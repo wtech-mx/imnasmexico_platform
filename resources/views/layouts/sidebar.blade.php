@@ -56,13 +56,13 @@
           <div class="collapse " id="pagesExamples">
             <ul class="nav ms-4">
               <li class="nav-item ">
-                <a class="nav-link {{ (Request::is('users*') ? 'show' : '') }}" href="">
-                  <span class="sidenav-mini-icon"> P </span>
+                <a class="nav-link {{ (Request::is('users*') ? 'show' : '') }}" href="{{ route('users.index') }}">
+                    <span class="sidenav-mini-icon"> P </span>
                   <span class="sidenav-normal">Usuarios</span>
                 </a>
 
-                <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
-                  <span class="sidenav-mini-icon"> P </span>
+                <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="{{ route('roles.index') }}">
+                    <span class="sidenav-mini-icon"> P </span>
                   <span class="sidenav-normal">Roles</span>
                 </a>
               </li>
