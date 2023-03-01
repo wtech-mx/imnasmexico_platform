@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+
+use App\Models\Configuracion;
 use Illuminate\Support\ServiceProvider;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        view()->composer('*', function ($view) {
+            $configuracion = Configuracion::first();
+
+            $fechaActual = date('Y-m-d');
+
+            $view->with(['configuracion' => $configuracion, 'fechaActual' => $fechaActual]);
+        });
     }
 }
