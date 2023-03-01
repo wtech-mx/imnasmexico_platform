@@ -20,40 +20,12 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link {{ (Request::is('clients*') ? 'active' : '') }}" href="" target="">
-            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-             <i class="ni ni-circle-08 text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-            </div>
-            <span class="nav-link-text ms-1">Clientes</span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link {{ (Request::is('notas/servicios*') ? 'active' : '') }}" href="">
-                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                    <i class="ni ni-book-bookmark text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-                </div>
-                <span class="nav-link-text ms-1">Notas Servicios</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link {{ (Request::is('notas/pedidos*') ? 'active' : '') }}" href="" target="">
-            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-             <i class="ni ni-basket text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-            </div>
-            <span class="nav-link-text ms-1">Notas Pedidos</span>
-          </a>
-        </li>
-
-
-        <li class="nav-item">
           <a class="nav-link {{ (Request::is('paquetes/servicios*') ? 'active' : '') }}" href="" target="">
             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                 <i class="fa fa-file text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
 
             </div>
-            <span class="nav-link-text ms-1">Notas Paquetes</span>
+            <span class="nav-link-text ms-1">Submenu</span>
           </a>
         </li>
 
@@ -73,29 +45,7 @@
         </li>
 
         <li class="nav-item">
-        <a data-bs-toggle="collapse" href="#pagesExamples1" class="nav-link {{ (Request::is('servicio*') ? 'active' : '') }}{{ (Request::is('reporte*') ? 'active' : '') }}" aria-controls="pagesExamples1" role="button" aria-expanded="false">
-            <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-                <i class="ni ni-collection text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-            </div>
-            <span class="nav-link-text ms-1">Administrativo</span>
-        </a>
-        <div class="collapse mb-3" id="pagesExamples1">
-        <ul class="nav ms-4">
-            <li class="nav-item ">
-            <a class="nav-link {{ (Request::is('servicio*') ? 'show' : '') }}" href="">
-                <span class="sidenav-mini-icon"> P </span>
-                <span class="sidenav-normal">Servicio</span>
-            </a>
 
-            @can('reportes')
-                <a class="nav-link {{ (Request::is('reporte*') ? 'show' : '') }}" href="">
-                    <span class="sidenav-mini-icon"> P </span>
-                    <span class="sidenav-normal">Reporte</span>
-                </a>
-            @endcan
-            </li>
-        </ul>
-        </div>
 
           <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link {{ (Request::is('users*') ? 'active' : '') }}{{ (Request::is('roles*') ? 'active' : '') }}" aria-controls="pagesExamples" role="button" aria-expanded="false">
             <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
@@ -131,16 +81,7 @@
             </div>
             <span class="nav-link-text ms-1">Configuraciones</span>
           </a>
-          <div class="collapse " id="sistem">
-            <ul class="nav ms-4">
-              <li class="nav-item ">
-                <a class="nav-link {{ (Request::is('configuracion*') ? 'show' : '') }}" href="#">
-                  <span class="sidenav-mini-icon">U</span>
-                  <span class="sidenav-normal">Horarios</span>
-                </a>
-              </li>
-            </ul>
-          </div>
+
           <div class="collapse " id="sistem">
             <ul class="nav ms-4">
               <li class="nav-item ">

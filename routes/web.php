@@ -20,17 +20,24 @@ use App\Http\Controllers\PermisosController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Auth::routes();
 
-Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+Route::group(['middleware' => ['auth']], function() {
 
 
-/*|--------------------------------------------------------------------------
-|Configuracion
-|--------------------------------------------------------------------------*/
-Route::get('/configuracion', [App\Http\Controllers\ConfiguracionController::class, 'index'])->name('index.configuracion');
-Route::patch('/configuracion/update', [App\Http\Controllers\ConfiguracionController::class, 'update'])->name('update.configuracion');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+
+    /*|--------------------------------------------------------------------------
+    |Configuracion
+    |--------------------------------------------------------------------------*/
+    Route::get('/configuracion', [App\Http\Controllers\ConfiguracionController::class, 'index'])->name('index.configuracion');
+    Route::patch('/configuracion/update', [App\Http\Controllers\ConfiguracionController::class, 'update'])->name('update.configuracion');
+
+
+
+
+});
 
