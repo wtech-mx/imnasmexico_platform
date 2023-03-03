@@ -1,0 +1,28 @@
+.primario{
+    background-color: #836262;
+}
+
+.secundario{
+    background-color: #F5ECE4;
+}
+
+.terciario{
+    background-color: #D19E99;
+}
+
+.texto_primario{
+    color: #836262;
+}
+
+.texto_secundario{
+    color: #F5ECE4;
+}
+
+.texto_terciario{
+    color: #D19E99;
+}
+
+.estilos_section{
+    margin-left: 30px;
+    margin-right: 30px;
+}

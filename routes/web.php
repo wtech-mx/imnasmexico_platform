@@ -3,9 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\ClientController;
 use App\Http\Controllers\PermisosController;
 
 /*
@@ -20,6 +18,22 @@ use App\Http\Controllers\PermisosController;
 */
 
 Route::get('/', function () {
+    return view('user.home');
+});
+
+Route::get('cursos', function () {
+    return view('user.calendar');
+});
+
+Route::get('nuestras instalaciones', function () {
+    return view('user.instalaciones');
+});
+
+Route::get('single_course', function () {
+    return view('user.single_course');
+});
+
+Route::get('login', function () {
     return view('auth.login');
 });
 
@@ -27,9 +41,7 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
 
-
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-
     Route::get('/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('roles.index');
     Route::get('/roles/show/{id}', [App\Http\Controllers\RoleController::class, 'show'])->name('roles.show');
     Route::get('/roles/create', [App\Http\Controllers\RoleController::class, 'create'])->name('roles.create');
@@ -41,15 +53,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('permisos', PermisosController::class);
     Route::resource('users', UserController::class);
 
-
     /*|--------------------------------------------------------------------------
     |Configuracion
     |--------------------------------------------------------------------------*/
     Route::get('/configuracion', [App\Http\Controllers\ConfiguracionController::class, 'index'])->name('index.configuracion');
     Route::patch('/configuracion/update', [App\Http\Controllers\ConfiguracionController::class, 'update'])->name('update.configuracion');
-
-
-
 
 });
 
