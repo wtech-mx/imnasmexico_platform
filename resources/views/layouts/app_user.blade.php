@@ -21,7 +21,7 @@
   </head>
   <body>
 
-    <main class="container-lg secundario" style="margin: 0;padding:0;">
+    <main class="container-fluid secundario" style="margin: 0;padding:0;">
 
     @yield('content')
 
