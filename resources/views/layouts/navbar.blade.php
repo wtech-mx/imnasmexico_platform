@@ -6,12 +6,12 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
           <li class="breadcrumb-item text-sm">
-            <a class="text-white" href="javascript:;">
-              <i class="ni ni-box-2"></i>
+            <a class="" href="javascript:;" >
+              <i class="ni ni-box-2" style="color: #6C4343"></i>
             </a>
           </li>
-          <li class="breadcrumb-item text-sm text-white"><a class="opacity-5 text-white" href="{{ route('dashboard') }}">Inicio</a></li>
-          <li class="breadcrumb-item text-sm text-white active" aria-current="page">@yield('page_actuality')</li>
+          <li class="breadcrumb-item text-sm "><a class="opacity-5 " href="{{ route('dashboard') }}" style="color: #6C4343">Inicio</a></li>
+          <li class="breadcrumb-item text-sm  active" aria-current="page" style="color: #6C4343">@yield('page_actuality')</li>
         </ol>
       </nav>
 
@@ -31,7 +31,7 @@
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
 
           <div class="dropdown">
-              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: 2px solid #fff; color: #fff;">
+              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: 2px solid #6C4343; color: #6C4343;">
                   {{Auth::user()->name;}}
               </button>
 
