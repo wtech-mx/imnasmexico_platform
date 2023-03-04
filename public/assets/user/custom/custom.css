@@ -21,6 +21,42 @@
     padding: 2rem 5rem 5rem 5rem;
 }
 
+
+/* Titulos */
+
+.titulo_alfa{
+    font-family: Leelawadee_1;
+    font-size: 60px;
+    color: #836262;
+}
+
+.titulomin_alfa{
+    font-family: Leelawadee_1;
+    font-size: 40px;
+    color: #836262;
+}
+
+.titulo_beta{
+    font-family: Leelawadee_2;
+    font-size: 60px;
+    color: #836262;
+    font-weight:300;
+}
+
+.titulo_delta{
+    font-family: Leelawadee_2;
+    font-size: 18px;
+    color: #836262;
+    font-weight:300;
+    letter-spacing: -1px;
+    line-height: 25px;
+    max-width: 1000px;
+}
+
+.tittle_section2{
+    margin-top: 6rem;
+}
+
 /* navbar */
 
 .navbar_custom{
@@ -162,7 +198,7 @@
     margin-left: 1rem;
     width: 30px;
     height: 30px;
-    padding: 3px 0 3px 0;
+    padding: 0px 0 0px 0;
 }
 
 .card_bg_btn_secundario{
@@ -171,7 +207,7 @@
     margin-left: 1rem;
     width: 30px;
     height: 30px;
-    padding: 3px 0 3px 0;
+    padding: 0px 0 0px 0;
 }
 
 .card_icon_btn{
@@ -194,3 +230,81 @@
     font-size: 20px;
 }
 
+
+/* secion2 */
+
+.card_certificaciones{
+    background-color: #fff;
+    border-radius: 24px;
+    width: 250px;
+    height: 195px;
+}
+
+.card_objetivos{
+    background-color: #fff;
+    border-radius: 24px;
+    width: 420px;
+    height: 325px;
+}
+
+.img_card_certificaciones{
+    width: 180px;
+}
+
+.img_card_objetivos{
+    margin-top: 2rem;
+    width: 130px;
+}
+
+.custom-info-logo{
+    font-size: 18px;
+    color: #000;
+    letter-spacing: -1px;
+    line-height: 25px;
+}
+
+.card_title_objetivos{
+    color: #836262;
+    font-family: Bahnschrift ;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.card_text_objetivos{
+    color: #000;
+    font-family: Bahnschrift ;
+    font-weight: 400;
+}
+
+.objetivos_mt{
+    margin-top: 6rem !important;
+}
+
+.objetivosmin_mt{
+    margin-top: 2rem !important;
+}
+
+/* beneficios */
+
+.point_icon_beneficios{
+    background-color: #836262;
+    border-radius: 24px;
+    margin-left: 1rem;
+    width: 90px;
+    height: 60px;
+    padding: 0px 0 0px 0;
+}
+
+.img_icon_beneficios{
+    width: 40px;
+    margin-left:20px;
+    margin-top: 8px;
+}
+
+.text_beneficios{
+    margin-left:30px;
+    font-family: Bahnschrift ;
+    font-size: 20px;
+    font-weight: lighter;
+    color: #836262;
+}
