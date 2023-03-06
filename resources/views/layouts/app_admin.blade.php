@@ -93,6 +93,36 @@
   <script src="{{ asset('assets/admin/js/plugins/jkanban/jkanban.js')}}"></script>
   <script src="{{ asset('assets/admin/js/plugins/chartjs.min.js')}}"></script>
   <script src="{{ asset('assets/admin/js/argon-dashboard.min.js')}}"></script>
+  <script src="{{ asset('assets/admin/js/plugins/multistep-form.js')}}"></script>
+
+   <script src="https://cdn.tiny.cloud/1/j1jav9k6mblf3p1zkwu0fxf5yfhp7b4inzjxkxfteidvmluh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+   <script>
+     tinymce.init({
+       selector: '#descripcion', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#objetivo', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#temario', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#informacion', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#descripcion_ticket', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+   </script>
+
 
   @yield('js_custom')
 
