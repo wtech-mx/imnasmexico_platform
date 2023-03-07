@@ -308,3 +308,15 @@
     font-weight: lighter;
     color: #836262;
 }
+
+.rounded_lab{
+    background-color: #fff;
+    border-radius: 150px;
+    width: 130px;
+    height: 130px;
+    
+}
+
+.img_rounded_lab{
+    width: 120px;
+}

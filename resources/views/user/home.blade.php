@@ -92,6 +92,7 @@
 
 </section>
 
+
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
 
     <div class="row mt-5">
@@ -292,6 +293,66 @@
 
 </section>
 
+
+<section class="primario bg_overley" style="background-color:#836262;">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="titulomin_alfa text-center mb-4">Nuestros Beneficios</h2>
+            <p class="text-white text-left text_beneficios">
+            Nuestros cursos, talleres, carreras y diplomados van dirigidos a personas sin conocimiento que quieran prepararse desde 0 o que cuentan con conocimiento y experiencia previa.
+            </p>
+            <div class="row">
+                <div class="col-3" style="margin-right: 2rem;">
+                    <div class="d-flex justify-content-center">
+                        <div class="rounded_lab">
+                            <p class="text-center">
+                                <img class="img_rounded_lab" src="{{ asset('assets/user/icons/icono-bb-glow-1.webp')}}" alt="">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-3" style="margin-right: 2rem;">
+                    <div class="d-flex justify-content-center">
+                        <div class="rounded_lab">
+                            <p class="text-center">
+                            <img class="img_rounded_lab" src="{{ asset('assets/user/icons/icono-corporal.webp')}}" alt="">
+                            </p>
+                        </div>
+                    </div>    
+                </div> 
+                
+                <div class="col-3" style="margin-right: 2rem;">
+                    <div class="d-flex justify-content-center">
+                        <div class="rounded_lab">
+                            <p class="text-left">
+                            <img class="img_rounded_lab" src="{{ asset('assets/user/icons/icono-facial.webp')}}" alt="">
+                            </p>
+                        </div>
+                    </div>    
+                </div>        
+            </div>
+        </div>
+        
+        <div class="col-6">
+            <div class="col-12">
+                <img class="" src="{{ asset('assets/user/utilidades/paciente.jpg')}}" alt="">
+            </div>
+
+            <div class="col-4">
+                <img class="" src="{{ asset('assets/user/utilidades/icono-facial.jpg')}}" alt="">
+            </div>
+
+            <div class="col-4">
+                <img class="" src="{{ asset('assets/user/utilidades/mason-product.jpg')}}" alt="">
+            </div>
+
+            <div class="col-4">
+                <img class="" src="{{ asset('assets/user/utilidades/producto_palciacion.jpg')}}" alt="">
+            </div>
+        </div>
+    </div>
+</section>
 
 
 
