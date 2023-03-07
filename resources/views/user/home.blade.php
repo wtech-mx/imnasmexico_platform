@@ -11,7 +11,7 @@
     @include('user.components.navbar');
 
     <div class="row">
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <h1 class="text-white titulo" style="margin-top: 6rem;">
                 Instituto Mexicano <br>
                 Naturales Ain Spa
@@ -31,60 +31,58 @@
             </div>
         </div>
 
-        <div class="col-6">
-
+        <div class="col-12 col-md-6">
             <div id="carouselExample" class="carousel slide">
 
-            <div class="carousel-inner">
-                {{-- card slide --}}
-                <div class="carousel-item active">
-                    <div class="d-flex justify-content-center">
-                        <div class="card card-custom" style="">
-                            <img class="card_image" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" class="card-img-top" alt="...">
-                            <div class="card-body card_body_custom">
-                            <h5 class="card-title card_modalidad">Presencial</h5>
-                            <h3 class="card_titulo">CURSO DE PIEDRAS CALIENTES</h3>
-                            <h4 class="card_date">Jueves 16 de Febrero</h4>
+                <div class="carousel-inner">
 
-                            <a class="btn btn-primario me-3">
-                                <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Comprar ahora
-                                    </p>
-                                    <div class="card_bg_btn ">
-                                        <i class="fas fa-cart-plus card_icon_btn"></i>
+                    <div class="carousel-item active">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="">
+                                <img class="card_image" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" class="card-img-top" alt="...">
+                                <div class="card-body card_body_custom">
+                                <h5 class="card-title card_modalidad">Presencial</h5>
+                                <h3 class="card_titulo">CURSO DE PIEDRAS CALIENTES</h3>
+                                <h4 class="card_date">Jueves 16 de Febrero</h4>
+
+                                <a class="btn btn-primario me-3">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Comprar ahora
+                                        </p>
+                                        <div class="card_bg_btn ">
+                                            <i class="fas fa-cart-plus card_icon_btn"></i>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
 
-                            <a class="btn btn-secundario me-1">
-                                <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Saber mas
-                                    </p>
-                                    <div class="card_bg_btn_secundario">
-                                        <i class="fas fa-plus card_icon_btn_secundario"></i>
+                                <a class="btn btn-secundario me-1">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Saber mas
+                                        </p>
+                                        <div class="card_bg_btn_secundario">
+                                            <i class="fas fa-plus card_icon_btn_secundario"></i>
+                                        </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
 
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
-            </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
 
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
             </div>
 
         </div>
@@ -97,7 +95,7 @@
 
     <div class="row mt-5">
 
-        <div class="col-3">
+        <div class="col-6 col-md-3">
             <div class="d-flex justify-content-center">
                 <div class="card_certificaciones">
                     <p class="text-center">
@@ -110,7 +108,7 @@
             </p>
         </div>
 
-        <div class="col-3">
+        <div class="col-6 col-md-3">
             <div class="d-flex justify-content-center">
                 <div class="card_certificaciones">
                     <p class="text-center">
@@ -123,7 +121,7 @@
             </p>
         </div>
 
-        <div class="col-3">
+        <div class="col-6 col-md-3">
             <div class="d-flex justify-content-center">
                 <div class="card_certificaciones">
                     <p class="text-center">
@@ -136,7 +134,7 @@
             </p>
         </div>
 
-        <div class="col-3">
+        <div class="col-6 col-md-3">
             <div class="d-flex justify-content-center">
                 <div class="card_certificaciones">
                     <p class="text-center">
@@ -161,7 +159,7 @@
             </div>
         </div>
 
-        <div class="col-6 objetivos_mt">
+        <div class="col-12 col-md-6 objetivos_mt">
             <div class="row">
                 <div class="col-6">
                     <div class="d-flex justify-content-end">
@@ -217,7 +215,7 @@
         </div>
 
         {{-- Nuestros Beneficios --}}
-        <div class="col-6 objetivosmin_mt">
+        <div class="col-12 col-md-6 objetivosmin_mt">
             <h2 class="titulomin_alfa text-center mb-4">Nuestros Beneficios</h2>
 
             <div class="row ">
@@ -289,20 +287,29 @@
             </div>
 
         </div>
-
-
 </section>
 
+{{-- slide de cursos --}}
+<section>
+    <div class="bgimg-1" style="height: 500px;background-image: url('{{ asset('assets/user/utilidades/spa.jpg')}}')">
 
-<section class="primario bg_overley" style="background-color:#836262;">
+    </div>
+</section>
+
+{{--Laboratorio --}}
+<section class="primario bg_overley" style="background-color:#F5ECE4;">
     <div class="row">
-        <div class="col-6">
-            <h2 class="titulomin_alfa text-center mb-4">Nuestros Beneficios</h2>
-            <p class="text-white text-left text_beneficios">
-            Nuestros cursos, talleres, carreras y diplomados van dirigidos a personas sin conocimiento que quieran prepararse desde 0 o que cuentan con conocimiento y experiencia previa.
+        <div class="col-12 col-md-6">
+            <h2 class="titulomin_alfa text-center mb-4">Laboratorio Naturales Ain Spa</h2>
+            <p class="text-left text_beneficios mb-4">
+                El Instituto Mexicano Naturales Ain Spa es un Instituto incorporado a la SEP
+                y STPS, también es una Entidad de Certificación y Evaluación SEP Conocer.   <br><br>
+
+                Contamos con más de 35 años en el mundo de la belleza y salud,<br>
+                 preparando y certificando a alumnos a nivel nacional e internacional.
             </p>
             <div class="row">
-                <div class="col-3" style="margin-right: 2rem;">
+                <div class="col-3" style="">
                     <div class="d-flex justify-content-center">
                         <div class="rounded_lab">
                             <p class="text-center">
@@ -312,48 +319,169 @@
                     </div>
                 </div>
 
-                <div class="col-3" style="margin-right: 2rem;">
+                <div class="col-3" style="">
                     <div class="d-flex justify-content-center">
                         <div class="rounded_lab">
                             <p class="text-center">
                             <img class="img_rounded_lab" src="{{ asset('assets/user/icons/icono-corporal.webp')}}" alt="">
                             </p>
                         </div>
-                    </div>    
-                </div> 
-                
-                <div class="col-3" style="margin-right: 2rem;">
+                    </div>
+                </div>
+
+                <div class="col-3" style="">
                     <div class="d-flex justify-content-center">
                         <div class="rounded_lab">
                             <p class="text-left">
                             <img class="img_rounded_lab" src="{{ asset('assets/user/icons/icono-facial.webp')}}" alt="">
                             </p>
                         </div>
-                    </div>    
-                </div>        
+                    </div>
+                </div>
+
+                <div class="col-3" style="">
+                    <div class="d-flex justify-content-center">
+                        <div class="rounded_lab">
+                            <p class="text-left">
+                            <img class="img_rounded_lab" src="{{ asset('assets/user/icons/icono-relex-1.webp')}}" alt="">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-5">
+                    <a class="btn btn-cuarto" style="margin-left: 1rem;">
+                        Ver Catalogo
+                    </a>
+                </div>
             </div>
         </div>
-        
-        <div class="col-6">
-            <div class="col-12">
-                <img class="" src="{{ asset('assets/user/utilidades/paciente.jpg')}}" alt="">
-            </div>
 
-            <div class="col-4">
-                <img class="" src="{{ asset('assets/user/utilidades/icono-facial.jpg')}}" alt="">
-            </div>
+        <div class="col-12 col-md-6">
+            <div class="row">
 
-            <div class="col-4">
-                <img class="" src="{{ asset('assets/user/utilidades/mason-product.jpg')}}" alt="">
-            </div>
+                <div class="col-12 mb-3">
+                    <div class="img_lab_principal" style="background-image: url('{{ asset('assets/user/utilidades/lab.jpg')}}')">
+                    </div>
+                </div>
 
-            <div class="col-4">
-                <img class="" src="{{ asset('assets/user/utilidades/producto_palciacion.jpg')}}" alt="">
+                <div class="col-4">
+                    <img class="img_lab_secundary px-3" src="{{ asset('assets/user/utilidades/doctiura.jpg')}}" alt="">
+                </div>
+
+                <div class="col-4">
+                    <img class="img_lab_secundary px-3" src="{{ asset('assets/user/utilidades/manos_product.jpg')}}" alt="">
+                </div>
+
+                <div class="col-4">
+                    <img class="img_lab_secundary px-3" src="{{ asset('assets/user/utilidades/producto_palciacion.jpg')}}" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+{{--Productos --}}
+
+{{--UNAM --}}
+<section class="primario bg_overley" style="background-color:#F5ECE4;">
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div id="slide_unam" class="carousel slide">
+
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="">
+                                <img class="card_image" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" class="card-img-top" alt="...">
+                                <div class="card-body card_body_custom">
+                                <h5 class="card-title card_modalidad">Presencial</h5>
+                                <h3 class="card_titulo">CURSO DE PIEDRAS CALIENTES</h3>
+                                <h4 class="card_date">Jueves 16 de Febrero</h4>
+
+                                <a class="btn btn-primario me-3">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Comprar ahora
+                                        </p>
+                                        <div class="card_bg_btn ">
+                                            <i class="fas fa-cart-plus card_icon_btn"></i>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a class="btn btn-secundario me-1">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Saber mas
+                                        </p>
+                                        <div class="card_bg_btn_secundario">
+                                            <i class="fas fa-plus card_icon_btn_secundario"></i>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#slide_unam" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#slide_unam" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <h2 class="titulomin_alfa text-left mb-4">
+                !Avalados ante la casa maxima <br>
+                casa de estudios UNAM!
+            </h2>
+            <p class="text-left text_beneficios mb-4" style="margin-left: 0px!important">
+                Cosmetria Estetica <br>
+                Medicina Estetica <br>
+            </p>
+            <div class="row">
+                <div class="col-6 col-md-3">
+                    <div class="d-flex justify-content-center">
+                        <div class="card_certificaciones">
+                            <p class="text-center">
+                                <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/DOCTORA.png')}}" alt="">
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 col-md-3">
+                    <div class="d-flex justify-content-center">
+                        <div class="card_certificaciones">
+                            <p class="text-center">
+                                <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/unam.webp')}}" alt="">
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 
+@endsection
+
+@section('js')
+
 
 @endsection
+
+
