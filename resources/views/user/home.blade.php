@@ -4,6 +4,10 @@
     Inicio
 @endsection
 
+@section('css_custom')
+<link href="{{ asset('assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
+@endsection
+
 @section('content')
 
 <section class="primario bg_overley" style="background-image: url('{{ asset('assets/user/utilidades/cosmetologa_bg.jpg')}}')">
@@ -451,7 +455,7 @@
                 Cosmetria Estetica <br>
                 Medicina Estetica <br>
             </p>
-            <p class="registro_num mt-3 mb-5">
+            <p class="registro_num2 mt-3 mb-5">
                 Numero de Registro : 60616-1236-17-x-22
             </p>
             <div class="row">

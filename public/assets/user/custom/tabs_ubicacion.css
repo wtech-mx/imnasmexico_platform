@@ -1,0 +1,27 @@
+  /* tab_ubicaicon */
+  .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #836262;
+    padding: 15px;
+    width: 130px;
+    border-radius: 24px;
+    font-size: 15px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.nav-pills .nav-link{
+    background-color: #fff;
+    padding: 18px;
+    width: 150px;
+    border-radius: 24px;
+    font-size: 15px;
+    color: #836262;
+    font-weight: bold;
+}
+
+.map_custom{
+    width: 1200px;
+    height: 600px;
+    touch-action: pan-x pan-y;
+    border-radius: 24px;
+}

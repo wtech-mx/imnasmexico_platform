@@ -1,0 +1,18 @@
+/* navbar */
+
+.navbar_custom{
+    background-color: #F5ECE4!important;
+    border-radius: 16px;
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+    margin-bottom: 6rem;
+}
+
+.nav_link_custom{
+    font-family: Bahnschrift;
+    font-size: 30px;
+    color: #836262;
+    font-weight: bold;
+}

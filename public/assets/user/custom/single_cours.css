@@ -1,0 +1,88 @@
+@font-face {
+    font-family: Leelawadee_1;
+    src: url('./../../user//fonts/LeelaUIb.ttf');
+ }
+
+ @font-face {
+    font-family: Leelawadee_2;
+    src: url('./../../user//fonts/LeelawUI.ttf');
+ }
+
+ @font-face {
+    font-family: Bahnschrift;
+    src: url('./../../user//fonts/Bahnschrift.ttf');
+ }
+
+  /* tab_ubicaicon */
+
+  .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #fff;
+    padding: 5px 0 5px 0;
+    width: 190px;
+    border-radius: 13px;
+    font-size: 15px;
+    color: #836262;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.nav-pills .nav-link{
+    background-color: #F5ECE4;
+    padding: 5px 0 5px 0;
+    width: 190px;
+    border-radius: 13px;
+    font-size: 15px;
+    color: #836262;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.content_nav{
+    padding: 5px;
+}
+
+.icon_nav_course{
+    width: 45px;
+    padding: 5px;
+    /* margin-left: 15px; */
+    border-radius: 12px;
+    background-color: #836262;
+    margin-left: 10px;
+}
+
+.icon_nav_course2{
+    width: 45px;
+    height: 45px;
+    padding: 5px 5px 5px 5px;
+    /* margin-left: 15px; */
+    border-radius: 12px;
+    background-color: #836262;
+    margin-left: 10px;
+    color: #fff;
+    font-size: 30px;
+}
+
+.img_destacada{
+    border-radius: 16px;
+}
+
+.tab-content > .active {
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px 15px 30px 15px;
+}
+
+.title_curso{
+    color: #836262;
+    font-family: Leelawadee_1;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.tittle_abstract{
+    color: #836262;
+    font-family: Bahnschrift;
+    font-weight: 300;
+    font-size: 22px;
+}
+

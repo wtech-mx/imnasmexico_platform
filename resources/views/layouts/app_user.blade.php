@@ -12,6 +12,9 @@
 
     <link href="{{ asset('assets/user/bootstrap/css/bootstrap.css')}}" rel="stylesheet" />
     <link href="{{ asset('assets/user/custom/custom.css')}}" rel="stylesheet" />
+    <link href="{{ asset('assets/user/custom/header.css')}}" rel="stylesheet" />
+    <link href="{{ asset('assets/user/custom/footer.css')}}" rel="stylesheet" />
+    @yield('css_custom')
 
     <!-- Font Awesome Icons -->
     <link href="{{ asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.cs')}}" rel="stylesheet" />
