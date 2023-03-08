@@ -300,7 +300,7 @@
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
     <div class="row">
         <div class="col-12 col-md-6">
-            <h2 class="titulomin_alfa text-center mb-4">Laboratorio Naturales Ain Spa</h2>
+            <h2 class="titulomin_alfa text-left mb-4" style="margin-left: 30px;">Laboratorio Naturales Ain Spa</h2>
             <p class="text-left text_beneficios mb-4">
                 El Instituto Mexicano Naturales Ain Spa es un Instituto incorporado a la SEP
                 y STPS, también es una Entidad de Certificación y Evaluación SEP Conocer.   <br><br>
@@ -451,6 +451,9 @@
                 Cosmetria Estetica <br>
                 Medicina Estetica <br>
             </p>
+            <p class="registro_num mt-3 mb-5">
+                Numero de Registro : 60616-1236-17-x-22
+            </p>
             <div class="row">
                 <div class="col-6 col-md-3">
                     <div class="d-flex justify-content-center">
@@ -466,7 +469,7 @@
                     <div class="d-flex justify-content-center">
                         <div class="card_certificaciones">
                             <p class="text-center">
-                                <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/unam.webp')}}" alt="">
+                                <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/unam.png')}}" alt="">
                             </p>
                         </div>
                     </div>
@@ -476,6 +479,72 @@
     </div>
 </section>
 
+{{-- testimonios --}}
+<section class="primario bg_overley" style="background-color:#836262;">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="titulo_alfa text-center" style="color: #fff!important">
+                Lo que dicen de  <br>
+                nuestros estudiantes...
+            </h2>
+        </div>
+    </div>
+</section>
+{{-- testimonios --}}
+
+{{-- Ubicacion --}}
+<section class="primario bg_overley" style="background-color:#F5ECE4;">
+
+<div class="row">
+    <div class="col-12">
+
+        <div class="d-flex justify-content-center">
+
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+
+                <li class="nav-item" role="presentation" style="margin-right: 30px;">
+                  <button class="nav-link active" id="pills-alamos-tab" data-bs-toggle="pill" data-bs-target="#pills-alamos" type="button" role="tab" aria-controls="pills-alamos" aria-selected="true">
+                    <i class="fas fa-map-marker-alt"></i> Alamos
+                  </button>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                  <button class="nav-link" id="pills-churubusco-tab" data-bs-toggle="pill" data-bs-target="#pills-churubusco" type="button" role="tab" aria-controls="pills-churubusco" aria-selected="false">
+                    <i class="fas fa-map-marker-alt"></i> Churubusco
+                  </button>
+                </li>
+
+              </ul>
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+            <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-alamos" role="tabpanel" aria-labelledby="pills-alamos-tab" tabindex="0">
+
+                    <iframe class="map_custom" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                </div>
+
+                <div class="tab-pane fade" id="pills-churubusco" role="tabpanel" aria-labelledby="pills-churubusco-tab" tabindex="0">
+                    <iframe class="map_custom" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15057.050845494474!2d-99.12426469013091!3d19.35777413013712!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe13ff298e83%3A0xbf7af804aa5b83a4!2sSur%20109-A%20260%2C%20H%C3%A9roes%20de%20Churubusco%2C%20Iztapalapa%2C%2009090%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1678243972623!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+              </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+</section>
+{{-- Ubicacion --}}
+
+{{-- footer --}}
+
+@include('admin.users.components.footer')
+
+{{-- footer --}}
 
 @endsection
 
