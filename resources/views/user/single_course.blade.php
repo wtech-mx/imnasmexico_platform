@@ -114,22 +114,249 @@
               </div>
 
               <div class="tab-pane fade" id="v-pills-objetivos" role="tabpanel" aria-labelledby="v-pills-objetivos-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="d-flex align-items-center">
+                            <img class="img_destacada img-fluid" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
+                        </div>
+                    </div>
 
+                    <div class="col-7">
+
+                        <h2 class="title_curso">Objetivo</h2>
+
+                        <p class="tittle_abstract mt-3 mb-3">
+                            Aprender a realizar masajes con piedras calientes, conociendo los beneficios y técnicas correctas logrando la descontractura de tu paciente.
+                        </p>
+
+                        <a class="btn btn-primario me-3">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    Comprar ahora
+                                </p>
+                                <div class="card_bg_btn ">
+                                    <i class="fas fa-cart-plus card_icon_btn"></i>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a class="btn btn-secundario me-1">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    Contactar
+                                </p>
+                                <div class="card_bg_btn_secundario">
+                                    <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
               </div>
 
               <div class="tab-pane fade" id="v-pills-temarios" role="tabpanel" aria-labelledby="v-pills-temarios-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="d-flex align-items-center">
+                            <img class="img_destacada img-fluid" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
+                        </div>
+                    </div>
 
+                    <div class="col-7">
+
+                        <h2 class="title_curso">Temario</h2>
+
+                        <p class="tittle_abstract mt-3 mb-3">
+                            Aprender a realizar masajes con piedras calientes, conociendo los beneficios y técnicas correctas logrando la descontractura de tu paciente.
+                        </p>
+
+                        <a class="btn btn-primario me-3">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    Comprar ahora
+                                </p>
+                                <div class="card_bg_btn ">
+                                    <i class="fas fa-cart-plus card_icon_btn"></i>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a class="btn btn-secundario me-1">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    Contactar
+                                </p>
+                                <div class="card_bg_btn_secundario">
+                                    <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
               </div>
 
               <div class="tab-pane fade" id="v-pills-documentos" role="tabpanel" aria-labelledby="v-pills-documentos-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="d-flex align-items-center">
+                            <img class="img_destacada img-fluid" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
+                        </div>
+                    </div>
 
+                    <div class="col-7">
+
+                        <h2 class="title_curso">Certificaciones</h2>
+
+                        <div class="row">
+                            <div class="col-6 col-md-3">
+                                <div class="d-flex justify-content-center">
+                                    <div class="card_certificaciones">
+                                        <p class="text-center">
+                                            <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3">
+                                <div class="d-flex justify-content-center">
+                                    <div class="card_certificaciones">
+                                        <p class="text-center">
+                                            <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/revoe.png')}}" alt="">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3">
+                                <div class="d-flex justify-content-center">
+                                    <div class="card_certificaciones">
+                                        <p class="text-center">
+                                            <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/unam.png')}}" alt="">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-md-3">
+                                <div class="d-flex justify-content-center">
+                                    <div class="card_certificaciones">
+                                        <p class="text-center">
+                                            <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/stps.png')}}" alt="">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a class="btn btn-primario me-3">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    Comprar ahora
+                                </p>
+                                <div class="card_bg_btn ">
+                                    <i class="fas fa-cart-plus card_icon_btn"></i>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a class="btn btn-secundario me-1">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    Contactar
+                                </p>
+                                <div class="card_bg_btn_secundario">
+                                    <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
               </div>
 
               <div class="tab-pane fade" id="v-pills-dirijido" role="tabpanel" aria-labelledby="v-pills-dirijido-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-6">
+                        <div class="d-flex justify-content-end">
+                            <div class="card_objetivos2">
+                                <p class="text-center">
+                                    <img class="img_card_objetivos2" src="{{ asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                </p>
+                                <p class="text-center card_title_objetivos">AMAS DE CASA</p>
+                                <p class="text-center card_text_objetivos">Aprovecha tu tiempo libre</p>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-6">
+                        <div class="d-flex justify-content-start">
+                            <div class="card_objetivos2">
+                                <p class="text-center">
+                                    <img class="img_card_objetivos2" src="{{ asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                </p>
+                                <p class="text-center card_title_objetivos">EMPRENDERORAS</p>
+                                <p class="text-center card_text_objetivos">Inicia tu propio Negocio.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 py-3">
+                        <div class="d-flex justify-content-end">
+                            <div class="card_objetivos2">
+                                <p class="text-center">
+                                    <img class="img_card_objetivos2" src="{{ asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                </p>
+                                <p class="text-center card_title_objetivos">ESTUDIANTES DE BELLEZA</p>
+                                <p class="text-center card_text_objetivos">Construye una carera profesional.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 py-3">
+                        <div class="d-flex justify-content-start">
+                            <div class="card_objetivos2">
+                                <p class="text-center">
+                                    <img class="img_card_objetivos2" src="{{ asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                </p>
+                                <p class="text-center card_title_objetivos">APASIONADAS POR LA BELLEZA</p>
+                                <p class="text-center card_text_objetivos">
+                                    Ya eres una profesional, ahora
+                                    estudia tu pasión.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
               </div>
 
               <div class="tab-pane fade" id="v-pills-recursos" role="tabpanel" aria-labelledby="v-pills-recursos-tab" tabindex="0">
+                <div class="row">
+
+                    <div class="col-6">
+                        <h2 class="title_curso">Ubicacion</h2>
+                        <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+
+                    <div class="col-6">
+                            <p class="tittle_abstract py-5 my-5">
+                                Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
+                            </p>
+                    </div>
+
+                </div>
+
+                {{-- parte por si es enlace poner if --}}
+
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="text-center title_curso">Enlace de la reuinion</h2>
+
+                        <p class="text-center registro_num2 mt-3 mb-5" style="margin-left: 13rem;">
+                            meet.google.com/jgs-sndf-qzi
+                        </p>
+
+                    </div>
+                </div>
 
               </div>
 

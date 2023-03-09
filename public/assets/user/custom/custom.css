@@ -245,6 +245,13 @@
     height: 325px;
 }
 
+.card_objetivos2{
+    background-color: #F5ECE4;
+    border-radius: 24px;
+    width: 350px;
+    height: 250px;
+}
+
 .img_card_certificaciones{
     width: 180px;
 }
@@ -252,6 +259,11 @@
 .img_card_objetivos{
     margin-top: 2rem;
     width: 130px;
+}
+
+.img_card_objetivos2{
+    margin-top: 2rem;
+    width: 100px;
 }
 
 .custom-info-logo{
@@ -366,3 +378,16 @@
   }
 
 
+  .map_custom{
+    width: 1200px;
+    height: 600px;
+    touch-action: pan-x pan-y;
+    border-radius: 24px;
+}
+
+.map_custom2{
+    width: 400px;
+    height: 300px;
+    touch-action: pan-x pan-y;
+    border-radius: 24px;
+}
