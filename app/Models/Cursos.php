@@ -34,6 +34,7 @@ class Cursos extends Model
         'informacion',
         'clase_grabada',
         'destacado',
+        'slug',
     ];
 
 }

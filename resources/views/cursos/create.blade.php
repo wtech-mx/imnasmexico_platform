@@ -116,7 +116,7 @@
                                                 <div class="form-check col-2">
                                                     <div class="form-group">
                                                         <input class="form-check-input" type="checkbox" value="1" id="sep" name="sep">
-                                                        <label for="nota">SEP</label>
+                                                        <label for="nota">RVOE</label>
                                                     </div>
                                                 </div>
 
@@ -209,7 +209,7 @@
                                     </div>
                                     <!--single Temario panel-->
                                     <div class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn">
-                                        <h5 class="font-weight-bolder">Temario</h5>
+                                        <h5 class="font-weight-bolder">Tickets</h5>
                                         <div class="multisteps-form__content">
                                             <div class="row">
                                                 <div id="formulario" class="mt-4">

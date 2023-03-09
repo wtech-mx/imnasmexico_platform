@@ -55,11 +55,14 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O   C U R S O S ===============================
     Route::get('/admin/cursos', [App\Http\Controllers\CursosController::class, 'index'])->name('cursos.index');
-    Route::get('/admin/cursos/store', [App\Http\Controllers\CursosController::class, 'create'])->name('cursos.create');
-    Route::post('/admin/cursos/create', [App\Http\Controllers\CursosController::class, 'store'])->name('cursos.store');
+    Route::get('/admin/cursos/create', [App\Http\Controllers\CursosController::class, 'create'])->name('cursos.create');
+    Route::post('/admin/cursos/store', [App\Http\Controllers\CursosController::class, 'store'])->name('cursos.store');
     Route::get('/admin/cursos/edit/{id}', [App\Http\Controllers\CursosController::class, 'edit'])->name('cursos.edit');
     Route::patch('/admin/cursos/update/{id}', [App\Http\Controllers\CursosController::class, 'update'])->name('cursos.update');
     Route::delete('/admin/cursos/delete/{id}', [App\Http\Controllers\CursosController::class, 'destroy'])->name('cursos.destroy');
+
+    // =============== P A G I N A  S I N G L E  C O U R S E ===============================
+    Route::get('/curso/{slug}', [App\Http\Controllers\CursosController::class, 'show'])->name('cursos.show');
 
     /*|--------------------------------------------------------------------------
     |Configuracion

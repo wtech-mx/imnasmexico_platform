@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cursos;
 use App\Models\CursosTickets;
 use Session;
+use Str;
 use Illuminate\Http\Request;
 
 class CursosController extends Controller
@@ -14,6 +15,12 @@ class CursosController extends Controller
         $cursos = Cursos::orderBy('id','DESC')->get();
 
         return view('cursos.index', compact('cursos'));
+    }
+
+    public function show($slug)
+    {
+        $curso = Cursos::where('slug','=', $slug)->firstOrFail();
+        return view('user.single_course', compact('curso'));
     }
 
     public function create()
@@ -51,6 +58,9 @@ class CursosController extends Controller
         $curso->informacion = $request->get('informacion');
         $curso->destacado = $request->get('destacado');
         $curso->estatus = $request->get('estatus');
+
+        $valorAleatorio = uniqid();
+        $curso->slug = Str::of($request->get('nombre'))->slug("-")->limit(300 - mb_strlen($valorAleatorio) - 1, "")->trim("-")->append("-", $valorAleatorio);
 
         $curso->save();
 

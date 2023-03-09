@@ -1,7 +1,7 @@
 @extends('layouts.app_user')
 
 @section('template_title')
-    Nombre del curso
+   {{$curso->nombre}}
 @endsection
 
 @section('css_custom')
@@ -75,18 +75,19 @@
 
                     <div class="col-7">
                         <h1 class="title_curso">
-                            Curso de Piedras Calientes
-                            Curativas y Alineación de Chacras
+                            {{$curso->nombre}}
                         </h1>
 
                         <p class="tittle_abstract mt-3 mb-3">
-                            Aprender a realizar masajes con piedras calientes, conociendo los beneficios y técnicas correctas logrando la descontractura de tu paciente.
+                            {{$curso->descripcion}}
                         </p>
 
                         <h2 class="title_curso">Fecha y Hora</h2>
 
                         <p class="tittle_abstract">
-                            Jueves , 16 de Febrero a las 11:00 AM - 3:00 PM
+                            {{$curso->fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
+                            {{$curso->fecha_final}}
+                            @endif, {{$curso->hora_inicial}} - {{$curso->hora_final}}
                         </p>
                         <a class="btn btn-primario me-3">
                             <div class="d-flex justify-content-around">
@@ -126,7 +127,7 @@
                         <h2 class="title_curso">Objetivo</h2>
 
                         <p class="tittle_abstract mt-3 mb-3">
-                            Aprender a realizar masajes con piedras calientes, conociendo los beneficios y técnicas correctas logrando la descontractura de tu paciente.
+                            {{$curso->objetivo}}
                         </p>
 
                         <a class="btn btn-primario me-3">
@@ -167,7 +168,7 @@
                         <h2 class="title_curso">Temario</h2>
 
                         <p class="tittle_abstract mt-3 mb-3">
-                            Aprender a realizar masajes con piedras calientes, conociendo los beneficios y técnicas correctas logrando la descontractura de tu paciente.
+                            {{$curso->temario}}
                         </p>
 
                         <a class="btn btn-primario me-3">
@@ -208,46 +209,67 @@
                         <h2 class="title_curso">Certificaciones</h2>
 
                         <div class="row">
-                            <div class="col-6 col-md-3">
-                                <div class="d-flex justify-content-center">
-                                    <div class="card_certificaciones">
-                                        <p class="text-center">
-                                            <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/sepconocer.png')}}" alt="">
-                                        </p>
+                            @if ($curso->redconocer == 1)
+                                <div class="col-6 col-md-4">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="card_certificaciones">
+                                                <p class="text-center">
+                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
 
-                            <div class="col-6 col-md-3">
-                                <div class="d-flex justify-content-center">
-                                    <div class="card_certificaciones">
-                                        <p class="text-center">
-                                            <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/revoe.png')}}" alt="">
-                                        </p>
+                            @if($curso->sep == 1)
+                                <div class="col-6 col-md-4">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="card_certificaciones">
+                                                <p class="text-center">
+                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/revoe.png')}}" alt="">
+                                                </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
 
-                            <div class="col-6 col-md-3">
-                                <div class="d-flex justify-content-center">
-                                    <div class="card_certificaciones">
-                                        <p class="text-center">
-                                            <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/unam.png')}}" alt="">
-                                        </p>
+                            @if ($curso->unam == 1)
+                                <div class="col-6 col-md-4">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="card_certificaciones">
+                                                <p class="text-center">
+                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/unam.png')}}" alt="">
+                                                </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
 
-                            <div class="col-6 col-md-3">
-                                <div class="d-flex justify-content-center">
-                                    <div class="card_certificaciones">
-                                        <p class="text-center">
-                                            <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/stps.png')}}" alt="">
-                                        </p>
+                            @if ($curso->imnas == 1)
+                                <div class="col-6 col-md-4">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="card_certificaciones">
+                                                <p class="text-center">
+                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/imnas.webp')}}" style="width: 50%">
+                                                </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
+
+                            @if ($curso->stps == 1)
+                                <div class="col-6 col-md-4">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="card_certificaciones">
+                                                <p class="text-center">
+                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/stps.png')}}" alt="">
+                                                </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
+
 
                         <a class="btn btn-primario me-3">
                             <div class="d-flex justify-content-around">
@@ -330,33 +352,31 @@
               </div>
 
               <div class="tab-pane fade" id="v-pills-recursos" role="tabpanel" aria-labelledby="v-pills-recursos-tab" tabindex="0">
-                <div class="row">
+                @if ($curso->modalidad == 'Presencial')
+                    <div class="row">
+                        <div class="col-6">
+                            <h2 class="title_curso">Ubicacion</h2>
+                            <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
 
-                    <div class="col-6">
-                        <h2 class="title_curso">Ubicacion</h2>
-                        <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div class="col-6">
+                                <p class="tittle_abstract py-5 my-5">
+                                    Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
+                                </p>
+                        </div>
                     </div>
+                @else
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="text-center title_curso">Enlace de la reuinion</h2>
 
-                    <div class="col-6">
-                            <p class="tittle_abstract py-5 my-5">
-                                Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
-                            </p>
+                            <a class="text-center registro_num2 mt-3 mb-5" href=" {{$curso->recurso}}" style="margin-left: 13rem;" target="_blank">
+                                {{$curso->recurso}}
+                            </a>
+
+                        </div>
                     </div>
-
-                </div>
-
-                {{-- parte por si es enlace poner if --}}
-
-                <div class="row">
-                    <div class="col-12">
-                        <h2 class="text-center title_curso">Enlace de la reuinion</h2>
-
-                        <p class="text-center registro_num2 mt-3 mb-5" style="margin-left: 13rem;">
-                            meet.google.com/jgs-sndf-qzi
-                        </p>
-
-                    </div>
-                </div>
+                @endif
 
               </div>
 
