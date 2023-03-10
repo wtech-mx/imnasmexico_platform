@@ -86,3 +86,34 @@
     font-size: 22px;
 }
 
+.tittle-contact{
+    color: #fff;
+    font-size: 60px;
+}
+
+.border_row{
+    background-color:#836262;
+    border-radius: 16px;
+}
+
+.form_contact{
+    border-radius: 16px;
+    padding: 15px;
+}
+
+.btn_enfiar_form{
+
+    background: #fff;
+    padding: 15px 25px 15px 25px;
+    border-radius: 16px;
+    color: #836262;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 1rem;
+}
+
+.img_contact{
+    border-radius: 16px;
+    margin-top: 9rem;
+    width: 400px;
+}

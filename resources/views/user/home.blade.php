@@ -387,6 +387,18 @@
 </section>
 
 {{--Productos --}}
+<section class="primario bg_overley" style="background-color:#836262;">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="titulo_alfa text-center" style="color: #fff!important">
+                Nuestro Catalogo
+            </h2>
+            <p class="text-center mt-5">
+                <img class="px-3" src="{{ asset('assets/user/utilidades/captura_productos.png')}}" alt="" style="width:80%;">
+            </p>
+        </div>
+    </div>
+</section>
 
 {{--UNAM --}}
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
@@ -491,6 +503,9 @@
                 Lo que dicen de  <br>
                 nuestros estudiantes...
             </h2>
+            <p class="text-center mt-5">
+                <img class="px-3" src="{{ asset('assets/user/utilidades/captura.png')}}" alt="">
+            </p>
         </div>
     </div>
 </section>
