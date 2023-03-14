@@ -20,44 +20,57 @@
         <div class="d-flex align-items-start">
             <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
               <button class="nav-link active" id="v-pills-informacion-tab" data-bs-toggle="pill" data-bs-target="#v-pills-informacion" type="button" role="tab" aria-controls="v-pills-informacion" aria-selected="true">
-                <p class="d-inline text-left">Informacion</p>
-                <div class="content_nav d-inline-block">
-                    <i class="fas fa-info-circle icon_nav_course2"></i>
+                <div class="d-flex justify-content-around">
+                     <p class="espacio_w">Informacion</p>
+                    <div class="content_nav d-inline-block">
+                        <i class="fas fa-info-circle icon_nav_course2"></i>
+                    </div>
                 </div>
               </button>
 
               <button class="nav-link" id="v-pills-objetivos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-objetivos" type="button" role="tab" aria-controls="v-pills-objetivos" aria-selected="false">
-                <p class="d-inline text-left">Objetivos</p>
-                <div class="content_nav d-inline-block">
-                    <img class="icon_nav_course" src="{{ asset('assets/user/icons/objetivo.webp')}}" alt="">
+                <div class="d-flex justify-content-around">
+                     <p class="espacio_w">Objetivos</p>
+                    <div class="content_nav d-inline-block">
+                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/objetivo.webp')}}" alt="">
+                    </div>
                 </div>
+
             </button>
 
               <button class="nav-link" id="v-pills-temarios-tab" data-bs-toggle="pill" data-bs-target="#v-pills-temarios" type="button" role="tab" aria-controls="v-pills-temarios" aria-selected="false" >
-                <p class="d-inline text-left">Temarios</p>
-                <div class="content_nav d-inline-block">
-                    <img class="icon_nav_course" src="{{ asset('assets/user/icons/prueba.webp')}}" alt="">
+                <div class="d-flex justify-content-around">
+                     <p class="espacio_w">Temarios</p>
+                    <div class="content_nav d-inline-block">
+                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/prueba.webp')}}" alt="">
+                    </div>
                 </div>
               </button>
 
               <button class="nav-link" id="v-pills-documentos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-documentos" type="button" role="tab" aria-controls="v-pills-documentos" aria-selected="false">
-                <p class="d-inline text-left">Documentos</p>
-                <div class="content_nav d-inline-block">
-                    <img class="icon_nav_course" src="{{ asset('assets/user/icons/certificacion.webp')}}" alt="">
+                <div class="d-flex justify-content-around">
+                     <p class="espacio_w">Documentos</p>
+                    <div class="content_nav d-inline-block">
+                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/certificacion.webp')}}" alt="">
+                    </div>
                 </div>
               </button>
 
               <button class="nav-link" id="v-pills-dirijido-tab" data-bs-toggle="pill" data-bs-target="#v-pills-dirijido" type="button" role="tab" aria-controls="v-pills-dirijido" aria-selected="false">
-                <p class="d-inline text-left">Dirigido a</p>
-                <div class="content_nav d-inline-block">
-                    <img class="icon_nav_course" src="{{ asset('assets/user/icons/personas.webp')}}" alt="">
+                <div class="d-flex justify-content-around">
+                     <p class="espacio_w">Dirigido a</p>
+                    <div class="content_nav d-inline-block">
+                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/personas.webp')}}" alt="">
+                    </div>
                 </div>
               </button>
 
               <button class="nav-link" id="v-pills-recursos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-recursos" type="button" role="tab" aria-controls="v-pills-recursos" aria-selected="false">
-                <p class="d-inline text-left">Recursos</p>
-                <div class="content_nav d-inline-block">
-                    <img class="icon_nav_course" src="{{ asset('assets/user/icons/video-call.png')}}" alt="">
+                <div class="d-flex justify-content-around">
+                     <p class="espacio_w">Recursos</p>
+                    <div class="content_nav d-inline-block">
+                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/video-call.png')}}" alt="">
+                    </div>
                 </div>
               </button>
 
@@ -79,7 +92,7 @@
                         </h1>
 
                         <p class="tittle_abstract mt-3 mb-3">
-                            {{$curso->descripcion}}
+                            <?php echo $curso->descripcion?>
                         </p>
 
                         <h2 class="title_curso">Fecha y Hora</h2>
@@ -127,7 +140,7 @@
                         <h2 class="title_curso">Objetivo</h2>
 
                         <p class="tittle_abstract mt-3 mb-3">
-                            {{$curso->objetivo}}
+                            <?php echo $curso->objetivo?>
                         </p>
 
                         <a class="btn btn-primario me-3">
@@ -168,7 +181,7 @@
                         <h2 class="title_curso">Temario</h2>
 
                         <p class="tittle_abstract mt-3 mb-3">
-                            {{$curso->temario}}
+                            <?php echo $curso->temario?>
                         </p>
 
                         <a class="btn btn-primario me-3">
@@ -355,12 +368,15 @@
                 @if ($curso->modalidad == 'Presencial')
                     <div class="row">
                         <div class="col-6">
-                            <h2 class="title_curso">Ubicacion</h2>
-                            <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                            <h2 class="title_curso text-center mb-5">Ubicacion</h2>
+                            <div class="d-flex justify-content-center">
+                                <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
+                            </div>
                         </div>
 
-                        <div class="col-6">
-                                <p class="tittle_abstract py-5 my-5">
+                        <div class="col-6 m-auto">
+                                <p class="tittle_abstract ">
                                     Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
                                 </p>
                         </div>
@@ -404,22 +420,23 @@
         <p class="text-center text-white">
             Complementa tus conocimientos y conviértete un experto de la cosmología,
         </p>
-        <form action="">
-            <div class="form-group">
-                <input type="text" class="form-control form_contact mt-3" id="" placeholder="Nombre (requerido)">
-            </div>
-            <div class="form-group">
-                <input type="email" class="form-control form_contact mt-3" id="" placeholder="Correo Electrónico (requerido)">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control form_contact mt-3" id="" placeholder="Teléfono (requerido)">
-            </div>
-            <div class="form-group">
-                <input type="text" class="form-control form_contact mt-3" id="" placeholder="Message">
-            </div>
-            <p class="text-center text-white">
-                <a class="btn btn_enfiar_form">Enviar <i class="fas fa-paper-plane"></i></a>
-            </p>
+        <form class="form_contactenos" action="">
+
+                <div class="form-group">
+                    <input type="text" class="form-control form_contact mt-4" id="" placeholder="Nombre (requerido)">
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control form_contact mt-4" id="" placeholder="Correo Electrónico (requerido)">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control form_contact mt-4" id="" placeholder="Teléfono (requerido)">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control form_contact mt-4" id="" placeholder="Message">
+                </div>
+                <p class="text-center text-white">
+                    <a class="btn btn_enfiar_form">Enviar <i class="fas fa-paper-plane"></i></a>
+                </p>
 
         </form>
     </div>

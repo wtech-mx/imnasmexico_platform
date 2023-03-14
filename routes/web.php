@@ -21,11 +21,11 @@ Route::get('/', function () {
     return view('user.home');
 });
 
-Route::get('cursos', function () {
+Route::get('calendario', function () {
     return view('user.calendar');
 });
 
-Route::get('nuestras instalaciones', function () {
+Route::get('nuestras_instalaciones', function () {
     return view('user.instalaciones');
 });
 
