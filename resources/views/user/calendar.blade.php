@@ -75,15 +75,39 @@
     <div class="row">
         <div class="col-4">
 
-            <div class="card" style="width: 18rem;">
-                <img src="{{ asset('assets/user/utilidades/cosmetologa.jpg')}}" class="card-img-top" alt="...">
+            <div class="card card_grid" style="">
+                <img class="img_card_grid" src="{{ asset('assets/user/utilidades/cosmetologa.jpg')}}" class="card-img-top" alt="...">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-2">
-                        SEP <br> 15
+                    <div class="col-2 mt-3">
+                       <h4 class="fecha_card_grid text-center">
+                        SEP <br> <strong class="fecha_strong_card_grid"> 15</strong>
+                       </h4>
                     </div>
-                    <div class="col-10">
-                        <h3>Carrera de Cosmiatría Estética Avanzada</h3>
+                    <div class="col-10 mt-4 mb-4">
+                        <h3 class="tittle_card_grid">Carrera de Cosmiatría Estética Avanzada</h3>
+                        <a class="btn btn_primario_grd_curso">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn_grid my-auto">
+                                    Comprar ahora
+                                </p>
+                                <div class="card_bg_btn ">
+                                    <i class="fas fa-cart-plus card_icon_btn_grid"></i>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a class="btn btn_secundario_grd_curso">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn_grid my-auto">
+                                    Saber mas
+                                </p>
+                                <div class="card_bg_btn_secundario">
+                                    <i class="fas fa-plus card_icon_btn_secundario_grid"></i>
+                                </div>
+                            </div>
+                        </a>
+
                     </div>
                   </div>
                 </div>

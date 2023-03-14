@@ -91,18 +91,19 @@
                             {{$curso->nombre}}
                         </h1>
 
-                        <p class="tittle_abstract mt-3 mb-3">
+                        <p class="tittle_abstract mt-5 mb-5">
                             <?php echo $curso->descripcion?>
                         </p>
 
                         <h2 class="title_curso">Fecha y Hora</h2>
 
-                        <p class="tittle_abstract">
+                        <p class="tittle_abstract ">
                             {{$curso->fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
                             {{$curso->fecha_final}}
                             @endif, {{$curso->hora_inicial}} - {{$curso->hora_final}}
                         </p>
-                        <a class="btn btn-primario me-3">
+
+                        <a class="btn btn-primario mt-5">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -113,7 +114,7 @@
                             </div>
                         </a>
 
-                        <a class="btn btn-secundario me-1">
+                        <a class="btn btn-secundario mt-5">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Contactar
@@ -137,7 +138,7 @@
 
                     <div class="col-7">
 
-                        <h2 class="title_curso">Objetivo</h2>
+                        <h2 class="title_curso mb-5">Objetivo</h2>
 
                         <p class="tittle_abstract mt-3 mb-3">
                             <?php echo $curso->objetivo?>
@@ -178,13 +179,13 @@
 
                     <div class="col-7">
 
-                        <h2 class="title_curso">Temario</h2>
+                        <h2 class="title_curso mb-5">Temario</h2>
 
-                        <p class="tittle_abstract mt-3 mb-3">
+                        <p class="tittle_abstract ">
                             <?php echo $curso->temario?>
                         </p>
 
-                        <a class="btn btn-primario me-3">
+                        <a class="btn btn-primario  mt-5">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -195,7 +196,7 @@
                             </div>
                         </a>
 
-                        <a class="btn btn-secundario me-1">
+                        <a class="btn btn-secundario mt-5">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Contactar
@@ -219,7 +220,7 @@
 
                     <div class="col-7">
 
-                        <h2 class="title_curso">Certificaciones</h2>
+                        <h2 class="title_curso mb-5">Certificaciones</h2>
 
                         <div class="row">
                             @if ($curso->redconocer == 1)
@@ -284,7 +285,7 @@
                         </div>
 
 
-                        <a class="btn btn-primario me-3">
+                        <a class="btn btn-primario mt-5">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -295,7 +296,7 @@
                             </div>
                         </a>
 
-                        <a class="btn btn-secundario me-1">
+                        <a class="btn btn-secundario mt-5">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Contactar
