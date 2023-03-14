@@ -376,17 +376,17 @@
                         </div>
 
                         <div class="col-6 m-auto">
-                                <p class="tittle_abstract ">
+                                <p class="  ">
                                     Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
                                 </p>
                         </div>
                     </div>
                 @else
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-12 mt">
                             <h2 class="text-center title_curso">Enlace de la reuinion</h2>
 
-                            <a class="text-center registro_num2 mt-3 mb-5" href=" {{$curso->recurso}}" style="margin-left: 13rem;" target="_blank">
+                            <a class="text-center registro_num2 mt-3 mb-5" href="{{$curso->recurso}}" style="" target="_blank">
                                 {{$curso->recurso}}
                             </a>
 
