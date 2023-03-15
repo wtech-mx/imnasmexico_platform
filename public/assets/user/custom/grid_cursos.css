@@ -148,3 +148,21 @@
     font-size: 40px;
     font-weight: bold;
 }
+
+.postion_row_caledanrio{
+    position: relative;
+    top: 30%;
+    left: 10%;
+}
+
+.btn-secundario_grid{
+    background-color: #F5ECE4;
+    color: #836262;
+    border-radius: 16px;
+    font-family: Bahnschrift;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px 30px 10px 30px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

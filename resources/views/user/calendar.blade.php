@@ -21,46 +21,77 @@
 
 @section('content')
 
-  <header>
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
 
-    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active" style="background-image: url('https://source.unsplash.com/LAaSoL0LrYs/1920x1080')">
-          <div class="carousel-caption">
-            <h5>First slide label</h5>
-            <p>Some representative placeholder content for the first slide.</p>
-          </div>
-        </div>
-        <div class="carousel-item" style="background-image: url('https://source.unsplash.com/bF2vsubyHcQ/1920x1080')">
-          <div class="carousel-caption">
-            <h5>Second slide label</h5>
-            <p>Some representative placeholder content for the second slide.</p>
-          </div>
-        </div>
-        <div class="carousel-item" style="background-image: url('https://source.unsplash.com/szFUQoyvrxM/1920x1080')">
-          <div class="carousel-caption">
-            <h5>Third slide label</h5>
-            <p>Some representative placeholder content for the third slide.</p>
-          </div>
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
-  </header>
 
+    <div class="carousel-inner">
+
+        <div class="carousel-item active" style="background-image: url('{{ asset('assets/user/utilidades/cosmetologa.jpg')}}')">
+            <div class="row postion_row_caledanrio">
+              <div class="col-12 col-md-6">
+                  <div class="conten_slilder_full">
+                    <h1 class="text-white titulo" style="">
+                        Instituto Mexicano <br>
+                        Naturales Ain Spa
+                    </h1>
+
+                    <a class="btn btn-secundario_grid me-3">
+                        <div class="d-flex justify-content-around">
+                            <p class="card_tittle_btn my-auto">
+                                Online
+                            </p>
+                        </div>
+                    </a>
+
+                    <p class="text-white parrafo" style="">
+                        Plataforma número uno de cursos en línea y <br>
+                        presenciales dedicados a la cosmetología y <br>
+                        cosmiatría a nivel nacional e internacional.
+                    </p>
+
+                    <div class="d-flex justify-content-start">
+                        <a class="btn btn-primario me-3">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    Comprar ahora
+                                </p>
+                                <div class="card_bg_btn ">
+                                    <i class="fas fa-cart-plus card_icon_btn"></i>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a class="btn btn-secundario me-1">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    Saber mas
+                                </p>
+                                <div class="card_bg_btn_secundario">
+                                    <i class="fas fa-plus card_icon_btn_secundario"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                  </div>
+              </div>
+            </div>
+        </div>
+
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+    </div>
 {{-- Grid --}}
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
 
