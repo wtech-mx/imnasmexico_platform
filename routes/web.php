@@ -23,10 +23,6 @@ Route::get('/', function () {
     return view('user.home');
 });
 
-Route::get('calendario', function () {
-    return view('user.calendar');
-});
-
 Route::get('nuestras_instalaciones', function () {
     return view('user.instalaciones');
 });
@@ -39,6 +35,8 @@ Auth::routes();
 
 // =============== P A G I N A  S I N G L E  C O U R S E ===============================
 Route::get('/curso/{slug}', [App\Http\Controllers\CursosController::class, 'show'])->name('cursos.show');
+
+Route::get('/calendario', [App\Http\Controllers\CursosController::class, 'index_user'])->name('cursos.index_user');
 
 Route::post('/webhooks', WebhooksController::class);
 

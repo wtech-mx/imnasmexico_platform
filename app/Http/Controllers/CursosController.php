@@ -87,6 +87,11 @@ class CursosController extends Controller
 
         CursosTickets::insert($insert_data);
 
+        $ticket = CursosTickets::orderBy('id','DESC')->first();
+        $curso = Cursos::find($curso->id);
+        $curso->precio = $ticket->precio;
+        $curso->update();
+
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->route('cursos.index')
             ->with('success', 'curso created successfully.');
@@ -158,8 +163,22 @@ class CursosController extends Controller
         //     }
         //     CursosTickets::insert($insert_data);
         // }
+
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->route('cursos.index')
             ->with('success', 'curso created successfully.');
+    }
+
+    public function index_user()
+    {
+        $DateAndTime = date('h:i', time());
+        $fechaActual = date('Y-m-d');
+        $cursos = Cursos::
+        where('fecha_final', '>=', $fechaActual)
+        ->where('hora_final', '>=', $DateAndTime)
+        ->orderBy('fecha_inicial','ASC')
+        ->get();
+
+        return view('user.calendar', compact('cursos'));
     }
 }
