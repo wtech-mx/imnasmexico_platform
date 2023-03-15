@@ -8,6 +8,35 @@
 <link href="{{ asset('assets/user/custom/single_cours.css')}}" rel="stylesheet" />
 @endsection
 
+@php
+    // SDK de Mercado Pago
+    require base_path('/vendor/autoload.php');
+    // Agrega credenciales
+    MercadoPago\SDK::setAccessToken(config('services.mercadopago.token'));
+
+    // Crea un objeto de preferencia
+    $preference = new MercadoPago\Preference();
+
+    // Crea un ítem en la preferencia
+    foreach ($tickets as $ticket) {
+        $item = new MercadoPago\Item();
+        $item->title = $curso->nombre;
+        $item->quantity = 1;
+        $item->unit_price = $ticket->precio;
+        $ticketss[] = $item;
+    }
+
+    $preference->back_urls = array(
+        "success" => route('order.pay'),
+        "failure" => "https://www.google.com.mx/",
+        "pending" => "http://www.tu-sitio/pending"
+    );
+    $preference->auto_return = "approved";
+
+    $preference->items = $ticketss;
+    $preference->save();
+@endphp
+
 @section('content')
 
 
@@ -102,6 +131,15 @@
                             {{$curso->fecha_final}}
                             @endif, {{$curso->hora_inicial}} - {{$curso->hora_final}}
                         </p>
+                        <div class="cho-container"></div>
+
+                        <div class="input-group text-center mb-3" style="width: 130px">
+                            <button class="input-group-text decrement-btn">-</button>
+                            <input type="text" name="quantity" class="for">
+                        </div>
+                        @foreach ($tickets as $ticket)
+                        <button type="button" class="btn btn-primary float-start addToCartBtn"> Agregar al carrito</button>
+                        @endforeach
 
                         <a class="btn btn-primario mt-5">
                             <div class="d-flex justify-content-around">
@@ -459,7 +497,33 @@
 @endsection
 
 @section('js')
+<script src="https://sdk.mercadopago.com/js/v2"></script>
 
+<script>
+    <? echo count($)
+  $(document).ready(function(){
+
+    $('#addToCartBtn').click(function(e){
+        e.preventDefault();
+
+    });
+
+  });
+
+  const mp = new MercadoPago("{{config('services.mercadopago.key')}}", {
+    locale: 'es-MX'
+  });
+
+  mp.checkout({
+    preference: {
+      id: '{{$preference->id}}'
+    },
+    render: {
+      container: '.cho-container',
+      label: 'Pagar',
+    }
+  });
+</script>
 
 @endsection
 

@@ -3,8 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermisosController;
+use App\Http\Controllers\WebhooksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,15 +31,18 @@ Route::get('nuestras_instalaciones', function () {
     return view('user.instalaciones');
 });
 
-Route::get('single_course', function () {
-    return view('user.single_course');
-});
-
 Route::get('login', function () {
     return view('auth.login');
 });
 
 Auth::routes();
+
+// =============== P A G I N A  S I N G L E  C O U R S E ===============================
+Route::get('/curso/{slug}', [App\Http\Controllers\CursosController::class, 'show'])->name('cursos.show');
+
+Route::post('/webhooks', WebhooksController::class);
+
+Route::get('/orders/pay', [OrderController::class, 'pay'])->name('order.pay');
 
 Route::group(['middleware' => ['auth']], function() {
 
@@ -60,9 +65,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/cursos/edit/{id}', [App\Http\Controllers\CursosController::class, 'edit'])->name('cursos.edit');
     Route::patch('/admin/cursos/update/{id}', [App\Http\Controllers\CursosController::class, 'update'])->name('cursos.update');
     Route::delete('/admin/cursos/delete/{id}', [App\Http\Controllers\CursosController::class, 'destroy'])->name('cursos.destroy');
-
-    // =============== P A G I N A  S I N G L E  C O U R S E ===============================
-    Route::get('/curso/{slug}', [App\Http\Controllers\CursosController::class, 'show'])->name('cursos.show');
 
     /*|--------------------------------------------------------------------------
     |Configuracion

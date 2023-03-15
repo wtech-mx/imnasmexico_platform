@@ -14,18 +14,20 @@ class CursosController extends Controller
     {
         $cursos = Cursos::orderBy('id','DESC')->get();
 
-        return view('cursos.index', compact('cursos'));
+        return view('admin.cursos.index', compact('cursos'));
     }
 
     public function show($slug)
     {
         $curso = Cursos::where('slug','=', $slug)->firstOrFail();
-        return view('user.single_course', compact('curso'));
+        $tickets = CursosTickets::where('id_curso','=', $curso->id)->get();
+
+        return view('user.single_course', compact('curso', 'tickets'));
     }
 
     public function create()
     {
-        return view('cursos.create');
+        return view('admin.cursos.create');
     }
 
     public function store(Request $request)
@@ -95,7 +97,7 @@ class CursosController extends Controller
         $curso = Cursos::find($id);
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
 
-        return view('cursos.edit', compact('curso', 'tickets'));
+        return view('admin.cursos.edit', compact('curso', 'tickets'));
     }
 
     public function update(Request $request, $id)

@@ -7,15 +7,15 @@
 @section('css_custom')
 <link href="{{ asset('assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
 <style>
-.carousel-item {
-  height: 100vh;
-  min-height: 350px;
-  background: no-repeat center center scroll;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
+    .carousel-item {
+    height: 100vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
 </style>
 @endsection
 
@@ -128,8 +128,6 @@
                                 </a>
                             </div>
                           </div>
-
-
 
                     </div>
 
