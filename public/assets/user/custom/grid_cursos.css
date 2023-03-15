@@ -1,9 +1,15 @@
+@font-face {
+    font-family: Bahnschrift;
+    src: url('./../../user//fonts/Bahnschrift.ttf');
+ }
+
 .card_grid{
-    width: 24rem;
+    width: 26.5rem;
     border-radius: 16px;
     border-style: solid;
     border-width: 0px 13px 13px 0px;
     border-color: #836262;
+    position: relative;
 }
 
 .img_card_grid{
@@ -36,13 +42,10 @@
     -webkit-box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 75%);
     -moz-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 75%);
-    padding-right: 3px !important;
-    padding-left: 3px !important;
-    padding-top: 3px !important;
-    padding-bottom: 3px !important;
     font-family: Bahnschrift;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 13px;
+        padding: 7px;
 }
 
 .btn_secundario_grd_curso{
@@ -52,17 +55,10 @@
     -webkit-box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 75%);
     -moz-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.75);
     box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 75%);
-    padding-right: 3px !important;
-    padding-left: 3px !important;
-    padding-top: 3px !important;
-    padding-bottom: 3px !important;
     font-family: Bahnschrift;
     font-weight: bold;
-    font-size: 10px;
-}
-
-.card_tittle_btn_grid{
-    font-size: 12px;
+    font-size: 13px;
+        padding: 7px;
 }
 
 .card_icon_btn_grid{
@@ -77,4 +73,78 @@
     color: #F5ECE4;
     font-size: 13px;
     margin-top: 8px;
+}
+
+.precio_grid{
+    position: absolute;
+    background-color: #836262;
+    color: #fff;
+    padding: 10px 25px 10px 25px;
+    border-radius: 19px;
+    padding: 10px 25px 10px 25px;
+    border-radius: 19px;
+    left: 15px;
+    top: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: Bahnschrift;
+}
+
+.share_grid{
+    position: absolute;
+    background-color: #836262;
+    color: #fff;
+    border-radius: 19px;
+    padding: 10px 15px 10px 15px;
+    border-radius: 19px;
+    right: 15px;
+    top: 15px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.wish_grid{
+    position: absolute;
+    background-color: #836262;
+    color: #fff;
+    border-radius: 19px;
+    padding: 10px 15px 10px 15px;
+    border-radius: 19px;
+    right: 70px;
+    top: 15px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.modalidado_grid{
+    position: absolute;
+    background-color: #F5ECE4;
+    color: #836262;
+    padding: 10px 25px 10px 25px;
+    border-radius: 19px;
+    padding: 10px 25px 10px 25px;
+    border-radius: 19px;
+    left: 15px;
+    top: 195px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.horario_grid{
+    position: absolute;
+    background-color: #F5ECE4;
+    color: #836262;
+    padding: 10px 25px 10px 25px;
+    border-radius: 19px;
+    padding: 10px 25px 10px 25px;
+    border-radius: 19px;
+    right: 15px;
+    top: 195px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.tittle_proximas_cer{
+    font-size: 40px;
+    font-weight: bold;
 }
