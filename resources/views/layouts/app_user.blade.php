@@ -21,15 +21,21 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <link href="{{ asset('assets/admin/css/nucleo-svg.css')}}" rel="stylesheet" />
 
-
   </head>
-  <body>
+
+  <body class="body">
+
+    <header class="header">
+        @include('user.components.navbar')
+    </header>
 
     <main class="container-fluid secundario" style="margin: 0;padding:0;">
-
     @yield('content')
-
     </main>
+
+    {{-- footer --}}
+    @include('admin.users.components.footer')
+    {{-- footer --}}
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> --}}
     {{-- <link href="{{ asset('assets/user/bootstrap/js/bootstrap.bundle.min.js')}}" rel="stylesheet" /> --}}

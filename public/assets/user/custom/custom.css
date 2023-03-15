@@ -1,17 +1,21 @@
 @font-face {
     font-family: Leelawadee_1;
-    src: url('./../../user//fonts/LeelaUIb.ttf');
+    src: url('./../../user/fonts/LeelaUIb.ttf');
  }
 
  @font-face {
     font-family: Leelawadee_2;
-    src: url('./../../user//fonts/LeelawUI.ttf');
+    src: url('./../../user/fonts/LeelawUI.ttf');
  }
 
  @font-face {
     font-family: Bahnschrift;
-    src: url('./../../user//fonts/Bahnschrift.ttf');
+    src: url('./../../user/fonts/Bahnschrift.ttf');
  }
+
+ .margin_home_nav{
+    margin-top: 13%;
+}
 
  .bg_overley{
     background-position: center center;

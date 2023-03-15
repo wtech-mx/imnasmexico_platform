@@ -7,12 +7,28 @@
     padding-left: 16px !important;
     padding-top: 16px !important;
     padding-bottom: 16px !important;
-    margin-bottom: 6rem;
+    position: fixed;
+    z-index: 100;
+    left: 5%;
+    right: 5%;
+    top: 30px;
 }
+
+
 
 .nav_link_custom{
     font-family: Bahnschrift;
     font-size: 30px;
     color: #836262;
     font-weight: bold;
+}
+
+
+.navbar > .container, .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {
+    display: flex;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+    background: #F5ECE4;
+    border-radius: 16px;
 }

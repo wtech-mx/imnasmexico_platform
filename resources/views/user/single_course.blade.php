@@ -42,9 +42,7 @@
 
 <section class="primario bg_overley" style="background:#836262;">
 
-    @include('user.components.navbar');
-
-    <div class="tab_section">
+    <div class="tab_section margin_home_nav">
 
         <div class="d-flex align-items-start">
             <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -488,11 +486,6 @@
 
 </div>
 </section>
-
-
-{{-- footer --}}
-@include('admin.users.components.footer')
-{{-- footer --}}
 
 @endsection
 

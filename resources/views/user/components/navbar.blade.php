@@ -1,4 +1,4 @@
-<nav class="navbar navbar_custom navbar-expand-lg bg-body-tertiary mt-3">
+<nav class="navbar navbar_custom navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
           <img src="{{ asset('assets/user/logotipos/imnas.webp')}}" alt="Logo" width="90"  class="d-inline-block align-text-top">
