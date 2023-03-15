@@ -78,7 +78,7 @@
     <div class="row">
         {{-- card_grid --}}
 
-        <div class="col-4">
+        <div class="col-6 col-md-4">
 
             <div class="card card_grid" style="">
                 <img class="img_card_grid" src="{{ asset('assets/user/utilidades/cosmetologa.jpg')}}" class="card-img-top" alt="...">
