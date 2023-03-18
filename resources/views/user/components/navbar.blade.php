@@ -30,7 +30,7 @@
         </ul>
 
         <div class="d-flex">
-            <a class="btn btn-primario me-4" style="font-size: 25px;">
+            <a class="btn btn-primario me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
                 Acceso alumnas
             </a>
         </div>

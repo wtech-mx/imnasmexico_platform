@@ -1,0 +1,57 @@
+@font-face {
+    font-family: Leelawadee_1;
+    src: url('./../../user/fonts/LeelaUIb.ttf');
+ }
+
+
+.tittle_modal_login{
+    font-family: Leelawadee_1;
+    font-size: 40px;
+    color: #836262;
+}
+
+.span_custom_login{
+    background: #F5ECE4;
+    color: #836262;
+    border: solid 3px transparent;
+    border-radius: 16px 0 0 16px;
+    -webkit-box-shadow: 5px 5px 13px 0px rgba(128,128,128,0.5);
+    -moz-box-shadow: 5px 5px 13px 0px rgba(128,128,128,0.5);
+    box-shadow: 5px 5px 13px 0px rgba(128,128,128,0.5);
+}
+
+.input_custom_login{
+    background: #F5ECE4;
+    color: #836262;
+    border: solid 3px transparent;
+    border-radius: 0px 16px 16px 0px;
+    font-weight: 600;
+    -webkit-box-shadow: 5px 5px 13px 0px rgba(128,128,128,0.5);
+    -moz-box-shadow: 5px 5px 13px 0px rgba(128,128,128,0.5);
+    box-shadow: 5px 5px 13px 0px rgba(128,128,128,0.5);
+}
+
+.modal_content_login{
+    border-radius: 16px!important;
+    border-style: solid;
+    border-width: 0px 9px 9px 0px;
+    border-color: #836262;
+}
+
+.btn_login_modal{
+    background-color: #836262;;
+    color:#F5ECE4;
+    border-radius: 16px;
+}
+
+.btn_login_modal:hover{
+    background-color: #836262;;
+    color:#F5ECE4;
+    border-radius: 16px;
+}
+
+
+body.modal-open>div.bg,
+.modal-backdrop.fade.show {
+      background-color: rgb(131, 98, 98,0.5);
+}

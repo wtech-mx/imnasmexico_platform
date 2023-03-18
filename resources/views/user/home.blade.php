@@ -47,7 +47,7 @@
                                 <h3 class="card_titulo">CURSO DE PIEDRAS CALIENTES</h3>
                                 <h4 class="card_date">Jueves 16 de Febrero</h4>
 
-                                <a class="btn btn-primario me-3">
+                                <a class="btn btn-primario me-3" type="button" data-bs-toggle="modal" data-bs-target="#checkout_modal">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn my-auto">
                                             Comprar ahora
