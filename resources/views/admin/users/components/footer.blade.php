@@ -10,7 +10,7 @@
                 </div>
             </div>
 
-            <div class="d-flex justify-content-evenly">
+            <div class="d-flex justify-content-center">
 
                 <div class="icon_footer">
                     <p class="text-center" style="margin-bottom: 0rem!important">
