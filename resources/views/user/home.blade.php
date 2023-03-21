@@ -13,17 +13,17 @@
 <section class="primario bg_overley" style="background-image: url('{{ asset('assets/user/utilidades/cosmetologa_bg.jpg')}}')">
 
     <div class="row margin_home_nav">
-        <div class="col-12 col-md-6">
-            <h1 class="text-white titulo" style="margin-top: 6rem;">
+        <div class="col-12 col-md-6 order-dos">
+            <h1 class="text-white titulo space_ttile" style="">
                 Instituto Mexicano <br>
                 Naturales Ain Spa
             </h1>
             <p class="text-white parrafo" style="">
-                Plataforma número uno de cursos en línea y <br>
-                presenciales dedicados a la cosmetología y <br>
+                Plataforma número uno de cursos en línea y
+                presenciales dedicados a la cosmetología y
                 cosmiatría a nivel nacional e internacional.
             </p>
-            <div class="d-flex justify-content-start">
+            <div class="d-flex justify-content-start justify-md-content-center">
                 <a class="btn btn-primario me-4">
                     Certificaciones
                 </a>
@@ -33,8 +33,8 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-6">
-            <div id="carouselExample" class="carousel slide">
+        <div class="col-12 col-md-6 order-uno">
+            <div id="carouselExample" class="carousel slide carrusel_space">
 
                 <div class="carousel-inner">
 

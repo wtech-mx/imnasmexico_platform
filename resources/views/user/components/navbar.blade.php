@@ -1,14 +1,20 @@
 <nav class="navbar navbar_custom navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
+
       <a class="navbar-brand" href="#">
-          <img src="{{ asset('assets/user/logotipos/imnas.webp')}}" alt="Logo" width="90"  class="d-inline-block align-text-top">
+          <img src="{{ asset('assets/user/logotipos/imnas.webp')}}" class="image_navbar d-inline-block align-text-top">
       </a>
+
+      <a class="btn btn-primario acceso_alumnas_flex_prim me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
+        Acceso alumnas
+      </a>
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarScroll">
-        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;margin-left: 7rem;">
+      <div class="collapse navbar-collapse nav_resp" id="navbarScroll">
+        <ul class="navbar-nav me-auto navbar_ul_custom my-2 my-lg-0 navbar-nav-scroll" style="">
           <li class="nav-item">
             <a class="nav-link nav_link_custom active" aria-current="page" href="#">Calendario</a>
           </li>
@@ -29,7 +35,7 @@
           </li>
         </ul>
 
-        <div class="d-flex">
+        <div class="d-flex acceso_alumnas_flex">
             <a class="btn btn-primario me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
                 Acceso alumnas
             </a>
@@ -38,3 +44,5 @@
       </div>
     </div>
   </nav>
+
+
