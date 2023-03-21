@@ -1,0 +1,126 @@
+.card_thanks {
+    background-color: #fff;
+    border-radius: 24px;
+    width: 250px;
+    /* height: 195px; */
+    border-style: solid;
+    border-width: 0px 9px 9px 0px;
+    border-color: #836262;
+    margin-top: 200px;
+}
+
+.img_card_thanks{
+    width: 180px;
+}
+
+.tittle_thanks{
+    color: #fff;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+.subtittle_thanks{
+    color: #fff;
+    font-size: 35px;
+    font-weight: 700;
+}
+
+.btn_thanks{
+    text-decoration: none;
+    color: #836262;
+    background: #F5ECE4;
+    padding: 15px 45px 15px 45px;
+    border-radius: 19px;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.btn_thanks:hover{
+    text-decoration: none;
+    color: #F5ECE4;
+    border: solid 3px #F5ECE4;
+    padding: 15px 45px 15px 45px;
+    border-radius: 19px;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.btn_thanks_2{
+    text-decoration: none;
+    color: #F5ECE4;
+    background: #836262;
+    padding: 15px 45px 15px 45px;
+    border-radius: 19px;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.btn_thanks_2:hover{
+    text-decoration: none;
+    color: #836262;
+    border: solid 3px #836262;
+    padding: 15px 45px 15px 45px;
+    border-radius: 19px;
+    font-weight: 600;
+    margin-top: 2rem;
+}
+
+.card_tanks{
+    background: #fff;
+    border-radius: 19px;
+    padding: 50px 45px 50px 45px;
+    -webkit-box-shadow: 6px 6px 6px 0px rgba(184,184,184,0.5);
+    -moz-box-shadow: 6px 6px 6px 0px rgba(184,184,184,0.5);
+    box-shadow: 6px 6px 6px 0px rgba(184,184,184,0.5);
+}
+
+.tittle_card_thanks{
+    color: #836262;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+
+.facts_thanks{
+    margin-bottom: 0rem!important;
+}
+
+.btn_certi_thanks{
+    margin-top: 3rem;
+    text-decoration: none;
+    color: #F5ECE4;
+    background: #836262;
+    padding: 15px 45px 15px 45px;
+    border-radius: 19px;
+    font-weight: 600;
+}
+
+.card_thanks_btn {
+    background-color: #836262;
+    border-radius: 24px;
+    margin-left: 1rem;
+    width: 30px;
+    height: 30px;
+    padding: 0px 0 0px 0;
+}
+
+.card_thanks_btn_2{
+    background-color: #F5ECE4;
+    border-radius: 24px;
+    margin-left: 1rem;
+    width: 30px;
+    height: 30px;
+    padding: 0px 0 0px 0;
+}
+
+.card_icon_thanks {
+    width: 20px;
+    color: #F5ECE4;
+    font-size: 13px;
+}
+
+.card_icon_thanks_2{
+    width: 20px;
+    color: #836262;
+    font-size: 13px;
+}

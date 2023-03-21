@@ -31,6 +31,10 @@ Route::get('login', function () {
     return view('auth.login');
 });
 
+Route::get('orden', function () {
+    return view('user.order');
+});
+
 Auth::routes();
 
 // =============== P A G I N A  S I N G L E  C O U R S E ===============================
