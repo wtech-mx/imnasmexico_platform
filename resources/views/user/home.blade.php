@@ -23,7 +23,7 @@
                 presenciales dedicados a la cosmetología y
                 cosmiatría a nivel nacional e internacional.
             </p>
-            <div class="d-flex justify-content-start justify-md-content-center">
+            <div class="d-flex justify-content-center justify-content-md-start space_btn_section1">
                 <a class="btn btn-primario me-4">
                     Certificaciones
                 </a>
@@ -302,8 +302,8 @@
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
     <div class="row">
         <div class="col-12 col-md-6">
-            <h2 class="titulomin_alfa text-left mb-4" style="margin-left: 30px;">Laboratorio Naturales Ain Spa</h2>
-            <p class="text-left text_beneficios mb-4">
+            <h2 class="titulomin_alfa espaciodor_lab text-left  mb-4" style="margin-left: 30px;">Laboratorio Naturales Ain Spa</h2>
+            <p class="text-left text_beneficios espaciodor_lab_text mb-4">
                 El Instituto Mexicano Naturales Ain Spa es un Instituto incorporado a la SEP
                 y STPS, también es una Entidad de Certificación y Evaluación SEP Conocer.   <br><br>
 
@@ -334,7 +334,7 @@
                 <div class="col-3" style="">
                     <div class="d-flex justify-content-center">
                         <div class="rounded_lab">
-                            <p class="text-left">
+                            <p class="text-center">
                             <img class="img_rounded_lab" src="{{ asset('assets/user/icons/icono-facial.webp')}}" alt="">
                             </p>
                         </div>
@@ -344,14 +344,14 @@
                 <div class="col-3" style="">
                     <div class="d-flex justify-content-center">
                         <div class="rounded_lab">
-                            <p class="text-left">
+                            <p class="text-center">
                             <img class="img_rounded_lab" src="{{ asset('assets/user/icons/icono-relex-1.webp')}}" alt="">
                             </p>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-12 mt-5">
+                <div class="col-12 col_adaptable_mobil mt-5">
                     <a class="btn btn-cuarto" style="margin-left: 1rem;">
                         Ver Catalogo
                     </a>
@@ -402,7 +402,7 @@
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
     <div class="row">
         <div class="col-12 col-md-6">
-            <div id="slide_unam" class="carousel slide">
+            <div id="slide_unam" class="carousel slide space_unam">
 
                 <div class="carousel-inner">
 
@@ -457,11 +457,11 @@
         </div>
 
         <div class="col-12 col-md-6">
-            <h2 class="titulomin_alfa text-left mb-4">
+            <h2 class="titulomin_alfa espaciodor_unam_text text-left mb-4">
                 !Avalados ante la casa maxima <br>
                 casa de estudios UNAM!
             </h2>
-            <p class="text-left text_beneficios mb-4" style="margin-left: 0px!important">
+            <p class="text-left text_beneficios espaciodor_lab_text mb-4" style="margin-left: 0px!important">
                 Cosmetria Estetica <br>
                 Medicina Estetica <br>
             </p>
@@ -469,7 +469,7 @@
                 Numero de Registro : 60616-1236-17-x-22
             </p>
             <div class="row">
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-md-3 spaciador_logos_unam">
                     <div class="d-flex justify-content-center">
                         <div class="card_certificaciones">
                             <p class="text-center">
@@ -512,7 +512,7 @@
 {{-- Ubicacion --}}
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
     <div class="row">
-        <div class="col-12">
+        <div class="col-12 espaciador_ubicacion">
 
             <div class="d-flex justify-content-center">
 

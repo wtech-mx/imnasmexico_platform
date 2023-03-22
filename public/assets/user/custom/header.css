@@ -41,6 +41,18 @@
     margin-left: 7rem;
 }
 
+.btn-primario:hover{
+    border: solid 3px #836262;
+    background-color: #F5ECE4;
+    color: #836262;
+}
+
+.btn-secundario:hover{
+    border: solid 3px #F5ECE4;
+    background-color: #836262;
+    color: #F5ECE4;
+}
+
 @media only screen and (min-width: 577px) {
     .acceso_alumnas_flex_prim{
         display: none!important;
@@ -62,6 +74,8 @@
         border-style: solid;
         border-width: 0px 0px 9px 0px;
         border-color: #F5ECE4;
+        padding-top: 0px;
+        padding-bottom: 0px;
     }
 
     .navbar > .container, .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {
@@ -125,8 +139,6 @@
         box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 75%)!important;
     }
 
-    .btn-primario {
 
-    }
 
   }
