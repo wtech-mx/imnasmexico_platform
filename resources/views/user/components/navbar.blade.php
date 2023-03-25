@@ -16,7 +16,7 @@
       <div class="collapse navbar-collapse nav_resp" id="navbarScroll">
         <ul class="navbar-nav me-auto navbar_ul_custom my-2 my-lg-0 navbar-nav-scroll" style="">
           <li class="nav-item">
-            <a class="nav-link nav_link_custom active" aria-current="page" href="#">Calendario</a>
+            <a class="nav-link nav_link_custom active" aria-current="page" href="{{ route('cursos.index_user') }}">Calendario</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav_link_custom" href="#">Avales</a>
@@ -32,6 +32,11 @@
           </li>
           <li class="nav-item">
             <a class="nav-link nav_link_custom" href="#">Instalaciones</a>
+          </li>
+          <li>
+            <a type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#checkout_modal">
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
+            </a>
           </li>
         </ul>
 

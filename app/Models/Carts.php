@@ -5,21 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrdersTickets extends Model
+class Carts extends Model
 {
     use HasFactory;
-    protected $table = "orders_tickets";
+    protected $table = "carts";
     protected $primarykey = "id";
     public $timestamps = false;
 
     protected $fillable = [
         'id_tickets',
-        'id_order',
+        'id_user',
         'cantidad',
     ];
-
-    public function CursosTickets()
-    {
-       return $this->belongsTo(CursosTickets::class,'id_tickets');
-    }
 }

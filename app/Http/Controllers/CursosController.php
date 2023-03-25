@@ -19,8 +19,9 @@ class CursosController extends Controller
 
     public function show($slug)
     {
+        $fechaActual = date('Y-m-d');
         $curso = Cursos::where('slug','=', $slug)->firstOrFail();
-        $tickets = CursosTickets::where('id_curso','=', $curso->id)->get();
+        $tickets = CursosTickets::where('id_curso','=', $curso->id)->where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
 
         return view('user.single_course', compact('curso', 'tickets'));
     }

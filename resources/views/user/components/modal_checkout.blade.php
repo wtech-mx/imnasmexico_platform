@@ -92,24 +92,47 @@
 
             <div class="col-6">
                 <p class="text-center tittle_modal_cka">Certificacion</p>
-
+                @php $total = 0 @endphp
                 <table class="table">
                     <thead>
                       <tr class="tr_checkout">
                         <th >#</th>
                         <th >Certificado</th>
                         <th >Costos</th>
+                        <th></th>
+                        <th></th>
                       </tr>
                     </thead>
 
                     <tbody>
-                      <tr>
-                        <th>
-                            <img class="image_checkout" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" class="card-img-top" alt="...">
-                        </th>
-                        <td class="td_title_checkout">Curso de Piedras Calientes Curativas y Alineación de Chacras</td>
-                        <td>$700.00</td>
-                      </tr>
+                    @if(session('cart'))
+                        @foreach(session('cart') as $id => $details)
+                            @php $total += $details['price'] * $details['quantity'] @endphp
+                            <tr>
+                                <th>
+                                    <img class="image_checkout" src="{{ asset('curso/'. $details['image'] )}}" class="card-img-top" alt="...">
+                                </th>
+                                <td class="td_title_checkout">{{ $details['name'] }}</td>
+                                <td>${{ $details['price'] }}</td>
+                                {{-- <td data-th="Quantity">
+
+                                    <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity update-cart" />
+
+                                </td>
+                                <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td> --}}
+                                <td>
+                                    <a class="btn btn-danger btn-sm remove-from-cart" ><i class="fa fa-trash-o"></i></a>
+
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                    <tr class="tr_checkout">
+                        <th></th>
+                        <th>Total:</th>
+                        <th>$ {{ $total }}</th>
+                        <th></th>
+                    </tr>
                     </tbody>
                   </table>
 
@@ -118,9 +141,7 @@
                   <div class="d-flex justify-content-center">
                     <a class="btn btn-primario me-3" >
                         <div class="d-flex justify-content-around">
-                            <p class="card_tittle_btn my-auto">
-                                Comprar ahora
-                            </p>
+                            <div class="card_tittle_btn my-auto cho-container"></div>
                             <div class="card_bg_btn ">
                                 <i class="fas fa-cart-plus card_icon_btn"></i>
                             </div>

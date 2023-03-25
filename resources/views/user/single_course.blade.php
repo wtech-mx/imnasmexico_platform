@@ -8,37 +8,7 @@
 <link href="{{ asset('assets/user/custom/single_cours.css')}}" rel="stylesheet" />
 @endsection
 
-@php
-    // SDK de Mercado Pago
-    require base_path('/vendor/autoload.php');
-    // Agrega credenciales
-    MercadoPago\SDK::setAccessToken(config('services.mercadopago.token'));
-
-    // Crea un objeto de preferencia
-    $preference = new MercadoPago\Preference();
-
-    // Crea un ítem en la preferencia
-    foreach ($tickets as $ticket) {
-        $item = new MercadoPago\Item();
-        $item->title = $curso->nombre;
-        $item->quantity = 1;
-        $item->unit_price = $ticket->precio;
-        $ticketss[] = $item;
-    }
-
-    $preference->back_urls = array(
-        "success" => route('order.pay'),
-        "failure" => "https://www.google.com.mx/",
-        "pending" => "http://www.tu-sitio/pending"
-    );
-    $preference->auto_return = "approved";
-
-    $preference->items = $ticketss;
-    $preference->save();
-@endphp
-
 @section('content')
-
 
 <section class="primario bg_overley" style="background:#836262;">
 
@@ -129,19 +99,11 @@
                             {{$curso->fecha_final}}
                             @endif, {{$curso->hora_inicial}} - {{$curso->hora_final}}
                         </p>
-                        <div class="cho-container"></div>
 
-                        <div class="input-group text-center mb-3" style="width: 130px">
-                            <button class="input-group-text decrement-btn">-</button>
-                            <input type="text" name="quantity" class="for">
-                        </div>
-                        @foreach ($tickets as $ticket)
-                        <button type="button" class="btn btn-primary float-start addToCartBtn"> Agregar al carrito</button>
-                        @endforeach
 
                         <a class="btn btn-primario mt-5">
                             <div class="d-flex justify-content-around">
-                                <p class="card_tittle_btn my-auto">
+                                <p class="card_tittle_btn my-auto" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                     Comprar ahora
                                 </p>
                                 <div class="card_bg_btn ">
@@ -160,6 +122,35 @@
                                 </div>
                             </div>
                         </a>
+
+                        <div class="collapse mt-3" id="collapseExample">
+                            <div class="card card-body">
+                                <div class="row">
+                                    @foreach ($tickets as $ticket)
+                                        <div class="col-10">
+                                            <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                        </div>
+                                        <div class="col-2">
+                                            @if ($ticket->descuento == NULL)
+                                                <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                            @else
+                                                <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                            @endif
+                                        </div>
+                                        <div class="col-12">
+                                            <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <p class="btn-holder"><a href="{{ route('add.to.cart', $ticket->id) }}" class="btn btn-warning btn-block text-center" role="button">Add</a> </p>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
               </div>
@@ -450,73 +441,42 @@
 
 {{--Contactanos --}}
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
-<div class="row border_row" style="">
+    <div class="row border_row" style="">
 
-    <div class="col-6">
-        <h2 class="text-center tittle-contact">Contactenos</h2>
-        <p class="text-center text-white">
-            Complementa tus conocimientos y conviértete un experto de la cosmología,
-        </p>
-        <form class="form_contactenos" action="">
+        <div class="col-6">
+            <h2 class="text-center tittle-contact">Contactenos</h2>
+            <p class="text-center text-white">
+                Complementa tus conocimientos y conviértete un experto de la cosmología,
+            </p>
+            <form class="form_contactenos" action="">
 
-                <div class="form-group">
-                    <input type="text" class="form-control form_contact mt-4" id="" placeholder="Nombre (requerido)">
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control form_contact mt-4" id="" placeholder="Correo Electrónico (requerido)">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control form_contact mt-4" id="" placeholder="Teléfono (requerido)">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control form_contact mt-4" id="" placeholder="Message">
-                </div>
-                <p class="text-center text-white">
-                    <a class="btn btn_enfiar_form">Enviar <i class="fas fa-paper-plane"></i></a>
-                </p>
+                    <div class="form-group">
+                        <input type="text" class="form-control form_contact mt-4" id="" placeholder="Nombre (requerido)">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control form_contact mt-4" id="" placeholder="Correo Electrónico (requerido)">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control form_contact mt-4" id="" placeholder="Teléfono (requerido)">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control form_contact mt-4" id="" placeholder="Message">
+                    </div>
+                    <p class="text-center text-white">
+                        <a class="btn btn_enfiar_form">Enviar <i class="fas fa-paper-plane"></i></a>
+                    </p>
 
-        </form>
+            </form>
+        </div>
+
+        <div class="col-6">
+                <div class="d-flex justify-content-center">
+                    <img class="img_contact" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
+                </div>
+        </div>
+
     </div>
-
-    <div class="col-6">
-            <div class="d-flex justify-content-center">
-                <img class="img_contact" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
-            </div>
-    </div>
-
-</div>
 </section>
-
-@endsection
-
-@section('js')
-<script src="https://sdk.mercadopago.com/js/v2"></script>
-
-<script>
-    <? echo count($)
-  $(document).ready(function(){
-
-    $('#addToCartBtn').click(function(e){
-        e.preventDefault();
-
-    });
-
-  });
-
-  const mp = new MercadoPago("{{config('services.mercadopago.key')}}", {
-    locale: 'es-MX'
-  });
-
-  mp.checkout({
-    preference: {
-      id: '{{$preference->id}}'
-    },
-    render: {
-      container: '.cho-container',
-      label: 'Pagar',
-    }
-  });
-</script>
 
 @endsection
 
