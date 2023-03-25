@@ -492,31 +492,6 @@
 @section('js')
 <script src="https://sdk.mercadopago.com/js/v2"></script>
 
-<script>
-    <? echo count($)
-  $(document).ready(function(){
-
-    $('#addToCartBtn').click(function(e){
-        e.preventDefault();
-
-    });
-
-  });
-
-  const mp = new MercadoPago("{{config('services.mercadopago.key')}}", {
-    locale: 'es-MX'
-  });
-
-  mp.checkout({
-    preference: {
-      id: '{{$preference->id}}'
-    },
-    render: {
-      container: '.cho-container',
-      label: 'Pagar',
-    }
-  });
-</script>
 
 @endsection
 
