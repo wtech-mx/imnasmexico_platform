@@ -203,52 +203,7 @@
 
 </section>
 
-{{-- slide de cursos --}}
-<section>
-    <div class="bgimg-1" style="height: 500px;background-image: url('{{ asset('assets/user/utilidades/spa.jpg')}}')">
 
-    </div>
-</section>
-
-
-{{--Contactanos --}}
-<section class="primario bg_overley" style="background-color:#F5ECE4;">
-<div class="row border_row" style="">
-
-    <div class="col-6">
-        <h2 class="text-center tittle-contact">Contactenos</h2>
-        <p class="text-center text-white">
-            Complementa tus conocimientos y conviértete un experto de la cosmología,
-        </p>
-        <form class="form_contactenos" action="">
-
-                <div class="form-group">
-                    <input type="text" class="form-control form_contact mt-4" id="" placeholder="Nombre (requerido)">
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control form_contact mt-4" id="" placeholder="Correo Electrónico (requerido)">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control form_contact mt-4" id="" placeholder="Teléfono (requerido)">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control form_contact mt-4" id="" placeholder="Message">
-                </div>
-                <p class="text-center text-white">
-                    <a class="btn btn_enfiar_form">Enviar <i class="fas fa-paper-plane"></i></a>
-                </p>
-
-        </form>
-    </div>
-
-    <div class="col-6">
-            <div class="d-flex justify-content-center">
-                <img class="img_contact" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
-            </div>
-    </div>
-
-</div>
-</section>
 
 @endsection
 

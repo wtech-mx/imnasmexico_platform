@@ -35,6 +35,22 @@ Route::get('orden', function () {
     return view('user.order');
 });
 
+Route::get('create_acount', function () {
+    return view('emails.create_acount');
+});
+
+Route::get('recibo', function () {
+    return view('emails.pedido_resibido_user');
+});
+
+Route::get('meet', function () {
+    return view('emails.liga_meet');
+});
+
+Route::get('sede', function () {
+    return view('emails.sede_del_curso');
+});
+
 Auth::routes();
 
 // =============== P A G I N A  S I N G L E  C O U R S E ===============================
