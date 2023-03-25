@@ -20,4 +20,9 @@ class Orders extends Model
         'estatus',
         'fecha'
     ];
+
+    public function OrdersTickets()
+    {
+        return $this->hasOne('App\Models\OrdersTickets', 'id_order', 'id');
+    }
 }

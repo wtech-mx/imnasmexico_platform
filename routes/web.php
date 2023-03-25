@@ -61,6 +61,11 @@ Route::get('/calendario', [App\Http\Controllers\CursosController::class, 'index_
 Route::post('/webhooks', WebhooksController::class);
 
 Route::get('/orders/pay', [OrderController::class, 'pay'])->name('order.pay');
+Route::get('/orders/{order}/show', [OrderController::class, 'show'])->name('order.show');
+
+Route::get('add-to-cart/{id}', [OrderController::class, 'addToCart'])->name('add.to.cart');
+Route::patch('/update-cart', [OrderController::class, 'update'])->name('update.cart');
+Route::delete('/remove-from-cart', [OrderController::class, 'remove'])->name('remove.from.cart');
 
 Route::group(['middleware' => ['auth']], function() {
 

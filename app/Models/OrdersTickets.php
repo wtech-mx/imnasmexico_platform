@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrdersTickets extends Model
 {
     use HasFactory;
-    protected $table = "orders";
+    protected $table = "orders_tickets";
     protected $primarykey = "id";
     public $timestamps = false;
 
@@ -17,4 +17,9 @@ class OrdersTickets extends Model
         'id_order',
         'cantidad',
     ];
+
+    public function CursosTickets()
+    {
+       return $this->belongsTo(CursosTickets::class,'id_tickets');
+    }
 }

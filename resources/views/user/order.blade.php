@@ -21,6 +21,7 @@
                 </div>
             </div>
             <h1 class="text-center tittle_thanks">¡Felicidades!</h1>
+            <h2 class="text-center subtittle_thanks">Dayanna Espinosa</h2>
             <h2 class="text-center subtittle_thanks">Compra Realizada con éxito</h2>
 
             <div class="d-flex justify-content-center">
@@ -46,7 +47,7 @@
 
     <div class="col-12 col-md-6">
         <div class="card_tanks">
-            <h3 class="tittle_card_thanks">Datos del pedido</h3>
+            <h3 class="tittle_card_thanks">Datos del cliente</h3>
             <p class="facts_thanks"><strong>Nombre:</strong> Josue Adrian </p>
             <p class="facts_thanks"><strong>Apellido:</strong> Ramirez Hernandez</p>
             <p class="facts_thanks"><strong>Correo:</strong> dinopiza@yahoo.com</p>
@@ -56,11 +57,22 @@
 
     <div class="col-12 col-md-6">
         <div class="card_tanks">
-            <h3 class="tittle_card_thanks">Datos del cliente</h3>
-            <p class="facts_thanks"><strong>Curso:</strong> Josue Adrian </p>
-            <p class="facts_thanks"><strong>Método de pago:</strong> Ramirez Hernandez</p>
-            <p class="facts_thanks"><strong>Correo:</strong> dinopiza@yahoo.com</p>
-            <p class="facts_thanks"><strong>Costo:</strong> 5529291962</p>
+            <h3 class="tittle_card_thanks">Datos del pedido</h3>
+            @foreach ($order_ticket as $item)
+                <p class="facts_thanks"><strong>Curso:</strong>{{$item->CursosTickets->nombre}}</p>
+            @endforeach
+            <p class="facts_thanks"><strong>Método de pago:</strong>{{$order->forma_pago}}</p>
+            <p class="facts_thanks"><strong>Estado:</strong>
+                @if ($order->forma_pago == 1)
+                    Aprovado
+                @else
+                    Pendiente
+                @endif
+
+            </p>
+            <p class="facts_thanks"><strong>Costo:</strong>${{$order->pago}}</p>
+            <p class="facts_thanks"><strong>Fecha:</strong> {{$order->fecha}}</p>
+            <p class="facts_thanks"><strong>Num pedido:</strong> {{$order->id}}</p>
         </div>
     </div>
 

@@ -26,6 +26,37 @@
   </head>
 
   <body class="body">
+    @if (session('cart'))
+        @php
+            // SDK de Mercado Pago
+            require base_path('/vendor/autoload.php');
+            // Agrega credenciales
+            MercadoPago\SDK::setAccessToken(config('services.mercadopago.token'));
+
+            // Crea un objeto de preferencia
+            $preference = new MercadoPago\Preference();
+
+            // Crea un ítem en la preferencia
+
+                foreach (session('cart') as $id => $details) {
+                    // dd(session('cart'));
+                    $item = new MercadoPago\Item();
+                    $item->title = $details['name'];
+                    $item->quantity = $details['quantity'];
+                    $item->unit_price = $details['price'];
+                    $ticketss[] = $item;
+                }
+
+            $preference->back_urls = array(
+                "success" => route('order.pay'),
+                "failure" => "https://www.google.com.mx/",
+                "pending" => "http://www.tu-sitio/pending"
+            );
+            $preference->auto_return = "approved";
+                $preference->items = $ticketss;
+                $preference->save();
+        @endphp
+    @endif
 
     <header class="header">
         @include('user.components.navbar')
@@ -48,6 +79,67 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'></script>
+    <script type="text/javascript">
+        $(".update-cart").change(function (e) {
+            e.preventDefault();
+            var ele = $(this);
+
+            $.ajax({
+                url: '{{ route('update.cart') }}',
+                method: "patch",
+
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: ele.parents("tr").attr("data-id"),
+                    quantity: ele.parents("tr").find(".quantity").val()
+                },
+
+                success: function (response) {
+                   window.location.reload();
+                }
+            });
+        });
+
+        $(".remove-from-cart").click(function (e) {
+            e.preventDefault();
+            var ele = $(this);
+
+            if(confirm("¿Seguro que quieres eliminar?")) {
+                $.ajax({
+                    url: '{{ route('remove.from.cart') }}',
+                    method: "DELETE",
+
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: ele.parents("tr").attr("data-id"),
+                    },
+
+                    success: function (response) {
+                    //  window.location.reload();
+                    }
+                });
+            }
+        });
+    </script>
+
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    @if (session('cart'))
+        <script>
+            const mp = new MercadoPago("{{config('services.mercadopago.key')}}", {
+                locale: 'es-MX'
+            });
+
+            mp.checkout({
+                preference: {
+                id: '{{$preference->id}}'
+                },
+                render: {
+                container: '.cho-container',
+                label: 'Comprar ahora',
+                }
+            });
+        </script>
+    @endif
 
     @yield('js')
 
