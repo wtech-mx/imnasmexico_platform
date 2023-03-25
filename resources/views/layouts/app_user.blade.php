@@ -36,7 +36,7 @@
     </main>
 
     {{-- footer --}}
-    @include('admin.users.components.footer')
+    @include('user.components.footer')
     {{-- footer --}}
 
     @include('user.components.modal_login')
