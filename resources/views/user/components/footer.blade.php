@@ -72,9 +72,9 @@
 
         </div>
 
-        <div class="col-12 col-md-6 mt-5 mb-5">
+        <div class="col-12 col-md-6 spaciador_footer mt-5 mb-5">
 
-            <div class="d-flex justify-content-center mb-5">
+            <div class="d-flex justify-content-center espaciador_fp mb-5">
                 <div class="card_footer">
                     <p class="text-center" style="margin-bottom: 0rem!important;">
                         <img class="img_card_footer" src="{{ asset('assets/user/icons/pago-seguro.png')}}" alt="">
@@ -97,35 +97,35 @@
             <hr class="hr_custom" style="">
 
             <div class="row">
-                <div class="col-4">
-                    <p class="text_calendario_footer">
-                        <i class="fas fa-calendar-alt icon_footer"></i>
+                <div class="col-4 margen_footer_calendar">
+                    <p class="text_calendario_footer_calendar">
+                        <i class="fas fa-calendar-alt icon_footer_2"></i>
                         Lunes a Viernes
                     </p>
-                    <p class="text_calendario_footer">
-                        <i class="far fa-clock icon_footer"></i>
+                    <p class="text_calendario_footer_calendar">
+                        <i class="far fa-clock icon_footer_2"></i>
                         10:00 am - 7:00 pm
                     </p>
                 </div>
 
-                <div class="col-4">
-                    <p class="text_calendario_footer">
-                        <i class="fas fa-calendar-alt icon_footer"></i>
+                <div class="col-4 margen_footer_calendar">
+                    <p class="text_calendario_footer_calendar">
+                        <i class="fas fa-calendar-alt icon_footer_2"></i>
                         Sabado
                     </p>
-                    <p class="text_calendario_footer">
-                        <i class="far fa-clock icon_footer"></i>
+                    <p class="text_calendario_footer_calendar">
+                        <i class="far fa-clock icon_footer_2"></i>
                         10:00 am - 5:00 pm
                     </p>
                 </div>
 
-                <div class="col-4">
-                    <p class="text_calendario_footer">
-                        <i class="fas fa-calendar-alt icon_footer"></i>
+                <div class="col-4 margen_footer_calendar">
+                    <p class="text_calendario_footer_calendar">
+                        <i class="fas fa-calendar-alt icon_footer_2"></i>
                         Domingo
                     </p>
-                    <p class="text_calendario_footer">
-                        <i class="far fa-clock icon_footer"></i>
+                    <p class="text_calendario_footer_calendar">
+                        <i class="far fa-clock icon_footer_2"></i>
                         1:00 am - 7:00 pm
                     </p>
                 </div>

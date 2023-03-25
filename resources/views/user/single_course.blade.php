@@ -479,5 +479,3 @@
 </section>
 
 @endsection
-
-

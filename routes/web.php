@@ -79,5 +79,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/configuracion', [App\Http\Controllers\ConfiguracionController::class, 'index'])->name('index.configuracion');
     Route::patch('/configuracion/update', [App\Http\Controllers\ConfiguracionController::class, 'update'])->name('update.configuracion');
 
+     // =============== M O D U L O   Profile User ===============================
+
 });
 
+Route::get('perfil', function () {
+    return view('user.profile');
+});
