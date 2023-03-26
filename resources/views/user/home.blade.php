@@ -6,8 +6,9 @@
 
 @section('css_custom')
 <link href="{{ asset('assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
-
 <link href="{{ asset('assets/user/custom/slider_products.css')}}" rel="stylesheet" />
+<link href="{{ asset('assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
+
 
 {{-- css carrusel --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -305,7 +306,80 @@ crossorigin="anonymous" />
 {{-- slide de cursos --}}
 <section>
     <div class="bgimg-1" style="height: 500px;background-image: url('{{ asset('assets/user/utilidades/spa.jpg')}}')">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="titulo_alfa text-center mb-5" style="color: #fff!important">
+                    Próximas Certificaciones
+                </h2>
+            </div>
 
+            <div class="col-12">
+
+                <div class="owl-carousel owl-theme">
+
+                    <div class="item" style="">
+                        <div class="card card_grid" style="">
+                            <img class="img_card_grid" src="" class="card-img-top" alt="...">
+
+                            <p class="precio_grid">$ mxn</p>
+                            <p class="modalidado_grid"></p>
+                            <p class="wish_grid"><i class="fas fa-heart"></i></p>
+                            <p class="share_grid"><i class="fas fa-share-alt"></i></p>
+                            <p class="horario_grid"></p>
+
+                            <div class="card-body">
+                            <div class="row">
+
+                                <div class="col-2 mt-4">
+                                <h4 class="fecha_card_grid text-center">
+                                     <br> <strong class="fecha_strong_card_grid"></strong>
+                                </h4>
+                                </div>
+
+                                <div class="col-10 mt-4">
+                                    <h3 class="tittle_card_grid"></h3>
+
+                                    <div class="d-flex mb-3">
+                                        <div class="me-auto p-2">
+                                            <a class="btn btn_primario_grd_curso">
+                                                <div class="d-flex justify-content-around">
+                                                    <p class="card_tittle_btn_grid my-auto">
+                                                        Comprar ahora
+                                                    </p>
+                                                    <div class="card_bg_btn ">
+                                                        <i class="fas fa-cart-plus card_icon_btn_grid"></i>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="p-2">
+                                            <a class="btn btn_secundario_grd_curso" href="">
+                                                <div class="d-flex justify-content-around">
+                                                    <p class="card_tittle_btn_grid my-auto">
+                                                        Saber mas
+                                                    </p>
+                                                    <div class="card_bg_btn_secundario">
+                                                        <i class="fas fa-plus card_icon_btn_secundario_grid"></i>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
     </div>
 </section>
 
@@ -411,7 +485,7 @@ crossorigin="anonymous" />
 
             <div class="owl-carousel owl-theme">
 
-                <div class="item" style="width:380px;">
+                <div class="item" style="">
                     <div class="content_careder_products">
                         <div class="card card_slider_products" style="">
                             <div class="d-flex justify-content-center">
@@ -440,6 +514,9 @@ crossorigin="anonymous" />
                     </div>
                 </div>
 
+            </div>
+
+        </div>
     </div>
 </section>
 
@@ -546,9 +623,9 @@ crossorigin="anonymous" />
                 Lo que dicen de  <br>
                 nuestros estudiantes...
             </h2>
-            <p class="text-center mt-5">
+            {{-- <p class="text-center mt-5">
                 <img class="px-3" src="{{ asset('assets/user/utilidades/captura.png')}}" alt="">
-            </p>
+            </p> --}}
         </div>
     </div>
 </section>
@@ -618,7 +695,7 @@ crossorigin="anonymous" />
 <script>
     $('.owl-carousel').owlCarousel({
         loop: true,
-        margin: 15,
+        margin: 30,
         nav: true,
         responsive: {
             0: {
@@ -630,9 +707,13 @@ crossorigin="anonymous" />
             1000: {
                 items: 3
             }
+
         }
     })
 </script>
+
+
+
 @endsection
 
 
