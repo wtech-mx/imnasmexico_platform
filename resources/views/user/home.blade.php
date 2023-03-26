@@ -6,6 +6,17 @@
 
 @section('css_custom')
 <link href="{{ asset('assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
+
+<link href="{{ asset('assets/user/custom/slider_products.css')}}" rel="stylesheet" />
+
+{{-- css carrusel --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+crossorigin="anonymous" />
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+crossorigin="anonymous" />
 @endsection
 
 @section('content')
@@ -388,13 +399,47 @@
 <section class="primario bg_overley" style="background-color:#836262;">
     <div class="row">
         <div class="col-12">
-            <h2 class="titulo_alfa text-center" style="color: #fff!important">
+            <h2 class="titulo_alfa text-center mb-5" style="color: #fff!important">
                 Nuestro Catalogo
             </h2>
-            <p class="text-center mt-5">
+            {{-- <p class="text-center mt-5">
                 <img class="px-3" src="{{ asset('assets/user/utilidades/captura_productos.png')}}" alt="" style="width:80%;">
-            </p>
+            </p> --}}
         </div>
+
+        <div class="col-12 m-auto">
+
+            <div class="owl-carousel owl-theme">
+
+                <div class="item" style="width:380px;">
+                    <div class="content_careder_products">
+                        <div class="card card_slider_products" style="">
+                            <div class="d-flex justify-content-center">
+                                <h4 class="text-left ttile_categoria_product">KERALUXE</h4>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <div class="contenedor_img_slider_product tamano_1">
+                                    <p class="text-center">
+                                    <img src="{{ asset('assets/user/utilidades/KERATINA-BRASILENA-2022.png')}}" alt="" class="img_slider_product">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card-body space_productos_slider">
+                                <div class="card-title">
+                                    <p class="text-center tittle_product_slider mb-4">KERATINA BRASILEÑA</p>
+
+                                    <p class="text-center">
+                                        <a class="text-center btn_slider_product mb-3" href="">Compra</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
     </div>
 </section>
 
@@ -559,7 +604,35 @@
 
 @section('js')
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+    crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+    integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+    crossorigin="anonymous"></script>
+
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 15,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 2
+            },
+            1000: {
+                items: 3
+            }
+        }
+    })
+</script>
 @endsection
 
 
