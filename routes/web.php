@@ -31,6 +31,12 @@ Route::get('login', function () {
     return view('auth.login');
 });
 
+Route::get('avales', function () {
+    return view('user.avales');
+});
+
+
+
 Route::get('orden', function () {
     return view('user.order');
 });

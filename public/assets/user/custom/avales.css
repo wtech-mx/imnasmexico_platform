@@ -1,0 +1,138 @@
+.espace_tittle_avales{
+    margin-top: 9rem;
+}
+
+.img_avales{
+    width: 190px;
+}
+
+.container_img_avales{
+    border-style: solid;
+    border-width: 0px 2px 0px 0px;
+    border-color: #836262;
+}
+
+.tittle_avales{
+    color: #836262;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.parrafo_avales{
+    margin-top: 1rem;
+    color: #000;
+    font-family: "Montserrat", Sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.container_nums{
+    margin-top: 50px;
+    margin-left: 90px;
+}
+
+.content_icon_hotspot{
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
+    /* border-style: solid;
+    border-width: 0px 0px 2px 0px;
+    border-color: #836262;
+    width: auto; */
+
+}
+
+.icon_hotspot{
+    font-size: 40px;
+    color: #836262;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.text_hotspot{
+    font-family: "Montserrat", Sans-serif;
+    font-size: 25px;
+    font-weight: normal;
+}
+
+
+
+.img_certificados{
+    width: 65%;
+    background-color: #836262;
+    padding: 10px 5px 10px 15px;
+    border-radius: 19px;
+}
+
+.contenedor_img_estandartes{
+    display: inline-block;
+    padding:5px;
+    box-sizing: border-box;
+}
+
+.img_estandars{
+    /*display: inline-block; */
+    padding: 5px;
+    box-sizing: border-box;
+    /* align-items: center; */
+    /* display: flex; */
+    margin: auto;
+}
+
+.tamano_1{
+    width: 300px;
+    height: 300px;
+}
+
+.space_text_certificados{
+    margin-top: 3rem;
+}
+
+.num_certifiacdo{
+    position: relative;
+    top: 35px;
+    margin: 0px 0px 0px 0px;
+    padding: 10px 10px 10px 10px;
+    border-style: solid;
+    border-width: 3px 3px 3px 3px;
+    border-color: #F5ECE4;
+    width: 150px;
+    border-radius: 30px 30px 30px 30px;
+    color: #F5ECE4;
+}
+
+.num_certifiacdo_2{
+    position: relative;
+    top: 35px;
+    margin: 0px 0px 0px 0px;
+    padding: 10px 10px 10px 10px;
+    border-style: solid;
+    border-width: 3px 3px 3px 3px;
+    border-color: #836262;
+    width: 150px;
+    border-radius: 30px 30px 30px 30px;
+    color: #836262;
+}
+
+.card_certificados{
+    background: #836262;
+    border-radius: 19px;
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
+    border: solid transparent;
+}
+
+.card_certificados_2{
+    background: #F5ECE4!important;
+    border-radius: 19px;
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
+    border: solid transparent;
+}
+
+.text_certifcado{
+    color: #F5ECE4;
+}
+
+.text_certifcado_2{
+    color: #836262;
+}
