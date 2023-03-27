@@ -1,7 +1,7 @@
 <nav class="navbar navbar_custom navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
 
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="{{ route('user.home') }}">
           <img src="{{ asset('assets/user/logotipos/imnas.webp')}}" class="image_navbar d-inline-block align-text-top">
       </a>
 

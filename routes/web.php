@@ -19,10 +19,6 @@ use App\Http\Controllers\WebhooksController;
 |
 */
 
-Route::get('/', function () {
-    return view('user.home');
-});
-
 Route::get('nuestras_instalaciones', function () {
     return view('user.instalaciones');
 });
@@ -61,11 +57,14 @@ Route::get('sede', function () {
 
 Auth::routes();
 
+Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->name('user.home');
+
 // =============== P A G I N A  S I N G L E  C O U R S E ===============================
 Route::get('/curso/{slug}', [App\Http\Controllers\CursosController::class, 'show'])->name('cursos.show');
 
 Route::get('/calendario', [App\Http\Controllers\CursosController::class, 'index_user'])->name('cursos.index_user');
 
+// =============== P A G O S ===============================
 Route::post('/webhooks', WebhooksController::class);
 
 Route::get('/orders/pay', [OrderController::class, 'pay'])->name('order.pay');
@@ -73,6 +72,7 @@ Route::get('/orders/{order}/show', [OrderController::class, 'show'])->name('orde
 
 Route::post('/orders/pay/stripe', [OrderController::class, 'pay_stripe'])->name('order.pay_stripe');
 
+// =============== C A R R I T O ===============================
 Route::get('add-to-cart/{id}', [OrderController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('/update-cart', [OrderController::class, 'update'])->name('update.cart');
 Route::delete('/remove-from-cart', [OrderController::class, 'remove'])->name('remove.from.cart');
