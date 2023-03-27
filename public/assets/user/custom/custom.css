@@ -438,7 +438,19 @@
     text-decoration: none;
   }
 
+
+  .mercadopago-button{
+    border-radius: 19px!important;
+    background-color: #836262!important;
+    padding: 5px 30px 5px 30px!important;
+    font-size: 15px!important;
+    color: #fff!important;
+    text-decoration: none!important;
+  }
+
+
 @media only screen and (max-width: 1390px) {
+
 
     .btn-primario {
         padding: 11px;
@@ -544,6 +556,14 @@
       }
 
 }
+
+@media only screen and (max-width: 1325px) {
+    .btn_ticket_comprar{
+        padding: 10px 20px 10px 20px;
+        font-size: 13px;
+      }
+}
+
 
 
 @media only screen and (max-width: 576px) {

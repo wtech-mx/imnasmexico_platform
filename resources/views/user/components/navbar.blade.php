@@ -19,7 +19,7 @@
             <a class="nav-link nav_link_custom active" aria-current="page" href="{{ route('cursos.index_user') }}">Calendario</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav_link_custom" href="#">Avales</a>
+            <a class="nav-link nav_link_custom" href="avales">Avales</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav_link_custom" href="#">Paquetes</a>

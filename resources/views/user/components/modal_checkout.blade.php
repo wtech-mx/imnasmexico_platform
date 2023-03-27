@@ -122,7 +122,6 @@
                                 <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td> --}}
                                 <td>
                                     <a class="btn btn-danger btn-sm remove-from-cart" ><i class="fa fa-trash-o"></i></a>
-
                                 </td>
                             </tr>
                         @endforeach
@@ -139,12 +138,12 @@
                   <p class="text-center tittle_modal_cka">Método de Pago</p>
 
                   <div class="d-flex justify-content-center">
-                    <a class="btn btn-primario me-3" >
+                    <a class="btn  me-3" >
                         <div class="d-flex justify-content-around">
                             <div class="card_tittle_btn my-auto cho-container"></div>
-                            <div class="card_bg_btn ">
+                            {{-- <div class="card_bg_btn ">
                                 <i class="fas fa-cart-plus card_icon_btn"></i>
-                            </div>
+                            </div> --}}
                         </div>
                     </a>
                   </div>

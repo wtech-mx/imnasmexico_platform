@@ -28,7 +28,7 @@
                         <div class="form-group mb-3">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="remember"> Recordarme
+                                    <input type="checkbox" name="remember" > Recordarme
                                 </label>
                             </div>
                         </div>
