@@ -101,7 +101,7 @@
                         </p>
 
 
-                        <a class="btn btn-primario mt-5" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <a class="btn btn-primario mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -123,7 +123,7 @@
                             </div>
                         </a>
 
-                        <div class="collapse mt-3" id="collapseExample">
+                        <div class="collapse mt-3" id="collapseinfo">
                             <div class="card card-body card_colapsable_comprar">
                                 <div class="row mb-3">
                                     @foreach ($tickets as $ticket)
@@ -176,48 +176,7 @@
                             <?php echo $curso->objetivo?>
                         </p>
 
-                        <a class="btn btn-primario me-3">
-                            <div class="d-flex justify-content-around">
-                                <p class="card_tittle_btn my-auto">
-                                    Comprar ahora
-                                </p>
-                                <div class="card_bg_btn ">
-                                    <i class="fas fa-cart-plus card_icon_btn"></i>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a class="btn btn-secundario me-1">
-                            <div class="d-flex justify-content-around">
-                                <p class="card_tittle_btn my-auto">
-                                    Contactar
-                                </p>
-                                <div class="card_bg_btn_secundario">
-                                    <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-              </div>
-
-              <div class="tab-pane fade" id="v-pills-temarios" role="tabpanel" aria-labelledby="v-pills-temarios-tab" tabindex="0">
-                <div class="row">
-                    <div class="col-5">
-                        <div class="d-flex align-items-center">
-                            <img class="img_destacada img-fluid" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
-                        </div>
-                    </div>
-
-                    <div class="col-7">
-
-                        <h2 class="title_curso mb-5">Temario</h2>
-
-                        <p class="tittle_abstract ">
-                            <?php echo $curso->temario?>
-                        </p>
-
-                        <a class="btn btn-primario  mt-5">
+                        <a class="btn btn-primario mt-5" data-bs-toggle="collapse" href="#collapseobjetivos" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -238,6 +197,113 @@
                                 </div>
                             </div>
                         </a>
+
+                        <div class="collapse mt-3" id="collapseobjetivos">
+                            <div class="card card-body card_colapsable_comprar">
+                                <div class="row mb-3">
+                                    @foreach ($tickets as $ticket)
+                                        <div class="col-4 mt-3">
+                                            <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                        </div>
+                                        <div class="col-3 mt-3">
+                                            @if ($ticket->descuento == NULL)
+                                                <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                            @else
+                                                <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                            @endif
+                                        </div>
+
+                                        <div class="col-5 mt-3">
+                                            <p class="btn-holder">
+                                                <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                    <i class="fas fa-ticket-alt"></i> Comprar
+                                                </a>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="v-pills-temarios" role="tabpanel" aria-labelledby="v-pills-temarios-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-5">
+                        <div class="d-flex align-items-center">
+                            <img class="img_destacada img-fluid" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
+                        </div>
+                    </div>
+
+                    <div class="col-7">
+
+                        <h2 class="title_curso mb-5">Temario</h2>
+
+                        <p class="tittle_abstract ">
+                            <?php echo $curso->temario?>
+                        </p>
+
+                        <a class="btn btn-primario mt-5" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    Comprar ahora
+                                </p>
+                                <div class="card_bg_btn ">
+                                    <i class="fas fa-cart-plus card_icon_btn"></i>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a class="btn btn-secundario mt-5">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    Contactar
+                                </p>
+                                <div class="card_bg_btn_secundario">
+                                    <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
+                                </div>
+                            </div>
+                        </a>
+
+                        <div class="collapse mt-3" id="collapsetemario">
+                            <div class="card card-body card_colapsable_comprar">
+                                <div class="row mb-3">
+                                    @foreach ($tickets as $ticket)
+                                        <div class="col-4 mt-3">
+                                            <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                        </div>
+                                        <div class="col-3 mt-3">
+                                            @if ($ticket->descuento == NULL)
+                                                <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                            @else
+                                                <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                            @endif
+                                        </div>
+
+                                        <div class="col-5 mt-3">
+                                            <p class="btn-holder">
+                                                <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                    <i class="fas fa-ticket-alt"></i> Comprar
+                                                </a>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
               </div>
@@ -317,7 +383,7 @@
                         </div>
 
 
-                        <a class="btn btn-primario mt-5">
+                        <a class="btn btn-primario mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -338,6 +404,39 @@
                                 </div>
                             </div>
                         </a>
+
+                        <div class="collapse mt-3" id="collapseinfo">
+                            <div class="card card-body card_colapsable_comprar">
+                                <div class="row mb-3">
+                                    @foreach ($tickets as $ticket)
+                                        <div class="col-4 mt-3">
+                                            <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                        </div>
+                                        <div class="col-3 mt-3">
+                                            @if ($ticket->descuento == NULL)
+                                                <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                            @else
+                                                <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                            @endif
+                                        </div>
+
+                                        <div class="col-5 mt-3">
+                                            <p class="btn-holder">
+                                                <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                    <i class="fas fa-ticket-alt"></i> Comprar
+                                                </a>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
               </div>
