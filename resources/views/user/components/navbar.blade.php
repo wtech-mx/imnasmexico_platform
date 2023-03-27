@@ -36,6 +36,7 @@
           <li class="nav-item">
             <a class="nav-link nav_link_custom" data-bs-toggle="modal" data-bs-target="#checkout_modal" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ count((array) session('cart')) }}</a>
           </li>
+
           {{-- <li>
             <a type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#checkout_modal">
                 <i class="fa fa-shopping-cart" aria-hidden="true"></i> Cart <span class="badge badge-pill badge-danger">{{ count((array) session('cart')) }}</span>
@@ -44,9 +45,14 @@
         </ul>
 
         <div class="d-flex acceso_alumnas_flex">
-            <a class="btn btn-primario me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
-                Acceso alumnas
-            </a>
+            @guest
+                <a class="btn btn-primario me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
+                    Acceso alumnas
+                </a>
+            @else
+                {{-- <a class="btn btn-primario me-4" type="button" href="{{ route('signout') }}">Cerrar Sesion</a> --}}
+                <a class="btn btn-primario me-4" type="button" href="{{ route('perfil.index') }}">Perfil</a>
+            @endguest
         </div>
 
       </div>

@@ -83,7 +83,7 @@
                                     <img class="img_profile_label" src="{{ asset('assets/user/icons/usuario.png')}}" alt="">
                                 </span>
 
-                                <input class="form-control" type="text"  id="nombre" name="nombre" >
+                                <input class="form-control" type="text"  id="name" name="name" value="{{$cliente->name}}">
                                 </div>
                             </div>
 
@@ -93,7 +93,7 @@
                                     <img class="img_profile_label" src="{{ asset('assets/user/icons/letter.png')}}" alt="">
                                 </span>
 
-                                <input class="form-control" type="text"  id="nombre" name="nombre" >
+                                <input class="form-control" type="text"  id="email" name="email" value="{{$cliente->email}}">
                                 </div>
                             </div>
 
@@ -103,7 +103,7 @@
                                     <img class="img_profile_label" src="{{ asset('assets/user/icons/ring-phone.png')}}" alt="">
                                 </span>
 
-                                <input class="form-control" type="text"  id="nombre" name="nombre" >
+                                <input class="form-control" type="number"  id="telefono" name="telefono" value="{{$cliente->telefono}}">
                                 </div>
                             </div>
 

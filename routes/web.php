@@ -77,6 +77,13 @@ Route::get('add-to-cart/{id}', [OrderController::class, 'addToCart'])->name('add
 Route::patch('/update-cart', [OrderController::class, 'update'])->name('update.cart');
 Route::delete('/remove-from-cart', [OrderController::class, 'remove'])->name('remove.from.cart');
 
+// =============== L O G I N  U S E R S ===============================
+Route::get('perfil', [App\Http\Controllers\ClientsController::class, 'index'])->name('perfil.index');
+
+Route::post('custom-login', [App\Http\Controllers\CustomAuthController::class, 'customLogin'])->name('login.custom');
+Route::post('custom-registration', [App\Http\Controllers\CustomAuthController::class, 'customRegistration'])->name('register.custom');
+Route::get('signout', [App\Http\Controllers\CustomAuthController::class, 'signOut'])->name('signout');
+
 Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
@@ -120,6 +127,3 @@ Route::group(['middleware' => ['auth']], function() {
 
 });
 
-Route::get('perfil', function () {
-    return view('user.profile');
-});
