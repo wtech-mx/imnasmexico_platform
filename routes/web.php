@@ -27,6 +27,11 @@ Route::get('nuestras_instalaciones', function () {
     return view('user.instalaciones');
 });
 
+Route::get('paquetes', function () {
+    return view('user.paquetes');
+});
+
+
 Route::get('login', function () {
     return view('auth.login');
 });
@@ -34,7 +39,6 @@ Route::get('login', function () {
 Route::get('avales', function () {
     return view('user.avales');
 });
-
 
 
 Route::get('orden', function () {

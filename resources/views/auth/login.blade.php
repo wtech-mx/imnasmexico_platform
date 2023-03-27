@@ -23,19 +23,29 @@
 
 <body class="">
 
+    <style>
+.bg-gradient-dark {
+    opacity: 0.5!important;
+    background-image: linear-gradient(310deg, #836262 0%, #836262 100%)!important;
+}
+    </style>
+
   <main class="main-content main-content-bg mt-0">
-    <div class="page-header min-vh-100" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/admin/master/argon-dashboard-pro/assets/admin/img/signin-basic.jpg');">
+    <div class="page-header min-vh-100" style="background-image: url('{{ asset('assets/user/utilidades/cosmetologa_bg.jpg')}}');">
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-4 col-md-7">
-            <div class="card border-0 mb-0">
+            <div class="card border-0 mb-0" style="border-style: solid!important;border-width: 0px 9px 9px 0px!important;border-color: #836262!important;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);">
               <div class="card-header bg-transparent">
-                <h5 class="text-dark text-center mt-2 mb-3">Hola!</h5>
+                <p class="text-center">
+                    <img style="width: 90px;" src="{{ asset('assets/user/logotipos/imnas.webp')}}" alt="">
+                </p>
+                <h5 class="text-dark text-center mt-2 mb-3">Bienvenido a <br> Imnas Mexico Platform</h5>
               </div>
               <div class="card-body px-lg-5 pt-0">
                 <div class="text-center text-muted mb-4">
-                  <small>Ingresa tu Correo o tu Telefono</small>
+                  <small>Ingresa tu Correo o tu Clave</small>
                 </div>
 
                 {{-- <form method="POST" action="{{ route('login') }}"> --}}
@@ -61,7 +71,7 @@
                   </div>
 
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary w-100 my-4 mb-2"> Ingresar</button>
+                    <button type="submit" class="btn btn-primary w-100 my-4 mb-2" style="background-color: #836262!important"> Ingresar</button>
                   </div>
 
                 </form>

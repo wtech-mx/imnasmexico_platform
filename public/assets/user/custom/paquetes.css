@@ -1,0 +1,24 @@
+.container_menu_fixed{
+    position: fixed;
+    width: 1358px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    top: 32px;
+    background-color: #836262;
+}
+
+.btn_paquetes_meni_fixed{
+        fill: #F5ECE4;
+        color: #836262;
+        background-color: #F5ECE4;
+        border-radius: 20px 20px 20px 20px;
+}
+
+.space_paquetes{
+    margin-top: 9rem;
+}
+
+.img_paquetes{
+    width: 100%;
+}
+
