@@ -27,11 +27,6 @@ Route::get('nuestras_instalaciones', function () {
     return view('user.instalaciones');
 });
 
-Route::get('paquetes', function () {
-    return view('user.paquetes');
-});
-
-
 Route::get('login', function () {
     return view('auth.login');
 });
@@ -40,6 +35,9 @@ Route::get('avales', function () {
     return view('user.avales');
 });
 
+Route::get('paquetes', function () {
+    return view('user.paquetes');
+});
 
 Route::get('orden', function () {
     return view('user.order');
@@ -73,6 +71,8 @@ Route::post('/webhooks', WebhooksController::class);
 Route::get('/orders/pay', [OrderController::class, 'pay'])->name('order.pay');
 Route::get('/orders/{order}/show', [OrderController::class, 'show'])->name('order.show');
 
+Route::post('/orders/pay/stripe', [OrderController::class, 'pay_stripe'])->name('order.pay_stripe');
+
 Route::get('add-to-cart/{id}', [OrderController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('/update-cart', [OrderController::class, 'update'])->name('update.cart');
 Route::delete('/remove-from-cart', [OrderController::class, 'remove'])->name('remove.from.cart');
@@ -98,6 +98,17 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/cursos/edit/{id}', [App\Http\Controllers\CursosController::class, 'edit'])->name('cursos.edit');
     Route::patch('/admin/cursos/update/{id}', [App\Http\Controllers\CursosController::class, 'update'])->name('cursos.update');
     Route::delete('/admin/cursos/delete/{id}', [App\Http\Controllers\CursosController::class, 'destroy'])->name('cursos.destroy');
+
+    // =============== M O D U L O   P A G O S  P O R  F U E R A ===============================
+    Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\PagosFueraController::class, 'inscripcion'])->name('pagos.inscripcion');
+    Route::post('/admin/pagos-por-fuera/inscripcion/store', [App\Http\Controllers\PagosFueraController::class, 'store'])->name('pagos.store');
+
+    Route::get('/changeStatus', [App\Http\Controllers\PagosFueraController::class, 'ChangeInscripcionStatus'])->name('ChangeInscripcionStatus.pagos');
+    Route::get('/changeStatus/pago', [App\Http\Controllers\PagosFueraController::class, 'ChangePendienteStatus'])->name('ChangePendienteStatus.pagos');
+    Route::get('/changeStatus/deudor', [App\Http\Controllers\PagosFueraController::class, 'ChangeDeudorStatus'])->name('ChangeDeudorStatus.pagos');
+
+    Route::get('/admin/pagos-por-fuera/pendientes', [App\Http\Controllers\PagosFueraController::class, 'pendientes'])->name('pagos.pendientes');
+    Route::get('/admin/pagos-por-fuera/deudores', [App\Http\Controllers\PagosFueraController::class, 'deudores'])->name('pagos.deudores');
 
     /*|--------------------------------------------------------------------------
     |Configuracion
