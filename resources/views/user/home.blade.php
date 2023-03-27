@@ -23,7 +23,7 @@ crossorigin="anonymous" />
 @section('content')
 
 <section class="primario bg_overley" style="background-image: url('{{ asset('assets/user/utilidades/cosmetologa_bg.jpg')}}')">
-
+    {{-- <span class="mask bg-gradient-dark opacity-6"></span> --}}
     <div class="row margin_home_nav">
         <div class="col-12 col-md-6 order-dos">
             <h1 class="text-white titulo space_ttile" style="">
