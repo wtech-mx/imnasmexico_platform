@@ -30,6 +30,35 @@
         </li>
 
         <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link {{ (Request::is('admin/pagos-por-fuera*') ? 'active' : '') }}" aria-controls="pagesExamples" role="button" aria-expanded="false">
+              <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                <i class="ni ni-settings text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+              </div>
+              <span class="nav-link-text ms-1">Pagos por Fuera</span>
+            </a>
+            <div class="collapse " id="pagesExamples">
+              <ul class="nav ms-4">
+                <li class="nav-item ">
+                  <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/inscripcion*') ? 'show' : '') }}" href="{{ route('pagos.inscripcion') }}">
+                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-normal">Pendientes de Inscripcion</span>
+                  </a>
+
+                  <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/pendientes*') ? 'show' : '') }}" href="{{ route('pagos.pendientes') }}">
+                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-normal">Pendientes de Pago</span>
+                  </a>
+
+                  <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/deudores*') ? 'show' : '') }}" href="{{ route('pagos.deudores') }}">
+                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-normal">Deudores</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+
+        <li class="nav-item">
           <a class="nav-link {{ (Request::is('paquetes/servicios*') ? 'active' : '') }}" href="" target="">
             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                 <i class="fa fa-file text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
@@ -39,16 +68,6 @@
           </a>
         </li>
 
-        @can('caja')
-            <li class="nav-item">
-            <a class="nav-link {{ (Request::is('caja*') ? 'active' : '') }}" href="" target="">
-                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                <i class="ni ni-money-coins text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-                </div>
-                <span class="nav-link-text ms-1">Caja</span>
-            </a>
-            </li>
-        @endcan
 
         <li class="nav-item mt-3">
           <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Administrativo</h6>
