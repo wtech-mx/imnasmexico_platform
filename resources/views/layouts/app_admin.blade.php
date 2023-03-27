@@ -58,8 +58,8 @@
 
         {{-- @include('layouts.header') --}}
         @include('layouts.simple_alert')
-        @yield('content')
 
+        @yield('content')
 
        <!-- Modal lateral Congif -->
         @include('layouts.footer')

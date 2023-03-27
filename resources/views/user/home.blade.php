@@ -50,14 +50,23 @@ crossorigin="anonymous" />
 
                 <div class="carousel-inner">
 
+                    @foreach ($cursos as $curso)
+
+                    @php
+                        $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
+                        $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
+                        $dia = date("d", strtotime($curso->fecha_inicial));
+                        $mes = date("M", strtotime($curso->fecha_inicial));
+                    @endphp
                     <div class="carousel-item active">
                         <div class="d-flex justify-content-center">
+
                             <div class="card card-custom" style="">
-                                <img class="card_image" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" class="card-img-top" alt="...">
+                                <img class="card_image" src="{{asset('curso/'. $curso->foto) }}" class="card-img-top" alt="...">
                                 <div class="card-body card_body_custom">
-                                <h5 class="card-title card_modalidad">Presencial</h5>
-                                <h3 class="card_titulo">CURSO DE PIEDRAS CALIENTES</h3>
-                                <h4 class="card_date">Jueves 16 de Febrero</h4>
+                                <h5 class="card-title card_modalidad">{{$curso->modalidad}}</h5>
+                                <h3 class="card_titulo">{{$curso->nombre}}</h3>
+                                <h4 class="card_date">{{$hora_inicial}} - {{$hora_final}}</h4>
 
                                 <a class="btn btn-primario me-3" type="button" data-bs-toggle="modal" data-bs-target="#checkout_modal">
                                     <div class="d-flex justify-content-around">
@@ -83,8 +92,10 @@ crossorigin="anonymous" />
 
                                 </div>
                             </div>
+
                         </div>
                     </div>
+                    @endforeach
 
                 </div>
 
@@ -305,7 +316,7 @@ crossorigin="anonymous" />
 
 {{-- slide de cursos --}}
 <section>
-    <div class="bgimg-1" style="height: 500px;background-image: url('{{ asset('assets/user/utilidades/spa.jpg')}}')">
+    <div class="bgimg-1" style="height: auto;background-image: url('{{ asset('assets/user/utilidades/spa.jpg')}}')">
         <div class="row">
             <div class="col-12">
                 <h2 class="titulo_alfa text-center mb-5" style="color: #fff!important">
@@ -313,7 +324,7 @@ crossorigin="anonymous" />
                 </h2>
             </div>
 
-            <div class="col-12">
+            <div class="col-12 mb-5">
 
                 <div class="owl-carousel owl-theme">
 
@@ -702,6 +713,7 @@ crossorigin="anonymous" />
     $('.owl-carousel').owlCarousel({
         loop: true,
         margin: 30,
+        paddimg:30,
         nav: true,
         responsive: {
             0: {

@@ -34,15 +34,7 @@
     display: inline-block;
   }
 
-.registro_num2{
-    border-radius: 24px;
-    background-color: #836262;
-    color: #fff;
-    padding: 15px 30px 15px 30px;
-    font-size: 25px;
-    font-weight: bold;
-    display: inline-block;
-  }
+
 
   .hr_custom{
     color: #fff!important;

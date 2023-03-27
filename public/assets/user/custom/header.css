@@ -2,6 +2,7 @@
 
 .navbar_custom{
     background-color: #F5ECE4!important;
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
     border-radius: 16px;
     padding-right: 16px ;
     padding-left: 16px ;
@@ -56,6 +57,16 @@
 @media only screen and (min-width: 577px) {
     .acceso_alumnas_flex_prim{
         display: none!important;
+    }
+}
+
+@media only screen and (max-width: 1390px) {
+    .image_navbar {
+        width: 60px;
+    }
+
+    .nav_link_custom {
+        font-size: 22px!important;
     }
 
 }

@@ -2,7 +2,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href="{{ route('dashboard') }}" target="">
-        <img src="{{asset('logo/'.$configuracion->logo) }}" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="{{ asset('assets/user/logotipos/imnas.webp')}}" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold"></span>
       </a>
     </div>
@@ -32,7 +32,7 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link {{ (Request::is('admin/pagos-por-fuera*') ? 'active' : '') }}" aria-controls="pagesExamples" role="button" aria-expanded="false">
               <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-                <i class="ni ni-settings text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                <i class="fas fa-file-invoice-dollar text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
               </div>
               <span class="nav-link-text ms-1">Pagos por Fuera</span>
             </a>

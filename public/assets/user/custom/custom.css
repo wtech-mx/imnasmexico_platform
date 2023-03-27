@@ -106,6 +106,7 @@
     font-family: Bahnschrift;
     font-weight: bold;
     font-size: 20px;
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
 }
 
 .btn-secundario{
@@ -116,6 +117,7 @@
     font-family: Bahnschrift;
     font-weight: bold;
     font-size: 20px;
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
 }
 
 
@@ -127,9 +129,7 @@
     background-color: #000;
     color: #F5ECE4;
     border-radius: 16px;
-    -webkit-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.75);
-    box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.75);
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
     padding-right: 16px !important;
     padding-left: 16px !important;
     padding-top: 16px !important;
@@ -412,6 +412,124 @@
 .space_ttile{
     margin-top: 6rem;
 }
+
+.registro_num2{
+    border-radius: 24px;
+    background-color: #836262;
+    color: #fff;
+    padding: 15px 30px 15px 30px;
+    font-size: 25px;
+    font-weight: bold;
+    display: inline-block;
+  }
+
+@media only screen and (max-width: 1390px) {
+
+    .btn-primario {
+        padding: 11px;
+        font-size: 18px!important;
+    }
+
+    .space_ttile {
+        margin-top: 4rem;
+    }
+
+    .titulo {
+        font-family: Leelawadee_1;
+        font-size: 45px;
+    }
+    .parrafo {
+        font-size: 22px;
+    }
+
+    .card_certificaciones {
+        width: 220px;
+    }
+
+    .img_card_certificaciones {
+        width: 150px;
+    }
+
+    .custom-info-logo {
+        font-size: 14px;
+    }
+
+    .titulo_alfa {
+        font-family: Leelawadee_1;
+        font-size: 45px;
+        color: #836262;
+    }
+
+    .titulo_beta {
+        font-size:45px;
+    }
+
+    titulo_delta {
+        font-size: 15px;
+    }
+
+    .card_objetivos {
+        width: 400px;
+        height: 260px;
+    }
+
+    .img_card_objetivos{
+        margin-top: 1rem;
+        width: 115px;
+    }
+
+    .card_title_objetivos {
+        font-size: 18px;
+    }
+
+    .card_text_objetivos{
+        font-size: 15px;
+    }
+
+    .titulomin_alfa {
+        font-size: 35px;
+    }
+
+    .point_icon_beneficios {
+        margin-left: 1rem;
+        width: 60px;
+        height: 60px;
+    }
+
+    .img_icon_beneficios {
+        width: 30px;
+        margin-left: 15px;
+        margin-top: 13px;
+    }
+
+    .text_beneficios {
+        margin-left: 30px;
+        font-size: 17px;
+    }
+
+    .img_lab_principal {
+        width: 600px;
+        height: 300px;
+    }
+
+    .img_lab_secundary {
+        width: 200px;
+        border-radius: 24px;
+        border-width: 0px 0px 0px 0px;
+        margin-bottom: 0rem;
+    }
+
+    .registro_num2{
+        padding: 15px 30px 15px 30px;
+        font-size: 20px;
+      }
+
+      .spaciador_logos_unam{
+        margin-right: 3rem;
+      }
+
+}
+
 
 @media only screen and (max-width: 576px) {
 
