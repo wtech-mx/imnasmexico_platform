@@ -423,6 +423,21 @@
     display: inline-block;
   }
 
+  .card_colapsable_comprar{
+    border: solid 3px #836262;
+    border-radius: 19px;
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
+  }
+
+  .btn_ticket_comprar{
+    border-radius: 19px;
+    background-color: #836262;
+    padding: 15px 30px 15px 30px;
+    font-size: 15px;
+    color: #fff;
+    text-decoration: none;
+  }
+
 @media only screen and (max-width: 1390px) {
 
     .btn-primario {

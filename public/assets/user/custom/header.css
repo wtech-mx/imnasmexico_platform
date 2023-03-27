@@ -54,6 +54,28 @@
     color: #F5ECE4;
 }
 
+.btn-login{
+    background-color: #836262;
+    color: #F5ECE4;
+    border-radius: 19px;
+    padding: 16px;
+    font-family: Bahnschrift;
+    font-weight: bold;
+    font-size: 20px;
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
+}
+
+@media only screen and (max-width: 1603px) {
+    .nav_link_custom {
+        font-size: 25px;
+    }
+
+    .btn-login{
+        padding: 13px;
+        font-size: 18px!important;
+    }
+}
+
 @media only screen and (min-width: 577px) {
     .acceso_alumnas_flex_prim{
         display: none!important;

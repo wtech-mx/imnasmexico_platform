@@ -46,7 +46,7 @@
 
         <div class="d-flex acceso_alumnas_flex">
             @guest
-                <a class="btn btn-primario me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
+                <a class="btn btn-login me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
                     Acceso alumnas
                 </a>
             @else

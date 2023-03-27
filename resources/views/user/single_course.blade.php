@@ -101,9 +101,9 @@
                         </p>
 
 
-                        <a class="btn btn-primario mt-5">
+                        <a class="btn btn-primario mt-5" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                             <div class="d-flex justify-content-around">
-                                <p class="card_tittle_btn my-auto" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                <p class="card_tittle_btn my-auto">
                                     Comprar ahora
                                 </p>
                                 <div class="card_bg_btn ">
@@ -124,13 +124,13 @@
                         </a>
 
                         <div class="collapse mt-3" id="collapseExample">
-                            <div class="card card-body">
-                                <div class="row">
+                            <div class="card card-body card_colapsable_comprar">
+                                <div class="row mb-3">
                                     @foreach ($tickets as $ticket)
-                                        <div class="col-10">
+                                        <div class="col-4 mt-3">
                                             <strong style="color: #836262">{{$ticket->nombre}}</strong>
                                         </div>
-                                        <div class="col-2">
+                                        <div class="col-3 mt-3">
                                             @if ($ticket->descuento == NULL)
                                                 <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                             @else
@@ -138,12 +138,17 @@
                                                 <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
                                             @endif
                                         </div>
-                                        <div class="col-12">
-                                            <p style="color: #836262">{{$ticket->descripcion}}</p>
+
+                                        <div class="col-5 mt-3">
+                                            <p class="btn-holder">
+                                                <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                    <i class="fas fa-ticket-alt"></i> Comprar
+                                                </a>
+                                            </p>
                                         </div>
 
-                                        <div class="col-6">
-                                            <p class="btn-holder"><a href="{{ route('add.to.cart', $ticket->id) }}" class="btn btn-warning btn-block text-center" role="button">Add</a> </p>
+                                        <div class="col-12">
+                                            <p style="color: #836262">{{$ticket->descripcion}}</p>
                                         </div>
                                     @endforeach
 
