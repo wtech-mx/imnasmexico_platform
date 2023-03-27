@@ -697,6 +697,7 @@
         justify-content: center !important;
         display: flex;
         margin-bottom: 2rem!important;
+        margin-top: 1.5rem!important;
     }
 
     .img_lab_principal {
@@ -728,6 +729,7 @@
 
     .spaciador_logos_unam{
         margin-bottom: 3rem;
+        margin-right: 0rem;
     }
 
     .espaciador_ubicacion{
@@ -738,6 +740,10 @@
     .map_custom {
         width: 460px;
         height: 260px;
+    }
+
+    .margin_galery_lab{
+        margin-bottom: 2rem;
     }
 
 }

@@ -462,7 +462,7 @@ crossorigin="anonymous" />
         </div>
 
         <div class="col-12 col-md-6">
-            <div class="row">
+            <div class="row margin_galery_lab">
 
                 <div class="col-12 mb-3">
                     <div class="img_lab_principal" style="background-image: url('{{ asset('assets/user/utilidades/lab.jpg')}}')">
@@ -490,7 +490,7 @@ crossorigin="anonymous" />
 <section class="primario bg_overley" style="background-color:#836262;">
     <div class="row">
         <div class="col-12">
-            <h2 class="titulo_alfa text-center mb-5" style="color: #fff!important">
+            <h2 class="titulo_alfa mt-3 mb-5 text-center" style="color: #fff!important">
                 Nuestro Catalogo
             </h2>
             {{-- <p class="text-center mt-5">
@@ -498,7 +498,7 @@ crossorigin="anonymous" />
             </p> --}}
         </div>
 
-        <div class="col-12 m-auto">
+        <div class="col-12 m-auto mb-5">
 
             <div class="owl-carousel owl-theme">
 
