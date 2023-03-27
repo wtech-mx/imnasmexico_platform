@@ -79,7 +79,7 @@
                 <div class="row">
                     <div class="col-5">
                         <div class="d-flex align-items-center">
-                            <img class="img_destacada img-fluid" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
+                            <img class="img_destacada img-fluid" src="{{asset('curso/'. $curso->foto) }}" alt="">
                         </div>
                     </div>
 

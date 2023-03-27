@@ -22,7 +22,7 @@
             <a class="nav-link nav_link_custom" href="avales">Avales</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav_link_custom" href="#">Paquetes</a>
+            <a class="nav-link nav_link_custom" href="paquetes">Paquetes</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav_link_custom" href="#">Nosotros</a>
@@ -31,7 +31,7 @@
             <a class="nav-link nav_link_custom" href="#">Tienda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav_link_custom" href="#">Instalaciones</a>
+            <a class="nav-link nav_link_custom" href="nuestras_instalaciones">Instalaciones</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav_link_custom" data-bs-toggle="modal" data-bs-target="#checkout_modal" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ count((array) session('cart')) }}</a>

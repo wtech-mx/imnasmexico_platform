@@ -376,19 +376,17 @@ crossorigin="anonymous" />
                                                             <p class="card_tittle_btn_grid my-auto">
                                                                 Saber mas
                                                             </p>
+
                                                             <div class="card_bg_btn_secundario">
                                                                 <i class="fas fa-plus card_icon_btn_secundario_grid"></i>
-                                                                </div>
                                                             </div>
-                                                        </a>
-                                                    </div>
+                                                        </div>
+                                                    </a>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     @endforeach
@@ -481,6 +479,8 @@ crossorigin="anonymous" />
                     <img class="img_lab_secundary px-3" src="{{ asset('assets/user/utilidades/producto_palciacion.jpg')}}" alt="">
                 </div>
 
+
+
             </div>
         </div>
     </div>
@@ -507,6 +507,95 @@ crossorigin="anonymous" />
                         <div class="card card_slider_products" style="">
                             <div class="d-flex justify-content-center">
                                 <h4 class="text-left ttile_categoria_product">KERALUXE</h4>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <div class="contenedor_img_slider_product tamano_1">
+                                    <p class="text-center">
+                                    <img src="{{ asset('assets/user/utilidades/KERATINA-BRASILENA-2022.png')}}" alt="" class="img_slider_product">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card-body space_productos_slider">
+                                <div class="card-title">
+                                    <p class="text-center tittle_product_slider mb-4">KERATINA BRASILEÑA</p>
+
+                                    <p class="text-center">
+                                        <a class="text-center btn_slider_product mb-3" href="">Compra</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="item" style="">
+                    <div class="content_careder_products">
+                        <div class="card card_slider_products" style="">
+                            <div class="d-flex justify-content-center">
+                                <h4 class="text-left ttile_categoria_product">KERALUXE2</h4>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <div class="contenedor_img_slider_product tamano_1">
+                                    <p class="text-center">
+                                    <img src="{{ asset('assets/user/utilidades/KERATINA-BRASILENA-2022.png')}}" alt="" class="img_slider_product">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card-body space_productos_slider">
+                                <div class="card-title">
+                                    <p class="text-center tittle_product_slider mb-4">KERATINA BRASILEÑA</p>
+
+                                    <p class="text-center">
+                                        <a class="text-center btn_slider_product mb-3" href="">Compra</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="item" style="">
+                    <div class="content_careder_products">
+                        <div class="card card_slider_products" style="">
+                            <div class="d-flex justify-content-center">
+                                <h4 class="text-left ttile_categoria_product">KERALUXE3</h4>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <div class="contenedor_img_slider_product tamano_1">
+                                    <p class="text-center">
+                                    <img src="{{ asset('assets/user/utilidades/KERATINA-BRASILENA-2022.png')}}" alt="" class="img_slider_product">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card-body space_productos_slider">
+                                <div class="card-title">
+                                    <p class="text-center tittle_product_slider mb-4">KERATINA BRASILEÑA</p>
+
+                                    <p class="text-center">
+                                        <a class="text-center btn_slider_product mb-3" href="">Compra</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item" style="">
+                    <div class="content_careder_products">
+                        <div class="card card_slider_products" style="">
+                            <div class="d-flex justify-content-center">
+                                <h4 class="text-left ttile_categoria_product">KERALUXE4</h4>
                             </div>
 
                             <div class="d-flex justify-content-center">

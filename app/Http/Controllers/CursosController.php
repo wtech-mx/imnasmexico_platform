@@ -176,6 +176,8 @@ class CursosController extends Controller
         $fechaActual = date('Y-m-d');
         $cursos = Cursos::get();
 
-        return view('user.calendar', compact('cursos'));
+        $tickets = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
+
+        return view('user.calendar', compact('cursos', 'tickets'));
     }
 }

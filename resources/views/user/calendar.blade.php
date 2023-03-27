@@ -31,56 +31,62 @@
 
     <div class="carousel-inner">
 
-        <div class="carousel-item active" style="background-image: url('{{ asset('assets/user/utilidades/cosmetologa.jpg')}}')">
-            <div class="row postion_row_caledanrio">
-              <div class="col-12 col-md-6">
-                  <div class="conten_slilder_full">
-                    <h1 class="text-white titulo" style="">
-                        Instituto Mexicano <br>
-                        Naturales Ain Spa
-                    </h1>
+        @foreach ($cursos as $curso)
+        @php
+            $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
+            $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
+            $dia = date("d", strtotime($curso->fecha_inicial));
+            $mes = date("M", strtotime($curso->fecha_inicial));
+        @endphp
+            <div class="carousel-item active" style="background-image: url('{{asset('curso/'. $curso->foto) }}')">
+                <div class="row postion_row_caledanrio">
+                <div class="col-12 col-md-6">
+                    <div class="conten_slilder_full">
+                        <h1 class="text-white titulo" style="">
+                            {{$curso->nombre}}
+                        </h1>
 
-                    <a class="btn btn-secundario_grid me-3">
-                        <div class="d-flex justify-content-around">
-                            <p class="card_tittle_btn my-auto">
-                                Online
-                            </p>
+                        <a class="btn btn-secundario_grid me-3">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    {{$curso->modalidad}}
+                                </p>
+                            </div>
+                        </a>
+
+                        <p class="text-white parrafo" style="">
+                            <?php echo $curso->descripcion?>
+                        </p>
+
+                        <div class="d-flex justify-content-start">
+                            <a class="btn btn-primario me-3">
+                                <div class="d-flex justify-content-around">
+                                    <p class="card_tittle_btn my-auto">
+                                        Comprar ahora
+                                    </p>
+                                    <div class="card_bg_btn ">
+                                        <i class="fas fa-cart-plus card_icon_btn"></i>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a class="btn btn-secundario me-1" href="{{ route('cursos.show',$curso->slug) }}">
+                                <div class="d-flex justify-content-around">
+                                    <p class="card_tittle_btn my-auto">
+                                        Saber mas
+                                    </p>
+                                    <div class="card_bg_btn_secundario">
+                                        <i class="fas fa-plus card_icon_btn_secundario"></i>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
-                    </a>
-
-                    <p class="text-white parrafo" style="">
-                        Plataforma número uno de cursos en línea y <br>
-                        presenciales dedicados a la cosmetología y <br>
-                        cosmiatría a nivel nacional e internacional.
-                    </p>
-
-                    <div class="d-flex justify-content-start">
-                        <a class="btn btn-primario me-3">
-                            <div class="d-flex justify-content-around">
-                                <p class="card_tittle_btn my-auto">
-                                    Comprar ahora
-                                </p>
-                                <div class="card_bg_btn ">
-                                    <i class="fas fa-cart-plus card_icon_btn"></i>
-                                </div>
-                            </div>
-                        </a>
-
-                        <a class="btn btn-secundario me-1">
-                            <div class="d-flex justify-content-around">
-                                <p class="card_tittle_btn my-auto">
-                                    Saber mas
-                                </p>
-                                <div class="card_bg_btn_secundario">
-                                    <i class="fas fa-plus card_icon_btn_secundario"></i>
-                                </div>
-                            </div>
-                        </a>
                     </div>
-                  </div>
-              </div>
+                </div>
+                </div>
             </div>
-        </div>
+        @endforeach
+
 
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
@@ -141,7 +147,7 @@
 
                         <div class="d-flex mb-3">
                             <div class="me-auto p-2">
-                                <a class="btn btn_primario_grd_curso">
+                                <a class="btn btn_primario_grd_curso" data-bs-toggle="collapse" href="#collapseobjetivos{{$curso->id}}" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn_grid my-auto">
                                             Comprar ahora
@@ -166,6 +172,43 @@
                                     </a>
                                 </div>
                             </div>
+
+
+                            <div class="collapse mt-3" id="collapseobjetivos{{$curso->id}}">
+                                <div class="card card-body card_colapsable_comprar">
+                                    <div class="row mb-3">
+                                        @foreach ($tickets as $ticket)
+                                        @if ($ticket->id_curso == $curso->id)
+                                            <div class="col-12 mt-3">
+                                                <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                            </div>
+                                            <div class="col-12 mt-3">
+                                                @if ($ticket->descuento == NULL)
+                                                    <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                @else
+                                                    <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                    <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                @endif
+                                            </div>
+
+                                            <div class="col-12 mt-3">
+                                                <p class="btn-holder">
+                                                    <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                        <i class="fas fa-ticket-alt"></i> Comprar
+                                                    </a>
+                                                </p>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                            </div>
+                                            @endif
+                                        @endforeach
+
+                                    </div>
+                                </div>
+                            </div>
+
 
                         </div>
 
