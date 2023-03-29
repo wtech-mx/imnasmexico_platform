@@ -128,9 +128,7 @@ crossorigin="anonymous" />
                     </p>
                 </div>
             </div>
-            <p class="text-center mt-5 custom-info-logo">
-                Son grandes empresas que tienen carácter regional o nacional y que garantizan que hay independencia en las áreas de capacitación, evaluación y certificación.
-            </p>
+
         </div>
 
         <div class="col-6 col-md-3">
@@ -141,9 +139,7 @@ crossorigin="anonymous" />
                     </p>
                 </div>
             </div>
-            <p class="text-center mt-5 custom-info-logo">
-                Son grandes empresas que tienen carácter regional o nacional y que garantizan que hay independencia en las áreas de capacitación, evaluación y certificación.
-            </p>
+
         </div>
 
         <div class="col-6 col-md-3">
@@ -154,9 +150,7 @@ crossorigin="anonymous" />
                     </p>
                 </div>
             </div>
-            <p class="text-center mt-5 custom-info-logo">
-                Son grandes empresas que tienen carácter regional o nacional y que garantizan que hay independencia en las áreas de capacitación, evaluación y certificación.
-            </p>
+
         </div>
 
         <div class="col-6 col-md-3">
@@ -167,9 +161,7 @@ crossorigin="anonymous" />
                     </p>
                 </div>
             </div>
-            <p class="text-center mt-5 custom-info-logo">
-                Son grandes empresas que tienen carácter regional o nacional y que garantizan que hay independencia en las áreas de capacitación, evaluación y certificación.
-            </p>
+
         </div>
 
         <div class="col-12 tittle_section2 mb-3">
@@ -467,15 +459,15 @@ crossorigin="anonymous" />
                     </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-6 col-sm-4">
                     <img class="img_lab_secundary px-3" src="{{ asset('assets/user/utilidades/doctiura.jpg')}}" alt="">
                 </div>
 
-                <div class="col-4">
+                <div class="col-6 col-sm-4">
                     <img class="img_lab_secundary px-3" src="{{ asset('assets/user/utilidades/manos_product.jpg')}}" alt="">
                 </div>
 
-                <div class="col-4">
+                <div class="col-4 col-sm-4 desapecer_contendor_sm">
                     <img class="img_lab_secundary px-3" src="{{ asset('assets/user/utilidades/producto_palciacion.jpg')}}" alt="">
                 </div>
 

@@ -564,8 +564,6 @@
       }
 }
 
-
-
 @media only screen and (max-width: 576px) {
 
     .bg_overley {
@@ -780,5 +778,73 @@
     .margin_galery_lab{
         margin-bottom: 2rem;
     }
+}
+
+@media only screen and (max-width: 380px) {
+
+    .desapecer_contendor_sm{
+        display: none;
+    }
+
+    .titulomin_alfa {
+        font-size: 20px;
+    }
+
+    .registro_num2 {
+        font-size: 15px!important;
+    }
+
+    .titulo_alfa {
+        font-size: 25px;
+        padding: 10px;
+    }
+
+    .map_custom {
+        width: 300px;
+        height: 300px;
+    }
+
+    .btn-primario {
+        padding: 5px;
+    }
+
+    .btn-secundario {
+        padding: 5px;
+
+    }
+
+    .card_tittle_btn {
+        font-size: 12px;
+    }
+
+    .btn-cuarto {
+        border-radius: 19px;
+        box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
+        padding-right: 15px !important;
+        padding-left: 15px !important;
+        padding-top: 10px !important;
+        padding-bottom: 10px !important;
+        font-size: 15px;
+    }
+
+    .img_icon_beneficios {
+        width: 26px;
+    }
+
+    .img_icon_beneficios {
+        margin-left: 12px;
+        margin-top: 10px;
+    }
+
+    .point_icon_beneficios {
+        width: 50px;
+        height: 50px;
+    }
+    .point_icon_beneficios {
+        margin-left: 0rem;
+    }
 
 }
+
+
+

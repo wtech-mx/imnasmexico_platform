@@ -1,8 +1,8 @@
 <div class="footer" style="">
     <div class="row">
-        <div class="col-12 col-md-6 mt-5">
+        <div class="col-12 col-md-6 space_principal_footer">
 
-            <div class="d-flex justify-content-center mb-5">
+            <div class="d-flex justify-content-center space_secundario_footer">
                 <div class="card_footer">
                     <p class="text-center" style="margin-bottom: 0rem!important;">
                         <img class="img_card_footer" src="{{ asset('assets/user/logotipos/imnas.webp')}}" alt="">

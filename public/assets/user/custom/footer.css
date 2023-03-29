@@ -81,6 +81,14 @@
     font-weight: 600;
 }
 
+.space_principal_footer{
+    margin-top: 3rem;
+}
+
+.space_secundario_footer{
+    margin-bottom: 3rem;
+}
+
 @media only screen and (max-width: 576px) {
     .icon_footer {
         padding: 10px;
@@ -145,6 +153,74 @@
     .img_card_footer {
         width: 45px;
         padding: 5px;
+    }
+}
+
+@media only screen and (max-width: 380px) {
+
+    .map_custom {
+        width: 300px;
+        height: 300px;
+    }
+
+    .space_principal_footer{
+        margin-top: 1rem;
+    }
+
+    .space_secundario_footer{
+        margin-bottom: 1rem;
+    }
+
+    .card_footer {
+        border-radius: 19px;
+        width: 50px;
+        padding: 5px 5px 5px 5px !important
+        /* height: 195px; */
+    }
+
+    .img_card_footer {
+        width: 40px;
+    }
+
+    .registro_num {
+        border-radius: 19x;
+        padding: 15px 30px 15px 30px;
+        font-size: 12px;
+        margin-top: 1rem!important;
+    }
+
+    .icon_footer {
+        padding: 6px 12px 6px 12px;
+        border-radius: 19px;
+        width: 50px;
+        font-size: 12px;
+
+    }
+
+    .icon_footer_2 {
+        background-color: #fff;
+        padding: 10px 15px 10px 10px;
+        border-radius: 16px;
+        color: #836262;
+        font-size: 23px;
+        display: block!important;
+    }
+
+    .text_calendario_footer_calendar {
+        font-size: 11px;
+    }
+
+    .preguntas_freceuntas {
+        font-size: 15px;
+        margin-top: 0.5rem !important;
+    }
+
+    .img_footer_pago {
+        width: 250px;
+    }
+
+    .margen_footer_calendar {
+        margin-top: 1rem;
     }
 
 }
