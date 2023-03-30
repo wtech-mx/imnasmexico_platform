@@ -5,3 +5,53 @@
     padding: 10px 40px 10px 40px;
     color: #F5ECE4;
 }
+
+.space_Card{
+    margin-top: 5rem
+}
+
+.space_Card_rs{
+    margin-top: 5rem;
+}
+
+.space_tittle_h2_ni{
+    margin-bottom: 1.5rem !important;
+}
+
+@media only screen and (max-width: 576px) {
+
+    .space_Card {
+        margin-top: 2rem;
+    }
+
+    .space_tiitle_slide{
+        margin-top: 3rem;
+    }
+
+    .space_Card_rs{
+        margin-top: 0rem;
+    }
+
+    .space_tittle_h2_ni{
+        margin-top: 3rem;
+        margin-bottom: 5rem;
+    }
+
+    .order-uno{
+        order: -1 !important;
+    }
+
+    .order-dos{
+        order: 6 !important;
+    }
+
+}
+
+
+@media only screen and (max-width: 380px) {
+    .parrafo_instalaciones{
+        font-size: 13px;
+        line-height: 1.3;
+    }
+}
+

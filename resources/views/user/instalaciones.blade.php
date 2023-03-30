@@ -44,11 +44,11 @@
         </div>
 
         <div class="col-12 col-md-6">
-            <h1 class="text-white titulo" style="">
+            <h1 class="text-white titulo space_tiitle_slide" style="">
                 Instituto Mexicano <br>
                 Naturales Ain Spa
             </h1>
-            <p class="text-white parrafo" style="">
+            <p class="text-white parrafo parrafo_instalaciones" style="">
                 Nuestra misión es llegar a más sectores de la educación a nivel global,
                 queremos que los mejores conocimientos y la experiencia de los mayores referentes del mundo estén a disposición de todo aquel
                   que tenga inquietud, ambición y ganas de aprender y de emprender.
@@ -63,12 +63,14 @@
 
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
 
-    <h2 class="titulomin_alfa text-center mb-4" style="">Conoce nuestras instalaciones</h2>
+    <h2 class="titulomin_alfa text-center space_tittle_h2_ni" style="">
+        Conoce nuestras instalaciones
+    </h2>
     <div class="row">
 
-        <div class="col-4">
+        <div class="col-12 col-md-4">
             <div class="d-flex justify-content-center">
-                <div class="card card-custom" style="margin-top: 5rem">
+                <div class="card card-custom space_Card_rs" style="">
                     <img class="card_image" src="{{ asset('assets/user/instalaciones/terraza3.jpg')}}" class="card-img-top" alt="...">
                 </div>
             </div>
@@ -81,9 +83,9 @@
 
         </div>
 
-        <div class="col-4">
+        <div class="col-12 col-md-4">
              <div class="d-flex justify-content-center">
-                <div class="card card-custom" style="margin-top: 5rem">
+                <div class="card card-custom space_Card" style="">
                     <img class="card_image" src="{{ asset('assets/user/instalaciones/tiendita.jpg')}}" class="card-img-top" alt="...">
                 </div>
             </div>
@@ -94,9 +96,9 @@
             </p>
         </div>
 
-        <div class="col-4">
+        <div class="col-12 col-md-4">
              <div class="d-flex justify-content-center">
-                <div class="card card-custom" style="margin-top: 5rem">
+                <div class="card card-custom space_Card" style="">
                     <img class="card_image" src="{{ asset('assets/user/instalaciones/salon.jpg')}}" class="card-img-top" alt="...">
                 </div>
             </div>
@@ -115,15 +117,15 @@
     <div class="row">
 
         <div class="col-12 col-md-6 m-auto">
-            <h1 class="text-white text-center titulo mt-5 mb-5" style="">Interior</h1>
-            <p class="text-center text-white mt-auto">
+            <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">Interior</h1>
+            <p class="text-center text-white mt-auto parrafo_instalaciones">
                 Nuestras Aulas están equipadas con todo <br> lo necesario para que aprendas de la mejor manera, <br> con los mejores equipos y materiales.
             </p>
         </div>
 
         <div class="col-12 col-md-6">
             <div class="d-flex justify-content-center">
-            <div class="card card-custom" style="margin-top: 5rem">
+            <div class="card card-custom space_Card mb-3" style="">
                 <div id="carouselExampleIndicators" class="carousel slide">
                     <div class="carousel-indicators">
                       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -156,9 +158,9 @@
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
     <div class="row">
 
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6 order-dos">
             <div class="d-flex justify-content-center">
-                <div class="card card-custom" style="margin-top: 5rem">
+                <div class="card card-custom space_Card" style="">
                     <div id="carouselExampleIndicators" class="carousel slide">
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -186,9 +188,9 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-6 m-auto">
+        <div class="col-12 col-md-6 order-uno m-auto">
             <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">Exterior</h1>
-            <p class="text-center text-white mt-auto" style="color:#836262!important;">
+            <p class="text-center text-white mt-auto parrafo_instalaciones" style="color:#836262!important;">
                 Nuestras Aulas están equipadas con todo <br> lo necesario para que aprendas de la mejor manera, <br> con los mejores equipos y materiales.
             </p>
         </div>
