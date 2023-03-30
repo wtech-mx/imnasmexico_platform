@@ -29,7 +29,7 @@
 
               <button class="nav-link" id="v-pills-objetivos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-objetivos" type="button" role="tab" aria-controls="v-pills-objetivos" aria-selected="false">
                 <div class="d-flex justify-content-around">
-                     <p class="espacio_p">Mis Producto </p>
+                     <p class="espacio_p">Mis Compras </p>
                     <div class="content_nav d-inline-block">
                         <img class="icon_nav_course" src="{{ asset('assets/user/icons/objetivo.webp')}}" alt="">
                     </div>
@@ -166,9 +166,47 @@
                 <div class="row">
 
                     <div class="col-12">
-                        <h2 class="title_curso mb-5">Mis productos</h2>
+                        <h2 class="title_curso mb-5">Mis compras</h2>
                     </div>
+                    <table class="table">
+                        <thead class="text-center">
+                          <tr class="tr_checkout">
+                            <th >Num. Pedido</th>
+                            <th >Fecha de Compra</th>
+                            <th >Num. Orden</th>
+                            <th >Total</th>
+                            <th>Forma de Pago</th>
+                            <th>Estado</th>
+                          </tr>
+                        </thead>
 
+                        <tbody class="text-center">
+                        @if(!empty($orders))
+                            @foreach($orders as $order)
+                                <tr>
+                                    <th>
+                                        #{{$order->id}}
+                                    </th>
+                                    <th>
+                                        {{$order->fecha}}
+                                    </th>
+                                    <td class="td_title_checkout">{{$order->num_order}}</td>
+                                    <td>${{$order->pago}}</td>
+                                    <td class="td_title_checkout">{{$order->forma_pago}}</td>
+                                    <td>
+                                        @if ($order->estatus == '1')
+                                            Completado
+                                        @else
+                                            En espera
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                            @else
+                            <p>Upps... aun no tiene compras de Curosos o Diplomados</p>
+                        @endif
+                        </tbody>
+                    </table>
                 </div>
               </div>
 

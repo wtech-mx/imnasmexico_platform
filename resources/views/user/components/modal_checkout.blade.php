@@ -133,7 +133,7 @@
                         <th></th>
                     </tr>
                     </tbody>
-                  </table>
+                </table>
 
                   <p class="text-center tittle_modal_cka">Método de Pago</p>
 

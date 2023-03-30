@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cursos;
 use App\Models\CursosTickets;
+use App\Models\OrdersTickets;
 use Session;
 use Str;
 use Illuminate\Http\Request;
@@ -23,7 +24,9 @@ class CursosController extends Controller
         $curso = Cursos::where('slug','=', $slug)->firstOrFail();
         $tickets = CursosTickets::where('id_curso','=', $curso->id)->where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
 
-        return view('user.single_course', compact('curso', 'tickets'));
+        $user_tickets = OrdersTickets::where('id_user','<=', auth()->user()->id)->first();
+
+        return view('user.single_course', compact('curso', 'tickets', 'user_tickets'));
     }
 
     public function create()
