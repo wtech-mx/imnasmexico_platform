@@ -497,35 +497,48 @@
               </div>
 
               <div class="tab-pane fade" id="v-pills-recursos" role="tabpanel" aria-labelledby="v-pills-recursos-tab" tabindex="0">
-                @if ($curso->modalidad == 'Presencial')
+                @guest
                     <div class="row">
                         <div class="col-6">
-                            <h2 class="title_curso text-center mb-5">Ubicacion</h2>
-                            <div class="d-flex justify-content-center">
-                                <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                </iframe>
-                            </div>
+                            <h2 class="title_curso text-center mb-5">Rescursos</h2>
                         </div>
 
                         <div class="col-6 m-auto">
                                 <p class="  ">
-                                    Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
+                                   Por favor inicie sesion y en caso de haber comprado este curso podra ver la direccion o liga de meet para su clase
                                 </p>
                         </div>
                     </div>
                 @else
-                    <div class="row">
-                        <div class="col-12 mt">
-                            <h2 class="text-center title_curso">Enlace de la reuinion</h2>
+                    @if ($curso->modalidad == 'Presencial')
+                        <div class="row">
+                            <div class="col-6">
+                                <h2 class="title_curso text-center mb-5">Ubicacion</h2>
+                                <div class="d-flex justify-content-center">
+                                    <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                    </iframe>
+                                </div>
+                            </div>
 
-                            <a class="text-center registro_num2 mt-3 mb-5" href="{{$curso->recurso}}" style="" target="_blank">
-                                {{$curso->recurso}}
-                            </a>
-
+                            <div class="col-6 m-auto">
+                                    <p class="  ">
+                                        Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
+                                    </p>
+                            </div>
                         </div>
-                    </div>
-                @endif
+                    @else
+                        <div class="row">
+                            <div class="col-12 mt">
+                                <h2 class="text-center title_curso">Enlace de la reuinion</h2>
 
+                                <a class="text-center registro_num2 mt-3 mb-5" href="{{$curso->recurso}}" style="" target="_blank">
+                                    {{$curso->recurso}}
+                                </a>
+
+                            </div>
+                        </div>
+                    @endif
+                @endguest
               </div>
 
             </div>

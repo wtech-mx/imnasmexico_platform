@@ -36,10 +36,10 @@ crossorigin="anonymous" />
                 cosmiatría a nivel nacional e internacional.
             </p>
             <div class="d-flex justify-content-center justify-content-md-start space_btn_section1">
-                <a class="btn btn-primario me-4">
+                <a class="btn btn-primario me-4" href="{{ route('cursos.index_user') }}">
                     Certificaciones
                 </a>
-                <a class="btn btn-secundario">
+                <a class="btn btn-secundario" href="">
                     Saber mas
                 </a>
             </div>
@@ -443,7 +443,7 @@ crossorigin="anonymous" />
                 </div>
 
                 <div class="col-12 col_adaptable_mobil mt-5">
-                    <a class="btn btn-cuarto" style="margin-left: 1rem;">
+                    <a class="btn btn-cuarto" style="margin-left: 1rem;" href="http://imnasmexico.com/new/tienda/">
                         Ver Catalogo
                     </a>
                 </div>
@@ -492,28 +492,30 @@ crossorigin="anonymous" />
         <div class="col-12 m-auto mb-5">
 
             <div class="owl-carousel owl-theme">
-
+                @foreach ($resultados as $resultado)
                 <div class="item" style="">
                     <div class="content_careder_products">
                         <div class="card card_slider_products" style="">
                             <div class="d-flex justify-content-center">
-                                <h4 class="text-left ttile_categoria_product">KERALUXE</h4>
+                                <h4 class="text-left ttile_categoria_product">{{ $resultado->categories[0]->name }}</h4>
                             </div>
 
                             <div class="d-flex justify-content-center">
                                 <div class="contenedor_img_slider_product tamano_1">
                                     <p class="text-center">
-                                    <img src="{{ asset('assets/user/utilidades/KERATINA-BRASILENA-2022.png')}}" alt="" class="img_slider_product">
+                                        @if (!empty($resultado->images))
+                                        <img src="{{ url($resultado->images[0]->src) }}" alt="{{$resultado->name}}" class="img_slider_product">
+                                        @endif
                                     </p>
                                 </div>
                             </div>
 
                             <div class="card-body space_productos_slider">
                                 <div class="card-title">
-                                    <p class="text-center tittle_product_slider mb-4">KERATINA BRASILEÑA</p>
+                                    <p class="text-center tittle_product_slider mb-4">{{$resultado->name}}</p>
 
                                     <p class="text-center">
-                                        <a class="text-center btn_slider_product mb-3" href="">Compra</a>
+                                        <a class="text-center btn_slider_product mb-3" href="{{ $resultado->permalink }}">Compra</a>
                                     </p>
 
                                 </div>
@@ -521,96 +523,7 @@ crossorigin="anonymous" />
                         </div>
                     </div>
                 </div>
-
-
-                <div class="item" style="">
-                    <div class="content_careder_products">
-                        <div class="card card_slider_products" style="">
-                            <div class="d-flex justify-content-center">
-                                <h4 class="text-left ttile_categoria_product">KERALUXE2</h4>
-                            </div>
-
-                            <div class="d-flex justify-content-center">
-                                <div class="contenedor_img_slider_product tamano_1">
-                                    <p class="text-center">
-                                    <img src="{{ asset('assets/user/utilidades/KERATINA-BRASILENA-2022.png')}}" alt="" class="img_slider_product">
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="card-body space_productos_slider">
-                                <div class="card-title">
-                                    <p class="text-center tittle_product_slider mb-4">KERATINA BRASILEÑA</p>
-
-                                    <p class="text-center">
-                                        <a class="text-center btn_slider_product mb-3" href="">Compra</a>
-                                    </p>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="item" style="">
-                    <div class="content_careder_products">
-                        <div class="card card_slider_products" style="">
-                            <div class="d-flex justify-content-center">
-                                <h4 class="text-left ttile_categoria_product">KERALUXE3</h4>
-                            </div>
-
-                            <div class="d-flex justify-content-center">
-                                <div class="contenedor_img_slider_product tamano_1">
-                                    <p class="text-center">
-                                    <img src="{{ asset('assets/user/utilidades/KERATINA-BRASILENA-2022.png')}}" alt="" class="img_slider_product">
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="card-body space_productos_slider">
-                                <div class="card-title">
-                                    <p class="text-center tittle_product_slider mb-4">KERATINA BRASILEÑA</p>
-
-                                    <p class="text-center">
-                                        <a class="text-center btn_slider_product mb-3" href="">Compra</a>
-                                    </p>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item" style="">
-                    <div class="content_careder_products">
-                        <div class="card card_slider_products" style="">
-                            <div class="d-flex justify-content-center">
-                                <h4 class="text-left ttile_categoria_product">KERALUXE4</h4>
-                            </div>
-
-                            <div class="d-flex justify-content-center">
-                                <div class="contenedor_img_slider_product tamano_1">
-                                    <p class="text-center">
-                                    <img src="{{ asset('assets/user/utilidades/KERATINA-BRASILENA-2022.png')}}" alt="" class="img_slider_product">
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="card-body space_productos_slider">
-                                <div class="card-title">
-                                    <p class="text-center tittle_product_slider mb-4">KERATINA BRASILEÑA</p>
-
-                                    <p class="text-center">
-                                        <a class="text-center btn_slider_product mb-3" href="">Compra</a>
-                                    </p>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+                @endforeach
             </div>
 
         </div>
@@ -624,43 +537,81 @@ crossorigin="anonymous" />
             <div id="slide_unam" class="carousel slide space_unam">
 
                 <div class="carousel-inner">
+                    @foreach ($unam as $item)
+                    @php
+                        $dia = date("d/m", strtotime($curso->fecha_inicial));
+                    @endphp
+                        <div class="carousel-item active">
+                            <div class="d-flex justify-content-center">
+                                <div class="card card-custom" style="">
+                                    <img class="card_image" src="{{asset('curso/'. $curso->foto) }}" class="card-img-top" alt="...">
+                                    <div class="card-body card_body_custom">
+                                    <h5 class="card-title card_modalidad">{{$item->modalidad}}</h5>
+                                    <h3 class="card_titulo">{{$item->nombre}}</h3>
+                                    <h4 class="card_date">{{$dia}}</h4>
 
-                    <div class="carousel-item active">
-                        <div class="d-flex justify-content-center">
-                            <div class="card card-custom" style="">
-                                <img class="card_image" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" class="card-img-top" alt="...">
-                                <div class="card-body card_body_custom">
-                                <h5 class="card-title card_modalidad">Presencial</h5>
-                                <h3 class="card_titulo">CURSO DE PIEDRAS CALIENTES</h3>
-                                <h4 class="card_date">Jueves 16 de Febrero</h4>
+                                    <a class="btn btn-primario me-3">
+                                        <div class="d-flex justify-content-around" data-bs-toggle="collapse" href="#collapseobjetivos{{$item->id}}" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
+                                            <p class="card_tittle_btn my-auto">
+                                                Comprar ahora
+                                            </p>
+                                            <div class="card_bg_btn ">
+                                                <i class="fas fa-cart-plus card_icon_btn"></i>
+                                            </div>
+                                        </div>
+                                    </a>
 
-                                <a class="btn btn-primario me-3">
-                                    <div class="d-flex justify-content-around">
-                                        <p class="card_tittle_btn my-auto">
-                                            Comprar ahora
-                                        </p>
-                                        <div class="card_bg_btn ">
-                                            <i class="fas fa-cart-plus card_icon_btn"></i>
+                                    <a class="btn btn-secundario me-1" href="{{ route('cursos.show',$curso->slug) }}">
+                                        <div class="d-flex justify-content-around">
+                                            <p class="card_tittle_btn my-auto">
+                                                Saber mas
+                                            </p>
+                                            <div class="card_bg_btn_secundario">
+                                                <i class="fas fa-plus card_icon_btn_secundario"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <div class="collapse mt-3" id="collapseobjetivos{{$item->id}}">
+                                        <div class="card card-body card_colapsable_comprar">
+                                            <div class="row mb-3">
+                                                @foreach ($tickets as $ticket)
+                                                @if ($ticket->id_curso == $item->id)
+                                                    <div class="col-12 mt-3">
+                                                        <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                    </div>
+                                                    <div class="col-12 mt-3">
+                                                        @if ($ticket->descuento == NULL)
+                                                            <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                        @else
+                                                            <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                            <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                        @endif
+                                                    </div>
+
+                                                    <div class="col-12 mt-3">
+                                                        <p class="btn-holder">
+                                                            <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                                <i class="fas fa-ticket-alt"></i> Comprar
+                                                            </a>
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                    </div>
+                                                    @endif
+                                                @endforeach
+
+                                            </div>
                                         </div>
                                     </div>
-                                </a>
 
-                                <a class="btn btn-secundario me-1">
-                                    <div class="d-flex justify-content-around">
-                                        <p class="card_tittle_btn my-auto">
-                                            Saber mas
-                                        </p>
-                                        <div class="card_bg_btn_secundario">
-                                            <i class="fas fa-plus card_icon_btn_secundario"></i>
-                                        </div>
                                     </div>
-                                </a>
-
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    @endforeach
                 </div>
 
                     <button class="carousel-control-prev" type="button" data-bs-target="#slide_unam" data-bs-slide="prev">
@@ -677,7 +628,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-6">
             <h2 class="titulomin_alfa espaciodor_unam_text text-left mb-4">
-                !Avalados ante la casa maxima <br>
+                ¡Avalados ante la casa maxima <br>
                 casa de estudios UNAM!
             </h2>
             <p class="text-left text_beneficios espaciodor_lab_text mb-4" style="margin-left: 0px!important">
@@ -717,7 +668,7 @@ crossorigin="anonymous" />
     <div class="row">
         <div class="col-12">
             <h2 class="titulo_alfa text-center" style="color: #fff!important">
-                Lo que dicen de  <br>
+                Lo que dicen <br>
                 nuestros estudiantes...
             </h2>
             {{-- <p class="text-center mt-5">

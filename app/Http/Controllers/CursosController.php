@@ -24,9 +24,9 @@ class CursosController extends Controller
         $curso = Cursos::where('slug','=', $slug)->firstOrFail();
         $tickets = CursosTickets::where('id_curso','=', $curso->id)->where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
 
-        $user_tickets = OrdersTickets::where('id_user','<=', auth()->user()->id)->first();
+        // $user_tickets = OrdersTickets::where('id_user','<=', auth()->user()->id)->first();
 
-        return view('user.single_course', compact('curso', 'tickets', 'user_tickets'));
+        return view('user.single_course', compact('curso', 'tickets'));
     }
 
     public function create()
