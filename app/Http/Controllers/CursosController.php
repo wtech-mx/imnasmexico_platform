@@ -178,15 +178,17 @@ class CursosController extends Controller
         $DateAndTime = date('h:i', time());
         $fechaActual = date('Y-m-d');
         $cursos = Cursos::where('fecha_final','>=', $fechaActual)->get();
+        $cursos_slide = Cursos::where('fecha_final','>=', $fechaActual)->get();
 
         $tickets = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
 
-        return view('user.calendar', compact('cursos', 'tickets'));
+        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide'));
     }
 
     public function advance(Request $request, Cursos $cursos) {
         $fechaActual = date('Y-m-d');
         $tickets = CursosTickets::where('fecha_final','>=', $fechaActual)->get();
+        $cursos_slide = Cursos::where('fecha_final','>=', $fechaActual)->get();
 
         if( $request->modalidad){
             $cursos = $cursos->where('fecha_final','>=', $fechaActual)->where('modalidad', 'LIKE', "%" . $request->modalidad . "%");
@@ -220,6 +222,6 @@ class CursosController extends Controller
 
         $cursos = $cursos->paginate(10);
 
-        return view('user.calendar', compact('cursos', 'tickets'));
+        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide'));
     }
 }

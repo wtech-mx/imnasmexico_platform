@@ -31,7 +31,7 @@
 
     <div class="carousel-inner">
 
-        @foreach ($cursos as $curso)
+        @foreach ($cursos_slide as $curso)
         @php
             $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
             $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
@@ -156,7 +156,6 @@
 
     <div class="row">
         {{-- card_grid --}}
-
         @foreach ($cursos as $curso)
         @php
             $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
