@@ -63,6 +63,7 @@ Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->nam
 Route::get('/curso/{slug}', [App\Http\Controllers\CursosController::class, 'show'])->name('cursos.show');
 
 Route::get('/calendario', [App\Http\Controllers\CursosController::class, 'index_user'])->name('cursos.index_user');
+Route::get('/calendario/advance', [App\Http\Controllers\CursosController::class, 'advance'])->name('advance_search');
 
 // =============== P A G O S ===============================
 Route::post('/webhooks', WebhooksController::class);
