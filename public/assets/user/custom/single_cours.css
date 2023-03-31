@@ -171,4 +171,31 @@
         font-size: 29px;
     }
 
+    .title_curso {
+        font-size: 35px;
+    }
+
+}
+
+@media only screen and (max-width: 1390px) {
+    .title_curso {
+        font-size: 25px;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .title_curso {
+        margin-top: 2rem;
+        font-size: 25px;
+    }
+
+    .img_destacada {
+        width: 60%;
+        margin-left: 5rem;
+    }
+
+    .space_cs_rs{
+        margin-top: 1rem!important;
+    }
+
 }

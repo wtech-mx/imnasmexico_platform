@@ -77,13 +77,13 @@
 
               <div class="tab-pane fade show active" id="v-pills-informacion" role="tabpanel" aria-labelledby="v-pills-informacion-tab" tabindex="0">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-12 col-lg-5">
                         <div class="d-flex align-items-center">
                             <img class="img_destacada img-fluid" src="{{asset('curso/'. $curso->foto) }}" alt="">
                         </div>
                     </div>
 
-                    <div class="col-7">
+                    <div class="col-12 col-lg-7">
                         <h1 class="title_curso">
                             {{$curso->nombre}}
                         </h1>
@@ -101,7 +101,7 @@
                         </p>
 
 
-                        <a class="btn btn-primario mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
+                        <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -112,7 +112,7 @@
                             </div>
                         </a>
 
-                        <a class="btn btn-secundario mt-5">
+                        <a class="btn btn-secundario space_cs_rs mt-5">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Contactar
@@ -162,13 +162,13 @@
 
               <div class="tab-pane fade" id="v-pills-objetivos" role="tabpanel" aria-labelledby="v-pills-objetivos-tab" tabindex="0">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-12 col-lg-5">
                         <div class="d-flex align-items-center">
-                            <img class="img_destacada img-fluid" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
+                            <img class="img_destacada img-fluid" src="{{asset('curso/'. $curso->foto) }}" alt="">
                         </div>
                     </div>
 
-                    <div class="col-7">
+                    <div class="col-12 col-lg-7">
 
                         <h2 class="title_curso mb-5">Objetivo</h2>
 
@@ -176,7 +176,7 @@
                             <?php echo $curso->objetivo?>
                         </p>
 
-                        <a class="btn btn-primario mt-5" data-bs-toggle="collapse" href="#collapseobjetivos" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
+                        <a class="btn btn-primario space_cs_rs  mt-5" data-bs-toggle="collapse" href="#collapseobjetivos" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -187,7 +187,7 @@
                             </div>
                         </a>
 
-                        <a class="btn btn-secundario mt-5">
+                        <a class="btn btn-secundario space_cs_rs mt-5">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Contactar
@@ -236,13 +236,13 @@
 
               <div class="tab-pane fade" id="v-pills-temarios" role="tabpanel" aria-labelledby="v-pills-temarios-tab" tabindex="0">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-12 col-lg-5">
                         <div class="d-flex align-items-center">
-                            <img class="img_destacada img-fluid" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
+                            <img class="img_destacada img-fluid" src="{{asset('curso/'. $curso->foto) }}" alt="">
                         </div>
                     </div>
 
-                    <div class="col-7">
+                    <div class="col-12 col-lg-7">
 
                         <h2 class="title_curso mb-5">Temario</h2>
 
@@ -250,7 +250,7 @@
                             <?php echo $curso->temario?>
                         </p>
 
-                        <a class="btn btn-primario mt-5" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
+                        <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -261,7 +261,7 @@
                             </div>
                         </a>
 
-                        <a class="btn btn-secundario mt-5">
+                        <a class="btn btn-secundario space_cs_rs mt-5">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Contactar
@@ -310,13 +310,13 @@
 
               <div class="tab-pane fade" id="v-pills-documentos" role="tabpanel" aria-labelledby="v-pills-documentos-tab" tabindex="0">
                 <div class="row">
-                    <div class="col-5">
+                    <div class="col-12 col-lg-5">
                         <div class="d-flex align-items-center">
-                            <img class="img_destacada img-fluid" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
+                            <img class="img_destacada img-fluid" src="{{asset('curso/'. $curso->foto) }}" alt="">
                         </div>
                     </div>
 
-                    <div class="col-7">
+                    <div class="col-12 col-lg-7">
 
                         <h2 class="title_curso mb-5">Certificaciones</h2>
 
@@ -362,7 +362,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/imnas.webp')}}" style="width: 50%">
+                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/imnas.webp')}}" >
                                                 </p>
                                         </div>
                                     </div>
@@ -383,7 +383,7 @@
                         </div>
 
 
-                        <a class="btn btn-primario mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
+                        <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -394,7 +394,7 @@
                             </div>
                         </a>
 
-                        <a class="btn btn-secundario mt-5">
+                        <a class="btn btn-secundario space_cs_rs mt-5">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Contactar
@@ -443,7 +443,7 @@
 
               <div class="tab-pane fade" id="v-pills-dirijido" role="tabpanel" aria-labelledby="v-pills-dirijido-tab" tabindex="0">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-6 ">
                         <div class="d-flex justify-content-end">
                             <div class="card_objetivos2">
                                 <p class="text-center">
@@ -499,11 +499,11 @@
               <div class="tab-pane fade" id="v-pills-recursos" role="tabpanel" aria-labelledby="v-pills-recursos-tab" tabindex="0">
                 @guest
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <h2 class="title_curso text-center mb-5">Rescursos</h2>
                         </div>
 
-                        <div class="col-6 m-auto">
+                        <div class="col-12 m-auto">
                                 <p class="  ">
                                    Por favor inicie sesion y en caso de haber comprado este curso podra ver la direccion o liga de meet para su clase
                                 </p>

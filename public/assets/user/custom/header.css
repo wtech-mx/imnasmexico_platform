@@ -76,12 +76,6 @@
     }
 }
 
-@media only screen and (min-width: 577px) {
-    .acceso_alumnas_flex_prim{
-        display: none!important;
-    }
-}
-
 @media only screen and (max-width: 1390px) {
     .image_navbar {
         width: 60px;
@@ -91,7 +85,44 @@
         font-size: 22px!important;
     }
 
+    .navbar_ul_custom {
+        --bs-scroll-height: 100px;
+        margin-left: 5rem!important;
+    }
+
 }
+
+
+@media only screen and (max-width: 1150px) {
+
+    .nav_link_custom {
+        font-size: 18px!important;
+    }
+
+    .btn-login {
+        padding: 10px;
+        font-size: 13px!important;
+    }
+
+    .navbar_ul_custom {
+        --bs-scroll-height: 100px;
+        margin-left: 0rem!important;
+    }
+
+}
+
+@media only screen and (min-width: 577px) {
+    .acceso_alumnas_flex_prim{
+        display: none!important;
+    }
+}
+
+@media only screen and (min-width: 767px) {
+    .margin_home_nav {
+        display: none;
+    }
+}
+
 
 @media only screen and (max-width: 576px) {
 
@@ -171,7 +202,5 @@
         -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75)!important;
         box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 75%)!important;
     }
-
-
 
   }
