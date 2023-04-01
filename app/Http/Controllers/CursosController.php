@@ -179,8 +179,8 @@ class CursosController extends Controller
     {
         $DateAndTime = date('h:i', time());
         $fechaActual = date('Y-m-d');
-        $cursos = Cursos::where('fecha_final','>=', $fechaActual)->get();
-        $cursos_slide = Cursos::where('fecha_final','>=', $fechaActual)->get();
+        $cursos = Cursos::where('fecha_final','>=', $fechaActual)->where('estatus','=', '1')->get();
+        $cursos_slide = Cursos::where('fecha_final','>=', $fechaActual)->where('estatus','=', '1')->get();
 
         $tickets = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
 
@@ -190,7 +190,7 @@ class CursosController extends Controller
     public function advance(Request $request, Cursos $cursos) {
         $fechaActual = date('Y-m-d');
         $tickets = CursosTickets::where('fecha_final','>=', $fechaActual)->get();
-        $cursos_slide = Cursos::where('fecha_final','>=', $fechaActual)->get();
+        $cursos_slide = Cursos::where('fecha_final','>=', $fechaActual)->where('estatus','=', '1')->get();
 
         if( $request->modalidad){
             $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('modalidad', 'LIKE', "%" . $request->modalidad . "%");

@@ -12,8 +12,8 @@ class HomeUsersController extends Controller
     public function index(){
         $DateAndTime = date('h:i', time());
         $fechaActual = date('Y-m-d');
-        $cursos = Cursos::where('fecha_final', '>=', $fechaActual)->get();
-        $unam = Cursos::where('unam', '=', 1)->where('fecha_final', '>=', $fechaActual)->get();
+        $cursos = Cursos::where('fecha_final', '>=', $fechaActual)->where('estatus','=', '1')->get();
+        $unam = Cursos::where('unam', '=', 1)->where('fecha_final', '>=', $fechaActual)->where('estatus','=', '1')->get();
 
         $tickets = CursosTickets::where('fecha_final','>=', $fechaActual)->get();
 
