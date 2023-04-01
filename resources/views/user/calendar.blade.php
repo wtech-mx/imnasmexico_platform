@@ -31,7 +31,7 @@
 
     <div class="carousel-inner">
 
-        @foreach ($cursos as $curso)
+        @foreach ($cursos_slide as $curso)
         @php
             $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
             $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
@@ -107,14 +107,55 @@
                 <div class="me-auto p-2">
                     <h5 class="tittle_proximas_cer">Próximas Certificaciones</h5>
                 </div>
-                <div class="p-2">Flex item</div>
+                <form action="{{ route('advance_search') }}" method="GET" >
+                    <div class="p-2">
+                        <label class="form-label">Modalidad</label>
+                        <select class="form-control" name="modalidad" id="modalidad">
+                            <option value="" selected>Modalidad</option>
+                            <option value="Online">Online</option>
+                            <option value="Presencial">Presencial</option>
+                        </select>
+                    </div>
+                    <div class="p-2">
+                        <label class="form-label">Nombre</label>
+                        <div class="input-group">
+                            <input name="nombre" class="form-control" type="text" placeholder="nombre">
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <label class="form-label">Categoria</label>
+                        <select class="form-control" name="categoria" id="categoria">
+                            <option value="" selected>Categoria</option>
+                            <option value="Faciales">Faciales</option>
+                            <option value="Corporales">Corporales</option>
+                        </select>
+                    </div>
+                    <div class="p-2">
+                        <label class="form-label">Tipo</label>
+                        <select class="form-control" name="tipo" id="tipo">
+                            <option value="" selected>Tipo</option>
+                            <option value="sep">SEP</option>
+                            <option value="unam">UNAM</option>
+                            <option value="stps">STPS</option>
+                            <option value="redconocer">RedConocer</option>
+                            <option value="imnas">IMNAS</option>
+                        </select>
+                    </div>
+                    <div class="p-2">
+                        <label class="form-label">Fecha</label>
+                        <div class="input-group">
+                            <input name="fecha_inicial" class="form-control" type="date">
+                        </div>
+                    </div>
+                    <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit">Buscar</button>
+                    <a class="btn btn-sm mb-0 mt-sm-0 mt-1" href="{{ route('cursos.index_user') }}">Limpiar</a>
+                </form>
             </div>
         </div>
     </div>
 
     <div class="row">
         {{-- card_grid --}}
-
         @foreach ($cursos as $curso)
         @php
             $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
