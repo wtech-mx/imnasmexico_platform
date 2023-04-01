@@ -313,6 +313,15 @@
         margin-top: 0px;
     }
 
+    .tittle-contact {
+        font-size: 45px;
+        margin-top: 1rem;
+    }
+
+    .border_row{
+        margin-bottom: 2rem;
+    }
+
 }
 
 @media only screen and (max-width: 502px) {
@@ -341,6 +350,21 @@
         border-radius: 50px;
         padding: 7px;
     }
+
+    .card_objetivos2 {
+        width: 350px;
+        height: 200px;
+    }
+
+    .img_card_objetivos2{
+        margin-top: 0rem;
+        width: 80px;
+    }
+
+    .card_text_objetivos {
+        font-size: 13px;
+    }
+
 }
 
 @media only screen and (max-width: 408px) {
@@ -382,6 +406,18 @@
         background: #836262;
         border-radius: 50px;
         padding: 4px;
+    }
+
+    .img_card_objetivos2{
+        width: 70px;
+    }
+
+    .card_text_objetivos {
+        font-size: 11px;
+    }
+
+    .tittle-contact {
+        font-size: 30px;
     }
 
 }

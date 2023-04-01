@@ -1054,11 +1054,12 @@
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
     <div class="row border_row" style="">
 
-        <div class="col-6">
+        <div class="col-12 col-md-6">
             <h2 class="text-center tittle-contact">Contactenos</h2>
             <p class="text-center text-white">
                 Complementa tus conocimientos y conviértete un experto de la cosmología,
             </p>
+
             <form class="form_contactenos" action="">
 
                     <div class="form-group">
@@ -1080,7 +1081,7 @@
             </form>
         </div>
 
-        <div class="col-6">
+        <div class="col-12 col-md-6 desaparecer_contenedor_sm">
                 <div class="d-flex justify-content-center">
                     <img class="img_contact" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
                 </div>
