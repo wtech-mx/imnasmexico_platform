@@ -102,54 +102,80 @@
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
 
     <div class="row">
+
+        <div class="col-12">
+            <form class="row form_search_calendar" action="{{ route('advance_search') }}" method="GET" >
+
+                <div class="col-2">
+                    <label class="form-label style_search_label">Modalidad</label>
+                    <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="modalidad" id="modalidad">
+                        <option value="Presencial">Presencial</option>
+                        <option value="Online">Online</option>
+                    </select>
+                </div>
+
+                <div class="col-2">
+                    <label class="form-label style_search_label">Categoria</label>
+                    <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="categoria" id="categoria">
+                        <option value="Faciales">Faciales</option>
+                        <option value="Corporales">Corporales</option>
+                    </select>
+                </div>
+
+                <div class="col-2">
+                    <label class="form-label style_search_label">Tipo</label>
+                    <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="tipo" id="tipo">
+                        <option value="" selected>Tipo</option>
+                        <option value="sep">SEP</option>
+                        <option value="unam">UNAM</option>
+                        <option value="stps">STPS</option>
+                        <option value="redconocer">RedConocer</option>
+                        <option value="imnas">IMNAS</option>
+                    </select>
+                </div>
+
+                <div class="col-2">
+                    <label class="form-label style_search_label">Fecha</label>
+                    <div class="input-group">
+                        <input name="fecha_inicial" class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;   border-radius: 0px;" type="date">
+                    </div>
+                </div>
+
+                <div class="col-2">
+                    <label class="form-label style_search_label">Nombre</label>
+                    <div class="input-group">
+                        <input name="nombre" class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" type="text" placeholder="nombre">
+                    </div>
+                </div>
+
+                <div class="col-2">
+
+                    <label class="form-label style_search_label">-</label>
+                    <div class="input-group">
+                        <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit">
+                            <i class="fas fa-search-plus  icon_search_style"></i>
+                        </button>
+                        <a class="btn btn-sm mb-0 mt-sm-0 mt-1" href="{{ route('cursos.index_user') }}">
+                            <i class="fas fa-eraser  icon_search_style_2"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
         <div class="col-12">
             <div class="d-flex mb-5">
+
                 <div class="me-auto p-2">
                     <h5 class="tittle_proximas_cer">Próximas Certificaciones</h5>
                 </div>
-                <form action="{{ route('advance_search') }}" method="GET" >
-                    <div class="p-2">
-                        <label class="form-label">Modalidad</label>
-                        <select class="form-control" name="modalidad" id="modalidad">
-                            <option value="" selected>Modalidad</option>
-                            <option value="Online">Online</option>
-                            <option value="Presencial">Presencial</option>
-                        </select>
-                    </div>
-                    <div class="p-2">
-                        <label class="form-label">Nombre</label>
-                        <div class="input-group">
-                            <input name="nombre" class="form-control" type="text" placeholder="nombre">
-                        </div>
-                    </div>
-                    <div class="p-2">
-                        <label class="form-label">Categoria</label>
-                        <select class="form-control" name="categoria" id="categoria">
-                            <option value="" selected>Categoria</option>
-                            <option value="Faciales">Faciales</option>
-                            <option value="Corporales">Corporales</option>
-                        </select>
-                    </div>
-                    <div class="p-2">
-                        <label class="form-label">Tipo</label>
-                        <select class="form-control" name="tipo" id="tipo">
-                            <option value="" selected>Tipo</option>
-                            <option value="sep">SEP</option>
-                            <option value="unam">UNAM</option>
-                            <option value="stps">STPS</option>
-                            <option value="redconocer">RedConocer</option>
-                            <option value="imnas">IMNAS</option>
-                        </select>
-                    </div>
-                    <div class="p-2">
-                        <label class="form-label">Fecha</label>
-                        <div class="input-group">
-                            <input name="fecha_inicial" class="form-control" type="date">
-                        </div>
-                    </div>
-                    <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit">Buscar</button>
-                    <a class="btn btn-sm mb-0 mt-sm-0 mt-1" href="{{ route('cursos.index_user') }}">Limpiar</a>
-                </form>
+
+                <div class="p-2">
+
+                </div>
             </div>
         </div>
     </div>
