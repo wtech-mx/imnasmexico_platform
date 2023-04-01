@@ -39,6 +39,7 @@ class CursosController extends Controller
         $curso = new Cursos;
         $curso->nombre = $request->get('nombre');
         $curso->descripcion = $request->get('descripcion');
+        $curso->materiales = $request->get('materiales');
 
         if ($request->hasFile("foto")) {
             $file = $request->file('foto');
@@ -115,6 +116,7 @@ class CursosController extends Controller
         $curso = Cursos::find($id);
         $curso->nombre = $request->get('nombre');
         $curso->descripcion = $request->get('descripcion');
+        $curso->materiales = $request->get('materiales');
 
         if ($request->hasFile("foto")) {
             $file = $request->file('foto');
@@ -182,7 +184,7 @@ class CursosController extends Controller
 
         $tickets = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
 
-        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide'));
+        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual'));
     }
 
     public function advance(Request $request, Cursos $cursos) {
@@ -191,37 +193,37 @@ class CursosController extends Controller
         $cursos_slide = Cursos::where('fecha_final','>=', $fechaActual)->get();
 
         if( $request->modalidad){
-            $cursos = $cursos->where('fecha_final','>=', $fechaActual)->where('modalidad', 'LIKE', "%" . $request->modalidad . "%");
+            $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('modalidad', 'LIKE', "%" . $request->modalidad . "%");
         }
 
         if( $request->nombre){
-            $cursos = $cursos->where('fecha_final','>=', $fechaActual)->where('nombre', 'LIKE', "%" . $request->nombre . "%");
+            $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('nombre', 'LIKE', "%" . $request->nombre . "%");
         }
 
         if( $request->categoria){
-            $cursos = $cursos->where('fecha_final','>=', $fechaActual)->where('categoria', 'LIKE', "%" . $request->categoria . "%");
+            $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('categoria', 'LIKE', "%" . $request->categoria . "%");
         }
 
         if($request->tipo){
             if($request->tipo == 'sep'){
-                $cursos = $cursos->where('fecha_final','>=', $fechaActual)->where('sep', '=', '1');
+                $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('sep', '=', '1');
             }elseif($request->tipo == 'unam'){
-                $cursos = $cursos->where('fecha_final','>=', $fechaActual)->where('unam', '=', '1');
+                $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('unam', '=', '1');
             }elseif($request->tipo == 'stps'){
-                $cursos = $cursos->where('fecha_final','>=', $fechaActual)->where('stps', '=', '1');
+                $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('stps', '=', '1');
             }elseif($request->tipo == 'redconocer'){
-                $cursos = $cursos->where('fecha_final','>=', $fechaActual)->where('redconocer', '=', '1');
+                $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('redconocer', '=', '1');
             }elseif($request->tipo == 'imnas'){
-                $cursos = $cursos->where('fecha_final','>=', $fechaActual)->where('imnas', '=', '1');
+                $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('imnas', '=', '1');
             }
         }
 
         if( $request->fecha_inicial){
-            $cursos = $cursos->where('fecha_inicial', '=', $request->fecha_inicial);
+            $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('fecha_inicial', '=', $request->fecha_inicial);
         }
 
         $cursos = $cursos->paginate(10);
 
-        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide'));
+        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual'));
     }
 }

@@ -113,6 +113,29 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="fecha">Liga Meet/Direccion</label>
+                                                        <input type="text" id="recurso" name="recurso" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-check col-3">
+                                                    <label for="nota">Destacado</label>
+                                                    <div class="form-group">
+                                                        <input class="form-check-input" type="checkbox" value="1" id="destacado" name="destacado">
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-check col-3">
+                                                    <label for="nota">Publicar</label>
+                                                    <div class="form-group">
+                                                        <input class="form-check-input" type="checkbox" value="1" id="estatus" name="estatus" checked>
+
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-check col-2">
                                                     <div class="form-group">
                                                         <input class="form-check-input" type="checkbox" value="1" id="sep" name="sep">
@@ -134,14 +157,14 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-2">
+                                                <div class="form-check col-3">
                                                     <div class="form-group">
                                                         <input class="form-check-input" type="checkbox" value="1" id="redconocer" name="redconocer">
                                                         <label for="nota">RedConocer</label>
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-2">
+                                                <div class="form-check col-3">
                                                     <div class="form-group">
                                                         <input class="form-check-input" type="checkbox" value="1" id="imnas" name="imnas">
                                                         <label for="nota">IMNAS</label>
@@ -180,24 +203,10 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6">
+                                                <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="fecha">Liga Meet/Direccion</label>
-                                                        <input type="text" id="recurso" name="recurso" class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-2">
-                                                    <div class="form-group">
-                                                        <input class="form-check-input" type="checkbox" value="1" id="destacado" name="destacado">
-                                                        <label for="nota">Destacado</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-2">
-                                                    <div class="form-group">
-                                                        <input class="form-check-input" type="checkbox" value="1" id="estatus" name="estatus" checked>
-                                                        <label for="nota">Publicar</label>
+                                                        <label for="fecha">Materiales de Clase</label>
+                                                        <textarea name="materiales" id="materiales" cols="10" rows="3" class="form-control"></textarea>
                                                     </div>
                                                 </div>
                                             </div>

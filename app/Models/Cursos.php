@@ -36,6 +36,7 @@ class Cursos extends Model
         'destacado',
         'slug',
         'precio',
+        'materiales',
     ];
 
 }

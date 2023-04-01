@@ -109,6 +109,7 @@
                 <div class="col-2">
                     <label class="form-label style_search_label">Modalidad</label>
                     <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="modalidad" id="modalidad">
+                        <option value="" selected>Seleccione</option>
                         <option value="Presencial">Presencial</option>
                         <option value="Online">Online</option>
                     </select>
@@ -117,6 +118,7 @@
                 <div class="col-2">
                     <label class="form-label style_search_label">Categoria</label>
                     <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="categoria" id="categoria">
+                        <option value="" selected>Seleccione</option>
                         <option value="Faciales">Faciales</option>
                         <option value="Corporales">Corporales</option>
                     </select>
@@ -125,7 +127,7 @@
                 <div class="col-2">
                     <label class="form-label style_search_label">Tipo</label>
                     <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="tipo" id="tipo">
-                        <option value="" selected>Tipo</option>
+                        <option value="" selected>Seleccione</option>
                         <option value="sep">SEP</option>
                         <option value="unam">UNAM</option>
                         <option value="stps">STPS</option>
@@ -137,7 +139,7 @@
                 <div class="col-2">
                     <label class="form-label style_search_label">Fecha</label>
                     <div class="input-group">
-                        <input name="fecha_inicial" class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;   border-radius: 0px;" type="date">
+                        <input name="fecha_inicial" class="form-control" value="{{$fechaActual}}" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;   border-radius: 0px;" type="date">
                     </div>
                 </div>
 

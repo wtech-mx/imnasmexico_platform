@@ -52,7 +52,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="input-group">
-                                                        <img id="blah" src="{{asset('cursos/'.$curso->foto) }}" alt="Imagen" style="width: 150px; height: 150px;"/>
+                                                        <img id="blah" src="{{asset('curso/'.$curso->foto) }}" alt="Imagen" style="width: 150px; height: 150px;"/>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -122,6 +122,37 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="fecha">Liga Meet/Direccion</label>
+                                                        <input type="text" id="recurso" name="recurso" class="form-control" value="{{$curso->recurso}}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-check col-3">
+                                                    <div class="form-group">
+                                                        @if ($curso->destacado == 1)
+                                                            <input class="form-check-input" type="checkbox" value="1" id="destacado" name="destacado" checked>
+                                                            <label for="nota">Destacado</label>
+                                                        @else
+                                                            <input class="form-check-input" type="checkbox" value="1" id="destacado" name="destacado">
+                                                            <label for="nota">Destacado</label>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-check col-3">
+                                                    <div class="form-group">
+                                                        @if ($curso->estatus == 1)
+                                                            <input class="form-check-input" type="checkbox" value="1" id="estatus" name="estatus" checked>
+                                                            <label for="nota">Publicar</label>
+                                                        @else
+                                                            <input class="form-check-input" type="checkbox" value="1" id="estatus" name="estatus">
+                                                            <label for="nota">Publicar</label>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-check col-2">
                                                     <div class="form-group">
                                                         @if ($curso->sep == 1)
@@ -158,7 +189,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-2">
+                                                <div class="form-check col-3">
                                                     <div class="form-group">
                                                         @if ($curso->redconocer == 1)
                                                             <input class="form-check-input" type="checkbox" value="1" id="redconocer" name="redconocer" checked>
@@ -170,7 +201,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-2">
+                                                <div class="form-check col-3">
                                                     <div class="form-group">
                                                         @if ($curso->imnas == 1)
                                                             <input class="form-check-input" type="checkbox" value="1" id="imnas" name="imnas" checked>
@@ -214,34 +245,10 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6">
+                                                <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="fecha">Liga Meet/Direccion</label>
-                                                        <input type="text" id="recurso" name="recurso" class="form-control" value="{{$curso->recurso}}">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-2">
-                                                    <div class="form-group">
-                                                        @if ($curso->destacado == 1)
-                                                            <input class="form-check-input" type="checkbox" value="1" id="destacado" name="destacado" checked>
-                                                            <label for="nota">Destacado</label>
-                                                        @else
-                                                            <input class="form-check-input" type="checkbox" value="1" id="destacado" name="destacado">
-                                                            <label for="nota">Destacado</label>
-                                                        @endif
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-2">
-                                                    <div class="form-group">
-                                                        @if ($curso->estatus == 1)
-                                                            <input class="form-check-input" type="checkbox" value="1" id="estatus" name="estatus" checked>
-                                                            <label for="nota">Publicar</label>
-                                                        @else
-                                                            <input class="form-check-input" type="checkbox" value="1" id="estatus" name="estatus">
-                                                            <label for="nota">Publicar</label>
-                                                        @endif
+                                                        <label for="fecha">Materiales de Clase</label>
+                                                        <textarea name="materiales" id="materiales" cols="10" rows="3" class="form-control">{{$curso->materiales}}</textarea>
                                                     </div>
                                                 </div>
                                             </div>
