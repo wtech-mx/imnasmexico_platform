@@ -664,21 +664,21 @@
 
             <div class="tab-pane fade" id="nav-profile_res" role="tabpanel" aria-labelledby="nav-profile_res-tab" tabindex="0">
                 <div class="row">
-                    <div class="col-12 col-lg-5">
+                    <div class="col-12 ">
                         <div class="d-flex align-items-center">
                             <img class="img_destacada img-fluid" src="{{asset('curso/'. $curso->foto) }}" alt="">
                         </div>
                     </div>
 
-                    <div class="col-12 col-lg-7">
+                    <div class="col-12 ">
 
-                        <h2 class="title_curso mb-5">Objetivo</h2>
+                        <h2 class="title_curso mb-md-5 mt-md-5 mt-2 mb-2">Objetivo</h2>
 
-                        <p class="tittle_abstract mt-3 mb-3">
+                        <p class="tittle_abstract mb-md-5 mt-md-5 mt-2 mb-2">
                             <?php echo $curso->objetivo?>
                         </p>
 
-                        <a class="btn btn-primario space_cs_rs  mt-5" data-bs-toggle="collapse" href="#collapseobjetivos" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
+                        <a class="btn btn-primario space_cs_rs  mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapseobjetivos" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -746,13 +746,13 @@
 
                     <div class="col-12">
 
-                        <h2 class="title_curso mb-5">Temario</h2>
+                        <h2 class="title_curso mb-md-5 mt-md-5 mt-2 mb-2">Temario</h2>
 
-                        <p class="tittle_abstract ">
+                        <p class="tittle_abstract mb-md-5 mt-md-5 mt-2 mb-2">
                             <?php echo $curso->temario?>
                         </p>
 
-                        <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
+                        <a class="btn btn-primario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -763,7 +763,7 @@
                             </div>
                         </a>
 
-                        <a class="btn btn-secundario space_cs_rs mt-5">
+                        <a class="btn btn-secundario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Contactar
@@ -815,7 +815,7 @@
 
                     <div class="col-12">
 
-                        <h2 class="title_curso mb-5">Certificaciones</h2>
+                        <h2 class="title_curso mb-md-5 mt-md-5 mt-2 mb-2">Certificaciones</h2>
 
                         <div class="row">
                             @if ($curso->redconocer == 1)
@@ -823,7 +823,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                    <img class="img_card_certificaciones dos_img_cert" src="{{ asset('assets/user/logotipos/sepconocer.png')}}" alt="">
                                                 </p>
                                         </div>
                                     </div>
@@ -835,7 +835,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/revoe.png')}}" alt="">
+                                                    <img class="img_card_certificaciones dos_img_cert" src="{{ asset('assets/user/logotipos/revoe.png')}}" alt="">
                                                 </p>
                                         </div>
                                     </div>
@@ -847,7 +847,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/unam.png')}}" alt="">
+                                                    <img class="img_card_certificaciones tres_img_cert" src="{{ asset('assets/user/logotipos/unam.png')}}" alt="">
                                                 </p>
                                         </div>
                                     </div>
@@ -871,7 +871,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/stps.png')}}" alt="">
+                                                    <img class="img_card_certificaciones dos_img_cert" src="{{ asset('assets/user/logotipos/stps.png')}}" alt="">
                                                 </p>
                                         </div>
                                     </div>
@@ -879,8 +879,7 @@
                             @endif
                         </div>
 
-
-                        <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
+                        <a class="btn btn-primario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Comprar ahora
@@ -891,7 +890,7 @@
                             </div>
                         </a>
 
-                        <a class="btn btn-secundario space_cs_rs mt-5">
+                        <a class="btn btn-secundario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
                                     Contactar
