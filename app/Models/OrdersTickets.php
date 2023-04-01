@@ -22,4 +22,19 @@ class OrdersTickets extends Model
     {
        return $this->belongsTo(CursosTickets::class,'id_tickets');
     }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
+
+    public function Cursos()
+    {
+        return $this->belongsTo(Cursos::class, 'id_curso');
+    }
+
+    public function Orders()
+    {
+        return $this->belongsTo(Orders::class, 'id_order');
+    }
 }

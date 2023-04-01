@@ -55,7 +55,7 @@
                                                 @endif
 
                                                 <td>
-                                                    <a type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#showDataModal{{$curso->id}}" style="color: #ffff"><i class="fa fa-users"></i></a>
+                                                    <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}"><i class="fa fa-users"></i></a>
                                                     @can('client-edit')
                                                         <a class="btn btn-sm btn-success" href="{{ route('cursos.edit',$curso->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
                                                     @endcan

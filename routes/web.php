@@ -60,10 +60,10 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->name('user.home');
 
 // =============== P A G I N A  S I N G L E  C O U R S E ===============================
-Route::get('/curso/{slug}', [App\Http\Controllers\CursosController::class, 'show'])->name('cursos.show');
+Route::get('/curso/{slug}', [App\Http\Controllers\CursoUsersController::class, 'show'])->name('cursos.show');
 
-Route::get('/calendario', [App\Http\Controllers\CursosController::class, 'index_user'])->name('cursos.index_user');
-Route::get('/calendario/advance', [App\Http\Controllers\CursosController::class, 'advance'])->name('advance_search');
+Route::get('/calendario', [App\Http\Controllers\CursoUsersController::class, 'index_user'])->name('cursos.index_user');
+Route::get('/calendario/advance', [App\Http\Controllers\CursoUsersController::class, 'advance'])->name('advance_search');
 
 // =============== P A G O S ===============================
 Route::post('/webhooks', WebhooksController::class);
@@ -107,6 +107,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/cursos/update/{id}', [App\Http\Controllers\CursosController::class, 'update'])->name('cursos.update');
     Route::delete('/admin/cursos/delete/{id}', [App\Http\Controllers\CursosController::class, 'destroy'])->name('cursos.destroy');
 
+    Route::get('/admin/cursos/listas/{id}', [App\Http\Controllers\CursosController::class, 'listas'])->name('cursos.listas');
+
     // =============== M O D U L O   P A G O S  P O R  F U E R A ===============================
     Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\PagosFueraController::class, 'inscripcion'])->name('pagos.inscripcion');
     Route::post('/admin/pagos-por-fuera/inscripcion/store', [App\Http\Controllers\PagosFueraController::class, 'store'])->name('pagos.store');
@@ -125,6 +127,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/configuracion/update', [App\Http\Controllers\ConfiguracionController::class, 'update'])->name('update.configuracion');
 
      // =============== M O D U L O   Profile User ===============================
+
 
 });
 

@@ -123,7 +123,7 @@
      });
 
      tinymce.init({
-       selector: '#materiales', // Replace this CSS selector to match the placeholder element for TinyMCE
+       selector: '#materiales_ticket', // Replace this CSS selector to match the placeholder element for TinyMCE
        plugins: 'code table lists'
      });
    </script>

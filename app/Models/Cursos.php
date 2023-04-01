@@ -38,5 +38,10 @@ class Cursos extends Model
         'precio',
         'materiales',
     ];
+    
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
 
 }
