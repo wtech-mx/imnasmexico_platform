@@ -354,7 +354,7 @@
                                                                                     <tr>
                                                                                         <td valign='top' dir="ltr" style='font-size: 15px;width:540px;line-height:30px;background-image:none;padding:35px 0px 0px;border-radius:0px;border-top:0 hidden;border-right:0 hidden;border-bottom:0 hidden;border-left:0 hidden;'>
 																							<div class='text-item '><p style="text-align: center;">
-                                                                                                <span style="font-size: 30px; color: #444444;">¡Hola!<strong> johndoe</strong>&nbsp;</span>
+                                                                                                <span style="font-size: 30px; color: #444444;">¡Hola!<strong> {{$datos->name}}</strong>&nbsp;</span>
                                                                                             </p>
                                                                                         </div>                                                                                        </td>
                                                                                     </tr>
@@ -373,10 +373,10 @@
 																							<div class='text-item '><p><span style="color: #444444;">Gracias por crear una cuenta en <strong>IMNAS MEXICO</strong></span></p>
 <p><span style="color: #444444;">&nbsp;</span></p>
 <p><strong><span style="color: #444444;">Su usuario es:</span></strong></p>
-<p><span style="color: #444444;"> johndoe</span></p>
+<p><span style="color: #444444;"> {{$datos->email}}</span></p>
 <p>&nbsp;</p>
 <p><span style="color: #444444;"><strong>Su contraseña es:</strong></span></p>
-<p><span style="color: #444444;"> KG&Q#ToW&kLq0owvLWq4Ck</span></p>
+<p><span style="color: #444444;"> {{$datos->telefono}}</span></p>
 <p><span style="color: #444444;">&nbsp;</span></p>
 <p><span style="color: #444444;">Puede acceder al área de su cuenta para ver pedidos, descuentos , promociones, certificaciones, cambiar su contraseña y más.</span></p></div>                                                                                        </td>
                                                                                     </tr>

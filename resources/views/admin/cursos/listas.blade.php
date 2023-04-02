@@ -17,8 +17,9 @@
 
                             <h3 class="mb-3">Listas de Cursos</h3>
 
-                            <a class="btn btn-sm btn-success" href="{{ route('cursos.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                <i class="fa fa-fw fa-edit"></i> Agregar </a>
+                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                Crear
+                            </a>
 
                         </div>
                     </div>
@@ -33,6 +34,7 @@
                     </ul>
                     <div class="tab-content" id="pills-tabContent">
                         @foreach ($tickets as $ticket)
+                        @include('admin.cursos.add_lista')
                             <div class="tab-pane fade show" id="pills-home{{$ticket->id}}" role="tabpanel" aria-labelledby="pills-home-tab{{$ticket->id}}">
                                 <div class="card-body">
                                     <h5>{{$ticket->nombre}}</h5>

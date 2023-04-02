@@ -120,6 +120,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/pagos-por-fuera/pendientes', [App\Http\Controllers\PagosFueraController::class, 'pendientes'])->name('pagos.pendientes');
     Route::get('/admin/pagos-por-fuera/deudores', [App\Http\Controllers\PagosFueraController::class, 'deudores'])->name('pagos.deudores');
 
+    // =============== M O D U L O   O R D E N E S ===============================
+    Route::post('/clientes/curso/create', [App\Http\Controllers\OrderController::class, 'pay_externo'])->name('orden.pay_externo');
+
+
     /*|--------------------------------------------------------------------------
     |Configuracion
     |--------------------------------------------------------------------------*/
@@ -127,7 +131,5 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/configuracion/update', [App\Http\Controllers\ConfiguracionController::class, 'update'])->name('update.configuracion');
 
      // =============== M O D U L O   Profile User ===============================
-
-
 });
 

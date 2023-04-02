@@ -359,7 +359,7 @@
                                                                                             style='font-size: 15px;width:530px;line-height:30px;background-image:none;background-color:transparent;padding:35px 0px 0px;border-radius:0px;border-top:0 hidden;border-right:0 hidden;border-bottom:0 hidden;border-left:0 hidden;'>
 																							<div class='text-item '><p style="text-align: center;"><span style="color: #444444;"><span style="font-size: 24px;">La liga de conexión de Google Meet es:</span></span></p>
 <p>&nbsp;</p>
-<p style="text-align: center;"><span style="text-decoration: underline;"><strong>meet.google.com/jgs-sndf-qzi</strong></span></p>
+<a style="text-align: center;" href="{{$orden_ticket->Cursos->recurso}}"><span style="text-decoration: underline;"><strong>{{$orden_ticket->Cursos->recurso}}</strong></span></a>
 <p>&nbsp;</p>
 <p style="text-align: center;">Nota importante: debes tener Google Meet descargado en tu dispositivo para poder ingresar</p>
 <p>&nbsp;</p></div>                                                                                        </td>

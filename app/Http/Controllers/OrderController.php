@@ -5,10 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Cursos;
 use App\Models\CursosTickets;
 use App\Models\Orders;
+use App\Models\User;
+use Hash;
+use Illuminate\Support\Arr;
+use Session;
 use App\Models\OrdersTickets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use session;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PlantillaNuevoUser;
+use App\Mail\PlantillaPedidoRecibido;
+use App\Mail\PlantillaTicket;
 
 class OrderController extends Controller
 {
@@ -70,9 +77,77 @@ class OrderController extends Controller
         return redirect()->route('order.show', $order);
     }
 
-    public function addToCart($id)
-
+    public function pay_externo(Request $request)
     {
+        $this->validate($request, [
+            'name' => 'required',
+            'email' => 'required',
+            'telefono' => 'required'
+        ]);
+
+        if(User::where('telefono', $request->telefono)->exists()){
+            $fechaActual = date('Y-m-d');
+            $user = User::where('telefono', '=', $request->telefono)->first();
+            $order = new Orders;
+            $order->id_usuario = $user->id;
+            $order->pago = $request->precio ;
+            $order->forma_pago = 'Externo';
+            $order->fecha = $fechaActual ;
+            $order->estatus = 1;
+            $order->save();
+
+            $order_ticket = new OrdersTickets;
+            $order_ticket->id_order = $order->id;
+            $order_ticket->id_tickets = $request->ticket;
+            $order_ticket->id_usuario = $user->id;
+            $order_ticket->id_curso = $request->curso;
+            $order_ticket->save();
+
+            $recibido = Orders::where('id', '=', $order->id)->first();
+            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->first();
+
+            Mail::to($request->email)->send(new PlantillaPedidoRecibido($orden_ticket));
+            Mail::to($request->email)->send(new PlantillaTicket($orden_ticket));
+        }else{
+            $fechaActual = date('Y-m-d');
+            $user = new User;
+            $user->name = $request->get('name');
+            $user->email = $request->get('email');
+            $user->telefono = $request->get('telefono');
+            $user->cliente = '1';
+            $user->password = Hash::make($request->get('telefono'));
+            $user->save();
+
+            $order = new Orders;
+            $order->id_usuario = $user->id;
+            $order->pago = $request->precio ;
+            $order->forma_pago = 'Externo';
+            $order->fecha = $fechaActual ;
+            $order->estatus = 1;
+            $order->save();
+
+            $order_ticket = new OrdersTickets;
+            $order_ticket->id_order = $order->id;
+            $order_ticket->id_tickets = $request->ticket;
+            $order_ticket->id_usuario = $user->id;
+            $order_ticket->id_curso = $request->curso;
+            $order_ticket->save();
+
+            // Enviar el correo electrónico
+            $datos = User::where('id', '=', $user->id)->first();
+            $recibido = Orders::where('id', '=', $order->id)->first();
+            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->first();
+
+            Mail::to($user->email)->send(new PlantillaNuevoUser($datos));
+            Mail::to($user->email)->send(new PlantillaPedidoRecibido($orden_ticket));
+            Mail::to($user->email)->send(new PlantillaTicket($orden_ticket));
+        }
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return back()->with('success','User created successfully');
+    }
+
+    public function addToCart($id){
         $product = CursosTickets::findOrFail($id);
         $cart = session()->get('cart', []);
 
