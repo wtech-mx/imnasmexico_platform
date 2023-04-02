@@ -14,7 +14,7 @@
 
 .ttile_categoria_product{
     color: #836262;
-    font-size: 25px;
+    font-size: 23px;
     margin-top: 30px;
     font-weight: 400;
 }
@@ -23,16 +23,16 @@
 
 }
 
-.img_slider_product{
+/* .img_slider_product{
     width: 90%;
-}
+} */
 
 .space_productos_slider{
 
 }
 
 .tittle_product_slider{
-    font-size: 30px;
+    font-size: 25px;
     font-weight: 400;
     color:#000;
     line-height: 35px;
@@ -48,5 +48,5 @@
 
 .owl-carousel .owl-item img {
     display: block;
-    width: 400px!important;
+    width: 250px!important;
 }

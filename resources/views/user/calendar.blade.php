@@ -38,7 +38,7 @@
             $dia = date("d", strtotime($curso->fecha_inicial));
             $mes = date("M", strtotime($curso->fecha_inicial));
         @endphp
-            <div class="carousel-item active" style="background-image: url('{{asset('curso/'. $curso->foto) }}')">
+            <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{asset('curso/'. $curso->foto) }}')">
                 <div class="row postion_row_caledanrio">
                 <div class="col-12 col-md-6">
                     <div class="conten_slilder_full">

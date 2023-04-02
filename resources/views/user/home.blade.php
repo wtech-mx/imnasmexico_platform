@@ -58,7 +58,7 @@ crossorigin="anonymous" />
                         $dia = date("d", strtotime($curso->fecha_inicial));
                         $mes = date("M", strtotime($curso->fecha_inicial));
                     @endphp
-                    <div class="carousel-item active">
+                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                         <div class="d-flex justify-content-center">
 
                             <div class="card card-custom" style="">
@@ -541,7 +541,7 @@ crossorigin="anonymous" />
                     @php
                         $dia = date("d/m", strtotime($curso->fecha_inicial));
                     @endphp
-                        <div class="carousel-item active">
+                        <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                             <div class="d-flex justify-content-center">
                                 <div class="card card-custom" style="">
                                     <img class="card_image" src="{{asset('curso/'. $curso->foto) }}" class="card-img-top" alt="...">
