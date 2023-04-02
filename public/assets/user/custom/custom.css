@@ -448,6 +448,13 @@
     text-decoration: none!important;
   }
 
+  .img_certificados_general{
+    width: 100%;
+    background-color: #836262;
+    padding: 10px 5px 10px 15px;
+    border-radius: 19px;
+}
+
 
 @media only screen and (max-width: 1390px) {
 

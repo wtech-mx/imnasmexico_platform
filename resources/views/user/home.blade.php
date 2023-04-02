@@ -121,46 +121,53 @@ crossorigin="anonymous" />
 
         <div class="col-6 col-md-3">
             <div class="d-flex justify-content-center">
-                <div class="card_certificaciones">
-                    <p class="text-center">
-                        <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/sepconocer.png')}}" alt="">
-                    </p>
-                </div>
+                <a data-bs-toggle="modal" data-bs-target="#redconcer">
+                    <div class="card_certificaciones">
+                        <p class="text-center">
+                            <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                        </p>
+                    </div>
+                </a>
             </div>
 
         </div>
 
         <div class="col-6 col-md-3">
             <div class="d-flex justify-content-center">
+                <a data-bs-toggle="modal" data-bs-target="#revoe">
                 <div class="card_certificaciones">
                     <p class="text-center">
                         <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/revoe.png')}}" alt="">
                     </p>
                 </div>
+                </a>
             </div>
 
         </div>
 
         <div class="col-6 col-md-3">
             <div class="d-flex justify-content-center">
-                <div class="card_certificaciones">
-                    <p class="text-center">
-                        <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/unam.png')}}" alt="">
-                    </p>
-                </div>
+                <a data-bs-toggle="modal" data-bs-target="#unam">
+                    <div class="card_certificaciones">
+                        <p class="text-center">
+                            <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/unam.png')}}" alt="">
+                        </p>
+                    </div>
+                </a>
             </div>
 
         </div>
 
         <div class="col-6 col-md-3">
             <div class="d-flex justify-content-center">
-                <div class="card_certificaciones">
-                    <p class="text-center">
-                        <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/stps.png')}}" alt="">
-                    </p>
-                </div>
+                <a data-bs-toggle="modal" data-bs-target="#stps">
+                    <div class="card_certificaciones">
+                        <p class="text-center">
+                            <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/stps.png')}}" alt="">
+                        </p>
+                    </div>
+                </a>
             </div>
-
         </div>
 
         <div class="col-12 tittle_section2 mb-3">
@@ -724,6 +731,8 @@ crossorigin="anonymous" />
     </div>
 </section>
 {{-- Ubicacion --}}
+
+@include('user.components.modal_certificados');
 
 @endsection
 
