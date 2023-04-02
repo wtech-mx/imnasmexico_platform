@@ -16,22 +16,25 @@
       <div class="collapse navbar-collapse nav_resp" id="navbarNavDropdown">
         <ul class="navbar-nav me-auto navbar_ul_custom my-2 my-lg-0 navbar-nav-scroll" style="">
           <li class="nav-item">
-            <a class="nav-link nav_link_custom active" aria-current="page" href="{{ route('cursos.index_user') }}">Calendario</a>
+            <a class="nav-link nav_link_custom {{ (Request::is('/*') ? 'active' : '') }}" aria-current="page" href="{{ route('user.home') }}">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav_link_custom" href="avales">Avales</a>
+            <a class="nav-link nav_link_custom {{ (Request::is('calendario*') ? 'active' : '') }}" aria-current="page" href="{{ route('cursos.index_user') }}">Calendario</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav_link_custom" href="paquetes">Paquetes</a>
+            <a class="nav-link nav_link_custom {{ (Request::is('avales*') ? 'active' : '') }}" href="avales">Avales</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav_link_custom" href="#">Nosotros</a>
+            <a class="nav-link nav_link_custom {{ (Request::is('paquetes*') ? 'active' : '') }}" href="paquetes">Paquetes</a>
           </li>
+          {{-- <li class="nav-item">
+            <a class="nav-link nav_link_custom {{ (Request::is('calendario*') ? 'active' : '') }}" href="#">Nosotros</a>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link nav_link_custom" href="#">Tienda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav_link_custom" href="nuestras_instalaciones">Instalaciones</a>
+            <a class="nav-link nav_link_custom {{ (Request::is('nuestras_instalaciones*') ? 'active' : '') }}" href="nuestras_instalaciones">Instalaciones</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav_link_custom" data-bs-toggle="modal" data-bs-target="#checkout_modal" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ count((array) session('cart')) }}</a>
