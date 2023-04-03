@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\WebhooksController;
+use App\Http\Controllers\StripePaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -132,4 +133,14 @@ Route::group(['middleware' => ['auth']], function() {
 
      // =============== M O D U L O   Profile User ===============================
 });
+
+// Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');
+// Route::post('/admin/pagos-por-fuera/inscripcion/store', [App\Http\Controllers\StripePaymentController::class, 'store'])->name('pagos.store');
+
+
+Route::controller(StripePaymentController::class)->group(function(){
+    Route::get('/stripe', 'stripe');
+    Route::post('stripe', 'stripePost')->name('stripe.post');
+});
+
 
