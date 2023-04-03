@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\PlantillaNuevoUser;
 use App\Mail\PlantillaPedidoRecibido;
 use App\Mail\PlantillaTicket;
+use Stripe;
 
 class OrderController extends Controller
 {
@@ -73,6 +74,42 @@ class OrderController extends Controller
 
             $request->session()->flush();
         }
+
+        return redirect()->route('order.show', $order);
+    }
+
+    public function pay_stripe(Orders $order, Request $request){
+        $fechaActual = date('Y-m-d');
+        $total = 0;
+        foreach(session('cart') as $id => $details){
+            $total += $details['price'] * $details['quantity'];
+        }
+
+        $order = new Orders;
+        $order->id_usuario = 1;
+        $order->pago = $total ;
+        $order->forma_pago = 'Mercado Pago';
+        $order->fecha = $fechaActual ;
+        $order->estatus = 0;
+        $order->save();
+
+        foreach(session('cart') as $id => $details){
+            $order_ticket = new OrdersTickets;
+            $order_ticket->id_order = $order->id;
+            $order_ticket->id_tickets = $details['id'];
+            $order_ticket->save();
+        }
+
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $stripe = Stripe\Charge::create ([
+                "amount" => $total * 100,
+                "currency" => "MXN",
+                "source" => $request->stripeToken,
+                "description" => "Test payment from itsolutionstuff.com."
+        ]);
+
+        dd($stripe);
 
         return redirect()->route('order.show', $order);
     }
