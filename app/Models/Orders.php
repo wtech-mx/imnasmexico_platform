@@ -25,4 +25,9 @@ class Orders extends Model
     {
         return $this->hasOne('App\Models\OrdersTickets', 'id_order', 'id');
     }
+    
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
 }

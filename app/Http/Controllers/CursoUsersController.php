@@ -34,6 +34,21 @@ class CursoUsersController extends Controller
         return view('user.single_course', compact('curso', 'tickets'));
     }
 
+    public function paquetes()
+    {
+        $fechaActual = date('Y-m-d');
+        $curso = Cursos::where('precio','<=', 600)->where('modalidad','=', 'Online')->get();
+
+        $tickets = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+        ->where('cursos_tickets.precio','<=', 600)
+        ->where('cursos_tickets.fecha_inicial','<=', $fechaActual)
+        ->where('cursos_tickets.fecha_final','>=', $fechaActual)
+        ->where('cursos.modalidad','=', 'Online')
+        ->get();
+
+        return view('user.paquetes', compact('curso', 'tickets'));
+    }
+
     public function advance(Request $request, Cursos $cursos) {
         $fechaActual = date('Y-m-d');
         $tickets = CursosTickets::where('fecha_final','>=', $fechaActual)->get();

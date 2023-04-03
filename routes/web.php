@@ -32,10 +32,6 @@ Route::get('avales', function () {
     return view('user.avales');
 });
 
-Route::get('paquetes', function () {
-    return view('user.paquetes');
-});
-
 Route::get('orden', function () {
     return view('user.order');
 });
@@ -66,11 +62,14 @@ Route::get('/curso/{slug}', [App\Http\Controllers\CursoUsersController::class, '
 Route::get('/calendario', [App\Http\Controllers\CursoUsersController::class, 'index_user'])->name('cursos.index_user');
 Route::get('/calendario/advance', [App\Http\Controllers\CursoUsersController::class, 'advance'])->name('advance_search');
 
+// =============== P A Q U E T E S ===============
+Route::get('/paquetes', [App\Http\Controllers\CursoUsersController::class, 'paquetes'])->name('cursos.paquetes');
+
 // =============== P A G O S ===============================
 Route::post('/webhooks', WebhooksController::class);
 
 Route::get('/orders/pay', [OrderController::class, 'pay'])->name('order.pay');
-Route::get('/orders/{order}/show', [OrderController::class, 'show'])->name('order.show');
+Route::get('/orders/{code}/show', [OrderController::class, 'show'])->name('order.show');
 
 Route::post('/orders/pay/stripe', [OrderController::class, 'pay_stripe'])->name('order.pay_stripe');
 
@@ -80,7 +79,7 @@ Route::patch('/update-cart', [OrderController::class, 'update'])->name('update.c
 Route::delete('/remove-from-cart', [OrderController::class, 'remove'])->name('remove.from.cart');
 
 // =============== L O G I N  U S E R S ===============================
-Route::get('perfil', [App\Http\Controllers\ClientsController::class, 'index'])->name('perfil.index');
+Route::get('perfil/{code}', [App\Http\Controllers\ClientsController::class, 'index'])->name('perfil.index');
 
 Route::post('custom-login', [App\Http\Controllers\CustomAuthController::class, 'customLogin'])->name('login.custom');
 Route::post('custom-registration', [App\Http\Controllers\CustomAuthController::class, 'customRegistration'])->name('register.custom');
@@ -138,9 +137,9 @@ Route::group(['middleware' => ['auth']], function() {
 // Route::post('/admin/pagos-por-fuera/inscripcion/store', [App\Http\Controllers\StripePaymentController::class, 'store'])->name('pagos.store');
 
 
-Route::controller(StripePaymentController::class)->group(function(){
-    Route::get('/stripe', 'stripe');
-    Route::post('stripe', 'stripePost')->name('stripe.post');
-});
+// Route::controller(StripePaymentController::class)->group(function(){
+//     Route::get('/stripe', 'stripe');
+//     Route::post('stripe', 'stripePost')->name('stripe.post');
+// });
 
 

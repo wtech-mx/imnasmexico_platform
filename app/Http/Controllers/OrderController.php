@@ -17,15 +17,12 @@ use App\Mail\PlantillaNuevoUser;
 use App\Mail\PlantillaPedidoRecibido;
 use App\Mail\PlantillaTicket;
 use Stripe;
+use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
-    public function add_to_cart(CursosTickets $ticket){
-        dd($ticket);
-    }
-
-    public function show($order){
-        $order = Orders::findOrFail($order);
+    public function show($code){
+        $order = Orders::where('code', $code)->firstOrFail();
         $order_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
 
         return view('user.order', compact('order', 'order_ticket'));
@@ -37,6 +34,7 @@ class OrderController extends Controller
         foreach(session('cart') as $id => $details){
             $total += $details['price'] * $details['quantity'];
         }
+        $code = Str::random(8);
 
         $order = new Orders;
         $order->id_usuario = 1;
@@ -44,12 +42,15 @@ class OrderController extends Controller
         $order->forma_pago = 'Mercado Pago';
         $order->fecha = $fechaActual ;
         $order->estatus = 0;
+        $order->code = $code;
         $order->save();
 
         foreach(session('cart') as $id => $details){
             $order_ticket = new OrdersTickets;
             $order_ticket->id_order = $order->id;
+            $order_ticket->id_usuario = 3;
             $order_ticket->id_tickets = $details['id'];
+            $order_ticket->id_curso = $details['curso'];
             $order_ticket->save();
         }
 
@@ -66,13 +67,10 @@ class OrderController extends Controller
             $order->update();
 
             $request->session()->flush();
-        }elseif($status == 'approved'){
-            $order = Orders::find($order->id);
-            $order->num_order = $payment_id;
-            $order->estatus = 1;
-            $order->update();
 
-            $request->session()->flush();
+            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->first();
+            Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
+            Mail::to($order->User->email)->send(new PlantillaTicket($orden_ticket));
         }
 
         return redirect()->route('order.show', $order);
@@ -84,19 +82,23 @@ class OrderController extends Controller
         foreach(session('cart') as $id => $details){
             $total += $details['price'] * $details['quantity'];
         }
+        $code = Str::random(8);
 
         $order = new Orders;
         $order->id_usuario = 1;
         $order->pago = $total ;
-        $order->forma_pago = 'Mercado Pago';
+        $order->forma_pago = 'STRIPE';
         $order->fecha = $fechaActual ;
         $order->estatus = 0;
+        $order->code = $code;
         $order->save();
 
         foreach(session('cart') as $id => $details){
             $order_ticket = new OrdersTickets;
             $order_ticket->id_order = $order->id;
+            $order_ticket->id_usuario = 3;
             $order_ticket->id_tickets = $details['id'];
+            $order_ticket->id_curso = $details['curso'];
             $order_ticket->save();
         }
 
@@ -106,10 +108,21 @@ class OrderController extends Controller
                 "amount" => $total * 100,
                 "currency" => "MXN",
                 "source" => $request->stripeToken,
-                "description" => "Test payment from itsolutionstuff.com."
+                "description" => $order_ticket->Cursos->nombre
         ]);
 
-        dd($stripe);
+        if($stripe->status == 'succeeded'){
+            $order = Orders::find($order->id);
+            $order->num_order = $stripe->id;
+            $order->estatus = 1;
+            $order->update();
+
+            $request->session()->flush();
+
+            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->first();
+            Mail::to($order_ticket->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
+            Mail::to($order_ticket->User->email)->send(new PlantillaTicket($orden_ticket));
+        }
 
         return redirect()->route('order.show', $order);
     }
@@ -121,7 +134,7 @@ class OrderController extends Controller
             'email' => 'required',
             'telefono' => 'required'
         ]);
-
+        $code = Str::random(8);
         if(User::where('telefono', $request->telefono)->exists()){
             $fechaActual = date('Y-m-d');
             $user = User::where('telefono', '=', $request->telefono)->first();
@@ -131,6 +144,7 @@ class OrderController extends Controller
             $order->forma_pago = 'Externo';
             $order->fecha = $fechaActual ;
             $order->estatus = 1;
+            $order->code = $code;
             $order->save();
 
             $order_ticket = new OrdersTickets;
@@ -161,6 +175,7 @@ class OrderController extends Controller
             $order->forma_pago = 'Externo';
             $order->fecha = $fechaActual ;
             $order->estatus = 1;
+            $order->code = $code;
             $order->save();
 
             $order_ticket = new OrdersTickets;
@@ -203,6 +218,7 @@ class OrderController extends Controller
 
                 "id" => $product->id,
                 "name" => $product->nombre,
+                "curso" => $product->id_curso,
                 "quantity" => 1,
                 "price" => $precio,
                 "image" => $product->imagen

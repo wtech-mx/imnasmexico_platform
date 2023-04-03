@@ -76,6 +76,7 @@ class CursosController extends Controller
                 'precio' => $precio_ticket[$count],
                 'fecha_inicial' => $fecha_inicial_ticket[$count],
                 'fecha_final' => $fecha_final_ticket[$count],
+                'imagen' => $curso->foto,
             );
             $insert_data[] = $data;
         }

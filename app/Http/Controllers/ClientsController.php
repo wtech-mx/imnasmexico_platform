@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 
 class ClientsController extends Controller
 {
-    public function index()
+    public function index($code)
     {
-        $cliente = User::find(auth()->user()->id);
+        $cliente = User::where('code', $code)->firstOrFail();
         $orders = Orders::where('id_usuario', '=', auth()->user()->id)->get();
         $order_ticket = OrdersTickets::get();
 

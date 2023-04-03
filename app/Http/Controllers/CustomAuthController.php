@@ -5,6 +5,8 @@ use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
+
 class CustomAuthController extends Controller
 {
 
@@ -46,13 +48,15 @@ class CustomAuthController extends Controller
 
     public function create(array $data)
     {
-      return User::create([
-        'name' => $data['name'],
-        'email' => $data['email'],
-        'telefono' => $data['telefono'],
-        'password' => Hash::make($data['telefono']),
-        'cliente' => $data['cliente'],
-      ]);
+        $code = Str::random(8);
+        $usuario = new User;
+        $usuario->name = $data['name'];
+        $usuario->email = $data['email'];
+        $usuario->telefono = $data['telefono'];
+        $usuario->password = $data['telefono'];
+        $usuario->cliente = $data['cliente'];
+        $usuario->code = $code;
+        $usuario->save();
     }
 
     public function dashboard()

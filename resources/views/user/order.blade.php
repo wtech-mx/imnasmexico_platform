@@ -9,7 +9,10 @@
 @endsection
 
 @section('content')
-
+@php
+    $date = $order->fecha;
+    $newDate = date("d-m-Y", strtotime($date));
+@endphp
 <section class="primario bg_overley" style="background-color:#836262;">
     <div class="row">
         <div class="col-12">
@@ -25,7 +28,7 @@
             <h2 class="text-center subtittle_thanks">Compra Realizada con éxito</h2>
 
             <div class="d-flex justify-content-center">
-                <a class="btn btn_thanks me-3">
+                <button class="btn btn_thanks me-3" onclick="scrollDown()">
                     <div class="d-flex justify-content-around">
                         <p class="card_tittle_btn my-auto">
                             Ver detalles del pedido
@@ -34,7 +37,7 @@
                             <i class="fas fa-cart-plus card_icon_thanks"></i>
                         </div>
                     </div>
-                </a>
+                </button>
             </div>
 
         </div>
@@ -48,10 +51,9 @@
     <div class="col-12 col-md-6">
         <div class="card_tanks">
             <h3 class="tittle_card_thanks">Datos del cliente</h3>
-            <p class="facts_thanks"><strong>Nombre:</strong> Josue Adrian </p>
-            <p class="facts_thanks"><strong>Apellido:</strong> Ramirez Hernandez</p>
-            <p class="facts_thanks"><strong>Correo:</strong> dinopiza@yahoo.com</p>
-            <p class="facts_thanks"><strong>Teléfono:</strong> 5529291962</p>
+            <p class="facts_thanks"><strong>Nombre:</strong> {{$order->User->name }}</p>
+            <p class="facts_thanks"><strong>Correo:</strong> {{$order->User->email }}</p>
+            <p class="facts_thanks"><strong>Teléfono:</strong> {{$order->User->telefono }}</p>
         </div>
     </div>
 
@@ -59,26 +61,26 @@
         <div class="card_tanks">
             <h3 class="tittle_card_thanks">Datos del pedido</h3>
             @foreach ($order_ticket as $item)
-                <p class="facts_thanks"><strong>Curso:</strong>{{$item->CursosTickets->nombre}}</p>
+                <p class="facts_thanks"><strong>Curso: </strong>{{$item->CursosTickets->nombre}}</p>
             @endforeach
-            <p class="facts_thanks"><strong>Método de pago:</strong>{{$order->forma_pago}}</p>
+            <p class="facts_thanks"><strong>Método de pago: </strong>{{$order->forma_pago}} </p>
             <p class="facts_thanks"><strong>Estado:</strong>
-                @if ($order->forma_pago == 1)
+                @if ($order->estatus == 1)
                     Aprovado
                 @else
                     Pendiente
                 @endif
 
             </p>
-            <p class="facts_thanks"><strong>Costo:</strong>${{$order->pago}}</p>
-            <p class="facts_thanks"><strong>Fecha:</strong> {{$order->fecha}}</p>
-            <p class="facts_thanks"><strong>Num pedido:</strong> {{$order->id}}</p>
+            <p class="facts_thanks"><strong>Costo: </strong>${{$order->pago}} mxn</p>
+            <p class="facts_thanks"><strong>Fecha: </strong> {{ $newDate}}</p>
+            <p class="facts_thanks"><strong>Num pedido:</strong> #{{$order->id}}</p>
         </div>
     </div>
 
     <div class="col-12">
         <div class="d-flex justify-content-center">
-            <a class="btn btn_thanks_2 me-3">
+            <a class="btn btn_thanks_2 me-3" href="{{ route('cursos.index_user') }}">
                 <div class="d-flex justify-content-around">
                     <p class="card_tittle_btn_2 my-auto">
                         Ver todas las Certificaciones
@@ -101,6 +103,11 @@
 
 @section('js')
 
+    <script>
+        function scrollDown() {
+         window.scrollBy(0, 300);
+        }
+    </script>
 
 @endsection
 
