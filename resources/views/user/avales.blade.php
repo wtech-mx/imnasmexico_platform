@@ -1035,6 +1035,12 @@ crossorigin="anonymous" />
             </p>
         </div>
 
+        <div class="col-12">
+            <p class="parrafo_avales_2">
+                El registro nacional del  instituto mexicano naturales ain spa es un registro interno donde se lleva un padrón detallado de cada uno de los alumnos que han acreditado las carreras, diplomados y certificaciones de acuerdo a los estatus requeridos en cada uno de ellos otorgando así credibilidad y sustento de los conocimientos , capacidades y aptitudes del egresado
+            </p>
+        </div>
+
         <div class="col-12 col-md-4 mt-5">
           <div class="container_nums">
             <div class="d-flex justify-content-start">

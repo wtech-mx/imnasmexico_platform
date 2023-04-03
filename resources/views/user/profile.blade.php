@@ -7,6 +7,8 @@
 @section('css_custom')
 <link href="{{ asset('assets/user/custom/single_cours.css')}}" rel="stylesheet" />
 <link href="{{ asset('assets/user/custom/perfil.css')}}" rel="stylesheet" />
+
+
 @endsection
 
 @section('content')
@@ -14,7 +16,7 @@
 
 <section class="primario bg_overley" style="background:#836262;">
 
-    <div class="tab_section margin_home_nav">
+    <div class="tab_section margin_home_nav desaparecer_contenedor_sm">
 
         <div class="d-flex align-items-start">
             <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -70,14 +72,14 @@
 
               <div class="tab-pane fade show active" id="v-pills-informacion" role="tabpanel" aria-labelledby="v-pills-informacion-tab" tabindex="0">
                 <div class="row">
-                    <div class="col-7">
+                    <div class="col-12 col-xl-7">
                         <div class="row">
 
                             <div class="col-12">
                                 <h2 class="title_curso mb-5">Datos de cliente</h2>
                             </div>
 
-                            <div class="col-6 form-group ">
+                            <div class="col-12 col-lg-6 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
                                     <img class="img_profile_label" src="{{ asset('assets/user/icons/usuario.png')}}" alt="">
@@ -87,7 +89,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-6 form-group ">
+                            <div class="col-12 col-lg-6 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
                                     <img class="img_profile_label" src="{{ asset('assets/user/icons/letter.png')}}" alt="">
@@ -97,7 +99,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-6 form-group ">
+                            <div class="col-12 col-lg-6 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
                                     <img class="img_profile_label" src="{{ asset('assets/user/icons/ring-phone.png')}}" alt="">
@@ -111,7 +113,7 @@
                                 <h2 class="title_curso mb-5">Dirección de envio</h2>
                             </div>
 
-                            <div class="col-6 form-group ">
+                            <div class="col-12 col-lg-6 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
                                     <img class="img_profile_label" src="{{ asset('assets/user/icons/edificio.png')}}" alt="">
@@ -121,7 +123,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-6 form-group ">
+                            <div class="col-12 col-lg-6 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
                                     <img class="img_profile_label" src="{{ asset('assets/user/icons/cp.png')}}" alt="">
@@ -131,7 +133,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-4 form-group ">
+                            <div class="col-6 col-lg-4 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
                                     <img class="img_profile_label" src="{{ asset('assets/user/icons/location-pointer.png')}}" alt="">
@@ -141,17 +143,17 @@
                                 </div>
                             </div>
 
-                            <div class="col-4 form-group ">
+                            <div class="col-6 col-lg-4 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
                                     <img class="img_profile_label" src="{{ asset('assets/user/icons/ring-phone.png')}}" alt="">
                                 </span>
 
-                                <input class="form-control" type="text"  id="nombre" name="nombre" >
+                                <input class="form-control" type="text"  id="telefono" name="telefono" placeholder="Telefono">
                                 </div>
                             </div>
 
-                            <div class="col-4 form-group ">
+                            <div class="col-12 col-lg-4 form-group ">
                                 <a class="btn_save_profile" href="">
                                     Guardar
                                 </a>
@@ -163,9 +165,9 @@
               </div>
 
               <div class="tab-pane fade" id="v-pills-objetivos" role="tabpanel" aria-labelledby="v-pills-objetivos-tab" tabindex="0">
-                <div class="row">
+                <div class="row space_laaterales_profile">
 
-                    <div class="col-12">
+                    <div class="col-12 space_laaterales_profile">
                         <h2 class="title_curso mb-5">Mis compras</h2>
                     </div>
                     <table class="table">
@@ -237,6 +239,206 @@
             </div>
           </div>
 
+    </div>
+
+    <div class="tab_content_tabs_mobil">
+        <nav class="nav_tab_mb">
+            <div class="nav nav-tabs centrar_tabs" id="nav-tab" role="tablist">
+                <div class="d-flex justify-content-between  mb-3">
+
+                    <button class="nav-link active" id="nav-infor_res-tab" data-bs-toggle="tab" data-bs-target="#nav-infor_res" type="button" role="tab" aria-controls="nav-infor_res" aria-selected="true">
+                        Mi Perfil <img class="icon_res_tabs" src="{{ asset('assets/user/icons/informacion.png')}}" alt="">
+                    </button>
+
+                    <button class="nav-link" id="nav-profile_res-tab" data-bs-toggle="tab" data-bs-target="#nav-profile_res" type="button" role="tab" aria-controls="nav-profile_res" aria-selected="false">
+                        Compras <img class="icon_res_tabs" src="{{ asset('assets/user/icons/objetivo.webp')}}" alt="">
+                    </button>
+
+                    <button class="nav-link" id="nav-temarios_res-tab" data-bs-toggle="tab" data-bs-target="#nav-temarios_res" type="button" role="tab" aria-controls="nav-temarios_res" aria-selected="false">
+                        Material de clase <img class="icon_res_tabs" src="{{ asset('assets/user/icons/libros.png')}}" alt="">
+                    </button>
+                </div>
+
+                <div class="d-flex justify-content-evenly">
+                    <button class="nav-link" id="nav-docus_res-tab" data-bs-toggle="tab" data-bs-target="#nav-docus_res" type="button" role="tab" aria-controls="nav-docus_res" aria-selected="false">
+                        Reconocimientos <img class="icon_res_tabs" src="{{ asset('assets/user/icons/certificacion.webp')}}" alt="">
+                    </button>
+
+                    <button class="nav-link" id="nav-dirigido_res-tab" data-bs-toggle="tab" data-bs-target="#nav-dirigido_res" type="button" role="tab" aria-controls="nav-dirigido_res" aria-selected="false">
+                        Mis Clases <img class="icon_res_tabs" src="{{ asset('assets/user/icons/video-call.png')}}" alt="">
+                    </button>
+
+                    <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false" style="background: transparent;">
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+          <div class="tab-content" id="nav-tabContent" style="padding: 0 0 30px 0;">
+            <div class="tab-pane fade show active" id="nav-infor_res" role="tabpanel" aria-labelledby="nav-infor_res-tab" tabindex="0">
+                <div class="row">
+
+                    <div class="col-12">
+                        <h2 class="title_curso mb-5">Datos de cliente</h2>
+                    </div>
+
+                    <div class="col-12 col-lg-6 form-group ">
+                        <div class="input-group input-group-alternative mb-4">
+                        <span class="input-group-text">
+                            <img class="img_profile_label" src="{{ asset('assets/user/icons/usuario.png')}}" alt="">
+                        </span>
+
+                        <input class="form-control" type="text"  id="name" name="name" value="{{$cliente->name}}">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 form-group ">
+                        <div class="input-group input-group-alternative mb-4">
+                        <span class="input-group-text">
+                            <img class="img_profile_label" src="{{ asset('assets/user/icons/letter.png')}}" alt="">
+                        </span>
+
+                        <input class="form-control" type="text"  id="email" name="email" value="{{$cliente->email}}">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 form-group ">
+                        <div class="input-group input-group-alternative mb-4">
+                        <span class="input-group-text">
+                            <img class="img_profile_label" src="{{ asset('assets/user/icons/ring-phone.png')}}" alt="">
+                        </span>
+
+                        <input class="form-control" type="number"  id="telefono" name="telefono" value="{{$cliente->telefono}}">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <h2 class="title_curso mb-5">Dirección de envio</h2>
+                    </div>
+
+                    <div class="col-12 col-lg-6 form-group ">
+                        <div class="input-group input-group-alternative mb-4">
+                        <span class="input-group-text">
+                            <img class="img_profile_label" src="{{ asset('assets/user/icons/edificio.png')}}" alt="" >
+                        </span>
+
+                        <input class="form-control prb" type="text"  id="nombre" name="nombre" placeholder="Direccion">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6 form-group ">
+                        <div class="input-group input-group-alternative mb-4">
+                        <span class="input-group-text">
+                            <img class="img_profile_label" src="{{ asset('assets/user/icons/location-pointer.png')}}" alt="">
+                        </span>
+
+                        <input class="form-control" type="text"  id="nombre" name="nombre" placeholder="Municipio y/o Provincia">
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-4 form-group ">
+                        <div class="input-group input-group-alternative mb-4">
+                        <span class="input-group-text">
+                            <img class="img_profile_label" src="{{ asset('assets/user/icons/cp.png')}}" alt="">
+
+                        </span>
+
+                        <input class="form-control" type="text"  id="nombre" name="nombre" placeholder="CP">
+                        </div>
+                    </div>
+
+                    <div class="col-6 col-lg-4 form-group ">
+                        <div class="input-group input-group-alternative mb-4">
+                        <span class="input-group-text">
+                            <img class="img_profile_label" src="{{ asset('assets/user/icons/ring-phone.png')}}" alt="">
+                        </span>
+
+                        <input class="form-control" type="text"  id="telefono" name="telefono" placeholder="Telefono">
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-4 form-group ">
+                        <a class="btn_save_profile" href="">
+                            Guardar
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="nav-profile_res" role="tabpanel" aria-labelledby="nav-profile_res-tab" tabindex="0">
+                <div class="row space_laaterales_profile">
+
+                    <div class="col-12 space_laaterales_profile">
+                        <h2 class="title_curso mb-5">Mis compras</h2>
+                    </div>
+                    <table class="table">
+                        <thead class="text-center">
+                          <tr class="tr_checkout">
+                            <th >Num. Pedido</th>
+                            <th >Fecha de Compra</th>
+                            <th >Num. Orden</th>
+                            <th >Total</th>
+                            <th>Forma de Pago</th>
+                            <th>Estado</th>
+                          </tr>
+                        </thead>
+
+                        <tbody class="text-center">
+                        @if(!empty($orders))
+                            @foreach($orders as $order)
+                                <tr>
+                                    <th>
+                                        #{{$order->id}}
+                                    </th>
+                                    <th>
+                                        {{$order->fecha}}
+                                    </th>
+                                    <td class="td_title_checkout">{{$order->num_order}}</td>
+                                    <td>${{$order->pago}}</td>
+                                    <td class="td_title_checkout">{{$order->forma_pago}}</td>
+                                    <td>
+                                        @if ($order->estatus == '1')
+                                            Completado
+                                        @else
+                                            En espera
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                            @else
+                            <p>Upps... aun no tiene compras de Curosos o Diplomados</p>
+                        @endif
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="nav-temarios_res" role="tabpanel" aria-labelledby="nav-temarios_res-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="title_curso mb-5">Material de Clase</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="nav-docus_res" role="tabpanel" aria-labelledby="nav-docus_res-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="title_curso mb-5">Reconocimientos</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="nav-dirigido_res" role="tabpanel" aria-labelledby="nav-dirigido_res-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="title_curso mb-5">Mis Clases </h2>
+                    </div>
+                </div>
+            </div>
+
+
+          </div>
     </div>
 
 </section>

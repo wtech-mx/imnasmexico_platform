@@ -260,6 +260,15 @@
         width: 100%;
     }
 
+    @media only screen and (max-width: 767px) {
+        .tittle_avales {
+            font-size: 15px;
+        }
+        .parrafo_avales_2 {
+            font-size: 12px;
+        }
+    }
+
 }
 
 

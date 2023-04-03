@@ -2,6 +2,12 @@
     width: 30px;
 }
 
+input::placeholder {
+    color: #836262!important;
+    font-weight: 400;
+    opacity: 0.3;
+}
+
 .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
     background: #F5ECE4!important;
     border: solid 2px transparent;
@@ -36,3 +42,28 @@
     text-align: center;
     white-space: nowrap;
 }
+
+.space_laaterales_profile{
+    margin-right: 3rem;
+    margin-left: 3rem;
+}
+
+@media only screen and (max-width: 1390px) {
+    .espacio_p {
+        font-size: 25px;
+    }
+
+    .space_laaterales_profile{
+        margin-right: 2rem;
+        margin-left: 2rem;
+    }
+
+}
+
+@media only screen and (max-width: 1390px) {
+    .space_laaterales_profile{
+        margin-right: 0rem;
+        margin-left: 0rem;
+    }
+}
+
