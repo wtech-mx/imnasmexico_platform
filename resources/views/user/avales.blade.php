@@ -31,9 +31,9 @@ crossorigin="anonymous" />
     </div>
 </section>
 
-<section class="primario bg_overley" style="background-color:#fff;padding: 2rem 5rem 0rem 5rem;">
+<section class="primario bg_overley padding_avales_cont" style="">
     <div class="row">
-        <div class="col-2 col-md-4">
+        <div class="col-4">
             <div class="container_img_avales">
                 <p class="text-center">
                     <img class="img_avales" src="{{ asset('assets/user/logotipos/sepconocer.png')}}" alt="">
@@ -41,7 +41,7 @@ crossorigin="anonymous" />
             </div>
         </div>
 
-        <div class="col-10 col-md-8">
+        <div class="col-8">
             <h2 class="tittle_avales">
                 Entidad de Certificación y Evaluación
                 ECE356-18 Instituto Mexicano Naturales Ain Spa
@@ -52,6 +52,14 @@ crossorigin="anonymous" />
                 individuales que una persona demuestra para brindar un servicio laboral con la calidad y excelencia que los sectores especializados requieren
             </p>
             {{-- <span class="highlight-spot " data-toggle="popover" data-content="This is an example hotspot!"></span> --}}
+        </div>
+
+        <div class="col-12">
+            <p class="parrafo_avales_2">
+                Es un documento oficial de alcance nacional expedido por el gobierno federal
+                a través del cual se reconocen conocimientos, habilidades, destrezas y actitudes
+                individuales que una persona demuestra para brindar un servicio laboral con la calidad y excelencia que los sectores especializados requieren
+            </p>
         </div>
 
         <div class="col-12 col-md-4 mt-5">
@@ -112,6 +120,8 @@ crossorigin="anonymous" />
                     <img src="{{ asset('assets/user/certificaciones/RECONOCIMIENTO-CONOCER.webp')}}" alt="" class="img_certificados">
                 </p>
         </div>
+
+
 
     </div>
 </section>
@@ -702,13 +712,12 @@ crossorigin="anonymous" />
     </div>
 </section>
 
-
-<section class="primario bg_overley" style="background-color:#fff;">
+<section class="primario bg_overley padding_avales_cont" style="background-color:#fff;">
     <div class="row">
         <div class="col-4">
             <div class="container_img_avales">
                 <p class="text-center">
-                    <img class="img_avales" src="{{ asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                    <img class="img_avales" src="{{ asset('assets/user/logotipos/revoe.webp')}}" alt="">
                 </p>
             </div>
         </div>
@@ -725,60 +734,82 @@ crossorigin="anonymous" />
             </p>
         </div>
 
-        <div class="col-4 mt-5">
+        <div class="col-12">
+            <p class="parrafo_avales_2">
+                Es el reconocimiento de validez oficial de estudios e incorporación de un programa o plan de estudios al sistema educativo nacional Si un Diplomado o Carrera lo tiene, cuenta con el aval de la Secretaría de Educación Pública a nivel federal.
+            </p>
+        </div>
+
+        <div class="col-12 col-md-4 mt-5">
           <div class="container_nums">
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07b;"></div>
-                    <p class="text_hotspot">Logos oficiales</p>
+                    <p class="text_hotspot">Sello del águila</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe077;"></div>
-                    <p class="text_hotspot">Curp</p>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe078;"></div>
                     <p class="text_hotspot">Nombre completo</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
+                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe078;"></div>
+                    <p class="text_hotspot">Curp</p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07d;"></div>
-                    <p class="text_hotspot">Nombre del estándar</p>
+                    <p class="text_hotspot">Estudios que cursaste</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07e;"></div>
-                    <p class="text_hotspot">Organismo certificado</p>
+                    <p class="text_hotspot">Programa de estudios</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe079;"></div>
-                    <p class="text_hotspot">QR SEP Conocer</p>
+                    <p class="text_hotspot">Sello y firma digital</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07a;"></div>
-                    <p class="text_hotspot">Número de folio</p>
+                    <p class="text_hotspot">QR único</p>
                 </div>
             </div>
+
+            <div class="d-flex justify-content-start">
+                <div class="content_icon_hotspot">
+                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07f;"></div>
+                    <p class="text_hotspot">Folio único</p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <div class="content_icon_hotspot">
+                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07c;"></div>
+                    <p class="text_hotspot">Página oficial
+                    </p>
+                </div>
+            </div>
+
           </div>
         </div>
 
-        <div class="col-8 mt-5">
+        <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
                     <img src="{{ asset('assets/user/certificaciones/Rectangulo-103.webp')}}" alt="" class="img_certificados">
                 </p>
@@ -787,7 +818,7 @@ crossorigin="anonymous" />
     </div>
 </section>
 
-<section class="primario bg_overley" style="background-color:#fff;">
+<section class="primario bg_overley padding_avales_cont" style="background-color:#fff;">
     <div class="row">
         <div class="col-12 mb-5">
             <h2 class="titulo_alfa text-center">¿Con cuáles</h2>
@@ -893,7 +924,7 @@ crossorigin="anonymous" />
 </section>
 
 
-<section class="primario bg_overley" style="background-color:#fff;">
+<section class="primario bg_overley padding_avales_cont" style="background-color:#fff;">
     <div class="row">
         <div class="col-4">
             <div class="container_img_avales">
@@ -915,9 +946,16 @@ crossorigin="anonymous" />
             </p>
         </div>
 
-        <div class="col-4 mt-5">
+        <div class="col-12">
+            <p class="parrafo_avales_2">
+                Es el reconocimiento de validez oficial de estudios e incorporación de un programa o plan de estudios al sistema educativo nacional Si un Diplomado o Carrera lo tiene, cuenta con el aval de la Secretaría de Educación Pública a nivel federal.
+            </p>
+        </div>
+
+
+        <div class="col-12 col-md-4 mt-5">
           <div class="container_nums">
-            <div class="d-flex justify-content-start">
+            <div class="d-flex justify-content-start ">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07b;"></div>
                     <p class="text_hotspot">Logos oficiales</p>
@@ -968,7 +1006,7 @@ crossorigin="anonymous" />
           </div>
         </div>
 
-        <div class="col-8 mt-5">
+        <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
                     <img src="{{ asset('assets/user/certificaciones/DIPLOMA-ONLINE.png')}}" alt="" class="img_certificados">
                 </p>
@@ -997,63 +1035,97 @@ crossorigin="anonymous" />
             </p>
         </div>
 
-        <div class="col-4 mt-5">
+        <div class="col-12 col-md-4 mt-5">
           <div class="container_nums">
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07b;"></div>
-                    <p class="text_hotspot">Logos oficiales</p>
+                    <p class="text_hotspot">Logo institucional</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe077;"></div>
-                    <p class="text_hotspot">Curp</p>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe078;"></div>
                     <p class="text_hotspot">Nombre completo</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
+                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe078;"></div>
+                    <p class="text_hotspot">Curso o diplomado</p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07d;"></div>
-                    <p class="text_hotspot">Nombre del estándar</p>
+                    <p class="text_hotspot">Sello STPS</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07e;"></div>
-                    <p class="text_hotspot">Organismo certificado</p>
+                    <p class="text_hotspot">Firma auténtica</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe079;"></div>
-                    <p class="text_hotspot">QR SEP Conocer</p>
+                    <p class="text_hotspot">Institución</p>
                 </div>
             </div>
 
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07a;"></div>
-                    <p class="text_hotspot">Número de folio</p>
-                </div>
-            </div>
           </div>
         </div>
 
-        <div class="col-8 mt-5">
+        <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
                     <img src="{{ asset('assets/user/certificaciones/Rectangulo-103.webp')}}" alt="" class="img_certificados">
                 </p>
+        </div>
+
+        <div class="col-12">
+
+            <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <p class="text-center">
+                            <img src="{{ asset('assets/user/certificaciones/cedula_papel.png')}}" class="img_slide_avales" alt="">
+                        </p>
+                      </div>
+
+                      <div class="carousel-item">
+                        <p class="text-center">
+                        <img src="{{ asset('assets/user/certificaciones/cedula_plastificada.png')}}" class="img_slide_avales" alt="">
+                        </p>
+                      </div>
+
+                      <div class="carousel-item">
+                        <p class="text-center">
+                        <img src="{{ asset('assets/user/certificaciones/tira_de_materias.png')}}" class="img_slide_avales" alt="...">
+                        </p>
+                      </div>
+
+                      <div class="carousel-item">
+                        <p class="text-center">
+                        <img src="{{ asset('assets/user/certificaciones/Titulo_Honorifico.png')}}" class="img_slide_avales" alt="...">
+                        </p>
+                      </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+
         </div>
 
     </div>

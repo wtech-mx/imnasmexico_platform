@@ -119,7 +119,7 @@ crossorigin="anonymous" />
 
     <div class="row mt-5">
 
-        <div class="col-6 col-md-3">
+        <div class="col-6 col-md-3 ">
             <div class="d-flex justify-content-center">
                 <a data-bs-toggle="modal" data-bs-target="#redconcer">
                     <div class="card_certificaciones">
@@ -132,7 +132,7 @@ crossorigin="anonymous" />
 
         </div>
 
-        <div class="col-6 col-md-3">
+        <div class="col-6 col-md-3 ">
             <div class="d-flex justify-content-center">
                 <a data-bs-toggle="modal" data-bs-target="#revoe">
                 <div class="card_certificaciones">
@@ -145,7 +145,7 @@ crossorigin="anonymous" />
 
         </div>
 
-        <div class="col-6 col-md-3">
+        <div class="col-6 col-md-3 mt-3 mt-md-0">
             <div class="d-flex justify-content-center">
                 <a data-bs-toggle="modal" data-bs-target="#unam">
                     <div class="card_certificaciones">
@@ -158,7 +158,7 @@ crossorigin="anonymous" />
 
         </div>
 
-        <div class="col-6 col-md-3">
+        <div class="col-6 col-md-3 mt-3 mt-md-0">
             <div class="d-flex justify-content-center">
                 <a data-bs-toggle="modal" data-bs-target="#stps">
                     <div class="card_certificaciones">
