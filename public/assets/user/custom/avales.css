@@ -1,3 +1,8 @@
+.padding_avales_cont{
+    background-color:#fff;
+    padding: 2rem 5rem 0rem 5rem;
+}
+
 .espace_tittle_avales{
     margin-top: 9rem;
 }
@@ -136,4 +141,130 @@
 .text_certifcado_2{
     color: #836262;
     font-size: 22px;
+}
+
+.img_slide_avales{
+    width: 80%;
+}
+
+
+@media only screen and (max-width: 1200px) {
+
+    /* .tittle_avales {
+        font-size: 20px;
+    }
+
+    .parrafo_avales {
+        margin-top:15px
+    } */
+
+
+    .tittle_avales {
+        font-size: 23px;
+    }
+
+    .parrafo_avales {
+        font-size: 17px;
+    }
+
+    .container_nums {
+        margin-top: 0px;
+        margin-left: 10px;
+    }
+
+}
+
+@media only screen and (max-width: 910px) {
+
+    .img_certificados {
+        width: 85%;
+    }
+
+    .content_icon_hotspot {
+        margin-bottom: 0.5rem;
+    }
+
+    .tittle_avales {
+        font-size: 20px;
+    }
+
+    .parrafo_avales {
+        font-size: 17px;
+    }
+
+    .container_nums {
+        margin-left: 0px;
+    }
+
+    .text_hotspot {
+        font-size: 20px;
+    }
+}
+
+
+@media only screen and (max-width: 910px) {
+    .padding_avales_cont{
+        padding: 2rem 1rem 0rem 1rem!important;
+    }
+
+}
+
+@media only screen and (min-width: 767px) {
+    .parrafo_avales_2{
+        display: none;
+    }
+
+}
+
+@media only screen and (max-width: 767px) {
+
+    .container_nums {
+        margin-left: 15px;
+    }
+
+    .icon_hotspot {
+        font-size: 35px;
+    }
+
+    .text_hotspot {
+        font-size: 17px;
+    }
+
+    .img_avales {
+        width: 90px;
+    }
+
+    .tittle_avales {
+        font-size: 19px;
+    }
+
+    .parrafo_avales {
+        font-size: 14px;
+        display: none;
+    }
+
+    .parrafo_avales_2{
+        margin-top: 1rem;
+        font-size: 14px;
+        color: #000;
+        font-family: "Montserrat", Sans-serif;
+        font-weight: 300;
+        text-align: center;
+    }
+
+    .content_icon_hotspot{
+        margin-left: 3rem;
+    }
+
+    .img_slide_avales {
+        width: 100%;
+    }
+
+}
+
+
+@media only screen and (max-width: 767px) {
+    .content_icon_hotspot{
+        margin-left: 1rem;
+    }
 }
