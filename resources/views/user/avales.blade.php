@@ -117,7 +117,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{ asset('assets/user/certificaciones/RECONOCIMIENTO-CONOCER.webp')}}" alt="" class="img_certificados">
+                    <img src="{{ asset('assets/user/certificaciones/RECONOCIMIENTO-CONOCER_2.PNG')}}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -811,7 +811,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{ asset('assets/user/certificaciones/Rectangulo-103.webp')}}" alt="" class="img_certificados">
+                    <img src="{{ asset('assets/user/certificaciones/revoe_documento.png')}}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -1008,7 +1008,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{ asset('assets/user/certificaciones/DIPLOMA-ONLINE.png')}}" alt="" class="img_certificados">
+                    <img src="{{ asset('assets/user/certificaciones/sep_documentos.png')}}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -1041,58 +1041,7 @@ crossorigin="anonymous" />
             </p>
         </div>
 
-        <div class="col-12 col-md-4 mt-5">
-          <div class="container_nums">
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07b;"></div>
-                    <p class="text_hotspot">Logo institucional</p>
-                </div>
-            </div>
 
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe077;"></div>
-                    <p class="text_hotspot">Nombre completo</p>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe078;"></div>
-                    <p class="text_hotspot">Curso o diplomado</p>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07d;"></div>
-                    <p class="text_hotspot">Sello STPS</p>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07e;"></div>
-                    <p class="text_hotspot">Firma auténtica</p>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe079;"></div>
-                    <p class="text_hotspot">Institución</p>
-                </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="col-12 col-md-8 mt-5">
-                <p class="text-center">
-                    <img src="{{ asset('assets/user/certificaciones/Rectangulo-103.webp')}}" alt="" class="img_certificados">
-                </p>
-        </div>
 
         <div class="col-12">
 
