@@ -5,6 +5,9 @@ use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PlantillaNuevoUser;
 use Illuminate\Support\Str;
 
 
@@ -50,18 +53,26 @@ class CustomAuthController extends Controller
         $request->validate([
             'name' => 'required',
             // 'username' => 'required|unique:users',
-            'email' => 'required',
-            'telefono' => 'required',
+            'email' => 'required|unique:users',
+            'telefono' => 'required|unique:users',
         ]);
 
-        $creat_user = new User;
-        $creat_user->name = $request->get('name');
-        $creat_user->email = $request->get('email');
-        $creat_user->telefono = $request->get('telefono');
-        $creat_user->username = $request->get('telefono');
-        $creat_user->code = rand(0, 1000);
-        $creat_user->password = Hash::make($request->get('telefono'));
-        $creat_user->save();
+        $code = Str::random(8);
+        if(User::where('telefono', $request->telefono)->exists()){
+            return back()->with('error','Email-Address And Password Are Wrong.');
+        }else{
+            $creat_user = new User;
+            $creat_user->name = $request->get('name');
+            $creat_user->email = $request->get('email');
+            $creat_user->telefono = $request->get('telefono');
+            $creat_user->username = $request->get('telefono');
+            $creat_user->code = $code;
+            $creat_user->password = Hash::make($request->get('telefono'));
+            $creat_user->save();
+            $datos = User::where('id', '=', $creat_user->id)->first();
+            Mail::to($creat_user->email)->send(new PlantillaNuevoUser($datos));
+        }
+
 
         return redirect("/")->withSuccess('has iniciado sesión');
     }

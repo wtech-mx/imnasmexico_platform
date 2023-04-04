@@ -373,12 +373,14 @@
 																							<div class='text-item '><p><span style="color: #444444;">Gracias por crear una cuenta en <strong>IMNAS MEXICO</strong></span></p>
 <p><span style="color: #444444;">&nbsp;</span></p>
 <p><strong><span style="color: #444444;">Su usuario es:</span></strong></p>
+<p><span style="color: #444444;"> {{$datos->username}}</span></p>
+<p><span style="color: #444444;">&nbsp;</span></p>
+<p><strong><span style="color: #444444;">Su correo es:</span></strong></p>
 <p><span style="color: #444444;"> {{$datos->email}}</span></p>
 <p>&nbsp;</p>
-<p><span style="color: #444444;"><strong>Su contraseña es:</strong></span></p>
-<p><span style="color: #444444;"> {{$datos->telefono}}</span></p>
-<p><span style="color: #444444;">&nbsp;</span></p>
-<p><span style="color: #444444;">Puede acceder al área de su cuenta para ver pedidos, descuentos , promociones, certificaciones, cambiar su contraseña y más.</span></p></div>                                                                                        </td>
+<p><span style="color: #444444;">Puede acceder a la plataforma con su correo o su usuario que es su numero telefonico.</span></p>
+<p>&nbsp;</p>
+<p><span style="color: #444444;">Donde vera el área de su cuenta para ver pedidos, descuentos , promociones, certificaciones y más.</span></p></div>                                                                                        </td>
                                                                                     </tr>
                                                                                 </table>
                                                                             </td>
