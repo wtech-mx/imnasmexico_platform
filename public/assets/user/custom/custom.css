@@ -26,6 +26,8 @@
     padding: 2rem 5rem 5rem 5rem;
 }
 
+input.input_custom_checkout::placeholder{color: #F5ECE4!important;}
+
 /* .mask {
     position: absolute;
     background-size: cover;
@@ -40,13 +42,7 @@
 
 /* Titulos */
 
-.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
-    color: var(--bs-nav-tabs-link-active-color);
-    background-color: #836262;
-    border-color: var(--bs-nav-tabs-link-active-border-color);
-    border-radius: 19px;
-    color: #fff;
-}
+
 
 .titulo_alfa{
     font-family: Leelawadee_1;
