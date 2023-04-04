@@ -7,24 +7,37 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+
 class CustomAuthController extends Controller
 {
 
     public function customLogin(Request $request)
     {
+
+        $input = $request->all();
+
         $request->validate([
-            'email' => 'required',
             'password' => 'required',
         ]);
 
-        $credentials = $request->only('email', 'password');
+        // $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->intended('perfil')
-                        ->withSuccess('Registrado');
+        // if (Auth::attempt($credentials)) {
+        //     return redirect()->intended('perfil')
+        //                 ->withSuccess('Registrado');
+        // }
+
+
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
+        {
+            return redirect("calendario")->withSuccess('Los datos de inicio de sesión no son válidos');
+        }else{
+            return redirect()->route('login')
+                ->with('error','Email-Address And Password Are Wrong.');
         }
 
-        return redirect("calendario")->withSuccess('Los datos de inicio de sesión no son válidos');
+
     }
 
     public function registration()
@@ -36,12 +49,19 @@ class CustomAuthController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required|email',
-            'telefono' => 'required|min:10|unique:users',
+            // 'username' => 'required|unique:users',
+            'email' => 'required',
+            'telefono' => 'required',
         ]);
 
-        $data = $request->all();
-        $check = $this->create($data);
+        $creat_user = new User;
+        $creat_user->name = $request->get('name');
+        $creat_user->email = $request->get('email');
+        $creat_user->telefono = $request->get('telefono');
+        $creat_user->username = $request->get('telefono');
+        $creat_user->code = rand(0, 1000);
+        $creat_user->password = Hash::make($request->get('telefono'));
+        $creat_user->save();
 
         return redirect("/")->withSuccess('has iniciado sesión');
     }
