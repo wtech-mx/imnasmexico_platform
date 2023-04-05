@@ -241,10 +241,9 @@ class OrderController extends Controller
 
     public function remove(Request $request)
     {
-            $cart = session()->get('cart');
-                unset($cart);
-                session()->put('cart', $cart);
-            session()->flash('success', 'Product removed successfully');
+        $cart = $request->session()->forget('cart');
+        // dd($cart);
+        return redirect()->back();
     }
 
 }
