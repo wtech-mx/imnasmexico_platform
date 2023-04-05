@@ -13,16 +13,16 @@ return new class extends Migration
     {
         Schema::create('pagos_fuera', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('correo');
-            $table->string('telefono');
-            $table->text('curso');
-            $table->text('modalidad');
-            $table->string('inscripcion');
-            $table->string('pendiente');
-            $table->string('deudor');
+            $table->string('nombre')->nullable();;
+            $table->string('correo')->nullable();;
+            $table->string('telefono')->nullable();;
+            $table->text('curso')->nullable();;
+            $table->text('modalidad')->nullable();;
+            $table->string('inscripcion')->nullable();;
+            $table->string('pendiente')->nullable();;
+            $table->string('deudor')->nullable();;
             $table->string('abono')->nullable();
-            $table->string('foto', 900);
+            $table->string('foto', 900)->nullable();;
             $table->timestamps();
         });
     }
