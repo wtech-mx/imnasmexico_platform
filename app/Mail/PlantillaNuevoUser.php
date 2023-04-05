@@ -19,6 +19,6 @@ class PlantillaNuevoUser extends Mailable
     public function build()
     {
         return $this->view('emails.create_acount')
-                    ->subject('Correo de bienvenida');
+                    ->subject('Nuevo Usuario');
     }
 }

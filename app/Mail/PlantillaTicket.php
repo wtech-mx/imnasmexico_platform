@@ -19,6 +19,6 @@ class PlantillaTicket extends Mailable
     public function build()
     {
         return $this->view('emails.liga_meet')
-                    ->subject('Correo de bienvenida');
+                    ->subject('Liga de MEET');
     }
 }

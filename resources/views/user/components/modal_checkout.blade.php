@@ -112,38 +112,6 @@
                               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
 
-                                    <div class="row">
-
-                                        <div class="col-6">
-                                            <div class="input-group flex-nowrap mt-4">
-                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                                <input type="text" class="form-control input_custom_checkout" placeholder="RFC" >
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <div class="input-group flex-nowrap mt-4">
-                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                                <input type="text" class="form-control input_custom_checkout" placeholder="Nombre" >
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <div class="input-group flex-nowrap mt-4">
-                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                                <input type="text" class="form-control input_custom_checkout" placeholder="Nombre" >
-                                            </div>
-                                        </div>
-
-                                        <div class="col-6">
-                                            <div class="input-group flex-nowrap mt-4">
-                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                                <input type="file" class="form-control input_custom_checkout" >
-                                            </div>
-                                        </div>
-
-                                    </div>
-
                                     <div class="d-flex justify-content-center">
                                         <form role="form" action="{{ route('order.pay_stripe') }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
                                             @csrf
@@ -151,8 +119,49 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="input-group flex-nowrap mt-4">
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                        <input type="text" name="razon_social" id="razon_social" class="form-control input_custom_checkout" placeholder="Nombre / Razon Social" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="input-group flex-nowrap mt-4">
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                        <input type="text" name="rfc" id="rfc" class="form-control input_custom_checkout" placeholder="RFC" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="input-group flex-nowrap mt-4">
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                        <select name="cfdi" id="cfdi" required>
+                                                            <option value="">CFDI</option>
+                                                            <option value="G01 Adquisición de Mercancías">G01 Adquisición de Mercancías</option>
+                                                            <option value="G02 Devoluciones, Descuentos o bonificaciones">G02 Devoluciones, Descuentos o bonificaciones</option>
+                                                            <option value="G03 Gastos en general">G03 Gastos en general</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="input-group flex-nowrap mt-4">
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                        <input type="text" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="input-group flex-nowrap mt-4">
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                        <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-12">
+                                                    <div class="input-group flex-nowrap mt-4">
                                                             <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-user"></i></span>
-                                                            <input class='form-control' size='4' type='text' placeholder="Nombre del titular">
+                                                            <input class='form-control' size='4' type='text' name="name" id="name" placeholder="Nombre">
                                                     </div>
                                                 </div>
 

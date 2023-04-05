@@ -478,7 +478,7 @@
                                                                                                                             style="text-align: center;">
                                                                                                                             <span
                                                                                                                                 style="font-size: 24px; color: #444444;">Orden
-                                                                                                                                #{{$orden_ticket->id}}.</span>
+                                                                                                                                #{{$id_order}}.</span>
                                                                                                                         </p>
                                                                                                                     </div>
                                                                                                                 </td>
@@ -514,7 +514,7 @@
                                                                                                                             style="text-align: center;">
                                                                                                                             <span
                                                                                                                                 style="font-size: 24px; color: #444444;">Hola
-                                                                                                                                {{$orden_ticket->User->name}},
+                                                                                                                                {{$user}},
                                                                                                                                 gracias
                                                                                                                                 por
                                                                                                                                 tu
@@ -678,6 +678,7 @@
                 <table width="100%" role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td class="" valign='middle' style="vertical-align:middle;width:150px;"><![endif]-->
+                                                                                                                            @foreach ($orden_ticket as $tickets)
                                                                                                                                             <div class='viwec-responsive '
                                                                                                                                                 style='vertical-align:middle;display:inline-block;width: 150px;'>
                                                                                                                                                 <table
@@ -690,7 +691,7 @@
                                                                                                                                                     <tr>
                                                                                                                                                         <td valign="middle"
                                                                                                                                                             style="font-size: 0;">
-                                                                                                                                                            <a href="https://imnasmexico.com/curso/{{$orden_ticket->Cursos->slug}}"
+                                                                                                                                                            <a href="https://imnasmexico.com/curso/{{$tickets->Cursos->slug}}"
                                                                                                                                                                 style="width: 150px;">
                                                                                                                                                                 <img width='100%'
                                                                                                                                                                     src='https://drive.google.com/thumbnail?id=18wbfStBein5bbAJVt9rAF6rHmejiNkP5&#038;sz=w300'>
@@ -704,40 +705,43 @@
                 <![endif]-->
                                                                                                                                             <div class='viwec-responsive'
                                                                                                                                                 style='width:258px;vertical-align:middle;display:inline-block;line-height: 150%;font-size: 15px'>
-                                                                                                                                                <table
-                                                                                                                                                    valign="middle"
-                                                                                                                                                    width="100%"
-                                                                                                                                                    border='0'
-                                                                                                                                                    cellpadding='0'
-                                                                                                                                                    cellspacing='0'
-                                                                                                                                                    style="border-collapse: collapse;">
-                                                                                                                                                    <tr>
-                                                                                                                                                        <td class="viwec-mobile-hidden"
-                                                                                                                                                            valign="middle"
-                                                                                                                                                            style="font-size:0;padding: 0;width: 15px;">
-                                                                                                                                                        </td>
-                                                                                                                                                        <td valign="middle"
-                                                                                                                                                            class="viwec-responsive-center">
-                                                                                                                                                            <a href="https://imnasmexico.com/new/producto/lipobanda-leticina-de-soya-3-piezas/"
+
+                                                                                                                                                    <table
+                                                                                                                                                        valign="middle"
+                                                                                                                                                        width="100%"
+                                                                                                                                                        border='0'
+                                                                                                                                                        cellpadding='0'
+                                                                                                                                                        cellspacing='0'
+                                                                                                                                                        style="border-collapse: collapse;">
+                                                                                                                                                        <tr>
+                                                                                                                                                            <td class="viwec-mobile-hidden"
+                                                                                                                                                                valign="middle"
+                                                                                                                                                                style="font-size:0;padding: 0;width: 15px;">
+                                                                                                                                                            </td>
+                                                                                                                                                            <td valign="middle"
                                                                                                                                                                 class="viwec-responsive-center">
-                                                                                                                                                                <span
-                                                                                                                                                                    style="margin:0;padding:0;font-size:16px;font-weight:400;font-family:Helvetica, Arial, sans-serif;color:#444444;line-height:30px;"
+                                                                                                                                                                <a href="https://imnasmexico.com/new/producto/lipobanda-leticina-de-soya-3-piezas/"
                                                                                                                                                                     class="viwec-responsive-center">
-                                                                                                                                                                    {{$orden_ticket->Cursos->nombre}}
-                                                                                                                                                                </span>
-                                                                                                                                                            </a>
-                                                                                                                                                            <p
-                                                                                                                                                                style="font-size:14px;font-weight:300;font-family:Helvetica, Arial, sans-serif;color:#444444;line-height:24px;">
-                                                                                                                                                                Cantidad:
-                                                                                                                                                                1<br>
-                                                                                                                                                            </p>
-                                                                                                                                                            <div
-                                                                                                                                                                class="woocommerce-order-item-meta">
-                                                                                                                                                            </div>
-                                                                                                                                                        </td>
-                                                                                                                                                    </tr>
-                                                                                                                                                </table>
+                                                                                                                                                                    <span
+                                                                                                                                                                        style="margin:0;padding:0;font-size:16px;font-weight:400;font-family:Helvetica, Arial, sans-serif;color:#444444;line-height:30px;"
+                                                                                                                                                                        class="viwec-responsive-center">
+                                                                                                                                                                        {{$tickets->Cursos->nombre}}
+                                                                                                                                                                    </span>
+                                                                                                                                                                </a>
+                                                                                                                                                                <p
+                                                                                                                                                                    style="font-size:14px;font-weight:300;font-family:Helvetica, Arial, sans-serif;color:#444444;line-height:24px;">
+                                                                                                                                                                    Cantidad:
+                                                                                                                                                                    1<br>
+                                                                                                                                                                </p>
+                                                                                                                                                                <div
+                                                                                                                                                                    class="woocommerce-order-item-meta">
+                                                                                                                                                                </div>
+                                                                                                                                                            </td>
+                                                                                                                                                        </tr>
+                                                                                                                                                    </table>
+
                                                                                                                                             </div>
+
                                                                                                                                             <!--[if mso | IE]></td>
                 <td class="" valign='middle' align="right" style="vertical-align:middle;width:118px;">
                 <![endif]-->
@@ -762,13 +766,14 @@
                                                                                                                                                                 style="text-align:right;white-space: nowrap;min-width: fit-content;font-size:20px;font-weight:400;font-family:Helvetica, Arial, sans-serif;color:#444444;line-height:30px;">
                                                                                                                                                                 <span
                                                                                                                                                                     class="woocommerce-Price-amount amount"><span
-                                                                                                                                                                        class="woocommerce-Price-currencySymbol">&#036;</span>{{$orden_ticket->CursosTickets->precio}}
+                                                                                                                                                                        class="woocommerce-Price-currencySymbol">&#036;</span>{{$tickets->CursosTickets->precio}}
                                                                                                                                                                 </span>
                                                                                                                                                             </p>
                                                                                                                                                         </td>
                                                                                                                                                     </tr>
                                                                                                                                                 </table>
                                                                                                                                             </div>
+                                                                                                                                            @endforeach
                                                                                                                                             <!--[if mso | IE]></td></tr></table><![endif]-->
                                                                                                                                         </td>
                                                                                                                                     </tr>
@@ -916,7 +921,7 @@
                                                                                                                                 style="font-size: 20px;">Método
                                                                                                                                 de
                                                                                                                                 pago:
-                                                                                                                                {{$orden_ticket->Orders->forma_pago}}</span>
+                                                                                                                                {{$forma_pago}}</span>
                                                                                                                         </p>
                                                                                                                     </div>
                                                                                                                 </td>
@@ -1147,7 +1152,7 @@
                                                                                                                                     style='font-weight:400;font-size:20px;line-height:30px;color:#444444'>
                                                                                                                                     <span
                                                                                                                                         class="woocommerce-Price-amount amount"><span
-                                                                                                                                            class="woocommerce-Price-currencySymbol">&#036;</span>{{$orden_ticket->CursosTickets->precio}}</span>
+                                                                                                                                            class="woocommerce-Price-currencySymbol">&#036;</span>{{$pago}}</span>
                                                                                                                                 </p>
                                                                                                                             </td>
                                                                                                                         </tr>

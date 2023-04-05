@@ -60,8 +60,12 @@ class OrderController extends Controller
         $preference->external_reference = $code;
         $preference->items = $ticketss;
 
-        if(User::where('telefono', $request->telefono)->exists()){
-           $user = User::where('telefono', $request->telefono)->first();
+        if(User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()){
+            if(User::where('telefono', $request->telefono)->exists()){
+                $user = User::where('telefono', $request->telefono)->first();
+            }else{
+                $user = User::where('email', $request->email)->first();
+            }
            $payer = $user;
         }else{
             $payer = new User;
@@ -137,21 +141,36 @@ class OrderController extends Controller
             $order->update();
 
             $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
+            $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
+            $user = $orden_ticket2->User->name;
+            $id_order = $orden_ticket2->id_order;
+            $pago = $orden_ticket2->Orders->pago;
+            $forma_pago = $orden_ticket2->Orders->forma_pago;
             // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
             foreach($orden_ticket as $details){
                 Mail::to($order->User->email)->send(new PlantillaTicket($details));
             }
+            Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago));
 
             $request->session()->flush();
         }
-
-        return redirect()->route('order.show', $order);
+        return redirect()->route('order.show', $order->code);
     }
 
     public function pay_stripe(Orders $order, Request $request){
         $code = Str::random(8);
-        if(User::where('telefono', $request->telefono)->exists()){
-            $user = User::where('telefono', $request->telefono)->first();
+        if(User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()){
+            if(User::where('telefono', $request->telefono)->exists()){
+                $user = User::where('telefono', $request->telefono)->first();
+            }else{
+                $user = User::where('email', $request->email)->first();
+            }
+            if($user->cfdi == NULL){
+                $user->razon_social = $request->get('razon_social');
+                $user->rfc = $request->get('rfc');
+                $user->cfdi = $request->get('cfdi');
+                $user->update();
+            }
             $payer = $user;
          }else{
              $payer = new User;
@@ -159,6 +178,9 @@ class OrderController extends Controller
              $payer->email = $request->get('email');
              $payer->telefono = $request->get('telefono');
              $payer->username = $request->get('telefono');
+             $payer->razon_social = $request->get('razon_social');
+             $payer->rfc = $request->get('rfc');
+             $payer->cfdi = $request->get('cfdi');
              $payer->code = $code;
              $payer->password = Hash::make($request->get('telefono'));
              $payer->save();
@@ -170,11 +192,13 @@ class OrderController extends Controller
         $total = 0;
         foreach(session('cart') as $id => $details){
             $total += $details['price'] * $details['quantity'];
+            $mult_iva = $total * .16;
+            $total_iva = $total + $mult_iva;
         }
 
         $order = new Orders;
         $order->id_usuario = $payer->id;
-        $order->pago = $total ;
+        $order->pago = $total_iva ;
         $order->forma_pago = 'STRIPE';
         $order->fecha = $fechaActual ;
         $order->estatus = 0;
@@ -193,7 +217,7 @@ class OrderController extends Controller
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
         $stripe = Stripe\Charge::create ([
-                "amount" => $total * 100,
+                "amount" => $total_iva * 100,
                 "currency" => "MXN",
                 "source" => $request->stripeToken,
                 "description" => $order_ticket->Cursos->nombre
@@ -207,12 +231,20 @@ class OrderController extends Controller
 
             $request->session()->flush();
 
-            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->first();
-            Mail::to($order_ticket->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
-            Mail::to($order_ticket->User->email)->send(new PlantillaTicket($orden_ticket));
+            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
+            $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
+            $user = $orden_ticket2->User->name;
+            $id_order = $orden_ticket2->id_order;
+            $pago = $orden_ticket2->Orders->pago;
+            $forma_pago = $orden_ticket2->Orders->forma_pago;
+            // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
+            foreach($orden_ticket as $details){
+                Mail::to($order->User->email)->send(new PlantillaTicket($details));
+            }
+            Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago));
         }
 
-        return redirect()->route('order.show', $order);
+        return redirect()->route('order.show', $order->code);
     }
 
     public function pay_externo(Request $request){
