@@ -19,6 +19,9 @@ use App\Http\Controllers\StripePaymentController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('check', function () {
+    return view('user.components.checkout_paquetes');
+});
 
 Route::get('nuestras_instalaciones', function () {
     return view('user.instalaciones');
@@ -65,7 +68,12 @@ Route::get('/calendario/advance', [App\Http\Controllers\CursoUsersController::cl
 // =============== P A Q U E T E S ===============
 Route::get('/paquetes', [App\Http\Controllers\CursoUsersController::class, 'paquetes'])->name('cursos.paquetes');
 
+Route::post('/paquetes/resultado', [App\Http\Controllers\OrderController::class, 'resultado'])->name('carrito.resultado');
+Route::get('/paquetes/resumen', [App\Http\Controllers\CursoUsersController::class, 'resumen'])->name('carrito.resumen');
+
 // =============== P A G O S ===============================
+Route::post('/process-payment', [OrderController::class, 'processPayment'])->name('process-payment');
+
 Route::post('/webhooks', WebhooksController::class);
 
 Route::get('/orders/pay', [OrderController::class, 'pay'])->name('order.pay');
@@ -73,10 +81,12 @@ Route::get('/orders/{code}/show', [OrderController::class, 'show'])->name('order
 
 Route::post('/orders/pay/stripe', [OrderController::class, 'pay_stripe'])->name('order.pay_stripe');
 
+Route::post('/paquete/pay/stripe', [OrderController::class, 'pay_stripe_paquete'])->name('order.pay_stripe_paquete');
+
 // =============== C A R R I T O ===============================
 Route::get('add-to-cart/{id}', [OrderController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('/update-cart', [OrderController::class, 'update'])->name('update.cart');
-Route::POST('/remove-from-cart', [OrderController::class, 'remove'])->name('remove.from.cart');
+Route::delete('/remove-from-cart', [OrderController::class, 'remove'])->name('remove.from.cart');
 
 // =============== L O G I N  U S E R S ===============================
 Route::get('perfil/{code}', [App\Http\Controllers\ClientsController::class, 'index'])->name('perfil.index');
@@ -132,6 +142,10 @@ Route::group(['middleware' => ['auth']], function() {
 
      // =============== M O D U L O   Profile User ===============================
 });
+
+// Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');
+// Route::post('/admin/pagos-por-fuera/inscripcion/store', [App\Http\Controllers\StripePaymentController::class, 'store'])->name('pagos.store');
+
 
 // Route::controller(StripePaymentController::class)->group(function(){
 //     Route::get('/stripe', 'stripe');

@@ -9,11 +9,11 @@ class PlantillaTicket extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $orden_ticket;
+    public $details;
 
-    public function __construct($orden_ticket)
+    public function __construct($details)
     {
-        $this->orden_ticket = $orden_ticket;
+        $this->details = $details;
     }
 
     public function build()
