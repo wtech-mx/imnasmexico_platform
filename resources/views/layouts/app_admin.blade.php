@@ -16,16 +16,16 @@
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
 
-  <link href="{{ asset('assets/admin/css/nucleo-svg.css')}}" rel="stylesheet" />
+  <link href="https://imnasmexico.com/plataforma/assets/admin/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="{{ asset('assets/admin/css/nucleo-svg.css')}}" rel="stylesheet" />
+  <link href="https://imnasmexico.com/plataforma/assets/admin/css/nucleo-svg.css" rel="stylesheet" />
   @yield('css')
    <!-- Select2  -->
-   <link rel="stylesheet" href="{{ asset('assets/admin/vendor/select2/dist/css/select2.min.css')}}">
+   <link rel="stylesheet" href="https://imnasmexico.com/plataforma/assets/admin/vendor/select2/dist/css/select2.min.css">
 
   <!-- CSS Files -->
-  <link id="pagestyle" href="{{ asset('assets/admin/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
+  <link id="pagestyle" href="https://imnasmexico.com/plataforma/assets/admin/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
 
    {{-- <link src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
   <link src="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css" rel="stylesheet" />
@@ -76,24 +76,24 @@
 
 
   <!--   Core JS Files   -->
-  {{-- <script src="{{ asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script> --}}
+  {{-- <script src="https://imnasmexico.com/plataforma/assets/admin/vendor/jquery/dist/jquery.min.js"></script> --}}
 
-  <script src="{{ asset('assets/admin/js/core/popper.min.js')}}"></script>
+  <script src="https://imnasmexico.com/plataforma/assets/admin/js/core/popper.min.js"></script>
 
-  <script src="{{ asset('assets/admin/js/core/bootstrap.min.js')}}"></script>
-  <script src="{{ asset('assets/admin/js/plugins/perfect-scrollbar.min.js')}}"></script>
-  <script src="{{ asset('assets/admin/js/plugins/smooth-scrollbar.min.js')}}"></script>
+  <script src="https://imnasmexico.com/plataforma/assets/admin/js/core/bootstrap.min.js"></script>
+  <script src="https://imnasmexico.com/plataforma/assets/admin/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="https://imnasmexico.com/plataforma/assets/admin/js/plugins/smooth-scrollbar.min.js"></script>
 
-  <script src="{{ asset('assets/admin/js/plugins/datatables.js')}}"></script>
+  <script src="https://imnasmexico.com/plataforma/assets/admin/js/plugins/datatables.js"></script>
 
-  <script src="{{ asset('assets/admin/js/plugins/fullcalendar.min.js')}}"></script>
+  <script src="https://imnasmexico.com/plataforma/assets/admin/js/plugins/fullcalendar.min.js"></script>
   <!-- Kanban scripts -->
 
-  <script src="{{ asset('assets/admin/js/plugins/dragula/dragula.min.js')}}"></script>
-  <script src="{{ asset('assets/admin/js/plugins/jkanban/jkanban.js')}}"></script>
-  <script src="{{ asset('assets/admin/js/plugins/chartjs.min.js')}}"></script>
-  <script src="{{ asset('assets/admin/js/argon-dashboard.min.js')}}"></script>
-  <script src="{{ asset('assets/admin/js/plugins/multistep-form.js')}}"></script>
+  <script src="https://imnasmexico.com/plataforma/assets/admin/js/plugins/dragula/dragula.min.js"></script>
+  <script src="https://imnasmexico.com/plataforma/assets/admin/js/plugins/jkanban/jkanban.js"></script>
+  <script src="https://imnasmexico.com/plataforma/assets/admin/js/plugins/chartjs.min.js"></script>
+  <script src="https://imnasmexico.com/plataforma/assets/admin/js/argon-dashboard.min.js"></script>
+  <script src="https://imnasmexico.com/plataforma/assets/admin/js/plugins/multistep-form.js"></script>
 
    <script src="https://cdn.tiny.cloud/1/j1jav9k6mblf3p1zkwu0fxf5yfhp7b4inzjxkxfteidvmluh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
    <script>
