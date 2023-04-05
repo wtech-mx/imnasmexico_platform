@@ -7,7 +7,7 @@
         <div class="modal-body">
           <div class="row">
 
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                 <p class="text-center tittle_modal_cka">Certificacion</p>
                 @php $total = 0 @endphp
                 <table class="table">
@@ -53,7 +53,7 @@
                 </table>
             </div>
 
-            <div class="col-6">
+            <div class="col-12 col-md-6">
                 <p class="text-center tittle_modal_cka">Detalles del cliente</p>
 
 
