@@ -76,7 +76,7 @@ Route::post('/orders/pay/stripe', [OrderController::class, 'pay_stripe'])->name(
 // =============== C A R R I T O ===============================
 Route::get('add-to-cart/{id}', [OrderController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('/update-cart', [OrderController::class, 'update'])->name('update.cart');
-Route::POST('/remove-from-cart', [OrderController::class, 'remove'])->name('remove.from.cart');
+Route::delete('/remove-from-cart', [OrderController::class, 'remove'])->name('remove.from.cart');
 
 // =============== L O G I N  U S E R S ===============================
 Route::get('perfil/{code}', [App\Http\Controllers\ClientsController::class, 'index'])->name('perfil.index');
@@ -132,6 +132,10 @@ Route::group(['middleware' => ['auth']], function() {
 
      // =============== M O D U L O   Profile User ===============================
 });
+
+// Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');
+// Route::post('/admin/pagos-por-fuera/inscripcion/store', [App\Http\Controllers\StripePaymentController::class, 'store'])->name('pagos.store');
+
 
 // Route::controller(StripePaymentController::class)->group(function(){
 //     Route::get('/stripe', 'stripe');

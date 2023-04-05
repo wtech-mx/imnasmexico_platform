@@ -58,7 +58,6 @@
         @endphp
     @endif
 
-
     <header class="header">
         @include('user.components.navbar')
     </header>
@@ -189,16 +188,15 @@
             if(confirm("¿Seguro que quieres eliminar?")) {
                 $.ajax({
                     url: '{{ route('remove.from.cart') }}',
-                    type: 'POST',
+                    method: "DELETE",
+
                     data: {
                         _token: '{{ csrf_token() }}',
                         id: ele.parents("tr").attr("data-id"),
                     },
-                    success: function(response) {
-                        location.reload();
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
+
+                    success: function (response) {
+                    //  window.location.reload();
                     }
                 });
             }

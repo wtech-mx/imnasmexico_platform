@@ -11,14 +11,6 @@
                 <p class="text-center tittle_modal_cka">Detalles del cliente</p>
 
                     <div class="row">
-
-                        <form id="datos-usuario">
-                            <input type="text" name="nombre">
-                            <input type="email" name="correo">
-                            <input type="tel" name="telefono">
-                            <button type="button" id="boton-pago">Pagar con Mercado Pago</button>
-                          </form>
-
                         <div class="col-6">
                             <div class="input-group flex-nowrap mt-4">
                                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
@@ -53,6 +45,46 @@
                             <a class="btn btn-factura" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
                                 ¿Quieres Facturar?
                             </a>
+
+                          <div style="min-height: 120px;">
+                            <div class="collapse collapse-horizontal" id="collapseWidthExample">
+                              <div class="card card-body" style="width: auto;border: solid 0px;padding: 0!important;">
+
+                                <div class="row">
+
+                                    <div class="col-6">
+                                        <div class="input-group flex-nowrap mt-4">
+                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                            <input type="text" class="form-control input_custom_checkout" placeholder="RFC" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="input-group flex-nowrap mt-4">
+                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                            <input type="text" class="form-control input_custom_checkout" placeholder="Nombre" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="input-group flex-nowrap mt-4">
+                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                            <input type="text" class="form-control input_custom_checkout" placeholder="Nombre" >
+                                        </div>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <div class="input-group flex-nowrap mt-4">
+                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                            <input type="file" class="form-control input_custom_checkout" >
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
 
                     </div>
 
@@ -116,102 +148,59 @@
                     </a>
                   </div>
 
-                  <div style="min-height: 120px;">
-                    <div class="collapse collapse-horizontal" id="collapseWidthExample">
-                      <div class="card card-body" style="width: auto;border: solid 0px;padding: 0!important;">
+                  <div class="d-flex justify-content-center">
+                    <form role="form" action="{{ route('order.pay_stripe') }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
+                        @csrf
 
                         <div class="row">
-
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="input-group flex-nowrap mt-4">
-                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                    <input type="text" class="form-control input_custom_checkout" placeholder="RFC" >
+                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-user"></i></span>
+                                        <input class='form-control' size='4' type='text' placeholder="Nombre del titular">
                                 </div>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="input-group flex-nowrap mt-4">
-                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                    <input type="text" class="form-control input_custom_checkout" placeholder="Nombre" >
+                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-credit-card"></i></i></span>
+                                    <input class='form-control card-number' autocomplete='off' size='20' type='text' placeholder="Numero de Tarjeta">
                                 </div>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-4">
                                 <div class="input-group flex-nowrap mt-4">
-                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                    <input type="text" class="form-control input_custom_checkout" placeholder="Nombre" >
+                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-numeric-up-alt"></i></span>
+                                    <input class='form-control card-cvc' autocomplete='off' placeholder='CVV' size='4' type='text'>
                                 </div>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-4">
                                 <div class="input-group flex-nowrap mt-4">
-                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                    <input type="file" class="form-control input_custom_checkout" >
+                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-calendar-alt"></i></i></span>
+                                    <input class='form-control card-expiry-month' autocomplete='off' placeholder='MES' size='2' type='text'>
                                 </div>
                             </div>
 
+                            <div class="col-4">
+                                <div class="input-group flex-nowrap mt-4">
+                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                    <input class='form-control card-expiry-year' autocomplete='off' placeholder='AÑO' size='4'type='text'>
+                                </div>
+                            </div>
+
+                            <div class="col-12 error form-group hide">
+                                <div class='alert-danger alert'>
+                                    Por favor, corrija los errores e inténtelo de nuevo
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn btn-primary btn-lg btn-block" type="submit">Comprar</button>
+                            </div>
                         </div>
 
-                        <div class="d-flex justify-content-center">
-                            <form role="form" action="{{ route('order.pay_stripe') }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
-                                @csrf
-
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="input-group flex-nowrap mt-4">
-                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-user"></i></span>
-                                                <input class='form-control' size='4' type='text' placeholder="Nombre del titular">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <div class="input-group flex-nowrap mt-4">
-                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-credit-card"></i></i></span>
-                                            <input class='form-control card-number' autocomplete='off' size='20' type='text' placeholder="Numero de Tarjeta">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <div class="input-group flex-nowrap mt-4">
-                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-numeric-up-alt"></i></span>
-                                            <input class='form-control card-cvc' autocomplete='off' placeholder='CVV' size='4' type='text'>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <div class="input-group flex-nowrap mt-4">
-                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-calendar-alt"></i></i></span>
-                                            <input class='form-control card-expiry-month' autocomplete='off' placeholder='MES' size='2' type='text'>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-4">
-                                        <div class="input-group flex-nowrap mt-4">
-                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                            <input class='form-control card-expiry-year' autocomplete='off' placeholder='AÑO' size='4'type='text'>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 error form-group hide">
-                                        <div class='alert-danger alert'>
-                                            Por favor, corrija los errores e inténtelo de nuevo
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12">
-                                        <button class="btn btn-primary btn-lg btn-block" type="submit">Comprar</button>
-                                    </div>
-                                </div>
-
-                            </form>
-                          </div>
-
-
-                      </div>
-                    </div>
+                    </form>
                   </div>
-
-
 
 
 
