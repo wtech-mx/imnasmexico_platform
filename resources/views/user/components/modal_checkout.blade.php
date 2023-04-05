@@ -8,44 +8,109 @@
           <div class="row">
 
             <div class="col-6">
+                <p class="text-center tittle_modal_cka">Certificacion</p>
+                @php $total = 0 @endphp
+                <table class="table">
+                    <thead>
+                      <tr class="tr_checkout">
+                        <th >#</th>
+                        <th >Certificado</th>
+                        <th >Costos</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                    @if(session('cart'))
+                        @foreach(session('cart') as $id => $details)
+                            @php $total += $details['price'] * $details['quantity'] @endphp
+                            <tr>
+                                <th>
+                                    <img class="image_checkout" src="{{ asset('curso/'. $details['image'] )}}" class="card-img-top" alt="...">
+                                </th>
+                                <td class="td_title_checkout">{{ $details['name'] }}</td>
+                                <td>${{ $details['price'] }}</td>
+                                {{-- <td data-th="Quantity">
+
+                                    <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity update-cart" />
+
+                                </td>
+                                <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td> --}}
+                                <td>
+                                    <a class="btn btn-danger btn-sm remove-from-cart" ><i class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @endif
+                    <tr class="tr_checkout">
+                        <th></th>
+                        <th>Total:</th>
+                        <th>$ {{ $total }}</th>
+                        <th></th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-6">
                 <p class="text-center tittle_modal_cka">Detalles del cliente</p>
 
-                <form method="POST" action="{{ route('process-payment') }}">
-                    @csrf
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="input-group flex-nowrap mt-4">
-                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
-                            </div>
-                        </div>
 
-                        <div class="col-12">
-                            <div class="input-group flex-nowrap mt-4">
-                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
-                                <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="input-group flex-nowrap mt-4">
-                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
-                                <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="card_tittle_btn my-auto" type="submit">Pagar</button>
-                </form>
 
                     <div class="col-12 mt-5">
 
-                            <a class="btn btn-factura" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWidthExample" aria-expanded="false" aria-controls="collapseWidthExample">
-                                ¿Quieres Facturar?
-                            </a>
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    Sin Factura
+                                </button>
+                              </h2>
+                              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <form method="POST" action="{{ route('process-payment') }}">
+                                                @csrf
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                        </div>
+                                                    </div>
 
-                            <div style="min-height: 120px;">
-                                <div class="collapse collapse-horizontal" id="collapseWidthExample">
-                                  <div class="card card-body" style="width: auto;border: solid 0px;padding: 0!important;">
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                            <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button class="card_tittle_btn my-auto" type="submit">Pagar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div class="accordion-item">
+                              <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    ¿Quieres Facturar?
+                                </button>
+                              </h2>
+                              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
 
                                     <div class="row">
 
@@ -135,70 +200,62 @@
 
 
                                   </div>
+
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+
+
+
+                                <div class="collapse collapse-horizontal" id="collapse_mp">
+                                    <div class="card card-body" style="width: auto;border: solid 0px;padding: 0!important;">
+
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <form method="POST" action="{{ route('process-payment') }}">
+                                                    @csrf
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                                <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                                <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                                <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button class="card_tittle_btn my-auto" type="submit">Pagar</button>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="collapse collapse-horizontal" id="collapse_factura">
+                                  <div class="card card-body" style="width: auto;border: solid 0px;padding: 0!important;">
+
+
+
                                 </div>
                               </div>
 
                     </div>
-
-            </div>
-
-            <div class="col-6">
-                <p class="text-center tittle_modal_cka">Certificacion</p>
-                @php $total = 0 @endphp
-                <table class="table">
-                    <thead>
-                      <tr class="tr_checkout">
-                        <th >#</th>
-                        <th >Certificado</th>
-                        <th >Costos</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                    @if(session('cart'))
-                        @foreach(session('cart') as $id => $details)
-                            @php $total += $details['price'] * $details['quantity'] @endphp
-                            <tr>
-                                <th>
-                                    <img class="image_checkout" src="{{ asset('curso/'. $details['image'] )}}" class="card-img-top" alt="...">
-                                </th>
-                                <td class="td_title_checkout">{{ $details['name'] }}</td>
-                                <td>${{ $details['price'] }}</td>
-                                {{-- <td data-th="Quantity">
-
-                                    <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity update-cart" />
-
-                                </td>
-                                <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td> --}}
-                                <td>
-                                    <a class="btn btn-danger btn-sm remove-from-cart" ><i class="fa fa-trash-o"></i></a>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endif
-                    <tr class="tr_checkout">
-                        <th></th>
-                        <th>Total:</th>
-                        <th>$ {{ $total }}</th>
-                        <th></th>
-                    </tr>
-                    </tbody>
-                </table>
-
-                  <p class="text-center tittle_modal_cka">Método de Pago</p>
-
-                  <div class="d-flex justify-content-center">
-                    <a class="btn  me-3" >
-                        <div class="d-flex justify-content-around">
-                            {{-- <div class="card_tittle_btn my-auto cho-container"></div> --}}
-                            {{-- <div class="card_bg_btn ">
-                                <i class="fas fa-cart-plus card_icon_btn"></i>
-                            </div> --}}
-                        </div>
-                    </a>
-                  </div>
 
             </div>
 
