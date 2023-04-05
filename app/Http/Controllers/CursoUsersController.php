@@ -45,7 +45,7 @@ class CursoUsersController extends Controller
         ->where('cursos_tickets.fecha_final','>=', $fechaActual)
         ->where('cursos.modalidad','=', 'Online')
         ->get();
-
+dd($tickets);
         return view('user.paquetes', compact('curso', 'tickets'));
     }
 

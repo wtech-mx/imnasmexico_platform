@@ -5,9 +5,9 @@ NUESTROS AVALES Y ACREDITACIONES
 @endsection
 
 @section('css_custom')
-<link href="{{ asset('assets/user/custom/avales.css')}}" rel="stylesheet" />
-<link href="{{ asset('assets/user/hotspot/bootstrap-hotspots.min.css')}}" rel="stylesheet" />
-<link rel="stylesheet" href="{{ asset('assets/metriz/Font-Face/style.css')}}" />
+<link href="{{ asset('plataforma/assets/user/custom/avales.css')}}" rel="stylesheet" />
+<link href="{{ asset('plataforma/assets/user/hotspot/bootstrap-hotspots.min.css')}}" rel="stylesheet" />
+<link rel="stylesheet" href="{{ asset('plataforma/assets/metriz/Font-Face/style.css')}}" />
 
 {{-- css carrusel --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
@@ -36,7 +36,7 @@ crossorigin="anonymous" />
         <div class="col-4">
             <div class="container_img_avales">
                 <p class="text-center">
-                    <img class="img_avales" src="{{ asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                    <img class="img_avales" src="{{ asset('plataforma/assets/user/logotipos/sepconocer.png')}}" alt="">
                 </p>
             </div>
         </div>
@@ -117,7 +117,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{ asset('assets/user/certificaciones/RECONOCIMIENTO-CONOCER_2.PNG')}}" alt="" class="img_certificados">
+                    <img src="{{ asset('plataforma/assets/user/certificaciones/RECONOCIMIENTO-CONOCER_2.PNG')}}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -146,7 +146,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0046.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0046.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -168,7 +168,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0186.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0186.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -190,7 +190,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0217.01.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0217.01.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -214,7 +214,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0361.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0361.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -236,7 +236,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0613.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0613.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -258,7 +258,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0616.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0616.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -282,7 +282,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0715.01.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0715.01.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -306,7 +306,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0792.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0792.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -330,7 +330,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0793.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0793.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -354,7 +354,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0859.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0859.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -376,7 +376,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0899.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0899.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -399,7 +399,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0900.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0900.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -421,7 +421,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C0902.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C0902.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -444,7 +444,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C1045.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C1045.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -468,7 +468,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C1313.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C1313.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -492,7 +492,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C1336.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C1336.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -514,7 +514,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C1391.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C1391.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -536,7 +536,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C1414.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C1414.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -560,7 +560,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/C1463.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/C1463.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -582,7 +582,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/EC0010.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/EC0010.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -605,7 +605,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/ec0611.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/ec0611.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -627,7 +627,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/ec0954.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/ec0954.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -649,7 +649,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/ec1049.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/ec1049.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -672,7 +672,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/ec1467.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/ec1467.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -694,7 +694,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/estandares/ec1468.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/estandares/ec1468.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -717,7 +717,7 @@ crossorigin="anonymous" />
         <div class="col-4">
             <div class="container_img_avales">
                 <p class="text-center">
-                    <img class="img_avales" src="{{ asset('assets/user/logotipos/revoe.webp')}}" alt="">
+                    <img class="img_avales" src="{{ asset('plataforma/assets/user/logotipos/revoe.webp')}}" alt="">
                 </p>
             </div>
         </div>
@@ -811,7 +811,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{ asset('assets/user/certificaciones/revoe_documento.png')}}" alt="" class="img_certificados">
+                    <img src="{{ asset('plataforma/assets/user/certificaciones/revoe_documento.png')}}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -838,7 +838,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/revoes/RVOE-17FT275-1.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/revoes/RVOE-17FT275-1.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -860,7 +860,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/revoes/RVOE-17FT229-min.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/revoes/RVOE-17FT229-min.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -882,7 +882,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/revoes/RVOE-17FT274-1.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/revoes/RVOE-17FT274-1.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -904,7 +904,7 @@ crossorigin="anonymous" />
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{ asset('assets/user/revoes/RVOE-17FT273-1-1.webp')}}" alt="" class="img_estandars">
+                                <img src="{{ asset('plataforma/assets/user/revoes/RVOE-17FT273-1-1.webp')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -929,7 +929,7 @@ crossorigin="anonymous" />
         <div class="col-4">
             <div class="container_img_avales">
                 <p class="text-center">
-                    <img class="img_avales" src="{{ asset('assets/user/logotipos/stps.webp')}}" alt="">
+                    <img class="img_avales" src="{{ asset('plataforma/assets/user/logotipos/stps.webp')}}" alt="">
                 </p>
             </div>
         </div>
@@ -1008,7 +1008,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{ asset('assets/user/certificaciones/sep_documentos.png')}}" alt="" class="img_certificados">
+                    <img src="{{ asset('plataforma/assets/user/certificaciones/sep_documentos.png')}}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -1020,7 +1020,7 @@ crossorigin="anonymous" />
         <div class="col-4">
             <div class="container_img_avales">
                 <p class="text-center">
-                    <img class="img_avales" src="{{ asset('assets/user/logotipos/registro_nmacional.png')}}" alt="">
+                    <img class="img_avales" src="{{ asset('plataforma/assets/user/logotipos/registro_nmacional.png')}}" alt="">
                 </p>
             </div>
         </div>
@@ -1049,25 +1049,25 @@ crossorigin="anonymous" />
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <p class="text-center">
-                            <img src="{{ asset('assets/user/certificaciones/cedula_papel.png')}}" class="img_slide_avales" alt="">
+                            <img src="{{ asset('plataforma/assets/user/certificaciones/cedula_papel.png')}}" class="img_slide_avales" alt="">
                         </p>
                       </div>
 
                       <div class="carousel-item">
                         <p class="text-center">
-                        <img src="{{ asset('assets/user/certificaciones/cedula_plastificada.png')}}" class="img_slide_avales" alt="">
+                        <img src="{{ asset('plataforma/assets/user/certificaciones/cedula_plastificada.png')}}" class="img_slide_avales" alt="">
                         </p>
                       </div>
 
                       <div class="carousel-item">
                         <p class="text-center">
-                        <img src="{{ asset('assets/user/certificaciones/tira_de_materias.png')}}" class="img_slide_avales" alt="...">
+                        <img src="{{ asset('plataforma/assets/user/certificaciones/tira_de_materias.png')}}" class="img_slide_avales" alt="...">
                         </p>
                       </div>
 
                       <div class="carousel-item">
                         <p class="text-center">
-                        <img src="{{ asset('assets/user/certificaciones/Titulo_Honorifico.png')}}" class="img_slide_avales" alt="...">
+                        <img src="{{ asset('plataforma/assets/user/certificaciones/Titulo_Honorifico.png')}}" class="img_slide_avales" alt="...">
                         </p>
                       </div>
                 </div>

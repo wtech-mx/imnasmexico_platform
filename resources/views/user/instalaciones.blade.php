@@ -5,13 +5,13 @@
 @endsection
 
 @section('css_custom')
-<link href="{{ asset('assets/user/custom/instalaciones.css')}}" rel="stylesheet" />
-<link href="{{ asset('assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
+<link href="{{ asset('plataforma/assets/user/custom/instalaciones.css')}}" rel="stylesheet" />
+<link href="{{ asset('plataforma/assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')
 
-<section class="primario bg_overley" style="background-image: url('{{ asset('assets/user/instalaciones/salon.jpg')}}')">
+<section class="primario bg_overley" style="background-image: url('{{ asset('plataforma/assets/user/instalaciones/salon.jpg')}}')">
 
     <div class="row margin_home_nav">
 
@@ -23,7 +23,7 @@
                     <div class="carousel-item active">
                         <div class="d-flex justify-content-center">
                             <div class="card card-custom" style="margin-top: 5rem">
-                                <img class="card_image" src="{{ asset('assets/user/instalaciones/terraza3.jpg')}}" class="card-img-top" alt="...">
+                                <img class="card_image" src="{{ asset('plataforma/assets/user/instalaciones/terraza3.jpg')}}" class="card-img-top" alt="...">
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
         <div class="col-12 col-md-4">
             <div class="d-flex justify-content-center">
                 <div class="card card-custom space_Card_rs" style="">
-                    <img class="card_image" src="{{ asset('assets/user/instalaciones/terraza3.jpg')}}" class="card-img-top" alt="...">
+                    <img class="card_image" src="{{ asset('plataforma/assets/user/instalaciones/terraza3.jpg')}}" class="card-img-top" alt="...">
                 </div>
             </div>
 
@@ -86,7 +86,7 @@
         <div class="col-12 col-md-4">
              <div class="d-flex justify-content-center">
                 <div class="card card-custom space_Card" style="">
-                    <img class="card_image" src="{{ asset('assets/user/instalaciones/tiendita.jpg')}}" class="card-img-top" alt="...">
+                    <img class="card_image" src="{{ asset('plataforma/assets/user/instalaciones/tiendita.jpg')}}" class="card-img-top" alt="...">
                 </div>
             </div>
             <p class="text-center mt-3">
@@ -99,7 +99,7 @@
         <div class="col-12 col-md-4">
              <div class="d-flex justify-content-center">
                 <div class="card card-custom space_Card" style="">
-                    <img class="card_image" src="{{ asset('assets/user/instalaciones/salon.jpg')}}" class="card-img-top" alt="...">
+                    <img class="card_image" src="{{ asset('plataforma/assets/user/instalaciones/salon.jpg')}}" class="card-img-top" alt="...">
                 </div>
             </div>
             <p class="text-center mt-3">
@@ -135,7 +135,7 @@
 
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <img class="card_image" src="{{ asset('assets/user/instalaciones/salon.jpg')}}" class="card-img-top" alt="...">
+                        <img class="card_image" src="{{ asset('plataforma/assets/user/instalaciones/salon.jpg')}}" class="card-img-top" alt="...">
                       </div>
                     </div>
 
@@ -170,7 +170,7 @@
 
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="card_image" src="{{ asset('assets/user/instalaciones/salon.jpg')}}" class="card-img-top" alt="...">
+                                <img class="card_image" src="{{ asset('plataforma/assets/user/instalaciones/salon.jpg')}}" class="card-img-top" alt="...">
                             </div>
                         </div>
 

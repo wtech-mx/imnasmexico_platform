@@ -5,8 +5,8 @@
 @endsection
 
 @section('css_custom')
-<link href="{{ asset('assets/user/custom/single_cours.css')}}" rel="stylesheet" />
-<link href="{{ asset('assets/user/custom/perfil.css')}}" rel="stylesheet" />
+<link href="{{ asset('plataforma/assets/user/custom/single_cours.css')}}" rel="stylesheet" />
+<link href="{{ asset('plataforma/assets/user/custom/perfil.css')}}" rel="stylesheet" />
 
 
 @endsection
@@ -33,7 +33,7 @@
                 <div class="d-flex justify-content-around">
                      <p class="espacio_p">Mis Compras </p>
                     <div class="content_nav d-inline-block">
-                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/objetivo.webp')}}" alt="">
+                        <img class="icon_nav_course" src="{{ asset('plataforma/assets/user/icons/objetivo.webp')}}" alt="">
                     </div>
                 </div>
 
@@ -43,7 +43,7 @@
                 <div class="d-flex justify-content-around">
                      <p class="espacio_p">Material de clase</p>
                     <div class="content_nav d-inline-block">
-                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/libros.png')}}" alt="">
+                        <img class="icon_nav_course" src="{{ asset('plataforma/assets/user/icons/libros.png')}}" alt="">
                     </div>
                 </div>
               </button>
@@ -52,7 +52,7 @@
                 <div class="d-flex justify-content-around">
                      <p class="espacio_p">Reconocimientos</p>
                     <div class="content_nav d-inline-block">
-                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/certificacion.webp')}}" alt="">
+                        <img class="icon_nav_course" src="{{ asset('plataforma/assets/user/icons/certificacion.webp')}}" alt="">
                     </div>
                 </div>
               </button>
@@ -61,7 +61,7 @@
                 <div class="d-flex justify-content-around">
                      <p class="espacio_p">Mis Clases</p>
                     <div class="content_nav d-inline-block">
-                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/video-call.png')}}" alt="">
+                        <img class="icon_nav_course" src="{{ asset('plataforma/assets/user/icons/video-call.png')}}" alt="">
                     </div>
                 </div>
               </button>
@@ -82,7 +82,7 @@
                             <div class="col-12 col-lg-6 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
-                                    <img class="img_profile_label" src="{{ asset('assets/user/icons/usuario.png')}}" alt="">
+                                    <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/usuario.png')}}" alt="">
                                 </span>
 
                                 <input class="form-control" type="text"  id="name" name="name" value="{{$cliente->name}}">
@@ -92,7 +92,7 @@
                             <div class="col-12 col-lg-6 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
-                                    <img class="img_profile_label" src="{{ asset('assets/user/icons/letter.png')}}" alt="">
+                                    <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/letter.png')}}" alt="">
                                 </span>
 
                                 <input class="form-control" type="text"  id="email" name="email" value="{{$cliente->email}}">
@@ -102,7 +102,7 @@
                             <div class="col-12 col-lg-6 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
-                                    <img class="img_profile_label" src="{{ asset('assets/user/icons/ring-phone.png')}}" alt="">
+                                    <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/ring-phone.png')}}" alt="">
                                 </span>
 
                                 <input class="form-control" type="number"  id="telefono" name="telefono" value="{{$cliente->telefono}}">
@@ -116,7 +116,7 @@
                             <div class="col-12 col-lg-6 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
-                                    <img class="img_profile_label" src="{{ asset('assets/user/icons/edificio.png')}}" alt="">
+                                    <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/edificio.png')}}" alt="">
                                 </span>
 
                                 <input class="form-control" type="text"  id="nombre" name="nombre" >
@@ -126,7 +126,7 @@
                             <div class="col-12 col-lg-6 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
-                                    <img class="img_profile_label" src="{{ asset('assets/user/icons/cp.png')}}" alt="">
+                                    <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/cp.png')}}" alt="">
                                 </span>
 
                                 <input class="form-control" type="text"  id="nombre" name="nombre" >
@@ -136,7 +136,7 @@
                             <div class="col-6 col-lg-4 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
-                                    <img class="img_profile_label" src="{{ asset('assets/user/icons/location-pointer.png')}}" alt="">
+                                    <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/location-pointer.png')}}" alt="">
                                 </span>
 
                                 <input class="form-control" type="text"  id="nombre" name="nombre" >
@@ -146,7 +146,7 @@
                             <div class="col-6 col-lg-4 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
-                                    <img class="img_profile_label" src="{{ asset('assets/user/icons/ring-phone.png')}}" alt="">
+                                    <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/ring-phone.png')}}" alt="">
                                 </span>
 
                                 <input class="form-control" type="text"  id="telefono" name="telefono" placeholder="Telefono">
@@ -247,25 +247,25 @@
                 <div class="d-flex justify-content-between  mb-3">
 
                     <button class="nav-link active" id="nav-infor_res-tab" data-bs-toggle="tab" data-bs-target="#nav-infor_res" type="button" role="tab" aria-controls="nav-infor_res" aria-selected="true">
-                        Mi Perfil <img class="icon_res_tabs" src="{{ asset('assets/user/icons/informacion.png')}}" alt="">
+                        Mi Perfil <img class="icon_res_tabs" src="{{ asset('plataforma/assets/user/icons/informacion.png')}}" alt="">
                     </button>
 
                     <button class="nav-link" id="nav-profile_res-tab" data-bs-toggle="tab" data-bs-target="#nav-profile_res" type="button" role="tab" aria-controls="nav-profile_res" aria-selected="false">
-                        Compras <img class="icon_res_tabs" src="{{ asset('assets/user/icons/objetivo.webp')}}" alt="">
+                        Compras <img class="icon_res_tabs" src="{{ asset('plataforma/assets/user/icons/objetivo.webp')}}" alt="">
                     </button>
 
                     <button class="nav-link" id="nav-temarios_res-tab" data-bs-toggle="tab" data-bs-target="#nav-temarios_res" type="button" role="tab" aria-controls="nav-temarios_res" aria-selected="false">
-                        Material de clase <img class="icon_res_tabs" src="{{ asset('assets/user/icons/libros.png')}}" alt="">
+                        Material de clase <img class="icon_res_tabs" src="{{ asset('plataforma/assets/user/icons/libros.png')}}" alt="">
                     </button>
                 </div>
 
                 <div class="d-flex justify-content-evenly">
                     <button class="nav-link" id="nav-docus_res-tab" data-bs-toggle="tab" data-bs-target="#nav-docus_res" type="button" role="tab" aria-controls="nav-docus_res" aria-selected="false">
-                        Reconocimientos <img class="icon_res_tabs" src="{{ asset('assets/user/icons/certificacion.webp')}}" alt="">
+                        Reconocimientos <img class="icon_res_tabs" src="{{ asset('plataforma/assets/user/icons/certificacion.webp')}}" alt="">
                     </button>
 
                     <button class="nav-link" id="nav-dirigido_res-tab" data-bs-toggle="tab" data-bs-target="#nav-dirigido_res" type="button" role="tab" aria-controls="nav-dirigido_res" aria-selected="false">
-                        Mis Clases <img class="icon_res_tabs" src="{{ asset('assets/user/icons/video-call.png')}}" alt="">
+                        Mis Clases <img class="icon_res_tabs" src="{{ asset('plataforma/assets/user/icons/video-call.png')}}" alt="">
                     </button>
 
                     <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false" style="background: transparent;">
@@ -285,7 +285,7 @@
                     <div class="col-12 col-lg-6 form-group ">
                         <div class="input-group input-group-alternative mb-4">
                         <span class="input-group-text">
-                            <img class="img_profile_label" src="{{ asset('assets/user/icons/usuario.png')}}" alt="">
+                            <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/usuario.png')}}" alt="">
                         </span>
 
                         <input class="form-control" type="text"  id="name" name="name" value="{{$cliente->name}}">
@@ -295,7 +295,7 @@
                     <div class="col-12 col-lg-6 form-group ">
                         <div class="input-group input-group-alternative mb-4">
                         <span class="input-group-text">
-                            <img class="img_profile_label" src="{{ asset('assets/user/icons/letter.png')}}" alt="">
+                            <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/letter.png')}}" alt="">
                         </span>
 
                         <input class="form-control" type="text"  id="email" name="email" value="{{$cliente->email}}">
@@ -305,7 +305,7 @@
                     <div class="col-12 col-lg-6 form-group ">
                         <div class="input-group input-group-alternative mb-4">
                         <span class="input-group-text">
-                            <img class="img_profile_label" src="{{ asset('assets/user/icons/ring-phone.png')}}" alt="">
+                            <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/ring-phone.png')}}" alt="">
                         </span>
 
                         <input class="form-control" type="number"  id="telefono" name="telefono" value="{{$cliente->telefono}}">
@@ -319,7 +319,7 @@
                     <div class="col-12 col-lg-6 form-group ">
                         <div class="input-group input-group-alternative mb-4">
                         <span class="input-group-text">
-                            <img class="img_profile_label" src="{{ asset('assets/user/icons/edificio.png')}}" alt="" >
+                            <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/edificio.png')}}" alt="" >
                         </span>
 
                         <input class="form-control prb" type="text"  id="nombre" name="nombre" placeholder="Direccion">
@@ -329,7 +329,7 @@
                     <div class="col-12 col-lg-6 form-group ">
                         <div class="input-group input-group-alternative mb-4">
                         <span class="input-group-text">
-                            <img class="img_profile_label" src="{{ asset('assets/user/icons/location-pointer.png')}}" alt="">
+                            <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/location-pointer.png')}}" alt="">
                         </span>
 
                         <input class="form-control" type="text"  id="nombre" name="nombre" placeholder="Municipio y/o Provincia">
@@ -339,7 +339,7 @@
                     <div class="col-6 col-lg-4 form-group ">
                         <div class="input-group input-group-alternative mb-4">
                         <span class="input-group-text">
-                            <img class="img_profile_label" src="{{ asset('assets/user/icons/cp.png')}}" alt="">
+                            <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/cp.png')}}" alt="">
 
                         </span>
 
@@ -350,7 +350,7 @@
                     <div class="col-6 col-lg-4 form-group ">
                         <div class="input-group input-group-alternative mb-4">
                         <span class="input-group-text">
-                            <img class="img_profile_label" src="{{ asset('assets/user/icons/ring-phone.png')}}" alt="">
+                            <img class="img_profile_label" src="{{ asset('plataforma/assets/user/icons/ring-phone.png')}}" alt="">
                         </span>
 
                         <input class="form-control" type="text"  id="telefono" name="telefono" placeholder="Telefono">

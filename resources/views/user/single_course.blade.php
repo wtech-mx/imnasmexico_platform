@@ -5,7 +5,7 @@
 @endsection
 
 @section('css_custom')
-<link href="{{ asset('assets/user/custom/single_cours.css')}}" rel="stylesheet" />
+<link href="{{ asset('plataforma/assets/user/custom/single_cours.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -29,7 +29,7 @@
                 <div class="d-flex justify-content-around">
                      <p class="espacio_w">Objetivos</p>
                     <div class="content_nav d-inline-block">
-                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/objetivo.webp')}}" alt="">
+                        <img class="icon_nav_course" src="{{ asset('plataforma/assets/user/icons/objetivo.webp')}}" alt="">
                     </div>
                 </div>
             </button>
@@ -38,7 +38,7 @@
                 <div class="d-flex justify-content-around">
                      <p class="espacio_w">Temarios</p>
                     <div class="content_nav d-inline-block">
-                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/prueba.webp')}}" alt="">
+                        <img class="icon_nav_course" src="{{ asset('plataforma/assets/user/icons/prueba.webp')}}" alt="">
                     </div>
                 </div>
               </button>
@@ -47,7 +47,7 @@
                 <div class="d-flex justify-content-around">
                      <p class="espacio_w">Documentos</p>
                     <div class="content_nav d-inline-block">
-                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/certificacion.webp')}}" alt="">
+                        <img class="icon_nav_course" src="{{ asset('plataforma/assets/user/icons/certificacion.webp')}}" alt="">
                     </div>
                 </div>
               </button>
@@ -56,7 +56,7 @@
                 <div class="d-flex justify-content-around">
                      <p class="espacio_w">Preguntas</p>
                     <div class="content_nav d-inline-block">
-                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/personas.webp')}}" alt="">
+                        <img class="icon_nav_course" src="{{ asset('plataforma/assets/user/icons/personas.webp')}}" alt="">
                     </div>
                 </div>
               </button>
@@ -65,7 +65,7 @@
                 <div class="d-flex justify-content-around">
                      <p class="espacio_w">Recursos</p>
                     <div class="content_nav d-inline-block">
-                        <img class="icon_nav_course" src="{{ asset('assets/user/icons/video-call.png')}}" alt="">
+                        <img class="icon_nav_course" src="{{ asset('plataforma/assets/user/icons/video-call.png')}}" alt="">
                     </div>
                 </div>
               </button>
@@ -327,7 +327,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                    <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/logotipos/sepconocer.png')}}" alt="">
                                                 </p>
                                         </div>
                                     </div>
@@ -339,7 +339,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/revoe.png')}}" alt="">
+                                                    <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/logotipos/revoe.png')}}" alt="">
                                                 </p>
                                         </div>
                                     </div>
@@ -351,7 +351,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/unam.png')}}" alt="">
+                                                    <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/logotipos/unam.png')}}" alt="">
                                                 </p>
                                         </div>
                                     </div>
@@ -363,7 +363,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/imnas.webp')}}" >
+                                                    <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/logotipos/imnas.webp')}}" >
                                                 </p>
                                         </div>
                                     </div>
@@ -375,7 +375,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/stps.png')}}" alt="">
+                                                    <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/logotipos/stps.png')}}" alt="">
                                                 </p>
                                         </div>
                                     </div>
@@ -449,7 +449,7 @@
                         <div class="d-flex justify-content-end">
                             <div class="card_objetivos2">
                                 <p class="text-center">
-                                    <img class="img_card_objetivos2" src="{{ asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                    <img class="img_card_objetivos2" src="{{ asset('plataforma/assets/user/icons/ama-de-casa.webp')}}" alt="">
                                 </p>
                                 <p class="text-center card_title_objetivos">AMAS DE CASA</p>
                                 <p class="text-center card_text_objetivos">Aprovecha tu tiempo libre</p>
@@ -461,7 +461,7 @@
                         <div class="d-flex justify-content-start">
                             <div class="card_objetivos2">
                                 <p class="text-center">
-                                    <img class="img_card_objetivos2" src="{{ asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                    <img class="img_card_objetivos2" src="{{ asset('plataforma/assets/user/icons/ama-de-casa.webp')}}" alt="">
                                 </p>
                                 <p class="text-center card_title_objetivos">EMPRENDERORAS</p>
                                 <p class="text-center card_text_objetivos">Inicia tu propio Negocio.</p>
@@ -473,7 +473,7 @@
                         <div class="d-flex justify-content-end">
                             <div class="card_objetivos2">
                                 <p class="text-center">
-                                    <img class="img_card_objetivos2" src="{{ asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                    <img class="img_card_objetivos2" src="{{ asset('plataforma/assets/user/icons/ama-de-casa.webp')}}" alt="">
                                 </p>
                                 <p class="text-center card_title_objetivos">ESTUDIANTES DE BELLEZA</p>
                                 <p class="text-center card_text_objetivos">Construye una carera profesional.</p>
@@ -485,7 +485,7 @@
                         <div class="d-flex justify-content-start">
                             <div class="card_objetivos2">
                                 <p class="text-center">
-                                    <img class="img_card_objetivos2" src="{{ asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                    <img class="img_card_objetivos2" src="{{ asset('plataforma/assets/user/icons/ama-de-casa.webp')}}" alt="">
                                 </p>
                                 <p class="text-center card_title_objetivos">APASIONADAS POR LA BELLEZA</p>
                                 <p class="text-center card_text_objetivos">
@@ -554,29 +554,29 @@
                 <div class="d-flex justify-content-between  mb-3">
 
                     <button class="nav-link active" id="nav-infor_res-tab" data-bs-toggle="tab" data-bs-target="#nav-infor_res" type="button" role="tab" aria-controls="nav-infor_res" aria-selected="true">
-                        Informacion <img class="icon_res_tabs" src="{{ asset('assets/user/icons/informacion.png')}}" alt="">
+                        Informacion <img class="icon_res_tabs" src="{{ asset('plataforma/assets/user/icons/informacion.png')}}" alt="">
                     </button>
 
                     <button class="nav-link" id="nav-profile_res-tab" data-bs-toggle="tab" data-bs-target="#nav-profile_res" type="button" role="tab" aria-controls="nav-profile_res" aria-selected="false">
-                        Objetivos <img class="icon_res_tabs" src="{{ asset('assets/user/icons/objetivo.webp')}}" alt="">
+                        Objetivos <img class="icon_res_tabs" src="{{ asset('plataforma/assets/user/icons/objetivo.webp')}}" alt="">
                     </button>
 
                     <button class="nav-link" id="nav-temarios_res-tab" data-bs-toggle="tab" data-bs-target="#nav-temarios_res" type="button" role="tab" aria-controls="nav-temarios_res" aria-selected="false">
-                        Temarios <img class="icon_res_tabs" src="{{ asset('assets/user/icons/prueba.webp')}}" alt="">
+                        Temarios <img class="icon_res_tabs" src="{{ asset('plataforma/assets/user/icons/prueba.webp')}}" alt="">
                     </button>
                 </div>
 
                 <div class="d-flex justify-content-between">
                     <button class="nav-link" id="nav-docus_res-tab" data-bs-toggle="tab" data-bs-target="#nav-docus_res" type="button" role="tab" aria-controls="nav-docus_res" aria-selected="false">
-                        Documentos <img class="icon_res_tabs" src="{{ asset('assets/user/icons/certificacion.webp')}}" alt="">
+                        Documentos <img class="icon_res_tabs" src="{{ asset('plataforma/assets/user/icons/certificacion.webp')}}" alt="">
                     </button>
 
                     <button class="nav-link" id="nav-dirigido_res-tab" data-bs-toggle="tab" data-bs-target="#nav-dirigido_res" type="button" role="tab" aria-controls="nav-dirigido_res" aria-selected="false">
-                        Dirigido a <img class="icon_res_tabs" src="{{ asset('assets/user/icons/personas.webp')}}" alt="">
+                        Dirigido a <img class="icon_res_tabs" src="{{ asset('plataforma/assets/user/icons/personas.webp')}}" alt="">
                     </button>
 
                     <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
-                        Recursos <img class="icon_res_tabs" src="{{ asset('assets/user/icons/video-call.png')}}" alt="">
+                        Recursos <img class="icon_res_tabs" src="{{ asset('plataforma/assets/user/icons/video-call.png')}}" alt="">
                     </button>
                 </div>
             </div>
@@ -830,7 +830,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones dos_img_cert" src="{{ asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                    <img class="img_card_certificaciones dos_img_cert" src="{{ asset('plataforma/assets/user/logotipos/sepconocer.png')}}" alt="">
                                                 </p>
                                         </div>
                                     </div>
@@ -842,7 +842,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones dos_img_cert" src="{{ asset('assets/user/logotipos/revoe.png')}}" alt="">
+                                                    <img class="img_card_certificaciones dos_img_cert" src="{{ asset('plataforma/assets/user/logotipos/revoe.png')}}" alt="">
                                                 </p>
                                         </div>
                                     </div>
@@ -854,7 +854,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones tres_img_cert" src="{{ asset('assets/user/logotipos/unam.png')}}" alt="">
+                                                    <img class="img_card_certificaciones tres_img_cert" src="{{ asset('plataforma/assets/user/logotipos/unam.png')}}" alt="">
                                                 </p>
                                         </div>
                                     </div>
@@ -866,7 +866,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones" src="{{ asset('assets/user/logotipos/imnas.webp')}}" >
+                                                    <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/logotipos/imnas.webp')}}" >
                                                 </p>
                                         </div>
                                     </div>
@@ -878,7 +878,7 @@
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones">
                                                 <p class="text-center">
-                                                    <img class="img_card_certificaciones dos_img_cert" src="{{ asset('assets/user/logotipos/stps.png')}}" alt="">
+                                                    <img class="img_card_certificaciones dos_img_cert" src="{{ asset('plataforma/assets/user/logotipos/stps.png')}}" alt="">
                                                 </p>
                                         </div>
                                     </div>
@@ -951,7 +951,7 @@
                         <div class="d-flex justify-content-end">
                             <div class="card_objetivos2">
                                 <p class="text-center">
-                                    <img class="img_card_objetivos2" src="{{ asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                    <img class="img_card_objetivos2" src="{{ asset('plataforma/assets/user/icons/ama-de-casa.webp')}}" alt="">
                                 </p>
                                 <p class="text-center card_title_objetivos">AMAS DE CASA</p>
                                 <p class="text-center card_text_objetivos">Aprovecha tu tiempo libre</p>
@@ -963,7 +963,7 @@
                         <div class="d-flex justify-content-start">
                             <div class="card_objetivos2">
                                 <p class="text-center">
-                                    <img class="img_card_objetivos2" src="{{ asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                    <img class="img_card_objetivos2" src="{{ asset('plataforma/assets/user/icons/ama-de-casa.webp')}}" alt="">
                                 </p>
                                 <p class="text-center card_title_objetivos">EMPRENDERORAS</p>
                                 <p class="text-center card_text_objetivos">Inicia tu propio Negocio.</p>
@@ -975,7 +975,7 @@
                         <div class="d-flex justify-content-end">
                             <div class="card_objetivos2">
                                 <p class="text-center">
-                                    <img class="img_card_objetivos2" src="{{ asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                    <img class="img_card_objetivos2" src="{{ asset('plataforma/assets/user/icons/ama-de-casa.webp')}}" alt="">
                                 </p>
                                 <p class="text-center card_title_objetivos">ESTUDIANTES DE BELLEZA</p>
                                 <p class="text-center card_text_objetivos">Construye una carera profesional.</p>
@@ -987,7 +987,7 @@
                         <div class="d-flex justify-content-start">
                             <div class="card_objetivos2">
                                 <p class="text-center">
-                                    <img class="img_card_objetivos2" src="{{ asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                    <img class="img_card_objetivos2" src="{{ asset('plataforma/assets/user/icons/ama-de-casa.webp')}}" alt="">
                                 </p>
                                 <p class="text-center card_title_objetivos">APASIONADAS POR LA BELLEZA</p>
                                 <p class="text-center card_text_objetivos">
@@ -1052,7 +1052,7 @@
 
 {{-- slide de cursos --}}
 <section>
-    <div class="bgimg-1" style="height: 500px;background-image: url('{{ asset('assets/user/utilidades/spa.jpg')}}')">
+    <div class="bgimg-1" style="height: 500px;background-image: url('{{ asset('plataforma/assets/user/utilidades/spa.jpg')}}')">
 
     </div>
 </section>
@@ -1091,7 +1091,7 @@
 
         <div class="col-12 col-md-6 desaparecer_contenedor_sm">
                 <div class="d-flex justify-content-center">
-                    <img class="img_contact" src="{{ asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
+                    <img class="img_contact" src="{{ asset('plataforma/assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
                 </div>
         </div>
 

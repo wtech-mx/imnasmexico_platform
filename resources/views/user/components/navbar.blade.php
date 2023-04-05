@@ -2,7 +2,7 @@
     <div class="container-fluid">
 
       <a class="navbar-brand" href="{{ route('user.home') }}">
-          <img src="{{ asset('assets/user/logotipos/imnas.webp')}}" class="image_navbar d-inline-block align-text-top">
+          <img src="{{ asset('plataforma/assets/user/logotipos/imnas.webp')}}" class="image_navbar d-inline-block align-text-top">
       </a>
 
       <a class="btn btn-primario acceso_alumnas_flex_prim me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
@@ -25,7 +25,7 @@
             <a class="nav-link nav_link_custom {{ (Request::is('avales*') ? 'active' : '') }}" href="avales">Avales</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav_link_custom {{ (Request::is('paquetes*') ? 'active' : '') }}" href="paquetes">Paquetes</a>
+            <a class="nav-link nav_link_custom {{ (Request::is('paquetes*') ? 'active' : '') }}" href="{{ route('cursos.paquetes') }}">Paquetes</a>
           </li>
           {{-- <li class="nav-item">
             <a class="nav-link nav_link_custom {{ (Request::is('calendario*') ? 'active' : '') }}" href="#">Nosotros</a>

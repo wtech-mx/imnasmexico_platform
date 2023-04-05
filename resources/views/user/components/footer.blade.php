@@ -5,7 +5,7 @@
             <div class="d-flex justify-content-center space_secundario_footer">
                 <div class="card_footer">
                     <p class="text-center" style="margin-bottom: 0rem!important;">
-                        <img class="img_card_footer" src="{{ asset('assets/user/logotipos/imnas.webp')}}" alt="">
+                        <img class="img_card_footer" src="{{ asset('plataforma/assets/user/logotipos/imnas.webp')}}" alt="">
                     </p>
                 </div>
             </div>
@@ -77,7 +77,7 @@
             <div class="d-flex justify-content-center espaciador_fp mb-5">
                 <div class="card_footer">
                     <p class="text-center" style="margin-bottom: 0rem!important;">
-                        <img class="img_card_footer" src="{{ asset('assets/user/icons/pago-seguro.png')}}" alt="">
+                        <img class="img_card_footer" src="{{ asset('plataforma/assets/user/icons/pago-seguro.png')}}" alt="">
                     </p>
                 </div>
             </div>
@@ -90,7 +90,7 @@
 
             <div class="d-flex justify-content-center">
                 <p class="registro_num mt-5">
-                    <img class="img_footer_pago" src="{{ asset('assets/user/utilidades/formas_pago.png')}}" alt="">
+                    <img class="img_footer_pago" src="{{ asset('plataforma/assets/user/utilidades/formas_pago.png')}}" alt="">
                 </p>
             </div>
 

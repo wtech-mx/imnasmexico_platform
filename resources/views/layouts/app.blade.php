@@ -14,7 +14,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     {{-- @vite(['resources/js/app.js']) --}}
-    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ asset('plataforma/assets/bootstrap/css/bootstrap.css') }}">
 
 </head>
 <body>
@@ -25,6 +25,6 @@
     </div>
 
 
-    <script src="{{ asset('assets/bootstrap/js/bootstrap.js') }}"></script>
+    <script src="{{ asset('plataforma/assets/bootstrap/js/bootstrap.js') }}"></script>
 </body>
 </html>
