@@ -16,6 +16,7 @@
     <link href="{{asset('assets/user/custom/footer.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/user/custom/modal_login.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/user/custom/modal_checkout.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/user/custom/preloader.css')}}" rel="stylesheet" />
 
     @yield('css_custom')
 
@@ -26,6 +27,7 @@
   </head>
 
   <body class="body">
+    <div id="page-loader"><span class="preloader-interior"></span></div>
 
     <header class="header">
         @include('user.components.navbar')
@@ -50,6 +52,8 @@
 
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'></script>
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+    <script type="text/javascript" src="{{asset('assets/user/custom/preloader.js')}}"></script>
 
     <script type="text/javascript">
 
