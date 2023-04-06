@@ -28,6 +28,7 @@ class CursoUsersController extends Controller
     {
         $fechaActual = date('Y-m-d');
         $curso = Cursos::where('slug','=', $slug)->firstOrFail();
+        $cursos = Cursos::where('fecha_final','>=', $fechaActual)->where('estatus','=', '1')->get();
         $tickets = CursosTickets::where('id_curso','=', $curso->id)->where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
 
         $usuarioId = Auth::id(); // Obtén el ID del usuario logueado
@@ -36,7 +37,7 @@ class CursoUsersController extends Controller
                         ->where('id_curso','=', $curso->id)
                         ->first();
 
-        return view('user.single_course', compact('curso', 'tickets', 'usuario_compro'));
+        return view('user.single_course', compact('curso', 'tickets', 'usuario_compro','cursos'));
     }
 
     public function paquetes()

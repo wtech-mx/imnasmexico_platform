@@ -11,21 +11,16 @@
 
 
 {{-- css carrusel --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
-integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
-crossorigin="anonymous" />
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
-integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
-crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
 @endsection
 
 @section('content')
 
-<section class="primario bg_overley" style="background-image: url('{{asset('assets/user/utilidades/cosmetologa_bg.jpg')}}')">
-    {{-- <span class="mask bg-gradient-dark opacity-6"></span> --}}
+<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/utilidades/cosmetologa_bg.jpg')}}')">
+    <span class="mask"></span>
     <div class="row margin_home_nav">
-        <div class="col-12 col-md-6 order-dos">
+        <div class="col-12 col-md-6 order-dos index_superior">
             <h1 class="text-white titulo space_ttile" style="">
                 Instituto Mexicano <br>
                 Naturales Ain Spa
@@ -112,7 +107,6 @@ crossorigin="anonymous" />
 
         </div>
     </div>
-
 </section>
 
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
@@ -315,9 +309,10 @@ crossorigin="anonymous" />
 {{-- slide de cursos --}}
 <section>
     <div class="bgimg-1" style="height: auto;background-image: url('{{asset('assets/user/utilidades/spa.jpg')}}')">
+        <span class="mask"></span>
         <div class="row">
-            <div class="col-12">
-                <h2 class="titulo_alfa text-center mb-5" style="color: #fff!important">
+            <div class="col-12 index_superior">
+                <h2 class="titulo_alfa text-center mt-3 mb-5" style="color: #fff!important">
                     Próximas Certificaciones
                 </h2>
             </div>
@@ -738,19 +733,12 @@ crossorigin="anonymous" />
 
 @section('js')
 
-
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
 {{-- <script src="{{asset('assets/user/custom/multistepes.js')}}"></script> --}}
 <!-- Option 1: Bootstrap Bundle with Popper -->
-
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
     integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
     crossorigin="anonymous"></script>
-
 
 <script>
     $('.owl-carousel').owlCarousel({
@@ -772,8 +760,6 @@ crossorigin="anonymous" />
         }
     })
 </script>
-
-
 
 @endsection
 

@@ -3,6 +3,19 @@
     src: url('./../../user//fonts/Bahnschrift.ttf');
  }
 
+ .mask_calendar{
+    position: absolute;
+    background-size: cover;
+    background-position: center center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    background-image: linear-gradient(310deg, #836262 0%, #836262 100%);
+    z-index: 1;
+}
+
 .card_grid{
     width: 26.5rem;
     border-radius: 16px;
@@ -153,7 +166,10 @@
     position: relative;
     top: 30%;
     left: 10%;
+    z-index: 1;
 }
+
+
 
 .btn-secundario_grid{
     background-color: #F5ECE4;
