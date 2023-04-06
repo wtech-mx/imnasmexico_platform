@@ -341,7 +341,7 @@
                                                                                             style='font-size: 15px;width:530px;text-align:center;padding:0px;background-image:none;background-color:transparent;'>
 																							            <img alt=""
                  width="100"
-                 src='{{ asset('plataforma/assets/user/icons/location-pointer.png')}}' max-width='100%'
+                 src='{{asset('assets/user/icons/location-pointer.png')}}' max-width='100%'
                  style='max-width: 100%;vertical-align: middle;width:100px;'/>
 			                                                                                        </td>
                                                                                     </tr>
@@ -379,7 +379,7 @@
 																							            <a href="https://goo.gl/maps/jCHkCo4exEaSXqai6" target="_blank">
                 <img alt=""
                      width="600"
-                     src='{{ asset('plataforma/assets/user/icons/mapa_captura.png')}}' max-width='100%'
+                     src='{{asset('assets/user/icons/mapa_captura.png')}}' max-width='100%'
                      style='max-width: 100%;vertical-align: middle;width:500px;border-radius:19px;border-style: solid;
                      border-width: 0px 9px 9px 0px;
                      border-color: #836262;'/>

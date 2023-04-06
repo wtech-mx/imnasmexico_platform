@@ -5,7 +5,7 @@
 @endsection
 
 @section('css_custom')
-    <link href="{{ asset('plataforma/assets/user/custom/paquetes.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/user/custom/paquetes.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -15,7 +15,7 @@
 
     <div class="row">
         <div class="col-6 space_paquetes">
-            <img class="img_paquetes" src="{{ asset('plataforma/assets/user/utilidades/PAQUETE-01.png')}}" alt="">
+            <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-01.png')}}" alt="">
         </div>
 
         <div class="col-6 space_paquetes">
@@ -51,7 +51,7 @@
         </div>
 
         <div class="col-6 space_paquetes">
-            <img class="img_paquetes" src="{{ asset('plataforma/assets/user/utilidades/PAQUETE-02.png')}}" alt="">
+            <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-02.png')}}" alt="">
         </div>
     </div>
 
@@ -61,7 +61,7 @@
 
     <div class="row">
         <div class="col-6 space_paquetes">
-            <img class="img_paquetes" src="{{ asset('plataforma/assets/user/utilidades/PAQUETE-03.png')}}" alt="">
+            <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-03.png')}}" alt="">
         </div>
 
         <div class="col-6 space_paquetes">
@@ -89,7 +89,7 @@
         </div>
 
         <div class="col-6 space_paquetes">
-            <img class="img_paquetes" src="{{ asset('plataforma/assets/user/utilidades/PAQUETE-04.png')}}" alt="">
+            <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-04.png')}}" alt="">
         </div>
     </div>
 

@@ -5,7 +5,7 @@
 @endsection
 
 @section('css_custom')
-<link href="{{ asset('plataforma/assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
 <style>
     .carousel-item {
     height: 100vh;

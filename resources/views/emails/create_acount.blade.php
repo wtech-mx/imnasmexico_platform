@@ -339,7 +339,7 @@
                                                                                     <tr>
                                                                                         <td valign='top' dir="ltr"
                                                                                             style='font-size: 15px;width:540px;text-align:center;padding:0px;background-image:none;'>
-																							<img alt=""width="100"src='{{ asset('plataforma/assets/user/icons/mujer.png')}}' max-width='100%'style='max-width: 100%;vertical-align: middle;width:100px;'/>
+																							<img alt=""width="100"src='{{asset('assets/user/icons/mujer.png')}}' max-width='100%'style='max-width: 100%;vertical-align: middle;width:100px;'/>
 			                                                                            </td>
                                                                                     </tr>
                                                                                 </table>

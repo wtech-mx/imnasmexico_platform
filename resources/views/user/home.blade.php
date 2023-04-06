@@ -5,9 +5,9 @@
 @endsection
 
 @section('css_custom')
-<link href="{{ asset('plataforma/assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
-<link href="{{ asset('plataforma/assets/user/custom/slider_products.css')}}" rel="stylesheet" />
-<link href="{{ asset('plataforma/assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/user/custom/slider_products.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
 
 
 {{-- css carrusel --}}
@@ -22,7 +22,7 @@ crossorigin="anonymous" />
 
 @section('content')
 
-<section class="primario bg_overley" style="background-image: url('{{ asset('plataforma/assets/user/utilidades/cosmetologa_bg.jpg')}}')">
+<section class="primario bg_overley" style="background-image: url('{{asset('assets/user/utilidades/cosmetologa_bg.jpg')}}')">
     {{-- <span class="mask bg-gradient-dark opacity-6"></span> --}}
     <div class="row margin_home_nav">
         <div class="col-12 col-md-6 order-dos">
@@ -124,7 +124,7 @@ crossorigin="anonymous" />
                 <a data-bs-toggle="modal" data-bs-target="#redconcer">
                     <div class="card_certificaciones">
                         <p class="text-center">
-                            <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/logotipos/sepconocer.png')}}" alt="">
+                            <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
                         </p>
                     </div>
                 </a>
@@ -137,7 +137,7 @@ crossorigin="anonymous" />
                 <a data-bs-toggle="modal" data-bs-target="#revoe">
                 <div class="card_certificaciones">
                     <p class="text-center">
-                        <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/logotipos/revoe.png')}}" alt="">
+                        <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/revoe.png')}}" alt="">
                     </p>
                 </div>
                 </a>
@@ -150,7 +150,7 @@ crossorigin="anonymous" />
                 <a data-bs-toggle="modal" data-bs-target="#unam">
                     <div class="card_certificaciones">
                         <p class="text-center">
-                            <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/logotipos/unam.png')}}" alt="">
+                            <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
                         </p>
                     </div>
                 </a>
@@ -163,7 +163,7 @@ crossorigin="anonymous" />
                 <a data-bs-toggle="modal" data-bs-target="#stps">
                     <div class="card_certificaciones">
                         <p class="text-center">
-                            <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/logotipos/stps.png')}}" alt="">
+                            <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/stps.png')}}" alt="">
                         </p>
                     </div>
                 </a>
@@ -188,7 +188,7 @@ crossorigin="anonymous" />
                     <div class="d-flex justify-content-end">
                         <div class="card_objetivos">
                             <p class="text-center">
-                                <img class="img_card_objetivos" src="{{ asset('plataforma/assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                <img class="img_card_objetivos" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
                             </p>
                             <p class="text-center card_title_objetivos">AMAS DE CASA</p>
                             <p class="text-center card_text_objetivos">Aprovecha tu tiempo libre</p>
@@ -200,7 +200,7 @@ crossorigin="anonymous" />
                     <div class="d-flex justify-content-start">
                         <div class="card_objetivos">
                             <p class="text-center">
-                                <img class="img_card_objetivos" src="{{ asset('plataforma/assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                <img class="img_card_objetivos" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
                             </p>
                             <p class="text-center card_title_objetivos">EMPRENDERORAS</p>
                             <p class="text-center card_text_objetivos">Inicia tu propio Negocio.</p>
@@ -212,7 +212,7 @@ crossorigin="anonymous" />
                     <div class="d-flex justify-content-end">
                         <div class="card_objetivos">
                             <p class="text-center">
-                                <img class="img_card_objetivos" src="{{ asset('plataforma/assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                <img class="img_card_objetivos" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
                             </p>
                             <p class="text-center card_title_objetivos">ESTUDIANTES DE BELLEZA</p>
                             <p class="text-center card_text_objetivos">Construye una carera profesional.</p>
@@ -224,7 +224,7 @@ crossorigin="anonymous" />
                     <div class="d-flex justify-content-start">
                         <div class="card_objetivos">
                             <p class="text-center">
-                                <img class="img_card_objetivos" src="{{ asset('plataforma/assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                <img class="img_card_objetivos" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
                             </p>
                             <p class="text-center card_title_objetivos">APASIONADAS POR LA BELLEZA</p>
                             <p class="text-center card_text_objetivos">
@@ -244,7 +244,7 @@ crossorigin="anonymous" />
             <div class="row ">
                 <div class="col-2 py-2">
                     <div class="point_icon_beneficios">
-                        <img class="img_icon_beneficios" src="{{ asset('plataforma/assets/user/icons/certificado-de-garantia.webp')}}" alt="">
+                        <img class="img_icon_beneficios" src="{{asset('assets/user/icons/certificado-de-garantia.webp')}}" alt="">
                     </div>
                 </div>
                 <div class="col-10 py-2">
@@ -255,7 +255,7 @@ crossorigin="anonymous" />
 
                 <div class="col-2 py-2">
                     <div class="point_icon_beneficios">
-                        <img class="img_icon_beneficios" src="{{ asset('plataforma/assets/user/icons/clase.webp')}}" alt="">
+                        <img class="img_icon_beneficios" src="{{asset('assets/user/icons/clase.webp')}}" alt="">
                     </div>
                 </div>
                 <div class="col-10 py-2">
@@ -266,7 +266,7 @@ crossorigin="anonymous" />
 
                 <div class="col-2 py-2">
                     <div class="point_icon_beneficios">
-                        <img class="img_icon_beneficios" src="{{ asset('plataforma/assets/user/icons/documentos.png')}}" alt="">
+                        <img class="img_icon_beneficios" src="{{asset('assets/user/icons/documentos.png')}}" alt="">
                     </div>
                 </div>
                 <div class="col-10 py-2">
@@ -277,7 +277,7 @@ crossorigin="anonymous" />
 
                 <div class="col-2 py-2">
                     <div class="point_icon_beneficios">
-                        <img class="img_icon_beneficios" src="{{ asset('plataforma/assets/user/icons/aprender-en-linea.webp')}}" alt="">
+                        <img class="img_icon_beneficios" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt="">
                     </div>
                 </div>
                 <div class="col-10 py-2">
@@ -288,7 +288,7 @@ crossorigin="anonymous" />
 
                 <div class="col-2 py-2">
                     <div class="point_icon_beneficios">
-                        <img class="img_icon_beneficios" src="{{ asset('plataforma/assets/user/icons/cuaderno.webp')}}" alt="">
+                        <img class="img_icon_beneficios" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="">
                     </div>
                 </div>
                 <div class="col-10 py-2">
@@ -299,7 +299,7 @@ crossorigin="anonymous" />
 
                 <div class="col-2 py-2">
                     <div class="point_icon_beneficios">
-                        <img class="img_icon_beneficios" src="{{ asset('plataforma/assets/user/icons/aprender-en-linea-1.webp')}}" alt="">
+                        <img class="img_icon_beneficios" src="{{asset('assets/user/icons/aprender-en-linea-1.webp')}}" alt="">
                     </div>
                 </div>
                 <div class="col-10 py-2">
@@ -314,7 +314,7 @@ crossorigin="anonymous" />
 
 {{-- slide de cursos --}}
 <section>
-    <div class="bgimg-1" style="height: auto;background-image: url('{{ asset('plataforma/assets/user/utilidades/spa.jpg')}}')">
+    <div class="bgimg-1" style="height: auto;background-image: url('{{asset('assets/user/utilidades/spa.jpg')}}')">
         <div class="row">
             <div class="col-12">
                 <h2 class="titulo_alfa text-center mb-5" style="color: #fff!important">
@@ -413,7 +413,7 @@ crossorigin="anonymous" />
                     <div class="d-flex justify-content-center">
                         <div class="rounded_lab">
                             <p class="text-center">
-                                <img class="img_rounded_lab" src="{{ asset('plataforma/assets/user/icons/icono-bb-glow-1.webp')}}" alt="">
+                                <img class="img_rounded_lab" src="{{asset('assets/user/icons/icono-bb-glow-1.webp')}}" alt="">
                             </p>
                         </div>
                     </div>
@@ -423,7 +423,7 @@ crossorigin="anonymous" />
                     <div class="d-flex justify-content-center">
                         <div class="rounded_lab">
                             <p class="text-center">
-                            <img class="img_rounded_lab" src="{{ asset('plataforma/assets/user/icons/icono-corporal.webp')}}" alt="">
+                            <img class="img_rounded_lab" src="{{asset('assets/user/icons/icono-corporal.webp')}}" alt="">
                             </p>
                         </div>
                     </div>
@@ -433,7 +433,7 @@ crossorigin="anonymous" />
                     <div class="d-flex justify-content-center">
                         <div class="rounded_lab">
                             <p class="text-center">
-                            <img class="img_rounded_lab" src="{{ asset('plataforma/assets/user/icons/icono-facial.webp')}}" alt="">
+                            <img class="img_rounded_lab" src="{{asset('assets/user/icons/icono-facial.webp')}}" alt="">
                             </p>
                         </div>
                     </div>
@@ -443,7 +443,7 @@ crossorigin="anonymous" />
                     <div class="d-flex justify-content-center">
                         <div class="rounded_lab">
                             <p class="text-center">
-                            <img class="img_rounded_lab" src="{{ asset('plataforma/assets/user/icons/icono-relex-1.webp')}}" alt="">
+                            <img class="img_rounded_lab" src="{{asset('assets/user/icons/icono-relex-1.webp')}}" alt="">
                             </p>
                         </div>
                     </div>
@@ -461,20 +461,20 @@ crossorigin="anonymous" />
             <div class="row margin_galery_lab">
 
                 <div class="col-12 mb-3">
-                    <div class="img_lab_principal" style="background-image: url('{{ asset('plataforma/assets/user/utilidades/lab.jpg')}}')">
+                    <div class="img_lab_principal" style="background-image: url('{{asset('assets/user/utilidades/lab.jpg')}}')">
                     </div>
                 </div>
 
                 <div class="col-6 col-sm-4">
-                    <img class="img_lab_secundary px-3" src="{{ asset('plataforma/assets/user/utilidades/doctiura.jpg')}}" alt="">
+                    <img class="img_lab_secundary px-3" src="{{asset('assets/user/utilidades/doctiura.jpg')}}" alt="">
                 </div>
 
                 <div class="col-6 col-sm-4">
-                    <img class="img_lab_secundary px-3" src="{{ asset('plataforma/assets/user/utilidades/manos_product.jpg')}}" alt="">
+                    <img class="img_lab_secundary px-3" src="{{asset('assets/user/utilidades/manos_product.jpg')}}" alt="">
                 </div>
 
                 <div class="col-4 col-sm-4 desapecer_contendor_sm">
-                    <img class="img_lab_secundary px-3" src="{{ asset('plataforma/assets/user/utilidades/producto_palciacion.jpg')}}" alt="">
+                    <img class="img_lab_secundary px-3" src="{{asset('assets/user/utilidades/producto_palciacion.jpg')}}" alt="">
                 </div>
 
 
@@ -492,7 +492,7 @@ crossorigin="anonymous" />
                 Nuestro Catalogo
             </h2>
             {{-- <p class="text-center mt-5">
-                <img class="px-3" src="{{ asset('plataforma/assets/user/utilidades/captura_productos.png')}}" alt="" style="width:80%;">
+                <img class="px-3" src="{{asset('assets/user/utilidades/captura_productos.png')}}" alt="" style="width:80%;">
             </p> --}}
         </div>
 
@@ -650,7 +650,7 @@ crossorigin="anonymous" />
                     <div class="d-flex justify-content-center">
                         <div class="card_certificaciones">
                             <p class="text-center">
-                                <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/logotipos/DOCTORA.png')}}" alt="">
+                                <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/DOCTORA.png')}}" alt="">
                             </p>
                         </div>
                     </div>
@@ -660,7 +660,7 @@ crossorigin="anonymous" />
                     <div class="d-flex justify-content-center">
                         <div class="card_certificaciones">
                             <p class="text-center">
-                                <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/logotipos/unam.png')}}" alt="">
+                                <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
                             </p>
                         </div>
                     </div>
@@ -679,7 +679,7 @@ crossorigin="anonymous" />
                 nuestros estudiantes...
             </h2>
             {{-- <p class="text-center mt-5">
-                <img class="px-3" src="{{ asset('plataforma/assets/user/utilidades/captura.png')}}" alt="">
+                <img class="px-3" src="{{asset('assets/user/utilidades/captura.png')}}" alt="">
             </p> --}}
         </div>
     </div>
@@ -743,7 +743,7 @@ crossorigin="anonymous" />
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-{{-- <script src="{{ asset('plataforma/assets/user/custom/multistepes.js')}}"></script> --}}
+{{-- <script src="{{asset('assets/user/custom/multistepes.js')}}"></script> --}}
 <!-- Option 1: Bootstrap Bundle with Popper -->
 
 

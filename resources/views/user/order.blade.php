@@ -5,7 +5,7 @@
 @endsection
 
 @section('css_custom')
-<link href="{{ asset('plataforma/assets/user/custom/thankyou.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/user/custom/thankyou.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -19,7 +19,7 @@
             <div class="d-flex justify-content-center">
                 <div class="card_thanks">
                     <p class="text-center">
-                        <img class="img_card_certificaciones" src="{{ asset('plataforma/assets/user/icons/cracker.png')}}" alt="">
+                        <img class="img_card_certificaciones" src="{{asset('assets/user/icons/cracker.png')}}" alt="">
                     </p>
                 </div>
             </div>

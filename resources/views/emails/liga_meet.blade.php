@@ -341,7 +341,7 @@
                                                                                             style='font-size: 15px;width:530px;text-align:center;padding:0px;background-image:none;background-color:transparent;'>
 																							            <img alt=""
                  width="100"
-                 src='{{ asset('plataforma/assets/user/icons/meet.png')}}' max-width='100%'
+                 src='{{asset('assets/user/icons/meet.png')}}' max-width='100%'
                  style='max-width: 100%;vertical-align: middle;width:100px;'/>
 			                                                                                        </td>
                                                                                     </tr>

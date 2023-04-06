@@ -10,17 +10,17 @@
         @yield('template_title') - {{$configuracion->nombre_sistema}}
     </title>
 
-    <link href="{{ asset('plataforma/assets/user/bootstrap/css/bootstrap.css')}}" rel="stylesheet" />
-    <link href="{{ asset('plataforma/assets/user/custom/custom.css')}}" rel="stylesheet" />
-    <link href="{{ asset('plataforma/assets/user/custom/header.css')}}" rel="stylesheet" />
-    <link href="{{ asset('plataforma/assets/user/custom/footer.css')}}" rel="stylesheet" />
-    <link href="{{ asset('plataforma/assets/user/custom/modal_login.css')}}" rel="stylesheet" />
-    <link href="{{ asset('plataforma/assets/user/custom/modal_checkout.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/user/bootstrap/css/bootstrap.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/user/custom/custom.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/user/custom/header.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/user/custom/footer.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/user/custom/modal_login.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/user/custom/modal_checkout.css')}}" rel="stylesheet" />
 
     @yield('css_custom')
 
     <!-- Font Awesome Icons -->
-    {{-- <link href="{{ asset('plataforma/assets/vendor/@fortawesome/fontawesome-free/css/all.min.cs')}}" rel="stylesheet" /> --}}
+    {{-- <link href="{{asset('assets/vendor/@fortawesome/fontawesome-free/css/all.min.cs')}}" rel="stylesheet" /> --}}
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
   </head>
