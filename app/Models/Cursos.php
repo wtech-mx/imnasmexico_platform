@@ -37,8 +37,10 @@ class Cursos extends Model
         'slug',
         'precio',
         'materiales',
+        'paquete',
+        'video_cad',
     ];
-    
+
     public function User()
     {
         return $this->belongsTo(User::class, 'id_usuario');

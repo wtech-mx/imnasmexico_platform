@@ -24,13 +24,23 @@
                     <tbody>
                     @if(session('cart'))
                         @foreach(session('cart') as $id => $details)
-                            @php $total += $details['price'] * $details['quantity'] @endphp
+                            @php
+                            $total += $details['price'] * $details['quantity'];
+
+
+                            if($details['paquete'] == 0){
+                                $price = $details['price'];
+                            }else{
+                                $price = 0;
+                                $nombre = 'Principiantes cosmetología';
+                            }
+                            @endphp
                             <tr>
                                 <th>
                                     <img class="image_checkout" src="{{ asset('curso/'. $details['image'] )}}" class="card-img-top" alt="...">
                                 </th>
                                 <td class="td_title_checkout">{{ $details['name'] }}</td>
-                                <td>${{ $details['price'] }}</td>
+                                <td>${{ $price }}</td>
                                 {{-- <td data-th="Quantity">
 
                                     <input type="number" value="{{ $details['quantity'] }}" class="form-control quantity update-cart" />

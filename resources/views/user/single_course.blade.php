@@ -512,7 +512,8 @@
                         </div>
                     </div>
                 @else
-                    @if ($curso->modalidad == 'Presencial')
+                    @if ($usuario_compro != NULL)
+                        @if ($curso->modalidad == 'Presencial')
                         <div class="row">
                             <div class="col-6">
                                 <h2 class="title_curso text-center mb-5">Ubicacion</h2>
@@ -528,7 +529,7 @@
                                     </p>
                             </div>
                         </div>
-                    @else
+                        @else
                         <div class="row">
                             <div class="col-12 mt">
                                 <h2 class="text-center title_curso">Enlace de la reuinion</h2>
@@ -539,7 +540,77 @@
 
                             </div>
                         </div>
+                        @endif
+                    @else
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="title_curso text-center mb-5">Rescursos</h2>
+                            </div>
+
+                            <div class="col-12 m-auto">
+                                    <p class="  ">
+                                        Usted no ha comprado este curso
+                                    </p>
+                            </div>
+                            @if ($curso->estatus == 1)
+                                <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Comprar ahora
+                                        </p>
+                                        <div class="card_bg_btn ">
+                                            <i class="fas fa-cart-plus card_icon_btn"></i>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a class="btn btn-secundario space_cs_rs mt-5">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Contactar
+                                        </p>
+                                        <div class="card_bg_btn_secundario">
+                                            <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <div class="collapse mt-3" id="collapsetemario">
+                                    <div class="card card-body card_colapsable_comprar">
+                                        <div class="row mb-3">
+                                            @foreach ($tickets as $ticket)
+                                                <div class="col-4 mt-3">
+                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                </div>
+                                                <div class="col-3 mt-3">
+                                                    @if ($ticket->descuento == NULL)
+                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                    @else
+                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                    @endif
+                                                </div>
+
+                                                <div class="col-5 mt-3">
+                                                    <p class="btn-holder">
+                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                            <i class="fas fa-ticket-alt"></i> Comprar
+                                                        </a>
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
                     @endif
+
                 @endguest
               </div>
 

@@ -337,12 +337,12 @@ class OrderController extends Controller
             } else {
 
                 $cart[$id] = [
-
                     "id" => $product->id,
                     "name" => $product->nombre,
                     "curso" => $product->id_curso,
                     "quantity" => 1,
                     "price" => $precio,
+                    "paquete" => 0,
                     "image" => $product->imagen
                 ];
             }
@@ -353,22 +353,38 @@ class OrderController extends Controller
 
     public function resultado(Request $request){
 
-        $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas'));
+        if($request->input('paquete') == 1){
+            $request->session()->flush();
+            $total = 1175;
+            $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas'));
+        }elseif($request->input('paquete') == 2){
+            $request->session()->flush();
+            $total = 1500;
+            $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas2'));
+        }elseif($request->input('paquete') == 3){
+            $request->session()->flush();
+            $total = 2125;
+            $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas3'));
+        }elseif($request->input('paquete') == 4){
+            $request->session()->flush();
+            $total = 2550;
+            $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas4'));
+        }
         $ticketsSeleccionados = CursosTickets::whereIn('id', $opcionesSeleccionadas)->get();
-
-        $total = 4700;
-        $nombre = 'Principiantes cosmetología';
             for ($i = 0; $i < count($ticketsSeleccionados); $i++) {
                 $cart[$ticketsSeleccionados[$i]->id] = [
                     "id" => $ticketsSeleccionados[$i]->id,
                     "name" => $ticketsSeleccionados[$i]->nombre,
                     "curso" => $ticketsSeleccionados[$i]->id_curso,
                     "quantity" => 1,
-                    "price" => $ticketsSeleccionados[$i]->precio,
+                    "price" => $total,
+                    "paquete" => 1,
                     "image" => $ticketsSeleccionados[$i]->imagen
                 ];
                 session()->put('cart', $cart);
             }
+
+
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 

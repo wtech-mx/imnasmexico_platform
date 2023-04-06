@@ -7,6 +7,7 @@ use App\Models\CursosTickets;
 use App\Models\OrdersTickets;
 use Session;
 use Str;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class CursoUsersController extends Controller
@@ -29,9 +30,13 @@ class CursoUsersController extends Controller
         $curso = Cursos::where('slug','=', $slug)->firstOrFail();
         $tickets = CursosTickets::where('id_curso','=', $curso->id)->where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
 
-        // $user_tickets = OrdersTickets::where('id_user','<=', auth()->user()->id)->first();
+        $usuarioId = Auth::id(); // Obtén el ID del usuario logueado
+        // Verifica si el usuario ha comprado un ticket para el curso
+        $usuario_compro = OrdersTickets::where('id_usuario', $usuarioId)
+                        ->where('id_curso','=', $curso->id)
+                        ->first();
 
-        return view('user.single_course', compact('curso', 'tickets'));
+        return view('user.single_course', compact('curso', 'tickets', 'usuario_compro'));
     }
 
     public function paquetes()
@@ -45,7 +50,7 @@ class CursoUsersController extends Controller
         ->where('cursos_tickets.fecha_final','>=', $fechaActual)
         ->where('cursos.modalidad','=', 'Online')
         ->get();
-dd($tickets);
+        // dd(session()->all());
         return view('user.paquetes', compact('curso', 'tickets'));
     }
 

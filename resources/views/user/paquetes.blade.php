@@ -23,12 +23,13 @@
                 @csrf
                 @foreach ($tickets as $ticket)
                     <div class="mt-5">
-                        <input type="checkbox" name="ticket[]" data-grupo="grupo1" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo1()">
+                        <input type="checkbox" name="ticket[]" id="checkbox{{ $ticket->id }}" data-grupo="grupo1" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo1()">
                         <label>{{ $ticket->nombre }}</label>
                     </div>
                 @endforeach
                 <input type="hidden" name="opciones_seleccionadas" value="">
-                <button type="submit">Comprar</button>
+                <input type="hidden" name="paquete" value="1">
+                <button class="btn btn-primary btn-submit" type="submit">Comprar</button>
             </form>
         </div>
     </div>
@@ -39,15 +40,18 @@
 
     <div class="row">
         <div class="col-6 space_paquetes">
-            @foreach ($tickets as $ticket)
-                <div class="mt-5">
-                    <input type="checkbox" name="ticket[]" data-grupo="grupo2" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo2()">
-                    <label>{{ $ticket->nombre }}</label>
-                </div>
-            @endforeach
-            <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', 2) }}"  role="button">
-                <i class="fas fa-ticket-alt"></i> Comprar
-            </a>
+            <form action="{{ route('carrito.resultado2') }}" method="post">
+                @csrf
+                @foreach ($tickets as $ticket)
+                    <div class="mt-5">
+                        <input type="checkbox" name="ticket2[]" data-grupo="grupo2" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo2()">
+                        <label>{{ $ticket->nombre }}</label>
+                    </div>
+                @endforeach
+                <input type="hidden" name="opciones_seleccionadas2" value="">
+                <input type="hidden" name="paquete" value="2">
+                <button type="submit" disabled>Comprar</button>
+            </form>
         </div>
 
         <div class="col-6 space_paquetes">
@@ -65,12 +69,18 @@
         </div>
 
         <div class="col-6 space_paquetes">
-            @foreach ($tickets as $ticket)
-                <div class="mt-5">
-                    <input type="checkbox" name="ticket[]" data-grupo="grupo3" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo3()">
-                    <label>{{ $ticket->nombre }}</label>
-                </div>
-            @endforeach
+            <form action="{{ route('carrito.resultado3') }}" method="post">
+                @csrf
+                @foreach ($tickets as $ticket)
+                    <div class="mt-5">
+                        <input type="checkbox" name="ticket3[]" data-grupo="grupo3" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo3()">
+                        <label>{{ $ticket->nombre }}</label>
+                    </div>
+                @endforeach
+                <input type="hidden" name="opciones_seleccionadas3" value="">
+                <input type="hidden" name="paquete" value="3">
+                <button type="submit" disabled>Comprar</button>
+            </form>
         </div>
     </div>
 
@@ -80,12 +90,18 @@
 
     <div class="row">
         <div class="col-6 space_paquetes">
-            @foreach ($tickets as $ticket)
-                <div class="mt-5">
-                    <input type="checkbox" name="ticket[]" data-grupo="grupo4" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo4()">
-                    <label>{{ $ticket->nombre }}</label>
-                </div>
-            @endforeach
+            <form action="{{ route('carrito.resultado4') }}" method="post">
+                @csrf
+                @foreach ($tickets as $ticket)
+                    <div class="mt-5">
+                        <input type="checkbox" name="ticket4[]" data-grupo="grupo4" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo4()">
+                        <label>{{ $ticket->nombre }}</label>
+                    </div>
+                @endforeach
+                <input type="hidden" name="opciones_seleccionadas4" value="">
+                <input type="hidden" name="paquete" value="4">
+                <button type="submit" disabled>Comprar</button>
+            </form>
         </div>
 
         <div class="col-6 space_paquetes">
@@ -98,18 +114,18 @@
 
 @section('js')
     <script>
-const checkboxes = document.getElementsByName("ticket[]");
-const campoOculto = document.getElementsByName("opciones_seleccionadas")[0];
+        const checkboxes = document.getElementsByName("ticket[]");
+        const campoOculto = document.getElementsByName("opciones_seleccionadas")[0];
 
-checkboxes.forEach(checkbox => {
-    checkbox.addEventListener("click", () => {
-        const opcionesSeleccionadas = [...checkboxes]
-            .filter(c => c.checked)
-            .map(c => c.value)
-            .join("|");
-        campoOculto.value = opcionesSeleccionadas;
-    });
-});
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener("click", () => {
+                const opcionesSeleccionadas = [...checkboxes]
+                    .filter(c => c.checked)
+                    .map(c => c.value)
+                    .join("|");
+                campoOculto.value = opcionesSeleccionadas;
+            });
+        });
     </script>
 
     <script>
@@ -119,18 +135,36 @@ checkboxes.forEach(checkbox => {
 
         checkboxes.forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
-            if (this.checked) {
-                seleccionados++;
-                if (seleccionados > 4) {
-                this.checked = false;
-                seleccionados--;
+                if (this.checked) {
+                    seleccionados++;
+                    if (seleccionados > 4) {
+                    this.checked = false;
+                    seleccionados--;
+                    }
+                } else {
+                    seleccionados--;
                 }
-            } else {
-                seleccionados--;
-            }
             });
         });
         }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+        // Deshabilitar el botón al cargar la página
+        $('.btn-submit').prop('disabled', true);
+
+        // Contar el número de casillas de verificación seleccionadas
+        $('.checkbox').on('change', function() {
+            var checkedCount = $('.checkbox:checked').length;
+            // Habilitar el botón si se seleccionan 4 casillas de verificación
+            if (checkedCount === 4) {
+            $('.btn-submit').prop('disabled', false);
+            } else {
+            $('.btn-submit').prop('disabled', true);
+            }
+        });
+        });
     </script>
 
     <script>
@@ -155,6 +189,21 @@ checkboxes.forEach(checkbox => {
     </script>
 
     <script>
+        const checkboxes2 = document.getElementsByName("ticket2[]");
+        const campoOculto2 = document.getElementsByName("opciones_seleccionadas2")[0];
+
+        checkboxes2.forEach(checkbox => {
+            checkbox.addEventListener("click", () => {
+                const opcionesSeleccionadas2 = [...checkboxes2]
+                    .filter(c => c.checked)
+                    .map(c => c.value)
+                    .join("|");
+                campoOculto2.value = opcionesSeleccionadas2;
+            });
+        });
+    </script>
+
+    <script>
         function limitarSeleccionGrupo3() {
         var checkboxes = document.querySelectorAll('input[type=checkbox][data-grupo=grupo3]');
         var seleccionados = 0;
@@ -176,6 +225,21 @@ checkboxes.forEach(checkbox => {
     </script>
 
     <script>
+        const checkboxes3 = document.getElementsByName("ticket3[]");
+        const campoOculto3 = document.getElementsByName("opciones_seleccionadas3")[0];
+
+        checkboxes3.forEach(checkbox => {
+            checkbox.addEventListener("click", () => {
+                const opcionesSeleccionadas3 = [...checkboxes3]
+                    .filter(c => c.checked)
+                    .map(c => c.value)
+                    .join("|");
+                campoOculto3.value = opcionesSeleccionadas3;
+            });
+        });
+    </script>
+
+    <script>
         function limitarSeleccionGrupo4() {
         var checkboxes = document.querySelectorAll('input[type=checkbox][data-grupo=grupo4]');
         var seleccionados = 0;
@@ -194,6 +258,21 @@ checkboxes.forEach(checkbox => {
             });
         });
         }
+    </script>
+
+    <script>
+        const checkboxes4 = document.getElementsByName("ticket4[]");
+        const campoOculto4 = document.getElementsByName("opciones_seleccionadas4")[0];
+
+        checkboxes4.forEach(checkbox => {
+            checkbox.addEventListener("click", () => {
+                const opcionesSeleccionadas4 = [...checkboxes4]
+                    .filter(c => c.checked)
+                    .map(c => c.value)
+                    .join("|");
+                campoOculto4.value = opcionesSeleccionadas4;
+            });
+        });
     </script>
 @endsection
 
