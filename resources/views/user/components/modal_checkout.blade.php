@@ -74,11 +74,11 @@
                             <div class="accordion-item">
                               <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Sin Factura
+                                    Mercado pago
                                 </button>
                               </h2>
                               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
+                                <div class="accordion-body" style="padding: 0px!important;">
                                     <div class="row">
                                         <div class="col-12">
                                             <form method="POST" action="{{ route('process-payment') }}">
@@ -104,8 +104,15 @@
                                                             <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
                                                         </div>
                                                     </div>
+
+                                                    <div class="col-12">
+                                                        <div class="d-flex justify-content-center">
+                                                            <button class="btn_pagar_checkout " type="submit">Pagar</button>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
-                                                <button class="card_tittle_btn my-auto" type="submit">Pagar</button>
+
                                             </form>
                                         </div>
                                     </div>
@@ -120,9 +127,8 @@
                                 </button>
                               </h2>
                               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
+                                <div class="accordion-body" style="padding: 0px!important;">
 
-                                    <div class="d-flex justify-content-center">
                                         <form role="form" action="{{ route('order.pay_stripe') }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
                                             @csrf
 
@@ -167,7 +173,6 @@
                                                     </div>
                                                 </div>
 
-
                                                 <div class="col-12">
                                                     <div class="input-group flex-nowrap mt-4">
                                                             <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-user"></i></span>
@@ -203,20 +208,22 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12 error form-group hide">
+                                                {{-- <div class="col-12 error form-group hide">
                                                     <div class='alert-danger alert'>
                                                         Por favor, corrija los errores e inténtelo de nuevo
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="col-12">
-                                                    <button class="btn btn-primary btn-lg btn-block" type="submit">Comprar</button>
+                                                    <div class="col-12">
+                                                        <div class="d-flex justify-content-center">
+                                                            <button class="btn_pagar_checkout " type="submit">Pagar</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
 
                                         </form>
-                                      </div>
-
 
                                   </div>
 

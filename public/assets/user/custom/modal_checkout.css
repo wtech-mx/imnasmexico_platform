@@ -63,3 +63,53 @@ body.modal-open>div.bg,
   .td_title_checkout{
     font-size: 14px;
   }
+  .accordion-item:first-of-type .accordion-button{
+    border: solid 1px transparent;
+    background-color: #836262;
+    color: #F5ECE4;
+    font-weight: bold;
+    border-radius: 19px;
+  }
+
+  .accordion-item:first-of-type {
+    border: solid 1px transparent;
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+    border: solid 1px transparent;
+    background-color: #836262;
+    background: #F5ECE4;
+    font-weight: bold;
+    border-radius: 19px;
+}
+
+.accordion-item:last-of-type {
+    border: solid 1px transparent;
+}
+
+.accordion-button:not(.collapsed) {
+    border: solid 1px transparent;
+    background-color: #836262;
+    background: #F5ECE4;
+    font-weight: bold;
+    border-radius: 19px;
+    color: #836262;
+}
+
+.input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
+    margin-left: calc(var(--bs-border-width) * -1);
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 110px;
+}
+
+.btn_pagar_checkout{
+    background: #000;
+    border-radius: 19px;
+    color: #F5ECE4;
+    border: solid 1px transparent;
+    padding: 10px 45px 10px 45px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
+}
