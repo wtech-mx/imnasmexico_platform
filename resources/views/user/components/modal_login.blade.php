@@ -35,9 +35,6 @@
                                 <div class="input-group flex-nowrap mt-4">
                                     <span class="input-group-text span_custom_login" ><i class="fas fa-phone-alt"></i></span>
                                     <input class="form-control input_custom_login" type="username" id="username" name="username"  placeholder="Telefono" required>
-                                    @if ($errors->has('email'))
-                                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                                    @endif
                                 </div>
 
                                 <div class="input-group flex-nowrap mt-4">
@@ -72,26 +69,33 @@
                                 <div class="input-group flex-nowrap mt-4">
                                     <span class="input-group-text span_custom_login" ><i class="fas fa-user"></i></span>
                                     <input class="form-control input_custom_login" type="text" id="name" name="name"   placeholder="Nombre Completo" required>
-                                        @if ($errors->has('name'))
-                                        <span class="text-danger">{{ $errors->first('name') }}</span>
-                                        @endif
                                 </div>
+                                @if ($errors->has('name'))
+                                <div class="input-group flex-nowrap mt-4">
+                                    <span class="text-danger">{{ $errors->first('name') }}</span>
+                                </div>
+                                @endif
 
                                 <div class="input-group flex-nowrap mt-4">
                                     <span class="input-group-text span_custom_login" ><i class="fas fa-envelope"></i></span>
                                     <input class="form-control input_custom_login" type="text" id="email" name="email"   placeholder="Correo" required>
-                                        @if ($errors->has('email'))
-                                        <span class="text-danger">{{ $errors->first('email') }}</span>
-                                        @endif
                                 </div>
+
+                                @if ($errors->has('email'))
+                                <div class="input-group flex-nowrap mt-4">
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                                </div>
+                                @endif
 
                                 <div class="input-group flex-nowrap mt-4">
                                     <span class="input-group-text span_custom_login" ><i class="fas fa-phone-alt"></i></span>
                                     <input class="form-control input_custom_login" type="number" id="telefono" name="telefono"   placeholder="Telefono" required>
-                                        @if ($errors->has('telefono'))
-                                        <span class="text-danger">{{ $errors->first('telefono') }}</span>
-                                        @endif
                                 </div>
+                                @if ($errors->has('telefono'))
+                                <div class="input-group flex-nowrap mt-4">
+                                    <span class="text-danger">{{ $errors->first('telefono') }}</span>
+                                </div>
+                                @endif
 
                                 <input type="hidden" placeholder="cliente" id="cliente" class="form-control" name="cliente" value="1">
 
