@@ -308,6 +308,7 @@
 
 {{-- slide de cursos --}}
 @include('user.components.carousel_courses')
+{{-- slide de cursos --}}
 
 {{--Laboratorio --}}
 <section class="primario bg_overley" style="background-color:#F5ECE4;">

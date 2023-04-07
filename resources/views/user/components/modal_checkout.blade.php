@@ -9,8 +9,8 @@
 
             <div class="col-12 col-md-6">
                 <p class="text-center tittle_modal_cka">Certificacion</p>
-                @php $total = 0 @endphp
-                <table class="table">
+
+                <table id="cart" class="table table-hover table-condensed">
                     <thead>
                       <tr class="tr_checkout">
                         <th >#</th>
@@ -20,8 +20,9 @@
                         <th></th>
                       </tr>
                     </thead>
-
                     <tbody>
+
+                    @php $total = 0 @endphp
                     @if(session('cart'))
                         @foreach(session('cart') as $id => $details)
                             @php
@@ -35,7 +36,7 @@
                                 $nombre = 'Principiantes cosmetología';
                             }
                             @endphp
-                            <tr>
+                            <tr data-id="{{ $id }}">
                                 <th>
                                     <img class="image_checkout" src="{{ asset('curso/'. $details['image'] )}}" class="card-img-top" alt="...">
                                 </th>
@@ -48,7 +49,7 @@
                                 </td>
                                 <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td> --}}
                                 <td>
-                                    <a class="btn btn-danger btn-sm remove-from-cart" ><i class="fa fa-trash-o"></i></a>
+                                    <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>
                                 </td>
                             </tr>
                         @endforeach

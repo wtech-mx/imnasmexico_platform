@@ -155,26 +155,24 @@
         });
 
         $(".remove-from-cart").click(function (e) {
-            e.preventDefault();
-            var ele = $(this);
+        e.preventDefault();
 
-            if(confirm("¿Seguro que quieres eliminar?")) {
-                $.ajax({
-                    url: '{{ route('remove.from.cart') }}',
-                    type: 'POST',
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: ele.parents("tr").attr("data-id"),
-                    },
-                    success: function(response) {
-                        location.reload();
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
-                    }
-                });
-            }
-        });
+        var ele = $(this);
+
+        if(confirm("Are you sure want to remove?")) {
+            $.ajax({
+                url: '{{ route('remove.from.cart') }}',
+                method: "DELETE",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: ele.parents("tr").attr("data-id")
+                },
+                success: function (response) {
+                    window.location.reload();
+                }
+            });
+        }
+    });
     </script>
 
     <script src="https://sdk.mercadopago.com/js/v2"></script>
