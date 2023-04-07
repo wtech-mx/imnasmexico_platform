@@ -349,6 +349,7 @@ class OrderController extends Controller
             }
 
         session()->put('cart', $cart);
+        Session::flash('modal_checkout', 'Se ha Abierto el checkout');
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
@@ -385,6 +386,7 @@ class OrderController extends Controller
                 session()->put('cart', $cart);
             }
 
+        // session()->flash('addedToCart', true);
 
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }

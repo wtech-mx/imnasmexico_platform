@@ -33,8 +33,20 @@
         @include('user.components.navbar')
     </header>
 
+
     <main class="container-fluid secundario" style="margin: 0;padding:0;">
     @yield('content')
+
+        @if (Session::has('modal_checkout'))
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+                var addedToCartModal = document.querySelector('#checkout_modal');
+                var bootstrapModal = new bootstrap.Modal(addedToCartModal);
+                bootstrapModal.show();
+            });
+    </script>
+      @endif
+
     </main>
 
     {{-- footer --}}
