@@ -451,17 +451,25 @@
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <h2 class="title_curso mt-4 mb-4"> Preguntas Frecuentes</h2>
-                        <p class="text_preguntas_material">
-                            Nuestros cursos y diplomados presenciales estan divididos en dos partes: <br><br>
-                            <strong>🤓 TEORÍA: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para su comprensión. <br><br>
-                            <strong>🤓 PRÁCTICA: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con PRODUCTO INCLUÍDO. <br> La práctica se hará de la mano con el profesor en donde se reforzara lo aprendido
-                        </p>
+                        @if ($curso->modalidad == 'Presencial')
+                            <p class="text_preguntas_material">
+                                Nuestros cursos y diplomados presenciales estan divididos en dos partes: <br><br>
+                                <strong>TEORÍA: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para su comprensión. <br><br>
+                                <strong>PRÁCTICA: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con PRODUCTO INCLUÍDO. <br> La práctica se hará de la mano con el profesor en donde se reforzara lo aprendido
+                            </p>
+                        @else
+                            <p class="text_preguntas_material">
+                                <strong>CLASES GRABADAS: </strong><br> Las clases quedarán grabadas y tendrás acceso a ellas por <strong>72 horas. </strong> <br><br>
+                                <strong>DESPUES DE COMPRAR: </strong><br> Una vez realizada su compra, a su correo llegará un email de <br> confirmación de pago y posteriormente uno con la liga de su <br>clase, es necesario revisar la bandeja de spam.
+                            </p>
+                        @endif
+
                     </div>
 
                     <div class="col-12 col-lg-6">
                         <h2 class="title_curso mt-4 mb-4"> Materiales de clase</h2>
                         <p class="text_preguntas_material">
-                            aqui v ala variable dde material de clase
+                            {{ $curso->materiales }}
                         </p>
                     </div>
 
@@ -1130,32 +1138,102 @@
                         </div>
                     </div>
                 @else
-                    @if ($curso->modalidad == 'Presencial')
-                        <div class="row">
-                            <div class="col-6">
-                                <h2 class="title_curso text-center mb-5">Ubicacion</h2>
-                                <div class="d-flex justify-content-center">
-                                    <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                    </iframe>
+                    @if ($usuario_compro != NULL)
+                        @if ($curso->modalidad == 'Presencial')
+                            <div class="row">
+                                <div class="col-6">
+                                    <h2 class="title_curso text-center mb-5">Ubicacion</h2>
+                                    <div class="d-flex justify-content-center">
+                                        <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                        </iframe>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 m-auto">
+                                        <p class="  ">
+                                            Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
+                                        </p>
                                 </div>
                             </div>
+                        @else
+                            <div class="row">
+                                <div class="col-12 mt">
+                                    <h2 class="text-center title_curso">Enlace de la reuinion</h2>
 
-                            <div class="col-6 m-auto">
-                                    <p class="  ">
-                                        Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
-                                    </p>
+                                    <a class="text-center registro_num2 mt-3 mb-5" href="{{$curso->recurso}}" style="" target="_blank">
+                                        {{$curso->recurso}}
+                                    </a>
+
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     @else
                         <div class="row">
-                            <div class="col-12 mt">
-                                <h2 class="text-center title_curso">Enlace de la reuinion</h2>
+                            <div class="col-12">
+                                <h2 class="title_curso text-center mb-5">Rescursos</h2>
+                            </div>
 
-                                <a class="text-center registro_num2 mt-3 mb-5" href="{{$curso->recurso}}" style="" target="_blank">
-                                    {{$curso->recurso}}
+                            <div class="col-12 m-auto">
+                                    <p class="  ">
+                                        Usted no ha comprado este curso
+                                    </p>
+                            </div>
+                            @if ($curso->estatus == 1)
+                                <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Comprar ahora
+                                        </p>
+                                        <div class="card_bg_btn ">
+                                            <i class="fas fa-cart-plus card_icon_btn"></i>
+                                        </div>
+                                    </div>
                                 </a>
 
-                            </div>
+                                <a class="btn btn-secundario space_cs_rs mt-5">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Contactar
+                                        </p>
+                                        <div class="card_bg_btn_secundario">
+                                            <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <div class="collapse mt-3" id="collapsetemario">
+                                    <div class="card card-body card_colapsable_comprar">
+                                        <div class="row mb-3">
+                                            @foreach ($tickets as $ticket)
+                                                <div class="col-4 mt-3">
+                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                </div>
+                                                <div class="col-3 mt-3">
+                                                    @if ($ticket->descuento == NULL)
+                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                    @else
+                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                    @endif
+                                                </div>
+
+                                                <div class="col-5 mt-3">
+                                                    <p class="btn-holder">
+                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                            <i class="fas fa-ticket-alt"></i> Comprar
+                                                        </a>
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     @endif
                 @endguest

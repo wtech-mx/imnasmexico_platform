@@ -169,6 +169,7 @@ class OrderController extends Controller
                 $user->razon_social = $request->get('razon_social');
                 $user->rfc = $request->get('rfc');
                 $user->cfdi = $request->get('cfdi');
+                $user->direccion = $request->get('direccion');
                 $user->update();
             }
             $payer = $user;

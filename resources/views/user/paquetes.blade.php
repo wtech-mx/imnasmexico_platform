@@ -50,7 +50,7 @@
                 @endforeach
                 <input type="hidden" name="opciones_seleccionadas2" value="">
                 <input type="hidden" name="paquete" value="2">
-                <button type="submit" disabled>Comprar</button>
+                <button type="submit" >Comprar</button>
             </form>
         </div>
 
@@ -79,7 +79,7 @@
                 @endforeach
                 <input type="hidden" name="opciones_seleccionadas3" value="">
                 <input type="hidden" name="paquete" value="3">
-                <button type="submit" disabled>Comprar</button>
+                <button type="submit" >Comprar</button>
             </form>
         </div>
     </div>
@@ -100,7 +100,7 @@
                 @endforeach
                 <input type="hidden" name="opciones_seleccionadas4" value="">
                 <input type="hidden" name="paquete" value="4">
-                <button type="submit" disabled>Comprar</button>
+                <button type="submit" >Comprar</button>
             </form>
         </div>
 
@@ -152,16 +152,16 @@
     <script>
         $(document).ready(function() {
         // Deshabilitar el botón al cargar la página
-        $('.btn-submit').prop('disabled', true);
+        $('.btn-submit').prop('', true);
 
         // Contar el número de casillas de verificación seleccionadas
         $('.checkbox').on('change', function() {
             var checkedCount = $('.checkbox:checked').length;
             // Habilitar el botón si se seleccionan 4 casillas de verificación
             if (checkedCount === 4) {
-            $('.btn-submit').prop('disabled', false);
+            $('.btn-submit').prop('', false);
             } else {
-            $('.btn-submit').prop('disabled', true);
+            $('.btn-submit').prop('', true);
             }
         });
         });

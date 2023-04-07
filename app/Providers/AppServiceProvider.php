@@ -49,8 +49,10 @@ class AppServiceProvider extends ServiceProvider
             // Asignar la nueva fecha y hora al objeto Cursos
             $curso2 = Cursos::where('video_cad', '=', '1')->first();
             if($curso2){
-                $curso2->video_cad = '0';
-                $curso2->update();
+                if($fechaHoraFutura <= $curso2->video_cad){
+                    $curso2->video_cad = '0';
+                    $curso2->update();
+                }
             }
 
             $view->with(['configuracion' => $configuracion, 'fechaActual' => $fechaActual]);

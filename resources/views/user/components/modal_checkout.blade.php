@@ -136,21 +136,21 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="input-group flex-nowrap mt-4">
-                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-user"></i></span>
                                                         <input type="text" name="razon_social" id="razon_social" class="form-control input_custom_checkout" placeholder="Nombre / Razon Social" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-6">
                                                     <div class="input-group flex-nowrap mt-4">
-                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-address-card"></i></span>
                                                         <input type="text" name="rfc" id="rfc" class="form-control input_custom_checkout" placeholder="RFC" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-6">
                                                     <div class="input-group flex-nowrap mt-4">
-                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-file"></i></span>
                                                         <select name="cfdi" id="cfdi" required>
                                                             <option value="">CFDI</option>
                                                             <option value="G01 Adquisición de Mercancías">G01 Adquisición de Mercancías</option>
@@ -162,15 +162,22 @@
 
                                                 <div class="col-6">
                                                     <div class="input-group flex-nowrap mt-4">
-                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
                                                         <input type="text" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-6">
                                                     <div class="input-group flex-nowrap mt-4">
-                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone"></i></span>
                                                         <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="input-group flex-nowrap mt-4">
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-compass"></i></span>
+                                                        <input type="text" name="direccion" id="direccion" class="form-control input_custom_checkout" placeholder="Direccion de factura" required>
                                                     </div>
                                                 </div>
 
