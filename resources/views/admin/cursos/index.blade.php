@@ -32,6 +32,7 @@
                                     <thead class="thead">
                                         <tr>
                                             <th>No</th>
+                                            <th>Img</th>
                                             <th>Nombre</th>
                                             <th>fecha inicio</th>
                                             <th>fecha final</th>
@@ -44,6 +45,7 @@
                                         @foreach ($cursos as $curso)
                                             <tr>
                                                 <td>{{ $curso->id }}</td>
+                                                <th><img id="blah" src="{{asset('curso/'.$curso->foto) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
 
                                                 <td>{{ $curso->nombre }}</td>
                                                 <td>{{ $curso->fecha_inicial }}</td>
