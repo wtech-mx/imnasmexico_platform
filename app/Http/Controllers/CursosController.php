@@ -9,6 +9,8 @@ use App\Models\OrdersTickets;
 use Session;
 use Str;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class CursosController extends Controller
 {
@@ -103,11 +105,22 @@ class CursosController extends Controller
 
     public function update(Request $request, $id)
     {
+        $fechaHoraActual = date('Y-m-d H:i:s');
 
         $curso = Cursos::find($id);
         $curso->nombre = $request->get('nombre');
         $curso->descripcion = $request->get('descripcion');
         $curso->materiales = $request->get('materiales');
+
+        if ($request->hasFile("clase_grabada")) {
+            $file = $request->file('clase_grabada');
+            $path = public_path() . '/clase';
+            $fileName2 = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName2);
+            $curso->clase_grabada = $fileName2;
+            $curso->video_cad = 1;
+            $curso->fecha_video = $fechaHoraActual;
+        }
 
         if ($request->hasFile("foto")) {
             $file = $request->file('foto');
@@ -133,7 +146,6 @@ class CursosController extends Controller
         $curso->informacion = $request->get('informacion');
         $curso->destacado = $request->get('destacado');
         $curso->estatus = $request->get('estatus');
-        $curso->clase_grabada = $request->get('clase_grabada');
 
         $curso->update();
 
@@ -144,22 +156,6 @@ class CursosController extends Controller
         $fecha_inicial_ticket = $request->get('fecha_inicial_ticket');
         $fecha_final_ticket = $request->get('fecha_final_ticket');
         $descuento = $request->get('descuento');
-
-        // if ($request->get('nombre_ticket') != NULL) {
-        //     for ($count = 0; $count < count($nombre_ticket); $count++) {
-        //         $data = array(
-        //             'id_curso' => $curso->id,
-        //             'nombre' => $nombre_ticket[$count],
-        //             'descripcion' => $descripcion_ticket[$count],
-        //             'precio' => $precio_ticket[$count],
-        //             'fecha_inicial' => $fecha_inicial_ticket[$count],
-        //             'fecha_final' => $fecha_final_ticket[$count],
-        //             'descuento' => $descuento[$count],
-        //         );
-        //         $insert_data[] = $data;
-        //     }
-        //     CursosTickets::insert($insert_data);
-        // }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->route('cursos.index')

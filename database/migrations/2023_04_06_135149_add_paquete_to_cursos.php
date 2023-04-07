@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('cursos', function (Blueprint $table) {
             $table->integer('video_cad')->nullable();
+            $table->timestamp('fecha_video')->nullable();
         });
     }
 
