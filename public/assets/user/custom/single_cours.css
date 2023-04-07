@@ -149,6 +149,12 @@
     margin: auto!important;
 }
 
+.text_preguntas_material{
+    font-size: 19px;
+    font-weight:400;
+    color: #836262;
+}
+
 @media only screen and (max-width: 1390px) {
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {

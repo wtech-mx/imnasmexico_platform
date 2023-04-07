@@ -60,7 +60,7 @@
                 <div class="d-flex justify-content-around">
                      <p class="espacio_w">Preguntas</p>
                     <div class="content_nav d-inline-block">
-                        <img class="icon_nav_course" src="{{asset('assets/user/icons/personas.webp')}}" alt="">
+                        <img class="icon_nav_course" src="{{asset('assets/user/icons/mujer_preguntas.png')}}" alt="">
                     </div>
                 </div>
               </button>
@@ -449,6 +449,26 @@
 
               <div class="tab-pane fade" id="v-pills-dirijido" role="tabpanel" aria-labelledby="v-pills-dirijido-tab" tabindex="0">
                 <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <h2 class="title_curso mt-4 mb-4"> Preguntas Frecuentes</h2>
+                        <p class="text_preguntas_material">
+                            Nuestros cursos y diplomados presenciales estan divididos en dos partes: <br><br>
+                            <strong>🤓 TEORÍA: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para su comprensión. <br><br>
+                            <strong>🤓 PRÁCTICA: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con PRODUCTO INCLUÍDO. <br> La práctica se hará de la mano con el profesor en donde se reforzara lo aprendido
+                        </p>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <h2 class="title_curso mt-4 mb-4"> Materiales de clase</h2>
+                        <p class="text_preguntas_material">
+                            aqui v ala variable dde material de clase
+                        </p>
+                    </div>
+
+                    <div class="col-12 mt-4 mb-4">
+                        <h2 class="title_curso text-center">Dirigido a...</h2>
+                    </div>
+
                     <div class="col-6 ">
                         <div class="d-flex justify-content-end">
                             <div class="card_objetivos2">
@@ -647,7 +667,7 @@
                     </button>
 
                     <button class="nav-link" id="nav-dirigido_res-tab" data-bs-toggle="tab" data-bs-target="#nav-dirigido_res" type="button" role="tab" aria-controls="nav-dirigido_res" aria-selected="false">
-                        Dirigido a <img class="icon_res_tabs" src="{{asset('assets/user/icons/personas.webp')}}" alt="">
+                        Preguntas <img class="icon_res_tabs" src="{{asset('assets/user/icons/mujer_preguntas.png')}}" alt="">
                     </button>
 
                     <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
@@ -1022,6 +1042,27 @@
 
             <div class="tab-pane fade" id="nav-dirigido_res" role="tabpanel" aria-labelledby="nav-dirigido_res-tab" tabindex="0">
                 <div class="row">
+
+                    <div class="col-12 ">
+                        <h2 class="title_curso mt-2 mb-2"> Preguntas Frecuentes</h2>
+                        <p class="text_preguntas_material">
+                            Nuestros cursos y diplomados presenciales estan divididos en dos partes: <br><br>
+                            <strong>🤓 TEORÍA: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para su comprensión. <br><br>
+                            <strong>🤓 PRÁCTICA: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con PRODUCTO INCLUÍDO. <br> La práctica se hará de la mano con el profesor en donde se reforzara lo aprendido
+                        </p>
+                    </div>
+
+                    <div class="col-12 ">
+                        <h2 class="title_curso mt-2 mb-2"> Materiales de clase</h2>
+                        <p class="text_preguntas_material">
+                            aqui v ala variable dde material de clase
+                        </p>
+                    </div>
+
+                    <div class="col-12 mt-2 mb-2">
+                        <h2 class="title_curso text-center">Dirigido a...</h2>
+                    </div>
+
                     <div class="col-6 ">
                         <div class="d-flex justify-content-end">
                             <div class="card_objetivos2">

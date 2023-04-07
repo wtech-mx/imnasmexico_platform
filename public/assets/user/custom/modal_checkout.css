@@ -100,7 +100,7 @@ body.modal-open>div.bg,
     margin-left: calc(var(--bs-border-width) * -1);
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    width: 110px;
+    /* width: 110px; */
 }
 
 .btn_pagar_checkout{
