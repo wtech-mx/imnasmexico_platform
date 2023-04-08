@@ -375,24 +375,9 @@
             <div class="row margin_galery_lab">
 
                 <div class="col-12 mb-3">
-                    <div class="img_lab_principal" style="background-image: url('{{asset('assets/user/utilidades/lab.jpg')}}')">
-                    </div>
+                        <img class="img_lab_principal" src="{{asset('assets/user/utilidades/IMAGEN LABORATORIO.png')}}" alt="">
+
                 </div>
-
-                <div class="col-6 col-sm-4">
-                    <img class="img_lab_secundary px-3" src="{{asset('assets/user/utilidades/doctiura.jpg')}}" alt="">
-                </div>
-
-                <div class="col-6 col-sm-4">
-                    <img class="img_lab_secundary px-3" src="{{asset('assets/user/utilidades/manos_product.jpg')}}" alt="">
-                </div>
-
-                <div class="col-4 col-sm-4 desapecer_contendor_sm">
-                    <img class="img_lab_secundary px-3" src="{{asset('assets/user/utilidades/producto_palciacion.jpg')}}" alt="">
-                </div>
-
-
-
             </div>
         </div>
     </div>

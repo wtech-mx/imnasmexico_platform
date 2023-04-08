@@ -349,17 +349,8 @@ input.input_custom_checkout::placeholder{color: #F5ECE4!important;}
 }
 
 .img_lab_principal{
-    width:660px;
-    height:400px;
-    border-radius: 24px;
-    margin:0 auto;
-    background-size: cover;
-    background-position: 50% 50%;
-    border-style: solid;
-    border-width: 0px 9px 9px 0px;
-    border-color: #836262;
+    width:100%;
 }
-
 
 .img_lab_secundary{
     width: 230px;
@@ -589,8 +580,8 @@ input.input_custom_checkout::placeholder{color: #F5ECE4!important;}
     }
 
     .img_lab_principal {
-        width: 600px;
-        height: 300px;
+
+
     }
 
     .img_lab_secundary {
@@ -814,8 +805,7 @@ input.input_custom_checkout::placeholder{color: #F5ECE4!important;}
     }
 
     .img_lab_principal {
-        width: 93%;
-        height: 200px;
+       width: 100%;
     }
 
     .img_lab_secundary {

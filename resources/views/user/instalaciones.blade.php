@@ -11,9 +11,9 @@
 
 @section('content')
 
-<section class="primario bg_overley" style="background-image: url('{{asset('assets/user/instalaciones/salon.jpg')}}')">
-
-    <div class="row margin_home_nav">
+<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/instalaciones/salon.jpg')}}')">
+    <span class="mask"></span>
+    <div class="row margin_home_nav ">
 
         <div class="col-12 col-md-6">
             <div id="carouselExample" class="carousel slide">
@@ -23,11 +23,52 @@
                     <div class="carousel-item active">
                         <div class="d-flex justify-content-center">
                             <div class="card card-custom" style="margin-top: 5rem">
-                                <img class="card_image" src="{{asset('assets/user/instalaciones/terraza3.jpg')}}" class="card-img-top" alt="...">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/1.jpg')}}" class="card-img-top" alt="...">
                             </div>
                         </div>
                     </div>
-
+                    <div class="carousel-item ">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/2.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/3.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/4.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/5.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/6.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/7.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -43,7 +84,7 @@
 
         </div>
 
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6 index_superior">
             <h1 class="text-white titulo space_tiitle_slide" style="">
                 Instituto Mexicano <br>
                 Naturales Ain Spa
@@ -71,12 +112,12 @@
         <div class="col-12 col-md-4">
             <div class="d-flex justify-content-center">
                 <div class="card card-custom space_Card_rs" style="">
-                    <img class="card_image" src="{{asset('assets/user/instalaciones/terraza3.jpg')}}" class="card-img-top" alt="...">
+                    <img class="card_image" src="{{asset('assets/user/instalaciones/terraza3.jpg')}}"  alt="...">
                 </div>
             </div>
 
             <p class="text-center mt-3">
-                <a type="button" class="btn btn_instalaciones" data-bs-toggle="modal" data-bs-target="#cafeteria">
+                <a href="#cafeteria" class="btn btn_instalaciones" >
                     Cafeteria
                 </a>
             </p>
@@ -86,11 +127,11 @@
         <div class="col-12 col-md-4">
              <div class="d-flex justify-content-center">
                 <div class="card card-custom space_Card" style="">
-                    <img class="card_image" src="{{asset('assets/user/instalaciones/tiendita.jpg')}}" class="card-img-top" alt="...">
+                    <img class="card_image" src="{{asset('assets/user/instalaciones/tiendita.jpg')}}"  alt="...">
                 </div>
             </div>
             <p class="text-center mt-3">
-                <a type="button" class="btn btn_instalaciones" data-bs-toggle="modal" data-bs-target="#tienda">
+                <a href="#tienda" class="btn btn_instalaciones" >
                     Tienda
                 </a>
             </p>
@@ -99,11 +140,11 @@
         <div class="col-12 col-md-4">
              <div class="d-flex justify-content-center">
                 <div class="card card-custom space_Card" style="">
-                    <img class="card_image" src="{{asset('assets/user/instalaciones/salon.jpg')}}" class="card-img-top" alt="...">
+                    <img class="card_image" src="{{asset('assets/user/instalaciones/salon.jpg')}}"  alt="...">
                 </div>
             </div>
             <p class="text-center mt-3">
-                <a type="button" class="btn btn_instalaciones" data-bs-toggle="modal" data-bs-target="#aulas">
+                <a href="#aulas" class="btn btn_instalaciones" >
                     Aulas
                 </a>
             </p>
@@ -113,7 +154,7 @@
 
 </section>
 
-<section class="primario bg_overley" style="background-color:#836262;">
+<section class="primario bg_overley" style="background-color:#836262;"id="aulas">
     <div class="row">
 
         <div class="col-12 col-md-6 m-auto">
@@ -126,24 +167,42 @@
         <div class="col-12 col-md-6">
             <div class="d-flex justify-content-center">
             <div class="card card-custom space_Card mb-3" style="">
-                <div id="carouselExampleIndicators" class="carousel slide">
-                    <div class="carousel-indicators">
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    </div>
-
+                <div id="carousel_interior" class="carousel slide">
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <img class="card_image" src="{{asset('assets/user/instalaciones/salon.jpg')}}" class="card-img-top" alt="...">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/1.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/2.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/3.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/4.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/7.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/8.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/9.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/10.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/11.jpg')}}"  style="width: 100%;">
                       </div>
                     </div>
 
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel_interior" data-bs-slide="prev">
                       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel_interior" data-bs-slide="next">
                       <span class="carousel-control-next-icon" aria-hidden="true"></span>
                       <span class="visually-hidden">Next</span>
                     </button>
@@ -155,31 +214,32 @@
     </div>
 </section>
 
-<section class="primario bg_overley" style="background-color:#F5ECE4;">
+<section class="primario bg_overley" style="background-color:#F5ECE4;" id="cafeteria">
     <div class="row">
 
         <div class="col-12 col-md-6 order-dos">
             <div class="d-flex justify-content-center">
                 <div class="card card-custom space_Card" style="">
-                    <div id="carouselExampleIndicators" class="carousel slide">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                        </div>
+                    <div id="carousel_exterior" class="carousel slide">
 
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img class="card_image" src="{{asset('assets/user/instalaciones/salon.jpg')}}" class="card-img-top" alt="...">
+                              <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/5.jpg')}}"  style="width: 100%;">
                             </div>
-                        </div>
+                            <div class="carousel-item ">
+                              <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/6.jpg')}}"  style="width: 100%;">
+                            </div>
+                            <div class="carousel-item ">
+                              <img class="card_image" src="{{asset('assets/user/instalaciones/terraza1.jpg')}}"  style="width: 100%;">
+                            </div>
+                          </div>
 
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_exterior" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
 
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_exterior" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
