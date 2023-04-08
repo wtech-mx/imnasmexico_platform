@@ -848,6 +848,52 @@ input.input_custom_checkout::placeholder{color: #F5ECE4!important;}
     .margin_galery_lab{
         margin-bottom: 2rem;
     }
+
+    .card_grid {
+        left: 100px;
+    }
+}
+
+@media only screen and (max-width: 490px) {
+    .card_grid {
+        left: 40px;
+    }
+}
+
+@media only screen and (max-width: 440px) {
+    .card_grid {
+        left: 60px;
+    }
+}
+
+@media only screen and (max-width: 419px) {
+    .map_custom {
+        width: 360px;
+        height: 260px;
+    }
+
+    .point_icon_beneficios {
+        margin-left: 0rem;
+    }
+
+    .point_icon_beneficios {
+        width: 60px;
+        height: 50px;
+    }
+
+    .img_icon_beneficios {
+        width: 30px;
+    }
+
+    .card_grid {
+        left:15px;
+    }
+}
+
+@media only screen and (max-width: 419px) {
+    .card_grid {
+        left: 27px;
+    }
 }
 
 @media only screen and (max-width: 380px) {
@@ -912,6 +958,10 @@ input.input_custom_checkout::placeholder{color: #F5ECE4!important;}
     }
     .point_icon_beneficios {
         margin-left: 0rem;
+    }
+
+    .card_grid {
+        left:10px;
     }
 
 }

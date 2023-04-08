@@ -63,7 +63,7 @@
                                 <h3 class="card_titulo">{{$curso->nombre}}</h3>
                                 <h4 class="card_date">{{$hora_inicial}} - {{$hora_final}}</h4>
 
-                                <a class="btn btn-primario me-3" type="button" data-bs-toggle="modal" data-bs-target="#checkout_modal">
+                                <a class="btn btn-primario me-2 me-sm-3" type="button" data-bs-toggle="modal" data-bs-target="#checkout_modal">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn my-auto">
                                             Comprar ahora
@@ -74,7 +74,7 @@
                                     </div>
                                 </a>
 
-                                <a class="btn btn-secundario me-1">
+                                <a class="btn btn-secundario me-0 me-sm-3">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn my-auto">
                                             Saber mas
@@ -643,13 +643,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
     integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
     crossorigin="anonymous"></script>
+<style>
 
+</style>
 <script>
     $('.owl-carousel').owlCarousel({
         loop: true,
         margin: 30,
+        left:30,
         paddimg:30,
         nav: true,
+        dots: false,
+        autoplay: true,
+        autoplayTimeout: 5000,
+        autoplayHoverPause: true,
+
         responsive: {
             0: {
                 items: 1
