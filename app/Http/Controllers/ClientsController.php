@@ -7,11 +7,11 @@ use App\Models\Orders;
 use App\Models\OrdersTickets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Hash;
 
 class ClientsController extends Controller
 {
-    public function index($code)
-    {
+    public function index($code){
         $cliente = User::where('code', $code)->firstOrFail();
         $orders = Orders::where('id_usuario', '=', auth()->user()->id)->get();
         $order_ticket = OrdersTickets::get();
@@ -23,5 +23,23 @@ class ClientsController extends Controller
                         ->where('cursos.video_cad','=', 1)
                         ->get();
         return view('user.profile',compact('cliente', 'orders', 'usuario_compro'));
+    }
+
+    public function update(Request $request, $code)
+    {
+        $user = User::find($code);
+        $user->nombre = $request->get('nombre');
+        $user->email = $request->get('email');
+        $user->telefono = $request->get('telefono');
+        $user->password = Hash::make($request->get('telefono'));
+        $user->cfdi = $request->get('cfdi');
+        $user->rfc = $request->get('rfc');
+        $user->razon_social = $request->get('razon_social');
+        $user->direccion = $request->get('direccion');
+        $user->update();
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->route('perfil.index')
+            ->with('success', 'usuario editado con exito.');
     }
 }

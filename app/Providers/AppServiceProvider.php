@@ -6,6 +6,7 @@ namespace App\Providers;
 use App\Models\Configuracion;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Cursos;
+use Carbon\Carbon;
 use DateInterval;
 use DateTime;
 
@@ -36,24 +37,25 @@ class AppServiceProvider extends ServiceProvider
                 $curso->update();
             }
 
-            // Obtener la fecha y hora actual
-            $fechaHoraActual = new DateTime();
-
-            // Sumar 72 horas a la fecha y hora actual
-            $intervalo = new DateInterval('PT72H');
-            $fechaHoraActual->add($intervalo);
-
-            // Obtener la nueva fecha y hora después de sumar 72 horas
-            $fechaHoraFutura = $fechaHoraActual->format('Y-m-d H:i:s');
-
             // Asignar la nueva fecha y hora al objeto Cursos
             $curso2 = Cursos::where('video_cad', '=', '1')->first();
+
+            // Obtener la fecha actual
+            $fechaActual = Carbon::now();
+
             if($curso2){
-                if($fechaHoraFutura <= $curso2->video_cad){
+                // Verificar si ha pasado más de 72 horas desde la fecha de subida del video
+                if ($fechaActual->diffInHours($curso2->fecha_video) <= 72) {
+                    // Mostrar el video al usuario
+                } else {
+                    // El video ha expirado, mostrar mensaje de error
                     $curso2->video_cad = '0';
                     $curso2->update();
                 }
             }
+
+
+
 
             $view->with(['configuracion' => $configuracion, 'fechaActual' => $fechaActual]);
         });
