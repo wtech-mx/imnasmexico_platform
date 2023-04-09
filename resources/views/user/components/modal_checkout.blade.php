@@ -129,15 +129,17 @@
                               </h2>
                               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body" style="padding: 0px!important;">
-                                    @php
-                                        $total = 0;
-                                        foreach(session('cart') as $id => $details){
-                                            $total += $details['price'] * $details['quantity'];
-                                            $iva = $total * .16;
-                                            $total_iva = $total + $iva;
-                                        }
-                                    @endphp
-                                  <b>Total con IVA: </b> {{$total_iva}}
+                                    @if(session('cart'))
+                                        @php
+                                            $total = 0;
+                                            foreach(session('cart') as $id => $details){
+                                                $total += $details['price'] * $details['quantity'];
+                                                $iva = $total * .16;
+                                                $total_iva = $total + $iva;
+                                            }
+                                        @endphp
+                                    <b>Total con IVA: </b> {{$total_iva}}
+                                    @endif
 
                                         <form role="form" action="{{ route('order.pay_stripe') }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
                                             @csrf
