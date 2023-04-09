@@ -13,6 +13,22 @@
                 <div class="owl-carousel owl-theme">
 
                     @foreach ($cursos as $curso)
+
+<script>
+    function shareFacebook() {
+  if (navigator.share) {
+    navigator.share({
+      title: 'Título de la publicación',
+      text: 'Descripción de la publicación',
+      url: 'https://www.ejemplo.com',
+    })
+    .then(() => console.log('Publicación compartida con éxito'))
+    .catch(error => console.error('Error al compartir publicación', error));
+  } else {
+    console.error('La funcionalidad de compartir no está soportada en este navegador');
+  }
+}
+</script>
                         @php
                             $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
                             $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
@@ -26,7 +42,7 @@
                                 <p class="precio_grid">${{$curso->precio}} mxn</p>
                                 <p class="modalidado_grid">{{$curso->modalidad}}</p>
                                 <p class="wish_grid"><i class="fas fa-heart"></i></p>
-                                <p class="share_grid"><i class="fas fa-share-alt"></i></p>
+                                <p class="share_grid" onclick="shareFacebook()"><i class="fas fa-share-alt"></i></p>
                                 <p class="horario_grid">{{$hora_inicial}} - {{$hora_final}}</p>
 
                                 <div class="card-body">
@@ -118,3 +134,5 @@
         </div>
     </div>
 </section>
+
+
