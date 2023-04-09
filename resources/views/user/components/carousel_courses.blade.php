@@ -21,6 +21,9 @@
       title: '{{$curso->nombre}}',
       text: '{{$curso->nombre}}',
       url:'{{ route('cursos.show',$curso->slug) }}',
+      files: [
+      new File(['imagen'], '{{asset('curso/'. $curso->foto) }}', { type: 'image/jpeg' }),
+    ],
     })
     .then(() => console.log('Publicación compartida con éxito'))
     .catch(error => console.error('Error al compartir publicación', error));
