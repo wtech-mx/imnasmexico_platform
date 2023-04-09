@@ -129,7 +129,7 @@ if (navigator.share) {
     text: '{{$curso->nombre}}',
     url:'{{ route('cursos.show',$curso->slug) }}',
     files: [
-    new File(['imagen'], 'https://plataforma.imnasmexico.com/{{asset('curso/'. $curso->foto) }}', { type: 'image/jpeg' }),
+    new File(['imagen'], 'https://plataforma.imnasmexico.com/{{asset('curso/'. $curso->foto) }}', { type: 'image/png' }),
     ],
     })
     .then(() => console.log('Publicación compartida con éxito'))
