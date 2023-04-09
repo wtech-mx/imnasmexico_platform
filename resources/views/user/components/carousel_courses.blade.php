@@ -13,25 +13,6 @@
                 <div class="owl-carousel owl-theme">
 
                     @foreach ($cursos as $curso)
-
-<script>
-    function shareFacebook() {
-  if (navigator.share) {
-    navigator.share({
-      title: '{{$curso->nombre}}',
-      text: '{{$curso->nombre}}',
-      url:'{{ route('cursos.show',$curso->slug) }}',
-      files: [
-      new File(['imagen'], '{{asset('curso/'. $curso->foto) }}', { type: 'image/jpeg' }),
-    ],
-    })
-    .then(() => console.log('Publicación compartida con éxito'))
-    .catch(error => console.error('Error al compartir publicación', error));
-  } else {
-    console.error('La funcionalidad de compartir no está soportada en este navegador');
-  }
-}
-</script>
                         @php
                             $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
                             $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
@@ -139,3 +120,23 @@
 </section>
 
 
+@foreach ($cursos as $curso)
+<script>
+    function shareFacebook() {
+if (navigator.share) {
+    navigator.share({
+    title: '{{$curso->nombre}}',
+    text: '{{$curso->nombre}}',
+    url:'{{ route('cursos.show',$curso->slug) }}',
+    files: [
+    new File(['imagen'], 'https://plataforma.imnasmexico.com/{{asset('curso/'. $curso->foto) }}', { type: 'image/jpeg' }),
+    ],
+    })
+    .then(() => console.log('Publicación compartida con éxito'))
+    .catch(error => console.error('Error al compartir publicación', error));
+} else {
+    console.error('La funcionalidad de compartir no está soportada en este navegador');
+}
+}
+</script>
+@endforeach
