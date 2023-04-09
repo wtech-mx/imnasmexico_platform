@@ -19,7 +19,7 @@
   if (navigator.share) {
     navigator.share({
       title: {{$curso->nombre}},
-      text: {{$curso->descripcion}},
+      text: {{$curso->nombre}},
       url:{{ route('cursos.show',$curso->slug) }},
     })
     .then(() => console.log('Publicación compartida con éxito'))
