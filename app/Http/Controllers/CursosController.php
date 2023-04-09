@@ -196,9 +196,10 @@ class CursosController extends Controller
 
     public function listas($id)
     {
+        $curso = Cursos::find($id);
         $ordenes = OrdersTickets::where('id_curso', '=', $id)->get();
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
 
-        return view('admin.cursos.listas', compact('ordenes', 'tickets'));
+        return view('admin.cursos.listas', compact('ordenes', 'tickets', 'curso'));
     }
 }
