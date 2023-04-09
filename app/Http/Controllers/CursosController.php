@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Storage;
 
 class CursosController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $cursos = Cursos::orderBy('id','DESC')->get();
 
@@ -28,10 +28,25 @@ class CursosController extends Controller
 
     public function store(Request $request)
     {
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_materiales = base_path('../public_html/plataforma.imnasmexico.com/materiales');
+            $ruta_curso = base_path('../public_html/plataforma.imnasmexico.com/curso');
+        }else{
+            $ruta_materiales = public_path() . '/materiales';
+            $ruta_curso = public_path() . '/curso';
+        }
         $curso = new Cursos;
         $curso->nombre = $request->get('nombre');
         $curso->descripcion = $request->get('descripcion');
-        $curso->materiales = $request->get('materiales');
+
+        if ($request->hasFile("materiales")) {
+            $file = $request->file('materiales');
+            $path = $ruta_materiales;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $curso->materiales = $fileName;
+        }
 
         if ($request->hasFile("foto")) {
             $file = $request->file('foto');
@@ -105,16 +120,33 @@ class CursosController extends Controller
 
     public function update(Request $request, $id)
     {
-        $fechaHoraActual = date('Y-m-d H:i:s');
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_materiales = base_path('../public_html/plataforma.imnasmexico.com/materiales');
+            $ruta_curso = base_path('../public_html/plataforma.imnasmexico.com/curso');
+            $ruta_video = base_path('../public_html/plataforma.imnasmexico.com/clase_grabada');
+        }else{
+            $ruta_materiales = public_path() . '/materiales';
+            $ruta_curso = public_path() . '/curso';
+            $ruta_video = public_path() . '/clase_grabada';
+        }
 
+        $fechaHoraActual = date('Y-m-d H:i:s');
         $curso = Cursos::find($id);
         $curso->nombre = $request->get('nombre');
         $curso->descripcion = $request->get('descripcion');
-        $curso->materiales = $request->get('materiales');
+
+        if ($request->hasFile("materiales")) {
+            $file = $request->file('materiales');
+            $path = public_path() . '/materiales';
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $curso->materiales = $fileName;
+        }
 
         if ($request->hasFile("clase_grabada")) {
             $file = $request->file('clase_grabada');
-            $path = public_path() . '/clase';
+            $path = $ruta_video;
             $fileName2 = uniqid() . $file->getClientOriginalName();
             $file->move($path, $fileName2);
             $curso->clase_grabada = $fileName2;

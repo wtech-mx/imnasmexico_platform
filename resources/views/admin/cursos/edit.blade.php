@@ -245,10 +245,17 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12">
+                                                <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="fecha">Materiales de Clase</label>
-                                                        <textarea name="materiales" id="materiales" cols="10" rows="3" class="form-control">{{$curso->materiales}}</textarea>
+                                                        <div class="form-group">
+                                                            <label for="fecha">Materiales de Clase</label>
+                                                            <input type="file" id="materiales" name="materiales" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="input-group">
+                                                        <img id="blah" src="{{asset('materiales/'.$curso->materiales) }}" alt="Imagen" style="width: 150px; height: 150px;"/>
                                                     </div>
                                                 </div>
                                             </div>

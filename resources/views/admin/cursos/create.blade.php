@@ -205,8 +205,10 @@
 
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="fecha">Materiales de Clase</label>
-                                                        <textarea name="materiales" id="materiales" cols="10" rows="3" class="form-control"></textarea>
+                                                        <div class="form-group">
+                                                            <<label for="fecha">Materiales de Clase</label>
+                                                            <input type="file" id="materiales" name="materiales" class="form-control">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

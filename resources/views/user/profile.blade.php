@@ -78,8 +78,9 @@
                             <div class="col-12">
                                 <h2 class="title_curso mb-5">Datos de cliente</h2>
                             </div>
-                            <form role="form" action="{{ route('perfil.update', $cliente->code) }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
+                            <form role="form" action="{{ route('perfil.update', $cliente->code) }}" method="post">
                                 @csrf
+                                <input type="hidden" name="_method" value="PATCH">
                                 <div class="row">
                                     <div class="col-12 col-lg-6 form-group ">
                                         <div class="input-group input-group-alternative mb-4">
@@ -122,7 +123,6 @@
                                                 <img class="img_profile_label" src="{{asset('assets/user/icons/document.png')}}" alt="">
                                             </span>
                                             <select name="cfdi" id="cfdi">
-                                                <option value="">CFDI</option>
                                                 <option value="{{$cliente->cfdi}}">{{$cliente->cfdi}}</option>
                                                 <option value="G01 Adquisición de Mercancías">G01 Adquisición de Mercancías</option>
                                                 <option value="G02 Devoluciones, Descuentos o bonificaciones">G02 Devoluciones, Descuentos o bonificaciones</option>
@@ -137,7 +137,7 @@
                                             <img class="img_profile_label" src="{{asset('assets/user/icons/document.png')}}" alt="">
                                         </span>
 
-                                        <input class="form-control" type="text"  id="rfc" name="rfc" placeholder="RFC" {{$cliente->rfc}}>
+                                        <input class="form-control" type="text"  id="rfc" name="rfc" placeholder="RFC" value="{{$cliente->rfc}}">
                                         </div>
                                     </div>
 
@@ -147,7 +147,7 @@
                                             <img class="img_profile_label" src="{{asset('assets/user/icons/user.png')}}" alt="">
                                         </span>
 
-                                        <input class="form-control" type="text"  id="razon_social" name="razon_social" placeholder="Razon Social" {{$cliente->razon_social}}>
+                                        <input class="form-control" type="text"  id="razon_social" name="razon_social" placeholder="Razon Social" value="{{$cliente->razon_social}}">
                                         </div>
                                     </div>
 
@@ -157,14 +157,14 @@
                                             <img class="img_profile_label" src="{{asset('assets/user/icons/location-pointer.png')}}" alt="">
                                         </span>
 
-                                        <input class="form-control" type="text"  id="direccion" name="direccion" placeholder="Direccion" {{$cliente->direccion}}>
+                                        <input class="form-control" type="text"  id="direccion" name="direccion" placeholder="Direccion" value="{{$cliente->direccion}}">
                                         </div>
                                     </div>
 
                                     <div class="col-12 col-lg-4 form-group ">
-                                        <a class="btn_save_profile" href="">
+                                        <button type="submit" class="btn_save_profile" >
                                             Guardar
-                                        </a>
+                                        </button>
                                     </div>
                                 </div>
                             </form>
@@ -189,12 +189,14 @@
                             <th >Total</th>
                             <th>Forma de Pago</th>
                             <th>Estado</th>
+                            <th>Acciones</th>
                           </tr>
                         </thead>
 
                         <tbody class="text-center">
                         @if(!empty($orders))
                             @foreach($orders as $order)
+                            @include('user.profile_show')
                                 <tr>
                                     <th>
                                         #{{$order->id}}
@@ -212,6 +214,9 @@
                                             En espera
                                         @endif
                                     </td>
+                                    <th>
+                                        <a type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showDataModal{{$order->id}}" style="color: #ffff; background: #836262"><i class="fa fa-fw fa-eye"></i></a>
+                                    </th>
                                 </tr>
                             @endforeach
                             @else
@@ -227,6 +232,16 @@
                     <div class="col-12">
                         <h2 class="title_curso mb-5">Material de Clase</h2>
                     </div>
+                    @foreach ($order_ticket as $tiket)
+                        @if ($tiket->Cursos->materiales != NULL && $tiket->Cursos->estatus == '1')
+                        <div class="col-6 mt-3">
+                            <b><label>Nombre Curso/Diplomado</label></b><br>
+                            <label>{{$tiket->Cursos->nombre}}</label>
+                            <img id="blah" src="{{asset('materiales/'.$tiket->Cursos->materiales) }}" alt="Imagen" style="width: 450px; height: 450px;"/>
+                        </div>
+                            <hr>
+                        @endif
+                    @endforeach
                 </div>
               </div>
 
@@ -396,12 +411,14 @@
                             <th >Total</th>
                             <th>Forma de Pago</th>
                             <th>Estado</th>
+                            <th>Acciones</th>
                           </tr>
                         </thead>
 
                         <tbody class="text-center">
                         @if(!empty($orders))
                             @foreach($orders as $order)
+                            @include('user.profile_show')
                                 <tr>
                                     <th>
                                         #{{$order->id}}
@@ -419,6 +436,12 @@
                                             En espera
                                         @endif
                                     </td>
+                                    <th>
+                                        {{$order->fecha}}
+                                    </th>
+                                    <th>
+                                        <a type="button" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#showDataModal{{$order->id}}" style="color: #ffff; background: #836262"><i class="fa fa-fw fa-eye"></i></a>
+                                    </th>
                                 </tr>
                             @endforeach
                             @else
@@ -434,6 +457,16 @@
                     <div class="col-12">
                         <h2 class="title_curso mb-5">Material de Clase</h2>
                     </div>
+                    @foreach ($order_ticket as $tiket)
+                        @if ($tiket->Cursos->materiales != NULL && $tiket->Cursos->estatus == '1')
+                        <div class="col-6 mt-3">
+                            <b><label>Nombre Curso/Diplomado</label></b><br>
+                            <label>{{$tiket->Cursos->nombre}}</label>
+                            <img id="blah" src="{{asset('materiales/'.$tiket->Cursos->materiales) }}" alt="Imagen" style="width: 450px; height: 450px;"/>
+                        </div>
+                            <hr>
+                        @endif
+                    @endforeach
                 </div>
             </div>
 

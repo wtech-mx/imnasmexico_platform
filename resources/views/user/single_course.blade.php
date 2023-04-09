@@ -465,12 +465,12 @@
 
                     </div>
 
-                    <div class="col-12 col-lg-6">
-                        <h2 class="title_curso mt-4 mb-4"> Materiales de clase</h2>
-                        <p class="text_preguntas_material">
-                            {{ $curso->materiales }}
-                        </p>
-                    </div>
+                    @if ($curso->materiales != NULL)
+                        <div class="col-12 col-lg-6">
+                            <h2 class="title_curso mt-4 mb-4"> Materiales de clase</h2>
+                            <img id="blah" src="{{asset('materiales/'.$curso->materiales) }}" alt="Imagen" style="width: 450px; height: 450px;"/>
+                        </div>
+                    @endif
 
                     <div class="col-12 mt-4 mb-4">
                         <h2 class="title_curso text-center">Dirigido a...</h2>
@@ -1052,19 +1052,26 @@
 
                     <div class="col-12 ">
                         <h2 class="title_curso mt-2 mb-2"> Preguntas Frecuentes</h2>
-                        <p class="text_preguntas_material">
-                            Nuestros cursos y diplomados presenciales estan divididos en dos partes: <br><br>
-                            <strong>🤓 TEORÍA: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para su comprensión. <br><br>
-                            <strong>🤓 PRÁCTICA: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con PRODUCTO INCLUÍDO. <br> La práctica se hará de la mano con el profesor en donde se reforzara lo aprendido
-                        </p>
+                        @if ($curso->modalidad == 'Presencial')
+                            <p class="text_preguntas_material">
+                                Nuestros cursos y diplomados presenciales estan divididos en dos partes: <br><br>
+                                <strong>TEORÍA: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para su comprensión. <br><br>
+                                <strong>PRÁCTICA: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con PRODUCTO INCLUÍDO. <br> La práctica se hará de la mano con el profesor en donde se reforzara lo aprendido
+                            </p>
+                        @else
+                            <p class="text_preguntas_material">
+                                <strong>CLASES GRABADAS: </strong><br> Las clases quedarán grabadas y tendrás acceso a ellas por <strong>72 horas. </strong> <br><br>
+                                <strong>DESPUES DE COMPRAR: </strong><br> Una vez realizada su compra, a su correo llegará un email de <br> confirmación de pago y posteriormente uno con la liga de su <br>clase, es necesario revisar la bandeja de spam.
+                            </p>
+                        @endif
                     </div>
 
-                    <div class="col-12 ">
-                        <h2 class="title_curso mt-2 mb-2"> Materiales de clase</h2>
-                        <p class="text_preguntas_material">
-                            aqui v ala variable dde material de clase
-                        </p>
-                    </div>
+                    @if ($curso->materiales != NULL)
+                        <div class="col-12 col-lg-6">
+                            <h2 class="title_curso mt-4 mb-4"> Materiales de clase</h2>
+                            <img id="blah" src="{{asset('materiales/'.$curso->materiales) }}" alt="Imagen" style="width: 450px; height: 450px;"/>
+                        </div>
+                    @endif
 
                     <div class="col-12 mt-2 mb-2">
                         <h2 class="title_curso text-center">Dirigido a...</h2>
