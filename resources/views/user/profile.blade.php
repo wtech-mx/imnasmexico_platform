@@ -185,7 +185,6 @@
                           <tr class="tr_checkout">
                             <th >Num. Pedido</th>
                             <th >Fecha de Compra</th>
-                            <th >Num. Orden</th>
                             <th >Total</th>
                             <th>Forma de Pago</th>
                             <th>Estado</th>
@@ -204,7 +203,6 @@
                                     <th>
                                         {{$order->fecha}}
                                     </th>
-                                    <td class="td_title_checkout">{{$order->num_order}}</td>
                                     <td>${{$order->pago}}</td>
                                     <td class="td_title_checkout">{{$order->forma_pago}}</td>
                                     <td>
@@ -407,7 +405,6 @@
                           <tr class="tr_checkout">
                             <th >Num. Pedido</th>
                             <th >Fecha de Compra</th>
-                            <th >Num. Orden</th>
                             <th >Total</th>
                             <th>Forma de Pago</th>
                             <th>Estado</th>
@@ -426,7 +423,6 @@
                                     <th>
                                         {{$order->fecha}}
                                     </th>
-                                    <td class="td_title_checkout">{{$order->num_order}}</td>
                                     <td>${{$order->pago}}</td>
                                     <td class="td_title_checkout">{{$order->forma_pago}}</td>
                                     <td>

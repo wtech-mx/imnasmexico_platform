@@ -34,7 +34,7 @@
               <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                 <i class="fas fa-file-invoice-dollar text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
               </div>
-              <span class="nav-link-text ms-1">Pagos por Fuera</span>
+              <span class="nav-link-text ms-1">Pagos Externos</span>
             </a>
             <div class="collapse " id="pagesExamples">
               <ul class="nav ms-4">
@@ -59,12 +59,11 @@
           </li>
 
         <li class="nav-item">
-          <a class="nav-link {{ (Request::is('paquetes/servicios*') ? 'active' : '') }}" href="" target="">
+          <a class="nav-link {{ (Request::is('/admin/pagos*') ? 'active' : '') }}" href="{{ route('pagos.index_pago') }}">
             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                 <i class="fa fa-file text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-
             </div>
-            <span class="nav-link-text ms-1">Submenu</span>
+            <span class="nav-link-text ms-1">Ordenes</span>
           </a>
         </li>
 

@@ -80,8 +80,9 @@
 
 <script>
     const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-      searchable: true,
-      fixedHeight: false
+        deferRender:true,
+        paging: true,
+        pageLength: 10
     });
 </script>
 
