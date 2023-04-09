@@ -123,17 +123,28 @@
 
                             <div class="accordion-item">
                               <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <button class="accordion-button collapsed mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                                     ¿Quieres Facturar?
                                 </button>
                               </h2>
                               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body" style="padding: 0px!important;">
+                                    @php
+                                        $total = 0;
+                                        foreach(session('cart') as $id => $details){
+                                            $total += $details['price'] * $details['quantity'];
+                                            $iva = $total * .16;
+                                            $total_iva = $total + $iva;
+                                        }
+                                    @endphp
+                                  <b>Total con IVA: </b> {{$total_iva}}
 
                                         <form role="form" action="{{ route('order.pay_stripe') }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
                                             @csrf
-
                                             <div class="row">
+                                                <div class="col-12">
+
+                                                </div>
                                                 <div class="col-12">
                                                     <div class="input-group flex-nowrap mt-4">
                                                         <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-user"></i></span>
