@@ -252,7 +252,7 @@
                                             <div class="col-12 mt-3">
                                                 <strong style="color: #836262">{{$ticket->nombre}}</strong>
                                             </div>
-                                            <div class="col-12 mt-3">
+                                            <div class="col-6 mt-3">
                                                 @if ($ticket->descuento == NULL)
                                                     <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                 @else
@@ -261,7 +261,7 @@
                                                 @endif
                                             </div>
 
-                                            <div class="col-12 mt-3">
+                                            <div class="col-6 mt-3">
                                                 <p class="btn-holder">
                                                     <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
                                                         <i class="fas fa-ticket-alt"></i> Comprar

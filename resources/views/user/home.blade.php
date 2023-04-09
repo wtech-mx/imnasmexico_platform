@@ -63,7 +63,7 @@
                                 <h3 class="card_titulo">{{$curso->nombre}}</h3>
                                 <h4 class="card_date">{{$hora_inicial}} - {{$hora_final}}</h4>
 
-                                <a class="btn btn-primario me-2 me-sm-3" type="button" data-bs-toggle="modal" data-bs-target="#checkout_modal">
+                                <a class="btn btn-primario me-2 me-sm-3" data-bs-toggle="collapse" href="#collapseobjetivos{{$curso->id}}" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn my-auto">
                                             Comprar ahora
@@ -84,6 +84,46 @@
                                         </div>
                                     </div>
                                 </a>
+
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="collapse mt-3" id="collapseobjetivos{{$curso->id}}">
+                                            <div class="card card-body card_colapsable_comprar">
+                                                <div class="row mb-3">
+                                                    @foreach ($tickets as $ticket)
+                                                    @if ($ticket->id_curso == $curso->id)
+                                                        <div class="col-12 mt-3">
+                                                            <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                        </div>
+                                                        <div class="col-6 mt-3">
+                                                            @if ($ticket->descuento == NULL)
+                                                                <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                            @else
+                                                                <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                                <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                            @endif
+                                                        </div>
+
+                                                        <div class="col-6 mt-3">
+                                                            <p class="btn-holder">
+                                                                <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                                    <i class="fas fa-ticket-alt"></i> Comprar
+                                                                </a>
+                                                            </p>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                        </div>
+                                                        @endif
+                                                    @endforeach
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
 
                                 </div>
                             </div>

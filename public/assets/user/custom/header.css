@@ -197,3 +197,9 @@
     }
 
   }
+
+  @media only screen and (max-width: 419px){
+    .nav_link_custom {
+        margin-bottom: 1.6rem;
+    }
+  }
