@@ -18,9 +18,9 @@
     function shareFacebook() {
   if (navigator.share) {
     navigator.share({
-      title: {{$curso->nombre}},
-      text: {{$curso->nombre}},
-      url:{{ route('cursos.show',$curso->slug) }},
+      title: '{{$curso->nombre}}',
+      text: '{{$curso->nombre}}',
+      url:'',
     })
     .then(() => console.log('Publicación compartida con éxito'))
     .catch(error => console.error('Error al compartir publicación', error));
