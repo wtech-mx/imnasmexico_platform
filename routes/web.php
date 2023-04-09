@@ -137,6 +137,11 @@ Route::group(['middleware' => ['auth']], function() {
     // =============== M O D U L O   O R D E N E S ===============================
     Route::post('/clientes/curso/create', [App\Http\Controllers\OrderController::class, 'pay_externo'])->name('orden.pay_externo');
 
+    // =============== M O D U L O   I N S C R I P C I O N E S ===============================
+    Route::get('/admin/pagos', [App\Http\Controllers\PagosFueraController::class, 'index_pago'])->name('pagos.index_pago');
+    Route::get('/admin/pagos/edit/{id}', [App\Http\Controllers\PagosFueraController::class, 'edit_pago'])->name('pagos.edit_pago');
+    Route::patch('/admin/pagos/update/{id}', [App\Http\Controllers\PagosFueraController::class, 'update_pago'])->name('pagos.update_pago');
+
 
     /*|--------------------------------------------------------------------------
     |Configuracion
