@@ -128,9 +128,9 @@ if (navigator.share) {
     title: '{{$curso->nombre}}',
     text: '{{$curso->nombre}}',
     url:'{{ route('cursos.show',$curso->slug) }}',
-    files: [
-    new File(['imagen'], 'https://plataforma.imnasmexico.com/{{asset('curso/'. $curso->foto) }}', { type: 'image/png' }),
-    ],
+    // files: [
+    // new File(['imagen'], 'https://plataforma.imnasmexico.com/{{asset('curso/'. $curso->foto) }}', { type: 'image/png' }),
+    // ],
     })
     .then(() => console.log('Publicación compartida con éxito'))
     .catch(error => console.error('Error al compartir publicación', error));
