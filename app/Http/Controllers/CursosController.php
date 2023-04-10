@@ -52,7 +52,7 @@ class CursosController extends Controller
 
         if ($request->hasFile("foto")) {
             $file = $request->file('foto');
-            $path = public_path() . '/curso';
+            $path = $ruta_curso;
             $fileName = uniqid() . $file->getClientOriginalName();
             $file->move($path, $fileName);
             $curso->foto = $fileName;
@@ -140,7 +140,7 @@ class CursosController extends Controller
 
         if ($request->hasFile("materiales")) {
             $file = $request->file('materiales');
-            $path = public_path() . '/materiales';
+            $path = $ruta_materiales;
             $fileName = uniqid() . $file->getClientOriginalName();
             $file->move($path, $fileName);
             $curso->materiales = $fileName;
@@ -158,7 +158,7 @@ class CursosController extends Controller
 
         if ($request->hasFile("foto")) {
             $file = $request->file('foto');
-            $path = public_path() . '/curso';
+            $path = $ruta_curso;
             $fileName = uniqid() . $file->getClientOriginalName();
             $file->move($path, $fileName);
             $curso->foto = $fileName;
