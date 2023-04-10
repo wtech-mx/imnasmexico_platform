@@ -14,22 +14,22 @@
 <section class="primario bg_overley" style="background-color:#fff;">
 
     <div class="row">
-        <div class="col-6 space_paquetes">
+        <div class="col-12 col-md-6 space_paquetes">
             <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-01.png')}}" alt="">
         </div>
 
-        <div class="col-6 space_paquetes">
+        <div class="col-12 col-md-6 space_paquetes">
             <form action="{{ route('carrito.resultado') }}" method="post">
                 @csrf
                 @foreach ($tickets as $ticket)
-                    <div class="mt-5">
-                        <input type="checkbox" name="ticket[]" id="checkbox{{ $ticket->id }}" data-grupo="grupo1" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo1()">
-                        <label>{{ $ticket->nombre }}</label>
+                    <div class="mt-2 mt-md-5">
+                        <input class="input_paquetes" type="checkbox" name="ticket[]" id="checkbox{{ $ticket->id }}" data-grupo="grupo1" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo1()">
+                        <label class="label_paquetes">{{ $ticket->nombre }}</label>
                     </div>
                 @endforeach
                 <input type="hidden" name="opciones_seleccionadas" value="">
                 <input type="hidden" name="paquete" value="1">
-                <button class="btn btn-primary btn-submit" type="submit" id="boton-compra" disabled>Comprar</button>
+                <button class="btn_paquetes btn-submit" type="submit" id="boton-compra" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
             </form>
         </div>
     </div>
@@ -39,22 +39,22 @@
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
 
     <div class="row">
-        <div class="col-6 space_paquetes">
+        <div class="col-12 col-md-6 order-dos space_paquetes">
             <form action="{{ route('carrito.resultado2') }}" method="post">
                 @csrf
                 @foreach ($tickets as $ticket)
-                    <div class="mt-5">
-                        <input type="checkbox" name="ticket2[]" data-grupo="grupo2" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo2()">
-                        <label>{{ $ticket->nombre }}</label>
+                    <div class="mt-2 mt-md-5">
+                        <input class="input_paquetes" type="checkbox" name="ticket2[]" data-grupo="grupo2" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo2()">
+                        <label class="label_paquetes">{{ $ticket->nombre }}</label>
                     </div>
                 @endforeach
                 <input type="hidden" name="opciones_seleccionadas2" value="">
                 <input type="hidden" name="paquete" value="2">
-                <button class="btn btn-primary btn-submit" type="submit" id="boton-compra2" disabled>Comprar</button>
+                <button class="btn_paquetes btn-submit" type="submit" id="boton-compra2" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
             </form>
         </div>
 
-        <div class="col-6 space_paquetes">
+        <div class="col-12 col-md-6 order-uno space_paquetes">
             <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-02.png')}}" alt="">
         </div>
     </div>
@@ -64,22 +64,22 @@
 <section class="primario bg_overley" style="background-color:#fff;">
 
     <div class="row">
-        <div class="col-6 space_paquetes">
+        <div class="col-12 col-md-6 space_paquetes">
             <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-03.png')}}" alt="">
         </div>
 
-        <div class="col-6 space_paquetes">
+        <div class="col-12 col-md-6 space_paquetes">
             <form action="{{ route('carrito.resultado3') }}" method="post">
                 @csrf
                 @foreach ($tickets as $ticket)
-                    <div class="mt-5">
-                        <input type="checkbox" name="ticket3[]" data-grupo="grupo3" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo3()">
-                        <label>{{ $ticket->nombre }}</label>
+                    <div class="mt-2 mt-md-5">
+                        <input class="input_paquetes" type="checkbox" name="ticket3[]" data-grupo="grupo3" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo3()">
+                        <label class="label_paquetes">{{ $ticket->nombre }}</label>
                     </div>
                 @endforeach
                 <input type="hidden" name="opciones_seleccionadas3" value="">
                 <input type="hidden" name="paquete" value="3">
-                <button class="btn btn-primary btn-submit" type="submit" id="boton-compra3" disabled>Comprar</button>
+                <button class="btn_paquetes btn-submit" type="submit" id="boton-compra3" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
             </form>
         </div>
     </div>
@@ -89,22 +89,22 @@
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
 
     <div class="row">
-        <div class="col-6 space_paquetes">
+        <div class="col-12 col-md-6 order-dos space_paquetes">
             <form action="{{ route('carrito.resultado4') }}" method="post">
                 @csrf
                 @foreach ($tickets as $ticket)
-                    <div class="mt-5">
-                        <input type="checkbox" name="ticket4[]" data-grupo="grupo4" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo4()">
-                        <label>{{ $ticket->nombre }}</label>
+                    <div class="mt-2 mt-md-5">
+                        <input class="input_paquetes" type="checkbox" name="ticket4[]" data-grupo="grupo4" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo4()">
+                        <label class="label_paquetes">{{ $ticket->nombre }}</label>
                     </div>
                 @endforeach
                 <input type="hidden" name="opciones_seleccionadas4" value="">
                 <input type="hidden" name="paquete" value="4">
-                <button class="btn btn-primary btn-submit" type="submit" id="boton-compra4" disabled>Comprar</button>
+                <button class="btn_paquetes btn-submit" type="submit" id="boton-compra4" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
             </form>
         </div>
 
-        <div class="col-6 space_paquetes">
+        <div class="col-12 col-md-6 order-uno  space_paquetes">
             <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-04.png')}}" alt="">
         </div>
     </div>
