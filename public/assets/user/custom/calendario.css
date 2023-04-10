@@ -127,4 +127,8 @@
     .carousel-item {
         height: 50vh;
     }
+
+    .mask_calendar {
+        height: 95%;
+    }
 }
