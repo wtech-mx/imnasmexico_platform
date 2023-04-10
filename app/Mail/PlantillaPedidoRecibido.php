@@ -14,14 +14,16 @@ class PlantillaPedidoRecibido extends Mailable
     public $user;
     public $pago;
     public $forma_pago;
+    public $orden_ticket2;
 
-    public function __construct($orden_ticket, $user, $id_order, $pago, $forma_pago)
+    public function __construct($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2)
     {
         $this->orden_ticket = $orden_ticket;
         $this->id_order = $id_order;
         $this->user = $user;
         $this->pago = $pago;
         $this->forma_pago = $forma_pago;
+        $this->orden_ticket2 = $orden_ticket2;
     }
 
     public function build()

@@ -24,14 +24,16 @@ use Throwable;
 
 class OrderController extends Controller
 {
-    public function show($code){
+    public function show($code)
+    {
         $order = Orders::where('code', $code)->firstOrFail();
         $order_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
 
         return view('user.order', compact('order', 'order_ticket'));
     }
 
-    public function processPayment(Request $request){
+    public function processPayment(Request $request)
+    {
         // Configurar el SDK de Mercado Pago con las credenciales de API
         SDK::setAccessToken(config('services.mercadopago.token'));
 
@@ -53,21 +55,21 @@ class OrderController extends Controller
         $preference = new \MercadoPago\Preference();
         $preference->back_urls = array(
             "success" => route('order.pay'),
-            "pending" => "https://www.google.com.mx/",
+            "pending" => route('order.pay'),
             "failure" => "https://www.google.com.mx/",
         );
         $preference->auto_return = "approved";
         $preference->external_reference = $code;
         $preference->items = $ticketss;
 
-        if(User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()){
-            if(User::where('telefono', $request->telefono)->exists()){
+        if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+            if (User::where('telefono', $request->telefono)->exists()) {
                 $user = User::where('telefono', $request->telefono)->first();
-            }else{
+            } else {
                 $user = User::where('email', $request->email)->first();
             }
-           $payer = $user;
-        }else{
+            $payer = $user;
+        } else {
             $payer = new User;
             $payer->name = $request->get('name');
             $payer->email = $request->get('email');
@@ -87,25 +89,25 @@ class OrderController extends Controller
 
             $fechaActual = date('Y-m-d');
             $total = 0;
-            foreach(session('cart') as $id => $details){
-                if ($details['curso'] == 1){
+            foreach (session('cart') as $id => $details) {
+                if ($details['curso'] == 1) {
                     $total = 4700;
-               }else{
+                } else {
                     $total += $details['price'] * $details['quantity'];
-               }
+                }
             }
 
             $order = new Orders;
             $order->id_usuario = $payer->id;
-            $order->pago = $total ;
+            $order->pago = $total;
             $order->forma_pago = 'Mercado Pago';
-            $order->fecha = $fechaActual ;
+            $order->fecha = $fechaActual;
             $order->estatus = 0;
             $order->code = $code;
             $order->external_reference = $code;
             $order->save();
 
-            foreach(session('cart') as $id => $details){
+            foreach (session('cart') as $id => $details) {
                 $order_ticket = new OrdersTickets;
                 $order_ticket->id_order = $order->id;
                 $order_ticket->id_usuario = $payer->id;
@@ -126,15 +128,15 @@ class OrderController extends Controller
         }
     }
 
-    public function pay(Orders $order, Request $request){
+    public function pay(Orders $order, Request $request)
+    {
         $payment_id = $request->get('payment_id');
 
         $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-7084001530614040-031418-70b92db902566a519042ec6bd85289b3-1330780039");
         $response = json_decode($response);
-
         $status = $response->status;
         $external_reference = $response->external_reference;
-        if($status == 'approved'){
+        if ($status == 'approved') {
             $order = Orders::where('external_reference', '=', $external_reference)->first();
             $order->num_order = $payment_id;
             $order->estatus = 1;
@@ -147,25 +149,41 @@ class OrderController extends Controller
             $pago = $orden_ticket2->Orders->pago;
             $forma_pago = $orden_ticket2->Orders->forma_pago;
             // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
-            foreach($orden_ticket as $details){
+            foreach ($orden_ticket as $details) {
                 Mail::to($order->User->email)->send(new PlantillaTicket($details));
             }
             Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago));
 
-            $request->session()->flush();
+            Session::forget('cart');
+        } elseif ($status == 'pending') {
+            $order = Orders::where('external_reference', '=', $external_reference)->first();
+            $order->num_order = $payment_id;
+            $order->update();
+
+            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
+            $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
+            $user = $orden_ticket2->User->name;
+            $id_order = $orden_ticket2->id_order;
+            $pago = $orden_ticket2->Orders->pago;
+            $forma_pago = $orden_ticket2->Orders->forma_pago;
+            // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
+            Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
+
+            Session::forget('cart');
         }
         return redirect()->route('order.show', $order->code);
     }
 
-    public function pay_stripe(Orders $order, Request $request){
+    public function pay_stripe(Orders $order, Request $request)
+    {
         $code = Str::random(8);
-        if(User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()){
-            if(User::where('telefono', $request->telefono)->exists()){
+        if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+            if (User::where('telefono', $request->telefono)->exists()) {
                 $user = User::where('telefono', $request->telefono)->first();
-            }else{
+            } else {
                 $user = User::where('email', $request->email)->first();
             }
-            if($user->cfdi == NULL){
+            if ($user->cfdi == NULL) {
                 $user->razon_social = $request->get('razon_social');
                 $user->rfc = $request->get('rfc');
                 $user->cfdi = $request->get('cfdi');
@@ -173,25 +191,25 @@ class OrderController extends Controller
                 $user->update();
             }
             $payer = $user;
-         }else{
-             $payer = new User;
-             $payer->name = $request->get('name');
-             $payer->email = $request->get('email');
-             $payer->telefono = $request->get('telefono');
-             $payer->username = $request->get('telefono');
-             $payer->razon_social = $request->get('razon_social');
-             $payer->rfc = $request->get('rfc');
-             $payer->cfdi = $request->get('cfdi');
-             $payer->code = $code;
-             $payer->password = Hash::make($request->get('telefono'));
-             $payer->save();
-             $datos = User::where('id', '=', $payer->id)->first();
-             Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
-         }
+        } else {
+            $payer = new User;
+            $payer->name = $request->get('name');
+            $payer->email = $request->get('email');
+            $payer->telefono = $request->get('telefono');
+            $payer->username = $request->get('telefono');
+            $payer->razon_social = $request->get('razon_social');
+            $payer->rfc = $request->get('rfc');
+            $payer->cfdi = $request->get('cfdi');
+            $payer->code = $code;
+            $payer->password = Hash::make($request->get('telefono'));
+            $payer->save();
+            $datos = User::where('id', '=', $payer->id)->first();
+            Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+        }
 
         $fechaActual = date('Y-m-d');
         $total = 0;
-        foreach(session('cart') as $id => $details){
+        foreach (session('cart') as $id => $details) {
             $total += $details['price'] * $details['quantity'];
             $mult_iva = $total * .16;
             $total_iva = $total + $mult_iva;
@@ -199,14 +217,14 @@ class OrderController extends Controller
 
         $order = new Orders;
         $order->id_usuario = $payer->id;
-        $order->pago = $total_iva ;
+        $order->pago = $total_iva;
         $order->forma_pago = 'STRIPE';
-        $order->fecha = $fechaActual ;
+        $order->fecha = $fechaActual;
         $order->estatus = 0;
         $order->code = $code;
         $order->save();
 
-        foreach(session('cart') as $id => $details){
+        foreach (session('cart') as $id => $details) {
             $order_ticket = new OrdersTickets;
             $order_ticket->id_order = $order->id;
             $order_ticket->id_usuario = $payer->id;
@@ -217,20 +235,20 @@ class OrderController extends Controller
 
         Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
 
-        $stripe = Stripe\Charge::create ([
-                "amount" => $total_iva * 100,
-                "currency" => "MXN",
-                "source" => $request->stripeToken,
-                "description" => $order_ticket->Cursos->nombre
+        $stripe = Stripe\Charge::create([
+            "amount" => $total_iva * 100,
+            "currency" => "MXN",
+            "source" => $request->stripeToken,
+            "description" => $order_ticket->Cursos->nombre
         ]);
 
-        if($stripe->status == 'succeeded'){
+        if ($stripe->status == 'succeeded') {
             $order = Orders::find($order->id);
             $order->num_order = $stripe->id;
             $order->estatus = 1;
             $order->update();
 
-            $request->session()->flush();
+            Session::forget('cart');
 
             $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
             $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
@@ -239,7 +257,7 @@ class OrderController extends Controller
             $pago = $orden_ticket2->Orders->pago;
             $forma_pago = $orden_ticket2->Orders->forma_pago;
             // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
-            foreach($orden_ticket as $details){
+            foreach ($orden_ticket as $details) {
                 Mail::to($order->User->email)->send(new PlantillaTicket($details));
             }
             Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago));
@@ -248,21 +266,22 @@ class OrderController extends Controller
         return redirect()->route('order.show', $order->code);
     }
 
-    public function pay_externo(Request $request){
+    public function pay_externo(Request $request)
+    {
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
             'telefono' => 'required'
         ]);
         $code = Str::random(8);
-        if(User::where('telefono', $request->telefono)->exists()){
+        if (User::where('telefono', $request->telefono)->exists()) {
             $fechaActual = date('Y-m-d');
             $user = User::where('telefono', '=', $request->telefono)->first();
             $order = new Orders;
             $order->id_usuario = $user->id;
-            $order->pago = $request->precio ;
+            $order->pago = $request->precio;
             $order->forma_pago = 'Externo';
-            $order->fecha = $fechaActual ;
+            $order->fecha = $fechaActual;
             $order->estatus = 1;
             $order->code = $code;
             $order->save();
@@ -279,7 +298,7 @@ class OrderController extends Controller
 
             Mail::to($request->email)->send(new PlantillaPedidoRecibido($orden_ticket));
             Mail::to($request->email)->send(new PlantillaTicket($orden_ticket));
-        }else{
+        } else {
             $code = Str::random(8);
             $fechaActual = date('Y-m-d');
             $user = new User;
@@ -294,9 +313,9 @@ class OrderController extends Controller
 
             $order = new Orders;
             $order->id_usuario = $user->id;
-            $order->pago = $request->precio ;
+            $order->pago = $request->precio;
             $order->forma_pago = 'Externo';
-            $order->fecha = $fechaActual ;
+            $order->fecha = $fechaActual;
             $order->estatus = 1;
             $order->code = $code;
             $order->save();
@@ -319,72 +338,69 @@ class OrderController extends Controller
         }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return back()->with('success','User created successfully');
+        return back()->with('success', 'User created successfully');
     }
 
-    public function addToCart($id){
+    public function addToCart($id)
+    {
         $cart = session()->get('cart', []);
 
-            $product = CursosTickets::findOrFail($id);
-            if($product->descuento == NULL){
-                $precio = $product->precio;
-            }else{
-                $precio = $product->descuento;
-            }
+        $product = CursosTickets::findOrFail($id);
+        if ($product->descuento == NULL) {
+            $precio = $product->precio;
+        } else {
+            $precio = $product->descuento;
+        }
 
-            if(isset($cart[$id])) {
-                $cart[$id]['quantity']++;
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
 
-            } else {
-
-                $cart[$id] = [
-                    "id" => $product->id,
-                    "name" => $product->nombre,
-                    "curso" => $product->id_curso,
-                    "quantity" => 1,
-                    "price" => $precio,
-                    "paquete" => 0,
-                    "image" => $product->imagen
-                ];
-            }
+            $cart[$id] = [
+                "id" => $product->id,
+                "name" => $product->nombre,
+                "curso" => $product->id_curso,
+                "quantity" => 1,
+                "price" => $precio,
+                "paquete" => 0,
+                "image" => $product->imagen
+            ];
+        }
 
         session()->put('cart', $cart);
         Session::flash('modal_checkout', 'Se ha Abierto el checkout');
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
-    public function resultado(Request $request){
-
-        if($request->input('paquete') == 1){
-            $request->session()->flush();
+    public function resultado(Request $request)
+    {
+        Session::forget('cart');
+        if ($request->input('paquete') == 1) {
             $total = 1175;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas'));
-        }elseif($request->input('paquete') == 2){
-            $request->session()->flush();
+        } elseif ($request->input('paquete') == 2) {
             $total = 1500;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas2'));
-        }elseif($request->input('paquete') == 3){
-            $request->session()->flush();
+        } elseif ($request->input('paquete') == 3) {
             $total = 2125;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas3'));
-        }elseif($request->input('paquete') == 4){
-            $request->session()->flush();
+        } elseif ($request->input('paquete') == 4) {
             $total = 2550;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas4'));
         }
         $ticketsSeleccionados = CursosTickets::whereIn('id', $opcionesSeleccionadas)->get();
-            for ($i = 0; $i < count($ticketsSeleccionados); $i++) {
-                $cart[$ticketsSeleccionados[$i]->id] = [
-                    "id" => $ticketsSeleccionados[$i]->id,
-                    "name" => $ticketsSeleccionados[$i]->nombre,
-                    "curso" => $ticketsSeleccionados[$i]->id_curso,
-                    "quantity" => 1,
-                    "price" => $total,
-                    "paquete" => 1,
-                    "image" => $ticketsSeleccionados[$i]->imagen
-                ];
-                session()->put('cart', $cart);
-            }
+        for ($i = 0; $i < count($ticketsSeleccionados); $i++) {
+            $cart[$ticketsSeleccionados[$i]->id] = [
+                "id" => $ticketsSeleccionados[$i]->id,
+                "name" => $ticketsSeleccionados[$i]->nombre,
+                "curso" => $ticketsSeleccionados[$i]->id_curso,
+                "quantity" => 1,
+                "price" => $total,
+                "paquete" => 1,
+                "image" => $ticketsSeleccionados[$i]->imagen
+            ];
+            session()->put('cart', $cart);
+        }
 
         // session()->flash('addedToCart', true);
 
@@ -394,14 +410,13 @@ class OrderController extends Controller
     public function remove(Request $request)
     {
 
-        if($request->id) {
+        if ($request->id) {
             $cart = session()->get('cart');
-            if(isset($cart[$request->id])) {
+            if (isset($cart[$request->id])) {
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
             session()->flash('success', 'Product removed successfully');
         }
     }
-
 }

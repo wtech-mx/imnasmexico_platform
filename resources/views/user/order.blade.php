@@ -19,13 +19,23 @@
             <div class="d-flex justify-content-center">
                 <div class="card_thanks">
                     <p class="text-center">
-                        <img class="img_card_certificaciones" src="{{asset('assets/user/icons/cracker.png')}}" alt="">
+                        @if ($order->estatus == '1')
+                            <img class="img_card_certificaciones" src="{{asset('assets/user/icons/cracker.png')}}" alt="">
+                        @else
+                            <img class="img_card_certificaciones" src="{{asset('assets/user/icons/payment.png')}}" alt="">
+                        @endif
+
                     </p>
                 </div>
             </div>
             <h1 class="text-center tittle_thanks">¡Felicidades!</h1>
             <h2 class="text-center subtittle_thanks">Dayanna Espinosa</h2>
-            <h2 class="text-center subtittle_thanks">Compra Realizada con éxito</h2>
+            @if ($order->estatus == '1')
+                <h2 class="text-center subtittle_thanks">Compra Realizada con éxito</h2>
+            @else
+            <h2 class="text-center subtittle_thanks">Tu compra se encuentra en estado Pendiente</h2>
+            @endif
+
 
             <div class="d-flex justify-content-center">
                 <button class="btn btn_thanks me-3" onclick="scrollDown()">

@@ -512,13 +512,22 @@
                                                                                                                         class='text-item '>
                                                                                                                         <p
                                                                                                                             style="text-align: center;">
-                                                                                                                            <span
-                                                                                                                                style="font-size: 24px; color: #444444;">Hola
-                                                                                                                                {{$user}},
-                                                                                                                                gracias
-                                                                                                                                por
-                                                                                                                                tu
-                                                                                                                                compra.</span>
+                                                                                                                            @if ($orden_ticket2->Orders->estatus == 1)
+                                                                                                                                <span
+                                                                                                                                    style="font-size: 24px; color: #444444;">Hola
+                                                                                                                                    {{$user}},
+                                                                                                                                    gracias
+                                                                                                                                    por
+                                                                                                                                    tu
+                                                                                                                                    compra.
+                                                                                                                                </span>
+                                                                                                                            @else
+                                                                                                                                <span
+                                                                                                                                    style="font-size: 24px; color: #444444;">
+                                                                                                                                    Hola {{$user}}, tu compra se encuentra en estado pendiente.
+                                                                                                                                </span>
+                                                                                                                            @endif
+
                                                                                                                         </p>
                                                                                                                     </div>
                                                                                                                 </td>
@@ -527,7 +536,7 @@
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </table>
-                                                                                            <table align='center'
+                                                                                            {{-- <table align='center'
                                                                                                 width='100%' border='0'
                                                                                                 cellpadding='0'
                                                                                                 cellspacing="0"
@@ -588,7 +597,7 @@
                                                                                             </table>
                                                                                         </td>
                                                                                     </tr>
-                                                                                </table>
+                                                                                </table> --}}
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -679,7 +688,7 @@
                     <tr>
                         <td class="" valign='middle' style="vertical-align:middle;width:150px;"><![endif]-->
                                                                                                                             @foreach ($orden_ticket as $tickets)
-                                                                                                                                            <div class='viwec-responsive '
+                                                                                                                                            {{-- <div class='viwec-responsive '
                                                                                                                                                 style='vertical-align:middle;display:inline-block;width: 150px;'>
                                                                                                                                                 <table
                                                                                                                                                     align="left"
@@ -691,15 +700,15 @@
                                                                                                                                                     <tr>
                                                                                                                                                         <td valign="middle"
                                                                                                                                                             style="font-size: 0;">
-                                                                                                                                                            <a href="https://imnasmexico.com/curso/{{$tickets->Cursos->slug}}"
+                                                                                                                                                            <a href="{{ route('cursos.show',$orden_ticket2->Cursos->slug) }}"
                                                                                                                                                                 style="width: 150px;">
                                                                                                                                                                 <img width='100%'
-                                                                                                                                                                    src='https://drive.google.com/thumbnail?id=18wbfStBein5bbAJVt9rAF6rHmejiNkP5&#038;sz=w300'>
+                                                                                                                                                                    src='{{asset('curso/'. $orden_ticket2->Cursos->foto) }}'>
                                                                                                                                                             </a>
                                                                                                                                                         </td>
                                                                                                                                                     </tr>
                                                                                                                                                 </table>
-                                                                                                                                            </div>
+                                                                                                                                            </div> --}}
                                                                                                                                             <!--[if mso | IE]></td>
                 <td class="" valign='middle' style="vertical-align:middle;width: 258px;">
                 <![endif]-->
@@ -720,7 +729,7 @@
                                                                                                                                                             </td>
                                                                                                                                                             <td valign="middle"
                                                                                                                                                                 class="viwec-responsive-center">
-                                                                                                                                                                <a href="https://imnasmexico.com/new/producto/lipobanda-leticina-de-soya-3-piezas/"
+                                                                                                                                                                <a href="{{ route('cursos.show',$orden_ticket2->Cursos->slug) }}"
                                                                                                                                                                     class="viwec-responsive-center">
                                                                                                                                                                     <span
                                                                                                                                                                         style="margin:0;padding:0;font-size:16px;font-weight:400;font-family:Helvetica, Arial, sans-serif;color:#444444;line-height:30px;"
@@ -1123,8 +1132,7 @@
                                                                                                             border='0'
                                                                                                             cellpadding='0'
                                                                                                             cellspacing="0"
-                                                                                                            style='border-collapse:
-                                                                                                separate;'>
+                                                                                                            style='border-collapse:separate;'>
                                                                                                             <tr>
                                                                                                                 <td valign='top'
                                                                                                                     dir="ltr"
