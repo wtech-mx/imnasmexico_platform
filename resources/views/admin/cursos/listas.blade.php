@@ -66,7 +66,14 @@
                                                             <td>{{ $orden->Orders->fecha }}</td>
 
                                                             <td>
-
+                                                                <form method="POST" action="{{ route('cursos.correo' ,$orden->id) }}" enctype="multipart/form-data" role="form">
+                                                                    @csrf
+                                                                    <input type="hidden" name="email" id="email" value="{{ $orden->User->email }}">
+                                                                    <input type="hidden" name="ticket" id="ticket" value="{{ $orden->id_tickets }}">
+                                                                    <input type="hidden" name="id_usuario" id="id_usuario" value="{{ $orden->id_usuario }}">
+                                                                    <input type="hidden" name="curso" id="curso" value="{{ $orden->id_curso }}">
+                                                                    <button type="submit" class="btn btn-sm btn-primary" ><i class="fas fa-external-link-alt"></i></button>
+                                                                </form>
                                                             </td>
                                                         </tr>
                                                     @endif

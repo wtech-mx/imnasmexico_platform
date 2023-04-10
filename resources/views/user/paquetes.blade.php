@@ -29,7 +29,7 @@
                 @endforeach
                 <input type="hidden" name="opciones_seleccionadas" value="">
                 <input type="hidden" name="paquete" value="1">
-                <button class="btn btn-primary btn-submit" type="submit">Comprar</button>
+                <button class="btn btn-primary btn-submit" type="submit" id="boton-compra" disabled>Comprar</button>
             </form>
         </div>
     </div>
@@ -50,7 +50,7 @@
                 @endforeach
                 <input type="hidden" name="opciones_seleccionadas2" value="">
                 <input type="hidden" name="paquete" value="2">
-                <button type="submit" >Comprar</button>
+                <button class="btn btn-primary btn-submit" type="submit" id="boton-compra2" disabled>Comprar</button>
             </form>
         </div>
 
@@ -79,7 +79,7 @@
                 @endforeach
                 <input type="hidden" name="opciones_seleccionadas3" value="">
                 <input type="hidden" name="paquete" value="3">
-                <button type="submit" >Comprar</button>
+                <button class="btn btn-primary btn-submit" type="submit" id="boton-compra3" disabled>Comprar</button>
             </form>
         </div>
     </div>
@@ -100,7 +100,7 @@
                 @endforeach
                 <input type="hidden" name="opciones_seleccionadas4" value="">
                 <input type="hidden" name="paquete" value="4">
-                <button type="submit" >Comprar</button>
+                <button class="btn btn-primary btn-submit" type="submit" id="boton-compra4" disabled>Comprar</button>
             </form>
         </div>
 
@@ -132,18 +132,28 @@
         function limitarSeleccionGrupo1() {
         var checkboxes = document.querySelectorAll('input[type=checkbox][data-grupo=grupo1]');
         var seleccionados = 0;
+        var botonCompra = document.getElementById('boton-compra');
 
         checkboxes.forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
                 if (this.checked) {
                     seleccionados++;
+                    if (seleccionados === 4) {
+                        // Habilita el botón de compra cuando se seleccionan 4 checkboxes
+                        botonCompra.disabled = false;
+                    }
                     if (seleccionados > 4) {
                     this.checked = false;
                     seleccionados--;
                     }
                 } else {
                     seleccionados--;
+                    // Deshabilita el botón de compra si no se seleccionan 4 checkboxes
+                    if (seleccionados !== 4) {
+                        botonCompra.disabled = true;
+                    }
                 }
+
             });
         });
         }
@@ -171,18 +181,27 @@
         function limitarSeleccionGrupo2() {
         var checkboxes = document.querySelectorAll('input[type=checkbox][data-grupo=grupo2]');
         var seleccionados = 0;
+        var botonCompra = document.getElementById('boton-compra2');
 
         checkboxes.forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
-            if (this.checked) {
-                seleccionados++;
-                if (seleccionados > 4) {
-                this.checked = false;
-                seleccionados--;
+                if (this.checked) {
+                    seleccionados++;
+                    if (seleccionados === 4) {
+                        // Habilita el botón de compra cuando se seleccionan 4 checkboxes
+                        botonCompra.disabled = false;
+                    }
+                    if (seleccionados > 4) {
+                    this.checked = false;
+                    seleccionados--;
+                    }
+                } else {
+                    seleccionados--;
+                    // Deshabilita el botón de compra si no se seleccionan 4 checkboxes
+                    if (seleccionados !== 4) {
+                        botonCompra.disabled = true;
+                    }
                 }
-            } else {
-                seleccionados--;
-            }
             });
         });
         }
@@ -207,18 +226,27 @@
         function limitarSeleccionGrupo3() {
         var checkboxes = document.querySelectorAll('input[type=checkbox][data-grupo=grupo3]');
         var seleccionados = 0;
+        var botonCompra = document.getElementById('boton-compra3');
 
         checkboxes.forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
-            if (this.checked) {
-                seleccionados++;
-                if (seleccionados > 4) {
-                this.checked = false;
-                seleccionados--;
+                if (this.checked) {
+                    seleccionados++;
+                    if (seleccionados === 4) {
+                        // Habilita el botón de compra cuando se seleccionan 4 checkboxes
+                        botonCompra.disabled = false;
+                    }
+                    if (seleccionados > 4) {
+                    this.checked = false;
+                    seleccionados--;
+                    }
+                } else {
+                    seleccionados--;
+                    // Deshabilita el botón de compra si no se seleccionan 4 checkboxes
+                    if (seleccionados !== 4) {
+                        botonCompra.disabled = true;
+                    }
                 }
-            } else {
-                seleccionados--;
-            }
             });
         });
         }
@@ -243,18 +271,27 @@
         function limitarSeleccionGrupo4() {
         var checkboxes = document.querySelectorAll('input[type=checkbox][data-grupo=grupo4]');
         var seleccionados = 0;
+        var botonCompra = document.getElementById('boton-compra4');
 
         checkboxes.forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
-            if (this.checked) {
-                seleccionados++;
-                if (seleccionados > 4) {
-                this.checked = false;
-                seleccionados--;
+                if (this.checked) {
+                    seleccionados++;
+                    if (seleccionados === 4) {
+                        // Habilita el botón de compra cuando se seleccionan 4 checkboxes
+                        botonCompra.disabled = false;
+                    }
+                    if (seleccionados > 4) {
+                    this.checked = false;
+                    seleccionados--;
+                    }
+                } else {
+                    seleccionados--;
+                    // Deshabilita el botón de compra si no se seleccionan 4 checkboxes
+                    if (seleccionados !== 4) {
+                        botonCompra.disabled = true;
+                    }
                 }
-            } else {
-                seleccionados--;
-            }
             });
         });
         }

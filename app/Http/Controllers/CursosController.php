@@ -7,6 +7,8 @@ use App\Models\CursosTickets;
 use App\Models\Orders;
 use App\Models\OrdersTickets;
 use Session;
+use App\Mail\PlantillaTicket;
+use Illuminate\Support\Facades\Mail;
 use Str;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -107,7 +109,7 @@ class CursosController extends Controller
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->route('cursos.index')
-            ->with('success', 'curso created successfully.');
+            ->with('success', 'curso creado con exito.');
     }
 
     public function edit($id)
@@ -191,7 +193,7 @@ class CursosController extends Controller
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->route('cursos.index')
-            ->with('success', 'curso created successfully.');
+            ->with('success', 'curso actualizado con exito.');
     }
 
     public function listas($id)
@@ -201,5 +203,23 @@ class CursosController extends Controller
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
 
         return view('admin.cursos.listas', compact('ordenes', 'tickets', 'curso'));
+    }
+
+    public function correo($id, Request $request)
+    {
+        $email = $request->get('email');
+        $ticket = $request->get('ticket');
+        $curso = $request->get('curso');
+        $id_usuario = $request->get('id_usuario');
+
+        $ordenes = OrdersTickets::where('id_curso', '=', $curso)
+        ->where('id_usuario', '=', $id_usuario)
+        ->get();
+
+        foreach ($ordenes as $details) {
+            Mail::to($email)->send(new PlantillaTicket($details));
+        }
+
+        return redirect()->back()->with('success', 'Envio de correo exitoso.');
     }
 }
