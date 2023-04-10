@@ -111,9 +111,84 @@
 
 }
 
-@media only screen and (min-width: 577px) {
+@media only screen and (min-width: 769px) {
     .acceso_alumnas_flex_prim{
         display: none!important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar_custom {
+        background-color: #836262!important;
+        position: fixed;
+        left: 0%;
+        right: 0%;
+        top: 0px;
+        border-radius: 0px;
+        opacity: 1;
+        border-radius: 0 0 19px 19px;
+        border-style: solid;
+        border-width: 0px 0px 9px 0px;
+        border-color: #F5ECE4;
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
+
+    .navbar > .container, .navbar > .container-fluid, .navbar > .container-sm, .navbar > .container-md, .navbar > .container-lg, .navbar > .container-xl, .navbar > .container-xxl {
+        background: #836262;
+        border-radius: 0px;
+    }
+
+    .nav_resp{
+        height: 680px;
+    }
+
+    .image_navbar{
+        width: 50px;
+        background:#F5ECE4;
+        padding: 10px;
+        border-radius: 19px;
+    }
+
+    .nav_link_custom {
+        font-family: Bahnschrift;
+        font-size: 30px;
+        color: #F5ECE4;
+        font-weight: bold;
+    }
+
+    .navbar_ul_custom{
+        --bs-scroll-height: auto;
+        margin-left: 0rem;
+        text-align: center;
+        margin-top: 3rem!important;
+    }
+
+    .nav_link_custom {
+        background: #F5ECE4;
+        border-radius: 19px;
+        color: #836262!important;
+        margin-bottom: 3rem;
+    }
+
+    .navbar-toggler {
+        border-radius: 50px!important;
+        border: solid 3px transparent!important;
+        padding: 5px!important;
+        background: #F5ECE4;
+    }
+
+    .acceso_alumnas_flex_prim{
+        background-color: #F5ECE4;
+        color: #836262;
+        border-radius: 19px;
+        font-family: Bahnschrift;
+        font-weight: bold;
+        font-size: 17px!important;
+        padding:5px;
+        -webkit-box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 75%)!important;
+        -moz-box-shadow: 0px 0px 0px 0px rgba(0,0,0,0.75)!important;
+        box-shadow: 0px 0px 0px 0px rgb(0 0 0 / 75%)!important;
     }
 }
 

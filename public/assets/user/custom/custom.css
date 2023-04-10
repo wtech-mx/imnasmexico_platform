@@ -622,6 +622,12 @@ input.input_custom_checkout::placeholder{color: #F5ECE4!important;}
     .tittle_section2 {
         margin-top: 3rem;
     }
+
+    .bg_overley {
+
+        padding: 2rem 1.5rem 5rem 1.5rem;
+    }
+
 }
 
 @media only screen and (max-width: 920px) {
