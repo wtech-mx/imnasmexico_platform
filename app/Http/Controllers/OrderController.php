@@ -152,7 +152,7 @@ class OrderController extends Controller
             foreach ($orden_ticket as $details) {
                 Mail::to($order->User->email)->send(new PlantillaTicket($details));
             }
-            Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago));
+            Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
             Session::forget('cart');
         } elseif ($status == 'pending') {
@@ -215,6 +215,15 @@ class OrderController extends Controller
             $total_iva = $total + $mult_iva;
         }
 
+        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        $stripe = Stripe\Charge::create([
+            "amount" => $total_iva * 100,
+            "currency" => "MXN",
+            "source" => $request->stripeToken,
+            "description" => $payer->name
+        ]);
+
         $order = new Orders;
         $order->id_usuario = $payer->id;
         $order->pago = $total_iva;
@@ -233,16 +242,7 @@ class OrderController extends Controller
             $order_ticket->save();
         }
 
-        Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-
-        $stripe = Stripe\Charge::create([
-            "amount" => $total_iva * 100,
-            "currency" => "MXN",
-            "source" => $request->stripeToken,
-            "description" => $order_ticket->Cursos->nombre
-        ]);
-
-        if ($stripe->status == 'succeeded') {
+        if ($stripe->status === 'succeeded') {
             $order = Orders::find($order->id);
             $order->num_order = $stripe->id;
             $order->estatus = 1;
@@ -260,7 +260,22 @@ class OrderController extends Controller
             foreach ($orden_ticket as $details) {
                 Mail::to($order->User->email)->send(new PlantillaTicket($details));
             }
-            Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago));
+            Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
+        }else{
+            $order = Orders::find($order->id);
+            $order->num_order = $stripe->id;
+            $order->update();
+
+            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
+            $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
+            $user = $orden_ticket2->User->name;
+            $id_order = $orden_ticket2->id_order;
+            $pago = $orden_ticket2->Orders->pago;
+            $forma_pago = $orden_ticket2->Orders->forma_pago;
+            // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
+            Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
+
+            Session::forget('cart');
         }
 
         return redirect()->route('order.show', $order->code);
