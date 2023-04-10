@@ -13,7 +13,20 @@
 @endsection
 
 @section('content')
+@php
+use Carbon\Carbon;
+$fecha_ini = $curso->fecha_inicial;
+$fecha_inicial = Carbon::createFromFormat('Y-m-d', $fecha_ini)->locale('es')->isoFormat('D [de] MMMM');
 
+$fecha_f = $curso->fecha_final;
+$fecha_final = Carbon::createFromFormat('Y-m-d', $fecha_f)->locale('es')->isoFormat('D [de] MMMM');
+
+$horaInicial = $curso->hora_inicial;
+$hora_inicial = Carbon::createFromFormat('H:i:s', $horaInicial)->format('h:i A');
+
+$horaFinal = $curso->hora_final;
+$hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
+@endphp
 <section class="primario bg_overley" style="background:#836262;">
 
     <div class="tab_section margin_home_nav desaparecer_contenedor_sm">
@@ -97,9 +110,9 @@
 
                         <h2 class="title_curso">Fecha y Horas</h2>
                         <p class="tittle_abstract ">
-                            {{$curso->fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
-                            {{$curso->fecha_final}}
-                            @endif, {{$curso->hora_inicial}} - {{$curso->hora_final}}
+                            {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
+                            - {{$fecha_final}}
+                            @endif, {{$hora_inicial}} - {{$hora_final}}
                         </p>
 
                         @if ($curso->estatus == 1)
