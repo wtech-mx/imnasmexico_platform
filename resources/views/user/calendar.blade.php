@@ -169,14 +169,14 @@
             $dia = date("d", strtotime($curso->fecha_inicial));
             $mes = date("M", strtotime($curso->fecha_inicial));
         @endphp
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-md-6 col-lg-4">
             <div class="card card_grid card_grid_cale  mb-5 mb-md-3" style="">
                 <img class="img_card_grid" src="{{asset('curso/'. $curso->foto) }}" class="card-img-top" alt="...">
 
                 <p class="precio_grid">${{$curso->precio}} mxn</p>
                 <p class="modalidado_grid">{{$curso->modalidad}}</p>
                 <p class="wish_grid"><i class="fas fa-heart"></i></p>
-                <p class="share_grid"><i class="fas fa-share-alt"></i></p>
+                <p class="share_grid" onclick="shareFacebook()"><i class="fas fa-share-alt"></i></p>
                 <p class="horario_grid">{{$hora_inicial}} - {{$hora_final}}</p>
 
                 <div class="card-body">
@@ -272,7 +272,26 @@
 
 @section('js')
 
-
+@foreach ($cursos as $curso)
+<script>
+    function shareFacebook() {
+if (navigator.share) {
+    navigator.share({
+    title: '{{$curso->nombre}}',
+    text: '{{$curso->nombre}}',
+    url:'{{ route('cursos.show',$curso->slug) }}',
+    // files: [
+    // new File(['imagen'], 'https://plataforma.imnasmexico.com/{{asset('curso/'. $curso->foto) }}', { type: 'image/png' }),
+    // ],
+    })
+    .then(() => console.log('Publicación compartida con éxito'))
+    .catch(error => console.error('Error al compartir publicación', error));
+} else {
+    console.error('La funcionalidad de compartir no está soportada en este navegador');
+}
+}
+</script>
+@endforeach
 @endsection
 
 
