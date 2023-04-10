@@ -1,20 +1,3 @@
-@font-face {
-    font-family: Bahnschrift;
-    src: url('./../../user//fonts/Bahnschrift.ttf');
- }
-
- .mask_calendar{
-    position: absolute;
-    background-size: cover;
-    background-position: center center;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0.3;
-    background-image: linear-gradient(310deg, #836262 0%, #836262 100%);
-    z-index: 1;
-}
 
 .card_grid{
     width: 26.5rem;
@@ -170,7 +153,6 @@
 }
 
 
-
 .btn-secundario_grid{
     background-color: #F5ECE4;
     color: #836262;
@@ -183,33 +165,32 @@
     margin-bottom: 15px;
 }
 
-.form_search_calendar{
-    padding: 30px;
-    border-radius: 19px;
-    border-style: solid;
-    border-width: 0px 13px 13px 0px;
-    border-color: #836262;
+@media only screen and (max-width: 530px) {
+    .card_grid {
+        left: 40px;
+    }
 }
 
-.icon_search_style{
-    background: #836262;
-    padding: 20px;
-    border-radius: 19px;
-    color: #F5ECE4;
-    font-size: 20px;
+@media only screen and (max-width: 463px) {
+    .card_grid {
+        left: 35px;
+        width: 24rem;
+    }
 }
 
-.icon_search_style_2{
-    background: #fff;
-    padding: 20px;
-    border-radius: 19px;
-    color: #836262;
-    font-size: 20px;
+@media only screen and (max-width: 400px) {
+    .card_grid {
+        width: 22rem;
+        left: 15px;
+    }
+
+    .fecha_card_grid {
+        font-size: 16px;
+    }
+
+    .tittle_card_grid {
+        font-size: 20px;
+        margin-bottom: 1rem;
+    }
 }
 
-.style_search_label{
-    color: #836262;
-    font-size: 15px;
-    font-weight: 600;
-    margin-left: 10px;
-}

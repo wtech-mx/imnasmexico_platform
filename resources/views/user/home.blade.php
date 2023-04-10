@@ -7,7 +7,7 @@
 @section('css_custom')
 <link href="{{asset('assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/slider_products.css')}}" rel="stylesheet" />
-<link href="{{asset('assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/user/custom/slide_cursos.css')}}" rel="stylesheet" />
 
 
 {{-- css carrusel --}}
@@ -74,7 +74,7 @@
                                     </div>
                                 </a>
 
-                                <a class="btn btn-secundario me-0 me-sm-3">
+                                <a class="btn btn-secundario me-0 me-sm-3" href="{{ route('cursos.show',$curso->slug) }}">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn my-auto">
                                             Saber mas

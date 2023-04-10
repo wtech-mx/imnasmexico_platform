@@ -39,7 +39,9 @@
 
                                         <div class="col-10 mt-4">
                                             <h3 class="tittle_card_grid">{{$curso->nombre}}</h3>
+                                        </div>
 
+                                        <div class="col-12">
                                             <div class="d-flex mb-3">
                                                 <div class="me-auto p-2">
                                                     <a class="btn btn_primario_grd_curso" data-bs-toggle="collapse" href="#carousel_course{{$curso->id}}" role="button" aria-expanded="false" aria-controls="carousel_course">

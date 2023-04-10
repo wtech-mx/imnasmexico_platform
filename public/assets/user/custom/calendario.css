@@ -1,0 +1,128 @@
+
+.carousel-item {
+    height: 100vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
+
+    @media only screen and (max-width: 1200px) {
+        .carousel-item {
+            height: 70vh;
+        }
+
+        .titulo_full{
+            font-family: Leelawadee_1;
+            font-size: 32px;
+        }
+
+        .mask_calendar {
+            height: 96%;
+        }
+
+        .icon_search_style_2 {
+            padding: 15px;
+        }
+
+        .icon_search_style {
+            padding: 15px;
+        }
+
+        .bg_overley {
+            padding: 2rem 3rem 5rem 3rem;
+        }
+
+    }
+
+@media only screen and (max-width: 768px) {
+    .postion_row_caledanrio {
+        left: 3%;
+    }
+
+    .titulo_full{
+        font-family: Leelawadee_1;
+        font-size: 35px;
+    }
+
+    .form_search_calendar {
+        padding: 10px;
+    }
+
+    .carousel-item {
+        height: 70vh;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .titulo_full {
+        font-size:25px;
+        text-align: left!important;
+    }
+
+    .carousel-item {
+        height: 45vh;
+    }
+
+    .mask_calendar {
+        height: 94%;
+    }
+
+    .form_search_calendar {
+        padding: 5px;
+    }
+
+    .tittle_proximas_cer {
+        font-size: 35px;
+    }
+}
+
+@media only screen and (max-width: 490px) {
+    .tittle_proximas_cer {
+        font-size: 30px;
+    }
+}
+
+@media only screen and (max-width: 1710px) {
+    .card_grid {
+        width: 21rem;
+    }
+
+    .tittle_card_grid {
+        font-size: 20px;
+        margin-bottom: 1rem;
+    }
+
+    .fecha_card_grid {
+        font-size: 15px;
+    }
+
+    .btn_primario_grd_curso {
+        font-size: 9px;
+        padding: 5px;
+    }
+
+    .btn_secundario_grd_curso {
+        font-size: 9px;
+        padding: 5px;
+    }
+
+}
+
+@media only screen and (max-width: 576px) {
+    .bg_overley {
+        padding: 2rem 1.5rem 1rem 1.5rem;
+    }
+
+    .tittle_proximas_cer {
+        font-size: 22px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .card_grid_cale {
+        left: 0px;
+    }
+}
