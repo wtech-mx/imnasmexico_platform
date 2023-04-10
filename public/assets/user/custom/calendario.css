@@ -77,6 +77,18 @@
     .tittle_proximas_cer {
         font-size: 35px;
     }
+
+    .bg_overley {
+        padding: 2rem 1.5rem 1rem 1.5rem;
+    }
+
+    .tittle_proximas_cer {
+        font-size: 22px;
+    }
+
+    .card_grid_cale {
+        left: 0px;
+    }
 }
 
 @media only screen and (max-width: 490px) {
@@ -111,18 +123,8 @@
 
 }
 
-@media only screen and (max-width: 576px) {
-    .bg_overley {
-        padding: 2rem 1.5rem 1rem 1.5rem;
-    }
-
-    .tittle_proximas_cer {
-        font-size: 22px;
-    }
-}
-
-@media only screen and (max-width: 576px) {
-    .card_grid_cale {
-        left: 0px;
+@media only screen and (max-width: 400px) {
+    .carousel-item {
+        height: 50vh;
     }
 }
