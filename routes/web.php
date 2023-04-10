@@ -19,6 +19,18 @@ use App\Http\Controllers\StripePaymentController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('403', function () {
+    return view('errors.403');
+});
+
+Route::get('404', function () {
+    return view('errors.404');
+});
+
+Route::get('500', function () {
+    return view('errors.500');
+});
+
 Route::get('check', function () {
     return view('user.components.checkout_paquetes');
 });

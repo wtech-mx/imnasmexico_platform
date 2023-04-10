@@ -169,7 +169,7 @@
             $mes = date("M", strtotime($curso->fecha_inicial));
         @endphp
         <div class="col-12 col-md-6">
-            <div class="card card_grid mb-5 mb-md-3" style="">
+            <div class="card card_grid card_grid_cale  mb-5 mb-md-3" style="">
                 <img class="img_card_grid" src="{{asset('curso/'. $curso->foto) }}" class="card-img-top" alt="...">
 
                 <p class="precio_grid">${{$curso->precio}} mxn</p>
