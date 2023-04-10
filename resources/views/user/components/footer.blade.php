@@ -13,46 +13,46 @@
             <div class="d-flex justify-content-center">
 
                 <div class="icon_footer">
-                    <p class="text-center" style="margin-bottom: 0rem!important">
+                    <a target="_blank" href="tel:%2055%208494%207222" class="text-center" style="margin-bottom: 0rem!important">
                         <i class="fas fa-phone-alt"></i>
-                    </p>
+                    </a>
                 </div>
 
                 <div class="icon_footer">
-                    <p class="text-center" style="margin-bottom: 0rem!important">
+                    <a target="_blank" href="http://api.whatsapp.com/send?phone=525545365893" class="text-center" style="margin-bottom: 0rem!important">
                         <i class="fab fa-whatsapp"></i>
-                    </p>
+                    </a>
                 </div>
 
                 <div class="icon_footer">
-                    <p class="text-center" style="margin-bottom: 0rem!important">
+                    <a target="_blank" href="https://www.instagram.com/naturalesainspaoficial/" class="text-center" style="margin-bottom: 0rem!important">
                         <i class="fab fa-instagram"></i>
-                    </p>
+                    </a>
                 </div>
 
                 <div class="icon_footer">
-                    <p class="text-center" style="margin-bottom: 0rem!important">
+                    <a target="_blank" href="https://www.facebook.com/naturalesainspa/" class="text-center" style="margin-bottom: 0rem!important">
                         <i class="fab fa-facebook"></i>
-                    </p>
+                    </a>
                 </div>
 
                 <div class="icon_footer">
-                    <p class="text-center" style="margin-bottom: 0rem!important">
+                    <a class="text-center" style="margin-bottom: 0rem!important">
                         <i class="fas fa-envelope"></i>
-                    </p>
+                    </a>
                 </div>
 
                 <div class="icon_footer">
-                    <p class="text-center" style="margin-bottom: 0rem!important">
+                    <a target="_blank" href="https://www.tiktok.com/@carla_rizo" class="text-center" style="margin-bottom: 0rem!important">
                         <i class="fab fa-tiktok"></i>
-                    </p>
+                    </a>
                 </div>
 
-                <div class="icon_footer">
+                {{-- <div class="icon_footer">
                     <p class="text-center" style="margin-bottom: 0rem!important">
                         <i class="fas fa-file"></i>
                     </p>
-                </div>
+                </div> --}}
 
             </div>
 
