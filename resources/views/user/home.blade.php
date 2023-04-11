@@ -315,7 +315,7 @@
                 </div>
                 <div class="col-10 py-2">
                     <p class="text-left text_beneficios">
-                        Nuestros <strong>cursos, carreras y diplomados</strong> quedarán grabados por 72 hrs para que puedas verlos nuevamente.
+                        Nuestros <strong style="font-weight: bold">cursos, carreras y diplomados</strong> quedarán grabados por 72 hrs para que puedas verlos nuevamente.
                     </p>
                 </div>
 
@@ -337,7 +337,7 @@
                 </div>
                 <div class="col-10 py-2">
                     <p class="text-left text_beneficios">
-                        Nuestros <strong>cursos, carreras y diplomados</strong> van dirigidos a personas sin conocimiento que quieran prepararse desde cero o que cuentan con conocimiento y experiencia previa.
+                        Nuestros <strong style="font-weight: bold">cursos, carreras y diplomados</strong> van dirigidos a personas sin conocimiento que quieran prepararse desde cero o que cuentan con conocimiento y experiencia previa.
                     </p>
                 </div>
             </div>
