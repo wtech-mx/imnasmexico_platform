@@ -19,7 +19,7 @@
 @endphp
 @section('content')
 
-<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/utilidades/cosmetologa_bg.jpg')}}')">
+<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/utilidades/IMAGEN-HOME.png')}}')">
     <span class="mask"></span>
     <div class="row margin_home_nav">
         <div class="col-12 col-md-6 order-dos index_superior">
