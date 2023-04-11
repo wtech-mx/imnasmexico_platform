@@ -120,7 +120,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{asset('assets/user/certificaciones/RECONOCIMIENTO-CONOCER_2.PNG')}}" alt="" class="img_certificados">
+                    <img src="{{asset('assets/user/certificaciones/RECONOCIMIENTO-CONOCER_2.png')}}" alt="" class="img_certificados">
                 </p>
         </div>
 
