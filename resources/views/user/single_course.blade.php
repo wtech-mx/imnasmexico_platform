@@ -594,12 +594,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                 @guest
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="title_curso text-center mb-5">Rescursos</h2>
+                            <h2 class="title_curso text-center mb-5">Contáctenos</h2>
                         </div>
 
                         <div class="col-12 m-auto">
                                 <p class="  ">
-                                   Por favor inicie sesion y en caso de haber comprado este curso podra ver la direccion o liga de meet para su clase
+                                   Por favor inicie sesion y en caso de haber comprado este curso podra ver la dirección o liga de meet para su clase.
                                 </p>
                         </div>
                     </div>
@@ -641,7 +641,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                             <div class="col-12 m-auto">
                                     <p class="  ">
-                                        Usted no ha comprado este curso, si tiene alguna duda nos la puede hacer saber por WhatsApp y nuestro equipo de trabajo con gusto se la resolverá.
+                                        Usted no ha comprado este curso, si tiene alguna duda nos la puede hacer saber por WhatsApp y con gusto se la resolveremos.
                                     </p>
                             </div>
                             @if ($curso->estatus == 1)
@@ -1211,12 +1211,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                 @guest
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="title_curso text-center mb-5">Rescursos</h2>
+                            <h2 class="title_curso text-center mb-5">Contáctenos</h2>
                         </div>
 
                         <div class="col-12 m-auto">
                                 <p class="  ">
-                                   Por favor inicie sesion y en caso de haber comprado este curso podra ver la direccion o liga de meet para su clase
+                                   Por favor inicie sesion y en caso de haber comprado este curso podra ver la dirección o liga de meet para su clase.
                                 </p>
                         </div>
                     </div>
@@ -1253,12 +1253,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                     @else
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="title_curso text-center mb-5">Rescursos</h2>
+                                <h2 class="title_curso text-center mb-5">Contáctenos</h2>
                             </div>
 
                             <div class="col-12 m-auto">
                                     <p class="  ">
-                                        Usted no ha comprado este curso
+                                        Usted no ha comprado este curso, si tiene alguna duda nos la puede hacer saber por WhatsApp y con gusto se la resolveremos.
                                     </p>
                             </div>
                             @if ($curso->estatus == 1)
