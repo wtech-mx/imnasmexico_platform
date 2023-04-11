@@ -169,7 +169,7 @@
             <div class="d-flex mb-0 mb-sm-5">
 
                 <div class="me-auto p-2">
-                    <h5 class="tittle_proximas_cer">'Calendario General Online y Presencia</h5>
+                    <h5 class="tittle_proximas_cer">'Calendario General Online y Presenciales</h5>
                 </div>
 
                 <div class="p-2">
