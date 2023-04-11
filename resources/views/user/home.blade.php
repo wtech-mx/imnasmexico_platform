@@ -23,7 +23,7 @@
 <section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/utilidades/IMAGEN-HOME.webp')}}')">
     <span class="mask"></span>
     <div class="row margin_home_nav">
-        <div class="col-12 col-md-6 order-dos index_superior">
+        <div class="col-12 col-md-6 index_superior">
             <h1 class="text-white titulo space_ttile" style="">
                 Instituto Mexicano <br>
                 Naturales Ain Spa
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-6 order-uno">
+        <div class="col-12 col-md-6 ">
             <div id="carouselExample" class="carousel slide carrusel_space">
 
                 <div class="carousel-inner">
