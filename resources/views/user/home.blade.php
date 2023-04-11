@@ -350,7 +350,7 @@
 {{-- slide de cursos --}}
 
 {{-- Estandares --}}
-<section class="primario bg_overley" style="background-color:#F5ECE4;">
+<section class="primario bg_overley" style="background-color:#ffff;">
 @include('user.components.estandares')
 </section>
 {{-- Estandares --}}
