@@ -51,6 +51,7 @@
 
     {{-- footer --}}
     @include('user.components.footer')
+    @include('user.components.modal_preguntas');
     {{-- footer --}}
 
     @include('user.components.modal_login')

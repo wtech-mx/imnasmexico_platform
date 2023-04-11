@@ -56,18 +56,22 @@
 
             </div>
 
-            <div class="d-flex justify-content-center">
+            {{-- <div class="d-flex justify-content-center">
                 <p class="registro_num mt-5">
                     SUSCRÍBETE A LA SECCIÓN DE NOTICIAS
                 </p>
-            </div>
+            </div> --}}
 
             <hr class="hr_custom" style="">
-
+           
             <div class="d-flex justify-content-center">
                 <p class="preguntas_freceuntas">
-                    PREGUNTAS FRECUENTES
-                </p>
+                <a data-bs-toggle="modal" data-bs-target="#preguntas">
+
+                        PREGUNTAS FRECUENTES
+
+                </a>
+            </p>
             </div>
 
         </div>

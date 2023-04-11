@@ -141,7 +141,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mt-5">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contactar
+                                        Contáctenos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -216,7 +216,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mt-5">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contactar
+                                        Contáctenos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -291,7 +291,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mt-5">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contactar
+                                        Contáctenos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -425,7 +425,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mt-5">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contactar
+                                        Contáctenos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -476,12 +476,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <h2 class="title_curso mt-4 mb-4"> Preguntas Frecuentes</h2>
                         <p class="text_preguntas_material">
                             <strong>1. ¿Cuál es el siguiente paso después de haber adquirido mi curso?</strong><br>
-                             Una vez realizada su compra, a su correo llegará un email de <br> confirmación de pago y posteriormente uno con la liga de su <br>clase, es necesario revisar la bandeja de spam.
+                             Una vez realizada tu compra, te llegará un correo de <br> confirmación de pago y posteriormente uno con la liga de tu <br>clase, es necesario revisar la bandeja de spam.
                         </p>
                         @if ($curso->modalidad == 'Presencial')
                             <p class="text_preguntas_material">
                                 <strong>2. Nuestros cursos y diplomados presenciales estan divididos en dos partes:</strong><br>
-                                <strong>Teoría: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para su comprensión. <br><br>
+                                <strong>Teoría: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para tu comprensión. <br><br>
                                 <strong>Práctica: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con <strong>producto incluído.</strong> <br> La práctica se hará de la mano con el profesor en donde se reforzara lo aprendido.
                             </p>
                         @else
@@ -553,9 +553,9 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <div class="d-flex justify-content-start">
                             <div class="card_objetivos2">
                                 <p class="text-center">
-                                    <img class="img_card_objetivos2" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                    <img class="img_card_objetivos2" src="{{asset('assets/user/icons/EMPRENDEDORA.webp')}}" alt="">
                                 </p>
-                                <p class="text-center card_title_objetivos">EMPRENDERORAS</p>
+                                <p class="text-center card_title_objetivos">EMPRENDEDORAS</p>
                                 <p class="text-center card_text_objetivos">Inicia tu propio Negocio.</p>
                             </div>
                         </div>
@@ -565,10 +565,10 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <div class="d-flex justify-content-end">
                             <div class="card_objetivos2">
                                 <p class="text-center">
-                                    <img class="img_card_objetivos2" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                    <img class="img_card_objetivos2" src="{{asset('assets/user/icons/ESTUDIANTE-.webp')}}" alt="">
                                 </p>
                                 <p class="text-center card_title_objetivos">ESTUDIANTES DE BELLEZA</p>
-                                <p class="text-center card_text_objetivos">Construye una carera profesional.</p>
+                                <p class="text-center card_text_objetivos">Construye una carrera profesional.</p>
                             </div>
                         </div>
                     </div>
@@ -577,7 +577,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <div class="d-flex justify-content-start">
                             <div class="card_objetivos2">
                                 <p class="text-center">
-                                    <img class="img_card_objetivos2" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                    <img class="img_card_objetivos2" src="{{asset('assets/user/icons/apasionada.webp')}}" alt="">
                                 </p>
                                 <p class="text-center card_title_objetivos">APASIONADAS POR LA BELLEZA</p>
                                 <p class="text-center card_text_objetivos">
@@ -599,7 +599,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                         <div class="col-12 m-auto">
                                 <p class="  ">
-                                   Por favor inicie sesion y en caso de haber comprado este curso podra ver la dirección o liga de meet para su clase.
+                                   Por favor inicie sesión y en caso de haber comprado este curso podra ver la dirección o liga de meet para su clase.
                                 </p>
                         </div>
                     </div>
@@ -659,7 +659,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                 <a class="btn btn-secundario space_cs_rs mt-5">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn my-auto">
-                                            Contactar
+                                            Contáctenos
                                         </p>
                                         <div class="card_bg_btn_secundario">
                                             <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -799,7 +799,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mt-5">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contactar
+                                        Contáctenos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -875,7 +875,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mt-5">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contactar
+                                        Contáctenos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -951,7 +951,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contactar
+                                        Contáctenos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -1079,7 +1079,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contactar
+                                        Contáctenos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -1172,7 +1172,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                 <p class="text-center">
                                     <img class="img_card_objetivos2" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
                                 </p>
-                                <p class="text-center card_title_objetivos">EMPRENDERORAS</p>
+                                <p class="text-center card_title_objetivos">EMPRENDEDORAS</p>
                                 <p class="text-center card_text_objetivos">Inicia tu propio Negocio.</p>
                             </div>
                         </div>
@@ -1185,7 +1185,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                     <img class="img_card_objetivos2" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
                                 </p>
                                 <p class="text-center card_title_objetivos">ESTUDIANTES DE BELLEZA</p>
-                                <p class="text-center card_text_objetivos">Construye una carera profesional.</p>
+                                <p class="text-center card_text_objetivos">Construye una carrera profesional.</p>
                             </div>
                         </div>
                     </div>
@@ -1216,7 +1216,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                         <div class="col-12 m-auto">
                                 <p class="  ">
-                                   Por favor inicie sesion y en caso de haber comprado este curso podra ver la dirección o liga de meet para su clase.
+                                   Por favor inicie sesión y en caso de haber comprado este curso podra ver la dirección o liga de meet para su clase.
                                 </p>
                         </div>
                     </div>
@@ -1276,7 +1276,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                 <a class="btn btn-secundario space_cs_rs mt-5">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn my-auto">
-                                            Contactar
+                                            Contáctenos
                                         </p>
                                         <div class="card_bg_btn_secundario">
                                             <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -1356,7 +1356,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <input type="text" class="form-control form_contact mt-4" id="" placeholder="Message">
                     </div>
                     <p class="text-center text-white">
-                        <a class="btn btn_enfiar_form">Enviar <i class="fas fa-paper-plane"></i></a>
+                        <a class="btn btn_enfiar_form">Enviar <i class="fab fa-whatsapp"></i></a>
                     </p>
 
             </form>

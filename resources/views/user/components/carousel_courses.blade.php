@@ -60,7 +60,7 @@
                                                     <a class="btn btn_secundario_grd_curso" href="{{ route('cursos.show',$curso->slug) }}">
                                                         <div class="d-flex justify-content-around">
                                                             <p class="card_tittle_btn_grid my-auto">
-                                                                Saber mas
+                                                                Saber más
                                                             </p>
 
                                                             <div class="card_bg_btn_secundario">

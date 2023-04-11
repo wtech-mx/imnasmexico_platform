@@ -5,6 +5,7 @@
 @endsection
 
 @section('css_custom')
+<link href="{{asset('assets/user/custom/avales.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/slider_products.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/slide_cursos.css')}}" rel="stylesheet" />
@@ -19,7 +20,7 @@
 @endphp
 @section('content')
 
-<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/utilidades/IMAGEN-HOME.png')}}')">
+<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/utilidades/IMAGEN-HOME.webp')}}')">
     <span class="mask"></span>
     <div class="row margin_home_nav">
         <div class="col-12 col-md-6 order-dos index_superior">
@@ -232,9 +233,9 @@
                     <div class="d-flex justify-content-start">
                         <div class="card_objetivos">
                             <p class="text-center">
-                                <img class="img_card_objetivos" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                <img class="img_card_objetivos" src="{{asset('assets/user/icons/EMPRENDEDORA.webp')}}" alt="">
                             </p>
-                            <p class="text-center card_title_objetivos">EMPRENDERORAS</p>
+                            <p class="text-center card_title_objetivos">EMPRENDEDORAS</p>
                             <p class="text-center card_text_objetivos">Inicia tu propio Negocio.</p>
                         </div>
                     </div>
@@ -244,7 +245,7 @@
                     <div class="d-flex justify-content-end">
                         <div class="card_objetivos">
                             <p class="text-center">
-                                <img class="img_card_objetivos" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                <img class="img_card_objetivos" src="{{asset('assets/user/icons/ESTUDIANTE-.webp')}}" alt="">
                             </p>
                             <p class="text-center card_title_objetivos">ESTUDIANTES DE BELLEZA</p>
                             <p class="text-center card_text_objetivos">Construye una carrera profesional.</p>
@@ -256,7 +257,7 @@
                     <div class="d-flex justify-content-start">
                         <div class="card_objetivos">
                             <p class="text-center">
-                                <img class="img_card_objetivos" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
+                                <img class="img_card_objetivos" src="{{asset('assets/user/icons/apasionada.webp')}}" alt="">
                             </p>
                             <p class="text-center card_title_objetivos">APASIONADAS POR LA BELLEZA</p>
                             <p class="text-center card_text_objetivos">
@@ -281,7 +282,7 @@
                 </div>
                 <div class="col-10 py-2">
                     <p class="text-left text_beneficios">
-                        Garantía de estudiar en una escuela avalada por las máximas dependencias gubernamentales.
+                        Garantía de estudiar en una escuela avalada por las máximas dependencias gubernamentales y la máxima casa de estudios, UNAM.
                     </p>
                 </div>
 
@@ -314,7 +315,7 @@
                 </div>
                 <div class="col-10 py-2">
                     <p class="text-left text_beneficios">
-                        Nuestros <strong>cursos, talleres, carreras y diplomados</strong> quedarán grabados por 72 hrs para que puedas verlos nuevamente.
+                        Nuestros <strong>cursos, carreras y diplomados</strong> quedarán grabados por 72 hrs para que puedas verlos nuevamente.
                     </p>
                 </div>
 
@@ -336,7 +337,7 @@
                 </div>
                 <div class="col-10 py-2">
                     <p class="text-left text_beneficios">
-                        Nuestros cursos, talleres, carreras y diplomados van dirigidos a personas sin conocimiento que quieran prepararse desde cero o que cuentan con conocimiento y experiencia previa.
+                        Nuestros <strong>cursos, carreras y diplomados</strong> van dirigidos a personas sin conocimiento que quieran prepararse desde cero o que cuentan con conocimiento y experiencia previa.
                     </p>
                 </div>
             </div>
@@ -348,17 +349,22 @@
 @include('user.components.carousel_courses')
 {{-- slide de cursos --}}
 
+{{-- Estandares --}}
+<section class="primario bg_overley" style="background-color:#F5ECE4;">
+@include('user.components.estandares')
+</section>
+{{-- Estandares --}}
+
 {{--Laboratorio --}}
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
     <div class="row">
         <div class="col-12 col-md-6">
             <h2 class="titulomin_alfa espaciodor_lab text-left  mb-4" style="margin-left: 30px;">Laboratorio Naturales Ain Spa</h2>
             <p class="text-left text_beneficios espaciodor_lab_text mb-4">
-                El Instituto Mexicano Naturales Ain Spa es un Instituto incorporado a la SEP
-                y STPS, también es una Entidad de Certificación y Evaluación SEP Conocer.   <br><br>
+                Somos un laboratorio certificado ante COFEPRIS.<br><br>
+                Contamos con mas de 100 productos faciales y corporales ideales para tu cabina o spa. <br>
+                Son productos con las bondades de la Aromaterapia y aceites esenciales, brindando siempre la mejor calidad en producto e imagen.
 
-                Contamos con más de 35 años en el mundo de la belleza y salud,<br>
-                 preparando y certificando a alumnos a nivel nacional e internacional.
             </p>
             <div class="row">
                 <div class="col-3" style="">
@@ -580,7 +586,7 @@
                 Cosmiatría Estética <br>
             </p>
             <p class="registro_num2 mt-3 mb-5">
-                Numero de Registro : 60616-1236-17-x-22
+                Número de Registro : 60616-1236-17-X-22
             </p>
             <div class="row">
                 <div class="col-6 col-md-3 spaciador_logos_unam">
@@ -595,11 +601,13 @@
 
                 <div class="col-6 col-md-3">
                     <div class="d-flex justify-content-center">
-                        <div class="card_certificaciones">
-                            <p class="text-center">
-                                <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
-                            </p>
-                        </div>
+                        <a data-bs-toggle="modal" data-bs-target="#unam">
+                            <div class="card_certificaciones">
+                                <p class="text-center">
+                                    <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
+                                </p>
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
