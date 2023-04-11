@@ -14,7 +14,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
 @endsection
-
+@php
+    use Carbon\Carbon;
+@endphp
 @section('content')
 
 <section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/utilidades/cosmetologa_bg.jpg')}}')">
@@ -26,16 +28,16 @@
                 Naturales Ain Spa
             </h1>
             <p class="text-white parrafo" style="">
-                Plataforma número uno de cursos en línea y
-                presenciales dedicados a la cosmetología y
-                cosmiatría a nivel nacional e internacional.
+                Instituto incorporado a la UNAM y SEP con más de 35 años en el mundo de
+                la belleza y salud, formando a miles de alumnos a nivel nacional e internacional,
+                brindando la mejor educación, con profesionales de alto nivel.
             </p>
             <div class="d-flex justify-content-center justify-content-md-start space_btn_section1">
                 <a class="btn btn-primario me-4" href="{{ route('cursos.index_user') }}">
-                    Certificaciones
+                    Oferta Educativa
                 </a>
                 <a class="btn btn-secundario" href="">
-                    Saber mas
+                    Saber más
                 </a>
             </div>
         </div>
@@ -50,8 +52,9 @@
                     @php
                         $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
                         $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
-                        $dia = date("d", strtotime($curso->fecha_inicial));
-                        $mes = date("M", strtotime($curso->fecha_inicial));
+
+                        $fecha_ini = $curso->fecha_inicial;
+                        $fecha_inicial = Carbon::createFromFormat('Y-m-d', $fecha_ini)->locale('es')->isoFormat('D [de] MMMM');
                     @endphp
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                         <div class="d-flex justify-content-center">
@@ -61,7 +64,7 @@
                                 <div class="card-body card_body_custom">
                                 <h5 class="card-title card_modalidad">{{$curso->modalidad}}</h5>
                                 <h3 class="card_titulo">{{$curso->nombre}}</h3>
-                                <h4 class="card_date">{{$hora_inicial}} - {{$hora_final}}</h4>
+                                <h4 class="card_date">{{$fecha_inicial}} - {{$hora_inicial}}</h4>
 
                                 <a class="btn btn-primario me-2 me-sm-3" data-bs-toggle="collapse" href="#collapseobjetivos{{$curso->id}}" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
                                     <div class="d-flex justify-content-around">
@@ -77,7 +80,7 @@
                                 <a class="btn btn-secundario me-0 me-sm-3" href="{{ route('cursos.show',$curso->slug) }}">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn my-auto">
-                                            Saber mas
+                                            Saber más
                                         </p>
                                         <div class="card_bg_btn_secundario">
                                             <i class="fas fa-plus card_icon_btn_secundario"></i>
@@ -208,11 +211,6 @@
             <h2 class="titulo_alfa text-center">Materializa tus metas</h2>
             <h3 class="titulo_beta text-center">Da tu primer paso con nosotros</h3>
             <div class="d-flex justify-content-center">
-            <h6 class="titulo_delta text-center mt-3">
-                Instituto incorporado a la SEP con más de 35 años en el mundo de la belleza, certificando a miles de alumnos desde su comienzo,
-                 con residencia en CDMX, ahora a nivel internacional, brindando la mejor educación dermocosmética, basados en el
-                 mejor nivel educativo y práctico con educadores profesionales a nivel internacional.
-            </h6>
             </div>
         </div>
 
@@ -249,7 +247,7 @@
                                 <img class="img_card_objetivos" src="{{asset('assets/user/icons/ama-de-casa.webp')}}" alt="">
                             </p>
                             <p class="text-center card_title_objetivos">ESTUDIANTES DE BELLEZA</p>
-                            <p class="text-center card_text_objetivos">Construye una carera profesional.</p>
+                            <p class="text-center card_text_objetivos">Construye una carrera profesional.</p>
                         </div>
                     </div>
                 </div>
@@ -305,7 +303,7 @@
                 </div>
                 <div class="col-10 py-2">
                     <p class="text-left text_beneficios">
-                        La documentación que recibirás estará avalada por la SEP o STPS
+                        La documentación que recibirás estará avalada por la UNAM, SEP o STPS
                     </p>
                 </div>
 
@@ -316,7 +314,7 @@
                 </div>
                 <div class="col-10 py-2">
                     <p class="text-left text_beneficios">
-                        Nuestros cursos, talleres, carreras y diplomados quedarán grabados por 72 hrs para que puedas verlos nuevamente.
+                        Nuestros <strong>cursos, talleres, carreras y diplomados</strong> quedarán grabados por 72 hrs para que puedas verlos nuevamente.
                     </p>
                 </div>
 
@@ -327,7 +325,7 @@
                 </div>
                 <div class="col-10 py-2">
                     <p class="text-left text_beneficios">
-                        Recibirás material de apoyo de acuerdo a tu clase como: ponencia módulo por modulo, fichas técnicas, libros digitales, grabación de la clase, catálogos y más.
+                        Recibirás material de apoyo de acuerdo a tu clase como: ponencia módulo por módulo, fichas técnicas, libros digitales, grabación de la clase, catálogos y más.
                     </p>
                 </div>
 
@@ -338,7 +336,7 @@
                 </div>
                 <div class="col-10 py-2">
                     <p class="text-left text_beneficios">
-                        Nuestros cursos, talleres, carreras y diplomados van dirigidos a personas sin conocimiento que quieran prepararse desde 0 o que cuentan con conocimiento y experiencia previa.
+                        Nuestros cursos, talleres, carreras y diplomados van dirigidos a personas sin conocimiento que quieran prepararse desde cero o que cuentan con conocimiento y experiencia previa.
                     </p>
                 </div>
             </div>
@@ -405,7 +403,7 @@
 
                 <div class="col-12 col_adaptable_mobil mt-5">
                     <a class="btn btn-cuarto" style="margin-left: 1rem;" href="http://imnasmexico.com/new/tienda/">
-                        Ver Catalogo
+                        Ver Catálogo
                     </a>
                 </div>
             </div>
@@ -428,7 +426,7 @@
     <div class="row">
         <div class="col-12">
             <h2 class="titulo_alfa mt-3 mb-5 text-center" style="color: #fff!important">
-                Nuestro Catalogo
+                Nuestro Catálogo
             </h2>
             {{-- <p class="text-center mt-5">
                 <img class="px-3" src="{{asset('assets/user/utilidades/captura_productos.png')}}" alt="" style="width:80%;">
@@ -510,7 +508,7 @@
                                     <a class="btn btn-secundario me-1" href="{{ route('cursos.show',$curso->slug) }}">
                                         <div class="d-flex justify-content-around">
                                             <p class="card_tittle_btn my-auto">
-                                                Saber mas
+                                                Saber más
                                             </p>
                                             <div class="card_bg_btn_secundario">
                                                 <i class="fas fa-plus card_icon_btn_secundario"></i>
@@ -574,12 +572,12 @@
 
         <div class="col-12 col-md-6">
             <h2 class="titulomin_alfa espaciodor_unam_text text-left mb-4">
-                ¡Avalados ante la casa maxima <br>
-                casa de estudios UNAM!
+                ¡Avalados ante la casa máxima <br>
+                de estudios UNAM!
             </h2>
             <p class="text-left text_beneficios espaciodor_lab_text mb-4" style="margin-left: 0px!important">
-                Cosmetria Estetica <br>
-                Medicina Estetica <br>
+                Medicina Estética <br>
+                Cosmiatría Estética <br>
             </p>
             <p class="registro_num2 mt-3 mb-5">
                 Numero de Registro : 60616-1236-17-x-22
@@ -636,7 +634,7 @@
 
                     <li class="nav-item" role="presentation" style="margin-right: 30px;">
                     <button class="nav-link active" id="pills-alamos-tab" data-bs-toggle="pill" data-bs-target="#pills-alamos" type="button" role="tab" aria-controls="pills-alamos" aria-selected="true">
-                        <i class="fas fa-map-marker-alt"></i> Alamos
+                        <i class="fas fa-map-marker-alt"></i> Álamos
                     </button>
                     </li>
 

@@ -111,7 +111,7 @@
                 <div class="col-4 margen_footer_calendar">
                     <p class="text_calendario_footer_calendar">
                         <i class="fas fa-calendar-alt icon_footer_2"></i>
-                        Sabado
+                        Sábado
                     </p>
                     <p class="text_calendario_footer_calendar">
                         <i class="far fa-clock icon_footer_2"></i>
@@ -126,7 +126,7 @@
                     </p>
                     <p class="text_calendario_footer_calendar">
                         <i class="far fa-clock icon_footer_2"></i>
-                        1:00 am - 7:00 pm
+                        10:00 am - 5:00 pm
                     </p>
                 </div>
 

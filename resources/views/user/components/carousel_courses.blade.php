@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-12 index_superior">
                 <h2 class="titulo_alfa text-center mt-3 mb-5" style="color: #fff!important">
-                    Próximas Certificaciones
+                    Próximos Cursos
                 </h2>
             </div>
 
