@@ -584,7 +584,7 @@
                 Cosmiatría Estética <br>
             </p>
             <p class="registro_num2 mt-3 mb-5">
-                Número de Registro : 60616-1236-17-X-22
+                Número de Registro : 60616-1263-17-X-22
             </p>
             <div class="row">
                 <div class="col-6 col-md-3 spaciador_logos_unam">

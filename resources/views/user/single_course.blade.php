@@ -501,7 +501,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         </p>
                         @if ($curso->modalidad == 'Presencial')
                             <p class="text_preguntas_material">
-                                <strong>4. ¿Donde se impartira mi curso?</strong><br>
+                                <strong>4. ¿Dónde se impartirá mi curso?</strong><br>
                                 Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
                             </p>
                         @else
@@ -512,7 +512,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @endif
                         <p class="text_preguntas_material">
                             <strong>5. ¿Es necesario tener conocimientos previos?</strong><br>
-                            No se requiere ningún conocimiento ni estudios previos, comenzamos desde 0% y cualquier persona que este interesada en la materia, lo puede estudiar.<br>
+                            No se requiere ningún conocimiento ni estudios previos, comenzamos desde 0% y cualquier persona que esté interesada en la materia, lo puede estudiar.<br>
                         </p>
                         <p class="text_preguntas_material">
                             <strong>6. ¿Tiene un costo extra tramitar mis Documentos Oficiales?</strong><br>
