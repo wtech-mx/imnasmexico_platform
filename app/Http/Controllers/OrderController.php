@@ -53,6 +53,7 @@ class OrderController extends Controller
 
         // Crear un objeto de preferencias de pago
         $preference = new \MercadoPago\Preference();
+
         $preference->back_urls = array(
             "success" => route('order.pay'),
             "pending" => route('order.pay'),
@@ -90,11 +91,7 @@ class OrderController extends Controller
             $fechaActual = date('Y-m-d');
             $total = 0;
             foreach (session('cart') as $id => $details) {
-                if ($details['curso'] == 1) {
-                    $total = 4700;
-                } else {
-                    $total += $details['price'] * $details['quantity'];
-                }
+                $total += $details['price'] * $details['quantity'];
             }
 
             $order = new Orders;
@@ -104,7 +101,6 @@ class OrderController extends Controller
             $order->fecha = $fechaActual;
             $order->estatus = 0;
             $order->code = $code;
-            $order->external_reference = $code;
             $order->save();
 
             foreach (session('cart') as $id => $details) {
