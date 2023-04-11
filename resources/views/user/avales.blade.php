@@ -129,9 +129,7 @@ crossorigin="anonymous" />
     </div>
 </section>
 
-<section class="primario bg_overley" style="background-color:#fff;">
 @include('user.components.estandares')
-</section>
 
 <section class="primario bg_overley padding_avales_cont" style="background-color:#fff;">
     <div class="row">

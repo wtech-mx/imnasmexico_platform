@@ -664,11 +664,12 @@ input.input_custom_checkout::placeholder{color: #F5ECE4!important;}
     }
 
     .carrusel_space{
-        margin-top: 4rem;
+        margin-top: 0rem;
     }
 
     .card-custom {
         width: 400px;
+        margin-bottom: 1rem;
     }
 
     .card_modalidad {
@@ -706,7 +707,7 @@ input.input_custom_checkout::placeholder{color: #F5ECE4!important;}
     }
 
     .space_btn_section1{
-        margin-bottom: 3rem;
+        margin-bottom: 1rem;
     }
 
     .card_certificaciones {
