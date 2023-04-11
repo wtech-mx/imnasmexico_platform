@@ -48,9 +48,12 @@
 
                                 </td>
                                 <td data-th="Subtotal" class="text-center">${{ $details['price'] * $details['quantity'] }}</td> --}}
-                                <td>
-                                    <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>
-                                </td>
+                                @if($details['paquete'] == 0)
+                                    <td>
+                                        <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>
+                                    </td>
+                                @endif
+
                             </tr>
                         @endforeach
                     @endif
