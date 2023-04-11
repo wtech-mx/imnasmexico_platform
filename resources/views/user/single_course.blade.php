@@ -491,7 +491,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             </p>
                         @endif
                         <p class="text_preguntas_material">
-                            <strong>3. ¿Cómo obtengo mi documento oficial?</strong><br>
+                            <strong>3. ¿Cómo obtengo mi Documento Oficial?</strong><br>
                             Registro IMNAS o Red CONOCER<br>
                             1. Te contactará la gestora donde te dará un usuario y contraseña para subir a la plataforma tu información oficial.<br>
                             2. Una vez aceptada por la gestora IMNAS tendrá máximo un mes para enviarte el documento por paquetería.<br><br>
