@@ -43,22 +43,25 @@ crossorigin="anonymous" />
 
         <div class="col-8">
             <h2 class="tittle_avales">
+                ¿Qué es un documento SEP CONOCER?
+            </h2>
+            <h5 class="parrafo_avales">
                 Entidad de Certificación y Evaluación
                 ECE356-18 Instituto Mexicano Naturales Ain Spa
-            </h2>
+            </h5>
             <p class="parrafo_avales">
-                Es un documento oficial de alcance nacional expedido por el gobierno federal
+                Es un Documento Oficial de alcance nacional expedido por el Gobierno Federal
                 a través del cual se reconocen conocimientos, habilidades, destrezas y actitudes
-                individuales que una persona demuestra para brindar un servicio laboral con la calidad y excelencia que los sectores especializados requieren
+                individuales que una persona demuestra para brindar un servicio laboral con la calidad y excelencia que los sectores especializados requieren.
             </p>
             {{-- <span class="highlight-spot " data-toggle="popover" data-content="This is an example hotspot!"></span> --}}
         </div>
 
         <div class="col-12">
             <p class="parrafo_avales_2">
-                Es un documento oficial de alcance nacional expedido por el gobierno federal
+                Es un Documento Oficial de alcance nacional expedido por el Gobierno Federal
                 a través del cual se reconocen conocimientos, habilidades, destrezas y actitudes
-                individuales que una persona demuestra para brindar un servicio laboral con la calidad y excelencia que los sectores especializados requieren
+                individuales que una persona demuestra para brindar un servicio laboral con la calidad y excelencia que los sectores especializados requieren.
             </p>
         </div>
 
@@ -129,8 +132,8 @@ crossorigin="anonymous" />
 <section class="primario bg_overley" style="background-color:#fff;">
     <div class="row">
         <div class="col-12 mb-5">
-            <h2 class="titulo_alfa text-center">¿Con cuáles</h2>
-            <h3 class="titulo_beta text-center">estándares contámos?</h3>
+            <h2 class="titulo_alfa text-center">Conoce todos</h2>
+            <h3 class="titulo_beta text-center">nuestros Estándares</h3>
         </div>
 
         <div class="col-12 m-auto">
@@ -724,19 +727,27 @@ crossorigin="anonymous" />
 
         <div class="col-8">
             <h2 class="tittle_avales">
+                ¿Qué es un diploma SEP RVOE?
+            </h2>
+            <h5 class="parrafo_avales">
                 Validez Oficial ante la Dirección General de Centro
                 De Formación para el Trabajo (D.G.C.F.T) con
                 Acuerdo 17FT274
-            </h2>
+            </h5>
             <p class="parrafo_avales">
-                Es el reconocimiento de validez oficial de estudios e incorporación de un programa o plan de estudios al sistema educativo nacional
-                Si un Diplomado o Carrera lo tiene, cuenta con el aval de la Secretaría de Educación Pública a nivel federal.
+                Es un reconocimiento con validez oficial de estudios incorado
+                a un programa o plan de estudios al sistema educativo nacional,
+                que cuenta con el aval de la Secretaría de Educación Pública a
+                nivel Federal.
             </p>
         </div>
 
         <div class="col-12">
             <p class="parrafo_avales_2">
-                Es el reconocimiento de validez oficial de estudios e incorporación de un programa o plan de estudios al sistema educativo nacional Si un Diplomado o Carrera lo tiene, cuenta con el aval de la Secretaría de Educación Pública a nivel federal.
+                Es un reconocimiento con validez oficial de estudios incorado
+                a un programa o plan de estudios al sistema educativo nacional,
+                que cuenta con el aval de la Secretaría de Educación Pública a
+                nivel Federal.
             </p>
         </div>
 
@@ -821,8 +832,8 @@ crossorigin="anonymous" />
 <section class="primario bg_overley padding_avales_cont" style="background-color:#fff;">
     <div class="row">
         <div class="col-12 mb-5">
-            <h2 class="titulo_alfa text-center">¿Con cuáles</h2>
-            <h3 class="titulo_beta text-center">RVOE contámos?</h3>
+            <h2 class="titulo_alfa text-center">Conoce todos</h2>
+            <h3 class="titulo_beta text-center">nuestros RVOES</h3>
         </div>
 
         <div class="col-12 m-auto">
@@ -936,19 +947,21 @@ crossorigin="anonymous" />
 
         <div class="col-8">
             <h2 class="tittle_avales">
+                ¿Qué es un diploma STPS?
+            </h2>
+            <h5 class="parrafo_avales">
                 Validez Oficial ante la Dirección General de Centro
                 De Formación para el Trabajo (D.G.C.F.T) con
                 Acuerdo 17FT274
-            </h2>
+            </h5>
             <p class="parrafo_avales">
-                Es el reconocimiento de validez oficial de estudios e incorporación de un programa o plan de estudios al sistema educativo nacional
-                Si un Diplomado o Carrera lo tiene, cuenta con el aval de la Secretaría de Educación Pública a nivel federal.
+                Es una constancia que se entrega al finalizar un entrenamiento o cursos y es avalada por la Secretaría del Trabajo y previsión social (STPS)
             </p>
         </div>
 
         <div class="col-12">
             <p class="parrafo_avales_2">
-                Es el reconocimiento de validez oficial de estudios e incorporación de un programa o plan de estudios al sistema educativo nacional Si un Diplomado o Carrera lo tiene, cuenta con el aval de la Secretaría de Educación Pública a nivel federal.
+                Es una constancia que se entrega al finalizar un entrenamiento o cursos y es avalada por la Secretaría del Trabajo y previsión social (STPS)
             </p>
         </div>
 
@@ -1027,17 +1040,25 @@ crossorigin="anonymous" />
 
         <div class="col-8">
             <h2 class="tittle_avales">
-                Registro nacional instituto naturales ain spa
-
+                ¿Qué es el Registro Nacional del Instituto Mexicano Naturales Ain Spa?
             </h2>
+            <h5 class="tittle_avales">
+                Registro nacional instituto naturales ain spa
+            </h5>
             <p class="parrafo_avales">
-                El registro nacional del  instituto mexicano naturales ain spa es un registro interno donde se lleva un padrón detallado de cada uno de los alumnos que han acreditado las carreras, diplomados y certificaciones de acuerdo a los estatus requeridos en cada uno de ellos otorgando así credibilidad y sustento de los conocimientos , capacidades y aptitudes del egresado
+                Tiene como principal función, que cada alumno pueda encontrar con facilidad su
+                registro, el cual va ligado a cada especiliadad que haya cursado con el Instituto.
+                Esto representa credibilidad y sustentode los Conocimientos, Capacidades y
+                Actitudes.
             </p>
         </div>
 
         <div class="col-12">
             <p class="parrafo_avales_2">
-                El registro nacional del  instituto mexicano naturales ain spa es un registro interno donde se lleva un padrón detallado de cada uno de los alumnos que han acreditado las carreras, diplomados y certificaciones de acuerdo a los estatus requeridos en cada uno de ellos otorgando así credibilidad y sustento de los conocimientos , capacidades y aptitudes del egresado
+                Tiene como principal función, que cada alumno pueda encontrar con facilidad su
+                registro, el cual va ligado a cada especiliadad que haya cursado con el Instituto.
+                Esto representa credibilidad y sustentode los Conocimientos, Capacidades y
+                Actitudes.
             </p>
         </div>
 
@@ -1049,9 +1070,27 @@ crossorigin="anonymous" />
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <p class="text-center">
-                            <img src="{{asset('assets/user/certificaciones/cedula_papel.png')}}" class="img_slide_avales" alt="">
+                        <img src="{{asset('assets/user/certificaciones/Titulo_Honorifico.png')}}" class="img_slide_avales" alt="...">
                         </p>
                       </div>
+
+                    <div class="carousel-item">
+                        <p class="text-center">
+                            <img src="{{asset('assets/user/certificaciones/diploma_imnas.png')}}" class="img_slide_avales" alt="...">
+                        </p>
+                    </div>
+
+                    <div class="carousel-item">
+                        <p class="text-center">
+                            <img src="{{asset('assets/user/certificaciones/tira_materias.png')}}" class="img_slide_avales" alt="...">
+                        </p>
+                    </div>
+
+                    <div class="carousel-item">
+                        <p class="text-center">
+                            <img src="{{asset('assets/user/certificaciones/cedula_papel.png')}}" class="img_slide_avales" alt="">
+                        </p>
+                    </div>
 
                       <div class="carousel-item">
                         <p class="text-center">
@@ -1059,17 +1098,6 @@ crossorigin="anonymous" />
                         </p>
                       </div>
 
-                      <div class="carousel-item">
-                        <p class="text-center">
-                        <img src="{{asset('assets/user/certificaciones/tira_de_materias.png')}}" class="img_slide_avales" alt="...">
-                        </p>
-                      </div>
-
-                      <div class="carousel-item">
-                        <p class="text-center">
-                        <img src="{{asset('assets/user/certificaciones/Titulo_Honorifico.png')}}" class="img_slide_avales" alt="...">
-                        </p>
-                      </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>

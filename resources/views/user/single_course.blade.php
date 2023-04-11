@@ -510,6 +510,20 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                 Google meet
                             </p>
                         @endif
+                        <p class="text_preguntas_material">
+                            <strong>5. ¿Es necesario tener conocimientos previos?</strong><br>
+                            No se requiere ningún conocimiento ni estudios previos, comenzamos dese 0% y cualquier persona que este interesada en la materia, lo puede estudiar.<br>
+                        </p>
+                        <p class="text_preguntas_material">
+                            <strong>6. ¿Tiene un costo extra tramitar mis Documentos Oficiales?</strong><br>
+                            No, al comprar el curso ya te incluye los Documentos Oficiales.<br>
+                        </p>
+                        @if ($curso->modalidad == 'Presencial')
+                            <p class="text_preguntas_material">
+                                <strong>7. ¿Puedo pagar en efectivo?</strong><br>
+                                Claro, si no te es posible pagar por la plataforma puedes llegar a pagar a la sede.
+                            </p>
+                        @endif
                     </div>
 
                     @if ($curso->materiales != NULL)
