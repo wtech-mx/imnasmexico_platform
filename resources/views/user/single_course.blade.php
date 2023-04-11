@@ -81,7 +81,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
               <button class="nav-link" id="v-pills-recursos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-recursos" type="button" role="tab" aria-controls="v-pills-recursos" aria-selected="false">
                 <div class="d-flex justify-content-around">
                     @guest
-                        <p class="espacio_w">Contácto</p>
+                        <p class="espacio_w">Contacto</p>
                      @else
                         @if ($usuario_compro != NULL)
                             @if ($curso->modalidad == 'Presencial')
@@ -346,7 +346,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                     <div class="col-12 col-lg-7">
 
-                        <h2 class="title_curso mb-5">Documentacion qué obtendrás</h2>
+                        <h2 class="title_curso mb-5">Documentación que obtendrás</h2>
 
                         <div class="row">
                             @if ($curso->redconocer == 1)
@@ -487,14 +487,14 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @else
                             <p class="text_preguntas_material">
                                 <strong>2. ¿Las clases quedan grabadas permanentemente?</strong><br>
-                                No, después de haber concluido tu clase, tendras la grabación disponible por <strong>72 horas </strong>para consultarla a la hora que desees.
+                                No, después de haber concluido tu clase, tendrás la grabación disponible por <strong>72 horas </strong>para consultarla a la hora que desees.
                             </p>
                         @endif
                         <p class="text_preguntas_material">
-                            <strong>3. ¿Como obtengo mi documento oficial?</strong><br>
-                            Registro IMNAS o RedConocer<br>
+                            <strong>3. ¿Cómo obtengo mi documento oficial?</strong><br>
+                            Registro IMNAS o Red CONOCER<br>
                             1. Te contactará la gestora donde te dará un usuario y contraseña para subir a la plataforma tu información oficial.<br>
-                            2. Una ves aceptada por la gestora IMNAS tendrá máximo un mes para enviarte el documento por paquetería.<br><br>
+                            2. Una vez aceptada por la gestora IMNAS tendrá máximo un mes para enviarte el documento por paquetería.<br><br>
                             Diploma STPS<br>
                             1. No se necesita ningún proceso de gestoría al término del curso.<br>
                             2. IMNAS te enviará tu diploma a tu correo en máximo una semana.
@@ -506,13 +506,13 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             </p>
                         @else
                             <p class="text_preguntas_material">
-                                <strong>4. ¿En que plataforma se impartira mi curso?</strong><br>
+                                <strong>4. ¿En qué plataforma se impartirá mi curso?</strong><br>
                                 Google meet
                             </p>
                         @endif
                         <p class="text_preguntas_material">
                             <strong>5. ¿Es necesario tener conocimientos previos?</strong><br>
-                            No se requiere ningún conocimiento ni estudios previos, comenzamos dese 0% y cualquier persona que este interesada en la materia, lo puede estudiar.<br>
+                            No se requiere ningún conocimiento ni estudios previos, comenzamos desde 0% y cualquier persona que este interesada en la materia, lo puede estudiar.<br>
                         </p>
                         <p class="text_preguntas_material">
                             <strong>6. ¿Tiene un costo extra tramitar mis Documentos Oficiales?</strong><br>
@@ -636,12 +636,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                     @else
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="title_curso text-center mb-5">Rescursos</h2>
+                                <h2 class="title_curso text-center mb-5">Contáctanos</h2>
                             </div>
 
                             <div class="col-12 m-auto">
                                     <p class="  ">
-                                        Usted no ha comprado este curso
+                                        Usted no ha comprado este curso, si tiene alguna duda nos la puede hacer saber por WhatsApp y nuestro equipo de trabajo con gusto se la resolverá.
                                     </p>
                             </div>
                             @if ($curso->estatus == 1)
@@ -737,9 +737,26 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         Preguntas <img class="icon_res_tabs" src="{{asset('assets/user/icons/mujer_preguntas.png')}}" alt="">
                     </button>
 
-                    <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
-                        Recursos <img class="icon_res_tabs" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
-                    </button>
+                    @guest
+                        <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
+                            Contacto <img class="icon_res_tabs" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
+                        </button>
+                        @else
+                            @if ($usuario_compro != NULL)
+                                    @if ($curso->modalidad == 'Presencial')
+                                    <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
+                                        Dirección <img class="icon_res_tabs" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
+                                    </button>
+                                @else
+                                    <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
+                                        Clase <img class="icon_res_tabs" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
+                                    </button>
+                                @endif
+                            @endif
+                        <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
+                            Contacto <img class="icon_res_tabs" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
+                        </button>
+                    @endguest
                 </div>
             </div>
           </nav>
@@ -1321,7 +1338,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
         <div class="col-12 col-md-6">
             <h2 class="text-center tittle-contact">Contáctanos</h2>
             <p class="text-center text-white">
-                Complementa tus conocimientos y conviértete un experto de la cosmetodologia.
+                Complementa tus conocimientos y conviértete un experto de la Cosmetología.
             </p>
 
             <form class="form_contactenos" action="">
