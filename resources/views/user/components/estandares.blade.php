@@ -1,4 +1,4 @@
-<section class="primario bg_overley" style="background-color:#ffff;">
+<section class="primario bg_overley" style="background-color:#ececec;">
     <div class="row">
         <div class="col-12 mb-5">
             <h2 class="titulo_alfa text-center">Conoce todos</h2>
