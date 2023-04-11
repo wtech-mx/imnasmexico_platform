@@ -8,7 +8,9 @@
 <link href="{{asset('assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/calendario.css')}}" rel="stylesheet" />
 @endsection
-
+@php
+    use Carbon\Carbon;
+@endphp
 @section('content')
 
 <div id="carousel_full" class="carousel slide" data-bs-ride="carousel">
@@ -28,6 +30,18 @@
             $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
             $dia = date("d", strtotime($curso->fecha_inicial));
             $mes = date("M", strtotime($curso->fecha_inicial));
+
+            $fecha_ini = $curso->fecha_inicial;
+            $fecha_inicial = Carbon::createFromFormat('Y-m-d', $fecha_ini)->locale('es')->isoFormat('D [de] MMMM');
+
+            $fecha_f = $curso->fecha_final;
+            $fecha_final = Carbon::createFromFormat('Y-m-d', $fecha_f)->locale('es')->isoFormat('D [de] MMMM');
+
+            $horaInicial = $curso->hora_inicial;
+            $hora_inicial = Carbon::createFromFormat('H:i:s', $horaInicial)->format('h:i A');
+
+            $horaFinal = $curso->hora_final;
+            $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
         @endphp
             <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{asset('curso/'. $curso->foto) }}')">
                 <div class="row postion_row_caledanrio">
@@ -48,6 +62,11 @@
                         <p class="text-white parrafo" style="">
                             <?php echo $curso->descripcion?>
                         </p> --}}
+                        <h3 class="tittle_abstract ">
+                            {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
+                            - {{$fecha_final}}
+                            @endif, {{$hora_inicial}} - {{$hora_final}}
+                        </h3>
 
                         <div class="d-flex justify-content-start">
                             <a class="btn btn-primario me-3">
@@ -64,7 +83,7 @@
                             <a class="btn btn-secundario me-1" href="{{ route('cursos.show',$curso->slug) }}">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Saber mas
+                                        Saber más
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fas fa-plus card_icon_btn_secundario"></i>
@@ -100,7 +119,7 @@
                 <div class="col-12 col-sm-6 col-md-2">
                     <label class="form-label style_search_label">Modalidad</label>
                     <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="modalidad" id="modalidad">
-                        <option value="" selected>Seleccione</option>
+                        <option value="" selected>Modalidad</option>
                         <option value="Presencial">Presencial</option>
                         <option value="Online">Online</option>
                     </select>
@@ -125,7 +144,7 @@
                 <div class="col-12 col-sm-4 col-md-3">
                     <label class="form-label style_search_label">Nombre</label>
                     <div class="input-group">
-                        <input name="nombre" class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" type="text" placeholder="nombre">
+                        <input name="nombre" class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" type="text" placeholder="Nombre">
                     </div>
                 </div>
 
@@ -150,7 +169,7 @@
             <div class="d-flex mb-0 mb-sm-5">
 
                 <div class="me-auto p-2">
-                    <h5 class="tittle_proximas_cer">Próximas Certificaciones</h5>
+                    <h5 class="tittle_proximas_cer">'Calendario General Online y Presencia</h5>
                 </div>
 
                 <div class="p-2">
@@ -209,7 +228,7 @@
                                     <a class="btn btn_secundario_grd_curso" href="{{ route('cursos.show',$curso->slug) }}">
                                         <div class="d-flex justify-content-around">
                                             <p class="card_tittle_btn_grid my-auto">
-                                                Saber mas
+                                                Saber más
                                             </p>
                                             <div class="card_bg_btn_secundario">
                                                 <i class="fas fa-plus card_icon_btn_secundario_grid"></i>

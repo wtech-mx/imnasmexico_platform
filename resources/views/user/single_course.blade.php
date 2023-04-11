@@ -35,7 +35,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
             <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
               <button class="nav-link active" id="v-pills-informacion-tab" data-bs-toggle="pill" data-bs-target="#v-pills-informacion" type="button" role="tab" aria-controls="v-pills-informacion" aria-selected="true">
                 <div class="d-flex justify-content-around">
-                     <p class="espacio_w">Informacion</p>
+                     <p class="espacio_w">Información</p>
                     <div class="content_nav d-inline-block">
                         <i class="fas fa-info-circle icon_nav_course2"></i>
                     </div>
@@ -80,7 +80,18 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
               <button class="nav-link" id="v-pills-recursos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-recursos" type="button" role="tab" aria-controls="v-pills-recursos" aria-selected="false">
                 <div class="d-flex justify-content-around">
-                     <p class="espacio_w">Recursos</p>
+                    @guest
+                        <p class="espacio_w">Contácto</p>
+                     @else
+                        @if ($usuario_compro != NULL)
+                            @if ($curso->modalidad == 'Presencial')
+                            <p class="espacio_w">Dirección</p>
+                            @else
+                            <p class="espacio_w">Liga Clase</p>
+                            @endif
+                        @endif
+                        <p class="espacio_w">Contácto</p>
+                    @endguest
                     <div class="content_nav d-inline-block">
                         <img class="icon_nav_course" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
                     </div>
@@ -108,7 +119,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <?php echo $curso->descripcion?>
                         </p>
 
-                        <h2 class="title_curso">Fecha y Horas</h2>
+                        <h2 class="title_curso">Fecha y Hora</h2>
                         <p class="tittle_abstract ">
                             {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
                             - {{$fecha_final}}
@@ -335,7 +346,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                     <div class="col-12 col-lg-7">
 
-                        <h2 class="title_curso mb-5">Certificaciones</h2>
+                        <h2 class="title_curso mb-5">Documentacion qué obtendrás</h2>
 
                         <div class="row">
                             @if ($curso->redconocer == 1)
@@ -463,19 +474,42 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <h2 class="title_curso mt-4 mb-4"> Preguntas Frecuentes</h2>
+                        <p class="text_preguntas_material">
+                            <strong>1. ¿Cuál es el siguiente paso después de haber adquirido mi curso?</strong><br>
+                             Una vez realizada su compra, a su correo llegará un email de <br> confirmación de pago y posteriormente uno con la liga de su <br>clase, es necesario revisar la bandeja de spam.
+                        </p>
                         @if ($curso->modalidad == 'Presencial')
                             <p class="text_preguntas_material">
-                                Nuestros cursos y diplomados presenciales estan divididos en dos partes: <br><br>
-                                <strong>TEORÍA: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para su comprensión. <br><br>
-                                <strong>PRÁCTICA: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con PRODUCTO INCLUÍDO. <br> La práctica se hará de la mano con el profesor en donde se reforzara lo aprendido
+                                <strong>2. Nuestros cursos y diplomados presenciales estan divididos en dos partes:</strong><br>
+                                <strong>Teoría: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para su comprensión. <br><br>
+                                <strong>Práctica: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con <strong>producto incluído.</strong> <br> La práctica se hará de la mano con el profesor en donde se reforzara lo aprendido.
                             </p>
                         @else
                             <p class="text_preguntas_material">
-                                <strong>CLASES GRABADAS: </strong><br> Las clases quedarán grabadas y tendrás acceso a ellas por <strong>72 horas. </strong> <br><br>
-                                <strong>DESPUES DE COMPRAR: </strong><br> Una vez realizada su compra, a su correo llegará un email de <br> confirmación de pago y posteriormente uno con la liga de su <br>clase, es necesario revisar la bandeja de spam.
+                                <strong>2. ¿Las clases quedan grabadas permanentemente?</strong><br>
+                                No, después de haber concluido tu clase, tendras la grabación disponible por <strong>72 horas </strong>para consultarla a la hora que desees.
                             </p>
                         @endif
-
+                        <p class="text_preguntas_material">
+                            <strong>3. ¿Como obtengo mi documento oficial?</strong><br>
+                            Registro IMNAS o RedConocer<br>
+                            1. Te contactará la gestora donde te dará un usuario y contraseña para subir a la plataforma tu información oficial.<br>
+                            2. Una ves aceptada por la gestora IMNAS tendrá máximo un mes para enviarte el documento por paquetería.<br><br>
+                            Diploma STPS<br>
+                            1. No se necesita ningún proceso de gestoría al término del curso.<br>
+                            2. IMNAS te enviará tu diploma a tu correo en máximo una semana.
+                        </p>
+                        @if ($curso->modalidad == 'Presencial')
+                            <p class="text_preguntas_material">
+                                <strong>4. ¿Donde se impartira mi curso?</strong><br>
+                                Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
+                            </p>
+                        @else
+                            <p class="text_preguntas_material">
+                                <strong>4. ¿En que plataforma se impartira mi curso?</strong><br>
+                                Google meet
+                            </p>
+                        @endif
                     </div>
 
                     @if ($curso->materiales != NULL)
@@ -560,7 +594,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @if ($curso->modalidad == 'Presencial')
                         <div class="row">
                             <div class="col-6">
-                                <h2 class="title_curso text-center mb-5">Ubicacion</h2>
+                                <h2 class="title_curso text-center mb-5">Ubicación</h2>
                                 <div class="d-flex justify-content-center">
                                     <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                                     </iframe>
@@ -576,7 +610,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @else
                         <div class="row">
                             <div class="col-12 mt">
-                                <h2 class="text-center title_curso">Enlace de la reuinion</h2>
+                                <h2 class="text-center title_curso">Enlace de la reuinión</h2>
 
                                 <a class="text-center registro_num2 mt-3 mb-5" href="{{$curso->recurso}}" style="" target="_blank">
                                     {{$curso->recurso}}
@@ -654,7 +688,6 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @endif
                         </div>
                     @endif
-
                 @endguest
               </div>
 
@@ -1272,9 +1305,9 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
     <div class="row border_row" style="">
 
         <div class="col-12 col-md-6">
-            <h2 class="text-center tittle-contact">Contactenos</h2>
+            <h2 class="text-center tittle-contact">Contáctanos</h2>
             <p class="text-center text-white">
-                Complementa tus conocimientos y conviértete un experto de la cosmología,
+                Complementa tus conocimientos y conviértete un experto de la cosmetodologia.
             </p>
 
             <form class="form_contactenos" action="">
