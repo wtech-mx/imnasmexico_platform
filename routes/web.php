@@ -37,7 +37,7 @@ Route::get('check', function () {
 
 Route::get('nuestras_instalaciones', function () {
     return view('user.instalaciones');
-});
+})->name('user.instalaciones');
 
 Route::get('login', function () {
     return view('auth.login');
@@ -45,7 +45,7 @@ Route::get('login', function () {
 
 Route::get('avales', function () {
     return view('user.avales');
-});
+})->name('user.avales');
 
 Route::get('orden', function () {
     return view('user.order');

@@ -22,7 +22,7 @@
             <a class="nav-link nav_link_custom {{ (Request::is('calendario*') ? 'active' : '') }}" aria-current="page" href="{{ route('cursos.index_user') }}">Calendario</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav_link_custom {{ (Request::is('avales*') ? 'active' : '') }}" href="avales">Avales</a>
+            <a class="nav-link nav_link_custom {{ (Request::is('avales*') ? 'active' : '') }}" href="{{ route('user.avales') }}">Avales</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav_link_custom {{ (Request::is('paquetes*') ? 'active' : '') }}" href="{{ route('cursos.paquetes') }}">Paquetes</a>
@@ -34,7 +34,7 @@
             <a class="nav-link nav_link_custom" href="#">Tienda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav_link_custom {{ (Request::is('nuestras_instalaciones*') ? 'active' : '') }}" href="nuestras_instalaciones">Instalaciones</a>
+            <a class="nav-link nav_link_custom {{ (Request::is('nuestras_instalaciones*') ? 'active' : '') }}" href="{{ route('user.instalaciones') }}">Instalaciones</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav_link_custom" data-bs-toggle="modal" data-bs-target="#checkout_modal" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ count((array) session('cart')) }}</a>
