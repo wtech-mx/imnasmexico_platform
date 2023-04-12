@@ -113,22 +113,30 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6">
+                                                <div class="col-5">
                                                     <div class="form-group">
                                                         <label for="fecha">Liga Meet/Direccion</label>
                                                         <input type="text" id="recurso" name="recurso" class="form-control">
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-3">
+                                                <div class="form-check col-2">
                                                     <label for="nota">Destacado</label>
                                                     <div class="form-group">
                                                         <input class="form-check-input" type="checkbox" value="1" id="destacado" name="destacado">
 
                                                     </div>
                                                 </div>
-
+                                                
                                                 <div class="form-check col-3">
+                                                    <label for="nota">Seccion UNAM</label>
+                                                    <div class="form-group">
+                                                        <input class="form-check-input" type="checkbox" value="1" id="seccion_unam" name="seccion_unam" >
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-check col-2">
                                                     <label for="nota">Publicar</label>
                                                     <div class="form-group">
                                                         <input class="form-check-input" type="checkbox" value="1" id="estatus" name="estatus" checked>

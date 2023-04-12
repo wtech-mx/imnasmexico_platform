@@ -39,6 +39,7 @@ class Cursos extends Model
         'materiales',
         'paquete',
         'video_cad',
+        'seccion_unam'
     ];
 
     public function User()

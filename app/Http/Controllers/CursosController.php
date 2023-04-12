@@ -74,6 +74,8 @@ class CursosController extends Controller
         $curso->informacion = $request->get('informacion');
         $curso->destacado = $request->get('destacado');
         $curso->estatus = $request->get('estatus');
+        $curso->seccion_unam = $request->get('seccion_unam');
+
 
         $valorAleatorio = uniqid();
         $curso->slug = Str::of($request->get('nombre'))->slug("-")->limit(300 - mb_strlen($valorAleatorio) - 1, "")->trim("-")->append("-", $valorAleatorio);
@@ -180,6 +182,7 @@ class CursosController extends Controller
         $curso->informacion = $request->get('informacion');
         $curso->destacado = $request->get('destacado');
         $curso->estatus = $request->get('estatus');
+        $curso->seccion_unam = $request->get('seccion_unam');
 
         $curso->update();
 

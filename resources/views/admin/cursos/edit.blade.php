@@ -122,33 +122,42 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6">
+                                                <div class="col-5">
                                                     <div class="form-group">
                                                         <label for="fecha">Liga Meet/Direccion</label>
                                                         <input type="text" id="recurso" name="recurso" class="form-control" value="{{$curso->recurso}}">
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-3">
+                                                <div class="form-check col-2">
+                                                    <label for="nota">Destacado</label>
                                                     <div class="form-group">
                                                         @if ($curso->destacado == 1)
                                                             <input class="form-check-input" type="checkbox" value="1" id="destacado" name="destacado" checked>
-                                                            <label for="nota">Destacado</label>
                                                         @else
                                                             <input class="form-check-input" type="checkbox" value="1" id="destacado" name="destacado">
-                                                            <label for="nota">Destacado</label>
                                                         @endif
                                                     </div>
                                                 </div>
 
                                                 <div class="form-check col-3">
+                                                    <label for="nota">Seccion UNAM</label>
+                                                    <div class="form-group">
+                                                        @if ($curso->seccion_unam == 1)
+                                                            <input class="form-check-input" type="checkbox" value="1" id="seccion_unam" name="seccion_unam" checked>
+                                                        @else
+                                                            <input class="form-check-input" type="checkbox" value="1" id="seccion_unam" name="seccion_unam" >
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-check col-2">
+                                                    <label for="nota">Publicar</label>
                                                     <div class="form-group">
                                                         @if ($curso->estatus == 1)
                                                             <input class="form-check-input" type="checkbox" value="1" id="estatus" name="estatus" checked>
-                                                            <label for="nota">Publicar</label>
                                                         @else
                                                             <input class="form-check-input" type="checkbox" value="1" id="estatus" name="estatus">
-                                                            <label for="nota">Publicar</label>
                                                         @endif
                                                     </div>
                                                 </div>
