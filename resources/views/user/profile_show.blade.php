@@ -33,12 +33,16 @@
                                 <div class="col-12 mt-3">
                                     @if ($tiket->Cursos->modalidad == 'Online')
                                         <b><label>Liga de Clase</label></b><br>
-                                        <a href="{{$tiket->Cursos->recurso}}">{{$tiket->Cursos->recurso}}</a>
+                                        @if ($order->estatus == '1')
+                                            <a href="{{$tiket->Cursos->recurso}}">{{$tiket->Cursos->recurso}}</a>
+                                        @endif
                                     @else
                                         <b><label>Dirección</label></b><br>
-                                        <p class="  ">
-                                            Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
-                                        </p>
+                                        @if ($order->estatus == '1')
+                                            <p class="  ">
+                                                Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México
+                                            </p>
+                                        @endif
                                     @endif
                                 </div>
                             </div>

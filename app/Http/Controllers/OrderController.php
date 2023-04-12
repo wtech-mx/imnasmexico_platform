@@ -47,7 +47,11 @@ class OrderController extends Controller
             $item = new Item();
             $item->title = $details['name'];
             $item->quantity = $details['quantity'];
-            $item->unit_price = $details['price'];
+            if ($details['price'] == 0) {
+                $item->unit_price = 0.01;
+            } else {
+                $item->unit_price = $details['price'];
+            }
             $ticketss[] = $item;
         }
 
@@ -112,7 +116,6 @@ class OrderController extends Controller
 
                 $order_ticket->save();
             }
-
             // Redirigir al usuario al proceso de pago de Mercado Pago
             return Redirect::to($preference->init_point);
         } catch (Exception $e) {
@@ -133,7 +136,7 @@ class OrderController extends Controller
         $status = $response->status;
         $external_reference = $response->external_reference;
         if ($status == 'approved') {
-            $order = Orders::where('external_reference', '=', $external_reference)->first();
+            $order = Orders::where('code', '=', $external_reference)->first();
             $order->num_order = $payment_id;
             $order->estatus = 1;
             $order->update();
@@ -152,7 +155,7 @@ class OrderController extends Controller
 
             Session::forget('cart');
         } elseif ($status == 'pending') {
-            $order = Orders::where('external_reference', '=', $external_reference)->first();
+            $order = Orders::where('code', '=', $external_reference)->first();
             $order->num_order = $payment_id;
             $order->update();
 
@@ -385,19 +388,173 @@ class OrderController extends Controller
 
     public function resultado(Request $request)
     {
+        $fechaActual = date('Y-m-d');
         Session::forget('cart');
         if ($request->input('paquete') == 1) {
             $total = 1175;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas'));
+            $curso = CursosTickets::where('nombre', '=', 'Cosmetología facial y corporal')
+            ->where('fecha_final', '>=', $fechaActual)
+            ->first();
+            if($curso != null){
+                $cart = session()->get('cart', []);
+                $cart[] = [
+                    "id" => $curso->id,
+                    "name" => $curso->nombre,
+                    "curso" => $curso->id_curso,
+                    "quantity" => 1,
+                    "price" => 0,
+                    "paquete" => 1,
+                    "image" => $curso->imagen
+                ];
+            }
+
         } elseif ($request->input('paquete') == 2) {
             $total = 1500;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas2'));
+            $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+            ->where('cursos.nombre', '=', 'Cosmetología facial y corporal')
+            ->where('cursos.fecha_final', '>=', $fechaActual)
+            ->where('cursos.modalidad', '=', 'Online')
+            ->select('cursos_tickets.*')
+            ->first();
+            if($curso != null){
+                $cart = session()->get('cart', []);
+                $cart[] = [
+                    "id" => $curso->id,
+                    "name" => $curso->nombre,
+                    "curso" => $curso->id_curso,
+                    "quantity" => 1,
+                    "price" => 0,
+                    "paquete" => 1,
+                    "image" => $curso->imagen
+                ];
+                session()->put('cart', $cart);
+            }
+
+            $aparatologia = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+            ->where('cursos.nombre', '=', 'Diplomado en Aparatología: Microdermoabrasíon, Multifuncional e Hydrafacial')
+            ->where('cursos.fecha_final', '>=', $fechaActual)
+            ->where('cursos.modalidad', '=', 'Online')
+            ->select('cursos_tickets.*')
+            ->first();
+            if($aparatologia != null){
+                $cart = session()->get('cart', []);
+                $cart[] = [
+                    "id" => $aparatologia->id,
+                    "name" => $aparatologia->nombre,
+                    "curso" => $aparatologia->id_curso,
+                    "quantity" => 1,
+                    "price" => 0,
+                    "paquete" => 1,
+                    "image" => $aparatologia->imagen
+                ];
+                session()->put('cart', $cart);
+            }
         } elseif ($request->input('paquete') == 3) {
             $total = 2125;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas3'));
+            $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+            ->where('cursos.nombre', '=', 'Cosmetología facial y corporal')
+            ->where('cursos.fecha_final', '>=', $fechaActual)
+            ->where('cursos.modalidad', '=', 'Online')
+            ->select('cursos_tickets.*')
+            ->first();
+            if($curso != null){
+                $cart = session()->get('cart', []);
+                $cart[] = [
+                    "id" => $curso->id,
+                    "name" => $curso->nombre,
+                    "curso" => $curso->id_curso,
+                    "quantity" => 1,
+                    "price" => 0,
+                    "paquete" => 1,
+                    "image" => $curso->imagen
+                ];
+                session()->put('cart', $cart);
+            }
+
+            $carrera = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+            ->where('cursos.nombre', '=', 'Carrera de Cosmiatría')
+            ->where('cursos.fecha_final', '>=', $fechaActual)
+            ->where('cursos.modalidad', '=', 'Online')
+            ->select('cursos_tickets.*')
+            ->first();
+            if($carrera != null){
+                $cart = session()->get('cart', []);
+                $cart[] = [
+                    "id" => $carrera->id,
+                    "name" => $carrera->nombre,
+                    "curso" => $carrera->id_curso,
+                    "quantity" => 1,
+                    "price" => 0,
+                    "paquete" => 1,
+                    "image" => $carrera->imagen
+                ];
+                session()->put('cart', $cart);
+            }
         } elseif ($request->input('paquete') == 4) {
             $total = 2550;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas4'));
+            $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+            ->where('cursos.nombre', '=', 'Cosmetología facial y corporal')
+            ->where('cursos.fecha_final', '>=', $fechaActual)
+            ->where('cursos.modalidad', '=', 'Online')
+            ->select('cursos_tickets.*')
+            ->first();
+
+            if($curso != null){
+                $cart = session()->get('cart', []);
+                $cart[] = [
+                    "id" => $curso->id,
+                    "name" => $curso->nombre,
+                    "curso" => $curso->id_curso,
+                    "quantity" => 1,
+                    "price" => 0,
+                    "paquete" => 1,
+                    "image" => $curso->imagen
+                ];
+                session()->put('cart', $cart);
+            }
+
+            $spa = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+            ->where('cursos.nombre', '=', 'Diplomado en Administración Asesoría Spa')
+            ->where('cursos.fecha_final', '>=', $fechaActual)
+            ->where('cursos.modalidad', '=', 'Online')
+            ->select('cursos_tickets.*')
+            ->first();
+            if($spa != null){
+                $cart = session()->get('cart', []);
+                $cart[] = [
+                    "id" => $spa->id,
+                    "name" => $spa->nombre,
+                    "curso" => $spa->id_curso,
+                    "quantity" => 1,
+                    "price" => 0,
+                    "paquete" => 1,
+                    "image" => $spa->imagen
+                ];
+                session()->put('cart', $cart);
+            }
+            $carrera = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+            ->where('cursos.nombre', '=', 'Carrera de Cosmiatría')
+            ->where('cursos.fecha_final', '>=', $fechaActual)
+            ->where('cursos.modalidad', '=', 'Online')
+            ->select('cursos_tickets.*')
+            ->first();
+            if($carrera != null){
+                $cart = session()->get('cart', []);
+                $cart[] = [
+                    "id" => $carrera->id,
+                    "name" => $carrera->nombre,
+                    "curso" => $carrera->id_curso,
+                    "quantity" => 1,
+                    "price" => 0,
+                    "paquete" => 1,
+                    "image" => $carrera->imagen
+                ];
+                session()->put('cart', $cart);
+            }
         }
         $ticketsSeleccionados = CursosTickets::whereIn('id', $opcionesSeleccionadas)->get();
         for ($i = 0; $i < count($ticketsSeleccionados); $i++) {
