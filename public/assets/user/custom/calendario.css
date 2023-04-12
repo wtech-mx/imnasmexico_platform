@@ -123,6 +123,14 @@
 
 }
 
+
+@media only screen and (max-width: 767px) {
+    .desaparecer_form_seach{
+        display: none;
+    }
+}
+
+
 @media only screen and (max-width: 400px) {
     .carousel-item {
         height: 50vh;

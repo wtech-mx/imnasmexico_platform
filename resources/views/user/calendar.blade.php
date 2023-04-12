@@ -114,9 +114,11 @@
     <div class="row">
 
         <div class="col-12">
-            <form class="row form_search_calendar" action="{{ route('advance_search') }}" method="GET" >
+            <form class="row form_search_calendar desaparecer_form_seach" action="{{ route('advance_search') }}" method="GET" >
 
-                <div class="col-12 col-sm-6 col-md-2">
+
+
+                <div class="col-12 col-md-5">
                     <label class="form-label style_search_label">Modalidad</label>
                     <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="modalidad" id="modalidad">
                         <option value="" selected>Modalidad</option>
@@ -125,30 +127,14 @@
                     </select>
                 </div>
 
-                <div class="col-12 col-sm-6 col-md-2">
-                    <label class="form-label style_search_label">Categoria</label>
-                    <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="categoria" id="categoria">
-                        <option value="" selected>Seleccione</option>
-                        <option value="Faciales">Faciales</option>
-                        <option value="Corporales">Corporales</option>
-                    </select>
-                </div>
-
-                <div class="col-12 col-sm-4 col-md-2">
-                    <label class="form-label style_search_label">Fecha</label>
-                    <div class="input-group">
-                        <input name="fecha_inicial" class="form-control" value="{{$fechaActual}}" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;   border-radius: 0px;" type="date">
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-4 col-md-3">
+                <div class="col-12 col-md-5">
                     <label class="form-label style_search_label">Nombre</label>
                     <div class="input-group">
                         <input name="nombre" class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" type="text" placeholder="Nombre">
                     </div>
                 </div>
 
-                <div class="col-12 col-sm-4 col-md-3">
+                <div class="col-12 col-md-2">
                     <label class="form-label style_search_label">-</label>
                     <div class="input-group">
                         <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit">
@@ -162,6 +148,45 @@
                 </div>
 
             </form>
+
+            <div class="container">
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#myContent" aria-expanded="false" aria-controls="myContent">
+                    <i class="fas fa-search-plus  icon_search_style"></i> Buscar
+                </button>
+
+                <div class="collapse" id="myContent">
+                    <form class="row form_search_calendar" action="{{ route('advance_search') }}" method="GET" >
+                        <div class="col-6">
+                            <label class="form-label style_search_label">Modalidad</label>
+                            <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="modalidad" id="modalidad">
+                                <option value="" selected>Modalidad</option>
+                                <option value="Presencial">Presencial</option>
+                                <option value="Online">Online</option>
+                            </select>
+                        </div>
+
+                        <div class="col-6">
+                            <label class="form-label style_search_label">Nombre</label>
+                            <div class="input-group">
+                                <input name="nombre" class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" type="text" placeholder="Nombre">
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label style_search_label">-</label>
+                            <div class="input-group">
+                                <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit">
+                                    <i class="fas fa-search-plus  icon_search_style"></i>
+                                </button>
+                                <a class="btn btn-sm mb-0 mt-sm-0 mt-1" href="{{ route('cursos.index_user') }}">
+                                    <i class="fas fa-eraser  icon_search_style_2"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+              </div>
 
         </div>
 
