@@ -487,12 +487,12 @@
                 <div class="carousel-inner">
                     @foreach ($unam as $item)
                     @php
-                        $dia = date("d/m", strtotime($curso->fecha_inicial));
+                        $dia = date("d/m", strtotime($item->fecha_inicial));
                     @endphp
                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                             <div class="d-flex justify-content-center">
                                 <div class="card card-custom" style="">
-                                    <img class="card_image" src="{{asset('curso/'. $curso->foto) }}" class="card-img-top" alt="...">
+                                    <img class="card_image" src="{{asset('curso/'. $item->foto) }}" class="card-img-top" alt="...">
                                     <div class="card-body card_body_custom">
                                     <h5 class="card-title card_modalidad">{{$item->modalidad}}</h5>
                                     <h3 class="card_titulo">{{$item->nombre}}</h3>
