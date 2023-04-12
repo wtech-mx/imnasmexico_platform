@@ -214,6 +214,7 @@
     </div>
 </section>
 
+
 <section class="primario bg_overley" style="background-color:#F5ECE4;" id="cafeteria">
     <div class="row">
 
@@ -258,6 +259,60 @@
     </div>
 </section>
 
+
+<section class="primario bg_overley" style="background-color:#836262;"id="aulas">
+    <div class="row">
+
+        <div class="col-12 col-md-6 m-auto">
+            <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">Tienda</h1>
+            <p class="text-center text-white mt-auto parrafo_instalaciones">
+                Nuestras Aulas están equipadas con todo <br> lo necesario para que aprendas de la mejor manera, <br> con los mejores equipos y materiales.
+            </p>
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="d-flex justify-content-center">
+            <div class="card card-custom space_Card mb-3" style="">
+                <div id="carousel_tiendita" class="carousel slide">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/tienda/1.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/tienda/2.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/tienda/3.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/tienda/4.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/tienda/7.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/tienda/8.jpg')}}"  style="width: 100%;">
+                      </div>
+                      <div class="carousel-item ">
+                        <img class="card_image" src="{{asset('assets/user/instalaciones/tienda/9.jpg')}}"  style="width: 100%;">
+                      </div>
+                    </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel_tiendita" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel_tiendita" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+            </div>
+            </div>
+        </div>
+
+    </div>
+</section>
 
 {{-- Ubicacion --}}
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
