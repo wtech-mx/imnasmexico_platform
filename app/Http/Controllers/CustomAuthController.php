@@ -59,7 +59,8 @@ class CustomAuthController extends Controller
 
         $code = Str::random(8);
         if(User::where('telefono', $request->telefono)->exists()){
-            return back()->with('error','Email-Address And Password Are Wrong.');
+            Session::flash('login_error', 'Email-Address And Password Are Wrong.');
+             return redirect()->back();
         }else{
             $creat_user = new User;
             $creat_user->name = $request->get('name');
@@ -73,8 +74,9 @@ class CustomAuthController extends Controller
             Mail::to($creat_user->email)->send(new PlantillaNuevoUser($datos));
         }
 
-
-        return redirect("/")->withSuccess('has iniciado sesión');
+        Auth::login($creat_user);
+        Session::flash('success', 'Se ha registrado Correctamente');
+        return redirect()->back();
     }
 
     public function create(array $data)

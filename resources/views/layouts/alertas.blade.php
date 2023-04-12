@@ -1,3 +1,24 @@
+@if (Session::has('modal_checkout'))
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+        var addedToCartModal = document.querySelector('#checkout_modal');
+        var bootstrapModal = new bootstrap.Modal(addedToCartModal);
+        bootstrapModal.show();
+    });
+</script>
+@endif
+
+@if (Session::has('login_error'))
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+        var addedToCartModal = document.querySelector('#login_modal');
+        var bootstrapModal = new bootstrap.Modal(addedToCartModal);
+        bootstrapModal.show();
+    });
+</script>
+@endif
+
+
 @if (Session::has('success'))
 <script>
     Swal.fire({
