@@ -509,7 +509,7 @@
                                         </div>
                                     </a>
 
-                                    <a class="btn btn-secundario me-1" href="{{ route('cursos.show',$curso->slug) }}">
+                                    <a class="btn btn-secundario me-1" href="{{ route('cursos.show',$item->slug) }}">
                                         <div class="d-flex justify-content-around">
                                             <p class="card_tittle_btn my-auto">
                                                 Saber más
