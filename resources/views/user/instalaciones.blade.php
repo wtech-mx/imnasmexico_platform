@@ -11,11 +11,11 @@
 
 @section('content')
 
-<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/instalaciones/salon.jpg')}}')">
+<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/instalaciones/retocadas/6.jpg')}}')">
     <span class="mask"></span>
     <div class="row margin_home_nav ">
 
-        <div class="col-12 col-md-6">
+        <div class="col-12 col-sm-12 col-md-6">
             <div id="carouselExample" class="carousel slide">
 
                 <div class="carousel-inner">
@@ -84,8 +84,8 @@
 
         </div>
 
-        <div class="col-12 col-md-6 index_superior">
-            <h1 class="text-white titulo space_tiitle_slide" style="">
+        <div class="col-12 col-sm-12 col-md-6 index_superior">
+            <h1 class="text-white titulo space_title_instalaciones  space_tiitle_slide" style="">
                 Instituto Mexicano <br>
                 Naturales Ain Spa
             </h1>
@@ -260,7 +260,7 @@
 </section>
 
 
-<section class="primario bg_overley" style="background-color:#836262;"id="aulas">
+<section class="primario bg_overley" style="background-color:#836262;"id="tienda">
     <div class="row">
 
         <div class="col-12 col-md-6 m-auto">
