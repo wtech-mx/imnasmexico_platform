@@ -37,7 +37,7 @@
                 <a class="btn btn-primario me-4" href="{{ route('cursos.index_user') }}">
                     Oferta Educativa
                 </a>
-                <a class="btn btn-secundario" href="">
+                <a class="btn btn-secundario" href="{{ route('user.nosotros') }}">
                     Saber más
                 </a>
             </div>
