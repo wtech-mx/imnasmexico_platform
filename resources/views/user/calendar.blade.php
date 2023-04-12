@@ -45,54 +45,51 @@
         @endphp
             <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{asset('curso/'. $curso->foto) }}')">
                 <div class="row postion_row_caledanrio">
-                <div class="col-12 col-md-6">
-                    <div class="conten_slilder_full">
-                        <h1 class="text-white titulo titulo_full" style="">
-                            {{$curso->nombre}}
-                        </h1>
+                    <div class="col-12 col-md-8">
+                        <div class="conten_slilder_full">
+                            <h1 class="text-white titulo titulo_full" style="">
+                                {{$curso->nombre}}
+                            </h1>
 
-                        <a class="btn btn-secundario_grid me-3 mb-5 mb-lg-5 mb-md-0 mt-5 mt-md-0 mt-lg-5">
-                            <div class="d-flex justify-content-around">
-                                <p class="card_tittle_btn my-auto">
-                                    {{$curso->modalidad}}
-                                </p>
+                            <a class="btn btn-secundario_grid me-3 mb-2 mb-lg-5 mb-md-4 mt-4 mt-md-4 mt-lg-5">
+                                <div class="d-flex justify-content-around">
+                                    <p class="card_tittle_btn my-auto">
+                                        {{$curso->modalidad}}
+                                    </p>
+                                </div>
+                            </a>
+
+                            <h3 class="text-white parrafo parrafo_full mb-4 mb-lg-5 mb-md-4">
+                                {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
+                                al {{$fecha_final}} <br>
+                                @endif {{$hora_inicial}} - {{$hora_final}}
+                            </h3>
+
+                            <div class="d-flex justify-content-start">
+                                <a class="btn btn-primario me-3">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Comprar ahora
+                                        </p>
+                                        <div class="card_bg_btn ">
+                                            <i class="fas fa-cart-plus card_icon_btn"></i>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a class="btn btn-secundario me-1" href="{{ route('cursos.show',$curso->slug) }}">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Saber más
+                                        </p>
+                                        <div class="card_bg_btn_secundario">
+                                            <i class="fas fa-plus card_icon_btn_secundario"></i>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-{{--
-                        <p class="text-white parrafo" style="">
-                            <?php echo $curso->descripcion?>
-                        </p> --}}
-                        <h3 class="tittle_abstract ">
-                            {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
-                            - {{$fecha_final}}
-                            @endif, {{$hora_inicial}} - {{$hora_final}}
-                        </h3>
-
-                        <div class="d-flex justify-content-start">
-                            <a class="btn btn-primario me-3">
-                                <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Comprar ahora
-                                    </p>
-                                    <div class="card_bg_btn ">
-                                        <i class="fas fa-cart-plus card_icon_btn"></i>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <a class="btn btn-secundario me-1" href="{{ route('cursos.show',$curso->slug) }}">
-                                <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Saber más
-                                    </p>
-                                    <div class="card_bg_btn_secundario">
-                                        <i class="fas fa-plus card_icon_btn_secundario"></i>
-                                    </div>
-                                </div>
-                            </a>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         @endforeach
