@@ -21,7 +21,7 @@ use App\Http\Controllers\StripePaymentController;
 */
 Route::get('nosotros', function () {
     return view('user.nosotros');
-});
+})->name('user.nosotros');
 
 
 Route::get('403', function () {
