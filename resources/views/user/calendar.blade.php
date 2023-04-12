@@ -112,9 +112,7 @@
 
         <div class="col-12">
             <form class="row form_search_calendar desaparecer_form_seach" action="{{ route('advance_search') }}" method="GET" >
-
-
-
+                @csrf
                 <div class="col-12 col-md-5">
                     <label class="form-label style_search_label">Modalidad</label>
                     <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="modalidad" id="modalidad">
@@ -153,7 +151,7 @@
 
                 <div class="collapse" id="content_search">
                     <form class="row" action="{{ route('advance_search') }}" method="GET" >
-
+                        @csrf
                         <div class="col-4">
                             <label class="form-label style_search_label">Modalidad</label>
                             <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="modalidad" id="modalidad">
@@ -309,6 +307,12 @@
         </div>
         @endforeach
         {{-- card_grid --}}
+        <!-- Mostrar mensaje si no se encontraron resultados -->
+        @if ($cursos->isEmpty())
+            <h3 class="title_curso">
+                No se encontraron cursos que coincidan con los criterios de búsqueda.
+            </h3>
+        @endif
     </div>
 
 </section>

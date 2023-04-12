@@ -16,8 +16,8 @@ class CursoUsersController extends Controller
     {
         $DateAndTime = date('h:i', time());
         $fechaActual = date('Y-m-d');
-        $cursos = Cursos::where('fecha_final','>=', $fechaActual)->where('estatus','=', '1')->get();
-        $cursos_slide = Cursos::where('fecha_final','>=', $fechaActual)->where('estatus','=', '1')->get();
+        $cursos = Cursos::where('estatus','=', '1')->get();
+        $cursos_slide = Cursos::where('estatus','=', '1')->get();
 
         $tickets = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
 
@@ -56,42 +56,28 @@ class CursoUsersController extends Controller
         return view('user.paquetes', compact('curso', 'tickets'));
     }
 
-    public function advance(Request $request, Cursos $cursos) {
+    public function advance(Request $request) {
         $fechaActual = date('Y-m-d');
-        $tickets = CursosTickets::where('fecha_final','>=', $fechaActual)->get();
-        $cursos_slide = Cursos::where('fecha_final','>=', $fechaActual)->where('estatus','=', '1')->get();
+        $tickets = CursosTickets::get();
+        $cursos_slide = Cursos::where('estatus', '1')->get();
+        // Consulta los cursos activos
+        $cursos = Cursos::where('estatus', '1');
 
-        if( $request->modalidad){
-            $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('modalidad', 'LIKE', "%" . $request->modalidad . "%");
+        // Obtén los valores de búsqueda del formulario
+        $nombre = $request->input('nombre');
+        $modalidad = $request->input('modalidad');
+
+        // Aplica los filtros de búsqueda si se proporcionaron
+        if ($nombre) {
+            $cursos->where('nombre', 'LIKE', "%$nombre%");
+        }
+        if ($modalidad) {
+            $cursos->where('modalidad', $modalidad);
         }
 
-        if( $request->nombre){
-            $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('nombre', 'LIKE', "%" . $request->nombre . "%");
-        }
+        // Obtén los resultados de la búsqueda
+        $cursos = $cursos->get();
 
-        if( $request->categoria){
-            $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('categoria', 'LIKE', "%" . $request->categoria . "%");
-        }
-
-        if($request->tipo){
-            if($request->tipo == 'sep'){
-                $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('sep', '=', '1');
-            }elseif($request->tipo == 'unam'){
-                $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('unam', '=', '1');
-            }elseif($request->tipo == 'stps'){
-                $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('stps', '=', '1');
-            }elseif($request->tipo == 'redconocer'){
-                $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('redconocer', '=', '1');
-            }elseif($request->tipo == 'imnas'){
-                $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('imnas', '=', '1');
-            }
-        }
-
-        if( $request->fecha_inicial){
-            $cursos = $cursos->where('estatus','=', '1')->where('fecha_final','>=', $fechaActual)->where('fecha_inicial', '=', $request->fecha_inicial);
-        }
-
-        $cursos = $cursos->paginate(10);
 
         return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual'));
     }
