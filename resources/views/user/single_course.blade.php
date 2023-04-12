@@ -482,7 +482,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <p class="text_preguntas_material">
                                 <strong>2. Nuestros cursos y diplomados presenciales están divididos en dos partes:</strong><br>
                                 <strong>Teoría: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para tu comprensión. <br><br>
-                                <strong>Práctica: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con <strong>producto incluído.</strong> <br> La práctica se hará de la mano con el profesor en donde se reforzara lo aprendido.
+                                <strong>Práctica: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con <strong>producto incluído.</strong> <br> La práctica se hará de la mano con el profesor en donde se reforzará lo aprendido.
                             </p>
                         @else
                             <p class="text_preguntas_material">
@@ -494,7 +494,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <strong>3. ¿Cómo obtengo mi Documento Oficial?</strong><br>
                             Registro IMNAS o Red CONOCER<br>
                             1. Te contactará la gestora donde te dará un usuario y contraseña para subir a la plataforma tu información oficial.<br>
-                            2. Una vez aceptada por la gestora IMNAS tendrá máximo un mes para enviarte el documento por paquetería.<br><br>
+                            2. una vez aceptada por la gestora, IMNAS tendrá máximo un mes para enviarte el documento por paquetería.<br><br>
                             Diploma STPS<br>
                             1. No se necesita ningún proceso de gestoría al término del curso.<br>
                             2. IMNAS te enviará tu diploma a tu correo en máximo una semana.
@@ -1133,7 +1133,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <p class="text_preguntas_material">
                                 Nuestros cursos y diplomados presenciales estan divididos en dos partes: <br><br>
                                 <strong>TEORÍA: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para su comprensión. <br><br>
-                                <strong>PRÁCTICA: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con PRODUCTO INCLUÍDO. <br> La práctica se hará de la mano con el profesor en donde se reforzara lo aprendido
+                                <strong>PRÁCTICA: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con PRODUCTO INCLUÍDO. <br> La práctica se hará de la mano con el profesor en donde se reforzará lo aprendido
                             </p>
                         @else
                             <p class="text_preguntas_material">
