@@ -3,5 +3,7 @@
 // });
 
 $(window).on('load', function () {
-    jQuery("#page-loader").fadeOut("slow");
+    setTimeout(function() {
+        jQuery("#page-loader").fadeOut("slow");
+    }, 3000); // 3 segundos
 });
