@@ -393,7 +393,7 @@ class OrderController extends Controller
         if ($request->input('paquete') == 1) {
             $total = 1175;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas'));
-            $curso = CursosTickets::where('nombre', '=', 'Cosmetología facial y corporal')
+            $curso = CursosTickets::where('nombre', '=', 'Diplomado de Cosmetología facial y corporal')
             ->where('fecha_final', '>=', $fechaActual)
             ->first();
             if($curso != null){
@@ -413,7 +413,7 @@ class OrderController extends Controller
             $total = 1500;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas2'));
             $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Cosmetología facial y corporal')
+            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología facial y corporal')
             ->where('cursos.fecha_final', '>=', $fechaActual)
             ->where('cursos.modalidad', '=', 'Online')
             ->select('cursos_tickets.*')
@@ -455,7 +455,7 @@ class OrderController extends Controller
             $total = 2125;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas3'));
             $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Cosmetología facial y corporal')
+            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología facial y corporal')
             ->where('cursos.fecha_final', '>=', $fechaActual)
             ->where('cursos.modalidad', '=', 'Online')
             ->select('cursos_tickets.*')
@@ -497,7 +497,7 @@ class OrderController extends Controller
             $total = 2550;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas4'));
             $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Cosmetología facial y corporal')
+            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología facial y corporal')
             ->where('cursos.fecha_final', '>=', $fechaActual)
             ->where('cursos.modalidad', '=', 'Online')
             ->select('cursos_tickets.*')
