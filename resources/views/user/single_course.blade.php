@@ -502,7 +502,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @if ($curso->modalidad == 'Presencial')
                             <p class="text_preguntas_material">
                                 <strong>4. ¿Dónde se impartirá mi curso?</strong><br>
-                                Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
+                                Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México
                             </p>
                         @else
                             <p class="text_preguntas_material">
@@ -617,7 +617,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                             <div class="col-6 m-auto">
                                     <p class="  ">
-                                        Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
+                                        Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México
                                     </p>
                             </div>
                         </div>
@@ -1234,7 +1234,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                                 <div class="col-6 m-auto">
                                         <p class="  ">
-                                            Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
+                                            Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México
                                         </p>
                                 </div>
                             </div>

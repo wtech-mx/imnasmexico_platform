@@ -29,7 +29,7 @@
                     </p>
                     <p class="text_preguntas_material">
                         <strong>5. Presencial ¿Dónde se impartirá mi curso?</strong><br>
-                        Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
+                        Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México
                     </p>
                     <p class="text_preguntas_material">
                         <strong>6. Online ¿En qué plataforma se impartirá mi curso?</strong><br>
