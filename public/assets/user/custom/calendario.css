@@ -130,6 +130,12 @@
     }
 }
 
+@media only screen and (min-width: 767px) {
+    .aparecer_form_seach{
+        display: none;
+    }
+}
+
 
 @media only screen and (max-width: 400px) {
     .carousel-item {

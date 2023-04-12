@@ -149,14 +149,15 @@
 
             </form>
 
-            <div class="container">
-                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#myContent" aria-expanded="false" aria-controls="myContent">
-                    <i class="fas fa-search-plus  icon_search_style"></i> Buscar
+            <div class="container aparecer_form_seach" style="display: contents;">
+                <button class="mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#content_search" aria-expanded="false" aria-controls="content_search" style="background: transparent;border: solid transparent;">
+                    <i class="fas fa-search  icon_search_style"></i> <strong>Buscar : </strong>
                 </button>
 
-                <div class="collapse" id="myContent">
-                    <form class="row form_search_calendar" action="{{ route('advance_search') }}" method="GET" >
-                        <div class="col-6">
+                <div class="collapse" id="content_search">
+                    <form class="row" action="{{ route('advance_search') }}" method="GET" >
+
+                        <div class="col-4">
                             <label class="form-label style_search_label">Modalidad</label>
                             <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="modalidad" id="modalidad">
                                 <option value="" selected>Modalidad</option>
@@ -165,7 +166,7 @@
                             </select>
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-8">
                             <label class="form-label style_search_label">Nombre</label>
                             <div class="input-group">
                                 <input name="nombre" class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" type="text" placeholder="Nombre">
