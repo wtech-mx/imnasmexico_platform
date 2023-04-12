@@ -82,6 +82,8 @@ Route::get('/curso/{slug}', [App\Http\Controllers\CursoUsersController::class, '
 Route::get('/calendario', [App\Http\Controllers\CursoUsersController::class, 'index_user'])->name('cursos.index_user');
 Route::get('/calendario/advance', [App\Http\Controllers\CursoUsersController::class, 'advance'])->name('advance_search');
 
+Route::post('/mensaje', [App\Http\Controllers\CursoUsersController::class, 'enviarFormulario'])->name('mensaje.form');
+
 // =============== P A Q U E T E S ===============
 Route::get('/paquetes', [App\Http\Controllers\CursoUsersController::class, 'paquetes'])->name('cursos.paquetes');
 

@@ -1341,22 +1341,23 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                 Complementa tus conocimientos y conviértete un experto de la Cosmetología.
             </p>
 
-            <form class="form_contactenos" action="">
+            <form method="POST" action="{{ route('mensaje.form') }}"role="form">
+                @csrf
+                    <div class="form-group">
+                        <input type="text" class="form-control form_contact mt-4" name="nombre" id="nombre" placeholder="Nombre (requerido)" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control form_contact mt-4" name="correo" id="correo" placeholder="Correo Electrónico (requerido)" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control form_contact mt-4" name="mensaje" id="mensaje" placeholder="Message">
+                    </div>
+                    <input type="hidden" class="form-control form_contact mt-4" name="curso" id="curso" value="{{$curso->nombre}}">
+                    <input type="hidden" class="form-control form_contact mt-4" name="fecha" id="fecha" value="{{$curso->fecha_inicial}}">
+                    <input type="hidden" class="form-control form_contact mt-4" name="modalidad" id="modalidad" value="{{$curso->modalidad}}">
 
-                    <div class="form-group">
-                        <input type="text" class="form-control form_contact mt-4" id="" placeholder="Nombre (requerido)">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control form_contact mt-4" id="" placeholder="Correo Electrónico (requerido)">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control form_contact mt-4" id="" placeholder="Teléfono (requerido)">
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control form_contact mt-4" id="" placeholder="Message">
-                    </div>
                     <p class="text-center text-white">
-                        <a class="btn btn_enfiar_form">Enviar <i class="fab fa-whatsapp"></i></a>
+                        <button type="submit" class="btn btn_enfiar_form">Enviar <i class="fab fa-whatsapp"></i></button>
                     </p>
 
             </form>
