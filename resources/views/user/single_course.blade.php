@@ -784,9 +784,9 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <h2 class="title_curso">Fecha y Hora</h2>
 
                         <p class="tittle_abstract ">
-                            {{$curso->fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
-                            {{$curso->fecha_final}}
-                            @endif, {{$curso->hora_inicial}} - {{$curso->hora_final}}
+                            {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
+                            - {{$fecha_final}}
+                            @endif, {{$hora_inicial}} - {{$hora_final}}
                         </p>
 
                         <h2 class="title_curso">Modalidad</h2>
