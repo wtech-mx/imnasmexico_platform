@@ -8,13 +8,13 @@
           <div class="row">
 
             <div class="col-12 col-md-6">
-                <p class="text-center tittle_modal_cka">Certificacion</p>
+                <p class="text-center tittle_modal_cka">Compras</p>
 
                 <table id="cart" class="table table-hover table-condensed">
                     <thead>
                       <tr class="tr_checkout">
                         <th >#</th>
-                        <th >Certificado</th>
+                        <th >Curso</th>
                         <th >Costos</th>
                         <th></th>
                         <th></th>
@@ -53,15 +53,20 @@
                                         <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>
                                     </td>
                                 @endif
-
+                                    <th></th>
                             </tr>
                         @endforeach
                     @endif
                     <tr class="tr_checkout">
                         <th></th>
                         <th>Total:</th>
-                        <th>$ {{ $total }}</th>
-                        <th></th>
+                        <th>${{ $total }}</th>
+                        <th>
+                            <form action="{{ route('vaciar_carrito') }}" method="post">
+                                @csrf
+                                <button class="btn">Vaciar carrito</button>
+                            </form>
+                        </th>
                     </tr>
                     </tbody>
                 </table>

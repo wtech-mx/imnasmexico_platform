@@ -92,7 +92,7 @@
             <p class="text-white parrafo parrafo_instalaciones" style="">
                 Nuestra misión es llegar a más sectores de la educación a nivel global,
                 queremos que los mejores conocimientos y la experiencia de los mayores referentes del mundo estén a disposición de todo aquel
-                  que tenga inquietud, ambición y ganas de aprender y de emprender.
+                  que tenga inquietud, ambición y ganas de aprender y emprender.
             </p>
 
         </div>
@@ -118,7 +118,7 @@
 
             <p class="text-center mt-3">
                 <a href="#cafeteria" class="btn btn_instalaciones" >
-                    Cafeteria
+                    Áreas Comunes
                 </a>
             </p>
 
@@ -158,7 +158,7 @@
     <div class="row">
 
         <div class="col-12 col-md-6 m-auto">
-            <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">Interior</h1>
+            <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">Aulas</h1>
             <p class="text-center text-white mt-auto parrafo_instalaciones">
                 Nuestras Aulas están equipadas con todo <br> lo necesario para que aprendas de la mejor manera, <br> con los mejores equipos y materiales.
             </p>
@@ -249,9 +249,9 @@
         </div>
 
         <div class="col-12 col-md-6 order-uno m-auto">
-            <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">Exterior</h1>
+            <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">Áreas Comunes</h1>
             <p class="text-center text-white mt-auto parrafo_instalaciones" style="color:#836262!important;">
-                Nuestras Aulas están equipadas con todo <br> lo necesario para que aprendas de la mejor manera, <br> con los mejores equipos y materiales.
+                Porque sabemos que después de una buena clase, necesitan <br>un buen descanso, contamos con áreas comunes para que <br>puedan relajarse un rato y disfrutar de sus alimentos.
             </p>
         </div>
 
@@ -270,7 +270,7 @@
 
                     <li class="nav-item" role="presentation" style="margin-right: 30px;">
                     <button class="nav-link active" id="pills-alamos-tab" data-bs-toggle="pill" data-bs-target="#pills-alamos" type="button" role="tab" aria-controls="pills-alamos" aria-selected="true">
-                        <i class="fas fa-map-marker-alt"></i> Alamos
+                        <i class="fas fa-map-marker-alt"></i> Álamos
                     </button>
                     </li>
 

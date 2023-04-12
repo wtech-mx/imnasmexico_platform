@@ -97,6 +97,7 @@ Route::get('/orders/{code}/show', [OrderController::class, 'show'])->name('order
 Route::post('/orders/pay/stripe', [OrderController::class, 'pay_stripe'])->name('order.pay_stripe');
 
 Route::post('/paquete/pay/stripe', [OrderController::class, 'pay_stripe_paquete'])->name('order.pay_stripe_paquete');
+Route::post('/vaciar-carrito', [OrderController::class, 'vaciar_carrito'])->name('vaciar_carrito');
 
 // =============== C A R R I T O ===============================
 Route::get('add-to-cart/{id}', [OrderController::class, 'addToCart'])->name('add.to.cart');

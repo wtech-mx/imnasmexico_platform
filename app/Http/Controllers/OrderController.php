@@ -418,6 +418,12 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
+    public function vaciar_carrito(Request $request)
+    {
+        Session::forget('cart');
+        return redirect()->back()->with('success', 'Product removed successfully');
+    }
+
     public function remove(Request $request)
     {
 
