@@ -480,7 +480,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         </p>
                         @if ($curso->modalidad == 'Presencial')
                             <p class="text_preguntas_material">
-                                <strong>2. Nuestros cursos y diplomados presenciales estan divididos en dos partes:</strong><br>
+                                <strong>2. Nuestros cursos y diplomados presenciales están divididos en dos partes:</strong><br>
                                 <strong>Teoría: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para tu comprensión. <br><br>
                                 <strong>Práctica: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con <strong>producto incluído.</strong> <br> La práctica se hará de la mano con el profesor en donde se reforzara lo aprendido.
                             </p>
