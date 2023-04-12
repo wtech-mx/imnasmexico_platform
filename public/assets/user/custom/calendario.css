@@ -7,6 +7,18 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+}
+
+.parrafo_full{
+    font-family: Leelawadee_2;
+    font-size: 29px;
+    line-height: 47px;
+}
+
+    @media only screen and (max-width: 1390px){
+        .parrafo_full{
+            font-size: 22px;
+        }
     }
 
     @media only screen and (max-width: 1200px) {
@@ -159,7 +171,7 @@
 @media only screen and (max-width: 400px) {
     .titulo_full {
         font-size: 20px;
-        margin-top: 1rem;
+        margin-top: 0rem;
     }
 
     .parrafo_full{
@@ -169,6 +181,10 @@
 
     .mask_calendar {
         height: 95%;
+    }
+
+    .carousel-item {
+        height: 53vh;
     }
 
 }

@@ -59,7 +59,7 @@
                                 </div>
                             </a>
 
-                            <h3 class="text-white parrafo parrafo_full mb-4 mb-lg-5 mb-md-4">
+                            <h3 class="text-white parrafo_full mb-4 mb-lg-5 mb-md-4">
                                 {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
                                 al {{$fecha_final}} <br>
                                 @endif {{$hora_inicial}} - {{$hora_final}}
