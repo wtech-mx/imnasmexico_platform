@@ -343,6 +343,10 @@
         width: 23rem!important;
     }
 
+    .fecha_card_grid {
+        font-size: 20px!important;
+    }
+
 }
 
 @media only screen and (max-width: 502px) {
@@ -360,6 +364,14 @@
         padding: 50px 10px 50px 10px;
     }
 
+    .fecha_card_grid {
+        font-size: 17px!important;
+    }
+
+    .card_grid {
+        width: 23rem!important;
+        left: 50px!important;
+    }
 }
 
 @media only screen and (max-width: 453px) {
@@ -367,8 +379,17 @@
         font-size: 11px;
     }
 
+    .card_grid {
+        width: 24rem!important;
+        left: 30px!important;
+    }
+
     .nav-tabs .nav-link {
         font-size: 11px;
+    }
+
+    .fecha_card_grid {
+        font-size: 20px!important;
     }
 
     .icon_res_tabs {
@@ -415,9 +436,29 @@
         border-radius: 50px;
         padding: 7px;
     }
+
+    .card_grid {
+        width: 23.5rem!important;
+        left: 16px!important;
+    }
+
+    .fecha_card_grid {
+        font-size: 18px!important;
+    }
+
 }
 
 @media only screen and (max-width: 388px) {
+
+    .card_grid {
+        width: 22rem!important;
+        left: 6px!important;
+    }
+
+    .fecha_card_grid {
+        font-size: 15px!important;
+    }
+
     .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
         padding: 5px 10px 5px 10px;
     }
