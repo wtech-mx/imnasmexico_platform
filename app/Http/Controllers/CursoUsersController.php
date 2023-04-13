@@ -16,8 +16,8 @@ class CursoUsersController extends Controller
     {
         $DateAndTime = date('h:i', time());
         $fechaActual = date('Y-m-d');
-        $cursos = Cursos::where('estatus','=', '1')->orderBy('fecha_inicial','ASC')->get();
-        $cursos_slide = Cursos::where('estatus','=', '1')->orderBy('fecha_inicial','ASC')->get();
+        $cursos = Cursos::where('estatus','=', '1')->orderBy('fecha_inicial','desc')->get();
+        $cursos_slide = Cursos::where('estatus','=', '1')->orderBy('fecha_inicial','desc')->get();
 
         $tickets = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
 
@@ -59,7 +59,7 @@ class CursoUsersController extends Controller
     public function advance(Request $request) {
         $fechaActual = date('Y-m-d');
         $tickets = CursosTickets::get();
-        $cursos_slide = Cursos::where('estatus', '1')->orderBy('fecha_inicial','ASC')->get();
+        $cursos_slide = Cursos::where('estatus', '1')->orderBy('fecha_inicial','desc')->get();
         // Consulta los cursos activos
         $cursos = Cursos::where('estatus', '1');
 
