@@ -9,7 +9,7 @@
 <link href="{{asset('assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/slider_products.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/slide_cursos.css')}}" rel="stylesheet" />
-
+<link href="{{asset('assets/user/custom/comentarios.css')}}" rel="stylesheet" />
 
 {{-- css carrusel --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="crossorigin="anonymous" />
@@ -613,21 +613,8 @@
     </div>
 </section>
 
-{{-- testimonios --}}
-<section class="primario bg_overley" style="background-color:#836262;">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="titulo_alfa text-center" style="color: #fff!important">
-                Lo que dicen <br>
-                nuestros estudiantes...
-            </h2>
-            {{-- <p class="text-center mt-5">
-                <img class="px-3" src="{{asset('assets/user/utilidades/captura.png')}}" alt="">
-            </p> --}}
-        </div>
-    </div>
-</section>
-{{-- testimonios --}}
+
+@include('user.components.comentarios')
 
 {{-- Ubicacion --}}
 <section class="primario bg_overley" style="background-color:#F5ECE4;">

@@ -1,0 +1,26 @@
+.content_comentarios{
+    background-color: #fff;
+    border-radius: 19px;
+}
+
+.img_coment{
+    width: 70px!important;
+    display: inline-block!important;
+    border-radius: 50px;
+    border: solid 5px #D19E99;
+    margin-top: 2rem;
+}
+
+.tiitle_name{
+    font-size: 16px;
+    color: #D19E99;
+}
+
+.img_estrellas{
+    width: 110px!important;
+    display: inline-block!important;
+}
+
+.text_coments{
+    padding: 0px 10px 30px 10px;
+}
