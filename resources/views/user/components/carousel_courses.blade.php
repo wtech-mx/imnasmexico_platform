@@ -17,7 +17,16 @@
                             $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
                             $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
                             $dia = date("d", strtotime($curso->fecha_inicial));
-                            $mes = date("M", strtotime($curso->fecha_inicial));
+                            $fecha_i = $curso->fecha_inicial;
+
+                            // Crear un objeto Carbon a partir de la fecha completa
+                            $carbonFecha = Carbon::parse($fecha_i);
+
+                            // Establecer la configuración regional a español
+                            $carbonFecha->locale('es');
+
+                            // Obtener el nombre del mes en español en el formato completo
+                            $mes = rtrim(strtoupper($carbonFecha->isoFormat('MMM')), '.');
                         @endphp
                         <div class="item" style="">
                             <div class="card card_grid" style="">

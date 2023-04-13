@@ -208,7 +208,7 @@
             $carbonFecha->locale('es');
 
             // Obtener el nombre del mes en español en el formato completo
-            $mes = $carbonFecha->isoFormat('MMM');
+            $mes = rtrim(strtoupper($carbonFecha->isoFormat('MMM')), '.');
         @endphp
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card card_grid card_grid_cale  mb-5 mb-md-3" style="">
