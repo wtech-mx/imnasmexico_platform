@@ -31,6 +31,102 @@ crossorigin="anonymous" />
     </div>
 </section>
 
+{{-- section unam --}}
+<section class="primario bg_overley padding_avales_cont" style="background-color:#fff;">
+    <div class="row">
+        <div class="col-4">
+            <div class="container_img_avales">
+                <p class="text-center">
+                    <img class="img_avales" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
+                </p>
+            </div>
+        </div>
+
+        <div class="col-8">
+            <h2 class="tittle_avales">
+                DIPLOMA UNAM, ¿QUÉ ES?
+            </h2>
+            <h5 class="parrafo_avales">
+                El Instituto Naturales Ain Spa, se complace en hacer
+                de su conocimiento, que ya contamos con aval ante la
+                máxima casa de estudios, UNAM, mediante la Red de
+                Educación Continua.
+            </h5>
+            <p class="parrafo_avales">
+                Esto quiere decir que al cursar
+                algún diplomado UNAM con nosotros, se podrán
+                hacer acreedores de un Diploma totalmente avalado
+                ante dicha Institución por medio de la Facultad de
+                Estudios Superiores Zaragoza.
+            </p>
+        </div>
+
+        <div class="col-12">
+            <p class="parrafo_avales_2">
+                Dicho Diploma, contará
+                con validez Oficial, ya que cuenta con todos los sellos
+                Institucionales y la firma del Director, validando este
+                Documento.
+            </p>
+        </div>
+
+        <div class="col-12 col-md-4 mt-5">
+          <div class="container_nums">
+            <div class="d-flex justify-content-start">
+                <div class="content_icon_hotspot">
+                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07b;"></div>
+                    <p class="text_hotspot">Sellos Institucionales en relieve </p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <div class="content_icon_hotspot">
+                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe077;"></div>
+                    <p class="text_hotspot">Nombre de la Institución</p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <div class="content_icon_hotspot">
+                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe078;"></div>
+                    <p class="text_hotspot">Nombre del Alumno</p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <div class="content_icon_hotspot">
+                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07d;"></div>
+                    <p class="text_hotspot">Nombre Diplomado</p>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-start">
+                <div class="content_icon_hotspot">
+                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07e;"></div>
+                    <p class="text_hotspot">Lugar y Fecha</p>
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-start">
+                <div class="content_icon_hotspot">
+                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe079;"></div>
+                    <p class="text_hotspot">Nombre y firma del Director</p>
+                </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-12 col-md-8 mt-5">
+                <p class="text-center">
+                    <img src="{{asset('assets/user/certificaciones/unam_puntos.png')}}" alt="" class="img_certificados">
+                </p>
+        </div>
+
+    </div>
+</section>
+
 <section class="primario bg_overley padding_avales_cont" style="">
     <div class="row">
         <div class="col-4">
@@ -245,101 +341,7 @@ crossorigin="anonymous" />
     </div>
 </section>
 
-{{-- section unam --}}
-<section class="primario bg_overley padding_avales_cont" style="background-color:#fff;">
-    <div class="row">
-        <div class="col-4">
-            <div class="container_img_avales">
-                <p class="text-center">
-                    <img class="img_avales" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
-                </p>
-            </div>
-        </div>
 
-        <div class="col-8">
-            <h2 class="tittle_avales">
-                DIPLOMA UNAM, ¿QUÉ ES?
-            </h2>
-            <h5 class="parrafo_avales">
-                El Instituto Naturales Ain Spa, se complace en hacer
-                de su conocimiento, que ya contamos con aval ante la
-                máxima casa de estudios, UNAM, mediante la Red de
-                Educación Continua.
-            </h5>
-            <p class="parrafo_avales">
-                Esto quiere decir que al cursar
-                algún diplomado UNAM con nosotros, se podrán
-                hacer acreedores de un Diploma totalmente avalado
-                ante dicha Institución por medio de la Facultad de
-                Estudios Superiores Zaragoza.
-            </p>
-        </div>
-
-        <div class="col-12">
-            <p class="parrafo_avales_2">
-                Dicho Diploma, contará
-                con validez Oficial, ya que cuenta con todos los sellos
-                Institucionales y la firma del Director, validando este
-                Documento.
-            </p>
-        </div>
-
-        <div class="col-12 col-md-4 mt-5">
-          <div class="container_nums">
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07b;"></div>
-                    <p class="text_hotspot">Sellos Institucionales en relieve </p>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe077;"></div>
-                    <p class="text_hotspot">Nombre de la Institución</p>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe078;"></div>
-                    <p class="text_hotspot">Nombre del Alumno</p>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07d;"></div>
-                    <p class="text_hotspot">Nombre Diplomado</p>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07e;"></div>
-                    <p class="text_hotspot">Lugar y Fecha</p>
-                </div>
-            </div>
-
-
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe079;"></div>
-                    <p class="text_hotspot">Nombre y firma del Director</p>
-                </div>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="col-12 col-md-8 mt-5">
-                <p class="text-center">
-                    <img src="{{asset('assets/user/certificaciones/unam_puntos.png')}}" alt="" class="img_certificados">
-                </p>
-        </div>
-
-    </div>
-</section>
 
 <section class="primario bg_overley padding_avales_cont" style="background-color:#fff;">
     <div class="row">

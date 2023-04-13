@@ -76,7 +76,7 @@
             <p class="facts_thanks"><strong>Método de pago: </strong>{{$order->forma_pago}} </p>
             <p class="facts_thanks"><strong>Estado:</strong>
                 @if ($order->estatus == 1)
-                    Aprovado
+                    Aprobado
                 @else
                     Pendiente
                 @endif
