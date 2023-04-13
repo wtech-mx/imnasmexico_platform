@@ -35,7 +35,7 @@
                             </video>
 
                             <div class="minicontent_video">
-                                <h2 class="tittle_video">Expos</h2>
+                                <h2 class="tittle_video">Diplomado </h2>
                                 <p class="text_video"></p>
                             </div>
                         </div>
@@ -46,7 +46,7 @@
                     <div class="d-flex justify-content-center">
                         <div class="card_video">
                             <div class="minicontent_video">
-                                <h2 class="tittle_video">Conferencias</h2>
+                                <h2 class="tittle_video">Expos</h2>
                                 <p class="text_video"></p>
                             </div>
 

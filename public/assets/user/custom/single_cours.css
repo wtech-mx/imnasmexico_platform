@@ -155,6 +155,11 @@
     color: #836262;
 }
 
+.img_material_clase{
+    width: 100%;
+    border-radius: 19px;
+}
+
 @media only screen and (max-width: 1390px) {
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -325,7 +330,17 @@
     }
 
     .border_row{
+        margin-top: 2rem;
         margin-bottom: 2rem;
+        padding: 50px;
+    }
+
+    .img_material_clase{
+        width:100%;
+    }
+
+    .card_grid {
+        width: 23rem!important;
     }
 
 }
@@ -337,6 +352,12 @@
 
     .nav-tabs .nav-link {
         font-size: 13px;
+    }
+
+    .border_row{
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        padding: 50px 10px 50px 10px;
     }
 
 }

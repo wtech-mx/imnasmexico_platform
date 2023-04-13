@@ -1,7 +1,7 @@
 @extends('layouts.app_user')
 
 @section('template_title')
-    Inicio
+    Calendario
 @endsection
 
 @section('css_custom')
@@ -66,21 +66,10 @@
                             </h3>
 
                             <div class="d-flex justify-content-start">
-                                <a class="btn btn-primario me-3">
-                                    <div class="d-flex justify-content-around">
-                                        <p class="card_tittle_btn my-auto">
-                                            Comprar ahora
-                                        </p>
-                                        <div class="card_bg_btn ">
-                                            <i class="fas fa-cart-plus card_icon_btn"></i>
-                                        </div>
-                                    </div>
-                                </a>
-
                                 <a class="btn btn-secundario me-1" href="{{ route('cursos.show',$curso->slug) }}">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn my-auto">
-                                            Saber más
+                                            Comprar ahora
                                         </p>
                                         <div class="card_bg_btn_secundario">
                                             <i class="fas fa-plus card_icon_btn_secundario"></i>

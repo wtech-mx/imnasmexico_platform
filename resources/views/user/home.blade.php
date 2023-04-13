@@ -38,7 +38,7 @@
                     Oferta Educativa
                 </a>
                 <a class="btn btn-secundario" href="{{ route('user.nosotros') }}">
-                    Saber más
+                    Nosotros
                 </a>
             </div>
         </div>
