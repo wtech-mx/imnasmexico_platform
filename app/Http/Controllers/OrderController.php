@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PlantillaNuevoUser;
 use App\Mail\PlantillaPedidoRecibido;
+use App\Mail\PlantillaTicketPresencial;
 use App\Mail\PlantillaTicket;
 use Stripe;
 use Illuminate\Support\Str;
@@ -149,7 +150,11 @@ class OrderController extends Controller
             $forma_pago = $orden_ticket2->Orders->forma_pago;
             // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
             foreach ($orden_ticket as $details) {
-                Mail::to($order->User->email)->send(new PlantillaTicket($details));
+                if($details->Cursos->modalidad == 'Online'){
+                    Mail::to($order->User->email)->send(new PlantillaTicket($details));
+                }else{
+                    Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
+                }
             }
             Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
@@ -257,7 +262,11 @@ class OrderController extends Controller
             $forma_pago = $orden_ticket2->Orders->forma_pago;
             // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
             foreach ($orden_ticket as $details) {
-                Mail::to($order->User->email)->send(new PlantillaTicket($details));
+                if($details->Cursos->modalidad == 'Online'){
+                    Mail::to($order->User->email)->send(new PlantillaTicket($details));
+                }else{
+                    Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
+                }
             }
             Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
         }else{
@@ -307,11 +316,21 @@ class OrderController extends Controller
             $order_ticket->id_curso = $request->curso;
             $order_ticket->save();
 
-            $recibido = Orders::where('id', '=', $order->id)->first();
-            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->first();
-
-            Mail::to($request->email)->send(new PlantillaPedidoRecibido($orden_ticket));
-            Mail::to($request->email)->send(new PlantillaTicket($orden_ticket));
+            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
+            $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
+            $user = $orden_ticket2->User->name;
+            $id_order = $orden_ticket2->id_order;
+            $pago = $orden_ticket2->Orders->pago;
+            $forma_pago = $orden_ticket2->Orders->forma_pago;
+            // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
+            foreach ($orden_ticket as $details) {
+                if($details->Cursos->modalidad == 'Online'){
+                    Mail::to($user->email)->send(new PlantillaTicket($details));
+                }else{
+                    Mail::to($user->email)->send(new PlantillaTicketPresencial($details));
+                }
+            }
+            Mail::to($user->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
         } else {
             $code = Str::random(8);
             $fechaActual = date('Y-m-d');
@@ -343,12 +362,22 @@ class OrderController extends Controller
 
             // Enviar el correo electrónico
             $datos = User::where('id', '=', $user->id)->first();
-            $recibido = Orders::where('id', '=', $order->id)->first();
-            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->first();
-
+            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
+            $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
+            $user = $orden_ticket2->User->name;
+            $id_order = $orden_ticket2->id_order;
+            $pago = $orden_ticket2->Orders->pago;
+            $forma_pago = $orden_ticket2->Orders->forma_pago;
+            
+            foreach ($orden_ticket as $details) {
+                if($details->Cursos->modalidad == 'Online'){
+                    Mail::to($user->email)->send(new PlantillaTicket($details));
+                }else{
+                    Mail::to($user->email)->send(new PlantillaTicketPresencial($details));
+                }
+            }
             Mail::to($user->email)->send(new PlantillaNuevoUser($datos));
-            Mail::to($user->email)->send(new PlantillaPedidoRecibido($orden_ticket));
-            Mail::to($user->email)->send(new PlantillaTicket($orden_ticket));
+            Mail::to($user->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
         }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

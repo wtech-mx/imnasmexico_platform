@@ -357,10 +357,10 @@
                                                                                     <tr>
                                                                                         <td valign='top' dir="ltr"
                                                                                             style='font-size: 15px;width:530px;line-height:30px;background-image:none;background-color:transparent;padding:35px 0px 0px;border-radius:0px;border-top:0 hidden;border-right:0 hidden;border-bottom:0 hidden;border-left:0 hidden;'>
-																							<div class='text-item '><p style="text-align: center;"><span style="color: #444444;"><span style="font-size: 24px;">La sede del Certificado se impartirá en&nbsp;</span></span></p>
+																							<div class='text-item '><p style="text-align: center;"><span style="color: #444444;"><span style="font-size: 24px;">La sede del Curso se impartirá en&nbsp;</span></span></p>
 <p>&nbsp;</p>
 <p style="text-align: center;">
-    <a target="_blank" href="https://goo.gl/maps/jCHkCo4exEaSXqai6" style="color:#000;"><strong><u>Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX</u></strong></a
+    <a target="_blank" href="https://goo.gl/maps/jCHkCo4exEaSXqai6" style="color:#000;"><strong><u>Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México</u></strong></a
         ></p>
 <p>&nbsp;</p></div>                                                                                        </td>
                                                                                     </tr>
