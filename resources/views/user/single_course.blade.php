@@ -533,7 +533,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                     @if ($curso->materiales != NULL)
                         <div class="col-12 col-lg-6">
                             <h2 class="title_curso mt-4 mb-4"> Materiales de clase</h2>
-                            <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="Imagen" style=""/>
+                            <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 100%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
                         </div>
                     @endif
 
@@ -1169,7 +1169,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                     @if ($curso->materiales != NULL)
                         <div class="col-12 col-lg-6">
                             <h2 class="title_curso mt-4 mb-4"> Materiales de clase</h2>
-                            <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="Imagen" style=""/>
+                            <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="Material de clase" style="width: 100%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
                         </div>
                     @endif
 
