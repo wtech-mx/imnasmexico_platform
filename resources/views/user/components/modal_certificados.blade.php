@@ -88,3 +88,24 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal imnas collage-->
+<div class="modal fade" id="imnas_collage" tabindex="-1" aria-labelledby="imnas_collageLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 19px;border: solid transparent;">
+            <div class="modal-body" style="background: #F5ECE4;border: solid transparent;border-radius: 19px;">
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn_close_custom" data-bs-dismiss="modal" style="margin-bottom: 1rem;">X</button>
+                </div>
+            <p class="text-center">
+                <img src="{{asset('assets/user/certificaciones/doc_imnas.png')}}" alt="" class="img_certificados_general">
+            </p>
+            <div class="d-flex justify-content-center">
+                <a class="btn_certificados" href="avales">
+                    Saber más
+                </a>
+            </div>
+        </div>
+      </div>
+   </div>
+</div>
