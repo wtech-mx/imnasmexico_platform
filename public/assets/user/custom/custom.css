@@ -875,11 +875,18 @@ input.input_custom_checkout::placeholder{color: #F5ECE4!important;}
     }
 }
 
+@media only screen and (max-width: 450px) {
+    .map_custom {
+        width: 420px;
+    }
+}
+
 @media only screen and (max-width: 440px) {
     .card_grid {
         left: 60px;
     }
 }
+
 
 @media only screen and (max-width: 419px) {
     .map_custom {
