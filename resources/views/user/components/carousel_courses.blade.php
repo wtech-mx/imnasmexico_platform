@@ -1,4 +1,8 @@
 <section>
+    @php
+    use Carbon\Carbon;
+    use Carbon\CarbonInterface;
+@endphp
     <div class="bgimg-1" style="height: auto;background-image: url('{{asset('assets/user/utilidades/spa.jpg')}}')">
         <span class="mask"></span>
         <div class="row">
