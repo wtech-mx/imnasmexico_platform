@@ -266,7 +266,7 @@
         <div class="col-12 col-md-6 m-auto">
             <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">Tienda</h1>
             <p class="text-center text-white mt-auto parrafo_instalaciones">
-                Nuestras Aulas están equipadas con todo <br> lo necesario para que aprendas de la mejor manera, <br> con los mejores equipos y materiales.
+                Aquí encontrarás toda nuestra gama de productos y más para <br>tus clases y para empezar tu negocio al finalizar tu formación <br>académica. Todos los productos que encontrarás, son de <br>la mejor calidad y con los mejores precios.
             </p>
         </div>
 
