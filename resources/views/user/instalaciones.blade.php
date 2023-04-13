@@ -266,7 +266,7 @@
         <div class="col-12 col-md-6 m-auto">
             <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">Tienda</h1>
             <p class="text-center text-white mt-auto parrafo_instalaciones">
-                Aquí encontrarás toda nuestra gama de productos y más para <br>tus clases y para empezar tu negocio al finalizar tu formación <br>académica. Todos los productos que encontrarás, son de <br>la mejor calidad y con los mejores precios.
+                Aquí encontrarás toda nuestra gama de <br>productos y más para tus clases y para empezar<br> tu negocio al finalizar tu formación académica.<br> Todos los productos que encontrarás, son de la<br> mejor calidad y con los mejores precios.
             </p>
         </div>
 
