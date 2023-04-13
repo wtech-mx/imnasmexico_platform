@@ -6,7 +6,11 @@
 
                     <div class="row">
                         <div class="col-12">
-                            <h3 class="text-center mb-3 mt-3">Preguntas Freceuntes</h3>
+                            <div class="d-flex justify-content-between">
+                                <h3 class="text-center mb-3 mt-3">Preguntas Freceuntes</h3>
+                                <button type="button" class="btn_close_custom" data-bs-dismiss="modal">X</button>
+
+                            </div>
                         </div>
 
                         <div class="col-12" style="padding:0px;">

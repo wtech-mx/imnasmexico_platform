@@ -13,6 +13,14 @@
     src: url('./../../user/fonts/Bahnschrift.ttf');
  }
 
+ .btn_close_custom{
+    background: #000;
+    height: 45px;
+    border-radius: 50px;
+    padding: 5px 15px 5px 15px;
+    color: #fff;
+ }
+
  .margin_home_nav{
     margin-top: 13%;
 }

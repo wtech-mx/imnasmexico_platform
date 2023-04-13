@@ -8,8 +8,10 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-12">
-
-                <p class="text-center tittle_modal_login">Acceso alumnas</p>
+                <div class="d-flex justify-content-between">
+                    <p class="text-center tittle_modal_login">Acceso alumnas</p>
+                    <button type="button" class="btn_close_custom" data-bs-dismiss="modal">X</button>
+                </div>
 
                 <nav>
                     <div class="d-flex justify-content-center">

@@ -8,7 +8,10 @@
           <div class="row">
 
             <div class="col-12 col-md-6">
-                <p class="text-center tittle_modal_cka">Compras</p>
+                <div class="d-flex justify-content-between">
+                    <p class="text-center tittle_modal_cka">Compras</p>
+                    <button type="button" class="btn_close_custom" data-bs-dismiss="modal">X</button>
+                </div>
 
                 <table id="cart" class="table table-hover table-condensed">
                     <thead>

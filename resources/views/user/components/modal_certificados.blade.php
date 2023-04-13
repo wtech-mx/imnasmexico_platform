@@ -3,6 +3,10 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content" style="border-radius: 19px;border: solid transparent;">
         <div class="modal-body" style="background: #F5ECE4;border: solid transparent;border-radius: 19px;">
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn_close_custom" data-bs-dismiss="modal" style="margin-bottom: 1rem;">X</button>
+            </div>
+
             <p class="text-center">
                 <img src="{{asset('assets/user/certificaciones/RECONOCIMIENTO-CONOCER.webp')}}" alt="" class="img_certificados_general">
             </p>
@@ -24,6 +28,9 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content" style="border-radius: 19px;border: solid transparent;">
         <div class="modal-body" style="background: #F5ECE4;border: solid transparent;border-radius: 19px;">
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn_close_custom" data-bs-dismiss="modal" style="margin-bottom: 1rem;">X</button>
+            </div>
             <p class="text-center">
                 <img src="{{asset('assets/user/certificaciones/Rectangulo-103.webp')}}" alt="" class="img_certificados_general">
             </p>
@@ -43,6 +50,10 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="border-radius: 19px;border: solid transparent;">
             <div class="modal-body" style="background: #F5ECE4;border: solid transparent;border-radius: 19px;">
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn_close_custom" data-bs-dismiss="modal" style="margin-bottom: 1rem;">X</button>
+                </div>
+
                 <p class="text-center">
                     <img src="{{asset('assets/user/certificaciones/CONSTANCIA-COSMIATRIA.webp')}}" alt="" class="img_certificados_general">
                 </p>
@@ -62,6 +73,9 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content" style="border-radius: 19px;border: solid transparent;">
             <div class="modal-body" style="background: #F5ECE4;border: solid transparent;border-radius: 19px;">
+                <div class="d-flex justify-content-between">
+                    <button type="button" class="btn_close_custom" data-bs-dismiss="modal" style="margin-bottom: 1rem;">X</button>
+                </div>
             <p class="text-center">
                 <img src="{{asset('assets/user/certificaciones/DIPLOMA-ONLINE.png')}}" alt="" class="img_certificados_general">
             </p>
