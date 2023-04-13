@@ -10,6 +10,7 @@
 @endsection
 @php
     use Carbon\Carbon;
+    use Carbon\CarbonInterface;
 @endphp
 @section('content')
 
@@ -196,7 +197,18 @@
             $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
             $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
             $dia = date("d", strtotime($curso->fecha_inicial));
-            $mes = date("M", strtotime($curso->fecha_inicial));
+            // $mes = date("M", strtotime($curso->fecha_inicial));
+
+            $fecha_i = $curso->fecha_inicial;
+
+            // Crear un objeto Carbon a partir de la fecha completa
+            $carbonFecha = Carbon::parse($fecha_i);
+
+            // Establecer la configuración regional a español
+            $carbonFecha->locale('es');
+
+            // Obtener el nombre del mes en español en el formato completo
+            $mes = $carbonFecha->isoFormat('MMM');
         @endphp
         <div class="col-12 col-md-6 col-lg-4">
             <div class="card card_grid card_grid_cale  mb-5 mb-md-3" style="">
