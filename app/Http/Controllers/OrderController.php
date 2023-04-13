@@ -475,7 +475,7 @@ class OrderController extends Controller
             }
 
             $carrera = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Carrera de Cosmiatría')
+            ->where('cursos.nombre', '=', 'Carrera de Cosmiatria Estética')
             ->where('cursos.fecha_final', '>=', $fechaActual)
             ->where('cursos.modalidad', '=', 'Online')
             ->select('cursos_tickets.*')
@@ -537,7 +537,7 @@ class OrderController extends Controller
                 session()->put('cart', $cart);
             }
             $carrera = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Carrera de Cosmiatría')
+            ->where('cursos.nombre', '=', 'Carrera de Cosmiatria Estética')
             ->where('cursos.fecha_final', '>=', $fechaActual)
             ->where('cursos.modalidad', '=', 'Online')
             ->select('cursos_tickets.*')

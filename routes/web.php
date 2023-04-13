@@ -170,6 +170,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/configuracion', [App\Http\Controllers\ConfiguracionController::class, 'index'])->name('index.configuracion');
     Route::patch('/configuracion/update', [App\Http\Controllers\ConfiguracionController::class, 'update'])->name('update.configuracion');
 
+    // =============== M O D U L O   C O M E N T A R I O S ===============================
+    Route::get('/admin/comentarios', [App\Http\Controllers\ComentariosController::class, 'index'])->name('comentarios.index');
+    Route::get('/admin/comentarios/create', [App\Http\Controllers\ComentariosController::class, 'create'])->name('comentarios.create');
+    Route::post('/admin/comentarios/store', [App\Http\Controllers\ComentariosController::class, 'store'])->name('comentarios.store');
+    Route::get('/admin/comentarios/edit/{id}', [App\Http\Controllers\ComentariosController::class, 'edit'])->name('comentarios.edit');
+    Route::patch('/admin/comentarios/update/{id}', [App\Http\Controllers\ComentariosController::class, 'update'])->name('comentarios.update');
+
      // =============== M O D U L O   Profile User ===============================
 });
 
