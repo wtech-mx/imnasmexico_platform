@@ -321,16 +321,10 @@ crossorigin="anonymous" />
                 </div>
             </div>
 
-            <div class="d-flex justify-content-start">
-                <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe079;"></div>
-                    <p class="text_hotspot">Sello y firma digital</p>
-                </div>
-            </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
-                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07a;"></div>
+                    <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe079;"></div>
                     <p class="text_hotspot">Nombre y firma del Director</p>
                 </div>
             </div>
@@ -496,7 +490,7 @@ crossorigin="anonymous" />
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe077;"></div>
-                    <p class="text_hotspot">Curp</p>
+                    <p class="text_hotspot">Horas cursadas</p>
                 </div>
             </div>
 
@@ -510,28 +504,28 @@ crossorigin="anonymous" />
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07d;"></div>
-                    <p class="text_hotspot">Nombre del estándar</p>
+                    <p class="text_hotspot">Curso o diplomado</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07e;"></div>
-                    <p class="text_hotspot">Organismo certificado</p>
+                    <p class="text_hotspot">Sello STPS</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe079;"></div>
-                    <p class="text_hotspot">QR SEP Conocer</p>
+                    <p class="text_hotspot">Firma auténtica</p>
                 </div>
             </div>
 
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07a;"></div>
-                    <p class="text_hotspot">Número de folio</p>
+                    <p class="text_hotspot">Institución</p>
                 </div>
             </div>
           </div>

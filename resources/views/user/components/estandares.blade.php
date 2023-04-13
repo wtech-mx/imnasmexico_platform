@@ -56,13 +56,13 @@
                 <div class="item">
                     <div class="card card_certificados">
                         <div class="d-flex justify-content-center">
-                            <h4 class="text-center num_certifiacdo">EC0217.01</h4>
+                            <h4 class="text-center num_certifiacdo">EC1343</h4>
                         </div>
 
                         <div class="d-flex justify-content-center">
                             <div class="contenedor_img_estandartes tamano_1">
                                 <p class="text-center">
-                                <img src="{{asset('assets/user/estandares/C0217.01.webp')}}" alt="" class="img_estandars">
+                                <img src="{{asset('assets/user/estandares/EC1343.png')}}" alt="" class="img_estandars">
                                 </p>
                             </div>
                         </div>
@@ -70,7 +70,7 @@
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
                                 <p class="text-center text_certifcado">
-                                    lmpartición de cursos de formación del capital humano de manera presencial grupal.
+                                    Manejo integral de tratamientos estéticos faciales.
                                 </p>
                             </div>
                         </div>
@@ -402,7 +402,7 @@
                 <div class="item">
                     <div class="card card_certificados_2">
                         <div class="d-flex justify-content-center">
-                            <h4 class="text-center num_certifiacdo_2">EC1414</h4>
+                            <h4 class="text-center num_certifiacdo_2">EC1444</h4>
                         </div>
 
                         <div class="d-flex justify-content-center">
