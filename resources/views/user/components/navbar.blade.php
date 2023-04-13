@@ -31,7 +31,7 @@
             <a class="nav-link nav_link_custom {{ (Request::is('calendario*') ? 'active' : '') }}" href="#">Nosotros</a>
           </li> --}}
           <li class="nav-item">
-            <a class="nav-link nav_link_custom" href="#">Tienda</a>
+            <a class="nav-link nav_link_custom" target="_blank" href="https://imnasmexico.com/new/tienda/">Tienda</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav_link_custom {{ (Request::is('nuestras_instalaciones*') ? 'active' : '') }}" href="{{ route('user.instalaciones') }}">Instalaciones</a>
