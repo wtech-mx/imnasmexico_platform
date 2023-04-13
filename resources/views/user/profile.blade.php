@@ -258,9 +258,12 @@
                     </div>
                     @foreach ($usuario_compro as $video)
                         <h5>{{$video->nombre}}</h5>
-                        <iframe width="560" height="315" src="{{asset('clase/'. $video->clase_grabada) }}"
-                        frameborder="0"
-                        allowfullscreen></iframe>
+
+                        <video width="560" height="315" controls>
+                            <source src="{{asset('clase_grabada/'. $video->clase_grabada) }}" type="video/mp4">
+                          </video>
+
+
                     @endforeach
                 </div>
               </div>
