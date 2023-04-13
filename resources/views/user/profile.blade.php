@@ -488,7 +488,7 @@
                     <div class="col 12">
                         <h5>{{$video->nombre}}</h5>
 
-                        <video width="560" height="315" controls controlsList="nodownload">
+                        <video width="300" height="315" controls controlsList="nodownload">
                             <source src="{{asset('clase_grabada/'. $video->clase_grabada) }}" type="video/mp4">
                           </video>
                     </div>
