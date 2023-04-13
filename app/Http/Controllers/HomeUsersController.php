@@ -6,7 +6,7 @@ use App\Models\Cursos;
 use App\Models\CursosTickets;
 use Illuminate\Http\Request;
 use Codexshaper\WooCommerce\Models\Product;
-
+use App\Models\Comentarios;
 class HomeUsersController extends Controller
 {
     public function index(){
@@ -14,6 +14,8 @@ class HomeUsersController extends Controller
         $fechaActual = date('Y-m-d');
         $cursos = Cursos::where('estatus','=', '1')->get();
         $unam = Cursos::where('seccion_unam', '=', 1)->where('estatus','=', '1')->get();
+        $comentarios = Comentarios::get();
+
 
         $tickets = CursosTickets::where('fecha_final','>=', $fechaActual)->get();
 
@@ -36,6 +38,6 @@ class HomeUsersController extends Controller
          //Une los array en uno solo
          $resultados = array_merge($decode2);
 
-        return view('user.home', compact('cursos', 'resultados', 'unam', 'tickets'));
+        return view('user.home', compact('cursos', 'resultados', 'unam', 'tickets','comentarios'));
     }
 }
