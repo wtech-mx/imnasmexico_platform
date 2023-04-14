@@ -25,7 +25,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado">Prestación de servicios cosmetológicos faciales.</p>
+                                <p class="text-center text_certifcado">Prestación de Servicios Cosmetológicos Faciales.</p>
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado_2">Gestión de negocios spa</p>
+                                <p class="text-center text_certifcado_2">Gestión de Negocios SPA.</p>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
                                 <p class="text-center text_certifcado">
-                                    Manejo integral de tratamientos estéticos faciales.
+                                    Manejo Integral de Tratamientos Estéticos Faciales.
                                 </p>
                             </div>
                         </div>
@@ -93,7 +93,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado_2">Aplicación de uñas acrílicas postizas en nivel básico.</p>
+                                <p class="text-center text_certifcado_2">Aplicación de Uñas Acrílicas Postizas en Nivel Básico.</p>
                             </div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado">Aplicación de uñas acrílicas con técnica escultural.</p>
+                                <p class="text-center text_certifcado">Aplicación de Uñas Acrílicas con Técnica Escultural.</p>
                             </div>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
                                 <p class="text-center text_certifcado_2">
-                                    Prestación de servicios auxiliares de enfermería en cuidados básicos y orientación a personas en unidades de atención médica
+                                    Prestación de Servicios Auxiliares de Enfermería en Cuidados Básicos y Orientación a Personas en Unidades de Atención Médica.
                                 </p>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
                                 <p class="text-center text_certifcado">
-                                    Aplicación de micropigmentación estética facial.
+                                    Aplicación de Micropigmentación Estética Facial.
                                 </p>
                             </div>
                         </div>
@@ -186,7 +186,7 @@
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
                                 <p class="text-center text_certifcado_2">
-                                    Prestación de servicios auxiliares en el manejo del material de consumo en unidades de atención médica
+                                    Prestación de Servicios Auxiliares en el Manejo del Material de Consumo en Unidades de Atención Médica.
                                 </p>
                             </div>
                         </div>
@@ -210,7 +210,7 @@
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
                                 <p class="text-center text_certifcado">
-                                    Prestación de servicios auxiliares en el uso de equipo médico e instrumental en unidades de atención médica
+                                    Prestación de Servicios Auxiliares en el Uso de Equipo Médico e Instrumental en Unidades de Atención Médica.
                                 </p>
                             </div>
                         </div>
@@ -233,7 +233,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado_2">Diseño de maquillaje profesional</p>
+                                <p class="text-center text_certifcado_2">Diseño de Maquillaje Profesional.</p>
                             </div>
                         </div>
                     </div>
@@ -255,7 +255,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado">Aplicacion de masaje tejido profundo.</p>
+                                <p class="text-center text_certifcado">Aplicacion de Masaje Tejido Profundo.</p>
                             </div>
                         </div>
                     </div>
@@ -278,7 +278,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado_2">Prestación de servicios cosmetológicos faciales.</p>
+                                <p class="text-center text_certifcado_2">Aplicación de Masaje Holístico.</p>
                             </div>
                         </div>
                     </div>
@@ -300,7 +300,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado">Aplicación de Masaje Drenaje Linfático Manual</p>
+                                <p class="text-center text_certifcado">Aplicación de Masaje Drenaje Linfático Manual.</p>
                             </div>
                         </div>
                     </div>
@@ -324,7 +324,7 @@
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
                                 <p class="text-center text_certifcado_2">
-                                    Diseño de cejas con efecto pelo a pelo con pigmento semipermanente/microblading
+                                    Diseño de Cejas con Efecto Pelo a Pelo con Pigmento Semipermanente/Microblading.
                                 </p>
                             </div>
                         </div>
@@ -348,7 +348,7 @@
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
                                 <p class="text-center text_certifcado">
-                                    Aplicación de técnicas para el mejoramiento de la apariencia cutánea facial mediante dermapen
+                                    Aplicación de Técnicas para el Mejoramiento de la Apariencia Cutánea Facial Mediante Dermapen.
                                 </p>
                             </div>
                         </div>
@@ -371,7 +371,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado_2">Cosmetológicos faciales y corporales</p>
+                                <p class="text-center text_certifcado_2">Prestación de Servicios Cosmetológicos Faciales y Corporales.</p>
                             </div>
                         </div>
                     </div>
@@ -393,7 +393,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado">Prestación de servicios de cosmiatría estética</p>
+                                <p class="text-center text_certifcado">Prestación de Servicios de Cosmiatría Estética.</p>
                             </div>
                         </div>
                     </div>
@@ -416,7 +416,7 @@
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
                                 <p class="text-center text_certifcado_2">
-                                    Aplicación de sistemas de alisado progresivo procedimiento para la reparación y nutrición de la fibra capilar
+                                    Aplicación de Sistemas de Alisados Progresivos y Procedimientos para la Reparación y Nutrición de la Fibra Capilar.
                                 </p>
                             </div>
                         </div>
@@ -439,7 +439,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado">Aplicación de procedimiento para el cambio direccional de cejas y pestañas</p>
+                                <p class="text-center text_certifcado">Aplicación de Procedimiento para el Cambio Direccional de Cejas y Pestañas.</p>
                             </div>
                         </div>
                     </div>
@@ -461,7 +461,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado_2">Prestación de servicios estéticos corporales.</p>
+                                <p class="text-center text_certifcado_2">Prestación de Servicios Estéticos Corporales.</p>
                             </div>
                         </div>
                     </div>
@@ -484,7 +484,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado">Prestación de servicios cosmetológicos faciales.</p>
+                                <p class="text-center text_certifcado">Aplicación de extensiones de Pestañas Una a Una.</p>
                             </div>
                         </div>
                     </div>
@@ -506,7 +506,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado_2">Cuidado estético de uñas, manos y pies y acabado gel semipermanente</p>
+                                <p class="text-center text_certifcado_2">Cuidado Estético de Uñas, Manos y Pies y Acabado Gel Semipermanente.</p>
                             </div>
                         </div>
                     </div>
@@ -528,7 +528,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado">Aplicación de masaje de reflexología podal</p>
+                                <p class="text-center text_certifcado">Aplicación de Masaje de Reflexología Podal.</p>
                             </div>
                         </div>
                     </div>
@@ -551,7 +551,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado_2">Manejo integral de tratamientos estéticos capilares y vello facial</p>
+                                <p class="text-center text_certifcado_2">Manejo Integral de Tratamientos Estéticos Capilares y Vello Facial.</p>
                             </div>
                         </div>
                     </div>
@@ -573,7 +573,7 @@
 
                         <div class="card-body space_text_certificados">
                             <div class="card-title text-center">
-                                <p class="text-center text_certifcado">Manejo integral de tratamientos estéticos corporales</p>
+                                <p class="text-center text_certifcado">Manejo Integral de Tratamientos Estéticos Corporales.</p>
                             </div>
                         </div>
                     </div>

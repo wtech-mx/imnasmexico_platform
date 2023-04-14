@@ -44,7 +44,7 @@ crossorigin="anonymous" />
 
         <div class="col-8">
             <h2 class="tittle_avales">
-                DIPLOMA UNAM, ¿QUÉ ES?
+                DIPLOMA UNAM
             </h2>
             <h5 class="parrafo_avales">
                 El Instituto Naturales Ain Spa, se complace en hacer
@@ -216,11 +216,9 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5 ">
                 <p class="text-center">
-                    <img src="{{asset('assets/user/certificaciones/RECONOCIMIENTO-CONOCER_2.png')}}" alt="" class="img_certificados">
+                    <img src="{{asset('assets/user/certificaciones/RECONOCIMIENTO-CONOCER_3.png')}}" alt="" class="img_certificados">
                 </p>
         </div>
-
-
 
     </div>
 </section>
@@ -247,7 +245,7 @@ crossorigin="anonymous" />
                 Acuerdo 17FT274
             </h5>
             <p class="parrafo_avales">
-                Es un reconocimiento con validez oficial de estudios incorado
+                Es un reconocimiento con validez oficial de estudios incorporado
                 a un programa o plan de estudios al sistema educativo nacional,
                 que cuenta con el aval de la Secretaría de Educación Pública a
                 nivel Federal.
@@ -469,13 +467,13 @@ crossorigin="anonymous" />
                 Acuerdo 17FT274
             </h5>
             <p class="parrafo_avales">
-                Es una constancia que se entrega al finalizar un entrenamiento o cursos y es avalada por la Secretaría del Trabajo y previsión social (STPS)
+                Es una constancia que se entrega al finalizar un entrenamiento o curso y es avalada por la Secretaría del Trabajo y Previsión Social (STPS)
             </p>
         </div>
 
         <div class="col-12">
             <p class="parrafo_avales_2">
-                Es una constancia que se entrega al finalizar un entrenamiento o cursos y es avalada por la Secretaría del Trabajo y previsión social (STPS)
+                Es una constancia que se entrega al finalizar un entrenamiento o curso y es avalada por la Secretaría del Trabajo y Previsión Social (STPS)
             </p>
         </div>
 
@@ -557,7 +555,7 @@ crossorigin="anonymous" />
                 ¿Qué es el Registro Nacional del Instituto Mexicano Naturales Ain Spa?
             </h2>
             <h5 class="tittle_avales">
-                Registro nacional instituto naturales ain spa
+                Registro Nacional del Instituto Mexicano Naturales Ain Spa
             </h5>
             <p class="parrafo_avales">
                 Tiene como principal función, que cada alumno pueda encontrar con facilidad su
