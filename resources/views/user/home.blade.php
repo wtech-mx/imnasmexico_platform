@@ -407,7 +407,7 @@
                 </div>
 
                 <div class="col-12 col_adaptable_mobil mt-5">
-                    <a class="btn btn-cuarto" style="margin-left: 1rem;" href="http://imnasmexico.com/new/tienda/">
+                    <a class="btn btn-cuarto" style="margin-left: 1rem;" target="_blank" href="http://imnasmexico.com/new/tienda/">
                         Ver Catálogo
                     </a>
                 </div>

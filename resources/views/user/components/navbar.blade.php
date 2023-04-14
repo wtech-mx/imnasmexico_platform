@@ -4,9 +4,10 @@
       <a class="navbar-brand" href="{{ route('user.home') }}">
           <img src="{{asset('assets/user/logotipos/imnas.webp')}}" class="image_navbar d-inline-block align-text-top">
       </a>
+
      @guest
             <a class="btn btn-primario acceso_alumnas_flex_prim me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
-                Acceso alumnas
+                Acceso alumn@s
             </a>
             @else
             {{-- <a class="btn btn-primario me-4" type="button" href="{{ route('signout') }}">Cerrar Sesion</a> --}}
@@ -26,16 +27,19 @@
             <a class="nav-link nav_link_custom {{ (Request::is('calendario*') ? 'active' : '') }}" aria-current="page" href="{{ route('cursos.index_user') }}">Calendario</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link nav_link_custom {{ (Request::is('paquetes*') ? 'active' : '') }}" href="{{ route('cursos.paquetes') }}">Paquetes</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link nav_link_custom {{ (Request::is('avales*') ? 'active' : '') }}" href="{{ route('user.avales') }}">Avales</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link nav_link_custom {{ (Request::is('paquetes*') ? 'active' : '') }}" href="{{ route('cursos.paquetes') }}">Paquetes</a>
+            <a class="nav-link nav_link_custom {{ (Request::is('nosotros*') ? 'active' : '') }}" href="{{ route('user.nosotros') }}">Nosotros</a>
           </li>
           {{-- <li class="nav-item">
             <a class="nav-link nav_link_custom {{ (Request::is('calendario*') ? 'active' : '') }}" href="#">Nosotros</a>
           </li> --}}
           <li class="nav-item">
-            <a class="nav-link nav_link_custom" href="#">Tienda</a>
+            <a class="nav-link nav_link_custom" target="_blank" href="https://imnasmexico.com/new/tienda/">Tienda</a>
           </li>
           <li class="nav-item">
             <a class="nav-link nav_link_custom {{ (Request::is('nuestras_instalaciones*') ? 'active' : '') }}" href="{{ route('user.instalaciones') }}">Instalaciones</a>
@@ -54,7 +58,7 @@
         <div class="d-flex acceso_alumnas_flex">
             @guest
                 <a class="btn btn-login me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
-                    Acceso alumnas
+                    Acceso alumn@s
                 </a>
             @else
                 {{-- <a class="btn btn-primario me-4" type="button" href="{{ route('signout') }}">Cerrar Sesion</a> --}}

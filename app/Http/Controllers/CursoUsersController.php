@@ -92,7 +92,7 @@ class CursoUsersController extends Controller
         $modalidad = $request->input('modalidad');
 
         // Crear el enlace de WhatsApp con los datos del formulario 5531167046
-        $url = 'https://api.whatsapp.com/send?phone=+525529291962&text=Hola%20buen%20d%C3%ADa%2C%20me%20interesa%20el%20curso%20de%20'.$curso.'%20'.$modalidad.'%20para%20la%20fecha%20del%20'.$fecha.'.%0A%0AMis%20datos:%0A'.$nombre.'%0A'.$correo.'%0A%0ATengo%20dudas%20y%2Fo%20preguntas%3A%0A'.$mensaje;
+        $url = 'https://api.whatsapp.com/send?phone=+525531167046&text=Hola%20buen%20d%C3%ADa%2C%20me%20interesa%20el%20curso%20de%20'.$curso.'%20'.$modalidad.'%20para%20la%20fecha%20del%20'.$fecha.'.%0A%0AMis%20datos:%0A'.$nombre.'%0A'.$correo.'%0A%0ATengo%20dudas%20y%2Fo%20preguntas%3A%0A'.$mensaje;
 
         // Redireccionar al enlace de WhatsApp
         return redirect($url);

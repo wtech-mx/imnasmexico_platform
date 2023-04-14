@@ -255,12 +255,16 @@
                 <div class="row">
                     <div class="col-12">
                         <h2 class="title_curso mb-5">Mis Clases</h2>
+                        <h3>Recuerda que las clases grabadas solo duran 72 Horas</h3>
                     </div>
                     @foreach ($usuario_compro as $video)
+                    <div class="col 12">
                         <h5>{{$video->nombre}}</h5>
-                        <iframe width="560" height="315" src="{{asset('clase/'. $video->clase_grabada) }}"
-                        frameborder="0"
-                        allowfullscreen></iframe>
+
+                        <video width="560" height="315" controls controlsList="nodownload">
+                            <source src="{{asset('clase_grabada/'. $video->clase_grabada) }}" type="video/mp4">
+                          </video>
+                    </div>
                     @endforeach
                 </div>
               </div>
@@ -480,7 +484,15 @@
                         <h2 class="title_curso mb-5">Mis Clases </h2>
                     </div>
 
+                    @foreach ($usuario_compro as $video)
+                    <div class="col 12">
+                        <h5>{{$video->nombre}}</h5>
 
+                        <video width="300" height="315" controls controlsList="nodownload">
+                            <source src="{{asset('clase_grabada/'. $video->clase_grabada) }}" type="video/mp4">
+                          </video>
+                    </div>
+                    @endforeach
 
                 </div>
             </div>
