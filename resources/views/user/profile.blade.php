@@ -262,22 +262,19 @@ Mi perfil- {{$cliente->name}}
               <div class="tab-pane fade" id="v-pills-dirijido" role="tabpanel" aria-labelledby="v-pills-dirijido-tab" tabindex="0">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="title_curso mb-5">Mis Clases</h2>
-                        <h3>Recuerda que las clases grabadas solo duran 72 Horas</h3>
+                        <h2 class="title_curso">Mis Clases</h2>
+                        <h3 class="tittle_clases">Recuerda que las clases grabadas solo duran 72 Horas</h3>
                     </div>
 
                     @foreach ($usuario_compro as $video)
-                    <div class="col 12">
-                        <h5>{{$video->nombre}}</h5>
-
+                    <div class="col-12 col-lg-6">
+                        <h5 class="titile_clase_grabada mt-3 mb-5">{{$video->nombre}}</h5>
                         @php
                             $url = $video->clase_grabada;
                             preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
                             $id_link_drive = $matches[1];
                         @endphp
-
-                        <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" width="640" height="480"></iframe>
-
+                        <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" class="iframe_clase"></iframe>
                     </div>
                     @endforeach
                 </div>
