@@ -65,7 +65,7 @@ body.modal-open>div.bg,
   }
   .accordion-item:first-of-type .accordion-button{
     border: solid 1px transparent;
-    background-color: #836262;
+    background-color: #fff;
     color: #F5ECE4;
     font-weight: bold;
     border-radius: 19px;

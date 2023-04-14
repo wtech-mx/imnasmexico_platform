@@ -86,7 +86,7 @@
                             <div class="accordion-item">
                               <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    Mercado pago
+                                        <img class="" style="width: 260px;" src="{{asset('assets/user/utilidades/formas_pago.png')}}" alt="">
                                 </button>
                               </h2>
                               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -211,7 +211,7 @@
                                                 <div class="col-6">
                                                     <div class="input-group flex-nowrap mt-4">
                                                         <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-file"></i></span>
-                                                        <select name="cfdi" id="cfdi" required>
+                                                        <select name="cfdi" id="cfdi" required style="width: 100px;">
                                                             <option value="">CFDI</option>
                                                             <option value="G01 Adquisición de Mercancías">G01 Adquisición de Mercancías</option>
                                                             <option value="G02 Devoluciones, Descuentos o bonificaciones">G02 Devoluciones, Descuentos o bonificaciones</option>
