@@ -14,8 +14,200 @@
 
 @section('content')
 
+<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/nosotros/11.jpeg')}}')">
+    <span class="mask"></span>
+    <div class="row margin_home_nav ">
 
-<section class="primario bg_overley" style="background-color:#836262;">
+        <div class="col-12 col-sm-12 col-md-6">
+            <div id="carouselExample" class="carousel slide">
+
+                <div class="carousel-inner">
+
+                    <div class="carousel-item active">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/1.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/2.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/3.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/4.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/5.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/6.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="d-flex justify-content-center">
+                            <div class="card card-custom" style="margin-top: 5rem">
+                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/7.jpg')}}" class="card-img-top" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+            </div>
+
+        </div>
+
+        <div class="col-12 col-sm-12 col-md-6 index_superior">
+            <h1 class="text-white titulo space_title_instalaciones  space_tiitle_slide" style="">
+                PENDIENTE EL TEXTO Y LAS FOTOS.
+            </h1>
+            <p class="text-white parrafo parrafo_instalaciones" style="">
+                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+                nonummy nibh euismod tincidunt
+                ut laoreet dolore magna aliquam
+                erat volutpat. Ut wisi enim ad
+                minim veniam, quis nostrud exerci
+                tation ullamcorper suscipit lobortis
+                nisl ut aliquip ex ea commodo
+                consequat. Duis autem vel eum
+                iriure dolor in hendrerit in vulputate velit esse molestie consequat,
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="primario bg_overley" style="background-color:#F5ECE4;" id="cafeteria">
+    <div class="row">
+
+        <div class="col-12 col-md-6 order-dos">
+            <div class="d-flex justify-content-center">
+                <div class="card card-custom space_Card" style="">
+                    <div id="carousel_exterior" class="carousel slide">
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/5.jpg')}}"  style="width: 100%;">
+                            </div>
+                            <div class="carousel-item ">
+                              <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/6.jpg')}}"  style="width: 100%;">
+                            </div>
+                            <div class="carousel-item ">
+                              <img class="card_image" src="{{asset('assets/user/instalaciones/terraza1.jpg')}}"  style="width: 100%;">
+                            </div>
+                          </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_exterior" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_exterior" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 order-uno m-auto">
+            <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">CONFERENCIA</h1>
+            <p class="text-center text-white mt-auto parrafo_instalaciones" style="color:#836262!important;">
+                Tuvimos la fortuna de llevarles
+                grandes Médicos Certificados, en
+                nuestra Conferencia, donde pudimos
+                tener grandes ponencias de nivel
+                médico con diversos temas actuales,
+                de la Medicina Estética. También
+                hubo demostraciones, rifas, y mucho
+                más. ¡Gracias a todos los que nos
+                acompañaron!
+
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section class="primario bg_overley" style="background-color:#836262;"id="alumnado">
+    <div class="row">
+
+        <div class="col-12 col-md-6 m-auto">
+
+            <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">ALUMNADO</h1>
+            <p class="text-center text-white mt-auto parrafo_instalaciones">
+                DESCRIPCIÓN DEL ALUMNADO.
+            </p>
+
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="d-flex justify-content-center">
+                <div class="card card-custom space_Card mb-3" style="">
+                    <div id="carousel_tiendita" class="carousel slide">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                              <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/5.jpg')}}"  style="width: 100%;">
+                            </div>
+                            <div class="carousel-item ">
+                              <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/6.jpg')}}"  style="width: 100%;">
+                            </div>
+                            <div class="carousel-item ">
+                              <img class="card_image" src="{{asset('assets/user/instalaciones/terraza1.jpg')}}"  style="width: 100%;">
+                            </div>
+                          </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_tiendita" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_tiendita" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+{{-- <section class="primario bg_overley" style="background-color:#836262;">
     <div class="row">
 
         <div class="col-12">
@@ -93,7 +285,7 @@
         </div>
 
     </div>
-</section>
+</section> --}}
 
 {{-- Ubicacion --}}
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
