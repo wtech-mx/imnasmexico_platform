@@ -368,7 +368,7 @@ class OrderController extends Controller
             $id_order = $orden_ticket2->id_order;
             $pago = $orden_ticket2->Orders->pago;
             $forma_pago = $orden_ticket2->Orders->forma_pago;
-            
+
             foreach ($orden_ticket as $details) {
                 if($details->Cursos->modalidad == 'Online'){
                     Mail::to($user->email)->send(new PlantillaTicket($details));
@@ -420,9 +420,9 @@ class OrderController extends Controller
         $fechaActual = date('Y-m-d');
         Session::forget('cart');
         if ($request->input('paquete') == 1) {
-            $total = 1175;
+            $total = 1500;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas'));
-            $curso = CursosTickets::where('nombre', '=', 'Diplomado de Cosmetología facial y corporal')
+            $curso = CursosTickets::where('nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
             ->where('fecha_final', '>=', $fechaActual)
             ->first();
             if($curso != null){
@@ -438,11 +438,25 @@ class OrderController extends Controller
                 ];
             }
 
+            $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
+            ->first();
+            $cart = session()->get('cart', []);
+            $cart[] = [
+                "id" => $canasta->id,
+                "name" => $canasta->nombre,
+                "curso" => $canasta->id_curso,
+                "quantity" => 1,
+                "price" => 0,
+                "paquete" => 1,
+                "image" => $canasta->imagen
+            ];
+            session()->put('cart', $cart);
+
         } elseif ($request->input('paquete') == 2) {
-            $total = 1500;
+            $total = 2000;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas2'));
             $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología facial y corporal')
+            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
             ->where('cursos.fecha_final', '>=', $fechaActual)
             ->where('cursos.modalidad', '=', 'Online')
             ->select('cursos_tickets.*')
@@ -462,7 +476,7 @@ class OrderController extends Controller
             }
 
             $aparatologia = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado en Aparatología: Microdermoabrasíon, Multifuncional e Hydrafacial')
+            ->where('cursos.nombre', '=', 'Diplomado de regulación y administración de spa ante COFEPRIS')
             ->where('cursos.fecha_final', '>=', $fechaActual)
             ->where('cursos.modalidad', '=', 'Online')
             ->select('cursos_tickets.*')
@@ -480,11 +494,26 @@ class OrderController extends Controller
                 ];
                 session()->put('cart', $cart);
             }
+
+            $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
+            ->first();
+            $cart = session()->get('cart', []);
+            $cart[] = [
+                "id" => $canasta->id,
+                "name" => $canasta->nombre,
+                "curso" => $canasta->id_curso,
+                "quantity" => 1,
+                "price" => 0,
+                "paquete" => 1,
+                "image" => $canasta->imagen
+            ];
+            session()->put('cart', $cart);
+
         } elseif ($request->input('paquete') == 3) {
-            $total = 2125;
+            $total = 2750;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas3'));
             $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología facial y corporal')
+            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
             ->where('cursos.fecha_final', '>=', $fechaActual)
             ->where('cursos.modalidad', '=', 'Online')
             ->select('cursos_tickets.*')
@@ -522,11 +551,25 @@ class OrderController extends Controller
                 ];
                 session()->put('cart', $cart);
             }
+
+            $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
+            ->first();
+            $cart = session()->get('cart', []);
+            $cart[] = [
+                "id" => $canasta->id,
+                "name" => $canasta->nombre,
+                "curso" => $canasta->id_curso,
+                "quantity" => 1,
+                "price" => 0,
+                "paquete" => 1,
+                "image" => $canasta->imagen
+            ];
+            session()->put('cart', $cart);
         } elseif ($request->input('paquete') == 4) {
-            $total = 2550;
+            $total = 3250;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas4'));
             $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología facial y corporal')
+            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
             ->where('cursos.fecha_final', '>=', $fechaActual)
             ->where('cursos.modalidad', '=', 'Online')
             ->select('cursos_tickets.*')
@@ -547,7 +590,7 @@ class OrderController extends Controller
             }
 
             $spa = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado en Administración Asesoría Spa')
+            ->where('cursos.nombre', '=', 'Diplomado de regulación y administración de spa ante COFEPRIS')
             ->where('cursos.fecha_final', '>=', $fechaActual)
             ->where('cursos.modalidad', '=', 'Online')
             ->select('cursos_tickets.*')
@@ -584,6 +627,116 @@ class OrderController extends Controller
                 ];
                 session()->put('cart', $cart);
             }
+
+            $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
+            ->first();
+            $cart = session()->get('cart', []);
+            $cart[] = [
+                "id" => $canasta->id,
+                "name" => $canasta->nombre,
+                "curso" => $canasta->id_curso,
+                "quantity" => 1,
+                "price" => 0,
+                "paquete" => 1,
+                "image" => $canasta->imagen
+            ];
+            session()->put('cart', $cart);
+
+        } elseif ($request->input('paquete') == 5) {
+            $total = 3625;
+            $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas5'));
+            $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
+            ->where('cursos.fecha_final', '>=', $fechaActual)
+            ->where('cursos.modalidad', '=', 'Online')
+            ->select('cursos_tickets.*')
+            ->first();
+
+            if($curso != null){
+                $cart = session()->get('cart', []);
+                $cart[] = [
+                    "id" => $curso->id,
+                    "name" => $curso->nombre,
+                    "curso" => $curso->id_curso,
+                    "quantity" => 1,
+                    "price" => 0,
+                    "paquete" => 1,
+                    "image" => $curso->imagen
+                ];
+                session()->put('cart', $cart);
+            }
+
+            $spa = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+            ->where('cursos.nombre', '=', 'Diplomado de regulación y administración de spa ante COFEPRIS')
+            ->where('cursos.fecha_final', '>=', $fechaActual)
+            ->where('cursos.modalidad', '=', 'Online')
+            ->select('cursos_tickets.*')
+            ->first();
+            if($spa != null){
+                $cart = session()->get('cart', []);
+                $cart[] = [
+                    "id" => $spa->id,
+                    "name" => $spa->nombre,
+                    "curso" => $spa->id_curso,
+                    "quantity" => 1,
+                    "price" => 0,
+                    "paquete" => 1,
+                    "image" => $spa->imagen
+                ];
+                session()->put('cart', $cart);
+            }
+            $carrera = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+            ->where('cursos.nombre', '=', 'Carrera de Cosmiatria Estética')
+            ->where('cursos.fecha_final', '>=', $fechaActual)
+            ->where('cursos.modalidad', '=', 'Online')
+            ->select('cursos_tickets.*')
+            ->first();
+            if($carrera != null){
+                $cart = session()->get('cart', []);
+                $cart[] = [
+                    "id" => $carrera->id,
+                    "name" => $carrera->nombre,
+                    "curso" => $carrera->id_curso,
+                    "quantity" => 1,
+                    "price" => 0,
+                    "paquete" => 1,
+                    "image" => $carrera->imagen
+                ];
+                session()->put('cart', $cart);
+            }
+            $post = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+            ->where('cursos.nombre', '=', 'Diplomado de Post Operatorio Facial y Corporal')
+            ->where('cursos.fecha_final', '>=', $fechaActual)
+            ->where('cursos.modalidad', '=', 'Online')
+            ->select('cursos_tickets.*')
+            ->first();
+            if($post != null){
+                $cart = session()->get('cart', []);
+                $cart[] = [
+                    "id" => $post->id,
+                    "name" => $post->nombre,
+                    "curso" => $post->id_curso,
+                    "quantity" => 1,
+                    "price" => 0,
+                    "paquete" => 1,
+                    "image" => $post->imagen
+                ];
+                session()->put('cart', $cart);
+            }
+
+            $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
+            ->first();
+            $cart = session()->get('cart', []);
+            $cart[] = [
+                "id" => $canasta->id,
+                "name" => $canasta->nombre,
+                "curso" => $canasta->id_curso,
+                "quantity" => 1,
+                "price" => 0,
+                "paquete" => 1,
+                "image" => $canasta->imagen
+            ];
+            session()->put('cart', $cart);
         }
         $ticketsSeleccionados = CursosTickets::whereIn('id', $opcionesSeleccionadas)->get();
         for ($i = 0; $i < count($ticketsSeleccionados); $i++) {

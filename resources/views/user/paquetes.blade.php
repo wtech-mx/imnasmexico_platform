@@ -19,8 +19,22 @@
         </div>
 
         <div class="col-12 col-md-6 space_paquetes">
-            <form action="{{ route('carrito.resultado') }}" method="post">
+            <h3 class="mt-5" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+            <h3 style="color: #836262"><strong>
+                <del style="color: #836262">$7,400</del>
+                $6,000</strong>
+            </h3>
+            <h5 style="color:#836262!important;">Descuento: <strong>$1,400</strong></h5>
+            <form class="mt-4" action="{{ route('carrito.resultado') }}" method="post">
                 @csrf
+                <h5 style="color:#836262!important;">Seleccione la canasta</h5>
+                <div class="col-6">
+                    <select class="form-control" style="background: #F5ECE4!important;color: #836262;font-weight: bold;" name="canasta" id="canasta">
+                        <option value="Canasta facial">Canasta facial</option>
+                        <option value="Canasta Corporal">Canasta Corporal</option>
+                    </select>
+                </div>
+
                 @foreach ($tickets as $ticket)
                     <div class="mt-2 mt-md-5">
                         <input class="input_paquetes" type="checkbox" name="ticket[]" id="checkbox{{ $ticket->id }}" data-grupo="grupo1" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo1()">
@@ -40,8 +54,21 @@
 
     <div class="row">
         <div class="col-12 col-md-6 order-dos space_paquetes">
-            <form action="{{ route('carrito.resultado2') }}" method="post">
+            <h3 class="mt-5" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+            <h3 style="color: #836262"><strong>
+                <del style="color: #836262">$9,400</del>
+                $8,000</strong>
+            </h3>
+            <h5 style="color:#836262!important;">Descuento: <strong>$1,400</strong></h5>
+            <form class="mt-4" action="{{ route('carrito.resultado2') }}" method="post">
                 @csrf
+                <h5 style="color:#836262!important;">Seleccione la canasta</h5>
+                <div class="col-6">
+                    <select class="form-control" style="background: #836262!important;color: #F5ECE4;font-weight: bold;" name="canasta" id="canasta">
+                        <option value="Canasta facial">Canasta facial</option>
+                        <option value="Canasta Corporal">Canasta Corporal</option>
+                    </select>
+                </div>
                 @foreach ($tickets as $ticket)
                     <div class="mt-2 mt-md-5">
                         <input class="input_paquetes" type="checkbox" name="ticket2[]" data-grupo="grupo2" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo2()">
@@ -69,8 +96,21 @@
         </div>
 
         <div class="col-12 col-md-6 space_paquetes">
-            <form action="{{ route('carrito.resultado3') }}" method="post">
+            <h3 class="mt-5" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+            <h3 style="color: #836262"><strong>
+                <del style="color: #836262">$12,400</del>
+                $11,000</strong>
+            </h3>
+            <h5 style="color:#836262!important;">Descuento: <strong>$1,400</strong></h5>
+            <form class="mt-4" action="{{ route('carrito.resultado3') }}" method="post">
                 @csrf
+                <div class="col-6">
+                    <h5 style="color:#836262!important;">Seleccione la canasta</h5>
+                    <select class="form-control" style="background: #F5ECE4!important;color: #836262;font-weight: bold;" name="canasta" id="canasta">
+                        <option value="Canasta facial">Canasta facial</option>
+                        <option value="Canasta Corporal">Canasta Corporal</option>
+                    </select>
+                </div>
                 @foreach ($tickets as $ticket)
                     <div class="mt-2 mt-md-5">
                         <input class="input_paquetes" type="checkbox" name="ticket3[]" data-grupo="grupo3" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo3()">
@@ -90,8 +130,21 @@
 
     <div class="row">
         <div class="col-12 col-md-6 order-dos space_paquetes">
-            <form action="{{ route('carrito.resultado4') }}" method="post">
+            <h3 class="mt-5" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+            <h3 style="color: #836262"><strong>
+                <del style="color: #836262">$14,400</del>
+                $13,000</strong>
+            </h3>
+            <h5 style="color:#836262!important;">Descuento: <strong>$1,400</strong></h5>
+            <form class="mt-4" action="{{ route('carrito.resultado4') }}" method="post">
                 @csrf
+                <h5 style="color:#836262!important;">Seleccione la canasta</h5>
+                <div class="col-6">
+                    <select class="form-control" style="background: #836262!important;color: #F5ECE4;font-weight: bold;" name="canasta" id="canasta">
+                        <option value="Canasta facial">Canasta facial</option>
+                        <option value="Canasta Corporal">Canasta Corporal</option>
+                    </select>
+                </div>
                 @foreach ($tickets as $ticket)
                     <div class="mt-2 mt-md-5">
                         <input class="input_paquetes" type="checkbox" name="ticket4[]" data-grupo="grupo4" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo4()">
@@ -106,6 +159,44 @@
 
         <div class="col-12 col-md-6 order-uno  space_paquetes">
             <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-04.png')}}" alt="">
+        </div>
+    </div>
+
+</section>
+
+<section class="primario bg_overley" style="background-color:#fff;">
+
+    <div class="row">
+        <div class="col-12 col-md-6 order-uno  space_paquetes">
+            <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-05.png')}}" alt="">
+        </div>
+
+        <div class="col-12 col-md-6 order-dos space_paquetes">
+            <h3 class="mt-5" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+            <h3 style="color: #836262"><strong>
+                <del style="color: #836262">$15,900</del>
+                $14,500</strong>
+            </h3>
+            <h5 style="color:#836262!important;">Descuento: <strong>$1,400</strong></h5>
+            <form class="mt-4" action="{{ route('carrito.resultado5') }}" method="post">
+                @csrf
+                <h5 style="color:#836262!important;">Seleccione la canasta</h5>
+                <div class="col-6">
+                    <select class="form-control" style="background: #F5ECE4!important;color: #836262;font-weight: bold;" name="canasta" id="canasta">
+                        <option value="Canasta facial">Canasta facial</option>
+                        <option value="Canasta Corporal">Canasta Corporal</option>
+                    </select>
+                </div>
+                @foreach ($tickets as $ticket)
+                    <div class="mt-2 mt-md-5">
+                        <input class="input_paquetes" type="checkbox" name="ticket5[]" data-grupo="grupo5" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo5()">
+                        <label class="label_paquetes">{{ $ticket->nombre }}</label>
+                    </div>
+                @endforeach
+                <input type="hidden" name="opciones_seleccionadas5" value="">
+                <input type="hidden" name="paquete" value="5">
+                <button class="btn_paquetes btn-submit" type="submit" id="boton-compra5" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
+            </form>
         </div>
     </div>
 
@@ -308,6 +399,51 @@
                     .map(c => c.value)
                     .join("|");
                 campoOculto4.value = opcionesSeleccionadas4;
+            });
+        });
+    </script>
+
+    <script>
+        function limitarSeleccionGrupo5() {
+        var checkboxes = document.querySelectorAll('input[type=checkbox][data-grupo=grupo5]');
+        var seleccionados = 0;
+        var botonCompra = document.getElementById('boton-compra5');
+
+        checkboxes.forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                if (this.checked) {
+                    seleccionados++;
+                    if (seleccionados === 4) {
+                        // Habilita el botón de compra cuando se seleccionan 4 checkboxes
+                        botonCompra.disabled = false;
+                    }
+                    if (seleccionados > 4) {
+                    this.checked = false;
+                    seleccionados--;
+                    }
+                } else {
+                    seleccionados--;
+                    // Deshabilita el botón de compra si no se seleccionan 4 checkboxes
+                    if (seleccionados !== 4) {
+                        botonCompra.disabled = true;
+                    }
+                }
+            });
+        });
+        }
+    </script>
+
+    <script>
+        const checkboxes5 = document.getElementsByName("ticket5[]");
+        const campoOculto5 = document.getElementsByName("opciones_seleccionadas5")[0];
+
+        checkboxes5.forEach(checkbox => {
+            checkbox.addEventListener("click", () => {
+                const opcionesSeleccionadas5 = [...checkboxes5]
+                    .filter(c => c.checked)
+                    .map(c => c.value)
+                    .join("|");
+                campoOculto5.value = opcionesSeleccionadas5;
             });
         });
     </script>

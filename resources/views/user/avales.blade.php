@@ -421,7 +421,7 @@ crossorigin="anonymous" />
                 <div class="item">
                     <div class="card card_certificados_2">
                         <div class="d-flex justify-content-center">
-                            <h4 class="text-center num_certifiacdo_2">EC1467</h4>
+                            <h4 class="text-center num_certifiacdo_2">17FT273</h4>
                         </div>
 
                         <div class="d-flex justify-content-center">
