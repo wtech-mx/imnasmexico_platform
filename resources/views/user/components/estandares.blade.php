@@ -1,8 +1,8 @@
 <section class="primario bg_overley" style="background-color:#ffffff;">
     <div class="row">
         <div class="col-12 mb-5">
-            <h2 class="titulo_alfa text-center">Conoce todos</h2>
-            <h3 class="titulo_beta text-center">nuestros Estándares</h3>
+            <h2 class="titulo_alfa text-center">¡Conoce todos nuestros Estándares </h2>
+            <h3 class="titulo_beta text-center">y Certifícate!</h3>
         </div>
 
         <div class="col-12 m-auto">

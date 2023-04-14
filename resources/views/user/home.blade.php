@@ -30,7 +30,7 @@
                 Naturales Ain Spa
             </h1>
             <p class="text-white parrafo" style="">
-                Instituto incorporado a la UNAM y SEP con más de 35 años en el mundo de
+                Instituto incorporado a UNAM, SEP, SEP CONOCER, SEP REVOE Y STPS (Secretaría de Trabajo y Previsión Social) con más de 35 años en el mundo de
                 la belleza y salud, formando a miles de alumnos a nivel nacional e internacional,
                 brindando la mejor educación, con profesionales de alto nivel.
             </p>

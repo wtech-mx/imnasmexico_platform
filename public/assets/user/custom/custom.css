@@ -241,6 +241,12 @@ input.input_custom_checkout::placeholder{color: #F5ECE4!important;}
 
 .carousel-control-prev-icon{
     background-color: #836262;
+    border-radius: 5px;
+}
+
+.carousel-control-next-icon {
+    background-color: #836262;
+    border-radius: 5px;
 }
 
 .card_tittle_btn{
