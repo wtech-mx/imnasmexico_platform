@@ -26,49 +26,49 @@
                     <div class="carousel-item active">
                         <div class="d-flex justify-content-center">
                             <div class="card card-custom" style="margin-top: 5rem">
-                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/1.jpg')}}" class="card-img-top" alt="...">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/1.jpeg')}}" class="card-img-top" alt="...">
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item ">
                         <div class="d-flex justify-content-center">
                             <div class="card card-custom" style="margin-top: 5rem">
-                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/2.jpg')}}" class="card-img-top" alt="...">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/2.jpeg')}}" class="card-img-top" alt="...">
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item ">
                         <div class="d-flex justify-content-center">
                             <div class="card card-custom" style="margin-top: 5rem">
-                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/3.jpg')}}" class="card-img-top" alt="...">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/3.jpeg')}}" class="card-img-top" alt="...">
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item ">
                         <div class="d-flex justify-content-center">
                             <div class="card card-custom" style="margin-top: 5rem">
-                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/4.jpg')}}" class="card-img-top" alt="...">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/4.jpeg')}}" class="card-img-top" alt="...">
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item ">
                         <div class="d-flex justify-content-center">
                             <div class="card card-custom" style="margin-top: 5rem">
-                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/5.jpg')}}" class="card-img-top" alt="...">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/5.jpeg')}}" class="card-img-top" alt="...">
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item ">
                         <div class="d-flex justify-content-center">
                             <div class="card card-custom" style="margin-top: 5rem">
-                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/6.jpg')}}" class="card-img-top" alt="...">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/6.jpeg')}}" class="card-img-top" alt="...">
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item ">
                         <div class="d-flex justify-content-center">
                             <div class="card card-custom" style="margin-top: 5rem">
-                                <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/7.jpg')}}" class="card-img-top" alt="...">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/7.jpeg')}}" class="card-img-top" alt="...">
                             </div>
                         </div>
                     </div>
@@ -89,18 +89,12 @@
 
         <div class="col-12 col-sm-12 col-md-6 index_superior">
             <h1 class="text-white titulo space_title_instalaciones  space_tiitle_slide" style="">
-                PENDIENTE EL TEXTO Y LAS FOTOS.
+                NOSOTROS
             </h1>
             <p class="text-white parrafo parrafo_instalaciones" style="">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                nonummy nibh euismod tincidunt
-                ut laoreet dolore magna aliquam
-                erat volutpat. Ut wisi enim ad
-                minim veniam, quis nostrud exerci
-                tation ullamcorper suscipit lobortis
-                nisl ut aliquip ex ea commodo
-                consequat. Duis autem vel eum
-                iriure dolor in hendrerit in vulputate velit esse molestie consequat,
+                El Instituto Naturales Ain Spa, es una Entidad de Certificación, que está en constante movimiento, haciendo presencia en diferentes eventos y Expos. <br>
+                 Realizando también, Conferencias y Congresos propios, además de toda la oferta educativa. <br>
+                 Queremos que conozcan más de nosotros y dejarles una probada de lo que es formar parte de la familia, IMNAS.
             </p>
 
         </div>
@@ -116,26 +110,21 @@
         <div class="col-12 col-md-6 order-dos">
             <div class="d-flex justify-content-center">
                 <div class="card card-custom space_Card" style="">
-                    <div id="carousel_exterior" class="carousel slide">
+                    <div id="carousel_conferencias" class="carousel slide">
 
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                              <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/5.jpg')}}"  style="width: 100%;">
-                            </div>
-                            <div class="carousel-item ">
-                              <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/6.jpg')}}"  style="width: 100%;">
-                            </div>
-                            <div class="carousel-item ">
-                              <img class="card_image" src="{{asset('assets/user/instalaciones/terraza1.jpg')}}"  style="width: 100%;">
-                            </div>
+                                <video class="video_nosotros" controls>
+                                    <source src="{{asset('assets/user/nosotros/VIDEO_CORTO_CONFERENCIA.MP4')}}" type="video/mp4">
+                                </video>                            </div>
                           </div>
 
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_exterior" data-bs-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_conferencias" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
 
-                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_exterior" data-bs-slide="next">
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_conferencias" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
@@ -147,21 +136,111 @@
         <div class="col-12 col-md-6 order-uno m-auto">
             <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">CONFERENCIA</h1>
             <p class="text-center text-white mt-auto parrafo_instalaciones" style="color:#836262!important;">
-                Tuvimos la fortuna de llevarles
-                grandes Médicos Certificados, en
-                nuestra Conferencia, donde pudimos
-                tener grandes ponencias de nivel
-                médico con diversos temas actuales,
-                de la Medicina Estética. También
-                hubo demostraciones, rifas, y mucho
-                más. ¡Gracias a todos los que nos
-                acompañaron!
-
+                Tuvimos la fortuna de llevarles grandes Médicos Certificados, en
+                nuestra Conferencia, donde pudimos tener grandes ponencias de
+                nivel médico con diversos temas actuales, de la Medicina Estética.
+                También hubo demostraciones, rifas, y mucho más. ¡Gracias a todos
+                los que nos acompañaron!
             </p>
         </div>
 
     </div>
 </section>
+
+<section class="primario bg_overley" style="background-color:#F5ECE4;" id="cafeteria">
+    <div class="row">
+
+        <div class="col-12 col-md-6 order-uno m-auto">
+            <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">EXPOS</h1>
+            <p class="text-center text-white mt-auto parrafo_instalaciones" style="color:#836262!important;">
+                Hemos tenido la fortuna de estar presentes en diversas Expos que,
+                gracias a todos ustedes, siempre son un éxito. Les damos las gracias a
+                todas las personas que nos siguen y a los que se unen en cada
+                evento, ¡Bienvenidos!
+            </p>
+        </div>
+
+        <div class="col-12 col-md-6 order-dos">
+            <div class="d-flex justify-content-center">
+                <div class="card card-custom space_Card" style="">
+                    <div id="carousel_expos" class="carousel slide">
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <video class="video_nosotros" controls>
+                                    <source src="{{asset('assets/user/nosotros/EXPO.MP4')}}" type="video/mp4">
+                                </video>                            </div>
+                          </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_expos" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_expos" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="primario bg_overley" style="background-color:#F5ECE4;" id="cafeteria">
+    <div class="row">
+
+        <div class="col-12 col-md-6 order-dos">
+            <div class="d-flex justify-content-center">
+                <div class="card card-custom space_Card" style="">
+                    <div id="carousel_conferencias" class="carousel slide">
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <video class="video_nosotros" controls>
+                                    <source src="{{asset('assets/user/nosotros/DIPLOMADO_MEDICINA_UNAM.MP4')}}" type="video/mp4">
+                                </video>
+                            </div>
+                          </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_conferencias" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_conferencias" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 order-uno m-auto">
+            <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">
+                DIPLOMADO
+            </h1>
+            <h2 class="text-center" style="color:#836262!important;font-size:19px">
+                UNIVERSITARIO DE MEDICINA ESTÉTICA AVALADO
+                ANTE LA UNAM
+            </h2>
+            <p class="text-center text-white mt-auto parrafo_instalaciones" style="color:#836262!important;">
+                Nos honramos en hacer de su conocimiento que ya somos una
+                Institución avalada ante la máxima casa de estudios, UNAM.
+                Añadimos a nuestra oferta educativa, un Diplomado de nivel Médico
+                para todos aquellos egresados de la carrera de Medicina, que quieran
+                extender sus estudios en el área de la medicina estética. Al finalizar
+                recibirán una Diploma totalmente avalado ante la UNAM a través de
+                la Facultad de Estudios Superiores Zaragoza.
+            </p>
+        </div>
+
+    </div>
+</section>
+
 
 <section class="primario bg_overley" style="background-color:#836262;"id="alumnado">
     <div class="row">
@@ -178,24 +257,55 @@
         <div class="col-12 col-md-6">
             <div class="d-flex justify-content-center">
                 <div class="card card-custom space_Card mb-3" style="">
-                    <div id="carousel_tiendita" class="carousel slide">
+                    <div id="carousel_alumnado" class="carousel slide">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                              <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/5.jpg')}}"  style="width: 100%;">
+                              <img class="card_image" src="{{asset('assets/user/nosotros/1.jpeg')}}"  style="width: 100%;">
                             </div>
+
                             <div class="carousel-item ">
-                              <img class="card_image" src="{{asset('assets/user/instalaciones/retocadas/6.jpg')}}"  style="width: 100%;">
+                              <img class="card_image" src="{{asset('assets/user/nosotros/2.jpeg')}}"  style="width: 100%;">
                             </div>
+
                             <div class="carousel-item ">
-                              <img class="card_image" src="{{asset('assets/user/instalaciones/terraza1.jpg')}}"  style="width: 100%;">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/3.jpeg')}}"  style="width: 100%;">
                             </div>
+
+                            <div class="carousel-item ">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/4.jpeg')}}"  style="width: 100%;">
+                              </div>
+
+                              <div class="carousel-item ">
+                                  <img class="card_image" src="{{asset('assets/user/nosotros/5.jpeg')}}"  style="width: 100%;">
+                              </div>
+
+                              <div class="carousel-item ">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/6.jpeg')}}"  style="width: 100%;">
+                              </div>
+
+                              <div class="carousel-item ">
+                                  <img class="card_image" src="{{asset('assets/user/nosotros/7.jpeg')}}"  style="width: 100%;">
+                              </div>
+
+                              <div class="carousel-item ">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/8.jpeg')}}"  style="width: 100%;">
+                            </div>
+
+                            <div class="carousel-item ">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/9.jpeg')}}"  style="width: 100%;">
+                            </div>
+
+                            <div class="carousel-item ">
+                              <img class="card_image" src="{{asset('assets/user/nosotros/10.jpeg')}}"  style="width: 100%;">
                           </div>
 
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_tiendita" data-bs-slide="prev">
+                          </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_alumnado" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_tiendita" data-bs-slide="next">
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_alumnado" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                         </button>
