@@ -220,7 +220,7 @@
             else {
                 $presencial_bg = '';
                 $presencial_border = '';
-                $presencial_color = 'color:#000;';
+                $presencial_color = '';
             }
 
         @endphp

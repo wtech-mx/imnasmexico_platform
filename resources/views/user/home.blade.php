@@ -361,7 +361,7 @@
             <h2 class="titulomin_alfa espaciodor_lab text-left  mb-4" style="margin-left: 30px;">Laboratorio Naturales Ain Spa</h2>
             <p class="text-left text_beneficios espaciodor_lab_text mb-4">
                 Somos un laboratorio certificado ante COFEPRIS.<br><br>
-                Contamos con mas de 100 productos faciales y corporales ideales para tu cabina o spa. <br>
+                Contamos con mas de 100 productos faciales y corporales ideales para tu cabina, consultorio o Spa. <br>
                 Son productos con las bondades de la Aromaterapia y aceites esenciales, brindando siempre la mejor calidad en producto e imagen.
 
             </p>
@@ -582,7 +582,6 @@
             </h2>
             <p class="text-left text_beneficios espaciodor_lab_text mb-4" style="margin-left: 0px!important">
                 Medicina Estética <br>
-                Cosmiatría Estética <br>
             </p>
             <p class="registro_num2 mt-3 mb-5">
                 Número de Registro : 60616-1263-17-X-22
