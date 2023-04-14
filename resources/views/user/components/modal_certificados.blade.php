@@ -12,7 +12,7 @@
             </p>
 
             <div class="d-flex justify-content-center">
-                <a class="btn_certificados" href="avales">
+                <a class="btn_certificados" href="{{ route('user.avales') }}">
                     Saber más
                 </a>
             </div>
@@ -36,7 +36,7 @@
             </p>
 
             <div class="d-flex justify-content-center">
-                <a class="btn_certificados" href="avales">
+                <a class="btn_certificados" href="{{ route('user.avales') }}">
                     Saber más
                 </a>
             </div>
@@ -59,7 +59,7 @@
                 </p>
 
                 <div class="d-flex justify-content-center">
-                    <a class="btn_certificados" href="avales">
+                    <a class="btn_certificados" href="{{ route('user.avales') }}">
                         Saber más
                     </a>
                 </div>
@@ -80,7 +80,7 @@
                 <img src="{{asset('assets/user/certificaciones/DIPLOMA-ONLINE.png')}}" alt="" class="img_certificados_general">
             </p>
             <div class="d-flex justify-content-center">
-                <a class="btn_certificados" href="avales">
+                <a class="btn_certificados" href="{{ route('user.avales') }}">
                     Saber más
                 </a>
             </div>
@@ -101,7 +101,7 @@
                 <img src="{{asset('assets/user/certificaciones/doc_imnas.png')}}" alt="" class="img_certificados_general">
             </p>
             <div class="d-flex justify-content-center">
-                <a class="btn_certificados" href="avales">
+                <a class="btn_certificados" href="{{ route('user.avales') }}">
                     Saber más
                 </a>
             </div>
