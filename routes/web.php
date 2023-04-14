@@ -26,7 +26,7 @@ Route::get('nosotros', function () {
 
 Route::get('403', function () {
     return view('errors.403');
-});
+})->name('403');
 
 Route::get('404', function () {
     return view('errors.404');
