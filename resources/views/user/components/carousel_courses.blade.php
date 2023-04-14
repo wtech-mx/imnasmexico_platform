@@ -49,7 +49,7 @@
                                 <img class="img_card_grid" src="{{asset('curso/'. $curso->foto) }}" class="card-img-top" alt="...">
 
                                 <p class="precio_grid" style="{{ $presencial_bg }}">${{$precio}} mxn</p>
-                                <p class="modalidado_grid">{{$curso->modalidad}}</p>
+                                <p class="modalidado_grid"><strong>{{$curso->modalidad}}</strong></p>
                                 <p class="wish_grid" style="{{ $presencial_bg }}"><i class="fas fa-heart"></i></p>
                                 <p class="share_grid" onclick="shareFacebook()" style="{{ $presencial_bg }}"><i class="fas fa-share-alt"></i></p>
                                 <p class="horario_grid">{{$hora_inicial}} - {{$hora_final}}</p>
