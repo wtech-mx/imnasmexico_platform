@@ -62,7 +62,7 @@ class OrderController extends Controller
         $preference->back_urls = array(
             "success" => route('order.pay'),
             "pending" => route('order.pay'),
-            "failure" => "https://www.google.com.mx/",
+            "failure" => "https://plataforma.imnasmexico.com/",
         );
         $preference->auto_return = "approved";
         $preference->external_reference = $code;
@@ -106,6 +106,7 @@ class OrderController extends Controller
             $order->fecha = $fechaActual;
             $order->estatus = 0;
             $order->code = $code;
+            $order->external_reference = $code;
             $order->save();
 
             foreach (session('cart') as $id => $details) {
