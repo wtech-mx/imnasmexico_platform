@@ -180,7 +180,7 @@
             <div class="d-flex mb-0 mb-sm-5">
 
                 <div class="me-auto p-2">
-                    <h5 class="tittle_proximas_cer">Calendario General Online y Presencial</h5>
+                    <h5 class="tittle_proximas_cer">{{ $titulo }}</h5>
                 </div>
 
                 <div class="p-2">
@@ -224,9 +224,9 @@
                     <div class="row">
 
                         <div class="col-2 mt-4">
-                            <h4 class="fecha_card_grid text-center">
+                            <h5 class="fecha_card_grid text-center">
                                 {{$mes}} <br> <strong class="fecha_strong_card_grid">{{$dia}}</strong>
-                            </h4>
+                            </h5>
                         </div>
 
                         <div class="col-10 mt-4">

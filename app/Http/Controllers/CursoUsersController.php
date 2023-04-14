@@ -21,7 +21,9 @@ class CursoUsersController extends Controller
 
         $tickets = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
 
-        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual'));
+        $titulo = 'Calendario General Online y Presencial';
+
+        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual', 'titulo'));
     }
 
     public function show($slug)
@@ -61,11 +63,21 @@ class CursoUsersController extends Controller
         $tickets = CursosTickets::get();
         $cursos_slide = Cursos::where('estatus', '1')->orderBy('fecha_inicial','asc')->get();
         // Consulta los cursos activos
-        $cursos = Cursos::where('estatus', '1');
+        $cursos = Cursos::where('estatus', '1')->orderBy('fecha_inicial','asc');
 
         // Obtén los valores de búsqueda del formulario
         $nombre = $request->input('nombre');
         $modalidad = $request->input('modalidad');
+
+        // Determina el título para la vista
+        $titulo = '';
+        if ($modalidad == 'Online') {
+            $titulo = 'Calendario General Online';
+        } elseif ($modalidad == 'Presencial') {
+            $titulo = 'Calendario General Presencial';
+        } else {
+            $titulo = 'Calendario General Online y Presencial';
+        }
 
         // Aplica los filtros de búsqueda si se proporcionaron
         if ($nombre) {
@@ -79,7 +91,7 @@ class CursoUsersController extends Controller
         $cursos = $cursos->get();
 
 
-        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual'));
+        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual', 'titulo'));
     }
 
     public function enviarFormulario(Request $request){
