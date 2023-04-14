@@ -228,9 +228,7 @@ class OrderController extends Controller
             "source" => $request->stripeToken,
             "description" => $payer->name
         ]);
-
-        $stripe->withErrorUrl(route('403'));
-
+        
         $order = new Orders;
         $order->id_usuario = $payer->id;
         $order->pago = $total_iva;
