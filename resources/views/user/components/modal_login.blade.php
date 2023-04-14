@@ -9,8 +9,11 @@
           <div class="row">
             <div class="col-12">
                 <div class="d-flex justify-content-between">
-                    <p class="text-center tittle_modal_login">Acceso alumn@s</p>
                     <button type="button" class="btn_close_custom" data-bs-dismiss="modal">X</button>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <p class="text-center tittle_modal_login">Acceso alumn@s</p>
                 </div>
 
                 <nav>

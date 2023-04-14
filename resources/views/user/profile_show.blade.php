@@ -20,7 +20,10 @@
                                 </div>
                                 <div class="col-4 mt-3">
                                     <b><label>Precio</label></b><br>
-                                    <label>{{$tiket->CursosTickets->precio}}</label>
+                                    @php
+                                        $precio = number_format($tiket->CursosTickets->precio, 2, '.', ',');
+                                    @endphp
+                                    <label>${{$precio}} mxn</label>
                                 </div>
                                 <div class="col-6 mt-3">
                                     <b><label>Fecha</label></b><br>
@@ -39,9 +42,9 @@
                                     @else
                                         <b><label>Dirección</label></b><br>
                                         @if ($order->estatus == '1')
-                                            <p class="  ">
+                                            <a class="" href="https://goo.gl/maps/WLa4tPsubCNvrLmD7" target="_blank">
                                                 Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México
-                                            </p>
+                                            </a>
                                         @endif
                                     @endif
                                 </div>

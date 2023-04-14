@@ -35,6 +35,10 @@
             @else
             <h2 class="text-center subtittle_thanks">Tu compra se encuentra en estado Pendiente</h2>
             @endif
+            <h4 class="text-center text-white tittle_mensaje mt-4">
+                Te llegará un correo de confirmación de pago y posteriormente uno con la liga y/o de la direccion de clase, <br>
+                 es necesario revisar la bandeja de spam.
+            </h4>
 
 
             <div class="d-flex justify-content-center">

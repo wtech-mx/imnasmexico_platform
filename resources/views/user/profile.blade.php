@@ -1,7 +1,7 @@
 @extends('layouts.app_user')
 
 @section('template_title')
-
+Mi perfil- {{$cliente->name}}
 @endsection
 
 @section('css_custom')
@@ -186,7 +186,7 @@
                             <th >Num. Pedido</th>
                             <th >Fecha de Compra</th>
                             <th >Total</th>
-                            <th>Forma de Pago</th>
+                            <th>Curso/Diplomado</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                           </tr>
@@ -203,8 +203,15 @@
                                     <th>
                                         {{$order->fecha}}
                                     </th>
-                                    <td>${{$order->pago}}</td>
-                                    <td class="td_title_checkout">{{$order->forma_pago}}</td>
+                                    <td>
+                                        @php
+                                            $precio = number_format($order->pago, 2, '.', ',');
+                                        @endphp
+                                        ${{$precio}} mxn
+                                    </td>
+                                    <td class="td_title_checkout">
+                                        {{$order->forma_pago}}
+                                    </td>
                                     <td>
                                         @if ($order->estatus == '1')
                                             Completado
@@ -246,8 +253,9 @@
               <div class="tab-pane fade" id="v-pills-documentos" role="tabpanel" aria-labelledby="v-pills-documentos-tab" tabindex="0">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="title_curso mb-5">Reconocimeitnos</h2>
+                        <h2 class="title_curso mb-5">Reconocimientos</h2>
                     </div>
+                    <p class="text-center">proximamente</p>
                 </div>
               </div>
 
@@ -410,6 +418,7 @@
                     <div class="col-12 space_laaterales_profile">
                         <h2 class="title_curso mb-5">Mis compras</h2>
                     </div>
+
                     <table class="table">
                         <thead class="text-center">
                           <tr class="tr_checkout">
