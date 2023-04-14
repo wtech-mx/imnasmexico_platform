@@ -4,10 +4,14 @@
       <a class="navbar-brand" href="{{ route('user.home') }}">
           <img src="{{asset('assets/user/logotipos/imnas.webp')}}" class="image_navbar d-inline-block align-text-top">
       </a>
-
-      <a class="btn btn-primario acceso_alumnas_flex_prim me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
-        Acceso alumnas
-      </a>
+     @guest
+            <a class="btn btn-primario acceso_alumnas_flex_prim me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
+                Acceso alumnas
+            </a>
+            @else
+            {{-- <a class="btn btn-primario me-4" type="button" href="{{ route('signout') }}">Cerrar Sesion</a> --}}
+            <a class="btn btn-primario acceso_alumnas_flex_prim me-4" type="button" href="{{ route('perfil.index', auth()->user()->code) }}">Perfil</a>
+        @endguest
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
