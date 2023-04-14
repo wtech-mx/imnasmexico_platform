@@ -249,7 +249,9 @@
 
             <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">ALUMNADO</h1>
             <p class="text-center text-white mt-auto parrafo_instalaciones">
-                DESCRIPCIÓN DEL ALUMNADO.
+                Hemos formado alumnos desde hace más de 35 años y, en todo este tiempo, siempre hemos ofrecido los mejores temas y los más actualizados. <br>
+                Cada vez hemos sumado más y más avales para respaldar todos los estudios y así, ofrecer solo educación de primer nivel. <br>
+                Estamos muy agradecidos con todas las personas que han pasado por las aulas de IMNAS y han depositado su confianza en nosotros para ser quienes los ayuden a formar sus carreras.
             </p>
 
         </div>
