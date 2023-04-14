@@ -257,13 +257,19 @@
                         <h2 class="title_curso mb-5">Mis Clases</h2>
                         <h3>Recuerda que las clases grabadas solo duran 72 Horas</h3>
                     </div>
+
                     @foreach ($usuario_compro as $video)
                     <div class="col 12">
                         <h5>{{$video->nombre}}</h5>
 
-                        <video width="560" height="315" controls controlsList="nodownload">
-                            <source src="{{asset('clase_grabada/'. $video->clase_grabada) }}" type="video/mp4">
-                          </video>
+                        @php
+                            $url = $video->clase_grabada;
+                            preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
+                            $id_link_drive = $matches[1];
+                        @endphp
+
+                        <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" width="640" height="480"></iframe>
+
                     </div>
                     @endforeach
                 </div>
@@ -485,12 +491,15 @@
                     </div>
 
                     @foreach ($usuario_compro as $video)
-                    <div class="col 12">
+                    <div class="col-12 py-3">
                         <h5>{{$video->nombre}}</h5>
+                        @php
+                            $url = $video->clase_grabada;
+                            preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
+                            $id_link_drive = $matches[1];
+                        @endphp
 
-                        <video width="300" height="315" controls controlsList="nodownload">
-                            <source src="{{asset('clase_grabada/'. $video->clase_grabada) }}" type="video/mp4">
-                          </video>
+                        <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" width="640" height="250"></iframe>
                     </div>
                     @endforeach
 

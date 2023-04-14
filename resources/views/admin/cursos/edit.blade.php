@@ -55,12 +55,13 @@
                                                         <img id="blah" src="{{asset('curso/'.$curso->foto) }}" alt="Imagen" style="width: 150px; height: 150px;"/>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="nota">Clase Grabada</label>
-                                                        <input type="file" id="clase_grabada" name="clase_grabada" class="form-control" >
+                                                        <label for="nota">Enlace de Clase Grabada</label>
+                                                        <input type="text" id="clase_grabada" name="clase_grabada" class="form-control" value="{{$curso->clase_grabada}}">
                                                     </div>
                                                 </div>
+
                                             </div>
                                             <div class="button-row d-flex mt-4">
                                                 <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>

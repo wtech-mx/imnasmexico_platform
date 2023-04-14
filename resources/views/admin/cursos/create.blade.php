@@ -54,6 +54,12 @@
                                                         <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 150px; height: 150px;"/>
                                                     </div>
                                                 </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="nota">Enlace de Clase Grabada</label>
+                                                        <input type="text" id="clase_grabada" name="clase_grabada" class="form-control" >
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="button-row d-flex mt-4">
                                                 <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
@@ -127,7 +133,7 @@
 
                                                     </div>
                                                 </div>
-                                                
+
                                                 <div class="form-check col-3">
                                                     <label for="nota">Seccion UNAM</label>
                                                     <div class="form-group">
