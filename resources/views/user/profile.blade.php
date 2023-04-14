@@ -122,7 +122,7 @@
                                             <span class="input-group-text">
                                                 <img class="img_profile_label" src="{{asset('assets/user/icons/document.png')}}" alt="">
                                             </span>
-                                            <select name="cfdi" id="cfdi">
+                                            <select name="cfdi" id="cfdi" style="width: 160px;">
                                                 <option value="{{$cliente->cfdi}}">{{$cliente->cfdi}}</option>
                                                 <option value="G01 Adquisición de Mercancías">G01 Adquisición de Mercancías</option>
                                                 <option value="G02 Devoluciones, Descuentos o bonificaciones">G02 Devoluciones, Descuentos o bonificaciones</option>

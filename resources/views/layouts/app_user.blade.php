@@ -17,7 +17,7 @@
     <link href="{{asset('assets/user/custom/modal_login.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/user/custom/modal_checkout.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/user/custom/preloader.css')}}" rel="stylesheet" />
-
+    <link href="{{asset('assets/user/custom/btn_flotante.css')}}" rel="stylesheet" />
     @yield('css_custom')
 
     <!-- Font Awesome Icons -->
@@ -38,7 +38,7 @@
     @yield('content')
     @include('layouts.alertas')
     </main>
-
+    @include('user.components.btn_flotante')
     {{-- footer --}}
     @include('user.components.footer')
     @include('user.components.modal_preguntas');
