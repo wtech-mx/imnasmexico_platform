@@ -428,7 +428,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                     </div>
                                     @if ($curso->titulo_hono == 1)
                                         <p class="text-center">
-                                            <strong>Titulo Honorifico</strong>
+                                            <strong>Título Honorífico</strong>
                                         </p>
                                      @else
                                         <p class="text-center">
