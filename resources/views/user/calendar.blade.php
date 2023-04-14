@@ -209,38 +209,52 @@
 
             // Obtener el nombre del mes en español en el formato completo
             $mes = rtrim(strtoupper($carbonFecha->isoFormat('MMM')), '.');
+
+            $precio = number_format($curso->precio, 2, '.', ',');
+
+            if ($curso->modalidad == 'Presencial') {
+                $presencial_bg = 'background-color:#000;';
+                $presencial_border = 'border-color:#000;';
+                $presencial_color = 'color:#000;';
+            }
+            else {
+                $presencial_bg = '';
+                $presencial_border = '';
+                $presencial_color = 'color:#000;';
+            }
+
         @endphp
         <div class="col-12 col-md-6 col-lg-4">
-            <div class="card card_grid card_grid_cale  mb-5 mb-md-3" style="">
+            <div class="card card_grid card_grid_cale  mb-5 mb-md-3" style="{{ $presencial_border }}">
                 <img class="img_card_grid" src="{{asset('curso/'. $curso->foto) }}" class="card-img-top" alt="...">
 
-                <p class="precio_grid">${{$curso->precio}} mxn</p>
+                <p class="precio_grid" style="{{ $presencial_bg }}">${{$precio}} mxn</p>
                 <p class="modalidado_grid">{{$curso->modalidad}}</p>
-                <p class="wish_grid"><i class="fas fa-heart"></i></p>
-                <p class="share_grid" onclick="shareFacebook()"><i class="fas fa-share-alt"></i></p>
+                <p class="wish_grid" style="{{ $presencial_bg }}"><i class="fas fa-heart"></i></p>
+                <p class="share_grid" onclick="shareFacebook()" style="{{ $presencial_bg }}"><i class="fas fa-share-alt"></i></p>
                 <p class="horario_grid">{{$hora_inicial}} - {{$hora_final}}</p>
 
                 <div class="card-body">
                     <div class="row">
 
                         <div class="col-2 mt-4">
-                            <h5 class="fecha_card_grid text-center">
+                            <h5 class="fecha_card_grid text-center" style="{{ $presencial_color }}">
                                 {{$mes}} <br> <strong class="fecha_strong_card_grid">{{$dia}}</strong>
                             </h5>
                         </div>
 
                         <div class="col-10 mt-4">
-                            <h3 class="tittle_card_grid">{{$curso->nombre}}</h3>
+                            <h3 class="tittle_card_grid" style="{{ $presencial_color }}" >{{$curso->nombre}}</h3>
 
                             <div class="d-flex mb-3">
                                 <div class="me-auto p-2">
-                                    <a class="btn btn_primario_grd_curso" data-bs-toggle="collapse" href="#collapseobjetivos{{$curso->id}}" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
+                                    <a class="btn btn_primario_grd_curso" data-bs-toggle="collapse" href="#collapseobjetivos{{$curso->id}}" role="button" aria-expanded="false" aria-controls="collapseobjetivos" style="{{ $presencial_bg }}">
                                         <div class="d-flex justify-content-around">
                                             <p class="card_tittle_btn_grid my-auto">
                                                 Comprar ahora
                                             </p>
                                             <div class="card_bg_btn ">
-                                                <i class="fas fa-cart-plus card_icon_btn_grid"></i>
+                                                <i class="fas fa-cart-plus card_icon_btn_grid" style="{{ $presencial_color }}"></i>
                                             </div>
                                         </div>
                                     </a>
@@ -252,7 +266,7 @@
                                             <p class="card_tittle_btn_grid my-auto">
                                                 Saber más
                                             </p>
-                                            <div class="card_bg_btn_secundario">
+                                            <div class="card_bg_btn_secundario" style="{{ $presencial_bg }}">
                                                 <i class="fas fa-plus card_icon_btn_secundario_grid"></i>
                                             </div>
                                         </div>

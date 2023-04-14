@@ -356,10 +356,11 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @if ($curso->redconocer == 1)
                                 <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
                                     <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones">
+                                        <div class="card_certificaciones" style="position: relative">
                                                 <a class="text-center" data-bs-toggle="modal" data-bs-target="#redconcer">
                                                     <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
                                                 </a>
+                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                         </div>
                                     </div>
                                 </div>
@@ -368,10 +369,11 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @if($curso->sep == 1)
                                 <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
                                     <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones">
+                                        <div class="card_certificaciones" style="position: relative">
                                             <a class="text-center" data-bs-toggle="modal" data-bs-target="#revoe">
                                                 <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/revoe.png')}}" alt="">
                                             </a>
+                                            <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                         </div>
                                     </div>
                                 </div>
@@ -380,10 +382,11 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @if ($curso->unam == 1)
                                 <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
                                     <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones">
+                                        <div class="card_certificaciones" style="position: relative">
                                                 <a class="text-center" data-bs-toggle="modal" data-bs-target="#unam">
                                                     <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
                                                 </a>
+                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                         </div>
                                     </div>
                                 </div>
@@ -392,10 +395,11 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @if ($curso->imnas == 1)
                                 <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
                                     <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones">
+                                        <div class="card_certificaciones" style="position: relative">
                                                 <a class="text-center" data-bs-toggle="modal" data-bs-target="#imnas_collage">
                                                     <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/imnas.png')}}" >
                                                 </a>
+                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                         </div>
                                     </div>
                                 </div>
@@ -404,10 +408,11 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @if ($curso->stps == 1)
                                 <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
                                     <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones">
+                                        <div class="card_certificaciones" style="position: relative">
                                                 <a class="text-center" data-bs-toggle="modal" data-bs-target="#stps">
                                                     <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/stps.png')}}" alt="">
                                                 </a>
+                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                         </div>
                                     </div>
                                 </div>
@@ -479,8 +484,8 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                     <div class="col-12 col-lg-6">
                         <h2 class="title_curso mt-4 mb-4"> Preguntas Frecuentes</h2>
                         <p class="text_preguntas_material">
-                            <strong>1. ¿Cuál es el siguiente paso después de haber adquirido mi curso?</strong><br>
-                             Una vez realizada tu compra, te llegará un correo de <br> confirmación de pago y posteriormente uno con la liga de tu <br>clase, es necesario revisar la bandeja de spam.
+                            <strong>1. ¿Es necesario tener conocimientos previos?</strong><br>
+                            No se requiere ningún conocimiento ni estudios previos, comenzamos desde 0% y cualquier persona que esté interesada en la materia, lo puede estudiar.<br>
                         </p>
                         @if ($curso->modalidad == 'Presencial')
                             <p class="text_preguntas_material">
@@ -515,8 +520,8 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             </p>
                         @endif
                         <p class="text_preguntas_material">
-                            <strong>5. ¿Es necesario tener conocimientos previos?</strong><br>
-                            No se requiere ningún conocimiento ni estudios previos, comenzamos desde 0% y cualquier persona que esté interesada en la materia, lo puede estudiar.<br>
+                            <strong>5. ¿Cuál es el siguiente paso después de haber adquirido mi curso?</strong><br>
+                            Una vez realizada tu compra, te llegará un correo de <br> confirmación de pago y posteriormente uno con la liga de tu <br>clase, es necesario revisar la bandeja de spam.
                         </p>
                         <p class="text_preguntas_material">
                             <strong>6. ¿Tiene un costo extra tramitar mis Documentos Oficiales?</strong><br>
@@ -596,17 +601,76 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
               <div class="tab-pane fade" id="v-pills-recursos" role="tabpanel" aria-labelledby="v-pills-recursos-tab" tabindex="0">
                 @guest
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="title_curso text-center mb-5">Contáctenos</h2>
-                        </div>
-
-                        <div class="col-12 m-auto">
-                                <p class="  ">
-                                   Por favor inicie sesión y en caso de haber comprado este curso podrá ver la dirección o liga de meet para su clase.
-                                </p>
-                        </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="title_curso text-center mb-5">Contáctenos</h2>
                     </div>
+
+                    <div class="col-12 m-auto">
+                            <p class="text-center">
+                                Por favor inicie sesión y en caso de haber comprado este curso podrá ver la dirección o liga de meet para su clase.
+                            </p>
+                    </div>
+                    @if ($curso->estatus == 1)
+                    <div class="d-flex justify-content-center">
+
+                        <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    Comprar ahora
+                                </p>
+                                <div class="card_bg_btn ">
+                                    <i class="fas fa-cart-plus card_icon_btn"></i>
+                                </div>
+                            </div>
+                        </a>
+
+                        <a class="btn btn-secundario space_cs_rs mt-5" href="#contactenos">
+                            <div class="d-flex justify-content-around">
+                                <p class="card_tittle_btn my-auto">
+                                    Contáctenos
+                                </p>
+                                <div class="card_bg_btn_secundario">
+                                    <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
+                                </div>
+                            </div>
+                        </a>
+
+                    </div>
+                        <div class="collapse mt-3" id="collapseinfo">
+                            <div class="card card-body card_colapsable_comprar">
+                                <div class="row mb-3">
+                                    @foreach ($tickets as $ticket)
+                                        <div class="col-4 mt-3">
+                                            <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                        </div>
+                                        <div class="col-3 mt-3">
+                                            @if ($ticket->descuento == NULL)
+                                                <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                            @else
+                                                <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                            @endif
+                                        </div>
+
+                                        <div class="col-5 mt-3">
+                                            <p class="btn-holder">
+                                                <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                    <i class="fas fa-ticket-alt"></i> Comprar
+                                                </a>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                        </div>
+                                    @endforeach
+
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                </div>
                 @else
                     @if ($usuario_compro != NULL)
                         @if ($curso->modalidad == 'Presencial')
@@ -1020,11 +1084,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @if ($curso->redconocer == 1)
                                 <div class="col-6 col-md-4">
                                     <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones">
+                                        <div class="card_certificaciones" style="position: relative">
                                                 <p class="text-center">
                                                     <a  data-bs-toggle="modal" data-bs-target="#redconcer">
                                                         <img class="img_card_certificaciones dos_img_cert" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
                                                     </a>
+                                                    <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                                 </p>
                                         </div>
                                     </div>
@@ -1034,11 +1099,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @if($curso->sep == 1)
                                 <div class="col-6 col-md-4">
                                     <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones">
+                                        <div class="card_certificaciones" style="position: relative">
                                             <p class="text-center">
                                                 <a  data-bs-toggle="modal" data-bs-target="#revoe">
                                                     <img class="img_card_certificaciones dos_img_cert" src="{{asset('assets/user/logotipos/revoe.png')}}" alt="">
                                                 </a>
+                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                             </p>
                                         </div>
                                     </div>
@@ -1048,11 +1114,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @if ($curso->unam == 1)
                                 <div class="col-6 col-md-4">
                                     <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones">
+                                        <div class="card_certificaciones" style="position: relative">
                                             <p class="text-center">
                                                 <a class="text-center" data-bs-toggle="modal" data-bs-target="#unam">
                                                     <img class="img_card_certificaciones tres_img_cert" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
                                                 </a>
+                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                             </p>
                                         </div>
                                     </div>
@@ -1062,11 +1129,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @if ($curso->imnas == 1)
                                 <div class="col-6 col-md-4">
                                     <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones">
+                                        <div class="card_certificaciones" style="position: relative">
                                             <p class="text-center">
                                                 <a  data-bs-toggle="modal" data-bs-target="#imnas_collage">
                                                     <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/imnas.png')}}" >
                                                 </a>
+                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                             </p>
                                         </div>
                                     </div>
@@ -1076,11 +1144,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @if ($curso->stps == 1)
                                 <div class="col-6 col-md-4">
                                     <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones">
+                                        <div class="card_certificaciones" style="position: relative">
                                             <p class="text-center">
                                                 <a class="text-center" data-bs-toggle="modal" data-bs-target="#stps">
                                                     <img class="img_card_certificaciones dos_img_cert" src="{{asset('assets/user/logotipos/stps.png')}}" alt="">
                                                 </a>
+                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                             </p>
                                         </div>
                                     </div>
