@@ -39,7 +39,9 @@ class Cursos extends Model
         'materiales',
         'paquete',
         'video_cad',
-        'seccion_unam'
+        'seccion_unam',
+        'texto_rvoe',
+        'pdf'
     ];
 
     public function User()

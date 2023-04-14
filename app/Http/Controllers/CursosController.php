@@ -34,9 +34,11 @@ class CursosController extends Controller
         if($dominio == 'plataforma.imnasmexico.com'){
             $ruta_materiales = base_path('../public_html/plataforma.imnasmexico.com/materiales');
             $ruta_curso = base_path('../public_html/plataforma.imnasmexico.com/curso');
+            $pdf = base_path('../public_html/plataforma.imnasmexico.com/pdf');
         }else{
             $ruta_materiales = public_path() . '/materiales';
             $ruta_curso = public_path() . '/curso';
+            $pdf = public_path() . '/pdf';
         }
         $curso = new Cursos;
         $curso->nombre = $request->get('nombre');
@@ -58,8 +60,16 @@ class CursosController extends Controller
             $curso->foto = $fileName;
         }
 
-        $curso->clase_grabada = $request->get('clase_grabada');
+        if ($request->hasFile("pdf")) {
+            $file = $request->file('pdf');
+            $path = $pdf;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $curso->pdf = $fileName;
+        }
 
+        $curso->texto_rvoe = $request->get('texto_rvoe');
+        $curso->pdf = $request->get('pdf');
         $curso->fecha_inicial = $request->get('fecha_inicial');
         $curso->hora_inicial = $request->get('hora_inicial');
         $curso->fecha_final = $request->get('fecha_final');
@@ -78,7 +88,8 @@ class CursosController extends Controller
         $curso->destacado = $request->get('destacado');
         $curso->estatus = $request->get('estatus');
         $curso->seccion_unam = $request->get('seccion_unam');
-
+        $curso->titulo_hono = $request->get('titulo_hono');
+        $curso->texto_conocer = $request->get('texto_conocer');
 
         $valorAleatorio = uniqid();
         $curso->slug = Str::of($request->get('nombre'))->slug("-")->limit(300 - mb_strlen($valorAleatorio) - 1, "")->trim("-")->append("-", $valorAleatorio);
@@ -131,11 +142,11 @@ class CursosController extends Controller
         if($dominio == 'plataforma.imnasmexico.com'){
             $ruta_materiales = base_path('../public_html/plataforma.imnasmexico.com/materiales');
             $ruta_curso = base_path('../public_html/plataforma.imnasmexico.com/curso');
-            $ruta_video = base_path('../public_html/plataforma.imnasmexico.com/clase_grabada');
+            $pdf = base_path('../public_html/plataforma.imnasmexico.com/pdf');
         }else{
             $ruta_materiales = public_path() . '/materiales';
             $ruta_curso = public_path() . '/curso';
-            $ruta_video = public_path() . '/clase_grabada';
+            $pdf = public_path() . '/pdf';
         }
 
         $fechaHoraActual = date('Y-m-d H:i:s');
@@ -165,7 +176,15 @@ class CursosController extends Controller
             $curso->foto = $fileName;
         }
 
+        if ($request->hasFile("pdf")) {
+            $file = $request->file('pdf');
+            $path = $pdf;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $curso->pdf = $fileName;
+        }
 
+        $curso->texto_rvoe = $request->get('texto_rvoe');
         $curso->fecha_inicial = $request->get('fecha_inicial');
         $curso->hora_inicial = $request->get('hora_inicial');
         $curso->fecha_final = $request->get('fecha_final');
@@ -184,6 +203,8 @@ class CursosController extends Controller
         $curso->destacado = $request->get('destacado');
         $curso->estatus = $request->get('estatus');
         $curso->seccion_unam = $request->get('seccion_unam');
+        $curso->titulo_hono = $request->get('titulo_hono');
+        $curso->texto_conocer = $request->get('texto_conocer');
 
         $curso->update();
 

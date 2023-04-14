@@ -113,7 +113,12 @@
      });
 
      tinymce.init({
-       selector: '#informacion', // Replace this CSS selector to match the placeholder element for TinyMCE
+       selector: '#texto_rvoe', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#texto_conocer', // Replace this CSS selector to match the placeholder element for TinyMCE
        plugins: 'code table lists'
      });
 

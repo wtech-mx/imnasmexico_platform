@@ -89,8 +89,10 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @else
                             <p class="espacio_w">Liga Clase</p>
                             @endif
+
+                        @else
+                            <p class="espacio_w">Contácto</p>
                         @endif
-                        <p class="espacio_w">Contácto</p>
                     @endguest
                     <div class="content_nav d-inline-block">
                         <img class="icon_nav_course" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
@@ -280,6 +282,19 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <p class="tittle_abstract ">
                             <?php echo $curso->temario?>
                         </p>
+
+                        @if($curso->pdf != NULL)
+                            <a class="btn btn-primario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" href="{{asset('pdf/'. $curso->pdf) }}" target="_blank">
+                                <div class="d-flex justify-content-around">
+                                    <p class="card_tittle_btn my-auto">
+                                        Ver más
+                                    </p>
+                                    <div class="card_bg_btn ">
+                                        <i class="fas fa-file-pdf card_icon_btn"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        @endif
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
                                 <div class="d-flex justify-content-around">
@@ -363,8 +378,10 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                                 <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                         </div>
                                     </div>
+                                    <p class="text-center">
+                                        <?php echo $curso->texto_conocer?>
+                                    </p>
                                 </div>
-
                             @endif
 
                             @if($curso->sep == 1)
@@ -377,6 +394,9 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                             <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                         </div>
                                     </div>
+                                    <p class="text-center">
+                                        <?php echo $curso->texto_rvoe?>
+                                    </p>
                                 </div>
                             @endif
 
@@ -406,9 +426,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                                 <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                         </div>
                                     </div>
-                                    <p class="text-center">
-                                        <strong>Documentos de Certificadora Nacional</strong>
-                                     </p>
+                                    @if ($curso->titulo_hono == 1)
+                                        <p class="text-center">
+                                            <strong>Titulo Honorifico</strong>
+                                        </p>
+                                     @else
+                                        <p class="text-center">
+                                            <strong>Documentos de Certificadora Nacional</strong>
+                                        </p>
+                                     @endif
                                 </div>
                             @endif
 
@@ -1048,6 +1074,19 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <?php echo $curso->temario?>
                         </p>
 
+                        @if($curso->pdf != NULL)
+                            <a class="btn btn-primario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" href="{{asset('pdf/'. $curso->pdf) }}" target="_blank">
+                                <div class="d-flex justify-content-around">
+                                    <p class="card_tittle_btn my-auto">
+                                        Ver más
+                                    </p>
+                                    <div class="card_bg_btn ">
+                                        <i class="fas fa-file-pdf card_icon_btn"></i>
+                                    </div>
+                                </div>
+                            </a>
+                        @endif
+
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
                                 <div class="d-flex justify-content-around">
@@ -1174,6 +1213,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                             </p>
                                         </div>
                                     </div>
+                                    @if ($curso->titulo_hono == 1)
+                                        <p class="text-center">
+                                            <strong>Titulo Honorifico</strong>
+                                        </p>
+                                    @else
+                                        <p class="text-center">
+                                            <strong>Documentos de Certificadora Nacional</strong>
+                                        </p>
+                                    @endif
                                 </div>
                             @endif
 

@@ -222,6 +222,19 @@
                                                         @endif
                                                     </div>
                                                 </div>
+
+
+                                                <div class="form-check col-2">
+                                                    <div class="form-group">
+                                                        @if ($curso->titulo_hono == 1)
+                                                            <input class="form-check-input" type="checkbox" value="1" id="titulo_hono" name="titulo_hono" checked>
+                                                            <label for="nota">Titulo Honorifico</label>
+                                                        @else
+                                                            <input class="form-check-input" type="checkbox" value="1" id="titulo_hono" name="titulo_hono">
+                                                            <label for="nota">Titulo Honorifico</label>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="button-row d-flex mt-4">
                                                 <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
@@ -250,8 +263,15 @@
 
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="fecha">Informacion</label>
-                                                        <textarea name="informacion" id="informacion" cols="10" rows="3" class="form-control"> {{$curso->informacion}}</textarea>
+                                                        <label for="fecha">RVOE</label>
+                                                        <textarea name="texto_rvoe" id="texto_rvoe" cols="10" rows="3" class="form-control"> {{$curso->texto_rvoe}}</textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="nota">CONOCER</label>
+                                                        <textarea name="texto_conocer" id="texto_conocer" cols="10" rows="3" class="form-control"> {{$curso->texto_conocer}}</textarea>
                                                     </div>
                                                 </div>
 
@@ -266,6 +286,15 @@
                                                 <div class="col-6">
                                                     <div class="input-group">
                                                         <img id="blah" src="{{asset('materiales/'.$curso->materiales) }}" alt="Imagen" style="width: 150px; height: 150px;"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label for="fecha">PDF Descarga</label>
+                                                            <input type="file" id="pdf" name="pdf" class="form-control" value="{{$curso->pdf}}">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

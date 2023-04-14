@@ -185,6 +185,14 @@
                                                     </div>
                                                 </div>
                                             </div>
+
+                                            <div class="form-check col-2">
+                                                <div class="form-group">
+                                                    <input class="form-check-input" type="checkbox" value="1" id="titulo_hono" name="titulo_hono">
+                                                    <label for="nota">Titulo Honorifico</label>
+                                                </div>
+                                            </div>
+
                                             <div class="button-row d-flex mt-4">
                                                 <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
                                                 <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
@@ -212,8 +220,15 @@
 
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="fecha">Informacion</label>
-                                                        <textarea name="informacion" id="informacion" cols="10" rows="3" class="form-control"></textarea>
+                                                        <label for="fecha">RVOE</label>
+                                                        <textarea name="texto_rvoe" id="texto_rvoe" cols="10" rows="3" class="form-control"></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class=" col-12">
+                                                    <div class="form-group">
+                                                        <label for="nota">CONOCER</label>
+                                                        <textarea name="texto_conocer" id="texto_conocer" cols="10" rows="3" class="form-control"></textarea>
                                                     </div>
                                                 </div>
 
@@ -222,6 +237,15 @@
                                                         <div class="form-group">
                                                             <<label for="fecha">Materiales de Clase</label>
                                                             <input type="file" id="materiales" name="materiales" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <<label for="fecha">PDF Descarga</label>
+                                                            <input type="file" id="pdf" name="pdf" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
