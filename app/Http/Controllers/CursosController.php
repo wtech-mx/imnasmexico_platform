@@ -59,6 +59,7 @@ class CursosController extends Controller
         }
 
         $curso->clase_grabada = $request->get('clase_grabada');
+
         $curso->fecha_inicial = $request->get('fecha_inicial');
         $curso->hora_inicial = $request->get('hora_inicial');
         $curso->fecha_final = $request->get('fecha_final');
@@ -150,15 +151,11 @@ class CursosController extends Controller
             $curso->materiales = $fileName;
         }
 
-        // if ($request->hasFile("clase_grabada")) {
-        //     $file = $request->file('clase_grabada');
-        //     $path = $ruta_video;
-        //     $fileName2 = uniqid() . $file->getClientOriginalName();
-        //     $file->move($path, $fileName2);
-        //     $curso->clase_grabada = $fileName2;
-        //     $curso->video_cad = 1;
-        //     $curso->fecha_video = $fechaHoraActual;
-        // }
+        if ($request->get('clase_grabada')) {
+            $curso->clase_grabada = $request->get('clase_grabada');
+            $curso->video_cad = 1;
+            $curso->fecha_video = $fechaHoraActual;
+        }
 
         if ($request->hasFile("foto")) {
             $file = $request->file('foto');
@@ -168,7 +165,7 @@ class CursosController extends Controller
             $curso->foto = $fileName;
         }
 
-        $curso->clase_grabada = $request->get('clase_grabada');
+
         $curso->fecha_inicial = $request->get('fecha_inicial');
         $curso->hora_inicial = $request->get('hora_inicial');
         $curso->fecha_final = $request->get('fecha_final');
