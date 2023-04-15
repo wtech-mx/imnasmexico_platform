@@ -147,7 +147,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mt-5" href="#contactenos">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contáctenos
+                                        Contáctanos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -260,7 +260,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mt-5" href="#contactenos">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contáctenos
+                                        Contáctanos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -386,7 +386,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mt-5" href="#contactenos">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contáctenos
+                                        Contáctanos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -584,7 +584,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mt-5" href="#contactenos">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contáctenos
+                                        Contáctanos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -816,7 +816,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                 @guest
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="title_curso text-center mb-5">Contáctenos</h2>
+                        <h2 class="title_curso text-center mb-5">Contáctanos</h2>
                     </div>
 
                     <div class="col-12 m-auto">
@@ -842,7 +842,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <a class="btn btn-secundario space_cs_rs mt-5" href="#contactenos">
                             <div class="d-flex justify-content-around">
                                 <p class="card_tittle_btn my-auto">
-                                    Contáctenos
+                                    Contáctanos
                                 </p>
                                 <div class="card_bg_btn_secundario">
                                     <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -981,7 +981,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                     <a class="btn btn-secundario space_cs_rs mt-5" href="#contactenos">
                                         <div class="d-flex justify-content-around">
                                             <p class="card_tittle_btn my-auto">
-                                                Contáctenos
+                                                Contáctanos
                                             </p>
                                             <div class="card_bg_btn_secundario">
                                                 <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -1165,7 +1165,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mt-5" href="#contactenos">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contáctenos
+                                        Contáctanos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -1279,7 +1279,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mt-5" href="#contactenos">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contáctenos
+                                        Contáctanos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -1406,7 +1406,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" href="#contactenos">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contáctenos
+                                        Contáctanos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -1597,7 +1597,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <a class="btn btn-secundario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" href="#contactenos">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Contáctenos
+                                        Contáctanos
                                     </p>
                                     <div class="card_bg_btn_secundario">
                                         <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
@@ -1767,7 +1767,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                 @guest
                     <div class="row">
                         <div class="col-12">
-                            <h2 class="title_curso text-center mb-5">Contáctenos</h2>
+                            <h2 class="title_curso text-center mb-5">Contáctanos</h2>
                         </div>
 
                         <div class="col-12 m-auto">
@@ -1809,7 +1809,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                     @else
                         <div class="row">
                             <div class="col-12">
-                                <h2 class="title_curso text-center mb-5">Contáctenos</h2>
+                                <h2 class="title_curso text-center mb-5">Contáctanos</h2>
                             </div>
 
                             <div class="col-12 m-auto">
@@ -1834,7 +1834,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                 <a class="btn btn-secundario space_cs_rs mt-5" href="#contactenos">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn my-auto">
-                                            Contáctenos
+                                            Contáctanos
                                         </p>
                                         <div class="card_bg_btn_secundario">
                                             <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
