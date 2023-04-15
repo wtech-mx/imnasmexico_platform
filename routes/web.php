@@ -95,6 +95,7 @@ Route::post('/paquetes/resultado5', [App\Http\Controllers\OrderController::class
 Route::get('/paquetes/resumen', [App\Http\Controllers\CursoUsersController::class, 'resumen'])->name('carrito.resumen');
 
 // =============== P A G O S ===============================
+Route::post('/clases_gratis', [OrderController::class, 'clases_gratis'])->name('clases_gratis');
 Route::post('/process-payment', [OrderController::class, 'processPayment'])->name('process-payment');
 
 Route::post('/webhooks', WebhooksController::class);

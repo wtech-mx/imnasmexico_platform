@@ -157,34 +157,72 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                             <div class="collapse mt-3" id="collapseinfo">
                                 <div class="card card-body card_colapsable_comprar">
-                                    <div class="row mb-3">
-                                        @foreach ($tickets as $ticket)
-                                            <div class="col-4 mt-3">
-                                                <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                            </div>
-                                            <div class="col-3 mt-3">
-                                                @if ($ticket->descuento == NULL)
-                                                    <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                                @else
-                                                    <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                    <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
-                                                @endif
-                                            </div>
+                                    @if($curso->precio == 0)
+                                        <div class="row mb-3">
+                                            <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                @csrf
+                                                <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-5 mt-3">
-                                                <p class="btn-holder">
-                                                    <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                        <i class="fas fa-ticket-alt"></i> Comprar
-                                                    </a>
-                                                </p>
-                                            </div>
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-12">
-                                                <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                            </div>
-                                        @endforeach
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                            <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                        </div>
+                                                    </div>
 
-                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="d-flex justify-content-center">
+                                                            <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="row mb-3">
+                                            @foreach ($tickets as $ticket)
+                                                <div class="col-4 mt-3">
+                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                </div>
+                                                <div class="col-3 mt-3">
+                                                    @if ($ticket->descuento == NULL)
+                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                    @else
+                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                    @endif
+                                                </div>
+
+                                                <div class="col-5 mt-3">
+                                                    <p class="btn-holder">
+                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                            <i class="fas fa-ticket-alt"></i> Comprar
+                                                        </a>
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         @endif
@@ -232,34 +270,72 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                             <div class="collapse mt-3" id="collapseobjetivos">
                                 <div class="card card-body card_colapsable_comprar">
-                                    <div class="row mb-3">
-                                        @foreach ($tickets as $ticket)
-                                            <div class="col-4 mt-3">
-                                                <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                            </div>
-                                            <div class="col-3 mt-3">
-                                                @if ($ticket->descuento == NULL)
-                                                    <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                                @else
-                                                    <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                    <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
-                                                @endif
-                                            </div>
+                                    @if($curso->precio == 0)
+                                        <div class="row mb-3">
+                                            <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                @csrf
+                                                <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-5 mt-3">
-                                                <p class="btn-holder">
-                                                    <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                        <i class="fas fa-ticket-alt"></i> Comprar
-                                                    </a>
-                                                </p>
-                                            </div>
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-12">
-                                                <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                            </div>
-                                        @endforeach
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                            <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                        </div>
+                                                    </div>
 
-                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="d-flex justify-content-center">
+                                                            <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="row mb-3">
+                                            @foreach ($tickets as $ticket)
+                                                <div class="col-4 mt-3">
+                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                </div>
+                                                <div class="col-3 mt-3">
+                                                    @if ($ticket->descuento == NULL)
+                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                    @else
+                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                    @endif
+                                                </div>
+
+                                                <div class="col-5 mt-3">
+                                                    <p class="btn-holder">
+                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                            <i class="fas fa-ticket-alt"></i> Comprar
+                                                        </a>
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         @endif
@@ -320,34 +396,72 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                             <div class="collapse mt-3" id="collapsetemario">
                                 <div class="card card-body card_colapsable_comprar">
-                                    <div class="row mb-3">
-                                        @foreach ($tickets as $ticket)
-                                            <div class="col-4 mt-3">
-                                                <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                            </div>
-                                            <div class="col-3 mt-3">
-                                                @if ($ticket->descuento == NULL)
-                                                    <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                                @else
-                                                    <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                    <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
-                                                @endif
-                                            </div>
+                                    @if($curso->precio == 0)
+                                        <div class="row mb-3">
+                                            <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                @csrf
+                                                <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-5 mt-3">
-                                                <p class="btn-holder">
-                                                    <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                        <i class="fas fa-ticket-alt"></i> Comprar
-                                                    </a>
-                                                </p>
-                                            </div>
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-12">
-                                                <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                            </div>
-                                        @endforeach
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                            <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                        </div>
+                                                    </div>
 
-                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="d-flex justify-content-center">
+                                                            <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="row mb-3">
+                                            @foreach ($tickets as $ticket)
+                                                <div class="col-4 mt-3">
+                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                </div>
+                                                <div class="col-3 mt-3">
+                                                    @if ($ticket->descuento == NULL)
+                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                    @else
+                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                    @endif
+                                                </div>
+
+                                                <div class="col-5 mt-3">
+                                                    <p class="btn-holder">
+                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                            <i class="fas fa-ticket-alt"></i> Comprar
+                                                        </a>
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         @endif
@@ -480,34 +594,72 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                             <div class="collapse mt-3" id="collapseinfo">
                                 <div class="card card-body card_colapsable_comprar">
-                                    <div class="row mb-3">
-                                        @foreach ($tickets as $ticket)
-                                            <div class="col-4 mt-3">
-                                                <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                            </div>
-                                            <div class="col-3 mt-3">
-                                                @if ($ticket->descuento == NULL)
-                                                    <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                                @else
-                                                    <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                    <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
-                                                @endif
-                                            </div>
+                                    @if($curso->precio == 0)
+                                        <div class="row mb-3">
+                                            <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                @csrf
+                                                <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-5 mt-3">
-                                                <p class="btn-holder">
-                                                    <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                        <i class="fas fa-ticket-alt"></i> Comprar
-                                                    </a>
-                                                </p>
-                                            </div>
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-12">
-                                                <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                            </div>
-                                        @endforeach
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                            <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                        </div>
+                                                    </div>
 
-                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="d-flex justify-content-center">
+                                                            <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="row mb-3">
+                                            @foreach ($tickets as $ticket)
+                                                <div class="col-4 mt-3">
+                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                </div>
+                                                <div class="col-3 mt-3">
+                                                    @if ($ticket->descuento == NULL)
+                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                    @else
+                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                    @endif
+                                                </div>
+
+                                                <div class="col-5 mt-3">
+                                                    <p class="btn-holder">
+                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                            <i class="fas fa-ticket-alt"></i> Comprar
+                                                        </a>
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         @endif
@@ -701,34 +853,72 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                     </div>
                         <div class="collapse mt-3" id="collapseinfo">
                             <div class="card card-body card_colapsable_comprar">
-                                <div class="row mb-3">
-                                    @foreach ($tickets as $ticket)
-                                        <div class="col-4 mt-3">
-                                            <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                        </div>
-                                        <div class="col-3 mt-3">
-                                            @if ($ticket->descuento == NULL)
-                                                <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                            @else
-                                                <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
-                                            @endif
-                                        </div>
+                                @if($curso->precio == 0)
+                                    <div class="row mb-3">
+                                        <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                            @csrf
+                                            <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="input-group flex-nowrap mt-4">
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                        <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                    </div>
+                                                </div>
 
-                                        <div class="col-5 mt-3">
-                                            <p class="btn-holder">
-                                                <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                    <i class="fas fa-ticket-alt"></i> Comprar
-                                                </a>
-                                            </p>
-                                        </div>
+                                                <div class="col-12">
+                                                    <div class="input-group flex-nowrap mt-4">
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                        <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                    </div>
+                                                </div>
 
-                                        <div class="col-12">
-                                            <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                        </div>
-                                    @endforeach
+                                                <div class="col-12">
+                                                    <div class="input-group flex-nowrap mt-4">
+                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                        <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                    </div>
+                                                </div>
 
-                                </div>
+                                                <div class="col-12">
+                                                    <div class="d-flex justify-content-center">
+                                                        <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                @else
+                                    <div class="row mb-3">
+                                        @foreach ($tickets as $ticket)
+                                            <div class="col-4 mt-3">
+                                                <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                            </div>
+                                            <div class="col-3 mt-3">
+                                                @if ($ticket->descuento == NULL)
+                                                    <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                @else
+                                                    <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                    <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                @endif
+                                            </div>
+
+                                            <div class="col-5 mt-3">
+                                                <p class="btn-holder">
+                                                    <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                        <i class="fas fa-ticket-alt"></i> Comprar
+                                                    </a>
+                                                </p>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                            </div>
+                                        @endforeach
+
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     @endif
@@ -802,34 +992,72 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                 </div>
                                     <div class="collapse mt-3" id="collapseinfo">
                                         <div class="card card-body card_colapsable_comprar">
-                                            <div class="row mb-3">
-                                                @foreach ($tickets as $ticket)
-                                                    <div class="col-4 mt-3">
-                                                        <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                                    </div>
-                                                    <div class="col-3 mt-3">
-                                                        @if ($ticket->descuento == NULL)
-                                                            <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                                        @else
-                                                            <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                            <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
-                                                        @endif
-                                                    </div>
+                                            @if($curso->precio == 0)
+                                                <div class="row mb-3">
+                                                    <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                        @csrf
+                                                        <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="input-group flex-nowrap mt-4">
+                                                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                                    <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                                </div>
+                                                            </div>
 
-                                                    <div class="col-5 mt-3">
-                                                        <p class="btn-holder">
-                                                            <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                                <i class="fas fa-ticket-alt"></i> Comprar
-                                                            </a>
-                                                        </p>
-                                                    </div>
+                                                            <div class="col-12">
+                                                                <div class="input-group flex-nowrap mt-4">
+                                                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                                    <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                                </div>
+                                                            </div>
 
-                                                    <div class="col-12">
-                                                        <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                                    </div>
-                                                @endforeach
+                                                            <div class="col-12">
+                                                                <div class="input-group flex-nowrap mt-4">
+                                                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                                    <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                                </div>
+                                                            </div>
 
-                                            </div>
+                                                            <div class="col-12">
+                                                                <div class="d-flex justify-content-center">
+                                                                    <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            @else
+                                                <div class="row mb-3">
+                                                    @foreach ($tickets as $ticket)
+                                                        <div class="col-4 mt-3">
+                                                            <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                        </div>
+                                                        <div class="col-3 mt-3">
+                                                            @if ($ticket->descuento == NULL)
+                                                                <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                            @else
+                                                                <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                                <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                            @endif
+                                                        </div>
+
+                                                        <div class="col-5 mt-3">
+                                                            <p class="btn-holder">
+                                                                <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                                    <i class="fas fa-ticket-alt"></i> Comprar
+                                                                </a>
+                                                            </p>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                        </div>
+                                                    @endforeach
+
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 @endif
@@ -947,34 +1175,72 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                             <div class="collapse mt-3" id="collapseinfo">
                                 <div class="card card-body card_colapsable_comprar">
-                                    <div class="row mb-3">
-                                        @foreach ($tickets as $ticket)
-                                            <div class="col-4 mt-3">
-                                                <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                            </div>
-                                            <div class="col-3 mt-3">
-                                                @if ($ticket->descuento == NULL)
-                                                    <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                                @else
-                                                    <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                    <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
-                                                @endif
-                                            </div>
+                                    @if($curso->precio == 0)
+                                        <div class="row mb-3">
+                                            <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                @csrf
+                                                <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-5 mt-3">
-                                                <p class="btn-holder">
-                                                    <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                        <i class="fas fa-ticket-alt"></i> Comprar
-                                                    </a>
-                                                </p>
-                                            </div>
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-12">
-                                                <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                            </div>
-                                        @endforeach
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                            <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                        </div>
+                                                    </div>
 
-                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="d-flex justify-content-center">
+                                                            <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="row mb-3">
+                                            @foreach ($tickets as $ticket)
+                                                <div class="col-4 mt-3">
+                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                </div>
+                                                <div class="col-3 mt-3">
+                                                    @if ($ticket->descuento == NULL)
+                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                    @else
+                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                    @endif
+                                                </div>
+
+                                                <div class="col-5 mt-3">
+                                                    <p class="btn-holder">
+                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                            <i class="fas fa-ticket-alt"></i> Comprar
+                                                        </a>
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         @endif
@@ -1023,34 +1289,72 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                             <div class="collapse mt-3" id="collapseobjetivos">
                                 <div class="card card-body card_colapsable_comprar">
-                                    <div class="row mb-3">
-                                        @foreach ($tickets as $ticket)
-                                            <div class="col-4 mt-3">
-                                                <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                            </div>
-                                            <div class="col-3 mt-3">
-                                                @if ($ticket->descuento == NULL)
-                                                    <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                                @else
-                                                    <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                    <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
-                                                @endif
-                                            </div>
+                                    @if($curso->precio == 0)
+                                        <div class="row mb-3">
+                                            <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                @csrf
+                                                <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-5 mt-3">
-                                                <p class="btn-holder">
-                                                    <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                        <i class="fas fa-ticket-alt"></i> Comprar
-                                                    </a>
-                                                </p>
-                                            </div>
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-12">
-                                                <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                            </div>
-                                        @endforeach
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                            <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                        </div>
+                                                    </div>
 
-                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="d-flex justify-content-center">
+                                                            <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="row mb-3">
+                                            @foreach ($tickets as $ticket)
+                                                <div class="col-4 mt-3">
+                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                </div>
+                                                <div class="col-3 mt-3">
+                                                    @if ($ticket->descuento == NULL)
+                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                    @else
+                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                    @endif
+                                                </div>
+
+                                                <div class="col-5 mt-3">
+                                                    <p class="btn-holder">
+                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                            <i class="fas fa-ticket-alt"></i> Comprar
+                                                        </a>
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         @endif
@@ -1112,34 +1416,72 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                             <div class="collapse mt-3" id="collapsetemario">
                                 <div class="card card-body card_colapsable_comprar">
-                                    <div class="row mb-3">
-                                        @foreach ($tickets as $ticket)
-                                            <div class="col-4 mt-3">
-                                                <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                            </div>
-                                            <div class="col-3 mt-3">
-                                                @if ($ticket->descuento == NULL)
-                                                    <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                                @else
-                                                    <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                    <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
-                                                @endif
-                                            </div>
+                                    @if($curso->precio == 0)
+                                        <div class="row mb-3">
+                                            <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                @csrf
+                                                <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-5 mt-3">
-                                                <p class="btn-holder">
-                                                    <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                        <i class="fas fa-ticket-alt"></i> Comprar
-                                                    </a>
-                                                </p>
-                                            </div>
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-12">
-                                                <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                            </div>
-                                        @endforeach
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                            <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                        </div>
+                                                    </div>
 
-                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="d-flex justify-content-center">
+                                                            <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="row mb-3">
+                                            @foreach ($tickets as $ticket)
+                                                <div class="col-4 mt-3">
+                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                </div>
+                                                <div class="col-3 mt-3">
+                                                    @if ($ticket->descuento == NULL)
+                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                    @else
+                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                    @endif
+                                                </div>
+
+                                                <div class="col-5 mt-3">
+                                                    <p class="btn-holder">
+                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                            <i class="fas fa-ticket-alt"></i> Comprar
+                                                        </a>
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         @endif
@@ -1241,7 +1583,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @endif
                         </div>
                         @if ($curso->estatus == 1)
-                            <a class="btn btn-primario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
+                            <a class="btn btn-primario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapseavales" role="button" aria-expanded="false" aria-controls="collapseavales">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
                                         Comprar ahora
@@ -1263,36 +1605,74 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                 </div>
                             </a>
 
-                            <div class="collapse mt-3" id="collapseinfo">
+                            <div class="collapse mt-3" id="collapseavales">
                                 <div class="card card-body card_colapsable_comprar">
-                                    <div class="row mb-3">
-                                        @foreach ($tickets as $ticket)
-                                            <div class="col-4 mt-3">
-                                                <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                            </div>
-                                            <div class="col-3 mt-3">
-                                                @if ($ticket->descuento == NULL)
-                                                    <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                                @else
-                                                    <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                    <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
-                                                @endif
-                                            </div>
+                                    @if($curso->precio == 0)
+                                        <div class="row mb-3">
+                                            <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                @csrf
+                                                <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-5 mt-3">
-                                                <p class="btn-holder">
-                                                    <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                        <i class="fas fa-ticket-alt"></i> Comprar
-                                                    </a>
-                                                </p>
-                                            </div>
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                        </div>
+                                                    </div>
 
-                                            <div class="col-12">
-                                                <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                            </div>
-                                        @endforeach
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                            <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                        </div>
+                                                    </div>
 
-                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="d-flex justify-content-center">
+                                                            <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    @else
+                                        <div class="row mb-3">
+                                            @foreach ($tickets as $ticket)
+                                                <div class="col-4 mt-3">
+                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                </div>
+                                                <div class="col-3 mt-3">
+                                                    @if ($ticket->descuento == NULL)
+                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                    @else
+                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                    @endif
+                                                </div>
+
+                                                <div class="col-5 mt-3">
+                                                    <p class="btn-holder">
+                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                            <i class="fas fa-ticket-alt"></i> Comprar
+                                                        </a>
+                                                    </p>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         @endif
@@ -1440,7 +1820,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             @if ($curso->estatus == 1)
                             <div class="d-flex justify-content-center">
 
-                                <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
+                                <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseconta" role="button" aria-expanded="false" aria-controls="collapseconta">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn my-auto">
                                             Comprar ahora
@@ -1463,36 +1843,74 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                 </a>
 
                             </div>
-                                <div class="collapse mt-3" id="collapseinfo">
+                                <div class="collapse mt-3" id="collapseconta">
                                     <div class="card card-body card_colapsable_comprar">
-                                        <div class="row mb-3">
-                                            @foreach ($tickets as $ticket)
-                                                <div class="col-4 mt-3">
-                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                                </div>
-                                                <div class="col-3 mt-3">
-                                                    @if ($ticket->descuento == NULL)
-                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                                    @else
-                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
-                                                    @endif
-                                                </div>
+                                        @if($curso->precio == 0)
+                                            <div class="row mb-3">
+                                                <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                    @csrf
+                                                    <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                                <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                            </div>
+                                                        </div>
 
-                                                <div class="col-5 mt-3">
-                                                    <p class="btn-holder">
-                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                            <i class="fas fa-ticket-alt"></i> Comprar
-                                                        </a>
-                                                    </p>
-                                                </div>
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                                <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                            </div>
+                                                        </div>
 
-                                                <div class="col-12">
-                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                                </div>
-                                            @endforeach
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                                <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                            </div>
+                                                        </div>
 
-                                        </div>
+                                                        <div class="col-12">
+                                                            <div class="d-flex justify-content-center">
+                                                                <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        @else
+                                            <div class="row mb-3">
+                                                @foreach ($tickets as $ticket)
+                                                    <div class="col-4 mt-3">
+                                                        <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                    </div>
+                                                    <div class="col-3 mt-3">
+                                                        @if ($ticket->descuento == NULL)
+                                                            <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                        @else
+                                                            <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                            <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                        @endif
+                                                    </div>
+
+                                                    <div class="col-5 mt-3">
+                                                        <p class="btn-holder">
+                                                            <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                                <i class="fas fa-ticket-alt"></i> Comprar
+                                                            </a>
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                    </div>
+                                                @endforeach
+
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             @endif
