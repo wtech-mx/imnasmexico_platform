@@ -287,7 +287,7 @@
                             <p class="text-center">
                                 <img class="img_card_objetivos" src="{{asset('assets/user/icons/MEDICOS.png')}}" alt="">
                             </p>
-                            <p class="text-center card_title_objetivos">Médicos</p>
+                            <p class="text-center card_title_objetivos">MÉDICOS</p>
                             <p class="text-center card_text_objetivos">
 
                             </p>
