@@ -11,7 +11,7 @@
 
 @section('content')
 
-<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/instalaciones/retocadas/6.jpg')}}')">
+<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/instalaciones/portada.jpg')}}')">
     <span class="mask"></span>
     <div class="row margin_home_nav ">
 
