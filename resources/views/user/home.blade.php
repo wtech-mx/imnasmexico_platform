@@ -287,9 +287,22 @@
                             <p class="text-center">
                                 <img class="img_card_objetivos" src="{{asset('assets/user/icons/MEDICOS.png')}}" alt="">
                             </p>
+                            <p class="text-center card_title_objetivos">Médicos</p>
+                            <p class="text-center card_text_objetivos">
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6 py-3">
+                    <div class="d-flex justify-content-start">
+                        <div class="card_objetivos">
+                            <p class="text-center">
+                                <img class="img_card_objetivos" src="{{asset('assets/user/icons/EXPERTOS DE LA SALUD.png')}}" alt="">
+                            </p>
                             <p class="text-center card_title_objetivos">APASIONADAS POR LA SALUD</p>
                             <p class="text-center card_text_objetivos">
-                                Medicos
                             </p>
                         </div>
                     </div>
