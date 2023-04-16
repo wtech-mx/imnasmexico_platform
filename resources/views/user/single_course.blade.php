@@ -135,9 +135,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
                                 <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Comprar ahora
-                                    </p>
+                                            @if ($curso->precio == 0)
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Registrarse
+                                                </p>
+                                            @else
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Comprar ahora
+                                                </p>
+                                            @endif
                                     <div class="card_bg_btn ">
                                         <i class="fas fa-cart-plus card_icon_btn"></i>
                                     </div>
@@ -248,9 +254,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs  mt-5" data-bs-toggle="collapse" href="#collapseobjetivos" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
                                 <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Comprar ahora
-                                    </p>
+                                            @if ($curso->precio == 0)
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Registrarse
+                                                </p>
+                                            @else
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Comprar ahora
+                                                </p>
+                                            @endif
                                     <div class="card_bg_btn ">
                                         <i class="fas fa-cart-plus card_icon_btn"></i>
                                     </div>
@@ -374,9 +386,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
                                 <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Comprar ahora
-                                    </p>
+                                            @if ($curso->precio == 0)
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Registrarse
+                                                </p>
+                                            @else
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Comprar ahora
+                                                </p>
+                                            @endif
                                     <div class="card_bg_btn ">
                                         <i class="fas fa-cart-plus card_icon_btn"></i>
                                     </div>
@@ -572,9 +590,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
                                 <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Comprar ahora
-                                    </p>
+                                            @if ($curso->precio == 0)
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Registrarse
+                                                </p>
+                                            @else
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Comprar ahora
+                                                </p>
+                                            @endif
                                     <div class="card_bg_btn ">
                                         <i class="fas fa-cart-plus card_icon_btn"></i>
                                     </div>
@@ -830,9 +854,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                         <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
                             <div class="d-flex justify-content-around">
-                                <p class="card_tittle_btn my-auto">
+                                @if ($curso->precio == 0)
+                                <p class="card_tittle_btn_grid my-auto">
+                                    Registrarse
+                                </p>
+                            @else
+                                <p class="card_tittle_btn_grid my-auto">
                                     Comprar ahora
                                 </p>
+                            @endif
                                 <div class="card_bg_btn ">
                                     <i class="fas fa-cart-plus card_icon_btn"></i>
                                 </div>
@@ -969,9 +999,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                                     <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
                                         <div class="d-flex justify-content-around">
-                                            <p class="card_tittle_btn my-auto">
-                                                Comprar ahora
-                                            </p>
+                                            @if ($curso->precio == 0)
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Registrarse
+                                                </p>
+                                            @else
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Comprar ahora
+                                                </p>
+                                            @endif
                                             <div class="card_bg_btn ">
                                                 <i class="fas fa-cart-plus card_icon_btn"></i>
                                             </div>
@@ -1153,9 +1189,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
                                 <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Comprar ahora
-                                    </p>
+                                            @if ($curso->precio == 0)
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Registrarse
+                                                </p>
+                                            @else
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Comprar ahora
+                                                </p>
+                                            @endif
                                     <div class="card_bg_btn ">
                                         <i class="fas fa-cart-plus card_icon_btn"></i>
                                     </div>
@@ -1267,9 +1309,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs  mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapseobjetivos" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
                                 <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Comprar ahora
-                                    </p>
+                                            @if ($curso->precio == 0)
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Registrarse
+                                                </p>
+                                            @else
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Comprar ahora
+                                                </p>
+                                            @endif
                                     <div class="card_bg_btn ">
                                         <i class="fas fa-cart-plus card_icon_btn"></i>
                                     </div>
@@ -1394,9 +1442,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
                                 <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Comprar ahora
-                                    </p>
+                                            @if ($curso->precio == 0)
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Registrarse
+                                                </p>
+                                            @else
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Comprar ahora
+                                                </p>
+                                            @endif
                                     <div class="card_bg_btn ">
                                         <i class="fas fa-cart-plus card_icon_btn"></i>
                                     </div>
@@ -1585,9 +1639,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapseavales" role="button" aria-expanded="false" aria-controls="collapseavales">
                                 <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Comprar ahora
-                                    </p>
+                                            @if ($curso->precio == 0)
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Registrarse
+                                                </p>
+                                            @else
+                                                <p class="card_tittle_btn_grid my-auto">
+                                                    Comprar ahora
+                                                </p>
+                                            @endif
                                     <div class="card_bg_btn ">
                                         <i class="fas fa-cart-plus card_icon_btn"></i>
                                     </div>
@@ -1822,9 +1882,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                                 <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseconta" role="button" aria-expanded="false" aria-controls="collapseconta">
                                     <div class="d-flex justify-content-around">
-                                        <p class="card_tittle_btn my-auto">
-                                            Comprar ahora
-                                        </p>
+                                        @if ($curso->precio == 0)
+                                            <p class="card_tittle_btn_grid my-auto">
+                                                Registrarse
+                                            </p>
+                                        @else
+                                            <p class="card_tittle_btn_grid my-auto">
+                                                Comprar ahora
+                                            </p>
+                                        @endif
                                         <div class="card_bg_btn ">
                                             <i class="fas fa-cart-plus card_icon_btn"></i>
                                         </div>
