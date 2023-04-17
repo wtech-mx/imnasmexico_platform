@@ -510,16 +510,13 @@
     </div>
 </section>
 
-{{--Productos --}}
+{{--Productos
 <section class="primario bg_overley" style="background-color:#836262;">
     <div class="row">
         <div class="col-12">
             <h2 class="titulo_alfa mt-3 mb-5 text-center" style="color: #fff!important">
                 Nuestro Catálogo
             </h2>
-            {{-- <p class="text-center mt-5">
-                <img class="px-3" src="{{asset('assets/user/utilidades/captura_productos.png')}}" alt="" style="width:80%;">
-            </p> --}}
         </div>
 
         <div class="col-12 m-auto mb-5">
@@ -561,7 +558,7 @@
 
         </div>
     </div>
-</section>
+</section>--}}
 
 {{--UNAM --}}
 <section class="primario bg_overley" style="background-color:#F5ECE4;">

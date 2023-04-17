@@ -85,7 +85,7 @@ class PagosFueraController extends Controller
     }
 
     public function index_pago(){
-        $orders = Orders::get();
+        $orders = Orders::orderBy('id','DESC')->get();
 
         return view('admin.pagos.index', compact('orders'));
     }
