@@ -510,7 +510,7 @@
     </div>
 </section>
 
-{{--Productos
+{{--Productos--}}
 <section class="primario bg_overley" style="background-color:#836262;">
     <div class="row">
         <div class="col-12">
@@ -522,7 +522,7 @@
         <div class="col-12 m-auto mb-5">
 
             <div class="owl-carousel owl-theme">
-                @foreach ($resultados as $resultado)
+                {{-- @foreach ($resultados as $resultado)
                 <div class="item" style="">
                     <div class="content_careder_products">
                         <div class="card card_slider_products" style="">
@@ -553,12 +553,180 @@
                         </div>
                     </div>
                 </div>
-                @endforeach
+                @endforeach --}}
+                <div class="item" style="">
+                    <div class="content_careder_products">
+                        <div class="card card_slider_products" style="">
+                            <div class="d-flex justify-content-center">
+                                <h4 class="text-left ttile_categoria_product">Keraluxe</h4>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <div class="contenedor_img_slider_product tamano_1">
+                                    <p class="text-center">
+                                        <img src="{{asset('productos/argan.jpg')}}" alt="Argán oil" class="img_slider_product">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card-body space_productos_slider">
+                                <div class="card-title">
+                                    <p class="text-center tittle_product_slider mb-4">Argán oil</p>
+
+                                    <p class="text-center">
+                                        <a class="text-center btn_slider_product mb-3" href="https://imnasmexico.com/new/producto/argan-oil/">Compra</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" style="">
+                    <div class="content_careder_products">
+                        <div class="card card_slider_products" style="">
+                            <div class="d-flex justify-content-center">
+                                <h4 class="text-left ttile_categoria_product">Keraluxe</h4>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <div class="contenedor_img_slider_product tamano_1">
+                                    <p class="text-center">
+                                        <img src="{{asset('productos/brasilena.jpg')}}" alt="Argán oil" class="img_slider_product">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card-body space_productos_slider">
+                                <div class="card-title">
+                                    <p class="text-center tittle_product_slider mb-4">Keratina Brasileña</p>
+
+                                    <p class="text-center">
+                                        <a class="text-center btn_slider_product mb-3" href="https://imnasmexico.com/new/producto/keratina-brasilena/">Compra</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" style="">
+                    <div class="content_careder_products">
+                        <div class="card card_slider_products" style="">
+                            <div class="d-flex justify-content-center">
+                                <h4 class="text-left ttile_categoria_product">Keraluxe</h4>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <div class="contenedor_img_slider_product tamano_1">
+                                    <p class="text-center">
+                                        <img src="{{asset('productos/japonesa.jpg')}}" alt="Argán oil" class="img_slider_product">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card-body space_productos_slider">
+                                <div class="card-title">
+                                    <p class="text-center tittle_product_slider mb-4">Keratina Japonesa</p>
+
+                                    <p class="text-center">
+                                        <a class="text-center btn_slider_product mb-3" href="https://imnasmexico.com/new/producto/keratina-japonesa/">Compra</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" style="">
+                    <div class="content_careder_products">
+                        <div class="card card_slider_products" style="">
+                            <div class="d-flex justify-content-center">
+                                <h4 class="text-left ttile_categoria_product">Keraluxe</h4>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <div class="contenedor_img_slider_product tamano_1">
+                                    <p class="text-center">
+                                        <img src="{{asset('productos/nanoplastia.jpg')}}" alt="Argán oil" class="img_slider_product">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card-body space_productos_slider">
+                                <div class="card-title">
+                                    <p class="text-center tittle_product_slider mb-4">Nanoplastia</p>
+
+                                    <p class="text-center">
+                                        <a class="text-center btn_slider_product mb-3" href="https://imnasmexico.com/new/producto/nanoplastia/">Compra</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" style="">
+                    <div class="content_careder_products">
+                        <div class="card card_slider_products" style="">
+                            <div class="d-flex justify-content-center">
+                                <h4 class="text-left ttile_categoria_product">Keraluxe</h4>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <div class="contenedor_img_slider_product tamano_1">
+                                    <p class="text-center">
+                                        <img src="{{asset('productos/profunda.jpg')}}" alt="Argán oil" class="img_slider_product">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card-body space_productos_slider">
+                                <div class="card-title">
+                                    <p class="text-center tittle_product_slider mb-4">Shampoo Limpieza Profunda</p>
+
+                                    <p class="text-center">
+                                        <a class="text-center btn_slider_product mb-3" href="https://imnasmexico.com/new/producto/shampoo-limpieza-profunda/">Compra</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="item" style="">
+                    <div class="content_careder_products">
+                        <div class="card card_slider_products" style="">
+                            <div class="d-flex justify-content-center">
+                                <h4 class="text-left ttile_categoria_product">Keraluxe</h4>
+                            </div>
+
+                            <div class="d-flex justify-content-center">
+                                <div class="contenedor_img_slider_product tamano_1">
+                                    <p class="text-center">
+                                        <img src="{{asset('productos/organic.jpg')}}" alt="Argán oil" class="img_slider_product">
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card-body space_productos_slider">
+                                <div class="card-title">
+                                    <p class="text-center tittle_product_slider mb-4">Shampoo Reparador Organic</p>
+
+                                    <p class="text-center">
+                                        <a class="text-center btn_slider_product mb-3" href="https://imnasmexico.com/new/producto/shampoo-reparador-organic/">Compra</a>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
     </div>
-</section>--}}
+</section>
 
 {{--UNAM --}}
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
