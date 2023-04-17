@@ -77,7 +77,11 @@
                     <button type="button" class="btn_close_custom" data-bs-dismiss="modal" style="margin-bottom: 1rem;">X</button>
                 </div>
             <p class="text-center">
-                <img src="{{asset('assets/user/certificaciones/DIPLOMA-ONLINE.png')}}" alt="" class="img_certificados_general">
+                @if ($curso->modalidad == 'Presencial')
+                    <img src="{{asset('assets/user/certificaciones/MUESTRA PRESENCIAL STPS.jpg')}}" alt="" class="img_certificados_general">
+                @else
+                    <img src="{{asset('assets/user/certificaciones/DIPLOMA-ONLINE.png')}}" alt="" class="img_certificados_general">
+                @endif
             </p>
             <div class="d-flex justify-content-center">
                 <a class="btn_certificados" href="{{ route('user.avales') }}">
@@ -119,7 +123,11 @@
                     <button type="button" class="btn_close_custom" data-bs-dismiss="modal" style="margin-bottom: 1rem;">X</button>
                 </div>
             <p class="text-center">
-                <img src="{{asset('assets/user/certificaciones/doc_imnas.png')}}" alt="" class="img_certificados_general">
+                @if ($curso->titulo_hono == '1')
+                    <img src="{{asset('assets/user/certificaciones/muestra TH.jpg')}}" alt="" class="img_certificados_general">
+                @else
+                    <img src="{{asset('assets/user/certificaciones/doc_imnas.png')}}" alt="" class="img_certificados_general">
+                @endif
             </p>
             <div class="d-flex justify-content-center">
                 <a class="btn_certificados" href="{{ route('user.avales') }}">

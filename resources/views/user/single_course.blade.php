@@ -543,7 +543,8 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                         </div>
                                     </div>
                                     <p class="text-center">
-                                        <strong>Constancia expedida por la UNAM a través de la facultad de estudios Superiores Zaragoza</strong>
+                                        <strong>En caso de ser Médico se te dará una constancia UNAM a través de la facultad de estudios Superiores Zaragoza,
+                                            de lo contrario se te dará un Diploma STPS</strong>
                                      </p>
                                 </div>
                             @endif
@@ -714,8 +715,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @endif
                         <p class="text_preguntas_material">
                             <strong>3. ¿Cómo obtengo mi Documento Oficial?</strong><br>
-                            @if ($curso->sep == '1' || $curso->imnas == '1')
-                            Registro IMNAS o Red CONOCER<br>
+                            @if ($curso->sep == '1' || $curso->imnas == '1' || $curso->redconocer == '1')
+                                @if ($curso->nombre == 'Diplomado de Mesoterapia Facial y Corporal')
+                                    Registro IMNAS<br>
+                                @else
+                                    Registro IMNAS o Red CONOCER<br>
+                                @endif
                             1. Te contactará la gestora vía whatsApp donde te dará un usuario y contraseña para subir a la plataforma tu información oficial.<br>
                             2. Una vez aceptada por la gestora, IMNAS tendrá máximo un mes para enviarte el documento por paquetería.<br><br>
                             @elseif ($curso->stps == '1')
@@ -735,7 +740,8 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @else
                         <p class="text_preguntas_material">
                             <strong>4. ¿Las clases quedan grabadas permanentemente?</strong><br>
-                            No, después de haber concluido tu clase, tendrás la grabación disponible por <strong>72 horas </strong>para consultarla a la hora que desees.
+                            No, después de haber concluido tu clase, tendrás la grabación disponible por <strong>72 horas </strong>para consultarla a la hora que desees. <br>
+                            Recuerda que podrás visualizarla en tu perfil, el cual se creará con el número telefónico que proporcionaste al realizar tu compra
                         </p>
                         @endif
                         @if ($curso->modalidad == 'Presencial')
@@ -833,6 +839,34 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-6 py-3">
+                        <div class="d-flex justify-content-end">
+                            <div class="card_objetivos2">
+                                <p class="text-center">
+                                    <img class="img_card_objetivos2" src="{{asset('assets/user/icons/MEDICOS.png')}}" alt="">
+                                </p>
+                                <p class="text-center card_title_objetivos">MÉDICOS</p>
+                                <p class="text-center card_text_objetivos">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 py-3">
+                        <div class="d-flex justify-content-start">
+                            <div class="card_objetivos2">
+                                <p class="text-center">
+                                    <img class="img_card_objetivos2" src="{{asset('assets/user/icons/EXPERTOS DE LA SALUD.png')}}" alt="">
+                                </p>
+                                <p class="text-center card_title_objetivos">APASIONADAS POR LA SALUD</p>
+                                <p class="text-center card_text_objetivos">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
               </div>
 
@@ -1820,6 +1854,33 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-6 py-3">
+                        <div class="d-flex justify-content-end">
+                            <div class="card_objetivos2">
+                                <p class="text-center">
+                                    <img class="img_card_objetivos2" src="{{asset('assets/user/icons/MEDICOS.png')}}" alt="">
+                                </p>
+                                <p class="text-center card_title_objetivos">MÉDICOS</p>
+                                <p class="text-center card_text_objetivos">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-6 py-3">
+                        <div class="d-flex justify-content-start">
+                            <div class="card_objetivos2">
+                                <p class="text-center">
+                                    <img class="img_card_objetivos2" src="{{asset('assets/user/icons/EXPERTOS DE LA SALUD.png')}}" alt="">
+                                </p>
+                                <p class="text-center card_title_objetivos">APASIONADAS POR LA SALUD</p>
+                                <p class="text-center card_text_objetivos">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -2035,7 +2096,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
     </div>
 </section>
 
-@include('user.components.modal_certificados');
+@include('user.components.modal_certificados_single');
 @endsection
 
 @section('js')
