@@ -49,10 +49,10 @@
                                 <img class="img_card_grid" src="{{asset('curso/'. $curso->foto) }}" class="card-img-top" alt="...">
 
                                 <p class="precio_grid" style="{{ $presencial_bg }}">${{$precio}} mxn</p>
-                                <p class="modalidado_grid"><strong>{{$curso->modalidad}}</strong></p>
+                                <p class="modalidado_grid" style="{{ $presencial_color }}"><strong>{{$curso->modalidad}}</strong></p>
                                 <p class="wish_grid" style="{{ $presencial_bg }}"><i class="fas fa-heart"></i></p>
                                 <p class="share_grid" onclick="shareFacebook()" style="{{ $presencial_bg }}"><i class="fas fa-share-alt"></i></p>
-                                <p class="horario_grid">{{$hora_inicial}} - {{$hora_final}}</p>
+                                <p class="horario_grid" style="{{ $presencial_color }}">{{$hora_inicial}} - {{$hora_final}}</p>
 
                                 <div class="card-body">
                                     <div class="row">
@@ -90,7 +90,7 @@
                                                 <div class="p-2">
                                                     <a class="btn btn_secundario_grd_curso" href="{{ route('cursos.show',$curso->slug) }}">
                                                         <div class="d-flex justify-content-around">
-                                                            <p class="card_tittle_btn_grid my-auto">
+                                                            <p class="card_tittle_btn_grid my-auto" style="{{ $presencial_color }}">
                                                                 Saber más
                                                             </p>
 
