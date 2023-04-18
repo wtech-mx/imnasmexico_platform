@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PlantillaNuevoUser;
 use Illuminate\Support\Str;
-
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CustomAuthController extends Controller
 {
@@ -50,16 +50,19 @@ class CustomAuthController extends Controller
 
     public function customRegistration(Request $request)
     {
-        $request->validate([
+        $validator = $request->validate([
             'name' => 'required',
             // 'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'telefono' => 'required|unique:users',
         ]);
 
+        if ($validator->fails()) {
+            return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+
         $code = Str::random(8);
         if(User::where('telefono', $request->telefono)->exists()){
-            Session::flash('login_error', 'Email-Address And Password Are Wrong.');
              return redirect()->back();
         }else{
             $creat_user = new User;

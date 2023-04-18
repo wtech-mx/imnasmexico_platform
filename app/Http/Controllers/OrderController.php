@@ -18,6 +18,7 @@ use App\Mail\PlantillaPedidoRecibido;
 use App\Mail\PlantillaTicketPresencial;
 use App\Mail\PlantillaTicket;
 use Stripe;
+use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use MercadoPago\{Exception, SDK, Preference, Item};
@@ -392,6 +393,7 @@ class OrderController extends Controller
             'email' => 'required',
             'telefono' => 'required'
         ]);
+
         $code = Str::random(8);
         if (User::where('telefono', $request->telefono)->exists()) {
             $fechaActual = date('Y-m-d');
@@ -480,7 +482,7 @@ class OrderController extends Controller
             Mail::to($user2->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
         }
 
-        Session::flash('success', 'Se ha guardado sus datos con exito');
+        Alert::success('Registro con exito', 'Se ha registrado con exito');
         return back()->with('success', 'User created successfully');
     }
 
