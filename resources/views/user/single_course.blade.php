@@ -44,7 +44,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
               <button class="nav-link" id="v-pills-objetivos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-objetivos" type="button" role="tab" aria-controls="v-pills-objetivos" aria-selected="false">
                 <div class="d-flex justify-content-around">
-                     <p class="espacio_w">Objetivos</p>
+                     <p class="espacio_w">Materiales</p>
                     <div class="content_nav d-inline-block">
                         <img class="icon_nav_course" src="{{asset('assets/user/icons/objetivo.webp')}}" alt="">
                     </div>
@@ -238,19 +238,30 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
               <div class="tab-pane fade" id="v-pills-objetivos" role="tabpanel" aria-labelledby="v-pills-objetivos-tab" tabindex="0">
                 <div class="row">
-                    <div class="col-12 col-lg-5">
-                        <div class="d-flex align-items-center">
-                            <img class="img_destacada img-fluid" src="{{asset('curso/'. $curso->foto) }}" alt="">
-                        </div>
-                    </div>
 
-                    <div class="col-12 col-lg-7">
+                    <div class="col-12 col-lg-12">
 
-                        <h2 class="title_curso mb-5">Objetivo</h2>
+                        <h2 class="title_curso mb-5 text-center">Materiales de Clase</h2>
+                        @if ($curso->modalidad == 'Presencial')
+                        <p class="tittle_abstract text-center">El material de clase es obligatorio traerlo, en caso de no tenerlo, contamos con tienda dentro de las instalaciones para su compra del material.</p>
+                            @else
+                        <p class="tittle_abstract text-center">El material de clase es opcional, en caso de quererlo puede checarlo en nuestra tienda en línea dándole click en la imagen o el botón.</p>
+                        @endif
+                        @if ($curso->materiales != NULL)
+                                <a href="{{ $curso->btn_cotizacion}}" target="_blank" >
+                                    <p class="text-center">
+                                    <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 40%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                                </p>
+                                </a>
+                                @if ($curso->btn_cotizacion != NULL)
+                                    <p class="btn-holder mt-4">
+                                        <a class="btn_ticket_comprar text-center" href="{{ $curso->btn_cotizacion}}"  role="button" target="_blank">
+                                        Comprar Material
+                                        </a>
+                                    </p>
+                                @endif
+                        @endif
 
-                        <p class="tittle_abstract mt-3 mb-3">
-                            <?php echo $curso->objetivo?>
-                        </p>
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs  mt-5" data-bs-toggle="collapse" href="#collapseobjetivos" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
                                 <div class="d-flex justify-content-around">
@@ -702,7 +713,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
               <div class="tab-pane fade" id="v-pills-dirijido" role="tabpanel" aria-labelledby="v-pills-dirijido-tab" tabindex="0">
                 <div class="row">
-                    <div class="col-12 col-lg-6">
+                    <div class="col-12 col-lg-12">
                         <h2 class="title_curso mt-4 mb-4"> Preguntas Frecuentes</h2>
                         <p class="text_preguntas_material">
                             <strong>1. ¿Es necesario tener conocimientos previos?</strong><br>
@@ -766,12 +777,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @if ($curso->modalidad == 'Presencial')
                             <p class="text_preguntas_material">
                                 <strong>6. ¿Cuál es el siguiente paso después de haber adquirido mi curso?</strong><br>
-                                Una vez realizada tu compra, te llegará un correo de <br> confirmación de pago y posteriormente uno con la dirección de tu <br>clase, es necesario revisar la bandeja de spam.
+                                Una vez realizada tu compra, te llegará un correo de confirmación de pago y posteriormente uno con la dirección de tu clase, es necesario revisar la bandeja de spam.
                             </p>
                             @else
                             <p class="text_preguntas_material">
                                 <strong>6. ¿Cuál es el siguiente paso después de haber adquirido mi curso?</strong><br>
-                                Una vez realizada tu compra, te llegará un correo de <br> confirmación de pago y posteriormente uno con la liga de tu <br>clase, es necesario revisar la bandeja de spam.
+                                Una vez realizada tu compra, te llegará un correo de confirmación de pago y posteriormente uno con la liga de tu clase, es necesario revisar la bandeja de spam.
                             </p>
                         @endif
                         <p class="text_preguntas_material">
@@ -785,22 +796,6 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             </p>
                         @endif
                     </div>
-
-                    @if ($curso->materiales != NULL)
-                        <div class="col-12 col-lg-6">
-                            <h2 class="title_curso mt-4 mb-4"> Materiales de clase</h2>
-                            <a href="{{ $curso->btn_cotizacion}}" target="_blank">
-                                <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 100%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
-                            </a>
-                            @if ($curso->btn_cotizacion != NULL)
-                                <p class="btn-holder mt-4">
-                                    <a class="btn_ticket_comprar text-center" href="{{ $curso->btn_cotizacion}}"  role="button" target="_blank">
-                                    Comprar
-                                    </a>
-                                </p>
-                            @endif
-                        </div>
-                    @endif
 
                     <div class="col-12 mt-4 mb-4">
                         <h2 class="title_curso text-center">Dirigido a...</h2>
@@ -1170,7 +1165,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                     </button>
 
                     <button class="nav-link" id="nav-profile_res-tab" data-bs-toggle="tab" data-bs-target="#nav-profile_res" type="button" role="tab" aria-controls="nav-profile_res" aria-selected="false">
-                        Objetivos <img class="icon_res_tabs" src="{{asset('assets/user/icons/objetivo.webp')}}" alt="">
+                        Materiales <img class="icon_res_tabs" src="{{asset('assets/user/icons/objetivo.webp')}}" alt="">
                     </button>
 
                     <button class="nav-link" id="nav-temarios_res-tab" data-bs-toggle="tab" data-bs-target="#nav-temarios_res" type="button" role="tab" aria-controls="nav-temarios_res" aria-selected="false">
@@ -1352,11 +1347,20 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                     <div class="col-12 ">
 
-                        <h2 class="title_curso mb-md-5 mt-md-5 mt-2 mb-2">Objetivo</h2>
+                        <h2 class="title_curso mb-md-5 mt-md-5 mt-2 mb-2">Materiales de Clase</h2>
 
-                        <p class="tittle_abstract mb-md-5 mt-md-5 mt-2 mb-2">
-                            <?php echo $curso->objetivo?>
-                        </p>
+                        @if ($curso->materiales != NULL)
+                                <a href="{{ $curso->btn_cotizacion}}" target="_blank">
+                                    <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 100%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                                </a>
+                                @if ($curso->btn_cotizacion != NULL)
+                                    <p class="btn-holder mt-4">
+                                        <a class="btn_ticket_comprar text-center" href="{{ $curso->btn_cotizacion}}"  role="button" target="_blank">
+                                        Comprar
+                                        </a>
+                                    </p>
+                                @endif
+                        @endif
 
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs  mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapseobjetivos" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
@@ -1804,37 +1808,87 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                     <div class="col-12 ">
                         <h2 class="title_curso mt-2 mb-2"> Preguntas Frecuentes</h2>
+                        <p class="text_preguntas_material">
+                            <strong>1. ¿Es necesario tener conocimientos previos?</strong><br>
+                            No se requiere ningún conocimiento ni estudios previos, comenzamos desde 0% y cualquier persona que esté interesada en la materia, lo puede estudiar.<br>
+                        </p>
                         @if ($curso->modalidad == 'Presencial')
                             <p class="text_preguntas_material">
-                                Nuestros cursos y diplomados presenciales estan divididos en dos partes: <br><br>
-                                <strong>TEORÍA: </strong><br> Se llevará a cabo en salón de clases con las debidas medidas sanitarias. <br> El profesor contará con apoyo visual para brindar la teoría necesaria para su comprensión. <br><br>
-                                <strong>PRÁCTICA: </strong> <br> Se llevará a cabo con camilla personal y auxiliar con PRODUCTO INCLUÍDO. <br> La práctica se hará de la mano con el profesor en donde se reforzará lo aprendido
+                                <strong>2. Nuestros cursos y diplomados presenciales están divididos en dos partes:</strong><br>
+                                <strong>Teoría: </strong><br> Se llevará a cabo en la las instalaciones de Instituto. El profesor contará con apoyo visual para brindar la teoría necesaria para su compresión, así mismo se compartirán los PDF´s de las clases. <br><br>
+                                <strong>Práctica: </strong> <br> Se llevará a cabo con modelo en vivo  y podrás preguntar tus dudas al momento, la práctica se llevará de la mano con el profesor en donde se reforzará lo aprendido.
+                            </p>
+                        @else
+                        <p class="text_preguntas_material">
+                            <strong>2. Nuestros cursos y diplomados online están divididos en dos partes:</strong><br>
+                            <strong>Teoría: </strong><br> Se llevará a cabo mediante Google Meet. El profesor contará con apoyo visual para brindar la teoría necesaria para su compresión, así mismo se compartirán los PDF´s de las clases. <br><br>
+                            <strong>Práctica: </strong> <br> Se llevará a cabo con modelo en vivo  y podrás preguntar tus dudas al momento, la práctica se llevará de la mano con el profesor en donde se reforzará lo aprendido.
+                        </p>
+                        @endif
+                        <p class="text_preguntas_material">
+                            <strong>3. ¿Cómo obtengo mi Documento Oficial?</strong><br>
+                            @if ($curso->sep == '1' || $curso->imnas == '1' || $curso->redconocer == '1')
+                                @if ($curso->nombre == 'Diplomado de Mesoterapia Facial y Corporal')
+                                    Registro IMNAS<br>
+                                @else
+                                    Registro IMNAS o Red CONOCER<br>
+                                @endif
+                            1. Te contactará la gestora vía whatsApp donde te dará un usuario y contraseña para subir a la plataforma tu información oficial.<br>
+                            2. Una vez aceptada por la gestora, IMNAS tendrá máximo un mes para enviarte el documento por paquetería.<br><br>
+                            @elseif ($curso->stps == '1')
+                            Diploma STPS<br>
+                            1. No se necesita ningún proceso de gestoría al término del curso.<br>
+                            2. IMNAS te enviará tu diploma a tu correo en máximo una semana.
+                            @elseif ($curso->unam == '1')
+                            UNAM<br>
+                            Te contactará la gestora via whatsApp para el envió de tu Documento Oficial.
+                            @endif
+                        </p>
+                        @if ($curso->modalidad == 'Presencial')
+                        <p class="text_preguntas_material">
+                            <strong>4. ¿Mi curso incluye material?</strong><br>
+                            No, el material de clase deberás adquirirlo por tu cuenta, pero no te preocupes podrás adquirirlo en las instalaciones. Recuerda que el total de tu pago solo incluye el producto para la práctica
+                        </p>
+                        @else
+                        <p class="text_preguntas_material">
+                            <strong>4. ¿Las clases quedan grabadas permanentemente?</strong><br>
+                            No, después de haber concluido tu clase, tendrás la grabación disponible por <strong>72 horas </strong>para consultarla a la hora que desees. <br>
+                            Recuerda que podrás visualizarla en tu perfil, el cual se creará con el número telefónico que proporcionaste al realizar tu compra
+                        </p>
+                        @endif
+                        @if ($curso->modalidad == 'Presencial')
+                            <p class="text_preguntas_material">
+                                <strong>5. ¿Dónde se impartirá mi curso?</strong><br>
+                                Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México
                             </p>
                         @else
                             <p class="text_preguntas_material">
-                                <strong>CLASES GRABADAS: </strong><br> Las clases quedarán grabadas y tendrás acceso a ellas por <strong>72 horas. </strong> <br><br>
-                                <strong>DESPUES DE COMPRAR: </strong><br> Una vez realizada su compra, a su correo llegará un email de <br> confirmación de pago y posteriormente uno con la liga de su <br>clase, es necesario revisar la bandeja de spam.
+                                <strong>5. ¿En qué plataforma se impartirá mi curso?</strong><br>
+                                Google meet
+                            </p>
+                        @endif
+                        @if ($curso->modalidad == 'Presencial')
+                            <p class="text_preguntas_material">
+                                <strong>6. ¿Cuál es el siguiente paso después de haber adquirido mi curso?</strong><br>
+                                Una vez realizada tu compra, te llegará un correo de confirmación de pago y posteriormente uno con la dirección de tu clase, es necesario revisar la bandeja de spam.
+                            </p>
+                            @else
+                            <p class="text_preguntas_material">
+                                <strong>6. ¿Cuál es el siguiente paso después de haber adquirido mi curso?</strong><br>
+                                Una vez realizada tu compra, te llegará un correo de confirmación de pago y posteriormente uno con la liga de tu clase, es necesario revisar la bandeja de spam.
+                            </p>
+                        @endif
+                        <p class="text_preguntas_material">
+                            <strong>7. ¿Tiene un costo extra tramitar mis Documentos Oficiales?</strong><br>
+                            No, al comprar el curso ya te incluye los Documentos Oficiales.<br>
+                        </p>
+                        @if ($curso->modalidad == 'Presencial')
+                            <p class="text_preguntas_material">
+                                <strong>8. ¿Puedo pagar en efectivo?</strong><br>
+                                Claro, si no te es posible pagar por la plataforma puedes llegar a pagar a la sede.
                             </p>
                         @endif
                     </div>
-
-                    @if ($curso->materiales != NULL)
-                        <div class="col-12 col-lg-6">
-                            <h2 class="title_curso mt-4 mb-4"> Materiales de clase</h2>
-                            <a href="{{ $curso->btn_cotizacion}}" target="_blank">
-                                <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 100%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
-                            </a>
-                            @if ($curso->btn_cotizacion != NULL)
-                                <a class="btn btn-secundario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" href="{{ $curso->btn_cotizacion}}" target="_blank">
-                                    <div class="d-flex justify-content-around">
-                                        <p class="card_tittle_btn my-auto">
-                                            Comprar
-                                        </p>
-                                    </div>
-                                </a>
-                            @endif
-                        </div>
-                    @endif
 
                     <div class="col-12 mt-2 mb-2">
                         <h2 class="title_curso text-center">Dirigido a...</h2>

@@ -20,14 +20,28 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link {{ (Request::is('admin/cursos*') ? 'active' : '') }}" href="{{ route('cursos.index') }}" target="">
-              <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+            <a data-bs-toggle="collapse" href="#pagesExamplesCurso" class="nav-link {{ (Request::is('admin/cursos*') ? 'active' : '') }}" aria-controls="pagesExamplesCurso" role="button" aria-expanded="false">
+              <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                 <i class="fa fa-graduation-cap text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-
               </div>
               <span class="nav-link-text ms-1">Cursos</span>
             </a>
-        </li>
+            <div class="collapse " id="pagesExamplesCurso">
+              <ul class="nav ms-4">
+                <li class="nav-item ">
+                  <a class="nav-link {{ (Request::is('/admin/cursos*') ? 'show' : '') }}" href="{{ route('cursos.index') }}">
+                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-normal">Todos los Cursos</span>
+                  </a>
+
+                  <a class="nav-link {{ (Request::is('/admin/cursos/dia*') ? 'show' : '') }}" href="{{ route('cursos.index_dia') }}">
+                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-normal">Cursos del Dia</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
 
         <li class="nav-item">
             <a class="nav-link {{ (Request::is('admin/comentarios*') ? 'active' : '') }}" href="{{ route('comentarios.index') }}" target="">
@@ -40,13 +54,13 @@
         </li>
 
         <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link {{ (Request::is('admin/pagos-por-fuera*') ? 'active' : '') }}" aria-controls="pagesExamples" role="button" aria-expanded="false">
+            <a data-bs-toggle="collapse" href="#pagesExamplesPagos" class="nav-link {{ (Request::is('admin/pagos-por-fuera*') ? 'active' : '') }}" aria-controls="pagesExamplesPagos" role="button" aria-expanded="false">
               <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                 <i class="fas fa-file-invoice-dollar text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
               </div>
               <span class="nav-link-text ms-1">Pagos Externos</span>
             </a>
-            <div class="collapse " id="pagesExamples">
+            <div class="collapse " id="pagesExamplesPagos">
               <ul class="nav ms-4">
                 <li class="nav-item ">
                   <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/inscripcion*') ? 'show' : '') }}" href="{{ route('pagos.inscripcion') }}">
