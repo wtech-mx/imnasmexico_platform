@@ -232,11 +232,20 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12">
+                                                <div class="col-6">
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <<label for="fecha">Materiales de Clase</label>
+                                                            <label for="fecha">Materiales de Clase</label>
                                                             <input type="file" id="materiales" name="materiales" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label for="fecha">Liga Material</label>
+                                                            <input type="text" id="btn_cotizacion" name="btn_cotizacion" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -244,7 +253,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <<label for="fecha">PDF Descarga</label>
+                                                            <label for="fecha">PDF Descarga</label>
                                                             <input type="file" id="pdf" name="pdf" class="form-control">
                                                         </div>
                                                     </div>
