@@ -205,10 +205,11 @@
         <div class="col-6 col-md-3 ">
             <div class="d-flex justify-content-center">
                 <a data-bs-toggle="modal" data-bs-target="#redconcer">
-                    <div class="card_certificaciones">
+                    <div class="card_certificaciones" style="position: relative">
                         <p class="text-center">
                             <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
                         </p>
+                        <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                     </div>
                 </a>
             </div>
@@ -218,10 +219,11 @@
         <div class="col-6 col-md-3 ">
             <div class="d-flex justify-content-center">
                 <a data-bs-toggle="modal" data-bs-target="#revoe">
-                <div class="card_certificaciones">
+                <div class="card_certificaciones" style="position: relative">
                     <p class="text-center">
                         <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/revoe.png')}}" alt="">
                     </p>
+                    <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                 </div>
                 </a>
             </div>
@@ -231,10 +233,11 @@
         <div class="col-6 col-md-3 mt-3 mt-md-0">
             <div class="d-flex justify-content-center">
                 <a data-bs-toggle="modal" data-bs-target="#unam">
-                    <div class="card_certificaciones">
+                    <div class="card_certificaciones" style="position: relative">
                         <p class="text-center">
                             <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
                         </p>
+                        <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                     </div>
                 </a>
             </div>
@@ -244,10 +247,11 @@
         <div class="col-6 col-md-3 mt-3 mt-md-0">
             <div class="d-flex justify-content-center">
                 <a data-bs-toggle="modal" data-bs-target="#stps">
-                    <div class="card_certificaciones">
+                    <div class="card_certificaciones" style="position: relative">
                         <p class="text-center">
                             <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/stps.png')}}" alt="">
                         </p>
+                        <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                     </div>
                 </a>
             </div>
@@ -256,10 +260,11 @@
         <div class="col-12 mt-3 mt-md-4 mt-lg-5 mt-md-0">
             <div class="d-flex justify-content-center">
                 <a data-bs-toggle="modal" data-bs-target="#registro_nacianal">
-                    <div class="card_certificaciones">
+                    <div class="card_certificaciones" style="position: relative">
                         <p class="text-center">
                             <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/registro_nacional.png')}}" alt="">
                         </p>
+                        <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                     </div>
                 </a>
             </div>

@@ -367,122 +367,130 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                         <h2 class="title_curso mb-5">Temario</h2>
 
-                        <p class="tittle_abstract ">
-                            <?php echo $curso->temario?>
-                        </p>
+                        <p class="tittle_abstract "><?php echo $curso->temario?></p>
 
-                        @if($curso->pdf != NULL)
-                            <a class="btn btn-primario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" href="{{asset('pdf/'. $curso->pdf) }}" target="_blank">
-                                <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Ver más
-                                    </p>
-                                    <div class="card_bg_btn ">
-                                        <i class="fas fa-file-pdf card_icon_btn"></i>
-                                    </div>
-                                </div>
-                            </a>
-                        @endif
-                        @if ($curso->estatus == 1)
-                            <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
-                                <div class="d-flex justify-content-around">
-                                            @if ($curso->precio == 0)
-                                                <p class="card_tittle_btn_grid my-auto">
-                                                    Registrarse
-                                                </p>
-                                            @else
-                                                <p class="card_tittle_btn_grid my-auto">
-                                                    Comprar ahora
-                                                </p>
-                                            @endif
-                                    <div class="card_bg_btn ">
-                                        <i class="fas fa-cart-plus card_icon_btn"></i>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <a class="btn btn-secundario space_cs_rs mt-5" href="#contactenos">
-                                <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        Contáctanos
-                                    </p>
-                                    <div class="card_bg_btn_secundario">
-                                        <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <div class="collapse mt-3" id="collapsetemario">
-                                <div class="card card-body card_colapsable_comprar">
-                                    @if($curso->precio == 0)
-                                        <div class="row mb-3">
-                                            <form method="POST" action="{{ route('clases_gratis') }}"role="form">
-                                                @csrf
-                                                <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="input-group flex-nowrap mt-4">
-                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-12">
-                                                        <div class="input-group flex-nowrap mt-4">
-                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
-                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-12">
-                                                        <div class="input-group flex-nowrap mt-4">
-                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
-                                                            <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-12">
-                                                        <div class="d-flex justify-content-center">
-                                                            <button class="btn_pagar_checkout " type="submit">Registrarse</button>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </form>
+                        <div class="row">
+                            <div class="col-12">
+                                @if($curso->pdf != NULL)
+                                <a class="btn btn-primario " href="{{asset('pdf/'. $curso->pdf) }}" target="_blank">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Descargar
+                                        </p>
+                                        <div class="card_bg_btn ">
+                                            <i class="fas fa-file-pdf card_icon_btn"></i>
                                         </div>
-                                    @else
-                                        <div class="row mb-3">
-                                            @foreach ($tickets as $ticket)
-                                                <div class="col-4 mt-3">
-                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                                </div>
-                                                <div class="col-3 mt-3">
-                                                    @if ($ticket->descuento == NULL)
-                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                                    @else
-                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
-                                                    @endif
-                                                </div>
-
-                                                <div class="col-5 mt-3">
-                                                    <p class="btn-holder">
-                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                            <i class="fas fa-ticket-alt"></i> Comprar
-                                                        </a>
-                                                    </p>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                                </div>
-                                            @endforeach
-
-                                        </div>
-                                    @endif
-                                </div>
+                                    </div>
+                                </a>
+                                @endif
                             </div>
-                        @endif
+
+                            <div class="col-12">
+
+                                @if ($curso->estatus == 1)
+                                <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
+                                    <div class="d-flex justify-content-around">
+                                                @if ($curso->precio == 0)
+                                                    <p class="card_tittle_btn_grid my-auto">
+                                                        Registrarse
+                                                    </p>
+                                                @else
+                                                    <p class="card_tittle_btn_grid my-auto">
+                                                        Comprar ahora
+                                                    </p>
+                                                @endif
+                                        <div class="card_bg_btn ">
+                                            <i class="fas fa-cart-plus card_icon_btn"></i>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a class="btn btn-secundario space_cs_rs mt-5" href="#contactenos">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Contáctanos
+                                        </p>
+                                        <div class="card_bg_btn_secundario">
+                                            <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <div class="collapse mt-3" id="collapsetemario">
+                                    <div class="card card-body card_colapsable_comprar">
+                                        @if($curso->precio == 0)
+                                            <div class="row mb-3">
+                                                <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                    @csrf
+                                                    <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                                <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                                <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                                <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div class="d-flex justify-content-center">
+                                                                <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        @else
+                                            <div class="row mb-3">
+                                                @foreach ($tickets as $ticket)
+                                                    <div class="col-4 mt-3">
+                                                        <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                    </div>
+                                                    <div class="col-3 mt-3">
+                                                        @if ($ticket->descuento == NULL)
+                                                            <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                        @else
+                                                            <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
+                                                            <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                        @endif
+                                                    </div>
+
+                                                    <div class="col-5 mt-3">
+                                                        <p class="btn-holder">
+                                                            <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                                <i class="fas fa-ticket-alt"></i> Comprar
+                                                            </a>
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                    </div>
+                                                @endforeach
+
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
               </div>
@@ -1186,9 +1194,6 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                     </button>
                                 @endif
                             @endif
-                        <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
-                            Contacto <img class="icon_res_tabs" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
-                        </button>
                     @endguest
                 </div>
             </div>
@@ -1446,6 +1451,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
             <div class="tab-pane fade" id="nav-temarios_res" role="tabpanel" aria-labelledby="nav-temarios_res-tab" tabindex="0">
                 <div class="row">
+
                     <div class="col-12">
                         <div class="d-flex align-items-center">
                             <img class="img_destacada img-fluid" src="{{asset('curso/'. $curso->foto) }}" alt="">
@@ -1460,11 +1466,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <?php echo $curso->temario?>
                         </p>
 
+                    </div>
+
+                    <div class="col-12">
+
                         @if($curso->pdf != NULL)
                             <a class="btn btn-primario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" href="{{asset('pdf/'. $curso->pdf) }}" target="_blank">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Ver más
+                                        Descargar
                                     </p>
                                     <div class="card_bg_btn ">
                                         <i class="fas fa-file-pdf card_icon_btn"></i>
@@ -1472,7 +1482,9 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                 </div>
                             </a>
                         @endif
+                    </div>
 
+                    <div class="col-12">
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapsetemario" role="button" aria-expanded="false" aria-controls="collapsetemario">
                                 <div class="d-flex justify-content-around">
