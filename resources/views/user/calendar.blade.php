@@ -70,7 +70,7 @@
                                 <a class="btn btn-secundario me-1" href="{{ route('cursos.show',$curso->slug) }}">
                                     <div class="d-flex justify-content-around">
                                         <p class="card_tittle_btn my-auto">
-                                            Comprar ahora
+                                            Saber más
                                         </p>
                                         <div class="card_bg_btn_secundario">
                                             <i class="fas fa-plus card_icon_btn_secundario"></i>

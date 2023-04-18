@@ -30,7 +30,12 @@
                         @foreach ($tickets as $ticket)
                             <li class="nav-item" role="presentation">
                                 <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="#pills-home{{$ticket->id}}" role="tab" aria-controls="pills-home" aria-selected="true" id="pills-home-tab{{$ticket->id}}">
-                                    <i class="ni ni-folder-17 text-sm me-2"></i> {{$ticket->nombre}}
+                                    <i class="ni ni-folder-17 text-sm me-2"></i> {{$ticket->nombre}} -
+                                    @if ($ticket->descuento == NULL)
+                                        {{$ticket->precio}}
+                                        @else
+                                        <del>${{$ticket->precio}}</del> <strong>{{$ticket->descuento}}</strong>
+                                    @endif
                                 </a>
                             </li>
                         @endforeach
@@ -49,6 +54,8 @@
                                                     <th>Nombre</th>
                                                     <th>Correo</th>
                                                     <th>Telefono</th>
+                                                    <th>Metodo de Pago</th>
+                                                    <th>Cantidad</th>
                                                     <th>Fecha</th>
 
                                                     <th>Acciones</th>
@@ -63,8 +70,11 @@
                                                             <td>{{ $orden->User->name }}</td>
                                                             <td>{{ $orden->User->email }}</td>
                                                             <td>{{ $orden->User->telefono }}</td>
+                                                            <td>{{ $orden->Orders->forma_pago }}</td>
+                                                            <td>
+                                                                    {{ $orden->Orders->pago }}
+                                                            </td>
                                                             <td>{{ $orden->Orders->fecha }}</td>
-
                                                             <td>
                                                                 <form method="POST" action="{{ route('cursos.correo' ,$orden->id) }}" enctype="multipart/form-data" role="form">
                                                                     @csrf
