@@ -59,7 +59,7 @@
 }
 .btn-mas label{
     cursor: pointer;
-    background: #836262;
+    background: #49E670;
     font-size: 23px;
 }
 #btn-mas:checked ~ .btn-mas label{
