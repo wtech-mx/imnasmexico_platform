@@ -23,6 +23,22 @@ class CursosController extends Controller
         return view('admin.cursos.index', compact('cursos'));
     }
 
+    public function index_dia(Request $request)
+    {
+        $fechaActual = date('Y-m-d');
+        $cursos = Cursos::where('fecha_inicial', '<=', $fechaActual)
+        ->where('fecha_final', '>=', $fechaActual)
+        ->orWhere(function ($query) use ($fechaActual) {
+            $query->where('fecha_inicial', '<=', $fechaActual)
+                ->where('fecha_final', '>=', $fechaActual);
+        })
+        ->where('estatus', '=', '1')
+        ->orderBy('id', 'DESC')
+        ->get();
+
+        return view('admin.cursos.index_dia', compact('cursos'));
+    }
+
     public function create()
     {
         return view('admin.cursos.create');
