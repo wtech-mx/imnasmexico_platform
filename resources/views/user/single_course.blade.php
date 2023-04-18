@@ -789,7 +789,16 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                     @if ($curso->materiales != NULL)
                         <div class="col-12 col-lg-6">
                             <h2 class="title_curso mt-4 mb-4"> Materiales de clase</h2>
-                            <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 100%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                            <a href="{{ $curso->btn_cotizacion}}" target="_blank">
+                                <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 100%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                            </a>
+                            @if ($curso->btn_cotizacion != NULL)
+                                <p class="btn-holder mt-4">
+                                    <a class="btn_ticket_comprar text-center" href="{{ $curso->btn_cotizacion}}"  role="button" target="_blank">
+                                    Comprar
+                                    </a>
+                                </p>
+                            @endif
                         </div>
                     @endif
 
@@ -1182,18 +1191,22 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
                             Contacto <img class="icon_res_tabs" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
                         </button>
-                        @else
-                            @if ($usuario_compro != NULL)
-                                    @if ($curso->modalidad == 'Presencial')
-                                    <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
-                                        Dirección <img class="icon_res_tabs" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
-                                    </button>
-                                @else
-                                    <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
-                                        Clase <img class="icon_res_tabs" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
-                                    </button>
-                                @endif
+                    @else
+                        @if ($usuario_compro != NULL)
+                            @if ($curso->modalidad == 'Presencial')
+                                <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
+                                    Dirección <img class="icon_res_tabs" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
+                                </button>
+                            @else
+                                <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
+                                    Clase <img class="icon_res_tabs" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
+                                </button>
                             @endif
+                        @else
+                            <button class="nav-link" id="nav-recursos_res-tab" data-bs-toggle="tab" data-bs-target="#nav-recursos_res" type="button" role="tab" aria-controls="nav-recursos_res" aria-selected="false">
+                                Contacto <img class="icon_res_tabs" src="{{asset('assets/user/icons/video-call.png')}}" alt="">
+                            </button>
+                        @endif
                     @endguest
                 </div>
             </div>
@@ -1808,7 +1821,18 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                     @if ($curso->materiales != NULL)
                         <div class="col-12 col-lg-6">
                             <h2 class="title_curso mt-4 mb-4"> Materiales de clase</h2>
-                            <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="Material de clase" style="width: 100%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                            <a href="{{ $curso->btn_cotizacion}}" target="_blank">
+                                <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 100%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                            </a>
+                            @if ($curso->btn_cotizacion != NULL)
+                                <a class="btn btn-secundario space_cs_rs mb-md-5 mt-md-5 mt-2 mb-2" href="{{ $curso->btn_cotizacion}}" target="_blank">
+                                    <div class="d-flex justify-content-around">
+                                        <p class="card_tittle_btn my-auto">
+                                            Comprar
+                                        </p>
+                                    </div>
+                                </a>
+                            @endif
                         </div>
                     @endif
 

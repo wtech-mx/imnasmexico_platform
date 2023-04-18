@@ -41,6 +41,7 @@ class Cursos extends Model
         'video_cad',
         'seccion_unam',
         'texto_rvoe',
+        'btn_cotizacion',
         'pdf'
     ];
 

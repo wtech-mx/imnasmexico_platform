@@ -43,6 +43,7 @@ class CursosController extends Controller
         $curso = new Cursos;
         $curso->nombre = $request->get('nombre');
         $curso->descripcion = $request->get('descripcion');
+        $curso->btn_cotizacion = $request->get('btn_cotizacion');
 
         if ($request->hasFile("materiales")) {
             $file = $request->file('materiales');
@@ -153,6 +154,7 @@ class CursosController extends Controller
         $curso = Cursos::find($id);
         $curso->nombre = $request->get('nombre');
         $curso->descripcion = $request->get('descripcion');
+        $curso->btn_cotizacion = $request->get('btn_cotizacion');
 
         if ($request->hasFile("materiales")) {
             $file = $request->file('materiales');
