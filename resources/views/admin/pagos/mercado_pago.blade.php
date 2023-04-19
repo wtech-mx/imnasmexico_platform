@@ -27,9 +27,9 @@
                                         <tr class="tr_checkout">
                                           <th >Num. Pedido</th>
                                           <th>Correo</th>
+                                          <th >Monto</th>
                                           <th >Curso</th>
                                           <th >Fecha</th>
-                                          <th >Monto</th>
                                         </tr>
                                       </thead>
                                     <tbody>
@@ -41,9 +41,10 @@
                                                 @else
                                                     <td>{{$pago->payer->email}}</td>
                                                 @endif
+                                                <td>${{ $pago->transaction_amount }}</td>
                                                 <td>{{ $pago->description }}</td>
                                                 <td>{{ $pago->date_approved}}</td>
-                                                <td>{{ $pago->transaction_amount }}</td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
