@@ -11,6 +11,7 @@ use App\Mail\PlantillaPedidoRecibido;
 use App\Mail\PlantillaTicket;
 use Illuminate\Support\Facades\Mail;
 use MercadoPago\SDK;
+use MercadoPago\SDK\AdvancedPayments\RangeDateTime;
 
 class PagosFueraController extends Controller
 {
@@ -129,24 +130,32 @@ class PagosFueraController extends Controller
         // Obtener pagos desde MercadoPago
         $filters = array(
             "status" => "approved", // Filtro opcional para obtener solo pagos aprobados
+            "range" => "date_created",
+            "begin_date" => date("Y")."-01-01T00:00:00Z", // Fecha inicial (primer día del año en curso)
+            "end_date" => date("Y-m-d")."T23:59:59Z", // Fecha final (hoy a las 23:59:59)
+            "limit" => 100, // Obtener un máximo de 100 registros por página
+            "offset" => 0 // Empezar desde el primer registro
         );
 
-        $searchResult = \MercadoPago\Payment::search($filters);
-        
-        // Verificar si la respuesta incluye la clave 'results'
-        if (!empty($searchResult)) {
-            // Procesar los pagos y mostrarlos en la vista
-            $pagos = array();
-            foreach ($searchResult as $pago) {
-                $pagos = $searchResult;
-            }
+        $pagos = array();
+
+        do {
+            // Obtener siguiente página de resultados
+            $searchResult = \MercadoPago\Payment::search($filters);
+
+            // Obtener los resultados de la búsqueda
+            $results = $searchResult->getArrayCopy();
+
+            // Concatenar los resultados de la siguiente página con los resultados anteriores
+            $pagos = array_merge($pagos, $results);
+
+            // Incrementar el offset para obtener la siguiente página de resultados
+            $filters["offset"] += $filters["limit"];
+
+        } while (count($results) > 0);
+
 
             return view('admin.pagos.mercado_pago', compact('pagos'));
-        } else {
-            // Manejar el caso en el que no hay resultados
-            return "No se encontraron resultados de pago.";
-        }
 
-        return view('admin.pagos.mercado_pago', compact('pagos'));
     }
 }
