@@ -114,7 +114,7 @@ class PagosFueraController extends Controller
             foreach($orden_ticket as $details){
                 Mail::to($orden_ticket2->User->email)->send(new PlantillaTicket($details));
             }
-            Mail::to($orden_ticket2->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago));
+            Mail::to($orden_ticket2->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
         }
 
         return redirect()->route('pagos.index_pago')
