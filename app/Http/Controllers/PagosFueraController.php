@@ -10,6 +10,7 @@ use Session;
 use App\Mail\PlantillaPedidoRecibido;
 use App\Mail\PlantillaTicket;
 use Illuminate\Support\Facades\Mail;
+use MercadoPago\SDK;
 
 class PagosFueraController extends Controller
 {
@@ -119,5 +120,33 @@ class PagosFueraController extends Controller
 
         return redirect()->route('pagos.index_pago')
             ->with('success', 'curso created successfully.');
+    }
+
+    public function mercado_pago(){
+        // Configuración de la SDK de MercadoPago
+        SDK::setAccessToken(config('services.mercadopago.token'));
+
+        // Obtener pagos desde MercadoPago
+        $filters = array(
+            "status" => "approved", // Filtro opcional para obtener solo pagos aprobados
+        );
+
+        $searchResult = \MercadoPago\Payment::search($filters);
+        
+        // Verificar si la respuesta incluye la clave 'results'
+        if (!empty($searchResult)) {
+            // Procesar los pagos y mostrarlos en la vista
+            $pagos = array();
+            foreach ($searchResult as $pago) {
+                $pagos = $searchResult;
+            }
+
+            return view('admin.pagos.mercado_pago', compact('pagos'));
+        } else {
+            // Manejar el caso en el que no hay resultados
+            return "No se encontraron resultados de pago.";
+        }
+
+        return view('admin.pagos.mercado_pago', compact('pagos'));
     }
 }

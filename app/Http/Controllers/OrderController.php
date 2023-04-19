@@ -161,7 +161,7 @@ class OrderController extends Controller
             Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
             Session::forget('cart');
-        } elseif ($status == 'pending') {
+        } else {
             $order = Orders::where('code', '=', $external_reference)->first();
             $order->num_order = $payment_id;
             $order->update();
