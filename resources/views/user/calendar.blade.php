@@ -63,7 +63,12 @@
                             <h3 class="text-white parrafo_full mb-4 mb-lg-5 mb-md-4">
                                 {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
                                 al {{$fecha_final}} <br>
-                                @endif {{$hora_inicial}} - {{$hora_final}}
+                                @endif
+                                @if ($curso->sin_fin == '1')
+                                    {{$hora_inicial}}</p>
+                                @else
+                                    {{$hora_inicial}} - {{$hora_final}}</p>
+                                @endif
                             </h3>
 
                             <div class="d-flex justify-content-start">
@@ -232,7 +237,12 @@
                 <p class="modalidado_grid" style="{{ $presencial_color }}"><strong>{{$curso->modalidad}}</strong></p>
                 <p class="wish_grid" style="{{ $presencial_bg }}"><i class="fas fa-heart"></i></p>
                 <p class="share_grid" onclick="shareFacebook()" style="{{ $presencial_bg }}"><i class="fas fa-share-alt"></i></p>
-                <p class="horario_grid" style="{{ $presencial_color }}">{{$hora_inicial}} - {{$hora_final}}</p>
+                <p class="horario_grid" style="{{ $presencial_color }}">
+                @if ($curso->sin_fin == '1')
+                    {{$hora_inicial}}</p>
+                @else
+                    {{$hora_inicial}} - {{$hora_final}}</p>
+                @endif
 
                 <div class="card-body">
                     <div class="row">

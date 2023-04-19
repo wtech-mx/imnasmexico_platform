@@ -87,6 +87,7 @@ class CursosController extends Controller
 
         $curso->texto_rvoe = $request->get('texto_rvoe');
         $curso->pdf = $request->get('pdf');
+        $curso->sin_fin = $request->get('sin_fin');
         $curso->fecha_inicial = $request->get('fecha_inicial');
         $curso->hora_inicial = $request->get('hora_inicial');
         $curso->fecha_final = $request->get('fecha_final');
@@ -202,6 +203,7 @@ class CursosController extends Controller
             $curso->pdf = $fileName;
         }
 
+        $curso->sin_fin = $request->get('sin_fin');
         $curso->texto_rvoe = $request->get('texto_rvoe');
         $curso->fecha_inicial = $request->get('fecha_inicial');
         $curso->hora_inicial = $request->get('hora_inicial');

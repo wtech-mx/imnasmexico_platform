@@ -44,7 +44,11 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
               <button class="nav-link" id="v-pills-objetivos-tab" data-bs-toggle="pill" data-bs-target="#v-pills-objetivos" type="button" role="tab" aria-controls="v-pills-objetivos" aria-selected="false">
                 <div class="d-flex justify-content-around">
+                    @if ($curso->modalidad == 'Presencial')
                      <p class="espacio_w">Materiales</p>
+                     @else
+                     <p class="espacio_w">Productos</p>
+                     @endif
                     <div class="content_nav d-inline-block">
                         <img class="icon_nav_course" src="{{asset('assets/user/icons/objetivo.webp')}}" alt="">
                     </div>
@@ -125,7 +129,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <p class="tittle_abstract ">
                             {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
                             - {{$fecha_final}}
-                            @endif, {{$hora_inicial}} - {{$hora_final}}
+                            @endif,
+                            @if ($curso->sin_fin == '1')
+                                {{$hora_inicial}}</p>
+                            @else
+                                {{$hora_inicial}} - {{$hora_final}}</p>
+                            @endif
                         </p>
 
                         <h2 class="title_curso">Modalidad</h2>
@@ -241,11 +250,12 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                     <div class="col-12 col-lg-12">
 
-                        <h2 class="title_curso mb-5 text-center">Materiales de Clase</h2>
                         @if ($curso->modalidad == 'Presencial')
-                        <p class="tittle_abstract text-center">El material de clase es obligatorio traerlo, en caso de no tenerlo, contamos con tienda dentro de las instalaciones para su compra del material.</p>
+                        <h2 class="title_curso mb-5 text-center">Materiales de Clase</h2>
+                        <p class="tittle_abstract text-center">El material de clase es obligatorio traerlo, en caso de no tenerlo, contamos con tienda dentro de las instalaciones para que puedas hacer la compra de tu material.</p>
                             @else
-                        <p class="tittle_abstract text-center">El material de clase es opcional, en caso de quererlo puede checarlo en nuestra tienda en línea dándole click en la imagen o el botón.</p>
+                            <h2 class="title_curso mb-5 text-center">Producto de Clase</h2>
+                        <p class="tittle_abstract text-center">El producto de clase es opcional, en caso de quererlo puedes checarlo en nuestra tienda en línea dándole click en la imagen o el botón.</p>
                         @endif
                         @if ($curso->materiales != NULL)
                                 <a href="{{ $curso->btn_cotizacion}}" target="_blank" >
@@ -1165,7 +1175,11 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                     </button>
 
                     <button class="nav-link" id="nav-profile_res-tab" data-bs-toggle="tab" data-bs-target="#nav-profile_res" type="button" role="tab" aria-controls="nav-profile_res" aria-selected="false">
+                        @if ($curso->modalidad == 'Presencial')
                         Materiales <img class="icon_res_tabs" src="{{asset('assets/user/icons/objetivo.webp')}}" alt="">
+                        @else
+                        Productos <img class="icon_res_tabs" src="{{asset('assets/user/icons/objetivo.webp')}}" alt="">
+                        @endif
                     </button>
 
                     <button class="nav-link" id="nav-temarios_res-tab" data-bs-toggle="tab" data-bs-target="#nav-temarios_res" type="button" role="tab" aria-controls="nav-temarios_res" aria-selected="false">
@@ -1346,9 +1360,13 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                     </div>
 
                     <div class="col-12 ">
-
-                        <h2 class="title_curso mb-md-5 mt-md-5 mt-2 mb-2">Materiales de Clase</h2>
-
+                        @if ($curso->modalidad == 'Presencial')
+                            <h2 class="title_curso mb-md-5 mt-md-5 mt-2 mb-2">Materiales de Clase</h2>
+                            <p class="tittle_abstract text-center">El material de clase es obligatorio traerlo, en caso de no tenerlo, contamos con tienda dentro de las instalaciones para que puedas hacer la compra de tu material.</p>
+                        @else
+                            <h2 class="title_curso mb-md-5 mt-md-5 mt-2 mb-2">Productos de Clase</h2>
+                            <p class="tittle_abstract text-center">El producto de clase es opcional, en caso de quererlo puedes checarlo en nuestra tienda en línea dándole click en la imagen o el botón.</p>
+                        @endif
                         @if ($curso->materiales != NULL)
                                 <a href="{{ $curso->btn_cotizacion}}" target="_blank">
                                     <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 100%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>

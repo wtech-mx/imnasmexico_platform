@@ -52,7 +52,13 @@
                                 <p class="modalidado_grid" style="{{ $presencial_color }}"><strong>{{$curso->modalidad}}</strong></p>
                                 <p class="wish_grid" style="{{ $presencial_bg }}"><i class="fas fa-heart"></i></p>
                                 <p class="share_grid" onclick="shareFacebook()" style="{{ $presencial_bg }}"><i class="fas fa-share-alt"></i></p>
-                                <p class="horario_grid" style="{{ $presencial_color }}">{{$hora_inicial}} - {{$hora_final}}</p>
+                                <p class="horario_grid" style="{{ $presencial_color }}">
+                                    @if ($curso->sin_fin == '1')
+                                        {{$hora_inicial}}</p>
+                                    @else
+                                        {{$hora_inicial}} - {{$hora_final}}</p>
+                                    @endif
+
 
                                 <div class="card-body">
                                     <div class="row">

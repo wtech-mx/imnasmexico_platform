@@ -99,7 +99,14 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6">
+                                                <div class="form-check col-4">
+                                                    <label for="nota">Sin Hora F.</label>
+                                                    <div class="form-group">
+                                                        <input class="form-check-input" type="checkbox" value="1" id="sin_fin" name="sin_fin">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
                                                     <div class="form-group">
                                                         <label for="nota">Categoria</label>
                                                         <select id="categoria" name="categoria" class="form-control">
@@ -109,7 +116,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6">
+                                                <div class="col-4">
                                                     <div class="form-group">
                                                         <label for="nota">Modalidad</label>
                                                         <select id="modalidad" name="modalidad" class="form-control">

@@ -42,7 +42,8 @@ class Cursos extends Model
         'seccion_unam',
         'texto_rvoe',
         'btn_cotizacion',
-        'pdf'
+        'pdf',
+        'sin_fin'
     ];
 
     public function User()
