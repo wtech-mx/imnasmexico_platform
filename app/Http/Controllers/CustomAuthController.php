@@ -50,15 +50,16 @@ class CustomAuthController extends Controller
 
     public function customRegistration(Request $request)
     {
-        $validator = $request->validate([
+        try {
+        $validatedData = $request->validate([
             'name' => 'required',
             // 'username' => 'required|unique:users',
             'email' => 'required|unique:users',
             'telefono' => 'required|unique:users',
         ]);
 
-        if ($validator->fails()) {
-            return back()->with('errors', $validator->messages()->all()[0])->withInput();
+    }catch (\Illuminate\Validation\ValidationException $e) {
+            return back()->with('errors', $e->getMessage())->withInput();
         }
 
         $code = Str::random(8);
