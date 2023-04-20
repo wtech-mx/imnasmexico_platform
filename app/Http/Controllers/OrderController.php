@@ -80,9 +80,10 @@ class OrderController extends Controller
             $payer = new User;
             $payer->name = $request->get('name');
             $payer->email = $request->get('email');
-            $payer->telefono = $request->get('telefono');
             $payer->username = $request->get('telefono');
             $payer->code = $code;
+            $payer->telefono = $request->get('telefono');
+            $payer->cliente = '1';
             $payer->password = Hash::make($request->get('telefono'));
             $payer->save();
             $datos = User::where('id', '=', $payer->id)->first();
@@ -134,7 +135,13 @@ class OrderController extends Controller
     {
         $payment_id = $request->get('payment_id');
 
-        $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-7084001530614040-031418-70b92db902566a519042ec6bd85289b3-1330780039");
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-8901800557603427-041420-99b569dfbf4e6ce9160fc673d9a47b1e-1115271504");
+        }else{
+            $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-7084001530614040-031418-70b92db902566a519042ec6bd85289b3-1330780039");
+        }
+
         $response = json_decode($response);
         $status = $response->status;
         $external_reference = $response->external_reference;
@@ -161,7 +168,7 @@ class OrderController extends Controller
             Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
             Session::forget('cart');
-        } elseif ($status == 'pending') {
+        } else {
             $order = Orders::where('code', '=', $external_reference)->first();
             $order->num_order = $payment_id;
             $order->update();
@@ -204,6 +211,7 @@ class OrderController extends Controller
             $payer->telefono = $request->get('telefono');
             $payer->username = $request->get('telefono');
             $payer->razon_social = $request->get('razon_social');
+            $user2->cliente = '1';
             $payer->rfc = $request->get('rfc');
             $payer->cfdi = $request->get('cfdi');
             $payer->code = $code;

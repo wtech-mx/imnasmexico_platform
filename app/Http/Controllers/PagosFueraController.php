@@ -10,6 +10,8 @@ use Session;
 use App\Mail\PlantillaPedidoRecibido;
 use App\Mail\PlantillaTicket;
 use Illuminate\Support\Facades\Mail;
+use MercadoPago\SDK;
+use MercadoPago\SDK\AdvancedPayments\RangeDateTime;
 
 class PagosFueraController extends Controller
 {
@@ -119,5 +121,40 @@ class PagosFueraController extends Controller
 
         return redirect()->route('pagos.index_pago')
             ->with('success', 'curso created successfully.');
+    }
+
+    public function mercado_pago(){
+        // Configuración de la SDK de MercadoPago
+        SDK::setAccessToken(config('services.mercadopago.token'));
+
+        // Obtener pagos desde MercadoPago
+        $filters = array(
+            "status" => "approved", // Filtro opcional para obtener solo pagos aprobados
+            "begin_date" => date('Y-m')."-01T00:00:00.000-00:00",
+            "end_date" => date('Y-m-t')."T23:59:59.999-00:00",
+            "limit" => 100, // Obtener un máximo de 100 registros por página
+            "offset" => 0 // Empezar desde el primer registro
+        );
+
+        $pagos = array();
+
+        do {
+            // Obtener siguiente página de resultados
+            $searchResult = \MercadoPago\Payment::search($filters);
+
+            // Obtener los resultados de la búsqueda
+            $results = $searchResult->getArrayCopy();
+
+            // Concatenar los resultados de la siguiente página con los resultados anteriores
+            $pagos = array_merge($pagos, $results);
+
+            // Incrementar el offset para obtener la siguiente página de resultados
+            $filters["offset"] += $filters["limit"];
+
+        } while (count($results) > 0);
+
+
+            return view('admin.pagos.mercado_pago', compact('pagos'));
+
     }
 }
