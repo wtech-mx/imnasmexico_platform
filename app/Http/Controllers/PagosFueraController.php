@@ -130,9 +130,8 @@ class PagosFueraController extends Controller
         // Obtener pagos desde MercadoPago
         $filters = array(
             "status" => "approved", // Filtro opcional para obtener solo pagos aprobados
-            "range" => "date_created",
-            "begin_date" => date("Y")."-01-01T00:00:00Z", // Fecha inicial (primer día del año en curso)
-            "end_date" => date("Y-m-d")."T23:59:59Z", // Fecha final (hoy a las 23:59:59)
+            "begin_date" => date('Y-m')."-01T00:00:00.000-00:00",
+            "end_date" => date('Y-m-t')."T23:59:59.999-00:00",
             "limit" => 100, // Obtener un máximo de 100 registros por página
             "offset" => 0 // Empezar desde el primer registro
         );
