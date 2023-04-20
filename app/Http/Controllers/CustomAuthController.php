@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\PlantillaNuevoUser;
 use Illuminate\Support\Str;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
+
 
 class CustomAuthController extends Controller
 {
@@ -50,7 +52,7 @@ class CustomAuthController extends Controller
 
     public function customRegistration(Request $request)
     {
-        $validator = $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             // 'username' => 'required|unique:users',
             'email' => 'required|unique:users',
@@ -58,7 +60,9 @@ class CustomAuthController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return back()->with('errors', $validator->messages()->all()[0])->withInput();
+            return back()
+            ->withErrors($validator)
+            ->withInput();
         }
 
         $code = Str::random(8);
