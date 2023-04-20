@@ -78,12 +78,13 @@ class OrderController extends Controller
             $payer = $user;
         } else {
             $payer = new User;
-            $payer->name = $request->get('name');
-            $payer->email = $request->get('email');
-            $payer->telefono = $request->get('telefono');
-            $payer->username = $request->get('telefono');
-            $payer->code = $code;
-            $payer->password = Hash::make($request->get('telefono'));
+            $user2->name = $request->get('name');
+            $user2->email = $request->get('email');
+            $user2->username = $request->get('telefono');
+            $user2->code = $code;
+            $user2->telefono = $request->get('telefono');
+            $user2->cliente = '1';
+            $user2->password = Hash::make($request->get('telefono'));
             $payer->save();
             $datos = User::where('id', '=', $payer->id)->first();
             Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
@@ -204,6 +205,7 @@ class OrderController extends Controller
             $payer->telefono = $request->get('telefono');
             $payer->username = $request->get('telefono');
             $payer->razon_social = $request->get('razon_social');
+            $user2->cliente = '1';
             $payer->rfc = $request->get('rfc');
             $payer->cfdi = $request->get('cfdi');
             $payer->code = $code;
