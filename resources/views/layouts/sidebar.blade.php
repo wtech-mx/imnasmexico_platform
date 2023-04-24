@@ -154,6 +154,35 @@
         </li>
 
         <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#pagesExamplesReportes" class="nav-link {{ (Request::is('admin/reporte*') ? 'active' : '') }}" aria-controls="pagesExamplesReportes" role="button" aria-expanded="false">
+              <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                <i class="fas fa-file-invoice-dollar text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+              </div>
+              <span class="nav-link-text ms-1">Reportes</span>
+            </a>
+            <div class="collapse" id="pagesExamplesReportes">
+              <ul class="nav ms-4">
+                <li class="nav-item ">
+                  <a class="nav-link {{ (Request::is('admin/reporte/dia*') ? 'show' : '') }}" href="{{ route('reporte.index_dia') }}">
+                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-normal">Dia</span>
+                  </a>
+
+                  <a class="nav-link {{ (Request::is('admin/reporte/semana*') ? 'show' : '') }}" href="{{ route('reporte.index_semana') }}">
+                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-normal">Semana</span>
+                  </a>
+
+                  <a class="nav-link {{ (Request::is('admin/reporte/mes*') ? 'show' : '') }}" href="{{ route('reporte.index_mes') }}">
+                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-normal">Mes</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          
+        <li class="nav-item">
           <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link {{ (Request::is('users*') ? 'active' : '') }}{{ (Request::is('roles*') ? 'active' : '') }}" aria-controls="pagesExamples" role="button" aria-expanded="false">
             <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
               <i class="ni ni-settings text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>

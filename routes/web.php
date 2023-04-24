@@ -185,7 +185,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/comentarios/edit/{id}', [App\Http\Controllers\ComentariosController::class, 'edit'])->name('comentarios.edit');
     Route::patch('/admin/comentarios/update/{id}', [App\Http\Controllers\ComentariosController::class, 'update'])->name('comentarios.update');
 
-     // =============== M O D U L O   Profile User ===============================
+    // =============== M O D U L O   R E P O R T E S ===============================
+    Route::get('/admin/reporte/dia', [App\Http\Controllers\ReportesController::class, 'index_dia'])->name('reporte.index_dia');
+    Route::get('/admin/reporte/semana', [App\Http\Controllers\ReportesController::class, 'index_semana'])->name('reporte.index_semana');
+    Route::get('/admin/reporte/mes', [App\Http\Controllers\ReportesController::class, 'index_mes'])->name('reporte.index_mes');
 });
 
 // Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');
