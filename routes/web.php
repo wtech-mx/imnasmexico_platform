@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\WebhooksController;
 use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\RevoesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -189,6 +191,18 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/reporte/dia', [App\Http\Controllers\ReportesController::class, 'index_dia'])->name('reporte.index_dia');
     Route::get('/admin/reporte/semana', [App\Http\Controllers\ReportesController::class, 'index_semana'])->name('reporte.index_semana');
     Route::get('/admin/reporte/mes', [App\Http\Controllers\ReportesController::class, 'index_mes'])->name('reporte.index_mes');
+
+    // =============== M O D U L O   WEB PAGE ===============================
+
+    Route::get('/admin/revoes', [App\Http\Controllers\RevoesController::class, 'index'])->name('revoes.index');
+    Route::post('/admin/revoes/store', [App\Http\Controllers\RevoesController::class, 'store'])->name('revoes.store');
+    Route::patch('/admin/revoes/update/{id}', [App\Http\Controllers\RevoesController::class, 'update'])->name('revoes.update');
+
+    Route::get('/admin/estandares', [App\Http\Controllers\EstandarController::class, 'index'])->name('estandares.index');
+    Route::post('/admin/estandares/store', [App\Http\Controllers\EstandarController::class, 'store'])->name('estandares.store');
+    Route::patch('/admin/comentarios/update/{id}', [App\Http\Controllers\EstandarController::class, 'update'])->name('estandares.update');
+
+
 });
 
 // Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');

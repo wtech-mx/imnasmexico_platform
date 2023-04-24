@@ -105,7 +105,7 @@
         </li>
 
         <li class="nav-item">
-            <a data-bs-toggle="collapse" href="#webpahe" class="nav-link {{ (Request::is('users*') ? 'active' : '') }}" aria-controls="webpahe" role="button" aria-expanded="false">
+            <a data-bs-toggle="collapse" href="#webpahe" class="nav-link {{ (Request::is('admin/estandares*') ? 'active' : '') }}" aria-controls="webpahe" role="button" aria-expanded="false">
               <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                 <i class="ni ni-settings text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
               </div>
@@ -115,31 +115,31 @@
               <ul class="nav ms-4">
                 <li class="nav-item ">
 
-                  <a class="nav-link {{ (Request::is('users*') ? 'show' : '') }}" href="">
+                  <a class="nav-link {{ (Request::is('users*') ? 'active' : '') }}" href="">
                     <span class="sidenav-mini-icon"></span>
                     <span class="sidenav-normal">Inicio</span>
                   </a>
-                  <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
+                  <a class="nav-link {{ (Request::is('roles*') ? 'active' : '') }}" href="">
                     <span class="sidenav-mini-icon"></span>
                     <span class="sidenav-normal">Avales</span>
                   </a>
-                  <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
+                  <a class="nav-link {{ (Request::is('roles*') ? 'active' : '') }}" href="">
                     <span class="sidenav-mini-icon"></span>
                     <span class="sidenav-normal">Nosotros</span>
                   </a>
-                  <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
+                  <a class="nav-link {{ (Request::is('roles*') ? 'active' : '') }}" href="">
                     <span class="sidenav-mini-icon"></span>
                     <span class="sidenav-normal">Avales</span>
                   </a>
-                  <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
+                  <a class="nav-link {{ (Request::is('roles*') ? 'active' : '') }}" href="">
                     <span class="sidenav-mini-icon"></span>
                     <span class="sidenav-normal">Instalaciones</span>
                   </a>
-                  <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
+                  <a class="nav-link {{ (Request::is('admin/estandares*') ? 'active' : '') }}" href="{{ route('estandares.index') }}">
                     <span class="sidenav-mini-icon"></span>
                     <span class="sidenav-normal">Estandares</span>
                   </a>
-                  <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
+                  <a class="nav-link {{ (Request::is('admin/revoes*') ? 'active' : '') }}" href="{{ route('revoes.index') }}">
                     <span class="sidenav-mini-icon"></span>
                     <span class="sidenav-normal">Revoes</span>
                   </a>
@@ -181,7 +181,7 @@
               </ul>
             </div>
           </li>
-          
+
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link {{ (Request::is('users*') ? 'active' : '') }}{{ (Request::is('roles*') ? 'active' : '') }}" aria-controls="pagesExamples" role="button" aria-expanded="false">
             <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">

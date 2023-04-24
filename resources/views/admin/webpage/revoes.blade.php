@@ -18,7 +18,9 @@
                     <h3 class="mb-3">RVOES</h3>
 
                     @can('usuarios-create')
-                    <a class="btn" href="" style="background: {{$configuracion->color_boton_add}}; color: #ffff">Crear Revoe</a>
+                    <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_revoe" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                        Crear Revoe
+                    </a>
                     @endcan
 
                 </div>
@@ -37,17 +39,24 @@
                         </tr>
                     </thead>
 
+                    @foreach ($revoes as $revoe)
+                    <tr>
+                        <td>{{ $revoe->id }}</td>
+                        <th><img id="blah" src="{{asset('revoes/'.$revoe->image) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
+                        <td>{{ $revoe->name }}</td>
+                        <td>{{ $revoe->num_revoe }}</td>
+                        <td>
+                            @can('client-edit')
+                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_revoe_{{ $revoe->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                <i class="fa fa-fw fa-edit"></i>
+                            </a>
+                            @endcan
+                        </td>
+                    </tr>
 
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <a class="btn btn-sm btn-success" href="{"><i class="fa fa-fw fa-edit"></i> </a>
-                            </td>
-                        </tr>
+                    @include('admin.webpage.modal_revoe_edit')
 
+                    @endforeach
 
                 </table>
                 </div>
@@ -57,6 +66,8 @@
         </div>
       </div>
 </div>
+
+@include('admin.webpage.modal_revoe_create')
 
 @endsection
 
