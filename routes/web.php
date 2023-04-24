@@ -72,6 +72,10 @@ Route::get('sede', function () {
     return view('emails.sede_del_curso');
 });
 
+Route::get('pago_exterior', function () {
+    return view('emails.pago_exterior');
+});
+
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->name('user.home');

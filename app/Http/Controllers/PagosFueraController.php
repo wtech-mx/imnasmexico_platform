@@ -9,6 +9,7 @@ use App\Models\Orders;
 use Session;
 use App\Mail\PlantillaPedidoRecibido;
 use App\Mail\PlantillaTicket;
+use App\Mail\PlantillaPagoExterno;
 use Illuminate\Support\Facades\Mail;
 use MercadoPago\SDK;
 use MercadoPago\SDK\AdvancedPayments\RangeDateTime;
@@ -41,8 +42,11 @@ class PagosFueraController extends Controller
             $file->move($path, $fileName);
             $pagos_fuera->foto = $fileName;
         }
-
         $pagos_fuera->save();
+
+        $email_custom = 'dayanna.wtech@gmail.com';
+        $datos = PagosFuera::where('id', '=', $pagos_fuera->id)->first();
+        Mail::to($email_custom)->send(new PlantillaPagoExterno($datos));
 
         return redirect()->route('pagos.inscripcion')
             ->with('success', 'pago fuera created successfully.');
