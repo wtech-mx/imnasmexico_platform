@@ -100,14 +100,60 @@
             </a>
         </li>
 
+        <li class="nav-item mt-3">
+            <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Web Page</h6>
+        </li>
+
+        <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#webpahe" class="nav-link {{ (Request::is('users*') ? 'active' : '') }}" aria-controls="webpahe" role="button" aria-expanded="false">
+              <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                <i class="ni ni-settings text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+              </div>
+              <span class="nav-link-text ms-1">Configuraciones de la pag</span>
+            </a>
+            <div class="collapse " id="webpahe">
+              <ul class="nav ms-4">
+                <li class="nav-item ">
+
+                  <a class="nav-link {{ (Request::is('users*') ? 'show' : '') }}" href="">
+                    <span class="sidenav-mini-icon"></span>
+                    <span class="sidenav-normal">Inicio</span>
+                  </a>
+                  <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
+                    <span class="sidenav-mini-icon"></span>
+                    <span class="sidenav-normal">Avales</span>
+                  </a>
+                  <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
+                    <span class="sidenav-mini-icon"></span>
+                    <span class="sidenav-normal">Nosotros</span>
+                  </a>
+                  <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
+                    <span class="sidenav-mini-icon"></span>
+                    <span class="sidenav-normal">Avales</span>
+                  </a>
+                  <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
+                    <span class="sidenav-mini-icon"></span>
+                    <span class="sidenav-normal">Instalaciones</span>
+                  </a>
+                  <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
+                    <span class="sidenav-mini-icon"></span>
+                    <span class="sidenav-normal">Estandares</span>
+                  </a>
+                  <a class="nav-link {{ (Request::is('roles*') ? 'show' : '') }}" href="">
+                    <span class="sidenav-mini-icon"></span>
+                    <span class="sidenav-normal">Revoes</span>
+                  </a>
+
+                </li>
+              </ul>
+            </div>
+          </li>
 
         <li class="nav-item mt-3">
           <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Administrativo</h6>
         </li>
 
         <li class="nav-item">
-
-
           <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link {{ (Request::is('users*') ? 'active' : '') }}{{ (Request::is('roles*') ? 'active' : '') }}" aria-controls="pagesExamples" role="button" aria-expanded="false">
             <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
               <i class="ni ni-settings text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
