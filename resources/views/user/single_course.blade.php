@@ -138,7 +138,13 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         </p>
 
                         <h2 class="title_curso">Modalidad</h2>
-                        <p class="tittle_abstract ">{{$curso->modalidad}}</p>
+                        <p class="tittle_abstract ">{{$curso->modalidad}} /
+                            @if ($curso->modalidad == 'Presencial')
+                                Castilla 136, Álamos, Benito Juárez, 03400, CDMX
+                                @else
+                                Google Meet
+                            @endif
+                        </p>
 
 
                         @if ($curso->estatus == 1)
@@ -1246,7 +1252,13 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         </p>
 
                         <h2 class="title_curso">Modalidad</h2>
-                        <p class="tittle_abstract ">{{$curso->modalidad}}</p>
+                        <p class="tittle_abstract ">{{$curso->modalidad}} /
+                            @if ($curso->modalidad == 'Presencial')
+                                Castilla 136, Álamos, Benito Juárez, 03400, CDMX
+                                @else
+                                Google Meet
+                            @endif
+                        </p>
                         @if ($curso->estatus == 1)
                             <a class="btn btn-primario space_cs_rs mt-5" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo">
                                 <div class="d-flex justify-content-around">
