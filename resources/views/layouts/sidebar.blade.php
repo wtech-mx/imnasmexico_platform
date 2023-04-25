@@ -115,25 +115,9 @@
               <ul class="nav ms-4">
                 <li class="nav-item ">
 
-                  <a class="nav-link {{ (Request::is('users*') ? 'active' : '') }}" href="">
+                  <a class="nav-link {{ (Request::is('users*') ? 'active' : '') }}" href="{{ route('webpage.index') }}">
                     <span class="sidenav-mini-icon"></span>
-                    <span class="sidenav-normal">Inicio</span>
-                  </a>
-                  <a class="nav-link {{ (Request::is('roles*') ? 'active' : '') }}" href="">
-                    <span class="sidenav-mini-icon"></span>
-                    <span class="sidenav-normal">Avales</span>
-                  </a>
-                  <a class="nav-link {{ (Request::is('roles*') ? 'active' : '') }}" href="">
-                    <span class="sidenav-mini-icon"></span>
-                    <span class="sidenav-normal">Nosotros</span>
-                  </a>
-                  <a class="nav-link {{ (Request::is('roles*') ? 'active' : '') }}" href="">
-                    <span class="sidenav-mini-icon"></span>
-                    <span class="sidenav-normal">Avales</span>
-                  </a>
-                  <a class="nav-link {{ (Request::is('roles*') ? 'active' : '') }}" href="">
-                    <span class="sidenav-mini-icon"></span>
-                    <span class="sidenav-normal">Instalaciones</span>
+                    <span class="sidenav-normal">Pagina Web</span>
                   </a>
                   <a class="nav-link {{ (Request::is('admin/estandares*') ? 'active' : '') }}" href="{{ route('estandares.index') }}">
                     <span class="sidenav-mini-icon"></span>

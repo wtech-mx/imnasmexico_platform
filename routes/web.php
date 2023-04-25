@@ -194,6 +194,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O   WEB PAGE ===============================
 
+    Route::get('/admin/webpage', [App\Http\Controllers\WebPageController::class, 'index'])->name('webpage.index');
     Route::get('/admin/revoes', [App\Http\Controllers\RevoesController::class, 'index'])->name('revoes.index');
     Route::post('/admin/revoes/store', [App\Http\Controllers\RevoesController::class, 'store'])->name('revoes.store');
     Route::patch('/admin/revoes/update/{id}', [App\Http\Controllers\RevoesController::class, 'update'])->name('revoes.update');
