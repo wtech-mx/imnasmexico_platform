@@ -62,28 +62,29 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($ordenes as $orden)
-                                                    @if ($orden->id_tickets == $ticket->id && $orden->Orders->estatus == '1')
+                                                @foreach ($ordenes as $order)
+                                                    @if ($order->id_tickets == $ticket->id && $order->Orders->estatus == '1')
                                                         <tr>
-                                                            <td>{{ $orden->id }}</td>
+                                                            <td>{{ $order->id }}</td>
 
-                                                            <td>{{ $orden->User->name }}</td>
-                                                            <td>{{ $orden->User->email }}</td>
-                                                            <td>{{ $orden->User->telefono }}</td>
-                                                            <td>{{ $orden->Orders->forma_pago }}</td>
+                                                            <td>{{ $order->User->name }}</td>
+                                                            <td>{{ $order->User->email }}</td>
+                                                            <td>{{ $order->User->telefono }}</td>
+                                                            <td>{{ $order->Orders->forma_pago }}</td>
                                                             <td>
-                                                                    {{ $orden->Orders->pago }}
+                                                                    {{ $order->Orders->pago }}
                                                             </td>
-                                                            <td>{{ $orden->Orders->fecha }}</td>
+                                                            <td>{{ $order->Orders->fecha }}</td>
                                                             <td>
-                                                                <form method="POST" action="{{ route('cursos.correo' ,$orden->id) }}" enctype="multipart/form-data" role="form">
+                                                                <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form">
                                                                     @csrf
-                                                                    <input type="hidden" name="email" id="email" value="{{ $orden->User->email }}">
-                                                                    <input type="hidden" name="ticket" id="ticket" value="{{ $orden->id_tickets }}">
-                                                                    <input type="hidden" name="id_usuario" id="id_usuario" value="{{ $orden->id_usuario }}">
-                                                                    <input type="hidden" name="curso" id="curso" value="{{ $orden->id_curso }}">
+                                                                    <input type="hidden" name="email" id="email" value="{{ $order->User->email }}">
+                                                                    <input type="hidden" name="ticket" id="ticket" value="{{ $order->id_tickets }}">
+                                                                    <input type="hidden" name="id_usuario" id="id_usuario" value="{{ $order->id_usuario }}">
+                                                                    <input type="hidden" name="curso" id="curso" value="{{ $order->id_curso }}">
                                                                     <button type="submit" class="btn btn-sm btn-primary" ><i class="fas fa-external-link-alt"></i></button>
                                                                 </form>
+                                                                <a class="btn btn-sm btn-success" href="{{ route('pagos.edit_pago',$order->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
                                                             </td>
                                                         </tr>
                                                     @endif
