@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Support\Facades\Mail;
 
 class Handler extends ExceptionHandler
 {
@@ -45,4 +46,37 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function report(Throwable $exception)
+    {
+        if ($this->shouldReport($exception)) {
+            $message = $exception->getMessage();
+            $statusCode = method_exists($exception, 'getStatusCode') ? $exception->getStatusCode() : 500;
+            $subject = "Error $statusCode: $message";
+
+            if (app()->bound('sentry') && $this->shouldReportToSentry($exception)) {
+                app('sentry')->captureException($exception);
+            }
+
+            if (app()->environment('production')) {
+                $this->sendEmail($subject, $exception);
+            }
+        }
+
+        parent::report($exception);
+    }
+
+    protected function sendEmail($subject, $exception)
+    {
+        $to = 'adrianwebtech@gmail.com';
+        $message = $exception->getMessage() . "\n\n" .
+            $exception->getTraceAsString() . "\n\n" .
+            'Request Data: ' . json_encode(request()->all());
+
+        Mail::raw($message, function ($email) use ($to, $subject) {
+            $email->to($to)
+                  ->subject($subject);
+        });
+    }
+
 }
