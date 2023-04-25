@@ -39,7 +39,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="foto">Foto</label>
-                                <img id="blah" src="{{asset('pago_fuera/'.$pago_fuera->foto) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                <img id="blah" src="{{asset('pago_fuera/'.$pago_fuera->foto) }}" alt="Imagen" style="width: 250px; height: 300px;"/>
 
                             </div>
                         </div>
