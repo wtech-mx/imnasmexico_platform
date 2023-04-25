@@ -2191,9 +2191,6 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <input type="text" class="form-control form_contact mt-4" name="nombre" id="nombre" placeholder="Nombre (requerido)" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control form_contact mt-4" name="correo" id="correo" placeholder="Correo Electrónico (requerido)" required>
-                    </div>
-                    <div class="form-group">
                         <input type="text" class="form-control form_contact mt-4" name="mensaje" id="mensaje" placeholder="Message">
                     </div>
                     <input type="hidden" class="form-control form_contact mt-4" name="curso" id="curso" value="{{$curso->nombre}}">
