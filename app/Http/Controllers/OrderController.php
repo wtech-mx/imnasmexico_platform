@@ -376,7 +376,7 @@ class OrderController extends Controller
             $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
             $user = $orden_ticket2->User->name;
             $id_order = $orden_ticket2->id_order;
-            $pago = $orden_ticket2->Orders->pago;
+            $pago = $request->precio;
             $forma_pago = $orden_ticket2->Orders->forma_pago;
 
             foreach ($orden_ticket as $details) {

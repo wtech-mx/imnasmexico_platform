@@ -37,6 +37,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($pagos_fuera as $pago_fuera)
+                                        @include('admin.pagos_fuera.modal_ins')
                                             <tr>
                                                 <td>{{ $pago_fuera->nombre }}</td>
                                                 <td>{{ $pago_fuera->correo }}</td>

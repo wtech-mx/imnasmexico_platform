@@ -14,7 +14,7 @@
                 @csrf
                 <div class="modal-body">
                     <input id="curso" name="curso" type="hidden" class="form-control" value="{{$ticket->id_curso}}">
-                    <input id="precio" name="precio" type="hidden" class="form-control" value="{{$ticket->precio}}">
+
                     <div class="form-group">
                         <label for="name">Ticket</label>
                         <select id="ticket" name="ticket" class="form-control">
@@ -34,6 +34,10 @@
                     <div class="form-group">
                         <label for="phone">Telefono</label>
                         <input id="telefono" name="telefono" type="number" class="form-control" placeholder="Telefono" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Monto</label>
+                        <input id="precio" name="precio" type="number" class="form-control" placeholder="$" required>
                     </div>
                 </div>
                 <div class="modal-footer">
