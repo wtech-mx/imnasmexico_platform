@@ -24,6 +24,13 @@ class PagosFueraController extends Controller
 
     public function store(Request $request)
     {
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera');
+        }else{
+            $pago_fuera = public_path() . '/pago_fuera';
+        }
+
         $pagos_fuera = new PagosFuera;
         $pagos_fuera->nombre = $request->get('nombre');
         $pagos_fuera->correo = $request->get('correo');
@@ -37,7 +44,7 @@ class PagosFueraController extends Controller
 
         if ($request->hasFile("foto")) {
             $file = $request->file('foto');
-            $path = public_path() . '/pago_fuera';
+            $path = $pago_fuera;
             $fileName = uniqid() . $file->getClientOriginalName();
             $file->move($path, $fileName);
             $pagos_fuera->foto = $fileName;
