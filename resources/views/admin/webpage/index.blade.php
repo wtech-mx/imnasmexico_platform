@@ -17,14 +17,14 @@
                     <h3 class="mb-3">Configuraciones de la Pag Web</h3>
 
                     <div class="contebnt_btn">
-                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_comentario" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                            Crear Comentario
-                        </a>
                         <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_estandar" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                             Crear estandar
                         </a>
                         <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_revoe" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                             Crear Revoe
+                        </a>
+                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_comentario" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            Crear Comentario
                         </a>
                     </div>
 
@@ -329,19 +329,18 @@
           <div class="card mt-3">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <h3 class="mb-3">Estandares y Revoes</h3>
+                    <h3 class="mb-3">Estandares ,Revoes y Comentarios</h3>
 
                     <div class="contebnt_btn">
-                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_comentario" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                            Crear Comentario
-                        </a>
                         <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_estandar" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                             Crear estandar
                         </a>
                         <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_revoe" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                             Crear Revoe
                         </a>
-
+                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_comentario" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            Crear Comentario
+                        </a>
                     </div>
 
                 </div>
