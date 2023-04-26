@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Session;
 use App\Models\WebPage;
+use App\Models\Estandar;
+use App\Models\Revoes;
+use App\Models\Comentarios;
 
 class WebPageController extends Controller
 {
@@ -35,9 +38,12 @@ class WebPageController extends Controller
     public function edit($id)
     {
 
+        $revoes = Revoes::orderBy('id','DESC')->get();
+        $estandares = Estandar::orderBy('id','DESC')->get();
         $webpage = WebPage::find($id);
+        $comentarios = Comentarios::orderBy('id','DESC')->get();
 
-        return view('admin.webpage.index', compact('webpage'));
+        return view('admin.webpage.index', compact('webpage','revoes','estandares','comentarios'));
     }
 
     public function update(Request $request, $id){

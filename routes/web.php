@@ -196,8 +196,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/admin/estandares', [App\Http\Controllers\EstandarController::class, 'index'])->name('estandares.index');
     Route::post('/admin/estandares/store', [App\Http\Controllers\EstandarController::class, 'store'])->name('estandares.store');
-    Route::patch('/admin/comentarios/update/{id}', [App\Http\Controllers\EstandarController::class, 'update'])->name('estandares.update');
-
+    Route::patch('/admin/estandares/update/{id}', [App\Http\Controllers\EstandarController::class, 'update'])->name('estandares.update');
 
 });
 

@@ -44,16 +44,6 @@
           </li>
 
         <li class="nav-item">
-            <a class="nav-link {{ (Request::is('admin/comentarios*') ? 'active' : '') }}" href="{{ route('comentarios.index') }}" target="">
-              <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                <i class="fa fa-graduation-cap text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-
-              </div>
-              <span class="nav-link-text ms-1">Comentarios</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
             <a data-bs-toggle="collapse" href="#pagesExamplesPagos" class="nav-link {{ (Request::is('admin/pagos-por-fuera*') ? 'active' : '') }}" aria-controls="pagesExamplesPagos" role="button" aria-expanded="false">
               <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                 <i class="fas fa-file-invoice-dollar text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
@@ -125,6 +115,11 @@
                   <a class="nav-link {{ (Request::is('admin/revoes*') ? 'active' : '') }}" href="{{ route('revoes.index') }}">
                     <span class="sidenav-mini-icon"></span>
                     <span class="sidenav-normal">Revoes</span>
+                  </a>
+
+                  <a class="nav-link {{ (Request::is('admin/comentarios*') ? 'active' : '') }}" href="{{ route('comentarios.index') }}">
+                    <span class="sidenav-mini-icon"></span>
+                    <span class="sidenav-normal">Comentarios</span>
                   </a>
 
                 </li>

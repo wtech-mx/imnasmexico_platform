@@ -29,7 +29,9 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="fecha">Descripcion</label>
-                                                        <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control"> {{$comentarios->descripcion}}</textarea>
+                                                        <textarea name="mensaje" id="mensaje" cols="10" rows="3" class="form-control">
+                                                            {{ $comentarios->mensaje }}
+                                                        </textarea>
                                                     </div>
                                                 </div>
 

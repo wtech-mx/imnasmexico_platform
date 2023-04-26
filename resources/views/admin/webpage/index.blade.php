@@ -9,16 +9,28 @@
 <div class="container-fluid mt-3">
       <div class="row">
         <div class="col">
+
           <div class="card">
             <!-- Card header -->
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h3 class="mb-3">Configuraciones de la Pag Web</h3>
-                    <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_revoe" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                        Crear Revoe
-                    </a>
+
+                    <div class="contebnt_btn">
+                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_comentario" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            Crear Comentario
+                        </a>
+                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_estandar" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            Crear estandar
+                        </a>
+                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_revoe" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            Crear Revoe
+                        </a>
+                    </div>
+
                 </div>
             </div>
+
             <div class="card-body">
                 <div class="row">
                     <div class="col-12">
@@ -312,22 +324,195 @@
                     </div>
                 </div>
             </div>
-
           </div>
+
+          <div class="card mt-3">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <h3 class="mb-3">Estandares y Revoes</h3>
+
+                    <div class="contebnt_btn">
+                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_comentario" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            Crear Comentario
+                        </a>
+                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_estandar" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            Crear estandar
+                        </a>
+                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_revoe" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            Crear Revoe
+                        </a>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card-body ">
+                <div class="row">
+                    <div class="col-12">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link active" id="estandares-tab" data-bs-toggle="tab" data-bs-target="#estandares-tab-pane" type="button" role="tab" aria-controls="estandares-tab-pane" aria-selected="true">
+                                Estandares
+                              </button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                              <button class="nav-link" id="revoe-tab" data-bs-toggle="tab" data-bs-target="#revoe-tab-pane" type="button" role="tab" aria-controls="revoe-tab-pane" aria-selected="false">
+                                Revoe
+                              </button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="comenatarios-tab" data-bs-toggle="tab" data-bs-target="#comenatarios-tab-pane" type="button" role="tab" aria-controls="comenatarios-tab-pane" aria-selected="false">
+                                  Comentarios
+                                </button>
+                              </li>
+
+                          </ul>
+
+                          <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="estandares-tab-pane" role="tabpanel" aria-labelledby="estandares-tab" tabindex="0">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-flush" id="estandares-search">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Imagen</th>
+                                                        <th>Nombre</th>
+                                                        <th>Num de estandar</th>
+                                                        <th width="280px">Acciones</th>
+                                                    </tr>
+                                                </thead>
+                                                @foreach ($estandares as $estandar)
+                                                <tr>
+                                                    <td>{{ $estandar->id }}</td>
+                                                    <th><img id="blah" src="{{asset('estandares/'.$estandar->image) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
+                                                    <td>{{ $estandar->name }}</td>
+                                                    <td>{{ $estandar->num_estandar }}</td>
+                                                    <td>
+                                                        @can('client-edit')
+                                                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_estandar_{{ $estandar->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                                <i class="fa fa-fw fa-edit"></i> </a>
+                                                        @endcan
+                                                    </td>
+                                                </tr>
+                                                @include('admin.webpage.modal_estandar_edit')
+                                                @endforeach
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="revoe-tab-pane" role="tabpanel" aria-labelledby="revoe-tab" tabindex="0">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="table-responsive">
+                                            <table class="table table-flush" id="revoes-search">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Imagen</th>
+                                                        <th>Nombre</th>
+                                                        <th>Num de Revoe</th>
+                                                        <th width="280px">Acciones</th>
+                                                    </tr>
+                                                </thead>
+
+                                                @foreach ($revoes as $revoe)
+                                                <tr>
+                                                    <td>{{ $revoe->id }}</td>
+                                                    <th><img id="blah" src="{{asset('revoes/'.$revoe->image) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
+                                                    <td>{{ $revoe->name }}</td>
+                                                    <td>{{ $revoe->num_revoe }}</td>
+                                                    <td>
+                                                        @can('client-edit')
+                                                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_revoe_{{ $revoe->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                            <i class="fa fa-fw fa-edit"></i>
+                                                        </a>
+                                                        @endcan
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.webpage.modal_revoe_edit')
+
+                                                @endforeach
+
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="tab-pane fade" id="comenatarios-tab-pane" role="tabpanel" aria-labelledby="comenatarios-tab" tabindex="0">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table class="table table-flush" id="comentarios-search">
+                                            <thead class="thead">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Img</th>
+                                                    <th>Nombre</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($comentarios as $comentario)
+                                                    <tr>
+                                                        <td>{{ $comentario->id }}</td>
+                                                        <th><img id="blah" src="{{asset('comentarios/'.$comentario->foto) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
+                                                        <td>{{ $comentario->nombre }}</td>
+                                                        <td>
+                                                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_comenatario_{{ $comentario->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                                <i class="fa fa-fw fa-edit"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @include('admin.webpage.modal_comentario_edit')
+
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                          </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+
         </div>
       </div>
 </div>
 
+@include('admin.webpage.modal_estandar_create')
+@include('admin.webpage.modal_revoe_create')
+@include('admin.webpage.modal_comentario_create')
 
 @endsection
 
 @section('datatable')
-
 <script>
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+    const dataTableSearch = new simpleDatatables.DataTable("#estandares-search", {
       searchable: true,
       fixedHeight: false
     });
-</script>
 
+    const dataTableSearch = new simpleDatatables.DataTable("#revoes-search", {
+      searchable: true,
+      fixedHeight: false
+    });
+
+    const dataTableSearch = new simpleDatatables.DataTable("#comentarios-search", {
+      searchable: true,
+      fixedHeight: false
+    });
+
+</script>
 @endsection

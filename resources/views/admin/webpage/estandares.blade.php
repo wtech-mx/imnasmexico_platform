@@ -55,7 +55,7 @@
                     @endforeach
 
                 </table>
-                </div>
+            </div>
             @endcan
 
           </div>

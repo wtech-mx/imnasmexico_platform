@@ -44,15 +44,14 @@ class ComentariosController extends Controller
         $comentarios->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->route('comentarios.index')
-            ->with('success', 'curso creado con exito.');
+        return redirect()->back()->with('success', 'Creado con exito');
     }
 
     public function edit($id)
     {
         $comentarios = Comentarios::find($id);
 
-        return view('admin.comentarios.edit', compact('comentarios', 'tickets'));
+        return view('admin.comentarios.edit', compact('comentarios'));
     }
 
     public function update(Request $request, $id)
@@ -79,7 +78,6 @@ class ComentariosController extends Controller
         $comentarios->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->route('comentarios.index')
-            ->with('success', 'curso actualizado con exito.');
+        return redirect()->back()->with('success', 'Actualziado con exito');
     }
 }

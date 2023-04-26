@@ -11,6 +11,7 @@ class RevoesController extends Controller
     public function index(Request $request)
     {
         $revoes = Revoes::orderBy('id','DESC')->get();
+        $estandares = Estandar::orderBy('id','DESC')->get();
 
         return view('admin.webpage.revoes', compact('revoes'));
     }
