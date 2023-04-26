@@ -14,7 +14,7 @@
 
 @section('content')
 
-<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/nosotros/11.jpeg')}}')">
+<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('webpage/'.$webpage->stone_nosotros_bg) }}')">
     <span class="mask"></span>
     <div class="row margin_home_nav ">
 
@@ -89,12 +89,10 @@
 
         <div class="col-12 col-sm-12 col-md-6 index_superior">
             <h1 class="text-white titulo space_title_instalaciones  space_tiitle_slide" style="">
-                NOSOTROS
+                {{ $webpage->stone_nosotros_tittle }}
             </h1>
             <p class="text-white parrafo parrafo_instalaciones" style="">
-                El Instituto Naturales Ain Spa, es una Entidad de Certificación, que está en constante movimiento, haciendo presencia en diferentes eventos y Expos. <br>
-                 Realizando también, Conferencias y Congresos propios, además de toda la oferta educativa. <br>
-                 Queremos que conozcan más de nosotros y dejarles una probada de lo que es formar parte de la familia, IMNAS.
+                {{ $webpage->stone_nosotros_text }}
             </p>
 
         </div>

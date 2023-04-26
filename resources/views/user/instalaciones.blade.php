@@ -11,7 +11,7 @@
 
 @section('content')
 
-<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/instalaciones/portada.jpg')}}')">
+<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('webpage/'.$webpage->stone_instalaciones_bg) }}')">
     <span class="mask"></span>
     <div class="row margin_home_nav ">
 
@@ -86,13 +86,10 @@
 
         <div class="col-12 col-sm-12 col-md-6 index_superior">
             <h1 class="text-white titulo space_title_instalaciones  space_tiitle_slide" style="">
-                Instituto Mexicano <br>
-                Naturales Ain Spa
+                {{ $webpage->stone_instalaciones_tittle }}
             </h1>
             <p class="text-white parrafo parrafo_instalaciones" style="">
-                Nuestra misión es llegar a más sectores de la educación a nivel global,
-                queremos que los mejores conocimientos y la experiencia de los mayores referentes del mundo estén a disposición de todo aquel
-                  que tenga inquietud, ambición y ganas de aprender y emprender.
+                {{ $webpage->stone_instalaciones_text }}
             </p>
 
         </div>

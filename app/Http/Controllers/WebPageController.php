@@ -14,6 +14,24 @@ class WebPageController extends Controller
         // return view('admin.webpage.index', compact('webpage'));
     }
 
+    public function instalaciones(Request $request){
+        $webpage = WebPage::first();
+
+        return view('user.instalaciones', compact('webpage'));
+    }
+
+    public function nosotros(Request $request){
+        $webpage = WebPage::first();
+
+        return view('user.nosotros', compact('webpage'));
+    }
+
+    public function avales(Request $request){
+        $webpage = WebPage::first();
+
+        return view('user.avales', compact('webpage'));
+    }
+
     public function edit($id)
     {
 

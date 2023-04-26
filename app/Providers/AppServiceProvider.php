@@ -4,6 +4,7 @@ namespace App\Providers;
 
 
 use App\Models\Configuracion;
+use App\Models\WebPage;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Cursos;
 use Carbon\Carbon;
@@ -28,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     {
         view()->composer('*', function ($view) {
             $configuracion = Configuracion::first();
+            $webpage = WebPage::first();
 
             $fechaActual = date('Y-m-d');
             $curso = Cursos::where('estatus', '=', '1')->where('fecha_final', '<', $fechaActual)->OrderBy('fecha_final', 'ASC')->first();
@@ -54,10 +56,7 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
 
-
-
-
-            $view->with(['configuracion' => $configuracion, 'fechaActual' => $fechaActual]);
+            $view->with(['configuracion' => $configuracion,'webpage' => $webpage, 'fechaActual' => $fechaActual]);
         });
     }
 }

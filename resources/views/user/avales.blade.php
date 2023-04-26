@@ -120,7 +120,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{asset('assets/user/certificaciones/unam_puntos.png')}}" alt="" class="img_certificados">
+                    <img src="{{asset('webpage/'.$webpage->stavalesunam_image) }}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -216,7 +216,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5 ">
                 <p class="text-center">
-                    <img src="{{asset('assets/user/certificaciones/RECONOCIMIENTO-CONOCER_3.png')}}" alt="" class="img_certificados">
+                    <img src="{{asset('webpage/'.$webpage->stavalesconocer_image) }}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -332,7 +332,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{asset('assets/user/certificaciones/revoe_documento.png')}}" alt="" class="img_certificados">
+                    <img src="{{asset('webpage/'.$webpage->stavalesrevoe_image) }}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -533,7 +533,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{asset('assets/user/certificaciones/sep_documentos.png')}}" alt="" class="img_certificados">
+                    <img src="{{asset('webpage/'.$webpage->stavalesstps_image) }}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -582,31 +582,31 @@ crossorigin="anonymous" />
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <p class="text-center">
-                        <img src="{{asset('assets/user/certificaciones/Titulo_Honorifico.png')}}" class="img_slide_avales" alt="...">
+                        <img src="{{asset('webpage/'.$webpage->stavalesregistro_one_image) }}" class="img_slide_avales" alt="...">
                         </p>
                       </div>
 
                     <div class="carousel-item">
                         <p class="text-center">
-                            <img src="{{asset('assets/user/certificaciones/diploma_imnas.png')}}" class="img_slide_avales" alt="...">
+                            <img src="{{asset('webpage/'.$webpage->stavalesregistro_two_image) }}" class="img_slide_avales" alt="...">
                         </p>
                     </div>
 
                     <div class="carousel-item">
                         <p class="text-center">
-                            <img src="{{asset('assets/user/certificaciones/tira_materias.png')}}" class="img_slide_avales" alt="...">
+                            <img src="{{asset('webpage/'.$webpage->stavalesregistro_three_image) }}" class="img_slide_avales" alt="...">
                         </p>
                     </div>
 
                     <div class="carousel-item">
                         <p class="text-center">
-                            <img src="{{asset('assets/user/certificaciones/cedula_papel.png')}}" class="img_slide_avales" alt="">
+                            <img src="{{asset('webpage/'.$webpage->stavalesregistro_four_image) }}" class="img_slide_avales" alt="">
                         </p>
                     </div>
 
                       <div class="carousel-item">
                         <p class="text-center">
-                        <img src="{{asset('assets/user/certificaciones/cedula_plastificada.png')}}" class="img_slide_avales" alt="">
+                        <img src="{{asset('webpage/'.$webpage->stavalesregistro_five_image) }}" class="img_slide_avales" alt="">
                         </p>
                       </div>
 

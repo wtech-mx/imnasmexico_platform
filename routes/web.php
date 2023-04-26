@@ -21,11 +21,6 @@ use App\Http\Controllers\RevoesController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('nosotros', function () {
-    return view('user.nosotros');
-})->name('user.nosotros');
-
-
 Route::get('403', function () {
     return view('errors.403');
 })->name('403');
@@ -42,17 +37,11 @@ Route::get('check', function () {
     return view('user.components.checkout_paquetes');
 });
 
-Route::get('nuestras_instalaciones', function () {
-    return view('user.instalaciones');
-})->name('user.instalaciones');
 
 Route::get('login', function () {
     return view('auth.login');
 });
 
-Route::get('avales', function () {
-    return view('user.avales');
-})->name('user.avales');
 
 Route::get('orden', function () {
     return view('user.order');
@@ -80,14 +69,17 @@ Route::get('pago_exterior', function () {
 
 Auth::routes();
 
+
+
 Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->name('user.home');
+Route::get('avales', [App\Http\Controllers\WebPageController::class, 'avales'])->name('user.avales');
+Route::get('nuestras_instalaciones', [App\Http\Controllers\WebPageController::class, 'instalaciones'])->name('user.instalaciones');
+Route::get('nosotros', [App\Http\Controllers\WebPageController::class, 'nosotros'])->name('user.nosotros');
 
 // =============== P A G I N A  S I N G L E  C O U R S E ===============================
 Route::get('/curso/{slug}', [App\Http\Controllers\CursoUsersController::class, 'show'])->name('cursos.show');
-
 Route::get('/calendario', [App\Http\Controllers\CursoUsersController::class, 'index_user'])->name('cursos.index_user');
 Route::get('/calendario/advance', [App\Http\Controllers\CursoUsersController::class, 'advance'])->name('advance_search');
-
 Route::post('/mensaje', [App\Http\Controllers\CursoUsersController::class, 'enviarFormulario'])->name('mensaje.form');
 
 // =============== P A Q U E T E S ===============

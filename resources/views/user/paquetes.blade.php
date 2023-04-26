@@ -15,7 +15,7 @@
 
     <div class="row">
         <div class="col-12 col-md-6 space_paquetes">
-            <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-01.png')}}" alt="">
+            <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetesone_image) }}" alt="">
         </div>
 
         <div class="col-12 col-md-6 space_paquetes">
@@ -82,7 +82,7 @@
         </div>
 
         <div class="col-12 col-md-6 order-uno space_paquetes">
-            <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-02.png')}}" alt="">
+            <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetestwo_image) }}" alt="">
         </div>
     </div>
 
@@ -92,7 +92,7 @@
 
     <div class="row">
         <div class="col-12 col-md-6 space_paquetes">
-            <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-03.png')}}" alt="">
+            <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetesthree_image) }}" alt="">
         </div>
 
         <div class="col-12 col-md-6 space_paquetes">
@@ -158,7 +158,7 @@
         </div>
 
         <div class="col-12 col-md-6 order-uno  space_paquetes">
-            <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-04.png')}}" alt="">
+            <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetesfour_image) }}" alt="">
         </div>
     </div>
 
@@ -168,7 +168,7 @@
 
     <div class="row">
         <div class="col-12 col-md-6 order-uno  space_paquetes">
-            <img class="img_paquetes" src="{{asset('assets/user/utilidades/PAQUETE-05.png')}}" alt="">
+            <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetesfive_image) }}" alt="">
         </div>
 
         <div class="col-12 col-md-6 order-dos space_paquetes">
