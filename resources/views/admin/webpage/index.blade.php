@@ -55,7 +55,9 @@
                                 </button>
                               </li>
                           </ul>
-                          <form action="">
+                          <form method="POST" action="{{ route('webpage.update', 1) }}" enctype="multipart/form-data" role="form">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
                           <div class="tab-content" id="pills-tabContent">
 
                                 <div class="tab-pane fade show active" id="pills-inicio" role="tabpanel" aria-labelledby="pills-inicio-tab" tabindex="0">
@@ -65,34 +67,39 @@
                                           <div class="form-group">
                                             <label for="">Seccion uno Image Bg</label>
                                             <input type="file" class="form-control" id="stone_home_bg" name="stone_home_bg">
+                                            <img id="blah" src="{{asset('webpage/'.$webpage->stone_home_bg) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                           </div>
                                         </div>
 
                                         <div class="col-6">
                                           <div class="form-group">
                                             <label for="">Seccion uno Titulo</label>
-                                            <input type="text" class="form-control" id="stone_home_tittle" name="stone_home_tittle" />
+                                            <input type="text" class="form-control" id="stone_home_tittle" name="stone_home_tittle" value="{{$webpage->stone_home_tittle}}"/>
                                           </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="form-group">
                                               <label for="">Seccion uno Text</label>
-                                              <textarea class="form-control" name="stone_home_text" id="stone_home_text" cols="30" rows="10"></textarea>
+                                              <textarea class="form-control" name="stone_home_text" id="stone_home_text" cols="30" rows="10">
+                                                {{$webpage->stone_home_text}}
+                                              </textarea>
                                             </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="">Seccion sinco Titulo</label>
-                                                <input type="text" class="form-control" id="stfive_home_tittle" name="stfive_home_tittle" />
+                                                <input type="text" class="form-control" id="stfive_home_tittle" name="stfive_home_tittle" value="{{$webpage->stfive_home_tittle}}"/>
                                               </div>
                                         </div>
 
                                         <div class="col-12">
                                             <div class="form-group">
                                               <label for="">Seccion sinco Text</label>
-                                              <textarea class="form-control" name="stfive_home_text" id="stfive_home_text" cols="30" rows="10"></textarea>
+                                              <textarea class="form-control" name="stfive_home_text" id="stfive_home_text" cols="30" rows="10">
+                                                {{$webpage->stfive_home_text}}
+                                              </textarea>
                                             </div>
                                         </div>
 
@@ -105,6 +112,7 @@
                                             <div class="form-group">
                                             <label for="">Paquetes imagen 1</label>
                                             <input type="file" class="form-control" id="stpaquetesone_image" name="stpaquetesone_image">
+                                            <img id="blah" src="{{asset('webpage/'.$webpage->stpaquetesone_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                             </div>
                                         </div>
 
@@ -112,6 +120,7 @@
                                             <div class="form-group">
                                             <label for="">Paquetes imagen 2</label>
                                             <input type="file" class="form-control" id="stpaquetestwo_image" name="stpaquetestwo_image">
+                                            <img id="blah" src="{{asset('webpage/'.$webpage->stpaquetestwo_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                             </div>
                                         </div>
 
@@ -119,6 +128,7 @@
                                             <div class="form-group">
                                             <label for="">Paquetes imagen 3</label>
                                             <input type="file" class="form-control" id="stpaquetesthree_image" name="stpaquetesthree_image">
+                                            <img id="blah" src="{{asset('webpage/'.$webpage->stpaquetesthree_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                             </div>
                                         </div>
 
@@ -126,6 +136,7 @@
                                             <div class="form-group">
                                             <label for="">Paquetes imagen 4</label>
                                             <input type="file" class="form-control" id="stpaquetesfour_image" name="stpaquetesfour_image">
+                                            <img id="blah" src="{{asset('webpage/'.$webpage->stpaquetesfour_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                             </div>
                                         </div>
 
@@ -133,6 +144,7 @@
                                             <div class="form-group">
                                             <label for="">Paquetes imagen 5</label>
                                             <input type="file" class="form-control" id="stpaquetesfive_image" name="stpaquetesfive_image">
+                                            <img id="blah" src="{{asset('webpage/'.$webpage->stpaquetesfive_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +156,8 @@
                                     <div class="col-3">
                                       <div class="form-group">
                                         <label for="">Certificado UNAM</label>
-                                        <input type="file" class="form-control" id="stavalesunam_image" name="stavalesunam_image">
+                                        <input type="file" class="form-control" id="stavalesunam_image" name="stavalesunam_image" >
+                                        <img id="blah" src="{{asset('webpage/'.$webpage->stavalesunam_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                       </div>
                                     </div>
 
@@ -152,6 +165,7 @@
                                       <div class="form-group">
                                       <label for="">Certificado Sep Conocer</label>
                                       <input type="file" class="form-control" id="stavalesconocer_image" name="stavalesconocer_image">
+                                      <img id="blah" src="{{asset('webpage/'.$webpage->stavalesconocer_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                       </div>
                                     </div>
 
@@ -159,6 +173,7 @@
                                       <div class="form-group">
                                       <label for="">Certificado REVOE</label>
                                       <input type="file" class="form-control" id="stavalesrevoe_image" name="stavalesrevoe_image">
+                                      <img id="blah" src="{{asset('webpage/'.$webpage->stavalesrevoe_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                       </div>
                                     </div>
 
@@ -166,6 +181,7 @@
                                       <div class="form-group">
                                       <label for="">Certificado STPS</label>
                                       <input type="file" class="form-control" id="stavalesstps_image" name="stavalesstps_image">
+                                      <img id="blah" src="{{asset('webpage/'.$webpage->stavalesstps_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                       </div>
                                     </div>
 
@@ -173,6 +189,7 @@
                                       <div class="form-group">
                                       <label for="">Registro Nacioanl 1</label>
                                       <input type="file" class="form-control" id="stavalesregistro_one_image" name="stavalesregistro_one_image">
+                                      <img id="blah" src="{{asset('webpage/'.$webpage->stavalesregistro_one_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                       </div>
                                     </div>
 
@@ -180,6 +197,7 @@
                                       <div class="form-group">
                                       <label for="">Registro Nacioanl 2</label>
                                       <input type="file" class="form-control" id="stavalesregistro_two_image" name="stavalesregistro_two_image">
+                                      <img id="blah" src="{{asset('webpage/'.$webpage->stavalesregistro_two_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                       </div>
                                     </div>
 
@@ -187,6 +205,7 @@
                                       <div class="form-group">
                                       <label for="">Registro Nacioanl 3</label>
                                       <input type="file" class="form-control" id="stavalesregistro_three_image" name="stavalesregistro_three_image">
+                                      <img id="blah" src="{{asset('webpage/'.$webpage->stavalesregistro_three_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                       </div>
                                     </div>
 
@@ -194,6 +213,7 @@
                                       <div class="form-group">
                                       <label for="">Registro Nacioanl 4</label>
                                       <input type="file" class="form-control" id="stavalesregistro_four_image" name="stavalesregistro_four_image">
+                                      <img id="blah" src="{{asset('webpage/'.$webpage->stavalesregistro_four_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                       </div>
                                     </div>
 
@@ -201,6 +221,7 @@
                                       <div class="form-group">
                                       <label for="">Registro Nacioanl 5</label>
                                       <input type="file" class="form-control" id="stavalesregistro_five_image" name="stavalesregistro_five_image">
+                                      <img id="blah" src="{{asset('webpage/'.$webpage->stavalesregistro_five_image) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                       </div>
                                     </div>
 
@@ -213,20 +234,23 @@
                                       <div class="form-group">
                                         <label for="">Seccion nosotros Image Bg</label>
                                         <input type="file" class="form-control" id="stone_nosotros_bg" name="stone_nosotros_bg">
+                                        <img id="blah" src="{{asset('webpage/'.$webpage->stone_nosotros_bg) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                       </div>
                                     </div>
 
                                     <div class="col-6">
                                       <div class="form-group">
                                         <label for="">Seccion nosotros Titulo</label>
-                                        <input type="text" class="form-control" id="stone_nosotros_tittle" name="stone_nosotros_tittle" />
+                                        <input type="text" class="form-control" id="stone_nosotros_tittle" name="stone_nosotros_tittle" value="{{$webpage->stone_nosotros_tittle}}"/>
                                       </div>
                                     </div>
 
                                     <div class="col-12">
                                         <div class="form-group">
                                           <label for="">Seccion nosotros Text</label>
-                                          <textarea class="form-control" name="stone_nosotros_text" id="stone_nosotros_text" cols="30" rows="10"></textarea>
+                                          <textarea class="form-control" name="stone_nosotros_text" id="stone_nosotros_text" cols="30" rows="10">
+                                            {{$webpage->stone_nosotros_text}}
+                                          </textarea>
                                         </div>
                                     </div>
                                   </div>
@@ -238,20 +262,23 @@
                                       <div class="form-group">
                                         <label for="">Seccion instalaciones Image Bg</label>
                                         <input type="file" class="form-control" id="stone_instalaciones_bg" name="stone_instalaciones_bg">
+                                        <img id="blah" src="{{asset('webpage/'.$webpage->stone_instalaciones_bg) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
                                       </div>
                                     </div>
 
                                     <div class="col-6">
                                       <div class="form-group">
                                         <label for="">Seccion instalaciones Titulo</label>
-                                        <input type="text" class="form-control" id="stone_instalaciones_tittle" name="stone_instalaciones_tittle" />
+                                        <input type="text" class="form-control" id="stone_instalaciones_tittle" name="stone_instalaciones_tittle" value="{{$webpage->stone_instalaciones_tittle}}"/>
                                       </div>
                                     </div>
 
                                     <div class="col-12">
                                         <div class="form-group">
                                           <label for="">Seccion instalaciones Text</label>
-                                          <textarea class="form-control" name="stone_instalaciones_text" id="stone_instalaciones_text" cols="30" rows="10"></textarea>
+                                          <textarea class="form-control" name="stone_instalaciones_text" id="stone_instalaciones_text" cols="30" rows="10">
+                                            {{$webpage->stone_instalaciones_text}}
+                                          </textarea>
                                         </div>
                                     </div>
                                   </div>
@@ -262,13 +289,17 @@
                                     <div class="col-6">
                                       <div class="form-group">
                                         <label for="">Pixel</label>
-                                        <textarea class="form-control" name="wb_all_pixel" id="wb_all_pixel" cols="30" rows="10"></textarea>
+                                        <textarea class="form-control" name="wb_all_pixel" id="wb_all_pixel" cols="30" rows="10">
+                                            {{$webpage->wb_all_pixel}}
+                                        </textarea>
                                       </div>
                                     </div>
                                     <div class="col-6">
                                       <div class="form-group">
                                         <label for="">Google ANALITICS</label>
-                                        <textarea class="form-control" name="wb_all_analitics" id="wb_all_analitics" cols="30" rows="10"></textarea>
+                                        <textarea class="form-control" name="wb_all_analitics" id="wb_all_analitics" cols="30" rows="10">
+                                            {{$webpage->wb_all_analitics}}
+                                        </textarea>
                                       </div>
                                     </div>
                                   </div>

@@ -114,8 +114,7 @@
             <div class="collapse " id="webpahe">
               <ul class="nav ms-4">
                 <li class="nav-item ">
-
-                  <a class="nav-link {{ (Request::is('users*') ? 'active' : '') }}" href="{{ route('webpage.index') }}">
+                  <a class="nav-link {{ (Request::is('users*') ? 'active' : '') }}" href="{{ route('webpage.edit',1) }}">
                     <span class="sidenav-mini-icon"></span>
                     <span class="sidenav-normal">Pagina Web</span>
                   </a>
