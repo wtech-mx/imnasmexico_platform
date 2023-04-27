@@ -224,8 +224,8 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                                     @if ($ticket->descuento == NULL)
                                                         <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                     @else
-                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                        <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                     @endif
                                                 </div>
 
@@ -355,8 +355,8 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                                     @if ($ticket->descuento == NULL)
                                                         <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                     @else
-                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                        <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                     @endif
                                                 </div>
 
@@ -491,8 +491,8 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                                         @if ($ticket->descuento == NULL)
                                                             <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                         @else
-                                                            <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                            <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                            <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                            <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                         @endif
                                                     </div>
 
@@ -700,8 +700,8 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                                     @if ($ticket->descuento == NULL)
                                                         <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                     @else
-                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                        <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                     @endif
                                                 </div>
 
@@ -991,8 +991,8 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                                 @if ($ticket->descuento == NULL)
                                                     <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                 @else
-                                                    <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                    <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                    <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                    <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                 @endif
                                             </div>
 
@@ -1136,8 +1136,8 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                                             @if ($ticket->descuento == NULL)
                                                                 <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                             @else
-                                                                <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                                <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                                <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                                <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                             @endif
                                                         </div>
 
@@ -1329,19 +1329,19 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                     @else
                                         <div class="row mb-3">
                                             @foreach ($tickets as $ticket)
-                                                <div class="col-4 mt-3">
+                                                <div class="col-12 mt-3">
                                                     <strong style="color: #836262">{{$ticket->nombre}}</strong>
                                                 </div>
-                                                <div class="col-3 mt-3">
+                                                <div class="col-6 col-lg-4 mt-3">
                                                     @if ($ticket->descuento == NULL)
                                                         <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                     @else
-                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                        <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                     @endif
                                                 </div>
 
-                                                <div class="col-5 mt-3">
+                                                <div class="col-6 col-lg-8 mt-3">
                                                     <p class="btn-holder">
                                                         <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
                                                             <i class="fas fa-ticket-alt"></i> Comprar
@@ -1393,7 +1393,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @endif
 
                         @if ($curso->estatus == 1)
-                            <a class="btn btn-primario space_cs_rs  mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapseobjetivos" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
+                            <a class="btn btn-primario space_cs_rs  mb-md-5 mt-md-5 mt-2 mb-2" data-bs-toggle="collapse" href="#collapseproductos" role="button" aria-expanded="false" aria-controls="collapseproductos">
                                 <div class="d-flex justify-content-around">
                                             @if ($curso->precio == 0)
                                                 <p class="card_tittle_btn_grid my-auto">
@@ -1421,7 +1421,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                 </div>
                             </a>
 
-                            <div class="collapse mt-3" id="collapseobjetivos">
+                            <div class="collapse mt-3" id="collapseproductos">
                                 <div class="card card-body card_colapsable_comprar">
                                     @if($curso->precio == 0)
                                         <div class="row mb-3">
@@ -1462,19 +1462,19 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                     @else
                                         <div class="row mb-3">
                                             @foreach ($tickets as $ticket)
-                                                <div class="col-4 mt-3">
+                                                <div class="col-12 mt-3">
                                                     <strong style="color: #836262">{{$ticket->nombre}}</strong>
                                                 </div>
-                                                <div class="col-3 mt-3">
+                                                <div class="col-6 col-lg-4 mt-3">
                                                     @if ($ticket->descuento == NULL)
                                                         <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                     @else
-                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                        <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                     @endif
                                                 </div>
 
-                                                <div class="col-5 mt-3">
+                                                <div class="col-6 col-lg-8 mt-3">
                                                     <p class="btn-holder">
                                                         <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
                                                             <i class="fas fa-ticket-alt"></i> Comprar
@@ -1602,19 +1602,19 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                     @else
                                         <div class="row mb-3">
                                             @foreach ($tickets as $ticket)
-                                                <div class="col-4 mt-3">
+                                                <div class="col-12 mt-3">
                                                     <strong style="color: #836262">{{$ticket->nombre}}</strong>
                                                 </div>
-                                                <div class="col-3 mt-3">
+                                                <div class="col-6 col-lg-4 mt-3">
                                                     @if ($ticket->descuento == NULL)
                                                         <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                     @else
-                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                        <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                     @endif
                                                 </div>
 
-                                                <div class="col-5 mt-3">
+                                                <div class="col-6 col-lg-8 mt-3">
                                                     <p class="btn-holder">
                                                         <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
                                                             <i class="fas fa-ticket-alt"></i> Comprar
@@ -1799,19 +1799,19 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                     @else
                                         <div class="row mb-3">
                                             @foreach ($tickets as $ticket)
-                                                <div class="col-4 mt-3">
+                                                <div class="col-12 mt-3">
                                                     <strong style="color: #836262">{{$ticket->nombre}}</strong>
                                                 </div>
-                                                <div class="col-3 mt-3">
+                                                <div class="col-6 col-lg-4 mt-3">
                                                     @if ($ticket->descuento == NULL)
                                                         <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                     @else
-                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                        <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                     @endif
                                                 </div>
 
-                                                <div class="col-5 mt-3">
+                                                <div class="col-6 col-lg-8 mt-3">
                                                     <p class="btn-holder">
                                                         <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
                                                             <i class="fas fa-ticket-alt"></i> Comprar
@@ -2131,19 +2131,19 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                         @else
                                             <div class="row mb-3">
                                                 @foreach ($tickets as $ticket)
-                                                    <div class="col-4 mt-3">
+                                                    <div class="col-12 mt-3">
                                                         <strong style="color: #836262">{{$ticket->nombre}}</strong>
                                                     </div>
-                                                    <div class="col-3 mt-3">
+                                                    <div class="col-6 col-lg-4 mt-3">
                                                         @if ($ticket->descuento == NULL)
                                                             <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                         @else
-                                                            <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                            <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                            <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                            <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                         @endif
                                                     </div>
 
-                                                    <div class="col-5 mt-3">
+                                                    <div class="col-6 col-lg-8 mt-3">
                                                         <p class="btn-holder">
                                                             <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
                                                                 <i class="fas fa-ticket-alt"></i> Comprar
