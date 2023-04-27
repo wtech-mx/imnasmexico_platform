@@ -203,6 +203,14 @@ class WebPageController extends Controller
             $webpage->stone_instalaciones_bg = $fileName;
         }
 
+        if ($request->hasFile("parallax")) {
+            $file = $request->file('parallax');
+            $path = $ruta_webpage;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $webpage->parallax = $fileName;
+        }
+
         $webpage->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

@@ -616,6 +616,7 @@
             </h2>
             <p class="text-left text_beneficios espaciodor_lab_text mb-4" style="margin-left: 0px!important">
                 Medicina Estética <br>
+                Cosmiatría estética
             </p>
             <p class="registro_num2 mt-3 mb-5">
                 Número de Registro : 60616-1263-17-X-22
@@ -631,17 +632,16 @@
                     </div>
                 </div>
 
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-md-3 spaciador_logos_unam">
                     <div class="d-flex justify-content-center">
-                        <a data-bs-toggle="modal" data-bs-target="#unam">
-                            <div class="card_certificaciones">
-                                <p class="text-center">
-                                    <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
-                                </p>
-                            </div>
-                        </a>
+                        <div class="card_certificaciones">
+                            <p class="text-center">
+                                <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
+                            </p>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

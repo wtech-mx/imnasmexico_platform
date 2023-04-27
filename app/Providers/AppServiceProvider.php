@@ -7,6 +7,8 @@ use App\Models\Configuracion;
 use App\Models\WebPage;
 use Illuminate\Support\ServiceProvider;
 use App\Models\Cursos;
+use App\Models\Revoes;
+use App\Models\Estandar;
 use Carbon\Carbon;
 use DateInterval;
 use DateTime;
@@ -30,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('*', function ($view) {
             $configuracion = Configuracion::first();
             $webpage = WebPage::first();
+            $estandares = Estandar::get();
+            $revoes = Revoes::get();
 
             $fechaActual = date('Y-m-d');
             $curso = Cursos::where('estatus', '=', '1')->where('fecha_final', '<', $fechaActual)->OrderBy('fecha_final', 'ASC')->first();
@@ -56,7 +60,7 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
 
-            $view->with(['configuracion' => $configuracion,'webpage' => $webpage, 'fechaActual' => $fechaActual]);
+            $view->with(['configuracion' => $configuracion,'webpage' => $webpage,'estandares' => $estandares,'revoes' => $revoes, 'fechaActual' => $fechaActual]);
         });
     }
 }

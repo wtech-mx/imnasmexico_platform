@@ -306,6 +306,7 @@
                                         </textarea>
                                       </div>
                                     </div>
+
                                     <div class="col-6">
                                       <div class="form-group">
                                         <label for="">Google ANALITICS</label>
@@ -314,6 +315,15 @@
                                         </textarea>
                                       </div>
                                     </div>
+
+                                    <div class="col-6">
+                                      <div class="form-group">
+                                        <label for="">Imagen de Parallax</label>
+                                        <input type="file" class="form-control" id="parallax" name="parallax">
+                                        <img id="blah" src="{{asset('webpage/'.$webpage->parallax) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
+                                      </div>
+                                    </div>
+
                                   </div>
                                 </div>
 
