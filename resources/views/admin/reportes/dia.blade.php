@@ -22,6 +22,12 @@
                             <h5 class="text-center">
                             <b>${{ $totalPagadoFormateado }}</b>
                             </h5>
+                            <div class="d-flex justify-content-center mt-3">
+                                <form method="POST" action="{{ route('reporte_email_dia.store') }}" enctype="multipart/form-data" role="form">
+                                    @csrf
+                                    <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff"> Enviar Reporte</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="col-6">
                             <h4 class="text-center mb-3">Tickets vendidos</h4>

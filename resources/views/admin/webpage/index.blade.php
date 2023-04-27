@@ -316,7 +316,35 @@
                                       </div>
                                     </div>
 
-                                    <div class="col-6">
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                          <label for="">Email Admin</label>
+                                          <input type="text" class="form-control" id="email_admin" name="email_admin" value="{{ $webpage->email_admin }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                          <label for="">Email Admin 2</label>
+                                          <input type="text" class="form-control" id="email_admin_two" name="email_admin_two" value="{{ $webpage->email_admin_two }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                          <label for="">Email Dev</label>
+                                          <input type="text" class="form-control" id="email_developer" name="email_developer" value="{{ $webpage->email_developer }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                          <label for="">Email Dev 2</label>
+                                          <input type="text" class="form-control" id="email_developer_two" name="email_developer_two" value="{{ $webpage->email_developer_two }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-3">
                                       <div class="form-group">
                                         <label for="">Imagen de Parallax</label>
                                         <input type="file" class="form-control" id="parallax" name="parallax">

@@ -66,6 +66,10 @@ class WebPageController extends Controller
         $webpage->stone_instalaciones_text = $request->get('stone_instalaciones_text');
         $webpage->wb_all_pixel = $request->get('wb_all_pixel');
         $webpage->wb_all_analitics = $request->get('wb_all_analitics');
+        $webpage->email_admin = $request->get('email_admin');
+        $webpage->email_developer = $request->get('email_developer');
+        $webpage->email_admin_two = $request->get('email_admin_two');
+        $webpage->email_developer_two = $request->get('email_developer_two');
 
         if ($request->hasFile("stone_home_bg")) {
             $file = $request->file('stone_home_bg');

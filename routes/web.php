@@ -67,8 +67,11 @@ Route::get('pago_exterior', function () {
     return view('emails.pago_exterior');
 });
 
-Auth::routes();
+Route::get('reporte_tickets_vendidos', function () {
+    return view('emails.reporte_tickets_vendidos');
+});
 
+Auth::routes();
 
 
 Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->name('user.home');
@@ -197,6 +200,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/estandares', [App\Http\Controllers\EstandarController::class, 'index'])->name('estandares.index');
     Route::post('/admin/estandares/store', [App\Http\Controllers\EstandarController::class, 'store'])->name('estandares.store');
     Route::patch('/admin/estandares/update/{id}', [App\Http\Controllers\EstandarController::class, 'update'])->name('estandares.update');
+
+
+    Route::post('/admin/reporte_email_dia/', [App\Http\Controllers\ReportesController::class, 'reporte_email_dia'])->name('reporte_email_dia.store');
+
 
 });
 
