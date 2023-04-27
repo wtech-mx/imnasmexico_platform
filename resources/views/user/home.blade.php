@@ -144,8 +144,8 @@
                                                                     @if ($ticket->descuento == NULL)
                                                                         <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                                     @else
-                                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                                        <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                                     @endif
                                                                 </div>
 
@@ -567,8 +567,8 @@
                                                         @if ($ticket->descuento == NULL)
                                                             <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                         @else
-                                                            <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                            <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                            <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                            <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                         @endif
                                                     </div>
 
