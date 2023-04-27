@@ -366,7 +366,7 @@ class OrderController extends Controller
 
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return back()->with('success', 'User created successfully');
+        return back()->with('success', 'Inscrito correctamente');
     }
 
     public function clases_gratis(Request $request)
@@ -439,7 +439,7 @@ class OrderController extends Controller
 
 
         Alert::success('Registro con exito', 'Se ha registrado con exito');
-        return back()->with('success', 'User created successfully');
+        return back()->with('success', 'Inscrito correctamente');
     }
 
     public function addToCart($id)
