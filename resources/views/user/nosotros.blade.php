@@ -101,6 +101,63 @@
 
 </section>
 
+<section class="primario bg_overley" style="background-color:#F5ECE4;" id="cafeteria">
+    <div class="row">
+
+        <div class="col-12 col-md-6 order-uno m-auto">
+            <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">Reality</h1>
+            <p class="text-center text-white mt-auto parrafo_instalaciones" style="color:#836262!important;">
+                ¡Participa en el primer reality de IMNAS! <br>
+                Demuestra tu talento y gana increíbles premios.
+            </p>
+        </div>
+
+        <div class="col-12 col-md-6 order-dos">
+            <div class="d-flex justify-content-center">
+                <div class="card card-custom space_Card" style="">
+                    <div id="carousel_reality" class="carousel slide">
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/reality_1.jpg')}}"  style="width: 100%;">
+                            </div>
+
+                            <div class="carousel-item ">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/reality_2.jpg')}}"  style="width: 100%;">
+                            </div>
+
+                            <div class="carousel-item ">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/reality_3.jpg')}}"  style="width: 100%;">
+                            </div>
+
+                            <div class="carousel-item ">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/reality_4.jpg')}}"  style="width: 100%;">
+                            </div>
+
+                            <div class="carousel-item ">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/reality_5.jpg')}}"  style="width: 100%;">
+                            </div>
+
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel_reality" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel_reality" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                                </button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
 
 <section class="primario bg_overley" style="background-color:#F5ECE4;" id="cafeteria">
     <div class="row">
