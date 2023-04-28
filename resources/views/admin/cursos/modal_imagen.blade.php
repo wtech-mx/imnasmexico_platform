@@ -5,6 +5,7 @@
     background: #836262;
     color: #fff;
     align-items: start;
+    width: 160px;
 }
 .nav.nav-pills .nav-link{
     color: #fff!important;
