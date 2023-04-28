@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use DB;
 
 class CursosController extends Controller
 {
@@ -135,9 +136,24 @@ class CursosController extends Controller
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
         $fotos_online = Recursos::where('tipo', '=', 'Online')->get();
         $fotos_presencial = Recursos::where('tipo', '=', 'Presencial')->get();
-        $fotos_pdf = Recursos::where('tipo', '=', 'PDF')->get();
+        $fotos_materialeso = DB::table('recursos')
+        ->select('material', 'nombre')
+        ->where('tipo', '=', 'Online')
+        ->where('material', '!=', NULL)
+        ->get();
 
-        return view('admin.cursos.edit', compact('curso', 'tickets', 'fotos_online','fotos_presencial','fotos_pdf'));
+        $fotos_materialesp = DB::table('recursos')
+        ->select('material', 'nombre')
+        ->where('tipo', '=', 'Presencial')
+        ->where('material', '!=', NULL)
+        ->get();
+
+        $fotos_pdf = DB::table('recursos')
+        ->select('pdf', 'nombre')
+        ->where('pdf', '!=', NULL)
+        ->get();
+
+        return view('admin.cursos.edit', compact('curso', 'tickets', 'fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp'));
     }
 
     public function update(Request $request, $id)

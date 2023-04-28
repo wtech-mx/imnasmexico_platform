@@ -49,10 +49,10 @@
                   <div class="tab-pane fade show" id="v-pills-materialeso" role="tabpanel" aria-labelledby="v-pills-materialeso-tab" tabindex="0">
                     <h3>Materiales Online</h3>
                     <div class="row">
-                        @foreach($fotos_online as $foto_online)
+                        @foreach($fotos_materialeso as $foto_materialeso)
                         <div class="col-md-4">
-                          <img src="{{ asset('curso/'.$foto_online->foto) }}" class="img-fluid img-thumbnail" alt="{{ $foto_online->nombre }}" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectMateriales('{{ $foto_online->foto }}')">
-                          {{$foto_online->nombre}}
+                          <img src="{{ asset('curso/'.$foto_materialeso->material) }}" class="img-fluid img-thumbnail" alt="{{ $foto_materialeso->nombre }}" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectMateriales('{{ $foto_materialeso->material }}')">
+                          {{$foto_materialeso->nombre}}
                         </div>
                         @endforeach
                     </div>
@@ -73,10 +73,10 @@
                   <div class="tab-pane fade show" id="v-pills-materialesp" role="tabpanel" aria-labelledby="v-pills-materialesp-tab" tabindex="0">
                     <h3>Materiales Presenciales</h3>
                     <div class="row">
-                        @foreach($fotos_online as $foto_online)
+                        @foreach($fotos_materialesp as $foto_materialesp)
                         <div class="col-md-4">
-                          <img src="{{ asset('curso/'.$foto_online->foto) }}" class="img-fluid img-thumbnail" alt="{{ $foto_online->nombre }}" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectMateriales('{{ $foto_online->foto }}')">
-                          {{$foto_online->nombre}}
+                          <img src="{{ asset('curso/'.$foto_materialesp->material) }}" class="img-fluid img-thumbnail" alt="{{ $foto_materialesp->nombre }}" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectMateriales('{{ $foto_materialesp->material }}')">
+                          {{$foto_materialesp->nombre}}
                         </div>
                         @endforeach
                     </div>
@@ -87,7 +87,7 @@
                     <div class="row">
                         @foreach($fotos_pdf as $foto_pdf)
                         <div class="col-md-4">
-                            <iframe src="{{ asset('curso/'.$foto_pdf->foto) }}" width="100%" height="300" class="img-fluid img-thumbnail" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectPdf('{{ $foto_pdf->foto }}')">
+                            <iframe src="{{ asset('curso/'.$foto_pdf->pdf) }}" width="100%" height="300" class="img-fluid img-thumbnail" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectPdf('{{ $foto_pdf->pdf }}')">
                             </iframe>
                         {{$foto_pdf->nombre}}
                         </div>
