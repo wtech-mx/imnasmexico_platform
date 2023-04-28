@@ -24,6 +24,7 @@
                             <div class="col-12 col-lg-8 m-auto">
                                 <form class="multisteps-form__form mb-8"  method="POST" action="{{ route('cursos.store') }}" enctype="multipart/form-data" role="form" style="height: 400px;">
                                     @csrf
+                                    @include('admin.cursos.modal_imagen')
                                     <!--single Datos Generales panel-->
                                     <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
                                         <h5 class="font-weight-bolder">Datos Generales</h5>
@@ -45,10 +46,13 @@
 
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="nota">Foto</label>
-                                                        <input type="file" id="foto" name="foto" class="form-control">
+                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            Seleccionar foto
+                                                        </button>
+                                                        <input type="hidden" name="foto" id="foto">
                                                     </div>
                                                 </div>
+
                                                 <div class="col-6">
                                                     <div class="input-group">
                                                         <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 150px; height: 150px;"/>
@@ -242,8 +246,10 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <label for="fecha">Materiales de Clase</label>
-                                                            <input type="file" id="materiales" name="materiales" class="form-control">
+                                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                Materiales de Clase
+                                                            </button>
+                                                            <input type="hidden" name="materiales" id="materiales">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -260,8 +266,10 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <label for="fecha">PDF Descarga</label>
-                                                            <input type="file" id="pdf" name="pdf" class="form-control">
+                                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                PDF Descarga
+                                                            </button>
+                                                            <input type="hidden" name="pdf" id="pdf">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -372,5 +380,18 @@
       // Agrega lo clonado al final del #formulario
       $clone.appendTo('#formulario');
     });
+    </script>
+    <script>
+        function selectImage(foto) {
+            $('#foto').val(foto);
+        }
+
+        function selectPdf(pdf) {
+            $('#pdf').val(pdf);
+        }
+
+        function selectMateriales(materiales) {
+            $('#materiales').val(materiales);
+        }
     </script>
 @endsection
