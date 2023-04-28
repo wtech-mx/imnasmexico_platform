@@ -138,6 +138,12 @@
                                 <img class="card_image" src="{{asset('assets/user/nosotros/reality_5.jpg')}}"  style="width: 100%;">
                             </div>
 
+                            <div class="carousel-item ">
+                                <video class="video_nosotros" controls>
+                                    <source src="{{asset('assets/user/nosotros/promo_reality.mp4')}}" type="video/mp4">
+                                </video>
+                            </div>
+
 
                             <button class="carousel-control-prev" type="button" data-bs-target="#carousel_reality" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

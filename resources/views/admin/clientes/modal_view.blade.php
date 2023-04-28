@@ -24,9 +24,6 @@
                           <button class="nav-link" id="fact-tab" data-bs-toggle="tab" data-bs-target="#fact{{ $cliente->id }}" type="button" role="tab" aria-controls="fact{{ $cliente->id }}" aria-selected="false">Facturacion</button>
                         </li>
 
-                        <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="documentos-tab" data-bs-toggle="tab" data-bs-target="#documentos{{ $cliente->id }}" type="button" role="tab{{ $cliente->id }}" aria-controls="documentos" aria-selected="false">Documentos</button>
-                        </li>
                       </ul>
 
                       <div class="tab-content" id="myTab_{{ $cliente->id }}Content">
@@ -71,9 +68,6 @@
                             </div>
                         </div>
 
-                        <div class="tab-pane fade" id="documentos{{ $cliente->id }}" role="tabpanel" aria-labelledby="documentos-tab">
-
-                        </div>
                       </div>
 
 

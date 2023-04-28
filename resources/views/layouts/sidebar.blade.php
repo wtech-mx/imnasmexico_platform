@@ -73,7 +73,7 @@
           </li>
 
         <li class="nav-item">
-          <a class="nav-link {{ (Request::is('/admin/pagos*') ? 'active' : '') }}" href="{{ route('pagos.index_pago') }}">
+          <a class="nav-link {{ (Request::is('admin/pagos') ? 'active' : '') }}" href="{{ route('pagos.index_pago') }}">
             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                 <i class="fa fa-file text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
             </div>
@@ -82,7 +82,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link {{ (Request::is('/admin/pagos/mercado*') ? 'active' : '') }}" href="{{ route('mercado.pago') }}">
+            <a class="nav-link {{ (Request::is('admin/pagos/mercado*') ? 'active' : '') }}" href="{{ route('mercado.pago') }}">
               <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                   <i class="fa fa-file text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
               </div>
@@ -91,7 +91,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link {{ (Request::is('/admin/clientes*') ? 'active' : '') }}" href="{{ route('clientes_admin.index') }}">
+            <a class="nav-link {{ (Request::is('admin/clientes*') ? 'active' : '') }}" href="{{ route('clientes_admin.index') }}">
               <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                   <i class="fa fa-file text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
               </div>
