@@ -204,7 +204,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::post('/admin/reporte_email_dia/', [App\Http\Controllers\ReportesController::class, 'reporte_email_dia'])->name('reporte_email_dia.store');
 
-
+ // =============== M O D U L O   WEB PAGE ===============================
+    Route::get('/admin/clientes', [App\Http\Controllers\ClientsController::class, 'index_admin'])->name('clientes_admin.index');
 });
 
 // Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');

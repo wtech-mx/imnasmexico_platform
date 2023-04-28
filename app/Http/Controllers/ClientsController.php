@@ -16,7 +16,7 @@ class ClientsController extends Controller
         $cliente = User::where('code', $code)->firstOrFail();
         $orders = Orders::where('id_usuario', '=', auth()->user()->id)->get();
         $order_ticket = OrdersTickets::where('id_usuario', '=', auth()->user()->id)->get();
-        
+
         $usuarioId = Auth::id(); // Obtén el ID del usuario logueado
         // Verifica si el usuario ha comprado un ticket para el curso
         $usuario_compro = OrdersTickets::join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
@@ -24,6 +24,13 @@ class ClientsController extends Controller
                         ->where('cursos.video_cad','=', 1)
                         ->get();
         return view('user.profile',compact('cliente', 'orders', 'usuario_compro', 'order_ticket'));
+    }
+
+    public function index_admin(){
+
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+
+        return view('admin.clientes.index',compact('clientes'));
     }
 
     public function update(Request $request, $code)
