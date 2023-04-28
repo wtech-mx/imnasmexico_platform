@@ -82,6 +82,7 @@
                   </div>
 
                   <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">
+                    <h3>PDF</h3>
                     <div class="row">
                         @foreach($fotos_pdf as $foto_pdf)
                         <div class="col-md-4">
