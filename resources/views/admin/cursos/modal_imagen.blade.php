@@ -1,12 +1,26 @@
 <!-- Modal -->
+
+<style>
+.nav.nav-pills {
+    background: #836262;
+    color: #fff;
+    align-items: start;
+}
+.nav.nav-pills .nav-link{
+    color: #fff!important;
+}
+</style>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" style="background: #F5ECE4;">
           <h5 class="modal-title" id="exampleModalLabel">Seleccionar imagen</h5>
-          <button type="button" class="btn_close_custom" data-bs-dismiss="modal" style="margin-bottom: 1rem;">X</button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
+            <span aria-hidden="true">X</span>
+        </button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body" style="background: #F5ECE4;">
             <div class="d-flex align-items-start">
                 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                   <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Online</button>
