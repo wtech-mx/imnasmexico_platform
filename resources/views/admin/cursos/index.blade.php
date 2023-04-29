@@ -48,8 +48,22 @@
                                                 <th><img id="blah" src="{{asset('curso/'.$curso->foto) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
 
                                                 <td>{{ $curso->nombre }}</td>
-                                                <td>{{ $curso->fecha_inicial }}</td>
-                                                <td>{{ $curso->fecha_final }}</td>
+                                                <td>
+                                                    @php
+                                                    $fecha = $curso->fecha_inicial;
+                                                    $fecha_timestamp = strtotime($fecha);
+                                                    $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                                                    @endphp
+                                                    {{$fecha_formateada}}
+                                                </td>
+                                                <td>
+                                                    @php
+                                                    $fecha = $curso->fecha_final;
+                                                    $fecha_timestamp = strtotime($fecha);
+                                                    $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                                                    @endphp
+                                                    {{$fecha_formateada}}
+                                                </td>
                                                 @if ($curso->modalidad == "Online")
                                                     <td> <label class="badge" style="color: #009ee3;background-color: #009ee340;">Online</label> </td>
                                                 @else
