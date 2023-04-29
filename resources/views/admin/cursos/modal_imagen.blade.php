@@ -51,7 +51,7 @@
                     <div class="row">
                         @foreach($fotos_materialeso as $foto_materialeso)
                         <div class="col-md-4">
-                          <img src="{{ asset('curso/'.$foto_materialeso->material) }}" class="img-fluid img-thumbnail" alt="{{ $foto_materialeso->nombre }}" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectMateriales('{{ $foto_materialeso->material }}')">
+                          <img src="{{ asset('materiales/'.$foto_materialeso->material) }}" class="img-fluid img-thumbnail" alt="{{ $foto_materialeso->nombre }}" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectMateriales('{{ $foto_materialeso->material }}')">
                           {{$foto_materialeso->nombre}}
                         </div>
                         @endforeach
