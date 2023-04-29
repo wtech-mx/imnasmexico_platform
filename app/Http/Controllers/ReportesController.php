@@ -23,7 +23,7 @@ class ReportesController extends Controller
         $totalPagado = $orders->sum('pago');
         $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
 
-        $cursosComprados = Orders::where('fecha', $fechaHoraActual)
+        $cursosComprados = Orders::where('fecha', '2023-04-28')
         ->with('OrdersTickets.CursosTickets')
         ->get()
         ->pluck('OrdersTickets')
