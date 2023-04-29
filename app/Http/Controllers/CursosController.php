@@ -42,12 +42,30 @@ class CursosController extends Controller
         return view('admin.cursos.index_dia', compact('cursos'));
     }
 
+
     public function create()
     {
         $fotos_online = Recursos::where('tipo', '=', 'Online')->get();
         $fotos_presencial = Recursos::where('tipo', '=', 'Presencial')->get();
         $fotos_pdf = Recursos::where('tipo', '=', 'PDF')->get();
-        return view('admin.cursos.create', compact('fotos_online','fotos_presencial','fotos_pdf'));
+        $fotos_materialeso = DB::table('recursos')
+        ->select('material', 'nombre')
+        ->where('tipo', '=', 'Online')
+        ->where('material', '!=', NULL)
+        ->get();
+
+        $fotos_materialesp = DB::table('recursos')
+        ->select('material', 'nombre')
+        ->where('tipo', '=', 'Presencial')
+        ->where('material', '!=', NULL)
+        ->get();
+
+        $fotos_pdf = DB::table('recursos')
+        ->select('pdf', 'nombre')
+        ->where('pdf', '!=', NULL)
+        ->get();
+
+        return view('admin.cursos.create', compact('fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp'));
     }
 
     public function store(Request $request)
