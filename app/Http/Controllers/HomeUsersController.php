@@ -7,6 +7,8 @@ use App\Models\CursosTickets;
 use Illuminate\Http\Request;
 use Codexshaper\WooCommerce\Models\Product;
 use App\Models\Comentarios;
+use App\Models\WebPage;
+
 class HomeUsersController extends Controller
 {
     public function index(){
@@ -15,8 +17,7 @@ class HomeUsersController extends Controller
         $cursos = Cursos::where('estatus','=', '1')->get();
         $unam = Cursos::where('seccion_unam', '=', 1)->where('estatus','=', '1')->get();
         $comentarios = Comentarios::get();
-
-
+        $webpage = WebPage::first();
         $tickets = CursosTickets::where('fecha_final','>=', $fechaActual)->get();
 
         // $woocomerce = new Product(
@@ -35,6 +36,6 @@ class HomeUsersController extends Controller
 
         //  $resultados = array_merge($decode2);
 
-        return view('user.home', compact('cursos', 'unam', 'tickets','comentarios'));
+        return view('user.home', compact('cursos', 'unam', 'tickets','comentarios','webpage'));
     }
 }

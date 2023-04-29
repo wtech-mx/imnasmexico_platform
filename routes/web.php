@@ -21,11 +21,6 @@ use App\Http\Controllers\RevoesController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('nosotros', function () {
-    return view('user.nosotros');
-})->name('user.nosotros');
-
-
 Route::get('403', function () {
     return view('errors.403');
 })->name('403');
@@ -42,17 +37,11 @@ Route::get('check', function () {
     return view('user.components.checkout_paquetes');
 });
 
-Route::get('nuestras_instalaciones', function () {
-    return view('user.instalaciones');
-})->name('user.instalaciones');
 
 Route::get('login', function () {
     return view('auth.login');
 });
 
-Route::get('avales', function () {
-    return view('user.avales');
-})->name('user.avales');
 
 Route::get('orden', function () {
     return view('user.order');
@@ -78,16 +67,22 @@ Route::get('pago_exterior', function () {
     return view('emails.pago_exterior');
 });
 
+Route::get('reporte_tickets_vendidos', function () {
+    return view('emails.reporte_tickets_vendidos');
+});
+
 Auth::routes();
 
+
 Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->name('user.home');
+Route::get('avales', [App\Http\Controllers\WebPageController::class, 'avales'])->name('user.avales');
+Route::get('nuestras_instalaciones', [App\Http\Controllers\WebPageController::class, 'instalaciones'])->name('user.instalaciones');
+Route::get('nosotros', [App\Http\Controllers\WebPageController::class, 'nosotros'])->name('user.nosotros');
 
 // =============== P A G I N A  S I N G L E  C O U R S E ===============================
 Route::get('/curso/{slug}', [App\Http\Controllers\CursoUsersController::class, 'show'])->name('cursos.show');
-
 Route::get('/calendario', [App\Http\Controllers\CursoUsersController::class, 'index_user'])->name('cursos.index_user');
 Route::get('/calendario/advance', [App\Http\Controllers\CursoUsersController::class, 'advance'])->name('advance_search');
-
 Route::post('/mensaje', [App\Http\Controllers\CursoUsersController::class, 'enviarFormulario'])->name('mensaje.form');
 
 // =============== P A Q U E T E S ===============
@@ -194,16 +189,23 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O   WEB PAGE ===============================
 
-    Route::get('/admin/webpage', [App\Http\Controllers\WebPageController::class, 'index'])->name('webpage.index');
+    // Route::get('/admin/webpage', [App\Http\Controllers\WebPageController::class, 'index'])->name('webpage.index');
     Route::get('/admin/revoes', [App\Http\Controllers\RevoesController::class, 'index'])->name('revoes.index');
     Route::post('/admin/revoes/store', [App\Http\Controllers\RevoesController::class, 'store'])->name('revoes.store');
     Route::patch('/admin/revoes/update/{id}', [App\Http\Controllers\RevoesController::class, 'update'])->name('revoes.update');
 
+    Route::get('/admin/webpage/{id}', [App\Http\Controllers\WebPageController::class, 'edit'])->name('webpage.edit');
+    Route::patch('/admin/webpage/update/{id}', [App\Http\Controllers\WebPageController::class, 'update'])->name('webpage.update');
+
     Route::get('/admin/estandares', [App\Http\Controllers\EstandarController::class, 'index'])->name('estandares.index');
     Route::post('/admin/estandares/store', [App\Http\Controllers\EstandarController::class, 'store'])->name('estandares.store');
-    Route::patch('/admin/comentarios/update/{id}', [App\Http\Controllers\EstandarController::class, 'update'])->name('estandares.update');
+    Route::patch('/admin/estandares/update/{id}', [App\Http\Controllers\EstandarController::class, 'update'])->name('estandares.update');
 
 
+    Route::post('/admin/reporte_email_dia/', [App\Http\Controllers\ReportesController::class, 'reporte_email_dia'])->name('reporte_email_dia.store');
+
+ // =============== M O D U L O   WEB PAGE ===============================
+    Route::get('/admin/clientes', [App\Http\Controllers\ClientsController::class, 'index_admin'])->name('clientes_admin.index');
 });
 
 // Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');

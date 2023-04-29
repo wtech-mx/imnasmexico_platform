@@ -7,6 +7,7 @@ use App\Models\CursosTickets;
 use App\Models\OrdersTickets;
 use Session;
 use Str;
+use App\Models\WebPage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -46,7 +47,7 @@ class CursoUsersController extends Controller
     {
         $fechaActual = date('Y-m-d');
         $curso = Cursos::where('precio','<=', 600)->where('modalidad','=', 'Online')->get();
-
+        $webpage = WebPage::first();
         $tickets = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
         ->where('cursos_tickets.precio','<=', 600)
         ->where('cursos_tickets.fecha_inicial','<=', $fechaActual)
@@ -55,7 +56,7 @@ class CursoUsersController extends Controller
         ->select('cursos_tickets.*')
         ->get();
         // dd(session()->all());
-        return view('user.paquetes', compact('curso', 'tickets'));
+        return view('user.paquetes', compact('curso', 'tickets','webpage'));
     }
 
     public function advance(Request $request) {

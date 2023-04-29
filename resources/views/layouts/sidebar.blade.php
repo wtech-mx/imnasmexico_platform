@@ -44,16 +44,6 @@
           </li>
 
         <li class="nav-item">
-            <a class="nav-link {{ (Request::is('admin/comentarios*') ? 'active' : '') }}" href="{{ route('comentarios.index') }}" target="">
-              <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                <i class="fa fa-graduation-cap text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-
-              </div>
-              <span class="nav-link-text ms-1">Comentarios</span>
-            </a>
-        </li>
-
-        <li class="nav-item">
             <a data-bs-toggle="collapse" href="#pagesExamplesPagos" class="nav-link {{ (Request::is('admin/pagos-por-fuera*') ? 'active' : '') }}" aria-controls="pagesExamplesPagos" role="button" aria-expanded="false">
               <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                 <i class="fas fa-file-invoice-dollar text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
@@ -83,7 +73,7 @@
           </li>
 
         <li class="nav-item">
-          <a class="nav-link {{ (Request::is('/admin/pagos*') ? 'active' : '') }}" href="{{ route('pagos.index_pago') }}">
+          <a class="nav-link {{ (Request::is('admin/pagos') ? 'active' : '') }}" href="{{ route('pagos.index_pago') }}">
             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                 <i class="fa fa-file text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
             </div>
@@ -92,11 +82,20 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link {{ (Request::is('/admin/pagos/mercado*') ? 'active' : '') }}" href="{{ route('mercado.pago') }}">
+            <a class="nav-link {{ (Request::is('admin/pagos/mercado*') ? 'active' : '') }}" href="{{ route('mercado.pago') }}">
               <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                   <i class="fa fa-file text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
               </div>
               <span class="nav-link-text ms-1">Mercado Pago</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link {{ (Request::is('admin/clientes*') ? 'active' : '') }}" href="{{ route('clientes_admin.index') }}">
+              <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                  <i class="fa fa-file text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+              </div>
+              <span class="nav-link-text ms-1">Alumn@s</span>
             </a>
         </li>
 
@@ -114,8 +113,7 @@
             <div class="collapse " id="webpahe">
               <ul class="nav ms-4">
                 <li class="nav-item ">
-
-                  <a class="nav-link {{ (Request::is('users*') ? 'active' : '') }}" href="{{ route('webpage.index') }}">
+                  <a class="nav-link {{ (Request::is('users*') ? 'active' : '') }}" href="{{ route('webpage.edit',1) }}">
                     <span class="sidenav-mini-icon"></span>
                     <span class="sidenav-normal">Pagina Web</span>
                   </a>
@@ -126,6 +124,11 @@
                   <a class="nav-link {{ (Request::is('admin/revoes*') ? 'active' : '') }}" href="{{ route('revoes.index') }}">
                     <span class="sidenav-mini-icon"></span>
                     <span class="sidenav-normal">Revoes</span>
+                  </a>
+
+                  <a class="nav-link {{ (Request::is('admin/comentarios*') ? 'active' : '') }}" href="{{ route('comentarios.index') }}">
+                    <span class="sidenav-mini-icon"></span>
+                    <span class="sidenav-normal">Comentarios</span>
                   </a>
 
                 </li>

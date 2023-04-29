@@ -63,7 +63,7 @@
             </div> --}}
 
             <hr class="hr_custom" style="">
-           
+
             <div class="d-flex justify-content-center">
                 <p class="preguntas_freceuntas">
                 <a data-bs-toggle="modal" data-bs-target="#preguntas">

@@ -3,7 +3,7 @@
     use Carbon\Carbon;
     use Carbon\CarbonInterface;
 @endphp
-    <div class="bgimg-1" style="height: auto;background-image: url('{{asset('assets/user/utilidades/spa.jpg')}}')">
+    <div class="bgimg-1" style="height: auto;background-image: url('{{asset('webpage/'.$webpage->parallax) }}')">
         <span class="mask"></span>
         <div class="row">
             <div class="col-12 index_superior">
@@ -159,8 +159,8 @@
                                                                         @if ($ticket->descuento == NULL)
                                                                             <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                                         @else
-                                                                            <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                                            <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                                            <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                                            <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                                         @endif
                                                                     </div>
 

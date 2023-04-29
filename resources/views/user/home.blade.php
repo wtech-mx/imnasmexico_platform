@@ -21,18 +21,15 @@
 @endphp
 @section('content')
 
-<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/utilidades/IMAGEN-HOME.webp')}}')">
+<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('webpage/'.$webpage->stone_home_bg) }}')">
     <span class="mask"></span>
     <div class="row margin_home_nav">
         <div class="col-12 col-md-6 index_superior">
             <h1 class="text-white titulo space_ttile" style="">
-                Instituto Mexicano <br>
-                Naturales Ain Spa
+                {{ $webpage->stone_home_tittle }}
             </h1>
             <p class="text-white parrafo" style="">
-                Instituto incorporado a UNAM, SEP, SEP CONOCER, SEP RVOE Y STPS (Secretaría de Trabajo y Previsión Social) con más de 35 años en el mundo de
-                la belleza y salud, formando a miles de alumnos a nivel nacional e internacional,
-                brindando la mejor educación, con profesionales de alto nivel.
+                {{ $webpage->stone_home_text }}
             </p>
             <div class="d-flex justify-content-center justify-content-md-start space_btn_section1">
                 <a class="btn btn-primario me-4" href="{{ route('cursos.index_user') }}">
@@ -147,8 +144,8 @@
                                                                     @if ($ticket->descuento == NULL)
                                                                         <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                                     @else
-                                                                        <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                                        <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                                        <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                                     @endif
                                                                 </div>
 
@@ -447,12 +444,9 @@
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
     <div class="row">
         <div class="col-12 col-md-6">
-            <h2 class="titulomin_alfa espaciodor_lab text-left  mb-4" style="margin-left: 30px;">Laboratorio Naturales Ain Spa</h2>
+            <h2 class="titulomin_alfa espaciodor_lab text-left  mb-4" style="margin-left: 30px;">{{ $webpage->stfive_home_tittle }}</h2>
             <p class="text-left text_beneficios espaciodor_lab_text mb-4">
-                Somos un laboratorio certificado ante COFEPRIS.<br><br>
-                Contamos con mas de 100 productos faciales y corporales ideales para tu cabina, consultorio o Spa. <br>
-                Son productos con las bondades de la Aromaterapia y aceites esenciales, brindando siempre la mejor calidad en producto e imagen.
-
+                {{ $webpage->stfive_home_text }}
             </p>
             <div class="row">
                 <div class="col-3" style="">
@@ -573,8 +567,8 @@
                                                         @if ($ticket->descuento == NULL)
                                                             <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
                                                         @else
-                                                            <del style="color: #836262"><strong>${{$ticket->precio}}</strong></del>
-                                                            <h5 style="color: #836262"><strong>${{$ticket->descuento}}</strong></h5>
+                                                            <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                            <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                         @endif
                                                     </div>
 
@@ -622,6 +616,7 @@
             </h2>
             <p class="text-left text_beneficios espaciodor_lab_text mb-4" style="margin-left: 0px!important">
                 Medicina Estética <br>
+                Cosmiatría estética
             </p>
             <p class="registro_num2 mt-3 mb-5">
                 Número de Registro : 60616-1263-17-X-22
@@ -637,17 +632,16 @@
                     </div>
                 </div>
 
-                <div class="col-6 col-md-3">
+                <div class="col-6 col-md-3 spaciador_logos_unam">
                     <div class="d-flex justify-content-center">
-                        <a data-bs-toggle="modal" data-bs-target="#unam">
-                            <div class="card_certificaciones">
-                                <p class="text-center">
-                                    <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
-                                </p>
-                            </div>
-                        </a>
+                        <div class="card_certificaciones">
+                            <p class="text-center">
+                                <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
+                            </p>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

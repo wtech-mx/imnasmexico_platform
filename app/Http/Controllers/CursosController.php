@@ -8,11 +8,15 @@ use App\Models\Orders;
 use App\Models\OrdersTickets;
 use Session;
 use App\Mail\PlantillaTicket;
+use App\Models\Recursos;
 use Illuminate\Support\Facades\Mail;
 use Str;
+use App\Models\Estandar;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use DB;
 
 class CursosController extends Controller
 {
@@ -39,9 +43,31 @@ class CursosController extends Controller
         return view('admin.cursos.index_dia', compact('cursos'));
     }
 
+
     public function create()
     {
-        return view('admin.cursos.create');
+        $estandares = Estandar::orderBy('name','asc')->get();
+        $fotos_online = Recursos::where('tipo', '=', 'Online')->get();
+        $fotos_presencial = Recursos::where('tipo', '=', 'Presencial')->get();
+        $fotos_pdf = Recursos::where('tipo', '=', 'PDF')->get();
+        $fotos_materialeso = DB::table('recursos')
+        ->select('material', 'nombre')
+        ->where('tipo', '=', 'Online')
+        ->where('material', '!=', NULL)
+        ->get();
+
+        $fotos_materialesp = DB::table('recursos')
+        ->select('material', 'nombre')
+        ->where('tipo', '=', 'Presencial')
+        ->where('material', '!=', NULL)
+        ->get();
+
+        $fotos_pdf = DB::table('recursos')
+        ->select('pdf', 'nombre')
+        ->where('pdf', '!=', NULL)
+        ->get();
+
+        return view('admin.cursos.create', compact('fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares'));
     }
 
     public function store(Request $request)
@@ -60,33 +86,11 @@ class CursosController extends Controller
         $curso->nombre = $request->get('nombre');
         $curso->descripcion = $request->get('descripcion');
         $curso->btn_cotizacion = $request->get('btn_cotizacion');
-
-        if ($request->hasFile("materiales")) {
-            $file = $request->file('materiales');
-            $path = $ruta_materiales;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $curso->materiales = $fileName;
-        }
-
-        if ($request->hasFile("foto")) {
-            $file = $request->file('foto');
-            $path = $ruta_curso;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $curso->foto = $fileName;
-        }
-
-        if ($request->hasFile("pdf")) {
-            $file = $request->file('pdf');
-            $path = $pdf;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $curso->pdf = $fileName;
-        }
-
-        $curso->texto_rvoe = $request->get('texto_rvoe');
+        $curso->foto = $request->get('foto');
         $curso->pdf = $request->get('pdf');
+        $curso->materiales = $request->get('materiales');
+        $curso->id_estandar = $request->get('id_estandar');
+        $curso->texto_rvoe = $request->get('texto_rvoe');
         $curso->sin_fin = $request->get('sin_fin');
         $curso->fecha_inicial = $request->get('fecha_inicial');
         $curso->hora_inicial = $request->get('hora_inicial');
@@ -148,59 +152,47 @@ class CursosController extends Controller
 
     public function edit($id)
     {
+        $estandares = Estandar::orderBy('name','asc')->get();
         $curso = Cursos::find($id);
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
+        $fotos_online = Recursos::where('tipo', '=', 'Online')->get();
+        $fotos_presencial = Recursos::where('tipo', '=', 'Presencial')->get();
+        $fotos_materialeso = DB::table('recursos')
+        ->select('material', 'nombre')
+        ->where('tipo', '=', 'Online')
+        ->where('material', '!=', NULL)
+        ->get();
 
-        return view('admin.cursos.edit', compact('curso', 'tickets'));
+        $fotos_materialesp = DB::table('recursos')
+        ->select('material', 'nombre')
+        ->where('tipo', '=', 'Presencial')
+        ->where('material', '!=', NULL)
+        ->get();
+
+        $fotos_pdf = DB::table('recursos')
+        ->select('pdf', 'nombre')
+        ->where('pdf', '!=', NULL)
+        ->get();
+
+        return view('admin.cursos.edit', compact('curso', 'tickets', 'fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares'));
     }
 
     public function update(Request $request, $id)
     {
-        $dominio = $request->getHost();
-        if($dominio == 'plataforma.imnasmexico.com'){
-            $ruta_materiales = base_path('../public_html/plataforma.imnasmexico.com/materiales');
-            $ruta_curso = base_path('../public_html/plataforma.imnasmexico.com/curso');
-            $pdf = base_path('../public_html/plataforma.imnasmexico.com/pdf');
-        }else{
-            $ruta_materiales = public_path() . '/materiales';
-            $ruta_curso = public_path() . '/curso';
-            $pdf = public_path() . '/pdf';
-        }
-
         $fechaHoraActual = date('Y-m-d H:i:s');
         $curso = Cursos::find($id);
         $curso->nombre = $request->get('nombre');
         $curso->descripcion = $request->get('descripcion');
         $curso->btn_cotizacion = $request->get('btn_cotizacion');
-
-        if ($request->hasFile("materiales")) {
-            $file = $request->file('materiales');
-            $path = $ruta_materiales;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $curso->materiales = $fileName;
-        }
+        $curso->foto = $request->get('foto');
+        $curso->pdf = $request->get('pdf');
+        $curso->materiales = $request->get('materiales');
+        $curso->id_estandar = $request->get('id_estandar');
 
         if ($request->get('clase_grabada')) {
             $curso->clase_grabada = $request->get('clase_grabada');
             $curso->video_cad = 1;
             $curso->fecha_video = $fechaHoraActual;
-        }
-
-        if ($request->hasFile("foto")) {
-            $file = $request->file('foto');
-            $path = $ruta_curso;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $curso->foto = $fileName;
-        }
-
-        if ($request->hasFile("pdf")) {
-            $file = $request->file('pdf');
-            $path = $pdf;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $curso->pdf = $fileName;
         }
 
         $curso->sin_fin = $request->get('sin_fin');

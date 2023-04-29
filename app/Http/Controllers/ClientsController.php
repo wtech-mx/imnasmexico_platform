@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Orders;
 use App\Models\OrdersTickets;
+use App\Models\CursosTickets;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -16,14 +17,25 @@ class ClientsController extends Controller
         $cliente = User::where('code', $code)->firstOrFail();
         $orders = Orders::where('id_usuario', '=', auth()->user()->id)->get();
         $order_ticket = OrdersTickets::where('id_usuario', '=', auth()->user()->id)->get();
-        
+
         $usuarioId = Auth::id(); // Obtén el ID del usuario logueado
         // Verifica si el usuario ha comprado un ticket para el curso
         $usuario_compro = OrdersTickets::join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
                         ->where('orders_tickets.id_usuario', $usuarioId)
                         ->where('cursos.video_cad','=', 1)
                         ->get();
+
         return view('user.profile',compact('cliente', 'orders', 'usuario_compro', 'order_ticket'));
+    }
+
+    public function index_admin(){
+
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+        $orders = Orders::get();
+        $tickets = CursosTickets::get();
+        $order_ticket = OrdersTickets::get();
+
+        return view('admin.clientes.index',compact('clientes','tickets','orders','order_ticket'));
     }
 
     public function update(Request $request, $code)

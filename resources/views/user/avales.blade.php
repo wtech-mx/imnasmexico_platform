@@ -120,7 +120,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{asset('assets/user/certificaciones/unam_puntos.png')}}" alt="" class="img_certificados">
+                    <img src="{{asset('webpage/'.$webpage->stavalesunam_image) }}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -216,7 +216,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5 ">
                 <p class="text-center">
-                    <img src="{{asset('assets/user/certificaciones/RECONOCIMIENTO-CONOCER_3.png')}}" alt="" class="img_certificados">
+                    <img src="{{asset('webpage/'.$webpage->stavalesconocer_image) }}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -332,7 +332,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{asset('assets/user/certificaciones/revoe_documento.png')}}" alt="" class="img_certificados">
+                    <img src="{{asset('webpage/'.$webpage->stavalesrevoe_image) }}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -340,112 +340,7 @@ crossorigin="anonymous" />
 </section>
 
 
-
-<section class="primario bg_overley padding_avales_cont" style="background-color:#fff;">
-    <div class="row">
-        <div class="col-12 mb-5">
-            <h2 class="titulo_alfa text-center">Conoce todos</h2>
-            <h3 class="titulo_beta text-center">nuestros RVOES</h3>
-        </div>
-
-        <div class="col-12 m-auto">
-
-            <div class="owl-carousel owl-theme">
-
-                <div class="item">
-                    <div class="card card_certificados">
-                        <div class="d-flex justify-content-center">
-                            <h4 class="text-center num_certifiacdo">17FT275</h4>
-                        </div>
-
-                        <div class="d-flex justify-content-center">
-                            <div class="contenedor_img_estandartes tamano_1">
-                                <p class="text-center">
-                                <img src="{{asset('assets/user/revoes/RVOE-17FT275-1.webp')}}" alt="" class="img_estandars">
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="card-body space_text_certificados">
-                            <div class="card-title text-center">
-                                <p class="text-center text_certifcado">Cuidado de manos y pies</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="card card_certificados_2">
-                        <div class="d-flex justify-content-center">
-                            <h4 class="text-center num_certifiacdo_2">17FT229</h4>
-                        </div>
-
-                        <div class="d-flex justify-content-center">
-                            <div class="contenedor_img_estandartes tamano_1">
-                                <p class="text-center">
-                                <img src="{{asset('assets/user/revoes/RVOE-17FT229-min.webp')}}" alt="" class="img_estandars">
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="card-body space_text_certificados">
-                            <div class="card-title text-center">
-                                <p class="text-center text_certifcado_2">Micropigmentación Facial</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="card card_certificados">
-                        <div class="d-flex justify-content-center">
-                            <h4 class="text-center num_certifiacdo">17FT274</h4>
-                        </div>
-
-                        <div class="d-flex justify-content-center">
-                            <div class="contenedor_img_estandartes tamano_1">
-                                <p class="text-center">
-                                <img src="{{asset('assets/user/revoes/RVOE-17FT274-1.webp')}}" alt="" class="img_estandars">
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="card-body space_text_certificados">
-                            <div class="card-title text-center">
-                                <p class="text-center text_certifcado">Cosmetología Facial</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="card card_certificados_2">
-                        <div class="d-flex justify-content-center">
-                            <h4 class="text-center num_certifiacdo_2">17FT273</h4>
-                        </div>
-
-                        <div class="d-flex justify-content-center">
-                            <div class="contenedor_img_estandartes tamano_1">
-                                <p class="text-center">
-                                <img src="{{asset('assets/user/revoes/RVOE-17FT273-1-1.webp')}}" alt="" class="img_estandars">
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="card-body space_text_certificados">
-                            <div class="card-title text-center">
-                                <p class="text-center text_certifcado_2">Cosmetología corporal</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-</section>
-
+@include('user.components.revoes')
 
 <section class="primario bg_overley padding_avales_cont" style="background-color:#fff;">
     <div class="row">
@@ -533,7 +428,7 @@ crossorigin="anonymous" />
 
         <div class="col-12 col-md-8 mt-5">
                 <p class="text-center">
-                    <img src="{{asset('assets/user/certificaciones/sep_documentos.png')}}" alt="" class="img_certificados">
+                    <img src="{{asset('webpage/'.$webpage->stavalesstps_image) }}" alt="" class="img_certificados">
                 </p>
         </div>
 
@@ -582,31 +477,31 @@ crossorigin="anonymous" />
                 <div class="carousel-inner">
                     <div class="carousel-item active">
                         <p class="text-center">
-                        <img src="{{asset('assets/user/certificaciones/Titulo_Honorifico.png')}}" class="img_slide_avales" alt="...">
+                        <img src="{{asset('webpage/'.$webpage->stavalesregistro_one_image) }}" class="img_slide_avales" alt="...">
                         </p>
                       </div>
 
                     <div class="carousel-item">
                         <p class="text-center">
-                            <img src="{{asset('assets/user/certificaciones/diploma_imnas.png')}}" class="img_slide_avales" alt="...">
+                            <img src="{{asset('webpage/'.$webpage->stavalesregistro_two_image) }}" class="img_slide_avales" alt="...">
                         </p>
                     </div>
 
                     <div class="carousel-item">
                         <p class="text-center">
-                            <img src="{{asset('assets/user/certificaciones/tira_materias.png')}}" class="img_slide_avales" alt="...">
+                            <img src="{{asset('webpage/'.$webpage->stavalesregistro_three_image) }}" class="img_slide_avales" alt="...">
                         </p>
                     </div>
 
                     <div class="carousel-item">
                         <p class="text-center">
-                            <img src="{{asset('assets/user/certificaciones/cedula_papel.png')}}" class="img_slide_avales" alt="">
+                            <img src="{{asset('webpage/'.$webpage->stavalesregistro_four_image) }}" class="img_slide_avales" alt="">
                         </p>
                     </div>
 
                       <div class="carousel-item">
                         <p class="text-center">
-                        <img src="{{asset('assets/user/certificaciones/cedula_plastificada.png')}}" class="img_slide_avales" alt="">
+                        <img src="{{asset('webpage/'.$webpage->stavalesregistro_five_image) }}" class="img_slide_avales" alt="">
                         </p>
                       </div>
 

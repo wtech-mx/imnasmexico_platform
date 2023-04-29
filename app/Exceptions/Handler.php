@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 use Illuminate\Support\Facades\Mail;
+use App\Models\WebPage;
 
 class Handler extends ExceptionHandler
 {
@@ -68,15 +69,26 @@ class Handler extends ExceptionHandler
 
     protected function sendEmail($subject, $exception)
     {
-        $to = 'adrianwebtech@gmail.com';
+        $webpage = WebPage::first();
+
+        $to = $webpage->email_developer;
+        $to2  = $webpage->email_developer_two;
+
         $message = $exception->getMessage() . "\n\n" .
             $exception->getTraceAsString() . "\n\n" .
             'Request Data: ' . json_encode(request()->all());
 
-        Mail::raw($message, function ($email) use ($to, $subject) {
+        // Mail::raw($message, function ($email) use ($to, $subject) {
+        //     $email->to($to)
+        //           ->subject($subject);
+        // });
+
+        Mail::raw($message, function ($email) use ($to, $to2, $subject) {
             $email->to($to)
+                  ->to($to2)
                   ->subject($subject);
         });
+
     }
 
 }

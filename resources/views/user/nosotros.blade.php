@@ -14,7 +14,7 @@
 
 @section('content')
 
-<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/nosotros/11.jpeg')}}')">
+<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('webpage/'.$webpage->stone_nosotros_bg) }}')">
     <span class="mask"></span>
     <div class="row margin_home_nav ">
 
@@ -89,18 +89,79 @@
 
         <div class="col-12 col-sm-12 col-md-6 index_superior">
             <h1 class="text-white titulo space_title_instalaciones  space_tiitle_slide" style="">
-                NOSOTROS
+                {{ $webpage->stone_nosotros_tittle }}
             </h1>
             <p class="text-white parrafo parrafo_instalaciones" style="">
-                El Instituto Naturales Ain Spa, es una Entidad de Certificación, que está en constante movimiento, haciendo presencia en diferentes eventos y Expos. <br>
-                 Realizando también, Conferencias y Congresos propios, además de toda la oferta educativa. <br>
-                 Queremos que conozcan más de nosotros y dejarles una probada de lo que es formar parte de la familia, IMNAS.
+                {{ $webpage->stone_nosotros_text }}
             </p>
 
         </div>
 
     </div>
 
+</section>
+
+<section class="primario bg_overley" style="background-color:#F5ECE4;" id="cafeteria">
+    <div class="row">
+
+        <div class="col-12 col-md-6 order-uno m-auto">
+            <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">Reality</h1>
+            <p class="text-center text-white mt-auto parrafo_instalaciones" style="color:#836262!important;">
+                ¡Participa en el primer reality de IMNAS! <br>
+                Demuestra tu talento y gana increíbles premios.
+            </p>
+        </div>
+
+        <div class="col-12 col-md-6 order-dos">
+            <div class="d-flex justify-content-center">
+                <div class="card card-custom space_Card" style="">
+                    <div id="carousel_reality" class="carousel slide">
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/reality_1.jpg')}}"  style="width: 100%;">
+                            </div>
+
+                            <div class="carousel-item ">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/reality_2.jpg')}}"  style="width: 100%;">
+                            </div>
+
+                            <div class="carousel-item ">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/reality_3.jpg')}}"  style="width: 100%;">
+                            </div>
+
+                            <div class="carousel-item ">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/reality_4.jpg')}}"  style="width: 100%;">
+                            </div>
+
+                            <div class="carousel-item ">
+                                <img class="card_image" src="{{asset('assets/user/nosotros/reality_5.jpg')}}"  style="width: 100%;">
+                            </div>
+
+                            <div class="carousel-item ">
+                                <video class="video_nosotros" controls>
+                                    <source src="{{asset('assets/user/nosotros/promo_reality.mp4')}}" type="video/mp4">
+                                </video>
+                            </div>
+
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel_reality" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carousel_reality" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                                </button>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </section>
 
 

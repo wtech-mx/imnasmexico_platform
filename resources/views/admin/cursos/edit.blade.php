@@ -25,6 +25,7 @@
                                 <form class="multisteps-form__form mb-8" style="height: 400px;" method="POST" action="{{ route('cursos.update', $curso->id) }}" enctype="multipart/form-data" role="form">
                                     @csrf
                                     <input type="hidden" name="_method" value="PATCH">
+                                    @include('admin.cursos.modal_imagen')
                                     <!--single Datos Generales panel-->
                                     <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
                                         <h5 class="font-weight-bolder">Datos Generales</h5>
@@ -46,8 +47,10 @@
 
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="nota">Foto</label>
-                                                        <input type="file" id="foto" name="foto" class="form-control" value="{{$curso->foto}}">
+                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                            Seleccionar foto
+                                                        </button>
+                                                        <input type="hidden" name="foto" id="foto" value="{{$curso->foto}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
@@ -61,7 +64,17 @@
                                                         <input type="text" id="clase_grabada" name="clase_grabada" class="form-control" value="{{$curso->clase_grabada}}">
                                                     </div>
                                                 </div>
-
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="estandar">Seleccionar Estandar</label>
+                                                        <select class="form-control" id="id_estandar" name="id_estandar">
+                                                          <option value="">Seleccionar Estandar</option>
+                                                          @foreach ($estandares as $estandar)
+                                                          <option value="{{ $estandar->id }}">{{ $estandar->name }}</option>
+                                                          @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="button-row d-flex mt-4">
                                                 <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
@@ -286,21 +299,23 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6">
+                                                <div class="col-4">
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <label for="fecha">Materiales de Clase</label>
-                                                            <input type="file" id="materiales" name="materiales" class="form-control">
+                                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                Materiales de Clase
+                                                            </button>
+                                                            <input type="hidden" name="materiales" id="materiales" value="{{$curso->materiales}}">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-6">
+                                                <div class="col-4">
                                                     <div class="input-group">
                                                         <img id="blah" src="{{asset('materiales/'.$curso->materiales) }}" alt="Imagen" style="width: 150px; height: 150px;"/>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12">
+                                                <div class="col-4">
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <label for="fecha">Liga Material</label>
@@ -312,8 +327,10 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <div class="form-group">
-                                                            <label for="fecha">PDF Descarga</label>
-                                                            <input type="file" id="pdf" name="pdf" class="form-control" value="{{$curso->pdf}}">
+                                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                PDF Descarga
+                                                            </button>
+                                                            <input type="hidden" name="pdf" id="pdf" value="{{$curso->pdf}}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -423,7 +440,6 @@
                                              </div>
                                         </div>
                                     </div>
-
                                 </form>
                             </div>
                         </div>
@@ -473,5 +489,19 @@
       // Agrega lo clonado al final del #formulario
       $clone.appendTo('#formulario');
     });
+    </script>
+    <script>
+        function selectImage(foto) {
+            $('#foto').val(foto);
+        }
+
+        function selectPdf(pdf) {
+            $('#pdf').val(pdf);
+        }
+
+        function selectMateriales(materiales) {
+            $('#materiales').val(materiales);
+        }
+
     </script>
 @endsection

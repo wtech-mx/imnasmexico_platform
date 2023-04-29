@@ -13,6 +13,7 @@ use App\Mail\PlantillaPagoExterno;
 use Illuminate\Support\Facades\Mail;
 use MercadoPago\SDK;
 use MercadoPago\SDK\AdvancedPayments\RangeDateTime;
+use App\Models\WebPage;
 
 class PagosFueraController extends Controller
 {
@@ -24,6 +25,8 @@ class PagosFueraController extends Controller
 
     public function store(Request $request)
     {
+        $webpage = WebPage::first();
+
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
             $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera');
@@ -51,9 +54,8 @@ class PagosFueraController extends Controller
         }
         $pagos_fuera->save();
 
-        $email_custom = 'dayanna.wtech@gmail.com';
         $datos = PagosFuera::where('id', '=', $pagos_fuera->id)->first();
-        Mail::to($email_custom)->send(new PlantillaPagoExterno($datos));
+        Mail::to($webpage->email_developer)->bcc($webpage->email_developer_two, 'Destinatario dev 2')->send(new PlantillaPagoExterno($datos));
 
         return redirect()->route('pagos.inscripcion')
             ->with('success', 'pago fuera created successfully.');
