@@ -36,6 +36,9 @@
                         <td>{{ $cliente->telefono }}</td>
                         <td>{{ $cliente->email }}</td>
                         <td>
+                            <a type="button" class="btn bg-dark" data-bs-toggle="modal" data-bs-target="#modal_documentos{{ $cliente->id }}" style="background: #52BE80; color: #ffff">
+                                <i class="fas fa-folder-open"></i>
+                            </a>
                             <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#ticket_cliente_{{ $cliente->id }}" style="background: #52BE80; color: #ffff">
                                 <i class="fas fa-ticket-alt"></i>
                             </a>
@@ -44,6 +47,7 @@
                             </a>
                         </td>
                     </tr>
+                    @include('admin.clientes.modal_documentos')
                     @include('admin.clientes.modal_tickets')
                     @include('admin.clientes.modal_view')
                     @endforeach

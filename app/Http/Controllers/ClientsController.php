@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Orders;
 use App\Models\OrdersTickets;
 use App\Models\CursosTickets;
+use App\Models\Documentos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -55,4 +56,66 @@ class ClientsController extends Controller
         return redirect()->route('perfil.index', $code)
             ->with('success', 'usuario editado con exito.');
     }
+
+    public function update_documentos(request $request,$id){
+
+        $documentos = Documentos::find($id);
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_estandar = base_path('../public_html/plataforma.imnasmexico.com/documentos');
+        }else{
+            $ruta_estandar = public_path() . '/documentos';
+        }
+
+        if ($request->hasFile("ine")) {
+            $file = $request->file('ine');
+            $path = $ruta_estandar;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $documentos->ine = $fileName;
+        }
+
+        if ($request->hasFile("curp")) {
+            $file = $request->file('curp');
+            $path = $ruta_estandar;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $documentos->curp = $fileName;
+        }
+
+        if ($request->hasFile("foto_tam_titulo")) {
+            $file = $request->file('foto_tam_titulo');
+            $path = $ruta_estandar;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $documentos->foto_tam_titulo = $fileName;
+        }
+
+        if ($request->hasFile("foto_tam_infantil")) {
+            $file = $request->file('foto_tam_infantil');
+            $path = $ruta_estandar;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $documentos->foto_tam_infantil = $fileName;
+        }
+
+        if ($request->hasFile("carta_compromiso")) {
+            $file = $request->file('carta_compromiso');
+            $path = $ruta_estandar;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $documentos->carta_compromiso = $fileName;
+        }
+
+        if ($request->hasFile("firma")) {
+            $file = $request->file('firma');
+            $path = $ruta_estandar;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $documentos->firma = $fileName;
+        }
+
+    }
+
 }
