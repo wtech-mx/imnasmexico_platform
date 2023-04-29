@@ -75,7 +75,7 @@
                     <div class="row">
                         @foreach($fotos_materialesp as $foto_materialesp)
                         <div class="col-md-4">
-                          <img src="{{ asset('curso/'.$foto_materialesp->material) }}" class="img-fluid img-thumbnail" alt="{{ $foto_materialesp->nombre }}" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectMateriales('{{ $foto_materialesp->material }}')">
+                          <img src="{{ asset('materiales/'.$foto_materialesp->material) }}" class="img-fluid img-thumbnail" alt="{{ $foto_materialesp->nombre }}" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectMateriales('{{ $foto_materialesp->material }}')">
                           {{$foto_materialesp->nombre}}
                         </div>
                         @endforeach
@@ -87,7 +87,7 @@
                     <div class="row">
                         @foreach($fotos_pdf as $foto_pdf)
                         <div class="col-md-4">
-                            <iframe src="{{ asset('curso/'.$foto_pdf->pdf) }}" width="100%" height="300" class="img-fluid img-thumbnail" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectPdf('{{ $foto_pdf->pdf }}')">
+                            <iframe src="{{ asset('pdf/'.$foto_pdf->pdf) }}" width="100%" height="300" class="img-fluid img-thumbnail" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectPdf('{{ $foto_pdf->pdf }}')">
                             </iframe>
                         {{$foto_pdf->nombre}}
                         </div>
