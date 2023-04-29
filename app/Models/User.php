@@ -30,6 +30,13 @@ class User extends Authenticatable
         'direccion',
     ];
 
+    // public function OrdersTickets()
+    // {
+    //    return $this->hasMany(OrdersTickets::class,'id_usuario');
+    // }
+
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

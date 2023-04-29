@@ -64,7 +64,17 @@
                                                         <input type="text" id="clase_grabada" name="clase_grabada" class="form-control" value="{{$curso->clase_grabada}}">
                                                     </div>
                                                 </div>
-
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="estandar">Seleccionar Estandar</label>
+                                                        <select class="form-control" id="id_estandar" name="id_estandar">
+                                                          <option value="">Seleccionar Estandar</option>
+                                                          @foreach ($estandares as $estandar)
+                                                          <option value="{{ $estandar->id }}">{{ $estandar->name }}</option>
+                                                          @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="button-row d-flex mt-4">
                                                 <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>

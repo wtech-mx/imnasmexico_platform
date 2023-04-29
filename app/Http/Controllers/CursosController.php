@@ -11,6 +11,7 @@ use App\Mail\PlantillaTicket;
 use App\Models\Recursos;
 use Illuminate\Support\Facades\Mail;
 use Str;
+use App\Models\Estandar;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -45,6 +46,7 @@ class CursosController extends Controller
 
     public function create()
     {
+        $estandares = Estandar::orderBy('name','asc')->get();
         $fotos_online = Recursos::where('tipo', '=', 'Online')->get();
         $fotos_presencial = Recursos::where('tipo', '=', 'Presencial')->get();
         $fotos_pdf = Recursos::where('tipo', '=', 'PDF')->get();
@@ -65,7 +67,7 @@ class CursosController extends Controller
         ->where('pdf', '!=', NULL)
         ->get();
 
-        return view('admin.cursos.create', compact('fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp'));
+        return view('admin.cursos.create', compact('fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares'));
     }
 
     public function store(Request $request)
@@ -87,7 +89,7 @@ class CursosController extends Controller
         $curso->foto = $request->get('foto');
         $curso->pdf = $request->get('pdf');
         $curso->materiales = $request->get('materiales');
-
+        $curso->id_estandar = $request->get('id_estandar');
         $curso->texto_rvoe = $request->get('texto_rvoe');
         $curso->sin_fin = $request->get('sin_fin');
         $curso->fecha_inicial = $request->get('fecha_inicial');
@@ -150,6 +152,7 @@ class CursosController extends Controller
 
     public function edit($id)
     {
+        $estandares = Estandar::orderBy('name','asc')->get();
         $curso = Cursos::find($id);
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
         $fotos_online = Recursos::where('tipo', '=', 'Online')->get();
@@ -171,7 +174,7 @@ class CursosController extends Controller
         ->where('pdf', '!=', NULL)
         ->get();
 
-        return view('admin.cursos.edit', compact('curso', 'tickets', 'fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp'));
+        return view('admin.cursos.edit', compact('curso', 'tickets', 'fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares'));
     }
 
     public function update(Request $request, $id)
@@ -184,6 +187,7 @@ class CursosController extends Controller
         $curso->foto = $request->get('foto');
         $curso->pdf = $request->get('pdf');
         $curso->materiales = $request->get('materiales');
+        $curso->id_estandar = $request->get('id_estandar');
 
         if ($request->get('clase_grabada')) {
             $curso->clase_grabada = $request->get('clase_grabada');

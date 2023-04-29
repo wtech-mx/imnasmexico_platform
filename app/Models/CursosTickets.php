@@ -21,4 +21,15 @@ class CursosTickets extends Model
         'fecha_inicial',
         'fecha_final',
     ];
+
+    // public function OrdersTickets()
+    // {
+    //     return $this->hasmany(OrdersTickets::class, 'id_tickets');
+    // }
+
+    // public function User()
+    // {
+    //     return $this->belongsTo(User::class, 'id_usuario');
+    // }
+
 }

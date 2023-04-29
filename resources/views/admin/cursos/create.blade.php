@@ -58,10 +58,23 @@
                                                         <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 150px; height: 150px;"/>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="nota">Enlace de Clase Grabada</label>
                                                         <input type="text" id="clase_grabada" name="clase_grabada" class="form-control" >
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="estandar">Seleccionar Estandar</label>
+                                                        <select class="form-control" id="id_estandar" name="id_estandar">
+                                                          @foreach ($estandares as $estandar)
+                                                          <option value="">Seleccionar Estandar</option>
+                                                          <option value="{{ $estandar->id }}">{{ $estandar->name }}</option>
+                                                          @endforeach
+                                                        </select>
                                                     </div>
                                                 </div>
                                             </div>
