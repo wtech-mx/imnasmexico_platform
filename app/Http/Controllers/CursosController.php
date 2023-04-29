@@ -22,7 +22,10 @@ class CursosController extends Controller
 {
     public function index(Request $request)
     {
-        $cursos = Cursos::orderBy('id','DESC')->get();
+        // $cursos = Cursos::orderBy('id','DESC')->get();
+        $cursos = Cursos::select('id', 'nombre', 'foto', 'fecha_inicial', 'fecha_final', 'recurso', 'modalidad', 'slug', 'clase_grabada')
+                ->orderBy('id', 'DESC')
+                ->get();
 
         return view('admin.cursos.index', compact('cursos'));
     }
