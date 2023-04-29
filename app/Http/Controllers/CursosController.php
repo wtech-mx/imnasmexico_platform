@@ -233,6 +233,25 @@ class CursosController extends Controller
             ->with('success', 'curso actualizado con exito.');
     }
 
+    public function update_meet(Request $request, $id){
+
+        $fechaHoraActual = date('Y-m-d H:i:s');
+
+        $curso = Cursos::find($id);
+
+        if ($request->get('clase_grabada')) {
+            $curso->clase_grabada = $request->get('clase_grabada');
+            $curso->video_cad = 1;
+            $curso->fecha_video = $fechaHoraActual;
+        }
+        $curso->recurso = $request->get('recurso');
+        $curso->update();
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->route('cursos.index')
+            ->with('success', 'curso actualizado con exito.');
+    }
+
     public function listas($id)
     {
         $curso = Cursos::find($id);
