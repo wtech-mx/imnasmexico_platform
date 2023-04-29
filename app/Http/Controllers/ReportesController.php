@@ -11,7 +11,7 @@ class ReportesController extends Controller
 {
     public function index_dia(){
         $fechaHoraActual = date('Y-m-d');
-        $orders = Orders::where('fecha', $fechaHoraActual)
+        $orders = Orders::where('fecha', '2023-04-28')
         ->where('estatus', '1')
         ->orderBy('id','DESC')
         ->get();
