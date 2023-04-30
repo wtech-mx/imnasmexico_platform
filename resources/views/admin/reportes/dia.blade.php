@@ -54,7 +54,7 @@
 
                         <div class="d-flex justify-content-between">
 
-                            <h3 class="mb-3">Cursos</h3>
+                            <h3 class="mb-3">Ordenes</h3>
 
                         </div>
                     </div>
