@@ -205,6 +205,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::post('/admin/reporte_email_dia/', [App\Http\Controllers\ReportesController::class, 'reporte_email_dia'])->name('reporte_email_dia.store');
 
+    Route::post('/admin/reporte_semana/', [App\Http\Controllers\ReportesController::class, 'reporte_email_semanal'])->name('reporte_semanal.store');
+
  // =============== M O D U L O   WEB PAGE ===============================
     Route::get('/admin/clientes', [App\Http\Controllers\ClientsController::class, 'index_admin'])->name('clientes_admin.index');
     Route::patch('/admin/clientes/documentos/{id}', [App\Http\Controllers\ClientsController::class, 'update_documentos'])->name('clientes.update_documentos');

@@ -24,6 +24,7 @@ class ReportesController extends Controller
         $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
 
         $cursosComprados = Orders::where('fecha', $fechaHoraActual)
+        ->where('estatus', '1')
         ->with('OrdersTickets.CursosTickets')
         ->get()
         ->pluck('OrdersTickets')
@@ -36,6 +37,7 @@ class ReportesController extends Controller
             ];
         })
         ->values();
+
 
         return view('admin.reportes.dia', compact('orders', 'totalPagadoFormateado', 'cursosComprados'));
     }
@@ -53,6 +55,7 @@ class ReportesController extends Controller
         $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
 
         $datos = Orders::where('fecha', $fechaHoraActual)
+        ->where('estatus', '1')
         ->with('OrdersTickets.CursosTickets')
         ->get()
         ->pluck('OrdersTickets')
@@ -74,21 +77,19 @@ class ReportesController extends Controller
 
     }
 
-
     public function index_semana(){
         $fechaActual = date('Y-m-d');
         $fechaInicioSemana = date('Y-m-d', strtotime('monday this week', strtotime($fechaActual)));
         $fechaFinSemana = date('Y-m-d', strtotime('sunday this week', strtotime($fechaActual)));
 
-            $orders = Orders::where('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            $orders = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
             ->where('estatus', '1')
-            ->orderBy('id','DESC')
+            ->where('pago', '>','0')
+            ->orderBy('fecha','DESC')
             ->get();
 
-            $totalPagado = $orders->sum('pago');
-            $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
-
-            $cursosComprados = Orders::where('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            $cursosComprados = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
             ->with('OrdersTickets.CursosTickets')
             ->get()
             ->pluck('OrdersTickets')
@@ -102,7 +103,7 @@ class ReportesController extends Controller
             })
             ->values();
 
-        return view('admin.reportes.semana', compact('orders', 'totalPagadoFormateado', 'cursosComprados'));
+        return view('admin.reportes.semana', compact('orders', 'orders', 'cursosComprados'));
     }
 
     public function index_mes(){
@@ -114,6 +115,7 @@ class ReportesController extends Controller
 
             $orders = Orders::whereBetween('fecha', [$fechaInicioMes, $fechaFinMes])
             ->where('estatus', '1')
+            ->where('pago', '>','0')
             ->orderBy('id','DESC')
             ->get();
 
@@ -122,6 +124,7 @@ class ReportesController extends Controller
 
             $cursosComprados = Orders::whereBetween('fecha', [$fechaInicioMes, $fechaFinMes])
             ->with('OrdersTickets.CursosTickets')
+            ->where('estatus', '1')
             ->get()
             ->pluck('OrdersTickets')
             ->flatten()

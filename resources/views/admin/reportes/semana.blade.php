@@ -18,10 +18,26 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
-                            <h4 class="text-center mb-3">Total del dia</h4>
+                            <h4 class="text-center mb-3">Total del Semana</h4>
                             <h5 class="text-center">
-                            <b>${{ $totalPagadoFormateado }}</b>
+                                {{-- <b>${{ $totalPagadoFormateado }}</b> --}}
+                                @php
+                                    $totalPagado = 0;
+                                    foreach ($orders as $order) {
+                                        $order->pago;
+                                        $totalPagado += $order->pago;
+                                    }
+                                @endphp
+
+                                ${{ number_format($totalPagado, 2, '.', ',') }}
+
                             </h5>
+                            <div class="d-flex justify-content-center mt-3">
+                                <form method="POST" action="{{ route('reporte_semanal.store') }}" enctype="multipart/form-data" role="form">
+                                    @csrf
+                                    <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff"> Enviar Reporte</button>
+                                </form>
+                            </div>
                         </div>
                         <div class="col-6">
                             <h4 class="text-center mb-3">Tickets vendidos</h4>
