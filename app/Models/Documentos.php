@@ -15,11 +15,18 @@ class Documentos extends Model
 
     protected $fillable = [
         'ine',
+        'id_usuario',
         'curp',
         'foto_tam_titulo',
         'foto_tam_infantil',
         'firma',
         'carta_compromiso',
     ];
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
+
+    }
 
 }
