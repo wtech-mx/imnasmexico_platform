@@ -14,80 +14,85 @@
                 <input type="hidden" name="_method" value="PATCH">
 
                 <div class="modal-body row">
-
-                    @if(!empty($documentos))
-                        @foreach($documentos as $documento)
-                            @if(($documento->id_usuario == $cliente->id))
-                                <div class="col-6 form-group">
-                                    <label for="ine">INE </label>
-                                    <input id="ine" name="ine" type="file" class="form-control" >
-                                    <img id="blah" src="{{asset('documentos/'.$documento->ine) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
-                                </div>
-
-                                <div class="col-6 form-group">
-                                    <label for="curp">CURP</label>
-                                    <input id="curp" name="curp" type="file" class="form-control" >
-                                    <img id="blah" src="{{asset('documentos/'.$documento->curp) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
-                                </div>
-
-                                <div class="col-6 form-group">
-                                    <label for="foto_tam_titulo">Foto tamaño titulo</label>
-                                    <input id="foto_tam_titulo" name="foto_tam_titulo" type="file" class="form-control" >
-                                    <img id="blah" src="{{asset('documentos/'.$documento->foto_tam_titulo) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
-                                </div>
-
-                                <div class="col-6 form-group">
-                                    <label for="foto_tam_infantil">Foto tamaño Infantil</label>
-                                    <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
-                                    <img id="blah" src="{{asset('documentos/'.$documento->foto_tam_infantil) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
-                                </div>
-
-                                <div class="col-6 form-group">
-                                    <label for="carta_compromiso">Carta Compromiso</label>
-                                    <input id="carta_compromiso" name="carta_compromiso" type="file" class="form-control" >
-                                    <img id="blah" src="{{asset('documentos/'.$documento->carta_compromiso) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
-                                </div>
-
-                                <div class="col-6 form-group">
-                                    <label for="firma">Firma</label>
-                                    <input id="firma" name="firma" type="file" class="form-control" >
-                                    <img id="blah" src="{{asset('documentos/'.$documento->firma) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
-                                </div>
-                            @else
-
+                    @php
+                        $tiene_documentos = false;
+                    @endphp
+                    @foreach($documentos as $documento)
+                        @if($documento->id_usuario == $cliente->id)
+                            @php
+                                $tiene_documentos = true;
+                            @endphp
                             <div class="col-6 form-group">
                                 <label for="ine">INE </label>
                                 <input id="ine" name="ine" type="file" class="form-control" >
+                                <img id="blah" src="{{asset('documentos/'.$documento->ine) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
                             </div>
 
                             <div class="col-6 form-group">
                                 <label for="curp">CURP</label>
                                 <input id="curp" name="curp" type="file" class="form-control" >
+                                <img id="blah" src="{{asset('documentos/'.$documento->curp) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
                             </div>
 
                             <div class="col-6 form-group">
                                 <label for="foto_tam_titulo">Foto tamaño titulo</label>
                                 <input id="foto_tam_titulo" name="foto_tam_titulo" type="file" class="form-control" >
+                                <img id="blah" src="{{asset('documentos/'.$documento->foto_tam_titulo) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
                             </div>
 
                             <div class="col-6 form-group">
                                 <label for="foto_tam_infantil">Foto tamaño Infantil</label>
                                 <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
+                                <img id="blah" src="{{asset('documentos/'.$documento->foto_tam_infantil) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
                             </div>
 
                             <div class="col-6 form-group">
                                 <label for="carta_compromiso">Carta Compromiso</label>
                                 <input id="carta_compromiso" name="carta_compromiso" type="file" class="form-control" >
+                                <img id="blah" src="{{asset('documentos/'.$documento->carta_compromiso) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
                             </div>
 
                             <div class="col-6 form-group">
                                 <label for="firma">Firma</label>
                                 <input id="firma" name="firma" type="file" class="form-control" >
+                                <img id="blah" src="{{asset('documentos/'.$documento->firma) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
                             </div>
+                        @endif
+                    @endforeach
 
-                            @endif
-                            @break
-                        @endforeach
+                    @if($tiene_documentos)
+                        <!-- Si el usuario tiene documentos, no mostramos el formulario -->
+                    @else
+                        <!-- Si el usuario no tiene documentos, mostramos el formulario -->
+                        <div class="col-6 form-group">
+                            <label for="ine">INE </label>
+                            <input id="ine" name="ine" type="file" class="form-control" >
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label for="curp">CURP</label>
+                            <input id="curp" name="curp" type="file" class="form-control" >
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label for="foto_tam_titulo">Foto tamaño titulo</label>
+                            <input id="foto_tam_titulo" name="foto_tam_titulo" type="file" class="form-control" >
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label for="foto_tam_infantil">Foto tamaño Infantil</label>
+                            <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label for="carta_compromiso">Carta Compromiso</label>
+                            <input id="carta_compromiso" name="carta_compromiso" type="file" class="form-control" >
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label for="firma">Firma</label>
+                            <input id="firma" name="firma" type="file" class="form-control" >
+                        </div>
                     @endif
 
                 </div>
