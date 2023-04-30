@@ -255,7 +255,9 @@ Mi perfil- {{$cliente->name}}
                     <div class="col-12">
                         <h2 class="title_curso mb-5">Reconocimientos</h2>
                     </div>
-                    <p class="text-center">proximamente</p>
+
+                    @include('user.profile_documentos')
+
                 </div>
               </div>
 

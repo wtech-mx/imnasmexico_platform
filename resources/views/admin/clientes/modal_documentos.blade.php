@@ -12,11 +12,11 @@
                 <nav>
                     <div class="d-flex justify-content-center">
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-login-tab" data-bs-toggle="tab" data-bs-target="#nav-login" type="button" role="tab" aria-controls="nav-login" aria-selected="true">
+                            <button class="nav-link active" id="nav-login-tab" data-bs-toggle="tab" data-bs-target="#nav-login{{ $cliente->id }}" type="button" role="tab" aria-controls="nav-login{{ $cliente->id }}" aria-selected="true">
                                 Oficiales
                             </button>
 
-                            <button class="nav-link" id="nav-register-tab" data-bs-toggle="tab" data-bs-target="#nav-register" type="button" role="tab" aria-controls="nav-register" aria-selected="false">
+                            <button class="nav-link" id="nav-register-tab" data-bs-toggle="tab" data-bs-target="#nav-register{{ $cliente->id }}" type="button" role="tab" aria-controls="nav-register{{ $cliente->id }}" aria-selected="false">
                                 Estandares
                             </button>
                         </div>
@@ -24,7 +24,8 @@
                 </nav>
 
             <div class="tab-content" id="nav-tabContent" style="">
-                <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab" tabindex="0" style="min-height: auto!important;">
+
+                <div class="tab-pane fade show active" id="nav-login{{ $cliente->id }}" role="tabpanel" aria-labelledby="nav-login-tab" tabindex="0" style="min-height: auto!important;">
                     <form method="POST" action="{{ route('clientes.update_documentos', $cliente->id) }}" enctype="multipart/form-data" role="form">
                         @csrf
                         <input type="hidden" name="_method" value="PATCH">
@@ -119,8 +120,33 @@
 
                     </form>
                 </div>
-                <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab" tabindex="0" style="min-height: auto!important;">
-                    dd
+
+                <div class="tab-pane fade" id="nav-register{{ $cliente->id }}" role="tabpanel" aria-labelledby="nav-register-tab" tabindex="0" style="min-height: auto!important;">
+                    @php
+                        $tiene_documentos_estandar = false;
+                    @endphp
+                    <ul>
+                        @foreach($documentos_estandares as $documento)
+                            @if($documento->id_usuario == $cliente->id)
+                                @php
+                                    $tiene_documentos = true;
+                                @endphp
+                                <li>{{ $documento->documento }} <a href="{{ route('descargar_documento', ['id' => $documento->id, 'cliente_id' => $cliente->id]) }}">Descargar</a></li>
+                            @endif
+                        @endforeach
+                    </ul>
+
+                    @if($tiene_documentos)
+                        <!-- Si el usuario tiene documentos, no mostramos el formulario -->
+                        @else
+                        <p>No se han subido archivos aún.</p>
+                    @endif
+
+                    <form method="POST" action="{{ route('documentos.store', $cliente->id) }}" enctype="multipart/form-data" role="form">
+                        @csrf
+                        <input type="file" name="archivos[]" multiple>
+                        <button type="submit">Subir archivos</button>
+                    </form>
                 </div>
             </div>
 
