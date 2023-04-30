@@ -72,6 +72,8 @@ class ClientsController extends Controller
         if($documentos_id == null){
             $documentos = new Documentos;
 
+            $documentos->id_usuario = $id;
+
             if ($request->hasFile("ine")) {
                 $file = $request->file('ine');
                 $path = $ruta_estandar;
@@ -121,6 +123,7 @@ class ClientsController extends Controller
             }
 
             $documentos->save();
+            return redirect()->back()->with('success', 'Creado con exito');
         }
 
 
