@@ -60,11 +60,12 @@ class ClientsController extends Controller
 
     public function update_documentos(Request $request, $id){
 
+        $cliente = User::where('id', $id)->first();
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
-            $ruta_estandar = base_path('../public_html/plataforma.imnasmexico.com/documentos');
+            $ruta_estandar = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $cliente->telefono);
         }else{
-            $ruta_estandar = public_path() . '/documentos';
+            $ruta_estandar = public_path() . '/documentos/' . $cliente->telefono;
         }
 
         $documentos_id = Documentos::where('id_usuario','=',$id)->first();
