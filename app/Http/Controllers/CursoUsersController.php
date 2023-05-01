@@ -82,7 +82,14 @@ class CursoUsersController extends Controller
 
         // Aplica los filtros de búsqueda si se proporcionaron
         if ($nombre) {
-            $cursos->where('nombre', 'LIKE', "%$nombre%");
+            // $cursos->where('nombre', 'LIKE', "%$nombre%");
+            // $cursos->where('nombre', 'REGEXP', implode('|', explode(' ', $nombre)));
+            $palabras = explode(" ", $nombre);
+            foreach($palabras as $palabra) {
+                if ($palabra != 'curso') {
+                    $cursos->where('nombre', 'LIKE', "%$palabra%");
+                }
+            }
         }
         if ($modalidad) {
             $cursos->where('modalidad', $modalidad);
