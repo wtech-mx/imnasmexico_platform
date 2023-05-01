@@ -14,7 +14,12 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h3 class="mb-3">Clientes</h3>
-
+                    <form action="{{ route('clientes.import') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <input type="file" name="file" class="form-control">
+                        <br>
+                        <button class="btn btn-success">Import User Data</button>
+                    </form>
                 </div>
             </div>
 

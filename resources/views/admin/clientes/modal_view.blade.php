@@ -35,11 +35,11 @@
                                 </div>
                                 <div class="col-6 form-group">
                                     <label for="name">Telefono</label>
-                                    <input id="rfc" name="talefono" type="number" class="form-control" disabled value="{{ $cliente->telefono }}">
+                                    <input id="talefono" name="talefono" type="number" class="form-control" disabled value="{{ $cliente->telefono }}">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label for="name">Correo</label>
-                                    <input id="Correo" name="Correo" type="email" class="form-control" disabled value="{{ $cliente->email }}">
+                                    <input id="email" name="email" type="email" class="form-control" disabled value="{{ $cliente->email }}">
                                 </div>
                             </div>
                         </div>
@@ -48,11 +48,11 @@
                             <div class="row">
                                 <div class="col-12 form-group">
                                     <label for="rfc">RFC</label>
-                                    <input id="rfc" name="rfc" type="number" class="form-control" disabled value="{{ $cliente->rfc }}">
+                                    <input id="rfc" name="rfc" type="text" class="form-control" disabled value="{{ $cliente->rfc }}">
                                 </div>
                                 <div class="col-12 form-group">
                                     <label for="razon_social">Razon social</label>
-                                    <input id="razon_social" name="razon_social" type="email" class="form-control" disabled value="{{ $cliente->razon_social }}">
+                                    <input id="razon_social" name="razon_social" type="text" class="form-control" disabled value="{{ $cliente->razon_social }}">
                                 </div>
                                 <div class="col-12 form-group">
                                     <label for="cfdi">CFDI</label>

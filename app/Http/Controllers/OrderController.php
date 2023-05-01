@@ -214,6 +214,7 @@ class OrderController extends Controller
             $payer->cliente = '1';
             $payer->rfc = $request->get('rfc');
             $payer->cfdi = $request->get('cfdi');
+            $payer->direccion = $request->get('direccion');
             $payer->code = $code;
             $payer->password = Hash::make($request->get('telefono'));
             $payer->save();

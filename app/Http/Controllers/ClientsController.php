@@ -388,5 +388,13 @@ class ClientsController extends Controller
         $pathToFile = $ruta_estandar. '/' . $documento->documento;
 
         return response()->download($pathToFile);
+
     }
+
+    public function import_clientes()
+    {
+        Excel::import(new UsersImport,request()->file('file'));
+        return back();
+    }
+
 }
