@@ -12,12 +12,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cursos', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_estandar');
-            $table->foreign('id_estandar')
-                ->references('id')->on('estandares')
-                ->onDelete('set null');
-        });
+        // Schema::table('cursos', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('id_estandar');
+        //     $table->foreign('id_estandar')
+        //         ->references('id')->on('estandares')
+        //         ->onDelete('set null');
+        // });
     }
 
     /**
