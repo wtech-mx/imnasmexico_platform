@@ -261,7 +261,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <p class="tittle_abstract text-center">El material de clase es obligatorio traerlo, en caso de no tenerlo, contamos con tienda dentro de las instalaciones para que puedas hacer la compra de tu material.</p>
                             @else
                             <h2 class="title_curso mb-5 text-center">Producto de Clase</h2>
-                        <p class="tittle_abstract text-center">El producto de clase es opcional, en caso de quererlo puedes checarlo en nuestra tienda en línea dándole click en la imagen o el botón.</p>
+                        <p class="text_preguntas_material text-center">El producto de clase es opcional, en caso de quererlo puedes checarlo en nuestra tienda en línea dándole click en la imagen o el botón.</p>
                         @endif
                         @if ($curso->materiales != NULL)
                                 <a href="{{ $curso->btn_cotizacion}}" target="_blank" >
@@ -279,6 +279,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         @endif
 
                         @if ($curso->estatus == 1)
+                        <div class="d-flex justify-content-center">
                             <a class="btn btn-primario space_cs_rs  mt-5" data-bs-toggle="collapse" href="#collapseobjetivos" role="button" aria-expanded="false" aria-controls="collapseobjetivos">
                                 <div class="d-flex justify-content-around">
                                             @if ($curso->precio == 0)
@@ -306,6 +307,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                     </div>
                                 </div>
                             </a>
+                        </div>
 
                             <div class="collapse mt-3" id="collapseobjetivos">
                                 <div class="card card-body card_colapsable_comprar">
@@ -377,6 +379,8 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                     @endif
                                 </div>
                             </div>
+
+
                         @endif
                     </div>
                 </div>
@@ -1377,7 +1381,9 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <p class="tittle_abstract text-center">El material de clase es obligatorio traerlo, en caso de no tenerlo, contamos con tienda dentro de las instalaciones para que puedas hacer la compra de tu material.</p>
                         @else
                             <h2 class="title_curso mb-md-5 mt-md-5 mt-2 mb-2">Productos de Clase</h2>
-                            <p class="tittle_abstract text-center">El producto de clase es opcional, en caso de quererlo puedes checarlo en nuestra tienda en línea dándole click en la imagen o el botón.</p>
+                            <p class="text_preguntas_material">
+                                El producto de clase es opcional, en caso de quererlo puedes checarlo en nuestra tienda en línea dándole click en la imagen o el botón.
+                            </p>
                         @endif
                         @if ($curso->materiales != NULL)
                                 <a href="{{ $curso->btn_cotizacion}}" target="_blank">
