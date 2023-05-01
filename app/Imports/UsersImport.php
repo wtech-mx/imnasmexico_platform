@@ -30,14 +30,15 @@ class UsersImport implements ToModel, WithHeadingRow,WithUpserts{
     {
         // Crea un nuevo objeto User con los datos de la fila actual
         $code = Str::random(8);
+        $telefono_str = strval($row['telefono']);
         $user = new User([
-            'code'    => $code,
-            'name'     => $row['name'],
-            'email'    => $row['email'],
-            'telefono'    => $row['telefono'],
-            'username'    => $row['username'],
-            'cliente'    => $row['cliente'],
-            'password' => Hash::make($row['password']),
+            'code'      => $code,
+            'name'      => $row['name'],
+            'email'     => $row['email'],
+            'telefono'  => $telefono_str,
+            'username'  => $telefono_str,
+            'cliente'   => $row['cliente'],
+            'password'  => Hash::make($telefono_str,),
         ]);
 
         return $user;
