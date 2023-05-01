@@ -48,7 +48,7 @@ class ReportesController extends Controller
         $webpage = WebPage::first();
 
         $fechaHoraActual = date('Y-m-d');
-        $orders = Orders::where('fecha', '2023-04-30')
+        $orders = Orders::where('fecha', $fechaHoraActual)
         ->where('estatus', '1')
         ->orderBy('id','DESC')
         ->get();
@@ -56,7 +56,7 @@ class ReportesController extends Controller
         $totalPagado = $orders->sum('pago');
         $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
 
-        $datos = Orders::where('fecha', '2023-04-30')
+        $datos = Orders::where('fecha', $fechaHoraActual)
         ->where('estatus', '1')
         ->with('OrdersTickets.CursosTickets')
         ->get()
