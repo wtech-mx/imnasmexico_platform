@@ -342,50 +342,49 @@
                                         </div>
                                     </div>
                                      <!--single Tickets panel-->
-                                    <div class="card multisteps-form__panel p-3 border-radius-xl bg-white h-100" data-animation="FadeIn">
+                                    <div class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn">
                                         <h5 class="font-weight-bolder">Tickets</h5>
                                         <div class="multisteps-form__content mt-3">
                                             <div class="row">
                                                 @foreach ($tickets as $item)
                                                     <div class="row">
+                                                        <input type="hidden" name="ticket_id[]" value="{{ $item->id }}">
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <label for="fecha">Nombre</label>
-                                                                <input value="{{$item->nombre}}" type="text" class="form-control">
+                                                                <input value="{{$item->nombre}}" id="nombre_ticket[]" name="nombre_ticket[]" type="text" class="form-control">
                                                             </div>
                                                         </div>
                                                         <div class="col-3">
                                                             <div class="form-group">
                                                                 <label for="num_sesion">Fecha inicial</label>
-                                                                <input value="{{$item->fecha_inicial}}" type="date" class="form-control" >
+                                                                <input value="{{$item->fecha_inicial}}" id="fecha_inicial_ticket[]" name="fecha_inicial_ticket[]" type="date" class="form-control" >
                                                             </div>
                                                         </div>
                                                         <div class="col-3">
                                                             <div class="form-group">
                                                                 <label for="num_sesion">Fecha final</label>
-                                                                <input value="{{$item->fecha_final}}" type="date" class="form-control" >
+                                                                <input value="{{$item->fecha_final}}" id="fecha_final_ticket[]" name="fecha_final_ticket[]" type="date" class="form-control" >
                                                             </div>
                                                         </div>
                                                         <div class="col-3">
                                                             <div class="form-group">
                                                                 <label for="num_sesion">Precio</label>
-                                                                <input value="{{$item->precio}}" type="number" class="form-control" >
+                                                                <input value="{{$item->precio}}" id="precio[]" name="precio[]" type="number" class="form-control" >
                                                             </div>
                                                         </div>
                                                         <div class="col-3">
                                                             <div class="form-group">
                                                                 <label for="num_sesion">Descuento</label>
-                                                                <input value="{{$item->descuento}}" type="number" class="form-control" >
+                                                                <input value="{{$item->descuento}}" id="descuento[]" name="descuento[]" type="number" class="form-control" >
                                                             </div>
                                                         </div>
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <label for="descripcion">Descripcion</label><br>
-                                                                <textarea cols="10" rows="3" class="form-control">{{$item->descripcion}}</textarea>
+                                                                <textarea id="descripcion_ticket[]" name="descripcion_ticket[]" cols="10" rows="3" class="form-control">{{$item->descripcion}}</textarea>
                                                             </div>
                                                         </div>
-
-
                                                     </div>
                                                 @endforeach
                                                 <div id="formulario" class="mt-4">
@@ -440,9 +439,11 @@
                                              </div>
                                         </div>
                                     </div>
+
                                 </form>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

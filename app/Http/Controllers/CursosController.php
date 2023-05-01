@@ -224,12 +224,36 @@ class CursosController extends Controller
         $curso->update();
 
         // G U A R D A R  T I C K E T
-        $nombre_ticket = $request->get('nombre_ticket');
-        $descripcion_ticket = $request->get('descripcion_ticket');
-        $precio_ticket = $request->get('precio');
-        $fecha_inicial_ticket = $request->get('fecha_inicial_ticket');
-        $fecha_final_ticket = $request->get('fecha_final_ticket');
+        $nombre_ticket = $request->input('nombre_ticket');
+        $descripcion_ticket = $request->input('descripcion_ticket');
+        $precio_ticket = $request->input('precio');
+        $fecha_inicial_ticket = $request->input('fecha_inicial_ticket');
+        $fecha_final_ticket = $request->input('fecha_final_ticket');
         $descuento = $request->get('descuento');
+        $ticket_ids = $request->input('ticket_id');
+
+        for ($count = 0; $count < count($nombre_ticket); $count++) {
+            $data = array(
+                'id_curso' => $curso->id,
+                'nombre' => $nombre_ticket[$count],
+                'descripcion' => $descripcion_ticket[$count],
+                'precio' => $precio_ticket[$count],
+                'fecha_inicial' => $fecha_inicial_ticket[$count],
+                'fecha_final' => $fecha_final_ticket[$count],
+                'descuento' => $descuento[$count],
+                'imagen' => $curso->foto,
+            );
+
+            if (isset($ticket_ids[$count])) {
+                // Actualizar el ticket existente
+                $ticket = CursosTickets::findOrFail($ticket_ids[$count]);
+                $ticket->update($data);
+            } elseif($nombre_ticket[$count] != NULL) {
+                // Crear un nuevo ticket
+                CursosTickets::create($data);
+
+            }
+        }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->route('cursos.index')
