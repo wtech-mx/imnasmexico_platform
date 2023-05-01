@@ -115,8 +115,8 @@ class ReportesController extends Controller
         $webpage = WebPage::first();
 
         $fechaActual = date('Y-m-d');
-        $fechaInicioSemana = date('Y-m-d', strtotime('monday this week', strtotime($fechaActual)));
-        $fechaFinSemana = date('Y-m-d', strtotime('sunday this week', strtotime($fechaActual)));
+        $fechaInicioSemana = date('Y-m-d', strtotime('monday this week', strtotime('2023-04-30')));
+        $fechaFinSemana = date('Y-m-d', strtotime('sunday this week', strtotime('2023-04-30')));
 
         $fecha = $fechaInicioSemana;
         $fecha_timestamp = strtotime($fecha);
@@ -196,7 +196,8 @@ class ReportesController extends Controller
     public function reporte_email_mes(){
         $webpage = WebPage::first();
 
-        $fechaActual = Carbon::now();
+        // $fechaActual = Carbon::now();
+        $fechaActual = '2023-04-30';
         // Obtenemos el primer día del mes actual
         $fechaInicioMes = $fechaActual->startOfMonth()->toDateString();
         // Obtenemos el último día del mes actual
