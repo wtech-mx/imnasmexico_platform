@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use Hash;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClientsController extends Controller
 {
@@ -394,7 +396,8 @@ class ClientsController extends Controller
     public function import_clientes()
     {
         Excel::import(new UsersImport,request()->file('file'));
-        return back();
+
+        return redirect()->back()->with('success', 'Creado con exito');
     }
 
 }
