@@ -393,7 +393,7 @@ class ClientsController extends Controller
 
     }
 
-    public function import_clientes()
+    public function import_clientes(Request $request)
     {
         Excel::import(new UsersImport,request()->file('file'));
 
