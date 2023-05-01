@@ -18,13 +18,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-6">
-                            <h4 class="text-center mb-3">Total del Semana</h4>
+                            <h4 class="text-center mb-3">Total del Mes</h4>
                             <h5 class="text-center">
                                 <b>${{ $totalPagadoFormateado }}</b>
 
                             </h5>
                             <div class="d-flex justify-content-center mt-3">
-                                <form method="POST" action="{{ route('reporte_semanal.store') }}" enctype="multipart/form-data" role="form">
+                                <form method="POST" action="{{ route('reporte_mes.store') }}" enctype="multipart/form-data" role="form">
                                     @csrf
                                     <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff"> Enviar Reporte</button>
                                 </form>

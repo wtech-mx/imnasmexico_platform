@@ -8,6 +8,8 @@ use App\Models\Orders;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ReporteTicketsVendidos;
+use App\Mail\ReporteTicketsVendidosSemana;
+use App\Mail\ReporteTicketsVendidosMes;
 use App\Models\WebPage;
 
 class ReportesController extends Controller
@@ -88,6 +90,9 @@ class ReportesController extends Controller
             ->orderBy('fecha','DESC')
             ->get();
 
+            $totalPagado = $orders->sum('pago');
+            $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
+
             $cursosComprados = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
             ->where('estatus', '1')
             ->with('OrdersTickets.CursosTickets')
@@ -104,6 +109,54 @@ class ReportesController extends Controller
             ->values();
 
         return view('admin.reportes.semana', compact('orders', 'orders', 'cursosComprados'));
+    }
+
+    public function reporte_email_semanal(){
+        $webpage = WebPage::first();
+
+        $fechaActual = date('Y-m-d');
+        $fechaInicioSemana = date('Y-m-d', strtotime('monday this week', strtotime($fechaActual)));
+        $fechaFinSemana = date('Y-m-d', strtotime('sunday this week', strtotime($fechaActual)));
+
+        $fecha = $fechaInicioSemana;
+        $fecha_timestamp = strtotime($fecha);
+        $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+
+        $fecha_fin = $fechaFinSemana;
+        $fecha_timestamp = strtotime($fecha_fin);
+        $fecha_formateadafin = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+        $fecha_semanal = $fecha_formateada.' al '.$fecha_formateadafin;
+
+            $orders = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
+            ->where('pago', '>','0')
+            ->orderBy('fecha','DESC')
+            ->get();
+
+            $totalPagado = $orders->sum('pago');
+            $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
+
+            $datos = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
+            ->with('OrdersTickets.CursosTickets')
+            ->get()
+            ->pluck('OrdersTickets')
+            ->flatten()
+            ->groupBy('CursosTickets.nombre')
+            ->map(function ($tickets, $nombreCurso) {
+                return [
+                    'nombre' => $nombreCurso,
+                    'total' => $tickets->count()
+                ];
+            })
+            ->values();
+
+        Mail::to($webpage->email_admin)
+        ->bcc($webpage->email_admin_two, 'Destinatario dev 2')
+        ->send(new ReporteTicketsVendidosSemana($datos,$totalPagadoFormateado,$fecha_semanal));
+
+        return redirect()->back()->with('success', 'Webpage actualizada');
+
     }
 
     public function index_mes(){
@@ -139,4 +192,51 @@ class ReportesController extends Controller
 
         return view('admin.reportes.mes', compact('orders', 'totalPagadoFormateado', 'cursosComprados'));
     }
+
+    public function reporte_email_mes(){
+        $webpage = WebPage::first();
+
+        $fechaActual = Carbon::now();
+        // Obtenemos el primer día del mes actual
+        $fechaInicioMes = $fechaActual->startOfMonth()->toDateString();
+        // Obtenemos el último día del mes actual
+        $fechaFinMes = $fechaActual->endOfMonth()->toDateString();
+
+
+        $fecha_mes = $fechaInicioMes;
+        $mes_date = date('F', strtotime($fecha_mes));
+
+            $orders = Orders::whereBetween('fecha', [$fechaInicioMes, $fechaFinMes])
+            ->where('estatus', '1')
+            ->where('pago', '>','0')
+            ->orderBy('id','DESC')
+            ->get();
+
+            $totalPagado = $orders->sum('pago');
+            $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
+
+            $datos = Orders::whereBetween('fecha', [$fechaInicioMes, $fechaFinMes])
+            ->with('OrdersTickets.CursosTickets')
+            ->where('estatus', '1')
+            ->get()
+            ->pluck('OrdersTickets')
+            ->flatten()
+            ->groupBy('CursosTickets.nombre')
+            ->map(function ($tickets, $nombreCurso) {
+                return [
+                    'nombre' => $nombreCurso,
+                    'total' => $tickets->count()
+                ];
+            })
+            ->values();
+
+        Mail::to($webpage->email_admin)
+        ->bcc($webpage->email_admin_two, 'Destinatario dev 2')
+        ->send(new ReporteTicketsVendidosMes($datos,$totalPagadoFormateado,$mes_date));
+
+        return redirect()->back()->with('success', 'Webpage actualizada');
+
+    }
+
+
 }
