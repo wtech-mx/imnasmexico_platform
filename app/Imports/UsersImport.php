@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\Importable;
+use Illuminate\Support\Str;
 
 use Hash;
 
@@ -23,18 +24,19 @@ class UsersImport implements ToModel, WithHeadingRow,WithUpserts{
     {
         return 'telefono'; // La columna telefono será utilizada para detectar duplicados
         return 'email'; // La columna email será utilizada para detectar duplicados
-        return 'code'; // La columna code será utilizada para detectar duplicados
     }
 
     public function model(array $row)
     {
         // Crea un nuevo objeto User con los datos de la fila actual
+        $code = Str::random(8);
         $user = new User([
+            'code'    => $code,
             'name'     => $row['name'],
             'email'    => $row['email'],
             'telefono'    => $row['telefono'],
             'username'    => $row['username'],
-            'code'    => $row['code'],
+            'cliente'    => $row['cliente'],
             'password' => Hash::make($row['password']),
         ]);
 
