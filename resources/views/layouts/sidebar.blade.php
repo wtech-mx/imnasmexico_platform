@@ -13,7 +13,7 @@
         <li class="nav-item">
           <a class="nav-link {{ (Request::is('dashboard*') ? 'active' : '') }}" href="{{ route('dashboard') }}" target="">
             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-             <i class="ni ni-calendar-grid-58 text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                <i class="fa fa-house text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
             </div>
             <span class="nav-link-text ms-1">Inicio</span>
           </a>
@@ -75,7 +75,7 @@
         <li class="nav-item">
           <a class="nav-link {{ (Request::is('admin/pagos') ? 'active' : '') }}" href="{{ route('pagos.index_pago') }}">
             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                <i class="fa fa-file text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                <i class="fa fa-ticket text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
             </div>
             <span class="nav-link-text ms-1">Ordenes</span>
           </a>
@@ -84,7 +84,7 @@
         <li class="nav-item">
             <a class="nav-link {{ (Request::is('admin/pagos/mercado*') ? 'active' : '') }}" href="{{ route('mercado.pago') }}">
               <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                  <i class="fa fa-file text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                <i class="fa fa-money text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
               </div>
               <span class="nav-link-text ms-1">Mercado Pago</span>
             </a>
@@ -93,7 +93,7 @@
         <li class="nav-item">
             <a class="nav-link {{ (Request::is('admin/clientes*') ? 'active' : '') }}" href="{{ route('clientes_admin.index') }}">
               <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                  <i class="fa fa-file text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                  <i class="fa fa-users text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
               </div>
               <span class="nav-link-text ms-1">Alumn@s</span>
             </a>
@@ -106,8 +106,8 @@
         <li class="nav-item">
             <a data-bs-toggle="collapse" href="#webpahe" class="nav-link {{ (Request::is('admin/estandares*') ? 'active' : '') }}" aria-controls="webpahe" role="button" aria-expanded="false">
               <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-                <i class="ni ni-settings text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-              </div>
+                <i class="fa fa-gear opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+            </div>
               <span class="nav-link-text ms-1">Configuraciones de la pag</span>
             </a>
             <div class="collapse " id="webpahe">
@@ -172,7 +172,7 @@
         <li class="nav-item">
           <a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link {{ (Request::is('users*') ? 'active' : '') }}{{ (Request::is('roles*') ? 'active' : '') }}" aria-controls="pagesExamples" role="button" aria-expanded="false">
             <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-              <i class="ni ni-settings text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+              <i class="fa fa-tools text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
             </div>
             <span class="nav-link-text ms-1">Roles y Permisos</span>
           </a>
