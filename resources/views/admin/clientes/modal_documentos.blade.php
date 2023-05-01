@@ -9,7 +9,7 @@
                 </button>
             </div>
 
-                <nav>
+                <nav class="mt-3">
                     <div class="d-flex justify-content-center">
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-login-tab" data-bs-toggle="tab" data-bs-target="#nav-login{{ $cliente->id }}" type="button" role="tab" aria-controls="nav-login{{ $cliente->id }}" aria-selected="true">
@@ -42,37 +42,74 @@
                                     <div class="col-6 form-group">
                                         <label for="ine">INE </label>
                                         <input id="ine" name="ine" type="file" class="form-control" >
-                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                        @if (pathinfo($documento->ine, PATHINFO_EXTENSION) == 'pdf')
+                                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine)}}" style="width: 100%; height: 350px;"></iframe>
+                                        @else
+                                        <p class="text-center mt-2">
+                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" alt="Imagen" style="width: 250px;height: 100%;"/>
+                                        </p>
+                                        @endif
                                     </div>
 
                                     <div class="col-6 form-group">
                                         <label for="curp">CURP</label>
                                         <input id="curp" name="curp" type="file" class="form-control" >
-                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                        @if (pathinfo($documento->curp, PATHINFO_EXTENSION) == 'pdf')
+                                        <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp)}}" style="width: 100%; height: 350px;"></iframe>
+                                        @else
+                                        <p class="text-center mt-2">
+                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" alt="Imagen" style="width: 250px;height: 100%;"/>
+                                        </p>
+                                        @endif
                                     </div>
 
                                     <div class="col-6 form-group">
                                         <label for="foto_tam_titulo">Foto tamaño titulo</label>
                                         <input id="foto_tam_titulo" name="foto_tam_titulo" type="file" class="form-control" >
-                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_titulo) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                        @if (pathinfo($documento->foto_tam_titulo, PATHINFO_EXTENSION) == 'pdf')
+                                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_titulo)}}" style="width: 100%; height: 350px;"></iframe>
+                                        @else
+                                        <p class="text-center mt-2">
+                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_titulo) }}" alt="Imagen" style="width: 250px;height: 100%;"/>
+                                        </p>
+                                        @endif
+
                                     </div>
 
                                     <div class="col-6 form-group">
                                         <label for="foto_tam_infantil">Foto tamaño Infantil</label>
                                         <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
-                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                        @if (pathinfo($documento->foto_tam_infantil, PATHINFO_EXTENSION) == 'pdf')
+                                        <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil)}}" style="width: 100%; height: 350px;"></iframe>
+                                        @else
+                                        <p class="text-center mt-2">
+                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" alt="Imagen" style="width: 250px;height: 100%;"/>
+                                        </p>
+                                        @endif
                                     </div>
 
                                     <div class="col-6 form-group">
                                         <label for="carta_compromiso">Carta Compromiso</label>
                                         <input id="carta_compromiso" name="carta_compromiso" type="file" class="form-control" >
-                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                        @if (pathinfo($documento->carta_compromiso, PATHINFO_EXTENSION) == 'pdf')
+                                        <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso)}}" style="width: 100%; height: 350px;"></iframe>
+                                        @else
+                                        <p class="text-center mt-2">
+                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" alt="Imagen" style="width: 250px;height: 100%;"/>
+                                        </p>
+                                        @endif
                                     </div>
 
                                     <div class="col-6 form-group">
                                         <label for="firma">Firma</label>
                                         <input id="firma" name="firma" type="file" class="form-control" >
-                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                        @if (pathinfo($documento->firma, PATHINFO_EXTENSION) == 'pdf')
+                                        <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma)}}" style="width: 100%; height: 350px;"></iframe>
+                                        @else
+                                        <p class="text-center mt-2">
+                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" alt="Imagen" style="width: 250px;height: 100%;"/>
+                                        </p>
+                                        @endif
                                     </div>
                                 @endif
                             @endforeach
@@ -125,28 +162,32 @@
                     @php
                         $tiene_documentos_estandar = false;
                     @endphp
-                    <ul>
-                        @foreach($documentos_estandares as $documento)
-                            @if($documento->id_usuario == $cliente->id)
-                                @php
-                                    $tiene_documentos = true;
-                                @endphp
-                                <li>{{ $documento->documento }} <a href="{{ route('descargar_documento', ['id' => $documento->id, 'cliente_id' => $cliente->id]) }}">Descargar</a></li>
-                            @endif
-                        @endforeach
-                    </ul>
+                        <form  method="POST" action="{{ route('documentos.store', $cliente->id) }}" enctype="multipart/form-data" role="form">
+                            @csrf
+                            <div class="modal-body row">
+                                <div class="col-12">
+                                    <input class="form-control" type="file" name="archivos[]" multiple>
+                                </div>
+                                @foreach($cliente->DocumentosEstandares as $documento)
+                                <div class="col-6 form-group">
+                                    @if (pathinfo($documento->documento, PATHINFO_EXTENSION) == 'pdf')
+                                        <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento)}}" style="width: 100%; height: 350px;"></iframe>
+                                    @else
+                                        <p class="text-center mt-2">
+                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento) }}" alt="Imagen" style="width: 220px;height: 100%;"/>
+                                            <a href="{{ route('descargar_documento', ['id' => $documento->id, 'cliente_id' => $cliente->id]) }}">
+                                                Descargar
+                                            </a>
+                                        </p>
+                                    @endif
+                                </div>
+                                @endforeach
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                            </div>
+                        </form>
 
-                    @if($tiene_documentos)
-                        <!-- Si el usuario tiene documentos, no mostramos el formulario -->
-                        @else
-                        <p>No se han subido archivos aún.</p>
-                    @endif
-
-                    <form method="POST" action="{{ route('documentos.store', $cliente->id) }}" enctype="multipart/form-data" role="form">
-                        @csrf
-                        <input type="file" name="archivos[]" multiple>
-                        <button type="submit">Subir archivos</button>
-                    </form>
                 </div>
             </div>
 

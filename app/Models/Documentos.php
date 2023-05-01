@@ -25,7 +25,8 @@ class Documentos extends Model
 
     public function User()
     {
-        return $this->belongsTo(User::class, 'id_usuario');
+
+        return $this->belongsTo('App\Models\User', 'id_usuario');
 
     }
 
