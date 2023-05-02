@@ -197,7 +197,11 @@ class CursosController extends Controller
             $curso->video_cad = 1;
             $curso->fecha_video = $fechaHoraActual;
         }
-
+        $curso->clase_grabada2 = $request->get('clase_grabada2');
+        $curso->clase_grabada3 = $request->get('clase_grabada3');
+        $curso->clase_grabada4 = $request->get('clase_grabada4');
+        $curso->clase_grabada5 = $request->get('clase_grabada5');
+        
         $curso->sin_fin = $request->get('sin_fin');
         $curso->texto_rvoe = $request->get('texto_rvoe');
         $curso->fecha_inicial = $request->get('fecha_inicial');
@@ -271,6 +275,10 @@ class CursosController extends Controller
             $curso->video_cad = 1;
             $curso->fecha_video = $fechaHoraActual;
         }
+        $curso->clase_grabada2 = $request->get('clase_grabada2');
+        $curso->clase_grabada3 = $request->get('clase_grabada3');
+        $curso->clase_grabada4 = $request->get('clase_grabada4');
+        $curso->clase_grabada5 = $request->get('clase_grabada5');
         $curso->recurso = $request->get('recurso');
         $curso->update();
 

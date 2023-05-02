@@ -16,9 +16,29 @@
                     <div class="col-12">
                         <h6 class="">{{ $curso->nombre }}</h6>
                     </div>
-                    <div class="col-12 form-group">
-                        <label for="name">Clase grabada</label>
+                    <div class="col-6 form-group">
+                        <label for="name">Clase grabada 1</label>
                         <input id="clase_grabada" name="clase_grabada" type="text" class="form-control" value="{{ $curso->clase_grabada }}">
+                    </div>
+
+                    <div class="col-6 form-group">
+                        <label for="name">Clase grabada 2</label>
+                        <input id="clase_grabada2" name="clase_grabada2" type="text" class="form-control" value="{{ $curso->clase_grabada2 }}">
+                    </div>
+
+                    <div class="col-6 form-group">
+                        <label for="name">Clase grabada 3</label>
+                        <input id="clase_grabada3" name="clase_grabada3" type="text" class="form-control" value="{{ $curso->clase_grabada3 }}">
+                    </div>
+
+                    <div class="col-6 form-group">
+                        <label for="name">Clase grabada 4</label>
+                        <input id="clase_grabada4" name="clase_grabada4" type="text" class="form-control" value="{{ $curso->clase_grabada4 }}">
+                    </div>
+
+                    <div class="col-6 form-group">
+                        <label for="name">Clase grabada 5</label>
+                        <input id="clase_grabada5" name="clase_grabada5" type="text" class="form-control" value="{{ $curso->clase_grabada5 }}">
                     </div>
 
                     <div class="col-12 form-group">
