@@ -220,7 +220,7 @@ class CursosController extends Controller
         $curso->seccion_unam = $request->get('seccion_unam');
         $curso->titulo_hono = $request->get('titulo_hono');
         $curso->texto_conocer = $request->get('texto_conocer');
-
+        $curso->precio_curso = $request->get('precio_curso');
         $curso->update();
 
         // G U A R D A R  T I C K E T
