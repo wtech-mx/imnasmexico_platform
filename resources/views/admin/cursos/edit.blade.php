@@ -434,7 +434,12 @@
                                                 </div>
                                             </div>
                                             <div class="button-row d-flex mt-4">
-                                                <input  id="precio_curso" name="precio_curso" type="number" class="form-control" placeholder="$">
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="num_sesion">Precio</label>
+                                                        <input  id="precio_curso" name="precio_curso" type="number" class="form-control" >
+                                                    </div>
+                                                </div>
                                                 <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
                                                 <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                              </div>
