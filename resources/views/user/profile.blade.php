@@ -546,7 +546,7 @@ Mi perfil- {{$cliente->name}}
 
                     @foreach ($usuario_compro as $video)
                     <div class="col-12 col-sm-6">
-                        <h5 class="titile_clase_grabada mt-1 mt-sm-1 mt-lg-5 mb-2 mb-sm-2 mb-lg-5">DD{{$video->nombre}} - Día 1</h5>
+                        <h5 class="titile_clase_grabada mt-1 mt-sm-1 mt-lg-5 mb-2 mb-sm-2 mb-lg-5">{{$video->nombre}} - Día 1</h5>
                         @php
                             $url = $video->clase_grabada;
                             preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
