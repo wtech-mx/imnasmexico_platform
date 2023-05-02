@@ -12,10 +12,11 @@
             <form method="POST" action="{{ route('cursos.update_meet', $curso->id) }}" enctype="multipart/form-data" role="form">
                 @csrf
                 <input type="hidden" name="_method" value="PATCH">
-                <div class="modal-body">
+                <div class="modal-body row">
                     <div class="col-12">
                         <h6 class="">{{ $curso->nombre }}</h6>
                     </div>
+
                     <div class="col-6 form-group">
                         <label for="name">Clase grabada 1</label>
                         <input id="clase_grabada" name="clase_grabada" type="text" class="form-control" value="{{ $curso->clase_grabada }}">
@@ -42,7 +43,7 @@
                     </div>
 
                     <div class="col-12 form-group">
-                        <label for="name">Recurso</label>
+                        <label for="name">Liga Meet</label>
                         <input id="recurso" name="recurso" type="text" class="form-control" value="{{ $curso->recurso }}">
                     </div>
 
