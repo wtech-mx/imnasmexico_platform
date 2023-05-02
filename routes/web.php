@@ -190,6 +190,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/reporte/dia', [App\Http\Controllers\ReportesController::class, 'index_dia'])->name('reporte.index_dia');
     Route::get('/admin/reporte/semana', [App\Http\Controllers\ReportesController::class, 'index_semana'])->name('reporte.index_semana');
     Route::get('/admin/reporte/mes', [App\Http\Controllers\ReportesController::class, 'index_mes'])->name('reporte.index_mes');
+    Route::get('/admin/reporte/custom', [App\Http\Controllers\ReportesController::class, 'index_custom'])->name('reporte.index_custom');
+    Route::post('/admin/reporte/calculando_custom', [App\Http\Controllers\ReportesController::class, 'store_calculando_custom'])->name('reporte.store_custom');
+
 
     // =============== M O D U L O   WEB PAGE ===============================
 
@@ -209,7 +212,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/reporte_email_dia/', [App\Http\Controllers\ReportesController::class, 'reporte_email_dia'])->name('reporte_email_dia.store');
     Route::post('/admin/reporte_semana/', [App\Http\Controllers\ReportesController::class, 'reporte_email_semanal'])->name('reporte_semanal.store');
     Route::post('/admin/reporte_mes/', [App\Http\Controllers\ReportesController::class, 'reporte_email_mes'])->name('reporte_mes.store');
-
+    Route::post('/admin/reporte_custom/', [App\Http\Controllers\ReportesController::class, 'reporte_email_custom'])->name('reporte_custom.store');
 
  // =============== M O D U L O   WEB PAGE ===============================
     Route::get('/admin/clientes', [App\Http\Controllers\ClientsController::class, 'index_admin'])->name('clientes_admin.index');

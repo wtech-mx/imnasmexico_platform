@@ -150,6 +150,11 @@
             <div class="collapse" id="pagesExamplesReportes">
               <ul class="nav ms-4">
                 <li class="nav-item ">
+                  <a class="nav-link {{ (Request::is('admin/reporte/custom*') ? 'show' : '') }}" href="{{ route('reporte.index_custom') }}">
+                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-normal">Personalizado</span>
+                  </a>
+
                   <a class="nav-link {{ (Request::is('admin/reporte/dia*') ? 'show' : '') }}" href="{{ route('reporte.index_dia') }}">
                     <span class="sidenav-mini-icon"> P </span>
                     <span class="sidenav-normal">Dia</span>

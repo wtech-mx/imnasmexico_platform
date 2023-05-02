@@ -235,8 +235,96 @@ class ReportesController extends Controller
         ->send(new ReporteTicketsVendidosMes($datos,$totalPagadoFormateado,$mes_date));
 
         return redirect()->back()->with('success', 'Webpage actualizada');
-
     }
 
+    public function index_custom(request $request){
+        return view('admin.reportes.custom');
+    }
+
+    public function store_calculando_custom(request $request){
+
+        $fechaInicioSemana = $request->get('fecha_inicio');
+        $fechaFinSemana = $request->get('fecha_fin');
+
+            $orders = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
+            ->where('pago', '>','0')
+            ->orderBy('fecha','DESC')
+            ->get();
+
+            $totalPagado = $orders->sum('pago');
+            $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
+
+            $cursosComprados = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
+            ->with('OrdersTickets.CursosTickets')
+            ->get()
+            ->pluck('OrdersTickets')
+            ->flatten()
+            ->groupBy('CursosTickets.nombre')
+            ->map(function ($tickets, $nombreCurso) {
+                return [
+                    'nombre' => $nombreCurso,
+                    'total' => $tickets->count()
+                ];
+            })
+            ->values();
+
+            $output = "";
+            foreach ($orders as $order) {
+                $output .= '<tr>'.
+                    '<td>'.$order->id.'</td>'.
+                    '<td>'.$order->User->name.'</td>'.
+                    '<td>'.$order->fecha.'</td>'.
+                    '<td>'.$order->pago.'</td>'.
+                    '<td>'.$order->forma_pago.'</td>'.
+                    '<td>';
+                    if ($order->estatus == '1') {
+                        $output .= 'Completado';
+                    } else {
+                        $output .= 'En espera';
+                    }
+
+                    $output .= '</td>'.
+                    '<td>'.
+                    '<a class="btn btn-sm btn-success"   href="'.route('pagos.edit_pago',$order->id).'">'.
+                    '<i class="fa fa-fw fa-edit">'.
+                    '</i>'.
+                    '</a>'.
+                    '</td>'.
+                    '</tr>';
+            }
+
+
+            if($request->ajax()){
+                if ($orders) {
+                    $output = '<div class="row">' .
+                        '<div class="col-12">' .
+
+                        '<table class="table table-flush" id="datatable-search">' .
+                        '<thead class="text-center">' .
+                        '<tr class="tr_checkout">' .
+                        '<th >Num. Pedido</th>' .
+                        '<th >Cliente</th>' .
+                        '<th >Fecha de Compra</th>' .
+                        '<th >Total</th>' .
+                        '<th>Forma de Pago</th>' .
+                        '<th>Estado</th>' .
+                        '<th>Acciones</th>' .
+                        '</tr>' .
+                        '</thead>' .
+                        '<tbody>' .
+                        $output .
+                        '</tbody>' .
+                        '</table>' .
+
+                        '</div>' .
+                        '</div>';
+
+                    return response()->json($output);
+                }
+        }
+
+    }
 
 }
