@@ -29,7 +29,7 @@
                 </div>
             </div>
             <h1 class="text-center tittle_thanks">¡Felicidades!</h1>
-            <h2 class="text-center subtittle_thanks">Dayanna Espinosa</h2>
+            <h2 class="text-center subtittle_thanks">{{$order->User->name }}</h2>
             @if ($order->estatus == '1')
                 <h2 class="text-center subtittle_thanks">Compra Realizada con éxito</h2>
             @else
