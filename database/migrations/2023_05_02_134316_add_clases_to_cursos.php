@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('cursos', function (Blueprint $table) {
-            $table->string('clase_grabada2', 900)->nullable();
-            $table->string('clase_grabada3', 900)->nullable();
-            $table->string('clase_grabada4', 900)->nullable();
-            $table->string('clase_grabada5', 900)->nullable();
+            $table->text('clase_grabada2')->nullable();
+            $table->text('clase_grabada3')->nullable();
+            $table->text('clase_grabada4')->nullable();
+            $table->text('clase_grabada5')->nullable();
         });
     }
 
