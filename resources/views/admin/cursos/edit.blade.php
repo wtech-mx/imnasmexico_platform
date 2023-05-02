@@ -434,7 +434,7 @@
                                                 </div>
                                             </div>
                                             <div class="button-row d-flex mt-4">
-                                                <div class="col-12">
+                                                <div class="col-3">
                                                     <div class="form-group">
                                                         <label for="num_sesion">Precio</label>
                                                         <input  id="precio_curso" name="precio_curso" type="number" class="form-control" >
