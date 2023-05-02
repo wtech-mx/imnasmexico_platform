@@ -437,7 +437,7 @@
                                                 <div class="col-3">
                                                     <div class="form-group">
                                                         <label for="num_sesion">Precio</label>
-                                                        <input  id="precio_curso" name="precio_curso" type="number" class="form-control" >
+                                                        <input  id="precio_curso" name="precio_curso" type="number" class="form-control" value="{{$curso->precio}}">
                                                     </div>
                                                 </div>
                                                 <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
