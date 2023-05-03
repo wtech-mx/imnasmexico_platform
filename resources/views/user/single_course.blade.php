@@ -189,21 +189,14 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                                         <div class="col-12">
                                                             <div class="input-group flex-nowrap mt-4">
                                                                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                                                <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                                <input type="text" name="name" id="name" class="form-control input_custom_checkout" value="{{auth()->user()->name }}" >
                                                             </div>
                                                         </div>
 
                                                         <div class="col-12">
                                                             <div class="input-group flex-nowrap mt-4">
                                                                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
-                                                                <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-12">
-                                                            <div class="input-group flex-nowrap mt-4">
-                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
-                                                                <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                                <input type="email" name="email" id="email" class="form-control input_custom_checkout" value="{{auth()->user()->email }}" required>
                                                             </div>
                                                         </div>
 

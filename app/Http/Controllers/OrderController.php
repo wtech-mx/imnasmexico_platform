@@ -136,9 +136,9 @@ class OrderController extends Controller
         $payment_id = $request->get('payment_id');
 
         $dominio = $request->getHost();
-        if($dominio == 'plataforma.imnasmexico.com'){
+        if ($dominio == 'plataforma.imnasmexico.com') {
             $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-8901800557603427-041420-99b569dfbf4e6ce9160fc673d9a47b1e-1115271504");
-        }else{
+        } else {
             $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-7084001530614040-031418-70b92db902566a519042ec6bd85289b3-1330780039");
         }
 
@@ -159,9 +159,9 @@ class OrderController extends Controller
             $forma_pago = $orden_ticket2->Orders->forma_pago;
             // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
             foreach ($orden_ticket as $details) {
-                if($details->Cursos->modalidad == 'Online'){
+                if ($details->Cursos->modalidad == 'Online') {
                     Mail::to($order->User->email)->send(new PlantillaTicket($details));
-                }else{
+                } else {
                     Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
                 }
             }
@@ -273,14 +273,14 @@ class OrderController extends Controller
             $forma_pago = $orden_ticket2->Orders->forma_pago;
             // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
             foreach ($orden_ticket as $details) {
-                if($details->Cursos->modalidad == 'Online'){
+                if ($details->Cursos->modalidad == 'Online') {
                     Mail::to($order->User->email)->send(new PlantillaTicket($details));
-                }else{
+                } else {
                     Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
                 }
             }
             Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
-        }else{
+        } else {
             $order = Orders::find($order->id);
             $order->num_order = $stripe->id;
             $order->update();
@@ -331,39 +331,39 @@ class OrderController extends Controller
             Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
-            $order = new Orders;
-            $order->id_usuario = $payer->id;
-            $order->pago = $request->precio;
-            $order->forma_pago = 'Externo';
-            $order->fecha = $fechaActual;
-            $order->estatus = 1;
-            $order->code = $code;
-            $order->save();
+        $order = new Orders;
+        $order->id_usuario = $payer->id;
+        $order->pago = $request->precio;
+        $order->forma_pago = 'Externo';
+        $order->fecha = $fechaActual;
+        $order->estatus = 1;
+        $order->code = $code;
+        $order->save();
 
-            $order_ticket = new OrdersTickets;
-            $order_ticket->id_order = $order->id;
-            $order_ticket->id_tickets = $request->ticket;
-            $order_ticket->id_usuario = $payer->id;
-            $order_ticket->id_curso = $request->curso;
-            $order_ticket->save();
+        $order_ticket = new OrdersTickets;
+        $order_ticket->id_order = $order->id;
+        $order_ticket->id_tickets = $request->ticket;
+        $order_ticket->id_usuario = $payer->id;
+        $order_ticket->id_curso = $request->curso;
+        $order_ticket->save();
 
-            // Enviar el correo electrónico
-            $datos = User::where('id', '=', $payer->id)->first();
-            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
-            $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
-            $user = $orden_ticket2->User->name;
-            $id_order = $orden_ticket2->id_order;
-            $pago = $request->precio;
-            $forma_pago = $orden_ticket2->Orders->forma_pago;
+        // Enviar el correo electrónico
+        $datos = User::where('id', '=', $payer->id)->first();
+        $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
+        $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
+        $user = $orden_ticket2->User->name;
+        $id_order = $orden_ticket2->id_order;
+        $pago = $request->precio;
+        $forma_pago = $orden_ticket2->Orders->forma_pago;
 
-            foreach ($orden_ticket as $details) {
-                if($details->Cursos->modalidad == 'Online'){
-                    Mail::to($payer->email)->send(new PlantillaTicket($details));
-                }else{
-                    Mail::to($payer->email)->send(new PlantillaTicketPresencial($details));
-                }
+        foreach ($orden_ticket as $details) {
+            if ($details->Cursos->modalidad == 'Online') {
+                Mail::to($payer->email)->send(new PlantillaTicket($details));
+            } else {
+                Mail::to($payer->email)->send(new PlantillaTicketPresencial($details));
             }
-            Mail::to($payer->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
+        }
+        Mail::to($payer->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
@@ -375,7 +375,6 @@ class OrderController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required',
-            'telefono' => 'required'
         ]);
 
         $code = Str::random(8);
@@ -430,9 +429,9 @@ class OrderController extends Controller
         $forma_pago = $orden_ticket2->Orders->forma_pago;
 
         foreach ($orden_ticket as $details) {
-            if($details->Cursos->modalidad == 'Online'){
+            if ($details->Cursos->modalidad == 'Online') {
                 Mail::to($payer->email)->send(new PlantillaTicket($details));
-            }else{
+            } else {
                 Mail::to($payer->email)->send(new PlantillaTicketPresencial($details));
             }
         }
@@ -482,9 +481,9 @@ class OrderController extends Controller
             $total = 1500;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas'));
             $curso = CursosTickets::where('nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
-            ->where('fecha_final', '>=', $fechaActual)
-            ->first();
-            if($curso != null){
+                ->where('fecha_final', '>=', $fechaActual)
+                ->first();
+            if ($curso != null) {
                 $cart = session()->get('cart', []);
                 $cart[] = [
                     "id" => $curso->id,
@@ -498,7 +497,7 @@ class OrderController extends Controller
             }
 
             $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
-            ->first();
+                ->first();
             $cart = session()->get('cart', []);
             $cart[] = [
                 "id" => $canasta->id,
@@ -510,17 +509,16 @@ class OrderController extends Controller
                 "image" => $canasta->imagen
             ];
             session()->put('cart', $cart);
-
         } elseif ($request->input('paquete') == 2) {
             $total = 2000;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas2'));
             $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
-            ->where('cursos.fecha_final', '>=', $fechaActual)
-            ->where('cursos.modalidad', '=', 'Online')
-            ->select('cursos_tickets.*')
-            ->first();
-            if($curso != null){
+                ->where('cursos.nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->select('cursos_tickets.*')
+                ->first();
+            if ($curso != null) {
                 $cart = session()->get('cart', []);
                 $cart[] = [
                     "id" => $curso->id,
@@ -535,12 +533,12 @@ class OrderController extends Controller
             }
 
             $aparatologia = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado de regulación y administración de spa ante COFEPRIS')
-            ->where('cursos.fecha_final', '>=', $fechaActual)
-            ->where('cursos.modalidad', '=', 'Online')
-            ->select('cursos_tickets.*')
-            ->first();
-            if($aparatologia != null){
+                ->where('cursos.nombre', '=', 'Diplomado de regulación y administración de spa ante COFEPRIS')
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->select('cursos_tickets.*')
+                ->first();
+            if ($aparatologia != null) {
                 $cart = session()->get('cart', []);
                 $cart[] = [
                     "id" => $aparatologia->id,
@@ -555,7 +553,7 @@ class OrderController extends Controller
             }
 
             $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
-            ->first();
+                ->first();
             $cart = session()->get('cart', []);
             $cart[] = [
                 "id" => $canasta->id,
@@ -567,17 +565,16 @@ class OrderController extends Controller
                 "image" => $canasta->imagen
             ];
             session()->put('cart', $cart);
-
         } elseif ($request->input('paquete') == 3) {
             $total = 2750;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas3'));
             $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
-            ->where('cursos.fecha_final', '>=', $fechaActual)
-            ->where('cursos.modalidad', '=', 'Online')
-            ->select('cursos_tickets.*')
-            ->first();
-            if($curso != null){
+                ->where('cursos.nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->select('cursos_tickets.*')
+                ->first();
+            if ($curso != null) {
                 $cart = session()->get('cart', []);
                 $cart[] = [
                     "id" => $curso->id,
@@ -592,12 +589,12 @@ class OrderController extends Controller
             }
 
             $carrera = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Carrera de Cosmiatria Estética')
-            ->where('cursos.fecha_final', '>=', $fechaActual)
-            ->where('cursos.modalidad', '=', 'Online')
-            ->select('cursos_tickets.*')
-            ->first();
-            if($carrera != null){
+                ->where('cursos.nombre', '=', 'Carrera de Cosmiatria Estética')
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->select('cursos_tickets.*')
+                ->first();
+            if ($carrera != null) {
                 $cart = session()->get('cart', []);
                 $cart[] = [
                     "id" => $carrera->id,
@@ -612,7 +609,7 @@ class OrderController extends Controller
             }
 
             $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
-            ->first();
+                ->first();
             $cart = session()->get('cart', []);
             $cart[] = [
                 "id" => $canasta->id,
@@ -628,13 +625,13 @@ class OrderController extends Controller
             $total = 3250;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas4'));
             $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
-            ->where('cursos.fecha_final', '>=', $fechaActual)
-            ->where('cursos.modalidad', '=', 'Online')
-            ->select('cursos_tickets.*')
-            ->first();
+                ->where('cursos.nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->select('cursos_tickets.*')
+                ->first();
 
-            if($curso != null){
+            if ($curso != null) {
                 $cart = session()->get('cart', []);
                 $cart[] = [
                     "id" => $curso->id,
@@ -649,12 +646,12 @@ class OrderController extends Controller
             }
 
             $spa = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado de regulación y administración de spa ante COFEPRIS')
-            ->where('cursos.fecha_final', '>=', $fechaActual)
-            ->where('cursos.modalidad', '=', 'Online')
-            ->select('cursos_tickets.*')
-            ->first();
-            if($spa != null){
+                ->where('cursos.nombre', '=', 'Diplomado de regulación y administración de spa ante COFEPRIS')
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->select('cursos_tickets.*')
+                ->first();
+            if ($spa != null) {
                 $cart = session()->get('cart', []);
                 $cart[] = [
                     "id" => $spa->id,
@@ -668,12 +665,12 @@ class OrderController extends Controller
                 session()->put('cart', $cart);
             }
             $carrera = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Carrera de Cosmiatria Estética')
-            ->where('cursos.fecha_final', '>=', $fechaActual)
-            ->where('cursos.modalidad', '=', 'Online')
-            ->select('cursos_tickets.*')
-            ->first();
-            if($carrera != null){
+                ->where('cursos.nombre', '=', 'Carrera de Cosmiatria Estética')
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->select('cursos_tickets.*')
+                ->first();
+            if ($carrera != null) {
                 $cart = session()->get('cart', []);
                 $cart[] = [
                     "id" => $carrera->id,
@@ -688,7 +685,7 @@ class OrderController extends Controller
             }
 
             $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
-            ->first();
+                ->first();
             $cart = session()->get('cart', []);
             $cart[] = [
                 "id" => $canasta->id,
@@ -700,18 +697,17 @@ class OrderController extends Controller
                 "image" => $canasta->imagen
             ];
             session()->put('cart', $cart);
-
         } elseif ($request->input('paquete') == 5) {
             $total = 3625;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas5'));
             $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
-            ->where('cursos.fecha_final', '>=', $fechaActual)
-            ->where('cursos.modalidad', '=', 'Online')
-            ->select('cursos_tickets.*')
-            ->first();
+                ->where('cursos.nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->select('cursos_tickets.*')
+                ->first();
 
-            if($curso != null){
+            if ($curso != null) {
                 $cart = session()->get('cart', []);
                 $cart[] = [
                     "id" => $curso->id,
@@ -726,12 +722,12 @@ class OrderController extends Controller
             }
 
             $spa = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado de regulación y administración de spa ante COFEPRIS')
-            ->where('cursos.fecha_final', '>=', $fechaActual)
-            ->where('cursos.modalidad', '=', 'Online')
-            ->select('cursos_tickets.*')
-            ->first();
-            if($spa != null){
+                ->where('cursos.nombre', '=', 'Diplomado de regulación y administración de spa ante COFEPRIS')
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->select('cursos_tickets.*')
+                ->first();
+            if ($spa != null) {
                 $cart = session()->get('cart', []);
                 $cart[] = [
                     "id" => $spa->id,
@@ -745,12 +741,12 @@ class OrderController extends Controller
                 session()->put('cart', $cart);
             }
             $carrera = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Carrera de Cosmiatria Estética')
-            ->where('cursos.fecha_final', '>=', $fechaActual)
-            ->where('cursos.modalidad', '=', 'Online')
-            ->select('cursos_tickets.*')
-            ->first();
-            if($carrera != null){
+                ->where('cursos.nombre', '=', 'Carrera de Cosmiatria Estética')
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->select('cursos_tickets.*')
+                ->first();
+            if ($carrera != null) {
                 $cart = session()->get('cart', []);
                 $cart[] = [
                     "id" => $carrera->id,
@@ -764,12 +760,12 @@ class OrderController extends Controller
                 session()->put('cart', $cart);
             }
             $post = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-            ->where('cursos.nombre', '=', 'Diplomado de Post Operatorio Facial y Corporal')
-            ->where('cursos.fecha_final', '>=', $fechaActual)
-            ->where('cursos.modalidad', '=', 'Online')
-            ->select('cursos_tickets.*')
-            ->first();
-            if($post != null){
+                ->where('cursos.nombre', '=', 'Diplomado de Post Operatorio Facial y Corporal')
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->select('cursos_tickets.*')
+                ->first();
+            if ($post != null) {
                 $cart = session()->get('cart', []);
                 $cart[] = [
                     "id" => $post->id,
@@ -784,7 +780,7 @@ class OrderController extends Controller
             }
 
             $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
-            ->first();
+                ->first();
             $cart = session()->get('cart', []);
             $cart[] = [
                 "id" => $canasta->id,
