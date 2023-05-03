@@ -36,7 +36,7 @@
                 </div>
 
                 @foreach ($tickets as $ticket)
-                    <div class="mt-2 mt-md-5">
+                    <div class="mt-2 mt-md-5 mt-lg-3">
                         <input class="input_paquetes" type="checkbox" name="ticket[]" id="checkbox{{ $ticket->id }}" data-grupo="grupo1" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo1()">
                         <label class="label_paquetes">{{ $ticket->nombre }}</label>
                     </div>
@@ -70,7 +70,7 @@
                     </select>
                 </div>
                 @foreach ($tickets as $ticket)
-                    <div class="mt-2 mt-md-5">
+                    <div class="mt-2 mt-md-5 mt-lg-3">
                         <input class="input_paquetes" type="checkbox" name="ticket2[]" data-grupo="grupo2" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo2()">
                         <label class="label_paquetes">{{ $ticket->nombre }}</label>
                     </div>
@@ -112,7 +112,7 @@
                     </select>
                 </div>
                 @foreach ($tickets as $ticket)
-                    <div class="mt-2 mt-md-5">
+                    <div class="mt-2 mt-md-5 mt-lg-3">
                         <input class="input_paquetes" type="checkbox" name="ticket3[]" data-grupo="grupo3" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo3()">
                         <label class="label_paquetes">{{ $ticket->nombre }}</label>
                     </div>
@@ -146,7 +146,7 @@
                     </select>
                 </div>
                 @foreach ($tickets as $ticket)
-                    <div class="mt-2 mt-md-5">
+                    <div class="mt-2 mt-md-5 mt-lg-3">
                         <input class="input_paquetes" type="checkbox" name="ticket4[]" data-grupo="grupo4" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo4()">
                         <label class="label_paquetes">{{ $ticket->nombre }}</label>
                     </div>
@@ -188,7 +188,7 @@
                     </select>
                 </div>
                 @foreach ($tickets as $ticket)
-                    <div class="mt-2 mt-md-5">
+                    <div class="mt-2 mt-md-5 mt-lg-3">
                         <input class="input_paquetes" type="checkbox" name="ticket5[]" data-grupo="grupo5" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo5()">
                         <label class="label_paquetes">{{ $ticket->nombre }}</label>
                     </div>
