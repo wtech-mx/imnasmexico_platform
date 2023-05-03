@@ -43,7 +43,20 @@
                                                 @endif
                                                 <td>${{ $pago->transaction_amount }}</td>
                                                 <td>{{ $pago->description }}</td>
-                                                <td>{{ $pago->date_approved}}</td>
+                                                <td>
+                                                    @php
+                                                        $fecha = $pago->date_approved;
+                                                        // Convertir a una marca de tiempo Unix
+                                                        $timestamp = strtotime($fecha);
+                                                        // Formatear la fecha
+                                                        $fecha_formateada = strftime('%e de %B del %Y', $timestamp);
+                                                        // Formatear la hora
+                                                        $hora_formateada = date('h:i A', $timestamp);
+                                                        // Combinar fecha y hora
+                                                        $fecha_hora_formateada = $fecha_formateada . ' a las ' . $hora_formateada;
+                                                    @endphp
+                                                    {{ $fecha_hora_formateada}}
+                                                </td>
 
                                             </tr>
                                         @endforeach
