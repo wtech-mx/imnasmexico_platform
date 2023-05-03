@@ -23,7 +23,7 @@ class CursosController extends Controller
     public function index(Request $request)
     {
         // $cursos = Cursos::orderBy('id','DESC')->get();
-        $cursos = Cursos::select('id', 'nombre', 'foto', 'fecha_inicial', 'fecha_final', 'recurso', 'modalidad', 'slug', 'clase_grabada')
+        $cursos = Cursos::select('id', 'nombre', 'foto', 'fecha_inicial', 'fecha_final', 'recurso', 'modalidad', 'slug', 'clase_grabada', 'clase_grabada2', 'clase_grabada3', 'clase_grabada4', 'clase_grabada5')
                 ->orderBy('id', 'DESC')
                 ->get();
 
@@ -197,6 +197,10 @@ class CursosController extends Controller
             $curso->video_cad = 1;
             $curso->fecha_video = $fechaHoraActual;
         }
+        $curso->clase_grabada2 = $request->get('clase_grabada2');
+        $curso->clase_grabada3 = $request->get('clase_grabada3');
+        $curso->clase_grabada4 = $request->get('clase_grabada4');
+        $curso->clase_grabada5 = $request->get('clase_grabada5');
 
         $curso->sin_fin = $request->get('sin_fin');
         $curso->texto_rvoe = $request->get('texto_rvoe');
@@ -271,6 +275,10 @@ class CursosController extends Controller
             $curso->video_cad = 1;
             $curso->fecha_video = $fechaHoraActual;
         }
+        $curso->clase_grabada2 = $request->get('clase_grabada2');
+        $curso->clase_grabada3 = $request->get('clase_grabada3');
+        $curso->clase_grabada4 = $request->get('clase_grabada4');
+        $curso->clase_grabada5 = $request->get('clase_grabada5');
         $curso->recurso = $request->get('recurso');
         $curso->update();
 

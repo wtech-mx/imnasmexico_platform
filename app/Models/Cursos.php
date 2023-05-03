@@ -43,7 +43,11 @@ class Cursos extends Model
         'texto_rvoe',
         'btn_cotizacion',
         'pdf',
-        'sin_fin'
+        'sin_fin',
+        'clase_grabada2',
+        'clase_grabada3',
+        'clase_grabada4',
+        'clase_grabada5',
     ];
 
     public function User()
