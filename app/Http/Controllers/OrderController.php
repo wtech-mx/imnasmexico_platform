@@ -474,17 +474,26 @@ class OrderController extends Controller
     }
 
     public function aplicarCupon(Request $request){
-        $curso = 0;
-        foreach(session('cart') as $id => $details){
-            $curso = $details['price'];
-            $descuento = $curso * 10 / 100;
-            $curso -= $descuento;
-            session()->put('price', $curso);
+
+        if (session()->has('coupon_applied')) {
+            return redirect()->back()->with('error', 'Cupón ya aplicado');
         }
+        
+        foreach (session('cart') as $id => $details) {
+            // Aplicar descuento al precio del producto
+            $discountedPrice = $details['price'] - ($details['price'] * 10 / 100);
 
-    return redirect()->back()->with('success', 'El cupón se ha aplicado correctamente.');
+            // Actualizar precio del producto en la sesión del carrito
+            session()->put("cart.{$id}.price", $discountedPrice);
+        }
+        $cart = session('cart');
+        // Almacenar que el cupón ya se ha aplicado en la sesión
+        session()->put('coupon_applied', true);
 
+        return redirect()->back()->with('success', 'Cupón aplicado con éxito');
     }
+
+
 
     public function resultado(Request $request)
     {
