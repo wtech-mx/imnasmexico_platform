@@ -271,60 +271,58 @@ class ReportesController extends Controller
             ->values();
 
             $output = "";
-            foreach ($orders as $order) {
-                $output .= '<tr>'.
-                    '<td>'.$order->id.'</td>'.
-                    '<td>'.$order->User->name.'</td>'.
-                    '<td>'.$order->fecha.'</td>'.
-                    '<td>'.$order->pago.'</td>'.
-                    '<td>'.$order->forma_pago.'</td>'.
-                    '<td>';
-                    if ($order->estatus == '1') {
-                        $output .= 'Completado';
-                    } else {
-                        $output .= 'En espera';
-                    }
-
-                    $output .= '</td>'.
-                    '<td>'.
-                    '<a class="btn btn-sm btn-success"   href="'.route('pagos.edit_pago',$order->id).'">'.
-                    '<i class="fa fa-fw fa-edit">'.
-                    '</i>'.
-                    '</a>'.
-                    '</td>'.
-                    '</tr>';
-            }
-
-
+            $output2 = "";
             if($request->ajax()){
                 if ($orders) {
-                    $output = '<div class="row">' .
-                        '<div class="col-12">' .
-
-                        '<table class="table table-flush" id="datatable-search">' .
-                        '<thead class="text-center">' .
-                        '<tr class="tr_checkout">' .
-                        '<th >Num. Pedido</th>' .
-                        '<th >Cliente</th>' .
-                        '<th >Fecha de Compra</th>' .
-                        '<th >Total</th>' .
-                        '<th>Forma de Pago</th>' .
-                        '<th>Estado</th>' .
-                        '<th>Acciones</th>' .
-                        '</tr>' .
-                        '</thead>' .
-                        '<tbody>' .
-                        $output .
-                        '</tbody>' .
-                        '</table>' .
-
-                        '</div>' .
-                        '</div>';
-
-                    return response()->json($output);
+                foreach ($orders as $order) {
+                    $output2 .=
+                        '<tr>'.
+                        '<td>'.$order->id.'</td>'.
+                        '<td>'.$order->User->name.'</td>'.
+                        '<td>'.$order->fecha.'</td>'.
+                        '<td>'.$order->pago.'</td>'.
+                        '<td>'.$order->forma_pago.'</td>'.
+                        '<td>';
+                        if ($order->estatus == '1') {
+                            $output2 .= 'Completado';
+                        } else {
+                            $output2 .= 'En espera';
+                        }
+                        $output2 .= '</td>'.
+                        '<td>'.
+                        '<a class="btn btn-sm btn-success"   href="'.route('pagos.edit_pago',$order->id).'">'.
+                        '<i class="fa fa-fw fa-edit">'.
+                        '</i>'.
+                        '</a>'.
+                        '</td>'.
+                        '</tr>';
                 }
-        }
+            }
 
+            $output =
+                    '<div class="row">' .
+                    '<div class="col-12">' .
+                    '<table class="table table-flush" id="datatable-search">' .
+                    '<thead class="text-center">' .
+                    '<tr class="tr_checkout">' .
+                    '<th >Num. Pedido</th>' .
+                    '<th >Cliente</th>' .
+                    '<th >Fecha de Compra</th>' .
+                    '<th >Total</th>' .
+                    '<th>Forma de Pago</th>' .
+                    '<th>Estado</th>' .
+                    '<th>Acciones</th>' .
+                    '</tr>' .
+                    '</thead>' .
+                    '<tbody>' .
+                    $output2 .
+                    '</tbody>' .
+                    '</table>' .
+                    '</div>' .
+                    '</div>';
+
+                return response()->json($output);
+            }
     }
 
 }

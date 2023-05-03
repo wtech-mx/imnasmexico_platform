@@ -91,21 +91,21 @@
             },
             success: function(response) {
                 $('#resultados').html(response);
+                const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+                deferRender:true,
+                paging: true,
+                pageLength: 10
+            });
+
+            const dataTableSearch2 = new simpleDatatables.DataTable("#datatable-search2", {
+                deferRender:true,
+                paging: true,
+                pageLength: 10
+            });
             }
         });
     }
 
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-        deferRender:true,
-        paging: true,
-        pageLength: 10
-    });
-
-    const dataTableSearch2 = new simpleDatatables.DataTable("#datatable-search2", {
-        deferRender:true,
-        paging: true,
-        pageLength: 10
-    });
 </script>
 
 @endsection
