@@ -473,6 +473,19 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
+    public function aplicarCupon(Request $request){
+        $curso = 0;
+        foreach(session('cart') as $id => $details){
+            $curso = $details['price'];
+            $descuento = $curso * 10 / 100;
+            $curso -= $descuento;
+            session()->put('price', $curso);
+        }
+
+    return redirect()->back()->with('success', 'El cupón se ha aplicado correctamente.');
+
+    }
+
     public function resultado(Request $request)
     {
         $fechaActual = date('Y-m-d');
