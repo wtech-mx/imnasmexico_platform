@@ -78,7 +78,7 @@
                     <div class="col-12">
                         <div class="input-group flex-nowrap mt-4">
                             <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-ticket"></i></span>
-                            <input type="text" name="cupon" id="cupon" class="form-control input_custom_checkout" placeholder="Código de cupón">
+                            <input type="text" name="coupon" id="coupon" class="form-control input_custom_checkout" placeholder="Código de cupón">
                         </div>
                     </div>
                     <button class="btn_pagar_checkout " type="submit">Aplicar cupón</button>

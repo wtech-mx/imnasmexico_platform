@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cursos;
 use App\Models\CursosTickets;
 use App\Models\Orders;
+use App\Models\Cupon;
 use App\Models\User;
 use Hash;
 use Illuminate\Support\Arr;
@@ -475,13 +476,25 @@ class OrderController extends Controller
 
     public function aplicarCupon(Request $request){
 
+        $coupon = Cupon::where('nombre', $request->coupon)
+        ->where('estado', '=', 'activo')
+        ->first();
+
+        if (!$coupon) {
+            return redirect()->back()->with('error', 'Cupón inválido');
+        }
+
+        if ($coupon->fecha_inicio && $coupon->fecha_fin < now()) {
+            return redirect()->back()->with('error', 'Cupón caducado');
+        }
+
         if (session()->has('coupon_applied')) {
             return redirect()->back()->with('error', 'Cupón ya aplicado');
         }
-        
+
         foreach (session('cart') as $id => $details) {
             // Aplicar descuento al precio del producto
-            $discountedPrice = $details['price'] - ($details['price'] * 10 / 100);
+            $discountedPrice = $details['price'] - ($details['price'] * $coupon->importe / 100);
 
             // Actualizar precio del producto en la sesión del carrito
             session()->put("cart.{$id}.price", $discountedPrice);
