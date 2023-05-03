@@ -272,8 +272,14 @@ class ReportesController extends Controller
 
             $output = "";
             $output2 = "";
+            $output3 = "";
+            $output4 = "";
+            $output5 = "";
+
             if($request->ajax()){
+
                 if ($orders) {
+
                 foreach ($orders as $order) {
                     $output2 .=
                         '<tr>'.
@@ -297,32 +303,120 @@ class ReportesController extends Controller
                         '</td>'.
                         '</tr>';
                 }
+
+                $totalPagado = 0;
+                foreach ($orders as $order) {
+                    $totalPagado += $order->pago;
+                }
+                $totalPagadoFormatted = number_format($totalPagado, 2, '.', ',');
+                $output5 .=
+                    '<h4 class="text-center mb-3">Total</h4>'.
+                    '<h5 class="text-center">'.
+                    '$ '.$totalPagadoFormatted.
+                    '</h5>'.
+                    '<div class="d-flex justify-content-center mt-3">'.
+                    '<form method="POST" action="" enctype="multipart/form-data" role="form">'.
+                    '<input type="hidden" name="_token" value="'.csrf_token().'">'.
+                    '<button type="submit" class="btn close-modal"> Enviar Reporte</button>'.
+                    '</form>'.
+                    '</div>';
+
+            }
+
+            if ($cursosComprados) {
+                foreach ($cursosComprados as $curso) {
+                    $output4 .=
+                        '<tr>'.
+                        '<td>'.$curso['nombre'].'</td>'.
+                        '<td>'.$curso['total'] .' personas </td>'.
+                        '</tr>';
+                }
             }
 
             $output =
-                    '<div class="row">' .
-                    '<div class="col-12">' .
-                    '<table class="table table-flush" id="datatable-search">' .
-                    '<thead class="text-center">' .
-                    '<tr class="tr_checkout">' .
-                    '<th >Num. Pedido</th>' .
-                    '<th >Cliente</th>' .
-                    '<th >Fecha de Compra</th>' .
-                    '<th >Total</th>' .
-                    '<th>Forma de Pago</th>' .
-                    '<th>Estado</th>' .
-                    '<th>Acciones</th>' .
-                    '</tr>' .
-                    '</thead>' .
-                    '<tbody>' .
-                    $output2 .
-                    '</tbody>' .
-                    '</table>' .
-                    '</div>' .
-                    '</div>';
+            '<div class="container-fluid mt-4">'.
+            '<div class="row">'.
+                '<div class="col-sm-12">'.
+                    '<div class="card">'.
 
-                return response()->json($output);
-            }
+                        '<div class="d-flex justify-content-center mt-5">'.
+                            '<ul class="nav nav-tabs" id="myTab" role="tablist">'.
+                                '<li class="nav-item" role="presentation">'.
+                                  '<button class="nav-link active" id="tickets-tab" data-bs-toggle="tab" data-bs-target="#tickets-tab-pane" type="button" role="tab" aria-controls="tickets-tab-pane" aria-selected="true">'.
+                                    'Tickets'.
+                                  '</button>'.
+                                '</li>'.
+                                '<li class="nav-item" role="presentation">'.
+                                  '<button class="nav-link" id="orders-tab" data-bs-toggle="tab" data-bs-target="#orders-tab-pane" type="button" role="tab" aria-controls="orders-tab-pane" aria-selected="false">'.
+                                    'Ordenes'.
+                                  '</button>'.
+                            '</ul>'.
+                        '</div>'.
+
+                        '<div class="tab-content" id="myTabContent">'.
+                            '<div class="tab-pane fade show active" id="tickets-tab-pane" role="tabpanel" aria-labelledby="tickets-tab" tabindex="0">'.
+                                '<div class="card-header">'.
+                                    '<div class="d-flex justify-content-between">'.
+                                        '<h3 class="mb-3">Tickets vendidos</h3>'.
+                                    '</div>'.
+                                '</div>'.
+
+                                '<div class="card-body">'.
+                                    '<table class="table table-flush" id="datatable-search">'.
+                                        '<thead class="text-center">'.
+                                            '<tr class="tr_checkout">'.
+                                            '<th >Nombre</th>'.
+                                            '<th >Personas</th>'.
+                                            '</tr>'.
+                                        '</thead>'.
+                                        '<tbody>'.
+                                        $output4 .
+                                        '</tbody>'.
+                                    '</table>'.
+                                '</div>'.
+
+                            '</div>'.
+
+                            '<div class="tab-pane fade" id="orders-tab-pane" role="tabpanel" aria-labelledby="orders-tab" tabindex="0">'.
+
+                               ' <div class="card-header">'.
+                                    '<div class="d-flex justify-content-between">'.
+                                        '<h3 class="mb-3">Ordenes de la Semana</h3>'.
+                                    '</div>'.
+                                '</div>'.
+                                    '<div class="card-body">'.
+                                        '<div class="table-responsive">'.
+                                            '<table class="table table-flush" id="datatable-search2">'.
+                                                '<thead class="text-center">'.
+                                                    '<tr class="tr_checkout">'.
+                                                      '<th >Num. Pedido</th>'.
+                                                      '<th >Cliente</th>'.
+                                                      '<th >Fecha de Compra</th>'.
+                                                      '<th >Total</th>'.
+                                                      '<th>Forma de Pago</th>'.
+                                                      '<th>Estado</th>'.
+                                                      '<th>Acciones</th>'.
+                                                    '</tr>'.
+                                                  '</thead>'.
+                                                '<tbody>'.
+                                                $output2 .
+                                                '</tbody>'.
+                                            '</table>'.
+                                        '</div>'.
+                                    '</div>'.
+                            '</div>'.
+                          '</div>'.
+                    '</div>'.
+                '</div>'.
+            '</div>'.
+        '</div>';
+
+                // return response()->json($output);
+                return response()->json([
+                    'resultados' => $output,
+                    'resultados2' => $output5
+                ]);
+        }
     }
 
 }

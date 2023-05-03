@@ -19,7 +19,6 @@
                     <div class="row">
                         <div class="col-6">
                             <h4 class="text-center mb-3">Seleciona las fechas</h4>
-
                             <div class="d-flex justify-content-center mt-3">
                                 <div class="row">
                                     <div class="col-6">
@@ -38,8 +37,11 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                </form>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div id="resultados2"></div>
+                                </div>
                             </div>
                         </div>
 
@@ -54,15 +56,7 @@
     </div>
 </div>
 
-<div class="container-fluid mt-4">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div id="resultados"></div>
-            </div>
-        </div>
-    </div>
-</div>
+<div id="resultados"></div>
 
 
 @endsection
@@ -90,7 +84,10 @@
                 '_token': token // Agregar el token CSRF a los datos enviados
             },
             success: function(response) {
-                $('#resultados').html(response);
+                $('#resultados').html(response.resultados);
+
+                $('#resultados2').html(response.resultados2);
+
                 const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
                 deferRender:true,
                 paging: true,
