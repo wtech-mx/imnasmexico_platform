@@ -222,6 +222,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('clientes-import', [App\Http\Controllers\ClientsController::class, 'import_clientes'])->name('clientes.import');
     Route::post('/admin/clientes/documentos/estandar/{id}', [App\Http\Controllers\ClientsController::class, 'documentos_estandares'])->name('documentos.store');
     Route::get('documentos/descargar/{id}/{cliente_id}', [App\Http\Controllers\ClientsController::class, 'descargarDocumento'])->name('descargar_documento');
+
+    // =============== M O D U L O   Cupones ===============================
+    Route::get('/admin/marketing/cupones', [App\Http\Controllers\MarketingController::class, 'index_cupon'])->name('cupones.index');
+    Route::post('/admin/marketing/cupones/store', [App\Http\Controllers\MarketingController::class, 'store_cupon'])->name('cupones.store');
+    Route::patch('/admin/marketing/cupones/update/{id}', [App\Http\Controllers\MarketingController::class, 'update_cupon'])->name('cupones.update');
+
 });
 
 // Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');

@@ -70,7 +70,26 @@
                 </li>
               </ul>
             </div>
-          </li>
+        </li>
+
+        <li class="nav-item">
+            <a data-bs-toggle="collapse" href="#pagesExamplesmarketing" class="nav-link {{ (Request::is('admin/marketing*') ? 'active' : '') }}" aria-controls="pagesExamplesmarketing" role="button" aria-expanded="false">
+              <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                <i class="fas fa-file-invoice-dollar text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+              </div>
+              <span class="nav-link-text ms-1">Marketing</span>
+            </a>
+            <div class="collapse " id="pagesExamplesmarketing">
+              <ul class="nav ms-4">
+                <li class="nav-item ">
+                  <a class="nav-link {{ (Request::is('admin/marketing/cupones*') ? 'show' : '') }}" href="{{ route('cupones.index') }}">
+                    <span class="sidenav-mini-icon">C</span>
+                    <span class="sidenav-normal">Cupones</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+        </li>
 
         <li class="nav-item">
           <a class="nav-link {{ (Request::is('admin/pagos') ? 'active' : '') }}" href="{{ route('pagos.index_pago') }}">

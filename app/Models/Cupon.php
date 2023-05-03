@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Orders extends Model
+class Cupon extends Model
 {
     use HasFactory;
-    protected $table = "Cupon";
+    protected $table = "cupones";
     protected $primarykey = "id";
     public $timestamps = true;
 
