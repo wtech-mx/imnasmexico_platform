@@ -75,6 +75,7 @@ class CustomAuthController extends Controller
             $creat_user->telefono = $request->get('telefono');
             $creat_user->username = $request->get('telefono');
             $creat_user->code = $code;
+            $creat_user->cliente = '1';
             $creat_user->password = Hash::make($request->get('telefono'));
             $creat_user->save();
             $datos = User::where('id', '=', $creat_user->id)->first();
@@ -96,6 +97,7 @@ class CustomAuthController extends Controller
         $usuario->password = $data['telefono'];
         $usuario->cliente = $data['cliente'];
         $usuario->code = $code;
+        $usuario->cliente = '1';
         $usuario->save();
     }
 

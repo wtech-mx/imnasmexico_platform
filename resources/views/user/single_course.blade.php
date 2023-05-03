@@ -178,6 +178,46 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                             <div class="collapse mt-3" id="collapseinfo">
                                 <div class="card card-body card_colapsable_comprar">
+                                    @guest
+                                    @else
+                                        @if(auth()->user()->cliente != 1 && auth()->user()->telefono == NULL)
+                                            <div class="row mb-3">
+                                                <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                    @csrf
+                                                    <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                                <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                                <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                                <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div class="d-flex justify-content-center">
+                                                                <button class="btn_pagar_checkout " type="submit">Admin</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        @endif
+                                    @endguest
                                     @if($curso->precio == 0)
                                         <div class="row mb-3">
                                             <form method="POST" action="{{ route('clases_gratis') }}"role="form">
