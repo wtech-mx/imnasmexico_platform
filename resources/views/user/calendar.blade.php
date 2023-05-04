@@ -236,7 +236,7 @@
                 <p class="precio_grid" style="{{ $presencial_bg }}">${{$precio}} mxn</p>
                 <p class="modalidado_grid" style="{{ $presencial_color }}"><strong>{{$curso->modalidad}}</strong></p>
                 <p class="wish_grid" style="{{ $presencial_bg }}"><i class="fas fa-heart"></i></p>
-                <p class="share_grid" onclick="shareFacebook()" style="{{ $presencial_bg }}"><i class="fas fa-share-alt"></i></p>
+                <p class="share_grid" onclick="shareFacebook('{{ $curso->slug }}')" style="{{ $presencial_bg }}"><i class="fas fa-share-alt"></i></p>
                 <p class="horario_grid" style="{{ $presencial_color }}">
                 @if ($curso->sin_fin == '1')
                     {{$hora_inicial}}</p>
@@ -377,22 +377,23 @@
         </div>
 
             <script>
-                function shareFacebook() {
-            if (navigator.share) {
-                navigator.share({
-                title: '{{$curso->nombre}}',
-                text: '{{$curso->nombre}}',
-                url:'{{ route('cursos.show',$curso->slug) }}',
-                // files: [
-                // new File(['imagen'], 'https://plataforma.imnasmexico.com/{{asset('curso/'. $curso->foto) }}', { type: 'image/png' }),
-                // ],
-                })
-                .then(() => console.log('Publicación compartida con éxito'))
-                .catch(error => console.error('Error al compartir publicación', error));
-            } else {
-                console.error('La funcionalidad de compartir no está soportada en este navegador');
-            }
-            }
+function shareFacebook(slug) {
+    // Obtener la información del curso usando el slug
+    const curso = obtenerCursoPorSlug(slug);
+
+    if (navigator.share) {
+        navigator.share({
+            title: curso.nombre,
+            text: curso.nombre,
+            url: '{{ route('cursos.show', ':slug') }}'.replace(':slug', slug),
+        })
+        .then(() => console.log('Publicación compartida con éxito'))
+        .catch(error => console.error('Error al compartir publicación', error));
+    } else {
+        console.error('La funcionalidad de compartir no está soportada en este navegador');
+    }
+}
+
             </script>
         @endforeach
         {{-- card_grid --}}
