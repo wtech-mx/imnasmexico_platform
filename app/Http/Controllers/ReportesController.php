@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ReporteTicketsVendidos;
 use App\Mail\ReporteTicketsVendidosSemana;
 use App\Mail\ReporteTicketsVendidosMes;
+use App\Mail\ReporteTicketsCustom;
+
+use DateTime;
+
 use App\Models\WebPage;
 
 class ReportesController extends Controller
@@ -315,7 +319,9 @@ class ReportesController extends Controller
                     '$ '.$totalPagadoFormatted.
                     '</h5>'.
                     '<div class="d-flex justify-content-center mt-3">'.
-                    '<form method="POST" action="" enctype="multipart/form-data" role="form">'.
+                    '<form method="POST" action="'.route('reporte_custom.store').'" enctype="multipart/form-data" role="form">'.
+                    '<input type="hidden" id="fecha_inicio" name="fecha_inicio" value="'.$fechaInicioSemana.'">'.
+                    '<input type="hidden" id="fecha_fin" name="fecha_fin" value="'.$fechaFinSemana.'">'.
                     '<input type="hidden" name="_token" value="'.csrf_token().'">'.
                     '<button type="submit" class="btn close-modal"> Enviar Reporte</button>'.
                     '</form>'.
@@ -417,6 +423,51 @@ class ReportesController extends Controller
                     'resultados2' => $output5
                 ]);
         }
+    }
+
+    public function reporte_email_custom(request $request){
+            $webpage = WebPage::first();
+
+            $fechaInicioSemana = $request->get('fecha_inicio');
+            $fechaFinSemana = $request->get('fecha_fin');
+
+            $fechaInicioObj = new DateTime(date('Y-m-d', strtotime($fechaInicioSemana)));
+            $fechaFinObj = new DateTime(date('Y-m-d', strtotime($fechaFinSemana)));
+
+            $fechaInicioStr = $fechaInicioObj->format('d \d\e F \d\e\l Y');
+            $fechaFinStr = $fechaFinObj->format('d \d\e F \d\e\l Y');
+
+            $fechaSemanaStr = $fechaInicioStr . ' al ' . $fechaFinStr;
+
+            $orders = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
+            ->where('pago', '>','0')
+            ->orderBy('fecha','DESC')
+            ->get();
+
+            $totalPagado = $orders->sum('pago');
+            $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
+
+            $datos = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
+            ->with('OrdersTickets.CursosTickets')
+            ->get()
+            ->pluck('OrdersTickets')
+            ->flatten()
+            ->groupBy('CursosTickets.nombre')
+            ->map(function ($tickets, $nombreCurso) {
+                return [
+                    'nombre' => $nombreCurso,
+                    'total' => $tickets->count()
+                ];
+            })
+            ->values();
+
+        Mail::to($webpage->email_admin)
+        ->bcc($webpage->email_admin_two, 'Destinatario dev 2')
+        ->send(new ReporteTicketsCustom($datos,$totalPagadoFormateado,$fechaSemanaStr));
+
+        return redirect()->back()->with('success', 'Webpage actualizada');
     }
 
 }
