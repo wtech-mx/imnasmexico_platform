@@ -471,7 +471,7 @@ class OrderController extends Controller
 
         session()->put('cart', $cart);
         Session::flash('modal_checkout', 'Se ha Abierto el checkout');
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return redirect()->back()->with('success', '¡Producto agregado');
     }
 
     public function aplicarCupon(Request $request){
@@ -503,6 +503,7 @@ class OrderController extends Controller
         // Almacenar que el cupón ya se ha aplicado en la sesión
         session()->put('coupon_applied', true);
 
+        Session::flash('modal_checkout', 'Se ha Abierto el checkout');
         return redirect()->back()->with('success', 'Cupón aplicado con éxito');
     }
 
@@ -862,7 +863,8 @@ class OrderController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Product removed successfully');
+            Session::flash('modal_checkout', 'Producto eliminado del carrito');
+            session()->flash('success', 'Producto eliminado del carrito');
         }
     }
 }
