@@ -375,6 +375,27 @@
                 </div>
             </div>
         </div>
+
+        @section('js')
+            <script>
+                function shareFacebook() {
+            if (navigator.share) {
+                navigator.share({
+                title: '{{$curso->nombre}}',
+                text: '{{$curso->nombre}}',
+                url:'{{ route('cursos.show',$curso->slug) }}',
+                // files: [
+                // new File(['imagen'], 'https://plataforma.imnasmexico.com/{{asset('curso/'. $curso->foto) }}', { type: 'image/png' }),
+                // ],
+                })
+                .then(() => console.log('Publicación compartida con éxito'))
+                .catch(error => console.error('Error al compartir publicación', error));
+            } else {
+                console.error('La funcionalidad de compartir no está soportada en este navegador');
+            }
+            }
+            </script>
+        @endsection
         @endforeach
         {{-- card_grid --}}
         <!-- Mostrar mensaje si no se encontraron resultados -->
@@ -390,28 +411,6 @@
 
 @endsection
 
-@section('js')
 
-@foreach ($cursos as $curso)
-<script>
-    function shareFacebook() {
-if (navigator.share) {
-    navigator.share({
-    title: '{{$curso->nombre}}',
-    text: '{{$curso->nombre}}',
-    url:'{{ route('cursos.show',$curso->slug) }}',
-    // files: [
-    // new File(['imagen'], 'https://plataforma.imnasmexico.com/{{asset('curso/'. $curso->foto) }}', { type: 'image/png' }),
-    // ],
-    })
-    .then(() => console.log('Publicación compartida con éxito'))
-    .catch(error => console.error('Error al compartir publicación', error));
-} else {
-    console.error('La funcionalidad de compartir no está soportada en este navegador');
-}
-}
-</script>
-@endforeach
-@endsection
 
 
