@@ -379,7 +379,7 @@
             <script>
 function shareFacebook(slug) {
     // Obtener la información del curso usando el slug
-    const curso = obtenerCursoPorSlug(slug);
+    const curso = '{{$curso->slug}}';
 
     if (navigator.share) {
         navigator.share({
