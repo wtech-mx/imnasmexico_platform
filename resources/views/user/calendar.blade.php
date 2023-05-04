@@ -376,7 +376,6 @@
             </div>
         </div>
 
-        @section('js')
             <script>
                 function shareFacebook() {
             if (navigator.share) {
@@ -395,7 +394,6 @@
             }
             }
             </script>
-        @endsection
         @endforeach
         {{-- card_grid --}}
         <!-- Mostrar mensaje si no se encontraron resultados -->
