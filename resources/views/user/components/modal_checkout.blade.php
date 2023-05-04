@@ -73,6 +73,13 @@
                     </tr>
                     </tbody>
                 </table>
+                @if(session()->has('coupon_applied'))
+                    <p>Cupón aplicado</p>
+                    <form action="{{ route('removeCoupon') }}" method="POST">
+                        @csrf
+                        <button class="btn_pagar_checkout " type="submit">Eliminar cupón</button>
+                    </form>
+                @else
                 <form action="{{ route('cupon.aplicar') }}" method="POST">
                     @csrf
                     <div class="col-12">
@@ -83,6 +90,7 @@
                     </div>
                     <button class="btn_pagar_checkout " type="submit">Aplicar cupón</button>
                 </form>
+                @endif
             </div>
 
             <div class="col-12 col-md-6">

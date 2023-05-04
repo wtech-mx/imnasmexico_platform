@@ -507,7 +507,20 @@ class OrderController extends Controller
         return redirect()->back()->with('success', 'Cupón aplicado con éxito');
     }
 
+    public function removeCoupon(){
+        session()->forget('coupon_applied');
 
+        foreach (session('cart') as $id => $details) {
+            // Restablecer el precio original del producto
+            $originalPrice = CursosTickets::where('id', $id)->value('precio');
+
+            // Actualizar precio del producto en la sesión del carrito
+            session()->put("cart.{$id}.price", $originalPrice);
+        }
+        
+        Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+        return redirect()->back()->with('success', 'Cupón eliminado con éxito');
+    }
 
     public function resultado(Request $request)
     {
