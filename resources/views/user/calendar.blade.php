@@ -383,8 +383,8 @@ function shareFacebook(slug) {
 
     if (navigator.share) {
         navigator.share({
-            title: '{{$curso->nombre}}',
-            text: '{{$curso->nombre}}',
+            title: curso.nombre,
+            text: curso.nombre,
             url: '{{ route('cursos.show', ':slug') }}'.replace(':slug', slug),
         })
         .then(() => console.log('Publicación compartida con éxito'))
