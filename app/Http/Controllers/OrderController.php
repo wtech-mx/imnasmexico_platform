@@ -481,14 +481,17 @@ class OrderController extends Controller
         ->first();
 
         if (!$coupon) {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
             return redirect()->back()->with('warning', 'Cupón inválido');
         }
 
         if ($coupon->fecha_inicio && $coupon->fecha_fin < now()) {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
             return redirect()->back()->with('warning', 'Cupón caducado');
         }
 
         if (session()->has('coupon_applied')) {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
             return redirect()->back()->with('warning', 'Cupón ya aplicado');
         }
 
