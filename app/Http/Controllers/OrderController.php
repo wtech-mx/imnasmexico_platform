@@ -481,15 +481,15 @@ class OrderController extends Controller
         ->first();
 
         if (!$coupon) {
-            return redirect()->back()->with('error', 'Cupón inválido');
+            return redirect()->back()->with('warning', 'Cupón inválido');
         }
 
         if ($coupon->fecha_inicio && $coupon->fecha_fin < now()) {
-            return redirect()->back()->with('error', 'Cupón caducado');
+            return redirect()->back()->with('warning', 'Cupón caducado');
         }
 
         if (session()->has('coupon_applied')) {
-            return redirect()->back()->with('error', 'Cupón ya aplicado');
+            return redirect()->back()->with('warning', 'Cupón ya aplicado');
         }
 
         foreach (session('cart') as $id => $details) {
@@ -517,9 +517,9 @@ class OrderController extends Controller
             // Actualizar precio del producto en la sesión del carrito
             session()->put("cart.{$id}.price", $originalPrice);
         }
-        
+
         Session::flash('modal_checkout', 'Se ha Abierto el checkout');
-        return redirect()->back()->with('success', 'Cupón eliminado con éxito');
+        return redirect()->back()->with('warning', 'Cupón eliminado con éxito');
     }
 
     public function resultado(Request $request)
@@ -864,7 +864,7 @@ class OrderController extends Controller
     public function vaciar_carrito(Request $request)
     {
         Session::forget('cart');
-        return redirect()->back()->with('success', 'Product removed successfully');
+        return redirect()->back()->with('warning', 'Se ha vaciado el carrito');
     }
 
     public function remove(Request $request)
@@ -876,8 +876,8 @@ class OrderController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            Session::flash('modal_checkout', 'Producto eliminado del carrito');
-            session()->flash('success', 'Producto eliminado del carrito');
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+            session()->flash('warning', 'Producto eliminado del carrito');
         }
     }
 }
