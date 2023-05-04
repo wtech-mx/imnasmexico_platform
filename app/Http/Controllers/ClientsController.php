@@ -18,6 +18,10 @@ use Maatwebsite\Excel\Facades\Excel;
 class ClientsController extends Controller
 {
     public function index($code){
+            // Verificar si el usuario tiene una sesión activa
+            if (!auth()->check()) {
+                return redirect()->route('cursos.index_user')->with('warning', 'Inicie sesión para ver su perfil');
+            }
         $cliente = User::where('code', $code)->firstOrFail();
         $orders = Orders::where('id_usuario', '=', auth()->user()->id)->get();
         $order_ticket = OrdersTickets::where('id_usuario', '=', auth()->user()->id)->get();
