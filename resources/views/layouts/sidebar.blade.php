@@ -38,6 +38,12 @@
                     <span class="sidenav-mini-icon"> P </span>
                     <span class="sidenav-normal">Cursos del Dia</span>
                   </a>
+
+                  <a class="nav-link {{ (Request::is('/admin/carpetas*') ? 'show' : '') }}" href="{{ route('carpetas.index') }}">
+                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-normal">Carpeta compartida</span>
+                  </a>
+
                 </li>
               </ul>
             </div>

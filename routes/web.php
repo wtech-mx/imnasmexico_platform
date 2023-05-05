@@ -228,6 +228,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/marketing/cupones/store', [App\Http\Controllers\MarketingController::class, 'store_cupon'])->name('cupones.store');
     Route::patch('/admin/marketing/cupones/update/{id}', [App\Http\Controllers\MarketingController::class, 'update_cupon'])->name('cupones.update');
 
+    // =============== M O D U L O   C A R P E T A S ===============================
+    Route::get('/admin/carpetas', [App\Http\Controllers\CarpetasController::class, 'index'])->name('carpetas.index');
+    Route::post('/admin/carpetas/store', [App\Http\Controllers\CarpetasController::class, 'store'])->name('carpetas.store');
+    Route::get('/admin/carpetas/edit/{id}', [App\Http\Controllers\CarpetasController::class, 'edit'])->name('carpetas.edit');
+    Route::patch('/admin/carpetas/update/{id}', [App\Http\Controllers\CarpetasController::class, 'update'])->name('carpetas.update');
+
+    Route::delete('/admin/carpetas/archivos/{id}', [App\Http\Controllers\CarpetasController::class, 'destroy'])->name('carpetas.destroy');
+
 });
 
 // Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');
