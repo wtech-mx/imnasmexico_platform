@@ -4,7 +4,7 @@
         <h3 class="tittle_clases">Recuerda que las clases grabadas solo duran 72 Horas</h3>
     </div>
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-12">
             <div class="accordion" id="accordionExample">
                 @foreach ($usuario_compro as $video)
@@ -87,7 +87,7 @@
 
         </div>
 
-    </div>
+    </div> --}}
 
     @foreach ($usuario_video as $video)
     <div class="col-12 col-lg-6">
