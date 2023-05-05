@@ -152,7 +152,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                            <button type="submit" class="btn close-modal" style="">Guardar</button>
                         </div>
 
                     </form>
