@@ -304,7 +304,7 @@ Mi perfil- {{$cliente->name}}
                         <h2 class="title_curso mb-1 mb-lg-5 mb-sm-2">Mis Clases </h2>
                     </div>
 
-                    @foreach ($usuario_compro as $video)
+                    @foreach ($usuario_video as $video)
                     <div class="col-12 col-sm-6">
                         <h5 class="titile_clase_grabada mt-1 mt-sm-1 mt-lg-5 mb-2 mb-sm-2 mb-lg-5">{{$video->nombre}} - Día 1</h5>
                         @php

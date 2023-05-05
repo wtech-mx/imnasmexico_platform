@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use Hash;
 use App\Imports\UsersImport;
+use App\Models\Publicidad;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ClientsController extends Controller
@@ -28,15 +29,24 @@ class ClientsController extends Controller
 
         $usuarioId = Auth::id(); // Obtén el ID del usuario logueado
         // Verifica si el usuario ha comprado un ticket para el curso
-        $usuario_compro = OrdersTickets::join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
+        $usuario_video = OrdersTickets::join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
+                        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
                         ->where('orders_tickets.id_usuario', $usuarioId)
                         ->where('cursos.video_cad','=', 1)
+                        ->where('orders.estatus','=', 1)
                         ->get();
+
+        $usuario_compro = OrdersTickets::join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                        ->where('orders_tickets.id_usuario', $usuarioId)
+                        ->where('orders.estatus','=', 1)
+                        ->get();
+
+        $publicidad = Publicidad::get();
 
         $documentos = Documentos::where('id_usuario', '=', auth()->user()->id)->get();
         $documentos_estandares = DocumentosEstandares::where('id_usuario', '=', auth()->user()->id)->get();
 
-        return view('user.profile',compact('cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares'));
+        return view('user.profile',compact('cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
     }
 
     public function update(Request $request, $code)
