@@ -134,7 +134,6 @@
                                                             En espera
                                                         @endif
                                                     </td>
-
                                                     <td>
                                                         <a class="btn btn-sm btn-success" href="{{ route('pagos.edit_pago',$order->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
                                                     </td>

@@ -12,20 +12,15 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-
                     <div class="card-header">
-
                         <div class="d-flex justify-content-between">
-
-
                             <h3 class="mb-3">Listas de Cursos</h3>
-
                             <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 Crear
                             </a>
-
                         </div>
                     </div>
+
                     <ul class="nav nav-pills nav-fill p-1" id="pills-tab" role="tablist">
                         @foreach ($tickets as $ticket)
                             <li class="nav-item" role="presentation">
@@ -43,7 +38,7 @@
                     <div class="tab-content" id="pills-tabContent">
                         @foreach ($tickets as $ticket)
                         @include('admin.cursos.add_lista')
-                            <div class="tab-pane fade show" id="pills-home{{$ticket->id}}" role="tabpanel" aria-labelledby="pills-home-tab{{$ticket->id}}">
+                            <div class="tab-pane fade show active" id="pills-home{{$ticket->id}}" role="tabpanel" aria-labelledby="pills-home-tab{{$ticket->id}}">
                                 <div class="card-body">
                                     <h5>{{$ticket->nombre}}</h5>
                                     <div class="table-responsive">
@@ -57,7 +52,6 @@
                                                     <th>Metodo de Pago</th>
                                                     <th>Cantidad</th>
                                                     <th>Fecha</th>
-
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
@@ -65,8 +59,7 @@
                                                 @foreach ($ordenes as $order)
                                                     @if ($order->id_tickets == $ticket->id && $order->Orders->estatus == '1')
                                                         <tr>
-                                                            <td>{{ $order->id }}</td>
-
+                                                            <td>{{ $order->Orders->id }}</td>
                                                             <td>{{ $order->User->name }}</td>
                                                             <td>{{ $order->User->email }}</td>
                                                             <td>{{ $order->User->telefono }}</td>
@@ -76,15 +69,16 @@
                                                             </td>
                                                             <td>{{ $order->Orders->fecha }}</td>
                                                             <td>
-                                                                <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form">
+                                                                <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form" style="display: inline-block">
                                                                     @csrf
                                                                     <input type="hidden" name="email" id="email" value="{{ $order->User->email }}">
                                                                     <input type="hidden" name="ticket" id="ticket" value="{{ $order->id_tickets }}">
                                                                     <input type="hidden" name="id_usuario" id="id_usuario" value="{{ $order->id_usuario }}">
                                                                     <input type="hidden" name="curso" id="curso" value="{{ $order->id_curso }}">
-                                                                    <button type="submit" class="btn btn-sm btn-primary" ><i class="fas fa-external-link-alt"></i></button>
+                                                                    <button type="submit" class="btn btn-sm btn-primary" ><i class="fas fa-envelope"></i></button>
                                                                 </form>
-                                                                <a class="btn btn-sm btn-success" href="{{ route('pagos.edit_pago',$order->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
+
+                                                                <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$order->Orders->id) }}"><i class="fa fa-money"></i> </a>
                                                             </td>
                                                         </tr>
                                                     @endif
