@@ -28,7 +28,6 @@
 
                     @can('client-list')
                         <div class="card-body">
-                            @include('admin.carpetas.create')
                             <div class="table-responsive">
                                 <table class="table table-flush" id="datatable-search">
                                     <thead class="thead">
@@ -42,11 +41,15 @@
                                         @foreach ($carpetas as $carpeta)
                                             <tr>
                                                 <td>{{ $carpeta->nombre }}</td>
-                                                <td>5</td>
+                                                <td>5 </td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('carpetas.edit',$carpeta->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
+                                                    {{-- <a class="btn btn-sm btn-success" href="{{ route('carpetas.edit',$carpeta->id) }}"><i class="fa fa-fw fa-edit"></i> </a> --}}
+                                                    <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_carpeta_{{ $carpeta->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                        <i class="fa fa-fw fa-edit"></i>
+                                                    </a>
                                                 </td>
                                             </tr>
+                                            @include('admin.carpetas.modal_edit')
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -57,6 +60,8 @@
             </div>
         </div>
     </div>
+
+@include('admin.carpetas.create')
 @endsection
 
 @section('datatable')

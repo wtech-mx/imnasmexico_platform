@@ -15,4 +15,10 @@ class Carpetas extends Model
     protected $fillable = [
         'nombre',
     ];
+
+    public function CarpetaRecursos()
+    {
+        return $this->hasMany(CarpetaRecursos::class, 'id_carpeta');
+    }
+
 }
