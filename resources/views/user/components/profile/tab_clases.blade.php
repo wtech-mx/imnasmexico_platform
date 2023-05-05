@@ -1,7 +1,83 @@
 <div class="row">
-    <div class="col-12">
+    <div class="col-12 mb-3">
         <h2 class="title_curso">Mis Clases</h2>
         <h3 class="tittle_clases">Recuerda que las clases grabadas solo duran 72 Horas</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="accordion" id="accordionExample">
+
+                <div class="accordion-item">
+                  <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" style="background-color: #836262;">
+                        <img class="icon_nav_course" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt=""> Nombre del curso
+                    </button>
+                  </h2>
+                  <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist" style="border: solid 1px transparent;">
+                              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true" style="position: relative">
+                               <img class="icon_nav_course" src="{{asset('assets/user/icons/libros.png')}}" alt=""> <strong>Material de clase</strong>
+                               <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
+                            </button>
+
+                              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" style="position: relative">
+                                <img class="icon_nav_course" src="{{asset('assets/user/icons/promocion.png')}}" alt=""> <strong>Promociones y descuentos</strong>
+                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
+                            </button>
+
+                              <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" style="position: relative">
+                                <img class="icon_nav_course" src="{{asset('assets/user/icons/clase.webp')}}" alt=""> <strong>Clases grabadas</strong>
+                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
+                            </button>
+                            </div>
+                          </nav>
+
+                          <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+
+                                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                    <div class="carousel-inner">
+
+                                      <div class="carousel-item active">
+                                        <img src="..." class="d-block w-100" alt="...">
+                                      </div>
+
+                                    </div>
+
+                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                      <span class="visually-hidden">Previous</span>
+                                    </button>
+
+                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                      <span class="visually-hidden">Next</span>
+                                    </button>
+                                  </div>
+
+                            </div>
+
+                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+
+                            </div>
+                          </div>
+
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+        </div>
+
     </div>
 
     @foreach ($usuario_compro as $video)
