@@ -214,7 +214,9 @@ class ClientsController extends Controller
 
     public function index_admin(){
 
-        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+        // $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->paginate(10);
+
         $orders = Orders::get();
         $tickets = CursosTickets::get();
         $order_ticket = OrdersTickets::get();

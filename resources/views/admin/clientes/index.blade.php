@@ -59,6 +59,8 @@
 
                 </table>
             </div>
+            {{ $clientes->links('pagination::bootstrap-4') }}
+
 
           </div>
         </div>
