@@ -19,17 +19,17 @@
 
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist" style="border: solid 1px transparent;">
-                              <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true" style="position: relative">
+                              <button class="nav-link active" id="nav-material-tab" data-bs-toggle="tab" data-bs-target="#nav-material" type="button" role="tab" aria-controls="nav-material" aria-selected="true" style="position: relative">
                                <img class="icon_nav_course" src="{{asset('assets/user/icons/libros.png')}}" alt=""> <strong>Material de clase</strong>
                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                             </button>
 
-                              <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false" style="position: relative">
+                              <button class="nav-link" id="nav-promociones-tab" data-bs-toggle="tab" data-bs-target="#nav-promociones" type="button" role="tab" aria-controls="nav-promociones" aria-selected="false" style="position: relative">
                                 <img class="icon_nav_course" src="{{asset('assets/user/icons/promocion.png')}}" alt=""> <strong>Promociones y descuentos</strong>
                                 <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                             </button>
 
-                              <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false" style="position: relative">
+                              <button class="nav-link" id="nav-grabadas-tab" data-bs-toggle="tab" data-bs-target="#nav-grabadas" type="button" role="tab" aria-controls="nav-grabadas" aria-selected="false" style="position: relative">
                                 <img class="icon_nav_course" src="{{asset('assets/user/icons/clase.webp')}}" alt=""> <strong>Clases grabadas</strong>
                                 <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                             </button>
@@ -37,11 +37,11 @@
                           </nav>
 
                           <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+                            <div class="tab-pane fade show active" id="nav-material" role="tabpanel" aria-labelledby="nav-material-tab" tabindex="0">
 
                             </div>
 
-                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+                            <div class="tab-pane fade" id="nav-promociones" role="tabpanel" aria-labelledby="nav-promociones-tab" tabindex="0">
 
                                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
@@ -65,7 +65,7 @@
 
                             </div>
 
-                            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab" tabindex="0">
+                            <div class="tab-pane fade" id="nav-grabadas" role="tabpanel" aria-labelledby="nav-grabadas-tab" tabindex="0">
 
                             </div>
                           </div>
