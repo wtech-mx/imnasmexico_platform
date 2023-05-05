@@ -93,6 +93,13 @@
                     <span class="sidenav-normal">Cupones</span>
                   </a>
                 </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link {{ (Request::is('/admin/publicidad*') ? 'show' : '') }}" href="{{ route('publicidad.index') }}">
+                      <span class="sidenav-mini-icon">C</span>
+                      <span class="sidenav-normal">Publicidad</span>
+                    </a>
+                  </li>
               </ul>
             </div>
         </li>
