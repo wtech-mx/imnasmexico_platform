@@ -21,6 +21,7 @@ use App\Http\Controllers\RevoesController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('403', function () {
     return view('errors.403');
 })->name('403');
@@ -126,6 +127,9 @@ Route::post('clientes/documentos/estandar/{id}', [App\Http\Controllers\ClientsCo
 Route::post('custom-login', [App\Http\Controllers\CustomAuthController::class, 'customLogin'])->name('login.custom');
 Route::post('custom-registration', [App\Http\Controllers\CustomAuthController::class, 'customRegistration'])->name('register.custom');
 Route::get('signout', [App\Http\Controllers\CustomAuthController::class, 'signOut'])->name('signout');
+
+// =============== M O D U L O   C U R S O ===============================
+Route::get('/nota/curso', [App\Http\Controllers\NotasCursosController::class, 'index_user'])->name('notas.index_user');
 
 Route::group(['middleware' => ['auth']], function() {
 
@@ -240,6 +244,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/publicidad', [App\Http\Controllers\PublicidadController::class, 'index'])->name('publicidad.index');
     Route::post('/admin/publicidad/store', [App\Http\Controllers\PublicidadController::class, 'store'])->name('publicidad.store');
     Route::delete('/admin/publicidad/archivos/{id}', [App\Http\Controllers\PublicidadController::class, 'destroy'])->name('publicidad.destroy');
+
+    // =============== M O D U L O   C U R S O ===============================
+    Route::get('/admin/notas/cursos', [App\Http\Controllers\NotasCursosController::class, 'index'])->name('notas_cursos.index');
+    Route::post('/admin/notas/cursos/store', [App\Http\Controllers\NotasCursosController::class, 'store'])->name('notas_cursos.store');
+    Route::get('/admin/notas/cursos/edit/{id}', [App\Http\Controllers\NotasCursosController::class, 'edit'])->name('notas_cursos.edit');
+    Route::patch('/admin/notas/cursos/update/{id}', [App\Http\Controllers\NotasCursosController::class, 'update'])->name('notas_cursos.update');
 
 });
 
