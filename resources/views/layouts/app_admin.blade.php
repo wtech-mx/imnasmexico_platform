@@ -19,6 +19,7 @@
   <link href="{{asset('assets/admin/css/nucleo-svg.css')}}" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+
   <link href="{{asset('assets/admin/css/nucleo-svg.css')}}" rel="stylesheet" />
   @yield('css')
    <!-- Select2  -->
@@ -40,115 +41,43 @@
             color: black;
         }
     </style>
-  @livewireStyles
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300  position-absolute w-100" style="background-color: {{$configuracion->color_principal}}!important;"></div>
-
-   <!-- Sidenav -->
     @include('layouts.sidebar')
+    <main class="main-content position-relative border-radius-lg ">
+        @include('layouts.navbar')
+        <div class="container-fluid py-4">
+            @include('layouts.simple_alert')
+            @yield('content')
+            @include('layouts.footer')
+        </div>
+    </main>
 
-  <main class="main-content position-relative border-radius-lg ">
-    <!-- Navbar -->
-    @include('layouts.navbar')
-    <!-- End Navbar -->
+    <!-- Modal lateral Congif -->
+        {{-- @include('layouts.modal_config') --}}
+    <!-- End Modal lateral Congif -->
 
-    <div class="container-fluid py-4">
+    <!--   Core JS Files   -->
+    {{-- <script src="{{asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script> --}}
+    <script src="{{asset('assets/admin/js/core/popper.min.js')}}"></script>
+    <script src="{{asset('assets/admin/js/core/bootstrap.min.js')}}"></script>
+    <script src="{{asset('assets/admin/js/plugins/perfect-scrollbar.min.js')}}"></script>
+    <script src="{{asset('assets/admin/js/plugins/smooth-scrollbar.min.js')}}"></script>
+    <script src="{{asset('assets/admin/js/plugins/datatables.js')}}"></script>
+    <script src="{{asset('assets/admin/js/plugins/fullcalendar.min.js')}}"></script>
+    <script src="{{asset('assets/admin/js/plugins/dragula/dragula.min.js')}}"></script>
+    <script src="{{asset('assets/admin/js/plugins/jkanban/jkanban.js')}}"></script>
+    <script src="{{asset('assets/admin/js/plugins/chartjs.min.js')}}"></script>
+    <script src="{{asset('assets/admin/js/argon-dashboard.min.js')}}"></script>
+    <script src="{{asset('assets/admin/js/plugins/multistep-form.js')}}"></script>
 
-        {{-- @include('layouts.header') --}}
-        @include('layouts.simple_alert')
+    @yield('js_custom')
+    @yield('datatable')
+    @yield('fullcalendar')
+    @yield('select2')
 
-        @yield('content')
-
-       <!-- Modal lateral Congif -->
-        @include('layouts.footer')
-      <!-- End Modal lateral Congif -->
-
-    </div>
-  </main>
-
-
-   <!-- Modal lateral Congif -->
-    {{-- @include('layouts.modal_config') --}}
-  <!-- End Modal lateral Congif -->
-
-
-
-  <!--   Core JS Files   -->
-  {{-- <script src="{{asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script> --}}
-
-  <script src="{{asset('assets/admin/js/core/popper.min.js')}}"></script>
-
-  <script src="{{asset('assets/admin/js/core/bootstrap.min.js')}}"></script>
-  <script src="{{asset('assets/admin/js/plugins/perfect-scrollbar.min.js')}}"></script>
-  <script src="{{asset('assets/admin/js/plugins/smooth-scrollbar.min.js')}}"></script>
-
-  <script src="{{asset('assets/admin/js/plugins/datatables.js')}}"></script>
-
-  <script src="{{asset('assets/admin/js/plugins/fullcalendar.min.js')}}"></script>
-  <!-- Kanban scripts -->
-
-  <script src="{{asset('assets/admin/js/plugins/dragula/dragula.min.js')}}"></script>
-  <script src="{{asset('assets/admin/js/plugins/jkanban/jkanban.js')}}"></script>
-  <script src="{{asset('assets/admin/js/plugins/chartjs.min.js')}}"></script>
-  <script src="{{asset('assets/admin/js/argon-dashboard.min.js')}}"></script>
-  <script src="{{asset('assets/admin/js/plugins/multistep-form.js')}}"></script>
-
-   <script src="https://cdn.tiny.cloud/1/j1jav9k6mblf3p1zkwu0fxf5yfhp7b4inzjxkxfteidvmluh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-   <script>
-     tinymce.init({
-       selector: '#descripcion', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#objetivo', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#temario', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#texto_rvoe', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#texto_conocer', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#descripcion_ticket', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#materiales_ticket', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-   </script>
-
-
-  @yield('js_custom')
-
-  @yield('datatable')
-
-  @yield('fullcalendar')
-
-
-  <!-- Github buttons -->
-  {{-- <script async defer src="https://buttons.github.io/buttons.js"></script> --}}
-
-  @yield('select2')
-
-
-
-  @livewireScripts
 </body>
 
 </html>

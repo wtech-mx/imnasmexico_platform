@@ -23,6 +23,7 @@ return new class extends Migration
                 ->references('id')->on('cursos')
                 ->inDelete('set null');
             $table->text('precio')->nullable();
+            $table->timestamps();
         });
     }
 

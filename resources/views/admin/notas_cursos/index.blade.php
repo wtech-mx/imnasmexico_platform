@@ -3,6 +3,12 @@
 @section('template_title')
     Notas Cursos
 @endsection
+
+@section('css')
+ <!-- Select2  -->
+ <link rel="stylesheet" href="{{asset('assets/admin/vendor/select2/dist/css/select2.min.css')}}">
+ @endsection
+
 @php
     $fecha = date('Y-m-d');
 @endphp
@@ -74,12 +80,33 @@
 
 @section('datatable')
 
+  <!-- Select2 JS -->
+  <script src="{{asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+
 <script>
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-      searchable: true,
-      fixedHeight: false
+
+document.addEventListener('DOMContentLoaded', function() {
+    var agregarCampoBtn = document.getElementById('agregarCampo');
+    var camposContainer = document.getElementById('camposContainer');
+    var campoExistente = camposContainer.querySelector('.campo');
+
+    agregarCampoBtn.addEventListener('click', function() {
+        var nuevoCampo = campoExistente.cloneNode(true);
+        camposContainer.appendChild(nuevoCampo);
+        inicializarSelect2(nuevoCampo.querySelector('select'));
     });
+
+    camposContainer.addEventListener('click', function(event) {
+        if (event.target.classList.contains('eliminarCampo')) {
+            var campo = event.target.closest('.campo');
+            campo.parentNode.removeChild(campo);
+        }
+    });
+});
+
+
 </script>
+
 @endsection
 
 

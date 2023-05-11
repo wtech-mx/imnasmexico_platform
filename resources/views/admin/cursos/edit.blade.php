@@ -460,6 +460,46 @@
 @endsection
 
 @section('js_custom')
+   <script src="https://cdn.tiny.cloud/1/j1jav9k6mblf3p1zkwu0fxf5yfhp7b4inzjxkxfteidvmluh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+   <script>
+     tinymce.init({
+       selector: '#descripcion', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#objetivo', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#temario', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#texto_rvoe', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#texto_conocer', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#descripcion_ticket', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#materiales_ticket', // Replace this CSS selector to match the placeholder element for TinyMCE
+       plugins: 'code table lists'
+     });
+   </script>
+
+
+
     <script>
         function readURL(input) {
     if (input.files && input.files[0]) { //Revisamos que el input tenga contenido

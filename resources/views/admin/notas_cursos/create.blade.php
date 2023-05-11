@@ -17,7 +17,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="name">Nombre</label>
-                                <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
+                                <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
 
@@ -39,6 +39,35 @@
                             <div class="form-group">
                                 <label for="name">Fecha</label>
                                 <input id="fecha" name="fecha" type="date" class="form-control" value="{{$fecha}}" required>@error('fecha') <span class="error text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="col-1">
+                            <div class="form-group">
+                                <label for="">-</label>
+                                <button class="mt-3" type="button" id="agregarCampo" style="border-radius: 9px;width: 36px;height: 40px;">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-11">
+                            <div class="form-group">
+                                <label for="">Curso</label>
+
+                                <div id="camposContainer">
+                                    <div class="campo mt-3">
+                                        <select name="campo[]" class="form-select d-inline-block" style="width: 90%!important;">
+                                            @foreach ($cursos as $curso)
+                                                <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->modalidad }}</option>
+                                            @endforeach
+                                        </select>
+
+                                        <button type="button" class="eliminarCampo" style="border-radius: 9px;margin-left: 0.2rem;">
+                                            <i class="fa fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
 
