@@ -8,6 +8,7 @@ use App\Models\Orders;
 use App\Models\OrdersTickets;
 use Session;
 use App\Mail\PlantillaTicket;
+use App\Models\Carpetas;
 use App\Models\Recursos;
 use Illuminate\Support\Facades\Mail;
 use Str;
@@ -70,7 +71,9 @@ class CursosController extends Controller
         ->where('pdf', '!=', NULL)
         ->get();
 
-        return view('admin.cursos.create', compact('fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares'));
+        $carpetas = Carpetas::get();
+
+        return view('admin.cursos.create', compact('fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares', 'carpetas'));
     }
 
     public function store(Request $request)
@@ -115,7 +118,7 @@ class CursosController extends Controller
         $curso->seccion_unam = $request->get('seccion_unam');
         $curso->titulo_hono = $request->get('titulo_hono');
         $curso->texto_conocer = $request->get('texto_conocer');
-
+        $curso->carpeta = $request->get('carpeta');
         $valorAleatorio = uniqid();
         $curso->slug = Str::of($request->get('nombre'))->slug("-")->limit(300 - mb_strlen($valorAleatorio) - 1, "")->trim("-")->append("-", $valorAleatorio);
 
@@ -177,7 +180,9 @@ class CursosController extends Controller
         ->where('pdf', '!=', NULL)
         ->get();
 
-        return view('admin.cursos.edit', compact('curso', 'tickets', 'fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares'));
+        $carpetas = Carpetas::get();
+
+        return view('admin.cursos.edit', compact('curso', 'tickets', 'fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares', 'carpetas'));
     }
 
     public function update(Request $request, $id)
@@ -225,6 +230,7 @@ class CursosController extends Controller
         $curso->titulo_hono = $request->get('titulo_hono');
         $curso->texto_conocer = $request->get('texto_conocer');
         $curso->precio = $request->get('precio_curso');
+        $curso->carpeta = $request->get('carpeta');
         $curso->update();
 
         // G U A R D A R  T I C K E T

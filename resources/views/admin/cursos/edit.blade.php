@@ -552,3 +552,12 @@
 
     </script>
 @endsection
+@section('select2')
+    <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
+@endsection
