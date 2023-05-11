@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use Hash;
 use App\Imports\UsersImport;
+use App\Models\Carpetas;
 use App\Models\Publicidad;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -41,12 +42,21 @@ class ClientsController extends Controller
                         ->where('orders.estatus','=', 1)
                         ->get();
 
+        $carpetas = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
+            ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
+            ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
+            ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+            ->where('orders_tickets.id_usuario', $usuarioId)
+            ->where('orders.estatus', '=', 1)
+            ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpetas.id as id_carpeta')
+            ->get();
+
         $publicidad = Publicidad::get();
 
         $documentos = Documentos::where('id_usuario', '=', auth()->user()->id)->get();
         $documentos_estandares = DocumentosEstandares::where('id_usuario', '=', auth()->user()->id)->get();
 
-        return view('user.profile',compact('cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
+        return view('user.profile',compact('cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad', 'carpetas'));
     }
 
     public function update(Request $request, $code)

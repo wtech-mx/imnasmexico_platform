@@ -16,6 +16,7 @@ class Cursos extends Model
         'nombre',
         'descripcion',
         'foto',
+        'carpeta',
         'fecha_inicial',
         'hora_inicial',
         'fecha_final',
@@ -53,6 +54,11 @@ class Cursos extends Model
     public function User()
     {
         return $this->belongsTo(User::class, 'id_usuario');
+    }
+
+    public function Carpeta()
+    {
+        return $this->belongsTo(Carpetas::class, 'carpeta');
     }
 
 }
