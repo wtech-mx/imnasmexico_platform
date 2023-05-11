@@ -245,11 +245,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/publicidad/store', [App\Http\Controllers\PublicidadController::class, 'store'])->name('publicidad.store');
     Route::delete('/admin/publicidad/archivos/{id}', [App\Http\Controllers\PublicidadController::class, 'destroy'])->name('publicidad.destroy');
 
-    // =============== M O D U L O   C U R S O ===============================
+    // =============== M O D U L O   N O T A S ===============================
     Route::get('/admin/notas/cursos', [App\Http\Controllers\NotasCursosController::class, 'index'])->name('notas_cursos.index');
     Route::post('/admin/notas/cursos/store', [App\Http\Controllers\NotasCursosController::class, 'store'])->name('notas_cursos.store');
     Route::get('/admin/notas/cursos/edit/{id}', [App\Http\Controllers\NotasCursosController::class, 'edit'])->name('notas_cursos.edit');
     Route::patch('/admin/notas/cursos/update/{id}', [App\Http\Controllers\NotasCursosController::class, 'update'])->name('notas_cursos.update');
+
+    Route::get('/admin/notas/productos', [App\Http\Controllers\NotasProductosController::class, 'index'])->name('notas_productos.index');
+    Route::post('/admin/notas/productos/store', [App\Http\Controllers\NotasProductosController::class, 'store'])->name('notas_productos.store');
+    Route::get('/admin/notas/productos/edit/{id}', [App\Http\Controllers\NotasProductosController::class, 'edit'])->name('notas_productos.edit');
+    Route::patch('/admin/notas/productos/update/{id}', [App\Http\Controllers\NotasProductosController::class, 'update'])->name('notas_productos.update');
 
 });
 

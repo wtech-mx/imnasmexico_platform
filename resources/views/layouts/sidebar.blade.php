@@ -64,7 +64,7 @@
                     <span class="sidenav-normal">Notas Cursos</span>
                   </a>
 
-                  <a class="nav-link " href="#">
+                  <a class="nav-link {{ (Request::is('admin/notas/cursos/*') ? 'show' : '') }}" href="{{ route('notas_productos.index') }}">
                     <span class="sidenav-mini-icon"> P </span>
                     <span class="sidenav-normal">Notas Productos</span>
                   </a>

@@ -10,7 +10,7 @@
                 </button>
 
             </div>
-            <form method="POST" action="{{ route('notas_cursos.store') }}" enctype="multipart/form-data" role="form">
+            <form method="POST" action="{{ route('notas_productos.store') }}" enctype="multipart/form-data" role="form">
                 @csrf
                 <div class="modal-body">
                     <div class="row">
