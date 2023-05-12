@@ -80,7 +80,7 @@
 
                         @endforeach
                         <div class="col-6 mt-3">
-                            <p><strong>Total: {{ $total }}</strong></p>
+                            <p><strong></strong></p>
                         </div>
 
                         <div class="col-12">
@@ -89,7 +89,7 @@
 
                         <div class="col-1">
                             <div class="form-group">
-                                <button class="mt-5" type="button" id="agregarCampo" style="border-radius: 9px;width: 36px;height: 40px;">
+                                <button class="mt-5" type="button" id="agregarCampo2" style="border-radius: 9px;width: 36px;height: 40px;">
                                     <i class="fa fa-plus"></i>
                                 </button>
                             </div>
@@ -97,8 +97,8 @@
 
                         <div class="col-11">
                             <div class="form-group">
-                                <div id="camposContainer">
-                                    <div class="campo mt-3">
+                                <div id="camposContainer2">
+                                    <div class="campo2 mt-3">
                                         <div class="row">
                                             <div class="col-6">
                                                 <label for="">Nombre</label>
@@ -112,7 +112,7 @@
                                             <div class="col-3">
                                                 <label for="">Cantidad</label>
                                                 <input type="number" name="campo3[]" class="form-control d-inline-block" style="width: 65%;">
-                                                <button type="button" class="eliminarCampo" style="border-radius: 9px;margin-left: 0.2rem;">
+                                                <button type="button" class="eliminarCampo2" style="border-radius: 9px;margin-left: 0.2rem;">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </div>

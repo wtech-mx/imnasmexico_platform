@@ -108,8 +108,11 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     var agregarCampoBtn = document.getElementById('agregarCampo');
+    var agregarCampoBtn2 = document.getElementById('agregarCampo2');
     var camposContainer = document.getElementById('camposContainer');
+    var camposContainer2 = document.getElementById('camposContainer2');
     var contadorCampos = 1;
+    var contadorCampos2 = 1;
 
     agregarCampoBtn.addEventListener('click', function() {
         var nuevoCampo = camposContainer.firstElementChild.cloneNode(true);
@@ -118,10 +121,24 @@ document.addEventListener('DOMContentLoaded', function() {
         contadorCampos++;
     });
 
+    agregarCampoBtn2.addEventListener('click', function() {
+        var nuevoCampo2 = camposContainer2.firstElementChild.cloneNode(true);
+        actualizarNombresCampos2(nuevoCampo2);
+        camposContainer2.appendChild(nuevoCampo2);
+        contadorCampos2++;
+    });
+
     camposContainer.addEventListener('click', function(event) {
         if (event.target.classList.contains('eliminarCampo')) {
             var campo = event.target.parentNode.parentNode;
             campo.parentNode.removeChild(campo);
+        }
+    });
+
+    camposContainer2.addEventListener('click', function(event) {
+        if (event.target.classList.contains('eliminarCampo2')) {
+            var campo2 = event.target.parentNode.parentNode;
+            campo2.parentNode.removeChild(campo2);
         }
     });
 
@@ -132,6 +149,15 @@ document.addEventListener('DOMContentLoaded', function() {
             input.setAttribute('name', nombreCampo + contadorCampos);
         });
     }
+
+    function actualizarNombresCampos2(campo) {
+        var camposInput2 = campo.querySelectorAll('input[name^="campo"]');
+        camposInput2.forEach(function(input) {
+            var nombreCampo2 = input.getAttribute('name');
+            input.setAttribute('name', nombreCampo2 + contadorCampos2);
+        });
+    }
+
 });
 
 </script>
