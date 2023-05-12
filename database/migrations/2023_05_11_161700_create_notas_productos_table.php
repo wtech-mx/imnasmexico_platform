@@ -19,7 +19,9 @@ return new class extends Migration
                 ->references('id')->on('users')
                 ->inDelete('set null');
             $table->string('metodo_pago')->nullable();
+            $table->string('tipo')->nullable();
             $table->date('fecha')->nullable();
+            $table->string('subtotal')->nullable();
             $table->string('total')->nullable();
             $table->string('restante')->nullable();
             $table->string('nota')->nullable();

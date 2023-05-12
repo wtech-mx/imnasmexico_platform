@@ -90,7 +90,7 @@
                             <h5>Pago</h5>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label for="name">Metodo de pago</label>
                                 <select class="form-select" name="metodo_pago" id="metodo_pago">
@@ -101,17 +101,34 @@
                             </div>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="form-group">
-                                <label for="name">Restante</label>
+                                <label for="name">Tipo de descuento</label>
+                                <select class="form-select" name="tipo" id="tipo">
+                                    <option value="Porcentaje">Porcentaje (%)</option>
+                                    <option value="Fijo">Fijo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="name">Descuento</label>
                                 <input id="restante" name="restante" type="number" class="form-control"  required>
                             </div>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="name">Subtotal</label>
+                                <input id="subtotal" name="subtotal" type="number" class="form-control"  >
+                            </div>
+                        </div>
+
+                        <div class="col-2">
                             <div class="form-group">
                                 <label for="name">Total</label>
-                                <input id="total" name="total" type="number" class="form-control"  required>
+                                <input id="total" name="total" type="number" class="form-control"  >
                             </div>
                         </div>
 

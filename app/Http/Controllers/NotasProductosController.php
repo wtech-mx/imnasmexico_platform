@@ -48,35 +48,78 @@ class NotasProductosController extends Controller
             Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
-        $nuevosCampos = $request->input('campo');
-        $nuevosCampos2 = $request->input('campo2');
-        $nuevosCampos3 = $request->input('campo3');
-
         $notas_productos = new NotasProductos;
         $notas_productos->id_usuario = $payer->id;
+        $notas_productos->tipo = $request->get('tipo');
         $notas_productos->metodo_pago = $request->get('metodo_pago');
         $notas_productos->fecha = $request->get('fecha');
         $notas_productos->restante = $request->get('restante');
-        $notas_productos->total = $request->get('total');
         $notas_productos->nota = $request->get('nota');
         $notas_productos->save();
 
-        if ($request->has('campo')) {
-            $nuevosCampos = $request->input('campo');
-            $nuevosCampos2 = $request->input('campo2');
-            $nuevosCampos3 = $request->input('campo3');
+        $notas = NotasProductos::find($notas_productos->id);
 
-            foreach ($nuevosCampos as $index => $campo) {
-                // Aquí puedes realizar las operaciones necesarias con cada campo adicional
-                // Por ejemplo, guardar en la base de datos
-                $notas_inscripcion = new ProductosNotasId;
-                $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                $notas_inscripcion->producto = $campo;
-                $notas_inscripcion->price = $nuevosCampos2[$index];
-                $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                $notas_inscripcion->save();
+        if ($request->get('tipo') == 'Porcentaje') {
+            // Aplicar descuento porcentaje al total
+            $descuento = $request->get('restante') / 100;
+            $total = 0;
+
+            if ($request->has('campo')) {
+                $nuevosCampos = $request->input('campo');
+                $nuevosCampos2 = $request->input('campo2');
+                $nuevosCampos3 = $request->input('campo3');
+
+                foreach ($nuevosCampos as $index => $campo) {
+
+                    $notas_inscripcion = new ProductosNotasId;
+                    $notas_inscripcion->id_notas_productos = $notas->id;
+                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->price = $nuevosCampos2[$index];
+                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                    $notas_inscripcion->save();
+
+                    $precio = $nuevosCampos2[$index];
+                    $cantidad = $nuevosCampos3[$index];
+                    $subtotal = $precio * $cantidad;
+                    $total += $subtotal;
+                }
+
+                $descuentoAplicado = $total * $descuento;
+                $total -= $descuentoAplicado;
             }
+
+            $notas->total = $total;
+        } elseif ($request->get('tipo') == 'Fijo') {
+            // Restar descuento fijo al total
+            $descuento = $request->get('restante');
+            $total = 0;
+
+            if ($request->has('campo')) {
+                $nuevosCampos = $request->input('campo');
+                $nuevosCampos2 = $request->input('campo2');
+                $nuevosCampos3 = $request->input('campo3');
+
+                foreach ($nuevosCampos as $index => $campo) {
+                    $notas_inscripcion = new ProductosNotasId;
+                    $notas_inscripcion->id_notas_productos = $notas->id;
+                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->price = $nuevosCampos2[$index];
+                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                    $notas_inscripcion->save();
+
+                    $precio = $nuevosCampos2[$index];
+                    $cantidad = $nuevosCampos3[$index];
+                    $subtotal = $precio * $cantidad;
+                    $total += $subtotal;
+                }
+
+                $total -= $descuento;
+            }
+
+            $notas->total = $total;
         }
+
+        $notas->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Envio de correo exitoso.');
@@ -85,33 +128,36 @@ class NotasProductosController extends Controller
     public function update(Request $request, $id){
         $notas = NotasProductos::find($id);
         $notas->metodo_pago = $request->get('metodo_pago');
+        $notas->tipo = $request->get('tipo');
         $notas->fecha = $request->get('fecha');
         $notas->total = $request->get('total');
         $notas->restante = $request->get('restante');
         $notas->nota = $request->get('nota');
-        $notas->update();
 
+        $productos = ProductosNotasId::where('id_notas_productos', '=', $id)->get();
+        $total = 0;
 
-        $nuevosCampos = $request->input('campo');
-        $nuevosCampos2 = $request->input('campo2');
-        $nuevosCampos3 = $request->input('campo3');
-
-        if ($request->has('campo')) {
-            $nuevosCampos = $request->input('campo');
-            $nuevosCampos2 = $request->input('campo2');
-            $nuevosCampos3 = $request->input('campo3');
-
-            foreach ($nuevosCampos as $index => $campo) {
-                // Aquí puedes realizar las operaciones necesarias con cada campo adicional
-                // Por ejemplo, guardar en la base de datos
-                $notas_inscripcion = new ProductosNotasId;
-                $notas_inscripcion->id_notas_productos = $id;
-                $notas_inscripcion->producto = $campo;
-                $notas_inscripcion->price = $nuevosCampos2[$index];
-                $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                $notas_inscripcion->save();
-            }
+        foreach ($productos as $producto) {
+            $precio = $producto->price;
+            $cantidad = $producto->cantidad;
+            $subtotal = $precio * $cantidad;
+            $total += $subtotal;
         }
+
+        if ($request->get('tipo') == 'Porcentaje') {
+            // Aplicar descuento porcentaje al total
+            $descuento = $request->get('restante') / 100;
+            $descuentoAplicado = $total * $descuento;
+            $total -= $descuentoAplicado;
+
+        } elseif ($request->get('tipo') == 'Fijo') {
+            $descuento = $request->get('restante');
+            $total -= $descuento;
+        }
+
+        $notas->total = $total;
+
+        $notas->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Se ha actualizada');

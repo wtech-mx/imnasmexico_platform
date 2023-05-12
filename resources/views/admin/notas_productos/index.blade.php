@@ -38,7 +38,7 @@
                                         <th>Productos</th>
                                         <th>Metodo de Pago</th>
                                         <th>fecha</th>
-                                        <th>Restante</th>
+                                        <th>Descuento</th>
                                         <th>Total</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -68,7 +68,14 @@
                                                 @endphp
                                                 {{$fecha_formateada}}
                                             </td>
-                                            <td>{{ $nota->restante }}</td>
+                                            <td>
+                                                @if ($nota->tipo == "Porcentaje")
+                                                   {{ $nota->restante }}  % -
+                                                @elseif ($nota->tipo == "Fijo")
+                                                ${{ $nota->restante }}.0
+                                                @endif
+
+                                            </td>
                                             <td>{{ $nota->total }}</td>
                                             <td>
                                                 <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_nota_{{ $nota->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">

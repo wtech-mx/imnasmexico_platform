@@ -49,6 +49,10 @@
                             <h5>Productos selecionados </h5>
                         </div>
 
+                        @php
+                            $total = 0;
+                            $totalCantidad = 0;
+                        @endphp
 
                         @foreach ($nota->ProductosNotasId as  $productos)
 
@@ -67,8 +71,17 @@
                             <label for="">Cantidad</label>
                             <input type="number" name="cantidad" class="form-control d-inline-block" style="width: 65%;" value="{{ $productos->cantidad }}">
                         </div>
-                        @endforeach
+                        @php
+                            $precio = $productos->price;
+                            $cantidad = $productos->cantidad;
+                            $subtotal = $precio * $cantidad;
+                            $total += $subtotal;
+                        @endphp
 
+                        @endforeach
+                        <div class="col-6 mt-3">
+                            <p><strong>Total: {{ $total }}</strong></p>
+                        </div>
 
                         <div class="col-12">
                             <h5 class="mt-5">Seleciona mas productos </h5>
@@ -114,7 +127,7 @@
                             <h5>Pago</h5>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label for="name">Metodo de pago</label>
                                 <select class="form-select" name="metodo_pago" id="metodo_pago">
@@ -126,14 +139,25 @@
                             </div>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="form-group">
-                                <label for="name">Restante</label>
+                                <label for="name">Tipo de descuento</label>
+                                <select class="form-select" name="tipo" id="tipo">
+                                    <option value="{{ $nota->tipo }}" selected>{{ $nota->tipo }}</option>
+                                    <option value="Porcentaje">Porcentaje (%)</option>
+                                    <option value="Fijo">Fijo</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-group">
+                                <label for="name">Descuento</label>
                                 <input id="restante" name="restante" type="number" class="form-control"  value="{{ $nota->restante }}">
                             </div>
                         </div>
 
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label for="name">Total</label>
                                 <input id="total" name="total" type="number" class="form-control"  value="{{ $nota->total }}">
