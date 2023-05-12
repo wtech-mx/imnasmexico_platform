@@ -27,9 +27,9 @@ class CursosTickets extends Model
     //     return $this->hasmany(OrdersTickets::class, 'id_tickets');
     // }
 
-    // public function User()
-    // {
-    //     return $this->belongsTo(User::class, 'id_usuario');
-    // }
+    public function Cursos()
+    {
+        return $this->belongsTo(Cursos::class, 'id_curso');
+    }
 
 }

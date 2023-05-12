@@ -20,4 +20,9 @@ class NotasInscripcion extends Model
     {
         return $this->belongsTo(NotasCursos::class, 'id_nota');
     }
+
+    public function CursosTickets()
+    {
+       return $this->belongsTo(CursosTickets::class,'id_curso');
+    }
 }

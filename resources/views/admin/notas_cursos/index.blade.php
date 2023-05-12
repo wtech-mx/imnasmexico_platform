@@ -4,11 +4,6 @@
     Notas Cursos
 @endsection
 
-@section('css')
- <!-- Select2  -->
- <link rel="stylesheet" href="{{asset('assets/admin/vendor/select2/dist/css/select2.min.css')}}">
- @endsection
-
 @php
     $fecha = date('Y-m-d');
 @endphp
@@ -62,9 +57,14 @@
                                                         style="background: #00BB2D; color: #ffff">
                                                         <i class="fa fa-whatsapp"></i></a>
 
-                                                            {{-- <a class="btn btn-sm btn-success" href="{{ route('nota.edit',$nota->id) }}"><i class="fa fa-fw fa-edit"></i> </a> --}}
+                                                        <a class="btn btn-sm btn-success" href="{{ route('notas_cursos.edit',$nota->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
+
+                                                        <a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#examplePago{{$nota->id}}">
+                                                            <i class="fa fa-money"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
+                                                @include('admin.notas_cursos.modal_pago')
                                             @endforeach
                                         </tbody>
                                 </table>
@@ -80,28 +80,48 @@
 
 @section('datatable')
 
-  <!-- Select2 JS -->
-  <script src="{{asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
-
 <script>
 
 document.addEventListener('DOMContentLoaded', function() {
-    var agregarCampoBtn = document.getElementById('agregarCampo');
-    var camposContainer = document.getElementById('camposContainer');
-    var campoExistente = camposContainer.querySelector('.campo');
+  var agregarCampoBtn = document.getElementById('agregarCampo');
+  var camposContainer = document.getElementById('camposContainer');
+  var campoExistente = camposContainer.querySelector('.campo');
+  var totalInput = document.getElementById('total');
+  var descuentoInput = document.getElementById('descuento');
+  var totalDescuentoInput = document.getElementById('totalDescuento');
 
-    agregarCampoBtn.addEventListener('click', function() {
-        var nuevoCampo = campoExistente.cloneNode(true);
-        camposContainer.appendChild(nuevoCampo);
-        inicializarSelect2(nuevoCampo.querySelector('select'));
-    });
+  agregarCampoBtn.addEventListener('click', function() {
+    var nuevoCampo = campoExistente.cloneNode(true);
+    camposContainer.appendChild(nuevoCampo);
+  });
 
-    camposContainer.addEventListener('click', function(event) {
-        if (event.target.classList.contains('eliminarCampo')) {
-            var campo = event.target.closest('.campo');
-            campo.parentNode.removeChild(campo);
-        }
-    });
+  camposContainer.addEventListener('click', function(event) {
+    if (event.target.classList.contains('eliminarCampo')) {
+      var campo = event.target.closest('.campo');
+      campo.parentNode.removeChild(campo);
+    } else {
+      var precios = camposContainer.querySelectorAll('select[name="campo[]"] option:checked');
+      var total = 0;
+
+      for (var i = 0; i < precios.length; i++) {
+        total += parseFloat(precios[i].getAttribute('data-precio'));
+      }
+
+      totalInput.value = total.toFixed(2);
+
+      // Calcular el descuento
+      var descuento = parseFloat(descuentoInput.value);
+      var totalDescuento = total - (total * (descuento / 100));
+      totalDescuentoInput.value = totalDescuento.toFixed(2);
+    }
+  });
+
+  descuentoInput.addEventListener('keyup', function() {
+    var descuento = parseFloat(descuentoInput.value);
+    var total = parseFloat(totalInput.value);
+    var totalDescuento = total - (total * (descuento / 100));
+    totalDescuentoInput.value = totalDescuento.toFixed(2);
+  });
 });
 
 
@@ -109,4 +129,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 @endsection
 
-
+@section('select2')
+    <script>
+        function updatePrecio(selectElement) {
+            var precioInput = selectElement.parentNode.querySelector('input[name="precio[]"]');
+            var precio = selectElement.options[selectElement.selectedIndex].getAttribute('data-precio');
+            precioInput.value = precio;
+        }
+    </script>
+@endsection

@@ -12,6 +12,10 @@ use App\Mail\PlantillaNuevoUser;
 use App\Mail\PlantillaPedidoRecibido;
 use App\Mail\PlantillaTicketPresencial;
 use App\Mail\PlantillaTicket;
+use App\Models\CursosTickets;
+use App\Models\NotasPagos;
+use App\Models\Orders;
+use App\Models\OrdersTickets;
 use Illuminate\Support\Str;
 use Session;
 use Hash;
@@ -25,15 +29,16 @@ class NotasCursosController extends Controller
      */
     public function index()
     {
+        $fechaActual = date('Y-m-d');
         $notas = NotasCursos::orderBy('id','DESC')->get();
-        $cursos = Cursos::where('estatus','=', '1')->orderBy('fecha_inicial','asc')->get();
+        $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
+        $notas_pagos = NotasPagos::get();
 
-        return view('admin.notas_cursos.index', compact('notas', 'cursos'));
+        return view('admin.notas_cursos.index', compact('notas', 'cursos', 'notas_pagos'));
     }
 
     public function store(request $request){
 
-        // Creacion de user
         $code = Str::random(8);
 
         if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
@@ -57,28 +62,101 @@ class NotasCursosController extends Controller
             Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
-        $nuevosCampos = $request->input('campo');
         $notas_cursos = new NotasCursos;
-        $notas_cursos->fecha = $request->get('fecha');
         $notas_cursos->id_usuario = $payer->id;
+        $notas_cursos->fecha = $request->get('fecha');
+        $notas_cursos->subtotal = $request->get('total');
+        $notas_cursos->descuento = $request->get('descuento');
+        $notas_cursos->total = $request->get('totalDescuento');
+        $notas_cursos->nota = $request->get('nota');
         $notas_cursos->save();
 
+        $code = Str::random(8);
+        $order = new Orders;
+        $order->id_usuario = $payer->id;
+        $order->pago = $notas_cursos->total;
+        $order->forma_pago = 'Nota';
+        $order->fecha = $notas_cursos->fecha;
+        $order->estatus = 1;
+        $order->code = $code;
+        $order->save();
+
+        $id = $notas_cursos->id;
+        $nuevosCampos = $request->input('campo');
         if ($nuevosCampos) {
             foreach ($nuevosCampos as $campo) {
-                // Realizar las operaciones necesarias con cada campo adicional
-                // por ejemplo, guardar en la base de datos
                 $notas_inscripcion = new NotasInscripcion;
-                $notas_inscripcion->id_nota = $notas_cursos->id;
-                $notas_inscripcion->id_curso = $campo;
+                $notas_inscripcion->id_nota = $id;
+                $notas_inscripcion->id_curso = intval($campo);
                 $notas_inscripcion->save();
+
+                $curso = CursosTickets::where('id', '=', $campo)->first();
+                $order_ticket = new OrdersTickets;
+                $order_ticket->id_order = $order->id;
+                $order_ticket->id_usuario = $payer->id;
+                $order_ticket->id_tickets = intval($campo);
+                $order_ticket->id_curso = $curso->id_curso;
+                $order_ticket->save();
             }
         }
 
+        $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
+        $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
+        $user = $orden_ticket2->User->name;
+        $id_order = $orden_ticket2->id_order;
+        $pago = $orden_ticket2->Orders->pago;
+        $forma_pago = $orden_ticket2->Orders->forma_pago;
+        // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
+        foreach ($orden_ticket as $details) {
+            if ($details->Cursos->modalidad == 'Online') {
+                Mail::to($order->User->email)->send(new PlantillaTicket($details));
+            } else {
+                Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
+            }
+        }
+        Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
+        $notas_pagos = new NotasPagos;
+        $notas_pagos->id_nota = $notas_cursos->id;
+        $notas_pagos->monto = $request->get('monto');
+        $notas_pagos->metodo_pago = $request->get('metodo_pago');
+        $notas_pagos->save();
+
+        $restante = $notas_cursos->total - $notas_pagos->monto;
+
+        $enotas_cursos = NotasCursos::where('id', '=', $notas_cursos->id)->first();
+        $enotas_cursos->restante = $restante;
+        $enotas_cursos->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Envio de correo exitoso.');
 
     }
 
+    public function edit($id)
+    {
+        $nota = NotasCursos::find($id);
+        $notas_pagos = NotasPagos::where('id_nota','=', $id)->get();
+        $notas_inscripcion = NotasInscripcion::where('id_nota','=', $id)->get();
+
+        return view('admin.notas_cursos.edit', compact('nota', 'notas_pagos', 'notas_inscripcion'));
+    }
+
+    public function update(Request $request, $id)
+    {
+
+        $notas_pagos = new NotasPagos;
+        $notas_pagos->id_nota = $id;
+        $notas_pagos->monto = $request->get('monto');
+        $notas_pagos->metodo_pago = $request->get('metodo_pago');
+        $notas_pagos->save();
+
+        $enotas_cursos = NotasCursos::where('id', '=', $id)->first();
+        $restante = $enotas_cursos->restante - $request->get('monto');
+        $enotas_cursos->restante = $restante;
+        $enotas_cursos->update();
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back()->with('success', 'Envio de correo exitoso.');
+    }
 }
