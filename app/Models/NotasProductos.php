@@ -26,4 +26,9 @@ class NotasProductos extends Model
     {
         return $this->belongsTo(User::class, 'id_usuario');
     }
+
+    public function ProductosNotasId()
+    {
+        return $this->hasMany(ProductosNotasId::class, 'id_notas_productos');
+    }
 }

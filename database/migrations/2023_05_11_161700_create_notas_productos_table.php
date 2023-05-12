@@ -13,19 +13,16 @@ return new class extends Migration
     {
         Schema::create('notas_productos', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')
                 ->references('id')->on('users')
                 ->inDelete('set null');
-            $table->date('producto')->nullable();
-            $table->date('id_product_woo')->nullable();
-            $table->date('price')->nullable();
-            $table->date('permalink')->nullable();
-            $table->date('metodo_pago')->nullable();
+            $table->string('metodo_pago')->nullable();
             $table->date('fecha')->nullable();
-            $table->text('total')->nullable();
-            $table->text('restante')->nullable();
-            $table->text('nota')->nullable();
+            $table->string('total')->nullable();
+            $table->string('restante')->nullable();
+            $table->string('nota')->nullable();
             $table->timestamps();
         });
     }
