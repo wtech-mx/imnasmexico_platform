@@ -8,24 +8,23 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
                     <span aria-hidden="true">X</span>
                 </button>
-
             </div>
-            <ul class="nav nav-pills nav-fill p-1" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true" id="pills-home-tab">
-                        <i class="ni ni-folder-17 text-sm me-2"></i> Curso(s)
-                    </a>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="#pills-pago" role="tab" aria-controls="pills-pago" id="pills-pago-tab">
-                        <i class="ni ni-folder-17 text-sm me-2"></i> Pago
-                    </a>
-                </li>
-            </ul>
+
+            <div class="d-flex justify-content-center">
+                <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-cursos-tab" data-bs-toggle="tab" data-bs-target="#nav-cursos" type="button" role="tab" aria-controls="nav-cursos" aria-selected="true">Cursos</button>
+                    <button class="nav-link" id="nav-pago-tab" data-bs-toggle="tab" data-bs-target="#nav-pago" type="button" role="tab" aria-controls="nav-pago" aria-selected="false">Pago</button>
+                </div>
+                </nav>
+            </div>
+
             <form method="POST" action="{{ route('notas_cursos.store') }}" enctype="multipart/form-data" role="form">
                 @csrf
-                <div class="tab-content" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="tab-content" id="nav-tabContent">
+
+
+                    <div class="tab-pane fade show active" id="nav-cursos" role="tabpanel" aria-labelledby="nav-cursos-tab" tabindex="0">
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-6">
@@ -75,7 +74,6 @@
                                 <div class="col-11">
                                     <div class="form-group">
                                         <label for="">Curso</label>
-
                                         <div id="camposContainer">
                                             <div class="campo mt-3">
                                                 <select name="campo[]" class="form-select d-inline-block js-example-basic-single" style="width: 70%!important;" onchange="updatePrecio(this)">
@@ -85,23 +83,22 @@
                                                     @endforeach
                                                 </select>
 
-                                                <input type="text" name="precio[]" class="form-control" style="width: 20%!important;margin-left: 0.2rem;" readonly>
+                                                <input type="text" name="precio[]" class="form-control" style="width: 20%!important;margin-left: 0.2rem;display: inline-block;" readonly>
                                                 {{-- <button type="button" class="eliminarCampo" style="border-radius: 9px;margin-left: 0.2rem;">
                                                     <i class="fa fa-trash"></i>
                                                 </button> --}}
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
-
                             </div>
 
                         </div>
                     </div>
 
                     {{-- ================ P A G O ================ --}}
-                    <div class="tab-pane fade" id="pills-pago" role="tabpanel" aria-labelledby="pills-pago-tab">
+
+                    <div class="tab-pane fade show active" id="nav-pago" role="tabpanel" aria-labelledby="nav-pago-tab" tabindex="0">
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-4">
@@ -144,14 +141,15 @@
                                 </div>
 
                             </div>
-
                         </div>
                     </div>
+
                 </div>
 
                 <div class="modal-footer">
                     <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                 </div>
+
             </form>
         </div>
     </div>
