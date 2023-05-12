@@ -153,6 +153,14 @@
                     <td>Curso</td>
                 </tr>
             @endforeach
+            @foreach ($notas_producto_efectivo as $nota_producto_efectivo)
+                <tr>
+                    <td>{{ $nota_producto_efectivo->id }}</td>
+                    <td>{{ $nota_producto_efectivo->User->name }}</td>
+                    <td>${{ $nota_producto_efectivo->total }}</td>
+                    <td>Producto</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 
@@ -176,6 +184,14 @@
                     <td>Curso</td>
                 </tr>
             @endforeach
+            @foreach ($notas_producto_trans as $nota_producto_efectivo)
+                <tr>
+                    <td>{{ $nota_producto_efectivo->id }}</td>
+                    <td>{{ $nota_producto_efectivo->User->name }}</td>
+                    <td>${{ $nota_producto_efectivo->total }}</td>
+                    <td>Producto</td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
 
@@ -197,6 +213,14 @@
                     <td>{{ $nota_curso_efectivo->Nota->User->name }}</td>
                     <td>${{ $nota_curso_efectivo->monto }}</td>
                     <td>Curso</td>
+                </tr>
+            @endforeach
+            @foreach ($notas_producto_tarjeta as $nota_producto_efectivo)
+                <tr>
+                    <td>{{ $nota_producto_efectivo->id }}</td>
+                    <td>{{ $nota_producto_efectivo->User->name }}</td>
+                    <td>${{ $nota_producto_efectivo->total }}</td>
+                    <td>Producto</td>
                 </tr>
             @endforeach
         </tbody>

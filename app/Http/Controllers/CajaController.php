@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Caja;
 use App\Models\CajaDia;
 use App\Models\NotasPagos;
+use App\Models\NotasProductos;
 use Session;
 use DB;
 
@@ -27,9 +28,12 @@ class CajaController extends Controller
             $caja=$caja->monto_inicial;
         }
 
-        $total_pagos = $caja + $total_notas_pagos;
+        $notas_producto = NotasProductos::where('fecha', '=', $fechaActual)->where('metodo_pago', '=', 'Efectivo')->get();
+        $total_producto_pagos = $notas_producto->sum('total');
 
-        return view('admin.caja.index', compact('fechaActual', 'notas_pagos', 'total_pagos', 'caja_egresos', 'total_egresos', 'caja'));
+        $total_pagos = $caja + $total_notas_pagos + $total_producto_pagos;
+
+        return view('admin.caja.index', compact('fechaActual', 'notas_pagos', 'total_pagos', 'notas_producto', 'caja_egresos', 'total_egresos', 'caja'));
     }
 
     public function store(request $request){
@@ -62,16 +66,23 @@ class CajaController extends Controller
         $fechaActual = date('Y-m-d');
         $today =  date('d-m-Y');
         $notas_cursos_efectivo = NotasPagos::whereDate('created_at', today())->where('metodo_pago', '=', 'Efectivo')->get();
-        $total_pagos_efectivo = $notas_cursos_efectivo->sum('monto');
-        $count_cursos_efectivo = $notas_cursos_efectivo->count();
+        $notas_producto_efectivo = NotasProductos::where('fecha', '=', $fechaActual)->where('metodo_pago', '=', 'Efectivo')->get();
 
         $notas_cursos_trans = NotasPagos::whereDate('created_at', today())->where('metodo_pago', '=', 'Transferencia')->get();
-        $total_pagos_trans = $notas_cursos_trans->sum('monto');
-        $count_cursos_trans = $notas_cursos_trans->count();
+        $notas_producto_trans = NotasProductos::where('fecha', '=', $fechaActual)->where('metodo_pago', '=', 'Transferencia')->get();
 
         $notas_cursos_tarjeta = NotasPagos::whereDate('created_at', today())->where('metodo_pago', '=', 'Tarjeta')->get();
-        $total_pagos_tarjeta = $notas_cursos_tarjeta->sum('monto');
-        $count_cursos_tarjeta = $notas_cursos_tarjeta->count();
+        $notas_producto_tarjeta = NotasProductos::where('fecha', '=', $fechaActual)->where('metodo_pago', '=', 'Tarjeta Credito/debito')->get();
+
+        //S U M A  E F E C T I V O
+        $total_pagos_efectivo = $notas_cursos_efectivo->sum('monto') + $notas_producto_efectivo->sum('total');
+        $count_cursos_efectivo = $notas_cursos_efectivo->count() + $notas_producto_efectivo->count();
+        //S U M A  T R A N S F E R E N C I A
+        $total_pagos_trans = $notas_cursos_trans->sum('monto')  + $notas_producto_trans->sum('total');
+        $count_cursos_trans = $notas_cursos_trans->count() + $notas_producto_trans->count();
+        //S U M A  T A R J E T A
+        $total_pagos_tarjeta = $notas_cursos_tarjeta->sum('monto') + $notas_producto_tarjeta->sum('total');
+        $count_cursos_tarjeta = $notas_cursos_tarjeta->count() + $notas_producto_tarjeta->count();
 
         $caja_egresos = CajaDia::where('fecha', '=', $fechaActual)->get();
         $total_egresos = $caja_egresos->sum('egresos');
@@ -89,6 +100,7 @@ class CajaController extends Controller
         $pdf = \PDF::loadView('admin.caja.pdf_corte', compact('fechaActual', 'notas_cursos_efectivo', 'total_pagos_efectivo', 'count_cursos_efectivo',
         'notas_cursos_trans', 'total_pagos_trans', 'count_cursos_trans',
         'notas_cursos_tarjeta', 'total_pagos_tarjeta', 'count_cursos_tarjeta',
+        'notas_producto_efectivo', 'notas_producto_trans', 'notas_producto_tarjeta',
         'caja_egresos', 'total_egresos', 'total_pagos','caja', 'today'));
         return $pdf->stream();
        // return $pdf->download('Corte '.$today.'.pdf');
