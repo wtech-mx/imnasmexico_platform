@@ -173,4 +173,21 @@ class NotasProductosController extends Controller
         return redirect()->back()->with('success', 'Se ha eliminado');
     }
 
+    public function update_productos(Request $request){
+        $productos = $request->input('productos');
+
+        foreach ($productos as $id => $data) {
+            $producto = ProductosNotasId::findOrFail($id);
+
+            // Actualizar los campos modificados
+            $producto->producto = $data['producto'];
+            $producto->price = $data['price'];
+            $producto->cantidad = $data['cantidad'];
+            $producto->save();
+        }
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back()->with('success', 'Se ha actualizada');
+    }
+
 }

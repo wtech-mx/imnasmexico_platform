@@ -257,6 +257,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/notas/productos/update/{id}', [App\Http\Controllers\NotasProductosController::class, 'update'])->name('notas_productos.update');
 
     Route::delete('/admin/notas/productos/delete/{id}', [App\Http\Controllers\NotasProductosController::class, 'delete'])->name('notas_productos.delete');
+    Route::post('/admin/productos/update/', [App\Http\Controllers\NotasProductosController::class, 'update_productos'])->name('notas_productos.productos');
 
     // =============== M O D U L O   C A J A ===============================
     Route::get('/admin/caja', [App\Http\Controllers\CajaController::class, 'index'])->name('caja.index');
