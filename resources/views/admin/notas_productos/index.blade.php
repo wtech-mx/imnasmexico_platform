@@ -49,7 +49,7 @@
                                             <td>{{ $nota->id }}</td>
                                             <td>{{ $nota->User->name }}</td>
                                             <td>
-                                                <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#productos_nota_{{ $nota->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                <a type="button" class="btn btn-sm bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#productos_nota_{{ $nota->id }}" >
                                                     <i class="fa fa-fw fa-eye"></i>
                                                 </a>
                                             </td>
@@ -78,8 +78,15 @@
                                             </td>
                                             <td>{{ $nota->total }}</td>
                                             <td>
-                                                <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_nota_{{ $nota->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_nota_{{ $nota->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                                     <i class="fa fa-fw fa-edit"></i>
+                                                </a>
+
+                                                @php
+                                                    $total = 0;$totalCantidad = 0;
+                                                @endphp
+                                                <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->User->telefono }}&text=Nueva%20orden%20%0A--------------------------------%0A%0ANumero%20de%20Orden%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $nota->fecha }}%0AEmail%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $nota->User->email }}%0ATelefono%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $nota->User->telefono }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php foreach ($nota->ProductosNotasId as $productos) { $precio = $productos->price; $cantidad = $productos->cantidad; $subtotal = $precio * $cantidad; $total += $subtotal; $precio = number_format($total, 2, '.', ','); echo $productos->producto . "%20$" . $productos->price . ".0%20%20x%20" . $productos->cantidad . "%0A"; } @endphp--------------------------------%0A%0ATipo de descuento%3A%20{{ $nota->tipo }}%0ADescuento%3A%20{{ $nota->restante }}%0ASubtotal%3A%20${{ $precio }}%0ATotal%3A%20${{$total_formateado = number_format($nota->total, 2, '.', ',')}}%0A">
+                                                    <i class="fa fa-whatsapp"></i>
                                                 </a>
                                             </td>
                                         </tr>

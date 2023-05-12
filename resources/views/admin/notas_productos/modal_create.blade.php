@@ -111,21 +111,14 @@
                             </div>
                         </div>
 
-                        <div class="col-2">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label for="name">Descuento</label>
                                 <input id="restante" name="restante" type="number" class="form-control"  required>
                             </div>
                         </div>
 
-                        <div class="col-2">
-                            <div class="form-group">
-                                <label for="name">Subtotal</label>
-                                <input id="subtotal" name="subtotal" type="number" class="form-control"  >
-                            </div>
-                        </div>
-
-                        <div class="col-2">
+                        <div class="col-3">
                             <div class="form-group">
                                 <label for="name">Total</label>
                                 <input id="total" name="total" type="number" class="form-control"  >

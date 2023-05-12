@@ -76,11 +76,12 @@
                             $cantidad = $productos->cantidad;
                             $subtotal = $precio * $cantidad;
                             $total += $subtotal;
+                            $precio = number_format($total, 2, '.', ',');
                         @endphp
 
                         @endforeach
                         <div class="col-6 mt-3">
-                            <p><strong></strong></p>
+                            <p><strong>${{ $precio }}</strong></p>
                         </div>
 
                         <div class="col-12">
@@ -150,17 +151,27 @@
                             </div>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-2">
                             <div class="form-group">
                                 <label for="name">Descuento</label>
                                 <input id="restante" name="restante" type="number" class="form-control"  value="{{ $nota->restante }}">
                             </div>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-2">
+                            <div class="form-group">
+                                <label for="name">Subtotal</label>
+                                <input id="subtotal" name="subtotal" type="text" class="form-control"  value="{{ $precio }}" disabled>
+                            </div>
+                        </div>
+
+                        <div class="col-2">
                             <div class="form-group">
                                 <label for="name">Total</label>
-                                <input id="total" name="total" type="number" class="form-control"  value="{{ $nota->total }}">
+                                @php
+                                    $total_formateado = number_format($nota->total, 2, '.', ',');
+                                @endphp
+                                <input id="total" name="total" type="text" class="form-control"  value="{{ $total_formateado }}">
                             </div>
                         </div>
 
