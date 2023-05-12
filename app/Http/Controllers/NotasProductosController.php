@@ -61,7 +61,6 @@ class NotasProductosController extends Controller
         $notas_productos->nota = $request->get('nota');
         $notas_productos->save();
 
-
         if ($request->has('campo')) {
             $nuevosCampos = $request->input('campo');
             $nuevosCampos2 = $request->input('campo2');
@@ -91,6 +90,28 @@ class NotasProductosController extends Controller
         $notas->restante = $request->get('restante');
         $notas->nota = $request->get('nota');
         $notas->update();
+
+
+        $nuevosCampos = $request->input('campo');
+        $nuevosCampos2 = $request->input('campo2');
+        $nuevosCampos3 = $request->input('campo3');
+
+        if ($request->has('campo')) {
+            $nuevosCampos = $request->input('campo');
+            $nuevosCampos2 = $request->input('campo2');
+            $nuevosCampos3 = $request->input('campo3');
+
+            foreach ($nuevosCampos as $index => $campo) {
+                // Aquí puedes realizar las operaciones necesarias con cada campo adicional
+                // Por ejemplo, guardar en la base de datos
+                $notas_inscripcion = new ProductosNotasId;
+                $notas_inscripcion->id_notas_productos = $id;
+                $notas_inscripcion->producto = $campo;
+                $notas_inscripcion->price = $nuevosCampos2[$index];
+                $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                $notas_inscripcion->save();
+            }
+        }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Se ha actualizada');

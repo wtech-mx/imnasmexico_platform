@@ -51,9 +51,7 @@
 
 
                         @foreach ($nota->ProductosNotasId as  $productos)
-                        <form class="form" action="{{ route('notas_productos.delete', $nota->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
+
                         <div class="col-6">
                             <label for="">Nombre</label>
                             <input type="text" name="producto" class="form-control d-inline-block" value="{{ $productos->producto }}">
@@ -68,11 +66,7 @@
                         <div class="col-3">
                             <label for="">Cantidad</label>
                             <input type="number" name="cantidad" class="form-control d-inline-block" style="width: 65%;" value="{{ $productos->cantidad }}">
-                            <button type="submit" class="" style="border-radius: 9px;margin-left: 0.2rem;">
-                                <i class="fa fa-trash"></i>
-                            </button>
                         </div>
-                        </form>
                         @endforeach
 
 
