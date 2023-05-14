@@ -32,6 +32,7 @@
                             <th>telefono</th>
                             <th>email</th>
                             <th></th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     @foreach ($clientes as $cliente)
@@ -45,7 +46,7 @@
                                 <i class="fas fa-folder-open"></i>
                             </a>
                             <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#ticket_cliente_{{ $cliente->id }}" style="background: #52BE80; color: #ffff">
-                                <i class="fas fa-ticket-alt"></i>
+                                <i class="fas fa-ticket-alt"></i> {{ $cliente->Orders->count()}}
                             </a>
                             <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_cliente_{{ $cliente->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 <i class="fa fa-fw fa-eye"></i>
