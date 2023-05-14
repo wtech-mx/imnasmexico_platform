@@ -12,6 +12,7 @@ use App\Mail\PlantillaNuevoUser;
 use Illuminate\Support\Str;
 use Session;
 use Hash;
+use DB;
 use Codexshaper\WooCommerce\Facades\Product;
 
 
@@ -134,28 +135,74 @@ class NotasProductosController extends Controller
         $notas->restante = $request->get('restante');
         $notas->nota = $request->get('nota');
 
-        $productos = ProductosNotasId::where('id_notas_productos', '=', $id)->get();
-        $total = 0;
-
-        foreach ($productos as $producto) {
-            $precio = $producto->price;
-            $cantidad = $producto->cantidad;
-            $subtotal = $precio * $cantidad;
-            $total += $subtotal;
-        }
+        $sum_total = DB::table('productos_notas_id')
+        ->selectRaw('SUM(price) as total')
+        ->where('id_notas_productos', $notas->id)
+        ->value('total');
 
         if ($request->get('tipo') == 'Porcentaje') {
             // Aplicar descuento porcentaje al total
             $descuento = $request->get('restante') / 100;
-            $descuentoAplicado = $total * $descuento;
-            $total -= $descuentoAplicado;
+            $total1 = 0;
 
+            if ($request->has('campo')) {
+                $nuevosCampos = $request->input('campo');
+                $nuevosCampos2 = $request->input('campo2');
+                $nuevosCampos3 = $request->input('campo3');
+
+                foreach ($nuevosCampos as $index => $campo) {
+
+                    $notas_inscripcion = new ProductosNotasId;
+                    $notas_inscripcion->id_notas_productos = $notas->id;
+                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->price = $nuevosCampos2[$index];
+                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                    $notas_inscripcion->save();
+
+                    $precio = $nuevosCampos2[$index];
+                    $cantidad = $nuevosCampos3[$index];
+                    $subtotal = $precio * $cantidad;
+                    $total1 += $subtotal;
+                    $total = $sum_total + $total1;
+
+                }
+
+                $descuentoAplicado = $total * $descuento;
+                $total -= $descuentoAplicado;
+            }
+
+            $notas->total = $total;
         } elseif ($request->get('tipo') == 'Fijo') {
-            $descuento = $request->get('restante');
-            $total -= $descuento;
-        }
 
-        $notas->total = $total;
+            // Restar descuento fijo al total
+            $descuento = $request->get('restante');
+            $total1 = 0;
+
+            if ($request->has('campo')) {
+                $nuevosCampos = $request->input('campo');
+                $nuevosCampos2 = $request->input('campo2');
+                $nuevosCampos3 = $request->input('campo3');
+
+                foreach ($nuevosCampos as $index => $campo) {
+                    $notas_inscripcion = new ProductosNotasId;
+                    $notas_inscripcion->id_notas_productos = $notas->id;
+                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->price = $nuevosCampos2[$index];
+                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                    $notas_inscripcion->save();
+
+                    $precio = $nuevosCampos2[$index];
+                    $cantidad = $nuevosCampos3[$index];
+                    $subtotal = $precio * $cantidad;
+                    $total1 += $subtotal;
+                    $total = $sum_total + $total1;
+                }
+
+                $total = $total - $descuento;
+            }
+
+            $notas->total = $total;
+        }
 
         $notas->update();
 
@@ -168,6 +215,23 @@ class NotasProductosController extends Controller
         $registro = ProductosNotasId::find($id); // Buscar el registro por su ID
         // Realizar las operaciones necesarias antes de eliminar el registro, si las hay
         $registro->delete();
+
+        $total = DB::table('productos_notas_id')
+        ->selectRaw('SUM(price) as total')
+        ->where('id_notas_productos', $registro->id_notas_productos)
+        ->value('total');
+
+        $nota = NotasProductos::where('id', '=', $registro->id_notas_productos)->first();
+        if ($nota->tipo == 'Fijo') {
+            $descuento = $nota->restante;
+            $total -= $descuento;
+        }elseif ($nota->tipo == 'Porcentaje') {
+            $descuento = $nota->restante / 100;
+            $descuentoAplicado = $nota->total * $descuento;
+            $total -= $descuentoAplicado;
+        }
+        $nota->total = $total;
+        $nota->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Se ha eliminado');
@@ -185,6 +249,23 @@ class NotasProductosController extends Controller
             $producto->cantidad = $data['cantidad'];
             $producto->save();
         }
+
+        $total = DB::table('productos_notas_id')
+            ->selectRaw('SUM(price) as total')
+            ->where('id_notas_productos', $producto->id_notas_productos)
+            ->value('total');
+
+        $nota = NotasProductos::where('id', '=', $producto->id_notas_productos)->first();
+        if ($nota->tipo == 'Fijo') {
+            $descuento = $nota->restante;
+            $total -= $descuento;
+        }elseif ($nota->tipo == 'Porcentaje') {
+            $descuento = $nota->restante / 100;
+            $descuentoAplicado = $nota->total * $descuento;
+            $total -= $descuentoAplicado;
+        }
+        $nota->total = $total;
+        $nota->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Se ha actualizada');
