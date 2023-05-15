@@ -71,15 +71,21 @@
                                           @endphp
                                           <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                             @if ($extension == 'jpg')
+                                            <p class="text-center">
                                             <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                            </p>
                                             @elseif ($extension == 'png')
+                                            <p class="text-center">
                                             <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                            </p>
                                             @elseif ($extension == 'jpeg')
+                                            <p class="text-center">
                                             <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                            </p>
                                             @elseif ($extension == 'pdf')
-                                            <embed class="embed_pdf_publicidad" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
+                                            <embed class="embed_pdf_publicidad" src="{{asset('publicidad/'. $item->nombre) }}" type="application/pdf"  />
                                             @elseif ($extension == 'mp4')
-                                            <video src="{{asset('publicidad/'. $item->nombre) }}"></video>
+                                            <video class="video_publicidad" src="{{asset('publicidad/'. $item->nombre) }}" controls></video>
                                             @endif
                                           </div>
                                           @endforeach
