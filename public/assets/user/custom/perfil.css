@@ -218,6 +218,15 @@ input::placeholder {
         margin-bottom: 2rem;
     }
 
+    .img_material_clase_pc {
+        width: 80%;
+    }
+
+    .embed_pdf {
+        width: 500px;
+        height: 500px;
+    }
+
 }
 
 @media only screen and (max-width: 670px) {
@@ -241,6 +250,16 @@ input::placeholder {
         height: 260px;
     }
 
+    .embed_pdf {
+        width: 400px;
+        height: 400px;
+    }
+
+    .embed_pdf_publicidad {
+        width: 400px;
+        height: 400px;
+    }
+
 }
 
 @media only screen and (max-width:535px) {
@@ -248,6 +267,16 @@ input::placeholder {
     .iframe_clase {
         width: 400px;
         height: 230px;
+    }
+
+    .embed_pdf {
+        width: 300px;
+        height: 400px;
+    }
+
+    .embed_pdf_publicidad {
+        width: 300px;
+        height: 400px;
     }
 }
 

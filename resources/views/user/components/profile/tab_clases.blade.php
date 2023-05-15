@@ -1,8 +1,3 @@
-<div class="row">
-    <div class="col-12 mb-3">
-        <h2 class="title_curso">Mis Clases</h2>
-        <h3 class="tittle_clases">Recuerda que las clases grabadas solo duran 72 Horas</h3>
-    </div>
 
     <div class="row">
         <div class="col-12">
@@ -39,7 +34,6 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-material{{$video->id_tickets}}" role="tabpanel" aria-labelledby="nav-material-tab" tabindex="0">
                                     <div class="row">
-
                                     @foreach ($carpetas as $carpeta)
                                         @php
                                             $file_info = new SplFileInfo($carpeta->nombre_recurso);
@@ -48,11 +42,15 @@
                                         @if ($carpeta->id_carpeta == $video->Cursos->carpeta)
                                             @if ($extension === 'pdf')
                                             <div class="col-12 col-md-12 col-lg-6 col-xl-4">
+                                                <p class="text-center">
                                                 <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
+                                                </p>
                                             </div>
                                             @else
                                             <div class="col-12 col-md-12 col-lg-6 col-xl-4 mt-xl-5 mt-lg-3 mt-md-2">
+                                                <p class="text-center">
                                                 <img class="img_material_clase_pc" id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" />
+                                                </p>
                                             </div>
                                             @endif
                                         @endif
@@ -170,9 +168,9 @@
                     </div>
                 @endforeach
 
-              </div>
+            </div>
 
         </div>
 
     </div>
-</div>
+
