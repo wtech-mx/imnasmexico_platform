@@ -49,16 +49,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-1">
-                                <div class="form-group">
-                                    <label for="">-</label>
-                                    <button class="mt-3" type="button" id="agregarCampo" style="border-radius: 9px;width: 36px;height: 40px;">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="col-11">
+                            <div class="col-12">
                                 <div class="form-group">
                                     <label for="">Curso</label>
 
