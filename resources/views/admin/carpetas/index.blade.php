@@ -41,7 +41,7 @@
                                         @foreach ($carpetas as $carpeta)
                                             <tr>
                                                 <td>{{ $carpeta->nombre }}</td>
-                                                <td>5 </td>
+                                                <td>{{ $carpeta->CarpetaRecursos->count()}}</td>
                                                 <td>
                                                     {{-- <a class="btn btn-sm btn-success" href="{{ route('carpetas.edit',$carpeta->id) }}"><i class="fa fa-fw fa-edit"></i> </a> --}}
                                                     <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_carpeta_{{ $carpeta->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">

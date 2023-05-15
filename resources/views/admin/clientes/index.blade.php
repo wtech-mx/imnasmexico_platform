@@ -31,7 +31,6 @@
                             <th>Nombre</th>
                             <th>telefono</th>
                             <th>email</th>
-                            <th></th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
