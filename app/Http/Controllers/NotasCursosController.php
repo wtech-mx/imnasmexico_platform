@@ -34,7 +34,15 @@ class NotasCursosController extends Controller
         $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
         $notas_pagos = NotasPagos::get();
 
-        return view('admin.notas_cursos.index', compact('notas', 'cursos', 'notas_pagos'));
+        $cursos_paquetes = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+        ->where('cursos_tickets.precio','<=', 600)
+        ->where('cursos_tickets.fecha_inicial','<=', $fechaActual)
+        ->where('cursos_tickets.fecha_final','>=', $fechaActual)
+        ->where('cursos.modalidad','=', 'Online')
+        ->select('cursos_tickets.*')
+        ->get();
+
+        return view('admin.notas_cursos.index', compact('notas', 'cursos', 'notas_pagos', 'cursos_paquetes'));
     }
 
     public function store(request $request){
@@ -68,6 +76,114 @@ class NotasCursosController extends Controller
         $notas_cursos->subtotal = $request->get('total');
         $notas_cursos->descuento = $request->get('descuento');
         $notas_cursos->total = $request->get('totalDescuento');
+        $notas_cursos->nota = $request->get('nota');
+        $notas_cursos->save();
+
+        $code = Str::random(8);
+        $order = new Orders;
+        $order->id_usuario = $payer->id;
+        $order->pago = $notas_cursos->total;
+        $order->forma_pago = 'Nota';
+        $order->fecha = $notas_cursos->fecha;
+        $order->estatus = 1;
+        $order->code = $code;
+        $order->save();
+
+        $id = $notas_cursos->id;
+        $nuevosCampos = $request->input('campo');
+        if ($nuevosCampos) {
+            foreach ($nuevosCampos as $campo) {
+                $notas_inscripcion = new NotasInscripcion;
+                $notas_inscripcion->id_nota = $id;
+                $notas_inscripcion->id_curso = intval($campo);
+                $notas_inscripcion->save();
+
+                $curso = CursosTickets::where('id', '=', $campo)->first();
+                $order_ticket = new OrdersTickets;
+                $order_ticket->id_order = $order->id;
+                $order_ticket->id_usuario = $payer->id;
+                $order_ticket->id_tickets = intval($campo);
+                $order_ticket->id_curso = $curso->id_curso;
+                $order_ticket->save();
+            }
+        }
+
+        $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
+        $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
+        $user = $orden_ticket2->User->name;
+        $id_order = $orden_ticket2->id_order;
+        $pago = $orden_ticket2->Orders->pago;
+        $forma_pago = $orden_ticket2->Orders->forma_pago;
+        // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
+        foreach ($orden_ticket as $details) {
+            if ($details->Cursos->modalidad == 'Online') {
+                Mail::to($order->User->email)->send(new PlantillaTicket($details));
+            } else {
+                Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
+            }
+        }
+        Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
+
+        $notas_pagos = new NotasPagos;
+        $notas_pagos->id_nota = $notas_cursos->id;
+        $notas_pagos->monto = $request->get('monto');
+        $notas_pagos->metodo_pago = $request->get('metodo_pago');
+        $notas_pagos->save();
+
+        $restante = $notas_cursos->total - $notas_pagos->monto;
+
+        $enotas_cursos = NotasCursos::where('id', '=', $notas_cursos->id)->first();
+        $enotas_cursos->restante = $restante;
+        $enotas_cursos->update();
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back()->with('success', 'Envio de correo exitoso.');
+
+    }
+
+    public function store_paquete(request $request){
+
+        $code = Str::random(8);
+
+        if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+            if (User::where('telefono', $request->telefono)->exists()) {
+                $user = User::where('telefono', $request->telefono)->first();
+            } else {
+                $user = User::where('email', $request->email)->first();
+            }
+            $payer = $user;
+        } else {
+            $payer = new User;
+            $payer->name = $request->get('name');
+            $payer->email = $request->get('email');
+            $payer->username = $request->get('telefono');
+            $payer->code = $code;
+            $payer->telefono = $request->get('telefono');
+            $payer->cliente = '1';
+            $payer->password = Hash::make($request->get('telefono'));
+            $payer->save();
+            $datos = User::where('id', '=', $payer->id)->first();
+            Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+        }
+
+        if($request->get('paquete') === 'Paquete1'){
+            $precio = "6000";
+        }elseif($request->get('paquete') === 'Paquete2'){
+            $precio = "8000";
+        }elseif($request->get('paquete') === 'Paquete3'){
+            $precio = "11000";
+        }elseif($request->get('paquete') === 'Paquete4'){
+            $precio = "13000";
+        }elseif($request->get('paquete') === 'Paquete5'){
+            $precio = "14500";
+        }
+
+        $notas_cursos = new NotasCursos;
+        $notas_cursos->id_usuario = $payer->id;
+        $notas_cursos->fecha = $request->get('fecha');
+        $notas_cursos->subtotal = $precio;
+        $notas_cursos->total = $precio;
+        $notas_cursos->paquete = $request->get('paquete');
         $notas_cursos->nota = $request->get('nota');
         $notas_cursos->save();
 
