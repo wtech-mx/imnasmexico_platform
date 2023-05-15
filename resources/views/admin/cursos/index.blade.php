@@ -71,13 +71,15 @@
                                                 @endif
 
                                                 <td>
+                                                    <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#recordatorio_modal_{{ $curso->id }}">
+                                                        <i class="fa fa-bell"></i>
+                                                    </a>
                                                     @if ($curso->modalidad == 'Online')
                                                         <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#update_modal_{{ $curso->id }}">
                                                             <i class="fab fa-google"></i>
                                                             {{-- <img id="blah" src="{{asset('assets/user/icons/meet.png') }}" alt="Imagen" style="width: 15px; height: 15px;"/> --}}
                                                         </a>
                                                     @endif
-
                                                     <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}"><i class="fa fa-users"></i></a>
                                                     @can('client-edit')
                                                         <a class="btn btn-sm btn-success" href="{{ route('cursos.edit',$curso->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
@@ -86,6 +88,7 @@
                                                 </td>
                                             </tr>
                                         @include('admin.cursos.modal_meet')
+                                        @include('admin.cursos.modal_recordatorio')
                                         @endforeach
                                     </tbody>
                                 </table>

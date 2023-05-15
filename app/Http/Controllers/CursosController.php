@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cursos;
+use App\Models\RecordatoriosCursos;
 use App\Models\CursosTickets;
 use App\Models\Orders;
 use App\Models\OrdersTickets;
@@ -316,6 +317,22 @@ class CursosController extends Controller
         foreach ($ordenes as $details) {
             Mail::to($email)->send(new PlantillaTicket($details));
         }
+
+        return redirect()->back()->with('success', 'Envio de correo exitoso.');
+    }
+
+    public function recordatorios_store(Request $request){
+
+        $estatus = "No enviado";
+
+        $recordatorios = new RecordatoriosCursos;
+        $recordatorios->id_curso = $request->get('id_curso');
+        $recordatorios->nombre = $request->get('nombre');
+        $recordatorios->email = $request->get('email');
+        $recordatorios->telefono = $request->get('telefono');
+        $recordatorios->estatus = $estatus;
+        $recordatorios->nota = $request->get('nota');
+        $recordatorios->save();
 
         return redirect()->back()->with('success', 'Envio de correo exitoso.');
     }

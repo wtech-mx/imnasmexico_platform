@@ -61,4 +61,9 @@ class Cursos extends Model
         return $this->belongsTo(Carpetas::class, 'carpeta');
     }
 
+    public function RecordatoriosCursos()
+    {
+        return $this->hasMany(RecordatoriosCursos::class, 'id_usuario');
+    }
+
 }
