@@ -75,6 +75,17 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="estandar">Seleccionar Carpeta Compartida</label>
+                                                        <select class="form-control" id="carpeta" name="carpeta">
+                                                            <option value="{{ $curso->id }}">{{ $curso->Carpeta->nombre }}</option>
+                                                          @foreach ($carpetas as $carpeta)
+                                                          <option value="{{ $carpeta->id }}">{{ $carpeta->nombre }}</option>
+                                                          @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="button-row d-flex mt-4">
                                                 <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
