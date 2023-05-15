@@ -38,6 +38,8 @@
 
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-material{{$video->id_tickets}}" role="tabpanel" aria-labelledby="nav-material-tab" tabindex="0">
+                                    <div class="row">
+
                                     @foreach ($carpetas as $carpeta)
                                         @php
                                             $file_info = new SplFileInfo($carpeta->nombre_recurso);
@@ -45,42 +47,51 @@
                                         @endphp
                                         @if ($carpeta->id_carpeta == $video->Cursos->carpeta)
                                             @if ($extension === 'pdf')
-                                                <embed src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf" style="width: 120px; height: 120px;" />
+                                            <div class="col-12 col-md-12 col-lg-6 col-xl-4">
+                                                <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
+                                            </div>
                                             @else
-                                                <img id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" style="width: 100px; height: 100px;"/>
+                                            <div class="col-12 col-md-12 col-lg-6 col-xl-4 mt-xl-5 mt-lg-3 mt-md-2">
+                                                <img class="img_material_clase_pc" id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" />
+                                            </div>
                                             @endif
                                         @endif
                                     @endforeach
-
+                                    </div>
                                 </div>
 
                                 <div class="tab-pane fade" id="nav-promociones{{$video->id_tickets}}" role="tabpanel" aria-labelledby="nav-promociones-tab" tabindex="0">
 
-                                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                                    <div id="carrousel_publicidad" class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
-
-                                        <div class="carousel-item active">
-                                            @foreach ($publicidad as $item)
-                                            @php
-                                                $file_info = new SplFileInfo($item->nombre);
-                                                $extension = $file_info->getExtension();
-                                            @endphp
-                                                @if ($extension != 'pdf')
-                                                    <img src="{{asset('publicidad/'. $item->nombre) }}" class="d-block w-100"/>
-                                                @endif
-                                            @endforeach
+                                          @foreach ($publicidad as $item)
+                                          @php
+                                            $file_info = new SplFileInfo($item->nombre);
+                                            $extension = $file_info->getExtension();
+                                          @endphp
+                                          <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                            @if ($extension == 'jpg')
+                                            <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                            @elseif ($extension == 'png')
+                                            <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                            @elseif ($extension == 'jpeg')
+                                            <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                            @elseif ($extension == 'pdf')
+                                            <embed class="embed_pdf_publicidad" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
+                                            @elseif ($extension == 'mp4')
+                                            <video src="{{asset('publicidad/'. $item->nombre) }}"></video>
+                                            @endif
+                                          </div>
+                                          @endforeach
                                         </div>
 
-                                        </div>
-
-                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Previous</span>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carrousel_publicidad" data-bs-slide="prev">
+                                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                          <span class="visually-hidden">Previous</span>
                                         </button>
-
-                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Next</span>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carrousel_publicidad" data-bs-slide="next">
+                                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                          <span class="visually-hidden">Next</span>
                                         </button>
                                     </div>
 
