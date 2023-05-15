@@ -48,11 +48,13 @@
                             <div class="col-4" style="background-color: #bb546c; color: #fff;">Fecha</div>
                         </div>
                         @foreach ($notas_pagos as $order_ticket)
-                            <div class="row text-center mt-2">
-                                <div class="col-4">{{$order_ticket->monto}}</div>
-                                <div class="col-4">{{$order_ticket->metodo_pago}}</div>
-                                <div class="col-4">{{$order_ticket->created_at}}</div>
-                            </div>
+                            @if ($order_ticket->id_nota == $nota->id)
+                                <div class="row text-center mt-2">
+                                    <div class="col-4">{{$order_ticket->monto}}</div>
+                                    <div class="col-4">{{$order_ticket->metodo_pago}}</div>
+                                    <div class="col-4">{{$order_ticket->created_at}}</div>
+                                </div>
+                            @endif
                         @endforeach
                     </div>
                 </div>

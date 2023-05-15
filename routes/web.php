@@ -251,6 +251,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/notas/cursos/edit/{id}', [App\Http\Controllers\NotasCursosController::class, 'edit'])->name('notas_cursos.edit');
     Route::patch('/admin/notas/cursos/update/{id}', [App\Http\Controllers\NotasCursosController::class, 'update'])->name('notas_cursos.update');
 
+    Route::post('/admin/notas/paquete/store', [App\Http\Controllers\NotasCursosController::class, 'store_paquete'])->name('notas_cursos.store_paquete');
+
     Route::get('/admin/notas/productos', [App\Http\Controllers\NotasProductosController::class, 'index'])->name('notas_productos.index');
     Route::post('/admin/notas/productos/store', [App\Http\Controllers\NotasProductosController::class, 'store'])->name('notas_productos.store');
     Route::get('/admin/notas/productos/edit/{id}', [App\Http\Controllers\NotasProductosController::class, 'edit'])->name('notas_productos.edit');
