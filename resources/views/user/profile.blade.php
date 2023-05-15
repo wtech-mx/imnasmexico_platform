@@ -275,18 +275,144 @@ Mi perfil- {{$cliente->name}}
             <div class="tab-pane fade" id="nav-temarios_res" role="tabpanel" aria-labelledby="nav-temarios_res-tab" tabindex="0">
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="title_curso mb-5">Material de Clase</h2>
+                        <h3 class="text-center mb-3"><img class="icon_nav_course" src="{{asset('assets/user/icons/libros.png')}}" alt=""> <strong>Material de clase</strong></h3>
                     </div>
-                    @foreach ($order_ticket as $tiket)
-                        @if ($tiket->Cursos->materiales != NULL && $tiket->Cursos->estatus == '1')
-                        <div class="col-6 mt-3">
-                            <b><label>Nombre Curso/Diplomado</label></b><br>
-                            <label>{{$tiket->Cursos->nombre}}</label>
-                            <img id="blah" src="{{asset('materiales/'.$tiket->Cursos->materiales) }}" alt="Imagen" style="width: 450px; height: 450px;"/>
+                    @foreach ($usuario_compro as $video)
+                    @foreach ($carpetas as $carpeta)
+                    @php
+                        $file_info = new SplFileInfo($carpeta->nombre_recurso);
+                        $extension = $file_info->getExtension();
+                    @endphp
+                    @if ($carpeta->id_carpeta == $video->Cursos->carpeta)
+                        @if ($extension === 'pdf')
+                        <div class="col-12 mt-3">
+                            <p class="text-center">
+                            <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
+                            </p>
                         </div>
-                            <hr>
+                        @else
+                        <div class="col-12 mt-3">
+                            <p class="text-center">
+                                <img class="img_material_clase_pc" id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" />
+                            </p>
+                        </div>
                         @endif
+                    @endif
                     @endforeach
+                    @endforeach
+
+                    <div class="col-12">
+                        <h3 class="text-center mt-5 mb-3"><img class="icon_nav_course" src="{{asset('assets/user/icons/promocion.png')}}" alt=""> <strong>Promociones y descuentos</strong></h3>
+                    </div>
+
+                    <div class="col-12">
+                        <div id="carrousel_publicidad_mb" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner">
+                              @foreach ($publicidad as $item)
+                              @php
+                                $file_info = new SplFileInfo($item->nombre);
+                                $extension = $file_info->getExtension();
+                              @endphp
+                              <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                @if ($extension == 'jpg')
+                                <p class="text-center">
+                                <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                </p>
+                                @elseif ($extension == 'png')
+                                <p class="text-center">
+                                <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                </p>
+                                @elseif ($extension == 'jpeg')
+                                <p class="text-center">
+                                <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                </p>
+                                @elseif ($extension == 'pdf')
+                                <p class="text-center">
+                                <embed class="embed_pdf_publicidad" src="{{asset('publicidad/'. $item->nombre) }}" type="application/pdf"  />
+                                </p>
+                                @elseif ($extension == 'mp4')
+                                <p class="text-center">
+                                <video class="video_publicidad" src="{{asset('publicidad/'. $item->nombre) }}" controls></video>
+                                </p>
+                                @endif
+                              </div>
+                              @endforeach
+                            </div>
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carrousel_publicidad_mb" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carrousel_publicidad_mb" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <h3 class="text-center mt-5 mb-3"><img class="icon_nav_course" src="{{asset('assets/user/icons/clase.webp')}}" alt=""> <strong>Clases grabadas</strong></h3>
+                    </div>
+
+                    @if ( $video->clase_grabada != NULL)
+                    <div class="col-12 col-lg-6">
+                        <h5 class="titile_clase_grabada mt-3 mb-5">{{$video->nombre}}  - <strong>Día 1</strong></h5>
+                        @php
+                            $url = $video->clase_grabada;
+                            preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
+                            $id_link_drive = $matches[1];
+                        @endphp
+                        <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" class="iframe_clase"></iframe>
+                    </div>
+                @endif
+                @if ( $video->clase_grabada2 != NULL)
+                    <div class="col-12 col-lg-6">
+                        <h5 class="titile_clase_grabada mt-3 mb-5">{{$video->nombre}} - <strong>Día 2</strong></h5>
+                        @php
+                            $url2 = $video->clase_grabada2;
+                            preg_match('/\/file\/d\/(.+?)\//', $url2, $matches2);
+                            $id_link_drive2 = $matches2[1];
+                        @endphp
+                        <iframe src="https://drive.google.com/file/d/{{ $id_link_drive2 }}/preview" class="iframe_clase"></iframe>
+                    </div>
+                @endif
+
+                @if ($video->clase_grabada3 != NULL)
+                    <div class="col-12 col-lg-6">
+                        <h5 class="titile_clase_grabada mt-3 mb-5">{{$video->nombre}} - <strong>Día 3</strong></h5>
+                        @php
+                            $url3 = $video->clase_grabada3;
+                            preg_match('/\/file\/d\/(.+?)\//', $url3, $matches3);
+                            $id_link_drive3 = $matches3[1];
+                        @endphp
+                        <iframe src="https://drive.google.com/file/d/{{ $id_link_drive3 }}/preview" class="iframe_clase"></iframe>
+                    </div>
+                @endif
+
+                @if ($video->clase_grabada4 != NULL)
+                    <div class="col-12 col-lg-6">
+                        <h5 class="titile_clase_grabada mt-3 mb-5">{{$video->nombre}} - <strong>Día 4</strong></h5>
+                        @php
+                            $url4 = $video->clase_grabada4;
+                            preg_match('/\/file\/d\/(.+?)\//', $url4, $matches4);
+                            $id_link_drive4 = $matches4[1];
+                        @endphp
+                        <iframe src="https://drive.google.com/file/d/{{ $id_link_drive4 }}/preview" class="iframe_clase"></iframe>
+                    </div>
+                @endif
+
+                @if ($video->clase_grabada5 != NULL)
+                    <div class="col-12 col-lg-6">
+                        <h5 class="titile_clase_grabada mt-3 mb-5">{{$video->nombre}} - <strong>Día 5</strong></h5>
+                        @php
+                            $url5 = $video->clase_grabada5;
+                            preg_match('/\/file\/d\/(.+?)\//', $url5, $matches5);
+                            $id_link_drive5 = $matches5[1];
+                        @endphp
+                        <iframe src="https://drive.google.com/file/d/{{ $id_link_drive5 }}/preview" class="iframe_clase"></iframe>
+                    </div>
+                @endif
+
                 </div>
             </div>
 
