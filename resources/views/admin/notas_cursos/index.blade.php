@@ -6,6 +6,8 @@
 
 @php
     $fecha = date('Y-m-d');
+    $fechaHoraActual = new DateTime();
+    $fechaHoraActualFormateada = $fechaHoraActual->format('Y-m-d\TH:i');
 @endphp
 @section('content')
 

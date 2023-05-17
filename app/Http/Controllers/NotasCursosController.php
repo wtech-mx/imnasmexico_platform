@@ -128,6 +128,7 @@ class NotasCursosController extends Controller
         $notas_pagos->id_nota = $notas_cursos->id;
         $notas_pagos->monto = $request->get('monto');
         $notas_pagos->metodo_pago = $request->get('metodo_pago');
+        $notas_pagos->created_at = $request->get('created_at');
         $notas_pagos->save();
 
         $restante = $notas_cursos->total - $notas_pagos->monto;
@@ -236,6 +237,7 @@ class NotasCursosController extends Controller
         $notas_pagos->id_nota = $notas_cursos->id;
         $notas_pagos->monto = $request->get('monto');
         $notas_pagos->metodo_pago = $request->get('metodo_pago');
+        $notas_pagos->created_at = $request->get('created_at');
         $notas_pagos->save();
 
         $restante = $notas_cursos->total - $notas_pagos->monto;
@@ -265,6 +267,7 @@ class NotasCursosController extends Controller
         $notas_pagos->id_nota = $id;
         $notas_pagos->monto = $request->get('monto');
         $notas_pagos->metodo_pago = $request->get('metodo_pago');
+        $notas_pagos->created_at = $request->get('created_at');
         $notas_pagos->save();
 
         $enotas_cursos = NotasCursos::where('id', '=', $id)->first();

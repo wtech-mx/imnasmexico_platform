@@ -89,14 +89,14 @@
                                 </select>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-4">
                                 <div class="form-group">
                                     <label for="name">Monto</label>
                                     <input class="form-control" type="number" id="monto" name="monto" value="$">
                                 </div>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-4">
                                 <div class="form-group">
                                     <label for="name">Metodo de Pago</label>
                                     <select name="metodo_pago" id="metodo_pago" class="form-select d-inline-block">
@@ -106,7 +106,12 @@
                                     </select>
                                 </div>
                             </div>
-
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Fecha *</label>
+                                    <input id="created_at" name="created_at" type="datetime-local" class="form-control" value="{{$fechaHoraActualFormateada}}" required>
+                                </div>
+                            </div>
                         </div>
 
                     </div>

@@ -61,17 +61,20 @@
 
                 <div class="modal-footer">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <input id="monto" name="monto" type="number" class="form-control" placeholder="$ monto">
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
                             <select name="metodo_pago" id="metodo_pago" class="form-select d-inline-block">
                                 <option value="Efectivo">Efectivo</option>
                                 <option value="Tarjeta">Tarjeta</option>
                                 <option value="Transferencia">Transferencia</option>
                             </select>
                         </div>
-                        <div class="col-4">
+                        <div class="col-3">
+                            <input id="created_at" name="created_at" type="datetime-local" class="form-control" value="{{$fechaHoraActualFormateada}}" required>
+                        </div>
+                        <div class="col-3">
                             <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                         </div>
                     </div>
