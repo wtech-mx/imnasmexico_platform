@@ -39,7 +39,7 @@
 
 .navbar_ul_custom{
     --bs-scroll-height: 100px;
-    margin-left: 7rem;
+    margin-left: 1rem;
 }
 
 .btn-primario:hover{

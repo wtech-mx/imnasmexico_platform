@@ -160,6 +160,37 @@
     border-radius: 19px;
 }
 
+.title_curso {
+    color: #836262;
+    font-family: Leelawadee_1;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.text_cards_horizon{
+    color: #000;
+    font-family: Bahnschrift;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.card_single_horizon{
+    background: #fff;
+    padding: 15px;
+    border-radius: 19px;
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
+    margin-bottom: 2rem;
+}
+
+.card_single_horizon2{
+    background: #fff;
+    padding: 15px;
+    border-radius: 19px;
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
+    margin-bottom: 2rem;
+    width: 60%;
+}
+
 @media only screen and (max-width: 1390px) {
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
