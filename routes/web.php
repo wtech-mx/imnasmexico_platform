@@ -72,6 +72,10 @@ Route::get('reporte_tickets_vendidos', function () {
     return view('emails.reporte_tickets_vendidos');
 });
 
+Route::get('vistahorizontal', function () {
+    return view('user.single_coursenew');
+});
+
 Auth::routes();
 
 
