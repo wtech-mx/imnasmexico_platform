@@ -69,12 +69,12 @@
                                             </div>
                                             <div class="col-3">
                                                 <label for="">Precio</label>
-                                                <input type="number" name="campo2[]" class="form-control d-inline-block" >
+                                                <input type="number" name="campo2[]" class="form-control d-inline-block precio" >
 
                                             </div>
                                             <div class="col-3">
                                                 <label for="">Cantidad</label>
-                                                <input type="number" name="campo3[]" class="form-control d-inline-block" style="width: 65%;">
+                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad" style="width: 65%;">
                                                 <button type="button" class="eliminarCampo" style="border-radius: 9px;margin-left: 0.2rem;">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
@@ -121,7 +121,7 @@
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="name">Total</label>
-                                <input id="total" name="total" type="number" class="form-control"  >
+                                <input id="total" name="total" type="text" class="form-control" readonly>
                             </div>
                         </div>
 

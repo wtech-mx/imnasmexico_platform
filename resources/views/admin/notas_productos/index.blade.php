@@ -114,58 +114,58 @@
     });
 
 document.addEventListener('DOMContentLoaded', function() {
-    var agregarCampoBtn = document.getElementById('agregarCampo');
-    var agregarCampoBtn2 = document.getElementById('agregarCampo2');
-    var camposContainer = document.getElementById('camposContainer');
-    var camposContainer2 = document.getElementById('camposContainer2');
-    var contadorCampos = 1;
-    var contadorCampos2 = 1;
+  var agregarCampoBtn = document.getElementById('agregarCampo');
+  var camposContainer = document.getElementById('camposContainer');
+  var contadorCampos = 1;
 
-    agregarCampoBtn.addEventListener('click', function() {
-        var nuevoCampo = camposContainer.firstElementChild.cloneNode(true);
-        actualizarNombresCampos(nuevoCampo);
-        camposContainer.appendChild(nuevoCampo);
-        contadorCampos++;
+  agregarCampoBtn.addEventListener('click', function() {
+    var nuevoCampo = camposContainer.firstElementChild.cloneNode(true);
+    actualizarNombresCampos(nuevoCampo);
+    camposContainer.appendChild(nuevoCampo);
+    contadorCampos++;
+  });
+
+  camposContainer.addEventListener('click', function(event) {
+    if (event.target.closest('.eliminarCampo')) {
+        var campo = event.target.closest('.campo');
+        campo.parentNode.removeChild(campo);
+        calcularTotal(); // Llamar a calcularTotal() después de eliminar el campo
+    }
     });
 
-    agregarCampoBtn2.addEventListener('click', function() {
-        var nuevoCampo2 = camposContainer2.firstElementChild.cloneNode(true);
-        actualizarNombresCampos2(nuevoCampo2);
-        camposContainer2.appendChild(nuevoCampo2);
-        contadorCampos2++;
-    });
 
-    camposContainer.addEventListener('click', function(event) {
-        if (event.target.classList.contains('eliminarCampo')) {
-            var campo = event.target.parentNode.parentNode;
-            campo.parentNode.removeChild(campo);
-        }
-    });
+  camposContainer.addEventListener('change', function(event) {
+    if (event.target.classList.contains('precio') || event.target.classList.contains('cantidad')) {
+      calcularTotal();
+    }
+  });
 
-    camposContainer2.addEventListener('click', function(event) {
-        if (event.target.classList.contains('eliminarCampo2')) {
-            var campo2 = event.target.parentNode.parentNode;
-            campo2.parentNode.removeChild(campo2);
-        }
+  function actualizarNombresCampos(campo) {
+    var camposInput = campo.querySelectorAll('input[name^="campo"]');
+    camposInput.forEach(function(input) {
+      var nombreCampo = input.getAttribute('name');
+      input.setAttribute('name', nombreCampo + contadorCampos);
     });
+  }
 
-    function actualizarNombresCampos(campo) {
-        var camposInput = campo.querySelectorAll('input[name^="campo"]');
-        camposInput.forEach(function(input) {
-            var nombreCampo = input.getAttribute('name');
-            input.setAttribute('name', nombreCampo + contadorCampos);
-        });
+  function calcularTotal() {
+    var precios = document.querySelectorAll('.precio');
+    var cantidades = document.querySelectorAll('.cantidad');
+    var total = 0;
+
+    for (var i = 0; i < precios.length; i++) {
+      var precio = parseFloat(precios[i].value);
+      var cantidad = parseFloat(cantidades[i].value);
+
+      if (!isNaN(precio) && !isNaN(cantidad)) {
+        total += precio * cantidad;
+      }
     }
 
-    function actualizarNombresCampos2(campo) {
-        var camposInput2 = campo.querySelectorAll('input[name^="campo"]');
-        camposInput2.forEach(function(input) {
-            var nombreCampo2 = input.getAttribute('name');
-            input.setAttribute('name', nombreCampo2 + contadorCampos2);
-        });
-    }
-
+    document.getElementById('total').value = total.toFixed(2);
+  }
 });
+
 
 </script>
 @endsection
