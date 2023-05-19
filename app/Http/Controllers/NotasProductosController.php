@@ -259,21 +259,25 @@ class NotasProductosController extends Controller
             $producto->save();
         }
 
-        $total = DB::table('productos_notas_id')
-            ->selectRaw('SUM(price) as total')
-            ->where('id_notas_productos', $producto->id_notas_productos)
-            ->value('total');
+        $sum_total = DB::table('productos_notas_id')->get();
+        $total_pro = 0;
+        foreach($sum_total as  $productos){
+            $precio = $productos->price;
+            $cantidad = $productos->cantidad;
+            $subtotal = $precio * $cantidad;
+            $total_pro += $subtotal;
+        }
 
         $nota = NotasProductos::where('id', '=', $producto->id_notas_productos)->first();
         if ($nota->tipo == 'Fijo') {
             $descuento = $nota->restante;
-            $total -= $descuento;
+            $total_pro -= $descuento;
         }elseif ($nota->tipo == 'Porcentaje') {
             $descuento = $nota->restante / 100;
-            $descuentoAplicado = $nota->total * $descuento;
-            $total -= $descuentoAplicado;
+            $descuentoAplicado = $total_pro * $descuento;
+            $total_pro -= $descuentoAplicado;
         }
-        $nota->total = $total;
+        $nota->total = $total_pro;
         $nota->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
