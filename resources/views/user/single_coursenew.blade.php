@@ -209,7 +209,7 @@
             <div class="card_single_horizon">
                 <div class="d-flex justify-content-between">
                     <h2 class="title_curso mb-3">Información</h2>
-                    <img class="icon_nav_course" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="">
+                    <img class="icon_nav_course" src="{{asset('assets/user/icons/informacion.png')}}" alt="">
                 </div>
 
 
