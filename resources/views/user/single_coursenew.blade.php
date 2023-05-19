@@ -167,7 +167,7 @@
                                                     <div class="col-12 mt-3">
                                                         <strong style="color: #836262">{{$ticket->nombre}}</strong>
                                                     </div>
-                                                    <div class="col-6 col-lg-4 mt-3">
+                                                    <div class="col-6 col-lg-6 mt-3">
                                                         @if ($ticket->descuento == NULL)
                                                             <h5 style="color: #836262"><strong>$ {{ $precio }}</strong></h5>
                                                         @else
@@ -176,7 +176,7 @@
                                                         @endif
                                                     </div>
 
-                                                    <div class="col-6 col-lg-8 mt-3">
+                                                    <div class="col-6 col-lg-6 mt-3">
                                                         <p class="btn-holder">
                                                             <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
                                                                 <i class="fas fa-ticket-alt"></i> Comprar
@@ -612,7 +612,7 @@
                                     <div class="col-12 mt-3">
                                         <strong style="color: #836262">{{$ticket->nombre}}</strong>
                                     </div>
-                                    <div class="col-6 col-lg-4 mt-3">
+                                    <div class="col-6 col-lg-8 mt-3">
                                         @if ($ticket->descuento == NULL)
                                             <h5 style="color: #836262"><strong>${{$precio}}</strong></h5>
                                         @else
@@ -621,7 +621,7 @@
                                         @endif
                                     </div>
 
-                                    <div class="col-6 col-lg-8 mt-3">
+                                    <div class="col-6 col-lg-4 mt-3">
                                         <p class="btn-holder">
                                             <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
                                                 <i class="fas fa-ticket-alt"></i> Comprar

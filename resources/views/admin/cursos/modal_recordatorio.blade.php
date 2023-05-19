@@ -20,11 +20,11 @@
                         <div class="d-flex justify-content-center">
                             <nav class="mt-3 mb-3">
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <button class="nav-link active" id="nav-interesados-tab" data-bs-toggle="tab" data-bs-target="#nav-interesados" type="button" role="tab" aria-controls="nav-interesados" aria-selected="true">
+                                <button class="nav-link active" id="nav-interesados-tab{{ $curso->id }}" data-bs-toggle="tab" data-bs-target="#nav-interesados{{ $curso->id }}" type="button" role="tab" aria-controls="nav-interesados" aria-selected="true">
                                     Interesados
                                 </button>
 
-                                <button class="nav-link" id="nav-registrar-tab" data-bs-toggle="tab" data-bs-target="#nav-registrar" type="button" role="tab" aria-controls="nav-registrar" aria-selected="false">
+                                <button class="nav-link" id="nav-registrar-tab{{ $curso->id }}" data-bs-toggle="tab" data-bs-target="#nav-registrar{{ $curso->id }}" type="button" role="tab" aria-controls="nav-registrar" aria-selected="false">
                                     Registrar
                                 </button>
                                 </div>
@@ -32,7 +32,7 @@
                         </div>
 
                           <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-interesados" role="tabpanel" aria-labelledby="nav-interesados-tab" tabindex="0">
+                            <div class="tab-pane fade show active" id="nav-interesados{{ $curso->id }}" role="tabpanel" aria-labelledby="nav-interesados-tab{{ $curso->id }}" tabindex="0">
                                 <div class="row">
                                             @foreach ($curso->RecordatoriosCursos as $recordatorio)
                                             <div class="col-3 mt-2 mb-2">
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
 
-                            <div class="tab-pane fade" id="nav-registrar" role="tabpanel" aria-labelledby="nav-registrar-tab" tabindex="0">
+                            <div class="tab-pane fade" id="nav-registrar{{ $curso->id }}" role="tabpanel" aria-labelledby="nav-registrar-tab{{ $curso->id }}" tabindex="0">
                                 <form method="POST" action="{{ route('recordatorio.store') }}" enctype="multipart/form-data" role="form">
                                     @csrf
                                     <input id="id_curso" name="id_curso" type="hidden" value="{{$curso->id}}">
