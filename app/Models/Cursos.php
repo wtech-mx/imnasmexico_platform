@@ -63,7 +63,7 @@ class Cursos extends Model
 
     public function RecordatoriosCursos()
     {
-        return $this->hasMany(RecordatoriosCursos::class, 'id_usuario');
+        return $this->hasMany(RecordatoriosCursos::class, 'id_curso');
     }
 
 }

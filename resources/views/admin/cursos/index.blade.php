@@ -72,7 +72,7 @@
 
                                                 <td>
                                                     <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#recordatorio_modal_{{ $curso->id }}">
-                                                        <i class="fa fa-bell"></i>
+                                                        <i class="fa fa-bell"></i> {{ $curso->RecordatoriosCursos->count()}}
                                                     </a>
                                                     @if ($curso->modalidad == 'Online')
                                                         <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#update_modal_{{ $curso->id }}">

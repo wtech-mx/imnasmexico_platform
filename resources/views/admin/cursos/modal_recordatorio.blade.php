@@ -33,7 +33,33 @@
 
                           <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-interesados" role="tabpanel" aria-labelledby="nav-interesados-tab" tabindex="0">
+                                <div class="row">
+                                            @foreach ($curso->RecordatoriosCursos as $recordatorio)
+                                            <div class="col-3 mt-2 mb-2">
+                                                {{ $recordatorio->nombre }}
+                                            </div>
 
+                                            <div class="col-3 mt-2 mb-2">
+                                                {{ $recordatorio->telefono }}
+                                            </div>
+
+                                            <div class="col-3 mt-2 mb-2">
+                                                @if ($recordatorio->estatus == 'No enviado')
+                                                <span class="badge badge-warning badge-sm">---</span>
+                                                @elseif ($recordatorio->estatus == 'Enviado')
+                                                <span class="badge badge-success badge-sm">---</span>
+                                                @elseif ($recordatorio->estatus == 'Interesado')
+                                                <span class="badge badge-danger badge-sm">---</span>
+                                                @endif
+                                            </div>
+
+                                            <div class="col-3 mt-2 mb-2">
+                                                <a type="button" class="btn btn-sm" target="_blank"href="https://wa.me/52{{$recordatorio->telefono}}?text=Hola%20{{$recordatorio->nombre}}"
+                                                        style="background: #00BB2D; color: #ffff">
+                                                        <i class="fa fa-whatsapp"></i></a>
+                                            </div>
+                                            @endforeach
+                                </div>
                             </div>
 
                             <div class="tab-pane fade" id="nav-registrar" role="tabpanel" aria-labelledby="nav-registrar-tab" tabindex="0">
