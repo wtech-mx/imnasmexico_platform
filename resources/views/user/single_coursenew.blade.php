@@ -8,7 +8,6 @@
 <meta property="og:image" content="https://plataforma.imnasmexico.com{{asset('curso/'. $curso->foto) }}">
 <meta property="og:title" content=" {{$curso->nombre}}">
 <meta property="og:description" content=" <?php echo $curso->descripcion?>">
-<meta property="og:image" content="https://plataforma.imnasmexico.com{{asset('curso/'. $curso->foto) }}">
 <meta property="og:image:alt" content=" {{$curso->nombre}}">
 
 <link href="{{asset('assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
