@@ -35,8 +35,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
     <span class="mask_calendar"></span>
 
     <div class="carousel-inner">
-
-            <div class="carousel-item active" style="background-image: url('{{asset('assets/user/utilidades/piedras_calientes.jpg')}}');height: auto;position: relative;" >
+            <div class="carousel-item active" style="background-image: url('{{asset('curso/'. $curso->foto) }}');height: auto;position: relative;" >
                 <div class="row postion_row_caledanrio space_single_new">
                     <div class="col-12 col-md-6">
                         <div class="conten_slilder_full">
