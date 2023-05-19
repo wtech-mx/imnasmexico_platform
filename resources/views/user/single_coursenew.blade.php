@@ -5,7 +5,12 @@
 @endsection
 
 @section('css_custom')
-<meta property="og:image" content="https://plataforma.imnasmexico.com/{{asset('curso/'. $curso->foto) }}">
+<meta property="og:image" content="https://plataforma.imnasmexico.com{{asset('curso/'. $curso->foto) }}">
+<meta property="og:title" content=" {{$curso->nombre}}">
+<meta property="og:description" content=" <?php echo $curso->descripcion?>">
+<meta property="og:image" content="https://plataforma.imnasmexico.com{{asset('curso/'. $curso->foto) }}">
+<meta property="og:image:alt" content=" {{$curso->nombre}}">
+
 <link href="{{asset('assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/calendario.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/single_course_horizon.css')}}" rel="stylesheet" />
@@ -16,20 +21,20 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
 
 @endsection
-@php
-use Carbon\Carbon;
-$fecha_ini = $curso->fecha_inicial;
-$fecha_inicial = Carbon::createFromFormat('Y-m-d', $fecha_ini)->locale('es')->isoFormat('D [de] MMMM');
+    @php
+    use Carbon\Carbon;
+    $fecha_ini = $curso->fecha_inicial;
+    $fecha_inicial = Carbon::createFromFormat('Y-m-d', $fecha_ini)->locale('es')->isoFormat('D [de] MMMM');
 
-$fecha_f = $curso->fecha_final;
-$fecha_final = Carbon::createFromFormat('Y-m-d', $fecha_f)->locale('es')->isoFormat('D [de] MMMM');
+    $fecha_f = $curso->fecha_final;
+    $fecha_final = Carbon::createFromFormat('Y-m-d', $fecha_f)->locale('es')->isoFormat('D [de] MMMM');
 
-$horaInicial = $curso->hora_inicial;
-$hora_inicial = Carbon::createFromFormat('H:i:s', $horaInicial)->format('h:i A');
+    $horaInicial = $curso->hora_inicial;
+    $hora_inicial = Carbon::createFromFormat('H:i:s', $horaInicial)->format('h:i A');
 
-$horaFinal = $curso->hora_final;
-$hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
-@endphp
+    $horaFinal = $curso->hora_final;
+    $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
+    @endphp
 @section('content')
 
 <div id="carousel_full" class="carousel slide" data-bs-ride="carousel">
