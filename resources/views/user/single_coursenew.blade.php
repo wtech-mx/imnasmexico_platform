@@ -33,6 +33,7 @@
 
     $horaFinal = $curso->hora_final;
     $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
+
     @endphp
 @section('content')
 
@@ -160,14 +161,17 @@
                                         @else
                                             <div class="row mb-3">
                                                 @foreach ($tickets as $ticket)
+                                                @php
+                                                        $precio = number_format($ticket->precio, 2, '.', ',');
+                                                @endphp
                                                     <div class="col-12 mt-3">
                                                         <strong style="color: #836262">{{$ticket->nombre}}</strong>
                                                     </div>
                                                     <div class="col-6 col-lg-4 mt-3">
                                                         @if ($ticket->descuento == NULL)
-                                                            <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                            <h5 style="color: #836262"><strong>$ {{ $precio }}</strong></h5>
                                                         @else
-                                                            <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                            <del style="color: #836262"><strong>De ${{ $precio }}</strong></del>
                                                             <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                                         @endif
                                                     </div>
@@ -203,7 +207,12 @@
     <div class="row" >
         <div class="col-12 col-md-6">
             <div class="card_single_horizon">
-                <h2 class="title_curso mb-3">Información</h2>
+                <div class="d-flex justify-content-between">
+                    <h2 class="title_curso mb-3">Información</h2>
+                    <img class="icon_nav_course" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="">
+                </div>
+
+
                 <h4> {{$curso->nombre}}</h4>
                 <p class="text_cards_horizon">
                     <?php echo $curso->descripcion?>
@@ -211,7 +220,11 @@
             </div>
 
             <div class="card_single_horizon">
-                <h2 class="title_curso mb-3">Temario</h2>
+                <div class="d-flex justify-content-between">
+                    <h2 class="title_curso mb-3">Temario</h2>
+                    <img class="icon_nav_course" src="{{asset('assets/user/icons/prueba.webp')}}" alt="">
+                </div>
+
                 <p class="text_cards_horizon">
                     <?php echo $curso->temario?>
                 </p>
@@ -231,7 +244,11 @@
 
 
             <div class="card_single_horizon">
-                <h2 class="title_curso mb-3">Preguntas Frecuentes</h2>
+                <div class="d-flex justify-content-between">
+                    <h2 class="title_curso mb-3">Preguntas Frecuentes</h2>
+                    <img class="icon_nav_course" src="{{asset('assets/user/icons/mujer_preguntas.png')}}" alt="">
+                </div>
+
                 <p class="text_preguntas_material">
                     <strong>1. ¿Es necesario tener conocimientos previos?</strong><br>
                     No se requiere ningún conocimiento ni estudios previos, comenzamos desde 0% y cualquier persona que esté interesada en la materia, lo puede estudiar.<br>
@@ -318,13 +335,17 @@
         <div class="col-12 col-md-6">
 
             <div class="card_single_horizon">
-                <h2 class="title_curso mb-3">
-                    @if ($curso->modalidad == 'Presencial')
-                     Materiales
-                     @else
-                     Productos
-                     @endif
-                </h2>
+                <div class="d-flex justify-content-between">
+                    <h2 class="title_curso mb-3">
+                        @if ($curso->modalidad == 'Presencial')
+                         Materiales
+                         @else
+                         Productos
+                         @endif
+                    </h2>
+                    <img class="icon_nav_course" src="{{asset('assets/user/icons/carrito-de-compras.webp')}}" alt="">
+                </div>
+
 
                 @if ($curso->modalidad == 'Presencial')
                 <p class="text_cards_horizon text-left">El material de clase es obligatorio traerlo, en caso de no tenerlo, contamos con tienda dentro de las instalaciones para que puedas hacer la compra de tu material.</p>
@@ -348,12 +369,16 @@
             </div>
 
             <div class="card_single_horizon">
-                <h2 class="title_curso mb-3">
-                    @if ($curso->modalidad == 'Presencial')
-                    Dirección
-                    @else
-                    Liga Clase
-                    @endif
+                    <div class="d-flex justify-content-between">
+                        <h2 class="title_curso mb-3">
+                            @if ($curso->modalidad == 'Presencial')
+                            Dirección
+                            @else
+                            Liga Clase
+                            @endif
+                        </h2>
+                        <img class="icon_nav_course" src="{{asset('assets/user/icons/meet.png')}}" alt="">
+                    </div>
 
                     @if ($curso->modalidad == 'Presencial')
                     <div class="d-flex justify-content-start">
@@ -387,11 +412,15 @@
                             @endif
                         @endguest
                     @endif
-                </h2>
             </div>
 
             <div class="card_single_horizon">
-                <h2 class="title_curso mb-3">Documentos</h2>
+                <div class="d-flex justify-content-between">
+                    <h2 class="title_curso mb-3">
+                        Documentos
+                    </h2>
+                    <img class="icon_nav_course" src="{{asset('assets/user/icons/documentos.png')}}" alt="">
+                </div>
                     <div class="row">
                             @if ($curso->redconocer == 1)
                                 <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
@@ -483,7 +512,12 @@
             </div>
 
             <div class="card_single_horizon">
-                <h2 class="title_curso">Fecha y Hora</h2>
+                <div class="d-flex justify-content-between">
+                    <h2 class="title_curso mb-3">
+                        Fecha y Hora
+                    </h2>
+                    <img class="icon_nav_course" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="">
+                </div>
                 <p class="text_cards_horizon">
                     {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
                     - {{$fecha_final}}
@@ -572,14 +606,17 @@
                         @else
                             <div class="row mb-3">
                                 @foreach ($tickets as $ticket)
+                                @php
+                                        $precio = number_format($ticket->precio, 2, '.', ',');
+                                @endphp
                                     <div class="col-12 mt-3">
                                         <strong style="color: #836262">{{$ticket->nombre}}</strong>
                                     </div>
                                     <div class="col-6 col-lg-4 mt-3">
                                         @if ($ticket->descuento == NULL)
-                                            <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                            <h5 style="color: #836262"><strong>${{$precio}}</strong></h5>
                                         @else
-                                            <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                            <del style="color: #836262"><strong>De ${{$precio}}</strong></del>
                                             <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
                                         @endif
                                     </div>
