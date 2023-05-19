@@ -40,7 +40,7 @@ class CursoUsersController extends Controller
                         ->where('id_curso','=', $curso->id)
                         ->first();
 
-        return view('user.single_course', compact('curso', 'tickets', 'usuario_compro','cursos'));
+        return view('user.single_coursenew', compact('curso', 'tickets', 'usuario_compro','cursos'));
     }
 
     public function paquetes()

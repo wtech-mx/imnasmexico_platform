@@ -191,6 +191,10 @@
     width: 60%;
 }
 
+.space_single_new{
+    margin-top: 15%;
+}
+
 @media only screen and (max-width: 1390px) {
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -238,6 +242,15 @@
 
     .space_cs_rs{
         margin-top: 1rem!important;
+    }
+
+    .space_single_new{
+        margin-top: 20%;
+    }
+
+    .card_single_horizon2 {
+        width: 95%;
+        opacity: 0.9;
     }
 }
 
@@ -345,8 +358,8 @@
     }
 
     .img_card_certificaciones {
-        width: 60px;
-        margin-top: 10px;
+        width: 80%;
+        margin-top: 0px;
     }
 
     .dos_img_cert{

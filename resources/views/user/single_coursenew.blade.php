@@ -34,12 +34,11 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 <div id="carousel_full" class="carousel slide" data-bs-ride="carousel">
     <span class="mask_calendar"></span>
 
-
     <div class="carousel-inner">
 
-            <div class="carousel-item active" style="background-image: url('{{asset('curso/'. $curso->foto) }}')">
-                <div class="row postion_row_caledanrio">
-                    <div class="col-6">
+            <div class="carousel-item active" style="background-image: url('{{asset('assets/user/utilidades/piedras_calientes.jpg')}}');height: auto;position: relative;" >
+                <div class="row postion_row_caledanrio space_single_new">
+                    <div class="col-12 col-md-6">
                         <div class="conten_slilder_full">
                             <h1 class="text-white titulo titulo_full" style="">
                                 {{$curso->nombre}}
@@ -53,133 +52,135 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                 </div>
                             </a>
 
-                            <h3 class="text-white parrafo_full mb-4 mb-lg-5 mb-md-4">
+                            <h3 class="text-white parrafo_full mb-4 mb-lg-5 mb-md-4 desaparecer_contenedor_sm">
                                 <?php echo $curso->descripcion?>
                             </h3>
                         </div>
                     </div>
 
-                    <div class="col-6">
-                        <div class="card_single_horizon2">
-                            <h2 class="title_curso">Fecha y Hora</h2>
-                            <p class="text_cards_horizon">
-                                {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
-                                - {{$fecha_final}}
-                                @endif,
-                                @if ($curso->sin_fin == '1')
-                                    {{$hora_inicial}}</p>
-                                @else
-                                    {{$hora_inicial}} - {{$hora_final}}</p>
-                                @endif
-                            </p>
-                            <h2 class="title_curso">Modalidad</h2>
-                            <p class="text_cards_horizon">
-                                @if ($curso->modalidad == 'Presencial')
-                                Castilla 136, Álamos, Benito Juárez, 03400, CDMX
-                                @else
-                                Google Meet
-                                @endif
-                            </p>
-                            @if ($curso->estatus == 1)
-                            <a class="btn btn-primario space_cs_rs" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="false" aria-controls="collapseinfo" style="display:block ">
-                                <div class="d-flex justify-content-start">
-                                            @if ($curso->precio == 0)
-                                                <p class="card_tittle_btn_grid my-auto">
-                                                    Registrarse
-                                                </p>
-                                            @else
-                                                <p class="card_tittle_btn_grid my-auto">
-                                                    Comprar ahora
-                                                </p>
-                                            @endif
-                                    <div class="card_bg_btn ">
-                                        <i class="fas fa-cart-plus card_icon_btn"></i>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <a class="btn btn-secundario space_cs_rs mt-3" href="#contactenos" style="display:block ">
-                                <div class="d-flex justify-content-start">
-                                    <p class="card_tittle_btn my-auto">
-                                        Contáctanos
-                                    </p>
-                                    <div class="card_bg_btn_secundario">
-                                        <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
-                                    </div>
-                                </div>
-                            </a>
-
-                            <div class="collapse mt-3" id="collapseinfo">
-                                <div class="card card-body card_colapsable_comprar">
-                                    @if($curso->precio == 0)
-                                        <div class="row mb-3">
-                                            <form method="POST" action="{{ route('clases_gratis') }}"role="form">
-                                                @csrf
-                                                <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
-                                                <div class="row">
-                                                    <div class="col-12">
-                                                        <div class="input-group flex-nowrap mt-4">
-                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-12">
-                                                        <div class="input-group flex-nowrap mt-4">
-                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
-                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-12">
-                                                        <div class="input-group flex-nowrap mt-4">
-                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
-                                                            <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col-12">
-                                                        <div class="d-flex justify-content-center">
-                                                            <button class="btn_pagar_checkout " type="submit">Registrarse</button>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </form>
-                                        </div>
+                    <div class="col-12 col-md-6">
+                        <div class="d-flex justify-content-start">
+                            <div class="card_single_horizon2 mt-3 mt-md-0">
+                                <h2 class="title_curso">Fecha y Hora</h2>
+                                <p class="text_cards_horizon">
+                                    {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
+                                    - {{$fecha_final}}
+                                    @endif,
+                                    @if ($curso->sin_fin == '1')
+                                        {{$hora_inicial}}</p>
                                     @else
-                                        <div class="row mb-3">
-                                            @foreach ($tickets as $ticket)
-                                                <div class="col-12 mt-3">
-                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
-                                                </div>
-                                                <div class="col-6 col-lg-4 mt-3">
-                                                    @if ($ticket->descuento == NULL)
-                                                        <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
-                                                    @else
-                                                        <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
-                                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
-                                                    @endif
-                                                </div>
-
-                                                <div class="col-6 col-lg-8 mt-3">
-                                                    <p class="btn-holder">
-                                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
-                                                            <i class="fas fa-ticket-alt"></i> Comprar
-                                                        </a>
-                                                    </p>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
-                                                </div>
-                                            @endforeach
-
-                                        </div>
+                                        {{$hora_inicial}} - {{$hora_final}}</p>
                                     @endif
+                                </p>
+                                <h2 class="title_curso">Modalidad</h2>
+                                <p class="text_cards_horizon">
+                                    @if ($curso->modalidad == 'Presencial')
+                                    Castilla 136, Álamos, Benito Juárez, 03400, CDMX
+                                    @else
+                                    Google Meet
+                                    @endif
+                                </p>
+                                @if ($curso->estatus == 1)
+                                <a class="btn btn-primario space_cs_rs" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="true" aria-controls="collapseinfo" style="display:block ">
+                                    <div class="d-flex justify-content-start">
+                                                @if ($curso->precio == 0)
+                                                    <p class="card_tittle_btn_grid my-auto">
+                                                        Registrarse
+                                                    </p>
+                                                @else
+                                                    <p class="card_tittle_btn_grid my-auto">
+                                                        Comprar ahora
+                                                    </p>
+                                                @endif
+                                        <div class="card_bg_btn ">
+                                            <i class="fas fa-cart-plus card_icon_btn"></i>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <a class="btn btn-secundario space_cs_rs mt-3" href="#contactenos" style="display:block ">
+                                    <div class="d-flex justify-content-start">
+                                        <p class="card_tittle_btn my-auto">
+                                            Contáctanos
+                                        </p>
+                                        <div class="card_bg_btn_secundario">
+                                            <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <div class="collapse show mt-3" id="collapseinfo">
+                                    <div class="card card-body card_colapsable_comprar">
+                                        @if($curso->precio == 0)
+                                            <div class="row mb-3">
+                                                <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                    @csrf
+                                                    <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                                <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                                <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div class="input-group flex-nowrap mt-4">
+                                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                                <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-12">
+                                                            <div class="d-flex justify-content-center">
+                                                                <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        @else
+                                            <div class="row mb-3">
+                                                @foreach ($tickets as $ticket)
+                                                    <div class="col-12 mt-3">
+                                                        <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                    </div>
+                                                    <div class="col-6 col-lg-4 mt-3">
+                                                        @if ($ticket->descuento == NULL)
+                                                            <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                                        @else
+                                                            <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                                            <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
+                                                        @endif
+                                                    </div>
+
+                                                    <div class="col-6 col-lg-8 mt-3">
+                                                        <p class="btn-holder">
+                                                            <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                                <i class="fas fa-ticket-alt"></i> Comprar
+                                                            </a>
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                                    </div>
+                                                @endforeach
+
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
+                                @endif
                             </div>
-                        @endif
                         </div>
                     </div>
                 </div>
@@ -346,11 +347,11 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
                     @if ($curso->modalidad == 'Presencial')
                     <div class="d-flex justify-content-start">
-                        <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                        <iframe class="map_custom2 mt-3 mb-3" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                         </iframe>
                     </div>
-                    <p class="text_cards_horizon mt-3">
-                        Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México
+                    <p class="text_cards_horizon ">
+                        <a href="https://goo.gl/maps/NRt7RT1TEkEnfDW38" target="_blank" style="text-decoration: none;color:#836262">Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México</a>
                     </p>
                     @else
                     <p class="text_cards_horizon">
@@ -381,7 +382,7 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
             <div class="card_single_horizon">
                 <h2 class="title_curso mb-3">Documentos</h2>
-                        <div class="row">
+                    <div class="row">
                             @if ($curso->redconocer == 1)
                                 <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
                                     <div class="d-flex justify-content-center">
@@ -468,13 +469,178 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                                      </p>
                                 </div>
                             @endif
+                    </div>
+            </div>
+
+            <div class="card_single_horizon">
+                <h2 class="title_curso">Fecha y Hora</h2>
+                <p class="text_cards_horizon">
+                    {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
+                    - {{$fecha_final}}
+                    @endif,
+                    @if ($curso->sin_fin == '1')
+                        {{$hora_inicial}}</p>
+                    @else
+                        {{$hora_inicial}} - {{$hora_final}}</p>
+                    @endif
+                </p>
+                <h2 class="title_curso">Modalidad</h2>
+                <p class="text_cards_horizon">
+                    @if ($curso->modalidad == 'Presencial')
+                    Castilla 136, Álamos, Benito Juárez, 03400, CDMX
+                    @else
+                    Google Meet
+                    @endif
+                </p>
+                @if ($curso->estatus == 1)
+                <a class="btn btn-primario space_cs_rs" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="true" aria-controls="collapseinfo" style="display:block ">
+                    <div class="d-flex justify-content-start">
+                                @if ($curso->precio == 0)
+                                    <p class="card_tittle_btn_grid my-auto">
+                                        Registrarse
+                                    </p>
+                                @else
+                                    <p class="card_tittle_btn_grid my-auto">
+                                        Comprar ahora
+                                    </p>
+                                @endif
+                        <div class="card_bg_btn ">
+                            <i class="fas fa-cart-plus card_icon_btn"></i>
                         </div>
+                    </div>
+                </a>
+
+                <a class="btn btn-secundario space_cs_rs mt-3" href="#contactenos" style="display:block ">
+                    <div class="d-flex justify-content-start">
+                        <p class="card_tittle_btn my-auto">
+                            Contáctanos
+                        </p>
+                        <div class="card_bg_btn_secundario">
+                            <i class="fab fa-whatsapp card_icon_btn_secundario"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <div class="collapse show mt-3" id="collapseinfo">
+                    <div class="card card-body card_colapsable_comprar">
+                        @if($curso->precio == 0)
+                            <div class="row mb-3">
+                                <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                    @csrf
+                                    <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="input-group flex-nowrap mt-4">
+                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="input-group flex-nowrap mt-4">
+                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="input-group flex-nowrap mt-4">
+                                                <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-center">
+                                                <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        @else
+                            <div class="row mb-3">
+                                @foreach ($tickets as $ticket)
+                                    <div class="col-12 mt-3">
+                                        <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                    </div>
+                                    <div class="col-6 col-lg-4 mt-3">
+                                        @if ($ticket->descuento == NULL)
+                                            <h5 style="color: #836262"><strong>${{$ticket->precio}}</strong></h5>
+                                        @else
+                                            <del style="color: #836262"><strong>De ${{$ticket->precio}}</strong></del>
+                                            <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-6 col-lg-8 mt-3">
+                                        <p class="btn-holder">
+                                            <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                <i class="fas fa-ticket-alt"></i> Comprar
+                                            </a>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                    </div>
+                                @endforeach
+
+                            </div>
+                        @endif
+                    </div>
+                </div>
+                @endif
             </div>
 
         </div>
     </div>
 </section>
+@include('user.components.modal_certificados_single');
 {{-- Grid --}}
+{{-- slide de cursos --}}
+@include('user.components.carousel_courses')
+{{-- slide de cursos --}}
+
+{{--Contactanos --}}
+<section class="primario bg_overley" id="contactenos"  style="background-color:#F5ECE4;">
+    <div class="row border_row" style="">
+
+        <div class="col-12 col-md-6">
+            <h2 class="text-center tittle-contact">Contáctanos</h2>
+            <p class="text-center text-white">
+                Complementa tus conocimientos y conviértete un experto de la Cosmetología.
+            </p>
+
+            <form method="POST" action="{{ route('mensaje.form') }}"role="form">
+                @csrf
+                    <div class="form-group">
+                        <input type="text" class="form-control form_contact mt-4" name="nombre" id="nombre" placeholder="Nombre (requerido)" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control form_contact mt-4" name="mensaje" id="mensaje" placeholder="Message">
+                    </div>
+                    <input type="hidden" class="form-control form_contact mt-4" name="curso" id="curso" value="{{$curso->nombre}}">
+                    <input type="hidden" class="form-control form_contact mt-4" name="fecha" id="fecha" value="{{$curso->fecha_inicial}}">
+                    <input type="hidden" class="form-control form_contact mt-4" name="modalidad" id="modalidad" value="{{$curso->modalidad}}">
+
+                    <p class="text-center text-white">
+                        <button type="submit" class="btn btn_enfiar_form">Enviar <i class="fab fa-whatsapp"></i></button>
+                    </p>
+
+            </form>
+        </div>
+
+        <div class="col-12 col-md-6 desaparecer_contenedor_sm">
+                <div class="d-flex justify-content-center">
+                    <img class="img_contact" src="{{asset('assets/user/utilidades/piedras_calientes.jpg')}}" alt="">
+                </div>
+        </div>
+
+    </div>
+</section>
+
 
 @endsection
 
