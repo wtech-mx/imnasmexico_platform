@@ -5,6 +5,7 @@
 @endsection
 
 @section('css_custom')
+<meta property="og:image" content="{{asset('curso/'. $curso->foto) }}">
 <link href="{{asset('assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/calendario.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/single_course_horizon.css')}}" rel="stylesheet" />
