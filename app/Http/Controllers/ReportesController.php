@@ -256,6 +256,34 @@ class ReportesController extends Controller
             ->orderBy('fecha','DESC')
             ->get();
 
+            $orders_mp = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
+            ->where('pago', '>','0')
+            ->where('forma_pago', '=','Mercado Pago')
+            ->orderBy('fecha','DESC')
+            ->get();
+
+            $orders_stripe = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
+            ->where('pago', '>','0')
+            ->where('forma_pago', '=','STRIPE')
+            ->orderBy('fecha','DESC')
+            ->get();
+
+            $orders_nota = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
+            ->where('pago', '>','0')
+            ->where('forma_pago', '=','Nota')
+            ->orderBy('fecha','DESC')
+            ->get();
+
+            $orders_ext = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
+            ->where('pago', '>','0')
+            ->where('forma_pago', '=','Externo')
+            ->orderBy('fecha','DESC')
+            ->get();
+
             $totalPagado = $orders->sum('pago');
             $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
 
@@ -309,14 +337,40 @@ class ReportesController extends Controller
                 }
 
                 $totalPagado = 0;
+                $totalPagadoMP = 0;
+                $totalPagadoST = 0;
+                $totalPagadoExt = 0;
                 foreach ($orders as $order) {
                     $totalPagado += $order->pago;
                 }
+                foreach ($orders_mp as $order_mp) {
+                    $totalPagadoMP += $order_mp->pago;
+                }
+                foreach ($orders_stripe as $order_stripe) {
+                    $totalPagadoST += $order_stripe->pago;
+                }
+                foreach ($orders_ext as $order_ext) {
+                    $totalPagadoExt += $order_ext->pago;
+                }
                 $totalPagadoFormatted = number_format($totalPagado, 2, '.', ',');
+                $totalPagadoFormattedMP = number_format($totalPagadoMP, 2, '.', ',');
+                $totalPagadoFormattedST = number_format($totalPagadoST, 2, '.', ',');
+                $totalPagadoFormattedEX = number_format($totalPagadoExt, 2, '.', ',');
                 $output5 .=
                     '<h4 class="text-center mb-3">Total</h4>'.
                     '<h5 class="text-center">'.
                     '$ '.$totalPagadoFormatted.
+                    '<h4 class="text-center mb-3">Total MP</h4>'.
+                    '<h5 class="text-center">'.
+                    '$ '.$totalPagadoFormattedMP.
+                    '</h5>'.
+                    '<h4 class="text-center mb-3">Total STRIPE</h4>'.
+                    '<h5 class="text-center">'.
+                    '$ '.$totalPagadoFormattedST.
+                    '</h5>'.
+                    '<h4 class="text-center mb-3">Total Externo</h4>'.
+                    '<h5 class="text-center">'.
+                    '$ '.$totalPagadoFormattedEX.
                     '</h5>'.
                     '<div class="d-flex justify-content-center mt-3">'.
                     '<form method="POST" action="'.route('reporte_custom.store').'" enctype="multipart/form-data" role="form">'.
