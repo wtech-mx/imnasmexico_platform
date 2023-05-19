@@ -57,7 +57,13 @@
                             </a>
 
                             <h3 class="text-white parrafo_full mb-4 mb-lg-5 mb-md-4 desaparecer_contenedor_sm">
-                                <?php echo $curso->descripcion?>
+                                @php
+                                $descripcion = $curso->descripcion;
+                                if (strlen($descripcion) > 162) {
+                                    $descripcion = substr($descripcion, 0, 162) . '...</br><a href="#contenido"style="color:#836262;">Continuar leyendo</a>';
+                                    echo $descripcion;
+                                }
+                                @endphp
                             </h3>
                         </div>
                     </div>
@@ -193,8 +199,8 @@
     </div>
 
 {{-- Grid --}}
-<section class="primario bg_overley" style="background-color:#F5ECE4;">
-    <div class="row">
+<section class="primario bg_overley" style="background-color:#F5ECE4;" id="contenido">
+    <div class="row" >
         <div class="col-12 col-md-6">
             <div class="card_single_horizon">
                 <h2 class="title_curso mb-3">Información</h2>
