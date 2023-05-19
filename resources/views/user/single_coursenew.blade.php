@@ -60,7 +60,7 @@
                                 @php
                                 $descripcion = $curso->descripcion;
                                 if (strlen($descripcion) > 162) {
-                                    $descripcion = substr($descripcion, 0, 162) . '...</br><a href="#contenido"style="color:#836262;">Continuar leyendo</a>';
+                                    $descripcion = substr($descripcion, 0, 162) . '...</br><a href="#contenido"style="color:#836262;background: #fff;padding: 10px;border-radius: 19px;text-decoration: none;">Continuar leyendo</a>';
                                     echo $descripcion;
                                 }
                                 @endphp
