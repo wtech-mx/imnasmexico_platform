@@ -104,15 +104,16 @@
                                 <div class="tab-pane fade" id="nav-grabadas{{$video->id_tickets}}" role="tabpanel" aria-labelledby="nav-grabadas-tab" tabindex="0">
                                     <div class="row">
                                         @foreach($usuario_video as $user_video)
-                                                    <div class="col-12 col-lg-6">
-                                                        <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}}  - <strong>Día 1</strong></h5>
-                                                        @php
-                                                            $url = $user_video->clase_grabada;
-                                                            preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
-                                                            $id_link_drive = $matches[1];
-                                                        @endphp
-                                                        <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" class="iframe_clase"></iframe>
-                                                    </div>
+                                            @if ($video->Cursos->id == $user_video->id_curso)
+                                                <div class="col-12 col-lg-6">
+                                                    <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}}  - <strong>Día 1</strong></h5>
+                                                    @php
+                                                        $url = $user_video->clase_grabada;
+                                                        preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
+                                                        $id_link_drive = $matches[1];
+                                                    @endphp
+                                                    <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" class="iframe_clase"></iframe>
+                                                </div>
                                                 @if ( $user_video->clase_grabada2 != NULL)
                                                     <div class="col-12 col-lg-6">
                                                         <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 2</strong></h5>
@@ -160,6 +161,7 @@
                                                         <iframe src="https://drive.google.com/file/d/{{ $id_link_drive5 }}/preview" class="iframe_clase"></iframe>
                                                     </div>
                                                 @endif
+                                            @endif
                                         @endforeach
                                     </div>
                                 </div>
