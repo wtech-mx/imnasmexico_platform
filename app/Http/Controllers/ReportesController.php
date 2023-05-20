@@ -284,6 +284,13 @@ class ReportesController extends Controller
             ->orderBy('fecha','DESC')
             ->get();
 
+            $orders_nota = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
+            ->where('pago', '>','0')
+            ->where('forma_pago', '=','Nota')
+            ->orderBy('fecha','DESC')
+            ->get();
+
             $totalPagado = $orders->sum('pago');
             $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
 
@@ -304,9 +311,9 @@ class ReportesController extends Controller
 
             $output = "";
             $output2 = "";
-            $output3 = "";
             $output4 = "";
             $output5 = "";
+            $grafica = "";
 
             if($request->ajax()){
 
@@ -340,6 +347,8 @@ class ReportesController extends Controller
                 $totalPagadoMP = 0;
                 $totalPagadoST = 0;
                 $totalPagadoExt = 0;
+                $totalPagadoNota = 0;
+
                 foreach ($orders as $order) {
                     $totalPagado += $order->pago;
                 }
@@ -352,25 +361,20 @@ class ReportesController extends Controller
                 foreach ($orders_ext as $order_ext) {
                     $totalPagadoExt += $order_ext->pago;
                 }
+                foreach ($orders_nota as $order_nota) {
+                    $totalPagadoNota += $order_nota->pago;
+                }
+
                 $totalPagadoFormatted = number_format($totalPagado, 2, '.', ',');
                 $totalPagadoFormattedMP = number_format($totalPagadoMP, 2, '.', ',');
                 $totalPagadoFormattedST = number_format($totalPagadoST, 2, '.', ',');
                 $totalPagadoFormattedEX = number_format($totalPagadoExt, 2, '.', ',');
+                $totalPagadoFormattedNota = number_format($totalPagadoNota, 2, '.', ',');
+
                 $output5 .=
                     '<h4 class="text-center mb-3">Total</h4>'.
                     '<h5 class="text-center">'.
                     '$ '.$totalPagadoFormatted.
-                    '<h4 class="text-center mb-3">Total MP</h4>'.
-                    '<h5 class="text-center">'.
-                    '$ '.$totalPagadoFormattedMP.
-                    '</h5>'.
-                    '<h4 class="text-center mb-3">Total STRIPE</h4>'.
-                    '<h5 class="text-center">'.
-                    '$ '.$totalPagadoFormattedST.
-                    '</h5>'.
-                    '<h4 class="text-center mb-3">Total Externo</h4>'.
-                    '<h5 class="text-center">'.
-                    '$ '.$totalPagadoFormattedEX.
                     '</h5>'.
                     '<div class="d-flex justify-content-center mt-3">'.
                     '<form method="POST" action="'.route('reporte_custom.store').'" enctype="multipart/form-data" role="form">'.
@@ -380,8 +384,66 @@ class ReportesController extends Controller
                     '<button type="submit" class="btn close-modal"> Enviar Reporte</button>'.
                     '</form>'.
                     '</div>';
+                    $grafica = '<div class="d-flex justify-content-evenly"><h6>MP:<div class="grafica_syle" style="background: #2152ff;">-</div></br>$'.$totalPagadoFormattedMP.'</h6><h6>Stripe:<div class="grafica_syle" style="background: #3A416F;">-</div></br>$'.$totalPagadoFormattedST.'</h6><h6>Externo:<div class="grafica_syle" style="background: #f53939;">-</div></br>$'.$totalPagadoFormattedEX.'</h6><h6>Notas:<div class="grafica_syle" style="background: #17c1e8;">-</div></br>$'.$totalPagadoFormattedNota.'</h6></div><div class="card-body p-3"><div class="chart"><canvas id="doughnut-chart" class="chart-canvas" height="300"></canvas></div></div>';
+                    $script = '
+                    <script>var ctx3 = document.getElementById("doughnut-chart").getContext("2d");
 
+                    new Chart(ctx3, {
+                      type: "doughnut",
+                      data: {
+                        labels: ["Mercado Pago", "Stipe", "Externo", "Nota"],
+                        datasets: [{
+                          label: "Projects",
+                          weight: 9,
+                          cutout: 60,
+                          tension: 0.9,
+                          pointRadius: 2,
+                          borderWidth: 2,
+                          backgroundColor: ["#2152ff", "#3A416F", "#f53939", "#17c1e8"],
+                          data: ['.$totalPagadoMP.', '.$totalPagadoST.', '.$totalPagadoExt.', '.$totalPagadoNota.'],
+                          fill: false
+                        }],
+                      },
+                      options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                          legend: {
+                            display: false,
+                          }
+                        },
+                        interaction: {
+                          intersect: false,
+                          mode: "index",
+                        },
+                        scales: {
+                          y: {
+                            grid: {
+                              drawBorder: false,
+                              display: false,
+                              drawOnChartArea: false,
+                              drawTicks: false,
+                            },
+                            ticks: {
+                              display: false
+                            }
+                          },
+                          x: {
+                            grid: {
+                              drawBorder: false,
+                              display: false,
+                              drawOnChartArea: false,
+                              drawTicks: false,
+                            },
+                            ticks: {
+                              display: false,
+                            }
+                          },
+                        },
+                      },
+                    });</script>';
             }
+
 
             if ($cursosComprados) {
                 foreach ($cursosComprados as $curso) {
@@ -469,10 +531,12 @@ class ReportesController extends Controller
                     '</div>'.
                 '</div>'.
             '</div>'.
-        '</div>';
+            '</div>';
 
                 // return response()->json($output);
                 return response()->json([
+                    'grafica' => $grafica,
+                    'script' => $script,
                     'resultados' => $output,
                     'resultados2' => $output5
                 ]);

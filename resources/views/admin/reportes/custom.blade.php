@@ -5,6 +5,17 @@
 @endsection
 
 @section('content')
+
+<style>
+    .grafica_syle{
+        width: 30px;
+        margin-left: 10px;
+        border-radius: 9px;
+        font-variant: diagonal-fractions;
+        display: inline-block;
+    }
+</style>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
@@ -43,10 +54,12 @@
                                     <div id="resultados2"></div>
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="col-6">
-                            <h4 class="text-center mb-3">Grafica  proximamente</h4>
+                            <h4 class="text-center mb-3">Grafica</h4>
+                            <div id="grafica"></div>
                         </div>
 
                     </div>
@@ -62,6 +75,7 @@
 @endsection
 
 @section('datatable')
+<script src="{{asset('assets/admin/js/plugins/chartjs.min.js')}}"></script>
 
 <script>
 
@@ -84,16 +98,16 @@
                 '_token': token // Agregar el token CSRF a los datos enviados
             },
             success: function(response) {
-                $('#resultados').html(response.resultados);
-
                 $('#resultados2').html(response.resultados2);
+                $('#resultados').html(response.resultados);
+                $('#grafica').html(response.grafica);
+                $('body').append(response.script);
 
-                const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+            const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
                 deferRender:true,
                 paging: true,
                 pageLength: 10
             });
-
             const dataTableSearch2 = new simpleDatatables.DataTable("#datatable-search2", {
                 deferRender:true,
                 paging: true,
