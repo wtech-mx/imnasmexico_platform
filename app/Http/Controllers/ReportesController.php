@@ -44,8 +44,54 @@ class ReportesController extends Controller
         })
         ->values();
 
+            $orders_mp = Orders::where('fecha', $fechaHoraActual)
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','Mercado Pago')
+                ->orderBy('fecha','DESC')
+            ->get();
 
-        return view('admin.reportes.dia', compact('orders', 'totalPagadoFormateado', 'cursosComprados'));
+            $orders_stripe = Orders::where('fecha', $fechaHoraActual)
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','STRIPE')
+                ->orderBy('fecha','DESC')
+            ->get();
+
+            $orders_nota = Orders::where('fecha', $fechaHoraActual)
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','Nota')
+                ->orderBy('fecha','DESC')
+            ->get();
+
+            $orders_ext = Orders::where('fecha', $fechaHoraActual)
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','Externo')
+                ->orderBy('fecha','DESC')
+            ->get();
+
+            $totalPagadoMP = 0;
+            $totalPagadoST = 0;
+            $totalPagadoExt = 0;
+            $totalPagadoNota = 0;
+
+            foreach ($orders_mp as $order_mp) {
+                $totalPagadoMP += $order_mp->pago;
+            }
+            foreach ($orders_stripe as $order_stripe) {
+                $totalPagadoST += $order_stripe->pago;
+            }
+            foreach ($orders_ext as $order_ext) {
+                $totalPagadoExt += $order_ext->pago;
+            }
+            foreach ($orders_nota as $order_nota) {
+                $totalPagadoNota += $order_nota->pago;
+            }
+
+
+        return view('admin.reportes.dia', compact('orders', 'totalPagadoFormateado', 'cursosComprados','totalPagadoMP','totalPagadoST','totalPagadoExt','totalPagadoNota'));
     }
 
     public function reporte_email_dia(){
@@ -112,7 +158,53 @@ class ReportesController extends Controller
             })
             ->values();
 
-        return view('admin.reportes.semana', compact('orders', 'orders', 'cursosComprados'));
+            $orders_mp = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','Mercado Pago')
+                ->orderBy('fecha','DESC')
+            ->get();
+
+            $orders_stripe = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','STRIPE')
+                ->orderBy('fecha','DESC')
+            ->get();
+
+            $orders_nota = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','Nota')
+                ->orderBy('fecha','DESC')
+            ->get();
+
+            $orders_ext = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','Externo')
+                ->orderBy('fecha','DESC')
+            ->get();
+
+            $totalPagadoMP = 0;
+            $totalPagadoST = 0;
+            $totalPagadoExt = 0;
+            $totalPagadoNota = 0;
+
+            foreach ($orders_mp as $order_mp) {
+                $totalPagadoMP += $order_mp->pago;
+            }
+            foreach ($orders_stripe as $order_stripe) {
+                $totalPagadoST += $order_stripe->pago;
+            }
+            foreach ($orders_ext as $order_ext) {
+                $totalPagadoExt += $order_ext->pago;
+            }
+            foreach ($orders_nota as $order_nota) {
+                $totalPagadoNota += $order_nota->pago;
+            }
+
+        return view('admin.reportes.semana', compact('orders', 'orders', 'cursosComprados','totalPagadoMP','totalPagadoST','totalPagadoExt','totalPagadoNota'));
     }
 
     public function reporte_email_semanal(){
@@ -194,7 +286,53 @@ class ReportesController extends Controller
             })
             ->values();
 
-        return view('admin.reportes.mes', compact('orders', 'totalPagadoFormateado', 'cursosComprados'));
+            $orders_mp = Orders::whereBetween('fecha', [$fechaInicioMes, $fechaFinMes])
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','Mercado Pago')
+                ->orderBy('fecha','DESC')
+            ->get();
+
+            $orders_stripe = Orders::whereBetween('fecha', [$fechaInicioMes, $fechaFinMes])
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','STRIPE')
+                ->orderBy('fecha','DESC')
+            ->get();
+
+            $orders_nota = Orders::whereBetween('fecha', [$fechaInicioMes, $fechaFinMes])
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','Nota')
+                ->orderBy('fecha','DESC')
+            ->get();
+
+            $orders_ext = Orders::whereBetween('fecha', [$fechaInicioMes, $fechaFinMes])
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','Externo')
+                ->orderBy('fecha','DESC')
+            ->get();
+
+            $totalPagadoMP = 0;
+            $totalPagadoST = 0;
+            $totalPagadoExt = 0;
+            $totalPagadoNota = 0;
+
+            foreach ($orders_mp as $order_mp) {
+                $totalPagadoMP += $order_mp->pago;
+            }
+            foreach ($orders_stripe as $order_stripe) {
+                $totalPagadoST += $order_stripe->pago;
+            }
+            foreach ($orders_ext as $order_ext) {
+                $totalPagadoExt += $order_ext->pago;
+            }
+            foreach ($orders_nota as $order_nota) {
+                $totalPagadoNota += $order_nota->pago;
+            }
+
+        return view('admin.reportes.mes', compact('orders', 'totalPagadoFormateado', 'cursosComprados','totalPagadoMP','totalPagadoST','totalPagadoExt','totalPagadoNota'));
     }
 
     public function reporte_email_mes(){
@@ -251,44 +389,37 @@ class ReportesController extends Controller
         $fechaFinSemana = $request->get('fecha_fin');
 
             $orders = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
-            ->where('estatus', '1')
-            ->where('pago', '>','0')
-            ->orderBy('fecha','DESC')
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->orderBy('fecha','DESC')
             ->get();
 
             $orders_mp = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
-            ->where('estatus', '1')
-            ->where('pago', '>','0')
-            ->where('forma_pago', '=','Mercado Pago')
-            ->orderBy('fecha','DESC')
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','Mercado Pago')
+                ->orderBy('fecha','DESC')
             ->get();
 
             $orders_stripe = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
-            ->where('estatus', '1')
-            ->where('pago', '>','0')
-            ->where('forma_pago', '=','STRIPE')
-            ->orderBy('fecha','DESC')
-            ->get();
-
-            $orders_nota = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
-            ->where('estatus', '1')
-            ->where('pago', '>','0')
-            ->where('forma_pago', '=','Nota')
-            ->orderBy('fecha','DESC')
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','STRIPE')
+                ->orderBy('fecha','DESC')
             ->get();
 
             $orders_ext = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
-            ->where('estatus', '1')
-            ->where('pago', '>','0')
-            ->where('forma_pago', '=','Externo')
-            ->orderBy('fecha','DESC')
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','Externo')
+                ->orderBy('fecha','DESC')
             ->get();
 
             $orders_nota = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
-            ->where('estatus', '1')
-            ->where('pago', '>','0')
-            ->where('forma_pago', '=','Nota')
-            ->orderBy('fecha','DESC')
+                ->where('estatus', '1')
+                ->where('pago', '>','0')
+                ->where('forma_pago', '=','Nota')
+                ->orderBy('fecha','DESC')
             ->get();
 
             $totalPagado = $orders->sum('pago');

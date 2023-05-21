@@ -5,6 +5,15 @@
 @endsection
 
 @section('content')
+<style>
+    .grafica_syle{
+        width: 30px;
+        margin-left: 10px;
+        border-radius: 9px;
+        font-variant: diagonal-fractions;
+        display: inline-block;
+    }
+</style>
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
@@ -31,7 +40,22 @@
                             </div>
                         </div>
                         <div class="col-6">
-                            <h4 class="text-center mb-3">Grafica  proximamente</h4>
+                            <h4 class="text-center mb-3">Grafica</h4>
+                                <div class="d-flex justify-content-evenly">
+                                    @php
+                                        $totalPagadoFormattedMP = number_format($totalPagadoMP, 2, '.', ',');
+                                        $totalPagadoFormattedST = number_format($totalPagadoST, 2, '.', ',');
+                                        $totalPagadoFormattedEX = number_format($totalPagadoExt, 2, '.', ',');
+                                        $totalPagadoFormattedNota = number_format($totalPagadoNota, 2, '.', ',');
+                                    @endphp
+                                    <h6>MP:<div class="grafica_syle" style="background: #2152ff;">-</div></br>$ {{ $totalPagadoFormattedMP }}</h6>
+                                    <h6>Stripe:<div class="grafica_syle" style="background: #3A416F;">-</div></br>$ {{ $totalPagadoFormattedST }}</h6>
+                                    <h6>Externo:<div class="grafica_syle" style="background: #f53939;">-</div></br>$ {{ $totalPagadoFormattedEX }}</h6>
+                                    <h6>Notas:<div class="grafica_syle" style="background: #17c1e8;">-</div></br>$ {{ $totalPagadoFormattedNota }}</h6>
+                                </div>
+                                <div class="chart">
+                                    <canvas id="doughnut-chart" class="chart-canvas" height="300"></canvas>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -44,8 +68,6 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="card">
-
-
                 <div class="d-flex justify-content-center mt-5">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -148,7 +170,7 @@
 @endsection
 
 @section('datatable')
-
+<script src="{{asset('assets/admin/js/plugins/chartjs.min.js')}}"></script>
 <script>
     const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
         deferRender:true,
@@ -160,6 +182,64 @@
         deferRender:true,
         paging: true,
         pageLength: 10
+    });
+
+    // Doughnut chart
+    var ctx3 = document.getElementById("doughnut-chart").getContext("2d");
+
+    new Chart(ctx3, {
+      type: "doughnut",
+      data: {
+        labels: ["Mercado Pago", "Stipe", "Externo", "Nota"],
+        datasets: [{
+          label: "Projects",
+          weight: 9,
+          cutout: 60,
+          tension: 0.9,
+          pointRadius: 2,
+          borderWidth: 2,
+          backgroundColor: ["#2152ff", "#3A416F", "#f53939", "#17c1e8"],
+          data: [{{ $totalPagadoMP }}, {{ $totalPagadoST }}, {{ $totalPagadoExt }}, {{ $totalPagadoNota }}],
+          fill: false
+        }],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false,
+          }
+        },
+        interaction: {
+          intersect: false,
+          mode: 'index',
+        },
+        scales: {
+          y: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+            },
+            ticks: {
+              display: false
+            }
+          },
+          x: {
+            grid: {
+              drawBorder: false,
+              display: false,
+              drawOnChartArea: false,
+              drawTicks: false,
+            },
+            ticks: {
+              display: false,
+            }
+          },
+        },
+      },
     });
 </script>
 
