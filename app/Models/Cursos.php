@@ -53,7 +53,7 @@ class Cursos extends Model
 
     public function User()
     {
-        return $this->belongsTo(User::class, 'id_usuario');
+        return $this->belongsTo(User::class, 'id_profesor');
     }
 
     public function Carpeta()

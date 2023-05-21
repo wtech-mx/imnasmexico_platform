@@ -1,7 +1,5 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
@@ -9,7 +7,6 @@ use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\WebhooksController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\RevoesController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -78,7 +75,6 @@ Route::get('vistahorizontal', function () {
 
 Auth::routes();
 
-
 Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->name('user.home');
 Route::get('avales', [App\Http\Controllers\WebPageController::class, 'avales'])->name('user.avales');
 Route::get('nuestras_instalaciones', [App\Http\Controllers\WebPageController::class, 'instalaciones'])->name('user.instalaciones');
@@ -132,10 +128,13 @@ Route::post('custom-login', [App\Http\Controllers\CustomAuthController::class, '
 Route::post('custom-registration', [App\Http\Controllers\CustomAuthController::class, 'customRegistration'])->name('register.custom');
 Route::get('signout', [App\Http\Controllers\CustomAuthController::class, 'signOut'])->name('signout');
 
+
+
 // =============== M O D U L O   C U R S O ===============================
 Route::get('/nota/curso', [App\Http\Controllers\NotasCursosController::class, 'index_user'])->name('notas.index_user');
 
 Route::group(['middleware' => ['auth']], function() {
+
 
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('roles.index');
@@ -162,6 +161,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/cursos/correo/{id}', [App\Http\Controllers\CursosController::class, 'correo'])->name('cursos.correo');
 
     Route::post('/admin/cursos/recordatorios/store', [App\Http\Controllers\CursosController::class, 'recordatorios_store'])->name('recordatorio.store');
+
+
+    // =============== M O D U L O  Profesores ===============================
+    Route::get('/admin/profesores', [App\Http\Controllers\ProfesoresController::class, 'index_profesores'])->name('profesores.index');
+    Route::post('/admin/profesores/store', [App\Http\Controllers\ProfesoresController::class, 'store_profesores'])->name('profesores.store');
+    Route::patch('/admin/profesores/update/{id}', [App\Http\Controllers\ProfesoresController::class, 'update_profesores'])->name('profesores.update');
+
 
     // =============== M O D U L O   P A G O S  P O R  F U E R A ===============================
     Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\PagosFueraController::class, 'inscripcion'])->name('pagos.inscripcion');

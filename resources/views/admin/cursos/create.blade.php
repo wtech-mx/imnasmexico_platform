@@ -89,6 +89,20 @@
                                                         </select>
                                                     </div>
                                                 </div>
+
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="estandar">Seleccionar Profesor</label>
+                                                        <select class="form-control" id="id_profesor" name="id_profesor">
+                                                            <option value="">Seleccionar Profesor</option>
+                                                            @foreach ($profesores as $profesor)
+                                                            <option value="{{ $profesor->id }}">{{ $profesor->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <div class="button-row d-flex mt-4">
                                                 <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
