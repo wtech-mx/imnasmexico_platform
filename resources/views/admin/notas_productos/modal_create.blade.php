@@ -110,6 +110,13 @@
 
                         <div class="col-3">
                             <div class="form-group">
+                                <label for="name">Subtotal</label>
+                                <input class="form-control total" type="text" id="total" name="total" value="0" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-3">
+                            <div class="form-group">
                                 <label for="name">Descuento</label>
                                 <input class="form-control" type="number" id="descuento" name="descuento" value="0">
                             </div>
