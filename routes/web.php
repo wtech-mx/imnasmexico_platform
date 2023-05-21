@@ -272,6 +272,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/caja/inicial/', [App\Http\Controllers\CajaController::class, 'caja_inicial'])->name('caja.caja_inicial');
 
     Route::get('/reporte/imprimir/corte', [App\Http\Controllers\CajaController::class, 'imprimir_corte'])->name('caja.print_corte');
+
+     // =============== M O D U L O   WEB PAGE ===============================
+     Route::get('/admin/products', [App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
+     Route::post('/admin/products/import', [App\Http\Controllers\ProductsController::class, 'import_products'])->name('products.import');
 });
 
 // Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');

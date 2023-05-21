@@ -64,21 +64,28 @@
                                     <div class="campo mt-3">
                                         <div class="row">
                                             <div class="col-6">
-                                                <label for="">Nombre</label>
-                                                <input type="text" name="campo[]" class="form-control d-inline-block" >
+                                                <label for="">Producto</label>
+                                                <div class="form-group">
+                                                    <select name="campo[]" class="form-select d-inline-block producto">
+                                                        <option value="">Seleccione products</option>
+                                                        @foreach ($products as $product)
+                                                        <option value="{{ $product->nombre }}" data-precio_normal="{{ $product->precio_normal }}">{{ $product->nombre }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div class="col-3">
-                                                <label for="">Precio</label>
-                                                <input type="number" name="campo2[]" class="form-control d-inline-block precio" >
-
-                                            </div>
-                                            <div class="col-3">
+                                              <div class="col-3">
                                                 <label for="">Cantidad</label>
-                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad" style="width: 65%;">
-                                                <button type="button" class="eliminarCampo" style="border-radius: 9px;margin-left: 0.2rem;">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </div>
+                                                <div class="form-group">
+                                                    <input type="number" name="campo3[]" class="form-control d-inline-block cantidad" >
+                                                </div>
+                                              </div>
+                                              <div class="col-3">
+                                                <label for="">Subtotal</label>
+                                                <div class="form-group">
+                                                    <input type="text" name="campo4[]" class="form-control d-inline-block subtotal" readonly>
+                                                </div>
+                                              </div>
                                         </div>
                                     </div>
                                 </div>
@@ -103,25 +110,15 @@
 
                         <div class="col-3">
                             <div class="form-group">
-                                <label for="name">Tipo de descuento</label>
-                                <select class="form-select" name="tipo" id="tipo">
-                                    <option value="Porcentaje">Porcentaje (%)</option>
-                                    <option value="Fijo">Fijo</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-3">
-                            <div class="form-group">
                                 <label for="name">Descuento</label>
-                                <input id="restante" name="restante" type="number" class="form-control"  required>
+                                <input class="form-control" type="number" id="descuento" name="descuento" value="0">
                             </div>
                         </div>
 
                         <div class="col-3">
                             <div class="form-group">
                                 <label for="name">Total</label>
-                                <input id="total" name="total" type="text" class="form-control" readonly>
+                                <input class="form-control" type="text" id="totalDescuento" name="totalDescuento" readonly>
                             </div>
                         </div>
 

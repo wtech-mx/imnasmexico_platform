@@ -35,7 +35,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Cliente</th>
-                                        <th>Productos</th>
+                                        {{-- <th>Productos</th> --}}
                                         <th>Metodo de Pago</th>
                                         <th>fecha</th>
                                         <th>Descuento</th>
@@ -48,11 +48,11 @@
                                         <tr>
                                             <td>{{ $nota->id }}</td>
                                             <td>{{ $nota->User->name }}</td>
-                                            <td>
+                                            {{-- <td>
                                                 <a type="button" class="btn btn-sm bg-gradient-dark" data-bs-toggle="modal" data-bs-target="#productos_nota_{{ $nota->id }}" >
                                                     <i class="fa fa-fw fa-eye"></i>
                                                 </a>
-                                            </td>
+                                            </td> --}}
                                             @if ($nota->metodo_pago == "Efectivo")
                                                 <td> <label class="badge" style="color: #009ee3;background-color: #009ee340;">Efectivo</label> </td>
                                             @elseif ($nota->metodo_pago == "Tarjeta Credito/debito")
@@ -69,11 +69,7 @@
                                                 {{$fecha_formateada}}
                                             </td>
                                             <td>
-                                                @if ($nota->tipo == "Porcentaje")
-                                                   {{ $nota->restante }}  % -
-                                                @elseif ($nota->tipo == "Fijo")
-                                                ${{ $nota->restante }}.0
-                                                @endif
+                                                  - {{ $nota->restante }}  %
 
                                             </td>
                                             <td>{{ $nota->total }}</td>
@@ -113,60 +109,112 @@
         pageLength: 10
     });
 
-document.addEventListener('DOMContentLoaded', function() {
-  var agregarCampoBtn = document.getElementById('agregarCampo');
-  var camposContainer = document.getElementById('camposContainer');
-  var contadorCampos = 1;
+    document.addEventListener('DOMContentLoaded', function() {
+        var agregarCampoBtn = document.getElementById('agregarCampo');
+        var camposContainer = document.getElementById('camposContainer');
+        var campoExistente = camposContainer.querySelector('.campo');
+        var totalInput = document.getElementById('total');
+        var descuentoInput = document.getElementById('descuento');
+        var totalDescuentoInput = document.getElementById('totalDescuento');
 
-  agregarCampoBtn.addEventListener('click', function() {
-    var nuevoCampo = camposContainer.firstElementChild.cloneNode(true);
-    actualizarNombresCampos(nuevoCampo);
-    camposContainer.appendChild(nuevoCampo);
-    contadorCampos++;
-  });
+        agregarCampoBtn.addEventListener('click', function() {
+            var nuevoCampo = campoExistente.cloneNode(true);
+            camposContainer.appendChild(nuevoCampo);
 
-  camposContainer.addEventListener('click', function(event) {
-    if (event.target.closest('.eliminarCampo')) {
-        var campo = event.target.closest('.campo');
-        campo.parentNode.removeChild(campo);
-        calcularTotal(); // Llamar a calcularTotal() después de eliminar el campo
-    }
+            // Limpiar los valores en el nuevo campo
+            nuevoCampo.querySelector('.producto').value = '';
+            nuevoCampo.querySelector('.cantidad').value = '';
+
+            // Asignar los eventos a los nuevos campos
+            nuevoCampo.querySelector('.producto').addEventListener('change', actualizarSubtotal);
+            nuevoCampo.querySelector('.cantidad').addEventListener('input', actualizarSubtotal);
+        });
+
+        camposContainer.addEventListener('change', function(event) {
+            if (event.target.classList.contains('producto') || event.target.classList.contains('cantidad')) {
+            actualizarSubtotal();
+            }
+        });
+
+        function actualizarSubtotal() {
+            var camposProductos = camposContainer.querySelectorAll('.campo .producto');
+            var camposCantidades = camposContainer.querySelectorAll('.campo .cantidad');
+            var subtotales = camposContainer.querySelectorAll('.campo .subtotal');
+            var total = 0;
+
+            for (var i = 0; i < camposProductos.length; i++) {
+                var producto = camposProductos[i];
+                var cantidad = camposCantidades[i];
+                var subtotal = subtotales[i];
+
+                var precio = parseFloat(producto.options[producto.selectedIndex].getAttribute('data-precio_normal'));
+                var cantidadValor = parseInt(cantidad.value);
+
+                var subtotalValor = isNaN(precio) || isNaN(cantidadValor) ? 0 : precio * cantidadValor;
+                subtotal.value = subtotalValor.toFixed(2);
+
+                total += subtotalValor;
+            }
+            totalInput.value = total.toFixed(2);
+                console.log('totsl', total);
+
+            // Calcular el descuento
+            var descuento = parseFloat(descuentoInput.value);
+            var totalDescuento = total - (total * (descuento / 100));
+            totalDescuentoInput.value = totalDescuento.toFixed(2);
+        }
+
+        descuentoInput.addEventListener('keyup', function() {
+            var descuento = parseFloat(descuentoInput.value);
+            var total = parseFloat(totalInput.value);
+            var totalDescuento = total - (total * (descuento / 100));
+            totalDescuentoInput.value = totalDescuento.toFixed(2);
+        });
     });
 
+    document.addEventListener('DOMContentLoaded', function() {
+        var agregarCampoBtn2 = document.getElementById('agregarCampo2');
+        var camposContainer2 = document.getElementById('camposContainer2');
+        var campoExistente2 = camposContainer2.querySelector('.campo2');
 
-  camposContainer.addEventListener('change', function(event) {
-    if (event.target.classList.contains('precio') || event.target.classList.contains('cantidad')) {
-      calcularTotal();
-    }
-  });
+        agregarCampoBtn2.addEventListener('click', function() {
+            var nuevoCampo2 = campoExistente2.cloneNode(true);
+            camposContainer2.appendChild(nuevoCampo2);
 
-  function actualizarNombresCampos(campo) {
-    var camposInput = campo.querySelectorAll('input[name^="campo"]');
-    camposInput.forEach(function(input) {
-      var nombreCampo = input.getAttribute('name');
-      input.setAttribute('name', nombreCampo + contadorCampos);
+            // Limpiar los valores en el nuevo campo
+            nuevoCampo2.querySelector('.producto2').value = '';
+            nuevoCampo2.querySelector('.cantidad2').value = '';
+
+            // Asignar los eventos a los nuevos campos
+            nuevoCampo2.querySelector('.producto2').addEventListener('change', actualizarSubtotal2);
+            nuevoCampo2.querySelector('.cantidad2').addEventListener('input', actualizarSubtotal2);
+        });
+
+        camposContainer2.addEventListener('change', function(event) {
+            if (event.target.classList.contains('producto2') || event.target.classList.contains('cantidad2')) {
+            actualizarSubtotal2();
+            }
+        });
+
+        function actualizarSubtotal2() {
+            var camposProductos2 = camposContainer2.querySelectorAll('.campo2 .producto2');
+            var camposCantidades2 = camposContainer2.querySelectorAll('.campo2 .cantidad2');
+            var subtotales2 = camposContainer2.querySelectorAll('.campo2 .subtotal2');
+
+            for (var i = 0; i < camposProductos2.length; i++) {
+                var producto2 = camposProductos2[i];
+                var cantidad2 = camposCantidades2[i];
+                var subtotal2 = subtotales2[i];
+
+                var precio2 = parseFloat(producto2.options[producto2.selectedIndex].getAttribute('data-precio_normal2'));
+                var cantidadValor2 = parseInt(cantidad2.value);
+
+                var subtotalValor2 = isNaN(precio2) || isNaN(cantidadValor2) ? 0 : precio2 * cantidadValor2;
+                subtotal2.value = subtotalValor2.toFixed(2);
+
+            }
+        }
     });
-  }
-
-  function calcularTotal() {
-    var precios = document.querySelectorAll('.precio');
-    var cantidades = document.querySelectorAll('.cantidad');
-    var total = 0;
-
-    for (var i = 0; i < precios.length; i++) {
-      var precio = parseFloat(precios[i].value);
-      var cantidad = parseFloat(cantidades[i].value);
-
-      if (!isNaN(precio) && !isNaN(cantidad)) {
-        total += precio * cantidad;
-      }
-    }
-
-    document.getElementById('total').value = total.toFixed(2);
-  }
-});
-
-
 </script>
 @endsection
 

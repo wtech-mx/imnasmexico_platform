@@ -55,31 +55,34 @@
                         @endphp
 
                         @foreach ($nota->ProductosNotasId as  $productos)
-
+                        @php
+                            $precio = number_format($productos->price, 0, '.', ',');
+                        @endphp
                         <div class="col-6">
                             <label for="">Nombre</label>
-                            <input type="text" name="producto" class="form-control d-inline-block" value="{{ $productos->producto }}">
+                            <input type="text"  class="form-control d-inline-block" value="{{ $productos->producto }}" disabled>
                         </div>
 
                         <div class="col-3">
                             <label for="">Precio</label>
-                            <input type="number" name="price" class="form-control d-inline-block" value="{{ $productos->price }}">
+                            <input type="text"  class="form-control d-inline-block" value="${{ $precio }}" disabled>
 
                         </div>
 
                         <div class="col-3">
                             <label for="">Cantidad</label>
-                            <input type="number" name="cantidad" class="form-control d-inline-block" style="width: 65%;" value="{{ $productos->cantidad }}">
+                            <input type="number"  class="form-control d-inline-block" style="width: 65%;" value="{{ $productos->cantidad }}" disabled>
                         </div>
                         @php
-                            $precio = $productos->price;
-                            $cantidad = $productos->cantidad;
-                            $subtotal = $precio * $cantidad;
+                            $subtotal = $productos->price;
                             $total += $subtotal;
                             $precio = number_format($total, 2, '.', ',');
                         @endphp
 
                         @endforeach
+                        <div class="col-6 mt-3">
+                            <p><strong>Total</strong></p>
+                        </div>
                         <div class="col-6 mt-3">
                             <p><strong>${{ $precio }}</strong></p>
                         </div>
@@ -102,21 +105,27 @@
                                     <div class="campo2 mt-3">
                                         <div class="row">
                                             <div class="col-6">
-                                                <label for="">Nombre</label>
-                                                <input type="text" name="campo[]" class="form-control d-inline-block" >
-                                            </div>
-                                            <div class="col-3">
-                                                <label for="">Precio</label>
-                                                <input type="number" name="campo2[]" class="form-control d-inline-block" >
-
+                                                <label for="">Producto</label>
+                                                <select id="campo[]" name="campo[]" class="form-select d-inline-block producto2">
+                                                    <option value="">Seleccione products</option>
+                                                    @foreach ($products as $product)
+                                                    <option value="{{ $product->nombre }}" data-precio_normal2="{{ $product->precio_normal }}">{{ $product->nombre }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="col-3">
                                                 <label for="">Cantidad</label>
-                                                <input type="number" name="campo3[]" class="form-control d-inline-block" style="width: 65%;">
-                                                <button type="button" class="eliminarCampo2" style="border-radius: 9px;margin-left: 0.2rem;">
-                                                    <i class="fa fa-trash"></i>
-                                                </button>
-                                            </div>
+                                                <div class="form-group">
+                                                    <input type="number" name="campo3[]" class="form-control d-inline-block cantidad2" >
+                                                </div>
+                                              </div>
+
+                                              <div class="col-3">
+                                                <label for="">Subtotal</label>
+                                                <div class="form-group">
+                                                    <input type="text" name="campo4[]" class="form-control d-inline-block subtotal2" readonly>
+                                                </div>
+                                              </div>
                                         </div>
                                     </div>
                                 </div>
@@ -140,21 +149,10 @@
                             </div>
                         </div>
 
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="name">Tipo de descuento</label>
-                                <select class="form-select" name="tipo" id="tipo">
-                                    <option value="{{ $nota->tipo }}" selected>{{ $nota->tipo }}</option>
-                                    <option value="Porcentaje">Porcentaje (%)</option>
-                                    <option value="Fijo">Fijo</option>
-                                </select>
-                            </div>
-                        </div>
-
                         <div class="col-2">
                             <div class="form-group">
                                 <label for="name">Descuento</label>
-                                <input id="restante" name="restante" type="number" class="form-control"  value="{{ $nota->restante }}">
+                                <input id="restante" name="restante" type="number" class="form-control"  value="{{ $nota->restante }}" disabled>
                             </div>
                         </div>
 
@@ -171,7 +169,7 @@
                                 @php
                                     $total_formateado = number_format($nota->total, 2, '.', ',');
                                 @endphp
-                                <input id="total" name="total" type="text" class="form-control"  value="{{ $total_formateado }}">
+                                <input type="text" class="form-control"  value="{{ $total_formateado }}" disabled>
                             </div>
                         </div>
 
