@@ -14,12 +14,15 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h3 class="mb-3">Products</h3>
-                    {{-- <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data">
+^                    <!-- <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="file" class="form-control">
                         <br>
                         <button class="btn btn-success">Importar Products</button>
-                    </form> --}}
+                    </form>-->
+                    <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_product" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                        <i class="fa fa-fw fa-edit"></i> Crear
+                    </a>
                 </div>
             </div>
 
@@ -32,6 +35,7 @@
                             <th>Nombre</th>
                             <th>Precio Reb.</th>
                             <th>Precio Normal</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     @foreach ($products as $product)
@@ -45,7 +49,13 @@
                         <td>{{ $product->nombre }}</td>
                         <td>${{ $precio_rebajado }}</td>
                         <td>${{ $precio_normal }}</td>
+                        <td>
+                            <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_product_{{ $product->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                <i class="fa fa-fw fa-edit"></i>
+                            </a>
+                        </td>
                     </tr>
+                    @include('admin.products.modal_update')
                     @endforeach
 
                 </table>
@@ -54,6 +64,7 @@
         </div>
       </div>
 </div>
+@include('admin.products.modal_create')
 @endsection
 
 @section('datatable')

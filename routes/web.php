@@ -282,6 +282,8 @@ Route::group(['middleware' => ['auth']], function() {
      // =============== M O D U L O   WEB PAGE ===============================
      Route::get('/admin/products', [App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
      Route::post('/admin/products/import', [App\Http\Controllers\ProductsController::class, 'import_products'])->name('products.import');
+     Route::post('/admin/products/store', [App\Http\Controllers\ProductsController::class, 'store'])->name('products.store');
+     Route::patch('/admin/products/update/{id}', [App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
 });
 
 // Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');
