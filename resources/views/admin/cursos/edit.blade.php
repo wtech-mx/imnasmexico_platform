@@ -80,7 +80,11 @@
                                                     <div class="form-group">
                                                         <label for="estandar">Seleccionar Carpeta Compartida</label>
                                                         <select class="form-control" id="carpeta" name="carpeta">
-                                                            <option value="{{ $curso->id }}">{{ $curso->Carpeta->nombre }}</option>
+                                                            @if ($curso->carpeta == NULL)
+                                                                <option value="">Seleccione Carpeta</option>
+                                                            @else
+                                                                <option value="{{ $curso->id }}">{{ $curso->Carpeta->nombre }}</option>
+                                                            @endif
                                                           @foreach ($carpetas as $carpeta)
                                                           <option value="{{ $carpeta->id }}">{{ $carpeta->nombre }}</option>
                                                           @endforeach
