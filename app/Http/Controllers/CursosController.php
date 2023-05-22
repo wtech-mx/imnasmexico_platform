@@ -7,6 +7,7 @@ use App\Models\RecordatoriosCursos;
 use App\Models\CursosTickets;
 use App\Models\Orders;
 use App\Models\OrdersTickets;
+use App\Models\User;
 use Session;
 use App\Mail\PlantillaTicket;
 use App\Models\Carpetas;
@@ -48,9 +49,9 @@ class CursosController extends Controller
         return view('admin.cursos.index_dia', compact('cursos'));
     }
 
-
     public function create()
     {
+        $profesores =  User::where('cliente','2')->orderBy('id','DESC')->get();
         $estandares = Estandar::orderBy('name','asc')->get();
         $fotos_online = Recursos::where('tipo', '=', 'Online')->get();
         $fotos_presencial = Recursos::where('tipo', '=', 'Presencial')->get();
@@ -74,7 +75,7 @@ class CursosController extends Controller
 
         $carpetas = Carpetas::get();
 
-        return view('admin.cursos.create', compact('fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares', 'carpetas'));
+        return view('admin.cursos.create', compact('fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares', 'carpetas','profesores'));
     }
 
     public function store(Request $request)
@@ -120,6 +121,7 @@ class CursosController extends Controller
         $curso->titulo_hono = $request->get('titulo_hono');
         $curso->texto_conocer = $request->get('texto_conocer');
         $curso->carpeta = $request->get('carpeta');
+        $curso->id_profesor = $request->get('id_profesor');
         $valorAleatorio = uniqid();
         $curso->slug = Str::of($request->get('nombre'))->slug("-")->limit(300 - mb_strlen($valorAleatorio) - 1, "")->trim("-")->append("-", $valorAleatorio);
 
@@ -159,6 +161,7 @@ class CursosController extends Controller
 
     public function edit($id)
     {
+        $profesores =  User::where('cliente','2')->orderBy('id','DESC')->get();
         $estandares = Estandar::orderBy('name','asc')->get();
         $curso = Cursos::find($id);
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
@@ -183,7 +186,7 @@ class CursosController extends Controller
 
         $carpetas = Carpetas::get();
 
-        return view('admin.cursos.edit', compact('curso', 'tickets', 'fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares', 'carpetas'));
+        return view('admin.cursos.edit', compact('curso', 'tickets', 'fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares', 'carpetas','profesores'));
     }
 
     public function update(Request $request, $id)
@@ -197,6 +200,7 @@ class CursosController extends Controller
         $curso->pdf = $request->get('pdf');
         $curso->materiales = $request->get('materiales');
         $curso->id_estandar = $request->get('id_estandar');
+        $curso->id_profesor = $request->get('id_profesor');
 
         if ($request->get('clase_grabada')) {
             $curso->clase_grabada = $request->get('clase_grabada');
