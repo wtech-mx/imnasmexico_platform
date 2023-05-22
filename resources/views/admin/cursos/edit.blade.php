@@ -96,7 +96,12 @@
                                                     <div class="form-group">
                                                         <label for="estandar">Seleccionar Profesor</label>
                                                         <select class="form-control" id="id_profesor" name="id_profesor">
-                                                          <option value="{{ $curso->id_profesor }}">{{ $curso->User->name }}</option>
+
+                                                            @if ($curso->id_profesor == NULL)
+                                                                <option value="">Seleccione Carpeta</option>
+                                                            @else
+                                                                <option value="{{ $curso->id_profesor }}">{{ $curso->User->name }}</option>
+                                                            @endif
                                                           @foreach ($profesores as $profesor)
                                                           <option value="{{ $profesor->id }}">{{ $profesor->name }}</option>
                                                           @endforeach
