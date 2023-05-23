@@ -77,6 +77,27 @@ class ClientsController extends Controller
             ->with('success', 'usuario editado con exito.');
     }
 
+    public function update_situacionfiscal(Request $request, $id){
+        $cliente = User::where('id', $id)->first();
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_estandar = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $cliente->telefono);
+        }else{
+            $ruta_estandar = public_path() . '/documentos/' . $cliente->telefono;
+        }
+
+        if ($request->hasFile("situacion_fiscal")) {
+            $file = $request->file('situacion_fiscal');
+            $path = $ruta_estandar;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $cliente->situacion_fiscal = $fileName;
+        }
+
+        $cliente->save();
+        return redirect()->back()->with('success', 'Creado con exito');
+    }
+
     public function update_documentos_cliente(Request $request, $id){
 
         $cliente = User::where('id', $id)->first();
@@ -245,7 +266,6 @@ class ClientsController extends Controller
 
         return view('admin.clientes.index',compact('clientes','tickets','orders','order_ticket','documentos', 'documentos_estandares'));
     }
-
 
 
     public function update_documentos(Request $request, $id){

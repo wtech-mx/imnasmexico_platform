@@ -9,7 +9,7 @@
                 </button>
             </div>
 
-            <form method="POST" action="{{ route('comentarios.update', $cliente->id) }}" enctype="multipart/form-data" role="form">
+            <form method="POST" action="{{ route('perfil.update_situacionfiscal', $cliente->id) }}" enctype="multipart/form-data" role="form">
                 @csrf
                 <input type="hidden" name="_method" value="PATCH">
                 <div class="modal-body">
@@ -67,7 +67,19 @@
 
                                 <div class="col-12 form-group">
                                     <label for="cfdi">Situacion Fiscal</label>
-                                    <input id="situacion_fiscal" name="situacion_fiscal" type="text" class="form-control" value="">
+                                    <input id="situacion_fiscal" name="situacion_fiscal" type="file" class="form-control" value="">
+                                </div>
+
+                                <div class="col-12">
+                                   <p class="text-center">
+                                    @if ($cliente->situacion_fiscal != '' )
+                                        <a target="_blank" href="{{ asset('documentos/' . $cliente->telefono . '/' . $cliente->situacion_fiscal) }}">
+                                            Ver Situacion Fiscal
+                                        </a>
+                                        @else
+                                        No hay situacion fiscal
+                                    @endif
+                                   </p>
                                 </div>
 
                             </div>
