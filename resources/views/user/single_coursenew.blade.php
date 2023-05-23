@@ -52,7 +52,8 @@
                             <a class="btn btn-secundario_grid me-3 mb-2 mb-lg-5 mb-md-4 mt-4 mt-md-4 mt-lg-5">
                                 <div class="d-flex justify-content-around">
                                     <p class="card_tittle_btn my-auto">
-                                        Online
+                                        {{ $curso->modalidad}}
+
                                     </p>
                                 </div>
                             </a>
