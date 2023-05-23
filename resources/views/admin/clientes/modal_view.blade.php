@@ -65,6 +65,11 @@
                                     </textarea>
                                 </div>
 
+                                <div class="col-12 form-group">
+                                    <label for="cfdi">Situacion Fiscal</label>
+                                    <input id="situacion_fiscal" name="situacion_fiscal" type="text" class="form-control" value="">
+                                </div>
+
                             </div>
                         </div>
 
