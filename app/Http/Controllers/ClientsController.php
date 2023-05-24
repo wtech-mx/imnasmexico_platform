@@ -15,6 +15,7 @@ use Hash;
 use App\Imports\UsersImport;
 use App\Models\Carpetas;
 use App\Models\Publicidad;
+use App\Models\Factura;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ClientsController extends Controller
@@ -95,6 +96,31 @@ class ClientsController extends Controller
         }
 
         $cliente->save();
+        return redirect()->back()->with('success', 'Creado con exito');
+    }
+
+    public function store_factura(Request $request){
+        $facturas = new Factura;
+        $facturas->id_usuario = $request->get('id_usuario');
+        $facturas->id_orders = $request->get('id_orders');
+
+        $cliente = User::where('id',  $request->get('id_usuario'))->first();
+        $dominio = $request->getHost();
+
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_estandar = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $cliente->telefono);
+        }else{
+            $ruta_estandar = public_path() . '/documentos/' . $cliente->telefono;
+        }
+
+        if ($request->hasFile("factura")) {
+            $file = $request->file('factura');
+            $path = $ruta_estandar;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $facturas->factura = $fileName;
+        }
+        $facturas->save();
         return redirect()->back()->with('success', 'Creado con exito');
     }
 

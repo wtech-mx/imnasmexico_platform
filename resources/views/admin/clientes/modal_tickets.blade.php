@@ -11,11 +11,11 @@
 
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-2 mb-2"><strong> Num. Pedido: </strong> </div>
                         <div class="col-2 mb-2"><strong> Fecha de Compra: </strong> </div>
                         <div class="col-2 mb-2"><strong> Total: </strong> </div>
                         <div class="col-2 mb-2"><strong> Curso/Diplomado: </strong> </div>
                         <div class="col-2 mb-2"><strong> Estado: </strong> </div>
+                        <div class="col-2 mb-2"><strong> Factura: </strong> </div>
                         <div class="col-2 mb-2"><strong> Acciones: </strong> </div>
                     </div>
                     <div class="row">
@@ -23,17 +23,13 @@
                                 @foreach($orders as $order)
                                 @if(($order->id_usuario == $cliente->id))
                                         <div class="col-2">
-                                            #{{$order->id}}
-                                        </div>
-
-                                        <div class="col-2">
                                             @php
                                             $fecha = $order->fecha;
                                             $fecha_timestamp = strtotime($fecha);
                                             $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                                             @endphp
-
-                                            {{$fecha_formateada}}
+                                            <p class="display: inline-block;margin: 0!important ;">#{{$order->id}}</p>
+                                            <p>{{$fecha_formateada}}</p>
                                         </div>
 
                                         <div class="col-2">
@@ -56,6 +52,28 @@
                                         </div>
 
                                         <div class="col-2">
+                                            @if ($order->forma_pago == 'STRIPE')
+                                            @if ($cliente->Factura)
+                                                <a target="_blank" href="{{ asset('documentos/' . $cliente->telefono . '/' . $cliente->Factura->factura) }}">
+                                                    Ver Factura
+                                                </a>
+                                                @else
+                                                <form method="POST" action="{{ route('factura.store') }}" enctype="multipart/form-data" role="form">
+                                                    @csrf
+                                                    <input type="hidden" id="id_usuario" name="id_usuario" value="{{$cliente->id}}">
+                                                    <input type="hidden" id="id_orders" name="id_orders" value="{{$order->id}}">
+                                                    <input type="file" id="factura" name="factura">
+                                                    <button class="btn btn-primary" type="submit">Guardar</button>
+                                                </form>
+                                                @endif
+                                                @else
+                                                No se requiere
+                                            @endif
+
+
+                                        </div>
+
+                                        <div class="col-2">
                                             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#ticket_{{ $order->id }}" aria-expanded="false" aria-controls="ticket_{{ $order->id }}">
                                                 <i class="fa fa-fw fa-eye"></i>
                                             </button>
@@ -71,7 +89,12 @@
                                                 <div class="row">
                                                     <div class="col-6 mt-3">
                                                         <h6 class="text-white">Nombre Curso/Diplomado</h6>
-                                                        <p class="text-white">{{$tiket->Cursos->nombre}}</p>
+                                                        @php
+                                                            $url = "https://plataforma.imnasmexico.com/curso/";
+                                                            $permalink = $tiket->Cursos->slug;
+                                                            $url_completa = $url.$permalink;
+                                                        @endphp
+                                                        <a class="text-white" href="{{$url_completa}}" target="_blank">{{$tiket->Cursos->nombre}}</a>
                                                     </div>
                                                     <div class="col-2 mt-3">
                                                         <h6 class="text-white">Precio</h6>
