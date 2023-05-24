@@ -19,11 +19,9 @@
                         <li class="nav-item" role="presentation">
                           <button class="nav-link active" id="datos-tab" data-bs-toggle="tab" data-bs-target="#datos{{ $cliente->id }}" type="button" role="tab" aria-controls="datos{{ $cliente->id }}" aria-selected="true">Datos Generales</button>
                         </li>
-
                         <li class="nav-item" role="presentation">
                           <button class="nav-link" id="fact-tab" data-bs-toggle="tab" data-bs-target="#fact{{ $cliente->id }}" type="button" role="tab" aria-controls="fact{{ $cliente->id }}" aria-selected="false">Facturacion</button>
                         </li>
-
                       </ul>
 
                       <div class="tab-content" id="myTab_{{ $cliente->id }}Content">
