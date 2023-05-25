@@ -17,6 +17,7 @@ use App\Models\Carpetas;
 use App\Models\Publicidad;
 use App\Models\Factura;
 use Maatwebsite\Excel\Facades\Excel;
+use DataTables;
 
 class ClientsController extends Controller
 {
@@ -281,8 +282,8 @@ class ClientsController extends Controller
 
     public function index_admin(){
 
-        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
-       // $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->paginate(10);
+        //$clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->paginate(150);
 
         $orders = Orders::get();
         $tickets = CursosTickets::get();
@@ -291,6 +292,18 @@ class ClientsController extends Controller
         $documentos_estandares = DocumentosEstandares::get();
 
         return view('admin.clientes.index',compact('clientes','tickets','orders','order_ticket','documentos', 'documentos_estandares'));
+    }
+
+    public function getUsuarios(){
+
+        $clientes = User::query();
+        $orders = Orders::get();
+        $tickets = CursosTickets::get();
+        $order_ticket = OrdersTickets::get();
+        $documentos = Documentos::get();
+        $documentos_estandares = DocumentosEstandares::get();
+
+        return DataTables::of($clientes)->make(true);
     }
 
 

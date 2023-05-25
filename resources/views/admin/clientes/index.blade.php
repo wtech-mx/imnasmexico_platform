@@ -5,7 +5,8 @@
 @endsection
 
 @section('content')
-
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+<script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 <div class="container-fluid mt-3">
       <div class="row">
         <div class="col">
@@ -59,6 +60,7 @@
 
                 </table>
             </div>
+            {{ $clientes->links('pagination::bootstrap-4') }}
           </div>
         </div>
       </div>
@@ -68,10 +70,16 @@
 @section('datatable')
 
 <script>
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-      searchable: true,
-      fixedHeight: false
+$(document).ready(function() {
+    $('#datatable-search').DataTable({
+        searching: true,
+        pageLength: 150,
+        scrollY: '400px', // Ajusta la altura de la tabla según tus necesidades
+        scrollCollapse: true,
+        // Resto de las opciones y configuraciones que desees agregar
     });
+});
+
 </script>
 
 @endsection

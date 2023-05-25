@@ -234,6 +234,7 @@ Route::group(['middleware' => ['auth']], function() {
 
  // =============== M O D U L O   WEB PAGE ===============================
     Route::get('/admin/clientes', [App\Http\Controllers\ClientsController::class, 'index_admin'])->name('clientes_admin.index');
+    Route::get('admin/clientes/ajax', [App\Http\Controllers\ClientsController::class, 'getUsuarios'])->name('usuarios.json');
     Route::patch('/admin/clientes/documentos/{id}', [App\Http\Controllers\ClientsController::class, 'update_documentos'])->name('clientes.update_documentos');
     Route::post('clientes-import', [App\Http\Controllers\ClientsController::class, 'import_clientes'])->name('clientes.import');
     Route::post('/admin/clientes/documentos/estandar/{id}', [App\Http\Controllers\ClientsController::class, 'documentos_estandares'])->name('documentos.store');
