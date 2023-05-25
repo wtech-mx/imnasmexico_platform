@@ -883,4 +883,36 @@ class OrderController extends Controller
             session()->flash('warning', 'Producto eliminado del carrito');
         }
     }
+
+    public function pagar_envio()
+    {
+        $id = 137;
+        $cart = session()->get('cart', []);
+
+        $product = CursosTickets::findOrFail($id);
+        if ($product->descuento == NULL) {
+            $precio = $product->precio;
+        } else {
+            $precio = $product->descuento;
+        }
+
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+
+            $cart[$id] = [
+                "id" => $product->id,
+                "name" => $product->nombre,
+                "curso" => $product->id_curso,
+                "quantity" => 1,
+                "price" => $precio,
+                "paquete" => 0,
+                "image" => $product->imagen
+            ];
+        }
+
+        session()->put('cart', $cart);
+        Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+        return redirect()->back()->with('success', '¡Producto agregado');
+    }
 }

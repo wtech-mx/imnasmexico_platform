@@ -117,6 +117,8 @@ Route::delete('/remove-from-cart', [OrderController::class, 'remove'])->name('re
 
 Route::post('/cupon', [OrderController::class, 'aplicarCupon'])->name('cupon.aplicar');
 Route::post('remove-coupon', [OrderController::class, 'removeCoupon'])->name('removeCoupon');
+
+Route::get('pagar/envio', [OrderController::class, 'pagar_envio'])->name('pagar_envio');
 // =============== L O G I N  U S E R S ===============================
 Route::get('perfil/{code}', [App\Http\Controllers\ClientsController::class, 'index'])->name('perfil.index');
 Route::patch('/perfil/update/{code}', [App\Http\Controllers\ClientsController::class, 'update'])->name('perfil.update');

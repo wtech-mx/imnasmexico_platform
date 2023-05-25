@@ -74,6 +74,12 @@
             </p>
             </div>
 
+            <div class="d-flex justify-content-center">
+                <a class="btn_ticket_comprar text-center" href="{{ route('pagar_envio') }}"  role="button">
+                    Pagar envio
+                </a>
+            </div>
+
         </div>
 
         <div class="col-12 col-md-6 spaciador_footer mt-5 mb-5">
