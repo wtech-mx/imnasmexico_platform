@@ -106,9 +106,9 @@
             @endif
 
             <div class="col-12">
-                <a class="btn_save_profile d-inline-block" href="">
+                <button type="submit" class="btn_save_profile d-inline-block" >
                     Guardar
-                </a>
+                </button>
             </div>
 
         </div>
