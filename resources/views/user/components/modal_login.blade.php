@@ -44,7 +44,7 @@
 
                                 <div class="input-group flex-nowrap mt-4">
                                     <span class="input-group-text span_custom_login" ><i class="fas fa-phone-alt"></i></span>
-                                    <input class="form-control input_custom_login" type="number" id="password" name="password"   placeholder="Confirma Telefono" required>
+                                    <input class="form-control input_custom_login" type="text" id="password" name="password"   placeholder="Confirma Telefono" required>
                                 </div>
 
                                 <div class="form-group mb-3">
