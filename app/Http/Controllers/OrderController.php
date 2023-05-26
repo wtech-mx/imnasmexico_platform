@@ -23,6 +23,11 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use MercadoPago\{Exception, SDK, Preference, Item};
+use Codexshaper\WooCommerce\Facades\WooCommerce;
+use Codexshaper\WooCommerce\Facades\Product;
+use Order;
+
+
 use Throwable;
 
 class OrderController extends Controller
@@ -140,7 +145,7 @@ class OrderController extends Controller
         if ($dominio == 'plataforma.imnasmexico.com') {
             $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-8901800557603427-041420-99b569dfbf4e6ce9160fc673d9a47b1e-1115271504");
         } else {
-            $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-7084001530614040-031418-70b92db902566a519042ec6bd85289b3-1330780039");
+            $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-8901800557603427-041420-99b569dfbf4e6ce9160fc673d9a47b1e-1115271504");
         }
 
         $response = json_decode($response);
@@ -159,14 +164,55 @@ class OrderController extends Controller
             $pago = $orden_ticket2->Orders->pago;
             $forma_pago = $orden_ticket2->Orders->forma_pago;
             // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
-            foreach ($orden_ticket as $details) {
-                if ($details->Cursos->modalidad == 'Online') {
-                    Mail::to($order->User->email)->send(new PlantillaTicket($details));
-                } else {
-                    Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
+
+            if($orden_ticket2->id_tickets == 137){
+                // Recorrer los productos y agregarlos al array line_items
+                    $line_items[] = [
+                        // 'product_id' => 20127,
+                        'product_id' => 1526,
+                        'quantity' => 1
+                    ];
+                // Crear el array de datos completo para enviar a la API
+                $data = [
+                    'payment_method' => 'Mercado Pago Platform',
+                    'payment_method_title' => 'Platform MP',
+                    'set_paid' => true,
+                    'line_items' => $line_items,
+                    'status' => 'processing',
+                    'billing' => [
+                        'first_name' => $order->User->name,
+                        'last_name' => 'Sandoval Barroso',
+                        'address_1' => 'Circuito interior 888',
+                        'address_2' => '',
+                        'city' => 'CDMX',
+                        'state' => 'CDMX',
+                        'postcode' => '94103',
+                        'country' => 'Mexico',
+                        'email' => $order->User->email,
+                        'phone' => $order->User->telefono
+                    ],
+                    'shipping' => [
+                        'first_name' => $order->User->name,
+                        'last_name' => 'Doe',
+                        'address_1' => '969 Market',
+                        'address_2' => '',
+                        'city' => 'CDMX',
+                        'state' => 'CDMX',
+                        'postcode' => '94103',
+                        'country' => 'Mexico'
+                    ],
+                ];
+                $ordenwoo = Order::create($data);
+            }else{
+                foreach ($orden_ticket as $details) {
+                    if ($details->Cursos->modalidad == 'Online') {
+                        Mail::to($order->User->email)->send(new PlantillaTicket($details));
+                    } else {
+                        Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
+                    }
                 }
+                Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
             }
-            Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
             Session::forget('cart');
         } else {
