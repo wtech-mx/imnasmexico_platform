@@ -66,17 +66,15 @@
 
             <div class="d-flex justify-content-center">
                 <p class="preguntas_freceuntas">
-                <a data-bs-toggle="modal" data-bs-target="#preguntas">
-
-                        PREGUNTAS FRECUENTES
-
-                </a>
-            </p>
+                    <a data-bs-toggle="modal" data-bs-target="#preguntas">
+                            PREGUNTAS FRECUENTES
+                    </a>
+                </p>
             </div>
 
             <div class="d-flex justify-content-center">
-                <a class="btn_ticket_comprar text-center" href="{{ route('pagar_envio') }}"  role="button">
-                    Pagar envio
+                <a class="preguntas_freceuntas btn_ticket_comprar text-center" href="{{ route('pagar_envio') }}"  role="button">
+                   PAGAR ENVÍO
                 </a>
             </div>
 
