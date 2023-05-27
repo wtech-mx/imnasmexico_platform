@@ -16,5 +16,17 @@ class Factura extends Model
         'id_usuario',
         'id_orders',
         'factura',
+        'estado',
     ];
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
+
+    public function Orders()
+    {
+        return $this->belongsTo(Orders::class, 'id_orders');
+    }
+
 }

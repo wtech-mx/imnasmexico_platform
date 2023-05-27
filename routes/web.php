@@ -126,7 +126,6 @@ Route::patch('clientes/documentos/{id}', [App\Http\Controllers\ClientsController
 Route::post('clientes/documentos/estandar/{id}', [App\Http\Controllers\ClientsController::class, 'documentos_estandares_cliente'])->name('documentos.store_cliente');
 Route::patch('admin/perfil/{id}', [App\Http\Controllers\ClientsController::class, 'update_situacionfiscal'])->name('perfil.update_situacionfiscal');
 Route::post('/admin/factura/store', [App\Http\Controllers\ClientsController::class, 'store_factura'])->name('factura.store');
-
 Route::post('custom-login', [App\Http\Controllers\CustomAuthController::class, 'customLogin'])->name('login.custom');
 Route::post('custom-registration', [App\Http\Controllers\CustomAuthController::class, 'customRegistration'])->name('register.custom');
 Route::get('signout', [App\Http\Controllers\CustomAuthController::class, 'signOut'])->name('signout');
@@ -241,6 +240,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('clientes-import', [App\Http\Controllers\ClientsController::class, 'import_clientes'])->name('clientes.import');
     Route::post('/admin/clientes/documentos/estandar/{id}', [App\Http\Controllers\ClientsController::class, 'documentos_estandares'])->name('documentos.store');
     Route::get('documentos/descargar/{id}/{cliente_id}', [App\Http\Controllers\ClientsController::class, 'descargarDocumento'])->name('descargar_documento');
+    Route::get('/admin/facturas', [App\Http\Controllers\FacturasController::class, 'index'])->name('facturas.index');
+    Route::patch('/admin/facturas/update/{id}', [App\Http\Controllers\FacturasController::class, 'update'])->name('facturas.update');
 
     // =============== M O D U L O   Cupones ===============================
     Route::get('/admin/marketing/cupones', [App\Http\Controllers\MarketingController::class, 'index_cupon'])->name('cupones.index');
