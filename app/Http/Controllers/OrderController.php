@@ -7,6 +7,7 @@ use App\Models\CursosTickets;
 use App\Models\Orders;
 use App\Models\Cupon;
 use App\Models\User;
+use App\Models\Factura;
 use Hash;
 use Illuminate\Support\Arr;
 use Session;
@@ -327,6 +328,14 @@ class OrderController extends Controller
                 }
             }
             Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
+
+            $facturas = new Factura;
+            $facturas->id_usuario = $order->User->id;
+            $facturas->id_orders = $order->id;
+            $estado = 'En Espera';
+            $facturas->estatus = $estado;
+            $facturas->save();
+
         } else {
             $order = Orders::find($order->id);
             $order->num_order = $stripe->id;
