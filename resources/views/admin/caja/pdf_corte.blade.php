@@ -58,6 +58,10 @@
     background-color: #F7EAED;
     }
   </style>
+@php
+  $fecha = date('d-m-Y');
+  $total_caja = $total_pagos - $total_egresos;
+@endphp
 <body>
   <header>
     <h1>Reporte de IMNAS</h1>
@@ -129,7 +133,7 @@
                 <td>${{ $caja->monto_inicial }}</td>
                 <td>${{ $total_pagos_efectivo }}</td>
                 <td>${{ $total_egresos }}</td>
-                <td>${{$total_pagos}}</td>
+                <td>${{$total_caja}}</td>
             </tr>
         </tbody>
     </table>
