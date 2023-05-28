@@ -336,6 +336,47 @@ class OrderController extends Controller
             $facturas->estatus = $estado;
             $facturas->save();
 
+            // $line_items = [];
+            // // Recorrer los tickets y agregarlos al array line_items
+            // foreach ($orden_ticket as $ticket) {
+            //     $line_items[] = [
+            //         'product_id' => 'nombre del producto',
+            //         'quantity' => 1
+            //     ];
+            // }
+
+            // // Creacion de orden en woo
+            // $data = [
+            //     'payment_method'       => 'Stripe Platform',
+            //     'payment_method_title' => 'Stripe Platform',
+            //     'set_paid'             => true,
+            //     'billing'              => [
+            //         'first_name' => 'John',
+            //         'last_name'  => 'Doe',
+            //         'address_1'  => '969 Market',
+            //         'address_2'  => '',
+            //         'city'       => 'San Francisco',
+            //         'state'      => 'CA',
+            //         'postcode'   => '94103',
+            //         'country'    => 'US',
+            //         'email'      => 'john.doe@example.com',
+            //         'phone'      => '(555) 555-5555',
+            //     ],
+            //     'shipping'             => [
+            //         'first_name' => 'John',
+            //         'last_name'  => 'Doe',
+            //         'address_1'  => '969 Market',
+            //         'address_2'  => '',
+            //         'city'       => 'San Francisco',
+            //         'state'      => 'CA',
+            //         'postcode'   => '94103',
+            //         'country'    => 'US',
+            //     ],
+            //     'line_items' => $line_items,
+            // ];
+
+            // $order = Order::create($data);
+
         } else {
             $order = Orders::find($order->id);
             $order->num_order = $stripe->id;
