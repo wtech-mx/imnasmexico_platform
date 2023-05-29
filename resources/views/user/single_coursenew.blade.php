@@ -62,7 +62,7 @@
                                 @php
                                 $descripcion = $curso->descripcion;
                                 if (strlen($descripcion) > 162) {
-                                    $descripcion = substr($descripcion, 0, 162) . '...</br><a href="#contenido"style="color:#836262;background: #fff;padding: 10px;border-radius: 19px;text-decoration: none;">Continuar leyendo</a>';
+                                    $descripcion = substr($descripcion, 0, 162) . '...</br><a href="#contenido"style="color:#836262;background: #fff;padding: 10px;border-radius: 19px;text-decoration: none;position: relative;top: 1rem;">Continuar leyendo</a>';
                                     echo $descripcion;
                                 }
                                 @endphp
@@ -640,6 +640,33 @@
                     </div>
                 </div>
                 @endif
+            </div>
+
+            <div class="card_single_horizon">
+                <div class="d-flex justify-content-between">
+                    <h2 class="title_curso mb-3">
+                        Pago mediante depósitos
+                    </h2>
+                    <img class="icon_nav_course" src="{{asset('assets/user/icons/depositar.png')}}" alt="">
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <p class="text_cards_horizon">
+                            Puedes realizar  los pagos mediante las siguiente cuentas. <br>
+                            Recuerda que se te pedira evidencia como el combrobante del deposito  y/o captura de la transaccion.
+                        </p>
+                    </div>
+                    <div class="col-12">
+                        <a class="text-center" data-bs-toggle="modal" data-bs-target="#depositos">
+                        <img class="img_depositos mt-2" src="{{asset('assets/user/utilidades/depostitos_Inbursa.jpg')}}" alt="">
+                        </a>
+                    </div>
+                    <div class="col-12">
+                        <a class="text-center" data-bs-toggle="modal" data-bs-target="#depositos">
+                        <img class="img_depositos mt-2" src="{{asset('assets/user/utilidades/depositos_bbva.jpg')}}" alt="">
+                        </a>
+                    </div>
+                </div>
             </div>
 
         </div>

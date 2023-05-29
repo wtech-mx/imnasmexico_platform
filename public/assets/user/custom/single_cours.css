@@ -196,6 +196,10 @@
     margin-top: 15%;
 }
 
+.img_depositos{
+    width: 100%;
+}
+
 @media only screen and (max-width: 1390px) {
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
