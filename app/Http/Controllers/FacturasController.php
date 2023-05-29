@@ -27,9 +27,9 @@ class FacturasController extends Controller
         }
             $factura = Factura::find($id);
             $factura->estatus = $request->get('estatus');
+            $factura->nota = $request->get('nota');
 
             if ($request->hasFile("factura")) {
-
                 $file = $request->file('factura');
                 $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();

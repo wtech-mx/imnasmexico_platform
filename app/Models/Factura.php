@@ -17,6 +17,7 @@ class Factura extends Model
         'id_orders',
         'factura',
         'estado',
+        'nota',
     ];
 
     public function User()

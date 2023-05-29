@@ -27,6 +27,13 @@
 
                         <div class="col-12 form-group">
                             <div class="form-group">
+                                <label for="factura">Nota</label>
+                               <textarea name="nota" id="nota" rows="5" class="form-control">{{ $factura->nota }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-12 form-group">
+                            <div class="form-group">
                                 <label for="factura">Factura PDF</label>
                                 <input type="file" id="factura" name="factura" class="form-control">
                             </div>
