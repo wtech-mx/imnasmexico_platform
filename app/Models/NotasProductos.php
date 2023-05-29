@@ -20,6 +20,10 @@ class NotasProductos extends Model
         'total',
         'restante',
         'nota',
+        'metodo_pago2',
+        'monto',
+        'monto2',
+        'foto_pago2',
     ];
 
     public function User()

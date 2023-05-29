@@ -51,6 +51,13 @@ class NotasProductosController extends Controller
             // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera');
+        }else{
+            $pago_fuera = public_path() . '/pagos';
+        }
+
         $notas_productos = new NotasProductos;
         $notas_productos->id_usuario = $payer->id;
         $notas_productos->metodo_pago = $request->get('metodo_pago');
@@ -58,6 +65,17 @@ class NotasProductosController extends Controller
         $notas_productos->restante = $request->get('descuento');
         $notas_productos->total = $request->get('totalDescuento');
         $notas_productos->nota = $request->get('nota');
+        $notas_productos->metodo_pago2 = $request->get('metodo_pago2');
+        $notas_productos->monto = $request->get('monto');
+        $notas_productos->monto2 = $request->get('monto2');
+
+        if ($request->hasFile("foto_pago2")) {
+            $file = $request->file('foto_pago2');
+            $path = $pago_fuera;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $notas_productos->foto_pago2 = $fileName;
+        }
         $notas_productos->save();
 
         if ($request->has('campo')) {
@@ -80,11 +98,20 @@ class NotasProductosController extends Controller
     }
 
     public function update(Request $request, $id){
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera');
+        }else{
+            $pago_fuera = public_path() . '/pagos';
+        }
         $notas = NotasProductos::find($id);
         $notas->metodo_pago = $request->get('metodo_pago');
         $notas->tipo = $request->get('tipo');
         $notas->fecha = $request->get('fecha');
         $notas->nota = $request->get('nota');
+        $notas->metodo_pago2 = $request->get('metodo_pago2');
+        $notas->monto = $request->get('monto');
+        $notas->monto2 = $request->get('monto2');
 
         $sum_total = ProductosNotasId::where('id_notas_productos', '=', $id)->get();
         $total_pro = $sum_total->sum('price');
@@ -118,7 +145,13 @@ class NotasProductosController extends Controller
 
             }
             $notas->total = $total;
-
+        if ($request->hasFile("foto_pago2")) {
+            $file = $request->file('foto_pago2');
+            $path = $pago_fuera;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $notas->foto_pago2 = $fileName;
+        }
         $notas->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

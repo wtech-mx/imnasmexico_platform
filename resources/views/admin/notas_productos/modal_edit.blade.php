@@ -137,33 +137,21 @@
                             <h5>Pago</h5>
                         </div>
 
-                        <div class="col-3">
-                            <div class="form-group">
-                                <label for="name">Metodo de pago</label>
-                                <select class="form-select" name="metodo_pago" id="metodo_pago">
-                                    <option value="{{ $nota->metodo_pago }}" selected>{{ $nota->metodo_pago }}</option>
-                                    <option value="Efectivo">Efectivo</option>
-                                    <option value="Tarjeta Credito/debito">Tarjeta Credito/debito</option>
-                                    <option value="Transferencia">Transferencia</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-2">
+                        <div class="col-4">
                             <div class="form-group">
                                 <label for="name">Descuento</label>
                                 <input id="restante" name="restante" type="number" class="form-control"  value="{{ $nota->restante }}" disabled>
                             </div>
                         </div>
 
-                        <div class="col-2">
+                        <div class="col-4">
                             <div class="form-group">
                                 <label for="name">Subtotal</label>
                                 <input id="subtotal" name="subtotal" type="text" class="form-control"  value="{{ $precio }}" disabled>
                             </div>
                         </div>
 
-                        <div class="col-2">
+                        <div class="col-4">
                             <div class="form-group">
                                 <label for="name">Total</label>
                                 @php
@@ -173,12 +161,68 @@
                             </div>
                         </div>
 
-                        <div class="col-12">
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="name">Metodo de pago</label>
+                                <select class="form-select" name="metodo_pago" id="metodo_pago">
+                                    <option value="{{ $nota->metodo_pago }}">{{ $nota->metodo_pago }}</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Tarjeta Credito/debito">Tarjeta Credito/debito</option>
+                                    <option value="Transferencia">Transferencia</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="name">Monto</label>
+                                <input class="form-control" type="text" id="monto" name="monto" value="{{ $nota->monto }}">
+                            </div>
+                        </div>
+
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="name">Foto Pago</label>
+                                <input class="form-control" type="file" id="foto_pago2" name="foto_pago2" value="{{ $nota->foto_pago2 }}">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="name">Metodo de pago 2</label>
+                                <select class="form-select" name="metodo_pago2" id="metodo_pago2">
+                                    <option value="{{ $nota->metodo_pago2 }}">{{ $nota->metodo_pago2 }}</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Tarjeta Credito/debito">Tarjeta Credito/debito</option>
+                                    <option value="Transferencia">Transferencia</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="name">Monto 2</label>
+                                <input class="form-control" type="text" id="monto2" name="monto2" value="{{ $nota->monto2 }}">
+                            </div>
+                        </div>
+
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="name">Comentario/nota</label>
                                 <textarea class="form-control" name="nota" id="nota" cols="30" rows="3">
                                     {{ $nota->nota }}
                                 </textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <label for="name">Foto Pago</label>
+                            <div class="form-group">
+                                @if ($nota->foto_pago2 == NULL)
+                                    <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 250px; height: 300px;"/>
+                                @else
+                                    <img id="blah" src="{{asset('pagos/'.$nota->foto_pago2) }}" alt="Imagen" style="width: 250px; height: 300px;"/>
+                                @endif
                             </div>
                         </div>
 
