@@ -41,10 +41,9 @@ class CustomAuthController extends Controller
                 return redirect("calendario")->withSuccess('Sesión iniciada');
             }
 
-
         }else{
-            return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+            return redirect()->back()
+            ->with('warning', 'Telefono incorrecto.');;
         }
 
 
@@ -119,6 +118,6 @@ class CustomAuthController extends Controller
         Session::flush();
         Auth::logout();
 
-        return Redirect('/');
+        return redirect("calendario")->withSuccess('Sesión terminada');
     }
 }

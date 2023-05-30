@@ -67,6 +67,7 @@ class ClientsController extends Controller
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->telefono = $request->get('telefono');
+        $user->username = $request->get('telefono');
         $user->password = Hash::make($request->get('telefono'));
         $user->cfdi = $request->get('cfdi');
         $user->rfc = $request->get('rfc');
