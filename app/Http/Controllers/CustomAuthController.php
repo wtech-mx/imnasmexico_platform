@@ -36,7 +36,7 @@ class CustomAuthController extends Controller
 
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))){
             if(Auth::user()->cliente == '2'){
-                return view('profesor.dashboard');
+                return redirect('/profesor/inicio');
             }else{
                 return redirect("calendario")->withSuccess('Sesión iniciada');
             }
