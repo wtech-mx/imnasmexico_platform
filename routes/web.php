@@ -171,8 +171,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/profesores', [App\Http\Controllers\ProfesoresController::class, 'index_profesores'])->name('profesores.index');
     Route::post('/admin/profesores/store', [App\Http\Controllers\ProfesoresController::class, 'store_profesores'])->name('profesores.store');
     Route::patch('/admin/profesores/update/{id}', [App\Http\Controllers\ProfesoresController::class, 'update_profesores'])->name('profesores.update');
-    Route::get('/profesores', [App\Http\Controllers\ProfesoresController::class, 'index_profesor_single'])->name('single_course.index');
+    Route::get('/profesor/cursos', [App\Http\Controllers\ProfesoresController::class, 'index_profesor_single'])->name('single_course.index');
 
+    Route::get('/profesor/inicio', [App\Http\Controllers\ProfesoresController::class, 'dashboard'])->name('dashboard.index');
     Route::get('/profesor/clase/{id}', [App\Http\Controllers\ProfesoresController::class, 'index_clase'])->name('clase.index');
     Route::post('/profesor/changeStatus', [App\Http\Controllers\ProfesoresController::class, 'ChangeAsistenciaStatus'])->name('ChangeAsistenciaStatus.clase');
 

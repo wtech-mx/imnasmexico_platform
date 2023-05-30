@@ -26,6 +26,14 @@ class ProfesoresController extends Controller
         return view('profesor.single_clase', compact('cursos'));
     }
 
+    public function dashboard(Request $request){
+        $id_profesor = auth::user()->id;
+
+        $cursos = Cursos::where('estatus','=', '1')->where('id_profesor', '=', $id_profesor)->count();
+
+        return view('profesor.dashboard', compact('cursos'));
+    }
+
     public function index_clase($id){
         $id_profesor = auth::user()->id;
 

@@ -35,7 +35,7 @@
                     <a href="{{ route('single_course.index') }}" style="text-decoration: none;color:#000;">
                         <h2>Mis clases</h2>
                     </a>
-                    <h2><strong>5</strong></h2>
+                    <h2><strong>{{ $cursos }}</strong></h2>
                 </div>
             </div>
         </div>
