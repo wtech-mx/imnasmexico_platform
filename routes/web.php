@@ -169,7 +169,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/profesores', [App\Http\Controllers\ProfesoresController::class, 'index_profesores'])->name('profesores.index');
     Route::post('/admin/profesores/store', [App\Http\Controllers\ProfesoresController::class, 'store_profesores'])->name('profesores.store');
     Route::patch('/admin/profesores/update/{id}', [App\Http\Controllers\ProfesoresController::class, 'update_profesores'])->name('profesores.update');
+    Route::get('/profesores', [App\Http\Controllers\ProfesoresController::class, 'index_profesor_single'])->name('single_course.index');
 
+
+    Route::get('fullcalender', [FullCalenderController::class, 'index']);
+    Route::post('fullcalenderAjax', [FullCalenderController::class, 'ajax']);
 
     // =============== M O D U L O   P A G O S  P O R  F U E R A ===============================
     Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\PagosFueraController::class, 'inscripcion'])->name('pagos.inscripcion');

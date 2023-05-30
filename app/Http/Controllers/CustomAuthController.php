@@ -20,7 +20,6 @@ class CustomAuthController extends Controller
     {
 
         $input = $request->all();
-
         $request->validate([
             'password' => 'required',
         ]);
@@ -34,9 +33,15 @@ class CustomAuthController extends Controller
 
 
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password'])))
-        {
-            return redirect("calendario")->withSuccess('Sesión iniciada');
+
+        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))){
+            if(Auth::user()->cliente == '2'){
+                return view('profesor.dashboard');
+            }else{
+                return redirect("calendario")->withSuccess('Sesión iniciada');
+            }
+
+
         }else{
             return redirect()->route('login')
                 ->with('error','Email-Address And Password Are Wrong.');

@@ -75,8 +75,10 @@
                             <div class="card_single_horizon2 mt-3 mt-md-0">
                                 <h2 class="title_curso">Fecha y Hora</h2>
                                 <p class="text_cards_horizon">
-                                    {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
-                                    - {{$fecha_final}}
+                                    {{$fecha_inicial}}
+
+                                    @if ($curso->fecha_inicial == $curso->fecha_final)
+                                    @else - {{$fecha_final}}
                                     @endif,
                                     @if ($curso->sin_fin == '1')
                                         {{$hora_inicial}}</p>

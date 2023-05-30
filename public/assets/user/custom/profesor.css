@@ -1,0 +1,22 @@
+.bg_main{
+    background-color: #836262;
+}
+
+.content_fullcalendar{
+    background-color: #fff;
+    border-radius: 19px;
+    padding: 10px;
+}
+
+.tittle_dash{
+    border-radius: 19px;
+    background: #fff;
+    border-radius: 19px;
+    padding: 15px;
+}
+
+.container_card_class{
+    background-color: #F5ECE4;
+    border-radius: 19px;
+    padding: 30px;
+}
