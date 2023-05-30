@@ -35,7 +35,12 @@
                     <a href="{{ route('single_course.index') }}" style="text-decoration: none;color:#000;">
                         <h2>Mis clases</h2>
                     </a>
-                    <h2><strong>{{ $cursos }}</strong></h2>
+                    @if ($cursos == NULL)
+                        <h2>0</h2>
+                    @else
+                        <h2><strong>{{ $cursos }}</strong></h2>
+                    @endif
+
                 </div>
             </div>
         </div>
