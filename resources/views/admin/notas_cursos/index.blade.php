@@ -90,51 +90,59 @@
 @section('datatable')
 
 <script>
-
     document.addEventListener('DOMContentLoaded', function() {
-    var agregarCampoBtn = document.getElementById('agregarCampo');
-    var camposContainer = document.getElementById('camposContainer');
-    var campoExistente = camposContainer.querySelector('.campo');
-    var totalInput = document.getElementById('total');
-    var descuentoInput = document.getElementById('descuento');
-    var totalDescuentoInput = document.getElementById('totalDescuento');
+        var agregarCampoBtn = document.getElementById('agregarCampo');
+        var camposContainer = document.getElementById('camposContainer');
+        var campoExistente = camposContainer.querySelector('.campo');
+        var totalInput = document.getElementById('total');
+        var descuentoInput = document.getElementById('descuento');
+        var totalDescuentoInput = document.getElementById('totalDescuento');
 
-    agregarCampoBtn.addEventListener('click', function() {
-        var nuevoCampo = campoExistente.cloneNode(true);
-        camposContainer.appendChild(nuevoCampo);
-    });
+        agregarCampoBtn.addEventListener('click', function() {
+            var nuevoCampo = campoExistente.cloneNode(true);
+            camposContainer.appendChild(nuevoCampo);
+        });
 
-    camposContainer.addEventListener('click', function(event) {
-        if (event.target.classList.contains('eliminarCampo')) {
-        var campo = event.target.closest('.campo');
-        campo.parentNode.removeChild(campo);
-        } else {
-        var precios = camposContainer.querySelectorAll('select[name="campo[]"] option:checked');
-        var total = 0;
+        camposContainer.addEventListener('change', function(event) {
+            if (event.target.classList.contains('cliente')) {
+                var precioInput = event.target.parentNode.querySelector('input[name="precio[]"]');
+                var precio = event.target.options[event.target.selectedIndex].getAttribute('data-precio');
+                precioInput.value = precio;
+            }
+            updateTotal();
+        });
 
-        for (var i = 0; i < precios.length; i++) {
-            total += parseFloat(precios[i].getAttribute('data-precio'));
+        camposContainer.addEventListener('input', function(event) {
+            if (event.target.classList.contains('precio')) {
+                updateTotal();
+            }
+        });
+
+        function updateTotal() {
+            var campos = camposContainer.querySelectorAll('.campo');
+            var total = 0;
+
+            for (var i = 0; i < campos.length; i++) {
+                var precioInput = campos[i].querySelector('.precio');
+                var precio = parseFloat(precioInput.value) || 0;
+                total += precio;
+            }
+
+            totalInput.value = total.toFixed(2);
+
+            // Calcular el descuento
+            var descuento = parseFloat(descuentoInput.value) || 0;
+            var totalDescuento = total - (total * (descuento / 100));
+            totalDescuentoInput.value = totalDescuento.toFixed(2);
         }
 
-        totalInput.value = total.toFixed(2);
-
-        // Calcular el descuento
-        var descuento = parseFloat(descuentoInput.value);
-        var totalDescuento = total - (total * (descuento / 100));
-        totalDescuentoInput.value = totalDescuento.toFixed(2);
-        }
+        descuentoInput.addEventListener('keyup', function() {
+            updateTotal();
+        });
     });
-
-    descuentoInput.addEventListener('keyup', function() {
-        var descuento = parseFloat(descuentoInput.value);
-        var total = parseFloat(totalInput.value);
-        var totalDescuento = total - (total * (descuento / 100));
-        totalDescuentoInput.value = totalDescuento.toFixed(2);
-    });
-    });
-
-
 </script>
+
+
 
 <script src="{{ asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
@@ -150,8 +158,9 @@
     });
 
   </script>
-@endsection
 
+
+@endsection
 @section('select2')
     <script>
         function updatePrecio(selectElement) {

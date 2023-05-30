@@ -75,6 +75,8 @@ Route::get('vistahorizontal', function () {
 
 Auth::routes();
 
+Route::post('/votar', [App\Http\Controllers\WebPageController::class, 'votar'])->name('votar');
+
 Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->name('user.home');
 Route::get('avales', [App\Http\Controllers\WebPageController::class, 'avales'])->name('user.avales');
 Route::get('nuestras_instalaciones', [App\Http\Controllers\WebPageController::class, 'instalaciones'])->name('user.instalaciones');

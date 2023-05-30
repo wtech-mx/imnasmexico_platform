@@ -164,6 +164,34 @@
     </div>
 </section>
 
+{{-- <section class="primario bg_overley" style="background-color:#836262;"id="alumnado">
+    <div class="row">
+
+        <div class="col-12 col-md-6 m-auto">
+
+            <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">Votaciones</h1>
+            <p class="text-center text-white mt-auto parrafo_instalaciones">
+                Vota por tu favorito
+            </p>
+
+        </div>
+
+        <div class="col-12 col-md-6">
+            <div class="d-flex justify-content-center">
+                <div class="card card-custom space_Card mb-3" style="">
+                    @foreach ($concursantes as $concursante)
+                        <div class="concursante">
+                            <h3>{{ $concursante->User->name }}</h3>
+                            <p>Contador: <span id="contador-{{ $concursante->id }}">{{ $concursante->votos }}</span></p>
+                            <button class="btn-votar" data-id="{{ $concursante->id }}">Votar</button>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section> --}}
 
 <section class="primario bg_overley" style="background-color:#F5ECE4;" id="cafeteria">
     <div class="row">
@@ -486,9 +514,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
     integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
     crossorigin="anonymous"></script>
-<style>
-
-</style>
 <script>
     $('.owl-carousel').owlCarousel({
         loop: true,
@@ -514,6 +539,31 @@
 
         }
     })
+</script>
+
+<script>
+    $(function() {
+        $('.btn-votar').click(function() {
+            var concursanteId = $(this).data('id');
+
+            $.ajax({
+                type: "POST",
+                url: "{{ route('votar') }}",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    concursanteId: concursanteId
+                },
+                success: function(data) {
+                    console.log(concursanteId);
+                    var contadorElement = $('#contador-' + concursanteId);
+                    contadorElement.text(data.votos);
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
 </script>
 
 @endsection

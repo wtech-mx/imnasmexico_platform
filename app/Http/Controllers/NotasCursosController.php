@@ -91,30 +91,35 @@ class NotasCursosController extends Controller
 
         $id = $notas_cursos->id;
         $nuevosCampos = $request->input('campo');
-        if ($nuevosCampos) {
-            foreach ($nuevosCampos as $campo) {
-                $notas_inscripcion = new NotasInscripcion;
-                $notas_inscripcion->id_nota = $id;
-                $notas_inscripcion->id_curso = intval($campo);
-                $notas_inscripcion->save();
+        $precio = $request->input('precio');
 
-                $curso = CursosTickets::where('id', '=', $campo)->first();
-                $order_ticket = new OrdersTickets;
-                $order_ticket->id_order = $order->id;
-                $order_ticket->id_usuario = $payer->id;
-                $order_ticket->id_tickets = intval($campo);
-                $order_ticket->id_curso = $curso->id_curso;
-                $order_ticket->save();
-            }
+        for ($count = 0; $count < count($nuevosCampos); $count++) {
+            $data = array(
+                'id_nota' => $id,
+                'id_curso' => $nuevosCampos[$count],
+                'precio' => $precio[$count],
+            );
+            $insert_data2[] = $data;
+
+            $curso = CursosTickets::where('id', '=', $nuevosCampos[$count])->first();
+            $order_ticket = new OrdersTickets;
+            $order_ticket->id_order = $order->id;
+            $order_ticket->id_usuario = $payer->id;
+            $order_ticket->id_tickets = $nuevosCampos[$count];
+            $order_ticket->id_curso = $curso->id_curso;
+            $order_ticket->save();
         }
+        NotasInscripcion::insert($insert_data2);
 
         $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
         $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
+
         $user = $orden_ticket2->User->name;
         $id_order = $orden_ticket2->id_order;
         $pago = $orden_ticket2->Orders->pago;
         $forma_pago = $orden_ticket2->Orders->forma_pago;
         // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
+
         foreach ($orden_ticket as $details) {
             if ($details->Cursos->modalidad == 'Online') {
                 Mail::to($order->User->email)->send(new PlantillaTicket($details));

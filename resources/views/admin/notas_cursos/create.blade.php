@@ -49,7 +49,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-1" style="display: none">
+                            <div class="col-1">
                                 <div class="form-group">
                                     <label for="">-</label>
                                     <button class="mt-3" type="button" id="agregarCampo" style="border-radius: 9px;width: 36px;height: 40px;">
@@ -63,12 +63,13 @@
                                     <label for="">Curso</label>
                                     <div id="camposContainer">
                                         <div class="campo mt-3">
-                                            <select name="campo[]" class="form-select d-inline-block cliente" style="width: 70%!important;" onchange="updatePrecio(this)" multiple="multiple">
+                                            <select name="campo[]" class="form-select d-inline-block" style="width: 70%!important;" onchange="updatePrecio(this); updateTotal()">
                                                 <option value="">Seleccione Curso</option>
                                                 @foreach ($cursos as $curso)
                                                 <option value="{{ $curso->id }}" data-precio="{{ $curso->precio }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
                                                 @endforeach
                                             </select>
+                                            <input type="text" name="precio[]" class="form-control d-inline-block precio" style="width: 20%!important;" onchange="updateTotal()">
                                         </div>
                                     </div>
                                 </div>

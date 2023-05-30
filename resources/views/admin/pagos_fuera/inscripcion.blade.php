@@ -81,8 +81,8 @@
 
 <script>
     const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-      searchable: true,
-      fixedHeight: false
+        searchable: true,
+        fixedHeight: false
     });
 
     $(function() {
@@ -90,20 +90,25 @@
             var inscripcion = $(this).prop('checked') == true ? 1 : 0;
             var id = $(this).data('id');
 
+            // Obtener el valor del token CSRF desde la etiqueta meta
+            var token = $('meta[name="csrf-token"]').attr('content');
+
+            // Enviar el token CSRF junto con los demás datos
             $.ajax({
-                type: "GET",
+                type: "POST",
                 dataType: "json",
                 url: '{{ route('ChangeInscripcionStatus.pagos') }}',
                 data: {
+                    '_token': token, // Agregar el token CSRF en los datos
                     'inscripcion': inscripcion,
                     'id': id
                 },
                 success: function(data) {
-                    console.log(data.success)
+                    console.log(data.success);
                 }
             });
-        })
-    })
+        });
+    });
 </script>
 
 @endsection

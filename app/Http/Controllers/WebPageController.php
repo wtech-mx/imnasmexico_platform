@@ -8,6 +8,8 @@ use App\Models\WebPage;
 use App\Models\Estandar;
 use App\Models\Revoes;
 use App\Models\Comentarios;
+use App\Models\User;
+use App\Models\Votos;
 
 class WebPageController extends Controller
 {
@@ -25,8 +27,18 @@ class WebPageController extends Controller
 
     public function nosotros(Request $request){
         $webpage = WebPage::first();
+        $concursantes = Votos::get();
 
-        return view('user.nosotros', compact('webpage'));
+        return view('user.nosotros', compact('webpage', 'concursantes'));
+    }
+
+    public function votar(Request $request)
+    {
+        $concursanteId = $request->input('concursanteId');
+        $concursante = Votos::findOrFail($concursanteId);
+        $concursante->increment('votos');
+
+        return response()->json(['votos' => $concursante->votos]);
     }
 
     public function avales(Request $request){
