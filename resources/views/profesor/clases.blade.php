@@ -1,7 +1,7 @@
 @extends('layouts.app_profesor')
 
 @section('template_title')
-    Clase
+    Clase de {{$curso->nombre}}
 @endsection
 
 @section('css_custom')

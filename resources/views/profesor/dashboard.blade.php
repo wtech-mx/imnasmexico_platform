@@ -29,10 +29,10 @@
         <div class="d-flex align-items-center">
             <div class="container_card_class">
                 <div class="d-flex justify-content-evenly">
-                    <a href="{{ route('single_course.index') }}" style="display: contents;">
+                    <a href="{{ route('clase.index') }}" style="display: contents;">
                         <img src="{{asset('assets/user/icons/meeting.webp')}}" alt="" style="width: 10%;">
                     </a>
-                    <a href="{{ route('single_course.index') }}" style="text-decoration: none;color:#000;">
+                    <a href="{{ route('clase.index') }}" style="text-decoration: none;color:#000;">
                         <h2>Mis clases</h2>
                     </a>
                     @if ($cursos == NULL)

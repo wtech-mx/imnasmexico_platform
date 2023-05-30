@@ -19,11 +19,13 @@ class ProfesoresController extends Controller
         return view('admin.profesores.index', compact('users'));
     }
 
-    public function index_profesor_single(Request $request){
+    public function index_profesor_single($id){
         $id_profesor = auth::user()->id;
 
-        $cursos = Cursos::where('id_profesor', '=', $id_profesor)->get();
-        return view('profesor.single_clase', compact('cursos'));
+        $curso = Cursos::find($id);
+        $ordenes = OrdersTickets::where('id_curso', '=', $id)->get();
+        $tickets = CursosTickets::where('id_curso', '=', $id)->get();
+        return view('profesor.clases', compact('curso', 'ordenes', 'tickets'));
     }
 
     public function dashboard(Request $request){
@@ -34,13 +36,12 @@ class ProfesoresController extends Controller
         return view('profesor.dashboard', compact('cursos'));
     }
 
-    public function index_clase($id){
+    public function index_clase(Request $request){
+
         $id_profesor = auth::user()->id;
 
-        $curso = Cursos::find($id);
-        $ordenes = OrdersTickets::where('id_curso', '=', $id)->get();
-        $tickets = CursosTickets::where('id_curso', '=', $id)->get();
-        return view('profesor.clases', compact('curso', 'ordenes', 'tickets'));
+        $cursos = Cursos::where('id_profesor', '=', $id_profesor)->get();
+        return view('profesor.single_clase', compact('cursos'));
     }
 
     public function ChangeAsistenciaStatus(Request $request)
