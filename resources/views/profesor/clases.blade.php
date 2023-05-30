@@ -14,48 +14,53 @@
 <div class="row">
     @foreach ($cursos as $curso)
     <div class="col-12 col-md-12 mt-3 mb-3 col-md-3 mb-md-3 col-lg-6 mb-lg-5 mt-lg-5">
-        <a href="{{ route('clase.index', $curso->id) }}" style="display: contents;">
+        <a href="{{ route('single_course.index', $curso->id) }}" style="display: contents;color: #836262;">
             <div class="container_card_class">
-                <div class="d-flex justify-content-evenly">
 
+                <div class="row">
+                    <div class="col-4">
                         <img src="{{asset('curso/'. $curso->foto) }}" alt="" style="width: 10%;">
+                    </div>
 
-                        <p class="text-center">
-                            {{$curso->nombre}} <br>
-                            <strong>{{ $curso->modalidad}}</strong> <br>
+                    <div class="col-8">
+                        <h3 class="tittle_cursos mb-2">
+                            #{{$curso->id}} - {{$curso->nombre}}
+                        </h3>
+                        <p class="text-left mb-3">
+                            <strong class="btn_radios_modalidad">{{ $curso->modalidad}}</strong> <br>
                                 @php
+                                    $fecha_inicial = $curso->fecha_inicial;
+                                    $date = new DateTime($fecha_inicial);
+                                    $dia = $date->format('j');
+                                    $mes = $date->format('M');
+                                    $fechaFormateada = $dia . ' ' . $mes;
 
-                                $fecha_inicial = $curso->fecha_inicial;
-                                $date = new DateTime($fecha_inicial);
-                                $dia = $date->format('j');
-                                $mes = $date->format('M');
-                                $fechaFormateada = $dia . ' ' . $mes;
+                                    $fecha_final = $curso->fecha_inicial;
+                                    $date = new DateTime($fecha_final);
+                                    $dia = $date->format('j');
+                                    $mes = $date->format('M');
+                                    $fechaFormateada2 = $dia . ' ' . $mes;
 
-                                $fecha_final = $curso->fecha_inicial;
-                                $date = new DateTime($fecha_final);
-                                $dia = $date->format('j');
-                                $mes = $date->format('M');
-                                $fechaFormateada2 = $dia . ' ' . $mes;
+                                    $hora = $curso->hora_inicial;
+                                    $time = DateTime::createFromFormat('H:i:s', $hora);
+                                    $horaFormateada = $time->format('H:i');
 
-                                $hora = $curso->hora_inicial;
-                                $time = DateTime::createFromFormat('H:i:s', $hora);
-                                $horaFormateada = $time->format('H:i');
-
-                                $horafinal = $curso->hora_final;
-                                $time = DateTime::createFromFormat('H:i:s', $horafinal);
-                                $horaFormateada2 = $time->format('H:i');
-
+                                    $horafinal = $curso->hora_final;
+                                    $time = DateTime::createFromFormat('H:i:s', $horafinal);
+                                    $horaFormateada2 = $time->format('H:i');
                                 @endphp
-                                <strong>Fecha Inicial : </strong>
+                        </p>
+                        <p class="text-left">
+                                <strong class="text-dark">Fecha Inicial : </strong>
                                 {{$fechaFormateada}} - {{$horaFormateada}} <br>
 
-                                <strong>Fecha Final :</strong>
+                                <strong class="text-dark">Fecha Final :</strong>
                                 {{$fechaFormateada2}} - {{$horaFormateada2}} <br>
 
-                                <strong>En lista : </strong> 55 Alumnas
+                                <strong class="text-dark">En lista : </strong> 55 Alumnas
 
                         </p>
-
+                    </div>
                 </div>
             </div>
         </a>

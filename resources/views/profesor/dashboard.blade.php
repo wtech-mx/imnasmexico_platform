@@ -40,7 +40,6 @@
                     @else
                         <h2><strong>{{ $cursos }}</strong></h2>
                     @endif
-
                 </div>
             </div>
         </div>

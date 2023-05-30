@@ -7,6 +7,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('favicon/'. $configuracion->favicon) }}">
     <link rel="shortcut icon" href="{{asset('assets/user/logotipos/favicon.png')}}" type="image/png">
     <link rel="stylesheet" href="{{asset('assets/user/custom/profesor.css')}}">
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 
     <title>
         @yield('template_title') - {{$configuracion->nombre_sistema}}
@@ -19,7 +20,7 @@
   <body>
 
     <main class="container-fluid bg_main">
-    @yield('content')
+        @yield('content')
     </main>
 
     @yield('js')
