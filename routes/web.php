@@ -173,6 +173,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/profesores/update/{id}', [App\Http\Controllers\ProfesoresController::class, 'update_profesores'])->name('profesores.update');
     Route::get('/profesores', [App\Http\Controllers\ProfesoresController::class, 'index_profesor_single'])->name('single_course.index');
 
+    Route::get('/profesor/clase/{id}', [App\Http\Controllers\ProfesoresController::class, 'index_clase'])->name('clase.index');
+
 
     Route::get('fullcalender', [App\Http\Controllers\FullCalenderController::class, 'index']);
     Route::post('fullcalenderAjax', [App\Http\Controllers\FullCalenderController::class, 'ajax']);

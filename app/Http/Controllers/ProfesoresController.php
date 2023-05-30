@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cursos;
+use App\Models\CursosTickets;
+use App\Models\OrdersTickets;
 use Session;
 use Hash;
 use Str;
@@ -21,7 +23,15 @@ class ProfesoresController extends Controller
 
         $cursos = Cursos::where('id_profesor', '=', $id_profesor)->get();
         return view('profesor.single_clase', compact('cursos'));
+    }
 
+    public function index_clase($id){
+        $id_profesor = auth::user()->id;
+
+        $curso = Cursos::find($id);
+        $ordenes = OrdersTickets::where('id_curso', '=', $id)->get();
+        $tickets = CursosTickets::where('id_curso', '=', $id)->get();
+        return view('profesor.clases', compact('curso', 'ordenes', 'tickets'));
     }
 
     public function store_profesores(Request $request){
