@@ -51,11 +51,14 @@
                         {{$fechaFormateada2}} - {{$horaFormateada2}} <br>
 
                         <strong>Lista : </strong> 55 Alumnas
-                        <ul class="nav nav-pills nav-fill p-1" id="pills-tab" role="tablist">
+                        <ul style="list-style-type:circle">
                             @foreach ($ordenes as $order)
                                 @if ($order->Orders->estatus == '1')
-                                <li class="nav-item" role="presentation">
+                                <li >
                                         {{ $order->User->name }}
+                                        <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $order->User->telefono }}&text=Recordatorio%20de%20clase%3A%0AHola%20{{ $order->User->name }}%2C%20te%20recordamos%20que%20tu%20clase%20{{ $order->Cursos->nombre }}%2C%20inicia%20hoy%20a%20las%20{{ $order->Cursos->hora_inicial }}.%0ALa%20liga%20de%20clase%20la%20podrás%20encontrar%20en%20tu%20correo%20o%20ingresando%20a%20tu%20perfil%20con%20el%20número%20que%20proporcionaste%20%22{{ $order->User->telefono }}%22.%0A">
+                                            <i class="fa fa-whatsapp"></i>
+                                        </a>
 
                                         <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form" style="display: inline-block">
                                             @csrf
@@ -63,8 +66,12 @@
                                             <input type="hidden" name="ticket" id="ticket" value="{{ $order->id_tickets }}">
                                             <input type="hidden" name="id_usuario" id="id_usuario" value="{{ $order->id_usuario }}">
                                             <input type="hidden" name="curso" id="curso" value="{{ $order->id_curso }}">
-                                            <button type="submit" class="btn btn-sm btn-primary" ><i class="fas fa-envelope"></i></button>
+                                            <button type="submit" class="btn btn-sm btn-primary" >Correo</button>
                                         </form>
+
+                                        <input data-id="{{ $order->Orders->id }}" class="toggle-class" type="checkbox"
+                                        data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                        data-on="Active" data-off="InActive" {{ $order->Orders->asistencia ? 'checked' : '' }}>
                                 </li>
                                 @endif
                             @endforeach
@@ -77,4 +84,33 @@
 
 @endsection
 
+@section('datatable')
 
+<script>
+    $(function() {
+        $('.toggle-class').change(function() {
+            var asistencia = $(this).prop('checked') == true ? 1 : 0;
+            var id = $(this).data('id');
+
+            // Obtener el valor del token CSRF desde la etiqueta meta
+            var token = $('meta[name="csrf-token"]').attr('content');
+
+            // Enviar el token CSRF junto con los demás datos
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: '{{ route('ChangeAsistenciaStatus.clase') }}',
+                data: {
+                    '_token': token, // Agregar el token CSRF en los datos
+                    'asistencia': asistencia,
+                    'id': id
+                },
+                success: function(data) {
+                    console.log(data.success);
+                }
+            });
+        });
+    });
+</script>
+
+@endsection

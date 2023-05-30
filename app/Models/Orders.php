@@ -18,7 +18,8 @@ class Orders extends Model
         'pago',
         'forma_pago',
         'estatus',
-        'fecha'
+        'fecha',
+        'asistencia',
     ];
 
     public function OrdersTickets()

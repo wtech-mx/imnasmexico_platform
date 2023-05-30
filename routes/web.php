@@ -174,7 +174,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/profesores', [App\Http\Controllers\ProfesoresController::class, 'index_profesor_single'])->name('single_course.index');
 
     Route::get('/profesor/clase/{id}', [App\Http\Controllers\ProfesoresController::class, 'index_clase'])->name('clase.index');
-
+    Route::post('/profesor/changeStatus', [App\Http\Controllers\ProfesoresController::class, 'ChangeAsistenciaStatus'])->name('ChangeAsistenciaStatus.clase');
 
     Route::get('fullcalender', [App\Http\Controllers\FullCalenderController::class, 'index']);
     Route::post('fullcalenderAjax', [App\Http\Controllers\FullCalenderController::class, 'ajax']);

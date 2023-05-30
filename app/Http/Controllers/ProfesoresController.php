@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cursos;
 use App\Models\CursosTickets;
+use App\Models\Orders;
 use App\Models\OrdersTickets;
 use Session;
 use Hash;
@@ -32,6 +33,15 @@ class ProfesoresController extends Controller
         $ordenes = OrdersTickets::where('id_curso', '=', $id)->get();
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
         return view('profesor.clases', compact('curso', 'ordenes', 'tickets'));
+    }
+
+    public function ChangeAsistenciaStatus(Request $request)
+    {
+        $asistencia = Orders::find($request->id);
+        $asistencia->asistencia = $request->asistencia;
+        $asistencia->save();
+
+        return response()->json(['success' => 'Asistencia registrada.']);
     }
 
     public function store_profesores(Request $request){
