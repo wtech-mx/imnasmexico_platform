@@ -87,10 +87,13 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-lg-4 form-group ">
+                    <div class="col-8 col-lg-8 form-group ">
                         <button type="submit" class="btn_save_profile" >
                             Guardar
                         </button>
+                    </div>
+                    <div class="col-4 col-lg-4 form-group ">
+                        <a class="btn_save_profile" type="button" href="{{ route('signout') }}">Cerrar Sesión</a>
                     </div>
                 </div>
             </form>
