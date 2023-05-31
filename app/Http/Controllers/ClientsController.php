@@ -14,6 +14,8 @@ use Session;
 use Hash;
 use App\Imports\UsersImport;
 use App\Models\Carpetas;
+use App\Models\CarpetasEstandares;
+use App\Models\CursosEstandares;
 use App\Models\Publicidad;
 use App\Models\Factura;
 use Maatwebsite\Excel\Facades\Excel;
@@ -58,7 +60,22 @@ class ClientsController extends Controller
         $documentos = Documentos::where('id_usuario', '=', auth()->user()->id)->get();
         $documentos_estandares = DocumentosEstandares::where('id_usuario', '=', auth()->user()->id)->get();
 
-        return view('user.profile',compact('cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad', 'carpetas'));
+        // Obtener el ID del usuario actualmente autenticado
+        $idUsuario = Auth::user()->id;
+
+        // Obtener las órdenes completadas del usuario
+        $ordenesCompletadas = Orders::where('id_usuario', $idUsuario)->where('estatus', 1)->pluck('id');
+
+        // Obtener los IDs de los cursos comprados en las órdenes completadas
+        $cursosComprados = OrdersTickets::whereIn('id_order', $ordenesCompletadas)->pluck('id_curso');
+        // Obtener los IDs de los estándares asociados a los cursos comprados
+        $estandares = CursosEstandares::whereIn('id_curso', $cursosComprados)->pluck('id_carpeta');
+
+        // Obtener los datos de los estándares
+        $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
+
+
+        return view('user.profile',compact('estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad', 'carpetas'));
     }
 
     public function update(Request $request, $code)

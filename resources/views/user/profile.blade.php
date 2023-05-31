@@ -326,28 +326,30 @@ Mi perfil- {{$cliente->name}}
 
                                                 <div class="col-12">
                                                     <div class="row">
-                                                    @foreach ($carpetas as $carpeta)
-                                                    @php
-                                                        $file_info = new SplFileInfo($carpeta->nombre_recurso);
-                                                        $extension = $file_info->getExtension();
-                                                    @endphp
-                                                    @if ($carpeta->id_carpeta == $video->Cursos->carpeta)
-                                                        @if ($extension === 'pdf')
-                                                        <div class="col-12 mt-3">
-                                                            <p class="text-center">
-                                                            <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
-                                                            <a class="text-dark" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
-                                                            </p>
-                                                        </div>
-                                                        @else
-                                                        <div class="col-12 mt-3">
-                                                            <p class="text-center">
-                                                                <img class="img_material_clase_pc" id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" />
-                                                            </p>
-                                                        </div>
-                                                        @endif
+                                                    @if ($carpetas != NULL)
+                                                        @foreach ($carpetas as $carpeta)
+                                                            @php
+                                                                $file_info = new SplFileInfo($carpeta->nombre_recurso);
+                                                                $extension = $file_info->getExtension();
+                                                            @endphp
+                                                            @if ($carpeta->id_carpeta == $video->Cursos->carpeta)
+                                                                @if ($extension === 'pdf')
+                                                                <div class="col-12 mt-3">
+                                                                    <p class="text-center">
+                                                                    <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
+                                                                    <a class="text-dark" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
+                                                                    </p>
+                                                                </div>
+                                                                @else
+                                                                <div class="col-12 mt-3">
+                                                                    <p class="text-center">
+                                                                        <img class="img_material_clase_pc" id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" />
+                                                                    </p>
+                                                                </div>
+                                                                @endif
+                                                            @endif
+                                                        @endforeach
                                                     @endif
-                                                    @endforeach
                                                     </div>
                                                 </div>
 
@@ -379,7 +381,7 @@ Mi perfil- {{$cliente->name}}
                                                             @elseif ($extension == 'pdf')
                                                             <p class="text-center">
                                                             <embed class="embed_pdf_publicidad" src="{{asset('publicidad/'. $item->nombre) }}" type="application/pdf"  />
-                                                            <a class="text-dark" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
+                                                            <a class="text-dark" href="{{ asset('publicidad/' . $item->nombre) }}" target="_blank" >Ver PDF</a>
                                                             </p>
                                                             @elseif ($extension == 'mp4')
                                                             <p class="text-center">

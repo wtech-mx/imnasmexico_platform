@@ -34,28 +34,30 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-material{{$video->id_tickets}}" role="tabpanel" aria-labelledby="nav-material-tab" tabindex="0">
                                     <div class="row">
-                                    @foreach ($carpetas as $carpeta)
-                                        @php
-                                            $file_info = new SplFileInfo($carpeta->nombre_recurso);
-                                            $extension = $file_info->getExtension();
-                                        @endphp
-                                        @if ($carpeta->id_carpeta == $video->Cursos->carpeta)
-                                            @if ($extension === 'pdf')
-                                            <div class="col-12 col-md-12 col-lg-6 col-xl-4">
-                                                <p class="text-center">
-                                                <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
-                                                    <a class="text-dark" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
-                                                </p>
-                                            </div>
-                                            @else
-                                            <div class="col-12 col-md-12 col-lg-6 col-xl-4 mt-xl-5 mt-lg-3 mt-md-2">
-                                                <p class="text-center">
-                                                <img class="img_material_clase_pc" id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" />
-                                                </p>
-                                            </div>
+                                    @if ($carpetas != NULL)
+                                        @foreach ($carpetas as $carpeta)
+                                            @php
+                                                $file_info = new SplFileInfo($carpeta->nombre_recurso);
+                                                $extension = $file_info->getExtension();
+                                            @endphp
+                                            @if ($carpeta->id_carpeta == $video->Cursos->carpeta)
+                                                @if ($extension === 'pdf')
+                                                <div class="col-12 col-md-12 col-lg-6 col-xl-4">
+                                                    <p class="text-center">
+                                                    <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
+                                                        <a class="text-dark" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
+                                                    </p>
+                                                </div>
+                                                @else
+                                                <div class="col-12 col-md-12 col-lg-6 col-xl-4 mt-xl-5 mt-lg-3 mt-md-2">
+                                                    <p class="text-center">
+                                                    <img class="img_material_clase_pc" id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" />
+                                                    </p>
+                                                </div>
+                                                @endif
                                             @endif
-                                        @endif
-                                    @endforeach
+                                        @endforeach
+                                    @endif
                                     </div>
                                 </div>
 
@@ -64,29 +66,29 @@
                                     <div id="carrousel_publicidad" class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
                                           @foreach ($publicidad as $item)
-                                          @php
-                                            $file_info = new SplFileInfo($item->nombre);
-                                            $extension = $file_info->getExtension();
-                                          @endphp
-                                          <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                            @if ($extension == 'jpg')
-                                            <p class="text-center">
-                                            <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
-                                            </p>
-                                            @elseif ($extension == 'png')
-                                            <p class="text-center">
-                                            <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
-                                            </p>
-                                            @elseif ($extension == 'jpeg')
-                                            <p class="text-center">
-                                            <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
-                                            </p>
-                                            @elseif ($extension == 'pdf')
-                                            <embed class="embed_pdf_publicidad" src="{{asset('publicidad/'. $item->nombre) }}" type="application/pdf"  />
-                                            @elseif ($extension == 'mp4')
-                                            <video class="video_publicidad" src="{{asset('publicidad/'. $item->nombre) }}" controls></video>
-                                            @endif
-                                          </div>
+                                            @php
+                                                $file_info = new SplFileInfo($item->nombre);
+                                                $extension = $file_info->getExtension();
+                                            @endphp
+                                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                                @if ($extension == 'jpg')
+                                                <p class="text-center">
+                                                <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                                </p>
+                                                @elseif ($extension == 'png')
+                                                <p class="text-center">
+                                                <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                                </p>
+                                                @elseif ($extension == 'jpeg')
+                                                <p class="text-center">
+                                                <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                                </p>
+                                                @elseif ($extension == 'pdf')
+                                                <embed class="embed_pdf_publicidad" src="{{asset('publicidad/'. $item->nombre) }}" type="application/pdf"  />
+                                                @elseif ($extension == 'mp4')
+                                                <video class="video_publicidad" src="{{asset('publicidad/'. $item->nombre) }}" controls></video>
+                                                @endif
+                                            </div>
                                           @endforeach
                                         </div>
 
