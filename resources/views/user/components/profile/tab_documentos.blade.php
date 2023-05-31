@@ -36,37 +36,97 @@
                     <div class="col-6 form-group p-3 mt-2">
                         <label for="ine">INE </label>
                         <input id="ine" name="ine" type="file" class="form-control" >
-                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                        @if (pathinfo($documento->ine, PATHINFO_EXTENSION) == 'pdf')
+                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine)}}" style="width: 60%; height: 60px;"></iframe>
+                            <p class="text-center ">
+                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver archivo</a>
+                            </p>
+                        @else
+                            <p class="text-center mt-2">
+                                <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver Imagen</a>
+                            </p>
+                        @endif
                     </div>
 
                     <div class="col-6 form-group p-3 mt-2">
                         <label for="curp">CURP</label>
                         <input id="curp" name="curp" type="file" class="form-control" >
-                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                        @if (pathinfo($documento->curp, PATHINFO_EXTENSION) == 'pdf')
+                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp)}}" style="width: 60%; height: 60px;"></iframe>
+                            <p class="text-center ">
+                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver archivo</a>
+                            </p>
+                        @else
+                            <p class="text-center mt-2">
+                                <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver Imagen</a>
+                            </p>
+                        @endif
                     </div>
 
                     <div class="col-6 form-group p-3 mt-2">
                         <label for="foto_tam_titulo">Foto tamaño titulo</label>
                         <input id="foto_tam_titulo" name="foto_tam_titulo" type="file" class="form-control" >
-                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_titulo) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                        @if (pathinfo($documento->foto_tam_titulo, PATHINFO_EXTENSION) == 'pdf')
+                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_titulo)}}" style="width: 60%; height: 60px;"></iframe>
+                            <p class="text-center ">
+                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_titulo) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver archivo</a>
+                            </p>
+                        @else
+                            <p class="text-center mt-2">
+                                <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_titulo) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_titulo) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver Imagen</a>
+                            </p>
+                        @endif
                     </div>
 
                     <div class="col-6 form-group p-3 mt-2">
                         <label for="foto_tam_infantil">Foto tamaño Infantil</label>
                         <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
-                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                        @if (pathinfo($documento->foto_tam_infantil, PATHINFO_EXTENSION) == 'pdf')
+                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil)}}" style="width: 60%; height: 60px;"></iframe>
+                            <p class="text-center ">
+                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver archivo</a>
+                            </p>
+                        @else
+                            <p class="text-center mt-2">
+                                <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver Imagen</a>
+                            </p>
+                        @endif
                     </div>
 
                     <div class="col-6 form-group p-3 mt-2">
                         <label for="carta_compromiso">Carta Compromiso</label>
                         <input id="carta_compromiso" name="carta_compromiso" type="file" class="form-control" >
-                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                        @if (pathinfo($documento->carta_compromiso, PATHINFO_EXTENSION) == 'pdf')
+                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso)}}" style="width: 60%; height: 60px;"></iframe>
+                            <p class="text-center ">
+                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver archivo</a>
+                            </p>
+                        @else
+                            <p class="text-center mt-2">
+                                <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver Imagen</a>
+                            </p>
+                        @endif
                     </div>
 
                     <div class="col-6 form-group p-3 mt-2">
                         <label for="firma">Firma</label>
                         <input id="firma" name="firma" type="file" class="form-control" >
-                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                        @if (pathinfo($documento->firma, PATHINFO_EXTENSION) == 'pdf')
+                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma)}}" style="width: 60%; height: 60px;"></iframe>
+                            <p class="text-center ">
+                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver archivo</a>
+                            </p>
+                        @else
+                            <p class="text-center mt-2">
+                                <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver Imagen</a>
+                            </p>
+                        @endif
                     </div>
             @endforeach
 
@@ -80,7 +140,7 @@
                 </div>
 
                 <div class="col-6 form-group p-3 mt-2">
-                    <label for="curp">CURP</label>
+                    <label for="foto_tam_titulo">CURP</label>
                     <input id="curp" name="curp" type="file" class="form-control" >
                 </div>
 
@@ -126,7 +186,17 @@
                     $tiene_documentos = true;
                 @endphp
                 <div class="col-6">
-                    {{ $documento->documento }}
+                    @if (pathinfo($documento->documento, PATHINFO_EXTENSION) == 'pdf')
+                        <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento)}}" style="width: 60%; height: 60px;"></iframe>
+                        <p class="text-center ">
+                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver archivo</a>
+                        </p>
+                    @else
+                        <p class="text-center mt-2">
+                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                            <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver Imagen</a>
+                        </p>
+                    @endif
                 </div>
         @endforeach
     </div>
