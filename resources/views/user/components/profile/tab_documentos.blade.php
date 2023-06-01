@@ -32,27 +32,28 @@
                                 $documentos = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->get();
                             @endphp
                             <div class="row">
-                            @foreach ($documentos as $documento)
-                                @if (pathinfo($documento->nombre, PATHINFO_EXTENSION) == 'pdf')
-                                <div class="col-4">
-                                    <p class="text-center ">
-                                        <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 70px; height: 70px;"/>
-                                        <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; border-radius: 19px;">
-                                            Descargar
-                                        </a>
-                                    </p>
-                                </div>
-                                @else
-                                <div class="col-4">
-                                    <p class="text-center mt-2">
-                                        <img src="{{asset('assets/user/icons/docx.png') }}" style="width: 70px; height: 70px;"/>
-                                        <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; border-radius: 19px;">
-                                            Descargar
-                                        </a>
-                                    </p>
-                                </div>
-                                @endif
-                            @endforeach
+                                @foreach ($documentos as $documento)
+                                    @if (pathinfo($documento->nombre, PATHINFO_EXTENSION) == 'pdf')
+                                    <div class="col-4">
+                                        <p class="text-center ">
+                                            <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 70px; height: 70px;"/>
+                                            <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; border-radius: 19px;">
+                                                Descargar
+                                            </a>
+                                        </p>
+                                    </div>
+                                    @else
+                                    <div class="col-4">
+                                        <p class="text-center mt-2">
+                                            <img src="{{asset('assets/user/icons/docx.png') }}" style="width: 70px; height: 70px;"/>
+                                            <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; border-radius: 19px;">
+                                                Descargar
+                                            </a>
+                                        </p>
+                                    </div>
+                                    @endif
+                                @endforeach
+                            </div>
                 </div>
                 @endforeach
             </div>

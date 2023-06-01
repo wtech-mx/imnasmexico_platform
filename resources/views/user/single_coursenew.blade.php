@@ -656,7 +656,7 @@
                         <p class="text_cards_horizon">
                             Si no te es posible realizar el pago por medio de la página,
                             lo podrás hacer mediante estas cuentas enviando tu comprobante al
-                            siguiente número de WhatsApp: 55 4536 5893 con tu nombre completo y nombre del curso que elegiste.
+                            siguiente número de WhatsApp: 55 4536 5893 con tu nombre completo y nombre del curso y/o diplomado que elegiste.
                         </p>
                     </div>
                     <div class="col-12">
