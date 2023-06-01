@@ -249,26 +249,26 @@ class CursosController extends Controller
         $curso->update();
 
         // G U A R D A R  EVENTOS Y ACTUALZ
-            // $evento_single = Event::where('id_curso','=',$curso->id)->first();
-            // if($evento_single == null){
-            //     $evento = new Event;
-            //     $evento->title = $curso->nombre;
-            //     $evento->start = $curso->fecha_inicial;
-            //     $evento->end = $curso->fecha_final;
-            //     $evento->id_profesor = $request->get('id_profesor');
-            //     $evento->id_curso = $curso->id;
-            //     $evento->save();
-            // }else{
-            // $evento_single2 = Event::where('id_curso','=',$curso->id)->first();
-            //     if ($evento_single2) {
-            //         $evento_single2->title = $curso->nombre;
-            //         $evento_single2->start = $curso->fecha_inicial;
-            //         $evento_single2->end = $curso->fecha_final;
-            //         $evento_single2->id_profesor = $request->get('id_profesor');
-            //         $evento_single2->id_curso = $curso->id;
-            //         $evento_single2->update();
-            //     }
-            // }
+        $evento_single = Event::where('id_curso','=',$curso->id)->first();
+        if($evento_single == null){
+            $evento = new Event;
+            $evento->title = $curso->nombre;
+            $evento->start = $curso->fecha_inicial;
+            $evento->end = $curso->fecha_final;
+            $evento->id_profesor = $request->get('id_profesor');
+            $evento->id_curso = $curso->id;
+            $evento->save();
+        }else{
+        $evento_single2 = Event::where('id_curso','=',$curso->id)->first();
+            if ($evento_single2) {
+                $evento_single2->title = $curso->nombre;
+                $evento_single2->start = $curso->fecha_inicial;
+                $evento_single2->end = $curso->fecha_final;
+                $evento_single2->id_profesor = $request->get('id_profesor');
+                $evento_single2->id_curso = $curso->id;
+                $evento_single2->update();
+            }
+        }
 
         // G U A R D A R  T I C K E T
         $nombre_ticket = $request->input('nombre_ticket');
@@ -305,12 +305,14 @@ class CursosController extends Controller
         $id_estandar = $request->get('id_estandar');
         $carpeta_est_id = $request->input('carpeta_est_id');
 
-        for ($count = 0; $count < count($id_estandar); $count++) {
-            $data = array(
-                'id_curso' => $curso->id,
-                'id_carpeta' => $id_estandar[$count],
-            );
-                CursosEstandares::create($data);
+        if($id_estandar != NULL){
+            for ($count = 0; $count < count($id_estandar); $count++) {
+                $data = array(
+                    'id_curso' => $curso->id,
+                    'id_carpeta' => $id_estandar[$count],
+                );
+                    CursosEstandares::create($data);
+            }
         }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
