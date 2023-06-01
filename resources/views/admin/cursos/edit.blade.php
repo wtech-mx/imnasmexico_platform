@@ -77,7 +77,6 @@
 
                                                           @foreach ($carpetas_estandares as $estandar)
                                                             <option value="{{ $estandar->id }}">{{ $estandar->nombre }}</option>
-                                                            <input type="hidden" name="carpeta_est_id[]" value="{{ $estandar->id }}">
                                                           @endforeach
                                                         </select>
                                                     </div>
