@@ -12,6 +12,9 @@
 @section('content')
 
 <div class="row">
+
+    @if(count($cursos) > 0)
+
     @foreach ($cursos as $curso)
     <div class="col-12 col-md-12 mt-3 mb-3 col-md-3 mb-md-3 col-lg-6 mb-lg-5 mt-lg-5">
         <a href="{{ route('single_course.index', $curso->id) }}" style="display: contents;color: #836262;">
@@ -66,6 +69,23 @@
         </a>
     </div>
     @endforeach
+
+    @else
+    <div class="col-12 mt-3 mb-3 mb-md-3  mb-lg-5 mt-lg-5" style="height: 88vh;">
+        <div class="container">
+            <p class="text-center">
+                <a class="text-center text-white" >
+                    No hay clases asignadas
+                </a> <br> <br>
+
+                <a class="btn btn-primary" href="{{ route('dashboard.index') }}">
+                    Regresar
+                </a>
+            </p>
+        </div>
+
+    </div>
+    @endif
 </div>
 
 @endsection

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
-
+use Auth;
 class FullCalenderController extends Controller
 {
     /**
@@ -14,11 +14,13 @@ class FullCalenderController extends Controller
      */
     public function index(Request $request)
     {
+        $id_profesor = auth::user()->id;
 
         if($request->ajax()) {
 
              $data = Event::whereDate('start', '>=', $request->start)
                        ->whereDate('end',   '<=', $request->end)
+                       ->where('id_profesor', '=', $id_profesor)
                        ->get(['id', 'title', 'start', 'end']);
 
              return response()->json($data);

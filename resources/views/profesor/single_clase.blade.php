@@ -5,7 +5,7 @@
 @endsection
 
 @section('css_custom')
-
+<link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 @endsection
 
 @section('content')
@@ -56,16 +56,31 @@
 
                     <strong class="text-dark">En lista : </strong> 55 Alumnas
             </p>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-12 mt-3 mb-3 col-md-3 mb-md-3 col-lg-6 mb-lg-5 mt-lg-5">
-        <div class="container_card_class">
-            <ul style="list-style-type:circle">
-                @foreach ($ordenes as $order)
+            <div class="table-responsive">
+                <table class="table table-flush" id="datatable-search">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>#</th>
+                            <th>Nombre</th>
+                            <th>telefono</th>
+                            {{-- <th>email</th> --}}
+                            <th>Check</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    @foreach ($ordenes as $order)
                     @if ($order->Orders->estatus == '1')
-                    <li >
-                            {{ $order->User->name }}
+                    <tr>
+                        <td>{{ $order->User->id }}</td>
+                        <td>{{ $order->User->name }}</td>
+                        <td>{{ $order->User->telefono }}</td>
+                        {{-- <td>{{ $order->User->email }}</td> --}}
+                        <td>
+                            <input data-id="{{ $order->Orders->id }}" class="toggle-class" type="checkbox"
+                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                            data-on="Active" data-off="InActive" {{ $order->Orders->asistencia ? 'checked' : '' }}>
+                        </td>
+                        <td>
                             <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $order->User->telefono }}&text=Recordatorio%20de%20clase%3A%0AHola%20{{ $order->User->name }}%2C%20te%20recordamos%20que%20tu%20clase%20{{ $order->Cursos->nombre }}%2C%20inicia%20hoy%20a%20las%20{{ $order->Cursos->hora_inicial }}.%0ALa%20liga%20de%20clase%20la%20podrás%20encontrar%20en%20tu%20correo%20o%20ingresando%20a%20tu%20perfil%20con%20el%20número%20que%20proporcionaste%20%22{{ $order->User->telefono }}%22.%0A">
                                 <i class="fa fa-whatsapp"></i>
                             </a>
@@ -76,27 +91,39 @@
                                 <input type="hidden" name="ticket" id="ticket" value="{{ $order->id_tickets }}">
                                 <input type="hidden" name="id_usuario" id="id_usuario" value="{{ $order->id_usuario }}">
                                 <input type="hidden" name="curso" id="curso" value="{{ $order->id_curso }}">
-                                <button type="submit" class="btn btn-sm btn-primary" >Correo</button>
+                                <button type="submit" class="btn btn-sm btn-primary" ><i class="fa fa-envelope"></i></button>
                             </form>
-
-                            <input data-id="{{ $order->Orders->id }}" class="toggle-class" type="checkbox"
-                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                            data-on="Active" data-off="InActive" {{ $order->Orders->asistencia ? 'checked' : '' }}>
-                    </li>
+                        </td>
+                    </tr>
                     @endif
-                @endforeach
-            </ul>
+                    @endforeach
+                </table>
+            </div>
         </div>
-
     </div>
+
+
 
 </div>
 
 @endsection
 
 @section('datatable')
+<script src="//cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
 
 <script>
+
+$(document).ready(function() {
+    $('#datatable-search').DataTable({
+        searching: true,
+        pageLength: 25,
+        scrollY: '400px', // Ajusta la altura de la tabla según tus necesidades
+        scrollCollapse: true,
+        // Resto de las opciones y configuraciones que desees agregar
+    });
+});
+
+
     $(function() {
         $('.toggle-class').change(function() {
             var asistencia = $(this).prop('checked') == true ? 1 : 0;

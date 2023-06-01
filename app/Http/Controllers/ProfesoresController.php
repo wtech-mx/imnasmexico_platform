@@ -33,6 +33,7 @@ class ProfesoresController extends Controller
         $id_profesor = auth::user()->id;
 
         $cursos = Cursos::where('id_profesor', '=', $id_profesor)->get();
+
         return view('profesor.clases', compact('cursos'));
     }
 

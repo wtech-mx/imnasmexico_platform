@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cursos;
+use App\Models\Event;
 use App\Models\RecordatoriosCursos;
 use App\Models\CursosTickets;
 use App\Models\Orders;
@@ -129,6 +130,14 @@ class CursosController extends Controller
 
         $curso->save();
 
+        $evento = new Event;
+        $evento->title = $curso->nombre;
+        $evento->start = $curso->fecha_inicial;
+        $evento->end = $curso->fecha_final;
+        $evento->id_profesor = $request->get('id_profesor');
+        $evento->id_curso = $curso->id;
+        $evento->save();
+
         // G U A R D A R  T I C K E T
         $nombre_ticket = $request->get('nombre_ticket');
         $descripcion_ticket = $request->get('descripcion_ticket');
@@ -238,6 +247,28 @@ class CursosController extends Controller
         $curso->precio = $request->get('precio_curso');
         $curso->carpeta = $request->get('carpeta');
         $curso->update();
+
+        // G U A R D A R  EVENTOS Y ACTUALZ
+            $evento_single = Event::where('id_curso','=',$curso->id)->first();
+            if($evento_single == null){
+                $evento = new Event;
+                $evento->title = $curso->nombre;
+                $evento->start = $curso->fecha_inicial;
+                $evento->end = $curso->fecha_final;
+                $evento->id_profesor = $request->get('id_profesor');
+                $evento->id_curso = $curso->id;
+                $evento->save();
+            }else{
+            $evento_single2 = Event::where('id_curso','=',$curso->id)->first();
+                if ($evento_single2) {
+                    $evento_single2->title = $curso->nombre;
+                    $evento_single2->start = $curso->fecha_inicial;
+                    $evento_single2->end = $curso->fecha_final;
+                    $evento_single2->id_profesor = $request->get('id_profesor');
+                    $evento_single2->id_curso = $curso->id;
+                    $evento_single2->update();
+                }
+            }
 
         // G U A R D A R  T I C K E T
         $nombre_ticket = $request->input('nombre_ticket');

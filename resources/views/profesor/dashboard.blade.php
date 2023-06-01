@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="col-12  col-md-12 mt-md-5 mb-5 col-md-3 col-lg-6 d-flex">
+    <div class="col-12 mt-3 col-md-12 mt-md-5 mb-5 col-md-3 col-lg-6 d-flex">
         <div class="d-flex align-items-center">
             <div class="container_card_class">
                 <div class="d-flex justify-content-evenly">
@@ -61,7 +61,7 @@
     });
 
     var calendar = $('#calendar').fullCalendar({
-                        editable: true,
+                        editable: false,
                         events: SITEURL + "/fullcalender",
                         displayEventTime: false,
                         editable: true,

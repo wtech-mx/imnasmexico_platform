@@ -1,5 +1,6 @@
 .bg_main{
     background-color: #836262;
+    height: 100vh;
 }
 
 .content_fullcalendar{
@@ -30,4 +31,16 @@
 
 .tittle_cursos{
     font-size: 22px;
+}
+
+@media only screen and (max-width: 991px) {
+    .bg_main{
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .bg_main{
+        height: 100vh;
+    }
 }
