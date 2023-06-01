@@ -37,7 +37,7 @@
                                 <div class="col-4">
                                     <p class="text-center ">
                                         <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 70px; height: 70px;"/>
-                                        <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; border-radius: 19px;">
+                                        <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; border-radius: 19px;">
                                             Descargar
                                         </a>
                                     </p>
@@ -46,7 +46,7 @@
                                 <div class="col-4">
                                     <p class="text-center mt-2">
                                         <img src="{{asset('assets/user/icons/docx.png') }}" style="width: 70px; height: 70px;"/>
-                                        <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; border-radius: 19px;">
+                                        <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; border-radius: 19px;">
                                             Descargar
                                         </a>
                                     </p>
