@@ -44,6 +44,7 @@
                                             <div class="col-12 col-md-12 col-lg-6 col-xl-4">
                                                 <p class="text-center">
                                                 <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
+                                                    <a class="text-dark" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
                                                 </p>
                                             </div>
                                             @else
