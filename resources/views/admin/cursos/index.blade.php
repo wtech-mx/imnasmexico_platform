@@ -111,4 +111,12 @@
     });
 </script>
 
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $('.cliente').select2();
+    });
+
+  </script>
+
 @endsection

@@ -190,7 +190,16 @@
               </div>
               <span class="nav-link-text ms-1">Caja</span>
             </a>
-          </li>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link {{ (Request::is('/admin/carpetas/estandares*') ? 'show' : '') }}" href="{{ route('carpetas_estandares.index') }}">
+                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-school text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                </div>
+                <span class="sidenav-normal">Carpeta Estandares</span>
+            </a>
+        </li>
 
         <li class="nav-item mt-3">
             <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Web Page</h6>

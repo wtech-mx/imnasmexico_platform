@@ -67,10 +67,11 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="estandar">Seleccionar Estandar</label>
-                                                        <select class="form-control" id="id_estandar" name="id_estandar">
+                                                        <select class="form-select cliente" id="id_estandar[]" name="id_estandar[]" multiple="multiple">
                                                           <option value="">Seleccionar Estandar</option>
-                                                          @foreach ($estandares as $estandar)
-                                                          <option value="{{ $estandar->id }}">{{ $estandar->name }}</option>
+                                                          @foreach ($carpetas_estandares as $estandar)
+                                                          <input type="hidden" name="carpeta_est_id[]" value="{{ $item->id }}">
+                                                          <option value="{{ $estandar->id }}">{{ $estandar->nombre }}</option>
                                                           @endforeach
                                                         </select>
                                                     </div>

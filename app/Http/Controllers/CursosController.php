@@ -11,6 +11,8 @@ use App\Models\User;
 use Session;
 use App\Mail\PlantillaTicket;
 use App\Models\Carpetas;
+use App\Models\CarpetasEstandares;
+use App\Models\CursosEstandares;
 use App\Models\Recursos;
 use Illuminate\Support\Facades\Mail;
 use Str;
@@ -52,7 +54,7 @@ class CursosController extends Controller
     public function create()
     {
         $profesores =  User::where('cliente','2')->orderBy('id','DESC')->get();
-        $estandares = Estandar::orderBy('name','asc')->get();
+        $estandares = CarpetasEstandares::orderBy('nombre','asc')->get();
         $fotos_online = Recursos::where('tipo', '=', 'Online')->get();
         $fotos_presencial = Recursos::where('tipo', '=', 'Presencial')->get();
         $fotos_pdf = Recursos::where('tipo', '=', 'PDF')->get();
@@ -162,7 +164,7 @@ class CursosController extends Controller
     public function edit($id)
     {
         $profesores =  User::where('cliente','2')->orderBy('id','DESC')->get();
-        $estandares = Estandar::orderBy('name','asc')->get();
+        $carpetas_estandares = CarpetasEstandares::orderBy('nombre','asc')->get();
         $curso = Cursos::find($id);
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
         $fotos_online = Recursos::where('tipo', '=', 'Online')->get();
@@ -186,7 +188,7 @@ class CursosController extends Controller
 
         $carpetas = Carpetas::get();
 
-        return view('admin.cursos.edit', compact('curso', 'tickets', 'fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares', 'carpetas','profesores'));
+        return view('admin.cursos.edit', compact('curso', 'tickets', 'fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','carpetas_estandares', 'carpetas','profesores'));
     }
 
     public function update(Request $request, $id)
@@ -199,7 +201,6 @@ class CursosController extends Controller
         $curso->foto = $request->get('foto');
         $curso->pdf = $request->get('pdf');
         $curso->materiales = $request->get('materiales');
-        $curso->id_estandar = $request->get('id_estandar');
         $curso->id_profesor = $request->get('id_profesor');
 
         if ($request->get('clase_grabada')) {
@@ -267,6 +268,25 @@ class CursosController extends Controller
                 // Crear un nuevo ticket
                 CursosTickets::create($data);
 
+            }
+        }
+
+        $id_estandar = $request->get('id_estandar');
+        $carpeta_est_id = $request->input('carpeta_est_id');
+
+        for ($count = 0; $count < count($id_estandar); $count++) {
+            $data = array(
+                'id_curso' => $curso->id,
+                'id_carpeta' => $id_estandar[$count],
+            );
+
+            if (isset($carpeta_est_id[$count])) {
+                // Actualizar el ticket existente
+                $ticket = CursosEstandares::findOrFail($carpeta_est_id[$count]);
+                $ticket->update($data);
+            } elseif($id_estandar[$count] != NULL) {
+                // Crear un nuevo ticket
+                CursosEstandares::create($data);
             }
         }
 

@@ -264,6 +264,14 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::delete('/admin/carpetas/archivos/{id}', [App\Http\Controllers\CarpetasController::class, 'destroy'])->name('carpetas.destroy');
 
+    // =============== M O D U L O   C A R P E T A S  E S T A N D A R E S ===============================
+    Route::get('/admin/carpetas/estandares', [App\Http\Controllers\CarpetasEstandaresController::class, 'index'])->name('carpetas_estandares.index');
+    Route::post('/admin/carpetas/estandares/store', [App\Http\Controllers\CarpetasEstandaresController::class, 'store'])->name('carpetas_estandares.store');
+    Route::get('/admin/carpetas/estandares/edit/{id}', [App\Http\Controllers\CarpetasEstandaresController::class, 'edit'])->name('carpetas_estandares.edit');
+    Route::patch('/admin/carpetas/estandares/update/{id}', [App\Http\Controllers\CarpetasEstandaresController::class, 'update'])->name('carpetas_estandares.update');
+
+    Route::delete('/admin/carpetas/estandares/archivos/{id}', [App\Http\Controllers\CarpetasEstandaresController::class, 'destroy'])->name('carpetas_estandares.destroy');
+
     // =============== M O D U L O   C A R P E T A S ===============================
     Route::get('/admin/publicidad', [App\Http\Controllers\PublicidadController::class, 'index'])->name('publicidad.index');
     Route::post('/admin/publicidad/store', [App\Http\Controllers\PublicidadController::class, 'store'])->name('publicidad.store');
