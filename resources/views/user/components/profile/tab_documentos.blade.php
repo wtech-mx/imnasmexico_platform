@@ -29,10 +29,10 @@
                 <div class="col-12">
                         <h4 class="text-center">{{ $estandar->nombre }}</h4> <br>
                             @php
-                                $documentos = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->get();
+                                $documentos_estandar = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->get();
                             @endphp
                             <div class="row">
-                                @foreach ($documentos as $documento)
+                                @foreach ($documentos_estandar as $documento)
                                     @if (pathinfo($documento->nombre, PATHINFO_EXTENSION) == 'pdf')
                                     <div class="col-4">
                                         <p class="text-center ">
