@@ -116,6 +116,7 @@
                                                         $id_link_drive = $matches[1];
                                                     @endphp
                                                     <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" class="iframe_clase"></iframe>
+                                                    <a class="text-dark" href="{{$user_video->clase_grabada}}" target="_blank" >Ver Video</a>
                                                 </div>
                                                 @if ( $user_video->clase_grabada2 != NULL)
                                                     <div class="col-12 col-lg-6">
@@ -126,6 +127,7 @@
                                                             $id_link_drive2 = $matches2[1];
                                                         @endphp
                                                         <iframe src="https://drive.google.com/file/d/{{ $id_link_drive2 }}/preview" class="iframe_clase"></iframe>
+                                                        <a class="text-dark" href="{{$user_video->clase_grabada2}}" target="_blank" >Ver Video</a>
                                                     </div>
                                                 @endif
 
@@ -138,6 +140,7 @@
                                                             $id_link_drive3 = $matches3[1];
                                                         @endphp
                                                         <iframe src="https://drive.google.com/file/d/{{ $id_link_drive3 }}/preview" class="iframe_clase"></iframe>
+                                                        <a class="text-dark" href="{{$user_video->clase_grabada3}}" target="_blank" >Ver Video</a>
                                                     </div>
                                                 @endif
 
@@ -150,6 +153,7 @@
                                                             $id_link_drive4 = $matches4[1];
                                                         @endphp
                                                         <iframe src="https://drive.google.com/file/d/{{ $id_link_drive4 }}/preview" class="iframe_clase"></iframe>
+                                                        <a class="text-dark" href="{{$user_video->clase_grabada4}}" target="_blank" >Ver Video</a>
                                                     </div>
                                                 @endif
 
@@ -162,6 +166,7 @@
                                                             $id_link_drive5 = $matches5[1];
                                                         @endphp
                                                         <iframe src="https://drive.google.com/file/d/{{ $id_link_drive5 }}/preview" class="iframe_clase"></iframe>
+                                                        <a class="text-dark" href="{{$user_video->clase_grabada5}}" target="_blank" >Ver Video</a>
                                                     </div>
                                                 @endif
                                             @endif
