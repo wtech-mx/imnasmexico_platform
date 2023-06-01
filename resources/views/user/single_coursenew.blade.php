@@ -654,8 +654,9 @@
                 <div class="row">
                     <div class="col-12">
                         <p class="text_cards_horizon">
-                            Puedes realizar  los pagos mediante las siguiente cuentas. <br>
-                            Recuerda que se te pedira evidencia como el combrobante del deposito  y/o captura de la transaccion.
+                            Si no te es posible realizar el pago por medio de la página,
+                            lo podrás hacer mediante estas cuentas enviando tu comprobante al
+                            siguiente número de WhatsApp: 55 4536 5893 con tu nombre completo y nombre del curso que elegiste.
                         </p>
                     </div>
                     <div class="col-12">
