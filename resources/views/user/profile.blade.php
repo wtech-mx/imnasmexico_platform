@@ -336,7 +336,7 @@ Mi perfil- {{$cliente->name}}
                                                         <div class="col-12 mt-3">
                                                             <p class="text-center">
                                                             <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
-                                                            <a href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
+                                                            <a class="text-dark" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
                                                             </p>
                                                         </div>
                                                         @else
@@ -379,6 +379,7 @@ Mi perfil- {{$cliente->name}}
                                                             @elseif ($extension == 'pdf')
                                                             <p class="text-center">
                                                             <embed class="embed_pdf_publicidad" src="{{asset('publicidad/'. $item->nombre) }}" type="application/pdf"  />
+                                                            <a class="text-dark" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
                                                             </p>
                                                             @elseif ($extension == 'mp4')
                                                             <p class="text-center">
