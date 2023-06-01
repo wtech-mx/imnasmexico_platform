@@ -70,7 +70,7 @@
                                                         <select class="form-select cliente" id="id_estandar[]" name="id_estandar[]" multiple="multiple">
                                                           <option value="">Seleccionar Estandar</option>
                                                           @foreach ($carpetas_estandares as $estandar)
-                                                          <input type="hidden" name="carpeta_est_id[]" value="{{ $item->id }}">
+                                                          <input type="hidden" name="carpeta_est_id[]" value="{{ $estandar->id }}">
                                                           <option value="{{ $estandar->id }}">{{ $estandar->nombre }}</option>
                                                           @endforeach
                                                         </select>

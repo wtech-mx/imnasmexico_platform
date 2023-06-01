@@ -11,7 +11,7 @@
 
                 <div class="modal-body row">
 
-                   <form method="POST" action="{{ route('carpetas.update', $carpeta->id) }}" enctype="multipart/form-data" role="form">
+                   <form method="POST" action="{{ route('carpetas_estandares.update', $carpeta->id) }}" enctype="multipart/form-data" role="form">
                         @csrf
                         <input type="hidden" name="_method" value="PATCH">
                         <div class="form-group col-6">
@@ -39,7 +39,7 @@
                                 $extension = $file_info->getExtension();
                             @endphp
 
-                                @if ($extension === 'pdf' || $extension === 'docx')
+                                @if ($extension === 'pdf')
                                 <p class="text-center">
                                     <embed src="{{ asset('carpetasestandares/' . $carpeta->nombre . '/' . $recurso->nombre) }}" type="application/pdf" style="width: 120px; height: 120px;" />
                                 </p>
@@ -53,7 +53,7 @@
 
                             <p class="text-center">
                                 <a class="btn btn-sm btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"><i class="fa fa-trash-o"></i></a>
-                                <form id="delete-form" action="{{ route('carpetas.destroy', $recurso->id) }}" method="POST" style="display: none;">
+                                <form id="delete-form" action="{{ route('carpetas_estandares.destroy', $recurso->id) }}" method="POST" style="display: none;">
                                     @csrf
                                     @method('DELETE')
                                 </form>

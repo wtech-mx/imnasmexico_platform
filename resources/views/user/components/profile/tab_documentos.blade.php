@@ -31,7 +31,19 @@
                         $documentos = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->get();
                     @endphp
                     @foreach ($documentos as $documento)
-                        <li>{{ $documento->nombre }}</li>
+                        <li>
+                        @if (pathinfo($documento->nombre, PATHINFO_EXTENSION) == 'pdf')
+                            <p class="text-center ">
+                                <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 70px; height: 70px;"/>
+                                <a class="text-center text-dark btn btn-sm" href="{{asset('carpetasestandares/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Descargar</a>
+                            </p>
+                        @else
+                            <p class="text-center mt-2">
+                                <img src="{{asset('assets/user/icons/docx.png') }}" style="width: 70px; height: 70px;"/>
+                                <a class="text-center text-dark btn btn-sm" href="{{asset('carpetasestandares/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Descargar</a>
+                            </p>
+                        @endif
+                    </li>
                     @endforeach
                 </ul>
             @endforeach
