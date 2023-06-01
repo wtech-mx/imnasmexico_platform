@@ -19,18 +19,17 @@
 <div class="tab-content" id="nav-tabContent" style="">
 
     <div class="tab-pane fade" id="nav-descargas" role="tabpanel" aria-labelledby="nav-descargas-tab" tabindex="0" style="min-height: auto!important;">
-<h1>Decadff</h1>
-@foreach ($estandaresComprados as $estandar)
-    <h4>{{ $estandar->nombre }}</h4>
-    <ul>
-        @php
-            $documentos = App\Models\Carpetas::where('id_estandar', $estandar->id)->get();
-        @endphp
-        @foreach ($documentos as $documento)
-            <li>{{ $documento->nombre_documento }}</li>
+        @foreach ($estandaresComprados as $estandar)
+            <h4>{{ $estandar->nombre }}</h4>
+            <ul>
+                @php
+                    $documentos = App\Models\Carpetas::where('id_estandar', $estandar->id)->get();
+                @endphp
+                @foreach ($documentos as $documento)
+                    <li>{{ $documento->nombre_documento }}</li>
+                @endforeach
+            </ul>
         @endforeach
-    </ul>
-@endforeach
     </div>
 
     <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab" tabindex="0" style="min-height: auto!important;">

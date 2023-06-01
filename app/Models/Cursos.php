@@ -66,4 +66,9 @@ class Cursos extends Model
         return $this->hasMany(RecordatoriosCursos::class, 'id_curso');
     }
 
+    public function CursosEstandares()
+    {
+        return $this->hasMany(CursosEstandares::class, 'id_carpeta');
+    }
+
 }

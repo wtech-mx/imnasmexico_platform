@@ -64,14 +64,20 @@
                                                         <input type="text" id="clase_grabada" name="clase_grabada" class="form-control" value="{{$curso->clase_grabada}}">
                                                     </div>
                                                 </div>
+
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="estandar">Seleccionar Estandar</label>
                                                         <select class="form-select cliente" id="id_estandar[]" name="id_estandar[]" multiple="multiple">
-                                                          <option value="">Seleccionar Estandar</option>
+
+                                                            @if (!empty( $curso->CursosEstandares))
+                                                            @else
+                                                                <option value="{{ $curso->CursosEstandares->id_carpeta }}">{{ $curso->CursosEstandares->CarpetaEstandar->nombre }}</option>
+                                                            @endif
+
                                                           @foreach ($carpetas_estandares as $estandar)
-                                                          <input type="hidden" name="carpeta_est_id[]" value="{{ $estandar->id }}">
-                                                          <option value="{{ $estandar->id }}">{{ $estandar->nombre }}</option>
+                                                            <option value="{{ $estandar->id }}">{{ $estandar->nombre }}</option>
+                                                            <input type="hidden" name="carpeta_est_id[]" value="{{ $estandar->id }}">
                                                           @endforeach
                                                         </select>
                                                     </div>
