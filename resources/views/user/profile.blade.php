@@ -336,6 +336,7 @@ Mi perfil- {{$cliente->name}}
                                                         <div class="col-12 mt-3">
                                                             <p class="text-center">
                                                             <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
+                                                            <a href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
                                                             </p>
                                                         </div>
                                                         @else
