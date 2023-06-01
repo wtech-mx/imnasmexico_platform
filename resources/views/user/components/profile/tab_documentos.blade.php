@@ -24,29 +24,34 @@
 
     <div class="tab-content" id="nav-tabContent" style="">
         <div class="tab-pane fade show active" id="nav-descargas" role="tabpanel" aria-labelledby="nav-descargas-tab" tabindex="0" style="min-height: auto!important;">
-            @foreach ($estandaresComprados as $estandar)
-                <h4>{{ $estandar->nombre }}</h4>
-                <ul>
-                    @php
-                        $documentos = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->get();
-                    @endphp
-                    @foreach ($documentos as $documento)
-                        <li>
-                        @if (pathinfo($documento->nombre, PATHINFO_EXTENSION) == 'pdf')
-                            <p class="text-center ">
-                                <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 70px; height: 70px;"/>
-                                <a class="text-center text-dark btn btn-sm" href="{{asset('carpetasestandares/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Descargar</a>
-                            </p>
-                        @else
-                            <p class="text-center mt-2">
-                                <img src="{{asset('assets/user/icons/docx.png') }}" style="width: 70px; height: 70px;"/>
-                                <a class="text-center text-dark btn btn-sm" href="{{asset('carpetasestandares/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Descargar</a>
-                            </p>
-                        @endif
-                    </li>
-                    @endforeach
-                </ul>
-            @endforeach
+            <div class="row">
+                @foreach ($estandaresComprados as $estandar)
+                <div class="col-4">
+                        <h4>{{ $estandar->nombre }}</h4> <br>
+                            @php
+                                $documentos = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->get();
+                            @endphp
+                            @foreach ($documentos as $documento)
+                                @if (pathinfo($documento->nombre, PATHINFO_EXTENSION) == 'pdf')
+                                    <p class="text-center ">
+                                        <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 70px; height: 70px;"/>
+                                        <a class="text-center text-dark btn btn-sm" href="{{asset('carpetasestandares/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
+                                            Descargar
+                                        </a>
+                                    </p>
+                                @else
+                                    <p class="text-center mt-2">
+                                        <img src="{{asset('assets/user/icons/docx.png') }}" style="width: 70px; height: 70px;"/>
+                                        <a class="text-center text-dark btn btn-sm" href="{{asset('carpetasestandares/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
+                                            Descargar
+                                        </a>
+                                    </p>
+                                @endif
+                            @endforeach
+                        </ul>
+                </div>
+                @endforeach
+            </div>
         </div>
 
         <div class="tab-pane fade" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab" tabindex="0" style="min-height: auto!important;">
