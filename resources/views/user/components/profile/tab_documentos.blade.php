@@ -27,7 +27,7 @@
             <div class="row">
                 @foreach ($estandaresComprados as $estandar)
                 <div class="col-12">
-                        <h4>{{ $estandar->nombre }}</h4> <br>
+                        <h4 class="text-center">{{ $estandar->nombre }}</h4> <br>
                             @php
                                 $documentos = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->get();
                             @endphp
@@ -37,7 +37,7 @@
                                 <div class="col-4">
                                     <p class="text-center ">
                                         <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 70px; height: 70px;"/>
-                                        <a class="text-center text-dark btn btn-sm" href="{{asset('carpetasestandares/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
+                                        <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; border-radius: 19px;">
                                             Descargar
                                         </a>
                                     </p>
@@ -46,14 +46,13 @@
                                 <div class="col-4">
                                     <p class="text-center mt-2">
                                         <img src="{{asset('assets/user/icons/docx.png') }}" style="width: 70px; height: 70px;"/>
-                                        <a class="text-center text-dark btn btn-sm" href="{{asset('carpetasestandares/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
+                                        <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: {{$configuracion->color_boton_close}}; border-radius: 19px;">
                                             Descargar
                                         </a>
                                     </p>
                                 </div>
                                 @endif
                             @endforeach
-                            </div>
                 </div>
                 @endforeach
             </div>
