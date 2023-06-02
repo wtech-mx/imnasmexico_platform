@@ -141,12 +141,16 @@ class PagosFueraController extends Controller
         SDK::setAccessToken(config('services.mercadopago.token'));
 
         // Obtener pagos desde MercadoPago
+        $today = date('Y-m-d');
+        $lastMonthEndDate = date('Y-m-d', strtotime('-1 month -1 day'));
+        $lastMonthStartDate = date('Y-m-01', strtotime('-1 month'));
+
         $filters = array(
-            "status" => "approved", // Filtro opcional para obtener solo pagos aprobados
-            "begin_date" => date('Y-m')."-01T00:00:00.000-00:00",
-            "end_date" => date('Y-m-t')."T23:59:59.999-00:00",
-            "limit" => 100, // Obtener un máximo de 100 registros por página
-            "offset" => 0 // Empezar desde el primer registro
+            "status" => "approved",
+            "begin_date" => $lastMonthStartDate."T00:00:00.000-00:00",
+            "end_date" => $today."T23:59:59.999-00:00",
+            "limit" => 100,
+            "offset" => 0
         );
 
         $pagos = array();
