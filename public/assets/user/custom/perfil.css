@@ -2,6 +2,10 @@
     width: 30px;
 }
 
+.space_newprofile{
+    margin-top: 13rem;
+}
+
 input::placeholder {
     color: #836262!important;
     font-weight: 400;
@@ -225,6 +229,10 @@ input::placeholder {
     .embed_pdf {
         width: 500px;
         height: 500px;
+    }
+
+    .space_newprofile{
+        margin-top: 5rem;
     }
 
 }

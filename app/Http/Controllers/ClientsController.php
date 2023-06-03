@@ -75,7 +75,7 @@ class ClientsController extends Controller
         $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
 
-        return view('user.profile',compact('estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad', 'carpetas'));
+        return view('user.profilenew',compact('estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad', 'carpetas'));
     }
 
     public function update(Request $request, $code)
