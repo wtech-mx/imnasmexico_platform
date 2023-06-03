@@ -71,4 +71,9 @@ class Cursos extends Model
         return $this->hasMany(CursosEstandares::class, 'id_carpeta');
     }
 
+    public function CursosTickets()
+    {
+        return $this->hasMany(CursosTickets::class, 'id_curso');
+    }
+
 }

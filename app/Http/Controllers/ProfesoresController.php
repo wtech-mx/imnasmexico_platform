@@ -25,7 +25,8 @@ class ProfesoresController extends Controller
         $curso = Cursos::find($id);
         $ordenes = OrdersTickets::where('id_curso', '=', $id)->get();
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
-        return view('profesor.single_clase', compact('curso', 'ordenes', 'tickets'));
+        $ticketCount = CursosTickets::where('id_curso', '=', $id)->count();
+        return view('profesor.single_clase', compact('curso', 'ordenes', 'tickets','ticketCount'));
     }
 
     public function index_clase(Request $request){

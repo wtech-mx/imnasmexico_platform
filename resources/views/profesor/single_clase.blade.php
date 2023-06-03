@@ -58,7 +58,8 @@
                     <strong class="text-dark">Fecha Final :</strong>
                     {{$fechaFormateada2}} - {{$horaFormateada2}} <br>
 
-                    <strong class="text-dark">En lista : </strong> 55 Alumnas
+                    <strong class="text-dark">En lista : </strong>
+
             </p>
             <div class="table-responsive">
                 <table class="table table-flush" id="datatable-search">
@@ -73,7 +74,9 @@
                         </tr>
                     </thead>
                     @foreach ($ordenes as $order)
+
                     @if ($order->Orders->estatus == '1')
+                    {{ $ordenes->count() }}
                     <tr>
                         <td>{{ $order->User->id }}</td>
                         <td>{{ $order->User->name }}</td>
