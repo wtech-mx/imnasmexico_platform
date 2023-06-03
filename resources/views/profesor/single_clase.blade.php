@@ -8,13 +8,17 @@
 <link rel="stylesheet" href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
 @endsection
 
+@section('main')bg-main @endsection
+
 @section('content')
 
 <div class="row">
 
     <div class="col-12 col-md-12 mt-3 mb-3 col-md-3 mb-md-3 col-lg-6 mb-lg-5 mt-lg-5">
         <div class="container_card_class">
-            <img src="{{asset('curso/'. $curso->foto) }}" alt="" style="width: 10%;">
+            <p class="text-center">
+                <img src="{{asset('curso/'. $curso->foto) }}" alt="" style="width: 80%;">
+            </p>
         </div>
     </div>
 

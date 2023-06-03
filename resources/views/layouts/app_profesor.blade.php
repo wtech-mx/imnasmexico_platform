@@ -18,7 +18,7 @@
 
   <body>
 
-    <main class="container-fluid bg_main">
+    <main class="container-fluid" style="background-color: #836262">
         @yield('content')
     </main>
 

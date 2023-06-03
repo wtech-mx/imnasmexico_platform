@@ -9,9 +9,21 @@
 
 @endsection
 
+
 @section('content')
 
 <div class="row">
+
+    <div class="col-12 mt-3 mb-3 mb-md-3  mb-lg-5 mt-lg-5" style="">
+        <div class="container">
+            <p class="text-center">
+                <a class="btn btn-primary text-dark" href="{{ route('dashboard.index') }}" style="    background-color: #F5ECE4;border-radius: 19px;padding: 10px;border:solid 1px transparent;">
+                    Regresar al calendario
+                </a>
+            </p>
+        </div>
+
+    </div>
 
     @if(count($cursos) > 0)
 
@@ -22,7 +34,7 @@
 
                 <div class="row">
                     <div class="col-4">
-                        <img src="{{asset('curso/'. $curso->foto) }}" alt="" style="width: 10%;">
+                        <img src="{{asset('curso/'. $curso->foto) }}" alt="" style="width: 100%;">
                     </div>
 
                     <div class="col-8">

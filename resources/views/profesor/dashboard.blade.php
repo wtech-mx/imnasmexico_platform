@@ -4,6 +4,10 @@
     Inicio
 @endsection
 
+@section('main')
+    bg-main
+@endsection
+
 @section('css_custom')
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -17,7 +21,7 @@
 
 @section('content')
 
-<div class="row">
+<div class="row bg-main">
     <div class="col-12  col-md-12 col-md-3 col-lg-6">
         <h3 class="tittle_dash mt-5 mb-5 mt-lg-3 mb-lg-3">Hola buen dia: {{Auth::user()->name}}</h3>
         <div class="content_fullcalendar">
