@@ -51,86 +51,16 @@
             </h1>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
-            <div class="card_reality">
-                <p class="text-center">
-                <img class="img_reality_alumnas" src="{{asset('assets/user/utilidades/reality/AYLEEN-HISTORIA.png') }}" style="width: 80%;">
-                </p>
+        @foreach ($concursantes as $concursante)
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
+                <div class="card_reality">
+                    <p class="text-center">
+                    <img class="img_reality_alumnas" src="{{asset('assets/user/utilidades/reality/'.$concursante->foto_perfil) }}" style="width: 80%;">
+                        <button class="btn-votar" data-id="{{ $concursante->id }}">Votar</button>
+                    </p>
+                </div>
             </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
-            <div class="card_reality">
-                <p class="text-center">
-                <img class="img_reality_alumnas" src="{{asset('assets/user/utilidades/reality/CLAUDIA CONTRERAS-HISTORIA.png') }}" style="width: 80%;">
-                </p>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
-            <div class="card_reality">
-                <p class="text-center">
-                <img class="img_reality_alumnas" src="{{asset('assets/user/utilidades/reality/DOROTHY-HIDTORIA.png') }}" style="width: 80%;">
-                </p>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
-            <div class="card_reality">
-                <p class="text-center">
-                <img class="img_reality_alumnas" src="{{asset('assets/user/utilidades/reality/ELISETH-HISTORIA.png') }}" style="width: 80%;">
-                </p>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
-            <div class="card_reality">
-                <p class="text-center">
-                <img class="img_reality_alumnas" src="{{asset('assets/user/utilidades/reality/ELLA-HISTORIA.png') }}" style="width: 80%;">
-                </p>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
-            <div class="card_reality">
-                <p class="text-center">
-                <img class="img_reality_alumnas" src="{{asset('assets/user/utilidades/reality/FRIDA-HISTORIA.png') }}" style="width: 80%;">
-                </p>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
-            <div class="card_reality">
-                <p class="text-center">
-                <img class="img_reality_alumnas" src="{{asset('assets/user/utilidades/reality/MAFER-HISTORIA.png') }}" style="width: 80%;">
-                </p>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
-            <div class="card_reality">
-                <p class="text-center">
-                <img class="img_reality_alumnas" src="{{asset('assets/user/utilidades/reality/MAGALY-HISTORIA.png') }}" style="width: 80%;">
-                </p>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
-            <div class="card_reality">
-                <p class="text-center">
-                <img class="img_reality_alumnas" src="{{asset('assets/user/utilidades/reality/MILDRED-HISTORIA.png') }}" style="width: 80%;">
-                </p>
-            </div>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
-            <div class="card_reality">
-                <p class="text-center">
-                <img class="img_reality_alumnas" src="{{asset('assets/user/utilidades/reality/TANIA-HISTORIA.png') }}" style="width: 80%;">
-                </p>
-            </div>
-        </div>
-
+        @endforeach
 
     </div>
 </section>
@@ -376,28 +306,78 @@
 </script>
 
 <script>
-    $(function() {
-        $('.btn-votar').click(function() {
-            var concursanteId = $(this).data('id');
+$(function() {
+  $('.btn-votar').click(function() {
+    var concursanteId = $(this).data('id');
 
-            $.ajax({
-                type: "POST",
-                url: "{{ route('votar') }}",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    concursanteId: concursanteId
-                },
-                success: function(data) {
-                    console.log(concursanteId);
-                    var contadorElement = $('#contador-' + concursanteId);
-                    contadorElement.text(data.votos);
-                },
-                error: function(xhr, status, error) {
-                    console.log(error);
-                }
-            });
-        });
+    // Verificar si se ha alcanzado el límite de votos permitidos
+    if (getVotosActuales() >= 5) {
+      alert('Has alcanzado el límite de votos permitidos');
+      return;
+    }
+
+    $.ajax({
+      type: "POST",
+      url: "{{ route('votar') }}",
+      data: {
+        _token: "{{ csrf_token() }}",
+        concursanteId: concursanteId
+      },
+      success: function(data) {
+        console.log(concursanteId);
+        var contadorElement = $('#contador-' + concursanteId);
+        contadorElement.text(data.votos);
+
+        // Actualizar la cookie después de votar exitosamente
+        actualizarCookieVotos(concursanteId);
+      },
+      error: function(xhr, status, error) {
+        console.log(error);
+      }
     });
+  });
+
+  function getVotosActuales() {
+    var votosCookie = getCookie('votos');
+    return votosCookie ? JSON.parse(votosCookie).length : 0;
+  }
+
+  function actualizarCookieVotos(concursanteId) {
+    var votosCookie = getCookie('votos');
+    var votos = votosCookie ? JSON.parse(votosCookie) : [];
+
+    // Agregar el ID del concursante al arreglo de votos
+    votos.push(concursanteId);
+
+    // Guardar el arreglo actualizado en la cookie
+    setCookie('votos', JSON.stringify(votos), 7);
+  }
+
+  function getCookie(name) {
+    var cookieArr = document.cookie.split(';');
+
+    for (var i = 0; i < cookieArr.length; i++) {
+      var cookiePair = cookieArr[i].split('=');
+      if (name === cookiePair[0].trim()) {
+        return decodeURIComponent(cookiePair[1]);
+      }
+    }
+
+    return null;
+  }
+
+  function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+  }
+});
+
+
 </script>
 
 @endsection

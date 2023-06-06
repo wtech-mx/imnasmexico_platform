@@ -13,11 +13,15 @@ class Votos extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'concursante_id',
+        'nombre',
         'votos',
+        'foto_perfil',
+        'facebook',
+        'instagram',
+        'tiktok',
+        'foto_antes',
+        'foto_despues',
+        'estatus',
     ];
 
-    public function User(){
-        return $this->belongsTo(User::class, 'concursante_id');
-    }
 }

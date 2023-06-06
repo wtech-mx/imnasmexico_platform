@@ -13,10 +13,15 @@ return new class extends Migration
     {
         Schema::create('votos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('concursante_id');
-            $table->foreign('concursante_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('nombre');
             $table->integer('votos')->default(0);
-
+            $table->text('foto_perfil');
+            $table->text('facebook')->nullable();
+            $table->text('instagram')->nullable();
+            $table->text('tiktok')->nullable();
+            $table->text('foto_antes')->nullable();
+            $table->text('foto_despues')->nullable();
+            $table->integer('estatus')->default(0);
         });
     }
 

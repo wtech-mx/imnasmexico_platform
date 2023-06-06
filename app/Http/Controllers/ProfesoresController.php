@@ -33,8 +33,14 @@ class ProfesoresController extends Controller
 
         $id_profesor = auth::user()->id;
 
-        $cursos = Cursos::where('id_profesor', '=', $id_profesor)->get();
+        // $cursos = Cursos::where('id_profesor', '=', $id_profesor)->get();
 
+        $cursos = Cursos::withCount(['ordersTickets as alumnos_pagados' => function ($query) {
+            $query->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                ->where('orders.estatus', 1)
+                ->where('cursos.id_profesor', '=', auth::user()->id);
+        }])->get();
+        
         return view('profesor.clases', compact('cursos'));
     }
 

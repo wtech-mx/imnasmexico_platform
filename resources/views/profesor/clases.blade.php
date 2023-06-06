@@ -71,7 +71,6 @@
 
                                 <strong class="text-dark">Fecha Final :</strong>
                                 {{$fechaFormateada2}} - {{$horaFormateada2}} <br>
-
                                 <strong class="text-dark">En lista : </strong> {{ $curso->CursosTickets->count() }} Alumn@
 
                         </p>

@@ -76,4 +76,8 @@ class Cursos extends Model
         return $this->hasMany(CursosTickets::class, 'id_curso');
     }
 
+    public function OrdersTickets()
+    {
+        return $this->hasMany(OrdersTickets::class, 'id_curso');
+    }
 }
