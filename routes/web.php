@@ -81,6 +81,7 @@ Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->nam
 Route::get('avales', [App\Http\Controllers\WebPageController::class, 'avales'])->name('user.avales');
 Route::get('nuestras_instalaciones', [App\Http\Controllers\WebPageController::class, 'instalaciones'])->name('user.instalaciones');
 Route::get('nosotros', [App\Http\Controllers\WebPageController::class, 'nosotros'])->name('user.nosotros');
+Route::get('reality', [App\Http\Controllers\WebPageController::class, 'reality'])->name('user.reality');
 
 // =============== P A G I N A  S I N G L E  C O U R S E ===============================
 Route::get('/curso/{slug}', [App\Http\Controllers\CursoUsersController::class, 'show'])->name('cursos.show');

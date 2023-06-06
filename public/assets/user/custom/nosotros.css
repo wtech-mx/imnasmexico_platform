@@ -30,6 +30,19 @@
     color: #836262;
 }
 
+.img_reality{
+    width: 500px;
+}
+
+.card_reality{
+    border-radius: 19px;
+}
+
+.img_reality_alumnas{
+    border-radius: 19px;
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
+}
+
 @media only screen and (max-width: 1475px) {
     .video_nosotros {
         width: 370px;
@@ -86,6 +99,10 @@
     .video_nosotros {
         width: 255px;
     }
+
+    .img_reality{
+        width: 400px;
+    }
 }
 
 @media only screen and (max-width: 1050px) {
@@ -117,6 +134,11 @@
     .tittle_nosotros{
         margin-top: 7rem!important;
         margin-bottom: 0rem!important;
+    }
+
+    .img_reality{
+        width: 250px;
+        margin-top: 3rem;
     }
 }
 

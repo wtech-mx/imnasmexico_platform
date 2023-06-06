@@ -32,6 +32,13 @@ class WebPageController extends Controller
         return view('user.nosotros', compact('webpage', 'concursantes'));
     }
 
+    public function reality(Request $request){
+        $webpage = WebPage::first();
+        $concursantes = Votos::get();
+
+        return view('user.reality', compact('webpage', 'concursantes'));
+    }
+
     public function votar(Request $request)
     {
         $concursanteId = $request->input('concursanteId');
