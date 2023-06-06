@@ -379,6 +379,9 @@
                         <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_comentario" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                             Crear Comentario
                         </a>
+                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_reality" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            Reality
+                        </a>
                     </div>
 
                 </div>
@@ -403,6 +406,12 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="comenatarios-tab" data-bs-toggle="tab" data-bs-target="#comenatarios-tab-pane" type="button" role="tab" aria-controls="comenatarios-tab-pane" aria-selected="false">
                                   Comentarios
+                                </button>
+                              </li>
+
+                              <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="reality-tab" data-bs-toggle="tab" data-bs-target="#reality-tab-pane" type="button" role="tab" aria-controls="reality-tab-pane" aria-selected="false">
+                                  Reality
                                 </button>
                               </li>
 
@@ -518,6 +527,41 @@
                                 </div>
                             </div>
 
+                            <div class="tab-pane fade" id="reality-tab-pane" role="tabpanel" aria-labelledby="reality-tab" tabindex="0">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table class="table table-flush" id="comentarios-search">
+                                            <thead class="thead">
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Img</th>
+                                                    <th>Nombre</th>
+                                                    <th>Votos</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($votos as $voto)
+                                                    <tr>
+                                                        <td>{{ $voto->id }}</td>
+                                                        <th><img id="blah" src="{{asset('reality/'.$voto->foto_perfil) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
+                                                        <td>{{ $voto->nombre }}</td>
+                                                        <td>{{ $voto->Votos }}</td>
+                                                        <td>
+                                                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_comenatario_{{ $voto->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                                <i class="fa fa-fw fa-edit"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                @include('admin.webpage.modal_reality__edit')
+
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
                           </div>
                     </div>
                 </div>
@@ -528,6 +572,7 @@
       </div>
 </div>
 
+@include('admin.webpage.modal_reality_create')
 @include('admin.webpage.modal_estandar_create')
 @include('admin.webpage.modal_revoe_create')
 @include('admin.webpage.modal_comentario_create')

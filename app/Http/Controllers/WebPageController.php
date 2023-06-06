@@ -45,6 +45,36 @@ class WebPageController extends Controller
         return view('user.avales', compact('webpage'));
     }
 
+    public function realitystore(Request $request){
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_webpage = base_path('../public_html/plataforma.imnasmexico.com/reality');
+        }else{
+            $ruta_webpage = public_path() . '/reality';
+        }
+
+        $reality = new Votos;
+        $reality->nombre = $request->get('nombre');
+        $reality->facebook = $request->get('facebook');
+        $reality->instagram = $request->get('instagram');
+        $reality->tiktok = $request->get('tiktok');
+
+        if ($request->hasFile("foto_perfil")) {
+            $file = $request->file('foto_perfil');
+            $path = $ruta_webpage;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $reality->foto_perfil = $fileName;
+        }
+
+        $reality->save();
+
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back()->with('success', 'Webpage actualizada');
+    }
+
     public function edit($id)
     {
 
@@ -52,8 +82,9 @@ class WebPageController extends Controller
         $estandares = Estandar::orderBy('id','DESC')->get();
         $webpage = WebPage::find($id);
         $comentarios = Comentarios::orderBy('id','DESC')->get();
+        $votos = Votos::get();
 
-        return view('admin.webpage.index', compact('webpage','revoes','estandares','comentarios'));
+        return view('admin.webpage.index', compact('webpage','revoes','estandares','comentarios','votos'));
     }
 
     public function update(Request $request, $id){
