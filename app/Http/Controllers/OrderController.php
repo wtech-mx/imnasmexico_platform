@@ -182,7 +182,7 @@ class OrderController extends Controller
                     'status' => 'processing',
                     'billing' => [
                         'first_name' => $order->User->name,
-                        'last_name' => 'Sandoval Barroso',
+                        'last_name' => '',
                         'address_1' => 'Circuito interior 888',
                         'address_2' => '',
                         'city' => 'CDMX',
@@ -194,7 +194,7 @@ class OrderController extends Controller
                     ],
                     'shipping' => [
                         'first_name' => $order->User->name,
-                        'last_name' => 'Doe',
+                        'last_name' => '',
                         'address_1' => '969 Market',
                         'address_2' => '',
                         'city' => 'CDMX',
