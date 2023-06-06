@@ -553,7 +553,7 @@ Mi perfil- {{$cliente->name}}
                                                                         $id_link_drive = $matches[1];
                                                                     @endphp
                                                                     <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" class="iframe_clase"></iframe>
-                                                                    
+                                                                    <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive }}" target="_blank" >Ver Clase</a>
                                                                 </div>
 
                                                                 @if ( $user_video->clase_grabada2 != NULL)
@@ -565,6 +565,7 @@ Mi perfil- {{$cliente->name}}
                                                                             $id_link_drive2 = $matches2[1];
                                                                         @endphp
                                                                         <iframe src="https://drive.google.com/file/d/{{ $id_link_drive2 }}/preview" class="iframe_clase"></iframe>
+                                                                        <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive2 }}" target="_blank" >Ver Clase</a>
                                                                     </div>
                                                                 @endif
 
@@ -577,6 +578,7 @@ Mi perfil- {{$cliente->name}}
                                                                             $id_link_drive3 = $matches3[1];
                                                                         @endphp
                                                                         <iframe src="https://drive.google.com/file/d/{{ $id_link_drive3 }}/preview" class="iframe_clase"></iframe>
+                                                                        <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive3 }}" target="_blank" >Ver Clase</a>
                                                                     </div>
                                                                 @endif
 
@@ -589,6 +591,7 @@ Mi perfil- {{$cliente->name}}
                                                                             $id_link_drive4 = $matches4[1];
                                                                         @endphp
                                                                         <iframe src="https://drive.google.com/file/d/{{ $id_link_drive4 }}/preview" class="iframe_clase"></iframe>
+                                                                        <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive4 }}" target="_blank" >Ver Clase</a>
                                                                     </div>
                                                                 @endif
 
@@ -601,6 +604,7 @@ Mi perfil- {{$cliente->name}}
                                                                             $id_link_drive5 = $matches5[1];
                                                                         @endphp
                                                                         <iframe src="https://drive.google.com/file/d/{{ $id_link_drive5 }}/preview" class="iframe_clase"></iframe>
+                                                                        <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive5 }}" target="_blank" >Ver Clase</a>
                                                                     </div>
                                                                 @endif
                                                             @endif
