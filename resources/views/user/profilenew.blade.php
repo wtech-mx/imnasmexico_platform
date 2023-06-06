@@ -104,6 +104,9 @@ Mi perfil- {{$cliente->name}}
                             Guardar
                         </a>
                     </div>
+                    <div class="col-4 col-lg-4 form-group ">
+                        <a class="btn_save_profile" type="button" href="{{ route('signout') }}">Cerrar Sesión</a>
+                    </div>
                 </div>
             </div>
 
