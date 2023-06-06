@@ -545,7 +545,7 @@ Mi perfil- {{$cliente->name}}
                                                         <div class="row">
                                                         @foreach($usuario_video as $user_video)
                                                             @if ($video->Cursos->id == $user_video->id_curso)
-                                                                <div class="col-12 col-lg-6">
+                                                                <div class="col-12 col-lg-12">
                                                                     <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}}  - <strong>Día 1</strong></h5>
                                                                     @php
                                                                         $url = $user_video->clase_grabada;
@@ -553,10 +553,11 @@ Mi perfil- {{$cliente->name}}
                                                                         $id_link_drive = $matches[1];
                                                                     @endphp
                                                                     <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" class="iframe_clase"></iframe>
+                                                                    
                                                                 </div>
 
                                                                 @if ( $user_video->clase_grabada2 != NULL)
-                                                                    <div class="col-12 col-lg-6">
+                                                                    <div class="col-12 col-lg-12">
                                                                         <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 2</strong></h5>
                                                                         @php
                                                                             $url2 = $user_video->clase_grabada2;
@@ -568,7 +569,7 @@ Mi perfil- {{$cliente->name}}
                                                                 @endif
 
                                                                 @if ($user_video->clase_grabada3 != NULL)
-                                                                    <div class="col-12 col-lg-6">
+                                                                    <div class="col-12 col-lg-12">
                                                                         <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 3</strong></h5>
                                                                         @php
                                                                             $url3 = $user_video->clase_grabada3;
@@ -580,7 +581,7 @@ Mi perfil- {{$cliente->name}}
                                                                 @endif
 
                                                                 @if ($user_video->clase_grabada4 != NULL)
-                                                                    <div class="col-12 col-lg-6">
+                                                                    <div class="col-12 col-lg-12">
                                                                         <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 4</strong></h5>
                                                                         @php
                                                                             $url4 = $user_video->clase_grabada4;
@@ -592,7 +593,7 @@ Mi perfil- {{$cliente->name}}
                                                                 @endif
 
                                                                 @if ($user_video->clase_grabada5 != NULL)
-                                                                    <div class="col-12 col-lg-6">
+                                                                    <div class="col-12 col-lg-12">
                                                                         <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 5</strong></h5>
                                                                         @php
                                                                             $url5 = $user_video->clase_grabada5;
