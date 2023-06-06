@@ -22,7 +22,7 @@
 @section('content')
 
 <div class="row bg-main">
-    <div class="col-12  col-md-12 col-md-3 col-lg-6">
+    <div class="col-12 mb-sm-0 col-md-12 col-md-3 col-lg-6 mb-lg-5">
         <h3 class="tittle_dash mt-5 mb-5 mt-lg-3 mb-lg-3">Hola buen dia: {{Auth::user()->name}}</h3>
         <div class="content_fullcalendar">
             <div id='calendar'></div>
