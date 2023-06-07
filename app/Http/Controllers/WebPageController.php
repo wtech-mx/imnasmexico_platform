@@ -59,6 +59,7 @@ class WebPageController extends Controller
         $reality->facebook = $request->get('facebook');
         $reality->instagram = $request->get('instagram');
         $reality->tiktok = $request->get('tiktok');
+        $reality->estatus = $request->get('estatus');
 
         if ($request->hasFile("foto_perfil")) {
             $file = $request->file('foto_perfil');
@@ -69,7 +70,35 @@ class WebPageController extends Controller
         }
 
         $reality->save();
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back()->with('success', 'Webpage actualizada');
+    }
 
+    public function realityupdate(Request $request, $id){
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_webpage = base_path('../public_html/plataforma.imnasmexico.com/reality');
+        }else{
+            $ruta_webpage = public_path() . '/reality';
+        }
+
+        $reality = Votos::find($id);
+        $reality->nombre = $request->get('nombre');
+        $reality->facebook = $request->get('facebook');
+        $reality->instagram = $request->get('instagram');
+        $reality->tiktok = $request->get('tiktok');
+        $reality->estatus = $request->get('estatus');
+
+        if ($request->hasFile("foto_perfil")) {
+            $file = $request->file('foto_perfil');
+            $path = $ruta_webpage;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $reality->foto_perfil = $fileName;
+        }
+
+        $reality->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Webpage actualizada');

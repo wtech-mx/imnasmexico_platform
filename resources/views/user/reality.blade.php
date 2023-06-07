@@ -53,11 +53,33 @@
 
         @foreach ($concursantes as $concursante)
             <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
-                <div class="card_reality">
+                <div class="card_reality" style="position: relative">
                     <p class="text-center">
-                    <img class="img_reality_alumnas" src="{{asset('assets/user/utilidades/reality/'.$concursante->foto_perfil) }}" style="width: 80%;">
+                        <img class="img_reality_alumnas" src="{{asset('reality/'.$concursante->foto_perfil) }}" style="width: 80%;">
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <a target="_blank" href="{{ $concursante->facebook }}" class="mt-2 mb-2" style="margin-left: 1rem;">
+                            <img src="{{asset('assets/user/utilidades/facebook.png') }}" style="width:25px">
+                        </a>
+                        <a target="_blank" href="{{ $concursante->instagram }}" class="mt-2 mb-2" style="margin-left: 1rem;">
+                            <img src="{{asset('assets/user/utilidades/instagram.png') }}" style="width:25px">
+                        </a>
+                        <a target="_blank" href="{{ $concursante->tiktok }}" class="mt-2 mb-2" style="margin-left: 1rem;">
+                            <img src="{{asset('assets/user/utilidades/tik-tok.png') }}" style="width:25px">
+                        </a>
+
+                    </div>
+                    <p class="text-center">
                         <button class="btn-votar" data-id="{{ $concursante->id }}">Votar</button>
                     </p>
+                    @if ($concursante->estatus == 'Desabilitado')
+                    <p class="text-center">
+                        <img class="tache" src="{{asset('assets/user/utilidades/prohibicion.png')}}" alt="" >
+                    </p>
+                    @endif
+
+
+                    <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                 </div>
             </div>
         @endforeach
@@ -65,83 +87,6 @@
     </div>
 </section>
 
-
-<section class="primario bg_overley" style="background-color:#836262;"id="alumnado">
-    <div class="row">
-
-        <div class="col-12 col-md-6 m-auto">
-
-            <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">ALUMNADO</h1>
-            <p class="text-center text-white mt-auto parrafo_instalaciones">
-                Hemos formado alumnos desde hace más de 35 años y, en todo este tiempo, siempre hemos ofrecido los mejores temas y los más actualizados. <br>
-                Cada vez hemos sumado más y más avales para respaldar todos los estudios y así, ofrecer solo educación de primer nivel. <br>
-                Estamos muy agradecidos con todas las personas que han pasado por las aulas de IMNAS y han depositado su confianza en nosotros para ser quienes los ayuden a formar sus carreras.
-            </p>
-
-        </div>
-
-        <div class="col-12 col-md-6">
-            <div class="d-flex justify-content-center">
-                <div class="card card-custom space_Card mb-3" style="">
-                    <div id="carousel_alumnado" class="carousel slide">
-                        <div class="carousel-inner">
-                            <div class="carousel-item active">
-                              <img class="card_image" src="{{asset('assets/user/nosotros/1.jpeg')}}"  style="width: 100%;">
-                            </div>
-
-                            <div class="carousel-item ">
-                              <img class="card_image" src="{{asset('assets/user/nosotros/2.jpeg')}}"  style="width: 100%;">
-                            </div>
-
-                            <div class="carousel-item ">
-                                <img class="card_image" src="{{asset('assets/user/nosotros/3.jpeg')}}"  style="width: 100%;">
-                            </div>
-
-                            <div class="carousel-item ">
-                                <img class="card_image" src="{{asset('assets/user/nosotros/4.jpeg')}}"  style="width: 100%;">
-                              </div>
-
-                              <div class="carousel-item ">
-                                  <img class="card_image" src="{{asset('assets/user/nosotros/5.jpeg')}}"  style="width: 100%;">
-                              </div>
-
-                              <div class="carousel-item ">
-                                <img class="card_image" src="{{asset('assets/user/nosotros/6.jpeg')}}"  style="width: 100%;">
-                              </div>
-
-                              <div class="carousel-item ">
-                                  <img class="card_image" src="{{asset('assets/user/nosotros/7.jpeg')}}"  style="width: 100%;">
-                              </div>
-
-                              <div class="carousel-item ">
-                                <img class="card_image" src="{{asset('assets/user/nosotros/8.jpeg')}}"  style="width: 100%;">
-                            </div>
-
-                            <div class="carousel-item ">
-                                <img class="card_image" src="{{asset('assets/user/nosotros/9.jpeg')}}"  style="width: 100%;">
-                            </div>
-
-                            <div class="carousel-item ">
-                              <img class="card_image" src="{{asset('assets/user/nosotros/10.jpeg')}}"  style="width: 100%;">
-                          </div>
-
-                          </div>
-
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_alumnado" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_alumnado" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
 
 {{-- <section class="primario bg_overley" style="background-color:#836262;">
     <div class="row">

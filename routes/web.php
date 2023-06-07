@@ -81,7 +81,7 @@ Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->nam
 Route::get('avales', [App\Http\Controllers\WebPageController::class, 'avales'])->name('user.avales');
 Route::get('nuestras_instalaciones', [App\Http\Controllers\WebPageController::class, 'instalaciones'])->name('user.instalaciones');
 Route::get('nosotros', [App\Http\Controllers\WebPageController::class, 'nosotros'])->name('user.nosotros');
-Route::get('reality', [App\Http\Controllers\WebPageController::class, 'reality'])->name('user.reality');
+Route::get('show', [App\Http\Controllers\WebPageController::class, 'reality'])->name('user.reality');
 
 // =============== P A G I N A  S I N G L E  C O U R S E ===============================
 Route::get('/curso/{slug}', [App\Http\Controllers\CursoUsersController::class, 'show'])->name('cursos.show');
@@ -232,6 +232,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/webpage/{id}', [App\Http\Controllers\WebPageController::class, 'edit'])->name('webpage.edit');
     Route::patch('/admin/webpage/update/{id}', [App\Http\Controllers\WebPageController::class, 'update'])->name('webpage.update');
     Route::post('/admin/reality/store', [App\Http\Controllers\WebPageController::class, 'realitystore'])->name('reality.store');
+    Route::patch('/admin/reality/update/{id}', [App\Http\Controllers\WebPageController::class, 'realityupdate'])->name('reality.update');
 
     Route::get('/admin/estandares', [App\Http\Controllers\EstandarController::class, 'index'])->name('estandares.index');
     Route::post('/admin/estandares/store', [App\Http\Controllers\EstandarController::class, 'store'])->name('estandares.store');

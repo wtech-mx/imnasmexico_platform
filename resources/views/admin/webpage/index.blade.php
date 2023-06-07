@@ -537,6 +537,7 @@
                                                     <th>Img</th>
                                                     <th>Nombre</th>
                                                     <th>Votos</th>
+                                                    <th>Estatus</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
@@ -547,14 +548,14 @@
                                                         <th><img id="blah" src="{{asset('reality/'.$voto->foto_perfil) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
                                                         <td>{{ $voto->nombre }}</td>
                                                         <td>{{ $voto->Votos }}</td>
+                                                        <td>{{ $voto->estatus }}</td>
                                                         <td>
-                                                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_comenatario_{{ $voto->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_reality_{{ $voto->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                                                 <i class="fa fa-fw fa-edit"></i>
                                                             </a>
                                                         </td>
                                                     </tr>
                                                 @include('admin.webpage.modal_reality__edit')
-
                                                 @endforeach
                                             </tbody>
                                         </table>

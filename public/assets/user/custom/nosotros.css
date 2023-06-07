@@ -43,6 +43,25 @@
     box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
 }
 
+.click_docmuentos {
+    position: absolute;
+    width: 50px;
+    bottom: 60px;
+    background: #6C5069;
+    border-radius: 40px;
+    padding: 5px;
+    right: 15px;
+    transform: rotate(-40deg);
+    transition: transform 0.3s ease;
+}
+
+.tache{
+    width: 200px;
+    position: absolute;
+    top: 150px;
+    left: 70px;
+}
+
 @media only screen and (max-width: 1475px) {
     .video_nosotros {
         width: 370px;
