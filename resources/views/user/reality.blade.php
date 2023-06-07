@@ -55,7 +55,11 @@
             <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
                 <div class="card_reality" style="position: relative">
                     <p class="text-center">
+                        @if ($concursante->estatus == 'Desabilitado')
+                        <img class="img_reality_alumnas descalificado" src="{{asset('reality/'.$concursante->foto_perfil) }}" style="width: 80%;">
+                        @else
                         <img class="img_reality_alumnas" src="{{asset('reality/'.$concursante->foto_perfil) }}" style="width: 80%;">
+                        @endif
                     </p>
                     <div class="d-flex justify-content-center">
                         <a target="_blank" href="{{ $concursante->facebook }}" class="mt-2 mb-2" style="margin-left: 1rem;">
@@ -69,104 +73,23 @@
                         </a>
 
                     </div>
-                    <p class="text-center">
-                        <button class="btn-votar" data-id="{{ $concursante->id }}">Votar</button>
-                    </p>
                     @if ($concursante->estatus == 'Desabilitado')
+
+                    @else
                     <p class="text-center">
-                        <img class="tache" src="{{asset('assets/user/utilidades/prohibicion.png')}}" alt="" >
+                        <button class="btn-votar" data-id="{{ $concursante->id }}">
+                            Votar <img src="{{asset('assets/user/utilidades/voto.png')}}" style="width: 30px;">
+                        </button>
                     </p>
-                    @endif
-
-
                     <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
+                    @endif
+                    {{-- <span id="contador-{{ $concursante->id }}">{{ $concursante->votos }}</span> --}}
                 </div>
             </div>
         @endforeach
 
     </div>
 </section>
-
-
-{{-- <section class="primario bg_overley" style="background-color:#836262;">
-    <div class="row">
-
-        <div class="col-12">
-            <h2 class="titulo_alfa tittle_nosotros mt-3 mb-5 text-center" style="color: #fff!important">
-                Nosotros
-            </h2>
-        </div>
-
-        <div class="col-12 m-auto mb-5">
-            <div class="owl-carousel owl-theme">
-
-                <div class="item" style="">
-                    <div class="d-flex justify-content-center">
-                        <div class="card_video">
-                            <video class="video_nosotros" controls>
-                                <source src="{{asset('assets/user/nosotros/DIPLOMADO_MEDICINA_UNAM.MP4')}}" type="video/mp4">
-                            </video>
-
-                            <div class="minicontent_video">
-                                <h2 class="tittle_video">Diplomado </h2>
-                                <p class="text_video"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item" style="">
-                    <div class="d-flex justify-content-center">
-                        <div class="card_video">
-                            <div class="minicontent_video">
-                                <h2 class="tittle_video">Expos</h2>
-                                <p class="text_video"></p>
-                            </div>
-
-                            <video class="video_nosotros" controls>
-                                <source src="{{asset('assets/user/nosotros/EXPO.MP4')}}" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item" style="">
-                    <div class="d-flex justify-content-center">
-                        <div class="card_video">
-
-                            <video class="video_nosotros" controls>
-                                <source src="{{asset('assets/user/nosotros/VIDEO DOCUMENTACIÓN.MP4')}}" type="video/mp4">
-                            </video>
-
-                            <div class="minicontent_video">
-                                <h2 class="tittle_video">Documentos</h2>
-                                <p class="text_video"></p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item" style="">
-                    <div class="d-flex justify-content-center">
-                        <div class="card_video">
-                            <div class="minicontent_video">
-                                <h2 class="tittle_video">Conferencias</h2>
-                                <p class="text_video"></p>
-                            </div>
-
-                            <video class="video_nosotros" controls>
-                                <source src="{{asset('assets/user/nosotros/VIDEO_CORTO_CONFERENCIA.MP4')}}" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</section> --}}
 
 {{-- Ubicacion --}}
 <section class="primario bg_overley" style="background-color:#F5ECE4;">
@@ -223,32 +146,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
     integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
     crossorigin="anonymous"></script>
-<script>
-    $('.owl-carousel').owlCarousel({
-        loop: true,
-        margin: 30,
-        left:30,
-        paddimg:30,
-        nav: true,
-        dots: false,
-        autoplay: false,
-        autoplayTimeout: 5000,
-        autoplayHoverPause: true,
-        navText : ["<i class='fa fa-chevron-left'></i>","<i class='fa fa-chevron-right'></i>"],
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 2
-            },
-            1000: {
-                items: 3
-            }
-
-        }
-    })
-</script>
 
 <script>
 $(function() {
@@ -321,7 +218,6 @@ $(function() {
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
   }
 });
-
 
 </script>
 

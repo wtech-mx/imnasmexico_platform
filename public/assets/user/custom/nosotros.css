@@ -62,6 +62,25 @@
     left: 70px;
 }
 
+.descalificado{
+    filter: grayscale(1);
+    transition-property: filter;
+    transition-duration: 1s;
+}
+
+.btn-votar{
+    border: solid transparent;
+    background: #836262;
+    border-radius: 19px;
+    color: #fff;
+    padding: 10px 30px;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 0px 9px 9px 0px;
+    border-color: #000;
+    margin-top: 2rem;
+}
+
 @media only screen and (max-width: 1475px) {
     .video_nosotros {
         width: 370px;

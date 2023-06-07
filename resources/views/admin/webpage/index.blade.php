@@ -547,7 +547,7 @@
                                                         <td>{{ $voto->id }}</td>
                                                         <th><img id="blah" src="{{asset('reality/'.$voto->foto_perfil) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
                                                         <td>{{ $voto->nombre }}</td>
-                                                        <td>{{ $voto->Votos }}</td>
+                                                        <td>{{ $voto->votos }}</td>
                                                         <td>{{ $voto->estatus }}</td>
                                                         <td>
                                                             <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_reality_{{ $voto->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
