@@ -52,7 +52,7 @@
         </div>
 
         @foreach ($concursantes as $concursante)
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 order-uno m-auto">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 m-auto">
                 <div class="card_reality" style="position: relative">
                     <p class="text-center">
                         @if ($concursante->estatus == 'Desabilitado')
@@ -76,11 +76,16 @@
                     @if ($concursante->estatus == 'Desabilitado')
 
                     @else
-                    <p class="text-center">
-                        <button class="btn-votar" data-id="{{ $concursante->id }}">
-                            Votar <img src="{{asset('assets/user/utilidades/voto.png')}}" style="width: 30px;">
-                        </button>
-                    </p>
+
+                    @if ($webpage->btn_votar == 'Activo')
+                        <p class="text-center">
+                            <button class="btn-votar" data-id="{{ $concursante->id }}">
+                                Votar <img src="{{asset('assets/user/utilidades/voto.png')}}" style="width: 30px;">
+                            </button>
+                        </p>
+                    @else
+                    @endif
+
                     <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                     @endif
                     {{-- <span id="contador-{{ $concursante->id }}">{{ $concursante->votos }}</span> --}}

@@ -352,6 +352,17 @@
                                       </div>
                                     </div>
 
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="Estatus">Estatus boton Votar</label>
+                                            <select name="btn_votar" id="btn_votar" class="form-control">
+                                                <option selected value="">{{ $webpage->btn_votar }}</option>
+                                                <option value="Activo">Activo</option>
+                                                <option value="Desabilitado">Desabilitado</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
                                   </div>
                                 </div>
 

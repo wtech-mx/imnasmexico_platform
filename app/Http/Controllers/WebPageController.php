@@ -140,6 +140,7 @@ class WebPageController extends Controller
         $webpage->email_developer = $request->get('email_developer');
         $webpage->email_admin_two = $request->get('email_admin_two');
         $webpage->email_developer_two = $request->get('email_developer_two');
+        $webpage->btn_votar = $request->get('btn_votar');
 
         if ($request->hasFile("stone_home_bg")) {
             $file = $request->file('stone_home_bg');
