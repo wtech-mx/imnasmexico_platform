@@ -17,13 +17,11 @@ class VotosController extends Controller
     public function votar(Request $request){
         $concursanteId = $request->input('concursanteId');
 
-        // Crear un nuevo registro de voto en la base de datos
-        Votos::create([
-            'concursante_id' => $concursanteId,
-        ]);
+        $concursante = Votos::findOrFail($concursanteId);
+        $concursante->increment('votos');
 
         // Obtener el número total de votos para el concursante
-        $totalVotos = Votos::where('concursante_id', $concursanteId)->count();
+        $totalVotos = Votos::where('id', $concursanteId)->count();
 
         // Retornar la respuesta como JSON con el número total de votos
         return response()->json(['votos' => $totalVotos]);
