@@ -80,15 +80,13 @@
                     @if ($webpage->btn_votar == 'Activo')
                         <p class="text-center">
                             <button class="btn-votar" data-id="{{ $concursante->id }}">
-                                Votar <img src="{{asset('assets/user/utilidades/voto.png')}}" style="width: 30px;">
+                                Votar <span id="contador-{{ $concursante->id }}">{{ $concursante->votos }}</span> -<img src="{{asset('assets/user/utilidades/voto.png')}}" style="width: 30px;">
                             </button>
                         </p>
                     @else
                     @endif
-
                     <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                     @endif
-                    {{-- <span id="contador-{{ $concursante->id }}">{{ $concursante->votos }}</span> --}}
                 </div>
             </div>
         @endforeach
@@ -142,7 +140,6 @@
 </section>
 {{-- Ubicacion --}}
 
-
 @endsection
 
 @section('js')
@@ -154,75 +151,81 @@
 
 <script>
 $(function() {
-  $('.btn-votar').click(function() {
-    var concursanteId = $(this).data('id');
+    $('.btn-votar').click(function() {
+        var concursanteId = $(this).data('id');
 
-    // Verificar si se ha alcanzado el límite de votos permitidos
-    if (getVotosActuales() >= 5) {
-      alert('Has alcanzado el límite de votos permitidos');
-      return;
-    }
+        // Verificar si se ha alcanzado el límite de votos permitidos por día
+        if (getVotosActuales() >= 5) {
+            alert('Has alcanzado el límite de votos permitidos por día');
+            return;
+        }
 
-    $.ajax({
-      type: "POST",
-      url: "{{ route('votar') }}",
-      data: {
-        _token: "{{ csrf_token() }}",
-        concursanteId: concursanteId
-      },
-      success: function(data) {
-        console.log(concursanteId);
-        var contadorElement = $('#contador-' + concursanteId);
-        contadorElement.text(data.votos);
+        $.ajax({
+            type: "POST",
+            url: "{{ route('votar') }}",
+            data: {
+                _token: "{{ csrf_token() }}",
+                concursanteId: concursanteId
+            },
+            success: function(response) {
+                // Obtener el número total de votos devuelto por el controlador
+                var totalVotos = response.votos;
 
-        // Actualizar la cookie después de votar exitosamente
-        actualizarCookieVotos(concursanteId);
-      },
-      error: function(xhr, status, error) {
-        console.log(error);
-      }
+                // Actualizar el contador de votos en tiempo real
+                var contadorElement = $('#contador-' + concursanteId);
+                contadorElement.text(totalVotos);
+
+                // Guardar el voto del usuario en el día actual
+                guardarVotoHoy(concursanteId);
+            },
+            error: function(xhr, status, error) {
+                console.log(error);
+            }
+        });
     });
-  });
 
-  function getVotosActuales() {
-    var votosCookie = getCookie('votos');
-    return votosCookie ? JSON.parse(votosCookie).length : 0;
-  }
-
-  function actualizarCookieVotos(concursanteId) {
-    var votosCookie = getCookie('votos');
-    var votos = votosCookie ? JSON.parse(votosCookie) : [];
-
-    // Agregar el ID del concursante al arreglo de votos
-    votos.push(concursanteId);
-
-    // Guardar el arreglo actualizado en la cookie
-    setCookie('votos', JSON.stringify(votos), 7);
-  }
-
-  function getCookie(name) {
-    var cookieArr = document.cookie.split(';');
-
-    for (var i = 0; i < cookieArr.length; i++) {
-      var cookiePair = cookieArr[i].split('=');
-      if (name === cookiePair[0].trim()) {
-        return decodeURIComponent(cookiePair[1]);
-      }
+    function getVotosActuales() {
+        var votosCookie = getCookie('votos');
+        var votosHoy = votosCookie ? JSON.parse(votosCookie) : [];
+        return votosHoy.length;
     }
 
-    return null;
-  }
+    function guardarVotoHoy(concursanteId) {
+        var votosCookie = getCookie('votos');
+        var votosHoy = votosCookie ? JSON.parse(votosCookie) : [];
 
-  function setCookie(name, value, days) {
-    var expires = "";
-    if (days) {
-      var date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-      expires = "; expires=" + date.toUTCString();
+        // Agregar el ID del concursante al arreglo de votos del día actual
+        votosHoy.push(concursanteId);
+
+        // Guardar el arreglo actualizado en la cookie
+        setCookie('votos', JSON.stringify(votosHoy), 1);
     }
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
-  }
+
+    function getCookie(name) {
+        var cookieArr = document.cookie.split(';');
+
+        for (var i = 0; i < cookieArr.length; i++) {
+            var cookiePair = cookieArr[i].split('=');
+            if (name === cookiePair[0].trim()) {
+                return decodeURIComponent(cookiePair[1]);
+            }
+        }
+
+        return null;
+    }
+
+    function setCookie(name, value, days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }
 });
+
+
 
 </script>
 
