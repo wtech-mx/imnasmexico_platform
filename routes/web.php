@@ -113,6 +113,8 @@ Route::post('/orders/pay/stripe', [OrderController::class, 'pay_stripe'])->name(
 Route::post('/paquete/pay/stripe', [OrderController::class, 'pay_stripe_paquete'])->name('order.pay_stripe_paquete');
 Route::post('/vaciar-carrito', [OrderController::class, 'vaciar_carrito'])->name('vaciar_carrito');
 
+Route::post('/order/pay/envio', [OrderController::class, 'pagar_envio'])->name('order.pay_envio');
+
 // =============== C A R R I T O ===============================
 Route::get('add-to-cart/{id}', [OrderController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('/update-cart', [OrderController::class, 'update'])->name('update.cart');
@@ -121,7 +123,6 @@ Route::delete('/remove-from-cart', [OrderController::class, 'remove'])->name('re
 Route::post('/cupon', [OrderController::class, 'aplicarCupon'])->name('cupon.aplicar');
 Route::post('remove-coupon', [OrderController::class, 'removeCoupon'])->name('removeCoupon');
 
-Route::get('pagar/envio', [OrderController::class, 'pagar_envio'])->name('pagar_envio');
 // =============== L O G I N  U S E R S ===============================
 Route::get('perfil/{code}', [App\Http\Controllers\ClientsController::class, 'index'])->name('perfil.index');
 Route::patch('/perfil/update/{code}', [App\Http\Controllers\ClientsController::class, 'update'])->name('perfil.update');

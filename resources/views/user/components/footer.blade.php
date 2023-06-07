@@ -79,7 +79,7 @@
                     <div class="col-12">
                       <div class="collapse multi-collapse" id="multiCollapseExample1">
                         <div class="card card-body mb-5">
-                            <form method="POST" action="{{ route('process-payment') }}">
+                            <form method="POST" action="{{ route('order.pay_envio') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="col-12">
@@ -92,14 +92,7 @@
                                     <div class="col-6">
                                         <div class="input-group flex-nowrap mt-4">
                                             <span class="input-group-text span_custom_checkout" id=""><i class="fa fa-building"></i></span>
-                                            <input type="text" name="address_1" id="address_1" class="form-control input_custom_checkout" placeholder="Calle y Numero" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <div class="input-group flex-nowrap mt-4">
-                                            <span class="input-group-text span_custom_checkout" id=""><i class="fa fa-map-pin"></i></span>
-                                            <input type="text" name="address_2" id="address_2" class="form-control input_custom_checkout" placeholder="Alcaldia" required>
+                                            <input type="text" name="address_1" id="address_1" class="form-control input_custom_checkout" placeholder="Dirección" required>
                                         </div>
                                     </div>
 

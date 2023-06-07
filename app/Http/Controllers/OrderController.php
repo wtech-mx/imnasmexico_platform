@@ -44,7 +44,7 @@ class OrderController extends Controller
     public function processPayment(Request $request)
     {
         // Configurar el SDK de Mercado Pago con las credenciales de API
-        SDK::setAccessToken(config('services.mercadopago.token'));
+       SDK::setAccessToken(config('services.mercadopago.token'));
 
         // Crear un objeto de preferencia de pago
         $preference = new Preference();
@@ -138,6 +138,107 @@ class OrderController extends Controller
         }
     }
 
+    public function pagar_envio(Request $request)
+    {
+
+        // Configurar el SDK de Mercado Pago con las credenciales de API
+        SDK::setAccessToken(config('services.mercadopago.token'));
+
+        // Crear un objeto de preferencia de pago
+        $preference = new Preference();
+        $code = Str::random(8);
+
+        $item = new Item();
+        $item->title = 'Pago Envio';
+        $item->quantity = 1;
+        $item->unit_price = 250;
+        $ticketss = array($item);
+
+        // Crear un objeto de preferencias de pago
+        $preference = new \MercadoPago\Preference();
+
+        $preference->back_urls = array(
+            "success" => route('order.pay'),
+            "pending" => route('order.pay'),
+            "failure" => "https://plataforma.imnasmexico.com/",
+        );
+        $preference->auto_return = "approved";
+        $preference->external_reference = $code;
+        $preference->items = $ticketss;
+
+        if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+            if (User::where('telefono', $request->telefono)->exists()) {
+                $user = User::where('telefono', $request->telefono)->first();
+                $user->direccion = $request->get('address_1');
+                $user->city = $request->get('city');
+                $user->state = $request->get('state');
+                $user->postcode = $request->get('postcode');
+                $user->country = $request->get('country');
+                $user->update();
+            } else {
+                $user = User::where('email', $request->email)->first();
+                $user->direccion = $request->get('address_1');
+                $user->city = $request->get('city');
+                $user->state = $request->get('state');
+                $user->postcode = $request->get('postcode');
+                $user->country = $request->get('country');
+                $user->update();
+            }
+            $payer = $user;
+        } else {
+            $payer = new User;
+            $payer->name = $request->get('name');
+            $payer->email = $request->get('email');
+            $payer->username = $request->get('telefono');
+            $payer->code = $code;
+            $payer->telefono = $request->get('telefono');
+            $payer->cliente = '1';
+            $payer->password = Hash::make($request->get('telefono'));
+            $payer->direccion = $request->get('address_1');
+            $payer->city = $request->get('city');
+            $payer->state = $request->get('state');
+            $payer->postcode = $request->get('postcode');
+            $payer->country = $request->get('country');
+            $payer->save();
+            $datos = User::where('id', '=', $payer->id)->first();
+            // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+        }
+
+        try {
+            // Crear la preferencia en Mercado Pago
+
+            $preference->save();
+
+            $fechaActual = date('Y-m-d');
+            $order = new Orders;
+            $order->id_usuario = $payer->id;
+            $order->pago = 250;
+            $order->forma_pago = 'Mercado Pago';
+            $order->fecha = $fechaActual;
+            $order->estatus = 0;
+            $order->code = $code;
+            $order->external_reference = $code;
+            $order->save();
+
+            $order_ticket = new OrdersTickets;
+            $order_ticket->id_order = $order->id;
+            $order_ticket->id_usuario = $payer->id;
+            $order_ticket->id_tickets = 137;
+            $order_ticket->id_curso = 109;
+
+            $order_ticket->save();
+
+            // Redirigir al usuario al proceso de pago de Mercado Pago
+            return Redirect::to($preference->init_point);
+        } catch (Exception $e) {
+            // Manejar errores de Mercado Pago
+            return Redirect::back()->withErrors(['message' => $e->getMessage()]);
+        } catch (Throwable $e) {
+            // Manejar errores de PHP
+            return Redirect::back()->withErrors(['message' => $e->getMessage()]);
+        }
+    }
+
     public function pay(Orders $order, Request $request)
     {
         $payment_id = $request->get('payment_id');
@@ -183,11 +284,11 @@ class OrderController extends Controller
                     'billing' => [
                         'first_name' => $order->User->name,
                         'last_name' => '',
-                        'address_1' => 'Circuito interior 888',
+                        'address_1' => $order->User->direccion,
                         'address_2' => '',
-                        'city' => 'CDMX',
-                        'state' => 'CDMX',
-                        'postcode' => '94103',
+                        'city' => $order->User->city,
+                        'state' => $order->User->state,
+                        'postcode' => $order->User->postcode,
                         'country' => 'Mexico',
                         'email' => $order->User->email,
                         'phone' => $order->User->telefono
@@ -195,14 +296,15 @@ class OrderController extends Controller
                     'shipping' => [
                         'first_name' => $order->User->name,
                         'last_name' => '',
-                        'address_1' => '969 Market',
+                        'address_1' => $order->User->direccion,
                         'address_2' => '',
-                        'city' => 'CDMX',
-                        'state' => 'CDMX',
-                        'postcode' => '94103',
+                        'city' => $order->User->city,
+                        'state' => $order->User->state,
+                        'postcode' => $order->User->postcode,
                         'country' => 'Mexico'
                     ],
                 ];
+
                 $ordenwoo = Order::create($data);
             }else{
                 foreach ($orden_ticket as $details) {
@@ -978,37 +1080,5 @@ class OrderController extends Controller
             Session::flash('modal_checkout', 'Se ha Abierto el checkout');
             session()->flash('warning', 'Producto eliminado del carrito');
         }
-    }
-
-    public function pagar_envio()
-    {
-        $id = 137;
-        $cart = session()->get('cart', []);
-
-        $product = CursosTickets::findOrFail($id);
-        if ($product->descuento == NULL) {
-            $precio = $product->precio;
-        } else {
-            $precio = $product->descuento;
-        }
-
-        if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-        } else {
-
-            $cart[$id] = [
-                "id" => $product->id,
-                "name" => $product->nombre,
-                "curso" => $product->id_curso,
-                "quantity" => 1,
-                "price" => $precio,
-                "paquete" => 0,
-                "image" => $product->imagen
-            ];
-        }
-
-        session()->put('cart', $cart);
-        Session::flash('modal_checkout', 'Se ha Abierto el checkout');
-        return redirect()->back()->with('success', '¡Producto agregado');
     }
 }
