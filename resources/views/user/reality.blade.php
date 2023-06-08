@@ -46,9 +46,15 @@
     <div class="row">
 
         <div class="col-12">
-            <h1 class="text-white text-center titulo mt-5 mb-lg-5 mb-md-5 mb-5" style="color:#836262!important;">
+            <h1 class="text-white text-center titulo mt-5 mb-lg-5 mb-md-5" style="color:#836262!important;">
                 Conoce a nuestros participantes
             </h1>
+            <p class="text-center mb-5" style="color:#836262!important;">
+                Recuerda que solo podras votar al inicio y hasta el fin de la transmision en vivo. <br>
+                Puedes verlo en nuestra pagina de Facebook <a href="https://www.facebook.com/naturalesainspa?mibextid=ZbWKwL" style="color:#836262!important;" target="_blank"><b> Naturales Ain Spa. </b></a><br><br>
+                El evento dará inicio este <b> sábado 10 y domingo 11 de junio a las 8:00 p.m.</b><br>
+                Asegúrate de sintonizar y ser parte de esta emocionante experiencia.
+            </p>
         </div>
 
         @foreach ($concursantes as $concursante)
