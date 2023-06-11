@@ -86,7 +86,7 @@
                     @if ($webpage->btn_votar == 'Activo')
                         <p class="text-center">
                             <button class="btn-votar" data-id="{{ $concursante->id }}">
-                                Votar <span id="contador-{{ $concursante->id }}">{{ $concursante->votos }}</span> -<img src="{{asset('assets/user/utilidades/voto.png')}}" style="width: 30px;">
+                                Votar <span><img src="{{asset('assets/user/utilidades/voto.png')}}" style="width: 30px;">
                             </button>
                         </p>
                     @else
@@ -183,6 +183,7 @@ $(function() {
 
                 // Guardar el voto del usuario en el día actual
                 guardarVotoHoy(concursanteId);
+                alert('Voto Guardado');
             },
             error: function(xhr, status, error) {
                 console.log(error);
