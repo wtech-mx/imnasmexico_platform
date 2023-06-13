@@ -18,98 +18,99 @@ Mi perfil- {{$cliente->name}}
                     <h2 class="title_curso mb-3">Mi Perfil</h2>
                     <img class="icon_nav_course" src="{{asset('assets/user/icons/informacion.png')}}" alt="">
                 </div>
-                <form role="form" action="{{ route('perfil.update', $cliente->code) }}" method="post">
-                    @csrf
-                    <input type="hidden" name="_method" value="PATCH">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="title_curso mb-5">Datos de cliente</h2>
-                        </div>
+                    <form role="form" action="{{ route('perfil.update', $cliente->code) }}" method="post">
+                        @csrf
+                        <input type="hidden" name="_method" value="PATCH">
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="title_curso mb-5">Datos de cliente</h2>
+                            </div>
 
-                        <div class="col-12 col-lg-6 form-group ">
-                            <div class="input-group input-group-alternative mb-4">
-                            <span class="input-group-text">
-                                <img class="img_profile_label" src="{{asset('assets/user/icons/usuario.png')}}" alt="">
-                            </span>
+                            <div class="col-12 col-lg-6 form-group ">
+                                <div class="input-group input-group-alternative mb-4">
+                                <span class="input-group-text">
+                                    <img class="img_profile_label" src="{{asset('assets/user/icons/usuario.png')}}" alt="">
+                                </span>
 
-                            <input class="form-control" type="text"  id="name" name="name" value="{{$cliente->name}}">
+                                <input class="form-control" type="text"  id="name" name="name" value="{{$cliente->name}}">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 form-group ">
+                                <div class="input-group input-group-alternative mb-4">
+                                <span class="input-group-text">
+                                    <img class="img_profile_label" src="{{asset('assets/user/icons/letter.png')}}" alt="">
+                                </span>
+
+                                <input class="form-control" type="text"  id="email" name="email" value="{{$cliente->email}}">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 form-group ">
+                                <div class="input-group input-group-alternative mb-4">
+                                <span class="input-group-text">
+                                    <img class="img_profile_label" src="{{asset('assets/user/icons/ring-phone.png')}}" alt="">
+                                </span>
+
+                                <input class="form-control" type="number"  id="telefono" name="telefono" value="{{$cliente->telefono}}">
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <h2 class="title_curso mb-5">Dirección de envio</h2>
+                            </div>
+
+                            <div class="col-12 col-lg-6 form-group ">
+                                <div class="input-group input-group-alternative mb-4">
+                                <span class="input-group-text">
+                                    <img class="img_profile_label" src="{{asset('assets/user/icons/edificio.png')}}" alt="" >
+                                </span>
+
+                                <input class="form-control prb" type="text"  id="nombre" name="nombre" placeholder="Direccion">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 form-group ">
+                                <div class="input-group input-group-alternative mb-4">
+                                <span class="input-group-text">
+                                    <img class="img_profile_label" src="{{asset('assets/user/icons/location-pointer.png')}}" alt="">
+                                </span>
+
+                                <input class="form-control" type="text"  id="nombre" name="nombre" placeholder="Municipio y/o Provincia">
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-lg-4 form-group ">
+                                <div class="input-group input-group-alternative mb-4">
+                                <span class="input-group-text">
+                                    <img class="img_profile_label" src="{{asset('assets/user/icons/cp.png')}}" alt="">
+
+                                </span>
+
+                                <input class="form-control" type="text"  id="nombre" name="nombre" placeholder="CP">
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-lg-4 form-group ">
+                                <div class="input-group input-group-alternative mb-4">
+                                <span class="input-group-text">
+                                    <img class="img_profile_label" src="{{asset('assets/user/icons/ring-phone.png')}}" alt="">
+                                </span>
+
+                                <input class="form-control" type="text"  id="telefono" name="telefono" placeholder="Telefono">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-4 form-group ">
+                                <button type="submit" class="btn_save_profile" >
+                                    Guardar
+                                </button>
+                            </div>
+                            <div class="col-4 col-lg-4 form-group ">
+                                <a class="btn_save_profile" type="button" href="{{ route('signout') }}">Cerrar Sesión</a>
                             </div>
                         </div>
-
-                        <div class="col-12 col-lg-6 form-group ">
-                            <div class="input-group input-group-alternative mb-4">
-                            <span class="input-group-text">
-                                <img class="img_profile_label" src="{{asset('assets/user/icons/letter.png')}}" alt="">
-                            </span>
-
-                            <input class="form-control" type="text"  id="email" name="email" value="{{$cliente->email}}">
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-lg-6 form-group ">
-                            <div class="input-group input-group-alternative mb-4">
-                            <span class="input-group-text">
-                                <img class="img_profile_label" src="{{asset('assets/user/icons/ring-phone.png')}}" alt="">
-                            </span>
-
-                            <input class="form-control" type="number"  id="telefono" name="telefono" value="{{$cliente->telefono}}">
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <h2 class="title_curso mb-5">Dirección de envio</h2>
-                        </div>
-
-                        <div class="col-12 col-lg-6 form-group ">
-                            <div class="input-group input-group-alternative mb-4">
-                            <span class="input-group-text">
-                                <img class="img_profile_label" src="{{asset('assets/user/icons/edificio.png')}}" alt="" >
-                            </span>
-
-                            <input class="form-control prb" type="text"  id="nombre" name="nombre" placeholder="Direccion">
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-lg-6 form-group ">
-                            <div class="input-group input-group-alternative mb-4">
-                            <span class="input-group-text">
-                                <img class="img_profile_label" src="{{asset('assets/user/icons/location-pointer.png')}}" alt="">
-                            </span>
-
-                            <input class="form-control" type="text"  id="nombre" name="nombre" placeholder="Municipio y/o Provincia">
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-lg-4 form-group ">
-                            <div class="input-group input-group-alternative mb-4">
-                            <span class="input-group-text">
-                                <img class="img_profile_label" src="{{asset('assets/user/icons/cp.png')}}" alt="">
-
-                            </span>
-
-                            <input class="form-control" type="text"  id="nombre" name="nombre" placeholder="CP">
-                            </div>
-                        </div>
-
-                        <div class="col-6 col-lg-4 form-group ">
-                            <div class="input-group input-group-alternative mb-4">
-                            <span class="input-group-text">
-                                <img class="img_profile_label" src="{{asset('assets/user/icons/ring-phone.png')}}" alt="">
-                            </span>
-
-                            <input class="form-control" type="text"  id="telefono" name="telefono" placeholder="Telefono">
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-lg-4 form-group ">
-                            <button type="submit" class="btn_save_profile" >
-                                Guardar
-                            </button>
-                        </div>
-                        <div class="col-4 col-lg-4 form-group ">
-                            <a class="btn_save_profile" type="button" href="{{ route('signout') }}">Cerrar Sesión</a>
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
 
