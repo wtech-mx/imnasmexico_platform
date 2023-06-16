@@ -51,6 +51,11 @@ class User extends Authenticatable
         return $this->hasOne(Factura::class, 'id_usuario');
     }
 
+    public function EnviosOrder()
+    {
+        return $this->hasOne(EnviosOrder::class, 'id_user');
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

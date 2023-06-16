@@ -8,6 +8,7 @@ use App\Models\Orders;
 use App\Models\Cupon;
 use App\Models\User;
 use App\Models\Factura;
+use App\Models\EnviosOrder;
 use Hash;
 use Illuminate\Support\Arr;
 use Session;
@@ -225,8 +226,15 @@ class OrderController extends Controller
             $order_ticket->id_usuario = $payer->id;
             $order_ticket->id_tickets = 137;
             $order_ticket->id_curso = 109;
-
             $order_ticket->save();
+
+            $estatus_envio = "Pendiente";
+
+            $envio = new EnviosOrder;
+            $envio->id_order = $order->id;
+            $envio->id_user = $payer->id;
+            $envio->estatus = $estatus_envio;
+            $envio->save();
 
             // Redirigir al usuario al proceso de pago de Mercado Pago
             return Redirect::to($preference->init_point);
@@ -238,6 +246,25 @@ class OrderController extends Controller
             return Redirect::back()->withErrors(['message' => $e->getMessage()]);
         }
     }
+
+    public function index_envios(Request $request){
+
+        $envios = EnviosOrder::get();
+
+        return view('admin.envios.index', compact('envios'));
+    }
+
+    public function envios_update(Request $request,$id){
+
+
+        $envios = EnviosOrder::find($id);
+        $envios->estatus = $request->get('estatus');
+        $envios->update();
+
+        Session::flash('success', 'Se ha Actualziado sus datos con exito');
+        return redirect()->back()->with('success', 'Actualziado con exito');
+    }
+
 
     public function pay(Orders $order, Request $request)
     {

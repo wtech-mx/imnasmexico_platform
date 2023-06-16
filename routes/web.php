@@ -277,6 +277,10 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::delete('/admin/carpetas/estandares/archivos/{id}', [App\Http\Controllers\CarpetasEstandaresController::class, 'destroy'])->name('carpetas_estandares.destroy');
 
+    // =============== M O D U L O  envio ===============================
+    Route::get('/admin/envios', [App\Http\Controllers\OrderController::class, 'index_envios'])->name('envios.index');
+    Route::patch('/admin/envios/update/{id}', [App\Http\Controllers\OrderController::class, 'envios_update'])->name('envios.update_eestatus');
+
     // =============== M O D U L O   C A R P E T A S ===============================
     Route::get('/admin/publicidad', [App\Http\Controllers\PublicidadController::class, 'index'])->name('publicidad.index');
     Route::post('/admin/publicidad/store', [App\Http\Controllers\PublicidadController::class, 'store'])->name('publicidad.store');
