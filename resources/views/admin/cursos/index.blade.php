@@ -37,7 +37,6 @@
                                             <th>fecha inicio</th>
                                             <th>fecha final</th>
                                             <th>modalidad</th>
-
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -65,14 +64,17 @@
                                                     {{$fecha_formateada}}
                                                 </td>
                                                 @if ($curso->modalidad == "Online")
-                                                    <td> <label class="badge" style="color: #009ee3;background-color: #009ee340;">Online</label> </td>
+                                                    <td> <label class="badge badge-sm" style="color: #009ee3;background-color: #009ee340;">Online</label> </td>
                                                 @else
-                                                    <td> <label class="badge" style="color: #746AB0;background-color: #746ab061;">Presencial</label> </td>
+                                                    <td> <label class="badge badge-sm" style="color: #746AB0;background-color: #746ab061;">Presencial</label> </td>
                                                 @endif
 
                                                 <td>
+                                                    <a type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#material_modal_{{ $curso->id }}">
+                                                        <i class="fas fa-folder-open"></i> {{ $curso->RecordatoriosCursos->count()}}
+                                                    </a>
                                                     <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#recordatorio_modal_{{ $curso->id }}">
-                                                        <i class="fa fa-bell"></i> {{ $curso->RecordatoriosCursos->count()}}
+                                                        <i class="fa fa-bell"></i> {{ $curso->MaterialClase->count()}}
                                                     </a>
                                                     @if ($curso->modalidad == 'Online')
                                                         <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#update_modal_{{ $curso->id }}">
@@ -87,7 +89,7 @@
                                                     <a class="btn btn-sm btn-info" href="{{ route('cursos.show',$curso->slug) }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
                                                 </td>
                                             </tr>
-                                        @include('admin.cursos.modal_meet')
+                                        @include('admin.cursos.modal_materialclase')
                                         @include('admin.cursos.modal_recordatorio')
                                         @endforeach
                                     </tbody>
@@ -117,6 +119,31 @@
         $('.cliente').select2();
     });
 
-  </script>
+</script>
+
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var agregarCampoBtn = document.getElementById('agregarCampo');
+        var camposContainer = document.getElementById('camposContainer');
+        var campoExistente = camposContainer.querySelector('.campo');
+
+        agregarCampoBtn.addEventListener('click', function() {
+            var nuevoCampo = campoExistente.cloneNode(true);
+            camposContainer.appendChild(nuevoCampo);
+
+            // Limpiar los valores en el nuevo campo
+            nuevoCampo.querySelector('.nombre').value = '';
+            nuevoCampo.querySelector('.archivo').value = '';
+
+            // Asignar los eventos a los nuevos campos
+            nuevoCampo.querySelector('.nombre').addEventListener('change');
+            nuevoCampo.querySelector('.archivo').addEventListener('input');
+        });
+
+    });
+
+</script>
 
 @endsection

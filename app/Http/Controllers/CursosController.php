@@ -13,6 +13,7 @@ use Session;
 use App\Mail\PlantillaTicket;
 use App\Models\Carpetas;
 use App\Models\CarpetasEstandares;
+use App\Models\MaterialClase;
 use App\Models\CursosEstandares;
 use App\Models\Recursos;
 use Illuminate\Support\Facades\Mail;
@@ -341,6 +342,40 @@ class CursosController extends Controller
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->route('cursos.index')
             ->with('success', 'curso actualizado con exito.');
+    }
+
+    public function update_materialclase(Request $request, $id){
+
+        $dominio = $request->getHost();
+        if ($dominio == 'plataforma.imnasmexico.com') {
+            $archivo = base_path('../public_html/plataforma.imnasmexico.com/material_clase');
+        } else {
+            $archivo = public_path() . '/material_clase';
+        }
+
+            $nuevosCampos = $request->input('campo');
+            $nuevosCampos2 = $request->input('campo1');
+
+            foreach ($nuevosCampos as $index => $campo) {
+                $material_clase = new MaterialClase;
+                $material_clase->id_curso = $id;
+                $material_clase->nombre = $campo;
+
+                if (isset($nuevosCampos2[$index])) {
+                    $file = $nuevosCampos2[$index];
+                    $path = $archivo;
+                    $fileName = uniqid() . $file->getClientOriginalName();
+                    $file->move($path, $fileName);
+                    $material_clase->file = $fileName;
+                }
+
+                $material_clase->save();
+            }
+
+        Session::flash('success', 'Se ha guardado sus datos con éxito');
+        return redirect()->route('cursos.index')->with('success', 'curso actualizado con éxito.');
+
+
     }
 
     public function listas($id)
