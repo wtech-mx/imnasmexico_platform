@@ -91,6 +91,7 @@
                                             </tr>
                                         @include('admin.cursos.modal_materialclase')
                                         @include('admin.cursos.modal_recordatorio')
+                                        @include('admin.cursos.modal_meet')
                                         @endforeach
                                     </tbody>
                                 </table>
