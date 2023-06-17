@@ -18,6 +18,7 @@
 {{-- css carrusel --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
+<link href="{{asset('assets/user/custom/lightbox.min.css')}}" rel="stylesheet" />
 
 @endsection
     @php
@@ -357,9 +358,9 @@
                 @endif
                 @if ($curso->materiales != NULL)
                     <p class="text-left">
-                        <a href="{{ $curso->btn_cotizacion}}" target="_blank" >
-                            <img id="img_material_clase" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 40%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
-                        </a>
+                            <a class="example-image-link" href="{{asset('materiales/'.$curso->materiales) }}" data-lightbox="example-2" data-title="{{$curso->nombre}}">
+                                <img id="img_material_clase example-image" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 40%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                            </a>
                     </p>
                     @if ($curso->btn_cotizacion != NULL)
                         <p class="text-left btn-holder mt-2">
@@ -724,11 +725,14 @@
 @section('js')
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="{{asset('assets/user/custom/lightbox-plus-jquery.min.js')}}"></script>
+
 {{-- <script src="{{asset('assets/user/custom/multistepes.js')}}"></script> --}}
 <!-- Option 1: Bootstrap Bundle with Popper -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
     integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
     crossorigin="anonymous"></script>
+
 
 <script>
     $('.owl-carousel').owlCarousel({
