@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="col-6 form-group">
                                     <label for="name">Telefono</label>
-                                    <input id="talefono" name="talefono" type="number" class="form-control" disabled value="{{ $cliente->telefono }}">
+                                    <input id="telefono" name="telefono" type="number" class="form-control" value="{{ $cliente->telefono }}">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label for="name">Correo</label>

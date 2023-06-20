@@ -32,7 +32,7 @@
                         <th>No</th>
                         <th>Nombre</th>
                         <th>Correo</th>
-                        <th>Puesto</th>
+                        <th>Telefono</th>
                         <th>Roles</th>
                         <th width="280px">Acciones</th>
                         </tr>
@@ -43,7 +43,7 @@
                             <td>{{ $user->id }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->puesto }}</td>
+                            <td>{{ $user->telefono }}</td>
                             <td>
                             @if(!empty($user->getRoleNames()))
                                 @foreach($user->getRoleNames() as $v)

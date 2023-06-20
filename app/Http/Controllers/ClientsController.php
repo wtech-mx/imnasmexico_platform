@@ -98,6 +98,12 @@ class ClientsController extends Controller
     }
 
     public function update_situacionfiscal(Request $request, $id){
+        $user = User::where('id', $id)->first();
+        $user->username = $request->get('telefono');
+        $user->telefono = $request->get('telefono');
+        $user->password = Hash::make($request->get('telefono'));
+        $user->update();
+
         $cliente = User::where('id', $id)->first();
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
