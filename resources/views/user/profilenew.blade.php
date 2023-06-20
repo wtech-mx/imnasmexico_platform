@@ -91,7 +91,7 @@ Mi perfil- {{$cliente->name}}
                                 </div>
                             </div>
 
-                            <div class="col-6 col-lg-4 form-group ">
+                            {{-- <div class="col-6 col-lg-4 form-group ">
                                 <div class="input-group input-group-alternative mb-4">
                                 <span class="input-group-text">
                                     <img class="img_profile_label" src="{{asset('assets/user/icons/ring-phone.png')}}" alt="">
@@ -99,7 +99,7 @@ Mi perfil- {{$cliente->name}}
 
                                 <input class="form-control" type="text"  id="telefono" name="telefono" placeholder="Telefono">
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="col-12 col-lg-4 form-group ">
                                 <button type="submit" class="btn_save_profile" >
