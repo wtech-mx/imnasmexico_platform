@@ -27,8 +27,6 @@ class NotasProductosController extends Controller
     }
 
     public function store(request $request){
-
-        dd($request);
         // Creacion de user
         $code = Str::random(8);
 
