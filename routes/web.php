@@ -7,6 +7,9 @@ use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\WebhooksController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\RevoesController;
+use App\Models\Cursos;
+use App\Models\CursosTickets;
+use App\Models\WebPage;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,7 +93,22 @@ Route::get('/calendario/advance', [App\Http\Controllers\CursoUsersController::cl
 Route::post('/mensaje', [App\Http\Controllers\CursoUsersController::class, 'enviarFormulario'])->name('mensaje.form');
 
 // =============== P A Q U E T E S ===============
-Route::get('/paquetes', [App\Http\Controllers\CursoUsersController::class, 'paquetes'])->name('cursos.paquetes');
+// Route::get('/paquetes/{id}', [App\Http\Controllers\CursoUsersController::class, 'paquetes'])->name('cursos.paquetes');
+
+Route::get('/paquetes/{id}', function ($id) {
+    $fechaActual = date('Y-m-d');
+    $curso = Cursos::where('precio','<=', 600)->where('modalidad','=', 'Online')->get();
+    $webpage = WebPage::first();
+    $tickets = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+    ->where('cursos_tickets.precio','<=', 600)
+    ->where('cursos_tickets.fecha_inicial','<=', $fechaActual)
+    ->where('cursos_tickets.fecha_final','>=', $fechaActual)
+    ->where('cursos.modalidad','=', 'Online')
+    ->select('cursos_tickets.*')
+    ->get();
+
+    return view('user.paquetes', compact('id', 'curso', 'tickets', 'webpage'));
+});
 
 Route::post('/paquetes/resultado', [App\Http\Controllers\OrderController::class, 'resultado'])->name('carrito.resultado');
 Route::post('/paquetes/resultado2', [App\Http\Controllers\OrderController::class, 'resultado'])->name('carrito.resultado2');
