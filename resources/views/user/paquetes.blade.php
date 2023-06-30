@@ -19,7 +19,8 @@
             </div>
 
             <div class="col-12 col-md-6 space_paquetes">
-                <h3 class="mt-5" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+                <h3 class="mt-3" style="color:#836262!important;">Paquete 1</h3>
+                <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
                 <h3 style="color: #836262"><strong>
                     <del style="color: #836262">$7,400</del>
                     $6,000</strong>
@@ -54,7 +55,8 @@
     <div id="paquete2">
         <div class="row">
             <div class="col-12 col-md-6 order-dos space_paquetes">
-                <h3 class="mt-5" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+                <h3 class="mt-3" style="color:#836262!important;">Paquete 2</h3>
+                <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
                 <h3 style="color: #836262"><strong>
                     <del style="color: #836262">$9,400</del>
                     $8,000</strong>
@@ -96,7 +98,8 @@
             </div>
 
             <div class="col-12 col-md-6 space_paquetes">
-                <h3 class="mt-5" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+                <h3 class="mt-3" style="color:#836262!important;">Paquete 3</h3>
+                <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
                 <h3 style="color: #836262"><strong>
                     <del style="color: #836262">$12,400</del>
                     $11,000</strong>
@@ -130,7 +133,8 @@
     <div id="paquete4">
         <div class="row">
             <div class="col-12 col-md-6 order-dos space_paquetes">
-                <h3 class="mt-5" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+                <h3 class="mt-3" style="color:#836262!important;">Paquete 4</h3>
+                <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
                 <h3 style="color: #836262"><strong>
                     <del style="color: #836262">$14,400</del>
                     $13,000</strong>
@@ -172,7 +176,8 @@
             </div>
 
             <div class="col-12 col-md-6 order-dos space_paquetes">
-                <h3 class="mt-5" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+                <h3 class="mt-3" style="color:#836262!important;">Paquete 5</h3>
+                <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
                 <h3 style="color: #836262"><strong>
                     <del style="color: #836262">$15,900</del>
                     $14,500</strong>
