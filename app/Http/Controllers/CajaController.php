@@ -29,9 +29,12 @@ class CajaController extends Controller
         }
 
         $notas_producto = NotasProductos::where('fecha', '=', $fechaActual)->where('metodo_pago', '=', 'Efectivo')->get();
-        $total_producto_pagos = $notas_producto->sum('total');
+        $total_producto_pagos = $notas_producto->sum('monto');
 
-        $total_pagos = $caja + $total_notas_pagos + $total_producto_pagos;
+        $notas_producto2 = NotasProductos::where('fecha', '=', $fechaActual)->where('metodo_pago2', '=', 'Efectivo')->get();
+        $total_producto_pagos2 = $notas_producto2->sum('monto2');
+
+        $total_pagos = $caja + $total_notas_pagos + $total_producto_pagos + $total_producto_pagos2;
 
         return view('admin.caja.index', compact('fechaActual', 'notas_pagos', 'total_pagos', 'notas_producto', 'caja_egresos', 'total_egresos', 'caja'));
     }
