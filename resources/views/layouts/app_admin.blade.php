@@ -71,7 +71,7 @@
     <script src="{{asset('assets/admin/js/plugins/jkanban/jkanban.js')}}"></script>
     <script src="{{asset('assets/admin/js/plugins/chartjs.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/argon-dashboard.min.js')}}"></script>
-    <script src="{{asset('assets/admin/js/plugins/multistep-form.js')}}"></script>
+    {{-- <script src="{{asset('assets/admin/js/plugins/multistep-form.js')}}"></script> --}}
 
     @yield('js_custom')
     @yield('datatable')

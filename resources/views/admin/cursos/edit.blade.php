@@ -501,6 +501,8 @@
 @endsection
 
 @section('js_custom')
+    <script src="{{asset('assets/admin/js/plugins/multistep-form.js')}}"></script>
+
    <script src="https://cdn.tiny.cloud/1/j1jav9k6mblf3p1zkwu0fxf5yfhp7b4inzjxkxfteidvmluh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
    <script>
      tinymce.init({
