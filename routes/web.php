@@ -169,6 +169,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::post('/admin/cursos/recordatorios/store', [App\Http\Controllers\CursosController::class, 'recordatorios_store'])->name('recordatorio.store');
 
+    Route::post('/cursos/{id}/duplicar', [App\Http\Controllers\CursosController::class, 'duplicar'])->name('cursos.duplicar');
 
     // =============== M O D U L O  Profesores ===============================
     Route::get('/admin/profesores', [App\Http\Controllers\ProfesoresController::class, 'index_profesores'])->name('profesores.index');

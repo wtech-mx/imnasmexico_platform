@@ -420,4 +420,52 @@ class CursosController extends Controller
 
         return redirect()->back()->with('success', 'Envio de correo exitoso.');
     }
+
+    public function duplicar($id, Request $request){
+
+        $cursoExistente = Cursos::findOrFail($id);
+
+        $nuevoCurso = $cursoExistente->replicate();
+
+        // Modifica cualquier campo necesario para el nuevo curso
+        $nuevoCurso->nombre = $nuevoCurso->nombre;
+        $valorAleatorio = uniqid();
+        $nuevoCurso->slug = Str::of($nuevoCurso->nombre)->slug("-")->limit(300 - mb_strlen($valorAleatorio) - 1, "")->trim("-")->append("-", $valorAleatorio);
+        unset($nuevoCurso->recurso);
+        unset($nuevoCurso->clase_grabada);
+        unset($nuevoCurso->clase_grabada2);
+        unset($nuevoCurso->clase_grabada3);
+        unset($nuevoCurso->clase_grabada4);
+        unset($nuevoCurso->clase_grabada5);
+
+        $nuevoCurso->fecha_inicial = $request->input('fecha_inicio');
+        $nuevoCurso->hora_inicial = $request->input('hora_inicio');
+        $nuevoCurso->fecha_final = $request->input('fecha_final');
+        $nuevoCurso->hora_final = $request->input('hora_final');
+        $nuevoCurso->sin_fin = $request->input('sin_fin');
+        $nuevoCurso->recurso = $request->input('recurso');
+
+        $nuevoCurso->save();
+
+        // ============ Duplica Tickets ============
+        $cursoExistente->CursosTickets->each(function ($ticket) use ($nuevoCurso) {
+                $fechaActual = date('Y-m-d');
+                $nuevoTicket = $ticket->replicate();
+                $nuevoTicket->id_curso = $nuevoCurso->id;
+                $nuevoTicket->fecha_inicial = $fechaActual;
+                $nuevoTicket->fecha_final = $nuevoCurso->fecha_final;
+                unset($nuevoTicket->descuento);
+                $nuevoTicket->save();
+        });
+
+        // ============ Duplica Estandar ============
+        $cursoExistente->CursosEstandares->each(function ($estandar) use ($nuevoCurso) {
+            $nuevoEstandar = $estandar->replicate();
+            $nuevoEstandar->id_curso = $nuevoCurso->id;
+            $nuevoEstandar->save();
+        });
+
+        return redirect()->route('cursos.index')->with('success', 'El curso se ha duplicado correctamente');
+    }
+
 }
