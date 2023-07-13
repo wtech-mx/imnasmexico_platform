@@ -79,7 +79,7 @@
                                     {{$fecha_inicial}}
 
                                     @if ($curso->fecha_inicial == $curso->fecha_final)
-                                    @else - {{$fecha_final}}
+                                    @else al {{$fecha_final}}
                                     @endif,
                                     @if ($curso->sin_fin == '1')
                                         {{$hora_inicial}}</p>
@@ -524,7 +524,7 @@
                 </div>
                 <p class="text_cards_horizon">
                     {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
-                    - {{$fecha_final}}
+                    al {{$fecha_final}}
                     @endif,
                     @if ($curso->sin_fin == '1')
                         {{$hora_inicial}}</p>
