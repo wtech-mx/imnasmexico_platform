@@ -136,7 +136,7 @@
                     <p class="text-dark" style="width:100px;">{{$curso->modalidad}}</p>
                   </div>
                   <h5 class="text-dark mb-1">{{$curso->nombre}}</h5>
-                  <p>{{$fecha_inicial}} - {{$hora_inicial}}</p>
+                  <p class="text-dark">{{$fecha_inicial}} - {{$hora_inicial}}</p>
                   <div class="row">
                     <div class="col-12">
                         <div class="d-flex justify-content-start">
