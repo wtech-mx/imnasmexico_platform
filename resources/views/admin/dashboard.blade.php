@@ -130,14 +130,22 @@
                 $fecha_ini = $curso->fecha_inicial;
                 $fecha_inicial = Carbon::createFromFormat('Y-m-d', $fecha_ini)->locale('es')->isoFormat('D [de] MMMM');
              @endphp
-              <div class="carousel-item h-100 {{ $loop->first ? 'active' : '' }}"" style="background-image: url('{{asset('curso/'. $curso->foto) }}');background-size: cover;">
+              <div class="carousel-item h-100 {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{asset('curso/'. $curso->foto) }}');background-size: cover;">
                 <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
                   <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                    <i class="ni ni-camera-compact text-dark opacity-10"></i>
+                    <p class="text-dark" style="width:100px;">{{$curso->modalidad}}</p>
                   </div>
-                  <h5 class="text-white mb-1">{{$curso->nombre}}</h5>
+                  <h5 class="text-dark mb-1">{{$curso->nombre}}</h5>
                   <p>{{$fecha_inicial}} - {{$hora_inicial}}</p>
-                  <p>{{$curso->modalidad}}</p>
+                  <div class="row">
+                    <div class="col-12">
+                        <div class="d-flex justify-content-start">
+                            <a class="btn btn-warning btn-sm" style="margin-right: 1rem" href="{{ route('cursos.edit',$curso->id) }}"  target="_blank"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                            <a class="btn btn-success btn-sm" href="{{ route('cursos.show',$curso->slug) }}"  target="_blank"><i class="fas fa-external-link-alt"></i> Ver</a>
+                        </div>
+                    </div>
+
+                  </div>
                 </div>
               </div>
               @endforeach
