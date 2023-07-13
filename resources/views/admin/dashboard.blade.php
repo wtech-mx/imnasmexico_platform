@@ -3,7 +3,10 @@
 @section('template_title')
     Dashboard
 @endsection
-
+@php
+    use Carbon\Carbon;
+    use Carbon\CarbonInterface;
+@endphp
 @section('content')
 <div class="container-fluid py-4">
     <div class="row">
@@ -57,14 +60,10 @@
                 <div class="row">
                   <div class="col-8">
                     <div class="numbers">
-                      <p class="text-sm mb-0 text-uppercase font-weight-bold">New Clients</p>
+                      <p class="text-sm mb-0 text-uppercase font-weight-bold">Facturas Pendientes</p>
                       <h5 class="font-weight-bolder">
-                        +3,462
+                        {{ $contadorfacturas }}
                       </h5>
-                      <p class="mb-0">
-                        <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                        since last quarter
-                      </p>
                     </div>
                   </div>
                   <div class="col-4 text-end">
@@ -82,13 +81,10 @@
                 <div class="row">
                   <div class="col-8">
                     <div class="numbers">
-                      <p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
+                      <p class="text-sm mb-0 text-uppercase font-weight-bold">Envios Pendientes de doc</p>
                       <h5 class="font-weight-bolder">
-                        $103,430
+                        {{ $contadorenvios }}
                       </h5>
-                      <p class="mb-0">
-                        <span class="text-success text-sm font-weight-bolder">+5%</span> than last month
-                      </p>
                     </div>
                   </div>
                   <div class="col-4 text-end">
@@ -126,15 +122,25 @@
           <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
             <div class="carousel-inner border-radius-lg h-100">
 
-              <div class="carousel-item h-100 active" style="background-image: url('../../assets/img/img-2.jpg');background-size: cover;">
+              @foreach ($cursos as $curso)
+              @php
+                $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
+                $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
+
+                $fecha_ini = $curso->fecha_inicial;
+                $fecha_inicial = Carbon::createFromFormat('Y-m-d', $fecha_ini)->locale('es')->isoFormat('D [de] MMMM');
+             @endphp
+              <div class="carousel-item h-100 {{ $loop->first ? 'active' : '' }}"" style="background-image: url('{{asset('curso/'. $curso->foto) }}');background-size: cover;">
                 <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
                   <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
                     <i class="ni ni-camera-compact text-dark opacity-10"></i>
                   </div>
-                  <h5 class="text-white mb-1">Get started with Argon</h5>
-                  <p>There’s nothing I really wanted to do in life that I wasn’t able to get good at.</p>
+                  <h5 class="text-white mb-1">{{$curso->nombre}}</h5>
+                  <p>{{$fecha_inicial}} - {{$hora_inicial}}</p>
+                  <p>{{$curso->modalidad}}</p>
                 </div>
               </div>
+              @endforeach
 
             </div>
 
@@ -151,7 +157,7 @@
         </div>
       </div>
     </div>
-    <div class="row mt-4">
+    {{-- <div class="row mt-4">
       <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
         <div class="card h-100 ">
           <div class="card-header">
@@ -1147,7 +1153,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
 @endsection
 

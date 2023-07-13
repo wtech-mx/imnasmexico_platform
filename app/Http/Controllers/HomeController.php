@@ -14,6 +14,8 @@ use App\Models\Orders;
 use Carbon\Carbon;
 use DateTime;
 use App\Models\WebPage;
+use App\Models\Factura;
+use App\Models\EnviosOrder;
 
 
 class HomeController extends Controller
@@ -66,7 +68,6 @@ class HomeController extends Controller
             return view('user.home', compact('cursos', 'resultados', 'unam', 'tickets'));
         }else{
 
-
             $fechaHoraActual = date('Y-m-d');
             $orders = Orders::where('fecha', $fechaHoraActual)
             ->where('estatus', '1')
@@ -94,7 +95,23 @@ class HomeController extends Controller
                 $data[] = $totalPagado;
             }
 
-            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'data'));
+            $now = Carbon::now();
+            $fechaInicioSemana = $now->startOfWeek()->format('Y-m-d');
+            $fechaFinSemana = $now->endOfWeek()->format('Y-m-d');
+
+            $cursos = Cursos::select('id', 'nombre', 'foto', 'fecha_inicial', 'fecha_final', 'recurso', 'modalidad', 'slug', 'clase_grabada', 'clase_grabada2', 'clase_grabada3', 'clase_grabada4', 'clase_grabada5')
+                ->whereBetween('fecha_inicial', [$fechaInicioSemana, $fechaFinSemana])
+                ->orderBy('id', 'DESC')
+                ->get();
+
+                $facturas = Factura::whereNotIn('estatus', ['Realizado', 'Sin procesar', 'Cancelada'])->get();
+                $contadorfacturas = $facturas->count();
+
+                $envios = EnviosOrder::whereNotIn('estatus', ['Realizado','Cancelado'])->get();
+                $contadorenvios = $envios->count();
+
+
+            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'data','cursos','contadorfacturas','contadorenvios'));
         }
 
     }

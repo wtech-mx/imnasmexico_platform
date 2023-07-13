@@ -22,6 +22,8 @@
                                 <option value="En Proceso">En Proceso</option>
                                 <option value="En Espera">En Espera</option>
                                 <option value="Realizado">Realizado</option>
+                                <option value="Sin procesar">Sin procesar</option>
+                                <option value="Cancelada">Cancelada</option>
                             </select>
                         </div>
 
