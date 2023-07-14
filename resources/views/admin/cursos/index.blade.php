@@ -70,26 +70,26 @@
                                                 @endif
 
                                                 <td>
-                                                    <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#duplicarModal{{ $curso->id }}">
+                                                    <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#duplicarModal{{ $curso->id }}" title="Duplicar">
                                                         <i class="fas fa-copy"></i>
                                                     </button>
-                                                    <a type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#material_modal_{{ $curso->id }}">
+                                                    <a type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#material_modal_{{ $curso->id }}" title="Material de clase">
                                                         <i class="fas fa-folder-open"></i> {{ $curso->RecordatoriosCursos->count()}}
                                                     </a>
-                                                    <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#recordatorio_modal_{{ $curso->id }}">
+                                                    <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#recordatorio_modal_{{ $curso->id }}" title="Recordatorios">
                                                         <i class="fa fa-bell"></i> {{ $curso->MaterialClase->count()}}
                                                     </a>
                                                     @if ($curso->modalidad == 'Online')
-                                                        <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#update_modal_{{ $curso->id }}">
+                                                        <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#update_modal_{{ $curso->id }}" title="Ligas">
                                                             <i class="fab fa-google"></i>
                                                             {{-- <img id="blah" src="{{asset('assets/user/icons/meet.png') }}" alt="Imagen" style="width: 15px; height: 15px;"/> --}}
                                                         </a>
                                                     @endif
-                                                    <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}"><i class="fa fa-users"></i></a>
+                                                    <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}" title="Listas de clase"><i class="fa fa-users"></i></a>
                                                     @can('client-edit')
-                                                        <a class="btn btn-sm btn-success" href="{{ route('cursos.edit',$curso->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
+                                                        <a class="btn btn-sm btn-success" href="{{ route('cursos.edit',$curso->id) }}" title="Editar"><i class="fa fa-fw fa-edit"></i> </a>
                                                     @endcan
-                                                    <a class="btn btn-sm btn-info" href="{{ route('cursos.show',$curso->slug) }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                                                    <a class="btn btn-sm btn-info" href="{{ route('cursos.show',$curso->slug) }}" target="_blank" title="Acceso Rapido"><i class="fas fa-external-link-alt"></i></a>
                                                 </td>
                                             </tr>
                                         @include('admin.cursos.modal_duplicar')

@@ -73,7 +73,8 @@
     });
 
     $(function() {
-        $('.toggle-class').change(function() {
+        // Asignar el evento a un elemento padre estático
+        $('.table-responsive').on('change', '.toggle-class', function() {
             var abono = $(this).prop('checked') == true ? 1 : 0;
             var id = $(this).data('id');
 
@@ -89,8 +90,8 @@
                     console.log(data.success)
                 }
             });
-        })
-    })
+        });
+    });
 </script>
 
 @endsection
