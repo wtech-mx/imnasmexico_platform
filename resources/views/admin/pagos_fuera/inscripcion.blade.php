@@ -84,6 +84,13 @@
         searchable: true,
         fixedHeight: false
     });
+    
+    $(function() {
+        $('form').on('submit', function() {
+            // Deshabilitar el botón de envío al hacer clic
+            $(this).find('button[type="submit"]').prop('disabled', true);
+        });
+    });
 
     $(function() {
         // Asignar el evento a un elemento padre estático
