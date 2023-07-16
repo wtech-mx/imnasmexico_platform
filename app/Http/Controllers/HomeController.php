@@ -16,6 +16,7 @@ use DateTime;
 use App\Models\WebPage;
 use App\Models\Factura;
 use App\Models\EnviosOrder;
+use MercadoPago\SDK;
 
 
 class HomeController extends Controller
@@ -109,9 +110,43 @@ class HomeController extends Controller
 
                 $envios = EnviosOrder::whereNotIn('estatus', ['Realizado','Cancelado'])->get();
                 $contadorenvios = $envios->count();
+                $profesores =  User::where('cliente','2')->orderBy('name','DESC')->get();
+
+                // Configuración de la SDK de MercadoPago
+                SDK::setAccessToken(config('services.mercadopago.token'));
+
+                // Obtener pagos desde MercadoPago
+                $today = date('Y-m-d');
+                $lastMonthEndDate = date('Y-m-d', strtotime('-1 month -1 day'));
+                $lastMonthStartDate = date('Y-m-01', strtotime('-1 month'));
+
+                $filters = array(
+                    "status" => "approved",
+                    "begin_date" => $lastMonthStartDate."T00:00:00.000-00:00",
+                    "end_date" => $today."T23:59:59.999-00:00",
+                    "limit" => 100,
+                    "offset" => 0
+                );
+
+                $pagos = array();
+
+                do {
+                    // Obtener siguiente página de resultados
+                    $searchResult = \MercadoPago\Payment::search($filters);
+
+                    // Obtener los resultados de la búsqueda
+                    $results = $searchResult->getArrayCopy();
+
+                    // Concatenar los resultados de la siguiente página con los resultados anteriores
+                    $pagos = array_merge($pagos, $results);
+
+                    // Incrementar el offset para obtener la siguiente página de resultados
+                    $filters["offset"] += $filters["limit"];
+
+                } while (count($results) > 0);
 
 
-            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'data','cursos','contadorfacturas','contadorenvios'));
+            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'data','cursos','contadorfacturas','contadorenvios','profesores','pagos'));
         }
 
     }
