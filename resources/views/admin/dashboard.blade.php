@@ -199,68 +199,48 @@
                 <h5 class="mb-0 text-capitalize">Mercado Pago</h5>
             </div>
             <div class="card-body pt-0">
-                <ul class="list-group list-group-flush list">
-                <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                    <div class="col-auto">
-                        <a href="javascript:;" class="avatar rounded-circle">
-                        <img alt="Image placeholder" src="../../assets/img/small-logos/logo-jira.svg">
-                        </a>
-                    </div>
-                    <div class="col">
-                        <h6>React Material Dashboard</h6>
-                        <div class="progress progress-xs mb-0">
-                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    </div>
-                </li>
-                <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                    <div class="col-auto">
-                        <a href="javascript:;" class="avatar rounded-circle">
-                        <img alt="Image placeholder" src="../../assets/img/small-logos/logo-asana.svg">
-                        </a>
-                    </div>
-                    <div class="col">
-                        <h6>Argon Design System</h6>
-                        <div class="progress progress-xs mb-0">
-                        <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                        </div>
-                    </div>
-                    </div>
-                </li>
-                <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                    <div class="col-auto">
-                        <a href="javascript:;" class="avatar rounded-circle">
-                        <img alt="Image placeholder" src="../../assets/img/small-logos/logo-spotify.svg">
-                        </a>
-                    </div>
-                    <div class="col">
-                        <h6>VueJs Now UI Kit PRO</h6>
-                        <div class="progress progress-xs mb-0">
-                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
-                        </div>
-                    </div>
-                    </div>
-                </li>
-                <li class="list-group-item px-0">
-                    <div class="row align-items-center">
-                    <div class="col-auto">
-                        <a href="javascript:;" class="avatar rounded-circle">
-                        <img alt="Image placeholder" src="../../assets/img/small-logos/bootstrap.svg">
-                        </a>
-                    </div>
-                    <div class="col">
-                        <h6>Soft UI Dashboard</h6>
-                        <div class="progress progress-xs mb-0">
-                        <div class="progress-bar bg-gradient-primary" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%;"></div>
-                        </div>
-                    </div>
-                    </div>
-                </li>
-                </ul>
+                <div class="table-responsive">
+                    <table class="table table-flush" id="datatable-search">
+                        <thead class="text-center">
+                            <tr class="tr_checkout">
+                              <th >Num. Pedido</th>
+                              <th>Correo</th>
+                              <th >Monto</th>
+                              <th >Curso</th>
+                              <th >Fecha</th>
+                            </tr>
+                          </thead>
+                        <tbody>
+                            @foreach ($pagos as $pago)
+                                <tr>
+                                    <td>{{ $pago->id }}</td>
+                                    @if ($pago->payer == null)
+                                        <td>/</td>
+                                    @else
+                                        <td>{{$pago->payer->email}}</td>
+                                    @endif
+                                    <td>${{ $pago->transaction_amount }}</td>
+                                    <td>{{ $pago->description }}</td>
+                                    <td>
+                                        @php
+                                            $fecha = $pago->date_approved;
+                                            // Convertir a una marca de tiempo Unix
+                                            $timestamp = strtotime($fecha);
+                                            // Formatear la fecha
+                                            $fecha_formateada = strftime('%e de %B del %Y', $timestamp);
+                                            // Formatear la hora
+                                            $hora_formateada = date('h:i A', $timestamp);
+                                            // Combinar fecha y hora
+                                            $fecha_hora_formateada = $fecha_formateada . ' a las ' . $hora_formateada;
+                                        @endphp
+                                        {{ $fecha_hora_formateada}}
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
             </div>
         </div>
