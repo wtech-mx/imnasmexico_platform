@@ -112,41 +112,43 @@ class HomeController extends Controller
                 $contadorenvios = $envios->count();
                 $profesores =  User::where('cliente','2')->orderBy('name','DESC')->get();
 
-                // Configuración de la SDK de MercadoPago
-                SDK::setAccessToken(config('services.mercadopago.token'));
+                $data = User::where('cliente','=',null)->orderBy('id','DESC')->get();
 
-                // Obtener pagos desde MercadoPago
-                $today = date('Y-m-d');
-                $lastMonthEndDate = date('Y-m-d', strtotime('-1 month -1 day'));
-                $lastMonthStartDate = date('Y-m-01', strtotime('-1 month'));
+                // // Configuración de la SDK de MercadoPago
+                // SDK::setAccessToken(config('services.mercadopago.token'));
 
-                $filters = array(
-                    "status" => "approved",
-                    "begin_date" => $lastMonthStartDate."T00:00:00.000-00:00",
-                    "end_date" => $today."T23:59:59.999-00:00",
-                    "limit" => 100,
-                    "offset" => 0
-                );
+                // // Obtener pagos desde MercadoPago
+                // $today = date('Y-m-d');
+                // $lastMonthEndDate = date('Y-m-d', strtotime('-1 month -1 day'));
+                // $lastMonthStartDate = date('Y-m-01', strtotime('-1 month'));
 
-                $pagos = array();
+                // $filters = array(
+                //     "status" => "approved",
+                //     "begin_date" => $lastMonthStartDate."T00:00:00.000-00:00",
+                //     "end_date" => $today."T23:59:59.999-00:00",
+                //     "limit" => 100,
+                //     "offset" => 0
+                // );
 
-                do {
-                    // Obtener siguiente página de resultados
-                    $searchResult = \MercadoPago\Payment::search($filters);
+                // $pagos = array();
 
-                    // Obtener los resultados de la búsqueda
-                    $results = $searchResult->getArrayCopy();
+                // do {
+                //     // Obtener siguiente página de resultados
+                //     $searchResult = \MercadoPago\Payment::search($filters);
 
-                    // Concatenar los resultados de la siguiente página con los resultados anteriores
-                    $pagos = array_merge($pagos, $results);
+                //     // Obtener los resultados de la búsqueda
+                //     $results = $searchResult->getArrayCopy();
 
-                    // Incrementar el offset para obtener la siguiente página de resultados
-                    $filters["offset"] += $filters["limit"];
+                //     // Concatenar los resultados de la siguiente página con los resultados anteriores
+                //     $pagos = array_merge($pagos, $results);
 
-                } while (count($results) > 0);
+                //     // Incrementar el offset para obtener la siguiente página de resultados
+                //     $filters["offset"] += $filters["limit"];
+
+                // } while (count($results) > 0);
 
 
-            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'data','cursos','contadorfacturas','contadorenvios','profesores','pagos'));
+            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'data','cursos','contadorfacturas','contadorenvios','profesores','data'));
         }
 
     }

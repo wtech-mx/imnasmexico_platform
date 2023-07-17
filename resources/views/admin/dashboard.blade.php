@@ -103,7 +103,12 @@
       <div class="col-lg-7 mb-4 mb-lg-0">
         <div class="card z-index-2 h-100">
           <div class="card-header pb-0 pt-3 bg-transparent">
-            <h6 class="text-capitalize">Resumen de ventas del año</h6>
+            <div class="d-flex justify-content-between">
+                <h3 class="mb-3">Resumen de ventas del año</h3>
+                <a type="button" href="{{ route('reporte.index_custom') }}" class="btn bg-gradient-primary" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                    <i class="fa fa-fw fa-eye"></i> - Ver Reportes
+                </a>
+            </div>
           </div>
           <div class="card-body p-3">
             <div class="chart">
@@ -169,7 +174,12 @@
         <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
             <div class="card h-100 ">
             <div class="card-header">
-                <h5 class="mb-0 text-capitalize">Profesores</h5>
+                <div class="d-flex justify-content-between">
+                    <h3 class="mb-3">Profesores</h3>
+                    <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_profesor" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                        <i class="fa fa-fw fa-edit"></i> Agregar
+                    </a>
+                </div>
             </div>
             <div class="card-body pt-0">
                 <div class="table-responsive">
@@ -178,14 +188,21 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Telefono</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($profesores as $item)
+                            @foreach ($profesores as $user)
                                 <tr>
-                                    <td>{{ $item->name }}</td>
-                                    <td>{{ $item->telefono }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->telefono }}</td>
+                                    <td>
+                                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_user_{{ $user->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                            <i class="fa fa-fw fa-edit"></i>
+                                        </a>
+                                    </td>
                                 </tr>
+                                @include('admin.profesores.modal_prof_edit')
                             @endforeach
                         </tbody>
                     </table>
@@ -211,7 +228,7 @@
                             </tr>
                           </thead>
                         <tbody>
-                            @foreach ($pagos as $pago)
+                            {{-- @foreach ($pagos as $pago)
                                 <tr>
                                     <td>{{ $pago->id }}</td>
                                     @if ($pago->payer == null)
@@ -237,7 +254,7 @@
                                     </td>
 
                                 </tr>
-                            @endforeach
+                            @endforeach --}}
                         </tbody>
                     </table>
                 </div>
@@ -250,46 +267,56 @@
         <div class="col-12 col-md-8 mb-4 mb-md-0">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="mb-0 text-capitalize">Usuarios</h5>
+                    <div class="d-flex justify-content-between">
+                        <h3 class="mb-3">Usuarios</h3>
+                        <a type="button" class="btn bg-gradient-primary" href="{{ route('users.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            <i class="fa fa-fw fa-edit"></i> Agregar
+                        </a>
+                    </div>
                 </div>
             <div class="table-responsive">
                 <table class="table align-items-center mb-0">
                 <thead>
                     <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Technology</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nombre</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Funcion</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Rol</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Conexion </th>
                     <th class="text-secondary opacity-7"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td>
-                        <div class="d-flex px-2 py-1">
+                    @foreach ($data as $key => $user)
+                        <tr>
+                            <td>
+                                <div class="d-flex px-2 py-1">
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h6 class="mb-0 text-xs">{{ $user->name }}</h6>
+                                        <p class="text-xs text-secondary mb-0">{{ $user->email }}</p>
+                                    </div>
+                                </div>
+                            </td>
 
-                        <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-xs">John Michael</h6>
-                            <p class="text-xs text-secondary mb-0">john@creative-tim.com</p>
-                        </div>
-                        </div>
-                    </td>
-                    <td>
-                        <p class="text-xs font-weight-bold mb-0">Manager</p>
-                        <p class="text-xs text-secondary mb-0">Organization</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                        <span class="badge badge-sm badge-success">Online</span>
-                    </td>
-                    <td class="align-middle text-center">
-                        <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
-                    </td>
-                    <td class="align-middle">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                        Edit
-                        </a>
-                    </td>
-                    </tr>
+                            <td>
+                                <p class="text-xs font-weight-bold mb-0">{{ $user->name }}</p>
+                            </td>
+
+                            <td class="align-middle text-center text-sm">
+                                <span class="badge badge-sm badge-success">Online</span>
+                            </td>
+
+                            <td class="align-middle text-center">
+                                <span class="text-secondary text-xs font-weight-bold">23/04/18</span>
+                            </td>
+
+                            <td class="align-middle">
+                                @can('usuarios-edit')
+                                <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
+                                @endcan
+                            </td>
+
+                        </tr>
+                    @endforeach
 
                 </tbody>
                 </table>
@@ -365,6 +392,7 @@
         </div>
         </div>
   </div>
+@include('admin.profesores.modal_prof_create')
 @endsection
 
 @section('js_custom')
