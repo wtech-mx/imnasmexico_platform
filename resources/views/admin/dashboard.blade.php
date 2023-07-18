@@ -270,7 +270,7 @@
                     <div class="d-flex justify-content-between">
                         <h3 class="mb-3">Usuarios</h3>
                         <a type="button" class="btn bg-gradient-primary" href="{{ route('users.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                            <i class="fa fa-fw fa-edit"></i> Agregar
+                            <i class="fa fa-fw fa-plus"></i> Agregar
                         </a>
                     </div>
                 </div>
@@ -326,66 +326,46 @@
         <div class="col-md-4">
             <div class="card">
             <div class="card-header pb-0 p-3">
-                <h6 class="mb-0">Categories</h6>
+                <div class="d-flex justify-content-between">
+                    <h6 class="mb-0">Cupones Activos</h6>
+                    <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_cupon" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                        <i class="fa fa-fw fa-plus"></i> Crear
+                    </a>
+                </div>
             </div>
+
+
             <div class="card-body p-3">
                 <ul class="list-group">
+
+                @foreach ($cupones as $cupon)
                 <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                     <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                        <i class="ni ni-mobile-button text-white opacity-10"></i>
-                    </div>
-                    <div class="d-flex flex-column">
-                        <h6 class="mb-1 text-dark text-sm">Devices</h6>
-                        <span class="text-xs">250 in stock, <span class="font-weight-bold">346+ sold</span></span>
-                    </div>
-                    </div>
-                    <div class="d-flex">
-                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                    </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                    <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                        <i class="ni ni-tag text-white opacity-10"></i>
-                    </div>
-                    <div class="d-flex flex-column">
-                        <h6 class="mb-1 text-dark text-sm">Tickets</h6>
-                        <span class="text-xs">123 closed, <span class="font-weight-bold">15 open</span></span>
-                    </div>
-                    </div>
-                    <div class="d-flex">
-                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
+                        <div class="icon icon-shape icon-sm me-3 bg-primary shadow text-center">
+                            <i class="ni ni-mobile-button text-white opacity-10"></i>
+                        </div>
+
+                        <div class="d-flex flex-column">
+                            <h6 class="mb-1 text-dark text-sm">{{ $cupon->nombre }}</h6>
+                            <span class="text-xs">
+                                @if($cupon->tipo_de_descuento == 'porcentaje')
+                                    % {{ $cupon->importe }} de descuento
+                                    @else
+                                    $  {{ $cupon->importe }} de descuento
+                                @endif
+                                <strong> -
+                                    <a type="button" class="" data-bs-toggle="modal" data-bs-target="#update_cupon_{{ $cupon->id }}" style="color: {{$configuracion->color_boton_add}};">
+                                         Editar
+                                    </a>
+                                </strong>
+                            </span>
+
+                        </div>
                     </div>
                 </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
-                    <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                        <i class="ni ni-box-2 text-white opacity-10"></i>
-                    </div>
-                    <div class="d-flex flex-column">
-                        <h6 class="mb-1 text-dark text-sm">Error logs</h6>
-                        <span class="text-xs">1 is active, <span class="font-weight-bold">40 closed</span></span>
-                    </div>
-                    </div>
-                    <div class="d-flex">
-                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                    </div>
-                </li>
-                <li class="list-group-item border-0 d-flex justify-content-between ps-0 border-radius-lg">
-                    <div class="d-flex align-items-center">
-                    <div class="icon icon-shape icon-sm me-3 bg-gradient-dark shadow text-center">
-                        <i class="ni ni-satisfied text-white opacity-10"></i>
-                    </div>
-                    <div class="d-flex flex-column">
-                        <h6 class="mb-1 text-dark text-sm">Happy users</h6>
-                        <span class="text-xs font-weight-bold">+ 430</span>
-                    </div>
-                    </div>
-                    <div class="d-flex">
-                    <button class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i class="ni ni-bold-right" aria-hidden="true"></i></button>
-                    </div>
-                </li>
+                @include('admin.marketing.modal_cupon_edit')
+                @endforeach
+
                 </ul>
             </div>
             </div>
@@ -393,6 +373,8 @@
         </div>
   </div>
 @include('admin.profesores.modal_prof_create')
+@include('admin.marketing.modal_cupon_create')
+
 @endsection
 
 @section('js_custom')

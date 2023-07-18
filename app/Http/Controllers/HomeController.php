@@ -17,7 +17,7 @@ use App\Models\WebPage;
 use App\Models\Factura;
 use App\Models\EnviosOrder;
 use MercadoPago\SDK;
-
+use App\Models\Cupon;
 
 class HomeController extends Controller
 {
@@ -114,6 +114,8 @@ class HomeController extends Controller
 
                 $data = User::where('cliente','=',null)->orderBy('id','DESC')->get();
 
+                $cupones = Cupon::orderBy('id','DESC')->get();
+
                 // // Configuración de la SDK de MercadoPago
                 // SDK::setAccessToken(config('services.mercadopago.token'));
 
@@ -148,7 +150,7 @@ class HomeController extends Controller
                 // } while (count($results) > 0);
 
 
-            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'data','cursos','contadorfacturas','contadorenvios','profesores','data'));
+            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'data','cursos','contadorfacturas','contadorenvios','profesores','data','cupones'));
         }
 
     }
