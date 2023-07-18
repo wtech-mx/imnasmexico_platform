@@ -93,7 +93,7 @@ class HomeController extends Controller
                     ->get();
 
                 $totalPagado = $orders->sum('pago');
-                $data[] = $totalPagado;
+                $datachart[] = $totalPagado;
             }
 
             $now = Carbon::now();
@@ -150,7 +150,7 @@ class HomeController extends Controller
                 // } while (count($results) > 0);
 
 
-            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'data','cursos','contadorfacturas','contadorenvios','profesores','data','cupones'));
+            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','data','cupones'));
         }
 
     }

@@ -399,7 +399,7 @@
           backgroundColor: gradientStroke1,
           borderWidth: 3,
           fill: true,
-          data: {!! json_encode($data) !!},
+          data: {!! json_encode($datachart) !!},
           maxBarThickness: 6
 
         }],
