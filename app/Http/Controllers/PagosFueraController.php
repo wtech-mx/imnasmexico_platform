@@ -35,7 +35,7 @@ class PagosFueraController extends Controller
         }
 
         $pagos_fuera = new PagosFuera;
-        $pagos_fuera->nombre = $request->get('nombre');
+        $pagos_fuera->nombre = $request->get('nombre') . " " . $request->get('apellido');
         $pagos_fuera->correo = $request->get('correo');
         $pagos_fuera->telefono = $request->get('telefono');
         $pagos_fuera->modalidad = $request->get('modalidad');

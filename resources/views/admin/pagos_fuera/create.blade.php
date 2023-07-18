@@ -13,17 +13,27 @@
             <form method="POST" action="{{ route('pagos.store') }}" enctype="multipart/form-data" role="form">
                 @csrf
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="name">Nombre</label>
+                                <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="name">Apellido</label>
+                                <input id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellido" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="correo">Correo</label>
-                        <input id="correo" name="correo" type="email" class="form-control" placeholder="correo">@error('correo') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input id="correo" name="correo" type="email" class="form-control" placeholder="correo" required>@error('correo') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="form-group">
                         <label for="curso">Curso</label>
-                        <input id="curso" name="curso" type="text" class="form-control" placeholder="curso">@error('curso') <span class="error text-danger">{{ $message }}</span> @enderror
+                        <input id="curso" name="curso" type="text" class="form-control" placeholder="curso" required>@error('curso') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
                     <div class="row">
                         <div class="col-6">
