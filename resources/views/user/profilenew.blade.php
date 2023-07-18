@@ -11,13 +11,15 @@ Mi perfil- {{$cliente->name}}
 @section('content')
 
 <section class="primario bg_overley" style="background-color:#F5ECE4;" id="contenido">
+
     <div class="row space_newprofile" style="">
-        <div class="col-12 col-md-6">
+
+        <div class="col-12">
             <div class="card_single_horizon">
-                <div class="d-flex justify-content-between">
-                    <h2 class="title_curso mb-3">Mi Perfil</h2>
-                    <img class="icon_nav_course" src="{{asset('assets/user/icons/informacion.png')}}" alt="">
-                </div>
+                    <div class="d-flex justify-content-between">
+                        <h2 class="title_curso mb-3">Mi Perfil</h2>
+                        <img class="icon_nav_course" src="{{asset('assets/user/icons/informacion.png')}}" alt="">
+                    </div>
                     <form role="form" action="{{ route('perfil.update', $cliente->code) }}" method="post">
                         @csrf
                         <input type="hidden" name="_method" value="PATCH">
@@ -91,29 +93,22 @@ Mi perfil- {{$cliente->name}}
                                 </div>
                             </div>
 
-                            {{-- <div class="col-6 col-lg-4 form-group ">
-                                <div class="input-group input-group-alternative mb-4">
-                                <span class="input-group-text">
-                                    <img class="img_profile_label" src="{{asset('assets/user/icons/ring-phone.png')}}" alt="">
-                                </span>
-
-                                <input class="form-control" type="text"  id="telefono" name="telefono" placeholder="Telefono">
-                                </div>
-                            </div> --}}
-
                             <div class="col-12 col-lg-4 form-group ">
                                 <button type="submit" class="btn_save_profile" >
                                     Guardar
                                 </button>
                             </div>
+
                             <div class="col-4 col-lg-4 form-group ">
                                 <a class="btn_save_profile" type="button" href="{{ route('signout') }}">Cerrar Sesión</a>
                             </div>
+
                         </div>
                     </form>
-                </div>
             </div>
+        </div>
 
+        <div class="col-12 col-lg-6">
             <div class="card_single_horizon">
                 <div class="d-flex justify-content-between">
                     <h2 class="title_curso mb-3">Mis Compras</h2>
@@ -121,7 +116,6 @@ Mi perfil- {{$cliente->name}}
                 </div>
 
                 <div class="row space_laaterales_profile">
-
                     <table class="table">
                         <thead class="text-center">
                           <tr class="tr_checkout">
@@ -167,7 +161,9 @@ Mi perfil- {{$cliente->name}}
                     </table>
                 </div>
             </div>
+        </div>
 
+        <div class="col-12 col-lg-6">
             <div class="card_single_horizon">
                 <div class="d-flex justify-content-between">
                     <h2 class="title_curso mb-3">Reconocimientos</h2>
@@ -436,10 +432,9 @@ Mi perfil- {{$cliente->name}}
                     </div>
                 </div>
             </div>
-
         </div>
 
-        <div class="col-12 col-md-6">
+        <div class="col-12">
 
             <div class="card_single_horizon">
                 <div class="d-flex justify-content-between">
@@ -628,7 +623,9 @@ Mi perfil- {{$cliente->name}}
 
             </div>
         </div>
+
     </div>
+
 </section>
 
 @endsection

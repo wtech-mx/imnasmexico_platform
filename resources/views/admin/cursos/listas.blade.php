@@ -60,7 +60,9 @@
                                                     @if ($order->id_tickets == $ticket->id && $order->Orders->estatus == '1')
                                                         <tr>
                                                             <td>{{ $order->Orders->id }}</td>
-                                                            <td>{{ $order->User->name }}</td>
+                                                            <td>
+                                                                <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a>
+                                                            </td>
                                                             <td>{{ $order->User->email }}</td>
                                                             <td>{{ $order->User->telefono }}</td>
                                                             <td>{{ $order->Orders->forma_pago }}</td>
