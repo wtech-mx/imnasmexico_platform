@@ -28,6 +28,7 @@ use MercadoPago\{Exception, SDK, Preference, Item};
 use Codexshaper\WooCommerce\Facades\WooCommerce;
 use Codexshaper\WooCommerce\Facades\Product;
 use Order;
+use Illuminate\Support\Facades\Validator;
 
 
 use Throwable;
@@ -598,10 +599,7 @@ class OrderController extends Controller
 
     public function clases_gratis(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required',
-        ]);
+
 
         $code = Str::random(8);
         $fechaActual = date('Y-m-d');
@@ -615,6 +613,18 @@ class OrderController extends Controller
                 $user = User::where('email', $request->email)->first();
             }
             $payer = $user;
+
+            $ordenestickets = OrdersTickets::where('id_tickets', '=',$curso_ticket->id)->where('id_usuario', '=',$payer->id)
+            ->first();
+
+            if($ordenestickets == null){
+
+            }else{
+
+                Alert::warning('Registro con exito', 'Se ha registrado con exito');
+                return back()->with('warning', 'Ya te has registrado');
+            }
+
         } else {
             $payer = new User;
             $payer->name = $request->get('name');

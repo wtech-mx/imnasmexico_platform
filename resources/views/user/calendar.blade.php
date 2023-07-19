@@ -325,7 +325,7 @@
                                                                 <div class="col-12">
                                                                     <div class="input-group flex-nowrap mt-4">
                                                                         <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
-                                                                        <input type="number" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                                        <input  type="tel" minlength="10" maxlength="10" pattern="[0-9]{10}"  name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="55-55-55-55" required>
                                                                     </div>
                                                                 </div>
 
