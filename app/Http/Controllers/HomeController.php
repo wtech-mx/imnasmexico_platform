@@ -116,41 +116,39 @@ class HomeController extends Controller
 
                 $cupones = Cupon::orderBy('id','DESC')->get();
 
-                // // Configuración de la SDK de MercadoPago
-                // SDK::setAccessToken(config('services.mercadopago.token'));
+                SDK::setAccessToken(config('services.mercadopago.token'));
 
-                // // Obtener pagos desde MercadoPago
-                // $today = date('Y-m-d');
-                // $lastMonthEndDate = date('Y-m-d', strtotime('-1 month -1 day'));
-                // $lastMonthStartDate = date('Y-m-01', strtotime('-1 month'));
+                // Obtener pagos desde MercadoPago
+                $today = date('Y-m-d');
+                $lastMonthEndDate = date('Y-m-d', strtotime('-1 month -1 day'));
+                $lastMonthStartDate = date('Y-m-01', strtotime('-1 month'));
 
-                // $filters = array(
-                //     "status" => "approved",
-                //     "begin_date" => $lastMonthStartDate."T00:00:00.000-00:00",
-                //     "end_date" => $today."T23:59:59.999-00:00",
-                //     "limit" => 100,
-                //     "offset" => 0
-                // );
+                $filters = array(
+                    "status" => "approved",
+                    "begin_date" => $today."T00:00:00.000-00:00",
+                    "end_date" => $today."T23:59:59.999-00:00",
+                    "limit" => 100,
+                    "offset" => 0
+                );
 
-                // $pagos = array();
+                $pagos = array();
 
-                // do {
-                //     // Obtener siguiente página de resultados
-                //     $searchResult = \MercadoPago\Payment::search($filters);
+                do {
+                    // Obtener siguiente página de resultados
+                    $searchResult = \MercadoPago\Payment::search($filters);
 
-                //     // Obtener los resultados de la búsqueda
-                //     $results = $searchResult->getArrayCopy();
+                    // Obtener los resultados de la búsqueda
+                    $results = $searchResult->getArrayCopy();
 
-                //     // Concatenar los resultados de la siguiente página con los resultados anteriores
-                //     $pagos = array_merge($pagos, $results);
+                    // Concatenar los resultados de la siguiente página con los resultados anteriores
+                    $pagos = array_merge($pagos, $results);
 
-                //     // Incrementar el offset para obtener la siguiente página de resultados
-                //     $filters["offset"] += $filters["limit"];
+                    // Incrementar el offset para obtener la siguiente página de resultados
+                    $filters["offset"] += $filters["limit"];
 
-                // } while (count($results) > 0);
+                } while (count($results) > 0);
 
-
-            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','data','cupones'));
+            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','data','cupones', 'pagos'));
         }
 
     }

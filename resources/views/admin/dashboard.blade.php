@@ -223,12 +223,12 @@
                               <th >Num. Pedido</th>
                               <th>Correo</th>
                               <th >Monto</th>
-                              <th >Curso</th>
+                              <th >Motivo</th>
                               <th >Fecha</th>
                             </tr>
                           </thead>
                         <tbody>
-                            {{-- @foreach ($pagos as $pago)
+                            @foreach ($pagos as $pago)
                                 <tr>
                                     <td>{{ $pago->id }}</td>
                                     @if ($pago->payer == null)
@@ -254,7 +254,7 @@
                                     </td>
 
                                 </tr>
-                            @endforeach --}}
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
