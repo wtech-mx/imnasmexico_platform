@@ -48,7 +48,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="telefono">Telefono</label>
-                                <input id="telefono" name="telefono" type="number" class="form-control" placeholder="55-55-55-55" pattern="[0-9]{10}" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="55-55-55-55" pattern="[0-9]{10}" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="col-6">

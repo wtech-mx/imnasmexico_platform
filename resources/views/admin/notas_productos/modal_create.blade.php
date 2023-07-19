@@ -34,7 +34,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="name">Telefono</label>
-                                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}" required>
+                                <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10" required>
 
                             </div>
                         </div>

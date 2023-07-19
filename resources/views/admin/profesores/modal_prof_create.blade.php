@@ -24,8 +24,7 @@
 
                     <div class="form-group">
                         <label for="telefono">telefono</label>
-                        <input id="telefono" name="telefono" type="text" pattern="[0-9]{10}" class="form-control" required>
-
+                        <input id="telefono" name="telefono" type="tel" pattern="[0-9]{10}" class="form-control" minlength="10" maxlength="10" required>
                     </div>
                 </div>
 
