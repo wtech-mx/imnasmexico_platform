@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createDataModalLabel">Crear Pago</h5>
+                <h5 class="modal-title" id="createDataModalLabel">Crear Pago sss</h5>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
                     <span aria-hidden="true">X</span>
@@ -48,7 +48,7 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="telefono">Telefono</label>
-                                <input id="telefono" name="telefono" type="number" class="form-control" placeholder="telefono" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                <input id="telefono" name="telefono" type="number" class="form-control" placeholder="55-55-55-55" pattern="[0-9]{10}" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
                             </div>
                         </div>
                         <div class="col-6">

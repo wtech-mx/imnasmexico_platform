@@ -20,19 +20,17 @@
 
                     <div class="form-group col-6">
                         <label for="name">Precio rebajado</label>
-                        <input id="precio_rebajado" name="precio_rebajado" type="text" class="form-control" value="{{ $product->precio_rebajado }}">
+                        <input id="precio_rebajado" name="precio_rebajado" type="number" class="form-control" value="{{ $product->precio_rebajado }}">
                     </div>
 
                     <div class="form-group col-6">
                         <label for="name">Precio normal</label>
-                        <input id="precio_normal" name="precio_normal" type="text" class="form-control" value="{{ $product->precio_normal }}">
+                        <input id="precio_normal" name="precio_normal" type="number" class="form-control" value="{{ $product->precio_normal }}">
                     </div>
 
                     <div class="form-group col-12">
                         <label for="num_estandar">descripcion</label>
-                        <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control">
-                            {{ $product->descripcion }}
-                        </textarea>
+                        <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control">{{ $product->descripcion }}</textarea>
                     </div>
 
                     <div class="form-group col-12">

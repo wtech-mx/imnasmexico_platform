@@ -15,17 +15,17 @@
                 <div class="modal-body row">
                     <div class="form-group col-12">
                         <label for="name">Nombre</label>
-                        <input id="nombre" name="nombre" type="text" class="form-control">
+                        <input id="nombre" name="nombre" type="text" class="form-control" required>
                     </div>
 
                     <div class="form-group col-6">
                         <label for="name">Precio rebajado</label>
-                        <input id="precio_rebajado" name="precio_rebajado" type="text" class="form-control" >
+                        <input id="precio_rebajado" name="precio_rebajado" type="number" class="form-control" >
                     </div>
 
                     <div class="form-group col-6">
                         <label for="name">Precio normal</label>
-                        <input id="precio_normal" name="precio_normal" type="text" class="form-control" >
+                        <input id="precio_normal" name="precio_normal" type="number" class="form-control" required>
                     </div>
 
                     <div class="form-group col-12">
@@ -36,7 +36,7 @@
 
                     <div class="form-group col-12">
                         <label for="imagenes">Link drive img</label>
-                        <input id="imagenes" name="imagenes" type="text" class="form-control">
+                        <input id="imagenes" name="imagenes" type="text" class="form-control" >
                     </div>
                 </div>
                 <div class="modal-footer">

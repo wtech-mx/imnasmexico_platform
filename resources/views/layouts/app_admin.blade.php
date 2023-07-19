@@ -78,6 +78,15 @@
     @yield('fullcalendar')
     @yield('select2')
 
+    <script>
+    $(function() {
+        $('form').on('submit', function() {
+            // Deshabilitar el botón de envío al hacer clic
+            $(this).find('button[type="submit"]').prop('disabled', true);
+        });
+    });
+    </script>
+
 </body>
 
 </html>
