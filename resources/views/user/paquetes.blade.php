@@ -38,7 +38,8 @@
                     @foreach ($tickets as $ticket)
                     @php
                         $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                        $fecha_formateada = date('d F', strtotime($fecha_inicial));
+                        $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                        $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
                     @endphp
                         <div class="mt-2 mt-md-5 mt-lg-3">
                             <input class="input_paquetes" type="checkbox" name="ticket[]" id="checkbox{{ $ticket->id }}" data-grupo="grupo1" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo1()">
@@ -77,7 +78,8 @@
                     @foreach ($tickets as $ticket)
                     @php
                         $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                        $fecha_formateada = date('d F', strtotime($fecha_inicial));
+                        $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                        $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
                     @endphp
                         <div class="mt-2 mt-md-5 mt-lg-3">
                             <input class="input_paquetes" type="checkbox" name="ticket2[]" data-grupo="grupo2" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo2()">
@@ -124,7 +126,8 @@
                     @foreach ($tickets as $ticket)
                     @php
                         $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                        $fecha_formateada = date('d F', strtotime($fecha_inicial));
+                        $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                        $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
                     @endphp
                         <div class="mt-2 mt-md-5 mt-lg-3">
                             <input class="input_paquetes" type="checkbox" name="ticket3[]" data-grupo="grupo3" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo3()">
@@ -163,7 +166,8 @@
                     @foreach ($tickets as $ticket)
                     @php
                         $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                        $fecha_formateada = date('d F', strtotime($fecha_inicial));
+                        $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                        $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
                     @endphp
                         <div class="mt-2 mt-md-5 mt-lg-3">
                             <input class="input_paquetes" type="checkbox" name="ticket4[]" data-grupo="grupo4" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo4()">
@@ -210,7 +214,8 @@
                     @foreach ($tickets as $ticket)
                     @php
                         $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                        $fecha_formateada = date('d F', strtotime($fecha_inicial));
+                        $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                        $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
                     @endphp
                         <div class="mt-2 mt-md-5 mt-lg-3">
                             <input class="input_paquetes" type="checkbox" name="ticket5[]" data-grupo="grupo5" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo5()">
