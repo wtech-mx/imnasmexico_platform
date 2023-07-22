@@ -203,6 +203,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/pagos', [App\Http\Controllers\PagosFueraController::class, 'index_pago'])->name('pagos.index_pago');
     Route::get('/admin/pagos/edit/{id}', [App\Http\Controllers\PagosFueraController::class, 'edit_pago'])->name('pagos.edit_pago');
     Route::patch('/admin/pagos/update/{id}', [App\Http\Controllers\PagosFueraController::class, 'update_pago'])->name('pagos.update_pago');
+    Route::get('/admin/pagos/pendiente', [App\Http\Controllers\PagosFueraController::class, 'index_pago_pendiente'])->name('pagos.index_pago_pendiente');
 
     Route::get('/admin/pagos/mercado', [App\Http\Controllers\PagosFueraController::class, 'mercado_pago'])->name('mercado.pago');
 

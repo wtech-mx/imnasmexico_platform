@@ -100,12 +100,18 @@ class PagosFueraController extends Controller
     }
 
     public function index_pago(){
-        $orders = Orders::orderBy('id','DESC')->get();
+        $orders = Orders::orderBy('id','DESC')->where('estatus', '=', '1')->get();
 
         return view('admin.pagos.index', compact('orders'));
     }
 
-    public function edit_pago($id){
+    public function index_pago_pendiente(){
+        $orders = Orders::orderBy('id','DESC')->where('estatus', '=', '0')->get();
+
+        return view('admin.pagos.index_pendiente', compact('orders'));
+    }
+
+    public function edit_pago($id){ 
         $orders = Orders::find($id);
         $order_tickets = OrdersTickets::where('id_order', '=', $id)->get();
 

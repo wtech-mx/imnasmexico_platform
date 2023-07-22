@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Ordenes 
+    Ordenes pendientes
 @endsection
 
 @section('content')
@@ -43,7 +43,7 @@
                                                 <td>{{ $order->pago }}</td>
                                                 <td>{{ $order->forma_pago }}</td>
                                                 <td>
-                                                        Completado
+                                                    En espera
                                                 </td>
 
                                                 <td>

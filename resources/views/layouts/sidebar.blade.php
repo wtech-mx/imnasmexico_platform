@@ -139,12 +139,29 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link {{ (Request::is('admin/pagos') ? 'active' : '') }}" href="{{ route('pagos.index_pago') }}">
-            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                <i class="fa fa-ticket text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+            <a data-bs-toggle="collapse" href="#pagesExamplescarrito" class="nav-link {{ (Request::is('admin/pagos*') ? 'active' : '') }}" aria-controls="pagesExamplescarrito" role="button" aria-expanded="false">
+              <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                <i class="fas fa-bullhorn text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+              </div>
+              <span class="nav-link-text ms-1">Ordenes</span>
+            </a>
+            <div class="collapse " id="pagesExamplescarrito">
+              <ul class="nav ms-4">
+                <li class="nav-item ">
+                  <a class="nav-link {{ (Request::is('admin/pagos*') ? 'show' : '') }}" href="{{ route('pagos.index_pago') }}">
+                    <span class="sidenav-mini-icon">C</span>
+                    <span class="sidenav-normal">Completados</span>
+                  </a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link {{ (Request::is('/admin/pagos/pendiente*') ? 'show' : '') }}" href="{{ route('pagos.index_pago_pendiente') }}">
+                      <span class="sidenav-mini-icon">C</span>
+                      <span class="sidenav-normal">Carrito abandonado</span>
+                    </a>
+                  </li>
+              </ul>
             </div>
-            <span class="nav-link-text ms-1">Ordenes</span>
-          </a>
         </li>
 
         <li class="nav-item">
