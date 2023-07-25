@@ -14,19 +14,15 @@
 
                         <div class="d-flex justify-content-between">
 
-
                             <h3 class="mb-3">Pendientes de Inscripción</h3>
 
-                            @can('client-create')
                                 <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                     Crear
                                 </a>
-                            @endcan
 
                         </div>
                     </div>
 
-                    @can('client-list')
                         <div class="card-body">
                             @include('admin.pagos_fuera.create')
                             <div class="table-responsive">
@@ -70,7 +66,6 @@
                                 </table>
                             </div>
                         </div>
-                    @endcan
                 </div>
             </div>
         </div>
@@ -80,12 +75,14 @@
 @section('datatable')
 
 <script>
+    $(document).ready(function() {
+        $('.curso').select2();
+    });
+
     const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
         searchable: true,
         fixedHeight: false
     });
-
-
 
     $(function() {
         // Asignar el evento a un elemento padre estático
@@ -107,6 +104,7 @@
             });
         });
     });
+
 </script>
 
 @endsection

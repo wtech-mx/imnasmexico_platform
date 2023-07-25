@@ -12,21 +12,23 @@
             </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input id="nombre" name="nombre" type="text" class="form-control" value="{{$pago_fuera->nombre}}" disabled>
+                        <label for="name">Nombre</label><br>
+                        <textarea cols="50" rows="3" disabled>{{$pago_fuera->nombre}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="correo">Correo</label>
                         <input id="correo" name="correo" type="email" class="form-control" value="{{$pago_fuera->correo}}" disabled>
                     </div>
+
                     <div class="form-group">
-                        <label for="curso">Curso</label>
-                        <input id="curso" name="curso" type="text" class="form-control" value="{{$pago_fuera->curso}}" disabled>
+                        <label for="curso">Curso</label><br>
+                        <textarea cols="50" rows="3" disabled>{{$pago_fuera->curso}}</textarea>
                     </div>
+
                     <div class="row">
                         <div class="col-6">
                             <div class="form-group">
-                                <label for="nota">Modalidad</label>
+                                <label for="nota">Forma de pago</label>
                                 <input id="curso" name="curso" type="text" class="form-control" value="{{$pago_fuera->modalidad}}" disabled>
                             </div>
                         </div>
@@ -40,7 +42,6 @@
                             <div class="form-group">
                                 <label for="foto">Foto</label>
                                 <img id="blah" src="{{asset('pago_fuera/'.$pago_fuera->foto) }}" alt="Imagen" style="width: 250px; height: 300px;"/>
-
                             </div>
                         </div>
                         <div class="col-2">

@@ -79,12 +79,25 @@
     @yield('select2')
 
     <script>
-    $(function() {
-        $('form').on('submit', function() {
-            // Deshabilitar el botón de envío al hacer clic
-            $(this).find('button[type="submit"]').prop('disabled', true);
+        $(function() {
+            $('form').on('submit', function() {
+                // Deshabilitar el botón de envío al hacer clic
+                $(this).find('button[type="submit"]').prop('disabled', true);
+            });
         });
-    });
+
+        const formContainer = document.getElementById('form-container');
+        const openFormButton = document.getElementById('open-form');
+
+        openFormButton.addEventListener('click', () => {
+            formContainer.style.display = 'block';
+        });
+
+        formContainer.addEventListener('click', (event) => {
+            if (event.target === formContainer) {
+                formContainer.style.display = 'none';
+            }
+        });
     </script>
 
 </body>
