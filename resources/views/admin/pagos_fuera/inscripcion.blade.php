@@ -29,6 +29,7 @@
                                 <table class="table table-flush" id="datatable-search">
                                     <thead class="thead">
                                         <tr>
+                                            <th>Num.</th>
                                             <th>Nombre</th>
                                             <th>Correo</th>
                                             <th>Telefono</th>
@@ -41,6 +42,7 @@
                                         @foreach ($pagos_fuera as $pago_fuera)
                                         @include('admin.pagos_fuera.modal_ins')
                                             <tr>
+                                                <td>{{ $pago_fuera->id }}</td>
                                                 <td>{{ $pago_fuera->nombre }}</td>
                                                 <td>{{ $pago_fuera->correo }}</td>
                                                 <td>{{ $pago_fuera->telefono }}</td>
