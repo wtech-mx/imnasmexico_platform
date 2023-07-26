@@ -44,7 +44,7 @@
                                 @if (pathinfo($pago_fuera->foto, PATHINFO_EXTENSION) === 'pdf')
                                     <iframe src="{{ asset('pago_fuera/'.$pago_fuera->foto) }}" width="100%" height="500px"></iframe>
                                 @else
-                                    <img id="blah" src="{{ asset('pago_fuera/'.$pago_fuera->foto) }}" alt="Imagen" style="width: 250px; height: 300px;">
+                                    <img id="blah" src="{{ asset('pago_fuera/'.$pago_fuera->foto) }}" alt="Imagen" style="width: 300px;">
                                 @endif
                             </div>
                         </div>

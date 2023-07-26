@@ -318,6 +318,12 @@ Route::group(['middleware' => ['auth']], function() {
      Route::post('/admin/products/import', [App\Http\Controllers\ProductsController::class, 'import_products'])->name('products.import');
      Route::post('/admin/products/store', [App\Http\Controllers\ProductsController::class, 'store'])->name('products.store');
      Route::patch('/admin/products/update/{id}', [App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
+
+    // =============== M O D U L O   M A N U A L ===============================
+    Route::get('/admin/manual', [App\Http\Controllers\ManualController::class, 'index'])->name('manual.index');
+    Route::post('/admin/manual/store', [App\Http\Controllers\ManualController::class, 'store'])->name('manual.store');
+    Route::patch('/admin/manual/update/{id}', [App\Http\Controllers\ManualController::class, 'update'])->name('manual.update');
+
 });
 
 // Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');
