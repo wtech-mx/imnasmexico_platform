@@ -20,6 +20,7 @@ class Orders extends Model
         'estatus',
         'fecha',
         'asistencia',
+        'id_externo',
     ];
 
     public function OrdersTickets()
@@ -30,5 +31,10 @@ class Orders extends Model
     public function User()
     {
         return $this->belongsTo(User::class, 'id_usuario');
+    }
+
+    public function PagosFuera()
+    {
+        return $this->belongsTo(PagosFuera::class, 'id_externo');
     }
 }

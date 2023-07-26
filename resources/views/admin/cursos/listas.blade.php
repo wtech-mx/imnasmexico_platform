@@ -51,7 +51,8 @@
                                                     <th>Telefono</th>
                                                     <th>Metodo de Pago</th>
                                                     <th>Cantidad</th>
-                                                    <th>Fecha</th>
+                                                    <th>Deudor</th>
+                                                    <th>Nota</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
@@ -69,7 +70,24 @@
                                                             <td>
                                                                     {{ $order->Orders->pago }}
                                                             </td>
-                                                            <td>{{ $order->Orders->fecha }}</td>
+                                                            <td>
+                                                                @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
+                                                                    @else
+
+                                                                    @if ($order->Orders->PagosFuera->deudor == '1')
+                                                                    <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled checked>
+                                                                    @else
+                                                                        <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled>
+                                                                    @endif
+                                                                @endif
+                                                            </td>
+                                                            <td>
+                                                                @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
+                                                                    @else
+
+                                                                   {{$order->Orders->id_externo }}
+                                                                @endif
+                                                            </td>
                                                             <td>
                                                                 <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form" style="display: inline-block">
                                                                     @csrf
