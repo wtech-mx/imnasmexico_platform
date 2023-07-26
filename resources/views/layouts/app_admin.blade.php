@@ -27,7 +27,7 @@
 
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('assets/admin/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
-
+  <link rel="stylesheet" href="{{asset('assets/admin/css/adaptabilidad.css')}}">
    {{-- <link src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />
   <link src="https://cdn.datatables.net/fixedheader/3.2.3/css/fixedHeader.dataTables.min.css" rel="stylesheet" />
 --}}
@@ -48,7 +48,7 @@
     @include('layouts.sidebar')
     <main class="main-content position-relative border-radius-lg ">
         @include('layouts.navbar')
-        <div class="container-fluid py-4">
+        <div class="container-fluid py-md-0 py-lg-4">
             @include('layouts.simple_alert')
             @yield('content')
             @include('layouts.footer')

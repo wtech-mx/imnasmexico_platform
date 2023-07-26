@@ -8,7 +8,7 @@
     use Carbon\CarbonInterface;
 @endphp
 @section('content')
-<div class="container-fluid py-4">
+<div class="container-fluid py-0 py-lg-4">
     <div class="row">
       <div class="col-lg-12">
         <div class="row">
