@@ -15,12 +15,12 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h3 class="mb-3">Clientes</h3>
-                    <form action="{{ route('clientes.import') }}" method="POST" enctype="multipart/form-data">
+                    {{-- <form action="{{ route('clientes.import') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="file" class="form-control">
                         <br>
                         <button class="btn btn-success">Importar Usuarios</button>
-                    </form>
+                    </form> --}}
                 </div>
             </div>
 
@@ -42,15 +42,21 @@
                         <td>{{ $cliente->telefono }}</td>
                         <td>{{ $cliente->email }}</td>
                         <td>
-                            <a type="button" class="btn bg-dark" data-bs-toggle="modal" data-bs-target="#modal_documentos{{ $cliente->id }}" style="background: #52BE80; color: #ffff">
-                                <i class="fas fa-folder-open"></i>
-                            </a>
-                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#ticket_cliente_{{ $cliente->id }}" style="background: #52BE80; color: #ffff">
-                                <i class="fas fa-ticket-alt"></i> {{ $cliente->Orders->count()}}
-                            </a>
-                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_cliente_{{ $cliente->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                <i class="fa fa-fw fa-eye"></i>
-                            </a>
+                            @can('client-documentos')
+                                <a type="button" class="btn bg-dark" data-bs-toggle="modal" data-bs-target="#modal_documentos{{ $cliente->id }}" style="background: #52BE80; color: #ffff">
+                                    <i class="fas fa-folder-open"></i>
+                                </a>
+                            @endcan
+                            @can('client-compras')
+                                <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#ticket_cliente_{{ $cliente->id }}" style="background: #52BE80; color: #ffff">
+                                    <i class="fas fa-ticket-alt"></i> {{ $cliente->Orders->count()}}
+                                </a>
+                            @endcan
+                            @can('client-edit')
+                                <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_cliente_{{ $cliente->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    <i class="fa fa-fw fa-eye"></i>
+                                </a>
+                            @endcan
                         </td>
                     </tr>
                     @include('admin.clientes.modal_documentos')

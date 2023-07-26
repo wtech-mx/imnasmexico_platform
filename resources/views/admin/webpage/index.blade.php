@@ -366,8 +366,9 @@
                                   </div>
                                 </div>
 
-                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
-
+                                @can('pagina-edit')
+                                   <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                @endcan
                           </div>
                           </form>
                     </div>

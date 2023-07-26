@@ -50,9 +50,11 @@
                             $ {{ $precio }}
                         </td>
                         <td>
-                            <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_envios_{{ $envio->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                <i class="fa fa-pencil"></i>
-                            </a>
+                            @can('envios-edit')
+                                <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_envios_{{ $envio->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+                            @endcan
                         </td>
                     </tr>
                     @include('admin.envios.modal_envios')

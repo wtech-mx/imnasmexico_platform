@@ -19,14 +19,17 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <h3 class="mb-3">Notas Cursos</h3>
+                            @can('nota-cursos-paquetes')
+                                <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#examplePaquete" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    Paquetes
+                                </a>
+                            @endcan
 
-                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#examplePaquete" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                Paquetes
-                            </a>
-
-                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                Crear
-                            </a>
+                            @can('nota-cursos-crear')
+                                <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    Crear
+                                </a>
+                            @endcan
                         </div>
                     </div>
                         <div class="card-body">
@@ -65,9 +68,11 @@
                                                         style="background: #00BB2D; color: #ffff">
                                                         <i class="fa fa-whatsapp"></i></a> --}}
 
-                                                        <a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#examplePago{{$nota->id}}">
-                                                            <i class="fa fa-money"></i>
-                                                        </a>
+                                                        @can('nota-cursos-pago')
+                                                            <a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#examplePago{{$nota->id}}">
+                                                                <i class="fa fa-money"></i>
+                                                            </a>
+                                                        @endcan
 
                                                         <a class="btn btn-sm btn-success" href="{{ route('notas_cursos.edit',$nota->id) }}"><i class="fa fa-eye"></i> </a>
                                                     </td>

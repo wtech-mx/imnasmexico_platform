@@ -50,14 +50,16 @@
                                                 @endif
 
                                                 <td>
-                                                    <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}"><i class="fa fa-users"></i></a>
+                                                    @can('cursos-edit')
+                                                        <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}"><i class="fa fa-users"></i></a>
+                                                    @endcan
                                                     @if ($curso->modalidad == 'Online')
                                                         <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#update_modal_{{ $curso->id }}" title="Ligas">
                                                             <i class="fab fa-google"></i>
                                                             {{-- <img id="blah" src="{{asset('assets/user/icons/meet.png') }}" alt="Imagen" style="width: 15px; height: 15px;"/> --}}
                                                         </a>
                                                     @endif
-                                                    @can('client-edit')
+                                                    @can('cursos-edit')
                                                         <a class="btn btn-sm btn-success" href="{{ route('cursos.edit',$curso->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
                                                     @endcan
                                                     <a class="btn btn-sm btn-info" href="{{ route('cursos.show',$curso->slug) }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>

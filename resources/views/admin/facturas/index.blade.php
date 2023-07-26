@@ -50,16 +50,23 @@
                             $ {{ $precio }}
                         </td>
                         <td>
-                            <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_cliente_{{ $factura->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                <i class="fa fa-fw fa-eye"></i>
-                            </a>
-                            <a target="_blank" class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$factura->Orders->id) }}">
-                                <i class="fa fa-fw fa-pencil"></i>
-                            </a>
-                            <a type="button" class="btn btn-sm btn-dark"data-bs-toggle="modal" data-bs-target="#factura{{ $factura->id }}">
-                                <i class="fa fa-money"></i>
-                            </a>
+                            @can('factura-ver')
+                                <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_cliente_{{ $factura->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    <i class="fa fa-fw fa-eye"></i>
+                                </a>
+                            @endcan
 
+                            @can('factura-compra')
+                                <a target="_blank" class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$factura->Orders->id) }}">
+                                    <i class="fa fa-fw fa-pencil"></i>
+                                </a>
+                            @endcan
+
+                            @can('factura-subir')
+                                <a type="button" class="btn btn-sm btn-dark"data-bs-toggle="modal" data-bs-target="#factura{{ $factura->id }}">
+                                    <i class="fa fa-money"></i>
+                                </a>
+                            @endcan
                         </td>
                     </tr>
                     @include('admin.facturas.modal_view')

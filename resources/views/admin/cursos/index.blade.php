@@ -17,7 +17,7 @@
 
                             <h3 class="mb-3">Cursos</h3>
 
-                            @can('client-create')
+                            @can('cursos-create')
                             <a class="btn btn-sm btn-success" href="{{ route('cursos.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 <i class="fa fa-fw fa-edit"></i> Crear </a>
                             @endcan
@@ -25,7 +25,6 @@
                         </div>
                     </div>
 
-                    @can('client-list')
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-flush" id="datatable-search">
@@ -70,23 +69,30 @@
                                                 @endif
 
                                                 <td>
-                                                    <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#duplicarModal{{ $curso->id }}" title="Duplicar">
-                                                        <i class="fas fa-copy"></i>
-                                                    </button>
-                                                    <a type="button" class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#material_modal_{{ $curso->id }}" title="Material de clase">
-                                                        <i class="fas fa-folder-open"></i> {{ $curso->RecordatoriosCursos->count()}}
-                                                    </a>
+                                                    @can('cursos-duplicar')
+                                                        <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#duplicarModal{{ $curso->id }}" title="Duplicar">
+                                                            <i class="fas fa-copy"></i>
+                                                        </button>
+                                                    @endcan
+
                                                     <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#recordatorio_modal_{{ $curso->id }}" title="Recordatorios">
-                                                        <i class="fa fa-bell"></i> {{ $curso->MaterialClase->count()}}
+                                                        <i class="fa fa-bell"></i> {{ $curso->RecordatoriosCursos->count()}}
                                                     </a>
-                                                    @if ($curso->modalidad == 'Online')
-                                                        <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#update_modal_{{ $curso->id }}" title="Ligas">
-                                                            <i class="fab fa-google"></i>
-                                                            {{-- <img id="blah" src="{{asset('assets/user/icons/meet.png') }}" alt="Imagen" style="width: 15px; height: 15px;"/> --}}
-                                                        </a>
-                                                    @endif
-                                                    <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}" title="Listas de clase"><i class="fa fa-users"></i></a>
-                                                    @can('client-edit')
+
+                                                    @can('cursos-ligas')
+                                                        @if ($curso->modalidad == 'Online')
+                                                            <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#update_modal_{{ $curso->id }}" title="Ligas">
+                                                                <i class="fab fa-google"></i>
+                                                                {{-- <img id="blah" src="{{asset('assets/user/icons/meet.png') }}" alt="Imagen" style="width: 15px; height: 15px;"/> --}}
+                                                            </a>
+                                                        @endif
+                                                    @endcan
+
+                                                    @can('cursos-lista')
+                                                        <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}" title="Listas de clase"><i class="fa fa-users"></i></a>
+                                                    @endcan
+
+                                                    @can('cursos-edit')
                                                         <a class="btn btn-sm btn-success" href="{{ route('cursos.edit',$curso->id) }}" title="Editar"><i class="fa fa-fw fa-edit"></i> </a>
                                                     @endcan
                                                     <a class="btn btn-sm btn-info" href="{{ route('cursos.show',$curso->slug) }}" target="_blank" title="Acceso Rapido"><i class="fas fa-external-link-alt"></i></a>
@@ -101,7 +107,6 @@
                                 </table>
                             </div>
                         </div>
-                    @endcan
                 </div>
             </div>
         </div>

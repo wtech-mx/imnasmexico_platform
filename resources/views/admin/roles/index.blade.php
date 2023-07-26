@@ -43,19 +43,19 @@ Roles
                         <td>{{ ++$i }}</td>
                         <td>{{ $role->name }}</td>
 
-
-
                         <td>
-
                             <a class="btn btn-sm btn-primary " href="{{ route('roles.show',$role->id) }}" style="color: #ffff"><i class="fa fa-fw fa-eye"></i> </a>
 
-                            <a class="btn btn-sm btn-success" href="{{ route('roles.edit',$role->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
 
+                            @can('role-edit')
+                                <a class="btn btn-sm btn-success" href="{{ route('roles.edit',$role->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
+                            @endcan
 
-                            {!! Form::open(['method' => 'DELETE','route' => ['permisos.destroy', $role->id],'style'=>'display:inline']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
-                            {!! Form::close() !!}
-
+                            @can('role-delete')
+                                {!! Form::open(['method' => 'DELETE','route' => ['permisos.destroy', $role->id],'style'=>'display:inline']) !!}
+                                    {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                                {!! Form::close() !!}
+                            @endcan
 
                         </td>
 

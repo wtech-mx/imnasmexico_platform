@@ -17,7 +17,7 @@
 
                             <h3 class="mb-3">Carpetas Estandares</h3>
 
-                            @can('client-create')
+                            @can('carpeta-estandares-create')
                                 <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                     Crear
                                 </a>
@@ -25,8 +25,6 @@
 
                         </div>
                     </div>
-
-                    @can('client-list')
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-flush" id="datatable-search">
@@ -43,10 +41,11 @@
                                                 <td>{{ $carpeta->nombre }}</td>
                                                 <td>{{ $carpeta->CarpetaDocumentosEstandares->count()}}</td>
                                                 <td>
-                                                    {{-- <a class="btn btn-sm btn-success" href="{{ route('carpetas.edit',$carpeta->id) }}"><i class="fa fa-fw fa-edit"></i> </a> --}}
-                                                    <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_carpeta_{{ $carpeta->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                                        <i class="fa fa-fw fa-edit"></i>
-                                                    </a>
+                                                    @can('carpeta-estandares-edit')
+                                                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_carpeta_{{ $carpeta->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                            <i class="fa fa-fw fa-edit"></i>
+                                                        </a>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                             @include('admin.carpetas_estandares.modal_edit')
@@ -55,7 +54,6 @@
                                 </table>
                             </div>
                         </div>
-                    @endcan
                 </div>
             </div>
         </div>

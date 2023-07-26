@@ -20,9 +20,11 @@
                         <br>
                         <button class="btn btn-success">Importar Products</button>
                     </form>-->
-                    <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_product" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                        <i class="fa fa-fw fa-edit"></i> Crear
-                    </a>
+                    @can('productos-create')
+                        <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_product" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            <i class="fa fa-fw fa-edit"></i> Crear
+                        </a>
+                    @endcan
                 </div>
             </div>
 
@@ -50,9 +52,11 @@
                         <td>${{ $precio_rebajado }}</td>
                         <td>${{ $precio_normal }}</td>
                         <td>
-                            <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_product_{{ $product->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                <i class="fa fa-fw fa-edit"></i>
-                            </a>
+                            @can('productos-edit')
+                                <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_product_{{ $product->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    <i class="fa fa-fw fa-edit"></i>
+                                </a>
+                            @endcan
                         </td>
                     </tr>
                     @include('admin.products.modal_update')

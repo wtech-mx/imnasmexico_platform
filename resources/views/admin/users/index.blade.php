@@ -24,7 +24,6 @@
                 </div>
             </div>
 
-            @can('usuarios-create')
             <div class="table-responsive">
                 <table class="table table-flush" id="datatable-search">
                     <thead class="thead-light">
@@ -68,7 +67,7 @@
 
                 </table>
                 </div>
-            @endcan
+            
 
           </div>
         </div>

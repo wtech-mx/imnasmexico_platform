@@ -17,17 +17,19 @@
 
                             <h3 class="mb-3">Publicidad</h3>
 
-                            <form method="POST" action="{{ route('publicidad.store') }}" enctype="multipart/form-data" role="form">
-                                @csrf
-                                <div class="modal-body">
-                                    <div class="col-12">
-                                        <input class="form-control" type="file" name="archivos[]" multiple>
+                            @can('publicidad-agregar')
+                                <form method="POST" action="{{ route('publicidad.store') }}" enctype="multipart/form-data" role="form">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="col-12">
+                                            <input class="form-control" type="file" name="archivos[]" multiple>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Agregar</button>
-                                </div>
-                            </form>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Agregar</button>
+                                    </div>
+                                </form>
+                            @endcan
 
                         </div>
                     </div>
@@ -59,11 +61,13 @@
                                                 </td>
                                                 <td>{{ $recurso->nombre }}</td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"><i class="fa fa-trash-o"></i></a>
-                                                    <form id="delete-form" action="{{ route('publicidad.destroy', $recurso->id) }}" method="POST" style="display: none;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
+                                                    @can('publicidad-eliminar')
+                                                        <a class="btn btn-sm btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"><i class="fa fa-trash-o"></i></a>
+                                                        <form id="delete-form" action="{{ route('publicidad.destroy', $recurso->id) }}" method="POST" style="display: none;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    @endcan
                                                 </td>
                                             </tr>
                                         @endforeach
