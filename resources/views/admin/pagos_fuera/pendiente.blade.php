@@ -16,11 +16,14 @@
 
 
                             <h3 class="mb-3">Pendientes de Revision Pago</h3>
-
+                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                Crear
+                            </a>
                         </div>
                     </div>
 
                         <div class="card-body">
+                            @include('admin.pagos_fuera.create')
                             <div class="table-responsive">
                                 <table class="table table-flush" id="datatable-search">
                                     <thead class="thead">

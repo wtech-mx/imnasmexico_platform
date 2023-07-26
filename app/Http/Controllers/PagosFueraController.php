@@ -25,7 +25,7 @@ class PagosFueraController extends Controller
 {
     public function inscripcion(){
         $fechaActual = date('Y-m-d');
-        $pagos_fuera = PagosFuera::orderBy('id','DESC')->where('inscripcion', '=', '0')->get();
+        $pagos_fuera = PagosFuera::orderBy('id','DESC')->get();
         $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
 
         return view('admin.pagos_fuera.inscripcion', compact('pagos_fuera', 'cursos'));
@@ -38,9 +38,54 @@ class PagosFueraController extends Controller
         $code = Str::random(8);
         $fechaActual = date('Y-m-d');
 
-        if($request->get('deudor') == '1'){
-
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera');
         }else{
+            $pago_fuera = public_path() . '/pago_fuera';
+        }
+
+        $order_ticket = $request->get('campo1');
+        $order_ticket2 = $request->get('campo2');
+        $order_ticket3 = $request->get('campo3');
+        $cursos = CursosTickets::where('id','=', $order_ticket)->first();
+        $cursos2 = CursosTickets::where('id','=', $order_ticket2)->first();
+        $cursos3 = CursosTickets::where('id','=', $order_ticket3)->first();
+
+        if($request->get('name2') == NULL){
+            $usuario = $request->get('name') . " " . $request->get('apellido');
+        }else{
+            $usuario = $request->get('name') . " " . $request->get('apellido') . "\n" . $request->get('name2') . " " . $request->get('apellido2');
+        }
+
+        if($request->get('campo3') != NULL){
+            $curso = $cursos->Cursos->nombre . "\n" . $cursos2->Cursos->nombre . "\n" . $cursos3->Cursos->nombre;
+        }elseif($request->get('campo2') != NULL){
+            $curso = $cursos->Cursos->nombre . "\n" . $cursos2->Cursos->nombre;
+        }else{
+            $curso = $cursos->Cursos->nombre;
+        }
+
+        $pagos_fuera = new PagosFuera;
+        $pagos_fuera->nombre = $usuario;
+        $pagos_fuera->correo = $request->get('email');
+        $pagos_fuera->telefono = $request->get('telefono');
+        $pagos_fuera->curso = $curso;
+        $pagos_fuera->inscripcion = '1';
+        $pagos_fuera->pendiente = '0';
+        $pagos_fuera->modalidad = $request->get('forma_pago');
+        $pagos_fuera->deudor = $request->get('deudor');
+        $pagos_fuera->abono = $request->get('abono');
+
+        if ($request->hasFile("foto")) {
+            $file = $request->file('foto');
+            $path = $pago_fuera;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $pagos_fuera->foto = $fileName;
+        }
+        $pagos_fuera->save();
+
             if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
                 if (User::where('telefono', $request->telefono)->exists()) {
                     $user = User::where('telefono', $request->telefono)->first();
@@ -69,6 +114,7 @@ class PagosFueraController extends Controller
             $order->fecha = $fechaActual;
             $order->estatus = 1;
             $order->code = $code;
+            $order->id_externo = $pagos_fuera->id;
             $order->save();
 
             $order_ticket = new OrdersTickets;
@@ -139,6 +185,7 @@ class PagosFueraController extends Controller
                 $order2->fecha = $fechaActual;
                 $order2->estatus = 1;
                 $order2->code = $code;
+                $order2->id_externo = $pagos_fuera->id;
                 $order2->save();
 
                 $order_ticket = new OrdersTickets;
@@ -179,55 +226,7 @@ class PagosFueraController extends Controller
                     }
                 }
             }
-        }
 
-        $dominio = $request->getHost();
-        if($dominio == 'plataforma.imnasmexico.com'){
-            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera');
-        }else{
-            $pago_fuera = public_path() . '/pago_fuera';
-        }
-
-        $order_ticket = $request->get('campo1');
-        $order_ticket2 = $request->get('campo2');
-        $order_ticket3 = $request->get('campo3');
-        $cursos = CursosTickets::where('id','=', $order_ticket)->first();
-        $cursos2 = CursosTickets::where('id','=', $order_ticket2)->first();
-        $cursos3 = CursosTickets::where('id','=', $order_ticket3)->first();
-
-        if($request->get('name2') == NULL){
-            $usuario = $request->get('name') . " " . $request->get('apellido');
-        }else{
-            $usuario = $request->get('name') . " " . $request->get('apellido') . "\n" . $request->get('name2') . " " . $request->get('apellido2');
-        }
-
-        if($request->get('campo3') != NULL){
-            $curso = $cursos->Cursos->nombre . "\n" . $cursos2->Cursos->nombre . "\n" . $cursos3->Cursos->nombre;
-        }elseif($request->get('campo2') != NULL){
-            $curso = $cursos->Cursos->nombre . "\n" . $cursos2->Cursos->nombre;
-        }else{
-            $curso = $cursos->Cursos->nombre;
-        }
-
-        $pagos_fuera = new PagosFuera;
-        $pagos_fuera->nombre = $usuario;
-        $pagos_fuera->correo = $request->get('email');
-        $pagos_fuera->telefono = $request->get('telefono');
-        $pagos_fuera->curso = $curso;
-        $pagos_fuera->inscripcion = '1';
-        $pagos_fuera->pendiente = '0';
-        $pagos_fuera->modalidad = $request->get('forma_pago');
-        $pagos_fuera->deudor = $request->get('deudor');
-        $pagos_fuera->abono = $request->get('abono');
-
-        if ($request->hasFile("foto")) {
-            $file = $request->file('foto');
-            $path = $pago_fuera;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $pagos_fuera->foto = $fileName;
-        }
-        $pagos_fuera->save();
 
         // $datos = PagosFuera::where('id', '=', $pagos_fuera->id)->first();
         // Mail::to($webpage->email_developer)->bcc($webpage->email_developer_two, 'Destinatario dev 2')->send(new PlantillaPagoExterno($datos));
@@ -246,9 +245,11 @@ class PagosFueraController extends Controller
     }
 
     public function pendientes(){
+        $fechaActual = date('Y-m-d');
         $pagos_fuera = PagosFuera::orderBy('id','DESC')->where('pendiente', '=', '0')->get();
+        $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
 
-        return view('admin.pagos_fuera.pendiente', compact('pagos_fuera'));
+        return view('admin.pagos_fuera.pendiente', compact('pagos_fuera', 'cursos'));
     }
 
     public function ChangePendienteStatus(Request $request)

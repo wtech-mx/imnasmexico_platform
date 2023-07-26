@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Pagos por Fuera
+    Todas las notas
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
 
                         <div class="d-flex justify-content-between">
 
-                            <h3 class="mb-3">Pendientes de Inscripción</h3>
+                            <h3 class="mb-3">Todas las notas</h3>
 
                                 <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                     Crear
@@ -32,10 +32,8 @@
                                             <th>Nombre</th>
                                             <th>Correo</th>
                                             <th>Telefono</th>
-                                            <th>Curso</th>
                                             <th>Modalidad</th>
-                                            <th>Inscripcion</th>
-
+                                            <th>Curso</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -46,17 +44,12 @@
                                                 <td>{{ $pago_fuera->nombre }}</td>
                                                 <td>{{ $pago_fuera->correo }}</td>
                                                 <td>{{ $pago_fuera->telefono }}</td>
-                                                <td>{{ $pago_fuera->curso }}</td>
                                                 @if ($pago_fuera->modalidad == "Online")
                                                     <td> <label class="badge" style="color: #009ee3;background-color: #009ee340;">Online</label> </td>
                                                 @else
                                                     <td> <label class="badge" style="color: #746AB0;background-color: #746ab061;">Presencial</label> </td>
                                                 @endif
-                                                <td>
-                                                    <input data-id="{{ $pago_fuera->id }}" class="toggle-class" type="checkbox"
-                                                    data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                                    data-on="Active" data-off="InActive" {{ $pago_fuera->inscripcion ? 'checked' : '' }}>
-                                                </td>
+                                                <td>{{ $pago_fuera->curso }}</td>
                                                 <td>
                                                     <a type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#showDataModal{{$pago_fuera->id}}" style="color: #ffff"><i class="fa fa-users"></i></a>
                                                 </td>

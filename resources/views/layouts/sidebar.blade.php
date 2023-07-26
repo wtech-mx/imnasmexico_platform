@@ -93,10 +93,6 @@
             <div class="collapse " id="pagesExamplesPagos">
               <ul class="nav ms-4">
                 <li class="nav-item ">
-                  <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/inscripcion*') ? 'show' : '') }}" href="{{ route('pagos.inscripcion') }}">
-                    <span class="sidenav-mini-icon"> P </span>
-                    <span class="sidenav-normal">Pendientes de Inscripcion</span>
-                  </a>
 
                   <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/pendientes*') ? 'show' : '') }}" href="{{ route('pagos.pendientes') }}">
                     <span class="sidenav-mini-icon"> P </span>
@@ -106,6 +102,11 @@
                   <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/deudores*') ? 'show' : '') }}" href="{{ route('pagos.deudores') }}">
                     <span class="sidenav-mini-icon"> P </span>
                     <span class="sidenav-normal">Deudores</span>
+                  </a>
+
+                  <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/inscripcion*') ? 'show' : '') }}" href="{{ route('pagos.inscripcion') }}">
+                    <span class="sidenav-mini-icon"> P </span>
+                    <span class="sidenav-normal">Todas las notas</span>
                   </a>
                 </li>
               </ul>
