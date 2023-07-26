@@ -2,7 +2,7 @@
     <div class="container-fluid py-1 px-3">
 
 
-
+{{--
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
           <li class="breadcrumb-item text-sm">
@@ -13,21 +13,16 @@
           <li class="breadcrumb-item text-sm "><a class="opacity-5 " href="{{ route('dashboard') }}" style="color: #6C4343">Inicio</a></li>
           <li class="breadcrumb-item text-sm  active" aria-current="page" style="color: #6C4343">@yield('page_actuality')</li>
         </ol>
-      </nav>
+      </nav> --}}
 
-
-      <div class="sidenav-toggler sidenav-toggler-inner px-3" style="">
-          <a href="javascript:;" class="nav-link p-0">
-            <div class="sidenav-toggler-inner">
-              <i class="sidenav-toggler-line bg-white"></i>
-              <i class="sidenav-toggler-line bg-white"></i>
-              <i class="sidenav-toggler-line bg-white"></i>
-            </div>
-          </a>
+       <div class="sidenav-toggler " style="">
+            <a  href="javascript:;" class="menu_flotante_admin">
+                <i class="fa fa-gear whatsapp-icon"></i>
+            </a>
         </div>
 
 
-      <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+      <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 btn_name_logout" id="navbar">
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
 
           <div class="dropdown">

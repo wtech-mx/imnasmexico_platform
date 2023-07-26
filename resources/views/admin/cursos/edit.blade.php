@@ -127,28 +127,28 @@
                                         <h5 class="font-weight-bolder">Fecha y Hora</h5>
                                         <div class="multisteps-form__content">
                                             <div class="row">
-                                                <div class="col-3">
+                                                <div class="col-6 col-md-6 col-lg-3">
                                                     <div class="form-group">
                                                         <label for="nota">Fecha Inicial</label>
                                                         <input type="date" id="fecha_inicial" name="fecha_inicial" class="form-control" value="{{$curso->fecha_inicial}}">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
+                                                <div class="col-6 col-md-6 col-lg-3">
                                                     <div class="form-group">
                                                         <label for="nota">Hora Inicial</label>
                                                         <input type="time" id="hora_inicial" name="hora_inicial" class="form-control" value="{{$curso->hora_inicial}}">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
+                                                <div class="col-6 col-md-6 col-lg-3">
                                                     <div class="form-group">
                                                         <label for="nota">Fecha Final</label>
                                                         <input type="date" id="fecha_final" name="fecha_final" class="form-control" value="{{$curso->fecha_final}}">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
+                                                <div class="col-6 col-md-6 col-lg-3">
                                                     <div class="form-group">
                                                         <label for="nota">Hora Final</label>
                                                         <input type="time" id="hora_final" name="hora_final" class="form-control" value="{{$curso->hora_final}}">
