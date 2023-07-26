@@ -41,7 +41,11 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="foto">Foto</label>
-                                <img id="blah" src="{{asset('pago_fuera/'.$pago_fuera->foto) }}" alt="Imagen" style="width: 250px; height: 300px;"/>
+                                @if (pathinfo($pago_fuera->foto, PATHINFO_EXTENSION) === 'pdf')
+                                    <iframe src="{{ asset('pago_fuera/'.$pago_fuera->foto) }}" width="100%" height="500px"></iframe>
+                                @else
+                                    <img id="blah" src="{{ asset('pago_fuera/'.$pago_fuera->foto) }}" alt="Imagen" style="width: 250px; height: 300px;">
+                                @endif
                             </div>
                         </div>
                         <div class="col-2">
