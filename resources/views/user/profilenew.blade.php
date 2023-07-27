@@ -68,7 +68,7 @@ Mi perfil- {{$cliente->name}}
                                     <img class="img_profile_label" src="{{asset('assets/user/icons/edificio.png')}}" alt="" >
                                 </span>
 
-                                <input class="form-control prb" type="text"  id="direccion" name="direccion" placeholder="Direccion">
+                                <input class="form-control prb" type="text"  id="direccion" name="direccion" placeholder="Direccion" value="{{$cliente->direccion}}">
                                 </div>
                             </div>
 
@@ -78,7 +78,7 @@ Mi perfil- {{$cliente->name}}
                                     <img class="img_profile_label" src="{{asset('assets/user/icons/location-pointer.png')}}" alt="">
                                 </span>
 
-                                <input class="form-control" type="text"  id="city" name="city" placeholder="Municipio y/o Provincia">
+                                <input class="form-control" type="text"  id="city" name="city" placeholder="Municipio y/o Provincia" value="{{$cliente->city}}">
                                 </div>
                             </div>
 
@@ -89,7 +89,7 @@ Mi perfil- {{$cliente->name}}
 
                                 </span>
 
-                                <input class="form-control" type="text"  id="postcode" name="postcode" placeholder="CP">
+                                <input class="form-control" type="text"  id="postcode" name="postcode" placeholder="CP" value="{{$cliente->postcode}}">
                                 </div>
                             </div>
 
