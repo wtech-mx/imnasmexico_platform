@@ -33,7 +33,6 @@
                                             <th>Nombre</th>
                                             <th>Correo</th>
                                             <th>Telefono</th>
-                                            <th>Modalidad</th>
                                             <th>Curso</th>
                                             <th>Acciones</th>
                                         </tr>
@@ -46,11 +45,6 @@
                                                 <td>{{ $pago_fuera->nombre }}</td>
                                                 <td>{{ $pago_fuera->correo }}</td>
                                                 <td>{{ $pago_fuera->telefono }}</td>
-                                                @if ($pago_fuera->modalidad == "Online")
-                                                    <td> <label class="badge" style="color: #009ee3;background-color: #009ee340;">Online</label> </td>
-                                                @else
-                                                    <td> <label class="badge" style="color: #746AB0;background-color: #746ab061;">Presencial</label> </td>
-                                                @endif
                                                 <td>{{ $pago_fuera->curso }}</td>
                                                 <td>
                                                     <a type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#showDataModal{{$pago_fuera->id}}" style="color: #ffff"><i class="fa fa-users"></i></a>
