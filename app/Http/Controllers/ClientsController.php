@@ -146,6 +146,8 @@ class ClientsController extends Controller
         $user->rfc = $request->get('rfc');
         $user->razon_social = $request->get('razon_social');
         $user->direccion = $request->get('direccion');
+        $user->city = $request->get('city');
+        $user->postcode = $request->get('postcode');
         $user->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
