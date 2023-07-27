@@ -26,9 +26,14 @@
                         <textarea name="descripcion" id="descripcion" cols="30" rows="3" class="form-control">{{ $item->descripcion }}</textarea>
                     </div>
 
-                    <div class="form-group col-12">
+                    <div class="form-group col-6">
                         <label for="name">Imagen de portada</label>
                         <input type="file" name="imagen_portada" id="imagen_portada" class="form-control">
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="name">Video</label>
+                        <input type="file" name="video" id="video" class="form-control">
                     </div>
 
                     <div class="form-group col-6">

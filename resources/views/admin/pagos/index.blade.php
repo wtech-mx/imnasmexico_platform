@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Ordenes 
+    Ordenes
 @endsection
 
 @section('content')
@@ -19,7 +19,6 @@
                         </div>
                     </div>
 
-                    @can('client-list')
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-flush" id="datatable-search">
@@ -55,7 +54,7 @@
                                 </table>
                             </div>
                         </div>
-                    @endcan
+
                 </div>
             </div>
         </div>

@@ -42,6 +42,14 @@ class ManualController extends Controller
         $curso->step9_name = $request->get('step9_name');
         $curso->step10_name = $request->get('step10_name');
 
+        if ($request->hasFile("video")) {
+            $file = $request->file('video');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $curso->video = $fileName;
+        }
+
         if ($request->hasFile("imagen_portada")) {
             $file = $request->file('imagen_portada');
             $path = $ruta_manual;
@@ -161,6 +169,14 @@ class ManualController extends Controller
         $curso->step8_name = $request->get('step8_name');
         $curso->step9_name = $request->get('step9_name');
         $curso->step10_name = $request->get('step10_name');
+
+        if ($request->hasFile("video")) {
+            $file = $request->file('video');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $curso->video = $fileName;
+        }
 
         if ($request->hasFile("imagen_portada")) {
             $file = $request->file('imagen_portada');

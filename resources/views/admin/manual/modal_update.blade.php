@@ -27,10 +27,18 @@
                         <textarea name="descripcion" id="descripcion" cols="30" rows="3" class="form-control">{{ $item->descripcion }}</textarea>
                     </div>
 
-                    <div class="form-group col-12">
+                    <div class="form-group col-6">
                         <label for="name">Imagen de portada</label>
                         <input type="file" name="imagen_portada" id="imagen_portada" class="form-control">
                         <img id="blah" src="{{ asset('manual/'.$item->imagen_portada) }}" alt="Imagen" style="width:300px;">
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="name">Video</label>
+                        <input type="file" name="video" id="video" class="form-control">
+                        <video width="300" controls>
+                            <source src="{{ asset('manual/'.$item->video) }}" type="video/mp4">
+                          </video>
                     </div>
 
                     <div class="form-group col-6">
