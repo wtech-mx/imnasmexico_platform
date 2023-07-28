@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('orders', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_externo');
-            $table->foreign('id_externo')
-                ->references('id')->on('pagos_fuera')
-                ->inDelete('set null');
-        });
+        // Schema::table('orders', function (Blueprint $table) {
+        //     $table->unsignedBigInteger('id_externo');
+        //     $table->foreign('id_externo')
+        //         ->references('id')->on('pagos_fuera')
+        //         ->inDelete('set null');
+        // });
     }
 
     /**
