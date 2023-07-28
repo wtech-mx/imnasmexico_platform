@@ -79,6 +79,9 @@ class PagosFueraController extends Controller
         $pagos_fuera->monto = $request->get('pago');
         $pagos_fuera->fecha_hora_1 = $request->get('fecha_hora_1');
         $pagos_fuera->usuario = $request->get('usuario');
+        $pagos_fuera->ticket1 = $request->get('campo1');
+        $pagos_fuera->ticket2 = $request->get('campo2');
+        $pagos_fuera->ticket3 = $request->get('campo3');
 
         if ($request->hasFile("foto")) {
             $file = $request->file('foto');
@@ -249,8 +252,10 @@ class PagosFueraController extends Controller
             $pago_fuera = public_path() . '/pago_fuera';
         }
 
+        $code = Str::random(8);
+        $fechaActual = date('Y-m-d');
+
         $pagos_fuera = PagosFuera::find($id);
-        $pagos_fuera = Orders::where('id_externo', '=', $id)->first();
         $pagos_fuera->abono2 = $request->get('abono2');
         $pagos_fuera->fecha_hora_2 = $request->get('fecha_hora_2');
         $pagos_fuera->deudor = '0';
@@ -263,16 +268,25 @@ class PagosFueraController extends Controller
             $pagos_fuera->foto2 = $fileName;
         }
 
-
         $pagos_fuera->update();
 
         if($request->get('abono2') != NULL){
-            $code = Str::random(8);
-            $fechaActual = date('Y-m-d');
+
+            if (User::where('telefono', $pagos_fuera->telefono)->exists() || User::where('email', $pagos_fuera->correo)->exists()) {
+                if (User::where('telefono', $pagos_fuera->telefono)->exists()) {
+                    $user = User::where('telefono', $pagos_fuera->telefono)->first();
+                } else {
+                    $user = User::where('email', $pagos_fuera->correo)->first();
+                }
+                $payer = $user;
+            }
+
+            $suma_abonos = $pagos_fuera->abono + $pagos_fuera->abono2;
+
             $order = new Orders;
-            $order->id_usuario = $pagos_fuera->id_usuario;
-            $order->pago = $request->get('pago');
-            $order->forma_pago = $request->get('forma_pago');
+            $order->id_usuario = $payer->id;
+            $order->pago = $suma_abonos;
+            $order->forma_pago = $pagos_fuera->modalidad;
             $order->fecha = $fechaActual;
             $order->estatus = 1;
             $order->code = $code;
@@ -281,8 +295,8 @@ class PagosFueraController extends Controller
 
             $order_ticket = new OrdersTickets;
             $order_ticket->id_order = $order->id;
-            $order_ticket->id_usuario = $pagos_fuera->id_usuario;
-            $order_ticket->id_tickets = $request->get('campo1');
+            $order_ticket->id_usuario = $payer->id;
+            $order_ticket->id_tickets = $pagos_fuera->ticket1;
             $cursos = CursosTickets::where('id','=', $order_ticket->id_tickets)->first();
             $order_ticket->id_curso = $cursos->id_curso;
             $order_ticket->save();
@@ -290,8 +304,8 @@ class PagosFueraController extends Controller
             if($request->get('campo2') != NULL){
                 $order_ticket2 = new OrdersTickets;
                 $order_ticket2->id_order = $order->id;
-                $order_ticket2->id_usuario = $pagos_fuera->id_usuario;
-                $order_ticket2->id_tickets = $request->get('campo2');
+                $order_ticket2->id_usuario = $payer->id;
+                $order_ticket2->id_tickets = $pagos_fuera->ticket;
                 $cursos2 = CursosTickets::where('id','=', $order_ticket2->id_tickets)->first();
                 $order_ticket2->id_curso = $cursos2->id_curso;
                 $order_ticket2->save();
@@ -300,8 +314,8 @@ class PagosFueraController extends Controller
             if($request->get('campo3') != NULL){
                 $order_ticket3 = new OrdersTickets;
                 $order_ticket3->id_order = $order->id;
-                $order_ticket3->id_usuario = $pagos_fuera->id_usuario;
-                $order_ticket3->id_tickets = $request->get('campo3');
+                $order_ticket3->id_usuario = $payer->id;
+                $order_ticket3->id_tickets = $pagos_fuera->ticket;
                 $cursos3 = CursosTickets::where('id','=', $order_ticket3->id_tickets)->first();
                 $order_ticket3->id_curso = $cursos3->id_curso;
                 $order_ticket3->save();
@@ -316,6 +330,80 @@ class PagosFueraController extends Controller
                     Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
                 }
             }
+
+            if($request->get('name2') != NULL){
+                $code2 = Str::random(8);
+                if (User::where('telefono', $request->get('telefono2'))->exists() || User::where('email', $request->get('email2'))->exists()) {
+                    if (User::where('telefono', $request->get('telefono2'))->exists()) {
+                        $user = User::where('telefono', $request->get('telefono2'))->first();
+                    } else {
+                        $user = User::where('email', $request->get('email2'))->first();
+                    }
+                    $payer2 = $user;
+                } else {
+                    $payer2 = new User();
+                    $payer2->name = $request->get('name2') . " " . $request->get('apellido2');
+                    $payer2->email = $request->get('email2');
+                    $payer2->username = $request->get('telefono2');
+                    $payer2->code = $code2;
+                    $payer2->telefono = $request->get('telefono2');
+                    $payer2->cliente = '1';
+                    $payer2->password = Hash::make($request->get('telefono2'));
+                    $payer2->save();
+                    $datos = User::where('id', '=', $payer2->id)->first();
+                    Mail::to($payer2->email)->send(new PlantillaNuevoUser($datos));
+                }
+
+                $order2 = new Orders;
+                $order2->id_usuario = $payer2->id;
+                $order2->pago = $request->get('pago');
+                $order2->forma_pago = $request->get('forma_pago');
+                $order2->fecha = $fechaActual;
+                $order2->estatus = 1;
+                $order2->code = $code;
+                $order2->id_externo = $pagos_fuera->id;
+                $order2->save();
+
+                $order_ticket = new OrdersTickets;
+                $order_ticket->id_order = $order2->id;
+                $order_ticket->id_usuario = $payer2->id;
+                $order_ticket->id_tickets = $request->get('campo1');
+                $cursos = CursosTickets::where('id','=', $order_ticket->id_tickets)->first();
+                $order_ticket->id_curso = $cursos->id_curso;
+                $order_ticket->save();
+
+                if($request->get('campo2') != NULL){
+                    $order_ticket2 = new OrdersTickets;
+                    $order_ticket2->id_order = $order2->id;
+                    $order_ticket2->id_usuario = $payer2->id;
+                    $order_ticket2->id_tickets = $request->get('campo2');
+                    $cursos2 = CursosTickets::where('id','=', $order_ticket2->id_tickets)->first();
+                    $order_ticket2->id_curso = $cursos2->id_curso;
+                    $order_ticket2->save();
+                }
+
+                if($request->get('campo3') != NULL){
+                    $order_ticket3 = new OrdersTickets;
+                    $order_ticket3->id_order = $order2->id;
+                    $order_ticket3->id_usuario = $payer2->id;
+                    $order_ticket3->id_tickets = $request->get('campo3');
+                    $cursos3 = CursosTickets::where('id','=', $order_ticket3->id_tickets)->first();
+                    $order_ticket3->id_curso = $cursos3->id_curso;
+                    $order_ticket3->save();
+                }
+
+                $orden_ticket2 = OrdersTickets::where('id_order', '=', $order2->id)->get();
+
+                foreach ($orden_ticket2 as $details) {
+                    if ($details->Cursos->modalidad == 'Online') {
+                        Mail::to($order2->User->email)->send(new PlantillaTicket($details));
+                    } else {
+                        Mail::to($order2->User->email)->send(new PlantillaTicketPresencial($details));
+                    }
+                }
+            }
+
+
         }
 
         Session::flash('success', 'Se ha actualizado es comprobante de la orden');

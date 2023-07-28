@@ -18,6 +18,9 @@ return new class extends Migration
             $table->string('usuario')->nullable();
             $table->timestamp('fecha_hora_1')->nullable();
             $table->timestamp('fecha_hora_2')->nullable();
+            $table->integer('ticket1')->nullable();
+            $table->integer('ticket2')->nullable();
+            $table->integer('ticket3')->nullable();
         });
     }
 
