@@ -11,6 +11,10 @@
 
             <form method="POST" action="{{ route('pagos.store') }}" enctype="multipart/form-data" role="form">
                 @csrf
+
+                <input id="fecha_hora_1" name="fecha_hora_1" type="hidden"  value="{{ $fechaActual }}">
+                <input id="usuario" name="usuario" type="hidden"  value="{{ Auth::user()->name }}">
+
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-6">
@@ -133,33 +137,34 @@
                             <div class="col-6 mt-3">
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-4">
                                 <div class="form-group">
                                     <label for="foto">Foto *</label>
                                     <input id="foto" name="foto" type="file" class="form-control" placeholder="foto" required>@error('foto') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-4">
                                 <label>Monto *</label>
                                 <div class="form-group">
-                                    <input class="form-control" type="number" id="pago" name="pago" required>
+                                    <input class="form-control" type="number" id="pago" name="pago" placeholder="Ingresa el total del/de cursos" required>
                                 </div>
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-1">
                                 <label>Deudor</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="deudor" name="deudor" value="1" id="flexCheckChecked">
+                                  <input class="form-check-input" type="checkbox" id="deudor" name="deudor" value="1" id="flexCheckChecked">
                                 </div>
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-3" id="abono-container">
                                 <div class="form-group">
-                                    <label for="abono">Abono</label>
-                                    <input id="abono" name="abono" type="number" class="form-control" placeholder="Abono">@error('abono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                  <label for="abono">Abono</label>
+                                  <input id="abono" name="abono" type="number" class="form-control" placeholder="Abono">@error('abono') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
+
                         </div>
 
                     </div>

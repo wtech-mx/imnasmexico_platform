@@ -188,6 +188,8 @@ Route::group(['middleware' => ['auth']], function() {
     // =============== M O D U L O   P A G O S  P O R  F U E R A ===============================
     Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\PagosFueraController::class, 'inscripcion'])->name('pagos.inscripcion');
     Route::post('/admin/pagos-por-fuera/inscripcion/store', [App\Http\Controllers\PagosFueraController::class, 'store'])->name('pagos.store');
+    Route::patch('/admin/pagos-por-fuera/inscripcion/edit/{id}', [App\Http\Controllers\PagosFueraController::class, 'update_deudores'])->name('pagos.update_deudores');;
+
 
     Route::get('/changeStatus', [App\Http\Controllers\PagosFueraController::class, 'ChangeInscripcionStatus'])->name('ChangeInscripcionStatus.pagos');
     Route::get('/changeStatus/pago', [App\Http\Controllers\PagosFueraController::class, 'ChangePendienteStatus'])->name('ChangePendienteStatus.pagos');

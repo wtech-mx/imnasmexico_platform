@@ -76,6 +76,9 @@ class PagosFueraController extends Controller
         $pagos_fuera->modalidad = $request->get('forma_pago');
         $pagos_fuera->deudor = $request->get('deudor');
         $pagos_fuera->abono = $request->get('abono');
+        $pagos_fuera->monto = $request->get('pago');
+        $pagos_fuera->fecha_hora_1 = $request->get('fecha_hora_1');
+        $pagos_fuera->usuario = $request->get('usuario');
 
         if ($request->hasFile("foto")) {
             $file = $request->file('foto');
@@ -107,8 +110,7 @@ class PagosFueraController extends Controller
                 Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
             }
 
-        if($request->get('deudor') == '1'){
-
+        if($request->get('deudor') != '1'){
             $order = new Orders;
             $order->id_usuario = $payer->id;
             $order->pago = $request->get('pago');
@@ -236,6 +238,35 @@ class PagosFueraController extends Controller
 
         return redirect()->route('pagos.inscripcion')
             ->with('success', 'pago fuera creado con exito.');
+    }
+
+    public function update_deudores(Request $request, $id){
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera');
+        }else{
+            $pago_fuera = public_path() . '/pago_fuera';
+        }
+
+        $pagos_fuera = PagosFuera::find($id);
+        $pagos_fuera->abono2 = $request->get('abono2');
+        $pagos_fuera->fecha_hora_2 = $request->get('fecha_hora_2');
+
+        if ($request->hasFile("foto2")) {
+            $file = $request->file('foto2');
+            $path = $pago_fuera;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $pagos_fuera->foto2 = $fileName;
+        }
+
+
+        $pagos_fuera->update();
+
+        Session::flash('success', 'Se ha actualizado es comprobante de la orden');
+        return redirect()->back()->with('success', 'actualizado es comprobante de la orden.');
+
     }
 
     public function ChangeInscripcionStatus(Request $request)

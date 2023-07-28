@@ -70,6 +70,24 @@
 @section('datatable')
 
 <script>
+
+    $(document).ready(function() {
+        // Esconde el contenedor del campo "Abono" inicialmente
+        $('#abono-container').hide();
+
+        // Escucha el evento 'change' del checkbox 'Deudor'
+        $('#deudor').change(function() {
+            // Si el checkbox 'Deudor' está seleccionado, muestra el contenedor del campo "Abono"
+            if ($(this).is(':checked')) {
+            $('#abono-container').show();
+            } else {
+            // Si el checkbox 'Deudor' está deseleccionado, oculta el contenedor del campo "Abono" y borra el valor ingresado
+            $('#abono-container').hide();
+            $('#abono').val('');
+            }
+        });
+    });
+
     const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
       searchable: true,
       fixedHeight: false
