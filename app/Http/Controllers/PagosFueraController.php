@@ -250,8 +250,10 @@ class PagosFueraController extends Controller
         }
 
         $pagos_fuera = PagosFuera::find($id);
+        $pagos_fuera = Orders::where('id_externo', '=', $id)->first();
         $pagos_fuera->abono2 = $request->get('abono2');
         $pagos_fuera->fecha_hora_2 = $request->get('fecha_hora_2');
+        $pagos_fuera->deudor = '0';
 
         if ($request->hasFile("foto2")) {
             $file = $request->file('foto2');
@@ -263,6 +265,58 @@ class PagosFueraController extends Controller
 
 
         $pagos_fuera->update();
+
+        if($request->get('abono2') != NULL){
+            $code = Str::random(8);
+            $fechaActual = date('Y-m-d');
+            $order = new Orders;
+            $order->id_usuario = $pagos_fuera->id_usuario;
+            $order->pago = $request->get('pago');
+            $order->forma_pago = $request->get('forma_pago');
+            $order->fecha = $fechaActual;
+            $order->estatus = 1;
+            $order->code = $code;
+            $order->id_externo = $pagos_fuera->id;
+            $order->save();
+
+            $order_ticket = new OrdersTickets;
+            $order_ticket->id_order = $order->id;
+            $order_ticket->id_usuario = $pagos_fuera->id_usuario;
+            $order_ticket->id_tickets = $request->get('campo1');
+            $cursos = CursosTickets::where('id','=', $order_ticket->id_tickets)->first();
+            $order_ticket->id_curso = $cursos->id_curso;
+            $order_ticket->save();
+
+            if($request->get('campo2') != NULL){
+                $order_ticket2 = new OrdersTickets;
+                $order_ticket2->id_order = $order->id;
+                $order_ticket2->id_usuario = $pagos_fuera->id_usuario;
+                $order_ticket2->id_tickets = $request->get('campo2');
+                $cursos2 = CursosTickets::where('id','=', $order_ticket2->id_tickets)->first();
+                $order_ticket2->id_curso = $cursos2->id_curso;
+                $order_ticket2->save();
+            }
+
+            if($request->get('campo3') != NULL){
+                $order_ticket3 = new OrdersTickets;
+                $order_ticket3->id_order = $order->id;
+                $order_ticket3->id_usuario = $pagos_fuera->id_usuario;
+                $order_ticket3->id_tickets = $request->get('campo3');
+                $cursos3 = CursosTickets::where('id','=', $order_ticket3->id_tickets)->first();
+                $order_ticket3->id_curso = $cursos3->id_curso;
+                $order_ticket3->save();
+            }
+
+            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
+
+            foreach ($orden_ticket as $details) {
+                if ($details->Cursos->modalidad == 'Online') {
+                    Mail::to($order->User->email)->send(new PlantillaTicket($details));
+                } else {
+                    Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
+                }
+            }
+        }
 
         Session::flash('success', 'Se ha actualizado es comprobante de la orden');
         return redirect()->back()->with('success', 'actualizado es comprobante de la orden.');
