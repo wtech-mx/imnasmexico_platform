@@ -13,7 +13,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="name">Nombre</label><br>
-                        <textarea cols="50" rows="3" disabled>{{$pago_fuera->nombre}}</textarea>
+                        <textarea class="form-control" cols="50" rows="3" disabled>{{$pago_fuera->nombre}}</textarea>
                     </div>
                     <div class="form-group">
                         <label for="correo">Correo</label>
@@ -22,7 +22,7 @@
 
                     <div class="form-group">
                         <label for="curso">Curso</label><br>
-                        <textarea cols="50" rows="3" disabled>{{$pago_fuera->curso}}</textarea>
+                        <textarea class="form-control" cols="50" rows="3" disabled>{{$pago_fuera->curso}}</textarea>
                     </div>
 
                     <div class="row">
@@ -32,23 +32,15 @@
                                 <input id="curso" name="curso" type="text" class="form-control" value="{{$pago_fuera->modalidad}}" disabled>
                             </div>
                         </div>
+
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="telefono">Telefono</label>
                                 <input id="telefono" name="telefono" type="number" class="form-control" value="{{$pago_fuera->telefono}}" disabled>
                             </div>
                         </div>
+
                         <div class="col-6">
-                            <div class="form-group">
-                                <label for="foto">Foto</label>
-                                @if (pathinfo($pago_fuera->foto, PATHINFO_EXTENSION) === 'pdf')
-                                    <iframe src="{{ asset('pago_fuera/'.$pago_fuera->foto) }}" width="100%" height="500px"></iframe>
-                                @else
-                                    <img id="blah" src="{{ asset('pago_fuera/'.$pago_fuera->foto) }}" alt="Imagen" style="width: 300px;">
-                                @endif
-                            </div>
-                        </div>
-                        <div class="col-2">
                             <label>Deudor</label>
                             <div class="form-check">
                                 @if ($pago_fuera->deudor == '1')
@@ -58,12 +50,25 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="col-4">
+
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="abono">Abono</label>
                                 <input id="abono" name="abono" type="number" class="form-control" value="{{$pago_fuera->abono}}" disabled>
                             </div>
                         </div>
+
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="foto">Foto</label> <br>
+                                @if (pathinfo($pago_fuera->foto, PATHINFO_EXTENSION) === 'pdf')
+                                    <iframe src="{{ asset('pago_fuera/'.$pago_fuera->foto) }}" width="100%" ></iframe>
+                                @else
+                                    <img id="blah" src="{{ asset('pago_fuera/'.$pago_fuera->foto) }}" alt="Imagen" style="width: 100%">
+                                @endif
+                            </div>
+                        </div>
+
                     </div>
                 </div>
         </div>

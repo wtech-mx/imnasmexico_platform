@@ -107,6 +107,8 @@ class PagosFueraController extends Controller
                 Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
             }
 
+        if($request->get('deudor') == '1'){
+
             $order = new Orders;
             $order->id_usuario = $payer->id;
             $order->pago = $request->get('pago');
@@ -227,6 +229,7 @@ class PagosFueraController extends Controller
                 }
             }
 
+        }
 
         // $datos = PagosFuera::where('id', '=', $pagos_fuera->id)->first();
         // Mail::to($webpage->email_developer)->bcc($webpage->email_developer_two, 'Destinatario dev 2')->send(new PlantillaPagoExterno($datos));
