@@ -82,6 +82,7 @@ class PagosFueraController extends Controller
         $pagos_fuera->ticket1 = $request->get('campo1');
         $pagos_fuera->ticket2 = $request->get('campo2');
         $pagos_fuera->ticket3 = $request->get('campo3');
+        $pagos_fuera->comentario = $request->get('comentario');
 
         if ($request->hasFile("foto")) {
             $file = $request->file('foto');
@@ -258,6 +259,7 @@ class PagosFueraController extends Controller
         $pagos_fuera = PagosFuera::find($id);
         $pagos_fuera->abono2 = $request->get('abono2');
         $pagos_fuera->fecha_hora_2 = $request->get('fecha_hora_2');
+        $pagos_fuera->comentario = $request->get('comentario');
         $pagos_fuera->deudor = '0';
 
         if ($request->hasFile("foto2")) {

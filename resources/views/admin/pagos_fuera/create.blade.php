@@ -165,6 +165,13 @@
                                 </div>
                             </div>
 
+                            <div class="col-12">
+                                <div class="form-group">
+                                  <label for="comentario">Comentarios y/o Nota</label>
+                                  <textarea class="form-control" name="comentario" id="comentario" cols="30" rows="3"></textarea>
+                                </div>
+                            </div>
+
                         </div>
 
                     </div>

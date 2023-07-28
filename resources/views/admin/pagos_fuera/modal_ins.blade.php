@@ -87,30 +87,41 @@
                             <input type="hidden" name="_method" value="PATCH">
                             <input id="fecha_hora_2" name="fecha_hora_2" type="hidden"  value="{{ $fechaActual }}">
 
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="foto2">Comprobante *</label>
-                                    <input id="foto2" name="foto2" type="file" class="form-control" @if($pago_fuera->foto2) disabled @endif required>
-                                    @error('foto2') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <div class="col-12">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                      <label for="comentario">Comentarios y/o Nota</label>
+                                      <textarea class="form-control" name="comentario" id="comentario" cols="30" rows="3">{{$pago_fuera->comentario}}</textarea>
+                                    </div>
                                 </div>
                             </div>
 
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="abono2">Abono 2</label>
-                                    <input id="abono2" name="abono2" type="number" class="form-control" value="{{ $pago_fuera->abono2 ? $pago_fuera->abono2 : '' }}" @if($pago_fuera->abono2) disabled @endif>
+                            <div class="row" id="deudorCampos">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="foto2">Comprobante *</label>
+                                        <input id="foto2" name="foto2" type="file" class="form-control" @if($pago_fuera->foto2) disabled @endif required>
+                                        @error('foto2') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-6">
-                                @if(!$pago_fuera->foto2 && !$pago_fuera->abono2)
-                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
-                                @endif
-                            </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="abono2">Abono 2</label>
+                                        <input id="abono2" name="abono2" type="number" class="form-control" value="{{ $pago_fuera->abono2 ? $pago_fuera->abono2 : '' }}" @if($pago_fuera->abono2) disabled @endif>
+                                    </div>
+                                </div>
 
-                            <div class="col-6">
-                                <label for="abono2">Fecha y hora del abono 2</label>
-                                <input id="fecha_hora_2" name="fecha_hora_2" type="text" class="form-control" value="{{$pago_fuera->fecha_hora_2}}" disabled>
+                                <div class="col-6">
+                                    @if(!$pago_fuera->foto2 && !$pago_fuera->abono2)
+                                    <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                    @endif
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="abono2">Fecha y hora del abono 2</label>
+                                    <input id="fecha_hora_2" name="fecha_hora_2" type="text" class="form-control" value="{{$pago_fuera->fecha_hora_2}}" disabled>
+                                </div>
                             </div>
                         </form>
 
@@ -141,3 +152,19 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const deudorCheckbox = document.getElementById('deudor');
+        const camposDeudor = document.getElementById('deudorCampos');
+
+        function toggleCamposDeudor() {
+            camposDeudor.style.display = deudorCheckbox.checked ? 'block' : 'none';
+        }
+
+        // Ejecutar al cargar la página
+        toggleCamposDeudor();
+
+        // Ejecutar cuando el checkbox cambie su estado
+        deudorCheckbox.addEventListener('change', toggleCamposDeudor);
+    });
+</script>
