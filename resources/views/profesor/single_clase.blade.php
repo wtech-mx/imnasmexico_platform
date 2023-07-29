@@ -24,9 +24,20 @@
 
     <div class="col-12 col-md-12 mt-3 mb-3 col-md-3 mb-md-3 col-lg-6 mb-lg-5 mt-lg-5">
         <div class="container_card_class">
+            <div class="d-flex justify-content-start mb-3">
+                    <a href="{{ route('clase.index') }}" class="" style="text-decoration: none;margin-right: 2rem;background:#fff; border-radius:16px;padding: 10px;color:#000;box-shadow: 15px 15px 19px -14px rgba(0,0,0,0.64);border: solid 5px #836262;">
+                        <i class="fa fa-pencil"></i> Mis Clases
+                    </a>
+
+                    <a href="{{ route('dashboard.index') }}" class="" style="text-decoration: none;background:#fff; border-radius:16px;padding: 10px;color:#000;box-shadow: 15px 15px 19px -14px rgba(0,0,0,0.64);border: solid 5px #836262;">
+                        <i class="fa fa-calendar"></i> Calendario
+                    </a>
+            </div>
+
             <h3 class="tittle_cursos mb-2">
                 #{{$curso->id}} - {{$curso->nombre}}
             </h3>
+
             <p class="text-left">
                 <strong class="btn_radios_modalidad">{{ $curso->modalidad}}</strong> <br>
                     @php
@@ -59,6 +70,17 @@
                     {{$fechaFormateada2}} - {{$horaFormateada2}} <br>
 
                     <strong class="text-dark">En lista : </strong>
+                    @php
+                        $contador = 0;
+                    @endphp
+                    @foreach ($ordenes as $order)
+                        @if ($order->Orders->estatus == '1')
+                            @php
+                                $contador++;
+                            @endphp
+                        @endif
+                    @endforeach
+                    {{ $contador }}
 
             </p>
             <div class="table-responsive">
@@ -76,7 +98,7 @@
                     @foreach ($ordenes as $order)
 
                     @if ($order->Orders->estatus == '1')
-                    {{ $ordenes->count() }}
+
                     <tr>
                         <td>{{ $order->User->id }}</td>
                         <td>{{ $order->User->name }}</td>

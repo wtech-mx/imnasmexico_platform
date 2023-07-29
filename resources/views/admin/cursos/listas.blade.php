@@ -41,6 +41,21 @@
                             <div class="tab-pane fade show active" id="pills-home{{$ticket->id}}" role="tabpanel" aria-labelledby="pills-home-tab{{$ticket->id}}">
                                 <div class="card-body">
                                     <h5>{{$ticket->nombre}}</h5>
+
+                                    <h5>En lista :
+                                    @php
+                                        $contador = 0;
+                                    @endphp
+                                    @foreach ($ordenes as $order)
+                                        @if ($order->Orders->estatus == '1')
+                                            @php
+                                                $contador++;
+                                            @endphp
+                                        @endif
+                                    @endforeach
+                                    {{ $contador }}
+                                    </h5>
+
                                     <div class="table-responsive">
                                         <table class="table table-flush" id="orden_servicio-{{$ticket->id}}">
                                             <thead class="thead">

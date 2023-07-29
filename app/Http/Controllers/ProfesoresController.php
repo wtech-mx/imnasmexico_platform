@@ -12,6 +12,8 @@ use Session;
 use Hash;
 use Str;
 use Auth;
+use Carbon\Carbon;
+
 class ProfesoresController extends Controller
 {
     public function index_profesores(Request $request){
@@ -29,18 +31,21 @@ class ProfesoresController extends Controller
         return view('profesor.single_clase', compact('curso', 'ordenes', 'tickets','ticketCount'));
     }
 
-    public function index_clase(Request $request){
 
+
+    public function index_clase(Request $request)
+    {
         $id_profesor = auth::user()->id;
-
-        // $cursos = Cursos::where('id_profesor', '=', $id_profesor)->get();
 
         $cursos = Cursos::withCount(['ordersTickets as alumnos_pagados' => function ($query) {
             $query->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
                 ->where('orders.estatus', 1)
                 ->where('cursos.id_profesor', '=', auth::user()->id);
-        }])->get();
-        
+        }])
+        ->whereDate('fecha_inicial', '>=', Carbon::yesterday()) // Filtrar por fecha mayor o igual a ayer
+        ->orderBy('fecha_inicial', 'ASC') // Ordenar por fecha_curso de forma descendente
+        ->get();
+
         return view('profesor.clases', compact('cursos'));
     }
 

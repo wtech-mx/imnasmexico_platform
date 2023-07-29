@@ -18,12 +18,17 @@ class FullCalenderController extends Controller
 
         if($request->ajax()) {
 
-             $data = Event::whereDate('start', '>=', $request->start)
-                       ->whereDate('end',   '<=', $request->end)
-                       ->where('id_profesor', '=', $id_profesor)
-                       ->get(['id', 'title', 'start', 'end']);
+            $data = Event::whereDate('start', '>=', $request->start)
+                        ->whereDate('end',   '<=', $request->end)
+                        ->where('id_profesor', '=', $id_profesor)
+                        ->get(['id', 'title', 'start', 'end']);
 
-             return response()->json($data);
+            // Modificar el título para eliminar el prefijo "Curso de"
+            foreach ($data as $event) {
+                $event->title = str_replace(['Curso de', 'Curso'], '', $event->title);
+            }
+
+            return response()->json($data);
         }
 
         return view('fullcalender');

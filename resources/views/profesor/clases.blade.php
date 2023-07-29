@@ -30,7 +30,9 @@
     @foreach ($cursos as $curso)
     <div class="col-12 col-md-12 mt-3 mb-3 col-md-3 mb-md-3 col-lg-6 mb-lg-5 mt-lg-5">
         <a href="{{ route('single_course.index', $curso->id) }}" style="display: contents;color: #836262;">
-            <div class="container_card_class">
+            <div class="container_card_class" style="box-shadow: 15px 15px 19px -14px rgba(0,0,0,0.64);border-style: solid;
+            border-width: 0px 9px 9px 0px;
+            border-color: #000;">
 
                 <div class="row">
                     <div class="col-4">
@@ -38,11 +40,13 @@
                     </div>
 
                     <div class="col-8">
-                        <h3 class="tittle_cursos mb-2">
+                        <h3 class="tittle_cursos mb-2" style="{{ $curso->modalidad === 'Presencial' ? 'color: #000 !important; ' : '' }}">
                             #{{$curso->id}} - {{$curso->nombre}}
                         </h3>
                         <p class="text-left mb-3">
-                            <strong class="btn_radios_modalidad">{{ $curso->modalidad}}</strong> <br>
+
+                            <strong class="btn_radios_modalidad" style="{{ $curso->modalidad === 'Presencial' ? 'background-color: #000 !important; ' : '' }}">{{ $curso->modalidad}}</strong> <br>
+
                                 @php
                                     $fecha_inicial = $curso->fecha_inicial;
                                     $date = new DateTime($fecha_inicial);
@@ -65,14 +69,13 @@
                                     $horaFormateada2 = $time->format('H:i');
                                 @endphp
                         </p>
-                        <p class="text-left">
+                        <p class="text-left" style="{{ $curso->modalidad === 'Presencial' ? 'color: #000 !important; ' : '' }}">
                                 <strong class="text-dark">Fecha Inicial : </strong>
                                 {{$fechaFormateada}} - {{$horaFormateada}} <br>
 
                                 <strong class="text-dark">Fecha Final :</strong>
                                 {{$fechaFormateada2}} - {{$horaFormateada2}} <br>
-                                <strong class="text-dark">En lista : </strong> {{ $curso->CursosTickets->count() }} Alumn@
-
+                                <strong class="text-dark">En lista : </strong>
                         </p>
                     </div>
                 </div>
