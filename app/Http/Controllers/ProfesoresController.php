@@ -37,17 +37,18 @@ class ProfesoresController extends Controller
     {
         $id_profesor = auth::user()->id;
 
-        $cursos = Cursos::withCount(['ordersTickets as alumnos_pagados' => function ($query) {
-            $query->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
-                ->where('orders.estatus', 1)
-                ->where('cursos.id_profesor', '=', auth::user()->id);
-        }])
-        ->whereDate('fecha_inicial', '>=', Carbon::yesterday()) // Filtrar por fecha mayor o igual a ayer
-        ->orderBy('fecha_inicial', 'ASC') // Ordenar por fecha_curso de forma descendente
-        ->get();
+        $cursos = Cursos::where('id_profesor', $id_profesor)
+            ->withCount(['ordersTickets as alumnos_pagados' => function ($query) {
+                $query->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                    ->where('orders.estatus', 1);
+            }])
+            ->whereDate('fecha_inicial', '>=', Carbon::yesterday())
+            ->orderBy('fecha_inicial', 'ASC')
+            ->get();
 
         return view('profesor.clases', compact('cursos'));
     }
+
 
     public function dashboard(Request $request){
         $id_profesor = auth::user()->id;

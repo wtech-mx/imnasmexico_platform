@@ -75,9 +75,9 @@
                                                         </button>
                                                     @endcan
 
-                                                    <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#recordatorio_modal_{{ $curso->id }}" title="Recordatorios">
+                                                    {{-- <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#recordatorio_modal_{{ $curso->id }}" title="Recordatorios">
                                                         <i class="fa fa-bell"></i> {{ $curso->RecordatoriosCursos->count()}}
-                                                    </a>
+                                                    </a> --}}
 
                                                     @can('cursos-ligas')
                                                         @if ($curso->modalidad == 'Online')
@@ -100,7 +100,7 @@
                                             </tr>
                                         @include('admin.cursos.modal_duplicar')
                                         @include('admin.cursos.modal_materialclase')
-                                        @include('admin.cursos.modal_recordatorio')
+                                        {{-- @include('admin.cursos.modal_recordatorio') --}}
                                         @include('admin.cursos.modal_meet')
                                         @endforeach
                                     </tbody>
