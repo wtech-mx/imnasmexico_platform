@@ -38,7 +38,11 @@
                     @foreach ($clientes as $cliente)
                     <tr>
                         <td>{{ $cliente->id }}</td>
-                        <td>{{ $cliente->name }}</td>
+                        <td>
+                            <a href=" {{ route('perfil.show', $cliente->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">
+                                {{ $cliente->name }}
+                            </a>
+                        </td>
                         <td>{{ $cliente->telefono }}</td>
                         <td>{{ $cliente->email }}</td>
                         <td>
