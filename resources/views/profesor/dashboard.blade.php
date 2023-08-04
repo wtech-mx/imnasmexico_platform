@@ -58,6 +58,14 @@
             </div>
         </div>
     </div>
+
+    <div class="tittle_dash mt-5 mb-5 mt-lg-3 mb-lg-3">
+                <div class="d-flex justify-content-evenly">
+                    <a href="{{ route('signout') }}" style="text-decoration: none;color:#000;">
+                        <h2>Cerrar Sesion</h2>
+                    </a>
+                </div>
+    </div>
 </div>
 
 @endsection

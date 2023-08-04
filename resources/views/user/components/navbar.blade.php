@@ -11,7 +11,11 @@
             </a>
             @else
             {{-- <a class="btn btn-primario me-4" type="button" href="{{ route('signout') }}">Cerrar Sesion</a> --}}
-            <a class="btn btn-primario acceso_alumnas_flex_prim me-4" type="button" href="{{ route('perfil.index', auth()->user()->code) }}">Perfil</a>
+            @if (auth()->user()->cliente == '1')
+                <a class="btn btn-primario acceso_alumnas_flex_prim me-4" type="button" href="{{ route('perfil.index', auth()->user()->code) }}">Perfil</a>
+            @elseif(auth()->user()->cliente == '2')
+                <a class="btn btn-primario acceso_alumnas_flex_prim me-4" type="button" href="{{ route('dashboard.index') }}">Perfil</a>
+            @endif
         @endguest
 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
