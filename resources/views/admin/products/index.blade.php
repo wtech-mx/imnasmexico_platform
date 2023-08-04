@@ -14,6 +14,11 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h3 class="mb-3">Products</h3>
+
+                    <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
+                        ¿Como fucniona?
+                    </a>
+
                    <!-- <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <input type="file" name="file" class="form-control">

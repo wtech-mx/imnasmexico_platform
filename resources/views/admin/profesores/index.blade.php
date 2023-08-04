@@ -14,6 +14,11 @@
 
                         <div class="d-flex justify-content-between">
                             <h3 class="mb-3">Profesores</h3>
+
+                            <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
+                                ¿Como funciona?
+                            </a>
+
                             @can('profesores-create')
                                 <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_profesor" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                     <i class="fa fa-fw fa-edit"></i> Crear

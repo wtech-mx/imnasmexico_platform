@@ -9,9 +9,13 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\Cursos;
 use App\Models\Revoes;
 use App\Models\Estandar;
+use App\Models\Manual;
 use Carbon\Carbon;
 use DateInterval;
 use DateTime;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
+use Str;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -30,10 +34,19 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer('*', function ($view) {
+            // Obtener la URL completa
+            $urlCompleta = URL::current();
+            // Obtener el dominio
+            $dominio = URL::to('/');
+            // Obtener lo que sigue al dominio
+            $ruta = Str::after($urlCompleta, $dominio);
+
             $configuracion = Configuracion::first();
             $webpage = WebPage::first();
             $estandares = Estandar::get();
             $revoes = Revoes::get();
+
+            $manuales = Manual::where('modulo','=',$ruta)->first();
 
             $fechaActual = date('Y-m-d');
             $curso = Cursos::where('estatus', '=', '1')->where('fecha_final', '<', $fechaActual)->OrderBy('fecha_final', 'ASC')->first();
@@ -60,7 +73,7 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
 
-            $view->with(['configuracion' => $configuracion,'webpage' => $webpage,'estandares' => $estandares,'revoes' => $revoes, 'fechaActual' => $fechaActual]);
+            $view->with(['configuracion' => $configuracion,'webpage' => $webpage,'estandares' => $estandares,'revoes' => $revoes, 'fechaActual' => $fechaActual,'manuales' => $manuales]);
         });
     }
 }

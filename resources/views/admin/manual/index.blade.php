@@ -14,6 +14,9 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h3 class="mb-3">Manual</h3>
+                    <a type="button" class="btn btn-sm bg-danger" data-bs-toggle="modal" data-bs-target="#manual_instrucciones" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                        ¿Como fucniona?
+                    </a>
                     <a type="button" class="btn btn-sm bg-primary" data-bs-toggle="modal" data-bs-target="#create_manual" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                         <i class="fa fa-fw fa-plus"></i> Crear
                     </a>

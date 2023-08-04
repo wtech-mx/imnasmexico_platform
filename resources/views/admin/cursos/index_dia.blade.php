@@ -16,6 +16,9 @@
 
                             <h3 class="mb-3">Cursos de Dia</h3>
 
+                            <a type="button" class="btn btn-sm bg-danger" data-bs-toggle="modal" data-bs-target="#manual_instrucciones" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                ¿Como fucniona?
+                            </a>
                         </div>
                     </div>
 

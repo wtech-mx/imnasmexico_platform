@@ -13,17 +13,17 @@
                 <div class="modal-body row">
                     <div class="form-group col-12">
                         <label for="name">Modulo</label>
-                        <input id="modulo" name="modulo" type="text" class="form-control" required value="{{ $item->modulo }}">
+                        <input id="modulo" name="modulo" type="text" class="form-control" required >
                     </div>
 
                     <div class="form-group col-12">
                         <label for="name">Nombre</label>
-                        <input id="nombre" name="nombre" type="text" class="form-control" required value="{{ $item->nombre }}">
+                        <input id="nombre" name="nombre" type="text" class="form-control" required >
                     </div>
 
                     <div class="form-group col-12">
                         <label for="name">Descripcion</label>
-                        <textarea name="descripcion" id="descripcion" cols="30" rows="3" class="form-control">{{ $item->descripcion }}</textarea>
+                        <textarea name="descripcion" id="descripcion" cols="30" rows="3" class="form-control"></textarea>
                     </div>
 
                     <div class="form-group col-6">
@@ -38,7 +38,7 @@
 
                     <div class="form-group col-6">
                         <label for="name">Paso 1</label>
-                        <input id="step1_name" name="step1_name" type="number" class="form-control" >
+                        <input id="step1_name" name="step1_name" type="text" class="form-control" >
                     </div>
 
                     <div class="form-group col-6">
@@ -48,7 +48,7 @@
 
                     <div class="form-group col-6">
                         <label for="name">Paso 2</label>
-                        <input id="step2_name" name="step2_name" type="number" class="form-control" >
+                        <input id="step2_name" name="step2_name" type="text" class="form-control" >
                     </div>
 
                     <div class="form-group col-6">
@@ -58,7 +58,7 @@
 
                     <div class="form-group col-6">
                         <label for="name">Paso 3</label>
-                        <input id="step3_name" name="step3_name" type="number" class="form-control" >
+                        <input id="step3_name" name="step3_name" type="text" class="form-control" >
                     </div>
 
                     <div class="form-group col-6">
@@ -68,7 +68,7 @@
 
                     <div class="form-group col-6">
                         <label for="name">Paso 4</label>
-                        <input id="step4_name" name="step4_name" type="number" class="form-control" >
+                        <input id="step4_name" name="step4_name" type="text" class="form-control" >
                     </div>
 
                     <div class="form-group col-6">
@@ -78,7 +78,7 @@
 
                     <div class="form-group col-6">
                         <label for="name">Paso 5</label>
-                        <input id="step5_name" name="step5_name" type="number" class="form-control" >
+                        <input id="step5_name" name="step5_name" type="text" class="form-control" >
                     </div>
 
                     <div class="form-group col-6">
@@ -88,7 +88,7 @@
 
                     <div class="form-group col-6">
                         <label for="name">Paso 6</label>
-                        <input id="step6_name" name="step6_name" type="number" class="form-control" >
+                        <input id="step6_name" name="step6_name" type="text" class="form-control" >
                     </div>
 
                     <div class="form-group col-6">
@@ -98,7 +98,7 @@
 
                     <div class="form-group col-6">
                         <label for="name">Paso 7</label>
-                        <input id="step7_name" name="step7_name" type="number" class="form-control" >
+                        <input id="step7_name" name="step7_name" type="text" class="form-control" >
                     </div>
 
                     <div class="form-group col-6">
@@ -108,7 +108,7 @@
 
                     <div class="form-group col-6">
                         <label for="name">Paso 8</label>
-                        <input id="step8_name" name="step8_name" type="number" class="form-control" >
+                        <input id="step8_name" name="step8_name" type="text" class="form-control" >
                     </div>
 
                     <div class="form-group col-6">
@@ -118,7 +118,7 @@
 
                     <div class="form-group col-6">
                         <label for="name">Paso 9</label>
-                        <input id="step9_name" name="step9_name" type="number" class="form-control" >
+                        <input id="step9_name" name="step9_name" type="text" class="form-control" >
                     </div>
 
                     <div class="form-group col-6">
@@ -128,7 +128,7 @@
 
                     <div class="form-group col-6">
                         <label for="name">Paso 10</label>
-                        <input id="step10_name" name="step10_name" type="number" class="form-control" >
+                        <input id="step10_name" name="step10_name" type="text" class="form-control" >
                     </div>
 
                     <div class="form-group col-6">

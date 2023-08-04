@@ -16,6 +16,10 @@
                 <div class="d-flex justify-content-between">
                     <h3 class="mb-3">Configuraciones de la Pag Web</h3>
 
+                    <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
+                        ¿Como funciona?
+                    </a>
+
                     <div class="contebnt_btn">
                         <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_estandar" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                             Crear estandar
@@ -93,9 +97,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                               <label for="">Seccion uno Text</label>
-                                              <textarea class="form-control" name="stone_home_text" id="stone_home_text" cols="30" rows="10">
-                                                {{$webpage->stone_home_text}}
-                                              </textarea>
+                                              <textarea class="form-control" name="stone_home_text" id="stone_home_text" cols="30" rows="10">{{$webpage->stone_home_text}}</textarea>
                                             </div>
                                         </div>
 
@@ -109,9 +111,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                               <label for="">Seccion sinco Text</label>
-                                              <textarea class="form-control" name="stfive_home_text" id="stfive_home_text" cols="30" rows="10">
-                                                {{$webpage->stfive_home_text}}
-                                              </textarea>
+                                              <textarea class="form-control" name="stfive_home_text" id="stfive_home_text" cols="30" rows="10">{{$webpage->stfive_home_text}}</textarea>
                                             </div>
                                         </div>
 
@@ -260,9 +260,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                           <label for="">Seccion nosotros Text</label>
-                                          <textarea class="form-control" name="stone_nosotros_text" id="stone_nosotros_text" cols="30" rows="10">
-                                            {{$webpage->stone_nosotros_text}}
-                                          </textarea>
+                                          <textarea class="form-control" name="stone_nosotros_text" id="stone_nosotros_text" cols="30" rows="10">{{$webpage->stone_nosotros_text}}</textarea>
                                         </div>
                                     </div>
                                   </div>
@@ -288,9 +286,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                           <label for="">Seccion instalaciones Text</label>
-                                          <textarea class="form-control" name="stone_instalaciones_text" id="stone_instalaciones_text" cols="30" rows="10">
-                                            {{$webpage->stone_instalaciones_text}}
-                                          </textarea>
+                                          <textarea class="form-control" name="stone_instalaciones_text" id="stone_instalaciones_text" cols="30" rows="10">{{$webpage->stone_instalaciones_text}}</textarea>
                                         </div>
                                     </div>
                                   </div>
@@ -301,18 +297,14 @@
                                     <div class="col-6">
                                       <div class="form-group">
                                         <label for="">Pixel</label>
-                                        <textarea class="form-control" name="wb_all_pixel" id="wb_all_pixel" cols="30" rows="10">
-                                            {{$webpage->wb_all_pixel}}
-                                        </textarea>
+                                        <textarea class="form-control" name="wb_all_pixel" id="wb_all_pixel" cols="30" rows="10">{{$webpage->wb_all_pixel}}</textarea>
                                       </div>
                                     </div>
 
                                     <div class="col-6">
                                       <div class="form-group">
                                         <label for="">Google ANALITICS</label>
-                                        <textarea class="form-control" name="wb_all_analitics" id="wb_all_analitics" cols="30" rows="10">
-                                            {{$webpage->wb_all_analitics}}
-                                        </textarea>
+                                        <textarea class="form-control" name="wb_all_analitics" id="wb_all_analitics" cols="30" rows="10">{{$webpage->wb_all_analitics}}</textarea>
                                       </div>
                                     </div>
 

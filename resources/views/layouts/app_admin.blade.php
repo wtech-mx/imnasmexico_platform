@@ -52,6 +52,8 @@
             @include('layouts.simple_alert')
             @yield('content')
             @include('layouts.footer')
+            @include('admin.manual.modal_instrucciones')
+
         </div>
     </main>
 

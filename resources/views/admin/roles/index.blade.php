@@ -20,7 +20,9 @@ Roles
             <div class="card-header">
                 <div class="d-flex justify-content-between">
                     <h3 class="mb-3">Roles y Permisos</h3>
-
+                    <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
+                        ¿Como funciona?
+                    </a>
                     @can('role-create')
                     <a class="btn" href="{{ route('roles.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">Crear </a>
                     @endcan

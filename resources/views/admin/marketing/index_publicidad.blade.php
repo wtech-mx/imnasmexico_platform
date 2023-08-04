@@ -14,8 +14,11 @@
 
                         <div class="d-flex justify-content-between">
 
-
                             <h3 class="mb-3">Publicidad</h3>
+
+                            <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
+                                ¿Como funciona?
+                            </a>
 
                             @can('publicidad-agregar')
                                 <form method="POST" action="{{ route('publicidad.store') }}" enctype="multipart/form-data" role="form">

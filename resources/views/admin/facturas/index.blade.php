@@ -13,7 +13,12 @@
             <!-- Card header -->
             <div class="card-header">
                 <div class="d-flex justify-content-between">
+
                     <h3 class="mb-3">Facturas</h3>
+
+                    <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
+                        ¿Como funciona?
+                    </a>
                 </div>
             </div>
 
