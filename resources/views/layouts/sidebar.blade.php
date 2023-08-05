@@ -401,6 +401,17 @@
                 </li>
                 </ul>
             </div>
+
+            <div class="collapse " id="sistem">
+                <ul class="nav ms-4">
+                <li class="nav-item ">
+                    <a class="nav-link {{ (Request::is('recursos*') ? 'show' : '') }}" href="{{ route('recursos.index') }}">
+                    <span class="sidenav-mini-icon">U</span>
+                    <span class="sidenav-normal">Recursos</span>
+                    </a>
+                </li>
+                </ul>
+            </div>
             </li>
         @endcan
       </ul>

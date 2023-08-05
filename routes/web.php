@@ -326,6 +326,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/manual/store', [App\Http\Controllers\ManualController::class, 'store'])->name('manual.store');
     Route::patch('/admin/manual/update/{id}', [App\Http\Controllers\ManualController::class, 'update'])->name('manual.update');
 
+    // =============== M O D U L O   R E C U R S O S ===============================
+    Route::get('/recursos', [App\Http\Controllers\RecursosController::class, 'index'])->name('recursos.index');
+    Route::post('/recursos/create', [App\Http\Controllers\RecursosController::class, 'store'])->name('recursos.store');
+    Route::patch('/recursos/update/{id}', [App\Http\Controllers\RecursosController::class, 'update'])->name('recursos.update');
+
 });
 
 // Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');
