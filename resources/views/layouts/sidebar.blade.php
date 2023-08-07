@@ -407,7 +407,7 @@
                 <li class="nav-item ">
                     <a class="nav-link {{ (Request::is('recursos*') ? 'show' : '') }}" href="{{ route('recursos.index') }}">
                     <span class="sidenav-mini-icon">U</span>
-                    <span class="sidenav-normal">Recursos</span>
+                    <span class="sidenav-normal">Biblioteca</span>
                     </a>
                 </li>
                 </ul>

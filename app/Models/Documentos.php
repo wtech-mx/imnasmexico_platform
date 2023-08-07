@@ -21,6 +21,8 @@ class Documentos extends Model
         'foto_tam_infantil',
         'firma',
         'carta_compromiso',
+        'tipo',
+        'folio',
     ];
 
     public function User()
