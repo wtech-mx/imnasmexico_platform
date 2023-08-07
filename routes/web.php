@@ -326,6 +326,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/manual/store', [App\Http\Controllers\ManualController::class, 'store'])->name('manual.store');
     Route::patch('/admin/manual/update/{id}', [App\Http\Controllers\ManualController::class, 'update'])->name('manual.update');
 
+    // =============== M O D U L O  Documentos tipos ===============================
+    Route::get('/admin/documentos/tipos', [App\Http\Controllers\TipodocumentosController::class, 'index'])->name('documentos.index');
+    Route::post('/admin/documentos/store', [App\Http\Controllers\TipodocumentosController::class, 'store'])->name('documentos.store');
+    Route::patch('/admin/documentos/update/{id}', [App\Http\Controllers\TipodocumentosController::class, 'update'])->name('documentos.update');
+
     // =============== M O D U L O   R E C U R S O S ===============================
     Route::get('/recursos', [App\Http\Controllers\RecursosController::class, 'index'])->name('recursos.index');
     Route::post('/recursos/create', [App\Http\Controllers\RecursosController::class, 'store'])->name('recursos.store');

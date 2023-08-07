@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tipodocumentos extends Model
+class Tipodocumentos extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,6 @@ class tipodocumentos extends Model
     protected $fillable = [
         'tipo',
         'nombre',
-        'curp',
         'img_portada',
         'img_reverso',
     ];
