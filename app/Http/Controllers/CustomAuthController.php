@@ -31,7 +31,6 @@ class CustomAuthController extends Controller
         //                 ->withSuccess('Registrado');
         // }
 
-
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))){
