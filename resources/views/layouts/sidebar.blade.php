@@ -444,6 +444,7 @@
                             </li>
                             </ul>
                         </div>
+                        @endcan
 
 <li class="nav-item">
     <a data-bs-toggle="collapse" href="#pagesExamplesdocumentos" class="nav-link {{ (Request::is('admin/reporte*') ? 'active' : '') }}" aria-controls="pagesExamplesdocumentos" role="button" aria-expanded="false">
@@ -564,9 +565,11 @@
                     <span class="sidenav-normal">Pagina</span>
                     </a>
                 </li>
->>>>>>> b5f7fea69073f3e381768ccdd39563cf2be52551
+
                 </ul>
             </div>
+
+            @endcan
             <div class="tab-pane fade" id="pills-paquetes" role="tabpanel" aria-labelledby="pills-paquetes-tab" tabindex="0">
                 <ul class="navbar-nav">
 
