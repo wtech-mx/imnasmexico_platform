@@ -331,6 +331,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/documentos/store', [App\Http\Controllers\TipodocumentosController::class, 'store'])->name('documentos.store');
     Route::patch('/admin/documentos/update/{id}', [App\Http\Controllers\TipodocumentosController::class, 'update'])->name('documentos.update');
 
+    Route::get('/admin/documentos/generar', [App\Http\Controllers\DocumentosController::class, 'index'])->name('generar_documentos.index');
+
     // =============== M O D U L O   R E C U R S O S ===============================
     Route::get('/recursos', [App\Http\Controllers\RecursosController::class, 'index'])->name('recursos.index');
     Route::post('/recursos/create', [App\Http\Controllers\RecursosController::class, 'store'])->name('recursos.store');
@@ -338,8 +340,16 @@ Route::group(['middleware' => ['auth']], function() {
 
 });
 
-// Route::get('/admin/pagos-por-fuera/inscripcion', [App\Http\Controllers\StripePaymentController::class, 'inscripcion'])->name('pagos.inscripcion');
-// Route::post('/admin/pagos-por-fuera/inscripcion/store', [App\Http\Controllers\StripePaymentController::class, 'store'])->name('pagos.store');
+// Rutas para el sistema de documentos
+Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
+    Route::get('login', function () {
+        return view('cam.auth.login');
+    });
+
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/expedientes', [HomeController::class, 'index_cam'])->name('cam.dashboard');
+    });
+});
 
 
 // Route::controller(StripePaymentController::class)->group(function(){
