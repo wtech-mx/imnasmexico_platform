@@ -29,16 +29,22 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="usuario" role="tabpanel" aria-labelledby="usuario-tab">
                                <div class="row">
-                                    <div class="col-12">
 
-                                    </div>
                                </div>
                             </div>
 
                             <div class="tab-pane fade" id="sin_usuario" role="tabpanel" aria-labelledby="sin_usuario-tab">
                                <div class="row">
                                     <div class="col-12">
+                                        <div class="form-group col-6">
+                                            <label for="name">Nombre o Nombres</label>
+                                            <input id="nombre" name="nombre" type="text" class="form-control" required >
+                                        </div>
 
+                                        <div class="form-group col-6">
+                                            <label for="name">Apellidos</label>
+                                            <input id="nombre" name="nombre" type="text" class="form-control" required >
+                                        </div>
                                     </div>
                                </div>
                             </div>
