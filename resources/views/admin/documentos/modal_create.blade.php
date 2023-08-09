@@ -12,7 +12,29 @@
                 @csrf
 
                 <div class="modal-body row">
-                    <div class="col-12">
+                        <div class="form-group col-12">
+                            <label for="name">Curso</label>
+                            <input id="curso" name="curso" type="text" class="form-control" required >
+                        </div>
+
+                        <div class="form-group col-7">
+                            <label for="name">Tipo de documento</label>
+                            <select name="tipo" id="tipo" class="form-select" required>
+                                <option value="Cedula de indetidad">CN - Cedula de identidad papel</option>
+                                <option value="Credencial">CN - Credencial plastico</option>
+                                <option value="Diploma">CN - Diploma</option>
+                                <option value="Titulo Honorifico con QR">CN - Titulo Honorifico con QR</option>
+                                <option value="Titulo Honorifico con QR">CN - Titulo Honorifico CFC</option>
+                                <option value="Tira de materias">CN - Tira de materias</option>
+                                <option value="Diploma_STPS">Diploma STPS</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-5">
+                            <label for="name">Fecha</label>
+                            <input id="fecha" name="fecha" type="date" class="form-control" required >
+                        </div>
+
 
                         <div class="d-flex justify-content-center">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -29,27 +51,45 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="usuario" role="tabpanel" aria-labelledby="usuario-tab">
                                <div class="row">
+                                    <label for="name">Alumno</label>
+                                    <select name="id_usuario" id="usuarioSelect" class="form-select">
+                                        @foreach ($alumnos as $item)
+                                            <option value="{{$item->id}}">{{$item->name}}</option>
+                                        @endforeach
+                                    </select>
 
+                                    <label for="name">Cursos</label>
+                                    <select id="ordenesSelect" disabled>
+                                        <option value="">Selecciona una orden</option>
+                                        <!-- Opciones de órdenes aquí -->
+                                    </select>
                                </div>
                             </div>
 
                             <div class="tab-pane fade" id="sin_usuario" role="tabpanel" aria-labelledby="sin_usuario-tab">
                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group col-6">
-                                            <label for="name">Nombre o Nombres</label>
-                                            <input id="nombre" name="nombre" type="text" class="form-control" required >
-                                        </div>
+                                    <div class="form-group col-6">
+                                        <label for="name">Nombre</label>
+                                        <input id="name" name="name" type="text" class="form-control" required >
+                                    </div>
 
-                                        <div class="form-group col-6">
-                                            <label for="name">Apellidos</label>
-                                            <input id="nombre" name="nombre" type="text" class="form-control" required >
-                                        </div>
+                                    <div class="form-group col-6">
+                                        <label for="name">Apellidos</label>
+                                        <input id="apellido" name="apellido" type="text" class="form-control" required >
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="name">Correo</label>
+                                        <input id="email" name="email" type="email" class="form-control" required >
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="name">Telefono</label>
+                                        <input id="telefono" name="telefono" type="number" class="form-control" required >
                                     </div>
                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
 
                 <div class="modal-footer">

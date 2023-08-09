@@ -332,6 +332,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/documentos/update/{id}', [App\Http\Controllers\TipodocumentosController::class, 'update'])->name('documentos.update');
 
     Route::get('/admin/documentos/generar', [App\Http\Controllers\DocumentosController::class, 'index'])->name('generar_documentos.index');
+    Route::get('/obtener-ordenes/{usuario}', [App\Http\Controllers\DocumentosController::class, 'obtenerOrdenes']);
+
 
     // =============== M O D U L O   R E C U R S O S ===============================
     Route::get('/recursos', [App\Http\Controllers\RecursosController::class, 'index'])->name('recursos.index');

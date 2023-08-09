@@ -34,7 +34,7 @@ Generar Documentos
                     </thead>
                     @foreach ($documentos as $item)
                     <tr>
-                        <td>{{ $item->nombre }}</td>
+                        <td>{{ $item->User->name }}</td>
                         <td>{{ $item->tipo }}</td>
                         <td>
                             <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#manual_update_{{ $item->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
@@ -60,6 +60,40 @@ Generar Documentos
     const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
       searchable: true,
       fixedHeight: false
+    });
+
+</script>
+
+<script>
+    const usuarioSelect = document.getElementById('usuarioSelect');
+    const ordenesSelect = document.getElementById('ordenesSelect');
+
+    usuarioSelect.addEventListener('change', function() {
+        const usuarioId = this.value;
+
+        if (usuarioId) {
+            // Habilitar el segundo select
+            ordenesSelect.removeAttribute('disabled');
+
+            // Realizar la solicitud AJAX para obtener las órdenes del usuario
+            fetch(`/obtener-ordenes/${usuarioId}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data); // Verifica si la relación "curso" se está cargando correctamente
+                    ordenesSelect.innerHTML = '<option value="">Selecciona una orden</option>';
+                    data.forEach(ordenTicket => {
+                        console.log(ordenTicket.CursosTickets.nombre);
+                        const option = document.createElement('option');
+                        option.value = ordenTicket.id;
+                        option.textContent = ordenTicket.CursosTickets ? ordenTicket.CursosTickets.nombre : 'Nombre no disponible';
+                        ordenesSelect.appendChild(option);
+                    });
+            });
+        } else {
+            // Si no se selecciona un usuario, deshabilitar el segundo select
+            ordenesSelect.innerHTML = '<option value="">Selecciona una orden</option>';
+            ordenesSelect.setAttribute('disabled', true);
+        }
     });
 </script>
 
