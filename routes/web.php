@@ -5,6 +5,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\WebhooksController;
+use App\Http\Controllers\ExpedientesController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\RevoesController;
 
@@ -350,6 +351,7 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
 
     Route::middleware(['auth'])->group(function () {
         Route::get('/expedientes', [HomeController::class, 'index_cam'])->name('cam.dashboard');
+        Route::get('/expediente', [ExpedientesController::class, 'view'])->name('view.expediente');
     });
 });
 

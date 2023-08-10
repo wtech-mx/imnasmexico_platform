@@ -21,7 +21,7 @@ Expedientes
                             </a>
 
                             @can('cursos-create')
-                            <a class="btn btn-sm btn-success" href="{{ route('cursos.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            <a class="btn btn-sm btn-success" href="{{ route('view.expediente') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 <i class="fa fa-fw fa-edit"></i> Crear
                             </a>
                             @endcan

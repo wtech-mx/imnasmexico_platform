@@ -1,387 +1,383 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-   Crear Curso
+Expediente
 @endsection
 
 @section('content')
-<div class="container-fluid py-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="multisteps-form">
+<div class="main-content position-relative max-height-vh-100 h-100">
+    <div class="card shadow-lg mx-4 card-profile-bottom">
+        <div class="card-body p-3">
+        <div class="row gx-4">
+            <div class="col-auto">
+            <div class="avatar avatar-xl position-relative">
+                <img src="{{asset('assets/user/logotipos/cam.png')}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+            </div>
+            </div>
+            <div class="col-auto my-auto">
+            <div class="h-100">
+                <h5 class="mb-1">
+                Sayo Kravits
+                </h5>
+                <p class="mb-0 font-weight-bold text-sm">
+                Evaluador independiente
+                </p>
+            </div>
+            </div>
+            <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+            <div class="nav-wrapper position-relative end-0">
+                <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
+                    <i class="ni ni-app"></i>
+                    <span class="ms-2">Inicio</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                    <i class="ni ni-email-83"></i>
+                    <span class="ms-2">Documentación</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                    <i class="ni ni-settings-gear-65"></i>
+                    <span class="ms-2">Estandares</span>
+                    </a>
+                </li>
+                </ul>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="container-fluid py-4">
+        <div class="row mt-3">
+        <div class="col-12 col-md-6 col-xl-4">
+            <div class="card h-100">
+            <div class="card-header pb-0 p-3">
+                <h6 class="mb-0">Checklist</h6>
+            </div>
+            <div class="card-body p-3">
+                <h6 class="text-uppercase text-body text-xs font-weight-bolder">Primera Fase</h6>
+                <ul class="list-group">
+                <li class="list-group-item border-0 px-0">
+                    <div class="form-check form-switch ps-0">
+                    <input class="form-check-input ms-0" type="checkbox" id="flexSwitchCheckDefault" checked>
+                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="flexSwitchCheckDefault">Email me when someone follows me</label>
+                    </div>
+                </li>
+                <li class="list-group-item border-0 px-0">
+                    <div class="form-check form-switch ps-0">
+                    <input class="form-check-input ms-0" type="checkbox" id="flexSwitchCheckDefault1" checked>
+                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="flexSwitchCheckDefault1">Email me when someone answers on my post</label>
+                    </div>
+                </li>
+                <li class="list-group-item border-0 px-0">
+                    <div class="form-check form-switch ps-0">
+                    <input class="form-check-input ms-0" type="checkbox" id="flexSwitchCheckDefault2">
+                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="flexSwitchCheckDefault2">Email me when someone mentions me</label>
+                    </div>
+                </li>
+                </ul>
+                <h6 class="text-uppercase text-body text-xs font-weight-bolder mt-4">Segunda Fase</h6>
+                <ul class="list-group">
+                <li class="list-group-item border-0 px-0">
+                    <div class="form-check form-switch ps-0">
+                    <input class="form-check-input ms-0" type="checkbox" id="flexSwitchCheckDefault3">
+                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="flexSwitchCheckDefault3">New launches and projects</label>
+                    </div>
+                </li>
+                <li class="list-group-item border-0 px-0">
+                    <div class="form-check form-switch ps-0">
+                    <input class="form-check-input ms-0" type="checkbox" id="flexSwitchCheckDefault4">
+                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="flexSwitchCheckDefault4">Monthly product updates</label>
+                    </div>
+                </li>
+                <li class="list-group-item border-0 px-0 pb-0">
+                    <div class="form-check form-switch ps-0">
+                    <input class="form-check-input ms-0" type="checkbox" id="flexSwitchCheckDefault5">
+                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0" for="flexSwitchCheckDefault5">Subscribe to newsletter</label>
+                    </div>
+                </li>
+                </ul>
+            </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6 col-xl-4 mt-md-0 mt-4">
+            <div class="card h-100">
+            <div class="card-header pb-0 p-3">
+                    <h6 class="mb-0">Información Evaluador</h6>
+            </div>
+            <div class="card-body p-3">
+                <p class="text-sm">
+                Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).
+                </p>
+                <hr class="horizontal gray-light my-4">
+                <ul class="list-group">
+                <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; Alec M. Thompson</li>
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; (44) 123 1234 123</li>
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; alecthompson@mail.com</li>
+                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong> &nbsp; USA</li>
+                <li class="list-group-item border-0 ps-0 pb-0">
+                    <strong class="text-dark text-sm">Social:</strong> &nbsp;
+                    <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
+                    <i class="fab fa-facebook fa-lg"></i>
+                    </a>
+                    <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
+                    <i class="fab fa-twitter fa-lg"></i>
+                    </a>
+                    <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
+                    <i class="fab fa-instagram fa-lg"></i>
+                    </a>
+                </li>
+                </ul>
+            </div>
+            </div>
+        </div>
+        <div class="col-12 col-xl-4 mt-xl-0 mt-4">
+            <div class="card h-100">
+            <div class="card-header pb-0 p-3">
                 <div class="row">
-                    <div class="col-12 col-lg-8 mx-auto mt-4 mb-sm-5 mb-3">
-                        <div class="multisteps-form__progress">
-                            <button class="multisteps-form__progress-btn js-active" type="button" title="Product Info">
-                            <span>1. Datos Generales</span>
-                            </button>
-                            <button class="multisteps-form__progress-btn" type="button" title="Media">2. Fecha y Hora</button>
-                            <button class="multisteps-form__progress-btn" type="button" title="Socials">3. Temario</button>
-                            <button class="multisteps-form__progress-btn" type="button" title="Pricing">4. Tickets</button>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-12 col-lg-8 m-auto">
-                                <form class="multisteps-form__form mb-8"  method="POST" action="{{ route('cursos.store') }}" enctype="multipart/form-data" role="form" style="height: 400px;">
-                                    @csrf
-                                    @include('admin.cursos.modal_imagen')
-                                    <!--single Datos Generales panel-->
-                                    <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
-                                        <h5 class="font-weight-bolder">Datos Generales</h5>
-                                        <div class="multisteps-form__content">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="fecha">Nombre</label>
-                                                        <input  id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="fecha">Descripcion</label>
-                                                        <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control"></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            Seleccionar foto
-                                                        </button>
-                                                        <input type="hidden" name="foto" id="foto">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <div class="input-group">
-                                                        <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 150px; height: 150px;"/>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="nota">Enlace de Clase Grabada</label>
-                                                        <input type="text" id="clase_grabada" name="clase_grabada" class="form-control" >
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="estandar">Seleccionar Estandar</label>
-                                                        <select class="form-control" id="id_estandar" name="id_estandar">
-                                                          @foreach ($estandares as $estandar)
-                                                          <option value="">Seleccionar Estandar</option>
-                                                          <option value="{{ $estandar->id }}">{{ $estandar->name }}</option>
-                                                          @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="estandar">Seleccionar Carpeta Compartida</label>
-                                                        <select class="form-control" id="carpeta" name="carpeta">
-                                                            <option value="">Seleccionar carpeta</option>
-                                                          @foreach ($carpetas as $carpeta)
-                                                          <option value="{{ $carpeta->id }}">{{ $carpeta->nombre }}</option>
-                                                          @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="estandar">Seleccionar Profesor</label>
-                                                        <select class="form-control" id="id_profesor" name="id_profesor">
-                                                            <option value="">Seleccionar Profesor</option>
-                                                            @foreach ($profesores as $profesor)
-                                                            <option value="{{ $profesor->id }}">{{ $profesor->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div class="button-row d-flex mt-4">
-                                                <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                     <!--single Fecha y hora panel-->
-                                    <div class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn">
-                                        <h5 class="font-weight-bolder">Fecha y Hora</h5>
-                                        <div class="multisteps-form__content">
-                                            <div class="row">
-                                                <div class="col-3">
-                                                    <div class="form-group">
-                                                        <label for="nota">Fecha Inicial</label>
-                                                        <input type="date" id="fecha_inicial" name="fecha_inicial" class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-3">
-                                                    <div class="form-group">
-                                                        <label for="nota">Hora Inicial</label>
-                                                        <input type="time" id="hora_inicial" name="hora_inicial" class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-3">
-                                                    <div class="form-group">
-                                                        <label for="nota">Fecha Final</label>
-                                                        <input type="date" id="fecha_final" name="fecha_final" class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-3">
-                                                    <div class="form-group">
-                                                        <label for="nota">Hora Final</label>
-                                                        <input type="time" id="hora_final" name="hora_final" class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-4">
-                                                    <label for="nota">Sin Hora F.</label>
-                                                    <div class="form-group">
-                                                        <input class="form-check-input" type="checkbox" value="1" id="sin_fin" name="sin_fin">
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label for="nota">Categoria</label>
-                                                        <select id="categoria" name="categoria" class="form-control">
-                                                            <option value="Faciales">Faciales</option>
-                                                            <option value="Corporales">Corporales</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label for="nota">Modalidad</label>
-                                                        <select id="modalidad" name="modalidad" class="form-control">
-                                                            <option value="Online">Online</option>
-                                                            <option value="Presencial">Presencial</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-5">
-                                                    <div class="form-group">
-                                                        <label for="fecha">Liga Meet/Direccion</label>
-                                                        <input type="text" id="recurso" name="recurso" class="form-control">
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-2">
-                                                    <label for="nota">Destacado</label>
-                                                    <div class="form-group">
-                                                        <input class="form-check-input" type="checkbox" value="1" id="destacado" name="destacado">
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-3">
-                                                    <label for="nota">Seccion UNAM</label>
-                                                    <div class="form-group">
-                                                        <input class="form-check-input" type="checkbox" value="1" id="seccion_unam" name="seccion_unam" >
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-2">
-                                                    <label for="nota">Publicar</label>
-                                                    <div class="form-group">
-                                                        <input class="form-check-input" type="checkbox" value="1" id="estatus" name="estatus" checked>
-
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-2">
-                                                    <div class="form-group">
-                                                        <input class="form-check-input" type="checkbox" value="1" id="sep" name="sep">
-                                                        <label for="nota">RVOE</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-2">
-                                                    <div class="form-group">
-                                                        <input class="form-check-input" type="checkbox" value="1" id="unam" name="unam">
-                                                        <label for="nota">UNAM</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-2">
-                                                    <div class="form-group">
-                                                        <input class="form-check-input" type="checkbox" value="1" id="stps" name="stps">
-                                                        <label for="nota">STPS</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-3">
-                                                    <div class="form-group">
-                                                        <input class="form-check-input" type="checkbox" value="1" id="redconocer" name="redconocer">
-                                                        <label for="nota">RedConocer</label>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-check col-3">
-                                                    <div class="form-group">
-                                                        <input class="form-check-input" type="checkbox" value="1" id="imnas" name="imnas">
-                                                        <label for="nota">IMNAS</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="form-check col-2">
-                                                <div class="form-group">
-                                                    <input class="form-check-input" type="checkbox" value="1" id="titulo_hono" name="titulo_hono">
-                                                    <label for="nota">Titulo Honorifico</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="button-row d-flex mt-4">
-                                                <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
-                                                <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--single Temario panel-->
-                                    <div class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn">
-                                        <h5 class="font-weight-bolder">Temario</h5>
-                                        <div class="multisteps-form__content">
-                                            <div class="row">
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="fecha">Objetivo</label>
-                                                        <textarea name="objetivo" id="objetivo" cols="10" rows="3" class="form-control"></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="fecha">Temario</label>
-                                                        <textarea name="temario" id="temario" cols="10" rows="3" class="form-control"></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="fecha">RVOE</label>
-                                                        <textarea name="texto_rvoe" id="texto_rvoe" cols="10" rows="3" class="form-control"></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <div class=" col-12">
-                                                    <div class="form-group">
-                                                        <label for="nota">CONOCER</label>
-                                                        <textarea name="texto_conocer" id="texto_conocer" cols="10" rows="3" class="form-control"></textarea>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <div class="form-group">
-                                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                Materiales de Clase
-                                                            </button>
-                                                            <input type="hidden" name="materiales" id="materiales">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <div class="form-group">
-                                                            <label for="fecha">Liga Material</label>
-                                                            <input type="text" id="btn_cotizacion" name="btn_cotizacion" class="form-control">
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <div class="form-group">
-                                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                PDF Descarga
-                                                            </button>
-                                                            <input type="hidden" name="pdf" id="pdf">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="button-row d-flex mt-4">
-                                                <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
-                                                <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--single Temario panel-->
-                                    <div class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn">
-                                        <h5 class="font-weight-bolder">Tickets</h5>
-                                        <div class="multisteps-form__content">
-                                            <div class="row">
-                                                <div id="formulario" class="mt-4">
-                                                    <button type="button" class="clonar btn btn-secondary btn-sm">Agregar</button>
-                                                    <div class="clonars">
-                                                        <div class="row">
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="fecha">Nombre</label>
-                                                                    <input  id="nombre_ticket[]" name="nombre_ticket[]" type="text" class="form-control">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <div class="form-group">
-                                                                    <label for="num_sesion">Fecha inicial</label>
-                                                                    <input  id="fecha_inicial_ticket[]" name="fecha_inicial_ticket[]" type="date" class="form-control" >
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <div class="form-group">
-                                                                    <label for="num_sesion">Fecha final</label>
-                                                                    <input  id="fecha_final_ticket[]" name="fecha_final_ticket[]" type="date" class="form-control" >
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-4">
-                                                                <div class="form-group">
-                                                                    <label for="num_sesion">Precio</label>
-                                                                    <input  id="precio[]" name="precio[]" type="number" class="form-control" >
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="descripcion">Descripcion</label><br>
-                                                                    <textarea name="descripcion_ticket[]" id="descripcion_ticket[]" cols="10" rows="3" class="form-control"></textarea>
-                                                                </div>
-                                                            </div>
-
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="button-row d-flex mt-4">
-                                                <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
-                                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div>
+                    <div class="col-md-8 d-flex align-items-center">
+                        <h6 class="mb-0">Evaluadores</h6>
+                        <div class="col-md-4 text-end">
+                            <a href="javascript:;">
+                            <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="card-body p-3">
+                <ul class="list-group">
+                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                    <div class="avatar me-3">
+                    <img src="../../../assets/img/kal-visuals-square.jpg" alt="kal" class="border-radius-lg shadow">
+                    </div>
+                    <div class="d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="mb-0 text-sm">Sophie B.</h6>
+                    <p class="mb-0 text-xs">Hi! I need more information..</p>
+                    </div>
+                    <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Ver</a>
+                </li>
+                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                    <div class="avatar me-3">
+                    <img src="../../../assets/img/marie.jpg" alt="kal" class="border-radius-lg shadow">
+                    </div>
+                    <div class="d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="mb-0 text-sm">Anne Marie</h6>
+                    <p class="mb-0 text-xs">Awesome work, can you..</p>
+                    </div>
+                    <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Ver</a>
+                </li>
+                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                    <div class="avatar me-3">
+                    <img src="../../../assets/img/ivana-square.jpg" alt="kal" class="border-radius-lg shadow">
+                    </div>
+                    <div class="d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="mb-0 text-sm">Ivanna</h6>
+                    <p class="mb-0 text-xs">About files I can..</p>
+                    </div>
+                    <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Ver</a>
+                </li>
+                <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                    <div class="avatar me-3">
+                    <img src="../../../assets/img/team-4.jpg" alt="kal" class="border-radius-lg shadow">
+                    </div>
+                    <div class="d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="mb-0 text-sm">Peterson</h6>
+                    <p class="mb-0 text-xs">Have a great afternoon..</p>
+                    </div>
+                    <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Ver</a>
+                </li>
+                <li class="list-group-item border-0 d-flex align-items-center px-0">
+                    <div class="avatar me-3">
+                    <img src="../../../assets/img/team-3.jpg" alt="kal" class="border-radius-lg shadow">
+                    </div>
+                    <div class="d-flex align-items-start flex-column justify-content-center">
+                    <h6 class="mb-0 text-sm">Nick Daniel</h6>
+                    <p class="mb-0 text-xs">Hi! I need more information..</p>
+                    </div>
+                    <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Ver</a>
+                </li>
+                </ul>
+            </div>
+            </div>
         </div>
+        </div>
+        <div class="row mt-4">
+        <div class="col-12">
+            <div class="card mb-4">
+            <div class="card-header pb-0 p-3">
+                <h6 class="mb-1">Expedientes Evaluadores</h6>
+                <p class="text-sm">Architects design houses</p>
+            </div>
+            <div class="card-body p-3">
+                <div class="row">
+                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                    <div class="card card-blog card-plain">
+                    <div class="position-relative">
+                        <a class="d-block shadow-xl border-radius-xl">
+                        <img src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                        </a>
+                    </div>
+                    <div class="card-body px-1 pb-0">
+                        <p class="text-gradient text-dark mb-2 text-sm">Project #1</p>
+                        <a href="javascript:;">
+                        <h5>
+                            Bubbles
+                        </h5>
+                        </a>
+                        <p class="mb-4 text-sm">
+                        As Bubble works through a huge amount of internal management turmoil.
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between">
+                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View Project</button>
+                        <div class="avatar-group mt-2">
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Elena Morison">
+                            <img alt="Image placeholder" src="{{asset('assets/user/icons/ama-de-casa.webp')}}">
+                            </a>
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Milly">
+                            <img alt="Image placeholder" src="{{asset('assets/user/icons/apasionada.webp')}}">
+                            </a>
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nick Daniel">
+                            <img alt="Image placeholder" src="{{asset('assets/user/icons/ESTUDIANTE-.webp')}}">
+                            </a>
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Peterson">
+                            <img alt="Image placeholder" src="{{asset('assets/user/icons/EMPRENDEDORA.webp')}}">
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                    <div class="card card-blog card-plain">
+                    <div class="position-relative">
+                        <a class="d-block shadow-xl border-radius-xl">
+                        <img src="{{asset('assets/user/logotipos/imnas.png')}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
+                        </a>
+                    </div>
+                    <div class="card-body px-1 pb-0">
+                        <p class="text-gradient text-dark mb-2 text-sm">Project #2</p>
+                        <a href="javascript:;">
+                        <h5>
+                            Scandinavian
+                        </h5>
+                        </a>
+                        <p class="mb-4 text-sm">
+                        Music is something that every person has his or her own specific opinion about.
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between">
+                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View Project</button>
+                        <div class="avatar-group mt-2">
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nick Daniel">
+                            <img alt="Image placeholder" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}">
+                            </a>
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Peterson">
+                            <img alt="Image placeholder" src="{{asset('assets/user/icons/cheque-de-pago.png')}}">
+                            </a>
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Elena Morison">
+                            <img alt="Image placeholder" src="{{asset('assets/user/icons/depositar.png')}}">
+                            </a>
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Milly">
+                            <img alt="Image placeholder" src="{{asset('assets/user/icons/meet.png')}}">
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                    <div class="card card-blog card-plain">
+                    <div class="position-relative">
+                        <a class="d-block shadow-xl border-radius-xl">
+                        <img src="{{asset('assets/user/logotipos/DOCTORA.png')}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                        </a>
+                    </div>
+                    <div class="card-body px-1 pb-0">
+                        <p class="text-gradient text-dark mb-2 text-sm">Project #3</p>
+                        <a href="javascript:;">
+                        <h5>
+                            Minimalist
+                        </h5>
+                        </a>
+                        <p class="mb-4 text-sm">
+                        Different people have different taste, and various types of music.
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between">
+                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View Project</button>
+                        <div class="avatar-group mt-2">
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Peterson">
+                            <img alt="Image placeholder" src="{{asset('assets/user/icons/document.png')}}">
+                            </a>
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nick Daniel">
+                            <img alt="Image placeholder" src="{{asset('assets/user/icons/edificio.png')}}">
+                            </a>
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Milly">
+                            <img alt="Image placeholder" src="{{asset('assets/user/icons/email.png')}}">
+                            </a>
+                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Elena Morison">
+                            <img alt="Image placeholder" src="{{asset('assets/user/icons/location-pointer.png')}}">
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                    <div class="card h-100 card-plain border">
+                    <div class="card-body d-flex flex-column justify-content-center text-center">
+                        <a href="javascript:;">
+                        <i class="fa fa-plus text-secondary mb-3"></i>
+                        <h5 class=" text-secondary"> New project </h5>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <footer class="footer pt-3  ">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+                <div class="copyright text-center text-sm text-muted text-lg-start">
+                © <script>
+                    document.write(new Date().getFullYear())
+                </script>,
+                made with <i class="fa fa-heart"></i> by
+                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Web Tech</a>
+                for a better web.
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                <li class="nav-item">
+                    <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Web Tech</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                </li>
+                </ul>
+            </div>
+            </div>
+        </div>
+        </footer>
     </div>
 </div>
 @endsection
 
-@section('js_custom')
+@section('datatable')
 
 @endsection
