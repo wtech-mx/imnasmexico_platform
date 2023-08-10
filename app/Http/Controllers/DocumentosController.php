@@ -10,13 +10,22 @@ use App\Models\User;
 use Codexshaper\WooCommerce\Facades\Order;
 use Illuminate\Support\Str;
 use Hash;
+use App\Models\Cursos;
+use App\Models\Tipodocumentos;
+
 
 class DocumentosController extends Controller
 {
     public function index(){
+
         $documentos = Documentos::get();
         $alumnos = User::where('cliente', '=', '1')->get();
-        return view('admin.documentos.index',compact('documentos', 'alumnos'));
+        $cursos = Cursos::pluck('nombre')->unique();
+        $cursosArray = $cursos->toArray();
+        $tipo_documentos = Tipodocumentos::get();
+
+
+        return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos'));
     }
 
     public function store(Request $request){

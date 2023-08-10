@@ -46,12 +46,16 @@
                             <div class="tab-pane fade" id="sin_usuario" role="tabpanel" aria-labelledby="sin_usuario-tab">
                                <div class="row">
 
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-6 mt-3">
                                         <label for="name">Curso</label>
-                                        <input id="curso" name="curso" type="text" class="form-control" required >
+                                        <select name="curso" id="curso" class="form-select">
+                                            @foreach ($cursosArray as $nombre)
+                                            <option value="{{ $nombre }}">{{ $nombre }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-6 mt-3">
                                         <label for="name">Fecha del Curso</label>
                                         <input id="fecha" name="fecha" type="date" class="form-control" required >
                                     </div>
@@ -59,57 +63,59 @@
                                     <div class="form-group col-6">
                                         <label for="name">Tipo de documento</label>
                                         <select name="tipo" id="tipo" class="form-select" required>
-                                            <option value="Cedula de indetidad">CN - Cedula de identidad papel</option>
-                                            <option value="Credencial">CN - Credencial plastico</option>
-                                            <option value="Diploma">CN - Diploma</option>
-                                            <option value="Titulo Honorifico con QR">CN - Titulo Honorifico con QR</option>
-                                            <option value="Titulo Honorifico con QR">CN - Titulo Honorifico CFC</option>
-                                            <option value="Tira de materias">CN - Tira de materias</option>
-                                            <option value="Diploma_STPS">Diploma STPS</option>
+                                            @foreach ($tipo_documentos as $item)
+                                            <option value="">{{ $item->nombre }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
 
                                     <div class="form-group col-6">
                                         <label for="name">Curp/generar</label>
-                                        <select class="form-select" name="" id="">
+                                        <select class="form-select" name="curp_option" id="curp_option">
                                             <option value="Curp">CURP</option>
                                             <option value="Generar curp">Generar CURP</option>
                                         </select>
                                     </div>
 
-                                    <div class="form-group col-12">
+                                    <div class="form-group col-12 curp_content">
                                         <label for="name">CURP(s)*:</label>
                                         <input id="nombre" name="nombre" type="text" class="form-control" required >
                                     </div>
 
-                                    <div class="form-group col-6">
-                                        <label for="name">Nombre(s)*:</label>
-                                        <input id="nombre" name="nombre" type="text" class="form-control" required >
-                                    </div>
 
-                                    <div class="form-group col-6">
-                                        <label for="name">Primer apellido*:</label>
-                                        <input id="primer_apellido" name="primer_apellido" type="text" class="form-control" required >
-                                    </div>
 
-                                    <div class="form-group col-6">
-                                        <label for="name">Segundo apellido:</label>
-                                        <input id="segundo_apellido" name="segundo_apellido" type="text" class="form-control" required >
-                                    </div>
+                                    <div class="gc_content" style="display: none">
+                                        <div class="row">
+                                            <div class="form-group col-6 gc_content" >
+                                                <label for="name">Nombre(s)*:</label>
+                                                <input id="nombre" name="nombre" type="text" class="form-control" required >
+                                            </div>
 
-                                    <div class="form-group col-6">
-                                        <label for="name">Fecha de nacimiento*:</label>
-                                        <input id="nacimiento" name="nacimiento" type="text" class="form-control" required >
-                                    </div>
+                                            <div class="form-group col-6 gc_content" >
+                                                <label for="name">Primer apellido*:</label>
+                                                <input id="primer_apellido" name="primer_apellido" type="text" class="form-control" required >
+                                            </div>
 
-                                    <div class="form-group col-6">
-                                        <label for="name">Sexo*:</label>
-                                        <input id="sexo" name="sexo" type="date" class="form-control" required >
-                                    </div>
+                                            <div class="form-group col-6 gc_content" >
+                                                <label for="name">Segundo apellido:</label>
+                                                <input id="segundo_apellido" name="segundo_apellido" type="text" class="form-control" required >
+                                            </div>
 
-                                    <div class="form-group col-6">
-                                        <label for="name">Estado*:</label>
+                                            <div class="form-group col-6 gc_content" >
+                                                <label for="name">Fecha de nacimiento*:</label>
+                                                <input id="nacimiento" name="nacimiento" type="text" class="form-control" required >
+                                            </div>
+
+                                            <div class="form-group col-6 gc_content" >
+                                                <label for="name">Sexo*:</label>
+                                                <input id="sexo" name="sexo" type="date" class="form-control" required >
+                                            </div>
+
+                                            <div class="form-group col-6 gc_content" >
+                                                <label for="name">Estado*:</label>
+                                            </div>
+                                        </div>
                                     </div>
 
                                </div>

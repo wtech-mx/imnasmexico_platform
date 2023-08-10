@@ -57,6 +57,26 @@ Generar Documentos
 @section('datatable')
 
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const curpOption = document.getElementById("curp_option");
+        const curpContent = document.querySelector(".curp_content");
+        const gcContent = document.querySelector(".gc_content");
+
+        // Mostrar u ocultar los contenedores según la opción seleccionada
+        curpOption.addEventListener("change", function () {
+            if (curpOption.value === "Curp") {
+                curpContent.style.display = "block";
+                gcContent.style.display = "none";
+            } else if (curpOption.value === "Generar curp") {
+                curpContent.style.display = "none";
+                gcContent.style.display = "block";
+            }
+        });
+    });
+</script>
+
+
+<script>
     const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
       searchable: true,
       fixedHeight: false
