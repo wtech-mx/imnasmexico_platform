@@ -49,11 +49,78 @@
 
                     </div>
 
-                    @if($manuales->step1_name != null)
                     <div class="tab-pane fade" id="pills-pasos" role="tabpanel" aria-labelledby="pills-pasos-tab" tabindex="0">
+                        <div class="row">
+                            @if($manuales->step1_name != null)
+                                <div class="col-12">
+                                    <h5>{{ $manuales->step1_name }}</h5>
+                                    <img id="blah" src="{{ asset('manual/'.$manuales->foto1) }}" alt="Imagen" style="width:100%;">
+                                </div>
+                            @endif
 
+                            @if($manuales->step2_name != null)
+                                <div class="col-12">
+                                    <h5>{{ $manuales->step2_name }}</h5>
+                                    <img id="blah" src="{{ asset('manual/'.$manuales->foto2) }}" alt="Imagen" style="width:100%;">
+                                </div>
+                            @endif
+                            @if($manuales->step3_name != null)
+                                <div class="col-12">
+                                    <h5>{{ $manuales->step3_name }}</h5>
+                                    <img id="blah" src="{{ asset('manual/'.$manuales->foto3) }}" alt="Imagen" style="width:100%;">
+                                </div>
+                            @endif
+
+                            @if($manuales->step4_name != null)
+                                <div class="col-12">
+                                    <h5>{{ $manuales->step4_name }}</h5>
+                                    <img id="blah" src="{{ asset('manual/'.$manuales->foto4) }}" alt="Imagen" style="width:100%;">
+                                </div>
+                            @endif
+                            @if($manuales->step5_name != null)
+                                <div class="col-12">
+                                    <h5>{{ $manuales->step5_name }}</h5>
+                                    <img id="blah" src="{{ asset('manual/'.$manuales->foto5) }}" alt="Imagen" style="width:100%;">
+                                </div>
+                            @endif
+
+                            @if($manuales->step6_name != null)
+                                <div class="col-12">
+                                    <h5>{{ $manuales->step6_name }}</h5>
+                                    <img id="blah" src="{{ asset('manual/'.$manuales->foto6) }}" alt="Imagen" style="width:100%;">
+                                </div>
+                            @endif
+
+                            @if($manuales->step7_name != null)
+                                <div class="col-12">
+                                    <h5>{{ $manuales->step7_name }}</h5>
+                                    <img id="blah" src="{{ asset('manual/'.$manuales->foto7) }}" alt="Imagen" style="width:100%;">
+                                </div>
+                            @endif
+
+                            @if($manuales->step8_name != null)
+                                <div class="col-12">
+                                    <h5>{{ $manuales->step8_name }}</h5>
+                                    <img id="blah" src="{{ asset('manual/'.$manuales->foto8) }}" alt="Imagen" style="width:100%;">
+                                </div>
+                            @endif
+
+                            @if($manuales->step9_name != null)
+                                <div class="col-12">
+                                    <h5>{{ $manuales->step9_name }}</h5>
+                                    <img id="blah" src="{{ asset('manual/'.$manuales->foto9) }}" alt="Imagen" style="width:100%;">
+                                </div>
+                            @endif
+
+                            @if($manuales->step10_name != null)
+                                <div class="col-12">
+                                    <h5>{{ $manuales->step10_name }}</h5>
+                                    <img id="blah" src="{{ asset('manual/'.$manuales->foto10) }}" alt="Imagen" style="width:100%;">
+                                </div>
+                            @endif
+                        </div>
                     </div>
-                    @endif
+
 
                     <div class="tab-pane fade" id="pills-video" role="tabpanel" aria-labelledby="pills-video-tab" tabindex="0">
                         <video  controls style="width: 100%">

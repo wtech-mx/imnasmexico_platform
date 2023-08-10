@@ -43,7 +43,7 @@
 
                     <div class="form-group col-6">
                         <label for="name">Paso 1</label>
-                        <input id="step3_name" name="step1_name" type="text" class="form-control" value="{{ $item->step3_name }}">
+                        <input id="step3_name" name="step1_name" type="text" class="form-control" value="{{ $item->step1_name }}">
                     </div>
 
                     <div class="form-group col-6">
@@ -54,7 +54,7 @@
 
                     <div class="form-group col-6">
                         <label for="name">Paso 2</label>
-                        <input id="step3_name" name="step2_name" type="text" class="form-control" value="{{ $item->step3_name }}">
+                        <input id="step3_name" name="step2_name" type="text" class="form-control" value="{{ $item->step2_name }}">
                     </div>
 
                     <div class="form-group col-6">
