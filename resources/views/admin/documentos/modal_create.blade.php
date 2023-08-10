@@ -12,29 +12,6 @@
                 @csrf
 
                 <div class="modal-body row">
-                        <div class="form-group col-12">
-                            <label for="name">Curso</label>
-                            <input id="curso" name="curso" type="text" class="form-control" required >
-                        </div>
-
-                        <div class="form-group col-7">
-                            <label for="name">Tipo de documento</label>
-                            <select name="tipo" id="tipo" class="form-select" required>
-                                <option value="Cedula de indetidad">CN - Cedula de identidad papel</option>
-                                <option value="Credencial">CN - Credencial plastico</option>
-                                <option value="Diploma">CN - Diploma</option>
-                                <option value="Titulo Honorifico con QR">CN - Titulo Honorifico con QR</option>
-                                <option value="Titulo Honorifico con QR">CN - Titulo Honorifico CFC</option>
-                                <option value="Tira de materias">CN - Tira de materias</option>
-                                <option value="Diploma_STPS">Diploma STPS</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group col-5">
-                            <label for="name">Fecha</label>
-                            <input id="fecha" name="fecha" type="date" class="form-control" required >
-                        </div>
-
 
                         <div class="d-flex justify-content-center">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -68,25 +45,73 @@
 
                             <div class="tab-pane fade" id="sin_usuario" role="tabpanel" aria-labelledby="sin_usuario-tab">
                                <div class="row">
+
                                     <div class="form-group col-6">
-                                        <label for="name">Nombre</label>
-                                        <input id="name" name="name" type="text" class="form-control" required >
+                                        <label for="name">Curso</label>
+                                        <input id="curso" name="curso" type="text" class="form-control" required >
                                     </div>
 
                                     <div class="form-group col-6">
-                                        <label for="name">Apellidos</label>
-                                        <input id="apellido" name="apellido" type="text" class="form-control" required >
+                                        <label for="name">Fecha del Curso</label>
+                                        <input id="fecha" name="fecha" type="date" class="form-control" required >
                                     </div>
 
                                     <div class="form-group col-6">
-                                        <label for="name">Correo</label>
-                                        <input id="email" name="email" type="email" class="form-control" required >
+                                        <label for="name">Tipo de documento</label>
+                                        <select name="tipo" id="tipo" class="form-select" required>
+                                            <option value="Cedula de indetidad">CN - Cedula de identidad papel</option>
+                                            <option value="Credencial">CN - Credencial plastico</option>
+                                            <option value="Diploma">CN - Diploma</option>
+                                            <option value="Titulo Honorifico con QR">CN - Titulo Honorifico con QR</option>
+                                            <option value="Titulo Honorifico con QR">CN - Titulo Honorifico CFC</option>
+                                            <option value="Tira de materias">CN - Tira de materias</option>
+                                            <option value="Diploma_STPS">Diploma STPS</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="form-group col-6">
+                                        <label for="name">Curp/generar</label>
+                                        <select class="form-select" name="" id="">
+                                            <option value="Curp">CURP</option>
+                                            <option value="Generar curp">Generar CURP</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label for="name">CURP(s)*:</label>
+                                        <input id="nombre" name="nombre" type="text" class="form-control" required >
                                     </div>
 
                                     <div class="form-group col-6">
-                                        <label for="name">Telefono</label>
-                                        <input id="telefono" name="telefono" type="number" class="form-control" required >
+                                        <label for="name">Nombre(s)*:</label>
+                                        <input id="nombre" name="nombre" type="text" class="form-control" required >
                                     </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="name">Primer apellido*:</label>
+                                        <input id="primer_apellido" name="primer_apellido" type="text" class="form-control" required >
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="name">Segundo apellido:</label>
+                                        <input id="segundo_apellido" name="segundo_apellido" type="text" class="form-control" required >
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="name">Fecha de nacimiento*:</label>
+                                        <input id="nacimiento" name="nacimiento" type="text" class="form-control" required >
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="name">Sexo*:</label>
+                                        <input id="sexo" name="sexo" type="date" class="form-control" required >
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="name">Estado*:</label>
+                                    </div>
+
                                </div>
                             </div>
                         </div>
