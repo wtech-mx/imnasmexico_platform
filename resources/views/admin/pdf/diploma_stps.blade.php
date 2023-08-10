@@ -59,8 +59,8 @@
 </head>
 <body>
     {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
-    {{--  <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
-    <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" class="img_portada">
+    {{--<img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">--}}
+    <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
 
 
     <div class="container">
