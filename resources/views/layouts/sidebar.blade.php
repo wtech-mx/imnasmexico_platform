@@ -476,19 +476,12 @@
                                 @can('cursos-show')
                                     <a class="nav-link {{ (Request::is('/cam/expedientes*') ? 'show' : '') }}" href="{{ route('cam.dashboard') }}">
                                         <span class="sidenav-mini-icon"> P </span>
-                                        <span class="sidenav-normal">Evaluador Ind.</span>
+                                        <span class="sidenav-normal">Evaluador Independiente</span>
                                     </a>
 
                                     <a class="nav-link {{ (Request::is('/admin/cursos/dia*') ? 'show' : '') }}" href="{{ route('cursos.index_dia') }}">
                                         <span class="sidenav-mini-icon"> P </span>
-                                        <span class="sidenav-normal">Cursos del Dia</span>
-                                    </a>
-                                @endcan
-
-                                @can('carpeta-compartida-show')
-                                    <a class="nav-link {{ (Request::is('/admin/carpetas*') ? 'show' : '') }}" href="{{ route('carpetas.index') }}">
-                                        <span class="sidenav-mini-icon"> P </span>
-                                        <span class="sidenav-normal">Carpeta compartida</span>
+                                        <span class="sidenav-normal">Centro de Evaluación</span>
                                     </a>
                                 @endcan
 
@@ -497,16 +490,14 @@
                             </div>
                         </li>
 
-                        @can('productos-show')
-                            <li class="nav-item">
-                                <a class="nav-link {{ (Request::is('admin/products') ? 'active' : '') }}" href="{{ route('products.index') }}">
-                                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-ticket text-sm opacity-10" style="color:#6EC1E4"></i>
-                                </div>
-                                <span class="nav-link-text ms-1">Pagos</span>
-                                </a>
-                            </li>
-                        @endcan
+                        <li class="nav-item">
+                            <a class="nav-link {{ (Request::is('notas/index') ? 'active' : '') }}" href="{{ route('index.notas') }}">
+                            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-ticket text-sm opacity-10" style="color:#6EC1E4"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Nota</span>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>

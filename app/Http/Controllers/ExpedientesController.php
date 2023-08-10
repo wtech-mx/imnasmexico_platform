@@ -10,4 +10,6 @@ class ExpedientesController extends Controller
 
         return view('cam.expedientes.exp_ind');
     }
+
+
 }

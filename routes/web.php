@@ -355,6 +355,9 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
     Route::middleware(['auth'])->group(function () {
         Route::get('/expedientes', [HomeController::class, 'index_cam'])->name('cam.dashboard');
         Route::get('/expediente', [ExpedientesController::class, 'view'])->name('view.expediente');
+
+        Route::get('/notas/index', [App\Http\Controllers\Cam\NotasCamController::class, 'index'])->name('index.notas');
+        Route::get('/notas/crear', [App\Http\Controllers\Cam\NotasCamController::class, 'crear'])->name('crear.notas');
     });
 });
 
