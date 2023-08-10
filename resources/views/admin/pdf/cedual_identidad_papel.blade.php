@@ -10,71 +10,58 @@
             padding: 0px;
             margin: 0px;
         }
-
-        @font-face {
-            font-family: 'Minion';
-            src: url('file:///E:/laragon/www/imnasmexico_platform/public/assets/admin/fonts/Minion.ttf');
-        }
-
         .img_portada {
             width: 793px;
             height: 1120px;
-            position:relative;
         }
-
-        .img_reverso{
+        .img_reverso {
             width: 793px;
             height: 1120px;
-            position:relative;
         }
 
-        .container {
-            position: absolute;
-            top: 44%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .container2{
-            position: absolute;
-            top:57%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .container3{
-            position: absolute;
-            top: 51.3%;
-            right: 24px;
-            text-align: center;
+        .contenedor{
+            position: relative;
         }
 
         .curso{
             font-size: 25px;
             color: red;
+            position: absolute;
+            font-size: 25px;
+            top:56.8%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+
         }
 
         .nombre{
-            font-family: 'Minion';
+            position: absolute;
             font-size: 25px;
             color: #000;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .folio1{
+            position: absolute;
+            font-size: 25px;
+            color: red;
+            top: 51.3%;
+            right: 24px;
+            text-align: center;
         }
 
         .folio{
-            position:relative;
-            font-size: 24px;
+            position: absolute;
+            top: 14.5%;
+            left: 65px;
+            z-index: 10000;
+            font-size: 50px;
             color: red;
         }
-
-        .folio2{
-            position:absolute;
-            font-size: 35px;
-            color: red;
-            bottom:: 500px;
-        }
-
 
     </style>
 </head>
@@ -86,29 +73,20 @@
         $parte2 = implode(' ', array_slice($palabras, 2));
     @endphp
 
-    {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
-    <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-
-    <div class="container">
+    <div class="contenedor">
+        {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
+        <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
         <h4 class="nombre">{{ $parte1 }}<br>{{ $parte2 }}</h4>
-    </div>
-
-    <div class="container2">
         <h4 class="curso">{{ ucwords(strtolower($curso)) }}</h4>
-    </div>
-
-    <div class="container3">
-        <h4 class="folio">FOLIO {{$folio}}</h4>
-    </div>
-
-    <div class="container4">
-        <h4 class="folio2">FOLIO {{$folio}}</h4>
-    </div>
-
-    <div class="contenedo_img">
+        <h4 class="folio1">Folio {{$folio }}</h4>
 
     </div>
-    <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
+
+    <div class="contenedor">
+        <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
+        <h2 class="folio">Folio {{ $folio }}</h2>
+    </div>
+
 
 
 </body>
