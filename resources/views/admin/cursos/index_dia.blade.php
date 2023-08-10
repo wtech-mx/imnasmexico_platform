@@ -53,7 +53,7 @@
                                                 @endif
 
                                                 <td>
-                                                    @can('cursos-edit')
+                                                    @can('cursos-lista')
                                                         <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}"><i class="fa fa-users"></i></a>
                                                     @endcan
                                                     @if ($curso->modalidad == 'Online')
