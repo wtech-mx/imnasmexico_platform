@@ -70,7 +70,7 @@
                                                 <label for="name">Tipo de documento</label>
                                                 <select name="tipo" id="tipo" class="form-select" >
                                                     @foreach ($tipo_documentos as $item)
-                                                    <option value="{{ $item->nombre }}">{{ $item->nombre }}</option>
+                                                    <option value="{{ $item->id }}">{{ $item->nombre }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>

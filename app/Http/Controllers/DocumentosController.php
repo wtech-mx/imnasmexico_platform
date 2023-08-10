@@ -33,10 +33,11 @@ class DocumentosController extends Controller
 
         $nombre = $request->get('nombre');
         $fecha = $request->get('fecha');
-        $tpo_documento = $request->get('tipo');
         $curso = $request->get('curso');
+        $tipo = $request->get('tipo');
+        $tipo_documentos = Tipodocumentos::find($tipo);
 
-        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso'));
+        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
 
         $pdf->setPaper('A4', 'portrait'); // Aquí definimos el tamaño A4 y la orientación vertical
         return $pdf->download('diploma_stps_'.$nombre.'.pdf');
