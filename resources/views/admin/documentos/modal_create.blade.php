@@ -76,7 +76,13 @@
                                             </div>
 
 
-                                            <div class="form-group col-6">
+                                            <div class="form-group col-6 ">
+                                                <label for="name">Folio</label>
+                                                <input id="folio" name="folio" type="text" class="form-control"  >
+                                            </div>
+
+
+                                            <div class="form-group col-12">
                                                 <label for="name">Curp/generar</label>
                                                 <select class="form-select" name="curp_option" id="curp_option">
                                                     <option value="Curp">CURP</option>

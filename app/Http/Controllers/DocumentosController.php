@@ -35,12 +35,29 @@ class DocumentosController extends Controller
         $fecha = $request->get('fecha');
         $curso = $request->get('curso');
         $tipo = $request->get('tipo');
+        $folio = $request->get('folio');
+        $curp = $request->get('curp');
+
+
         $tipo_documentos = Tipodocumentos::find($tipo);
 
-        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+        if($tipo_documentos->tipo== 'Diploma_STPS'){
 
-        $pdf->setPaper('A4', 'portrait'); // Aquí definimos el tamaño A4 y la orientación vertical
-        return $pdf->download('diploma_stps_'.$nombre.'.pdf');
+            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+            $pdf->setPaper('A4', 'portrait');
+
+            return $pdf->download('diploma_stps_'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo== 'Cedula de indetidad'){
+
+            $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp'));
+            $pdf->setPaper('A4', 'portrait');
+
+            return $pdf->download('CN-Cedula de identidad papel_'.$nombre.'.pdf');
+        }
+
+
+
     }
 
     public function store(Request $request){
