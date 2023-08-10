@@ -332,6 +332,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/documentos/store', [App\Http\Controllers\TipodocumentosController::class, 'store'])->name('documentos.store');
     Route::patch('/admin/documentos/update/{id}', [App\Http\Controllers\TipodocumentosController::class, 'update'])->name('documentos.update');
 
+    Route::post('/admin/documentos/generar', [App\Http\Controllers\DocumentosController::class, 'generar'])->name('generar.documento');
+
+
     Route::get('/admin/documentos/generar', [App\Http\Controllers\DocumentosController::class, 'index'])->name('generar_documentos.index');
     Route::get('/obtener-ordenes/{usuario}', [App\Http\Controllers\DocumentosController::class, 'obtenerOrdenes']);
 

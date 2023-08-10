@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Hash;
 use App\Models\Cursos;
 use App\Models\Tipodocumentos;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class DocumentosController extends Controller
@@ -26,6 +27,19 @@ class DocumentosController extends Controller
 
 
         return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos'));
+    }
+
+    public function generar(Request $request){
+
+        $nombre = $request->get('nombre');
+        $fecha = $request->get('fecha');
+        $tpo_documento = $request->get('tipo');
+        $curso = $request->get('curso');
+
+        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso'));
+
+        $pdf->setPaper('A4', 'portrait'); // Aquí definimos el tamaño A4 y la orientación vertical
+        return $pdf->download('diploma_stps_'.$nombre.'.pdf');
     }
 
     public function store(Request $request){
