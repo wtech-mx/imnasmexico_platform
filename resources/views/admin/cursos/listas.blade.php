@@ -66,7 +66,7 @@
                                                     <th>Telefono</th>
                                                     <th>Metodo de Pago</th>
                                                     <th>Cantidad</th>
-                                                    <th>Deudor</th>
+                                                    {{-- <th>Deudor</th> --}}
                                                     <th>Nota</th>
                                                     <th>Acciones</th>
                                                 </tr>
@@ -85,7 +85,7 @@
                                                             <td>
                                                                     {{ $order->Orders->pago }}
                                                             </td>
-                                                            <td>
+                                                            {{-- <td>
                                                                 @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
                                                                     @else
 
@@ -95,7 +95,7 @@
                                                                         <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled>
                                                                     @endif
                                                                 @endif
-                                                            </td>
+                                                            </td> --}}
                                                             <td>
                                                                 @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
                                                                     @else
@@ -110,10 +110,10 @@
                                                                     <input type="hidden" name="ticket" id="ticket" value="{{ $order->id_tickets }}">
                                                                     <input type="hidden" name="id_usuario" id="id_usuario" value="{{ $order->id_usuario }}">
                                                                     <input type="hidden" name="curso" id="curso" value="{{ $order->id_curso }}">
-                                                                    <button type="submit" class="btn btn-sm btn-primary" ><i class="fas fa-envelope"></i></button>
+                                                                    <button type="submit" class="btn btn-sm btn-primary" title="Enviar liga"><i class="fas fa-envelope"></i></button>
                                                                 </form>
 
-                                                                <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$order->Orders->id) }}"><i class="fa fa-money"></i> </a>
+                                                                <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$order->Orders->id) }}"><i class="fa fa-money" title="Ver Orden"></i> </a>
                                                             </td>
                                                         </tr>
                                                     @endif
@@ -175,5 +175,6 @@
         });
     @endforeach
 </script>
+
 
 @endsection

@@ -202,6 +202,7 @@ Route::group(['middleware' => ['auth']], function() {
     // =============== M O D U L O   O R D E N E S ===============================
     Route::post('/clientes/curso/create', [App\Http\Controllers\OrderController::class, 'pay_externo'])->name('orden.pay_externo');
 
+
     // =============== M O D U L O   I N S C R I P C I O N E S ===============================
     Route::get('/admin/pagos', [App\Http\Controllers\PagosFueraController::class, 'index_pago'])->name('pagos.index_pago');
     Route::get('/admin/pagos/edit/{id}', [App\Http\Controllers\PagosFueraController::class, 'edit_pago'])->name('pagos.edit_pago');
@@ -210,6 +211,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/admin/pagos/mercado', [App\Http\Controllers\PagosFueraController::class, 'mercado_pago'])->name('mercado.pago');
 
+    Route::patch('/cursos/cambio/{id}', [App\Http\Controllers\PagosFueraController::class, 'cambio'])->name('cursos.cambio');
+    Route::get('/admin/pagos/edit/cambio/{id}',  [App\Http\Controllers\PagosFueraController::class, 'getTicketsByCurso']);
     /*|--------------------------------------------------------------------------
     |Configuracion
     |--------------------------------------------------------------------------*/

@@ -113,22 +113,48 @@
                                     </button>
                                 </div>
                             </form>
+                            <form method="POST" action="{{ route('cursos.cambio', $orders->id) }}" enctype="multipart/form-data" role="form">
+                                @csrf
+                                <input type="hidden" name="_method" value="PATCH">
+                                <div class="row">
+                                    <h4>Cambio de curso</h4>
+                                    <div class="col-5">
+                                        <label for="">Nombre del curso</label>
+                                        <select name="curso_ticket" id="curso_ticket" class="form-select d-inline-block cursos">
+                                            <option value="">Seleccione Curso</option>
+                                            @foreach ($cursos as $item)
+                                            <option value="{{ $item->id }}">{{ $item->nombre }}  / {{ $item->fecha_inicial }} - {{ $item->modalidad }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-5">
+                                        <label for="">Seleccione un ticket</label>
+                                        <select class="form-control" id="ticket" name="ticket">
+                                            <option value="">seleccione un curso</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-2">
+                                        <br>
+                                        <button type="submit" class="btn btn-secondary">
+                                            Cambiar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
                                 <div class="modal-body">
                                     <div class="tab-content">
                                         <div class="row text-center">
                                             <div class="col-6" style="background-color: #bb546c; color: #fff;">Nombre</div>
                                             <div class="col-2" style="background-color: #bb546c; color: #fff;">Fecha Curso</div>
                                             <div class="col-2" style="background-color: #bb546c; color: #fff;">Precio</div>
-                                            <div class="col-2" style="background-color: #bb546c; color: #fff;">imagen</div>
+                                            <div class="col-2" style="background-color: #bb546c; color: #fff;">Monto</div>
                                         </div>
                                         @foreach ($order_tickets as $order_ticket)
                                             <div class="row text-center mt-2">
                                                 <div class="col-6">{{$order_ticket->CursosTickets->nombre}}</div>
                                                 <div class="col-2">{{$order_ticket->Cursos->fecha_inicial}}</div>
-                                                <div class="col-2">{{$order_ticket->CursosTickets->precio}}</div>
-                                                <div class="col-2">
-                                                    <img id="blah" src="{{asset('curso/'.$order_ticket->CursosTickets->foto) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
-                                                </div>
+                                                <div class="col-2">${{$order_ticket->CursosTickets->precio}}</div>
+                                                <div class="col-2">${{$orders->pago}}</div>
                                             </div>
                                         @endforeach
                                 </div>
@@ -138,8 +164,41 @@
             </div>
         </div>
     </div>
-
 @endsection
-@section('js')
+@section('datatable')
+<script src="{{ asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+        $('.cursos').select2();
+    });
+  </script>
+
+<script>
+    $(document).ready(function () {
+        $('#curso_ticket').on('change', function () {
+                let id = $(this).val();
+                console.log(id);
+                //curso no esta en la tabla de automovil
+            $('#ticket').empty();
+                $('#ticket').append(`<option value="" disabled selected>Procesando..</option>`);
+                $.ajax({
+                type: 'GET',
+                url: 'cambio/' + id,
+                success: function (response) {
+                var response = JSON.parse(response);
+                console.log(response);
+                //trae los automoviles relacionados con el curso
+                $('#ticket').empty();
+                $('#ticket').append(`<option value="" disabled selected>Seleccione ticket de curso</option>`);
+                response.forEach(element => {
+                    $('#ticket').append(`<option value="${element['id']}">${element['nombre']}</option>`);
+                    });
+                }
+            });
+        });
+    });
+</script>
 @endsection

@@ -3,16 +3,16 @@
       <ul class="nav nav-pills mb-5" id="pills-tab" role="tablist">
 
         @can('menu-cursos')
-            <li class="nav-item" role="inicio">
-                <a class="nav-link active" id="pills-inicio-tab" data-bs-toggle="pill" data-bs-target="#pills-inicio" type="button" role="tab" aria-controls="pills-inicio" aria-selected="true">
+            <li class="nav-item" role="imnas">
+                <a class="nav-link active" id="pills-imnas-tab" data-bs-toggle="pill" data-bs-target="#pills-imnas" type="button" role="tab" aria-controls="pills-imnas" aria-selected="true">
                     <img src="{{asset('assets/user/logotipos/imnas.webp')}}" class="navbar-brand-img h-100" alt="main_logo">
                 </a>
             </li>
         @endcan
 
         @can('menu-cam')
-            <li class="nav-item" role="paquetes">
-            <a class="nav-link" id="pills-paquetes-tab" data-bs-toggle="pill" data-bs-target="#pills-paquetes" type="button" role="tab" aria-controls="pills-paquetes" aria-selected="false">
+            <li class="nav-item" role="cam">
+            <a class="nav-link" id="pills-cam-tab" data-bs-toggle="pill" data-bs-target="#pills-cam" type="button" role="tab" aria-controls="pills-cam" aria-selected="false">
                 <img src="{{asset('assets/user/logotipos/cam.png')}}" class="navbar-brand-img h-100" alt="main_logo">
             </a>
             </li>
@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse  w-auto h-auto" id="sidenav-collapse-main">
         <div class="tab-content" id="pills-tabContent">
             @can('menu-cursos')
-                <div class="tab-pane fade show active" id="pills-inicio" role="tabpanel" aria-labelledby="pills-inicio-tab" tabindex="0">
+                <div class="tab-pane fade show active" id="pills-imnas" role="tabpanel" aria-labelledby="pills-imnas-tab" tabindex="0">
                     <ul class="navbar-nav">
 
                         <li class="nav-item">
@@ -451,7 +451,7 @@
             @endcan
 
             @can('menu-cam')
-                <div class="tab-pane fade" id="pills-paquetes" role="tabpanel" aria-labelledby="pills-paquetes-tab" tabindex="0">
+                <div class="tab-pane fade" id="pills-cam" role="tabpanel" aria-labelledby="pills-cam-tab" tabindex="0">
                     <ul class="navbar-nav">
 
                         <li class="nav-item">

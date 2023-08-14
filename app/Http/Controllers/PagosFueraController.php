@@ -19,7 +19,9 @@ use MercadoPago\SDK\AdvancedPayments\RangeDateTime;
 use App\Models\WebPage;
 use Hash;
 use App\Mail\PlantillaNuevoUser;
+use App\Models\Cursos;
 use Illuminate\Support\Str;
+use DB;
 
 class PagosFueraController extends Controller
 {
@@ -466,10 +468,12 @@ class PagosFueraController extends Controller
     }
 
     public function edit_pago($id){
+        $fechaActual = date('Y-m-d');
         $orders = Orders::find($id);
         $order_tickets = OrdersTickets::where('id_order', '=', $id)->get();
+        $cursos = Cursos::where('fecha_final','>=', $fechaActual)->get();
 
-        return view('admin.pagos.edit', compact('orders', 'order_tickets'));
+        return view('admin.pagos.edit', compact('orders', 'order_tickets', 'cursos'));
     }
 
     public function update_pago(Request $request, $id){
@@ -533,5 +537,23 @@ class PagosFueraController extends Controller
 
             return view('admin.pagos.mercado_pago', compact('pagos'));
 
+    }
+
+    public function getTicketsByCurso($id)
+    {
+        $fechaActual = date('Y-m-d');
+        echo json_encode(DB::table('cursos_tickets')->where('id_curso', $id)->where('fecha_inicial', '<=', $fechaActual)
+        ->where('fecha_final', '>=', $fechaActual)->get());
+    }
+
+    public function cambio(Request $request, $id){
+
+        $orden = OrdersTickets::where('id_order', '=', $id)->first();
+        $orden->id_curso = $request->get('curso_ticket');
+        $orden->id_tickets = $request->get('ticket');
+        $orden->update();
+
+        return redirect()->back()
+        ->with('success', 'Usuario cambiado con exito.');
     }
 }
