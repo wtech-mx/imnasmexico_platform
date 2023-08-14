@@ -29,8 +29,9 @@ class PagosFueraController extends Controller
         $fechaActual = date('Y-m-d');
         $pagos_fuera = PagosFuera::orderBy('id','DESC')->get();
         $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
+        $clases_grabadas = CursosTickets::where('fecha_final','<=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
 
-        return view('admin.pagos_fuera.inscripcion', compact('pagos_fuera', 'cursos'));
+        return view('admin.pagos_fuera.inscripcion', compact('pagos_fuera', 'cursos', 'clases_grabadas'));
     }
 
     public function store(Request $request)
@@ -50,9 +51,11 @@ class PagosFueraController extends Controller
         $order_ticket = $request->get('campo1');
         $order_ticket2 = $request->get('campo2');
         $order_ticket3 = $request->get('campo3');
+        $clase_grabada = $request->get('clase_grabada');
         $cursos = CursosTickets::where('id','=', $order_ticket)->first();
         $cursos2 = CursosTickets::where('id','=', $order_ticket2)->first();
         $cursos3 = CursosTickets::where('id','=', $order_ticket3)->first();
+        $clase = CursosTickets::where('id','=', $clase_grabada)->first();
 
         if($request->get('name2') == NULL){
             $usuario = $request->get('name') . " " . $request->get('apellido');
@@ -64,6 +67,8 @@ class PagosFueraController extends Controller
             $curso = $cursos->Cursos->nombre . "\n" . $cursos2->Cursos->nombre . "\n" . $cursos3->Cursos->nombre;
         }elseif($request->get('campo2') != NULL){
             $curso = $cursos->Cursos->nombre . "\n" . $cursos2->Cursos->nombre;
+        }elseif($request->get('clase_grabada') != NULL){
+            $curso = $clase->Cursos->nombre . '- clase grabada.';
         }else{
             $curso = $cursos->Cursos->nombre;
         }
@@ -104,7 +109,7 @@ class PagosFueraController extends Controller
                 $payer = $user;
             } else {
                 $payer = new User();
-                $payer->name = $request->get('nombre') . " " . $request->get('apellido');
+                $payer->name = $request->get('name') . " " . $request->get('apellido');
                 $payer->email = $request->get('email');
                 $payer->username = $request->get('telefono');
                 $payer->code = $code;
@@ -123,6 +128,9 @@ class PagosFueraController extends Controller
             $order->forma_pago = $request->get('forma_pago');
             $order->fecha = $fechaActual;
             $order->estatus = 1;
+            if($request->get('clase_grabada') != NULL){
+                $order->clase_grabada = '1';
+            }
             $order->code = $code;
             $order->id_externo = $pagos_fuera->id;
             $order->save();
@@ -130,9 +138,15 @@ class PagosFueraController extends Controller
             $order_ticket = new OrdersTickets;
             $order_ticket->id_order = $order->id;
             $order_ticket->id_usuario = $payer->id;
-            $order_ticket->id_tickets = $request->get('campo1');
-            $cursos = CursosTickets::where('id','=', $order_ticket->id_tickets)->first();
-            $order_ticket->id_curso = $cursos->id_curso;
+            if($request->get('clase_grabada') != NULL){
+                $order_ticket->id_tickets = $request->get('clase_grabada');
+                $cursos = CursosTickets::where('id','=', $order_ticket->id_tickets)->first();
+                $order_ticket->id_curso = $cursos->id_curso;
+            }else{
+                $order_ticket->id_tickets = $request->get('campo1');
+                $cursos = CursosTickets::where('id','=', $order_ticket->id_tickets)->first();
+                $order_ticket->id_curso = $cursos->id_curso;
+            }
             $order_ticket->save();
 
             if($request->get('campo2') != NULL){
@@ -242,7 +256,7 @@ class PagosFueraController extends Controller
         // $datos = PagosFuera::where('id', '=', $pagos_fuera->id)->first();
         // Mail::to($webpage->email_developer)->bcc($webpage->email_developer_two, 'Destinatario dev 2')->send(new PlantillaPagoExterno($datos));
 
-        return redirect()->route('pagos.inscripcion')
+        return redirect()->route('pagos.pendientes')
             ->with('success', 'pago fuera creado con exito.');
     }
 
@@ -428,8 +442,9 @@ class PagosFueraController extends Controller
         $fechaActual = date('Y-m-d');
         $pagos_fuera = PagosFuera::orderBy('id','DESC')->where('pendiente', '=', '0')->get();
         $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
+        $clases_grabadas = CursosTickets::where('fecha_final','<=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
 
-        return view('admin.pagos_fuera.pendiente', compact('pagos_fuera', 'cursos'));
+        return view('admin.pagos_fuera.pendiente', compact('pagos_fuera', 'cursos', 'clases_grabadas'));
     }
 
     public function ChangePendienteStatus(Request $request)

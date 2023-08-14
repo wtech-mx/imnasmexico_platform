@@ -12,12 +12,14 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use Hash;
+use DB;
 use App\Imports\UsersImport;
 use App\Models\Carpetas;
 use App\Models\CarpetasEstandares;
 use App\Models\CursosEstandares;
 use App\Models\Publicidad;
 use App\Models\Factura;
+use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use DataTables;
 
@@ -74,7 +76,6 @@ class ClientsController extends Controller
         // Obtener los datos de los estándares
         $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
-
         return view('user.profilenew',compact('estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad', 'carpetas'));
     }
 
@@ -96,6 +97,14 @@ class ClientsController extends Controller
                     ->where('cursos.video_cad','=', 1)
                     ->where('orders.estatus','=', 1)
                     ->get();
+
+    $clase_grabada = OrdersTickets::join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
+        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+        ->where('orders_tickets.id_usuario', $id)
+        ->where('orders.clase_grabada','=', 1)
+        ->where('orders.estatus','=', 1)
+        ->where('orders.fecha', '>=', Carbon::now()->subDays(3))
+        ->get();
 
     $usuario_compro = OrdersTickets::join('orders', 'orders_tickets.id_order', '=', 'orders.id')
                     ->where('orders_tickets.id_usuario', $id)
@@ -131,7 +140,7 @@ class ClientsController extends Controller
     $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
 
-    return view('user.profilenew',compact('estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad', 'carpetas'));
+    return view('user.profilenew',compact('clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad', 'carpetas'));
 }
 
     public function update(Request $request, $code)

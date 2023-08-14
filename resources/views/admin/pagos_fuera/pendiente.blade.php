@@ -72,6 +72,16 @@
 @endsection
 
 @section('datatable')
+<script src="{{ asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+
+  <script type="text/javascript">
+
+    $(document).ready(function() {
+        $('.campo1').select2();
+    });
+
+  </script>
 
 <script>
 

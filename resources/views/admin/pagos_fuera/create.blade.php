@@ -20,7 +20,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="name">Nombre *</label>
-                                    <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" required>@error('name') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
@@ -56,7 +56,7 @@
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
-                                                <label for="name">Nombre 2</label>
+                                                <label for="name2">Nombre 2</label>
                                                 <input id="name2" name="name2" type="text" class="form-control" placeholder="Nombre">
                                             </div>
                                         </div>
@@ -86,8 +86,8 @@
                             </div>
 
                             <div class="form-group col-12">
-                                <label class="mt-2">Curso *</label> <br>
-                                <select name="campo1" class="form-select d-inline-block curso" style="width: 70%!important;">
+                                <label class="mt-2">Curso</label> <br>
+                                <select name="campo1" class="form-select d-inline-block" style="width: 70%!important;">
                                     <option value="">Seleccione Curso</option>
                                     @foreach ($cursos as $curso)
                                     <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
@@ -125,6 +125,16 @@
                                             </div>
                                         </div>
                                 </div>
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label class="mt-2">Clase grabada</label> <br>
+                                <select name="clase_grabada" class="form-select d-inline-block curso" style="width: 70%!important;">
+                                    <option value="">Seleccione Curso</option>
+                                    @foreach ($clases_grabadas as $clase_grabada)
+                                    <option value="{{ $clase_grabada->id }}">{{ $clase_grabada->nombre }} - {{ $clase_grabada->Cursos->modalidad }} / {{ $clase_grabada->Cursos->fecha_inicial }}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="col-6 mt-3">
