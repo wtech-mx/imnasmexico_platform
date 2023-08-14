@@ -545,7 +545,7 @@ Mi perfil- {{$cliente->name}}
                                                             <h3 class="text-center mt-5 mb-3"><img class="icon_nav_course" src="{{asset('assets/user/icons/clase.webp')}}" alt=""> <strong>Clases grabadas</strong></h3>
                                                         </div>
                                                         <div class="row">
-                                                        @if ($video->Orders->clase_grabada == NULL)
+                                                        @if ($video->Orders->clase_grabada_orden == NULL)
                                                             @foreach($usuario_video as $user_video)
                                                                 @if ($video->Cursos->id == $user_video->id_curso)
                                                                     <div class="col-12 col-lg-12">
@@ -661,7 +661,7 @@ Mi perfil- {{$cliente->name}}
                                                                             @endphp
                                                                             @if ($id_link_drive2)
                                                                             <iframe src="https://drive.google.com/file/d/{{ $id_link_drive2 }}/preview" class="iframe_clase"></iframe>
-                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive }}" target="_blank" >Ver Clase</a>
+                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive2 }}" target="_blank" >Ver Clase</a>
                                                                             @else
                                                                                 <p>El video se encuentra como privado</p>
                                                                             @endif

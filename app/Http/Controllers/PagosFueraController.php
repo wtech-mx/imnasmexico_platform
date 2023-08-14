@@ -129,7 +129,7 @@ class PagosFueraController extends Controller
             $order->fecha = $fechaActual;
             $order->estatus = 1;
             if($request->get('clase_grabada') != NULL){
-                $order->clase_grabada = '1';
+                $order->clase_grabada_orden = '1';
             }
             $order->code = $code;
             $order->id_externo = $pagos_fuera->id;

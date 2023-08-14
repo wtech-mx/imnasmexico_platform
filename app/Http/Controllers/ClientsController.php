@@ -101,7 +101,7 @@ class ClientsController extends Controller
     $clase_grabada = OrdersTickets::join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
         ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
         ->where('orders_tickets.id_usuario', $id)
-        ->where('orders.clase_grabada','=', 1)
+        ->where('orders.clase_grabada_orden','=', 1)
         ->where('orders.estatus','=', 1)
         ->where('orders.fecha', '>=', Carbon::now()->subDays(3))
         ->get();
