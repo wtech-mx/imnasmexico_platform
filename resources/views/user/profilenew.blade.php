@@ -573,7 +573,7 @@ Mi perfil- {{$cliente->name}}
                                                                             @endphp
                                                                             @if ($id_link_drive2)
                                                                             <iframe src="https://drive.google.com/file/d/{{ $id_link_drive2 }}/preview" class="iframe_clase"></iframe>
-                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive }}" target="_blank" >Ver Clase</a>
+                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive2 }}" target="_blank" >Ver Clase</a>
                                                                             @else
                                                                                 <p>El video se encuentra como privado</p>
                                                                             @endif
