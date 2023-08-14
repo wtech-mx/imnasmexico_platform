@@ -559,8 +559,8 @@ Mi perfil- {{$cliente->name}}
                                                                         <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" class="iframe_clase"></iframe>
                                                                         <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive }}" target="_blank" >Ver Clase</a>
                                                                         @else
-                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive }}" target="_blank" >Ver Clase</a>
-                                                                            <p>El video se encuentra como privado</p>
+                                                                        <a class="text-dark" href="{{$user_video->clase_grabada}}" target="_blank" >Ver Clase</a>
+                                                                            {{-- <p>El video se encuentra como privado</p> --}}
                                                                         @endif
                                                                     </div>
 
