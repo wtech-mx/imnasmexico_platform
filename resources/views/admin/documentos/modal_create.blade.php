@@ -90,7 +90,7 @@
 
                                                     <div class="form-group col-6 gc_cn">
                                                         <label for="name">Fotografia </label>
-                                                        <input id="fotografia" name="fotografia" type="file" class="form-control"  >
+                                                        <input id="img_infantil" name="img_infantil" type="file" class="form-control"  >
                                                     </div>
 
                                                     <div class="form-group col-6 gc_cn">

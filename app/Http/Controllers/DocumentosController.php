@@ -53,6 +53,7 @@ class DocumentosController extends Controller
         $folio = $request->get('folio');
         $curp = $request->get('curp');
 
+
         if ($request->hasFile("img_infantil")) {
             $file = $request->file('img_infantil');
             $path = $ruta_manual;
@@ -60,13 +61,13 @@ class DocumentosController extends Controller
             $file->move($path, $fileName);
         }
 
-        if ($request->hasFile("firma")) {
-            $file = $request->file('firma');
-            $path = $ruta_manual;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-        }
 
+        if ($request->hasFile("firma")) {
+            $file_firma = $request->file('firma');
+            $path_firma = $ruta_manual;
+            $fileName_firma = uniqid() . $file_firma->getClientOriginalName();
+            $file_firma->move($path_firma, $fileName_firma);
+        }
 
         $tipo_documentos = Tipodocumentos::find($tipo);
 
@@ -79,9 +80,9 @@ class DocumentosController extends Controller
 
         }elseif($tipo_documentos->tipo== 'Cedula de indetidad'){
 
-            $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp'));
-            //$pdf->setPaper('A4', 'portrait');
-            $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
+            $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf->setPaper('A4', 'portrait');
+            // $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
 
 
             return $pdf->download('CN-Cedula de identidad papel_'.$nombre.'.pdf');
