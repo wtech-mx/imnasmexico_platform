@@ -25,11 +25,26 @@ class DocumentosController extends Controller
         $cursosArray = $cursos->toArray();
         $tipo_documentos = Tipodocumentos::get();
 
+        $estados = [
+            'Aguascalientes', 'Baja California', 'Baja California Sur','CDMX', 'Campeche', 'Chiapas',
+            'Chihuahua', 'Coahuila', 'Colima', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo',
+            'Jalisco', 'Michoacán', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca',
+            'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora',
+            'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
+        ];
 
-        return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos'));
+
+        return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados'));
     }
 
     public function generar(Request $request){
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/utilidades_documentos');
+        }else{
+            $ruta_manual = public_path() . '/utilidades_documentos';
+        }
 
         $nombre = $request->get('nombre');
         $fecha = $request->get('fecha');
@@ -37,6 +52,20 @@ class DocumentosController extends Controller
         $tipo = $request->get('tipo');
         $folio = $request->get('folio');
         $curp = $request->get('curp');
+
+        if ($request->hasFile("img_infantil")) {
+            $file = $request->file('img_infantil');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+        }
+
+        if ($request->hasFile("firma")) {
+            $file = $request->file('firma');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+        }
 
 
         $tipo_documentos = Tipodocumentos::find($tipo);
@@ -51,12 +80,29 @@ class DocumentosController extends Controller
         }elseif($tipo_documentos->tipo== 'Cedula de indetidad'){
 
             $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp'));
-            $pdf->setPaper('A4', 'portrait');
+            //$pdf->setPaper('A4', 'portrait');
+            $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
+
 
             return $pdf->download('CN-Cedula de identidad papel_'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo== 'Titulo Honorifico con QR'){
+
+            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('curso','fecha','tipo_documentos','nombre','folio','curp'));
+            // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
+
+            $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
+
+
+            return $pdf->download('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
         }
+        elseif($tipo_documentos->tipo== 'Credencial'){
 
+            $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp'));
+            $pdf->setPaper([0, 0, 85.0 * 28.35, 55.0 * 28.35], 'landscape');  // Cambiar 'a tamaño 5.5x8.5 credencial
 
+            return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
+        }
 
     }
 

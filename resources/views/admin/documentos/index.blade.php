@@ -59,7 +59,11 @@ Generar Documentos
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const curpOption = document.getElementById("curp_option");
+        const tipoOption = document.getElementById("tipo");
+
         const curpContent = document.querySelector(".curp_content");
+
+        const cnContent = document.querySelector(".gc_cn");
         const gcContent = document.querySelector(".gc_content");
 
         // Mostrar u ocultar los contenedores según la opción seleccionada
@@ -70,6 +74,14 @@ Generar Documentos
             } else if (curpOption.value === "Generar curp") {
                 curpContent.style.display = "none";
                 gcContent.style.display = "block";
+            }
+        });
+
+        tipoOption.addEventListener("change", function () {
+            if (tipoOption.value != 1) {
+                cnContent.style.display = "block";
+            }else {
+                cnContent.style.display = "none";
             }
         });
     });

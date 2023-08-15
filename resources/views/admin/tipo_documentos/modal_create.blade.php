@@ -24,7 +24,7 @@
                             <option value="Credencial">CN - Credencial plastico</option>
                             <option value="Diploma">CN - Diploma</option>
                             <option value="Titulo Honorifico con QR">CN - Titulo Honorifico con QR</option>
-                            <option value="Titulo Honorifico con QR">CN - Titulo Honorifico CFC</option>
+                            <option value="Titulo Honorifico con QR_CFC">CN - Titulo Honorifico CFC</option>
                             <option value="Tira de materias">CN - Tira de materias</option>
                             <option value="Diploma_STPS">Diploma - STPS</option>
                         </select>

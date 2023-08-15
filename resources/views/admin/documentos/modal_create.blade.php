@@ -75,62 +75,79 @@
                                                 </select>
                                             </div>
 
-
-                                            <div class="form-group col-6 ">
-                                                <label for="name">Folio</label>
-                                                <input id="folio" name="folio" type="text" class="form-control"  >
-                                            </div>
-
-
-                                            <div class="form-group col-12">
-                                                <label for="name">Curp/generar</label>
-                                                <select class="form-select" name="curp_option" id="curp_option">
-                                                    <option value="Curp">CURP</option>
-                                                    <option value="Generar curp">Generar CURP</option>
-                                                </select>
-                                            </div>
-
-                                            <div class="form-group col-12 curp_content">
-                                                <label for="name">CURP(s)*:</label>
-                                                <input id="curp" name="curp" type="text" class="form-control"  >
-                                            </div>
-
-                                            <div class="gc_content" style="display: none">
+                                            <div class="gc_cn" style="display: none">
                                                 <div class="row">
-                                                    <div class="form-group col-6 gc_content" >
-                                                        <label for="name">Nombre(s)*:</label>
-                                                        <input id="nombre_curp" name="nombre_curp" type="text" class="form-control"  >
+
+                                                    <div class="form-group col-6 gc_cn">
+                                                        <label for="name">Folio</label>
+                                                        <input id="folio" name="folio" type="text" class="form-control"  >
                                                     </div>
 
-                                                    <div class="form-group col-6 gc_content" >
-                                                        <label for="name">Primer apellido*:</label>
-                                                        <input id="primer_apellido" name="primer_apellido" type="text" class="form-control"  >
+                                                    <div class="form-group col-6 gc_cn">
+                                                        <label for="name">Firma Personal</label>
+                                                        <input id="firma" name="firma" type="file" class="form-control"  >
                                                     </div>
 
-                                                    <div class="form-group col-6 gc_content" >
-                                                        <label for="name">Segundo apellido:</label>
-                                                        <input id="segundo_apellido" name="segundo_apellido" type="text" class="form-control"  >
+                                                    <div class="form-group col-6 gc_cn">
+                                                        <label for="name">Fotografia </label>
+                                                        <input id="fotografia" name="fotografia" type="file" class="form-control"  >
                                                     </div>
 
-                                                    <div class="form-group col-6 gc_content" >
-                                                        <label for="name">Fecha de nacimiento*:</label>
-                                                        <input id="nacimiento" name="nacimiento" type="text" class="form-control"  >
+                                                    <div class="form-group col-6 gc_cn">
+                                                        <label for="name">Curp/generar</label>
+                                                        <select class="form-select" name="curp_option" id="curp_option">
+                                                            <option value="Curp">CURP</option>
+                                                            <option value="Generar curp">Generar CURP</option>
+                                                        </select>
                                                     </div>
 
-                                                    <div class="form-group col-6 gc_content" >
-                                                        <label for="name">Sexo*:</label>
-                                                        <input id="sexo" name="sexo" type="date" class="form-control"  >
+                                                    <div class="form-group col-12 curp_content">
+                                                        <label for="name">CURP(s)*:</label>
+                                                        <input id="curp" name="curp" type="text" class="form-control"  >
                                                     </div>
 
-                                                    <div class="form-group col-6 gc_content" >
-                                                        <label for="name">Estado*:</label>
+                                                    <div class="gc_content" style="display: none">
+                                                        <div class="row">
+                                                            <div class="form-group col-6 gc_content" >
+                                                                <label for="name">Nombre(s)*:</label>
+                                                                <input id="nombre_curp" name="nombre_curp" type="text" class="form-control"  >
+                                                            </div>
+
+                                                            <div class="form-group col-6 gc_content" >
+                                                                <label for="name">Primer apellido*:</label>
+                                                                <input id="primer_apellido" name="primer_apellido" type="text" class="form-control"  >
+                                                            </div>
+
+                                                            <div class="form-group col-6 gc_content" >
+                                                                <label for="name">Segundo apellido:</label>
+                                                                <input id="segundo_apellido" name="segundo_apellido" type="text" class="form-control"  >
+                                                            </div>
+
+                                                            <div class="form-group col-6 gc_content" >
+                                                                <label for="name">Fecha de nacimiento*:</label>
+                                                                <input id="nacimiento" name="nacimiento" type="text" class="form-control"  >
+                                                            </div>
+
+                                                            <div class="form-group col-6 gc_content" >
+                                                                <label for="name">Sexo*:</label>
+                                                                <input id="sexo" name="sexo" type="date" class="form-control"  >
+                                                            </div>
+
+                                                            <div class="form-group col-6 gc_content" >
+                                                                <label for="name">Estado*:</label>
+                                                                <select class="form-select" name="estado" id="estado">
+                                                                    @foreach ($estados as $estado)
+                                                                        <option value="{{ $estado }}">{{ $estado }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
-
-
                                                 </div>
                                             </div>
 
-                                            <div class="col-6">
+                                            <div class="col-12">
                                                 <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                             </div>
 
