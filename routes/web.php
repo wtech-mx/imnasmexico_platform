@@ -355,12 +355,24 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         return view('cam.auth.login');
     });
 
+    Route::get('evaluador', function () {
+        return view('cam.usuario.evaluador');
+    })->name('evaluador');
+
+    Route::get('centro', function () {
+        return view('cam.usuario.centro');
+    })->name('centro');
+
     Route::middleware(['auth'])->group(function () {
         Route::get('/expedientes', [HomeController::class, 'index_cam'])->name('cam.dashboard');
         Route::get('/expediente', [ExpedientesController::class, 'view'])->name('view.expediente');
 
         Route::get('/notas/index', [App\Http\Controllers\Cam\NotasCamController::class, 'index'])->name('index.notas');
         Route::get('/notas/crear', [App\Http\Controllers\Cam\NotasCamController::class, 'crear'])->name('crear.notas');
+
+        // =============== M O D U L O   R E C U R S O S ===============================
+        Route::get('/estandares/index', [App\Http\Controllers\Cam\CamEstandaresController::class, 'index'])->name('index.estandares');
+        Route::post('/estandares/crear', [App\Http\Controllers\Cam\CamEstandaresController::class, 'crear'])->name('crear.estandares');
     });
 });
 

@@ -9,16 +9,16 @@ class NotasCamController extends Controller
 {
     public function index(){
 
-        return view('cam.notas.index');
+        return view('cam.admin.notas.index');
     }
 
     public function crear(Request $request){
 
-        return view('cam.notas.crear');
+        return view('cam.admin.notas.crear');
     }
 
     public function store(Request $request){
 
-        return view('cam.notas.crear');
+        return view('cam.admin.notas.crear');
     }
 }

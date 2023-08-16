@@ -27,7 +27,7 @@ Notas CAM
                                 Crear
                             </a>
                             @endcan
-                            @include('cam.notas.crear')
+                            @include('cam.admin.notas.crear')
                         </div>
                     </div>
 
@@ -97,6 +97,41 @@ Notas CAM
 <script>
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
+    });
+</script>
+
+
+<script>
+    document.getElementById('tipo').addEventListener('change', function() {
+        var membresiaContainer = document.getElementById('membresiaContainer');
+
+        if (this.value === 'Centro Evaluación') {
+            membresiaContainer.style.display = 'block';
+        } else {
+            membresiaContainer.style.display = 'none';
+        }
+    });
+</script>
+
+<script>
+    document.getElementById('metodo_pago').addEventListener('change', function() {
+        var fotoContainer = document.getElementById('fotoContainer');
+
+        if (this.value === 'Transferencia') {
+            fotoContainer.style.display = 'block';
+        } else {
+            fotoContainer.style.display = 'none';
+        }
+    });
+
+    document.getElementById('metodo_pago2').addEventListener('change', function() {
+        var fotoContainer2 = document.getElementById('fotoContainer2');
+
+        if (this.value === 'Transferencia') {
+            fotoContainer2.style.display = 'block';
+        } else {
+            fotoContainer2.style.display = 'none';
+        }
     });
 </script>
 @endsection

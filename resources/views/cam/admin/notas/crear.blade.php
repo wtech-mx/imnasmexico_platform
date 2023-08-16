@@ -16,15 +16,15 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="name">Nombre *</label>
+                                    <label for="name">Nombre(s) *</label>
                                     <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="name">Apellido *</label>
-                                    <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    <label for="name">Apellidos *</label>
+                                    <input id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellidos" required>@error('apellido') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
@@ -38,7 +38,28 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="name">Telefono *</label>
-                                    <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="55-55-55-55-55" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Facebook</label>
+                                    <input id="facebook" name="facebook" type="text" class="form-control" required>@error('facebook') <span class="error text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">TikTok</label>
+                                    <input id="tiktok" name="tiktok" type="text" class="form-control" required>@error('tiktok') <span class="error text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Instagram</label>
+                                    <input id="instagram" name="instagram" type="text" class="form-control" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
@@ -52,17 +73,18 @@
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="name">Tipo</label>
-                                    <select name="metodo_pago" id="metodo_pago" class="form-select d-inline-block">
+                                    <select name="tipo" id="tipo" class="form-select d-inline-block">
                                         <option value="Evaluador Independiente">Evaluador Independiente</option>
                                         <option value="Centro Evaluación">Centro Evaluación</option>
+                                        <option value="Externo">Externo</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-4" id="membresiaContainer" style="display: none;">
                                 <div class="form-group">
                                     <label for="name">Membresía</label>
-                                    <select name="metodo_pago" id="metodo_pago" class="form-select d-inline-block">
+                                    <select name="membresia" id="membresia" class="form-select d-inline-block">
                                         <option value="Gold">Gold</option>
                                         <option value="Diamante">Diamante</option>
                                     </select>
@@ -72,7 +94,7 @@
                             <div class="col-12">
                                 <div class="form-group">
                                     <label for="">Estandares</label><br>
-                                        <select name="campo[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
+                                        <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
                                             <option value="EC0859 Diseño de maquillaje profesional." >EC0859 Diseño de maquillaje profesional.</option>
                                             <option value="EC1336 Cosmetológicos faciales y corporales.">EC1336 Cosmetológicos faciales y corporales.</option>
                                             <option value="">EC0900 Aplicación de masaje holístico.</option>
@@ -109,36 +131,55 @@
                                 </div>
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-4" id="fotoContainer" style="display: none;">
+                                <div class="form-group">
+                                    <label for="name">Foto</label><br>
+                                    <input id="foto" name="foto" type="file" class="form-control" placeholder="foto" required>
+                                </div>
+                            </div>
+
+                            <div class="col-6 mt-3">
+                                <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                    Agregar otro metodo de pago
+                                </button>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="collapse " id="collapseExample">
+                                    <div class="row">
+                                        <span for="">Método de pago 2</span>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="name">Monto</label>
+                                                <input class="form-control" type="text" id="pago2" name="pago2">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label for="name">Metodo de Pago</label>
+                                                <select name="metodo_pago2" id="metodo_pago2" class="form-select d-inline-block">
+                                                    <option value="Efectivo">Efectivo</option>
+                                                    <option value="Tarjeta">Tarjeta</option>
+                                                    <option value="Transferencia">Transferencia</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-4" id="fotoContainer2" style="display: none;">
+                                            <div class="form-group">
+                                                <label for="name">Foto</label><br>
+                                                <input id="foto2" name="foto2" type="file" class="form-control" placeholder="foto" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
                                 <div class="form-group">
                                     <label for="name">Nota</label><br>
-                                    <textarea class="form-control" name="" id="" cols="20" rows="1"></textarea>
-                                </div>
-                            </div>
-
-                            <span for="">Método de pago 2</span>
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="name">Monto</label>
-                                    <input class="form-control" type="text" id="pago" name="pago">
-                                </div>
-                            </div>
-
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="name">Metodo de Pago</label>
-                                    <select name="metodo_pago" id="metodo_pago" class="form-select d-inline-block">
-                                        <option value="Efectivo">Efectivo</option>
-                                        <option value="Tarjeta">Tarjeta</option>
-                                        <option value="Transferencia">Transferencia</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="name">Nota</label><br>
-                                    <textarea class="form-control" name="" id="" cols="20" rows="1"></textarea>
+                                    <textarea class="form-control" name="nota" id="nota" cols="20" rows="1"></textarea>
                                 </div>
                             </div>
                         </div>

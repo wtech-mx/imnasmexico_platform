@@ -24,18 +24,15 @@ class CustomAuthController extends Controller
             'password' => 'required',
         ]);
 
-        // $credentials = $request->only('email', 'password');
-
-        // if (Auth::attempt($credentials)) {
-        //     return redirect()->intended('perfil')
-        //                 ->withSuccess('Registrado');
-        // }
-
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))){
             if(Auth::user()->cliente == '2'){
                 return redirect('/profesor/inicio');
+            }elseif(Auth::user()->cliente == '3'){
+                return redirect("cam/evaluador")->withSuccess('Sesión iniciada');
+            }elseif(Auth::user()->cliente == '4'){
+                return redirect("cam/centro")->withSuccess('Sesión iniciada');
             }else{
                 return redirect("calendario")->withSuccess('Sesión iniciada');
             }

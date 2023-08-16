@@ -47,34 +47,7 @@
                 <div class="text-center text-muted mb-4">
                   <small>Ingresa tu Correo y tu Clave</small>
                 </div>
-
-                {{-- <form method="POST" action="{{ route('login') }}"> --}}
-                    <form method="POST" action="{{ route('login.custom') }}">
-                  @csrf
-
-                  <div class="mb-3">
-                    <input id="username" name="username" type="number" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required autofocus>
-                        @error('username')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                  </div>
-
-                  <div class="mb-3">
-                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                  </div>
-
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-primary w-100 my-4 mb-2" style="background-color: #6EC1E4!important"> Ingresar</button>
-                  </div>
-
-                </form>
+                    <h1>Hola</h1>
 
               </div>
             </div>
@@ -97,28 +70,7 @@
       </div>
     </div>
   </footer>
-  <!-- -------- END FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-  <!--   Core JS Files   -->
-  <script src="{{asset('assets/admin/js/core/popper.min.js')}}"></script>
-  <script src="{{asset('assets/admin/js/core/bootstrap.min.js')}}"></script>
-  <script src="{{asset('assets/admin/js/plugins/perfect-scrollbar.min.js')}}"></script>
-  <script src="{{asset('assets/admin/js/plugins/smooth-scrollbar.min.js')}}"></script>
-  <!-- Kanban scripts -->
-  <script src="{{asset('assets/admin/js/plugins/dragula/dragula.min.js')}}"></script>
-  <script src="{{asset('assets/admin/js/plugins/jkanban/jkanban.js')}}"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="{{asset('assets/admin/js/argon-dashboard.min.js?v=2.0.4')}}"></script>
 </body>
 
 </html>
+
