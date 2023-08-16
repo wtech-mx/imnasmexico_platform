@@ -1,76 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app_cam')
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/admin/img/apple-icon.png')}}">
-  <link rel="icon" type="image/png" href="{{asset('assets/user/logotipos/cam.png')}}">
-  <title>
-    CAM
-  </title>
-  <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-  <!-- Nucleo Icons -->
-  <link href="{{asset('assets/admin/css/nucleo-icons.css')}}" rel="stylesheet" />
-  <link href="{{asset('assets/admin/css/nucleo-svg.css')}}" rel="stylesheet" />
-  <!-- Font Awesome Icons -->
-  <script src="https://kit.fontawesome.com/42d5adcbca.js')}}" crossorigin="anonymous"></script>
-  <link href="{{asset('assets/admin/css/nucleo-svg.css')}}" rel="stylesheet" />
-  <!-- CSS Files -->
-  <link id="pagestyle" href="{{asset('assets/admin/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
-</head>
+@section('template_title')
+    Evaluador independiente
+@endsection
 
-<body class="">
+@section('css_custom')
+    <link href="{{asset('assets/cam/estilos/custom.css')}}" rel="stylesheet" />
+@endsection
+5569358180
+@section('content')
 
-    <style>
-.bg-gradient-dark {
-    opacity: 0.5!important;
-    background-image: linear-gradient(310deg, #6EC1E4 0%, #6EC1E4 100%)!important;
-}
-    </style>
+<section class="cam_bg_users">
 
-  <main class="main-content main-content-bg mt-0">
-    <div class="page-header min-vh-100" style="background-image: url('{{asset('assets/user/utilidades/portada_cam.webp')}}');">
-      <span class="mask bg-gradient-dark opacity-6"></span>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-4 col-md-7">
-            <div class="card border-0 mb-0" style="border-style: solid!important;border-width: 0px 9px 9px 0px!important;border-color: #6EC1E4!important;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);">
-              <div class="card-header bg-transparent">
-                <p class="text-center">
-                    <img style="width: 90px;" src="{{asset('assets/user/logotipos/cam.png')}}" alt="">
-                </p>
-                <h5 class="text-dark text-center mt-2 mb-3">Bienvenido a <br> CAM</h5>
-              </div>
-              <div class="card-body px-lg-5 pt-0">
-                <div class="text-center text-muted mb-4">
-                  <small>Ingresa tu Correo y tu Clave</small>
+    <div class="row">
+
+        <div class="col-12 mb-5">
+            <h1 class="text-center tittle_bold_cam">Bienvenido <br> Evaluador independiente: </h1> <h3 class="text-center tittle_border_cam">Alberto perex</h3>
+        </div>
+
+        <div class="col-4">
+            <div class="d-flex justify-content-center">
+                <div class="card_user">
+                    <img src="{{ asset('assets/cam/usuario.png') }}" alt="" width="80px">
                 </div>
-                    <h1>Hola</h1>
-
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </main>
-  <!-- -------- START FOOTER 3 w/ COMPANY DESCRIPTION WITH LINKS & SOCIAL ICONS & COPYRIGHT ------- -->
-  <footer class="footer py-2">
-    <div class="container">
-      <div class="row">
-        <div class="col-8 mx-auto text-center mt-1">
-          <p class="mb-0 text-secondary">
-            Power By <script>
-              document.write(new Date().getFullYear())
-            </script> WebTech
-          </p>
-        </div>
-      </div>
-    </div>
-  </footer>
-</body>
 
-</html>
+        <div class="col-4">
+            <div class="d-flex justify-content-center">
+                <div class="card_user">
+                    <img src="{{ asset('assets/cam/reproductor-de-video.png') }}" alt="" width="80px">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div class="d-flex justify-content-center">
+                <div class="card_user">
+                    <img src="{{ asset('assets/cam/expediente.png') }}" alt="" width="80px">
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</section>
+
+@endsection
+
 

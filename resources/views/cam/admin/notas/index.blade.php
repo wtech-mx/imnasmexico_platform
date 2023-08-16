@@ -45,42 +45,7 @@ Notas CAM
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            <tr>
-                                                <td>11</td>
-                                                <th>Verplancken Sheila</th>
 
-                                                <td>Centro Evaluación</td>
-                                                <td>
-                                                    <label class="badge badge-sm" style="color: #009ee3;background-color: #009ee340;">Mercado Pago</label>
-                                                </td>
-                                                <td>
-                                                    15/07/2023
-                                                </td>
-
-                                                <td>
-                                                    @can('cursos-edit')
-                                                        <a class="btn btn-sm btn-success" href="#" title="Editar"><i class="fa fa-fw fa-edit"></i> </a>
-                                                    @endcan
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>12</td>
-                                                <th>Espinosa   Dayanna</th>
-
-                                                <td>Evaluador Ind.</td>
-                                                <td>
-                                                    <label class="badge badge-sm" style="color: #746AB0;background-color: #746ab061;">Efectivo</label>
-                                                </td>
-                                                <td>
-                                                    15/07/2023
-                                                </td>
-
-                                                <td>
-                                                    @can('cursos-edit')
-                                                        <a class="btn btn-sm btn-success" href="#" title="Editar"><i class="fa fa-fw fa-edit"></i> </a>
-                                                    @endcan
-                                                </td>
-                                            </tr>
                                     </tbody>
                                 </table>
                             </div>
