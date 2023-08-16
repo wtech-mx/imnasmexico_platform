@@ -359,6 +359,14 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         return view('cam.usuario.evaluador');
     })->name('evaluador');
 
+    Route::get('evaluador/videos', function () {
+        return view('cam.videos.evaluador');
+    })->name('videos.evaluador');
+
+    Route::get('centro/videos', function () {
+        return view('cam.videos.centro');
+    })->name('videos.centro');
+
     Route::get('centro', function () {
         return view('cam.usuario.centro');
     })->name('centro');

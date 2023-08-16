@@ -36,3 +36,24 @@
     -webkit-text-stroke-color: #FFFFFF;
     stroke: #FFFFFF;
 }
+
+.tittle_border_cam_min{
+    color: #5AB5C200;
+    font-family: "Roboto", Sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    -webkit-text-stroke-width: 1px;
+    stroke-width: 1px;
+    -webkit-text-stroke-color: #FFFFFF;
+    stroke: #FFFFFF;
+}
+
+.cam_bg_videos{
+    background-color: #6EC1E4;
+}
+
+.video{
+    height: 100%;
+    width: 80%;
+}
+
