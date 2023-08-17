@@ -18,13 +18,7 @@ Expedientes
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
-                            </a>
-
-                            @can('cursos-create')
-                            <a class="btn btn-sm btn-success" href="{{ route('view.expediente') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                <i class="fa fa-fw fa-edit"></i> Crear
                             </a>
-                            @endcan
 
                         </div>
                     </div>
@@ -35,51 +29,39 @@ Expedientes
                                     <thead class="thead">
                                         <tr>
                                             <th>No</th>
-                                            <th>Img</th>
                                             <th>Nombre</th>
-                                            <th>fecha inicio</th>
-                                            <th>fecha final</th>
-                                            <th>modalidad</th>
+                                            <th>Tipo</th>
+                                            <th>Fecha Emisión</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                            <tr>
-                                                <td>11</td>
-                                                <th>Espinosa Verplancken Sheila Dayanna</th>
+                                            @foreach ($expedientes as $expediente)
+                                                <tr>
+                                                    <td>{{$expediente->Nota->id}}</td>
+                                                    <th>{{$expediente->Nota->Cliente->name}}</th>
 
-                                                <td>Evaluador Ind.</td>
-                                                <td>
-                                                    <label class="badge badge-sm" style="color: #009ee3;background-color: #009ee340;">Fase 2</label>
-                                                </td>
-                                                <td>
-                                                    15/07/2023
-                                                </td>
+                                                    <td>{{$expediente->Nota->tipo}}</td>
+                                                    <td>
+                                                        @php
+                                                            $fecha = $expediente->created_at;
+                                                            // Convertir a una marca de tiempo Unix
+                                                            $timestamp = strtotime($fecha);
+                                                            // Formatear la fecha
+                                                            $fecha_formateada = strftime('%e de %B del %Y', $timestamp);
+                                                            // Formatear la hora
+                                                            $hora_formateada = date('h:i A', $timestamp);
+                                                            // Combinar fecha y hora
+                                                            $fecha_hora_formateada = $fecha_formateada . ' a las ' . $hora_formateada;
+                                                        @endphp
+                                                        {{ $fecha_hora_formateada}}
+                                                    </td>
 
-                                                <td>
-                                                    @can('cursos-edit')
-                                                        <a class="btn btn-sm btn-success" href="#" title="Editar"><i class="fa fa-fw fa-edit"></i> </a>
-                                                    @endcan
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>12</td>
-                                                <th>Espinosa   Dayanna</th>
-
-                                                <td>Evaluador Ind.</td>
-                                                <td>
-                                                    <label class="badge badge-sm" style="color: #746AB0;background-color: #746ab061;">Fase 3</label>
-                                                </td>
-                                                <td>
-                                                    15/07/2023
-                                                </td>
-
-                                                <td>
-                                                    @can('cursos-edit')
-                                                        <a class="btn btn-sm btn-success" href="#" title="Editar"><i class="fa fa-fw fa-edit"></i> </a>
-                                                    @endcan
-                                                </td>
-                                            </tr>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-success" href="{{ route('expediente.edit', $expediente->Nota->id) }}" title="Editar"><i class="fa fa-fw fa-edit"></i> </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                     </tbody>
                                 </table>
                             </div>

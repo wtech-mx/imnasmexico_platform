@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Cam;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class CamDocumentosUsers extends Model
 {
     use HasFactory;
-    protected $table = 'cam_citas';
+    protected $table = 'cam_docusers';
     protected $primarykey = "id";
 
     protected $fillable = [

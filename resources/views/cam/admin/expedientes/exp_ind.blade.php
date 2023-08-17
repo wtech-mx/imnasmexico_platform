@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-Expediente
+Expediente {{$expediente->id}}
 @endsection
 
 @section('content')
@@ -17,10 +17,10 @@ Expediente
             <div class="col-auto my-auto">
             <div class="h-100">
                 <h5 class="mb-1">
-                Sayo Kravits
+                    {{$expediente->Nota->Cliente->name}}
                 </h5>
                 <p class="mb-0 font-weight-bold text-sm">
-                Evaluador independiente
+                    {{$expediente->Nota->tipo}}
                 </p>
             </div>
             </div>
@@ -28,13 +28,13 @@ Expediente
             <div class="nav-wrapper position-relative end-0">
                 <ul class="nav nav-pills nav-fill p-1" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
+                    <a class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center " id="pills-cam-exp-inicio-tab" data-bs-toggle="pill" data-bs-target="#pills-cam-exp-inicio" type="button" role="tab" aria-controls="pills-cam-exp-inicio" aria-selected="true">
                     <i class="ni ni-app"></i>
                     <span class="ms-2">Inicio</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                    <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center "id="pills-cam-exp-doc-tab" data-bs-toggle="pill" data-bs-target="#pills-cam-exp-doc" type="button" role="tab" aria-controls="pills-cam-exp-doc" aria-selected="false">
                     <i class="ni ni-email-83"></i>
                     <span class="ms-2">Documentación</span>
                     </a>
@@ -52,211 +52,182 @@ Expediente
         </div>
     </div>
 
-        <div class="container-fluid py-4">
-            <div class="row mt-3">
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="card h-100">
-                        <div class="card-header pb-0 p-3">
-                            <h6 class="mb-0">Checklist</h6>
+                <div class="container-fluid py-4">
+                    <div class="row mt-3">
+                        <div class="col-12 col-md-6 col-xl-4">
+                            <div class="card h-100">
+                                <div class="card-header pb-0 p-3">
+                                    <h6 class="mb-0">Checklist</h6>
+                                </div>
+                                <div class="card-body p-3">
+                                    <h6 class="text-uppercase text-body text-xs font-weight-bolder">Primera Fase</h6>
+                                    <ul class="list-group">
+                                    <li class="list-group-item border-0 px-0">
+                                        <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="1" checked>
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                            1.- NOMBRAMIENTO DEL EVALUADOR INDEPENDIENTE POR PARTE DE LA ENTIDAD DE
+                                            CERTIFICACIÓN Y EVALUACIÓN JUNTO CON DECÁLOGO DEL EVALUADOR DE COMPETENCIA.</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 px-0">
+                                        <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="2" checked>
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                            2.- ACUERDO DE CONFIENCIALIDAD ENTRE LA ENTIDAD DE CERTIFICACIÓN Y EVALUACIÓN Y EL
+                                            EVALUADOR INDEPENDIENTE.</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 px-0">
+                                        <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="3">
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                            3.- LOGO DEL EVALUADOR INDEPENDIENTE QUE UTILIZARA EN SUS PUBLICACIONES</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 px-0">
+                                        <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="4">
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                            4.- COMPROBANTE DE DOMICILIO DEL EVALAUDOR INDEPENDIENTE</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 px-0">
+                                        <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="5">
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                            5.- CONTRATO INDIVIDUAL DE TRABAJO DEL EVALUADOR CON ANEXO DE ARTICULOS 64, 65 Y 66.
+                                            ENTRE LA ENTIDAD DE CERTIFICACIÓN Y EVALUACIÓN Y EL EVALUADOR INDEPENDIENTE</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 px-0 pb-0">
+                                        <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="6">
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                            6.- CURRICULUM VITAE DEL EVALUADOR INDEPENDIENTE</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 px-0">
+                                        <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="7">
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                            7.- INE</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 px-0">
+                                        <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="8">
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                            8.- CURP</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 px-0 pb-0">
+                                        <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="9">
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                            9.- ACTA DE NACIMIENTO</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 px-0">
+                                        <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="10">
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                            10.- RECONOCIMIENOS O CERTIFICADOS RELACIONADOS CON LOS ESTÁNDARES QUE SE
+                                            ACREDITAN</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 px-0">
+                                        <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="11">
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                            11.- LISTADO DE LOS ESTÁNDARES ACREDITADOS DEBE INCLUIR EL EC0076</label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item border-0 px-0 pb-0">
+                                        <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="12">
+                                        <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                            12.- ACREDITACIONES DE LOS ESTÁNDARES POR PARTE DE LA ENTIDAD DE CERTIFICACIÓN Y
+                                            EVALUACIÓN</label>
+                                        </div>
+                                    </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body p-3">
-                            <h6 class="text-uppercase text-body text-xs font-weight-bolder">Primera Fase</h6>
-                            <ul class="list-group">
-                            <li class="list-group-item border-0 px-0">
-                                <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-0" type="checkbox" id="1" checked>
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    1.- NOMBRAMIENTO DEL EVALUADOR INDEPENDIENTE POR PARTE DE LA ENTIDAD DE
-                                    CERTIFICACIÓN Y EVALUACIÓN JUNTO CON DECÁLOGO DEL EVALUADOR DE COMPETENCIA.</label>
+                        <div class="col-12 col-md-6 col-xl-4 mt-md-0 mt-4">
+                            <div class="card h-100">
+                                <div class="card-header pb-0 p-3">
+                                        <h6 class="mb-0">Información {{$expediente->Nota->tipo}}</h6>
                                 </div>
-                            </li>
-                            <li class="list-group-item border-0 px-0">
-                                <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-0" type="checkbox" id="2" checked>
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    2.- ACUERDO DE CONFIENCIALIDAD ENTRE LA ENTIDAD DE CERTIFICACIÓN Y EVALUACIÓN Y EL
-                                    EVALUADOR INDEPENDIENTE.</label>
+                                <div class="card-body p-3">
+                                    <p class="text-sm">
+                                        {{$expediente->Nota->nota}}
+                                    </p>
+                                    <hr class="horizontal gray-light my-4">
+                                    <ul class="list-group">
+                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Nombre:</strong> &nbsp; {{$expediente->Nota->Cliente->name}}</li>
+                                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Celular:</strong> &nbsp; {{$expediente->Nota->Cliente->telefono}}</li>
+                                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Correo:</strong> &nbsp; {{$expediente->Nota->Cliente->email}}</li>
+                                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Referencia:</strong> &nbsp; {{$expediente->Nota->referencia}}</li>
+                                    <li class="list-group-item border-0 ps-0 pb-0">
+                                        <strong class="text-dark text-sm">Social:</strong> &nbsp;
+                                        <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.facebook.com/{{$expediente->Nota->Cliente->facebook}}" target="_blank">
+                                        <i class="fab fa-facebook fa-lg"></i>
+                                        </a>
+                                        <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.tiktok.com/{{$expediente->Nota->Cliente->tiktok}}" target="_blank">
+                                        <i class="fab fa-tiktok fa-lg"></i>
+                                        </a>
+                                        <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.instagram.com/{{$expediente->Nota->Cliente->instagram}}" target="_blank">
+                                        <i class="fab fa-instagram fa-lg"></i>
+                                        </a>
+                                    </li>
+                                    </ul>
                                 </div>
-                            </li>
-                            <li class="list-group-item border-0 px-0">
-                                <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-0" type="checkbox" id="3">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    3.- LOGO DEL EVALUADOR INDEPENDIENTE QUE UTILIZARA EN SUS PUBLICACIONES</label>
+                            </div>
+                        </div>
+                    <div class="col-12 col-xl-4 mt-xl-0 mt-4">
+                        <div class="card h-100">
+                            <div class="card-header pb-0 p-3">
+                                <div class="row">
+                                    <div class="col-md-8 d-flex align-items-center">
+                                        <h6 class="mb-0">Estandares</h6>
+                                        <div class="col-md-4 text-end">
+                                            <a href="javascript:;">
+                                            <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar"></i>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </li>
-                            <li class="list-group-item border-0 px-0">
-                                <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-0" type="checkbox" id="4">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    4.- COMPROBANTE DE DOMICILIO DEL EVALAUDOR INDEPENDIENTE</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-0 px-0">
-                                <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-0" type="checkbox" id="5">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    5.- CONTRATO INDIVIDUAL DE TRABAJO DEL EVALUADOR CON ANEXO DE ARTICULOS 64, 65 Y 66.
-                                    ENTRE LA ENTIDAD DE CERTIFICACIÓN Y EVALUACIÓN Y EL EVALUADOR INDEPENDIENTE</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-0 px-0 pb-0">
-                                <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-0" type="checkbox" id="6">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    6.- CURRICULUM VITAE DEL EVALUADOR INDEPENDIENTE</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-0 px-0">
-                                <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-0" type="checkbox" id="7">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    7.- INE</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-0 px-0">
-                                <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-0" type="checkbox" id="8">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    8.- CURP</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-0 px-0 pb-0">
-                                <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-0" type="checkbox" id="9">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    9.- ACTA DE NACIMIENTO</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-0 px-0">
-                                <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-0" type="checkbox" id="10">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    10.- RECONOCIMIENOS O CERTIFICADOS RELACIONADOS CON LOS ESTÁNDARES QUE SE
-                                    ACREDITAN</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-0 px-0">
-                                <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-0" type="checkbox" id="11">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    11.- LISTADO DE LOS ESTÁNDARES ACREDITADOS DEBE INCLUIR EL EC0076</label>
-                                </div>
-                            </li>
-                            <li class="list-group-item border-0 px-0 pb-0">
-                                <div class="form-check form-switch ps-0">
-                                <input class="form-check-input ms-0" type="checkbox" id="12">
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    12.- ACREDITACIONES DE LOS ESTÁNDARES POR PARTE DE LA ENTIDAD DE CERTIFICACIÓN Y
-                                    EVALUACIÓN</label>
-                                </div>
-                            </li>
-                            </ul>
+                            </div>
+                            <div class="card-body p-3">
+                                <ul class="list-group">
+                                    @foreach ($estandares_usuario as $estandar_usuario)
+
+                                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                            <div class="avatar me-4">
+                                                @if ($estandar_usuario->estatus == 'Pendiente')
+                                                    <p class="border-radius-lg shadow" style="background-color: #c05b21;">Pendiente</p>
+                                                @elseif($estandar_usuario->estatus == 'Rechazado')
+                                                    <p class="border-radius-lg shadow" style="background-color: #aa2222;">Rechazado</p>
+                                                @else
+                                                    <p class="border-radius-lg shadow" style="background-color: #63ac28;">Aprovado</p>
+                                                @endif
+
+                                            </div>
+                                            <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">{{$estandar_usuario->Estandar->estandar}}</h6>
+                                            <p class="mb-0 text-xs">{{$estandar_usuario->evaluador}}</p>
+                                            </div>
+                                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Editar</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-md-6 col-xl-4 mt-md-0 mt-4">
-                    <div class="card h-100">
-                        <div class="card-header pb-0 p-3">
-                                <h6 class="mb-0">Información Evaluador</h6>
-                        </div>
-                        <div class="card-body p-3">
-                            <p class="text-sm">
-                            Hi, I’m Alec Thompson, Decisions: If you can’t decide, the answer is no. If two equally difficult paths, choose the one more painful in the short term (pain avoidance is creating an illusion of equality).
-                            </p>
-                            <hr class="horizontal gray-light my-4">
-                            <ul class="list-group">
-                            <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Full Name:</strong> &nbsp; Alec M. Thompson</li>
-                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Mobile:</strong> &nbsp; (44) 123 1234 123</li>
-                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong> &nbsp; alecthompson@mail.com</li>
-                            <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Location:</strong> &nbsp; USA</li>
-                            <li class="list-group-item border-0 ps-0 pb-0">
-                                <strong class="text-dark text-sm">Social:</strong> &nbsp;
-                                <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
-                                <i class="fab fa-facebook fa-lg"></i>
-                                </a>
-                                <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
-                                <i class="fab fa-twitter fa-lg"></i>
-                                </a>
-                                <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="javascript:;">
-                                <i class="fab fa-instagram fa-lg"></i>
-                                </a>
-                            </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            <div class="col-12 col-xl-4 mt-xl-0 mt-4">
-                <div class="card h-100">
-                    <div class="card-header pb-0 p-3">
-                        <div class="row">
-                            <div class="col-md-8 d-flex align-items-center">
-                                <h6 class="mb-0">Evaluadores</h6>
-                                <div class="col-md-4 text-end">
-                                    <a href="javascript:;">
-                                    <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body p-3">
-                        <ul class="list-group">
-                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                            <div class="avatar me-3">
-                            <img src="../../../assets/img/kal-visuals-square.jpg" alt="kal" class="border-radius-lg shadow">
-                            </div>
-                            <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Sophie B.</h6>
-                            <p class="mb-0 text-xs">Hi! I need more information..</p>
-                            </div>
-                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Ver</a>
-                        </li>
-                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                            <div class="avatar me-3">
-                            <img src="../../../assets/img/marie.jpg" alt="kal" class="border-radius-lg shadow">
-                            </div>
-                            <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Anne Marie</h6>
-                            <p class="mb-0 text-xs">Awesome work, can you..</p>
-                            </div>
-                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Ver</a>
-                        </li>
-                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                            <div class="avatar me-3">
-                            <img src="../../../assets/img/ivana-square.jpg" alt="kal" class="border-radius-lg shadow">
-                            </div>
-                            <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Ivanna</h6>
-                            <p class="mb-0 text-xs">About files I can..</p>
-                            </div>
-                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Ver</a>
-                        </li>
-                        <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                            <div class="avatar me-3">
-                            <img src="../../../assets/img/team-4.jpg" alt="kal" class="border-radius-lg shadow">
-                            </div>
-                            <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Peterson</h6>
-                            <p class="mb-0 text-xs">Have a great afternoon..</p>
-                            </div>
-                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Ver</a>
-                        </li>
-                        <li class="list-group-item border-0 d-flex align-items-center px-0">
-                            <div class="avatar me-3">
-                            <img src="../../../assets/img/team-3.jpg" alt="kal" class="border-radius-lg shadow">
-                            </div>
-                            <div class="d-flex align-items-start flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">Nick Daniel</h6>
-                            <p class="mb-0 text-xs">Hi! I need more information..</p>
-                            </div>
-                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Ver</a>
-                        </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <div class="row mt-4">
         <div class="col-12">

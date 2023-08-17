@@ -5,7 +5,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\WebhooksController;
-use App\Http\Controllers\ExpedientesController;
+use App\Http\Controllers\Cam\CamExpedientesController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\RevoesController;
 
@@ -372,9 +372,12 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
     })->name('centro');
 
     Route::middleware(['auth'])->group(function () {
-        Route::get('/expedientes', [HomeController::class, 'index_cam'])->name('cam.dashboard');
-        Route::get('/expediente', [ExpedientesController::class, 'view'])->name('view.expediente');
+        // =============== M O D U L O   E X P E D I E N T E S ===============================
+        Route::get('/expedientes/independiente', [CamExpedientesController::class, 'index_ind'])->name('independiente.index');
+        Route::get('/expediente', [CamExpedientesController::class, 'view'])->name('view.expediente');
+        Route::get('/expediente/edit/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'edit'])->name('expediente.edit');
 
+        // =============== M O D U L O  N O T A S ===============================
         Route::get('/notas/index', [App\Http\Controllers\Cam\NotasCamController::class, 'index'])->name('index.notas');
         Route::post('/notas/crear', [App\Http\Controllers\Cam\NotasCamController::class, 'crear'])->name('crear.notas');
 

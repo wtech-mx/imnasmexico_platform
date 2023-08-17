@@ -474,7 +474,7 @@
                             <ul class="nav ms-4">
                                 <li class="nav-item ">
                                 @can('cursos-show')
-                                    <a class="nav-link {{ (Request::is('/cam/expedientes*') ? 'show' : '') }}" href="{{ route('cam.dashboard') }}">
+                                    <a class="nav-link {{ (Request::is('/cam/expedientes*') ? 'show' : '') }}" href="{{ route('independiente.index') }}">
                                         <span class="sidenav-mini-icon"> P </span>
                                         <span class="sidenav-normal">Evaluador Independiente</span>
                                     </a>

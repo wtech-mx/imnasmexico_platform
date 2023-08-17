@@ -64,7 +64,7 @@
 
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label for="name">Celular</label>
+                                    <label for="name">Celular *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/foldable-phone.png') }}" alt="" width="35px">
@@ -156,10 +156,10 @@
 
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="">Seleccione estandares</label><br>
+                                    <label for="">Seleccione estandares *</label><br>
                                         <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
                                             @foreach ($estandares_cam as $estandar_cam)
-                                                <option value="{{$estandar_cam->estandar}}">{{$estandar_cam->estandar}}</option>
+                                                <option value="{{$estandar_cam->id}}">{{$estandar_cam->estandar}}</option>
                                             @endforeach
                                         </select>
                                 </div>
@@ -265,7 +265,7 @@
 
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="name">Referencia</label>
+                                    <label for="name">Referencia *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/refer.png') }}" alt="" width="35px">

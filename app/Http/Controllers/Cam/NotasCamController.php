@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\PlantillaNuevoUser;
 use App\Models\Cam\CamChecklist;
 use App\Models\Cam\CamNotEstandares;
+use App\Models\Cam\CamCitas;
+use App\Models\Cam\CamDocumentosUsers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -32,9 +34,9 @@ class NotasCamController extends Controller
 
     public function crear(Request $request){
         $code = Str::random(8);
-        if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
-            if (User::where('telefono', $request->telefono)->exists()) {
-                $user = User::where('telefono', $request->telefono)->first();
+        if (User::where('telefono', $request->celular)->exists() || User::where('email', $request->email)->exists()) {
+            if (User::where('telefono', $request->celular)->exists()) {
+                $user = User::where('telefono', $request->celular)->first();
             } else {
                 $user = User::where('email', $request->email)->first();
             }
@@ -78,6 +80,7 @@ class NotasCamController extends Controller
         $notas_cam->monto1 = $request->get('monto1');
         $notas_cam->metodo_pago = $request->get('metodo_pago');
         $notas_cam->nota = $request->get('nota');
+        $notas_cam->referencia = $request->get('referencia');
         $notas_cam->id_usuario = auth()->user()->id;
         if ($request->hasFile("comprobante")) {
             $file = $request->file('comprobante');
@@ -106,6 +109,7 @@ class NotasCamController extends Controller
             $data = array(
                 'id_nota' => $notas_cam->id,
                 'id_estandar' => $estandares[$count],
+                'estatus' => 'Pendiente',
                 'id_usuario' => auth()->user()->id,
             );
             $insert_data[] = $data;
@@ -116,7 +120,15 @@ class NotasCamController extends Controller
         $checklist->id_nota = $notas_cam->id;
         $checklist->save();
 
-        return redirect()->route('pagos.pendientes')
+        $citas = new CamCitas;
+        $citas->id_nota = $notas_cam->id;
+        $citas->save();
+
+        $documentos = new CamDocumentosUsers;
+        $documentos->id_nota = $notas_cam->id;
+        $documentos->save();
+
+        return redirect()->route('index.notas')
             ->with('success', 'Nota CAM creada con exito.');
     }
 
