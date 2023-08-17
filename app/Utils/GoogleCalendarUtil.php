@@ -4,7 +4,7 @@ use Google_Client;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
 
-function crearEventoGoogleCalendar($nombreCurso, $fechaInicio, $fechaFin, $idProfesor, $idCurso) {
+function GoogleCalendarUtil($nombreCurso, $fechaInicio, $fechaFin, $idProfesor, $idCurso) {
     $client = new Google_Client();
     // Configura las credenciales obtenidas desde la consola de desarrolladores de Google
     $client->setAccessToken('AIzaSyA-8zwrW2RCdYbKcYuZ_62JEYbtgoaD_OY');
