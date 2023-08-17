@@ -3,9 +3,7 @@
 @section('template_title')
 Notas CAM
 @endsection
-@php
-    $fecha = date('d-m-Y');
-@endphp
+
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -21,7 +19,6 @@ Notas CAM
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
                             </a>
-
                             @can('cursos-create')
                             <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 Crear
@@ -45,7 +42,39 @@ Notas CAM
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        @foreach ($notas_cam as $nota_cam)
+                                            <tr>
+                                                <td>{{$nota_cam->id}}</td>
+                                                <td>{{$nota_cam->Cliente->name}}</td>
+                                                <td>
+                                                    @if ($nota_cam->Cliente->cliente == '4')
+                                                        <label class="badge badge-sm" style="color: #009ee3;background-color: #009ee340;">Centro Evaluación</label>
+                                                    @else
+                                                        <label class="badge badge-sm" style="color: #746AB0;background-color: #746ab061;">Evaluador Independiente</label>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{$nota_cam->metodo_pago}}
+                                                    @if ($nota_cam->metodo_pago2 != NULL)
+                                                        - {{$nota_cam->metodo_pago2}}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @php
+                                                        $fecha = $nota_cam->created_at;
+                                                        // Convertir a una marca de tiempo Unix
+                                                        $timestamp = strtotime($fecha);
+                                                        // Formatear la fecha
+                                                        $fecha_formateada = strftime('%e de %B del %Y', $timestamp);
+                                                        // Formatear la hora
+                                                        $hora_formateada = date('h:i A', $timestamp);
+                                                        // Combinar fecha y hora
+                                                        $fecha_hora_formateada = $fecha_formateada . ' a las ' . $hora_formateada;
+                                                    @endphp
+                                                    {{ $fecha_hora_formateada}}
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

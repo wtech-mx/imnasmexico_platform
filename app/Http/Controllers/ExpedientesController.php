@@ -8,7 +8,7 @@ class ExpedientesController extends Controller
 {
     public function view(Request $request){
 
-        return view('cam.expedientes.exp_ind');
+        return view('cam.admin.expedientes.exp_ind');
     }
 
 

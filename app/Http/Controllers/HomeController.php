@@ -154,6 +154,6 @@ class HomeController extends Controller
     }
 
     public function index_cam(){
-        return view('cam.expedientes.index');
+        return view('cam.admin.expedientes.index');
     }
 }

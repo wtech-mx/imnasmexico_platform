@@ -19,13 +19,14 @@ return new class extends Migration
                 ->inDelete('set null');
 
             $table->text('tipo');
+            $table->text('membresia')->nullable();
             $table->text('monto1')->nullable();
             $table->text('monto2')->nullable();
             $table->text('metodo_pago')->nullable();
             $table->text('metodo_pago2')->nullable();
             $table->text('nota')->nullable();
-            $table->text('nota2')->nullable();
             $table->text('comprobante', 900)->nullable();
+            $table->text('comprobante2', 900)->nullable();
             $table->text('descuento')->nullable();
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')

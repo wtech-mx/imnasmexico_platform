@@ -3,14 +3,14 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createDataModalLabel">Crear nota de cam</h5>
+                <h5 class="modal-title" id="createDataModalLabel"># Nota:{{$siguienteId}}</h5>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
                     <span aria-hidden="true">X</span>
                 </button>
             </div>
 
-            <form method="POST" action="{{ route('notas_cursos.store') }}" enctype="multipart/form-data" role="form">
+            <form method="POST" action="{{ route('crear.notas') }}" enctype="multipart/form-data" role="form">
                 @csrf
                     <div class="modal-body">
                         <div class="row">
@@ -28,7 +28,7 @@
 
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="name">Apellido(s) *</label>
+                                    <label for="name">Apellidos *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/etiqueta.png') }}" alt="" width="35px">
@@ -40,7 +40,7 @@
 
                             <div class="col-6">
                                 <div class="form-group">
-                                    <label for="name">Correo(s) *</label>
+                                    <label for="name">Correo *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
@@ -82,7 +82,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/facebook.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="facebook" name="facebook" type="text" class="form-control" required>@error('facebook') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="facebook" name="facebook" type="text" class="form-control" placeholder="naturalesainspa">@error('facebook') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +94,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/tiktok.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="tiktok" name="tiktok" type="text" class="form-control" required>@error('tiktok') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="tiktok" name="tiktok" type="text" class="form-control" placeholder="@imnasmexico">@error('tiktok') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +106,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/instagram.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="instagram" name="instagram" type="text" class="form-control" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="instagram" name="instagram" type="text" class="form-control" placeholder="naturalesainspaoficial">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +118,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="fecha" name="fecha" type="date" class="form-control" value="{{$fecha}}" required>@error('fecha') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="fecha" name="fecha" type="text" class="form-control" value="{{$fecha}}" disabled>
                                     </div>
                                 </div>
                             </div>
@@ -156,14 +156,11 @@
 
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="">Estandares</label><br>
+                                    <label for="">Seleccione estandares</label><br>
                                         <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
-                                            <option value="EC0859 Diseño de maquillaje profesional." >EC0859 Diseño de maquillaje profesional.</option>
-                                            <option value="EC1336 Cosmetológicos faciales y corporales.">EC1336 Cosmetológicos faciales y corporales.</option>
-                                            <option value="">EC0900 Aplicación de masaje holístico.</option>
-                                            <option value="">EC0019 Tutoría de cursos de formación en línea</option>
-                                            <option value="">EC0366 Desarrollo de cursos de formación en línea</option>
-                                            <option value="">EC1206 Preparación del servicio de dieta hospitalaria</option>
+                                            @foreach ($estandares_cam as $estandar_cam)
+                                                <option value="{{$estandar_cam->estandar}}">{{$estandar_cam->estandar}}</option>
+                                            @endforeach
                                         </select>
                                 </div>
                             </div>
@@ -183,7 +180,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                         </span>
-                                        <input class="form-control" type="text" id="pago" name="pago">
+                                        <input class="form-control" type="number" id="monto1" name="monto1">
                                     </div>
                                 </div>
                             </div>
@@ -207,7 +204,7 @@
                             <div class="col-4" id="fotoContainer" style="display: none;">
                                 <div class="form-group">
                                     <label for="name">Foto</label><br>
-                                    <input id="foto" name="foto" type="file" class="form-control" placeholder="foto" required>
+                                    <input id="comprobante" name="comprobante" type="file" class="form-control" placeholder="foto">
                                 </div>
                             </div>
 
@@ -228,7 +225,7 @@
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                                     </span>
-                                                    <input class="form-control" type="text" id="pago2" name="pago2">
+                                                    <input class="form-control" type="number" id="monto2" name="monto2">
                                                 </div>
                                             </div>
                                         </div>
@@ -252,7 +249,7 @@
                                         <div class="col-4" id="fotoContainer2" style="display: none;">
                                             <div class="form-group">
                                                 <label for="name">Foto</label><br>
-                                                <input id="foto2" name="foto2" type="file" class="form-control" placeholder="foto" required>
+                                                <input id="comprobante2" name="comprobante2" type="file" class="form-control" placeholder="foto">
                                             </div>
                                         </div>
                                     </div>
