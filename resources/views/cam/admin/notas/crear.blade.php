@@ -256,12 +256,25 @@
                                 </div>
                             </div>
 
-                            <div class="col-12">
+                            <div class="col-8">
                                 <div class="form-group">
                                     <label for="name">Nota</label><br>
-                                    <textarea class="form-control" name="nota" id="nota" cols="20" rows="1"></textarea>
+                                    <textarea class="form-control" name="nota" id="nota" cols="20" rows="2"></textarea>
                                 </div>
                             </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Referencia</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/refer.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="referencia" name="referencia" type="text" class="form-control" placeholder="Referencia" required>@error('referencia') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 

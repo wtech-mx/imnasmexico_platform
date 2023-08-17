@@ -14,6 +14,8 @@ class CamNotEstandares extends Model
     protected $fillable = [
         'id_nota',
         'id_estandar',
+        'estatus',
+        'evaluador',
         'id_usuario',
     ];
 

@@ -28,6 +28,7 @@ return new class extends Migration
             $table->text('comprobante', 900)->nullable();
             $table->text('comprobante2', 900)->nullable();
             $table->text('descuento')->nullable();
+            $table->text('referencia')->nullable();
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')
                 ->references('id')->on('users')

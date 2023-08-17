@@ -24,6 +24,7 @@ class CamNotas extends Model
         'comprobante',
         'descuento',
         'id_usuario',
+        'referencia',
     ];
 
     public function Cliente(){

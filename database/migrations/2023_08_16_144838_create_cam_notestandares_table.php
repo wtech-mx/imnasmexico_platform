@@ -23,6 +23,9 @@ return new class extends Migration
                 ->references('id')->on('cam_estandares')
                 ->inDelete('set null');
 
+            $table->text('estatus')->nullable();
+            $table->text('evaluador')->nullable();
+
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')
                 ->references('id')->on('users')
