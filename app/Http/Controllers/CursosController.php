@@ -24,6 +24,8 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use DB;
+use App\Utils\GoogleCalendarUtil;
+
 
 class CursosController extends Controller
 {
@@ -138,6 +140,9 @@ class CursosController extends Controller
         $evento->id_profesor = $request->get('id_profesor');
         $evento->id_curso = $curso->id;
         $evento->save();
+
+        crearEventoGoogleCalendar($curso->nombre, $curso->fecha_inicial, $curso->fecha_final, $request->get('id_profesor'), $curso->id);
+
 
         // G U A R D A R  T I C K E T
         $nombre_ticket = $request->get('nombre_ticket');
