@@ -765,7 +765,7 @@ class OrderController extends Controller
         $fechaActual = date('Y-m-d');
         Session::forget('cart');
         if ($request->input('paquete') == 1) {
-            $total = 1500;
+            $total = 1350;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas'));
             $curso = CursosTickets::where('nombre', '=', 'Diplomado de Cosmetología Facial y Corporal')
                 ->where('fecha_final', '>=', $fechaActual)

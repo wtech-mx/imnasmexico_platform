@@ -22,9 +22,9 @@
                 <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
                 <h3 style="color: #836262"><strong>
                     <del style="color: #836262">$7,400</del>
-                    $6,000</strong>
+                    $5,400</strong>
                 </h3>
-                <h5 style="color:#836262!important;">Descuento: <strong>$1,400</strong></h5>
+                <h5 style="color:#836262!important;">Descuento: <strong>$2,000</strong></h5>
                 <form class="mt-4" action="{{ route('carrito.resultado') }}" method="post">
                     @csrf
                     <h5 style="color:#836262!important;">Seleccione la canasta</h5>

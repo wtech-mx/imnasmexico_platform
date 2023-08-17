@@ -46,10 +46,10 @@ class CursoUsersController extends Controller
     public function paquetes()
     {
         $fechaActual = date('Y-m-d');
-        $curso = Cursos::where('precio','<=', 600)->where('modalidad','=', 'Online')->get();
+        $curso = Cursos::where('precio','<=', 690)->where('modalidad','=', 'Online')->get();
         $webpage = WebPage::first();
         $tickets = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
-        ->where('cursos_tickets.precio','<=', 600)
+        ->where('cursos_tickets.precio','<=', 690)
         ->where('cursos_tickets.fecha_inicial','<=', $fechaActual)
         ->where('cursos_tickets.fecha_final','>=', $fechaActual)
         ->where('cursos.modalidad','=', 'Online')
