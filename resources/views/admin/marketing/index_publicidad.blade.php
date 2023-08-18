@@ -42,11 +42,13 @@
                                 <table class="table table-flush" id="datatable-search">
                                     <thead class="thead">
                                         <tr>
+                                            <th>id</th>
                                             <th>Vista</th>
                                             <th>Nombre</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
+
                                     <tbody>
                                         @foreach ($publicidad as $recurso)
                                             @php
@@ -54,6 +56,8 @@
                                                 $extension = $file_info->getExtension();
                                             @endphp
                                             <tr>
+                                                <td>{{  $recurso->id }}</td>
+
                                                 <td>
                                                     @if ($extension === 'pdf')
                                                         <iframe src="{{ asset('publicidad/'.$recurso->nombre) }}" class=""></iframe>
@@ -64,7 +68,9 @@
                                                         Ver
                                                     </a>
                                                 </td>
+
                                                 <td>{{ $recurso->nombre }}</td>
+
                                                 <td>
                                                     @can('publicidad-eliminar')
                                                         <a class="btn btn-sm btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"><i class="fa fa-trash-o"></i></a>
@@ -74,6 +80,7 @@
                                                         </form>
                                                     @endcan
                                                 </td>
+
                                             </tr>
                                         @endforeach
                                     </tbody>
