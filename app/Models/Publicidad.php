@@ -14,5 +14,8 @@ class Publicidad extends Model
 
     protected $fillable = [
         'nombre',
+        'nombre_doc',
+        'area',
+        'sub_area',
     ];
 }
