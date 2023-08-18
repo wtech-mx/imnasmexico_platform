@@ -60,6 +60,9 @@
                                                     @else
                                                         <img id="img_material_clase" src="{{asset('publicidad/'. $recurso->nombre) }}" style="width: 100px; height: 100px;"/>
                                                     @endif
+                                                    <a href="{{ asset('publicidad/'.$recurso->nombre) }}" target="_blank" >
+                                                        Ver
+                                                    </a>
                                                 </td>
                                                 <td>{{ $recurso->nombre }}</td>
                                                 <td>
