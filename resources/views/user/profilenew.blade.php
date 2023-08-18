@@ -508,7 +508,7 @@ Mi perfil- {{$cliente->name}}
                                                             <div class="col-12">
                                                                 <div class="row">
                                                                     @if ($carpetas_literatura != NULL)
-                                                                        <h4>Faciales</h4>
+                                                                        <h2>Faciales</h2>
                                                                         @foreach ($carpetas_literatura as $carpeta)
                                                                             @if ($carpeta->sub_area_recurso == 'facial')
                                                                                 @php
@@ -533,7 +533,7 @@ Mi perfil- {{$cliente->name}}
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
-                                                                        <h4>Corporal</h4>
+                                                                        <h2>Corporal</h2>
                                                                         @foreach ($carpetas_literatura as $carpeta)
                                                                             @if ($carpeta->sub_area_recurso == 'corporal')
                                                                                 @php
