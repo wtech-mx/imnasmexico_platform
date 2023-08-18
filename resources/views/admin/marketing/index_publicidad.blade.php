@@ -56,7 +56,7 @@
                                             <tr>
                                                 <td>
                                                     @if ($extension === 'pdf')
-                                                        <embed src="{{ asset('publicidad/' . $recurso->nombre) }}" type="application/pdf" style="width: 120px; height: 120px;" />
+                                                        <iframe src="{{ asset('publicidad/'.$recurso->nombre) }}" class=""></iframe>
                                                     @else
                                                         <img id="img_material_clase" src="{{asset('publicidad/'. $recurso->nombre) }}" style="width: 100px; height: 100px;"/>
                                                     @endif
