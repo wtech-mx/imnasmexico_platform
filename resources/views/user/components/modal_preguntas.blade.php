@@ -75,8 +75,8 @@
                                             Registro IMNAS o Red CONOCER<br>
                                             1. Te contactará la gestora donde te dará un usuario y contraseña para subir a la plataforma tu información oficial.<br>
                                             2. Una vez aceptada por la gestora IMNAS tendrá máximo un mes para enviarte el documento por paquetería.<br><br>
-                                            Diploma STPS. <br>
                                             En el caso de ser foraneas hay que realizar pago de envio de $250. <br>
+                                            Diploma STPS. <br>
                                             <br>
                                             1. No se necesita ningún proceso de gestoría al término del curso.<br>
                                             2. IMNAS te enviará tu diploma a tu correo en máximo una semana.
