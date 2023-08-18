@@ -377,6 +377,9 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::get('/expediente', [CamExpedientesController::class, 'view'])->name('view.expediente');
         Route::get('/expediente/edit/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'edit'])->name('expediente.edit');
 
+        Route::patch('/expediente/cita/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_citas'])->name('expediente.cita');
+        Route::patch('/expediente/check/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_check'])->name('expediente.check');
+
         // =============== M O D U L O  N O T A S ===============================
         Route::get('/notas/index', [App\Http\Controllers\Cam\NotasCamController::class, 'index'])->name('index.notas');
         Route::post('/notas/crear', [App\Http\Controllers\Cam\NotasCamController::class, 'crear'])->name('crear.notas');
