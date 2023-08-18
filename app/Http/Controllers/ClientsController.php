@@ -48,14 +48,45 @@ class ClientsController extends Controller
                         ->where('orders.estatus','=', 1)
                         ->get();
 
-        $carpetas = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
-            ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
-            ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
-            ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
-            ->where('orders_tickets.id_usuario', $usuarioId)
-            ->where('orders.estatus', '=', 1)
-            ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpetas.id as id_carpeta')
-            ->get();
+                        $carpetas_material = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
+                        ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
+                        ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
+                        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                        ->where('orders_tickets.id_usuario', $usuarioId)
+                        ->where('orders.estatus', '=', 1)
+                        ->where('carpeta_recursos.area', '=', 'Material')
+                        ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpetas.id as id_carpeta')
+                        ->get();
+
+                    $carpetas_literatura = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
+                        ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
+                        ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
+                        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                        ->where('orders_tickets.id_usuario', $usuarioId)
+                        ->where('orders.estatus', '=', 1)
+                        ->where('carpeta_recursos.area', '=', 'Literatura')
+                        ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpeta_recursos.sub_area as sub_area_recurso','carpetas.id as id_carpeta')
+                        ->get();
+
+                    $carpetas_guia = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
+                        ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
+                        ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
+                        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                        ->where('orders_tickets.id_usuario', $usuarioId)
+                        ->where('orders.estatus', '=', 1)
+                        ->where('carpeta_recursos.area', '=', 'Guia')
+                        ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpetas.id as id_carpeta')
+                        ->get();
+
+                    $carpetas_precios = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
+                        ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
+                        ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
+                        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                        ->where('orders_tickets.id_usuario', $usuarioId)
+                        ->where('orders.estatus', '=', 1)
+                        ->where('carpeta_recursos.area', '=', 'Precios')
+                        ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpetas.id as id_carpeta')
+                        ->get();
 
         $publicidad = Publicidad::get();
 
@@ -76,7 +107,7 @@ class ClientsController extends Controller
         // Obtener los datos de los estándares
         $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
-        return view('user.profilenew',compact('estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad', 'carpetas'));
+        return view('user.profilenew',compact('carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
     }
 
     public function show($id){
