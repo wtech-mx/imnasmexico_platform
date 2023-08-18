@@ -477,7 +477,7 @@ Mi perfil- {{$cliente->name}}
                                                         <div class="tab-pane fade show active" id="content1" role="tabpanel" aria-labelledby="tab1">
                                                             <div class="col-12">
                                                                 <div class="row">
-                                                                @if ($carpetas_material != NULL)
+                                                                @if (isset($carpetas_material) && $carpetas_material != NULL)
                                                                     @foreach ($carpetas_material as $carpeta)
                                                                         @php
                                                                             $file_info = new SplFileInfo($carpeta->nombre_recurso);
@@ -500,6 +500,9 @@ Mi perfil- {{$cliente->name}}
                                                                             @endif
                                                                         @endif
                                                                     @endforeach
+                                                                @else
+                                                                    <!-- Aquí puedes mostrar un mensaje o contenido alternativo cuando no hay datos -->
+                                                                    <p>No hay datos disponibles.</p>
                                                                 @endif
                                                                 </div>
                                                             </div>
@@ -507,7 +510,7 @@ Mi perfil- {{$cliente->name}}
                                                         <div class="tab-pane fade" id="content2" role="tabpanel" aria-labelledby="tab2">
                                                             <div class="col-12">
                                                                 <div class="row">
-                                                                    @if ($carpetas_literatura != NULL)
+                                                                    @if (isset($carpetas_literatura) && $carpetas_literatura != NULL)
                                                                         <h2>Faciales</h2>
                                                                         @foreach ($carpetas_literatura as $carpeta)
                                                                             @if ($carpeta->sub_area_recurso == 'facial')
@@ -558,6 +561,9 @@ Mi perfil- {{$cliente->name}}
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
+                                                                        @else
+                                                                        <!-- Aquí puedes mostrar un mensaje o contenido alternativo cuando no hay datos -->
+                                                                        <p>No hay datos disponibles.</p>
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -565,7 +571,7 @@ Mi perfil- {{$cliente->name}}
                                                         <div class="tab-pane fade" id="content_guia" role="tabpanel" aria-labelledby="tab_guia">
                                                             <div class="col-12">
                                                                 <div class="row">
-                                                                    @if ($carpetas_guia != NULL)
+                                                                    @if (isset($carpetas_guia) && $carpetas_guia != NULL)
                                                                         @foreach ($carpetas_guia as $carpeta)
                                                                             @php
                                                                                 $file_info = new SplFileInfo($carpeta->nombre_recurso);
@@ -588,6 +594,9 @@ Mi perfil- {{$cliente->name}}
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
+                                                                        @else
+                                                                        <!-- Aquí puedes mostrar un mensaje o contenido alternativo cuando no hay datos -->
+                                                                        <p>No hay datos disponibles.</p>
                                                                     @endif
                                                                 </div>
                                                             </div>
