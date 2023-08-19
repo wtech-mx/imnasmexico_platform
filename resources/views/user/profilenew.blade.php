@@ -511,7 +511,7 @@ Mi perfil- {{$cliente->name}}
                                                             <div class="col-12">
                                                                 <div class="row">
                                                                     @if (isset($carpetas_literatura) && $carpetas_literatura != NULL)
-                                                                        <h2>Faciales</h2>
+                                                                        <h2>Literatura de fase de tratamiento facial</h2>
                                                                         @foreach ($carpetas_literatura as $carpeta)
                                                                             @if ($carpeta->sub_area_recurso == 'facial')
                                                                                 @php
@@ -536,7 +536,7 @@ Mi perfil- {{$cliente->name}}
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
-                                                                        <h2>Corporal</h2>
+                                                                        <h2>Literatura de fase de tratamiento corporal</h2>
                                                                         @foreach ($carpetas_literatura as $carpeta)
                                                                             @if ($carpeta->sub_area_recurso == 'corporal')
                                                                                 @php
