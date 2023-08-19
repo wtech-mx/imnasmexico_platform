@@ -71,33 +71,30 @@ class DocumentosController extends Controller
 
         $tipo_documentos = Tipodocumentos::find($tipo);
 
-        if($tipo_documentos->tipo== 'Diploma_STPS'){
+        if($tipo_documentos->tipo == 'Diploma_STPS'){
 
             $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
             $pdf->setPaper('A4', 'portrait');
 
             return $pdf->download('diploma_stps_'.$nombre.'.pdf');
 
-        }elseif($tipo_documentos->tipo== 'Cedula de indetidad'){
-
+        }elseif($tipo_documentos->tipo == 'Cedula de indetidad'){
             $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
             $pdf->setPaper('A4', 'portrait');
             // $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
 
-
             return $pdf->download('CN-Cedula de identidad papel_'.$nombre.'.pdf');
 
-        }elseif($tipo_documentos->tipo== 'Titulo Honorifico con QR'){
+        }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR'){
 
-            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('curso','fecha','tipo_documentos','nombre','folio','curp'));
+            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
             // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
             $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
 
-
             return $pdf->download('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
-        }
-        elseif($tipo_documentos->tipo== 'Credencial'){
+
+        }elseif($tipo_documentos->tipo == 'Credencial'){
 
             $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp'));
             $pdf->setPaper([0, 0, 85.0 * 28.35, 55.0 * 28.35], 'landscape');  // Cambiar 'a tamaño 5.5x8.5 credencial
