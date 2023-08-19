@@ -94,6 +94,19 @@ class DocumentosController extends Controller
 
             return $pdf->download('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
 
+        }elseif($tipo_documentos->tipo == 'Diploma'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.diploma_imnas',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+
+            return $pdf->download('CN-Doploma_imnas_'.$nombre.'.pdf');
+
         }elseif($tipo_documentos->tipo == 'Credencial'){
 
             $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp'));
