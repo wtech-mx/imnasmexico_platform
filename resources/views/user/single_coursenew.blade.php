@@ -278,8 +278,10 @@
                         @else
                             Registro IMNAS o Red CONOCER<br>
                         @endif
-                    1. Te contactará la gestora vía whatsApp donde te dará un usuario y contraseña para subir a la plataforma tu información oficial.<br>
-                    2. Una vez aceptada por la gestora, IMNAS tendrá máximo un mes para enviarte el documento por paquetería.<br><br>
+                    1. Sube a la plataforma tu información oficial.<br>
+                    2. Si resides fuera de la Ciudad de México (CDMX), te informamos que para recibir tus documentos, será necesario cubrir un costo de envío de $250 MXN.<br>
+                    Si te encuentras dentro de la CDMX, tendras que recoger tus documentos en nuestras instalaciones. Para ello, será necesario programar una cita previa.<br>
+                    3. IMNAS tendrá máximo un mes para enviarte el documento por paquetería.<br><br>
                     @elseif ($curso->stps == '1')
                     Diploma STPS<br>
                     1. No se necesita ningún proceso de gestoría al término del curso.<br>
