@@ -109,8 +109,14 @@ class DocumentosController extends Controller
 
         }elseif($tipo_documentos->tipo == 'Credencial'){
 
-            $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp'));
-            $pdf->setPaper([0, 0, 85.0 * 28.35, 55.0 * 28.35], 'landscape');  // Cambiar 'a tamaño 5.5x8.5 credencial
+            $ancho_cm = 5.5;
+            $alto_cm = 8.5;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
             return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
         }
