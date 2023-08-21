@@ -79,6 +79,21 @@
                                                 <div class="row">
 
                                                     <div class="form-group col-6 gc_cn">
+                                                        <label for="name">Nombre / nombres</label>
+                                                        <input id="nombres" name="nombres" type="text" class="form-control"  >
+                                                    </div>
+
+                                                    <div class="form-group col-6 gc_cn">
+                                                        <label for="name">Apellido Paterno</label>
+                                                        <input id="apellido_apeterno" name="apellido_apeterno" type="text" class="form-control"  >
+                                                    </div>
+
+                                                    <div class="form-group col-6 gc_cn">
+                                                        <label for="name">Apellido Materno</label>
+                                                        <input id="apellido_materno" name="apellido_materno" type="text" class="form-control"  >
+                                                    </div>
+
+                                                    <div class="form-group col-6 gc_cn">
                                                         <label for="name">Folio</label>
                                                         <input id="folio" name="folio" type="text" class="form-control"  >
                                                     </div>

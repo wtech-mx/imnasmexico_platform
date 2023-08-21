@@ -53,6 +53,10 @@ class DocumentosController extends Controller
         $folio = $request->get('folio');
         $curp = $request->get('curp');
 
+        $nombres = $request->get('nombres');
+        $apellido_apeterno = $request->get('apellido_apeterno');
+        $apellido_materno = $request->get('apellido_materno');
+
 
         if ($request->hasFile("img_infantil")) {
             $file = $request->file('img_infantil');
@@ -115,7 +119,7 @@ class DocumentosController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
             return $pdf->download('CN-Credencial_'.$nombre.'.pdf');

@@ -57,34 +57,46 @@ Generar Documentos
 @section('datatable')
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const curpOption = document.getElementById("curp_option");
-        const tipoOption = document.getElementById("tipo");
+document.addEventListener("DOMContentLoaded", function () {
+    const curpOption = document.getElementById("curp_option");
+    const tipoOption = document.getElementById("tipo");
 
-        const curpContent = document.querySelector(".curp_content");
+    const curpContent = document.querySelector(".curp_content");
 
-        const cnContent = document.querySelector(".gc_cn");
-        const gcContent = document.querySelector(".gc_content");
+    const cnContent = document.querySelector(".gc_cn");
+    const gcContent = document.querySelector(".gc_content");
 
-        // Mostrar u ocultar los contenedores según la opción seleccionada
-        curpOption.addEventListener("change", function () {
-            if (curpOption.value === "Curp") {
-                curpContent.style.display = "block";
-                gcContent.style.display = "none";
-            } else if (curpOption.value === "Generar curp") {
-                curpContent.style.display = "none";
-                gcContent.style.display = "block";
-            }
-        });
-
-        tipoOption.addEventListener("change", function () {
-            if (tipoOption.value != 1) {
-                cnContent.style.display = "block";
-            }else {
-                cnContent.style.display = "none";
-            }
-        });
+    // Mostrar u ocultar los contenedores según la opción seleccionada
+    curpOption.addEventListener("change", function () {
+        if (curpOption.value === "Curp") {
+            curpContent.style.display = "block";
+            gcContent.style.display = "none";
+        } else if (curpOption.value === "Generar curp") {
+            curpContent.style.display = "none";
+            gcContent.style.display = "block";
+        }
     });
+
+    tipoOption.addEventListener("change", function () {
+        if (tipoOption.value == 5) {
+            document.querySelectorAll(".number_4").forEach(element => {
+                element.style.display = "block";
+            });
+            cnContent.style.display = "block";
+        } else if (tipoOption.value != 1) {
+            document.querySelectorAll(".number_4").forEach(element => {
+                element.style.display = "none";
+            });
+            cnContent.style.display = "block";
+        } else {
+            document.querySelectorAll(".number_4").forEach(element => {
+                element.style.display = "none";
+            });
+            cnContent.style.display = "none";
+        }
+    });
+});
+
 </script>
 
 

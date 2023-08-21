@@ -39,9 +39,8 @@
         .container2{
             position: absolute;
             top:67%;
-            left: 54%;
-            transform: translate(-50%, -50%);
-            text-align: center;
+            left: 115px;
+            text-align: left;
         }
 
         .container3{
@@ -76,6 +75,28 @@
             text-align: center;
         }
 
+        .container7{
+            position: absolute;
+            top:33%;
+            left: 115px;
+            text-align: left;
+        }
+
+
+        .container8{
+            position: absolute;
+            top:43%;
+            left: 115px;
+            text-align: left;
+        }
+
+        .container9{
+            position: absolute;
+            top:52%;
+            left: 115px;
+            text-align: left;
+        }
+
         .container_folio_bajo1{
             position: absolute;
             top:23%;
@@ -90,7 +111,7 @@
         }
 
         .curso{
-            font-size: 8px;
+            font-size:8px;
             color: red;
         }
 
@@ -210,6 +231,18 @@
 
         <div class="container5">
             <h4 class="folio3">PERMANENTE</h4>
+        </div>
+
+        <div class="container7">
+            <h4 class="folio3">{{$nombres}}</h4>
+        </div>
+
+        <div class="container8">
+            <h4 class="folio3">{{$apellido_apeterno}}</h4>
+        </div>
+
+        <div class="container9">
+            <h4 class="folio3">{{$apellido_materno}}</h4>
         </div>
 
         <div class="container_folio_bajo1">
