@@ -474,9 +474,9 @@ Mi perfil- {{$cliente->name}}
                                                         <li class="nav-item">
                                                             <a class="nav-link" id="tab_contacto" data-bs-toggle="tab" href="#content_contacto" role="tab" aria-controls="content_contacto" aria-selected="true">Contacto</a>
                                                         </li>
-                                                        {{-- <li class="nav-item">
-                                                            <a class="nav-link" id="tab_avales" data-bs-toggle="tab" href="#content_avales" role="tab" aria-controls="content_avales" aria-selected="true">Avales</a>
-                                                        </li> --}}
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" id="tab_avales" data-bs-toggle="tab" href="#content_avales" role="tab" aria-controls="content_avales" aria-selected="true">Avales y Estándares</a>
+                                                        </li>
                                                     </ul>
 
                                                     <div class="tab-content" id="myTabContent">
@@ -710,11 +710,11 @@ Mi perfil- {{$cliente->name}}
                                                                         </div>
                                                                     </div>
 
-                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carrousel_publicidad_mb" data-bs-slide="prev">
+                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carrousel_contacto_mb" data-bs-slide="prev">
                                                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                                     <span class="visually-hidden">Previous</span>
                                                                     </button>
-                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carrousel_publicidad_mb" data-bs-slide="next">
+                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carrousel_contacto_mb" data-bs-slide="next">
                                                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                                     <span class="visually-hidden">Next</span>
                                                                     </button>
@@ -723,65 +723,41 @@ Mi perfil- {{$cliente->name}}
                                                         </div>
                                                         <div class="tab-pane fade" id="content_avales" role="tabpanel" aria-labelledby="tab_avales">
                                                             <div class="col-12">
-                                                                <div id="carrousel_contacto_mb" class="carousel slide" data-bs-ride="carousel">
+                                                                <div id="carrousel_avales_mb" class="carousel slide" data-bs-ride="carousel">
                                                                     <div class="carousel-inner">
-                                                                        <div class="carousel-item">
-                                                                            <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f3809a6CURSOS ONLINE.png') }}" class="d-block">
-                                                                            </p>
-                                                                        </div>
-                                                                        <div class="carousel-item">
-                                                                            <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f380e3bCURSOS PRESENCIALES.png') }}" class="d-block">
-                                                                            </p>
-                                                                        </div>
-                                                                        <div class="carousel-item">
-                                                                            <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f3823e8DOCUMENTACIÓN.png') }}" class="d-block">
-                                                                            </p>
-                                                                        </div>
-                                                                        <div class="carousel-item">
-                                                                            <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646513beca4b6INSTALACIONES-DOCUMENTOS_4.png') }}" class="d-block">
-                                                                            </p>
-                                                                        </div>
-                                                                        <div class="carousel-item">
-                                                                            <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646513beccf90SEP CONOCER.png') }}" class="d-block">
-                                                                            </p>
-                                                                        </div>
-                                                                        <div class="carousel-item">
-                                                                            <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f33aeb2CAM-01.png') }}" class="d-block">
-                                                                            </p>
-                                                                        </div>
                                                                         <div class="carousel-item active">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f33bbccCAM.png') }}" class="d-block">
+                                                                                <embed class="embed_pdf_publicidad" src="{{asset('publicidad/64e36edf3ac8bDOCUMENTACIONES IMNAS2.pdf') }}" type="application/pdf"  />
+                                                                                <a class="text-dark" href="{{ asset('publicidad/64e36edf3ac8bDOCUMENTACIONES IMNAS2.pdf') }}" target="_blank" >Ver PDF</a>
                                                                             </p>
                                                                         </div>
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f3812b7DISTRIBUIDAORA DE PRODUCTO.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f382887ESTÁNDARES 01.jpg') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646513becd472VENTAS DE PRODCUTO.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f3832c9ESTÁNDARES 02.jpg') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/64deb7c5d9f866465176806a32Lic Carla-1.jpeg') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f383b81ESTÁNDARES 03.jpg') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+                                                                        <div class="carousel-item">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f384473ESTÁNDARES 04.jpg') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                     </div>
 
-                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carrousel_publicidad_mb" data-bs-slide="prev">
+                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carrousel_avales_mb" data-bs-slide="prev">
                                                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                                     <span class="visually-hidden">Previous</span>
                                                                     </button>
-                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carrousel_publicidad_mb" data-bs-slide="next">
+                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carrousel_avales_mb" data-bs-slide="next">
                                                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                                     <span class="visually-hidden">Next</span>
                                                                     </button>
