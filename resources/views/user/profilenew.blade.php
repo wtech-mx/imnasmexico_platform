@@ -776,7 +776,7 @@ Mi perfil- {{$cliente->name}}
                                                                 @foreach($usuario_video as $user_video)
                                                                     @if ($video->Cursos->id == $user_video->id_curso)
                                                                         <div class="col-12 col-lg-12">
-                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}}  - <strong>Día 1</strong></h5>
+                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}}  - <strong>Módulo 1</strong></h5>
                                                                             @php
                                                                                 $url = $user_video->clase_grabada;
                                                                                 preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
@@ -793,7 +793,7 @@ Mi perfil- {{$cliente->name}}
 
                                                                         @if ( $user_video->clase_grabada2 != NULL)
                                                                             <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 2</strong></h5>
+                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 2</strong></h5>
                                                                                 @php
                                                                                     $url2 = $user_video->clase_grabada2;
                                                                                     preg_match('/\/file\/d\/(.+?)\//', $url2, $matches2);
@@ -810,7 +810,7 @@ Mi perfil- {{$cliente->name}}
 
                                                                         @if ($user_video->clase_grabada3 != NULL)
                                                                             <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 3</strong></h5>
+                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 3</strong></h5>
                                                                                 @php
                                                                                     $url3 = $user_video->clase_grabada3;
                                                                                     preg_match('/\/file\/d\/(.+?)\//', $url3, $matches3);
@@ -827,7 +827,7 @@ Mi perfil- {{$cliente->name}}
 
                                                                         @if ($user_video->clase_grabada4 != NULL)
                                                                             <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 4</strong></h5>
+                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 4</strong></h5>
                                                                                 @php
                                                                                     $url4 = $user_video->clase_grabada4;
                                                                                     preg_match('/\/file\/d\/(.+?)\//', $url4, $matches4);
@@ -844,7 +844,7 @@ Mi perfil- {{$cliente->name}}
 
                                                                         @if ($user_video->clase_grabada5 != NULL)
                                                                             <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 5</strong></h5>
+                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 5</strong></h5>
                                                                                 @php
                                                                                     $url5 = $user_video->clase_grabada5;
                                                                                     preg_match('/\/file\/d\/(.+?)\//', $url5, $matches5);
@@ -864,7 +864,7 @@ Mi perfil- {{$cliente->name}}
                                                                 @foreach($clase_grabada as $user_video)
                                                                     @if ($video->Cursos->id == $user_video->id_curso)
                                                                         <div class="col-12 col-lg-12">
-                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}}  - <strong>Día 1</strong></h5>
+                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}}  - <strong>Módulo 1</strong></h5>
                                                                             @php
                                                                                 $url = $user_video->clase_grabada;
                                                                                 preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
@@ -880,7 +880,7 @@ Mi perfil- {{$cliente->name}}
 
                                                                         @if ( $user_video->clase_grabada2 != NULL)
                                                                             <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 2</strong></h5>
+                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 2</strong></h5>
                                                                                 @php
                                                                                     $url2 = $user_video->clase_grabada2;
                                                                                     preg_match('/\/file\/d\/(.+?)\//', $url2, $matches2);
@@ -897,7 +897,7 @@ Mi perfil- {{$cliente->name}}
 
                                                                         @if ($user_video->clase_grabada3 != NULL)
                                                                             <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 3</strong></h5>
+                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 3</strong></h5>
                                                                                 @php
                                                                                     $url3 = $user_video->clase_grabada3;
                                                                                     preg_match('/\/file\/d\/(.+?)\//', $url3, $matches3);
@@ -914,7 +914,7 @@ Mi perfil- {{$cliente->name}}
 
                                                                         @if ($user_video->clase_grabada4 != NULL)
                                                                             <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 4</strong></h5>
+                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 4</strong></h5>
                                                                                 @php
                                                                                     $url4 = $user_video->clase_grabada4;
                                                                                     preg_match('/\/file\/d\/(.+?)\//', $url4, $matches4);
@@ -931,7 +931,7 @@ Mi perfil- {{$cliente->name}}
 
                                                                         @if ($user_video->clase_grabada5 != NULL)
                                                                             <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Día 5</strong></h5>
+                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 5</strong></h5>
                                                                                 @php
                                                                                     $url5 = $user_video->clase_grabada5;
                                                                                     preg_match('/\/file\/d\/(.+?)\//', $url5, $matches5);
