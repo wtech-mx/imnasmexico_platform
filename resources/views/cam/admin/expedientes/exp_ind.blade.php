@@ -5,8 +5,8 @@ Expediente {{$expediente->id}}
 @endsection
 
 @section('content')
-<div class="main-content position-relative max-height-vh-100 h-100">
-    <div class="card shadow-lg mx-4 card-profile-bottom">
+<div class="container-fluid ">
+    <div class="card shadow-lg">
         <div class="card-body p-3">
         <div class="row gx-4">
             <div class="col-auto">
@@ -15,7 +15,7 @@ Expediente {{$expediente->id}}
             </div>
             </div>
             <div class="col-auto my-auto">
-            <div class="h-100">
+            <div class="">
                 <h5 class="mb-1">
                     {{$expediente->Nota->Cliente->name}}
                 </h5>
@@ -45,7 +45,7 @@ Expediente {{$expediente->id}}
 
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                <div class="container-fluid py-4">
+                <div class="container-fluid ">
                     <div class="row mt-3">
                        {{-- ==================== S E C C I O N  I N I C I O ==================== --}}
                         <div class="col-12 col-md-6 col-xl-4">
@@ -54,7 +54,7 @@ Expediente {{$expediente->id}}
                                     <form method="POST" action="{{ route('expediente.cita', $expediente->id) }}" enctype="multipart/form-data" role="form">
                                         @csrf
                                         <input type="hidden" name="_method" value="PATCH">
-                                        <div class="card-header pb-0 p-3">
+                                        <div class="card-header ">
                                             <div class="row">
                                                 <div class="col-8">
                                                     <h6 class="mb-0">Programa de Citas</h6>
@@ -64,7 +64,7 @@ Expediente {{$expediente->id}}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="card-body p-3">
+                                        <div class="card-body ">
                                             <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{$expediente->Nota->tipo}}</h6>
                                             <ul class="list-group">
                                                 <li class="list-group-item border-0 px-0">
@@ -160,10 +160,10 @@ Expediente {{$expediente->id}}
                                         </div>
                                     </form>
                                 @elseif ($expediente->check1 != NULL && $expediente->check2 != NULL && $expediente->check3 != NULL && $expediente->check4 != NULL && $expediente->check5 != NULL && $expediente->check6 != NULL)
-                                    <div class="card-header pb-0 p-3">
+                                    <div class="card-header">
                                         <h6 class="mb-0">Checklist</h6>
                                     </div>
-                                    <div class="card-body p-3">
+                                    <div class="card-body ">
                                         <ul class="list-group">
                                             <li class="list-group-item border-0 px-0">
                                                 <div class="form-check form-switch ps-0">
@@ -365,7 +365,6 @@ Expediente {{$expediente->id}}
                                 </div>
                             </div>
                         </div>
-
 
                         <div class="col-12 col-xl-4 mt-xl-0 mt-4">
                             <div class="card h-100">
@@ -888,38 +887,6 @@ Expediente {{$expediente->id}}
         </div>
         </div>
 
-        <footer class="footer pt-3  ">
-        <div class="container-fluid">
-            <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-                <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
-                    document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Web Tech</a>
-                for a better web.
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                    <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Web Tech</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                    <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-                </ul>
-            </div>
-            </div>
-        </div>
-        </footer>
     </div>
 </div>
 @endsection
