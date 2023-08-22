@@ -14,6 +14,11 @@
                 @csrf
                     <div class="modal-body">
                         <div class="row">
+
+                            <div class="col-12">
+                                <h5>Datos personales</h5>
+                            </div>
+
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="name">Nombre(s) *</label>
@@ -75,6 +80,10 @@
 
                             </div>
 
+                            <div class="col-12">
+                                <h5>Redes Sociales</h5>
+                            </div>
+
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="name">Facebook</label>
@@ -110,6 +119,51 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="col-12">
+                                <h5>Datos de Direccion</h5>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Estado/ciudad</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/skyscraper.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="estado" name="estado" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Direccion (Opcional)</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/streets.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="direccion" name="direccion" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Alcaldia / municipio (Opcional)</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/ecuador.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="alcaldia" name="alcaldia" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <h5>Datos de evaluador o centro</h5>
+                            </div>
+
 
                             <div class="col-4">
                                 <div class="form-group">
