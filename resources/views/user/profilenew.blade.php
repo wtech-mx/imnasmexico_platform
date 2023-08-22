@@ -458,26 +458,211 @@ Mi perfil- {{$cliente->name}}
                                         <div id="collapseOne{{$video->id_tickets}}" class="accordion-collapse collapse {{ $loop->first ? 'show' : '' }}" aria-labelledby="headingOne" data-bs-parent="#acordcion_mb_clases">
                                             <div class="accordion-body">
                                                 <div class="row">
-                                                    <ul class="nav nav-tabs" id="myTabs">
-                                                        <li class="nav-item">
-                                                            <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#content1" role="tab" aria-controls="content1" aria-selected="true">Material de clase</a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#content2" role="tab" aria-controls="content2" aria-selected="false">Literatura para el estudiante</a>
-                                                        </li>
-                                                        {{-- <li class="nav-item">
-                                                            <a class="nav-link" id="tab_guia" data-bs-toggle="tab" href="#content_guia" role="tab" aria-controls="content_guia" aria-selected="false">Guia para documentación</a>
-                                                        </li> --}}
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" id="tab_costos" data-bs-toggle="tab" href="#content_costos" role="tab" aria-controls="content_costos" aria-selected="true">Lista de precios y costos de tratamientos</a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" id="tab_contacto" data-bs-toggle="tab" href="#content_contacto" role="tab" aria-controls="content_contacto" aria-selected="true">Contacto</a>
-                                                        </li>
-                                                        <li class="nav-item">
-                                                            <a class="nav-link" id="tab_avales" data-bs-toggle="tab" href="#content_avales" role="tab" aria-controls="content_avales" aria-selected="true">Avales y Estándares</a>
-                                                        </li>
-                                                    </ul>
+
+                                                    <div class="col-12">
+                                                        <h3 class="text-center mt-5 mb-3"><img class="icon_nav_course" src="{{asset('assets/user/icons/clase.webp')}}" alt=""> <strong>Clases grabadas</strong></h3>
+                                                    </div>
+                                                    <div class="row">
+                                                        @if ($video->Orders->clase_grabada_orden == NULL)
+                                                            @foreach($usuario_video as $user_video)
+                                                                @if ($video->Cursos->id == $user_video->id_curso)
+                                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                                                        <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}}  - <strong>Módulo 1</strong></h5>
+                                                                        @php
+                                                                            $url = $user_video->clase_grabada;
+                                                                            preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
+                                                                            $id_link_drive = $matches[1] ?? null;
+                                                                        @endphp
+                                                                        @if ($id_link_drive)
+                                                                        <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" class="iframe_clase"></iframe>
+                                                                        <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive }}" target="_blank" >Ver Clase</a>
+                                                                        @else
+                                                                        <a class="text-dark" href="{{$user_video->clase_grabada}}" target="_blank" >Ver Clase</a>
+                                                                            {{-- <p>El video se encuentra como privado</p> --}}
+                                                                        @endif
+                                                                    </div>
+
+                                                                    @if ( $user_video->clase_grabada2 != NULL)
+                                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 2</strong></h5>
+                                                                            @php
+                                                                                $url2 = $user_video->clase_grabada2;
+                                                                                preg_match('/\/file\/d\/(.+?)\//', $url2, $matches2);
+                                                                                $id_link_drive2 = $matches2[1] ?? null;
+                                                                            @endphp
+                                                                            @if ($id_link_drive2)
+                                                                            <iframe src="https://drive.google.com/file/d/{{ $id_link_drive2 }}/preview" class="iframe_clase"></iframe>
+                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive2 }}" target="_blank" >Ver Clase</a>
+                                                                            @else
+                                                                                <p>El video se encuentra como privado</p>
+                                                                            @endif
+                                                                        </div>
+                                                                    @endif
+
+                                                                    @if ($user_video->clase_grabada3 != NULL)
+                                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 3</strong></h5>
+                                                                            @php
+                                                                                $url3 = $user_video->clase_grabada3;
+                                                                                preg_match('/\/file\/d\/(.+?)\//', $url3, $matches3);
+                                                                                $id_link_drive3 = $matches3[1] ?? null;
+                                                                            @endphp
+                                                                            @if ($id_link_drive3)
+                                                                            <iframe src="https://drive.google.com/file/d/{{ $id_link_drive3 }}/preview" class="iframe_clase"></iframe>
+                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive3 }}" target="_blank" >Ver Clase</a>
+                                                                            @else
+                                                                                <p>El video se encuentra como privado</p>
+                                                                            @endif
+                                                                        </div>
+                                                                    @endif
+
+                                                                    @if ($user_video->clase_grabada4 != NULL)
+                                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 4</strong></h5>
+                                                                            @php
+                                                                                $url4 = $user_video->clase_grabada4;
+                                                                                preg_match('/\/file\/d\/(.+?)\//', $url4, $matches4);
+                                                                                $id_link_drive4 = $matches4[1] ?? null;
+                                                                            @endphp
+                                                                            @if ($id_link_drive4)
+                                                                            <iframe src="https://drive.google.com/file/d/{{ $id_link_drive4 }}/preview" class="iframe_clase"></iframe>
+                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive4 }}" target="_blank" >Ver Clase</a>
+                                                                            @else
+                                                                                <p>El video se encuentra como privado</p>
+                                                                            @endif
+                                                                        </div>
+                                                                    @endif
+
+                                                                    @if ($user_video->clase_grabada5 != NULL)
+                                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 5</strong></h5>
+                                                                            @php
+                                                                                $url5 = $user_video->clase_grabada5;
+                                                                                preg_match('/\/file\/d\/(.+?)\//', $url5, $matches5);
+                                                                                $id_link_drive5 = $matches5[1] ?? null;
+                                                                            @endphp
+                                                                            @if ($id_link_drive5)
+                                                                            <iframe src="https://drive.google.com/file/d/{{ $id_link_drive5 }}/preview" class="iframe_clase"></iframe>
+                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive5 }}" target="_blank" >Ver Clase</a>
+                                                                            @else
+                                                                                <p>El video se encuentra como privado</p>
+                                                                            @endif
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
+                                                            @endforeach
+                                                        @else
+                                                            @foreach($clase_grabada as $user_video)
+                                                                @if ($video->Cursos->id == $user_video->id_curso)
+                                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                                                        <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}}  - <strong>Módulo 1</strong></h5>
+                                                                        @php
+                                                                            $url = $user_video->clase_grabada;
+                                                                            preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
+                                                                            $id_link_drive = $matches[1] ?? null;
+                                                                        @endphp
+                                                                        @if ($id_link_drive)
+                                                                        <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" class="iframe_clase"></iframe>
+                                                                        <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive }}" target="_blank" >Ver Clase</a>
+                                                                        @else
+                                                                            <p>El video se encuentra como privado</p>
+                                                                        @endif
+                                                                    </div>
+
+                                                                    @if ( $user_video->clase_grabada2 != NULL)
+                                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 2</strong></h5>
+                                                                            @php
+                                                                                $url2 = $user_video->clase_grabada2;
+                                                                                preg_match('/\/file\/d\/(.+?)\//', $url2, $matches2);
+                                                                                $id_link_drive2 = $matches2[1] ?? null;
+                                                                            @endphp
+                                                                            @if ($id_link_drive2)
+                                                                            <iframe src="https://drive.google.com/file/d/{{ $id_link_drive2 }}/preview" class="iframe_clase"></iframe>
+                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive2 }}" target="_blank" >Ver Clase</a>
+                                                                            @else
+                                                                                <p>El video se encuentra como privado</p>
+                                                                            @endif
+                                                                        </div>
+                                                                    @endif
+
+                                                                    @if ($user_video->clase_grabada3 != NULL)
+                                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 3</strong></h5>
+                                                                            @php
+                                                                                $url3 = $user_video->clase_grabada3;
+                                                                                preg_match('/\/file\/d\/(.+?)\//', $url3, $matches3);
+                                                                                $id_link_drive3 = $matches3[1] ?? null;
+                                                                            @endphp
+                                                                            @if ($id_link_drive3)
+                                                                            <iframe src="https://drive.google.com/file/d/{{ $id_link_drive3 }}/preview" class="iframe_clase"></iframe>
+                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive3 }}" target="_blank" >Ver Clase</a>
+                                                                            @else
+                                                                                <p>El video se encuentra como privado</p>
+                                                                            @endif
+                                                                        </div>
+                                                                    @endif
+
+                                                                    @if ($user_video->clase_grabada4 != NULL)
+                                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 4</strong></h5>
+                                                                            @php
+                                                                                $url4 = $user_video->clase_grabada4;
+                                                                                preg_match('/\/file\/d\/(.+?)\//', $url4, $matches4);
+                                                                                $id_link_drive4 = $matches4[1] ?? null;
+                                                                            @endphp
+                                                                            @if ($id_link_drive4)
+                                                                            <iframe src="https://drive.google.com/file/d/{{ $id_link_drive4 }}/preview" class="iframe_clase"></iframe>
+                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive4 }}" target="_blank" >Ver Clase</a>
+                                                                            @else
+                                                                                <p>El video se encuentra como privado</p>
+                                                                            @endif
+                                                                        </div>
+                                                                    @endif
+
+                                                                    @if ($user_video->clase_grabada5 != NULL)
+                                                                        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 5</strong></h5>
+                                                                            @php
+                                                                                $url5 = $user_video->clase_grabada5;
+                                                                                preg_match('/\/file\/d\/(.+?)\//', $url5, $matches5);
+                                                                                $id_link_drive5 = $matches5[1] ?? null;
+                                                                            @endphp
+                                                                            @if ($id_link_drive5)
+                                                                            <iframe src="https://drive.google.com/file/d/{{ $id_link_drive5 }}/preview" class="iframe_clase"></iframe>
+                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive5 }}" target="_blank" >Ver Clase</a>
+                                                                            @else
+                                                                                <p>El video se encuentra como privado</p>
+                                                                            @endif
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+
+                                                    <div class="d-flex justify-content-center">
+                                                        <ul class="nav nav-tabs" id="myTabs">
+                                                            <li class="nav-item">
+                                                                <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#content1" role="tab" aria-controls="content1" style="" class="tab_profile_materials" aria-selected="true">Material de clase <img src="{{ asset('assets/user/icons/stack-of-books.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#content2" role="tab" aria-controls="content2" style="" class="tab_profile_materials" aria-selected="false">Literatura para el estudiante <img src="{{ asset('assets/user/icons/read.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
+                                                            </li>
+                                                            {{-- <li class="nav-item">
+                                                                <a class="nav-link" id="tab_guia" data-bs-toggle="tab" href="#content_guia" role="tab" aria-controls="content_guia" style="" class="tab_profile_materials" aria-selected="false">Guia para documentación</a>
+                                                            </li> --}}
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" id="tab_costos" data-bs-toggle="tab" href="#content_costos" role="tab" aria-controls="content_costos" style="" class="tab_profile_materials" aria-selected="true">Lista de precios y costos de tratamientos <img src="{{ asset('assets/user/icons/money.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" id="tab_contacto" data-bs-toggle="tab" href="#content_contacto" role="tab" aria-controls="content_contacto" style="" class="tab_profile_materials" aria-selected="true">Contacto <img src="{{ asset('assets/user/icons/complain.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
+                                                            </li>
+                                                            <li class="nav-item">
+                                                                <a class="nav-link" id="tab_avales" data-bs-toggle="tab" href="#content_avales" role="tab" aria-controls="content_avales" style="" class="tab_profile_materials" aria-selected="true">Avales y Estándares <img src="{{ asset('assets/user/icons/certificate.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
 
                                                     <div class="tab-content" id="myTabContent">
                                                         <div class="tab-pane fade show active" id="content1" role="tabpanel" aria-labelledby="tab1">
@@ -491,10 +676,12 @@ Mi perfil- {{$cliente->name}}
                                                                         @endphp
                                                                         @if ($carpeta->id_carpeta == $video->Cursos->carpeta)
                                                                             @if ($extension === 'pdf')
-                                                                            <div class="col-12 mt-3">
+                                                                            <div class="col-lg-4 col-md-6 col-sm-12  col-12 mt-3">
                                                                                 <p class="text-center">
                                                                                 <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
-                                                                                <a class="text-dark" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
+                                                                                    <a class="text-dark d-block" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >
+                                                                                        Ver PDF
+                                                                                    </a>
                                                                                 </p>
                                                                             </div>
                                                                             @else
@@ -517,7 +704,7 @@ Mi perfil- {{$cliente->name}}
                                                             <div class="col-12">
                                                                 <div class="row">
                                                                     @if (isset($carpetas_literatura) && $carpetas_literatura != NULL)
-                                                                        <h2>Literatura de fase de tratamiento facial</h2>
+                                                                        <h2>Literatura de fase de tratamiento facial  <img src="{{ asset('assets/user/icons/skincare.png') }}" alt="" style="width:30px;"></h2>
                                                                         @foreach ($carpetas_literatura as $carpeta)
                                                                             @if ($carpeta->sub_area_recurso == 'facial')
                                                                                 @php
@@ -542,7 +729,7 @@ Mi perfil- {{$cliente->name}}
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
-                                                                        <h2>Literatura de fase de tratamiento corporal</h2>
+                                                                        <h2>Literatura de fase de tratamiento corporal  <img src="{{ asset('assets/user/icons/massage.png') }}" alt="" style="width:30px;"></h2>
                                                                         @foreach ($carpetas_literatura as $carpeta)
                                                                             @if ($carpeta->sub_area_recurso == 'corporal')
                                                                                 @php
@@ -766,189 +953,6 @@ Mi perfil- {{$cliente->name}}
                                                         </div>
                                                     </div>
 
-
-
-                                                        <div class="col-12">
-                                                            <h3 class="text-center mt-5 mb-3"><img class="icon_nav_course" src="{{asset('assets/user/icons/clase.webp')}}" alt=""> <strong>Clases grabadas</strong></h3>
-                                                        </div>
-                                                        <div class="row">
-                                                            @if ($video->Orders->clase_grabada_orden == NULL)
-                                                                @foreach($usuario_video as $user_video)
-                                                                    @if ($video->Cursos->id == $user_video->id_curso)
-                                                                        <div class="col-12 col-lg-12">
-                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}}  - <strong>Módulo 1</strong></h5>
-                                                                            @php
-                                                                                $url = $user_video->clase_grabada;
-                                                                                preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
-                                                                                $id_link_drive = $matches[1] ?? null;
-                                                                            @endphp
-                                                                            @if ($id_link_drive)
-                                                                            <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" class="iframe_clase"></iframe>
-                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive }}" target="_blank" >Ver Clase</a>
-                                                                            @else
-                                                                            <a class="text-dark" href="{{$user_video->clase_grabada}}" target="_blank" >Ver Clase</a>
-                                                                                {{-- <p>El video se encuentra como privado</p> --}}
-                                                                            @endif
-                                                                        </div>
-
-                                                                        @if ( $user_video->clase_grabada2 != NULL)
-                                                                            <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 2</strong></h5>
-                                                                                @php
-                                                                                    $url2 = $user_video->clase_grabada2;
-                                                                                    preg_match('/\/file\/d\/(.+?)\//', $url2, $matches2);
-                                                                                    $id_link_drive2 = $matches2[1] ?? null;
-                                                                                @endphp
-                                                                                @if ($id_link_drive2)
-                                                                                <iframe src="https://drive.google.com/file/d/{{ $id_link_drive2 }}/preview" class="iframe_clase"></iframe>
-                                                                                <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive2 }}" target="_blank" >Ver Clase</a>
-                                                                                @else
-                                                                                    <p>El video se encuentra como privado</p>
-                                                                                @endif
-                                                                            </div>
-                                                                        @endif
-
-                                                                        @if ($user_video->clase_grabada3 != NULL)
-                                                                            <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 3</strong></h5>
-                                                                                @php
-                                                                                    $url3 = $user_video->clase_grabada3;
-                                                                                    preg_match('/\/file\/d\/(.+?)\//', $url3, $matches3);
-                                                                                    $id_link_drive3 = $matches3[1] ?? null;
-                                                                                @endphp
-                                                                                @if ($id_link_drive3)
-                                                                                <iframe src="https://drive.google.com/file/d/{{ $id_link_drive3 }}/preview" class="iframe_clase"></iframe>
-                                                                                <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive3 }}" target="_blank" >Ver Clase</a>
-                                                                                @else
-                                                                                    <p>El video se encuentra como privado</p>
-                                                                                @endif
-                                                                            </div>
-                                                                        @endif
-
-                                                                        @if ($user_video->clase_grabada4 != NULL)
-                                                                            <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 4</strong></h5>
-                                                                                @php
-                                                                                    $url4 = $user_video->clase_grabada4;
-                                                                                    preg_match('/\/file\/d\/(.+?)\//', $url4, $matches4);
-                                                                                    $id_link_drive4 = $matches4[1] ?? null;
-                                                                                @endphp
-                                                                                @if ($id_link_drive4)
-                                                                                <iframe src="https://drive.google.com/file/d/{{ $id_link_drive4 }}/preview" class="iframe_clase"></iframe>
-                                                                                <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive4 }}" target="_blank" >Ver Clase</a>
-                                                                                @else
-                                                                                    <p>El video se encuentra como privado</p>
-                                                                                @endif
-                                                                            </div>
-                                                                        @endif
-
-                                                                        @if ($user_video->clase_grabada5 != NULL)
-                                                                            <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 5</strong></h5>
-                                                                                @php
-                                                                                    $url5 = $user_video->clase_grabada5;
-                                                                                    preg_match('/\/file\/d\/(.+?)\//', $url5, $matches5);
-                                                                                    $id_link_drive5 = $matches5[1] ?? null;
-                                                                                @endphp
-                                                                                @if ($id_link_drive5)
-                                                                                <iframe src="https://drive.google.com/file/d/{{ $id_link_drive5 }}/preview" class="iframe_clase"></iframe>
-                                                                                <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive5 }}" target="_blank" >Ver Clase</a>
-                                                                                @else
-                                                                                    <p>El video se encuentra como privado</p>
-                                                                                @endif
-                                                                            </div>
-                                                                        @endif
-                                                                    @endif
-                                                                @endforeach
-                                                            @else
-                                                                @foreach($clase_grabada as $user_video)
-                                                                    @if ($video->Cursos->id == $user_video->id_curso)
-                                                                        <div class="col-12 col-lg-12">
-                                                                            <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}}  - <strong>Módulo 1</strong></h5>
-                                                                            @php
-                                                                                $url = $user_video->clase_grabada;
-                                                                                preg_match('/\/file\/d\/(.+?)\//', $url, $matches);
-                                                                                $id_link_drive = $matches[1] ?? null;
-                                                                            @endphp
-                                                                            @if ($id_link_drive)
-                                                                            <iframe src="https://drive.google.com/file/d/{{ $id_link_drive }}/preview" class="iframe_clase"></iframe>
-                                                                            <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive }}" target="_blank" >Ver Clase</a>
-                                                                            @else
-                                                                                <p>El video se encuentra como privado</p>
-                                                                            @endif
-                                                                        </div>
-
-                                                                        @if ( $user_video->clase_grabada2 != NULL)
-                                                                            <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 2</strong></h5>
-                                                                                @php
-                                                                                    $url2 = $user_video->clase_grabada2;
-                                                                                    preg_match('/\/file\/d\/(.+?)\//', $url2, $matches2);
-                                                                                    $id_link_drive2 = $matches2[1] ?? null;
-                                                                                @endphp
-                                                                                @if ($id_link_drive2)
-                                                                                <iframe src="https://drive.google.com/file/d/{{ $id_link_drive2 }}/preview" class="iframe_clase"></iframe>
-                                                                                <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive2 }}" target="_blank" >Ver Clase</a>
-                                                                                @else
-                                                                                    <p>El video se encuentra como privado</p>
-                                                                                @endif
-                                                                            </div>
-                                                                        @endif
-
-                                                                        @if ($user_video->clase_grabada3 != NULL)
-                                                                            <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 3</strong></h5>
-                                                                                @php
-                                                                                    $url3 = $user_video->clase_grabada3;
-                                                                                    preg_match('/\/file\/d\/(.+?)\//', $url3, $matches3);
-                                                                                    $id_link_drive3 = $matches3[1] ?? null;
-                                                                                @endphp
-                                                                                @if ($id_link_drive3)
-                                                                                <iframe src="https://drive.google.com/file/d/{{ $id_link_drive3 }}/preview" class="iframe_clase"></iframe>
-                                                                                <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive3 }}" target="_blank" >Ver Clase</a>
-                                                                                @else
-                                                                                    <p>El video se encuentra como privado</p>
-                                                                                @endif
-                                                                            </div>
-                                                                        @endif
-
-                                                                        @if ($user_video->clase_grabada4 != NULL)
-                                                                            <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 4</strong></h5>
-                                                                                @php
-                                                                                    $url4 = $user_video->clase_grabada4;
-                                                                                    preg_match('/\/file\/d\/(.+?)\//', $url4, $matches4);
-                                                                                    $id_link_drive4 = $matches4[1] ?? null;
-                                                                                @endphp
-                                                                                @if ($id_link_drive4)
-                                                                                <iframe src="https://drive.google.com/file/d/{{ $id_link_drive4 }}/preview" class="iframe_clase"></iframe>
-                                                                                <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive4 }}" target="_blank" >Ver Clase</a>
-                                                                                @else
-                                                                                    <p>El video se encuentra como privado</p>
-                                                                                @endif
-                                                                            </div>
-                                                                        @endif
-
-                                                                        @if ($user_video->clase_grabada5 != NULL)
-                                                                            <div class="col-12 col-lg-12">
-                                                                                <h5 class="titile_clase_grabada mt-3 mb-5">{{$user_video->nombre}} - <strong>Módulo 5</strong></h5>
-                                                                                @php
-                                                                                    $url5 = $user_video->clase_grabada5;
-                                                                                    preg_match('/\/file\/d\/(.+?)\//', $url5, $matches5);
-                                                                                    $id_link_drive5 = $matches5[1] ?? null;
-                                                                                @endphp
-                                                                                @if ($id_link_drive5)
-                                                                                <iframe src="https://drive.google.com/file/d/{{ $id_link_drive5 }}/preview" class="iframe_clase"></iframe>
-                                                                                <a class="text-dark" href="https://drive.google.com/file/d/{{ $id_link_drive5 }}" target="_blank" >Ver Clase</a>
-                                                                                @else
-                                                                                    <p>El video se encuentra como privado</p>
-                                                                                @endif
-                                                                            </div>
-                                                                        @endif
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
-                                                        </div>
                                                 </div>
                                             </div>
                                         </div>

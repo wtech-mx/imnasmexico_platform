@@ -200,6 +200,14 @@
     width: 100%;
 }
 
+.img_tabs_profile_ss{
+    width:20px;
+}
+
+.tab_profile_materials{
+    font-size: 15px;
+}
+
 @media only screen and (max-width: 1390px) {
 
     .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -297,6 +305,7 @@
         color: #836262;
         border-radius: 19px;
         font-weight: 600;
+        font-size: 9px!important;
     }
 
     .nav-tabs{
@@ -322,6 +331,14 @@
 
     .img_material_clase{
         width: 80%;
+    }
+
+    .img_tabs_profile_ss{
+        width:15px;
+    }
+
+    .tab_profile_materials{
+        font-size: 9px!important;
     }
 
 }
