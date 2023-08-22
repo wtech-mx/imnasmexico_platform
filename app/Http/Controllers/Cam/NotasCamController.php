@@ -13,6 +13,7 @@ use App\Models\Cam\CamChecklist;
 use App\Models\Cam\CamNotEstandares;
 use App\Models\Cam\CamCitas;
 use App\Models\Cam\CamDocumentosUsers;
+use App\Models\Cam\CamVideosUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -127,6 +128,12 @@ class NotasCamController extends Controller
         $documentos = new CamDocumentosUsers;
         $documentos->id_nota = $notas_cam->id;
         $documentos->save();
+
+        $videos = new CamVideosUser;
+        $videos->id_nota = $notas_cam->id;
+        $videos->id_cliente = $notas_cam->id_cliente;
+        $videos->tipo = $request->get('tipo');
+        $videos->save();
 
         return redirect()->route('index.notas')
             ->with('success', 'Nota CAM creada con exito.');
