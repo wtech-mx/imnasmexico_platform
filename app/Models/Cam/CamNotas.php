@@ -34,4 +34,9 @@ class CamNotas extends Model
     public function User(){
         return $this->belongsTo(User::class, 'id_usuario');
     }
+
+    public function Video(){
+        return $this->hasMany(CamVideosUser::class, 'id_nota', 'id');
+    }
+
 }

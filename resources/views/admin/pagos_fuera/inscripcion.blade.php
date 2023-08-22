@@ -85,10 +85,6 @@
         });
     });
 
-    $(document).ready(function() {
-        $('.curso').select2();
-    });
-
     const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
         searchable: true,
         fixedHeight: false

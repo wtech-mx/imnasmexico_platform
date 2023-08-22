@@ -355,13 +355,9 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         return view('cam.auth.login');
     });
 
-    Route::get('evaluador', function () {
-        return view('cam.usuario.evaluador');
-    })->name('evaluador');
-
-    Route::get('evaluador/videos', function () {
-        return view('cam.videos.evaluador');
-    })->name('videos.evaluador');
+    Route::get('evaluador/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'index'])->name('evaluador.index');
+    Route::get('evaluador/videos/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'videos'])->name('evaluador.videos');
+    Route::patch('evaluador/videos/edit/{id}', [App\Http\Controllers\Cam\CamClientesController::class, 'update_videos'])->name('evaluador.update_videos');
 
     Route::get('centro/videos', function () {
         return view('cam.videos.centro');

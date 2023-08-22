@@ -32,13 +32,13 @@
         <div class="col-4">
             <div class="d-flex justify-content-center">
                 <div class="card_user">
-                    <a href="{{ route('videos.evaluador') }}">
+                    <a href="{{ route('evaluador.videos', auth()->user()->code) }}">
                         <img src="{{ asset('assets/cam/reproductor-de-video.png') }}" alt="" width="80px">
                     </a>
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-3">
-                <a href="{{ route('videos.evaluador') }}" style="text-decoration: none;">
+                <a href="{{ route('evaluador.videos', auth()->user()->code) }}" style="text-decoration: none;">
                     <h5 class="tittle_border_cam_min">Videos</h5>
                 </a>
             </div>

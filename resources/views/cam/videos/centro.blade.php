@@ -32,7 +32,7 @@
                 <video width="320" height="240" class="video d-block" controls>
                     <source src="https://www.cambyimnas.com/wp-content/uploads/2023/03/CAPACITACION%20ESTANDAR%20EC0076.mp4" type="video/mp4">
                 </video>
-                <button class="btn btn-sm btn-outline-light">Video Terminado</button>
+                <button class="btn btn-sm btn-outline-light">Siguente Video</button>
             </p>
         </div>
 
@@ -145,7 +145,7 @@
                 <video width="320" height="240" class="video d-block" controls>
                     <source src="https://www.cambyimnas.com/wp-content/uploads/2023/03/8%20LOGOTIPO.mp4" type="video/mp4">
                 </video>
-                <button class="btn btn-sm btn-outline-light">Video Terminado</button>
+                <button class="btn btn-sm btn-outline-light">Finalizar</button>
 
             </p>
         </div>

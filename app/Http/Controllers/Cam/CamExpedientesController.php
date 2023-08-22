@@ -19,7 +19,7 @@ class CamExpedientesController extends Controller
     }
 
     public function edit($id_nota){
-        $expediente = CamCitas::where('id_nota', $id_nota)->firstOrFail();
+        $expediente = CamCitas::where('id_nota', $id_nota)->first();
         $documentos = CamDocumentosUsers::where('id_nota', $id_nota)->firstOrFail();
         $check = CamChecklist::where('id_nota', $id_nota)->firstOrFail();
         $estandares_usuario = CamNotEstandares::where('id_nota', $id_nota)->get();
