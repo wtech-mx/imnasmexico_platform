@@ -664,7 +664,7 @@
                     </div>
                     <div class="col-12">
                         <a class="text-center" data-bs-toggle="modal" data-bs-target="#depositos">
-                        <img class="img_depositos mt-2" src="{{asset('assets/user/utilidades/depostitos.jpg')}}" alt="">
+                        <img class="img_depositos mt-2" src="{{asset('assets/user/utilidades/depositos.jpg')}}" alt="">
                         </a>
                     </div>
                     {{-- <div class="col-12">
