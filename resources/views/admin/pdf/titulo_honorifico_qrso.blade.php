@@ -151,8 +151,8 @@
             clip-path: ellipse(50% 50% at 50% 50%);
             transform: translateX(-50%);
             left: 50%;
-            /* background-image: url('https://plataforma.imnasmexico.com/curso/64378d058a10838,000.jpg'); */
-            background-image: url('utilidades_documentos/{{ $fileName }}');
+            background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
+            /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
 
             background-size: cover;
             background-position: center center;
@@ -169,7 +169,8 @@
         @endphp
 
         {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
-        <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
+        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
+        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
 
         <div class="container">
             <h4 class="nombre">{{ $parte1 }}<br>{{ $parte2 }}</h4>
@@ -188,7 +189,8 @@
             <h4 class="folio3">FOLIO {{$folio}}</h4>
         </div>
 
-        <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
+        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
+        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
 
         <div class="container4">
             <h4 class="folio2">{{$nombre}}</h4>
@@ -219,7 +221,8 @@
         </div>
 
         <div class="container5">
-            <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
+            {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
         </div>
 
     </body>

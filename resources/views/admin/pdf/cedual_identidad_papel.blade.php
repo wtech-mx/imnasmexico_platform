@@ -110,7 +110,7 @@
             clip-path: ellipse(50% 50% at 50% 50%);
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('https://plataforma.imnasmexico.com/curso/64378d058a10838,000.jpg'); */
+            background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
             /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
 
             background-size: cover;
@@ -148,13 +148,15 @@
             <h4 class="folio">FOLIO {{$folio}}</h4>
         </div>
 
-        <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
+        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
+        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
 
         <div class="container4">
             <h4 class="folio2">FOLIO {{$folio}}</h4>
         </div>
 
         <div class="container5">
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
             <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
         </div>
 
