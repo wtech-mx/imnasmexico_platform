@@ -664,14 +664,14 @@
                     </div>
                     <div class="col-12">
                         <a class="text-center" data-bs-toggle="modal" data-bs-target="#depositos">
-                        <img class="img_depositos mt-2" src="{{asset('assets/user/utilidades/depostitos_Inbursa.jpg')}}" alt="">
+                        <img class="img_depositos mt-2" src="{{asset('assets/user/utilidades/depostitos.jpg')}}" alt="">
                         </a>
                     </div>
-                    <div class="col-12">
+                    {{-- <div class="col-12">
                         <a class="text-center" data-bs-toggle="modal" data-bs-target="#depositos">
                         <img class="img_depositos mt-2" src="{{asset('assets/user/utilidades/depositos_bbva.jpg')}}" alt="">
                         </a>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
