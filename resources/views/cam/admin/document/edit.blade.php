@@ -53,9 +53,9 @@
                                                 @if ($documento->categoria == 'FORMATOS ESTANDARES')
                                                     <td>
                                                         @if ($extension === 'pdf')
-                                                            <embed src="{{ asset('cam_doc/'. $documento->nombre) }}" type="application/pdf" style="width: 120px; height: 120px;" />
+                                                            <embed src="{{ asset('cam_doc_general/'. $documento->nombre) }}" type="application/pdf" style="width: 120px; height: 120px;" />
                                                         @else
-                                                            <img id="img_material_clase" src="{{asset('cam_doc/'. $documento->nombre) }}" style="width: 100px; height: 100px;"/>
+                                                            <img id="img_material_clase" src="{{asset('cam_doc_general/'. $documento->nombre) }}" style="width: 100px; height: 100px;"/>
                                                         @endif
                                                     </td>
                                                 @else

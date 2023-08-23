@@ -26,9 +26,9 @@ class CamDocuemntosController extends Controller
 
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
-            $cam_doc = base_path('../public_html/plataforma.imnasmexico.com/cam_doc');
+            $cam_doc = base_path('../public_html/plataforma.imnasmexico.com/cam_doc_general');
         }else{
-            $cam_doc = public_path() . '/cam_doc';
+            $cam_doc = public_path() . '/cam_doc_general';
         }
 
         $carpeta = $request->get('id_carpdoc');
