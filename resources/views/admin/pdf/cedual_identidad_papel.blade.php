@@ -110,8 +110,8 @@
             clip-path: ellipse(50% 50% at 50% 50%);
             transform: translateX(-50%);
             left: 50%;
-            /* background-image: url('https://plataforma.imnasmexico.com/curso/64378d058a10838,000.jpg'); */
-            background-image: url('utilidades_documentos/{{ $fileName }}');
+            background-image: url('https://plataforma.imnasmexico.com/curso/64378d058a10838,000.jpg'); */
+            /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
 
             background-size: cover;
             background-position: center center;
