@@ -58,7 +58,7 @@ Expedientes
                                                     </td>
 
                                                     <td>
-                                                        <a class="btn btn-sm btn-success" href="{{ route('expediente.edit', $expediente->Nota->id) }}" title="Editar"><i class="fa fa-fw fa-edit"></i> </a>
+                                                        <a class="btn btn-sm btn-info" href="{{ route('expediente.edit', $expediente->Nota->id) }}" title="Ver"><i class="fa fa-fw fa-eye"></i> </a>
                                                     </td>
                                                 </tr>
                                             @endforeach

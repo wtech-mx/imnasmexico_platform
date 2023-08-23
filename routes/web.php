@@ -372,6 +372,7 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::get('/expedientes/independiente', [CamExpedientesController::class, 'index_ind'])->name('independiente.index');
         Route::get('/expediente', [CamExpedientesController::class, 'view'])->name('view.expediente');
         Route::get('/expediente/edit/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'edit'])->name('expediente.edit');
+        Route::get('/ruta/para/obtener/archivos', [App\Http\Controllers\Cam\CamExpedientesController::class, 'obtenerArchivosPorCategoria'])->name('obtener.archivos');
 
         Route::patch('/expediente/cita/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_citas'])->name('expediente.cita');
         Route::patch('/expediente/check/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_check'])->name('expediente.check');
@@ -383,6 +384,12 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         // =============== M O D U L O   R E C U R S O S ===============================
         Route::get('/estandares/index', [App\Http\Controllers\Cam\CamEstandaresController::class, 'index'])->name('index.estandares');
         Route::post('/estandares/crear', [App\Http\Controllers\Cam\CamEstandaresController::class, 'crear'])->name('crear.estandares');
+
+        // =============== M O D U L O   D O C U M E N T O S ===============================
+        Route::get('/documentos/index', [App\Http\Controllers\Cam\CamDocuemntosController::class, 'index'])->name('index.documentos');
+        Route::post('/documentos/carpeta/crear', [App\Http\Controllers\Cam\CamDocuemntosController::class, 'crear_carpeta'])->name('crear_carpeta.documentos');
+        Route::post('/documentos/crear', [App\Http\Controllers\Cam\CamDocuemntosController::class, 'crear'])->name('crear.documentos');
+        Route::get('/documentos/edit/{id}', [App\Http\Controllers\Cam\CamDocuemntosController::class, 'edit'])->name('edit.documentos');
     });
 });
 

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Cam;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cam\CamCarpetaDocumentos;
+use App\Models\Cam\CamCedulas;
+use App\Models\Cam\CamCertificados;
 use App\Models\Cam\CamChecklist;
 use App\Models\Cam\CamCitas;
+use App\Models\Cam\CamDocuemntos;
 use App\Models\Cam\CamDocumentosUsers;
 use App\Models\Cam\CamNotEstandares;
 use Illuminate\Http\Request;
@@ -231,5 +235,20 @@ class CamExpedientesController extends Controller
         $check->update();
 
         return redirect()->back()->with('success', 'curso actualizado con exito.');
+    }
+
+    public function obtenerArchivosPorCategoria(Request $request){
+        $categoria = $request->input('categoria');
+        $expedienteId = intval($request->input('expediente_id'));
+        if($categoria == 'certificado'){
+            $archivos = CamCertificados::where('id_nota', $expedienteId)->get();
+        }elseif($categoria == 'cedula'){
+            $archivos = CamCedulas::where('id_nota', $expedienteId)->get();
+        }else{
+            $archivos = CamDocuemntos::where('id_carpdoc', $categoria)->get();
+        }
+
+
+        return response()->json($archivos);
     }
 }

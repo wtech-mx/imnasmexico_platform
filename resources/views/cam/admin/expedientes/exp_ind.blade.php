@@ -5,6 +5,7 @@ Expediente {{$expediente->id}}
 @endsection
 
 @section('content')
+
 <div class="container-fluid ">
     <div class="card shadow-lg">
         <div class="card-body p-3">
@@ -424,7 +425,7 @@ Expediente {{$expediente->id}}
                                                     <h6 class="mb-0">Documentos</h6>
                                                 </div>
                                                 <div class="col-4">
-                                                    <button type="submit" class="btn btn-sm close-modal" style="background: #6EC1E4; color: #ffff;">Guardar</button>
+                                                    <button type="submit" class="btn btn-sm" style="background: #6EC1E4; color: #ffff;">Guardar</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -673,31 +674,47 @@ Expediente {{$expediente->id}}
                         <div class="col-12 col-md-6 col-xl-4 mt-md-0 mt-4">
                             <div class="card h-100">
                                 <div class="card-header pb-0 p-3">
-                                        <h6 class="mb-0">Información {{$expediente->Nota->tipo}}</h6>
+                                        <h6 class="mb-0">Carpetas</h6>
                                 </div>
                                 <div class="card-body p-3">
-                                    <p class="text-sm">
-                                        {{$expediente->Nota->nota}}
-                                    </p>
-                                    <hr class="horizontal gray-light my-4">
-                                    <ul class="list-group">
-                                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Nombre:</strong> &nbsp; {{$expediente->Nota->Cliente->name}}</li>
-                                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Celular:</strong> &nbsp; {{$expediente->Nota->Cliente->telefono}}</li>
-                                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Correo:</strong> &nbsp; {{$expediente->Nota->Cliente->email}}</li>
-                                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Referencia:</strong> &nbsp; {{$expediente->Nota->referencia}}</li>
-                                    <li class="list-group-item border-0 ps-0 pb-0">
-                                        <strong class="text-dark text-sm">Social:</strong> &nbsp;
-                                        <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.facebook.com/{{$expediente->Nota->Cliente->facebook}}" target="_blank">
-                                        <i class="fab fa-facebook fa-lg"></i>
-                                        </a>
-                                        <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.tiktok.com/{{$expediente->Nota->Cliente->tiktok}}" target="_blank">
-                                        <i class="fab fa-tiktok fa-lg"></i>
-                                        </a>
-                                        <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.instagram.com/{{$expediente->Nota->Cliente->instagram}}" target="_blank">
-                                        <i class="fab fa-instagram fa-lg"></i>
-                                        </a>
-                                    </li>
-                                    </ul>
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <button class="btn btn-sm" id="btnArchivos1" onclick="mostrarArchivos('7')">
+                                                <img src="{{asset('assets/user/icons/manual.png')}}" class="img-fluid" style="width: 40%;">
+                                                <label for="">1. Manuales Digitales CONOCER</label>
+                                            </button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('8')">
+                                                <img src="{{asset('assets/user/icons/information.png')}}" class="img-fluid" style="width: 40%;">
+                                                <label for="">2. Reglamento Y Manuales De Procedimientos IMNAS</label>
+                                            </button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('10')">
+                                                <img src="{{asset('assets/user/icons/illustrator.png')}}" class="img-fluid" style="width: 40%;">
+                                                <label for="">4. Logo Conocer Evaluador Independiente</label>
+                                            </button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('certificado', {{ $expediente->Nota->id }})">
+                                                <img src="{{asset('assets/user/icons/information.png')}}" class="img-fluid" style="width: 40%;">
+                                                <label for="">5. Certificados Conocer</label>
+                                            </button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('cedula', {{ $expediente->Nota->id }})">
+                                                <img src="{{asset('assets/user/icons/cedula.png')}}" class="img-fluid" style="width: 40%;">
+                                                <label for="">6. Cedulas De Acreditación</label>
+                                            </button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="btn btn-sm" id="btnArchivos3" onclick="mostrarArchivos('9')">
+                                                <img src="{{asset('assets/user/icons/book.png')}}" class="img-fluid" style="width: 40%;">
+                                                <label for="">8. Formatos Resolucion De Quejas</label>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -708,7 +725,7 @@ Expediente {{$expediente->id}}
                                 <div class="card-header pb-0 p-3">
                                     <div class="row">
                                         <div class="col-md-8 d-flex align-items-center">
-                                            <h6 class="mb-0">Estandares</h6>
+                                            <h6 class="mb-0">Documentos</h6>
                                             <div class="col-md-4 text-end">
                                                 <a href="javascript:;">
                                                 <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar"></i>
@@ -718,27 +735,7 @@ Expediente {{$expediente->id}}
                                     </div>
                                 </div>
                                 <div class="card-body p-3">
-                                    <ul class="list-group">
-                                        @foreach ($estandares_usuario as $estandar_usuario)
-                                            <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                                                <div class="avatar me-4">
-                                                    @if ($estandar_usuario->estatus == 'Pendiente')
-                                                        <p class="border-radius-lg shadow" style="background-color: #c05b21;">Pendiente</p>
-                                                    @elseif($estandar_usuario->estatus == 'Rechazado')
-                                                        <p class="border-radius-lg shadow" style="background-color: #aa2222;">Rechazado</p>
-                                                    @else
-                                                        <p class="border-radius-lg shadow" style="background-color: #63ac28;">Aprovado</p>
-                                                    @endif
-
-                                                </div>
-                                                <div class="d-flex align-items-start flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{$estandar_usuario->Estandar->estandar}}</h6>
-                                                    <p class="mb-0 text-xs">{{$estandar_usuario->evaluador}}</p>
-                                                </div>
-                                                <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Editar</a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
+                                    <div id="contenedorArchivos"></div>
                                 </div>
                             </div>
                         </div>
@@ -888,9 +885,60 @@ Expediente {{$expediente->id}}
         </div>
 
     </div>
-</div>
+
 @endsection
 
 @section('datatable')
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function mostrarArchivos(categoria, expedienteId) {
+        $.ajax({
+            url: '{{ route("obtener.archivos") }}', // Cambiar a la ruta correcta en tu aplicación
+            method: 'GET',
+            data: { categoria: categoria,  expediente_id: expedienteId },
+            success: function(data) {
+                var archivosHTML = '';
 
+                if (data.length > 0) {
+                    data.forEach(function(archivo) {
+                        var extension = obtenerExtension(archivo.nombre);
+                        var archivoURL = '{{ asset('cam_doc_general/') }}/' + archivo.nombre;
+
+
+                            if (extension === 'pdf') {
+                                archivosHTML += '<div class="archivo">';
+                                archivosHTML += '<embed src="' + archivoURL + '" type="application/pdf" style="width: 120px; height: 120px;" />';
+                                archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir PDF</a>';
+                                archivosHTML += '</div>';
+                            } else if (extension === 'jpg' || extension === 'png' || extension === 'jpeg') {
+                                archivosHTML += '<div class="archivo">';
+                                archivosHTML += '<img src="' + archivoURL + '" alt="' + archivo.nombre + '" style="width: 100px; height: 100px;">';
+                                archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Imagen</a>';
+                                archivosHTML += '</div>';
+                            } else {
+                                archivosHTML += '<div class="archivo">' + archivo.nombre + '</div>';
+                            }
+
+                    });
+                } else {
+                    archivosHTML = '<p>No hay archivos disponibles.</p>';
+                }
+
+                $('#contenedorArchivos').html(archivosHTML);
+            },
+            error: function() {
+                alert('Error al cargar los archivos.');
+            }
+        });
+    }
+
+    function obtenerExtension(nombreArchivo) {
+        var partes = nombreArchivo.split('.');
+        if (partes.length > 1) {
+            return partes[partes.length - 1].toLowerCase();
+        } else {
+            return '';
+        }
+    }
+</script>
 @endsection
