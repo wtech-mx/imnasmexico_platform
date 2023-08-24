@@ -64,11 +64,11 @@
 
 
     <div class="container">
-        <h4 class="curso">{{ ucwords(strtolower($curso)) }}</h4>
+        <h4 class="nombre">{{ ucwords(strtolower($nombre)) }}</h4>
     </div>
 
     <div class="container2">
-        <h4 class="nombre">{{ ucwords(strtolower($nombre)) }}</h4>
+        <h4 class="curso">{{ ucwords(strtolower($curso)) }}</h4>
     </div>
 
     <h4 class="fecha">{{ $fecha }}</h4>
