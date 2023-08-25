@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class CamVideosUser extends Model
 {
     use HasFactory;
-    use HasFactory;
     protected $table = 'cam_videosuser';
     protected $primarykey = "id";
 

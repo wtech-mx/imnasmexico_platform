@@ -10,6 +10,8 @@ use App\Models\Cam\CamChecklist;
 use App\Models\Cam\CamCitas;
 use App\Models\Cam\CamDocuemntos;
 use App\Models\Cam\CamDocumentosUsers;
+use App\Models\Cam\CamNombramiento;
+use App\Models\Cam\CamNotas;
 use App\Models\Cam\CamNotEstandares;
 use Illuminate\Http\Request;
 
@@ -237,6 +239,35 @@ class CamExpedientesController extends Controller
         return redirect()->back()->with('success', 'curso actualizado con exito.');
     }
 
+    public function crear_nomb(Request $request){
+        $dominio = $request->getHost();
+
+            if($dominio == 'plataforma.imnasmexico.com'){
+                $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam_doc_general');
+            }else{
+                $ruta_recursos = public_path() . '/cam_doc_general';
+            }
+
+            $id_nota = $request->get('id_nota');
+            $id_cliente = $request->get('id_cliente');
+            if ($request->hasFile('foto')) {
+                $foto = $request->file('foto');
+                foreach ($foto as $archivo) {
+                    $path = $ruta_recursos;
+                    $fileName = uniqid() . $archivo->getClientOriginalName();
+                    $archivo->move($path, $fileName);
+                    $nomb = new CamNombramiento;
+                    $nomb->nombramientos = $fileName;
+                    $nomb->id_nota = $id_nota;
+                    $nomb->id_cliente = $id_cliente;
+                    $nomb->save();
+                }
+            }
+        $nomb->save();
+
+        return redirect()->back()->with('success', 'Archivo subido exitosamente');
+    }
+
     public function obtenerArchivosPorCategoria(Request $request){
         $categoria = $request->input('categoria');
         $expedienteId = intval($request->input('expediente_id'));
@@ -244,11 +275,29 @@ class CamExpedientesController extends Controller
             $archivos = CamCertificados::where('id_nota', $expedienteId)->get();
         }elseif($categoria == 'cedula'){
             $archivos = CamCedulas::where('id_nota', $expedienteId)->get();
+        }elseif($categoria == 'nombramiento'){
+            $archivos = CamNombramiento::where('id_nota', $expedienteId)->get();
         }else{
             $archivos = CamDocuemntos::where('id_carpdoc', $categoria)->get();
         }
 
-
         return response()->json($archivos);
     }
+
+    public function obtenerCarpetasCompradas($notaId) {
+        $carpetas = CamNotEstandares::where('id_nota', $notaId)->with('Estandar')->get();
+        $nombresCarpetas = $carpetas->pluck('Estandar.estandar');
+        return response()->json($nombresCarpetas);
+
+    }
+
+    public function obtenerDocumentosPorCarpeta(Request $request) {
+
+        $nombreCarpeta = $request->input('nombre_carpeta');
+        $carpdocumentos = CamCarpetaDocumentos::where('nombre', $nombreCarpeta )->first();
+        $documentos = CamDocuemntos::where('id_carpdoc', $carpdocumentos->id)->get();
+
+        return response()->json($documentos);
+    }
+
 }

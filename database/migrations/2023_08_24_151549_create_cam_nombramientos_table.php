@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cam_cedulas', function (Blueprint $table) {
+        Schema::create('cam_nombramientos', function (Blueprint $table) {
             $table->id();
             $table->text('nombre');
 
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cam_cedulas');
+        Schema::dropIfExists('cam_nombramientos');
     }
 };

@@ -691,6 +691,12 @@ Expediente {{$expediente->id}}
                                             </button>
                                         </div>
                                         <div class="col-4">
+                                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('estandares', {{ $expediente->Nota->id }}); mostrarCarpetasCompradas({{ $expediente->Nota->id }})">
+                                                <img src="{{asset('assets/user/icons/documentos.png')}}" class="img-fluid" style="width: 40%;">
+                                                <label for="">3. Formatos Estándares</label>
+                                            </button>
+                                        </div>
+                                        <div class="col-4">
                                             <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('10')">
                                                 <img src="{{asset('assets/user/icons/illustrator.png')}}" class="img-fluid" style="width: 40%;">
                                                 <label for="">4. Logo Conocer Evaluador Independiente</label>
@@ -698,7 +704,7 @@ Expediente {{$expediente->id}}
                                         </div>
                                         <div class="col-4">
                                             <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('certificado', {{ $expediente->Nota->id }})">
-                                                <img src="{{asset('assets/user/icons/information.png')}}" class="img-fluid" style="width: 40%;">
+                                                <img src="{{asset('assets/user/icons/certificacion.webp')}}" class="img-fluid" style="width: 40%;">
                                                 <label for="">5. Certificados Conocer</label>
                                             </button>
                                         </div>
@@ -706,6 +712,12 @@ Expediente {{$expediente->id}}
                                             <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('cedula', {{ $expediente->Nota->id }})">
                                                 <img src="{{asset('assets/user/icons/cedula.png')}}" class="img-fluid" style="width: 40%;">
                                                 <label for="">6. Cedulas De Acreditación</label>
+                                            </button>
+                                        </div>
+                                        <div class="col-4">
+                                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('nombramiento', {{ $expediente->Nota->id }})">
+                                                <img src="{{asset('assets/user/icons/certificate.png')}}" class="img-fluid" style="width: 40%;">
+                                                <label for="">7. Nombramiento</label>
                                             </button>
                                         </div>
                                         <div class="col-4">
@@ -735,7 +747,19 @@ Expediente {{$expediente->id}}
                                     </div>
                                 </div>
                                 <div class="card-body p-3">
-                                    <div id="contenedorArchivos"></div>
+                                    <div id="contenedorSubirArchivos" style="display: none;">
+                                        <form method="POST" action="{{ route('crear.nomb') }}" enctype="multipart/form-data" role="form">
+                                            @csrf
+                                            <input id="foto[]" name="foto[]" type="file" class="form-control" multiple>
+                                            <input id="id_nota" name="id_nota" type="number" value="{{ $expediente->Nota->id }}" style="display: none">
+                                            <input id="id_cliente" name="id_cliente" type="number" value="{{ $expediente->Nota->id_cliente }}" style="display: none">
+                                            <button type="submit" class="btn btn-sm" style="background: #6EC1E4; color: #ffff;">Guardar</button>
+                                        </form>
+                                    </div>
+                                    <div id="contenedorArchivos" ></div>
+                                    <div id="contenedorArchivosCarp"></div>
+
+                                    <div id="contenedorCarpetas"></div>
                                 </div>
                             </div>
                         </div>
@@ -891,7 +915,19 @@ Expediente {{$expediente->id}}
 @section('datatable')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
     function mostrarArchivos(categoria, expedienteId) {
+        // Oculta el formulario y vacía el contenedor de archivos
+        $('#contenedorSubirArchivos').hide();
+        $('#contenedorArchivos').empty();
+
+        // Limpia el contenedor de carpetas (estándares)
+        $('#contenedorCarpetas').empty();
+
+        if (categoria === 'estandares') {
+            mostrarCarpetasCompradas(expedienteId);
+        }
+
         $.ajax({
             url: '{{ route("obtener.archivos") }}', // Cambiar a la ruta correcta en tu aplicación
             method: 'GET',
@@ -930,7 +966,87 @@ Expediente {{$expediente->id}}
                 alert('Error al cargar los archivos.');
             }
         });
+
+        if (categoria === 'nombramiento') {
+            $('#contenedorSubirArchivos').show();
+        }
     }
+
+    function mostrarCarpetasCompradas(notaId) {
+        $.ajax({
+            url: '{{ route("obtener.carpetas", ["notaId" => $expediente->Nota->id]) }}',
+            method: 'GET',
+            success: function(data) {
+                var carpetasHTML = '';
+
+                data.forEach(function(carpeta, index) {
+                    console.log('Nombre de Carpeta:', carpeta); // Agrega esta línea para verificar el nombre
+                    carpetasHTML += '<div class="col-4">';
+                    carpetasHTML += '<button class="btn btn-sm btnCarpeta" data-nombre_carpeta="' + carpeta + '">';
+                    carpetasHTML += '<img src="{{ asset('assets/user/icons/folder.png') }}" class="img-fluid" style="width: 40%;">';
+                    carpetasHTML += '<label for="">' + (index + 1) + '. ' + carpeta + '</label>';
+                    carpetasHTML += '</button>';
+                    carpetasHTML += '</div>';
+                });
+
+
+                $('#contenedorCarpetas').html(carpetasHTML);
+
+                // Asignar evento de clic a los botones de carpeta
+                $('.btnCarpeta').click(function() {
+                    var nombreCarpeta = $(this).data('nombre_carpeta');
+                    console.log(nombreCarpeta);
+                    mostrarArchivosCarpetas(nombreCarpeta);
+                });
+            },
+            error: function() {
+                alert('Error al obtener las carpetas compradas.');
+            }
+        });
+    }
+
+    function mostrarArchivosCarpetas(nombreCarpeta) {
+        $('#contenedorArchivos').empty();
+
+        $.ajax({
+            url: '{{ route("obtener.archivos.carp") }}',
+            method: 'GET',
+            data: { nombre_carpeta: nombreCarpeta },
+            success: function(documentos) { // Cambia 'data' por 'documentos'
+                var archivosHTML = '';
+
+                if (documentos.length > 0) {
+                    documentos.forEach(function(archivo) {
+                        var extension = obtenerExtension(archivo.nombre);
+                        var archivoURL = '{{ asset('cam_doc_general/') }}/' + archivo.nombre;
+
+                        if (extension === 'pdf') {
+                            archivosHTML += '<div class="archivo">';
+                            archivosHTML += '<embed src="' + archivoURL + '" type="application/pdf" style="width: 120px; height: 120px;" />';
+                            archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir PDF</a>';
+                            archivosHTML += '</div>';
+                        } else if (extension === 'jpg' || extension === 'png' || extension === 'jpeg') {
+                            archivosHTML += '<div class="archivo">';
+                            archivosHTML += '<img src="' + archivoURL + '" alt="' + archivo.nombre + '" style="width: 100px; height: 100px;">';
+                            archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Imagen</a>';
+                            archivosHTML += '</div>';
+                        } else {
+                            archivosHTML += '<div class="archivo">' + archivo.nombre + '</div>';
+                        }
+                    });
+                } else {
+                    archivosHTML = '<p>No hay archivos disponibles.</p>';
+                }
+
+                $('#contenedorArchivos').html(archivosHTML);
+            },
+            error: function() {
+                alert('Error al cargar los archivos de la carpeta.');
+            }
+        });
+    }
+
+
 
     function obtenerExtension(nombreArchivo) {
         var partes = nombreArchivo.split('.');

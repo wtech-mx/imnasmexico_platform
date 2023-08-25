@@ -73,7 +73,13 @@ Notas CAM
                                                     @endphp
                                                     {{ $fecha_hora_formateada}}
                                                 </td>
+                                                <td>
+                                                    <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#EditexampleModal{{$nota_cam->id}}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                        <i class="fa fa-fw fa-eye"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
+                                            @include('cam.admin.notas.edit')
                                         @endforeach
                                     </tbody>
                                 </table>

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cam_certificados', function (Blueprint $table) {
             $table->id();
-            $table->text('certificado');
+            $table->text('nombre');
 
             $table->unsignedBigInteger('id_cliente');
             $table->foreign('id_cliente')

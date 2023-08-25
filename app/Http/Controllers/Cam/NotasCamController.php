@@ -49,6 +49,9 @@ class NotasCamController extends Controller
             $payer->username = $request->get('celular');
             $payer->code = $code;
             $payer->telefono = $request->get('celular');
+            $payer->country = $request->get('country');
+            $payer->direccion = $request->get('direccion');
+            $payer->city = $request->get('city');
             $payer->celular_casa = $request->get('telefono');
             $payer->facebook = $request->get('facebook');
             $payer->tiktok = $request->get('tiktok');

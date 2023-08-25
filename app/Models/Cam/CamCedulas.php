@@ -12,7 +12,7 @@ class CamCedulas extends Model
     protected $primarykey = "id";
 
     protected $fillable = [
-        'cedula',
+        'nombre',
         'id_cliente',
         'id_nota',
     ];
