@@ -13,6 +13,7 @@ use App\Models\Cam\CamDocumentosUsers;
 use App\Models\Cam\CamNombramiento;
 use App\Models\Cam\CamNotas;
 use App\Models\Cam\CamNotEstandares;
+use App\Models\Cam\CamVideosUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -30,8 +31,9 @@ class CamExpedientesController extends Controller
         $documentos = CamDocumentosUsers::where('id_nota', $id_nota)->firstOrFail();
         $check = CamChecklist::where('id_nota', $id_nota)->firstOrFail();
         $estandares_usuario = CamNotEstandares::where('id_nota', $id_nota)->get();
+        $video = CamVideosUser::where('id_nota', $id_nota)->first();
 
-        return view('cam.admin.expedientes.exp_ind', compact('expediente', 'estandares_usuario', 'documentos', 'check'));
+        return view('cam.admin.expedientes.exp_ind', compact('expediente', 'estandares_usuario', 'documentos', 'check', 'video'));
     }
 
     public function update_exp_user(Request $request, $id){

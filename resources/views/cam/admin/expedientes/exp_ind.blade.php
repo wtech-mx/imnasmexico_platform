@@ -367,6 +367,42 @@ Expediente {{$expediente->id}}
 
                                 </div>
                                 <div class="card-body p-3">
+                                        <div class="d-flex mb-2">
+                                            <span class="me-2 text-sm font-weight-bold text-capitalize">Progreso Videos</span>
+                                            @php
+                                                $progress = 0;
+                                                if ($video->check1 == NULL) {
+                                                    $progress = 10;
+                                                }elseif ($video->check2 == NULL) {
+                                                    $progress = 20;
+                                                }elseif ($video->check3 == NULL) {
+                                                    $progress = 30;
+                                                }elseif ($video->check4 == NULL) {
+                                                    $progress = 40;
+                                                }elseif ($video->check5 == NULL) {
+                                                    $progress = 50;
+                                                }elseif ($video->check6 == NULL) {
+                                                    $progress = 60;
+                                                }elseif ($video->check7 == NULL) {
+                                                    $progress = 70;
+                                                }elseif ($video->check8 == NULL) {
+                                                    $progress = 80;
+                                                }elseif ($video->check9 == NULL) {
+                                                    $progress = 90;
+                                                }elseif ($video->check10 == NULL) {
+                                                    $progress = 100;
+                                                }
+                                            @endphp
+                                            <span class="ms-auto text-sm font-weight-bold">{{ $progress }}%</span>
+                                        </div>
+                                        <div>
+                                            <div class="progress progress-md">
+                                               <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="{{ $progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ $progress }}%;"></div>
+                                            </div>
+                                        </div>
+                                </div>
+
+                                <div class="card-body p-3">
                                     <form method="POST" action="{{ route('update_exp_user', $expediente->Nota->Cliente->id) }}" enctype="multipart/form-data" role="form">
                                         @csrf
                                         <input type="hidden" name="_method" value="PATCH">
