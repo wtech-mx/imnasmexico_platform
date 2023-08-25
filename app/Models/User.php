@@ -30,6 +30,8 @@ class User extends Authenticatable
         'code',
         'direccion',
         'num_user',
+        'otra_red',
+        'pagina_web',
     ];
 
     public function DocumentosEstandares()

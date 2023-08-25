@@ -56,6 +56,8 @@ class NotasCamController extends Controller
             $payer->facebook = $request->get('facebook');
             $payer->tiktok = $request->get('tiktok');
             $payer->instagram = $request->get('instagram');
+            $payer->pagina_web = $request->get('pagina_web');
+            $payer->otra_red = $request->get('otra_red');
 
             if($request->get('tipo') == 'Centro Evaluación'){
                 $payer->cliente = '4';

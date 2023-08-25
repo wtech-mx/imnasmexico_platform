@@ -16,6 +16,8 @@ return new class extends Migration
             $table->text('usuario_eva')->nullable();
             $table->text('contrasena_eva')->nullable();
             $table->text('costo_emi')->nullable();
+            $table->text('pagina_web')->nullable();
+            $table->text('otra_red')->nullable();
         });
     }
 
