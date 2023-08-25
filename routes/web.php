@@ -372,11 +372,13 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::get('/expedientes/independiente', [CamExpedientesController::class, 'index_ind'])->name('independiente.index');
         Route::get('/expediente', [CamExpedientesController::class, 'view'])->name('view.expediente');
         Route::get('/expediente/edit/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'edit'])->name('expediente.edit');
+        // =============== M O D U L O   E X P E D I E N T E S ( C A R P E T A S)===============================
         Route::get('/ruta/para/obtener/archivos', [App\Http\Controllers\Cam\CamExpedientesController::class, 'obtenerArchivosPorCategoria'])->name('obtener.archivos');
         Route::post('/expediente/crear/nomb', [App\Http\Controllers\Cam\CamExpedientesController::class, 'crear_nomb'])->name('crear.nomb');
         Route::get('/obtener-carpetas-compradas/{notaId}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'obtenerCarpetasCompradas'])->name('obtener.carpetas');
         Route::get('/ruta/para/obtener/archivos/carpetas', [App\Http\Controllers\Cam\CamExpedientesController::class, 'obtenerDocumentosPorCarpeta'])->name('obtener.archivos.carp');
 
+        Route::patch('/expediente/user/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_exp_user'])->name('update_exp_user');
 
         Route::patch('/expediente/cita/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_citas'])->name('expediente.cita');
         Route::patch('/expediente/check/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_check'])->name('expediente.check');

@@ -17,7 +17,8 @@ Expediente {{$expediente->id}}
             </div>
             <div class="col-auto my-auto">
             <div class="">
-                <h5 class="mb-1">
+                <h3 class="mb-1">{{ $expediente->Nota->Cliente->num_user }}</h3>
+                <h5 class="mb-0">
                     {{$expediente->Nota->Cliente->name}}
                 </h5>
                 <p class="mb-0 font-weight-bold text-sm">
@@ -363,6 +364,40 @@ Expediente {{$expediente->id}}
                                         </a>
                                     </li>
                                     </ul>
+
+                                </div>
+                                <div class="card-body p-3">
+                                    <form method="POST" action="{{ route('update_exp_user', $expediente->Nota->Cliente->id) }}" enctype="multipart/form-data" role="form">
+                                        @csrf
+                                        <input type="hidden" name="_method" value="PATCH">
+                                        <div class="row">
+                                            <h5 class="mt-2">No SEP</h5>
+                                            <div class="col-6">
+                                                <label for="name">No usuario</label>
+                                                <input id="num_user" name="num_user" class="form-control" type="text" placeholder="numero usuario" value="{{ $expediente->Nota->Cliente->num_user }}">
+                                            </div>
+                                            <div class="col-6">
+                                            </div>
+                                            <h5 class="mt-2">Claves de Módulo de evaluación</h5>
+                                            <div class="col-6">
+                                                <label for="name">User</label>
+                                                <input id="usuario_eva" name="usuario_eva" class="form-control" type="text" value="{{ $expediente->Nota->Cliente->usuario_eva }}">
+                                            </div>
+                                            <div class="col-6">
+                                                <label for="name">Contraseña</label>
+                                                <input id="contrasena_eva" name="contrasena_eva" class="form-control" type="text" value="{{ $expediente->Nota->Cliente->contrasena_eva }}">
+                                            </div>
+                                            <h5 class="mt-2">Costo emisión</h5>
+                                            <div class="col-6">
+                                                <label for="name">Costo</label>
+                                                <input id="costo_emi" name="costo_emi" class="form-control" type="text" value="{{ $expediente->Nota->Cliente->costo_emi }}">
+                                            </div>
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-sm mt-2" style="background: #6EC1E4; color: #ffff;">Guardar</button>
+                                            </div>
+                                        </div>
+
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -371,13 +406,11 @@ Expediente {{$expediente->id}}
                             <div class="card h-100">
                                 <div class="card-header pb-0 p-3">
                                     <div class="row">
-                                        <div class="col-md-8 d-flex align-items-center">
+                                        <div class="col-md-4 d-flex align-items-center">
                                             <h6 class="mb-0">Estandares</h6>
-                                            <div class="col-md-4 text-end">
-                                                <a href="javascript:;">
-                                                <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar"></i>
-                                                </a>
-                                            </div>
+                                        </div>
+                                        <div class="col-md-8 text-end">
+                                           <h6>Costo emisión: ${{ $expediente->Nota->Cliente->costo_emi }}.00 mxn</h6>
                                         </div>
                                     </div>
                                 </div>

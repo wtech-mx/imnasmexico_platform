@@ -13,6 +13,7 @@ use App\Models\Cam\CamDocumentosUsers;
 use App\Models\Cam\CamNombramiento;
 use App\Models\Cam\CamNotas;
 use App\Models\Cam\CamNotEstandares;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CamExpedientesController extends Controller
@@ -31,6 +32,19 @@ class CamExpedientesController extends Controller
         $estandares_usuario = CamNotEstandares::where('id_nota', $id_nota)->get();
 
         return view('cam.admin.expedientes.exp_ind', compact('expediente', 'estandares_usuario', 'documentos', 'check'));
+    }
+
+    public function update_exp_user(Request $request, $id){
+
+        $user = User::find($id);
+        $user->num_user = $request->get('num_user');
+        $user->usuario_eva = $request->get('usuario_eva');
+        $user->contrasena_eva = $request->get('contrasena_eva');
+        $user->costo_emi = $request->get('costo_emi');
+
+        $user->update();
+
+        return redirect()->back()->with('success', 'Datos actualizados exitosamente');
     }
 
     public function update_citas(Request $request, $id){
