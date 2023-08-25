@@ -18,6 +18,8 @@ return new class extends Migration
             $table->text('costo_emi')->nullable();
             $table->text('pagina_web')->nullable();
             $table->text('otra_red')->nullable();
+            $table->text('curp')->nullable();
+            $table->text('estatus_exp')->nullable();
         });
     }
 
