@@ -362,6 +362,12 @@ Expediente {{$expediente->id}}
                                         <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.instagram.com/{{$expediente->Nota->Cliente->instagram}}" target="_blank">
                                         <i class="fab fa-instagram fa-lg"></i>
                                         </a>
+                                        <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="https://{{$expediente->Nota->Cliente->pagina_web}}" target="_blank">
+                                            <i class="fa fa-globe fa-lg"></i>
+                                        </a>
+                                        <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="https://{{$expediente->Nota->Cliente->otra_red}}" target="_blank">
+                                            <i class="fa fa-heart fa-lg"></i>
+                                        </a>
                                     </li>
                                     </ul>
 

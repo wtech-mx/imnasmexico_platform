@@ -127,7 +127,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/web-link.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="pagina_web" name="pagina_web" type="text" class="form-control" placeholder="https://imnasmexico.com">@error('pagina_web') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="pagina_web" name="pagina_web" type="text" class="form-control" placeholder="imnasmexico.com">@error('pagina_web') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -343,7 +343,7 @@
 
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="name">Referencia *</label>
+                                    <label for="name">Como nos conocieron *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/refer.png') }}" alt="" width="35px">
