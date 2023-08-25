@@ -432,7 +432,7 @@ Expediente {{$expediente->id}}
                                                     <h6 class="mb-0 text-sm">{{$estandar_usuario->Estandar->estandar}}</h6>
                                                     <p class="mb-0 text-xs">{{$estandar_usuario->evaluador}}</p>
                                                 </div>
-                                                <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="javascript:;">Editar</a>
+                                                <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto">Editar</a>
                                             </li>
                                         @endforeach
                                     </ul>
@@ -447,6 +447,7 @@ Expediente {{$expediente->id}}
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                 <div class="container-fluid py-4">
                     <div class="row mt-3">
+
                         <div class="col-12 col-md-6 col-xl-4">
                             <div class="card h-100">
                                  <form method="POST" action="{{ route('expediente.check', $expediente->Nota->id) }}" enctype="multipart/form-data" role="form">
@@ -703,7 +704,6 @@ Expediente {{$expediente->id}}
                             </div>
                         </div>
 
-
                         <div class="col-12 col-md-6 col-xl-4 mt-md-0 mt-4">
                             <div class="card h-100">
                                 <div class="card-header pb-0 p-3">
@@ -764,7 +764,6 @@ Expediente {{$expediente->id}}
                             </div>
                         </div>
 
-
                         <div class="col-12 col-xl-4 mt-xl-0 mt-4">
                             <div class="card h-100">
                                 <div class="card-header pb-0 p-3">
@@ -790,7 +789,6 @@ Expediente {{$expediente->id}}
                                         </form>
                                     </div>
                                     <div id="contenedorArchivos" ></div>
-                                    <div id="contenedorArchivosCarp"></div>
 
                                     <div id="contenedorCarpetas"></div>
                                 </div>

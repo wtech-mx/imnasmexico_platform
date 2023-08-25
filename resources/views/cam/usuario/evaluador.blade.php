@@ -47,11 +47,15 @@
         <div class="col-4">
             <div class="d-flex justify-content-center">
                 <div class="card_user">
-                    <img src="{{ asset('assets/cam/expediente.png') }}" alt="" width="80px">
+                    <a href="{{ route('evaluador.index_expediente', auth()->user()->code) }}">
+                        <img src="{{ asset('assets/cam/expediente.png') }}" alt="" width="80px">
+                    </a>
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-3">
-                <h5 class="tittle_border_cam_min">Expediente</h5>
+                <a href="{{ route('evaluador.index_expediente', auth()->user()->code) }}">
+                    <h5 class="tittle_border_cam_min">Expediente</h5>
+                </a>
             </div>
         </div>
 

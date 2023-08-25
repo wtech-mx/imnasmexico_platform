@@ -25,6 +25,7 @@
   <body class="body">
 
     @yield('content')
+    @yield('datatable')
 
   </body>
 
