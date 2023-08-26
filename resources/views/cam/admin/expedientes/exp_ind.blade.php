@@ -15,7 +15,7 @@ Expediente {{$expediente->id}}
                 <div class="col-lg-8 col-12">
                     <div class="row">
                         <div class="col-lg-4 col-12">
-                            @if ($expediente->Nota->Cliente->estatus_exp == '0')
+                            @if ($expediente->Nota->Cliente->estatus_exp == '0' || $expediente->Nota->Cliente->estatus_exp == NULL)
                                 <div class="card card-background card-background-mask-danger h-100">
                             @else
                                 <div class="card card-background card-background-mask-success h-100">
@@ -125,24 +125,26 @@ Expediente {{$expediente->id}}
                                 @php
                                     $progress = 0;
                                     if ($video->check1 == NULL) {
-                                        $progress = 10;
+                                        $progress = 0;
                                     }elseif ($video->check2 == NULL) {
-                                        $progress = 20;
+                                        $progress = 10;
                                     }elseif ($video->check3 == NULL) {
-                                        $progress = 30;
+                                        $progress = 20;
                                     }elseif ($video->check4 == NULL) {
-                                        $progress = 40;
+                                        $progress = 30;
                                     }elseif ($video->check5 == NULL) {
-                                        $progress = 50;
+                                        $progress = 40;
                                     }elseif ($video->check6 == NULL) {
-                                        $progress = 60;
+                                        $progress = 50;
                                     }elseif ($video->check7 == NULL) {
-                                        $progress = 70;
+                                        $progress = 60;
                                     }elseif ($video->check8 == NULL) {
-                                        $progress = 80;
+                                        $progress = 70;
                                     }elseif ($video->check9 == NULL) {
-                                        $progress = 90;
+                                        $progress = 80;
                                     }elseif ($video->check10 == NULL) {
+                                        $progress = 90;
+                                    }else {
                                         $progress = 100;
                                     }
                                 @endphp
