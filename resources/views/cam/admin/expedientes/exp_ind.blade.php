@@ -840,13 +840,13 @@ Expediente {{$expediente->id}}
                                 <div class="card-body p-3">
                                     <div class="row">
                                         <div class="col-4">
-                                            <button class="btn btn-sm" id="btnArchivos1" onclick="mostrarArchivos('7')">
+                                            <button class="btn btn-sm" id="btnArchivos1" onclick="mostrarArchivos('1')">
                                                 <img src="{{asset('assets/user/icons/manual.png')}}" class="img-fluid" style="width: 40%;">
                                                 <label for="">1. Manuales Digitales CONOCER</label>
                                             </button>
                                         </div>
                                         <div class="col-4">
-                                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('8')">
+                                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('2')">
                                                 <img src="{{asset('assets/user/icons/information.png')}}" class="img-fluid" style="width: 40%;">
                                                 <label for="">2. Reglamento Y Manuales De Procedimientos IMNAS</label>
                                             </button>
@@ -858,7 +858,7 @@ Expediente {{$expediente->id}}
                                             </button>
                                         </div>
                                         <div class="col-4">
-                                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('10')">
+                                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('3')">
                                                 <img src="{{asset('assets/user/icons/illustrator.png')}}" class="img-fluid" style="width: 40%;">
                                                 <label for="">4. Logo Conocer Evaluador Independiente</label>
                                             </button>
@@ -882,7 +882,7 @@ Expediente {{$expediente->id}}
                                             </button>
                                         </div>
                                         <div class="col-4">
-                                            <button class="btn btn-sm" id="btnArchivos3" onclick="mostrarArchivos('9')">
+                                            <button class="btn btn-sm" id="btnArchivos3" onclick="mostrarArchivos('4')">
                                                 <img src="{{asset('assets/user/icons/book.png')}}" class="img-fluid" style="width: 40%;">
                                                 <label for="">8. Formatos Resolucion De Quejas</label>
                                             </button>
