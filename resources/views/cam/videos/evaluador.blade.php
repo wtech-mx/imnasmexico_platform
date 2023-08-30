@@ -22,14 +22,13 @@
             </div>
 
         @if ($video->check1 == NULL)
-            <div class="col-6 d-flex align-items-center p-3">
+            <div class="col-12 col-md-6  d-flex align-items-center p-3">
                 <h1 class="text-center tittle_bold_cam">
                     CAPACITACION ESTANDAR EC0076
                 </h1>
-
             </div>
 
-            <div class="col-6 p-3">
+            <div class="col-12 col-md-6  p-3">
                 <p class="text-center tittle_bold_cam">
                     <video width="320" height="240" class="video d-block" controls>
                         <source src="https://www.cambyimnas.com/wp-content/uploads/2023/03/CAPACITACION%20ESTANDAR%20EC0076.mp4" type="video/mp4">
@@ -45,7 +44,7 @@
         @endif
 
         @if ($video->check1 != NULL && $video->check2 == NULL)
-            <div class="col-6 d-flex align-items-center p-3">
+            <div class="col-12 col-md-6 p-3">
                 <p class="text-center tittle_bold_cam">
                     <video width="320" height="240" class="video d-block" controls>
                         <source src="https://www.cambyimnas.com/wp-content/uploads/2023/03/1%20DIAGNOSTICO_EI.mp4" type="video/mp4">
@@ -60,7 +59,7 @@
                 </p>
             </div>
 
-            <div class="col-6 d-flex align-items-center p-3">
+            <div class="col-12 col-md-6 d-flex align-items-center p-3">
                 <h1 class="text-center tittle_bold_cam">
                     DIAGNOSTICO
                 </h1>
@@ -68,13 +67,13 @@
         @endif
 
         @if ($video->check2 != NULL && $video->check3 == NULL)
-            <div class="col-6 d-flex align-items-center p-3">
+            <div class="col-12 col-md-6  d-flex align-items-center p-3">
                 <h1 class="text-center tittle_bold_cam">
                     PLAN DE EVALUACION
                 </h1>
             </div>
 
-            <div class="col-6 p-3">
+            <div class="col-12 col-md-6  p-3">
                 <p class="text-center tittle_bold_cam">
                     <video width="320" height="240" class="video d-block" controls>
                         <source src="https://www.cambyimnas.com/wp-content/uploads/2023/03/2%20PLAN%20DE%20EVALUACION%20EI.mp4" type="video/mp4">
@@ -91,7 +90,7 @@
         @endif
 
         @if ($video->check3 != NULL && $video->check4 == NULL)
-            <div class="col-6 p-3">
+            <div class="col-12 col-md-6  p-3">
                 <p class="text-center tittle_bold_cam">
                     <video width="320" height="240" class="video d-block" controls>
                         <source src="https://www.cambyimnas.com/wp-content/uploads/2023/03/3%20EVALUACION%20EI.mp4" type="video/mp4">
@@ -106,7 +105,7 @@
                 </p>
             </div>
 
-            <div class="col-6 d-flex align-items-center p-3">
+            <div class="col-12 col-md-6  d-flex align-items-center p-3">
                 <h1 class="text-center tittle_bold_cam">
                     EVALUACION
                 </h1>
@@ -114,13 +113,13 @@
         @endif
 
         @if ($video->check4 != NULL && $video->check5 == NULL)
-            <div class="col-6 d-flex align-items-center p-3">
+            <div class="col-12 col-md-6  d-flex align-items-center p-3">
                 <h1 class="text-center tittle_bold_cam">
                     CEDULA DE EVALUACION
                 </h1>
             </div>
 
-            <div class="col-6 p-3">
+            <div class="col-12 col-md-6  p-3">
                 <p class="text-center tittle_bold_cam">
                     <video width="320" height="240" class="video d-block" controls>
                         <source src="https://www.cambyimnas.com/wp-content/uploads/2023/03/4%20CEDULA%20DE%20EVALUACION%20EI%20.mp4" type="video/mp4">
@@ -137,7 +136,7 @@
         @endif
 
         @if ($video->check5 != NULL && $video->check6 == NULL)
-            <div class="col-6 p-3">
+            <div class="col-12 col-md-6  p-3">
                 <p class="text-center tittle_bold_cam">
                     <video width="320" height="240" class="video d-block" controls>
                         <source src="https://www.cambyimnas.com/wp-content/uploads/2023/03/5%20VIDEO%20ENTREGA%20DE%20CERTIFICADO%20EI.mp4" type="video/mp4">
@@ -152,7 +151,7 @@
                 </p>
             </div>
 
-            <div class="col-6 d-flex align-items-center p-3">
+            <div class="col-12 col-md-6  d-flex align-items-center p-3">
                 <h1 class="text-center tittle_bold_cam">
                     ENTREGA DE CERTIFICADOS
                 </h1>
@@ -160,13 +159,13 @@
         @endif
 
         @if ($video->check6 != NULL && $video->check7 == NULL)
-            <div class="col-6 d-flex align-items-center p-3">
+            <div class="col-12 col-md-6  d-flex align-items-center p-3">
                 <h1 class="text-center tittle_bold_cam">
                     MODULO DE EVALUACION Y LOTES
                 </h1>
             </div>
 
-            <div class="col-6 p-3">
+            <div class="col-12 col-md-6  p-3">
                 <p class="text-center tittle_bold_cam">
                     <video width="320" height="240" class="video d-block" controls>
                         <source src="https://www.cambyimnas.com/wp-content/uploads/2023/03/6%20MODULO%20DE%20EVALUACION%20Y%20LOTES%20EI.mp4" type="video/mp4">
@@ -183,7 +182,7 @@
         @endif
 
         @if ($video->check7 != NULL && $video->check8 == NULL)
-            <div class="col-6 p-3">
+            <div class="col-12 col-md-6  p-3">
                 <p class="text-center tittle_bold_cam">
                     <video width="320" height="240" class="video d-block" controls>
                         <source src="https://www.cambyimnas.com/wp-content/uploads/2023/03/7%20FOTOGRAFIA%20EI.mp4" type="video/mp4">
@@ -198,7 +197,7 @@
                 </p>
             </div>
 
-            <div class="col-6 d-flex align-items-center p-3">
+            <div class="col-12 col-md-6  d-flex align-items-center p-3">
                 <h1 class="text-center tittle_bold_cam">
                     FOTOGRAFIA
                 </h1>
@@ -206,13 +205,13 @@
         @endif
 
         @if ($video->check8 != NULL && $video->check9 == NULL)
-            <div class="col-6 d-flex align-items-center p-3">
+            <div class="col-12 col-md-6  d-flex align-items-center p-3">
                 <h1 class="text-center tittle_bold_cam">
                     LOGOTIPO
                 </h1>
             </div>
 
-            <div class="col-6 p-3">
+            <div class="col-12 col-md-6  p-3">
                 <p class="text-center tittle_bold_cam">
                     <video width="320" height="240" class="video d-block" controls>
                         <source src="https://www.cambyimnas.com/wp-content/uploads/2023/03/8%20LOGOTIPO%20EVALUADOR%20INDEPENDIENTE_EI.mp4" type="video/mp4">
@@ -229,7 +228,7 @@
         @endif
 
         @if ($video->check9 != NULL && $video->check10 == NULL)
-            <div class="col-6 p-3">
+            <div class="col-12 col-md-6  p-3">
                 <p class="text-center tittle_bold_cam">
                     <video width="320" height="240" class="video d-block" controls>
                         <source src="https://www.cambyimnas.com/wp-content/uploads/2023/03/9%20CEDULA%20DE%20ACREDITACION%20EI.mp4" type="video/mp4">
@@ -244,7 +243,7 @@
                 </p>
             </div>
 
-            <div class="col-6 d-flex align-items-center p-3">
+            <div class="col-12 col-md-6  d-flex align-items-center p-3">
                 <h1 class="text-center tittle_bold_cam">
                     CEDULA DE ACREDITACION
                 </h1>
@@ -252,7 +251,7 @@
         @endif
 
         @if ($video->check10 != NULL)
-            <div class="col-6 p-3">
+            <div class="col-12 col-md-6  p-3">
                 <p class="text-center tittle_bold_cam">
                     ¡Felicidades! has concluido con la fase de los tutoriales. <br> Un paso menos para convertirte en Evaluador Independiente. <br> Prosigue con la siguiente fase.
                     <button class="btn btn-sm btn-outline-light">Subir documentos</button>

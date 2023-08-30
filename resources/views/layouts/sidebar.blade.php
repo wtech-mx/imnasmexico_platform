@@ -517,6 +517,15 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a class="nav-link {{ (Request::is('videos/index') ? 'active' : '') }}" href="{{ route('index.documentos') }}">
+                            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-ticket text-sm opacity-10" style="color:#6EC1E4"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Videos</span>
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
             @endcan

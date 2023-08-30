@@ -13,7 +13,7 @@
 
         @font-face {
             font-family: 'Minion';
-            src: url('file:///E:/laragon/www/imnasmexico_platform/public/assets/admin/fonts/Minion.ttf');
+            src: url('https://plataforma.imnasmexico.com/assets/admin/fonts/Minion.ttf');
         }
 
         .img_portada {

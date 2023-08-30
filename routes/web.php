@@ -403,6 +403,12 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::post('/documentos/carpeta/crear', [App\Http\Controllers\Cam\CamDocuemntosController::class, 'crear_carpeta'])->name('crear_carpeta.documentos');
         Route::post('/documentos/crear', [App\Http\Controllers\Cam\CamDocuemntosController::class, 'crear'])->name('crear.documentos');
         Route::get('/documentos/edit/{id}', [App\Http\Controllers\Cam\CamDocuemntosController::class, 'edit'])->name('edit.documentos');
+
+        // =============== M O D U L O   videos CRUD ===============================
+        Route::get('/admin/vidos_cam', [App\Http\Controllers\CamVideosController::class, 'index'])->name('vidos_cam.index');
+        Route::post('/admin/vidos_cam/store', [App\Http\Controllers\CamVideosController::class, 'store'])->name('vidos_cam.store');
+        Route::patch('/admin/vidos_cam/update/{id}', [App\Http\Controllers\CamVideosController::class, 'update'])->name('vidos_cam.update');
+
     });
 });
 
