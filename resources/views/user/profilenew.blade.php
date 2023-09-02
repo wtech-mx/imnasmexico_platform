@@ -644,28 +644,28 @@ Mi perfil- {{$cliente->name}}
                                                     <div class="d-flex justify-content-center">
                                                         <ul class="nav nav-tabs" id="myTabs">
                                                             <li class="nav-item">
-                                                                <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#content1" role="tab" aria-controls="content1" style="" class="tab_profile_materials" aria-selected="true">Material de clase <img src="{{ asset('assets/user/icons/stack-of-books.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
+                                                                <a class="nav-link active" id="tab1" data-bs-toggle="tab" href="#content1{{$video->id_tickets}}" role="tab" aria-controls="content1" style="" class="tab_profile_materials" aria-selected="true">Material de clase <img src="{{ asset('assets/user/icons/stack-of-books.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
                                                             </li>
                                                             <li class="nav-item">
-                                                                <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#content2" role="tab" aria-controls="content2" style="" class="tab_profile_materials" aria-selected="false">Literatura para el estudiante <img src="{{ asset('assets/user/icons/read.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
+                                                                <a class="nav-link" id="tab2" data-bs-toggle="tab" href="#content2{{$video->id_tickets}}" role="tab" aria-controls="content2" style="" class="tab_profile_materials" aria-selected="false">Literatura para el estudiante <img src="{{ asset('assets/user/icons/read.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
                                                             </li>
                                                             {{-- <li class="nav-item">
                                                                 <a class="nav-link" id="tab_guia" data-bs-toggle="tab" href="#content_guia" role="tab" aria-controls="content_guia" style="" class="tab_profile_materials" aria-selected="false">Guia para documentación</a>
                                                             </li> --}}
                                                             <li class="nav-item">
-                                                                <a class="nav-link" id="tab_costos" data-bs-toggle="tab" href="#content_costos" role="tab" aria-controls="content_costos" style="" class="tab_profile_materials" aria-selected="true">Lista de precios y costos de tratamientos <img src="{{ asset('assets/user/icons/money.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
+                                                                <a class="nav-link" id="tab_costos" data-bs-toggle="tab" href="#content_costos{{$video->id_tickets}}" role="tab" aria-controls="content_costos" style="" class="tab_profile_materials" aria-selected="true">Lista de precios y costos de tratamientos <img src="{{ asset('assets/user/icons/money.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
                                                             </li>
                                                             <li class="nav-item">
-                                                                <a class="nav-link" id="tab_contacto" data-bs-toggle="tab" href="#content_contacto" role="tab" aria-controls="content_contacto" style="" class="tab_profile_materials" aria-selected="true">Contacto <img src="{{ asset('assets/user/icons/complain.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
+                                                                <a class="nav-link" id="tab_contacto" data-bs-toggle="tab" href="#content_contacto{{$video->id_tickets}}" role="tab" aria-controls="content_contacto" style="" class="tab_profile_materials" aria-selected="true">Contacto <img src="{{ asset('assets/user/icons/complain.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
                                                             </li>
                                                             <li class="nav-item">
-                                                                <a class="nav-link" id="tab_avales" data-bs-toggle="tab" href="#content_avales" role="tab" aria-controls="content_avales" style="" class="tab_profile_materials" aria-selected="true">Avales y Estándares <img src="{{ asset('assets/user/icons/certificate.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
+                                                                <a class="nav-link" id="tab_avales" data-bs-toggle="tab" href="#content_avales{{$video->id_tickets}}" role="tab" aria-controls="content_avales" style="" class="tab_profile_materials" aria-selected="true">Avales y Estándares <img src="{{ asset('assets/user/icons/certificate.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
                                                             </li>
                                                         </ul>
                                                     </div>
 
                                                     <div class="tab-content" id="myTabContent">
-                                                        <div class="tab-pane fade show active" id="content1" role="tabpanel" aria-labelledby="tab1">
+                                                        <div class="tab-pane fade show active" id="content1{{$video->id_tickets}}" role="tabpanel" aria-labelledby="tab1">
                                                             <div class="col-12">
                                                                 <div class="row">
                                                                 @if (isset($carpetas_material) && $carpetas_material != NULL)
@@ -700,7 +700,7 @@ Mi perfil- {{$cliente->name}}
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="tab-pane fade" id="content2" role="tabpanel" aria-labelledby="tab2">
+                                                        <div class="tab-pane fade" id="content2{{$video->id_tickets}}" role="tabpanel" aria-labelledby="tab2">
                                                             <div class="col-12">
                                                                 <div class="row">
                                                                     @if (isset($carpetas_literatura) && $carpetas_literatura != NULL)
@@ -794,7 +794,7 @@ Mi perfil- {{$cliente->name}}
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="tab-pane fade" id="content_costos" role="tabpanel" aria-labelledby="tab_costos">
+                                                        <div class="tab-pane fade" id="content_costos{{$video->id_tickets}}" role="tabpanel" aria-labelledby="tab_costos">
                                                             <div class="col-12">
                                                                 <div id="carrousel_publicidad_mb" class="carousel slide" data-bs-ride="carousel">
                                                                     <div class="carousel-inner">
@@ -841,7 +841,7 @@ Mi perfil- {{$cliente->name}}
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="tab-pane fade" id="content_contacto" role="tabpanel" aria-labelledby="tab_contacto">
+                                                        <div class="tab-pane fade" id="content_contacto{{$video->id_tickets}}" role="tabpanel" aria-labelledby="tab_contacto">
                                                             <div class="col-12">
                                                                 <div id="carrousel_contacto_mb" class="carousel slide" data-bs-ride="carousel">
                                                                     <div class="carousel-inner">
@@ -908,7 +908,7 @@ Mi perfil- {{$cliente->name}}
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="tab-pane fade" id="content_avales" role="tabpanel" aria-labelledby="tab_avales">
+                                                        <div class="tab-pane fade" id="content_avales{{$video->id_tickets}}" role="tabpanel" aria-labelledby="tab_avales">
                                                             <div class="col-12">
                                                                 <div id="carrousel_avales_mb" class="carousel slide" data-bs-ride="carousel">
                                                                     <div class="carousel-inner">
