@@ -102,7 +102,7 @@
 </section>
 
 <section class="primario bg_overley" style="background-color:#F5ECE4;" id="cafeteria">
-    <div class="row">
+    {{-- <div class="row">
 
         <div class="col-12 col-md-6 order-uno m-auto">
             <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">Reality</h1>
@@ -155,6 +155,35 @@
                                 </button>
 
                         </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> --}}
+
+    <div class="row">
+
+        <div class="col-12 col-md-6 order-uno m-auto">
+            <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">Clausura </h1>
+            <p class="text-center text-white mt-auto parrafo_instalaciones" style="color:#836262!important;">
+                Nos complace enormemente compartir la presentación de nuestra primera generación en el Diplomado en
+                Medicina Estética, el cual ha sido avalado por la prestigiosa UNAM (Universidad Nacional Autónoma de México).
+            </p>
+        </div>
+
+        <div class="col-12 col-md-6 order-dos">
+            <div class="d-flex justify-content-center">
+                <div class="card card-custom space_Card" style="">
+                    <div id="carousel_expos" class="carousel slide">
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <video class="video_nosotros" controls>
+                                    <source src="{{asset('assets/user/nosotros/clausura_unam.MOV')}}" type="video/mp4">
+                                </video>                            </div>
+                          </div>
 
                     </div>
                 </div>

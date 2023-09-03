@@ -48,9 +48,9 @@
           <li class="nav-item">
             <a class="nav-link nav_link_custom {{ (Request::is('nuestras_instalaciones*') ? 'active' : '') }}" href="{{ route('user.instalaciones') }}">Instalaciones</a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link nav_link_custom {{ (Request::is('reality*') ? 'active' : '') }}" href="{{ route('user.reality') }}">Reality</a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link nav_link_custom" data-bs-toggle="modal" data-bs-target="#checkout_modal" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i> {{ count((array) session('cart')) }}</a>
           </li>
