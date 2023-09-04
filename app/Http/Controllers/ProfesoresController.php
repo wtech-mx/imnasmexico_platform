@@ -23,11 +23,11 @@ class ProfesoresController extends Controller
 
     public function index_profesor_single($id){
         $id_profesor = auth::user()->id;
-
         $curso = Cursos::find($id);
         $ordenes = OrdersTickets::where('id_curso', '=', $id)->get();
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
         $ticketCount = CursosTickets::where('id_curso', '=', $id)->count();
+
         return view('profesor.single_clase', compact('curso', 'ordenes', 'tickets','ticketCount'));
     }
 
@@ -36,8 +36,11 @@ class ProfesoresController extends Controller
     public function index_clase(Request $request)
     {
         $id_profesor = auth::user()->id;
+        $tipo_profesor = auth::user()->cliente;
 
-        $cursos = Cursos::where('id_profesor', $id_profesor)
+        if($tipo_profesor == '2'){
+
+            $cursos = Cursos::where('id_profesor', $id_profesor)
             ->withCount(['ordersTickets as alumnos_pagados' => function ($query) {
                 $query->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
                     ->where('orders.estatus', 1);
@@ -46,6 +49,18 @@ class ProfesoresController extends Controller
             ->orderBy('fecha_inicial', 'ASC')
             ->get();
 
+        }else if($tipo_profesor == '5'){
+
+            $cursos = Cursos::withCount(['ordersTickets as alumnos_pagados' => function ($query) {
+                $query->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                    ->where('orders.estatus', 1);
+            }])
+
+            ->whereDate('fecha_inicial', '>=', Carbon::yesterday())
+            ->orderBy('fecha_inicial', 'ASC')
+            ->get();
+        }
+
         return view('profesor.clases', compact('cursos'));
     }
 
@@ -53,7 +68,16 @@ class ProfesoresController extends Controller
     public function dashboard(Request $request){
         $id_profesor = auth::user()->id;
 
-        $cursos = Cursos::where('estatus','=', '1')->where('id_profesor', '=', $id_profesor)->count();
+        $tipo_profesor = auth::user()->cliente;
+
+        if($tipo_profesor == '2'){
+
+            $cursos = Cursos::where('estatus','=', '1')->where('id_profesor', '=', $id_profesor)->count();
+
+        }else if($tipo_profesor == '5'){
+
+            $cursos = Cursos::where('estatus','=', '1')->count();
+        }
 
         return view('profesor.dashboard', compact('cursos'));
     }
