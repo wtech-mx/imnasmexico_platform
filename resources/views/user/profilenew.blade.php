@@ -843,7 +843,7 @@ Mi perfil- {{$cliente->name}}
                                                         </div>
                                                         <div class="tab-pane fade" id="content_contacto{{$video->id_tickets}}" role="tabpanel" aria-labelledby="tab_contacto">
                                                             <div class="col-12">
-                                                                <div id="carrousel_contacto_mb" class="carousel slide" data-bs-ride="carousel">
+                                                                <div id="carrousel_contacto_mb_{{$video->id_tickets}}" class="carousel slide" data-bs-ride="carousel">
                                                                     <div class="carousel-inner">
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
@@ -897,11 +897,11 @@ Mi perfil- {{$cliente->name}}
                                                                         </div>
                                                                     </div>
 
-                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carrousel_contacto_mb" data-bs-slide="prev">
+                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carrousel_contacto_mb_{{$video->id_tickets}}" data-bs-slide="prev">
                                                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                                     <span class="visually-hidden">Previous</span>
                                                                     </button>
-                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carrousel_contacto_mb" data-bs-slide="next">
+                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carrousel_contacto_mb_{{$video->id_tickets}}" data-bs-slide="next">
                                                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                                     <span class="visually-hidden">Next</span>
                                                                     </button>
@@ -910,7 +910,7 @@ Mi perfil- {{$cliente->name}}
                                                         </div>
                                                         <div class="tab-pane fade" id="content_avales{{$video->id_tickets}}" role="tabpanel" aria-labelledby="tab_avales">
                                                             <div class="col-12">
-                                                                <div id="carrousel_avales_mb" class="carousel slide" data-bs-ride="carousel">
+                                                                <div id="carrousel_avales_mb_{{$video->id_tickets}}" class="carousel slide" data-bs-ride="carousel">
                                                                     <div class="carousel-inner">
                                                                         <div class="carousel-item active">
                                                                             <p class="text-center">
@@ -940,11 +940,11 @@ Mi perfil- {{$cliente->name}}
                                                                         </div>
                                                                     </div>
 
-                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carrousel_avales_mb" data-bs-slide="prev">
+                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carrousel_avales_mb_{{$video->id_tickets}}" data-bs-slide="prev">
                                                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                                     <span class="visually-hidden">Previous</span>
                                                                     </button>
-                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carrousel_avales_mb" data-bs-slide="next">
+                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carrousel_avales_mb_{{$video->id_tickets}}" data-bs-slide="next">
                                                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                                     <span class="visually-hidden">Next</span>
                                                                     </button>
