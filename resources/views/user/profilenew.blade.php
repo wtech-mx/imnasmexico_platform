@@ -901,7 +901,7 @@ Mi perfil- {{$cliente->name}}
                                                             <div class="col-12">
                                                                 <div id="carrousel_contacto_mb_{{$video->id_tickets}}" class="carousel slide" data-bs-ride="carousel">
                                                                     <div class="carousel-inner">
-                                                                        <div class="carousel-item">
+                                                                        <div class="carousel-item active">
                                                                             <p class="text-center">
                                                                                 <img class="img_material_clase_pc" src="{{asset('publicidad/646512f3809a6CURSOS ONLINE.png') }}" class="d-block">
                                                                             </p>
@@ -931,7 +931,7 @@ Mi perfil- {{$cliente->name}}
                                                                                 <img class="img_material_clase_pc" src="{{asset('publicidad/646512f33aeb2CAM-01.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
-                                                                        <div class="carousel-item active">
+                                                                        <div class="carousel-item">
                                                                             <p class="text-center">
                                                                                 <img class="img_material_clase_pc" src="{{asset('publicidad/646512f33bbccCAM.png') }}" class="d-block">
                                                                             </p>
