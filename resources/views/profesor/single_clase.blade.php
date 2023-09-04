@@ -80,7 +80,8 @@
                             @endphp
                         @endif
                     @endforeach
-                    {{ $contador }}
+                    {{ $contador }} <br>
+                    <strong class="text-dark">Profesor Asignado :</strong> {{$profesor->name}}
 
             </p>
             <div class="table-responsive">

@@ -22,13 +22,20 @@ class ProfesoresController extends Controller
     }
 
     public function index_profesor_single($id){
+
         $id_profesor = auth::user()->id;
+
         $curso = Cursos::find($id);
+
+        $profesor =  User::where('id','=',$curso->id_profesor)->first();
+
         $ordenes = OrdersTickets::where('id_curso', '=', $id)->get();
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
         $ticketCount = CursosTickets::where('id_curso', '=', $id)->count();
 
-        return view('profesor.single_clase', compact('curso', 'ordenes', 'tickets','ticketCount'));
+
+
+        return view('profesor.single_clase', compact('curso', 'ordenes', 'tickets','ticketCount','profesor'));
     }
 
 
