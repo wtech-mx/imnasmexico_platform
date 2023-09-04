@@ -28,7 +28,7 @@ class CustomAuthController extends Controller
 
         if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))){
 
-            if(Auth::user()->cliente == '2'){
+            if(Auth::user()->cliente == '2' or  Auth::user()->cliente == '5'){
                 return redirect('/profesor/inicio');
             }elseif(Auth::user()->cliente == '3'){
                 $code = Auth::user()->code;
