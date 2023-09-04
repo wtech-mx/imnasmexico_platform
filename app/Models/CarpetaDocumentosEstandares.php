@@ -16,5 +16,6 @@ class CarpetaDocumentosEstandares extends Model
         'ine',
         'id_carpeta',
         'nombre',
+        'guia',
     ];
 }
