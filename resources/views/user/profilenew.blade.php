@@ -796,7 +796,7 @@ Mi perfil- {{$cliente->name}}
                                                         </div>
                                                         <div class="tab-pane fade" id="content_costos{{$video->id_tickets}}" role="tabpanel" aria-labelledby="tab_costos">
                                                             <div class="col-12">
-                                                                <div id="carrousel_publicidad_mb" class="carousel slide" data-bs-ride="carousel">
+                                                                <div id="carrousel_publicidad_mb_{{$video->id_tickets}}" class="carousel slide" data-bs-ride="carousel">
                                                                     <div class="carousel-inner">
                                                                     @foreach ($publicidad as $item)
                                                                         @php
@@ -830,11 +830,11 @@ Mi perfil- {{$cliente->name}}
                                                                     @endforeach
                                                                     </div>
 
-                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carrousel_publicidad_mb" data-bs-slide="prev">
+                                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carrousel_publicidad_mb_{{$video->id_tickets}}" data-bs-slide="prev">
                                                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                                     <span class="visually-hidden">Previous</span>
                                                                     </button>
-                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carrousel_publicidad_mb" data-bs-slide="next">
+                                                                    <button class="carousel-control-next" type="button" data-bs-target="#carrousel_publicidad_mb_{{$video->id_tickets}}" data-bs-slide="next">
                                                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                                     <span class="visually-hidden">Next</span>
                                                                     </button>
