@@ -733,7 +733,7 @@ Mi perfil- {{$cliente->name}}
                                                                             @if ($extension === 'pdf')
                                                                             <div class="col-lg-4 col-md-6 col-sm-12  col-12 mt-3">
                                                                                 <p class="text-center">
-                                                                                    <h3>Módulo {{ $contador }}</h3>
+                                                                                    <h3>{{$carpeta->nombre_recurso}}</h3>
                                                                                 <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
                                                                                     <a class="text-dark d-block" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >
                                                                                         Ver PDF
