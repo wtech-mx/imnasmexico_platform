@@ -970,10 +970,136 @@ Mi perfil- {{$cliente->name}}
                                                                     <div class="carousel-inner">
                                                                         <div class="carousel-item active">
                                                                             <p class="text-center">
-                                                                                <embed class="embed_pdf_publicidad" src="{{asset('publicidad/64e36edf3ac8bDOCUMENTACIONES IMNAS2.pdf') }}" type="application/pdf"  />
-                                                                                <a class="text-dark" href="{{ asset('publicidad/64e36edf3ac8bDOCUMENTACIONES IMNAS2.pdf') }}" target="_blank" >Ver PDF</a>
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_1.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_2.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_3.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_4.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_5.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_6.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_7.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_8.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_9.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_10.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_11.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_12.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_13.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_14.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_15.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_16.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_17.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_18.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_19.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_21.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_22.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_23.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
                                                                                 <img class="img_material_clase_pc" src="{{asset('publicidad/646512f382887ESTÁNDARES 01.jpg') }}" class="d-block">
