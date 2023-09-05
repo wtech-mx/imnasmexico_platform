@@ -109,7 +109,7 @@
         <div class="col-12 col-md-4">
             <div class="d-flex justify-content-center">
                 <div class="card card-custom space_Card_rs" style="">
-                    <img class="card_image" src="{{asset('assets/user/instalaciones/terraza3.jpg')}}"  alt="...">
+                    <img class="card_image" src="{{asset('assets/user/instalaciones/Areas_Comunes.png')}}"  alt="...">
                 </div>
             </div>
 

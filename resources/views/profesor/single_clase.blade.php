@@ -80,7 +80,8 @@
                             @endphp
                         @endif
                     @endforeach
-                    {{ $contador }}
+                    {{ $contador }} <br>
+                    <strong class="text-dark">Profesor Asignado :</strong> {{$profesor->name}}
 
             </p>
             <div class="table-responsive">
@@ -102,7 +103,7 @@
                     <tr>
                         <td>{{ $order->User->id }}</td>
                         <td>{{ $order->User->name }}</td>
-                        <td>{{ $order->User->telefono }}</td>
+                        <td>{{ str_repeat('*', strlen($order->User->telefono) - 4) . substr($order->User->telefono, -4) }}</td>
                         {{-- <td>{{ $order->User->email }}</td> --}}
                         <td>
                             <input data-id="{{ $order->Orders->id }}" class="toggle-class" type="checkbox"

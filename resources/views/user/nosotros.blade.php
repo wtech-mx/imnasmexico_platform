@@ -265,19 +265,70 @@
         <div class="col-12 col-md-6 order-dos">
             <div class="d-flex justify-content-center">
                 <div class="card card-custom space_Card" style="">
-                    <div id="carousel_conferencias" class="carousel slide">
+                    <div id="carousel_stand" class="carousel slide">
 
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <video class="video_nosotros" controls>
-                                    <source src="{{asset('assets/user/nosotros/DIPLOMADO_MEDICINA_UNAM.MP4')}}" type="video/mp4">
-                                </video>
+                                <div class="d-flex justify-content-center">
+                                    <div class="card card-custom" style="margin-top: 1rem">
+                                        <img class="card_image" src="{{asset('assets/user/nosotros/stand1.jpg')}}" class="card-img-top" alt="...">
+                                    </div>
+                                </div>
                             </div>
-                          </div>
+
+                            <div class="carousel-item ">
+                                <div class="d-flex justify-content-center">
+                                    <div class="card card-custom" style="margin-top: 1rem">
+                                        <img class="card_image" src="{{asset('assets/user/nosotros/stand3.jpg')}}" class="card-img-top" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item ">
+                                <div class="d-flex justify-content-center">
+                                    <div class="card card-custom" style="margin-top: 1rem">
+                                        <img class="card_image" src="{{asset('assets/user/nosotros/stand4.jpg')}}" class="card-img-top" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="carousel-item ">
+                                <div class="d-flex justify-content-center">
+                                    <div class="card card-custom" style="margin-top: 1rem">
+                                        <img class="card_image" src="{{asset('assets/user/nosotros/stand5.jpg')}}" class="card-img-top" alt="...">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_stand" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_stand" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="col-12 col-md-6 order-uno m-auto">
+            <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">STANDS</h1>
+            <p class="text-center text-white mt-auto parrafo_instalaciones" style="color:#836262!important;">
+
+            </p>
+        </div>
+
+    </div>
+</section>
+
+<section class="primario bg_overley" style="background-color:#F5ECE4;" id="cafeteria">
+    <div class="row">
 
         <div class="col-12 col-md-6 order-uno m-auto">
             <h1 class="text-white text-center titulo mt-5 " style="color:#836262!important;">
@@ -296,6 +347,23 @@
                 recibirán una Diploma totalmente avalado ante la UNAM a través de
                 la Facultad de Estudios Superiores Zaragoza.
             </p>
+        </div>
+
+        <div class="col-12 col-md-6 order-dos">
+            <div class="d-flex justify-content-center">
+                <div class="card card-custom space_Card" style="">
+                    <div id="carousel_conferencias" class="carousel slide">
+
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <video class="video_nosotros" controls>
+                                    <source src="{{asset('assets/user/nosotros/DIPLOMADO_MEDICINA_UNAM.MP4')}}" type="video/mp4">
+                                </video>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
