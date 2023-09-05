@@ -56,12 +56,12 @@
 
         .container5{
             position: absolute;
-            top: 80%;
-            right:50px;
+            top: 75%;
+            right:45px;
         }
 
         .img_firma{
-            width: 230px;
+            width: 100px;
             height: auto;
         }
 
@@ -78,7 +78,7 @@
 
         .nombre{
             font-family: 'Minion', sans-serif;
-            font-size: 20px;
+            font-size: 17px;
             color: #000;
         }
 
@@ -95,8 +95,8 @@
         }
 
         .oval-container {
-            width: 185px;
-            height: 285px;
+            width: 112px;
+            height: 170px;
             position: absolute;
             overflow: hidden;
             top: 32%;
@@ -114,8 +114,7 @@
             transform: translateX(-50%);
             left: 50%;
             background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-            /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
-
+             /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
             background-size: cover;
             background-position: center center;
         }
@@ -160,7 +159,7 @@
 
         <div class="container5">
             <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
-            {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
+            {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma">--}}
         </div>
 
     </body>
