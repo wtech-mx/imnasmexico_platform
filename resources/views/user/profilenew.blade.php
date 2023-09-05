@@ -1102,22 +1102,48 @@ Mi perfil- {{$cliente->name}}
 
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f382887ESTÁNDARES 01.jpg') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-1.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
+
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f3832c9ESTÁNDARES 02.jpg') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-2.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
+
+
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f383b81ESTÁNDARES 03.jpg') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-3.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
+
+
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f384473ESTÁNDARES 04.jpg') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-4.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+
+                                                                        <div class="carousel-item">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-5.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+
+                                                                        <div class="carousel-item">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-6.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+
+                                                                        <div class="carousel-item">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-7.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                     </div>
