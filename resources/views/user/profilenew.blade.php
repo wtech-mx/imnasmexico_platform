@@ -363,7 +363,7 @@ Mi perfil- {{$cliente->name}}
                                                     <p class="text-center ">
                                                         <a href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="text-decoration: none; color: #000">
                                                             <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/><br>
-                                                            {{$documento->nombre}}
+                                                            {{ substr($documento->nombre, 13) }}
                                                         </a><br>
                                                         <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: #836262; border-radius: 19px;">
                                                             Descargar
@@ -375,7 +375,7 @@ Mi perfil- {{$cliente->name}}
                                                     <p class="text-center mt-2">
                                                         <a href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="text-decoration: none; color: #000">
                                                             <img src="{{asset('assets/user/icons/docx.png') }}" style="width: 45px; height: 45px;"/><br>
-                                                            {{$documento->nombre}}
+                                                            {{ substr($documento->nombre, 13) }}
                                                         </a><br>
                                                         <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: #836262; border-radius: 19px;">
                                                             Descargar
