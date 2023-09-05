@@ -1084,6 +1084,12 @@ Mi perfil- {{$cliente->name}}
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_20.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+                                                                        <div class="carousel-item ">
+                                                                            <p class="text-center">
                                                                                 <img class="img_material_clase_pc" src="{{asset('publicidad/avales_21.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
