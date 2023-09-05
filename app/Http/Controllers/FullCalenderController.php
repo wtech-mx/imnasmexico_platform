@@ -15,21 +15,31 @@ class FullCalenderController extends Controller
     public function index(Request $request)
     {
         $id_profesor = auth::user()->id;
+        $tipo_profesor = auth::user()->cliente;
 
-        if($request->ajax()) {
+        if($tipo_profesor == '2'){
+            if($request->ajax()) {
 
-            $data = Event::whereDate('start', '>=', $request->start)
-                        ->whereDate('end',   '<=', $request->end)
-                        ->where('id_profesor', '=', $id_profesor)
-                        ->get(['id', 'title', 'start', 'end']);
-
-            // Modificar el título para eliminar el prefijo "Curso de"
-            foreach ($data as $event) {
-                $event->title = str_replace(['Curso de', 'Curso'], '', $event->title);
+                $data = Event::whereDate('start', '>=', $request->start)
+                            ->whereDate('end',   '<=', $request->end)
+                            ->where('id_profesor', '=', $id_profesor)
+                            ->get(['id', 'title', 'start', 'end']);
             }
 
-            return response()->json($data);
+        }else if($tipo_profesor == '5'){
+
+            $data = Event::whereDate('start', '>=', $request->start)
+            ->whereDate('end',   '<=', $request->end)
+            ->get(['id', 'title', 'start', 'end']);
+
         }
+
+        // Modificar el título para eliminar el prefijo "Curso de"
+        foreach ($data as $event) {
+            $event->title = str_replace(['Curso de', 'Curso'], '', $event->title);
+        }
+
+            return response()->json($data);
 
         return view('fullcalender');
     }
