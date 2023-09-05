@@ -84,7 +84,7 @@ class DocumentosController extends Controller
 
         }elseif($tipo_documentos->tipo == 'Cedula de indetidad'){
             $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
-            $pdf->setPaper('A4', 'portrait');
+            //$pdf->setPaper('A4', 'portrait');
             $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
 
             return $pdf->download('CN-Cedula de identidad papel_'.$nombre.'.pdf');

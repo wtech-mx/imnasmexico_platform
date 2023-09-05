@@ -13,18 +13,21 @@
 
         @font-face {
             font-family: 'Minion';
-            src: url('file:///E:/laragon/www/imnasmexico_platform/public/assets/admin/fonts/Minion.ttf');
+            src: url('plataforma.imnasmexico.com/assets/admin/fonts/Minion.ttf');
+            font-weight: normal;
+            font-style: normal;
         }
 
+
         .img_portada {
-            width: 793px;
-            height: 1120px;
+            width: 480px;
+            height: 668px;
             position:relative;
         }
 
         .container {
             position: absolute;
-            top: 44%;
+            top: 45.5%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -40,8 +43,8 @@
 
         .container3{
             position: absolute;
-            top: 51.3%;
-            right: 24px;
+            top: 51%;
+            right: 19px;
             text-align: center;
         }
 
@@ -63,31 +66,31 @@
         }
 
         .img_reverso{
-            width: 793px;
-            height: 1120px;
+            width: 480px;
+            height: 668px;
             position:relative;
         }
 
         .curso{
-            font-size: 25px;
+            font-size: 17px;
             color: red;
         }
 
         .nombre{
-            font-family: 'Minion';
-            font-size: 25px;
+            font-family: 'Minion', sans-serif;
+            font-size: 20px;
             color: #000;
         }
 
         .folio{
             position:relative;
-            font-size: 24px;
+            font-size:19px;
             color: red;
         }
 
         .folio2{
             position:relative;
-            font-size: 35px;
+            font-size: 25px;
             color: red;
         }
 
