@@ -12,8 +12,9 @@
             </div>
             <form method="POST" action="{{ route('carpetas_estandares.store') }}" enctype="multipart/form-data" role="form">
                 @csrf
-                <div class="modal-body">
-                    <div class="form-group">
+                <div class="modal-body row">
+
+                    <div class="form-group col-12">
                         <label for="name">Nombre</label>
                         <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>

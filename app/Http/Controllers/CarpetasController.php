@@ -39,6 +39,8 @@ class CarpetasController extends Controller
                 $carpeta_recursos = new CarpetaRecursos;
                 $carpeta_recursos->nombre = $fileName;
                 $carpeta_recursos->id_carpeta = $folder;
+                $carpeta_recursos->area = $request->get('area');
+                $carpeta_recursos->sub_area = $request->get('sub_area');
                 $carpeta_recursos->save();
             }
         }
@@ -73,6 +75,8 @@ class CarpetasController extends Controller
                 $carpeta_recursos = new CarpetaRecursos;
                 $carpeta_recursos->nombre = $fileName;
                 $carpeta_recursos->id_carpeta = $id;
+                $carpeta_recursos->area = $request->get('area');
+                $carpeta_recursos->sub_area = $request->get('sub_area');
                 $carpeta_recursos->save();
             }
         }

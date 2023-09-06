@@ -15,5 +15,7 @@ class CarpetaRecursos extends Model
     protected $fillable = [
         'id_carpeta',
         'nombre',
+        'area',
+        'sub_area',
     ];
 }

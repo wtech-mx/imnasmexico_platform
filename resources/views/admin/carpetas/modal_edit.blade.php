@@ -24,6 +24,24 @@
                             <input  name="archivos[]" multiple  type="file" class="form-control" >
                         </div>
 
+                        <div class="form-group col-6">
+                            <label for="">Area</label>
+                                <select name="area" id="area" class="form-select">
+                                    <option value="">selecciona una opcion</option>
+                                    <option value="Material">Material</option>
+                                    <option value="Literatura">Literatura</option>
+                                </select>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label for="">Sub Area</label>
+                                <select name="sub_area" id="sub_area" class="form-select">
+                                    <option value="">selecciona una opcion</option>
+                                    <option value="corporal">corporal</option>
+                                    <option value="facial">facial</option>
+                                </select>
+                        </div>
+
                         <div class="form-group col-12">
                             <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Actualizar</button>
                         </div>
@@ -50,6 +68,8 @@
                                 @endif
 
                             <p class="text-center">{{ $recurso->nombre }}</p>
+                            <p class="text-center"><strong>Area:</strong>{{ $recurso->area }}</p>
+                            <p class="text-center"><strong>Subarea:</strong>{{ $recurso->sub_area }}</p>
 
                             <p class="text-center">
                                 <a class="btn btn-sm btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"><i class="fa fa-trash-o"></i></a>
