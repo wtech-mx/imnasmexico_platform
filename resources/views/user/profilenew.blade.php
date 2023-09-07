@@ -195,33 +195,37 @@ Mi perfil- {{$cliente->name}}
                                         @endphp
 
                                         <div class="col-6 form-group p-3 mt-2">
-                                            <label for="ine">INE Frente y atras</label>
-                                            <input id="ine" name="ine" type="file" class="form-control" >
+                                            <label for="ine">INE Frente y atras</label><br>
+                                            <input name="ine" hidden id="btnoriginal2" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall2').innerText=document.getElementById('btnoriginal2').files[0]['name'];" type="file" value="Adjuntar documento">
+                                            <button type="button" id='botonpersonal2' onClick="document.getElementById('btnoriginal2').click();">Adjuntar documento</button>
+                                            <small id='tagsmall2'>No hay archivos adjuntos</small>
                                             @if (pathinfo($documento->ine, PATHINFO_EXTENSION) == 'pdf')
                                                 <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine)}}" style="width: 60%; height: 60px;"></iframe>
                                                 <p class="text-center ">
-                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
                                                 </p>
                                             @else
                                                 <p class="text-center mt-2">
                                                     <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
                                                 </p>
                                             @endif
                                         </div>
 
                                         <div class="col-6 form-group p-3 mt-2">
-                                            <label for="curp">CURP</label>
-                                            <input id="curp" name="curp" type="file" class="form-control" >
+                                            <label for="curp">CURP</label><br>
+                                            <input name="curp" hidden id="btnoriginal1" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall1').innerText=document.getElementById('btnoriginal1').files[0]['name'];" type="file" value="Adjuntar documento">
+                                            <button type="button" id='botonpersonal1' onClick="document.getElementById('btnoriginal1').click();">Adjuntar documento</button>
+                                            <small id='tagsmall1'>No hay archivos adjuntos</small>
                                             @if (pathinfo($documento->curp, PATHINFO_EXTENSION) == 'pdf')
                                                 <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp)}}" style="width: 60%; height: 60px;"></iframe>
                                                 <p class="text-center ">
-                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
                                                 </p>
                                             @else
                                                 <p class="text-center mt-2">
-                                                    <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                                    <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" alt="Imagen" style="width: 120px;height: 80%;"/><br>
+                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
                                                 </p>
                                             @endif
                                         </div>
@@ -232,13 +236,17 @@ Mi perfil- {{$cliente->name}}
                                 @else
                                     <!-- Si el usuario no tiene documentos, mostramos el formulario -->
                                     <div class="col-6 form-group p-3 mt-2">
-                                        <label for="ine">INE Frente y atras</label>
-                                        <input id="ine" name="ine" type="file" class="form-control" >
+                                        <label for="ine">INE Frente y atras</label><br>
+                                        <input name="ine" hidden id="btnoriginal3" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall3').innerText=document.getElementById('btnoriginal3').files[0]['name'];" type="file" value="Adjuntar documento">
+                                        <button type="button" id='botonpersonal3' onClick="document.getElementById('btnoriginal3').click();">Adjuntar documento</button>
+                                        <small id='tagsmall3'>No hay archivos adjuntos</small>
                                     </div>
 
                                     <div class="col-6 form-group p-3 mt-2">
-                                        <label for="foto_tam_titulo">CURP</label>
-                                        <input id="curp" name="curp" type="file" class="form-control" >
+                                        <label for="foto_tam_titulo">CURP</label><br>
+                                        <input name="curp" hidden id="btnoriginal4" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall4').innerText=document.getElementById('btnoriginal4').files[0]['name'];" type="file" value="Adjuntar documento">
+                                        <button type="button" id='botonpersonal4' onClick="document.getElementById('btnoriginal4').click();">Adjuntar documento</button>
+                                        <small id='tagsmall4'>No hay archivos adjuntos</small>
                                     </div>
                                 @endif
 
@@ -476,7 +484,7 @@ Mi perfil- {{$cliente->name}}
                                                             </li>
                                                             @if ($video->Cursos->CursosEstandares->count() > 0)
                                                                 <li class="nav-item">
-                                                                    <a class="nav-link" id="tab_estandar" data-bs-toggle="tab" href="#content_estandar{{$video->id_tickets}}" role="tab" aria-controls="content_estandar" style="font-size: 19px;" class="tab_profile_materials" aria-selected="true">Estandares <img src="{{ asset('assets/user/icons/certificacion.webp') }}" alt="" class="img_tabs_profile_ss" style=""></a>
+                                                                    <a class="nav-link" id="tab_estandar" data-bs-toggle="tab" href="#content_estandar{{$video->id_tickets}}" role="tab" aria-controls="content_estandar" style="font-size: 19px;" class="tab_profile_materials" aria-selected="true">Estándares <img src="{{ asset('assets/user/icons/certificacion.webp') }}" alt="" class="img_tabs_profile_ss" style=""></a>
                                                                 </li>
                                                                 <li class="nav-item">
                                                                     <a class="nav-link" id="tab_descargas" data-bs-toggle="tab" href="#content_descargas{{$video->id_tickets}}" role="tab" aria-controls="content_descargas" style="font-size: 19px;" class="tab_profile_materials" aria-selected="true">Descargas/Subir Documentos <img src="{{ asset('assets/user/icons/documentos.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
@@ -611,16 +619,18 @@ Mi perfil- {{$cliente->name}}
 
                                                                             <div class="col-6 form-group p-3 mt-2">
                                                                                 <label for="foto_tam_infantil">Foto tamaño Infantil Color</label>
-                                                                                <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
+                                                                                <input name="foto_tam_infantil" hidden id="btnoriginal5{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall5{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal5{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
+                                                                                <button type="button" id='botonpersonal5{{$video->id_tickets}}' onClick="document.getElementById('btnoriginal5{{$video->id_tickets}}').click();">Adjuntar documento</button>
+                                                                                <small id='tagsmall5{{$video->id_tickets}}'>No hay archivos adjuntos</small>
                                                                                 @if (pathinfo($documento->foto_tam_infantil, PATHINFO_EXTENSION) == 'pdf')
                                                                                     <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil)}}" style="width: 60%; height: 60px;"></iframe>
                                                                                     <p class="text-center ">
-                                                                                        <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                                                                        <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
                                                                                     </p>
                                                                                 @else
                                                                                     <p class="text-center mt-2">
                                                                                         <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                                                        <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                                                                        <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
                                                                                     </p>
                                                                                 @endif
                                                                             </div>
@@ -629,16 +639,18 @@ Mi perfil- {{$cliente->name}}
                                                                                 @if ($video->Cursos->nombre != 'Diplomado de Cosmetología Facial y Corporal')
                                                                                     <div class="col-6 form-group p-3 mt-2">
                                                                                         <label for="firma">Firma</label>
-                                                                                        <input id="firma" name="firma" type="file" class="form-control" >
+                                                                                        <input name="firma" hidden id="btnoriginal6{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall6{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal6{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
+                                                                                        <button type="button" id='botonpersonal6{{$video->id_tickets}}' onClick="document.getElementById('btnoriginal6{{$video->id_tickets}}').click();">Adjuntar documento</button>
+                                                                                        <small id='tagsmall6{{$video->id_tickets}}'>No hay archivos adjuntos</small>
                                                                                         @if (pathinfo($documento->firma, PATHINFO_EXTENSION) == 'pdf')
                                                                                             <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma)}}" style="width: 60%; height: 60px;"></iframe>
                                                                                             <p class="text-center ">
-                                                                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                                                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
                                                                                             </p>
                                                                                         @else
                                                                                             <p class="text-center mt-2">
                                                                                                 <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                                                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                                                                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
                                                                                             </p>
                                                                                         @endif
                                                                                     </div>
@@ -653,13 +665,17 @@ Mi perfil- {{$cliente->name}}
 
                                                                         <div class="col-6 form-group p-3 mt-2">
                                                                             <label for="foto_tam_infantil">Foto tamaño Infantil Color</label>
-                                                                            <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
+                                                                            <input name="foto_tam_infantil" hidden id="btnoriginal7{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall7{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal7{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
+                                                                            <button type="button" id='botonpersonal7{{$video->id_tickets}}' onClick="document.getElementById('btnoriginal7{{$video->id_tickets}}').click();">Adjuntar documento</button>
+                                                                            <small id='tagsmall7{{$video->id_tickets}}'>No hay archivos adjuntos</small>
                                                                         </div>
                                                                         @if ($video->Cursos->imnas == '1' || $video->Cursos->redconocer == '1')
                                                                             @if ($video->Cursos->nombre != 'Diplomado de Cosmetología Facial y Corporal')
                                                                                 <div class="col-6 form-group p-3 mt-2">
                                                                                     <label for="firma">Firma</label>
-                                                                                    <input id="firma" name="firma" type="file" class="form-control" >
+                                                                                    <input name="firma" hidden id="btnoriginal8{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall8{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal8{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
+                                                                                    <button type="button" id='botonpersonal8{{$video->id_tickets}}' onClick="document.getElementById('btnoriginal8{{$video->id_tickets}}').click();">Adjuntar documento</button>
+                                                                                    <small id='tagsmall8{{$video->id_tickets}}'>No hay archivos adjuntos</small>
                                                                                 </div>
                                                                             @endif
                                                                         @endif
@@ -679,7 +695,7 @@ Mi perfil- {{$cliente->name}}
                                                                 <div class="row">
                                                                     @foreach ($estandaresComprados as $estandar)
                                                                     <div class="col-12">
-                                                                            <h4 class="text-center">Guia para estandar {{ $estandar->nombre }}</h4> <br>
+                                                                            <h4 class="text-center">Guía para estándar {{ $estandar->nombre }}</h4> <br>
                                                                                 @php
                                                                                     $documentos_estandar = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->where('guia', '=', '1')->get();
                                                                                 @endphp
@@ -744,7 +760,9 @@ Mi perfil- {{$cliente->name}}
                                                                                         <div class="col-3">
                                                                                             <input type="hidden" name="documento_ids[]" value="{{ $documento->id }}">
                                                                                             <input type="hidden" name="curso" value="{{ $video->Cursos->id }}">
-                                                                                            <input class="form-control" type="file" name="archivos[]">
+                                                                                            <input name="archivos[]" hidden id="btnoriginal{{ $documento->id }}{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall{{ $documento->id }}{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal{{ $documento->id }}{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
+                                                                                            <button type="button" id="botonpersonal{{ $documento->id }}{{$video->id_tickets}}" onClick="document.getElementById('btnoriginal{{ $documento->id }}{{$video->id_tickets}}').click();">Adjuntar documento</button>
+                                                                                            <small id='tagsmall{{ $documento->id }}{{$video->id_tickets}}'>No hay archivos adjuntos</small>
                                                                                         </div>
                                                                                         <div class="col-3">
                                                                                             <input type="checkbox" name="documento_subido" {{ $documentoDescargado ? 'checked' : '' }} disabled>
