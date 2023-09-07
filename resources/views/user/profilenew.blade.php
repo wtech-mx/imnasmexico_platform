@@ -237,7 +237,7 @@ Mi perfil- {{$cliente->name}}
                                     </div>
 
                                     <div class="col-6 form-group p-3 mt-2">
-                                        <label for="foto_tam_titulo">Foto ovalo</label>
+                                        <label for="foto_tam_titulo">CURP</label>
                                         <input id="foto_tam_titulo" name="foto_tam_titulo" type="file" class="form-control" >
                                     </div>
                                 @endif
@@ -650,26 +650,19 @@ Mi perfil- {{$cliente->name}}
                                                                         <!-- Si el usuario tiene documentos, no mostramos el formulario -->
                                                                     @else
                                                                         <!-- Si el usuario no tiene documentos, mostramos el formulario -->
-                                                                        <div class="col-6 form-group p-3 mt-2">
-                                                                            <label for="carta_compromiso">Carta Compromiso</label>
-                                                                            <input id="carta_compromiso" name="carta_compromiso" type="file" class="form-control" >
-                                                                        </div>
 
                                                                         <div class="col-6 form-group p-3 mt-2">
-                                                                            <label for="foto_tam_infantil">Foto tamaño Infantil</label>
+                                                                            <label for="foto_tam_infantil">Foto tamaño Infantil Color</label>
                                                                             <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
                                                                         </div>
-
-
-                                                                        <div class="col-6 form-group p-3 mt-2">
-                                                                            <label for="foto_tam_titulo">Foto ovalo</label>
-                                                                            <input id="foto_tam_titulo" name="foto_tam_titulo" type="file" class="form-control" >
-                                                                        </div>
-
-                                                                        <div class="col-6 form-group p-3 mt-2">
-                                                                            <label for="firma">Firma</label>
-                                                                            <input id="firma" name="firma" type="file" class="form-control" >
-                                                                        </div>
+                                                                        @if ($video->Cursos->imnas == '1' || $video->Cursos->redconocer == '1')
+                                                                            @if ($video->Cursos->nombre != 'Diplomado de Cosmetología Facial y Corporal')
+                                                                                <div class="col-6 form-group p-3 mt-2">
+                                                                                    <label for="firma">Firma</label>
+                                                                                    <input id="firma" name="firma" type="file" class="form-control" >
+                                                                                </div>
+                                                                            @endif
+                                                                        @endif
                                                                     @endif
 
                                                                     <div class="col-12">
