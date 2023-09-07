@@ -238,7 +238,7 @@ Mi perfil- {{$cliente->name}}
 
                                     <div class="col-6 form-group p-3 mt-2">
                                         <label for="foto_tam_titulo">CURP</label>
-                                        <input id="foto_tam_titulo" name="foto_tam_titulo" type="file" class="form-control" >
+                                        <input id="curp" name="curp" type="file" class="form-control" >
                                     </div>
                                 @endif
 
