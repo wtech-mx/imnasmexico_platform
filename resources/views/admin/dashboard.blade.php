@@ -299,7 +299,7 @@
                             </td>
 
                             <td>
-                                <p class="text-xs font-weight-bold mb-0">{{ $user->name }}</p>
+                                <p class="text-xs font-weight-bold mb-0">{{ $user->puesto }}</p>
                             </td>
 
                             <td class="align-middle text-center text-sm">

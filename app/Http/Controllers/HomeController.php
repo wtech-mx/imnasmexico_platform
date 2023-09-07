@@ -110,7 +110,7 @@ class HomeController extends Controller
 
                 $envios = EnviosOrder::whereNotIn('estatus', ['Realizado','Cancelado'])->get();
                 $contadorenvios = $envios->count();
-                $profesores =  User::where('cliente','2')->orderBy('name','DESC')->get();
+                $profesores =  User::where('cliente','2')->orWhere('cliente', '5')->orderBy('name','DESC')->get();
 
                 $data = User::where('cliente','=',null)->orderBy('id','DESC')->get();
 

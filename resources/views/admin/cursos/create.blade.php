@@ -114,28 +114,28 @@
                                         <h5 class="font-weight-bolder">Fecha y Hora</h5>
                                         <div class="multisteps-form__content">
                                             <div class="row">
-                                                <div class="col-3">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">
                                                         <label for="nota">Fecha Inicial</label>
                                                         <input type="date" id="fecha_inicial" name="fecha_inicial" class="form-control">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">
                                                         <label for="nota">Hora Inicial</label>
                                                         <input type="time" id="hora_inicial" name="hora_inicial" class="form-control">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">
                                                         <label for="nota">Fecha Final</label>
                                                         <input type="date" id="fecha_final" name="fecha_final" class="form-control">
                                                     </div>
                                                 </div>
 
-                                                <div class="col-3">
+                                                <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                                     <div class="form-group">
                                                         <label for="nota">Hora Final</label>
                                                         <input type="time" id="hora_final" name="hora_final" class="form-control">
@@ -334,19 +334,19 @@
                                                                     <input  id="nombre_ticket[]" name="nombre_ticket[]" type="text" class="form-control">
                                                                 </div>
                                                             </div>
-                                                            <div class="col-4">
+                                                            <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                                                                 <div class="form-group">
                                                                     <label for="num_sesion">Fecha inicial</label>
                                                                     <input  id="fecha_inicial_ticket[]" name="fecha_inicial_ticket[]" type="date" class="form-control" >
                                                                 </div>
                                                             </div>
-                                                            <div class="col-4">
+                                                            <div class="col-6 col-sm-6 col-md-4 col-lg-4">
                                                                 <div class="form-group">
                                                                     <label for="num_sesion">Fecha final</label>
                                                                     <input  id="fecha_final_ticket[]" name="fecha_final_ticket[]" type="date" class="form-control" >
                                                                 </div>
                                                             </div>
-                                                            <div class="col-4">
+                                                            <div class="col-12 col-sm-6 col-md-4 col-lg-4">
                                                                 <div class="form-group">
                                                                     <label for="num_sesion">Precio</label>
                                                                     <input  id="precio[]" name="precio[]" type="number" class="form-control" >

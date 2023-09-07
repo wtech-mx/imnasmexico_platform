@@ -17,7 +17,7 @@ use Carbon\Carbon;
 class ProfesoresController extends Controller
 {
     public function index_profesores(Request $request){
-        $users =  User::where('cliente','2')->orderBy('id','DESC')->get();
+        $users =  User::where('cliente','2')->orWhere('cliente', '5')->orderBy('id','DESC')->get();
         return view('admin.profesores.index', compact('users'));
     }
 

@@ -47,6 +47,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
+            'telefono' => 'required|telefono|unique:users,telefono',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
@@ -55,6 +56,7 @@ class UserController extends Controller
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->puesto = $request->get('puesto');
+        $user->telefono = $request->get('telefono');
         $user->password = Hash::make($request->get('password'));
         $user->assignRole($request->input('roles'));
         $user->save();
@@ -114,6 +116,7 @@ class UserController extends Controller
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->puesto = $request->get('puesto');
+        $user->telefono = $request->get('telefono');
         if(!empty($request->get('password'))){
             $user->password = Hash::make($request->get('password'));
         }else{
