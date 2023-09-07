@@ -426,12 +426,16 @@ class ClientsController extends Controller
 
         if ($request->hasFile('archivos')) {
             $archivos = $request->file('archivos');
-            foreach ($archivos as $archivo) {
+            $documento_ids = $request->get('documento_ids'); // Cambio a documento_ids (plural) ya que es un array
+            $id_curso = $request->get('curso');
+            foreach ($archivos as $key => $archivo) {
                 $path = $ruta_estandar;
                 $fileName = uniqid() . $archivo->getClientOriginalName();
                 $archivo->move($path, $fileName);
                 $documentos = new DocumentosEstandares();
                 $documentos->documento = $fileName;
+                $documentos->id_documento = $documento_ids[$key]; // Usar el ID correspondiente
+                $documentos->id_curso = $id_curso;
                 $documentos->id_usuario = $id;
                 $documentos->save();
             }

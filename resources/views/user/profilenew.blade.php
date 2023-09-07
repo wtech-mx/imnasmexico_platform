@@ -479,10 +479,7 @@ Mi perfil- {{$cliente->name}}
                                                                     <a class="nav-link" id="tab_estandar" data-bs-toggle="tab" href="#content_estandar{{$video->id_tickets}}" role="tab" aria-controls="content_estandar" style="font-size: 19px;" class="tab_profile_materials" aria-selected="true">Estandares <img src="{{ asset('assets/user/icons/certificacion.webp') }}" alt="" class="img_tabs_profile_ss" style=""></a>
                                                                 </li>
                                                                 <li class="nav-item">
-                                                                    <a class="nav-link" id="tab_descargas" data-bs-toggle="tab" href="#content_descargas{{$video->id_tickets}}" role="tab" aria-controls="content_descargas" style="font-size: 19px;" class="tab_profile_materials" aria-selected="true">Descargas Documentos <img src="{{ asset('assets/user/icons/documentos.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
-                                                                </li>
-                                                                <li class="nav-item">
-                                                                    <a class="nav-link" id="tab_register" data-bs-toggle="tab" href="#content_register{{$video->id_tickets}}" role="tab" aria-controls="content_register" style="font-size: 19px;" class="tab_profile_materials" aria-selected="true">Subir Documentos <img src="{{ asset('assets/user/icons/folder.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
+                                                                    <a class="nav-link" id="tab_descargas" data-bs-toggle="tab" href="#content_descargas{{$video->id_tickets}}" role="tab" aria-controls="content_descargas" style="font-size: 19px;" class="tab_profile_materials" aria-selected="true">Descargas/Subir Documentos <img src="{{ asset('assets/user/icons/documentos.png') }}" alt="" class="img_tabs_profile_ss" style=""></a>
                                                                 </li>
                                                             @endif
                                                             <li class="nav-item">
@@ -611,72 +608,41 @@ Mi perfil- {{$cliente->name}}
                                                                             @php
                                                                                 $tiene_documentos = true;
                                                                             @endphp
+
                                                                             <div class="col-6 form-group p-3 mt-2">
-                                                                                <label for="carta_compromiso">Carta Compromiso</label>
-                                                                                <input id="carta_compromiso" name="carta_compromiso" type="file" class="form-control" >
-                                                                                @if (pathinfo($documento->carta_compromiso, PATHINFO_EXTENSION) == 'pdf')
-                                                                                    <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso)}}" style="width: 60%; height: 60px;"></iframe>
+                                                                                <label for="foto_tam_infantil">Foto tamaño Infantil Color</label>
+                                                                                <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
+                                                                                @if (pathinfo($documento->foto_tam_infantil, PATHINFO_EXTENSION) == 'pdf')
+                                                                                    <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil)}}" style="width: 60%; height: 60px;"></iframe>
                                                                                     <p class="text-center ">
-                                                                                        <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                                                                        <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
                                                                                     </p>
                                                                                 @else
                                                                                     <p class="text-center mt-2">
-                                                                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                                                        <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                                                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                                                        <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
                                                                                     </p>
                                                                                 @endif
                                                                             </div>
 
-                                                                            @if ($video->Cursos->nombre == 'Diplomado de Cosmetología Facial y Corporal')
-                                                                                <div class="col-6 form-group p-3 mt-2">
-                                                                                    <label for="foto_tam_infantil">Foto tamaño Infantil</label>
-                                                                                    <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
-                                                                                    @if (pathinfo($documento->foto_tam_infantil, PATHINFO_EXTENSION) == 'pdf')
-                                                                                        <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil)}}" style="width: 60%; height: 60px;"></iframe>
-                                                                                        <p class="text-center ">
-                                                                                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
-                                                                                        </p>
-                                                                                    @else
-                                                                                        <p class="text-center mt-2">
-                                                                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                                                            <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
-                                                                                        </p>
-                                                                                    @endif
-                                                                                </div>
-                                                                            @endif
-
                                                                             @if ($video->Cursos->imnas == '1' || $video->Cursos->redconocer == '1')
-                                                                                <div class="col-6 form-group p-3 mt-2">
-                                                                                    <label for="foto_tam_titulo">Foto ovalo</label>
-                                                                                    <input id="foto_tam_titulo" name="foto_tam_titulo" type="file" class="form-control" >
-                                                                                    @if (pathinfo($documento->foto_tam_titulo, PATHINFO_EXTENSION) == 'pdf')
-                                                                                        <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_titulo)}}" style="width: 60%; height: 60px;"></iframe>
-                                                                                        <p class="text-center ">
-                                                                                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_titulo) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
-                                                                                        </p>
-                                                                                    @else
-                                                                                        <p class="text-center mt-2">
-                                                                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_titulo) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                                                            <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_titulo) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
-                                                                                        </p>
-                                                                                    @endif
-                                                                                </div>
-
-                                                                                <div class="col-6 form-group p-3 mt-2">
-                                                                                    <label for="firma">Firma</label>
-                                                                                    <input id="firma" name="firma" type="file" class="form-control" >
-                                                                                    @if (pathinfo($documento->firma, PATHINFO_EXTENSION) == 'pdf')
-                                                                                        <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma)}}" style="width: 60%; height: 60px;"></iframe>
-                                                                                        <p class="text-center ">
-                                                                                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
-                                                                                        </p>
-                                                                                    @else
-                                                                                        <p class="text-center mt-2">
-                                                                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                                                            <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
-                                                                                        </p>
-                                                                                    @endif
-                                                                                </div>
+                                                                                @if ($video->Cursos->nombre != 'Diplomado de Cosmetología Facial y Corporal')
+                                                                                    <div class="col-6 form-group p-3 mt-2">
+                                                                                        <label for="firma">Firma</label>
+                                                                                        <input id="firma" name="firma" type="file" class="form-control" >
+                                                                                        @if (pathinfo($documento->firma, PATHINFO_EXTENSION) == 'pdf')
+                                                                                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma)}}" style="width: 60%; height: 60px;"></iframe>
+                                                                                            <p class="text-center ">
+                                                                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                                                                            </p>
+                                                                                        @else
+                                                                                            <p class="text-center mt-2">
+                                                                                                <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                                                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                                                                            </p>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                @endif
                                                                             @endif
                                                                     @endforeach
 
@@ -766,89 +732,39 @@ Mi perfil- {{$cliente->name}}
                                                                             @php
                                                                                 $documentos_estandar = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->where('guia', '=', NULL)->get();
                                                                             @endphp
-                                                                            <div class="row">
-                                                                                @foreach ($documentos_estandar as $documento)
-                                                                                    @if (pathinfo($documento->nombre, PATHINFO_EXTENSION) == 'pdf')
-                                                                                    <div class="col-12">
-                                                                                        <p class="text-center ">
-                                                                                            <a href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="text-decoration: none; color: #000">
-                                                                                                <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
-                                                                                                {{ substr($documento->nombre, 13) }}
-                                                                                            </a>
-                                                                                            <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: #836262; border-radius: 19px;">
-                                                                                                Descargar
-                                                                                            </a>
-                                                                                        </p>
+                                                                                <form action="{{ route('documentos.store_cliente', $cliente->id) }}" method="POST" enctype="multipart/form-data">
+                                                                                    @csrf
+                                                                                    @foreach ($documentos_estandar as $documento)
+                                                                                        @php
+                                                                                            $documentoDescargado = DB::table('documentos_estandares')->where('id_usuario', $cliente->id)->where('id_documento', $documento->id)->exists();
+                                                                                        @endphp
+                                                                                    <div class="row">
+                                                                                        <div class="col-6  mb-2">
+                                                                                                <a href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="text-decoration: none; color: #000">
+                                                                                                    <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
+                                                                                                    {{ substr($documento->nombre, 13) }}
+                                                                                                </a>
+                                                                                                <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: #836262; border-radius: 19px;">
+                                                                                                    Descargar
+                                                                                                </a>
+                                                                                        </div>
+                                                                                        <div class="col-3">
+                                                                                            <input type="hidden" name="documento_ids[]" value="{{ $documento->id }}">
+                                                                                            <input type="hidden" name="curso" value="{{ $video->Cursos->id }}">
+                                                                                            <input class="form-control" type="file" name="archivos[]">
+                                                                                        </div>
+                                                                                        <div class="col-3">
+                                                                                            <input type="checkbox" name="documento_subido" {{ $documentoDescargado ? 'checked' : '' }} disabled>
+                                                                                        </div>
                                                                                     </div>
-                                                                                    @else
-                                                                                    <div class="col-12">
-                                                                                        <p class="text-center mt-2">
-                                                                                            <a href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="text-decoration: none; color: #000">
-                                                                                                <img src="{{asset('assets/user/icons/docx.png') }}" style="width: 45px; height: 45px;"/>
-                                                                                                {{ substr($documento->nombre, 13) }}
-                                                                                            </a>
-                                                                                            <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: #836262; border-radius: 19px;">
-                                                                                                Descargar
-                                                                                            </a>
-                                                                                        </p>
-                                                                                    </div>
-                                                                                    @endif
-                                                                                @endforeach
-                                                                            </div>
+                                                                                    @endforeach
+                                                                                    <button class="btn_save_profile d-inline-block mt-3" style="margin-left:8rem;" type="submit">Subir Documento</button>
+                                                                                </form>
                                                                     </div>
                                                                     @endforeach
                                                                 </div>
                                                             </div>
 
-                                                            <div class="tab-pane fade" id="content_register{{$video->id_tickets}}" role="tabpanel" aria-labelledby="nav-register-tab" tabindex="0" style="min-height: auto!important;">
-                                                                @php
-                                                                    $tiene_documentos_estandar = false;
-                                                                @endphp
-                                                                <div clasS="row">
-                                                                    @foreach($documentos_estandares as $documento)
-                                                                            @php
-                                                                                $tiene_documentos = true;
-                                                                            @endphp
-                                                                            <div class="col-6">
-                                                                                @if (pathinfo($documento->documento, PATHINFO_EXTENSION) == 'pdf')
-                                                                                    <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento)}}" style="width: 60%; height: 60px;"></iframe>
-                                                                                    <p class="text-center ">
-                                                                                        <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
-                                                                                    </p>
-                                                                                @else
-                                                                                    <p class="text-center mt-2">
-                                                                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                                                        <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
-                                                                                    </p>
-                                                                                @endif
-                                                                            </div>
-                                                                    @endforeach
-                                                                </div>
-
-                                                                <div clasS="row">
-
-                                                                    @if($tiene_documentos)
-                                                                        <!-- Si el usuario tiene documentos, no mostramos el formulario -->
-                                                                        @else
-                                                                        <div class="col-12">
-                                                                            <p class="text-center">No se han subido archivos aún.</p>
-                                                                        </div>
-                                                                    @endif
-
-                                                                    <div class="col-12">
-                                                                        <div class="d-flex justify-content-center">
-
-                                                                            <form method="POST" action="{{ route('documentos.store_cliente', $cliente->id) }}" enctype="multipart/form-data" role="form">
-                                                                                @csrf
-                                                                                <input class="form-control" type="file" name="archivos[]" multiple>
-                                                                                <button class="btn_save_profile d-inline-block mt-3" style="margin-left:8rem;" type="submit">Subir archivos</button>
-                                                                            </form>
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
                                                         <div class="tab-pane fade" id="content_costos{{$video->id_tickets}}" role="tabpanel" aria-labelledby="tab_costos">
                                                             <div class="col-12">
                                                                 <div id="carrousel_publicidad_mb_{{$video->id_tickets}}" class="carousel slide" data-bs-ride="carousel">
