@@ -15,8 +15,17 @@
                 <div class="modal-body row">
 
                     <div class="form-group col-12">
-                        <label for="name">Nombre</label>
+                        <label for="name">Nombre: </label>
                         <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label for="name">Guia: </label>
+                        <select name="guia" id="guia" class="form-select">
+                            <option value="">Seleciona una opcion</option>
+                            <option value="">Sin Guia</option>
+                            <option value="1">Con Guia</option>
+                        </select>
                     </div>
 
                     <div class="col-12">

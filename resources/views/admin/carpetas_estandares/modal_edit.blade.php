@@ -15,13 +15,22 @@
                         @csrf
                         <input type="hidden" name="_method" value="PATCH">
                         <div class="form-group col-6">
-                            <label for="">Nomrbe</label>
+                            <label for="">Nombre</label>
                             <input id="nombre" name="nombre" type="text" class="form-control" value="{{$carpeta->nombre}}">
                         </div>
 
                         <div class="form-group col-6">
                             <label for="">Archivos</label>
                             <input  name="archivos[]" multiple  type="file" class="form-control" >
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="name">Guia: </label>
+                            <select name="guia" id="guia" class="form-select">
+                                <option value="">Seleciona una opcion</option>
+                                <option value="">Sin Guia</option>
+                                <option value="1">Con Guia</option>
+                            </select>
                         </div>
 
                         <div class="form-group col-12">
@@ -50,6 +59,10 @@
                                 @endif
 
                             <p class="text-center">{{ $recurso->nombre }}</p>
+
+                            @if($recurso->guia == '1')
+                                <strong><p class="text-center">Guia</p></strong>
+                            @endif
 
                             <p class="text-center">
                                 <a class="btn btn-sm btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"><i class="fa fa-trash-o"></i></a>

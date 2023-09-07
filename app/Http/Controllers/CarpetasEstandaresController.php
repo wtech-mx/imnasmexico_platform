@@ -39,6 +39,7 @@ class CarpetasEstandaresController extends Controller
                 $carpeta_recursos = new CarpetaDocumentosEstandares;
                 $carpeta_recursos->nombre = $fileName;
                 $carpeta_recursos->id_carpeta = $folder;
+                $carpeta_recursos->guia = $request->get('guia');;
                 $carpeta_recursos->save();
             }
         }
@@ -73,6 +74,7 @@ class CarpetasEstandaresController extends Controller
                 $carpeta_recursos = new CarpetaDocumentosEstandares;
                 $carpeta_recursos->nombre = $fileName;
                 $carpeta_recursos->id_carpeta = $id;
+                $carpeta_recursos->guia = $request->get('guia');;
                 $carpeta_recursos->save();
             }
         }
