@@ -246,7 +246,9 @@
                 @endif
             </div>
 
+            @if($curso->visibilidad_faqs == '0')
 
+            @else
             <div class="card_single_horizon">
                 <div class="d-flex justify-content-between">
                     <h2 class="title_curso mb-3">Preguntas Frecuentes</h2>
@@ -336,44 +338,53 @@
                     </p>
                 @endif
             </div>
+            @endif
+
         </div>
 
         <div class="col-12 col-md-6">
 
-            <div class="card_single_horizon">
-                <div class="d-flex justify-content-between">
-                    <h2 class="title_curso mb-3">
-                        @if ($curso->modalidad == 'Presencial')
-                         Materiales
-                         @else
-                         Productos
-                         @endif
-                    </h2>
-                    <img class="icon_nav_course" src="{{asset('assets/user/icons/carrito-de-compras.webp')}}" alt="">
-                </div>
+            @if($curso->visibilidad_productos == '0')
+
+            @else
+                <div class="card_single_horizon">
+                    <div class="d-flex justify-content-between">
+                        <h2 class="title_curso mb-3">
+                            @if ($curso->modalidad == 'Presencial')
+                            Materiales
+                            @else
+                            Productos
+                            @endif
+                        </h2>
+                        <img class="icon_nav_course" src="{{asset('assets/user/icons/carrito-de-compras.webp')}}" alt="">
+                    </div>
 
 
-                @if ($curso->modalidad == 'Presencial')
-                <p class="text_cards_horizon text-left">El material de clase es obligatorio traerlo, en caso de no tenerlo, contamos con tienda dentro de las instalaciones para que puedas hacer la compra de tu material.</p>
-                 @else
-                <p class="text_cards_horizon text-left">El producto de clase es opcional, en caso de quererlo puedes checarlo en nuestra tienda en línea dándole click en la imagen o el botón.</p>
-                @endif
-                @if ($curso->materiales != NULL)
-                    <p class="text-left">
-                            <a class="example-image-link" href="{{asset('materiales/'.$curso->materiales) }}" data-lightbox="example-2" data-title="{{$curso->nombre}}">
-                                <img id="img_material_clase example-image" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 40%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
-                            </a>
-                    </p>
-                    @if ($curso->btn_cotizacion != NULL)
-                        <p class="text-left btn-holder mt-2">
-                            <a class="btn_ticket_comprar text-center" href="{{ $curso->btn_cotizacion}}"  role="button" target="_blank">
-                            Comprar Material
-                            </a>
-                        </p>
+                    @if ($curso->modalidad == 'Presencial')
+                    <p class="text_cards_horizon text-left">El material de clase es obligatorio traerlo, en caso de no tenerlo, contamos con tienda dentro de las instalaciones para que puedas hacer la compra de tu material.</p>
+                    @else
+                    <p class="text_cards_horizon text-left">El producto de clase es opcional, en caso de quererlo puedes checarlo en nuestra tienda en línea dándole click en la imagen o el botón.</p>
                     @endif
-                @endif
-            </div>
+                    @if ($curso->materiales != NULL)
+                        <p class="text-left">
+                                <a class="example-image-link" href="{{asset('materiales/'.$curso->materiales) }}" data-lightbox="example-2" data-title="{{$curso->nombre}}">
+                                    <img id="img_material_clase example-image" src="{{asset('materiales/'.$curso->materiales) }}" alt="material de clase" style="width: 40%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                                </a>
+                        </p>
+                        @if ($curso->btn_cotizacion != NULL)
+                            <p class="text-left btn-holder mt-2">
+                                <a class="btn_ticket_comprar text-center" href="{{ $curso->btn_cotizacion}}"  role="button" target="_blank">
+                                Comprar Material
+                                </a>
+                            </p>
+                        @endif
+                    @endif
+                </div>
+            @endif
 
+            @if($curso->visibilidad_liga_clase == '0')
+
+            @else
             <div class="card_single_horizon">
                     <div class="d-flex justify-content-between">
                         <h2 class="title_curso mb-3">
@@ -419,6 +430,7 @@
                         @endguest
                     @endif
             </div>
+            @endif
 
             <div class="card_single_horizon">
                 <div class="d-flex justify-content-between">
@@ -647,6 +659,10 @@
                 @endif
             </div>
 
+            @if($curso->visibilidad_metodos_pago == '0')
+
+            @else
+
             <div class="card_single_horizon">
                 <div class="d-flex justify-content-between">
                     <h2 class="title_curso mb-3">
@@ -674,6 +690,8 @@
                     </div> --}}
                 </div>
             </div>
+
+            @endif
 
         </div>
     </div>

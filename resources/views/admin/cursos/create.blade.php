@@ -103,6 +103,50 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="col-12">
+                                                    <h5>Visibilidad de secciones</h5>
+                                                </div>
+
+                                                <div class="col-12 col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="estandar">Productos </label>
+                                                        <select class="form-control" id="visibilidad_productos" name="visibilidad_productos">
+                                                            <option value="">Visible</option>
+                                                            <option value="0">No visible</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="estandar">Liga de clase </label>
+                                                        <select class="form-control" id="visibilidad_liga_clase" name="visibilidad_liga_clase">
+                                                            <option value="">Visible</option>
+                                                            <option value="0">No visible</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="estandar">Metodos de Pago </label>
+                                                        <select class="form-control" id="visibilidad_metodos_pago" name="visibilidad_metodos_pago">
+                                                            <option value="">Visible</option>
+                                                            <option value="0">No visible</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="estandar">FAQS </label>
+                                                        <select class="form-control" id="visibilidad_faqs" name="visibilidad_faqs">
+                                                            <option value="">Visible</option>
+                                                            <option value="0">No visible</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <div class="button-row d-flex mt-4">
                                                 <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>

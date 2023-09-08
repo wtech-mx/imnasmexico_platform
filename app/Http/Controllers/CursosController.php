@@ -272,6 +272,10 @@ class CursosController extends Controller
         $curso->texto_conocer = $request->get('texto_conocer');
         $curso->precio = $request->get('precio_curso');
         $curso->carpeta = $request->get('carpeta');
+        $curso->visibilidad_productos = $request->get('visibilidad_productos');
+        $curso->visibilidad_liga_clase = $request->get('visibilidad_liga_clase');
+        $curso->visibilidad_metodos_pago = $request->get('visibilidad_metodos_pago');
+        $curso->visibilidad_faqs = $request->get('visibilidad_faqs');
         $curso->update();
 
         // G U A R D A R  EVENTOS Y ACTUALZ
