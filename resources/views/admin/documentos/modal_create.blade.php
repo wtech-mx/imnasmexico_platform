@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="create_manual">Crear Manual</h5>
+                <h5 class="modal-title" id="create_manual">Generar documento</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
                     <span aria-hidden="true">X</span>
                 </button>
@@ -46,40 +46,63 @@
                                     @csrf
                                     <div class="row">
 
-                                        <div class="form-group col-12 mt-3">
-                                            <label for="name">Nombre Completo</label>
-                                            <input id="nombre" name="nombre" type="text" class="form-control" required >
-                                        </div>
-
-
-                                            <div class="form-group col-6 ">
-                                                <label for="name">Curso</label>
-                                                <select name="curso" id="curso" class="form-select">
-                                                    @foreach ($cursosArray as $nombre)
-                                                    <option value="{{ $nombre }}">{{ $nombre }}</option>
-                                                    @endforeach
-                                                </select>
+                                            <div class="form-group col-12 mt-3">
+                                                <label for="name">Nombre Completo *</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/mujer.png')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="nombre" name="nombre" type="text" class="form-control" required >
+                                                </div>
                                             </div>
 
                                             <div class="form-group col-6 ">
-                                                <label for="name">Fecha del Curso</label>
-                                                <input id="fecha" name="fecha" type="date" class="form-control" required >
+                                                <label for="name">Curso *</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <select name="curso" id="curso" class="form-select">
+                                                        @foreach ($cursosArray as $nombre)
+                                                        <option value="{{ $nombre }}">{{ $nombre }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-6 ">
+                                                <label for="name">Fecha del Curso *</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="fecha" name="fecha" type="date" class="form-control" required >
+                                                </div>
                                             </div>
 
                                             <div class="form-group col-6">
-                                                <label for="name">Tipo de documento</label>
-                                                <select name="tipo" id="tipo" class="form-select" >
-                                                    @foreach ($tipo_documentos as $item)
-                                                    <option value="{{ $item->id }}">{{ $item->nombre }}</option>
-                                                    @endforeach
-                                                </select>
+                                                <label for="name">Tipo de documento *</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px">
+                                                    </span>
+                                                    <select name="tipo" id="tipo" class="form-select" >
+                                                        @foreach ($tipo_documentos as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
                                             </div>
 
                                             <div class="gc_cn" style="display: none">
                                                 <div class="row">
 
+                                                    <div class="form-group col-12 gc_cn">
+                                                        <p>Los campos de (Nombre (s) y Apellidos) <br>son solo obligatorios para generar la credencial</p>
+                                                    </div>
+
                                                     <div class="form-group col-6 gc_cn">
-                                                        <label for="name">Nombre / nombres</label>
+                                                        <label for="name">Nombre (s)</label>
                                                         <input id="nombres" name="nombres" type="text" class="form-control"  >
                                                     </div>
 
@@ -94,18 +117,33 @@
                                                     </div>
 
                                                     <div class="form-group col-6 gc_cn">
-                                                        <label for="name">Folio</label>
-                                                        <input id="folio" name="folio" type="text" class="form-control"  >
+                                                        <label for="name">Folio *</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text" id="basic-addon1">
+                                                                <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                            </span>
+                                                            <input id="folio" name="folio" type="text" class="form-control"  >
+                                                        </div>
                                                     </div>
 
                                                     <div class="form-group col-6 gc_cn">
-                                                        <label for="name">Firma Personal</label>
-                                                        <input id="firma" name="firma" type="file" class="form-control"  >
+                                                        <label for="name">Firma Personal *</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text" id="basic-addon1">
+                                                                <img class="img_profile_label" src="{{asset('assets/user/icons/firma-digital.png')}}" alt="" width="30px">
+                                                            </span>
+                                                            <input id="firma" name="firma" type="file" class="form-control"  >
+                                                        </div>
                                                     </div>
 
                                                     <div class="form-group col-6 gc_cn">
-                                                        <label for="name">Fotografia </label>
-                                                        <input id="img_infantil" name="img_infantil" type="file" class="form-control"  >
+                                                        <label for="name">Fotografia *</label>
+                                                        <div class="input-group">
+                                                            <span class="input-group-text" id="basic-addon1">
+                                                                <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
+                                                            </span>
+                                                            <input id="img_infantil" name="img_infantil" type="file" class="form-control"  >
+                                                        </div>
                                                     </div>
 
                                                     <div class="form-group col-6 gc_cn">
