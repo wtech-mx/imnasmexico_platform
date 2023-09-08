@@ -84,7 +84,7 @@ class DocumentosController extends Controller
 
         }elseif($tipo_documentos->tipo == 'Cedula de indetidad'){
             $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
-            //$pdf->setPaper('A4', 'portrait');
+            $pdf->setPaper('A4', 'portrait');
             $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
 
             return $pdf->download('CN-Cedula de identidad papel_'.$nombre.'.pdf');
@@ -123,6 +123,90 @@ class DocumentosController extends Controller
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
             return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_aparatologia'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_aparatologia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_alasiados'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_alasiados',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_cosmetologia_fc'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_cosmetologia_fc',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_cosmeatria_ea'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_cosmeatria_ea',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_auxiliar'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_auxiliar',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_masoterapia'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_masoterapia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_cosme'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_cosme',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
         }
 
     }
