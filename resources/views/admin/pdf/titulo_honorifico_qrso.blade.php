@@ -110,7 +110,7 @@
         }
 
         .curso{
-            font-size: 43px;
+            font-size: 35px;
             color: #353535;
         }
 
@@ -182,7 +182,28 @@
         </div>
 
         <div class="container2">
-            <h4 class="curso">{{ ucwords(strtolower($curso)) }}</h4>
+            @php
+                // Divide el curso por espacios en blanco
+                $palabras = explode(' ', $curso);
+
+                // Inicializa la cadena formateada
+                $curso_formateado = '';
+                $contador_palabras = 0;
+
+                foreach ($palabras as $palabra) {
+                    // Agrega la palabra actual a la cadena formateada
+                    $curso_formateado .= $palabra . ' ';
+
+                    // Incrementa el contador de palabras
+                    $contador_palabras++;
+
+                    // Agrega un salto de línea después de cada tercera palabra
+                    if ($contador_palabras % 4 == 0) {
+                        $curso_formateado .= "<br>";
+                    }
+                }
+            @endphp
+            <h4 class="curso">{!! $curso_formateado !!}</h4>
         </div>
 
         <div class="container_folio_bajo1">
@@ -201,7 +222,28 @@
         </div>
 
         <div class="container7">
-            <h4 class="folio2">{{$curso}}</h4>
+            @php
+            // Divide el curso por espacios en blanco
+            $palabras = explode(' ', $curso);
+
+            // Inicializa la cadena formateada
+            $curso_formateado = '';
+            $contador_palabras = 0;
+
+            foreach ($palabras as $palabra) {
+                // Agrega la palabra actual a la cadena formateada
+                $curso_formateado .= $palabra . ' ';
+
+                // Incrementa el contador de palabras
+                $contador_palabras++;
+
+                // Agrega un salto de línea después de cada tercera palabra
+                if ($contador_palabras % 6 == 0) {
+                    $curso_formateado .= "<br>";
+                }
+            }
+        @endphp
+            <h4 class="folio2">{!! $curso_formateado !!}</h4>
         </div>
 
         <div class="container8">
@@ -213,7 +255,7 @@
         </div>
 
         <div class="container10">
-            <h4 class="folio2">{{$curso}}</h4>
+            <h4 class="folio2">{!! $curso_formateado !!}</h4>
         </div>
 
         <div class="container3">

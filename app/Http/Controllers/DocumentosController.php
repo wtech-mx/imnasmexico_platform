@@ -52,6 +52,7 @@ class DocumentosController extends Controller
         $tipo = $request->get('tipo');
         $folio = $request->get('folio');
         $curp = $request->get('curp');
+        $nacionalidad = $request->get('nacionalidad');
 
         $nombres = $request->get('nombres');
         $apellido_apeterno = $request->get('apellido_apeterno');
@@ -119,7 +120,7 @@ class DocumentosController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno'));
+            $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
             return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
@@ -131,7 +132,7 @@ class DocumentosController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_aparatologia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_aparatologia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -143,7 +144,7 @@ class DocumentosController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_alasiados',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_alasiados',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -155,7 +156,7 @@ class DocumentosController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_cosmetologia_fc',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_cosmetologia_fc',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -167,7 +168,7 @@ class DocumentosController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_cosmeatria_ea',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_cosmeatria_ea',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -179,7 +180,7 @@ class DocumentosController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_auxiliar',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_auxiliar',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -191,7 +192,7 @@ class DocumentosController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_masoterapia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_masoterapia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -203,7 +204,7 @@ class DocumentosController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_cosme',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_cosme',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');

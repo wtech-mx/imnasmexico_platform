@@ -243,6 +243,7 @@ class CursosController extends Controller
             $curso->video_cad = 1;
             $curso->fecha_video = $fechaHoraActual;
         }
+
         $curso->clase_grabada2 = $request->get('clase_grabada2');
         $curso->clase_grabada3 = $request->get('clase_grabada3');
         $curso->clase_grabada4 = $request->get('clase_grabada4');

@@ -38,7 +38,7 @@
 
         .container2{
             position: absolute;
-            top:67%;
+            top:62%;
             left: 115px;
             text-align: left;
         }
@@ -167,8 +167,8 @@
             clip-path: ellipse(50% 50% at 50% 50%);
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-            /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
+             background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
+            /*background-image: url('utilidades_documentos/{{ $fileName }}');*/
             background-size: cover;
             background-position: center center;
         }
@@ -182,8 +182,8 @@
             clip-path: ellipse(50% 50% at 50% 50%);
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-            /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
+             background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
+            /* background-image: url('utilidades_documentos/{{ $fileName }}');*/
             opacity: 0.5;
             background-size: cover;
             background-position: center center;
@@ -216,9 +216,29 @@
             <div class="oval2">
             </div>
         </div>
-
         <div class="container2">
-            <h4 class="curso">{{ ucwords(strtolower($curso)) }}</h4>
+            @php
+                // Divide el curso por espacios en blanco
+                $palabras = explode(' ', $curso);
+
+                // Inicializa la cadena formateada
+                $curso_formateado = '';
+                $contador_palabras = 0;
+
+                foreach ($palabras as $palabra) {
+                    // Agrega la palabra actual a la cadena formateada
+                    $curso_formateado .= $palabra . ' ';
+
+                    // Incrementa el contador de palabras
+                    $contador_palabras++;
+
+                    // Agrega un salto de línea después de cada tercera palabra
+                    if ($contador_palabras % 4 == 0) {
+                        $curso_formateado .= "<br>";
+                    }
+                }
+            @endphp
+            <h4 class="curso">{!! $curso_formateado !!}</h4>
         </div>
 
         <div class="container3">
@@ -226,7 +246,7 @@
         </div>
 
         <div class="container4">
-            <h4 class="nacionalidad">Mexicana</h4>
+            <h4 class="nacionalidad">{{ $nacionalidad }}</h4>
         </div>
 
         <div class="container5">
