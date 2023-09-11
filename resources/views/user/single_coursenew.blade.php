@@ -113,7 +113,7 @@
                                     </div>
                                 </a>
 
-                                @if($curso->visibilidad_carusel == '0')
+                                @if($curso->visibilidad_contactanos == '0')
 
                                 @else
                                 <a class="btn btn-secundario space_cs_rs mt-3" href="#contactenos" style="display:block ">
@@ -609,7 +609,7 @@
                     </div>
                 </a>
 
-                @if($curso->visibilidad_carusel == '0')
+                @if($curso->visibilidad_contactanos == '0')
 
                 @else
                 <a class="btn btn-secundario space_cs_rs mt-3" href="#contactenos" style="display:block ">
