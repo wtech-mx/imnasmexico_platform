@@ -113,6 +113,9 @@
                                     </div>
                                 </a>
 
+                                @if($curso->visibilidad_carusel == '0')
+
+                                @else
                                 <a class="btn btn-secundario space_cs_rs mt-3" href="#contactenos" style="display:block ">
                                     <div class="d-flex justify-content-start">
                                         <p class="card_tittle_btn my-auto">
@@ -123,6 +126,7 @@
                                         </div>
                                     </div>
                                 </a>
+                                @endif
 
                                 <div class="collapse show mt-3" id="collapseinfo">
                                     <div class="card card-body card_colapsable_comprar">
