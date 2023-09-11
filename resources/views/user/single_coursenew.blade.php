@@ -364,8 +364,33 @@
                           <div class="carousel-item active">
                             <img src="{{asset('cursos/DÍA 1 CARRUSEL.jpg')}}" class="d-block w-100" alt="...">
                           </div>
+
                           <div class="carousel-item">
                             <img src="{{asset('cursos/DÍA 2 CARRUSEL.jpg')}}" class="d-block w-100" alt="...">
+                          </div>
+
+                          <div class="carousel-item">
+                            <img src="{{asset('cursos/expo1.jpg')}}" class="d-block w-100" alt="...">
+                          </div>
+
+                          <div class="carousel-item">
+                            <img src="{{asset('cursos/expo2.jpg')}}" class="d-block w-100" alt="...">
+                          </div>
+
+                          <div class="carousel-item">
+                            <img src="{{asset('cursos/expo3.jpg')}}" class="d-block w-100" alt="...">
+                          </div>
+
+                          <div class="carousel-item">
+                            <img src="{{asset('cursos/expo4.jpg')}}" class="d-block w-100" alt="...">
+                          </div>
+
+                          <div class="carousel-item">
+                            <img src="{{asset('cursos/expo5.jpg')}}" class="d-block w-100" alt="...">
+                          </div>
+
+                          <div class="carousel-item">
+                            <img src="{{asset('cursos/expo6.jpg')}}" class="d-block w-100" alt="...">
                           </div>
                         </div>
 
