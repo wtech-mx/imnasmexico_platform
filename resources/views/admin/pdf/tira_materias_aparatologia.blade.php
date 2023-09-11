@@ -36,10 +36,26 @@
             text-align: center;
         }
 
+        .container2{
+            position: absolute;
+            top:21.3%;
+            left: 21.6%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
         .container3{
             position: absolute;
             top:33.3%;
             left: 45%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .container4{
+            position: absolute;
+            top:21.3%;
+            left: 30.6%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
@@ -74,6 +90,19 @@
             color: red;
         }
 
+
+        .folio2{
+            position:relative;
+            font-size: 6px;
+            color: red;
+        }
+
+        .curp{
+            position:relative;
+            font-size: 4px;
+            color: red;
+        }
+
         .oval-container {
             width: 103px;
             height: 117px;
@@ -104,18 +133,41 @@
 </head>
 
     <body>
-
         @php
-            $palabras = explode(' ', ucwords(strtolower($nombre)));
-            $parte1 = implode(' ', array_slice($palabras, 0, 2));
-            $parte2 = implode(' ', array_slice($palabras, 2));
+                    // Divide el curso por espacios en blanco
+                    $palabras = explode(' ', $nombre);
+
+                    // Inicializa la cadena formateada
+                    $nombre_formateado = '';
+                    $contador_palabras = 0;
+
+                    foreach ($palabras as $palabra) {
+                        // Agrega la palabra actual a la cadena formateada
+                        $nombre_formateado .= $palabra . ' ';
+
+                        // Incrementa el contador de palabras
+                        $contador_palabras++;
+
+                        // Agrega un salto de línea después de cada tercera palabra
+                        if ($contador_palabras % 4 == 0) {
+                            $nombre_formateado .= "<br>";
+                        }
+                    }
         @endphp
 
         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
 
         <div class="container">
-            <h4 class="nombre">{{ $parte1 }}<br>{{ $parte2 }}</h4>
+            <h4 class="nombre">{!! $nombre_formateado !!}<</h4>
+        </div>
+
+        <div class="container2">
+            <h4 class="folio2">{{$folio}}</h4>
+        </div>
+
+        <div class="container4">
+            <h4 class="curp">{{$curp}}</h4>
         </div>
 
         <div class="oval-container">
@@ -130,9 +182,6 @@
         <div class="container_folio_bajo1">
             <h4 class="folio3">{{$folio}}</h4>
         </div>
-
-        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
-        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
 
     </body>
 </html>
