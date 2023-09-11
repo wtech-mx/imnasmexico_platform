@@ -14,6 +14,13 @@
 {{-- css carrusel --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
+<style>
+    #registroBtn[disabled] {
+    background-color: #ccc; /* Cambia el color de fondo */
+    cursor: not-allowed; /* Cambia el cursor al estilo "no permitido" */
+    color: #666; /* Cambia el color del texto */
+}
+</style>
 @endsection
 @php
     use Carbon\Carbon;
@@ -102,14 +109,28 @@
                                                         @if ($ticket->id_curso == $curso->id)
                                                             @if($curso->precio == 0)
                                                                 <div class="row mb-3">
-                                                                    <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                                    <form method="POST" action="{{ route('clases_gratis') }}"role="form" id="miFormulario">
                                                                         @csrf
                                                                         <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
                                                                         <div class="row">
                                                                             <div class="col-12">
                                                                                 <div class="input-group flex-nowrap mt-4">
                                                                                     <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                                                                    <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                                                    <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre(s)" required>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-12">
+                                                                                <div class="input-group flex-nowrap mt-4">
+                                                                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-male"></i></span>
+                                                                                    <input type="text" name="ape_paterno" id="ape_paterno" class="form-control input_custom_checkout" placeholder="Apellido Paterno" required>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-12">
+                                                                                <div class="input-group flex-nowrap mt-4">
+                                                                                    <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-female"></i></span>
+                                                                                    <input type="text" name="ape_materno" id="ape_materno" class="form-control input_custom_checkout" placeholder="Apellido Materno" required>
                                                                                 </div>
                                                                             </div>
 
@@ -129,7 +150,7 @@
 
                                                                             <div class="col-12">
                                                                                 <div class="d-flex justify-content-center">
-                                                                                    <button class="btn_pagar_checkout " type="submit">Registrarse</button>
+                                                                                    <button class="btn_pagar_checkout " type="submit" id="registroBtn">Registrarse</button>
                                                                                 </div>
                                                                             </div>
 
@@ -712,6 +733,19 @@
 
 </style>
 <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var registroBtn = document.getElementById("registroBtn");
+        var formulario = document.getElementById("miFormulario"); // Reemplaza "miFormulario" con el ID de tu formulario
+
+        registroBtn.addEventListener("click", function () {
+            registroBtn.disabled = true; // Deshabilita el botón después de hacer clic
+            registroBtn.textContent = "Registrando..."; // Cambia el texto del botón
+            formulario.submit(); // Envía el formulario
+        });
+    });
+</script>
+<script>
+
     $('.owl-carousel').owlCarousel({
         loop: true,
         margin: 30,

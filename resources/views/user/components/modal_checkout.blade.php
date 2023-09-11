@@ -118,7 +118,21 @@
                                                     <div class="col-12">
                                                         <div class="input-group flex-nowrap mt-4">
                                                             <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre(s)" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-male"></i></span>
+                                                            <input type="text" name="ape_paterno" id="ape_paterno" class="form-control input_custom_checkout" placeholder="Apellido Paterno" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-female"></i></span>
+                                                            <input type="text" name="ape_materno" id="ape_materno" class="form-control input_custom_checkout" placeholder="Apellido Materno" required>
                                                         </div>
                                                     </div>
 

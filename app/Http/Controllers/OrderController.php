@@ -87,7 +87,7 @@ class OrderController extends Controller
             $payer = $user;
         } else {
             $payer = new User;
-            $payer->name = $request->get('name');
+            $payer->name = $request->get('name') . ' ' . $request->get('ape_paterno') . ' ' . $request->get('ape_materno');
             $payer->email = $request->get('email');
             $payer->username = $request->get('telefono');
             $payer->code = $code;
@@ -627,7 +627,7 @@ class OrderController extends Controller
 
         } else {
             $payer = new User;
-            $payer->name = $request->get('name');
+            $payer->name = $request->get('name') . ' ' . $request->get('ape_paterno') . ' ' . $request->get('ape_materno');
             $payer->email = $request->get('email');
             $payer->username = $request->get('telefono');
             $payer->code = $code;

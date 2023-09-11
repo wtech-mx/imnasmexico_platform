@@ -117,14 +117,28 @@
                                                             @if ($ticket->id_curso == $curso->id)
                                                                 @if($curso->precio == 0)
                                                                     <div class="row mb-3">
-                                                                        <form method="POST" action="{{ route('clases_gratis') }}"role="form">
+                                                                        <form method="POST" action="{{ route('clases_gratis') }}"role="form" >
                                                                             @csrf
                                                                             <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
                                                                             <div class="row">
                                                                                 <div class="col-12">
                                                                                     <div class="input-group flex-nowrap mt-4">
                                                                                         <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                                                                        <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                                                                        <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre(s)" required>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-12">
+                                                                                    <div class="input-group flex-nowrap mt-4">
+                                                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-male"></i></span>
+                                                                                        <input type="text" name="ape_paterno" id="ape_paterno" class="form-control input_custom_checkout" placeholder="Apellido Paterno" required>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-12">
+                                                                                    <div class="input-group flex-nowrap mt-4">
+                                                                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-female"></i></span>
+                                                                                        <input type="text" name="ape_materno" id="ape_materno" class="form-control input_custom_checkout" placeholder="Apellido Materno" required>
                                                                                     </div>
                                                                                 </div>
 
@@ -138,7 +152,7 @@
                                                                                 <div class="col-12">
                                                                                     <div class="input-group flex-nowrap mt-4">
                                                                                         <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
-                                                                                        <input type="text" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono" required>
+                                                                                        <input  type="tel" minlength="10" maxlength="10" pattern="[0-9]{10}"  name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="55-55-55-55" required>
                                                                                     </div>
                                                                                 </div>
 
