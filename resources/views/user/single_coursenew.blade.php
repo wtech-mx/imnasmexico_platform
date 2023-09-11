@@ -344,6 +344,39 @@
 
         <div class="col-12 col-md-6">
 
+            @if($curso->visibilidad_carusel == '0')
+
+            @else
+                <div class="card_single_horizon">
+                    <div class="d-flex justify-content-between">
+                        <h2 class="title_curso mb-3">
+                            Galeria
+                        </h2>
+                        <img class="icon_nav_course" src="{{asset('assets/user/icons/picture.png')}}" alt="">
+                    </div>
+
+                    <div id="carouselExample" class="carousel slide">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="{{asset('cursos/DÍA 1 CARRUSEL.jpg')}}" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="{{asset('cursos/DÍA 2 CARRUSEL.jpg')}}" class="d-block w-100" alt="...">
+                          </div>
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                </div>
+            @endif
+
             @if($curso->visibilidad_productos == '0')
 
             @else
