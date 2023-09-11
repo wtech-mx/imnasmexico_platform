@@ -130,6 +130,11 @@ class CursosController extends Controller
         $curso->texto_conocer = $request->get('texto_conocer');
         $curso->carpeta = $request->get('carpeta');
         $curso->id_profesor = $request->get('id_profesor');
+        $curso->visibilidad_productos = $request->get('visibilidad_productos');
+        $curso->visibilidad_liga_clase = $request->get('visibilidad_liga_clase');
+        $curso->visibilidad_metodos_pago = $request->get('visibilidad_metodos_pago');
+        $curso->visibilidad_faqs = $request->get('visibilidad_faqs');
+        $curso->visibilidad_contactanos = $request->get('visibilidad_contactanos');
         $valorAleatorio = uniqid();
         $curso->slug = Str::of($request->get('nombre'))->slug("-")->limit(300 - mb_strlen($valorAleatorio) - 1, "")->trim("-")->append("-", $valorAleatorio);
 
@@ -277,6 +282,7 @@ class CursosController extends Controller
         $curso->visibilidad_liga_clase = $request->get('visibilidad_liga_clase');
         $curso->visibilidad_metodos_pago = $request->get('visibilidad_metodos_pago');
         $curso->visibilidad_faqs = $request->get('visibilidad_faqs');
+        $curso->visibilidad_contactanos = $request->get('visibilidad_contactanos');
         $curso->update();
 
         // G U A R D A R  EVENTOS Y ACTUALZ

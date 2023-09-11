@@ -163,6 +163,17 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="col-12 col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="estandar">Contactanos </label>
+                                                        <select class="form-control" id="visibilidad_contactanos" name="visibilidad_contactanos">
+                                                            <option selected>{{ $curso->visibilidad_contactanos }}</option>
+                                                            <option value="">Visible</option>
+                                                            <option value="0">No visible</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
                                             </div>
 
                                             <div class="button-row d-flex mt-4">

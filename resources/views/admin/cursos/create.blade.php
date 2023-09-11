@@ -112,7 +112,7 @@
                                                         <label for="estandar">Productos </label>
                                                         <select class="form-control" id="visibilidad_productos" name="visibilidad_productos">
                                                             <option value="">Visible</option>
-                                                            <option value="0">No visible</option>
+                                                            <option value="0" selected>No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -122,7 +122,7 @@
                                                         <label for="estandar">Liga de clase </label>
                                                         <select class="form-control" id="visibilidad_liga_clase" name="visibilidad_liga_clase">
                                                             <option value="">Visible</option>
-                                                            <option value="0">No visible</option>
+                                                            <option value="0" selected>No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -132,7 +132,7 @@
                                                         <label for="estandar">Metodos de Pago </label>
                                                         <select class="form-control" id="visibilidad_metodos_pago" name="visibilidad_metodos_pago">
                                                             <option value="">Visible</option>
-                                                            <option value="0">No visible</option>
+                                                            <option value="0" selected>No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -142,7 +142,17 @@
                                                         <label for="estandar">FAQS </label>
                                                         <select class="form-control" id="visibilidad_faqs" name="visibilidad_faqs">
                                                             <option value="">Visible</option>
-                                                            <option value="0">No visible</option>
+                                                            <option value="0" selected>No visible</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="estandar">Contactanos </label>
+                                                        <select class="form-control" id="visibilidad_contactanos" name="visibilidad_contactanos">
+                                                            <option value="">Visible</option>
+                                                            <option value="0" selected>No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
