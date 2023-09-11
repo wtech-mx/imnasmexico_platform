@@ -62,7 +62,7 @@
 
         .container4{
             position: absolute;
-            top: 3.5%;
+            top: 3.2%;
             left:110px;
         }
 
@@ -213,8 +213,30 @@
         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
 
+        @php
+        // Divide el curso por espacios en blanco
+        $palabras = explode(' ', $nombre);
+
+        // Inicializa la cadena formateada
+        $nombre_formateado = '';
+        $contador_palabras = 0;
+
+        foreach ($palabras as $palabra) {
+            // Agrega la palabra actual a la cadena formateada
+            $nombre_formateado .= $palabra . ' ';
+
+            // Incrementa el contador de palabras
+            $contador_palabras++;
+
+            // Agrega un salto de línea después de cada tercera palabra
+            if ($contador_palabras % 4 == 0) {
+                $nombre_formateado .= "<br>";
+            }
+        }
+        @endphp
+
         <div class="container4">
-            <h4 class="folio2">{{$nombre}}</h4>
+            <h4 class="folio2">{!! $nombre_formateado !!}</h4>
         </div>
 
         <div class="container6">
@@ -247,7 +269,7 @@
         </div>
 
         <div class="container8">
-            <h4 class="folio2">MEXICANA</h4>
+            <h4 class="folio2">{{ $nacionalidad }}</h4>
         </div>
 
         <div class="container9">
