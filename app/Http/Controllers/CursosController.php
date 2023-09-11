@@ -135,6 +135,7 @@ class CursosController extends Controller
         $curso->visibilidad_metodos_pago = $request->get('visibilidad_metodos_pago');
         $curso->visibilidad_faqs = $request->get('visibilidad_faqs');
         $curso->visibilidad_contactanos = $request->get('visibilidad_contactanos');
+        $curso->visibilidad_carusel = $request->get('visibilidad_carusel');
         $valorAleatorio = uniqid();
         $curso->slug = Str::of($request->get('nombre'))->slug("-")->limit(300 - mb_strlen($valorAleatorio) - 1, "")->trim("-")->append("-", $valorAleatorio);
 
@@ -283,6 +284,7 @@ class CursosController extends Controller
         $curso->visibilidad_metodos_pago = $request->get('visibilidad_metodos_pago');
         $curso->visibilidad_faqs = $request->get('visibilidad_faqs');
         $curso->visibilidad_contactanos = $request->get('visibilidad_contactanos');
+        $curso->visibilidad_carusel = $request->get('visibilidad_carusel');
         $curso->update();
 
         // G U A R D A R  EVENTOS Y ACTUALZ

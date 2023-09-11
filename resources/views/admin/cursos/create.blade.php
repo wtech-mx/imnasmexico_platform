@@ -157,6 +157,16 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="col-12 col-md-6 col-lg-6">
+                                                    <div class="form-group">
+                                                        <label for="estandar">Galeria </label>
+                                                        <select class="form-control" id="visibilidad_carusel" name="visibilidad_carusel">
+                                                            <option value="">Visible</option>
+                                                            <option value="0" selected>No visible</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <div class="button-row d-flex mt-4">
                                                 <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
