@@ -715,6 +715,16 @@ class OrderController extends Controller
         ->where('estado', '=', 'activo')
         ->first();
 
+        $cart = session('cart');
+        $containsDiplomado = false;
+
+        foreach ($cart as $id => $details) {
+            if (isset($details['name']) && stripos($details['name'], 'Diplomado') !== false) {
+                $containsDiplomado = true;
+                break;
+            }
+        }
+
         if (!$coupon) {
             Session::flash('modal_checkout', 'Se ha Abierto el checkout');
             return redirect()->back()->with('warning', 'Cupón inválido');
@@ -728,6 +738,11 @@ class OrderController extends Controller
         if (session()->has('coupon_applied')) {
             Session::flash('modal_checkout', 'Se ha Abierto el checkout');
             return redirect()->back()->with('warning', 'Cupón ya aplicado');
+        }
+
+        if ($containsDiplomado) {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+            return redirect()->back()->with('warning', 'No puedes aplicar este cupón a productos tipo "Diplomado" en tu carrito.');
         }
 
         foreach (session('cart') as $id => $details) {
