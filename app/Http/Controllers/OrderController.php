@@ -717,12 +717,23 @@ class OrderController extends Controller
 
         $cart = session('cart');
         $containsDiplomado = false;
+        $totalCartPrice = 0;
 
         foreach ($cart as $id => $details) {
             if (isset($details['name']) && stripos($details['name'], 'Diplomado') !== false) {
                 $containsDiplomado = true;
                 break;
             }
+        }
+
+        foreach ($cart as $id => $details) {
+            $totalCartPrice += $details['price'] * $details['quantity'];
+        }
+
+        // Verificar el gasto mínimo requerido por el cupón
+        if ($totalCartPrice < $coupon->gasto_min) {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+            return redirect()->back()->with('warning', 'No puedes aplicar este cupón ya que el gasto mínimo requerido no se ha alcanzado.');
         }
 
         if (!$coupon) {
@@ -740,12 +751,17 @@ class OrderController extends Controller
             return redirect()->back()->with('warning', 'Cupón ya aplicado');
         }
 
+        // Verificar di existe un Diplomado
         if ($containsDiplomado) {
             Session::flash('modal_checkout', 'Se ha Abierto el checkout');
             return redirect()->back()->with('warning', 'No puedes aplicar este cupón a productos tipo "Diplomado" en tu carrito.');
         }
 
         foreach (session('cart') as $id => $details) {
+            if ($coupon->tiene_limite) {
+                // Restar 1 al contador de usos restantes solo si el cupón tiene límite
+                $coupon->decrement('usos_restantes', 1);
+            }
             // Aplicar descuento al precio del producto
             $discountedPrice = $details['price'] - ($details['price'] * $coupon->importe / 100);
 
