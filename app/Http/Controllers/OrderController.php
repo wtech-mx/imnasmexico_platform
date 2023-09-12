@@ -783,7 +783,7 @@ class OrderController extends Controller
                 ];
             }
             session()->put('cart', $cart);
-            
+
             $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
                 ->first();
             $cart = session()->get('cart', []);
@@ -1097,7 +1097,7 @@ class OrderController extends Controller
 
         // session()->flash('addedToCart', true);
         Session::flash('modal_checkout', 'Se ha Abierto el checkout');
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        return redirect()->back()->with('success', 'Paquete agregado con exito');
     }
 
     public function vaciar_carrito(Request $request)
