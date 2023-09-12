@@ -782,7 +782,8 @@ class OrderController extends Controller
                     "image" => $curso->imagen
                 ];
             }
-
+            session()->put('cart', $cart);
+            
             $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
                 ->first();
             $cart = session()->get('cart', []);
