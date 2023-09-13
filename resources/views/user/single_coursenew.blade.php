@@ -82,11 +82,18 @@
                             <div class="card_single_horizon2 mt-3 mt-md-0">
                                 <h2 class="title_curso">Fecha y Hora</h2>
                                 <p class="text_cards_horizon">
-                                    {{$fecha_inicial}}
 
-                                    @if ($curso->fecha_inicial == $curso->fecha_final)
-                                    @else al {{$fecha_final}}
-                                    @endif,
+                                    @if ($curso->sin_fin_fecha == '1')
+                                        {{$fecha_inicial}},  {{$curso->mensaje}} <br>
+                                    @else
+                                        {{$fecha_inicial}}
+                                        @if ($curso->fecha_inicial == $curso->fecha_final)
+                                        @else
+                                        al {{$fecha_final}}
+                                        @endif,
+                                    @endif
+
+
                                     @if ($curso->sin_fin == '1')
                                         {{$hora_inicial}}</p>
                                     @else
@@ -605,9 +612,15 @@
                     <img class="icon_nav_course" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="">
                 </div>
                 <p class="text_cards_horizon">
-                    {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
-                    al {{$fecha_final}}
-                    @endif,
+                    @if ($curso->sin_fin_fecha == '1')
+                        {{$fecha_inicial}},  {{$curso->mensaje}} <br>
+                    @else
+                        {{$fecha_inicial}}
+                        @if ($curso->fecha_inicial == $curso->fecha_final)
+                        @else
+                        al {{$fecha_final}}
+                        @endif,
+                    @endif
                     @if ($curso->sin_fin == '1')
                         {{$hora_inicial}}</p>
                     @else

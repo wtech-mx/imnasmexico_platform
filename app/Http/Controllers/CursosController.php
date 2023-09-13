@@ -136,6 +136,8 @@ class CursosController extends Controller
         $curso->visibilidad_faqs = $request->get('visibilidad_faqs');
         $curso->visibilidad_contactanos = $request->get('visibilidad_contactanos');
         $curso->visibilidad_carusel = $request->get('visibilidad_carusel');
+        $curso->sin_fin_fecha = $request->get('sin_fin_fecha');
+        $curso->mensaje = $request->get('mensaje');
         $valorAleatorio = uniqid();
         $curso->slug = Str::of($request->get('nombre'))->slug("-")->limit(300 - mb_strlen($valorAleatorio) - 1, "")->trim("-")->append("-", $valorAleatorio);
 
@@ -285,6 +287,8 @@ class CursosController extends Controller
         $curso->visibilidad_faqs = $request->get('visibilidad_faqs');
         $curso->visibilidad_contactanos = $request->get('visibilidad_contactanos');
         $curso->visibilidad_carusel = $request->get('visibilidad_carusel');
+        $curso->sin_fin_fecha = $request->get('sin_fin_fecha');
+        $curso->mensaje = $request->get('mensaje');
         $curso->update();
 
         // G U A R D A R  EVENTOS Y ACTUALZ

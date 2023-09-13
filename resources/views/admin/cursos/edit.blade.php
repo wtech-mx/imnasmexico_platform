@@ -225,13 +225,24 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-4">
+                                                <div class="form-check col-2">
                                                     <label for="nota">Sin Hora F.</label>
                                                     <div class="form-group">
                                                         @if ($curso->sin_fin == 1)
                                                             <input class="form-check-input" type="checkbox" value="1" id="sin_fin" name="sin_fin" checked>
                                                         @else
                                                             <input class="form-check-input" type="checkbox" value="1" id="sin_fin" name="sin_fin">
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-check col-2">
+                                                    <label for="nota">Sin Fecha F.</label>
+                                                    <div class="form-group">
+                                                        @if ($curso->sin_fin_fecha == 1)
+                                                            <input class="form-check-input" type="checkbox" value="1" id="sin_fin_fecha" name="sin_fin_fecha" checked>
+                                                        @else
+                                                            <input class="form-check-input" type="checkbox" value="1" id="sin_fin_fecha" name="sin_fin_fecha">
                                                         @endif
                                                     </div>
                                                 </div>
@@ -407,6 +418,13 @@
                                                     <div class="form-group">
                                                         <label for="nota">CONOCER</label>
                                                         <textarea name="texto_conocer" id="texto_conocer" cols="10" rows="3" class="form-control"> {{$curso->texto_conocer}}</textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <label for="fecha">Mensaje</label>
+                                                        <textarea name="mensaje" id="mensaje" cols="10" rows="3" class="form-control"> {{$curso->mensaje}}</textarea>
                                                     </div>
                                                 </div>
 

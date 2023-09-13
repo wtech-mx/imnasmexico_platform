@@ -49,6 +49,8 @@ class Cursos extends Model
         'clase_grabada3',
         'clase_grabada4',
         'clase_grabada5',
+        'sin_fin_fecha',
+        'mensaje',
     ];
 
     public function User()
