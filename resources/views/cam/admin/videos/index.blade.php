@@ -53,6 +53,7 @@ Videos
                                                     </a>
                                                 </td>
                                             </tr>
+                                            @include('cam.admin.videos.edit')
                                         @endforeach
                                     </tbody>
                                 </table>

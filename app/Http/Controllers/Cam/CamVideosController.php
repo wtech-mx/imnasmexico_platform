@@ -20,6 +20,14 @@ class CamVideosController extends Controller
     public function store(Request $request)
     {
 
+        $camvideo = new CamVideos;
+
+        $camvideo->nombre = $request->get('nombre');
+        $camvideo->video_url = $request->get('link');
+        $camvideo->orden = $request->get('orden');
+        $camvideo->tipo = $request->get('tipo');
+        $camvideo->save();
+
         Session::flash('success', 'Se ha guardado sus datos con exito');
 
         return redirect()->back()->with('success', 'Envio de correo exitoso.');
@@ -29,7 +37,17 @@ class CamVideosController extends Controller
     public function update(Request $request, $id)
     {
 
+        $camvideo = CamVideos::find($id);
+
+        $camvideo->nombre = $request->get('nombre');
+        $camvideo->video_url = $request->get('link');
+        $camvideo->orden = $request->get('orden');
+        $camvideo->tipo = $request->get('tipo');
+
+        $camvideo->update();
+
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Envio de correo exitoso.');
 
-    }}
+    }
+}

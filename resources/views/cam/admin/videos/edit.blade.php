@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="EditexampleModal{{$video->id}}" tabindex="-1" role="dialog" aria-labelledby="EditexampleModal{{$video->id}}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,8 +10,10 @@
                 </button>
             </div>
 
-            <form method="POST" action="{{ route('videos_cam.store') }}" enctype="multipart/form-data" role="form">
+            <form method="POST" action="{{ route('videos_cam.update', $video->id) }}" enctype="multipart/form-data" role="form">
                 @csrf
+                <input type="hidden" name="_method" value="PATCH">
+
                     <div class="modal-body">
                         <div class="row">
 
@@ -27,6 +29,7 @@
                                             <img src="{{ asset('assets/cam/expediente.png') }}" alt="" width="35px">
                                         </span>
                                         <select name="orden" id="orden" class="form-select d-inline-block" required>
+                                            <option selected>{{ $video->orden }}</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
@@ -51,7 +54,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" value="{{ $video->nombre }}">@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -64,6 +67,7 @@
                                             <img src="{{ asset('assets/cam/etiqueta.png') }}" alt="" width="35px">
                                         </span>
                                         <select name="tipo" id="tipo" class="form-select d-inline-block" required>
+                                            <option selected>{{ $video->tipo }}</option>
                                             <option value="Evaluador Independiente">Evaluador Independiente</option>
                                             <option value="Centro Evaluador">Centro Evaluador</option>
                                         </select>
@@ -78,11 +82,10 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/reproductor-de-video.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="link" name="link" type="text" class="form-control" placeholder="Link" required>@error('link') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="link" name="link" type="text" class="form-control" placeholder="Link" value="{{ $video->video_url }}">@error('link') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
-
 
                     </div>
 
