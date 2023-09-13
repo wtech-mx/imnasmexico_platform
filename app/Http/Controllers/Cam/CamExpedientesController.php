@@ -10,6 +10,9 @@ use App\Models\Cam\CamChecklist;
 use App\Models\Cam\CamCitas;
 use App\Models\Cam\CamDocuemntos;
 use App\Models\Cam\CamDocumentosUsers;
+use App\Models\Cam\CamEstandares;
+use App\Models\Cam\CamMiniExp;
+use App\Models\Cam\CamMiniExpDiplomas;
 use App\Models\Cam\CamNombramiento;
 use App\Models\Cam\CamNotas;
 use App\Models\Cam\CamNotEstandares;
@@ -32,8 +35,10 @@ class CamExpedientesController extends Controller
         $check = CamChecklist::where('id_nota', $id_nota)->firstOrFail();
         $estandares_usuario = CamNotEstandares::where('id_nota', $id_nota)->get();
         $video = CamVideosUser::where('id_nota', $id_nota)->first();
+        $estandares_cam = CamEstandares::get();
+        $minis_exps = CamMiniExp::where('id_nota', $id_nota)->get();
 
-        return view('cam.admin.expedientes.exp_ind', compact('expediente', 'estandares_usuario', 'documentos', 'check', 'video'));
+        return view('cam.admin.expedientes.exp_ind', compact('expediente', 'estandares_usuario', 'documentos', 'check', 'video', 'estandares_cam', 'minis_exps'));
     }
 
     public function update_exp_user(Request $request, $id){
@@ -316,4 +321,73 @@ class CamExpedientesController extends Controller
         return response()->json($documentos);
     }
 
+    public function crear_mini(Request $request){
+        $dominio = $request->getHost();
+
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam_mini_exp/' . $request->get('celular'));
+        }else{
+            $ruta_recursos = public_path() . '/cam_mini_exp/' . $request->get('celular');
+        }
+
+        $mini_exp = new CamMiniExp();
+        $mini_exp->nombre = $request->get('name');
+        $mini_exp->apellido = $request->get('apellido');
+        $mini_exp->email = $request->get('email');
+        $mini_exp->telefono = $request->get('telefono');
+        $mini_exp->celular = $request->get('celular');
+        $mini_exp->id_nota = $request->get('id_nota');
+        $mini_exp->id_cliente = $request->get('id_client');
+        $mini_exp->id_usuario = auth()->user()->id;
+
+        if ($request->hasFile("acta")) {
+            $file = $request->file('acta');
+            $path = $ruta_recursos;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $mini_exp->acta = $fileName;
+        }
+
+        if ($request->hasFile("curp")) {
+            $file = $request->file('curp');
+            $path = $ruta_recursos;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $mini_exp->curp = $fileName;
+        }
+
+        if ($request->hasFile("ine")) {
+            $file = $request->file('ine');
+            $path = $ruta_recursos;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $mini_exp->ine = $fileName;
+        }
+
+        if ($request->hasFile("comprobante")) {
+            $file = $request->file('comprobante');
+            $path = $ruta_recursos;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $mini_exp->comprobante = $fileName;
+        }
+        $mini_exp->save();
+
+        if ($request->hasFile('diplomas')) {
+            $foto = $request->file('diplomas');
+            foreach ($foto as $archivo) {
+                $path = $ruta_recursos;
+                $fileName = uniqid() . $archivo->getClientOriginalName();
+                $archivo->move($path, $fileName);
+                $nomb = new CamMiniExpDiplomas;
+                $nomb->diplomas = $fileName;
+                $nomb->id_mini = $mini_exp->id;
+                $nomb->save();
+            }
+            $nomb->save();
+        }
+
+
+        return redirect()->back()->with('success', 'Archivo subido exitosamente');
+    }
 }
