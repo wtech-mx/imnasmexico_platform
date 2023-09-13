@@ -120,7 +120,7 @@
         pageLength: 10
     });
 
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search_cs", {
+    const dataTableSearch2 = new simpleDatatables.DataTable("#datatable-search_cs", {
         deferRender:true,
         paging: true,
         pageLength: 10
