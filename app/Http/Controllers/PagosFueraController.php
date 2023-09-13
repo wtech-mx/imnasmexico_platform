@@ -471,9 +471,10 @@ class PagosFueraController extends Controller
     }
 
     public function index_pago(){
-        $orders = Orders::orderBy('id','DESC')->where('estatus', '=', '1')->get();
+        $orders = Orders::orderBy('id','DESC')->where('estatus', '=', '1')->where('forma_pago', '!=', 'Clase Gratis')->get();
 
-        return view('admin.pagos.index', compact('orders'));
+        $orders_clase_gratis = Orders::orderBy('id','DESC')->Where('forma_pago', '=', 'Clase Gratis')->get();
+        return view('admin.pagos.index', compact('orders','orders_clase_gratis'));
     }
 
     public function index_pago_pendiente(){
