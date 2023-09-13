@@ -50,7 +50,14 @@
                                                     <tr>
                                                         <td>{{ $order->id }}</td>
                                                         <td>{{ $order->User->name }}</td>
-                                                        <td>{{ $order->fecha }}</td>
+                                                        <td>
+                                                            @php
+                                                            $fecha = $order->fecha;
+                                                            $fecha_timestamp = strtotime($fecha);
+                                                            $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                                                            @endphp
+                                                            {{$fecha_formateada}}
+                                                        </td>
                                                         <td>{{ $order->pago }}</td>
                                                         <td>{{ $order->forma_pago }}</td>
                                                         <td>
@@ -86,7 +93,14 @@
                                                     <tr>
                                                         <td>{{ $order->id }}</td>
                                                         <td>{{ $order->User->name }}</td>
-                                                        <td>{{ $order->fecha }}</td>
+                                                        <td>
+                                                            @php
+                                                            $fecha = $order->fecha;
+                                                            $fecha_timestamp = strtotime($fecha);
+                                                            $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                                                            @endphp
+                                                            {{$fecha_formateada}}
+                                                        </td>
                                                         <td>{{ $order->pago }}</td>
                                                         <td>{{ $order->forma_pago }}</td>
                                                         <td>
