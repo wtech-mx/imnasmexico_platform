@@ -11,39 +11,47 @@ use App\Models\Cam\CamDocuemntos;
 use App\Models\Cam\CamNombramiento;
 use App\Models\Cam\CamNotas;
 use App\Models\Cam\CamVideosUser;
+use App\Models\Cam\CamVideos;
+
 use Illuminate\Support\Facades\Auth;
 
 class CamClientesController extends Controller
 {
     public function index($code){
-
         return view('cam.usuario.evaluador');
     }
 
     public function videos($code){
-        $video = CamVideosUser::where('id_cliente', '=', auth()->user()->id)->first();
 
-        return view('cam.videos.evaluador', compact('video'));
+        $usuario = auth()->user();
+
+        $video = CamVideosUser::where('id_cliente', '=', $usuario->id)->first();
+
+        if($usuario->cliente == '3'){
+            $camvideos = CamVideos::where('tipo', '=', 'Evaluador Independiente')->get();
+
+        }else if($usuario->cliente == '4'){
+            $camvideos = CamVideos::where('tipo', '=', 'Centro Evaluador')->get();
+        }
+
+        return view('cam.videos.evaluador', compact('video','camvideos'));
     }
 
     public function update_videos(Request $request, $id)
     {
+
         $videos = CamVideos::orderBy('orden','DESC')->get();
 
         $video = CamVideosUser::find($id);
-        if($request->get('check1') != NULL){
-            $video->check1 = $request->get('check1');
+
+        for ($i = 1; $i <= 10; $i++) {
+            $fieldName = "check{$i}";
+
+            if ($request->has($fieldName)) {
+                $video->$fieldName = $request->get($fieldName);
+            }
         }
-        if($request->get('check2') != NULL){
-            $video->check2 = $request->get('check2');
-        }
-        if($request->get('check3') != NULL){
-            $video->check3 = $request->get('check3');
-        }
-        if($request->get('check4') != NULL){
-            $video->check4 = $request->get('check4');
-        }
-        $video->check5 = $request->get('check5');
+
         $video->update();
 
         return redirect()->back()->with('success', 'Video Finalizado');
