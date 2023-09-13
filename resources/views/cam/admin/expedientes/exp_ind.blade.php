@@ -169,7 +169,11 @@ Expediente {{$expediente->id}}
         <div class="row gx-4">
             <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-                <img src="{{asset('assets/user/logotipos/cam.png')}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                @if ($documentos->logo == NULL)
+                    <img src="{{asset('assets/user/logotipos/sin-logo.jpg')}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                @else
+                    <img src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->logo)}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                @endif
             </div>
             </div>
             <div class="col-auto my-auto">
@@ -938,131 +942,72 @@ Expediente {{$expediente->id}}
             <div class="card mb-4">
             <div class="card-header pb-0 p-3">
                 <h6 class="mb-1">Expedientes Evaluadores</h6>
-                <p class="text-sm">Architects design houses</p>
             </div>
             <div class="card-body p-3">
                 <div class="row">
-                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
-                    <div class="card card-blog card-plain">
-                    <div class="position-relative">
-                        <a class="d-block shadow-xl border-radius-xl">
-                        <img src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
-                        </a>
-                    </div>
-                    <div class="card-body px-1 pb-0">
-                        <p class="text-gradient text-dark mb-2 text-sm">Project #1</p>
-                        <a href="javascript:;">
-                        <h5>
-                            Bubbles
-                        </h5>
-                        </a>
-                        <p class="mb-4 text-sm">
-                        As Bubble works through a huge amount of internal management turmoil.
-                        </p>
-                        <div class="d-flex align-items-center justify-content-between">
-                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View Project</button>
-                        <div class="avatar-group mt-2">
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Elena Morison">
-                            <img alt="Image placeholder" src="{{asset('assets/user/icons/ama-de-casa.webp')}}">
-                            </a>
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Milly">
-                            <img alt="Image placeholder" src="{{asset('assets/user/icons/apasionada.webp')}}">
-                            </a>
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nick Daniel">
-                            <img alt="Image placeholder" src="{{asset('assets/user/icons/ESTUDIANTE-.webp')}}">
-                            </a>
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Peterson">
-                            <img alt="Image placeholder" src="{{asset('assets/user/icons/EMPRENDEDORA.webp')}}">
-                            </a>
+                    @foreach ($minis_exps as $mini_exp)
+                        <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                            <div class="card card-blog card-plain">
+                            <div class="position-relative">
+                                <a class="d-block shadow-xl border-radius-xl">
+                                    @if ($documentos->logo == NULL)
+                                        <img src="{{asset('assets/user/logotipos/sin-logo.jpg')}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                                    @else
+                                        <img src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->logo)}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                                    @endif
+                                </a>
+                            </div>
+                            <div class="card-body px-1 pb-0">
+                                <p class="text-gradient text-dark mb-2 text-sm">Expediente #{{ $loop->iteration }}</p>
+                                <a href="javascript:;">
+                                <h5>
+                                    {{ $mini_exp->nombre }} {{ $mini_exp->apellido }}
+                                </h5>
+                                </a>
+                                <p class="mb-4 text-sm">
+                                    {{ $mini_exp->email }} <br> {{ $mini_exp->celular }}
+                                </p>
+                                <div class="d-flex align-items-center justify-content-between">
+                                <button type="button" class="btn btn-outline-primary btn-sm mb-0">Ver Expediente</button>
+                                <div class="avatar-group mt-2">
+                                    @if ($mini_exp->acta != NULL)
+                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Acta de Nacimiento">
+                                            <img alt="Image placeholder" src="{{asset('assets/user/icons/cheque-de-pago.png')}}">
+                                        </a>
+                                    @endif
+                                    @if ($mini_exp->curp != NULL)
+                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="CURP">
+                                        <img alt="Image placeholder" src="{{asset('assets/user/icons/cedula.png')}}">
+                                        </a>
+                                    @endif
+                                    @if ($mini_exp->ine != NULL)
+                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="INE">
+                                        <img alt="Image placeholder" src="{{asset('assets/user/icons/flag.png')}}">
+                                        </a>
+                                    @endif
+                                    @if ($mini_exp->comprobante != NULL)
+                                        <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Comprobante de domicilio">
+                                        <img alt="Image placeholder" src="{{asset('assets/user/icons/location-pointer.png')}}">
+                                        </a>
+                                    @endif
+                                </div>
+                                </div>
+                            </div>
+                            </div>
                         </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
-                    <div class="card card-blog card-plain">
-                    <div class="position-relative">
-                        <a class="d-block shadow-xl border-radius-xl">
-                        <img src="{{asset('assets/user/logotipos/imnas.png')}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg">
-                        </a>
-                    </div>
-                    <div class="card-body px-1 pb-0">
-                        <p class="text-gradient text-dark mb-2 text-sm">Project #2</p>
-                        <a href="javascript:;">
-                        <h5>
-                            Scandinavian
-                        </h5>
-                        </a>
-                        <p class="mb-4 text-sm">
-                        Music is something that every person has his or her own specific opinion about.
-                        </p>
-                        <div class="d-flex align-items-center justify-content-between">
-                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View Project</button>
-                        <div class="avatar-group mt-2">
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nick Daniel">
-                            <img alt="Image placeholder" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}">
-                            </a>
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Peterson">
-                            <img alt="Image placeholder" src="{{asset('assets/user/icons/cheque-de-pago.png')}}">
-                            </a>
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Elena Morison">
-                            <img alt="Image placeholder" src="{{asset('assets/user/icons/depositar.png')}}">
-                            </a>
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Milly">
-                            <img alt="Image placeholder" src="{{asset('assets/user/icons/meet.png')}}">
-                            </a>
-                        </div>
+                    @endforeach
+
+                    <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                        <div class="card h-100 card-plain border">
+                            <div class="card-body d-flex flex-column justify-content-center text-center">
+                                <a data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                <i class="fa fa-plus text-secondary mb-3"></i>
+                                <h5 class=" text-secondary"> Nuevo Expediente </h5>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
-                    <div class="card card-blog card-plain">
-                    <div class="position-relative">
-                        <a class="d-block shadow-xl border-radius-xl">
-                        <img src="{{asset('assets/user/logotipos/DOCTORA.png')}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
-                        </a>
-                    </div>
-                    <div class="card-body px-1 pb-0">
-                        <p class="text-gradient text-dark mb-2 text-sm">Project #3</p>
-                        <a href="javascript:;">
-                        <h5>
-                            Minimalist
-                        </h5>
-                        </a>
-                        <p class="mb-4 text-sm">
-                        Different people have different taste, and various types of music.
-                        </p>
-                        <div class="d-flex align-items-center justify-content-between">
-                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View Project</button>
-                        <div class="avatar-group mt-2">
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Peterson">
-                            <img alt="Image placeholder" src="{{asset('assets/user/icons/document.png')}}">
-                            </a>
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Nick Daniel">
-                            <img alt="Image placeholder" src="{{asset('assets/user/icons/edificio.png')}}">
-                            </a>
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Milly">
-                            <img alt="Image placeholder" src="{{asset('assets/user/icons/email.png')}}">
-                            </a>
-                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Elena Morison">
-                            <img alt="Image placeholder" src="{{asset('assets/user/icons/location-pointer.png')}}">
-                            </a>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
-                    <div class="card h-100 card-plain border">
-                    <div class="card-body d-flex flex-column justify-content-center text-center">
-                        <a href="javascript:;">
-                        <i class="fa fa-plus text-secondary mb-3"></i>
-                        <h5 class=" text-secondary"> New project </h5>
-                        </a>
-                    </div>
-                    </div>
-                </div>
+                    @include('cam.admin.expedientes.modal_nuevo_expediente')
                 </div>
             </div>
             </div>

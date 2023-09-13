@@ -390,6 +390,9 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::patch('/expediente/cita/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_citas'])->name('expediente.cita');
         Route::patch('/expediente/check/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_check'])->name('expediente.check');
 
+        // =============== M O D U L O   E X P E D I E N T E S ( M I N I  E X P)===============================
+        Route::post('/expediente/mini/crear', [App\Http\Controllers\Cam\CamExpedientesController::class, 'crear_mini'])->name('crear.mini_exp');
+
         // =============== M O D U L O  N O T A S ===============================
         Route::get('/notas/index', [App\Http\Controllers\Cam\NotasCamController::class, 'index'])->name('index.notas');
         Route::post('/notas/crear', [App\Http\Controllers\Cam\NotasCamController::class, 'crear'])->name('crear.notas');
@@ -405,9 +408,9 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::get('/documentos/edit/{id}', [App\Http\Controllers\Cam\CamDocuemntosController::class, 'edit'])->name('edit.documentos');
 
         // =============== M O D U L O   videos CRUD ===============================
-        Route::get('/admin/vidos_cam', [App\Http\Controllers\CamVideosController::class, 'index'])->name('vidos_cam.index');
-        Route::post('/admin/vidos_cam/store', [App\Http\Controllers\CamVideosController::class, 'store'])->name('vidos_cam.store');
-        Route::patch('/admin/vidos_cam/update/{id}', [App\Http\Controllers\CamVideosController::class, 'update'])->name('vidos_cam.update');
+        Route::get('/admin/videos_cam', [App\Http\Controllers\Cam\CamVideosController::class, 'index'])->name('videos_cam.index');
+        Route::post('/admin/videos_cam/store', [App\Http\Controllers\Cam\CamVideosController::class, 'store'])->name('videos_cam.store');
+        Route::patch('/admin/videos_cam/update/{id}', [App\Http\Controllers\Cam\CamVideosController::class, 'update'])->name('videos_cam.update');
 
     });
 });

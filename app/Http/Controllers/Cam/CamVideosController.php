@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Cam;
 
+use App\Http\Controllers\Controller;
 use App\Models\Cam\CamVideos;
 use Session;
 
@@ -11,9 +12,9 @@ class CamVideosController extends Controller
 {
     public function index(Request $request)
     {
-        $revoes = Revoes::orderBy('id','DESC')->get();
+        $videos = CamVideos::orderBy('id','DESC')->get();
 
-        return view('admin.webpage.revoes', compact('revoes'));
+        return view('cam.admin.videos.index', compact('videos'));
     }
 
     public function store(Request $request)

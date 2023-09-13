@@ -35,6 +35,10 @@ class CamNotas extends Model
         return $this->belongsTo(User::class, 'id_usuario');
     }
 
+    public function DocUser(){
+        return $this->hasMany(CamDocumentosUsers::class, 'id_nota', 'id');
+    }
+
     public function Video(){
         return $this->hasMany(CamVideosUser::class, 'id_nota', 'id');
     }
