@@ -28,6 +28,7 @@ class CamClientesController extends Controller
 
     public function update_videos(Request $request, $id)
     {
+        $videos = CamVideos::orderBy('orden','DESC')->get();
 
         $video = CamVideosUser::find($id);
         if($request->get('check1') != NULL){

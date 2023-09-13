@@ -37,6 +37,7 @@ Videos
                                             <th>Orden</th>
                                             <th>Nombre</th>
                                             <th>Tipo</th>
+                                            <th>Link</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -47,6 +48,7 @@ Videos
                                                 <td>{{$video->orden}}</td>
                                                 <td>{{$video->nombre}}</td>
                                                 <td>{{$video->tipo}}</td>
+                                                <td><a href="{{$video->video_url}}" target="_blank" rel="noopener noreferrer">{{$video->video_url}}</a></td>
                                                 <td>
                                                     <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#EditexampleModal{{$video->id}}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                                         <i class="fa fa-fw fa-eye"></i>

@@ -12,7 +12,7 @@ class CamVideosController extends Controller
 {
     public function index(Request $request)
     {
-        $videos = CamVideos::orderBy('id','DESC')->get();
+        $videos = CamVideos::orderBy('orden','DESC')->get();
 
         return view('cam.admin.videos.index', compact('videos'));
     }
