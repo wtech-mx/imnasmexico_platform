@@ -1,7 +1,7 @@
-<div class="container-fluid ">
+
     <div class="row mt-3">
-        <div class="col-12 col-md-6 col-xl-4">
-            <div class="card h-100">
+        <div class="col-12 col-md-6 col-xl-6" >
+            <div class="card h-100" >
                 @if ($expediente->check1 === NULL || $expediente->check2 === NULL || $expediente->check3 === NULL || $expediente->check4 === NULL || $expediente->check5 === NULL || $expediente->check6 === NULL)
                     <form method="POST" action="{{ route('expediente.cita', $expediente->id) }}" enctype="multipart/form-data" role="form">
                         @csrf
@@ -113,7 +113,7 @@
                     </form>
                 @elseif ($expediente->check1 != NULL && $expediente->check2 != NULL && $expediente->check3 != NULL && $expediente->check4 != NULL && $expediente->check5 != NULL && $expediente->check6 != NULL)
                     <div class="card-header">
-                        <h6 class="mb-0">Checklist</h6>
+                        <h6 class="">Checklist</h6>
                     </div>
                     <div class="card-body ">
                         <ul class="list-group">
@@ -285,47 +285,7 @@
             </div>
         </div>
 
-
-        <div class="col-12 col-md-6 col-xl-4 mt-md-0 mt-4">
-            <div class="card h-100">
-                <div class="card-header pb-0 p-3">
-                        <h6 class="mb-0">Información {{$expediente->Nota->tipo}}</h6>
-                </div>
-                <div class="card-body p-3">
-                    <p class="text-sm">
-                        {{$expediente->Nota->nota}}
-                    </p>
-                    <hr class="horizontal gray-light my-4">
-                    <ul class="list-group">
-                    <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Nombre:</strong> &nbsp; {{$expediente->Nota->Cliente->name}}</li>
-                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Celular:</strong> &nbsp; {{$expediente->Nota->Cliente->telefono}}</li>
-                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Correo:</strong> &nbsp; {{$expediente->Nota->Cliente->email}}</li>
-                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Referencia:</strong> &nbsp; {{$expediente->Nota->referencia}}</li>
-                    <li class="list-group-item border-0 ps-0 pb-0">
-                        <strong class="text-dark text-sm">Social:</strong> &nbsp;
-                        <a class="btn btn-facebook btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.facebook.com/{{$expediente->Nota->Cliente->facebook}}" target="_blank">
-                        <i class="fab fa-facebook fa-lg"></i>
-                        </a>
-                        <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.tiktok.com/{{$expediente->Nota->Cliente->tiktok}}" target="_blank">
-                        <i class="fab fa-tiktok fa-lg"></i>
-                        </a>
-                        <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="https://www.instagram.com/{{$expediente->Nota->Cliente->instagram}}" target="_blank">
-                        <i class="fab fa-instagram fa-lg"></i>
-                        </a>
-                        <a class="btn btn-twitter btn-simple mb-0 ps-1 pe-2 py-0" href="https://{{$expediente->Nota->Cliente->pagina_web}}" target="_blank">
-                            <i class="fa fa-globe fa-lg"></i>
-                        </a>
-                        <a class="btn btn-instagram btn-simple mb-0 ps-1 pe-2 py-0" href="https://{{$expediente->Nota->Cliente->otra_red}}" target="_blank">
-                            <i class="fa fa-heart fa-lg"></i>
-                        </a>
-                    </li>
-                    </ul>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 col-xl-4 mt-xl-0 mt-4">
+        <div class="col-12 col-xl-6 mt-xl-0 mt-4">
             <div class="card h-100">
                 <div class="card-header pb-0 p-3">
                     <div class="row">
@@ -363,4 +323,3 @@
             </div>
         </div>
     </div>
-</div>

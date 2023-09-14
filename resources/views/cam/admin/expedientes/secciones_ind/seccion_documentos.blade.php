@@ -1,4 +1,3 @@
-<div class="container-fluid py-4">
     <div class="row mt-3">
 
         <div class="col-12 col-md-6 col-xl-4">
@@ -348,4 +347,3 @@
             </div>
         </div>
     </div>
-</div>

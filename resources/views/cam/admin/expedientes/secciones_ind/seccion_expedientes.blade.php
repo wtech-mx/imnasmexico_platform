@@ -1,4 +1,3 @@
-<section class="py-3">
     <div class="row mt-lg-4 mt-2">
         @foreach ($minis_exps as $mini_exp)
             <div class="col-lg-4 col-md-6 mb-4">
@@ -68,4 +67,3 @@
         </div>
       </div>
     </div>
-  </section>
