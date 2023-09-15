@@ -23,6 +23,9 @@
                                     <option value="REGLAMENTO Y MANUALES DE PROCEDIMIENTOS IMNAS">REGLAMENTO Y MANUALES DE PROCEDIMIENTOS IMNAS</option>
                                     <option value="FORMATOS RESOLUCION DE QUEJAS">FORMATOS RESOLUCION DE QUEJAS</option>
                                     <option value="LOGO CONOCER EVALUADOR INDEPENDIENTE">LOGO CONOCER EVALUADOR INDEPENDIENTE</option>
+                                    <option value="ACREDITACION CE o EI">ACREDITACION CE o EI</option>
+                                    <option value="ESPECIFICACIONES FOTOGRAFIA">ESPECIFICACIONES FOTOGRAFIA</option>
+                                    <option value="OPERACION CE">OPERACION CE</option>
                                 </select>
                             </div>
                         </div>
