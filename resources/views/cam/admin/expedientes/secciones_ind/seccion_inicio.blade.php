@@ -18,23 +18,24 @@
                         </div>
                         <div class="card-body ">
                             <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{$expediente->Nota->tipo}}</h6>
-                            <ul class="list-group">
-                                <li class="list-group-item border-0 px-0">
+                            <div class="row">
+
+                                <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3">
                                     <div class="form-check form-switch ps-0">
-                                    @if ($expediente->check1 == '1')
-                                        <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1" checked>
-                                        <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
-                                            {{$expediente->UserEC->name}}</label>
-                                    @else
-                                        <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1">
-                                    @endif
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                        1. Evaluación del EC0076</label>
+                                        @if ($expediente->check1 == '1')
+                                            <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1" checked>
+                                            <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
+                                                {{$expediente->UserEC->name}}</label>
+                                        @else
+                                            <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1">
+                                        @endif
+                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
+                                        <strong>1. Evaluación del EC0076</strong></label>
                                     </div>
                                     <input id="evaluacion_ec0076" name="evaluacion_ec0076" value="{{$expediente->evaluacion_ec0076}}" type="date" class="form-control">
-                                </li>
-                                <hr>
-                                <li class="list-group-item border-0 px-0">
+                                </div>
+
+                                <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3">
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check2 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check2" name="check2" value="1" checked>
@@ -43,13 +44,13 @@
                                     @else
                                         <input class="form-check-input ms-0" type="checkbox" id="check2" name="check2" value="1">
                                     @endif
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                        2.- Evaluación de Estándares afines</label>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
+                                        <strong>2.- Evaluación de Estándares afines</strong></label>
                                     </div>
                                     <input id="evaluacion_afines" name="evaluacion_afines" value="{{$expediente->evaluacion_afines}}" type="date" class="form-control">
-                                </li>
-                                <hr>
-                                <li class="list-group-item border-0 px-0">
+                                </div>
+
+                                <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3">
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check3 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1" checked>
@@ -58,13 +59,13 @@
                                     @else
                                         <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1">
                                     @endif
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                        3.- Refuerzo de transferencia de conocimiento y operatividad</label>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
+                                        <strong>3.- Refuerzo de transferencia de conocimiento y operatividad</strong></label>
                                     </div>
                                     <input id="refuerzo_conocimiento" name="refuerzo_conocimiento" value="{{$expediente->refuerzo_conocimiento}}" type="date" class="form-control">
-                                </li>
-                                <hr>
-                                <li class="list-group-item border-0 px-0">
+                                </div>
+
+                                <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3">
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check4 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check4" name="check4" value="1" checked>
@@ -73,13 +74,13 @@
                                     @else
                                         <input class="form-check-input ms-0" type="checkbox" id="check4" name="check4" value="1">
                                     @endif
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                        4.- Refuerzo de llenado de formatos</label>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
+                                        <strong>4.- Refuerzo de llenado de formatos</strong></label>
                                     </div>
                                     <input id="refuerzo_formatos" name="refuerzo_formatos" value="{{$expediente->refuerzo_formatos}}" type="date" class="form-control">
-                                </li>
-                                <hr>
-                                <li class="list-group-item border-0 px-0">
+                                </div>
+
+                                <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3">
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check5 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check5" name="check5" value="1" checked>
@@ -88,13 +89,13 @@
                                     @else
                                         <input class="form-check-input ms-0" type="checkbox" id="check5" name="check5" value="1">
                                     @endif
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                        5.- Coaching empresarial</label>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
+                                        <strong>5.- Coaching empresarial</strong></label>
                                     </div>
                                     <input id="coaching_empresarial" name="coaching_empresarial" value="{{$expediente->coaching_empresarial}}" type="date" class="form-control">
-                                </li>
-                                <hr>
-                                <li class="list-group-item border-0 px-0 pb-0">
+                                </div>
+
+                                <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3 ">
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check6 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check6" name="check6" value="1" checked>
@@ -103,12 +104,13 @@
                                     @else
                                         <input class="form-check-input ms-0" type="checkbox" id="check6" name="check6" value="1">
                                     @endif
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                        6.- Entrega de carpeta cam y formatos</label>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
+                                        <strong>6.- Entrega de carpeta cam y formatos</strong></label>
                                     </div>
                                     <input id="carpeta_cam" name="carpeta_cam" value="{{$expediente->carpeta_cam}}" type="date" class="form-control">
-                                </li>
-                            </ul>
+                                </div>
+
+                            </div>
                         </div>
                     </form>
                 @elseif ($expediente->check1 != NULL && $expediente->check2 != NULL && $expediente->check3 != NULL && $expediente->check4 != NULL && $expediente->check5 != NULL && $expediente->check6 != NULL)

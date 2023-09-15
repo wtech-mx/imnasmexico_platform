@@ -37,6 +37,22 @@ class CamClientesController extends Controller
         return view('cam.videos.evaluador', compact('video','camvideos'));
     }
 
+    public function videosce($code){
+
+        $usuario = auth()->user();
+
+        $video = CamVideosUser::where('id_cliente', '=', $usuario->id)->first();
+
+        if($usuario->cliente == '3'){
+            $camvideos = CamVideos::where('tipo', '=', 'Evaluador Independiente')->get();
+
+        }else if($usuario->cliente == '4'){
+            $camvideos = CamVideos::where('tipo', '=', 'Centro Evaluador')->get();
+        }
+
+        return view('cam.videos.centro', compact('video','camvideos'));
+    }
+
     public function update_videos(Request $request, $id)
     {
 

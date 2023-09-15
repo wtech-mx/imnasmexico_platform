@@ -357,6 +357,8 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
 
     Route::get('evaluador/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'index'])->name('evaluador.index');
     Route::get('evaluador/videos/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'videos'])->name('evaluador.videos');
+    Route::get('centro/videos/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'videosce'])->name('centro.videos');
+
     Route::patch('evaluador/videos/edit/{id}', [App\Http\Controllers\Cam\CamClientesController::class, 'update_videos'])->name('evaluador.update_videos');
 
     // =============== M O D U L O   E X P E D I E N T E S ( C A R P E T A S)===============================
@@ -365,10 +367,6 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
     Route::post('/evaluador/expediente/crear/certificado', [App\Http\Controllers\Cam\CamClientesController::class, 'crear_certificado'])->name('evaluador.crear.certificados');
     Route::post('/evaluador/expediente/crear/cedulas', [App\Http\Controllers\Cam\CamClientesController::class, 'crear_cedulas'])->name('evaluador.crear.cedulas');
 
-
-    Route::get('centro/videos', function () {
-        return view('cam.videos.centro');
-    })->name('videos.centro');
 
     Route::get('centro', function () {
         return view('cam.usuario.centro');

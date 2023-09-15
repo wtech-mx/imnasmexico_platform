@@ -32,7 +32,7 @@
         <div class="col-12 col-md-6  p-3">
             <p class="text-center tittle_bold_cam">
 
-                @if ($item->orden == 1 || $video->{"check" . ($item->orden - 1)} !== null)
+                @if ($item->orden == 1 || ($video->{"check" . ($item->orden - 1)} !== null && $video->{"check" . ($item->orden - 1)} !== ""))
 
                 <video width="320" height="240" class="video d-block" controls>
                     <source src="{{ $item->video_url }}" type="video/mp4">
@@ -52,7 +52,7 @@
             </p>
         </div>
 
-@endforeach
+    @endforeach
 
     </div>
 

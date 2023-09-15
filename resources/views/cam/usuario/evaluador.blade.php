@@ -28,7 +28,8 @@
 
                 <h3 class="text-center tittle_border_cam">{{ auth()->user()->name }}</h3>
                 @if(auth()->user()->usuario_eva == null or auth()->user()->usuario_eva == "" )
-
+                <p class="text-white text-center">
+                </p>
                 @else
                 <p class="text-white text-center">
                     <strong>Usuario:</strong> <br>
