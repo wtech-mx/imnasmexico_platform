@@ -15,7 +15,30 @@
     <div class="row">
 
         <div class="col-12 mb-5">
-            <h1 class="text-center tittle_bold_cam">Bienvenido <br> Evaluador independiente: </h1> <h3 class="text-center tittle_border_cam">{{ auth()->user()->name }}</h3>
+            <h1 class="text-center tittle_bold_cam">Bienvenido <br> Evaluador independiente: </h1>
+            <div class="d-flex justify-content-around">
+                @if(auth()->user()->num_user == null or auth()->user()->num_user == "" )
+                <p class="text-white text-center">
+                </p>
+                @else
+                <p class="text-white text-center"><strong>No SEP:</strong> <br>
+                    {{ auth()->user()->num_user }}
+                </p>
+                @endif
+
+                <h3 class="text-center tittle_border_cam">{{ auth()->user()->name }}</h3>
+                @if(auth()->user()->usuario_eva == null or auth()->user()->usuario_eva == "" )
+
+                @else
+                <p class="text-white text-center">
+                    <strong>Usuario:</strong> <br>
+                    {{ auth()->user()->usuario_eva }} <br>
+                    <strong>Contraseña:</strong> <br>
+                    {{ auth()->user()->contrasena_eva }}
+                </p>
+                @endif
+
+            </div>
         </div>
 
         <div class="col-4">
@@ -59,10 +82,20 @@
             </div>
         </div>
 
-
     </div>
-
 </section>
+
+<footer>
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-center">
+                <h4 class="p-3">Todos los derechos Reservados Instituto Mexicano Naturales Ain Spa</h4>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
 
 @endsection
 
