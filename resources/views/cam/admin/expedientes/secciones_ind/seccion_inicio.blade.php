@@ -1,6 +1,6 @@
 
     <div class="row mt-3">
-        <div class="col-12 col-md-6 col-xl-6" >
+        <div class="col-12 " >
             <div class="card h-100" >
                 @if ($expediente->check1 === NULL || $expediente->check2 === NULL || $expediente->check3 === NULL || $expediente->check4 === NULL || $expediente->check5 === NULL || $expediente->check6 === NULL)
                     <form method="POST" action="{{ route('expediente.cita', $expediente->id) }}" enctype="multipart/form-data" role="form">
@@ -119,6 +119,7 @@
                         <ul class="list-group">
                             <li class="list-group-item border-0 px-0">
                                 <div class="form-check form-switch ps-0">
+
                                 @if ($check->c1 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c1" name="c1" value="1" checked>
                                     <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
@@ -126,6 +127,7 @@
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c1" name="c1" value="1">
                                 @endif
+
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
                                     1.- NOMBRAMIENTO DEL EVALUADOR INDEPENDIENTE POR PARTE DE LA ENTIDAD DE
                                     CERTIFICACIÓN Y EVALUACIÓN JUNTO CON DECÁLOGO DEL EVALUADOR DE COMPETENCIA.</label>
@@ -133,6 +135,7 @@
                             </li>
                             <li class="list-group-item border-0 px-0">
                                 <div class="form-check form-switch ps-0">
+
                                 @if ($check->c2 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c2" name="c2" value="1" checked>
                                     <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
@@ -140,6 +143,7 @@
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c2" name="c2" value="1">
                                 @endif
+
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
                                     2.- ACUERDO DE CONFIENCIALIDAD ENTRE LA ENTIDAD DE CERTIFICACIÓN Y EVALUACIÓN Y EL
                                     EVALUADOR INDEPENDIENTE.</label>
@@ -147,6 +151,7 @@
                             </li>
                             <li class="list-group-item border-0 px-0">
                                 <div class="form-check form-switch ps-0">
+
                                 @if ($check->c3 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c3" name="c3" value="1" checked>
                                     <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
@@ -154,12 +159,14 @@
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c3" name="c3" value="1">
                                 @endif
+
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
                                     3.- LOGO DEL EVALUADOR INDEPENDIENTE QUE UTILIZARA EN SUS PUBLICACIONES</label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0">
                                 <div class="form-check form-switch ps-0">
+
                                 @if ($check->c4 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c4" name="c4" value="1" checked>
                                     <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
@@ -167,6 +174,7 @@
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c4" name="c4" value="1">
                                 @endif
+
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
                                     4.- COMPROBANTE DE DOMICILIO DEL EVALAUDOR INDEPENDIENTE</label>
                                 </div>
@@ -187,15 +195,17 @@
                             </li>
                             <li class="list-group-item border-0 px-0 pb-0">
                                 <div class="form-check form-switch ps-0">
-                                @if ($check->c6 == '1')
-                                    <input class="form-check-input ms-0" type="checkbox" id="c6" name="c6" value="1" checked>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                        {{$check->User6->name}}</label>
-                                @else
-                                    <input class="form-check-input ms-0" type="checkbox" id="c6" name="c6" value="1">
-                                @endif
-                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    6.- CURRICULUM VITAE DEL EVALUADOR INDEPENDIENTE</label>
+                                    @if ($check->c6 == '1')
+                                        <input class="form-check-input ms-0" type="checkbox" id="c6" name="c6" value="1" checked>
+                                        <p class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                            {{$check->User6->name}}
+                                        </p>
+                                    @else
+                                        <input class="form-check-input ms-0" type="checkbox" id="c6" name="c6" value="1">
+                                    @endif
+                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                        6.- CURRICULUM VITAE DEL EVALUADOR INDEPENDIENTE
+                                    </label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0">
@@ -285,39 +295,51 @@
             </div>
         </div>
 
-        <div class="col-12 col-xl-6 mt-xl-0 mt-4">
-            <div class="card h-100">
+        <div class="col-12">
+            <div class="card mt-3">
                 <div class="card-header pb-0 p-3">
                     <div class="row">
                         <div class="col-md-4 d-flex align-items-center">
                             <h6 class="mb-0">Estandares</h6>
                         </div>
                         <div class="col-md-8 text-end">
-                           <h6>Costo emisión: ${{ $expediente->Nota->Cliente->costo_emi }}.00 mxn</h6>
+                           <h6><strong>Costo emisión:</strong><br> ${{ $expediente->Nota->Cliente->costo_emi }}.00 mxn</h6>
                         </div>
                     </div>
                 </div>
                 <div class="card-body p-3">
                     <ul class="list-group">
-                        @foreach ($estandares_usuario as $estandar_usuario)
-                            <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
-                                <div class="avatar me-4">
-                                    @if ($estandar_usuario->estatus == 'Pendiente')
-                                        <p class="border-radius-lg shadow" style="background-color: #c05b21;">Pendiente</p>
-                                    @elseif($estandar_usuario->estatus == 'Rechazado')
-                                        <p class="border-radius-lg shadow" style="background-color: #aa2222;">Rechazado</p>
-                                    @else
-                                        <p class="border-radius-lg shadow" style="background-color: #63ac28;">Aprovado</p>
-                                    @endif
 
-                                </div>
-                                <div class="d-flex align-items-start flex-column justify-content-center">
-                                    <h6 class="mb-0 text-sm">{{$estandar_usuario->Estandar->estandar}}</h6>
-                                    <p class="mb-0 text-xs">{{$estandar_usuario->evaluador}}</p>
-                                </div>
-                                <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto">Editar</a>
-                            </li>
-                        @endforeach
+                        <div class="table-responsive">
+                            <table class="table table-flush" id="datatable-search">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>Estatus</th>
+                                        <th>Estandar</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                @foreach ($estandares_usuario as $estandar_usuario)
+                                <tr>
+                                    <td>
+                                        @if ($estandar_usuario->estatus == 'Pendiente')
+                                        <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #c05b21;">Pendiente</p>
+                                        @elseif($estandar_usuario->estatus == 'Rechazado')
+                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #aa2222;">Rechazado</p>
+                                        @else
+                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #63ac28;">Aprovado</p>
+                                        @endif
+                                    </td>
+
+                                    <td>{{$estandar_usuario->Estandar->estandar}}</td>
+                                    <td>
+                                        Editar
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </table>
+                        </div>
+
                     </ul>
                 </div>
             </div>
