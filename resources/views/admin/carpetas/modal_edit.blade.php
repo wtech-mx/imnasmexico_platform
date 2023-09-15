@@ -66,16 +66,18 @@
                                     <img id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre . '/' . $recurso->nombre) }}" style="width: 100px; height: 100px;"/>
                                 </p>
                                 @endif
-
                             <p class="text-center">{{ $recurso->nombre }}</p>
                             <p class="text-center"><strong>Area:</strong>{{ $recurso->area }}</p>
                             <p class="text-center"><strong>Subarea:</strong>{{ $recurso->sub_area }}</p>
 
                             <p class="text-center">
-                                <a class="btn btn-sm btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"><i class="fa fa-trash-o"></i></a>
-                                <form id="delete-form" action="{{ route('carpetas.destroy', $recurso->id) }}" method="POST" style="display: none;">
+
+                                <form id="delete-form" action="{{ route('carpetas.destroy', $recurso->id) }}" method="POST" style="">
                                     @csrf
                                     @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash-o"></i>
+                                    </button>
                                 </form>
                             </p>
                         </div>
