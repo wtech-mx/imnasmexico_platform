@@ -487,7 +487,7 @@
                                         <span class="sidenav-normal">Evaluador Independiente</span>
                                     </a>
 
-                                    <a class="nav-link {{ (Request::is('/admin/cursos/dia*') ? 'show' : '') }}" href="{{ route('cursos.index_dia') }}">
+                                    <a class="nav-link {{ (Request::is('/admin/cursos/dia*') ? 'show' : '') }}" href="{{ route('centro.index') }}">
                                         <span class="sidenav-mini-icon"> P </span>
                                         <span class="sidenav-normal">Centro de Evaluación</span>
                                     </a>

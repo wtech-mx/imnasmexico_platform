@@ -8,6 +8,7 @@ use App\Models\Cam\CamCedulas;
 use App\Models\Cam\CamCertificados;
 use App\Models\Cam\CamChecklist;
 use App\Models\Cam\CamCitas;
+use App\Models\Cam\CamDocExp;
 use App\Models\Cam\CamDocuemntos;
 use App\Models\Cam\CamDocumentosUsers;
 use App\Models\Cam\CamEstandares;
@@ -26,7 +27,7 @@ class CamExpedientesController extends Controller
 
     public function index_ind(){
 
-        $expedientes = CamCitas::get();
+        $expedientes = CamNotas::where('tipo', 'Evaluador Independiente')->get();
         return view('cam.admin.expedientes.index', compact('expedientes'));
     }
 
@@ -42,6 +43,33 @@ class CamExpedientesController extends Controller
         $videos_dinamicos = CamVideos::where('tipo','=',$video->tipo)->orderBy('orden','ASC')->get();
 
         return view('cam.admin.expedientes.exp_ind', compact('expediente', 'estandares_usuario', 'documentos', 'check', 'video', 'estandares_cam', 'minis_exps','videos_dinamicos'));
+    }
+
+    public function index_centro(){
+        $expedientes = CamNotas::where('tipo', 'Centro Evaluación')->get();
+        return view('cam.admin.expedientes.index_centro', compact('expedientes'));
+    }
+
+    public function edit_centro($id){
+        $expediente = CamCitas::where('id_nota', $id)->first();
+        $documentos = CamDocumentosUsers::where('id_nota', $id)->firstOrFail();
+        $check = CamChecklist::where('id_nota', $id)->firstOrFail();
+        $estandares_usuario = CamNotEstandares::where('id_nota', $id)->get();
+        $video = CamVideosUser::where('id_nota', $id)->first();
+        $estandares_cam = CamEstandares::get();
+        $minis_exps = CamMiniExp::where('id_nota', $id)->get();
+
+        return view('cam.admin.expedientes.exp_centro', compact('expediente', 'estandares_usuario', 'documentos', 'check', 'video', 'estandares_cam', 'minis_exps'));
+    }
+
+    public function update_estatus(Request $request, $id){
+
+        $estandar = CamNotEstandares::find($id);
+        $estandar->evaluador = $request->get('evaluador');
+        $estandar->estatus = $request->get('estatus');
+        $estandar->update();
+
+        return redirect()->back()->with('success', 'Estatus actualizado exitosamente');
     }
 
     public function update_exp_user(Request $request, $id){
@@ -466,5 +494,46 @@ class CamExpedientesController extends Controller
 
 
         return redirect()->back()->with('success', 'Archivo subido exitosamente');
+    }
+
+    public function crear_docexp(Request $request){
+        $dominio = $request->getHost();
+
+            if($dominio == 'plataforma.imnasmexico.com'){
+                $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam_doc_exp');
+            }else{
+                $ruta_recursos = public_path() . '/cam_doc_exp';
+            }
+
+            $id_nota = $request->get('id_nota');
+            $id_cliente = $request->get('id_cliente');
+            $tipo = $request->get('categoria');
+            if ($request->hasFile('archivos')) {
+                $foto = $request->file('archivos');
+                foreach ($foto as $archivo) {
+                    $path = $ruta_recursos;
+                    $fileName = uniqid() . $archivo->getClientOriginalName();
+                    $archivo->move($path, $fileName);
+                    $nomb = new CamDocExp;
+                    $nomb->nombre = $fileName;
+                    $nomb->tipo = $tipo;
+                    $nomb->id_nota = $id_nota;
+                    $nomb->id_cliente = $id_cliente;
+                    $nomb->id_usuario = auth()->user()->id;
+                    $nomb->save();
+                }
+            }
+
+
+        return redirect()->back()->with('success', 'Archivo subido exitosamente');
+    }
+
+    public function mostrarArchivosSubidos(Request $request){
+        $categoria = $request->input('categoria');
+
+        // Recupera archivos según la categoría y el tipo deseado
+        $archivos = CamDocExp::where('tipo', $categoria)
+            ->where('tipo', $categoria)->get();
+        return response()->json($archivos);
     }
 }

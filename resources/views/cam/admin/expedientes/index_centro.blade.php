@@ -14,7 +14,7 @@ Expedientes
 
                         <div class="d-flex justify-content-between">
 
-                            <h3 class="mb-3">Expedientes Evaluadores Independientes</h3>
+                            <h3 class="mb-3">Expedientes Centros de Evaluación</h3>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
@@ -41,7 +41,7 @@ Expedientes
                                                     <td>{{$expediente->id}}</td>
                                                     <th>{{$expediente->Cliente->name}}</th>
 
-                                                    <td>{{$expediente->tipo}}</td>
+                                                    <td>{{$expediente->membresia}}</td>
                                                     <td>
                                                         @php
                                                             $fecha = $expediente->created_at;
@@ -58,7 +58,7 @@ Expedientes
                                                     </td>
 
                                                     <td>
-                                                        <a class="btn btn-sm btn-info" href="{{ route('expediente.edit', $expediente->id) }}" title="Ver"><i class="fa fa-fw fa-eye"></i> </a>
+                                                        <a class="btn btn-sm btn-info" href="{{ route('expediente.edit_centro', $expediente->id) }}" title="Ver"><i class="fa fa-fw fa-eye"></i> </a>
                                                     </td>
                                                 </tr>
                                             @endforeach

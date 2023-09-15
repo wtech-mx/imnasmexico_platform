@@ -26,6 +26,9 @@
                                     <option value="ACREDITACION CE o EI">ACREDITACION CE o EI</option>
                                     <option value="ESPECIFICACIONES FOTOGRAFIA">ESPECIFICACIONES FOTOGRAFIA</option>
                                     <option value="OPERACION CE">OPERACION CE</option>
+                                    <option value="PRESENTACION">PRESENTACION</option>
+                                    <option value="TRIPTICO">TRIPTICO</option>
+                                    <option value="TUTORIALES APOYO">TUTORIALES APOYO</option>
                                 </select>
                             </div>
                         </div>

@@ -375,10 +375,20 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
     })->name('centro');
 
     Route::middleware(['auth'])->group(function () {
-        // =============== M O D U L O   E X P E D I E N T E S ===============================
+        // =============== M O D U L O   E X P E D I E N T E S  I N D E===============================
         Route::get('/expedientes/independiente', [CamExpedientesController::class, 'index_ind'])->name('independiente.index');
         Route::get('/expediente', [CamExpedientesController::class, 'view'])->name('view.expediente');
         Route::get('/expediente/edit/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'edit'])->name('expediente.edit');
+
+        Route::patch('/expediente/estandar/estatus/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_estatus'])->name('expediente.estatus');
+
+        // =============== M O D U L O   E X P E D I E N T E S  C E N T R O===============================
+        Route::get('/expedientes/centro', [CamExpedientesController::class, 'index_centro'])->name('centro.index');
+        Route::get('/expediente/centro/edit/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'edit_centro'])->name('expediente.edit_centro');
+
+        Route::post('/expediente/crear/doc/exp', [App\Http\Controllers\Cam\CamExpedientesController::class, 'crear_docexp'])->name('crear.docexp');
+        Route::get('/expediente/obtener/doc/exp', [App\Http\Controllers\Cam\CamExpedientesController::class, 'mostrarArchivosSubidos'])->name('obtener.docexp');
+
         // =============== M O D U L O   E X P E D I E N T E S ( C A R P E T A S)===============================
         Route::get('/ruta/para/obtener/archivos', [App\Http\Controllers\Cam\CamExpedientesController::class, 'obtenerArchivosPorCategoria'])->name('obtener.archivos');
         Route::post('/expediente/crear/nomb', [App\Http\Controllers\Cam\CamExpedientesController::class, 'crear_nomb'])->name('crear.nomb');
