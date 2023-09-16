@@ -113,7 +113,7 @@ Notas CAM
     });
 </script>
 
-<script>
+{{-- <script>
     document.getElementById('metodo_pago').addEventListener('change', function() {
         var fotoContainer = document.getElementById('fotoContainer');
 
@@ -133,5 +133,5 @@ Notas CAM
             fotoContainer2.style.display = 'none';
         }
     });
-</script>
+</script> --}}
 @endsection

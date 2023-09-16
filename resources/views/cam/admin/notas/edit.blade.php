@@ -144,42 +144,78 @@
                                 </div>
                             </div>
 
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Profesion</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/medico.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="puesto" name="puesto" type="text" class="form-control" value="{{$nota_cam->Cliente->puesto}}">@error('otra_red') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-12">
                                 <h5>Datos de Direccion</h5>
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <label for="name">Estado/ciudad</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/skyscraper.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="city" name="city" type="text" class="form-control" value="{{$nota_cam->Cliente->city}}">@error('city') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="name">Direccion (Opcional)</label>
+                                    <label for="name">Calle y Numero (Opcional)</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/streets.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="direccion" name="direccion" type="text" class="form-control" value="{{$nota_cam->Cliente->direccion}}">@error('direccion') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="direccion" name="direccion" type="text" class="form-control"  value="{{$nota_cam->Cliente->direccion}}">
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="name">Colonia</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/street-market.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="state" name="state" type="text" class="form-control"  value="{{$nota_cam->Cliente->state}}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="name">Codigo Postal</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/cp.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="postcode" name="postcode" type="text" class="form-control"  value="{{$nota_cam->Cliente->postcode}}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="name">Alcaldia / municipio (Opcional)</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/ecuador.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="country" name="country" type="text" class="form-control" value="{{$nota_cam->Cliente->country}}">@error('country') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="country" name="country" type="text" class="form-control"  value="{{$nota_cam->Cliente->country}}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Estado/ciudad (Entidad Federativa)</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/skyscraper.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="city" name="city" type="text" class="form-control" value="{{$nota_cam->Cliente->city}}">
                                     </div>
                                 </div>
                             </div>

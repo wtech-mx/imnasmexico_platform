@@ -34,6 +34,18 @@ class NotasCamController extends Controller
     }
 
     public function crear(Request $request){
+        $name = $request->get('name');
+        $apellido = $request->get('apellido');
+        $celular = $request->get('celular');
+        // Obtén las dos primeras letras del nombre
+        $primerasDosLetrasNombre = substr($name, 0, 2);
+        // Obtén las dos primeras letras del apellido
+        $primerasDosLetrasApellido = substr($apellido, 0, 2);
+        // Obtén los últimos tres dígitos del número de teléfono
+        $ultimosTresDigitosCelular = substr($celular, -3);
+        // Concatena las partes para formar la contraseña
+        $password = $primerasDosLetrasNombre . $primerasDosLetrasApellido . $ultimosTresDigitosCelular;
+
         $code = Str::random(8);
         if (User::where('telefono', $request->celular)->exists() || User::where('email', $request->email)->exists()) {
             if (User::where('telefono', $request->celular)->exists()) {
@@ -47,10 +59,12 @@ class NotasCamController extends Controller
             $payer->name = $request->get('name') . " " . $request->get('apellido');
             $payer->email = $request->get('email');
             $payer->username = $request->get('celular');
-            $payer->code = $code;
             $payer->telefono = $request->get('celular');
-            $payer->country = $request->get('country');
+            $payer->code = $code;
             $payer->direccion = $request->get('direccion');
+            $payer->country = $request->get('country');
+            $payer->state = $request->get('state');
+            $payer->postcode = $request->get('postcode');
             $payer->city = $request->get('city');
             $payer->celular_casa = $request->get('telefono');
             $payer->facebook = $request->get('facebook');
@@ -58,6 +72,7 @@ class NotasCamController extends Controller
             $payer->instagram = $request->get('instagram');
             $payer->pagina_web = $request->get('pagina_web');
             $payer->otra_red = $request->get('otra_red');
+            $payer->puesto = $request->get('puesto');
 
             if($request->get('tipo') == 'Centro Evaluación'){
                 $payer->cliente = '4';
@@ -66,7 +81,7 @@ class NotasCamController extends Controller
             }
 
             $payer->membresia = $request->get('membresia');
-            $payer->password = Hash::make($request->get('celular'));
+            $payer->password = Hash::make($password);
             $payer->save();
             $datos = User::where('id', '=', $payer->id)->first();
             // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));

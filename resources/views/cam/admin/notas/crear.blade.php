@@ -57,19 +57,7 @@
 
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label for="name">Telefono</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="name">Celular *</label>
+                                    <label for="name">Celular (WhatasApp) *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/foldable-phone.png') }}" alt="" width="35px">
@@ -78,6 +66,19 @@
                                     </div>
                                 </div>
 
+                            </div>
+
+
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="name">Telefono (Local)</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-12">
@@ -144,25 +145,26 @@
                                 </div>
                             </div>
 
-                            <div class="col-12">
-                                <h5>Datos de Direccion</h5>
-                            </div>
-
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="name">Estado/ciudad</label>
+                                    <label for="name">Profesion</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/skyscraper.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/medico.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="city" name="city" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="puesto" name="puesto" type="text" class="form-control">
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-4">
+
+                            <div class="col-12">
+                                <h5>Datos de Direccion</h5>
+                            </div>
+
+                            <div class="col-6">
                                 <div class="form-group">
-                                    <label for="name">Direccion (Opcional)</label>
+                                    <label for="name">Calle y Numero (Opcional)</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/streets.png') }}" alt="" width="35px">
@@ -172,7 +174,31 @@
                                 </div>
                             </div>
 
-                            <div class="col-4">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="name">Colonia</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/street-market.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="state" name="state" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="name">Codigo Postal</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/cp.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="postcode" name="postcode" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
                                 <div class="form-group">
                                     <label for="name">Alcaldia / municipio (Opcional)</label>
                                     <div class="input-group mb-3">
@@ -184,10 +210,21 @@
                                 </div>
                             </div>
 
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Estado/ciudad (Entidad Federativa)</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/skyscraper.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="city" name="city" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-12">
                                 <h5>Datos de evaluador o centro</h5>
                             </div>
-
 
                             <div class="col-4">
                                 <div class="form-group">
@@ -255,13 +292,24 @@
                                 <div class="form-group">
                                     <label for="name">Monto *</label>
                                     <div class="input-group mb-3">
+                                        <span class="input-group-text"><img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
+                                        <input class="form-control" type="number" id="monto1" name="monto1">
+                                        <span class="input-group-text">.00</span>
+                                      </div>
+                                </div>
+                            </div>
+
+                            {{-- <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Monto *</label>
+                                    <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                         </span>
                                         <input class="form-control" type="number" id="monto1" name="monto1">
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="col-4">
                                 <div class="form-group">
@@ -279,10 +327,16 @@
                                 </div>
                             </div>
 
-                            <div class="col-4" id="fotoContainer" style="display: none;">
+                            <div class="col-4" id="fotoContainer" style="">
+
                                 <div class="form-group">
                                     <label for="name">Foto</label><br>
-                                    <input id="comprobante" name="comprobante" type="file" class="form-control" placeholder="foto">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="comprobante" name="comprobante" type="file" class="form-control" placeholder="foto">
+                                    </div>
                                 </div>
                             </div>
 
@@ -300,11 +354,10 @@
                                             <div class="form-group">
                                                 <label for="name">Monto *</label>
                                                 <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
-                                                    </span>
+                                                    <span class="input-group-text"><img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
                                                     <input class="form-control" type="number" id="monto2" name="monto2">
-                                                </div>
+                                                    <span class="input-group-text">.00</span>
+                                                  </div>
                                             </div>
                                         </div>
 
@@ -324,10 +377,15 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-4" id="fotoContainer2" style="display: none;">
+                                        <div class="col-4" id="fotoContainer2" style="">
                                             <div class="form-group">
                                                 <label for="name">Foto</label><br>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                                                    </span>
                                                 <input id="comprobante2" name="comprobante2" type="file" class="form-control" placeholder="foto">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
