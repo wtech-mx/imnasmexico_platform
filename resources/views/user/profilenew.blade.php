@@ -181,7 +181,7 @@ Mi perfil- {{$cliente->name}}
 
                 <div class="tab-content" id="nav-tabContent" style="">
                     <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab" tabindex="0" style="min-height: auto!important;">
-                        <form method="POST" action="{{ route('clientes.update_documentos_cliente', $cliente->id) }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('clientes.update_documentos_cliente', $cliente->id) }}" enctype="multipart/form-data" role="form" onsubmit="disableButton()">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
 
@@ -296,7 +296,7 @@ Mi perfil- {{$cliente->name}}
                                 @endif
 
                                 <div class="col-12">
-                                    <button type="submit" class="btn_save_profile d-inline-block" style="border: solid 0px;" >
+                                    <button type="submit"  id="submitButton" class="btn_save_profile d-inline-block" style="border: solid 0px;" >
                                         Guardar
                                     </button>
                                 </div>
@@ -1173,8 +1173,13 @@ Mi perfil- {{$cliente->name}}
 @endsection
 
 @section('js')
-
 <script>
+
+    function disableButton() {
+        // Deshabilita el botón de guardar después de hacer clic
+        document.getElementById('submitButton').disabled = true;
+    }
+
         // Obtener elementos
     const noButton = document.getElementById('noButton');
     const siButton = document.getElementById('siButton');
