@@ -212,7 +212,7 @@ Mi perfil- {{$cliente->name}}
                                                 @endif
                                                 <p class="text-center">
                                                     Se ha cargado tu archivo con exito <i class="fa fa-fw fa-check"></i><br>
-                                                    ¿Quieres reemplzar el archivo actual?
+                                                    ¿Quieres reemplazar el archivo actual?
                                                 </p>
 
                                                 <div class="d-flex justify-content-center">
@@ -254,7 +254,7 @@ Mi perfil- {{$cliente->name}}
                                                 @endif
                                                 <p class="text-center">
                                                     Se ha cargado tu archivo con exito <i class="fa fa-fw fa-check"></i><br>
-                                                    ¿Quieres reemplzar el archivo actual?
+                                                    ¿Quieres reemplazar el archivo actual?
                                                 </p>
 
                                                 <div class="d-flex justify-content-center">
