@@ -791,6 +791,7 @@ Mi perfil- {{$cliente->name}}
                                                                                     @foreach ($documentos_estandar as $documento)
                                                                                         @php
                                                                                             $documentoDescargado = DB::table('documentos_estandares')->where('id_usuario', $cliente->id)->where('id_documento', $documento->id)->exists();
+                                                                                            $documentoSubido = DB::table('documentos_estandares')->where('id_usuario', $cliente->id)->where('id_documento', $documento->id)->first();
                                                                                         @endphp
                                                                                     <div class="row">
                                                                                         <div class="col-6  mb-2">
@@ -809,8 +810,23 @@ Mi perfil- {{$cliente->name}}
                                                                                             <button type="button" id="botonpersonal{{ $documento->id }}{{$video->id_tickets}}" onClick="document.getElementById('btnoriginal{{ $documento->id }}{{$video->id_tickets}}').click();">Adjuntar documento</button>
                                                                                             <small id='tagsmall{{ $documento->id }}{{$video->id_tickets}}'>No hay archivos adjuntos</small>
                                                                                         </div>
-                                                                                        <div class="col-3">
+                                                                                        <div class="col-1">
                                                                                             <input type="checkbox" name="documento_subido" {{ $documentoDescargado ? 'checked' : '' }} disabled>
+                                                                                        </div>
+                                                                                        <div class="col-2">
+                                                                                            @if ($documentoDescargado)
+                                                                                                @if (pathinfo($documentoSubido->documento, PATHINFO_EXTENSION) == 'pdf')
+                                                                                                    <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documentoSubido->documento)}}" style="width: 60%; height: 60px;"></iframe>
+                                                                                                    <p class="text-center ">
+                                                                                                        <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documentoSubido->documento) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                                                                                    </p>
+                                                                                                @else
+                                                                                                    <p class="text-center mt-2">
+                                                                                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documentoSubido->documento) }}" alt="Imagen" style="width: 120px;height: 80%;"/><br>
+                                                                                                        <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documentoSubido->documento) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
+                                                                                                    </p>
+                                                                                                @endif
+                                                                                            @endif
                                                                                         </div>
                                                                                     </div>
                                                                                     @endforeach
