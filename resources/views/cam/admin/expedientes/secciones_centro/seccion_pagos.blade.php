@@ -1,8 +1,8 @@
 <div class="row mt-3">
     <div class="col-12 col-md-12 mt-3 ">
-        <div class="card h-100">
+        <div class="card h-100 p-2">
 
-            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <ul class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
                 <li class="nav-item mb-0 px-0 py-1 active d-flex align-items-center justify-content-center" role="presentation">
                 <button class="nav-link active" id="pills-emision-tab" data-bs-toggle="pill" data-bs-target="#pills-emision" type="button" role="tab" aria-controls="pills-emision" aria-selected="true">Nueva emision</button>
                 </li>
@@ -32,39 +32,51 @@
                         </div>
                         <div class="card-body p-3">
                             <div class="row">
-                                <label for="contrato_general">Nombre</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
-                                    </span>
-                                    <input id="num_user" name="num_user" class="form-control" type="text" placeholder="Nombre cliente">
+
+                                <div class="col-6">
+                                    <label for="contrato_general">Nombre</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="num_user" name="num_user" class="form-control" type="text" placeholder="Nombre cliente">
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
+                                <div class="col-6">
                                     <label for="">Seleccione estandar(es) *</label><br>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets\user\icons\certificate.png') }}" alt="" width="35px">
+                                        </span>
                                         <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
                                             @foreach ($estandares_cam_user as $estandar_cam)
                                                 <option value="{{$estandar_cam->id_estandar}}">{{$estandar_cam->Estandar->estandar}}</option>
                                             @endforeach
                                         </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Foto</label><br>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="comprobante" name="comprobante" type="file" class="form-control" placeholder="foto">
                                     </div>
                                 </div>
 
-                                <label for="contrato_general">Total</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
-                                    </span>
-                                    <input id="costo_total" name="costo_total" class="form-control" type="text">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="name">Foto</label><br>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                                            </span>
+                                            <input id="comprobante" name="comprobante" type="file" class="form-control" placeholder="foto">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="contrato_general">Total</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets\cam\dinero.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="costo_total" name="costo_total" class="form-control" type="text">
+                                    </div>
                                 </div>
 
                             </div>
@@ -89,39 +101,54 @@
                         </div>
                         <div class="card-body p-3">
                             <div class="row">
-                                <label for="contrato_general">Nombre</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
-                                    </span>
-                                    <input id="num_user" name="num_user" class="form-control" type="text" placeholder="Nombre cliente">
-                                </div>
 
-                                <div class="form-group">
-                                    <label for="">Seleccione estandar(es) *</label><br>
-                                        <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
-                                            @foreach ($estandares_cam as $estandar_cam)
-                                                <option value="{{$estandar_cam->id}}">{{$estandar_cam->estandar}}</option>
-                                            @endforeach
-                                        </select>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Foto</label><br>
+                                <div class="col-6">
+                                    <label for="contrato_general">Nombre</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="comprobante" name="comprobante" type="file" class="form-control" placeholder="foto">
+                                        <input id="num_user" name="num_user" class="form-control" type="text" placeholder="Nombre cliente">
                                     </div>
                                 </div>
 
-                                <label for="contrato_general">Total</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
-                                    </span>
-                                    <input id="costo_total" name="costo_total" class="form-control" type="text">
+                                <div class="col-6">
+                                    <label for="">Seleccione estandar(es) *</label><br>
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets\user\icons\certificate.png') }}" alt="" width="35px">
+                                            </span>
+                                            <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
+                                                @foreach ($estandares_cam as $estandar_cam)
+                                                    <option value="{{$estandar_cam->id}}">{{$estandar_cam->estandar}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="name">Foto</label><br>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                                            </span>
+                                            <input id="comprobante" name="comprobante" type="file" class="form-control" placeholder="foto">
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-6">
+                                    <label for="contrato_general">Total</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets\cam\dinero.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="costo_total" name="costo_total" class="form-control" type="text">
+                                    </div>
                                 </div>
 
                             </div>
@@ -163,38 +190,48 @@
                                     // Combinar nueva fecha y hora (con un año adicional)
                                     $fecha_hora_fin = $nueva_fecha_formateada;
                                 @endphp
-                                <label for="contrato_general">Fin de Operaciones</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
-                                    </span>
-                                    <input id="num_user" name="num_user" class="form-control" type="text" value="{{ $fecha_hora_fin}}" disabled>
+
+                                <div class="col-6">
+                                    <label for="contrato_general">Fin de Operaciones</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="num_user" name="num_user" class="form-control" type="text" value="{{ $fecha_hora_fin}}" disabled>
+                                    </div>
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="name">Foto</label><br>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <label for="name">Foto</label><br>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                                            </span>
+                                            <input id="comprobante" name="comprobante" type="file" class="form-control" placeholder="foto">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <label for="contrato_general">Total</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets\cam\dinero.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="costo_total" name="costo_total" class="form-control" type="text">
+                                    </div>
+                                </div>
+
+
+                                <div class="col-6">
+                                    <label for="name">Fecha *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="comprobante" name="comprobante" type="file" class="form-control" placeholder="foto">
+                                        <input id="fecha" name="fecha" type="text" class="form-control" value="{{$fecha}}">
                                     </div>
-                                </div>
-
-                                <label for="contrato_general">Total</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
-                                    </span>
-                                    <input id="costo_total" name="costo_total" class="form-control" type="text">
-                                </div>
-
-                                <label for="name">Fecha *</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
-                                    </span>
-                                    <input id="fecha" name="fecha" type="text" class="form-control" value="{{$fecha}}">
                                 </div>
 
                             </div>

@@ -10,7 +10,7 @@
                         <div class="col-4">
                             <button class="btn btn-sm" id="btnArchivos1" onclick="mostrarArchivos('1')">
                                 <img src="{{asset('assets/user/icons/manual.png')}}" class="img-fluid" style="width: 40%;">
-                                <p class="text-sm">1. Manuales Digitales CONOCER</p>
+                                <p class="text-sm"> <br>1. Manuales Digitales CONOCER</p>
                             </button>
                         </div>
                         <div class="col-4">
@@ -22,31 +22,31 @@
                         <div class="col-4">
                             <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('estandares', {{ $expediente->Nota->id }}); mostrarCarpetasCompradas({{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/documentos.png')}}" class="img-fluid" style="width: 40%;">
-                                <p class="text-sm">3. Formatos Estándares</p>
+                                <p class="text-sm"> <br>3. Formatos Estándares</p>
                             </button>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('3')">
                                 <img src="{{asset('assets/user/icons/illustrator.png')}}" class="img-fluid" style="width: 40%;">
-                                <p class="text-sm">4. Logo Conocer Evaluador Independiente</p>
+                                <p class="text-sm"><br>4. Logo Conocer Evaluador Independiente</p>
                             </button>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('certificado', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/certificacion.webp')}}" class="img-fluid" style="width: 40%;">
-                                <p class="text-sm">5. Certificados Conocer</p>
+                                <p class="text-sm"><br>5. Certificados Conocer</p>
                             </button>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('cedula', {{ $expediente->Nota->id }})">
                                 <img src="{{asset('assets/user/icons/cedula.png')}}" class="img-fluid" style="width: 40%;">
-                                <p class="text-sm">6. Cedulas De Acreditación</p>
+                                <p class="text-sm"><br>6. Cedulas De Acreditación</p>
                             </button>
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm" id="btnArchivos3" onclick="mostrarArchivos('4')">
                                 <img src="{{asset('assets/user/icons/book.png')}}" class="img-fluid" style="width: 40%;">
-                                <p class="text-sm">7. Formatos Resolucion De Quejas</p>
+                                <p class="text-sm"><br>7. Formatos Resolucion De Quejas</p>
                             </button>
                         </div>
                     </div>
@@ -114,9 +114,9 @@
                         <div class="card-body p-3">
                             <div class="row">
 
-                                <label for="contrato_general">Contrato general</label>
+                                <label class="" for="contrato_general">Contrato general</label>
                                 <div class="col-6">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\cam\contrato_g.png') }}" alt="" width="35px">
                                         </span>
@@ -141,9 +141,9 @@
                                     @endif
                                 </div>
 
-                                <label for="solicitud_acreditacion">Solicitud acreditacion </label>
+                                <label class="" for="solicitud_acreditacion">Solicitud acreditacion </label>
                                 <div class="col-6">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\cam\solicitud.png') }}" alt="" width="35px">
                                         </span>
@@ -168,9 +168,9 @@
                                     @endif
                                 </div>
 
-                                <label for="carta_compromiso">Carta compromiso</label>
+                                <label class="" for="carta_compromiso">Carta compromiso</label>
                                 <div class="col-6">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\cam\carta.png') }}" alt="" width="35px">
                                         </span>
@@ -195,9 +195,9 @@
                                     @endif
                                 </div>
 
-                                <label for="ine">INE</label>
+                                <label class="" for="ine">INE</label>
                                 <div class="col-6">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\cam\ine.png') }}" alt="" width="35px">
                                         </span>
@@ -222,9 +222,9 @@
                                     @endif
                                 </div>
 
-                                <label for="curp">CURP</label>
+                                <label class="" for="curp">CURP</label>
                                 <div class="col-6">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
                                         </span>
@@ -249,9 +249,9 @@
                                     @endif
                                 </div>
 
-                                <label for="foto">Foto </label>
+                                <label class="" for="foto">Foto </label>
                                 <div class="col-6">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\user\icons\picture.png') }}" alt="" width="35px">
                                         </span>
@@ -276,9 +276,9 @@
                                     @endif
                                 </div>
 
-                                <label for="acuerdo_confidencialidad">Comprobante Domicilio </label>
+                                <label class="" for="acuerdo_confidencialidad">Comprobante Domicilio </label>
                                 <div class="col-6">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\cam\comprobante.png') }}" alt="" width="35px">
                                         </span>
@@ -303,9 +303,9 @@
                                     @endif
                                 </div>
 
-                                <label for="logo">Logo evaluador independiente</label>
+                                <label class="" for="logo">Logo evaluador independiente</label>
                                 <div class="col-6">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\user\icons\illustrator.png') }}" alt="" width="35px">
                                         </span>
@@ -330,9 +330,9 @@
                                     @endif
                                 </div>
 
-                                <label for="carta_responsabilidad">Carta responsabilidad logo</label>
+                                <label class="" for="carta_responsabilidad">Carta responsabilidad logo</label>
                                 <div class="col-6">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\cam\carta_res.png') }}" alt="" width="35px">
                                         </span>
@@ -357,9 +357,9 @@
                                     @endif
                                 </div>
 
-                                <label for="acta_nacimiento">Acta nacimiento</label>
+                                <label class="" for="acta_nacimiento">Acta nacimiento</label>
                                 <div class="col-6">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\cam\acta.png') }}" alt="" width="35px">
                                         </span>
@@ -384,9 +384,9 @@
                                     @endif
                                 </div>
 
-                                <label for="curriculum">Curriculum </label>
+                                <label class="" for="curriculum">Curriculum </label>
                                 <div class="col-6">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\cam\cv.png') }}" alt="" width="35px">
                                         </span>
@@ -411,9 +411,9 @@
                                     @endif
                                 </div>
 
-                                <label for="acuerdo_confidencialidad">Acuerdo confidencialidad </label>
+                                <label class="" for="acuerdo_confidencialidad">Acuerdo confidencialidad </label>
                                 <div class="col-6">
-                                    <div class="input-group mb-3">
+                                    <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\cam\folder.png') }}" alt="" width="35px">
                                         </span>
@@ -438,9 +438,9 @@
                                 @endif
                             </div>
 
-                            <label for="acuerdo_confidencialidad">Contrato individual </label>
+                            <label class="" for="acuerdo_confidencialidad">Contrato individual </label>
                             <div class="col-6">
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-4">
                                     <span class="input-group-text" id="basic-addon1">
                                         <img src="{{ asset('assets\cam\contrato.png') }}" alt="" width="35px">
                                     </span>
@@ -466,9 +466,9 @@
                             </div>
 
 
-                            <label for="acuerdo_confidencialidad">Nombramiento</label>
+                            <label class="" for="acuerdo_confidencialidad">Nombramiento</label>
                             <div class="col-6">
-                                <div class="input-group mb-3">
+                                <div class="input-group mb-4">
                                     <span class="input-group-text" id="basic-addon1">
                                         <img src="{{ asset('assets\user\icons\stamp.png') }}" alt="" width="35px">
                                     </span>
@@ -491,6 +491,11 @@
                                         </p>
                                     @endif
                                 @endif
+                            </div>
+
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-sm" style="background: #6EC1E4; color: #ffff;">Guardar</button>
+
                             </div>
 
                         </div>

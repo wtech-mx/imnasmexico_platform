@@ -205,10 +205,10 @@ Expediente {{$expediente->id}}
                         var archivoURL = '{{ asset('cam_doc_general/') }}/' + archivo.nombre;
 
 
-                            if (extension === 'pdf') {
+                            if (extension === 'pdf' || extension === 'docx') {
                                 archivosHTML += '<div class="archivo">';
                                 archivosHTML += '<embed src="' + archivoURL + '" type="application/pdf" style="width: 120px; height: 120px;" />';
-                                archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir PDF</a>';
+                                archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Documento</a>';
                                 archivosHTML += '</div>';
                             } else if (extension === 'jpg' || extension === 'png' || extension === 'jpeg') {
                                 archivosHTML += '<div class="archivo">';
@@ -330,7 +330,7 @@ Expediente {{$expediente->id}}
                         var archivoURL = '{{ asset('cam_doc_exp/') }}/' + archivo.nombre;
 
 
-                            if (extension === 'pdf') {
+                            if (extension === 'pdf' ) {
                                 archivosHTML += '<div class="archivo">';
                                 archivosHTML += '<embed src="' + archivoURL + '" type="application/pdf" style="width: 120px; height: 120px;" />';
                                 archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir PDF</a>';
