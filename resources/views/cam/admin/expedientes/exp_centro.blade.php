@@ -205,15 +205,23 @@ Expediente {{$expediente->id}}
                         var archivoURL = '{{ asset('cam_doc_general/') }}/' + archivo.nombre;
 
 
-                            if (extension === 'pdf' || extension === 'docx') {
+                            if (extension === 'pdf' ) {
                                 archivosHTML += '<div class="archivo">';
                                 archivosHTML += '<embed src="' + archivoURL + '" type="application/pdf" style="width: 120px; height: 120px;" />';
-                                archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Documento</a>';
+                                archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir PDF</a>';
                                 archivosHTML += '</div>';
                             } else if (extension === 'jpg' || extension === 'png' || extension === 'jpeg') {
                                 archivosHTML += '<div class="archivo">';
                                 archivosHTML += '<img src="' + archivoURL + '" alt="' + archivo.nombre + '" style="width: 100px; height: 100px;">';
                                 archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Imagen</a>';
+                                archivosHTML += '</div>';
+                            }else if (extension === 'docx') {
+                                archivosHTML += '<div class="archivo">';
+                                archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Documento</a>';
+                                archivosHTML += '</div>';
+                            }else if (extension === 'pptx') {
+                                archivosHTML += '<div class="archivo">';
+                                archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Presentacion</a>';
                                 archivosHTML += '</div>';
                             } else {
                                 archivosHTML += '<div class="archivo">' + archivo.nombre + '</div>';
@@ -294,7 +302,15 @@ Expediente {{$expediente->id}}
                             archivosHTML += '<img src="' + archivoURL + '" alt="' + archivo.nombre + '" style="width: 100px; height: 100px;">';
                             archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Imagen</a>';
                             archivosHTML += '</div>';
-                        } else {
+                        }else if (extension === 'docx') {
+                                archivosHTML += '<div class="archivo">';
+                                archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Documento</a>';
+                                archivosHTML += '</div>';
+                            }else if (extension === 'pptx') {
+                                archivosHTML += '<div class="archivo">';
+                                archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Presentacion</a>';
+                                archivosHTML += '</div>';
+                            } else {
                             archivosHTML += '<div class="archivo">' + archivo.nombre + '</div>';
                         }
                     });
@@ -339,6 +355,14 @@ Expediente {{$expediente->id}}
                                 archivosHTML += '<div class="archivo">';
                                 archivosHTML += '<img src="' + archivoURL + '" alt="' + archivo.nombre + '" style="width: 100px; height: 100px;">';
                                 archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Imagen</a>';
+                                archivosHTML += '</div>';
+                            }else if (extension === 'docx') {
+                                archivosHTML += '<div class="archivo">';
+                                archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Documento</a>';
+                                archivosHTML += '</div>';
+                            }else if (extension === 'pptx') {
+                                archivosHTML += '<div class="archivo">';
+                                archivosHTML += '<a href="' + archivoURL + '" target="_blank">Abrir Presentacion</a>';
                                 archivosHTML += '</div>';
                             } else {
                                 archivosHTML += '<div class="archivo">' + archivo.nombre + '</div>';
