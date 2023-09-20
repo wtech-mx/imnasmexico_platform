@@ -77,7 +77,18 @@
                                         <input id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required value="{{$nota_cam->Cliente->celular_casa}}">@error('celular') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
+                            </div>
 
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">CURP</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="curp" name="curp" type="text" class="form-control" value="{{$nota_cam->Cliente->curp}}">
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="col-12">

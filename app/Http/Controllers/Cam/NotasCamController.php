@@ -73,6 +73,7 @@ class NotasCamController extends Controller
             $payer->pagina_web = $request->get('pagina_web');
             $payer->otra_red = $request->get('otra_red');
             $payer->puesto = $request->get('puesto');
+            $payer->curp = $request->get('curp');
 
             if($request->get('tipo') == 'Centro Evaluación'){
                 $payer->cliente = '4';

@@ -81,6 +81,18 @@
                                 </div>
                             </div>
 
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">CURP</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="curp" name="curp" type="text" class="form-control" >
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-12">
                                 <h5>Redes Sociales</h5>
                             </div>
@@ -293,7 +305,7 @@
                                     <label for="name">Monto *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
-                                        <input class="form-control" type="text" id="monto1" name="monto1">
+                                        <input class="form-control" type="number" id="monto1" name="monto1">
                                         <span class="input-group-text">.00</span>
                                       </div>
                                 </div>
