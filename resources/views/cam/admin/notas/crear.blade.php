@@ -233,7 +233,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="fecha" name="fecha" type="text" class="form-control" value="{{$fecha}}" disabled>
+                                        <input id="fecha" name="fecha" type="text" class="form-control" value="{{$fecha}}">
                                     </div>
                                 </div>
                             </div>

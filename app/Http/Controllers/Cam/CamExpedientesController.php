@@ -56,11 +56,12 @@ class CamExpedientesController extends Controller
         $check = CamChecklist::where('id_nota', $id)->firstOrFail();
         $estandares_usuario = CamNotEstandares::where('id_nota', $id)->get();
         $video = CamVideosUser::where('id_nota', $id)->first();
+        $estandares_cam_user = CamNotEstandares::where('id_nota', $id)->where('estatus', '=', 'Aprovado')->get();
         $estandares_cam = CamEstandares::get();
         $minis_exps = CamMiniExp::where('id_nota', $id)->get();
         $videos_dinamicos = CamVideos::where('tipo','=',$video->tipo)->orderBy('orden','ASC')->get();
 
-        return view('cam.admin.expedientes.exp_centro', compact('videos_dinamicos','expediente', 'estandares_usuario', 'documentos', 'check', 'video', 'estandares_cam', 'minis_exps'));
+        return view('cam.admin.expedientes.exp_centro', compact('videos_dinamicos','expediente', 'estandares_usuario', 'estandares_cam_user','documentos', 'check', 'video', 'estandares_cam', 'minis_exps'));
     }
 
     public function update_estatus(Request $request, $id){
