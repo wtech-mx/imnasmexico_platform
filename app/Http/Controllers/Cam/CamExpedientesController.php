@@ -58,8 +58,9 @@ class CamExpedientesController extends Controller
         $video = CamVideosUser::where('id_nota', $id)->first();
         $estandares_cam = CamEstandares::get();
         $minis_exps = CamMiniExp::where('id_nota', $id)->get();
+        $videos_dinamicos = CamVideos::where('tipo','=',$video->tipo)->orderBy('orden','ASC')->get();
 
-        return view('cam.admin.expedientes.exp_centro', compact('expediente', 'estandares_usuario', 'documentos', 'check', 'video', 'estandares_cam', 'minis_exps'));
+        return view('cam.admin.expedientes.exp_centro', compact('videos_dinamicos','expediente', 'estandares_usuario', 'documentos', 'check', 'video', 'estandares_cam', 'minis_exps'));
     }
 
     public function update_estatus(Request $request, $id){
@@ -136,7 +137,7 @@ class CamExpedientesController extends Controller
         $doc = CamDocumentosUsers::where('id_nota', $id)->first();
 
         if($dominio == 'plataforma.imnasmexico.com'){
-            $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam/doc' . $doc->Nota->Cliente->telefono);
+            $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam/doc/' . $doc->Nota->Cliente->telefono);
         }else{
             $ruta_recursos = public_path() . '/cam/doc/' . $doc->Nota->Cliente->telefono;
         }
@@ -252,6 +253,14 @@ class CamExpedientesController extends Controller
             $file->move($path, $fileName);
             $doc->carta_responsabilidad = $fileName;
         }
+
+        if ($request->hasFile("nombramiento")) {
+            $file = $request->file('nombramiento');
+            $path = $ruta_recursos;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $doc->nombramiento = $fileName;
+        }
         $doc->update();
 
         $check = CamChecklist::where('id_nota', $id)->first();
@@ -296,26 +305,45 @@ class CamExpedientesController extends Controller
         $dominio = $request->getHost();
 
             if($dominio == 'plataforma.imnasmexico.com'){
-                $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam_doc_general');
+                $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam_doc_general/');
             }else{
-                $ruta_recursos = public_path() . '/cam_doc_general';
+                $ruta_recursos = public_path() . '/cam_doc_general/';
             }
 
             $id_nota = $request->get('id_nota');
             $id_cliente = $request->get('id_cliente');
-            if ($request->hasFile('foto')) {
-                $foto = $request->file('foto');
-                foreach ($foto as $archivo) {
-                    $path = $ruta_recursos;
-                    $fileName = uniqid() . $archivo->getClientOriginalName();
-                    $archivo->move($path, $fileName);
-                    $nomb = new CamNombramiento;
-                    $nomb->nombramientos = $fileName;
-                    $nomb->id_nota = $id_nota;
-                    $nomb->id_cliente = $id_cliente;
-                    $nomb->save();
+            if($request->get('categoria') == 'cedula'){
+                if ($request->hasFile('foto')) {
+                    $foto = $request->file('foto');
+                    foreach ($foto as $archivo) {
+                        $path = $ruta_recursos;
+                        $fileName = uniqid() . $archivo->getClientOriginalName();
+                        $archivo->move($path, $fileName);
+                        $nomb = new CamCedulas;
+                        $nomb->nombre = $fileName;
+                        $nomb->id_nota = $id_nota;
+                        $nomb->id_cliente = $id_cliente;
+                        $nomb->save();
+                    }
                 }
             }
+
+            if($request->get('categoria') == 'certificados'){
+                if ($request->hasFile('foto')) {
+                    $foto = $request->file('foto');
+                    foreach ($foto as $archivo) {
+                        $path = $ruta_recursos;
+                        $fileName = uniqid() . $archivo->getClientOriginalName();
+                        $archivo->move($path, $fileName);
+                        $nomb = new CamCertificados;
+                        $nomb->nombre = $fileName;
+                        $nomb->id_nota = $id_nota;
+                        $nomb->id_cliente = $id_cliente;
+                        $nomb->save();
+                    }
+                }
+            }
+
         $nomb->save();
 
         return redirect()->back()->with('success', 'Archivo subido exitosamente');
@@ -533,9 +561,9 @@ class CamExpedientesController extends Controller
         $dominio = $request->getHost();
 
             if($dominio == 'plataforma.imnasmexico.com'){
-                $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam_doc_exp');
+                $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam_doc_exp/');
             }else{
-                $ruta_recursos = public_path() . '/cam_doc_exp';
+                $ruta_recursos = public_path() . '/cam_doc_exp/';
             }
 
             $id_nota = $request->get('id_nota');

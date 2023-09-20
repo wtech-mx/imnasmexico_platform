@@ -271,6 +271,7 @@ Expediente {{$expediente->id}}
     function mostrarArchivos(categoria, expedienteId) {
         // Oculta el formulario y vacía el contenedor de archivos
         $('#contenedorSubirArchivos').hide();
+        $('#contenedorSubirArchivosCedula').hide();
         $('#contenedorArchivos').empty();
 
         // Limpia el contenedor de carpetas (estándares)
@@ -319,8 +320,11 @@ Expediente {{$expediente->id}}
             }
         });
 
-        if (categoria === 'nombramiento') {
+        if (categoria === 'certificado') {
             $('#contenedorSubirArchivos').show();
+        }
+        if (categoria === 'cedula') {
+            $('#contenedorSubirArchivosCedula').show();
         }
     }
 

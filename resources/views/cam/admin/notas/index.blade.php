@@ -113,6 +113,29 @@ Notas CAM
     });
 </script>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var inputElement = document.getElementById('monto1');
+
+        inputElement.addEventListener('input', function() {
+            var inputValue = this.value;
+            if (inputValue) {
+                // Elimina cualquier coma existente
+                inputValue = inputValue.replace(/,/g, '');
+
+                // Formatea el valor con comas
+                var formattedValue = numberWithCommas(inputValue);
+                this.value = formattedValue;
+            }
+        });
+
+        // Función para agregar comas como separadores de miles
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+    });
+</script>
+
 {{-- <script>
     document.getElementById('metodo_pago').addEventListener('change', function() {
         var fotoContainer = document.getElementById('fotoContainer');
