@@ -1,7 +1,7 @@
 <form method="POST" action="{{ route('update_exp_user', $expediente->Nota->Cliente->id) }}" enctype="multipart/form-data" role="form">
     @csrf
     <input type="hidden" name="_method" value="PATCH">
-        <div class="row mt-n2 mb-3">
+        <div class="row mt-n2 mb-3 mt-3 ">
             <div class="col-lg-8 col-12">
                 <div class="row">
                     <div class="col-lg-4 col-12">
@@ -29,7 +29,7 @@
                                         EN PROCESO.
                                     </p>
                                 @else
-                                    <p class="text-white mb-0">
+                                    <p class="text-white text-sm mb-0">
                                         COMPLETO Y LISTO PARA LA OPERACIÓN. SE COMPARTÍO AL EVALUADOR INDEPENDIENTE TODOS LOS ARCHIVOS NECESARIOS PARA LA OPERACIÓN
                                     </p>
                                 @endif
@@ -91,6 +91,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-4 col-12">
                 <div class="card">
 
@@ -122,7 +123,7 @@
             </div>
 
             <div class="col-8">
-                <div class="card">
+                <div class="card mt-2">
                     <div class="card-body p-3 pt-1 mt-2">
                         <h6 class="text-dark mb-3">Progreso de Videos</h6>
                         <div class="row">
@@ -150,8 +151,9 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-4">
-                <div class="card h-100">
+                <div class="card mt-2">
                     <div class="card-header pb-0 p-3">
                             <h6 class="mb-0">Información {{$expediente->Nota->tipo}}</h6>
                     </div>
@@ -188,8 +190,10 @@
                     </div>
                 </div>
             </div>
+
         </div>
 </form>
+
     <div class="row mt-3">
         <div class="col-12 " >
             <div class="card h-100" >

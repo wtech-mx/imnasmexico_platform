@@ -53,7 +53,7 @@ Expediente {{$expediente->id}}
         </div>
     </div>
 
-        <div class="tab-content" id="pills-tabContent">
+        <div class="tab-content " id="pills-tabContent" style="margin-top: 6rem">
             {{-- ==================== S E C C I O N  I N I C I O ==================== --}}
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                 @include('cam.admin.expedientes.secciones_ind.seccion_inicio')
@@ -66,7 +66,7 @@ Expediente {{$expediente->id}}
 
         </div>
 
-    </div>
+</div>
 
 @endsection
 
