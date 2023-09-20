@@ -335,9 +335,10 @@
 
                                     <td>{{$estandar_usuario->Estandar->estandar}}</td>
                                     <td>
-                                        Editar
+                                        <a data-bs-toggle="modal" data-bs-target="#exampleModalEstatus{{$estandar_usuario->id}}" class="btn btn-link pe-3 ps-0 mb-0 ms-auto">Editar</a>
                                     </td>
                                 </tr>
+                                @include('cam.admin.expedientes.modal_estatus')
                                 @endforeach
                             </table>
                         </div>

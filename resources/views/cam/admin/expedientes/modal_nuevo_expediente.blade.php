@@ -57,12 +57,12 @@
 
                             <div class="col-3">
                                 <div class="form-group">
-                                    <label for="name">Telefono</label>
+                                    <label for="name">Telefono Local</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" >@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055">@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +126,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/certificate.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="diplomas" name="diplomas[]" multiple type="file" class="form-control">
+                                        <input id="diplomas" name="diplomas[]" multiple type="file" class="form-control" >
                                     </div>
                                 </div>
                             </div>

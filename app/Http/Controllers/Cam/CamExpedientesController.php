@@ -79,6 +79,7 @@ class CamExpedientesController extends Controller
         $user->usuario_eva = $request->get('usuario_eva');
         $user->contrasena_eva = $request->get('contrasena_eva');
         $user->costo_emi = $request->get('costo_emi');
+        $user->nomb_centro = $request->get('nomb_centro');
 
         $user->update();
 
@@ -361,8 +362,10 @@ class CamExpedientesController extends Controller
         $video = CamVideosUser::where('id_nota', $mini_exp->id_nota)->first();
         $documentos = CamDocumentosUsers::where('id_nota', $mini_exp->id_nota)->firstOrFail();
         $minis_exps = CamMiniExp::where('id_nota', $expediente->id_nota)->get();
+        $minis_exp_nom = CamNombramiento::where('id_mini_exp', $mini_exp->id)->get();
+        $minis_exp_ced = CamCedulas::where('id_mini_exp', $mini_exp->id)->get();
 
-        return view('cam.admin.expedientes.mini_exp', compact('estandares_cam', 'expediente', 'mini_exp', 'video', 'documentos', 'mini_exp_diplomas', 'minis_exps'));
+        return view('cam.admin.expedientes.mini_exp', compact('minis_exp_nom','minis_exp_ced','estandares_cam', 'expediente', 'mini_exp', 'video', 'documentos', 'mini_exp_diplomas', 'minis_exps'));
     }
 
     public function crear_mini(Request $request){
@@ -487,6 +490,36 @@ class CamExpedientesController extends Controller
                 $nomb = new CamMiniExpDiplomas;
                 $nomb->diplomas = $fileName;
                 $nomb->id_mini = $mini->id;
+                $nomb->save();
+            }
+            $nomb->save();
+        }
+
+        if ($request->hasFile('nombramientos')) {
+            $foto = $request->file('nombramientos');
+            foreach ($foto as $archivo) {
+                $path = $ruta_recursos;
+                $fileName = uniqid() . $archivo->getClientOriginalName();
+                $archivo->move($path, $fileName);
+                $nomb = new CamNombramiento;
+                $nomb->nombre = $fileName;
+                $nomb->id_mini_exp = $mini->id;
+                $nomb->id_cliente = $mini->id_cliente;
+                $nomb->save();
+            }
+            $nomb->save();
+        }
+
+        if ($request->hasFile('cedulas')) {
+            $foto = $request->file('cedulas');
+            foreach ($foto as $archivo) {
+                $path = $ruta_recursos;
+                $fileName = uniqid() . $archivo->getClientOriginalName();
+                $archivo->move($path, $fileName);
+                $nomb = new CamCedulas;
+                $nomb->nombre = $fileName;
+                $nomb->id_mini_exp = $mini->id;
+                $nomb->id_cliente = $mini->id_cliente;
                 $nomb->save();
             }
             $nomb->save();

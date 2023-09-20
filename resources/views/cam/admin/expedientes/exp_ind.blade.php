@@ -8,6 +8,51 @@ Expediente {{$expediente->id}}
 
 <div class="container-fluid ">
 
+    <div class="card shadow-lg mb-5">
+        <div class="card-body p-3">
+        <div class="row gx-4">
+            <div class="col-2 my-auto">
+                <div class="avatar avatar-xl position-relative">
+                    @if ($documentos->logo == NULL)
+                        <img src="{{asset('assets/user/logotipos/sin-logo.jpg')}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                    @else
+                        <img src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->logo)}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                    @endif
+                </div>
+            </div>
+            <div class="col-4 my-auto">
+                <div class="">
+                    <p class="mb-1 ">
+                        <strong>Clave evaluador:</strong><br>
+                        {{ $expediente->Nota->Cliente->num_user }}
+                    </p>
+                    <h5 class="mb-0">
+                        {{$expediente->Nota->Cliente->name}}
+                    </h5>
+                    <p class="mb-0 font-weight-bold text-sm">
+                        {{$expediente->Nota->tipo}}
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 my-auto">
+                <div class="nav-wrapper position-relative end-0">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item mb-0 px-0 py-1 active d-flex align-items-center justify-content-center" role="presentation">
+                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Inicio</button>
+                        </li>
+                        <li class="nav-item mb-0 px-0 py-1 d-flex align-items-center justify-content-center" role="presentation">
+                        <button class="nav-link " id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Documentación</button>
+                        </li>
+                        {{-- <li class="nav-item mb-0 px-0 py-1 d-flex align-items-center justify-content-center" role="presentation">
+                        <button class="nav-link " id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Expedientes</button>
+                        </li> --}}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
     <form method="POST" action="{{ route('update_exp_user', $expediente->Nota->Cliente->id) }}" enctype="multipart/form-data" role="form">
         @csrf
         <input type="hidden" name="_method" value="PATCH">
@@ -23,7 +68,7 @@ Expediente {{$expediente->id}}
                                 <div class="full-background" style="background-image: url({{asset('assets/user/instalaciones/salon.jpg')}})"></div>
                                 <div class="card-body pt-4 text-center">
 
-                                    <p class="text-white mb-0"><strong>No SEP:</strong><br>
+                                    <p class="text-white mb-0"><strong>Clave evaluador:</strong><br>
                                         {{ $expediente->Nota->Cliente->num_user }}
                                     </p>
                                     <p class="text-white">
@@ -49,7 +94,7 @@ Expediente {{$expediente->id}}
 
                         <div class="col-lg-4 col-md-6 col-12 mt-4 mt-lg-0">
                             <div class="form-group">
-                                <label for="name"  class="text-white">No SEP</label>
+                                <label for="name" >Clave evaluador</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">
                                         <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
@@ -59,7 +104,7 @@ Expediente {{$expediente->id}}
                             </div>
 
                             <div class="form-group">
-                                <label for="name"  class="text-white">Usuario</label>
+                                <label for="name" >Usuario SII</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">
                                         <img src="{{ asset('assets\cam\nombre.png') }}" alt="" width="35px">
@@ -72,7 +117,7 @@ Expediente {{$expediente->id}}
                         <div class="col-lg-4 col-md-6 col-12 mt-4 mt-lg-0">
 
                             <div class="form-group">
-                                <label for="name"  class="text-white">Costo emisión</label>
+                                <label for="name" >Costo emisión</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">
                                         <img src="{{ asset('assets\user\icons\bolsa-de-dinero.png') }}" alt="" width="35px">
@@ -82,7 +127,7 @@ Expediente {{$expediente->id}}
                             </div>
 
                             <div class="form-group">
-                                <label for="name"  class="text-white">Contraseña</label>
+                                <label for="name" >Contraseña SII</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">
                                         <img src="{{ asset('assets\user\icons\password.png') }}" alt="" width="35px">
@@ -201,50 +246,6 @@ Expediente {{$expediente->id}}
             </div>
     </form>
 
-    <div class="card shadow-lg">
-        <div class="card-body p-3">
-        <div class="row gx-4">
-            <div class="col-2 my-auto">
-                <div class="avatar avatar-xl position-relative">
-                    @if ($documentos->logo == NULL)
-                        <img src="{{asset('assets/user/logotipos/sin-logo.jpg')}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-                    @else
-                        <img src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->logo)}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-                    @endif
-                </div>
-            </div>
-            <div class="col-4 my-auto">
-                <div class="">
-                    <p class="mb-1 ">
-                        <strong>No SEP:</strong><br>
-                        {{ $expediente->Nota->Cliente->num_user }}
-                    </p>
-                    <h5 class="mb-0">
-                        {{$expediente->Nota->Cliente->name}}
-                    </h5>
-                    <p class="mb-0 font-weight-bold text-sm">
-                        {{$expediente->Nota->tipo}}
-                    </p>
-                </div>
-            </div>
-            <div class="col-lg-6 col-md-6 my-auto">
-                <div class="nav-wrapper position-relative end-0">
-                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                        <li class="nav-item mb-0 px-0 py-1 active d-flex align-items-center justify-content-center" role="presentation">
-                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Inicio</button>
-                        </li>
-                        <li class="nav-item mb-0 px-0 py-1 d-flex align-items-center justify-content-center" role="presentation">
-                        <button class="nav-link " id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Documentación</button>
-                        </li>
-                        <li class="nav-item mb-0 px-0 py-1 d-flex align-items-center justify-content-center" role="presentation">
-                        <button class="nav-link " id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Expedientes</button>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
 
         <div class="tab-content" id="pills-tabContent">
             {{-- ==================== S E C C I O N  I N I C I O ==================== --}}
@@ -257,87 +258,6 @@ Expediente {{$expediente->id}}
                 @include('cam.admin.expedientes.secciones_ind.seccion_documentos')
             </div>
 
-            {{-- ==================== S E C C I O N  E X P E D I E N T E S ==================== --}}
-            <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                @include('cam.admin.expedientes.secciones_ind.seccion_expedientes')
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="col-12">
-                <div class="card mb-4">
-                <div class="card-header pb-0 p-3">
-                    <h6 class="mb-1">Expedientes Evaluadores</h6>
-                </div>
-                <div class="card-body p-3">
-                    <div class="row">
-                        @foreach ($minis_exps->take(3) as $mini_exp)
-                            <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
-                                <div class="card card-blog card-plain">
-                                <div class="position-relative">
-                                    <a class="d-block shadow-xl border-radius-xl">
-                                        @if ($documentos->logo == NULL)
-                                            <img src="{{asset('assets/user/logotipos/sin-logo.jpg')}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
-                                        @else
-                                            <img src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->logo)}}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
-                                        @endif
-                                    </a>
-                                </div>
-                                <div class="card-body px-1 pb-0">
-                                    <p class="text-gradient text-dark mb-2 text-sm">Expediente #{{ $loop->iteration }}</p>
-                                    <a href="javascript:;">
-                                    <h5>
-                                        {{ $mini_exp->nombre }} {{ $mini_exp->apellido }}
-                                    </h5>
-                                    </a>
-                                    <p class="mb-4 text-sm">
-                                        {{ $mini_exp->email }} <br> {{ $mini_exp->celular }}
-                                    </p>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                    <a type="button" class="btn btn-outline-primary btn-sm mb-0" href="{{ route('edit.mini_exp', $mini_exp->id) }}">Ver Expediente</a>
-                                    <div class="avatar-group mt-2">
-                                        @if ($mini_exp->acta != NULL)
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Acta de Nacimiento">
-                                                <img alt="Image placeholder" src="{{asset('assets/user/icons/cheque-de-pago.png')}}">
-                                            </a>
-                                        @endif
-                                        @if ($mini_exp->curp != NULL)
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="CURP">
-                                            <img alt="Image placeholder" src="{{asset('assets/user/icons/cedula.png')}}">
-                                            </a>
-                                        @endif
-                                        @if ($mini_exp->ine != NULL)
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="INE">
-                                            <img alt="Image placeholder" src="{{asset('assets/user/icons/flag.png')}}">
-                                            </a>
-                                        @endif
-                                        @if ($mini_exp->comprobante != NULL)
-                                            <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Comprobante de domicilio">
-                                            <img alt="Image placeholder" src="{{asset('assets/user/icons/location-pointer.png')}}">
-                                            </a>
-                                        @endif
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
-                            </div>
-                        @endforeach
-
-                        <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
-                            <div class="card h-100 card-plain border">
-                                <div class="card-body d-flex flex-column justify-content-center text-center">
-                                    <a data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                    <i class="fa fa-plus text-secondary mb-3"></i>
-                                    <h5 class=" text-secondary"> Nuevo Expediente </h5>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        @include('cam.admin.expedientes.modal_nuevo_expediente')
-                    </div>
-                </div>
-                </div>
-            </div>
         </div>
 
     </div>

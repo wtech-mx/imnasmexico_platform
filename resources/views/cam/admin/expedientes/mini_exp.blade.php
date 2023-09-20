@@ -169,7 +169,7 @@ Expediente
           <div class="card overflow-scroll">
             <div class="card-body d-flex">
               <div class="col-lg-1 col-md-2 col-sm-3 col-4 text-center">
-                <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="avatar avatar-lg border-1 rounded-circle bg-gradient-primary">
+                <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="avatar avatar-lg border-1 rounded-circle bg-gradient-info">
                   <i class="fas fa-plus text-white"></i>
                 </a>
                 <p class="mb-0 text-sm" style="margin-top:6px;">Agregar</p>
@@ -177,7 +177,7 @@ Expediente
               @include('cam.admin.expedientes.modal_nuevo_expediente')
                 @foreach ($minis_exps as $minis_exp)
                     <div class="col-lg-1 col-md-2 col-sm-3 col-4 text-center">
-                        <a href="{{ route('edit.mini_exp', $minis_exp->id) }}" class="avatar avatar-lg rounded-circle border border-primary">
+                        <a href="{{ route('edit.mini_exp', $minis_exp->id) }}" class="avatar avatar-lg rounded-circle border border-info">
                             @if ($documentos->acta == NULL)
                                 <img src="{{asset('assets/user/logotipos/sin-logo.jpg')}}" alt="Image placeholder" class="p-1">
                             @else
@@ -201,13 +201,29 @@ Expediente
                             <div class="card h-100">
                                 <div class="card-body p-3 pt-1 mt-2">
                                     <div class="bg-gray-100 border-radius-lg">
-                                        <a href="{{ route('expediente.edit', $mini_exp->id_nota) }}" class="btn btn-sm mt-2" style="background: #161616; color: #ffff;">Regresar</a>
+                                        <a href="{{ route('expediente.edit_centro', $mini_exp->id_nota) }}" class="btn btn-sm mt-2" style="background: #161616; color: #ffff;">Regresar</a>
                                     </div>
 
                                     <li class="list-group-item border-0 ps-0 pt-0 text-sm"><strong class="text-dark">Nombre:</strong> &nbsp; {{$mini_exp->nombre}} {{$mini_exp->apellido}}</li>
                                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Celular:</strong> &nbsp; {{$mini_exp->celular}}</li>
                                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Telefono:</strong> &nbsp; {{$mini_exp->telefono}}</li>
                                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Correo:</strong> &nbsp; {{$mini_exp->email}}</li>
+                                    <hr class="horizontal dark">
+                                    <div class="row">
+                                        <h5>Claves SII</h5>
+                                        <div class="col-3">
+                                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Usuario</p>
+                                            <input id="usuario" name="usuario" class="form-control" type="text" placeholder="usuario" value="{{ $mini_exp->usuario }}">
+                                        </div>
+                                        <div class="col-3">
+                                            <p class="text-sm mb-0 text-uppercase font-weight-bold">Contraseña</p>
+                                            <input id="password" name="password" class="form-control" type="text" placeholder="contraseña" value="{{ $mini_exp->password }}">
+                                        </div>
+                                        <div class="col-3">
+                                            <br>
+                                            <button type="submit" class="btn btn-sm" style="background: #6EC1E4; color: #ffff;">Guardar</button>
+                                        </div>
+                                    </div>
                                     <hr class="horizontal dark">
                                     <h5>Documentos</h5>
 
@@ -291,9 +307,10 @@ Expediente
                                                     @endif
                                                 </div>
 
-                                                <div class="col-6 mt-3">
-                                                    <label for="diplomas">Diplomas</label>
-                                                    <input id="diplomas" name="diplomas[]" type="file" class="form-control" value="">
+                                                <h5 class="mt-3">Diplomas</h5>
+                                                <div class="col-6">
+                                                    <label for="diplomas">Subir diplomas</label>
+                                                    <input id="diplomas" name="diplomas[]" type="file" class="form-control" value="" multiple>
                                                 </div>
 
                                                 <div class="col-6 mt-3">
@@ -316,7 +333,65 @@ Expediente
                                                         @endif
                                                     </div>
                                                 @endforeach
+
+                                                <h5 class="mt-3">Nombramientos</h5>
+
+                                                <div class="col-6">
+                                                    <label for="nombramientos">Subir nombramientos</label>
+                                                    <input id="nombramientos" name="nombramientos[]" type="file" class="form-control" value="" multiple>
+                                                </div>
+
+                                                <div class="col-6 mt-3">
+                                                </div>
+
+                                                @foreach ($minis_exp_nom as $mini_exp_nom)
+                                                    <div class="col-3 mt-3">
+                                                        @if ($mini_exp_nom->nombre != NULL)
+                                                            @if (pathinfo($mini_exp_nom->nombre, PATHINFO_EXTENSION) == 'pdf')
+                                                                <iframe class="mt-2" src="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$mini_exp_nom->nombre)}}" style="width: 60%; height: 60px;"></iframe>
+                                                                <p class="text-center ">
+                                                                    <a class="btn btn-sm text-dark" href="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$mini_exp_nom->nombre) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                                                </p>
+                                                            @else
+                                                                <p class="text-center mt-2">
+                                                                    <img id="blah" src="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$mini_exp_nom->nombre) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$mini_exp_nom->nombre) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
+                                                                </p>
+                                                            @endif
+                                                        @endif
+                                                    </div>
+                                                @endforeach
+
+                                                <h5 class="mt-3">Cedulas</h5>
+
+                                                <div class="col-6">
+                                                    <label for="cedulas">Subir cedulas</label>
+                                                    <input id="cedulas" name="cedulas[]" type="file" class="form-control" value="" multiple>
+                                                </div>
+
+                                                <div class="col-6 mt-3">
+                                                </div>
+
+                                                @foreach ($minis_exp_ced as $minis_exp_ced)
+                                                    <div class="col-3 mt-3">
+                                                        @if ($minis_exp_ced->nombre != NULL)
+                                                            @if (pathinfo($minis_exp_ced->nombre, PATHINFO_EXTENSION) == 'pdf')
+                                                                <iframe class="mt-2" src="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$minis_exp_ced->nombre)}}" style="width: 60%; height: 60px;"></iframe>
+                                                                <p class="text-center ">
+                                                                    <a class="btn btn-sm text-dark" href="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$minis_exp_ced->nombre) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                                                </p>
+                                                            @else
+                                                                <p class="text-center mt-2">
+                                                                    <img id="blah" src="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$minis_exp_ced->nombre) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$minis_exp_ced->nombre) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
+                                                                </p>
+                                                            @endif
+                                                        @endif
+                                                    </div>
+                                                @endforeach
                                             </div>
+
+
                                     </form>
                                 </div>
 

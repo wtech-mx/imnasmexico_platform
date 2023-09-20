@@ -155,6 +155,13 @@ Expediente {{$expediente->id}}
                                 </div>
                             </div>
 
+                            @if ($expediente->Nota->Cliente->nomb_centro == NULL)
+                                <div class="mt-3">
+                                    <p class="text-sm mb-0 text-uppercase font-weight-bold">Nombre centro</p>
+                                    <input id="nomb_centro" name="nomb_centro" class="form-control" type="text" placeholder="numero usuario" value="{{ $expediente->Nota->Cliente->nomb_centro }}">
+                                </div>
+                            @endif
+
                             <div class="d-flex bg-gray-100 border-radius-lg p-3">
                                 <button type="submit" class="btn btn-sm mt-2" style="background: #6EC1E4; color: #ffff;">Guardar</button>
                             </div>
@@ -179,9 +186,11 @@ Expediente {{$expediente->id}}
             <div class="col-auto my-auto">
             <div class="">
                 <h3 class="mb-1">{{ $expediente->Nota->Cliente->num_user }}</h3>
-                <h5 class="mb-0">
-                    {{$expediente->Nota->Cliente->name}}
-                </h5>
+                @if ($expediente->Nota->Cliente->nomb_centro == NULL)
+                    <h5 class="mb-0">{{ $expediente->Nota->Cliente->num_user }}</h5>
+                @else
+                    <h5 class="mb-0">{{ $expediente->Nota->Cliente->nomb_centro }}</h5>
+                @endif
                 <p class="mb-0 font-weight-bold text-sm">
                     {{$expediente->Nota->tipo}}
                 </p>

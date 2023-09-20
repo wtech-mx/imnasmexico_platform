@@ -253,21 +253,9 @@
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('cedula', {{ $expediente->Nota->id }})">
-                                <img src="{{asset('assets/user/icons/cedula.png')}}" class="img-fluid" style="width: 40%;">
-                                <label for="">5. Cedulas De Acreditación</label>
-                            </button>
-                        </div>
-                        <div class="col-4">
                             <button class="btn btn-sm" id="btnArchivos3" onclick="mostrarArchivos('4')">
                                 <img src="{{asset('assets/user/icons/book.png')}}" class="img-fluid" style="width: 40%;">
-                                <label for="">6. Formatos Resolucion De Quejas</label>
-                            </button>
-                        </div>
-                        <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('nombramiento', {{ $expediente->Nota->id }})">
-                                <img src="{{asset('assets/user/icons/certificate.png')}}" class="img-fluid" style="width: 40%;">
-                                <label >7. Nombramiento</label>
+                                <label for="">5. Formatos Resolucion De Quejas</label>
                             </button>
                         </div>
                         <div class="col-4">
