@@ -24,12 +24,14 @@
                             <select name="area" id="area" class="form-select">
                                 <option value="Material">Material</option>
                                 <option value="Literatura">Literatura</option>
+                                <option value="Carta compromiso">Carta compromiso</option>
                             </select>
                     </div>
 
                     <div class="form-group col-6">
                         <label for="">Sub Area: </label>
-                            <select name="area" id="area" class="form-select">
+                            <select name="sub_area" id="sub_area" class="form-select">
+                                <option value="">Seleccionar opcion</option>
                                 <option value="corporal">corporal</option>
                                 <option value="facial">facial</option>
                             </select>

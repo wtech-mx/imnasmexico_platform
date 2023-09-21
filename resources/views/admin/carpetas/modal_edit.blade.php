@@ -26,10 +26,11 @@
 
                         <div class="form-group col-6">
                             <label for="">Area</label>
-                                <select name="area" id="area" class="form-select">
+                                <select name="area" id="area" class="form-select" required>
                                     <option value="">selecciona una opcion</option>
                                     <option value="Material">Material</option>
                                     <option value="Literatura">Literatura</option>
+                                    <option value="Carta compromiso">Carta compromiso</option>
                                 </select>
                         </div>
 
