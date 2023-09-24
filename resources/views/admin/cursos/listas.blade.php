@@ -66,14 +66,15 @@
                                                     <th>Telefono</th>
                                                     <th>Metodo de Pago</th>
                                                     <th>Cantidad</th>
-                                                    {{-- <th>Deudor</th> --}}
+                                                    <th>Deudor</th>
                                                     <th>Nota</th>
                                                     <th>Acciones</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($ordenes as $order)
-                                                    @if ($order->id_tickets == $ticket->id && $order->Orders->estatus == '1')
+                                                    @if ($order->id_tickets == $ticket->id && $order->Orders->estatus == '1' ||
+                                                    ($order->Cursos->modalidad == 'Presencial' && $order->Orders->PagosFuera->deudor == '1'))
                                                         <tr>
                                                             <td>{{ $order->Orders->id }}</td>
                                                             <td>
@@ -85,17 +86,18 @@
                                                             <td>
                                                                     {{ $order->Orders->pago }}
                                                             </td>
-                                                            {{-- <td>
+                                                            <td>
                                                                 @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
                                                                     @else
-
-                                                                    @if ($order->Orders->PagosFuera->deudor == '1')
-                                                                    <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled checked>
-                                                                    @else
-                                                                        <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled>
+                                                                    @if ($order->Cursos->modalidad == 'Presencial')
+                                                                        @if ($order->Orders->PagosFuera->deudor == '1')
+                                                                            <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled checked>
+                                                                        @else
+                                                                            <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled>
+                                                                        @endif
                                                                     @endif
                                                                 @endif
-                                                            </td> --}}
+                                                            </td>
                                                             <td>
                                                                 @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
                                                                     @else
