@@ -73,51 +73,89 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($ordenes as $order)
-                                                    @if ($order->id_tickets == $ticket->id && $order->Orders->estatus == '1' ||
-                                                    ($order->Cursos->modalidad == 'Presencial' && $order->Orders->PagosFuera->deudor == '1'))
-                                                        <tr>
-                                                            <td>{{ $order->Orders->id }}</td>
-                                                            <td>
-                                                                <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a>
-                                                            </td>
-                                                            <td>{{ $order->User->email }}</td>
-                                                            <td>{{ $order->User->telefono }}</td>
-                                                            <td>{{ $order->Orders->forma_pago }}</td>
-                                                            <td>
-                                                                    {{ $order->Orders->pago }}
-                                                            </td>
-                                                            <td>
-                                                                @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
-                                                                    @else
-                                                                    @if ($order->Cursos->modalidad == 'Presencial')
-                                                                        @if ($order->Orders->PagosFuera->deudor == '1')
-                                                                            <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled checked>
+                                                        @if ($order->id_tickets == $ticket->id && $order->Orders->estatus == '1')
+                                                            <tr>
+                                                                <td>{{ $order->Orders->id }}</td>
+                                                                <td>
+                                                                    <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a>
+                                                                </td>
+                                                                <td>{{ $order->User->email }}</td>
+                                                                <td>{{ $order->User->telefono }}</td>
+                                                                <td>{{ $order->Orders->forma_pago }}</td>
+                                                                <td>
+                                                                        {{ $order->Orders->pago }}
+                                                                </td>
+                                                                <td>
+
+                                                                </td>
+                                                                <td>
+                                                                    @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
                                                                         @else
-                                                                            <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled>
+
+                                                                    {{$order->Orders->id_externo }}
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+                                                                    <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form" style="display: inline-block">
+                                                                        @csrf
+                                                                        <input type="hidden" name="email" id="email" value="{{ $order->User->email }}">
+                                                                        <input type="hidden" name="ticket" id="ticket" value="{{ $order->id_tickets }}">
+                                                                        <input type="hidden" name="id_usuario" id="id_usuario" value="{{ $order->id_usuario }}">
+                                                                        <input type="hidden" name="curso" id="curso" value="{{ $order->id_curso }}">
+                                                                        <button type="submit" class="btn btn-sm btn-primary" title="Enviar liga"><i class="fas fa-envelope"></i></button>
+                                                                    </form>
+
+                                                                    <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$order->Orders->id) }}"><i class="fa fa-money" title="Ver Orden"></i> </a>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+
+                                                    @if ($order->Orders->PagosFuera != NULL)
+                                                        @if ($order->id_tickets == $ticket->id && ($order->Cursos->modalidad == 'Presencial' && $order->Orders->PagosFuera->deudor == '1'))
+                                                            <tr>
+                                                                <td>{{ $order->Orders->id }}</td>
+                                                                <td>
+                                                                    <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a>
+                                                                </td>
+                                                                <td>{{ $order->User->email }}</td>
+                                                                <td>{{ $order->User->telefono }}</td>
+                                                                <td>{{ $order->Orders->forma_pago }}</td>
+                                                                <td>
+                                                                        {{ $order->Orders->pago }}
+                                                                </td>
+                                                                <td>
+                                                                    @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
+                                                                        @else
+                                                                        @if ($order->Cursos->modalidad == 'Presencial')
+                                                                            @if ($order->Orders->PagosFuera->deudor == '1')
+                                                                                <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled checked>
+                                                                            @else
+                                                                                <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled>
+                                                                            @endif
                                                                         @endif
                                                                     @endif
-                                                                @endif
-                                                            </td>
-                                                            <td>
-                                                                @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
-                                                                    @else
+                                                                </td>
+                                                                <td>
+                                                                    @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
+                                                                        @else
 
-                                                                   {{$order->Orders->id_externo }}
-                                                                @endif
-                                                            </td>
-                                                            <td>
-                                                                <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form" style="display: inline-block">
-                                                                    @csrf
-                                                                    <input type="hidden" name="email" id="email" value="{{ $order->User->email }}">
-                                                                    <input type="hidden" name="ticket" id="ticket" value="{{ $order->id_tickets }}">
-                                                                    <input type="hidden" name="id_usuario" id="id_usuario" value="{{ $order->id_usuario }}">
-                                                                    <input type="hidden" name="curso" id="curso" value="{{ $order->id_curso }}">
-                                                                    <button type="submit" class="btn btn-sm btn-primary" title="Enviar liga"><i class="fas fa-envelope"></i></button>
-                                                                </form>
+                                                                    {{$order->Orders->id_externo }}
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+                                                                    <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form" style="display: inline-block">
+                                                                        @csrf
+                                                                        <input type="hidden" name="email" id="email" value="{{ $order->User->email }}">
+                                                                        <input type="hidden" name="ticket" id="ticket" value="{{ $order->id_tickets }}">
+                                                                        <input type="hidden" name="id_usuario" id="id_usuario" value="{{ $order->id_usuario }}">
+                                                                        <input type="hidden" name="curso" id="curso" value="{{ $order->id_curso }}">
+                                                                        <button type="submit" class="btn btn-sm btn-primary" title="Enviar liga"><i class="fas fa-envelope"></i></button>
+                                                                    </form>
 
-                                                                <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$order->Orders->id) }}"><i class="fa fa-money" title="Ver Orden"></i> </a>
-                                                            </td>
-                                                        </tr>
+                                                                    <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$order->Orders->id) }}"><i class="fa fa-money" title="Ver Orden"></i> </a>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
                                                     @endif
                                                 @endforeach
                                             </tbody>
