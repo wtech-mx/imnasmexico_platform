@@ -34,7 +34,7 @@ class CamClientesController extends Controller
             $camvideos = CamVideos::where('tipo', '=', 'Centro Evaluador')->get();
         }
 
-        return view('cam.videos.evaluador', compact('video','camvideos'));
+        return view('cam.usuario.videos', compact('video','camvideos','usuario'));
     }
 
     public function videosce($code){

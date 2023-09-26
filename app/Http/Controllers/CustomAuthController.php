@@ -30,11 +30,11 @@ class CustomAuthController extends Controller
 
             if(Auth::user()->cliente == '2' or  Auth::user()->cliente == '5'){
                 return redirect('/profesor/inicio');
-            }elseif(Auth::user()->cliente == '3'){
+
+            }elseif(Auth::user()->cliente == '4' or Auth::user()->cliente == '3'){
                 $code = Auth::user()->code;
-                return redirect()->route('evaluador.index', ['code' => $code]);
-            }elseif(Auth::user()->cliente == '4'){
-                return redirect("cam/centro")->withSuccess('Sesión iniciada');
+                return redirect()->route('cam.index', ['code' => $code])->withSuccess('Sesión iniciada');
+
             }else{
                 return redirect("calendario")->withSuccess('Sesión iniciada');
             }
@@ -43,7 +43,6 @@ class CustomAuthController extends Controller
             return redirect()->back()
             ->with('warning', 'Telefono incorrecto.');;
         }
-
 
     }
 

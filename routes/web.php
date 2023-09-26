@@ -355,10 +355,6 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         return view('cam.auth.login');
     });
 
-    Route::get('evaluador/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'index'])->name('evaluador.index');
-    Route::get('evaluador/videos/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'videos'])->name('evaluador.videos');
-    Route::get('centro/videos/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'videosce'])->name('centro.videos');
-
     Route::patch('evaluador/videos/edit/{id}', [App\Http\Controllers\Cam\CamClientesController::class, 'update_videos'])->name('evaluador.update_videos');
 
     // =============== M O D U L O   E X P E D I E N T E S ( C A R P E T A S)===============================
@@ -368,10 +364,6 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
     Route::post('/evaluador/expediente/crear/cedulas', [App\Http\Controllers\Cam\CamClientesController::class, 'crear_cedulas'])->name('evaluador.crear.cedulas');
 
 
-    Route::get('centro', function () {
-        return view('cam.usuario.centro');
-    })->name('centro');
-
     Route::middleware(['auth'])->group(function () {
         // =============== M O D U L O   E X P E D I E N T E S  I N D E===============================
         Route::get('/expedientes/independiente', [CamExpedientesController::class, 'index_ind'])->name('independiente.index');
@@ -379,6 +371,11 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::get('/expediente/edit/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'edit'])->name('expediente.edit');
 
         Route::patch('/expediente/estandar/estatus/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_estatus'])->name('expediente.estatus');
+
+        // =============== M O D U L O  dashboards===============================
+        Route::get('dashboard/{code}', [App\Http\Controllers\Cam\CamDashboardController::class, 'index'])->name('cam.index');
+        Route::get('videos/{code}', [App\Http\Controllers\Cam\CamClientesController::class, 'videos'])->name('dashboard.videos');
+
 
         // =============== M O D U L O   E X P E D I E N T E S  C E N T R O===============================
         Route::get('/expedientes/centro', [CamExpedientesController::class, 'index_centro'])->name('centro.index');
