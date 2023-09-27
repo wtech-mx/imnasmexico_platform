@@ -3,7 +3,7 @@
         <div class="col-12 col-md-6 ">
             <div class="card h-100">
                 <div class="card-header pb-0 p-3">
-                        <h6 class="mb-0">Carpetas</h6>
+                        <h4 class="mb-0">Carpetas</h4>
                 </div>
                 <div class="card-body p-2">
                     <div class="row">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('3')">
-                                <img src="{{asset('assets/user/icons/illustrator.png')}}" class="img-fluid" style="width: 40%;">
+                                <img src="{{asset('assets/user/logotipos/sepconocer.png')}}" class="img-fluid" style="width: 65%;">
                                 <p class="text-sm"><br>4. Logo Conocer Evaluador Independiente</p>
                             </button>
                         </div>
@@ -59,7 +59,7 @@
                 <div class="card-header pb-0 p-3">
                     <div class="row">
                         <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0">Documentos</h6>
+                            <h4 class="mb-0">Documentos en carpetas</h4>
                             <div class="col-md-4 text-end">
                                 <a href="javascript:;">
                                 <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar"></i>
@@ -104,7 +104,7 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-8">
-                                    <h6 class="mb-0">Documentos</h6>
+                                    <h4 class="mb-0">Documentos</h4>
                                 </div>
                                 <div class="col-4">
                                     <button type="submit" class="btn btn-sm" style="background: #6EC1E4; color: #ffff;">Guardar</button>
@@ -114,7 +114,7 @@
                         <div class="card-body p-3">
                             <div class="row">
 
-                                <label class="" for="contrato_general">Contrato general</label>
+                                <h6 class="" for="contrato_general">Contrato general</h6>
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
@@ -141,7 +141,7 @@
                                     @endif
                                 </div>
 
-                                <label class="" for="solicitud_acreditacion">Solicitud acreditacion </label>
+                                <h6 class="" for="solicitud_acreditacion">Solicitud acreditacion </h6>
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
@@ -168,7 +168,7 @@
                                     @endif
                                 </div>
 
-                                <label class="" for="carta_compromiso">Carta compromiso</label>
+                                <h6 class="" for="carta_compromiso">Carta compromiso</h6>
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
@@ -195,7 +195,7 @@
                                     @endif
                                 </div>
 
-                                <label class="" for="ine">INE</label>
+                                <h6 class="" for="ine">INE</h6>
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
@@ -222,7 +222,7 @@
                                     @endif
                                 </div>
 
-                                <label class="" for="curp">CURP</label>
+                                <h6 class="" for="curp">CURP</h6>
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
@@ -249,7 +249,7 @@
                                     @endif
                                 </div>
 
-                                <label class="" for="foto">Foto </label>
+                                <h6 class="" for="foto">Foto </h6>
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
@@ -276,7 +276,7 @@
                                     @endif
                                 </div>
 
-                                <label class="" for="acuerdo_confidencialidad">Comprobante Domicilio </label>
+                                <h6 class="" for="acuerdo_confidencialidad">Comprobante Domicilio </h6>
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
@@ -303,7 +303,7 @@
                                     @endif
                                 </div>
 
-                                <label class="" for="logo">Logo evaluador independiente</label>
+                                <h6 class="" for="logo">Logo evaluador independiente</h6>
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
@@ -330,7 +330,7 @@
                                     @endif
                                 </div>
 
-                                <label class="" for="carta_responsabilidad">Carta responsabilidad logo</label>
+                                <h6 class="" for="carta_responsabilidad">Carta responsabilidad logo</h6>
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
@@ -357,7 +357,7 @@
                                     @endif
                                 </div>
 
-                                <label class="" for="acta_nacimiento">Acta nacimiento</label>
+                                <h6 class="" for="acta_nacimiento">Acta nacimiento</h6>
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
@@ -384,7 +384,7 @@
                                     @endif
                                 </div>
 
-                                <label class="" for="curriculum">Curriculum </label>
+                                <h6 class="" for="curriculum">Curriculum </h6>
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
@@ -411,7 +411,7 @@
                                     @endif
                                 </div>
 
-                                <label class="" for="acuerdo_confidencialidad">Acuerdo confidencialidad </label>
+                                <h6 class="" for="acuerdo_confidencialidad">Acuerdo confidencialidad </h6>
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
@@ -438,7 +438,7 @@
                                 @endif
                             </div>
 
-                            <label class="" for="acuerdo_confidencialidad">Contrato individual </label>
+                            <h6 class="" for="acuerdo_confidencialidad">Contrato individual </h6>
                             <div class="col-6">
                                 <div class="input-group mb-4">
                                     <span class="input-group-text" id="basic-addon1">
@@ -466,7 +466,7 @@
                             </div>
 
 
-                            <label class="" for="acuerdo_confidencialidad">Nombramiento</label>
+                            <h6 class="" for="acuerdo_confidencialidad">Nombramiento</h6>
                             <div class="col-6">
                                 <div class="input-group mb-4">
                                     <span class="input-group-text" id="basic-addon1">

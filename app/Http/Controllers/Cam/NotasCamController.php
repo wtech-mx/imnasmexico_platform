@@ -131,7 +131,7 @@ class NotasCamController extends Controller
             $data = array(
                 'id_nota' => $notas_cam->id,
                 'id_estandar' => $estandares[$count],
-                'estatus' => 'Pendiente',
+                'estatus' => 'Sin estatus',
                 'id_usuario' => auth()->user()->id,
             );
             $insert_data[] = $data;

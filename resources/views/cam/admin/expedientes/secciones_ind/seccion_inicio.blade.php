@@ -49,7 +49,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="name" >Usuario SII</label>
+                            <label for="name" >Usuario módulo de evaluación</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets\cam\nombre.png') }}" alt="" width="35px">
@@ -72,7 +72,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="name" >Contraseña SII</label>
+                            <label for="name" >Contraseña módulo de evaluación</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets\user\icons\password.png') }}" alt="" width="35px">
@@ -113,10 +113,44 @@
                                 $fecha_hora_formateada = $fecha_formateada;
                                 // Combinar nueva fecha y hora (con un año adicional)
                                 $fecha_hora_fin = $nueva_fecha_formateada;
+
+                                // Obtén el mes y el año de la cadena original
+                                $parts = explode(" ", $fecha_hora_fin);
+                                $dia = (int)$parts[0];
+                                $mes = $parts[2];
+                                $ano = (int)$parts[4];
+
+                                // Asocia nombres de meses a números de mes
+                                $meses = [
+                                    'January' => 1,
+                                    'February' => 2,
+                                    'March' => 3,
+                                    'April' => 4,
+                                    'May' => 5,
+                                    'June' => 6,
+                                    'July' => 7,
+                                    'August' => 8,
+                                    'September' => 9,
+                                    'October' => 10,
+                                    'November' => 11,
+                                    'December' => 12
+                                ];
+
+                                // Convierte el nombre del mes a su número correspondiente
+                                $mes_numero = $meses[$mes];
+
+                                // Formatea la fecha en el formato deseado (Año-Mes-Día)
+                                $fecha_formateada = sprintf("%04d-%02d-%02d", $ano, $mes_numero, $dia);
+
+                                // Calcula la diferencia de días con la fecha actual
+                                $hoy = date("Y-m-d");
+                                $diferencia_dias = (strtotime($fecha_formateada) - strtotime($hoy)) / (60 * 60 * 24);
                             @endphp
                         <p class="text-sm">{{ $fecha_hora_formateada}}</p>
                         <h6 class="text-danger">Fin de Operaciones</h6>
                         <p class="text-sm">{{ $fecha_hora_fin}}</p>
+                        <h6 class="text-primary mb-0">Dias restantes</h6>
+                        <h4 class="font-weight-bolder"><span class="small"></span><span id="state1" countTo="{{$diferencia_dias}}"></span></h4>
 
                     </div>
                 </div>
@@ -125,7 +159,7 @@
             <div class="col-8">
                 <div class="card mt-2">
                     <div class="card-body p-3 pt-1 mt-2">
-                        <h6 class="text-dark mb-3">Progreso de Videos</h6>
+                        <h6 class="text-dark mb-3">Progreso de videos vistos por el evaluador</h6>
                         <div class="row">
                             @foreach ($videos_dinamicos as $item)
                                 <div class="col-3">
@@ -136,7 +170,7 @@
                                         <img src="{{ asset('assets\cam\loading.png') }}" alt="" width="35">
                                     </p>
                                     @else
-                                    <p class="text-sm text-center">Aun no has visto el video anterior</p>
+                                    <p class="text-sm text-center">{{ $item->orden }}- {{ $item->nombre }}</p>
                                     @endif
                                 </div>
                             @endforeach
@@ -219,8 +253,6 @@
                                     <div class="form-check form-switch ps-0">
                                         @if ($expediente->check1 == '1')
                                             <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1" checked>
-                                            <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
-                                                {{$expediente->UserEC->name}}</label>
                                         @else
                                             <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1">
                                         @endif
@@ -234,8 +266,6 @@
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check2 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check2" name="check2" value="1" checked>
-                                        <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
-                                            {{$expediente->UserFin->name}}</label>
                                     @else
                                         <input class="form-check-input ms-0" type="checkbox" id="check2" name="check2" value="1">
                                     @endif
@@ -249,13 +279,11 @@
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check3 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1" checked>
-                                        <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
-                                            {{$expediente->UserCon->name}}</label>
                                     @else
                                         <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1">
                                     @endif
                                     <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
-                                        <strong>3.- Refuerzo de transferencia de conocimiento y operatividad</strong></label>
+                                        <strong>3.- Refuerzo de transferencia de <br> conocimiento y operatividad</strong></label>
                                     </div>
                                     <input id="refuerzo_conocimiento" name="refuerzo_conocimiento" value="{{$expediente->refuerzo_conocimiento}}" type="date" class="form-control">
                                 </div>
@@ -264,8 +292,6 @@
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check4 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check4" name="check4" value="1" checked>
-                                        <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
-                                            {{$expediente->UserFor->name}}</label>
                                     @else
                                         <input class="form-check-input ms-0" type="checkbox" id="check4" name="check4" value="1">
                                     @endif
@@ -279,8 +305,6 @@
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check5 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check5" name="check5" value="1" checked>
-                                        <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
-                                            {{$expediente->UserEm->name}}</label>
                                     @else
                                         <input class="form-check-input ms-0" type="checkbox" id="check5" name="check5" value="1">
                                     @endif
@@ -294,8 +318,6 @@
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check6 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check6" name="check6" value="1" checked>
-                                        <label class="form-check-label text-body ms-3 text-truncate w-30 mb-0">
-                                            {{$expediente->UserCar->name}}</label>
                                     @else
                                         <input class="form-check-input ms-0" type="checkbox" id="check6" name="check6" value="1">
                                     @endif
@@ -319,14 +341,12 @@
 
                                 @if ($check->c1 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c1" name="c1" value="1" checked>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                        {{$check->User1->name}}</label>
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c1" name="c1" value="1">
                                 @endif
 
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    1.- NOMBRAMIENTO DEL EVALUADOR INDEPENDIENTE POR PARTE DE LA ENTIDAD DE
+                                    1.- NOMBRAMIENTO DEL EVALUADOR INDEPENDIENTE POR PARTE DE LA ENTIDAD DE <br>
                                     CERTIFICACIÓN Y EVALUACIÓN JUNTO CON DECÁLOGO DEL EVALUADOR DE COMPETENCIA.</label>
                                 </div>
                             </li>
@@ -335,14 +355,12 @@
 
                                 @if ($check->c2 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c2" name="c2" value="1" checked>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                        {{$check->User2->name}}</label>
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c2" name="c2" value="1">
                                 @endif
 
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    2.- ACUERDO DE CONFIENCIALIDAD ENTRE LA ENTIDAD DE CERTIFICACIÓN Y EVALUACIÓN Y EL
+                                    2.- ACUERDO DE CONFIENCIALIDAD ENTRE LA ENTIDAD DE CERTIFICACIÓN Y EVALUACIÓN Y EL <br>
                                     EVALUADOR INDEPENDIENTE.</label>
                                 </div>
                             </li>
@@ -351,8 +369,6 @@
 
                                 @if ($check->c3 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c3" name="c3" value="1" checked>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                        {{$check->User3->name}}</label>
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c3" name="c3" value="1">
                                 @endif
@@ -366,8 +382,6 @@
 
                                 @if ($check->c4 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c4" name="c4" value="1" checked>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                        {{$check->User4->name}}</label>
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c4" name="c4" value="1">
                                 @endif
@@ -380,13 +394,11 @@
                                 <div class="form-check form-switch ps-0">
                                 @if ($check->c5 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c5" name="c5" value="1" checked>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                        {{$check->User5->name}}</label>
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c5" name="c5" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    5.- CONTRATO INDIVIDUAL DE TRABAJO DEL EVALUADOR CON ANEXO DE ARTICULOS 64, 65 Y 66.
+                                    5.- CONTRATO INDIVIDUAL DE TRABAJO DEL EVALUADOR CON ANEXO DE ARTICULOS 64, 65 Y 66. <br>
                                     ENTRE LA ENTIDAD DE CERTIFICACIÓN Y EVALUACIÓN Y EL EVALUADOR INDEPENDIENTE</label>
                                 </div>
                             </li>
@@ -409,8 +421,6 @@
                                 <div class="form-check form-switch ps-0">
                                 @if ($check->c7 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c7" name="c7" value="1" checked>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                        {{$check->User7->name}}</label>
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c7" name="c7" value="1">
                                 @endif
@@ -422,8 +432,6 @@
                                 <div class="form-check form-switch ps-0">
                                 @if ($check->c8 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c8" name="c8" value="1" checked>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                        {{$check->User8->name}}</label>
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c8" name="c8" value="1">
                                 @endif
@@ -435,8 +443,6 @@
                                 <div class="form-check form-switch ps-0">
                                 @if ($check->c9 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c9" name="c9" value="1" checked>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                        {{$check->User9->name}}</label>
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c9" name="c9" value="1">
                                 @endif
@@ -448,8 +454,6 @@
                                 <div class="form-check form-switch ps-0">
                                 @if ($check->c10 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c10" name="c10" value="1" checked>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                        {{$check->User10->name}}</label>
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c10" name="c10" value="1">
                                 @endif
@@ -462,8 +466,6 @@
                                 <div class="form-check form-switch ps-0">
                                 @if ($check->c11 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c11" name="c11" value="1" checked>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                        {{$check->User11->name}}</label>
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c11" name="c11" value="1">
                                 @endif
@@ -475,13 +477,11 @@
                                 <div class="form-check form-switch ps-0">
                                 @if ($check->c12 == '1')
                                     <input class="form-check-input ms-0" type="checkbox" id="c12" name="c12" value="1" checked>
-                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                        {{$check->User12->name}}</label>
                                 @else
                                     <input class="form-check-input ms-0" type="checkbox" id="c12" name="c12" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    12.- ACREDITACIONES DE LOS ESTÁNDARES POR PARTE DE LA ENTIDAD DE CERTIFICACIÓN Y
+                                    12.- ACREDITACIONES DE LOS ESTÁNDARES POR PARTE DE <br> LA ENTIDAD DE CERTIFICACIÓN Y
                                     EVALUACIÓN</label>
                                 </div>
                             </li>
@@ -519,12 +519,16 @@
                                 @foreach ($estandares_usuario as $estandar_usuario)
                                 <tr>
                                     <td>
-                                        @if ($estandar_usuario->estatus == 'Pendiente')
-                                        <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #c05b21;">Pendiente</p>
-                                        @elseif($estandar_usuario->estatus == 'Rechazado')
-                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #aa2222;">Rechazado</p>
-                                        @else
-                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #63ac28;">Aprovado</p>
+                                        @if ($estandar_usuario->estatus == 'Programado')
+                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #05cdff;">Programado</p>
+                                        @elseif($estandar_usuario->estatus == 'Evaluado')
+                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #fbff05;">Evaluado</p>
+                                        @elseif($estandar_usuario->estatus == 'En proceso')
+                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #c05b21;">En proceso</p>
+                                        @elseif($estandar_usuario->estatus == 'Entregado')
+                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #63ac28;">Entregado</p>
+                                        @elseif($estandar_usuario->estatus == 'Sin estatus')
+                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #161616;">Sin estatus</p>
                                         @endif
                                     </td>
 

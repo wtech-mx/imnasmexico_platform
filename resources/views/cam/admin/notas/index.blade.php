@@ -104,11 +104,14 @@ Notas CAM
 <script>
     document.getElementById('tipo').addEventListener('change', function() {
         var membresiaContainer = document.getElementById('membresiaContainer');
+        var razonContainer = document.getElementById('razonContainer');
 
         if (this.value === 'Centro Evaluación') {
             membresiaContainer.style.display = 'block';
+            razonContainer.style.display = 'block';
         } else {
             membresiaContainer.style.display = 'none';
+            razonContainer.style.display = 'none';
         }
     });
 </script>

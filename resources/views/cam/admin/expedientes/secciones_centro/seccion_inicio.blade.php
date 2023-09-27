@@ -825,12 +825,16 @@
                                 @foreach ($estandares_usuario as $estandar_usuario)
                                 <tr>
                                     <td>
-                                        @if ($estandar_usuario->estatus == 'Pendiente')
-                                        <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #c05b21;">Pendiente</p>
-                                        @elseif($estandar_usuario->estatus == 'Rechazado')
-                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #aa2222;">Rechazado</p>
-                                        @else
-                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #63ac28;">Aprovado</p>
+                                        @if ($estandar_usuario->estatus == 'Programado')
+                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #05cdff;">Programado</p>
+                                        @elseif($estandar_usuario->estatus == 'Evaluado')
+                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #fbff05;">Evaluado</p>
+                                        @elseif($estandar_usuario->estatus == 'En proceso')
+                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #c05b21;">En proceso</p>
+                                        @elseif($estandar_usuario->estatus == 'Entregado')
+                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #63ac28;">Entregado</p>
+                                        @elseif($estandar_usuario->estatus == 'Sin estatus')
+                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #161616;">Sin estatus</p>
                                         @endif
                                     </td>
 

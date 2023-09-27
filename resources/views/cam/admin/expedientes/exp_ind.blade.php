@@ -72,7 +72,18 @@ Expediente {{$expediente->id}}
 
 @section('datatable')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('assets/admin/js/plugins/countup.min.js') }}"></script>
+
 <script>
+
+    if (document.getElementById('state1')) {
+      const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
+      if (!countUp.error) {
+        countUp.start();
+      } else {
+        console.error(countUp.error);
+      }
+    }
 
     function mostrarArchivos(categoria, expedienteId) {
         // Oculta el formulario y vacía el contenedor de archivos

@@ -14,6 +14,48 @@
                 @csrf
                     <div class="modal-body">
                         <div class="row">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Fecha *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="fecha" name="fecha" type="text" class="form-control" value="{{$fecha}}">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Tipo *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
+                                        </span>
+                                        <select name="tipo" id="tipo" class="form-select d-inline-block">
+                                            <option value="Evaluador Independiente">Evaluador Independiente</option>
+                                            <option value="Centro Evaluación">Centro Evaluación</option>
+                                            <option value="Externo">Externo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-4" id="membresiaContainer" style="display: none;">
+                                <div class="form-group">
+                                    <label for="name">Membresía *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/membership.png') }}" alt="" width="35px">
+                                        </span>
+                                        <select name="membresia" id="membresia" class="form-select d-inline-block">
+                                            <option value="Gold">Gold</option>
+                                            <option value="Diamante">Diamante</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="col-12">
                                 <h5>Datos personales</h5>
@@ -43,7 +85,44 @@
                                 </div>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Celular (WhatasApp) *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/whatsapp.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required>@error('celular') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Celular (celular) *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/foldable-phone.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Telefono (Local) *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
                                 <div class="form-group">
                                     <label for="name">Correo *</label>
                                     <div class="input-group mb-3">
@@ -55,33 +134,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="name">Celular (WhatasApp) *</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/foldable-phone.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required>@error('celular') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="name">Telefono (Local)</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-6">
+                            <div class="col-4">
                                 <div class="form-group">
                                     <label for="name">CURP</label>
                                     <div class="input-group mb-3">
@@ -89,6 +142,83 @@
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="curp" name="curp" type="text" class="form-control" >
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-4" id="razonContainer" style="display: none;">
+                                <div class="form-group">
+                                    <label for="name">Razon Social</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/firma-digital.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="curp" name="curp" type="text" class="form-control" >
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-12">
+                                <h5>Datos de Direccion</h5>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Calle y Numero (Opcional)</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/streets.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="direccion" name="direccion" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="name">Colonia</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/street-market.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="state" name="state" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <label for="name">Codigo Postal</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/cp.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="postcode" name="postcode" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Alcaldia / municipio (Opcional)</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/ecuador.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="country" name="country" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Estado/ciudad (Entidad Federativa)</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/skyscraper.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="city" name="city" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -169,121 +299,12 @@
                                 </div>
                             </div>
 
-
                             <div class="col-12">
-                                <h5>Datos de Direccion</h5>
-                            </div>
-
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="name">Calle y Numero (Opcional)</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/streets.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="direccion" name="direccion" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="name">Colonia</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/street-market.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="state" name="state" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-3">
-                                <div class="form-group">
-                                    <label for="name">Codigo Postal</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/cp.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="postcode" name="postcode" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="name">Alcaldia / municipio (Opcional)</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/ecuador.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="country" name="country" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="name">Estado/ciudad (Entidad Federativa)</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/skyscraper.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="city" name="city" type="text" class="form-control" placeholder="">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-12">
-                                <h5>Datos de evaluador o centro</h5>
-                            </div>
-
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="name">Fecha *</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="fecha" name="fecha" type="text" class="form-control" value="{{$fecha}}">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="name">Tipo *</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
-                                        </span>
-                                        <select name="tipo" id="tipo" class="form-select d-inline-block">
-                                            <option value="Evaluador Independiente">Evaluador Independiente</option>
-                                            <option value="Centro Evaluación">Centro Evaluación</option>
-                                            <option value="Externo">Externo</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-4" id="membresiaContainer" style="display: none;">
-                                <div class="form-group">
-                                    <label for="name">Membresía *</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/membership.png') }}" alt="" width="35px">
-                                        </span>
-                                        <select name="membresia" id="membresia" class="form-select d-inline-block">
-                                            <option value="Gold">Gold</option>
-                                            <option value="Diamante">Diamante</option>
-                                        </select>
-                                    </div>
-                                </div>
+                                <h5>Seleccionar Estandares *</h5>
                             </div>
 
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="">Seleccione estandares *</label><br>
                                         <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
                                             @foreach ($estandares_cam as $estandar_cam)
                                                 <option value="{{$estandar_cam->id}}">{{$estandar_cam->estandar}}</option>
@@ -342,7 +363,7 @@
                             <div class="col-4" id="fotoContainer" style="">
 
                                 <div class="form-group">
-                                    <label for="name">Foto</label><br>
+                                    <label for="name">Foto del pago</label><br>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
@@ -391,7 +412,7 @@
 
                                         <div class="col-4" id="fotoContainer2" style="">
                                             <div class="form-group">
-                                                <label for="name">Foto</label><br>
+                                                <label for="name">Foto del pago</label><br>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
@@ -406,7 +427,7 @@
 
                             <div class="col-8">
                                 <div class="form-group">
-                                    <label for="name">Nota</label><br>
+                                    <label for="name">Observaciones</label><br>
                                     <textarea class="form-control" name="nota" id="nota" cols="20" rows="2"></textarea>
                                 </div>
                             </div>
