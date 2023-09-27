@@ -23,7 +23,7 @@ Expediente {{$expediente->id}}
             <div class="col-4 my-auto">
                 <div class="">
                     <p class="mb-1 ">
-                        <strong>Clave evaluador:</strong><br>
+                        <strong>Clave centro evaluador:</strong><br>
                         {{ $expediente->Nota->Cliente->num_user }}
                     </p>
                     @if ($expediente->Nota->Cliente->nomb_centro == NULL)
@@ -165,6 +165,8 @@ Expediente {{$expediente->id}}
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+<script src="{{ asset('assets/admin/js/plugins/countup.min.js') }}"></script>
+
 <script>
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
@@ -172,7 +174,15 @@ Expediente {{$expediente->id}}
 </script>
 
 <script>
-
+    if (document.getElementById('state1')) {
+      const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
+      if (!countUp.error) {
+        countUp.start();
+      } else {
+        console.error(countUp.error);
+      }
+    }
+    
     function mostrarArchivos(categoria, expedienteId) {
         // Oculta el formulario y vacía el contenedor de archivos
         $('#contenedorSubirArchivos').hide();

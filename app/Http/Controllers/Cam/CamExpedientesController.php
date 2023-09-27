@@ -56,7 +56,7 @@ class CamExpedientesController extends Controller
         $check = CamChecklist::where('id_nota', $id)->firstOrFail();
         $estandares_usuario = CamNotEstandares::where('id_nota', $id)->get();
         $video = CamVideosUser::where('id_nota', $id)->first();
-        $estandares_cam_user = CamNotEstandares::where('id_nota', $id)->where('estatus', '=', 'Aprovado')->get();
+        $estandares_cam_user = CamNotEstandares::where('id_nota', $id)->where('estatus', '=', 'Entregado')->get();
         $estandares_cam = CamEstandares::get();
         $minis_exps = CamMiniExp::where('id_nota', $id)->get();
         $videos_dinamicos = CamVideos::where('tipo','=',$video->tipo)->orderBy('orden','ASC')->get();

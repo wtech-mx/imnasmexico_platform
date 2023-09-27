@@ -15,7 +15,7 @@
             </ul>
 
             <div class="tab-content" id="pills-tabContent">
-                {{-- ==================== S E C C I O N  I N I C I O ==================== --}}
+                {{-- ==================== N U E V A  E M I S I O N ==================== --}}
                 <div class="tab-pane fade show active" id="pills-emision" role="tabpanel" aria-labelledby="pills-emision-tab">
                     <form method="POST" action="{{ route('expediente.check', $expediente->Nota->id) }}" enctype="multipart/form-data" role="form">
                         @csrf
@@ -59,7 +59,7 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="name">Foto</label><br>
+                                        <label for="name">Comprobante de pago</label><br>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
@@ -70,7 +70,7 @@
                                 </div>
 
                                 <div class="col-6">
-                                    <label for="contrato_general">Total</label>
+                                    <label for="contrato_general">Cantidad total</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\cam\dinero.png') }}" alt="" width="35px">
@@ -84,16 +84,13 @@
                     </form>
                 </div>
 
-                {{-- ==================== S E C C I O N  D O C U M E N T O S ==================== --}}
+                {{-- ==================== N U E V O  E S T A N D A R ==================== --}}
                 <div class="tab-pane fade" id="pills-nuevo-estandar" role="tabpanel" aria-labelledby="pills-nuevo-estandar-tab">
                     <form method="POST" action="{{ route('expediente.check', $expediente->Nota->id) }}" enctype="multipart/form-data" role="form">
                         @csrf
                         <input type="hidden" name="_method" value="PATCH">
                         <div class="card-header pb-0 p-3">
                             <div class="row">
-                                <div class="col-8">
-                                    <h6 class="mb-0">Nueva emision - ${{ $expediente->Nota->Cliente->costo_emi }}.00 mxn</h6>
-                                </div>
                                 <div class="col-4">
                                     <button type="submit" class="btn btn-sm" style="background: #6EC1E4; color: #ffff;">Guardar</button>
                                 </div>
@@ -101,17 +98,6 @@
                         </div>
                         <div class="card-body p-3">
                             <div class="row">
-
-                                <div class="col-6">
-                                    <label for="contrato_general">Nombre</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="num_user" name="num_user" class="form-control" type="text" placeholder="Nombre cliente">
-                                    </div>
-                                </div>
-
                                 <div class="col-6">
                                     <label for="">Seleccione estandar(es) *</label><br>
                                     <div class="form-group">
@@ -130,7 +116,7 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="name">Foto</label><br>
+                                        <label for="name">Comprobante de pago</label><br>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
@@ -142,7 +128,7 @@
 
 
                                 <div class="col-6">
-                                    <label for="contrato_general">Total</label>
+                                    <label for="contrato_general">Cantidad total</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\cam\dinero.png') }}" alt="" width="35px">
@@ -156,7 +142,7 @@
                     </form>
                 </div>
 
-                {{-- ==================== S E C C I O N  D O C U M E N T O S ==================== --}}
+                {{-- ==================== R E N O V A C I O N ==================== --}}
                 <div class="tab-pane fade" id="pills-renovacion" role="tabpanel" aria-labelledby="pills-renovacion-tab">
                     <form method="POST" action="{{ route('expediente.check', $expediente->Nota->id) }}" enctype="multipart/form-data" role="form">
                         @csrf
@@ -203,7 +189,7 @@
 
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="name">Foto</label><br>
+                                        <label for="name">Comprobante de pago</label><br>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
@@ -214,7 +200,7 @@
                                 </div>
 
                                 <div class="col-6">
-                                    <label for="contrato_general">Total</label>
+                                    <label for="contrato_general">Cantidad total</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\cam\dinero.png') }}" alt="" width="35px">

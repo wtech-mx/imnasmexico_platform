@@ -210,7 +210,7 @@ Expediente
                                     <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Correo:</strong> &nbsp; {{$mini_exp->email}}</li>
                                     <hr class="horizontal dark">
                                     <div class="row">
-                                        <h5>Claves SII</h5>
+                                        <h5>Claves módulo de evaluación</h5>
                                         <div class="col-3">
                                             <p class="text-sm mb-0 text-uppercase font-weight-bold">Usuario</p>
                                             <input id="usuario" name="usuario" class="form-control" type="text" placeholder="usuario" value="{{ $mini_exp->usuario }}">
@@ -356,34 +356,6 @@ Expediente
                                                                 <p class="text-center mt-2">
                                                                     <img id="blah" src="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$mini_exp_nom->nombre) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
                                                                     <a class="text-center text-dark btn btn-sm" href="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$mini_exp_nom->nombre) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
-                                                                </p>
-                                                            @endif
-                                                        @endif
-                                                    </div>
-                                                @endforeach
-
-                                                <h5 class="mt-3">Cedulas</h5>
-
-                                                <div class="col-6">
-                                                    <label for="cedulas">Subir cedulas</label>
-                                                    <input id="cedulas" name="cedulas[]" type="file" class="form-control" value="" multiple>
-                                                </div>
-
-                                                <div class="col-6 mt-3">
-                                                </div>
-
-                                                @foreach ($minis_exp_ced as $minis_exp_ced)
-                                                    <div class="col-3 mt-3">
-                                                        @if ($minis_exp_ced->nombre != NULL)
-                                                            @if (pathinfo($minis_exp_ced->nombre, PATHINFO_EXTENSION) == 'pdf')
-                                                                <iframe class="mt-2" src="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$minis_exp_ced->nombre)}}" style="width: 60%; height: 60px;"></iframe>
-                                                                <p class="text-center ">
-                                                                    <a class="btn btn-sm text-dark" href="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$minis_exp_ced->nombre) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
-                                                                </p>
-                                                            @else
-                                                                <p class="text-center mt-2">
-                                                                    <img id="blah" src="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$minis_exp_ced->nombre) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('cam_mini_exp/'. $mini_exp->celular . '/' .$minis_exp_ced->nombre) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
                                                                 </p>
                                                             @endif
                                                         @endif

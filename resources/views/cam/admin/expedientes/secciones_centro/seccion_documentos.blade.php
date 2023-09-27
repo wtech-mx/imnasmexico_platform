@@ -3,7 +3,7 @@
         <div class="col-12 col-md-6 ">
             <div class="card h-100">
                 <div class="card-header pb-0 p-3">
-                        <h6 class="mb-0">Carpetas</h6>
+                        <h4 class="mb-0">Carpetas</h4>
                 </div>
                 <div class="card-body p-2">
                     <div class="row">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-4">
                             <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('3')">
-                                <img src="{{asset('assets/user/icons/illustrator.png')}}" class="img-fluid" style="width: 40%;">
+                                <img src="{{asset('assets/user/logotipos/sepconocer.png')}}" class="img-fluid" style="width: 65%;">
                                 <p for=""><br>4. Logo Conocer Centro de Evaluación</p>
                             </button>
                         </div>
@@ -35,6 +35,12 @@
                             <button class="btn btn-sm" id="btnArchivos3" onclick="mostrarArchivos('4')">
                                 <img src="{{asset('assets/user/icons/book.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>5. Formatos Resolucion De Quejas</p>
+                            </button>
+                        </div>
+                        <div class="col-4">
+                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('cedula', {{ $expediente->Nota->id }})">
+                                <img src="{{asset('assets/user/icons/cedula.png')}}" class="img-fluid" style="width: 40%;">
+                                <p for="">6. Cedulas De Acreditación</p>
                             </button>
                         </div>
                         <div class="col-4">
@@ -137,7 +143,7 @@
                 <div class="card-header pb-0 p-3">
                     <div class="row">
                         <div class="col-md-8 d-flex align-items-center">
-                            <h6 class="mb-0">Documentos</h6>
+                            <h4 class="mb-0">Documentos en carpetas</h4>
                             <div class="col-md-4 text-end">
                                 <a href="javascript:;">
                                 <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Agregar"></i>
@@ -190,7 +196,7 @@
                         <div class="card-body p-3">
                             <div class="row">
 
-                                <label for="contrato_general">Contrato general</label>
+                                <h6 for="contrato_general">Contrato general</h6>
                                 <div class="col-6 mb-3">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -217,7 +223,7 @@
                                     @endif
                                 </div>
 
-                                <label for="carta_compromiso">Carta compromiso</label>
+                                <h6 for="carta_compromiso">Carta compromiso</h6>
                                 <div class="col-6 mb-3">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -244,7 +250,7 @@
                                     @endif
                                 </div>
 
-                                <label for="ine">INE</label>
+                                <h6 for="ine">INE</h6>
                                 <div class="col-6 mb-3">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -271,7 +277,7 @@
                                     @endif
                                 </div>
 
-                                <label for="curp">CURP</label>
+                                <h6 for="curp">CURP</h6>
                                 <div class="col-6 mb-3">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -298,7 +304,7 @@
                                     @endif
                                 </div>
 
-                                <label for="foto">Foto </label>
+                                <h6 for="foto">Foto </h6>
                                 <div class="col-6 mb-3">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -325,7 +331,7 @@
                                     @endif
                                 </div>
 
-                                <label for="acuerdo_confidencialidad">Comprobante Domicilio </label>
+                                <h6 for="acuerdo_confidencialidad">Comprobante Domicilio </h6>
                                 <div class="col-6 mb-3">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -352,7 +358,7 @@
                                     @endif
                                 </div>
 
-                                <label for="logo">Logo centro evaluador</label>
+                                <h6 for="logo">Logo centro evaluador</h6>
                                 <div class="col-6 mb-3">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -379,7 +385,7 @@
                                     @endif
                                 </div>
 
-                                <label for="carta_responsabilidad">Carta responsabilidad logo</label>
+                                <h6 for="carta_responsabilidad">Carta responsabilidad logo</h6>
                                 <div class="col-6 mb-3">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -406,7 +412,7 @@
                                     @endif
                                 </div>
 
-                                <label for="acta_nacimiento">Acta nacimiento</label>
+                                <h6 for="acta_nacimiento">Acta nacimiento</h6>
                                 <div class="col-6 mb-3">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -433,7 +439,7 @@
                                     @endif
                                 </div>
 
-                                <label for="curriculum">Curriculum </label>
+                                <h6 for="curriculum">Curriculum </h6>
                                 <div class="col-6 mb-3">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -460,7 +466,7 @@
                                     @endif
                                 </div>
 
-                                <label for="acuerdo_confidencialidad">Acuerdo confidencialidad </label>
+                                <h6 for="acuerdo_confidencialidad">Acuerdo confidencialidad </h6>
                                 <div class="col-6 mb-3">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
@@ -487,7 +493,7 @@
                                 @endif
                             </div>
 
-                            <label for="acuerdo_confidencialidad">Contrato individual </label>
+                            <h6 for="acuerdo_confidencialidad">Contrato individual </h6>
                             <div class="col-6 mb-3">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">
