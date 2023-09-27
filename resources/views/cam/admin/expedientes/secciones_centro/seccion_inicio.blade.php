@@ -309,6 +309,13 @@
                     </div>
                     <div class="card-body ">
                         <ul class="list-group">
+                            <form method="POST" action="{{ route('expediente.cita', $expediente->id) }}" enctype="multipart/form-data" role="form">
+                                @csrf
+                                <input type="hidden" name="_method" value="PATCH" >
+                                <div class="col-4">
+                                    <button type="submit" class="btn btn-sm close-modal" style="background: #6EC1E4; color: #ffff;">Guardar</button>
+                                </div>
+                            <input type="text" name="id_nota" id="id_nota" value="{{$expediente->Nota->id}}" style="display: none">
                             <li class="list-group-item border-0 px-0">
                                 <div class="form-check form-switch ps-0">
                                 @if ($check->c1 == '1')
@@ -319,8 +326,7 @@
                                     <input class="form-check-input ms-0" type="checkbox" id="c1" name="c1" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    1.- NOMBRAMIENTO DEL EVALUADOR INDEPENDIENTE POR PARTE DE LA ENTIDAD DE
-                                    CERTIFICACIÓN Y EVALUACIÓN JUNTO CON DECÁLOGO DEL EVALUADOR DE COMPETENCIA.</label>
+                                    1.- Solicitud de acreditación.</label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0">
@@ -333,8 +339,7 @@
                                     <input class="form-check-input ms-0" type="checkbox" id="c2" name="c2" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    2.- ACUERDO DE CONFIENCIALIDAD ENTRE LA ENTIDAD DE CERTIFICACIÓN Y EVALUACIÓN Y EL
-                                    EVALUADOR INDEPENDIENTE.</label>
+                                    2.- Contrato de Acreditación.</label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0">
@@ -347,7 +352,7 @@
                                     <input class="form-check-input ms-0" type="checkbox" id="c3" name="c3" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    3.- LOGO DEL EVALUADOR INDEPENDIENTE QUE UTILIZARA EN SUS PUBLICACIONES</label>
+                                    3.- Carta compromiso.</label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0">
@@ -360,7 +365,7 @@
                                     <input class="form-check-input ms-0" type="checkbox" id="c4" name="c4" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    4.- COMPROBANTE DE DOMICILIO DEL EVALAUDOR INDEPENDIENTE</label>
+                                    4.- Acta constitutiva o documentación legal (copia simple).</label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0">
@@ -373,8 +378,7 @@
                                     <input class="form-check-input ms-0" type="checkbox" id="c5" name="c5" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    5.- CONTRATO INDIVIDUAL DE TRABAJO DEL EVALUADOR CON ANEXO DE ARTICULOS 64, 65 Y 66.
-                                    ENTRE LA ENTIDAD DE CERTIFICACIÓN Y EVALUACIÓN Y EL EVALUADOR INDEPENDIENTE</label>
+                                    5.- Identificación Oficial INE VIGENTE del representante legal (copia simple).</label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0 pb-0">
@@ -387,7 +391,7 @@
                                     <input class="form-check-input ms-0" type="checkbox" id="c6" name="c6" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    6.- CURRICULUM VITAE DEL EVALUADOR INDEPENDIENTE</label>
+                                    6.- CURP (Copia simple).</label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0">
@@ -400,7 +404,8 @@
                                     <input class="form-check-input ms-0" type="checkbox" id="c7" name="c7" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    7.- INE</label>
+                                    7.- RFC Constancia de situación Fiscal actualizada que corresponda con la<br>
+                                    razón social del Centro de Evaluación.</label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0">
@@ -413,7 +418,7 @@
                                     <input class="form-check-input ms-0" type="checkbox" id="c8" name="c8" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    8.- CURP</label>
+                                    8.- Comprobante de domicilio.</label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0 pb-0">
@@ -426,7 +431,7 @@
                                     <input class="form-check-input ms-0" type="checkbox" id="c9" name="c9" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    9.- ACTA DE NACIMIENTO</label>
+                                    9.- Registro de marca o Carta del registro de marca.</label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0">
@@ -439,8 +444,7 @@
                                     <input class="form-check-input ms-0" type="checkbox" id="c10" name="c10" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    10.- RECONOCIMIENOS O CERTIFICADOS RELACIONADOS CON LOS ESTÁNDARES QUE SE
-                                    ACREDITAN</label>
+                                    10.- Contrato de arrendamiento o Escritura de la propiedad donde se establecerá el Centro de Evaluación.</label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0">
@@ -453,7 +457,7 @@
                                     <input class="form-check-input ms-0" type="checkbox" id="c11" name="c11" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    11.- LISTADO DE LOS ESTÁNDARES ACREDITADOS DEBE INCLUIR EL EC0076</label>
+                                    11.- Organigrama del Centro de Evaluación.</label>
                                 </div>
                             </li>
                             <li class="list-group-item border-0 px-0 pb-0">
@@ -466,10 +470,327 @@
                                     <input class="form-check-input ms-0" type="checkbox" id="c12" name="c12" value="1">
                                 @endif
                                 <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
-                                    12.- ACREDITACIONES DE LOS ESTÁNDARES POR PARTE DE LA ENTIDAD DE CERTIFICACIÓN Y
-                                    EVALUACIÓN</label>
+                                    12.- Listado de equipamiento para el desarrollo de las actividades administrativas<br>
+                                    del Centro de Evaluación. (Fotografías).</label>
                                 </div>
                             </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c13 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c13" name="c13" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c13" name="c13" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    13.- Listado de equipamiento para el desarrollo de las actividades de evaluación. (Fotografías).</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c14 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c14" name="c14" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c14" name="c14" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    14.- Medios de comunicación.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c15 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c15" name="c15" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c15" name="c15" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    15.- Tamaño e impacto del CE.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c16 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c16" name="c16" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c16" name="c16" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    16.- Reconocimientos/Constancias profesionales.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c17 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c17" name="c17" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c17" name="c17" value="1" checked>
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    17.- Página de internet con buzón de quejas y sugerencias.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c18 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c18" name="c18" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c18" name="c18" value="1" checked>
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    18.- Redes sociales.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c19 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c19" name="c19" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c19" name="c19" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    19.- Expedientes completos por cada Evaluador Independiente y personal administrativo que participe <br>
+                                    en las áreas del CONOCER del Centro de Evaluación.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c20 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c20" name="c20" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c20" name="c20" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    20.- Buzón físico de quejas y sugerencias con formatos impresos de quejas y sugerencias a un<br>
+                                    lado para los candidatos (debe tener la página del CONOCER, así como los números de contacto<br>
+                                    del CONOCER y también los datos de contacto de la Entidad de Certificación y Evaluación).</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c21 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c21" name="c21" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c21" name="c21" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    21.- Lista de Precios Explicita. Precios separados y exhibidos de los Estándares de forma<br>
+                                    que le candidato los pueda ver y enterarse de ellos, si tiene precios de capacitaciones o<br>
+                                    alineaciones estarán separados de las evaluaciones.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c22 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c22" name="c22" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c22" name="c22" value="1" checked>
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    22.- Manuales digitales de la Normatividad, operatividad y funcionalidad del CONOCER.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c23 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c23" name="c23" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c23" name="c23" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    23.- Reglamento Interno de la Entidad para reglamentar al CE (Diseñado con logos del CE).</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c24 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c24" name="c24" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c24" name="c24" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    24.- Manual de procedimientos de aseguramiento de la calidad con logos del CE.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c25 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c25" name="c25" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c25" name="c25" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    25.- Manual de Procedimientos de Atención al Cliente Reporte y Graficación con Logos del CE.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c26 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c26" name="c26" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c26" name="c26" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    26.- Manual del Participante.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c27 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c27" name="c27" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c27" name="c27" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    27.- Ligas de Accesos y contraseñas al Módulo de Evaluación del CONOCER.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c28 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c28" name="c28" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c28" name="c28" value="1" checked>
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    28.- Ligas de Videos para la formación de Evaluadores.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c29 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c29" name="c29" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c29" name="c29" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    29.- Logos diferenciados del CONOCER para cada Entidad de Certificación y Evaluación (ECE),<br>
+                                    Centro de Evaluación (CE) y Evaluador Independiente (EI).</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c30 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c30" name="c30" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c30" name="c30" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    30.- Entrega Oficial del registro ante SEP CONOCER y Placa de Aluminio otorgada por<br>
+                                    parte de la Entidad de Certificación al Centro de Evaluación.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c31 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c31" name="c31" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c31" name="c31" value="1" checked>
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    31.- Especificaciones de las fotografías. Si no tiene las especificaciones<br>
+                                    correctas acarrea retrasos en las entregas de Certificados.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c32 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c32" name="c32" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c32" name="c32" value="1" checked>
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    32.- Papelería proporcionada por la Entidad de Certificación y Evaluación con logos<br>
+                                    del Centro de Evaluación para su operación (Diagnóstico, Plan de Evaluación, Cédula<br>
+                                    de Evaluación, Encuesta de Satisfacción).</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c33 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c33" name="c33" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c33" name="c33" value="1" checked>
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    33.- Tríptico del protocolo de la evaluación con datos del Centro de Evaluación con logos,<br>
+                                    dirección del Centro de Evaluación, así como los números de contacto del CONOCER y también<br>
+                                    los datos de contacto de la Entidad de Certificación y Evaluación. La Entidad de Certificación<br>
+                                    y Evaluación proporciona este tríptico.</label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c34 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c34" name="c34" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c34" name="c34" value="1" checked>
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    34.- Formatos de resolución de quejas proporcionados por la Entidad de<br>
+                                    Certificación y Evaluación (Colocarlos al lado de Buzón de quejas).
+                                </label>
+                                </div>
+                            </li>
+                            <li class="list-group-item border-0 px-0 pb-0">
+                                <div class="form-check form-switch ps-0">
+                                @if ($check->c35 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="c35" name="c35" value="1" checked>
+                                    <label class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
+                                        {{$check->User12->name}}</label>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="c35" name="c35" value="1" checked>
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-0">
+                                    35.- Formatos Seguimiento de resolución de quejas proporcionados por la Entidad de<br>
+                                    Certificación y Evaluación (Tenerlos en la papelería del Área del CONOCER del CE).
+                                </label>
+                                </div>
+                            </li>
+                            </form>
                         </ul>
                     </div>
                 @endif

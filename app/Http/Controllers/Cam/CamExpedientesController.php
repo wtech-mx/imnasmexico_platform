@@ -301,6 +301,14 @@ class CamExpedientesController extends Controller
 
         return redirect()->back()->with('success', 'curso actualizado con exito.');
     }
+    public function update_check_centro(Request $request, $id){
+
+        $check = CamChecklist::where('id_nota', $id)->first();
+        $data = $request->except(['_token', '_method']);
+        $check->update($data);
+
+        return redirect()->back()->with('success', 'curso actualizado con exito.');
+    }
 
     public function crear_nomb(Request $request){
         $dominio = $request->getHost();
