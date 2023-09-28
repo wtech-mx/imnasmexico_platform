@@ -7,7 +7,55 @@ Expediente {{$expediente->id}}
 @section('content')
 
 <div class="container-fluid ">
+@php
+    $fecha = $expediente->Nota->created_at;
+    // Convertir a una marca de tiempo Unix
+    $timestamp = strtotime($fecha);
+    // Obtener la fecha con un año adicional
+    $nueva_fecha_timestamp = strtotime('+1 year', $timestamp);
+    // Formatear la fecha original
+    $fecha_formateada = strftime('%e de %B del %Y', $timestamp);
+    // Formatear la fecha con un año adicional
+    $nueva_fecha_formateada = strftime('%e de %B del %Y', $nueva_fecha_timestamp);
+    // Formatear la hora
+    $hora_formateada = date('h:i A', $timestamp);
+    // Combinar fecha y hora
+    $fecha_hora_formateada = $fecha_formateada;
+    // Combinar nueva fecha y hora (con un año adicional)
+    $fecha_hora_fin = $nueva_fecha_formateada;
 
+    // Obtén el mes y el año de la cadena original
+    $parts = explode(" ", $fecha_hora_fin);
+    $dia = (int)$parts[0];
+    $mes = $parts[2];
+    $ano = (int)$parts[4];
+
+    // Asocia nombres de meses a números de mes
+    $meses = [
+        'January' => 1,
+        'February' => 2,
+        'March' => 3,
+        'April' => 4,
+        'May' => 5,
+        'June' => 6,
+        'July' => 7,
+        'August' => 8,
+        'September' => 9,
+        'October' => 10,
+        'November' => 11,
+        'December' => 12
+    ];
+
+    // Convierte el nombre del mes a su número correspondiente
+    $mes_numero = $meses[$mes];
+
+    // Formatea la fecha en el formato deseado (Año-Mes-Día)
+    $fecha_formateada = sprintf("%04d-%02d-%02d", $ano, $mes_numero, $dia);
+
+    // Calcula la diferencia de días con la fecha actual
+    $hoy = date("Y-m-d");
+    $diferencia_dias = (strtotime($fecha_formateada) - strtotime($hoy)) / (60 * 60 * 24);
+@endphp
     <div class="card shadow-lg mb-5">
         <div class="card-body p-3">
         <div class="row gx-4">
@@ -76,7 +124,7 @@ Expediente {{$expediente->id}}
 
             {{-- ==================== S E C C I O N  P A G O S ==================== --}}
             <div class="tab-pane fade" id="pills-pagos" role="tabpanel" aria-labelledby="pills-pagos-tab">
-                @include('cam.admin.expedientes.secciones_centro.seccion_pagos')
+                @include('cam.admin.expedientes.seccion_pagos')
             </div>
         </div>
 
@@ -182,7 +230,16 @@ Expediente {{$expediente->id}}
         console.error(countUp.error);
       }
     }
-    
+
+    if (document.getElementById('state2')) {
+      const countUp = new CountUp('state2', document.getElementById("state2").getAttribute("countTo"));
+      if (!countUp.error) {
+        countUp.start();
+      } else {
+        console.error(countUp.error);
+      }
+    }
+
     function mostrarArchivos(categoria, expedienteId) {
         // Oculta el formulario y vacía el contenedor de archivos
         $('#contenedorSubirArchivos').hide();

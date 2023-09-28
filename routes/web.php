@@ -397,6 +397,11 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::patch('/expediente/cita/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_citas'])->name('expediente.cita');
         Route::patch('/expediente/check/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_check'])->name('expediente.check');
 
+        // =============== M O D U L O  P A G O S ===============================
+        Route::post('/expediente/pago/nueva-emision', [App\Http\Controllers\Cam\CamExpedientesController::class, 'pago_nueva_emision'])->name('nueva_emision.pago');
+        Route::post('/expediente/pago/nuevo-estandar', [App\Http\Controllers\Cam\CamExpedientesController::class, 'pago_nuevo_estandar'])->name('nuevo_estandar.pago');
+        Route::post('/expediente/pago/renovacion', [App\Http\Controllers\Cam\CamExpedientesController::class, 'pago_renovacion'])->name('renovacion.pago');
+
         // =============== M O D U L O   E X P E D I E N T E S ( M I N I  E X P)===============================
         Route::get('/expediente/mini/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'edit_mini'])->name('edit.mini_exp');
         Route::post('/expediente/mini/crear', [App\Http\Controllers\Cam\CamExpedientesController::class, 'crear_mini'])->name('crear.mini_exp');

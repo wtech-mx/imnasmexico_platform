@@ -17,6 +17,9 @@ use App\Models\Cam\CamMiniExpDiplomas;
 use App\Models\Cam\CamNombramiento;
 use App\Models\Cam\CamNotas;
 use App\Models\Cam\CamNotEstandares;
+use App\Models\Cam\CamPagosEmision;
+use App\Models\Cam\CamPagosEstandar;
+use App\Models\Cam\CamPagosRenovacion;
 use App\Models\Cam\CamVideosUser;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,11 +41,20 @@ class CamExpedientesController extends Controller
         $check = CamChecklist::where('id_nota', $id_nota)->firstOrFail();
         $estandares_usuario = CamNotEstandares::where('id_nota', $id_nota)->get();
         $video = CamVideosUser::where('id_nota', $id_nota)->first();
-        $estandares_cam = CamEstandares::get();
+        $estandares_cam_user = CamNotEstandares::where('id_nota', $id_nota)->where('estatus', '=', 'Entregado')->get();
+        $estandares_cam = CamEstandares::whereNotIn('id', function ($query) use ($id_nota) {
+            $query->select('id_estandar')
+                ->from('cam_notestandares')
+                ->where('id_nota', '=', $id_nota);
+        })->get();
         $minis_exps = CamMiniExp::where('id_nota', $id_nota)->get();
         $videos_dinamicos = CamVideos::where('tipo','=',$video->tipo)->orderBy('orden','ASC')->get();
+        $pagos_emision = CamPagosEmision::where('id_nota', $id_nota)->get();
+        $pagos_estandar = CamPagosEstandar::where('id_nota', $id_nota)->get();
+        $pagos_renovacion = CamPagosRenovacion::where('id_nota', $id_nota)->get();
+        $estandares_cam_comprados = CamNotEstandares::where('id_nota', $id_nota)->get();
 
-        return view('cam.admin.expedientes.exp_ind', compact('expediente', 'estandares_usuario', 'documentos', 'check', 'video', 'estandares_cam', 'minis_exps','videos_dinamicos'));
+        return view('cam.admin.expedientes.exp_ind', compact('estandares_cam_comprados','pagos_renovacion','pagos_emision', 'pagos_estandar', 'estandares_cam_user','expediente', 'estandares_usuario', 'documentos', 'check', 'video', 'estandares_cam', 'minis_exps','videos_dinamicos'));
     }
 
     public function index_centro(){
@@ -57,11 +69,21 @@ class CamExpedientesController extends Controller
         $estandares_usuario = CamNotEstandares::where('id_nota', $id)->get();
         $video = CamVideosUser::where('id_nota', $id)->first();
         $estandares_cam_user = CamNotEstandares::where('id_nota', $id)->where('estatus', '=', 'Entregado')->get();
-        $estandares_cam = CamEstandares::get();
+
+        $estandares_cam = CamEstandares::whereNotIn('id', function ($query) use ($id) {
+            $query->select('id_estandar')
+                ->from('cam_notestandares')
+                ->where('id_nota', '=', $id);
+        })->get();
+
         $minis_exps = CamMiniExp::where('id_nota', $id)->get();
         $videos_dinamicos = CamVideos::where('tipo','=',$video->tipo)->orderBy('orden','ASC')->get();
+        $pagos_emision = CamPagosEmision::where('id_nota', $id)->get();
+        $pagos_estandar = CamPagosEstandar::where('id_nota', $id)->get();
+        $pagos_renovacion = CamPagosRenovacion::where('id_nota', $id)->get();
+        $estandares_cam_comprados = CamNotEstandares::where('id_nota', $id)->get();
 
-        return view('cam.admin.expedientes.exp_centro', compact('videos_dinamicos','expediente', 'estandares_usuario', 'estandares_cam_user','documentos', 'check', 'video', 'estandares_cam', 'minis_exps'));
+        return view('cam.admin.expedientes.exp_centro', compact('estandares_cam_comprados','pagos_renovacion','pagos_emision', 'pagos_estandar','videos_dinamicos','expediente', 'estandares_usuario', 'estandares_cam_user','documentos', 'check', 'video', 'estandares_cam', 'minis_exps'));
     }
 
     public function update_estatus(Request $request, $id){
@@ -86,6 +108,106 @@ class CamExpedientesController extends Controller
         $user->update();
 
         return redirect()->back()->with('success', 'Datos actualizados exitosamente');
+    }
+
+    public function pago_nueva_emision(Request $request){
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $cam_notas = base_path('../public_html/plataforma.imnasmexico.com/cam_pagos');
+        }else{
+            $cam_notas = public_path() . '/cam_pagos';
+        }
+
+        $notas_cam = new CamPagosEmision;
+        $notas_cam->id_nota = $request->get('id_nota');
+        $notas_cam->id_cliente = $request->get('id_cliente');
+        $notas_cam->id_estandar = $request->get('estandares');
+        $notas_cam->nombre = $request->get('nombre');
+        $notas_cam->estandar = $request->get('estandares');
+        $notas_cam->cantidad_total = $request->get('cantidad_total');
+        $notas_cam->id_usuario = auth()->user()->id;
+        if ($request->hasFile("comprobante_pago")) {
+            $file = $request->file('comprobante_pago');
+            $path = $cam_notas;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $notas_cam->comprobante_pago = $fileName;
+        }
+        $notas_cam->save();
+
+        return redirect()->back()
+            ->with('success', 'Nueva emision creada con exito.');
+    }
+
+    public function pago_nuevo_estandar(Request $request){
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $cam_notas = base_path('../public_html/plataforma.imnasmexico.com/cam_pagos');
+        }else{
+            $cam_notas = public_path() . '/cam_pagos';
+        }
+
+        $notas_cam = new CamPagosEstandar;
+        $notas_cam->id_nota = $request->get('id_nota');
+        $notas_cam->id_cliente = $request->get('id_cliente');
+        $notas_cam->cantidad_total = $request->get('cantidad_total');
+        $notas_cam->id_usuario = auth()->user()->id;
+        if ($request->hasFile("comprobante_pago")) {
+            $file = $request->file('comprobante_pago');
+            $path = $cam_notas;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $notas_cam->comprobante_pago = $fileName;
+        }
+        $notas_cam->save();
+
+        $estandares = $request->input('estandares');
+
+        for ($count = 0; $count < count($estandares); $count++) {
+            $data = array(
+                'id_nota' => $request->get('id_nota'),
+                'id_estandar' => $estandares[$count],
+                'estatus' => 'Sin estatus',
+                'id_usuario' => auth()->user()->id,
+                'id_pago' => $notas_cam->id,
+            );
+            $insert_data[] = $data;
+        }
+        CamNotEstandares::insert($insert_data);
+
+        return redirect()->back()
+            ->with('success', 'Nuevo estandar agregado con exito.');
+    }
+
+    public function pago_renovacion(Request $request){
+
+        $fechaActual = date('Y-m-d');
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $cam_notas = base_path('../public_html/plataforma.imnasmexico.com/cam_pagos');
+        }else{
+            $cam_notas = public_path() . '/cam_pagos';
+        }
+
+        $notas_cam = new CamPagosRenovacion;
+        $notas_cam->id_nota = $request->get('id_nota');
+        $notas_cam->id_cliente = $request->get('id_cliente');
+        $notas_cam->cantidad_total = $request->get('cantidad_total');
+        $notas_cam->fecha = $fechaActual;
+        $notas_cam->id_usuario = auth()->user()->id;
+        if ($request->hasFile("comprobante_pago")) {
+            $file = $request->file('comprobante_pago');
+            $path = $cam_notas;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $notas_cam->comprobante_pago = $fileName;
+        }
+        $notas_cam->save();
+
+        return redirect()->back()
+            ->with('success', 'Renovacion con exito.');
     }
 
     public function update_citas(Request $request, $id){
