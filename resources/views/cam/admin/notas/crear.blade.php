@@ -34,6 +34,7 @@
                                             <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                         </span>
                                         <select name="tipo" id="tipo" class="form-select d-inline-block">
+                                            <option value="">Seleccione una opción</option>
                                             <option value="Evaluador Independiente">Evaluador Independiente</option>
                                             <option value="Centro Evaluación">Centro Evaluación</option>
                                             <option value="Externo">Externo</option>
@@ -42,14 +43,15 @@
                                 </div>
                             </div>
 
-                            <div class="col-4" id="membresiaContainer" style="display: none;">
+                            <div class="col-4" id="opcionesCentro" style="display: none;">
                                 <div class="form-group">
                                     <label for="name">Membresía *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/membership.png') }}" alt="" width="35px">
                                         </span>
-                                        <select name="membresia" id="membresia" class="form-select d-inline-block">
+                                        <select name="membresia" id="centroTipo" class="form-select d-inline-block">
+                                            <option value="">Seleccione una opción</option>
                                             <option value="Gold">Gold</option>
                                             <option value="Diamante">Diamante</option>
                                         </select>
@@ -312,6 +314,20 @@
                                         </select>
                                 </div>
                             </div>
+
+                            <div class="col-12">
+                                <h5>Estandares afines*</h5>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                        <select name="estandares_afines[]" class="form-select d-inline-block js-example-basic-multiple2" style="width: 70%!important;" multiple="multiple">
+                                            @foreach ($estandares_cam as $estandar_cam)
+                                                <option value="{{$estandar_cam->id}}">{{$estandar_cam->estandar}}</option>
+                                            @endforeach
+                                        </select>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
@@ -323,6 +339,32 @@
                             <h4>Sección de pago</h4>
                             <div class="col-4">
                                 <div class="form-group">
+                                    <label for="name">Precio *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><img src="{{ asset('assets/user/icons/order.webp') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
+                                        <input class="form-control" type="text" id="costo" name="costo" readonly>
+                                        <span class="input-group-text">.00</span>
+                                      </div>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Restante *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text"><img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
+                                        <input class="form-control" type="number" id="restante" name="restante">
+                                        <span class="input-group-text">.00</span>
+                                      </div>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
                                     <label for="name">Monto *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
@@ -331,18 +373,6 @@
                                       </div>
                                 </div>
                             </div>
-
-                            {{-- <div class="col-4">
-                                <div class="form-group">
-                                    <label for="name">Monto *</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input class="form-control" type="number" id="monto1" name="monto1">
-                                    </div>
-                                </div>
-                            </div> --}}
 
                             <div class="col-4">
                                 <div class="form-group">

@@ -47,7 +47,7 @@ Notas CAM
                                                 <td>{{$nota_cam->id}}</td>
                                                 <td><a href="{{ route('expediente.edit', $nota_cam->id) }}">{{$nota_cam->Cliente->name}}</a>
                                                 <td>
-                                                    @if ($nota_cam->Cliente->cliente == '4')
+                                                    @if ($nota_cam->tipo == 'Centro Evaluación')
                                                         <label class="badge badge-sm" style="color: #009ee3;background-color: #009ee340;">Centro Evaluación</label>
                                                     @else
                                                         <label class="badge badge-sm" style="color: #746AB0;background-color: #746ab061;">Evaluador Independiente</label>
@@ -98,46 +98,84 @@ Notas CAM
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
     });
+
+    $(document).ready(function() {
+        $('.js-example-basic-multiple2').select2();
+    });
 </script>
 
-
 <script>
-    document.getElementById('tipo').addEventListener('change', function() {
-        var membresiaContainer = document.getElementById('membresiaContainer');
-        var razonContainer = document.getElementById('razonContainer');
+    // Obtén referencias a los elementos select, inputs y el contenedor de razon
+    var selectTipo = document.getElementById('tipo');
+    var selectCentroTipo = document.getElementById('centroTipo');
+    var inputCosto = document.getElementById('costo');
+    var inputMonto1 = document.getElementById('monto1');
+    var inputMonto2 = document.getElementById('monto2');
+    var inputRestante = document.getElementById('restante');
+    var opcionesCentro = document.getElementById('opcionesCentro');
+    var razonContainer = document.getElementById('razonContainer');
 
-        if (this.value === 'Centro Evaluación') {
-            membresiaContainer.style.display = 'block';
-            razonContainer.style.display = 'block';
-        } else {
-            membresiaContainer.style.display = 'none';
+    // Define los costos y valores iniciales
+    var costoEvaluador = 45000; // Cambia esto al costo real para un evaluador
+    var preciosCentro = {
+        Gold: 65000,      // Cambia esto al costo real para "Gold"
+        Diamante: 95000   // Cambia esto al costo real para "Diamante"
+    };
+    var monto1 = 0;
+    var monto2 = 0;
+
+    // Agrega eventos de cambio a los campos monto1 y monto2
+    inputMonto1.addEventListener('input', function() {
+        monto1 = parseFloat(inputMonto1.value) || 0;
+        actualizarRestante();
+    });
+
+    inputMonto2.addEventListener('input', function() {
+        monto2 = parseFloat(inputMonto2.value) || 0;
+        actualizarRestante();
+    });
+
+    // Agrega un evento de cambio al select de tipo
+    selectTipo.addEventListener('change', function() {
+        var opcionSeleccionada = selectTipo.value;
+        if (opcionSeleccionada === 'Evaluador Independiente') {
+            opcionesCentro.style.display = 'none';
             razonContainer.style.display = 'none';
+            inputCosto.value = costoEvaluador;
+        } else {
+            opcionesCentro.style.display = 'block';
+            razonContainer.style.display = 'block';
         }
+        actualizarRestante();
     });
+
+    // Agrega un evento de cambio al select de centroTipo
+    selectCentroTipo.addEventListener('change', function() {
+        var opcionSeleccionada = selectCentroTipo.value;
+        inputCosto.value = preciosCentro[opcionSeleccionada] || '';
+        actualizarRestante();
+    });
+
+    // Función para calcular y actualizar el campo restante
+    function actualizarRestante() {
+        var opcionSeleccionada = selectTipo.value;
+        var costo = parseFloat(inputCosto.value) || 0;
+
+        if (opcionSeleccionada === 'Evaluador Independiente') {
+            costo = costoEvaluador;
+        } else {
+            var centroTipoSeleccionado = selectCentroTipo.value;
+            costo = preciosCentro[centroTipoSeleccionado] || 0;
+        }
+
+        var total = costo - monto1 - monto2;
+        inputRestante.value = total.toFixed(2);
+    }
+
+    // Llama a la función inicialmente para calcular el valor inicial del campo restante
+    actualizarRestante();
 </script>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var inputElement = document.getElementById('monto1');
-
-        inputElement.addEventListener('input', function() {
-            var inputValue = this.value;
-            if (inputValue) {
-                // Elimina cualquier coma existente
-                inputValue = inputValue.replace(/,/g, '');
-
-                // Formatea el valor con comas
-                var formattedValue = numberWithCommas(inputValue);
-                this.value = formattedValue;
-            }
-        });
-
-        // Función para agregar comas como separadores de miles
-        function numberWithCommas(x) {
-            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-        }
-    });
-</script>
 
 {{-- <script>
     document.getElementById('metodo_pago').addEventListener('change', function() {
