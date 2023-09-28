@@ -66,7 +66,7 @@ class CamExpedientesController extends Controller
         $expediente = CamCitas::where('id_nota', $id)->first();
         $documentos = CamDocumentosUsers::where('id_nota', $id)->firstOrFail();
         $check = CamChecklist::where('id_nota', $id)->firstOrFail();
-        $estandares_usuario = CamNotEstandares::where('id_nota', $id)->get();
+        $estandares_usuario = CamNotEstandares::where('id_nota', $id)->where('id_mini_exp', '=', NULL)->get();
         $video = CamVideosUser::where('id_nota', $id)->first();
         $estandares_cam_user = CamNotEstandares::where('id_nota', $id)->where('estatus', '=', 'Entregado')->get();
 
@@ -522,9 +522,27 @@ class CamExpedientesController extends Controller
         $documentos = CamDocumentosUsers::where('id_nota', $mini_exp->id_nota)->firstOrFail();
         $minis_exps = CamMiniExp::where('id_nota', $expediente->id_nota)->get();
         $minis_exp_nom = CamNombramiento::where('id_mini_exp', $mini_exp->id)->get();
-        $minis_exp_ced = CamCedulas::where('id_mini_exp', $mini_exp->id)->get();
+        $minis_exp_cer = CamCertificados::where('id_mini_exp', $mini_exp->id)->get();
+        $estandares_cam_user = CamNotEstandares::where('id_nota', $mini_exp->id_nota)->where('estatus', '=', 'Entregado')->get();
+        $estandares_cam_mini = CamNotEstandares::where('id_mini_exp', $mini_exp->id)->get();
 
-        return view('cam.admin.expedientes.mini_exp', compact('minis_exp_nom','minis_exp_ced','estandares_cam', 'expediente', 'mini_exp', 'video', 'documentos', 'mini_exp_diplomas', 'minis_exps'));
+        return view('cam.admin.expedientes.mini_exp', compact('estandares_cam_mini','estandares_cam_user','minis_exp_nom','minis_exp_cer','estandares_cam', 'expediente', 'mini_exp', 'video', 'documentos', 'mini_exp_diplomas', 'minis_exps'));
+    }
+
+    public function crear_estandar_mini(Request $request){
+
+
+        $notas_cam = new CamNotEstandares;
+        $notas_cam->id_nota = $request->get('id_nota');
+        $notas_cam->id_mini_exp = $request->get('id');
+        $notas_cam->id_estandar = $request->get('id_estandar');
+        $notas_cam->estatus = $request->get('estatus');
+        $notas_cam->fecha_evaluar = $request->get('fecha_evaluar');
+        $notas_cam->id_usuario = auth()->user()->id;
+        $notas_cam->save();
+
+        return redirect()->back()
+            ->with('success', 'Nuevo estandar agregado con exito.');
     }
 
     public function crear_mini(Request $request){
@@ -638,6 +656,22 @@ class CamExpedientesController extends Controller
             $file->move($path, $fileName);
             $mini->comprobante = $fileName;
         }
+
+        if ($request->hasFile("contrato_individual")) {
+            $file = $request->file('contrato_individual');
+            $path = $ruta_recursos;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $mini->contrato_individual = $fileName;
+        }
+
+        if ($request->hasFile("confidencialidad")) {
+            $file = $request->file('confidencialidad');
+            $path = $ruta_recursos;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $mini->confidencialidad = $fileName;
+        }
         $mini->save();
 
         if ($request->hasFile('diplomas')) {
@@ -669,13 +703,13 @@ class CamExpedientesController extends Controller
             $nomb->save();
         }
 
-        if ($request->hasFile('cedulas')) {
-            $foto = $request->file('cedulas');
+        if ($request->hasFile('certificados')) {
+            $foto = $request->file('certificados');
             foreach ($foto as $archivo) {
                 $path = $ruta_recursos;
                 $fileName = uniqid() . $archivo->getClientOriginalName();
                 $archivo->move($path, $fileName);
-                $nomb = new CamCedulas;
+                $nomb = new CamCertificados;
                 $nomb->nombre = $fileName;
                 $nomb->id_mini_exp = $mini->id;
                 $nomb->id_cliente = $mini->id_cliente;
@@ -683,7 +717,6 @@ class CamExpedientesController extends Controller
             }
             $nomb->save();
         }
-
 
         return redirect()->back()->with('success', 'Archivo subido exitosamente');
     }

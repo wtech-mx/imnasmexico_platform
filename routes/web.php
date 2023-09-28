@@ -406,6 +406,7 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::get('/expediente/mini/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'edit_mini'])->name('edit.mini_exp');
         Route::post('/expediente/mini/crear', [App\Http\Controllers\Cam\CamExpedientesController::class, 'crear_mini'])->name('crear.mini_exp');
         Route::patch('/expediente/mini/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_mini'])->name('update.mini_exp');
+        Route::post('/expediente/mini/estandar', [App\Http\Controllers\Cam\CamExpedientesController::class, 'crear_estandar_mini'])->name('crear_estandar.mini_exp');
 
         // =============== M O D U L O  N O T A S ===============================
         Route::get('/notas/index', [App\Http\Controllers\Cam\NotasCamController::class, 'index'])->name('index.notas');
