@@ -215,19 +215,6 @@
 
                                 <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3">
                                     <div class="form-check form-switch ps-0">
-                                    @if ($expediente->check2 == '1')
-                                        <input class="form-check-input ms-0" type="checkbox" id="check2" name="check2" value="1" checked>
-                                    @else
-                                        <input class="form-check-input ms-0" type="checkbox" id="check2" name="check2" value="1">
-                                    @endif
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
-                                        <strong>2.- Evaluación de Estándares afines</strong></label>
-                                    </div>
-                                    <input id="evaluacion_afines" name="evaluacion_afines" value="{{$expediente->evaluacion_afines}}" type="date" class="form-control">
-                                </div>
-
-                                <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3">
-                                    <div class="form-check form-switch ps-0">
                                     @if ($expediente->check3 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1" checked>
                                     @else
@@ -444,57 +431,6 @@
         </div>
 
         <div class="col-12">
-            <div class="card mt-3">
-                <div class="card-header pb-0 p-3">
-                    <div class="row">
-                        <div class="col-md-4 d-flex align-items-center">
-                            <h6 class="mb-0">Estandares</h6>
-                        </div>
-                        <div class="col-md-8 text-end">
-                           <h6><strong>Costo emisión:</strong><br> ${{ $expediente->Nota->Cliente->costo_emi }}.00 mxn</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body p-3">
-                    <ul class="list-group">
-
-                        <div class="table-responsive">
-                            <table class="table table-flush" id="datatable-search">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th>Estatus</th>
-                                        <th>Estandar</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                @foreach ($estandares_usuario as $estandar_usuario)
-                                <tr>
-                                    <td>
-                                        @if ($estandar_usuario->estatus == 'Programado')
-                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #05cdff;">Programado</p>
-                                        @elseif($estandar_usuario->estatus == 'Evaluado')
-                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #fbff05;">Evaluado</p>
-                                        @elseif($estandar_usuario->estatus == 'En proceso')
-                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #c05b21;">En proceso</p>
-                                        @elseif($estandar_usuario->estatus == 'Entregado')
-                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #63ac28;">Entregado</p>
-                                        @elseif($estandar_usuario->estatus == 'Sin estatus')
-                                            <p class="border-radius-md shadow text-xs text-white" style="padding:5px;background-color: #161616;">Sin estatus</p>
-                                        @endif
-                                    </td>
-
-                                    <td>{{$estandar_usuario->Estandar->estandar}}</td>
-                                    <td>
-                                        <a data-bs-toggle="modal" data-bs-target="#exampleModalEstatus{{$estandar_usuario->id}}" class="btn btn-link pe-3 ps-0 mb-0 ms-auto">Editar</a>
-                                    </td>
-                                </tr>
-                                @include('cam.admin.expedientes.modal_estatus')
-                                @endforeach
-                            </table>
-                        </div>
-
-                    </ul>
-                </div>
-            </div>
+            @include('cam.admin.expedientes.seccion_estandares')
         </div>
     </div>

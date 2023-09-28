@@ -91,6 +91,7 @@ class CamExpedientesController extends Controller
         $estandar = CamNotEstandares::find($id);
         $estandar->evaluador = $request->get('evaluador');
         $estandar->estatus = $request->get('estatus');
+        $estandar->fecha_evaluar = $request->get('fecha_evaluar');
         $estandar->update();
 
         return redirect()->back()->with('success', 'Estatus actualizado exitosamente');

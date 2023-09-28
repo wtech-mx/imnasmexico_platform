@@ -32,7 +32,7 @@
                                 <label for="name">Estatus *</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">
-                                        <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
+                                        <img src="{{ asset('assets/cam/carta_res.png') }}" alt="" width="35px">
                                     </span>
                                     <select name="estatus" id="estatus" class="form-select d-inline-block" required>
                                         <option value="{{$estandar_usuario->estatus}}">{{$estandar_usuario->estatus}}</option>
@@ -41,6 +41,16 @@
                                         <option value="En proceso">En proceso</option>
                                         <option value="Entregado">Entregado</option>
                                     </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Fecha evaluación</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input id="fecha_evaluar" name="fecha_evaluar" type="date" class="form-control" value="{{$estandar_usuario->fecha_evaluar}}" >
                                 </div>
                             </div>
                         </div>
