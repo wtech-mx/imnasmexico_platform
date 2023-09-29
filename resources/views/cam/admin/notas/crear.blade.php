@@ -21,7 +21,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="fecha" name="fecha" type="text" class="form-control" value="{{$fecha}}">
+                                        <input id="fecha" name="fecha" type="date" class="form-control" value="{{$fecha}}">
                                     </div>
                                 </div>
                             </div>
@@ -316,7 +316,7 @@
                             </div>
 
                             <div class="col-12">
-                                <h5>Estandares afines*</h5>
+                                <h5>Estandares con los que ya cuenta*</h5>
                             </div>
 
                             <div class="col-12">
