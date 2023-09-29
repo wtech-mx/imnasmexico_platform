@@ -64,5 +64,10 @@ Estandares
 @endsection
 
 @section('datatable')
-
+<script>
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+      searchable: true,
+      fixedHeight: false
+    });
+</script>
 @endsection
