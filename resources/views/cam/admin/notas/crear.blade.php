@@ -368,7 +368,7 @@
                                     <label for="name">Monto *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
-                                        <input class="form-control" type="number" id="monto1" name="monto1">
+                                        <input class="form-control" type="number" id="monto1" name="monto1" required>
                                         <span class="input-group-text">.00</span>
                                       </div>
                                 </div>
