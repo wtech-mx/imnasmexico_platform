@@ -141,17 +141,18 @@ class NotasCamController extends Controller
 
         $estandares_afines = $request->input('estandares_afines');
 
-        for ($count = 0; $count < count($estandares_afines); $count++) {
-            $data = array(
-                'id_nota' => $notas_cam->id,
-                'id_estandar' => $estandares_afines[$count],
-                'estatus' => 'Entregado',
-                'id_usuario' => auth()->user()->id,
-            );
-            $insert_data[] = $data;
+        if($estandares_afines != NULL){
+            for ($count = 0; $count < count($estandares_afines); $count++) {
+                $data = array(
+                    'id_nota' => $notas_cam->id,
+                    'id_estandar' => $estandares_afines[$count],
+                    'estatus' => 'Entregado',
+                    'id_usuario' => auth()->user()->id,
+                );
+                $insert_data[] = $data;
+            }
+            CamNotEstandares::insert($insert_data);
         }
-        CamNotEstandares::insert($insert_data);
-
         $checklist = new CamChecklist;
         $checklist->id_nota = $notas_cam->id;
         $checklist->save();
