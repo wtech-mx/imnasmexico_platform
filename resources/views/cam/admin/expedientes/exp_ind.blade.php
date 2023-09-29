@@ -6,7 +6,7 @@ Expediente {{$expediente->id}}
 
 @section('content')
 @php
-    $fecha = $expediente->Nota->created_at;
+    $fecha = $expediente->Nota->fecha;
     // Convertir a una marca de tiempo Unix
     $timestamp = strtotime($fecha);
     // Obtener la fecha con un año adicional

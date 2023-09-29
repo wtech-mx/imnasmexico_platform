@@ -98,6 +98,7 @@ class NotasCamController extends Controller
         $notas_cam = new CamNotas;
         $notas_cam->id_cliente = $payer->id;
         $notas_cam->tipo = $request->get('tipo');
+        $notas_cam->fecha = $request->get('fecha');
         $notas_cam->membresia = $request->get('membresia');
         $notas_cam->monto1 = $request->get('monto1');
         $notas_cam->metodo_pago = $request->get('metodo_pago');
