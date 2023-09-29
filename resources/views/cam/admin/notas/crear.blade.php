@@ -33,7 +33,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                         </span>
-                                        <select name="tipo" id="tipo" class="form-select d-inline-block">
+                                        <select name="tipo" id="tipo" class="form-select d-inline-block" required>
                                             <option value="">Seleccione una opción</option>
                                             <option value="Evaluador Independiente">Evaluador Independiente</option>
                                             <option value="Centro Evaluación">Centro Evaluación</option>
