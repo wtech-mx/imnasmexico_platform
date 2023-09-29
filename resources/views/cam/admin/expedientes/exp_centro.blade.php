@@ -7,7 +7,7 @@ Expediente {{$expediente->id}}
 @section('content')
 
 <div class="container-fluid ">
-@php
+{{-- @php
     $fecha = $expediente->Nota->fecha;
     // Convertir a una marca de tiempo Unix
     $timestamp = strtotime($fecha);
@@ -55,7 +55,7 @@ Expediente {{$expediente->id}}
     // Calcula la diferencia de días con la fecha actual
     $hoy = date("Y-m-d");
     $diferencia_dias = (strtotime($fecha_formateada) - strtotime($hoy)) / (60 * 60 * 24);
-@endphp
+@endphp --}}
     <div class="card shadow-lg mb-5">
         <div class="card-body p-3">
         <div class="row gx-4">

@@ -233,7 +233,8 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-8">
-                                    <h4 class="mb-0">Dias restantes - <span class="small"></span><span id="state2" countTo="{{$diferencia_dias}}"></span></h4>
+                                    {{-- <h4 class="mb-0">Dias restantes - <span class="small"></span><span id="state2" countTo="{{$diferencia_dias}}"></span></h4> --}}
+                                    <h4 class="mb-0">Dias restantes - 365</h4>
                                 </div>
                                 <div class="col-4">
                                     <button type="submit" class="btn btn-sm" style="background: #6EC1E4; color: #ffff;">Guardar</button>
@@ -266,7 +267,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
                                         </span>
-                                        <input class="form-control" type="text" value="{{ $fecha_hora_fin}}" disabled>
+                                        <input class="form-control" type="text" value="29 Septiembre 2024" disabled>
                                     </div>
                                 </div>
 
