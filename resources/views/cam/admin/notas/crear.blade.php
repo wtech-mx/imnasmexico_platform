@@ -316,7 +316,7 @@
                             </div>
 
                             <div class="col-12">
-                                <h5>Estandares con los que ya cuenta*</h5>
+                                <h5>Estandares con los que ya cuenta</h5>
                             </div>
 
                             <div class="col-12">
