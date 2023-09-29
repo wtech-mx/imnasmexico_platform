@@ -689,7 +689,7 @@ Mi perfil- {{$cliente->name}}
                                                                                 </div>
 
                                                                                 <div class="content_files_{{$video->id_tickets}}">
-                                                                                    <label for="foto_tam_infantil">Foto tamaño Infantil Color</label>
+                                                                                    <label for="foto_tam_infantil">Foto tamaño Infantil blanco y negro</label>
                                                                                     <input name="foto_tam_infantil" hidden id="btnoriginal5{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall5{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal5{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
                                                                                     <button type="button" id='botonpersonal5{{$video->id_tickets}}' onClick="document.getElementById('btnoriginal5{{$video->id_tickets}}').click();">Adjuntar documento</button>
                                                                                     <small id='tagsmall5{{$video->id_tickets}}'>No hay archivos adjuntos</small>
@@ -700,7 +700,7 @@ Mi perfil- {{$cliente->name}}
                                                                             @else
 
                                                                             <div class="col-12">
-                                                                                <label for="foto_tam_infantil">Foto tamaño Infantil Color</label>
+                                                                                <label for="foto_tam_infantil">Foto tamaño Infantil blanco y negro</label>
                                                                                 <input name="foto_tam_infantil" hidden id="btnoriginal5{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall5{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal5{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
                                                                                 <button type="button" id='botonpersonal5{{$video->id_tickets}}' onClick="document.getElementById('btnoriginal5{{$video->id_tickets}}').click();">Adjuntar documento</button>
                                                                                 <small id='tagsmall5{{$video->id_tickets}}'>No hay archivos adjuntos</small>
@@ -800,7 +800,7 @@ Mi perfil- {{$cliente->name}}
                                                                         <!-- Si el usuario no tiene documentos, mostramos el formulario -->
                                                                         <div class="row">
                                                                             <div class="col-12 form-group p-3 mt-2">
-                                                                                <label for="foto_tam_infantil">Foto tamaño Infantil Color</label>
+                                                                                <label for="foto_tam_infantil">Foto tamaño Infantil blanco y negro</label>
                                                                                 <input name="foto_tam_infantil" hidden id="btnoriginal7{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall7{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal7{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
                                                                                 <button type="button" id='botonpersonal7{{$video->id_tickets}}' onClick="document.getElementById('btnoriginal7{{$video->id_tickets}}').click();">Adjuntar documento</button>
                                                                                 <small id='tagsmall7{{$video->id_tickets}}'>No hay archivos adjuntos</small>
