@@ -61,15 +61,13 @@ Notas CAM
                                                 </td>
                                                 <td>
                                                     @php
-                                                        $fecha = $nota_cam->created_at;
+                                                        $fecha = $nota_cam->fecha;
                                                         // Convertir a una marca de tiempo Unix
                                                         $timestamp = strtotime($fecha);
                                                         // Formatear la fecha
                                                         $fecha_formateada = strftime('%e de %B del %Y', $timestamp);
-                                                        // Formatear la hora
-                                                        $hora_formateada = date('h:i A', $timestamp);
                                                         // Combinar fecha y hora
-                                                        $fecha_hora_formateada = $fecha_formateada . ' a las ' . $hora_formateada;
+                                                        $fecha_hora_formateada = $fecha_formateada;
                                                     @endphp
                                                     {{ $fecha_hora_formateada}}
                                                 </td>
