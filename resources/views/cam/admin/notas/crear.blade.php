@@ -144,7 +144,10 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="curp" name="curp" type="text" class="form-control" value="{{old('curp')}}">@error('curp') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="curp" name="curp" type="text" class="form-control" oninput="validarInput(this)" value="{{old('curp')}}">
+                                        @error('curp') <span class="error text-danger">{{ $message }}</span> @enderror
+                                       <span class="error text-danger" id="resultado"></span>
+
                                     </div>
                                 </div>
                             </div>
