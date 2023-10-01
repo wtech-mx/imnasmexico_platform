@@ -314,9 +314,9 @@
                                         <td>{{$pago_renovacion->id}}</td>
                                         <td>{{$pago_renovacion->cantidad_total}}</td>
                                         <td>
-                                            {{ $fecha_hora_formateada}}
+                                            {{ $fecha_formateada}}
                                         </td>
-                                        <td>{{ $fecha_hora_fin}}</td>
+                                        <td>{{ $fecha_formateada2}}</td>
                                         <td>
                                             <a target="_blank" href="{{asset('cam_pagos/'.$pago_renovacion->comprobante_pago)}}">Ver comprobante</a>
                                         </td>

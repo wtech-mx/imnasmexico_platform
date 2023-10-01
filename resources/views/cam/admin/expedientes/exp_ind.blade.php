@@ -6,53 +6,28 @@ Expediente {{$expediente->id}}
 
 @section('content')
 @php
-    $fecha = $expediente->Nota->fecha;
-    // Convertir a una marca de tiempo Unix
-    $timestamp = strtotime($fecha);
-    // Obtener la fecha con un año adicional
-    $nueva_fecha_timestamp = strtotime('+1 year', $timestamp);
-    // Formatear la fecha original
-    $fecha_formateada = strftime('%e de %B del %Y', $timestamp);
-    // Formatear la fecha con un año adicional
-    $nueva_fecha_formateada = strftime('%e de %B del %Y', $nueva_fecha_timestamp);
-    // Formatear la hora
-    $hora_formateada = date('h:i A', $timestamp);
-    // Combinar fecha y hora
-    $fecha_hora_formateada = $fecha_formateada;
-    // Combinar nueva fecha y hora (con un año adicional)
-    $fecha_hora_fin = $nueva_fecha_formateada;
+$fecha = $expediente->Nota->fecha; // Suponiendo que $fecha es una cadena en formato 'Y-m-d'
 
-    // Obtén el mes y el año de la cadena original
-    $parts = explode(" ", $fecha_hora_fin);
-    $dia = (int)$parts[0];
-    $mes = $parts[2];
-    $ano = (int)$parts[4];
+// Crear un objeto DateTime desde la cadena de fecha
+$fechaObj = new DateTime($fecha);
 
-    // Asocia nombres de meses a números de mes
-    $meses = [
-        'January' => 1,
-        'February' => 2,
-        'March' => 3,
-        'April' => 4,
-        'May' => 5,
-        'June' => 6,
-        'July' => 7,
-        'August' => 8,
-        'September' => 9,
-        'October' => 10,
-        'November' => 11,
-        'December' => 12
-    ];
+// Formatear la fecha en el formato "d de F del Y" (01 de Octubre del 2024)
+$fecha_formateada = $fechaObj->format('d \d\e F \d\e\l Y');
 
-    // Convierte el nombre del mes a su número correspondiente
-    $mes_numero = $meses[$mes];
+// Clonar el objeto DateTime para la segunda fecha
+$fechaObj2 = clone $fechaObj;
 
-    // Formatea la fecha en el formato deseado (Año-Mes-Día)
-    $fecha_formateada = sprintf("%04d-%02d-%02d", $ano, $mes_numero, $dia);
+// Sumar un año a la segunda fecha
+$fechaObj2->modify('+1 year');
 
-    // Calcula la diferencia de días con la fecha actual
-    $hoy = date("Y-m-d");
-    $diferencia_dias = (strtotime($fecha_formateada) - strtotime($hoy)) / (60 * 60 * 24);
+// Formatear la segunda fecha en el mismo formato
+$fecha_formateada2 = $fechaObj2->format('d \d\e F \d\e\l Y');
+
+// Calcular la diferencia de días con la fecha actual
+$hoy = new DateTime(); // Fecha actual
+$diferencia = $fechaObj2->diff($hoy); // Diferencia entre las dos fechas
+$diferencia_dias = $diferencia->days;
+
 @endphp
 <div class="container-fluid ">
 

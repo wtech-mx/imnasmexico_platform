@@ -96,12 +96,11 @@
 
                     <div class="card-body p-3 pt-1 mt-2">
                         <h6 class="text-success">Inicio de operaciones.</h6>
-                        <p class="text-sm">29 Septiembre 2023</p>
+                        <p class="text-sm">{{$fecha_formateada}}</p>
                         <h6 class="text-danger">Fin de Operaciones</h6>
-                        <p class="text-sm">29 Septiembre 2024</p>
+                        <p class="text-sm">{{$fecha_formateada2}}</p>
                         <h6 class="text-primary mb-0">Dias restantes</h6>
-                        <h4 class="font-weight-bolder">365</h4>
-                        {{-- <h4 class="font-weight-bolder"><span class="small"></span><span id="state1" countTo="{{$diferencia_dias}}"></span></h4> --}}
+                        <h4 class="font-weight-bolder"><span class="small"></span><span id="state1" countTo="{{$diferencia_dias}}"></span></h4>
 
                     </div>
                 </div>
