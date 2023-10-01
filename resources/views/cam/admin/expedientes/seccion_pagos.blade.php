@@ -4,7 +4,7 @@
 
             <ul class="nav nav-pills mb-3 mt-3" id="pills-tab" role="tablist">
                 <li class="nav-item mb-0 px-0 py-1 active d-flex align-items-center justify-content-center" role="presentation">
-                <button class="nav-link active" id="pills-emision-tab" data-bs-toggle="pill" data-bs-target="#pills-emision" type="button" role="tab" aria-controls="pills-emision" aria-selected="true">Nueva emision</button>
+                <button class="nav-link active" id="pills-emision-tab" data-bs-toggle="pill" data-bs-target="#pills-emision" type="button" role="tab" aria-controls="pills-emision" aria-selected="true">Emisión de certificado</button>
                 </li>
                 <li class="nav-item mb-0 px-0 py-1 d-flex align-items-center justify-content-center" role="presentation">
                 <button class="nav-link " id="pills-nuevo-estandar-tab" data-bs-toggle="pill" data-bs-target="#pills-nuevo-estandar" type="button" role="tab" aria-controls="pills-nuevo-estandar" aria-selected="false">Nuevo Estandar</button>
@@ -24,7 +24,7 @@
                         <div class="card-header pb-0 p-3">
                             <div class="row">
                                 <div class="col-8">
-                                    <h4 class="mb-0">Costo de emision - ${{ $expediente->Nota->Cliente->costo_emi }}.00 mxn</h4>
+                                    <h4 class="mb-0">Costo de emision certificado  - ${{ $expediente->Nota->Cliente->costo_emi }}.00 mxn</h4>
                                 </div>
                                 <div class="col-4">
                                     <button type="submit" class="btn btn-sm" style="background: #6EC1E4; color: #ffff;">Guardar</button>
@@ -34,13 +34,33 @@
                         <div class="card-body p-3">
                             <div class="row">
 
-                                <div class="col-6">
-                                    <h6 for="contrato_general">Nombre *</h6>
+                                <div class="col-5">
+                                    <h6 for="contrato_general">Dictamen *</h6>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="nombre" name="nombre" class="form-control" type="text" placeholder="Nombre cliente" required>
+                                        <input id="nombre" name="nombre" class="form-control" type="text" placeholder="Dictamen" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-3">
+                                    <h6 for="contrato_general">Numero portafolios *</h6>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets\user\icons\abc-block.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="portafolios" name="portafolios" class="form-control" type="text" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-4">
+                                    <h6 for="contrato_general">Cantidad total</h6>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets\cam\dinero.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="cantidad_total_emision" name="cantidad_total_emision" class="form-control" type="text" readonly>
                                     </div>
                                 </div>
 
@@ -84,8 +104,8 @@
                     <table class="table table-flush mt-2" id="datatable-search">
                         <thead class="thead">
                             <tr>
-                                <th>No</th>
-                                <th>Nombre</th>
+                                <th># Portafolios</th>
+                                <th>Dictamen</th>
                                 <th>Fecha</th>
                                 <th>Estandar</th>
                                 <th>Comprobante</th>
@@ -94,7 +114,7 @@
                         <tbody>
                                 @foreach ($pagos_emision as $pago_emision)
                                     <tr>
-                                        <td>{{$pago_emision->id}}</td>
+                                        <td>{{$pago_emision->num_portafolios}}</td>
                                         <th>{{$pago_emision->nombre}}</th>
                                         <td>
                                             @php
@@ -107,10 +127,21 @@
                                                 $hora_formateada = date('h:i A', $timestamp);
                                                 // Combinar fecha y hora
                                                 $fecha_hora_formateada = $fecha_formateada;
+
+                                                $nombreEstandar = $pago_emision->Estandar->estandar;
+                                                // Divide la cadena en palabras utilizando una expresión regular
+                                                $palabras = preg_split('/\s+/', $nombreEstandar);
+
+                                                // Inserta saltos de línea después de cada cuarta palabra
+                                                $palabrasConSaltos = array_chunk($palabras, 4);
+                                                foreach ($palabrasConSaltos as &$grupoPalabras) {
+                                                    $grupoPalabras = implode(' ', $grupoPalabras);
+                                                }
+                                                $nombreEstandarFormateado = implode("<br>", $palabrasConSaltos);
                                             @endphp
                                             {{ $fecha_hora_formateada}}
                                         </td>
-                                        <td>{{$pago_emision->Estandar->estandar}}</td>
+                                        <td>{!! $nombreEstandarFormateado !!}</td>
                                         <td>
                                             <a target="_blank" href="{{asset('cam_pagos/'.$pago_emision->comprobante_pago)}}">Ver comprobante</a>
                                         </td>
@@ -268,6 +299,22 @@
                                             <img src="{{ asset('assets\user\icons\letter.png') }}" alt="" width="35px">
                                         </span>
                                         <input class="form-control" type="text" value="29 Septiembre 2024" disabled>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <h6 for="">Seleccione estandar(es) *</h6>
+                                    <div class="form-group">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets\user\icons\certificate.png') }}" alt="" width="35px">
+                                            </span>
+                                            <select name="estandares_renovacion[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
+                                                @foreach ($estandares_usuario as $estandar_cam)
+                                                    <option value="{{$estandar_cam->id}}">{{$estandar_cam->Estandar->estandar}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
 
