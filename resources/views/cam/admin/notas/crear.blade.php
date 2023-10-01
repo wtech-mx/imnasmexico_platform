@@ -108,7 +108,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/foldable-phone.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required value="{{old('telefono')}}" >@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required value="{{old('celular')}}" >@error('celular') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -360,7 +360,9 @@
 
                     <div class="modal-body">
                         <div class="row">
+
                             <h4>Sección de pago</h4>
+
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="name">Precio *</label>

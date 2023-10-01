@@ -22,7 +22,11 @@ use Illuminate\Support\Facades\Validator;
 class NotasCamController extends Controller
 {
     public function index(){
+
         $estandares_cam = CamEstandares::get();
+
+        $estandar_user = CamNotEstandares::get();
+
         $notas_cam = CamNotas::get();
 
         $ultimaNota = CamNotas::latest('id')->first();
@@ -31,7 +35,7 @@ class NotasCamController extends Controller
 
         $fecha = Carbon::now()->locale('es')->isoFormat('D [de] MMMM [del] YYYY');
 
-        return view('cam.admin.notas.index', compact('estandares_cam', 'notas_cam', 'siguienteId', 'fecha'));
+        return view('cam.admin.notas.index', compact('estandares_cam', 'notas_cam', 'siguienteId', 'fecha','estandar_user'));
     }
 
     public function crear(Request $request){
