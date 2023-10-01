@@ -24,6 +24,7 @@
         </main>
     </div>
 
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
     <script src="{{asset('assets/bootstrap/js/bootstrap.js') }}"></script>
 </body>

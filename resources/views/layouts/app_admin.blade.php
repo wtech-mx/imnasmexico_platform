@@ -74,6 +74,7 @@
     <script src="{{asset('assets/admin/js/plugins/chartjs.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/argon-dashboard.min.js')}}"></script>
     {{-- <script src="{{asset('assets/admin/js/plugins/multistep-form.js')}}"></script> --}}
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
     @yield('js_custom')
     @yield('datatable')

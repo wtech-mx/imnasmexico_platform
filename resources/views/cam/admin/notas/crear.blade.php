@@ -35,9 +35,9 @@
                                         </span>
                                         <select name="tipo" id="tipo" class="form-select d-inline-block" required>
                                             <option value="">Seleccione una opción</option>
-                                            <option value="Evaluador Independiente">Evaluador Independiente</option>
-                                            <option value="Centro Evaluación">Centro Evaluación</option>
-                                            <option value="Externo">Externo</option>
+                                            <option value="Evaluador Independiente" {{ old('tipo') == 'Evaluador Independiente' ? 'selected' : '' }}>Evaluador Independiente</option>
+                                            <option value="Centro Evaluación" {{ old('tipo') == 'Centro Evaluación' ? 'selected' : '' }}>Centro Evaluación</option>
+                                            <option value="Externo" {{ old('tipo') == 'Externo' ? 'selected' : '' }}>Externo</option>
                                         </select>
                                     </div>
                                 </div>
@@ -50,11 +50,12 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/membership.png') }}" alt="" width="35px">
                                         </span>
-                                        <select name="membresia" id="centroTipo" class="form-select d-inline-block">
+                                        <select name="membresia" id="centroTipo" class="form-select d-inline-block" required>
                                             <option value="">Seleccione una opción</option>
-                                            <option value="Gold">Gold</option>
-                                            <option value="Diamante">Diamante</option>
+                                            <option value="Gold" {{ old('membresia') == 'Gold' ? 'selected' : '' }}>Gold</option>
+                                            <option value="Diamante" {{ old('membresia') == 'Diamante' ? 'selected' : '' }}>Diamante</option>
                                         </select>
+
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +71,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" required value="{{old('name')}}">@error('name') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -82,7 +83,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/etiqueta.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellidos" required>@error('apellido') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellidos" required value="{{old('apellido')}}">@error('apellido') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -94,7 +95,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/whatsapp.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required>@error('celular') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required value="{{old('celular')}}">@error('celular') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
 
@@ -107,7 +108,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/foldable-phone.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required value="{{old('telefono')}}" >@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -119,7 +120,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required value="{{old('telefono')}}">@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -131,7 +132,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="email" name="email" type="email" class="form-control" placeholder="Correo">@error('email') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="email" name="email" type="email" class="form-control" placeholder="Correo" value="{{old('email')}}">@error('email') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -143,7 +144,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="curp" name="curp" type="text" class="form-control" >
+                                        <input id="curp" name="curp" type="text" class="form-control" value="{{old('curp')}}">
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +156,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/firma-digital.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="curp" name="curp" type="text" class="form-control" >
+                                        <input id="razon_social" name="razon_social" type="text" class="form-control" value="{{old('razon_social')}}">
                                     </div>
                                 </div>
                             </div>
@@ -172,7 +173,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/streets.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="direccion" name="direccion" type="text" class="form-control" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="direccion" name="direccion" type="text" class="form-control" required value="{{old('direccion')}}">@error('direccion') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -184,7 +185,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/street-market.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="state" name="state" type="text" class="form-control" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="state" name="state" type="text" class="form-control" required value="{{old('state')}}">@error('state') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +197,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/cp.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="postcode" name="postcode" type="text" class="form-control" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="postcode" name="postcode" type="text" class="form-control" required value="{{old('postcode')}}">@error('postcode') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -208,7 +209,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/ecuador.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="country" name="country" type="text" class="form-control" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="country" name="country" type="text" class="form-control" required value="{{old('country')}}">@error('country') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -220,7 +221,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/skyscraper.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="city" name="city" type="text" class="form-control" required>@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="country" name="city" type="text" class="form-control" required value="{{old('city')}}">@error('country') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +237,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/facebook.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="facebook" name="facebook" type="text" class="form-control" placeholder="naturalesainspa">@error('facebook') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="facebook" name="facebook" type="text" class="form-control" value="{{old('facebook')}}" placeholder="naturalesainspa">@error('facebook') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -248,7 +249,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/tiktok.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="tiktok" name="tiktok" type="text" class="form-control" placeholder="@imnasmexico">@error('tiktok') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="tiktok" name="tiktok" type="text" class="form-control"  value="{{old('tiktok')}}" placeholder="naturalesainspa">@error('tiktok') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -260,7 +261,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/instagram.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="instagram" name="instagram" type="text" class="form-control" placeholder="naturalesainspaoficial">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="instagram" name="instagram" type="text" class="form-control" value="{{old('instagram')}}" placeholder="naturalesainspaoficial">@error('instagram') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +273,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/web-link.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="pagina_web" name="pagina_web" type="text" class="form-control" placeholder="imnasmexico.com">@error('pagina_web') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="pagina_web" name="pagina_web" type="text" class="form-control" placeholder="imnasmexico.com" value="{{old('pagina_web')}}">@error('pagina_web') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -284,7 +285,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/heart.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="otra_red" name="otra_red" type="text" class="form-control" placeholder="naturalesainspa">@error('otra_red') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="otra_red" name="otra_red" type="text" class="form-control" placeholder="naturalesainspa" value="{{old('otra_red')}}">@error('otra_red') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -296,7 +297,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/medico.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="puesto" name="puesto" type="text" class="form-control">
+                                        <input id="puesto" name="puesto" type="text" class="form-control" value="{{old('puesto')}}">
                                     </div>
                                 </div>
                             </div>
@@ -309,7 +310,9 @@
                                 <div class="form-group">
                                         <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
                                             @foreach ($estandares_cam as $estandar_cam)
-                                                <option value="{{$estandar_cam->id}}">{{$estandar_cam->estandar}}</option>
+                                                <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
+                                                    {{$estandar_cam->estandar}}
+                                                </option>
                                             @endforeach
                                         </select>
                                 </div>
@@ -321,9 +324,11 @@
 
                             <div class="col-12">
                                 <div class="form-group">
-                                        <select name="estandares_afines[]" class="form-select d-inline-block js-example-basic-multiple2" style="width: 70%!important;" multiple="multiple">
+                                        <select name="estandares_afines[]" class="form-select d-inline-block js-example-basic-multiple2" style="width: 70%!important;" multiple="multiple" >
                                             @foreach ($estandares_cam as $estandar_cam)
-                                                <option value="{{$estandar_cam->id}}">{{$estandar_cam->estandar}}</option>
+                                                <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares_afines', [])) ? 'selected' : '' }}>
+                                                    {{$estandar_cam->estandar}}
+                                                </option>
                                             @endforeach
                                         </select>
                                 </div>
@@ -342,7 +347,7 @@
                                     <label for="name">Precio *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><img src="{{ asset('assets/user/icons/order.webp') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
-                                        <input class="form-control" type="text" id="costo" name="costo" readonly>
+                                        <input class="form-control" type="text" id="costo" name="costo"  value="{{old('costo')}}">
                                         <span class="input-group-text">.00</span>
                                       </div>
                                 </div>
@@ -353,7 +358,7 @@
                                     <label for="name">Restante *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
-                                        <input class="form-control" type="number" id="restante" name="restante">
+                                        <input class="form-control" type="number" id="restante" name="restante" value="{{old('restante')}}">
                                         <span class="input-group-text">.00</span>
                                       </div>
                                 </div>
@@ -368,7 +373,7 @@
                                     <label for="name">Monto *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text"><img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
-                                        <input class="form-control" type="number" id="monto1" name="monto1" required>
+                                        <input class="form-control" type="number" id="monto1" name="monto1" required  value="{{old('monto1')}}">
                                         <span class="input-group-text">.00</span>
                                       </div>
                                 </div>
@@ -381,10 +386,10 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/metodo-de-pago.png') }}" alt="" width="35px">
                                         </span>
-                                        <select name="metodo_pago" id="metodo_pago" class="form-select d-inline-block">
-                                            <option value="Efectivo">Efectivo</option>
-                                            <option value="Tarjeta">Tarjeta</option>
-                                            <option value="Transferencia">Transferencia</option>
+                                        <select name="metodo_pago" id="metodo_pago" class="form-select d-inline-block"  value="{{old('metodo_pago')}}">
+                                            <option value="Efectivo" {{ old('metodo_pago') == 'Efectivo' ? 'selected' : '' }}>Efectivo</option>
+                                            <option value="Tarjeta" {{ old('metodo_pago') == 'Tarjeta' ? 'selected' : '' }}>Tarjeta</option>
+                                            <option value="Transferencia" {{ old('metodo_pago') == 'Transferencia' ? 'selected' : '' }}>Transferencia</option>
                                         </select>
                                     </div>
                                 </div>
@@ -418,7 +423,7 @@
                                                 <label for="name">Monto *</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text"><img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">$</span>
-                                                    <input class="form-control" type="number" id="monto2" name="monto2">
+                                                    <input class="form-control" type="number" id="monto2" name="monto2" value="{{old('monto2')}}">
                                                     <span class="input-group-text">.00</span>
                                                   </div>
                                             </div>
@@ -432,9 +437,10 @@
                                                         <img src="{{ asset('assets/cam/metodo-de-pago.png') }}" alt="" width="35px">
                                                     </span>
                                                     <select name="metodo_pago2" id="metodo_pago2" class="form-select d-inline-block">
-                                                        <option value="Efectivo">Efectivo</option>
-                                                        <option value="Tarjeta">Tarjeta</option>
-                                                        <option value="Transferencia">Transferencia</option>
+                                                        <option value="Efectivo" {{ old('metodo_pago2') == 'Efectivo' ? 'selected' : '' }}>Efectivo</option>
+                                                        <option value="Tarjeta" {{ old('metodo_pago2') == 'Tarjeta' ? 'selected' : '' }}>Tarjeta</option>
+                                                        <option value="Transferencia" {{ old('metodo_pago2') == 'Transferencia' ? 'selected' : '' }}>Transferencia</option>
+                                                    </select>
                                                     </select>
                                                 </div>
                                             </div>
@@ -458,7 +464,7 @@
                             <div class="col-8">
                                 <div class="form-group">
                                     <label for="name">Observaciones</label><br>
-                                    <textarea class="form-control" name="nota" id="nota" cols="20" rows="2"></textarea>
+                                    <textarea class="form-control" name="nota" id="nota" cols="20" rows="2">{{ old('nota') }}</textarea>
                                 </div>
                             </div>
 
@@ -469,7 +475,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/refer.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="referencia" name="referencia" type="text" class="form-control" placeholder="Referencia" required>@error('referencia') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="referencia" name="referencia" type="text" class="form-control" placeholder="Referencia" required  value="{{old('Referencia')}}">@error('referencia') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>

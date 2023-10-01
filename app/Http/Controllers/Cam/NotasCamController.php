@@ -17,6 +17,7 @@ use App\Models\Cam\CamVideosUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Validator;
 
 class NotasCamController extends Controller
 {
@@ -34,6 +35,31 @@ class NotasCamController extends Controller
     }
 
     public function crear(Request $request){
+
+        $validator = Validator::make($request->all(), [
+            'fecha' => 'required',
+            'tipo' => 'required',
+            'celular' => 'required|numeric|digits:10', // Añadido numeric y digits
+            'telefono' => 'required|numeric|digits:10', // Añadido numeric y digits
+            'email' => 'required',
+            'direccion' => 'required',
+            'state' => 'required',
+            'postcode' => 'required|numeric|digits:4',
+            'country' => 'required',
+            'costo' => 'required',
+            'restante' => 'required',
+            'monto1' => 'required',
+            'metodo_pago' => 'required',
+            'referencia' => 'required',
+            'comprobante' => 'mimes:jpeg,jpg,png,pdf', // Ejemplo de reglas de validación para un archivo
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+            ->withErrors($validator)
+            ->withInput();
+        }
+
         $name = $request->get('name');
         $apellido = $request->get('apellido');
         $celular = $request->get('celular');
@@ -61,6 +87,7 @@ class NotasCamController extends Controller
             $payer->username = $request->get('celular');
             $payer->telefono = $request->get('celular');
             $payer->code = $code;
+            $payer->razon_social = $request->get('razon_social');
             $payer->direccion = $request->get('direccion');
             $payer->country = $request->get('country');
             $payer->state = $request->get('state');
