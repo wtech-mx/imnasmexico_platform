@@ -186,6 +186,7 @@
                     <form method="POST" action="{{ route('expediente.cita', $expediente->id) }}" enctype="multipart/form-data" role="form">
                         @csrf
                         <input type="hidden" name="_method" value="PATCH">
+
                         <div class="card-header ">
                             <div class="row">
                                 <div class="col-8">
@@ -196,11 +197,12 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="card-body ">
                             <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{$expediente->Nota->tipo}}</h6>
                             <div class="row">
 
-                                <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3">
+                                <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
                                     <div class="form-check form-switch ps-0">
                                         @if ($expediente->check1 == '1')
                                             <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1" checked>
@@ -213,7 +215,7 @@
                                     <input id="evaluacion_ec0076" name="evaluacion_ec0076" value="{{$expediente->evaluacion_ec0076}}" type="date" class="form-control">
                                 </div>
 
-                                <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3">
+                                <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check3 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1" checked>
@@ -221,12 +223,12 @@
                                         <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1">
                                     @endif
                                     <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
-                                        <strong>3.- Refuerzo de transferencia de <br> conocimiento y operatividad</strong></label>
+                                        <strong>3.- Refuerzo de transferencia de conocimiento y operatividad</strong></label>
                                     </div>
                                     <input id="refuerzo_conocimiento" name="refuerzo_conocimiento" value="{{$expediente->refuerzo_conocimiento}}" type="date" class="form-control">
                                 </div>
 
-                                <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3">
+                                <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check4 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check4" name="check4" value="1" checked>
@@ -239,7 +241,7 @@
                                     <input id="refuerzo_formatos" name="refuerzo_formatos" value="{{$expediente->refuerzo_formatos}}" type="date" class="form-control">
                                 </div>
 
-                                <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3">
+                                <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check5 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check5" name="check5" value="1" checked>
@@ -252,7 +254,7 @@
                                     <input id="coaching_empresarial" name="coaching_empresarial" value="{{$expediente->coaching_empresarial}}" type="date" class="form-control">
                                 </div>
 
-                                <div class="form-group col-6 col-sm-4 col-md-4 col-lg-4 p-2 mb-3 ">
+                                <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
                                     <div class="form-check form-switch ps-0">
                                     @if ($expediente->check6 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="check6" name="check6" value="1" checked>

@@ -66,7 +66,21 @@ Notas CAM
                                         @foreach ($notas_cam as $nota_cam)
                                             <tr>
                                                 <td>{{$nota_cam->id}}</td>
-                                                <td><a href="{{ route('expediente.edit', $nota_cam->id) }}">{{$nota_cam->Cliente->name}}</a>
+                                                <td>
+                                                    @if ($nota_cam->tipo == 'Centro Evaluación')
+
+                                                    <a href="{{ route('expediente.edit', $nota_cam->id) }}" style="text-decoration: underline;color:blue">
+                                                        {{$nota_cam->Cliente->name}}
+                                                    </a>
+
+                                                    @else
+
+                                                    <a href="{{ route('expediente.edit_centro', $nota_cam->id) }}" style="text-decoration: underline;color:blue">
+                                                        {{$nota_cam->Cliente->name}}
+                                                    </a>
+
+                                                    @endif
+
                                                 <td>
                                                     @if ($nota_cam->tipo == 'Centro Evaluación')
                                                         <label class="badge badge-sm" style="color: #009ee3;background-color: #009ee340;">Centro Evaluación</label>

@@ -307,7 +307,7 @@
                                 <div class="col-6">
                                     <div class="input-group mb-4">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets\user\icons\illustrator.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets\user\logotipos/sin-logo.jpg') }}" alt="" width="35px">
                                         </span>
                                         <input id="logo" name="logo" type="file" class="form-control" value="">
                                     </div>
