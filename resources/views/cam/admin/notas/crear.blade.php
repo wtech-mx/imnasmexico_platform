@@ -21,7 +21,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="fecha" name="fecha" type="date" class="form-control" value="{{$fecha}}">
+                                        <input id="fecha" name="fecha" type="date" class="form-control" value="{{$fecha}}" required>
                                     </div>
                                 </div>
                             </div>
@@ -50,7 +50,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/membership.png') }}" alt="" width="35px">
                                         </span>
-                                        <select name="membresia" id="centroTipo" class="form-select d-inline-block" required>
+                                        <select name="membresia" id="centroTipo" class="form-select d-inline-block">
                                             <option value="">Seleccione una opción</option>
                                             <option value="Gold" {{ old('membresia') == 'Gold' ? 'selected' : '' }}>Gold</option>
                                             <option value="Diamante" {{ old('membresia') == 'Diamante' ? 'selected' : '' }}>Diamante</option>
@@ -144,7 +144,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="curp" name="curp" type="text" class="form-control" value="{{old('curp')}}">
+                                        <input id="curp" name="curp" type="text" class="form-control" value="{{old('curp')}}">@error('curp') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>
@@ -303,12 +303,12 @@
                             </div>
 
                             <div class="col-12">
-                                <h5>Seleccionar Estandares *</h5>
+                                <h5>Seleccionar Estándares *</h5>
                             </div>
 
                             <div class="col-12">
                                 <div class="form-group">
-                                        <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
+                                        <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple" required>
                                             @foreach ($estandares_cam as $estandar_cam)
                                                 <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
                                                     {{$estandar_cam->estandar}}
@@ -319,7 +319,23 @@
                             </div>
 
                             <div class="col-12">
-                                <h5>Estandares con los que ya cuenta</h5>
+                                <h5>Estándares operables *</h5>
+                            </div>
+
+                            <div class="col-12">
+                                <div class="form-group">
+                                        <select name="estandares_operables[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple" required>
+                                            @foreach ($estandares_cam as $estandar_cam)
+                                                <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares_operables', [])) ? 'selected' : '' }}>
+                                                    {{$estandar_cam->estandar}}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <h5>Estándares con los que ya cuenta</h5>
                             </div>
 
                             <div class="col-12">
@@ -475,7 +491,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/refer.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="referencia" name="referencia" type="text" class="form-control" placeholder="Referencia" required  value="{{old('Referencia')}}">@error('referencia') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="referencia" name="referencia" type="text" class="form-control" placeholder="Referencia" required  value="{{old('referencia')}}">@error('referencia') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>

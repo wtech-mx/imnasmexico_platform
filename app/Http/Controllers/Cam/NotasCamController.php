@@ -44,7 +44,7 @@ class NotasCamController extends Controller
             'email' => 'required',
             'direccion' => 'required',
             'state' => 'required',
-            'postcode' => 'required|numeric|digits:4',
+            'postcode' => 'required|numeric|digits:5',
             'country' => 'required',
             'costo' => 'required',
             'restante' => 'required',
@@ -166,19 +166,34 @@ class NotasCamController extends Controller
         }
         CamNotEstandares::insert($insert_data);
 
+        $estandares_operables = $request->input('estandares_operables');
+
+        for ($count = 0; $count < count($estandares_operables); $count++) {
+            $data2 = array(
+                'id_nota' => $notas_cam->id,
+                'id_estandar' => $estandares_operables[$count],
+                'estatus' => 'Sin estatus',
+                'operables' => '1',
+                'id_usuario' => auth()->user()->id,
+            );
+            $insert_data2[] = $data2;
+        }
+        CamNotEstandares::insert($insert_data2);
+
         $estandares_afines = $request->input('estandares_afines');
 
         if($estandares_afines != NULL){
             for ($count = 0; $count < count($estandares_afines); $count++) {
-                $data = array(
+                $data3 = array(
                     'id_nota' => $notas_cam->id,
                     'id_estandar' => $estandares_afines[$count],
                     'estatus' => 'Entregado',
+                    'ya_contaba' => '1',
                     'id_usuario' => auth()->user()->id,
                 );
-                $insert_data[] = $data;
+                $insert_data3[] = $data3;
             }
-            CamNotEstandares::insert($insert_data);
+            CamNotEstandares::insert($insert_data3);
         }
         $checklist = new CamChecklist;
         $checklist->id_nota = $notas_cam->id;
