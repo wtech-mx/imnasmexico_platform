@@ -164,6 +164,7 @@ class NotasCamController extends Controller
                 'id_nota' => $notas_cam->id,
                 'id_estandar' => $estandares[$count],
                 'estatus' => 'Sin estatus',
+                'estatus_renovacion' => 'renovo',
                 'id_usuario' => auth()->user()->id,
             );
             $insert_data[] = $data;
@@ -177,6 +178,7 @@ class NotasCamController extends Controller
                 'id_nota' => $notas_cam->id,
                 'id_estandar' => $estandares_operables[$count],
                 'estatus' => 'Sin estatus',
+                'estatus_renovacion' => 'renovo',
                 'operables' => '1',
                 'id_usuario' => auth()->user()->id,
             );
@@ -192,6 +194,7 @@ class NotasCamController extends Controller
                     'id_nota' => $notas_cam->id,
                     'id_estandar' => $estandares_afines[$count],
                     'estatus' => 'Entregado',
+                    'estatus_renovacion' => 'renovo',
                     'ya_contaba' => '1',
                     'id_usuario' => auth()->user()->id,
                 );
