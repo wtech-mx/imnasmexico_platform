@@ -133,7 +133,7 @@
                                             </p>
                                         @else
                                             <p class="text-center mt-2">
-                                                <img id="blah" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->ine) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                <img id="blah" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->contrato_general) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
                                                 <a class="text-center text-dark btn btn-sm" href="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->contrato_general) }}" target="_blank" style="background: #836262; color: #ffff!important
                                                 ">Ver Imagen</a>
                                             </p>
