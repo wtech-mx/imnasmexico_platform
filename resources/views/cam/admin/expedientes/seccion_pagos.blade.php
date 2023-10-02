@@ -45,7 +45,7 @@
                                 </div>
 
                                 <div class="col-3">
-                                    <h6 for="contrato_general">Numero portafolios *</h6>
+                                    <h6 for="contrato_general">Numero de lote *</h6>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets\user\icons\abc-block.png') }}" alt="" width="35px">
