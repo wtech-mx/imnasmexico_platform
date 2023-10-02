@@ -69,13 +69,13 @@ Notas CAM
                                                 <td>
                                                     @if ($nota_cam->tipo == 'Centro Evaluación')
 
-                                                    <a href="{{ route('expediente.edit', $nota_cam->id) }}" style="text-decoration: underline;color:blue">
+                                                    <a href="{{ route('expediente.edit_centro', $nota_cam->id) }}" style="text-decoration: underline;color:blue">
                                                         {{$nota_cam->Cliente->name}}
                                                     </a>
 
                                                     @else
 
-                                                    <a href="{{ route('expediente.edit_centro', $nota_cam->id) }}" style="text-decoration: underline;color:blue">
+                                                    <a href="{{ route('expediente.edit', $nota_cam->id) }}" style="text-decoration: underline;color:blue">
                                                         {{$nota_cam->Cliente->name}}
                                                     </a>
 
