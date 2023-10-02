@@ -173,6 +173,7 @@ class CamExpedientesController extends Controller
                 'id_nota' => $request->get('id_nota'),
                 'id_estandar' => $estandares[$count],
                 'estatus' => 'Sin estatus',
+                'estatus_renovacion' => 'renovo',
                 'id_usuario' => auth()->user()->id,
                 'id_pago' => $notas_cam->id,
             );
@@ -449,7 +450,7 @@ class CamExpedientesController extends Controller
         }
         $check->update();
 
-        return redirect()->back()->with('success', 'curso actualizado con exito.');
+        return redirect()->back()->with('success', 'Datos actualizado con exito.');
     }
     public function update_check_centro(Request $request, $id){
 
