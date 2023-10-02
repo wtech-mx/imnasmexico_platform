@@ -489,6 +489,15 @@ class CursosController extends Controller
 
         $nuevoCurso->save();
 
+        // ============ Agregar a calendario ============
+        $evento = new Event;
+        $evento->title = $nuevoCurso->nombre;
+        $evento->start = $nuevoCurso->fecha_inicial;
+        $evento->end = $nuevoCurso->fecha_final;
+        $evento->id_profesor = $cursoExistente->id_profesor;
+        $evento->id_curso = $nuevoCurso->id;
+        $evento->save();
+
         // ============ Duplica Tickets ============
         $cursoExistente->CursosTickets->each(function ($ticket) use ($nuevoCurso) {
                 $fechaActual = date('Y-m-d');
