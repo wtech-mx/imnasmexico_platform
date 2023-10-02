@@ -40,6 +40,7 @@
                                         <option value="Evaluado">Evaluado</option>
                                         <option value="En proceso">En proceso</option>
                                         <option value="Entregado">Entregado</option>
+                                        <option value="Entregado por otra identidad">Entregado por otra identidad</option>
                                     </select>
                                 </div>
                             </div>
