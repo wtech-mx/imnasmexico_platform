@@ -182,7 +182,7 @@
     <div class="row mt-3">
         <div class="col-12 " >
             <div class="card h-100" >
-                @if ($expediente->check1 === NULL || $expediente->check2 === NULL || $expediente->check3 === NULL || $expediente->check4 === NULL || $expediente->check5 === NULL || $expediente->check6 === NULL)
+                @if ($expediente->check1 === NULL || $expediente->check3 === NULL || $expediente->check4 === NULL || $expediente->check5 === NULL || $expediente->check6 === NULL)
                     <form method="POST" action="{{ route('expediente.cita', $expediente->id) }}" enctype="multipart/form-data" role="form">
                         @csrf
                         <input type="hidden" name="_method" value="PATCH">
@@ -270,7 +270,7 @@
                             </div>
                         </div>
                     </form>
-                @elseif ($expediente->check1 != NULL && $expediente->check2 != NULL && $expediente->check3 != NULL && $expediente->check4 != NULL && $expediente->check5 != NULL && $expediente->check6 != NULL)
+                @elseif ($expediente->check1 != NULL && $expediente->check3 != NULL && $expediente->check4 != NULL && $expediente->check5 != NULL && $expediente->check6 != NULL)
                     <div class="card-header">
                         <h6 class="">Checklist</h6>
                     </div>
