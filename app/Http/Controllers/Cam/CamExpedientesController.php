@@ -170,6 +170,7 @@ class CamExpedientesController extends Controller
         $notas_cam = new CamPagosEstandar;
         $notas_cam->id_nota = $request->get('id_nota');
         $notas_cam->id_cliente = $request->get('id_cliente');
+        $notas_cam->operatividad = $request->get('operatividad');
         $notas_cam->cantidad_total = $request->get('cantidad_total');
         $notas_cam->id_usuario = auth()->user()->id;
         if ($request->hasFile("comprobante_pago")) {
@@ -183,18 +184,34 @@ class CamExpedientesController extends Controller
 
         $estandares = $request->input('estandares');
 
-        for ($count = 0; $count < count($estandares); $count++) {
-            $data = array(
-                'id_nota' => $request->get('id_nota'),
-                'id_estandar' => $estandares[$count],
-                'estatus' => 'Sin estatus',
-                'estatus_renovacion' => 'renovo',
-                'id_usuario' => auth()->user()->id,
-                'id_pago' => $notas_cam->id,
-            );
-            $insert_data[] = $data;
+        if($request->get('operatividad') == 1){
+            for ($count = 0; $count < count($estandares); $count++) {
+                $data = array(
+                    'id_nota' => $request->get('id_nota'),
+                    'id_estandar' => $estandares[$count],
+                    'estatus' => 'Sin estatus',
+                    'operables' => '1',
+                    'estatus_renovacion' => 'renovo',
+                    'id_usuario' => auth()->user()->id,
+                    'id_pago' => $notas_cam->id,
+                );
+                $insert_data[] = $data;
+            }
+            CamNotEstandares::insert($insert_data);
+        }else{
+            for ($count = 0; $count < count($estandares); $count++) {
+                $data = array(
+                    'id_nota' => $request->get('id_nota'),
+                    'id_estandar' => $estandares[$count],
+                    'estatus' => 'Sin estatus',
+                    'estatus_renovacion' => 'renovo',
+                    'id_usuario' => auth()->user()->id,
+                    'id_pago' => $notas_cam->id,
+                );
+                $insert_data[] = $data;
+            }
+            CamNotEstandares::insert($insert_data);
         }
-        CamNotEstandares::insert($insert_data);
 
         return redirect()->back()
             ->with('success', 'Nuevo estandar agregado con exito.');

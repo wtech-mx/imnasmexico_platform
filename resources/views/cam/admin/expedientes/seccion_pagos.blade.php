@@ -208,6 +208,13 @@
                                     </div>
                                 </div>
 
+                                <div class="col-6">
+                                    <h6 for="contrato_general">¿Operatividad?</h6>
+                                    <div class="form-check form-switch ps-0">
+                                        <input class="form-check-input ms-0" type="checkbox" id="operatividad" name="operatividad" value="1">
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </form>
@@ -220,6 +227,7 @@
                                 <th>Fecha</th>
                                 <th>Cantidad total</th>
                                 <th>Comprobante</th>
+                                <th>¿Operatividad?</th>
                                 <th>Detalles</th>
                             </tr>
                         </thead>
@@ -245,6 +253,14 @@
                                         <td>
                                             <a target="_blank" href="{{asset('cam_pagos/'.$pago_estandar->comprobante_pago)}}">Ver comprobante</a>
                                         </td>
+                                        <td>
+                                            @if ($pago_estandar->operatividad == '1')
+                                                <p>Si</p>
+                                            @else
+                                                <p>No</p>
+                                            @endif
+                                        </td>
+
                                         <td>
                                             <a data-bs-toggle="modal" data-bs-target="#exampleModalEstandar{{$pago_estandar->id}}" class="btn btn-link pe-3 ps-0 mb-0 ms-auto">Ver detalles</a>
                                         </td>
