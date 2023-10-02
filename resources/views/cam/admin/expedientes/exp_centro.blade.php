@@ -31,7 +31,7 @@ Expediente {{$expediente->id}}
     $diferencia_dias = $diferencia->days;
 
     @endphp
-    <div class="card shadow-lg mb-5">
+    <div class="card shadow-lg mb-3">
         <div class="card-body p-3">
         <div class="row gx-4">
             <div class="col-2 my-auto">

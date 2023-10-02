@@ -182,97 +182,110 @@
     <div class="row mt-3">
         <div class="col-12 " >
             <div class="card h-100" >
-                @if ($expediente->check1 === NULL || $expediente->check3 === NULL || $expediente->check4 === NULL || $expediente->check5 === NULL || $expediente->check6 === NULL)
-                    <form method="POST" action="{{ route('expediente.cita', $expediente->id) }}" enctype="multipart/form-data" role="form">
-                        @csrf
-                        <input type="hidden" name="_method" value="PATCH">
+                <form method="POST" action="{{ route('expediente.cita', $expediente->id) }}" enctype="multipart/form-data" role="form">
+                    @csrf
+                    <input type="hidden" name="_method" value="PATCH">
 
-                        <div class="card-header ">
-                            <div class="row">
-                                <div class="col-8">
-                                    <h6 class="mb-0">Programa de Citas</h6>
-                                </div>
-                                <div class="col-4">
-                                    <button type="submit" class="btn btn-sm close-modal" style="background: #6EC1E4; color: #ffff;">Guardar</button>
-                                </div>
+                    <div class="card-header ">
+                        <div class="row">
+                            <div class="col-8">
+                                <h6 class="mb-0">Programa de Citas</h6>
+                            </div>
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-sm close-modal" style="background: #6EC1E4; color: #ffff;">Guardar</button>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="card-body ">
-                            <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{$expediente->Nota->tipo}}</h6>
-                            <div class="row">
+                    <div class="card-body ">
+                        <h6 class="text-uppercase text-body text-xs font-weight-bolder">{{$expediente->Nota->tipo}}</h6>
+                        <div class="row">
 
-                                <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
-                                    <div class="form-check form-switch ps-0">
-                                        @if ($expediente->check1 == '1')
-                                            <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1" checked>
-                                        @else
-                                            <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1">
-                                        @endif
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
-                                        <strong>1. Evaluación del EC0076</strong></label>
-                                    </div>
-                                    <input id="evaluacion_ec0076" name="evaluacion_ec0076" value="{{$expediente->evaluacion_ec0076}}" type="date" class="form-control">
-                                </div>
-
-                                <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
-                                    <div class="form-check form-switch ps-0">
-                                    @if ($expediente->check3 == '1')
-                                        <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1" checked>
+                            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
+                                <div class="form-check form-switch ps-0">
+                                    @if ($expediente->check1 == '1')
+                                        <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1" checked>
                                     @else
-                                        <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1">
+                                        <input class="form-check-input ms-0" type="checkbox" id="check1" name="check1" value="1">
                                     @endif
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
-                                        <strong>3.- Refuerzo de transferencia de conocimiento y operatividad</strong></label>
-                                    </div>
-                                    <input id="refuerzo_conocimiento" name="refuerzo_conocimiento" value="{{$expediente->refuerzo_conocimiento}}" type="date" class="form-control">
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
+                                    <strong>1. Evaluación del EC0076</strong></label>
                                 </div>
-
-                                <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
-                                    <div class="form-check form-switch ps-0">
-                                    @if ($expediente->check4 == '1')
-                                        <input class="form-check-input ms-0" type="checkbox" id="check4" name="check4" value="1" checked>
-                                    @else
-                                        <input class="form-check-input ms-0" type="checkbox" id="check4" name="check4" value="1">
-                                    @endif
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
-                                        <strong>4.- Refuerzo de llenado de formatos</strong></label>
-                                    </div>
-                                    <input id="refuerzo_formatos" name="refuerzo_formatos" value="{{$expediente->refuerzo_formatos}}" type="date" class="form-control">
-                                </div>
-
-                                <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
-                                    <div class="form-check form-switch ps-0">
-                                    @if ($expediente->check5 == '1')
-                                        <input class="form-check-input ms-0" type="checkbox" id="check5" name="check5" value="1" checked>
-                                    @else
-                                        <input class="form-check-input ms-0" type="checkbox" id="check5" name="check5" value="1">
-                                    @endif
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
-                                        <strong>5.- Coaching empresarial</strong></label>
-                                    </div>
-                                    <input id="coaching_empresarial" name="coaching_empresarial" value="{{$expediente->coaching_empresarial}}" type="date" class="form-control">
-                                </div>
-
-                                <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
-                                    <div class="form-check form-switch ps-0">
-                                    @if ($expediente->check6 == '1')
-                                        <input class="form-check-input ms-0" type="checkbox" id="check6" name="check6" value="1" checked>
-                                    @else
-                                        <input class="form-check-input ms-0" type="checkbox" id="check6" name="check6" value="1">
-                                    @endif
-                                    <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
-                                        <strong>6.- Entrega de carpeta cam y formatos</strong></label>
-                                    </div>
-                                    <input id="carpeta_cam" name="carpeta_cam" value="{{$expediente->carpeta_cam}}" type="date" class="form-control">
-                                </div>
-
+                                <input id="evaluacion_ec0076" name="evaluacion_ec0076" value="{{$expediente->evaluacion_ec0076}}" type="date" class="form-control">
                             </div>
+
+                            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
+                                <div class="form-check form-switch ps-0">
+                                @if ($expediente->check3 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1" checked>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="check3" name="check3" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
+                                    <strong>3.- Refuerzo de transferencia de conocimiento y operatividad</strong></label>
+                                </div>
+                                <input id="refuerzo_conocimiento" name="refuerzo_conocimiento" value="{{$expediente->refuerzo_conocimiento}}" type="date" class="form-control">
+                            </div>
+
+                            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
+                                <div class="form-check form-switch ps-0">
+                                @if ($expediente->check4 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="check4" name="check4" value="1" checked>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="check4" name="check4" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
+                                    <strong>4.- Refuerzo de llenado de formatos</strong></label>
+                                </div>
+                                <input id="refuerzo_formatos" name="refuerzo_formatos" value="{{$expediente->refuerzo_formatos}}" type="date" class="form-control">
+                            </div>
+
+                            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
+                                <div class="form-check form-switch ps-0">
+                                @if ($expediente->check5 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="check5" name="check5" value="1" checked>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="check5" name="check5" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
+                                    <strong>5.- Coaching empresarial</strong></label>
+                                </div>
+                                <input id="coaching_empresarial" name="coaching_empresarial" value="{{$expediente->coaching_empresarial}}" type="date" class="form-control">
+                            </div>
+
+                            <div class="form-group col-12 col-sm-12 col-md-12 col-lg-12 p-2 mb-3">
+                                <div class="form-check form-switch ps-0">
+                                @if ($expediente->check6 == '1')
+                                    <input class="form-check-input ms-0" type="checkbox" id="check6" name="check6" value="1" checked>
+                                @else
+                                    <input class="form-check-input ms-0" type="checkbox" id="check6" name="check6" value="1">
+                                @endif
+                                <label class="form-check-label text-body ms-3 text-truncate w-80 mb-3">
+                                    <strong>6.- Entrega de carpeta cam y formatos</strong></label>
+                                </div>
+                                <input id="carpeta_cam" name="carpeta_cam" value="{{$expediente->carpeta_cam}}" type="date" class="form-control">
+                            </div>
+
                         </div>
-                    </form>
-                @elseif ($expediente->check1 != NULL && $expediente->check3 != NULL && $expediente->check4 != NULL && $expediente->check5 != NULL && $expediente->check6 != NULL)
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-12 mt-3" >
+            <div class="card h-100" >
+                <form method="POST" action="{{ route('expediente.checklist', $expediente->Nota->id) }}" enctype="multipart/form-data" role="form">
+                    @csrf
+                    <input type="hidden" name="_method" value="PATCH">
                     <div class="card-header">
-                        <h6 class="">Checklist</h6>
+                        <div class="row">
+                            <div class="col-8">
+                                <h6 class="">Checklist</h6>
+                            </div>
+                            <div class="col-4">
+                                <button type="submit" class="btn btn-sm close-modal" style="background: #6EC1E4; color: #ffff;">Guardar</button>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-body ">
                         <ul class="list-group">
@@ -346,9 +359,6 @@
                                 <div class="form-check form-switch ps-0">
                                     @if ($check->c6 == '1')
                                         <input class="form-check-input ms-0" type="checkbox" id="c6" name="c6" value="1" checked>
-                                        <p class="form-check-label text-body ms-3 text-truncate w-15 mb-0">
-                                            {{$check->User6->name}}
-                                        </p>
                                     @else
                                         <input class="form-check-input ms-0" type="checkbox" id="c6" name="c6" value="1">
                                     @endif
@@ -427,8 +437,7 @@
                             </li>
                         </ul>
                     </div>
-                @endif
-
+                </form>
             </div>
         </div>
 

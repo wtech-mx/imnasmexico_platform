@@ -310,7 +310,7 @@
                                                 <img src="{{ asset('assets\user\icons\certificate.png') }}" alt="" width="35px">
                                             </span>
                                             <select name="estandares_renovacion[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
-                                                @foreach ($estandares_usuario as $estandar_cam)
+                                                @foreach ($estandares_cam_reno as $estandar_cam)
                                                     <option value="{{$estandar_cam->id}}">{{$estandar_cam->Estandar->estandar}}</option>
                                                 @endforeach
                                             </select>
@@ -348,26 +348,28 @@
                     <table class="table table-flush mt-2" id="datatable-search">
                         <thead class="thead">
                             <tr>
-                                <th>No</th>
+                                <th>Fecha de renovacion</th>
                                 <th>Cantidad total</th>
-                                <th>Fecha incio</th>
-                                <th>Fecha fin</th>
-                                <th>Comprobante</th>
+                                <th>Detalles</th>
                             </tr>
                         </thead>
                         <tbody>
                                 @foreach ($pagos_renovacion as $pago_renovacion)
+                                @php
+                                    $fecha = $pago_renovacion->fecha; // Suponiendo que $fecha es una cadena en formato 'Y-m-d'
+                                    // Crear un objeto DateTime desde la cadena de fecha
+                                    $fechaObj = new DateTime($fecha);
+                                    // Formatear la fecha en el formato "d de F del Y" (01 de Octubre del 2024)
+                                    $fecha_formateada = $fechaObj->format('d \d\e F \d\e\l Y');
+                                @endphp
                                     <tr>
-                                        <td>{{$pago_renovacion->id}}</td>
+                                        <td>{{$fecha_formateada}}</td>
                                         <td>{{$pago_renovacion->cantidad_total}}</td>
                                         <td>
-                                            {{ $fecha_formateada}}
-                                        </td>
-                                        <td>{{ $fecha_formateada2}}</td>
-                                        <td>
-                                            <a target="_blank" href="{{asset('cam_pagos/'.$pago_renovacion->comprobante_pago)}}">Ver comprobante</a>
+                                            <a data-bs-toggle="modal" data-bs-target="#exampleModalRenovacion{{$pago_renovacion->id}}" class="btn btn-link pe-3 ps-0 mb-0 ms-auto">Ver detalles</a>
                                         </td>
                                     </tr>
+                                    @include('cam.admin.expedientes.modal_renovacion')
                                 @endforeach
                         </tbody>
                     </table>

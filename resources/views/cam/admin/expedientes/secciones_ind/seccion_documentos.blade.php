@@ -492,12 +492,6 @@
                                     @endif
                                 @endif
                             </div>
-
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-sm" style="background: #6EC1E4; color: #ffff;">Guardar</button>
-
-                            </div>
-
                         </div>
                     </div>
                 </form>

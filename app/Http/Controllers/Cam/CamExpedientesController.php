@@ -54,8 +54,10 @@ class CamExpedientesController extends Controller
         $pagos_estandar = CamPagosEstandar::where('id_nota', $id_nota)->get();
         $pagos_renovacion = CamPagosRenovacion::where('id_nota', $id_nota)->get();
         $estandares_cam_comprados = CamNotEstandares::where('id_nota', $id_nota)->where('estatus_renovacion', '=', 'renovo')->get();
+        $estandares_cam_reno = CamNotEstandares::where('id_nota', $id_nota)->get();
+        $estandares_renovacion = CamRenoEstandares::where('id_nota', $id_nota)->get();
 
-        return view('cam.admin.expedientes.exp_ind', compact('estandares_cam_comprados','pagos_renovacion','pagos_emision', 'pagos_estandar', 'estandares_cam_user','expediente', 'estandares_usuario', 'documentos', 'check', 'video', 'estandares_cam', 'minis_exps','videos_dinamicos'));
+        return view('cam.admin.expedientes.exp_ind', compact('estandares_renovacion','estandares_cam_reno','estandares_cam_comprados','pagos_renovacion','pagos_emision', 'pagos_estandar', 'estandares_cam_user','expediente', 'estandares_usuario', 'documentos', 'check', 'video', 'estandares_cam', 'minis_exps','videos_dinamicos'));
     }
 
     public function index_centro(){
@@ -83,8 +85,10 @@ class CamExpedientesController extends Controller
         $pagos_estandar = CamPagosEstandar::where('id_nota', $id)->get();
         $pagos_renovacion = CamPagosRenovacion::where('id_nota', $id)->get();
         $estandares_cam_comprados = CamNotEstandares::where('id_nota', $id)->where('estatus_renovacion', '=', 'renovo')->get();
+        $estandares_cam_reno = CamNotEstandares::where('id_nota', $id)->get();
+        $estandares_renovacion = CamRenoEstandares::where('id_nota', $id)->get();
 
-        return view('cam.admin.expedientes.exp_centro', compact('estandares_cam_comprados','pagos_renovacion','pagos_emision', 'pagos_estandar','videos_dinamicos','expediente', 'estandares_usuario', 'estandares_cam_user','documentos', 'check', 'video', 'estandares_cam', 'minis_exps'));
+        return view('cam.admin.expedientes.exp_centro', compact('estandares_renovacion','estandares_cam_reno','estandares_cam_comprados','pagos_renovacion','pagos_emision', 'pagos_estandar','videos_dinamicos','expediente', 'estandares_usuario', 'estandares_cam_user','documentos', 'check', 'video', 'estandares_cam', 'minis_exps'));
     }
 
     public function update_estatus(Request $request, $id){
@@ -217,11 +221,14 @@ class CamExpedientesController extends Controller
         // Itera sobre todos los registros y actualiza sus estatus
         foreach ($registrosNota as $registro) {
             // Si el ID del registro está en los seleccionados, actualiza con el nuevo estatus_renovacion
+
             if (in_array($registro->id, $estandares)) {
-                $registro->update(['estatus_renovacion' => 'renovo']);
+                $registro->estatus_renovacion = 'renovo';
+                $registro->update();
             } else {
                 // Si no está seleccionado, actualiza con otro estatus_renovacion
-                $registro->update(['estatus_renovacion' => 'no renovo']);
+                $registro->estatus_renovacion = 'no renovo';
+                $registro->update();
             }
         }
 
@@ -280,7 +287,7 @@ class CamExpedientesController extends Controller
 
         $cita->update();
 
-        return redirect()->back()->with('success', 'curso actualizado con exito.');
+        return redirect()->back()->with('success', 'Datos actualizado con exito.');
     }
 
     public function update_check(Request $request, $id){
@@ -450,15 +457,25 @@ class CamExpedientesController extends Controller
         }
         $check->update();
 
-        return redirect()->back()->with('success', 'Datos actualizado con exito.');
+        return redirect()->back()->with('success', 'Datos actualizados con exito.');
     }
+
+    public function update_checklist(Request $request, $id){
+
+        $check = CamChecklist::where('id_nota', $id)->first();
+        $data = $request->except(['_token', '_method']);
+        $check->update($data);
+
+        return redirect()->back()->with('success', 'Datos actualizados con exito.');
+    }
+
     public function update_check_centro(Request $request, $id){
 
         $check = CamChecklist::where('id_nota', $id)->first();
         $data = $request->except(['_token', '_method']);
         $check->update($data);
 
-        return redirect()->back()->with('success', 'curso actualizado con exito.');
+        return redirect()->back()->with('success', 'Datos actualizado con exito.');
     }
 
     public function crear_nomb(Request $request){

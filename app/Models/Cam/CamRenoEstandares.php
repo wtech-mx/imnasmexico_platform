@@ -20,4 +20,8 @@ class CamRenoEstandares extends Model
     public function Nota(){
         return $this->belongsTo(CamNotas::class, 'id_nota');
     }
+    
+    public function Estandar(){
+        return $this->belongsTo(CamEstandares::class, 'id_estandar');
+    }
 }

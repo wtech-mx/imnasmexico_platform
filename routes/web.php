@@ -395,7 +395,10 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::patch('/expediente/user/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_exp_user'])->name('update_exp_user');
 
         Route::patch('/expediente/cita/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_citas'])->name('expediente.cita');
+        Route::patch('/expediente/checklist/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_checklist'])->name('expediente.checklist');
         Route::patch('/expediente/check/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_check'])->name('expediente.check');
+
+        Route::patch('/expediente/checklist/centro/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_check_centro'])->name('expediente.checklist_centro');
 
         // =============== M O D U L O  P A G O S ===============================
         Route::post('/expediente/pago/nueva-emision', [App\Http\Controllers\Cam\CamExpedientesController::class, 'pago_nueva_emision'])->name('nueva_emision.pago');
