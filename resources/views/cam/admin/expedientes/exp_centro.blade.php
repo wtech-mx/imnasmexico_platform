@@ -248,7 +248,7 @@ Expediente {{$expediente->id}}
 
         if (categoria === 'estandares') {
             mostrarCarpetasCompradas(expedienteId);
-        } else if (categoria === '11' || categoria === '12' || categoria === '13' || categoria === '14' || categoria === '15'  || categoria === '16'  || categoria === '17'  || categoria === '18'  || categoria === '19'  || categoria === '20') {
+        } else if (categoria === 'cedula' || categoria === '11' || categoria === '12' || categoria === '13' || categoria === '14' || categoria === '15'  || categoria === '16'  || categoria === '17'  || categoria === '18'  || categoria === '19'  || categoria === '20') {
             // Muestra las imágenes o documentos con el número '2' en la columna 'tipo'
             mostrarArchivosSubidos(categoria);
         }

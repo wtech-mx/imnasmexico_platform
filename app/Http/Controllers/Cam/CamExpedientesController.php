@@ -798,28 +798,54 @@ class CamExpedientesController extends Controller
     public function crear_docexp(Request $request){
         $dominio = $request->getHost();
 
-            if($dominio == 'plataforma.imnasmexico.com'){
-                $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam_doc_exp/');
-            }else{
-                $ruta_recursos = public_path() . '/cam_doc_exp/';
-            }
 
-            $id_nota = $request->get('id_nota');
-            $id_cliente = $request->get('id_cliente');
-            $tipo = $request->get('categoria');
-            if ($request->hasFile('archivos')) {
-                $foto = $request->file('archivos');
-                foreach ($foto as $archivo) {
-                    $path = $ruta_recursos;
-                    $fileName = uniqid() . $archivo->getClientOriginalName();
-                    $archivo->move($path, $fileName);
-                    $nomb = new CamDocExp;
-                    $nomb->nombre = $fileName;
-                    $nomb->tipo = $tipo;
-                    $nomb->id_nota = $id_nota;
-                    $nomb->id_cliente = $id_cliente;
-                    $nomb->id_usuario = auth()->user()->id;
-                    $nomb->save();
+
+            if($request->get('categoria') == 'cedula'){
+                if($dominio == 'plataforma.imnasmexico.com'){
+                    $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam_doc_exp/');
+                }else{
+                    $ruta_recursos = public_path() . '/cam_doc_general/';
+                }
+                $id_nota = $request->get('id_nota');
+                $id_cliente = $request->get('id_cliente');
+                $tipo = $request->get('categoria');
+                if ($request->hasFile('archivos')) {
+                    $foto = $request->file('archivos');
+                    foreach ($foto as $archivo) {
+                        $path = $ruta_recursos;
+                        $fileName = uniqid() . $archivo->getClientOriginalName();
+                        $archivo->move($path, $fileName);
+                        $nomb = new CamCedulas;
+                        $nomb->nombre = $fileName;
+                        $nomb->id_nota = $id_nota;
+                        $nomb->id_cliente = $id_cliente;
+                        $nomb->save();
+                    }
+                }
+            }else{
+
+                if($dominio == 'plataforma.imnasmexico.com'){
+                    $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/cam_doc_exp/');
+                }else{
+                    $ruta_recursos = public_path() . '/cam_doc_exp/';
+                }
+                $id_nota = $request->get('id_nota');
+                $id_cliente = $request->get('id_cliente');
+                $tipo = $request->get('categoria');
+                if ($request->hasFile('archivos')) {
+                    $foto = $request->file('archivos');
+                    foreach ($foto as $archivo) {
+                        $path = $ruta_recursos;
+                        $fileName = uniqid() . $archivo->getClientOriginalName();
+                        $archivo->move($path, $fileName);
+                        $nomb = new CamDocExp;
+                        $nomb->nombre = $fileName;
+                        $nomb->tipo = $tipo;
+                        $nomb->id_nota = $id_nota;
+                        $nomb->id_cliente = $id_cliente;
+                        $nomb->id_usuario = auth()->user()->id;
+                        $nomb->save();
+                    }
                 }
             }
 
