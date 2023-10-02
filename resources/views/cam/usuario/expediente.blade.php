@@ -17,7 +17,7 @@
         <div class="col-12 mb-5">
             <h1 class="text-center tittle_bold_cam">Expediente <br> Evaluador independiente: </h1> <h3 class="text-center tittle_border_cam">{{ auth()->user()->name }}</h3>
             <div class="d-flex justify-content-center">
-                <a class="text-center btn btn-lg btn-outline-light " href="{{ route('evaluador.index', auth()->user()->code) }}">Regresar al inicio</a>
+                <a class="text-center btn btn-lg btn-outline-light " href="{{ route('evaluador.index_expediente', auth()->user()->code) }}">Regresar al inicio</a>
             </div>
         </div>
 
