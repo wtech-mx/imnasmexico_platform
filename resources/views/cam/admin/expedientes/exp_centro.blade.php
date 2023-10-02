@@ -36,11 +36,13 @@ Expediente {{$expediente->id}}
         <div class="row gx-4">
             <div class="col-2 my-auto">
                 <div class="avatar avatar-xl position-relative">
-                    @if ($documentos->logo == NULL)
-                        <img src="{{asset('assets/user/logotipos/sin-logo.jpg')}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-                    @else
-                        <img src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->logo)}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-                    @endif
+                    <a type="button" data-bs-toggle="modal" data-bs-target="#modal_estatus">
+                        @if ($documentos->logo == NULL)
+                            <img src="{{asset('assets/user/logotipos/sin-logo.jpg')}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                        @else
+                            <img src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->logo)}}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                        @endif
+                    </a>
                 </div>
             </div>
             <div class="col-4 my-auto">
