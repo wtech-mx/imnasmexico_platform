@@ -35,6 +35,17 @@ class CamExpedientesController extends Controller
         return view('cam.admin.expedientes.index', compact('expedientes'));
     }
 
+    public function update_estatus_expedientes(Request $request,$id){
+
+        $user = User::find($id);
+        $user->estatus_exp = $request->get('estatus_exp');
+
+        $user->update();
+
+        return redirect()->back()->with('success', 'Datos actualizados exitosamente');
+
+    }
+
     public function edit($id_nota){
 
         $expediente = CamCitas::where('id_nota', $id_nota)->first();

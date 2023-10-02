@@ -410,6 +410,8 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::post('/expediente/mini/crear', [App\Http\Controllers\Cam\CamExpedientesController::class, 'crear_mini'])->name('crear.mini_exp');
         Route::patch('/expediente/mini/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_mini'])->name('update.mini_exp');
         Route::post('/expediente/mini/estandar', [App\Http\Controllers\Cam\CamExpedientesController::class, 'crear_estandar_mini'])->name('crear_estandar.mini_exp');
+        Route::patch('/esstatus/expedientes/update/{id}', [App\Http\Controllers\Cam\CamExpedientesController::class, 'update_estatus_expedientes'])->name('estatus_expediente.update');
+
 
         // =============== M O D U L O  N O T A S ===============================
         Route::get('/notas/index', [App\Http\Controllers\Cam\NotasCamController::class, 'index'])->name('index.notas');
@@ -429,6 +431,7 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::get('/admin/videos_cam', [App\Http\Controllers\Cam\CamVideosController::class, 'index'])->name('videos_cam.index');
         Route::post('/admin/videos_cam/store', [App\Http\Controllers\Cam\CamVideosController::class, 'store'])->name('videos_cam.store');
         Route::patch('/admin/videos_cam/update/{id}', [App\Http\Controllers\Cam\CamVideosController::class, 'update'])->name('videos_cam.update');
+
 
     });
 });
