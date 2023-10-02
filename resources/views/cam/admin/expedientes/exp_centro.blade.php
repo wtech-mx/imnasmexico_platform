@@ -104,7 +104,7 @@ Expediente {{$expediente->id}}
                 @include('cam.admin.expedientes.seccion_pagos')
             </div>
         </div>
-
+        @include('cam.admin.expedientes.modal_estatus_expediente')
 
         <div class="row mt-4">
             <div class="col-12">
