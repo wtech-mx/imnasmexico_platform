@@ -197,6 +197,23 @@ Expediente {{$expediente->id}}
 </script>
 
 <script>
+    $(document).ready(function() {
+        // Escucha los cambios en los campos "portafolios" y "costo_emi"
+        $('#portafolios, #costo_emi').on('input', function() {
+            // Obtiene los valores de los campos
+            var portafolios = parseFloat($('#portafolios').val()) || 0;
+            var costo_emi = parseFloat($('#costo_emi').val()) || 0;
+
+            // Calcula el producto
+            var cantidad_total_emision = portafolios * costo_emi;
+
+            // Muestra el resultado en el campo "cantidad_total_emision"
+            $('#cantidad_total_emision').val(cantidad_total_emision.toFixed(2)); // Ajusta la cantidad de decimales según tus necesidades
+        });
+    });
+</script>
+
+<script>
     if (document.getElementById('state1')) {
       const countUp = new CountUp('state1', document.getElementById("state1").getAttribute("countTo"));
       if (!countUp.error) {
