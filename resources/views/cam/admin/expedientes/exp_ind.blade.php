@@ -208,6 +208,9 @@ $diferencia_dias = $diferencia->days;
         if (categoria === 'cedula') {
             $('#contenedorSubirArchivosCedula').show();
         }
+        if (categoria === 'diplomas') {
+            $('#contenedorSubirArchivosDiplomas').show();
+        }
     }
 
     function mostrarCarpetasCompradas(notaId) {

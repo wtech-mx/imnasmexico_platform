@@ -173,18 +173,12 @@ class NotasCamController extends Controller
 
         $estandares_operables = $request->input('estandares_operables');
 
-        for ($count = 0; $count < count($estandares_operables); $count++) {
-            $data2 = array(
+        foreach ($estandares_operables as $estandar_operable) {
+            CamNotEstandares::where([
                 'id_nota' => $notas_cam->id,
-                'id_estandar' => $estandares_operables[$count],
-                'estatus' => 'Sin estatus',
-                'estatus_renovacion' => 'renovo',
-                'operables' => '1',
-                'id_usuario' => auth()->user()->id,
-            );
-            $insert_data2[] = $data2;
+                'id_estandar' => $estandar_operable,
+            ])->update(['operables' => '1']);
         }
-        CamNotEstandares::insert($insert_data2);
 
         $estandares_afines = $request->input('estandares_afines');
 

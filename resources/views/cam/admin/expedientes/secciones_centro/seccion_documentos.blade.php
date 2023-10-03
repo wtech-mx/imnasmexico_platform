@@ -62,12 +62,6 @@
                             </button>
                         </div>
                         <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('14')">
-                                <img src="{{asset('assets/user/icons/read.png')}}" class="img-fluid" style="width: 40%;">
-                                <p for=""><br>Carta Compromiso</p>
-                            </button>
-                        </div>
-                        <div class="col-4">
                             <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('15')">
                                 <img src="{{asset('assets/user/icons/monetary-policy.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>Constancia de situacion fiscal</p>
@@ -95,12 +89,6 @@
                             <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('6')">
                                 <img src="{{asset('assets/user/icons/perfil.png')}}" class="img-fluid" style="width: 40%;">
                                 <p for=""><br>Especificaciónes Fotografia</p>
-                            </button>
-                        </div>
-                        <div class="col-4">
-                            <button class="btn btn-sm" id="btnArchivos2" onclick="mostrarArchivos('19')">
-                                <img src="{{asset('assets/user/icons/carta.png')}}" class="img-fluid" style="width: 40%;">
-                                <p for=""><br>Carta de Responsabilidad (Logo)</p>
                             </button>
                         </div>
                         <div class="col-4">
@@ -190,6 +178,7 @@
                                     <h4 class="mb-0">Documentos</h4>
                                 </div>
                                 <div class="col-4">
+                                    <button type="submit" class="btn" style="background: #6EC1E4; color: #ffff;">Guardar</button>
                                 </div>
                             </div>
                         </div>
@@ -494,15 +483,15 @@
                             </div>
 
                             <h6 for="acuerdo_confidencialidad">Contrato individual </h6>
-                            <div class="col-6 mb-3">
-                                <div class="input-group mb-3">
+                            <div class="col-6">
+                                <div class="input-group mb-2">
                                     <span class="input-group-text" id="basic-addon1">
                                         <img src="{{ asset('assets\cam\contrato.png') }}" alt="" width="35px">
                                     </span>
                                     <input id="contrato_individual" name="contrato_individual" type="file" class="form-control" >
                                 </div>
                             </div>
-                            <div class="col-6 mb-3">
+                            <div class="col-6">
                                 @if ($documentos->contrato_individual != NULL)
                                     @if (pathinfo($documentos->contrato_individual, PATHINFO_EXTENSION) == 'pdf')
                                         <iframe class="mt-2" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->contrato_individual)}}" style="width: 60%; height: 60px;"></iframe>
@@ -520,9 +509,31 @@
                                 @endif
                             </div>
 
+                            <h6 class="" for="rfc">RFC</h6>
+                            <div class="col-6 mb-3">
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets\user\icons\qr.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input id="rfc" name="rfc" type="file" class="form-control" >
+                                </div>
+                            </div>
                             <div class="col-6">
-                                <button type="submit" class="btn" style="background: #6EC1E4; color: #ffff;">Guardar</button>
-
+                                @if ($documentos->rfc != NULL)
+                                    @if (pathinfo($documentos->rfc, PATHINFO_EXTENSION) == 'pdf')
+                                        <iframe class="mt-2" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->rfc)}}" style="width: 60%; height: 60px;"></iframe>
+                                        <p class="text-center ">
+                                            <a class="btn btn-sm text-dark" href="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->rfc) }}" target="_blank" style="background: #836262; color: #ffff!important
+                                            ">Ver archivo</a>
+                                        </p>
+                                    @else
+                                        <p class="text-center mt-2">
+                                            <img id="blah" src="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->rfc) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                            <a class="text-center text-dark btn btn-sm" href="{{asset('cam/doc/'. $documentos->Nota->Cliente->telefono . '/' .$documentos->rfc) }}" target="_blank" style="background: #836262; color: #ffff!important
+                                            ">Ver Imagen</a>
+                                        </p>
+                                    @endif
+                                @endif
                             </div>
 
                         </div>

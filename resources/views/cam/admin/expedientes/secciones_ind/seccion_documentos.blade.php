@@ -49,6 +49,12 @@
                                 <p class="text-sm"><br>7. Formatos Resolucion De Quejas</p>
                             </button>
                         </div>
+                        <div class="col-4">
+                            <button class="btn btn-sm" id="btnArchivos3" onclick="mostrarArchivos('diplomas', {{ $expediente->Nota->id }})">
+                                <img src="{{asset('assets/user/icons/consent.png')}}" class="img-fluid" style="width: 40%;">
+                                <p class="text-sm"><br>8. Diplomas extras</p>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,6 +89,16 @@
                         <form method="POST" action="{{ route('crear.nomb') }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <input type="hidden" id="categoria" name="categoria" value="cedula">
+                            <input id="foto[]" name="foto[]" type="file" class="form-control" multiple>
+                            <input id="id_nota" name="id_nota" type="number" value="{{ $expediente->Nota->id }}" style="display: none">
+                            <input id="id_cliente" name="id_cliente" type="number" value="{{ $expediente->Nota->id_cliente }}" style="display: none">
+                            <button type="submit" class="btn btn-sm mt-2" style="background: #6EC1E4; color: #ffff;">Guardar</button>
+                        </form>
+                    </div>
+                    <div id="contenedorSubirArchivosDiplomas" style="display: none;">
+                        <form method="POST" action="{{ route('crear.nomb') }}" enctype="multipart/form-data" role="form">
+                            @csrf
+                            <input type="hidden" id="categoria" name="categoria" value="diplomas">
                             <input id="foto[]" name="foto[]" type="file" class="form-control" multiple>
                             <input id="id_nota" name="id_nota" type="number" value="{{ $expediente->Nota->id }}" style="display: none">
                             <input id="id_cliente" name="id_cliente" type="number" value="{{ $expediente->Nota->id_cliente }}" style="display: none">
@@ -492,6 +508,7 @@
                                     @endif
                                 @endif
                             </div>
+
                         </div>
                     </div>
                 </form>

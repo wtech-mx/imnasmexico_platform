@@ -43,7 +43,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="form-group">
                                     <label for="name">Correo *</label>
                                     <div class="input-group mb-3">
@@ -55,26 +55,39 @@
                                 </div>
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-4">
                                 <div class="form-group">
-                                    <label for="name">Telefono Local</label>
+                                    <label for="name">Celular (WhatasApp) *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/whatsapp.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055">@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required value="{{old('celular')}}">@error('celular') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
+
                             </div>
 
-                            <div class="col-3">
+                            <div class="col-4">
                                 <div class="form-group">
-                                    <label for="name">Celular *</label>
+                                    <label for="name">Celular (celular) *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/foldable-phone.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required>@error('celular') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        <input id="celular" name="celular" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required value="{{old('celular')}}" >@error('celular') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Telefono (Local) *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="5500550055" required value="{{old('telefono')}}">@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
                             </div>

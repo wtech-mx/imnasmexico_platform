@@ -8,6 +8,7 @@ use App\Models\Cam\CamCedulas;
 use App\Models\Cam\CamCertificados;
 use App\Models\Cam\CamChecklist;
 use App\Models\Cam\CamCitas;
+use App\Models\Cam\CamDiplomas;
 use App\Models\Cam\CamDocExp;
 use App\Models\Cam\CamDocuemntos;
 use App\Models\Cam\CamDocumentosUsers;
@@ -448,6 +449,14 @@ class CamExpedientesController extends Controller
             $file->move($path, $fileName);
             $doc->nombramiento = $fileName;
         }
+
+        if ($request->hasFile("rfc")) {
+            $file = $request->file('rfc');
+            $path = $ruta_recursos;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $doc->rfc = $fileName;
+        }
         $doc->update();
 
         $check = CamChecklist::where('id_nota', $id)->first();
@@ -549,6 +558,23 @@ class CamExpedientesController extends Controller
                 }
             }
 
+            if($request->get('categoria') == 'diplomas'){
+                if ($request->hasFile('foto')) {
+                    $foto = $request->file('foto');
+                    foreach ($foto as $archivo) {
+                        $path = $ruta_recursos;
+                        $fileName = uniqid() . $archivo->getClientOriginalName();
+                        $archivo->move($path, $fileName);
+                        $nomb = new CamDiplomas;
+                        $nomb->nombre = $fileName;
+                        $nomb->id_nota = $id_nota;
+                        $nomb->id_cliente = $id_cliente;
+                        $nomb->id_usuario = auth()->user()->id;
+                        $nomb->save();
+                    }
+                }
+            }
+
         $nomb->save();
 
         return redirect()->back()->with('success', 'Archivo subido exitosamente');
@@ -563,6 +589,8 @@ class CamExpedientesController extends Controller
             $archivos = CamCedulas::where('id_nota', $expedienteId)->get();
         }elseif($categoria == 'nombramiento'){
             $archivos = CamNombramiento::where('id_nota', $expedienteId)->get();
+        }elseif($categoria == 'diplomas'){
+            $archivos = CamDiplomas::where('id_nota', $expedienteId)->get();
         }else{
             $archivos = CamDocuemntos::where('id_carpdoc', $categoria)->get();
         }
