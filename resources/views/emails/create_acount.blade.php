@@ -402,7 +402,7 @@
             <tr>
                 <td class='viwec-mobile-button-padding' align='center' valign='middle' role='presentation'
                     height="44" style='border-radius:10px;background-color:#c20303;width:190px; border:0 hidden; ;'>
-                    <a href='https://imnasmexico.com/new/mi-cuenta/%20' target='_blank'
+                    <a href='https://plataforma.imnasmexico.com/' target='_blank'
                        style='color:#eeeeee !important;font-weight:400;display:block;text-decoration:none;text-transform:none;margin:0;text-align: center;max-width: 100%;background-color:#c20303;line-height:44px;height:44px'>
                           <span style='color: #eeeeee'>
                               Ir a mi cuenta                          </span>
