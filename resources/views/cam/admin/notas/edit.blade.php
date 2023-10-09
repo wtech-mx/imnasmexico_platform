@@ -14,6 +14,32 @@
                 @csrf
                     <div class="modal-body">
                         <div class="row">
+
+                            <div class="col-12">
+                                @php
+                                        $name = $nota_cam->Cliente->name;
+                                        $apellido = $nota_cam->Cliente->apellido;
+                                        $celular = $nota_cam->Cliente->telefono;
+                                        // Obtén las dos primeras letras del nombre
+                                        $primerasDosLetrasNombre = substr($name, 0, 2);
+                                        // Obtén las dos primeras letras del apellido
+                                        $primerasDosLetrasApellido = substr($apellido, 0, 2);
+                                        // Obtén los últimos tres dígitos del número de teléfono
+                                        $ultimosTresDigitosCelular = substr($celular, -3);
+                                        // Concatena las partes para formar la contraseña
+                                        $password = $primerasDosLetrasNombre . $primerasDosLetrasApellido . $ultimosTresDigitosCelular;
+                                @endphp
+                                <div class="form-group">
+                                    <label for="name">Contraseña *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/password.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="" name="" type="text" class="form-control" value="{{$password}}" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-4">
                                 <div class="form-group">
                                     <label for="name">Fecha *</label>
