@@ -20,10 +20,12 @@
                                 ¿Como funciona?
                             </a>
 
+                            <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff">Regresar </a>
+
                             @can('cursos-create')
-                            <a class="btn btn-sm btn-success" href="{{ route('cursos.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                <i class="fa fa-fw fa-edit"></i> Crear
-                            </a>
+                                <a class="btn btn-sm btn-success" href="{{ route('cursos.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    <i class="fa fa-fw fa-edit"></i> Crear
+                                </a>
                             @endcan
 
                         </div>
@@ -36,10 +38,10 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Img</th>
+                                            <th>Modalidad</th>
                                             <th>Nombre</th>
                                             <th>fecha inicio</th>
                                             <th>fecha final</th>
-                                            <th>modalidad</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -49,7 +51,41 @@
                                                 <td>{{ $curso->id }}</td>
                                                 <th><img id="blah" src="{{asset('curso/'.$curso->foto) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
 
-                                                <td>{{ $curso->nombre }}</td>
+                                                @if ($curso->modalidad == "Online")
+                                                    <td> <label class="badge badge-sm" style="color: #009ee3;background-color: #009ee340;">Online</label> </td>
+                                                @else
+                                                    <td> <label class="badge badge-sm" style="color: #746AB0;background-color: #746ab061;">Presencial</label> </td>
+                                                @endif
+
+                                                <td>
+
+                                                    @php
+                                                        $nombreDelCurso = $curso->nombre;
+                                                        $nombreDelCurso = str_replace('Curso de ', '', $nombreDelCurso);
+                                                        $nombreDelCurso = str_replace('Curso ', '', $nombreDelCurso);
+
+                                                        $palabras = explode(' ', $nombreDelCurso);
+
+                                                        // Inicializa la cadena formateada
+                                                        $nombre_formateado = '';
+                                                        $contador_palabras = 0;
+
+                                                        foreach ($palabras as $palabra) {
+                                                            // Agrega la palabra actual a la cadena formateada
+                                                            $nombre_formateado .= $palabra . ' ';
+
+                                                            // Incrementa el contador de palabras
+                                                            $contador_palabras++;
+
+                                                            // Agrega un salto de línea después de cada tercera palabra
+                                                            if ($contador_palabras % 3 == 0) {
+                                                                $nombre_formateado .= "<br>";
+                                                            }
+                                                        }
+                                                    @endphp
+
+                                                    {!! $nombre_formateado !!}
+                                                </td>
                                                 <td>
                                                     @php
                                                     $fecha = $curso->fecha_inicial;
@@ -66,11 +102,6 @@
                                                     @endphp
                                                     {{$fecha_formateada}}
                                                 </td>
-                                                @if ($curso->modalidad == "Online")
-                                                    <td> <label class="badge badge-sm" style="color: #009ee3;background-color: #009ee340;">Online</label> </td>
-                                                @else
-                                                    <td> <label class="badge badge-sm" style="color: #746AB0;background-color: #746ab061;">Presencial</label> </td>
-                                                @endif
 
                                                 <td>
                                                     @can('cursos-duplicar')

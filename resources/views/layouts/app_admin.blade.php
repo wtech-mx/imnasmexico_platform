@@ -65,7 +65,6 @@
     {{-- <script src="{{asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script> --}}
     <script src="{{asset('assets/admin/js/core/popper.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/core/bootstrap.min.js')}}"></script>
-    <script src="{{asset('assets/admin/js/plugins/perfect-scrollbar.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/plugins/smooth-scrollbar.min.js')}}"></script>
     <script src="{{asset('assets/admin/js/plugins/datatables.js')}}"></script>
     <script src="{{asset('assets/admin/js/plugins/fullcalendar.min.js')}}"></script>
@@ -82,6 +81,9 @@
     @yield('select2')
 
     <script>
+        document.getElementById('regresar_btn').addEventListener('click', function() {
+            history.back();
+        });
         $(function() {
             $('form').on('submit', function() {
                 // Deshabilitar el botón de envío al hacer clic

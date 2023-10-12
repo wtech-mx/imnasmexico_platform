@@ -18,7 +18,7 @@ Create Rol
             <div class="card-header">
               <h3 class="mb-3">Crear Role</h3>
               <div class="d-flex justify-content-between">
-                <a class="btn" href="{{ route('roles.index') }}" style="background: {{$configuracion->color_boton_close}}; color: #ffff"> Regresar</a>
+                <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff">Regresar </a>
                 <button type="button" class="btn btn-secondary " data-bs-toggle="modal" data-bs-target="#exampleModal">
                     Crear Permiso
                   </button>

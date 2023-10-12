@@ -31,7 +31,7 @@
                                             <th>Correo</th>
                                             <th>Telefono</th>
                                             <th>Abono</th>
-                                            <th>Pago Completo</th>
+                                            <th>Deudores</th>
 
                                             <th>Acciones</th>
                                         </tr>
