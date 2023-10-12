@@ -59,7 +59,10 @@ class CursosController extends Controller
 
     public function create()
     {
-        $profesores =  User::where('cliente','2')->orWhere('cliente', '5')->orderBy('id','DESC')->get();
+        $profesores = User::where('cliente', '2')
+        ->orWhere('cliente', '5')
+        ->orderBy('id', 'DESC')
+        ->get();
         $estandares = CarpetasEstandares::orderBy('nombre','asc')->get();
         $fotos_online = Recursos::where('tipo', '=', 'Online')->get();
         $fotos_presencial = Recursos::where('tipo', '=', 'Presencial')->get();
@@ -206,7 +209,11 @@ class CursosController extends Controller
 
     public function edit($id)
     {
-        $profesores =  User::where('cliente','2')->orderBy('id','DESC')->get();
+        $profesores = User::where('cliente', '2')
+        ->orWhere('cliente', '5')
+        ->orderBy('id', 'DESC')
+        ->get();
+
         $carpetas_estandares = CarpetasEstandares::orderBy('nombre','asc')->get();
         $curso = Cursos::find($id);
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();

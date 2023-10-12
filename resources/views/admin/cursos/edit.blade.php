@@ -103,7 +103,7 @@
                                                         <label for="estandar">Seleccionar Profesor</label>
                                                         <select class="form-control" id="id_profesor" name="id_profesor">
 
-                                                            @if ($curso->id_profesor == 0 || $curso->id_profesor == NULL)
+                                                            @if ($curso->id_profesor == 0 || $curso->id_profesor == NULL )
                                                                 <option value="">Seleccione Profesor</option>
                                                             @else
                                                                 <option value="{{ $curso->id_profesor }}">{{ $curso->User->name }}</option>

@@ -12,12 +12,12 @@
         <ul class="navbar-nav">
 
             <li class="nav-item">
-            <a class="nav-link {{ (Request::is('dashboard*') ? 'active' : '') }}" href="{{ route('dashboard') }}" target="">
-                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                    <i class="fa fa-home text-sm opacity-10" style="color: #6EC1E4"></i>
-                </div>
-                <span class="nav-link-text ms-1">Inicio</span>
-            </a>
+                <a class="nav-link {{ (Request::is('dashboard*') ? 'active' : '') }}" href="{{ route('dashboard') }}" target="">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-home text-sm opacity-10" style="color: #6EC1E4"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Inicio</span>
+                </a>
             </li>
 
             <li class="nav-item">
@@ -101,13 +101,24 @@
         <ul class="navbar-nav">
 
             <li class="nav-item">
-            <a class="nav-link {{ (Request::is('dashboard*') ? 'active' : '') }}" href="{{ route('dashboard') }}" target="">
-                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                    <i class="fa fa-home text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-                </div>
-                <span class="nav-link-text ms-1">Inicio</span>
-            </a>
+                <a class="nav-link {{ (Request::is('dashboard*') ? 'active' : '') }}" href="{{ route('dashboard') }}" target="">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-home text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Inicio</span>
+                </a>
             </li>
+
+            @can('menu-profesores-admins')
+            <li class="nav-item">
+                <a class="nav-link {{ (Request::is('/profesor/inicio*') ? 'active' : '') }}" href="{{ route('dashboard.index') }}" target="">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-home text-sm opacity-10" style="color: #ccc"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Panel de Profesor</span>
+                </a>
+            </li>
+            @endcan
 
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#pagesExamplesCurso" class="nav-link {{ (Request::is('admin/cursos*') ? 'active' : '') }}" aria-controls="pagesExamplesCurso" role="button" aria-expanded="false">
