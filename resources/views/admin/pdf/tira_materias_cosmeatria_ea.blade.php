@@ -38,8 +38,8 @@
 
         .container2{
             position: absolute;
-            top:21.3%;
-            left: 21.6%;
+            top:21%;
+            left: 21.9%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
@@ -54,8 +54,8 @@
 
         .container4{
             position: absolute;
-            top:21.3%;
-            left: 30.6%;
+            top:21%;
+            left: 35.6%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
