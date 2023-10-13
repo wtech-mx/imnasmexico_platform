@@ -21,7 +21,6 @@
                     <div class="row">
                             @if(!empty($orders))
                                 @foreach($orders as $order)
-                                @if(($order->id_usuario == $cliente->id))
                                         <div class="col-2">
                                             @php
                                             $fecha = $order->fecha;
@@ -123,7 +122,6 @@
                                               </div>
                                             </div>
                                         </div>
-                                        @endif
                                 @endforeach
                                 @else
                                 <p>Upps... aun no tiene compras de Curosos o Diplomados</p>

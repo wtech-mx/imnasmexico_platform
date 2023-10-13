@@ -130,107 +130,107 @@ class ClientsController extends Controller
 
     public function show($id){
         // Verificar si el usuario tiene una sesión activa
-    if (!auth()->check()) {
-        return redirect()->route('cursos.index_user')->with('warning', 'Inicie sesión para ver su perfil');
+        if (!auth()->check()) {
+            return redirect()->route('cursos.index_user')->with('warning', 'Inicie sesión para ver su perfil');
+        }
+
+        $cliente = User::where('id', $id)->firstOrFail();
+        $orders = Orders::where('id_usuario', '=',$id)->get();
+        $order_ticket = OrdersTickets::where('id_usuario', '=',$id)->get();
+
+        $usuarioId = Auth::id(); // Obtén el ID del usuario logueado
+        // Verifica si el usuario ha comprado un ticket para el curso
+        $usuario_video = OrdersTickets::join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
+                        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                        ->where('orders_tickets.id_usuario', $id)
+                        ->where('cursos.video_cad','=', 1)
+                        ->where('orders.estatus','=', 1)
+                        ->get();
+
+        $clase_grabada = OrdersTickets::join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
+            ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+            ->where('orders_tickets.id_usuario', $id)
+            ->where('orders.clase_grabada_orden','=', 1)
+            ->where('orders.estatus','=', 1)
+            ->where('orders.fecha', '>=', Carbon::now()->subDays(3))
+            ->get();
+
+        $usuario_compro = OrdersTickets::join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                        ->where('orders_tickets.id_usuario', $id)
+                        ->where('orders.estatus','=', 1)
+                        ->get();
+
+        $carpetas_material = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
+            ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
+            ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
+            ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+            ->where('orders_tickets.id_usuario', $id)
+            ->where('orders.estatus', '=', 1)
+            ->where('carpeta_recursos.area', '=', 'Material')
+            ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpetas.id as id_carpeta')
+            ->get();
+
+        $carpetas_literatura = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
+            ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
+            ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
+            ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+            ->where('orders_tickets.id_usuario', $id)
+            ->where('orders.estatus', '=', 1)
+            ->where('carpeta_recursos.area', '=', 'Literatura')
+            ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpeta_recursos.sub_area as sub_area_recurso','carpetas.id as id_carpeta')
+            ->get();
+
+        $carpetas_guia = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
+            ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
+            ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
+            ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+            ->where('orders_tickets.id_usuario', $id)
+            ->where('orders.estatus', '=', 1)
+            ->where('carpeta_recursos.area', '=', 'Guia')
+            ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpetas.id as id_carpeta')
+            ->get();
+
+        $carpetas_precios = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
+            ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
+            ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
+            ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+            ->where('orders_tickets.id_usuario', $id)
+            ->where('orders.estatus', '=', 1)
+            ->where('carpeta_recursos.area', '=', 'Precios')
+            ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpetas.id as id_carpeta')
+            ->get();
+
+        $carpetas_carta = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
+            ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
+            ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
+            ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+            ->where('orders_tickets.id_usuario', $id)
+            ->where('orders.estatus', '=', 1)
+            ->where('carpeta_recursos.area', '=', 'Carta compromiso')
+            ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpeta_recursos.sub_area as sub_area_recurso','carpetas.id as id_carpeta')
+            ->get();
+
+        $publicidad = Publicidad::get();
+
+        $documentos = Documentos::where('id_usuario', '=',$id)->get();
+        $documentos_estandares = DocumentosEstandares::where('id_usuario', '=',$id)->get();
+
+        // Obtener el ID del usuario actualmente autenticado
+        $idUsuario = Auth::user()->id;
+
+        // Obtener las órdenes completadas del usuario
+        $ordenesCompletadas = Orders::where('id_usuario', $id)->where('estatus', 1)->pluck('id');
+
+        // Obtener los IDs de los cursos comprados en las órdenes completadas
+        $cursosComprados = OrdersTickets::whereIn('id_order', $ordenesCompletadas)->pluck('id_curso');
+        // Obtener los IDs de los estándares asociados a los cursos comprados
+        $estandares = CursosEstandares::whereIn('id_curso', $cursosComprados)->pluck('id_carpeta');
+
+        // Obtener los datos de los estándares
+        $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
+
+        return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
     }
-
-    $cliente = User::where('id', $id)->firstOrFail();
-    $orders = Orders::where('id_usuario', '=',$id)->get();
-    $order_ticket = OrdersTickets::where('id_usuario', '=',$id)->get();
-
-    $usuarioId = Auth::id(); // Obtén el ID del usuario logueado
-    // Verifica si el usuario ha comprado un ticket para el curso
-    $usuario_video = OrdersTickets::join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
-                    ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
-                    ->where('orders_tickets.id_usuario', $id)
-                    ->where('cursos.video_cad','=', 1)
-                    ->where('orders.estatus','=', 1)
-                    ->get();
-
-    $clase_grabada = OrdersTickets::join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
-        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
-        ->where('orders_tickets.id_usuario', $id)
-        ->where('orders.clase_grabada_orden','=', 1)
-        ->where('orders.estatus','=', 1)
-        ->where('orders.fecha', '>=', Carbon::now()->subDays(3))
-        ->get();
-
-    $usuario_compro = OrdersTickets::join('orders', 'orders_tickets.id_order', '=', 'orders.id')
-                    ->where('orders_tickets.id_usuario', $id)
-                    ->where('orders.estatus','=', 1)
-                    ->get();
-
-    $carpetas_material = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
-        ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
-        ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
-        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
-        ->where('orders_tickets.id_usuario', $id)
-        ->where('orders.estatus', '=', 1)
-        ->where('carpeta_recursos.area', '=', 'Material')
-        ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpetas.id as id_carpeta')
-        ->get();
-
-    $carpetas_literatura = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
-        ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
-        ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
-        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
-        ->where('orders_tickets.id_usuario', $id)
-        ->where('orders.estatus', '=', 1)
-        ->where('carpeta_recursos.area', '=', 'Literatura')
-        ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpeta_recursos.sub_area as sub_area_recurso','carpetas.id as id_carpeta')
-        ->get();
-
-    $carpetas_guia = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
-        ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
-        ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
-        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
-        ->where('orders_tickets.id_usuario', $id)
-        ->where('orders.estatus', '=', 1)
-        ->where('carpeta_recursos.area', '=', 'Guia')
-        ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpetas.id as id_carpeta')
-        ->get();
-
-    $carpetas_precios = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
-        ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
-        ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
-        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
-        ->where('orders_tickets.id_usuario', $id)
-        ->where('orders.estatus', '=', 1)
-        ->where('carpeta_recursos.area', '=', 'Precios')
-        ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpetas.id as id_carpeta')
-        ->get();
-
-    $carpetas_carta = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
-        ->join('carpeta_recursos', 'carpetas.id', '=', 'carpeta_recursos.id_carpeta')
-        ->join('orders_tickets', 'cursos.id', '=', 'orders_tickets.id_curso')
-        ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
-        ->where('orders_tickets.id_usuario', $id)
-        ->where('orders.estatus', '=', 1)
-        ->where('carpeta_recursos.area', '=', 'Carta compromiso')
-        ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpeta_recursos.sub_area as sub_area_recurso','carpetas.id as id_carpeta')
-        ->get();
-
-    $publicidad = Publicidad::get();
-
-    $documentos = Documentos::where('id_usuario', '=',$id)->get();
-    $documentos_estandares = DocumentosEstandares::where('id_usuario', '=',$id)->get();
-
-    // Obtener el ID del usuario actualmente autenticado
-    $idUsuario = Auth::user()->id;
-
-    // Obtener las órdenes completadas del usuario
-    $ordenesCompletadas = Orders::where('id_usuario', $id)->where('estatus', 1)->pluck('id');
-
-    // Obtener los IDs de los cursos comprados en las órdenes completadas
-    $cursosComprados = OrdersTickets::whereIn('id_order', $ordenesCompletadas)->pluck('id_curso');
-    // Obtener los IDs de los estándares asociados a los cursos comprados
-    $estandares = CursosEstandares::whereIn('id_curso', $cursosComprados)->pluck('id_carpeta');
-
-    // Obtener los datos de los estándares
-    $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
-
-    return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
-}
 
     public function update(Request $request, $code)
     {
@@ -466,16 +466,32 @@ class ClientsController extends Controller
 
     public function index_admin(){
 
-        //$clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
-        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->paginate(100);
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
-        $orders = Orders::get();
-        $tickets = CursosTickets::get();
-        $order_ticket = OrdersTickets::get();
-        $documentos = Documentos::get();
-        $documentos_estandares = DocumentosEstandares::get();
+        return view('admin.clientes.index',compact('clientes'));
+    }
 
-        return view('admin.clientes.index',compact('clientes','tickets','orders','order_ticket','documentos', 'documentos_estandares'));
+    public function buscador(Request $request){
+        $id_client = $request->id_client;
+        $phone = $request->phone;
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+        if ($id_client !== 'null' && $id_client !== null) {
+            $cliente = User::where('cliente','=' ,'1')->where('id', '=', $id_client)->first();
+            $orders = Orders::where('id', '=', $id_client)->get();
+            $tickets = CursosTickets::where('id', '=', $id_client)->get();
+            $order_ticket = OrdersTickets::where('id', '=', $id_client)->get();
+            $documentos = Documentos::where('id', '=', $id_client)->get();
+            $documentos_estandares = DocumentosEstandares::where('id', '=', $id_client)->first();
+        } elseif ($phone !== 'null' && $phone !== null) {
+            $cliente = User::where('cliente','=' ,'1')->where('id', '=', $phone)->first();
+            $orders = Orders::where('id', '=', $phone)->get();
+            $tickets = CursosTickets::where('id', '=', $phone)->get();
+            $order_ticket = OrdersTickets::where('id', '=', $phone)->get();
+            $documentos = Documentos::where('id', '=', $phone)->get();
+            $documentos_estandares = DocumentosEstandares::where('id', '=', $phone)->get();
+        }
+
+        return view('admin.clientes.index',compact('clientes','cliente','tickets','orders','order_ticket','documentos', 'documentos_estandares'));
     }
 
     public function getUsuarios(){
