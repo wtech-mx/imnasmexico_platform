@@ -46,8 +46,8 @@
 
         .containerx{
             position: absolute;
-            top:70%;
-            left: 85%;
+            top:67%;
+            left: 82%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
