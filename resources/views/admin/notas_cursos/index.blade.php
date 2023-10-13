@@ -65,7 +65,14 @@
                                                     @else
                                                     <td> <label class="badge badge-danger" style="font-size: 15px;">${{ $nota->restante }}</label> </td>
                                                     @endif
-                                                    <td>{{ $nota->fecha }}</td>
+                                                    <td>
+                                                        @php
+                                                        $fecha = $nota->fecha;
+                                                        $fecha_timestamp = strtotime($fecha);
+                                                        $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                                                        @endphp
+                                                        {{$fecha_formateada}}
+                                                    </td>
                                                     <td>{{ $nota->paquete }}</td>
                                                     <td>
                                                         {{-- <a type="button" class="btn btn-sm" target="_blank"
@@ -100,6 +107,11 @@
 @section('datatable')
 
 <script>
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+      searchable: true,
+      fixedHeight: false
+    });
+
     document.addEventListener('DOMContentLoaded', function() {
         var agregarCampoBtn = document.getElementById('agregarCampo');
         var camposContainer = document.getElementById('camposContainer');
