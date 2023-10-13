@@ -39,7 +39,7 @@
         .container2{
             position: absolute;
             top:21.2%;
-            left: 22.3%;
+            left: 22.5%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
@@ -55,6 +55,7 @@
         .container4{
             position: absolute;
             top:21.2%;
+            letter-spacing: -0.5px;
             left: 34.6%;
             transform: translate(-50%, -50%);
             text-align: center;
