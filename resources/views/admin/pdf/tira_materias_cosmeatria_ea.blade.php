@@ -38,7 +38,7 @@
 
         .container2{
             position: absolute;
-            top:21%;
+            top:21.2%;
             left: 21.9%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -54,8 +54,8 @@
 
         .container4{
             position: absolute;
-            top:21%;
-            left: 35.6%;
+            top:21.2%;
+            left: 34.6%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
