@@ -474,21 +474,20 @@ class ClientsController extends Controller
     public function buscador(Request $request){
         $id_client = $request->id_client;
         $phone = $request->phone;
+        $tickets = CursosTickets::get();
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
         if ($id_client !== 'null' && $id_client !== null) {
             $cliente = User::where('cliente','=' ,'1')->where('id', '=', $id_client)->first();
-            $orders = Orders::where('id', '=', $id_client)->get();
-            $tickets = CursosTickets::where('id', '=', $id_client)->get();
-            $order_ticket = OrdersTickets::where('id', '=', $id_client)->get();
-            $documentos = Documentos::where('id', '=', $id_client)->get();
+            $orders = Orders::where('id_usuario', '=', $id_client)->get();
+            $order_ticket = OrdersTickets::where('id_usuario', '=', $id_client)->get();
+            $documentos = Documentos::where('id_usuario', '=', $id_client)->get();
             $documentos_estandares = DocumentosEstandares::where('id', '=', $id_client)->first();
         } elseif ($phone !== 'null' && $phone !== null) {
             $cliente = User::where('cliente','=' ,'1')->where('id', '=', $phone)->first();
-            $orders = Orders::where('id', '=', $phone)->get();
-            $tickets = CursosTickets::where('id', '=', $phone)->get();
-            $order_ticket = OrdersTickets::where('id', '=', $phone)->get();
-            $documentos = Documentos::where('id', '=', $phone)->get();
-            $documentos_estandares = DocumentosEstandares::where('id', '=', $phone)->get();
+            $orders = Orders::where('id_usuario', '=', $phone)->get();
+            $order_ticket = OrdersTickets::where('id_usuario', '=', $phone)->get();
+            $documentos = Documentos::where('id_usuario', '=', $phone)->get();
+            $documentos_estandares = DocumentosEstandares::where('id_usuario', '=', $phone)->get();
         }
 
         return view('admin.clientes.index',compact('clientes','cliente','tickets','orders','order_ticket','documentos', 'documentos_estandares'));
