@@ -39,7 +39,7 @@
         .container2{
             position: absolute;
             top:21.2%;
-            left: 22.2%;
+            left: 22.3%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
@@ -101,6 +101,7 @@
             position:relative;
             font-size: 6px;
             color: red;
+            line-height: 200%;
         }
 
         .oval-container {
