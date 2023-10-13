@@ -44,7 +44,7 @@
         .container3{
             position: absolute;
             top: 51%;
-            right: 19px;
+            right: 17px;
             text-align: center;
         }
 
@@ -147,7 +147,7 @@
         </div>
 
         <div class="container3">
-            <h4 class="folio">FOLIO {{$folio}}</h4>
+            <h4 class="folio"> {{$folio}}</h4>
         </div>
 
         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
