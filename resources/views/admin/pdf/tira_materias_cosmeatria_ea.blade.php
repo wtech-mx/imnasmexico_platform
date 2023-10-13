@@ -39,14 +39,14 @@
         .container2{
             position: absolute;
             top:21.2%;
-            left: 21.9%;
+            left: 22.2%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
 
         .container3{
             position: absolute;
-            top:33.3%;
+            top:33.4%;
             left: 45%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -99,7 +99,7 @@
 
         .curp{
             position:relative;
-            font-size: 4px;
+            font-size: 6px;
             color: red;
         }
 
