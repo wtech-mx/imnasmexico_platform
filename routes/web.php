@@ -256,8 +256,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/reporte_mes/', [App\Http\Controllers\ReportesController::class, 'reporte_email_mes'])->name('reporte_mes.store');
     Route::post('/admin/reporte_custom/', [App\Http\Controllers\ReportesController::class, 'reporte_email_custom'])->name('reporte_custom.store');
 
- // =============== M O D U L O   WEB PAGE ===============================
+    // =============== M O D U L O   WEB PAGE ===============================
     Route::get('/admin/clientes', [App\Http\Controllers\ClientsController::class, 'index_admin'])->name('clientes_admin.index');
+    Route::get('/buscador/index/cliente', [App\Http\Controllers\ClientsController::class, 'buscador'])->name('advance_search.buscador');
     Route::get('admin/clientes/ajax', [App\Http\Controllers\ClientsController::class, 'getUsuarios'])->name('usuarios.json');
     Route::patch('/admin/clientes/documentos/{id}', [App\Http\Controllers\ClientsController::class, 'update_documentos'])->name('clientes.update_documentos');
     Route::post('clientes-import', [App\Http\Controllers\ClientsController::class, 'import_clientes'])->name('clientes.import');

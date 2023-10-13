@@ -21,7 +21,6 @@
                     <div class="row">
                             @if(!empty($orders))
                                 @foreach($orders as $order)
-                                @if(($order->id_usuario == $cliente->id))
                                         <div class="col-2">
                                             @php
                                             $fecha = $order->fecha;
@@ -77,6 +76,7 @@
                                             <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#ticket_{{ $order->id }}" aria-expanded="false" aria-controls="ticket_{{ $order->id }}">
                                                 <i class="fa fa-fw fa-eye"></i>
                                             </button>
+                                            <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$order->id) }}" target="_blank"><i class="fa fa-money" title="Ver Orden"></i> </a>
                                         </div>
 
                                         <div class="col-12 ">
@@ -123,7 +123,6 @@
                                               </div>
                                             </div>
                                         </div>
-                                        @endif
                                 @endforeach
                                 @else
                                 <p>Upps... aun no tiene compras de Curosos o Diplomados</p>
