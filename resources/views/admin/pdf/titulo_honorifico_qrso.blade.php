@@ -44,6 +44,14 @@
             text-align: center;
         }
 
+        .containerx{
+            position: absolute;
+            top:70%;
+            left: 85%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
         .container_folio_bajo1{
             position: absolute;
             top:90.5%;
@@ -111,6 +119,10 @@
 
         .curso{
             font-size: 35px;
+            color: #353535;
+        }
+
+        .fechax{
             color: #353535;
         }
 
@@ -206,6 +218,10 @@
             <h4 class="curso">{!! $curso_formateado !!}</h4>
         </div>
 
+        <div class="containerx">
+            <h4 class="fechax">{{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
+        </div>
+
         <div class="container_folio_bajo1">
             <h4 class="folio3">FOLIO {{$folio}}</h4>
         </div>
@@ -214,25 +230,26 @@
         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
 
         @php
-        // Divide el curso por espacios en blanco
-        $palabras = explode(' ', $nombre);
+            // Divide el curso por espacios en blanco
+            $palabras = explode(' ', $nombre);
 
-        // Inicializa la cadena formateada
-        $nombre_formateado = '';
-        $contador_palabras = 0;
+            // Inicializa la cadena formateada
+            $nombre_formateado = '';
+            $contador_palabras = 0;
 
-        foreach ($palabras as $palabra) {
-            // Agrega la palabra actual a la cadena formateada
-            $nombre_formateado .= $palabra . ' ';
+            foreach ($palabras as $palabra) {
+                // Agrega la palabra actual a la cadena formateada
+                $nombre_formateado .= $palabra . ' ';
 
-            // Incrementa el contador de palabras
-            $contador_palabras++;
+                // Incrementa el contador de palabras
+                $contador_palabras++;
 
-            // Agrega un salto de línea después de cada tercera palabra
-            if ($contador_palabras % 4 == 0) {
-                $nombre_formateado .= "<br>";
+                // Agrega un salto de línea después de cada tercera palabra
+                if ($contador_palabras % 4 == 0) {
+                    $nombre_formateado .= "<br>";
+                }
             }
-        }
+
         @endphp
 
         <div class="container4">
