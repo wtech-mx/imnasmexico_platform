@@ -46,7 +46,7 @@
 
         .containerx{
             position: absolute;
-            top:67%;
+            top:67.2%;
             left: 82%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -219,7 +219,7 @@
         </div>
 
         <div class="containerx">
-            <h4 class="fechax">{{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
+            <h4 class="fechax"><strong>{{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }}</strong> </h4>
         </div>
 
         <div class="container_folio_bajo1">
