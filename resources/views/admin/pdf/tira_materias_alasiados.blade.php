@@ -39,14 +39,14 @@
         .container2{
             position: absolute;
             top:21.3%;
-            left: 21.6%;
+            left: 22.7%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
 
         .container3{
             position: absolute;
-            top:33.3%;
+            top:33.4%;
             left: 45%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -54,10 +54,12 @@
 
         .container4{
             position: absolute;
-            top:21.3%;
-            left: 30.6%;
+            top:21.2%;
+            letter-spacing: -0.5px;
+            left: 35.1%;
             transform: translate(-50%, -50%);
             text-align: center;
+        }ext-align: center;
         }
 
         .container_folio_bajo1{
