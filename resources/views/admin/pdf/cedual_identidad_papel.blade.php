@@ -43,7 +43,7 @@
 
         .container6{
             position: absolute;
-            top:65%;
+            top:63%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -85,7 +85,7 @@
         }
 
         .fecha{
-            font-size: 17px;
+            font-size: 15px;
             color: #000;
         }
 
