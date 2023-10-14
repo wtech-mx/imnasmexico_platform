@@ -43,7 +43,7 @@
 
         .container6{
             position: absolute;
-            top:62%;
+            top:61%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
