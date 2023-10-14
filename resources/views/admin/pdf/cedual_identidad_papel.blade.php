@@ -43,7 +43,7 @@
 
         .container6{
             position: absolute;
-            top:63%;
+            top:61%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -160,7 +160,7 @@
         </div>
 
         <div class="container6">
-            <h4 class="fecha">Expedicion en la Ciudad de México , México a {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
+            <h4 class="fecha">Expedido en la Ciudad de México , México a {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
         </div>
 
         <div class="container3">
