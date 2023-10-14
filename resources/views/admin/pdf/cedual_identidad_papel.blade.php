@@ -85,7 +85,7 @@
         }
 
         .fecha{
-            font-size: 12px;
+            font-size: 10px;
             color: #000;
         }
 
@@ -160,7 +160,7 @@
         </div>
 
         <div class="container6">
-            <h4 class="fecha">Expedido en la Ciudad de México , México a {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
+            <h4 class="fecha">Expedido en la Ciudad de México, el dia {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
         </div>
 
         <div class="container3">
