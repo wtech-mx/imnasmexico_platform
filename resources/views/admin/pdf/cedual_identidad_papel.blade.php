@@ -41,6 +41,14 @@
             text-align: center;
         }
 
+        .container6{
+            position: absolute;
+            top:65%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
         .container3{
             position: absolute;
             top: 51%;
@@ -74,6 +82,11 @@
         .curso{
             font-size: 17px;
             color: red;
+        }
+
+        .fecha{
+            font-size: 17px;
+            color: #000;
         }
 
         .nombre{
@@ -144,6 +157,10 @@
 
         <div class="container2">
             <h4 class="curso">{{ ucwords(strtolower($curso)) }}</h4>
+        </div>
+
+        <div class="container6">
+            <h4 class="fecha">Expedicion en la Ciudad de México , México a {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
         </div>
 
         <div class="container3">
