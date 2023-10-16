@@ -29,8 +29,13 @@ return new class extends Migration
                 ->references('id')->on('cursos_tickets')
                 ->inDelete('set null');
 
-            $table->string('estatus');
-            $table->string('usuario_bitacora');
+            $table->unsignedBigInteger('id_usuario_bitacora');
+            $table->foreign('id_usuario_bitacora')
+                ->references('id')->on('users')
+                ->inDelete('set null');
+
+            $table->string('estatus')->nullable();
+            $table->string('folio');
 
             $table->timestamps();
         });

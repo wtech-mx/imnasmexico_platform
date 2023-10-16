@@ -107,7 +107,7 @@
                                                                     @endif
                                                                 </td>
                                                                 <td>
-                                                                    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_documentos">
+                                                                    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_documentos_{{ $order->User->id }}">
                                                                         <i class="fa fa-file"></i>
                                                                     </a>
 
@@ -158,6 +158,10 @@
                                                                     @endif
                                                                 </td>
                                                                 <td>
+                                                                    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_documentos_{{ $order->User->id }}">
+                                                                        <i class="fa fa-file"></i>
+                                                                    </a>
+                                                                    
                                                                     <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form" style="display: inline-block">
                                                                         @csrf
                                                                         <input type="hidden" name="email" id="email" value="{{ $order->User->email }}">

@@ -15,9 +15,9 @@ class DocumenotsGenerador extends Model
     protected $fillable = [
         'id_usuario',
         'id_curso',
-        'usuario_bitacora',
+        'id_usuario_bitacora',
         'estado',
-        'nota',
+        'folio',
     ];
 
     public function User()

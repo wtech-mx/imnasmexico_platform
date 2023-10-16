@@ -15,7 +15,7 @@ use App\Models\Cursos;
 use App\Models\Tipodocumentos;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Mail\PlantillaDocumentoStps;
-
+use App\Models\DocumenotsGenerador;
 
 class DocumentosController extends Controller
 {
@@ -34,6 +34,8 @@ class DocumentosController extends Controller
             'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora',
             'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
         ];
+
+        $documentos = Documentos::get();
 
         return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados'));
     }
@@ -236,6 +238,17 @@ class DocumentosController extends Controller
         }else{
             $ruta_manual = public_path() . '/utilidades_documentos';
         }
+
+        $bitacora = new DocumenotsGenerador;
+        $bitacora->id_usuario = $request->get('id_usuario');
+        $bitacora->id_curso = $request->get('id_curso');
+        $bitacora->id_curso_ticket = $request->get('id_ticket');
+        $bitacora->id_usuario_bitacora = auth()->user()->id;
+        $bitacora->folio = $request->get('folio');
+        if($request->get('tipo') == '1'){
+            $bitacora->estatus = 'Enviado';
+        }
+        $bitacora->save();
 
         $nombre = $request->get('nombre');
         $datos = $request->get('nombre');

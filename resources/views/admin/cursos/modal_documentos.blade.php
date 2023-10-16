@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="modal_documentos" tabindex="-1" aria-labelledby="modal_documentosLabel" aria-hidden="true">
+<div class="modal fade" id="modal_documentos_{{ $order->User->id }}" tabindex="-1" aria-labelledby="modal_documentosLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
 
@@ -26,6 +26,9 @@
                     <input type="hidden" name="email" id="email" value="{{ $order->User->email }}">
 
                     <div class="row">
+                            <input id="id_curso" name="id_curso" type="text" class="form-control" value="{{ $ticket->Cursos->id }}" style="display: none" >
+                            <input id="id_ticket" name="id_ticket" type="text" class="form-control" value="{{ $ticket->id }}" style="display: none" >
+                            <input id="id_usuario" name="id_usuario" type="text" class="form-control" value="{{ $order->id_usuario }}" style="display: none" >
 
                             <div class="form-group col-12 mt-3">
                                 <label for="name">Nombre Completo *</label>
