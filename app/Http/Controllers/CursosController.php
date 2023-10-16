@@ -27,6 +27,7 @@ use DB;
 use Google_Client;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
+use App\Models\Tipodocumentos;
 
 
 class CursosController extends Controller
@@ -432,8 +433,17 @@ class CursosController extends Controller
         $curso = Cursos::find($id);
         $ordenes = OrdersTickets::where('id_curso', '=', $id)->get();
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
+        $tipo_documentos = Tipodocumentos::get();
 
-        return view('admin.cursos.listas', compact('ordenes', 'tickets', 'curso'));
+        $estados = [
+            'Aguascalientes', 'Baja California', 'Baja California Sur','CDMX', 'Campeche', 'Chiapas',
+            'Chihuahua', 'Coahuila', 'Colima', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo',
+            'Jalisco', 'Michoacán', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca',
+            'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora',
+            'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
+        ];
+
+        return view('admin.cursos.listas', compact('ordenes', 'tickets', 'curso','tipo_documentos','estados'));
     }
 
     public function correo($id, Request $request)
