@@ -9,23 +9,22 @@
         </div>
 
         <div class="modal-body row">
-            @if ($ticket->Cursos->stps == '1')
+
                 <div class="col-12">
+                    @if ($ticket->Cursos->stps == '1')
                     <h5 class="text-center">Diploma STPS</h5>
+                    @endif
                     <p class="text-center">
                         El Diploma esta listo para ser enviado el correo que si tiene guardado es:
                         <strong>{{ $order->User->email }}</strong>
                     </p>
-                    <div class="d-flex justify-content-center">
-                        <a class="btn btn-sm btn-success">
-                            <i class="fa fa-send"></i> Enviar por correo
-                        </a>
-                    </div>
                 </div>
-            @endif
+
             <div class="col-12">
-                <form method="POST" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
+                <form method="POST" action="{{ route('generar_enviar.documento') }}" enctype="multipart/form-data" role="form">
                     @csrf
+                    <input type="hidden" name="email" id="email" value="{{ $order->User->email }}">
+
                     <div class="row">
 
                             <div class="form-group col-12 mt-3">
@@ -242,7 +241,7 @@
                             </div>
 
                             <div class="col-12">
-                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff"> <i class="fa fa-send" title="Ver Orden"></i>Enviar</button>
                             </div>
 
                     </div>

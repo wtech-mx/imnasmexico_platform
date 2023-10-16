@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use Illuminate\Support\Facades\Mail;
 use App\Models\Documentos;
 use App\Models\OrdersTickets;
 use App\Models\User;
@@ -13,6 +14,7 @@ use Hash;
 use App\Models\Cursos;
 use App\Models\Tipodocumentos;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Mail\PlantillaDocumentoStps;
 
 
 class DocumentosController extends Controller
@@ -32,7 +34,6 @@ class DocumentosController extends Controller
             'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora',
             'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
         ];
-
 
         return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados'));
     }
@@ -224,6 +225,61 @@ class DocumentosController extends Controller
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
         }
+
+    }
+
+    public function generar_enviar(Request $request){
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/utilidades_documentos');
+        }else{
+            $ruta_manual = public_path() . '/utilidades_documentos';
+        }
+
+        $nombre = $request->get('nombre');
+        $datos = $request->get('nombre');
+        $fecha = $request->get('fecha');
+        $curso = $request->get('curso');
+        $tipo = $request->get('tipo');
+        $folio = $request->get('folio');
+        $curp = $request->get('curp');
+
+        $email_user = $request->get('email');
+        $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
+
+        $nacionalidad = $request->get('nacionalidad');
+
+        $nombres = $request->get('nombres');
+        $apellido_apeterno = $request->get('apellido_apeterno');
+        $apellido_materno = $request->get('apellido_materno');
+
+        if ($request->hasFile("img_infantil")) {
+            $file = $request->file('img_infantil');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+        }
+
+        if ($request->hasFile("firma")) {
+            $file_firma = $request->file('firma');
+            $path_firma = $ruta_manual;
+            $fileName_firma = uniqid() . $file_firma->getClientOriginalName();
+            $file_firma->move($path_firma, $fileName_firma);
+        }
+
+        $tipo_documentos = Tipodocumentos::find($tipo);
+
+        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+        $pdf->setPaper('A4', 'portrait');
+
+        $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+
+        $destinatario = [ $email_user  , $email_diplomas];
+
+        Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+
+        return redirect()->back()->with('success', 'Envio de correo exitoso.');
 
     }
 

@@ -74,6 +74,11 @@ Route::get('vistahorizontal', function () {
     return view('user.single_coursenew');
 });
 
+Route::get('sede', function () {
+    return view('emails.documento_stps');
+});
+
+
 Auth::routes();
 
 Route::post('/votar', [App\Http\Controllers\VotosController::class, 'votar'])->name('votar');
@@ -338,6 +343,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/documentos/update/{id}', [App\Http\Controllers\TipodocumentosController::class, 'update'])->name('documentos.update');
 
     Route::post('/admin/documentos/generar', [App\Http\Controllers\DocumentosController::class, 'generar'])->name('generar.documento');
+    Route::post('/admin/documentos/enviar_generar', [App\Http\Controllers\DocumentosController::class, 'generar_enviar'])->name('generar_enviar.documento');
 
 
     Route::get('/admin/documentos/generar', [App\Http\Controllers\DocumentosController::class, 'index'])->name('generar_documentos.index');
