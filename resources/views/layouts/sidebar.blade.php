@@ -131,14 +131,19 @@
                 <ul class="nav ms-4">
                     <li class="nav-item ">
                     @can('cursos-show')
-                        <a class="nav-link {{ (Request::is('/admin/cursos*') ? 'show' : '') }}" href="{{ route('cursos.index') }}">
-                            <span class="sidenav-mini-icon"> P </span>
-                            <span class="sidenav-normal">Todos los Cursos</span>
-                        </a>
-
                         <a class="nav-link {{ (Request::is('/admin/cursos/dia*') ? 'show' : '') }}" href="{{ route('cursos.index_dia') }}">
                             <span class="sidenav-mini-icon"> P </span>
                             <span class="sidenav-normal">Cursos del Dia</span>
+                        </a>
+
+                        <a class="nav-link {{ (Request::is('/admin/cursos/mes*') ? 'show' : '') }}" href="{{ route('cursos.index_mes') }}">
+                            <span class="sidenav-mini-icon"> P </span>
+                            <span class="sidenav-normal">Cursos del Mes</span>
+                        </a>
+
+                        <a class="nav-link {{ (Request::is('/admin/cursos*') ? 'show' : '') }}" href="{{ route('cursos.index') }}">
+                            <span class="sidenav-mini-icon"> P </span>
+                            <span class="sidenav-normal">Todos los Cursos</span>
                         </a>
                     @endcan
 
