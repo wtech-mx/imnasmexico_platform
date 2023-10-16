@@ -40,6 +40,7 @@
                         @include('admin.cursos.add_lista')
                             <div class="tab-pane fade show active" id="pills-home{{$ticket->id}}" role="tabpanel" aria-labelledby="pills-home-tab{{$ticket->id}}">
                                 <div class="card-body">
+
                                     <h5>{{$ticket->nombre}}</h5>
 
                                     <h5>En lista :
@@ -62,10 +63,8 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Nombre</th>
-                                                    <th>Correo</th>
-                                                    <th>Telefono</th>
                                                     <th>Metodo de Pago</th>
-                                                    <th>Cantidad</th>
+                                                    <th>Costo</th>
                                                     <th>Deudor</th>
                                                     <th>Nota</th>
                                                     <th>Acciones</th>
@@ -77,10 +76,10 @@
                                                             <tr>
                                                                 <td>{{ $order->Orders->id }}</td>
                                                                 <td>
-                                                                    <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a>
+                                                                    <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a><br>
+                                                                    <p>{{ $order->User->telefono }}</p>
+                                                                    <p>{{ $order->User->email }}</p>
                                                                 </td>
-                                                                <td>{{ $order->User->email }}</td>
-                                                                <td>{{ $order->User->telefono }}</td>
                                                                 <td>{{ $order->Orders->forma_pago }}</td>
                                                                 <td>
                                                                         {{ $order->Orders->pago }}
@@ -115,10 +114,10 @@
                                                             <tr>
                                                                 <td>{{ $order->Orders->id }}</td>
                                                                 <td>
-                                                                    <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a>
+                                                                    <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a><br>
+                                                                    <p>{{ $order->User->telefono }}</p>
+                                                                    <p>{{ $order->User->email }}</p>
                                                                 </td>
-                                                                <td>{{ $order->User->email }}</td>
-                                                                <td>{{ $order->User->telefono }}</td>
                                                                 <td>{{ $order->Orders->forma_pago }}</td>
                                                                 <td>
                                                                         {{ $order->Orders->pago }}
@@ -205,7 +204,7 @@
                     'pdf',
                     'colvis'
                 ],
-                responsive: true,
+                responsive: false,
                 stateSave: true,
 
                 language: {
