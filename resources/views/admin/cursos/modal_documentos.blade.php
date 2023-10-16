@@ -65,9 +65,41 @@
                                         <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px">
                                     </span>
                                     <select name="tipo" id="tipo" class="form-select" >
-                                        @foreach ($tipo_documentos as $item)
-                                        <option value="{{ $item->id }}">{{ $item->nombre }}</option>
-                                        @endforeach
+                                        @if ($ticket->Cursos->stps == '1')
+                                            <option value="1">Diploma STPS General</option>
+                                        @endif
+                                        @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
+                                            <option value="2">RN-Cedula de identidad de papel General</option>
+                                            <option value="3">RN - Titulo Honorifico Generico QRS</option>
+                                            <option value="4">RN - Diploma Imnas</option>
+                                            <option value="5">RN - Credencial General</option>
+                                            <option value="13">Titulo Honorifico Online Qr Logo</option>
+
+                                            @if (str_contains($ticket->Cursos->nombre,'medicina estetica'))
+                                                <option value="6">CN - Tira de materias aparatologia</option>
+                                            @endif
+                                            @if (str_contains($ticket->Cursos->nombre, 'Alisados'))
+                                                <option value="7">CN - Tira de materias alasiados progresivos</option>
+                                            @endif
+                                            @if (str_contains($ticket->Cursos->nombre, 'Cosmetología'))
+                                                <option value="8">CN - Tira de materias cosmetologia facial y corporal</option>
+                                            @endif
+                                            @if (str_contains($ticket->Cursos->nombre, 'Cosmiatria'))
+                                                <option value="9">CN - Tira de materias cosmiatria estetica avanzada</option>
+                                            @endif
+                                            @if (str_contains($ticket->Cursos->nombre, 'Auxiliar'))
+                                                <option value="10">CN - Tira de materias auxiliar en cuidados de atencion medica</option>
+                                            @endif
+                                            @if (str_contains($ticket->Cursos->nombre, 'Mesoterapia'))
+                                                <option value="11">CN - Tira de materias masoterapia</option>
+                                            @endif
+                                            @if (str_contains($ticket->Cursos->nombre, 'Cosmetología'))
+                                                <option value="12">CN - Tira de materias Cosmetologia</option>
+                                            @endif
+                                        @endif
+                                        @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
+                                            <option value="13">Titulo Honorifico Online Qr Logo</option>
+                                        @endif
                                     </select>
                                 </div>
                             </div>
