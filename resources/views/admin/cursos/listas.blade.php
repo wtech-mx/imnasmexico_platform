@@ -57,7 +57,17 @@
                                     {{ $contador }}
                                     </h5>
 
-                                    <h5>Diploma y/o Certificaciones "Titulo Honorifico, STPS, (TRAER DATOS DINAMICOS)"</h5>
+                                    <h5>Diploma y/o Certificaciones:
+                                        @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
+                                            IMNAS
+                                        @endif
+                                        @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
+                                            Titulo Honorifico
+                                        @endif
+                                        @if ($ticket->Cursos->stps == '1')
+                                            STPS
+                                        @endif
+                                    </h5>
 
                                     <div class="table-responsive">
                                         <table class="table table-flush" id="orden_servicio-{{$ticket->id}}">
