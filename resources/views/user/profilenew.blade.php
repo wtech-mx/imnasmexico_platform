@@ -728,8 +728,6 @@ Mi perfil- {{$cliente->name}}
                                                                             </script>
 
                                                                             @if ($video->Cursos->imnas == '1' || $video->Cursos->redconocer == '1')
-                                                                                @if ($video->Cursos->nombre != 'Diplomado de Cosmetología Facial y Corporal')
-
                                                                                     <div class="col-6 form-group p-3 mt-2">
 
                                                                                         @if($documento->firma !== null)
@@ -789,7 +787,6 @@ Mi perfil- {{$cliente->name}}
                                                                                             });
                                                                                         </script>
                                                                                     </div>
-                                                                                @endif
                                                                             @endif
                                                                     </div>
                                                                     @endforeach
@@ -807,14 +804,12 @@ Mi perfil- {{$cliente->name}}
                                                                             </div>
 
                                                                             @if ($video->Cursos->imnas == '1' || $video->Cursos->redconocer == '1')
-                                                                                @if ($video->Cursos->nombre != 'Diplomado de Cosmetología Facial y Corporal')
                                                                                     <div class="col-12 form-group p-3 mt-2">
                                                                                         <label for="firma">Firma</label>
                                                                                         <input name="firma" hidden id="btnoriginal8{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall8{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal8{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
                                                                                         <button type="button" id='botonpersonal8{{$video->id_tickets}}' onClick="document.getElementById('btnoriginal8{{$video->id_tickets}}').click();">Adjuntar documento</button>
                                                                                         <small id='tagsmall8{{$video->id_tickets}}'>No hay archivos adjuntos</small>
                                                                                     </div>
-                                                                                @endif
                                                                             @endif
                                                                         </div>
                                                                     @endif

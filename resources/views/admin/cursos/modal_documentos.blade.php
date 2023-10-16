@@ -9,20 +9,20 @@
         </div>
 
         <div class="modal-body row">
-
-            <div class="col-12">
-                <h5 class="text-center">Diploma STPS</h5>
-                <p class="text-center">
-                    El Diploma esta listo para ser enviado el correo que si tiene guardado es:
-                    <strong>{{ $order->User->email }}</strong>
-                </p>
-                <div class="d-flex justify-content-center">
-                    <a class="btn btn-sm btn-success">
-                        <i class="fa fa-send"></i> Enviar por correo
-                    </a>
+            @if ($ticket->Cursos->stps == '1')
+                <div class="col-12">
+                    <h5 class="text-center">Diploma STPS</h5>
+                    <p class="text-center">
+                        El Diploma esta listo para ser enviado el correo que si tiene guardado es:
+                        <strong>{{ $order->User->email }}</strong>
+                    </p>
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-sm btn-success">
+                            <i class="fa fa-send"></i> Enviar por correo
+                        </a>
+                    </div>
                 </div>
-            </div>
-
+            @endif
             <div class="col-12">
                 <form method="POST" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
                     @csrf
@@ -34,19 +34,17 @@
                                     <span class="input-group-text" id="basic-addon1">
                                         <img class="img_profile_label" src="{{asset('assets/user/icons/mujer.png')}}" alt="" width="30px">
                                     </span>
-                                    <input id="nombre" name="nombre" type="text" class="form-control" required >
+                                    <input id="nombre" name="nombre" type="text" class="form-control" value="{{ $order->User->name }}" readonly >
                                 </div>
                             </div>
 
-                            <div class="form-group col-6 ">
+                            <div class="form-group col-12 ">
                                 <label for="name">Curso *</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">
                                         <img class="img_profile_label" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt="" width="30px">
                                     </span>
-                                    <select name="curso" id="curso" class="form-select">
-                                        <option value=""></option>
-                                    </select>
+                                    <input id="curso" name="curso" type="text" class="form-control" value="{{ $ticket->Cursos->nombre }}" readonly >
                                 </div>
                             </div>
 
@@ -56,7 +54,7 @@
                                     <span class="input-group-text" id="basic-addon1">
                                         <img class="img_profile_label" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="" width="30px">
                                     </span>
-                                    <input id="fecha" name="fecha" type="date" class="form-control" required >
+                                    <input id="fecha" name="fecha" type="text" class="form-control" value="{{ $ticket->Cursos->fecha_inicial }}" readonly >
                                 </div>
                             </div>
 
@@ -118,22 +116,38 @@
 
                                     <div class="form-group col-6 gc_cn">
                                         <label for="name">Firma Personal *</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img class="img_profile_label" src="{{asset('assets/user/icons/firma-digital.png')}}" alt="" width="30px">
-                                            </span>
-                                            <input id="firma" name="firma" type="file" class="form-control"  >
-                                        </div>
+                                        @if ($order->User->Documentos)
+                                            @if ($order->User->Documentos->firma !== null)
+                                                <div class="input-group">
+                                                    <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->firma) }}" alt="Imagen" style="width: 60px;height: 60%;">
+                                                </div>
+                                            @endif
+                                        @else
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/firma-digital.png')}}" alt="" width="30px">
+                                                </span>
+                                                <input id="firma" name="firma" type="file" class="form-control">
+                                            </div>
+                                        @endif
                                     </div>
 
                                     <div class="form-group col-6 gc_cn">
                                         <label for="name">Fotografia *</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
-                                            </span>
-                                            <input id="img_infantil" name="img_infantil" type="file" class="form-control"  >
-                                        </div>
+                                        @if ($order->User->Documentos)
+                                            @if ($order->User->Documentos->foto_tam_infantil !== null)
+                                                <div class="input-group">
+                                                    <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" alt="Imagen" style="width: 60px;height: 60%;">
+                                                </div>
+                                            @endif
+                                        @else
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
+                                                </span>
+                                                <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control"  >
+                                            </div>
+                                        @endif
                                     </div>
 
                                     <div class="form-group col-6 gc_cn">
