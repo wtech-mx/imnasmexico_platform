@@ -1,9 +1,12 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-Generar Documentos
+Reporte de Documentos
 @endsection
-
+@section('css')
+<link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
+@endsection
 @section('content')
 
 <div class="container-fluid mt-3">
@@ -27,22 +30,57 @@ Generar Documentos
                 <table class="table table-flush" id="datatable-search">
                     <thead class="thead-light">
                         <tr>
-                            <th>Nombre</th>
-                            <th>tipo</th>
-                            <th>Acciones</th>
+                            <th>Folio</th>
+                            <th>Alumn@</th>
+                            <th>Curso</th>
+                            <th>Fecha</th>
+                            <th>Estatus</th>
+                            <th>Personal</th>
                         </tr>
                     </thead>
-                    @foreach ($documentos as $item)
-                    <tr>
-                        <td>{{ $item->User->name }}</td>
-                        <td>{{ $item->tipo }}</td>
-                        <td>
-                            <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#manual_update_{{ $item->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                <i class="fa fa-pencil"></i>
-                            </a>
-                        </td>
-                    </tr>
-                    @include('admin.documentos.modal_update')
+                    @foreach ($bitacoras as $item)
+                        <tr>
+                            <td>{{ $item->folio }}</td>
+                            <td>{{ $item->Alumno->name }}</td>
+                            <td>
+                                @php
+                                    $nombreDelCurso = $item->Cursos->nombre;
+                                    $nombreDelCurso = str_replace('Curso de ', '', $nombreDelCurso);
+                                    $nombreDelCurso = str_replace('Curso ', '', $nombreDelCurso);
+
+                                    $palabras = explode(' ', $nombreDelCurso);
+
+                                    // Inicializa la cadena formateada
+                                    $nombre_formateado = '';
+                                    $contador_palabras = 0;
+
+                                    foreach ($palabras as $palabra) {
+                                        // Agrega la palabra actual a la cadena formateada
+                                        $nombre_formateado .= $palabra . ' ';
+
+                                        // Incrementa el contador de palabras
+                                        $contador_palabras++;
+
+                                        // Agrega un salto de línea después de cada tercera palabra
+                                        if ($contador_palabras % 3 == 0) {
+                                            $nombre_formateado .= "<br>";
+                                        }
+                                    }
+                                @endphp
+                                {!! $nombre_formateado !!}
+                            </td>
+                            <td>
+                                @php
+                                $fecha = $item->created_at;
+                                $fecha_timestamp = strtotime($fecha);
+                                $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                                @endphp
+                                {{$fecha_formateada}}
+                            </td>
+                            <td>{{ $item->estatus }}</td>
+                            <td>{{ $item->User->name }}</td>
+
+                        </tr>
                     @endforeach
                 </table>
             </div>
@@ -55,6 +93,14 @@ Generar Documentos
 
 @endsection
 @section('datatable')
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+
+ <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+ <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap4.min.js"></script>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -101,10 +147,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 <script>
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-      searchable: true,
-      fixedHeight: false
-    });
+        $(document).ready(function() {
+            $('#datatable-search').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        extend: 'print',
+                        text: 'Imprimir',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    'excel',
+                    'pdf',
+                    'colvis'
+                ],
+                responsive: false,
+                stateSave: true,
+
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+                }
+            });
+        });
 
 </script>
 

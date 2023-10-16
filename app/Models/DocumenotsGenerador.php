@@ -20,9 +20,14 @@ class DocumenotsGenerador extends Model
         'folio',
     ];
 
-    public function User()
+    public function Alumno()
     {
         return $this->belongsTo(User::class, 'id_usuario');
+    }
+
+    public function User()
+    {
+        return $this->belongsTo(User::class, 'id_usuario_bitacora');
     }
 
     public function Cursos()
