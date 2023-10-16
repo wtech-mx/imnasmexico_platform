@@ -344,6 +344,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::post('/admin/documentos/generar', [App\Http\Controllers\DocumentosController::class, 'generar'])->name('generar.documento');
     Route::post('/admin/documentos/enviar_generar', [App\Http\Controllers\DocumentosController::class, 'generar_enviar'])->name('generar_enviar.documento');
+    Route::patch('/admin/documentos/bitacora/{id}', [App\Http\Controllers\DocumentosController::class, 'bitacora_documentos_estatus'])->name('bitacora_documentos.update');
 
 
     Route::get('/admin/documentos/generar', [App\Http\Controllers\DocumentosController::class, 'index'])->name('generar_documentos.index');

@@ -161,7 +161,7 @@
                                                                     <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_documentos_{{ $order->User->id }}">
                                                                         <i class="fa fa-file"></i>
                                                                     </a>
-                                                                    
+
                                                                     <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form" style="display: inline-block">
                                                                         @csrf
                                                                         <input type="hidden" name="email" id="email" value="{{ $order->User->email }}">
@@ -208,48 +208,8 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const curpOption = document.getElementById("curp_option");
-        const tipoOption = document.getElementById("tipo");
 
-        const curpContent = document.querySelector(".curp_content");
 
-        const cnContent = document.querySelector(".gc_cn");
-        const gcContent = document.querySelector(".gc_content");
-
-        // Mostrar u ocultar los contenedores según la opción seleccionada
-        curpOption.addEventListener("change", function () {
-            if (curpOption.value === "Curp") {
-                curpContent.style.display = "block";
-                gcContent.style.display = "none";
-            } else if (curpOption.value === "Generar curp") {
-                curpContent.style.display = "none";
-                gcContent.style.display = "block";
-            }
-        });
-
-        tipoOption.addEventListener("change", function () {
-            if (tipoOption.value == 5) {
-                document.querySelectorAll(".number_4").forEach(element => {
-                    element.style.display = "block";
-                });
-                cnContent.style.display = "block";
-            } else if (tipoOption.value != 1) {
-                document.querySelectorAll(".number_4").forEach(element => {
-                    element.style.display = "none";
-                });
-                cnContent.style.display = "block";
-            } else {
-                document.querySelectorAll(".number_4").forEach(element => {
-                    element.style.display = "none";
-                });
-                cnContent.style.display = "none";
-            }
-        });
-    });
-
-    </script>
 
 <script>
     @foreach ($tickets as $ticket)

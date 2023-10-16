@@ -27,20 +27,38 @@ Reporte de Documentos
             </div>
 
             <div class="table-responsive">
-                <table class="table table-flush" id="datatable-search">
+                <table class="table table-flush p-2" id="datatable-search">
                     <thead class="thead-light">
                         <tr>
-                            <th>Folio</th>
                             <th>Alumn@</th>
                             <th>Curso</th>
+                            <th>Documento</th>
                             <th>Fecha</th>
                             <th>Estatus</th>
                             <th>Personal</th>
                         </tr>
                     </thead>
+
+
                     @foreach ($bitacoras as $item)
+                        @php
+
+                        if ($item->tipo_documento == '1') {
+                            $item->tipo_documento = 'Diploma STPS General';
+                        }elseif ($item->tipo_documento == '2') {
+                            $item->tipo_documento = 'RN-Cedula de identidad de papel General';
+                        }elseif ($item->tipo_documento == '3') {
+                            $item->tipo_documento = 'RN - Titulo Honorifico Generico QRS';
+                        }elseif ($item->tipo_documento == '4') {
+                            $item->tipo_documento = 'RN - Diploma Imnas';
+                        }elseif ($item->tipo_documento == '5') {
+                            $item->tipo_documento = 'RN - Credencial General';
+                        }elseif ($item->tipo_documento == '13') {
+                            $item->tipo_documento = 'Titulo Honorifico Online Qr Logo';
+                        }
+
+                    @endphp
                         <tr>
-                            <td>{{ $item->folio }}</td>
                             <td>{{ $item->Alumno->name }}</td>
                             <td>
                                 @php
@@ -69,18 +87,32 @@ Reporte de Documentos
                                 @endphp
                                 {!! $nombre_formateado !!}
                             </td>
+                            <td>{{ $item->tipo_documento }} <br>
+                                {{ $item->folio }}
+                            </td>
+
                             <td>
                                 @php
-                                $fecha = $item->created_at;
-                                $fecha_timestamp = strtotime($fecha);
-                                $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                                    $fecha = $item->created_at;
+                                    $fecha_timestamp = strtotime($fecha);
+                                    $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                                 @endphp
                                 {{$fecha_formateada}}
                             </td>
-                            <td>{{ $item->estatus }}</td>
+
+                            <td>
+                                <!-- Button trigger modal -->
+
+                                <button type="button" class="btn  btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal_{{$item->id}}">
+                                    {{ $item->estatus }}
+                                </button>
+                            </td>
+
                             <td>{{ $item->User->name }}</td>
 
                         </tr>
+                        @include('admin.documentos.modal_estatus')
+
                     @endforeach
                 </table>
             </div>
@@ -88,6 +120,7 @@ Reporte de Documentos
         </div>
       </div>
 </div>
+
 
 @include('admin.documentos.modal_create')
 

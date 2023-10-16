@@ -35,6 +35,7 @@ return new class extends Migration
                 ->inDelete('set null');
 
             $table->string('estatus')->nullable();
+            $table->string('tipo_documento')->nullable();
             $table->string('folio');
 
             $table->timestamps();

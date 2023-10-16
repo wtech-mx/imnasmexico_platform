@@ -244,10 +244,13 @@ class DocumentosController extends Controller
         $bitacora->id_curso = $request->get('id_curso');
         $bitacora->id_curso_ticket = $request->get('id_ticket');
         $bitacora->id_usuario_bitacora = auth()->user()->id;
+        $bitacora->tipo_documento = $request->get('tipo');
         $bitacora->folio = $request->get('folio');
+
         if($request->get('tipo') == '1'){
             $bitacora->estatus = 'Enviado';
         }
+
         $bitacora->save();
 
         $nombre = $request->get('nombre');
@@ -258,7 +261,8 @@ class DocumentosController extends Controller
         $folio = $request->get('folio');
         $curp = $request->get('curp');
 
-        $email_user = $request->get('email');
+        //$email_user = $request->get('email');
+        $email_user = 'adrianwebtech@gmail.com';
         $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
 
         $nacionalidad = $request->get('nacionalidad');
@@ -267,8 +271,8 @@ class DocumentosController extends Controller
         $apellido_apeterno = $request->get('apellido_apeterno');
         $apellido_materno = $request->get('apellido_materno');
 
-        if ($request->hasFile("img_infantil")) {
-            $file = $request->file('img_infantil');
+        if ($request->hasFile("foto_tam_infantil")) {
+            $file = $request->file('foto_tam_infantil');
             $path = $ruta_manual;
             $fileName = uniqid() . $file->getClientOriginalName();
             $file->move($path, $fileName);
@@ -281,18 +285,177 @@ class DocumentosController extends Controller
             $file_firma->move($path_firma, $fileName_firma);
         }
 
-        $tipo_documentos = Tipodocumentos::find($tipo);
-
-        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
-        $pdf->setPaper('A4', 'portrait');
-
-        $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
-
         $destinatario = [ $email_user  , $email_diplomas];
 
-        Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+        $tipo_documentos = Tipodocumentos::find($tipo);
 
-        return redirect()->back()->with('success', 'Envio de correo exitoso.');
+        if($tipo_documentos->tipo == 'Diploma_STPS'){
+
+            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+            $pdf->setPaper('A4', 'portrait');
+
+            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+            $pdf->setPaper('A4', 'portrait');
+
+            $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+
+            Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+
+            return $pdf->download('diploma_stps_'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Cedula de indetidad'){
+            $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf->setPaper('A4', 'portrait');
+            $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
+
+            return $pdf->download('CN-Cedula de identidad papel_'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR'){
+
+            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
+
+            $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
+
+            return $pdf->download('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR_CFC'){
+
+            $ancho_cm = 33;
+            $alto_cm = 48;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+
+            //$pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); //  Cambiar 'a tamaño 48x33 super b'
+
+            return $pdf->download('CN-Titulo Honorifico Online QR_'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Diploma'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.diploma_imnas',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+
+            return $pdf->download('CN-Doploma_imnas_'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Credencial'){
+
+            $ancho_cm = 5.5;
+            $alto_cm = 8.5;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
+
+            return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_aparatologia'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_aparatologia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_alasiados'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_alasiados',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_cosmetologia_fc'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_cosmetologia_fc',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_cosmeatria_ea'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_cosmeatria_ea',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_auxiliar'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_auxiliar',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_masoterapia'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_masoterapia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
+        }elseif($tipo_documentos->tipo == 'Tira_materias_cosme'){
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_cosme',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+        }
+
+        return redirect()->back()->with('success', 'Generado Exitosamente');
+
+    }
+
+    public function bitacora_documentos_estatus(Request $request , $id){
+
+        $bitacora = DocumenotsGenerador::find( $id);
+        $bitacora->estatus = $request->get('estatus');
+        $bitacora->update();
+
+        return redirect()->back()->with('success', 'Estatus actualizado.');
 
     }
 

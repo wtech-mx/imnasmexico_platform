@@ -106,7 +106,31 @@
                                 </div>
                             </div>
 
-                            <div class="gc_cn" style="display: none">
+                            <div class="gc_cn" style="">
+
+                                @php
+                                    // Datos de ejemplo
+                                    $nombreCurso = $ticket->Cursos->nombre;
+                                    $idUsuario = $order->User->id;
+                                    $numeroAleatorio = rand(100, 999); // Generar un número aleatorio de tres dígitos
+
+                                    // Dividir el nombre del curso en palabras
+                                    $palabras = preg_split('/\s+/', $nombreCurso);
+
+                                    // Inicializar una variable para las iniciales del curso
+                                    $inicialesCurso = '';
+
+                                    // Recorrer las palabras del nombre del curso y obtener iniciales
+                                    foreach ($palabras as $palabra) {
+                                        $palabra = preg_replace("/[^a-zA-Z]+/", "", $palabra); // Eliminar caracteres no alfabéticos
+                                        $inicialesCurso .= strtoupper(substr($palabra, 0, 1));
+                                    }
+
+                                    // Combinar todos los elementos en el código del folio
+                                    $folio = $inicialesCurso . $idUsuario . '-' . $numeroAleatorio;
+
+                                @endphp
+
                                 <div class="row">
 
                                     <div class="form-group col-12 gc_cn">
@@ -134,7 +158,7 @@
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
                                             </span>
-                                            <input id="folio" name="folio" type="text" class="form-control" value="CEA00152" >
+                                            <input id="folio" name="folio" type="text" class="form-control" value="{{ $folio }}" >
                                         </div>
                                     </div>
 
@@ -243,6 +267,7 @@
                                 </div>
                             </div>
 
+
                             <div class="col-12">
                                 <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff"> <i class="fa fa-send" title="Ver Orden"></i>Enviar</button>
                             </div>
@@ -259,3 +284,4 @@
       </div>
     </div>
   </div>
+
