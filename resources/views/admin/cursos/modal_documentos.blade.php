@@ -81,7 +81,7 @@
                                             @if (str_contains($ticket->Cursos->nombre, 'Alisados'))
                                                 <option value="7">CN - Tira de materias alasiados progresivos</option>
                                             @endif
-                                            @if (str_contains($ticket->Cursos->nombre, 'Cosmetología'))
+                                            @if (str_contains($ticket->Cursos->nombre, 'Cosmetología Facial y Corporal'))
                                                 <option value="8">CN - Tira de materias cosmetologia facial y corporal</option>
                                             @endif
                                             @if (str_contains($ticket->Cursos->nombre, 'Cosmiatria'))
