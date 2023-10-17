@@ -449,7 +449,7 @@ class DocumentosController extends Controller
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
         }
 
-        return redirect()->back()->with('success', 'Generado Exitosamente');
+        //return redirect()->back()->with('success', 'Generado Exitosamente');
 
     }
 
