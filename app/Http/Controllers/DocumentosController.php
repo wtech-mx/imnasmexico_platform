@@ -50,9 +50,12 @@ class DocumentosController extends Controller
         }
 
         $bitacora = new DocumenotsGenerador;
+        $bitacora->cliente = $request->get('nombre');
+        $bitacora->curso = $request->get('curso');
         $bitacora->id_usuario_bitacora = auth()->user()->id;
         $bitacora->tipo_documento = $request->get('tipo');
         $bitacora->folio = $request->get('folio');
+        $bitacora->estatus = 'Generado y descargado';
         $bitacora->save();
 
         $nombre = $request->get('nombre');

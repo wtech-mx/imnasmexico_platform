@@ -43,49 +43,59 @@ Reporte de Documentos
                     @foreach ($bitacoras as $item)
                         @php
 
-                        if ($item->tipo_documento == '1') {
-                            $item->tipo_documento = 'Diploma STPS General';
-                        }elseif ($item->tipo_documento == '2') {
-                            $item->tipo_documento = 'RN-Cedula de identidad de papel General';
-                        }elseif ($item->tipo_documento == '3') {
-                            $item->tipo_documento = 'RN - Titulo Honorifico Generico QRS';
-                        }elseif ($item->tipo_documento == '4') {
-                            $item->tipo_documento = 'RN - Diploma Imnas';
-                        }elseif ($item->tipo_documento == '5') {
-                            $item->tipo_documento = 'RN - Credencial General';
-                        }elseif ($item->tipo_documento == '13') {
-                            $item->tipo_documento = 'Titulo Honorifico Online Qr Logo';
-                        }
+                            if ($item->tipo_documento == '1') {
+                                $item->tipo_documento = 'Diploma STPS General';
+                            }elseif ($item->tipo_documento == '2') {
+                                $item->tipo_documento = 'RN-Cedula de identidad de papel General';
+                            }elseif ($item->tipo_documento == '3') {
+                                $item->tipo_documento = 'RN - Titulo Honorifico Generico QRS';
+                            }elseif ($item->tipo_documento == '4') {
+                                $item->tipo_documento = 'RN - Diploma Imnas';
+                            }elseif ($item->tipo_documento == '5') {
+                                $item->tipo_documento = 'RN - Credencial General';
+                            }elseif ($item->tipo_documento == '13') {
+                                $item->tipo_documento = 'Titulo Honorifico Online Qr Logo';
+                            }
 
-                    @endphp
+                        @endphp
                         <tr>
-                            <td>{{ $item->Alumno->name }}</td>
                             <td>
-                                @php
-                                    $nombreDelCurso = $item->Cursos->nombre;
-                                    $nombreDelCurso = str_replace('Curso de ', '', $nombreDelCurso);
-                                    $nombreDelCurso = str_replace('Curso ', '', $nombreDelCurso);
+                                @if ($item->id_usuario == NULL)
+                                    {{ $item->cliente }}
+                                @else
+                                    {{ $item->Alumno->name }}
+                                @endif
+                            </td>
+                            <td>
+                                @if ($item->id_curso == NULL)
+                                    {{ $item->curso }}
+                                @else
+                                    @php
+                                        $nombreDelCurso = $item->Cursos->nombre;
+                                        $nombreDelCurso = str_replace('Curso de ', '', $nombreDelCurso);
+                                        $nombreDelCurso = str_replace('Curso ', '', $nombreDelCurso);
 
-                                    $palabras = explode(' ', $nombreDelCurso);
+                                        $palabras = explode(' ', $nombreDelCurso);
 
-                                    // Inicializa la cadena formateada
-                                    $nombre_formateado = '';
-                                    $contador_palabras = 0;
+                                        // Inicializa la cadena formateada
+                                        $nombre_formateado = '';
+                                        $contador_palabras = 0;
 
-                                    foreach ($palabras as $palabra) {
-                                        // Agrega la palabra actual a la cadena formateada
-                                        $nombre_formateado .= $palabra . ' ';
+                                        foreach ($palabras as $palabra) {
+                                            // Agrega la palabra actual a la cadena formateada
+                                            $nombre_formateado .= $palabra . ' ';
 
-                                        // Incrementa el contador de palabras
-                                        $contador_palabras++;
+                                            // Incrementa el contador de palabras
+                                            $contador_palabras++;
 
-                                        // Agrega un salto de línea después de cada tercera palabra
-                                        if ($contador_palabras % 3 == 0) {
-                                            $nombre_formateado .= "<br>";
+                                            // Agrega un salto de línea después de cada tercera palabra
+                                            if ($contador_palabras % 3 == 0) {
+                                                $nombre_formateado .= "<br>";
+                                            }
                                         }
-                                    }
-                                @endphp
-                                {!! $nombre_formateado !!}
+                                    @endphp
+                                    {!! $nombre_formateado !!}
+                                @endif
                             </td>
                             <td>{{ $item->tipo_documento }} <br>
                                 {{ $item->folio }}
