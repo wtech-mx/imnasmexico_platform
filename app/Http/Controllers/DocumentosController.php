@@ -265,13 +265,6 @@ class DocumentosController extends Controller
         $apellido_apeterno = $request->get('apellido_apeterno');
         $apellido_materno = $request->get('apellido_materno');
 
-        if ($request->hasFile("foto_tam_infantil")) {
-            $file = $request->file('foto_tam_infantil');
-            $path = $ruta_manual;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-        }
-
         if ($request->hasFile("img_infantil")) {
             $file = $request->file('img_infantil');
             $path = $ruta_manual;

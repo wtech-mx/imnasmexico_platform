@@ -203,7 +203,7 @@
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
                                                 </span>
-                                                <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control"  >
+                                                <input id="img_infantil" name="img_infantil" type="file" class="form-control"  >
                                             </div>
                                         @endif
                                     </div>
