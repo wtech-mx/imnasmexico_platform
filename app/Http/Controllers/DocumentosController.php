@@ -303,7 +303,9 @@ class DocumentosController extends Controller
 
             Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
 
-            return $pdf->download('diploma_stps_'.$nombre.'.pdf');
+            return redirect()->back()->with('success', 'Enviado por emial correctamente');
+
+            //return $pdf->download('diploma_stps_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Cedula de indetidad'){
             $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
