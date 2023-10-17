@@ -213,7 +213,7 @@
                                                         Descargar Documento
                                                     </a>
                                                 @else
-                                                    <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" alt="Imagen" style="width: 1000px;height: 100px;">
+                                                    <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" alt="Imagen" style="width: 100px;height: 100px;">
                                                 @endif
                                         </div>
 
