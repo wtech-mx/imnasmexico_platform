@@ -272,6 +272,13 @@ class DocumentosController extends Controller
             $file->move($path, $fileName);
         }
 
+        if ($request->hasFile("img_infantil")) {
+            $file = $request->file('img_infantil');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+        }
+
         if ($request->hasFile("firma")) {
             $file_firma = $request->file('firma');
             $path_firma = $ruta_manual;
@@ -303,7 +310,7 @@ class DocumentosController extends Controller
 
             Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
 
-            return redirect()->back()->with('success', 'Enviado por emial correctamente');
+            return redirect()->back()->with('success', 'Enviado por email correctamente');
 
             //return $pdf->download('diploma_stps_'.$nombre.'.pdf');
 
