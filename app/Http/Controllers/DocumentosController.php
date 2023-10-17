@@ -35,7 +35,7 @@ class DocumentosController extends Controller
             'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
         ];
 
-        $bitacoras = DocumenotsGenerador::get();
+        $bitacoras = DocumenotsGenerador::orderBy('created_at', 'ASC')->get();
 
         return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados', 'bitacoras'));
     }
@@ -247,12 +247,6 @@ class DocumentosController extends Controller
         $bitacora->tipo_documento = $request->get('tipo');
         $bitacora->folio = $request->get('folio');
 
-        if($request->get('tipo') == '1'){
-            $bitacora->estatus = 'Enviado';
-        }
-
-        $bitacora->save();
-
         $nombre = $request->get('nombre');
         $datos = $request->get('nombre');
         $fecha = $request->get('fecha');
@@ -288,6 +282,14 @@ class DocumentosController extends Controller
         $destinatario = [ $email_user  , $email_diplomas];
 
         $tipo_documentos = Tipodocumentos::find($tipo);
+
+        if($tipo_documentos == 'Diploma_STPS'){
+            $bitacora->estatus = 'Enviado X email';
+        }else{
+            $bitacora->estatus = 'Generado y Descargado';
+        }
+
+        $bitacora->save();
 
         if($tipo_documentos->tipo == 'Diploma_STPS'){
 

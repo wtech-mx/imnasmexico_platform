@@ -18,11 +18,11 @@
                         <label for="rfc">Etatus</label>
                         <select class="form-select" aria-label="Default select example" id="estatus" name="estatus">
                             <option value="">Selciona una opcion</option>
-                            <option value="En Proceso">En Proceso</option>
+                            <option value="Enviado x paqueteria">Enviado x paqueteria</option>
+                            <option value="Enviado  x email">Enviado  x email</option>
                             <option value="En Espera">En Espera</option>
-                            <option value="Realizado">Realizado</option>
                             <option value="Generado">Generado</option>
-                            <option value="Cancelada">Cancelada</option>
+                            <option value="Cancelado">Cancelado</option>
                         </select>
                     </div>
 
