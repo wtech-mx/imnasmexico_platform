@@ -303,7 +303,7 @@ class DocumentosController extends Controller
 
             Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
 
-            return redirect()->back()->with('success', 'Enviado por email correctamente');
+            //return redirect()->back()->with('success', 'Enviado por email correctamente');
 
             //return $pdf->download('diploma_stps_'.$nombre.'.pdf');
 
