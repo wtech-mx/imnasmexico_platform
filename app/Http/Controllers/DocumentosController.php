@@ -49,6 +49,12 @@ class DocumentosController extends Controller
             $ruta_manual = public_path() . '/utilidades_documentos';
         }
 
+        $bitacora = new DocumenotsGenerador;
+        $bitacora->id_usuario_bitacora = auth()->user()->id;
+        $bitacora->tipo_documento = $request->get('tipo');
+        $bitacora->folio = $request->get('folio');
+        $bitacora->save();
+
         $nombre = $request->get('nombre');
         $fecha = $request->get('fecha');
         $curso = $request->get('curso');
