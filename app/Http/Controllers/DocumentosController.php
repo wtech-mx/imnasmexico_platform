@@ -255,8 +255,8 @@ class DocumentosController extends Controller
         $folio = $request->get('folio');
         $curp = $request->get('curp');
 
-        //$email_user = $request->get('email');
-        $email_user = 'adrianwebtech@gmail.com';
+        $email_user = $request->get('email');
+        //$email_user = 'adrianwebtech@gmail.com';
         $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
 
         $nacionalidad = $request->get('nacionalidad');
