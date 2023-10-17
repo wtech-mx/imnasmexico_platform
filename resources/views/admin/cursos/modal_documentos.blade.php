@@ -134,7 +134,8 @@
                                 <div class="row">
 
                                     <div class="form-group col-12 gc_cn">
-                                        <p>Los campos de (Nombre (s) y Apellidos) <br>son solo obligatorios para generar la credencial</p>
+                                        <p>Los campos de (Nombre (s) y Apellidos) <br>son solo obligatorios para generar la credencial  </p>
+                                        <p>Link de la pag para remover los fondos de las fotografias <strong><a style="text-decoration:revert " href="https://www.remove.bg/es/upload" target="_blank" >remove.bg/es/upload</a></strong></p>
                                     </div>
 
                                     <div class="form-group col-6 gc_cn">
@@ -172,41 +173,52 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-6 gc_cn">
-                                        <label for="name">Firma Personal *</label>
-                                        @if ($order->User->Documentos)
-                                            @if ($order->User->Documentos->firma !== null)
-                                                <div class="input-group">
-                                                    <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->firma) }}" alt="Imagen" style="width: 60px;height: 60%;">
-                                                </div>
-                                            @endif
-                                        @else
+                                    @if ($order->User->Documentos)
+                                        @if ($order->User->Documentos->firma !== null)
+                                        <div class="form-group col-6 gc_cn">
+                                            <label for="name">Firma Personal *</label>
                                             <div class="input-group">
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img class="img_profile_label" src="{{asset('assets/user/icons/firma-digital.png')}}" alt="" width="30px">
                                                 </span>
                                                 <input id="firma" name="firma" type="file" class="form-control">
                                             </div>
-                                        @endif
-                                    </div>
-
-                                    <div class="form-group col-6 gc_cn">
-                                        <label for="name">Fotografia *</label>
-                                        @if ($order->User->Documentos)
-                                            @if ($order->User->Documentos->foto_tam_infantil !== null)
+                                            @if (pathinfo($order->User->Documentos->firma, PATHINFO_EXTENSION) == 'pdf')
+                                                <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->firma) }}" download="{{ $order->User->Documentos->firma }}" style="background: #836262; border-radius: 19px;">
+                                                    Descargar Documento
+                                                </a>
+                                            @else
                                                 <div class="input-group">
-                                                    <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" alt="Imagen" style="width: 60px;height: 60%;">
+                                                    <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->firma) }}" alt="Imagen" style="width: 100px;height: 100px;">
                                                 </div>
                                             @endif
-                                        @else
-                                            <div class="input-group">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
-                                                </span>
-                                                <input id="img_infantil" name="img_infantil" type="file" class="form-control"  >
-                                            </div>
+
+                                        </div>
                                         @endif
-                                    </div>
+                                    @endif
+
+                                    @if ($order->User->Documentos)
+                                        @if ($order->User->Documentos->foto_tam_infantil !== null)
+
+                                            <div class="form-group col-6 gc_cn">
+                                                <label for="name">Fotografia *</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="img_infantil" name="img_infantil" type="file" class="form-control"  >
+                                                </div>
+                                                @if (pathinfo($order->User->Documentos->foto_tam_infantil, PATHINFO_EXTENSION) == 'pdf')
+                                                    <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" download="{{ $order->User->Documentos->foto_tam_infantil }}" style="background: #836262; border-radius: 19px;">
+                                                        Descargar Documento
+                                                    </a>
+                                                @else
+                                                    <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" alt="Imagen" style="width: 1000px;height: 100px;">
+                                                @endif
+                                        </div>
+
+                                        @endif
+                                    @endif
 
                                     <div class="form-group col-6 gc_cn">
                                         <label for="name">Curp/generar</label>
