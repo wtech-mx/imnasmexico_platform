@@ -45,8 +45,8 @@ class DocumentosController extends Controller
         $bitacoras = DocumenotsGenerador::query();
 
         if( $request->fecha != NULL && $request->fecha2 != NULL){
-            $bitacoras = $bitacoras->where('created_at', '>=', $request->fecha)
-                                ->where('created_at', '<=', $request->fecha2);
+            $bitacoras = $bitacoras->whereDate('created_at', '>=', $request->fecha)
+                                ->whereDate('created_at', '<=', $request->fecha2);
         }
         $bitacoras = $bitacoras->get();
 
