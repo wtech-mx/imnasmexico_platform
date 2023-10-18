@@ -16,6 +16,7 @@ use App\Models\Tipodocumentos;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Mail\PlantillaDocumentoStps;
 use App\Models\DocumenotsGenerador;
+use DB;
 
 class DocumentosController extends Controller
 {
@@ -36,6 +37,33 @@ class DocumentosController extends Controller
         ];
 
         $bitacoras = DocumenotsGenerador::orderBy('created_at', 'ASC')->get();
+
+        return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados', 'bitacoras'));
+    }
+
+    public function buscador(Request $request){
+
+        $bitacoras = DocumenotsGenerador::query();
+
+        if( $request->fecha != NULL && $request->fecha2 != NULL){
+            $bitacoras = $bitacoras->where('created_at', '>=', $request->fecha)
+                                ->where('created_at', '<=', $request->fecha2);
+        }
+        $bitacoras = $bitacoras->get();
+
+        $documentos = Documentos::get();
+        $alumnos = User::where('cliente', '=', '1')->get();
+        $cursos = Cursos::pluck('nombre')->unique();
+        $cursosArray = $cursos->toArray();
+        $tipo_documentos = Tipodocumentos::get();
+
+        $estados = [
+            'Aguascalientes', 'Baja California', 'Baja California Sur','CDMX', 'Campeche', 'Chiapas',
+            'Chihuahua', 'Coahuila', 'Colima', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo',
+            'Jalisco', 'Michoacán', 'Morelos', 'Nayarit', 'Nuevo León', 'Oaxaca',
+            'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora',
+            'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
+        ];
 
         return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados', 'bitacoras'));
     }

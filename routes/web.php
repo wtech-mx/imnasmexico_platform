@@ -339,6 +339,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O  Documentos tipos ===============================
     Route::get('/admin/documentos/tipos', [App\Http\Controllers\TipodocumentosController::class, 'index'])->name('documentos.index');
+    Route::get('/buscador/index/documentos', [App\Http\Controllers\DocumentosController::class, 'buscador'])->name('advance_documentos.buscador');
     Route::post('/admin/documentos/store', [App\Http\Controllers\TipodocumentosController::class, 'store'])->name('documentos.store');
     Route::patch('/admin/documentos/update/{id}', [App\Http\Controllers\TipodocumentosController::class, 'update'])->name('documentos.update');
 

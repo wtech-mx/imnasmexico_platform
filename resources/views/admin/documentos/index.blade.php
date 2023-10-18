@@ -25,6 +25,31 @@ Reporte de Documentos
                     </a>
                 </div>
             </div>
+            <form action="{{ route('advance_documentos.buscador') }}" method="GET" >
+
+                <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
+                    <h5>Filtros</h5>
+                        <div class="row">
+                            <div class="col-3 ml-3">
+                                <label class="form-label">Del</label>
+                                <div class="input-group">
+                                    <input name="fecha" class="form-control"
+                                        type="date" required>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <label class="form-label">Al</label>
+                                <div class="input-group">
+                                    <input  name="fecha2" type="date" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <br>
+                                <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #F82018; color: #ffffff;">Buscar</button>
+                            </div>
+                        </div>
+                </div>
+            </form>
 
             <div class="table-responsive">
                 <table class="table table-flush p-2" id="datatable-search">
@@ -35,95 +60,95 @@ Reporte de Documentos
                             <th>Documento</th>
                             <th>Fecha</th>
                             <th>Estatus</th>
-                            <th>Personal</th>
                         </tr>
                     </thead>
 
 
-                    @foreach ($bitacoras as $item)
-                        @php
+                    @if(Route::currentRouteName() != 'documentos.index')
+                        @foreach ($bitacoras as $item)
+                            @php
 
-                            if ($item->tipo_documento == '1') {
-                                $item->tipo_documento = 'Diploma STPS General';
-                            }elseif ($item->tipo_documento == '2') {
-                                $item->tipo_documento = 'RN-Cedula de identidad de papel General';
-                            }elseif ($item->tipo_documento == '3') {
-                                $item->tipo_documento = 'RN - Titulo Honorifico Generico QRS';
-                            }elseif ($item->tipo_documento == '4') {
-                                $item->tipo_documento = 'RN - Diploma Imnas';
-                            }elseif ($item->tipo_documento == '5') {
-                                $item->tipo_documento = 'RN - Credencial General';
-                            }elseif ($item->tipo_documento == '13') {
-                                $item->tipo_documento = 'Titulo Honorifico Online Qr Logo';
-                            }
+                                if ($item->tipo_documento == '1') {
+                                    $item->tipo_documento = 'Diploma STPS General';
+                                }elseif ($item->tipo_documento == '2') {
+                                    $item->tipo_documento = 'RN-Cedula de identidad de papel General';
+                                }elseif ($item->tipo_documento == '3') {
+                                    $item->tipo_documento = 'RN - Titulo Honorifico Generico QRS';
+                                }elseif ($item->tipo_documento == '4') {
+                                    $item->tipo_documento = 'RN - Diploma Imnas';
+                                }elseif ($item->tipo_documento == '5') {
+                                    $item->tipo_documento = 'RN - Credencial General';
+                                }elseif ($item->tipo_documento == '13') {
+                                    $item->tipo_documento = 'Titulo Honorifico Online Qr Logo';
+                                }
 
-                        @endphp
-                        <tr>
-                            <td>
-                                @if ($item->id_usuario == NULL)
-                                    {{ $item->cliente }}
-                                @else
-                                    {{ $item->Alumno->name }}
-                                @endif
-                            </td>
-                            <td>
-                                @if ($item->id_curso == NULL)
-                                    {{ $item->curso }}
-                                @else
-                                    @php
-                                        $nombreDelCurso = $item->Cursos->nombre;
-                                        $nombreDelCurso = str_replace('Curso de ', '', $nombreDelCurso);
-                                        $nombreDelCurso = str_replace('Curso ', '', $nombreDelCurso);
+                            @endphp
+                            <tr>
+                                <td>
+                                    @if ($item->id_usuario == NULL)
+                                        {{ $item->cliente }}
+                                    @else
+                                        {{ $item->Alumno->name }}
+                                    @endif
+                                </td>
+                                <td>
+                                    @if ($item->id_curso == NULL)
+                                        {{ $item->curso }}
+                                    @else
+                                        @php
+                                            $nombreDelCurso = $item->Cursos->nombre;
+                                            $nombreDelCurso = str_replace('Curso de ', '', $nombreDelCurso);
+                                            $nombreDelCurso = str_replace('Curso ', '', $nombreDelCurso);
 
-                                        $palabras = explode(' ', $nombreDelCurso);
+                                            $palabras = explode(' ', $nombreDelCurso);
 
-                                        // Inicializa la cadena formateada
-                                        $nombre_formateado = '';
-                                        $contador_palabras = 0;
+                                            // Inicializa la cadena formateada
+                                            $nombre_formateado = '';
+                                            $contador_palabras = 0;
 
-                                        foreach ($palabras as $palabra) {
-                                            // Agrega la palabra actual a la cadena formateada
-                                            $nombre_formateado .= $palabra . ' ';
+                                            foreach ($palabras as $palabra) {
+                                                // Agrega la palabra actual a la cadena formateada
+                                                $nombre_formateado .= $palabra . ' ';
 
-                                            // Incrementa el contador de palabras
-                                            $contador_palabras++;
+                                                // Incrementa el contador de palabras
+                                                $contador_palabras++;
 
-                                            // Agrega un salto de línea después de cada tercera palabra
-                                            if ($contador_palabras % 3 == 0) {
-                                                $nombre_formateado .= "<br>";
+                                                // Agrega un salto de línea después de cada tercera palabra
+                                                if ($contador_palabras % 3 == 0) {
+                                                    $nombre_formateado .= "<br>";
+                                                }
                                             }
-                                        }
+                                        @endphp
+                                        {!! $nombre_formateado !!}
+                                    @endif
+                                </td>
+                                <td>{{ $item->tipo_documento }} <br>
+                                    {{ $item->folio }}
+                                </td>
+
+                                <td>
+                                    @php
+                                        $fecha = $item->created_at;
+                                        $fecha_timestamp = strtotime($fecha);
+                                        $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                                     @endphp
-                                    {!! $nombre_formateado !!}
-                                @endif
-                            </td>
-                            <td>{{ $item->tipo_documento }} <br>
-                                {{ $item->folio }}
-                            </td>
+                                    {{$fecha_formateada}}
+                                </td>
 
-                            <td>
-                                @php
-                                    $fecha = $item->created_at;
-                                    $fecha_timestamp = strtotime($fecha);
-                                    $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
-                                @endphp
-                                {{$fecha_formateada}}
-                            </td>
+                                <td>
+                                    <!-- Button trigger modal -->
 
-                            <td>
-                                <!-- Button trigger modal -->
+                                    <button type="button" class="btn  btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal_{{$item->id}}">
+                                        {{ $item->estatus }}
+                                    </button>
+                                </td>
 
-                                <button type="button" class="btn  btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal_{{$item->id}}">
-                                    {{ $item->estatus }}
-                                </button>
-                            </td>
 
-                            <td>{{ $item->User->name }}</td>
+                            </tr>
+                            @include('admin.documentos.modal_estatus')
 
-                        </tr>
-                        @include('admin.documentos.modal_estatus')
-
-                    @endforeach
+                        @endforeach
+                    @endif
                 </table>
             </div>
           </div>
