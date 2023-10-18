@@ -64,7 +64,7 @@ Reporte de Documentos
                     </thead>
 
 
-                    @if(Route::currentRouteName() != 'documentos.index')
+                    @if(Route::currentRouteName() != 'generar_documentos.index')
                         @foreach ($bitacoras as $item)
                             @php
 

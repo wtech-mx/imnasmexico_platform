@@ -36,9 +36,8 @@ class DocumentosController extends Controller
             'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
         ];
 
-        $bitacoras = DocumenotsGenerador::orderBy('created_at', 'ASC')->get();
 
-        return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados', 'bitacoras'));
+        return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados'));
     }
 
     public function buscador(Request $request){

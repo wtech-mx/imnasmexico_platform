@@ -348,7 +348,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/documentos/bitacora/{id}', [App\Http\Controllers\DocumentosController::class, 'bitacora_documentos_estatus'])->name('bitacora_documentos.update');
 
 
-    Route::get('/admin/documentos/generar', [App\Http\Controllers\DocumentosController::class, 'index'])->name('generar_documentos.index');
+    Route::get('/admin/doc/generar', [App\Http\Controllers\DocumentosController::class, 'index'])->name('generar_documentos.index');
     Route::get('/obtener-ordenes/{usuario}', [App\Http\Controllers\DocumentosController::class, 'obtenerOrdenes']);
 
 
