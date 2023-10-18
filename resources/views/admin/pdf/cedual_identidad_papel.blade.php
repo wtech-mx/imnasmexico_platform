@@ -171,7 +171,7 @@
         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
 
         <div class="container4">
-            <h4 class="folio2">FOLIO {{$folio}}</h4>
+            <h4 class="folio2">{{$folio}}</h4>
         </div>
 
         <div class="container5">
