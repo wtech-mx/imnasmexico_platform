@@ -60,6 +60,7 @@ Reporte de Documentos
                             <th>Documento</th>
                             <th>Fecha</th>
                             <th>Estatus</th>
+                            <th>Personal</th>
                         </tr>
                     </thead>
 
@@ -141,6 +142,10 @@ Reporte de Documentos
                                     <button type="button" class="btn  btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal_{{$item->id}}">
                                         {{ $item->estatus }}
                                     </button>
+                                </td>
+
+                                <td>
+                                    <td>{{ $item->User->name }}</td>
                                 </td>
 
 
