@@ -118,7 +118,7 @@ class RecursosController extends Controller
 
         if ($request->hasFile("material")) {
             if($dominio == 'plataforma.imnasmexico.com'){
-                $ruta_recursos = base_path('/materiales');
+                $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/materiales');
             } else {
                 $ruta_recursos = public_path() . '/materiales';
             }
