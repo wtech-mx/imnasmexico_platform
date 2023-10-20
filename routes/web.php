@@ -354,6 +354,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O   R E C U R S O S ===============================
     Route::get('/recursos', [App\Http\Controllers\RecursosController::class, 'index'])->name('recursos.index');
+    Route::get('/buscador/index/recursos', [App\Http\Controllers\RecursosController::class, 'buscador'])->name('advance_recursos.buscador');
     Route::post('/recursos/create', [App\Http\Controllers\RecursosController::class, 'store'])->name('recursos.store');
     Route::patch('/recursos/update/{id}', [App\Http\Controllers\RecursosController::class, 'update'])->name('recursos.update');
 
