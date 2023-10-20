@@ -30,21 +30,23 @@
                                         <option value="Presencial">Presencial</option>
                                     </select>
                                 </div>
-                                <div class="col-12">
+                                <div class="col-6">
                                     <label for="">Foto curso</label><br>
-                                    <img id="blah" src="{{asset('curso/'.$recurso->foto) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
                                     <input type="file" id="foto" name="foto" value="{{$recurso->foto}}" class="form-control">
+                                    <img id="blah" src="{{asset('curso/'.$recurso->foto) }}" alt="Imagen" style="width: 10opx; height:100px;"/>
+
                                 </div>
-                                <div class="col-12">
+                                <div class="col-6">
                                     <label for="">Material de clase</label><br>
-                                    <img id="blah" src="{{asset('materiales/'.$recurso->material) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
                                     <input type="file" id="material" name="material" value="{{$recurso->material}}" class="form-control">
+                                    <img id="blah" src="{{asset('materiales/'.$recurso->material) }}" alt="Imagen" style="width: 10opx; height:100px;"/>
+
                                 </div>
                                 <div class="col-12">
                                     <label for="">PDF</label><br>
-                                    <iframe src="{{ asset('pdf/'.$recurso->pdf) }}" width="70%" height="150" class="img-fluid img-thumbnail" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectPdf('{{ $recurso->pdf }}')">
-                                    </iframe>
                                     <input type="file" id="pdf" name="pdf" value="{{$recurso->pdf}}" class="form-control">
+                                    <iframe src="{{ asset('pdf/'.$recurso->pdf) }}" width="100%" height="250" class="img-fluid img-thumbnail" data-bs-dismiss="modal" aria-label="Seleccionar" onclick="selectPdf('{{ $recurso->pdf }}')">
+                                    </iframe>
                                 </div>
                             </div>
                         </div>

@@ -79,46 +79,90 @@ class RecursosController extends Controller
         if ($request->hasFile("foto")) {
             if($dominio == 'plataforma.imnasmexico.com'){
                 $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/curso');
-            }else{
+            } else {
                 $ruta_recursos = public_path() . '/curso';
             }
 
             $file = $request->file('foto');
             $path = $ruta_recursos;
             $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $recursos->foto = $fileName;
+
+            // Verifica si la imagen existente ya existe y elimínala si es el caso.
+            $imagenExistente = $path . '/' . $recursos->foto;
+            if (file_exists($imagenExistente)) {
+                unlink($imagenExistente);
+            }
+
+            $imagenAnterior = $path . '/' . $recursos->foto;
+            if (file_exists($imagenAnterior)) {
+                unlink($imagenAnterior);
+            }
+
+            // Mueve la nueva imagen con el mismo nombre de archivo que la imagen anterior.
+            $file->move($path, $recursos->foto);
+
+            $recursos->foto = $recursos->foto; // No cambia el nombre.
         }
 
         if ($request->hasFile("material")) {
             if($dominio == 'plataforma.imnasmexico.com'){
                 $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/materiales');
-            }else{
+            } else {
                 $ruta_recursos = public_path() . '/materiales';
             }
 
             $file = $request->file('material');
             $path = $ruta_recursos;
             $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $recursos->material = $fileName;
+
+            // Verifica si la imagen existente ya existe y elimínala si es el caso.
+            $imagenExistente = $path . '/' . $recursos->material;
+            if (file_exists($imagenExistente)) {
+                unlink($imagenExistente);
+            }
+
+            $imagenAnterior = $path . '/' . $recursos->material;
+            if (file_exists($imagenAnterior)) {
+                unlink($imagenAnterior);
+            }
+
+            // Mueve la nueva imagen con el mismo nombre de archivo que la imagen anterior.
+            $file->move($path, $recursos->material);
+
+            $recursos->material = $recursos->material; // No cambia el nombre.
         }
 
         if ($request->hasFile("pdf")) {
             if($dominio == 'plataforma.imnasmexico.com'){
                 $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/pdf');
-            }else{
+            } else {
                 $ruta_recursos = public_path() . '/pdf';
             }
 
             $file = $request->file('pdf');
             $path = $ruta_recursos;
             $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $recursos->pdf = $fileName;
+
+            // Verifica si la imagen existente ya existe y elimínala si es el caso.
+            $imagenExistente = $path . '/' . $recursos->pdf;
+            if (file_exists($imagenExistente)) {
+                unlink($imagenExistente);
+            }
+
+            $imagenAnterior = $path . '/' . $recursos->pdf;
+            if (file_exists($imagenAnterior)) {
+                unlink($imagenAnterior);
+            }
+
+            // Mueve la nueva imagen con el mismo nombre de archivo que la imagen anterior.
+            $file->move($path, $recursos->pdf);
+
+            $recursos->pdf = $recursos->pdf; // No cambia el nombre.
         }
 
         $recursos->update();
+
+
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Actualziado con exito');
