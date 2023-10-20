@@ -824,7 +824,7 @@ Mi perfil- {{$cliente->name}}
 
                                                             <form action="{{ route('documentos.store_cliente', $cliente->id) }}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
-                                                                @foreach ($carpetas_carta as $documento)
+                                                                @foreach ($carpetas_carta as $documento_carta)
                                                                     <h3 class="mt-5 mb-2">Documentos extras obligatorios</h3>
 
                                                                     @php
@@ -834,11 +834,11 @@ Mi perfil- {{$cliente->name}}
                                                                 <div class="row">
 
                                                                     <div class="col-6  mb-2">
-                                                                            <a href="{{asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" download="{{$documento->nombre_recurso}}" style="text-decoration: none; color: #000">
+                                                                            <a href="{{asset('cursos/' . $carpeta->nombre_carpeta . '/' . $documento_carta->nombre_recurso) }}" download="{{$documento_carta->nombre_recurso}}" style="text-decoration: none; color: #000">
                                                                                 <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
-                                                                                {{ substr($documento->nombre_recurso, 13) }}
+                                                                                {{ substr($documento_carta->nombre_recurso, 13) }}
                                                                             </a>
-                                                                            <a class="text-center text-white btn btn-sm ml-2" href="{{asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" download="{{$documento->nombre_recurso}}" style="background: #836262; border-radius: 19px;">
+                                                                            <a class="text-center text-white btn btn-sm ml-2" href="{{asset('cursos/' . $carpeta->nombre_carpeta . '/' . $documento_carta->nombre_recurso) }}" download="{{$documento_carta->nombre_recurso}}" style="background: #836262; border-radius: 19px;">
                                                                                 Descargar
                                                                             </a>
                                                                     </div>
