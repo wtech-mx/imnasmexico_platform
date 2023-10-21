@@ -24,7 +24,7 @@ class DocumentosController extends Controller
 
         $documentos = Documentos::get();
         $alumnos = User::where('cliente', '=', '1')->get();
-        $cursos = Cursos::pluck('nombre')->unique();
+        $cursos = Cursos::orderBy('nombre','ASC')->pluck('nombre')->unique();
         $cursosArray = $cursos->toArray();
         $tipo_documentos = Tipodocumentos::get();
 
