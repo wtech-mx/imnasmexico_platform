@@ -175,7 +175,13 @@
         </div>
 
         <div class="container5">
-            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
+
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma"
+            @if (!isset($fileName_firma))
+                src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png"
+            @endif
+>
+
             {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma">--}}
         </div>
 
