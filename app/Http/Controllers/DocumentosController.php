@@ -112,7 +112,7 @@ class DocumentosController extends Controller
             $fileName_firma = uniqid() . $file_firma->getClientOriginalName();
             $file_firma->move($path_firma, $fileName_firma);
         } else {
-            $firmaPath = "https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png";
+            $fileName_firma = "fondo_sf.png";
         }
 
         $tipo_documentos = Tipodocumentos::find($tipo);
