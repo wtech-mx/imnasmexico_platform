@@ -828,8 +828,8 @@ Mi perfil- {{$cliente->name}}
                                                                     <h3 class="mt-5 mb-2">Documentos extras obligatorios</h3>
 
                                                                     @php
-                                                                        $documentoDescargado = DB::table('documentos_estandares')->where('id_usuario', $cliente->id)->where('id_documento', $documento->id)->exists();
-                                                                        $documentoSubido = DB::table('documentos_estandares')->where('id_usuario', $cliente->id)->where('id_documento', $documento->id)->orderBy('created_at', 'desc')->first();
+                                                                        $documentoDescargado = DB::table('documentos_estandares')->where('id_usuario', $cliente->id)->where('id_documento', $documento_carta->id)->exists();
+                                                                        $documentoSubido = DB::table('documentos_estandares')->where('id_usuario', $cliente->id)->where('id_documento', $documento_carta->id)->orderBy('created_at', 'desc')->first();
                                                                     @endphp
                                                                 <div class="row">
 
@@ -869,43 +869,43 @@ Mi perfil- {{$cliente->name}}
                                                                             </p>
 
                                                                             <div class="d-flex justify-content-center">
-                                                                                <a id="noButtondoc_{{ $documento->id }}" class="btn_save_profile" >No</a>
-                                                                                <a id="siButtondoc_{{ $documento->id }}" class="btn_save_profile" style="margin-left: 1rem">Si -</a>
+                                                                                <a id="noButtondoc_{{ $documento_carta->id }}" class="btn_save_profile" >No</a>
+                                                                                <a id="siButtondoc_{{ $documento_carta->id }}" class="btn_save_profile" style="margin-left: 1rem">Si -</a>
                                                                             </div>
 
-                                                                            <div class="content_files_{{ $documento->id }}">
-                                                                                <input type="hidden" name="documento_ids[]" value="{{ $documento->id }}">
+                                                                            <div class="content_files_{{ $documento_carta->id }}">
+                                                                                <input type="hidden" name="documento_ids[]" value="{{ $documento_carta->id }}">
                                                                                 <input type="hidden" name="curso" value="{{ $video->Cursos->id }}">
-                                                                                <input   name="archivos[]" hidden id="btnoriginal{{ $documento->id }}{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall{{ $documento->id }}{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal{{ $documento->id }}{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
-                                                                                <button type="button" id="botonpersonal{{ $documento->id }}{{$video->id_tickets}}" onClick="document.getElementById('btnoriginal{{ $documento->id }}{{$video->id_tickets}}').click();">Adjuntar documento</button>
-                                                                                <small id='tagsmall{{ $documento->id }}{{$video->id_tickets}}'>No hay archivos adjuntos</small>
+                                                                                <input   name="archivos[]" hidden id="btnoriginal{{ $documento_carta->id }}{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall{{ $documento_carta->id }}{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal{{ $documento_carta->id }}{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
+                                                                                <button type="button" id="botonpersonal{{ $documento_carta->id }}{{$video->id_tickets}}" onClick="document.getElementById('btnoriginal{{ $documento_carta->id }}{{$video->id_tickets}}').click();">Adjuntar documento</button>
+                                                                                <small id='tagsmall{{ $documento_carta->id }}{{$video->id_tickets}}'>No hay archivos adjuntos</small>
                                                                             </div>
 
                                                                         @else
-                                                                            <input type="hidden" name="documento_ids[]" value="{{ $documento->id }}">
+                                                                            <input type="hidden" name="documento_ids[]" value="{{ $documento_carta->id }}">
                                                                             <input type="hidden" name="curso" value="{{ $video->Cursos->id }}">
-                                                                            <input   name="archivos[]" hidden id="btnoriginal{{ $documento->id }}{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall{{ $documento->id }}{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal{{ $documento->id }}{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
-                                                                            <button type="button" id="botonpersonal{{ $documento->id }}{{$video->id_tickets}}" onClick="document.getElementById('btnoriginal{{ $documento->id }}{{$video->id_tickets}}').click();">Adjuntar documento</button>
-                                                                            <small id='tagsmall{{ $documento->id }}{{$video->id_tickets}}'>No hay archivos adjuntos</small>
+                                                                            <input   name="archivos[]" hidden id="btnoriginal{{ $documento_carta->id }}{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall{{ $documento_carta->id }}{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal{{ $documento_carta->id }}{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar documento">
+                                                                            <button type="button" id="botonpersonal{{ $documento_carta->id }}{{$video->id_tickets}}" onClick="document.getElementById('btnoriginal{{ $documento_carta->id }}{{$video->id_tickets}}').click();">Adjuntar documento</button>
+                                                                            <small id='tagsmall{{ $documento_carta->id }}{{$video->id_tickets}}'>No hay archivos adjuntos</small>
                                                                         @endif
 
                                                                         <script>
                                                                             // Obtener elementos
-                                                                            const noButtondoc_{{ $documento->id }} = document.getElementById('noButtondoc_{{ $documento->id }}');
-                                                                            const siButtondoc_{{ $documento->id }} = document.getElementById('siButtondoc_{{ $documento->id }}');
+                                                                            const noButtondoc_{{ $documento_carta->id }} = document.getElementById('noButtondoc_{{ $documento_carta->id }}');
+                                                                            const siButtondoc_{{ $documento_carta->id }} = document.getElementById('siButtondoc_{{ $documento_carta->id }}');
 
-                                                                            const contentFilesdoc_{{ $documento->id }} = document.querySelector('.content_files_{{ $documento->id }}');
+                                                                            const contentFilesdoc_{{ $documento_carta->id }} = document.querySelector('.content_files_{{ $documento_carta->id }}');
 
                                                                             // Ocultar el contenedor al principio
-                                                                            contentFilesdoc_{{ $documento->id }}.style.display = 'none';
+                                                                            contentFilesdoc_{{ $documento_carta->id }}.style.display = 'none';
 
                                                                             // Agregar eventos de clic a los botones
-                                                                            noButtondoc_{{ $documento->id }}.addEventListener('click', function () {
-                                                                                contentFilesdoc_{{ $documento->id }}.style.display = 'none';
+                                                                            noButtondoc_{{ $documento_carta->id }}.addEventListener('click', function () {
+                                                                                contentFilesdoc_{{ $documento_carta->id }}.style.display = 'none';
                                                                             });
 
-                                                                            siButtondoc_{{ $documento->id }}.addEventListener('click', function () {
-                                                                                contentFilesdoc_{{ $documento->id }}.style.display = 'block';
+                                                                            siButtondoc_{{ $documento_carta->id }}.addEventListener('click', function () {
+                                                                                contentFilesdoc_{{ $documento_carta->id }}.style.display = 'block';
                                                                             });
                                                                         </script>
 

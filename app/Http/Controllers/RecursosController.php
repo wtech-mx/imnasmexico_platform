@@ -9,9 +9,21 @@ use Session;
 class RecursosController extends Controller
 {
     public function index(Request $request){
-        $recursos = Recursos::orderBy('id','DESC')->get();
+        $recursos_buscador = Recursos::orderBy('id','DESC')->get();
 
-        return view('admin.recursos.index', compact('recursos'));
+        return view('admin.recursos.index', compact('recursos_buscador'));
+    }
+
+    public function buscador(Request $request){
+        $recursos_buscador = Recursos::orderBy('id','DESC')->get();
+        $recursos = Recursos::query();
+
+        if( $request->nombre != NULL){
+            $recursos = $recursos->where('nombre', '=', $request->nombre);
+        }
+        $recursos = $recursos->get();
+
+        return view('admin.recursos.index', compact('recursos', 'recursos_buscador'));
     }
 
     public function store(Request $request){
@@ -39,7 +51,7 @@ class RecursosController extends Controller
             if($dominio == 'plataforma.imnasmexico.com'){
                 $ruta_recursos = base_path('../public_html/plataforma.imnasmexico.com/materiales');
             }else{
-                $ruta_recursos = public_path() . '/materiales';
+                $ruta_recursos = public_path() . '\materiales';
             }
 
             $file = $request->file('material');
