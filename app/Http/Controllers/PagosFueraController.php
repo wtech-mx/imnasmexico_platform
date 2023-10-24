@@ -10,8 +10,10 @@ use Session;
 use App\Mail\PlantillaPedidoRecibido;
 use App\Mail\PlantillaTicketPresencial;
 use App\Mail\PlantillaTicket;
+use App\Mail\PlantillaDocumentoStps;
 use App\Mail\PlantillaPagoExterno;
 use App\Models\CursosTickets;
+use App\Models\Tipodocumentos;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use MercadoPago\SDK;
@@ -22,6 +24,7 @@ use App\Mail\PlantillaNuevoUser;
 use App\Models\Cursos;
 use Illuminate\Support\Str;
 use DB;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PagosFueraController extends Controller
 {
@@ -171,11 +174,34 @@ class PagosFueraController extends Controller
 
             $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
 
+            $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
+            $destinatario = [ $order->User->email  , $email_diplomas];
+            $datos = $order->User->name;
+
+
             foreach ($orden_ticket as $details) {
+
+                $curso = $details->Cursos->nombre;
+                $fecha = $details->Cursos->fecha_inicial;
+                $nombre = $order->User->name;
+                $tipo ='Diploma_STPS';
+                $tipo_documentos = Tipodocumentos::first();
+
                 if ($details->Cursos->modalidad == 'Online') {
                     Mail::to($order->User->email)->send(new PlantillaTicket($details));
                 } else {
                     Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
+                }
+
+                if($details->Cursos->stps == '1'){
+
+                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                    $pdf->setPaper('A4', 'portrait');
+
+                    $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+
+                    Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+
                 }
             }
 
