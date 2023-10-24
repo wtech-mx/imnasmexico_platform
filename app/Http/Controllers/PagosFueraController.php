@@ -184,7 +184,6 @@ class PagosFueraController extends Controller
                 $curso = $details->Cursos->nombre;
                 $fecha = $details->Cursos->fecha_inicial;
                 $nombre = $order->User->name;
-                $tipo ='Diploma_STPS';
                 $tipo_documentos = Tipodocumentos::first();
 
                 if ($details->Cursos->modalidad == 'Online') {
@@ -197,9 +196,7 @@ class PagosFueraController extends Controller
 
                     $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
                     $pdf->setPaper('A4', 'portrait');
-
                     $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
-
                     Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
 
                 }

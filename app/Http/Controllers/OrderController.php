@@ -20,6 +20,7 @@ use App\Mail\PlantillaNuevoUser;
 use App\Mail\PlantillaPedidoRecibido;
 use App\Mail\PlantillaTicketPresencial;
 use App\Mail\PlantillaTicket;
+use App\Mail\PlantillaDocumentoStps;
 use Stripe;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
@@ -29,6 +30,7 @@ use Codexshaper\WooCommerce\Facades\WooCommerce;
 use Codexshaper\WooCommerce\Facades\Product;
 use Order;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 use Throwable;
@@ -335,11 +337,31 @@ class OrderController extends Controller
 
                 $ordenwoo = Order::create($data);
             }else{
+
+                $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
+                $destinatario = [ $order->User->email  , $email_diplomas];
+                $datos = $order->User->name;
+
                 foreach ($orden_ticket as $details) {
+
+                    $curso = $details->Cursos->nombre;
+                    $fecha = $details->Cursos->fecha_inicial;
+                    $nombre = $order->User->name;
+                    $tipo_documentos = Tipodocumentos::first();
+
                     if ($details->Cursos->modalidad == 'Online') {
                         Mail::to($order->User->email)->send(new PlantillaTicket($details));
                     } else {
                         Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
+                    }
+
+                    if($details->Cursos->stps == '1'){
+
+                        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                        $pdf->setPaper('A4', 'portrait');
+                        $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+                        Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+
                     }
                 }
                 Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
@@ -583,12 +605,31 @@ class OrderController extends Controller
         $pago = $request->precio;
         $forma_pago = $orden_ticket2->Orders->forma_pago;
 
+        $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
+        $destinatario = [ $order->User->email  , $email_diplomas];
+        $datos = $order->User->name;
+
         foreach ($orden_ticket as $details) {
+
+            $curso = $details->Cursos->nombre;
+            $fecha = $details->Cursos->fecha_inicial;
+            $nombre = $order->User->name;
+            $tipo_documentos = Tipodocumentos::first();
+
             if ($details->Cursos->modalidad == 'Online') {
                 Mail::to($payer->email)->send(new PlantillaTicket($details));
             } else {
                 Mail::to($payer->email)->send(new PlantillaTicketPresencial($details));
             }
+
+            if($details->Cursos->stps == '1'){
+
+                $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                $pdf->setPaper('A4', 'portrait');
+                $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+                Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+            }
+
         }
         Mail::to($payer->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
@@ -664,11 +705,30 @@ class OrderController extends Controller
         $pago = $orden_ticket2->Orders->pago;
         $forma_pago = $orden_ticket2->Orders->forma_pago;
 
+        $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
+        $destinatario = [ $order->User->email  , $email_diplomas];
+        $datos = $order->User->name;
+
         foreach ($orden_ticket as $details) {
+
+            $curso = $details->Cursos->nombre;
+            $fecha = $details->Cursos->fecha_inicial;
+            $nombre = $order->User->name;
+            $tipo_documentos = Tipodocumentos::first();
+
             if ($details->Cursos->modalidad == 'Online') {
                 Mail::to($payer->email)->send(new PlantillaTicket($details));
             } else {
                 Mail::to($payer->email)->send(new PlantillaTicketPresencial($details));
+            }
+
+            if($details->Cursos->stps == '1'){
+
+                $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                $pdf->setPaper('A4', 'portrait');
+                $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+                Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+
             }
         }
         Mail::to($payer->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
