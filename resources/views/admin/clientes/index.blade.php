@@ -75,17 +75,17 @@
                                 <td>{{ $cliente->email }}</td>
                                 <td>
                                     @can('client-documentos')
-                                        <a type="button" class="btn bg-dark" data-bs-toggle="modal" data-bs-target="#modal_documentos{{ $cliente->id }}" style="background: #52BE80; color: #ffff">
+                                        <a type="button" class="btn btn-sm bg-dark" data-bs-toggle="modal" data-bs-target="#modal_documentos{{ $cliente->id }}" style="background: #52BE80; color: #ffff">
                                             <i class="fas fa-folder-open"></i>
                                         </a>
                                     @endcan
                                     @can('client-compras')
-                                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#ticket_cliente_{{ $cliente->id }}" style="background: #52BE80; color: #ffff">
+                                        <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#ticket_cliente_{{ $cliente->id }}" style="background: #52BE80; color: #ffff">
                                             <i class="fas fa-ticket-alt"></i> {{ $cliente->Orders->count()}}
                                         </a>
                                     @endcan
                                     @can('client-edit')
-                                        <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_cliente_{{ $cliente->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                        <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_cliente_{{ $cliente->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                             <i class="fa fa-fw fa-eye"></i>
                                         </a>
                                     @endcan
