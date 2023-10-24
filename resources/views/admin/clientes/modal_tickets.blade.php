@@ -94,7 +94,11 @@
                                                             $permalink = $tiket->Cursos->slug;
                                                             $url_completa = $url.$permalink;
                                                         @endphp
-                                                        <a class="text-white" href="{{$url_completa}}" target="_blank">{{$tiket->Cursos->nombre}}</a>
+                                                        <a class="text-white" href="{{$url_completa}}" target="_blank" style="text-decoration: revert;">{{$tiket->Cursos->nombre}}</a> <br>
+
+                                                        <a class="btn btn-white mt-3 text-dark" href="{{ route('cursos.listas',$tiket->Cursos->id) }}" target="_blank" style="text-decoration: revert;">
+                                                            Ver lista
+                                                        </a>
                                                     </div>
                                                     <div class="col-2 mt-3">
                                                         <h6 class="text-white">Precio</h6>
