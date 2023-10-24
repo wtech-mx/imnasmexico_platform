@@ -99,6 +99,20 @@
                                                         <a class="btn btn-white mt-3 text-dark" href="{{ route('cursos.listas',$tiket->Cursos->id) }}" target="_blank" style="text-decoration: revert;">
                                                             Ver lista
                                                         </a>
+
+                                                        <h6 class="text-white">Diploma y/o Certificaciones:</h6>
+                                                        <p class="text-white">
+                                                        @if ($tiket->Cursos->imnas == '1' && $tiket->Cursos->titulo_hono == NULL)
+                                                            IMNAS -
+                                                        @endif
+                                                        @if ($tiket->Cursos->imnas == '1' && $tiket->Cursos->titulo_hono == '1')
+                                                            Titulo Honorifico -
+                                                        @endif
+                                                        @if ($tiket->Cursos->stps == '1')
+                                                            STPS
+                                                        @endif
+                                                        </p>
+
                                                     </div>
                                                     <div class="col-2 mt-3">
                                                         <h6 class="text-white">Precio</h6>
