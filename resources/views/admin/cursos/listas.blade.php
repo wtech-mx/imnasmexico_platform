@@ -7,6 +7,15 @@
 <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
 @endsection
+<style>
+    .estatus-doc-red {
+        color: red;
+    }
+
+    .estatus-doc-green {
+        color: green;
+    }
+</style>
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -14,7 +23,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
-                            <h3 class="mb-3">Listas de Cursos</h3>
+                            <h3 class="mb-3">Lista de Curso</h3>
                             <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 Crear
                             </a>
@@ -58,15 +67,20 @@
                                     </h5>
 
                                     <h5>Diploma y/o Certificaciones:
-                                        @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
+                                        @if ($ticket->descripcion == 'Con opción a Documentos de certificadora IMNAS')
                                             IMNAS
+                                        @else
+                                            @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
+                                                IMNAS
+                                            @endif
+                                            @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
+                                                Titulo Honorifico
+                                            @endif
+                                            @if ($ticket->Cursos->stps == '1')
+                                                STPS
+                                            @endif
                                         @endif
-                                        @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
-                                            Titulo Honorifico
-                                        @endif
-                                        @if ($ticket->Cursos->stps == '1')
-                                            STPS
-                                        @endif
+
                                     </h5>
 
                                     <div class="table-responsive">
@@ -85,7 +99,7 @@
                                             <tbody>
                                                 @foreach ($ordenes as $order)
                                                         @if ($order->id_tickets == $ticket->id && $order->Orders->estatus == '1')
-                                                            <tr>
+                                                            <tr class="{{ $order->estatus_doc == 1 ? 'estatus-doc-green' : 'estatus-doc-red' }}">
                                                                 <td>{{ $order->Orders->id }}</td>
                                                                 <td>
                                                                     <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a><br>
@@ -127,7 +141,7 @@
 
                                                     @if ($order->Orders->PagosFuera != NULL)
                                                         @if ($order->id_tickets == $ticket->id && ($order->Cursos->modalidad == 'Presencial' && $order->Orders->PagosFuera->deudor == '1'))
-                                                            <tr>
+                                                            <tr class="{{ $order->estatus_doc === 1 ? 'estatus-doc-green' : 'estatus-doc-red' }}">
                                                                 <td>{{ $order->Orders->id }}</td>
                                                                 <td>
                                                                     <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a><br>

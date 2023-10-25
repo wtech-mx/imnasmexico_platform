@@ -28,6 +28,7 @@
                     <div class="row">
                             <input id="id_curso" name="id_curso" type="text" class="form-control" value="{{ $ticket->Cursos->id }}" style="display: none" >
                             <input id="id_ticket" name="id_ticket" type="text" class="form-control" value="{{ $ticket->id }}" style="display: none" >
+                            <input id="id_ticket_orders" name="id_ticket_orders" type="text" class="form-control" value="{{ $order->id }}" style="display: none">
                             <input id="id_usuario" name="id_usuario" type="text" class="form-control" value="{{ $order->id_usuario }}" style="display: none" >
 
                             <div class="form-group col-12 mt-3">
@@ -67,12 +68,7 @@
                                         <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px">
                                     </span>
                                     <select name="tipo" id="tipo" class="form-select" >
-
-                                        @if ($ticket->Cursos->stps == '1')
-                                            <option value="1">Diploma STPS General</option>
-                                        @endif
-
-                                        @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
+                                        @if ($ticket->descripcion == 'Con opción a Documentos de certificadora IMNAS')
                                             <option value="2">RN-Cedula de identidad de papel General</option>
                                             <option value="3">RN - Titulo Honorifico Generico QRS</option>
                                             <option value="4">RN - Diploma Imnas</option>
@@ -100,44 +96,86 @@
                                             @if (str_contains($ticket->Cursos->nombre, 'Cosmetología'))
                                                 <option value="12">CN - Tira de materias Cosmetologia</option>
                                             @endif
-                                        @endif
-                                        @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
-                                            <option value="13">Titulo Honorifico Online Qr Logo</option>
+                                        @else
+                                            @if ($ticket->Cursos->stps == '1')
+                                                <option value="1">Diploma STPS General</option>
+                                            @endif
+
+                                            @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
+                                                <option value="2">RN-Cedula de identidad de papel General</option>
+                                                <option value="3">RN - Titulo Honorifico Generico QRS</option>
+                                                <option value="4">RN - Diploma Imnas</option>
+                                                <option value="5">RN - Credencial General</option>
+                                                <option value="13">Titulo Honorifico Online Qr Logo</option>
+
+                                                @if (str_contains($ticket->Cursos->nombre,'medicina estetica'))
+                                                    <option value="6">CN - Tira de materias aparatologia</option>
+                                                @endif
+                                                @if (str_contains($ticket->Cursos->nombre, 'Alisados'))
+                                                    <option value="7">CN - Tira de materias alasiados progresivos</option>
+                                                @endif
+                                                @if (str_contains($ticket->Cursos->nombre, 'Cosmetología Facial y Corporal'))
+                                                    <option value="8">CN - Tira de materias cosmetologia facial y corporal</option>
+                                                @endif
+                                                @if (str_contains($ticket->Cursos->nombre, 'Cosmiatria'))
+                                                    <option value="9">CN - Tira de materias cosmiatria estetica avanzada</option>
+                                                @endif
+                                                @if (str_contains($ticket->Cursos->nombre, 'Auxiliar'))
+                                                    <option value="10">CN - Tira de materias auxiliar en cuidados de atencion medica</option>
+                                                @endif
+                                                @if (str_contains($ticket->Cursos->nombre, 'Mesoterapia'))
+                                                    <option value="11">CN - Tira de materias masoterapia</option>
+                                                @endif
+                                                @if (str_contains($ticket->Cursos->nombre, 'Cosmetología'))
+                                                    <option value="12">CN - Tira de materias Cosmetologia</option>
+                                                @endif
+                                            @endif
+                                            @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
+                                                <option value="13">Titulo Honorifico Online Qr Logo</option>
+                                            @endif
                                         @endif
                                     </select>
                                 </div>
                             </div>
+                            @php
+                                // Datos de ejemplo
+                                $nombreCurso = $ticket->Cursos->nombre;
+                                $idUsuario = $order->User->id;
+                                $numeroAleatorio = rand(100, 999); // Generar un número aleatorio de tres dígitos
+
+                                // Dividir el nombre del curso en palabras
+                                $palabras = preg_split('/\s+/', $nombreCurso);
+
+                                // Inicializar una variable para las iniciales del curso
+                                $inicialesCurso = '';
+
+                                // Recorrer las palabras del nombre del curso y obtener iniciales
+                                foreach ($palabras as $palabra) {
+                                    $palabra = preg_replace("/[^a-zA-Z]+/", "", $palabra); // Eliminar caracteres no alfabéticos
+                                    $inicialesCurso .= strtoupper(substr($palabra, 0, 1));
+                                }
+
+                                // Combinar todos los elementos en el código del folio
+                                $folio = $inicialesCurso . $idUsuario . '-' . $numeroAleatorio;
+
+                            @endphp
 
                             @if ($ticket->Cursos->stps == '1')
+                            <div class="form-group col-6 gc_cn" style="display: none">
+                                <label for="name">Folio *</label>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                    </span>
+                                    <input id="folio" name="folio" type="text" class="form-control" value="{{ $folio }}" >
+                                </div>
+                            </div>
 
                             @endif
 
                             @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
 
                             <div class="gc_cn" style="">
-
-                                @php
-                                    // Datos de ejemplo
-                                    $nombreCurso = $ticket->Cursos->nombre;
-                                    $idUsuario = $order->User->id;
-                                    $numeroAleatorio = rand(100, 999); // Generar un número aleatorio de tres dígitos
-
-                                    // Dividir el nombre del curso en palabras
-                                    $palabras = preg_split('/\s+/', $nombreCurso);
-
-                                    // Inicializar una variable para las iniciales del curso
-                                    $inicialesCurso = '';
-
-                                    // Recorrer las palabras del nombre del curso y obtener iniciales
-                                    foreach ($palabras as $palabra) {
-                                        $palabra = preg_replace("/[^a-zA-Z]+/", "", $palabra); // Eliminar caracteres no alfabéticos
-                                        $inicialesCurso .= strtoupper(substr($palabra, 0, 1));
-                                    }
-
-                                    // Combinar todos los elementos en el código del folio
-                                    $folio = $inicialesCurso . $idUsuario . '-' . $numeroAleatorio;
-
-                                @endphp
 
                                 <div class="row">
 

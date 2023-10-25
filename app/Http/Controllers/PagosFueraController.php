@@ -193,6 +193,10 @@ class PagosFueraController extends Controller
                 }
 
                 if($details->Cursos->stps == '1'){
+                    $id_ticket = $order_ticket->id;
+                    $ticket = OrdersTickets::find($id_ticket);
+                    $ticket->estatus_doc = '1';
+                    $ticket->update();
 
                     $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
                     $pdf->setPaper('A4', 'portrait');

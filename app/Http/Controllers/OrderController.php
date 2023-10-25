@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cursos;
+use App\Models\Tipodocumentos;
 use App\Models\CursosTickets;
 use App\Models\Orders;
 use App\Models\Cupon;
@@ -356,12 +357,15 @@ class OrderController extends Controller
                     }
 
                     if($details->Cursos->stps == '1'){
+                        $id_ticket = $orden_ticket2->id;
+                        $ticket = OrdersTickets::find($id_ticket);
+                        $ticket->estatus_doc = '1';
+                        $ticket->update();
 
                         $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
                         $pdf->setPaper('A4', 'portrait');
                         $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
                         Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
-
                     }
                 }
                 Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
@@ -623,6 +627,10 @@ class OrderController extends Controller
             }
 
             if($details->Cursos->stps == '1'){
+                $id_ticket = $order_ticket->id;
+                $ticket = OrdersTickets::find($id_ticket);
+                $ticket->estatus_doc = '1';
+                $ticket->update();
 
                 $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
                 $pdf->setPaper('A4', 'portrait');
@@ -723,12 +731,15 @@ class OrderController extends Controller
             }
 
             if($details->Cursos->stps == '1'){
+                $id_ticket = $order_ticket->id;
+                $ticket = OrdersTickets::find($id_ticket);
+                $ticket->estatus_doc = '1';
+                $ticket->update();
 
                 $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
                 $pdf->setPaper('A4', 'portrait');
                 $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
                 Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
-
             }
         }
         Mail::to($payer->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));

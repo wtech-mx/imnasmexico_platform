@@ -37,6 +37,7 @@ class CursosController extends Controller
         // $cursos = Cursos::orderBy('id','DESC')->get();
         $cursos = Cursos::select('id', 'nombre', 'foto', 'fecha_inicial', 'fecha_final', 'recurso', 'modalidad', 'slug', 'clase_grabada', 'clase_grabada2', 'clase_grabada3', 'clase_grabada4', 'clase_grabada5')
                 ->orderBy('fecha_inicial', 'DESC')
+                ->with('orderTicket')
                 ->get();
 
         return view('admin.cursos.index', compact('cursos'));
@@ -53,6 +54,7 @@ class CursosController extends Controller
         })
         ->where('estatus', '=', '1')
         ->orderBy('fecha_inicial', 'DESC')
+        ->with('orderTicket')
         ->get();
 
         return view('admin.cursos.index_dia', compact('cursos'));
@@ -64,8 +66,8 @@ class CursosController extends Controller
         $ultimoDiaDelMes = date('Y-m-t');
 
         $cursos = Cursos::whereBetween('fecha_inicial', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->where('estatus', '=', '1')
         ->orderBy('fecha_inicial', 'DESC')
+        ->with('orderTicket')
         ->get();
 
         return view('admin.cursos.index_mes', compact('cursos'));

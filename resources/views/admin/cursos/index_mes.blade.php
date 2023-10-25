@@ -3,6 +3,15 @@
 @section('template_title')
     Cursos del Mes
 @endsection
+<style>
+    .estatus-doc-red {
+        color: red;
+    }
+
+    .estatus-doc-green {
+        color: green;
+    }
+</style>
 
 @section('content')
     <div class="container-fluid">
@@ -38,7 +47,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($cursos as $curso)
-                                            <tr>
+                                            <tr class="{{ $curso->orderTicket->where('estatus_doc', '!=', 1)->isEmpty() ? 'estatus-doc-green' : 'estatus-doc-red' }}">
                                                 <td>{{ $curso->id }}</td>
                                                 <th><img id="blah" src="{{asset('curso/'.$curso->foto) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
 
@@ -115,7 +124,7 @@
                                                     @endcan
 
                                                     @can('cursos-lista')
-                                                        <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}" title="Listas de clase"><i class="fa fa-users"></i></a>
+                                                        <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}" title="Listas de clase"><i class="fa fa-users"></i> {{ $curso->orderTicket->count() }}</a>
                                                     @endcan
 
                                                     @can('cursos-edit')

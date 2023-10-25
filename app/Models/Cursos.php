@@ -87,4 +87,12 @@ class Cursos extends Model
     {
         return $this->hasMany(OrdersTickets::class, 'id_curso');
     }
+
+    public function orderTicket()
+    {
+        return $this->hasMany(OrdersTickets::class, 'id_curso', 'id')
+            ->whereHas('orders', function ($query) {
+                $query->where('estatus', 1);
+            });
+    }
 }
