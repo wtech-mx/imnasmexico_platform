@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="modal_documentos_{{ $order->User->id }}" tabindex="-1" aria-labelledby="modal_documentosLabel" aria-hidden="true">
+<div class="modal fade" id="modal_imnas_documentos_{{ $order->User->id }}" tabindex="-1" aria-labelledby="modal_documentosLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
 
@@ -68,11 +68,6 @@
                                         <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px">
                                     </span>
                                     <select name="tipo" id="tipo" class="form-select" >
-                                        @if ($ticket->Cursos->stps == '1')
-                                            <option value="1">Diploma STPS General</option>
-                                        @endif
-
-                                        @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
                                             <option value="2">RN-Cedula de identidad de papel General</option>
                                             <option value="3">RN - Titulo Honorifico Generico QRS</option>
                                             <option value="4">RN - Diploma Imnas</option>
@@ -100,10 +95,7 @@
                                             @if (str_contains($ticket->Cursos->nombre, 'Cosmetología'))
                                                 <option value="12">CN - Tira de materias Cosmetologia</option>
                                             @endif
-                                        @endif
-                                        @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
-                                            <option value="13">Titulo Honorifico Online Qr Logo</option>
-                                        @endif
+
                                     </select>
                                 </div>
                             </div>
