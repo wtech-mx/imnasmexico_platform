@@ -124,7 +124,7 @@
                                                     @endcan
 
                                                     @can('cursos-lista')
-                                                        <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}" title="Listas de clase"><i class="fa fa-users"></i> {{ $curso->orderTicket->count() }}</a>
+                                                        <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}" title="Listas de clase"><i class="fa fa-users"></i> {{ $curso->userCount }}</a>
                                                     @endcan
 
                                                     @can('cursos-edit')
