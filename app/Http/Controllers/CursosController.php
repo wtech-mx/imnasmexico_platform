@@ -67,8 +67,11 @@ class CursosController extends Controller
 
         $cursos = Cursos::whereBetween('fecha_inicial', [$primerDiaDelMes, $ultimoDiaDelMes])
         ->orderBy('fecha_inicial', 'DESC')
-        ->with('orderTicket')
         ->get();
+
+        foreach ($cursos as $curso) {
+            $curso->userCount = $curso->uniqueOrderTicketCount();
+        }
 
         return view('admin.cursos.index_mes', compact('cursos'));
     }

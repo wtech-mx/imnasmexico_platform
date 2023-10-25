@@ -87,12 +87,22 @@ class Cursos extends Model
     {
         return $this->hasMany(OrdersTickets::class, 'id_curso');
     }
-
+    
     public function orderTicket()
     {
         return $this->hasMany(OrdersTickets::class, 'id_curso', 'id')
             ->whereHas('orders', function ($query) {
                 $query->where('estatus', 1);
             });
+    }
+
+    public function uniqueOrderTicketCount()
+    {
+        return OrdersTickets::selectRaw('COUNT(DISTINCT id_usuario) as user_count')
+        ->where('id_curso', $this->id)
+        ->whereHas('orders', function ($query) {
+            $query->where('estatus', 1);
+        })
+        ->value('user_count');
     }
 }
