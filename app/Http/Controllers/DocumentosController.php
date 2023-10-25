@@ -122,11 +122,6 @@ class DocumentosController extends Controller
             $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
             $pdf->setPaper('A4', 'portrait');
 
-            $id_ticket = $request->get('id_ticket');
-            $ticket = OrdersTickets::find($id_ticket);
-            $ticket->estatus_doc = '1';
-            $ticket->update();
-
             return $pdf->download('diploma_stps_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Cedula de indetidad'){
