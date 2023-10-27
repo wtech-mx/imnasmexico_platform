@@ -30,24 +30,16 @@
 
         .container {
             position: absolute;
-            top: 44.5%;
-            left: 65%;
+            top: 45%;
+            left: 70%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
 
         .container2{
             position: absolute;
-            top:55%;
+            top:59%;
             left: 65%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-        }
-
-        .containerx{
-            position: absolute;
-            top:67.2%;
-            left: 82%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
@@ -62,8 +54,8 @@
 
         .container3{
             position: absolute;
-            top:90%;
-            left: 50%;
+            top:75%;
+            left: 62%;
             transform: translate(-50%, -50%);
             text-align: center;
         }
@@ -122,10 +114,6 @@
             color: #353535;
         }
 
-        .fechax{
-            color: #353535;
-        }
-
         .nombre{
             font-family: 'Minion';
             font-size: 45px;
@@ -145,12 +133,12 @@
         }
 
         .oval-container {
-            width: 210px;
-            height: 345px;
+            width: 265px;
+            height: 430px;
             position: absolute;
             overflow: hidden;
-            top: 40%;
-            left: 15%;
+            top: 39%;
+            left: 11%;
             background: transparent;
         }
 
@@ -163,8 +151,8 @@
             clip-path: ellipse(50% 50% at 50% 50%);
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-            /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
+             background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
+             /* background-image: url('utilidades_documentos/{{ $fileName }}');*/
 
             background-size: cover;
             background-position: center center;
@@ -175,17 +163,32 @@
     <body>
 
         @php
-            $palabras = explode(' ', ucwords(strtolower($nombre)));
-            $parte1 = implode(' ', array_slice($palabras, 0, 2));
-            $parte2 = implode(' ', array_slice($palabras, 2));
+        // Divide el curso por espacios en blanco
+        $palabras = explode(' ', $nombre);
+
+        // Inicializa la cadena formateada
+        $nombre_formateado = '';
+        $contador_palabras = 0;
+
+        foreach ($palabras as $palabra) {
+            // Agrega la palabra actual a la cadena formateada
+            $nombre_formateado .= $palabra . ' ';
+
+            // Incrementa el contador de palabras
+            $contador_palabras++;
+
+            // Agrega un salto de línea después de cada tercera palabra
+            if ($contador_palabras % 2 == 0) {
+                $nombre_formateado .= "<br>";
+            }
+        }
         @endphp
 
-        {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">--}}
 
         <div class="container">
-            <h4 class="nombre">{{ $parte1 }}<br>{{ $parte2 }}</h4>
+            <h4 class="nombre">{!! $nombre_formateado !!}</h4>
         </div>
 
         <div class="oval-container">
@@ -210,100 +213,22 @@
                     $contador_palabras++;
 
                     // Agrega un salto de línea después de cada tercera palabra
-                    if ($contador_palabras % 4 == 0) {
+                    if ($contador_palabras % 3 == 0) {
                         $curso_formateado .= "<br>";
                     }
                 }
             @endphp
+
             <h4 class="curso">{!! $curso_formateado !!}</h4>
         </div>
 
-        <div class="containerx">
-            <h4 class="fechax"><strong>{{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }}</strong> </h4>
-        </div>
-
-        <div class="container_folio_bajo1">
-            <h4 class="folio3">FOLIO {{$folio}}</h4>
-        </div>
-
-        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
-        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
-
-        @php
-            // Divide el curso por espacios en blanco
-            $palabras = explode(' ', $nombre);
-
-            // Inicializa la cadena formateada
-            $nombre_formateado = '';
-            $contador_palabras = 0;
-
-            foreach ($palabras as $palabra) {
-                // Agrega la palabra actual a la cadena formateada
-                $nombre_formateado .= $palabra . ' ';
-
-                // Incrementa el contador de palabras
-                $contador_palabras++;
-
-                // Agrega un salto de línea después de cada tercera palabra
-                if ($contador_palabras % 4 == 0) {
-                    $nombre_formateado .= "<br>";
-                }
-            }
-
-        @endphp
-
-        <div class="container4">
-            <h4 class="folio2">{!! $nombre_formateado !!}</h4>
-        </div>
-
-        <div class="container6">
-            <h4 class="folio2">{{$curp}}</h4>
-        </div>
-
-        <div class="container7">
-            @php
-            // Divide el curso por espacios en blanco
-            $palabras = explode(' ', $curso);
-
-            // Inicializa la cadena formateada
-            $curso_formateado = '';
-            $contador_palabras = 0;
-
-            foreach ($palabras as $palabra) {
-                // Agrega la palabra actual a la cadena formateada
-                $curso_formateado .= $palabra . ' ';
-
-                // Incrementa el contador de palabras
-                $contador_palabras++;
-
-                // Agrega un salto de línea después de cada tercera palabra
-                if ($contador_palabras % 6 == 0) {
-                    $curso_formateado .= "<br>";
-                }
-            }
-        @endphp
-            <h4 class="folio2">{!! $curso_formateado !!}</h4>
-        </div>
-
-        <div class="container8">
-            <h4 class="folio2">{{ $nacionalidad }}</h4>
-        </div>
-
-        <div class="container9">
-            <h4 class="folio2">PERMANENTE_</h4>
-        </div>
-
-        <div class="container10">
-            <h4 class="folio2">{!! $curso_formateado !!}</h4>
-        </div>
-
         <div class="container3">
-            <h4 class="folio3">FOLIO {{$folio}}</h4>
+            <h4 class="fecha">Expedido en la Ciudad de México , el dia {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
         </div>
 
         <div class="container5">
-            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
-            {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
+             <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
+            {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma">--}}
         </div>
 
     </body>

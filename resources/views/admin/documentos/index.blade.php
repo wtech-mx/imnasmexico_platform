@@ -43,6 +43,14 @@ Reporte de Documentos
                                     <input  name="fecha2" type="date" class="form-control" required>
                                 </div>
                             </div>
+
+                            <div class="col-3">
+                                <label class="form-label">Curso</label>
+                                <div class="input-group">
+                                    <input  name="curso" type="date" class="form-control" required>
+                                </div>
+                            </div>
+
                             <div class="col-3">
                                 <br>
                                 <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #F82018; color: #ffffff;">Buscar</button>
