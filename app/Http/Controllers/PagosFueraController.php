@@ -192,39 +192,42 @@ class PagosFueraController extends Controller
                     Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
                 }
 
-                
-                if($details->Cursos->stps == '1' && $details->Cursos->titulo_hono == '1'){
-                    $id_ticket = $order_ticket->id;
-                    $ticket = OrdersTickets::find($id_ticket);
-                    $ticket->estatus_doc = '1';
-                    $ticket->estatus_cedula = '1';
-                    $ticket->estatus_diploma = '1';
-                    $ticket->estatus_credencial = '1';
-                    $ticket->estatus_tira = '1';
-                    $ticket->update();
+                if($details->CursosTickets->descripcion == 'Con opción a Documentos de certificadora IMNAS'){
 
-                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
-                    $pdf->setPaper('A4', 'portrait');
-                    $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
-                    Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                }else{
+                    if($details->Cursos->stps == '1' && $details->Cursos->titulo_hono == '1'){
+                        $id_ticket = $order_ticket->id;
+                        $ticket = OrdersTickets::find($id_ticket);
+                        $ticket->estatus_doc = '1';
+                        $ticket->estatus_cedula = '1';
+                        $ticket->estatus_diploma = '1';
+                        $ticket->estatus_credencial = '1';
+                        $ticket->estatus_tira = '1';
+                        $ticket->update();
 
-                }
-                if($details->Cursos->stps == '1' && $details->Cursos->titulo_hono == NULL){
-                    $id_ticket = $order_ticket->id;
-                    $ticket = OrdersTickets::find($id_ticket);
-                    $ticket->estatus_doc = '1';
-                    $ticket->estatus_cedula = '1';
-                    $ticket->estatus_titulo = '1';
-                    $ticket->estatus_diploma = '1';
-                    $ticket->estatus_credencial = '1';
-                    $ticket->estatus_tira = '1';
-                    $ticket->update();
+                        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                        $pdf->setPaper('A4', 'portrait');
+                        $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+                        Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
 
-                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
-                    $pdf->setPaper('A4', 'portrait');
-                    $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
-                    Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                    }
+                    if($details->Cursos->stps == '1' && $details->Cursos->titulo_hono == NULL){
+                        $id_ticket = $order_ticket->id;
+                        $ticket = OrdersTickets::find($id_ticket);
+                        $ticket->estatus_doc = '1';
+                        $ticket->estatus_cedula = '1';
+                        $ticket->estatus_titulo = '1';
+                        $ticket->estatus_diploma = '1';
+                        $ticket->estatus_credencial = '1';
+                        $ticket->estatus_tira = '1';
+                        $ticket->update();
 
+                        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                        $pdf->setPaper('A4', 'portrait');
+                        $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+                        Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+
+                    }
                 }
             }
 
