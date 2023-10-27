@@ -191,10 +191,6 @@ class DocumentosController extends Controller
             $pdf = PDF::loadView('admin.pdf.tira_materias_aparatologia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
-            $id_ticket = $request->get('id_ticket');
-            $ticket = OrdersTickets::find($id_ticket);
-            $ticket->estatus_doc = '1';
-            $ticket->update();
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira_materias_alasiados'){
@@ -207,10 +203,6 @@ class DocumentosController extends Controller
             $pdf = PDF::loadView('admin.pdf.tira_materias_alasiados',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
-            $id_ticket = $request->get('id_ticket');
-            $ticket = OrdersTickets::find($id_ticket);
-            $ticket->estatus_doc = '1';
-            $ticket->update();
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira_materias_cosmetologia_fc'){
@@ -223,10 +215,6 @@ class DocumentosController extends Controller
             $pdf = PDF::loadView('admin.pdf.tira_materias_cosmetologia_fc',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
-            $id_ticket = $request->get('id_ticket');
-            $ticket = OrdersTickets::find($id_ticket);
-            $ticket->estatus_doc = '1';
-            $ticket->update();
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira_materias_cosmeatria_ea'){
@@ -239,10 +227,6 @@ class DocumentosController extends Controller
             $pdf = PDF::loadView('admin.pdf.tira_materias_cosmeatria_ea',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
-            $id_ticket = $request->get('id_ticket');
-            $ticket = OrdersTickets::find($id_ticket);
-            $ticket->estatus_doc = '1';
-            $ticket->update();
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira_materias_auxiliar'){
@@ -255,10 +239,6 @@ class DocumentosController extends Controller
             $pdf = PDF::loadView('admin.pdf.tira_materias_auxiliar',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
-            $id_ticket = $request->get('id_ticket');
-            $ticket = OrdersTickets::find($id_ticket);
-            $ticket->estatus_doc = '1';
-            $ticket->update();
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira_materias_masoterapia'){
@@ -271,10 +251,6 @@ class DocumentosController extends Controller
             $pdf = PDF::loadView('admin.pdf.tira_materias_masoterapia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
-            $id_ticket = $request->get('id_ticket');
-            $ticket = OrdersTickets::find($id_ticket);
-            $ticket->estatus_doc = '1';
-            $ticket->update();
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira_materias_cosme'){
@@ -287,10 +263,6 @@ class DocumentosController extends Controller
             $pdf = PDF::loadView('admin.pdf.tira_materias_cosme',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
-            $id_ticket = $request->get('id_ticket');
-            $ticket = OrdersTickets::find($id_ticket);
-            $ticket->estatus_doc = '1';
-            $ticket->update();
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
         }
 
