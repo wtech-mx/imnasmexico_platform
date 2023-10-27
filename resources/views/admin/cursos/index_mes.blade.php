@@ -47,7 +47,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($cursos as $curso)
-                                            <tr class="{{ $curso->orderTicket->where('estatus_doc', '!=', 1)->isEmpty() ? 'estatus-doc-green' : 'estatus-doc-red' }}">
+                                            <tr class="{{ ($curso->orderTicket->where('estatus_doc', '!=', 1)->isEmpty() && $curso->orderTicket->where('estatus_cedula', '!=', 1)->isEmpty() && $curso->orderTicket->where('estatus_titulo', '!=', 1)->isEmpty() && $curso->orderTicket->where('estatus_diploma', '!=', 1)->isEmpty() && $curso->orderTicket->where('estatus_credencial', '!=', 1)->isEmpty() && $curso->orderTicket->where('estatus_tira', '!=', 1)->isEmpty()) ? 'estatus-doc-green' : 'estatus-doc-red' }}">
                                                 <td>{{ $curso->id }}</td>
                                                 <th><img id="blah" src="{{asset('curso/'.$curso->foto) }}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
 

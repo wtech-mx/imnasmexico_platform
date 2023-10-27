@@ -28,6 +28,19 @@
                                 Crear
                             </a>
                         </div>
+                        <h4>Inscritos :
+                            @php
+                                $contador = 0;
+                            @endphp
+                            @foreach ($ordenes as $order)
+                                @if ($order->Orders->estatus == '1')
+                                    @php
+                                        $contador++;
+                                    @endphp
+                                @endif
+                            @endforeach
+                            {{ $contador }}
+                        </h4>
                     </div>
 
                     <ul class="nav nav-pills nav-fill p-1" id="pills-tab" role="tablist">
@@ -36,9 +49,9 @@
                                 <a class="nav-link mb-0 px-0 py-1 " data-bs-toggle="tab" href="#pills-home{{$ticket->id}}" role="tab" aria-controls="pills-home" aria-selected="true" id="pills-home-tab{{$ticket->id}}">
                                     <i class="ni ni-folder-17 text-sm me-2"></i> {{$ticket->nombre}} -
                                     @if ($ticket->descuento == NULL)
-                                        {{$ticket->precio}}
+                                        ${{$ticket->precio}}
                                         @else
-                                        <del>${{$ticket->precio}}</del> <strong>{{$ticket->descuento}}</strong>
+                                        <del>${{$ticket->precio}}</del> <strong>${{$ticket->descuento}}</strong>
                                     @endif
                                 </a>
                             </li>
@@ -52,29 +65,17 @@
 
                                     <h5>{{$ticket->nombre}}</h5>
 
-                                    <h5>En lista :
-                                    @php
-                                        $contador = 0;
-                                    @endphp
-                                    @foreach ($ordenes as $order)
-                                        @if ($order->Orders->estatus == '1')
-                                            @php
-                                                $contador++;
-                                            @endphp
-                                        @endif
-                                    @endforeach
-                                    {{ $contador }}
-                                    </h5>
-
                                     <h5>Diploma y/o Certificaciones:
                                         @if ($ticket->descripcion == 'Con opción a Documentos de certificadora IMNAS')
                                             IMNAS
+                                        @elseif ($ticket->descripcion == 'Opción a certificación a masaje holístico EC0900')
+                                            Certificación a masaje holístico
                                         @else
                                             @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
                                                 IMNAS
                                             @endif
                                             @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
-                                                Titulo Honorifico
+                                                Titulo Honorifico -
                                             @endif
                                             @if ($ticket->Cursos->stps == '1')
                                                 STPS
@@ -99,7 +100,7 @@
                                             <tbody>
                                                 @foreach ($ordenes as $order)
                                                         @if ($order->id_tickets == $ticket->id && $order->Orders->estatus == '1')
-                                                            <tr class="{{ $order->estatus_doc == 1 ? 'estatus-doc-green' : 'estatus-doc-red' }}">
+                                                            <tr class="{{ ($order->estatus_doc == 1 && $order->estatus_cedula == 1 && $order->estatus_titulo == 1 && $order->estatus_diploma == 1 && $order->estatus_credencial == 1 && $order->estatus_tira == 1) ? 'estatus-doc-green' : 'estatus-doc-red' }}">
                                                                 <td>{{ $order->Orders->id }}</td>
                                                                 <td>
                                                                     <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a><br>
@@ -123,6 +124,10 @@
                                                                 <td>
                                                                     @if ($order->CursosTickets->descripcion == 'Con opción a Documentos de certificadora IMNAS')
                                                                     <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_imnas_documentos_{{ $order->User->id }}">
+                                                                        <i class="fa fa-file"></i>
+                                                                    </a>
+                                                                    @elseif ($ticket->descripcion == 'Opción a certificación a masaje holístico EC0900')
+                                                                    <a class="btn btn-sm btn-success">
                                                                         <i class="fa fa-file"></i>
                                                                     </a>
                                                                     @else
