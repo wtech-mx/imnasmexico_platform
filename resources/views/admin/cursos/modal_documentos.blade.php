@@ -27,9 +27,27 @@
                 <div class="modal-body row">
 
                         <div class="col-12">
-                            @if ($ticket->Cursos->stps == '1')
-                            <h5 class="text-center">Diploma STPS</h5>
-                            @endif
+                            @if ($ticket->descripcion == 'Con opción a Documentos de certificadora IMNAS')
+                                IMNAS
+                                @elseif ($ticket->descripcion == 'Opción a certificación a masaje holístico EC0900')
+                                    Certificación a masaje holístico
+                                @else
+                                    @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
+                                        IMNAS
+                                    @endif
+                                    @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
+                                        Titulo Honorifico -
+                                    @endif
+                                    @if ($ticket->Cursos->stps == '1')
+                                        Diploma STPS
+                                    @endif
+                                    @if ($ticket->Cursos->redconocer == '1')
+                                        RedConocer
+                                    @endif
+                                    @if ($ticket->Cursos->unam == '1')
+                                        UNAM
+                                    @endif
+                                @endif
                             <p class="text-center">
                                 El Diploma esta listo para ser enviado el correo que si tiene guardado es:
                                 <strong>{{ $order->User->email }}</strong>
