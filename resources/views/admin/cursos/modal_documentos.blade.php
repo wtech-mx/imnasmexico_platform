@@ -28,24 +28,37 @@
 
                         <div class="col-12">
                             @if ($ticket->descripcion == 'Con opción a Documentos de certificadora IMNAS')
-                                IMNAS
+                                    <h5 class="text-center">
+                                        IMNAS
+                                    </h5>
                                 @elseif ($ticket->descripcion == 'Opción a certificación a masaje holístico EC0900')
-                                    Certificación a masaje holístico
+                                    <h5 class="text-center">
+                                        Certificación a masaje holístico
+                                    </h5>
                                 @else
                                     @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
+                                    <h5 class="text-center">
                                         IMNAS
                                     @endif
                                     @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
+                                    <h5 class="text-center">
                                         Titulo Honorifico -
+                                    </h5>
                                     @endif
                                     @if ($ticket->Cursos->stps == '1')
+                                    <h5 class="text-center">
                                         Diploma STPS
+                                    </h5>
                                     @endif
                                     @if ($ticket->Cursos->redconocer == '1')
+                                    <h5 class="text-center">
                                         RedConocer
+                                    </h5>
                                     @endif
                                     @if ($ticket->Cursos->unam == '1')
+                                    <h5 class="text-center">
                                         UNAM
+                                    </h5>
                                     @endif
                                 @endif
                             <p class="text-center">
