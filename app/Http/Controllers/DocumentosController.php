@@ -334,9 +334,9 @@ class DocumentosController extends Controller
 
         $bitacora->save();
 
-        $curso = Cursos::where('id', '=', $bitacora->id_curso)->first();
+        $curso_first = Cursos::where('id', '=', $bitacora->id_curso)->first();
 
-        if($curso->CursosTickets->contains('descripcion', 'Con opción a Documentos de certificadora IMNAS')){
+        if($curso_first->CursosTickets->contains('descripcion', 'Con opción a Documentos de certificadora IMNAS')){
             if($tipo_documentos->tipo == 'Diploma_STPS'){
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
@@ -555,7 +555,7 @@ class DocumentosController extends Controller
                 return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
             }
         }else{
-            if($curso->stps == '1' && $curso->titulo_hono == '1'){
+            if($curso_first->stps == '1' && $curso_first->titulo_hono == '1'){
                 if($tipo_documentos->tipo == 'Diploma_STPS'){
                     $id_ticket = $request->get('id_ticket_orders');
                     $ticket = OrdersTickets::find($id_ticket);
@@ -606,7 +606,7 @@ class DocumentosController extends Controller
 
                 }
             }
-            if($curso->stps == '1' && $curso->titulo_hono == NULL){
+            if($curso_first->stps == '1' && $curso_first->titulo_hono == NULL){
                 if($tipo_documentos->tipo == 'Diploma_STPS'){
                     $id_ticket = $request->get('id_ticket_orders');
                     $ticket = OrdersTickets::find($id_ticket);
