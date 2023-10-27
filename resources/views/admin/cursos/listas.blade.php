@@ -80,6 +80,12 @@
                                             @if ($ticket->Cursos->stps == '1')
                                                 STPS
                                             @endif
+                                            @if ($ticket->Cursos->redconocer == '1')
+                                                RedConocer
+                                            @endif
+                                            @if ($ticket->Cursos->unam == '1')
+                                                UNAM
+                                            @endif
                                         @endif
 
                                     </h5>
