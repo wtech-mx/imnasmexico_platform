@@ -449,7 +449,9 @@ class CursosController extends Controller
     public function listas($id)
     {
         $curso = Cursos::find($id);
-        $ordenes = OrdersTickets::where('id_curso', '=', $id)->get();
+        $ordenes = OrdersTickets::whereHas('orders', function ($query) {
+            $query->where('estatus', 1);
+        })->where('id_curso', $id)->get();
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
         $tipo_documentos = Tipodocumentos::get();
 

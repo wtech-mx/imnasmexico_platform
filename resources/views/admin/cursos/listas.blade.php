@@ -158,7 +158,7 @@
 
                                                     @if ($order->Orders->PagosFuera != NULL)
                                                         @if ($order->id_tickets == $ticket->id && ($order->Cursos->modalidad == 'Presencial' && $order->Orders->PagosFuera->deudor == '1'))
-                                                            <tr class="{{ $order->estatus_doc === 1 ? 'estatus-doc-green' : 'estatus-doc-red' }}">
+                                                            <tr class="{{ ($order->estatus_doc == 1 && $order->estatus_cedula == 1 && $order->estatus_titulo == 1 && $order->estatus_diploma == 1 && $order->estatus_credencial == 1 && $order->estatus_tira == 1) ? 'estatus-doc-green' : 'estatus-doc-red' }}">
                                                                 <td>{{ $order->Orders->id }}</td>
                                                                 <td>
                                                                     <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a><br>
