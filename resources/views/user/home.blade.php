@@ -60,7 +60,11 @@
                         $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
 
                         $fecha_ini = $curso->fecha_inicial;
-                        $fecha_inicial = Carbon::createFromFormat('Y-m-d', $fecha_ini)->locale('es')->isoFormat('D [de] MMMM');
+                        $fechaInicialCarbon = Carbon::createFromFormat('Y-m-d', $fecha_ini);
+                        $nombreDia = $fechaInicialCarbon->locale('es')->isoFormat('dddd');
+                        $nombreDiaCapitalizado = ucfirst($nombreDia);
+
+                        $fecha_inicial = $nombreDiaCapitalizado . ' ' . $fechaInicialCarbon->isoFormat('D [de] MMMM');
                     @endphp
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                         <div class="d-flex justify-content-center">

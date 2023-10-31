@@ -30,10 +30,16 @@
     @php
     use Carbon\Carbon;
     $fecha_ini = $curso->fecha_inicial;
-    $fecha_inicial = Carbon::createFromFormat('Y-m-d', $fecha_ini)->locale('es')->isoFormat('D [de] MMMM');
+    $fechaInicialCarbon = Carbon::createFromFormat('Y-m-d', $fecha_ini);
+    $nombreDia = $fechaInicialCarbon->locale('es')->isoFormat('dddd');
+    $nombreDiaCapitalizado = ucfirst($nombreDia);
+    $fecha_inicial = $nombreDiaCapitalizado . ' ' . $fechaInicialCarbon->isoFormat('D [de] MMMM');
 
     $fecha_f = $curso->fecha_final;
-    $fecha_final = Carbon::createFromFormat('Y-m-d', $fecha_f)->locale('es')->isoFormat('D [de] MMMM');
+    $fechaInicialCarbon2 = Carbon::createFromFormat('Y-m-d', $fecha_f);
+    $nombreDia2 = $fechaInicialCarbon2->locale('es')->isoFormat('dddd');
+    $nombreDiaCapitalizado2 = ucfirst($nombreDia2);
+    $fecha_final = $nombreDiaCapitalizado2 . ' ' . $fechaInicialCarbon2->isoFormat('D [de] MMMM');
 
     $horaInicial = $curso->hora_inicial;
     $hora_inicial = Carbon::createFromFormat('H:i:s', $horaInicial)->format('h:i A');
