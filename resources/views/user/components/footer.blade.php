@@ -48,6 +48,12 @@
                     </a>
                 </div>
 
+                <div class="icon_footer">
+                    <a target="_blank" href="https://www.tiktok.com/@imnasmexico" class="text-center" style="margin-bottom: 0rem!important">
+                        <i class="fab fa-tiktok"></i>
+                    </a>
+                </div>
+
                 {{-- <div class="icon_footer">
                     <p class="text-center" style="margin-bottom: 0rem!important">
                         <i class="fas fa-file"></i>
