@@ -553,6 +553,22 @@ class DocumentosController extends Controller
                 $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
                 return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+            }elseif($tipo_documentos->tipo == 'Tira_materias_drenaje_linfatico'){
+                $id_ticket = $request->get('id_ticket_orders');
+                $ticket = OrdersTickets::find($id_ticket);
+                $ticket->estatus_tira = '1';
+                $ticket->update();
+
+                $ancho_cm = 21.5;
+                $alto_cm = 34;
+
+                $ancho_puntos = $ancho_cm * 28.35;
+                $alto_puntos = $alto_cm * 28.35;
+
+                $pdf = PDF::loadView('admin.pdf.tira_materias_drenaje',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+                $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+                return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
             }
         }else{
             if($curso_first->stps == '1' && $curso_first->titulo_hono == '1'){
