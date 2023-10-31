@@ -266,10 +266,6 @@ class DocumentosController extends Controller
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
         }elseif($tipo_documentos->tipo == 'Tira_materias_drenaje_linfatico'){
-            $id_ticket = $request->get('id_ticket_orders');
-            $ticket = OrdersTickets::find($id_ticket);
-            $ticket->estatus_tira = '1';
-            $ticket->update();
 
             $ancho_cm = 21.5;
             $alto_cm = 34;
