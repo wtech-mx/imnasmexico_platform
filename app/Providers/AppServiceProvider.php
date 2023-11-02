@@ -10,6 +10,7 @@ use App\Models\Cursos;
 use App\Models\Revoes;
 use App\Models\Estandar;
 use App\Models\Manual;
+use App\Models\Noticias;
 use Carbon\Carbon;
 use DateInterval;
 use DateTime;
@@ -45,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
             $webpage = WebPage::first();
             $estandares = Estandar::get();
             $revoes = Revoes::get();
-
+            $noticias = Noticias::orderBy('orden','DESC')->get();
             $manuales = Manual::where('modulo','=',$ruta)->first();
 
             $fechaActual = date('Y-m-d');
@@ -73,7 +74,7 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
 
-            $view->with(['configuracion' => $configuracion,'webpage' => $webpage,'estandares' => $estandares,'revoes' => $revoes, 'fechaActual' => $fechaActual,'manuales' => $manuales]);
+            $view->with(['configuracion' => $configuracion,'webpage' => $webpage,'estandares' => $estandares,'revoes' => $revoes, 'fechaActual' => $fechaActual,'manuales' => $manuales,'noticias' => $noticias]);
         });
     }
 }
