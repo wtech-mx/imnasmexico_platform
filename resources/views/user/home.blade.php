@@ -220,7 +220,7 @@
     </div>
 </section>
 
-<section class="primario bg_overley" style="background-color:#F5ECE4;">
+<section class="primario bg_overley mb-lg-0 mb-md-0 mb-5" style="background-color:#F5ECE4;">
 
     <div class="row mt-5">
 
@@ -300,7 +300,7 @@
 <section class="primario bg_overley" style="background-color:#836262;"id="tienda">
     <div class="row">
 
-        <div class="col-12">
+        <div class="col-12 p-3">
                     <div id="carousel_tiendita" class="carousel slide">
                         <div class="carousel-inner">
                            @foreach ($noticias as $item)
@@ -309,7 +309,7 @@
                                 <div class="row">
                                     <div class="col-12 col-lg-6 col-md-6">
                                         <div class="d-flex justify-content-center">
-                                            <div class="card card-custom space_Card mb-3" style="">
+                                            <div class="card card-custom space_Card mb-3 mt-lg-3 mt-md-5" style="">
                                                 @if ($item->tipo === 'imagen')
 
                                                     <img class="card_image" src="{{asset('noticias/'.$item->multimedia) }}"  style="width: 100%;">
