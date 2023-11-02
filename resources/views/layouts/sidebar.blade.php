@@ -407,6 +407,11 @@
                             <span class="sidenav-normal">Comentarios</span>
                         </a>
 
+                        <a class="nav-link {{ (Request::is('admin/noticias*') ? 'active' : '') }}" href="{{ route('noticias.index') }}">
+                            <span class="sidenav-mini-icon"></span>
+                            <span class="sidenav-normal">Noticias</span>
+                        </a>
+
                     </li>
                 </ul>
                 </div>

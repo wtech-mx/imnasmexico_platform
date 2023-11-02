@@ -232,6 +232,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/comentarios/edit/{id}', [App\Http\Controllers\ComentariosController::class, 'edit'])->name('comentarios.edit');
     Route::patch('/admin/comentarios/update/{id}', [App\Http\Controllers\ComentariosController::class, 'update'])->name('comentarios.update');
 
+    // =============== M O D U L O   N o t i c i a s===============================
+    Route::get('/admin/noticias', [App\Http\Controllers\NoticiasController::class, 'index'])->name('noticias.index');
+    Route::get('/admin/noticias/create', [App\Http\Controllers\NoticiasController::class, 'create'])->name('noticias.create');
+    Route::post('/admin/noticias/store', [App\Http\Controllers\NoticiasController::class, 'store'])->name('noticias.store');
+    Route::get('/admin/noticias/edit/{id}', [App\Http\Controllers\NoticiasController::class, 'edit'])->name('noticias.edit');
+    Route::patch('/admin/noticias/update/{id}', [App\Http\Controllers\NoticiasController::class, 'update'])->name('noticias.update');
+
     // =============== M O D U L O   R E P O R T E S ===============================
     Route::get('/admin/reporte/dia', [App\Http\Controllers\ReportesController::class, 'index_dia'])->name('reporte.index_dia');
     Route::get('/admin/reporte/semana', [App\Http\Controllers\ReportesController::class, 'index_semana'])->name('reporte.index_semana');

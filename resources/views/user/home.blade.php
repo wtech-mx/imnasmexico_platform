@@ -292,6 +292,73 @@
             </div>
         </div>
 
+    </div>
+
+</section>
+
+
+<section class="primario bg_overley" style="background-color:#836262;"id="tienda">
+    <div class="row">
+
+        <div class="col-12">
+
+
+
+                    <div id="carousel_tiendita" class="carousel slide">
+                        <div class="carousel-inner">
+
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    <div class="col-12 col-lg-6 col-md-6">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card card-custom space_Card mb-3" style="">
+                                                <img class="card_image" src="{{asset('assets/user/instalaciones/tienda/1.jpg')}}"  style="width: 100%;">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-6 col-md-6">
+                                        <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">Tienda</h1>
+                                        <p class="text-center text-white mt-auto parrafo_instalaciones">
+                                            Aquí encontrarás toda nuestra gama de <br>productos y más para tus clases y para empezar<br> tu negocio al finalizar tu formación académica.<br> Todos los productos que encontrarás, son de la<br> mejor calidad y con los mejores precios.
+                                        </p>
+
+                                        <div class="d-flex justify-content-center">
+                                            <a class="btn btn-cuarto" style="margin-left: 1rem;" target="_blank" href="http://imnasmexico.com/new/tienda/">
+                                                Ver Catálogo
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel_tiendita" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carousel_tiendita" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                        </button>
+
+                    </div>
+        </div>
+
+
+    </div>
+</section>
+
+
+<section class="primario bg_overley" style="background-color:#F5ECE4;">
+    <div class="row">
+
         <div class="col-12 tittle_section2 mb-3">
             <h2 class="titulo_alfa text-center">Materializa tus metas</h2>
             <h3 class="titulo_beta text-center">Da tu primer paso con nosotros</h3>
@@ -455,6 +522,7 @@
             </div>
 
         </div>
+    </div>
 </section>
 
 {{-- slide de cursos --}}
