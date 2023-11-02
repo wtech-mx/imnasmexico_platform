@@ -304,12 +304,23 @@
                     <div id="carousel_tiendita" class="carousel slide">
                         <div class="carousel-inner">
                            @foreach ($noticias as $item)
+                           @if ($item->estatus === 'Activo')
                             <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                 <div class="row">
                                     <div class="col-12 col-lg-6 col-md-6">
                                         <div class="d-flex justify-content-center">
                                             <div class="card card-custom space_Card mb-3" style="">
-                                                <img class="card_image" src="{{asset('noticias/'.$item->multimedia) }}"  style="width: 100%;">
+                                                @if ($item->tipo === 'imagen')
+
+                                                    <img class="card_image" src="{{asset('noticias/'.$item->multimedia) }}"  style="width: 100%;">
+
+                                                @elseif ($item->tipo === 'Video')
+
+                                                <video controls autoplay>
+                                                        <source src="{{asset('noticias/'.$item->multimedia) }}" type="video/mp4">
+                                                    </video>
+
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -329,6 +340,9 @@
                                     </div>
                                 </div>
                             </div>
+                            @else
+
+                            @endif
                            @endforeach
                         </div>
 
