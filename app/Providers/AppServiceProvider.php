@@ -46,7 +46,7 @@ class AppServiceProvider extends ServiceProvider
             $webpage = WebPage::first();
             $estandares = Estandar::get();
             $revoes = Revoes::get();
-            $noticias = Noticias::orderBy('orden','DESC')->get();
+            $noticias = Noticias::orderBy('orden','ASC')->get();
             $manuales = Manual::where('modulo','=',$ruta)->first();
 
             $fechaActual = date('Y-m-d');
