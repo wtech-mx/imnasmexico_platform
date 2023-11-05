@@ -128,26 +128,26 @@
             <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
                 <div class="carousel-inner border-radius-lg h-100">
 
-                @foreach ($cursos as $curso)
+                @foreach ($cursos as $curso_car)
                 @php
-                    $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
-                    $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
+                    $hora_inicial = Carbon::parse($curso_car->hora_inicial)->format('h:i A');
+                    $hora_final = strftime("%H:%M %p", strtotime($curso_car->hora_final)) ;
 
-                    $fecha_ini = $curso->fecha_inicial;
+                    $fecha_ini = $curso_car->fecha_inicial;
                     $fecha_inicial = Carbon::createFromFormat('Y-m-d', $fecha_ini)->locale('es')->isoFormat('D [de] MMMM');
                 @endphp
-                <div class="carousel-item h-100 {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{asset('curso/'. $curso->foto) }}');background-size: cover;">
+                <div class="carousel-item h-100 {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{asset('curso/'. $curso_car->foto) }}');background-size: cover;">
                     <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
                     <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                        <p class="text-dark" style="width:100px;">{{$curso->modalidad}}</p>
+                        <p class="text-dark" style="width:100px;">{{$curso_car->modalidad}}</p>
                     </div>
-                    <h5 class="text-dark mb-1">{{$curso->nombre}}</h5>
+                    <h5 class="text-dark mb-1">{{$curso_car->nombre}}</h5>
                     <p class="text-dark">{{$fecha_inicial}} - {{$hora_inicial}}</p>
                     <div class="row">
                         <div class="col-12">
                             <div class="d-flex justify-content-start">
-                                <a class="btn btn-warning btn-sm" style="margin-right: 1rem" href="{{ route('cursos.edit',$curso->id) }}"  target="_blank"><i class="fa fa-fw fa-edit"></i> Editar</a>
-                                <a class="btn btn-success btn-sm" href="{{ route('cursos.show',$curso->slug) }}"  target="_blank"><i class="fas fa-external-link-alt"></i> Ver</a>
+                                <a class="btn btn-warning btn-sm" style="margin-right: 1rem" href="{{ route('cursos.edit',$curso_car->id) }}"  target="_blank"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                <a class="btn btn-success btn-sm" href="{{ route('cursos.show',$curso_car->slug) }}"  target="_blank"><i class="fas fa-external-link-alt"></i> Ver</a>
                             </div>
                         </div>
 
@@ -397,7 +397,7 @@
       data: {
         labels: {!! json_encode($meses) !!},
         datasets: [{
-          label: "Mobile apps",
+          label: "Total Ventas",
           tension: 0.4,
           borderWidth: 0,
           pointRadius: 0,

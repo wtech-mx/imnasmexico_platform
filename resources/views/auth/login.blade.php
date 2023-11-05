@@ -19,6 +19,7 @@
   <link href="{{asset('assets/admin/css/nucleo-svg.css')}}" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="{{asset('assets/admin/css/argon-dashboard.css?v=2.0.4')}}" rel="stylesheet" />
+
 </head>
 
 <body class="">
@@ -45,7 +46,7 @@
               </div>
               <div class="card-body px-lg-5 pt-0">
                 <div class="text-center text-muted mb-4">
-                  <small>Ingresa tu Correo o tu Clave</small>
+                  <small>Ingresa tu correo y contraseña</small>
                 </div>
 
                 {{-- <form method="POST" action="{{ route('login') }}"> --}}
@@ -53,6 +54,7 @@
                   @csrf
 
                   <div class="mb-3">
+                    <label for="">Correo</label>
                     <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                         @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -61,13 +63,18 @@
                         @enderror
                   </div>
 
-                  <div class="mb-3">
+                  <div class="mb-2">
+                    <label for="">Contraseña</label>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                         @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
+                  </div>
+
+                  <div class="mb-3">
+                    <button class="btn btn-outline-secondary btn-sm" type="button" id="togglePassword">Mostrar</button>
                   </div>
 
                   <div class="text-center">
@@ -115,6 +122,18 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordInput = document.getElementById('password');
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            this.textContent = 'Ocultar';
+        } else {
+            passwordInput.type = 'password';
+            this.textContent = 'Mostrar';
+        }
+    });
+</script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
