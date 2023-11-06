@@ -5,6 +5,7 @@
 @endsection
 
 @section('css_custom')
+
 <link href="{{asset('assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/calendario.css')}}" rel="stylesheet" />
 <style>
@@ -14,21 +15,18 @@
     color: #666; /* Cambia el color del texto */
 }
 </style>
+
 @endsection
+
 @php
     use Carbon\Carbon;
     use Carbon\CarbonInterface;
 @endphp
+
 @section('content')
 
 <div id="carousel_full" class="carousel slide" data-bs-ride="carousel">
     <span class="mask_calendar"></span>
-{{--
-    <div class="carousel-indicators">
-      <button type="button" data-bs-target="#carousel_full" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-      <button type="button" data-bs-target="#carousel_full" data-bs-slide-to="1" aria-label="Slide 2"></button>
-      <button type="button" data-bs-target="#carousel_full" data-bs-slide-to="2" aria-label="Slide 3"></button>
-    </div> --}}
 
     <div class="carousel-inner">
 
@@ -404,23 +402,22 @@
         </div>
 
             <script>
-function shareFacebook(slug) {
-    // Obtener la información del curso usando el slug
-    const curso = '{{$curso->slug}}';
+                function shareFacebook(slug) {
+                    // Obtener la información del curso usando el slug
+                    const curso = '{{$curso->slug}}';
 
-    if (navigator.share) {
-        navigator.share({
-            title: curso.nombre,
-            text: curso.nombre,
-            url: '{{ route('cursos.show', ':slug') }}'.replace(':slug', slug),
-        })
-        .then(() => console.log('Publicación compartida con éxito'))
-        .catch(error => console.error('Error al compartir publicación', error));
-    } else {
-        console.error('La funcionalidad de compartir no está soportada en este navegador');
-    }
-}
-
+                    if (navigator.share) {
+                        navigator.share({
+                            title: curso.nombre,
+                            text: curso.nombre,
+                            url: '{{ route('cursos.show', ':slug') }}'.replace(':slug', slug),
+                        })
+                        .then(() => console.log('Publicación compartida con éxito'))
+                        .catch(error => console.error('Error al compartir publicación', error));
+                    } else {
+                        console.error('La funcionalidad de compartir no está soportada en este navegador');
+                    }
+                }
             </script>
         @endforeach
         {{-- card_grid --}}

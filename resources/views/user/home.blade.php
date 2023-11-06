@@ -304,44 +304,48 @@
                     <div id="carousel_tiendita" class="carousel slide">
                         <div class="carousel-inner">
                            @foreach ($noticias as $item)
-                           @if ($item->estatus === 'Activo')
-                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                                <div class="row">
-                                    <div class="col-12 col-lg-6 col-md-6">
-                                        <div class="d-flex justify-content-center">
-                                            <div class="card card-custom space_Card mb-3 mt-lg-3 mt-md-5" style="">
-                                                @if ($item->tipo === 'imagen')
+                            @if ($item->estatus === 'Activo')
+                                @if ($item->seccion === 'Inicio')
 
-                                                    <img class="card_image" src="{{asset('noticias/'.$item->multimedia) }}"  style="width: 100%;">
+                                <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                    <div class="row">
+                                        <div class="col-12 col-lg-6 col-md-6 my-auto">
+                                            <div class="d-flex justify-content-center">
+                                                <div class="card card-custom space_Card mb-3 mt-lg-3 mt-md-5" style="">
+                                                    @if ($item->tipo === 'imagen')
 
-                                                @elseif ($item->tipo === 'Video')
+                                                        <img class="card_image" src="{{asset('noticias/'.$item->multimedia) }}"  style="width: 100%;">
 
-                                                <video controls autoplay>
-                                                        <source src="{{asset('noticias/'.$item->multimedia) }}" type="video/mp4">
-                                                    </video>
+                                                    @elseif ($item->tipo === 'Video')
 
-                                                @endif
+                                                    <video controls autoplay>
+                                                            <source src="{{asset('noticias/'.$item->multimedia) }}" type="video/mp4">
+                                                        </video>
+
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-lg-6 col-md-6 my-auto">
+                                            <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">{{ $item->titulo }}</h1>
+                                            <p class="text-center text-white mt-auto parrafo_instalaciones">
+                                                {{ $item->descripcion }}
+                                            </p>
+
+                                            <div class="d-flex justify-content-center">
+                                                <a class="btn btn-sm btn-cuarto" style="margin-left: 1rem;" target="_blank" href="{{ $item->link }}">
+                                                    Ver
+                                                </a>
+
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="col-12 col-lg-6 col-md-6">
-                                        <h1 class="text-white text-center titulo mt-3 mb-3  mt-md-5 mb-md-5" style="">{{ $item->titulo }}</h1>
-                                        <p class="text-center text-white mt-auto parrafo_instalaciones">
-                                            {{ $item->descripcion }}
-                                        </p>
-
-                                        <div class="d-flex justify-content-center">
-                                            <a class="btn btn-cuarto" style="margin-left: 1rem;" target="_blank" href="{{ $item->link }}">
-                                                Ver
-                                            </a>
-
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
-                            @else
 
+                                @else
+
+                                @endif
                             @endif
                            @endforeach
                         </div>

@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Noticias
+    Noticias y Videos
 @endsection
 
 @section('content')
@@ -14,7 +14,7 @@
 
                         <div class="d-flex justify-content-between">
 
-                            <h3 class="mb-3">Noticias</h3>
+                            <h3 class="mb-3">Noticias y Videos</h3>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
@@ -33,11 +33,12 @@
                                     <thead class="thead">
                                         <tr>
                                             <th>No</th>
+                                            <th>Orden</th>
                                             <th>Img / Video</th>
                                             <th>Titulo</th>
                                             <th>Descripcion</th>
                                             <th>Estatus</th>
-                                            <th>Orden</th>
+                                            <th>Seccion</th>
                                             <th>Accion</th>
                                         </tr>
                                     </thead>
@@ -47,23 +48,80 @@
                                             <tr>
                                                 <td>{{ $item->id }}</td>
 
+                                                <td>{{ $item->orden }}</td>
+
                                                 <th>
                                                     <img id="blah" src="{{asset('noticias/'.$item->multimedia) }}" alt="Imagen" style="width: 60px; height: 60px;"/>
                                                 </th>
 
-                                                <td>{{ $item->titulo }}</td>
+                                                <td>
+                                                    @php
+                                                        $nombreDelCurso = $item->titulo;
 
-                                                <td>{{ $item->descripcion }}</td>
+                                                        $palabras = explode(' ', $nombreDelCurso);
+
+                                                        // Inicializa la cadena formateada
+                                                        $titulo_formateado = '';
+                                                        $contador_palabras = 0;
+
+                                                        foreach ($palabras as $palabra) {
+                                                            // Agrega la palabra actual a la cadena formateada
+                                                            $titulo_formateado .= $palabra . ' ';
+
+                                                            // Incrementa el contador de palabras
+                                                            $contador_palabras++;
+
+                                                            // Agrega un salto de línea después de cada tercera palabra
+                                                            if ($contador_palabras % 3 == 0) {
+                                                                $titulo_formateado .= "<br>";
+                                                            }
+                                                        }
+                                                    @endphp
+
+                                                    {!! $titulo_formateado !!}
+
+                                                </td>
+
+                                                <td>
+
+                                                    @php
+                                                        $descripDelCurso = $item->descripcion;
+
+                                                        $palabras = explode(' ', $descripDelCurso);
+
+                                                        // Inicializa la cadena formateada
+                                                        $descrip_formateado = '';
+                                                        $contador_palabras = 0;
+
+                                                        foreach ($palabras as $palabra) {
+                                                            // Agrega la palabra actual a la cadena formateada
+                                                            $descrip_formateado .= $palabra . ' ';
+
+                                                            // Incrementa el contador de palabras
+                                                            $contador_palabras++;
+
+                                                            // Agrega un salto de línea después de cada tercera palabra
+                                                            if ($contador_palabras % 3 == 0) {
+                                                                $descrip_formateado .= "<br>";
+                                                            }
+                                                        }
+                                                    @endphp
+
+                                                    {!! $descrip_formateado !!}
+
+                                                </td>
 
                                                 <td>{{ $item->estatus }}</td>
 
-                                                <td>{{ $item->orden }}</td>
+                                                <td>{{ $item->seccion }}</td>
 
                                                 <td>
-                                                    <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#edit_noticia{{$item->id}}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                    <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#edit_noticia{{$item->id}}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                                         <i class="fa fa-fw fa-edit"></i>
                                                     </a>
                                                 </td>
+
+
 
                                             </tr>
                                             @include('admin.noticias.edit')

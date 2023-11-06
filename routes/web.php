@@ -86,6 +86,7 @@ Route::post('/votar', [App\Http\Controllers\VotosController::class, 'votar'])->n
 Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->name('user.home');
 Route::get('avales', [App\Http\Controllers\WebPageController::class, 'avales'])->name('user.avales');
 Route::get('nuestras_instalaciones', [App\Http\Controllers\WebPageController::class, 'instalaciones'])->name('user.instalaciones');
+Route::get('videos', [App\Http\Controllers\WebPageController::class, 'videos'])->name('user.videos');
 Route::get('nosotros', [App\Http\Controllers\WebPageController::class, 'nosotros'])->name('user.nosotros');
 Route::get('show', [App\Http\Controllers\WebPageController::class, 'reality'])->name('user.reality');
 

@@ -46,6 +46,9 @@
             <a class="nav-link nav_link_custom" target="_blank" href="https://imnasmexico.com/new/tienda/">Productos NAS</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link nav_link_custom {{ (Request::is('videos*') ? 'active' : '') }}" href="{{ route('user.videos') }}">Videos</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link nav_link_custom {{ (Request::is('nuestras_instalaciones*') ? 'active' : '') }}" href="{{ route('user.instalaciones') }}">Instalaciones</a>
           </li>
           {{-- <li class="nav-item">

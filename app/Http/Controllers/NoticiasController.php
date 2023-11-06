@@ -27,6 +27,7 @@ class NoticiasController extends Controller
         $noticias = new Noticias;
         $noticias->titulo = $request->get('titulo');
         $noticias->descripcion = $request->get('descripcion');
+        $noticias->seccion = $request->get('seccion');
         $noticias->link = $request->get('link');
         $noticias->tipo = $request->get('tipo');
         $noticias->estatus = $request->get('estatus');
@@ -59,11 +60,11 @@ class NoticiasController extends Controller
         $noticias = Noticias::find($id);
         $noticias->titulo = $request->get('titulo');
         $noticias->descripcion = $request->get('descripcion');
+        $noticias->seccion = $request->get('seccion');
         $noticias->link = $request->get('link');
         $noticias->tipo = $request->get('tipo');
         $noticias->estatus = $request->get('estatus');
         $noticias->orden = $request->get('orden');
-
 
         if ($request->hasFile("multimedia")) {
 

@@ -10,6 +10,10 @@ use App\Models\Revoes;
 use App\Models\Comentarios;
 use App\Models\User;
 use App\Models\Votos;
+use App\Models\Cursos;
+use App\Models\CursosTickets;
+use App\Models\Noticias;
+
 
 class WebPageController extends Controller
 {
@@ -37,6 +41,26 @@ class WebPageController extends Controller
         $concursantes = Votos::get();
 
         return view('user.reality', compact('webpage', 'concursantes'));
+    }
+
+    public function videos(Request $request){
+
+        $DateAndTime = date('h:i', time());
+        $fechaActual = date('Y-m-d');
+        $cursos = Cursos::where('estatus','=', '1')->orderBy('fecha_inicial','asc')->get();
+        $cursos_slide = Cursos::where('estatus','=', '1')->orderBy('fecha_inicial','asc')->get();
+
+        $tickets = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
+
+        $titulo = 'Calendario General Online y Presencial';
+
+        $webpage = WebPage::first();
+
+        $noticias_producto = Noticias::where('seccion','=', 'Videos_Productos')->get();
+        $noticias_alumnas = Noticias::where('seccion','=', 'Videos_Alumnas')->get();
+
+        return view('user.videos', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual', 'titulo','noticias_producto','noticias_alumnas'));
+
     }
 
     public function avales(Request $request){

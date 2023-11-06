@@ -83,7 +83,23 @@
                             <span class="input-group-text" id="basic-addon1">
                                 <img src="{{ asset('assets/user/icons/informacion.png') }}" alt="" width="35px">
                             </span>
-                            <input id="orden" name="orden" type="text" class="form-control" >@error('orden') <span class="error text-danger">{{ $message }}</span> @enderror
+
+                            <input id="orden" name="orden" type="number" class="form-control" >@error('orden') <span class="error text-danger">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+
+                    <div class="col-6 form-group">
+                        <label for="seccion">Seccion</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets/cam/carta_res.png') }}" alt="" width="35px">
+                            </span>
+                            <select name="seccion" id="seccion" class="form-select d-inline-block" required>
+                                <option value="">Seleccione una opción</option>
+                                <option value="Inicio" {{ old('estatus') == 'Inicio' ? 'selected' : '' }}>Inicio</option>
+                                <option value="Videos_Alumnas" {{ old('estatus') == 'Videos_Alumnas' ? 'selected' : '' }}>Videos_Alumnas</option>
+                                <option value="Videos_Productos" {{ old('estatus') == 'Videos_Productos' ? 'selected' : '' }}>Videos_Productos</option>
+                            </select>
                         </div>
                     </div>
 

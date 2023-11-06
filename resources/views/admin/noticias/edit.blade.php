@@ -76,6 +76,7 @@
                             </span>
                             <input id="multimedia" name="multimedia" type="file" class="form-control">
                         </div>
+
                     </div>
 
                     <div class="col-6 form-group">
@@ -86,6 +87,25 @@
                             </span>
                             <input id="orden" name="orden" type="text" class="form-control" value="{{ $item->orden }}">
                         </div>
+                    </div>
+
+                    <div class="col-6 form-group">
+                        <label for="seccion">Seccion</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets/cam/carta_res.png') }}" alt="" width="35px">
+                            </span>
+                            <select name="seccion" id="seccion" class="form-select d-inline-block" value="{{ $item->id }}">
+                                <option selected>{{ $item->seccion }}</option>
+                                <option value="Inicio" {{ old('seccion') == 'Inicio' ? 'selected' : '' }}>Inicio</option>
+                                <option value="Videos_Alumnas" {{ old('seccion') == 'Videos_Alumnas' ? 'selected' : '' }}>Videos_Alumnas</option>
+                                <option value="Videos_Productos" {{ old('seccion') == 'Videos_Productos' ? 'selected' : '' }}>Videos_Productos</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <img id="blah" src="{{asset('noticias/'.$item->multimedia) }}" alt="Imagen" style="width: 100%; height: auto;"/>
                     </div>
 
                 </div>
