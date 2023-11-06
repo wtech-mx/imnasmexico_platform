@@ -205,7 +205,8 @@
                             <div class="carousel-item active">
                                 <video class="video_nosotros" controls>
                                     <source src="{{asset('assets/user/nosotros/VIDEO_CORTO_CONFERENCIA.MP4')}}" type="video/mp4">
-                                </video>                            </div>
+                                </video>
+                            </div>
                           </div>
                     </div>
                 </div>

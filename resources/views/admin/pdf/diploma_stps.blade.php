@@ -71,7 +71,15 @@
         <h4 class="curso">{{ ucwords(strtolower($curso)) }}</h4>
     </div>
 
-    <h4 class="fecha">{{ $fecha }}</h4>
+    <h4 class="fecha">
+
+        @php
+            $fecha_timestamp = strtotime($fecha);
+            $fecha_formateada = date('d-m-Y', $fecha_timestamp);
+        @endphp
+
+        {{$fecha_formateada}}
+    </h4>
 
 </body>
 </html>
