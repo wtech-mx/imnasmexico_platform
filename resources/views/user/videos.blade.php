@@ -23,7 +23,11 @@
 @section('content')
 
 {{-- slide de cursos --}}
-@include('user.components.carousel_courses')
+<div class="row">
+    <div class="col-12 mt-5">
+        @include('user.components.carousel_courses')
+    </div>
+</div>
 {{-- slide de cursos --}}
 
 
