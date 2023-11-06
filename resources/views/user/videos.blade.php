@@ -9,9 +9,6 @@
 <link href="{{asset('assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/nosotros.css')}}" rel="stylesheet" />
 
-<link href="{{asset('assets/user/custom/grid_cursos.css')}}" rel="stylesheet" />
-<link href="{{asset('assets/user/custom/calendario.css')}}" rel="stylesheet" />
-
 {{-- css carrusel --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
@@ -27,9 +24,7 @@
 <div id="carousel_full" class="carousel slide" data-bs-ride="carousel">
     <span class="mask_calendar"></span>
 
-
     <div class="carousel-inner">
-
         @foreach ($cursos_slide as $curso)
         @php
             $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
@@ -99,27 +94,30 @@
                 </div>
             </div>
         @endforeach
-
-
     </div>
+
     <button class="carousel-control-prev" type="button" data-bs-target="#carousel_full" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
+
     <button class="carousel-control-next" type="button" data-bs-target="#carousel_full" data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
-    </div>
+
+</div>
 
 
 <section class="primario bg_overley" style="background-color:#F5ECE4;"id="tienda">
     <div class="row">
+
         <div class="col-12">
-            <h3 class="text-center" style="color:#836262;">>
+            <h3 class="text-center" style="color:#836262;">
                 Videos Productos
             </h3>
         </div>
+
         <div class="col-12 p-3">
                     <div id="carousel_tiendita" class="carousel slide">
                         <div class="carousel-inner">
