@@ -16,7 +16,7 @@ Reporte de Documentos
             <!-- Card header -->
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <h3 class="mb-3">Generar Documentos </h3>
+                    <h3 class="mb-3">Reporte Documentos </h3>
                     <a type="button" class="btn btn-sm bg-danger" data-bs-toggle="modal" data-bs-target="#manual_instrucciones" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                         ¿Como fucniona?
                     </a>
@@ -60,6 +60,7 @@ Reporte de Documentos
             </form>
 
             <div class="table-responsive">
+                @if(Route::currentRouteName() != 'generar_documentos.index')
                 <table class="table table-flush p-2" id="datatable-search">
                     <thead class="thead-light">
                         <tr>
@@ -72,8 +73,6 @@ Reporte de Documentos
                         </tr>
                     </thead>
 
-
-                    @if(Route::currentRouteName() != 'generar_documentos.index')
                         @foreach ($bitacoras as $item)
                             @php
 
@@ -102,7 +101,31 @@ Reporte de Documentos
                                 </td>
                                 <td>
                                     @if ($item->id_curso == NULL)
-                                        {{ $item->curso }}
+                                        @php
+                                            $nombreDelCurso2 = $item->curso;
+                                            $nombreDelCurso2 = str_replace('Curso de ', '', $nombreDelCurso2);
+                                            $nombreDelCurso2 = str_replace('Curso ', '', $nombreDelCurso2);
+
+                                            $palabras = explode(' ', $nombreDelCurso2);
+
+                                            // Inicializa la cadena formateada
+                                            $nombre_formateado2 = '';
+                                            $contador_palabras2 = 0;
+
+                                            foreach ($palabras as $palabra) {
+                                                // Agrega la palabra actual a la cadena formateada
+                                                $nombre_formateado2 .= $palabra . ' ';
+
+                                                // Incrementa el contador de palabras
+                                                $contador_palabras2++;
+
+                                                // Agrega un salto de línea después de cada tercera palabra
+                                                if ($contador_palabras2 % 3 == 0) {
+                                                    $nombre_formateado2 .= "<br>";
+                                                }
+                                            }
+                                        @endphp
+                                        {{ $nombre_formateado2 }}
                                     @else
                                         @php
                                             $nombreDelCurso = $item->Cursos->nombre;
@@ -161,8 +184,9 @@ Reporte de Documentos
                             @include('admin.documentos.modal_estatus')
 
                         @endforeach
-                    @endif
+
                 </table>
+                @endif
             </div>
           </div>
         </div>
