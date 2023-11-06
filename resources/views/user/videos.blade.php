@@ -9,9 +9,6 @@
 <link href="{{asset('assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/nosotros.css')}}" rel="stylesheet" />
 
-{{-- css carrusel --}}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" />
 @endsection
 
 @php
@@ -21,92 +18,9 @@
 
 @section('content')
 
-<div id="carousel_full" class="carousel slide" data-bs-ride="carousel">
-    <span class="mask_calendar"></span>
-
-    <div class="carousel-inner">
-        @foreach ($cursos_slide as $curso)
-        @php
-            $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;
-            $hora_final = strftime("%H:%M %p", strtotime($curso->hora_final)) ;
-            $dia = date("d", strtotime($curso->fecha_inicial));
-            $mes = date("M", strtotime($curso->fecha_inicial));
-
-            $fecha_ini = $curso->fecha_inicial;
-            $fechaInicialCarbon = Carbon::createFromFormat('Y-m-d', $fecha_ini);
-            $nombreDia = $fechaInicialCarbon->locale('es')->isoFormat('dddd');
-            $nombreDiaCapitalizado = ucfirst($nombreDia);
-            $fecha_inicial = $nombreDiaCapitalizado . ' ' . $fechaInicialCarbon->isoFormat('D [de] MMMM');
-
-            $fecha_f = $curso->fecha_final;
-            $fechaInicialCarbon2 = Carbon::createFromFormat('Y-m-d', $fecha_f);
-            $nombreDia2 = $fechaInicialCarbon2->locale('es')->isoFormat('dddd');
-            $nombreDiaCapitalizado2 = ucfirst($nombreDia2);
-            $fecha_final = $nombreDiaCapitalizado2 . ' ' . $fechaInicialCarbon2->isoFormat('D [de] MMMM');
-
-            $horaInicial = $curso->hora_inicial;
-            $hora_inicial = Carbon::createFromFormat('H:i:s', $horaInicial)->format('h:i A');
-
-            $horaFinal = $curso->hora_final;
-            $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
-        @endphp
-            <div class="carousel-item {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{asset('curso/'. $curso->foto) }}')">
-                <div class="row postion_row_caledanrio">
-                    <div class="col-12 col-md-8">
-                        <div class="conten_slilder_full">
-                            <h1 class="text-white titulo titulo_full" style="">
-                                {{$curso->nombre}}
-                            </h1>
-
-                            <a class="btn btn-secundario_grid me-3 mb-2 mb-lg-5 mb-md-4 mt-4 mt-md-4 mt-lg-5">
-                                <div class="d-flex justify-content-around">
-                                    <p class="card_tittle_btn my-auto">
-                                        {{$curso->modalidad}}
-                                    </p>
-                                </div>
-                            </a>
-
-                            <h3 class="text-white parrafo_full mb-4 mb-lg-5 mb-md-4">
-                                {{$fecha_inicial}} @if ($curso->fecha_inicial == $curso->fecha_final) @else
-                                al {{$fecha_final}} <br>
-                                @endif
-                                @if ($curso->sin_fin == '1')
-                                    {{$hora_inicial}}</p>
-                                @else
-                                    {{$hora_inicial}} - {{$hora_final}}</p>
-                                @endif
-                            </h3>
-
-                            <div class="d-flex justify-content-start">
-                                <a class="btn btn-secundario me-1" href="{{ route('cursos.show',$curso->slug) }}">
-                                    <div class="d-flex justify-content-around">
-                                        <p class="card_tittle_btn my-auto">
-                                            Saber más
-                                        </p>
-                                        <div class="card_bg_btn_secundario">
-                                            <i class="fas fa-plus card_icon_btn_secundario"></i>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach
-    </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#carousel_full" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-
-    <button class="carousel-control-next" type="button" data-bs-target="#carousel_full" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-
-</div>
+{{-- slide de cursos --}}
+@include('user.components.carousel_courses')
+{{-- slide de cursos --}}
 
 
 <section class="primario bg_overley" style="background-color:#F5ECE4;"id="tienda">
