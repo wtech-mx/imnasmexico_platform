@@ -10,7 +10,7 @@
         <div class="col-12">
             <div class="multisteps-form">
                 <div class="row">
-                    <div class="col-12 col-lg-8 mx-auto mt-4 mb-sm-5 mb-3">
+                    <div class="col-12 mx-auto mt-4 mb-sm-5 mb-3">
                         <div class="multisteps-form__progress">
                             <button class="multisteps-form__progress-btn js-active" type="button" title="Product Info">
                             <span>1. Datos Generales</span>
@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-12 col-lg-8 m-auto">
+                            <div class="col-12 m-auto">
                                 <form class="multisteps-form__form mb-8" style="height: 400px;" method="POST" action="{{ route('cursos.update', $curso->id) }}" enctype="multipart/form-data" role="form">
                                     @csrf
                                     <input type="hidden" name="_method" value="PATCH">
@@ -31,9 +31,13 @@
                                         <h5 class="font-weight-bolder">Datos Generales</h5>
                                         <div class="multisteps-form__content">
                                             <div class="row">
-                                                <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label for="fecha">Nombre</label>
+
+                                                <div class="form-group col-12">
+                                                    <label for="name">Nombre del curso*</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
+                                                        </span>
                                                         <input  id="nombre" name="nombre" type="text" class="form-control" value="{{$curso->nombre}}">
                                                     </div>
                                                 </div>
@@ -48,7 +52,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                            Seleccionar foto
+                                                            <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px"> Seleccionar foto
                                                         </button>
                                                         <input type="hidden" name="foto" id="foto" value="{{$curso->foto}}">
                                                     </div>
@@ -119,9 +123,12 @@
                                                     <h5>Visibilidad de secciones</h5>
                                                 </div>
 
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <div class="form-group">
-                                                        <label for="estandar">Productos </label>
+                                                <div class="col-12 col-md-6 col-lg-6 form-group">
+                                                    <label for="name">Productos *</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/productos.png') }}" alt="" width="35px">
+                                                        </span>
                                                         <select class="form-control" id="visibilidad_productos" name="visibilidad_productos">
                                                             <option selected>{{ $curso->visibilidad_productos }}</option>
                                                             <option value="">Visible</option>
@@ -130,9 +137,12 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <div class="form-group">
-                                                        <label for="estandar">Liga de clase </label>
+                                                <div class="col-12 col-md-6 col-lg-6 form-group">
+                                                    <label for="name">Liga de clase</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/meet.png') }}" alt="" width="35px">
+                                                        </span>
                                                         <select class="form-control" id="visibilidad_liga_clase" name="visibilidad_liga_clase">
                                                             <option selected>{{ $curso->visibilidad_liga_clase }}</option>
                                                             <option value="">Visible</option>
@@ -141,9 +151,12 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <div class="form-group">
-                                                        <label for="estandar">Metodos de Pago </label>
+                                                <div class="col-12 col-md-6 col-lg-6 form-group">
+                                                    <label for="name">Metodos de Pago</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/payment.png') }}" alt="" width="35px">
+                                                        </span>
                                                         <select class="form-control" id="visibilidad_metodos_pago" name="visibilidad_metodos_pago">
                                                             <option selected>{{ $curso->visibilidad_metodos_pago }}</option>
                                                             <option value="">Visible</option>
@@ -152,9 +165,12 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <div class="form-group">
-                                                        <label for="estandar">FAQS </label>
+                                                <div class="col-12 col-md-6 col-lg-6 form-group">
+                                                    <label for="name">FAQS</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/informacion.png') }}" alt="" width="35px">
+                                                        </span>
                                                         <select class="form-control" id="visibilidad_faqs" name="visibilidad_faqs">
                                                             <option selected>{{ $curso->visibilidad_faqs }}</option>
                                                             <option value="">Visible</option>
@@ -163,24 +179,28 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <div class="form-group">
-                                                        <label for="estandar">Contactanos </label>
+                                                <div class="col-12 col-md-6 col-lg-6 form-group">
+                                                    <label for="name">Contactanos</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/complain.png') }}" alt="" width="35px">
+                                                        </span>
                                                         <select class="form-control" id="visibilidad_contactanos" name="visibilidad_contactanos">
-                                                            <option selected>{{ $curso->visibilidad_contactanos }}</option>
-                                                            <option value="">Visible</option>
+                                                            <option value="" selected>Visible</option>
                                                             <option value="0">No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12 col-md-6 col-lg-6">
-                                                    <div class="form-group">
-                                                        <label for="estandar">Galeria </label>
+                                                <div class="col-12 col-md-6 col-lg-6 form-group">
+                                                    <label for="name">Galeria</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                                        </span>
                                                         <select class="form-control" id="visibilidad_carusel" name="visibilidad_carusel">
-                                                            <option selected>{{ $curso->visibilidad_carusel }}</option>
                                                             <option value="">Visible</option>
-                                                            <option value="0">No visible</option>
+                                                            <option value="0" selected>No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -258,9 +278,12 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <label for="nota">Modalidad</label>
+                                                <div class="col-4 form-group">
+                                                    <label for="name">Modalidad</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/cam/gestion-del-cambio.png') }}" alt="" width="35px">
+                                                        </span>
                                                         <select id="modalidad" name="modalidad" class="form-control">
                                                             <option value="{{$curso->modalidad}}">{{$curso->modalidad}}</option>
                                                             <option value="Online">Online</option>
@@ -269,9 +292,13 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-5">
-                                                    <div class="form-group">
-                                                        <label for="fecha">Liga Meet/Direccion</label>
+
+                                                <div class="col-4 form-group">
+                                                    <label for="name">Liga Meet/Direccion</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/meet.png') }}" alt="" width="35px">
+                                                        </span>
                                                         <input type="text" id="recurso" name="recurso" class="form-control" value="{{$curso->recurso}}">
                                                     </div>
                                                 </div>
@@ -432,7 +459,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                Materiales de Clase
+                                                                <img src="{{ asset('assets/user/icons/stack-of-books.png') }}" alt="" width="35px"> Materiales de Clase
                                                             </button>
                                                             <input type="hidden" name="materiales" id="materiales" value="{{$curso->materiales}}">
                                                         </div>
@@ -444,12 +471,14 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-4">
-                                                    <div class="form-group">
-                                                        <div class="form-group">
-                                                            <label for="fecha">Liga Material</label>
-                                                            <input type="text" id="btn_cotizacion" name="btn_cotizacion" value="{{$curso->btn_cotizacion}}" class="form-control">
-                                                        </div>
+
+                                                <div class="col-6 form-group">
+                                                    <label for="name">Liga Material</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/enlace.png') }}" alt="" width="35px">
+                                                        </span>
+                                                        <input type="text" id="btn_cotizacion" name="btn_cotizacion" value="{{$curso->btn_cotizacion}}" class="form-control">
                                                     </div>
                                                 </div>
 
@@ -457,7 +486,7 @@
                                                     <div class="form-group">
                                                         <div class="form-group">
                                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                PDF Descarga
+                                                                <img src="{{ asset('assets/user/icons/pdf.png') }}" alt="" width="35px">  PDF Descarga
                                                             </button>
                                                             <input type="hidden" name="pdf" id="pdf" value="{{$curso->pdf}}">
                                                         </div>
@@ -478,42 +507,65 @@
                                                 @foreach ($tickets as $item)
                                                     <div class="row">
                                                         <input type="hidden" name="ticket_id[]" value="{{ $item->id }}">
-                                                        <div class="col-12">
-                                                            <div class="form-group">
-                                                                <label for="fecha">Nombre</label>
+
+                                                        <div class="col-12 form-group">
+                                                            <label for="fecha">Nombre</label>
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                                                </span>
                                                                 <input value="{{$item->nombre}}" id="nombre_ticket[]" name="nombre_ticket[]" type="text" class="form-control">
                                                             </div>
                                                         </div>
-                                                        <div class="col-3">
-                                                            <div class="form-group">
-                                                                <label for="num_sesion">Fecha inicial</label>
+
+                                                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                            <label for="name">Fecha inicial</label>
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <img src="{{ asset('assets/user/icons/calendario.png') }}" alt="" width="35px">
+                                                                </span>
                                                                 <input value="{{$item->fecha_inicial}}" id="fecha_inicial_ticket[]" name="fecha_inicial_ticket[]" type="date" class="form-control" >
                                                             </div>
                                                         </div>
-                                                        <div class="col-3">
-                                                            <div class="form-group">
-                                                                <label for="num_sesion">Fecha final</label>
+
+                                                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                            <label for="name">Fecha final</label>
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <img src="{{ asset('assets/user/icons/calendario.png') }}" alt="" width="35px">
+                                                                </span>
                                                                 <input value="{{$item->fecha_final}}" id="fecha_final_ticket[]" name="fecha_final_ticket[]" type="date" class="form-control" >
                                                             </div>
                                                         </div>
-                                                        <div class="col-3">
-                                                            <div class="form-group">
-                                                                <label for="num_sesion">Precio</label>
+
+                                                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                            <label for="name">Precio</label>
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <img src="{{ asset('assets/user/icons/money.png') }}" alt="" width="35px">
+                                                                </span>
                                                                 <input value="{{$item->precio}}" id="precio[]" name="precio[]" type="number" class="form-control" >
                                                             </div>
                                                         </div>
-                                                        <div class="col-3">
-                                                            <div class="form-group">
-                                                                <label for="num_sesion">Descuento</label>
+
+
+                                                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                            <label for="name">Descuento</label>
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
+                                                                </span>
                                                                 <input value="{{$item->descuento}}" id="descuento[]" name="descuento[]" type="number" class="form-control" >
                                                             </div>
                                                         </div>
+
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <label for="descripcion">Descripcion</label><br>
                                                                 <textarea id="descripcion_ticket[]" name="descripcion_ticket[]" cols="10" rows="3" class="form-control">{{$item->descripcion}}</textarea>
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                 @endforeach
                                                 <div id="formulario" class="mt-4">
@@ -562,16 +614,20 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="button-row d-flex mt-4">
-                                                <div class="col-3">
+
+                                             <div class="row d-flex mt-4">
+                                                <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="num_sesion">Precio</label>
                                                         <input  id="precio_curso" name="precio_curso" type="number" class="form-control" value="{{$curso->precio}}">
                                                     </div>
                                                 </div>
-                                                <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
-                                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
-                                             </div>
+
+                                                <div class="col-4">
+                                                    <button class="btn btn-secondary mt-3 js-btn-prev" type="button" title="Prev"><img src="{{ asset('assets/user/icons/back.png') }}" alt="" width="35px"> Ant.</button>
+                                                    <button class="btn btn-success close-modal mt-3" type="submit"  style=""><img src="{{ asset('assets/user/icons/salvar.png') }}" alt="" width="35px">  Guardar</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
