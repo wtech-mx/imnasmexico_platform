@@ -165,6 +165,19 @@ class CursosController extends Controller
 
         $curso->save();
 
+        $id_estandar = $request->get('id_estandar');
+        $carpeta_est_id = $request->input('carpeta_est_id');
+
+        if($id_estandar != NULL){
+            for ($count = 0; $count < count($id_estandar); $count++) {
+                $data = array(
+                    'id_curso' => $curso->id,
+                    'id_carpeta' => $id_estandar[$count],
+                );
+                    CursosEstandares::create($data);
+            }
+        }
+
         $evento = new Event;
         $evento->title = $curso->nombre;
         $evento->start = $curso->fecha_inicial;
@@ -172,27 +185,6 @@ class CursosController extends Controller
         $evento->id_profesor = $request->get('id_profesor');
         $evento->id_curso = $curso->id;
         $evento->save();
-
-        // $client = new Google_Client();
-        // // Configura las credenciales obtenidas desde la consola de desarrolladores de Google
-        // $client->setAccessToken('AIzaSyA-8zwrW2RCdYbKcYuZ_62JEYbtgoaD_OY');
-
-        // $calendarService = new Google_Service_Calendar($client);
-
-        // $meet = new Google_Service_Calendar_Event([
-        //     'summary' => $curso->nombre,
-        //     'start' => [
-        //         'dateTime' => $curso->fecha_inicial,
-        //         'timeZone' => 'America/Mexico_City',
-        //     ],
-        //     'end' => [
-        //         'dateTime' => $curso->fecha_final,
-        //         'timeZone' => 'America/Mexico_City',
-        //     ],
-        // ]);
-
-        // // Crea el evento en Google Calendar
-        // $calendarService->events->insert('primary', $meet);
 
         // G U A R D A R  T I C K E T
         $nombre_ticket = $request->get('nombre_ticket');

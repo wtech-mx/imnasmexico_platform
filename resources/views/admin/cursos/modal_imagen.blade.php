@@ -24,10 +24,10 @@
         <div class="modal-body" style="background: #F5ECE4;">
             <div class="d-flex align-items-start">
                 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                  <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Online</button>
+                  <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Fotos Online</button>
                   <button class="nav-link" id="v-pills-materialeso-tab" data-bs-toggle="pill" data-bs-target="#v-pills-materialeso" type="button" role="tab" aria-controls="v-pills-materialeso" aria-selected="false">Materiales O.</button>
 
-                  <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Presencial</button>
+                  <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Fotos Presencial</button>
                   <button class="nav-link" id="v-pills-materialesp-tab" data-bs-toggle="pill" data-bs-target="#v-pills-materialesp" type="button" role="tab" aria-controls="v-pills-materialesp" aria-selected="false">Materiales P.</button>
 
                   <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">PDF</button>

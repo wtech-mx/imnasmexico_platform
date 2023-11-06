@@ -130,6 +130,12 @@
                 <div class="collapse " id="pagesExamplesCurso">
                 <ul class="nav ms-4">
                     <li class="nav-item ">
+                    @can('cursos-create')
+                        <a class="nav-link {{ (Request::is('/admin/cursos/mes*') ? 'show' : '') }}" href="{{ route('cursos.create') }}">
+                            <span class="sidenav-mini-icon"> P </span>
+                            <span class="sidenav-normal">Crear Curso</span>
+                        </a>
+                    @endcan
                     @can('cursos-show')
                         <a class="nav-link {{ (Request::is('/admin/cursos/dia*') ? 'show' : '') }}" href="{{ route('cursos.index_dia') }}">
                             <span class="sidenav-mini-icon"> P </span>
@@ -150,7 +156,7 @@
                     @can('carpeta-compartida-show')
                         <a class="nav-link {{ (Request::is('/admin/carpetas*') ? 'show' : '') }}" href="{{ route('carpetas.index') }}">
                             <span class="sidenav-mini-icon"> P </span>
-                            <span class="sidenav-normal">Carpeta compartida</span>
+                            <span class="sidenav-normal">Carpeta Materiales</span>
                         </a>
                     @endcan
 

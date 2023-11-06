@@ -15,7 +15,7 @@
                 <div class="modal-body row">
 
                     <div class="form-group col-12">
-                        <label for="name">Nombre</label>
+                        <label for="name">Nombre del curso</label>
                         <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>@error('nombre') <span class="error text-danger">{{ $message }}</span> @enderror
                     </div>
 
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="form-group col-6">
-                        <label for="">Sub Area: </label>
+                        <label for="">Subárea: </label>
                             <select name="sub_area" id="sub_area" class="form-select">
                                 <option value="">Seleccionar opcion</option>
                                 <option value="corporal">corporal</option>
@@ -38,6 +38,7 @@
                     </div>
 
                     <div class="col-12">
+                        <label for="">Documentos</label>
                         <input class="form-control" type="file" name="archivos[]" multiple>
                     </div>
                 </div>

@@ -28,6 +28,12 @@
                             <a type="button" class="btn btn-sm bg-danger" data-bs-toggle="modal" data-bs-target="#manual_instrucciones" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 ¿Como fucniona?
                             </a>
+
+                            @can('cursos-create')
+                                <a class="btn btn-sm btn-success" href="{{ route('cursos.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    <i class="fa fa-fw fa-edit"></i> Crear
+                                </a>
+                            @endcan
                         </div>
                     </div>
 

@@ -16,7 +16,7 @@
                             <span>1. Datos Generales</span>
                             </button>
                             <button class="multisteps-form__progress-btn" type="button" title="Media">2. Fecha y Hora</button>
-                            <button class="multisteps-form__progress-btn" type="button" title="Socials">3. Temario</button>
+                            <button class="multisteps-form__progress-btn" type="button" title="Socials">3. Información</button>
                             <button class="multisteps-form__progress-btn" type="button" title="Pricing">4. Tickets</button>
                         </div>
 
@@ -32,15 +32,15 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="fecha">Nombre</label>
-                                                        <input  id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre">
+                                                        <label for="fecha">Nombre del curso *</label>
+                                                        <input  id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre" required>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="fecha">Descripcion</label>
-                                                        <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control"></textarea>
+                                                        <label for="fecha">Objetivo *</label>
+                                                        <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control" required></textarea>
                                                     </div>
                                                 </div>
 
@@ -61,17 +61,10 @@
 
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="nota">Enlace de Clase Grabada</label>
-                                                        <input type="text" id="clase_grabada" name="clase_grabada" class="form-control" >
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12">
-                                                    <div class="form-group">
                                                         <label for="estandar">Seleccionar Estandar</label>
-                                                        <select class="form-control" id="id_estandar" name="id_estandar">
+                                                        <select class="form-control" id="id_estandar[]" name="id_estandar[]" multiple="multiple">
+                                                            <option value="">Seleccionar Estandar</option>
                                                           @foreach ($estandares as $estandar)
-                                                          <option value="">Seleccionar Estandar</option>
                                                           <option value="{{ $estandar->id }}">{{ $estandar->name }}</option>
                                                           @endforeach
                                                         </select>
@@ -80,8 +73,8 @@
 
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="estandar">Seleccionar Carpeta Compartida</label>
-                                                        <select class="form-control" id="carpeta" name="carpeta">
+                                                        <label for="estandar">Seleccionar Carpeta Materiales</label>
+                                                        <select class="form-control carpeta_mat" id="carpeta" name="carpeta">
                                                             <option value="">Seleccionar carpeta</option>
                                                           @foreach ($carpetas as $carpeta)
                                                           <option value="{{ $carpeta->id }}">{{ $carpeta->nombre }}</option>
@@ -93,8 +86,8 @@
 
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="estandar">Seleccionar Profesor</label>
-                                                        <select class="form-control" id="id_profesor" name="id_profesor">
+                                                        <label for="estandar">Seleccionar Profesor *</label>
+                                                        <select class="form-control" id="id_profesor" name="id_profesor" required>
                                                             <option value="">Seleccionar Profesor</option>
                                                             @foreach ($profesores as $profesor)
                                                             <option value="{{ $profesor->id }}">{{ $profesor->name }}</option>
@@ -111,8 +104,8 @@
                                                     <div class="form-group">
                                                         <label for="estandar">Productos </label>
                                                         <select class="form-control" id="visibilidad_productos" name="visibilidad_productos">
-                                                            <option value="">Visible</option>
-                                                            <option value="0" selected>No visible</option>
+                                                            <option value="" selected>Visible</option>
+                                                            <option value="0">No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -121,8 +114,8 @@
                                                     <div class="form-group">
                                                         <label for="estandar">Liga de clase </label>
                                                         <select class="form-control" id="visibilidad_liga_clase" name="visibilidad_liga_clase">
-                                                            <option value="">Visible</option>
-                                                            <option value="0" selected>No visible</option>
+                                                            <option value="" selected>Visible</option>
+                                                            <option value="0">No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -131,8 +124,8 @@
                                                     <div class="form-group">
                                                         <label for="estandar">Metodos de Pago </label>
                                                         <select class="form-control" id="visibilidad_metodos_pago" name="visibilidad_metodos_pago">
-                                                            <option value="">Visible</option>
-                                                            <option value="0" selected>No visible</option>
+                                                            <option value="" selected>Visible</option>
+                                                            <option value="0">No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -141,8 +134,8 @@
                                                     <div class="form-group">
                                                         <label for="estandar">FAQS </label>
                                                         <select class="form-control" id="visibilidad_faqs" name="visibilidad_faqs">
-                                                            <option value="">Visible</option>
-                                                            <option value="0" selected>No visible</option>
+                                                            <option value="" selected>Visible</option>
+                                                            <option value="0">No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -151,8 +144,8 @@
                                                     <div class="form-group">
                                                         <label for="estandar">Contactanos </label>
                                                         <select class="form-control" id="visibilidad_contactanos" name="visibilidad_contactanos">
-                                                            <option value="">Visible</option>
-                                                            <option value="0" selected>No visible</option>
+                                                            <option value="" selected>Visible</option>
+                                                            <option value="0">No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -169,7 +162,7 @@
 
                                             </div>
                                             <div class="button-row d-flex mt-4">
-                                                <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
+                                                <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Sig.</button>
                                             </div>
                                         </div>
                                     </div>
@@ -213,7 +206,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-4">
+                                                {{-- <div class="col-4">
                                                     <div class="form-group">
                                                         <label for="nota">Categoria</label>
                                                         <select id="categoria" name="categoria" class="form-control">
@@ -221,7 +214,7 @@
                                                             <option value="Corporales">Corporales</option>
                                                         </select>
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="col-4">
                                                     <div class="form-group">
@@ -240,13 +233,13 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-2">
+                                                {{-- <div class="form-check col-2">
                                                     <label for="nota">Destacado</label>
                                                     <div class="form-group">
                                                         <input class="form-check-input" type="checkbox" value="1" id="destacado" name="destacado">
 
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="form-check col-3">
                                                     <label for="nota">Seccion UNAM</label>
@@ -264,6 +257,7 @@
                                                     </div>
                                                 </div>
 
+                                                <h5>Documentacion</h5>
                                                 <div class="form-check col-2">
                                                     <div class="form-group">
                                                         <input class="form-check-input" type="checkbox" value="1" id="sep" name="sep">
@@ -308,22 +302,22 @@
                                             </div>
 
                                             <div class="button-row d-flex mt-4">
-                                                <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
-                                                <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
+                                                <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Ante.</button>
+                                                <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Sig.</button>
                                             </div>
                                         </div>
                                     </div>
                                     <!--single Temario panel-->
                                     <div class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn">
-                                        <h5 class="font-weight-bolder">Temario</h5>
+                                        <h5 class="font-weight-bolder">Información</h5>
                                         <div class="multisteps-form__content">
                                             <div class="row">
-                                                <div class="col-12">
+                                                {{-- <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="fecha">Objetivo</label>
                                                         <textarea name="objetivo" id="objetivo" cols="10" rows="3" class="form-control"></textarea>
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="col-12">
                                                     <div class="form-group">
@@ -378,8 +372,8 @@
                                                 </div>
                                             </div>
                                             <div class="button-row d-flex mt-4">
-                                                <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
-                                                <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
+                                                <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Ante.</button>
+                                                <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Sig.</button>
                                             </div>
                                         </div>
                                     </div>
@@ -429,7 +423,7 @@
                                                 </div>
                                             </div>
                                             <div class="button-row d-flex mt-4">
-                                                <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
+                                                <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Ant.</button>
                                                 <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                             </div>
                                         </div>
@@ -447,17 +441,19 @@
 @endsection
 
 @section('js_custom')
+<script src="{{ asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+
     <script src="{{asset('assets/admin/js/plugins/multistep-form.js')}}"></script>
 
    <script src="https://cdn.tiny.cloud/1/j1jav9k6mblf3p1zkwu0fxf5yfhp7b4inzjxkxfteidvmluh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
    <script>
-     tinymce.init({
-       selector: '#descripcion', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
+        $(document).ready(function() {
+            $('.carpeta_mat').select2();
+        });
 
      tinymce.init({
-       selector: '#objetivo', // Replace this CSS selector to match the placeholder element for TinyMCE
+       selector: '#descripcion', // Replace this CSS selector to match the placeholder element for TinyMCE
        plugins: 'code table lists'
      });
 

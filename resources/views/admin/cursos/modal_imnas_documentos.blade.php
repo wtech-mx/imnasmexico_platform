@@ -253,6 +253,16 @@
                                                 </div>
 
                                                 @endif
+                                                @else
+                                                <div class="form-group col-6 gc_cn">
+                                                    <label for="name">Fotografia *</label>
+                                                    <div class="input-group">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
+                                                        </span>
+                                                        <input id="img_infantil" name="img_infantil" type="file" class="form-control"  >
+                                                    </div>
+                                                </div>
                                             @endif
 
                                             <div class="form-group col-6 gc_cn">

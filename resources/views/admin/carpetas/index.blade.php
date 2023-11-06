@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Carpetas Compartidas
+    Carpetas Materiales
 @endsection
 
 @section('content')
@@ -15,7 +15,7 @@
                         <div class="d-flex justify-content-between">
 
 
-                            <h3 class="mb-3">Carpetas Compartidas</h3>
+                            <h3 class="mb-3">Carpetas Materiales</h3>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?

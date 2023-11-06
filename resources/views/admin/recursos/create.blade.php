@@ -16,13 +16,13 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col-7">
-                                    <label for="">Nombre</label>
+                                    <label for="">Nombre del curso</label>
                                     <div class="form-group">
                                         <input type="text" name="nombre" class="form-control nombre">
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    <label for="">Tipo</label>
+                                    <label for="">Modalidad</label>
                                     <select class="form-control" id="tipo" name="tipo" required>
                                         <option value="Online">Online</option>
                                         <option value="Presencial">Presencial</option>
