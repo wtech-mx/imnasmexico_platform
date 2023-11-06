@@ -8,6 +8,7 @@
 
 <link href="{{asset('assets/user/custom/tabs_ubicacion.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/nosotros.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/user/custom/slide_cursos.css')}}" rel="stylesheet" />
 
 @endsection
 
