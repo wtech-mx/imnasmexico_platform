@@ -24,7 +24,7 @@
 
 {{-- slide de cursos --}}
 <div class="row">
-    <div class="col-12 mt-5">
+    <div class="col-12" style="margin-top: 9rem !important">
         @include('user.components.carousel_courses')
     </div>
 </div>
