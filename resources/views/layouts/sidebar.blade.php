@@ -446,12 +446,12 @@
 
                         <a class="nav-link {{ (Request::is('admin/documentos/tipos*') ? 'show' : '') }}" href="{{ route('documentos.index') }}">
                             <span class="sidenav-mini-icon"> P </span>
-                            <span class="sidenav-normal">Tipos</span>
+                            <span class="sidenav-normal">Tipos de Documentos</span>
                         </a>
 
                         <a class="nav-link {{ (Request::is('admin/documentos/generar*') ? 'show' : '') }}" href="{{ route('generar_documentos.index') }}">
                             <span class="sidenav-mini-icon"> P </span>
-                            <span class="sidenav-normal">Clientes</span>
+                            <span class="sidenav-normal">Reporte Generados</span>
                         </a>
 
                     </li>
