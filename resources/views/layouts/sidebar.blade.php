@@ -225,7 +225,7 @@
 
                     <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/pendientes*') ? 'show' : '') }}" href="{{ route('pagos.pendientes') }}">
                         <span class="sidenav-mini-icon"> P </span>
-                        <span class="sidenav-normal">Pendientes de Pago</span>
+                        <span class="sidenav-normal">Verificar Pagos</span>
                     </a>
 
                     <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/deudores*') ? 'show' : '') }}" href="{{ route('pagos.deudores') }}">
@@ -344,7 +344,7 @@
                 </li>
             @endcan
 
-            @can('caja')
+            {{-- @can('caja')
                 <li class="nav-item">
                     <a class="nav-link {{ (Request::is('admin/caja/cursos') ? 'active' : '') }}" href="{{ route('caja.index') }}">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
@@ -353,7 +353,7 @@
                     <span class="nav-link-text ms-1">Caja</span>
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
 
             @can('carpeta-estandares-show')
                 <li class="nav-item">

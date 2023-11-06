@@ -37,7 +37,7 @@
                                             <th>Correo</th>
                                             <th>Telefono</th>
                                             <th>Curso</th>
-                                            <th>Pendiente Pago</th>
+                                            <th>¿Verificado?</th>
 
                                             <th>Acciones</th>
                                         </tr>

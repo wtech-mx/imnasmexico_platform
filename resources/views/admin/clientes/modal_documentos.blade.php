@@ -17,7 +17,7 @@
                             </button>
 
                             <button class="nav-link" id="nav-register-tab" data-bs-toggle="tab" data-bs-target="#nav-register{{ $cliente->id }}" type="button" role="tab" aria-controls="nav-register{{ $cliente->id }}" aria-selected="false">
-                                Estandares
+                                Doc Evaluacion
                             </button>
                         </div>
                     </div>
@@ -190,13 +190,19 @@
                         <form  method="POST" action="{{ route('documentos.store', $cliente->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="modal-body row">
-                                <div class="col-12">
+                                {{-- <div class="col-12">
                                     <input class="form-control" type="file" name="archivos[]" multiple>
-                                </div>
+                                </div> --}}
                                 @foreach($cliente->DocumentosEstandares as $documento)
                                 <div class="col-6 form-group">
                                     @if (pathinfo($documento->documento, PATHINFO_EXTENSION) == 'pdf')
                                         <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento)}}" style="width: 100%; height: 350px;"></iframe>
+                                    @elseif (pathinfo($documento->documento, PATHINFO_EXTENSION) == 'docx' || pathinfo($documento->documento, PATHINFO_EXTENSION) == 'doc')
+                                        <!-- Usar Microsoft Office Web Viewer para visualizar documentos Word -->
+                                        <img id="blah" src="{{ asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 100px; height: 100px;"/>
+                                        <a href="{{ route('descargar_documento', ['id' => $documento->id, 'cliente_id' => $cliente->id]) }}">
+                                            Descargar
+                                        </a>
                                     @else
                                         <p class="text-center mt-2">
                                             <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento) }}" alt="Imagen" style="width: 220px;height: 100%;"/>
@@ -208,9 +214,9 @@
                                 </div>
                                 @endforeach
                             </div>
-                            <div class="modal-footer">
+                            {{-- <div class="modal-footer">
                                 <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
-                            </div>
+                            </div> --}}
                         </form>
 
                 </div>
