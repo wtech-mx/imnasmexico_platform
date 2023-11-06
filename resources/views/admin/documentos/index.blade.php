@@ -44,12 +44,12 @@ Reporte de Documentos
                                 </div>
                             </div>
 
-                            <div class="col-3">
+                            {{-- <div class="col-3">
                                 <label class="form-label">Curso</label>
                                 <div class="input-group">
-                                    <input  name="curso" type="date" class="form-control" required>
+                                    <input  name="curso" type="date" class="form-control">
                                 </div>
-                            </div>
+                            </div> --}}
 
                             <div class="col-3">
                                 <br>
