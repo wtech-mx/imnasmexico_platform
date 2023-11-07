@@ -108,7 +108,10 @@ Mi perfil- {{$cliente->name}}
                             </div>
 
                             <div class="col-4 col-lg-4 form-group ">
-                                <a class="btn_save_profile" type="button" href="{{ route('signout') }}">Cerrar Sesión</a>
+                                <a class="btn_save_profile" type="button" href="{{ route('signout') }}" style="background: #ff1212cf;">
+                                    Cerrar Sesión
+                                    <img class="img_profile_label" src="{{asset('assets/user/icons/salida.png')}}" alt="">
+                                </a>
                             </div>
 
                         </div>
@@ -219,7 +222,7 @@ Mi perfil- {{$cliente->name}}
                                                     </p>
                                                 @endif
                                                 <p class="text-center">
-                                                    Se ha cargado tu <strong>INE</strong> con exito <i class="fa fa-fw fa-check"></i><br>
+                                                    Se ha cargado tu <strong>INE</strong> con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
                                                     ¿Quieres reemplazar el archivo actual?
                                                 </p>
 
@@ -261,7 +264,7 @@ Mi perfil- {{$cliente->name}}
                                                     </p>
                                                 @endif
                                                 <p class="text-center">
-                                                    Se ha cargado tu <strong>CURP</strong> con exito <i class="fa fa-fw fa-check"></i><br>
+                                                    Se ha cargado tu <strong>CURP</strong> con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
                                                     ¿Quieres reemplazar el archivo actual?
                                                 </p>
 
@@ -300,7 +303,7 @@ Mi perfil- {{$cliente->name}}
                                                     </p>
                                                 @endif
                                                 <p class="text-center">
-                                                    Se ha cargado tu <strong>FOTO</strong> con exito <i class="fa fa-fw fa-check"></i><br>
+                                                    Se ha cargado tu <strong>FOTO</strong> con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
                                                     ¿Quieres reemplazar el archivo actual?
                                                 </p>
 
@@ -734,7 +737,7 @@ Mi perfil- {{$cliente->name}}
                                                                                 @endif
 
                                                                                 <p class="text-center">
-                                                                                    Se ha cargado tu archivo con exito <i class="fa fa-fw fa-check"></i><br>
+                                                                                    Se ha cargado tu archivo con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
                                                                                     ¿Quieres reemplazar el archivo actual?
                                                                                 </p>
 
@@ -799,7 +802,7 @@ Mi perfil- {{$cliente->name}}
                                                                                                 </p>
                                                                                             @endif
                                                                                             <p class="text-center">
-                                                                                                Se ha cargado tu archivo con exito <i class="fa fa-fw fa-check"></i><br>
+                                                                                                Se ha cargado tu archivo con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
                                                                                                 ¿Quieres reemplazar el archivo actual?
                                                                                             </p>
 
@@ -919,7 +922,7 @@ Mi perfil- {{$cliente->name}}
                                                                         <div class="col-3 form-group p-3 mt-2">
 
                                                                             <p class="text-center">
-                                                                                Se ha cargado tu archivo con exito <i class="fa fa-fw fa-check"></i><br>
+                                                                                Se ha cargado tu archivo con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
                                                                                 ¿Quieres reemplazar el archivo actual?
                                                                             </p>
 
@@ -1068,7 +1071,7 @@ Mi perfil- {{$cliente->name}}
                                                                                                 <div class="col-3 form-group p-3 mt-2">
 
                                                                                                     <p class="text-center">
-                                                                                                        Se ha cargado tu archivo con exito <i class="fa fa-fw fa-check"></i><br>
+                                                                                                        Se ha cargado tu archivo con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
                                                                                                         ¿Quieres reemplazar el archivo actual?
                                                                                                     </p>
 
