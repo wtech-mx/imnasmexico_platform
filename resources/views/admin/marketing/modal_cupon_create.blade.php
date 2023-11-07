@@ -14,7 +14,7 @@
                 @csrf
                 <div class="modal-body row">
 
-                <div class="form-group col-12">
+                <div class="form-group col-6">
                     <label class="" for="nombre">Nombre</label>
                     <div class="input-group mb-2 mr-sm-2">
                       <div class="input-group-prepend">
@@ -24,17 +24,13 @@
                     </div>
                 </div>
 
-                <div class="form-group col-12">
+                <div class="form-group col-6">
                     <label class="" for="nombre">Tipo de descuento</label>
-                    <select id="tipo_de_descuento" name="tipo_de_descuento" class="form-control" >
-                      <option selected>Seleciona el tipo </option>
-                      <option value="porcentaje">Porcentaje</option>
-                      <option value="fijo">Fijo</option>
-                    </select>
+                    <input type="text" class="form-control" id="tipo_de_descuento" name="tipo_de_descuento" value="porcentaje" readonly>
                 </div>
 
                 <div class="form-group col-6">
-                    <label class="" for="importe">Importe</label>
+                    <label class="" for="importe">Descuento en %</label>
                     <div class="input-group mb-2 mr-sm-2">
                       <div class="input-group-prepend">
                         <div class="input-group-text">@</div>
@@ -68,7 +64,7 @@
                 </div>
 
 
-                <div class="form-group col-12">
+                {{-- <div class="form-group col-12">
                     <label class="" for="nombre">Incluir Cursos</label>
                     <select id="inc_cursos" name="inc_cursos" class="form-control" >
                       <option selected>Seleciona el curso </option>
@@ -80,7 +76,7 @@
                     <select id="exc_cursos" name="exc_cursos" class="form-control" >
                       <option selected>Seleciona el curso </option>
                     </select>
-                </div>
+                </div> --}}
 
                 <div class="form-group col-12">
                     <label class="" for="nombre">Estado</label>
@@ -101,7 +97,7 @@
                     </div>
                 </div>
 
-                <div class="form-group col-6">
+                {{-- <div class="form-group col-6">
                     <label class="" for="limite_uso_por_usuario">Limite de uso po usuarios</label>
                     <div class="input-group mb-2 mr-sm-2">
                       <div class="input-group-prepend">
@@ -109,7 +105,7 @@
                       </div>
                       <input type="number" class="form-control" id="limite_uso_por_usuario" name="limite_uso_por_usuario">
                     </div>
-                </div>
+                </div> --}}
 
                 </div>
                 <div class="modal-footer">

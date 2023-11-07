@@ -44,7 +44,9 @@
                         <td>{{ $envio->User->telefono }}</td>
                         <td>{{ $envio->User->email }}</td>
                         <td>
-                            # {{ $envio->Orders->id }}
+                            <a class="btn btn-sm btn-success" href="{{ route('pagos.edit_pago',$envio->Orders->id) }}" target="_blank">
+                                # {{ $envio->Orders->id }}
+                            </a>
                         </td>
                         <td>
                             {{ $envio->estatus }}

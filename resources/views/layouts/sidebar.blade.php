@@ -405,7 +405,7 @@
 
                         <a class="nav-link {{ (Request::is('admin/revoes*') ? 'active' : '') }}" href="{{ route('revoes.index') }}">
                             <span class="sidenav-mini-icon"></span>
-                            <span class="sidenav-normal">Revoes</span>
+                            <span class="sidenav-normal">Rvoes</span>
                         </a>
 
                         <a class="nav-link {{ (Request::is('admin/comentarios*') ? 'active' : '') }}" href="{{ route('comentarios.index') }}">
