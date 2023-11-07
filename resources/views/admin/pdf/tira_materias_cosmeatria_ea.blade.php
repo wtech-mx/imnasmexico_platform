@@ -30,10 +30,19 @@
 
         .container {
             position: absolute;
-            top: 15.3%;
+            top: 15%;
             left: 55%;
             transform: translate(-50%, -50%);
             text-align: center;
+        }
+
+        .containerz{
+            position: absolute;
+            top: 16%;
+            left: 17.6%;
+            background: #ffffff;
+            width: 508px;
+            height: 110px;
         }
 
         .container2{
@@ -100,9 +109,8 @@
 
         .curp{
             position:relative;
-            font-size: 6px;
+            font-size: 4px;
             color: red;
-            line-height: 200%;
         }
 
         .oval-container {
@@ -164,12 +172,14 @@
             <h4 class="nombre">{!! $nombre_formateado !!}<</h4>
         </div>
 
-        <div class="container2">
-            <h4 class="folio2">{{$folio}}</h4>
-        </div>
-
-        <div class="container4">
-            <h4 class="curp">{{$curp}}</h4>
+        <div class="containerz">
+            <p class="texto" style="font-size: 13px;text-align: justify;">
+                La Coordinación de Asuntos Escolares y Apoyo a Estudiantes del Registro Nacional
+                Instituto Mexicano Naturales Ain Spa RIIMNAS, con registro de la Secretaria
+                del Trabajo y Prevención Social STPS como Agente Capacitador Externo con Registro
+                RIFC-680910-879-0013 , hace constar que el la Alumno(a) , con Numero de
+                Folio: <strong style="color: red"> {{$folio}} </strong> con CURP: <strong  style="color: red">{{$curp}} </strong>,  curso  <strong  style="color: red">{{ ucwords(strtolower($curso)) }} </strong>  Cubriendo todos los correspondientes. <br> Para afectos de desempeño académico  se expresa lo siguiente:
+            </p>
         </div>
 
         <div class="oval-container">
