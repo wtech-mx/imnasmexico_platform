@@ -26,7 +26,19 @@
                                 </div>
                                 <div class="col-6 mt-3">
                                     <b><label>Fecha</label></b><br>
-                                    <label>{{$tiket->Cursos->fecha_inicial}} - {{$tiket->Cursos->fecha_final}}</label>
+                                    <label>
+                                        @php
+                                            $fecha = $tiket->Cursos->fecha_inicial;
+                                            $fecha_timestamp = strtotime($fecha);
+                                            $fecha_formateada = date('d-m-Y', $fecha_timestamp);
+
+                                            $fecha2 = $tiket->Cursos->fecha_final;
+                                            $fecha_timestamp2 = strtotime($fecha);
+                                            $fecha_formateada2 = date('d-m-Y', $fecha_timestamp2);
+                                        @endphp
+
+                                        {{$fecha_formateada}} - {{$fecha_formateada2}}
+                                    </label>
                                 </div>
                                 <div class="col-6 mt-3">
                                     <b><label>Hora</label></b><br>

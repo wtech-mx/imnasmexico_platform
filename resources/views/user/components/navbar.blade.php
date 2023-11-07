@@ -72,7 +72,7 @@
                 </a>
             @else
                 {{-- <a class="btn btn-primario me-4" type="button" href="{{ route('signout') }}">Cerrar Sesion</a> --}}
-                <a class="btn btn-primario me-4" type="button" href="{{ route('perfil.index', auth()->user()->code) }}">Perfil</a>
+                <a class="btn btn-primario me-4" type="button" href="{{ route('perfil.index', auth()->user()->code) }}" style="background-color: #5dad00">Perfil</a>
             @endguest
         </div>
 
