@@ -57,11 +57,11 @@
                                 @can('usuarios-edit')
                                 <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
                                 @endcan
-                                @can('usuarios-delete')
+                                {{-- @can('usuarios-delete')
                                 {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display: contents;']) !!}
                                     {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm ',]) !!}
                                 {!! Form::close() !!}
-                                @endcan
+                                @endcan --}}
                             </td>
 
                         </tr>
