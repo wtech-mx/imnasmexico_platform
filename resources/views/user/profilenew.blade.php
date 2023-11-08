@@ -737,7 +737,7 @@ Mi perfil- {{$cliente->name}}
                                                                                 @endif
 
                                                                                 <p class="text-center">
-                                                                                    Se ha cargado tu archivo con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
+                                                                                    Se ha cargado tu <strong>Firma</strong> con exit- <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
                                                                                     ¿Quieres reemplazar el archivo actual?
                                                                                 </p>
 
@@ -802,7 +802,7 @@ Mi perfil- {{$cliente->name}}
                                                                                                 </p>
                                                                                             @endif
                                                                                             <p class="text-center">
-                                                                                                Se ha cargado tu archivo con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
+                                                                                                Se ha cargado tu <strong>Firma</strong> con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
                                                                                                 ¿Quieres reemplazar el archivo actual?
                                                                                             </p>
 
@@ -922,7 +922,7 @@ Mi perfil- {{$cliente->name}}
                                                                         <div class="col-3 form-group p-3 mt-2">
 
                                                                             <p class="text-center">
-                                                                                Se ha cargado tu archivo con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
+                                                                                Se ha cargado tu archivo con exito-- <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
                                                                                 ¿Quieres reemplazar el archivo actual?
                                                                             </p>
 
@@ -1071,7 +1071,7 @@ Mi perfil- {{$cliente->name}}
                                                                                                 <div class="col-3 form-group p-3 mt-2">
 
                                                                                                     <p class="text-center">
-                                                                                                        Se ha cargado tu archivo con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
+                                                                                                        Se ha cargado tu archivo con exito- <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
                                                                                                         ¿Quieres reemplazar el archivo actual?
                                                                                                     </p>
 
