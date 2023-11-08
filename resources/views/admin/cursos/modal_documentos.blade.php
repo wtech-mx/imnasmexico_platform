@@ -239,7 +239,7 @@
                                             @if ($order->User->Documentos)
                                                 @if ($order->User->Documentos->firma !== null)
                                                 <div class="form-group col-6 gc_cn">
-                                                    <label for="name">Firma Personal *</label>
+                                                    <label for="name">Firma Personal -*</label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <img class="img_profile_label" src="{{asset('assets/user/icons/firma-digital.png')}}" alt="" width="30px">
@@ -260,7 +260,7 @@
 
                                                 @else
                                                 <div class="form-group col-6 gc_cn">
-                                                    <label for="name">Firma Personal *</label>
+                                                    <label for="name">Firma Personal -*</label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <img class="img_profile_label" src="{{asset('assets/user/icons/firma-digital.png')}}" alt="" width="30px">
@@ -268,13 +268,15 @@
                                                         <input id="firma" name="firma" type="file" class="form-control">
                                                     </div>
                                                     @if (pathinfo($order->User->Documentos->firma, PATHINFO_EXTENSION) == 'pdf')
-                                                        <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->firma) }}" download="{{ $order->User->Documentos->firma }}" style="background: #836262; border-radius: 19px;">
-                                                            Descargar Documento
-                                                        </a>
+                                                    <iframe class="mt-2" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil)}}" style="width: 60%; height: 60px;"></iframe>
+                                                    <p class="text-center ">
+                                                        <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                                    </p>
                                                     @else
-                                                        <div class="input-group">
-                                                            <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->firma) }}" alt="Imagen" style="width: 100px;height: 100px;">
-                                                        </div>
+                                                    <p class="text-center mt-2">
+                                                        <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                        <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
+                                                    </p>
                                                     @endif
 
                                                 </div>
@@ -297,7 +299,10 @@
                                                                         Descargar Documento
                                                                     </a>
                                                                 @else
-                                                                    <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" alt="Imagen" style="width: 100px;height: 100px;">
+                                                                    <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" alt="Imagen" style="width: 100px;height: 100px;"> <br>
+                                                                    <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" download="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" style="background: #836262; border-radius: 19px;">
+                                                                        Descargar
+                                                                    </a>
                                                                 @endif
                                                         </div>
                                                     @endif
