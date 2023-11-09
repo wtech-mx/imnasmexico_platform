@@ -18,9 +18,6 @@ return new class extends Migration
             $table->string('foto_pago')->nullable();
 
             $table->unsignedBigInteger('id_admin');
-            $table->foreign('id_admin')
-                ->references('id')->on('users')
-                ->inDelete('set null');
 
             $table->string('nombre')->nullable();
             $table->string('telefono')->nullable();
