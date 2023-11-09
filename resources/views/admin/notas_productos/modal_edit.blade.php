@@ -17,26 +17,43 @@
                         <div class="col-12">
                             <h5>Datos del cliente</h5>
                         </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="name">Nombre</label>
-                                <input id="name" name="name" type="text" class="form-control" value="{{ $nota->User->name }}" >
+                        @if ($nota->id_usuario == NULL)
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Nombre</label>
+                                    <input id="name" name="name" type="text" class="form-control" value="{{ $nota->nombre }}" >
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="name">Correo</label>
-                                <input id="email" name="email" type="email" class="form-control" value="{{ $nota->User->email }}">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Telefono</label>
+                                    <input id="telefono" name="telefono" type="number" class="form-control" value="{{ $nota->telefono }}">
+                                </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Nombre</label>
+                                    <input id="name" name="name" type="text" class="form-control" value="{{ $nota->User->name }}" >
+                                </div>
+                            </div>
 
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="name">Telefono</label>
-                                <input id="telefono" name="telefono" type="number" class="form-control" value="{{ $nota->User->telefono }}">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Correo</label>
+                                    <input id="email" name="email" type="email" class="form-control" value="{{ $nota->User->email }}">
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Telefono</label>
+                                    <input id="telefono" name="telefono" type="number" class="form-control" value="{{ $nota->User->telefono }}">
+                                </div>
+                            </div>
+                        @endif
+
 
                         <div class="col-6">
                             <div class="form-group">

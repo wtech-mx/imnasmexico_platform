@@ -15,40 +15,79 @@ use Session;
 use Hash;
 use DB;
 use Codexshaper\WooCommerce\Facades\Product;
+use Illuminate\Contracts\Database\Eloquent\Builder;
+use Carbon\Carbon;
 
 
 class NotasProductosController extends Controller
 {
     public function index(){
-        $notas = NotasProductos::orderBy('id','DESC')->get();
+        $now = Carbon::now();
+        $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+        $notas = NotasProductos::whereDate('fecha', $now->toDateString())
+        ->orderBy('id','DESC')->get();
         $products = Products::orderBy('nombre','ASC')->get();
 
-        return view('admin.notas_productos.index', compact('notas', 'products'));
+        return view('admin.notas_productos.index', compact('notas', 'products', 'clientes', 'administradores'));
+    }
+
+    public function buscador(Request $request){
+        $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+        $products = Products::orderBy('nombre','ASC')->get();
+        $id_client = $request->id_client;
+        $phone = $request->phone;
+        $admin = $request->administradores;
+        if ($id_client !== 'null' && $id_client !== null) {
+            $notas = NotasProductos::where('id_usuario', $id_client)->get();
+        } elseif ($phone !== 'null' && $phone !== null) {
+            $notas = NotasProductos::where('id_usuario', $phone)->get();
+        }
+        if ($admin !== 'null' && $admin !== null) {
+            $notas = NotasProductos::where('id_admin', $admin)->get();
+        }
+
+        return view('admin.notas_productos.index',compact('notas', 'products', 'clientes', 'administradores'));
+    }
+
+    public function create(){
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+        $products = Products::orderBy('nombre','ASC')->get();
+
+        return view('admin.notas_productos.create', compact('products', 'clientes'));
     }
 
     public function store(request $request){
         // Creacion de user
         $code = Str::random(8);
 
-        if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
-            if (User::where('telefono', $request->telefono)->exists()) {
-                $user = User::where('telefono', $request->telefono)->first();
+        $notas_productos = new NotasProductos;
+        if($request->get('email') == NULL){
+            $notas_productos->nombre = $request->get('name');
+            $notas_productos->telefono = $request->get('telefono');
+        }else{
+            if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+                if (User::where('telefono', $request->telefono)->exists()) {
+                    $user = User::where('telefono', $request->telefono)->first();
+                } else {
+                    $user = User::where('email', $request->email)->first();
+                }
+                $payer = $user;
             } else {
-                $user = User::where('email', $request->email)->first();
+                $payer = new User;
+                $payer->name = $request->get('name');
+                $payer->email = $request->get('email');
+                $payer->username = $request->get('telefono');
+                $payer->code = $code;
+                $payer->telefono = $request->get('telefono');
+                $payer->cliente = '1';
+                $payer->password = Hash::make($request->get('telefono'));
+                $payer->save();
+                $datos = User::where('id', '=', $payer->id)->first();
+                // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
             }
-            $payer = $user;
-        } else {
-            $payer = new User;
-            $payer->name = $request->get('name');
-            $payer->email = $request->get('email');
-            $payer->username = $request->get('telefono');
-            $payer->code = $code;
-            $payer->telefono = $request->get('telefono');
-            $payer->cliente = '1';
-            $payer->password = Hash::make($request->get('telefono'));
-            $payer->save();
-            $datos = User::where('id', '=', $payer->id)->first();
-            // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+            $notas_productos->id_usuario = $payer->id;
         }
 
         $dominio = $request->getHost();
@@ -58,16 +97,41 @@ class NotasProductosController extends Controller
             $pago_fuera = public_path() . '/pagos';
         }
 
-        $notas_productos = new NotasProductos;
-        $notas_productos->id_usuario = $payer->id;
+        if($request->get('tipo_nota') == NULL){
+            $notas_productos->tipo_nota = 'Cotizacion';
+        }else{
+            $notas_productos->tipo_nota = 'Venta Presencial';
+        }
+
+        $descuento = floatval($request->get('descuento', 0));
+
+        $nuevosCampos4 = $request->input('campo4', []);
+        $nuevosCampos4 = array_map('floatval', $nuevosCampos4); // Convierte a números
+        $sumaCampo4 = array_sum($nuevosCampos4);
+        // Aplicar descuento si $descuento es mayor que 0
+        if ($descuento > 0) {
+            $descuentoAplicado = $sumaCampo4 * ($descuento / 100);
+            $totalConDescuento = $sumaCampo4 - $descuentoAplicado;
+        } else {
+            $descuentoAplicado = 0;
+            $totalConDescuento = $sumaCampo4;
+        }
+
         $notas_productos->metodo_pago = $request->get('metodo_pago');
         $notas_productos->fecha = $request->get('fecha');
+        $notas_productos->tipo = $sumaCampo4;
         $notas_productos->restante = $request->get('descuento');
-        $notas_productos->total = $request->get('totalDescuento');
+        $notas_productos->total = $totalConDescuento;
         $notas_productos->nota = $request->get('nota');
         $notas_productos->metodo_pago2 = $request->get('metodo_pago2');
         $notas_productos->monto = $request->get('monto');
         $notas_productos->monto2 = $request->get('monto2');
+        if($request->get('envio') == NULL){
+            $notas_productos->envio = 'No';
+        }else{
+            $notas_productos->envio = 'Si';
+        }
+        $notas_productos->id_admin = auth()->user()->id;
 
         if ($request->hasFile("foto_pago2")) {
             $file = $request->file('foto_pago2');
@@ -92,9 +156,18 @@ class NotasProductosController extends Controller
                 $notas_inscripcion->save();
             }
         }
+        if($request->get('envio') != NULL){
+            $notas_inscripcion = new ProductosNotasId;
+            $notas_inscripcion->id_notas_productos = $notas_productos->id;
+            $notas_inscripcion->producto = 'Costo de envio';
+            $notas_inscripcion->price = '250.00';
+            $notas_inscripcion->cantidad = '1';
+            $notas_inscripcion->save();
+        }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->back()->with('success', 'Envio de correo exitoso.');
+        return redirect()->route('notas_productos.index')
+        ->with('success', 'Creado exitosamente.');
     }
 
     public function update(Request $request, $id){

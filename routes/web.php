@@ -320,9 +320,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/notas/paquete/store', [App\Http\Controllers\NotasCursosController::class, 'store_paquete'])->name('notas_cursos.store_paquete');
 
     Route::get('/admin/notas/productos', [App\Http\Controllers\NotasProductosController::class, 'index'])->name('notas_productos.index');
+    Route::get('/admin/productos/create', [App\Http\Controllers\NotasProductosController::class, 'create'])->name('notas_productos.create');
     Route::post('/admin/notas/productos/store', [App\Http\Controllers\NotasProductosController::class, 'store'])->name('notas_productos.store');
     Route::get('/admin/notas/productos/edit/{id}', [App\Http\Controllers\NotasProductosController::class, 'edit'])->name('notas_productos.edit');
     Route::patch('/admin/notas/productos/update/{id}', [App\Http\Controllers\NotasProductosController::class, 'update'])->name('notas_productos.update');
+    Route::get('/admin/notas/productos/buscador', [App\Http\Controllers\NotasProductosController::class, 'buscador'])->name('advance_productos.buscador');
 
     Route::delete('/admin/notas/productos/delete/{id}', [App\Http\Controllers\NotasProductosController::class, 'delete'])->name('notas_productos.delete');
     Route::post('/admin/productos/update/', [App\Http\Controllers\NotasProductosController::class, 'update_productos'])->name('notas_productos.productos');
