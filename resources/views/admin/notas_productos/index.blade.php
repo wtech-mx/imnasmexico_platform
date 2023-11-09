@@ -40,7 +40,7 @@
                             <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
                                 <h5>Filtro</h5>
                                     <div class="row">
-                                        <div class="col-3">
+                                        {{-- <div class="col-3">
                                             <label for="user_id">Seleccionar cliente:</label>
                                             <select class="form-control cliente" name="id_client" id="id_client">
                                                 <option selected value="">seleccionar cliente</option>
@@ -57,7 +57,7 @@
                                                     <option value="{{ $client->id }}">{{ $client->telefono }}</option>
                                                 @endforeach
                                             </select>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-3">
                                             <label for="user_id">Seleccionar Usuario:</label>
                                             <select class="form-control administradores" name="administradores" id="administradores">
