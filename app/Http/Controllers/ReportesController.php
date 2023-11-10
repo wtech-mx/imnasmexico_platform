@@ -69,6 +69,7 @@ class ReportesController extends Controller
                 ->where('estatus', '1')
                 ->where('pago', '>','0')
                 ->where('forma_pago', '=','Externo')
+                ->where('forma_pago', '=','Transferencia Inbursa')
                 ->orderBy('fecha','DESC')
             ->get();
 
