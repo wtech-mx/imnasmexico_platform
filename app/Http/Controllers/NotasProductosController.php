@@ -307,4 +307,22 @@ class NotasProductosController extends Controller
         return redirect()->back()->with('success', 'Se ha actualizada');
     }
 
+    public function eliminar($id){
+        // Encuentra la nota por su ID
+        $nota = NotasProductos::find($id);
+
+        // Elimina todos los productos relacionados
+        $nota->ProductosNotasId()->delete();
+
+        // Verifica si la nota existe
+        if (!$nota) {
+            abort(404, 'La nota no existe');
+        }
+
+        // Elimina la nota
+        $nota->delete();
+
+        // Redirecciona o responde según tus necesidades
+        return redirect()->back()->with('success', 'La nota se eliminó correctamente');
+    }
 }

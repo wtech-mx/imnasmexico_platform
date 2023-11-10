@@ -148,8 +148,13 @@
                                                         <i class="fa fa-whatsapp"></i>
                                                     </a>
                                                     @endif
-
                                                 @endcan
+                                                <form action="{{ route('notas.eliminar', ['id' => $nota->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+
+                                                    <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar esta nota?')">Eliminar Nota</button>
+                                                </form>
                                             </td>
                                         </tr>
                                         @include('admin.notas_productos.modal_edit')

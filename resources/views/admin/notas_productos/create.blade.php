@@ -83,7 +83,7 @@
                                             <div id="camposContainer">
                                                 <div class="campo mt-3">
                                                     <div class="row">
-                                                        <div class="col-6">
+                                                        <div class="col-4">
                                                             <label for="">Producto</label>
                                                             <div class="form-group">
                                                                 <select name="campo[]" class="form-select d-inline-block producto">
@@ -95,7 +95,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="form-group col-3">
+                                                        <div class="form-group col-2">
                                                             <label for="name">Cantidad *</label>
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text" id="basic-addon1">
@@ -105,13 +105,30 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="form-group col-3">
+                                                        <div class="form-group col-2">
+                                                            <label for="name">Descuento (%)</label>
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
+                                                                </span>
+                                                                <input type="number" name="descuento_prod[]" class="form-control d-inline-block descuento_prod" value="0">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-2">
                                                             <label for="name">Subtotal *</label>
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text" id="basic-addon1">
                                                                     <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                                                 </span>
                                                                 <input type="text" name="campo4[]" class="form-control d-inline-block subtotal" readonly>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-2">
+                                                            <label for="name">Quitar</label>
+                                                            <div class="input-group mb-3">
+                                                                <button type="button" class="btn btn-danger btn-sm eliminarCampo"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                             </div>
                                                         </div>
 
@@ -273,17 +290,33 @@
         $(document).ready(function() {
             $('.producto').select2();
 
-            // Función para asociar eventos al campo de cantidad
-            function asociarEventosCantidad(cantidadInput) {
+            // Función para asociar eventos al campo de cantidad y descuento
+            function asociarEventosCampos(cantidadInput, descuentoInput) {
                 cantidadInput.addEventListener('input', function() {
+                    actualizarSubtotal();
+                });
+
+                cantidadInput.addEventListener('blur', function() {
+                    actualizarSubtotal();
+                });
+
+                descuentoInput.addEventListener('input', function() {
                     actualizarSubtotal();
                 });
             }
 
-            // Asociar eventos al campo de cantidad original
-            var cantidadOriginal = document.querySelector('.campo .cantidad');
-            asociarEventosCantidad(cantidadOriginal);
+            // Función para eliminar un campo
+            function eliminarCampo(campo) {
+                campo.remove();
+                actualizarSubtotal();
+            }
 
+            // Asociar eventos al campo de cantidad y descuento original
+            var cantidadOriginal = document.querySelector('.campo .cantidad');
+            var descuentoOriginal = document.querySelector('.campo .descuento_prod');
+            asociarEventosCampos(cantidadOriginal, descuentoOriginal);
+
+            // Agregar campo duplicado
             agregarCampoBtn.addEventListener('click', function() {
                 var nuevoCampo = campoExistente.cloneNode(true);
                 camposContainer.appendChild(nuevoCampo);
@@ -291,23 +324,38 @@
                 // Limpiar los valores en el nuevo campo
                 nuevoCampo.querySelector('.producto').value = '';
                 nuevoCampo.querySelector('.cantidad').value = '';
+                nuevoCampo.querySelector('.descuento_prod').value = '0';
                 nuevoCampo.querySelector('.subtotal').value = '0.00';
 
                 // Asignar los eventos a los nuevos campos
                 nuevoCampo.querySelector('.producto').addEventListener('change', actualizarSubtotal);
 
-                // Obtener el campo de cantidad del nuevo campo
+                // Obtener los campos de cantidad y descuento del nuevo campo
                 var cantidadInput = nuevoCampo.querySelector('.cantidad');
+                var descuentoInput = nuevoCampo.querySelector('.descuento_prod');
 
-                // Asociar eventos al nuevo campo de cantidad
-                asociarEventosCantidad(cantidadInput);
+                // Asociar eventos al nuevo campo de cantidad y descuento
+                asociarEventosCampos(cantidadInput, descuentoInput);
 
                 // Eliminar la clase 'select2-hidden-accessible' y la data de select2 antes de clonar
                 $(nuevoCampo).find('.producto').removeClass('select2-hidden-accessible').next().remove();
 
                 // Inicializar select2 después de clonar
                 $(nuevoCampo).find('.producto').select2();
+
+                // Agregar evento para eliminar el nuevo campo
+                var eliminarCampoBtn = nuevoCampo.querySelector('.eliminarCampo');
+                eliminarCampoBtn.addEventListener('click', function() {
+                    eliminarCampo(nuevoCampo);
+                });
             });
+
+            // Agregar evento para eliminar el campo original
+            var eliminarCampoBtnOriginal = document.querySelector('.campo .eliminarCampo');
+            eliminarCampoBtnOriginal.addEventListener('click', function() {
+                eliminarCampo(document.querySelector('.campo'));
+            });
+
         });
 
         camposContainer.addEventListener('change', function(event) {
@@ -319,28 +367,34 @@
         function actualizarSubtotal() {
             var camposProductos = camposContainer.querySelectorAll('.campo .producto');
             var camposCantidades = camposContainer.querySelectorAll('.campo .cantidad');
+            var camposDescuentos = camposContainer.querySelectorAll('.campo .descuento_prod');
             var subtotales = camposContainer.querySelectorAll('.campo .subtotal');
             var total = 0;
 
             for (var i = 0; i < camposProductos.length; i++) {
                 var producto = camposProductos[i];
                 var cantidad = camposCantidades[i];
+                var descuento = camposDescuentos[i];
                 var subtotal = subtotales[i];
 
                 var precio = parseFloat(producto.options[producto.selectedIndex].getAttribute('data-precio_normal'));
                 var cantidadValor = parseInt(cantidad.value);
+                var descuentoValor = parseFloat(descuento.value);
 
                 var subtotalValor = isNaN(precio) || isNaN(cantidadValor) ? 0 : precio * cantidadValor;
-                subtotal.value = subtotalValor.toFixed(2);
 
-                total += subtotalValor;
+                // Aplicar el descuento al subtotal
+                var subtotalConDescuento = subtotalValor - (subtotalValor * (descuentoValor / 100));
+                subtotal.value = subtotalConDescuento.toFixed(2);
+
+                total += subtotalConDescuento;
             }
-            totalInput.value = total.toFixed(2);
-                console.log('totsl', total);
 
-            // Calcular el descuento
-            var descuento = parseFloat(descuentoInput.value);
-            var totalDescuento = total - (total * (descuento / 100));
+            totalInput.value = total.toFixed(2);
+
+            // Calcular el descuento total
+            var descuentoTotal = parseFloat(descuentoInput.value);
+            var totalDescuento = total - (total * (descuentoTotal / 100));
             totalDescuentoInput.value = totalDescuento.toFixed(2);
 
             // Sumar el costo de envío si el checkbox está marcado
@@ -348,6 +402,7 @@
             var totalConEnvio = totalDescuento + costoEnvio;
             totalDescuentoInput.value = totalConEnvio.toFixed(2);
         }
+
 
         // Manejar cambios en el estado del checkbox de envío
         document.getElementById('checkboxEnvio').addEventListener('change', actualizarSubtotal);
