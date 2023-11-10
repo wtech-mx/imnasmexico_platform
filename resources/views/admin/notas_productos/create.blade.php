@@ -147,7 +147,7 @@
                                         <label for="name">Subtotal *</label>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
+                                                <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                             </span>
                                             <input class="form-control total" type="text" id="total" name="total" value="0" readonly>
                                         </div>

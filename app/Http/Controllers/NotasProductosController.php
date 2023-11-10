@@ -22,11 +22,18 @@ use Carbon\Carbon;
 class NotasProductosController extends Controller
 {
     public function index(){
+
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+
         $now = Carbon::now();
         $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
-        $notas = NotasProductos::whereDate('fecha', $now->toDateString())
+
+
+        $notas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
         ->orderBy('id','DESC')->get();
+
         $products = Products::orderBy('nombre','ASC')->get();
 
         return view('admin.notas_productos.index', compact('notas', 'products', 'clientes', 'administradores'));
