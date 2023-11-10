@@ -21,46 +21,53 @@
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-12">
-                                        <h5 for="toggleSwitch">¿Venta Presencial?</h5>
-                                        <label for="toggleSwitch">Si</label>
-                                        <input type="checkbox" id="toggleSwitch" name="tipo_nota">
+
+                                    <div class="col-12 mt-2">
+                                        <h5 style="color:#836262"><strong>Datos del cliente</strong> </h5>
                                     </div>
 
-                                    <div class="col-12">
-                                        <h5>Datos del cliente</h5>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="name">Nombre *</label>
+                                    <div class="form-group col-6">
+                                        <label for="name">Nombre *</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
+                                            </span>
                                             <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" required>
                                         </div>
                                     </div>
 
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="name">Correo</label>
+                                    <div class="form-group col-6">
+                                        <label for="name">Correo</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
+                                            </span>
                                             <input id="email" name="email" type="email" class="form-control" placeholder="Correo">
                                         </div>
                                     </div>
 
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="name">Telefono *</label>
+                                    <div class="form-group col-6">
+                                        <label for="name">Telefono *</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
+                                            </span>
                                             <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10" required>
-
                                         </div>
                                     </div>
 
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="name">Fecha</label>
+                                    <div class="form-group col-6">
+                                        <label for="name">Fecha *</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
+                                            </span>
                                             <input id="fecha" name="fecha" type="date" class="form-control" value="{{$fecha}}" required>
                                         </div>
                                     </div>
 
-                                    <div class="col-12">
-                                        <h5>Seleciona los productos </h5>
+                                    <div class="col-12 mt-5">
+                                        <h5 style="color:#836262"><strong>Seleciona los productos</strong> </h5>
                                     </div>
 
                                     <div class="col-1">
@@ -87,60 +94,95 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <div class="col-3">
-                                                            <label for="">Cantidad</label>
-                                                            <div class="form-group">
+
+                                                        <div class="form-group col-3">
+                                                            <label for="name">Cantidad *</label>
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
+                                                                </span>
                                                                 <input type="number" name="campo3[]" class="form-control d-inline-block cantidad" >
                                                             </div>
                                                         </div>
-                                                        <div class="col-3">
-                                                            <label for="">Subtotal</label>
-                                                            <div class="form-group">
+
+                                                        <div class="form-group col-3">
+                                                            <label for="name">Subtotal *</label>
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                                </span>
                                                                 <input type="text" name="campo4[]" class="form-control d-inline-block subtotal" readonly>
                                                             </div>
                                                         </div>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-12">
-                                        <h5>Pago</h5>
+                                    <div class="col-12 mt-2 mb-3">
+                                        <h5 style="color:#836262"><strong>Pago</strong> </h5>
                                     </div>
 
-                                    <div class="col-12">
-                                        <h5 for="toggleSwitch">¿Agregar envio?</h5>
-                                        <label for="">Si</label>
-                                        <input type="checkbox" id="checkboxEnvio" name="envio">
+                                    <div class="col-12 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="checkboxEnvio" name="envio">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                <p class="" style="display: inline-block;font-size: 20px;padding: 5px;color: #3b8b00;">Si</p> <strong> (¿Agregar envio?)</strong>
+                                            </label>
+                                        </div>
                                     </div>
 
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="name">Subtotal</label>
+                                    <div class="col-12 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="toggleSwitch" name="tipo_nota">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                <p class="" style="display: inline-block;font-size: 20px;padding: 5px;color: #3b8b00;">Si</p> <strong> (¿Venta Presencial?)</strong>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <label for="name">Subtotal *</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
+                                            </span>
                                             <input class="form-control total" type="text" id="total" name="total" value="0" readonly>
                                         </div>
                                     </div>
 
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="name">Descuento</label>
+                                    <div class="form-group col-4">
+                                        <label for="name">Descuento</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
+                                            </span>
                                             <input class="form-control" type="number" id="descuento" name="descuento" value="0">
                                         </div>
                                     </div>
 
-                                    <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="name">Total</label>
+
+                                    <div class="form-group col-4">
+                                        <label for="name">Total</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" alt="" width="35px">
+                                            </span>
                                             <input class="form-control" type="text" id="totalDescuento" name="totalDescuento" readonly>
                                         </div>
                                     </div>
 
                                     <div id="divToToggle" style="display: none;">
                                         <div class="row">
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label for="name">Metodo de pago</label>
+
+                                            <div class="form-group col-4">
+                                                <label for="name">Metodo de pago</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/payment.png') }}" alt="" width="35px">
+                                                    </span>
                                                     <select class="form-select" name="metodo_pago" id="metodo_pago">
                                                         <option value="Efectivo">Efectivo</option>
                                                         <option value="Tarjeta Credito/debito">Tarjeta Credito/debito</option>
@@ -149,23 +191,32 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label for="name">Monto</label>
+                                            <div class="form-group col-4">
+                                                <label for="name">Monto</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/money.png') }}" alt="" width="35px">
+                                                    </span>
                                                     <input class="form-control" type="text" id="monto" name="monto" value="0">
                                                 </div>
                                             </div>
 
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label for="name">Foto Pago</label>
+                                            <div class="form-group col-4">
+                                                <label for="name">Foto Pago</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                                    </span>
                                                     <input class="form-control" type="file" id="foto_pago2" name="foto_pago2">
                                                 </div>
                                             </div>
 
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="name">Metodo de pago 2</label>
+                                            <div class="form-group col-4">
+                                                <label for="name">Metodo de pago 2</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/payment.png') }}" alt="" width="35px">
+                                                    </span>
                                                     <select class="form-select" name="metodo_pago2" id="metodo_pago2">
                                                         <option value="">Seleccione metodo de pago</option>
                                                         <option value="Efectivo">Efectivo</option>
@@ -175,12 +226,16 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label for="name">Monto 2</label>
+                                            <div class="form-group col-4">
+                                                <label for="name">Monto 2</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/money.png') }}" alt="" width="35px">
+                                                    </span>
                                                     <input class="form-control" type="text" id="monto2" name="monto2">
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
 
