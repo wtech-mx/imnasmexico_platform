@@ -130,6 +130,9 @@
                                             </td>
                                             <td>{{ $nota->total }}</td>
                                             <td>
+                                                <a class="btn btn-sm btn-success text-white" target="_blank" href="{{ route('notas_productos.imprimir', ['id' => $nota->id]) }}">
+                                                    <i class="fa fa-pdf"></i>
+                                                </a>
                                                 @can('nota-productos-editar')
                                                     <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_nota_{{ $nota->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                                         <i class="fa fa-fw fa-edit"></i>
@@ -152,9 +155,9 @@
                                                 <form action="{{ route('notas.eliminar', ['id' => $nota->id]) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-
-                                                    <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar esta nota?')">Eliminar Nota</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta nota?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                 </form>
+
                                             </td>
                                         </tr>
                                         @include('admin.notas_productos.modal_edit')

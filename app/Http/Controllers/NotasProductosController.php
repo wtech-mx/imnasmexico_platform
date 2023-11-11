@@ -238,6 +238,19 @@ class NotasProductosController extends Controller
         return redirect()->back()->with('success', 'Se ha actualizada');
     }
 
+    public function imprimir($id){
+        $diaActual = date('Y-m-d');
+        $today =  date('d-m-Y');
+
+        $nota = NotasProductos::find($id);
+
+        $nota_productos = ProductosNotasId::where('id_notas_productos', $nota->id)->get();
+
+        $pdf = \PDF::loadView('admin.notas_productos.pdf_nota', compact('nota', 'today', 'nota_productos'));
+         return $pdf->stream();
+        //return $pdf->download('Reporte Caja '.$today.'.pdf');
+    }
+
     public function delete($id)
     {
         $registro = ProductosNotasId::find($id); // Buscar el registro por su ID
