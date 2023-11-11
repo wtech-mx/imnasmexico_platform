@@ -521,7 +521,7 @@
                     <img class="icon_nav_course" src="{{asset('assets/user/icons/documentos.png')}}" alt="">
                 </div>
                     <div class="row">
-                            @if ($curso->redconocer == 'Diplomado en DERMAPEN')
+                            @if ($curso->nombre == 'Diplomado en DERMAPEN')
                                 <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
                                     <div class="d-flex justify-content-center">
                                         <div class="card_certificaciones" style="position: relative">
