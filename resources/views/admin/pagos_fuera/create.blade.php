@@ -1,16 +1,9 @@
+<div id="rightPanel" class="right-panel">
+    <!-- Contenido del panel derecho -->
+    <div class="close-btn" onclick="closeRightPanel()">Cerrar</div>
+    <div class="panel-content">
 
--<!-- Modal -->
-<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="createDataModalLabel">Crear pago externo</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
-                    <span aria-hidden="true">X</span>
-                </button>
-            </div>
-
-            <form method="POST" action="{{ route('pagos.store') }}" enctype="multipart/form-data" role="form">
+            <form method="POST" action="{{ route('pagos.store') }}" enctype="multipart/form-data" role="form" id="tuFormulario">
                 @csrf
 
                 <input id="fecha_hora_1" name="fecha_hora_1" type="hidden"  value="{{ $fechaActual }}">
@@ -88,7 +81,7 @@
 
                             <div class="form-group col-12">
                                 <label class="mt-2">Curso</label> <br>
-                                <select name="campo1" class="form-select d-inline-block" style="width: 70%!important;">
+                                <select name="campo1" class="form-select d-inline-block curso" style="width: 70%!important;">
                                     <option value="">Seleccione Curso</option>
                                     @foreach ($cursos as $curso)
                                     <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
@@ -187,11 +180,10 @@
 
                     </div>
 
-                <div class="modal-footer">
-                    <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
-                </div>
+                    <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff" id="btnGuardar">Guardar</button>
+
 
             </form>
+
         </div>
     </div>
-</div>

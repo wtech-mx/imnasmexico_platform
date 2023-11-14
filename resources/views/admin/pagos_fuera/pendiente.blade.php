@@ -3,7 +3,34 @@
 @section('template_title')
     Pagos por Fuera
 @endsection
+<style>
+    .right-panel {
+        position: fixed;
+        top: 0;
+        right: -900px; /* Oculto inicialmente */
+        width: 600px;
+        height: 100%;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
+    }
 
+    .panel-content {
+        padding: 20px;
+        /* Estilos adicionales para el contenido del panel */
+    }
+
+    .close-btn {
+        cursor: pointer;
+        padding: 10px;
+        background-color: #ddd;
+        text-align: center;
+        margin-top: 65px;
+    }
+
+</style>
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -20,7 +47,7 @@
                                 ¿Como funciona?
                             </a>
 
-                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            <a type="button" class="btn bg-gradient-primary" onclick="openRightPanel()" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 Crear
                             </a>
                         </div>
@@ -78,12 +105,19 @@
   <script type="text/javascript">
 
     $(document).ready(function() {
-        $('.campo1').select2();
+        $('.curso').select2();
     });
 
   </script>
 
 <script>
+function openRightPanel() {
+    document.getElementById("rightPanel").style.right = "0";
+}
+
+function closeRightPanel() {
+    document.getElementById("rightPanel").style.right = "-600px";
+}
 
     $(document).ready(function() {
         // Esconde el contenedor del campo "Abono" inicialmente
@@ -128,5 +162,40 @@
         });
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('tuFormulario');
+        var btnGuardar = document.getElementById('btnGuardar');
+
+        btnGuardar.addEventListener('click', function() {
+            // Habilitar el atributo 'required' en los campos del formulario
+            var inputs = form.querySelectorAll('[data-required]');
+            inputs.forEach(function(input) {
+                input.setAttribute('required', 'required');
+            });
+
+            // Deshabilitar el botón
+            this.setAttribute('disabled', 'disabled');
+
+            // Verificar la validez del formulario antes de enviarlo
+            if (form.checkValidity()) {
+                form.submit();
+            } else {
+                // Habilitar nuevamente el botón si el formulario no es válido
+                btnGuardar.removeAttribute('disabled');
+            }
+        });
+
+        form.addEventListener('submit', function(event) {
+            // Deshabilitar el atributo 'required' en los campos del formulario antes de enviarlo
+            var inputs = form.querySelectorAll('[data-required]');
+            inputs.forEach(function(input) {
+                input.removeAttribute('required');
+            });
+        });
+    });
+</script>
+
+
 
 @endsection
