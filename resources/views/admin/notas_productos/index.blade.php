@@ -84,9 +84,7 @@
                                         <th>No</th>
                                         <th>Cliente</th>
                                         <th>Tipo</th>
-                                        <th>Metodo de Pago</th>
                                         <th>fecha</th>
-                                        <th>Descuento</th>
                                         <th>Total</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -109,13 +107,6 @@
                                                     <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
                                                 @endif
                                             </td>
-                                            @if ($nota->metodo_pago == "Efectivo")
-                                                <td> <label class="badge" style="color: #009ee3;background-color: #009ee340;">Efectivo</label> </td>
-                                            @elseif ($nota->metodo_pago == "Tarjeta Credito/debito")
-                                                <td> <label class="badge" style="color: #746AB0;background-color: #746ab061;">Tarjeta Credito/debito</label> </td>
-                                            @elseif ($nota->metodo_pago == "Transferencia")
-                                                <td> <label class="badge" style="color: #746AB0;background-color: #746ab061;">Transferencia</label> </td>
-                                            @endif
                                             <td>
                                                 @php
                                                 $fecha = $nota->fecha;
@@ -124,20 +115,11 @@
                                                 @endphp
                                                 {{$fecha_formateada}}
                                             </td>
-                                            <td>
-                                                  - {{ $nota->restante }}  %
-
-                                            </td>
                                             <td>{{ $nota->total }}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-success text-white" target="_blank" href="{{ route('notas_productos.imprimir', ['id' => $nota->id]) }}">
-                                                    <i class="fa fa-pdf"></i>
+                                                <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_productos.imprimir', ['id' => $nota->id]) }}">
+                                                    <i class="fa fa-file"></i>
                                                 </a>
-                                                @can('nota-productos-editar')
-                                                    <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_nota_{{ $nota->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                                        <i class="fa fa-fw fa-edit"></i>
-                                                    </a>
-                                                @endcan
                                                 @php
                                                     $total = 0;$totalCantidad = 0;
                                                 @endphp
@@ -151,6 +133,11 @@
                                                         <i class="fa fa-whatsapp"></i>
                                                     </a>
                                                     @endif
+                                                @endcan
+                                                @can('nota-productos-editar')
+                                                    <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_nota_{{ $nota->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                        <i class="fa fa-fw fa-edit"></i>
+                                                    </a>
                                                 @endcan
                                                 <form action="{{ route('notas.eliminar', ['id' => $nota->id]) }}" method="POST">
                                                     @csrf
