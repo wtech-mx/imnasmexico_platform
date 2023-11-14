@@ -85,6 +85,10 @@ class HomeController extends Controller
             ->whereIn('id_usuario', $userIds)
             ->delete();
 
+            DB::table('enviosorder')
+            ->whereIn('id_user', $userIds)
+            ->delete();
+
             DB::table('orders')
             ->whereIn('id_usuario', $userIds)
             ->delete();
