@@ -171,6 +171,10 @@ class OrderController extends Controller
         $preference->external_reference = $code;
         $preference->items = $ticketss;
 
+        $request->validate([
+            'name' => 'required|string|regex:/^[^@.%\/&$#]+$/',
+        ]);
+
         if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
             if (User::where('telefono', $request->telefono)->exists()) {
                 $user = User::where('telefono', $request->telefono)->first();
@@ -259,8 +263,6 @@ class OrderController extends Controller
     }
 
     public function envios_update(Request $request,$id){
-
-
         $envios = EnviosOrder::find($id);
         $envios->estatus = $request->get('estatus');
         $envios->update();
@@ -420,6 +422,9 @@ class OrderController extends Controller
 
     public function pay_stripe(Orders $order, Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|regex:/^[^@.%\/&$#]+$/',
+        ]);
         $code = Str::random(8);
         if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
             if (User::where('telefono', $request->telefono)->exists()) {
@@ -676,6 +681,9 @@ class OrderController extends Controller
     public function clases_gratis(Request $request)
     {
 
+        $request->validate([
+            'name' => 'required|string|regex:/^[^@.%\/&$#]+$/',
+        ]);
 
         $code = Str::random(8);
         $fechaActual = date('Y-m-d');

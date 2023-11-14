@@ -158,7 +158,7 @@
                                                         <div class="col-12">
                                                             <div class="input-group flex-nowrap mt-4">
                                                                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                                                                <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre(s) *" required>
+                                                                <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre(s) *" pattern="[^@.%/&$#]+" required>
                                                             </div>
                                                         </div>
 
@@ -186,7 +186,7 @@
                                                         <div class="col-12">
                                                             <div class="input-group flex-nowrap mt-4">
                                                                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
-                                                                <input type="number" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono *" required>
+                                                                <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control input_custom_checkout" placeholder="55-55-55-55-55" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
                                                             </div>
                                                         </div>
 
