@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Lista de {{$curso->nombre}} / {{$curso->fecha_inicial}}
+    Lista de {{$curso->nombre}} / {{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)->translatedFormat('l j \\de F \\de Y')) }}
 @endsection
 @section('css')
 <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -253,11 +253,26 @@
                         extend: 'print',
                         text: 'Imprimir',
                         exportOptions: {
-                            columns: ':visible'
+                            columns: ':visible',
+                            modifier: {
+                                styles: {
+                                    fontSize: '80px' // Tamaño de letra más grande para exportación PDF
+                                }
+                            }
                         }
                     },
                     'excel',
-                    'pdf',
+                    {
+                        extend: 'pdfHtml5',
+                        customize: function(doc) {
+                            // Establecer el tamaño de fuente para el documento PDF
+                            doc.defaultStyle.fontSize = 14;
+
+                            // Establecer el tamaño de fuente para el encabezado
+                            doc.content[0].fontSize = 20;
+
+                        }
+                    },
                     'colvis'
                 ],
                 responsive: false,
