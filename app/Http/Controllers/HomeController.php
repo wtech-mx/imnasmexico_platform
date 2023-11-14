@@ -69,29 +69,21 @@ class HomeController extends Controller
 
             return view('user.home', compact('cursos', 'resultados', 'unam', 'tickets'));
         }else{
-            //  $userIds = User::where(function ($query) {
-            //     $query->where('name', 'like', '%@%')
-            //         ->orWhere(function ($query) {
-            //             $query->whereRaw('LENGTH(telefono) = 1')
-            //                 ->orWhereRaw('LENGTH(telefono) = 2')
-            //                 ->orWhereRaw('LENGTH(telefono) = 3')
-            //                 ->orWhereRaw('LENGTH(telefono) = 4');
-            //         });
-            // })->pluck('id');
 
-            // DB::table('orders_tickets')
-            // ->whereIn('id_usuario', $userIds)
-            // ->delete();
+             // Obtener IDs de usuarios con nombres que contienen "@"
+             $userIds = User::where(function ($query) {
+                $query->where('name', 'like', '%@%')
+            })->pluck('id');
 
-            // DB::table('enviosorder')
-            // ->whereIn('id_user', $userIds)
-            // ->delete();
+            DB::table('orders_tickets')
+            ->whereIn('id_usuario', $userIds)
+            ->delete();
 
-            // DB::table('orders')
-            // ->whereIn('id_usuario', $userIds)
-            // ->delete();
+            DB::table('orders')
+            ->whereIn('id_usuario', $userIds)
+            ->delete();
 
-            // User::whereIn('id', $userIds)->delete();
+            User::whereIn('id', $userIds)->delete();
 
             $fechaHoraActual = date('Y-m-d');
             $orders = Orders::where('fecha', $fechaHoraActual)
