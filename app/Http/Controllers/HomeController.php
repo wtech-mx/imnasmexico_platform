@@ -71,19 +71,19 @@ class HomeController extends Controller
         }else{
 
              // Obtener IDs de usuarios con nombres que contienen "@"
-             $userIds = User::where(function ($query) {
-                $query->where('name', 'like', '%@%')
-            })->pluck('id');
+            //  $userIds = User::where(function ($query) {
+            //     $query->where('name', 'like', '%@%')
+            // })->pluck('id');
 
-            DB::table('orders_tickets')
-            ->whereIn('id_usuario', $userIds)
-            ->delete();
+            // DB::table('orders_tickets')
+            // ->whereIn('id_usuario', $userIds)
+            // ->delete();
 
-            DB::table('orders')
-            ->whereIn('id_usuario', $userIds)
-            ->delete();
+            // DB::table('orders')
+            // ->whereIn('id_usuario', $userIds)
+            // ->delete();
 
-            User::whereIn('id', $userIds)->delete();
+            // User::whereIn('id', $userIds)->delete();
 
             $fechaHoraActual = date('Y-m-d');
             $orders = Orders::where('fecha', $fechaHoraActual)
