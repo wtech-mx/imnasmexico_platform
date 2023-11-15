@@ -275,8 +275,8 @@ class NotasProductosController extends Controller
         $nota_productos = ProductosNotasId::where('id_notas_productos', $nota->id)->get();
 
         $pdf = \PDF::loadView('admin.notas_productos.pdf_nota', compact('nota', 'today', 'nota_productos'));
-       return $pdf->stream();
-        //  return $pdf->download('Nota remision'. $id .'/'.$today.'.pdf');
+       // return $pdf->stream();
+         return $pdf->download('Nota remision'. $id .'/'.$today.'.pdf');
     }
 
     public function delete($id)
