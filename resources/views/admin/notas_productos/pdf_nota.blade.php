@@ -141,7 +141,11 @@
                         {{ $nota_producto->producto }}
                     </td>
                     @php
-                        $unit = $nota_producto->price / $nota_producto->cantidad;
+                        if($nota_producto->producto == NULL){
+                            $unit = 0;
+                        }else{
+                            $unit = $nota_producto->price / $nota_producto->cantidad;
+                        }
                     @endphp
                     <td>
                         ${{ $unit }}
