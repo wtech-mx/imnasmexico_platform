@@ -98,6 +98,7 @@
                                                     <th>Nombre</th>
                                                     <th>Metodo de Pago</th>
                                                     <th>Costo</th>
+                                                    <th>Documentacion</th>
                                                     <th>Deudor</th>
                                                     <th>Nota</th>
                                                     <th>Acciones</th>
@@ -114,8 +115,29 @@
                                                                     <p>{{ $order->User->email }}</p>
                                                                 </td>
                                                                 <td>{{ $order->Orders->forma_pago }}</td>
+                                                                <td>{{ $order->Orders->pago }}</td>
                                                                 <td>
-                                                                        {{ $order->Orders->pago }}
+                                                                    @if ($ticket->descripcion == 'Con opción a Documentos de certificadora IMNAS')
+                                                                        IMNAS
+                                                                    @elseif ($ticket->descripcion == 'Opción a certificación a masaje holístico EC0900')
+                                                                        Certificación a masaje holístico
+                                                                    @else
+                                                                        @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
+                                                                            IMNAS
+                                                                        @endif
+                                                                        @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
+                                                                            Titulo Honorifico -
+                                                                        @endif
+                                                                        @if ($ticket->Cursos->stps == '1')
+                                                                            STPS
+                                                                        @endif
+                                                                        @if ($ticket->Cursos->redconocer == '1')
+                                                                            RedConocer
+                                                                        @endif
+                                                                        @if ($ticket->Cursos->unam == '1')
+                                                                            UNAM
+                                                                        @endif
+                                                                    @endif
                                                                 </td>
                                                                 <td>
 
