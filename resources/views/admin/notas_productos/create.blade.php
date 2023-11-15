@@ -160,6 +160,15 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-12 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="toggleFactura" name="factura" value="1">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                <p class="" style="display: inline-block;font-size: 20px;padding: 5px;color: #3b8b00;">Si</p> <strong> (¿Factura?)</strong>
+                                            </label>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group col-4">
                                         <label for="name">Subtotal *</label>
                                         <div class="input-group mb-3">
@@ -256,13 +265,93 @@
                                         </div>
                                     </div>
 
+                                    <div id="divFactura" style="display: none;">
+                                        <div class="row">
+                                            <h5>Factura</h5>
+
+                                            <div class="form-group col-4">
+                                                <label for="name">Situacion Fiscal</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input class="form-control" type="file" id="situacion_fiscal" name="situacion_fiscal">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-4">
+                                                <label for="name">Nombre / Razon Social</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/firma-digital.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input class="form-control" type="text" id="razon_social" name="razon_social">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-4">
+                                                <label for="name">RFC</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/carta.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input class="form-control" type="text" id="rfc" name="rfc">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-4">
+                                                <label for="name">CFDI</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/monetary-policy.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <select class="form-select" name="cfdi" id="cfdi">
+                                                        <option value="">Seleccione CFDI</option>
+                                                        <option value="G01 Adquisicion de Mercancias">G01 Adquisicion de Mercancias</option>
+                                                        <option value="G02 Devoluciones, Descuentos o Bonificaciones">G02 Devoluciones, Descuentos o Bonificaciones</option>
+                                                        <option value="G03 Gastos en General">G03 Gastos en General</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-4">
+                                                <label for="name">Correo</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input class="form-control" type="text" id="correo_fac" name="correo_fac">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-4">
+                                                <label for="name">Telefono</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/complain.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input class="form-control" type="number" id="telefono_fac" name="telefono_fac">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label for="name">Direccion de Factura</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/cp.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input class="form-control" type="text" id="direccion_fac" name="direccion_fac">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="name">Comentario/nota</label>
                                             <textarea class="form-control" name="nota" id="nota" cols="30" rows="3"></textarea>
                                         </div>
                                     </div>
-
                                 </div>
 
                             </div>
@@ -365,47 +454,61 @@
         });
 
         function actualizarSubtotal() {
-            var camposProductos = camposContainer.querySelectorAll('.campo .producto');
-            var camposCantidades = camposContainer.querySelectorAll('.campo .cantidad');
-            var camposDescuentos = camposContainer.querySelectorAll('.campo .descuento_prod');
-            var subtotales = camposContainer.querySelectorAll('.campo .subtotal');
-            var total = 0;
+    var camposProductos = camposContainer.querySelectorAll('.campo .producto');
+    var camposCantidades = camposContainer.querySelectorAll('.campo .cantidad');
+    var camposDescuentos = camposContainer.querySelectorAll('.campo .descuento_prod');
+    var subtotales = camposContainer.querySelectorAll('.campo .subtotal');
 
-            for (var i = 0; i < camposProductos.length; i++) {
-                var producto = camposProductos[i];
-                var cantidad = camposCantidades[i];
-                var descuento = camposDescuentos[i];
-                var subtotal = subtotales[i];
+    var total = 0;
 
-                var precio = parseFloat(producto.options[producto.selectedIndex].getAttribute('data-precio_normal'));
-                var cantidadValor = parseInt(cantidad.value);
-                var descuentoValor = parseFloat(descuento.value);
+    for (var i = 0; i < camposProductos.length; i++) {
+        var producto = camposProductos[i];
+        var cantidad = camposCantidades[i];
+        var descuento = camposDescuentos[i];
+        var subtotal = subtotales[i];
 
-                var subtotalValor = isNaN(precio) || isNaN(cantidadValor) ? 0 : precio * cantidadValor;
+        var precio = parseFloat(producto.options[producto.selectedIndex].getAttribute('data-precio_normal'));
+        var cantidadValor = parseInt(cantidad.value);
+        var descuentoValor = parseFloat(descuento.value);
 
-                // Aplicar el descuento al subtotal
-                var subtotalConDescuento = subtotalValor - (subtotalValor * (descuentoValor / 100));
-                subtotal.value = subtotalConDescuento.toFixed(2);
+        var subtotalValor = isNaN(precio) || isNaN(cantidadValor) ? 0 : precio * cantidadValor;
 
-                total += subtotalConDescuento;
-            }
+        // Aplicar el descuento al subtotal
+        var subtotalConDescuento = subtotalValor - (subtotalValor * (descuentoValor / 100));
+        subtotal.value = subtotalConDescuento.toFixed(2);
 
-            totalInput.value = total.toFixed(2);
+        total += subtotalConDescuento;
+    }
 
-            // Calcular el descuento total
-            var descuentoTotal = parseFloat(descuentoInput.value);
-            var totalDescuento = total - (total * (descuentoTotal / 100));
-            totalDescuentoInput.value = totalDescuento.toFixed(2);
+    totalInput.value = total.toFixed(2);
 
-            // Sumar el costo de envío si el checkbox está marcado
-            var costoEnvio = document.getElementById('checkboxEnvio').checked ? 250 : 0;
-            var totalConEnvio = totalDescuento + costoEnvio;
-            totalDescuentoInput.value = totalConEnvio.toFixed(2);
-        }
+    // Calcular el descuento total
+    var descuentoTotal = parseFloat(descuentoInput.value);
+    var totalDescuento = total - (total * (descuentoTotal / 100));
+    totalDescuentoInput.value = totalDescuento.toFixed(2);
 
+    // Sumar el costo de envío si el checkbox está marcado
+    var costoEnvio = document.getElementById('checkboxEnvio').checked ? 250 : 0;
+    var totalConEnvio = totalDescuento + costoEnvio;
 
-        // Manejar cambios en el estado del checkbox de envío
-        document.getElementById('checkboxEnvio').addEventListener('change', actualizarSubtotal);
+    // Sumar el 16% si el checkbox de factura está marcado
+    var toggleFactura = document.getElementById('toggleFactura');
+    if (toggleFactura.checked) {
+        totalConEnvio *= 1.16;
+    }
+
+    // Actualizar el valor en el input
+    totalDescuentoInput.value = totalConEnvio.toFixed(2);
+}
+
+// Manejar cambios en el estado del checkbox de envío
+document.getElementById('checkboxEnvio').addEventListener('change', actualizarSubtotal);
+
+// Agregar un evento change al checkbox de factura
+document.getElementById('toggleFactura').addEventListener('change', actualizarSubtotal);
+
+// Llamar a la función inicialmente para establecer el valor inicial
+actualizarSubtotal();
 
         descuentoInput.addEventListener('keyup', function() {
             var descuento = parseFloat(descuentoInput.value);
@@ -420,6 +523,12 @@
         $('#toggleSwitch').change(function () {
             // Mostrar u ocultar el div basado en el estado del switch
             $('#divToToggle').toggle();
+        });
+
+        // Manejar el cambio de estado del switch
+        $('#toggleFactura').change(function () {
+            // Mostrar u ocultar el div basado en el estado del switch
+            $('#divFactura').toggle();
         });
     });
 </script>

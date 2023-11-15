@@ -95,13 +95,25 @@
         <tbody>
            <tr>
             <td>
-                {{ $nota->nombre }}
+                @if ($nota->nombre == NULL)
+                    {{ $nota->User->name }}
+                @else
+                    {{ $nota->nombre }}
+                @endif
             </td>
             <td>
-                {{ $nota->correo }}
+                @if ($nota->nombre == NULL)
+                    {{ $nota->User->email }}
+                @else
+                    {{ $nota->correo }}
+                @endif
             </td>
             <td>
-                {{ $nota->telefono }}
+                @if ($nota->nombre == NULL)
+                    {{ $nota->User->telefono }}
+                @else
+                    {{ $nota->telefono }}
+                @endif
             </td>
             <td>
                 {{ $nota->fecha }}
@@ -110,16 +122,16 @@
         </tbody>
     </table>
 
-    <table class="table text-center table-bordered border-primary">
-        <thead style="background-color: #836262; color: #fff">
+    <table class="table table-bordered border-primary">
+        <thead class="text-center" style="background-color: #836262; color: #fff">
             <tr>
                 <th>Cantidad</th>
                 <th>Producto</th>
-                <th>Precio</th>
-                <th>Subtotal</th>
+                <th>P.Unit</th>
+                <th>Importe</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-center">
             @foreach ($nota_productos as $nota_producto)
                 <tr>
                     <td>
@@ -128,20 +140,70 @@
                     <td>
                         {{ $nota_producto->producto }}
                     </td>
-                    <td>
-                        {{ $nota_producto->price }}
-                    </td>
                     @php
-                        $subtotal = $nota_producto->price * $nota_producto->cantidad;
+                        $unit = $nota_producto->price / $nota_producto->cantidad;
                     @endphp
                     <td>
-                        {{ $subtotal }}
+                        ${{ $unit }}
+                    </td>
+                    @php
+                        $subtotal = $unit * $nota_producto->cantidad;
+                    @endphp
+                    <td>
+                        ${{ $subtotal }}
                     </td>
                 </tr>
            @endforeach
         </tbody>
+        <tfoot >
+            <tr style="background-color: #ffffff;">
+                <td></td>
+                <td></td>
+              <td style="text-align: right"><b>Subtotal</b> </td>
+              <td>${{ $nota->tipo }}</td>
+            </tr>
+            @if ($nota->restante > 0)
+                <tr style="background-color: #ffffff;">
+                    <td></td>
+                    <td></td>
+                <td style="text-align: right"><b>Descuento</b> </td>
+                <td>{{ $nota->restante }}%</td>
+                </tr>
+            @endif
+            @if ($nota->envio == 'Si')
+                <tr style="background-color: #ffffff;">
+                    <td></td>
+                    <td></td>
+                <td style="text-align: right"><b>Envío</b> </td>
+                <td>$250</td>
+                </tr>
+            @endif
+            @if ($nota->factura == '1')
+                <tr style="background-color: #ffffff;">
+                    <td></td>
+                    <td></td>
+                <td style="text-align: right"><b>IVA por Factura</b> </td>
+                <td>16%</td>
+                </tr>
+            @endif
+            <tr style="background-color: #ffffff;">
+                <td></td>
+                <td></td>
+              <td style="text-align: right"><b>Total</b> </td>
+              <td><b>${{ $nota->total }}</b> </td>
+            </tr>
+        </tfoot>
     </table>
 
+    @if ($nota->factura == '1')
+        <h2>Datos de Factura</h2>
+        <b for="">Razon Social:</b> {{ $nota->razon_social }} <br>
+        <b for="">RFC:</b> {{ $nota->rfc }} <br>
+        <b for="">CFDI:</b> {{ $nota->cfdi }} <br>
+        <b for="">Correo Factura:</b> {{ $nota->correo_fac }} <br>
+        <b for="">Telefono Factura:</b> {{ $nota->telefono_fac }} <br>
+        <b for="">Dirección:</b> {{ $nota->direccion_fac }}<br>
+    @endif
 
   </div>
 </body>

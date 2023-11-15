@@ -109,6 +109,11 @@ class NotasProductosController extends Controller
         }else{
             $notas_productos->tipo_nota = 'Venta Presencial';
         }
+        if($request->get('envio') == NULL){
+            $envio = 0;
+        }else{
+            $envio = 250;
+        }
 
         $descuento = floatval($request->get('descuento', 0));
 
@@ -118,10 +123,24 @@ class NotasProductosController extends Controller
         // Aplicar descuento si $descuento es mayor que 0
         if ($descuento > 0) {
             $descuentoAplicado = $sumaCampo4 * ($descuento / 100);
-            $totalConDescuento = $sumaCampo4 - $descuentoAplicado;
+            $totalDesc = ($envio + $sumaCampo4) - $descuentoAplicado;
+            if($request->get('factura') == NULL){
+                $factura = 0;
+                $totalConDescuento = $totalDesc;
+            }else{
+                $factura = $totalDesc * .16;
+                $totalConDescuento = $totalDesc + $factura;
+            }
         } else {
             $descuentoAplicado = 0;
-            $totalConDescuento = $sumaCampo4;
+            $totalDesc = $envio + $sumaCampo4;
+            if($request->get('factura') == NULL){
+                $factura = 0;
+                $totalConDescuento = $totalDesc;
+            }else{
+                $factura = $totalDesc * .16;
+                $totalConDescuento = $totalDesc + $factura;
+            }
         }
 
         $notas_productos->metodo_pago = $request->get('metodo_pago');
@@ -147,6 +166,23 @@ class NotasProductosController extends Controller
             $file->move($path, $fileName);
             $notas_productos->foto_pago2 = $fileName;
         }
+
+        if($request->get('factura') != NULL){
+            if ($request->hasFile("situacion_fiscal")) {
+                $file = $request->file('situacion_fiscal');
+                $path = $pago_fuera;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $notas_productos->situacion_fiscal = $fileName;
+            }
+            $notas_productos->factura = $request->get('factura');
+            $notas_productos->razon_social = $request->get('razon_social');
+            $notas_productos->rfc = $request->get('rfc');
+            $notas_productos->cfdi = $request->get('cfdi');
+            $notas_productos->correo_fac = $request->get('correo_fac');
+            $notas_productos->telefono_fac = $request->get('telefono_fac');
+            $notas_productos->direccion_fac = $request->get('direccion_fac');
+        }
         $notas_productos->save();
 
         if ($request->has('campo')) {
@@ -162,14 +198,6 @@ class NotasProductosController extends Controller
                 $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                 $notas_inscripcion->save();
             }
-        }
-        if($request->get('envio') != NULL){
-            $notas_inscripcion = new ProductosNotasId;
-            $notas_inscripcion->id_notas_productos = $notas_productos->id;
-            $notas_inscripcion->producto = 'Costo de envio';
-            $notas_inscripcion->price = '250.00';
-            $notas_inscripcion->cantidad = '1';
-            $notas_inscripcion->save();
         }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
@@ -247,8 +275,8 @@ class NotasProductosController extends Controller
         $nota_productos = ProductosNotasId::where('id_notas_productos', $nota->id)->get();
 
         $pdf = \PDF::loadView('admin.notas_productos.pdf_nota', compact('nota', 'today', 'nota_productos'));
-         return $pdf->stream();
-        //return $pdf->download('Reporte Caja '.$today.'.pdf');
+       return $pdf->stream();
+        //  return $pdf->download('Nota remision'. $id .'/'.$today.'.pdf');
     }
 
     public function delete($id)
