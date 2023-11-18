@@ -377,8 +377,7 @@ class CursosController extends Controller
         }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->route('cursos.index')
-            ->with('success', 'curso actualizado con exito.');
+        return redirect()->back()->with('success', 'curso actualizado con exito.');
     }
 
     public function update_meet(Request $request, $id){
@@ -400,8 +399,7 @@ class CursosController extends Controller
         $curso->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->route('cursos.index')
-            ->with('success', 'curso actualizado con exito.');
+        return redirect()->back()->with('success', 'curso actualizado con exito.');
     }
 
     public function update_materialclase(Request $request, $id){
@@ -545,7 +543,7 @@ class CursosController extends Controller
             $nuevoEstandar->save();
         });
 
-        return redirect()->route('cursos.index')->with('success', 'El curso se ha duplicado correctamente');
+        return redirect()->back()->with('success', 'El curso se ha duplicado correctamente');
     }
 
 }
