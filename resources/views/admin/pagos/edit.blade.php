@@ -133,9 +133,12 @@
                                     <div class="form-group">
                                         <label for="foto">Comprobante 1</label> <br>
                                         @if (pathinfo($orders->PagosFuera->foto, PATHINFO_EXTENSION) === 'pdf')
-                                            <iframe src="{{ asset('pago_fuera/'.$orders->PagosFuera->foto) }}" width="50%" ></iframe>
+                                            <iframe src="{{ asset('pago_fuera/'.$orders->PagosFuera->foto) }}" width="10%" ></iframe>
                                         @else
-                                            <img id="blah" src="{{ asset('pago_fuera/'.$orders->PagosFuera->foto) }}" alt="Imagen" style="width: 50%">
+                                            <img id="blah" src="{{ asset('pago_fuera/'.$orders->PagosFuera->foto) }}" alt="Imagen" style="width: 10%">
+                                            <a class="text-center text-white btn btn-sm mt-2" href="{{asset('pago_fuera/'.$orders->PagosFuera->foto) }}" download="{{asset('pago_fuera/'.$orders->PagosFuera->foto) }}" style="background: #836262; border-radius: 19px;">
+                                                Descargar
+                                            </a>
                                         @endif
                                     </div>
                                 </div>
@@ -145,9 +148,12 @@
                                         <div class="form-group">
                                             <label for="foto">Comprobante 2</label> <br>
                                             @if (pathinfo($orders->PagosFuera->foto2, PATHINFO_EXTENSION) === 'pdf')
-                                                <iframe src="{{ asset('pago_fuera/'.$orders->PagosFuera->foto2) }}" width="50%" ></iframe>
+                                                <iframe src="{{ asset('pago_fuera/'.$orders->PagosFuera->foto2) }}" width="10%" ></iframe>
                                             @else
-                                                <img id="blah" src="{{ asset('pago_fuera/'.$orders->PagosFuera->foto2) }}" alt="Imagen" style="width: 50%">
+                                                <img id="blah" src="{{ asset('pago_fuera/'.$orders->PagosFuera->foto2) }}" alt="Imagen" style="width: 10%">
+                                                <a class="text-center text-white btn btn-sm mt-2" href="{{asset('pago_fuera/'.$orders->PagosFuera->foto2) }}" download="{{asset('pago_fuera/'.$orders->PagosFuera->foto2) }}" style="background: #836262; border-radius: 19px;">
+                                                    Descargar
+                                                </a>
                                             @endif
                                         </div>
                                     </div>
