@@ -128,6 +128,31 @@
                                     </button>
                                 </div>
                             </form>
+                            @if ($orders->id_externo != NULL)
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="foto">Comprobante 1</label> <br>
+                                        @if (pathinfo($orders->PagosFuera->foto, PATHINFO_EXTENSION) === 'pdf')
+                                            <iframe src="{{ asset('pago_fuera/'.$orders->PagosFuera->foto) }}" width="50%" ></iframe>
+                                        @else
+                                            <img id="blah" src="{{ asset('pago_fuera/'.$orders->PagosFuera->foto) }}" alt="Imagen" style="width: 50%">
+                                        @endif
+                                    </div>
+                                </div>
+
+                                @if ($orders->PagosFuera->foto2 != NULL)
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="foto">Comprobante 2</label> <br>
+                                            @if (pathinfo($orders->PagosFuera->foto2, PATHINFO_EXTENSION) === 'pdf')
+                                                <iframe src="{{ asset('pago_fuera/'.$orders->PagosFuera->foto2) }}" width="50%" ></iframe>
+                                            @else
+                                                <img id="blah" src="{{ asset('pago_fuera/'.$orders->PagosFuera->foto2) }}" alt="Imagen" style="width: 50%">
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endif
+                            @endif
                             <form method="POST" action="{{ route('cursos.cambio', $orders->id) }}" enctype="multipart/form-data" role="form">
                                 @csrf
                                 <input type="hidden" name="_method" value="PATCH">
