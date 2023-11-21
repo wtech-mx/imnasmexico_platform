@@ -22,9 +22,9 @@
                                         <h5>Filtro</h5>
                                             <div class="row">
                                                 <div class="col-3">
-                                                    <label for="user_id">Seleccionar cliente:</label>
+                                                    <label for="user_id">Seleccionar Alumno:</label>
                                                     <select class="form-control cliente" name="id_client" id="id_client">
-                                                        <option selected value="">seleccionar cliente</option>
+                                                        <option selected value="">Buscar Alumno</option>
                                                         @foreach($clientes as $client)
                                                             <option value="{{ $client->id }}">{{ $client->name }}</option>
                                                         @endforeach

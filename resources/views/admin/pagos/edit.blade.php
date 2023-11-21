@@ -38,13 +38,28 @@
                                             <input type="text" class="form-control" value="{{$orders->forma_pago}}" disabled>
                                         </div>
                                     </div>
-                                    <div class="col-3">
+                                    @if ($orders->id_externo == NULL)
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="nota">Personal que subio el pago</label>
+                                                <input type="text" class="form-control" value="Pago por pagina" disabled>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="col-2">
+                                            <div class="form-group">
+                                                <label for="nota">Personal que subio el pago</label>
+                                                <input type="text" class="form-control" value="{{$orders->PagosFuera->usuario}}" disabled>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <div class="col-2">
                                         <div class="form-group">
                                             <label for="nota">Fecha</label>
                                             <input type="text" class="form-control" value="{{$orders->fecha}}" disabled>
                                         </div>
                                     </div>
-                                    <div class="col-3">
+                                    <div class="col-2">
                                         <div class="form-group">
                                             <label for="nota">Estatus</label><br>
                                             <select class="form-control" name="estatus" id="estatus">
