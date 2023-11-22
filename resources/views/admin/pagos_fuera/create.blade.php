@@ -11,33 +11,48 @@
 
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="name">Nombre *</label>
-                                    <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" required>@error('name') <span class="error text-danger">{{ $message }}</span> @enderror
-                                </div>
-                            </div>
 
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="name">Apellido *</label>
-                                    <input id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellido" required>@error('apellido') <span class="error text-danger">{{ $message }}</span> @enderror
+                                <div class="form-group col-6">
+                                    <label for="name">Nombre(s) *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" required>@error('name') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-6">
-                                <div class="form-group">
+                                <div class="form-group col-6">
+                                    <label for="name">Apellido(s) *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellido" required>@error('apellido') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-6">
                                     <label for="name">Correo *</label>
-                                    <input id="email" name="email" type="email" class="form-control" placeholder="Correo">@error('email') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="email" name="email" type="email" class="form-control" placeholder="Correo">@error('email') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="col-6">
-                                <div class="form-group">
+                                <div class="form-group col-6">
                                     <label for="name">Telefono *</label>
-                                    <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="55-55-55-55-55" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/foldable-phone.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="55-55-55-55-55" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    </div>
                                 </div>
-                            </div>
+
 
                             <div class="col-6 mt-3">
                                 <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#clienteExample" aria-expanded="false" aria-controls="clienteExample">
@@ -48,33 +63,49 @@
                             <div class="col-12">
                                 <div class="collapse" id="clienteExample">
                                     <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="name2">Nombre 2</label>
+
+                                        <div class="form-group col-6">
+                                            <label for="name">Apellido(s) </label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
+                                                </span>
                                                 <input id="name2" name="name2" type="text" class="form-control" placeholder="Nombre">
                                             </div>
                                         </div>
 
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="name">Apellido 2</label>
+
+                                        <div class="form-group col-6">
+                                            <label for="name">Apellido(s) </label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
+                                                </span>
                                                 <input id="apellido2" name="apellido2" type="text" class="form-control" placeholder="Apellido">
                                             </div>
                                         </div>
 
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="name">Correo 2</label>
+                                        <div class="form-group col-6">
+                                            <label for="name">Correo 2 </label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
+                                                </span>
                                                 <input id="email2" name="email2" type="email" class="form-control" placeholder="Correo">
                                             </div>
                                         </div>
 
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label for="name">Telefono 2</label>
+
+                                        <div class="form-group col-6">
+                                            <label for="name">Telefono 2 </label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img src="{{ asset('assets/cam/foldable-phone.png') }}" alt="" width="35px">
+                                                </span>
                                                 <input id="telefono2" name="telefono2" type="tel" minlength="10" maxlength="10" class="form-control" placeholder="55-55-55-55-55">
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -131,43 +162,54 @@
                                 </select>
                             </div>
 
-                            <div class="col-6 mt-3">
-                                <div class="form-group">
-                                    <label for="foto">Forma de pago *</label>
+                            <div class="form-group col-6 mt-3">
+                                <label for="name">Forma de pago *</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/metodo-de-pago.png') }}" alt="" width="35px">
+                                    </span>
                                     <input id="forma_pago" name="forma_pago" type="text" class="form-control" placeholder="forma pago" required>@error('forma_pago') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
-                            <div class="col-6 mt-3">
-                            </div>
-
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="foto">Foto *</label>
+                            <div class="form-group col-6 mt-3">
+                                <label for="name">Foto (Comprobante) *</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                                    </span>
                                     <input id="foto" name="foto" type="file" class="form-control" placeholder="foto" required>@error('foto') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
-                            <div class="col-4">
-                                <label>Monto *</label>
-                                <div class="form-group">
+                            <div class="form-group col-6 mt-3">
+                                <label for="name">Monto *</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">
+                                    </span>
                                     <input class="form-control" type="number" id="pago" name="pago" placeholder="Ingresa el total del/de cursos" required>
                                 </div>
                             </div>
 
-                            <div class="col-1">
+
+                            <div class="form-group col-1 mt-3">
                                 <label>Deudor</label>
                                 <div class="form-check">
                                   <input class="form-check-input" type="checkbox" id="deudor" name="deudor" value="1" id="flexCheckChecked">
                                 </div>
                             </div>
 
-                            <div class="col-3" id="abono-container">
-                                <div class="form-group">
-                                  <label for="abono">Abono</label>
-                                  <input id="abono" name="abono" type="number" class="form-control" placeholder="Abono">@error('abono') <span class="error text-danger">{{ $message }}</span> @enderror
+                            <div class="form-group col-5 mt-3" id="abono-container">
+                                <label for="name">Abono *</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px" style="margin-right: 1rem">
+                                    </span>
+                                    <input id="abono" name="abono" type="number" class="form-control" placeholder="Abono">@error('abono') <span class="error text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
+
 
                             <div class="col-12">
                                 <div class="form-group">

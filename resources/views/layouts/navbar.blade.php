@@ -26,7 +26,7 @@
         <div class="ms-md-auto pe-md-3 d-flex align-items-center">
 
           <div class="dropdown">
-              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: 2px solid #6C4343; color: #6C4343;">
+              <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false" style="border: 2px solid #fff; color: #fff;">
                   {{Auth::user()->name;}}
               </button>
 
@@ -40,7 +40,7 @@
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center" style="display: inline-block!important;">
                      <i class="fa fa-arrow-right text-dark" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
                     </div>
-                    <span class="ms-1 text-dark">Cerrar Cesion</span>
+                    <span class="ms-1 text-dark">Cerrar Sesion</span>
                   </a>
                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     {{-- <form id="logout-form" action="{{ route('logout') }}" method="POST" > --}}
