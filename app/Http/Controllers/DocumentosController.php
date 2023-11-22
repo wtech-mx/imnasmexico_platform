@@ -46,6 +46,7 @@ class DocumentosController extends Controller
         $cursos = Cursos::where('fecha_inicial', '>=', '2023-11-01')
         ->where('precio', '>', 0)
         ->where('nombre', '!=', 'Diplomado en Cosmiatría Estética UNAM')
+        ->where('nombre', '!=', 'Diplomado en medicina estetica UNAM')
         ->where('nombre', '!=', 'Diplomado en Cosmetología y Cosmiatría SEP Facial y Corporal')
         ->where('nombre', '!=', 'Diplomado en Cosmetología SEP y Cosmiatría UNAM Facial y Corporal')
         ->whereHas('orderTicket', function($query) {
