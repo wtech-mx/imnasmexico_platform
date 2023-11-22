@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="col-12 form-group">
                                     <label for="name">Nombre</label>
-                                    <input id="name" name="name" type="text" class="form-control" disabled value="{{ $cliente->name }}">
+                                    <input id="name" name="name" type="text" class="form-control" value="{{ $cliente->name }}">
                                 </div>
                                 <div class="col-6 form-group">
                                     <label for="name">Telefono</label>
@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="col-6 form-group">
                                     <label for="name">Correo</label>
-                                    <input id="email" name="email" type="email" class="form-control" disabled value="{{ $cliente->email }}">
+                                    <input id="email" name="email" type="email" class="form-control" value="{{ $cliente->email }}">
                                 </div>
                             </div>
                         </div>

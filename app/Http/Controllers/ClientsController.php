@@ -258,6 +258,8 @@ class ClientsController extends Controller
         $user->username = $request->get('telefono');
         $user->telefono = $request->get('telefono');
         $user->password = Hash::make($request->get('telefono'));
+        $user->name = $request->get('name');
+        $user->email = $request->get('email');
         $user->update();
 
         $cliente = User::where('id', $id)->first();
