@@ -454,6 +454,11 @@
                             <span class="sidenav-normal">Reporte Generados</span>
                         </a>
 
+                        <a class="nav-link {{ (Request::is('admin/documentos/faltantes*') ? 'show' : '') }}" href="{{ route('documentos.faltantes') }}">
+                            <span class="sidenav-mini-icon"> P </span>
+                            <span class="sidenav-normal">Documentos faltantes</span>
+                        </a>
+
                     </li>
                 </ul>
                 </div>

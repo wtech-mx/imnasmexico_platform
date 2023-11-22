@@ -41,6 +41,28 @@ class DocumentosController extends Controller
         return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados'));
     }
 
+    public function faltantes(Request $request){
+        // $cursos = Cursos::orderBy('id','DESC')->get();
+        $cursos = Cursos::where('fecha_inicial', '>=', '2023-11-01')
+        ->where('precio', '>', 0)
+        ->where('nombre', '!=', 'Diplomado en Cosmiatría Estética UNAM')
+        ->where('nombre', '!=', 'Diplomado en Cosmetología y Cosmiatría SEP Facial y Corporal')
+        ->where('nombre', '!=', 'Diplomado en Cosmetología SEP y Cosmiatría UNAM Facial y Corporal')
+        ->whereHas('orderTicket', function($query) {
+            $query->where('estatus_doc', '=', NULL)
+                  ->orWhere('estatus_cedula', '=', NULL)
+                  ->orWhere('estatus_titulo', '=', NULL)
+                  ->orWhere('estatus_diploma', '=', NULL)
+                  ->orWhere('estatus_credencial', '=', NULL)
+                  ->orWhere('estatus_tira', '=', NULL);
+        })
+        ->orderBy('fecha_inicial', 'DESC')
+        ->with('orderTicket')
+        ->get();
+
+        return view('admin.documentos.doc_faltante', compact('cursos'));
+    }
+
     public function buscador(Request $request){
 
         $bitacoras = DocumenotsGenerador::query();
