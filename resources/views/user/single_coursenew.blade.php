@@ -110,6 +110,8 @@
                                 <p class="text_cards_horizon">
                                     @if ($curso->modalidad == 'Presencial')
                                     Castilla 136, Álamos, Benito Juárez, 03400, CDMX
+                                    @elseif ($curso->modalidad == 'FACEBOOK LIVE')
+                                    Online Gratuita
                                     @else
                                     Google Meet
                                     @endif
@@ -652,6 +654,8 @@
                 <p class="text_cards_horizon">
                     @if ($curso->modalidad == 'Presencial')
                     Castilla 136, Álamos, Benito Juárez, 03400, CDMX
+                    @elseif ($curso->modalidad == 'FACEBOOK LIVE')
+                    Online
                     @else
                     Google Meet
                     @endif

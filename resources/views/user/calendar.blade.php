@@ -244,7 +244,13 @@
             <div class="card card_grid card_grid_cale  mb-5 mb-md-3" style="{{ $presencial_border }}">
                 <img class="img_card_grid" src="{{asset('curso/'. $curso->foto) }}" class="card-img-top" alt="...">
 
-                <p class="precio_grid" style="{{ $presencial_bg }}">${{$precio}} mxn</p>
+                <p class="precio_grid" style="{{ $presencial_bg }}">
+                    @if ($curso->precio == 0)
+                        Gratuita
+                    @else
+                        ${{$precio}} mxn
+                    @endif
+                </p>
                 <p class="modalidado_grid" style="{{ $presencial_color }}"><strong>{{$curso->modalidad}}</strong></p>
                 <p class="wish_grid" style="{{ $presencial_bg }}"><i class="fas fa-heart"></i></p>
                 <p class="share_grid" onclick="shareFacebook('{{ $curso->slug }}')" style="{{ $presencial_bg }}"><i class="fas fa-share-alt"></i></p>
