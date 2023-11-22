@@ -14,13 +14,20 @@
 
                         <div class="d-flex justify-content-between">
 
+                            <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
+
+
                             <h3 class="mb-3">Publicidad</h3>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
                             </a>
 
-                            @can('publicidad-agregar')
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4   ">
+                                @can('publicidad-agregar')
                                 <form method="POST" action="{{ route('publicidad.store') }}" enctype="multipart/form-data" role="form">
                                     @csrf
                                     <div class="modal-body">
@@ -34,6 +41,7 @@
                                 </form>
                             @endcan
 
+                            </div>
                         </div>
                     </div>
 

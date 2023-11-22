@@ -14,6 +14,9 @@
 
                         <div class="d-flex justify-content-between">
 
+                            <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
+
+
                             <h3 class="mb-3">Todas las notas</h3>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
@@ -28,7 +31,6 @@
                     </div>
 
                         <div class="card-body">
-                            @include('admin.pagos_fuera.create')
                             <div class="table-responsive">
                                 <table class="table table-flush" id="datatable-search">
                                     <thead class="thead">

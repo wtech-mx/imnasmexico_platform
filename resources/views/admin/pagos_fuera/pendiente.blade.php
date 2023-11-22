@@ -41,7 +41,10 @@
 
                         <div class="d-flex justify-content-between">
 
-                            <h3 class="mb-3">Pendientes de Revision Pago</h3>
+                            <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
+
+
+                            <h3 class="mb-3">Pendientes de <br> Revision Pago</h3>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?

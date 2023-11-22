@@ -23,9 +23,11 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between">
+                            <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
+
                             <h3 class="mb-3">Lista de Curso</h3><br>
                             <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                Crear
+                                Crear  <i class="fas fa-plus"></i>
                             </a>
                         </div>
                         <p class="text-sm">{{$curso->nombre}} / {{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)->translatedFormat('l j \\de F \\de Y')) }} al {{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_final)->translatedFormat('l j \\de F \\de Y')) }} - ( {{ $curso->modalidad }} )

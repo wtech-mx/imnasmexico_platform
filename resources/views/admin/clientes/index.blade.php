@@ -15,7 +15,6 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-sm-12">
-                            <div class="card">
                                 <form action="{{ route('advance_search.buscador') }}" method="GET" >
 
                                     <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
@@ -46,7 +45,6 @@
                                             </div>
                                     </div>
                                 </form>
-                            </div>
                         </div>
                     </div>
                 </div>

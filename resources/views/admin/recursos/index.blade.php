@@ -13,11 +13,14 @@
             <!-- Card header -->
             <div class="card-header">
                 <div class="d-flex justify-content-between">
+                    <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
+
                     <h3 class="mb-3">Biblioteca</h3>
 
                         <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                             ¿Como fucniona?
                         </a>
+
                         <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_recurso" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                             <i class="fa fa-fw fa-edit"></i> Crear
                         </a>
