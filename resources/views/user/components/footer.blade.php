@@ -36,11 +36,11 @@
                     </a>
                 </div>
 
-                <div class="icon_footer">
-                    <a class="text-center" style="margin-bottom: 0rem!important">
+                {{-- <div class="icon_footer">
+                    <a target="_blank" href="mailto:imnasmexico@naturalesainspa.com" class="text-center" style="margin-bottom: 0rem!important">
                         <i class="fas fa-envelope"></i>
                     </a>
-                </div>
+                </div>--}}
 
                 <div class="icon_footer">
                     <a target="_blank" href="https://www.tiktok.com/@carla_rizo" class="text-center" style="margin-bottom: 0rem!important">
@@ -215,5 +215,12 @@
             </div>
 
         </div>
+
+        <div class="col-12 spaciador_footer mt-5 mb-5 text-center">
+            <p class="text-center text-white">Todos los derechos reservados © 2023
+                <strong>Instituto Mexicano Naturales Ain Spa</strong>
+            </p>
+        </div>
+
     </div>
 </div>

@@ -67,13 +67,37 @@
 
         <div class="d-flex acceso_alumnas_flex">
             @guest
-                <a class="btn btn-login me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
+                <a class="btn btn-sm btn-login me-4" type="button" data-bs-toggle="modal" data-bs-target="#login_modal" style="font-size: 25px;">
                     Acceso alumn@s
                 </a>
             @else
-                {{-- <a class="btn btn-primario me-4" type="button" href="{{ route('signout') }}">Cerrar Sesion</a> --}}
-                <a class="btn btn-primario me-4" type="button" href="{{ route('perfil.index', auth()->user()->code) }}" style="background-color: #5dad00">Perfil</a>
+
+            @if (auth()->user()->cliente == '1')
+                <a class="btn btn-sm btn-primario me-4" type="button" href="{{ route('perfil.index', auth()->user()->code) }}" style="background-color: #5dad00">Perfil</a>
+
+                <a class="btn btn-sm btn-primario one" type="button" href="{{ route('signout') }}" style="background: #ff1212cf!important;border-radius: 16px;">
+                    Cerrar
+                </a>
+
+            @elseif(auth()->user()->cliente == '2')
+                <a class="btn btn-sm btn-primario me-4" type="button" href="{{ route('dashboard.index') }}">Perfil</a>
+                <a class="btn btn-sm btn-primario" type="button" href="{{ route('signout') }}" style="background: #ff1212cf!important;border-radius: 16px;">
+                    Cerrar
+                </a>
+
+            @elseif(auth()->user()->cliente == '5')
+                <a class="btn btn-sm btn-primario me-4" type="button" href="{{ route('dashboard') }}">Dashboard</a>
+                <a class="btn btn-sm btn-primario" type="button" href="{{ route('signout') }}" style="background: #ff1212cf!important;border-radius: 16px;">
+                    Cerrar
+                </a>
+
+            @elseif(auth()->user()->cliente == NULL)
+                <a class="btn btn-sm btn-primario me-4" type="button" href="{{ route('dashboard') }}">Dashboard</a>
+            @endif
+
+                {{-- <a class="btn btn-sm btn-primario me-4" type="button" href="{{ route('signout') }}">Cerrar Sesion</a> --}}
             @endguest
+
         </div>
 
       </div>
