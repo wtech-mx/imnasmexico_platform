@@ -396,22 +396,48 @@
 
                     <div id="carouselExample" class="carousel slide">
                         <div class="carousel-inner">
+                            <div class="row">
 
-                          <div class="carousel-item active">
-                              <img src="{{asset('cursos/expo1.jpg')}}" class="d-block w-100" alt="...">
-                          </div>
+                                @foreach ($noticias_gallery as $item)
 
-                          <div class="carousel-item ">
-                            <img src="{{asset('cursos/DÍA 1 CARRUSEL.jpg')}}" class="d-block w-100" alt="...">
-                          </div>
+                                    <div class="col-12">
+                                        @if ($item->estatus === 'Activo')
+                                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
 
-                          <div class="carousel-item">
-                            <img src="{{asset('cursos/DÍA 2 CARRUSEL.jpg')}}" class="d-block w-100" alt="...">
-                          </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <h6 class="title_curso mb-3" style="color: #000">
+                                                        {{ $item->titulo }}
+                                                    </h6>
+                                                </div>
 
-                          <div class="carousel-item">
-                            <img src="{{asset('cursos/expo7.jpg')}}" class="d-block w-100" alt="...">
-                          </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <p class="text_cards_horizon text-left">
+                                                        {{ $item->descripcion }}
+                                                    </p>
+                                                </div>
+
+                                                @if ($item->tipo === 'imagen')
+                                                    <img src="{{asset('noticias/'.$item->multimedia) }}" class="d-block w-100" alt="...">
+                                                    @elseif ($item->tipo === 'Video')
+                                                    <video controls autoplay>
+                                                            <source src="{{asset('noticias/'.$item->multimedia) }}" type="video/mp4">
+                                                    </video>
+                                                @endif
+
+                                                <div class="d-flex justify-content-center">
+                                                    <p class="text-center text-white">
+                                                        <a href="{{ $item->link }}" class="btn btn-sm btn_enfiar_form text-white" style="background: #836262;">Ver Más</a>
+                                                    </p>
+                                                </div>
+
+                                            </div>
+
+                                        @endif
+                                    </div>
+
+                                @endforeach
+
+                            </div>
 
                         </div>
 

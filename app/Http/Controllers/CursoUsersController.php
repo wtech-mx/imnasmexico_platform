@@ -8,6 +8,7 @@ use App\Models\OrdersTickets;
 use Session;
 use Str;
 use App\Models\WebPage;
+use App\Models\Noticias;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,7 @@ class CursoUsersController extends Controller
 
         $tickets = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
 
+
         $titulo = 'Calendario General Online y Presencial';
 
         return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual', 'titulo'));
@@ -30,6 +32,9 @@ class CursoUsersController extends Controller
     public function show($slug)
     {
         $fechaActual = date('Y-m-d');
+
+        $noticias_gallery = Noticias::orderBy('id','DESC')->where('seccion','=','Galeria Cursos')->get();
+
         $curso = Cursos::where('slug','=', $slug)->firstOrFail();
         $cursos = Cursos::where('fecha_final','>=', $fechaActual)->where('estatus','=', '1')->get();
         $tickets = CursosTickets::where('id_curso','=', $curso->id)->where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
@@ -40,7 +45,7 @@ class CursoUsersController extends Controller
                         ->where('id_curso','=', $curso->id)
                         ->first();
 
-        return view('user.single_coursenew', compact('curso', 'tickets', 'usuario_compro','cursos'));
+        return view('user.single_coursenew', compact('curso', 'tickets', 'usuario_compro','cursos','noticias_gallery'));
     }
 
     public function paquetes()
