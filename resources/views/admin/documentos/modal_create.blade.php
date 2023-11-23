@@ -41,7 +41,7 @@
                                </div>
                             </div> --}}
 
-                            <div class="tab-pane fade" id="sin_usuario" role="tabpanel" aria-labelledby="sin_usuario-tab">
+                            <div class="tab-pane fade show active" id="sin_usuario" role="tabpanel" aria-labelledby="sin_usuario-tab">
                                 <form method="POST" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
                                     @csrf
                                     <div class="row">
