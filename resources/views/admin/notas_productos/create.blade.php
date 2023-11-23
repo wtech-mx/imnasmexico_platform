@@ -142,7 +142,7 @@
                                         <h5 style="color:#836262"><strong>Pago</strong> </h5>
                                     </div>
 
-                                    <div class="col-12 ">
+                                    <div class="col-4 ">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="checkboxEnvio" name="envio">
                                             <label class="form-check-label" for="flexCheckDefault">
@@ -151,7 +151,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12 ">
+                                    <div class="col-4 ">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="toggleSwitch" name="tipo_nota">
                                             <label class="form-check-label" for="flexCheckDefault">
@@ -160,7 +160,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-12 ">
+                                    <div class="col-4 ">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="toggleFactura" name="factura" value="1">
                                             <label class="form-check-label" for="flexCheckDefault">
