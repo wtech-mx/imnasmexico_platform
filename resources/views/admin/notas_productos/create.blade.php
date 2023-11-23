@@ -371,7 +371,7 @@
         var agregarCampoBtn = document.getElementById('agregarCampo');
         var camposContainer = document.getElementById('camposContainer');
         var campoExistente = camposContainer.querySelector('.campo');
-        campoExistente.querySelector('.cantidad').value = '1';
+        campoExistente.querySelector('.cantidad').value = '';
         var totalInput = document.getElementById('total');
         var descuentoInput = document.getElementById('descuento');
         var totalDescuentoInput = document.getElementById('totalDescuento');
@@ -417,7 +417,7 @@
 
                 // Limpiar los valores en el nuevo campo
                 nuevoCampo.querySelector('.producto').value = '';
-                nuevoCampo.querySelector('.cantidad').value = '1';
+                nuevoCampo.querySelector('.cantidad').value = '';
                 nuevoCampo.querySelector('.descuento_prod').value = '0';
                 nuevoCampo.querySelector('.subtotal').value = '0.00';
 

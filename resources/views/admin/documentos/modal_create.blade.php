@@ -11,20 +11,20 @@
 
                 <div class="modal-body row">
 
-                        <div class="d-flex justify-content-center">
+                        {{-- <div class="d-flex justify-content-center">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="usuario-tab" data-bs-toggle="tab" data-bs-target="#usuario" type="button" role="tab" aria-controls="usuario" aria-selected="true">Con usuario</button>
                                 </li>
 
                                 <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="sin_usuario-tab" data-bs-toggle="tab" data-bs-target="#sin_usuario" type="button" role="tab" aria-controls="sin_usuario" aria-selected="false">Sin usario</button>
+                                <button class="nav-link " id="sin_usuario-tab" data-bs-toggle="tab" data-bs-target="#sin_usuario" type="button" role="tab" aria-controls="sin_usuario" aria-selected="false">Sin usario</button>
                                 </li>
                             </ul>
-                        </div>
+                        </div> --}}
 
                         <div class="tab-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="usuario" role="tabpanel" aria-labelledby="usuario-tab">
+                            {{-- <div class="tab-pane fade show active" id="usuario" role="tabpanel" aria-labelledby="usuario-tab">
                                <div class="row">
                                     <label for="name">Alumno</label>
                                     <select name="id_usuario" id="usuarioSelect" class="form-select">
@@ -39,7 +39,7 @@
                                         <!-- Opciones de órdenes aquí -->
                                     </select>
                                </div>
-                            </div>
+                            </div> --}}
 
                             <div class="tab-pane fade" id="sin_usuario" role="tabpanel" aria-labelledby="sin_usuario-tab">
                                 <form method="POST" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
