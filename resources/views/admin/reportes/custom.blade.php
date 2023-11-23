@@ -37,12 +37,12 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <label for="">Fecha de inicio</label>
-                                        <input class="form-control" type="date" id="fecha_inicio" name="fecha_inicio">
+                                        <input class="form-control" type="date" id="fecha_inicio"  name="fecha_inicio">
                                     </div>
 
                                     <div class="col-6">
                                         <label for="">Fecha de fin</label>
-                                        <input class="form-control" type="date" id="fecha_fin" name="fecha_fin">
+                                        <input class="form-control" type="date" id="fecha_fin"  name="fecha_fin">
                                     </div>
 
                                     <div class="col-12">

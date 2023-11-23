@@ -66,11 +66,10 @@ class ReportesController extends Controller
             ->get();
 
             $orders_ext = Orders::where('fecha', $fechaHoraActual)
-                ->where('estatus', '1')
-                ->where('pago', '>','0')
-                ->where('forma_pago', '=','Externo')
-                ->where('forma_pago', '=','Transferencia Inbursa')
-                ->orderBy('fecha','DESC')
+            ->where('estatus', '1')
+            ->where('pago', '>','0')
+            ->whereNotIn('forma_pago', ['Mercado Pago', 'STRIPE', 'Nota'])
+            ->orderBy('fecha', 'DESC')
             ->get();
 
             $totalPagadoMP = 0;
