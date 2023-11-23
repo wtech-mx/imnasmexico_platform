@@ -128,6 +128,48 @@ class ClientsController extends Controller
         return view('user.profilenew',compact('carpetas_carta', 'clase_grabada','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
     }
 
+    public function eliminarDocumento($documentoId){
+        $documento = DocumentosEstandares::findOrFail($documentoId);
+        $documento->delete();
+
+        return redirect()->back()->with('success', 'El documento ha sido eliminado correctamente.');
+    }
+
+    public function eliminarDocumentoPer($id, $tipo){
+        $documento = Documentos::findOrFail($id);
+
+        // Lógica para determinar el campo específico según el tipo de documento
+        $campoDocumento = '';
+
+        switch ($tipo) {
+            case 'ine':
+                $campoDocumento = 'ine';
+                break;
+            case 'curp':
+                $campoDocumento = 'curp';
+                break;
+            case 'foto_tam_titulo':
+                $campoDocumento = 'foto_tam_titulo';
+                break;
+            case 'foto_tam_infantil':
+                $campoDocumento = 'foto_tam_infantil';
+                break;
+            case 'firma':
+                $campoDocumento = 'firma';
+                break;
+            case 'carta_compromiso':
+                $campoDocumento = 'carta_compromiso';
+                break;
+        }
+
+        // Establece el campo del documento a NULL en la base de datos
+        $documento->$campoDocumento = NULL;
+        $documento->save();
+
+        return redirect()->back()->with('success', 'El documento ha sido eliminado correctamente.');
+    }
+
+
     public function show($id){
         // Verificar si el usuario tiene una sesión activa
         if (!auth()->check()) {

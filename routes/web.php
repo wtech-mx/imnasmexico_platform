@@ -143,6 +143,8 @@ Route::post('custom-login', [App\Http\Controllers\CustomAuthController::class, '
 Route::post('custom-registration', [App\Http\Controllers\CustomAuthController::class, 'customRegistration'])->name('register.custom');
 Route::get('signout', [App\Http\Controllers\CustomAuthController::class, 'signOut'])->name('signout');
 
+Route::post('/eliminar-documento/{documento}', [App\Http\Controllers\ClientsController::class, 'eliminarDocumento'])->name('eliminar.documento');
+Route::post('/eliminar-documento/{id}/{tipo}', [App\Http\Controllers\ClientsController::class, 'eliminarDocumentoPer'])->name('eliminar.documentoper');
 
 
 // =============== M O D U L O   C U R S O ===============================
