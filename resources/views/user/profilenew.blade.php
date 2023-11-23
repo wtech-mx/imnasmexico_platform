@@ -396,6 +396,7 @@ Mi perfil- {{$cliente->name}}
                                                     <div class="col-12">
                                                         <h3 class="text-center mt-5 mb-3"><img class="icon_nav_course" src="{{asset('assets/user/icons/clase.webp')}}" alt=""> <strong>Clases grabadas</strong></h3>
                                                     </div>
+
                                                     <div class="row">
                                                         @if ($video->Orders->clase_grabada_orden == NULL)
                                                             @foreach($usuario_video as $user_video)
@@ -636,10 +637,12 @@ Mi perfil- {{$cliente->name}}
                                                             </div>
                                                         </div>
                                                         <div class="tab-pane fade" id="content2{{$video->id_tickets}}" role="tabpanel" aria-labelledby="tab2">
-                                                            <div class="col-12">
-                                                                <div class="row">
+                                                            <div class="row">
+
                                                                     @if (isset($carpetas_literatura) && $carpetas_literatura != NULL)
+                                                                    <div class="col-12">
                                                                         <h2>Literatura de fase de tratamiento facial  <img src="{{ asset('assets/user/icons/skincare.png') }}" alt="" style="width:30px;"></h2>
+                                                                    </div>
                                                                         @foreach ($carpetas_literatura as $carpeta)
                                                                             @if ($carpeta->sub_area_recurso == 'facial')
                                                                                 @php
@@ -648,23 +651,27 @@ Mi perfil- {{$cliente->name}}
                                                                                 @endphp
                                                                                 @if ($carpeta->id_carpeta == $video->Cursos->carpeta)
                                                                                     @if ($extension === 'pdf')
-                                                                                    <div class="col-12 mt-3">
+                                                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 mt-3">
                                                                                         <p class="text-center">
                                                                                         <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
                                                                                         <a class="text-dark" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
                                                                                         </p>
                                                                                     </div>
                                                                                     @else
-                                                                                    <div class="col-12 mt-3">
+
+                                                                                    <div class="col-12 col-sm-12 col-md-6 col-lg-4 mt-3">
                                                                                         <p class="text-center">
                                                                                             <img class="img_material_clase_pc" id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" />
                                                                                         </p>
                                                                                     </div>
+
                                                                                     @endif
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
-                                                                        <h2>Literatura de fase de tratamiento corporal  <img src="{{ asset('assets/user/icons/massage.png') }}" alt="" style="width:30px;"></h2>
+                                                                        <div class="col-12">
+                                                                            <h2>Literatura de fase de tratamiento corporal  <img src="{{ asset('assets/user/icons/massage.png') }}" alt="" style="width:30px;"></h2>
+                                                                        </div>
                                                                         @foreach ($carpetas_literatura as $carpeta)
                                                                             @if ($carpeta->sub_area_recurso == 'corporal')
                                                                                 @php
@@ -673,14 +680,14 @@ Mi perfil- {{$cliente->name}}
                                                                                 @endphp
                                                                                 @if ($carpeta->id_carpeta == $video->Cursos->carpeta)
                                                                                     @if ($extension === 'pdf')
-                                                                                    <div class="col-12 mt-3">
+                                                                                      <div class="col-12 col-sm-12 col-md-6 col-lg-4 mt-3">
                                                                                         <p class="text-center">
                                                                                         <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
                                                                                         <a class="text-dark" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >Ver PDF</a>
                                                                                         </p>
                                                                                     </div>
                                                                                     @else
-                                                                                    <div class="col-12 mt-3">
+                                                                                      <div class="col-12 col-sm-12 col-md-6 col-lg-4 mt-3">
                                                                                         <p class="text-center">
                                                                                             <img class="img_material_clase_pc" id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" />
                                                                                         </p>
@@ -693,9 +700,9 @@ Mi perfil- {{$cliente->name}}
                                                                         <!-- Aquí puedes mostrar un mensaje o contenido alternativo cuando no hay datos -->
                                                                         <p>No hay datos disponibles.</p>
                                                                     @endif
-                                                                </div>
                                                             </div>
                                                         </div>
+
                                                         <div class="tab-pane fade" id="content_costos{{$video->id_tickets}}" role="tabpanel" aria-labelledby="tab_costos">
                                                             <div class="col-12">
                                                                 <div id="carrousel_publicidad_mb_{{$video->id_tickets}}" class="carousel slide" data-bs-ride="carousel">
