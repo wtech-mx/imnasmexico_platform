@@ -22,15 +22,13 @@
         <form method="POST" action="{{ route('clientes.update_documentos_cliente', $cliente->id) }}" enctype="multipart/form-data" role="form">
             @csrf
             <input type="hidden" name="_method" value="PATCH">
-
+            @php
+                $tiene_documentos = count($documentos) > 0;
+            @endphp
             <div class="modal-body row">
-                @php
-                    $tiene_documentos = false;
-                @endphp
+                @if($tiene_documentos)
+
                 @foreach($documentos as $documento)
-                        @php
-                            $tiene_documentos = true;
-                        @endphp
                         <div class="col-6 form-group">
                             <label for="ine">INE Frente y Atras</label>
                             <input id="ine" name="ine" type="file" class="form-control" >
@@ -156,6 +154,28 @@
                             @endif
                         </div>
                 @endforeach
+
+                @else
+                    <div class="col-6 form-group">
+                        <label for="ine">INE Frente y Atras</label>
+                        <input id="ine" name="ine" type="file" class="form-control" >
+                    </div>
+
+                    <div class="col-6 form-group">
+                        <label for="curp">CURP</label>
+                        <input id="curp" name="curp" type="file" class="form-control" >
+                    </div>
+
+                    <div class="col-6 form-group">
+                        <label for="foto_tam_infantil">Foto Infantil color o blanco y negro</label>
+                        <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
+                    </div>
+
+                    <div class="col-6 form-group">
+                        <label for="firma">Firma</label>
+                        <input id="firma" name="firma" type="file" class="form-control" >
+                    </div>
+                @endif
             </div>
 
             <div class="modal-footer">
