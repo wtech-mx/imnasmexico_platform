@@ -410,11 +410,12 @@ class ReportesController extends Controller
             ->get();
 
             $orders_ext = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
-                ->where('estatus', '1')
-                ->where('pago', '>','0')
-                ->where('forma_pago', '=','Externo')
-                ->orderBy('fecha','DESC')
+            ->where('estatus', '1')
+            ->where('pago', '>','0')
+            ->whereNotIn('forma_pago', ['Mercado Pago', 'STRIPE', 'Nota'])
+            ->orderBy('fecha', 'DESC')
             ->get();
+
 
             $orders_nota = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
                 ->where('estatus', '1')
@@ -422,6 +423,8 @@ class ReportesController extends Controller
                 ->where('forma_pago', '=','Nota')
                 ->orderBy('fecha','DESC')
             ->get();
+
+
 
             $totalPagado = $orders->sum('pago');
             $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');

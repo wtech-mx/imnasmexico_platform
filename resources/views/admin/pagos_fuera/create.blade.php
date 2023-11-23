@@ -163,12 +163,25 @@
                             </div>
 
                             <div class="form-group col-6 mt-3">
-                                <label for="name">Forma de pago *</label>
+                                <label for="name">Método de Pago *</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">
                                         <img src="{{ asset('assets/cam/metodo-de-pago.png') }}" alt="" width="35px">
                                     </span>
-                                    <input id="forma_pago" name="forma_pago" type="text" class="form-control" placeholder="forma pago" required>@error('forma_pago') <span class="error text-danger">{{ $message }}</span> @enderror
+                                    <select name="forma_pago" id="forma_pago" class="form-select d-inline-block">
+                                        <option value="" >Selecione una opcion</option>
+                                        <option value="Efectivo" {{ old('forma_pago') == 'Efectivo' ? 'selected' : '' }}>Efectivo</option>
+                                        <option value="Tarjeta" {{ old('forma_pago') == 'Tarjeta' ? 'selected' : '' }}>Tarjeta</option>
+                                        <option value="transferencia inbursa" {{ old('forma_pago') == 'transferencia inbursa' ? 'selected' : '' }}>Transferencia Inbursa</option>
+                                        <option value="transferencia bancomer" {{ old('forma_pago') == 'transferencia bancomer' ? 'selected' : '' }}>Transferencia BBVA Bancomer</option>
+                                        <option value="deposito inbursa" {{ old('forma_pago') == 'deposito inbursa' ? 'selected' : '' }}>Deposito Inbursa</option>
+                                        <option value="deposito bancomer" {{ old('forma_pago') == 'deposito bancomer' ? 'selected' : '' }}>Deposito BBVA Bancomer</option>
+                                        <option value="oxxo inbursa" {{ old('forma_pago') == 'oxxo inbursa' ? 'selected' : '' }}>OXXO Inbursa</option>
+                                        <option value="oxxo bancomer" {{ old('forma_pago') == 'oxxo bancomer' ? 'selected' : '' }}>OXXO Bancomer</option>
+                                        <option value="Mercado Pago" {{ old('forma_pago') == 'Mercado Pago' ? 'selected' : '' }}>Mercado Pago</option>
+                                        <option value="otro" {{ old('forma_pago') == 'otro' ? 'selected' : '' }}>Otro</option>
+
+                                    </select>
                                 </div>
                             </div>
 

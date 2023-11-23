@@ -189,7 +189,6 @@
                                         </div>
                                     </div>
 
-
                                     <div class="form-group col-4">
                                         <label for="name">Total</label>
                                         <div class="input-group mb-3">

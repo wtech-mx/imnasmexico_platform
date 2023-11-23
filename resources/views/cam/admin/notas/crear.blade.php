@@ -462,7 +462,6 @@
                                                         <option value="Tarjeta" {{ old('metodo_pago2') == 'Tarjeta' ? 'selected' : '' }}>Tarjeta</option>
                                                         <option value="Transferencia" {{ old('metodo_pago2') == 'Transferencia' ? 'selected' : '' }}>Transferencia</option>
                                                     </select>
-                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
