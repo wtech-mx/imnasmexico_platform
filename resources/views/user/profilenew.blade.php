@@ -393,7 +393,7 @@ Mi perfil- {{$cliente->name}}
                                                     </div>
 
                                                     <div class="col-12">
-                                                        <h3 class="text-center mt-5 mb-5"><img class="icon_nav_course" src="{{asset('assets/user/icons/maestro.PNG')}}" alt=""> <strong>Material de clase , literatura , Avales, ETC..</strong></h3>
+                                                        <h3 class="text-center mt-5 mb-5"><img class="icon_nav_course" src="{{asset('assets/user/icons/maestro.png')}}" alt=""> <strong>Material de clase , Literatura , Avales, ETC..</strong></h3>
                                                     </div>
 
                                                     <div class="d-flex justify-content-center">
@@ -431,21 +431,21 @@ Mi perfil- {{$cliente->name}}
                                                                         @endphp
                                                                         @if ($carpeta->id_carpeta == $video->Cursos->carpeta)
                                                                             @if ($extension === 'pdf')
-                                                                            <div class="col-lg-4 col-md-6 col-sm-12  col-12 mt-3">
-                                                                                <p class="text-center">
-                                                                                    <h3>{{ substr($carpeta->nombre_recurso, 13) }}</h3>
-                                                                                <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
-                                                                                    <a class="text-dark d-block" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >
-                                                                                        Ver PDF
-                                                                                    </a>
-                                                                                </p>
-                                                                            </div>
+                                                                                <div class="col-lg-4 col-md-6 col-sm-12  col-12 mt-3">
+                                                                                    <p class="text-center">
+                                                                                        <h3>{{ substr($carpeta->nombre_recurso, 13) }}</h3>
+                                                                                        <embed class="embed_pdf" src="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" type="application/pdf"  />
+                                                                                        <a class="text-dark d-block" href="{{ asset('cursos/' . $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" target="_blank" >
+                                                                                            Ver PDF
+                                                                                        </a>
+                                                                                    </p>
+                                                                                </div>
                                                                             @else
-                                                                            <div class="col-lg-4 col-md-6 col-sm-12  col-12 mt-3">
-                                                                                <p class="text-center">
-                                                                                    <img class="img_material_clase_pc" id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" />
-                                                                                </p>
-                                                                            </div>
+                                                                                <div class="col-lg-6 col-md-6 col-sm-12  col-12 mt-3">
+                                                                                    <p class="text-center">
+                                                                                        <img class="img_material_clase_pc" id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" />
+                                                                                    </p>
+                                                                                </div>
                                                                             @endif
                                                                         @endif
                                                                     @endforeach
