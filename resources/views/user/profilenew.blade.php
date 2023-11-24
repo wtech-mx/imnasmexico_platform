@@ -180,190 +180,6 @@ Mi perfil- {{$cliente->name}}
                     <h2 class="title_curso mb-3">Documentos</h2>
                     <img class="icon_nav_course" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
                 </div>
-                {{-- <nav>
-                    <div class="d-flex justify-content-center">
-                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-login-tab" data-bs-toggle="tab" data-bs-target="#nav-login" type="button" role="tab" aria-controls="nav-login" aria-selected="true">
-                                Doc. Personal
-                            </button>
-                        </div>
-                    </div>
-                </nav>
-
-                <div class="tab-content" id="nav-tabContent" style="">
-                    <div class="tab-pane fade show active" id="nav-login" role="tabpanel" aria-labelledby="nav-login-tab" tabindex="0" style="min-height: auto!important;">
-                        <form method="POST" action="{{ route('clientes.update_documentos_cliente', $cliente->id) }}" enctype="multipart/form-data" role="form" onsubmit="disableButton()">
-                            @csrf
-                            <input type="hidden" name="_method" value="PATCH">
-
-                            <div class="row">
-                                @php
-                                    $tiene_documentos = false;
-                                @endphp
-                                @foreach($documentos as $documento)
-                                        @php
-                                            $tiene_documentos = true;
-                                        @endphp
-
-                                        <div class="col-6 form-group p-3 mt-2">
-
-                                            @if($documento->ine !== null)
-
-                                            @if (pathinfo($documento->ine, PATHINFO_EXTENSION) == 'pdf')
-
-                                                <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine)}}" style="width:100%; height: 100px;"></iframe>
-                                                <p class="text-center ">
-                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
-                                                </p>
-                                                @else
-                                                    <p class="text-center mt-2">
-                                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" alt="Imagen" style="width: 100px;height: 100px;"/><br>
-                                                        <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
-                                                    </p>
-                                                @endif
-                                                <p class="text-center">
-                                                    Se ha cargado tu <strong>INE</strong> con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
-                                                    ¿Quieres reemplazar el archivo actual?
-                                                </p>
-
-                                                <div class="d-flex justify-content-center">
-                                                    <a id="noButton" class="btn_save_profile" >No</a>
-                                                    <a id="siButton" class="btn_save_profile" style="margin-left: 1rem">Si -</a>
-                                                </div>
-
-                                                <div class="content_files">
-                                                    <label for="ine">INE Frente y atras</label><br>
-                                                    <input name="ine" hidden id="btnoriginal2" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall2').innerText=document.getElementById('btnoriginal2').files[0]['name'];" type="file" value="Adjuntar documento">
-                                                    <button type="button" id='botonpersonal2' onClick="document.getElementById('btnoriginal2').click();">Adjuntar documento</button>
-                                                    <small id='tagsmall2'></small>
-                                                </div>
-
-                                            @else
-                                                  <label for="ine">INE Frente y atras</label><br>
-                                                  <input name="ine" hidden id="btnoriginal2" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall2').innerText=document.getElementById('btnoriginal2').files[0]['name'];" type="file" value="Adjuntar documento">
-                                                  <button type="button" id='botonpersonal2' onClick="document.getElementById('btnoriginal2').click();">Adjuntar documento</button>
-                                                  <small id='tagsmall2'></small>
-                                            @endif
-
-                                        </div>
-
-                                        <div class="col-6 form-group p-3 mt-2">
-
-                                            @if($documento->curp !== null)
-
-                                            @if (pathinfo($documento->curp, PATHINFO_EXTENSION) == 'pdf')
-
-                                                <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp)}}" style="width:100%; height: 100px;"></iframe>
-                                                <p class="text-center ">
-                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
-                                                </p>
-                                                @else
-                                                    <p class="text-center mt-2">
-                                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" alt="Imagen" style="width: 100px;height: 100px;"/><br>
-                                                        <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
-                                                    </p>
-                                                @endif
-                                                <p class="text-center">
-                                                    Se ha cargado tu <strong>CURP</strong> con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
-                                                    ¿Quieres reemplazar el archivo actual?
-                                                </p>
-
-                                                <div class="d-flex justify-content-center">
-                                                    <a id="noButton2" class="btn_save_profile" >No</a>
-                                                    <a id="siButton2" class="btn_save_profile" style="margin-left: 1rem">Si -</a>
-                                                </div>
-
-                                                <div class="content_files2">
-                                                    <label for="curp">CURP</label><br>
-                                                    <input name="curp" hidden id="btnoriginal3" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall1').innerText=document.getElementById('btnoriginal3').files[0]['name'];" type="file" value="Adjuntar documento">
-                                                    <button type="button" id='botonpersonal1' onClick="document.getElementById('btnoriginal3').click();">Adjuntar documento</button>
-                                                </div>
-
-                                            @else
-                                                <label for="curp">CURP</label><br>
-                                                <input name="curp" hidden id="btnoriginal3" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall1').innerText=document.getElementById('btnoriginal3').files[0]['name'];" type="file" value="Adjuntar documento">
-                                                <button type="button" id='botonpersonal1' onClick="document.getElementById('btnoriginal3').click();">Adjuntar documento</button>
-                                            @endif
-                                        </div>
-
-                                        <div class="col-6 form-group p-3 mt-2">
-
-                                            @if($documento->foto_tam_infantil !== null)
-
-                                            @if (pathinfo($documento->foto_tam_infantil, PATHINFO_EXTENSION) == 'pdf')
-
-                                                <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil)}}" style="width: 100px;height: 100px;"></iframe>
-                                                <p class="text-center ">
-                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
-                                                </p>
-                                                @else
-                                                    <p class="text-center mt-2">
-                                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" alt="Imagen" style="width: 100px;height: 100px;"/><br>
-                                                        <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
-                                                    </p>
-                                                @endif
-                                                <p class="text-center">
-                                                    Se ha cargado tu <strong>FOTO</strong> con exito <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
-                                                    ¿Quieres reemplazar el archivo actual?
-                                                </p>
-
-                                                <div class="d-flex justify-content-center">
-                                                    <a id="noButton3" class="btn_save_profile" >No</a>
-                                                    <a id="siButton3" class="btn_save_profile" style="margin-left: 1rem">Si -</a>
-                                                </div>
-
-                                                <div class="content_files3">
-                                                    <label for="foto_tam_infantil">Foto Infantil blanco y/o negro</label><br>
-                                                    <input name="foto_tam_infantil" hidden id="btnoriginal4" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall4').innerText=document.getElementById('btnoriginal4').files[0]['name'];" type="file" value="Adjuntar documento">
-                                                    <button type="button" id='botonpersonal4' onClick="document.getElementById('btnoriginal4').click();">Adjuntar documento</button>
-                                                </div>
-
-                                            @else
-                                                <label for="foto_tam_infantil">Foto Infantil blanco y/o negro</label><br>
-                                                <input name="foto_tam_infantil" hidden id="btnoriginal4" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall4').innerText=document.getElementById('btnoriginal4').files[0]['name'];" type="file" value="Adjuntar documento">
-                                                <button type="button" id='botonpersonal4' onClick="document.getElementById('btnoriginal4').click();">Adjuntar documento</button>
-                                            @endif
-                                        </div>
-                                @endforeach
-
-                                @if($tiene_documentos)
-                                    <!-- Si el usuario tiene documentos, no mostramos el formulario -->
-                                @else
-                                    <!-- Si el usuario no tiene documentos, mostramos el formulario -->
-                                    <div class="col-6 form-group p-3 mt-2">
-                                        <label for="ine">INE Frente y atras</label><br>
-                                        <input name="ine" hidden id="btnoriginal3" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall2').innerText=document.getElementById('btnoriginal3').files[0]['name'];" type="file" value="Adjuntar documento">
-                                        <button type="button" id='botonpersonal3' onClick="document.getElementById('btnoriginal3').click();">Adjuntar documento</button>
-                                        <small id='tagsmall2'>No hay archivos adjuntos</small>
-                                    </div>
-
-                                    <div class="col-6 form-group p-3 mt-2">
-                                        <label for="curp">CURP</label><br>
-                                        <input name="curp" hidden id="btnoriginal3" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall3').innerText=document.getElementById('btnoriginal3').files[0]['name'];" type="file" value="Adjuntar documento">
-                                        <button type="button" id='botonpersonal3' onClick="document.getElementById('btnoriginal3').click();">Adjuntar documento</button>
-                                        <small id='tagsmall3'>No hay archivos adjuntos</small>
-                                    </div>
-
-                                    <div class="col-6 form-group p-3 mt-2">
-                                        <label for="foto_tam_titulo">Foto Infantil blanco y/o negro</label><br>
-                                        <input name="foto_tam_infantil" hidden id="btnoriginal4" class="form-control text-center col-md-6" onChange="document.getElementById('tagsma015').innerText=document.getElementById('btnoriginal4').files[0]['name'];" type="file" value="Adjuntar documento">
-                                        <button type="button" id='botonpersonal4' onClick="document.getElementById('btnoriginal4').click();">Adjuntar documento</button>
-                                        <small id='tagsmall4'>No hay archivos adjuntos</small>
-                                    </div>
-
-                                @endif
-
-                                <div class="col-12">
-                                    <button type="submit"  id="submitButton" class="btn_save_profile d-inline-block" style="border: solid 0px;" >
-                                        Guardar
-                                    </button>
-                                </div>
-
-                            </div>
-
-                        </form>
-                    </div>
-                </div> --}}
                 @include('user.profile_documentos')
             </div>
         </div>
@@ -576,6 +392,10 @@ Mi perfil- {{$cliente->name}}
                                                         @endif
                                                     </div>
 
+                                                    <div class="col-12">
+                                                        <h3 class="text-center mt-5 mb-5"><img class="icon_nav_course" src="{{asset('assets/user/icons/maestro.PNG')}}" alt=""> <strong>Material de clase , literatura , Avales, ETC..</strong></h3>
+                                                    </div>
+
                                                     <div class="d-flex justify-content-center">
                                                         <ul class="nav nav-tabs" id="myTabs">
                                                             <li class="nav-item">
@@ -621,7 +441,7 @@ Mi perfil- {{$cliente->name}}
                                                                                 </p>
                                                                             </div>
                                                                             @else
-                                                                            <div class="col-12 mt-3">
+                                                                            <div class="col-lg-4 col-md-6 col-sm-12  col-12 mt-3">
                                                                                 <p class="text-center">
                                                                                     <img class="img_material_clase_pc" id="img_material_clase" src="{{asset('cursos/'. $carpeta->nombre_carpeta . '/' . $carpeta->nombre_recurso) }}" />
                                                                                 </p>
@@ -636,11 +456,12 @@ Mi perfil- {{$cliente->name}}
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                         <div class="tab-pane fade" id="content2{{$video->id_tickets}}" role="tabpanel" aria-labelledby="tab2">
                                                             <div class="row">
 
                                                                     @if (isset($carpetas_literatura) && $carpetas_literatura != NULL)
-                                                                    <div class="col-12">
+                                                                    <div class="col-12  mt-2 mb-2">
                                                                         <h2>Literatura de fase de tratamiento facial  <img src="{{ asset('assets/user/icons/skincare.png') }}" alt="" style="width:30px;"></h2>
                                                                     </div>
                                                                         @foreach ($carpetas_literatura as $carpeta)
@@ -669,7 +490,7 @@ Mi perfil- {{$cliente->name}}
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
-                                                                        <div class="col-12">
+                                                                        <div class="col-12 mt-2 mb-2">
                                                                             <h2>Literatura de fase de tratamiento corporal  <img src="{{ asset('assets/user/icons/massage.png') }}" alt="" style="width:30px;"></h2>
                                                                         </div>
                                                                         @foreach ($carpetas_literatura as $carpeta)
