@@ -29,7 +29,7 @@
                 @if($tiene_documentos)
 
                 @foreach($documentos as $documento)
-                        <div class="col-6 form-group">
+                        <div class="col-6 form-group mb-5">
                             <label for="ine">INE Frente y Atras</label>
                             <input id="ine" name="ine" type="file" class="form-control" >
                             @if ($documento->ine == NULL)
@@ -61,7 +61,7 @@
                             @endif
                         </div>
 
-                        <div class="col-6 form-group">
+                        <div class="col-6 form-group mb-5">
                             <label for="curp">CURP</label>
                             <input id="curp" name="curp" type="file" class="form-control" >
                             @if ($documento->curp == NULL)
@@ -92,7 +92,7 @@
                             @endif
                         </div>
 
-                        <div class="col-6 form-group">
+                        <div class="col-6 form-group mb-5">
                             <label for="foto_tam_infantil">Foto Infantil color o blanco y negro</label>
                             <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
                             @if ($documento->foto_tam_infantil == NULL)
@@ -123,7 +123,7 @@
                             @endif
                         </div>
 
-                        <div class="col-6 form-group">
+                        <div class="col-6 form-group mb-5">
                             <label for="firma">Firma</label>
                             <input id="firma" name="firma" type="file" class="form-control" >
                             @if ($documento->firma == NULL)
@@ -156,22 +156,22 @@
                 @endforeach
 
                 @else
-                    <div class="col-6 form-group">
+                    <div class="col-6 form-group mb-5">
                         <label for="ine">INE Frente y Atras</label>
                         <input id="ine" name="ine" type="file" class="form-control" >
                     </div>
 
-                    <div class="col-6 form-group">
+                    <div class="col-6 form-group mb-5">
                         <label for="curp">CURP</label>
                         <input id="curp" name="curp" type="file" class="form-control" >
                     </div>
 
-                    <div class="col-6 form-group">
+                    <div class="col-6 form-group mb-5">
                         <label for="foto_tam_infantil">Foto Infantil color o blanco y negro</label>
                         <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
                     </div>
 
-                    <div class="col-6 form-group">
+                    <div class="col-6 form-group mb-5">
                         <label for="firma">Firma</label>
                         <input id="firma" name="firma" type="file" class="form-control" >
                     </div>
