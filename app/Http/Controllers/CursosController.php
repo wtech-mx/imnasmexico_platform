@@ -396,6 +396,12 @@ class CursosController extends Controller
         $curso->clase_grabada4 = $request->get('clase_grabada4');
         $curso->clase_grabada5 = $request->get('clase_grabada5');
         $curso->recurso = $request->get('recurso');
+
+        if($request->get('video_cad') == 1){
+            $curso->video_cad = $request->get('video_cad');
+            $curso->fecha_video = $fechaHoraActual;
+        }
+
         $curso->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

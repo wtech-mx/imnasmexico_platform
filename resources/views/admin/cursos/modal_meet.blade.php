@@ -17,34 +17,82 @@
                         <h6 class="">{{ $curso->nombre }}</h6>
                     </div>
 
-                    <div class="col-6 form-group">
+                    <div class="form-group col-6">
                         <label for="name">Clase grabada 1</label>
-                        <input id="clase_grabada" name="clase_grabada" type="text" class="form-control" value="{{ $curso->clase_grabada }}">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets/user/icons/grabacion-de-video.png') }}" alt="" width="35px">
+                            </span>
+                            <input id="clase_grabada" name="clase_grabada" type="text" class="form-control" value="{{ $curso->clase_grabada }}">
+                        </div>
                     </div>
 
-                    <div class="col-6 form-group">
+                    <div class="form-group col-6">
                         <label for="name">Clase grabada 2</label>
-                        <input id="clase_grabada2" name="clase_grabada2" type="text" class="form-control" value="{{ $curso->clase_grabada2 }}">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets/user/icons/grabacion-de-video.png') }}" alt="" width="35px">
+                            </span>
+                            <input id="clase_grabada2" name="clase_grabada2" type="text" class="form-control" value="{{ $curso->clase_grabada2 }}">
+                        </div>
                     </div>
 
-                    <div class="col-6 form-group">
+                    <div class="form-group col-6">
                         <label for="name">Clase grabada 3</label>
-                        <input id="clase_grabada3" name="clase_grabada3" type="text" class="form-control" value="{{ $curso->clase_grabada3 }}">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets/user/icons/grabacion-de-video.png') }}" alt="" width="35px">
+                            </span>
+                            <input id="clase_grabada3" name="clase_grabada3" type="text" class="form-control" value="{{ $curso->clase_grabada3 }}">
+                        </div>
                     </div>
 
-                    <div class="col-6 form-group">
+                    <div class="form-group col-6">
                         <label for="name">Clase grabada 4</label>
-                        <input id="clase_grabada4" name="clase_grabada4" type="text" class="form-control" value="{{ $curso->clase_grabada4 }}">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets/user/icons/grabacion-de-video.png') }}" alt="" width="35px">
+                            </span>
+                            <input id="clase_grabada4" name="clase_grabada4" type="text" class="form-control" value="{{ $curso->clase_grabada4 }}">
+                        </div>
                     </div>
 
-                    <div class="col-6 form-group">
+                    <div class="form-group col-6">
                         <label for="name">Clase grabada 5</label>
-                        <input id="clase_grabada5" name="clase_grabada5" type="text" class="form-control" value="{{ $curso->clase_grabada5 }}">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets/user/icons/grabacion-de-video.png') }}" alt="" width="35px">
+                            </span>
+                            <input id="clase_grabada5" name="clase_grabada5" type="text" class="form-control" value="{{ $curso->clase_grabada5 }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label for="name">Liga Meet</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets/user/icons/meet.png') }}" alt="" width="35px">
+                            </span>
+                            <input id="recurso" name="recurso" type="text" class="form-control" value="{{ $curso->recurso }}">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <h4>Reactivacion de videos</h4>
                     </div>
 
                     <div class="col-12 form-group">
-                        <label for="name">Liga Meet</label>
-                        <input id="recurso" name="recurso" type="text" class="form-control" value="{{ $curso->recurso }}">
+                        <label for="name">Al activar esta opcion se visualizaran las clases grabadas otras 72 horas</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets/user/icons/grabacion-de-video.png') }}" alt="" width="35px">
+                            </span>
+                            <select class="form-control" id="video_cad" name="video_cad">
+                                <option value="">Selecione una opcion</option>
+                                <option value="1">Si</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
                     </div>
 
                 </div>
