@@ -43,8 +43,8 @@
 
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="fecha">Objetivo *</label>
-                                                        <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control" required></textarea>
+                                                        <label for="Objetivo">Objetivo *</label>
+                                                        <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control" >-</textarea>
                                                     </div>
                                                 </div>
 
@@ -179,8 +179,8 @@
                                                             <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
                                                         </span>
                                                         <select class="form-control" id="visibilidad_carusel" name="visibilidad_carusel">
-                                                            <option value="">Visible</option>
-                                                            <option value="0" selected>No visible</option>
+                                                            <option value="" selected>Visible</option>
+                                                            <option value="0" >No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -353,21 +353,21 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="fecha">Temario</label>
-                                                        <textarea name="temario" id="temario" cols="10" rows="3" class="form-control"></textarea>
+                                                        <textarea name="temario" id="temario" cols="10" rows="3" class="form-control">-</textarea>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="fecha">RVOE</label>
-                                                        <textarea name="texto_rvoe" id="texto_rvoe" cols="10" rows="3" class="form-control"></textarea>
+                                                        <textarea name="texto_rvoe" id="texto_rvoe" cols="10" rows="3" class="form-control">-</textarea>
                                                     </div>
                                                 </div>
 
                                                 <div class=" col-12">
                                                     <div class="form-group">
                                                         <label for="nota">CONOCER</label>
-                                                        <textarea name="texto_conocer" id="texto_conocer" cols="10" rows="3" class="form-control"></textarea>
+                                                        <textarea name="texto_conocer" id="texto_conocer" cols="10" rows="3" class="form-control">-</textarea>
                                                     </div>
                                                 </div>
 

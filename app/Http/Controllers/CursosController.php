@@ -214,7 +214,7 @@ class CursosController extends Controller
         $curso->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->route('cursos.index')
+        return redirect()->route('cursos.index_mes')
             ->with('success', 'curso creado con exito.');
     }
 
