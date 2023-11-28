@@ -177,6 +177,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/cursos/material_clase/{id}', [App\Http\Controllers\CursosController::class, 'update_materialclase'])->name('cursos.material_clase');
     Route::delete('/admin/cursos/delete/{id}', [App\Http\Controllers\CursosController::class, 'destroy'])->name('cursos.destroy');
     Route::get('/admin/cursos/listas/{id}', [App\Http\Controllers\CursosController::class, 'listas'])->name('cursos.listas');
+    Route::patch('/admin/cursos/estatus/doc/{id}', [App\Http\Controllers\CursosController::class, 'estatus_doc'])->name('cambiar.estatus_doc');
     Route::post('/admin/cursos/correo/{id}', [App\Http\Controllers\CursosController::class, 'correo'])->name('cursos.correo');
 
     Route::post('/admin/cursos/recordatorios/store', [App\Http\Controllers\CursosController::class, 'recordatorios_store'])->name('recordatorio.store');

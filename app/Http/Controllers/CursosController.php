@@ -552,4 +552,18 @@ class CursosController extends Controller
         return redirect()->back()->with('success', 'El curso se ha duplicado correctamente');
     }
 
+    public function estatus_doc(Request $request, $id){
+
+        $order = OrdersTickets::find($id);
+        dd($order->Orders->id);
+        $order->clase_grabada2 = $request->get('clase_grabada2');
+        $order->clase_grabada3 = $request->get('clase_grabada3');
+        $order->clase_grabada4 = $request->get('clase_grabada4');
+        $order->clase_grabada5 = $request->get('clase_grabada5');
+        $order->reorder = $request->get('reorder');
+        $order->update();
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back()->with('success', 'curso actualizado con exito.');
+    }
 }
