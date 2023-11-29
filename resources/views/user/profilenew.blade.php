@@ -200,12 +200,12 @@ Mi perfil- {{$cliente->name}}
                                 @foreach ($usuario_compro as $video)
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingOne">
-                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$video->id_tickets}}" aria-expanded="true" aria-controls="collapseOne{{$video->id}}" style="background-color: #836262;">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$video->id_tickets}}" aria-expanded="true" aria-controls="collapseOne{{$video->id}}" style="background-color: #836262;">
                                                 <img class="icon_nav_course" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt=""> {{$video->Cursos->nombre}}
                                             </button>
                                         </h2>
 
-                                        <div id="collapseOne{{$video->id_tickets}}" class="accordion-collapse collapsed" aria-labelledby="headingOne" data-bs-parent="#acordcion_mb_clases">
+                                        <div id="collapseOne{{$video->id_tickets}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#acordcion_mb_clases">
                                             <div class="accordion-body">
                                                 <div class="row">
 
