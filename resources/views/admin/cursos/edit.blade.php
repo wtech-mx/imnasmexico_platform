@@ -89,7 +89,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="estandar">Seleccionar Carpeta Compartida</label>
-                                                        <select class="form-control" id="carpeta" name="carpeta">
+                                                        <select class="form-control carpetas" id="carpeta" name="carpeta">
                                                             @if ($curso->carpeta == NULL)
                                                                 <option value="">Seleccione Carpeta</option>
                                                             @else
@@ -745,6 +745,10 @@
         // In your Javascript (external .js resource or <script> tag)
         $(document).ready(function() {
             $('.js-example-basic-single').select2();
+        });
+
+        $(document).ready(function() {
+            $('.carpetas').select2();
         });
     </script>
 @endsection
