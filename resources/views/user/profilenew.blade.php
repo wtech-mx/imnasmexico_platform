@@ -205,7 +205,7 @@ Mi perfil- {{$cliente->name}}
                                             </button>
                                         </h2>
 
-                                        <div id="collapseOne{{$video->id_tickets}}" class="accordion-collapse" aria-labelledby="headingOne" data-bs-parent="#acordcion_mb_clases">
+                                        <div id="collapseOne{{$video->id_tickets}}" class="accordion-collapse collapsed" aria-labelledby="headingOne" data-bs-parent="#acordcion_mb_clases">
                                             <div class="accordion-body">
                                                 <div class="row">
 
