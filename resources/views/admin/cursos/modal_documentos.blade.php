@@ -60,7 +60,7 @@
                                         UNAM
                                     </h5>
                                     @endif
-                                @endif
+                            @endif
                             <p class="text-center">
                                 El Diploma esta listo para ser enviado el correo que si tiene guardado es:
                                 <strong>{{ $order->User->email }}</strong>
@@ -628,14 +628,14 @@
                         @if ($ticket->Cursos->stps == '1')
                         <p>Diploma STPS</p>
                         @endif
-                        @if ($ticket->Cursos->titulo_hono == '1')
+                        @if ($ticket->Cursos->titulo_hono == '1' && $ticket->Cursos->titulo_hono == '1')
                             <hr style="border-top: 1px solid red">
                             <p>Titulo Honorifico</p>
                         @endif
                         @if ($ticket->Cursos->redconocer == '1')
                             <p>REDCONOCER</p>
                         @endif
-                        @if ($ticket->Cursos->imnas == '1')
+                        @if ($ticket->descripcion == 'Con opción a Documentos de certificadora IMNAS')
                             <p>Cedula de Identidad</p>
                             <hr style="border-top: 1px solid red">
                             <p>Titulo Honorifico</p>
@@ -677,7 +677,7 @@
                                 @endif
                             </p>
                         @endif
-                        @if ($ticket->Cursos->imnas == '1')
+                        @if ($ticket->descripcion == 'Con opción a Documentos de certificadora IMNAS')
                             <p>
                                 @if ($order->estatus_cedula == '1')
                                     <img src="{{ asset('assets/user/utilidades/voto.png') }}" alt="" width="30px">
@@ -738,7 +738,7 @@
                                     @endif
                                 </p>
                                 @endif
-                                @if ($ticket->Cursos->titulo_hono == '1')
+                                @if ($ticket->Cursos->titulo_hono == '1' )
                                     <hr style="border-top: 1px solid red">
                                     <p>
                                         @if ($order->estatus_titulo == '1')
@@ -765,7 +765,7 @@
                                         @endif
                                     </p>
                                 @endif
-                                @if ($ticket->Cursos->imnas == '1')
+                                @if ($ticket->descripcion == 'Con opción a Documentos de certificadora IMNAS')
                                     <p>
                                         @if ($order->estatus_cedula == '1')
                                             <div class="form-check">

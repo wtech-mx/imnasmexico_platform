@@ -570,7 +570,7 @@
 
             <div class="tab-pane fade" id="nav-registro-imnas{{$order->User->id }}" role="tabpanel" aria-labelledby="nav-registro-imnas-tab" tabindex="0" style="min-height: auto!important;">
                 <div class="modal-body row">
-                    <div class="col-8">
+                    <div class="col-6">
                         <p><b>Documento</b></p>
                         <p>1. Cedula</p>
                         <hr style="border-top: 1px solid red">
@@ -582,10 +582,10 @@
                         <hr style="border-top: 1px solid red">
                         <p>5. Tira de materias</p>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <p><b>Entrega</b></p>
                         <p>
-                            @if ($order->estatus_doc == '1')
+                            @if ($order->estatus_cedula == '1')
                                 <img src="{{ asset('assets/user/utilidades/voto.png') }}" alt="" width="30px">
                             @else
                                 <img src="{{ asset('assets/user/utilidades/prohibicion.png') }}" alt="" width="30px">
@@ -624,6 +624,76 @@
                             @endif
                         </p>
 
+                    </div>
+                    <div class="col-3">
+                        <form method="POST" action="{{ route('cambiar.estatus_doc', $order->id) }}" enctype="multipart/form-data" role="form">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
+                                <p><b>¿Realizado?</b></p>
+                                    <p>
+                                        @if ($order->estatus_cedula == '1')
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" id="estatus_cedula" name="estatus_cedula" checked>
+                                            </div>
+                                        @else
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" id="estatus_cedula" name="estatus_cedula">
+                                            </div>
+                                        @endif
+                                    </p>
+                                    <hr style="border-top: 1px solid red">
+                                    <p>
+                                        @if ($order->estatus_titulo == '1')
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" id="estatus_titulo_imnas" name="estatus_titulo_imnas" checked>
+                                            </div>
+                                        @else
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" id="estatus_titulo_imnas" name="estatus_titulo_imnas">
+                                            </div>
+                                        @endif
+                                    </p>
+                                    <hr style="border-top: 1px solid red">
+                                    <p>
+                                        @if ($order->estatus_diploma == '1')
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" id="estatus_diploma" name="estatus_diploma" checked>
+                                            </div>
+                                        @else
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" id="estatus_diploma" name="estatus_diploma">
+                                            </div>
+                                        @endif
+                                    </p>
+                                    <hr style="border-top: 1px solid red">
+                                    <p>
+                                        @if ($order->estatus_credencial == '1')
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" id="estatus_credencial" name="estatus_credencial" checked>
+                                            </div>
+                                        @else
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" id="estatus_credencial" name="estatus_credencial">
+                                            </div>
+                                        @endif
+                                    </p>
+                                    <hr style="border-top: 1px solid red">
+                                    <p>
+                                        @if ($order->estatus_tira == '1')
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" id="estatus_tira" name="estatus_tira" checked>
+                                            </div>
+                                        @else
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="1" id="estatus_tira" name="estatus_tira">
+                                            </div>
+                                        @endif
+                                    </p>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff" title="Guardar Estatus">Actualizar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -555,12 +555,37 @@ class CursosController extends Controller
     public function estatus_doc(Request $request, $id){
 
         $order = OrdersTickets::find($id);
-        dd($order->Orders->id);
-        $order->clase_grabada2 = $request->get('clase_grabada2');
-        $order->clase_grabada3 = $request->get('clase_grabada3');
-        $order->clase_grabada4 = $request->get('clase_grabada4');
-        $order->clase_grabada5 = $request->get('clase_grabada5');
-        $order->reorder = $request->get('reorder');
+
+        if($request->estatus_redconocer == 1){
+            $order->estatus_doc = '1';
+            $order->estatus_cedula = '1';
+            $order->estatus_titulo = '1';
+            $order->estatus_diploma = '1';
+            $order->estatus_credencial = '1';
+            $order->estatus_tira = '1';
+            $order->estatus_redconocer = '1';
+        }elseif($order->CursosTickets->descripcion == 'Con opción a Documentos de certificadora IMNAS'){
+            $order->estatus_doc = '1';
+            $order->estatus_cedula = $request->get('estatus_cedula');
+            $order->estatus_titulo = $request->get('estatus_titulo_imnas');
+            $order->estatus_diploma = $request->get('estatus_diploma');
+            $order->estatus_credencial = $request->get('estatus_credencial');
+            $order->estatus_tira = $request->get('estatus_tira');
+            $order->estatus_redconocer = '1';
+        }elseif($request->estatus_titulo == '1' ){
+            $order->estatus_doc = '1';
+            $order->estatus_cedula = '1';
+            $order->estatus_titulo = '1';
+            $order->estatus_diploma = '1';
+            $order->estatus_credencial = '1';
+            $order->estatus_tira = '1';
+            $order->estatus_redconocer = '1';
+        }
+
+
+
+
+
         $order->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
