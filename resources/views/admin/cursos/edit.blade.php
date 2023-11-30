@@ -336,7 +336,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-2">
+                                                <div class="form-check col-3">
                                                     <div class="form-group">
                                                         @if ($curso->sep == 1)
                                                             <input class="form-check-input" type="checkbox" value="1" id="sep" name="sep" checked>
@@ -348,7 +348,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-2">
+                                                <div class="form-check col-3">
                                                     <div class="form-group">
                                                         @if ($curso->unam == 1)
                                                             <input class="form-check-input" type="checkbox" value="1" id="unam" name="unam" checked>
@@ -360,7 +360,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-2">
+                                                <div class="form-check col-3">
                                                     <div class="form-group">
                                                         @if ($curso->stps == 1)
                                                             <input class="form-check-input" type="checkbox" value="1" id="stps" name="stps" checked>
@@ -397,7 +397,7 @@
                                                 </div>
 
 
-                                                <div class="form-check col-2">
+                                                <div class="form-check col-3">
                                                     <div class="form-group">
                                                         @if ($curso->titulo_hono == 1)
                                                             <input class="form-check-input" type="checkbox" value="1" id="titulo_hono" name="titulo_hono" checked>
@@ -408,7 +408,90 @@
                                                         @endif
                                                     </div>
                                                 </div>
+
+
+                                                <div class="col-6 form-group">
+                                                    <label for="name">Paquete de cursos</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="">
+                                                            <img src="{{ asset('assets/cam/gestion-del-cambio.png') }}" alt="" width="35px">
+                                                        </span>
+                                                        <select id="opcion" name="pack_stps" class="form-control">
+                                                            <option selected>{{ $curso->pack_stps }}</option>
+                                                            <option value="Si">Si</option>
+                                                            <option value="No">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3 " id="contentGenerarSKU" style="display: none;">
+
+                                                    <div class="col-6 form-group">
+                                                        <label for="name">Nomnre de STPS 1</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="">
+                                                                <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input  id="p_stps_1" name="p_stps_1" type="text" class="form-control" value="{{ $curso->p_stps_1 }}" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6 form-group">
+                                                        <label for="name">Nomnre de STPS 2</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="">
+                                                                <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input  id="p_stps_2" name="p_stps_2" type="text" class="form-control" value="{{ $curso->p_stps_2 }}" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6 form-group">
+                                                        <label for="name">Nomnre de STPS 3</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="">
+                                                                <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input  id="p_stps_3" name="p_stps_3" type="text" class="form-control" value="{{ $curso->p_stps_3 }}" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6 form-group">
+                                                        <label for="name">Nomnre de STPS 4</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="">
+                                                                <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input  id="p_stps_4" name="p_stps_4" type="text" class="form-control" value="{{ $curso->p_stps_4 }}" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6 form-group">
+                                                        <label for="name">Nomnre de STPS 5</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="">
+                                                                <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input  id="p_stps_5" name="p_stps_5" type="text" class="form-control" value="{{ $curso->p_stps_5 }}" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6 form-group">
+                                                        <label for="name">Nomnre de STPS 6</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="">
+                                                                <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input  id="p_stps_6" name="p_stps_6" type="text" class="form-control" value="{{ $curso->seccion_unam }}" >
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+
                                             </div>
+
+
                                             <div class="button-row d-flex mt-4">
                                                 <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">Prev</button>
                                                 <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">Next</button>
@@ -649,6 +732,24 @@
 
    <script src="https://cdn.tiny.cloud/1/j1jav9k6mblf3p1zkwu0fxf5yfhp7b4inzjxkxfteidvmluh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
    <script>
+
+        $(document).ready(function() {
+
+            // Manejar el cambio en el select
+            $('#opcion').change(function() {
+                var selectedOption = $(this).val();
+
+                // Ocultar todas las secciones al cambiar la opción
+                $('#contentGenerarSKU').hide();
+
+                // Mostrar la sección correspondiente según la opción seleccionada
+                if (selectedOption === 'Si') {
+                    $('#contentGenerarSKU').show();
+                }
+            });
+
+        });
+
      tinymce.init({
        selector: '#descripcion', // Replace this CSS selector to match the placeholder element for TinyMCE
        plugins: 'code table lists'

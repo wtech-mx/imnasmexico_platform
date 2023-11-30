@@ -288,22 +288,23 @@
                                                     </div>
                                                 </div>
 
-                                                <h5>Documentacion</h5>
-                                                <div class="form-check col-2">
+                                                <h5 class="mb-5 mt-5">Documentacion</h5>
+
+                                                <div class="form-check col-3">
                                                     <div class="form-group">
                                                         <input class="form-check-input" type="checkbox" value="1" id="sep" name="sep">
                                                         <label for="nota">RVOE</label>
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-2">
+                                                <div class="form-check col-3">
                                                     <div class="form-group">
                                                         <input class="form-check-input" type="checkbox" value="1" id="unam" name="unam">
                                                         <label for="nota">UNAM</label>
                                                     </div>
                                                 </div>
 
-                                                <div class="form-check col-2">
+                                                <div class="form-check col-3">
                                                     <div class="form-group">
                                                         <input class="form-check-input" type="checkbox" value="1" id="stps" name="stps">
                                                         <label for="nota">STPS</label>
@@ -323,13 +324,91 @@
                                                         <label for="nota">IMNAS</label>
                                                     </div>
                                                 </div>
-                                            </div>
 
-                                            <div class="form-check col-2">
-                                                <div class="form-group">
-                                                    <input class="form-check-input" type="checkbox" value="1" id="titulo_hono" name="titulo_hono">
-                                                    <label for="nota">Titulo Honorifico</label>
+                                                <div class="form-check col-3">
+                                                    <div class="form-group">
+                                                        <input class="form-check-input" type="checkbox" value="1" id="titulo_hono" name="titulo_hono">
+                                                        <label for="nota">Titulo Honorifico</label>
+                                                    </div>
                                                 </div>
+
+                                                <div class="col-6 form-group">
+                                                    <label for="name">Paquete de cursos</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="">
+                                                            <img src="{{ asset('assets/cam/gestion-del-cambio.png') }}" alt="" width="35px">
+                                                        </span>
+                                                        <select id="opcion" name="pack_stps" class="form-control">
+                                                            <option value="Si">Si</option>
+                                                            <option selected value="No">No</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row mb-3 " id="contentGenerarSKU" style="display: none;">
+
+                                                    <div class="col-6 form-group">
+                                                        <label for="name">Nomnre de STPS 1</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="">
+                                                                <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input  id="p_stps_1" name="p_stps_1" type="text" class="form-control" placeholder="Nombre" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6 form-group">
+                                                        <label for="name">Nomnre de STPS 2</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="">
+                                                                <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input  id="p_stps_2" name="p_stps_2" type="text" class="form-control" placeholder="Nombre" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6 form-group">
+                                                        <label for="name">Nomnre de STPS 3</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="">
+                                                                <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input  id="p_stps_3" name="p_stps_3" type="text" class="form-control" placeholder="Nombre" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6 form-group">
+                                                        <label for="name">Nomnre de STPS 4</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="">
+                                                                <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input  id="p_stps_4" name="p_stps_4" type="text" class="form-control" placeholder="Nombre" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6 form-group">
+                                                        <label for="name">Nomnre de STPS 5</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="">
+                                                                <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input  id="p_stps_5" name="p_stps_5" type="text" class="form-control" placeholder="Nombre" >
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-6 form-group">
+                                                        <label for="name">Nomnre de STPS 6</label>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="">
+                                                                <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input  id="p_stps_6" name="p_stps_6" type="text" class="form-control" placeholder="Nombre" >
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
                                             </div>
 
                                             <div class="button-row d-flex mt-4">
@@ -500,7 +579,22 @@
    <script src="https://cdn.tiny.cloud/1/j1jav9k6mblf3p1zkwu0fxf5yfhp7b4inzjxkxfteidvmluh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
    <script>
         $(document).ready(function() {
+
             $('.carpeta_mat').select2();
+
+            // Manejar el cambio en el select
+            $('#opcion').change(function() {
+                var selectedOption = $(this).val();
+
+                // Ocultar todas las secciones al cambiar la opción
+                $('#contentGenerarSKU').hide();
+
+                // Mostrar la sección correspondiente según la opción seleccionada
+                if (selectedOption === 'Si') {
+                    $('#contentGenerarSKU').show();
+                }
+            });
+
         });
 
      tinymce.init({
@@ -532,9 +626,8 @@
        selector: '#materiales_ticket', // Replace this CSS selector to match the placeholder element for TinyMCE
        plugins: 'code table lists'
      });
-   </script>
 
-    <script>
+
         function readURL(input) {
     if (input.files && input.files[0]) { //Revisamos que el input tenga contenido
         var reader = new FileReader(); //Leemos el contenido
@@ -550,9 +643,7 @@
     $("#foto").change(function() { //Cuando el input cambie (se cargue un nuevo archivo) se va a ejecutar de nuevo el cambio de imagen y se verá reflejado.
     readURL(this);
     });
-    </script>
 
-<script type="text/javascript">
     // ============= Agregar mas inputs dinamicamente =============
     $('.clonar').click(function() {
       // Clona el .input-group
@@ -570,8 +661,8 @@
       // Agrega lo clonado al final del #formulario
       $clone.appendTo('#formulario');
     });
-    </script>
-    <script>
+
+
         function selectImage(foto) {
             $('#foto').val(foto);
         }
@@ -583,5 +674,7 @@
         function selectMateriales(materiales) {
             $('#materiales').val(materiales);
         }
+
+
     </script>
 @endsection
