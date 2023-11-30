@@ -772,6 +772,11 @@ class OrderController extends Controller
                 $id_ticket = $order_ticket->id;
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_doc = '1';
+                $ticket->estatus_cedula = '1';
+                $ticket->estatus_titulo = '1';
+                $ticket->estatus_diploma = '1';
+                $ticket->estatus_credencial = '1';
+                $ticket->estatus_tira = '1';
                 $ticket->update();
 
                 $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
