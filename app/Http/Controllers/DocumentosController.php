@@ -378,19 +378,41 @@ class DocumentosController extends Controller
                 $ticket->estatus_doc = '1';
                 $ticket->update();
 
-                $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
-                $pdf->setPaper('A4', 'portrait');
+                if($ticket->Cursos->pack_stps == "Si"){
+                    $variables = [
+                        $ticket->Cursos->p_stps_1,
+                        $ticket->Cursos->p_stps_2,
+                        $ticket->Cursos->p_stps_3,
+                        $ticket->Cursos->p_stps_4,
+                        $ticket->Cursos->p_stps_5,
+                        $ticket->Cursos->p_stps_6,
+                    ];
 
-                $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
-                $pdf->setPaper('A4', 'portrait');
+                    foreach ($variables as $index => $curso) {
+                        if (isset($curso) && !empty($curso)) {
+                            // Lógica para crear el PDF y enviar el correo aquí
+                            $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre'));
+                            $pdf->setPaper('A4', 'portrait');
+                            $contenidoPDF = $pdf->output();
 
-                $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+                            Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
 
-                Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                            // Si solo quieres generar uno, puedes agregar un break después del Mail::send
+                            // break;
+                        }
+                    }
+                }else{
+                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                    $pdf->setPaper('A4', 'portrait');
 
-                //return redirect()->back()->with('success', 'Enviado por email correctamente');
+                    $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
 
-                //return $pdf->download('diploma_stps_'.$nombre.'.pdf');
+                    Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+
+                    //return redirect()->back()->with('success', 'Enviado por email correctamente');
+
+                    //return $pdf->download('diploma_stps_'.$nombre.'.pdf');
+                }
 
             }elseif($tipo_documentos->tipo == 'Cedula de indetidad'){
                 $id_ticket = $request->get('id_ticket_orders');
@@ -617,19 +639,41 @@ class DocumentosController extends Controller
                     $ticket->estatus_tira = '1';
                     $ticket->update();
 
-                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
-                    $pdf->setPaper('A4', 'portrait');
+                    if($ticket->Cursos->pack_stps == "Si"){
+                        $variables = [
+                            $ticket->Cursos->p_stps_1,
+                            $ticket->Cursos->p_stps_2,
+                            $ticket->Cursos->p_stps_3,
+                            $ticket->Cursos->p_stps_4,
+                            $ticket->Cursos->p_stps_5,
+                            $ticket->Cursos->p_stps_6,
+                        ];
 
-                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
-                    $pdf->setPaper('A4', 'portrait');
+                        foreach ($variables as $index => $curso) {
+                            if (isset($curso) && !empty($curso)) {
+                                // Lógica para crear el PDF y enviar el correo aquí
+                                $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre'));
+                                $pdf->setPaper('A4', 'portrait');
+                                $contenidoPDF = $pdf->output();
 
-                    $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+                                Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
 
-                    Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                                // Si solo quieres generar uno, puedes agregar un break después del Mail::send
+                                // break;
+                            }
+                        }
+                    }else{
+                        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                        $pdf->setPaper('A4', 'portrait');
 
-                    //return redirect()->back()->with('success', 'Enviado por email correctamente');
+                        $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
 
-                    //return $pdf->download('diploma_stps_'.$nombre.'.pdf');
+                        Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+
+                        //return redirect()->back()->with('success', 'Enviado por email correctamente');
+
+                        //return $pdf->download('diploma_stps_'.$nombre.'.pdf');
+                    }
 
                 }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR_CFC'){
                     $id_ticket = $request->get('id_ticket_orders');
@@ -669,19 +713,34 @@ class DocumentosController extends Controller
                     $ticket->estatus_tira = '1';
                     $ticket->update();
 
-                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
-                    $pdf->setPaper('A4', 'portrait');
+                    if($ticket->Cursos->pack_stps == "Si"){
+                        $variables = [
+                            $ticket->Cursos->p_stps_1,
+                            $ticket->Cursos->p_stps_2,
+                            $ticket->Cursos->p_stps_3,
+                            $ticket->Cursos->p_stps_4,
+                            $ticket->Cursos->p_stps_5,
+                            $ticket->Cursos->p_stps_6,
+                        ];
 
-                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
-                    $pdf->setPaper('A4', 'portrait');
+                        foreach ($variables as $index => $curso) {
+                            if (isset($curso) && !empty($curso)) {
+                                // Lógica para crear el PDF y enviar el correo aquí
+                                $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre'));
+                                $pdf->setPaper('A4', 'portrait');
+                                $contenidoPDF = $pdf->output();
 
-                    $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+                                Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                            }
+                        }
+                    }else{
+                        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                        $pdf->setPaper('A4', 'portrait');
 
-                    Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                        $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
 
-                    //return redirect()->back()->with('success', 'Enviado por email correctamente');
-
-                    //return $pdf->download('diploma_stps_'.$nombre.'.pdf');
+                        Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                    }
 
                 }
             }

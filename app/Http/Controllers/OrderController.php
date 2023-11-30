@@ -371,10 +371,32 @@ class OrderController extends Controller
                             $ticket->estatus_tira = '1';
                             $ticket->update();
 
-                            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
-                            $pdf->setPaper('A4', 'portrait');
-                            $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
-                            Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                            if($ticket->Cursos->pack_stps == "Si"){
+                                $variables = [
+                                    $ticket->Cursos->p_stps_1,
+                                    $ticket->Cursos->p_stps_2,
+                                    $ticket->Cursos->p_stps_3,
+                                    $ticket->Cursos->p_stps_4,
+                                    $ticket->Cursos->p_stps_5,
+                                    $ticket->Cursos->p_stps_6,
+                                ];
+
+                                foreach ($variables as $index => $curso) {
+                                    if (isset($curso) && !empty($curso)) {
+                                        // Lógica para crear el PDF y enviar el correo aquí
+                                        $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre'));
+                                        $pdf->setPaper('A4', 'portrait');
+                                        $contenidoPDF = $pdf->output();
+
+                                        Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                                    }
+                                }
+                            }else{
+                                $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                                $pdf->setPaper('A4', 'portrait');
+                                $contenidoPDF = $pdf->output();
+                                Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                            }
 
                         }
                         if($details->Cursos->stps == '1' && $details->Cursos->titulo_hono == NULL){
@@ -388,10 +410,32 @@ class OrderController extends Controller
                             $ticket->estatus_tira = '1';
                             $ticket->update();
 
-                            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
-                            $pdf->setPaper('A4', 'portrait');
-                            $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
-                            Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                            if($ticket->Cursos->pack_stps == "Si"){
+                                $variables = [
+                                    $ticket->Cursos->p_stps_1,
+                                    $ticket->Cursos->p_stps_2,
+                                    $ticket->Cursos->p_stps_3,
+                                    $ticket->Cursos->p_stps_4,
+                                    $ticket->Cursos->p_stps_5,
+                                    $ticket->Cursos->p_stps_6,
+                                ];
+
+                                foreach ($variables as $index => $curso) {
+                                    if (isset($curso) && !empty($curso)) {
+                                        // Lógica para crear el PDF y enviar el correo aquí
+                                        $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre'));
+                                        $pdf->setPaper('A4', 'portrait');
+                                        $contenidoPDF = $pdf->output();
+
+                                        Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                                    }
+                                }
+                            }else{
+                                $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                                $pdf->setPaper('A4', 'portrait');
+                                $contenidoPDF = $pdf->output();
+                                Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                            }
 
                         }
                     }
@@ -523,47 +567,6 @@ class OrderController extends Controller
             $estado = 'En Espera';
             $facturas->estatus = $estado;
             $facturas->save();
-
-            // $line_items = [];
-            // // Recorrer los tickets y agregarlos al array line_items
-            // foreach ($orden_ticket as $ticket) {
-            //     $line_items[] = [
-            //         'product_id' => 'nombre del producto',
-            //         'quantity' => 1
-            //     ];
-            // }
-
-            // // Creacion de orden en woo
-            // $data = [
-            //     'payment_method'       => 'Stripe Platform',
-            //     'payment_method_title' => 'Stripe Platform',
-            //     'set_paid'             => true,
-            //     'billing'              => [
-            //         'first_name' => 'John',
-            //         'last_name'  => 'Doe',
-            //         'address_1'  => '969 Market',
-            //         'address_2'  => '',
-            //         'city'       => 'San Francisco',
-            //         'state'      => 'CA',
-            //         'postcode'   => '94103',
-            //         'country'    => 'US',
-            //         'email'      => 'john.doe@example.com',
-            //         'phone'      => '(555) 555-5555',
-            //     ],
-            //     'shipping'             => [
-            //         'first_name' => 'John',
-            //         'last_name'  => 'Doe',
-            //         'address_1'  => '969 Market',
-            //         'address_2'  => '',
-            //         'city'       => 'San Francisco',
-            //         'state'      => 'CA',
-            //         'postcode'   => '94103',
-            //         'country'    => 'US',
-            //     ],
-            //     'line_items' => $line_items,
-            // ];
-
-            // $order = Order::create($data);
 
         } else {
             $order = Orders::find($order->id);
