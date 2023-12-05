@@ -185,6 +185,8 @@ class PagosFueraController extends Controller
                 $curso = $details->Cursos->nombre;
                 $fecha = $details->Cursos->fecha_inicial;
                 $nombre = $order->User->name;
+                $horas_default = "24";
+                $duracion_hrs = $horas_default;
                 $tipo_documentos = Tipodocumentos::first();
 
                 if ($details->Cursos->modalidad == 'Online') {
@@ -221,7 +223,7 @@ class PagosFueraController extends Controller
                             foreach ($variables as $index => $curso) {
                                 if (isset($curso) && !empty($curso)) {
                                     // Lógica para crear el PDF y enviar el correo aquí
-                                    $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre'));
+                                    $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre','duracion_hrs'));
                                     $pdf->setPaper('A4', 'portrait');
                                     $contenidoPDF = $pdf->output();
 
@@ -245,7 +247,7 @@ class PagosFueraController extends Controller
                             $ticket->estatus_tira = '1';
                             $ticket->update();
 
-                            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs'));
                             $pdf->setPaper('A4', 'portrait');
                             $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
                             Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));

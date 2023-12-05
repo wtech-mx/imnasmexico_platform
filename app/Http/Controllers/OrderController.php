@@ -350,6 +350,8 @@ class OrderController extends Controller
                     $curso = $details->Cursos->nombre;
                     $fecha = $details->Cursos->fecha_inicial;
                     $nombre = $order->User->name;
+                    $horas_default = "24";
+                    $duracion_hrs = $horas_default;
                     $tipo_documentos = Tipodocumentos::first();
 
                     if ($details->Cursos->modalidad == 'Online') {
@@ -384,7 +386,7 @@ class OrderController extends Controller
                                 foreach ($variables as $index => $curso) {
                                     if (isset($curso) && !empty($curso)) {
                                         // Lógica para crear el PDF y enviar el correo aquí
-                                        $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre'));
+                                        $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre','horas_default'));
                                         $pdf->setPaper('A4', 'portrait');
                                         $contenidoPDF = $pdf->output();
 
@@ -392,7 +394,7 @@ class OrderController extends Controller
                                     }
                                 }
                             }else{
-                                $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                                $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','horas_default'));
                                 $pdf->setPaper('A4', 'portrait');
                                 $contenidoPDF = $pdf->output();
                                 Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));

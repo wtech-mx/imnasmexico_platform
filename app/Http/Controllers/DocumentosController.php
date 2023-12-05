@@ -339,7 +339,6 @@ class DocumentosController extends Controller
         $curp = $request->get('curp');
 
         $horas_default = "24";
-
         $duracion_hrs = $horas_default;
 
         $email_user = $request->get('email');
