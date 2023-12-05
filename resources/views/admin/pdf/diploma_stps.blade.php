@@ -76,9 +76,17 @@
     {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
     <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
 
+    @php
+        // Verificar si $duracion_hrs está vacía y asignarle "48 horas" si es el caso
+        $duracion_hrs = empty($duracion_hrs) ? '48' : $duracion_hrs;
+
+    @endphp
+
     <div class="container_horas">
         <h4 class="horas">Otorga el presente reconocimiento con valor curricular de {{ $duracion_hrs }} horas a:</h4>
     </div>
+
+
 
     <div class="container">
         <h4 class="nombre">{{ ucwords(strtolower($nombre)) }}</h4>
