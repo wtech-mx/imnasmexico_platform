@@ -217,6 +217,24 @@ Reporte de Documentos
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+
+    const radioSiMayo = document.getElementById('radioSiMayo');
+    const radioNoMayo = document.getElementById('radioNoMayo');
+
+    const precioMayoristaContainer = document.getElementById('precioMayoristaContainer');
+
+    radioSiMayo.addEventListener('change', function() {
+        if (radioSiMayo.checked) {
+            precioMayoristaContainer.style.display = 'block';
+        }
+    });
+
+    radioNoMayo.addEventListener('change', function() {
+        if (radioNoMayo.checked) {
+            precioMayoristaContainer.style.display = 'none';
+    }
+    });
+
     const curpOption = document.getElementById("curp_option");
     const tipoOption = document.getElementById("tipo");
 

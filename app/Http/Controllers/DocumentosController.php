@@ -111,7 +111,16 @@ class DocumentosController extends Controller
 
         $nombre = $request->get('nombre');
         $fecha = $request->get('fecha');
-        $curso = $request->get('curso');
+
+        if($request->get('curso') == null){
+
+            $curso = $request->get('curso_name');
+
+        }else{
+            $curso = $request->get('curso');
+        }
+
+        $duracion_hrs = $request->get('duracion_hrs');
         $tipo = $request->get('tipo');
         $folio = $request->get('folio');
         $curp = $request->get('curp');
@@ -143,7 +152,7 @@ class DocumentosController extends Controller
 
         if($tipo_documentos->tipo == 'Diploma_STPS'){
 
-            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs'));
             $pdf->setPaper('A4', 'portrait');
 
             return $pdf->download('diploma_stps_'.$nombre.'.pdf');
@@ -329,6 +338,10 @@ class DocumentosController extends Controller
         $folio = $request->get('folio');
         $curp = $request->get('curp');
 
+        $horas_default = "24";
+
+        $duracion_hrs = $horas_default;
+
         $email_user = $request->get('email');
         //$email_user = 'adrianwebtech@gmail.com';
         $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
@@ -391,7 +404,7 @@ class DocumentosController extends Controller
                     foreach ($variables as $index => $curso) {
                         if (isset($curso) && !empty($curso)) {
                             // Lógica para crear el PDF y enviar el correo aquí
-                            $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre'));
+                            $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre','duracion_hrs'));
                             $pdf->setPaper('A4', 'portrait');
                             $contenidoPDF = $pdf->output();
 
@@ -402,7 +415,7 @@ class DocumentosController extends Controller
                         }
                     }
                 }else{
-                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs'));
                     $pdf->setPaper('A4', 'portrait');
 
                     $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.

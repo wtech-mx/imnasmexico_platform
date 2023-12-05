@@ -64,9 +64,36 @@
                                                     </span>
                                                     <select name="curso" id="curso" class="form-select">
                                                         @foreach ($cursosArray as $nombre)
+                                                        <option value="">Seleccionar Curso</option>
                                                         <option value="{{ $nombre }}">{{ $nombre }}</option>
                                                         @endforeach
                                                     </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-6">
+                                                <label for="name" class="label_custom_primary_product mb-2">Escribir Manualmente</label>
+
+                                                <div class="input-group d-flex justify-content-around mt-3">
+                                                      <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radioSiMayo" value="Si">
+                                                        <label class="form-check-label" for="">Si</label>
+                                                      </div>
+
+                                                      <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="radioNoMayo" value="No">
+                                                        <label class="form-check-label" for="">No</label>
+                                                      </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-12" id="precioMayoristaContainer" style="display: none;">
+                                                <label for="name" class="label_custom_primary_product mb-2">Nombre del curso:</label>
+                                                <div class="input-group ">
+                                                    <span class="input-group-text span_custom_tab" >
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="curso_name" name="curso_name" type="text"  class="form-control input_custom_tab @error('curso_name') is-invalid @enderror"  value="{{ old('curso_name') }}" autocomplete="" autofocus>
                                                 </div>
                                             </div>
 
@@ -77,6 +104,16 @@
                                                         <img class="img_profile_label" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="" width="30px">
                                                     </span>
                                                     <input id="fecha" name="fecha" type="date" class="form-control" required >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-6 ">
+                                                <label for="name">Duracion del curso en horas: </label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="duracion_hrs" name="duracion_hrs" type="number" class="form-control" value="48" >
                                                 </div>
                                             </div>
 

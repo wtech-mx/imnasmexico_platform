@@ -209,7 +209,6 @@ class PagosFueraController extends Controller
                         $ticket->estatus_tira = '1';
                         $ticket->update();
 
-
                             $variables = [
                                 $details->Cursos->p_stps_1,
                                 $details->Cursos->p_stps_2,
