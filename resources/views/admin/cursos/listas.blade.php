@@ -310,7 +310,10 @@
 
                 language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
-                }
+                },
+                columnDefs: [
+                    { type: 'num', targets: 0 } // Indica que la columna 0 (No) debe ser tratada como número
+                ]
             });
         });
     @endforeach
