@@ -110,10 +110,13 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                                @php
+                                                    $contador = 1;
+                                                @endphp
                                                 @foreach ($ordenes as $order)
                                                         @if ($order->id_tickets == $ticket->id && $order->Orders->estatus == '1')
                                                             <tr class="{{ ($order->estatus_doc == 1 && $order->estatus_cedula == 1 && $order->estatus_titulo == 1 && $order->estatus_diploma == 1 && $order->estatus_credencial == 1 && $order->estatus_tira == 1) ? 'estatus-doc-green' : 'estatus-doc-red' }}">
-                                                                <td>{{ $order->Orders->id }}</td>
+                                                                <td>{{ $contador++ }}</td>
                                                                 <td>
                                                                     <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a><br>
                                                                     <p>{{ $order->User->telefono }}</p>
@@ -186,7 +189,7 @@
                                                     @if ($order->Orders->PagosFuera != NULL)
                                                         @if ($order->id_tickets == $ticket->id && ($order->Cursos->modalidad == 'Presencial' && $order->Orders->PagosFuera->deudor == '1'))
                                                             <tr class="{{ ($order->estatus_doc == 1 && $order->estatus_cedula == 1 && $order->estatus_titulo == 1 && $order->estatus_diploma == 1 && $order->estatus_credencial == 1 && $order->estatus_tira == 1) ? 'estatus-doc-green' : 'estatus-doc-red' }}">
-                                                                <td>{{ $order->Orders->id }}</td>
+                                                                <td>{{ $contador++ }}</td>
                                                                 <td>
                                                                     <a href=" {{ route('perfil.show', $order->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $order->User->name }}</a><br>
                                                                     <p>{{ $order->User->telefono }}</p>
@@ -307,7 +310,10 @@
 
                 language: {
                     url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
-                }
+                },
+                columnDefs: [
+                    { type: 'num', targets: 0 } // Indica que la columna 0 (No) debe ser tratada como número
+                ]
             });
         });
     @endforeach
