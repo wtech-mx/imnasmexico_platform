@@ -219,9 +219,19 @@
                                                                     @endif
                                                                 </td>
                                                                 <td>
+                                                                    @if ($order->CursosTickets->descripcion == 'Con opción a Documentos de certificadora IMNAS')
+                                                                    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_imnas_documentos_{{ $order->User->id }}">
+                                                                        <i class="fa fa-file"></i>
+                                                                    </a>
+                                                                    @elseif ($ticket->descripcion == 'Opción a certificación a masaje holístico EC0900')
+                                                                    <a class="btn btn-sm btn-success">
+                                                                        <i class="fa fa-file"></i>
+                                                                    </a>
+                                                                    @else
                                                                     <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_documentos_{{ $order->User->id }}">
                                                                         <i class="fa fa-file"></i>
                                                                     </a>
+                                                                    @endif
 
                                                                     <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form" style="display: inline-block">
                                                                         @csrf
