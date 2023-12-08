@@ -64,7 +64,6 @@
                                                     </span>
                                                     <select name="curso" id="curso" class="form-select">
                                                         @foreach ($cursosArray as $nombre)
-                                                        <option value="">Seleccionar Curso</option>
                                                         <option value="{{ $nombre }}">{{ $nombre }}</option>
                                                         @endforeach
                                                     </select>

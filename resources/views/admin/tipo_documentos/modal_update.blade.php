@@ -20,9 +20,8 @@
 
                     <div class="form-group col-12">
                         <label for="name">Tipo</label>
-                        <label for="name">Tipo</label>
                         <select name="tipo" id="tipo" class="form-select">
-                            <option value="">{{ $item->tipo }}</option>
+                            <option value="{{ $item->tipo }}">{{ $item->tipo }}</option>
                             <option value="Cedula de indetidad">CN - Cedula de identidad papel</option>
                             <option value="Credencial">CN - Credencial plastico</option>
                             <option value="Diploma">CN - Diploma</option>
