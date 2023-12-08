@@ -27,7 +27,8 @@
         }
 
         .img_reverso{
-            width: 100%;
+            width: 812px;
+            height:1280px;
         }
 
         .nombre_reverso{
