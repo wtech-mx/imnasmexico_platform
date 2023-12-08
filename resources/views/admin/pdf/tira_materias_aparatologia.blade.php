@@ -22,10 +22,22 @@
             position:relative;
         }
 
+        .contenedor_reverso{
+            position: relative;
+        }
+
         .img_reverso{
             width: 100%;
-            height: auto;
-            position:relative;
+        }
+
+        .nombre_reverso{
+            position: absolute;
+            top: 61.5%;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: red;
+            font-size: 14px;
         }
 
         .container {
@@ -60,7 +72,6 @@
             transform: translate(-50%, -50%);
             text-align: center;
         }
-
         .container4{
             position: absolute;
             top:21.2%;
@@ -165,8 +176,8 @@
                     }
         @endphp
 
-        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
+        {{--<img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">--}}
 
         <div class="container">
             <h4 class="nombre">{!! $nombre_formateado !!}<</h4>
@@ -193,6 +204,13 @@
 
         <div class="container_folio_bajo1">
             <h4 class="folio3">{{$folio}}</h4>
+        </div>
+
+        <div class="contenedor_reverso">
+            <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
+
+            {{--<img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">--}}
+            <h4 class="nombre_reverso">{{ ucwords(strtolower($curso)) }}</h4>
         </div>
 
     </body>
