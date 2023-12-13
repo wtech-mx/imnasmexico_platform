@@ -92,18 +92,18 @@
             height: 330px;
             position: absolute;
             overflow: hidden;
-            top: 43%;
+            top: 42.7%;
             left: 7%;
             background: transparent;
         }
 
         .oval {
-            width: 100%;
+            width: 90%;
             height: 100%;
             border-radius: 50%;
             background-color: transparent;
             position: absolute;
-            clip-path: ellipse(50% 50% at 50% 50%);
+            clip-path: ellipse(50% 50% at 50% 40%);
             transform: translateX(-50%);
             left: 50%;
             background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
