@@ -130,8 +130,8 @@
             height: 117px;
             position: absolute;
             overflow: hidden;
-            top: 15%;
-            right:3.9%;
+            top: 14.8%;
+            right:4.2%;
             background: transparent;
         }
 
@@ -144,8 +144,8 @@
             clip-path: ellipse(50% 50% at 50% 50%);
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-            /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
+            /* background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}'); */
+            background-image: url('utilidades_documentos/{{ $fileName }}');
             background-size: cover;
             background-position: center center;
 
