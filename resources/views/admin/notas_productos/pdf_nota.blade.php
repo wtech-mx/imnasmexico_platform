@@ -61,7 +61,7 @@
   </style>
 <body>
   <header>
-    <h1>Nota de Remision</h1>
+    <h1>Nota de Remision #{{$nota->id}}</h1>
     <h2>Naturales AIN SPA</h2>
   </header>
 
