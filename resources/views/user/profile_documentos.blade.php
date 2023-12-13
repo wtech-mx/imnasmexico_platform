@@ -167,7 +167,7 @@
                     </div>
 
                     <div class="col-6 form-group mb-5">
-                        <label for="foto_tam_infantil">Foto Infantil color o blanco y negro</label>
+                        <label for="foto_tam_infantil">Foto Infantil color</label>
                         <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
                     </div>
 
