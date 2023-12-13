@@ -188,6 +188,19 @@
             background-size: cover;
             background-position: center center;
         }
+
+        .container_imgtrasera{
+            position: relative;
+        }
+
+        .curso_atras{
+            position: absolute;
+            top:82.5%;
+            left: 4%;
+            color: red;
+            font-size: 5px
+        }
+
     </style>
 
 </head>
@@ -274,7 +287,11 @@
             {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
         </div>
 
-        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
+        <div class="container_imgtrasera">
+            <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
+            <p class="curso_atras">{{ $curso }}</p>
+        </div>
+
         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
 
     </body>
