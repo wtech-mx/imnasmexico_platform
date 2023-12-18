@@ -63,6 +63,7 @@
                                                         <img class="img_profile_label" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt="" width="30px">
                                                     </span>
                                                     <select name="curso" id="curso" class="form-select">
+                                                        <option value="">Selecionar opcion</option>
                                                         @foreach ($cursosArray as $nombre)
                                                         <option value="{{ $nombre }}">{{ $nombre }}</option>
                                                         @endforeach
