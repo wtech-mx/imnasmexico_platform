@@ -16,7 +16,7 @@
 
         @include('cam.usuario.componentes.header')
 
-        <div class="col-4">
+        {{-- <div class="col-4">
             <div class="d-flex justify-content-center">
                 <div class="card_user">
                     <img src="{{ asset('assets/cam/usuario.png') }}" alt="" width="80px"> <br>
@@ -25,7 +25,7 @@
             <div class="d-flex justify-content-center mt-3">
                 <h5 class="tittle_border_cam_min">Datos generales</h5>
             </div>
-        </div>
+        </div> --}}
 
         <div class="col-4">
             <div class="d-flex justify-content-center">
@@ -43,7 +43,7 @@
             </div>
         </div>
 
-        <div class="col-4">
+        {{-- <div class="col-4">
             <div class="d-flex justify-content-center">
                 <div class="card_user">
                     <a href="{{ route('evaluador.index_expediente', $usuario->code) }}">
@@ -56,7 +56,7 @@
                     <h5 class="tittle_border_cam_min">Expediente</h5>
                 </a>
             </div>
-        </div>
+        </div> --}}
 
     </div>
 </section>
