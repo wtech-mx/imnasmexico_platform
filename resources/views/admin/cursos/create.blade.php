@@ -333,7 +333,7 @@
                                                 </div>
 
                                                 <div class="col-6 form-group">
-                                                    <label for="name">Paquete de cursos</label>
+                                                    <label for="name">Paquete de STPS</label>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text" id="">
                                                             <img src="{{ asset('assets/cam/gestion-del-cambio.png') }}" alt="" width="35px">
