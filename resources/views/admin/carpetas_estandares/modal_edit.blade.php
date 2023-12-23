@@ -65,8 +65,10 @@
                             @endif
 
                             <p class="text-center">
-                                <a class="btn btn-sm btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form').submit();"><i class="fa fa-trash-o"></i></a>
-                                <form id="delete-form" action="{{ route('carpetas_estandares.destroy', $recurso->id) }}" method="POST" style="display: none;">
+                                <a class="btn btn-sm btn-danger" onclick="event.preventDefault(); document.getElementById('delete-form-{{ $recurso->id }}').submit();">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                                <form id="delete-form-{{ $recurso->id }}" action="{{ route('carpetas_estandares.destroy', $recurso->id) }}" method="POST" style="display: none;">
                                     @csrf
                                     @method('DELETE')
                                 </form>
