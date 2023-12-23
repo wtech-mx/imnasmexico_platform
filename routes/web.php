@@ -223,6 +223,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::patch('/cursos/cambio/{id}', [App\Http\Controllers\PagosFueraController::class, 'cambio'])->name('cursos.cambio');
     Route::get('/admin/pagos/edit/cambio/{id}',  [App\Http\Controllers\PagosFueraController::class, 'getTicketsByCurso']);
+
+    Route::get('/admin/pagos/mercadopago', [App\Http\Controllers\PagosFueraController::class, 'index_mp'])->name('pagos.mp');
     /*|--------------------------------------------------------------------------
     |Configuracion
     |--------------------------------------------------------------------------*/

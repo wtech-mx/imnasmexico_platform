@@ -130,8 +130,8 @@
             height: 117px;
             position: absolute;
             overflow: hidden;
-            top: 15%;
-            right:3.9%;
+            top: 14.8%;
+            right:4.2%;
             background: transparent;
         }
 

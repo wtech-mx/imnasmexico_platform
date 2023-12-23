@@ -283,6 +283,13 @@
                     <div class="collapse " id="pagesExamplescarrito">
                     <ul class="nav ms-4">
                         <li class="nav-item ">
+                            <a class="nav-link {{ (Request::is('admin/pagos*') ? 'show' : '') }}" href="{{ route('pagos.mp') }}">
+                                <span class="sidenav-mini-icon">C</span>
+                                <span class="sidenav-normal">Completados MP</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item ">
                         <a class="nav-link {{ (Request::is('admin/pagos*') ? 'show' : '') }}" href="{{ route('pagos.index_pago') }}">
                             <span class="sidenav-mini-icon">C</span>
                             <span class="sidenav-normal">Completados</span>

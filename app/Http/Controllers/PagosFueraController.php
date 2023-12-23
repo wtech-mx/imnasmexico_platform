@@ -25,6 +25,7 @@ use App\Models\Cursos;
 use Illuminate\Support\Str;
 use DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class PagosFueraController extends Controller
 {
@@ -36,6 +37,15 @@ class PagosFueraController extends Controller
         $clases_grabadas = CursosTickets::where('fecha_final','<=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
 
         return view('admin.pagos_fuera.inscripcion', compact('pagos_fuera', 'cursos', 'clases_grabadas'));
+    }
+
+    public function index_mp(){
+        $fechaInicioSemana = Carbon::now()->startOfWeek()->toDateString();
+        $fechaFinSemana = Carbon::now()->endOfWeek()->toDateString();
+
+        $orders = Orders::orderBy('id','DESC')->where('estatus', '=', '1')->whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])->where('forma_pago', '=', 'Mercado Pago')->get();
+
+        return view('admin.pagos.index_mp', compact('orders'));
     }
 
     public function store(Request $request)

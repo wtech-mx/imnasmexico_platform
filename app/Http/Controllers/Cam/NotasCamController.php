@@ -90,6 +90,7 @@ class NotasCamController extends Controller
             $payer->email = $request->get('email');
             $payer->username = $request->get('celular');
             $payer->telefono = $request->get('celular');
+            $payer->cam = $password;
             $payer->code = $code;
             $payer->razon_social = $request->get('razon_social');
             $payer->direccion = $request->get('direccion');
