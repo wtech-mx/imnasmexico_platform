@@ -53,7 +53,7 @@
                   @csrf
 
                   <div class="mb-3">
-                    <input id="username" name="username" type="number" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required autofocus>
+                    <input id="username" name="username" type="text" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required autofocus>
                         @error('username')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
