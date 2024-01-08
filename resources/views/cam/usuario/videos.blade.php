@@ -39,10 +39,11 @@
             <p class="text-center tittle_bold_cam">
 
                 @if ($item->orden == 1 || ($video->{"check" . ($item->orden - 1)} !== null && $video->{"check" . ($item->orden - 1)} !== ""))
-
+{{-- 
                 <video width="320" height="240" class="video d-block" controls>
                     <source src="{{ $item->video_url }}" type="video/mp4">
-                </video>
+                </video> --}}
+                <iframe src="{{ $item->video_url }}" class="iframe_clase"></iframe>
 
                 <form method="POST" action="{{ route('evaluador.update_videos', $video->id) }}" enctype="multipart/form-data" role="form">
                     @csrf
