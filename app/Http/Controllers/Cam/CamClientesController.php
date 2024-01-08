@@ -27,10 +27,10 @@ class CamClientesController extends Controller
 
         $video = CamVideosUser::where('id_cliente', '=', $usuario->id)->first();
 
-        if($usuario->cliente == '3'){
+        if($usuario->user_cam == '3'){
             $camvideos = CamVideos::where('tipo', '=', 'Evaluador Independiente')->get();
 
-        }else if($usuario->cliente == '4'){
+        }else if($usuario->user_cam == '4'){
             $camvideos = CamVideos::where('tipo', '=', 'Centro Evaluador')->get();
         }
 
@@ -43,10 +43,10 @@ class CamClientesController extends Controller
 
         $video = CamVideosUser::where('id_cliente', '=', $usuario->id)->first();
 
-        if($usuario->cliente == '3'){
+        if($usuario->user_cam == '3'){
             $camvideos = CamVideos::where('tipo', '=', 'Evaluador Independiente')->get();
 
-        }else if($usuario->cliente == '4'){
+        }else if($usuario->user_cam == '4'){
             $camvideos = CamVideos::where('tipo', '=', 'Centro Evaluador')->get();
         }
 

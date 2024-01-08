@@ -16,15 +16,15 @@
 
         <div class="col-12 mb-5 mt-5">
             <h1 class="text-center tittle_border_cam">Aprende los pasos que debes seguir <br>
-                @if($usuario->cliente == '4')
+                @if($usuario->user_cam == '4')
                     Centro Evaluador
                 @else
                     Evaluador independiente
                 @endif
             </h3>
-                <div class="d-flex justify-content-center">
+                {{-- <div class="d-flex justify-content-center">
                     <a class="text-center btn btn-lg btn-outline-light " href="{{ route('cam.index', $usuario->code) }}">Regresar al inicio</a>
-                </div>
+                </div> --}}
         </div>
 
         @foreach ($camvideos as $item)

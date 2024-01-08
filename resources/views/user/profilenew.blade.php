@@ -22,6 +22,28 @@ Mi perfil- {{$cliente->name}}
 
     <div class="row space_newprofile" style="">
 
+        @if($cliente->user_cam == '4' || $cliente->user_cam == '3')
+            <div class="col-12 col-lg-12">
+                <div class="card_single_horizon">
+                    <div class="d-flex justify-content-between">
+                        <h2 class="title_curso mb-3" style="color: #6EC1E4!important">CAM</h2>
+                        <img class="icon_nav_course" src="{{asset('assets/user/logotipos/cam.png')}}" style="background-color: #6EC1E4!important">
+                    </div>
+
+                    <div class="row space_laaterales_profile">
+                        <a href="{{ route('dashboard.videos', $cliente->code) }}">
+                            @if($cliente->user_cam == '4')
+                                <h3 class="title_curso mb-3">Bienvenido Centro  Evaluador - Ver videos de CAM</h3>
+                            @else
+                                <h3 class="title_curso mb-3">Bienvenido Evaluador independiente - Ver videos de CAM</h3>
+                            @endif
+
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="col-12">
             <div class="card_single_horizon">
                     <div class="d-flex justify-content-between">

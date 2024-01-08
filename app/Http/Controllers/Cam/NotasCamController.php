@@ -80,8 +80,52 @@ class NotasCamController extends Controller
         if (User::where('telefono', $request->celular)->exists() || User::where('email', $request->email)->exists()) {
             if (User::where('telefono', $request->celular)->exists()) {
                 $user = User::where('telefono', $request->celular)->first();
+                $user->razon_social = $request->get('razon_social');
+                $user->direccion = $request->get('direccion');
+                $user->country = $request->get('country');
+                $user->state = $request->get('state');
+                $user->postcode = $request->get('postcode');
+                $user->city = $request->get('city');
+                $user->celular_casa = $request->get('telefono');
+                $user->facebook = $request->get('facebook');
+                $user->tiktok = $request->get('tiktok');
+                $user->instagram = $request->get('instagram');
+                $user->pagina_web = $request->get('pagina_web');
+                $user->otra_red = $request->get('otra_red');
+                $user->puesto = $request->get('puesto');
+                $user->curp = $request->get('curp');
+                $user->cam = $password;
+                $user->password = Hash::make($password);
+                if($request->get('tipo') == 'Centro Evaluación'){
+                    $user->user_cam = '4';
+                }else{
+                    $user->user_cam = '3';
+                }
+                $user->update();
             } else {
                 $user = User::where('email', $request->email)->first();
+                $user->razon_social = $request->get('razon_social');
+                $user->direccion = $request->get('direccion');
+                $user->country = $request->get('country');
+                $user->state = $request->get('state');
+                $user->postcode = $request->get('postcode');
+                $user->city = $request->get('city');
+                $user->celular_casa = $request->get('telefono');
+                $user->facebook = $request->get('facebook');
+                $user->tiktok = $request->get('tiktok');
+                $user->instagram = $request->get('instagram');
+                $user->pagina_web = $request->get('pagina_web');
+                $user->otra_red = $request->get('otra_red');
+                $user->puesto = $request->get('puesto');
+                $user->curp = $request->get('curp');
+                $user->cam = $password;
+                $user->password = Hash::make($password);
+                if($request->get('tipo') == 'Centro Evaluación'){
+                    $user->user_cam = '4';
+                }else{
+                    $user->user_cam = '3';
+                }
+                $user->update();
             }
             $payer = $user;
         } else {
@@ -106,11 +150,11 @@ class NotasCamController extends Controller
             $payer->otra_red = $request->get('otra_red');
             $payer->puesto = $request->get('puesto');
             $payer->curp = $request->get('curp');
-
+            $payer->cliente = '1';
             if($request->get('tipo') == 'Centro Evaluación'){
-                $payer->cliente = '4';
+                $payer->user_cam = '4';
             }else{
-                $payer->cliente = '3';
+                $payer->user_cam = '3';
             }
 
             $payer->membresia = $request->get('membresia');

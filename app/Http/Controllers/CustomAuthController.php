@@ -31,12 +31,13 @@ class CustomAuthController extends Controller
             if(Auth::user()->cliente == '2' or  Auth::user()->cliente == '5'){
                 return redirect('/profesor/inicio');
 
-            }elseif(Auth::user()->cliente == '4' or Auth::user()->cliente == '3'){
+            }elseif(Auth::user()->user_cam == '4' or Auth::user()->user_cam == '3'){
                 $code = Auth::user()->code;
-                return redirect()->route('cam.index', ['code' => $code])->withSuccess('Sesión iniciada');
-
+                return redirect()->route('perfil.index', ['code' => $code])->withSuccess('Sesión iniciada');
             }else{
-                return redirect("calendario")->withSuccess('Sesión iniciada');
+                $code = Auth::user()->code;
+                return redirect()->route('perfil.index', ['code' => $code])->withSuccess('Sesión iniciada');
+                // return redirect("calendario")->withSuccess('Sesión iniciada');
             }
 
         }else{

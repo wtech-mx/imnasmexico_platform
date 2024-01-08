@@ -1,6 +1,6 @@
 <div class="col-12 mb-5">
     <h1 class="text-center tittle_bold_cam">Bienvenido <br>
-        @if($usuario->cliente == '4')
+        @if($usuario->user_cam == '4')
             Centro Evaluador
         @else
             Evaluador independiente
