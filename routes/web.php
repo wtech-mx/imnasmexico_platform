@@ -152,6 +152,9 @@ Route::get('/nota/curso', [App\Http\Controllers\NotasCursosController::class, 'i
 
 Route::group(['middleware' => ['auth']], function() {
 
+    // =============== M O D U L O   P A Q U E T E S ===============================
+    Route::get('/admin/paquetes', [App\Http\Controllers\PaquetesController::class, 'index'])->name('paquetes.index');
+    Route::patch('/admin/paquetes/update/{id}', [App\Http\Controllers\PaquetesController::class, 'update'])->name('paquetes.update');
 
     Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/roles', [App\Http\Controllers\RoleController::class, 'index'])->name('roles.index');
