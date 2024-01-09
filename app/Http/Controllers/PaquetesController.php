@@ -11,9 +11,9 @@ class PaquetesController extends Controller
 {
     public function index(){
         $paquete = Paquetes::first();
-        $cursos = Cursos::where('precio', '>', 0)->orderBy('nombre','ASC')->pluck('nombre')->unique();
-        $paquete_incluye = PaquetesIncluye::get();
+        $cursos = Cursos::where('precio', '>', 0)->where('diplomado_colores', '=', null)->orderBy('nombre','ASC')->pluck('nombre')->unique();
         $cursosArray = $cursos->toArray();
+        $paquete_incluye = PaquetesIncluye::get();
 
         return view('admin.paquetes.index', compact('paquete', 'cursosArray', 'paquete_incluye'));
     }
