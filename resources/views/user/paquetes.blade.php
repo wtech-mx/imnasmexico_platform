@@ -10,226 +10,250 @@
 
 @section('content')
 
-<section class="primario bg_overley" style="background-color:#fff;">
-    <div id="paquete1">
-        <div class="row">
-            <div class="col-12 col-md-6 space_paquetes">
-                <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetesone_image) }}" alt="">
-            </div>
-
-            <div class="col-12 col-md-6 space_paquetes">
-                <h3 class="mt-3" style="color:#836262!important;">Paquete 1</h3>
-                <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
-                <h3 style="color: #836262"><strong>
-                    <del style="color: #836262">$7,400</del>
-                    $5,400</strong>
-                </h3>
-                <h5 style="color:#836262!important;">Descuento: <strong>$2,000</strong></h5>
-                <form class="mt-4" action="{{ route('carrito.resultado') }}" method="post">
-                    @csrf
-                    <h5 style="color:#836262!important;">Seleccione la canasta</h5>
-                    <div class="col-6">
-                        <select class="form-control" style="background: #F5ECE4!important;color: #836262;font-weight: bold;" name="canasta" id="canasta">
-                            <option value="Canasta facial">Canasta facial</option>
-                            <option value="Canasta Corporal">Canasta Corporal</option>
-                        </select>
+    @if ($paquete->visible_1 == 1)
+        <section class="primario bg_overley" style="background-color:#fff;">
+            <div id="paquete1">
+                <div class="row">
+                    <div class="col-12 col-md-6 space_paquetes">
+                        <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetesone_image) }}" alt="">
                     </div>
 
-                    @foreach ($tickets as $ticket)
-                    @php
-                        $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                        $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-                        $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
-                    @endphp
-                        <div class="mt-2 mt-md-5 mt-lg-3">
-                            <input class="input_paquetes" type="checkbox" name="ticket[]" id="checkbox{{ $ticket->id }}" data-grupo="grupo1" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo1()">
-                            <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
-                        </div>
-                    @endforeach
-                    <input type="hidden" name="opciones_seleccionadas" value="">
-                    <input type="hidden" name="paquete" value="1">
-                    <button class="btn_paquetes btn-submit" type="submit" id="boton-compra" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="primario bg_overley" style="background-color:#F5ECE4;">
-    <div id="paquete2">
-        <div class="row">
-            <div class="col-12 col-md-6 order-dos space_paquetes">
-                <h3 class="mt-3" style="color:#836262!important;">Paquete 2</h3>
-                <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
-                <h3 style="color: #836262"><strong>
-                    <del style="color: #836262">$9,400</del>
-                    $8,000</strong>
-                </h3>
-                <h5 style="color:#836262!important;">Descuento: <strong>$1,400</strong></h5>
-                <form class="mt-4" action="{{ route('carrito.resultado2') }}" method="post">
-                    @csrf
-                    <h5 style="color:#836262!important;">Seleccione la canasta</h5>
-                    <div class="col-6">
-                        <select class="form-control" style="background: #836262!important;color: #F5ECE4;font-weight: bold;" name="canasta" id="canasta">
-                            <option value="Canasta facial">Canasta facial</option>
-                            <option value="Canasta Corporal">Canasta Corporal</option>
-                        </select>
+                    <div class="col-12 col-md-6 space_paquetes">
+                        <h3 class="mt-3" style="color:#836262!important;">Paquete 1</h3>
+                        <h3 style="color: #836262"><strong>
+                            <del style="color: #836262">${{number_format($paquete->precio_1, 2, '.', ',');}} mxn</del>
+                            ${{number_format($paquete->precio_rebajado_1, 2, '.', ',');}} mxn</strong>
+                        </h3>
+                        @php
+                          $descuento = $paquete->precio_1 - $paquete->precio_rebajado_1;
+                        @endphp
+                        <h5 style="color:#836262!important;">Descuento: <strong>${{number_format($descuento, 2, '.', ',');}} mxn</strong></h5>
+                        <form class="mt-4" action="{{ route('carrito.resultado') }}" method="post">
+                            @csrf
+                            <h5 style="color:#836262!important;">Seleccione la canasta</h5>
+                            <div class="col-6">
+                                <select class="form-control" style="background: #F5ECE4!important;color: #836262;font-weight: bold;" name="canasta" id="canasta">
+                                    <option value="Canasta facial">Canasta facial</option>
+                                    <option value="Canasta Corporal">Canasta Corporal</option>
+                                </select>
+                            </div>
+                            <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+                            @foreach ($tickets as $ticket)
+                            @php
+                                $fecha_inicial = $ticket->Cursos->fecha_inicial;
+                                $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                                $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
+                            @endphp
+                                <div class="mt-2 mt-md-5 mt-lg-3">
+                                    <input class="input_paquetes" type="checkbox" name="ticket[]" id="checkbox{{ $ticket->id }}" data-grupo="grupo1" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo1()">
+                                    <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
+                                </div>
+                            @endforeach
+                            <input type="hidden" name="opciones_seleccionadas" value="">
+                            <input type="hidden" name="paquete" value="1">
+                            <button class="btn_paquetes btn-submit" type="submit" id="boton-compra" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
+                        </form>
                     </div>
-                    @foreach ($tickets as $ticket)
-                    @php
-                        $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                        $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-                        $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
-                    @endphp
-                        <div class="mt-2 mt-md-5 mt-lg-3">
-                            <input class="input_paquetes" type="checkbox" name="ticket2[]" data-grupo="grupo2" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo2()">
-                            <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
-                        </div>
-                    @endforeach
-                    <input type="hidden" name="opciones_seleccionadas2" value="">
-                    <input type="hidden" name="paquete" value="2">
-                    <button class="btn_paquetes btn-submit" type="submit" id="boton-compra2" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
-                </form>
+                </div>
             </div>
+        </section>
+    @endif
 
-            <div class="col-12 col-md-6 order-uno space_paquetes">
-                <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetestwo_image) }}" alt="">
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="primario bg_overley" style="background-color:#fff;">
-    <div id="paquete3">
-        <div class="row">
-            <div class="col-12 col-md-6 space_paquetes">
-                <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetesthree_image) }}" alt="">
-            </div>
-
-            <div class="col-12 col-md-6 space_paquetes">
-                <h3 class="mt-3" style="color:#836262!important;">Paquete 3</h3>
-                <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
-                <h3 style="color: #836262"><strong>
-                    <del style="color: #836262">$12,400</del>
-                    $11,000</strong>
-                </h3>
-                <h5 style="color:#836262!important;">Descuento: <strong>$1,400</strong></h5>
-                <form class="mt-4" action="{{ route('carrito.resultado3') }}" method="post">
-                    @csrf
-                    <div class="col-6">
-                        <h5 style="color:#836262!important;">Seleccione la canasta</h5>
-                        <select class="form-control" style="background: #F5ECE4!important;color: #836262;font-weight: bold;" name="canasta" id="canasta">
-                            <option value="Canasta facial">Canasta facial</option>
-                            <option value="Canasta Corporal">Canasta Corporal</option>
-                        </select>
+    @if ($paquete->visible_2 == 1)
+        <section class="primario bg_overley" style="background-color:#F5ECE4;">
+            <div id="paquete2">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-dos space_paquetes">
+                        <h3 class="mt-3" style="color:#836262!important;">Paquete 2</h3>
+                        <h3 style="color: #836262"><strong>
+                            <del style="color: #836262">${{number_format($paquete->precio_2, 2, '.', ',');}} mxn</del>
+                            ${{number_format($paquete->precio_rebajado_2, 2, '.', ',');}} mxn</strong>
+                        </h3>
+                        @php
+                            $descuento2 = $paquete->precio_2 - $paquete->precio_rebajado_2;
+                        @endphp
+                        <h5 style="color:#836262!important;">Descuento: <strong>${{number_format($descuento2, 2, '.', ',');}} mxn</strong></h5>
+                        <form class="mt-4" action="{{ route('carrito.resultado2') }}" method="post">
+                            @csrf
+                            <h5 style="color:#836262!important;">Seleccione la canasta</h5>
+                            <div class="col-6">
+                                <select class="form-control" style="background: #836262!important;color: #F5ECE4;font-weight: bold;" name="canasta" id="canasta">
+                                    <option value="Canasta facial">Canasta facial</option>
+                                    <option value="Canasta Corporal">Canasta Corporal</option>
+                                </select>
+                            </div>
+                            <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+                            @foreach ($tickets as $ticket)
+                            @php
+                                $fecha_inicial = $ticket->Cursos->fecha_inicial;
+                                $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                                $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
+                            @endphp
+                                <div class="mt-2 mt-md-5 mt-lg-3">
+                                    <input class="input_paquetes" type="checkbox" name="ticket2[]" data-grupo="grupo2" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo2()">
+                                    <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
+                                </div>
+                            @endforeach
+                            <input type="hidden" name="opciones_seleccionadas2" value="">
+                            <input type="hidden" name="paquete" value="2">
+                            <button class="btn_paquetes btn-submit" type="submit" id="boton-compra2" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
+                        </form>
                     </div>
-                    @foreach ($tickets as $ticket)
-                    @php
-                        $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                        $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-                        $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
-                    @endphp
-                        <div class="mt-2 mt-md-5 mt-lg-3">
-                            <input class="input_paquetes" type="checkbox" name="ticket3[]" data-grupo="grupo3" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo3()">
-                            <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
-                        </div>
-                    @endforeach
-                    <input type="hidden" name="opciones_seleccionadas3" value="">
-                    <input type="hidden" name="paquete" value="3">
-                    <button class="btn_paquetes btn-submit" type="submit" id="boton-compra3" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
 
-<section class="primario bg_overley" style="background-color:#F5ECE4;">
-    <div id="paquete4">
-        <div class="row">
-            <div class="col-12 col-md-6 order-dos space_paquetes">
-                <h3 class="mt-3" style="color:#836262!important;">Paquete 4</h3>
-                <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
-                <h3 style="color: #836262"><strong>
-                    <del style="color: #836262">$14,400</del>
-                    $13,000</strong>
-                </h3>
-                <h5 style="color:#836262!important;">Descuento: <strong>$1,400</strong></h5>
-                <form class="mt-4" action="{{ route('carrito.resultado4') }}" method="post">
-                    @csrf
-                    <h5 style="color:#836262!important;">Seleccione la canasta</h5>
-                    <div class="col-6">
-                        <select class="form-control" style="background: #836262!important;color: #F5ECE4;font-weight: bold;" name="canasta" id="canasta">
-                            <option value="Canasta facial">Canasta facial</option>
-                            <option value="Canasta Corporal">Canasta Corporal</option>
-                        </select>
+                    <div class="col-12 col-md-6 order-uno space_paquetes">
+                        <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetestwo_image) }}" alt="">
                     </div>
-                    @foreach ($tickets as $ticket)
-                    @php
-                        $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                        $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-                        $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
-                    @endphp
-                        <div class="mt-2 mt-md-5 mt-lg-3">
-                            <input class="input_paquetes" type="checkbox" name="ticket4[]" data-grupo="grupo4" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo4()">
-                            <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
-                        </div>
-                    @endforeach
-                    <input type="hidden" name="opciones_seleccionadas4" value="">
-                    <input type="hidden" name="paquete" value="4">
-                    <button class="btn_paquetes btn-submit" type="submit" id="boton-compra4" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
-                </form>
+                </div>
             </div>
+        </section>
+    @endif
 
-            <div class="col-12 col-md-6 order-uno  space_paquetes">
-                <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetesfour_image) }}" alt="">
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="primario bg_overley" style="background-color:#fff;">
-    <div id="paquete5">
-        <div class="row">
-            <div class="col-12 col-md-6 order-uno  space_paquetes">
-                <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetesfive_image) }}" alt="">
-            </div>
-
-            <div class="col-12 col-md-6 order-dos space_paquetes">
-                <h3 class="mt-3" style="color:#836262!important;">Paquete 5</h3>
-                <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
-                <h3 style="color: #836262"><strong>
-                    <del style="color: #836262">$15,900</del>
-                    $14,500</strong>
-                </h3>
-                <h5 style="color:#836262!important;">Descuento: <strong>$1,400</strong></h5>
-                <form class="mt-4" action="{{ route('carrito.resultado5') }}" method="post">
-                    @csrf
-                    <h5 style="color:#836262!important;">Seleccione la canasta</h5>
-                    <div class="col-6">
-                        <select class="form-control" style="background: #F5ECE4!important;color: #836262;font-weight: bold;" name="canasta" id="canasta">
-                            <option value="Canasta facial">Canasta facial</option>
-                            <option value="Canasta Corporal">Canasta Corporal</option>
-                        </select>
+    @if ($paquete->visible_3 == 1)
+        <section class="primario bg_overley" style="background-color:#fff;">
+            <div id="paquete3">
+                <div class="row">
+                    <div class="col-12 col-md-6 space_paquetes">
+                        <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetesthree_image) }}" alt="">
                     </div>
-                    @foreach ($tickets as $ticket)
-                    @php
-                        $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                        $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-                        $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
-                    @endphp
-                        <div class="mt-2 mt-md-5 mt-lg-3">
-                            <input class="input_paquetes" type="checkbox" name="ticket5[]" data-grupo="grupo5" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo5()">
-                            <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
-                        </div>
-                    @endforeach
-                    <input type="hidden" name="opciones_seleccionadas5" value="">
-                    <input type="hidden" name="paquete" value="5">
-                    <button class="btn_paquetes btn-submit" type="submit" id="boton-compra5" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
-                </form>
+
+                    <div class="col-12 col-md-6 space_paquetes">
+                        <h3 class="mt-3" style="color:#836262!important;">Paquete 3</h3>
+                        <h3 style="color: #836262"><strong>
+                            <del style="color: #836262">${{number_format($paquete->precio_3, 2, '.', ',');}} mxn</del>
+                            ${{number_format($paquete->precio_rebajado_3, 2, '.', ',');}} mxn</strong>
+                        </h3>
+                        @php
+                            $descuento3 = $paquete->precio_3 - $paquete->precio_rebajado_3;
+                        @endphp
+                        <h5 style="color:#836262!important;">Descuento: <strong>${{number_format($descuento3, 2, '.', ',');}} mxn</strong></h5>
+                        <form class="mt-4" action="{{ route('carrito.resultado3') }}" method="post">
+                            @csrf
+                            <div class="col-6">
+                                <h5 style="color:#836262!important;">Seleccione la canasta</h5>
+                                <select class="form-control" style="background: #F5ECE4!important;color: #836262;font-weight: bold;" name="canasta" id="canasta">
+                                    <option value="Canasta facial">Canasta facial</option>
+                                    <option value="Canasta Corporal">Canasta Corporal</option>
+                                </select>
+                            </div>
+                            <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+                            @foreach ($tickets as $ticket)
+                            @php
+                                $fecha_inicial = $ticket->Cursos->fecha_inicial;
+                                $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                                $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
+                            @endphp
+                                <div class="mt-2 mt-md-5 mt-lg-3">
+                                    <input class="input_paquetes" type="checkbox" name="ticket3[]" data-grupo="grupo3" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo3()">
+                                    <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
+                                </div>
+                            @endforeach
+                            <input type="hidden" name="opciones_seleccionadas3" value="">
+                            <input type="hidden" name="paquete" value="3">
+                            <button class="btn_paquetes btn-submit" type="submit" id="boton-compra3" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
+    @endif
+
+    @if ($paquete->visible_4 == 1)
+        <section class="primario bg_overley" style="background-color:#F5ECE4;">
+            <div id="paquete4">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-dos space_paquetes">
+                        <h3 class="mt-3" style="color:#836262!important;">Paquete 4</h3>
+                        <h3 style="color: #836262"><strong>
+                            <del style="color: #836262">${{number_format($paquete->precio_4, 2, '.', ',');}} mxn</del>
+                            ${{number_format($paquete->precio_rebajado_4, 2, '.', ',');}} mxn</strong>
+                        </h3>
+                        @php
+                            $descuento4 = $paquete->precio_4 - $paquete->precio_rebajado_4;
+                        @endphp
+                        <h5 style="color:#836262!important;">Descuento: <strong>${{number_format($descuento4, 2, '.', ',');}} mxn</strong></h5>
+                        <form class="mt-4" action="{{ route('carrito.resultado4') }}" method="post">
+                            @csrf
+                            <h5 style="color:#836262!important;">Seleccione la canasta</h5>
+                            <div class="col-6">
+                                <select class="form-control" style="background: #836262!important;color: #F5ECE4;font-weight: bold;" name="canasta" id="canasta">
+                                    <option value="Canasta facial">Canasta facial</option>
+                                    <option value="Canasta Corporal">Canasta Corporal</option>
+                                </select>
+                            </div>
+                            <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+                            @foreach ($tickets as $ticket)
+                            @php
+                                $fecha_inicial = $ticket->Cursos->fecha_inicial;
+                                $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                                $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
+                            @endphp
+                                <div class="mt-2 mt-md-5 mt-lg-3">
+                                    <input class="input_paquetes" type="checkbox" name="ticket4[]" data-grupo="grupo4" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo4()">
+                                    <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
+                                </div>
+                            @endforeach
+                            <input type="hidden" name="opciones_seleccionadas4" value="">
+                            <input type="hidden" name="paquete" value="4">
+                            <button class="btn_paquetes btn-submit" type="submit" id="boton-compra4" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
+                        </form>
+                    </div>
+
+                    <div class="col-12 col-md-6 order-uno  space_paquetes">
+                        <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetesfour_image) }}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+    @if ($paquete->visible_5 == 1)
+        <section class="primario bg_overley" style="background-color:#fff;">
+            <div id="paquete5">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-uno  space_paquetes">
+                        <img class="img_paquetes" src="{{asset('webpage/'.$webpage->stpaquetesfive_image) }}" alt="">
+                    </div>
+
+                    <div class="col-12 col-md-6 order-dos space_paquetes">
+                        <h3 class="mt-3" style="color:#836262!important;">Paquete 5</h3>
+                        <h3 style="color: #836262"><strong>
+                            <del style="color: #836262">${{number_format($paquete->precio_5, 2, '.', ',');}} mxn</del>
+                            ${{number_format($paquete->precio_rebajado_5, 2, '.', ',');}} mxn</strong>
+                        </h3>
+                        @php
+                            $descuento5 = $paquete->precio_5 - $paquete->precio_rebajado_5;
+                        @endphp
+                        <h5 style="color:#836262!important;">Descuento: <strong>${{number_format($descuento5, 2, '.', ',');}} mxn</strong></h5>
+                        <form class="mt-4" action="{{ route('carrito.resultado5') }}" method="post">
+                            @csrf
+                            <h5 style="color:#836262!important;">Seleccione la canasta</h5>
+                            <div class="col-6">
+                                <select class="form-control" style="background: #F5ECE4!important;color: #836262;font-weight: bold;" name="canasta" id="canasta">
+                                    <option value="Canasta facial">Canasta facial</option>
+                                    <option value="Canasta Corporal">Canasta Corporal</option>
+                                </select>
+                            </div>
+                            <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
+                            @foreach ($tickets as $ticket)
+                            @php
+                                $fecha_inicial = $ticket->Cursos->fecha_inicial;
+                                $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
+                                $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
+                            @endphp
+                                <div class="mt-2 mt-md-5 mt-lg-3">
+                                    <input class="input_paquetes" type="checkbox" name="ticket5[]" data-grupo="grupo5" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo5()">
+                                    <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
+                                </div>
+                            @endforeach
+                            <input type="hidden" name="opciones_seleccionadas5" value="">
+                            <input type="hidden" name="paquete" value="5">
+                            <button class="btn_paquetes btn-submit" type="submit" id="boton-compra5" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
 
 
 @section('js')

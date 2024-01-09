@@ -9,6 +9,7 @@ use Session;
 use Str;
 use App\Models\WebPage;
 use App\Models\Noticias;
+use App\Models\Paquetes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -53,15 +54,17 @@ class CursoUsersController extends Controller
         $fechaActual = date('Y-m-d');
         $curso = Cursos::where('precio','<=', 690)->where('modalidad','=', 'Online')->get();
         $webpage = WebPage::first();
+        $paquete = Paquetes::first();
         $tickets = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
         ->where('cursos_tickets.precio','<=', 690)
+        ->where('cursos_tickets.precio','>', 0)
         ->where('cursos_tickets.fecha_inicial','<=', $fechaActual)
         ->where('cursos_tickets.fecha_final','>=', $fechaActual)
         ->where('cursos.modalidad','=', 'Online')
         ->select('cursos_tickets.*')
         ->get();
         // dd(session()->all());
-        return view('user.paquetes', compact('curso', 'tickets','webpage'));
+        return view('user.paquetes', compact('curso', 'tickets','webpage', 'paquete'));
     }
 
     public function advance(Request $request) {
