@@ -62,6 +62,7 @@ class CursoUsersController extends Controller
         ->where('cursos_tickets.fecha_final','>=', $fechaActual)
         ->where('cursos.modalidad','=', 'Online')
         ->select('cursos_tickets.*')
+        ->orderBy('cursos.fecha_inicial','ASC')
         ->get();
         // dd(session()->all());
         return view('user.paquetes', compact('curso', 'tickets','webpage', 'paquete'));
