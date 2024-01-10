@@ -21,14 +21,14 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <h3 class="mb-3">Notas Productos Del Mes</h3>
+                            <h2 class="mb-3">Notas Productos Del Mes</h2>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
                             </a>
 
                             @can('nota-productos-crear')
-                                <a class="btn btn-sm btn-success" href="{{ route('notas_productos.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                <a class="btn btn-sm btn-success" href="{{ route('notas_productos.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff; font-size: 20px;">
                                     <i class="fa fa-fw fa-edit"></i> Crear
                                 </a>
                             @endcan
@@ -40,24 +40,6 @@
                             <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
                                 <h5>Filtro</h5>
                                     <div class="row">
-                                        {{-- <div class="col-3">
-                                            <label for="user_id">Seleccionar cliente:</label>
-                                            <select class="form-control cliente" name="id_client" id="id_client">
-                                                <option selected value="">seleccionar cliente</option>
-                                                @foreach($clientes as $client)
-                                                    <option value="{{ $client->id }}">{{ $client->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-3">
-                                            <label for="user_id">Seleccionar Telefono:</label>
-                                            <select class="form-control phone" name="phone" id="phone">
-                                                <option selected value="">seleccionar Telefono</option>
-                                                @foreach($clientes as $client)
-                                                    <option value="{{ $client->id }}">{{ $client->telefono }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div> --}}
                                         <div class="col-3">
                                             <label for="user_id">Seleccionar Usuario:</label>
                                             <select class="form-control administradores" name="administradores" id="administradores">
@@ -93,25 +75,31 @@
                                     @foreach ($notas as $nota)
                                         <tr>
                                             <td>
-                                                @if ($nota->folio == null)
-                                                    {{ $nota->id }}
-                                                @else
-                                                    {{ $nota->folio }}
-                                                @endif
+                                                <h5>
+                                                    @if ($nota->folio == null)
+                                                        {{ $nota->id }}
+                                                    @else
+                                                        {{ $nota->folio }}
+                                                    @endif
+                                                </h5>
                                             </td>
                                             <td>
-                                                @if ($nota->id_usuario == NULL)
-                                                    {{ $nota->nombre }} <br> {{ $nota->telefono }}
-                                                @else
-                                                    {{ $nota->User->name }}
-                                                @endif
+                                                <h5>
+                                                    @if ($nota->id_usuario == NULL)
+                                                        {{ $nota->nombre }} <br> {{ $nota->telefono }}
+                                                    @else
+                                                        {{ $nota->User->name }}
+                                                    @endif
+                                                </h5>
                                             </td>
                                             <td>
-                                                @if ($nota->tipo_nota == 'Venta Presencial')
-                                                    <label class="badge" style="color: #e39b00;background-color: #e3ae0040;">Venta Presencial</label>
-                                                @else
-                                                    <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
-                                                @endif
+                                                <h5>
+                                                    @if ($nota->tipo_nota == 'Venta Presencial')
+                                                        <label class="badge" style="color: #e39b00;background-color: #e3ae0040;">Venta Presencial</label>
+                                                    @else
+                                                        <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
+                                                    @endif
+                                                </h5>
                                             </td>
                                             <td>
                                                 @php
@@ -119,9 +107,11 @@
                                                 $fecha_timestamp = strtotime($fecha);
                                                 $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                                                 @endphp
-                                                {{$fecha_formateada}}
+                                                <h5>
+                                                    {{$fecha_formateada}}
+                                                </h5>
                                             </td>
-                                            <td>{{ $nota->total }}</td>
+                                            <td><h5>{{ $nota->total }}</h5></td>
                                             <td>
                                                 <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_productos.imprimir', ['id' => $nota->id]) }}">
                                                     <i class="fa fa-file"></i>

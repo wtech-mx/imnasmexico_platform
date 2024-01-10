@@ -23,11 +23,11 @@
                                 <div class="row">
 
                                     <div class="col-12 mt-2">
-                                        <h5 style="color:#836262"><strong>Datos del cliente</strong> </h5>
+                                        <h2 style="color:#836262"><strong>Datos del cliente</strong> </h2>
                                     </div>
 
                                     <div class="form-group col-6">
-                                        <label for="name">Nombre *</label>
+                                        <h4 for="name">Nombre *</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
@@ -37,7 +37,7 @@
                                     </div>
 
                                     <div class="form-group col-6">
-                                        <label for="name">Correo</label>
+                                        <h4 for="name">Correo</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
@@ -47,7 +47,7 @@
                                     </div>
 
                                     <div class="form-group col-6">
-                                        <label for="name">Telefono *</label>
+                                        <h4 for="name">Telefono *</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
@@ -57,7 +57,7 @@
                                     </div>
 
                                     <div class="form-group col-6">
-                                        <label for="name">Fecha *</label>
+                                        <h4 for="name">Fecha *</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
@@ -67,7 +67,7 @@
                                     </div>
 
                                     <div class="col-12 mt-5">
-                                        <h5 style="color:#836262"><strong>Seleciona los productos</strong> </h5>
+                                        <h2 style="color:#836262"><strong>Seleciona los productos</strong> </h2>
                                     </div>
 
                                     <div class="col-1">
@@ -84,7 +84,7 @@
                                                 <div class="campo mt-3">
                                                     <div class="row">
                                                         <div class="col-4">
-                                                            <label for="">Producto</label>
+                                                            <h4 for="">Producto</h4>
                                                             <div class="form-group">
                                                                 <select name="campo[]" class="form-select d-inline-block producto">
                                                                     <option value="">Seleccione products</option>
@@ -96,7 +96,7 @@
                                                         </div>
 
                                                         <div class="form-group col-2">
-                                                            <label for="name">Cantidad *</label>
+                                                            <h4 for="name">Cantidad *</h4>
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text" id="basic-addon1">
                                                                     <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
@@ -106,7 +106,7 @@
                                                         </div>
 
                                                         <div class="form-group col-2">
-                                                            <label for="name">Descuento (%)</label>
+                                                            <h4 for="name">Descuento (%)</h4>
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text" id="basic-addon1">
                                                                     <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
@@ -116,7 +116,7 @@
                                                         </div>
 
                                                         <div class="form-group col-2">
-                                                            <label for="name">Subtotal *</label>
+                                                            <h4 for="name">Subtotal *</h4>
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text" id="basic-addon1">
                                                                     <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
@@ -126,7 +126,7 @@
                                                         </div>
 
                                                         <div class="form-group col-2">
-                                                            <label for="name">Quitar</label>
+                                                            <h4 for="name">Quitar</h4>
                                                             <div class="input-group mb-3">
                                                                 <button type="button" class="btn btn-danger btn-sm eliminarCampo"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                             </div>
@@ -139,29 +139,29 @@
                                     </div>
 
                                     <div class="col-12 mt-2 mb-3">
-                                        <h5 style="color:#836262"><strong>Pago</strong> </h5>
+                                        <h2 style="color:#836262"><strong>Pago</strong> </h2>
                                     </div>
 
                                     <div class="col-4 ">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="checkboxEnvio" name="envio">
-                                            <label class="form-check-label" for="flexCheckDefault">
+                                            <h4 class="form-check-h4" for="flexCheckDefault">
                                                 <p class="" style="display: inline-block;font-size: 20px;padding: 5px;color: #3b8b00;">Si</p> <strong> (¿Agregar envio?)</strong>
-                                            </label>
+                                            </h4>
                                         </div>
                                     </div>
 
                                     <div class="col-4 ">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="toggleFactura" name="factura" value="1">
-                                            <label class="form-check-label" for="flexCheckDefault">
+                                            <h4 class="form-check-h4" for="flexCheckDefault">
                                                 <p class="" style="display: inline-block;font-size: 20px;padding: 5px;color: #3b8b00;">Si</p> <strong> (¿Factura?)</strong>
-                                            </label>
+                                            </h4>
                                         </div>
                                     </div>
 
                                     <div class="form-group col-4">
-                                        <label for="name">Subtotal *</label>
+                                        <h4 for="name">Subtotal *</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
@@ -171,7 +171,7 @@
                                     </div>
 
                                     <div class="form-group col-4">
-                                        <label for="name">Descuento</label>
+                                        <h4 for="name">Descuento</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
@@ -181,7 +181,7 @@
                                     </div>
 
                                     <div class="form-group col-4">
-                                        <label for="name">Total</label>
+                                        <h4 for="name">Total</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" alt="" width="35px">
@@ -193,7 +193,7 @@
                                     <div class="row">
 
                                         <div class="form-group col-4">
-                                            <label for="name">Metodo de pago</label>
+                                            <h4 for="name">Metodo de pago</h4>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img src="{{ asset('assets/user/icons/payment.png') }}" alt="" width="35px">
@@ -207,7 +207,7 @@
                                         </div>
 
                                         <div class="form-group col-4">
-                                            <label for="name">Monto</label>
+                                            <h4 for="name">Monto</h4>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img src="{{ asset('assets/user/icons/money.png') }}" alt="" width="35px">
@@ -217,7 +217,7 @@
                                         </div>
 
                                         <div class="form-group col-4">
-                                            <label for="name">Foto Pago</label>
+                                            <h4 for="name">Foto Pago</h4>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
@@ -227,7 +227,7 @@
                                         </div>
 
                                         <div class="form-group col-4">
-                                            <label for="name">Metodo de pago 2</label>
+                                            <h4 for="name">Metodo de pago 2</h4>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img src="{{ asset('assets/user/icons/payment.png') }}" alt="" width="35px">
@@ -242,7 +242,7 @@
                                         </div>
 
                                         <div class="form-group col-4">
-                                            <label for="name">Monto 2</label>
+                                            <h4 for="name">Monto 2</h4>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img src="{{ asset('assets/user/icons/money.png') }}" alt="" width="35px">
@@ -255,10 +255,10 @@
 
                                     <div id="divFactura" style="display: none;">
                                         <div class="row">
-                                            <h5>Factura</h5>
+                                            <h4>Factura</h4>
 
                                             <div class="form-group col-4">
-                                                <label for="name">Situacion Fiscal</label>
+                                                <h4 for="name">Situacion Fiscal</h4>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
@@ -268,7 +268,7 @@
                                             </div>
 
                                             <div class="form-group col-4">
-                                                <label for="name">Nombre / Razon Social</label>
+                                                <h4 for="name">Nombre / Razon Social</h4>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/firma-digital.png') }}" alt="" width="35px">
@@ -278,7 +278,7 @@
                                             </div>
 
                                             <div class="form-group col-4">
-                                                <label for="name">RFC</label>
+                                                <h4 for="name">RFC</h4>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/carta.png') }}" alt="" width="35px">
@@ -288,7 +288,7 @@
                                             </div>
 
                                             <div class="form-group col-4">
-                                                <label for="name">CFDI</label>
+                                                <h4 for="name">CFDI</h4>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/monetary-policy.png') }}" alt="" width="35px">
@@ -303,7 +303,7 @@
                                             </div>
 
                                             <div class="form-group col-4">
-                                                <label for="name">Correo</label>
+                                                <h4 for="name">Correo</h4>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
@@ -313,7 +313,7 @@
                                             </div>
 
                                             <div class="form-group col-4">
-                                                <label for="name">Telefono</label>
+                                                <h4 for="name">Telefono</h4>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/complain.png') }}" alt="" width="35px">
@@ -323,7 +323,7 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <label for="name">Direccion de Factura</label>
+                                                <h4 for="name">Direccion de Factura</h4>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/cp.png') }}" alt="" width="35px">
@@ -336,7 +336,7 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-group">
-                                            <label for="name">Comentario/nota</label>
+                                            <h4 for="name">Comentario/nota</h4>
                                             <textarea class="form-control" name="nota" id="nota" cols="30" rows="3"></textarea>
                                         </div>
                                     </div>
@@ -344,7 +344,7 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff; font-size: 17px;">Guardar</button>
                             </div>
                         </form>
                     </div>

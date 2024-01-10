@@ -21,14 +21,14 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <h3 class="mb-3">Notas Cotizacion Del Mes</h3>
+                            <h2 class="mb-3">Notas Cotizacion Del Mes</h2>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
                             </a>
 
                             @can('nota-productos-crear')
-                                <a class="btn btn-sm btn-success" href="{{ route('notas_cotizacion.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                <a class="btn btn-sm btn-success" href="{{ route('notas_cotizacion.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff; font-size: 20px;">
                                     <i class="fa fa-fw fa-edit"></i> Crear
                                 </a>
                             @endcan
@@ -74,22 +74,27 @@
                                     @foreach ($notas as $nota)
                                         <tr>
                                             <td>
-                                                @if ($nota->folio == null)
-                                                    {{ $nota->id }}
-                                                @else
-                                                    {{ $nota->folio }}
-                                                @endif
-
+                                                <h5>
+                                                    @if ($nota->folio == null)
+                                                        {{ $nota->id }}
+                                                    @else
+                                                        {{ $nota->folio }}
+                                                    @endif
+                                                </h5>
                                             </td>
                                             <td>
-                                                @if ($nota->id_usuario == NULL)
-                                                    {{ $nota->nombre }} <br> {{ $nota->telefono }}
-                                                @else
-                                                    {{ $nota->User->name }}
-                                                @endif
+                                                <h5>
+                                                    @if ($nota->id_usuario == NULL)
+                                                        {{ $nota->nombre }} <br> {{ $nota->telefono }}
+                                                    @else
+                                                        {{ $nota->User->name }}
+                                                    @endif
+                                                </h5>
                                             </td>
                                             <td>
-                                                <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
+                                                <h5>
+                                                    <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
+                                                </h5>
                                             </td>
                                             <td>
                                                 @php
@@ -97,9 +102,11 @@
                                                 $fecha_timestamp = strtotime($fecha);
                                                 $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                                                 @endphp
-                                                {{$fecha_formateada}}
+                                                <h5>
+                                                    {{$fecha_formateada}}
+                                                </h5>
                                             </td>
-                                            <td>{{ $nota->total }}</td>
+                                            <td><h5>{{ $nota->total }}</h5></td>
                                             <td>
                                                 <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $nota->id]) }}">
                                                     <i class="fa fa-file"></i>
