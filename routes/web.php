@@ -340,6 +340,17 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/notas/productos/imprimir/{id}', [App\Http\Controllers\NotasProductosController::class, 'imprimir'])->name('notas_productos.imprimir');
     Route::delete('/notas/{id}', [App\Http\Controllers\NotasProductosController::class, 'eliminar'])->name('notas.eliminar');
 
+    Route::get('/admin/notas/cotizacion', [App\Http\Controllers\CotizacionController::class, 'index'])->name('notas_cotizacion.index');
+    Route::get('/admin/cotizacion/create', [App\Http\Controllers\CotizacionController::class, 'create'])->name('notas_cotizacion.create');
+    Route::post('/admin/notas/cotizacion/store', [App\Http\Controllers\CotizacionController::class, 'store'])->name('notas_cotizacion.store');
+    Route::get('/admin/notas/cotizacion/edit/{id}', [App\Http\Controllers\CotizacionController::class, 'edit'])->name('notas_cotizacion.edit');
+    Route::patch('/admin/notas/cotizacion/update/{id}', [App\Http\Controllers\CotizacionController::class, 'update'])->name('notas_cotizacion.update');
+
+    Route::delete('/admin/notas/cotizacion/delete/{id}', [App\Http\Controllers\CotizacionController::class, 'delete'])->name('notas_cotizacion.delete');
+    Route::post('/admin/cotizacion/update/', [App\Http\Controllers\CotizacionController::class, 'update_cotizacion'])->name('notas_cotizacion.cotizacion');
+
+    Route::get('/admin/notas/cotizacion/imprimir/{id}', [App\Http\Controllers\CotizacionController::class, 'imprimir'])->name('notas_cotizacion.imprimir');
+    Route::delete('/notas/cotizacion/{id}', [App\Http\Controllers\CotizacionController::class, 'eliminar'])->name('notas_cotizacion.eliminar');
     // =============== M O D U L O   C A J A ===============================
     Route::get('/admin/caja', [App\Http\Controllers\CajaController::class, 'index'])->name('caja.index');
     Route::post('/admin/caja/store', [App\Http\Controllers\CajaController::class, 'store'])->name('caja.store');

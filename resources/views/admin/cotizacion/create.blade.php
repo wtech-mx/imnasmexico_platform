@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Notas Productos
+    Notas Cotizacion
 @endsection
 
 @section('css')
@@ -17,7 +17,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('notas_productos.store') }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('notas_cotizacion.store') }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
@@ -190,69 +190,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="row">
-
-                                        <div class="form-group col-4">
-                                            <label for="name">Metodo de pago</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img src="{{ asset('assets/user/icons/payment.png') }}" alt="" width="35px">
-                                                </span>
-                                                <select class="form-select" name="metodo_pago" id="metodo_pago">
-                                                    <option value="Efectivo">Efectivo</option>
-                                                    <option value="Tarjeta Credito/debito">Tarjeta Credito/debito</option>
-                                                    <option value="Transferencia">Transferencia</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-4">
-                                            <label for="name">Monto</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img src="{{ asset('assets/user/icons/money.png') }}" alt="" width="35px">
-                                                </span>
-                                                <input class="form-control" type="text" id="monto" name="monto" value="0">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-4">
-                                            <label for="name">Foto Pago</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
-                                                </span>
-                                                <input class="form-control" type="file" id="foto_pago2" name="foto_pago2">
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-4">
-                                            <label for="name">Metodo de pago 2</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img src="{{ asset('assets/user/icons/payment.png') }}" alt="" width="35px">
-                                                </span>
-                                                <select class="form-select" name="metodo_pago2" id="metodo_pago2">
-                                                    <option value="">Seleccione metodo de pago</option>
-                                                    <option value="Efectivo">Efectivo</option>
-                                                    <option value="Tarjeta Credito/debito">Tarjeta Credito/debito</option>
-                                                    <option value="Transferencia">Transferencia</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group col-4">
-                                            <label for="name">Monto 2</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img src="{{ asset('assets/user/icons/money.png') }}" alt="" width="35px">
-                                                </span>
-                                                <input class="form-control" type="text" id="monto2" name="monto2">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
                                     <div id="divFactura" style="display: none;">
                                         <div class="row">
                                             <h5>Factura</h5>
@@ -334,6 +271,7 @@
 
                                         </div>
                                     </div>
+
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="name">Comentario/nota</label>

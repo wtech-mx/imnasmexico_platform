@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Notas Productos
+    Notas Cotizacion
 @endsection
 
 @section('css')
@@ -21,14 +21,14 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <h3 class="mb-3">Notas Productos Del Mes</h3>
+                            <h3 class="mb-3">Notas Cotizacion Del Mes</h3>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
                             </a>
 
                             @can('nota-productos-crear')
-                                <a class="btn btn-sm btn-success" href="{{ route('notas_productos.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                <a class="btn btn-sm btn-success" href="{{ route('notas_cotizacion.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                     <i class="fa fa-fw fa-edit"></i> Crear
                                 </a>
                             @endcan
@@ -40,24 +40,6 @@
                             <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
                                 <h5>Filtro</h5>
                                     <div class="row">
-                                        {{-- <div class="col-3">
-                                            <label for="user_id">Seleccionar cliente:</label>
-                                            <select class="form-control cliente" name="id_client" id="id_client">
-                                                <option selected value="">seleccionar cliente</option>
-                                                @foreach($clientes as $client)
-                                                    <option value="{{ $client->id }}">{{ $client->name }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="col-3">
-                                            <label for="user_id">Seleccionar Telefono:</label>
-                                            <select class="form-control phone" name="phone" id="phone">
-                                                <option selected value="">seleccionar Telefono</option>
-                                                @foreach($clientes as $client)
-                                                    <option value="{{ $client->id }}">{{ $client->telefono }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div> --}}
                                         <div class="col-3">
                                             <label for="user_id">Seleccionar Usuario:</label>
                                             <select class="form-control administradores" name="administradores" id="administradores">
@@ -83,7 +65,6 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Cliente</th>
-                                        <th>Tipo</th>
                                         <th>fecha</th>
                                         <th>Total</th>
                                         <th>Acciones</th>
@@ -98,6 +79,7 @@
                                                 @else
                                                     {{ $nota->folio }}
                                                 @endif
+
                                             </td>
                                             <td>
                                                 @if ($nota->id_usuario == NULL)
@@ -107,11 +89,7 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if ($nota->tipo_nota == 'Venta Presencial')
-                                                    <label class="badge" style="color: #e39b00;background-color: #e3ae0040;">Venta Presencial</label>
-                                                @else
-                                                    <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
-                                                @endif
+                                                <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
                                             </td>
                                             <td>
                                                 @php
@@ -123,7 +101,7 @@
                                             </td>
                                             <td>{{ $nota->total }}</td>
                                             <td>
-                                                <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_productos.imprimir', ['id' => $nota->id]) }}">
+                                                <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $nota->id]) }}">
                                                     <i class="fa fa-file"></i>
                                                 </a>
                                                 @php
@@ -145,7 +123,7 @@
                                                         <i class="fa fa-fw fa-edit"></i>
                                                     </a>
                                                 @endcan
-                                                <form action="{{ route('notas.eliminar', ['id' => $nota->id]) }}" method="POST">
+                                                <form action="{{ route('notas_cotizacion.eliminar', ['id' => $nota->id]) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta nota?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
@@ -153,8 +131,8 @@
 
                                             </td>
                                         </tr>
-                                        @include('admin.notas_productos.modal_edit')
-                                        @include('admin.notas_productos.modal_products')
+                                        @include('admin.cotizacion.modal_edit')
+                                        @include('admin.cotizacion.modal_products')
                                     @endforeach
                                 </tbody>
                             </table>

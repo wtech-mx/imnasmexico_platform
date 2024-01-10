@@ -61,7 +61,7 @@
   </style>
 <body>
   <header>
-    <h1>Nota de Remision #@if ($nota->folio == null) {{ $nota->id }} @else {{ $nota->folio }} @endif</h1>
+    <h1>Nota de Cotización #@if ($nota->folio == null) {{ $nota->id }} @else {{ $nota->folio }} @endif</h1>
     <h2>Naturales AIN SPA</h2>
   </header>
 

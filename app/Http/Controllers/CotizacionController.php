@@ -2,24 +2,18 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Models\ProductosNotasId;
 use App\Models\NotasProductos;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\PlantillaNuevoUser;
 use App\Models\Products;
 use Illuminate\Support\Str;
 use Session;
 use Hash;
 use DB;
-use Codexshaper\WooCommerce\Facades\Product;
-use Illuminate\Contracts\Database\Eloquent\Builder;
 use Carbon\Carbon;
 
-
-class NotasProductosController extends Controller
+class CotizacionController extends Controller
 {
     public function index(){
 
@@ -30,39 +24,19 @@ class NotasProductosController extends Controller
         $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
-
         $notas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Venta Presencial')->get();
+        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->get();
 
         $products = Products::orderBy('nombre','ASC')->get();
 
-        return view('admin.notas_productos.index', compact('notas', 'products', 'clientes', 'administradores'));
-    }
-
-    public function buscador(Request $request){
-        $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
-        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
-        $products = Products::orderBy('nombre','ASC')->get();
-        $id_client = $request->id_client;
-        $phone = $request->phone;
-        $admin = $request->administradores;
-        if ($id_client !== 'null' && $id_client !== null) {
-            $notas = NotasProductos::where('id_usuario', $id_client)->get();
-        } elseif ($phone !== 'null' && $phone !== null) {
-            $notas = NotasProductos::where('id_usuario', $phone)->get();
-        }
-        if ($admin !== 'null' && $admin !== null) {
-            $notas = NotasProductos::where('id_admin', $admin)->get();
-        }
-
-        return view('admin.notas_productos.index',compact('notas', 'products', 'clientes', 'administradores'));
+        return view('admin.cotizacion.index', compact('notas', 'products', 'clientes', 'administradores'));
     }
 
     public function create(){
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
         $products = Products::orderBy('nombre','ASC')->get();
 
-        return view('admin.notas_productos.create', compact('products', 'clientes'));
+        return view('admin.cotizacion.create', compact('products', 'clientes'));
     }
 
     public function store(request $request){
@@ -138,7 +112,7 @@ class NotasProductosController extends Controller
             }
         }
 
-        $notas_productos->tipo_nota = 'Venta Presencial';
+        $notas_productos->tipo_nota = 'Cotizacion';
         $notas_productos->metodo_pago = $request->get('metodo_pago');
         $notas_productos->fecha = $request->get('fecha');
         $notas_productos->tipo = $sumaCampo4;
@@ -148,6 +122,7 @@ class NotasProductosController extends Controller
         $notas_productos->metodo_pago2 = $request->get('metodo_pago2');
         $notas_productos->monto = $request->get('monto');
         $notas_productos->monto2 = $request->get('monto2');
+
         $tipoNota = $notas_productos->tipo_nota;
         $ultimoFolio = NotasProductos::where('tipo_nota', $tipoNota)
             ->max('folio');
@@ -206,7 +181,7 @@ class NotasProductosController extends Controller
         }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->route('notas_productos.index')
+        return redirect()->route('notas_cotizacion.index')
         ->with('success', 'Creado exitosamente.');
     }
 
@@ -280,14 +255,13 @@ class NotasProductosController extends Controller
         $nota_productos = ProductosNotasId::where('id_notas_productos', $nota->id)->get();
 
         $pdf = \PDF::loadView('admin.notas_productos.pdf_nota', compact('nota', 'today', 'nota_productos'));
-       // return $pdf->stream();
-       if($nota->folio == null){
+        if($nota->folio == null){
             $folio = $nota->id;
         }else{
             $folio = $nota->folio;
         }
-
-         return $pdf->download('Nota remision'. $folio .'/'.$today.'.pdf');
+       // return $pdf->stream();
+         return $pdf->download('Nota cotizacion'. $folio .'/'.$today.'.pdf');
     }
 
     public function delete($id)

@@ -195,18 +195,23 @@
                 <ul class="nav ms-4">
                     <li class="nav-item ">
                         @can('nota-cursos-show')
-                            <a class="nav-link {{ (Request::is('admin/notas/cursos/*') ? 'show' : '') }}" href="{{ route('notas_cursos.index') }}">
+                            <a class="nav-link {{ (Request::is('admin/notas/productos/*') ? 'show' : '') }}" href="{{ route('notas_cursos.index') }}">
                                 <span class="sidenav-mini-icon"> P </span>
                                 <span class="sidenav-normal">Notas Cursos</span>
                             </a>
                         @endcan
 
                         @can('nota-productos-show')
-                            <a class="nav-link {{ (Request::is('admin/notas/cursos/*') ? 'show' : '') }}" href="{{ route('notas_productos.index') }}">
+                            <a class="nav-link {{ (Request::is('admin/notas/productos/*') ? 'show' : '') }}" href="{{ route('notas_productos.index') }}">
                                 <span class="sidenav-mini-icon"> P </span>
                                 <span class="sidenav-normal">Notas Productos</span>
                             </a>
                         @endcan
+
+                        <a class="nav-link {{ (Request::is('admin/notas/productos/*') ? 'show' : '') }}" href="{{ route('notas_cotizacion.index') }}">
+                            <span class="sidenav-mini-icon"> P </span>
+                            <span class="sidenav-normal">Notas Cotizaciones</span>
+                        </a>
 
                     </li>
                 </ul>
@@ -480,7 +485,7 @@
                 <span class="nav-link-text ms-1">Paquetes</span>
                 </a>
             </li>
-            
+
             <li class="nav-item mt-3">
             <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Administrativo</h6>
             </li>
