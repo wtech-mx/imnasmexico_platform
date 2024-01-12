@@ -102,6 +102,26 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group col-6">
+                                                    <label for="name">Direccion</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
+                                                        </span>
+                                                        <input  id="direccion" name="direccion" type="text" class="form-control"  value="Castilla 136, Álamos, Benito Juárez, 03400, CDMX">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-6">
+                                                    <label for="name">Iframe del mapa</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/abc-block.png') }}" alt="" width="35px">
+                                                        </span>
+                                                        <input  id="mapa_iframe" name="mapa_iframe" type="text" class="form-control"  value="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx">
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-12">
                                                     <h5>Visibilidad de secciones</h5>
                                                 </div>

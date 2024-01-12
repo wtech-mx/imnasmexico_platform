@@ -140,7 +140,15 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                         <h2 class="title_curso">Modalidad</h2>
                         <p class="tittle_abstract ">{{$curso->modalidad}} /
                             @if ($curso->modalidad == 'Presencial')
-                                Castilla 136, Álamos, Benito Juárez, 03400, CDMX
+
+                                    @if ($curso->direccion == NULL)
+
+                                    <p class="">Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México.</p>
+
+                                    @else
+                                        <p class="">{{ $curso->direccion }}</p>
+                                    @endif
+
                                 @else
                                 Google Meet
                             @endif
@@ -1059,15 +1067,31 @@ $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
                             <div class="col-6">
                                 <h2 class="title_curso text-center mb-5">Ubicación</h2>
                                 <div class="d-flex justify-content-center">
-                                    <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                    </iframe>
+
+                                    @if ($curso->mapa_iframe == Null)
+
+                                        <iframe class="map_custom2" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30110.056826145097!2d-99.14852410230698!3d19.379667296620767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fe40772ea94d%3A0x6b392a4717cc4368!2sInstituto%20Mexicano%20Naturales%20Ain%20Spa%20SC!5e0!3m2!1ses-419!2smx!4v1678243651126!5m2!1ses-419!2smx"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                        </iframe>
+
+                                    @else
+
+                                        <iframe class="map_custom2" src="{{$curso->mapa_iframe }}"  style="" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                                        </iframe>
+
+                                    @endif
+
                                 </div>
                             </div>
 
                             <div class="col-6 m-auto">
-                                    <p class="  ">
-                                        Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México
-                                    </p>
+                                @if ($curso->direccion == Null)
+
+                                <p class="">Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México</p>
+
+                                @else
+                                    <p class="">{{ $curso->direccion }}</p>
+                                @endif
+
                             </div>
                         </div>
                         @else

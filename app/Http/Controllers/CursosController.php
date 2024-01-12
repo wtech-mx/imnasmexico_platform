@@ -158,6 +158,9 @@ class CursosController extends Controller
         $curso->p_stps_5 = $request->get('p_stps_5');
         $curso->p_stps_6 = $request->get('p_stps_6');
 
+        $curso->direccion = $request->get('direccion');
+        $curso->mapa_iframe = $request->get('mapa_iframe');
+
         $curso->texto_conocer = $request->get('texto_conocer');
         $curso->carpeta = $request->get('carpeta');
         $curso->id_profesor = $request->get('id_profesor');
@@ -305,6 +308,9 @@ class CursosController extends Controller
         $curso->estatus = $request->get('estatus');
         $curso->seccion_unam = $request->get('seccion_unam');
         $curso->titulo_hono = $request->get('titulo_hono');
+
+        $curso->direccion = $request->get('direccion');
+        $curso->mapa_iframe = $request->get('mapa_iframe');
 
         $curso->pack_stps = $request->get('pack_stps');
         $curso->p_stps_1 = $request->get('p_stps_1');

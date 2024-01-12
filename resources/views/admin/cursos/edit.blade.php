@@ -119,6 +119,26 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="form-group col-6">
+                                                    <label for="name">Direccion</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
+                                                        </span>
+                                                        <input  id="direccion" name="direccion" type="text" class="form-control"  value="{{ $curso->direccion }}">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group col-6">
+                                                    <label for="name">Iframe del mapa</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/abc-block.png') }}" alt="" width="35px">
+                                                        </span>
+                                                        <input  id="mapa_iframe" name="mapa_iframe" type="text" class="form-control"  value="{{ $curso->mapa_iframe }}">
+                                                    </div>
+                                                </div>
+
                                                 <div class="col-12">
                                                     <h5>Visibilidad de secciones</h5>
                                                 </div>
