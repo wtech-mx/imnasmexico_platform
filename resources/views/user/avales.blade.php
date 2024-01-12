@@ -194,7 +194,7 @@ crossorigin="anonymous" />
             <div class="d-flex justify-content-start">
                 <div class="content_icon_hotspot">
                     <div class="icon_hotspot" aria-hidden="true" data-icon="&#xe07e;"></div>
-                    <p class="text_hotspot">Organismo certificado</p>
+                    <p class="text_hotspot">Entidad de Certificación</p>
                 </div>
             </div>
 
