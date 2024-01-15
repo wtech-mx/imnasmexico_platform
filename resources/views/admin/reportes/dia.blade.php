@@ -24,7 +24,7 @@
                         <h3 class="mb-3">Reporte</h3>
                         <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                             ¿Como funciona?
-                        </a>
+                        </a>
                     </div>
                 </div>
                 <div class="card-body">

@@ -570,117 +570,121 @@
             </div>
             @endif
 
-            <div class="card_single_horizon">
-                <div class="d-flex justify-content-between">
-                    <h2 class="title_curso mb-3">
-                        Documentos
-                    </h2>
-                    <img class="icon_nav_course" src="{{asset('assets/user/icons/documentos.png')}}" alt="">
-                </div>
-                    <div class="row">
-                            @if ($curso->nombre == 'Diplomado en DERMAPEN')
-                                <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones" style="position: relative">
-                                                <a class="text-center" data-bs-toggle="modal" data-bs-target="#redconcer">
-                                                    <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
-                                                </a>
-                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
-                                        </div>
-                                    </div>
-                                    <p class="text-center">
-                                        <?php echo $curso->texto_conocer?>
-                                    </p>
-                                </div>
-                            @endif
-                            @if ($curso->nombre == 'Diplomado en Regulación y Administración de Spa ante COFEPRIS')
-                                <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones" style="position: relative">
-                                                <a class="text-center" data-bs-toggle="modal" data-bs-target="#redconcer">
-                                                    <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
-                                                </a>
-                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
-                                        </div>
-                                    </div>
-                                    <p class="text-center">
-                                        <?php echo $curso->texto_conocer?>
-                                    </p>
-                                </div>
-                            @endif
+            @if($curso->visibilidad_doc == '0')
 
-                            @if($curso->sep == 1)
-                                <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones" style="position: relative">
-                                            <a class="text-center" data-bs-toggle="modal" data-bs-target="#revoe">
-                                                <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/revoe.png')}}" alt="">
-                                            </a>
-                                            <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
-                                        </div>
-                                    </div>
-                                    <p class="text-center">
-                                        <?php echo $curso->texto_rvoe?>
-                                    </p>
-                                </div>
-                            @endif
-
-                            @if ($curso->unam == 1)
-                                <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones" style="position: relative">
-                                                <a class="text-center" data-bs-toggle="modal" data-bs-target="#unam">
-                                                    <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
-                                                </a>
-                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
-                                        </div>
-                                    </div>
-                                    <p class="text-center">
-                                        <strong>En caso de ser Médico se te dará una constancia UNAM a través de la facultad de estudios Superiores Zaragoza,
-                                            de lo contrario se te dará un Diploma STPS</strong>
-                                     </p>
-                                </div>
-                            @endif
-
-                            @if ($curso->imnas == 1)
-                                <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones" style="position: relative">
-                                                <a class="text-center" data-bs-toggle="modal" data-bs-target="#imnas_collage">
-                                                    <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/imnas.png')}}" >
-                                                </a>
-                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
-                                        </div>
-                                    </div>
-                                    @if ($curso->titulo_hono == 1)
-                                        <p class="text-center">
-                                            <strong>Título Honorífico</strong>
-                                        </p>
-                                     @else
-                                        <p class="text-center">
-                                            <strong>Documentos de Certificadora Nacional</strong>
-                                        </p>
-                                     @endif
-                                </div>
-                            @endif
-
-                            @if ($curso->stps == 1)
-                                <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones" style="position: relative">
-                                                <a class="text-center" data-bs-toggle="modal" data-bs-target="#stps">
-                                                    <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/stps.png')}}" alt="">
-                                                </a>
-                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
-                                        </div>
-                                    </div>
-                                    <p class="text-center">
-                                        <strong>Diploma STPS</strong>
-                                     </p>
-                                </div>
-                            @endif
+            @else
+                <div class="card_single_horizon">
+                    <div class="d-flex justify-content-between">
+                        <h2 class="title_curso mb-3">
+                            Documentos
+                        </h2>
+                        <img class="icon_nav_course" src="{{asset('assets/user/icons/documentos.png')}}" alt="">
                     </div>
-            </div>
+                        <div class="row">
+                                @if ($curso->nombre == 'Diplomado en DERMAPEN')
+                                    <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card_certificaciones" style="position: relative">
+                                                    <a class="text-center" data-bs-toggle="modal" data-bs-target="#redconcer">
+                                                        <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                    </a>
+                                                    <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
+                                            </div>
+                                        </div>
+                                        <p class="text-center">
+                                            <?php echo $curso->texto_conocer?>
+                                        </p>
+                                    </div>
+                                @endif
+                                @if ($curso->nombre == 'Diplomado en Regulación y Administración de Spa ante COFEPRIS')
+                                    <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card_certificaciones" style="position: relative">
+                                                    <a class="text-center" data-bs-toggle="modal" data-bs-target="#redconcer">
+                                                        <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                    </a>
+                                                    <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
+                                            </div>
+                                        </div>
+                                        <p class="text-center">
+                                            <?php echo $curso->texto_conocer?>
+                                        </p>
+                                    </div>
+                                @endif
+
+                                @if($curso->sep == 1)
+                                    <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card_certificaciones" style="position: relative">
+                                                <a class="text-center" data-bs-toggle="modal" data-bs-target="#revoe">
+                                                    <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/revoe.png')}}" alt="">
+                                                </a>
+                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
+                                            </div>
+                                        </div>
+                                        <p class="text-center">
+                                            <?php echo $curso->texto_rvoe?>
+                                        </p>
+                                    </div>
+                                @endif
+
+                                @if ($curso->unam == 1)
+                                    <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card_certificaciones" style="position: relative">
+                                                    <a class="text-center" data-bs-toggle="modal" data-bs-target="#unam">
+                                                        <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/unam.png')}}" alt="">
+                                                    </a>
+                                                    <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
+                                            </div>
+                                        </div>
+                                        <p class="text-center">
+                                            <strong>En caso de ser Médico se te dará una constancia UNAM a través de la facultad de estudios Superiores Zaragoza,
+                                                de lo contrario se te dará un Diploma STPS</strong>
+                                        </p>
+                                    </div>
+                                @endif
+
+                                @if ($curso->imnas == 1)
+                                    <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card_certificaciones" style="position: relative">
+                                                    <a class="text-center" data-bs-toggle="modal" data-bs-target="#imnas_collage">
+                                                        <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/imnas.png')}}" >
+                                                    </a>
+                                                    <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
+                                            </div>
+                                        </div>
+                                        @if ($curso->titulo_hono == 1)
+                                            <p class="text-center">
+                                                <strong>Título Honorífico</strong>
+                                            </p>
+                                        @else
+                                            <p class="text-center">
+                                                <strong>Documentos de Certificadora Nacional</strong>
+                                            </p>
+                                        @endif
+                                    </div>
+                                @endif
+
+                                @if ($curso->stps == 1)
+                                    <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card_certificaciones" style="position: relative">
+                                                    <a class="text-center" data-bs-toggle="modal" data-bs-target="#stps">
+                                                        <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/stps.png')}}" alt="">
+                                                    </a>
+                                                    <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
+                                            </div>
+                                        </div>
+                                        <p class="text-center">
+                                            <strong>Diploma STPS</strong>
+                                        </p>
+                                    </div>
+                                @endif
+                        </div>
+                </div>
+            @endif
 
             <div class="card_single_horizon">
                 <div class="d-flex justify-content-between">
