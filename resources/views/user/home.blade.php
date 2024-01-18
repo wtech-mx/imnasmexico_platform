@@ -343,8 +343,6 @@
                                     </div>
                                 </div>
 
-                                @else
-
                                 @endif
                             @endif
                            @endforeach
@@ -362,7 +360,6 @@
 
                     </div>
         </div>
-
 
     </div>
 </section>
