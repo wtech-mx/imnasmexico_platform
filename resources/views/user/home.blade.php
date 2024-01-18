@@ -303,7 +303,7 @@
         <div class="col-12 p-3">
                     <div id="carousel_tiendita" class="carousel slide">
                         <div class="carousel-inner">
-                           @foreach ($noticias as $item)
+                           @foreach ($noticias_inicio as $item)
                             @if ($item->estatus === 'Activo')
                                 @if ($item->seccion === 'Inicio')
 

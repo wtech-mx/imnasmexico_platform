@@ -100,24 +100,25 @@
             </div>
         </div>
         </div>
-        <div class="row">
-        <div class="col-lg-7 mb-4 mb-lg-0">
-            <div class="card z-index-2 h-100">
-            <div class="card-header pb-0 pt-3 bg-transparent">
-                <div class="d-flex justify-content-between">
-                    <h3 class="mb-3">Resumen de ventas del año</h3>
-                    <a type="button" href="{{ route('reporte.index_custom') }}" class="btn bg-gradient-primary" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                        <i class="fa fa-fw fa-eye"></i> - Ver Reportes
-                    </a>
+
+    <div class="row">
+            <div class="col-lg-7 mb-4 mb-lg-0">
+                <div class="card z-index-2 h-100">
+                <div class="card-header pb-0 pt-3 bg-transparent">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="mb-3">Resumen de ventas del año</h3>
+                        <a type="button" href="{{ route('reporte.index_custom') }}" class="btn bg-gradient-primary" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            <i class="fa fa-fw fa-eye"></i> - Ver Reportes
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body p-3">
+                    <div class="chart">
+                    <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+                    </div>
+                </div>
                 </div>
             </div>
-            <div class="card-body p-3">
-                <div class="chart">
-                <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
-                </div>
-            </div>
-            </div>
-        </div>
 
         <div class="col-lg-5">
             <div class="card card-carousel overflow-hidden h-100 p-0">
@@ -125,52 +126,65 @@
                     <h6 class="text-capitalize">Cursos de la semana</h6>
                 </div>
 
-            <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
-                <div class="carousel-inner border-radius-lg h-100">
+                <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
 
-                @foreach ($cursos as $curso_car)
-                @php
-                    $hora_inicial = Carbon::parse($curso_car->hora_inicial)->format('h:i A');
-                    $hora_final = strftime("%H:%M %p", strtotime($curso_car->hora_final)) ;
+                    <div class="carousel-inner border-radius-lg h-100">
 
-                    $fecha_ini = $curso_car->fecha_inicial;
-                    $fecha_inicial = Carbon::createFromFormat('Y-m-d', $fecha_ini)->locale('es')->isoFormat('D [de] MMMM');
-                @endphp
-                <div class="carousel-item h-100 {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{asset('curso/'. $curso_car->foto) }}');background-size: cover;">
-                    <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
-                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
-                        <p class="text-dark" style="width:100px;">{{$curso_car->modalidad}}</p>
-                    </div>
-                    <h5 class="text-dark mb-1">{{$curso_car->nombre}}</h5>
-                    <p class="text-dark">{{$fecha_inicial}}</p>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="d-flex justify-content-start">
-                                <a class="btn btn-warning btn-sm" style="margin-right: 1rem" href="{{ route('cursos.edit',$curso_car->id) }}"  target="_blank"><i class="fa fa-fw fa-edit"></i> Editar</a>
-                                <a class="btn btn-success btn-sm" href="{{ route('cursos.show',$curso_car->slug) }}"  target="_blank"><i class="fas fa-external-link-alt"></i> Ver</a>
+                        @foreach ($cursos as $curso_car)
+
+                            @php
+                                $hora_inicial = Carbon::parse($curso_car->hora_inicial)->format('h:i A');
+                                $hora_final = strftime("%H:%M %p", strtotime($curso_car->hora_final)) ;
+
+                                $fecha_ini = $curso_car->fecha_inicial;
+                                $fecha_inicial = Carbon::createFromFormat('Y-m-d', $fecha_ini)->locale('es')->isoFormat('D [de] MMMM');
+                            @endphp
+
+                            <div class="carousel-item h-100 {{ $loop->first ? 'active' : '' }}" style="background-image: url('{{asset('curso/'. $curso_car->foto) }}');background-size: cover;">
+                                <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+
+                                    <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
+                                        <p class="text-dark" style="width:100px;">{{$curso_car->modalidad}}</p>
+                                    </div>
+
+                                    <h5 class="text-dark mb-1">{{$curso_car->nombre}}</h5>
+                                    <p class="text-dark">{{$fecha_inicial}}</p>
+
+                                    <div class="row">
+
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-start">
+                                                <a class="btn btn-warning btn-sm" style="margin-right: 1rem" href="{{ route('cursos.edit',$curso_car->id) }}"  target="_blank"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                <a class="btn btn-success btn-sm" href="{{ route('cursos.show',$curso_car->slug) }}"  target="_blank"><i class="fas fa-external-link-alt"></i> Ver</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
+
+                        @endforeach
 
                     </div>
-                    </div>
-                </div>
-                @endforeach
+
+                    <button class="carousel-control-prev w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+
+                    <button class="carousel-control-next w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
 
                 </div>
 
-                <button class="carousel-control-prev w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next w-5 me-3" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-                </button>
+            </div>
+        </div>
 
-            </div>
-            </div>
-        </div>
-        </div>
+    </div>
+
         <div class="row mt-4">
         <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
             <div class="card h-100 ">
