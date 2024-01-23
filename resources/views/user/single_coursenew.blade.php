@@ -612,20 +612,35 @@
                                     </div>
                                 @endif
                                 @if ($curso->nombre == 'Diplomado Desarrollo Educativo')
-                                <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
-                                    <div class="d-flex justify-content-center">
-                                        <div class="card_certificaciones" style="position: relative">
-                                                <a class="text-center" >
-                                                    <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
-                                                </a>
-                                               {{-- <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" > --}}
+                                    <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card_certificaciones" style="position: relative">
+                                                    <a class="text-center" >
+                                                        <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                    </a>
+                                                {{-- <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" > --}}
+                                            </div>
                                         </div>
+                                        <p class="text-center">
+                                            <?php echo $curso->texto_conocer?>
+                                        </p>
                                     </div>
-                                    <p class="text-center">
-                                        <?php echo $curso->texto_conocer?>
-                                    </p>
-                                </div>
-                            @endif
+                                @endif
+                                @if ($curso->nombre == 'Diplomado en Auxiliar de Enfermería en Cuidados Básicos de Atención Médica')
+                                    <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card_certificaciones" style="position: relative">
+                                                    <a class="text-center" >
+                                                        <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                    </a>
+                                                {{-- <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" > --}}
+                                            </div>
+                                        </div>
+                                        <p class="text-center">
+                                            <?php echo $curso->texto_conocer?>
+                                        </p>
+                                    </div>
+                                @endif
 
                                 @if($curso->sep == 1)
                                     <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
