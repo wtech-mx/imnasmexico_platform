@@ -94,8 +94,7 @@ class NotasCamController extends Controller
                 $user->otra_red = $request->get('otra_red');
                 $user->puesto = $request->get('puesto');
                 $user->curp = $request->get('curp');
-                $user->cam = $password;
-                $user->password = Hash::make($password);
+                $user->cam = $request->celular;
                 if($request->get('tipo') == 'Centro Evaluación'){
                     $user->user_cam = '4';
                 }else{
@@ -118,8 +117,7 @@ class NotasCamController extends Controller
                 $user->otra_red = $request->get('otra_red');
                 $user->puesto = $request->get('puesto');
                 $user->curp = $request->get('curp');
-                $user->cam = $password;
-                $user->password = Hash::make($password);
+                $user->cam = $request->celular;
                 if($request->get('tipo') == 'Centro Evaluación'){
                     $user->user_cam = '4';
                 }else{
