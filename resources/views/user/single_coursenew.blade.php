@@ -615,7 +615,7 @@
                                     <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
                                         <div class="d-flex justify-content-center">
                                             <div class="card_certificaciones" style="position: relative">
-                                                    <a class="text-center" >
+                                                <a class="text-center" data-bs-toggle="modal" data-bs-target="#educativo">
                                                         <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
                                                     </a>
                                                 {{-- <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" > --}}
