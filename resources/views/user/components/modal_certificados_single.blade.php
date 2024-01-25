@@ -125,7 +125,7 @@
   </div>
 
           <!-- Diplomado en Auxiliar de Enfermería en Cuidados Básicos de Atención Médica -->
-<div class="modal fade" id="dcscufc" tabindex="-1" aria-labelledby="dcscufcLabel" aria-hidden="true">
+<div class="modal fade" id="enfer" tabindex="-1" aria-labelledby="enferLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content" style="border-radius: 19px;border: solid transparent;">
         <div class="modal-body" style="background: #F5ECE4;border: solid transparent;border-radius: 19px;">
