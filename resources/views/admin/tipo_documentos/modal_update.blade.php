@@ -29,6 +29,7 @@
                             <option value="Titulo Honorifico con QR">CN - Titulo Honorifico CFC</option>
                             <option value="Tira de materias">CN - Tira de materias</option>
                             <option value="Diploma_STPS">Diploma - STPS</option>
+                            <option value="Titulo Honorifico Nuevo">Titulo Honorifico Nuevo</option>
                         </select>
                     </div>
 

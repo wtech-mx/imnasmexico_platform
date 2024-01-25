@@ -173,6 +173,15 @@ class DocumentosController extends Controller
 
             return $pdf->download('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
 
+        }elseif($tipo_documentos->tipo == 'Titulo Honorifico Nuevo'){
+
+            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_online_nuevo',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
+
+            $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
+
+            return $pdf->download('CN-titulo_honorifico_online_nuevo_'.$nombre.'.pdf');
+
         }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR_CFC'){
 
             $ancho_cm = 33;

@@ -152,7 +152,7 @@
             transform: translateX(-50%);
             left: 50%;
              background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-             /* background-image: url('utilidades_documentos/{{ $fileName }}');*/
+             /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
 
             background-size: cover;
             background-position: center center;
@@ -185,7 +185,7 @@
         @endphp
 
         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">--}}
+         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
 
         <div class="container">
             <h4 class="nombre">{!! $nombre_formateado !!}</h4>
@@ -228,7 +228,7 @@
 
         <div class="container5">
              <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
-            {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma">--}}
+            {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
         </div>
 
     </body>
