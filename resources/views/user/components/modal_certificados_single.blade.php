@@ -49,6 +49,30 @@
     </div>
   </div>
 
+    <!-- Diplomado en Regulación y Administración de Spa ante COFEPRIS -->
+<div class="modal fade" id="cofepris" tabindex="-1" aria-labelledby="cofeprisLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" style="border-radius: 19px;border: solid transparent;">
+        <div class="modal-body" style="background: #F5ECE4;border: solid transparent;border-radius: 19px;">
+            <div class="d-flex justify-content-between">
+                <button type="button" class="btn_close_custom" data-bs-dismiss="modal" style="margin-bottom: 1rem;">X</button>
+            </div>
+
+            <p class="text-center">
+                <img src="{{asset('assets/user/certificaciones/c1.jpg')}}" alt="" class="img_certificados_general">
+            </p>
+
+            <div class="d-flex justify-content-center">
+                <a class="btn_certificados" href="{{ route('user.avales') }}">
+                    Saber más
+                </a>
+            </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 <!-- Modal revoe-->
 <div class="modal fade" id="revoe" tabindex="-1" aria-labelledby="revoeLabel" aria-hidden="true">
