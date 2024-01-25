@@ -626,6 +626,21 @@
                                     </p>
                                 </div>
                                 @endif
+                                @if ($curso->nombre == 'Diplomado en Cosmetología SEP y Cosmiatría UNAM Facial y Corporal')
+                                <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                    <div class="d-flex justify-content-center">
+                                        <div class="card_certificaciones" style="position: relative">
+                                                <a class="text-center" data-bs-toggle="modal" data-bs-target="#dcscufc">
+                                                    <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                </a>
+                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
+                                        </div>
+                                    </div>
+                                    <p class="text-center">
+                                        <?php echo $curso->texto_conocer?>
+                                    </p>
+                                </div>
+                                @endif
                                 @if ($curso->nombre == 'Diplomado Desarrollo Educativo')
                                     <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
                                         <div class="d-flex justify-content-center">
