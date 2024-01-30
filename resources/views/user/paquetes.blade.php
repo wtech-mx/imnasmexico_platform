@@ -30,28 +30,9 @@
                         <h5 style="color:#836262!important;">Descuento: <strong>${{number_format($descuento, 2, '.', ',');}} mxn</strong></h5>
                         <form class="mt-4" action="{{ route('carrito.resultado') }}" method="post">
                             @csrf
-                            <h5 style="color:#836262!important;">Seleccione la canasta</h5>
-                            <div class="col-6">
-                                <select class="form-control" style="background: #F5ECE4!important;color: #836262;font-weight: bold;" name="canasta" id="canasta">
-                                    <option value="Canasta facial">Canasta facial</option>
-                                    <option value="Canasta Corporal">Canasta Corporal</option>
-                                </select>
-                            </div>
-                            <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
-                            @foreach ($tickets as $ticket)
-                            @php
-                                $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                                $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-                                $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
-                            @endphp
-                                <div class="mt-2 mt-md-5 mt-lg-3">
-                                    <input class="input_paquetes" type="checkbox" name="ticket[]" id="checkbox{{ $ticket->id }}" data-grupo="grupo1" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo1()">
-                                    <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
-                                </div>
-                            @endforeach
                             <input type="hidden" name="opciones_seleccionadas" value="">
                             <input type="hidden" name="paquete" value="1">
-                            <button class="btn_paquetes btn-submit" type="submit" id="boton-compra" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
+                            <button class="btn_paquetes btn-submit" type="submit">Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
                         </form>
                     </div>
                 </div>
@@ -75,28 +56,9 @@
                         <h5 style="color:#836262!important;">Descuento: <strong>${{number_format($descuento2, 2, '.', ',');}} mxn</strong></h5>
                         <form class="mt-4" action="{{ route('carrito.resultado2') }}" method="post">
                             @csrf
-                            <h5 style="color:#836262!important;">Seleccione la canasta</h5>
-                            <div class="col-6">
-                                <select class="form-control" style="background: #836262!important;color: #F5ECE4;font-weight: bold;" name="canasta" id="canasta">
-                                    <option value="Canasta facial">Canasta facial</option>
-                                    <option value="Canasta Corporal">Canasta Corporal</option>
-                                </select>
-                            </div>
-                            <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
-                            @foreach ($tickets as $ticket)
-                            @php
-                                $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                                $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-                                $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
-                            @endphp
-                                <div class="mt-2 mt-md-5 mt-lg-3">
-                                    <input class="input_paquetes" type="checkbox" name="ticket2[]" data-grupo="grupo2" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo2()">
-                                    <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
-                                </div>
-                            @endforeach
                             <input type="hidden" name="opciones_seleccionadas2" value="">
                             <input type="hidden" name="paquete" value="2">
-                            <button class="btn_paquetes btn-submit" type="submit" id="boton-compra2" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
+                            <button class="btn_paquetes btn-submit" type="submit">Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
                         </form>
                     </div>
 
@@ -128,28 +90,9 @@
                         <h5 style="color:#836262!important;">Descuento: <strong>${{number_format($descuento3, 2, '.', ',');}} mxn</strong></h5>
                         <form class="mt-4" action="{{ route('carrito.resultado3') }}" method="post">
                             @csrf
-                            <div class="col-6">
-                                <h5 style="color:#836262!important;">Seleccione la canasta</h5>
-                                <select class="form-control" style="background: #F5ECE4!important;color: #836262;font-weight: bold;" name="canasta" id="canasta">
-                                    <option value="Canasta facial">Canasta facial</option>
-                                    <option value="Canasta Corporal">Canasta Corporal</option>
-                                </select>
-                            </div>
-                            <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
-                            @foreach ($tickets as $ticket)
-                            @php
-                                $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                                $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-                                $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
-                            @endphp
-                                <div class="mt-2 mt-md-5 mt-lg-3">
-                                    <input class="input_paquetes" type="checkbox" name="ticket3[]" data-grupo="grupo3" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo3()">
-                                    <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
-                                </div>
-                            @endforeach
                             <input type="hidden" name="opciones_seleccionadas3" value="">
                             <input type="hidden" name="paquete" value="3">
-                            <button class="btn_paquetes btn-submit" type="submit" id="boton-compra3" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
+                            <button class="btn_paquetes btn-submit" type="submit">Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
                         </form>
                     </div>
                 </div>
@@ -173,28 +116,9 @@
                         <h5 style="color:#836262!important;">Descuento: <strong>${{number_format($descuento4, 2, '.', ',');}} mxn</strong></h5>
                         <form class="mt-4" action="{{ route('carrito.resultado4') }}" method="post">
                             @csrf
-                            <h5 style="color:#836262!important;">Seleccione la canasta</h5>
-                            <div class="col-6">
-                                <select class="form-control" style="background: #836262!important;color: #F5ECE4;font-weight: bold;" name="canasta" id="canasta">
-                                    <option value="Canasta facial">Canasta facial</option>
-                                    <option value="Canasta Corporal">Canasta Corporal</option>
-                                </select>
-                            </div>
-                            <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
-                            @foreach ($tickets as $ticket)
-                            @php
-                                $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                                $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-                                $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
-                            @endphp
-                                <div class="mt-2 mt-md-5 mt-lg-3">
-                                    <input class="input_paquetes" type="checkbox" name="ticket4[]" data-grupo="grupo4" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo4()">
-                                    <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
-                                </div>
-                            @endforeach
                             <input type="hidden" name="opciones_seleccionadas4" value="">
                             <input type="hidden" name="paquete" value="4">
-                            <button class="btn_paquetes btn-submit" type="submit" id="boton-compra4" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
+                            <button class="btn_paquetes btn-submit" type="submit">Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
                         </form>
                     </div>
 
@@ -226,28 +150,9 @@
                         <h5 style="color:#836262!important;">Descuento: <strong>${{number_format($descuento5, 2, '.', ',');}} mxn</strong></h5>
                         <form class="mt-4" action="{{ route('carrito.resultado5') }}" method="post">
                             @csrf
-                            <h5 style="color:#836262!important;">Seleccione la canasta</h5>
-                            <div class="col-6">
-                                <select class="form-control" style="background: #F5ECE4!important;color: #836262;font-weight: bold;" name="canasta" id="canasta">
-                                    <option value="Canasta facial">Canasta facial</option>
-                                    <option value="Canasta Corporal">Canasta Corporal</option>
-                                </select>
-                            </div>
-                            <h3 class="mt-2" style="color:#836262!important;">Selecciona tus 4 cursos</h3>
-                            @foreach ($tickets as $ticket)
-                            @php
-                                $fecha_inicial = $ticket->Cursos->fecha_inicial;
-                                $fmt = new IntlDateFormatter('es_ES', IntlDateFormatter::LONG, IntlDateFormatter::NONE);
-                                $fecha_formateada = $fmt->format(strtotime($fecha_inicial));
-                            @endphp
-                                <div class="mt-2 mt-md-5 mt-lg-3">
-                                    <input class="input_paquetes" type="checkbox" name="ticket5[]" data-grupo="grupo5" value="{{ $ticket->id }}" onclick="limitarSeleccionGrupo5()">
-                                    <label class="label_paquetes">{{ $ticket->nombre }} - {{ $fecha_formateada }}</label>
-                                </div>
-                            @endforeach
                             <input type="hidden" name="opciones_seleccionadas5" value="">
                             <input type="hidden" name="paquete" value="5">
-                            <button class="btn_paquetes btn-submit" type="submit" id="boton-compra5" disabled>Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
+                            <button class="btn_paquetes btn-submit" type="submit">Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
                         </form>
                     </div>
                 </div>
@@ -274,32 +179,32 @@
 
     <script>
         function limitarSeleccionGrupo1() {
-        var checkboxes = document.querySelectorAll('input[type=checkbox][data-grupo=grupo1]');
-        var seleccionados = 0;
-        var botonCompra = document.getElementById('boton-compra');
+            var checkboxes = document.querySelectorAll('input[type=checkbox][data-grupo=grupo1]');
+            var seleccionados = 0;
+            var botonCompra = document.getElementById('boton-compra');
 
-        checkboxes.forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                if (this.checked) {
-                    seleccionados++;
-                    if (seleccionados === 4) {
-                        // Habilita el botón de compra cuando se seleccionan 4 checkboxes
-                        botonCompra.disabled = false;
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        seleccionados++;
+                        if (seleccionados === 4) {
+                            // Habilita el botón de compra cuando se seleccionan 4 checkboxes
+                            botonCompra.disabled = false;
+                        }
+                        if (seleccionados > 4) {
+                        this.checked = false;
+                        seleccionados--;
+                        }
+                    } else {
+                        seleccionados--;
+                        // Deshabilita el botón de compra si no se seleccionan 4 checkboxes
+                        if (seleccionados !== 4) {
+                            botonCompra.disabled = true;
+                        }
                     }
-                    if (seleccionados > 4) {
-                    this.checked = false;
-                    seleccionados--;
-                    }
-                } else {
-                    seleccionados--;
-                    // Deshabilita el botón de compra si no se seleccionan 4 checkboxes
-                    if (seleccionados !== 4) {
-                        botonCompra.disabled = true;
-                    }
-                }
 
+                });
             });
-        });
         }
     </script>
 

@@ -43,6 +43,18 @@ class CursosController extends Controller
         return view('admin.cursos.index', compact('cursos'));
     }
 
+    public function filtro(Request $request){
+        $cursos = Cursos::orderBy('fecha_inicial', 'DESC');
+
+        if( $request->fecha_inicial_de && $request->fecha_inicial_a ){
+            $cursos = $cursos->where('fecha_inicial', '>=', $request->fecha_inicial_de)
+                                     ->where('fecha_inicial', '<=', $request->fecha_inicial_a);
+        }
+        $cursos = $cursos->get();
+
+        return view('admin.cursos.index_dia', compact('cursos'));
+    }
+
     public function index_dia(Request $request)
     {
         $fechaActual = date('Y-m-d');

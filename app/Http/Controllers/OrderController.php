@@ -938,27 +938,17 @@ class OrderController extends Controller
                         "name" => $curso->nombre,
                         "curso" => $curso->id_curso,
                         "quantity" => 1,
-                        "price" => 0,
+                        "price" => $total,
                         "paquete" => $paquete->num_paquete,
                         "image" => $curso->imagen
                     ];
-                }
-                session()->put('cart', $cart);
-            }
+                   session()->put('cart', $cart);
+                }else{
 
-            $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
-                ->first();
-            $cart = session()->get('cart', []);
-            $cart[] = [
-                "id" => $canasta->id,
-                "name" => $canasta->nombre,
-                "curso" => $canasta->id_curso,
-                "quantity" => 1,
-                "price" => 0,
-                "paquete" => 1,
-                "image" => $canasta->imagen
-            ];
-            session()->put('cart', $cart);
+                    return view('errors.sin_cursospaquetes');
+                }
+
+            }
         } elseif ($request->input('paquete') == 2) {
             $total = $paquete->precio_curso_2;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas2'));
@@ -979,27 +969,17 @@ class OrderController extends Controller
                         "name" => $curso->nombre,
                         "curso" => $curso->id_curso,
                         "quantity" => 1,
-                        "price" => 0,
+                        "price" => $total,
                         "paquete" => $paquete->num_paquete,
                         "image" => $curso->imagen
                     ];
+                    session()->put('cart', $cart);
+                }else{
+
+                    return view('errors.sin_cursospaquetes');
                 }
-                session()->put('cart', $cart);
             }
 
-            $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
-                ->first();
-            $cart = session()->get('cart', []);
-            $cart[] = [
-                "id" => $canasta->id,
-                "name" => $canasta->nombre,
-                "curso" => $canasta->id_curso,
-                "quantity" => 1,
-                "price" => 0,
-                "paquete" => 1,
-                "image" => $canasta->imagen
-            ];
-            session()->put('cart', $cart);
         } elseif ($request->input('paquete') == 3) {
             $total = $paquete->precio_curso_3;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas3'));
@@ -1020,27 +1000,16 @@ class OrderController extends Controller
                         "name" => $curso->nombre,
                         "curso" => $curso->id_curso,
                         "quantity" => 1,
-                        "price" => 0,
+                        "price" => $total,
                         "paquete" => $paquete->num_paquete,
                         "image" => $curso->imagen
                     ];
-                }
-                session()->put('cart', $cart);
-            }
+                    session()->put('cart', $cart);
+                }else{
 
-            $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
-                ->first();
-            $cart = session()->get('cart', []);
-            $cart[] = [
-                "id" => $canasta->id,
-                "name" => $canasta->nombre,
-                "curso" => $canasta->id_curso,
-                "quantity" => 1,
-                "price" => 0,
-                "paquete" => 1,
-                "image" => $canasta->imagen
-            ];
-            session()->put('cart', $cart);
+                    return view('errors.sin_cursospaquetes');
+                }
+            }
         } elseif ($request->input('paquete') == 4) {
             $total = $paquete->precio_curso_4;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas4'));
@@ -1061,27 +1030,16 @@ class OrderController extends Controller
                         "name" => $curso->nombre,
                         "curso" => $curso->id_curso,
                         "quantity" => 1,
-                        "price" => 0,
+                        "price" => $total,
                         "paquete" => $paquete->num_paquete,
                         "image" => $curso->imagen
                     ];
-                }
-                session()->put('cart', $cart);
-            }
+                    session()->put('cart', $cart);
+                }else{
 
-            $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
-                ->first();
-            $cart = session()->get('cart', []);
-            $cart[] = [
-                "id" => $canasta->id,
-                "name" => $canasta->nombre,
-                "curso" => $canasta->id_curso,
-                "quantity" => 1,
-                "price" => 0,
-                "paquete" => 1,
-                "image" => $canasta->imagen
-            ];
-            session()->put('cart', $cart);
+                    return view('errors.sin_cursospaquetes');
+                }
+            }
         } elseif ($request->input('paquete') == 5) {
             $total = $paquete->precio_curso_5;
             $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas5'));
@@ -1102,41 +1060,18 @@ class OrderController extends Controller
                         "name" => $curso->nombre,
                         "curso" => $curso->id_curso,
                         "quantity" => 1,
-                        "price" => 0,
+                        "price" => $total,
                         "paquete" => $paquete->num_paquete,
                         "image" => $curso->imagen
                     ];
-                }
-                session()->put('cart', $cart);
-            }
+                    session()->put('cart', $cart);
+                }else{
 
-            $canasta = CursosTickets::where('nombre', '=', $request->input('canasta'))
-                ->first();
-            $cart = session()->get('cart', []);
-            $cart[] = [
-                "id" => $canasta->id,
-                "name" => $canasta->nombre,
-                "curso" => $canasta->id_curso,
-                "quantity" => 1,
-                "price" => 0,
-                "paquete" => 1,
-                "image" => $canasta->imagen
-            ];
-            session()->put('cart', $cart);
+                    return view('errors.sin_cursospaquetes');
+                }
+            }
         }
-        $ticketsSeleccionados = CursosTickets::whereIn('id', $opcionesSeleccionadas)->get();
-        for ($i = 0; $i < count($ticketsSeleccionados); $i++) {
-            $cart[$ticketsSeleccionados[$i]->id] = [
-                "id" => $ticketsSeleccionados[$i]->id,
-                "name" => $ticketsSeleccionados[$i]->nombre,
-                "curso" => $ticketsSeleccionados[$i]->id_curso,
-                "quantity" => 1,
-                "price" => $total,
-                "paquete" => 1,
-                "image" => $ticketsSeleccionados[$i]->imagen
-            ];
-            session()->put('cart', $cart);
-        }
+
 
         // session()->flash('addedToCart', true);
         Session::flash('modal_checkout', 'Se ha Abierto el checkout');

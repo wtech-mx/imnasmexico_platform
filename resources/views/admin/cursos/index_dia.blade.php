@@ -34,6 +34,42 @@
                                 </a>
                             @endcan
                         </div>
+                        <div class="col-12">
+                            <form class="row mt-3 mb-3" action="{{ route('cursos.filtro') }}" method="GET" >
+                                <div class="col-12">
+                                    <h6>Filtro</h6>
+                                </div>
+
+                                <div class="col-6 col-md-4 col-lg-4 py-3">
+                                    <label class="form-label tiitle_products">Rango Fecha de</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text span_custom_tab" >
+                                            <img class="icon_span_tab" src="{{ asset('assets/media/icons/cero.webp') }}" alt="" >
+                                        </span>
+                                        <input id="fecha_inicial_de" name="fecha_inicial_de" type="date"  class="form-control input_custom_tab @error('stock_de') is-invalid @enderror"  value="{{ old('stock_de') }}" autocomplete="" autofocus>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-md-4 col-lg-4 py-3">
+                                    <label class="form-label tiitle_products">hasta </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text span_custom_tab" >
+                                            <img class="icon_span_tab" src="{{ asset('assets/media/icons/9.webp') }}" alt="" >
+                                        </span>
+                                        <input id="fecha_inicial_a" name="fecha_inicial_a" type="date"  class="form-control input_custom_tab @error('stock_a') is-invalid @enderror"  value="{{ old('stock_a') }}" autocomplete="" autofocus>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-md-4 col-lg-4 py-3">
+                                    <label class="form-label tiitle_products">-</label>
+                                    <div class="input-group">
+                                        <button class="btn btn_filter" type="submit" style="">Filtrar
+                                        </button>
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
                     </div>
 
                         <div class="card-body">

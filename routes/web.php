@@ -172,6 +172,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/cursos', [App\Http\Controllers\CursosController::class, 'index'])->name('cursos.index');
     Route::get('/admin/cursos/dia', [App\Http\Controllers\CursosController::class, 'index_dia'])->name('cursos.index_dia');
     Route::get('/admin/cursos/mes', [App\Http\Controllers\CursosController::class, 'index_mes'])->name('cursos.index_mes');
+    Route::get('/admin/cursos/mes/filtro', [App\Http\Controllers\CursosController::class, 'filtro'])->name('cursos.filtro');
     Route::get('/admin/cursos/create', [App\Http\Controllers\CursosController::class, 'create'])->name('cursos.create');
     Route::post('/admin/cursos/store', [App\Http\Controllers\CursosController::class, 'store'])->name('cursos.store');
     Route::get('/admin/cursos/edit/{id}', [App\Http\Controllers\CursosController::class, 'edit'])->name('cursos.edit');
