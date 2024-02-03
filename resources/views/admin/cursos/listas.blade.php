@@ -299,6 +299,20 @@
                                     fontSize: '80px' // Tamaño de letra más grande para exportación PDF
                                 }
                             }
+                        },
+                        title: function() {
+                            var customText = '';
+                            var titulo = 'Lista de {{$curso->nombre}} / {{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_inicial)->translatedFormat('l j \\de F \\de Y')) }} al {{ \Illuminate\Support\Str::ucfirst(\Carbon\Carbon::parse($curso->fecha_final)->translatedFormat('l j \\de F \\de Y')) }} - ( {{ $curso->modalidad }} )';
+                            // Agregar un texto personalizado antes del título de la página
+                            @foreach ($ticket->Cursos->CursosEstandares as $cursoEstandar)
+                                customText += '<span style="font-size: 40px">{{$cursoEstandar->CarpetasEstandares->nombre}}</span>';
+                            @endforeach
+                            @if ($curso->redconocer == 1)
+                                return customText + '<br><br>' + titulo + '<br><br>' + '<span style="font-size: 40px">SEP-CONOCER  Fecha de evaluación:</span>';
+                            @else
+                                return titulo;
+                            @endif
+
                         }
                     },
                     'excel',
@@ -328,6 +342,7 @@
         });
     @endforeach
 </script>
+
 
 
 @endsection

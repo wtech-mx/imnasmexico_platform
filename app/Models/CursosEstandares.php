@@ -21,7 +21,11 @@ class CursosEstandares extends Model
     {
         return $this->belongsTo(Cursos::class, 'id_curso');
     }
-
+    public function CarpetasEstandares()
+    {
+        return $this->belongsTo(CarpetasEstandares::class, 'id_carpeta');
+    }
+    
     public function CarpetaEstandar()
     {
         return $this->belongsTo(CarpetaEstandar::class, 'id_carpeta');
