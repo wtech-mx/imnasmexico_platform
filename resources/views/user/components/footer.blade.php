@@ -78,7 +78,7 @@
                 </p>
             </div>
 
-            <div class="d-flex justify-content-center">
+            {{-- <div class="d-flex justify-content-center">
                 <a class="preguntas_freceuntas btn_ticket_comprar text-center" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false">Pagar Envio</a>
             </div>
                 <div class="row">
@@ -149,7 +149,7 @@
                         </div>
                       </div>
                     </div>
-                </div>
+                </div> --}}
 
 
         </div>
