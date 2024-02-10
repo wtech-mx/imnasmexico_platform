@@ -662,7 +662,7 @@ class OrderController extends Controller
             $tipo_documentos = Tipodocumentos::first();
 
             if ($details->Cursos->modalidad == 'Online') {
-                Mail::to($payer->email)->send(new PlantillaTicket($details));
+                // Mail::to($payer->email)->send(new PlantillaTicket($details));
             } else {
                 Mail::to($payer->email)->send(new PlantillaTicketPresencial($details));
             }
@@ -680,7 +680,7 @@ class OrderController extends Controller
             }
 
         }
-        Mail::to($payer->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
+        // Mail::to($payer->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
