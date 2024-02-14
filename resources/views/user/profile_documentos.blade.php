@@ -211,11 +211,11 @@
                     @endif
                 @endif
             </div>
-
-            <div class="modal-footer">
-                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
-            </div>
-
+            @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
+                <div class="modal-footer">
+                    <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                </div>
+            @endif
         </form>
         <script>
             function eliminarDocumento(url) {
