@@ -153,6 +153,42 @@
                                 <button type="button" class="btn btn-danger btn-sm mt-2" onclick="eliminarDocumento('{{ route('eliminar.documentoper', ['id' => $documento->id, 'tipo' => 'firma']) }}')">Eliminar</button>
                             @endif
                         </div>
+
+                        @if ($cliente->name == 'Asiyadeth Virginia Hernández Cruz')
+                            <div class="col-6 form-group mb-5">
+                                <label for="firma">Cédula de evaluación</label>
+                                <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" download="NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf" style="background: #836262; border-radius: 19px;">
+                                    Descargar Cédula
+                                </a>
+                                <input id="carta_compromiso" name="carta_compromiso" type="file" class="form-control" >
+                                @if ($documento->carta_compromiso == NULL)
+                                    <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                @else
+                                    @if (pathinfo($documento->carta_compromiso, PATHINFO_EXTENSION) == 'pdf')
+                                        <p class="text-center ">
+                                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso)}}" style="width: 60%; height: 60px;"></iframe>
+                                        </p>
+                                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                    @elseif (pathinfo($documento->carta_compromiso, PATHINFO_EXTENSION) == 'doc')
+                                        <p class="text-center ">
+                                            <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                        </p>
+                                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                    @elseif (pathinfo($documento->carta_compromiso, PATHINFO_EXTENSION) == 'docx')
+                                        <p class="text-center ">
+                                            <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                        </p>
+                                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                    @else
+                                        <p class="text-center ">
+                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                        </p>
+                                            <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->carta_compromiso) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
+                                    @endif
+                                    <button type="button" class="btn btn-danger btn-sm mt-2" onclick="eliminarDocumento('{{ route('eliminar.documentoper', ['id' => $documento->id, 'tipo' => 'carta_compromiso']) }}')">Eliminar</button>
+                                @endif
+                            </div>
+                        @endif
                 @endforeach
 
                 @else
@@ -175,6 +211,17 @@
                         <label for="firma">Firma</label>
                         <input id="firma" name="firma" type="file" class="form-control" >
                     </div>
+
+                    @if ($cliente->name == 'Asiyadeth Virginia Hernández Cruz')
+                        <div class="col-6 form-group mb-5">
+                            <label for="firma">Cédula de evaluación</label>
+                            <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" download="NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf" style="background: #836262; border-radius: 19px;">
+                                Descargar Cédula
+                            </a>
+                            <input id="carta_compromiso" name="carta_compromiso" type="file" class="form-control" >
+
+                        </div>
+                    @endif
                 @endif
             </div>
 
