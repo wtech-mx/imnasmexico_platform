@@ -170,14 +170,6 @@
                             @endif
                         </div>
 
-                        @if ($cliente->name == 'Asiyadeth Virginia Hernández Cruz')
-                            <div class="col-6 form-group mb-5 mt-5">
-                                <label for="firma">Cédula de evaluación</label><br>
-                                <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" download="NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf" style="background: #836262; border-radius: 19px;">
-                                    Descargar Cédula
-                                </a>
-                            </div>
-                        @endif
                 @endforeach
 
                 @else
@@ -200,15 +192,6 @@
                         <label for="firma">Firma</label>
                         <input id="firma" name="firma" type="file" class="form-control" >
                     </div>
-
-                    @if ($cliente->name == 'Asiyadeth Virginia Hernández Cruz')
-                        <div class="col-6 form-group mb-5 mt-5">
-                            <label for="firma">Cédula de evaluación</label><br>
-                            <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" download="NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf" style="background: #836262; border-radius: 19px;">
-                                Descargar Cédula
-                            </a>
-                        </div>
-                    @endif
                 @endif
             </div>
             @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
@@ -282,9 +265,9 @@
                                                             </p>
                                                         @endif
 
-                                                    </div>
+                                                </div>
 
-                                                    <div class="col-3 form-group p-3 mt-2">
+                                                <div class="col-3 form-group p-3 mt-2">
 
                                                         <p class="text-center">
                                                             Se ha cargado tu archivo con exito- <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
@@ -325,23 +308,42 @@
                                                                 form.submit();
                                                             }
                                                         }
-                                                </script>
+                                                    </script>
 
                                                 </div>
-
                                             </div>
                                         @endforeach
-                                        <div class="row">
-                                            <div class="col-8"></div>
-                                            <div class="col-4">
-                                                <button class="btn_save_profile d-inline-block mt-3 mb-3" style="background: {{$configuracion->color_boton_save}}; color: #ffff" type="submit">Guardar Documentos</button>
+                                        @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
+                                            <div class="row">
+                                                <div class="col-8"></div>
+                                                <div class="col-4">
+                                                    <button class="btn_save_profile d-inline-block mt-3 mb-3" style="background: {{$configuracion->color_boton_save}}; color: #ffff" type="submit">Guardar Documentos</button>
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </form>
                         </div>
                     @endforeach
                 @endif
             @endforeach
+            @if ($cliente->name == 'Asiyadeth Virginia Hernández Cruz')
+                <div class="col-6  mb-2">
+                    <a href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" download="NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf" style="text-decoration: none; color: #000">
+                        <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
+                        Cédula de evaluación
+                    </a>
+                    <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" download="NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf" style="background: #836262; border-radius: 19px;">
+                        Descargar
+                    </a>
+                </div>
+
+                <div class="col-3 form-group p-3 mt-2">
+                    <iframe class="mt-2" src="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf')}}" style="width: 60%; height: 60px;"></iframe>
+                    <p class="text-center ">
+                        <a class="btn btn-sm text-dark" href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                    </p>
+                </div>
+            @endif
         </div>
     </div>
 
