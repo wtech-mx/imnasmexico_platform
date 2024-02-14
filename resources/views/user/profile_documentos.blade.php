@@ -271,15 +271,15 @@
 
                                                         <p class="text-center">
                                                             Se ha cargado tu archivo con exito- <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
-                                                            @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
+
                                                                 ¿Quieres Borrarlo?
-                                                            @endif
+
                                                         </p>
-                                                        @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
+
                                                             <div class="d-flex justify-content-center">
                                                                 <button type="button" class="btn btn-danger btn-sm" onclick="eliminarDocumento('{{ route('eliminar.documento', $documentoSubido->id) }}')">Eliminar</button>
                                                             </div>
-                                                        @endif
+
                                                     @else
                                                         <input type="hidden" name="documento_ids[]" value="{{ $documento->id }}">
                                                         <input type="hidden" name="curso" value="{{ $video->Cursos->id }}">
@@ -313,14 +313,12 @@
                                                 </div>
                                             </div>
                                         @endforeach
-                                        @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                                             <div class="row">
                                                 <div class="col-8"></div>
                                                 <div class="col-4">
                                                     <button class="btn_save_profile d-inline-block mt-3 mb-3" style="background: {{$configuracion->color_boton_save}}; color: #ffff" type="submit">Guardar Documentos</button>
                                                 </div>
                                             </div>
-                                        @endif
                                     </form>
                         </div>
                     @endforeach
