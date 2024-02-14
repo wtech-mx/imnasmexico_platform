@@ -31,7 +31,7 @@
                 @foreach($documentos as $documento)
                         <div class="col-6 form-group mb-5">
                             <label for="ine">INE Frente y Atras</label>
-                            @if ($cliente->name != 'Alice Edwards')
+                            @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                                 <input id="ine" name="ine" type="file" class="form-control" >
                             @endif
                             @if ($documento->ine == NULL)
@@ -59,7 +59,7 @@
                                         <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
 
                                 @endif
-                                @if ($cliente->name != 'Alice Edwards')
+                                @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                                     <button type="button" class="btn btn-danger btn-sm " onclick="eliminarDocumento('{{ route('eliminar.documentoper', ['id' => $documento->id, 'tipo' => 'ine']) }}')">Eliminar</button>
                                 @endif
                             @endif
@@ -67,7 +67,7 @@
 
                         <div class="col-6 form-group mb-5">
                             <label for="curp">CURP</label>
-                            @if ($cliente->name != 'Alice Edwards')
+                            @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                                 <input id="curp" name="curp" type="file" class="form-control" >
                             @endif
                             @if ($documento->curp == NULL)
@@ -94,7 +94,7 @@
                                     </p>
                                         <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
                                 @endif
-                                @if ($cliente->name != 'Alice Edwards')
+                                @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                                     <button type="button" class="btn btn-danger btn-sm mt-2" onclick="eliminarDocumento('{{ route('eliminar.documentoper', ['id' => $documento->id, 'tipo' => 'curp']) }}')">Eliminar</button>
                                 @endif
                             @endif
@@ -102,7 +102,7 @@
 
                         <div class="col-6 form-group mb-5">
                             <label for="foto_tam_infantil">Foto Infantil a color</label>
-                            @if ($cliente->name != 'Alice Edwards')
+                            @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                                 <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
                             @endif
                             @if ($documento->foto_tam_infantil == NULL)
@@ -129,7 +129,7 @@
                                     </p>
                                         <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
                                 @endif
-                                @if ($cliente->name != 'Alice Edwards')
+                                @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                                     <button type="button" class="btn btn-danger btn-sm mt-2" onclick="eliminarDocumento('{{ route('eliminar.documentoper', ['id' => $documento->id, 'tipo' => 'foto_tam_infantil']) }}')">Eliminar</button>
                                 @endif
                             @endif
@@ -137,7 +137,7 @@
 
                         <div class="col-6 form-group mb-5">
                             <label for="firma">Firma</label>
-                            @if ($cliente->name != 'Alice Edwards')
+                            @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                                 <input id="firma" name="firma" type="file" class="form-control" >
                             @endif
                             @if ($documento->firma == NULL)
@@ -164,13 +164,13 @@
                                     </p>
                                         <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->firma) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
                                 @endif
-                                @if ($cliente->name != 'Alice Edwards')
+                                @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                                     <button type="button" class="btn btn-danger btn-sm mt-2" onclick="eliminarDocumento('{{ route('eliminar.documentoper', ['id' => $documento->id, 'tipo' => 'firma']) }}')">Eliminar</button>
                                 @endif
                             @endif
                         </div>
 
-                        @if ($cliente->name == 'Alice Edwards')
+                        @if ($cliente->name == 'Asiyadeth Virginia Hernández Cruz')
                             <div class="col-6 form-group mb-5 mt-5">
                                 <label for="firma">Cédula de evaluación</label><br>
                                 <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" download="NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf" style="background: #836262; border-radius: 19px;">
@@ -201,7 +201,7 @@
                         <input id="firma" name="firma" type="file" class="form-control" >
                     </div>
 
-                    @if ($cliente->name == 'Alice Edwards')
+                    @if ($cliente->name == 'Asiyadeth Virginia Hernández Cruz')
                         <div class="col-6 form-group mb-5 mt-5">
                             <label for="firma">Cédula de evaluación</label><br>
                             <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" download="NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf" style="background: #836262; border-radius: 19px;">
@@ -288,11 +288,11 @@
 
                                                         <p class="text-center">
                                                             Se ha cargado tu archivo con exito- <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
-                                                            @if ($cliente->name != 'Alice Edwards')
+                                                            @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                                                                 ¿Quieres Borrarlo?
                                                             @endif
                                                         </p>
-                                                        @if ($cliente->name != 'Alice Edwards')
+                                                        @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                                                             <div class="d-flex justify-content-center">
                                                                 <button type="button" class="btn btn-danger btn-sm" onclick="eliminarDocumento('{{ route('eliminar.documento', $documentoSubido->id) }}')">Eliminar</button>
                                                             </div>
