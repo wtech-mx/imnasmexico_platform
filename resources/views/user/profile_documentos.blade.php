@@ -155,7 +155,7 @@
                         </div>
 
                         @if ($cliente->name == 'Asiyadeth Virginia Hernández Cruz')
-                            <div class="col-6 form-group mb-5">
+                            <div class="col-6 form-group mb-5 mt-5">
                                 <label for="firma">Cédula de evaluación</label>
                                 <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" download="NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf" style="background: #836262; border-radius: 19px;">
                                     Descargar Cédula
@@ -213,7 +213,7 @@
                     </div>
 
                     @if ($cliente->name == 'Asiyadeth Virginia Hernández Cruz')
-                        <div class="col-6 form-group mb-5">
+                        <div class="col-6 form-group mb-5 mt-5">
                             <label for="firma">Cédula de evaluación</label>
                             <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" download="NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf" style="background: #836262; border-radius: 19px;">
                                 Descargar Cédula
