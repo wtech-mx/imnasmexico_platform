@@ -320,7 +320,7 @@
                                                     <button class="btn_save_profile d-inline-block mt-3 mb-3" style="background: {{$configuracion->color_boton_save}}; color: #ffff" type="submit">Guardar Documentos</button>
                                                 </div>
                                             </div>
-                                       
+
                                     </form>
                         </div>
                     @endforeach
@@ -328,19 +328,19 @@
             @endforeach
             @if ($cliente->name == 'Asiyadeth Virginia Hernández Cruz')
                 <div class="col-6  mb-2">
-                    <a href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" download="NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf" style="text-decoration: none; color: #000">
+                    <a href="{{asset('carpetasestandares/Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf') }}" download="Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf" style="text-decoration: none; color: #000">
                         <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
                         Cédula de evaluación
                     </a>
-                    <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" download="NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf" style="background: #836262; border-radius: 19px;">
+                    <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf') }}" download="Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf" style="background: #836262; border-radius: 19px;">
                         Descargar
                     </a>
                 </div>
 
                 <div class="col-3 form-group p-3 mt-2">
-                    <iframe class="mt-2" src="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf')}}" style="width: 60%; height: 60px;"></iframe>
+                    <iframe class="mt-2" src="{{asset('carpetasestandares/Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf')}}" style="width: 60%; height: 60px;"></iframe>
                     <p class="text-center ">
-                        <a class="btn btn-sm text-dark" href="{{asset('carpetasestandares/NUEVA CEDULA VIRGINIA EC1313 - FIRMADA.pdf') }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                        <a class="btn btn-sm text-dark" href="{{asset('carpetasestandares/Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf') }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
                     </p>
                 </div>
             @endif
