@@ -173,7 +173,7 @@
                         @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                             <div class="col-6 form-group mb-5">
                                 <label for="firma">Foto Óvalo</label>
-
+                                <input id="foto_tam_titulo" name="foto_tam_titulo" type="file" class="form-control" >
                                 @if ($documento->foto_tam_titulo == NULL)
                                     <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
                                 @else
