@@ -123,6 +123,7 @@
                                                     <a class="btn btn-sm btn-info" href="{{ route('cursos.show',$curso->slug) }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
                                                 </td>
                                             </tr>
+                                            @include('admin.cursos.modal_duplicar')
                                             @include('admin.cursos.modal_meet')
                                         @endforeach
                                     </tbody>
