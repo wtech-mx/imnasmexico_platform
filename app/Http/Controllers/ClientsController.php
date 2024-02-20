@@ -158,6 +158,15 @@ class ClientsController extends Controller
             case 'firma':
                 $campoDocumento = 'firma';
                 break;
+            case 'foto_infantil_blanco':
+                $campoDocumento = 'foto_infantil_blanco';
+                break;
+            case 'domicilio':
+                $campoDocumento = 'domicilio';
+                break;
+            case 'estudios':
+                $campoDocumento = 'estudios';
+                break;
             case 'carta_compromiso':
                 $campoDocumento = 'carta_compromiso';
                 break;
@@ -423,6 +432,22 @@ class ClientsController extends Controller
                 $documentos->firma = $fileName;
             }
 
+            if ($request->hasFile("estudios")) {
+                $file = $request->file('estudios');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documentos->estudios = $fileName;
+            }
+
+            if ($request->hasFile("domicilio")) {
+                $file = $request->file('domicilio');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documentos->domicilio = $fileName;
+            }
+
             $documentos->save();
             return redirect()->back()->with('success', 'Creado con exito');
         }
@@ -486,6 +511,22 @@ class ClientsController extends Controller
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
                 $documentos->firma = $fileName;
+            }
+
+            if ($request->hasFile("estudios")) {
+                $file = $request->file('estudios');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documentos->estudios = $fileName;
+            }
+
+            if ($request->hasFile("domicilio")) {
+                $file = $request->file('domicilio');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documentos->domicilio = $fileName;
             }
 
             $documentos->update();

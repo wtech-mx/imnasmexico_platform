@@ -109,6 +109,81 @@
                             </div>
 
                             @foreach ($usuario_compro as $video)
+                                @if ($video->Cursos->sep == '1')
+                                    <div class="col-6 form-group mb-5">
+                                        <label for="estudios">Último grado de estudio (oficial)</label>
+                                        @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
+                                            <input id="estudios" name="estudios" type="file" class="form-control" >
+                                        @endif
+                                        @if ($documento->estudios == NULL)
+                                            <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                        @else
+                                            @if (pathinfo($documento->estudios, PATHINFO_EXTENSION) == 'pdf')
+                                            <p class="text-center ">
+                                                <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->estudios)}}" style="width: 60%; height: 60px;"></iframe>
+                                            </p>
+                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->estudios) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                            @elseif (pathinfo($documento->estudios, PATHINFO_EXTENSION) == 'doc')
+                                            <p class="text-center ">
+                                                <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                            </p>
+                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->estudios) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                            @elseif (pathinfo($documento->estudios, PATHINFO_EXTENSION) == 'docx')
+                                            <p class="text-center ">
+                                                <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                            </p>
+                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->estudios) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                            @else
+                                                <p class="text-center mt-2">
+                                                    <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->estudios) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                </p>
+                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->estudios) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
+                                            @endif
+                                            @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
+                                                <button type="button" class="btn btn-danger btn-sm mt-2" onclick="eliminarDocumento('{{ route('eliminar.documentoper', ['id' => $documento->id, 'tipo' => 'estudios']) }}')">Eliminar</button>
+                                            @endif
+                                        @endif
+                                    </div>
+
+                                    <div class="col-6 form-group mb-5">
+                                        <label for="domicilio">Comprobante de domicilio</label>
+                                        @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
+                                            <input id="domicilio" name="domicilio" type="file" class="form-control" >
+                                        @endif
+                                        @if ($documento->domicilio == NULL)
+                                            <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                        @else
+                                            @if (pathinfo($documento->domicilio, PATHINFO_EXTENSION) == 'pdf')
+                                            <p class="text-center ">
+                                                <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->domicilio)}}" style="width: 60%; height: 60px;"></iframe>
+                                            </p>
+                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->domicilio) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                            @elseif (pathinfo($documento->domicilio, PATHINFO_EXTENSION) == 'doc')
+                                            <p class="text-center ">
+                                                <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                            </p>
+                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->domicilio) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                            @elseif (pathinfo($documento->domicilio, PATHINFO_EXTENSION) == 'docx')
+                                            <p class="text-center ">
+                                                <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                            </p>
+                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->domicilio) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                            @else
+                                                <p class="text-center mt-2">
+                                                    <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->domicilio) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                </p>
+                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->domicilio) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
+                                            @endif
+                                            @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
+                                                <button type="button" class="btn btn-danger btn-sm mt-2" onclick="eliminarDocumento('{{ route('eliminar.documentoper', ['id' => $documento->id, 'tipo' => 'domicilio']) }}')">Eliminar</button>
+                                            @endif
+                                        @endif
+                                    </div>
+                                    @break
+                                @endif
+                            @endforeach
+
+                            @foreach ($usuario_compro as $video)
                                 @if ($video->Cursos->imnas == '1')
                                     <div class="col-6 form-group mb-5">
                                         <label for="foto_infantil_blanco">Foto Infantil Blanco y negro</label>
@@ -141,6 +216,7 @@
                                             @endif
                                         @endif
                                     </div>
+                                    @break
                                 @endif
                             @endforeach
 
@@ -180,6 +256,7 @@
                                             @endif
                                         @endif
                                     </div>
+                                    @break
                                 @endif
                             @endforeach
 
@@ -264,11 +341,27 @@
                     </div>
 
                     @foreach ($usuario_compro as $video)
+                        @if ($video->Cursos->sep == '1')
+                            <div class="col-6 form-group mb-5">
+                                <label for="estudios">Último grado de estudio (oficial)</label>
+                                <input id="estudios" name="estudios" type="file" class="form-control" >
+                            </div>
+
+                            <div class="col-6 form-group mb-5">
+                                <label for="domicilio">Comprobante de domicilio</label>
+                                <input id="domicilio" name="domicilio" type="file" class="form-control" >
+                            </div>
+                            @break
+                        @endif
+                    @endforeach
+
+                    @foreach ($usuario_compro as $video)
                         @if ($video->Cursos->imnas == '1')
                             <div class="col-6 form-group mb-5">
                                 <label for="foto_infantil_blanco">Foto Infantil Blanco y negro</label>
                                 <input id="foto_infantil_blanco" name="foto_infantil_blanco" type="file" class="form-control" >
                             </div>
+                            @break
                         @endif
                     @endforeach
 
@@ -278,6 +371,7 @@
                                 <label for="foto_tam_infantil">Foto Infantil color</label>
                                 <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
                             </div>
+                            @break
                         @endif
                     @endforeach
 
@@ -298,6 +392,7 @@
                        <a class="example-image-link" href="{{asset('documentos/selfi.jpg') }}" data-lightbox="example-2" data-title="selfi" target="_blank">
                             <img id="img_material_clase example-image" src="{{asset('documentos/selfi.jpg') }}" alt="material de clase" style="width: 40%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
                         </a>
+                        @break
                     @endif
                 @endforeach
             </div>
