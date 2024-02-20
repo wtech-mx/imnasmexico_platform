@@ -103,6 +103,11 @@
                                                 @endif
 
                                                 <td>
+                                                    @can('cursos-duplicar')
+                                                        <button class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#duplicarModal{{ $curso->id }}" title="Duplicar">
+                                                            <i class="fas fa-copy"></i>
+                                                        </button>
+                                                    @endcan
                                                     @can('cursos-lista')
                                                         <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}"><i class="fa fa-users"></i> {{ $curso->orderTicket->count() }}</a>
                                                     @endcan
