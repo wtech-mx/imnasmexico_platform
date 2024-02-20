@@ -399,6 +399,14 @@ class ClientsController extends Controller
                 $documentos->foto_tam_infantil = $fileName;
             }
 
+            if ($request->hasFile("foto_infantil_blanco")) {
+                $file = $request->file('foto_infantil_blanco');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documentos->foto_infantil_blanco = $fileName;
+            }
+
             if ($request->hasFile("carta_compromiso")) {
                 $file = $request->file('carta_compromiso');
                 $path = $ruta_estandar;
@@ -438,6 +446,14 @@ class ClientsController extends Controller
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
                 $documentos->curp = $fileName;
+            }
+
+            if ($request->hasFile("foto_infantil_blanco")) {
+                $file = $request->file('foto_infantil_blanco');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documentos->foto_infantil_blanco = $fileName;
             }
 
             if ($request->hasFile("foto_tam_titulo")) {
@@ -604,6 +620,14 @@ class ClientsController extends Controller
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
                 $documentos->foto_tam_infantil = $fileName;
+            }
+
+            if ($request->hasFile("foto_infantil_blanco")) {
+                $file = $request->file('foto_infantil_blanco');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documentos->foto_infantil_blanco = $fileName;
             }
 
             if ($request->hasFile("carta_compromiso")) {

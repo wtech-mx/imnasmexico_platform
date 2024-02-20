@@ -23,6 +23,7 @@ class Documentos extends Model
         'carta_compromiso',
         'tipo',
         'folio',
+        'foto_infantil_blanco',
     ];
 
     public function User()
