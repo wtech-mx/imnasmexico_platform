@@ -376,15 +376,15 @@
                     </div>
                 @endif
 
-                {{-- @foreach ($usuario_compro as $video)
+                @foreach ($usuario_compro as $video)
                     @if ($video->Cursos->imnas == '1')
-                       <p> Instrucciones para subir Foto Infantil Blanco y negro</p>
-                       <a class="example-image-link" href="{{asset('documentos/selfi.jpg') }}" data-lightbox="example-2" data-title="selfi" target="_blank">
-                            <img id="img_material_clase example-image" src="{{asset('documentos/selfi.jpg') }}" alt="material de clase" style="width: 40%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                       <p> Registro IMNAS</p>
+                       <a class="example-image-link" href="{{asset('documentos/imnas.jpg') }}" data-lightbox="example-2" data-title="imnas" target="_blank">
+                            <img id="img_material_clase example-image" src="{{asset('documentos/imnas.jpg') }}" alt="material de clase" style="width: 40%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
                         </a>
                         @break
                     @endif
-                @endforeach --}}
+                @endforeach
             </div>
             @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                 <div class="modal-footer">
