@@ -352,7 +352,7 @@ class DocumentosController extends Controller
 
         $email_user = $request->get('email');
         //$email_user = 'adrianwebtech@gmail.com';
-        $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
+        $email_diplomas = 'imnascenter@naturalesainspa.com';
 
         $nacionalidad = $request->get('nacionalidad');
 

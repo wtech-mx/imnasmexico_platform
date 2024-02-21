@@ -185,7 +185,7 @@ class PagosFueraController extends Controller
 
             $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
 
-            $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
+            $email_diplomas = 'imnascenter@naturalesainspa.com';
             $destinatario = [ $order->User->email  , $email_diplomas];
             $datos = $order->User->name;
 

@@ -343,7 +343,7 @@ class OrderController extends Controller
                 $ordenwoo = Order::create($data);
             }else{
 
-                $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
+                $email_diplomas = 'imnascenter@naturalesainspa.com';
                 $destinatario = [ $order->User->email  , $email_diplomas];
                 $datos = $order->User->name;
 
@@ -648,7 +648,7 @@ class OrderController extends Controller
         $pago = $request->precio;
         $forma_pago = $orden_ticket2->Orders->forma_pago;
 
-        $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
+        $email_diplomas = 'imnascenter@naturalesainspa.com';
         $destinatario = [ $order->User->email  , $email_diplomas];
         $datos = $order->User->name;
 
@@ -757,7 +757,7 @@ class OrderController extends Controller
         $pago = $orden_ticket2->Orders->pago;
         $forma_pago = $orden_ticket2->Orders->forma_pago;
 
-        $email_diplomas = 'diplomas_imnas@naturalesainspa.com';
+        $email_diplomas = 'imnascenter@naturalesainspa.com';
         $destinatario = [ $order->User->email  , $email_diplomas];
         $datos = $order->User->name;
 
