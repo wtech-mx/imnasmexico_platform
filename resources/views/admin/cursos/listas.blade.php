@@ -158,6 +158,15 @@
                                                                     @endif
                                                                 </td>
                                                                 <td>
+                                                                    @php
+                                                                        $fechaFormateada = date('d-m-Y', strtotime($order->Cursos->fecha_inicial));
+                                                                        $horaFormateada = date('h:i A', strtotime($order->Cursos->hora_inicial));
+                                                                        $mensajeModalidad = ($order->Cursos->modalidad == 'Online') ? '%0A%0ACon esta liga podrás acceder a tu clase el día ' . $fechaFormateada . ' a las ' . $horaFormateada . '%0A%0A' . $order->Cursos->recurso : 'Recuerda asistir a nuestras instalaciones el día ' . $fechaFormateada . ' a las ' . $horaFormateada;
+                                                                        $mensajeAdicional = ($order->Cursos->stps == 1) ? 'Si tus diplomas no te llegaron al correo, podrás checarlos en tu perfil.' : '';
+                                                                    @endphp
+<a type="button" class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone={{$order->User->telefono}}&text=Hola {{$order->User->name}}%0A%0A {{$mensajeModalidad }} %0A%0A {{$mensajeAdicional}}" style="color: #ffffff" target="_blank">
+    <i class="fa fa-whatsapp"></i>
+</a>
                                                                     @if ($order->CursosTickets->descripcion == 'Con opción a Documentos de certificadora IMNAS')
                                                                     <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_imnas_documentos_{{ $order->User->id }}">
                                                                         <i class="fa fa-file"></i>
@@ -219,6 +228,10 @@
                                                                     @endif
                                                                 </td>
                                                                 <td>
+
+                                                                    <a type="button" class="btn btn-sm btn-success" href="https://wa.me/{{ $order->User->telefono }}?text={{ urlencode('Hola ' . $order->User->name . '%0A%0ACon esta liga podrás acceder a tu clase el día ' . $order->Cursos->fecha_inicial . ' a las ' . $order->Cursos->hora_inicial . '%0A%0A' . $order->Cursos->recurso) }}" style="color: #ffffff" target="_blank">
+                                                                        <i class="fa fa-whatsapp"></i>
+                                                                    </a>
                                                                     @if ($order->CursosTickets->descripcion == 'Con opción a Documentos de certificadora IMNAS')
                                                                     <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_imnas_documentos_{{ $order->User->id }}">
                                                                         <i class="fa fa-file"></i>

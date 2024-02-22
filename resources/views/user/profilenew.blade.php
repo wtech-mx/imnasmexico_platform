@@ -64,7 +64,7 @@ Mi perfil- {{$cliente->name}}
                                     <img class="img_profile_label" src="{{asset('assets/user/icons/usuario.png')}}" alt="">
                                 </span>
 
-                                <input class="form-control" type="text"  id="name" name="name" value="{{$cliente->name}}">
+                                <input class="form-control" type="text"  id="name" name="name" value="{{$cliente->name}}" readonly>
                                 </div>
                             </div>
 
@@ -138,6 +138,18 @@ Mi perfil- {{$cliente->name}}
 
                         </div>
                     </form>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-12">
+            <div class="card_single_horizon">
+                <div class="d-flex justify-content-between">
+                    <h2 class="title_curso mb-3">Descarga de Diplomados STPS</h2>
+                    <img class="icon_nav_course" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
+                </div>
+                @foreach ($usuario_compro as $ticket)
+                    <h1> {{$ticket}} </h1>
+                @endforeach
             </div>
         </div>
 
