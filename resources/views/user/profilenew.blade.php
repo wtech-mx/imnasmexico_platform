@@ -148,7 +148,7 @@ Mi perfil- {{$cliente->name}}
                     <img class="icon_nav_course" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
                 </div>
                 @foreach ($usuario_compro as $ticket)
-                    <h1> {{$ticket}} </h1>
+                    <h1></h1>
                 @endforeach
             </div>
         </div>
@@ -244,6 +244,76 @@ Mi perfil- {{$cliente->name}}
                                         <div id="collapseOne{{$video->id_tickets}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#acordcion_mb_clases">
                                             <div class="accordion-body">
                                                 <div class="row">
+
+                                                    <div class="col-12">
+                                                        @if($video->Cursos->stps == '1')
+
+                                                            <form method="POST" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
+                                                                @csrf
+                                                                <div class="row">
+
+                                                                        <div class="form-group col-12 mt-3" style="display: none;">
+                                                                            <label for="name">Nombre Completo *</label>
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text" id="basic-addon1">
+                                                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/mujer.png')}}" alt="" width="30px">
+                                                                                </span>
+                                                                                <input id="nombre" name="nombre" type="text" class="form-control" value="{{$cliente->name}}" >
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group col-12" id="precioMayoristaContainer" style="display: none;">
+                                                                            <label for="name" class="label_custom_primary_product mb-2">Nombre del curso:</label>
+                                                                            <div class="input-group ">
+                                                                                <span class="input-group-text span_custom_tab" >
+                                                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt="" width="30px">
+                                                                                </span>
+                                                                                <input id="curso_name" name="curso_name" type="text"  class="form-control input_custom_tab "  value="{{ $video->Cursos->nombre }}" >
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group col-6 "style="display: none;">
+                                                                            <label for="name">Fecha del Curso *</label>
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text" id="basic-addon1">
+                                                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="" width="30px">
+                                                                                </span>
+                                                                                <input id="fecha" name="fecha" type="date" class="form-control" value="{{ $video->Cursos->fecha_final }}" >
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group col-6 "style="display: none;">
+                                                                            <label for="name">Duracion del curso en horas: </label>
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text" id="basic-addon1">
+                                                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="" width="30px">
+                                                                                </span>
+                                                                                <input id="duracion_hrs" name="duracion_hrs" type="number" class="form-control" value="48" >
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group col-6"style="display: none;">
+                                                                            <label for="name">Tipo de documento *</label>
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text" id="basic-addon1">
+                                                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px">
+                                                                                </span>
+                                                                                <select name="tipo" id="tipo" class="form-select" >
+                                                                                        <option value="1" selected >Diploma STPS General</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-12 d-flex justify-content-center">
+                                                                            <button type="submit" class="text-center mt-5 mb-3" style="background: transparent;border: 0px;">
+                                                                                 <h3 class=""><img class="icon_nav_course" src="{{asset('assets/user/icons/certificate.png')}}" alt=""> <strong>Descargar Diploma STPS</strong></h3>
+                                                                            </button>
+                                                                        </div>
+
+                                                                </div>
+                                                            </form>
+                                                        @endif
+                                                    </div>
 
                                                     <div class="col-12">
                                                         <h3 class="text-center mt-5 mb-3"><img class="icon_nav_course" src="{{asset('assets/user/icons/clase.webp')}}" alt=""> <strong>Clases grabadas</strong></h3>
