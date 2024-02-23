@@ -225,7 +225,7 @@ Mi perfil- {{$cliente->name}}
                                         <h2 class="accordion-header" id="headingOne">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$video->id_tickets}}" aria-expanded="true" aria-controls="collapseOne{{$video->id}}" style="background-color: #836262;">
                                                 <img class="icon_nav_course" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt="">
-                                                {{$video->Cursos->nombre}}
+                                                {{$video->Cursos->nombre}}  @if($video->Cursos->stps == '1') (Descargar Diploma STPS) @endif
                                                 <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
                                             </button>
                                         </h2>
