@@ -237,6 +237,90 @@ Mi perfil- {{$cliente->name}}
                                                     <div class="col-12">
                                                         @if($video->Cursos->stps == '1')
 
+                                                            @if($video->Cursos->pack_stps == "Si")
+
+                                                                @php
+
+                                                                    $stps_values = [
+                                                                        $video->Cursos->p_stps_1,
+                                                                        $video->Cursos->p_stps_2,
+                                                                        $video->Cursos->p_stps_3,
+                                                                        $video->Cursos->p_stps_4,
+                                                                        $video->Cursos->p_stps_5,
+                                                                        $video->Cursos->p_stps_6,
+                                                                    ];
+
+                                                                    $total_stps = max($stps_values); // Obtener el valor máximo de los p_stps
+
+                                                                @endphp
+
+                                                            <form method="POST" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
+                                                                @csrf
+                                                                <div class="row">
+
+                                                                        <div class="form-group col-12 mt-3" style="display: none;">
+                                                                            <label for="name">Nombre Completo *</label>
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text" id="basic-addon1">
+                                                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/mujer.png')}}" alt="" width="30px">
+                                                                                </span>
+                                                                                <input id="nombre" name="nombre" type="text" class="form-control" value="{{$cliente->name}}" >
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group col-12" id="precioMayoristaContainer" style="display: none;">
+                                                                            <label for="name" class="label_custom_primary_product mb-2">Nombre del curso:</label>
+                                                                            <div class="input-group ">
+                                                                                <span class="input-group-text span_custom_tab" >
+                                                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt="" width="30px">
+                                                                                </span>
+                                                                                <input id="curso_name" name="curso_name" type="text"  class="form-control input_custom_tab "  value="{{ $i }}" >
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group col-6 "style="display: none;">
+                                                                            <label for="name">Fecha del Curso *</label>
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text" id="basic-addon1">
+                                                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="" width="30px">
+                                                                                </span>
+                                                                                <input id="fecha" name="fecha" type="date" class="form-control" value="{{ $video->Cursos->fecha_final }}" >
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group col-6 "style="display: none;">
+                                                                            <label for="name">Duracion del curso en horas: </label>
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text" id="basic-addon1">
+                                                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="" width="30px">
+                                                                                </span>
+                                                                                <input id="duracion_hrs" name="duracion_hrs" type="number" class="form-control" value="48" >
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group col-6"style="display: none;">
+                                                                            <label for="name">Tipo de documento *</label>
+                                                                            <div class="input-group">
+                                                                                <span class="input-group-text" id="basic-addon1">
+                                                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px">
+                                                                                </span>
+                                                                                <select name="tipo" id="tipo" class="form-select" >
+                                                                                        <option value="1" selected >Diploma STPS General</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-4 d-flex justify-content-center">
+                                                                            <button type="submit" class="text-center mt-5 mb-3" style="background: transparent;border: 0px;">
+                                                                                <h3 class=""><img class="icon_nav_course" src="{{asset('assets/user/icons/certificate.png')}}" alt=""> <strong>Descargar Diploma {{ $i }}</strong></h3>
+                                                                            </button>
+                                                                        </div>
+
+                                                                </div>
+                                                            </form>
+
+                                                            @else
+
                                                             <form method="POST" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
                                                                 @csrf
                                                                 <div class="row">
@@ -301,6 +385,10 @@ Mi perfil- {{$cliente->name}}
 
                                                                 </div>
                                                             </form>
+
+                                                            @endif
+
+
                                                         @endif
                                                     </div>
 
