@@ -322,6 +322,24 @@ class DocumentosController extends Controller
 
     }
 
+    public function generar_alumno(Request $request){
+
+        $nombre = $request->get('nombre');
+        $fecha = $request->get('fecha');
+        $curso = $request->get('curso_name');
+        $duracion_hrs = $request->get('duracion_hrs');
+        $tipo = $request->get('tipo');
+
+        $tipo_documentos = Tipodocumentos::find($tipo);
+
+
+        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs'));
+        $pdf->setPaper('A4', 'portrait');
+
+        return $pdf->download('diploma_stps_'.$nombre.'.pdf');
+
+    }
+
     public function generar_enviar(Request $request){
 
         $dominio = $request->getHost();
