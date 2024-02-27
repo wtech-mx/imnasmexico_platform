@@ -376,15 +376,32 @@
                     </div>
                 @endif
 
-                @foreach ($usuario_compro as $video)
-                    @if ($video->Cursos->imnas == '1')
-                       <p> Registro IMNAS</p>
-                       <a class="example-image-link" href="{{asset('documentos/imnas.jpg') }}" data-lightbox="example-2" data-title="imnas" target="_blank">
-                            <img id="img_material_clase example-image" src="{{asset('documentos/imnas.jpg') }}" alt="material de clase" style="width: 40%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
-                        </a>
-                        @break
-                    @endif
-                @endforeach
+                <div class="row">
+                    <div class="col-6">
+                        @foreach ($usuario_compro as $video)
+                            @if ($video->Cursos->imnas == '1')
+                            <p><b>Registro IMNAS</b></p>
+                            <a class="example-image-link" href="{{asset('documentos/imnas.jpg') }}" data-lightbox="example-2" data-title="imnas" target="_blank">
+                                    <img id="img_material_clase example-image" src="{{asset('documentos/imnas.jpg') }}" alt="material de clase" style="width: 90%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                                </a>
+                                @break
+                            @endif
+                        @endforeach
+                    </div>
+                    <div class="col-6">
+                        @foreach ($usuario_compro as $video)
+                            @if ($video->Cursos->sep == '1')
+                                <p><b>Requisitos RVOE</b></p>
+                                <a class="example-image-link" href="{{asset('documentos/imnas.jpg') }}" data-lightbox="example-2" data-title="imnas" target="_blank">
+                                    <img id="img_material_clase example-image" src="{{asset('documentos/rvoe.jpg') }}" alt="material de clase" style="width: 90%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                                </a>
+                                @break
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
+
+
             </div>
             @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                 <div class="modal-footer">
@@ -411,8 +428,8 @@
                 @if ($video->Cursos->CursosEstandares->count() > 0)
                     @foreach ($estandaresComprados as $estandar)
                     @php
-                                                                // Check if the folder has been displayed already
-                                                                if (!in_array($estandar->nombre, $displayedFolders)) {
+                                        // Check if the folder has been displayed already
+                                        if (!in_array($estandar->nombre, $displayedFolders)) {
                                             $displayedFolders[] = $estandar->nombre; // Mark the folder as displayed
                                         } else {
                                             continue; // Skip displaying the folder if it has been displayed already

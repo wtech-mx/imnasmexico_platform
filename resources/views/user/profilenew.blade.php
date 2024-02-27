@@ -220,7 +220,18 @@ Mi perfil- {{$cliente->name}}
                 <div class="row">
                         <div class="col-12">
                             <div class="accordion" id="acordcion_mb_clases">
+                                @php
+                                    $displayedFolders = []; // Keep track of displayed folders
+                                @endphp
                                 @foreach ($usuario_compro as $video)
+                                @php
+                                    // Check if the folder has been displayed already
+                                    if (!in_array($video->Cursos->nombre, $displayedFolders)) {
+                                        $displayedFolders[] = $video->Cursos->nombre; // Mark the folder as displayed
+                                    } else {
+                                        continue; // Skip displaying the folder if it has been displayed already
+                                    }
+                                @endphp
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="headingOne">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$video->id_tickets}}" aria-expanded="true" aria-controls="collapseOne{{$video->id}}" style="background-color: #836262;">
