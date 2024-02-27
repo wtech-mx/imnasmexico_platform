@@ -404,9 +404,20 @@
 
     <div class="tab-pane fade" id="nav-des-sub-doc" role="tabpanel" aria-labelledby="nav-des-sub-doc-tab" tabindex="0" style="min-height: auto!important;">
         <div class="modal-body row">
+            @php
+                $displayedFolders = []; // Keep track of displayed folders
+            @endphp
             @foreach ($usuario_compro as $video)
                 @if ($video->Cursos->CursosEstandares->count() > 0)
                     @foreach ($estandaresComprados as $estandar)
+                    @php
+                                                                // Check if the folder has been displayed already
+                                                                if (!in_array($estandar->nombre, $displayedFolders)) {
+                                            $displayedFolders[] = $estandar->nombre; // Mark the folder as displayed
+                                        } else {
+                                            continue; // Skip displaying the folder if it has been displayed already
+                                        }
+                    @endphp
                         <div class="col-12">
                             <h4 class="text-center">{{ $estandar->nombre }}</h4> <br>
                                 @php
