@@ -112,6 +112,20 @@
             background-size: cover;
             background-position: center center;
         }
+
+        .container7{
+            position: absolute;
+            top:59%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .curso_sm{
+            font-size: 11px;
+            color: red;
+        }
+
     </style>
 </head>
 
@@ -149,6 +163,10 @@
 
         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
+
+        <div class="container7">
+            <h4 class="curso_sm">{{ ucwords(strtolower($curso)) }}</h4>
+        </div>
 
     </body>
 </html>
