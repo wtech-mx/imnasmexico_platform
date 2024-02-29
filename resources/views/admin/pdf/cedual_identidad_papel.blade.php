@@ -41,6 +41,14 @@
             text-align: center;
         }
 
+        .container7{
+            position: absolute;
+            top:78%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
         .container6{
             position: absolute;
             top:61%;
@@ -84,10 +92,16 @@
             color: red;
         }
 
+        .curso_sm{
+            font-size: 11px;
+            color: red;
+        }
+
         .fecha{
             font-size: 8px;
             color: #000;
         }
+
 
         .nombre{
             font-family: 'Minion', sans-serif;
@@ -179,10 +193,13 @@
             <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma"
             @if (!isset($fileName_firma))
                 src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png"
-            @endif
->
+            @endif>
 
             {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma">--}}
+        </div>
+
+        <div class="container7">
+            <h4 class="curso_sm">{{ ucwords(strtolower($curso)) }}</h4>
         </div>
 
     </body>
