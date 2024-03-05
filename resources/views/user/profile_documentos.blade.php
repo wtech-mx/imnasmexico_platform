@@ -375,39 +375,36 @@
                         <input id="firma" name="firma" type="file" class="form-control" >
                     </div>
                 @endif
-
-                <div class="row">
-                    <div class="col-6">
-                        @foreach ($usuario_compro as $video)
-                            @if ($video->Cursos->imnas == '1')
-                            <p><b>Registro IMNAS</b></p>
-                            <a class="example-image-link" href="{{asset('documentos/imnas.jpg') }}" data-lightbox="example-2" data-title="imnas" target="_blank">
-                                    <img id="img_material_clase example-image" src="{{asset('documentos/imnas.jpg') }}" alt="material de clase" style="width: 90%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
-                                </a>
-                                @break
-                            @endif
-                        @endforeach
-                    </div>
-                    <div class="col-6">
-                        @foreach ($usuario_compro as $video)
-                            @if ($video->Cursos->sep == '1')
-                                <p><b>Requisitos RVOE</b></p>
-                                <a class="example-image-link" href="{{asset('documentos/imnas.jpg') }}" data-lightbox="example-2" data-title="imnas" target="_blank">
-                                    <img id="img_material_clase example-image" src="{{asset('documentos/rvoe.jpg') }}" alt="material de clase" style="width: 90%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
-                                </a>
-                                @break
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
-
-
             </div>
             @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                 <div class="modal-footer">
                     <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                 </div>
             @endif
+            <div class="row">
+                <div class="col-6">
+                    @foreach ($usuario_compro as $video)
+                        @if ($video->Cursos->imnas == '1')
+                        <p><b>Registro IMNAS</b></p>
+                        <a class="example-image-link" href="{{asset('documentos/imnas.jpg') }}" data-lightbox="example-2" data-title="imnas" target="_blank">
+                                <img id="img_material_clase example-image" src="{{asset('documentos/imnas.jpg') }}" alt="material de clase" style="width: 90%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                            </a>
+                            @break
+                        @endif
+                    @endforeach
+                </div>
+                <div class="col-6">
+                    @foreach ($usuario_compro as $video)
+                        @if ($video->Cursos->sep == '1')
+                            <p><b>Requisitos RVOE</b></p>
+                            <a class="example-image-link" href="{{asset('documentos/imnas.jpg') }}" data-lightbox="example-2" data-title="imnas" target="_blank">
+                                <img id="img_material_clase example-image" src="{{asset('documentos/rvoe.jpg') }}" alt="material de clase" style="width: 90%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                            </a>
+                            @break
+                        @endif
+                    @endforeach
+                </div>
+            </div>
         </form>
         <script>
             function eliminarDocumento(url) {
