@@ -570,11 +570,11 @@ class ClientsController extends Controller
 
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
-       /* $userIds = [6367];
+       $userIds = [145, 7161, 7160, 7159, 7156, 7154, 7153, 7152, 7151, 7150, 7148, 7147, 7146, 7145, 7144, 7143, 7142, 7141, 7140, 7139, 7138, 7137, 7136, 7135, 7134, 7133, 7132, 7131, 7130, 7129, 7127, 7126, 7125];
         EnviosOrder::whereIn('id_user', $userIds)->delete();
         OrdersTickets::whereIn('id_usuario', $userIds)->delete();
         Orders::whereIn('id_usuario', $userIds)->delete();
-        User::whereIn('id', $userIds)->delete();*/
+        User::whereIn('id', $userIds)->delete();
 
         return view('admin.clientes.index',compact('clientes'));
     }
