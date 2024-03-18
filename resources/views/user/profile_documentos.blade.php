@@ -386,8 +386,8 @@
                     @foreach ($usuario_compro as $video)
                         @if ($video->Cursos->imnas == '1')
                         <p><b>Registro IMNAS</b></p>
-                        <a class="example-image-link" href="{{asset('documentos/imnas.jpg') }}" data-lightbox="example-2" data-title="imnas" target="_blank">
-                                <img id="img_material_clase example-image" src="{{asset('documentos/imnas.jpg') }}" alt="material de clase" style="width: 90%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                        <a class="example-image-link" href="{{asset('documentos/imnas1.jpg') }}" data-lightbox="example-2" data-title="imnas" target="_blank">
+                                <img id="img_material_clase example-image" src="{{asset('documentos/imnas1.jpg') }}" alt="material de clase" style="width: 90%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
                             </a>
                             @break
                         @endif
@@ -397,8 +397,19 @@
                     @foreach ($usuario_compro as $video)
                         @if ($video->Cursos->sep == '1')
                             <p><b>Requisitos RVOE</b></p>
-                            <a class="example-image-link" href="{{asset('documentos/imnas.jpg') }}" data-lightbox="example-2" data-title="imnas" target="_blank">
+                            <a class="example-image-link" href="{{asset('documentos/rvoe.jpg') }}" data-lightbox="example-2" data-title="imnas" target="_blank">
                                 <img id="img_material_clase example-image" src="{{asset('documentos/rvoe.jpg') }}" alt="material de clase" style="width: 90%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                            </a>
+                            @break
+                        @endif
+                    @endforeach
+                </div>
+                <div class="col-6">
+                    @foreach ($usuario_compro as $video)
+                        @if ($video->Cursos->redconocer == '1')
+                            <p><b>Requisitos RVOE</b></p>
+                            <a class="example-image-link" href="{{asset('documentos/conocer.jpg') }}" data-lightbox="example-2" data-title="conocer" target="_blank">
+                                <img id="img_material_clase example-image" src="{{asset('documentos/conocer.jpg') }}" alt="material de clase" style="width: 90%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
                             </a>
                             @break
                         @endif
