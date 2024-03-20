@@ -72,7 +72,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="estandar">Seleccionar Estandar</label>
-                                                        <select class="form-select cliente" id="id_estandar[]" name="id_estandar[]" multiple="multiple">
+                                                        <select class="form-select id_estandar" id="id_estandar[]" name="id_estandar[]" multiple="multiple">
 
                                                             @if (!empty( $curso->CursosEstandares))
                                                             @else
@@ -870,6 +870,9 @@
 
         $(document).ready(function() {
             $('.carpetas').select2();
+        });
+        $(document).ready(function() {
+            $('.id_estandar').select2();
         });
     </script>
 @endsection
