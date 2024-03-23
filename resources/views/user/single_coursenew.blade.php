@@ -909,7 +909,7 @@
                     </div>
                     <div class="col-12">
                         <a class="text-center" data-bs-toggle="modal" data-bs-target="#depositos">
-                        <img class="img_depositos mt-2" src="{{asset('assets/user/utilidades/img_factura_nuev.jpeg')}}" alt="">
+                        <img class="img_depositos mt-2" src="{{asset('assets/user/utilidades/cuenta_tarjeta.jpeg')}}" alt="">
                         </a>
                     </div>
                     {{-- <div class="col-12">
