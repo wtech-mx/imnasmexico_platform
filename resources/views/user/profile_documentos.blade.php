@@ -429,149 +429,167 @@
 
     <div class="tab-pane fade" id="nav-des-sub-doc" role="tabpanel" aria-labelledby="nav-des-sub-doc-tab" tabindex="0" style="min-height: auto!important;">
         <div class="modal-body row">
-            @php
-                $displayedFolders = []; // Keep track of displayed folders
-            @endphp
-            @foreach ($usuario_compro as $video)
-                @if ($video->Cursos->CursosEstandares->count() > 0)
-                    @foreach ($estandaresComprados as $estandar)
-                    @php
-                                        // Check if the folder has been displayed already
-                                        if (!in_array($estandar->nombre, $displayedFolders)) {
-                                            $displayedFolders[] = $estandar->nombre; // Mark the folder as displayed
-                                        } else {
-                                            continue; // Skip displaying the folder if it has been displayed already
-                                        }
-                    @endphp
-                        <div class="col-12">
-                            <h4 class="text-center">{{ $estandar->nombre }}</h4> <br>
-                                @php
-                                    $documentos_estandar = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->where('guia', '=', NULL)->get();
-                                @endphp
-                                    <form action="{{ route('documentos.store_cliente', $cliente->id) }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        @foreach ($documentos_estandar as $documento)
-                                            @php
-                                                $documentoDescargado = DB::table('documentos_estandares')->where('id_usuario', $cliente->id)->where('id_documento', $documento->id)->exists();
-                                                $documentoSubido = DB::table('documentos_estandares')->where('id_usuario', $cliente->id)->where('id_documento', $documento->id)->orderBy('created_at', 'desc')->first();
-                                            @endphp
-                                            <div class="row">
+            <div class="accordion" id="acordcion_mb_clases">
+                @php
+                    $displayedFolders = []; // Keep track of displayed folders
+                @endphp
+                @foreach ($usuario_compro as $video)
+                    @if ($video->Cursos->CursosEstandares->count() > 0)
+                        @foreach ($estandaresComprados as $estandar)
+                        @php
+                                            // Check if the folder has been displayed already
+                                            if (!in_array($estandar->nombre, $displayedFolders)) {
+                                                $displayedFolders[] = $estandar->nombre; // Mark the folder as displayed
+                                            } else {
+                                                continue; // Skip displaying the folder if it has been displayed already
+                                            }
+                        @endphp
+                            <div class="col-12">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="headingOne">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$estandar->id}}" aria-expanded="true" aria-controls="collapseOne{{$estandar->id}}" style="background-color: #836262;">
+                                                <img class="icon_nav_course" src="{{asset('assets/user/icons/folder.png')}}" alt="">
+                                                {{$estandar->nombre}}
+                                                <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" >
+                                            </button>
+                                        </h2>
 
-                                                <div class="col-6  mb-2">
-                                                        <a href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="text-decoration: none; color: #000">
-                                                            <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
-                                                            {{ substr($documento->nombre, 13) }}
-                                                        </a>
-                                                        <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: #836262; border-radius: 19px;">
-                                                            Descargar
-                                                        </a>
-                                                </div>
-
-                                                <div class="col-3 form-group p-3 mt-2">
-
-                                                    @if ($documentoDescargado)
-
-                                                        @if (pathinfo($documentoSubido->documento, PATHINFO_EXTENSION) == 'pdf')
-                                                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documentoSubido->documento)}}" style="width: 60%; height: 60px;"></iframe>
-                                                            <p class="text-center ">
-                                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documentoSubido->documento) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
-                                                            </p>
-                                                        @elseif (pathinfo($documento->documento, PATHINFO_EXTENSION) == 'doc')
-                                                            <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
-                                                            <p class="text-center ">
-                                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
-                                                            </p>
-                                                        @elseif (pathinfo($documento->documento, PATHINFO_EXTENSION) == 'docx')
-                                                            <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
-                                                            <p class="text-center ">
-                                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
-                                                            </p>
-                                                        @else
-                                                            <p class="text-center mt-2">
-                                                                <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documentoSubido->documento) }}" alt="Imagen" style="width: 120px;height: 80%;"/><br>
-                                                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documentoSubido->documento) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
-                                                            </p>
-                                                        @endif
-
-                                                </div>
-
-                                                <div class="col-3 form-group p-3 mt-2">
-
-                                                        <p class="text-center">
-                                                            Se ha cargado tu archivo con exito- <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
-
-                                                                ¿Quieres Borrarlo?
-
-                                                        </p>
-
-                                                            <div class="d-flex justify-content-center">
-                                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminarDocumento('{{ route('eliminar.documento', $documentoSubido->id) }}')">Eliminar</button>
+                                        <div id="collapseOne{{$estandar->id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#acordcion_mb_clases">
+                                            <div class="accordion-body">
+                                                <div class="row">
+                                                    @php
+                                                        $documentos_estandar = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->where('guia', '=', NULL)->get();
+                                                    @endphp
+                                                    <form action="{{ route('documentos.store_cliente', $cliente->id) }}" method="POST" enctype="multipart/form-data">
+                                                        @csrf
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <h4>Por favor, carga tus documentos y luego haz clic en <b>'Guardar'</b>.</h4>
                                                             </div>
+                                                            <div class="col-12">
+                                                                <button class="btn_save_profile d-inline-block mt-3 mb-3 blinking" style="background: {{$configuracion->color_boton_save}}; color: #ffff" type="submit">Guardar</button>
+                                                            </div>
+                                                        </div>
+                                                        @foreach ($documentos_estandar as $documento)
+                                                            @php
+                                                                $documentoDescargado = DB::table('documentos_estandares')->where('id_usuario', $cliente->id)->where('id_documento', $documento->id)->exists();
+                                                                $documentoSubido = DB::table('documentos_estandares')->where('id_usuario', $cliente->id)->where('id_documento', $documento->id)->orderBy('created_at', 'desc')->first();
+                                                            @endphp
+                                                            <div class="row">
 
-                                                    @else
-                                                        <input type="hidden" name="documento_ids[]" value="{{ $documento->id }}">
-                                                        <input type="hidden" name="curso" value="{{ $video->Cursos->id }}">
-                                                        <input   name="archivos[]" hidden id="btnoriginal{{ $documento->id }}{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall{{ $documento->id }}{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal{{ $documento->id }}{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar doc">
-                                                        <button type="button" id="botonpersonal{{ $documento->id }}{{$video->id_tickets}}" onClick="document.getElementById('btnoriginal{{ $documento->id }}{{$video->id_tickets}}').click();">Adjuntar doc</button>
-                                                        <small id='tagsmall{{ $documento->id }}{{$video->id_tickets}}'>No hay archivos adjuntos</small>
-                                                    @endif
+                                                                <div class="col-6  mb-2">
+                                                                        <a href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="text-decoration: none; color: #000">
+                                                                            <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
+                                                                            {{ substr($documento->nombre, 13) }}
+                                                                        </a>
+                                                                        <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: #836262; border-radius: 19px;">
+                                                                            Descargar
+                                                                        </a>
+                                                                </div>
 
-                                                    <script>
-                                                        function eliminarDocumento(url) {
-                                                            if (confirm('¿Estás seguro de que quieres eliminar este documento?')) {
-                                                                var form = document.createElement('form');
-                                                                form.method = 'POST';
-                                                                form.action = url;
+                                                                <div class="col-3 form-group p-3 mt-2">
 
-                                                                var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                                                                    @if ($documentoDescargado)
 
-                                                                var hiddenField = document.createElement('input');
-                                                                hiddenField.type = 'hidden';
-                                                                hiddenField.name = '_token';
-                                                                hiddenField.value = csrfToken;
+                                                                        @if (pathinfo($documentoSubido->documento, PATHINFO_EXTENSION) == 'pdf')
+                                                                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documentoSubido->documento)}}" style="width: 60%; height: 60px;"></iframe>
+                                                                            <p class="text-center ">
+                                                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documentoSubido->documento) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                                                            </p>
+                                                                        @elseif (pathinfo($documento->documento, PATHINFO_EXTENSION) == 'doc')
+                                                                            <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                                                            <p class="text-center ">
+                                                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                                                            </p>
+                                                                        @elseif (pathinfo($documento->documento, PATHINFO_EXTENSION) == 'docx')
+                                                                            <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                                                            <p class="text-center ">
+                                                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->documento) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                                                            </p>
+                                                                        @else
+                                                                            <p class="text-center mt-2">
+                                                                                <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documentoSubido->documento) }}" alt="Imagen" style="width: 120px;height: 80%;"/><br>
+                                                                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documentoSubido->documento) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
+                                                                            </p>
+                                                                        @endif
 
-                                                                form.appendChild(hiddenField);
+                                                                </div>
 
-                                                                document.body.appendChild(form);
-                                                                form.submit();
-                                                            }
-                                                        }
-                                                    </script>
+                                                                <div class="col-3 form-group p-3 mt-2">
 
+                                                                        <p class="text-center">
+                                                                            Se ha cargado tu archivo con exito- <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
+
+                                                                                ¿Quieres Borrarlo?
+
+                                                                        </p>
+
+                                                                            <div class="d-flex justify-content-center">
+                                                                                <button type="button" class="btn btn-danger btn-sm" onclick="eliminarDocumento('{{ route('eliminar.documento', $documentoSubido->id) }}')">Eliminar</button>
+                                                                            </div>
+
+                                                                    @else
+                                                                        <input type="hidden" name="documento_ids[]" value="{{ $documento->id }}">
+                                                                        <input type="hidden" name="curso" value="{{ $video->Cursos->id }}">
+                                                                        <input   name="archivos[]" hidden id="btnoriginal{{ $documento->id }}{{$video->id_tickets}}" class="form-control text-center col-md-6" onChange="document.getElementById('tagsmall{{ $documento->id }}{{$video->id_tickets}}').innerText=document.getElementById('btnoriginal{{ $documento->id }}{{$video->id_tickets}}').files[0]['name'];" type="file" value="Adjuntar doc">
+                                                                        <button type="button" id="botonpersonal{{ $documento->id }}{{$video->id_tickets}}" onClick="document.getElementById('btnoriginal{{ $documento->id }}{{$video->id_tickets}}').click();">Adjuntar doc</button>
+                                                                        <small id='tagsmall{{ $documento->id }}{{$video->id_tickets}}'>No hay archivos adjuntos</small>
+                                                                    @endif
+
+                                                                    <script>
+                                                                        function eliminarDocumento(url) {
+                                                                            if (confirm('¿Estás seguro de que quieres eliminar este documento?')) {
+                                                                                var form = document.createElement('form');
+                                                                                form.method = 'POST';
+                                                                                form.action = url;
+
+                                                                                var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                                                                                var hiddenField = document.createElement('input');
+                                                                                hiddenField.type = 'hidden';
+                                                                                hiddenField.name = '_token';
+                                                                                hiddenField.value = csrfToken;
+
+                                                                                form.appendChild(hiddenField);
+
+                                                                                document.body.appendChild(form);
+                                                                                form.submit();
+                                                                            }
+                                                                        }
+                                                                    </script>
+
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+
+                                                    </form>
                                                 </div>
                                             </div>
-                                        @endforeach
+                                        </div>
+                                    </div>
+                            </div>
+                        @endforeach
+                    @endif
+                @endforeach
+                @if ($cliente->name == 'Asiyadeth Virginia Hernández Cruz')
+                    <div class="col-6  mb-2">
+                        <a href="{{asset('carpetasestandares/Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf') }}" download="Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf" style="text-decoration: none; color: #000">
+                            <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
+                            Cédula de evaluación
+                        </a>
+                        <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf') }}" download="Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf" style="background: #836262; border-radius: 19px;">
+                            Descargar
+                        </a>
+                    </div>
 
-                                            <div class="row">
-                                                <div class="col-8"></div>
-                                                <div class="col-4">
-                                                    <button class="btn_save_profile d-inline-block mt-3 mb-3" style="background: {{$configuracion->color_boton_save}}; color: #ffff" type="submit">Guardar Documentos</button>
-                                                </div>
-                                            </div>
-
-                                    </form>
-                        </div>
-                    @endforeach
+                    <div class="col-3 form-group p-3 mt-2">
+                        <iframe class="mt-2" src="{{asset('carpetasestandares/Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf')}}" style="width: 60%; height: 60px;"></iframe>
+                        <p class="text-center ">
+                            <a class="btn btn-sm text-dark" href="{{asset('carpetasestandares/Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf') }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                        </p>
+                    </div>
                 @endif
-            @endforeach
-            @if ($cliente->name == 'Asiyadeth Virginia Hernández Cruz')
-                <div class="col-6  mb-2">
-                    <a href="{{asset('carpetasestandares/Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf') }}" download="Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf" style="text-decoration: none; color: #000">
-                        <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
-                        Cédula de evaluación
-                    </a>
-                    <a class="text-center text-white btn btn-sm ml-2" href="{{asset('carpetasestandares/Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf') }}" download="Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf" style="background: #836262; border-radius: 19px;">
-                        Descargar
-                    </a>
-                </div>
-
-                <div class="col-3 form-group p-3 mt-2">
-                    <iframe class="mt-2" src="{{asset('carpetasestandares/Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf')}}" style="width: 60%; height: 60px;"></iframe>
-                    <p class="text-center ">
-                        <a class="btn btn-sm text-dark" href="{{asset('carpetasestandares/Cedula de Evaluacion EC1313 ASIYADETH - Firmada-1.pdf') }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
-                    </p>
-                </div>
-            @endif
+            </div>
         </div>
     </div>
 

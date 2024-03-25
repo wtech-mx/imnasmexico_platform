@@ -14,6 +14,21 @@ Mi perfil- {{$cliente->name}}
         color: #fff!important;
     }
 
+    @keyframes blinking {
+        0% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.6;
+        }
+        100% {
+            opacity: 1;
+        }
+    }
+
+        .blinking {
+        animation: blinking 1.7s infinite;
+        }
 </style>
 
 @section('content')
