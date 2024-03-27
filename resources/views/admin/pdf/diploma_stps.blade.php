@@ -71,7 +71,7 @@
         .fecha_sello{
             position:relative;
             top: 72%;
-            left: 300px;
+            left: 260px;
             font-size: 13px
         }
 
