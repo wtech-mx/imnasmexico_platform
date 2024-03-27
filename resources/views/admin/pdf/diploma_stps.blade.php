@@ -106,7 +106,6 @@
 
 
 
-    @if($sello == 'Si')
 
         <h4 class="fecha">
 
@@ -118,19 +117,6 @@
             {{$fecha_formateada}}
         </h4>
 
-    @else
-
-        <h4 class="fecha_sello">
-
-            @php
-                $fecha_timestamp = strtotime($fecha);
-                $fecha_formateada = date('d-m-Y', $fecha_timestamp);
-            @endphp
-
-            {{$fecha_formateada}}
-        </h4>
-
-    @endif
 
 </body>
 </html>
