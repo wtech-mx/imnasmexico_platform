@@ -68,6 +68,12 @@
             font-size: 18px
         }
 
+        .fecha_sello{
+            position:relative;
+            top: 70%;
+            left: 130px;
+            font-size: 18px
+        }
 
     </style>
 </head>
@@ -106,15 +112,34 @@
         <h4 class="curso">{{ ucwords(strtolower($curso)) }}</h4>
     </div>
 
-    <h4 class="fecha">
 
-        @php
-            $fecha_timestamp = strtotime($fecha);
-            $fecha_formateada = date('d-m-Y', $fecha_timestamp);
-        @endphp
 
-        {{$fecha_formateada}}
-    </h4>
+
+    @if($sello == 'Si')
+
+        <h4 class="fecha">
+
+            @php
+                $fecha_timestamp = strtotime($fecha);
+                $fecha_formateada = date('d-m-Y', $fecha_timestamp);
+            @endphp
+
+            {{$fecha_formateada}}
+        </h4>
+
+    @else
+
+        <h4 class="fecha_sello">
+
+            @php
+                $fecha_timestamp = strtotime($fecha);
+                $fecha_formateada = date('d-m-Y', $fecha_timestamp);
+            @endphp
+
+            {{$fecha_formateada}}
+        </h4>
+
+    @endif
 
 </body>
 </html>
