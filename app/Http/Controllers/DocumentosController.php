@@ -94,6 +94,7 @@ class DocumentosController extends Controller
     public function generar(Request $request){
 
         $dominio = $request->getHost();
+
         if($dominio == 'plataforma.imnasmexico.com'){
             $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/utilidades_documentos');
         }else{
@@ -101,6 +102,7 @@ class DocumentosController extends Controller
         }
 
         $bitacora = new DocumenotsGenerador;
+
         $bitacora->cliente = $request->get('nombre');
         $bitacora->curso = $request->get('curso');
         $bitacora->id_usuario_bitacora = auth()->user()->id;
@@ -120,6 +122,8 @@ class DocumentosController extends Controller
             $curso = $request->get('curso');
         }
 
+
+        $sello = $request->get('sello');
         $duracion_hrs = $request->get('duracion_hrs');
         $tipo = $request->get('tipo');
         $folio = $request->get('folio');
@@ -152,7 +156,7 @@ class DocumentosController extends Controller
 
         if($tipo_documentos->tipo == 'Diploma_STPS'){
 
-            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs'));
+            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
             $pdf->setPaper('A4', 'portrait');
 
             return $pdf->download('diploma_stps_'.$nombre.'.pdf');

@@ -87,6 +87,22 @@
                                                 </div>
                                             </div>
 
+                                            <div class="form-group col-6">
+                                                <label for="name" class="label_custom_primary_product mb-2">Con Sello STP</label>
+
+                                                <div class="input-group d-flex justify-content-around mt-3">
+                                                      <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="sello" id="radioSiSello" value="Si" checked>
+                                                        <label class="form-check-label" for="">Si</label>
+                                                      </div>
+
+                                                      <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="sello" id="radioNoSello" value="No">
+                                                        <label class="form-check-label" for="">No</label>
+                                                      </div>
+                                                </div>
+                                            </div>
+
                                             <div class="form-group col-12" id="precioMayoristaContainer" style="display: none;">
                                                 <label for="name" class="label_custom_primary_product mb-2">Nombre del curso:</label>
                                                 <div class="input-group ">
