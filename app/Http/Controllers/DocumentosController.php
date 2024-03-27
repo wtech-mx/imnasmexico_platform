@@ -333,11 +333,12 @@ class DocumentosController extends Controller
         $curso = $request->get('curso_name');
         $duracion_hrs = $request->get('duracion_hrs');
         $tipo = $request->get('tipo');
+        $sello = 'Si';
 
         $tipo_documentos = Tipodocumentos::find($tipo);
 
 
-        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs'));
+        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
         $pdf->setPaper('A4', 'portrait');
 
         return $pdf->download('diploma_stps_'.$nombre.'.pdf');
