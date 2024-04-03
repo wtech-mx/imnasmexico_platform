@@ -232,8 +232,10 @@ class PagosFueraController extends Controller
 
                             foreach ($variables as $index => $curso) {
                                 if (isset($curso) && !empty($curso)) {
+                                    $sello = 'Si';
+
                                     // Lógica para crear el PDF y enviar el correo aquí
-                                    $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre','duracion_hrs'));
+                                    $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre','duracion_hrs','sello'));
                                     $pdf->setPaper('A4', 'portrait');
                                     $contenidoPDF = $pdf->output();
 
@@ -256,8 +258,9 @@ class PagosFueraController extends Controller
                             $ticket->estatus_credencial = '1';
                             $ticket->estatus_tira = '1';
                             $ticket->update();
+                            $sello = 'Si';
 
-                            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs'));
+                            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
                             $pdf->setPaper('A4', 'portrait');
                             $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
                             Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
@@ -275,7 +278,9 @@ class PagosFueraController extends Controller
                             $ticket->estatus_tira = '1';
                             $ticket->update();
 
-                            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs'));
+                            $sello = 'Si';
+
+                            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
                             $pdf->setPaper('A4', 'portrait');
                             $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
                             Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
