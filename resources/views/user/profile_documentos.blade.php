@@ -6,7 +6,7 @@
             </button>
 
             <button class="nav-link" id="nav-des-sub-doc-tab" data-bs-toggle="tab" data-bs-target="#nav-des-sub-doc" type="button" role="tab" aria-controls="nav-des-sub-doc" aria-selected="false">
-                Descargas/Subir Documentos
+                Descargas/Subir Documentos Para SEP CONOCER
             </button>
 
             @foreach ($estandaresComprados as $estandar)
