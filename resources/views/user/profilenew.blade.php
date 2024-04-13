@@ -1078,27 +1078,9 @@ Mi perfil- {{$cliente->name}}
 
 @section('js')
 
-<script type="text/javascript" src="{{ asset('assets/admin/js/jquery.signature.js') }}"></script>
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'></script>
-
-<link rel="stylesheet" type="text/css" href="{{ asset('assets/admin/css/jquery.signature.css') }}">
-
 <script>
 
-    var sig = $('#sig').signature({syncField: '#signed', syncFormat: 'PNG'});
-      $('#clear').click(function (e) {
-          e.preventDefault();
-          sig.signature('clear');
-          $("#signed").val('');
-      });
-
-    function disableButton() {
-        // Deshabilita el botón de guardar después de hacer clic
-        document.getElementById('submitButton').disabled = true;
-    }
-
-        // Obtener elementos
+    // Obtener elementos
     const noButton = document.getElementById('noButton');
     const siButton = document.getElementById('siButton');
 
@@ -1107,8 +1089,6 @@ Mi perfil- {{$cliente->name}}
 
     const noButton3 = document.getElementById('noButton3');
     const siButton3 = document.getElementById('siButton3');
-
-
 
     const contentFiles = document.querySelector('.content_files');
     const contentFiles2 = document.querySelector('.content_files2');
@@ -1147,6 +1127,158 @@ Mi perfil- {{$cliente->name}}
     });
 
 
+
+</script>
+
+    <script>
+        $(document).ready(function() {
+        // Cuando se selecciona un archivo en un input con clase "documento-input"
+        $(".ine_input").change(function() {
+            console.log('Archivo seleccionado');
+
+            // Obtener el formulario
+            var form = $('#formDocumentos')[0];
+            // Crear un objeto FormData para enviar archivos
+            var formData = new FormData(form);
+
+            // Realizar una solicitud AJAX
+            $.ajax({
+                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // Aquí puedes manejar la respuesta del servidor
+                    // Por ejemplo, mostrar un mensaje de éxito
+                    alert('Archivo cargado con éxito');
+                },
+                error: function(error) {
+                    // Manejar errores, si es necesario
+                    console.log(error);
+                    alert('Error al cargar el archivo');
+                }
+            });
+        });
+
+        $(".curp_input").change(function() {
+            console.log('Archivo seleccionado');
+
+            // Obtener el formulario
+            var form = $('#formDocumentos')[0];
+            // Crear un objeto FormData para enviar archivos
+            var formData = new FormData(form);
+
+            // Realizar una solicitud AJAX
+            $.ajax({
+                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // Aquí puedes manejar la respuesta del servidor
+                    // Por ejemplo, mostrar un mensaje de éxito
+                    alert('Archivo cargado con éxito');
+                },
+                error: function(error) {
+                    // Manejar errores, si es necesario
+                    console.log(error);
+                    alert('Error al cargar el archivo');
+                }
+            });
+        });
+
+        $(".foto_tam_infantil_input").change(function() {
+            console.log('Archivo seleccionado');
+
+            // Obtener el formulario
+            var form = $('#formDocumentos')[0];
+            // Crear un objeto FormData para enviar archivos
+            var formData = new FormData(form);
+
+            // Realizar una solicitud AJAX
+            $.ajax({
+                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // Aquí puedes manejar la respuesta del servidor
+                    // Por ejemplo, mostrar un mensaje de éxito
+                    alert('Archivo cargado con éxito');
+                },
+                error: function(error) {
+                    // Manejar errores, si es necesario
+                    console.log(error);
+                    alert('Error al cargar el archivo');
+                }
+            });
+        });
+
+        $(".firma_input").change(function() {
+            console.log('Archivo seleccionado');
+
+            // Obtener el formulario
+            var form = $('#formDocumentos')[0];
+            // Crear un objeto FormData para enviar archivos
+            var formData = new FormData(form);
+
+            // Realizar una solicitud AJAX
+            $.ajax({
+                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // Aquí puedes manejar la respuesta del servidor
+                    // Por ejemplo, mostrar un mensaje de éxito
+                    alert('Archivo cargado con éxito');
+                },
+                error: function(error) {
+                    // Manejar errores, si es necesario
+                    console.log(error);
+                    alert('Error al cargar el archivo');
+                }
+            });
+        });
+    });
+
+
+    </script>
+
+
+<script>
+    $(document).ready(function() {
+        // Capturamos el evento de cambio en los campos de archivo
+        $("input[type=file]").change(function() {
+            // Obtenemos el formulario al que pertenece el campo de archivo
+            var form = $(this).closest('form');
+
+            // Creamos un objeto FormData para enviar los datos del formulario
+            var formData = new FormData(form[0]);
+
+            // Realizamos la solicitud AJAX al controlador
+            $.ajax({
+                url: "{{ route('documentos.store_cliente', $cliente->id) }}",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // Manejamos la respuesta del controlador (si es necesario)
+                    alert('Archivo cargado con éxito');
+                },
+                error: function(error) {
+                    // Manejamos los errores (si los hay)
+                    console.log(error);
+                    alert('Error al cargar el archivo');
+                }
+            });
+        });
+    });
 </script>
 
 @endsection

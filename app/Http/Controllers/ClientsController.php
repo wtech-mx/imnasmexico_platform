@@ -538,6 +538,7 @@ class ClientsController extends Controller
     }
 
     public function documentos_estandares_cliente(Request $request, $id){
+
         $cliente = User::where('id', $id)->first();
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
