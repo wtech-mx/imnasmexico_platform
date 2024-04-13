@@ -1301,7 +1301,7 @@ Mi perfil- {{$cliente->name}}
             });
         });
 
-        $(".tam_titulo_input").change(function() {
+                $(".domicilio_input").change(function() {
             console.log('Archivo seleccionado');
 
             // Obtener el formulario
@@ -1328,35 +1328,6 @@ Mi perfil- {{$cliente->name}}
                 }
             });
         });
-
-        $(".infantil_blanco_input").change(function() {
-            console.log('Archivo seleccionado');
-
-            // Obtener el formulario
-            var form = $('#formDocumentos')[0];
-            // Crear un objeto FormData para enviar archivos
-            var formData = new FormData(form);
-
-            // Realizar una solicitud AJAX
-            $.ajax({
-                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    // Aquí puedes manejar la respuesta del servidor
-                    // Por ejemplo, mostrar un mensaje de éxito
-                    alert('Archivo cargado con éxito');
-                },
-                error: function(error) {
-                    // Manejar errores, si es necesario
-                    console.log(error);
-                    alert('Error al cargar el archivo');
-                }
-            });
-        });
-
 
     });
 

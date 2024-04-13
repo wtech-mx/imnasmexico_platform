@@ -31,7 +31,7 @@
                                         @php
                                             $documentos_estandar = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->where('guia', '=', NULL)->get();
                                         @endphp
-                                        <form id="formDocumentos_sepconocer{{$estandar->id}}" class="row" method="POST" enctype="multipart/form-data">
+                                        <form id="formDocumentos_sepconocer{{$estandar->id}}" class="row mb-3" method="POST" enctype="multipart/form-data" style="padding:0px">
 
                                                 @csrf
 
@@ -42,7 +42,7 @@
                                                     @endphp
                                                     <div class="row">
 
-                                                        <div class="col-5  ">
+                                                        <div class="col-12  col-md-5 col-lg-5 mb-4 ">
                                                                 <a href="{{asset('carpetasestandares/'.$estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="text-decoration: none; color: #000">
                                                                     <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
                                                                     {{ substr($documento->nombre, 13) }}
@@ -52,7 +52,7 @@
                                                                 </a>
                                                         </div>
 
-                                                        <div class="col-3 ">
+                                                        <div class="col-6 col-md-3 col-lg-3 mb-4 ">
 
                                                             @if ($documentoDescargado)
 
@@ -80,7 +80,7 @@
 
                                                         </div>
 
-                                                        <div class="col-4 ">
+                                                        <div class="col-6 col-md-3 col-lg-4 mb-4 ">
 
                                                                 <p class="text-center">
                                                                     Se ha cargado tu archivo con exito- <img class="img_profile_label" src="{{asset('assets/user/icons/comprobado.png')}}" alt=""><br>
