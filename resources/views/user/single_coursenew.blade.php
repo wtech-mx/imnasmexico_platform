@@ -909,7 +909,7 @@
                     </div>
                     <div class="col-12">
                         <a class="text-center" data-bs-toggle="modal" data-bs-target="#depositos">
-                        <img class="img_depositos mt-2" src="{{asset('assets/user/utilidades/cuenta.jpg')}}" alt="">
+                        <img class="img_depositos mt-2" src="{{asset('webpage/'.$webpage->img_cuenta_bancaria) }}" alt="">
                         </a>
                     </div>
                     {{-- <div class="col-12">

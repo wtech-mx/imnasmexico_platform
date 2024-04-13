@@ -310,6 +310,15 @@ class WebPageController extends Controller
             $webpage->parallax = $fileName;
         }
 
+        if ($request->hasFile("img_cuenta_bancaria")) {
+            $file = $request->file('img_cuenta_bancaria');
+            $path = $ruta_webpage;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $webpage->img_cuenta_bancaria = $fileName;
+        }
+
+
         $webpage->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

@@ -353,6 +353,14 @@
 
                                     <div class="col-3">
                                         <div class="form-group">
+                                          <label for="">Imagen Cuenta Banccaria</label>
+                                          <input type="file" class="form-control" id="img_cuenta_bancaria" name="img_cuenta_bancaria">
+                                          <img id="blah" src="{{asset('webpage/'.$webpage->img_cuenta_bancaria) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
+                                        </div>
+                                      </div>
+
+                                    <div class="col-3">
+                                        <div class="form-group">
                                             <label for="Estatus">Estatus boton Votar</label>
                                             <select name="btn_votar" id="btn_votar" class="form-control">
                                                 <option selected value="">{{ $webpage->btn_votar }}</option>
