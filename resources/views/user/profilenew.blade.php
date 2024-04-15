@@ -1130,266 +1130,262 @@ Mi perfil- {{$cliente->name}}
 
 </script>
 
-    <script>
-        $(document).ready(function() {
-        // Cuando se selecciona un archivo en un input con clase "documento-input"
-        $(".ine_input").change(function() {
-            console.log('Archivo seleccionado');
+<script>
+    $(document).ready(function() {
+    // Cuando se selecciona un archivo en un input con clase "documento-input"
+    $(".ine_input").change(function() {
+        console.log('Archivo seleccionado');
 
-            // Obtener el formulario
-            var form = $('#formDocumentos')[0];
-            // Crear un objeto FormData para enviar archivos
-            var formData = new FormData(form);
+        // Obtener el formulario
+        var form = $('#formDocumentos')[0];
+        // Crear un objeto FormData para enviar archivos
+        var formData = new FormData(form);
 
-            // Realizar una solicitud AJAX
-            $.ajax({
-                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    // Aquí puedes manejar la respuesta del servidor
-                    // Por ejemplo, mostrar un mensaje de éxito
-                    alert('Archivo cargado con éxito');
-                    console.log('Archivo cargado con éxito');
-                    console.log(response);
+        // Realizar una solicitud AJAX
+        $.ajax({
+            url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Aquí puedes manejar la respuesta del servidor
+                // Por ejemplo, mostrar un mensaje de éxito
+                alert('Archivo cargado con éxito');
+                console.log(response);
 
-                    $('#resultado_ine').html(response); // Actualiza la sección con los datos del servicio
-                    var contenedor = document.getElementById("contenedor_ine");
-                    contenedor.setAttribute("style", "display:none;");
+                $('#resultado_ine').html(response); // Actualiza la sección con los datos del servicio
+                var contenedor = document.getElementById("contenedor_ine");
+                contenedor.setAttribute("style", "display:none;");
 
-                },
-                error: function(error) {
-                    // Manejar errores, si es necesario
-                    console.log(error);
-                    alert('Error al cargar el archivo');
-                }
-            });
+            },
+            error: function(error) {
+                // Manejar errores, si es necesario
+                console.log(error);
+                alert('Error al cargar el archivo');
+            }
         });
-
-        $(".curp_input").change(function() {
-            console.log('Archivo seleccionado');
-
-            // Obtener el formulario
-            var form = $('#formDocumentos')[0];
-            // Crear un objeto FormData para enviar archivos
-            var formData = new FormData(form);
-
-            // Realizar una solicitud AJAX
-            $.ajax({
-                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    // Aquí puedes manejar la respuesta del servidor
-                    // Por ejemplo, mostrar un mensaje de éxito
-                    alert('Archivo cargado con éxito');
-                    $('#resultado_curp').html(response); // Actualiza la sección con los datos del servicio
-                    var contenedor = document.getElementById("contenedor_curp");
-                    contenedor.setAttribute("style", "display:none;");
-                },
-                error: function(error) {
-                    // Manejar errores, si es necesario
-                    console.log(error);
-                    alert('Error al cargar el archivo');
-                }
-            });
-        });
-
-        $(".foto_tam_infantil_input").change(function() {
-            console.log('Archivo seleccionado');
-
-            // Obtener el formulario
-            var form = $('#formDocumentos')[0];
-            // Crear un objeto FormData para enviar archivos
-            var formData = new FormData(form);
-
-            // Realizar una solicitud AJAX
-            $.ajax({
-                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    // Aquí puedes manejar la respuesta del servidor
-                    // Por ejemplo, mostrar un mensaje de éxito
-                    alert('Archivo cargado con éxito');
-                },
-                error: function(error) {
-                    // Manejar errores, si es necesario
-                    console.log(error);
-                    alert('Error al cargar el archivo');
-                    $('#resultado_foto_tam_infantil').html(response); // Actualiza la sección con los datos del servicio
-                    var contenedor = document.getElementById("contenedor_foto_tam_infantil");
-                    contenedor.setAttribute("style", "display:none;");
-                }
-            });
-        });
-
-        $(".tam_titulo_input").change(function() {
-            console.log('Archivo seleccionado');
-
-            // Obtener el formulario
-            var form = $('#formDocumentos')[0];
-            // Crear un objeto FormData para enviar archivos
-            var formData = new FormData(form);
-
-            // Realizar una solicitud AJAX
-            $.ajax({
-                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    // Aquí puedes manejar la respuesta del servidor
-                    // Por ejemplo, mostrar un mensaje de éxito
-                    alert('Archivo cargado con éxito');
-                },
-                error: function(error) {
-                    // Manejar errores, si es necesario
-                    console.log(error);
-                    alert('Error al cargar el archivo');
-                    $('#resultado_foto_tam_titulo').html(response); // Actualiza la sección con los datos del servicio
-                    var contenedor = document.getElementById("contenedor_foto_tam_titulo");
-                    contenedor.setAttribute("style", "display:none;");
-                }
-            });
-        });
-
-        $(".infantil_blanco_input").change(function() {
-            console.log('Archivo seleccionado');
-
-            // Obtener el formulario
-            var form = $('#formDocumentos')[0];
-            // Crear un objeto FormData para enviar archivos
-            var formData = new FormData(form);
-
-            // Realizar una solicitud AJAX
-            $.ajax({
-                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    // Aquí puedes manejar la respuesta del servidor
-                    // Por ejemplo, mostrar un mensaje de éxito
-                    alert('Archivo cargado con éxito');
-                },
-                error: function(error) {
-                    // Manejar errores, si es necesario
-                    console.log(error);
-                    alert('Error al cargar el archivo');
-                    $('#resultado_foto_infantil_blanco').html(response); // Actualiza la sección con los datos del servicio
-                    var contenedor = document.getElementById("contenedor_foto_infantil_blanco");
-                    contenedor.setAttribute("style", "display:none;");
-                }
-            });
-        });
-
-        $(".firma_input").change(function() {
-            console.log('Archivo seleccionado');
-
-            // Obtener el formulario
-            var form = $('#formDocumentos')[0];
-            // Crear un objeto FormData para enviar archivos
-            var formData = new FormData(form);
-
-            // Realizar una solicitud AJAX
-            $.ajax({
-                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    // Aquí puedes manejar la respuesta del servidor
-                    // Por ejemplo, mostrar un mensaje de éxito
-                    alert('Archivo cargado con éxito');
-                },
-                error: function(error) {
-                    // Manejar errores, si es necesario
-                    console.log(error);
-                    alert('Error al cargar el archivo');
-                    $('#resultado_firma').html(response); // Actualiza la sección con los datos del servicio
-                    var contenedor = document.getElementById("contenedor_firma");
-                    contenedor.setAttribute("style", "display:none;");
-                }
-            });
-        });
-
-        $(".estudios_input").change(function() {
-            console.log('Archivo seleccionado');
-
-            // Obtener el formulario
-            var form = $('#formDocumentos')[0];
-            // Crear un objeto FormData para enviar archivos
-            var formData = new FormData(form);
-
-            // Realizar una solicitud AJAX
-            $.ajax({
-                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    // Aquí puedes manejar la respuesta del servidor
-                    // Por ejemplo, mostrar un mensaje de éxito
-                    alert('Archivo cargado con éxito');
-                    $('#resultado_estudios').html(response); // Actualiza la sección con los datos del servicio
-                    var contenedor = document.getElementById("contenedor_estudios");
-                    contenedor.setAttribute("style", "display:none;");
-                },
-                error: function(error) {
-                    // Manejar errores, si es necesario
-                    console.log(error);
-                    alert('Error al cargar el archivo');
-                }
-            });
-        });
-
-        $(".domicilio_input").change(function() {
-            console.log('Archivo seleccionado');
-
-            // Obtener el formulario
-            var form = $('#formDocumentos')[0];
-            // Crear un objeto FormData para enviar archivos
-            var formData = new FormData(form);
-
-            // Realizar una solicitud AJAX
-            $.ajax({
-                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    // Aquí puedes manejar la respuesta del servidor
-                    // Por ejemplo, mostrar un mensaje de éxito
-                    alert('Archivo cargado con éxito');
-                    $('#resultado_domicilio').html(response); // Actualiza la sección con los datos del servicio
-                    var contenedor = document.getElementById("contenedor_domicilio");
-                    contenedor.setAttribute("style", "display:none;");
-                },
-                error: function(error) {
-                    // Manejar errores, si es necesario
-                    console.log(error);
-                    alert('Error al cargar el archivo');
-
-                }
-            });
-        });
-
     });
 
+    $(".curp_input").change(function() {
+        console.log('Archivo seleccionado');
 
-    </script>
+        // Obtener el formulario
+        var form = $('#formDocumentos')[0];
+        // Crear un objeto FormData para enviar archivos
+        var formData = new FormData(form);
+
+        // Realizar una solicitud AJAX
+        $.ajax({
+            url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Aquí puedes manejar la respuesta del servidor
+                // Por ejemplo, mostrar un mensaje de éxito
+                alert('Archivo cargado con éxito');
+                $('#resultado_curp').html(response); // Actualiza la sección con los datos del servicio
+                var contenedor = document.getElementById("contenedor_curp");
+                contenedor.setAttribute("style", "display:none;");
+            },
+            error: function(error) {
+                // Manejar errores, si es necesario
+                console.log(error);
+            }
+        });
+    });
+
+    $(".foto_tam_infantil_input").change(function() {
+        console.log('Archivo seleccionado');
+
+        // Obtener el formulario
+        var form = $('#formDocumentos')[0];
+        // Crear un objeto FormData para enviar archivos
+        var formData = new FormData(form);
+
+        // Realizar una solicitud AJAX
+        $.ajax({
+            url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Aquí puedes manejar la respuesta del servidor
+                // Por ejemplo, mostrar un mensaje de éxito
+                alert('Archivo cargado con éxito');
+                $('#resultado_foto_tam_infantil').html(response); // Actualiza la sección con los datos del servicio
+                var contenedor = document.getElementById("contenedor_foto_tam_infantil");
+                contenedor.setAttribute("style", "display:none;");
+            },
+            error: function(error) {
+                // Manejar errores, si es necesario
+                console.log(error);
+
+            }
+        });
+    });
+
+    $(".tam_titulo_input").change(function() {
+        console.log('Archivo seleccionado');
+
+        // Obtener el formulario
+        var form = $('#formDocumentos')[0];
+        // Crear un objeto FormData para enviar archivos
+        var formData = new FormData(form);
+
+        // Realizar una solicitud AJAX
+        $.ajax({
+            url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Aquí puedes manejar la respuesta del servidor
+                // Por ejemplo, mostrar un mensaje de éxito
+                alert('Archivo cargado con éxito');
+                $('#resultado_foto_tam_titulo').html(response); // Actualiza la sección con los datos del servicio
+                var contenedor = document.getElementById("contenedor_foto_tam_titulo");
+                contenedor.setAttribute("style", "display:none;");
+            },
+            error: function(error) {
+                // Manejar errores, si es necesario
+                console.log(error);
+
+            }
+        });
+    });
+
+    $(".infantil_blanco_input").change(function() {
+        console.log('Archivo seleccionado');
+
+        // Obtener el formulario
+        var form = $('#formDocumentos')[0];
+        // Crear un objeto FormData para enviar archivos
+        var formData = new FormData(form);
+
+        // Realizar una solicitud AJAX
+        $.ajax({
+            url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Aquí puedes manejar la respuesta del servidor
+                // Por ejemplo, mostrar un mensaje de éxito
+                alert('Archivo cargado con éxito');
+                $('#resultado_foto_infantil_blanco').html(response); // Actualiza la sección con los datos del servicio
+                var contenedor = document.getElementById("contenedor_foto_infantil_blanco");
+                contenedor.setAttribute("style", "display:none;");
+            },
+            error: function(error) {
+                // Manejar errores, si es necesario
+                console.log(error);
+
+            }
+        });
+    });
+
+    $(".firma_input").change(function() {
+        console.log('Archivo seleccionado');
+
+        // Obtener el formulario
+        var form = $('#formDocumentos')[0];
+        // Crear un objeto FormData para enviar archivos
+        var formData = new FormData(form);
+
+        // Realizar una solicitud AJAX
+        $.ajax({
+            url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Aquí puedes manejar la respuesta del servidor
+                // Por ejemplo, mostrar un mensaje de éxito
+                alert('Archivo cargado con éxito');
+                $('#resultado_firma').html(response); // Actualiza la sección con los datos del servicio
+                var contenedor = document.getElementById("contenedor_firma");
+                contenedor.setAttribute("style", "display:none;");
+            },
+            error: function(error) {
+                // Manejar errores, si es necesario
+                console.log(error);
+
+            }
+        });
+    });
+
+    $(".estudios_input").change(function() {
+        console.log('Archivo seleccionado');
+
+        // Obtener el formulario
+        var form = $('#formDocumentos')[0];
+        // Crear un objeto FormData para enviar archivos
+        var formData = new FormData(form);
+
+        // Realizar una solicitud AJAX
+        $.ajax({
+            url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Aquí puedes manejar la respuesta del servidor
+                // Por ejemplo, mostrar un mensaje de éxito
+                alert('Archivo cargado con éxito');
+                $('#resultado_estudios').html(response); // Actualiza la sección con los datos del servicio
+                var contenedor = document.getElementById("contenedor_estudios");
+                contenedor.setAttribute("style", "display:none;");
+            },
+            error: function(error) {
+                // Manejar errores, si es necesario
+                console.log(error);
+            }
+        });
+    });
+
+    $(".domicilio_input").change(function() {
+        console.log('Archivo seleccionado');
+
+        // Obtener el formulario
+        var form = $('#formDocumentos')[0];
+        // Crear un objeto FormData para enviar archivos
+        var formData = new FormData(form);
+
+        // Realizar una solicitud AJAX
+        $.ajax({
+            url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                // Aquí puedes manejar la respuesta del servidor
+                // Por ejemplo, mostrar un mensaje de éxito
+                alert('Archivo cargado con éxito');
+                $('#resultado_domicilio').html(response); // Actualiza la sección con los datos del servicio
+                var contenedor = document.getElementById("contenedor_domicilio");
+                contenedor.setAttribute("style", "display:none;");
+            },
+            error: function(error) {
+                // Manejar errores, si es necesario
+                console.log(error);
+
+            }
+        });
+    });
+
+});
+
+
+</script>
 
 
 <script>
