@@ -78,7 +78,7 @@
                                                     {{-- <option value="3">RN - Titulo Honorifico Generico QRS</option> --}}
                                                     <option value="4">RN - Diploma Imnas</option>
                                                     <option value="5">RN - Credencial General</option>
-                                                    <option value="13">Titulo Honorifico Online Qr Logo</option>
+                                                    <option value="3">RN - Titulo Honorifico QRS</option>
 
                                                     @if (str_contains($ticket->Cursos->nombre,'medicina estetica'))
                                                         <option value="6">CN - Tira de materias aparatologia</option>

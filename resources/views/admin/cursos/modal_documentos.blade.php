@@ -121,7 +121,6 @@
 
                                                 @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == NULL)
                                                     <option value="2">RN-Cedula de identidad de papel General</option>
-                                                    {{-- <option value="3">RN - Titulo Honorifico Generico QRS</option> --}}
                                                     <option value="4">RN - Diploma Imnas</option>
                                                     <option value="5">RN - Credencial General</option>
                                                     <option value="3">RN - Titulo Honorifico QRS</option>
