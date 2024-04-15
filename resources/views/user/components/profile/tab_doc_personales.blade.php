@@ -313,7 +313,6 @@
 
                     <div class="col-6 form-group mb-5">
                         <label for="firma">Firma</label>
-                        <div id="resultado_firma"></div>
 
                         @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                             <input id="firma" name="firma" type="file" class="form-control firma_input" >
@@ -349,7 +348,7 @@
                             @endif
                         </div>
                         @endif
-                        
+
                         <div id="resultado_firma"></div>
 
                     </div>
@@ -359,11 +358,13 @@
             <div class="col-6 form-group mb-5">
                 <label for="ine">INE Frente y Atras</label>
                 <input id="ine" name="ine" type="file" class="form-control ine_input">
+                <div id="resultado_ine"></div>
             </div>
 
             <div class="col-6 form-group mb-5">
                 <label for="curp">CURPs</label>
                 <input id="curp" name="curp" type="file" class="form-control curp_input" >
+                <div id="resultado_curp"></div>
             </div>
 
             @foreach ($usuario_compro as $video)
@@ -371,16 +372,19 @@
                     <div class="col-6 form-group mb-5">
                         <label for="estudios">Último grado de estudio (oficial)</label>
                         <input id="estudios" name="estudios" type="file" class="form-control estudios_input" >
+                        <div id="resultado_estudios"></div>
                     </div>
 
                     <div class="col-6 form-group mb-5">
                         <label for="domicilio">Comprobante de domicilio</label>
                         <input id="domicilio" name="domicilio" type="file" class="form-control domicilio_input" >
+                        <div id="resultado_domicilio"></div>
                     </div>
 
                     <div class="col-6 form-group mb-5">
                         <label for="foto_tam_infantil">Foto Óvalo</label>
                         <input id="foto_tam_titulo" name="foto_tam_titulo" type="file" class="form-control tam_titulo_input" >
+                        <div id="resultado_foto_tam_titulo"></div>
                     </div>
                     @break
                 @endif
@@ -391,6 +395,7 @@
                     <div class="col-6 form-group mb-5">
                         <label for="foto_infantil_blanco">Foto Infantil Blanco y negro</label>
                         <input id="foto_infantil_blanco" name="foto_infantil_blanco" type="file" class="form-control infantil_blanco_input" >
+                        <div id="resultado_foto_tam_titulo"></div>
                     </div>
                     @break
                 @endif
@@ -399,11 +404,13 @@
             <div class="col-6 form-group mb-5">
                 <label for="foto_tam_infantil">Foto Infantil color</label>
                 <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control foto_tam_infantil_input" >
+                <div id="resultado_foto_tam_infantil"></div>
             </div>
 
             <div class="col-6 form-group mb-5">
                 <label for="firma">Firma</label>
-                <input id="firma" name="firma" type="file" class="form-control firma_input firma_input" >
+                <input id="firma" name="firma" type="file" class="form-control firma_input" >
+                <div id="resultado_firma"></div>
             </div>
         @endif
     </div>

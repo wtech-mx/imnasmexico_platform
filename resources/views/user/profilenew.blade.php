@@ -1224,7 +1224,7 @@ Mi perfil- {{$cliente->name}}
                     console.log(error);
                     alert('Error al cargar el archivo');
                     $('#resultado_foto_tam_infantil').html(response); // Actualiza la sección con los datos del servicio
-                    var contenedor = document.getElementById("contenedor_foto_infantil_blanco");
+                    var contenedor = document.getElementById("contenedor_foto_tam_infantil");
                     contenedor.setAttribute("style", "display:none;");
                 }
             });
