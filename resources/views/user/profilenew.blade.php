@@ -1152,6 +1152,13 @@ Mi perfil- {{$cliente->name}}
                     // Aquí puedes manejar la respuesta del servidor
                     // Por ejemplo, mostrar un mensaje de éxito
                     alert('Archivo cargado con éxito');
+                    console.log('Archivo cargado con éxito');
+                    console.log(response);
+
+                    $('#resultado_ine').html(response); // Actualiza la sección con los datos del servicio
+                    var contenedor = document.getElementById("contenedor_ine");
+                    contenedor.setAttribute("style", "display:none;");
+
                 },
                 error: function(error) {
                     // Manejar errores, si es necesario
@@ -1180,6 +1187,9 @@ Mi perfil- {{$cliente->name}}
                     // Aquí puedes manejar la respuesta del servidor
                     // Por ejemplo, mostrar un mensaje de éxito
                     alert('Archivo cargado con éxito');
+                    $('#resultado_curp').html(response); // Actualiza la sección con los datos del servicio
+                    var contenedor = document.getElementById("contenedor_curp");
+                    contenedor.setAttribute("style", "display:none;");
                 },
                 error: function(error) {
                     // Manejar errores, si es necesario
@@ -1213,6 +1223,71 @@ Mi perfil- {{$cliente->name}}
                     // Manejar errores, si es necesario
                     console.log(error);
                     alert('Error al cargar el archivo');
+                    $('#resultado_foto_tam_infantil').html(response); // Actualiza la sección con los datos del servicio
+                    var contenedor = document.getElementById("contenedor_foto_infantil_blanco");
+                    contenedor.setAttribute("style", "display:none;");
+                }
+            });
+        });
+
+        $(".tam_titulo_input").change(function() {
+            console.log('Archivo seleccionado');
+
+            // Obtener el formulario
+            var form = $('#formDocumentos')[0];
+            // Crear un objeto FormData para enviar archivos
+            var formData = new FormData(form);
+
+            // Realizar una solicitud AJAX
+            $.ajax({
+                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // Aquí puedes manejar la respuesta del servidor
+                    // Por ejemplo, mostrar un mensaje de éxito
+                    alert('Archivo cargado con éxito');
+                },
+                error: function(error) {
+                    // Manejar errores, si es necesario
+                    console.log(error);
+                    alert('Error al cargar el archivo');
+                    $('#resultado_foto_tam_titulo').html(response); // Actualiza la sección con los datos del servicio
+                    var contenedor = document.getElementById("contenedor_foto_tam_titulo");
+                    contenedor.setAttribute("style", "display:none;");
+                }
+            });
+        });
+
+        $(".infantil_blanco_input").change(function() {
+            console.log('Archivo seleccionado');
+
+            // Obtener el formulario
+            var form = $('#formDocumentos')[0];
+            // Crear un objeto FormData para enviar archivos
+            var formData = new FormData(form);
+
+            // Realizar una solicitud AJAX
+            $.ajax({
+                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    // Aquí puedes manejar la respuesta del servidor
+                    // Por ejemplo, mostrar un mensaje de éxito
+                    alert('Archivo cargado con éxito');
+                },
+                error: function(error) {
+                    // Manejar errores, si es necesario
+                    console.log(error);
+                    alert('Error al cargar el archivo');
+                    $('#resultado_foto_infantil_blanco').html(response); // Actualiza la sección con los datos del servicio
+                    var contenedor = document.getElementById("contenedor_foto_infantil_blanco");
+                    contenedor.setAttribute("style", "display:none;");
                 }
             });
         });
@@ -1241,6 +1316,9 @@ Mi perfil- {{$cliente->name}}
                     // Manejar errores, si es necesario
                     console.log(error);
                     alert('Error al cargar el archivo');
+                    $('#resultado_firma').html(response); // Actualiza la sección con los datos del servicio
+                    var contenedor = document.getElementById("contenedor_firma");
+                    contenedor.setAttribute("style", "display:none;");
                 }
             });
         });
@@ -1264,6 +1342,9 @@ Mi perfil- {{$cliente->name}}
                     // Aquí puedes manejar la respuesta del servidor
                     // Por ejemplo, mostrar un mensaje de éxito
                     alert('Archivo cargado con éxito');
+                    $('#resultado_estudios').html(response); // Actualiza la sección con los datos del servicio
+                    var contenedor = document.getElementById("contenedor_estudios");
+                    contenedor.setAttribute("style", "display:none;");
                 },
                 error: function(error) {
                     // Manejar errores, si es necesario
@@ -1292,39 +1373,15 @@ Mi perfil- {{$cliente->name}}
                     // Aquí puedes manejar la respuesta del servidor
                     // Por ejemplo, mostrar un mensaje de éxito
                     alert('Archivo cargado con éxito');
+                    $('#resultado_domicilio').html(response); // Actualiza la sección con los datos del servicio
+                    var contenedor = document.getElementById("contenedor_domicilio");
+                    contenedor.setAttribute("style", "display:none;");
                 },
                 error: function(error) {
                     // Manejar errores, si es necesario
                     console.log(error);
                     alert('Error al cargar el archivo');
-                }
-            });
-        });
 
-                $(".domicilio_input").change(function() {
-            console.log('Archivo seleccionado');
-
-            // Obtener el formulario
-            var form = $('#formDocumentos')[0];
-            // Crear un objeto FormData para enviar archivos
-            var formData = new FormData(form);
-
-            // Realizar una solicitud AJAX
-            $.ajax({
-                url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    // Aquí puedes manejar la respuesta del servidor
-                    // Por ejemplo, mostrar un mensaje de éxito
-                    alert('Archivo cargado con éxito');
-                },
-                error: function(error) {
-                    // Manejar errores, si es necesario
-                    console.log(error);
-                    alert('Error al cargar el archivo');
                 }
             });
         });

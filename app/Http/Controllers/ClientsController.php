@@ -455,14 +455,18 @@ class ClientsController extends Controller
 
         if($documentos_id->id_usuario == $id){
 
-            $documentos = Documentos::find($documentos_id->id);
+            $documento = Documentos::find($documentos_id->id);
 
             if ($request->hasFile("ine")) {
                 $file = $request->file('ine');
                 $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
-                $documentos->ine = $fileName;
+                $documento->ine = $fileName;
+                $documento->update();
+
+                return view('user.components.profile.resultado.ine',['documento' => $documento,'cliente' => $cliente]);
+
             }
 
             if ($request->hasFile("curp")) {
@@ -470,7 +474,11 @@ class ClientsController extends Controller
                 $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
-                $documentos->curp = $fileName;
+                $documento->curp = $fileName;
+
+                $documento->update();
+
+                return view('user.components.profile.resultado.curp',['documento' => $documento,'cliente' => $cliente]);
             }
 
             if ($request->hasFile("foto_infantil_blanco")) {
@@ -478,7 +486,11 @@ class ClientsController extends Controller
                 $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
-                $documentos->foto_infantil_blanco = $fileName;
+                $documento->foto_infantil_blanco = $fileName;
+
+                $documento->update();
+
+                return view('user.components.profile.resultado.foto_tam_infantil',['documento' => $documento,'cliente' => $cliente]);
             }
 
             if ($request->hasFile("foto_tam_titulo")) {
@@ -486,7 +498,11 @@ class ClientsController extends Controller
                 $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
-                $documentos->foto_tam_titulo = $fileName;
+                $documento->foto_tam_titulo = $fileName;
+
+                $documento->update();
+
+                return view('user.components.profile.resultado.tam_titulo',['documento' => $documento,'cliente' => $cliente]);
             }
 
             if ($request->hasFile("foto_tam_infantil")) {
@@ -494,7 +510,11 @@ class ClientsController extends Controller
                 $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
-                $documentos->foto_tam_infantil = $fileName;
+                $documento->foto_tam_infantil = $fileName;
+
+                $documento->update();
+
+                return view('user.components.profile.resultado.foto_tam_infantil',['documento' => $documento,'cliente' => $cliente]);
             }
 
             if ($request->hasFile("carta_compromiso")) {
@@ -502,7 +522,11 @@ class ClientsController extends Controller
                 $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
-                $documentos->carta_compromiso = $fileName;
+                $documento->carta_compromiso = $fileName;
+
+                $documento->update();
+
+                return view('user.components.profile.resultado.foto_tam_infantil',['documento' => $documento,'cliente' => $cliente]);
             }
 
             if ($request->hasFile("firma")) {
@@ -510,7 +534,11 @@ class ClientsController extends Controller
                 $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
-                $documentos->firma = $fileName;
+                $documento->firma = $fileName;
+
+                $documento->update();
+
+                return view('user.components.profile.resultado.firma',['documento' => $documento,'cliente' => $cliente]);
             }
 
             if ($request->hasFile("estudios")) {
@@ -518,7 +546,11 @@ class ClientsController extends Controller
                 $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
-                $documentos->estudios = $fileName;
+                $documento->estudios = $fileName;
+
+                $documento->update();
+
+                return view('user.components.profile.resultado.estudios',['documento' => $documento,'cliente' => $cliente]);
             }
 
             if ($request->hasFile("domicilio")) {
@@ -526,14 +558,18 @@ class ClientsController extends Controller
                 $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
-                $documentos->domicilio = $fileName;
+                $documento->domicilio = $fileName;
+
+                $documento->update();
+
+                return view('user.components.profile.resultado.domicilio',['documento' => $documento,'cliente' => $cliente]);
             }
 
-            $documentos->update();
+            // $documentos->update();
 
         }
 
-        return redirect()->back()->with('success', 'Creado con exito');
+        // return redirect()->back()->with('success', 'Creado con exito');
 
     }
 
