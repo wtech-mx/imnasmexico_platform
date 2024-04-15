@@ -149,7 +149,7 @@
                                                     @endif
                                                 @endif
                                                 @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
-                                                    <option value="13">Titulo Honorifico Online Qr Logo</option>
+                                                    <option value="3">RN - Titulo Honorifico QRS</option>
                                                 @endif
                                             </select>
                                         </div>
