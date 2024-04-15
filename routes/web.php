@@ -135,7 +135,7 @@ Route::get('perfil/{code}', [App\Http\Controllers\ClientsController::class, 'ind
 Route::get('perfil/user/{id}', [App\Http\Controllers\ClientsController::class, 'show'])->name('perfil.show');
 
 Route::patch('/perfil/update/{code}', [App\Http\Controllers\ClientsController::class, 'update'])->name('perfil.update');
-Route::patch('clientes/documentos/{id}', [App\Http\Controllers\ClientsController::class, 'update_documentos_cliente'])->name('clientes.update_documentos_cliente');
+Route::match(['post', 'patch'],'clientes/documentos/{id}', [App\Http\Controllers\ClientsController::class, 'update_documentos_cliente'])->name('clientes.update_documentos_cliente');
 Route::post('clientes/documentos/estandar/{id}', [App\Http\Controllers\ClientsController::class, 'documentos_estandares_cliente'])->name('documentos.store_cliente');
 Route::patch('admin/perfil/{id}', [App\Http\Controllers\ClientsController::class, 'update_situacionfiscal'])->name('perfil.update_situacionfiscal');
 Route::post('/admin/factura/store', [App\Http\Controllers\ClientsController::class, 'store_factura'])->name('factura.store');

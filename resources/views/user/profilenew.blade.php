@@ -1134,48 +1134,64 @@ Mi perfil- {{$cliente->name}}
     $(document).ready(function() {
     // Cuando se selecciona un archivo en un input con clase "documento-input"
     $(".ine_input").change(function() {
-        console.log('Archivo seleccionado');
+    console.log('Archivo seleccionado');
 
-        // Obtener el formulario
-        var form = $('#formDocumentos')[0];
-        // Crear un objeto FormData para enviar archivos
-        var formData = new FormData(form);
+    // Obtener el archivo seleccionado
+    var file = $(this).prop('files')[0];
 
-        // Realizar una solicitud AJAX
-        $.ajax({
-            url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                // Aquí puedes manejar la respuesta del servidor
-                // Por ejemplo, mostrar un mensaje de éxito
-                alert('Archivo cargado con éxito');
-                console.log(response);
+    // Crear un objeto FormData y agregar solo el archivo seleccionado
+    var formData = new FormData();
+    formData.append('ine', file);
 
-                $('#resultado_ine').html(response); // Actualiza la sección con los datos del servicio
-                var contenedor = document.getElementById("contenedor_ine");
-                contenedor.setAttribute("style", "display:none;");
+    // Obtener el token CSRF
+    var token = $('meta[name="csrf-token"]').attr('content');
 
-            },
-            error: function(error) {
-                // Manejar errores, si es necesario
-                console.log(error);
-                alert('Error al cargar el archivo');
-            }
-        });
+    // Agregar el token CSRF a los datos de la solicitud AJAX
+    formData.append('_token', token);
+
+    // Realizar una solicitud AJAX
+    $.ajax({
+        url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
+        type: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            // Aquí puedes manejar la respuesta del servidor
+            // Por ejemplo, mostrar un mensaje de éxito
+            alert('Archivo cargado con éxito');
+            $('#resultado_ine').html(response); // Actualiza la sección con los datos del servicio
+            var contenedor = document.getElementById("contenedor_ine");
+            contenedor.setAttribute("style", "display:none;");
+
+        },
+        error: function(error) {
+            // Manejar errores, si es necesario
+            console.log(error);
+            alert('Error al cargar el archivo');
+        }
     });
+});
+
 
     $(".curp_input").change(function() {
         console.log('Archivo seleccionado');
 
-        // Obtener el formulario
-        var form = $('#formDocumentos')[0];
-        // Crear un objeto FormData para enviar archivos
-        var formData = new FormData(form);
+        // Obtener el archivo seleccionado
+        var file = $(this).prop('files')[0];
+
+        // Crear un objeto FormData y agregar solo el archivo seleccionado
+        var formData = new FormData();
+        formData.append('ine', file);
+
+        // Obtener el token CSRF
+        var token = $('meta[name="csrf-token"]').attr('content');
+
+        // Agregar el token CSRF a los datos de la solicitud AJAX
+        formData.append('_token', token);
 
         // Realizar una solicitud AJAX
+
         $.ajax({
             url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
             type: 'POST',
@@ -1198,14 +1214,22 @@ Mi perfil- {{$cliente->name}}
     });
 
     $(".foto_tam_infantil_input").change(function() {
-        console.log('Archivo seleccionado');
+    console.log('Archivo seleccionado');
 
-        // Obtener el formulario
-        var form = $('#formDocumentos')[0];
-        // Crear un objeto FormData para enviar archivos
-        var formData = new FormData(form);
+    // Obtener el archivo seleccionado
+    var file = $(this).prop('files')[0];
 
-        // Realizar una solicitud AJAX
+    // Crear un objeto FormData y agregar solo el archivo seleccionado
+    var formData = new FormData();
+    formData.append('ine', file);
+
+    // Obtener el token CSRF
+    var token = $('meta[name="csrf-token"]').attr('content');
+
+    // Agregar el token CSRF a los datos de la solicitud AJAX
+    formData.append('_token', token);
+
+    // Realizar una solicitud AJAX
         $.ajax({
             url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
             type: 'POST',
@@ -1229,14 +1253,22 @@ Mi perfil- {{$cliente->name}}
     });
 
     $(".tam_titulo_input").change(function() {
-        console.log('Archivo seleccionado');
+    console.log('Archivo seleccionado');
 
-        // Obtener el formulario
-        var form = $('#formDocumentos')[0];
-        // Crear un objeto FormData para enviar archivos
-        var formData = new FormData(form);
+    // Obtener el archivo seleccionado
+    var file = $(this).prop('files')[0];
 
-        // Realizar una solicitud AJAX
+    // Crear un objeto FormData y agregar solo el archivo seleccionado
+    var formData = new FormData();
+    formData.append('ine', file);
+
+    // Obtener el token CSRF
+    var token = $('meta[name="csrf-token"]').attr('content');
+
+    // Agregar el token CSRF a los datos de la solicitud AJAX
+    formData.append('_token', token);
+
+    // Realizar una solicitud AJAX
         $.ajax({
             url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
             type: 'POST',
@@ -1260,14 +1292,22 @@ Mi perfil- {{$cliente->name}}
     });
 
     $(".infantil_blanco_input").change(function() {
-        console.log('Archivo seleccionado');
+    console.log('Archivo seleccionado');
 
-        // Obtener el formulario
-        var form = $('#formDocumentos')[0];
-        // Crear un objeto FormData para enviar archivos
-        var formData = new FormData(form);
+    // Obtener el archivo seleccionado
+    var file = $(this).prop('files')[0];
 
-        // Realizar una solicitud AJAX
+    // Crear un objeto FormData y agregar solo el archivo seleccionado
+    var formData = new FormData();
+    formData.append('ine', file);
+
+    // Obtener el token CSRF
+    var token = $('meta[name="csrf-token"]').attr('content');
+
+    // Agregar el token CSRF a los datos de la solicitud AJAX
+    formData.append('_token', token);
+
+    // Realizar una solicitud AJAX
         $.ajax({
             url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
             type: 'POST',
@@ -1291,14 +1331,22 @@ Mi perfil- {{$cliente->name}}
     });
 
     $(".firma_input").change(function() {
-        console.log('Archivo seleccionado');
+    console.log('Archivo seleccionado');
 
-        // Obtener el formulario
-        var form = $('#formDocumentos')[0];
-        // Crear un objeto FormData para enviar archivos
-        var formData = new FormData(form);
+    // Obtener el archivo seleccionado
+    var file = $(this).prop('files')[0];
 
-        // Realizar una solicitud AJAX
+    // Crear un objeto FormData y agregar solo el archivo seleccionado
+    var formData = new FormData();
+    formData.append('ine', file);
+
+    // Obtener el token CSRF
+    var token = $('meta[name="csrf-token"]').attr('content');
+
+    // Agregar el token CSRF a los datos de la solicitud AJAX
+    formData.append('_token', token);
+
+    // Realizar una solicitud AJAX
         $.ajax({
             url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
             type: 'POST',
@@ -1322,14 +1370,22 @@ Mi perfil- {{$cliente->name}}
     });
 
     $(".estudios_input").change(function() {
-        console.log('Archivo seleccionado');
+    console.log('Archivo seleccionado');
 
-        // Obtener el formulario
-        var form = $('#formDocumentos')[0];
-        // Crear un objeto FormData para enviar archivos
-        var formData = new FormData(form);
+    // Obtener el archivo seleccionado
+    var file = $(this).prop('files')[0];
 
-        // Realizar una solicitud AJAX
+    // Crear un objeto FormData y agregar solo el archivo seleccionado
+    var formData = new FormData();
+    formData.append('ine', file);
+
+    // Obtener el token CSRF
+    var token = $('meta[name="csrf-token"]').attr('content');
+
+    // Agregar el token CSRF a los datos de la solicitud AJAX
+    formData.append('_token', token);
+
+    // Realizar una solicitud AJAX
         $.ajax({
             url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
             type: 'POST',
@@ -1352,14 +1408,22 @@ Mi perfil- {{$cliente->name}}
     });
 
     $(".domicilio_input").change(function() {
-        console.log('Archivo seleccionado');
+    console.log('Archivo seleccionado');
 
-        // Obtener el formulario
-        var form = $('#formDocumentos')[0];
-        // Crear un objeto FormData para enviar archivos
-        var formData = new FormData(form);
+    // Obtener el archivo seleccionado
+    var file = $(this).prop('files')[0];
 
-        // Realizar una solicitud AJAX
+    // Crear un objeto FormData y agregar solo el archivo seleccionado
+    var formData = new FormData();
+    formData.append('ine', file);
+
+    // Obtener el token CSRF
+    var token = $('meta[name="csrf-token"]').attr('content');
+
+    // Agregar el token CSRF a los datos de la solicitud AJAX
+    formData.append('_token', token);
+
+    // Realizar una solicitud AJAX
         $.ajax({
             url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
             type: 'POST',
