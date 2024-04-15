@@ -1177,20 +1177,20 @@ Mi perfil- {{$cliente->name}}
     $(".curp_input").change(function() {
         console.log('Archivo seleccionado');
 
-        // Obtener el archivo seleccionado
-        var file = $(this).prop('files')[0];
+// Obtener el archivo seleccionado
+var file = $(this).prop('files')[0];
 
-        // Crear un objeto FormData y agregar solo el archivo seleccionado
-        var formData = new FormData();
-        formData.append('ine', file);
+// Crear un objeto FormData y agregar solo el archivo seleccionado
+var formData = new FormData();
+formData.append('ine', file);
 
-        // Obtener el token CSRF
-        var token = $('meta[name="csrf-token"]').attr('content');
+// Obtener el token CSRF
+var token = $('meta[name="csrf-token"]').attr('content');
 
-        // Agregar el token CSRF a los datos de la solicitud AJAX
-        formData.append('_token', token);
+// Agregar el token CSRF a los datos de la solicitud AJAX
+formData.append('_token', token);
 
-        // Realizar una solicitud AJAX
+// Realizar una solicitud AJAX
 
         $.ajax({
             url: "{{ route('clientes.update_documentos_cliente', $cliente->id) }}",
