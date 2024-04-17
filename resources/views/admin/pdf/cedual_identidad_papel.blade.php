@@ -154,6 +154,8 @@
             $palabras = explode(' ', ucwords(strtolower($nombre)));
             $parte1 = implode(' ', array_slice($palabras, 0, 2));
             $parte2 = implode(' ', array_slice($palabras, 2));
+            $cantidad_palabras = count($palabras);
+
         @endphp
 
         {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
@@ -161,7 +163,11 @@
         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
 
         <div class="container">
-            <h4 class="nombre">{{ $parte1 }}<br>{{ $parte2 }}</h4>
+            @if ($cantidad_palabras > 5)
+                <h4 class="nombre">{{ $parte1 }}<br>{{ $parte2 }}</h4>
+            @else
+                <h4 class="nombre">{{ $nombre }}</h4>
+            @endif
         </div>
 
         <div class="oval-container">
