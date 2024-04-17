@@ -226,10 +226,5 @@
             <h4 class="fecha">Expedido en la Ciudad de México , el dia {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
         </div>
 
-        <div class="container5">
-             <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
-            {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
-        </div>
-
     </body>
 </html>
