@@ -117,6 +117,19 @@
             height: auto;
         }
 
+        .container_marco{
+            position: absolute;
+            top: 33%;
+            left: 11.5%;
+            z-index: 100;
+
+        }
+
+        .img_marco{
+            width: 300px;
+            height: 540px;
+        }
+
         .curso{
             font-size: 35px;
             color: #353535;
@@ -165,7 +178,6 @@
             left: 50%;
             background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
             /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
-
             background-size: cover;
             background-position: center center;
         }
@@ -183,6 +195,12 @@
         {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+        {{-- <img src="tipos_documentos/titulo honorifico_sinmarco.png" class="img_portada"> --}}
+
+        <div class="container_marco">
+            {{-- <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
+            <img src="tipos_documentos/marco_pro.png" class="img_marco">
+        </div>
 
         <div class="container">
             <h4 class="nombre">{{ $parte1 }}<br>{{ $parte2 }}</h4>
