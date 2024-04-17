@@ -199,7 +199,7 @@
 
         <div class="container_marco">
             {{-- <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
-            <img src="tipos_documentos/marco_pro.png" class="img_marco">
+            <img src="https://plataforma.imnasmexico.com/tipos_documentos/marco_pro.png" class="img_marco">
         </div>
 
         <div class="container">
