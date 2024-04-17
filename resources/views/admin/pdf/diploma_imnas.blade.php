@@ -87,9 +87,22 @@
             color: red;
         }
 
+        .container_marco{
+            position: absolute;
+            top: 35%;
+            left: 3.5%;
+            z-index: 100;
+
+        }
+
+        .img_marco{
+            width: 300px;
+            height: 475px;
+        }
+
         .oval-container {
             width: 240px;
-            height: 330px;
+            height: 290px;
             position: absolute;
             overflow: hidden;
             top: 42.7%;
@@ -108,7 +121,6 @@
             left: 50%;
             background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
             /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
-
             background-size: cover;
             background-position: center center;
         }
@@ -139,6 +151,11 @@
 
         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+
+        <div class="container_marco">
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
+            {{-- <img src="tipos_documentos/marco_diploma.png" class="img_marco"> --}}
+        </div>
 
         <div class="container">
             <h4 class="nombre">{{ $parte1 }}<br>{{ $parte2 }}</h4>
