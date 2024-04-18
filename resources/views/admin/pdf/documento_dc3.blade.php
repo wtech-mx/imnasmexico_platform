@@ -109,9 +109,8 @@
 <body>
 
         {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
-        <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-        {{-- <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
- --}}
+        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
     @php
         // Verificar si $duracion_hrs está vacía y asignarle "48 horas" si es el caso
         $duracion_hrs = empty($duracion_hrs) ? '48' : $duracion_hrs;
