@@ -24,7 +24,7 @@
 
         .container {
             position: absolute;
-            top: 7.5%;
+            top: 9%;
             left: 12%;
             transform: translate(-50%, -50%);
             text-align: center;
