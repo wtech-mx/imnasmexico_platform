@@ -334,14 +334,41 @@ class DocumentosController extends Controller
         $duracion_hrs = $request->get('duracion_hrs');
         $tipo = $request->get('tipo');
         $sello = 'Si';
-
         $tipo_documentos = Tipodocumentos::find($tipo);
 
-
-        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
+        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs'));
         $pdf->setPaper('A4', 'portrait');
 
         return $pdf->download('diploma_stps_'.$nombre.'.pdf');
+
+    }
+
+    public function generar_alumno_dc(Request $request){
+
+        $nombre = $request->get('nombre');
+
+        $curp = $request->get('curp');
+        $curso = $request->get('curso_name');
+        $duracion_hrs = $request->get('duracion_hrs');
+        $tipo = 'Formato DC-3';
+        $costo = '2000';
+
+        $fecha_inicio = $request->get('fecha_inicial');
+        $fecha = $request->get('fecha');
+
+        // Unir las dos fechas
+        $fecha_inicio_sin_guiones = str_replace('-', '', $fecha_inicio);
+        $fecha_sin_guiones = str_replace('-', '', $fecha);
+
+        $fecha_unida = $fecha_inicio_sin_guiones . 'a' . $fecha_sin_guiones;
+
+
+        $tipo_documentos = Tipodocumentos::where('tipo',$tipo)->first();
+
+        $pdf = PDF::loadView('admin.pdf.documento_dc3',compact('curso','costo','curp','fecha_unida','tipo_documentos','nombre','duracion_hrs'));
+        $pdf->setPaper('A4', 'portrait');
+
+        return $pdf->download('documento_dc3_'.$nombre.'.pdf');
 
     }
 

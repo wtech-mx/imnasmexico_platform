@@ -248,6 +248,7 @@ Mi perfil- {{$cliente->name}}
                                     }
                                 @endphp
                                     <div class="accordion-item">
+
                                         <h2 class="accordion-header" id="headingOne">
                                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne{{$video->id_tickets}}" aria-expanded="true" aria-controls="collapseOne{{$video->id}}" style="background-color: #836262;">
                                                 <img class="icon_nav_course" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt="">
@@ -283,6 +284,7 @@ Mi perfil- {{$cliente->name}}
                                                                     $non_null_values = array_filter($stps_values, function ($value) {
                                                                         return $value !== null;
                                                                     });
+
                                                                 @endphp
 
                                                                 @foreach ($non_null_values as $index => $value)
@@ -354,7 +356,7 @@ Mi perfil- {{$cliente->name}}
                                                                 @endforeach
 
                                                             @else
-                                                                <div class="col-12">
+                                                                <div class="col-12 ">
                                                                     <form method="POST" action="{{ route('generar_alumno.documento') }}" enctype="multipart/form-data" role="form">
                                                                         @csrf
                                                                         <div class="row">
@@ -420,6 +422,44 @@ Mi perfil- {{$cliente->name}}
                                                                         </div>
                                                                     </form>
                                                                 </div>
+
+                                                                @if($video->Cursos->nombre == 'Micropuntura Brasileña')
+
+                                                                <div class="col-12 ">
+                                                                    <form method="POST" action="{{ route('generar_alumno_dc.documento') }}" enctype="multipart/form-data" role="form">
+                                                                        @csrf
+                                                                        <div class="row">
+
+                                                                                <input id="nombre" name="nombre" type="hidden" class="form-control" value="{{$cliente->name}}" >
+
+                                                                                <input id="curso_name" name="curso_name" type="hidden"  class="form-control input_custom_tab "  value="{{ $video->Cursos->nombre }}" >
+
+                                                                                <input id="fecha_inicial" name="fecha_inicial" type="hidden" class="form-control" value="{{ $video->Cursos->fecha_inicial }}" >
+                                                                                <input id="fecha" name="fecha" type="hidden" class="form-control" value="{{ $video->Cursos->fecha_final }}" >
+
+                                                                                <input id="duracion_hrs" name="duracion_hrs" type="hidden" class="form-control" value="20" >
+
+                                                                                <div class="form-group col-12 col-md-6 col-lg-6" id="precioMayoristaContainer" >
+                                                                                    <label for="name" class="label_custom_primary_product mb-2">CURP</label>
+                                                                                    <div class="input-group ">
+                                                                                        <span class="input-group-text span_custom_tab" >
+                                                                                            <img class="img_profile_label" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt="" width="30px">
+                                                                                        </span>
+                                                                                        <input id="curp" name="curp" type="text"  class="form-control input_custom_tab " placeholder="Ingresa tu CURP" required>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="col-12 col-md-6 col-lg-6">
+                                                                                    <button type="submit" class="text-center mt-4" style="background: transparent;border: 0px;">
+                                                                                        <h3 class=""><img class="icon_nav_course" src="{{asset('assets/user/icons/pdf.png')}}" alt=""> <strong>Descargar Formato DC-3</strong></h3>
+                                                                                    </button>
+                                                                                </div>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+
+                                                                @endif
+
                                                             @endif
 
 
