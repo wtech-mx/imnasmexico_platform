@@ -117,8 +117,12 @@ class PagosFueraController extends Controller
             if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
                 if (User::where('telefono', $request->telefono)->exists()) {
                     $user = User::where('telefono', $request->telefono)->first();
+                    $user->name = $request->get('name') . " " . $request->get('apellido');
+                    $user->update();
                 } else {
                     $user = User::where('email', $request->email)->first();
+                    $user->name = $request->get('name') . " " . $request->get('apellido');
+                    $user->update();
                 }
                 $payer = $user;
             } else {
