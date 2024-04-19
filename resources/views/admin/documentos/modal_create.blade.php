@@ -152,6 +152,7 @@
 
                                                     <div class="form-group col-12 gc_cn">
                                                         <p>Los campos de (Nombre (s) y Apellidos) <br>son solo obligatorios para generar la credencial</p>
+                                                        <p>Link de la pag para remover los fondos de las fotografias <strong><a style="text-decoration:revert " href="https://www.remove.bg/es/upload" target="_blank" >remove.bg/es/upload</a></strong></p>
                                                     </div>
 
                                                     <div class="form-group col-6 gc_cn">
