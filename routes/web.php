@@ -395,6 +395,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/recursos/create', [App\Http\Controllers\RecursosController::class, 'store'])->name('recursos.store');
     Route::patch('/recursos/update/{id}', [App\Http\Controllers\RecursosController::class, 'update'])->name('recursos.update');
 
+    // =============== M O D U L O   N O T A ===============================
+    Route::get('/notas/cam', [App\Http\Controllers\NotasCamController::class, 'index'])->name('notascam.index');
+    Route::get('/notas/cam/crear', [App\Http\Controllers\NotasCamController::class, 'crear'])->name('notascam.crear');
+
 });
 
 // Rutas para el sistema de documentos

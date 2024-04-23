@@ -1,31 +1,10 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-Notas CAM
+    Notas Estandares
 @endsection
 
 @section('content')
-
-<style>
-    #resultado {
-    border: solid 3px red;
-    color: white;
-    font-weight: bold;
-    width: 100%;
-    border-radius: 10px;
-    padding: 10px;
-    font-size: 13px;
-    margin-top: 1rem;
-    }
-
-    #resultado.ok {
-        border: solid 3px GREEN;
-        color: GREEN!IMPORTANT;
-        font-weight: bold;
-    }
-</style>
-
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -35,18 +14,16 @@ Notas CAM
 
                         <div class="d-flex justify-content-between">
 
-                            <h3 class="mb-3">Notas CAM</h3>
+                            <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
 
-                            <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
-                                ¿Como funciona?
+                            <h3 class="mb-3">Notas Estandares</h3>
+
+                            <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#modal_estandares_create">
+                               Crea Nota
                             </a>
-                            @can('nota-cam-create')
-                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                Crear
-                            </a>
-                            @endcan
-                            @include('cam.admin.notas.crear')
+
                         </div>
+
                     </div>
 
                         <div class="card-body">
@@ -54,66 +31,15 @@ Notas CAM
                                 <table class="table table-flush" id="datatable-search">
                                     <thead class="thead">
                                         <tr>
-                                            <th>No</th>
+                                            <th>id</th>
+                                            <th>Vista</th>
                                             <th>Nombre</th>
-                                            <th>Tipo</th>
-                                            <th>Metodo Pago</th>
-                                            <th>Fecha</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
+
                                     <tbody>
-                                        @foreach ($notas_cam as $nota_cam)
-                                            <tr>
-                                                <td>{{$nota_cam->id}}</td>
-                                                <td>
-                                                    @if ($nota_cam->tipo == 'Centro Evaluación')
 
-                                                    <a href="{{ route('expediente.edit_centro', $nota_cam->id) }}" style="text-decoration: underline;color:blue">
-                                                        {{$nota_cam->Cliente->name}}
-                                                    </a>
-
-                                                    @else
-
-                                                    <a href="{{ route('expediente.edit', $nota_cam->id) }}" style="text-decoration: underline;color:blue">
-                                                        {{$nota_cam->Cliente->name}}
-                                                    </a>
-
-                                                    @endif
-
-                                                <td>
-                                                    @if ($nota_cam->tipo == 'Centro Evaluación')
-                                                        <label class="badge badge-sm" style="color: #009ee3;background-color: #009ee340;">Centro Evaluación</label>
-                                                    @else
-                                                        <label class="badge badge-sm" style="color: #746AB0;background-color: #746ab061;">Evaluador Independiente</label>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    {{$nota_cam->metodo_pago}}
-                                                    @if ($nota_cam->metodo_pago2 != NULL)
-                                                        - {{$nota_cam->metodo_pago2}}
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    @php
-                                                        $fecha = $nota_cam->fecha;
-                                                        // Convertir a una marca de tiempo Unix
-                                                        $timestamp = strtotime($fecha);
-                                                        // Formatear la fecha
-                                                        $fecha_formateada = strftime('%e de %B del %Y', $timestamp);
-                                                        // Combinar fecha y hora
-                                                        $fecha_hora_formateada = $fecha_formateada;
-                                                    @endphp
-                                                    {{ $fecha_hora_formateada}}
-                                                </td>
-                                                <td>
-                                                    <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#EditexampleModal{{$nota_cam->id}}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                                        <i class="fa fa-fw fa-eye"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            @include('cam.admin.notas.edit')
-                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -122,12 +48,20 @@ Notas CAM
             </div>
         </div>
     </div>
+
+@include('admin.notas_cam.modal_create')
+
 @endsection
 
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
+        const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+      searchable: true,
+      fixedHeight: false
+    });
+
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
     });
