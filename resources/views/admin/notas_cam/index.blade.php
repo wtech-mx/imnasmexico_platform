@@ -26,24 +26,152 @@
 
                     </div>
 
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-flush" id="datatable-search">
-                                    <thead class="thead">
-                                        <tr>
-                                            <th>id</th>
-                                            <th>Vista</th>
-                                            <th>Nombre</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
+                    <div class="card-body">
+                        <div class="row">
+                            @foreach ( $notas as $item)
+                                <div class="col-12 mb-4">
+                                    <div class="comtainer_nota" style="background: #ddbba254;border-radius: 13px;box-shadow: 10px 10px 28px -25px rgba(0,0,0,0.73);padding: 15px;">
+                                        <div class="row">
 
-                                    <tbody>
+                                            <div class="col-4">
+                                                <h4 style="font-size: 14px;">{{ $item->nombre_persona }}</h4>
+                                                <h3 style="font-size: 18px">Estandares</h3>
+                                                <ul>
+                                                    <li></li>
+                                                </ul>
+                                            </div>
 
-                                    </tbody>
-                                </table>
-                            </div>
+                                            <div class="col-4 mt-4">
+                                                <h3 style="font-size: 18px">Estatus</h3>
+                                            </div>
+
+                                            <div class="col-2 mt-4">
+                                                <h3 style="font-size: 18px">Evaluador</h3>
+                                                <a type="button" data-bs-toggle="modal" data-bs-target="#modal_evaluador" style="font-size: 11px;background: #fff;padding: 2px;border-radius: 6px;">Selecionar Evaluador</a>
+
+                                                @if( $item->evaluador == 'Kay')
+                                                    <p style="font-size: 11px;background: #fff200;padding: 2px;border-radius: 6px;display:block;"><strong>{{ $item->evaluador }}</strong></p>
+
+                                                @elseif ( $item->evaluador == 'Martin')
+                                                    <p style="font-size: 11px;background: #0062ff;padding: 2px;border-radius: 6px;display:inline-block;color:white"><strong>{{ $item->evaluador }}</strong></p>
+
+                                                @elseif ( $item->evaluador == 'Carla')
+                                                    <p style="font-size: 11px;background: #2ab300;padding: 2px;border-radius: 6px;display:inline-block;color:white"><strong>{{ $item->evaluador }}</strong></p>
+
+                                                @endif
+
+                                            </div>
+
+                                            <div class="col-2">
+                                                <h4 style="font-size: 14px;"># Portafolio <strong>{{ $item->num_portafolio }}</strong></h4>
+                                                <h3 style="font-size: 18px">Acciones</h3>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <p class="d-inline-flex gap-1">
+                                                    <a class="btn btn-sm btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                      Mas informacion
+                                                    </a>
+                                                  </p>
+                                                  <div class="collapse" id="collapseExample">
+                                                    <div class="card card-body ">
+
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label for="name">Fecha de evaluacion *</label>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">
+                                                                            <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
+                                                                        </span>
+                                                                        <input id="fecha" name="fecha" type="date" class="form-control" value="{{ $item->fecha }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label for="name">Hora *</label>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">
+                                                                            <img src="{{ asset('assets/user/icons/reloj.png') }}" alt="" width="35px">
+                                                                        </span>
+                                                                        <input id="time" name="time" type="time" class="form-control" value="{{ $item->time }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label for="name">Tipo *</label>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">
+                                                                            <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
+                                                                        </span>
+                                                                        <select name="tipo" id="tipo" class="form-select d-inline-block" >
+                                                                            <option value="">{{ $item->tipo }}</option>
+
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label for="name">Modalidad *</label>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">
+                                                                            <img src="{{ asset('assets/cam/gestion-del-cambio.png') }}" alt="" width="35px">
+                                                                        </span>
+                                                                        <select name="tipo_modalidad" id="tipo_modalidad" class="form-select d-inline-block" >
+                                                                            <option value="">{{ $item->tipo_modalidad }}</option>
+
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label for="name">Alumnos o externos *</label>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">
+                                                                            <img src="{{ asset('assets/user/icons/perfil.png') }}" alt="" width="35px">
+                                                                        </span>
+                                                                        <select name="tipo_alumno" id="tipo_alumno" class="form-select d-inline-block" >
+                                                                            <option value="">{{ $item->tipo_alumno }}</option>
+
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label for="name">Nombre del Centro</label>
+                                                                    <div class="input-group mb-3">
+                                                                        <span class="input-group-text" id="basic-addon1">
+                                                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                                                        </span>
+                                                                        <input id="nombre_centro" name="nombre_centro" type="number" class="form-control" value="{{ $item->nombre_centro }}">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                  </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            @include('admin.notas_cam.modal_evaluador')
+
+                            @endforeach
                         </div>
+                    </div>
                 </div>
             </div>
         </div>

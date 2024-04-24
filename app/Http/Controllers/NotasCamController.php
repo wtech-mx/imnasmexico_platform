@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cam\CamEstandares;
 use App\Models\NotasEstatus;
+use Illuminate\Support\Facades\Validator;
 
 
 class NotasCamController extends Controller
@@ -12,12 +13,13 @@ class NotasCamController extends Controller
     public function index(){
 
         $estandares_cam = CamEstandares::get();
+        $notas = NotasEstatus::get();
 
-        return view('admin.notas_cam.index', compact('estandares_cam'));
+        return view('admin.notas_cam.index', compact('estandares_cam','notas'));
     }
 
     public function store(Request $request){
-dd( $request);
+
         $validator = Validator::make($request->all(), [
             'fecha' => 'required',
             'tipo' => 'required',
@@ -42,7 +44,7 @@ dd( $request);
         $notas->tipo_modalidad = $request->get('tipo_modalidad');
         $notas->tipo_alumno = $request->get('tipo_alumno');
         $notas->nombre_centro = $request->get('nombre_centro');
-        $notas->nombre_persona = $nombnre
+        $notas->nombre_persona = $nombnre;
         $notas->celular = $request->get('celular');
         $notas->email = $request->get('email');
 
@@ -50,5 +52,15 @@ dd( $request);
 
         return redirect()->route('notascam.index')->with('success', 'Nota creada con exito.');
     }
+
+    public function store_evaluador(Request $request,$id){
+
+        $notas = NotasEstatus::find($id);
+        $notas->evaluador = $request->get('evaluador');
+        $notas->update();
+
+        return redirect()->route('notascam.index')->with('warning', 'Nota Actualziada con exito.');
+    }
+
 
 }

@@ -19,6 +19,7 @@ class NotasEstatus extends Model
         'tipo_alumno',
         'nombre_centro',
         'nombre_persona',
+        'celular',
         'email',
         'estatus',
         'subida_portafolio',

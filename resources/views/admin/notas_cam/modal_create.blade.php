@@ -106,7 +106,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="nombre_centro" name="nombre_centro" type="number" class="form-control" >
+                                        <input id="nombre_centro" name="nombre_centro" type="text" class="form-control" >
                                     </div>
                                 </div>
                             </div>
