@@ -123,7 +123,7 @@
 
         .oval-container {
             width: 112px;
-            height: 170px;
+            height: 175px;
             position: absolute;
             overflow: hidden;
             top: 32%;
@@ -140,11 +140,11 @@
             clip-path: ellipse(50% 50% at 50% 50%);
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-             /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
+             background-image: url('utilidades_documentos/{{ $fileName }}');
             background-size: cover;
             background-position: center center;
-        }
+        }            /* background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}'); */
+
     </style>
 </head>
 
@@ -156,8 +156,8 @@
     @endphp
 
         {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
-        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+        {{-- <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+        <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
 
         <div class="container">
                 @for ($i = 0; $i < $cantidad_palabras; $i += 2)
