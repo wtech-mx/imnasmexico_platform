@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Models\Cam;
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CamNotEstandares extends Model
+class NotasEstandaresEstatus extends Model
 {
     use HasFactory;
-    protected $table = 'cam_notestandares';
+    protected $table = '_notasestandares_estatus';
     protected $primarykey = "id";
 
     protected $fillable = [
@@ -20,8 +19,8 @@ class CamNotEstandares extends Model
         'id_usuario',
     ];
 
-    public function Nota(){
-        return $this->belongsTo(CamNotas::class, 'id_nota');
+    public function NotasEstatus(){
+        return $this->belongsTo(NotasEstatus::class, 'id_nota');
     }
 
     public function Estandar(){

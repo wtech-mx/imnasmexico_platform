@@ -4,6 +4,10 @@
     Notas Estandares
 @endsection
 
+@php
+   use App\Models\NotasEstandaresEstatus;
+@endphp
+
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -29,43 +33,75 @@
                     <div class="card-body">
                         <div class="row">
                             @foreach ( $notas as $item)
+                                @php
+                                    $estandares_estatus = NotasEstandaresEstatus::where('id_nota','=', $item->id)->Where('operables','=', null)->get();
+                                @endphp
                                 <div class="col-12 mb-4">
                                     <div class="comtainer_nota" style="background: #ddbba254;border-radius: 13px;box-shadow: 10px 10px 28px -25px rgba(0,0,0,0.73);padding: 15px;">
                                         <div class="row">
 
-                                            <div class="col-4">
+                                            <div class="col-6 mb-3">
                                                 <h4 style="font-size: 14px;">{{ $item->nombre_persona }}</h4>
-                                                <h3 style="font-size: 18px">Estandares</h3>
-                                                <ul>
-                                                    <li></li>
-                                                </ul>
                                             </div>
 
-                                            <div class="col-4 mt-4">
-                                                <h3 style="font-size: 18px">Estatus</h3>
-                                            </div>
-
-                                            <div class="col-2 mt-4">
-                                                <h3 style="font-size: 18px">Evaluador</h3>
-                                                <a type="button" data-bs-toggle="modal" data-bs-target="#modal_evaluador" style="font-size: 11px;background: #fff;padding: 2px;border-radius: 6px;">Selecionar Evaluador</a>
-
-                                                @if( $item->evaluador == 'Kay')
-                                                    <p style="font-size: 11px;background: #fff200;padding: 2px;border-radius: 6px;display:block;"><strong>{{ $item->evaluador }}</strong></p>
-
-                                                @elseif ( $item->evaluador == 'Martin')
-                                                    <p style="font-size: 11px;background: #0062ff;padding: 2px;border-radius: 6px;display:inline-block;color:white"><strong>{{ $item->evaluador }}</strong></p>
-
-                                                @elseif ( $item->evaluador == 'Carla')
-                                                    <p style="font-size: 11px;background: #2ab300;padding: 2px;border-radius: 6px;display:inline-block;color:white"><strong>{{ $item->evaluador }}</strong></p>
-
-                                                @endif
-
-                                            </div>
-
-                                            <div class="col-2">
+                                            <div class="col-6 mb-3">
                                                 <h4 style="font-size: 14px;"># Portafolio <strong>{{ $item->num_portafolio }}</strong></h4>
-                                                <h3 style="font-size: 18px">Acciones</h3>
                                             </div>
+
+                                            <div class="col-12">
+                                                @foreach ($estandares_estatus as $estandar_item)
+
+                                                <div class="row mb-4" style="    background: #ffffff7d;border-radius: 9px;padding: 5px;">
+                                                    <div class="col-4">
+                                                        <h3 style="font-size: 18px">Estandares</h3>
+                                                        <ul>
+                                                            <li >{{$estandar_item->estandar->estandar}}</li>
+
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="col-4 ">
+                                                        <h3 style="font-size: 18px">Estatus</h3>
+                                                        <a type="button" data-bs-toggle="modal" data-bs-target="#modal_estatus_{{ $estandar_item->id }}" style="font-size: 11px;background: #fff;padding: 2px;border-radius: 6px;">Selecionar Estatus</a>
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <p style=""><strong>{{ $estandar_item->estatus }}</strong></p>
+                                                            </div>
+                                                            <div class="col-6">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-2 ">
+                                                        <h3 style="font-size: 18px">Evaluador</h3>
+                                                        <a type="button" data-bs-toggle="modal" data-bs-target="#modal_evaluador_{{ $estandar_item->id }}" style="font-size: 11px;background: #fff;padding: 2px;border-radius: 6px;">Selecionar Evaluador</a>
+
+                                                        @if( $estandar_item->evaluador == 'Kay')
+                                                            <p style="font-size: 11px;background: #fff200;padding: 2px;border-radius: 6px;display:block;"><strong>{{ $estandar_item->evaluador }}</strong></p>
+
+                                                        @elseif ( $estandar_item->evaluador == 'Martin')
+                                                            <p style="font-size: 11px;background: #0062ff;padding: 2px;border-radius: 6px;display:inline-block;color:white"><strong>{{ $estandar_item->evaluador }}</strong></p>
+
+                                                        @elseif ( $estandar_item->evaluador == 'Carla')
+                                                            <p style="font-size: 11px;background: #2ab300;padding: 2px;border-radius: 6px;display:inline-block;color:white"><strong>{{ $estandar_item->evaluador }}</strong></p>
+
+                                                        @endif
+
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                        <h3 style="font-size: 18px">Acciones</h3>
+                                                    </div>
+
+                                                </div>
+                                                @include('admin.notas_cam.modal_evaluador')
+                                                @include('admin.notas_cam.modal_estatus')
+                                                @endforeach
+
+                                            </div>
+
+
 
                                             <div class="col-12">
                                                 <p class="d-inline-flex gap-1">
@@ -167,7 +203,6 @@
                                     </div>
                                 </div>
 
-                            @include('admin.notas_cam.modal_evaluador')
 
                             @endforeach
                         </div>

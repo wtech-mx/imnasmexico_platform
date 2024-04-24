@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cam\CamEstandares;
+use App\Models\NotasEstandaresEstatus;
+
 use App\Models\NotasEstatus;
 use Illuminate\Support\Facades\Validator;
-
 
 class NotasCamController extends Controller
 {
@@ -50,16 +51,55 @@ class NotasCamController extends Controller
 
         $notas->save();
 
+        $estandares = $request->input('estandares');
+
+        for ($count = 0; $count < count($estandares); $count++) {
+            $data = array(
+                'id_nota' => $notas->id,
+                'id_estandar' => $estandares[$count],
+                'estatus' => 'Sin estatus',
+                'estatus_renovacion' => 'renovo',
+                'id_usuario' => auth()->user()->id,
+            );
+            $insert_data[] = $data;
+        }
+
+
+        $camnotas = NotasEstandaresEstatus::insert($insert_data);
+
+        NotasEstandaresEstatus::insert($insert_data);
+
+        $estandares_operables = $request->input('estandares_operables');
+
+        foreach ($estandares_operables as $estandar_operable) {
+            NotasEstandaresEstatus::where([
+                'id_nota' => $notas->id,
+                'id_estandar' => $estandar_operable,
+            ])->update(['operables' => '1']);
+        }
+
         return redirect()->route('notascam.index')->with('success', 'Nota creada con exito.');
     }
 
     public function store_evaluador(Request $request,$id){
 
-        $notas = NotasEstatus::find($id);
-        $notas->evaluador = $request->get('evaluador');
-        $notas->update();
+        $notas_estandares = NotasEstandaresEstatus::find($id);
+        $notas_estandares->evaluador = $request->get('evaluador');
 
-        return redirect()->route('notascam.index')->with('warning', 'Nota Actualziada con exito.');
+        $notas_estandares->update();
+
+
+        return redirect()->route('notascam.index')->with('warning', 'Evaluador Actualziada con exito.');
+    }
+
+    public function store_estatus(Request $request,$id){
+
+        $notas_estandares = NotasEstandaresEstatus::find($id);
+        $notas_estandares->estatus = $request->get('estatus');
+
+        $notas_estandares->update();
+
+        return redirect()->route('notascam.index')->with('warning', 'Estado Actualziado con exito.');
     }
 
 
