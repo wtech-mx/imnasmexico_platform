@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cam\CamEstandares;
+use App\Models\NotasEstatus;
 
 
 class NotasCamController extends Controller
@@ -15,8 +16,8 @@ class NotasCamController extends Controller
         return view('admin.notas_cam.index', compact('estandares_cam'));
     }
 
-    public function crear(Request $request){
-
+    public function store(Request $request){
+dd( $request);
         $validator = Validator::make($request->all(), [
             'fecha' => 'required',
             'tipo' => 'required',
@@ -31,80 +32,23 @@ class NotasCamController extends Controller
 
         $name = $request->get('name');
         $apellido = $request->get('apellido');
-        $celular = $request->get('celular');
-        // Obtén las dos primeras letras del nombre
-        $primerasDosLetrasNombre = substr($name, 0, 2);
-        // Obtén las dos primeras letras del apellido
-        $primerasDosLetrasApellido = substr($apellido, 0, 2);
-        // Obtén los últimos tres dígitos del número de teléfono
-        $ultimosTresDigitosCelular = substr($celular, -3);
-        // Concatena las partes para formar la contraseña
-        $password = $primerasDosLetrasNombre . $primerasDosLetrasApellido . $ultimosTresDigitosCelular;
+        $nombnre = $name.$apellido;
 
+        $notas = new NotasEstatus;
+        $notas->fecha = $request->get('fecha');
+        $notas->time = $request->get('time');
+        $notas->num_portafolio = $request->get('num_portafolio');
+        $notas->tipo = $request->get('tipo');
+        $notas->tipo_modalidad = $request->get('tipo_modalidad');
+        $notas->tipo_alumno = $request->get('tipo_alumno');
+        $notas->nombre_centro = $request->get('nombre_centro');
+        $notas->nombre_persona = $nombnre
+        $notas->celular = $request->get('celular');
+        $notas->email = $request->get('email');
 
-        $notas_cam = new CamNotas;
-        $notas_cam->id_cliente = $payer->id;
-        $notas_cam->tipo = $request->get('tipo');
-        $notas_cam->fecha = $request->get('fecha');
-        $notas_cam->membresia = $request->get('membresia');
-        $notas_cam->monto1 = $request->get('monto1');
-        $notas_cam->metodo_pago = $request->get('metodo_pago');
-        $notas_cam->nota = $request->get('nota');
-        $notas_cam->referencia = $request->get('referencia');
-        $notas_cam->id_usuario = auth()->user()->id;
-        if ($request->hasFile("comprobante")) {
-            $file = $request->file('comprobante');
-            $path = $cam_notas;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $notas_cam->comprobante = $fileName;
-        }
+        $notas->save();
 
-        $notas_cam->save();
-
-        $estandares = $request->input('estandares');
-
-        for ($count = 0; $count < count($estandares); $count++) {
-            $data = array(
-                'id_nota' => $notas_cam->id,
-                'id_estandar' => $estandares[$count],
-                'estatus' => 'Sin estatus',
-                'estatus_renovacion' => 'renovo',
-                'id_usuario' => auth()->user()->id,
-            );
-            $insert_data[] = $data;
-        }
-
-        CamNotEstandares::insert($insert_data);
-
-        $estandares_operables = $request->input('estandares_operables');
-
-        foreach ($estandares_operables as $estandar_operable) {
-            CamNotEstandares::where([
-                'id_nota' => $notas_cam->id,
-                'id_estandar' => $estandar_operable,
-            ])->update(['operables' => '1']);
-        }
-
-        $estandares_afines = $request->input('estandares_afines');
-
-        if($estandares_afines != NULL){
-            for ($count = 0; $count < count($estandares_afines); $count++) {
-                $data3 = array(
-                    'id_nota' => $notas_cam->id,
-                    'id_estandar' => $estandares_afines[$count],
-                    'estatus' => 'Entregado',
-                    'estatus_renovacion' => 'renovo',
-                    'ya_contaba' => '1',
-                    'id_usuario' => auth()->user()->id,
-                );
-                $insert_data3[] = $data3;
-            }
-            CamNotEstandares::insert($insert_data3);
-        }
-
-        return redirect()->route('index.notas')
-            ->with('success', 'Nota CAM creada con exito.');
+        return redirect()->route('notascam.index')->with('success', 'Nota creada con exito.');
     }
 
 }

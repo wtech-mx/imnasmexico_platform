@@ -10,7 +10,7 @@
                 </button>
             </div>
 
-            <form method="POST" action="{{ route('notascam.crear') }}" enctype="multipart/form-data" role="form">
+            <form method="POST" action="{{ route('notascam.store') }}" enctype="multipart/form-data" role="form">
                 @csrf
                     <div class="modal-body">
                         <div class="row">
