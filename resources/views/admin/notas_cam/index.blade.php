@@ -27,6 +27,26 @@
                             </a>
 
                         </div>
+                            <div class="row mt-4">
+                                <div class="col-3">
+                                    <label for="user_id">Buscar Persona</label>
+                                    <select class="form-control cliente" name="id_client" id="id_client">
+                                        <option selected value="">Buscar Alumno</option>
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <label for="user_id">Buscar Telefono:</label>
+                                    <select class="form-control phone" name="phone" id="phone">
+                                        <option selected value="">Buscar Telefono</option>
+
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <br>
+                                    <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #F82018; color: #ffffff;">Buscar</button>
+                                </div>
+                            </div>
+
 
                     </div>
 
