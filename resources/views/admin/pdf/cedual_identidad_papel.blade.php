@@ -122,24 +122,22 @@
         }
 
         .oval-container {
-            width: 112px;
-            height: 170px;
+            width: 123px;
+            height: 185px;
             position: absolute;
             overflow: hidden;
-            top: 32%;
-            left: 9%;
-            background: transparent;
+            top: 31%;
+            left: 8%;
+            /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
         }
 
         .oval {
             width: 100%;
             height: 100%;
-            border-radius: 50%;
-            background-color: transparent;
-            position: absolute;
-            clip-path: ellipse(50% 50% at 50% 50%);
-            transform: translateX(-50%);
-            left: 50%;
+            background: #fff;
+            margin: 0;
+            padding: 0;
+            margin-top: 8px;
             background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
              /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
             background-size: cover;
