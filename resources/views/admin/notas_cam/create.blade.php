@@ -1,9 +1,8 @@
 <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#acordcion_mb_clases">
-    <div class="accordion-body row">
+    <div class="accordion-body row" style="background: #cccccc45;padding: 10px;border-radius: 12px;">
         <form method="POST" action="{{ route('notascam.store') }}" enctype="multipart/form-data" role="form">
             @csrf
-                <div class="modal-body">
-                    <div class="row">
+            <div class="row">
                         <div class="col-6">
                             <div class="form-group">
                                 <h4 for="name">Fecha de evaluacion *</h4>
@@ -159,16 +158,12 @@
                         </div>
 
                         <div class="col-6">
-                            <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">
+                            <button type="submit" class="btn btn-sm" style="background: {{$configuracion->color_boton_save}}; color: #ffff">
                                 <h4 style="color: #fff"> Guardar </h4>
                              </button>
                         </div>
 
-                    </div>
-
-                </div>
-
-
+            </div>
 
         </form>
     </div>

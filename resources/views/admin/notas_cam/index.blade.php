@@ -17,14 +17,16 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-4">
-                                <a class="btn bg-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <a class="btn bg-success" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                    <h5 style="color: #fff"> Crear nota</h5>
                                 </a>
                             </div>
+
                             <div class="col-12">
                                 @include('admin.notas_cam.create')
                             </div>
                         </div>
+
                         <form action="{{ route('notascam.buscador') }}" method="GET" >
                             <div class="row mt-4">
                                 <div class="col-3">
