@@ -17,15 +17,15 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="name">Estatus *</label>
+                                    <h4 for="name">Estatus *</h4>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                         </span>
                                         <select name="estatus" id="estatus" class="form-select d-inline-block" required>
-                                            <option value="">Seleccione Estado</option>
-                                            <option value="1 Cedula">1 Cedula</option>
-                                            <option value="2 Subir Portafolio">2 Subir Portafolio</option>
+                                            <option value="">Seleccione Estatus</option>
+                                            <option value="1- Cedula">1- Cedula</option>
+                                            <option value="2- Subir Portafolio">2- Subir Portafolio</option>
                                             <option value="3- Crear Lote">3- Crear Lote</option>
                                             <option value="4- Dictamen">4- Dictamen</option>
                                             <option value="5- Certificacion">5- Certificacion</option>

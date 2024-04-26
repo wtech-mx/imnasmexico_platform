@@ -397,6 +397,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O   N O T A ===============================
     Route::get('/notas/cam', [App\Http\Controllers\NotasCamController::class, 'index'])->name('notascam.index');
+    Route::get('/notas/cam/buscador/', [App\Http\Controllers\NotasCamController::class, 'buscador'])->name('notascam.buscador');
     Route::post('/notas/cam/store', [App\Http\Controllers\NotasCamController::class, 'store'])->name('notascam.store');
     Route::patch('/notas/cam/store/evaluador/{id}', [App\Http\Controllers\NotasCamController::class, 'store_evaluador'])->name('notascam.store_evaluador');
     Route::patch('/notas/cam/store/estatus/{id}', [App\Http\Controllers\NotasCamController::class, 'store_estatus'])->name('notascam.store_estatus');

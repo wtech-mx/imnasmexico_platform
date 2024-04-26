@@ -15,216 +15,225 @@
                 <div class="card">
 
                     <div class="card-header">
-
-                        <div class="d-flex justify-content-between">
-
-                            <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
-
-                            <h3 class="mb-3">Notas Estandares</h3>
-
-                            <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#modal_estandares_create">
-                               Crea Nota
-                            </a>
-
+                        <div class="row">
+                            <div class="col-4">
+                                <a class="btn bg-danger" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                   <h5 style="color: #fff"> Crear nota</h5>
+                                </a>
+                            </div>
+                            <div class="col-12">
+                                @include('admin.notas_cam.create')
+                            </div>
                         </div>
+                        <form action="{{ route('notascam.buscador') }}" method="GET" >
                             <div class="row mt-4">
                                 <div class="col-3">
-                                    <label for="user_id">Buscar Persona</label>
-                                    <select class="form-control cliente" name="id_client" id="id_client">
-                                        <option selected value="">Buscar Alumno</option>
+                                    <h5 for="user_id">Buscar por nombre</h5>
+                                    <select class="form-control nombre_persona" name="nombre_persona" id="nombre_persona">
+                                        <option selected value="">Nombre</option>
+                                        @foreach ($nombres_personas as $nombre_persona)
+                                            <option value="{{$nombre_persona}}">{{$nombre_persona}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-3">
-                                    <label for="user_id">Buscar Telefono:</label>
-                                    <select class="form-control phone" name="phone" id="phone">
-                                        <option selected value="">Buscar Telefono</option>
-
+                                    <h5 for="user_id">Buscar Telefono:</h5>
+                                    <select class="form-control celular_persona" name="celular_persona" id="celular_persona">
+                                        <option selected value="">Telefono</option>
+                                        @foreach ($celular_personas as $celular_persona)
+                                            <option value="{{$celular_persona}}">{{$celular_persona}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-3">
+                                    <h5 for="user_id">Buscar por Estandar:</h5>
+                                    <select class="form-control estandar" name="estandar" id="estandar">
+                                        <option selected value="">Estandar</option>
+                                        @foreach ($estandares_cam as $estandar_cam)
+                                            <option value="{{$estandar_cam->id}}">{{$estandar_cam->estandar}}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-3">
                                     <br>
-                                    <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #F82018; color: #ffffff;">Buscar</button>
+                                    <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #F82018;"><h5 style="color: #ffffff;">Buscar</h5></button>
                                 </div>
                             </div>
-
-
+                        </form>
                     </div>
 
                     <div class="card-body">
                         <div class="row">
-                            @foreach ( $notas as $item)
-                                @php
-                                    $estandares_estatus = NotasEstandaresEstatus::where('id_nota','=', $item->id)->Where('operables','=', null)->get();
-                                @endphp
-                                <div class="col-12 mb-4">
-                                    <div class="comtainer_nota" style="background: #ddbba254;border-radius: 13px;box-shadow: 10px 10px 28px -25px rgba(0,0,0,0.73);padding: 15px;">
-                                        <div class="row">
+                            @if(Route::currentRouteName() != 'notascam.index')
+                                @foreach ( $notas as $item)
+                                    @php
+                                        $estandares_estatus = NotasEstandaresEstatus::where('id_nota','=', $item->id)->get();
+                                    @endphp
+                                    <div class="col-12 mb-4">
+                                        <div class="comtainer_nota" style="background: #ddbba254;border-radius: 13px;box-shadow: 10px 10px 28px -25px rgba(0,0,0,0.73);padding: 15px;">
+                                            <div class="row">
 
-                                            <div class="col-6 mb-3">
-                                                <h4 style="font-size: 14px;">{{ $item->nombre_persona }}</h4>
-                                            </div>
+                                                <div class="col-12">
+                                                    <div class="collapse" id="collapseExample">
+                                                        <div class="card card-body ">
+                                                            <div class="row">
+                                                                <div class="col-4">
+                                                                    <div class="form-group">
+                                                                        <h5 for="name">Nombre *</h5>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
+                                                                            </span>
+                                                                            <input type="text" class="form-control" value="{{ $item->nombre_persona }}" disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                            <div class="col-6 mb-3">
-                                                <h4 style="font-size: 14px;"># Portafolio <strong>{{ $item->num_portafolio }}</strong></h4>
-                                            </div>
+                                                                <div class="col-4">
+                                                                    <div class="form-group">
+                                                                        <h5 for="name">Telefono *</h5>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
+                                                                            </span>
+                                                                            <input type="text" class="form-control" value="{{ $item->celular }}" disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                            <div class="col-12">
-                                                @foreach ($estandares_estatus as $estandar_item)
+                                                                <div class="col-4">
+                                                                    <div class="form-group">
+                                                                        <h5 for="name">Correo *</h5>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
+                                                                            </span>
+                                                                            <input type="text" class="form-control" value="{{ $item->email }}" disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                                <div class="row mb-4" style="    background: #ffffff7d;border-radius: 9px;padding: 5px;">
-                                                    <div class="col-4">
-                                                        <h3 style="font-size: 18px">Estandares</h3>
-                                                        <ul>
-                                                            <li >{{$estandar_item->estandar->estandar}}</li>
+                                                                <div class="col-4">
+                                                                    <div class="form-group">
+                                                                        <h5 for="name">Fecha de evaluacion *</h5>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
+                                                                            </span>
+                                                                            <input type="date" class="form-control" value="{{ $item->fecha }}" disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                                        </ul>
-                                                    </div>
+                                                                <div class="col-4">
+                                                                    <div class="form-group">
+                                                                        <h5 for="name">Hora *</h5>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <img src="{{ asset('assets/user/icons/reloj.png') }}" alt="" width="35px">
+                                                                            </span>
+                                                                            <input id="time" name="time" type="time" class="form-control" value="{{ $item->time }}" disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                                    <div class="col-4 ">
-                                                        <h3 style="font-size: 18px">Estatus</h3>
-                                                        <a type="button" data-bs-toggle="modal" data-bs-target="#modal_estatus_{{ $estandar_item->id }}" style="font-size: 11px;background: #fff;padding: 2px;border-radius: 6px;">Selecionar Estatus</a>
-                                                        <div class="row">
-                                                            <div class="col-6">
-                                                                <p style=""><strong>{{ $estandar_item->estatus }}</strong></p>
-                                                            </div>
-                                                            <div class="col-6">
+                                                                <div class="col-4">
+                                                                    <div class="form-group">
+                                                                        <h5 for="name">Tipo *</h5>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
+                                                                            </span>
+                                                                            <select name="tipo" id="tipo" class="form-select d-inline-block" disabled>
+                                                                                <option value="">{{ $item->tipo }}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
+                                                                <div class="col-4">
+                                                                    <div class="form-group">
+                                                                        <h5 for="name">Modalidad *</h5>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <img src="{{ asset('assets/cam/gestion-del-cambio.png') }}" alt="" width="35px">
+                                                                            </span>
+                                                                            <select name="tipo_modalidad" id="tipo_modalidad" class="form-select d-inline-block" disabled>
+                                                                                <option value="">{{ $item->tipo_modalidad }}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-4">
+                                                                    <div class="form-group">
+                                                                        <h5 for="name">Alumnos o externos *</h5>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <img src="{{ asset('assets/user/icons/perfil.png') }}" alt="" width="35px">
+                                                                            </span>
+                                                                            <select name="tipo_alumno" id="tipo_alumno" class="form-select d-inline-block" disabled>
+                                                                                <option value="">{{ $item->tipo_alumno }}</option>
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <h5 for="name">Nombre del Centro</h5>
+                                                                        <div class="input-group mb-3">
+                                                                            <span class="input-group-text" id="basic-addon1">
+                                                                                <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                                                            </span>
+                                                                            <input id="nombre_centro" name="nombre_centro" type="text" class="form-control" value="{{ $item->nombre_centro }}" disabled>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
 
-                                                    <div class="col-2 ">
-                                                        <h3 style="font-size: 18px">Evaluador</h3>
-                                                        <a type="button" data-bs-toggle="modal" data-bs-target="#modal_evaluador_{{ $estandar_item->id }}" style="font-size: 11px;background: #fff;padding: 2px;border-radius: 6px;">Selecionar Evaluador</a>
+                                                <div class="col-4 mb-3">
+                                                    <h3 style="color: #35a79e"> Nombre: </h3><h4> {{ $item->nombre_persona }}</h4>
+                                                </div>
 
-                                                        @if( $estandar_item->evaluador == 'Kay')
-                                                            <p style="font-size: 11px;background: #fff200;padding: 2px;border-radius: 6px;display:block;"><strong>{{ $estandar_item->evaluador }}</strong></p>
+                                                <div class="col-4 mb-3">
+                                                    <h3 style="color: #35a79e">Fecha: </h3><h4> <strong>{{ \Carbon\Carbon::parse($item->fecha)->locale('es_ES')->isoFormat('dddd DD [de] MMMM YYYY') }}</strong></h4>
+                                                </div>
 
-                                                        @elseif ( $estandar_item->evaluador == 'Martin')
-                                                            <p style="font-size: 11px;background: #0062ff;padding: 2px;border-radius: 6px;display:inline-block;color:white"><strong>{{ $estandar_item->evaluador }}</strong></p>
+                                                <div class="col-2 mb-3">
+                                                    <h3 style="color: #35a79e">Hora: </h3><h4> <strong>{{ $item->time }}</strong></h4>
+                                                </div>
 
-                                                        @elseif ( $estandar_item->evaluador == 'Carla')
-                                                            <p style="font-size: 11px;background: #2ab300;padding: 2px;border-radius: 6px;display:inline-block;color:white"><strong>{{ $estandar_item->evaluador }}</strong></p>
+                                                <div class="col-2 mb-3">
+                                                    <a class="btn btn-sm btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    <h5 style="color: #ffff;"> Mas informacion</h5>
+                                                    </a>
+                                                </div>
 
+                                                <div class="col-12">
+                                                    @foreach ($estandares_estatus as $estandar_item)
+                                                        @if ($id_estandar == NULL)
+                                                            @include('admin.notas_cam.card_nota')
+                                                        @else
+                                                            @if ($estandar_item->id_estandar == $id_estandar)
+                                                                @include('admin.notas_cam.card_nota')
+                                                            @endif
                                                         @endif
 
-                                                    </div>
 
-                                                    <div class="col-2">
-                                                        <h3 style="font-size: 18px">Acciones</h3>
-                                                    </div>
+                                                    @include('admin.notas_cam.modal_evaluador')
+                                                    @include('admin.notas_cam.modal_estatus')
+                                                    @endforeach
 
                                                 </div>
-                                                @include('admin.notas_cam.modal_evaluador')
-                                                @include('admin.notas_cam.modal_estatus')
-                                                @endforeach
-
                                             </div>
-
-
-
-                                            <div class="col-12">
-                                                <p class="d-inline-flex gap-1">
-                                                    <a class="btn btn-sm btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                                                      Mas informacion
-                                                    </a>
-                                                  </p>
-                                                  <div class="collapse" id="collapseExample">
-                                                    <div class="card card-body ">
-
-                                                        <div class="row">
-                                                            <div class="col-4">
-                                                                <div class="form-group">
-                                                                    <label for="name">Fecha de evaluacion *</label>
-                                                                    <div class="input-group mb-3">
-                                                                        <span class="input-group-text" id="basic-addon1">
-                                                                            <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
-                                                                        </span>
-                                                                        <input id="fecha" name="fecha" type="date" class="form-control" value="{{ $item->fecha }}">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-4">
-                                                                <div class="form-group">
-                                                                    <label for="name">Hora *</label>
-                                                                    <div class="input-group mb-3">
-                                                                        <span class="input-group-text" id="basic-addon1">
-                                                                            <img src="{{ asset('assets/user/icons/reloj.png') }}" alt="" width="35px">
-                                                                        </span>
-                                                                        <input id="time" name="time" type="time" class="form-control" value="{{ $item->time }}">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-4">
-                                                                <div class="form-group">
-                                                                    <label for="name">Tipo *</label>
-                                                                    <div class="input-group mb-3">
-                                                                        <span class="input-group-text" id="basic-addon1">
-                                                                            <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
-                                                                        </span>
-                                                                        <select name="tipo" id="tipo" class="form-select d-inline-block" >
-                                                                            <option value="">{{ $item->tipo }}</option>
-
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-4">
-                                                                <div class="form-group">
-                                                                    <label for="name">Modalidad *</label>
-                                                                    <div class="input-group mb-3">
-                                                                        <span class="input-group-text" id="basic-addon1">
-                                                                            <img src="{{ asset('assets/cam/gestion-del-cambio.png') }}" alt="" width="35px">
-                                                                        </span>
-                                                                        <select name="tipo_modalidad" id="tipo_modalidad" class="form-select d-inline-block" >
-                                                                            <option value="">{{ $item->tipo_modalidad }}</option>
-
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-4">
-                                                                <div class="form-group">
-                                                                    <label for="name">Alumnos o externos *</label>
-                                                                    <div class="input-group mb-3">
-                                                                        <span class="input-group-text" id="basic-addon1">
-                                                                            <img src="{{ asset('assets/user/icons/perfil.png') }}" alt="" width="35px">
-                                                                        </span>
-                                                                        <select name="tipo_alumno" id="tipo_alumno" class="form-select d-inline-block" >
-                                                                            <option value="">{{ $item->tipo_alumno }}</option>
-
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-12">
-                                                                <div class="form-group">
-                                                                    <label for="name">Nombre del Centro</label>
-                                                                    <div class="input-group mb-3">
-                                                                        <span class="input-group-text" id="basic-addon1">
-                                                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
-                                                                        </span>
-                                                                        <input id="nombre_centro" name="nombre_centro" type="number" class="form-control" value="{{ $item->nombre_centro }}">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                    </div>
-                                                  </div>
-                                            </div>
-
                                         </div>
                                     </div>
-                                </div>
-
-
-                            @endforeach
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -232,144 +241,26 @@
         </div>
     </div>
 
-@include('admin.notas_cam.modal_create')
-
 @endsection
 
-@section('datatable')
-<script src="{{ asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script>
+@section('select2')
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
-        const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-      searchable: true,
-      fixedHeight: false
+    $(document).ready(function() {
+        $('.nombre_persona').select2();
     });
 
     $(document).ready(function() {
-        $('.js-example-basic-multiple').select2();
+        $('.celular_persona').select2();
     });
 
     $(document).ready(function() {
-        $('.js-example-basic-multiple2').select2();
-    });
-</script>
-
-<script>
-    // Obtén referencias a los elementos select, inputs y el contenedor de razon
-    var selectTipo = document.getElementById('tipo');
-    var selectCentroTipo = document.getElementById('centroTipo');
-    var inputCosto = document.getElementById('costo');
-    var inputMonto1 = document.getElementById('monto1');
-    var inputMonto2 = document.getElementById('monto2');
-    var inputRestante = document.getElementById('restante');
-    var opcionesCentro = document.getElementById('opcionesCentro');
-    var razonContainer = document.getElementById('razonContainer');
-
-    // Define los costos y valores iniciales
-    var costoEvaluador = 45000; // Cambia esto al costo real para un evaluador
-    var preciosCentro = {
-        Gold: 65000,      // Cambia esto al costo real para "Gold"
-        Diamante: 95000   // Cambia esto al costo real para "Diamante"
-    };
-    var monto1 = 0;
-    var monto2 = 0;
-
-    // Agrega eventos de cambio a los campos monto1 y monto2
-    inputMonto1.addEventListener('input', function() {
-        monto1 = parseFloat(inputMonto1.value) || 0;
-        actualizarRestante();
+        $('.estandar').select2();
     });
 
-    inputMonto2.addEventListener('input', function() {
-        monto2 = parseFloat(inputMonto2.value) || 0;
-        actualizarRestante();
+    $(document).ready(function() {
+        $('.estandares').select2();
     });
-
-    // Agrega un evento de cambio al select de tipo
-    selectTipo.addEventListener('change', function() {
-        var opcionSeleccionada = selectTipo.value;
-        if (opcionSeleccionada === 'Evaluador Independiente') {
-            opcionesCentro.style.display = 'none';
-            razonContainer.style.display = 'none';
-            inputCosto.value = costoEvaluador;
-        } else {
-            opcionesCentro.style.display = 'block';
-            razonContainer.style.display = 'block';
-        }
-        actualizarRestante();
-    });
-
-    // Agrega un evento de cambio al select de centroTipo
-    selectCentroTipo.addEventListener('change', function() {
-        var opcionSeleccionada = selectCentroTipo.value;
-        inputCosto.value = preciosCentro[opcionSeleccionada] || '';
-        actualizarRestante();
-    });
-
-    // Función para calcular y actualizar el campo restante
-    function actualizarRestante() {
-        var opcionSeleccionada = selectTipo.value;
-        var costo = parseFloat(inputCosto.value) || 0;
-
-        if (opcionSeleccionada === 'Evaluador Independiente') {
-            costo = costoEvaluador;
-        } else {
-            var centroTipoSeleccionado = selectCentroTipo.value;
-            costo = preciosCentro[centroTipoSeleccionado] || 0;
-        }
-
-        var total = costo - monto1 - monto2;
-        inputRestante.value = total.toFixed(2);
-    }
-
-    // Llama a la función inicialmente para calcular el valor inicial del campo restante
-    actualizarRestante();
-
-
-    //Función para validar una CURP
-function curpValida(curp) {
-    var re = /^([A-Z][AEIOUX][A-Z]{2}\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\d|3[01])[HM](?:AS|B[CS]|C[CLMSH]|D[FG]|G[TR]|HG|JC|M[CNS]|N[ETL]|OC|PL|Q[TR]|S[PLR]|T[CSL]|VZ|YN|ZS)[B-DF-HJ-NP-TV-Z]{3}[A-Z\d])(\d)$/,
-        validado = curp.match(re);
-
-    if (!validado)  //Coincide con el formato general?
-    	return false;
-
-    //Validar que coincida el dígito verificador
-    function digitoVerificador(curp17) {
-        //Fuente https://consultas.curp.gob.mx/CurpSP/
-        var diccionario  = "0123456789ABCDEFGHIJKLMNÑOPQRSTUVWXYZ",
-            lngSuma      = 0.0,
-            lngDigito    = 0.0;
-        for(var i=0; i<17; i++)
-            lngSuma = lngSuma + diccionario.indexOf(curp17.charAt(i)) * (18 - i);
-        lngDigito = 10 - lngSuma % 10;
-        if (lngDigito == 10) return 0;
-        return lngDigito;
-    }
-
-    if (validado[2] != digitoVerificador(validado[1]))
-    	return false;
-
-    return true; //Validado
-}
-
-
-//Handler para el evento cuando cambia el input
-//Lleva la CURP a mayúsculas para validarlo
-function validarInput(input) {
-    var curp = input.value.toUpperCase(),
-        resultado = document.getElementById("resultado"),
-        valido = "No válido";
-
-    if (curpValida(curp)) { // ⬅️ Acá se comprueba
-    	valido = "Válido";
-        resultado.classList.add("ok");
-    } else {
-    	resultado.classList.remove("ok");
-    }
-
-    resultado.innerText = "CURP: " + curp + "\nFormato: " + valido;
-}
 </script>
 
 

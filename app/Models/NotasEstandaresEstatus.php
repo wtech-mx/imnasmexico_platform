@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class NotasEstandaresEstatus extends Model
 {
     use HasFactory;
-    protected $table = '_notasestandares_estatus';
+    protected $table = 'notasestandares_estatus';
     protected $primarykey = "id";
 
     protected $fillable = [
@@ -16,7 +16,11 @@ class NotasEstandaresEstatus extends Model
         'id_estandar',
         'estatus',
         'evaluador',
-        'id_usuario',
+        'fecha_cedula',
+        'fecha_portafolio',
+        'fecha_lote',
+        'fecha_dictamen',
+        'fecha_certificacion',
     ];
 
     public function NotasEstatus(){
@@ -27,7 +31,4 @@ class NotasEstandaresEstatus extends Model
         return $this->belongsTo(CamEstandares::class, 'id_estandar');
     }
 
-    public function User(){
-        return $this->belongsTo(User::class, 'id_usuario');
-    }
 }

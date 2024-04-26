@@ -17,16 +17,16 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-group">
-                                    <label for="name">Evaluador *</label>
+                                    <h5 for="name">Evaluador *</h5>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                         </span>
                                         <select name="evaluador" id="evaluador" class="form-select d-inline-block" required>
                                             <option value="">Seleccione Evaluador</option>
-                                            <option value="Kay">Kay</option>
-                                            <option value="Martin">Martin</option>
-                                            <option value="Carla">Carla</option>
+                                            <option value="EC0001 Carla">EC0001 Carla</option>
+                                            <option value="EC0002 Kay">EC0002 Kay</option>
+                                            <option value="EC0040 Martin">EC0040 Martin</option>
                                         </select>
                                     </div>
                                 </div>
