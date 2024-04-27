@@ -153,25 +153,29 @@
         $cantidad_palabras = count($palabras);
     @endphp
 
-        {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
-        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+    {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
+    <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
+    {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
 
-        <div class="container">
-                @for ($i = 0; $i < $cantidad_palabras; $i += 2)
-                    @if ($i + 1 < $cantidad_palabras)
-                        @if ($i + 2 < $cantidad_palabras)
-                            <h4 class="nombre">{{ $palabras[$i] }} {{ $palabras[$i + 1] }}<br>{{ $palabras[$i + 2] }} {{ $palabras[$i + 3] }}<br></h4>
-                            @php $i += 2; @endphp
-                        @else
-                            <h4 class="nombre">{{ $palabras[$i] }} {{ $palabras[$i + 1] }}</h4>
-                        @endif
-                    @else
-                        <h4 class="nombre">{{ $palabras[$i] }}</h4>
-                    @endif
-                @endfor
+    <div class="container">
+        @for ($i = 0; $i < $cantidad_palabras; $i += 2)
+            @php
+                $linea = '';
+                if (isset($palabras[$i])) {
+                    $linea .= $palabras[$i];
+                    if (isset($palabras[$i + 1])) {
+                        $linea .= ' ' . $palabras[$i + 1];
+                    }
+                }
+                if ($i + 2 < $cantidad_palabras) {
+                    $linea .= '<br>';
+                }
+            @endphp
+            <h4 class="nombre">{!! $linea !!}</h4>
+        @endfor
+    </div>
 
-        </div>
+
 
         <div class="oval-container">
             <div class="oval">
