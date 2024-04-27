@@ -55,6 +55,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
+            width: 500px;
         }
 
         .container3{
@@ -98,7 +99,7 @@
         }
 
         .fecha{
-            font-size: 8px;
+            font-size: 12px;
             color: #000;
         }
 
