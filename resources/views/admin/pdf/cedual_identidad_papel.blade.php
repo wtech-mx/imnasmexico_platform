@@ -127,7 +127,7 @@
             height: 185px;
             position: absolute;
             overflow: hidden;
-            top: 31%;
+            top: 28%;
             left: 8%;
             /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
         }
