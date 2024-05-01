@@ -181,7 +181,7 @@
        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">--}}
 
         <div class="container">
-            <h4 class="nombre">{!! $nombre_formateado !!}<</h4>
+            <h4 class="nombre">{{ $nombre }}<</h4>
         </div>
 
         <div class="containerz">
