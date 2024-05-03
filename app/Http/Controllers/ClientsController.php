@@ -126,14 +126,20 @@ class ClientsController extends Controller
     // Obtener los datos de los estándares
     $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
-    if($cliente->estatus_constancia == 'documentos' || $cliente->estatus_constancia == 'revision de datos'){
+    if($cliente->estatus_constancia == 'documentos' || $cliente->estatus_constancia == 'revision de datos' || $cliente->estatus_constancia == 'Seleccion de fecha tentativa'){
 
         // Preparar los datos necesarios para verificar
-        $datosCliente = [
-            'ine' => $cliente->Documentos->ine,
-            'curp' => $cliente->Documentos->curp,
-            'firma' => $cliente->Documentos->firma
-        ];
+        if($cliente->Documentos){
+            $datosCliente = [
+                'ine' => $cliente->Documentos->ine,
+                'curp' => $cliente->Documentos->curp,
+                'firma' => $cliente->Documentos->firma
+            ];
+        }else{
+            $datosCliente = [
+                'ine' => $cliente->name
+            ];
+        }
 
         return view('user.certificado_webinar',compact('cliente','datosCliente'));
 
@@ -294,8 +300,22 @@ class ClientsController extends Controller
         // Obtener los datos de los estándares
         $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
-        if($cliente->estatus_constancia == 'documentos' || $cliente->estatus_constancia == 'revision de datos'){
-            return view('user.certificado_webinar',compact('cliente'));
+        if($cliente->estatus_constancia == 'documentos' || $cliente->estatus_constancia == 'revision de datos' || $cliente->estatus_constancia == 'Seleccion de fecha tentativa'){
+                   // Preparar los datos necesarios para verificar
+            if($cliente->Documentos){
+                $datosCliente = [
+                    'ine' => $cliente->Documentos->ine,
+                    'curp' => $cliente->Documentos->curp,
+                    'firma' => $cliente->Documentos->firma
+                ];
+            }else{
+                $datosCliente = [
+                    'ine' => $cliente->name
+                ];
+            }
+
+
+            return view('user.certificado_webinar',compact('cliente','datosCliente'));
         }else{
             return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
         }
@@ -347,9 +367,7 @@ class ClientsController extends Controller
             }
 
             $documento->save();
-        }
-
-        if($documentos_id->id_usuario == $cliente->id){
+        }else{
             $documento = Documentos::find($documentos_id->id);
 
             if($request->signed != NULL){
@@ -390,17 +408,25 @@ class ClientsController extends Controller
     }
 
     public function formulario(Request $request, $code){
-        $user = User::where('code', $code)->firstOrFail();
-        $user->name = $request->get('nombre') . ' ' . $request->get('apellido');
-        $user->puesto = $request->get('puesto');
-        $user->edad = $request->get('edad');
-        $user->city = $request->get('city');
-        $user->especialidad = $request->get('especialidad');
-        $user->sector_productividad = $request->get('sector_productividad');
-        $user->manera_cursos = $request->get('manera_cursos');
-        $user->modalidad_cursos = $request->get('modalidad_cursos');
-        $user->estatus_constancia = 'revision de datos';
-        $user->update();
+
+        if($request->get('fecha_tentativa') == NULL){
+            $user = User::where('code', $code)->firstOrFail();
+            $user->name = $request->get('nombre') . ' ' . $request->get('apellido');
+            $user->puesto = $request->get('puesto');
+            $user->edad = $request->get('edad');
+            $user->city = $request->get('city');
+            $user->especialidad = $request->get('especialidad');
+            $user->sector_productividad = $request->get('sector_productividad');
+            $user->manera_cursos = $request->get('manera_cursos');
+            $user->modalidad_cursos = $request->get('modalidad_cursos');
+            $user->estatus_constancia = 'revision de datos';
+            $user->update();
+        }else{
+            $user = User::where('code', $code)->firstOrFail();
+            $user->fecha_tentativa = $request->get('fecha_tentativa');
+            $user->estatus_constancia = 'Fecha tentativa seleccionada';
+            $user->update();
+        }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->route('perfil.index', $code)
@@ -1003,9 +1029,16 @@ class ClientsController extends Controller
 
     public function estatus_update_certificaion(Request $request, $id){
 
-        $user = User::where('id', $id)->firstOrFail();
-        $user->estatus_constancia = $request->get('estatus_constancia');
-        $user->update();
+        if($request->get('fecha_certificaion') == NULL){
+            $user = User::where('id', $id)->firstOrFail();
+            $user->estatus_constancia = $request->get('estatus_constancia');
+            $user->update();
+        }else{
+            $user = User::where('id', $id)->firstOrFail();
+            $user->fecha_certificaion = $request->get('fecha_certificaion');
+            $user->estatus_constancia = 'Fecha aprobada';
+            $user->update();
+        }
 
         return redirect()->back()->with('success', 'Estatus editado con exito.');
     }

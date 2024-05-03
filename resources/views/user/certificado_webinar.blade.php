@@ -72,7 +72,7 @@
 
 
                         <div id="contenedor_firma">
-                            @if ($cliente->Documentos->firma)
+                            @if ($cliente->Documentos)
                                 <p class="text-center ">
                                     <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->firma) }}" alt="Imagen" style="width: 100%;height: auto;"/><br>
                                 </p>
@@ -114,27 +114,29 @@
                             </div>
 
                             <div id="contenedor_ine">
-                                @if (pathinfo($cliente->Documentos->ine, PATHINFO_EXTENSION) == 'pdf')
-                                    <p class="text-center ">
-                                        <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine)}}" style="width: 60%; height: auto"></iframe>
-                                    </p>
-                                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
-                                    @elseif (pathinfo($cliente->Documentos->ine, PATHINFO_EXTENSION) == 'doc')
-                                    <p class="text-center ">
-                                        <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: auto"/>
-                                    </p>
-                                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
-                                    @elseif (pathinfo($cliente->Documentos->ine, PATHINFO_EXTENSION) == 'docx')
-                                    <p class="text-center ">
-                                        <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: auto"/>
-                                    </p>
-                                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
-                                    @else
-                                        <p class="text-center mt-2">
-                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" alt="Imagen" style="width: 50%;height: auto;"/><br>
+                                @if ($cliente->Documentos)
+                                    @if (pathinfo($cliente->Documentos->ine, PATHINFO_EXTENSION) == 'pdf')
+                                        <p class="text-center ">
+                                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine)}}" style="width: 60%; height: auto"></iframe>
                                         </p>
-                                        <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver INE</a>
+                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                        @elseif (pathinfo($cliente->Documentos->ine, PATHINFO_EXTENSION) == 'doc')
+                                        <p class="text-center ">
+                                            <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: auto"/>
+                                        </p>
+                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                        @elseif (pathinfo($cliente->Documentos->ine, PATHINFO_EXTENSION) == 'docx')
+                                        <p class="text-center ">
+                                            <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: auto"/>
+                                        </p>
+                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                        @else
+                                            <p class="text-center mt-2">
+                                                <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" alt="Imagen" style="width: 50%;height: auto;"/><br>
+                                            </p>
+                                            <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver INE</a>
                                     @endif
+                                @endif
 
                             </div>
                         </div>
@@ -147,27 +149,28 @@
                             </div>
 
                             <div id="contenedor_curp">
-
-                                @if (pathinfo($cliente->Documentos->curp, PATHINFO_EXTENSION) == 'pdf')
-                                <p class="text-center ">
-                                    <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp)}}" style="width: 60%; height: auto;"></iframe>
-                                </p>
-                                        <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
-                                @elseif (pathinfo($cliente->Documentos->curp, PATHINFO_EXTENSION) == 'doc')
-                                <p class="text-center ">
-                                    <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: auto;"/>
-                                </p>
-                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
-                                @elseif (pathinfo($cliente->Documentos->curp, PATHINFO_EXTENSION) == 'docx')
-                                <p class="text-center ">
-                                    <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: auto;"/>
-                                </p>
-                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
-                                @else
-                                    <p class="text-center mt-2">
-                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" alt="Imagen" style="width: 50%;height: auto;"/><br>
-                                    </p>
-                                        <a class="text-center text-dark btn btn-sm mb-5" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver CURP</a>
+                                @if ($cliente->Documentos)
+                                    @if (pathinfo($cliente->Documentos->curp, PATHINFO_EXTENSION) == 'pdf')
+                                        <p class="text-center ">
+                                            <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp)}}" style="width: 60%; height: auto;"></iframe>
+                                        </p>
+                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                        @elseif (pathinfo($cliente->Documentos->curp, PATHINFO_EXTENSION) == 'doc')
+                                        <p class="text-center ">
+                                            <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: auto;"/>
+                                        </p>
+                                        <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                        @elseif (pathinfo($cliente->Documentos->curp, PATHINFO_EXTENSION) == 'docx')
+                                        <p class="text-center ">
+                                            <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: auto;"/>
+                                        </p>
+                                        <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                        @else
+                                        <p class="text-center mt-2">
+                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" alt="Imagen" style="width: 50%;height: auto;"/><br>
+                                        </p>
+                                            <a class="text-center text-dark btn btn-sm mb-5" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver CURP</a>
+                                    @endif
                                 @endif
                             </div>
 

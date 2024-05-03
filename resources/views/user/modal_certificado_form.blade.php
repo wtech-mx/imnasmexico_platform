@@ -95,12 +95,14 @@
                 @else
                     <div class="col-12">
                         <h2 class="text-center">En revision</h2>
-                        <p class="mt-3 mb-2">En el un maximo de 72 horas nos estariamos contactando contigo</p>
-                        <p class="mb-3">Seleciona la fecha <strong>tentativa</strong> en la que quieres que se te evalue.</p>
-                        <div class="input-group">
-                        <span class="input-group-text" id="basic-addon3"><img src="{{asset('assets/user/icons/read.png')}}" style="width: 40px"></span>
-                        <input type="date" class="form-control" name="fecha" required>
-                        </div>
+                        <p class="mt-3 mb-2">En un maximo de 72 horas nos estariamos contactando contigo.</p>
+                        @if ($cliente->estatus_constancia == 'Seleccion de fecha tentativa')
+                            <p class="mb-3">Seleciona la fecha <strong>tentativa</strong> en la que quieres que se te evalue.</p>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon3"><img src="{{asset('assets/user/icons/read.png')}}" style="width: 40px"></span>
+                                <input type="date" class="form-control" name="fecha_tentativa">
+                            </div>
+                        @endif
                     </div>
                 @endif
 
@@ -108,7 +110,9 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar para corregir mis documentos cargados</button>
-            <button type="submit" class="btn btn-primary">Guardar</button>
+                @if ($cliente->estatus_constancia == 'documentos' || $cliente->estatus_constancia == 'Seleccion de fecha tentativa')
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                @endif
             </div>
         </form>
       </div>
