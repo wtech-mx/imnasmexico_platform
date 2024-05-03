@@ -11,6 +11,9 @@
             <input type="hidden" name="_method" value="PATCH">
             <div class="modal-body row">
 
+                @if ($cliente->estatus_constancia == 'documentos')
+
+
                 <div class="mb-4 col-6">
                     <label for="basic-url" class="form-label" style="font-weight: 700;">Nombre *</label>
                     <div class="input-group">
@@ -88,6 +91,18 @@
                     </select>
                     </div>
                 </div>
+
+                @else
+                    <div class="col-12">
+                        <h2 class="text-center">En revision</h2>
+                        <p class="mt-3 mb-2">En el un maximo de 72 horas nos estariamos contactando contigo</p>
+                        <p class="mb-3">Seleciona la fecha <strong>tentativa</strong> en la que quieres que se te evalue.</p>
+                        <div class="input-group">
+                        <span class="input-group-text" id="basic-addon3"><img src="{{asset('assets/user/icons/read.png')}}" style="width: 40px"></span>
+                        <input type="date" class="form-control" name="fecha" required>
+                        </div>
+                    </div>
+                @endif
 
             </div>
 

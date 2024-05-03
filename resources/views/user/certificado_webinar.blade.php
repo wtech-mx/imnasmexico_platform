@@ -22,7 +22,6 @@
 
 <section class="primario bg_overley " style="background-color:#F5ECE4;">
 
-    @if ($cliente->estatus_constancia == 'documentos')
         <form role="form" action="{{ route('perfil.update_certificaion', $cliente->code) }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="_method" value="PATCH">
@@ -78,6 +77,7 @@
                                     <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->firma) }}" alt="Imagen" style="width: 100%;height: auto;"/><br>
                                 </p>
                             @else
+                        </div>
 
                             <div class="row">
                                 <div class="col-md-12">
@@ -186,11 +186,7 @@
 
             </div>
         </form>
-    @else
-        <div class="row" style="margin-top: 10rem !important;">
-            <h1>En espera de revision de documentos</h1>
-        </div>
-    @endif
+
 
 </section>
 @include('user.modal_certificado_form')
