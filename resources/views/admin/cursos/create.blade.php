@@ -300,6 +300,14 @@
                                                     </div>
                                                 </div>
 
+
+                                                <div class="form-check col-3">
+                                                    <label for="nota">Certificacion Webinar</label>
+                                                    <div class="form-group">
+                                                        <input class="form-check-input" type="checkbox" value="1" id="certificacion_webinar" name="certificacion_webinar" >
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-check col-2">
                                                     <label for="nota">Publicar</label>
                                                     <div class="form-group">

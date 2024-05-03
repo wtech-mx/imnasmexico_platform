@@ -395,6 +395,13 @@ class PagosFueraController extends Controller
             }
             $order_ticket->save();
 
+            if($order_ticket->Cursos->certificacion_webinar == 1){
+                $user_certificacion = User::where('id', $order_ticket->User->id)->first();
+                $user_certificacion->estatus_constancia = 1;
+                $user_certificacion->agendar_cita = 1;
+                $user_certificacion->update();
+            }
+
             if($request->get('campo2') != NULL){
                 $order_ticket2 = new OrdersTickets;
                 $order_ticket2->id_order = $order->id;
@@ -797,6 +804,13 @@ class PagosFueraController extends Controller
         $orden->id_curso = $request->get('curso_ticket');
         $orden->id_tickets = $request->get('ticket');
         $orden->update();
+
+        if($orden->Cursos->certificacion_webinar == 1){
+            $user_certificacion = User::where('id', $orden->User->id)->first();
+            $user_certificacion->estatus_constancia = 1;
+            $user_certificacion->agendar_cita = 1;
+            $user_certificacion->update();
+        }
 
         return redirect()->back()
         ->with('success', 'Usuario cambiado con exito.');

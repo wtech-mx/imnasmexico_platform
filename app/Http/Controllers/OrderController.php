@@ -362,6 +362,13 @@ class OrderController extends Controller
                         Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
                     }
 
+                    if($details->Cursos->certificacion_webinar == 1){
+                        $user_certificacion = User::where('id', $order->User->id)->first();
+                        $user_certificacion->estatus_constancia = 1;
+                        $user_certificacion->agendar_cita = 1;
+                        $user_certificacion->update();
+                    }
+
                     if($details->CursosTickets->descripcion == 'Con opción a Documentos de certificadora IMNAS'){
 
                     }else{
@@ -574,6 +581,13 @@ class OrderController extends Controller
             $facturas->estatus = $estado;
             $facturas->save();
 
+            if($orden_ticket2->Cursos->certificacion_webinar == 1){
+                $user_certificacion = User::where('id', $orden_ticket2->User->id)->first();
+                $user_certificacion->estatus_constancia = 1;
+                $user_certificacion->agendar_cita = 1;
+                $user_certificacion->update();
+            }
+
         } else {
             $order = Orders::find($order->id);
             $order->num_order = $stripe->id;
@@ -640,6 +654,13 @@ class OrderController extends Controller
         $order_ticket->id_usuario = $payer->id;
         $order_ticket->id_curso = $request->curso;
         $order_ticket->save();
+
+        if($order_ticket->Cursos->certificacion_webinar == 1){
+            $user_certificacion = User::where('id', $order_ticket->User->id)->first();
+            $user_certificacion->estatus_constancia = 1;
+            $user_certificacion->agendar_cita = 1;
+            $user_certificacion->update();
+        }
 
         // Enviar el correo electrónico
         $datos = User::where('id', '=', $payer->id)->first();
@@ -751,6 +772,13 @@ class OrderController extends Controller
         $order_ticket->id_usuario = $payer->id;
         $order_ticket->id_curso = $curso->id;
         $order_ticket->save();
+
+        if($order_ticket->Cursos->certificacion_webinar == 1){
+            $user_certificacion = User::where('id', $order_ticket->User->id)->first();
+            $user_certificacion->estatus_constancia = 1;
+            $user_certificacion->agendar_cita = 1;
+            $user_certificacion->update();
+        }
 
         // Enviar el correo electrónico
         $datos = User::where('id', '=', $payer->id)->first();

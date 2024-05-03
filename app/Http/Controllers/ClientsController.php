@@ -281,7 +281,51 @@ class ClientsController extends Controller
         // Obtener los datos de los estándares
         $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
-        return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
+        if($cliente->estatus_constancia == 1){
+            return view('user.certificado_webinar');
+        }else{
+            return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
+        }
+
+    }
+
+    public function update_certificaion(Request $request, $code)
+    {
+        $cliente = User::where('code', $code)->first();
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_estandar = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $cliente->telefono);
+        }else{
+            $ruta_estandar = public_path() . '/documentos/' . $cliente->telefono;
+        }
+
+        $documentos_id = Documentos::where('id_usuario','=',$cliente->id)->first();
+        if($documentos_id == null){
+            $documento = new Documentos;
+            $documento->id_usuario = $cliente->id;
+
+            $file = $request->file('ine');
+            $path = $ruta_estandar;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $documento->ine = $fileName;
+            $documento->save();
+        }
+
+        if($documentos_id->id_usuario == $cliente->id){
+            $documento = Documentos::find($documentos_id->id);
+
+            $file = $request->file('ine');
+            $path = $ruta_estandar;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $documento->ine = $fileName;
+            $documento->save();
+        }
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->route('perfil.index', $code)
+            ->with('success', 'usuario editado con exito.');
     }
 
     public function update(Request $request, $code)

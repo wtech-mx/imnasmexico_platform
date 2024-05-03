@@ -148,6 +148,7 @@ class CursosController extends Controller
         $curso->hora_final = $request->get('hora_final');
         $curso->categoria = $request->get('categoria');
         $curso->modalidad = $request->get('modalidad');
+        $curso->certificacion_webinar = $request->get('certificacion_webinar');
         $curso->objetivo = $request->get('objetivo');
         $curso->temario = $request->get('temario');
         $curso->sep = $request->get('sep');
@@ -305,6 +306,7 @@ class CursosController extends Controller
         $curso->hora_inicial = $request->get('hora_inicial');
         $curso->fecha_final = $request->get('fecha_final');
         $curso->hora_final = $request->get('hora_final');
+        $curso->certificacion_webinar = $request->get('certificacion_webinar');
         $curso->categoria = $request->get('categoria');
         $curso->modalidad = $request->get('modalidad');
         $curso->objetivo = $request->get('objetivo');

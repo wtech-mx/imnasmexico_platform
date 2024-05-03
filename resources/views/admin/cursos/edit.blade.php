@@ -345,6 +345,17 @@
                                                     </div>
                                                 </div>
 
+                                                <div class="form-check col-3">
+                                                    <label for="nota">Certificacion Webinar</label>
+                                                    <div class="form-group">
+                                                        @if ($curso->certificacion_webinar == 1)
+                                                            <input class="form-check-input" type="checkbox" value="1" id="certificacion_webinar" name="certificacion_webinar" checked>
+                                                        @else
+                                                            <input class="form-check-input" type="checkbox" value="1" id="certificacion_webinar" name="certificacion_webinar" >
+                                                        @endif
+                                                    </div>
+                                                </div>
+
                                                 <div class="form-check col-2">
                                                     <label for="nota">Publicar</label>
                                                     <div class="form-group">
