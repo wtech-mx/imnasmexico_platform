@@ -78,6 +78,11 @@ Route::get('sede', function () {
     return view('emails.documento_stps');
 });
 
+Route::get('certificado_webinar', function () {
+    return view('user.certificado_webinar');
+});
+
+
 
 Auth::routes();
 
