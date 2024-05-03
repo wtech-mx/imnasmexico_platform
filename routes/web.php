@@ -301,6 +301,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/facturas', [App\Http\Controllers\FacturasController::class, 'index'])->name('facturas.index');
     Route::patch('/admin/facturas/update/{id}', [App\Http\Controllers\FacturasController::class, 'update'])->name('facturas.update');
 
+    Route::post('/admin/borrar/usuarios', [App\Http\Controllers\ClientsController::class, 'destroy'])->name('usuarios.destroy');
+
     // =============== M O D U L O   Cupones ===============================
     Route::get('/admin/marketing/cupones', [App\Http\Controllers\MarketingController::class, 'index_cupon'])->name('cupones.index');
     Route::post('/admin/marketing/cupones/store', [App\Http\Controllers\MarketingController::class, 'store_cupon'])->name('cupones.store');

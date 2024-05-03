@@ -45,6 +45,28 @@
                                             </div>
                                     </div>
                                 </form>
+                                @can('borrar-usuarios')
+                                <form action="{{ route('usuarios.destroy') }}" method="POST" >
+                                    @csrf
+                                    <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
+                                        <h5>Borrar</h5>
+                                            <div class="row">
+                                                <div class="col-3">
+                                                    <select class="form-control cliente" name="id_client_borrar[]" id="id_client_borrar[]" multiple>
+                                                        @foreach($clientes as $client)
+                                                            <option value="{{ $client->id }}">{{ $client->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-3">
+                                                    <br>
+                                                    <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #F82018; color: #ffffff;">Borrar</button>
+                                                </div>
+                                            </div>
+                                    </div>
+                                </form>
+                                @endcan
+
                         </div>
                     </div>
                 </div>
