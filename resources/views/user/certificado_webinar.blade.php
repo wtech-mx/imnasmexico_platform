@@ -120,7 +120,7 @@
     </form>
 
 </section>
-
+@include('user.modal_certificado_form')
 @endsection
 
 @section('js')
