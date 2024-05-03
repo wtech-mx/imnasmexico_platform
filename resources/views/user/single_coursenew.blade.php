@@ -671,6 +671,34 @@
                                         </p>
                                     </div>
                                 @endif
+                                @if ($curso->nombre == 'Mes Becario EC0046')
+                                    <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card_certificaciones" style="position: relative">
+                                                    <a class="text-center" >
+                                                        <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                    </a>
+                                            </div>
+                                        </div>
+                                        <p class="text-center">
+                                            EC0046 - Prestación de servicios Cosmetológicos Faciales
+                                        </p>
+                                    </div>
+                                @endif
+                                @if ($curso->nombre == 'Mes Becario EC0010')
+                                    <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                        <div class="d-flex justify-content-center">
+                                            <div class="card_certificaciones" style="position: relative">
+                                                    <a class="text-center" >
+                                                        <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                    </a>
+                                            </div>
+                                        </div>
+                                        <p class="text-center">
+                                            EC0010 - Prestación de Servicios Estéticos Corporales 
+                                        </p>
+                                    </div>
+                                @endif
 
                                 @if($curso->sep == 1)
                                     <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
@@ -904,7 +932,13 @@
                         <p class="text_cards_horizon">
                             Si no te es posible realizar el pago por medio de la página,
                             lo podrás hacer mediante estas cuentas enviando tu comprobante al
-                            siguiente número de WhatsApp: <a href="tel:+52 1 55 3116 7046" target="_blank" r>55 3116 7046</a> con tu nombre completo y nombre del curso y/o diplomado que elegiste.
+                            siguiente número de WhatsApp:
+                            @if ($curso->nombre == 'Mes Becario EC0010' || $curso->nombre == 'Mes Becario EC0046')
+                                <a href="tel:+52 1 55 2220 8900" target="_blank" r>55 2220 8900</a>
+                            @else
+                                <a href="tel:+52 1 55 3116 7046" target="_blank" r>55 3116 7046</a>
+                            @endif
+                            con tu nombre completo y nombre del curso y/o diplomado que elegiste.
                         </p>
                     </div>
                     <div class="col-12">
