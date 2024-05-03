@@ -293,6 +293,14 @@ class ClientsController extends Controller
 
     }
 
+
+    public function index_certificados_webinar(){
+
+
+        return view('admin.certificacion_webinar.index');
+
+    }
+
     public function update_certificaion(Request $request, $code)
     {
         $cliente = User::where('code', $code)->first();

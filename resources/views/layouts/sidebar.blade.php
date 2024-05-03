@@ -110,6 +110,15 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link {{ (Request::is('/admin/certificaciones/webinar/*') ? 'active' : '') }}" href="{{ route('index.certificados_wbinar') }}" target="">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-home text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Certificacion Webinar</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a class="nav-link {{ (Request::is('/notas/cam') ? 'active' : '') }}" href="{{ route('notascam.index') }}" target="">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-spinner text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>

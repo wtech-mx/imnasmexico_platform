@@ -140,6 +140,7 @@ Route::get('perfil/{code}', [App\Http\Controllers\ClientsController::class, 'ind
 Route::get('perfil/user/{id}', [App\Http\Controllers\ClientsController::class, 'show'])->name('perfil.show');
 Route::patch('/perfil/certificaion/update/{code}', [App\Http\Controllers\ClientsController::class, 'update_certificaion'])->name('perfil.update_certificaion');
 
+
 Route::patch('/perfil/update/{code}', [App\Http\Controllers\ClientsController::class, 'update'])->name('perfil.update');
 Route::match(['post', 'patch'],'clientes/documentos/{id}', [App\Http\Controllers\ClientsController::class, 'update_documentos_cliente'])->name('clientes.update_documentos_cliente');
 Route::post('clientes/documentos/estandar/{id}', [App\Http\Controllers\ClientsController::class, 'documentos_estandares_cliente'])->name('documentos.store_cliente');
@@ -157,6 +158,8 @@ Route::post('/eliminar-documento/{id}/{tipo}', [App\Http\Controllers\ClientsCont
 Route::get('/nota/curso', [App\Http\Controllers\NotasCursosController::class, 'index_user'])->name('notas.index_user');
 
 Route::group(['middleware' => ['auth']], function() {
+
+    Route::get('/admin/certificaciones/webinar/', [App\Http\Controllers\ClientsController::class, 'index_certificados_webinar'])->name('index.certificados_wbinar');
 
     // =============== M O D U L O   P A Q U E T E S ===============================
     Route::get('/admin/paquetes', [App\Http\Controllers\PaquetesController::class, 'index'])->name('paquetes.index');
