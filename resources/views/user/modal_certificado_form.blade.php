@@ -1,10 +1,10 @@
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel">Formulario</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <form role="form" action="{{ route('perfil.formulario', $cliente->code) }}" method="post" enctype="multipart/form-data">
             @csrf
@@ -92,6 +92,7 @@
             </div>
 
             <div class="modal-footer">
+                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Cerrar para corregir mis documentos cargados</button>
             <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
         </form>

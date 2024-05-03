@@ -27,9 +27,7 @@
             @csrf
             <input type="hidden" name="_method" value="PATCH">
             <div class="row" style="margin-top: 10rem !important;">
-                <div class="col-6">
-
-                    <img src="" alt="">
+                <div class="col-12 col-md-6 col-lg-6">
 
                     <h3 class="text-center titulomin_alfa mb-3">Carta Compromiso</h3>
 
@@ -73,16 +71,27 @@
                             documento.
                         </p>
 
-                        <div class="row">
-                            <div class="col-md-12">
-                                <label class="" for="">Signature:</label>
+
+                        <div id="contenedor_firma">
+                            @if ($cliente->Documentos->firma)
+                                <p class="text-center ">
+                                    <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->firma) }}" alt="Imagen" style="width: 100%;height: auto;"/><br>
+                                </p>
+                            @else
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="" for="">Signature:</label>
+                                    <br/>
+                                    <div id="sig" ></div>
+                                    <br/>
+                                    <button id="clear" class="btn btn-danger btn-sm">Repetir Firma</button>
+                                    <textarea id="signature64" name="signed" style="display: none"></textarea>
+                                </div>
                                 <br/>
-                                <div id="sig" ></div>
-                                <br/>
-                                <button id="clear" class="btn btn-danger btn-sm">Repetir Firma</button>
-                                <textarea id="signature64" name="signed" style="display: none"></textarea>
                             </div>
-                            <br/>
+
+                            @endif
                         </div>
 
                         <hr style="height: 4px;background: black;margin-bottom: 10px;">
@@ -93,7 +102,7 @@
 
                 </div>
 
-                <div class="col-6">
+                <div class="col-12 col-md-6 col-lg-6">
                     <h3 class="text-center titulomin_alfa mb-3">Documentacion</h3>
 
                         <div class="mb-3 col-12">
@@ -103,6 +112,31 @@
                             </span>
                             <input id="ine" name="ine" type="file" class="form-control " >
                             </div>
+
+                            <div id="contenedor_ine">
+                                @if (pathinfo($cliente->Documentos->ine, PATHINFO_EXTENSION) == 'pdf')
+                                    <p class="text-center ">
+                                        <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine)}}" style="width: 60%; height: auto"></iframe>
+                                    </p>
+                                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                    @elseif (pathinfo($cliente->Documentos->ine, PATHINFO_EXTENSION) == 'doc')
+                                    <p class="text-center ">
+                                        <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: auto"/>
+                                    </p>
+                                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                    @elseif (pathinfo($cliente->Documentos->ine, PATHINFO_EXTENSION) == 'docx')
+                                    <p class="text-center ">
+                                        <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: auto"/>
+                                    </p>
+                                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                    @else
+                                        <p class="text-center mt-2">
+                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" alt="Imagen" style="width: 50%;height: auto;"/><br>
+                                        </p>
+                                        <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver INE</a>
+                                    @endif
+
+                            </div>
                         </div>
 
                         <div class="mb-3 col-12">
@@ -111,12 +145,43 @@
                             <span class="input-group-text" id="basic-addon3"><img src="{{asset('assets/user/icons/carta.png')}}" style="width: 40px"></span>
                             <input id="curp" name="curp" type="file" class="form-control" >
                             </div>
+
+                            <div id="contenedor_curp">
+
+                                @if (pathinfo($cliente->Documentos->curp, PATHINFO_EXTENSION) == 'pdf')
+                                <p class="text-center ">
+                                    <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp)}}" style="width: 60%; height: auto;"></iframe>
+                                </p>
+                                        <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                @elseif (pathinfo($cliente->Documentos->curp, PATHINFO_EXTENSION) == 'doc')
+                                <p class="text-center ">
+                                    <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: auto;"/>
+                                </p>
+                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                @elseif (pathinfo($cliente->Documentos->curp, PATHINFO_EXTENSION) == 'docx')
+                                <p class="text-center ">
+                                    <img id="blah" src="{{asset('assets/user/icons/docx.png') }}" alt="Imagen" style="width: 60px; height: auto;"/>
+                                </p>
+                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Descargar</a>
+                                @else
+                                    <p class="text-center mt-2">
+                                        <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" alt="Imagen" style="width: 50%;height: auto;"/><br>
+                                    </p>
+                                        <a class="text-center text-dark btn btn-sm mb-5" href="{{asset('documentos/'. $cliente->telefono . '/' .$cliente->Documentos->curp) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver CURP</a>
+                                @endif
+                            </div>
+
+                            <button type="submit mt-5" class="btn btn-success w-100">Guardar</button>
+
                         </div>
 
-                        <button type="submit" class="btn btn-success">Guardar</button>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Launch demo modal
-                        </button>
+                        <div class="col-12 d-flex align-item-center">
+
+                            <a type="button" class="btn btn-danger" id="btnAbrirModal" style="display: none;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Ingresar Datos de Acadamicos
+                            </a>
+                        </div>
+
                 </div>
 
             </div>
@@ -145,6 +210,29 @@
         sig.signature('clear');
         $("#signature64").val('');
     });
+
+    // Obtener los datos del cliente desde PHP
+    var datosCliente = {!! json_encode($datosCliente) !!};
+
+    // Verificar si los campos necesarios están completos
+    function verificarCamposCompletos() {
+        // Verificar si todos los campos están completos
+        if (datosCliente.ine && datosCliente.curp && datosCliente.firma) {
+            // Activar el modal
+            var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+            modal.show();
+            document.getElementById('btnAbrirModal').style.display = 'block';
+        }else{
+            document.getElementById('btnAbrirModal').style.display = 'none';
+        }
+    }
+
+    // Llamar a la función al cargar la página
+    window.onload = function() {
+        verificarCamposCompletos();
+    };
+
+
 </script>
 
 @endsection

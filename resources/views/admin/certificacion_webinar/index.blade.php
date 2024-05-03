@@ -49,26 +49,26 @@
                             <tr>
                                 <td>
                                     <ul>
-                                        <li><strong>Nombre : {{$cliente->name}} </strong></li>
-                                        <li><strong>Telefono : {{$cliente->telefono}}</strong></li>
-                                        <li><strong>Correo : {{$cliente->email}}</strong></li>
+                                        <li><strong>Nombre : </strong>{{$cliente->name}} </li>
+                                        <li><strong>Telefono : </strong>{{$cliente->telefono}}</li>
+                                        <li><strong>Correo : </strong>{{$cliente->email}}</li>
                                     </ul>
                                 </td>
 
                                 <td>
                                     <ul>
-                                        <li><strong>Profesion : {{$cliente->puesto}}</strong></li>
-                                        <li><strong>Edad : {{$cliente->edad}}</strong></li>
-                                        <li><strong>Ciudad : {{$cliente->city}}</strong></li>
+                                        <li><strong>Profesion : </strong>{{$cliente->puesto}}</li>
+                                        <li><strong>Edad : </strong>{{$cliente->edad}}</li>
+                                        <li><strong>Ciudad : </strong>{{$cliente->city}}</li>
                                     </ul>
                                 </td>
 
                                 <td>
                                     <ul>
-                                        <li><strong>Especialidad : {{$cliente->especialidad}}</strong></li>
-                                        <li><strong>Sector de productividad : {{$cliente->sector_productividad}}</strong></li>
-                                        <li><strong>Como impartes Cursos : {{$cliente->manera_cursos}}</strong></li>
-                                        <li><strong>Modalidad : {{$cliente->modalidad_cursos}}</strong></li>
+                                        <li><strong>Especialidad : </strong>{{$cliente->especialidad}}</li>
+                                        <li><strong>Sector de productividad : </strong>{{$cliente->sector_productividad}}</li>
+                                        <li><strong>Como impartes Cursos : </strong>{{$cliente->manera_cursos}}</li>
+                                        <li><strong>Modalidad : </strong>{{$cliente->modalidad_cursos}}</li>
                                     </ul>
                                 </td>
 
