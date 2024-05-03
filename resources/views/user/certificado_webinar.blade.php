@@ -22,7 +22,7 @@
 
 <section class="primario bg_overley " style="background-color:#F5ECE4;">
 
-    <form role="form" action="{{ route('perfil.update_certificaion', $cliente->code) }}" method="post">
+    <form role="form" action="{{ route('perfil.update_certificaion', $cliente->code) }}" method="post" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="_method" value="PATCH">
         <div class="row" style="margin-top: 10rem !important;">
@@ -100,7 +100,7 @@
                         <div class="input-group">
                         <span class="input-group-text" id="basic-addon3"><img src="{{asset('assets/user/icons/tarjeta-de-identificacion.png')}}" style="width: 40px">
                         </span>
-                        <input id="ine" name="ine" type="file" class="form-control curp_input" >
+                        <input id="ine" name="ine" type="file" class="form-control " >
                         </div>
                     </div>
 
@@ -108,11 +108,11 @@
                         <label for="basic-url" class="form-label">CURP *</label>
                         <div class="input-group">
                         <span class="input-group-text" id="basic-addon3"><img src="{{asset('assets/user/icons/carta.png')}}" style="width: 40px"></span>
-                        <input id="curp" name="curp" type="file" class="form-control curp_input" >
+                        <input id="curp" name="curp" type="file" class="form-control" >
                         </div>
                     </div>
 
-                    <button class="btn btn-success">Guardar</button>
+                    <button type="submit" class="btn btn-success">Guardar</button>
 
             </div>
 

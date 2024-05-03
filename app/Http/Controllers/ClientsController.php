@@ -126,7 +126,11 @@ class ClientsController extends Controller
         // Obtener los datos de los estándares
         $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
-        return view('user.profilenew',compact('carpetas_carta', 'clase_grabada','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
+        if($cliente->estatus_constancia == 1){
+            return view('user.certificado_webinar',compact('cliente'));
+        }else{
+            return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
+        }
     }
 
     public function eliminarDocumento($documentoId){
@@ -282,7 +286,7 @@ class ClientsController extends Controller
         $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
         if($cliente->estatus_constancia == 1){
-            return view('user.certificado_webinar');
+            return view('user.certificado_webinar',compact('cliente'));
         }else{
             return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
         }
@@ -304,23 +308,71 @@ class ClientsController extends Controller
             $documento = new Documentos;
             $documento->id_usuario = $cliente->id;
 
-            $file = $request->file('ine');
-            $path = $ruta_estandar;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $documento->ine = $fileName;
+            if($request->signed != NULL){
+                $folderPath = $ruta_estandar; // create signatures folder in public directory
+                $image_parts = explode(";base64,", $request->signed);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+                $signature = uniqid() . '.'.$image_type;
+                $file = $folderPath . $signature;
+
+                file_put_contents($file, $image_base64);
+                $documento->firma = $signature;
+            }
+
+            if($request->hasFile("ine")){
+                $file = $request->file('ine');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documento->ine = $fileName;
+            }
+
+            if($request->hasFile("curp")){
+                $file = $request->file('curp');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documento->curp = $fileName;
+            }
+
             $documento->save();
         }
 
         if($documentos_id->id_usuario == $cliente->id){
             $documento = Documentos::find($documentos_id->id);
 
-            $file = $request->file('ine');
-            $path = $ruta_estandar;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $documento->ine = $fileName;
-            $documento->save();
+            if($request->signed != NULL){
+                $folderPath = $ruta_estandar; // create signatures folder in public directory
+                $image_parts = explode(";base64,", $request->signed);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+                $signature = uniqid() . '.'.$image_type;
+                $file = $folderPath . $signature;
+
+                file_put_contents($file, $image_base64);
+                $documento->firma = $signature;
+            }
+
+            if($request->hasFile("ine")){
+                $file = $request->file('ine');
+                $path = $ruta_estandar;
+                $fileName2 = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName2);
+                $documento->ine = $fileName2;
+            }
+
+            if($request->hasFile("curp")){
+                $file = $request->file('curp');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documento->curp = $fileName;
+            }
+
+            $documento->update();
         }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
