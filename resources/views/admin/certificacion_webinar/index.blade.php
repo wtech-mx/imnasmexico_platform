@@ -16,7 +16,7 @@
 
                     <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
 
-                    <h3 class="mb-3">Envios</h3>
+                    <h3 class="mb-3">Certificaciones Webinar</h3>
 
                     <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                         ¿Como funciona?
@@ -77,9 +77,6 @@
                                     Estatus
                                 </button>
                                 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
                             </td>
 
                             <td></td>

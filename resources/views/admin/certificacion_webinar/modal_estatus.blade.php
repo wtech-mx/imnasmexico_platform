@@ -16,8 +16,13 @@
                         <label for="basic-url" class="form-label" style="font-weight: 700;">Estatus *</label>
                         <div class="input-group">
                             <select name="" id="" class="form-select">
-                                <option value="">Aprovado</option>
-                                <option value="">En Espera</option>
+
+                                <option value="">Revision de Documentos</option>
+                                <option value="">Documentos Rechazados</option>
+                                <option value="">Formualario Realizado</option>
+                                <option value="">Seleccion de fecha tentativa</option>
+                                <option value="">Aprovacion de fecha</option>
+
                             </select>
                         </div>
                     </div>
