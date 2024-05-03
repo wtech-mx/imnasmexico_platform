@@ -45,44 +45,45 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <ul>
-                                    <li><strong>Nombre :</strong></li>
-                                    <li><strong>Telefono :</strong></li>
-                                    <li><strong>Correo :</strong></li>
-                                    <li><strong>Telefono :</strong></li>
-                                </ul>
-                            </td>
+                        @foreach ($clientes as $cliente)
+                            <tr>
+                                <td>
+                                    <ul>
+                                        <li><strong>Nombre : {{$cliente->name}} </strong></li>
+                                        <li><strong>Telefono : {{$cliente->telefono}}</strong></li>
+                                        <li><strong>Correo : {{$cliente->email}}</strong></li>
+                                    </ul>
+                                </td>
 
-                            <td>
-                                <ul>
-                                    <li><strong>Profesion :</strong></li>
-                                    <li><strong>Edad :</strong></li>
-                                    <li><strong>Ciudad :</strong></li>
-                                </ul>
-                            </td>
+                                <td>
+                                    <ul>
+                                        <li><strong>Profesion : {{$cliente->puesto}}</strong></li>
+                                        <li><strong>Edad : {{$cliente->edad}}</strong></li>
+                                        <li><strong>Ciudad : {{$cliente->city}}</strong></li>
+                                    </ul>
+                                </td>
 
-                            <td>
-                                <ul>
-                                    <li><strong>Especialidad :</strong></li>
-                                    <li><strong>Sector de productividad :</strong></li>
-                                    <li><strong>Como impartes Cursos :</strong></li>
-                                    <li><strong>Modalidad :</strong></li>
-                                </ul>
-                            </td>
+                                <td>
+                                    <ul>
+                                        <li><strong>Especialidad : {{$cliente->especialidad}}</strong></li>
+                                        <li><strong>Sector de productividad : {{$cliente->sector_productividad}}</strong></li>
+                                        <li><strong>Como impartes Cursos : {{$cliente->manera_cursos}}</strong></li>
+                                        <li><strong>Modalidad : {{$cliente->modalidad_cursos}}</strong></li>
+                                    </ul>
+                                </td>
 
-                            <td>
-                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_estatus">
-                                    Estatus
-                                </button>
-                                <!-- Button trigger modal -->
-                            </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal_estatus{{$cliente->id}}">
+                                        {{$cliente->estatus_constancia}}
+                                    </button>
+                                    <!-- Button trigger modal -->
+                                </td>
 
-                            <td></td>
+                                <td></td>
 
-                        </tr>
-                        @include('admin.certificacion_webinar.modal_estatus')
+                            </tr>
+                            @include('admin.certificacion_webinar.modal_estatus')
+                        @endforeach
                     </tbody>
 
                 </table>

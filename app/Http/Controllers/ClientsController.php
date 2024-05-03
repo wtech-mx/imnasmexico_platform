@@ -126,7 +126,7 @@ class ClientsController extends Controller
         // Obtener los datos de los estándares
         $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
-        if($cliente->estatus_constancia == 1){
+        if($cliente->estatus_constancia == 'documentos' || $cliente->estatus_constancia == 'revision de datos'){
             return view('user.certificado_webinar',compact('cliente'));
         }else{
             return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
@@ -285,19 +285,11 @@ class ClientsController extends Controller
         // Obtener los datos de los estándares
         $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
-        if($cliente->estatus_constancia == 1){
+        if($cliente->estatus_constancia == 'documentos' || $cliente->estatus_constancia == 'revision de datos'){
             return view('user.certificado_webinar',compact('cliente'));
         }else{
             return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
         }
-
-    }
-
-
-    public function index_certificados_webinar(){
-
-
-        return view('admin.certificacion_webinar.index');
 
     }
 
@@ -382,6 +374,24 @@ class ClientsController extends Controller
 
             $documento->update();
         }
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->route('perfil.index', $code)
+            ->with('success', 'usuario editado con exito.');
+    }
+
+    public function formulario(Request $request, $code){
+        $user = User::where('code', $code)->firstOrFail();
+        $user->name = $request->get('nombre') . ' ' . $request->get('apellido');
+        $user->puesto = $request->get('puesto');
+        $user->edad = $request->get('edad');
+        $user->city = $request->get('city');
+        $user->especialidad = $request->get('especialidad');
+        $user->sector_productividad = $request->get('sector_productividad');
+        $user->manera_cursos = $request->get('manera_cursos');
+        $user->modalidad_cursos = $request->get('modalidad_cursos');
+        $user->estatus_constancia = 'revision de datos';
+        $user->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->route('perfil.index', $code)
@@ -733,6 +743,7 @@ class ClientsController extends Controller
         }
         return redirect()->back()->with('success', 'Creado con exito');
     }
+
     // =============== A D M I N ===============================
 
     public function index_admin(){
@@ -969,4 +980,18 @@ class ClientsController extends Controller
         return redirect()->back()->with('success', 'Creado con exito');
     }
 
+    public function index_certificados_webinar(){
+        $clientes = User::where('estatus_constancia', '!=', NULL)->orderBy('id','DESC')->get();
+
+        return view('admin.certificacion_webinar.index',compact('clientes'));
+    }
+
+    public function estatus_update_certificaion(Request $request, $id){
+
+        $user = User::where('id', $id)->firstOrFail();
+        $user->estatus_constancia = $request->get('estatus_constancia');
+        $user->update();
+
+        return redirect()->back()->with('success', 'Estatus editado con exito.');
+    }
 }

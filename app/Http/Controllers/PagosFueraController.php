@@ -397,7 +397,7 @@ class PagosFueraController extends Controller
 
             if($order_ticket->Cursos->certificacion_webinar == 1){
                 $user_certificacion = User::where('id', $order_ticket->User->id)->first();
-                $user_certificacion->estatus_constancia = 1;
+                $user_certificacion->estatus_constancia = 'documentos';
                 $user_certificacion->agendar_cita = 1;
                 $user_certificacion->update();
             }
@@ -807,7 +807,7 @@ class PagosFueraController extends Controller
 
         if($orden->Cursos->certificacion_webinar == 1){
             $user_certificacion = User::where('id', $orden->User->id)->first();
-            $user_certificacion->estatus_constancia = 1;
+            $user_certificacion->estatus_constancia = 'documentos';
             $user_certificacion->agendar_cita = 1;
             $user_certificacion->update();
         }

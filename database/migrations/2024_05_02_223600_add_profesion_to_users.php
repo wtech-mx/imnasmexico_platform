@@ -12,8 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->text('estatus_constancia')->nullable();
-            $table->integer('agendar_cita')->default(0);
+            $table->text('edad')->nullable();
+            $table->text('especialidad')->nullable();
+            $table->text('sector_productividad')->nullable();
+            $table->text('manera_cursos')->nullable();
+            $table->text('modalidad_cursos')->nullable();
         });
     }
 

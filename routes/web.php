@@ -139,7 +139,8 @@ Route::post('remove-coupon', [OrderController::class, 'removeCoupon'])->name('re
 Route::get('perfil/{code}', [App\Http\Controllers\ClientsController::class, 'index'])->name('perfil.index');
 Route::get('perfil/user/{id}', [App\Http\Controllers\ClientsController::class, 'show'])->name('perfil.show');
 Route::patch('/perfil/certificaion/update/{code}', [App\Http\Controllers\ClientsController::class, 'update_certificaion'])->name('perfil.update_certificaion');
-
+Route::patch('/perfil/formulario/{code}', [App\Http\Controllers\ClientsController::class, 'formulario'])->name('perfil.formulario');
+Route::get('/admin/certificaciones/webinar/', [App\Http\Controllers\ClientsController::class, 'index_certificados_webinar'])->name('index.certificados_wbinar');
 
 Route::patch('/perfil/update/{code}', [App\Http\Controllers\ClientsController::class, 'update'])->name('perfil.update');
 Route::match(['post', 'patch'],'clientes/documentos/{id}', [App\Http\Controllers\ClientsController::class, 'update_documentos_cliente'])->name('clientes.update_documentos_cliente');
@@ -153,13 +154,14 @@ Route::get('signout', [App\Http\Controllers\CustomAuthController::class, 'signOu
 Route::post('/eliminar-documento/{documento}', [App\Http\Controllers\ClientsController::class, 'eliminarDocumento'])->name('eliminar.documento');
 Route::post('/eliminar-documento/{id}/{tipo}', [App\Http\Controllers\ClientsController::class, 'eliminarDocumentoPer'])->name('eliminar.documentoper');
 
+Route::patch('/perfil/estatus/certificaion/{id}', [App\Http\Controllers\ClientsController::class, 'estatus_update_certificaion'])->name('estatus_update.certificaion');
 
 // =============== M O D U L O   C U R S O ===============================
 Route::get('/nota/curso', [App\Http\Controllers\NotasCursosController::class, 'index_user'])->name('notas.index_user');
 
 Route::group(['middleware' => ['auth']], function() {
 
-    Route::get('/admin/certificaciones/webinar/', [App\Http\Controllers\ClientsController::class, 'index_certificados_webinar'])->name('index.certificados_wbinar');
+
 
     // =============== M O D U L O   P A Q U E T E S ===============================
     Route::get('/admin/paquetes', [App\Http\Controllers\PaquetesController::class, 'index'])->name('paquetes.index');

@@ -364,7 +364,7 @@ class OrderController extends Controller
 
                     if($details->Cursos->certificacion_webinar == 1){
                         $user_certificacion = User::where('id', $order->User->id)->first();
-                        $user_certificacion->estatus_constancia = 1;
+                        $user_certificacion->estatus_constancia = 'documentos';
                         $user_certificacion->agendar_cita = 1;
                         $user_certificacion->update();
                     }
@@ -583,7 +583,7 @@ class OrderController extends Controller
 
             if($orden_ticket2->Cursos->certificacion_webinar == 1){
                 $user_certificacion = User::where('id', $orden_ticket2->User->id)->first();
-                $user_certificacion->estatus_constancia = 1;
+                $user_certificacion->estatus_constancia = 'documentos';
                 $user_certificacion->agendar_cita = 1;
                 $user_certificacion->update();
             }
@@ -657,7 +657,7 @@ class OrderController extends Controller
 
         if($order_ticket->Cursos->certificacion_webinar == 1){
             $user_certificacion = User::where('id', $order_ticket->User->id)->first();
-            $user_certificacion->estatus_constancia = 1;
+            $user_certificacion->estatus_constancia = 'documentos';
             $user_certificacion->agendar_cita = 1;
             $user_certificacion->update();
         }
@@ -775,7 +775,7 @@ class OrderController extends Controller
 
         if($order_ticket->Cursos->certificacion_webinar == 1){
             $user_certificacion = User::where('id', $order_ticket->User->id)->first();
-            $user_certificacion->estatus_constancia = 1;
+            $user_certificacion->estatus_constancia = 'documentos';
             $user_certificacion->agendar_cita = 1;
             $user_certificacion->update();
         }

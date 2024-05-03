@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="modal_estatus" tabindex="-1" aria-labelledby="modal_estatusLabel" aria-hidden="true">
+<div class="modal fade" id="modal_estatus{{$cliente->id}}" tabindex="-1" aria-labelledby="modal_estatusLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
 
@@ -8,33 +8,33 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <div class="modal-body">
-            <form action="">
-                <div class="row">
+        <form role="form" action="{{ route('estatus_update.certificaion', $cliente->id) }}" method="post">
+            @csrf
+            <input type="hidden" name="_method" value="PATCH">
+            <div class="modal-body">
 
-                    <div class="mb-4 col-12">
-                        <label for="basic-url" class="form-label" style="font-weight: 700;">Estatus *</label>
-                        <div class="input-group">
-                            <select name="" id="" class="form-select">
+                    <div class="row">
 
-                                <option value="">Revision de Documentos</option>
-                                <option value="">Documentos Rechazados</option>
-                                <option value="">Formualario Realizado</option>
-                                <option value="">Seleccion de fecha tentativa</option>
-                                <option value="">Aprovacion de fecha</option>
-
-                            </select>
+                        <div class="mb-4 col-12">
+                            <label for="basic-url" class="form-label" style="font-weight: 700;">Estatus *</label>
+                            <div class="input-group">
+                                <select name="estatus_constancia" id="estatus_constancia" class="form-select">
+                                    <option value="revision de datos">Formualario Realizado</option>
+                                    <option value="Seleccion de fecha tentativa">Seleccion de fecha tentativa</option>
+                                    <option value="Aprovacion de fecha">Aprovacion de fecha</option>
+                                </select>
+                            </div>
                         </div>
+
                     </div>
 
-                </div>
-            </form>
-        </div>
+            </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-          <button type="button" class="btn btn-primary">Actualizar</button>
-        </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+        </form>
       </div>
     </div>
   </div>
