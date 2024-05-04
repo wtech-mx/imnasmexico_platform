@@ -143,7 +143,7 @@
                                 <div class="mb-3 col-12">
                                     <label for="basic-url" class="form-label">Telefono *</label>
                                     <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon3"><img src="{{asset('assets/user/icons/tarjeta-de-identificacion.png')}}" style="width: 40px">
+                                    <span class="input-group-text" id="basic-addon3"><img src="{{asset('assets/user/icons/complain.png')}}" style="width: 40px">
                                     </span>
                                     <input class="form-control" type="tel" minlength="10" maxlength="10" id="username" name="username"   placeholder="Telefono" required>
                                     </div>
@@ -160,7 +160,7 @@
 
                                 <div class="mb-3 col-12">
                                     <label for="basic-url" class="form-label">CURP *</label>
-                                    <div class="input-group">
+                                    <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon3"><img src="{{asset('assets/user/icons/carta.png')}}" style="width: 40px"></span>
                                     <input id="curp" name="curp" type="file" class="form-control" required>
                                     </div>
