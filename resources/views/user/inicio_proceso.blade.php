@@ -5,6 +5,7 @@
 @endsection
 
 @section('css_custom')
+<link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
 
 
 <style>
@@ -205,9 +206,8 @@
 @section('js')
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="https://keith-wood.name/js/jquery.signature.js"></script>
+    <script type="text/javascript" src="{{asset('assets/admin/js/firma.js') }}"></script>
 
     <script type="text/javascript">
         var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
