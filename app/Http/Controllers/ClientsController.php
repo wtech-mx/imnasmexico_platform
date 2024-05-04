@@ -509,7 +509,13 @@ class ClientsController extends Controller
             $documento->update();
         }
 
-        return redirect()->back()->with('success', 'El documento ha sido eliminado correctamente.');
+        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if(auth()->attempt(array($fieldType => $request->get('username'), 'password' => $request->get('username')))){
+
+            $code = Auth::user()->code;
+            return redirect()->route('perfil.index', ['code' => $code])->withSuccess('Documentos guardados correctamente');
+
+        }
     }
 
     public function formulario(Request $request, $code){
@@ -533,9 +539,8 @@ class ClientsController extends Controller
             $user->update();
         }
 
-        Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->route('perfil.index', $code)
-            ->with('success', 'usuario editado con exito.');
+            ->with('success', 'formulario guardado con exito.');
     }
 
     public function update(Request $request, $code)
