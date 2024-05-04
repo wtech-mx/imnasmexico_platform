@@ -207,10 +207,12 @@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    {{-- <script type="text/javascript" src="https://keith-wood.name/js/jquery.signature.js"></script> --}}
     <script type="text/javascript" src="{{asset('assets/admin/js/firma.js') }}"></script>
-
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'></script>
     <script type="text/javascript">
         var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
+
         $('#clear').click(function(e) {
             e.preventDefault();
             sig.signature('clear');
