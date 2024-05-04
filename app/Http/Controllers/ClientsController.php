@@ -417,6 +417,8 @@ class ClientsController extends Controller
         $code = Str::random(8);
         if (User::where('telefono', $request->username)->exists()) {
             $user = User::where('telefono', $request->telefono)->first();
+            $user->estatus_constancia = 'documentos';
+            $user->update();
             $payer = $user;
         } else {
             $payer = new User();
