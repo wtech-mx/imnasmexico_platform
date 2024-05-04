@@ -6,7 +6,6 @@
 
 @section('css_custom')
 
-
 <style>
     .kbw-signature { width: 100%; height: 200px;}
     #sig canvas{
@@ -25,6 +24,7 @@
         <form role="form" action="{{ route('perfil.update_certificaion', $cliente->code) }}" method="post" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="_method" value="PATCH">
+
             <div class="row" style="margin-top: 10rem !important;">
                 <div class="col-12 col-md-6 col-lg-6">
 
@@ -187,10 +187,11 @@
                 </div>
 
             </div>
+
         </form>
 
-
 </section>
+
 @include('user.modal_certificado_form')
 @endsection
 
