@@ -20,29 +20,56 @@ class CustomAuthController extends Controller
     {
 
         $input = $request->all();
-        $request->validate([
-            'password' => 'required',
-        ]);
 
-        $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+        if($request->password == 'certificaion'){
+            $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))){
+            if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['username']))){
 
-            if(Auth::user()->cliente == '2' or  Auth::user()->cliente == '5'){
-                return redirect('/profesor/inicio');
+                if(Auth::user()->cliente == '2' or  Auth::user()->cliente == '5'){
+                    return redirect('/profesor/inicio');
 
-            }elseif(Auth::user()->user_cam == '4' or Auth::user()->user_cam == '3'){
-                $code = Auth::user()->code;
-                return redirect()->route('perfil.index', ['code' => $code])->withSuccess('Sesión iniciada');
+                }elseif(Auth::user()->user_cam == '4' or Auth::user()->user_cam == '3'){
+                    $code = Auth::user()->code;
+                    return redirect()->route('perfil.index', ['code' => $code])->withSuccess('Sesión iniciada');
+                }else{
+                    if(Auth::user()->estatus_constancia == 'Fecha aprobada'){
+                        return redirect()->back()
+                        ->with('warning', 'Su proceso a concluido.');
+                    }else{
+                        $code = Auth::user()->code;
+                        return redirect()->route('perfil.index', ['code' => $code])->withSuccess('Sesión iniciada');
+                    }
+                }
+
             }else{
-                $code = Auth::user()->code;
-                return redirect()->route('perfil.index', ['code' => $code])->withSuccess('Sesión iniciada');
-                // return redirect("calendario")->withSuccess('Sesión iniciada');
+                return redirect()->back()
+                ->with('warning', 'Telefono incorrecto.');
             }
-
         }else{
-            return redirect()->back()
-            ->with('warning', 'Telefono incorrecto.');;
+            $request->validate([
+                'password' => 'required',
+            ]);
+
+            $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+            if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))){
+
+                if(Auth::user()->cliente == '2' or  Auth::user()->cliente == '5'){
+                    return redirect('/profesor/inicio');
+
+                }elseif(Auth::user()->user_cam == '4' or Auth::user()->user_cam == '3'){
+                    $code = Auth::user()->code;
+                    return redirect()->route('perfil.index', ['code' => $code])->withSuccess('Sesión iniciada');
+                }else{
+                    $code = Auth::user()->code;
+                    return redirect()->route('perfil.index', ['code' => $code])->withSuccess('Sesión iniciada');
+                }
+
+            }else{
+                return redirect()->back()
+                ->with('warning', 'Telefono incorrecto.');;
+            }
         }
 
     }

@@ -70,7 +70,6 @@
                             documento.
                         </p>
 
-
                         <div id="contenedor_firma">
                             @if ($cliente->Documentos)
                                 <p class="text-center ">

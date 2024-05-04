@@ -23,6 +23,7 @@ use App\Models\Factura;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use DataTables;
+use Illuminate\Support\Str;
 
 class ClientsController extends Controller
 {
@@ -405,6 +406,110 @@ class ClientsController extends Controller
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->route('perfil.index', $code)
             ->with('success', 'usuario editado con exito.');
+    }
+
+    public function certificaion(){
+
+        return view('user.inicio_proceso');
+    }
+
+    public function store_certificaion(Request $request){
+        $code = Str::random(8);
+        if (User::where('telefono', $request->username)->exists()) {
+            $user = User::where('telefono', $request->telefono)->first();
+            $payer = $user;
+        } else {
+            $payer = new User();
+            $payer->name = $request->get('username');
+            $payer->email = $request->get('username').'@imnas.com';
+            $payer->username = $request->get('username');
+            $payer->code = $code;
+            $payer->estatus_constancia = 'documentos';
+            $payer->telefono = $request->get('username');
+            $payer->cliente = '1';
+            $payer->password = Hash::make($request->get('username'));
+            $payer->save();
+        }
+
+        $cliente = User::where('id', $payer->id)->first();
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_estandar = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $cliente->telefono);
+        }else{
+            $ruta_estandar = public_path() . '/documentos/' . $cliente->telefono;
+        }
+
+        $documentos_id = Documentos::where('id_usuario','=',$cliente->id)->first();
+        if($documentos_id == null){
+            $documento = new Documentos;
+            $documento->id_usuario = $cliente->id;
+
+            if($request->signed != NULL){
+                $folderPath = $ruta_estandar; // create signatures folder in public directory
+                $image_parts = explode(";base64,", $request->signed);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+                $signature = uniqid() . '.'.$image_type;
+                $file = $folderPath . $signature;
+
+                file_put_contents($file, $image_base64);
+                $documento->firma = $signature;
+            }
+
+            if($request->hasFile("ine")){
+                $file = $request->file('ine');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documento->ine = $fileName;
+            }
+
+            if($request->hasFile("curp")){
+                $file = $request->file('curp');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documento->curp = $fileName;
+            }
+
+            $documento->save();
+        }else{
+            $documento = Documentos::find($documentos_id->id);
+
+            if($request->signed != NULL){
+                $folderPath = $ruta_estandar; // create signatures folder in public directory
+                $image_parts = explode(";base64,", $request->signed);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+                $signature = uniqid() . '.'.$image_type;
+                $file = $folderPath . $signature;
+
+                file_put_contents($file, $image_base64);
+                $documento->firma = $signature;
+            }
+
+            if($request->hasFile("ine")){
+                $file = $request->file('ine');
+                $path = $ruta_estandar;
+                $fileName2 = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName2);
+                $documento->ine = $fileName2;
+            }
+
+            if($request->hasFile("curp")){
+                $file = $request->file('curp');
+                $path = $ruta_estandar;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documento->curp = $fileName;
+            }
+
+            $documento->update();
+        }
+
+        return redirect()->back()->with('success', 'El documento ha sido eliminado correctamente.');
     }
 
     public function formulario(Request $request, $code){
