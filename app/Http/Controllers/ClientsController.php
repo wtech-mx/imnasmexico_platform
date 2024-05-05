@@ -445,20 +445,6 @@ class ClientsController extends Controller
         if($documentos_id == null){
             $documento = new Documentos;
             $documento->id_usuario = $cliente->id;
-
-            if($request->signed != NULL){
-                $folderPath = $ruta_estandar; // create signatures folder in public directory
-                $image_parts = explode(";base64,", $request->signed);
-                $image_type_aux = explode("image/", $image_parts[0]);
-                $image_type = $image_type_aux[1];
-                $image_base64 = base64_decode($image_parts[1]);
-                $signature = uniqid() . '.'.$image_type;
-                $file = $folderPath . $signature;
-
-                file_put_contents($file, $image_base64);
-                $documento->firma = $signature;
-            }
-
             if($request->hasFile("ine")){
                 $file = $request->file('ine');
                 $path = $ruta_estandar;
@@ -475,22 +461,22 @@ class ClientsController extends Controller
                 $documento->curp = $fileName;
             }
 
-            $documento->save();
-        }else{
-            $documento = Documentos::find($documentos_id->id);
-
             if($request->signed != NULL){
                 $folderPath = $ruta_estandar; // create signatures folder in public directory
                 $image_parts = explode(";base64,", $request->signed);
                 $image_type_aux = explode("image/", $image_parts[0]);
                 $image_type = $image_type_aux[1];
                 $image_base64 = base64_decode($image_parts[1]);
-                $signature = uniqid() . '.'.$image_type;
+                $signature = '/'.uniqid() . '.'.$image_type;
                 $file = $folderPath . $signature;
 
                 file_put_contents($file, $image_base64);
                 $documento->firma = $signature;
             }
+
+            $documento->save();
+        }else{
+            $documento = Documentos::find($documentos_id->id);
 
             if($request->hasFile("ine")){
                 $file = $request->file('ine');
@@ -506,6 +492,19 @@ class ClientsController extends Controller
                 $fileName = uniqid() . $file->getClientOriginalName();
                 $file->move($path, $fileName);
                 $documento->curp = $fileName;
+            }
+
+            if($request->signed != NULL){
+                $folderPath = $ruta_estandar; // create signatures folder in public directory
+                $image_parts = explode(";base64,", $request->signed);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+                $signature = '/'.uniqid() . '.'.$image_type;
+                $file = $folderPath . $signature;
+
+                file_put_contents($file, $image_base64);
+                $documento->firma = $signature;
             }
 
             $documento->update();
