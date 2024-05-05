@@ -203,13 +203,6 @@
 <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
 
 <script type="text/javascript">
-    var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
-    $('#clear').click(function(e) {
-        e.preventDefault();
-        sig.signature('clear');
-        $("#signature64").val('');
-    });
-
     // Obtener los datos del cliente desde PHP
     var datosCliente = {!! json_encode($datosCliente) !!};
 
