@@ -200,7 +200,7 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="https://keith-wood.name/js/jquery.signature.js"></script>
+<script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
 
 <script type="text/javascript">
     var sig = $('#sig').signature({syncField: '#signature64', syncFormat: 'PNG'});
@@ -216,14 +216,11 @@
     // Verificar si los campos necesarios están completos
     function verificarCamposCompletos() {
         // Verificar si todos los campos están completos
-        if (datosCliente.ine && datosCliente.curp && datosCliente.firma) {
-            // Activar el modal
+
             var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
             modal.show();
             document.getElementById('btnAbrirModal').style.display = 'block';
-        }else{
-            document.getElementById('btnAbrirModal').style.display = 'none';
-        }
+
     }
 
     // Llamar a la función al cargar la página
