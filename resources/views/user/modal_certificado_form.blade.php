@@ -31,6 +31,14 @@
                 </div>
 
                 <div class="mb-4 col-12">
+                    <label for="basic-url" class="form-label" style="font-weight: 700;">Correo *</label>
+                    <div class="input-group">
+                    <span class="input-group-text" id="basic-addon3"><img src="{{asset('assets/user/icons/email.png')}}" style="width: 40px"></span>
+                    <input type="email" class="form-control" name="correo" required>
+                    </div>
+                </div>
+
+                <div class="mb-4 col-12">
                     <label for="basic-url" class="form-label" style="font-weight: 700;">Profesion *</label>
                     <div class="input-group">
                     <span class="input-group-text" id="basic-addon3"><img src="{{asset('assets/user/icons/MEDICOS.png')}}" style="width: 40px"></span>

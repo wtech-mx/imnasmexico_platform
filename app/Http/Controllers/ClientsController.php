@@ -526,6 +526,7 @@ class ClientsController extends Controller
             $user->name = $request->get('nombre') . ' ' . $request->get('apellido');
             $user->puesto = $request->get('puesto');
             $user->edad = $request->get('edad');
+            $user->email = $request->get('correo');
             $user->city = $request->get('city');
             $user->especialidad = $request->get('especialidad');
             $user->sector_productividad = $request->get('sector_productividad');
