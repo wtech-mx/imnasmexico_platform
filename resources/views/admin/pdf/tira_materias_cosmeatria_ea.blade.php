@@ -190,7 +190,7 @@
                 Instituto Mexicano Naturales Ain Spa RIIMNAS, con registro de la Secretaria
                 del Trabajo y Prevención Social STPS como Agente Capacitador Externo con Registro
                 RIFC-680910-879-0013 , hace constar que el la Alumno(a) , con Numero de
-                Folio: <strong style="color: red"> {{$folio}} </strong> con CURP: <strong  style="color: red">{{$curp}} </strong>,  curso  <strong  style="color: red">{{ ucwords(strtolower($curso)) }} </strong>  Cubriendo todos los correspondientes. <br> Para afectos de desempeño académico  se expresa lo siguiente:
+                Folio: <strong style="color: red"> {{$folio}} </strong> con CURP: <strong  style="color: red">{{$curp}} </strong>,  especialidad  <strong  style="color: red">{{ ucwords(strtolower($curso)) }} </strong>  Cubriendo todos los correspondientes. <br> Para afectos de desempeño académico  se expresa lo siguiente:
             </p>
         </div>
 
