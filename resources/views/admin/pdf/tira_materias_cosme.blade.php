@@ -38,9 +38,8 @@
             transform: translate(-50%, -50%);
             text-align: center;
             color: red;
-            font-size: 14px;
+            font-size: 20px;
         }
-
         .container {
             position: absolute;
             top: 15%;
