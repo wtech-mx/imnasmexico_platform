@@ -65,10 +65,12 @@ class PagosFueraController extends Controller
         $order_ticket = $request->get('campo1');
         $order_ticket2 = $request->get('campo2');
         $order_ticket3 = $request->get('campo3');
+        $order_ticket4 = $request->get('campo4');
         $clase_grabada = $request->get('clase_grabada');
         $cursos = CursosTickets::where('id','=', $order_ticket)->first();
         $cursos2 = CursosTickets::where('id','=', $order_ticket2)->first();
         $cursos3 = CursosTickets::where('id','=', $order_ticket3)->first();
+        $cursos4 = CursosTickets::where('id','=', $order_ticket4)->first();
         $clase = CursosTickets::where('id','=', $clase_grabada)->first();
 
         if($request->get('name2') == NULL){
@@ -77,7 +79,9 @@ class PagosFueraController extends Controller
             $usuario = $request->get('name') . " " . $request->get('apellido') . "\n" . $request->get('name2') . " " . $request->get('apellido2');
         }
 
-        if($request->get('campo3') != NULL){
+        if($request->get('campo4') != NULL){
+            $curso = $cursos->Cursos->nombre . "\n" . $cursos2->Cursos->nombre . "\n" . $cursos3->Cursos->nombre . "\n" . $cursos4->Cursos->nombre;
+        }elseif($request->get('campo3') != NULL){
             $curso = $cursos->Cursos->nombre . "\n" . $cursos2->Cursos->nombre . "\n" . $cursos3->Cursos->nombre;
         }elseif($request->get('campo2') != NULL){
             $curso = $cursos->Cursos->nombre . "\n" . $cursos2->Cursos->nombre;
@@ -103,6 +107,7 @@ class PagosFueraController extends Controller
         $pagos_fuera->ticket1 = $request->get('campo1');
         $pagos_fuera->ticket2 = $request->get('campo2');
         $pagos_fuera->ticket3 = $request->get('campo3');
+        $pagos_fuera->ticket4 = $request->get('campo4');
         $pagos_fuera->comentario = $request->get('comentario');
 
         if ($request->hasFile("foto")) {
@@ -422,6 +427,16 @@ class PagosFueraController extends Controller
                 $order_ticket3->save();
             }
 
+            if($request->get('campo4') != NULL){
+                $order_ticket4 = new OrdersTickets;
+                $order_ticket4->id_order = $order->id;
+                $order_ticket4->id_usuario = $payer->id;
+                $order_ticket4->id_tickets = $request->get('campo4');
+                $cursos4 = CursosTickets::where('id','=', $order_ticket4->id_tickets)->first();
+                $order_ticket4->id_curso = $cursos4->id_curso;
+                $order_ticket4->save();
+            }
+
             $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
 
             if($request->get('name2') != NULL){
@@ -483,6 +498,16 @@ class PagosFueraController extends Controller
                     $cursos3 = CursosTickets::where('id','=', $order_ticket3->id_tickets)->first();
                     $order_ticket3->id_curso = $cursos3->id_curso;
                     $order_ticket3->save();
+                }
+
+                if($request->get('campo4') != NULL){
+                    $order_ticket4 = new OrdersTickets;
+                    $order_ticket4->id_order = $order->id;
+                    $order_ticket4->id_usuario = $payer->id;
+                    $order_ticket4->id_tickets = $request->get('campo4');
+                    $cursos3 = CursosTickets::where('id','=', $order_ticket4->id_tickets)->first();
+                    $order_ticket4->id_curso = $cursos3->id_curso;
+                    $order_ticket4->save();
                 }
 
                 $orden_ticket2 = OrdersTickets::where('id_order', '=', $order2->id)->get();

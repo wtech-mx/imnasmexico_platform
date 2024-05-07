@@ -111,6 +111,17 @@
         $('.curso').select2();
     });
 
+    $(document).ready(function() {
+        $('.curso2').select2();
+    });
+
+    $(document).ready(function() {
+        $('.curso3').select2();
+    });
+
+    $(document).ready(function() {
+        $('.curso4').select2();
+    });
   </script>
 
 <script>
