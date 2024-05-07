@@ -192,6 +192,16 @@ class PagosFueraController extends Controller
                 $order_ticket3->save();
             }
 
+            if($request->get('campo4') != NULL){
+                $order_ticket4 = new OrdersTickets;
+                $order_ticket4->id_order = $order->id;
+                $order_ticket4->id_usuario = $payer->id;
+                $order_ticket4->id_tickets = $request->get('campo4');
+                $cursos4 = CursosTickets::where('id','=', $order_ticket4->id_tickets)->first();
+                $order_ticket4->id_curso = $cursos4->id_curso;
+                $order_ticket4->save();
+            }
+            
             $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
 
             $email_diplomas = 'imnascenter@naturalesainspa.com';
