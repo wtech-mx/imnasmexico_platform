@@ -129,9 +129,9 @@
                             <div class="col-12">
                                 <div class="collapse " id="collapseExample">
                                         <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-12">
                                                 <label class="mt-2">Curso 2</label> <br>
-                                                <select name="campo2" class="form-select d-inline-block" style="width: 70%!important;">
+                                                <select name="campo2" class="form-select d-inline-block curso2" style="width: 70%!important;">
                                                     <option value="">Seleccione Curso</option>
                                                     @foreach ($cursos as $curso)
                                                     <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
@@ -139,9 +139,19 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-6">
+                                            <div class="col-12">
                                                 <label class="mt-2">Curso 3</label> <br>
-                                                <select name="campo3" class="form-select d-inline-block" style="width: 70%!important;">
+                                                <select name="campo3" class="form-select d-inline-block curso3" style="width: 70%!important;">
+                                                    <option value="">Seleccione Curso</option>
+                                                    @foreach ($cursos as $curso)
+                                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <label class="mt-2">Curso 4</label> <br>
+                                                <select name="campo4" class="form-select d-inline-block curso4" style="width: 70%!important;">
                                                     <option value="">Seleccione Curso</option>
                                                     @foreach ($cursos as $curso)
                                                     <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
