@@ -134,7 +134,7 @@
         }
 
         .curso_sm{
-            font-size: 16px;
+            font-size: 20px;
             color: red;
         }
 
