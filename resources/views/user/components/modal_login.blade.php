@@ -23,9 +23,9 @@
                                 Iniciar Sesion
                             </button>
 
-                            <button class="nav-link" id="nav-register-tab" data-bs-toggle="tab" data-bs-target="#nav-register" type="button" role="tab" aria-controls="nav-register" aria-selected="false">
+                            {{-- <button class="nav-link" id="nav-register-tab" data-bs-toggle="tab" data-bs-target="#nav-register" type="button" role="tab" aria-controls="nav-register" aria-selected="false">
                                 Registrar
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                   </nav>
@@ -66,7 +66,7 @@
 
                     </div>
 
-                    <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab" tabindex="0" style="min-height: auto!important;">
+                    {{-- <div class="tab-pane fade" id="nav-register" role="tabpanel" aria-labelledby="nav-register-tab" tabindex="0" style="min-height: auto!important;">
                         <div class="d-flex justify-content-center">
                             <form action="{{ route('register.custom') }}" method="POST">
                                 @csrf
@@ -113,7 +113,7 @@
 
                             </form>
                         </div>
-                    </div>
+                    </div> --}}
 
                   </div>
 
