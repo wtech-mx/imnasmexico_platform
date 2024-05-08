@@ -67,7 +67,7 @@ class NotasCursosController extends Controller
             $payer->password = Hash::make($request->get('telefono'));
             $payer->save();
             $datos = User::where('id', '=', $payer->id)->first();
-            Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+          //  Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
         $notas_cursos = new NotasCursos;
@@ -169,7 +169,7 @@ class NotasCursosController extends Controller
             $payer->password = Hash::make($request->get('telefono'));
             $payer->save();
             $datos = User::where('id', '=', $payer->id)->first();
-            Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+          //  Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
         if($request->get('paquete') === 'Paquete1'){

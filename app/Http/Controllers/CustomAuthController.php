@@ -108,7 +108,7 @@ class CustomAuthController extends Controller
             $creat_user->password = Hash::make($request->get('telefono'));
             $creat_user->save();
             $datos = User::where('id', '=', $creat_user->id)->first();
-            Mail::to($creat_user->email)->send(new PlantillaNuevoUser($datos));
+          //  Mail::to($creat_user->email)->send(new PlantillaNuevoUser($datos));
         }
 
         Auth::login($creat_user);

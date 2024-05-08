@@ -101,7 +101,7 @@ class OrderController extends Controller
             $payer->password = Hash::make($request->get('telefono'));
             $payer->save();
             $datos = User::where('id', '=', $payer->id)->first();
-            Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+           // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
         try {
@@ -454,7 +454,7 @@ class OrderController extends Controller
                     }
 
                 }
-                Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
+               // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
             }
 
             Session::forget('cart');
@@ -512,7 +512,7 @@ class OrderController extends Controller
             $payer->password = Hash::make($request->get('telefono'));
             $payer->save();
             $datos = User::where('id', '=', $payer->id)->first();
-            Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+          //  Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
         $fechaActual = date('Y-m-d');
@@ -636,7 +636,7 @@ class OrderController extends Controller
             $payer->password = Hash::make($request->get('telefono'));
             $payer->save();
             $datos = User::where('id', '=', $payer->id)->first();
-            Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+          //  Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
         $order = new Orders;
@@ -754,7 +754,7 @@ class OrderController extends Controller
             $payer->password = Hash::make($request->get('telefono'));
             $payer->save();
             $datos = User::where('id', '=', $payer->id)->first();
-            Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+           // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
         $order = new Orders;

@@ -141,7 +141,7 @@ class PagosFueraController extends Controller
                 $payer->password = Hash::make($request->get('telefono'));
                 $payer->save();
                 $datos = User::where('id', '=', $payer->id)->first();
-                Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+            //    Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
             }
 
         if($request->get('deudor') != '1'){
@@ -201,7 +201,7 @@ class PagosFueraController extends Controller
                 $order_ticket4->id_curso = $cursos4->id_curso;
                 $order_ticket4->save();
             }
-            
+
             $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
 
             $email_diplomas = 'imnascenter@naturalesainspa.com';
@@ -330,7 +330,7 @@ class PagosFueraController extends Controller
                     $payer2->password = Hash::make($request->get('telefono2'));
                     $payer2->save();
                     $datos = User::where('id', '=', $payer2->id)->first();
-                    Mail::to($payer2->email)->send(new PlantillaNuevoUser($datos));
+                   // Mail::to($payer2->email)->send(new PlantillaNuevoUser($datos));
                 }
 
                 $order2 = new Orders;
@@ -469,7 +469,7 @@ class PagosFueraController extends Controller
                     $payer2->password = Hash::make($request->get('telefono2'));
                     $payer2->save();
                     $datos = User::where('id', '=', $payer2->id)->first();
-                    Mail::to($payer2->email)->send(new PlantillaNuevoUser($datos));
+                   // Mail::to($payer2->email)->send(new PlantillaNuevoUser($datos));
                 }
 
                 $order2 = new Orders;
@@ -640,7 +640,7 @@ class PagosFueraController extends Controller
                     $payer2->password = Hash::make($request->get('telefono2'));
                     $payer2->save();
                     $datos = User::where('id', '=', $payer2->id)->first();
-                    Mail::to($payer2->email)->send(new PlantillaNuevoUser($datos));
+                  //  Mail::to($payer2->email)->send(new PlantillaNuevoUser($datos));
                 }
 
                 $order2 = new Orders;
