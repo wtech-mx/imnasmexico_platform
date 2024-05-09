@@ -462,7 +462,8 @@ class DocumentosController extends Controller
                     foreach ($variables as $index => $curso) {
                         if (isset($curso) && !empty($curso)) {
                             // Lógica para crear el PDF y enviar el correo aquí
-                            $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre','duracion_hrs'));
+                            $sello = 'Si';
+                            $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre','duracion_hrs', 'sello'));
                             $pdf->setPaper('A4', 'portrait');
                             $contenidoPDF = $pdf->output();
 
@@ -473,7 +474,8 @@ class DocumentosController extends Controller
                         }
                     }
                 }else{
-                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs'));
+                    $sello = 'Si';
+                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs', 'sello'));
                     $pdf->setPaper('A4', 'portrait');
 
                     $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
@@ -722,8 +724,9 @@ class DocumentosController extends Controller
 
                         foreach ($variables as $index => $curso) {
                             if (isset($curso) && !empty($curso)) {
+                                $sello = 'Si';
                                 // Lógica para crear el PDF y enviar el correo aquí
-                                $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre'));
+                                $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre', 'sello'));
                                 $pdf->setPaper('A4', 'portrait');
                                 $contenidoPDF = $pdf->output();
 
@@ -734,7 +737,8 @@ class DocumentosController extends Controller
                             }
                         }
                     }else{
-                        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                        $sello = 'Si';
+                        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre', 'sello'));
                         $pdf->setPaper('A4', 'portrait');
 
                         $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
@@ -796,8 +800,9 @@ class DocumentosController extends Controller
 
                         foreach ($variables as $index => $curso) {
                             if (isset($curso) && !empty($curso)) {
+                                $sello = 'Si';
                                 // Lógica para crear el PDF y enviar el correo aquí
-                                $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre'));
+                                $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre', 'sello'));
                                 $pdf->setPaper('A4', 'portrait');
                                 $contenidoPDF = $pdf->output();
 
@@ -805,7 +810,8 @@ class DocumentosController extends Controller
                             }
                         }
                     }else{
-                        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre'));
+                        $sello = 'Si';
+                        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre', 'sello'));
                         $pdf->setPaper('A4', 'portrait');
 
                         $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
