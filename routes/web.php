@@ -82,7 +82,9 @@ Route::get('certificado_webinar', function () {
     return view('user.certificado_webinar');
 });
 
-
+Route::get('folio', function () {
+    return view('user.folio');
+});
 
 Auth::routes();
 
