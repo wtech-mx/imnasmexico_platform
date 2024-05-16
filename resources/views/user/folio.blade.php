@@ -28,11 +28,11 @@
         <div class="col-4">
 
             <h3 class="text-center mt-4 mb-4">
-                Ingresa el Folio de tus documentos
+                Ingresa el Folio de tu documento
             </h3>
 
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Ingresa Folio" aria-label="Search">
+            <form method="GET" action="{{ route('folio.buscador') }}" class="d-flex" role="search">
+                <input class="form-control me-2" placeholder="Ingresa Folio" name="folio">
                 <button class="btn btn-outline-success" type="submit">Buscar</button>
             </form>
 
@@ -42,48 +42,30 @@
 
         </div>
 
-        <div class="col-12">
+        <div class="col-12 mt-4">
 
-            <h5 class="text-left mt-5 mb-3"><strong>Resultado de Busqueda del Folio : </strong></h5>
+            @if(Route::currentRouteName() != 'folio.index')
+                @if ($tickets == NULL)
+                    <div class="card card-body card_colapsable_comprar">
+                        <h5 class="text-left mb-3">El folio ingresado no se ha encontrado. Por favor, verifica que esté correctamente escrito e inténtalo nuevamente.</h5>
+                        <h6><strong>{{$folio}}</strong></h6>
+                    </div>
+                @else
+                    <h5 class="text-left mt-5 mb-3"><strong>Resultado de Busqueda del Folio : </strong></h5>
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <div class="card card-body card_colapsable_comprar">
+                                <h2 class="text-center">{{$tickets->User->name}}</h2>
 
-            <table class="table mt-3">
-                <thead>
-                  <tr>
-                    <th scope="col">Folio</th>
-                    <th scope="col">Nombre Completo</th>
-                    <th scope="col">Curso ,Diplomado y/o Carrera</th>
-                    <th scope="col">Modalidad</th>
-                    <th scope="col">Fechas</th>
-                    <th scope="col">Descargar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                  </tr>
-                </tbody>
-              </table>
+                                <h3>Especializado en: {{$tickets->Cursos->nombre}}</h3>
+                                <h3>Cursado del: {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('DD [de] MMMM [del] YYYY') }}</h3>
+                                <h3>Al: {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_final)->isoFormat('DD [de] MMMM [del] YYYY') }}</h3>
+                                <h3>Este folio: {{$tickets->folio}} certifica que el alumno ha completado satisfactoriamente el curso/diplomado mencionado anteriormente.</h3>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endif
 
         </div>
 

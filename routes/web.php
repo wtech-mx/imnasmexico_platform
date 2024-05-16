@@ -85,6 +85,9 @@ Route::get('certificado_webinar', function () {
 Route::get('folio', function () {
     return view('user.folio');
 });
+// =============== M O D U L O   F O L I O S ===============================
+Route::get('/buscar/folio', [App\Http\Controllers\FoliosController::class, 'index'])->name('folio.index');
+Route::get('/buscador/folio', [App\Http\Controllers\FoliosController::class, 'buscador'])->name('folio.buscador');
 
 Auth::routes();
 
@@ -505,8 +508,6 @@ Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
         Route::get('/admin/videos_cam', [App\Http\Controllers\Cam\CamVideosController::class, 'index'])->name('videos_cam.index');
         Route::post('/admin/videos_cam/store', [App\Http\Controllers\Cam\CamVideosController::class, 'store'])->name('videos_cam.store');
         Route::patch('/admin/videos_cam/update/{id}', [App\Http\Controllers\Cam\CamVideosController::class, 'update'])->name('videos_cam.update');
-
-
     });
 });
 

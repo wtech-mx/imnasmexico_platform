@@ -124,7 +124,7 @@
                                         }
 
                                         // Combinar todos los elementos en el código del folio
-                                        $folio = $inicialesCurso . $idUsuario . '-' . $numeroAleatorio;
+                                        $folio = $inicialesCurso . $idUsuario . '-' . $ticket->id_curso;
 
                                     @endphp
 

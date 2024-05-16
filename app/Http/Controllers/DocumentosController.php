@@ -491,6 +491,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_cedula = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
 
                 $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
@@ -503,6 +504,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_titulo = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
 
                 $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
@@ -516,6 +518,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_titulo = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
                 $ancho_cm = 33;
                 $alto_cm = 48;
@@ -534,6 +537,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_diploma = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
 
                 $ancho_cm = 21.5;
@@ -552,6 +556,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_credencial = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
 
                 $ancho_cm = 5.5;
@@ -569,6 +574,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_tira = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
 
                 $ancho_cm = 21.5;
@@ -586,6 +592,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_tira = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
 
                 $ancho_cm = 21.5;
@@ -603,6 +610,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_tira = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
 
                 $ancho_cm = 21.5;
@@ -620,6 +628,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_tira = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
 
                 $ancho_cm = 21.5;
@@ -637,6 +646,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_tira = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
 
                 $ancho_cm = 21.5;
@@ -654,6 +664,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_tira = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
 
                 $ancho_cm = 21.5;
@@ -671,6 +682,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_tira = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
 
                 $ancho_cm = 21.5;
@@ -687,6 +699,7 @@ class DocumentosController extends Controller
                 $id_ticket = $request->get('id_ticket_orders');
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_tira = '1';
+                $ticket->folio = $request->get('folio');
                 $ticket->update();
 
                 $ancho_cm = 21.5;
@@ -759,6 +772,7 @@ class DocumentosController extends Controller
                     $ticket->estatus_diploma = '1';
                     $ticket->estatus_credencial = '1';
                     $ticket->estatus_tira = '1';
+                    $ticket->folio = $request->get('folio');
                     $ticket->update();
 
                     $ancho_cm = 33;
