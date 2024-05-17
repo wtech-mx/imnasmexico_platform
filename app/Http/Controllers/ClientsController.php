@@ -151,7 +151,7 @@ class ClientsController extends Controller
 
     public function eliminarDocumento($documentoId){
         $documento = DocumentosEstandares::findOrFail($documentoId);
-        $documento->delete();
+        $documentoSubido = DB::table('documentos_estandares')->where('id_documento', $documento->id_documento)->where('id_usuario', $documento->id_usuario)->where('id_curso', $documento->id_curso)->delete();
 
         return redirect()->back()->with('success', 'El documento ha sido eliminado correctamente.');
     }
