@@ -102,25 +102,24 @@ class DocumentosController extends Controller
         }
 
         $bitacora = new DocumenotsGenerador;
+        if($request->get('curso_name') == null){
+            $curso = $request->get('curso');
+        }else{
+            $curso = $request->get('curso_name');
+        }
 
         $bitacora->cliente = $request->get('nombre');
-        $bitacora->curso = $request->get('curso');
+        $bitacora->curso = $curso;
         $bitacora->id_usuario_bitacora = auth()->user()->id;
         $bitacora->tipo_documento = $request->get('tipo');
         $bitacora->folio = $request->get('folio');
+        $bitacora->fecha_inicial = $request->get('fecha');
+        $bitacora->duracion_hrs = $request->get('duracion_hrs');
         $bitacora->estatus = 'Generado y descargado';
         $bitacora->save();
 
         $nombre = $request->get('nombre');
         $fecha = $request->get('fecha');
-
-        if($request->get('curso') == null){
-
-            $curso = $request->get('curso_name');
-
-        }else{
-            $curso = $request->get('curso');
-        }
 
 
         $sello = $request->get('sello');

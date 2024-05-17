@@ -6,6 +6,34 @@ Reporte de Documentos
 @section('css')
 <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
+<style>
+    .right-panel {
+        position: fixed;
+        top: 0;
+        right: -900px; /* Oculto inicialmente */
+        width: 600px;
+        height: 100%;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
+    }
+
+    .panel-content {
+        padding: 20px;
+        /* Estilos adicionales para el contenido del panel */
+    }
+
+    .close-btn {
+        cursor: pointer;
+        padding: 10px;
+        background-color: #ddd;
+        text-align: center;
+        margin-top: 65px;
+    }
+
+</style>
 @endsection
 @section('content')
 
@@ -20,11 +48,13 @@ Reporte de Documentos
                     <a type="button" class="btn btn-sm bg-danger" data-bs-toggle="modal" data-bs-target="#manual_instrucciones" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                         ¿Como fucniona?
                     </a>
-                    <a type="button" class="btn btn-sm bg-primary" data-bs-toggle="modal" data-bs-target="#create_manual" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                    <a type="button" class="btn btn-sm bg-primary" onclick="openRightPanel()" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                         <i class="fa fa-fw fa-plus"></i> Crear
                     </a>
                 </div>
             </div>
+            @include('admin.documentos.modal_create')
+
             <form action="{{ route('advance_documentos.buscador') }}" method="GET" >
 
                 <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
@@ -194,7 +224,7 @@ Reporte de Documentos
 </div>
 
 
-@include('admin.documentos.modal_create')
+
 
 @endsection
 
@@ -215,6 +245,108 @@ Reporte de Documentos
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 
+<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+
+{{-- Funcion de inputs --}}
+    <script>
+        $(document).ready(function() {
+            $('.curso').select2();
+        });
+        // Funcion abrir a la izquierda
+        function openRightPanel() {
+            document.getElementById("rightPanel").style.right = "0";
+        }
+
+        function closeRightPanel() {
+            document.getElementById("rightPanel").style.right = "-600px";
+        }
+
+        // Funcion nombre dividido en los 3 inputs
+        function splitFullName() {
+            // Obtener el valor del nombre completo
+            var fullName = document.getElementById('nombre').value.trim();
+
+            // Dividir el nombre completo en sus partes
+            var parts = fullName.split(' ');
+
+            // Obtener los inputs de nombre, apellido paterno y apellido materno
+            var nombresInput = document.getElementById('nombres');
+            var apellidoPaternoInput = document.getElementById('apellido_paterno');
+            var apellidoMaternoInput = document.getElementById('apellido_materno');
+
+            // Asignar las partes a los inputs correspondientes
+            if (parts.length >= 1) {
+                apellidoMaternoInput.value = parts.pop(); // Obtener el último elemento (apellido materno)
+            }
+            if (parts.length >= 1) {
+                apellidoPaternoInput.value = parts.pop(); // Obtener el último elemento (apellido paterno)
+            }
+            nombresInput.value = parts.join(' '); // El resto se considera como nombres
+        }
+
+        // Funcion folio dinamico
+        function generarFolio() {
+            // Obtener el nombre del curso seleccionado
+            var cursoSelect = document.getElementById('curso');
+            var cursoNombre = cursoSelect.options[cursoSelect.selectedIndex].text.toUpperCase();
+
+            // Obtener las iniciales de cada palabra en el nombre del curso (limitado a 5 letras)
+            var cursoIniciales = cursoNombre.split(' ').map(word => word.charAt(0)).join('').substring(0, 4);
+
+            // Obtener el último número base utilizado o establecerlo en 6000 si es la primera vez
+            var ultimoNumeroBase = parseInt(localStorage.getItem('ultimoNumeroBase')) || 6000;
+
+            // Incrementar el número base para el próximo folio
+            var siguienteNumeroBase = ultimoNumeroBase + 1;
+
+            // Guardar el nuevo número base para el próximo folio
+            localStorage.setItem('ultimoNumeroBase', siguienteNumeroBase);
+
+            // Construir el folio
+            var folio = 'F' + cursoIniciales + '-' + siguienteNumeroBase;
+
+            // Asignar el folio al input correspondiente
+            document.getElementById('folio').value = folio;
+        }
+
+        //mostrar img automaticamente
+        //foto
+        function mostrarImagen(input) {
+            // Verificar si se seleccionó una imagen
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Mostrar la imagen en el elemento img
+                    var imagenSeleccionada = document.getElementById('imagen_seleccionada');
+                    imagenSeleccionada.src = e.target.result;
+                    imagenSeleccionada.style.display = 'block'; // Mostrar el elemento img
+                }
+
+                // Leer el contenido de la imagen seleccionada como una URL
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        //firma
+        function mostrarImagenFirma(input) {
+            // Verificar si se seleccionó una imagen
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function(e) {
+                    // Mostrar la imagen en el elemento img
+                    var imagenSeleccionadafirma = document.getElementById('imagen_seleccionada_firma');
+                    imagenSeleccionadafirma.src = e.target.result;
+                    imagenSeleccionadafirma.style.display = 'block'; // Mostrar el elemento img
+                }
+
+                // Leer el contenido de la imagen seleccionada como una URL
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+{{-- end Funcion de inputs --}}
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
