@@ -54,14 +54,14 @@
                     @if ($tickets_generador == "")
                         <h5 class="text-left mt-5 mb-3"><strong>Resultado de Busqueda del Folio : </strong></h5>
                         <div class="row mb-3">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="card card-body card_colapsable_comprar">
-                                    <h2 class="text-center">{{$tickets->User->name}}</h2>
+                                    <h2 class="text-center">{{$tickets->User->name}}</h2><br><br>
 
-                                    <h3>Especializado en: {{$tickets->Cursos->nombre}}</h3>
-                                    <h3>Cursado del: {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('DD [de] MMMM [del] YYYY') }}</h3>
-                                    <h3>Al: {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_final)->isoFormat('DD [de] MMMM [del] YYYY') }}</h3>
-                                    <h3>Este folio: {{$tickets->folio}} certifica que el alumno ha completado satisfactoriamente el curso/diplomado mencionado anteriormente.</h3>
+                                    <p><b> Especializado en: </b>{{$tickets->Cursos->nombre}}</p>
+                                    <p><b>Cursado del: </b>{{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('DD [de] MMMM [del] YYYY') }}</p>
+                                    <p><b>Al: </b>{{ \Carbon\Carbon::parse($tickets->Cursos->fecha_final)->isoFormat('DD [de] MMMM [del] YYYY') }}</p>
+                                    <p><b>Este folio: </b>{{$tickets->folio}} certifica que el alumno ha completado satisfactoriamente el curso/diplomado mencionado anteriormente.</p>
                                 </div>
                             </div>
                         </div>
@@ -77,13 +77,13 @@
                     @if ($tickets == NULL)
                         <h5 class="text-left mt-5 mb-3"><strong>Resultado de Busqueda del Folio : </strong></h5>
                         <div class="row mb-3">
-                            <div class="col-6">
+                            <div class="col-12">
                                 <div class="card card-body card_colapsable_comprar">
-                                    <h2 class="text-center">{{$tickets_generador->cliente}}</h2>
+                                    <h2 class="text-center">{{$tickets_generador->cliente}}</h2><br><br>
 
-                                    <h3>Especializado en: {{$tickets_generador->curso}}</h3>
-                                    <h3>Cursado el dia: {{ \Carbon\Carbon::parse($tickets_generador->fecha_inicial)->isoFormat('DD [de] MMMM [del] YYYY') }}</h3>
-                                    <h3>Este folio: {{$tickets_generador->folio}} certifica que el alumno ha completado satisfactoriamente el curso/diplomado mencionado anteriormente.</h3>
+                                    <p><b>Especializado en: </b>{$tickets_generador->curso}}</p>
+                                    <p><b>Cursado el dia: </b>{{ \Carbon\Carbon::parse($tickets_generador->fecha_inicial)->isoFormat('DD [de] MMMM [del] YYYY') }}</p>
+                                    <p><b>Este folio: </b>{{$tickets_generador->folio}} certifica que el alumno ha completado satisfactoriamente el curso/diplomado mencionado anteriormente.</p>
                                 </div>
                             </div>
                         </div>
