@@ -69,10 +69,7 @@
                 @endif
 
                 @if ($tickets == NULL && $tickets_generador == "")
-                    <div class="card card-body card_colapsable_comprar">
-                        <h5 class="text-left mb-3">El folio ingresado no se ha encontrado. Por favor, verifica que esté correctamente escrito e inténtalo nuevamente.</h5>
-                        <h6><strong>{{$folio}}</strong></h6>
-                    </div>
+                
                 @else
                     @if ($tickets == NULL)
                         <h5 class="text-left mt-5 mb-3"><strong>Resultado de Busqueda del Folio : </strong></h5>
