@@ -23,9 +23,9 @@
 <section class="primario bg_overley padding_avales_cont" style="background-color:#fff;">
     <div class="row">
 
-        <div class="col-4"></div>
+        <div class="col-2"></div>
 
-        <div class="col-4">
+        <div class="col-8">
 
             <h3 class="text-center mt-4 mb-4">
                 Ingresa el Folio de tu documento
@@ -38,7 +38,7 @@
 
         </div>
 
-        <div class="col-4">
+        <div class="col-2">
 
         </div>
 
