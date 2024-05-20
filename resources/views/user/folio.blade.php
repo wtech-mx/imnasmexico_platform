@@ -81,7 +81,7 @@
                                 <div class="card card-body card_colapsable_comprar">
                                     <h2 class="text-center">{{$tickets_generador->cliente}}</h2><br><br>
 
-                                    <p><b>Especializado en: </b>{$tickets_generador->curso}}</p>
+                                    <p><b>Especializado en: </b>{{$tickets_generador->curso}}</p>
                                     <p><b>Cursado el dia: </b>{{ \Carbon\Carbon::parse($tickets_generador->fecha_inicial)->isoFormat('DD [de] MMMM [del] YYYY') }}</p>
                                     <p><b>Este folio: </b>{{$tickets_generador->folio}} certifica que el alumno ha completado satisfactoriamente el curso/diplomado mencionado anteriormente.</p>
                                 </div>
