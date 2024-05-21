@@ -125,6 +125,31 @@
                                     Google Meet
                                     @endif
                                 </p>
+                                @if ($curso->nombre == 'Curso Power BI – Análisis de Datos y Business Intelligence')
+                                <div class="collapse show mt-3" id="collapseinfo">
+                                    <div class="card card-body card_colapsable_comprar">
+                                        <div class="row mb-3">
+                                            @foreach ($tickets as $ticket)
+                                            @php
+                                            $precio = number_format($ticket->precio, 2, '.', ',');
+                                            @endphp
+                                                <div class="col-12 mt-3">
+                                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                                </div>
+                                                <div class="col-6 col-lg-6 mt-3">
+                                                    @if ($ticket->descuento == NULL)
+                                                        <h5 style="color: #836262"><strong>$ {{ $precio }}</strong></h5>
+                                                    @else
+                                                        <del style="color: #836262"><strong>De ${{ $precio }}</strong></del>
+                                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
+                                                    @endif
+                                                </div>
+
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
                                 @if ($curso->estatus == 1)
                                 <a class="btn btn-primario space_cs_rs" data-bs-toggle="collapse" href="#collapseinfo" role="button" aria-expanded="true" aria-controls="collapseinfo" style="display:block ">
                                     <div class="d-flex justify-content-start">
@@ -695,7 +720,7 @@
                                             </div>
                                         </div>
                                         <p class="text-center">
-                                            EC0010 - Prestación de Servicios Estéticos Corporales 
+                                            EC0010 - Prestación de Servicios Estéticos Corporales
                                         </p>
                                     </div>
                                 @endif
