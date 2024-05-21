@@ -550,7 +550,7 @@
 
                         @else
 
-                            {!!  $curso->mapa_iframe !!}
+                            {{-- {!!  $curso->mapa_iframe !!} --}}
 
                         @endif
 
