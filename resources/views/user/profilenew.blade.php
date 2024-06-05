@@ -288,7 +288,7 @@ Mi perfil- {{$cliente->name}}
                                                                 @endphp
 
                                                                 @foreach ($non_null_values as $index => $value)
-                                                                <div class="col-3">
+                                                                <div class="col-6">
                                                                     <form method="POST" action="{{ route('generar_alumno.documento') }}" enctype="multipart/form-data" role="form">
                                                                         @csrf
                                                                         <div class="row">
