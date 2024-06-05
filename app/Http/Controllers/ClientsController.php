@@ -1134,7 +1134,8 @@ class ClientsController extends Controller
     }
 
     public function index_certificados_webinar(){
-        $clientes = User::where('estatus_constancia', '!=', NULL)->orwhere('estatus_constancia', '!=', 'aprobado')->orderBy('id','DESC')->get();
+        $clientes = User::whereNotNull('estatus_constancia')
+        ->where('estatus_constancia', '!=', 'aprobado')->orderBy('id','DESC')->get();
 
         return view('admin.certificacion_webinar.index',compact('clientes'));
     }
