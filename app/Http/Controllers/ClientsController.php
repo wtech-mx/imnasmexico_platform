@@ -415,8 +415,8 @@ class ClientsController extends Controller
 
     public function store_certificaion(Request $request){
         $code = Str::random(8);
-        if (User::where('telefono', $request->telefono)->exists()) {
-            $user = User::where('telefono', $request->telefono)->first();
+        if (User::where('telefono', $request->username)->exists()) {
+            $user = User::where('telefono', $request->username)->first();
             $user->estatus_constancia = 'documentos';
             $user->update();
             $payer = $user;
