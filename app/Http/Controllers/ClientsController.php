@@ -24,6 +24,8 @@ use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use DataTables;
 use Illuminate\Support\Str;
+use App\Mail\PlantillaWebinar;
+use Illuminate\Support\Facades\Mail;
 
 class ClientsController extends Controller
 {
@@ -1141,6 +1143,13 @@ class ClientsController extends Controller
     }
 
     public function estatus_update_certificaion(Request $request, $id){
+
+
+        if($request->get('estatus_constancia') == 'Enviar Correo'){
+
+            $datos = User::where('id', '=', $id)->firstOrFail();
+            Mail::to($datos->email)->send(new PlantillaWebinar($datos));
+        }
 
         if($request->get('fecha_certificaion') == NULL){
             $user = User::where('id', $id)->firstOrFail();

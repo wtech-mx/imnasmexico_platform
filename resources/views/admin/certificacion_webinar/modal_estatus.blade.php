@@ -104,6 +104,7 @@
                                     <div class="input-group">
                                         <select name="estatus_constancia" id="estatus_constancia" class="form-select">
                                             <option value="revision de datos">Formualario Realizado</option>
+                                            <option value="Enviar Correo">Enviar Correo de acceso</option>
                                             <option value="Seleccion de fecha tentativa">Seleccion de fecha tentativa</option>
                                             <option value="Aprovacion de fecha">Aprovacion de fecha</option>
                                         </select>
