@@ -83,6 +83,17 @@
                             </div>
 
                         @if ($cliente->estatus_constancia == 'Fecha tentativa seleccionada' || $cliente->estatus_constancia == 'Fecha aprobada')
+                            <div class="mb-4 col-12">
+                                <label for="basic-url" class="form-label" style="font-weight: 700;">Estatus *</label>
+                                <div class="input-group">
+                                    <select name="estatus_constancia" id="estatus_constancia" class="form-select">
+                                        <option value="">Seleciona opcion</option>
+                                        <option value="">No enviar correo de acceso</option>
+                                        <option value="Enviar Correo">Enviar Correo de acceso</option>
+                                    </select>
+                                </div>
+                            </div>
+
                                 <div class="col-12"></div>
                                 <div class="mb-4 col-6">
                                     <label for="basic-url" class="form-label" style="font-weight: 700;">fecha tentativa *</label>
@@ -98,6 +109,7 @@
                                     </div>
                                 </div>
                                 <h3>fecha certificaion: {{$cliente->fecha_certificaion}}</h3>
+
                             @else
                                 <div class="mb-4 col-12">
                                     <label for="basic-url" class="form-label" style="font-weight: 700;">Estatus *</label>

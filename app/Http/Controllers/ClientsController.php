@@ -24,6 +24,7 @@ use Carbon\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
 use DataTables;
 use Illuminate\Support\Str;
+use App\Mail\PlantillaEvaluacionAprovada;
 use App\Mail\PlantillaWebinar;
 use Illuminate\Support\Facades\Mail;
 
@@ -34,20 +35,21 @@ class ClientsController extends Controller
         if (!auth()->check()) {
             return redirect()->route('cursos.index_user')->with('warning', 'Inicie sesión para ver su perfil');
         }
-    $cliente = User::where('code', $code)->firstOrFail();
-    $orders = Orders::where('id_usuario', '=', auth()->user()->id)->get();
-    $order_ticket = OrdersTickets::where('id_usuario', '=', auth()->user()->id)->get();
 
-    $usuarioId = Auth::id(); // Obtén el ID del usuario logueado
-    // Verifica si el usuario ha comprado un ticket para el curso
-    $usuario_video = OrdersTickets::join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
+                $cliente = User::where('code', $code)->firstOrFail();
+                $orders = Orders::where('id_usuario', '=', auth()->user()->id)->get();
+                $order_ticket = OrdersTickets::where('id_usuario', '=', auth()->user()->id)->get();
+
+                $usuarioId = Auth::id(); // Obtén el ID del usuario logueado
+                 // Verifica si el usuario ha comprado un ticket para el curso
+                    $usuario_video = OrdersTickets::join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
                     ->join('orders', 'orders_tickets.id_order', '=', 'orders.id')
                     ->where('orders_tickets.id_usuario', $usuarioId)
                     ->where('cursos.video_cad','=', 1)
                     ->where('orders.estatus','=', 1)
                     ->get();
 
-    $usuario_compro = OrdersTickets::join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                    $usuario_compro = OrdersTickets::join('orders', 'orders_tickets.id_order', '=', 'orders.id')
                     ->where('orders_tickets.id_usuario', $usuarioId)
                     ->where('orders.estatus','=', 1)
                     ->get();
@@ -110,45 +112,45 @@ class ClientsController extends Controller
                     ->select('carpetas.nombre as nombre_carpeta', 'carpeta_recursos.nombre as nombre_recurso', 'carpeta_recursos.sub_area as sub_area_recurso','carpetas.id as id_carpeta')
                     ->get();
 
-    $publicidad = Publicidad::get();
+                    $publicidad = Publicidad::get();
 
-    $documentos = Documentos::where('id_usuario', '=', auth()->user()->id)->get();
-    $documentos_estandares = DocumentosEstandares::where('id_usuario', '=', auth()->user()->id)->get();
+                    $documentos = Documentos::where('id_usuario', '=', auth()->user()->id)->get();
+                    $documentos_estandares = DocumentosEstandares::where('id_usuario', '=', auth()->user()->id)->get();
 
-    // Obtener el ID del usuario actualmente autenticado
-    $idUsuario = Auth::user()->id;
+                    // Obtener el ID del usuario actualmente autenticado
+                    $idUsuario = Auth::user()->id;
 
-    // Obtener las órdenes completadas del usuario
-    $ordenesCompletadas = Orders::where('id_usuario', $idUsuario)->where('estatus', 1)->pluck('id');
+                    // Obtener las órdenes completadas del usuario
+                    $ordenesCompletadas = Orders::where('id_usuario', $idUsuario)->where('estatus', 1)->pluck('id');
 
-    // Obtener los IDs de los cursos comprados en las órdenes completadas
-    $cursosComprados = OrdersTickets::whereIn('id_order', $ordenesCompletadas)->pluck('id_curso');
-    // Obtener los IDs de los estándares asociados a los cursos comprados
-    $estandares = CursosEstandares::whereIn('id_curso', $cursosComprados)->pluck('id_carpeta');
+                    // Obtener los IDs de los cursos comprados en las órdenes completadas
+                    $cursosComprados = OrdersTickets::whereIn('id_order', $ordenesCompletadas)->pluck('id_curso');
+                    // Obtener los IDs de los estándares asociados a los cursos comprados
+                    $estandares = CursosEstandares::whereIn('id_curso', $cursosComprados)->pluck('id_carpeta');
 
-    // Obtener los datos de los estándares
-    $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
+                    // Obtener los datos de los estándares
+                    $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
-    if($cliente->estatus_constancia == 'documentos' || $cliente->estatus_constancia == 'revision de datos' || $cliente->estatus_constancia == 'Seleccion de fecha tentativa'){
+                    if($cliente->estatus_constancia == 'documentos' || $cliente->estatus_constancia == 'revision de datos' || $cliente->estatus_constancia == 'Seleccion de fecha tentativa'){
 
-        // Preparar los datos necesarios para verificar
-        if($cliente->Documentos){
-            $datosCliente = [
-                'ine' => $cliente->Documentos->ine,
-                'curp' => $cliente->Documentos->curp,
-                'firma' => $cliente->Documentos->firma
-            ];
-        }else{
-            $datosCliente = [
-                'ine' => $cliente->name
-            ];
-        }
+                        // Preparar los datos necesarios para verificar
+                        if($cliente->Documentos){
+                            $datosCliente = [
+                                'ine' => $cliente->Documentos->ine,
+                                'curp' => $cliente->Documentos->curp,
+                                'firma' => $cliente->Documentos->firma
+                            ];
+                        }else{
+                            $datosCliente = [
+                                'ine' => $cliente->name
+                            ];
+                        }
 
-        return view('user.certificado_webinar',compact('cliente','datosCliente'));
+                        return view('user.certificado_webinar',compact('cliente','datosCliente'));
 
-    }else{
-        return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
-    }
+                    }else{
+                        return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
+                    }
 }
 
     public function eliminarDocumento($documentoId){
@@ -1160,6 +1162,10 @@ class ClientsController extends Controller
             $user->fecha_certificaion = $request->get('fecha_certificaion');
             $user->estatus_constancia = 'Fecha aprobada';
             $user->update();
+
+            $datos = User::where('id', '=', $id)->firstOrFail();
+            Mail::to($datos->email)->send(new PlantillaEvaluacionAprovada($datos));
+
         }
 
         return redirect()->back()->with('success', 'Estatus editado con exito.');

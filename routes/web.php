@@ -78,6 +78,11 @@ Route::get('sede', function () {
     return view('emails.documento_stps');
 });
 
+Route::get('fecha_aprovada', function () {
+    return view('emails.fecha_aprovada');
+});
+
+
 Route::get('certificado_webinar', function () {
     return view('user.certificado_webinar');
 });
