@@ -10,9 +10,9 @@
             </button>
 
             @foreach ($estandaresComprados as $estandar)
-                @if ($estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER')
+                @if ($estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER' || 'EC0186 - Gestión del negocio spa SEP CONOCER')
                     <button class="nav-link" id="nav-des-ejemplo-tab" data-bs-toggle="tab" data-bs-target="#nav-des-ejemplo" type="button" role="tab" aria-controls="nav-des-ejemplo" aria-selected="false">
-                        Ejemplos de llenado
+                        Ejemplos de llenado SEP CONOCER
                     </button>
                 @endif
             @endforeach
