@@ -84,6 +84,44 @@
                 </a>
             </div>
 
+            <div class="d-flex justify-content-center">
+                <a class="preguntas_freceuntas btn_ticket_comprar text-center" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false">Registro IMNAS</a>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="collapse multi-collapse" id="multiCollapseExample1">
+                        <div class="card card-body mb-5">
+                            <form method="POST" action="{{ route('order.pay_registro') }}" role="form">
+                                @csrf
+                                <div class="col-12">
+                                    <div class="input-group flex-nowrap mt-4">
+                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-user"></i></span>
+                                        <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="input-group flex-nowrap mt-4">
+                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                        <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="input-group flex-nowrap mt-4">
+                                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                        <input type="tel" minlength="10" maxlength="10" name="telefono" id="telefono" pattern="[0-9]{10}" class="form-control input_custom_checkout" placeholder="55-55-55-55-55" required>
+                                    </div>
+                                </div>
+
+                                <button class="btn_pagar_checkout" type="submit">Pagar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             {{-- <div class="d-flex justify-content-center">
                 <a class="preguntas_freceuntas btn_ticket_comprar text-center" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false">Pagar Envio</a>
             </div>

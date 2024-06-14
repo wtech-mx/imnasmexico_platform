@@ -432,6 +432,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/notas/cam/store/evaluador/{id}', [App\Http\Controllers\NotasCamController::class, 'store_evaluador'])->name('notascam.store_evaluador');
     Route::patch('/notas/cam/store/estatus/{id}', [App\Http\Controllers\NotasCamController::class, 'store_estatus'])->name('notascam.store_estatus');
 
+    // =============== M O D U L O   R E G I S T R O  I M N A S ===============================
+    Route::get('/registro/imnas/index', [App\Http\Controllers\RegistroIMNASController::class, 'index'])->name('index.imnas');
+    Route::post('/order/pay/registro', [OrderController::class, 'pagar_registro'])->name('order.pay_registro');
+    Route::get('/registro/imnas/show/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'show_cliente'])->name('show_cliente.imnas');
+    Route::post('/registro/imnas/generar_registro', [App\Http\Controllers\RegistroIMNASController::class, 'generar_registro'])->name('generar_registro.documento');
+    Route::patch('/registro/imnas/guia/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_guia'])->name('update_guia.imnas');
+
+    // =============== M O D U L O   R E G I S T R O  I M N A S  C L I E N T E S ===============================
+    Route::get('/registro/imnas/clientes/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'index_clientes'])->name('clientes.imnas');
+    Route::patch('/registro/imnas/subir/doc/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_clientes'])->name('update_clientes.imnas');
 });
 
 // Rutas para el sistema de documentos

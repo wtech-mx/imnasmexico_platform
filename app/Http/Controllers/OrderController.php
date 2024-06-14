@@ -24,6 +24,7 @@ use App\Mail\PlantillaTicket;
 use App\Mail\PlantillaDocumentoStps;
 use App\Models\Paquetes;
 use App\Models\PaquetesIncluye;
+use App\Models\RegistroImnas;
 use Stripe;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Str;
@@ -147,7 +148,6 @@ class OrderController extends Controller
 
     public function pagar_envio(Request $request)
     {
-
         // Configurar el SDK de Mercado Pago con las credenciales de API
         SDK::setAccessToken(config('services.mercadopago.token'));
 
@@ -257,6 +257,113 @@ class OrderController extends Controller
         }
     }
 
+    public function pagar_registro(Request $request)
+    {
+        // Configurar el SDK de Mercado Pago con las credenciales de API
+        SDK::setAccessToken(config('services.mercadopago.token'));
+
+        // Crear un objeto de preferencia de pago
+        $preference = new Preference();
+        $code = Str::random(8);
+
+        $item = new Item();
+        $item->title = 'Pago Registro IMNAS';
+        $item->quantity = 1;
+        $item->unit_price = 250;
+        $ticketss = array($item);
+
+        // Crear un objeto de preferencias de pago
+        $preference = new \MercadoPago\Preference();
+
+        $preference->back_urls = array(
+            "success" => route('order.pay'),
+            "pending" => route('order.pay'),
+            "failure" => "https://plataforma.imnasmexico.com/",
+        );
+        $preference->auto_return = "approved";
+        $preference->external_reference = $code;
+        $preference->items = $ticketss;
+
+        $request->validate([
+            'name' => 'required|string|regex:/^[^@.%\/&$#]+$/',
+        ]);
+
+        if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+            if (User::where('telefono', $request->telefono)->exists()) {
+                $user = User::where('telefono', $request->telefono)->first();
+                $user->direccion = $request->get('address_1');
+                $user->city = $request->get('city');
+                $user->state = $request->get('state');
+                $user->postcode = $request->get('postcode');
+                $user->country = $request->get('country');
+                $user->update();
+            } else {
+                $user = User::where('email', $request->email)->first();
+                $user->direccion = $request->get('address_1');
+                $user->city = $request->get('city');
+                $user->state = $request->get('state');
+                $user->postcode = $request->get('postcode');
+                $user->country = $request->get('country');
+                $user->update();
+            }
+            $payer = $user;
+        } else {
+            $payer = new User;
+            $payer->name = $request->get('name');
+            $payer->email = $request->get('email');
+            $payer->username = $request->get('telefono');
+            $payer->code = $code;
+            $payer->telefono = $request->get('telefono');
+            $payer->cliente = '1';
+            $payer->password = Hash::make($request->get('telefono'));
+            $payer->direccion = $request->get('address_1');
+            $payer->city = $request->get('city');
+            $payer->state = $request->get('state');
+            $payer->postcode = $request->get('postcode');
+            $payer->country = $request->get('country');
+            $payer->save();
+            $datos = User::where('id', '=', $payer->id)->first();
+        }
+
+        try {
+            // Crear la preferencia en Mercado Pago
+
+            $preference->save();
+
+            $fechaActual = date('Y-m-d');
+            $order = new Orders;
+            $order->id_usuario = $payer->id;
+            $order->pago = 250;
+            $order->forma_pago = 'Mercado Pago';
+            $order->fecha = $fechaActual;
+            $order->estatus = 0;
+            $order->code = $code;
+            $order->external_reference = $code;
+            $order->save();
+
+            $order_ticket = new OrdersTickets;
+            $order_ticket->id_order = $order->id;
+            $order_ticket->id_usuario = $payer->id;
+            $order_ticket->id_tickets = 886;
+            $order_ticket->id_curso = 553;
+            $order_ticket->save();
+
+            $envio = new RegistroImnas;
+            $envio->id_order = $order->id;
+            $envio->id_usuario = $payer->id;
+            $envio->save();
+
+            // Redirigir al usuario al proceso de pago de Mercado Pago
+            return Redirect::to($preference->init_point);
+        } catch (Exception $e) {
+            // Manejar errores de Mercado Pago
+            return Redirect::back()->withErrors(['message' => $e->getMessage()]);
+        } catch (Throwable $e) {
+            // Manejar errores de PHP
+            return Redirect::back()->withErrors(['message' => $e->getMessage()]);
+        }
+    }
+
     public function index_envios(Request $request){
 
         $envios = EnviosOrder::get();
@@ -280,9 +387,9 @@ class OrderController extends Controller
 
         $dominio = $request->getHost();
         if ($dominio == 'plataforma.imnasmexico.com') {
-            $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-8901800557603427-041420-99b569dfbf4e6ce9160fc673d9a47b1e-1115271504");
+            $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=TEST-3105049862829838-031417-76d6b6648d0ba342c635d268cd25ba10-236513607");
         } else {
-            $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-8901800557603427-041420-99b569dfbf4e6ce9160fc673d9a47b1e-1115271504");
+            $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=TEST-3105049862829838-031417-76d6b6648d0ba342c635d268cd25ba10-236513607");
         }
 
         $response = json_decode($response);
@@ -341,6 +448,14 @@ class OrderController extends Controller
                 ];
 
                 $ordenwoo = Order::create($data);
+            }else if($orden_ticket2->id_curso == 553){
+                $order = Orders::where('code', '=', $external_reference)->first();
+                $order->registro_imnas = 1;
+                $order->update();
+
+                $cliente = User::where('id', '=', $order->id_usuario)->first();
+                $cliente->registro_imnas = 1;
+                $cliente->update();
             }else{
 
                 $email_diplomas = 'imnascenter@naturalesainspa.com';
@@ -471,6 +586,16 @@ class OrderController extends Controller
             $forma_pago = $orden_ticket2->Orders->forma_pago;
             // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
             Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
+
+            if($orden_ticket2->id_curso == 553){
+                $order = Orders::where('code', '=', $external_reference)->first();
+                $order->registro_imnas = 1;
+                $order->update();
+
+                $cliente = User::where('id', '=', $order->id_usuario)->first();
+                $cliente->registro_imnas = 1;
+                $cliente->update();
+            }
 
             Session::forget('cart');
         }

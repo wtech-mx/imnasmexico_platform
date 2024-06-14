@@ -59,6 +59,23 @@ Mi perfil- {{$cliente->name}}
             </div>
         @endif
 
+        @if($cliente->registro_imnas == '1')
+            <div class="col-12 col-lg-12">
+                <div class="card_single_horizon">
+                    <div class="d-flex justify-content-between">
+                        <h2 class="title_curso mb-3" style="color: #5a0421!important">Registros IMNAS</h2>
+                        <img class="icon_nav_course" src="{{asset('assets/user/logotipos/imnas.webp')}}" style="background-color: #5a0421!important">
+                    </div>
+
+                    <div class="row space_laaterales_profile">
+                        <a href="{{ route('clientes.imnas', $cliente->code) }}">
+                            <h3 class="title_curso mb-3">Bienvenido - Ir a registros IMNAS</h3>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="col-12">
             <div class="card_single_horizon">
                     <div class="d-flex justify-content-between">

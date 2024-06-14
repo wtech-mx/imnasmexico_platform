@@ -50,6 +50,7 @@ class ClientsController extends Controller
                     ->get();
 
                     $usuario_compro = OrdersTickets::join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+                    ->where('orders_tickets.id_curso', '!=', 553)
                     ->where('orders_tickets.id_usuario', $usuarioId)
                     ->where('orders.estatus','=', 1)
                     ->get();
@@ -234,6 +235,7 @@ class ClientsController extends Controller
         $usuario_compro = OrdersTickets::join('orders', 'orders_tickets.id_order', '=', 'orders.id')
                         ->where('orders_tickets.id_usuario', $id)
                         ->where('orders.estatus','=', 1)
+                        ->where('orders_tickets.id_curso', '!=', 553)
                         ->get();
 
         $carpetas_material = Carpetas::join('cursos', 'carpetas.id', '=', 'cursos.carpeta')
