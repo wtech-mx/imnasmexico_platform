@@ -1,8 +1,108 @@
 <div id="rightPanel" class="right-panel">
-    <!-- Contenido del panel derecho -->
-    <div class="close-btn" onclick="closeRightPanel()">Cerrar</div>
+    <div class="panel-content">
 
-        <div class="panel-content">
+    <div class="row">
+        <div class="col-4">
+            <div class="btn btn-warning mt-5 ml-5" onclick="closeRightPanel()" style="margin-left: 2rem">Cerrar</div>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-4"></div>
+    </div>
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Con Usuario</button>
+        </li>
+
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Sin Uusario</button>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+            <div class="row">
+
+                <form method="POST" class="row" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
+                    @csrf
+
+                    <div class="col-12">
+                        <label for="id_client">Seleccionar Alumno:</label>
+                        <select class="form-control cliente" name="id_client" id="id_client">
+                            <option selected value="">Buscar Alumno</option>
+                            @foreach($clientes as $client)
+                                <option value="{{ $client->id }}">{{ $client->name }} / {{ $client->telefono }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="col-12 mt-3 mb-3">
+                        <label for="id_curso">Seleccionar Curso:</label>
+                        <select class="form-control cliente" name="id_curso" id="id_curso">
+                            <option selected value="">Buscar Curso</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="name">Tipo de documento *</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px">
+                            </span>
+                            <select name="tipo_documento" id="tipo_documento" class="form-select" >
+                                @foreach ($tipo_documentos as $item)
+                                <option value="{{ $item->id }}">{{ $item->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="name" class="label_custom_primary_product mb-2">Con Sello STP</label>
+
+                        <div class="input-group d-flex justify-content-around mt-3">
+                                <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sello" id="radioSiSelloDoc" value="Si" checked>
+                                <label class="form-check-label" for="">Si</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sello" id="radioNoSelloDoc" value="No">
+                                <label class="form-check-label" for="">No</label>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-6 ">
+                        <label for="name">Fecha del Curso *</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img class="img_profile_label" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="" width="30px">
+                            </span>
+                            <input id="fecha_curso" name="fecha_curso" type="date" class="form-control" required >
+                        </div>
+                    </div>
+
+                    <div class="form-group col-6 ">
+                        <label for="name">Duracion del curso en horas: </label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img class="img_profile_label" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="" width="30px">
+                            </span>
+                            <input id="duracion_hrs_curso" name="duracion_hrs_curso" type="number" class="form-control" value="48" >
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
             <form method="POST" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
                 @csrf
                 <div class="row">
@@ -242,5 +342,11 @@
 
                 </div>
             </form>
+        </div>
+      </div>
+
+
+
+
         </div>
 </div>

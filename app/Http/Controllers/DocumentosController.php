@@ -18,6 +18,7 @@ use App\Mail\PlantillaDocumentoStps;
 use App\Models\CursosTickets;
 use App\Models\DocumenotsGenerador;
 use DB;
+use App\Models\Orders;
 
 class DocumentosController extends Controller
 {
@@ -29,6 +30,9 @@ class DocumentosController extends Controller
         $cursosArray = $cursos->toArray();
         $tipo_documentos = Tipodocumentos::get();
 
+        $clientes = User::where('cliente','=' ,'1')->orderBy('name','ASC')->get();
+
+
         $estados = [
             'Aguascalientes', 'Baja California', 'Baja California Sur','CDMX', 'Campeche', 'Chiapas',
             'Chihuahua', 'Coahuila', 'Colima', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo',
@@ -37,8 +41,7 @@ class DocumentosController extends Controller
             'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
         ];
 
-
-        return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados'));
+        return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados','clientes'));
     }
 
     public function faltantes(Request $request){
@@ -80,6 +83,9 @@ class DocumentosController extends Controller
         $cursosArray = $cursos->toArray();
         $tipo_documentos = Tipodocumentos::get();
 
+        $clientes = User::where('cliente','=' ,'1')->orderBy('name','ASC')->get();
+
+
         $estados = [
             'Aguascalientes', 'Baja California', 'Baja California Sur','CDMX', 'Campeche', 'Chiapas',
             'Chihuahua', 'Coahuila', 'Colima', 'Durango', 'Guanajuato', 'Guerrero', 'Hidalgo',
@@ -88,7 +94,26 @@ class DocumentosController extends Controller
             'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
         ];
 
-        return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados', 'bitacoras'));
+        return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados', 'bitacoras','clientes'));
+    }
+
+    public function getCursos($id){
+        $orders = Orders::where('id_usuario', '=', $id)->where('estatus', '=', '1')->get();
+        $cursos = [];
+
+        foreach ($orders as $order) {
+            $order_tickets = OrdersTickets::where('id_order', '=', $order->id)->get();
+
+            foreach ($order_tickets as $ticket) {
+                $cursos[] = [
+                    'id' => $ticket->Cursos->id,
+
+                    'nombre' => $ticket->Cursos->nombre,
+                ];
+            }
+        }
+
+        return response()->json($cursos);
     }
 
     public function generar(Request $request){

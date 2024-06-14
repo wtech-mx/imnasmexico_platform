@@ -414,6 +414,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/doc/generar', [App\Http\Controllers\DocumentosController::class, 'index'])->name('generar_documentos.index');
     Route::get('/obtener-ordenes/{usuario}', [App\Http\Controllers\DocumentosController::class, 'obtenerOrdenes']);
 
+    Route::get('/getCursos/{id}', [App\Http\Controllers\DocumentosController::class, 'getCursos']);
+
+
     Route::get('/admin/documentos/faltantes', [App\Http\Controllers\DocumentosController::class, 'faltantes'])->name('documentos.faltantes');
 
     // =============== M O D U L O   R E C U R S O S ===============================

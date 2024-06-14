@@ -223,37 +223,49 @@ Reporte de Documentos
       </div>
 </div>
 
-
-
-
 @endsection
 
 @section('datatable')
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
 
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-
- <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
- <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap4.min.js"></script>
-
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+<script>
+    $(document).ready(function() {
+        $('.curso').select2();
+         $('.cliente').select2();
 
-{{-- Funcion de inputs --}}
-    <script>
-        $(document).ready(function() {
-            $('.curso').select2();
+        const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+            searchable: true,
+            fixedHeight: false
         });
-        // Funcion abrir a la izquierda
-        function openRightPanel() {
+
+        $('#id_client').on('change', function() {
+            var clientId = $(this).val();
+            if (clientId) {
+                $.ajax({
+                    url: '/getCursos/' + clientId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        $('#id_curso').empty();
+                        $('#id_curso').append('<option selected value="">Buscar Curso</option>');
+                        $.each(data, function(key, value) {
+                            $('#id_curso').append('<option value="'+ value.id +'" data-fecha_curso="'+ value.fecha_curso +'" data-duracion_hrs_curso="'+ value.duracion_hrs_curso +'">'+ value.nombre +'</option>');
+                        });
+                    }
+                });
+            } else {
+                $('#id_curso').empty();
+                $('#id_curso').append('<option selected value="">Buscar Curso</option>');
+            }
+        });
+
+
+
+    });
+
+            // Funcion abrir a la izquierda
+            function openRightPanel() {
             document.getElementById("rightPanel").style.right = "0";
         }
 
@@ -345,128 +357,67 @@ Reporte de Documentos
                 reader.readAsDataURL(input.files[0]);
             }
         }
-    </script>
-{{-- end Funcion de inputs --}}
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-
-    const radioSiMayo = document.getElementById('radioSiMayo');
-    const radioNoMayo = document.getElementById('radioNoMayo');
-
-    const precioMayoristaContainer = document.getElementById('precioMayoristaContainer');
-
-    radioSiMayo.addEventListener('change', function() {
-        if (radioSiMayo.checked) {
-            precioMayoristaContainer.style.display = 'block';
-        }
-    });
-
-    radioNoMayo.addEventListener('change', function() {
-        if (radioNoMayo.checked) {
-            precioMayoristaContainer.style.display = 'none';
-    }
-    });
-
-    const curpOption = document.getElementById("curp_option");
-    const tipoOption = document.getElementById("tipo");
-
-    const curpContent = document.querySelector(".curp_content");
-
-    const cnContent = document.querySelector(".gc_cn");
-    const gcContent = document.querySelector(".gc_content");
-
-    // Mostrar u ocultar los contenedores según la opción seleccionada
-    curpOption.addEventListener("change", function () {
-        if (curpOption.value === "Curp") {
-            curpContent.style.display = "block";
-            gcContent.style.display = "none";
-        } else if (curpOption.value === "Generar curp") {
-            curpContent.style.display = "none";
-            gcContent.style.display = "block";
-        }
-    });
-
-    tipoOption.addEventListener("change", function () {
-        if (tipoOption.value == 5) {
-            document.querySelectorAll(".number_4").forEach(element => {
-                element.style.display = "block";
-            });
-            cnContent.style.display = "block";
-        } else if (tipoOption.value != 1) {
-            document.querySelectorAll(".number_4").forEach(element => {
-                element.style.display = "none";
-            });
-            cnContent.style.display = "block";
-        } else {
-            document.querySelectorAll(".number_4").forEach(element => {
-                element.style.display = "none";
-            });
-            cnContent.style.display = "none";
-        }
-    });
-});
-
 </script>
 
-
 <script>
-        $(document).ready(function() {
-            $('#datatable-search').DataTable({
-                dom: 'Bfrtip',
-                buttons: [
-                    {
-                        extend: 'print',
-                        text: 'Imprimir',
-                        exportOptions: {
-                            columns: ':visible'
-                        }
-                    },
-                    'excel',
-                    'pdf',
-                    'colvis'
-                ],
-                responsive: false,
-                stateSave: true,
+    document.addEventListener("DOMContentLoaded", function () {
 
-                language: {
-                    url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
-                }
-            });
+        const radioSiMayo = document.getElementById('radioSiMayo');
+        const radioNoMayo = document.getElementById('radioNoMayo');
+
+        const precioMayoristaContainer = document.getElementById('precioMayoristaContainer');
+
+        radioSiMayo.addEventListener('change', function() {
+            if (radioSiMayo.checked) {
+                precioMayoristaContainer.style.display = 'block';
+            }
         });
 
-</script>
-
-<script>
-    const usuarioSelect = document.getElementById('usuarioSelect');
-    const ordenesSelect = document.getElementById('ordenesSelect');
-
-    usuarioSelect.addEventListener('change', function() {
-        const usuarioId = this.value;
-
-        if (usuarioId) {
-            // Habilitar el segundo select
-            ordenesSelect.removeAttribute('disabled');
-
-            // Realizar la solicitud AJAX para obtener las órdenes del usuario
-            fetch(`/obtener-ordenes/${usuarioId}`)
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data); // Verifica si la relación "curso" se está cargando correctamente
-                    ordenesSelect.innerHTML = '<option value="">Selecciona una orden</option>';
-                    data.forEach(ordenTicket => {
-                        console.log(ordenTicket.CursosTickets.nombre);
-                        const option = document.createElement('option');
-                        option.value = ordenTicket.id;
-                        option.textContent = ordenTicket.CursosTickets ? ordenTicket.CursosTickets.nombre : 'Nombre no disponible';
-                        ordenesSelect.appendChild(option);
-                    });
-            });
-        } else {
-            // Si no se selecciona un usuario, deshabilitar el segundo select
-            ordenesSelect.innerHTML = '<option value="">Selecciona una orden</option>';
-            ordenesSelect.setAttribute('disabled', true);
+        radioNoMayo.addEventListener('change', function() {
+            if (radioNoMayo.checked) {
+                precioMayoristaContainer.style.display = 'none';
         }
     });
+
+        const curpOption = document.getElementById("curp_option");
+        const tipoOption = document.getElementById("tipo");
+
+        const curpContent = document.querySelector(".curp_content");
+
+        const cnContent = document.querySelector(".gc_cn");
+        const gcContent = document.querySelector(".gc_content");
+
+    // Mostrar u ocultar los contenedores según la opción seleccionada
+        curpOption.addEventListener("change", function () {
+            if (curpOption.value === "Curp") {
+                curpContent.style.display = "block";
+                gcContent.style.display = "none";
+            } else if (curpOption.value === "Generar curp") {
+                curpContent.style.display = "none";
+                gcContent.style.display = "block";
+            }
+        });
+
+        tipoOption.addEventListener("change", function () {
+            if (tipoOption.value == 5) {
+                document.querySelectorAll(".number_4").forEach(element => {
+                    element.style.display = "block";
+                });
+                cnContent.style.display = "block";
+            } else if (tipoOption.value != 1) {
+                document.querySelectorAll(".number_4").forEach(element => {
+                    element.style.display = "none";
+                });
+                cnContent.style.display = "block";
+            } else {
+                document.querySelectorAll(".number_4").forEach(element => {
+                    element.style.display = "none";
+                });
+                cnContent.style.display = "none";
+            }
+        });
+    });
+
 </script>
 
 @endsection
