@@ -88,7 +88,7 @@
                 <a class="preguntas_freceuntas btn_ticket_comprar text-center" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false">Registro IMNAS</a>
             </div>
 
-            <div class="row">
+            {{-- <div class="row">
                 <div class="col-12">
                     <div class="collapse multi-collapse" id="multiCollapseExample1">
                         <div class="card card-body mb-5">
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             {{-- <div class="d-flex justify-content-center">
                 <a class="preguntas_freceuntas btn_ticket_comprar text-center" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false">Pagar Envio</a>

@@ -387,7 +387,8 @@ class OrderController extends Controller
 
         $dominio = $request->getHost();
         if ($dominio == 'plataforma.imnasmexico.com') {
-            $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=TEST-3105049862829838-031417-76d6b6648d0ba342c635d268cd25ba10-236513607");
+            $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-8901800557603427-041420-99b569dfbf4e6ce9160fc673d9a47b1e-1115271504");
+
         } else {
             $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=TEST-3105049862829838-031417-76d6b6648d0ba342c635d268cd25ba10-236513607");
         }
