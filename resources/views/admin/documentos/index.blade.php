@@ -247,17 +247,88 @@ Reporte de Documentos
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
+                        var cursos = data.cursos;
+                        var ine = data.ine;
+                        var curp = data.curp;
+                        var foto_tam_titulo = data.foto_tam_titulo;
+                        var foto_tam_infantil = data.foto_tam_infantil;
+                        var firma = data.firma;
+
+                        var cliente_telefono = data.cliente_telefono;
+
                         $('#id_curso').empty();
                         $('#id_curso').append('<option selected value="">Buscar Curso</option>');
-                        $.each(data, function(key, value) {
+                        $.each(cursos, function(key, value) {
                             $('#id_curso').append('<option value="'+ value.id +'" data-fecha_curso="'+ value.fecha_curso +'" data-duracion_hrs_curso="'+ value.duracion_hrs_curso +'">'+ value.nombre +'</option>');
                         });
+
+                        // Mostrar imagen si existe INE
+                        if (ine) {
+                            $('#ine_image').attr('src', '/documentos/' + cliente_telefono + '/' + ine).show();
+                        } else {
+                            $('#ine_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay INE
+                        }
+
+                        if (curp) {
+                            $('#curp_image').attr('src', '/documentos/' + cliente_telefono + '/' + curp).show();
+                        } else {
+                            $('#curp_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay INE
+                        }
+
+                        if (foto_tam_titulo) {
+                            $('#foto_tam_titulo_image').attr('src', '/documentos/' + cliente_telefono + '/' + foto_tam_titulo).show();
+                        } else {
+                            $('#foto_tam_titulo_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay INE
+                        }
+
+                        if (foto_tam_infantil) {
+                            $('#foto_tam_infantil_image').attr('src', '/documentos/' + cliente_telefono + '/' + foto_tam_infantil).show();
+                        } else {
+                            $('#foto_tam_infantil_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay INE
+                        }
+
+                        if (firma) {
+                            $('#firma_image').attr('src', '/documentos/' + cliente_telefono + '/' + firma).show();
+                        } else {
+                            $('#firma_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay INE
+                        }
+
+                        console.log(cliente_telefono); // Para verificar que el teléfono del cliente cambió
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error al obtener los cursos:', error);
+                        $('#id_curso').empty();
+                        $('#id_curso').append('<option selected value="">Buscar Curso</option>');
+                        $('#ine_image').attr('src', '').hide(); // Ocultar y limpiar la imagen en caso de error
+                        $('#curp_image').attr('src', '').hide(); // Ocultar y limpiar la imagen en caso de error
+                        $('#foto_tam_titulo_image').attr('src', '').hide(); // Ocultar y limpiar la imagen en caso de error
+                        $('#foto_tam_infantil_image').attr('src', '').hide(); // Ocultar y limpiar la imagen en caso de error
+                        $('#firma_image').attr('src', '').hide(); // Ocultar y limpiar la imagen en caso de error
+
                     }
                 });
             } else {
                 $('#id_curso').empty();
                 $('#id_curso').append('<option selected value="">Buscar Curso</option>');
+                $('#ine_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay cliente seleccionado
+                $('#curp_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay cliente seleccionado
+                $('#foto_tam_titulo_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay cliente seleccionado
+                $('#foto_tam_infantil_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay cliente seleccionado
+                $('#firma_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay cliente seleccionado
+
             }
+        });
+
+        $('#id_curso').on('change', function() {
+            var selectedOption = $(this).find(':selected');
+            var fechaCurso = selectedOption.data('fecha_curso');
+
+            if (fechaCurso) {
+                $('#fecha_curso').val(fechaCurso);
+            } else {
+                $('#fecha_curso').val('');
+            }
+
         });
 
 

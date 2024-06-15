@@ -97,8 +97,11 @@ class DocumentosController extends Controller
         return view('admin.documentos.index',compact('documentos', 'alumnos','cursosArray','tipo_documentos','estados', 'bitacoras','clientes'));
     }
 
-    public function getCursos($id){
+    public function getCursos($id) {
         $orders = Orders::where('id_usuario', '=', $id)->where('estatus', '=', '1')->get();
+        $documentos = Documentos::where('id_usuario', '=', $id)->get();
+        $cliente = User::where('id','=',$id)->first();
+
         $cursos = [];
 
         foreach ($orders as $order) {
@@ -107,14 +110,34 @@ class DocumentosController extends Controller
             foreach ($order_tickets as $ticket) {
                 $cursos[] = [
                     'id' => $ticket->Cursos->id,
-
                     'nombre' => $ticket->Cursos->nombre,
+                    'fecha_curso' => $ticket->Cursos->fecha_inicial,
                 ];
             }
         }
 
-        return response()->json($cursos);
+        $ine = $documentos->first() ? $documentos->first()->ine : null;
+        $curp = $documentos->first() ? $documentos->first()->curp : null;
+        $foto_tam_titulo = $documentos->first() ? $documentos->first()->foto_tam_titulo : null;
+        $foto_tam_infantil = $documentos->first() ? $documentos->first()->foto_tam_infantil : null;
+        $foto_infantil_blanco = $documentos->first() ? $documentos->first()->foto_infantil_blanco : null;
+        $firma = $documentos->first() ? $documentos->first()->firma : null;
+
+        $data = [
+            'cursos' => $cursos,
+            'documentos' => $documentos,
+            'ine' => $ine,
+            'curp' => $curp,
+            'foto_tam_titulo' => $foto_tam_titulo,
+            'foto_tam_infantil' => $foto_tam_infantil,
+            'firma' => $firma,
+            'cliente_telefono' => $cliente->telefono,
+        ];
+
+
+        return response()->json($data);
     }
+
 
     public function generar(Request $request){
 
