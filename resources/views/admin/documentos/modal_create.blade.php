@@ -94,18 +94,17 @@
                     </div>
 
                     <div class="col-6 mt-3 mb-3">
-                        <label for="ine_image">INE:</label> <br>
-                        <img id="ine_image" src="" alt="INE Image" style="display: none; width: 200px; height: auto;">
-                    </div>
-
-                    <div class="col-6 mt-3 mb-3">
                         <label for="curp_image">CURP:</label> <br>
-                        <img id="curp_image" src="" alt="INE Image" style="display: none; width: 200px; height: auto;">
+                        <img id="curp_image" src="" alt="Imagen del curp" style="display:none; width: 250px; height: 100%;" />
+                        <iframe id="curp_iframe" src="" style="display:none; width: 100%; height: 350px;"></iframe>
+                        <p class="text-center">
+                            <a id="curp_link" class="btn btn-sm text-dark" href="" target="_blank" style="display:none; background: {{$configuracion->color_boton_close}}; color: #ffff;"></a>
+                        </p>
                     </div>
 
                     <div class="col-6 mt-3 mb-3">
                         <label for="foto_tam_titulo_image">foto tam titulo:</label> <br>
-                        <img id="foto_tam_titulo_image" src="" alt="INE Image" style="display: none; width: 200px; height: auto;">
+                        <img id="foto_tam_titulo_image" src="" alt="curp Image" style="display: none; width: 200px; height: auto;">
                     </div>
 
                     <div class="col-6 mt-3 mb-3">
@@ -116,7 +115,7 @@
                     <div class="col-6 mt-3 mb-3">
                         <label for="firma_image">Firma:</label> <br>
                         <img id="firma_image" src="" alt="INE Image" style="display: none; width: 200px; height: auto;">
-                    </div>  
+                    </div>
 
                     <div class="col-12">
                         <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>

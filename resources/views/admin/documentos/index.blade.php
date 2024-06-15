@@ -248,7 +248,7 @@ Reporte de Documentos
                     dataType: 'json',
                     success: function(data) {
                         var cursos = data.cursos;
-                        var ine = data.ine;
+                        // var ine = data.ine;
                         var curp = data.curp;
                         var foto_tam_titulo = data.foto_tam_titulo;
                         var foto_tam_infantil = data.foto_tam_infantil;
@@ -258,21 +258,27 @@ Reporte de Documentos
 
                         $('#id_curso').empty();
                         $('#id_curso').append('<option selected value="">Buscar Curso</option>');
+
                         $.each(cursos, function(key, value) {
                             $('#id_curso').append('<option value="'+ value.id +'" data-fecha_curso="'+ value.fecha_curso +'" data-duracion_hrs_curso="'+ value.duracion_hrs_curso +'">'+ value.nombre +'</option>');
                         });
 
                         // Mostrar imagen si existe INE
-                        if (ine) {
-                            $('#ine_image').attr('src', '/documentos/' + cliente_telefono + '/' + ine).show();
-                        } else {
-                            $('#ine_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay INE
-                        }
-
                         if (curp) {
-                            $('#curp_image').attr('src', '/documentos/' + cliente_telefono + '/' + curp).show();
+                            var curpExtension = curp.split('.').pop().toLowerCase();
+                            if (curpExtension === 'pdf') {
+                                $('#curp_image').hide();
+                                $('#curp_iframe').attr('src', '/documentos/' + cliente_telefono + '/' + curp).show();
+                                $('#curp_link').attr('href', '/documentos/' + cliente_telefono + '/' + curp).text('Ver archivo').show();
+                            } else {
+                                $('#curp_iframe').hide();
+                                $('#curp_image').attr('src', '/documentos/' + cliente_telefono + '/' + curp).show();
+                                $('#curp_link').attr('href', '/documentos/' + cliente_telefono + '/' + curp).text('Ver Imagen').show();
+                            }
                         } else {
-                            $('#curp_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay INE
+                            $('#curp_image').hide();
+                            $('#curp_iframe').hide();
+                            $('#curp_link').hide();
                         }
 
                         if (foto_tam_titulo) {
@@ -299,8 +305,9 @@ Reporte de Documentos
                         console.error('Error al obtener los cursos:', error);
                         $('#id_curso').empty();
                         $('#id_curso').append('<option selected value="">Buscar Curso</option>');
-                        $('#ine_image').attr('src', '').hide(); // Ocultar y limpiar la imagen en caso de error
-                        $('#curp_image').attr('src', '').hide(); // Ocultar y limpiar la imagen en caso de error
+                        $('#curp_image').hide();
+                        $('#curp_iframe').hide();
+                        $('#curp_link').hide();
                         $('#foto_tam_titulo_image').attr('src', '').hide(); // Ocultar y limpiar la imagen en caso de error
                         $('#foto_tam_infantil_image').attr('src', '').hide(); // Ocultar y limpiar la imagen en caso de error
                         $('#firma_image').attr('src', '').hide(); // Ocultar y limpiar la imagen en caso de error
@@ -310,8 +317,9 @@ Reporte de Documentos
             } else {
                 $('#id_curso').empty();
                 $('#id_curso').append('<option selected value="">Buscar Curso</option>');
-                $('#ine_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay cliente seleccionado
                 $('#curp_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay cliente seleccionado
+                $('#curp_iframe').hide();
+                $('#curp_link').hide();
                 $('#foto_tam_titulo_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay cliente seleccionado
                 $('#foto_tam_infantil_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay cliente seleccionado
                 $('#firma_image').attr('src', '').hide(); // Ocultar y limpiar la imagen si no hay cliente seleccionado

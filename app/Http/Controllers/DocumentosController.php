@@ -116,7 +116,7 @@ class DocumentosController extends Controller
             }
         }
 
-        $ine = $documentos->first() ? $documentos->first()->ine : null;
+        // $ine = $documentos->first() ? $documentos->first()->ine : null;
         $curp = $documentos->first() ? $documentos->first()->curp : null;
         $foto_tam_titulo = $documentos->first() ? $documentos->first()->foto_tam_titulo : null;
         $foto_tam_infantil = $documentos->first() ? $documentos->first()->foto_tam_infantil : null;
@@ -126,7 +126,7 @@ class DocumentosController extends Controller
         $data = [
             'cursos' => $cursos,
             'documentos' => $documentos,
-            'ine' => $ine,
+            // 'ine' => $ine,
             'curp' => $curp,
             'foto_tam_titulo' => $foto_tam_titulo,
             'foto_tam_infantil' => $foto_tam_infantil,
