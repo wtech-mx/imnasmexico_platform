@@ -57,12 +57,103 @@
 
 @endsection
 @section('datatable')
-
+<script src="https://cdn.tiny.cloud/1/j1jav9k6mblf3p1zkwu0fxf5yfhp7b4inzjxkxfteidvmluh/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
       searchable: true,
       fixedHeight: false
     });
+
+    tinymce.init({
+       selector: '#aviso_privacidad_cp',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#aviso_priv_hoja2_dip',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_tm_Tira_materias_aparatologia',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_tm_Tira_materias_alasiados',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_tm_Tira_materias_cosmetologia_fc',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_tm_Tira_materias_cosmeatria_ea',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_tm_Tira_materias_auxiliar',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_tm_Tira_materias_masoterapia',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_tm_Tira_materias_cosmetologia',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_tm_Tira_materias_drenaje_linfatico',
+       plugins: 'code table lists'
+     });
+
+
+     tinymce.init({
+       selector: '#leyenda1_hoja2_tm_Tira_materias_aparatologia',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_hoja2_tm_Tira_materias_alasiados',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_hoja2_tm_Tira_materias_cosmetologia_fc',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_hoja2_tm_Tira_materias_cosmeatria_ea',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_hoja2_tm_Tira_materias_auxiliar',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_hoja2_tm_Tira_materias_masoterapia',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_hoja2_tm_Tira_materias_cosmetologia',
+       plugins: 'code table lists'
+     });
+
+     tinymce.init({
+       selector: '#leyenda1_hoja2_tm_Tira_materias_drenaje_linfatico',
+       plugins: 'code table lists'
+     });
 </script>
 
 @endsection

@@ -95,9 +95,9 @@
                             <input type="text" name="tipo_vigencia_abrev_cp"  class="form-control" value="{{ $item->tipo_vigencia_abrev_cp }}">
                         </div>
 
-                        <div class="form-group col-6">
+                        <div class="form-group col-12">
                             <label for="name">aviso_privacidad_cp</label>
-                            <textarea class="form-control" name="aviso_privacidad_cp" id="" cols="30" rows="10">{{ $item->aviso_privacidad_cp }}</textarea>
+                            <textarea class="form-control" name="aviso_privacidad_cp" id="aviso_privacidad_cp" cols="30" rows="10">{{ $item->aviso_privacidad_cp }}</textarea>
                         </div>
 
                         <div class="form-group col-6">
@@ -210,9 +210,9 @@
                             <input type="text" name="subtitulo_hoja2_dip"  class="form-control" value="{{ $item->subtitulo_hoja2_dip }}">
                         </div>
 
-                        <div class="form-group col-6">
+                        <div class="form-group col-12">
                             <label for="name">Aviso priv hoja2</label>
-                            <input type="text" name="aviso_priv_hoja2_dip"  class="form-control" value="{{ $item->aviso_priv_hoja2_dip }}">
+                            <input type="text" name="aviso_priv_hoja2_dip" id="aviso_priv_hoja2_dip" class="form-control" value="{{ $item->aviso_priv_hoja2_dip }}">
                         </div>
 
                         <div class="form-group col-6">
@@ -490,9 +490,9 @@
                             <input type="text" name="titulo1_tm"  class="form-control" value="{{ $item->titulo1_tm }}">
                         </div>
 
-                        <div class="form-group col-6">
+                        <div class="form-group col-12">
                             <label for="name">Leyenda 1</label>
-                            <input type="text" name="leyenda1_tm"  class="form-control" value="{{ $item->leyenda1_tm }}">
+                            <input type="text" name="leyenda1_tm" id="leyenda1_tm_{{$item->tipo}}" class="form-control" value="{{ $item->leyenda1_tm }}">
                         </div>
 
                         <div class="form-group col-6">
@@ -545,9 +545,9 @@
                             <input type="text" name="leyenda_footer_hoja1_tm"  class="form-control" value="{{ $item->leyenda_footer_hoja1_tm }}">
                         </div>
 
-                        <div class="form-group col-6">
+                        <div class="form-group col-12">
                             <label for="name">Leyenda 1 hoja2</label>
-                            <input type="text" name="leyenda1_hoja2_tm"  class="form-control" value="{{ $item->leyenda1_hoja2_tm }}">
+                            <input type="text" name="leyenda1_hoja2_tm" id="leyenda1_hoja2_tm_{{$item->tipo}}" class="form-control" value="{{ $item->leyenda1_hoja2_tm }}">
                         </div>
 
                         <div class="form-group col-6">
