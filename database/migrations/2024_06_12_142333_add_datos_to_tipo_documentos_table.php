@@ -127,7 +127,6 @@ return new class extends Migration
             $table->text('tira_materias_auxiliar_tm')->nullable();
             $table->text('tira_materias_masoterapia_tm')->nullable();
             $table->text('tira_materias_cosmetologia_fc_tm')->nullable();
-
             $table->text('leyenda_footer_hoja1_tm')->nullable();
             $table->text('leyenda1_hoja2_tm')->nullable();
             $table->text('leyenda2_hoja2_tm')->nullable();
