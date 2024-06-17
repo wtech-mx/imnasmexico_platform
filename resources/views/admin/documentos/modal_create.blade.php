@@ -26,6 +26,12 @@
                 <form method="POST" class="row" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
                     @csrf
 
+                        <!-- Campos ocultos para enviar datos adicionales -->
+                    <input type="hidden" id="curp_hidden" name="curp">
+                    <input type="hidden" id="foto_tam_titulo_hidden" name="foto_tam_titulo">
+                    <input type="hidden" id="foto_tam_infantil_hidden" name="foto_tam_infantil">
+                    <input type="hidden" id="firma_hidden" name="firma">
+
                     <div class="col-12">
                         <label for="id_client">Seleccionar Alumno:</label>
                         <select class="form-control cliente" name="id_client" id="id_client">
@@ -49,7 +55,8 @@
                             <span class="input-group-text" id="basic-addon1">
                                 <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px">
                             </span>
-                            <select name="tipo_documento" id="tipo_documento" class="form-select" >
+
+                            <select name="tipo" id="tipo" class="form-select" >
                                 @foreach ($tipo_documentos as $item)
                                 <option value="{{ $item->id }}">{{ $item->nombre }}</option>
                                 @endforeach

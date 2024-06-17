@@ -66,6 +66,73 @@ class TipodocumentosController extends Controller
         $tipo_documento->tipo = $request->get('tipo');
         $tipo_documento->nombre = $request->get('nombre');
 
+        $tipo_documento->leyenda1_cp = $request->get('leyenda1_cp');
+        $tipo_documento->fecha_expedicion_cp = $request->get('fecha_expedicion_cp');
+        $tipo_documento->leyenda2_cp = $request->get('leyenda2_cp');
+        $tipo_documento->tipo_vigencia_cp = $request->get('tipo_vigencia_cp');
+        $tipo_documento->tipo_vigencia_abrev_cp = $request->get('tipo_vigencia_abrev_cp');
+        $tipo_documento->aviso_privacidad_cp = $request->get('aviso_privacidad_cp');
+        $tipo_documento->leyenda_auth_qr_cp = $request->get('leyenda_auth_qr_cp');
+
+        if ($request->hasFile("logo_cp")) {
+            $file = $request->file('logo_cp');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $tipo_documento->logo_cp = $fileName;
+        }
+
+        if ($request->hasFile("logo_otra_institucion_cp")) {
+            $file = $request->file('logo_otra_institucion_cp');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $tipo_documento->logo_otra_institucion_cp = $fileName;
+        }
+
+        if ($request->hasFile("firma1_cp")) {
+            $file = $request->file('firma1_cp');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $tipo_documento->firma1_cp = $fileName;
+        }
+
+        if ($request->hasFile("firma2_cp")) {
+            $file = $request->file('firma2_cp');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $tipo_documento->firma2_cp = $fileName;
+        }
+
+        if ($request->hasFile("img_izq_cp")) {
+            $file = $request->file('img_izq_cp');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $tipo_documento->img_izq_cp = $fileName;
+        }
+
+        if ($request->hasFile("img_der_cp")) {
+            $file = $request->file('img_der_cp');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $tipo_documento->img_der_cp = $fileName;
+        }
+
+
+        // Termina cedula de papel
+
+        if ($request->hasFile("fondo_cp")) {
+            $file = $request->file('fondo_cp');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $tipo_documento->fondo_cp = $fileName;
+        }
+
 
         if ($request->hasFile("img_portada")) {
             $file = $request->file('img_portada');

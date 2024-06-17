@@ -300,6 +300,12 @@ Reporte de Documentos
                         }
 
                         console.log(cliente_telefono); // Para verificar que el teléfono del cliente cambió
+
+                        // Completar los campos ocultos con los datos recibidos
+                        $('#curp_hidden').val(curp);
+                        $('#foto_tam_titulo_hidden').val(foto_tam_titulo);
+                        $('#foto_tam_infantil_hidden').val(foto_tam_infantil);
+                        $('#firma_hidden').val(firma);
                     },
                     error: function(xhr, status, error) {
                         console.error('Error al obtener los cursos:', error);

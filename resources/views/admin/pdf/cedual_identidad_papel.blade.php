@@ -149,14 +149,14 @@
 
     <body>
 
-        @php
+    @php
         $palabras = explode(' ', ucwords(strtolower($nombre)));
         $cantidad_palabras = count($palabras);
     @endphp
 
     {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
-    <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-    {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+    {{-- <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+    <img src="tipos_documentos/{{ $tipo_documentos->fondo_cp }}" class="img_portada">
 
     <div class="container">
         @for ($i = 0; $i < $cantidad_palabras; $i += 2)
@@ -179,7 +179,11 @@
 
 
         <div class="oval-container">
-            <div class="oval">
+            <img src="tipos_documentos/{{ $tipo_documentos->logo_cp }}" class="img_portada">
+        </div>
+
+        <div class="container_logo_cp">
+            <div class="logo_cp">
             </div>
         </div>
 

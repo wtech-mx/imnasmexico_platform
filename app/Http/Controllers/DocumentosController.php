@@ -148,8 +148,33 @@ class DocumentosController extends Controller
         }else{
             $ruta_manual = public_path() . '/utilidades_documentos';
         }
+        if ($request->get('id_client') != null) {
+            // Obtener datos del request
+            $foto_tam_titulo = $request->get('foto_tam_titulo');
+            $foto_tam_infantil = $request->get('foto_tam_infantil');
+            $firma = $request->get('firma');
+            $fecha_curso = $request->get('fecha_curso');
+            $duracion_hrs_curso = $request->get('duracion_hrs_curso');
+
+            // Obtener el alumno y el curso de la base de datos
+            $alumno = User::find($request->get('id_client'));
+            $curso = Cursos::find($request->get('id_curso'));
+
+            // Agrupar todos los datos en un solo array asociativo
+            $data = [
+                'foto_tam_titulo' => $foto_tam_titulo ?? 'default_value',
+                'foto_tam_infantil' => $foto_tam_infantil ?? 'default_value',
+                'firma' => $firma ?? 'default_value',
+                'fecha_curso' => $fecha_curso ?? 'default_date',
+                'duracion_hrs_curso' => $duracion_hrs_curso ?? 0,
+                'alumno' => $alumno ?? new User(), // default User object or null
+                'curso' => $curso ?? new Cursos(), // default Cursos object or null
+            ];
+        }
+
 
         $bitacora = new DocumenotsGenerador;
+
         if($request->get('curso_name') == null){
             $curso = $request->get('curso');
         }else{
@@ -169,7 +194,6 @@ class DocumentosController extends Controller
         $nombre = $request->get('nombre');
         $fecha = $request->get('fecha');
 
-
         $sello = $request->get('sello');
         $duracion_hrs = $request->get('duracion_hrs');
         $tipo = $request->get('tipo');
@@ -177,9 +201,11 @@ class DocumentosController extends Controller
         $curp = $request->get('curp');
         $nacionalidad = $request->get('nacionalidad');
 
+
         $nombres = $request->get('nombres');
         $apellido_apeterno = $request->get('apellido_apeterno');
         $apellido_materno = $request->get('apellido_materno');
+
 
 
         if ($request->hasFile("img_infantil")) {
@@ -187,6 +213,8 @@ class DocumentosController extends Controller
             $path = $ruta_manual;
             $fileName = uniqid() . $file->getClientOriginalName();
             $file->move($path, $fileName);
+        } else {
+            $fileName = "";
         }
 
 
@@ -201,6 +229,8 @@ class DocumentosController extends Controller
 
         $tipo_documentos = Tipodocumentos::find($tipo);
 
+
+
         if($tipo_documentos->tipo == 'Diploma_STPS'){
 
             $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
@@ -209,7 +239,28 @@ class DocumentosController extends Controller
             return $pdf->download('diploma_stps_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Cedula de indetidad'){
-            $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+
+            $otherData = [
+                'leyenda1_cp' => $tipo_documentos->leyenda1_cp,
+                'fecha_expedicion_cp' => $tipo_documentos->fecha_expedicion_cp,
+                'leyenda2_cp' => $tipo_documentos->leyenda2_cp,
+                'tipo_vigencia_cp' => $tipo_documentos->tipo_vigencia_cp,
+                'tipo_vigencia_abrev_cp' => $tipo_documentos->tipo_vigencia_abrev_cp,
+                'aviso_privacidad_cp' => $tipo_documentos->aviso_privacidad_cp,
+                'leyenda_auth_qr_cp' => $tipo_documentos->leyenda_auth_qr_cp,
+                'qr_cp' => $tipo_documentos->qr_cp,
+                'logo_cp' => $tipo_documentos->logo_cp,
+                'logo_otra_institucion_cp' => $tipo_documentos->logo_otra_institucion_cp,
+                'firma1_cp' => $tipo_documentos->firma1_cp,
+                'firma2_cp' => $tipo_documentos->firma2_cp,
+                'img_izq_cp' => $tipo_documentos->img_izq_cp,
+                'img_der_cp' => $tipo_documentos->img_der_cp,
+                'fondo_cp' => $tipo_documentos->fondo_cp,
+            ];
+
+            $pdfData = array_merge($data, $otherData);
+
+            $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','pdfData'));
             $pdf->setPaper('A4', 'portrait');
             $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
 
