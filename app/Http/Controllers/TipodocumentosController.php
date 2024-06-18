@@ -56,6 +56,8 @@ class TipodocumentosController extends Controller
     {
 
         $dominio = $request->getHost();
+
+
         if($dominio == 'plataforma.imnasmexico.com'){
             $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/tipos_documentos');
         }else{

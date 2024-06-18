@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    @php
+        $domain = request()->getHost();
+        $basePath = ($domain == 'plataforma.imnasmexico.com')
+                ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
+                : 'tipos_documentos/';
+
+        $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+                ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+                : 'utilidades_documentos/';
+
+
+        if( $fileName == null){
+            $fileName= $pdfData['foto_tam_infantil'];
+        }
+
+
+    @endphp
+
     <style>
         * {
             padding: 0px;
@@ -33,11 +52,113 @@
             text-align: center;
         }
 
+        .container_leyenda2_cp {
+            position: absolute;
+            top: 52.5%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
         .container2{
             position: absolute;
             top:57%;
             left: 50%;
             transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .container_logo_cp{
+            position: absolute;
+            top:17%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .container_leyenda1_cp{
+            position: absolute;
+            top:36%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .container_aviso_privacidad_cp{
+            position: absolute;
+            top:68%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 400px;
+            line-height: 0.9;
+
+        }
+
+        .container_tipo_vigencia_abrev_cp{
+            position: absolute;
+            top:22%;
+            right: 3%;
+            text-align: center;
+        }
+
+        .container_qr_cp{
+            position: absolute;
+            top:36%;
+            right: -9%;
+            text-align: center;
+        }
+
+        .container_firma1_cp{
+            position: absolute;
+            top:68%;
+            right: -34%;
+            text-align: center;
+        }
+
+        .container_firma2_cp{
+            position: absolute;
+            top:68%;
+            left: -34%;
+            text-align: center;
+        }
+
+        .tipo_abrev{
+            text-transform: uppercase;
+            color: red;
+            font-size: 19px;
+        }
+
+        .tipo_vigencia_abrev_cp{
+            font-size: 55px;
+            text-transform: uppercase;
+            color: red;
+        }
+
+        .firma1_cp{
+            width: 35%;
+        }
+
+        .firma2_cp{
+            width: 35%;
+        }
+
+        .logo_cp{
+            width: 107%;
+        }
+
+        .leyenda1_cp{
+            color: red;
+            font-size: 35px;
+            text-align: center;
+        }
+
+        .qr_cp{
+            width: 50%;
+        }
+
+        .leyenda2_cp{
+            font-size: 15px;
             text-align: center;
         }
 
@@ -103,6 +224,11 @@
             color: #000;
         }
 
+        .aviso_privacidad_cp{
+            font-size: 12px;
+            color: #000;
+            line-height: 0.5;
+        }
 
         .nombre{
             font-family: 'Minion', sans-serif;
@@ -139,8 +265,8 @@
             margin: 0;
             padding: 0;
             margin-top: 8px;
-            background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-             /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
+            /* background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}'); */
+            background-image: url('{{ $basePathUtilidades . $fileName }}');
             background-size: cover;
             background-position: center center;
         }
@@ -150,13 +276,25 @@
     <body>
 
     @php
+        if ($nombre == NULL) {
+            $nombre = $pdfData['alumno']->name;
+        }
+
         $palabras = explode(' ', ucwords(strtolower($nombre)));
         $cantidad_palabras = count($palabras);
+
     @endphp
 
     {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
     {{-- <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
-    <img src="tipos_documentos/{{ $tipo_documentos->fondo_cp }}" class="img_portada">
+
+    @if($pdfData['curso']->nombre == null)
+        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+        @else
+        <img src="{{ $basePath . $tipo_documentos->fondo_cp }}" class="img_portada">
+
+    @endif
 
     <div class="container">
         @for ($i = 0; $i < $cantidad_palabras; $i += 2)
@@ -176,27 +314,66 @@
         @endfor
     </div>
 
-
+    <div class="container_leyenda2_cp">
+        <p class="leyenda2_cp">{{ $tipo_documentos->leyenda2_cp }}</p>
+    </div>
 
         <div class="oval-container">
-            <img src="tipos_documentos/{{ $tipo_documentos->logo_cp }}" class="img_portada">
-        </div>
-
-        <div class="container_logo_cp">
-            <div class="logo_cp">
+            <div class="oval">
             </div>
         </div>
 
-        <div class="container2">
-            <h4 class="curso">{{ ucwords(strtolower($curso)) }}</h4>
+        <div class="container_logo_cp">
+            <img src="tipos_documentos/{{ $tipo_documentos->logo_cp }}" class="logo_cp">
         </div>
+
+        <div class="container_tipo_vigencia_abrev_cp">
+            <P class="tipo_vigencia_abrev_cp">{{ $tipo_documentos->tipo_vigencia_abrev_cp }} <br> <strong class="tipo_abrev">TIPO</strong></P>
+        </div>
+
+        <div class="container_qr_cp">
+            <img src="{{ $basePath . $tipo_documentos->qr_cp }}" class="qr_cp">
+        </div>
+
+        <div class="container_leyenda1_cp">
+            <h4 class="leyenda1_cp">{{ $tipo_documentos->leyenda1_cp }}</h4>
+        </div>
+
+        <div class="container2">
+            <h4 class="curso">
+
+                @php
+                    if ($curso == NULL) {
+                        $curso = $pdfData['curso']->nombre;
+                    }
+                @endphp
+
+                {{ ucwords(strtolower($curso)) }}
+            </h4>
+        </div>
+
+        @php
+            if ($fecha == null) {
+                $fecha = $pdfData['fecha_curso'];
+            }
+        @endphp
 
         <div class="container6">
             <h4 class="fecha">Expedido en la Ciudad de México, el {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
         </div>
 
-        <div class="container3">
-            <h4 class="folio"> {{$folio}}</h4>
+        <div class="container_aviso_privacidad_cp">
+            <p class="aviso_privacidad_cp">
+                 {!! $pdfData['aviso_privacidad_cp'] !!}
+            </p>
+        </div>
+
+        <div class="container_firma1_cp">
+            <img src="{{ $basePath . $tipo_documentos->firma1_cp }}" class="firma1_cp">
+        </div>
+
+        <div class="container_firma2_cp">
+            <img src="{{ $basePath . $tipo_documentos->firma2_cp }}" class="firma2_cp">
         </div>
 
         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
