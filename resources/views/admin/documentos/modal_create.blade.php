@@ -123,6 +123,22 @@
                         <label for="firma_image">Firma:</label> <br>
                         <img id="firma_image" src="" alt="INE Image" style="display: none; width: 200px; height: auto;">
                     </div>
+                    <div class="form-group col-12">
+                        <label for="name" class="label_custom_primary_product mb-2">¿Te gusto el Resultado?</label>
+                        <p>Si te gusto el resultado guardalo para la lista de clase y se ponga en estatus de generado (color Verde)</p>
+
+                        <div class="input-group d-flex justify-content-around mt-3">
+                                <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sello" id="radioSiSResultadook" value="Si" >
+                                <label class="form-check-label" for="">Si</label>
+                                </div>
+
+                                <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="sello" id="radioNoSResultadook" value="No" checked>
+                                <label class="form-check-label" for="">No</label>
+                                </div>
+                        </div>
+                    </div>
 
                     <div class="col-12">
                         <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>

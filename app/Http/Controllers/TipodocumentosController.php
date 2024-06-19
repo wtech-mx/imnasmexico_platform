@@ -74,6 +74,8 @@ class TipodocumentosController extends Controller
         $tipo_documento->tipo_vigencia_cp = $request->get('tipo_vigencia_cp');
         $tipo_documento->tipo_vigencia_abrev_cp = $request->get('tipo_vigencia_abrev_cp');
         $tipo_documento->aviso_privacidad_cp = $request->get('aviso_privacidad_cp');
+        $tipo_documento->aviso_privacidad_cp2 = $request->get('aviso_privacidad_cp2');
+
         $tipo_documento->leyenda_auth_qr_cp = $request->get('leyenda_auth_qr_cp');
 
         if ($request->hasFile("logo_cp")) {
@@ -106,6 +108,14 @@ class TipodocumentosController extends Controller
             $fileName = uniqid() . $file->getClientOriginalName();
             $file->move($path, $fileName);
             $tipo_documento->firma2_cp = $fileName;
+        }
+
+        if ($request->hasFile("firma3_cp")) {
+            $file = $request->file('firma3_cp');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $tipo_documento->firma3_cp = $fileName;
         }
 
         if ($request->hasFile("img_izq_cp")) {

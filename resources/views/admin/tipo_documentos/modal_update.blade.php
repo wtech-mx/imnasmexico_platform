@@ -74,6 +74,12 @@
                         </div>
 
                         <div class="form-group col-6">
+                            <label for="name">firma3_cp</label>
+                            <input type="file" name="firma3_cp" id="firma3_cp" class="form-control">
+                            <img  src="{{ asset('tipos_documentos/'.$item->firma3_cp) }}" alt="Imagen" style="width:300px;">
+                        </div>
+
+                        <div class="form-group col-6">
                             <label for="name">img_izq_cp</label>
                             <input type="file" name="img_izq_cp" id="img_izq_cp" class="form-control">
                             <img  src="{{ asset('tipos_documentos/'.$item->img_izq_cp) }}" alt="Imagen" style="width:300px;">
@@ -98,6 +104,11 @@
                         <div class="form-group col-12">
                             <label for="name">aviso_privacidad_cp</label>
                             <textarea class="form-control" name="aviso_privacidad_cp" id="aviso_privacidad_cp" cols="30" rows="10">{{ $item->aviso_privacidad_cp }}</textarea>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label for="name">aviso_privacidad_cp2</label>
+                            <textarea class="form-control" name="aviso_privacidad_cp2" id="aviso_privacidad_cp2" cols="30" rows="10">{{ $item->aviso_privacidad_cp2 }}</textarea>
                         </div>
 
                         <div class="form-group col-6">

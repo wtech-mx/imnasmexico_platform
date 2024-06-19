@@ -70,6 +70,12 @@
      });
 
      tinymce.init({
+       selector: '#aviso_privacidad_cp2',
+       plugins: 'code table lists'
+     });
+
+
+     tinymce.init({
        selector: '#aviso_priv_hoja2_dip',
        plugins: 'code table lists'
      });

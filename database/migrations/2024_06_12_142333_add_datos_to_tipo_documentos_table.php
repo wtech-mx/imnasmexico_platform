@@ -34,6 +34,7 @@ return new class extends Migration
             $table->text('leyenda2_cp')->nullable();
             $table->text('firma1_cp')->nullable();
             $table->text('firma2_cp')->nullable();
+            $table->text('firma3_cp')->nullable();
             $table->text('img_izq_cp')->nullable();
             $table->text('img_der_cp')->nullable();
             $table->text('tipo_vigencia_cp')->nullable();
