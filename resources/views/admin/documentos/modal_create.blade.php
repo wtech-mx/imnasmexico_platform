@@ -23,7 +23,7 @@
         <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
             <div class="row">
 
-                <form method="POST" class="row" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
+                {{-- <form method="POST" class="row" action="{{ route('generar.documento') }}" enctype="multipart/form-data" role="form">
                     @csrf
 
                         <!-- Campos ocultos para enviar datos adicionales -->
@@ -144,7 +144,7 @@
                         <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                     </div>
 
-                </form>
+                </form> --}}
 
             </div>
         </div>
