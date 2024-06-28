@@ -70,6 +70,42 @@ Mi perfil- {{$cliente->name}}
                             Estatus documento
                         </a>
                     </div>
+
+                    <div class="collapse show mt-3" id="collapseinfo">
+                        <div class="card card-body card_colapsable_comprar">
+                            <div class="row mb-3">
+                                @foreach ($cursos_tickets as $ticket)
+                                @php
+                                        $precio = number_format($ticket->precio, 2, '.', ',');
+                                @endphp
+                                    <div class="col-12 mt-3">
+                                        <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                    </div>
+                                    <div class="col-6 col-lg-6 mt-3">
+                                        @if ($ticket->descuento == NULL)
+                                            <h5 style="color: #836262"><strong>$ {{ $precio }}</strong></h5>
+                                        @else
+                                            <del style="color: #836262"><strong>De ${{ $precio }}</strong></del>
+                                            <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-6 col-lg-6 mt-3">
+                                        <p class="btn-holder">
+                                            <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                                <i class="fas fa-ticket-alt"></i> Comprar
+                                            </a>
+                                        </p>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

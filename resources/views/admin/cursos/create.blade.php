@@ -66,10 +66,10 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="estandar">Seleccionar Estandar</label>
-                                                        <select class="form-control" id="id_estandar[]" name="id_estandar[]" multiple="multiple">
+                                                        <select class="form-control id_estandar" id="id_estandar[]" name="id_estandar[]" multiple="multiple">
                                                             <option value="">Seleccionar Estandar</option>
-                                                          @foreach ($estandares as $estandar)
-                                                          <option value="{{ $estandar->id }}">{{ $estandar->name }}</option>
+                                                          @foreach ($carpetas_estandares as $estandar)
+                                                          <option value="{{ $estandar->id }}">{{ $estandar->nombre }}</option>
                                                           @endforeach
                                                         </select>
                                                     </div>
@@ -199,8 +199,8 @@
                                                             <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
                                                         </span>
                                                         <select class="form-control" id="visibilidad_carusel" name="visibilidad_carusel">
-                                                            <option value="" selected>Visible</option>
-                                                            <option value="0" >No visible</option>
+                                                            <option value="" >Visible</option>
+                                                            <option value="0" selected>No visible</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -609,6 +609,7 @@
         $(document).ready(function() {
 
             $('.carpeta_mat').select2();
+            $('.id_estandar').select2();
 
             // Manejar el cambio en el select
             $('#opcion').change(function() {
@@ -625,35 +626,6 @@
 
         });
 
-     tinymce.init({
-       selector: '#descripcion', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#temario', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#texto_rvoe', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#texto_conocer', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#descripcion_ticket', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#materiales_ticket', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
 
 
         function readURL(input) {

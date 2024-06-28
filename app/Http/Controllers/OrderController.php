@@ -132,8 +132,18 @@ class OrderController extends Controller
                 $order_ticket->id_usuario = $payer->id;
                 $order_ticket->id_tickets = $details['id'];
                 $order_ticket->id_curso = $details['curso'];
-
                 $order_ticket->save();
+
+                if($details['curso'] == 647){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->save();
+
+                    $user_registro_imnas = User::where('id', $payer->id)->first();
+                    $user_registro_imnas->registro_imnas = '1';
+                    $user_registro_imnas->update();
+                }
             }
             // Redirigir al usuario al proceso de pago de Mercado Pago
             return Redirect::to($preference->init_point);
@@ -674,6 +684,18 @@ class OrderController extends Controller
             $order_ticket->id_tickets = $details['id'];
             $order_ticket->id_curso = $details['curso'];
             $order_ticket->save();
+
+            if($details['curso'] == 647){
+                $envio = new RegistroImnas;
+                $envio->id_order = $order->id;
+                $envio->id_usuario = $payer->id;
+                $envio->save();
+
+                $user_registro_imnas = User::where('id', $payer->id)->first();
+                $user_registro_imnas->registro_imnas = '1';
+                $user_registro_imnas->update();
+            }
+
         }
 
         if ($stripe->status === 'succeeded') {

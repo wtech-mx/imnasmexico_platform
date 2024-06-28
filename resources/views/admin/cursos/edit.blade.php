@@ -62,12 +62,12 @@
                                                         <img id="blah" src="{{asset('curso/'.$curso->foto) }}" alt="Imagen" style="width: 150px; height: 150px;"/>
                                                     </div>
                                                 </div>
-                                                <div class="col-12">
+                                                {{-- <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="nota">Enlace de Clase Grabada</label>
                                                         <input type="text" id="clase_grabada" name="clase_grabada" class="form-control" value="{{$curso->clase_grabada}}">
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                                 <div class="col-12">
                                                     <div class="form-group">
@@ -780,41 +780,6 @@
             });
 
         });
-
-     tinymce.init({
-       selector: '#descripcion', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#objetivo', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#temario', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#texto_rvoe', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#texto_conocer', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#descripcion_ticket', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
-
-     tinymce.init({
-       selector: '#materiales_ticket', // Replace this CSS selector to match the placeholder element for TinyMCE
-       plugins: 'code table lists'
-     });
    </script>
 
 

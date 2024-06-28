@@ -94,7 +94,7 @@ class CursosController extends Controller
         ->orWhere('cliente', '5')
         ->orderBy('id', 'DESC')
         ->get();
-        $estandares = CarpetasEstandares::orderBy('nombre','asc')->get();
+        $carpetas_estandares = CarpetasEstandares::orderBy('nombre','asc')->get();
         $fotos_online = Recursos::where('tipo', '=', 'Online')->get();
         $fotos_presencial = Recursos::where('tipo', '=', 'Presencial')->get();
         $fotos_pdf = Recursos::where('tipo', '=', 'PDF')->get();
@@ -117,7 +117,7 @@ class CursosController extends Controller
 
         $carpetas = Carpetas::get();
 
-        return view('admin.cursos.create', compact('fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','estandares', 'carpetas','profesores'));
+        return view('admin.cursos.create', compact('fotos_online','fotos_presencial','fotos_pdf', 'fotos_materialeso', 'fotos_materialesp','carpetas_estandares', 'carpetas','profesores'));
     }
 
     public function store(Request $request)

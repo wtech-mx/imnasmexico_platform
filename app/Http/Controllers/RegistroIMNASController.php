@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cursos;
+use App\Models\CursosTickets;
 use App\Models\DocumenotsGenerador;
 use App\Models\Orders;
 use App\Models\RegistroImnas;
@@ -24,7 +26,11 @@ class RegistroIMNASController extends Controller
         $registros_imnas = RegistroImnas::where('id_usuario', '=', $cliente->id)->where('nombre', '!=', NULL)->get();
         $recien_comprados = RegistroImnas::where('id_usuario', '=', $cliente->id)->where('nombre', '=', NULL)->get();
 
-        return view('user.registro_imnas', compact('registros_imnas', 'cliente', 'recien_comprados'));
+        $curso = Cursos::where('id', '=', 553)->first();
+        $cursos_tickets = CursosTickets::where('id_curso', $curso->id)->get();
+        $cursos_tickets = $cursos_tickets->slice(1);
+
+        return view('user.registro_imnas', compact('registros_imnas', 'cliente', 'recien_comprados', 'cursos_tickets', 'curso'));
     }
 
     public function update_clientes(Request $request, $id)
@@ -85,7 +91,10 @@ class RegistroIMNASController extends Controller
         $cliente = User::where('code', $code)->firstOrFail();
         $registros_imnas = RegistroImnas::where('id_usuario', '=', $cliente->id)->get();
 
-        return view('admin.registro_imnas.show', compact('registros_imnas', 'cliente'));
+        $curso = Cursos::where('id', '=', 553)->first();
+        $cursos_tickets = CursosTickets::where('id_curso', '=', $curso)->get();
+
+        return view('admin.registro_imnas.show', compact('registros_imnas', 'cliente', 'curso', 'cursos_tickets'));
     }
 
     public function generar_registro(Request $request){
