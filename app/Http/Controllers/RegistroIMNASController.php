@@ -26,7 +26,7 @@ class RegistroIMNASController extends Controller
         $registros_imnas = RegistroImnas::where('id_usuario', '=', $cliente->id)->where('nombre', '!=', NULL)->get();
         $recien_comprados = RegistroImnas::where('id_usuario', '=', $cliente->id)->where('nombre', '=', NULL)->get();
 
-        $curso = Cursos::where('id', '=', 553)->first();
+        $curso = Cursos::where('id', '=', 647)->first();
         $cursos_tickets = CursosTickets::where('id_curso', $curso->id)->get();
         $cursos_tickets = $cursos_tickets->slice(1);
 
@@ -91,7 +91,7 @@ class RegistroIMNASController extends Controller
         $cliente = User::where('code', $code)->firstOrFail();
         $registros_imnas = RegistroImnas::where('id_usuario', '=', $cliente->id)->get();
 
-        $curso = Cursos::where('id', '=', 553)->first();
+        $curso = Cursos::where('id', '=', 647)->first();
         $cursos_tickets = CursosTickets::where('id_curso', '=', $curso)->get();
 
         return view('admin.registro_imnas.show', compact('registros_imnas', 'cliente', 'curso', 'cursos_tickets'));
