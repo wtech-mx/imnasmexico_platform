@@ -91,11 +91,11 @@
                                                     @endif
                                                 </h5>
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 <h5>
                                                     <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
                                                 </h5>
-                                            </td>
+                                            </td> --}}
                                             <td>
                                                 @php
                                                 $fecha = $nota->fecha;
@@ -106,7 +106,7 @@
                                                     {{$fecha_formateada}}
                                                 </h5>
                                             </td>
-                                            <td><h5>{{ $nota->total }}</h5></td>
+                                            <td><h5>${{ $nota->total }}</h5></td>
                                             <td>
                                                 <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $nota->id]) }}">
                                                     <i class="fa fa-file"></i>
@@ -126,19 +126,18 @@
                                                     @endif
                                                 @endcan
                                                 @can('nota-productos-editar')
-                                                    <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_nota_{{ $nota->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                                    <a class="btn btn-sm btn-warning" href="{{ route('notas_cotizacion.edit', $nota->id) }}">
                                                         <i class="fa fa-fw fa-edit"></i>
                                                     </a>
                                                 @endcan
-                                                <form action="{{ route('notas_cotizacion.eliminar', ['id' => $nota->id]) }}" method="POST">
+                                                {{-- <form action="{{ route('notas_cotizacion.eliminar', ['id' => $nota->id]) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta nota?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                </form>
+                                                </form> --}}
 
                                             </td>
                                         </tr>
-                                        @include('admin.cotizacion.modal_edit')
                                         @include('admin.cotizacion.modal_products')
                                     @endforeach
                                 </tbody>
