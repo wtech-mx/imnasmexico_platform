@@ -209,61 +209,51 @@ class CotizacionController extends Controller
     }
 
     public function update(Request $request, $id){
-        $dominio = $request->getHost();
-        if($dominio == 'plataforma.imnasmexico.com'){
-            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera');
-        }else{
-            $pago_fuera = public_path() . '/pagos';
+        $campo = $request->input('campo');
+        $campo4 = $request->input('campo4');
+        $campo3 = $request->input('campo3');
+        $descuento_prod = $request->input('descuento_prod');
+
+        // Agregar nuevos productos
+        for ($count = 0; $count < count($campo); $count++) {
+            $price = $campo4[$count];
+            $cleanPrice = floatval(str_replace(['$', ','], '', $price));
+            $data = array(
+                'id_notas_productos' => $id,
+                'producto' => $campo[$count],
+                'price' => $cleanPrice,
+                'cantidad' => $campo3[$count],
+                'descuento' => $descuento_prod[$count],
+            );
+            ProductosNotasId::create($data);
         }
-        $notas = NotasProductos::find($id);
-        $notas->metodo_pago = $request->get('metodo_pago');
-        $notas->tipo = $request->get('tipo');
-        $notas->fecha = $request->get('fecha');
-        $notas->nota = $request->get('nota');
-        $notas->metodo_pago2 = $request->get('metodo_pago2');
-        $notas->monto = $request->get('monto');
-        $notas->monto2 = $request->get('monto2');
 
-        $sum_total = ProductosNotasId::where('id_notas_productos', '=', $id)->get();
-        $total_pro = $sum_total->sum('price');
+        $producto = $request->input('productos');
+        $price = $request->input('price');
+        $cantidad = $request->input('cantidad');
+        $descuento = $request->input('descuento');
 
-            $descuento = $notas->restante / 100;
-            $total1 = 0;
+        for ($count = 0; $count < count($producto); $count++) {
+            $productos = ProductosNotasId::where('producto', $producto[$count])
+            ->where('id_notas_productos', $id)
+            ->firstOrFail();
 
-            if ($request->has('campo')) {
-                $nuevosCampos = $request->input('campo');
-                $nuevosCampos2 = $request->input('campo4');
-                $nuevosCampos3 = $request->input('campo3');
-
-                foreach ($nuevosCampos as $index => $campo) {
-
-                    $notas_inscripcion = new ProductosNotasId;
-                    $notas_inscripcion->id_notas_productos = $notas->id;
-                    $notas_inscripcion->producto = $campo;
-                    $notas_inscripcion->price = $nuevosCampos2[$index];
-                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                    $notas_inscripcion->save();
-
-                    $precio = $nuevosCampos2[$index];
-                    $subtotal = $precio;
-                    $total1 += $subtotal;
-                    $total = $total_pro + $total1;
-
-                }
-
-                $descuentoAplicado = $total * $descuento;
-                $total -= $descuentoAplicado;
-
-            }
-            $notas->total = $total;
-        if ($request->hasFile("foto_pago2")) {
-            $file = $request->file('foto_pago2');
-            $path = $pago_fuera;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $notas->foto_pago2 = $fileName;
+            $precio = $price[$count];
+            $cleanPrice2 = floatval(str_replace(['$', ','], '', $precio));
+            $data = array(
+                'price' => $cleanPrice2,
+                'cantidad' => $cantidad[$count],
+                'descuento' => $descuento[$count],
+            );
+            $productos->update($data);
         }
-        $notas->update();
+
+        $nota = NotasProductos::findOrFail($id);
+        $total_final = $request->get('total_final');
+        $cleanPrice3 = floatval(str_replace(['$', ','], '', $total_final));
+        $nota->tipo = $request->get('subtotal_final');
+        $nota->total = $cleanPrice3;
+        $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Se ha actualizada');
@@ -323,8 +313,6 @@ class CotizacionController extends Controller
 
         foreach ($productos as $id => $data) {
             $producto = ProductosNotasId::findOrFail($id);
-
-            // Actualizar los campos modificados
             $producto->producto = $data['producto'];
             $producto->price = $data['price'];
             $producto->cantidad = $data['cantidad'];

@@ -12,6 +12,10 @@ class ProductosNotasId extends Model
 
     protected $fillable = [
         'id_notas_productos',
+        'producto',
+        'price',
+        'cantidad',
+        'descuento',
     ];
 
     public function Nota()

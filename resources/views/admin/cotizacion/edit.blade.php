@@ -17,7 +17,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('notas_productos.update', $cotizacion->id) }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('notas_cotizacion.update', $cotizacion->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <div class="modal-body">
@@ -112,7 +112,7 @@
 
                                         <div class="col-3">
                                             <label for="">Nombre</label>
-                                            <input type="text"  class="form-control d-inline-block" value="{{ $productos->producto }}" disabled>
+                                            <input type="text"  name="productos[]" class="form-control d-inline-block" value="{{ $productos->producto }}" readonly>
                                         </div>
 
                                         <div class="form-group col-3">
@@ -121,7 +121,7 @@
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
                                                 </span>
-                                                <input type="number" id="cantidad_{{ $productos->id }}" class="form-control cantidad" style="width: 65%;" value="{{ $productos->cantidad }}">
+                                                <input type="number" id="cantidad_{{ $productos->id }}" name="cantidad[]" class="form-control cantidad" style="width: 65%;" value="{{ $productos->cantidad }}">
                                             </div>
                                         </div>
 
@@ -131,7 +131,7 @@
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                                 </span>
-                                                <input type="number" id="descuento_{{ $productos->id }}" name="descuento" class="form-control descuento" value="{{ $productos->descuento }}">
+                                                <input type="number" id="descuento_{{ $productos->id }}" name="descuento[]" class="form-control descuento" value="{{ $productos->descuento }}">
                                             </div>
                                         </div>
 
@@ -141,7 +141,7 @@
                                                 <span class="input-group-text" id="basic-addon1">
                                                     <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                                 </span>
-                                                <input type="text" id="subtotal_{{ $productos->id }}" class="form-control subtotal" value="${{ $precio_format }}" disabled>
+                                                <input type="text" id="subtotal_{{ $productos->id }}" name="price[]" class="form-control subtotal" value="${{ $precio_format }}" readonly>
                                             </div>
                                         </div>
 
@@ -151,16 +151,16 @@
                                         @php
                                             $subtotal = $productos->price;
                                             $total += $subtotal;
-                                            $precio = number_format($total, 2, '.', ',');
+                                            $precio = $total;
                                         @endphp
                                     @endforeach
-                                    <div class="col-6 mt-2">
+                                    {{-- <div class="col-6 mt-2">
                                         <h5 style="color:#836262"><strong>Total</strong> </h5>
                                     </div>
 
                                     <div class="col-6 mt-3">
                                         <h4 style="color:#836262"><strong>${{ $precio }}</strong> </h4>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="col-12">
                                         <h5 class="mt-5">Seleciona mas productos </h5>
@@ -178,38 +178,46 @@
                                         <div class="form-group">
                                             <div id="camposContainer2">
                                                 <div class="campo2 mt-3">
-                                                    <div class="row">
-                                                        <div class="col-6">
+                                                    <div class="row" id="new-products">
+                                                        <div class="col-3">
                                                             <label for="">Producto</label>
-                                                            <select id="campo[]" name="campo[]" class="form-select d-inline-block producto2">
-                                                                <option value="">Seleccione products</option>
+                                                            <select id="producto" name="campo[]" class="form-select d-inline-block producto2">
+                                                                <option value="">Seleccione productos</option>
                                                                 @foreach ($products as $product)
                                                                 <option value="{{ $product->nombre }}" data-precio_normal2="{{ $product->precio_normal }}">{{ $product->nombre }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
 
-
                                                         <div class="form-group col-3">
-                                                                <label for="name">Cantidad *</label>
-                                                                <div class="input-group mb-3">
-                                                                    <span class="input-group-text" id="basic-addon1">
-                                                                        <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
-                                                                    </span>
-                                                                    <input type="number" name="campo3[]" class="form-control d-inline-block cantidad2" >
-                                                                </div>
+                                                            <label for="name">Cantidad *</label>
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
+                                                                </span>
+                                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad2" value="1">
+                                                            </div>
                                                         </div>
 
                                                         <div class="form-group col-3">
-                                                                <label for="name">Subtotal *</label>
-                                                                <div class="input-group mb-3">
-                                                                    <span class="input-group-text" id="basic-addon1">
-                                                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
-                                                                    </span>
-                                                                    <input type="text" name="campo4[]" class="form-control d-inline-block subtotal2" readonly>
-                                                                </div>
+                                                            <label for="name">Descuento (%)</label>
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
+                                                                </span>
+                                                                <input type="number" name="descuento_prod[]" class="form-control d-inline-block descuento_prod" value="0">
                                                             </div>
+                                                        </div>
 
+                                                        <div class="form-group col-3">
+                                                            <label for="name">Subtotal *</label>
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                                </span>
+                                                                <input type="text" name="campo4[]" class="form-control d-inline-block subtotal2" readonly>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -221,24 +229,13 @@
                                         <h5 style="color:#836262"><strong>Pago</strong> </h5>
                                     </div>
 
-
-                                    <div class="form-group col-4">
-                                        <label for="name">Descuento</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input id="restante" name="restante" type="number" class="form-control"  value="{{ $cotizacion->restante }}" disabled>
-                                        </div>
-                                    </div>
-
                                     <div class="form-group col-4">
                                         <label for="name">Subtotal *</label>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                             </span>
-                                            <input id="subtotal" name="subtotal" type="text" class="form-control"  value="{{ $precio }}" disabled>
+                                            <input id="subtotal_final" name="subtotal_final" type="text" class="form-control"  value="{{ $precio }}" readonly>
                                         </div>
                                     </div>
 
@@ -248,14 +245,11 @@
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" alt="" width="35px">
                                             </span>
-                                            @php
-                                                $total_formateado = number_format($cotizacion->total, 2, '.', ',');
-                                            @endphp
-                                            <input type="text" class="form-control"  value="{{ $total_formateado }}" disabled>
+                                            <input id="total_final" name="total_final" type="text" class="form-control"  value="{{ $cotizacion->total }}" readonly>
                                         </div>
                                     </div>
 
-                                    <div class="col-4">
+                                    {{-- <div class="col-4">
                                         <div class="form-group">
                                             <label for="name">Metodo de pago</label>
                                             <select class="form-select" name="metodo_pago" id="metodo_pago">
@@ -329,7 +323,7 @@
                                                 <img id="blah" src="{{asset('pagos/'.$cotizacion->foto_pago2) }}" alt="Imagen" style="width: 250px; height: 300px;"/>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                 </div>
 
@@ -355,15 +349,15 @@
             const descuentoInput = document.getElementById(`descuento_${producto.id}`);
 
             if (cantidadInput) {
-                cantidadInput.addEventListener('input', () => updateSubtotal(producto.id));
+                cantidadInput.addEventListener('input', () => updateSubtotalExistente(producto.id));
             }
 
             if (descuentoInput) {
-                descuentoInput.addEventListener('input', () => updateSubtotal(producto.id));
+                descuentoInput.addEventListener('input', () => updateSubtotalExistente(producto.id));
             }
         });
 
-        function updateSubtotal(id) {
+        function updateSubtotalExistente(id) {
             const cantidad = parseFloat(document.getElementById(`cantidad_${id}`).value) || 0;
             const descuento = parseFloat(document.getElementById(`descuento_${id}`).value) || 0;
             const precio_unitario = parseFloat(document.getElementById(`precio_unitario_${id}`).value) || 0;
@@ -382,14 +376,109 @@
 
         function updateTotal() {
             let total = 0;
-            const subtotales = document.querySelectorAll('.subtotal');
 
-            subtotales.forEach(subtotal => {
-                total += parseFloat(subtotal.value.replace('$', '')) || 0;
+            // Sumar subtotales de productos existentes
+            const subtotalesExistentes = document.querySelectorAll('.subtotal');
+            subtotalesExistentes.forEach(subtotalElement => {
+                const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
+                total += subtotalValue;
             });
 
-            document.getElementById('total').value = `$${total.toFixed(2)}`;
+            // Sumar subtotales de nuevos productos
+            const subtotalesNuevos = document.querySelectorAll('.subtotal2');
+            subtotalesNuevos.forEach(subtotalElement => {
+                const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
+                total += subtotalValue;
+            });
+
+            document.getElementById('subtotal_final').value = `$${total.toFixed(2)}`;
+            document.getElementById('total_final').value = `$${total.toFixed(2)}`;
         }
     });
 </script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const camposContainer2 = document.getElementById('camposContainer2');
+
+        // Añadir campo de producto
+        document.getElementById('agregarCampo2').addEventListener('click', function() {
+            const nuevoCampo = crearNuevoCampo();
+            camposContainer2.appendChild(nuevoCampo);
+            asignarEventos(nuevoCampo);
+        });
+
+        function crearNuevoCampo() {
+            const campoTemplate = document.querySelector('.campo2');
+            const nuevoCampo = campoTemplate.cloneNode(true);
+            nuevoCampo.querySelector('.producto2').value = '';
+            nuevoCampo.querySelector('.cantidad2').value = '';
+            nuevoCampo.querySelector('.descuento_prod').value = '0';
+            nuevoCampo.querySelector('.subtotal2').value = '';
+            return nuevoCampo;
+        }
+
+        function asignarEventos(campo) {
+            const productSelect = campo.querySelector('.producto2');
+            const cantidadInput = campo.querySelector('.cantidad2');
+            const descuentoInput = campo.querySelector('.descuento_prod');
+
+            productSelect.addEventListener('change', function () {
+                const selectedOption = productSelect.options[productSelect.selectedIndex];
+                const precio = parseFloat(selectedOption.dataset.precio_normal2) || 0;
+                cantidadInput.value = 1;
+                const descuento = parseFloat(descuentoInput.value) || 0;
+                const subtotal = precio - (precio * (descuento / 100));
+                campo.querySelector('.subtotal2').value = `$${subtotal.toFixed(2)}`;
+                updateTotal();
+            });
+
+            cantidadInput.addEventListener('input', function () {
+                actualizarSubtotalNuevo(campo);
+            });
+
+            descuentoInput.addEventListener('input', function () {
+                actualizarSubtotalNuevo(campo);
+            });
+        }
+
+        function actualizarSubtotalNuevo(campo) {
+            const productSelect = campo.querySelector('.producto2');
+            const selectedOption = productSelect.options[productSelect.selectedIndex];
+            const precio = parseFloat(selectedOption.dataset.precio_normal2) || 0;
+            const cantidad = parseFloat(campo.querySelector('.cantidad2').value) || 0;
+            const descuento = parseFloat(campo.querySelector('.descuento_prod').value) || 0;
+            const subtotal = (precio * cantidad) - ((precio * cantidad) * (descuento / 100));
+            campo.querySelector('.subtotal2').value = `$${subtotal.toFixed(2)}`;
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let total = 0;
+
+            // Sumar subtotales de productos existentes
+            const subtotalesExistentes = document.querySelectorAll('.subtotal');
+            subtotalesExistentes.forEach(subtotalElement => {
+                const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
+                total += subtotalValue;
+            });
+
+            // Sumar subtotales de nuevos productos
+            const subtotalesNuevos = document.querySelectorAll('.subtotal2');
+            subtotalesNuevos.forEach(subtotalElement => {
+                const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
+                total += subtotalValue;
+            });
+
+            document.getElementById('subtotal_final').value = `$${total.toFixed(2)}`;
+            document.getElementById('total_final').value = `$${total.toFixed(2)}`;
+        }
+
+        // Asignar eventos a los campos existentes
+        document.querySelectorAll('.campo2').forEach(campo => {
+            asignarEventos(campo);
+        });
+    });
+</script>
+
 @endsection
