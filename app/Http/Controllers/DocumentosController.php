@@ -239,28 +239,7 @@ class DocumentosController extends Controller
             return $pdf->download('diploma_stps_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Cedula de indetidad'){
-
-            $otherData = [
-                'leyenda1_cp' => $tipo_documentos->leyenda1_cp,
-                'fecha_expedicion_cp' => $tipo_documentos->fecha_expedicion_cp,
-                'leyenda2_cp' => $tipo_documentos->leyenda2_cp,
-                'tipo_vigencia_cp' => $tipo_documentos->tipo_vigencia_cp,
-                'tipo_vigencia_abrev_cp' => $tipo_documentos->tipo_vigencia_abrev_cp,
-                'aviso_privacidad_cp' => $tipo_documentos->aviso_privacidad_cp,
-                'leyenda_auth_qr_cp' => $tipo_documentos->leyenda_auth_qr_cp,
-                'qr_cp' => $tipo_documentos->qr_cp,
-                'logo_cp' => $tipo_documentos->logo_cp,
-                'logo_otra_institucion_cp' => $tipo_documentos->logo_otra_institucion_cp,
-                'firma1_cp' => $tipo_documentos->firma1_cp,
-                'firma2_cp' => $tipo_documentos->firma2_cp,
-                'img_izq_cp' => $tipo_documentos->img_izq_cp,
-                'img_der_cp' => $tipo_documentos->img_der_cp,
-                'fondo_cp' => $tipo_documentos->fondo_cp,
-            ];
-
-            $pdfData = array_merge($data, $otherData);
-
-            $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','pdfData'));
+            $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
             $pdf->setPaper('A4', 'portrait');
             $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
 
