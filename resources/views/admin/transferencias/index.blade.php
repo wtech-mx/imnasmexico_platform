@@ -33,7 +33,7 @@
                                 <div class="col-6">
                                     <div class="col-12">
                                         <label for="">Criterio (Numero de referencia)</label>
-                                        <input class="form-control" type="number" name="cuenta" value="123456789987654321">
+                                        <input class="form-control" type="number" name="criterio" value="123456789987654321">
                                     </div>
                                 </div>
 
@@ -44,7 +44,7 @@
 
                                 <div class="col-6 mt-3">
                                     <label for="">Emisor</label>
-                                    <select name="emisor" class="form-select">
+                                    <select name="emisor" class="form-select emisor" id="">
                                         <option value="40138">ABC CAPITAL</option>
                                         <option value="40133">ACTINVER</option>
                                         <option value="40062">AFIRME</option>
@@ -133,7 +133,7 @@
 
                                 <div class="col-6 mt-3">
                                     <label for="">Receptor</label>
-                                    <select name="receptor" class="form-select">
+                                    <select name="receptor" class="form-select receptor" id="">
                                         <option value="40138">ABC CAPITAL</option>
                                         <option value="40133">ACTINVER</option>
                                         <option value="40062">AFIRME</option>
@@ -247,5 +247,15 @@
 @endsection
 
 @section('datatable')
+<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.emisor').select2();
+        $('.receptor').select2();
+    });
+
+
+</script>
 
 @endsection
