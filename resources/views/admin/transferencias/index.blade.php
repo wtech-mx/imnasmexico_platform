@@ -14,7 +14,8 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-2"></div>
+            <div class="col-8">
                 <div class="card">
                     <div class="card-body">
                         <form method="POST" action="{{ route('trasnferencias.store') }}" enctype="multipart/form-data" role="form">
@@ -22,27 +23,41 @@
 
                             <div class="row">
 
-                                <div class="col-6">
-                                    <label for="">Tipo de Criterio</label>
-                                    <select class="form-select" name="tipoCriterio" id="">
-                                        <option value="T">Clave de Rastreo</option>
-                                        <option value="R">Referencia Numerica</option>
-                                    </select>
-                                </div>
-
-                                <div class="col-6">
-                                    <div class="col-12">
-                                        <label for="">Criterio (Numero de referencia)</label>
-                                        <input class="form-control" type="number" name="criterio">
+                                <div class="form-group col-6">
+                                    <label for="">Tipo de Criterio *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
+                                        </span>
+                                        <select name="tipoCriterio" class="form-select d-inline-block" required>
+                                            <option value="">Seleccione una opción</option>
+                                            <option value="T">Clave de Rastreo</option>
+                                            <option value="R">Referencia Numerica</option>
+                                        </select>
                                     </div>
                                 </div>
 
-                                <div class="col-12">
-                                    <label for="">fecha</label>
-                                    <input class="form-control" type="date" name="fecha">
+                                <div class="form-group col-6 mb-3">
+                                    <label for="">Criterio (Numero de referencia)</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/hastag.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input class="form-control" type="number" name="criterio" required>
+                                    </div>
                                 </div>
 
-                                <div class="col-6 mt-3">
+                                <div class="form-group col-4">
+                                    <label for="name">Fecha *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="fecha" name="fecha" type="date" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-4 mt-3">
                                     <label for="">Emisor</label>
                                     <select name="emisor" class="form-select emisor" id="">
                                         <option value="40138">ABC CAPITAL</option>
@@ -131,7 +146,7 @@
                                     </select>
                                 </div>
 
-                                <div class="col-6 mt-3">
+                                <div class="col-4 mt-3">
                                     <label for="">Receptor</label>
                                     <select name="receptor" class="form-select receptor" id="">
                                         <option value="40138">ABC CAPITAL</option>
@@ -220,16 +235,25 @@
                                     </select>
                                 </div>
 
-                                <div class="col-12">
-                                    <label for="">cuenta</label>
-                                    <input class="form-control" type="number" name="cuenta" value="500362597807">
+                                <div class="form-group col-6 mb-3">
+                                    <label for="">Cuenta *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/libreta-de-depositos.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input class="form-control" type="number" name="cuenta" value="500362597807">
+                                    </div>
                                 </div>
 
                                 <input type="hidden" name="receptorParticipante" value="false">
-
-                                <div class="col-12">
-                                    <label for="">monto</label>
-                                    <input class="form-control" type="text" name="monto">
+                                <div class="form-group col-6 mb-3">
+                                    <label for="">Monto *</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input class="form-control" type="text" name="monto">
+                                    </div>
                                 </div>
 
 
@@ -242,6 +266,7 @@
                     </div>
                 </div>
             </div>
+            <div class="col-2"></div>
         </div>
     </div>
 @endsection
