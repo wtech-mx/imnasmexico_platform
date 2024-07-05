@@ -33,7 +33,7 @@
                                 <div class="col-6">
                                     <div class="col-12">
                                         <label for="">Criterio (Numero de referencia)</label>
-                                        <input class="form-control" type="number" name="criterio" value="123456789987654321">
+                                        <input class="form-control" type="number" name="criterio">
                                     </div>
                                 </div>
 

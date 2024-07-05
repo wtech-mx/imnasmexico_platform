@@ -23,7 +23,6 @@ class VerificarTransferenciasController extends Controller
         $receptor = $request->input('receptor');
         $cuenta = $request->input('cuenta');
         $receptorParticipante = filter_var($request->input('receptorParticipante'), FILTER_VALIDATE_BOOLEAN);
-
         $monto = (float)$request->input('monto');
 
         // Formatear la fecha en el formato yyyy-MM-dd
@@ -31,7 +30,7 @@ class VerificarTransferenciasController extends Controller
 
         $body = json_encode([
             'tipoCriterio' => $tipoCriterio,
-            'fecha' => $fecha,
+            'fecha' => $fechaFormateada,
             'criterio' => $criterio,
             'emisor' => $emisor,
             'receptor' => $receptor,
@@ -40,28 +39,40 @@ class VerificarTransferenciasController extends Controller
             'monto' => $monto,
         ]);
 
+        try {
+            // Configurar el cliente Guzzle
+            $client = new GuzzleClient();
 
-        // Configurar el cliente Guzzle
-        $client = new GuzzleClient();
+            $response = $client->post('https://sandbox.link.kiban.com/api/v2/cep/validate?testCaseId=663567bb713cf2110a11069f', [
+                'headers' => [
+                    'accept' => 'application/json',
+                    'content-type' => 'application/json',
+                    'x-api-key' => '1K8EH2H0D9YCRC-1T3RGCZ000013Y-11VD-1FQSB66Q8',
+                ],
+                'body' => $body,
+            ]);
 
-        $response = $client->post('https://sandbox.link.kiban.com/api/v2/cep/validate?testCaseId=663567bb713cf2110a11069f', [
-            'headers' => [
-                'accept' => 'application/json',
-                'content-type' => 'application/json',
-                 'x-api-key' => '1K8EH2H0D9YCRC-1T3RGCZ000013Y-11VD-1FQSB66Q8',
-                // 'x-api-key' => '1K8EH2H0D9YCRC-1T3RGCZ000013Y-C6X6-1FQV1DJPQ',
+            $body = $response->getBody();
+            $data = json_decode($body, true);
 
-            ],
-            'body' => $body,
-        ]);
+            return view('admin.transferencias.resultado', ['data' => $data]);
 
-        $body = $response->getBody();
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            // Captura errores 4xx
+            if ($e->getResponse()->getStatusCode() == 404) {
+                $error = 'Transferencia no encontrada. Inténtelo de nuevo.';
+            } else {
+                $error = 'Error al procesar la transferencia. Inténtelo de nuevo.';
+            }
 
-        $data = json_decode($body, true);
+            return view('admin.transferencias.resultado', ['error' => $error]);
 
-        return view('admin.transferencias.resultado', ['data' => $data]);
-
-
+        } catch (\Exception $e) {
+            // Captura cualquier otro error
+            $error = 'Error inesperado. Inténtelo de nuevo.';
+            return view('admin.transferencias.resultado', ['error' => $error]);
+        }
     }
+
 
 }
