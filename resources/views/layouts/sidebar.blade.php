@@ -237,6 +237,15 @@
             </li>
 
             <li class="nav-item">
+                <a class="nav-link {{ (Request::is('admin/cotizacion/cosmica*') ? 'active' : '') }}" href="{{ route('cotizacion_cosmica.index') }}">
+                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-file-text text-sm opacity-10" style="color: #322338"></i>
+                </div>
+                <span class="nav-link-text ms-1">Cotizaciones Cosmica</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#pagesExamplesPagos" class="nav-link {{ (Request::is('admin/pagos-por-fuera*') ? 'active' : '') }}" aria-controls="pagesExamplesPagos" role="button" aria-expanded="false">
                 <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                     <i class="fas fa-file-invoice-dollar text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
