@@ -252,6 +252,11 @@
                         <span class="sidenav-normal">Verificar Pagos</span>
                     </a>
 
+                    <a class="nav-link {{ (Request::is('admin/comprobar_transferencias*') ? 'show' : '') }}" href="{{ route('trasnferencias.index') }}">
+                        <span class="sidenav-mini-icon"> P </span>
+                        <span class="sidenav-normal">Comprar Transferencias</span>
+                    </a>
+
                     <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/deudores*') ? 'show' : '') }}" href="{{ route('pagos.deudores') }}">
                         <span class="sidenav-mini-icon"> P </span>
                         <span class="sidenav-normal">Deudores</span>

@@ -175,6 +175,9 @@ Route::get('/nota/curso', [App\Http\Controllers\NotasCursosController::class, 'i
 
 Route::group(['middleware' => ['auth']], function() {
 
+    // =============== M O D U L O  V E R I  F I C A R T R A N S F E R E N C I A S ===============================
+    Route::get('/admin/comprobar_transferenciass', [App\Http\Controllers\VerificarTransferenciasController::class, 'index'])->name('trasnferencias.index');
+    Route::post('/admin/comprobar_transferencias/verificar', [App\Http\Controllers\VerificarTransferenciasController::class, 'store'])->name('trasnferencias.store');
 
 
     // =============== M O D U L O   P A Q U E T E S ===============================
