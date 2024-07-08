@@ -425,7 +425,7 @@
             totalDescuentoInput.value = totalDescuento.toFixed(2);
 
             // Sumar el costo de envío si el checkbox está marcado
-            var costoEnvio = document.getElementById('checkboxEnvio').checked ? 250 : 0;
+            var costoEnvio = document.getElementById('checkboxEnvio').checked ? 180 : 0;
             var totalConEnvio = totalDescuento + costoEnvio;
 
             // Sumar el 16% si el checkbox de factura está marcado
