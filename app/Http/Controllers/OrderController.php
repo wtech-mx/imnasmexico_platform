@@ -138,6 +138,11 @@ class OrderController extends Controller
                     $envio = new RegistroImnas;
                     $envio->id_order = $order->id;
                     $envio->id_usuario = $payer->id;
+                    if($details['id'] == 1008){
+                        $envio->tipo = 1;
+                    }elseif($details['id'] == 1009){
+                        $envio->tipo = 2;
+                    }
                     $envio->save();
 
                     $user_registro_imnas = User::where('id', $payer->id)->first();
@@ -354,13 +359,14 @@ class OrderController extends Controller
             $order_ticket = new OrdersTickets;
             $order_ticket->id_order = $order->id;
             $order_ticket->id_usuario = $payer->id;
-            $order_ticket->id_tickets = 886;
-            $order_ticket->id_curso = 553;
+            $order_ticket->id_tickets = 1008;
+            $order_ticket->id_curso = 647;
             $order_ticket->save();
 
             $envio = new RegistroImnas;
             $envio->id_order = $order->id;
             $envio->id_usuario = $payer->id;
+            $envio->tipo = 1;
             $envio->save();
 
             // Redirigir al usuario al proceso de pago de Mercado Pago
@@ -459,7 +465,7 @@ class OrderController extends Controller
                 ];
 
                 $ordenwoo = Order::create($data);
-            }else if($orden_ticket2->id_curso == 553){
+            }else if($orden_ticket2->id_curso == 647){
                 $order = Orders::where('code', '=', $external_reference)->first();
                 $order->registro_imnas = 1;
                 $order->update();
@@ -598,7 +604,7 @@ class OrderController extends Controller
             // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
             Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
-            if($orden_ticket2->id_curso == 553){
+            if($orden_ticket2->id_curso == 647){
                 $order = Orders::where('code', '=', $external_reference)->first();
                 $order->registro_imnas = 1;
                 $order->update();
@@ -689,6 +695,11 @@ class OrderController extends Controller
                 $envio = new RegistroImnas;
                 $envio->id_order = $order->id;
                 $envio->id_usuario = $payer->id;
+                if($details['id'] == 1008){
+                    $envio->tipo = 1;
+                }elseif($details['id'] == 1009){
+                    $envio->tipo = 2;
+                }
                 $envio->save();
 
                 $user_registro_imnas = User::where('id', $payer->id)->first();

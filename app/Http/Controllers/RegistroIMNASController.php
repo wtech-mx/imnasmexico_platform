@@ -24,7 +24,12 @@ class RegistroIMNASController extends Controller
     public function index_clientes($code){
         $cliente = User::where('code', $code)->firstOrFail();
         $registros_imnas = RegistroImnas::where('id_usuario', '=', $cliente->id)->where('nombre', '!=', NULL)->get();
-        $recien_comprados = RegistroImnas::where('id_usuario', '=', $cliente->id)->where('nombre', '=', NULL)->get();
+        $recien_comprados = RegistroImnas::join('orders', 'registro_imnas_doc.id_order', '=', 'orders.id')
+        ->where('registro_imnas_doc.id_usuario', $cliente->id)
+        ->whereNull('registro_imnas_doc.nombre')
+        ->where('orders.estatus', '1')
+        ->select('registro_imnas_doc.*') // Asegúrate de seleccionar solo las columnas necesarias
+        ->get();
 
         $curso = Cursos::where('id', '=', 647)->first();
         $cursos_tickets = CursosTickets::where('id_curso', $curso->id)->get();
@@ -81,6 +86,14 @@ class RegistroIMNASController extends Controller
             $file->move($path, $fileName);
             $registro->firma = $fileName;
         }
+
+        if($request->hasFile("logo")){
+            $file = $request->file('logo');
+            $path = $ruta_estandar;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $registro->logo = $fileName;
+        }
         $registro->update();
 
         return redirect()->back()->with('success', 'datos actualizado con exito.');
@@ -89,7 +102,12 @@ class RegistroIMNASController extends Controller
     public function show_cliente($code){
 
         $cliente = User::where('code', $code)->firstOrFail();
-        $registros_imnas = RegistroImnas::where('id_usuario', '=', $cliente->id)->get();
+        $registros_imnas = RegistroImnas::join('orders', 'registro_imnas_doc.id_order', '=', 'orders.id')
+        ->where('registro_imnas_doc.id_usuario', $cliente->id)
+        ->where('orders.estatus', '1')
+        ->select('registro_imnas_doc.*') // Asegúrate de seleccionar solo las columnas necesarias
+        ->get();
+;
 
         $curso = Cursos::where('id', '=', 647)->first();
         $cursos_tickets = CursosTickets::where('id_curso', '=', $curso)->get();
