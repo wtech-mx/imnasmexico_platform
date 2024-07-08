@@ -117,6 +117,14 @@ class PagosFueraController extends Controller
             $file->move($path, $fileName);
             $pagos_fuera->foto = $fileName;
         }
+
+        if ($request->hasFile("foto2")) {
+            $file = $request->file('foto2');
+            $path = $pago_fuera;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $pagos_fuera->foto2 = $fileName;
+        }
         $pagos_fuera->save();
 
             if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
