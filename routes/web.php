@@ -173,6 +173,11 @@ Route::patch('/perfil/estatus/certificaion/{id}', [App\Http\Controllers\ClientsC
 // =============== M O D U L O   C U R S O ===============================
 Route::get('/nota/curso', [App\Http\Controllers\NotasCursosController::class, 'index_user'])->name('notas.index_user');
 
+// =============== M O D U L O   D I S T R I B U I D O R A S ===============================
+Route::get('distribuidoras', function () {
+    return view('user.distribuidoras');
+});
+
 Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O  V E R I  F I C A R T R A N S F E R E N C I A S ===============================
@@ -454,6 +459,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/cotizacion/cosmica/edit/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'edit'])->name('cotizacion_cosmica.edit');
     Route::patch('/admin/cotizacion/cosmica/update/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update'])->name('cotizacion_cosmica.update');
     Route::get('/admin/cotizacion/cosmica/imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
+
+    // =============== M O D U L O   R E G I S T R O   C O M P R A S ===============================
+    Route::get('/admin/registro/compras', [App\Http\Controllers\RegistroComprasController::class, 'index'])->name('registro_compras.index');
+    Route::get('/admin/registro/compras/buscador', [App\Http\Controllers\RegistroComprasController::class, 'buscador'])->name('registro_compras.buscador');
+    Route::get('/admin/registro/compras/create', [App\Http\Controllers\RegistroComprasController::class, 'create'])->name('registro_compras.create');
+    Route::post('/admin/registro/compras/store', [App\Http\Controllers\RegistroComprasController::class, 'store'])->name('registro_compras.store');
 });
 
 // Rutas para el sistema de documentos
