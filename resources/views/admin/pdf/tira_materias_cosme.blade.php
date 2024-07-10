@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Tira materterias Cosmetologia</title>
     <style>
         * {
             padding: 0px;
@@ -40,6 +40,7 @@
             color: red;
             font-size: 20px;
         }
+
         .container {
             position: absolute;
             top: 15%;
@@ -53,7 +54,7 @@
             top: 16%;
             left: 17.6%;
             background: #ffffff;
-            width: 508px;
+            width: 530px;
             height: 110px;
         }
 
@@ -83,9 +84,8 @@
 
         .container_folio_bajo1{
             position: absolute;
-            top:31.6%;
+            top:30.7%;
             right:3%;
-            transform: translate(-50%, -50%);
             text-align: center;
         }
 
@@ -150,6 +150,13 @@
 
         }
 
+        .qr_container{
+            width: 100%;
+            position: absolute;
+            top: 7.8%;
+            left:85.7%;
+        }
+
     </style>
 </head>
 
@@ -211,6 +218,12 @@
 
            {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">--}}
             <h4 class="nombre_reverso">{{ ucwords(strtolower($curso)) }}</h4>
+        </div>
+
+        <div class="qr_container">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',3,3) . '" style="background: #fff; padding: 5px;"   />';
+            @endphp
         </div>
 
     </body>

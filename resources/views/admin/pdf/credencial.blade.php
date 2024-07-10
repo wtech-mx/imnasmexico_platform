@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Crednecial</title>
     <style>
         * {
             padding: 0px;
@@ -201,6 +201,22 @@
             font-size: 5px
         }
 
+        .qr_container{
+            width: 100%;
+            position: absolute;
+            top: 53.5%;
+            left:74%;
+            display: inline-block;
+        }
+
+        .qr_container2{
+            width: 100%;
+            position: absolute;
+            top:22.5%;
+            left: 73%;
+            display: inline-block;
+        }
+
     </style>
 
 </head>
@@ -262,6 +278,12 @@
             <h4 class="nacionalidad">{{ $nacionalidad }}</h4>
         </div>
 
+        <div class="qr_container">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.0,2.0) . '" style="background: #fff; padding: 5px;"   />';
+            @endphp
+        </div>
+
         <div class="container5">
             <h4 class="folio3">PERMANENTE</h4>
         </div>
@@ -290,6 +312,12 @@
         <div class="container_imgtrasera">
             <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
             <p class="curso_atras">{{ $curso }}</p>
+        </div>
+
+        <div class="qr_container2">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',1.5,1.5) . '" style="background: #fff; padding: 5px;"   />';
+            @endphp
         </div>
 
         {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}

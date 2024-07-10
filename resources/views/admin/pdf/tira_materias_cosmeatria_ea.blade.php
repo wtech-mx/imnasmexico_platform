@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Tira materterias Cosmeatria</title>
     <style>
         * {
             padding: 0px;
@@ -84,9 +84,8 @@
 
         .container_folio_bajo1{
             position: absolute;
-            top:31.6%;
+            top:30.7%;
             right:3%;
-            transform: translate(-50%, -50%);
             text-align: center;
         }
 
@@ -148,8 +147,15 @@
             /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
             background-size: cover;
             background-position: center center;
-
         }
+
+        .qr_container{
+            width: 100%;
+            position: absolute;
+            top: 7.8%;
+            left:85.7%;
+        }
+
 
     </style>
 </head>
@@ -190,7 +196,7 @@
                 Instituto Mexicano Naturales Ain Spa RIIMNAS, con registro de la Secretaria
                 del Trabajo y Prevención Social STPS como Agente Capacitador Externo con Registro
                 RIFC-680910-879-0013 , hace constar que el la Alumno(a) , con Numero de
-                Folio: <strong style="color: red"> {{$folio}} </strong> con CURP: <strong  style="color: red">{{$curp}} </strong>,  especialidad  <strong  style="color: red">{{ ucwords(strtolower($curso)) }} </strong>  Cubriendo todos los correspondientes. <br> Para afectos de desempeño académico  se expresa lo siguiente:
+                Folio: <strong style="color: red"> {{$folio}} </strong> con CURP: <strong  style="color: red">{{$curp}} </strong>,  curso  <strong  style="color: red">{{ ucwords(strtolower($curso)) }} </strong>  Cubriendo todos los correspondientes. <br> Para afectos de desempeño académico  se expresa lo siguiente:
             </p>
         </div>
 
@@ -213,6 +219,13 @@
            {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">--}}
             <h4 class="nombre_reverso">{{ ucwords(strtolower($curso)) }}</h4>
         </div>
+
+        <div class="qr_container">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',3,3) . '" style="background: #fff; padding: 5px;"   />';
+            @endphp
+        </div>
+
 
     </body>
 </html>

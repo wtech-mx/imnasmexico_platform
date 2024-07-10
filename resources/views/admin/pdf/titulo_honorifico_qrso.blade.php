@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Titulo Honorifico</title>
     <style>
         * {
             padding: 0px;
@@ -181,6 +181,32 @@
             background-size: cover;
             background-position: center center;
         }
+
+
+        .qr_container{
+            width: 100%;
+            position: absolute;
+            top: 82%;
+            left:11.2%;
+            display: inline-block;
+        }
+
+        .qr_container2{
+            width: 100%;
+            position: absolute;
+            top: 82%;
+            left:79.9%;
+            display: inline-block;
+        }
+
+        .qr_container3{
+            width: 100%;
+            position: absolute;
+            top: 4.9%;
+            left:78%;
+            display: inline-block;
+        }
+
     </style>
 </head>
 
@@ -242,6 +268,18 @@
 
         <div class="container_folio_bajo1">
             <h4 class="folio3">FOLIO {{$folio}}</h4>
+        </div>
+
+        <div class="qr_container">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',4,4) . '" style="background: #fff; padding: 5px;"   />';
+            @endphp
+        </div>
+
+        <div class="qr_container2">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',4,4) . '" style="background: #fff; padding: 5px;"   />';
+            @endphp
         </div>
 
         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
@@ -317,6 +355,12 @@
 
         <div class="container3">
             <h4 class="folio3">FOLIO {{$folio}}</h4>
+        </div>
+
+        <div class="qr_container3">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',6,6) . '" style="background: #fff; padding: 5px;"   />';
+            @endphp
         </div>
 
     </body>

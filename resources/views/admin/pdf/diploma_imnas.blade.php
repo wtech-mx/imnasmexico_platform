@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Diploma Imnas</title>
     <style>
         * {
             padding: 0px;
@@ -138,6 +138,22 @@
             color: red;
         }
 
+        .qr_container{
+            width: 100%;
+            position: absolute;
+            top: 68.5%;
+            left:80%;
+            display: inline-block;
+        }
+
+        .qr_container2{
+            width: 100%;
+            position: absolute;
+            top: 72%;
+            left:76%;
+            display: inline-block;
+        }
+
     </style>
 </head>
 
@@ -174,6 +190,13 @@
             <h4 class="fecha">Ciudad de México , México a {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
         </div>
 
+        <div class="qr_container">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',4,4) . '" style="background: #fff; padding: 5px;"   />';
+            @endphp
+        </div>
+
+
         <div class="container_folio_bajo1">
             <h4 class="folio3">{{$folio}}</h4>
         </div>
@@ -184,6 +207,13 @@
         <div class="container7">
             <h4 class="curso_sm">{{ ucwords(strtolower($curso)) }}</h4>
         </div>
+
+        <div class="qr_container2">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',4,4) . '" style="background: #fff; padding: 5px;"   />';
+            @endphp
+        </div>
+
 
     </body>
 </html>

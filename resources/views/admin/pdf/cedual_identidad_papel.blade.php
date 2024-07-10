@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Cedula de identidad</title>
     <style>
         * {
             padding: 0px;
@@ -144,15 +144,32 @@
             background-size: cover;
             background-position: center center;
         }
+
+        .qr_container{
+            width: 100%;
+            position: absolute;
+            top: 35.2%;
+            left:76.5%;
+            display: inline-block;
+        }
+
+        .qr_container2{
+            width: 100%;
+            position: absolute;
+            top:80%;
+            left: 40%;
+            display: inline-block;
+        }
+
     </style>
 </head>
 
     <body>
 
         @php
-        $palabras = explode(' ', ucwords(strtolower($nombre)));
-        $cantidad_palabras = count($palabras);
-    @endphp
+            $palabras = explode(' ', ucwords(strtolower($nombre)));
+            $cantidad_palabras = count($palabras);
+        @endphp
 
     {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
     <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
@@ -176,11 +193,15 @@
         @endfor
     </div>
 
-
-
         <div class="oval-container">
             <div class="oval">
             </div>
+        </div>
+
+        <div class="qr_container">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.5,2.5) . '" style="background: #fff; padding: 10px;"   />';
+            @endphp
         </div>
 
         <div class="container2">
@@ -210,6 +231,12 @@
             @endif>
 
             {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma">--}}
+        </div>
+
+        <div class="qr_container2">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.5,2.5) . '" style="background: #fff; padding: 10px;"   />';
+            @endphp
         </div>
 
         <div class="container7">

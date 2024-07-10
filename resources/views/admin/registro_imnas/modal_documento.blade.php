@@ -29,6 +29,7 @@
                     <div class="col-12">
                         <form method="POST" action="{{ route('generar_registro.documento') }}" enctype="multipart/form-data" role="form">
                             @csrf
+
                             <input type="hidden" name="email" id="email" value="{{ $registro_imnas->User->email }}">
                             <input type="hidden" name="id_registro" id="id_registro" value="{{ $registro_imnas->id }}">
 
@@ -219,8 +220,24 @@
                                                 @endif
                                             </div>
 
+                                            <div class="form-group col-6 gc_cn">
+                                                <label for="name">Logo *</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="img_infantil" name="img_infantil" type="file" class="form-control"  >
+                                                </div>
+                                                @if (pathinfo($registro_imnas->logo, PATHINFO_EXTENSION) == 'pdf')
+                                                    <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->logo) }}" download="{{ $registro_imnas->logo }}" style="background: #836262; border-radius: 19px;">
+                                                        Descargar Documento
+                                                    </a>
+                                                @else
+                                                    <img id="blah" src="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->logo) }}" alt="Imagen" style="width: 100px;height: 100px;">
+                                                @endif
+                                            </div>
 
-                                            <div class="form-group col-12 curp_content">
+                                            <div class="form-group col-6 curp_content">
                                                 <label for="name">CURP *:</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="basic-addon1">

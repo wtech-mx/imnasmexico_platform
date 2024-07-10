@@ -62,11 +62,11 @@ Mi perfil- {{$cliente->name}}
                             <h5>Registros IMNAS comprados: {{ count($recien_comprados)}}</h5>
                         </p>
 
-                        <a href="#section1" class="btn btn-outline-danger mb-sm-2" style="border: solid 0px;">
+                        <a href="#section1" class="btn btn-outline-danger mb-sm-2" style="">
                             Subir documentos
                         </a>
 
-                        <a href="#section2" class="btn btn-outline-warning mb-sm-2" style="border: solid 0px;">
+                        <a href="#section2" class="btn btn-outline-warning mb-sm-2" style="">
                             Estatus documento
                         </a>
                     </div>
