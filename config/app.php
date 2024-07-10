@@ -184,7 +184,7 @@ return [
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
-
+        Milon\Barcode\BarcodeServiceProvider::class,
 
         /*
          * Package Service Providers...
