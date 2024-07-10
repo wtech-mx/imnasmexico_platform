@@ -1,7 +1,7 @@
 @extends('layouts.app_user')
 
 @section('template_title')
-Registro compras
+Registro Bienvenida
 @endsection
 
 @section('css_custom')
@@ -37,13 +37,13 @@ Registro compras
 
     <div class="row space_newprofile" style="">
 
-        <div class="col-12">
+        <div class="col-12 mt-5">
             <div class="card_single_horizon">
                 <div class="d-flex justify-content-between">
-                    <h3 class="title_curso mb-3">Registro compra</h3>
+                    <h3 class="title_curso mb-3">Registro Bienvenida</h3>
                     <img class="icon_nav_course" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
                 </div>
-                <form   method="POST" action="{{ route('registro_compras.store') }}" enctype="multipart/form-data" role="form" >
+                <form   method="POST" action="{{ route('registro_llegada.store') }}" enctype="multipart/form-data" role="form" >
                     @csrf
                     <div class="row">
                         <div class="col-12 col-lg-6 form-group ">
@@ -88,44 +88,45 @@ Registro compras
                         </div>
 
                         <div class="col-12 col-lg-6 form-group ">
-                            <label for="">Monto *</label>
-                            <div class="input-group input-group-alternative mb-4">
-                            <span class="input-group-text">
-                                <img class="img_profile_label" src="{{asset('assets/user/icons/bolsa-de-dinero.png')}}" alt="">
-                            </span>
-
-                            <input class="form-control" type="number"  id="monto" name="monto" required>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-lg-6 form-group ">
-                            <label for="">¿Compraste Distribucion? *</label>
+                            <label for="">¿Como te enteraste? *</label>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioNo" value="No" checked>
+                                <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioFacebook" value="Facebook" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
-                                    No
+                                    Facebook
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioSi" value="Si">
+                                <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioInstagram" value="Instagram">
                                 <label class="form-check-label" for="flexRadioDefault2">
-                                    Si
+                                    Instagram
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioTikTok" value="TikTok">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    TikTok
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadio" id="flexRadioFamiliar" value="Familiar / Amigo">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Familiar / Amigo
                                 </label>
                             </div>
                         </div>
 
-                        <div class="col-12 col-lg-6 form-group ">
-                            <label for="">Sugerencia</label>
+                        <div class="col-12 col-lg-6 form-group mt-3">
+                            <label for="">Expectativa</label>
                             <div class="input-group input-group-alternative mb-4">
                             <span class="input-group-text">
                                 <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="">
                             </span>
 
-                            <textarea class="form-control" cols="10" rows="2" id="sugerencia" name="sugerencia"></textarea>
+                            <textarea class="form-control" cols="10" rows="2" id="espectativa" name="espectativa"></textarea>
                             </div>
                         </div>
 
-                        <div class="col-12 col-lg-4 form-group ">
+                        <div class="col-12 col-lg-4 form-group m-3">
                             <button type="submit" class="btn_save_profile btn-lg" style="border: solid 0px;">
                                 Guardar
                             </button>

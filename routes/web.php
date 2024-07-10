@@ -178,6 +178,14 @@ Route::get('distribuidoras', function () {
     return view('user.distribuidoras');
 });
 
+// =============== M O D U L O   R E G I S T R O   C O M P R A S ===============================
+Route::get('registro/compras/registrar', [App\Http\Controllers\RegistroComprasController::class, 'create'])->name('registro_compras.create');
+Route::post('registro/compras/store', [App\Http\Controllers\RegistroComprasController::class, 'store'])->name('registro_compras.store');
+
+// =============== M O D U L O   R E G I S T R O   B I E N V E N I D A ===============================
+Route::get('registro/bienvenida/registrarse', [App\Http\Controllers\RegistroLlegadaController::class, 'create'])->name('registro_llegada.create');
+Route::post('registro/bienvenida/store', [App\Http\Controllers\RegistroLlegadaController::class, 'store'])->name('registro_llegada.store');
+
 Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O  V E R I  F I C A R T R A N S F E R E N C I A S ===============================
@@ -463,8 +471,10 @@ Route::group(['middleware' => ['auth']], function() {
     // =============== M O D U L O   R E G I S T R O   C O M P R A S ===============================
     Route::get('/admin/registro/compras', [App\Http\Controllers\RegistroComprasController::class, 'index'])->name('registro_compras.index');
     Route::get('/admin/registro/compras/buscador', [App\Http\Controllers\RegistroComprasController::class, 'buscador'])->name('registro_compras.buscador');
-    Route::get('/admin/registro/compras/create', [App\Http\Controllers\RegistroComprasController::class, 'create'])->name('registro_compras.create');
-    Route::post('/admin/registro/compras/store', [App\Http\Controllers\RegistroComprasController::class, 'store'])->name('registro_compras.store');
+
+    // =============== M O D U L O   R E G I S T R O   B I E N V E N I D A ===============================
+    Route::get('/admin/registro/llegada', [App\Http\Controllers\RegistroLlegadaController::class, 'index'])->name('registro_llegada.index');
+    Route::get('/admin/registro/llegada/buscador', [App\Http\Controllers\RegistroLlegadaController::class, 'buscador'])->name('registro_llegada.buscador');
 });
 
 // Rutas para el sistema de documentos

@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('registro_compras', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre')->nullable();
-            $table->string('telefono')->nullable();
-            $table->string('correo')->nullable();
-            $table->string('ciudad')->nullable();
-            $table->string('monto')->nullable();
-            $table->string('distribucion')->nullable();
-            $table->string('sugerencia')->nullable();
+            $table->text('nombre')->nullable();
+            $table->text('telefono')->nullable();
+            $table->text('correo')->nullable();
+            $table->text('ciudad')->nullable();
+            $table->text('monto')->nullable();
+            $table->text('distribucion')->nullable();
+            $table->text('sugerencia')->nullable();
             $table->timestamps();
         });
     }

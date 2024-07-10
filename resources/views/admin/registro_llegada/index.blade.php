@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Registro Compras
+    Registro Bienvenida
 @endsection
 
 @section('content')
@@ -13,14 +13,14 @@
                     <div class="card-header">
 
                         <div class="d-flex justify-content-between">
-                            <h3 class="mb-3">Registros Compras</h3>
+                            <h3 class="mb-3">Registros Bienvenida</h3>
 
                             <a type="button" class="btn btn-sm bg-danger" data-bs-toggle="modal" data-bs-target="#manual_instrucciones" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 ¿Como fucniona?
                             </a>
                         </div>
                         <div class="col-12">
-                            <form class="row mt-3 mb-3" action="{{ route('registro_compras.buscador') }}" method="GET" >
+                            <form class="row mt-3 mb-3" action="{{ route('registro_llegada.buscador') }}" method="GET" >
                                 <div class="col-12">
                                     <h6>Filtro</h6>
                                 </div>
@@ -55,25 +55,23 @@
                                             <th>No</th>
                                             <th>Nombre</th>
                                             <th>Telefono</th>
-                                            <th>Monto</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if(Route::currentRouteName() != 'registro_compras.index')
+                                        @if(Route::currentRouteName() != 'registro_llegada.index')
                                             @foreach ($compras as $compra)
                                                 <tr>
                                                     <td>{{ $compra->id }}</td>
                                                     <td>{{ $compra->nombre }}</td>
                                                     <td>{{ $compra->telefono }}</td>
-                                                    <td>{{ $compra->monto }}</td>
                                                     <td>
                                                         <a type="button" class="btn btn-sm bg-dark" data-bs-toggle="modal" data-bs-target="#modal{{ $compra->id }}" style="background: #52BE80; color: #ffff">
                                                             <i class="fas fa-folder-open"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
-                                                @include('admin.registro_compras.modal')
+                                                @include('admin.registro_llegada.modal')
                                             @endforeach
                                         @endif
                                     </tbody>
