@@ -226,7 +226,7 @@
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
                                                     </span>
-                                                    <input id="img_infantil" name="img_infantil" type="file" class="form-control"  >
+                                                    <input id="logo" name="logo" type="file" class="form-control"  >
                                                 </div>
                                                 @if (pathinfo($registro_imnas->logo, PATHINFO_EXTENSION) == 'pdf')
                                                     <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->logo) }}" download="{{ $registro_imnas->logo }}" style="background: #836262; border-radius: 19px;">

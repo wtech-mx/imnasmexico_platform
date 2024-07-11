@@ -154,23 +154,56 @@
             display: inline-block;
         }
 
+        .container_logo{
+            position: absolute;
+            top: 12%;
+            left:12px;
+        }
+
+        .img_logo{
+            width: 50px;
+        }
+
     </style>
 </head>
 
     <body>
-
         @php
+            $domain = request()->getHost();
+            $basePath = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
+                    : 'tipos_documentos/';
+
+            $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+                    : 'utilidades_documentos/';
+
             $palabras = explode(' ', ucwords(strtolower($nombre)));
             $parte1 = implode(' ', array_slice($palabras, 0, 2));
             $parte2 = implode(' ', array_slice($palabras, 2));
         @endphp
 
-        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+
+        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
 
         <div class="container_marco">
             {{-- <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
             <img src="https://plataforma.imnasmexico.com/tipos_documentos/marco_diploma.png" class="img_marco">
+        </div>
+
+
+        <div class="container_logo">
+            @if(!isset($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+            @elseif(empty($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+            @else
+                <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo">
+            @endif
         </div>
 
         <div class="container">
@@ -201,8 +234,7 @@
             <h4 class="folio3">{{$folio}}</h4>
         </div>
 
-        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
-        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
+        <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
 
         <div class="container7">
             <h4 class="curso_sm">{{ ucwords(strtolower($curso)) }}</h4>

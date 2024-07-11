@@ -207,25 +207,57 @@
             display: inline-block;
         }
 
+        .container_logo{
+            position: absolute;
+            top: 13%;
+            left:200px;
+        }
+
+        .img_logo{
+            width: 100px;
+        }
+
     </style>
 </head>
 
     <body>
 
         @php
+
+            $domain = request()->getHost();
+            $basePath = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
+                    : 'tipos_documentos/';
+
+            $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+                    : 'utilidades_documentos/';
+
             $palabras = explode(' ', ucwords(strtolower($nombre)));
             $parte1 = implode(' ', array_slice($palabras, 0, 2));
             $parte2 = implode(' ', array_slice($palabras, 2));
         @endphp
 
-        {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
-        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
-        {{-- <img src="tipos_documentos/titulo honorifico_sinmarco.png" class="img_portada"> --}}
+        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
 
         <div class="container_marco">
             {{-- <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
             <img src="https://plataforma.imnasmexico.com/tipos_documentos/marco_pro.png" class="img_marco">
+        </div>
+
+        <div class="container_logo">
+            @if(!isset($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+            @elseif(empty($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+            @else
+                <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo">
+            @endif
         </div>
 
         <div class="container">
@@ -281,9 +313,7 @@
                 echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',4,4) . '" style="background: #fff; padding: 5px;"   />';
             @endphp
         </div>
-
-        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
-        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
+        <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
 
         @php
             // Divide el curso por espacios en blanco

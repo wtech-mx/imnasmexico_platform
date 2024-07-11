@@ -187,7 +187,6 @@ class RegistroIMNASController extends Controller
         $tipo_documentos = Tipodocumentos::find($tipo);
 
         if($tipo_documentos->tipo == 'Cedula de indetidad'){
-            dd($fileName_logo);
             $id_ticket = $request->get('id_registro');
             $ticket = RegistroImnas::find($id_ticket);
             $ticket->estatus_cedula = '1';

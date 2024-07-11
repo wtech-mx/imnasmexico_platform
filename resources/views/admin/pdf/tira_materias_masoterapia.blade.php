@@ -54,7 +54,7 @@
             top: 16%;
             left: 17.6%;
             background: #ffffff;
-            width: 530px;
+            width: 508px;
             height: 110px;
         }
 
@@ -157,11 +157,30 @@
             left:85.7%;
         }
 
+        .container_logo{
+            position: absolute;
+            top: 10%;
+            left:290px;
+        }
+
+        .img_logo{
+            width: 40px;
+        }
     </style>
 </head>
 
     <body>
         @php
+
+            $domain = request()->getHost();
+            $basePath = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
+                    : 'tipos_documentos/';
+
+            $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+                    : 'utilidades_documentos/';
+
                     // Divide el curso por espacios en blanco
                     $palabras = explode(' ', $nombre);
 
@@ -183,9 +202,20 @@
                     }
         @endphp
 
-         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-       {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">--}}
+         <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+         <div class="container_logo">
+            @if(!isset($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
 
+            @elseif(empty($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+            @else
+                <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo">
+            @endif
+        </div>
         <div class="container">
             <h4 class="nombre">{{ $nombre }}<</h4>
         </div>
@@ -214,9 +244,8 @@
         </div>
 
         <div class="contenedor_reverso">
-            <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
+            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
 
-           {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">--}}
             <h4 class="nombre_reverso">{{ ucwords(strtolower($curso)) }}</h4>
         </div>
 
@@ -225,6 +254,7 @@
                 echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',3,3) . '" style="background: #fff; padding: 5px;"   />';
             @endphp
         </div>
+
 
     </body>
 </html>
