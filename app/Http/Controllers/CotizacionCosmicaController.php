@@ -94,7 +94,7 @@ class CotizacionCosmicaController extends Controller
         if($request->get('envio') == NULL){
             $envio = 0;
         }else{
-            $envio = 250;
+            $envio = 180;
         }
 
         $descuento = floatval($request->get('descuento', 0));
