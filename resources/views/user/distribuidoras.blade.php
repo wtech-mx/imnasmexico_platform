@@ -34,7 +34,7 @@
                 3° - <strong>Disponibilidad Local:</strong>Encuentra nuestros productos en tu zona, sin complicaciones ni demoras.<br>
             </p>
             <p class="text-white parrafo parrafo_instalaciones" style="">
-                Encuentra tu distribuidora más cercana y descubre la diferencia de comprar con la confianza que solo IMNAS y Cosmica pueden ofrecer. ¡Estamos aquí para servirte mejor!
+                Encuentra tu distribuidora más cercana y descubre la diferencia de comprar con la confianza que solo Cosmica pueden ofrecer. ¡Estamos aquí para servirte mejor!
             </p>
         </div>
 
