@@ -116,6 +116,28 @@ Registro compras
                         </div>
 
                         <div class="col-12 col-lg-6 form-group ">
+                            <label for="">¿Donde nos conociste? *</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioConociste" id="flexRadioFacebook" value="Facebook" checked>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                    Facebook
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioConociste" id="flexRadioInstagram" value="Instagram">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Instagram
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioConociste" id="flexRadioNaturales" value="Naturales ain spa">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                    Naturales ain spa
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-6 form-group ">
                             <label for="">Sugerencia</label>
                             <div class="input-group input-group-alternative mb-4">
                             <span class="input-group-text">

@@ -27,6 +27,7 @@ class RegistroComprasController extends Controller
         $curso->ciudad = $request->get('ciudad');
         $curso->monto = $request->get('monto');
         $curso->distribucion = $request->get('flexRadio');
+        $curso->conociste = $request->get('flexRadioConociste');
         $curso->sugerencia = $request->get('sugerencia');
         $curso->save();
 
