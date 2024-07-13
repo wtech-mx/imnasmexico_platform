@@ -2,9 +2,9 @@
     <div class="row" style="background:transparent;">
 
         <div class="col-12">
-            <div class="d-flex justify-content-center ">
+            <div class="row">
 
-                <div class="container_icons_ml p-5">
+                <div class="container_icons_ml p-5 col-12 col-md-4 col-lg-4">
 
                     <p class="text-center">
                         <img src="https://cosmicaskin.com/wp-content/uploads/2024/06/truck.png" alt="">
@@ -21,7 +21,7 @@
 
                 </div>
 
-                <div class="container_icons_ml p-5">
+                <div class="container_icons_ml p-5 col-12 col-md-4 col-lg-4">
 
                     <p class="text-center">
                         <img src="https://cosmicaskin.com/wp-content/uploads/2024/06/payment.png" alt="">
@@ -39,7 +39,7 @@
 
                 </div>
 
-                <div class="container_icons_ml p-5">
+                <div class="container_icons_ml p-5 col-12 col-md-4 col-lg-4">
 
                     <p class="text-center">
                         <img src="https://cosmicaskin.com/wp-content/uploads/2024/06/box.png" alt="">
