@@ -1,4 +1,4 @@
-@extends('layouts.app_user')
+@extends('layouts.app_cosmika')
 
 @section('template_title')
 Registro Bienvenida
@@ -6,7 +6,7 @@ Registro Bienvenida
 
 @section('css_custom')
 <link href="{{asset('assets/user/custom/single_cours.css')}}" rel="stylesheet" />
-<link href="{{asset('assets/user/custom/perfil.css')}}" rel="stylesheet" />
+<link href="{{asset('assets/user/custom/perfil_cosmika.css')}}" rel="stylesheet" />
 @endsection
 
 <style>
@@ -29,18 +29,19 @@ Registro Bienvenida
         .blinking {
         animation: blinking 1.7s infinite;
         }
+
 </style>
 
 @section('content')
 
-<section class="primario bg_overley" style="background-color:#F5ECE4;" id="contenido">
+<section class="primario bg_overley" style="background-color:#E1D7E6;" id="contenido">
 
     <div class="row space_newprofile" style="">
 
         <div class="col-12 mt-5">
             <div class="card_single_horizon">
                 <div class="d-flex justify-content-between">
-                    <h3 class="title_curso mb-3">Registro Bienvenida</h3>
+                    <h3 class="title_curso mb-3" style="color:#2D2034">Registro Bienvenida</h3>
                     <img class="icon_nav_course" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
                 </div>
                 <form   method="POST" action="{{ route('registro_llegada.store') }}" enctype="multipart/form-data" role="form" >
@@ -127,7 +128,7 @@ Registro Bienvenida
                         </div>
 
                         <div class="col-12 col-lg-4 form-group m-3">
-                            <button type="submit" class="btn_save_profile btn-lg" style="border: solid 0px;">
+                            <button type="submit" class="btn_save_profile btn-lg" style="border: solid 0px;background:#2D2034">
                                 Guardar
                             </button>
                         </div>
