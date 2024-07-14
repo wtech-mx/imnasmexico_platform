@@ -20,7 +20,7 @@
 
 @section('content')
 
-<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('webpage/'.$webpage->stone_nosotros_bg) }}')">
+<section class="primario bg_overley" style="">
 
     <div class="container" id="container1"></div>
 
