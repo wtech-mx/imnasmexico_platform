@@ -104,6 +104,7 @@ Route::get('nuestras_instalaciones', [App\Http\Controllers\WebPageController::cl
 Route::get('videos', [App\Http\Controllers\WebPageController::class, 'videos'])->name('user.videos');
 Route::get('nosotros', [App\Http\Controllers\WebPageController::class, 'nosotros'])->name('user.nosotros');
 Route::get('show', [App\Http\Controllers\WebPageController::class, 'reality'])->name('user.reality');
+Route::get('revista', [App\Http\Controllers\WebPageController::class, 'revista'])->name('user.revista');
 
 // =============== P A G I N A  S I N G L E  C O U R S E ===============================
 Route::get('/curso/{slug}', [App\Http\Controllers\CursoUsersController::class, 'show'])->name('cursos.show');

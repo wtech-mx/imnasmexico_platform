@@ -29,6 +29,11 @@ class WebPageController extends Controller
         return view('user.instalaciones', compact('webpage'));
     }
 
+    public function revista(Request $request){
+
+        return view('user.revista');
+    }
+
     public function nosotros(Request $request){
         $webpage = WebPage::first();
         $concursantes = Votos::get();
