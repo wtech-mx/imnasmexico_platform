@@ -251,7 +251,8 @@ class CotizacionController extends Controller
         $nota = NotasProductos::findOrFail($id);
         $total_final = $request->get('total_final');
         $cleanPrice3 = floatval(str_replace(['$', ','], '', $total_final));
-        $nota->tipo = $request->get('subtotal_final');
+        $cleanPrice4 = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
+        $nota->tipo = $cleanPrice4;
         $nota->total = $cleanPrice3;
         $nota->save();
 
