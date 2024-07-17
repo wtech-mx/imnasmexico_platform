@@ -209,12 +209,12 @@
 
         .container_logo{
             position: absolute;
-            top: 13%;
-            left:200px;
+            top: 94%;
+            left:243px;
         }
 
         .img_logo{
-            width: 100px;
+            width: 70px;
         }
 
     </style>
@@ -238,7 +238,17 @@
             $parte2 = implode(' ', array_slice($palabras, 2));
         @endphp
 
+        @if(!isset($fileName_logo))
         <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+        @elseif(empty($fileName_logo))
+        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+        @elseif($fileName_logo == 'Sin Logo')
+        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+        @else
+        <img src="{{ $basePath . 'titulo_logo_empresa.png' }}" class="img_portada">
+        @endif
 
 
         <div class="container_marco">

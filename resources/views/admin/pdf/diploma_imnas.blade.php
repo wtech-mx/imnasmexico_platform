@@ -156,12 +156,12 @@
 
         .container_logo{
             position: absolute;
-            top: 12%;
-            left:12px;
+            top: 10%;
+            left:450px;
         }
 
         .img_logo{
-            width: 50px;
+            width: 120px;
         }
 
     </style>
@@ -184,7 +184,19 @@
         @endphp
 
 
-        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+        {{-- <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada"> --}}
+
+            @if(!isset($fileName_logo))
+                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+            @elseif(empty($fileName_logo))
+                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+            @else
+                <img src="{{ $basePath . 'portada_doploma_logo_empresa.png' }}" class="img_portada">
+            @endif
 
         <div class="container_marco">
             {{-- <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}

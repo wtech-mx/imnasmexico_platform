@@ -84,12 +84,12 @@
 
         .container_logo{
             position: absolute;
-            top: 14%;
-            left:50px;
+            top: 13.5%;
+            left:380px;
         }
 
         .img_logo{
-            width: 50px;
+            width: 60px;
         }
 
         .img_reverso{

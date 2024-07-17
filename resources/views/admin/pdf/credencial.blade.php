@@ -219,13 +219,16 @@
 
         .container_logo{
             position: absolute;
-            top: 14%;
-            left:7px;
+            top: 8%;
+            left:60px;
         }
 
         .img_logo{
-            width: 10px;
+            width: 30px;
         }
+
+
+
     </style>
 
 </head>
@@ -246,9 +249,20 @@
             $palabras = explode(' ', ucwords(strtolower($nombre)));
             $parte1 = implode(' ', array_slice($palabras, 0, 2));
             $parte2 = implode(' ', array_slice($palabras, 2));
+
         @endphp
 
-        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+        @if(!isset($fileName_logo))
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+        @elseif(empty($fileName_logo))
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+        @elseif($fileName_logo == 'Sin Logo')
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+        @else
+            <img src="{{ $basePath . 'portada_credneicla_logo_empresa.png' }}" class="img_portada">
+        @endif
 
         {{-- <div class="container">
             <h4 class="nombre">{{ $parte1 }}<br>{{ $parte2 }}</h4>

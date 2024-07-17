@@ -159,12 +159,12 @@
 
         .container_logo{
             position: absolute;
-            top: 10%;
-            left:290px;
+            top: 5.5%;
+            left:190px;
         }
 
         .img_logo{
-            width: 40px;
+            width: 80px;
         }
     </style>
 </head>
@@ -202,7 +202,18 @@
                     }
         @endphp
 
+         @if(!isset($fileName_logo))
          <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+        @elseif(empty($fileName_logo))
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+        @elseif($fileName_logo == 'Sin Logo')
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+        @else
+            <img src="{{ $basePath . 'tira_auxiliar_logo.png' }}" class="img_portada">
+        @endif
+
          <div class="container_logo">
             @if(!isset($fileName_logo))
                 <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
