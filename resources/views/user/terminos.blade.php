@@ -1,7 +1,7 @@
 @extends('layouts.app_user')
 
 @section('template_title')
-NUESTROS AVALES Y ACREDITACIONES
+Términos y Condiciones de Pago
 @endsection
 
 @section('css_custom')
