@@ -210,6 +210,7 @@
                                                                 <td>
                                                                         {{ $order->Orders->pago }}
                                                                 </td>
+                                                                <td>STPS</td>
                                                                 <td>
                                                                     @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
                                                                         @else
