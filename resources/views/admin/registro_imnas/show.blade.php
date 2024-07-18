@@ -11,18 +11,8 @@
                 <div class="card">
 
                     <div class="card-header">
-
-                        <div class="d-flex justify-content-between">
-
-                            <h3 class="mb-3"> {{$cliente->name}} </h3>
-
-
-                            @can('cursos-create')
-                                <a class="btn btn-sm btn-success" href="{{ route('cursos.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                    <i class="fa fa-fw fa-edit"></i> Crear
-                                </a>
-                            @endcan
-                        </div>
+                        <h3 class="mb-3"> {{$cliente->name}} </h3>
+                        <h5 class="mb-3"> {{$cliente->telefono}} </h5>
                     </div>
 
                         <div class="card-body">
@@ -34,6 +24,7 @@
                                             <th>Comentario</th>
                                             <th>Folio</th>
                                             <th>Guia</th>
+                                            <th>Tipo</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -52,6 +43,13 @@
                                                 <td><p>{{ $registro_imnas->comentario_cliente }}</p></td>
                                                 <td><p>{{ $registro_imnas->folio }}</p></td>
                                                 <td><p>{{ $registro_imnas->num_guia }}</p></td>
+                                                <td>
+                                                    @if ($registro_imnas->tipo == '1')
+                                                        Emisión por alumno
+                                                    @elseif ($registro_imnas->tipo == '2')
+                                                        Especialidad extra
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_imnas_documentos_{{ $registro_imnas->id }}">
                                                         <i class="fa fa-file"></i>

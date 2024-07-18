@@ -376,7 +376,7 @@
                 </a>
             </li>
 
-            @can('factura-show')
+            {{-- @can('factura-show')
                 <li class="nav-item">
                     <a class="nav-link {{ (Request::is('admin/facturas*') ? 'active' : '') }}" href="{{ route('facturas.index') }}">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
@@ -385,7 +385,7 @@
                     <span class="nav-link-text ms-1">Facturas</span>
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
 
             @can('profesores-show')
                 <li class="nav-item">
@@ -420,7 +420,25 @@
                 </li>
             @endcan
 
-            @can('envios-show')
+            <li class="nav-item">
+                <a class="nav-link {{ (Request::is('admin/registro/compras*') ? 'active' : '') }}" href="{{ route('registro_compras.index') }}">
+                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                    <i class="fas fa-sticky-note text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                </div>
+                <span class="nav-link-text ms-1">Registros Compras</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ (Request::is('admin/registro/llegada*') ? 'active' : '') }}" href="{{ route('registro_llegada.index') }}">
+                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                    <i class="fas fa-sticky-note text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                </div>
+                <span class="nav-link-text ms-1">Registros Bienvenida</span>
+                </a>
+            </li>
+
+            {{-- @can('envios-show')
                 <li class="nav-item">
                     <a class="nav-link {{ (Request::is('/admin/envios*') ? 'active' : '') }}" href="{{ route('envios.index') }}">
                         <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
@@ -429,7 +447,7 @@
                         <span class="sidenav-normal">Envios</span>
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
 
             <li class="nav-item mt-3">
                 <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Web Page</h6>

@@ -67,11 +67,14 @@ Mi perfil- {{$cliente->name}}
                         <img class="icon_nav_course" src="{{asset('assets/user/logotipos/imnas.webp')}}" style="background-color: #5a0421!important">
                     </div>
 
-                    <div class="row space_laaterales_profile">
-                        <a href="{{ route('clientes.imnas', $cliente->code) }}">
-                            <h3 class="title_curso mb-3">Bienvenido - Ir a registros IMNAS</h3>
+                    <div class="row space_laaterales_profile" >
+                        <a href="{{ route('clientes.imnas', $cliente->code) }}" style=" text-decoration: none;" >
+                            <h3 class="title_curso mb-3" >
+                                Bienvenido - Ir a registros IMNAS <img class="" src="{{asset('assets/user/icons/clic2.png')}}" alt="" style="width: 50px;bottom: -30px;right: -30px;transform: rotate(-40deg);transition: transform 0.3s ease;">
+                            </h3>
                         </a>
                     </div>
+
                 </div>
             </div>
         @endif

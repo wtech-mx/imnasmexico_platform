@@ -150,6 +150,11 @@
                                                         </div>
                                                     </div>
 
+                                                    <div class="col-12 form-check form-check-inline mt-3">
+                                                        <input class="form-check-input" type="checkbox" id="terminos" value="si" required>
+                                                        <label class="form-check-label" for="terminos">He leído y acepto los <a href="{{ route('user.terminos') }}" style="color: #000;"> términos y condiciones</a> del sitio</label>
+                                                    </div>
+
                                                     <div class="col-12">
                                                         <div class="d-flex justify-content-center">
                                                             <button class="btn_pagar_checkout " type="submit">Pagar</button>
@@ -182,6 +187,11 @@
                                                             <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
                                                             <input type="number" name="telefono" id="telefono" class="form-control input_custom_checkout" value="{{auth()->user()->telefono}}" required>
                                                         </div>
+                                                    </div>
+
+                                                    <div class="col-12 form-check form-check-inline mt-3">
+                                                        <input class="form-check-input" type="checkbox" id="terminos" value="si" required>
+                                                        <label class="form-check-label" for="terminos">He leído y acepto los <a href="{{ route('user.terminos') }}" style="color: #000;"> términos y condiciones</a> del sitio</label>
                                                     </div>
 
                                                     <div class="col-12">
@@ -306,6 +316,11 @@
                                                         <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
                                                         <input class='form-control card-expiry-year' autocomplete='off' placeholder='AÑO' size='4'type='text'>
                                                     </div>
+                                                </div>
+
+                                                <div class="col-12 form-check form-check-inline mt-3">
+                                                    <input class="form-check-input" type="checkbox" id="terminos" value="si" required>
+                                                    <label class="form-check-label" for="terminos">He leído y acepto los <a href="{{ route('user.terminos') }}" style="color: #000;"> términos y condiciones</a> del sitio</label>
                                                 </div>
 
                                                 {{-- <div class="col-12 error form-group hide">

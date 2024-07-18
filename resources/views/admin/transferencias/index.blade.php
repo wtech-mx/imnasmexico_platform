@@ -245,7 +245,8 @@
                                     </div>
                                 </div>
 
-                                <input type="hidden" name="receptorParticipante" value="false">
+                                <input type="hidden" name="receptorParticipante" value="true">
+
                                 <div class="form-group col-6 mb-3">
                                     <label for="">Monto *</label>
                                     <div class="input-group mb-3">

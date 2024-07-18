@@ -24,7 +24,12 @@ class RegistroIMNASController extends Controller
     public function index_clientes($code){
         $cliente = User::where('code', $code)->firstOrFail();
         $registros_imnas = RegistroImnas::where('id_usuario', '=', $cliente->id)->where('nombre', '!=', NULL)->get();
-        $recien_comprados = RegistroImnas::where('id_usuario', '=', $cliente->id)->where('nombre', '=', NULL)->get();
+        $recien_comprados = RegistroImnas::join('orders', 'registro_imnas_doc.id_order', '=', 'orders.id')
+        ->where('registro_imnas_doc.id_usuario', $cliente->id)
+        ->whereNull('registro_imnas_doc.nombre')
+        ->where('orders.estatus', '1')
+        ->select('registro_imnas_doc.*') // Asegúrate de seleccionar solo las columnas necesarias
+        ->get();
 
         $curso = Cursos::where('id', '=', 647)->first();
         $cursos_tickets = CursosTickets::where('id_curso', $curso->id)->get();
@@ -81,6 +86,14 @@ class RegistroIMNASController extends Controller
             $file->move($path, $fileName);
             $registro->firma = $fileName;
         }
+
+        if($request->hasFile("logo")){
+            $file = $request->file('logo');
+            $path = $ruta_estandar;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $registro->logo = $fileName;
+        }
         $registro->update();
 
         return redirect()->back()->with('success', 'datos actualizado con exito.');
@@ -89,7 +102,12 @@ class RegistroIMNASController extends Controller
     public function show_cliente($code){
 
         $cliente = User::where('code', $code)->firstOrFail();
-        $registros_imnas = RegistroImnas::where('id_usuario', '=', $cliente->id)->get();
+        $registros_imnas = RegistroImnas::join('orders', 'registro_imnas_doc.id_order', '=', 'orders.id')
+        ->where('registro_imnas_doc.id_usuario', $cliente->id)
+        ->where('orders.estatus', '1')
+        ->select('registro_imnas_doc.*') // Asegúrate de seleccionar solo las columnas necesarias
+        ->get();
+;
 
         $curso = Cursos::where('id', '=', 647)->first();
         $cursos_tickets = CursosTickets::where('id_curso', '=', $curso)->get();
@@ -155,6 +173,15 @@ class RegistroIMNASController extends Controller
             $fileName_firma = 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
         }
 
+        if ($request->hasFile("logo")) {
+            $file_logo = $request->file('logo');
+            $path_logo = $ruta_manual;
+            $fileName_logo = uniqid() . $file_logo->getClientOriginalName();
+            $file_logo->move($path_logo, $fileName_logo);
+        }else{
+            $fileName_logo = 'Sin Logo';
+        }
+
         $destinatario = [ $email_user  , $email_diplomas];
 
         $tipo_documentos = Tipodocumentos::find($tipo);
@@ -171,7 +198,7 @@ class RegistroIMNASController extends Controller
                 $ticket->update();
             }
 
-            $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_logo'));
             $pdf->setPaper('A4', 'portrait');
             $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
 
@@ -189,7 +216,7 @@ class RegistroIMNASController extends Controller
                 $ticket->update();
             }
 
-            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
             $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
@@ -214,7 +241,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
 
             //$pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); //  Cambiar 'a tamaño 48x33 super b'
@@ -239,7 +266,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.diploma_imnas',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+            $pdf = PDF::loadView('admin.pdf.diploma_imnas',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
 
@@ -263,7 +290,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
             return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
@@ -286,7 +313,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_aparatologia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_aparatologia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -309,7 +336,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_alasiados',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_alasiados',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -332,7 +359,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_cosmetologia_fc',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_cosmetologia_fc',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -355,7 +382,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_cosmeatria_ea',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_cosmeatria_ea',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -378,7 +405,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_auxiliar',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_auxiliar',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -401,7 +428,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_masoterapia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_masoterapia',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -424,7 +451,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_cosme',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_cosme',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
@@ -446,7 +473,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_drenaje',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_drenaje',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');

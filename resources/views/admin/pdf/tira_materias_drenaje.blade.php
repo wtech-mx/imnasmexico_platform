@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Tira materterias Cosmetologia F y C</title>
     <style>
         * {
             padding: 0px;
@@ -84,9 +84,8 @@
 
         .container_folio_bajo1{
             position: absolute;
-            top:31.6%;
+            top:30.7%;
             right:3%;
-            transform: translate(-50%, -50%);
             text-align: center;
         }
 
@@ -151,11 +150,37 @@
 
         }
 
+        .qr_container{
+            width: 100%;
+            position: absolute;
+            top: 7.8%;
+            left:85.7%;
+        }
+
+        .container_logo{
+            position: absolute;
+            top: 5.5%;
+            left:190px;
+        }
+
+        .img_logo{
+            width: 80px;
+        }
     </style>
 </head>
 
     <body>
         @php
+
+            $domain = request()->getHost();
+            $basePath = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
+                    : 'tipos_documentos/';
+
+            $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+                    : 'utilidades_documentos/';
+
                     // Divide el curso por espacios en blanco
                     $palabras = explode(' ', $nombre);
 
@@ -177,9 +202,31 @@
                     }
         @endphp
 
-         <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-       {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">--}}
+            @if(!isset($fileName_logo))
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
 
+            @elseif(empty($fileName_logo))
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+            @elseif($fileName_logo == 'Sin Logo')
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+            @else
+            <img src="{{ $basePath . 'tira_carrera_logo.png' }}" class="img_portada">
+            @endif
+
+         <div class="container_logo">
+            @if(!isset($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+            @elseif(empty($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+            @else
+                <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo">
+            @endif
+        </div>
         <div class="container">
             <h4 class="nombre">{{ $nombre }}<</h4>
         </div>
@@ -208,11 +255,17 @@
         </div>
 
         <div class="contenedor_reverso">
-            <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
+            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
 
-           {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">--}}
             <h4 class="nombre_reverso">{{ ucwords(strtolower($curso)) }}</h4>
         </div>
+
+        <div class="qr_container">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',3,3) . '" style="background: #fff; padding: 5px;"   />';
+            @endphp
+        </div>
+
 
     </body>
 </html>

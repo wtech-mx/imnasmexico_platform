@@ -85,7 +85,7 @@
             </div>
 
             <div class="d-flex justify-content-center">
-                <a class="preguntas_freceuntas btn_ticket_comprar text-center" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false">Registro IMNAS</a>
+                <a class="preguntas_freceuntas btn_ticket_comprar text-center" href="{{ route('cursos.show', 'afiliacion-imnas-6675e89c64f68') }}">Registro IMNAS</a>
             </div>
 
             {{-- <div class="row">

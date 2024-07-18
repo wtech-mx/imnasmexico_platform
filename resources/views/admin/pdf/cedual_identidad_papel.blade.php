@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Cedula de identidad</title>
     <style>
         * {
             padding: 0px;
@@ -82,6 +82,16 @@
             height: auto;
         }
 
+        .container_logo{
+            position: absolute;
+            top: 13.5%;
+            left:380px;
+        }
+
+        .img_logo{
+            width: 60px;
+        }
+
         .img_reverso{
             width: 480px;
             height: 668px;
@@ -102,7 +112,6 @@
             font-size: 12px;
             color: #000;
         }
-
 
         .nombre{
             font-family: 'Minion', sans-serif;
@@ -144,19 +153,72 @@
             background-size: cover;
             background-position: center center;
         }
+
+        .qr_container{
+            width: 100%;
+            position: absolute;
+            top: 35.2%;
+            left:76.5%;
+            display: inline-block;
+        }
+
+        .qr_container2{
+            width: 100%;
+            position: absolute;
+            top:80%;
+            left: 40%;
+            display: inline-block;
+        }
+
     </style>
 </head>
+
+@php
+    $domain = request()->getHost();
+    $basePath = ($domain == 'plataforma.imnasmexico.com')
+            ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
+            : 'tipos_documentos/';
+
+    $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+            ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+            : 'utilidades_documentos/';
+
+@endphp
+
+{{-- <img src="{{ $basePathUtilidades . $tipo_documentos->img_portada }}" class="img_portada"> --}}
 
     <body>
 
         @php
-        $palabras = explode(' ', ucwords(strtolower($nombre)));
-        $cantidad_palabras = count($palabras);
-    @endphp
+            $palabras = explode(' ', ucwords(strtolower($nombre)));
+            $cantidad_palabras = count($palabras);
+        @endphp
 
-    {{-- <img src="{{ asset('tipos_documentos/'.$tipo_documentos->img_portada) }}" style="width:100%;"> --}}
-    <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada">
-    {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+    {{-- <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
+    <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+
+    {{-- <div class="container_logo">
+        <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo"
+
+        @if (!isset($fileName_logo))
+            src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png"
+        @endif>
+    </div> --}}
+
+    <div class="container_logo">
+        @if(!isset($fileName_logo))
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+        @elseif(empty($fileName_logo))
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+        @elseif($fileName_logo == 'Sin Logo')
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+        @else
+            <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo">
+        @endif
+    </div>
 
     <div class="container">
         @for ($i = 0; $i < $cantidad_palabras; $i += 2)
@@ -176,11 +238,15 @@
         @endfor
     </div>
 
-
-
         <div class="oval-container">
             <div class="oval">
             </div>
+        </div>
+
+        <div class="qr_container">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.5,2.5) . '" style="background: #fff; padding: 10px;"   />';
+            @endphp
         </div>
 
         <div class="container2">
@@ -195,8 +261,8 @@
             <h4 class="folio"> {{$folio}}</h4>
         </div>
 
-        <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso">
-        {{-- <img src="tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
+        {{-- <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
+        <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
 
         <div class="container4">
             <h4 class="folio2">{{$folio}}</h4>
@@ -204,12 +270,19 @@
 
         <div class="container5">
 
-            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma"
+            <img src="{{ $basePathUtilidades . $fileName_firma }}" class="img_firma"
+            {{-- <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma" --}}
+
             @if (!isset($fileName_firma))
                 src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png"
             @endif>
-
             {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma">--}}
+        </div>
+
+        <div class="qr_container2">
+            @php
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.5,2.5) . '" style="background: #fff; padding: 10px;"   />';
+            @endphp
         </div>
 
         <div class="container7">

@@ -179,7 +179,7 @@
                     <td></td>
                     <td></td>
                 <td style="text-align: right"><b>Envío</b> </td>
-                <td>$250</td>
+                <td>$180</td>
                 </tr>
             @endif
             @if ($nota->factura == '1')

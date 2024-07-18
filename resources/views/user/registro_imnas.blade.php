@@ -62,11 +62,11 @@ Mi perfil- {{$cliente->name}}
                             <h5>Registros IMNAS comprados: {{ count($recien_comprados)}}</h5>
                         </p>
 
-                        <a href="#section1" class="btn btn-outline-danger mb-sm-2" style="border: solid 0px;">
+                        <a href="#section1" class="btn btn-outline-danger mb-sm-2" style="">
                             Subir documentos
                         </a>
 
-                        <a href="#section2" class="btn btn-outline-warning mb-sm-2" style="border: solid 0px;">
+                        <a href="#section2" class="btn btn-outline-warning mb-sm-2" style="">
                             Estatus documento
                         </a>
                     </div>
@@ -117,9 +117,16 @@ Mi perfil- {{$cliente->name}}
                 <div class="col-12 col-lg-6">
                     <div class="card_single_horizon">
                         <div class="d-flex justify-content-between">
-                            <h2 class="title_curso mb-3">Subir documentos</h2>
+                            <h3 class="title_curso mb-3">Subir documentos</h3>
                             <img class="icon_nav_course" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
                         </div>
+                        <h4>
+                            @if ($recien_comprado->tipo == '1')
+                                Emisión por alumno
+                            @elseif ($recien_comprado->tipo == '2')
+                                Especialidad extra
+                            @endif
+                        </h4>
                         <form   method="POST" action="{{ route('update_clientes.imnas', $recien_comprado->id) }}" enctype="multipart/form-data" role="form" >
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
@@ -186,6 +193,10 @@ Mi perfil- {{$cliente->name}}
                                     <label for="ine">Firma *</label>
                                     <input id="firma" name="firma" type="file" class="form-control ine_input" required>
                                 </div>
+                                <div class="col-6 form-group mb-5">
+                                    <label for="ine">Logo</label>
+                                    <input id="logo" name="logo" type="file" class="form-control ine_input">
+                                </div>
 
                                 <div class="col-12 col-lg-4 form-group ">
                                     <button type="submit" class="btn_save_profile btn-lg" style="border: solid 0px;">
@@ -227,9 +238,10 @@ Mi perfil- {{$cliente->name}}
                                 <td><p>{{ $registro_imnas->folio }}</p></td>
                                 <td><p>{{ $registro_imnas->num_guia }}</p></td>
                                 <td>
-                                    <a class="btn btn-sm btn-info" href="{{ route('dashboard') }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                                    <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#modalUser{{ $registro_imnas->id }}" title="Ver"><i class="fa fa-eye"></i></a>
                                 </td>
                             </tr>
+                            @include('user.modal_registro_imnas')
                         @endforeach
                     </tbody>
                 </table>

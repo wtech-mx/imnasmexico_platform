@@ -207,6 +207,16 @@
                             </div>
 
                             <div class="form-group col-6 mt-3">
+                                <label for="name">Foto (Comprobante) 2</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input id="foto2" name="foto2" type="file" class="form-control" placeholder="foto2">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-6 mt-3">
                                 <label for="name">Monto *</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">
