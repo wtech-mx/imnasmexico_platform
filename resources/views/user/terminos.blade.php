@@ -78,8 +78,8 @@ crossorigin="anonymous" />
             </p>
         </div>
 
-        <form action="" class="row">
-
+        <form method="POST" action="{{ route('terminos.store') }}" enctype="multipart/form-data" role="form" class="row">
+            @csrf
             <div class="col-12">
                 <p class="text-center"><strong>He leído y acepto los  términos y condicionesdel sitio</strong></p>
             </div>

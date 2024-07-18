@@ -188,6 +188,9 @@ Route::post('registro/compras/store', [App\Http\Controllers\RegistroComprasContr
 Route::get('registro/bienvenida/registrarse', [App\Http\Controllers\RegistroLlegadaController::class, 'create'])->name('registro_llegada.create');
 Route::post('registro/bienvenida/store', [App\Http\Controllers\RegistroLlegadaController::class, 'store'])->name('registro_llegada.store');
 
+// =============== M O D U L O   T E R M I N O S ===============================
+Route::post('terminos/store', [App\Http\Controllers\TerminosController::class, 'store'])->name('terminos.store');
+
 Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O  V E R I  F I C A R T R A N S F E R E N C I A S ===============================
