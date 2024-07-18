@@ -35,8 +35,7 @@ crossorigin="anonymous" />
     <div class="row">
 
         <div class="col-12">
-                <div class="col-12">
-                    <p class="text_beneficios mt-5 p-2 p-xs-2 p-md-3 p-lg-5">
+            <p class="text_beneficios mt-5 p-2 p-xs-2 p-md-3 p-lg-5">
                         1. Alcance y Aceptación de los Términos
                         <br><br><br>
                         1.1. Estos Términos y Condiciones de Pago (“Términos”) regulan la relación entre el Instituto Mexicano Naturales AIN SPA y Naturales AIN SPA (“El Instituto”) y cualquier persona (“El Cliente”) que realice pagos por servicios educativos o de laboratorio proporcionados por El Instituto y Laboratorio.
@@ -76,9 +75,36 @@ crossorigin="anonymous" />
                         7.1. Estos Términos se regirán e interpretarán de acuerdo con las leyes de [país o estado correspondiente].
                         <br><br>
                         7.2. Cualquier disputa que surja en relación con estos Términos será resuelta ante los tribunales competentes de México , a los que las partes se someten con renuncia expresa a cualquier otro fuero que pudiera corresponderles.
-                    </p>
-                </div>
+            </p>
         </div>
+
+        <form action="" class="row">
+
+            <div class="col-12">
+                <p class="text-center"><strong>He leído y acepto los  términos y condicionesdel sitio</strong></p>
+            </div>
+
+            <div class="col-4"></div>
+
+            <div class="col-4">
+                <div class="d-flex justify-content-center">
+                    <div class="input-group flex-nowrap mt-4">
+                        <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                        <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre completo *" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4"></div>
+
+
+            <div class="col-12">
+                <div class="d-flex justify-content-center">
+                    <button class="btn_pagar_checkout " type="submit">Aceptar</button>
+                </div>
+            </div>
+
+        </form>
 
     </div>
 </section>
