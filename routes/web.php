@@ -99,6 +99,7 @@ Auth::routes();
 Route::post('/votar', [App\Http\Controllers\VotosController::class, 'votar'])->name('votar');
 
 Route::get('/', [App\Http\Controllers\HomeUsersController::class, 'index'])->name('user.home');
+Route::get('terminos', [App\Http\Controllers\WebPageController::class, 'terminos'])->name('user.terminos');
 Route::get('avales', [App\Http\Controllers\WebPageController::class, 'avales'])->name('user.avales');
 Route::get('nuestras_instalaciones', [App\Http\Controllers\WebPageController::class, 'instalaciones'])->name('user.instalaciones');
 Route::get('videos', [App\Http\Controllers\WebPageController::class, 'videos'])->name('user.videos');

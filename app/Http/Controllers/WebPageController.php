@@ -34,6 +34,11 @@ class WebPageController extends Controller
         return view('user.revista');
     }
 
+    public function terminos(Request $request){
+
+        return view('user.terminos');
+    }
+
     public function nosotros(Request $request){
         $webpage = WebPage::first();
         $concursantes = Votos::get();
