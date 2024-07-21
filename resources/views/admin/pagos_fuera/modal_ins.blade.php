@@ -14,44 +14,77 @@
 
                     <div class="row">
 
-                        <div class="col-6">
-                            <label for="name">Fecha y hora de ingreso</label><br>
-                            <input id="fecha_hora_1" name="fecha_hora_1" type="text" class="form-control" value="{{$pago_fuera->fecha_hora_1}}" disabled>
-                        </div>
-
-                        <div class="col-6">
-                            <label for="name">Usario que lo registro</label><br>
-                            <input id="usuario" name="usuario" type="text" class="form-control" value="{{$pago_fuera->usuario}}" disabled>
-                        </div>
-
-                        <div class="form-group col-6 mt-5">
-                            <label for="name">Nombre de cliente</label><br>
-                            <input id="nombre" name="nombre" type="text" class="form-control" value="{{$pago_fuera->nombre}}" disabled>
-                        </div>
-
-                        <div class="form-group col-6 mt-5">
-                            <label for="correo">Correo</label>
-                            <input id="correo" name="correo" type="email" class="form-control" value="{{$pago_fuera->correo}}" disabled>
-                        </div>
-
-                        <div class="form-group col-12">
-                            <label for="curso">Curso</label><br>
-                            <textarea class="form-control" cols="50" rows="3" disabled>{{$pago_fuera->curso}}</textarea>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="nota">Forma de pago</label>
-                                <input id="curso" name="curso" type="text" class="form-control" value="{{$pago_fuera->modalidad}}" disabled>
+                            <div class="form-group col-6">
+                                <label for="">Fecha y hora de ingreso</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="30px">
+                                    </span>
+                                    <input id="fecha_hora_1" name="fecha_hora_1" type="text" class="form-control" value="{{$pago_fuera->fecha_hora_1}}" disabled>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="telefono">Telefono</label>
-                                <input id="telefono" name="telefono" type="number" class="form-control" value="{{$pago_fuera->telefono}}" disabled>
+                            <div class="form-group col-6">
+                                <label for="">Usario que lo registro</label><br>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/ine.png') }}" alt="" width="30px">
+                                    </span>
+                                    <input id="usuario" name="usuario" type="text" class="form-control" value="{{$pago_fuera->usuario}}" disabled>
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="form-group col-6">
+                                <label for="">Nombre de cliente</label><br>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/medico.png') }}" alt="" width="30px">
+                                    </span>
+                                    <input id="nombre" name="nombre" type="text" class="form-control" value="{{$pago_fuera->nombre}}" disabled>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group col-6">
+                                <label for="">Correo</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="30px">
+                                    </span>
+                                    <input id="correo" name="correo" type="email" class="form-control" value="{{$pago_fuera->correo}}" disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label for="">Curso</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="30px">
+                                    </span>
+                                    <input id="" name="" type="text" class="form-control" value="{{$pago_fuera->curso}}" disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="">Forma de pago</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/metodo-de-pago.png') }}" alt="" width="30px">
+                                    </span>
+                                    <input id="curso" name="curso" type="text" class="form-control" value="{{$pago_fuera->modalidad}}" disabled>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="">Telefono</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="30px">
+                                    </span>
+                                    <input id="telefono" name="telefono" type="number" class="form-control" value="{{$pago_fuera->telefono}}" disabled>
+                                </div>
+                            </div>
+
 
                         <div class="col-2">
                             <label>Deudor</label>
@@ -64,16 +97,22 @@
                             </div>
                         </div>
 
-                        <div class="col-4">
+                        <div class="form-group col-4">
                             <label>Monto *</label>
-                            <div class="form-group">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="30px">
+                                </span>
                                 <input class="form-control" type="number" id="pago" name="pago" value="{{$pago_fuera->monto}}" disabled>
                             </div>
                         </div>
 
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="abono">Abono 1</label>
+                        <div class="form-group col-6">
+                            <label for="abono">Abono 1</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/cam/dar-dinero.png') }}" alt="" width="30px">
+                                </span>
                                 <input id="abono" name="abono" type="number" class="form-control" value="{{$pago_fuera->abono}}" disabled>
                             </div>
                         </div>
