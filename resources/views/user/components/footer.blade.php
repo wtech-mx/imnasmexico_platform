@@ -262,7 +262,7 @@
 
         <div class="col-12 spaciador_footer mt-5 mb-5 text-center">
             <p class="text-center text-white">Todos los derechos reservados © 2023
-                <strong>Instituto Mexicano Naturales Ain Spa</strong>
+                <strong><a style="color: #ffff!important" href="https://plataforma.imnasmexico.com/login"> Instituto Mexicano Naturales Ain Spa </a></strong>
             </p>
         </div>
 

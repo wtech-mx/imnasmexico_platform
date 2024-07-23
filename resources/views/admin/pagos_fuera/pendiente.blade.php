@@ -31,10 +31,8 @@
     }
 
     .selected-row {
-    background-color: #f8d7da !important; /* Color rojo claro */
-}
-
-
+        background-color: #f8d7da !important; /* Color rojo claro */
+    }
 </style>
 @section('content')
     <div class="container-fluid">
@@ -87,8 +85,16 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($pagos_fuera as $pago_fuera)
+                                        @php
+                                            $colorClass = '';
+                                            if (str_contains($pago_fuera->modalidad, 'inbursa')) {
+                                                $colorClass = '#00bcd4';
+                                            } elseif (str_contains($pago_fuera->modalidad, 'bancomer')) {
+                                                $colorClass = '#0033cc';
+                                            }
+                                        @endphp
                                         @include('admin.pagos_fuera.modal_ins')
-                                            <tr>
+                                            <tr style="color: {{ $colorClass }}">
                                                 <td>{{ $pago_fuera->id }}</td>
                                                 <td>
                                                     @php
