@@ -42,14 +42,20 @@
                             <table class="table table-flush" id="datatable-search">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
-                                        <th>Cliente</th>
-                                        <th>fecha</th>
+                                        <th>#</th>
+                                        <th>Distribuidora</th>
+                                        <th>Fechas</th>
                                         <th>Total</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                    @foreach ($usercosmika as $item)
+                                        <tr>
+                                            <td>{{ $item->id }}</td>
+                                        </tr>
+                                    @endforeach
 
                                 </tbody>
                             </table>
@@ -60,7 +66,9 @@
             </div>
         </div>
     </div>
+
 @include('cosmica.distribuidoras.modal_create')
+
 @endsection
 
 @section('datatable')
