@@ -178,6 +178,11 @@
                         </a>
                     @endcan
 
+                    <a class="nav-link {{ (Request::is('/recursos') ? 'active' : '') }}" href="{{ route('recursos.index') }}">
+                        <span class="sidenav-mini-icon"> B </span>
+                        <span class="sidenav-normal">Biblioteca</span>
+                    </a>
+
                     </li>
                 </ul>
                 </div>
@@ -194,14 +199,7 @@
                 </li>
             @endcan
 
-                <li class="nav-item">
-                    <a class="nav-link {{ (Request::is('/recursos') ? 'active' : '') }}" href="{{ route('recursos.index') }}">
-                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-camera text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Biblioteca</span>
-                    </a>
-                </li>
+
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#pagesExamplesCursos" class="nav-link {{ (Request::is('admin/notas/cursos*') ? 'active' : '') }}" aria-controls="pagesExamplesCursos" role="button" aria-expanded="false">
                 <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
@@ -234,15 +232,6 @@
                     </li>
                 </ul>
                 </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ (Request::is('admin/cotizacion/cosmica*') ? 'active' : '') }}" href="{{ route('cotizacion_cosmica.index') }}">
-                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                    <i class="fa fa-file-text text-sm opacity-10" style="color: #322338"></i>
-                </div>
-                <span class="nav-link-text ms-1">Cotizaciones Cosmica</span>
-                </a>
             </li>
 
             <li class="nav-item">
@@ -438,6 +427,39 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a data-bs-toggle="collapse" href="#pagesExamplesdocumentos" class="nav-link {{ (Request::is('admin/reporte*') ? 'active' : '') }}" aria-controls="pagesExamplesdocumentos" role="button" aria-expanded="false">
+                <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                    <i class="fas fa-file-invoice-dollar text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                </div>
+                <span class="nav-link-text ms-1">Documentos</span>
+                </a>
+                <div class="collapse" id="pagesExamplesdocumentos">
+                <ul class="nav ms-4">
+                    <li class="nav-item ">
+
+                        <a class="nav-link {{ (Request::is('admin/documentos/tipos*') ? 'show' : '') }}" href="{{ route('documentos.index') }}">
+                            <span class="sidenav-mini-icon"> P </span>
+                            <span class="sidenav-normal">Tipos de Documentos</span>
+                        </a>
+
+                        <a class="nav-link {{ (Request::is('admin/documentos/generar*') ? 'show' : '') }}" href="{{ route('generar_documentos.index') }}">
+                            <span class="sidenav-mini-icon"> P </span>
+                            <span class="sidenav-normal">Reporte Generados</span>
+                        </a>
+
+                        <a class="nav-link {{ (Request::is('admin/documentos/faltantes*') ? 'show' : '') }}" href="{{ route('documentos.faltantes') }}">
+                            <span class="sidenav-mini-icon"> P </span>
+                            <span class="sidenav-normal">Documentos faltantes</span>
+                        </a>
+
+                    </li>
+                </ul>
+                </div>
+            </li>
+
+
+
             {{-- @can('envios-show')
                 <li class="nav-item">
                     <a class="nav-link {{ (Request::is('/admin/envios*') ? 'active' : '') }}" href="{{ route('envios.index') }}">
@@ -448,6 +470,19 @@
                     </a>
                 </li>
             @endcan --}}
+
+            <li class="nav-item mt-3">
+                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Cosmika</h6>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ (Request::is('admin/cotizacion/cosmica*') ? 'active' : '') }}" href="{{ route('cotizacion_cosmica.index') }}">
+                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-file-text text-sm opacity-10" style="color: #322338"></i>
+                </div>
+                <span class="nav-link-text ms-1">Cotizaciones Cosmica</span>
+                </a>
+            </li>
 
             <li class="nav-item mt-3">
                 <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Web Page</h6>
@@ -490,6 +525,11 @@
                             <span class="sidenav-normal">Noticias</span>
                         </a>
 
+                        <a class="nav-link {{ (Request::is('admin/paquetes') ? 'active' : '') }}" href="{{ route('paquetes.index') }}">
+                            <span class="sidenav-mini-icon"></span>
+                            <span class="sidenav-normal">Paquetes</span>
+                        </a>
+
                     </li>
                 </ul>
                 </div>
@@ -501,47 +541,6 @@
                     <i class="fa fa-ticket text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
                 </div>
                 <span class="nav-link-text ms-1">Manual de Usuario</span>
-                </a>
-            </li>
-
-
-            <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#pagesExamplesdocumentos" class="nav-link {{ (Request::is('admin/reporte*') ? 'active' : '') }}" aria-controls="pagesExamplesdocumentos" role="button" aria-expanded="false">
-                <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-                    <i class="fas fa-file-invoice-dollar text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-                </div>
-                <span class="nav-link-text ms-1">Documentos</span>
-                </a>
-                <div class="collapse" id="pagesExamplesdocumentos">
-                <ul class="nav ms-4">
-                    <li class="nav-item ">
-
-                        <a class="nav-link {{ (Request::is('admin/documentos/tipos*') ? 'show' : '') }}" href="{{ route('documentos.index') }}">
-                            <span class="sidenav-mini-icon"> P </span>
-                            <span class="sidenav-normal">Tipos de Documentos</span>
-                        </a>
-
-                        <a class="nav-link {{ (Request::is('admin/documentos/generar*') ? 'show' : '') }}" href="{{ route('generar_documentos.index') }}">
-                            <span class="sidenav-mini-icon"> P </span>
-                            <span class="sidenav-normal">Reporte Generados</span>
-                        </a>
-
-                        <a class="nav-link {{ (Request::is('admin/documentos/faltantes*') ? 'show' : '') }}" href="{{ route('documentos.faltantes') }}">
-                            <span class="sidenav-mini-icon"> P </span>
-                            <span class="sidenav-normal">Documentos faltantes</span>
-                        </a>
-
-                    </li>
-                </ul>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ (Request::is('admin/paquetes') ? 'active' : '') }}" href="{{ route('paquetes.index') }}">
-                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                    <i class="fa fa-shopping-bag text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-                </div>
-                <span class="nav-link-text ms-1">Paquetes</span>
                 </a>
             </li>
 
@@ -641,7 +640,9 @@
                 </div>
                 @endcan
 
-                @can('menu-cam')
+
+
+                {{-- @can('menu-cam')
 
                 <li class="nav-item mt-3">
                     <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Menu CAM</h6>
@@ -718,7 +719,7 @@
                             <span class="nav-link-text ms-1">Videos</span>
                             </a>
                         </li>
-                @endcan
+                @endcan --}}
         </ul>
 
     </aside>
