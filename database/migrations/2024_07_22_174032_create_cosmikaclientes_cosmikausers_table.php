@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('direccion_rs_face')->nullable();
             $table->string('direccion_rs_insta')->nullable();
             $table->string('direccion_rs_whats')->nullable();
-
+            $table->string('claves_protocolo')->nullable();
             $table->timestamps();
         });
     }

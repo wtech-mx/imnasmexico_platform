@@ -464,26 +464,33 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/registro/imnas/clientes/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'index_clientes'])->name('clientes.imnas');
     Route::patch('/registro/imnas/subir/doc/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_clientes'])->name('update_clientes.imnas');
 
-    // =============== M O D U L O   C O T I Z A C I O N E S   C O S M I C A ===============================
-    Route::get('/admin/cotizacion/cosmica', [App\Http\Controllers\CotizacionCosmicaController::class, 'index'])->name('cotizacion_cosmica.index');
-    Route::get('/admin/cotizacion/cosmica/buscador', [App\Http\Controllers\CotizacionCosmicaController::class, 'buscador'])->name('cotizacion_cosmica.buscador');
-    Route::get('/admin/cotizacion/cosmica/create', [App\Http\Controllers\CotizacionCosmicaController::class, 'create'])->name('cotizacion_cosmica.create');
-    Route::post('/admin/cotizacion/cosmica/store', [App\Http\Controllers\CotizacionCosmicaController::class, 'store'])->name('cotizacion_cosmica.store');
-    Route::get('/admin/cotizacion/cosmica/edit/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'edit'])->name('cotizacion_cosmica.edit');
-    Route::patch('/admin/cotizacion/cosmica/update/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update'])->name('cotizacion_cosmica.update');
-    Route::get('/admin/cotizacion/cosmica/imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
 
     // =============== M O D U L O   R E G I S T R O   C O M P R A S ===============================
-    Route::get('/admin/registro/compras', [App\Http\Controllers\RegistroComprasController::class, 'index'])->name('registro_compras.index');
-    Route::get('/admin/registro/compras/buscador', [App\Http\Controllers\RegistroComprasController::class, 'buscador'])->name('registro_compras.buscador');
+    Route::get('/cosmica/registro/compras', [App\Http\Controllers\RegistroComprasController::class, 'index'])->name('registro_compras.index');
+    Route::get('/cosmica/registro/compras/buscador', [App\Http\Controllers\RegistroComprasController::class, 'buscador'])->name('registro_compras.buscador');
 
     // =============== M O D U L O   R E G I S T R O   B I E N V E N I D A ===============================
-    Route::get('/admin/registro/llegada', [App\Http\Controllers\RegistroLlegadaController::class, 'index'])->name('registro_llegada.index');
-    Route::get('/admin/registro/llegada/buscador', [App\Http\Controllers\RegistroLlegadaController::class, 'buscador'])->name('registro_llegada.buscador');
+    Route::get('/cosmica/registro/llegada', [App\Http\Controllers\RegistroLlegadaController::class, 'index'])->name('registro_llegada.index');
+    Route::get('/cosmica/registro/llegada/buscador', [App\Http\Controllers\RegistroLlegadaController::class, 'buscador'])->name('registro_llegada.buscador');
+
+        // =============== M O D U L O   C O T I Z A C I O N E S   C O S M I C A ===============================
+        Route::get('cosmica/cotizacion/', [App\Http\Controllers\CotizacionCosmicaController::class, 'index'])->name('cotizacion_cosmica.index');
+        Route::get('cosmica/cotizacion//buscador', [App\Http\Controllers\CotizacionCosmicaController::class, 'buscador'])->name('cotizacion_cosmica.buscador');
+        Route::get('cosmica/cotizacion//create', [App\Http\Controllers\CotizacionCosmicaController::class, 'create'])->name('cotizacion_cosmica.create');
+        Route::post('cosmica/cotizacion//store', [App\Http\Controllers\CotizacionCosmicaController::class, 'store'])->name('cotizacion_cosmica.store');
+        Route::get('cosmica/cotizacion//edit/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'edit'])->name('cotizacion_cosmica.edit');
+        Route::patch('cosmica/cotizacion//update/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update'])->name('cotizacion_cosmica.update');
+        Route::get('cosmica/cotizacion//imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
+
+    // =============== M O D U L O   c o s m i k a ===============================
+    Route::get('cosmica/distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index'])->name('distribuidoras.index');
+    Route::post('cosmica/distribuidoras/store', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'store'])->name('distribuidoras.store');
+
 });
 
-// Rutas para el sistema de documentos
-Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
+    // Rutas para el sistema de documentos
+
+    Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
     Route::get('login', function () {
         return view('cam.auth.login');
     });

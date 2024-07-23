@@ -41,11 +41,12 @@
             color: black;
         }
     </style>
+
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
     @php
-        $backgroundColor = Request::is('admin/cotizacion/cosmica*') ? '#322338' : $configuracion->color_principal;
+        $backgroundColor = Request::is('cosmica*') ? '#322338' : $configuracion->color_principal;
     @endphp
   <div class="min-height-300  position-absolute w-100" style="background-color: {{$backgroundColor}}!important;"></div>
     @include('layouts.sidebar')

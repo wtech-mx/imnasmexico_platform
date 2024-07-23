@@ -472,15 +472,24 @@
             @endcan --}}
 
             <li class="nav-item mt-3">
-                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Cosmika</h6>
+                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Cosmica</h6>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ (Request::is('admin/cotizacion/cosmica*') ? 'active' : '') }}" href="{{ route('cotizacion_cosmica.index') }}">
+                <a class="nav-link {{ (Request::is('cosmica/cotizacion/*') ? 'active' : '') }}" href="{{ route('cotizacion_cosmica.index') }}">
                 <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                     <i class="fa fa-file-text text-sm opacity-10" style="color: #322338"></i>
                 </div>
                 <span class="nav-link-text ms-1">Cotizaciones Cosmica</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ (Request::is('cosmica/distribuidoras/*') ? 'active' : '') }}" href="{{ route('distribuidoras.index') }}">
+                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-file-text text-sm opacity-10" style="color: #322338"></i>
+                </div>
+                <span class="nav-link-text ms-1">Distribuidoras</span>
                 </a>
             </li>
 

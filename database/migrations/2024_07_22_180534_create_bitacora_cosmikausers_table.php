@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('membresia_fin')->nullable();
             $table->string('meses_acomulados')->nullable();
             $table->string('consumido_totalmes')->nullable();
+            $table->string('claves_protocolo')->nullable();
 
             $table->timestamps();
         });
