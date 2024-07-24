@@ -47,7 +47,15 @@
                                                     <td>{{$pago->payer->email}}</td>
                                                 @endif
                                                 <td>${{ $pago->transaction_amount }}</td>
-                                                <td>{{ $pago->description }}</td>
+                                                <td>
+                                                    @php
+                                                        $words = explode(' ', $pago->description );
+                                                        $chunks = array_chunk($words, 3);
+                                                        foreach ($chunks as $chunk) {
+                                                            echo implode(' ', $chunk) . '<br>';
+                                                        }
+                                                    @endphp
+                                                </td>
                                                 <td>
                                                     @php
                                                         $fecha = $pago->date_approved;
@@ -57,11 +65,12 @@
                                                         $fecha_formateada = strftime('%e de %B del %Y', $timestamp);
                                                         // Formatear la hora
                                                         $hora_formateada = date('h:i A', $timestamp);
-                                                        // Combinar fecha y hora
-                                                        $fecha_hora_formateada = $fecha_formateada . ' a las ' . $hora_formateada;
+                                                        // Combinar fecha y hora con salto de línea
+                                                        $fecha_hora_formateada = $fecha_formateada . '<br>a las ' . $hora_formateada;
                                                     @endphp
-                                                    {{ $fecha_hora_formateada}}
+                                                    {!! $fecha_hora_formateada !!}
                                                 </td>
+
 
                                             </tr>
                                         @endforeach
