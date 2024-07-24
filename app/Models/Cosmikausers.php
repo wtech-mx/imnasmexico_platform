@@ -45,12 +45,7 @@ class Cosmikausers extends Model
 
     public function getPuntosFaltantesAttribute()
     {
-        $meta = 0;
-        if ($this->membresia === 'Cosmos') {
-            $meta = 2500;
-        } elseif ($this->membresia === 'Estelar') {
-            $meta = 5000;
-        }
+        $meta = $this->membresia === 'Cosmos' ? 1500 : ($this->membresia === 'Estelar' ? 2500 : 0);
         return max(0, $meta - $this->consumido_totalmes);
     }
 

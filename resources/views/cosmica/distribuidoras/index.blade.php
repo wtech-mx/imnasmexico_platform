@@ -50,7 +50,7 @@
                                         <th>Distribuidora</th>
                                         <th>Membrecia</th>
                                         <th>Puntos</th>
-                                        <th>Fechas</th>
+                                        <th>Meses Acumulados</th>
                                         <th>Estatus</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -60,8 +60,6 @@
                                     @foreach ($usercosmika as $item)
                                         <tr>
                                             <td>{{ $item->id }}</td>
-
-
                                         <td>
                                             @php
                                                 $words = explode(' ', $item->User->name );
@@ -85,12 +83,15 @@
                                         </td>
 
                                         <td>
-                                            Inicio: {{ \Carbon\Carbon::parse($item->membresia_inicio)->format('d M Y') }}<br>
-                                            Fin: {{ \Carbon\Carbon::parse($item->membresia_fin)->format('d M Y') }}
+                                            {{ $item->meses_acomulados }}
                                         </td>
                                         <td>
-                                            {{ $item->dias_restantes }} <br>
-                                            {{ $item->puntos_faltantes }}
+                                            @if ($item->puntos_faltantes > 0)
+                                                <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Dias Faltantes: <b> {{ $item->dias_restantes }} </b></label><br>
+                                                Puntos faltantes: <b> {{ $item->puntos_faltantes }} </b>
+                                            @else
+                                                <label class="badge" style="color: #06a306;background-color: #00e3aa40;">Cumplio con la meta</label><br>
+                                            @endif
                                         </td>
 
                                         <td>

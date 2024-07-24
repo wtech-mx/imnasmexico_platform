@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Bitacora_cosmikausers;
 use App\Models\Cosmikausers;
 use App\Models\NotasProductosCosmica;
 use App\Models\ProductosNotasCosmica;
@@ -16,6 +17,8 @@ use Illuminate\Http\Request;
 class CotizacionCosmicaController extends Controller
 {
     public function index(){
+
+        $this->checkMembresia();
 
         $primerDiaDelMes = date('Y-m-01');
         $ultimoDiaDelMes = date('Y-m-t');
@@ -304,5 +307,56 @@ class CotizacionCosmicaController extends Controller
         }
 
         return redirect()->back()->with('success', 'Se ha actualizado con exito');
+    }
+
+
+    protected function checkMembresia()
+    {
+        $users = Cosmikausers::all();
+
+        foreach ($users as $user) {
+            $this->handleUserMembresia($user);
+            $user->save();
+        }
+    }
+
+    protected function handleUserMembresia($user)
+    {
+        $membresiaFin = Carbon::parse($user->membresia_fin);
+        $diasRestantes = Carbon::now()->diffInDays($membresiaFin, false);
+        $meta = $user->membresia === 'Cosmos' ? 1500 : ($user->membresia === 'Estelar' ? 2500 : 0);
+
+        if ($diasRestantes == 0 && $user->consumido_totalmes >= $meta) {
+            $this->createBitacora($user);
+            $user->membresia_fin = $membresiaFin->addMonth()->format('Y-m-d');
+            $user->consumido_totalmes = 0;
+            $user->meses_acomulados += 1;
+        } elseif ($diasRestantes < 0 && $diasRestantes >= -5) {
+            if ($user->consumido_totalmes < $meta && $diasRestantes == -5) {
+                $this->createBitacora($user);
+                $user->puntos_acomulados = 0;
+                $user->meses_acomulados = 0;
+                $user->membresia_estatus = 'Inactiva';
+            }
+        } elseif ($diasRestantes < -5) {
+            $this->createBitacora($user);
+            $user->puntos_acomulados = 0;
+            $user->meses_acomulados = 0;
+            $user->membresia_estatus = 'Inactiva';
+        }
+    }
+
+    protected function createBitacora($user)
+    {
+        $bitacora = new Bitacora_cosmikausers();
+        $bitacora->id_cliente = $user->id_cliente;
+        $bitacora->membresia = $user->membresia;
+        $bitacora->puntos_acomulados = $user->puntos_acomulados;
+        $bitacora->membresia_inicio = $user->membresia_inicio;
+        $bitacora->membresia_fin = $user->membresia_fin;
+        $bitacora->meses_acomulados = $user->meses_acomulados;
+        $bitacora->consumido_totalmes = $user->consumido_totalmes;
+        $bitacora->claves_protocolo = $user->claves_protocolo;
+        $bitacora->save();
     }
 }
