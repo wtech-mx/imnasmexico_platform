@@ -61,8 +61,8 @@
                             </span>
                             <select name="membresia" id="membresia" class="form-select d-inline-block" required>
                                 <option value="">Seleccione una opción</option>
-                                <option value="cosmos" {{ old('membresia') == 'cosmos' ? 'selected' : '' }}>Cosmos</option>
-                                <option value="estelar" {{ old('membresia') == 'estelar' ? 'selected' : '' }}>Estelar</option>
+                                <option value="Cosmos" {{ old('membresia') == 'Cosmos' ? 'selected' : '' }}>Cosmos</option>
+                                <option value="Estelar" {{ old('membresia') == 'Estelar' ? 'selected' : '' }}>Estelar</option>
                             </select>
                         </div>
                     </div>

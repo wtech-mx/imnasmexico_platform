@@ -67,6 +67,7 @@
                                         <th>Cliente</th>
                                         <th>fecha</th>
                                         <th>Total</th>
+                                        <th>Estatus</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -102,6 +103,15 @@
                                             </td>
                                             <td><h5>${{ $nota->total }}</h5></td>
                                             <td>
+                                                <button class="btn " data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}" title="Editar Estatus">
+                                                    @if ($nota->estatus_cotizacion == 'Aprobada')
+                                                        <label class="badge" style="color: #06a306;background-color: #00e3aa40;">Aprobada</label>
+                                                    @else
+                                                        <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Pendiente</label>
+                                                    @endif
+                                                </button>
+                                            </td>
+                                            <td>
                                                 <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}">
                                                     <i class="fa fa-file"></i>
                                                 </a>
@@ -126,6 +136,7 @@
                                                 @endcan
                                             </td>
                                         </tr>
+                                        @include('admin.cotizacion_cosmica.modal_estatus')
                                     @endforeach
                                 </tbody>
                             </table>

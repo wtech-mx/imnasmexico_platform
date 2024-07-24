@@ -39,8 +39,6 @@ class VerificarTransferenciasController extends Controller
             'monto' => $monto,
         ]);
 
-        dd($body);
-
         try {
             // Configurar el cliente Guzzle
             $client = new GuzzleClient();

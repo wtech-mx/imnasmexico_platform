@@ -206,15 +206,6 @@ class CotizacionCosmicaController extends Controller
             }
         }
 
-        if($request->get('id_cliente')){
-            if(Cosmikausers::where('id_cliente', $request->id_cliente)->exists()){
-                $distribuidora = Cosmikausers::where('id_cliente', $request->get('id_cliente'))->first();
-                $suma = $distribuidora->puntos_acomulados + $notas_productos->subtotal;
-                $distribuidora->puntos_acomulados = $suma;
-                $distribuidora->update();
-            }
-        }
-
         return redirect()->route('cotizacion_cosmica.index')
         ->with('success', 'Se ha creado su cotizacion con exito');
     }
@@ -292,8 +283,26 @@ class CotizacionCosmicaController extends Controller
         }else{
             $folio = $nota->folio;
         }
-        //  return $pdf->stream();
-       return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
+        return $pdf->stream();
+       //  return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
     }
 
+    public function update_estatus(Request $request, $id){
+
+        $nota = NotasProductosCosmica::find($id);
+        $nota->estatus_cotizacion = 'Aprobada';
+        $nota->update();
+
+        if($nota->id_usuario){
+            if(Cosmikausers::where('id_cliente', $nota->id_usuario)->exists()){
+                $distribuidora = Cosmikausers::where('id_cliente', $nota->id_usuario)->first();
+                $suma = $distribuidora->puntos_acomulados + $nota->subtotal;
+                $distribuidora->puntos_acomulados = $suma;
+                $distribuidora->consumido_totalmes = $suma;
+                $distribuidora->update();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Se ha actualizado con exito');
+    }
 }

@@ -48,9 +48,10 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Distribuidora</th>
-                                        <th>Fechas</th>
                                         <th>Membrecia</th>
+                                        <th>Puntos</th>
                                         <th>Fechas</th>
+                                        <th>Estatus</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -80,12 +81,16 @@
                                         </td>
 
                                         <td>
-                                                Inicio: {{ \Carbon\Carbon::parse($item->membresia_inicio)->format('d M Y') }}<br>
-                                                Fin: {{ \Carbon\Carbon::parse($item->membresia_fin)->format('d M Y') }}
+                                            {{ $item->puntos_acomulados }}
                                         </td>
 
                                         <td>
-
+                                            Inicio: {{ \Carbon\Carbon::parse($item->membresia_inicio)->format('d M Y') }}<br>
+                                            Fin: {{ \Carbon\Carbon::parse($item->membresia_fin)->format('d M Y') }}
+                                        </td>
+                                        <td>
+                                            {{ $item->dias_restantes }} <br>
+                                            {{ $item->puntos_faltantes }}
                                         </td>
 
                                         <td>

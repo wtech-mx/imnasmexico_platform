@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Cosmikausers extends Model
 {
@@ -34,6 +35,23 @@ class Cosmikausers extends Model
     public function User()
     {
         return $this->belongsTo(User::class, 'id_cliente');
+    }
+
+    public function getDiasRestantesAttribute()
+    {
+        $membresiaFin = Carbon::parse($this->membresia_fin);
+        return Carbon::now()->diffInDays($membresiaFin, false);
+    }
+
+    public function getPuntosFaltantesAttribute()
+    {
+        $meta = 0;
+        if ($this->membresia === 'Cosmos') {
+            $meta = 2500;
+        } elseif ($this->membresia === 'Estelar') {
+            $meta = 5000;
+        }
+        return max(0, $meta - $this->consumido_totalmes);
     }
 
 }
