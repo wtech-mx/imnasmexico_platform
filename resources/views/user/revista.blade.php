@@ -9,8 +9,8 @@
 
     <style type="text/css">
       .container {
-        height: 80vh;
-        width: auto;
+        height: 93vh;
+        width: 100%;
       }
 
     </style>
@@ -21,8 +21,12 @@
 @section('content')
 
 <section class="primario bg_overley" style="">
+    {{-- <div class="container" id="container1"></div> --}}
 
-    <div class="container" id="container1"></div>
+    <div class="d-flex justify-content-center">
+        <iframe src="https://cosmicaskin.com/protocolo/" frameborder="0" class="container" style="margin-top: 6rem"></iframe>
+    </div>
+
 
 </section>
 
@@ -31,14 +35,14 @@
 @section('js')
 
     <!-- Scripts necesarios -->
-    <script src="{{asset('js/jquery.min.js')}}"></script>
+    {{-- <script src="{{asset('js/jquery.min.js')}}"></script>
     <script src="{{asset('js/html2canvas.min.js')}}"></script>
     <script src="{{asset('js/three.min.js')}}"></script>
     <script src="{{asset('js/pdf.min.js')}}"></script>
-    <script src="{{asset('js/3dflipbook.min.js')}}"></script>
+    <script src="{{asset('js/3dflipbook.min.js')}}"></script> --}}
 
 
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
 
         var template = {
           html: 'templates/default-book-view.html',
@@ -61,7 +65,7 @@
 
         // }
 
-      </script>
+      </script> --}}
 
 
 @endsection
