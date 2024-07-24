@@ -226,6 +226,24 @@
                                 </div>
                             </div>
 
+                            <div class="col-12">
+
+                                <p class="d-inline-flex gap-1">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseComprobante" role="button" aria-expanded="false" aria-controls="collapseComprobante">
+                                        Comprobar pago Banxico <img src="https://www.banxico.org.mx/DIBM/resources/img/logoBM-Monograma.png" alt="" style="width: 20px">
+                                    </a>
+                                  </p>
+
+                                  <div class="collapse" id="collapseComprobante">
+                                    <div class="card card-body row" style="padding: 0 !important;border: solid 5px #836263;border-radius: 10px;">
+                                        <div class="col-12">
+                                            <iframe src="https://www.banxico.org.mx/cep/" frameborder="0" style="width: 100%;height: 600px;"></iframe>
+                                        </div>
+                                    </div>
+                                  </div>
+
+                            </div>
+
 
                             <div class="form-group col-1 mt-3">
                                 <label>Deudor</label>

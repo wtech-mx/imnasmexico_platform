@@ -31,8 +31,9 @@
     }
 
     .selected-row {
-        background-color: #f8d7da !important; /* Color rojo claro */
-    }
+    background-color: #f8d7da !important; /* Color rojo claro */
+}
+
 </style>
 @section('content')
     <div class="container-fluid">
@@ -85,16 +86,8 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($pagos_fuera as $pago_fuera)
-                                        @php
-                                            $colorClass = '';
-                                            if (str_contains($pago_fuera->modalidad, 'inbursa')) {
-                                                $colorClass = '#00bcd4';
-                                            } elseif (str_contains($pago_fuera->modalidad, 'bancomer')) {
-                                                $colorClass = '#0033cc';
-                                            }
-                                        @endphp
                                         @include('admin.pagos_fuera.modal_ins')
-                                            <tr style="color: {{ $colorClass }}">
+                                            <tr>
                                                 <td>{{ $pago_fuera->id }}</td>
                                                 <td>
                                                     @php
@@ -121,9 +114,11 @@
                                                 </td>
                                                 <td>{{ $pago_fuera->modalidad }}</td>
                                                 <td>
+                                                    @can('verificacion-pago')
                                                     <input data-id="{{ $pago_fuera->id }}" class="toggle-class" type="checkbox"
                                                     data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                                     data-on="Active" data-off="InActive" {{ $pago_fuera->pendiente ? 'checked' : '' }}>
+                                                    @endcan
                                                 </td>
                                                 <td>
                                                     <a type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#showDataModal{{$pago_fuera->id}}" style="color: #ffff">
@@ -151,34 +146,17 @@
   <script type="text/javascript">
 
     $(document).ready(function() {
+
         $('.curso').select2();
-    });
-
-    $(document).ready(function() {
-        $('.curso2').select2();
-    });
-
-    $(document).ready(function() {
-        $('.curso3').select2();
-    });
-
-    $(document).ready(function() {
         $('.curso4').select2();
-    });
+        $('.curso2').select2();
+        $('.curso3').select2();
 
+        const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+            searchable: true,
+            fixedHeight: false
+        });
 
-  </script>
-
-<script>
-        function openRightPanel() {
-            document.getElementById("rightPanel").style.right = "0";
-        }
-
-        function closeRightPanel() {
-            document.getElementById("rightPanel").style.right = "-600px";
-        }
-
-    $(document).ready(function() {
                 // Esconde el contenedor del campo "Abono" inicialmente
                 $('#abono-container').hide();
 
@@ -196,20 +174,28 @@
 
                 var table = $('#datatable-search').DataTable();
 
-        // Manejar el clic en las filas
-        $('#datatable-search tbody').on('click', 'tr', function () {
-            // Remover la clase 'selected-row' de cualquier fila previamente seleccionada
-            $('#datatable-search tbody tr').removeClass('selected-row');
+                // Manejar el clic en las filas
+                $('#datatable-search tbody').on('click', 'tr', function () {
+                    // Remover la clase 'selected-row' de cualquier fila previamente seleccionada
+                    $('#datatable-search tbody tr').removeClass('selected-row');
 
-            // Agregar la clase 'selected-row' a la fila seleccionada
-            $(this).addClass('selected-row');
-        });
+                    // Agregar la clase 'selected-row' a la fila seleccionada
+                    $(this).addClass('selected-row');
+                });
+
     });
 
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-      searchable: true,
-      fixedHeight: false
-    });
+        function openRightPanel() {
+            document.getElementById("rightPanel").style.right = "0";
+        }
+
+        function closeRightPanel() {
+            document.getElementById("rightPanel").style.right = "-600px";
+        }
+
+  </script>
+
+<script>
 
     $(function() {
         // Asignar el evento a un elemento padre estático
@@ -231,7 +217,9 @@
             });
         });
     });
+
 </script>
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         var form = document.getElementById('tuFormulario');
@@ -265,7 +253,5 @@
         });
     });
 </script>
-
-
 
 @endsection
