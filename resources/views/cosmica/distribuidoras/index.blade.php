@@ -11,6 +11,10 @@
 
 @php
     $fecha = date('Y-m-d');
+    use Carbon\Carbon;
+
+    // Establece la localización a español
+    Carbon::setLocale('es');
 @endphp
 @section('content')
 
@@ -44,6 +48,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Distribuidora</th>
+                                        <th>Membrecia</th>
                                         <th>Fechas</th>
                                         <th>Total</th>
                                         <th>Acciones</th>
@@ -54,7 +59,44 @@
                                     @foreach ($usercosmika as $item)
                                         <tr>
                                             <td>{{ $item->id }}</td>
+
+                                            <td>
+                                                @php
+                                                    $words = explode(' ', $item->User->name );
+                                                    $chunks = array_chunk($words, 3);
+                                                    foreach ($chunks as $chunk) {
+                                                        echo implode(' ', $chunk) . '<br>';
+                                                    }
+                                                @endphp
+                                                <br>
+                                                {{ $item->User->email }}
+                                                <br>
+                                                {{ $item->User->telefono }}
+                                            </td>
+
+                                            <td>
+                                                {{ $item->membresia }}
+                                            </td>
+
+                                            <td>
+                                                    Inicio: {{ \Carbon\Carbon::parse($item->membresia_inicio)->format('d M Y') }}<br>
+                                                    Fin: {{ \Carbon\Carbon::parse($item->membresia_fin)->format('d M Y') }}
+                                            </td>
+
+                                            <td>
+
+                                            </td>
+
+                                            <td>
+                                                <a type="button" class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop_{{ $item->id }}">
+                                                    <i class="fa fa-fw fa-edit"></i> Editar
+                                                </a>
+                                            </td>
+
                                         </tr>
+
+                                        @include('cosmica.distribuidoras.modal_update')
+
                                     @endforeach
 
                                 </tbody>

@@ -75,4 +75,25 @@ class CosmicaDistribuidoraController extends Controller
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Envio de correo exitoso.');
     }
+
+    public function update(Request $request,$id){
+
+        $usercosmika =  Cosmikausers::findorfail($id);
+        $usercosmika->membresia = $request->get('membresia');
+        $usercosmika->membresia_estatus = $request->get('membresia_estatus');
+        $usercosmika->puntos_acomulados = $request->get('puntos_acomulados');
+        $usercosmika->membresia_inicio = $request->get('membresia_inicio');
+        $usercosmika->membresia_fin = $request->get('membresia_fin');
+        $usercosmika->meses_acomulados = $request->get('meses_acomulados');
+        $usercosmika->consumido_totalmes = $request->get('consumido_totalmes');
+        $usercosmika->direccion_local = $request->get('direccion_local');
+        $usercosmika->direccion_foto = $request->get('direccion_foto');
+        $usercosmika->direccion_rs_face = $request->get('direccion_rs_face');
+        $usercosmika->direccion_rs_insta = $request->get('direccion_rs_insta');
+        $usercosmika->direccion_rs_whats = $request->get('direccion_rs_whats');
+        $usercosmika->update();
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back()->with('success', 'Actualizado exitoso.');
+    }
 }
