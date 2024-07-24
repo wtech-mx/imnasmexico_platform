@@ -51,6 +51,7 @@
                                         <th>Membrecia</th>
                                         <th>Puntos</th>
                                         <th>Meses Acumulados</th>
+                                        <th>Protocolo</th>
                                         <th>Estatus</th>
                                         <th>Acciones</th>
                                     </tr>
@@ -59,7 +60,9 @@
 
                                     @foreach ($usercosmika as $item)
                                         <tr>
-                                            <td>{{ $item->id }}</td>
+                                            <td>{{ $item->id }}
+
+                                            </td>
                                         <td>
                                             @php
                                                 $words = explode(' ', $item->User->name );
@@ -85,6 +88,13 @@
                                         <td>
                                             {{ $item->meses_acomulados }}
                                         </td>
+
+                                        <td>
+                                            <a href="" class="btn btn-outline-warning btn-sm btn-xs" data-bs-toggle="modal" data-bs-target="#exampleRevista">
+                                                Accesos
+                                            </a>
+                                        </td>
+
                                         <td>
                                             @if ($item->puntos_faltantes > 0)
                                                 <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Dias Faltantes: <b> {{ $item->dias_restantes }} </b></label><br>
