@@ -44,8 +44,9 @@
                                     <tr>
                                         <th>#</th>
                                         <th>Distribuidora</th>
-                                        <th>Fechas</th>
-                                        <th>Total</th>
+                                        <th>Fecha inicio</th>
+                                        <th>Meses consecutivos</th>
+                                        <th>Puntos</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -54,6 +55,10 @@
                                     @foreach ($usercosmika as $item)
                                         <tr>
                                             <td>{{ $item->id }}</td>
+                                            <td>{{ $item->User->name }}</td>
+                                            <td>{{ $item->membresia_inicio }}</td>
+                                            <td>{{ $item->meses_acomulados }}</td>
+                                            <td>{{ $item->puntos_acomulados }}</td>
                                         </tr>
                                     @endforeach
 

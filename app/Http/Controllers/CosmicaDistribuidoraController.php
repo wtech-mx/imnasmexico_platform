@@ -21,8 +21,9 @@ class CosmicaDistribuidoraController extends Controller
     public function index(){
 
         $usercosmika = Cosmikausers::orderby('id','desc')->get();
+        $clientes = User::orderby('name','desc')->get();
 
-        return view('cosmica.distribuidoras.index',compact('usercosmika'));
+        return view('cosmica.distribuidoras.index',compact('usercosmika', 'clientes'));
     }
 
 

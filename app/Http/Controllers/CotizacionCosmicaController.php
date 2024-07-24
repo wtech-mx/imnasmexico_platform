@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cosmikausers;
 use App\Models\NotasProductosCosmica;
 use App\Models\ProductosNotasCosmica;
 use App\Models\Products;
@@ -57,17 +58,12 @@ class CotizacionCosmicaController extends Controller
         $code = Str::random(8);
 
         $notas_productos = new NotasProductosCosmica;
-        if($request->get('email') == NULL){
+        if($request->get('email') == NULL && $request->get('id_cliente') == NULL){
             $notas_productos->nombre = $request->get('name');
             $notas_productos->telefono = $request->get('telefono');
         }else{
-            if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
-                if (User::where('telefono', $request->telefono)->exists()) {
-                    $user = User::where('telefono', $request->telefono)->first();
-                } else {
-                    $user = User::where('email', $request->email)->first();
-                }
-                $payer = $user;
+            if ($request->get('id_cliente')) {
+                $id_cliente = $request->get('id_cliente');
             } else {
                 $payer = new User;
                 $payer->name = $request->get('name');
@@ -78,10 +74,10 @@ class CotizacionCosmicaController extends Controller
                 $payer->cliente = '1';
                 $payer->password = Hash::make($request->get('telefono'));
                 $payer->save();
-                $datos = User::where('id', '=', $payer->id)->first();
-                // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+
+                $id_cliente = $payer->id;
             }
-            $notas_productos->id_usuario = $payer->id;
+            $notas_productos->id_usuario = $id_cliente;
         }
 
         $dominio = $request->getHost();
@@ -207,6 +203,15 @@ class CotizacionCosmicaController extends Controller
                 $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                 $notas_inscripcion->descuento = $nuevosCampos4[$index];
                 $notas_inscripcion->save();
+            }
+        }
+
+        if($request->get('id_cliente')){
+            if(Cosmikausers::where('id_cliente', $request->id_cliente)->exists()){
+                $distribuidora = Cosmikausers::where('id_cliente', $request->get('id_cliente'))->first();
+                $suma = $distribuidora->puntos_acomulados + $notas_productos->subtotal;
+                $distribuidora->puntos_acomulados = $suma;
+                $distribuidora->update();
             }
         }
 
