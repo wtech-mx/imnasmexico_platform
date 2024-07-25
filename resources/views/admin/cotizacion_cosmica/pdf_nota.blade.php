@@ -179,7 +179,7 @@
                     <td></td>
                     <td></td>
                 <td style="text-align: right"><b>Envío</b> </td>
-                <td>$180</td>
+                <td>${{$nota->dinero_recibido}}</td>
                 </tr>
             @endif
             @if ($nota->factura == '1')

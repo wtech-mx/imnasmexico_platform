@@ -128,7 +128,7 @@
                                                                 <span class="input-group-text" id="basic-addon1">
                                                                     <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
                                                                 </span>
-                                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad" >
+                                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad" value="0">
                                                             </div>
                                                         </div>
 
@@ -321,95 +321,97 @@
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var agregarCampoBtn = document.getElementById('agregarCampo');
-        var camposContainer = document.getElementById('camposContainer');
-        var campoExistente = camposContainer.querySelector('.campo');
-        campoExistente.querySelector('.cantidad').value = '';
-        var totalInput = document.getElementById('total');
-        var descuentoInput = document.getElementById('descuento');
-        var totalDescuentoInput = document.getElementById('totalDescuento');
+document.addEventListener('DOMContentLoaded', function() {
+    var agregarCampoBtn = document.getElementById('agregarCampo');
+    var camposContainer = document.getElementById('camposContainer');
+    var campoExistente = camposContainer.querySelector('.campo');
+    campoExistente.querySelector('.cantidad').value = '0';
+    var totalInput = document.getElementById('total');
+    var descuentoInput = document.getElementById('descuento');
+    var totalDescuentoInput = document.getElementById('totalDescuento');
 
-        $(document).ready(function() {
-            $('.producto').select2();
-            $('.cliente').select2();
+    $(document).ready(function() {
+        $('.producto').select2();
+        $('.cliente').select2();
 
-            // Función para asociar eventos al campo de cantidad y descuento
-            function asociarEventosCampos(cantidadInput, descuentoInput, productoInput) {
-                cantidadInput.addEventListener('input', function() {
-                    actualizarSubtotal();
+        var clienteData = null;
+
+        $('#id_cliente').on('change', function() {
+            var clienteId = $(this).val();
+
+            if (clienteId) {
+                $.ajax({
+                    url: '/get-descuento/' + clienteId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        clienteData = data;
+                        if (data.status === 'activo') {
+                            if (data.membresia === 'Cosmos') {
+                                $('#descuento').val(40);
+                            } else if (data.membresia === 'Estelar') {
+                                $('#descuento').val(60);
+                            }
+                        } else {
+                            $('#descuento').val(0); // Opcional: Resetear si no está activo
+                        }
+                        actualizarSubtotal();
+                    }
                 });
-
-                cantidadInput.addEventListener('blur', function() {
-                    actualizarSubtotal();
-                });
-
-                descuentoInput.addEventListener('input', function() {
-                    actualizarSubtotal();
-                });
-
-                productoInput.addEventListener('change', function () {
-                    actualizarSubtotal();
-                });
-            }
-
-            // Función para eliminar un campo
-            function eliminarCampo(campo) {
-                campo.remove();
+            } else {
+                $('#descuento').val(0); // Opcional: Resetear si no hay cliente seleccionado
+                clienteData = null;
                 actualizarSubtotal();
             }
+        });
 
-            // Asociar eventos al campo de cantidad y descuento original
-            var cantidadOriginal = document.querySelector('.campo .cantidad');
-            var descuentoOriginal = document.querySelector('.campo .descuento_prod');
-            var productoOriginal = document.querySelector('.campo .producto');
-            asociarEventosCampos(cantidadOriginal, descuentoOriginal, productoOriginal);
+        function asociarEventosCampos(cantidadInput, descuentoInput, productoInput) {
+            cantidadInput.addEventListener('input', actualizarSubtotal);
+            cantidadInput.addEventListener('blur', actualizarSubtotal);
+            descuentoInput.addEventListener('input', actualizarSubtotal);
+            productoInput.addEventListener('change', actualizarSubtotal);
+        }
 
-            // Agregar campo duplicado
-            agregarCampoBtn.addEventListener('click', function() {
-                var nuevoCampo = campoExistente.cloneNode(true);
-                camposContainer.appendChild(nuevoCampo);
+        function eliminarCampo(campo) {
+            campo.remove();
+            actualizarSubtotal();
+        }
 
-                // Limpiar los valores en el nuevo campo
-                nuevoCampo.querySelector('.producto').value = '';
-                nuevoCampo.querySelector('.cantidad').value = '';
-                nuevoCampo.querySelector('.descuento_prod').value = '0';
-                nuevoCampo.querySelector('.subtotal').value = '0.00';
+        var cantidadOriginal = document.querySelector('.campo .cantidad');
+        var descuentoOriginal = document.querySelector('.campo .descuento_prod');
+        var productoOriginal = document.querySelector('.campo .producto');
+        asociarEventosCampos(cantidadOriginal, descuentoOriginal, productoOriginal);
 
-                nuevoCampo.querySelector('.producto').addEventListener('change', function () {
-                    actualizarSubtotal();
-                });
+        agregarCampoBtn.addEventListener('click', function() {
+            var nuevoCampo = campoExistente.cloneNode(true);
+            camposContainer.appendChild(nuevoCampo);
 
-                // Obtener los campos de cantidad y descuento del nuevo campo
-                var cantidadInput = nuevoCampo.querySelector('.cantidad');
-                var descuentoInput = nuevoCampo.querySelector('.descuento_prod');
-                var productoInput = nuevoCampo.querySelector('.producto');
+            nuevoCampo.querySelector('.producto').value = '';
+            nuevoCampo.querySelector('.cantidad').value = '';
+            nuevoCampo.querySelector('.descuento_prod').value = '0';
+            nuevoCampo.querySelector('.subtotal').value = '0.00';
 
-                // Asociar eventos al nuevo campo de cantidad y descuento
-                asociarEventosCampos(cantidadInput, descuentoInput, productoInput);
+            nuevoCampo.querySelector('.producto').addEventListener('change', actualizarSubtotal);
 
-                // Eliminar la clase 'select2-hidden-accessible' y la data de select2 antes de clonar
-                $(nuevoCampo).find('.producto').removeClass('select2-hidden-accessible').next().remove();
+            var cantidadInput = nuevoCampo.querySelector('.cantidad');
+            var descuentoInput = nuevoCampo.querySelector('.descuento_prod');
+            var productoInput = nuevoCampo.querySelector('.producto');
+            asociarEventosCampos(cantidadInput, descuentoInput, productoInput);
 
-                // Inicializar select2 después de clonar
-                $(nuevoCampo).find('.producto').select2();
+            $(nuevoCampo).find('.producto').removeClass('select2-hidden-accessible').next().remove();
+            $(nuevoCampo).find('.producto').select2();
 
-                // Agregar evento para eliminar el nuevo campo
-                var eliminarCampoBtn = nuevoCampo.querySelector('.eliminarCampo');
-                eliminarCampoBtn.addEventListener('click', function() {
-                    eliminarCampo(nuevoCampo);
-                });
-
-                // Actualizar subtotal al agregar nuevo campo
-                actualizarSubtotal();
+            var eliminarCampoBtn = nuevoCampo.querySelector('.eliminarCampo');
+            eliminarCampoBtn.addEventListener('click', function() {
+                eliminarCampo(nuevoCampo);
             });
 
-            // Agregar evento para eliminar el campo original
-            var eliminarCampoBtnOriginal = document.querySelector('.campo .eliminarCampo');
-            eliminarCampoBtnOriginal.addEventListener('click', function() {
-                eliminarCampo(document.querySelector('.campo'));
-            });
+            actualizarSubtotal();
+        });
 
+        var eliminarCampoBtnOriginal = document.querySelector('.campo .eliminarCampo');
+        eliminarCampoBtnOriginal.addEventListener('click', function() {
+            eliminarCampo(document.querySelector('.campo'));
         });
 
         camposContainer.addEventListener('change', function(event) {
@@ -438,7 +440,6 @@
 
                 var subtotalValor = isNaN(precio) || isNaN(cantidadValor) ? 0 : precio * cantidadValor;
 
-                // Aplicar el descuento al subtotal
                 var subtotalConDescuento = subtotalValor - (subtotalValor * (descuentoValor / 100));
                 subtotal.value = subtotalConDescuento.toFixed(2);
 
@@ -447,32 +448,42 @@
 
             totalInput.value = total.toFixed(2);
 
-            // Calcular el descuento total
             var descuentoTotal = parseFloat(descuentoInput.value);
             var totalDescuento = total - (total * (descuentoTotal / 100));
             totalDescuentoInput.value = totalDescuento.toFixed(2);
 
-            // Sumar el costo de envío si el checkbox está marcado
-            var costoEnvio = document.getElementById('checkboxEnvio').checked ? 180 : 0;
+            var costoEnvio = 0;
+
+            if (clienteData && clienteData.status === 'activo') {
+                if (clienteData.membresia === 'Cosmos') {
+                    costoEnvio = total >= 1500 ? 90 : 126;
+                } else if (clienteData.membresia === 'Estelar') {
+                    costoEnvio = total >= 2500 ? 0 : 90;
+                }
+            }
+
+            var envioCheckbox = document.getElementById('checkboxEnvio');
+            if (envioCheckbox.checked) {
+                if (!clienteData || clienteData.status !== 'activo') {
+                    costoEnvio = 180; // Si el cliente no tiene membresía o no está activa, el costo de envío es 180
+                }
+            } else {
+                costoEnvio = 0; // Si el checkbox no está marcado, el costo de envío es 0
+            }
+
             var totalConEnvio = totalDescuento + costoEnvio;
 
-            // Sumar el 16% si el checkbox de factura está marcado
             var toggleFactura = document.getElementById('toggleFactura');
             if (toggleFactura.checked) {
                 totalConEnvio *= 1.16;
             }
 
-            // Actualizar el valor en el input
             totalDescuentoInput.value = totalConEnvio.toFixed(2);
         }
 
-        // Manejar cambios en el estado del checkbox de envío
         document.getElementById('checkboxEnvio').addEventListener('change', actualizarSubtotal);
-
-        // Agregar un evento change al checkbox de factura
         document.getElementById('toggleFactura').addEventListener('change', actualizarSubtotal);
 
-        // Llamar a la función inicialmente para establecer el valor inicial
         actualizarSubtotal();
 
         descuentoInput.addEventListener('keyup', function() {
@@ -482,6 +493,10 @@
             totalDescuentoInput.value = totalDescuento.toFixed(2);
         });
     });
+});
+
+
+
 
     $(document).ready(function () {
         // Manejar el cambio de estado del switch
