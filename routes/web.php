@@ -477,6 +477,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('cosmica/cotizacion/update/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update'])->name('cotizacion_cosmica.update');
     Route::get('cosmica/cotizacion/imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
 
+    Route::get('/get-descuento/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'getDescuento']);
     // =============== M O D U L O   c o s m i k a ===============================
     Route::get('cosmica/distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index'])->name('distribuidoras.index');
     Route::post('cosmica/distribuidoras/store', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'store'])->name('distribuidoras.store');

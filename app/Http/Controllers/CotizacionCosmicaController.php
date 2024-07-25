@@ -126,10 +126,23 @@ class CotizacionCosmicaController extends Controller
             $pago_fuera = public_path() . '/pagos';
         }
 
-        if($request->get('envio') == NULL){
-            $envio = 0;
-        }else{
-            $envio = 180;
+        //C o s t o  d e  E n v i o
+        $cliente = Cosmikausers::where('id_cliente', '=', $id_cliente)->first();
+        $total = $request->input('totalDescuento');
+
+        $envio = 0;
+        if ($request->get('envio') !== NULL) {
+            // Si el cliente tiene membresía activa, calcular el costo de envío basado en la membresía
+            if ($cliente && $cliente->membresia_estatus === 'Activa') {
+                if ($cliente->membresia === 'Cosmos') {
+                    $envio = $total >= 1500 ? 90 : 126;
+                } elseif ($cliente->membresia === 'Estelar') {
+                    $envio = $total >= 2500 ? 0 : 90;
+                }
+            } else {
+                // Si el cliente no tiene membresía activa, el costo de envío es 180
+                $envio = 180;
+            }
         }
 
         $descuento = floatval($request->get('descuento', 0));
@@ -159,7 +172,7 @@ class CotizacionCosmicaController extends Controller
                 $totalConDescuento = $totalDesc + $factura;
             }
         }
-
+        $notas_productos->dinero_recibido = $envio;
         $notas_productos->metodo_pago = $request->get('metodo_pago');
         $notas_productos->fecha = $request->get('fecha');
         $notas_productos->subtotal = $sumaCampo4;
@@ -402,5 +415,20 @@ class CotizacionCosmicaController extends Controller
         $bitacora->consumido_totalmes = $user->consumido_totalmes;
         $bitacora->claves_protocolo = $user->claves_protocolo;
         $bitacora->save();
+    }
+
+    public function getDescuento($id){
+        $user = Cosmikausers::where('id_cliente', $id)->first();
+
+        if ($user && $user->membresia_estatus === 'Activa') {
+            return response()->json([
+                'status' => 'activo',
+                'membresia' => $user->membresia,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'inactivo',
+            ]);
+        }
     }
 }
