@@ -103,13 +103,21 @@
                                             </td>
                                             <td><h5>${{ $nota->total }}</h5></td>
                                             <td>
-                                                <button class="btn " data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}" title="Editar Estatus">
-                                                    @if ($nota->estatus_cotizacion == 'Aprobada')
-                                                        <label class="badge" style="color: #06a306;background-color: #00e3aa40;">Aprobada</label>
-                                                    @else
-                                                        <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Pendiente</label>
-                                                    @endif
-                                                </button>
+
+                                                @if ($nota->estatus_cotizacion == 'Aprobada')
+
+                                                <a class="btn btn-xs btn-primary" style="background: #06a306;">
+                                                    Aprobada
+                                                </a>
+
+                                                @else
+
+                                                <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}" title="Editar Estatus" style="background: #b600e3;">
+                                                    Pendiente
+                                                </a>
+
+                                                @endif
+
                                             </td>
                                             <td>
                                                 <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}">
@@ -150,19 +158,24 @@
 @endsection
 
 @section('datatable')
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('.cliente').select2();
-    });
-
-    $(document).ready(function() {
         $('.administradores').select2();
+        $('.phone').select2();
+        $('.administradores').select2();
+
+        const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+            searchable: true,
+            fixedHeight: false
+        });
     });
 
-    $(document).ready(function() {
-        $('.phone').select2();
-    });
 </script>
 @endsection
 
