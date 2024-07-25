@@ -473,14 +473,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/cosmica/registro/llegada', [App\Http\Controllers\RegistroLlegadaController::class, 'index'])->name('registro_llegada.index');
     Route::get('/cosmica/registro/llegada/buscador', [App\Http\Controllers\RegistroLlegadaController::class, 'buscador'])->name('registro_llegada.buscador');
 
-        // =============== M O D U L O   C O T I Z A C I O N E S   C O S M I C A ===============================
-        Route::get('cosmica/cotizacion/', [App\Http\Controllers\CotizacionCosmicaController::class, 'index'])->name('cotizacion_cosmica.index');
-        Route::get('cosmica/cotizacion/buscador', [App\Http\Controllers\CotizacionCosmicaController::class, 'buscador'])->name('cotizacion_cosmica.buscador');
-        Route::get('cosmica/cotizacion/create', [App\Http\Controllers\CotizacionCosmicaController::class, 'create'])->name('cotizacion_cosmica.create');
-        Route::post('cosmica/cotizacion/store', [App\Http\Controllers\CotizacionCosmicaController::class, 'store'])->name('cotizacion_cosmica.store');
-        Route::get('cosmica/cotizacion/edit/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'edit'])->name('cotizacion_cosmica.edit');
-        Route::patch('cosmica/cotizacion/update/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update'])->name('cotizacion_cosmica.update');
-        Route::get('cosmica/cotizacion/imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
+    // =============== M O D U L O   C O T I Z A C I O N E S   C O S M I C A ===============================
+    Route::get('cosmica/cotizacion/', [App\Http\Controllers\CotizacionCosmicaController::class, 'index'])->name('cotizacion_cosmica.index');
+    Route::get('cosmica/cotizacion/buscador', [App\Http\Controllers\CotizacionCosmicaController::class, 'buscador'])->name('cotizacion_cosmica.buscador');
+    Route::get('cosmica/cotizacion/create', [App\Http\Controllers\CotizacionCosmicaController::class, 'create'])->name('cotizacion_cosmica.create');
+    Route::post('cosmica/cotizacion/store', [App\Http\Controllers\CotizacionCosmicaController::class, 'store'])->name('cotizacion_cosmica.store');
+    Route::get('cosmica/cotizacion/edit/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'edit'])->name('cotizacion_cosmica.edit');
+    Route::patch('cosmica/cotizacion/update/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update'])->name('cotizacion_cosmica.update');
+    Route::get('cosmica/cotizacion/imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
 
     // =============== M O D U L O   c o s m i k a ===============================
     Route::get('cosmica/distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index'])->name('distribuidoras.index');
@@ -488,7 +488,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('cosmica/distribuidoras/update/{id}', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'update'])->name('distribuidoras.update');
     Route::patch('cosmica/distribuidoras/update/estatus/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_estatus'])->name('distribuidoras.update_estatus');
     Route::patch('cosmica/distribuidoras/update/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_protocolo'])->name('distribuidoras.update_protocolo');
-
+    Route::get('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_protocolo'])->name('distribuidoras.index_protocolo');
+    Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'validate_protocolo'])->name('distribuidoras.validate_protocolo');
 });
 
     // Rutas para el sistema de documentos

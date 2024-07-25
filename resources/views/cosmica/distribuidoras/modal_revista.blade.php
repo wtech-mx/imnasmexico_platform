@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="exampleRevista_{{ $item->id }}" tabindex="-1" aria-labelledby="exampleRevista_{{ $item->id }}Label" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
 
         <div class="modal-header">
@@ -24,9 +24,18 @@
                 </div>
             </div>
 
-            <div class="col-6">
-                <button type="submit" class="btn btn-success w-100" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+            <div class="col-4">
+                <button type="submit" class="btn btn-success btn-xs w-100" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
             </div>
+
+            <div class="col-4">
+                <button type="button" class="btn btn-success btn-xs w-100 copy-link" data-link="{{ route('distribuidoras.index_protocolo', $item->id) }}" data-id="{{ $item->id }}">Copiar enlace</button>
+            </div>
+
+            <div class="col-4">
+                <button type="button" class="btn btn-success btn-xs w-100 whatsapp-link" data-link="{{ route('distribuidoras.index_protocolo', $item->id) }}" data-id="{{ $item->id }}">WhatsApp</button>
+            </div>
+
 
           </form>
         </div>
@@ -38,3 +47,5 @@
       </div>
     </div>
   </div>
+
+

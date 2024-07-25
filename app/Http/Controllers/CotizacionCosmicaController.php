@@ -13,6 +13,7 @@ use Hash;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class CotizacionCosmicaController extends Controller
 {
@@ -31,6 +32,41 @@ class CotizacionCosmicaController extends Controller
 
         return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores'));
     }
+
+    public function index_protocolo(Request $request, $id)
+    {
+        // Obtén el distribuidora
+        $distribuidora = Cosmikausers::find($id);
+
+        // Verifica si hay una cookie con la clave de acceso
+        $claveAcceso = Cookie::get('claves_protocolo' . $id);
+
+        // Si la cookie existe, muestra el iframe
+        if ($claveAcceso) {
+            return view('user.revista', ['distribuidora' => $distribuidora, 'show_iframe' => true]);
+        }
+
+        // Si no, muestra el formulario para ingresar la clave
+        return view('user.revista', ['distribuidora' => $distribuidora, 'show_iframe' => false]);
+    }
+
+    public function validate_protocolo(Request $request, $id)
+    {
+        // Verifica la clave de acceso (aquí deberías agregar la lógica para verificar la clave)
+        $inputClave = $request->input('claves_protocolo');
+        $distribuidora = Cosmikausers::find($id)->first();
+
+        // Si la clave es correcta, guarda una cookie por 24 horas
+        if ($inputClave == $distribuidora->claves_protocolo) { // Aquí asumo que 'claves_protocolo' es el campo con la clave correcta
+
+            Cookie::queue('claves_protocolo' . $id, $inputClave, 1440); // 1440 minutos = 24 horas
+            return redirect()->route('distribuidoras.index_protocolo', $id)->with('show_iframe', true);
+        }
+
+        // Si la clave es incorrecta, redirige de vuelta al formulario con un mensaje de error
+        return redirect()->route('distribuidoras.index_protocolo', $id)->withErrors(['claves_protocolo' => 'Clave incorrecta']);
+    }
+
 
     public function buscador(Request $request){
         $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
@@ -310,7 +346,6 @@ class CotizacionCosmicaController extends Controller
     }
 
     public function update_protocolo(Request $request, $id){
-
 
         $distribuidora = Cosmikausers::find($id);
         $distribuidora->claves_protocolo = $request->input('claves_protocolo');

@@ -137,6 +137,36 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        // Copiar enlace al portapapeles
+        document.querySelectorAll('.copy-link').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const link = this.getAttribute('data-link');
+                const textarea = document.createElement('textarea');
+                textarea.value = link;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('Enlace copiado al portapapeles');
+            });
+        });
+
+        // Enviar enlace por WhatsApp
+        document.querySelectorAll('.whatsapp-link').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const link = this.getAttribute('data-link');
+                const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(link)}`;
+                window.open(whatsappUrl, '_blank');
+            });
+        });
+    });
+
+
+      </script>
 <script type="text/javascript">
 
     $(document).ready(function() {
