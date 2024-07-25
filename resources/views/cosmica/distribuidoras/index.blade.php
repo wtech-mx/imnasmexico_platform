@@ -90,7 +90,7 @@
                                         </td>
 
                                         <td>
-                                            <a href="" class="btn btn-outline-warning btn-sm btn-xs" data-bs-toggle="modal" data-bs-target="#exampleRevista">
+                                            <a href="" class="btn btn-outline-warning btn-sm btn-xs" data-bs-toggle="modal" data-bs-target="#exampleRevista_{{ $item->id }}">
                                                 Accesos
                                             </a>
                                         </td>
@@ -113,6 +113,7 @@
                                     </tr>
 
                                         @include('cosmica.distribuidoras.modal_update')
+                                        @include('cosmica.distribuidoras.modal_revista')
 
                                     @endforeach
 

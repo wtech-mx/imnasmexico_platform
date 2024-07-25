@@ -309,6 +309,15 @@ class CotizacionCosmicaController extends Controller
         return redirect()->back()->with('success', 'Se ha actualizado con exito');
     }
 
+    public function update_protocolo(Request $request, $id){
+
+
+        $distribuidora = Cosmikausers::find($id);
+        $distribuidora->claves_protocolo = $request->input('claves_protocolo');
+        $distribuidora->update();
+
+        return redirect()->back()->with('success', 'Se ha actualizado con exito');
+    }
 
     protected function checkMembresia()
     {

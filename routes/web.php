@@ -487,6 +487,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('cosmica/distribuidoras/store', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'store'])->name('distribuidoras.store');
     Route::patch('cosmica/distribuidoras/update/{id}', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'update'])->name('distribuidoras.update');
     Route::patch('cosmica/distribuidoras/update/estatus/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_estatus'])->name('distribuidoras.update_estatus');
+    Route::patch('cosmica/distribuidoras/update/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_protocolo'])->name('distribuidoras.update_protocolo');
+
 });
 
     // Rutas para el sistema de documentos
