@@ -126,22 +126,26 @@ class CotizacionCosmicaController extends Controller
             $pago_fuera = public_path() . '/pagos';
         }
 
-        //C o s t o  d e  E n v i o
-        $cliente = Cosmikausers::where('id_cliente', '=', $id_cliente)->first();
-        $total = $request->input('totalDescuento');
+        if($request->get('email') == NULL && $request->get('id_cliente') == NULL){
+            $envio = 180;
+        }else{
+            //C o s t o  d e  E n v i o
+            $cliente = Cosmikausers::where('id_cliente', '=', $id_cliente)->first();
+            $total = $request->input('totalDescuento');
 
-        $envio = 0;
-        if ($request->get('envio') !== NULL) {
-            // Si el cliente tiene membresía activa, calcular el costo de envío basado en la membresía
-            if ($cliente && $cliente->membresia_estatus === 'Activa') {
-                if ($cliente->membresia === 'Cosmos') {
-                    $envio = $total >= 1500 ? 90 : 126;
-                } elseif ($cliente->membresia === 'Estelar') {
-                    $envio = $total >= 2500 ? 0 : 90;
+            $envio = 0;
+            if ($request->get('envio') !== NULL) {
+                // Si el cliente tiene membresía activa, calcular el costo de envío basado en la membresía
+                if ($cliente && $cliente->membresia_estatus === 'Activa') {
+                    if ($cliente->membresia === 'Cosmos') {
+                        $envio = $total >= 1500 ? 90 : 126;
+                    } elseif ($cliente->membresia === 'Estelar') {
+                        $envio = $total >= 2500 ? 0 : 90;
+                    }
+                } else {
+                    // Si el cliente no tiene membresía activa, el costo de envío es 180
+                    $envio = 180;
                 }
-            } else {
-                // Si el cliente no tiene membresía activa, el costo de envío es 180
-                $envio = 180;
             }
         }
 
@@ -348,7 +352,7 @@ class CotizacionCosmicaController extends Controller
         if($nota->id_usuario){
             if(Cosmikausers::where('id_cliente', $nota->id_usuario)->exists()){
                 $distribuidora = Cosmikausers::where('id_cliente', $nota->id_usuario)->first();
-                $suma = $distribuidora->puntos_acomulados + $nota->subtotal;
+                $suma = $distribuidora->puntos_acomulados + $nota->total;
                 $distribuidora->puntos_acomulados = $suma;
                 $distribuidora->consumido_totalmes = $suma;
                 $distribuidora->update();
