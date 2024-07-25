@@ -135,7 +135,7 @@
                                 </div>
                             </div>
 
-                            <div class="row" id="deudorCampos">
+                            <div class="row" id="">
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="foto2">Comprobante *</label>
@@ -164,7 +164,7 @@
                             </div>
                         </form>
 
-                        <div class="col-12">
+                        <div class="col-6">
                             <div class="form-group">
                                 <label for="foto">Comprobante 1</label> <br>
                                 @if (pathinfo($pago_fuera->foto, PATHINFO_EXTENSION) === 'pdf')
@@ -175,24 +175,9 @@
                             </div>
                         </div>
 
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="foto">Comprobante 2</label> <br>
-                                @if (pathinfo($pago_fuera->foto2, PATHINFO_EXTENSION) === 'pdf')
-                                    <iframe src="{{ asset('pago_fuera/'.$pago_fuera->foto2) }}" width="100%" ></iframe>
-                                @else
-                                    <img id="blah" src="{{ asset('pago_fuera/'.$pago_fuera->foto2) }}" alt="Imagen" style="width: 100%">
-                                @endif
-                            </div>
-                        </div>
+                        <div class="col-6">
 
-                        <div class="col-12">
-                            <h4 class="text-left mt-3 mb-3"><strong>Comprobacion de pagos por transferencia o deposito</strong></h4>
-                        </div>
-
-                        <div class="col 12">
-
-                            <p class="d-inline-flex gap-1">
+                            <p class="d-inline-flex gap-1 mt-3">
                                 <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
                                     Comprobar pago Banxico <img src="https://www.banxico.org.mx/DIBM/resources/img/logoBM-Monograma.png" alt="" style="width: 20px">
                                 </a>
@@ -207,6 +192,23 @@
                               </div>
 
                         </div>
+
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="foto">Comprobante 2</label> <br>
+                                @if (pathinfo($pago_fuera->foto2, PATHINFO_EXTENSION) === 'pdf')
+                                    <iframe src="{{ asset('pago_fuera/'.$pago_fuera->foto2) }}" width="100%" ></iframe>
+                                @else
+                                    <img id="blah" src="{{ asset('pago_fuera/'.$pago_fuera->foto2) }}" alt="Imagen" style="width: 100%">
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <h4 class="text-left mt-3 mb-3"><strong>Comprobacion de pagos por transferencia o deposito</strong></h4>
+                        </div>
+
+
 
                     </div>
                 </div>
