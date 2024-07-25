@@ -28,8 +28,21 @@ class CosmicaDistribuidoraController extends Controller
         return view('cosmica.distribuidoras.index',compact('usercosmika', 'clientes'));
     }
 
+    public function index_distribuidoras(){
+
+        $distribuidora = Cosmikausers::where('membresia','=','Estelar')->get();
+
+        return view('user.distribuidoras', compact('distribuidora'));
+    }
 
     public function store(Request $request){
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_webpage = base_path('../public_html/plataforma.imnasmexico.com/utilidades');
+        }else{
+            $ruta_webpage = public_path() . '/utilidades';
+        }
 
         $code = Str::random(8);
         $fechaActual = date('Y-m-d');
@@ -67,8 +80,15 @@ class CosmicaDistribuidoraController extends Controller
         $usercosmika->membresia_fin = $request->get('membresia_fin');
         $usercosmika->meses_acomulados = $request->get('meses_acomulados');
         $usercosmika->consumido_totalmes = $request->get('consumido_totalmes');
-        $usercosmika->direccion_local = $request->get('direccion_local');
-        $usercosmika->direccion_foto = $request->get('direccion_foto');
+
+        if ($request->hasFile("direccion_foto")) {
+            $file = $request->file('direccion_foto');
+            $path = $ruta_webpage;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $usercosmika->direccion_foto = $fileName;
+        }
+
         $usercosmika->direccion_rs_face = $request->get('direccion_rs_face');
         $usercosmika->direccion_rs_insta = $request->get('direccion_rs_insta');
         $usercosmika->direccion_rs_whats = $request->get('direccion_rs_whats');
@@ -81,6 +101,13 @@ class CosmicaDistribuidoraController extends Controller
 
     public function update(Request $request,$id){
 
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_webpage = base_path('../public_html/plataforma.imnasmexico.com/utilidades');
+        }else{
+            $ruta_webpage = public_path() . '/utilidades';
+        }
+
         $usercosmika =  Cosmikausers::findorfail($id);
         $usercosmika->membresia = $request->get('membresia');
         $usercosmika->membresia_estatus = $request->get('membresia_estatus');
@@ -89,8 +116,16 @@ class CosmicaDistribuidoraController extends Controller
         $usercosmika->membresia_fin = $request->get('membresia_fin');
         $usercosmika->meses_acomulados = $request->get('meses_acomulados');
         $usercosmika->consumido_totalmes = $request->get('consumido_totalmes');
+
+        if ($request->hasFile("direccion_foto")) {
+            $file = $request->file('direccion_foto');
+            $path = $ruta_webpage;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $usercosmika->direccion_foto = $fileName;
+        }
+
         $usercosmika->direccion_local = $request->get('direccion_local');
-        $usercosmika->direccion_foto = $request->get('direccion_foto');
         $usercosmika->direccion_rs_face = $request->get('direccion_rs_face');
         $usercosmika->direccion_rs_insta = $request->get('direccion_rs_insta');
         $usercosmika->direccion_rs_whats = $request->get('direccion_rs_whats');

@@ -53,7 +53,7 @@
                                 <img src="{{ asset('assets/cam/membrecia.png') }}" alt="" width="35px">
                             </span>
                             <select name="membresia" id="membresia" class="form-select d-inline-block" >
-                                <option value="">{{$item->membresia}}</option>
+                                <option value="{{$item->membresia}}">{{$item->membresia}}</option>
                                 <option value="cosmos" {{ old('membresia') == 'cosmos' ? 'selected' : '' }}>Cosmos</option>
                                 <option value="estelar" {{ old('membresia') == 'estelar' ? 'selected' : '' }}>Estelar</option>
                             </select>
@@ -143,6 +143,9 @@
                             </span>
                             <input id="direccion_foto" name="direccion_foto" type="file" class="form-control"  value="{{$item->direccion_foto}}">
                         </div>
+
+                        <img id="blah" src="{{asset('utilidades/'.$item->direccion_foto) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
+
                     </div>
 
                     <div class="form-group col-4">

@@ -175,11 +175,6 @@ Route::patch('/perfil/estatus/certificaion/{id}', [App\Http\Controllers\ClientsC
 // =============== M O D U L O   C U R S O ===============================
 Route::get('/nota/curso', [App\Http\Controllers\NotasCursosController::class, 'index_user'])->name('notas.index_user');
 
-// =============== M O D U L O   D I S T R I B U I D O R A S ===============================
-Route::get('distribuidoras', function () {
-    return view('user.distribuidoras');
-});
-
 // =============== M O D U L O   R E G I S T R O   C O M P R A S ===============================
 Route::get('registro/compras/registrar', [App\Http\Controllers\RegistroComprasController::class, 'create'])->name('registro_compras.create');
 Route::post('registro/compras/store', [App\Http\Controllers\RegistroComprasController::class, 'store'])->name('registro_compras.store');
@@ -490,6 +485,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('cosmica/distribuidoras/update/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_protocolo'])->name('distribuidoras.update_protocolo');
     Route::get('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_protocolo'])->name('distribuidoras.index_protocolo');
     Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'validate_protocolo'])->name('distribuidoras.validate_protocolo');
+
+    Route::get('distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index_distribuidoras'])->name('distribuidoras.index_distribuidoras');
+
 });
 
     // Rutas para el sistema de documentos

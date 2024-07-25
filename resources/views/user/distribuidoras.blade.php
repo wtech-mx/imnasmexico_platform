@@ -55,131 +55,42 @@
 
         <div class="col-12">
             <h4 class="text-white text-center titulo mt-5 mb-lg-5 mb-md-5" style="color:#2D2034!important;">
-                CDMX
+                Distribuidoras
             </h4>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 m-auto">
-            <div class="card_reality" style="position: relative">
-                <p class="text-center">
-                    <img class="img_reality_alumnas " src="{{asset('assets/user/utilidades/producto_palciacion.jpg') }}" style="width: 80%;">
-                </p>
-                <p class="text-center">
-                    Pl. de la República s/n, Tabacalera, Cuauhtémoc, 06030 Cuauhtémoc, CDMX
-                </p>
-                <div class="d-flex justify-content-center">
-                    <a target="_blank" href="#" class="mt-2 mb-2" style="margin-left: 1rem;">
-                        <img src="{{asset('assets/user/utilidades/facebook.png') }}" style="width:25px">
-                    </a>
-                    <a target="_blank" href="#" class="mt-2 mb-2" style="margin-left: 1rem;">
-                        <img src="{{asset('assets/user/utilidades/instagram.png') }}" style="width:25px">
-                    </a>
-                    <a target="_blank" href="#" class="mt-2 mb-2" style="margin-left: 1rem;">
-                        <img src="{{asset('assets/user/utilidades/tik-tok.png') }}" style="width:25px">
-                    </a>
-
-                </div>
-
-                <p class="text-center">
-                    <button class="btn-votar" style="background: #fff;color: #2D2034;border-color: #2D2034;">
-                        Ver ubicación <span><img src="{{asset('assets/user/utilidades/google-maps.png')}}" style="width: 30px;">
-                    </button>
-                </p>
-            </div>
-        </div>
+        @foreach ($distribuidora as $item)
 
         <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 m-auto">
             <div class="card_reality" style="position: relative">
                 <p class="text-center">
-                    <img class="img_reality_alumnas " src="{{asset('assets/user/utilidades/lab.jpg') }}" style="width: 80%;">
+                    <img class="img_reality_alumnas " src="{{asset('utilidades/'.$item->direccion_foto) }}" style="width: 80%;">
                 </p>
                 <p class="text-center">
-                    Blvd. Miguel de Cervantes Saavedra, Granada, Miguel Hidalgo, 11529 Ciudad de México, CDMX
+                    <strong>{{ $item->User->name }}</strong> <br>
+                    {{ $item->direccion_local }}
                 </p>
                 <div class="d-flex justify-content-center">
-                    <a target="_blank" href="#" class="mt-2 mb-2" style="margin-left: 1rem;">
+                    <a target="_blank" href=" {{ $item->direccion_rs_face }}" class="mt-2 mb-2" style="margin-left: 1rem;">
                         <img src="{{asset('assets/user/utilidades/facebook.png') }}" style="width:25px">
                     </a>
-                    <a target="_blank" href="#" class="mt-2 mb-2" style="margin-left: 1rem;">
+                    <a target="_blank" href=" {{ $item->direccion_rs_insta }}" class="mt-2 mb-2" style="margin-left: 1rem;">
                         <img src="{{asset('assets/user/utilidades/instagram.png') }}" style="width:25px">
                     </a>
-                    <a target="_blank" href="#" class="mt-2 mb-2" style="margin-left: 1rem;">
-                        <img src="{{asset('assets/user/utilidades/tik-tok.png') }}" style="width:25px">
+                    <a target="_blank" href="https://api.whatsapp.com/send?phone=521{{ $item->direccion_rs_whats }}&text=Hola" class="mt-2 mb-2" style="margin-left: 1rem;">
+                        <img src="{{asset('assets/user/utilidades/whatsapp.png') }}" style="width:25px">
                     </a>
-
                 </div>
 
-                <p class="text-center">
+                {{-- <p class="text-center">
                     <button class="btn-votar" style="background: #fff;color: #2D2034;border-color: #2D2034;">
                         Ver ubicación <span><img src="{{asset('assets/user/utilidades/google-maps.png')}}" style="width: 30px;">
                     </button>
-                </p>
+                </p> --}}
             </div>
         </div>
 
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 m-auto">
-            <div class="card_reality" style="position: relative">
-                <p class="text-center">
-                    <img class="img_reality_alumnas " src="{{asset('assets/user/utilidades/cosmetologa_bg.jpg') }}" style="width: 80%;">
-                </p>
-                <p class="text-center">
-                    Calz. Vallejo 1090, Sta Cruz de las Salinas, Azcapotzalco, 02340 Ciudad de México, CDMX
-                </p>
-                <div class="d-flex justify-content-center">
-                    <a target="_blank" href="#" class="mt-2 mb-2" style="margin-left: 1rem;">
-                        <img src="{{asset('assets/user/utilidades/facebook.png') }}" style="width:25px">
-                    </a>
-                    <a target="_blank" href="#" class="mt-2 mb-2" style="margin-left: 1rem;">
-                        <img src="{{asset('assets/user/utilidades/instagram.png') }}" style="width:25px">
-                    </a>
-                    <a target="_blank" href="#" class="mt-2 mb-2" style="margin-left: 1rem;">
-                        <img src="{{asset('assets/user/utilidades/tik-tok.png') }}" style="width:25px">
-                    </a>
-
-                </div>
-
-                <p class="text-center">
-                    <button class="btn-votar" style="background: #fff;color: #2D2034;border-color: #2D2034;">
-                        Ver ubicación <span><img src="{{asset('assets/user/utilidades/google-maps.png')}}" style="width: 30px;">
-                    </button>
-                </p>
-            </div>
-        </div>
-
-        <div class="col-12">
-            <h4 class="text-white text-center titulo mt-5 mb-lg-5 mb-md-5" style="color:#2D2034!important;">
-                Puebla
-            </h4>
-        </div>
-
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 m-auto">
-            <div class="card_reality" style="position: relative">
-                <p class="text-center">
-                    <img class="img_reality_alumnas " src="{{asset('assets/user/utilidades/IMAGEN-HOME.webp') }}" style="width: 80%;">
-                </p>
-                <p class="text-center">
-                    C. 15 Sur, Los Volcanes, 72410 Heroica Puebla de Zaragoza, Pue.
-                </p>
-                <div class="d-flex justify-content-center">
-                    <a target="_blank" href="#" class="mt-2 mb-2" style="margin-left: 1rem;">
-                        <img src="{{asset('assets/user/utilidades/facebook.png') }}" style="width:25px">
-                    </a>
-                    <a target="_blank" href="#" class="mt-2 mb-2" style="margin-left: 1rem;">
-                        <img src="{{asset('assets/user/utilidades/instagram.png') }}" style="width:25px">
-                    </a>
-                    <a target="_blank" href="#" class="mt-2 mb-2" style="margin-left: 1rem;">
-                        <img src="{{asset('assets/user/utilidades/tik-tok.png') }}" style="width:25px">
-                    </a>
-
-                </div>
-
-                <p class="text-center">
-                    <button class="btn-votar" style="background: #fff;color: #2D2034;border-color: #2D2034;">
-                        Ver ubicación <span><img src="{{asset('assets/user/utilidades/google-maps.png')}}" style="width: 30px;">
-                    </button>
-                </p>
-            </div>
-        </div>
+        @endforeach
 
     </div>
 </section>
