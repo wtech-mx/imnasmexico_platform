@@ -484,13 +484,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('cosmica/distribuidoras/update/{id}', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'update'])->name('distribuidoras.update');
     Route::patch('cosmica/distribuidoras/update/estatus/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_estatus'])->name('distribuidoras.update_estatus');
     Route::patch('cosmica/distribuidoras/update/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_protocolo'])->name('distribuidoras.update_protocolo');
-    Route::get('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_protocolo'])->name('distribuidoras.index_protocolo');
-    Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'validate_protocolo'])->name('distribuidoras.validate_protocolo');
 
-    Route::get('distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index_distribuidoras'])->name('distribuidoras.index_distribuidoras');
+
 
 });
 
+Route::get('distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index_distribuidoras'])->name('distribuidoras.index_distribuidoras');
+Route::get('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_protocolo'])->name('distribuidoras.index_protocolo');
+Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'validate_protocolo'])->name('distribuidoras.validate_protocolo');
     // Rutas para el sistema de documentos
 
     Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {

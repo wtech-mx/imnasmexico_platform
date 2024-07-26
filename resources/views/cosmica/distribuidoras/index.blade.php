@@ -39,6 +39,13 @@
 
                             @endcan
                         </div>
+
+                        <a type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#por_vencer">
+                            <img src="{{ asset('assets/user/icons/bell.png') }}" alt="" width="30px">
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ $usuarios_por_vencer ? $usuarios_por_vencer->count() : 0 }}
+                            </span>
+                        </a>
                     </div>
 
                     <div class="card-body">
@@ -128,13 +135,13 @@
     </div>
 
 @include('cosmica.distribuidoras.modal_create')
-
+@include('cosmica.distribuidoras.modal_por_vencer')
 @endsection
 
 @section('datatable')
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 

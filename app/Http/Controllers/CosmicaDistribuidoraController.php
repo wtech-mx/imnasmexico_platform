@@ -25,17 +25,38 @@ class CosmicaDistribuidoraController extends Controller
         $usercosmika = Cosmikausers::orderby('id','desc')->get();
         $clientes = User::orderby('name','desc')->get();
 
-        return view('cosmica.distribuidoras.index',compact('usercosmika', 'clientes'));
+        $fechaActual = Carbon::now();
+        $fechaDentroDe5Dias = $fechaActual->copy()->addDays(5);
+        $usuarios_por_vencer = Cosmikausers::where('membresia_estatus', 'Activa')
+                    ->whereDate('membresia_fin', '<=', $fechaDentroDe5Dias)
+                    ->where(function($query) {
+                        $query->where(function($subQuery) {
+                            $subQuery->where('membresia', 'Cosmos')
+                                    ->where('consumido_totalmes', '<', 1500);
+                        })->orWhere(function($subQuery) {
+                            $subQuery->where('membresia', 'Estelar')
+                                    ->where('consumido_totalmes', '<', 2500);
+                        });
+                    })
+                    ->get();
+
+        return view('cosmica.distribuidoras.index',compact('usercosmika', 'clientes', 'usuarios_por_vencer'));
     }
 
     public function index_distribuidoras(){
 
-        $distribuidora = Cosmikausers::where('membresia','=','Estelar')->get();
+        $distribuidora = Cosmikausers::where('membresia','=','Estelar')->where('membresia_estatus','=','Activa')->get();
 
         return view('user.distribuidoras', compact('distribuidora'));
     }
 
     public function store(Request $request){
+
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'telefono' => 'required|string|max:10',
+        ]);
 
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
@@ -71,6 +92,11 @@ class CosmicaDistribuidoraController extends Controller
         //    Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
+        $nombre = $request->get('name');
+        $apellido = $request->get('apellido');
+        $telefono = $request->get('telefono');
+        $claves_protocolo = '@' . substr($nombre, 0, 2) . substr($apellido, -2) . substr($telefono, -3);
+
         $usercosmika = new Cosmikausers;
         $usercosmika->id_cliente = $payer->id;
         $usercosmika->membresia = $request->get('membresia');
@@ -80,6 +106,7 @@ class CosmicaDistribuidoraController extends Controller
         $usercosmika->membresia_fin = $request->get('membresia_fin');
         $usercosmika->meses_acomulados = $request->get('meses_acomulados');
         $usercosmika->consumido_totalmes = $request->get('consumido_totalmes');
+        $usercosmika->claves_protocolo = $claves_protocolo;
 
         if ($request->hasFile("direccion_foto")) {
             $file = $request->file('direccion_foto');
@@ -94,9 +121,7 @@ class CosmicaDistribuidoraController extends Controller
         $usercosmika->direccion_rs_whats = $request->get('direccion_rs_whats');
         $usercosmika->save();
 
-
-        Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->back()->with('success', 'Envio de correo exitoso.');
+        return redirect()->back()->with('success', 'Se ha guardado sus datos con exito');
     }
 
     public function update(Request $request,$id){
@@ -131,7 +156,6 @@ class CosmicaDistribuidoraController extends Controller
         $usercosmika->direccion_rs_whats = $request->get('direccion_rs_whats');
         $usercosmika->update();
 
-        Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Actualizado exitoso.');
     }
 

@@ -52,20 +52,29 @@ class CotizacionCosmicaController extends Controller
 
     public function validate_protocolo(Request $request, $id)
     {
-        // Verifica la clave de acceso (aquí deberías agregar la lógica para verificar la clave)
-        $inputClave = $request->input('claves_protocolo');
-        $distribuidora = Cosmikausers::find($id)->first();
+        // Obtén el distribuidora
+        $distribuidora = Cosmikausers::find($id);
 
-        // Si la clave es correcta, guarda una cookie por 24 horas
-        if ($inputClave == $distribuidora->claves_protocolo) { // Aquí asumo que 'claves_protocolo' es el campo con la clave correcta
+        // Verifica si la membresía está activa
+        if ($distribuidora->membresia_estatus !== 'Activa') {
+            return redirect()->route('distribuidoras.index_protocolo', $id)->withErrors(['claves_protocolo' => 'Tu membresía ha vencido.']);
+        }else{
+            // Verifica la clave de acceso
+            $inputClave = $request->input('claves_protocolo');
 
-            Cookie::queue('claves_protocolo' . $id, $inputClave, 1440); // 1440 minutos = 24 horas
-            return redirect()->route('distribuidoras.index_protocolo', $id)->with('show_iframe', true);
+            // Si la clave es correcta, guarda una cookie por 24 horas
+            if ($inputClave == $distribuidora->claves_protocolo) {
+                Cookie::queue('claves_protocolo' . $id, $inputClave, 1440); // 1440 minutos = 24 horas
+                return redirect()->route('distribuidoras.index_protocolo', $id)->with('show_iframe', true);
+            }
+
+            // Si la clave es incorrecta, redirige de vuelta al formulario con un mensaje de error
+            return redirect()->route('distribuidoras.index_protocolo', $id)->withErrors(['claves_protocolo' => 'Clave incorrecta']);
         }
 
-        // Si la clave es incorrecta, redirige de vuelta al formulario con un mensaje de error
-        return redirect()->route('distribuidoras.index_protocolo', $id)->withErrors(['claves_protocolo' => 'Clave incorrecta']);
+
     }
+
 
 
     public function buscador(Request $request){
@@ -127,7 +136,11 @@ class CotizacionCosmicaController extends Controller
         }
 
         if($request->get('email') == NULL && $request->get('id_cliente') == NULL){
-            $envio = 180;
+            if ($request->get('envio') !== NULL) {
+                $envio = 180;
+            }else{
+                $envio = 0;
+            }
         }else{
             //C o s t o  d e  E n v i o
             $cliente = Cosmikausers::where('id_cliente', '=', $id_cliente)->first();
@@ -353,9 +366,16 @@ class CotizacionCosmicaController extends Controller
             if(Cosmikausers::where('id_cliente', $nota->id_usuario)->exists()){
                 $distribuidora = Cosmikausers::where('id_cliente', $nota->id_usuario)->first();
                 $suma = $distribuidora->puntos_acomulados + $nota->total;
-                $distribuidora->puntos_acomulados = $suma;
-                $distribuidora->consumido_totalmes = $suma;
-                $distribuidora->update();
+
+                // Obtener solo los múltiplos de 1000
+                $puntos_sumar = floor($suma / 1000) * 1000;
+
+                // Solo sumar si puntos_sumar es mayor o igual a 1000
+                if ($puntos_sumar >= 1000) {
+                    $distribuidora->puntos_acomulados = $puntos_sumar;
+                    $distribuidora->consumido_totalmes = $suma; // Si esta columna debe contener el valor completo de $suma
+                    $distribuidora->update();
+                }
             }
         }
 
