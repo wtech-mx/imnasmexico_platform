@@ -318,7 +318,7 @@
 
                                                     @elseif ($item->tipo === 'Video')
 
-                                                    <video controls autoplay>
+                                                    <video controls autoplay muted>
                                                             <source src="{{asset('noticias/'.$item->multimedia) }}" type="video/mp4">
                                                         </video>
 
