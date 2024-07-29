@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="productos_nota_{{ $nota->id }}" tabindex="-1" role="dialog" aria-labelledby="productos_nota_{{ $nota->id }}" aria-hidden="true">
+<div class="modal fade" id="productos_nota_{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="productos_nota_{{ $item->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -28,7 +28,7 @@
                             <div class="row">
                                 <form class="form" action="{{ route('notas_productos.productos') }}" method="POST">
                                     @csrf
-                                    @foreach ($nota->ProductosNotasId as $productos)
+                                    @foreach ($item->ProductosNotasId as $productos)
                                     <div class="col-6">
                                         <label for="">Nombre</label>
                                         <input type="text" name="productos[{{ $productos->id }}][producto]" class="form-control d-inline-block" value="{{ $productos->producto }}">
@@ -57,7 +57,7 @@
 
                         <div class="tab-pane fade" id="eliminar-tab-pane" role="tabpanel" aria-labelledby="eliminar-tab" tabindex="0">
                             <div class="row">
-                                @foreach ($nota->ProductosNotasId as  $productos)
+                                @foreach ($item->ProductosNotasId as  $productos)
                                 <form class="form" action="{{ route('notas_productos.delete', $productos->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')

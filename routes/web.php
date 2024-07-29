@@ -387,6 +387,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/notas/cotizacion', [App\Http\Controllers\CotizacionController::class, 'index'])->name('notas_cotizacion.index');
     Route::get('/admin/cotizacion/create', [App\Http\Controllers\CotizacionController::class, 'create'])->name('notas_cotizacion.create');
     Route::post('/admin/notas/cotizacion/store', [App\Http\Controllers\CotizacionController::class, 'store'])->name('notas_cotizacion.store');
+    Route::patch('/admin/notas/cotizacion/estatus/{id}', [App\Http\Controllers\CotizacionController::class, 'update_estatus'])->name('notas_cotizacion.update_estatus');
     Route::get('/admin/notas/cotizacion/edit/{id}', [App\Http\Controllers\CotizacionController::class, 'edit'])->name('notas_cotizacion.edit');
     Route::patch('/admin/notas/cotizacion/update/{id}', [App\Http\Controllers\CotizacionController::class, 'update'])->name('notas_cotizacion.update');
 

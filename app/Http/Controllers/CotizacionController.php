@@ -25,11 +25,20 @@ class CotizacionController extends Controller
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
         $notas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->get();
+        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion');
+
+        $notasAprobadas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
+        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('estatus_cotizacion','=' , 'Aprobada')->get();
+
+        $notasPendientes = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
+        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('estatus_cotizacion','=' , 'Pendiente')->get();
+
+        $notasCandeladas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
+        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('estatus_cotizacion','=' , 'Cancelada')->get();
 
         $products = Products::orderBy('nombre','ASC')->get();
 
-        return view('admin.cotizacion.index', compact('notas', 'products', 'clientes', 'administradores'));
+        return view('admin.cotizacion.index', compact('notas', 'products', 'clientes', 'administradores','notasAprobadas','notasPendientes','notasCandeladas'));
     }
 
     public function create(){
@@ -258,6 +267,17 @@ class CotizacionController extends Controller
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Se ha actualizada');
+    }
+
+    public function update_estatus(Request $request, $id){
+
+        $nota = NotasProductos::findOrFail($id);
+        $nota->estatus_cotizacion  = $request->get('estatus_cotizacion');
+        $nota->save();
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back()->with('success', 'Se ha actualizada');
+
     }
 
     public function imprimir($id){
