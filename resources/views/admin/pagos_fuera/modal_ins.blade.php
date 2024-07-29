@@ -165,7 +165,7 @@
                         </form>
 
                         <div class="col-6">
-                            <div class="form-group">
+                            <div class="form-group  mt-3">
                                 <label for="foto">Comprobante 1</label> <br>
                                 @if (pathinfo($pago_fuera->foto, PATHINFO_EXTENSION) === 'pdf')
                                     <iframe src="{{ asset('pago_fuera/'.$pago_fuera->foto) }}" width="100%" height="500px"></iframe>

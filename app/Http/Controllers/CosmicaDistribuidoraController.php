@@ -45,7 +45,7 @@ class CosmicaDistribuidoraController extends Controller
 
     public function index_distribuidoras(){
 
-        $distribuidora = Cosmikausers::where('membresia','=','Estelar')->where('membresia_estatus','=','Activa')->get();
+        $distribuidora = Cosmikausers::where('membresia','=','estelar')->where('membresia_estatus','=','Activa')->get();
 
         return view('user.distribuidoras', compact('distribuidora'));
     }
