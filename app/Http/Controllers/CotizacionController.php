@@ -25,7 +25,7 @@ class CotizacionController extends Controller
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
         $notas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion');
+        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->get();
 
         $notasAprobadas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
         ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('estatus_cotizacion','=' , 'Aprobada')->get();
