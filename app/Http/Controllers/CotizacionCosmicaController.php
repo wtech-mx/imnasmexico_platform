@@ -14,6 +14,9 @@ use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Validator;
+use Session;
+
 
 class CotizacionCosmicaController extends Controller
 {
@@ -102,6 +105,18 @@ class CotizacionCosmicaController extends Controller
     }
 
     public function store(request $request){
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'email|unique:users,email',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+            ->withErrors($validator)
+            ->withInput()
+            ->with('error', 'El correo ya existe.(Ingresa uno que no exista o seleciona el cliente)');
+        }
+
         // Creacion de user
         $code = Str::random(8);
 
