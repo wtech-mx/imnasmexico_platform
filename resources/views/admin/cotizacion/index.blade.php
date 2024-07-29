@@ -66,19 +66,19 @@
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                   <button class="nav-link active" id="nav-Pendiente-tab" data-bs-toggle="tab" data-bs-target="#nav-Pendiente" type="button" role="tab" aria-controls="nav-Pendiente" aria-selected="true">
-                                    Pendiente
+                                    Pendiente  <img src="{{ asset('assets/cam/pausa.png') }}" alt="" width="35px">
                                   </button>
 
                                   <button class="nav-link" id="nav-Aprobada-tab" data-bs-toggle="tab" data-bs-target="#nav-Aprobada" type="button" role="tab" aria-controls="nav-Aprobada" aria-selected="false">
-                                    Aprobada
+                                    Aprobada <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
                                   </button>
 
                                   <button class="nav-link" id="nav-Cancelada-tab" data-bs-toggle="tab" data-bs-target="#nav-Cancelada" type="button" role="tab" aria-controls="nav-Cancelada" aria-selected="false">
-                                    Cancelada
+                                    Cancelada <img src="{{ asset('assets/cam/cerrar.png') }}" alt="" width="35px">
                                   </button>
 
                                   <button class="nav-link" id="nav-Cotizacion-tab" data-bs-toggle="tab" data-bs-target="#nav-Cotizacion" type="button" role="tab" aria-controls="nav-Cotizacion" aria-selected="false" >
-                                    Cotizacion
+                                    Cotizacion <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
                                   </button>
                                 </div>
                               </nav>
