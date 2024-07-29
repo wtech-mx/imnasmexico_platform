@@ -97,7 +97,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($itemsPendientes as $item)
+                                            @foreach ($notasPendientes as $item)
                                                 <tr>
                                                     <td>
                                                         <h5>
@@ -202,7 +202,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($itemsAprobadas as $item)
+                                            @foreach ($notasAprobadas as $item)
                                                 <tr>
                                                     <td>
                                                         <h5>
@@ -307,7 +307,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($itemsCandeladas as $item)
+                                            @foreach ($notasCandeladas as $item)
                                                 <tr>
                                                     <td>
                                                         <h5>
@@ -412,7 +412,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($items as $item)
+                                            @foreach ($notas as $item)
                                                 <tr>
                                                     <td>
                                                         <h5>
