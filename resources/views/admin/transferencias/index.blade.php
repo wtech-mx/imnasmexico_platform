@@ -43,7 +43,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/hastag.png') }}" alt="" width="35px">
                                         </span>
-                                        <input class="form-control" type="number" name="criterio" required>
+                                        <input class="form-control" type="text" name="criterio" required>
                                     </div>
                                 </div>
 
@@ -241,7 +241,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/libreta-de-depositos.png') }}" alt="" width="35px">
                                         </span>
-                                        <input class="form-control" type="number" name="cuenta" value="500362597807">
+                                        <input class="form-control" type="number" name="cuenta" value="036180500362597807">
                                     </div>
                                 </div>
 
