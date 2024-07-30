@@ -38,7 +38,7 @@
                                 </div>
 
                                 <div class="form-group col-6 mb-3">
-                                    <label for="">Criterio (Numero de referencia)</label>
+                                    <label for="">Ingresa la clave o la referencia</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/hastag.png') }}" alt="" width="35px">
