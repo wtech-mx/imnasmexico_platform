@@ -31,7 +31,7 @@ class VerificarTransferenciasController extends Controller
 
         $body = json_encode([
             'tipoCriterio' => $tipoCriterio,
-            'fecha' => $fechaFormateada,
+            'fecha' => $fecha,
             'criterio' => $criterio,
             'emisor' => $emisor,
             'receptor' => $receptor,
@@ -40,16 +40,16 @@ class VerificarTransferenciasController extends Controller
             'monto' => $monto,
         ]);
 
-dd($body);
+
         // try {
             // Configurar el cliente Guzzle
             $client = new GuzzleClient();
 
             $response = $client->request('POST', 'https://link.kiban.cloud/api/v2/cep/validate', [
                 'headers' => [
-                    'accept' => '   ',
+                    'accept' => 'application/json',
                     'content-type' => 'application/json',
-                    '   ' => '1K8EH2H0D9YCRC-1T3RGCZ000013Y-C6X6-1FQV1DJPQ', //produccion
+                    'x-api-key' => '1K8EH2H0D9YCRC-1T3RGCZ000013Y-C6X6-1FQV1DJPQ', //produccion
                     // 'x-api-key' => '1K8EH2H0D9YCRC-1T3RGCZ000013Y-11VD-1FQSB66Q8', //sandbox
 
                 ],
@@ -58,7 +58,7 @@ dd($body);
 
             $body = $response->getBody();
             $data = json_decode($body, true);
-            dd($data);
+         
             return view('admin.transferencias.resultado', ['data' => $data]);
 
         // } catch (\GuzzleHttp\Exception\ClientException $e) {
