@@ -106,16 +106,16 @@ class CotizacionCosmicaController extends Controller
 
     public function store(request $request){
 
-        $validator = Validator::make($request->all(), [
-            'email' => 'email|unique:users,email',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        //     'email' => 'email|unique:users,email',
+        // ]);
 
-        if ($validator->fails()) {
-            return back()
-            ->withErrors($validator)
-            ->withInput()
-            ->with('error', 'El correo ya existe.(Ingresa uno que no exista o seleciona el cliente)');
-        }
+        // if ($validator->fails()) {
+        //     return back()
+        //     ->withErrors($validator)
+        //     ->withInput()
+        //     ->with('error', 'El correo ya existe.(Ingresa uno que no exista o seleciona el cliente)');
+        // }
 
         // Creacion de user
         $code = Str::random(8);
