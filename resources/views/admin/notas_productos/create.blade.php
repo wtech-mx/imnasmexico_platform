@@ -37,7 +37,7 @@
                                     </div>
 
                                     <div class="form-group col-6">
-                                        <h4 for="name">Correo</h4>
+                                        <h4 for="name">Correo <strong style="color:red;">(El correo no es forzoso)</strong></h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
