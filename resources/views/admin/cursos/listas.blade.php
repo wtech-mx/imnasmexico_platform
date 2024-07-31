@@ -165,9 +165,17 @@
                                                                         $mensajeAdicional = ($order->Cursos->stps == 1) ? 'Si tus diplomas no te llegaron al correo, podrás checarlos en tu perfil.' : '';
                                                                     @endphp
 
+                                                                    @if($ticket->nombre == 'CLASE GRATIS "Importancia de la macrobiótica en la Química de productos Dermocosméticos de alta Gama"')
+                                                                    <a type="button" class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone={{$order->User->telefono}}&text=Hola {{$order->User->name}}%0A%0AConectate%20el%20viernes%20en%20punto%20de%20las%203%3A00%20pm%20ingresando%C2%A0a%C2%A0esta%C2%A0liga%0Ameet.google.com/kpy-nizb-udm" style="color: #ffffff" target="_blank">
+                                                                        <i class="fa fa-whatsapp"></i>
+                                                                    </a>
+                                                                    @else
                                                                     <a type="button" class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone={{$order->User->telefono}}&text=Hola {{$order->User->name}}%0A%0A {{$mensajeModalidad }} %0A%0A {{$mensajeAdicional}}" style="color: #ffffff" target="_blank">
                                                                         <i class="fa fa-whatsapp"></i>
                                                                     </a>
+                                                                    @endif
+
+
 
                                                                     @if ($order->CursosTickets->descripcion == 'Con opción a Documentos de certificadora IMNAS')
                                                                     <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_imnas_documentos_{{ $order->User->id }}">
