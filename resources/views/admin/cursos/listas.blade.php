@@ -166,7 +166,7 @@
                                                                     @endphp
 
                                                                     @if($ticket->nombre == 'CLASE GRATIS "Importancia de la macrobiótica en la Química de productos Dermocosméticos de alta Gama"')
-                                                                    <a type="button" class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone={{$order->User->telefono}}&text=Hola {{$order->User->name}}%0A%0AConectate%20el%20viernes%20en%20punto%20de%20las%203%3A00%20pm%20ingresando%C2%A0a%C2%A0esta%C2%A0liga%0Ameet.google.com/kpy-nizb-udm" style="color: #ffffff" target="_blank">
+                                                                    <a type="button" class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone={{$order->User->telefono}}&text=Hola {{$order->User->name}}%0A%Conéctate%20el%20viernes%20en%20punto%20de%20las%203%3A00%20pm%20ingresando%C2%A0a%C2%A0esta%C2%A0liga%0Ameet.google.com/kpy-nizb-udm" style="color: #ffffff" target="_blank">
                                                                         <i class="fa fa-whatsapp"></i>
                                                                     </a>
                                                                     @else
