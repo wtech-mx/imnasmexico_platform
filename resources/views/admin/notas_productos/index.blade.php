@@ -20,6 +20,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
+
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
@@ -36,8 +37,10 @@
                             @endcan
                         </div>
                     </div>
+
                     <div class="card">
                         <form action="{{ route('advance_productos.buscador') }}" method="GET" >
+                            @csrf
 
                             <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
                                 <h5>Filtro</h5>
@@ -51,6 +54,17 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="col-3">
+                                            <label for="user_id">Fecha Inicio:</label>
+                                            <input type="date" class="form-control" name="fecha_inicio">
+                                        </div>
+
+                                        <div class="col-3">
+                                            <label for="user_id">Fecha Fin:</label>
+                                            <input type="date" class="form-control" name="fecha_fin">
+                                        </div>
+
+
                                         <div class="col-3">
                                             <br>
                                             <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #F82018; color: #ffffff;">Buscar</button>
@@ -212,52 +226,6 @@
 
 </script>
 
-<script>
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var agregarCampoBtn2 = document.getElementById('agregarCampo2');
-        var camposContainer2 = document.getElementById('camposContainer2');
-        var campoExistente2 = camposContainer2.querySelector('.campo2');
-
-        agregarCampoBtn2.addEventListener('click', function() {
-            var nuevoCampo2 = campoExistente2.cloneNode(true);
-            camposContainer2.appendChild(nuevoCampo2);
-
-            // Limpiar los valores en el nuevo campo
-            nuevoCampo2.querySelector('.producto2').value = '';
-            nuevoCampo2.querySelector('.cantidad2').value = '';
-
-            // Asignar los eventos a los nuevos campos
-            nuevoCampo2.querySelector('.producto2').addEventListener('change', actualizarSubtotal2);
-            nuevoCampo2.querySelector('.cantidad2').addEventListener('input', actualizarSubtotal2);
-        });
-
-        camposContainer2.addEventListener('change', function(event) {
-            if (event.target.classList.contains('producto2') || event.target.classList.contains('cantidad2')) {
-            actualizarSubtotal2();
-            }
-        });
-
-        function actualizarSubtotal2() {
-            var camposProductos2 = camposContainer2.querySelectorAll('.campo2 .producto2');
-            var camposCantidades2 = camposContainer2.querySelectorAll('.campo2 .cantidad2');
-            var subtotales2 = camposContainer2.querySelectorAll('.campo2 .subtotal2');
-
-            for (var i = 0; i < camposProductos2.length; i++) {
-                var producto2 = camposProductos2[i];
-                var cantidad2 = camposCantidades2[i];
-                var subtotal2 = subtotales2[i];
-
-                var precio2 = parseFloat(producto2.options[producto2.selectedIndex].getAttribute('data-precio_normal2'));
-                var cantidadValor2 = parseInt(cantidad2.value);
-
-                var subtotalValor2 = isNaN(precio2) || isNaN(cantidadValor2) ? 0 : precio2 * cantidadValor2;
-                subtotal2.value = subtotalValor2.toFixed(2);
-
-            }
-        }
-    });
-</script>
 @endsection
 
 

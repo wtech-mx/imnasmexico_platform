@@ -117,13 +117,13 @@
                             </div>
                         </div>
 
-                        <div class="col-12">
+                        {{-- <div class="col-12">
                             <p class="text-left mt-3 mb-3"><strong>Comprobacion de pagos por transferencia o deposito</strong></p>
-                        </div>
+                        </div> --}}
 
                         {{-- campos para transferencia banxico api --}}
 
-                        <div class="form-group col-6">
+                        {{-- <div class="form-group col-6">
                             <label for="">Seleciona Clabe de rastreo o referencia *</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">
@@ -271,7 +271,7 @@
 
                         <div class="form-group col-6 mb-3 mt-4">
                             <a href="" class="btn bt-xs btn-success">Comprobar</a>
-                        </div>
+                        </div> --}}
 
                         {{-- campos para transferencia banxico api --}}
 

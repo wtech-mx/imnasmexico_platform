@@ -40,22 +40,40 @@ class NotasProductosController extends Controller
     }
 
     public function buscador(Request $request){
+
         $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
         $products = Products::orderBy('nombre','ASC')->get();
+
         $id_client = $request->id_client;
         $phone = $request->phone;
         $admin = $request->administradores;
+        $fecha_inicio = $request->fecha_inicio;
+        $fecha_fin = $request->fecha_fin;
+
+        $query = NotasProductos::query();
+
         if ($id_client !== 'null' && $id_client !== null) {
-            $notas = NotasProductos::where('id_usuario', $id_client)->get();
+            $query->where('id_usuario', $id_client);
         } elseif ($phone !== 'null' && $phone !== null) {
-            $notas = NotasProductos::where('id_usuario', $phone)->get();
-        }
-        if ($admin !== 'null' && $admin !== null) {
-            $notas = NotasProductos::where('id_admin', $admin)->get();
+            $query->where('id_usuario', $phone);
         }
 
-        return view('admin.notas_productos.index',compact('notas', 'products', 'clientes', 'administradores'));
+        if ($admin !== 'null' && $admin !== null) {
+            $query->where('id_admin', $admin);
+        }
+
+        if ($fecha_inicio !== null) {
+            $query->whereDate('fecha', '>=', $fecha_inicio);
+        }
+
+        if ($fecha_fin !== null) {
+            $query->whereDate('fecha', '<=', $fecha_fin);
+        }
+
+        $notas = $query->get();
+
+        return view('admin.notas_productos.index', compact('notas', 'products', 'clientes', 'administradores'));
     }
 
     public function create(){

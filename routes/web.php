@@ -390,6 +390,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/notas/cotizacion/estatus/{id}', [App\Http\Controllers\CotizacionController::class, 'update_estatus'])->name('notas_cotizacion.update_estatus');
     Route::get('/admin/notas/cotizacion/edit/{id}', [App\Http\Controllers\CotizacionController::class, 'edit'])->name('notas_cotizacion.edit');
     Route::patch('/admin/notas/cotizacion/update/{id}', [App\Http\Controllers\CotizacionController::class, 'update'])->name('notas_cotizacion.update');
+    Route::get('/admin/notas/cotizacion/buscador', [App\Http\Controllers\CotizacionController::class, 'buscador'])->name('advance_cotizacion_productos.buscador');
+
 
     Route::delete('/admin/notas/cotizacion/delete/{id}', [App\Http\Controllers\CotizacionController::class, 'delete'])->name('notas_cotizacion.delete');
     Route::post('/admin/cotizacion/update/', [App\Http\Controllers\CotizacionController::class, 'update_cotizacion'])->name('notas_cotizacion.cotizacion');

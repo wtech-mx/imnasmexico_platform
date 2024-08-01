@@ -7,8 +7,7 @@
 @section('css')
  <!-- Select2  -->
  <link rel="stylesheet" href="{{asset('assets/admin/vendor/select2/dist/css/select2.min.css')}}">
- <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-<link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
+
  @endsection
 
 @php
@@ -20,6 +19,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
+
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
@@ -36,9 +36,10 @@
                             @endcan
                         </div>
                     </div>
-                    <div class="card">
-                        <form action="{{ route('advance_productos.buscador') }}" method="GET" >
 
+                    <div class="card">
+                        <form action="{{ route('advance_cotizacion_productos.buscador') }}" method="GET" >
+                            @csrf
                             <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
                                 <h5>Filtro</h5>
                                     <div class="row">
@@ -51,6 +52,17 @@
                                                 @endforeach
                                             </select>
                                         </div>
+                                        <div class="col-3">
+                                            <label for="user_id">Fecha Inicio:</label>
+                                            <input type="date" class="form-control" name="fecha_inicio">
+                                        </div>
+
+                                        <div class="col-3">
+                                            <label for="user_id">Fecha Fin:</label>
+                                            <input type="date" class="form-control" name="fecha_fin">
+                                        </div>
+
+
                                         <div class="col-3">
                                             <br>
                                             <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #F82018; color: #ffffff;">Buscar</button>
@@ -519,169 +531,38 @@
 
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
 
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
 
- <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
- <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap4.min.js"></script>
-
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 <script type="text/javascript">
+
     $(document).ready(function() {
         $('.cliente').select2();
-    });
-
-    $(document).ready(function() {
+        $('.phone').select2();
         $('.administradores').select2();
     });
 
-    $(document).ready(function() {
-        $('.phone').select2();
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+        searchable: true,
+        fixedHeight: false
     });
+
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search2", {
+        searchable: true,
+        fixedHeight: false
+    });
+
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search3", {
+        searchable: true,
+        fixedHeight: false
+    });
+
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search4", {
+        searchable: true,
+        fixedHeight: false
+    });
+
 </script>
-<script>
-    $(document).ready(function() {
-        $('#datatable-search').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'print',
-                    text: 'Imprimir',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                'excel',
-                'pdf',
-                'colvis'
-            ],
-            responsive: true,
-            stateSave: true,
 
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
-            }
-        });
-
-        $('#datatable-search2').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'print',
-                    text: 'Imprimir',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                'excel',
-                'pdf',
-                'colvis'
-            ],
-            responsive: true,
-            stateSave: true,
-
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
-            }
-        });
-
-        $('#datatable-search3').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'print',
-                    text: 'Imprimir',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                'excel',
-                'pdf',
-                'colvis'
-            ],
-            responsive: true,
-            stateSave: true,
-
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
-            }
-        });
-
-        $('#datatable-search4').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'print',
-                    text: 'Imprimir',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                'excel',
-                'pdf',
-                'colvis'
-            ],
-            responsive: true,
-            stateSave: true,
-
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
-            }
-        });
-    });
-
-    document.addEventListener('DOMContentLoaded', function() {
-        var agregarCampoBtn2 = document.getElementById('agregarCampo2');
-        var camposContainer2 = document.getElementById('camposContainer2');
-        var campoExistente2 = camposContainer2.querySelector('.campo2');
-
-        agregarCampoBtn2.addEventListener('click', function() {
-            var nuevoCampo2 = campoExistente2.cloneNode(true);
-            camposContainer2.appendChild(nuevoCampo2);
-
-            // Limpiar los valores en el nuevo campo
-            nuevoCampo2.querySelector('.producto2').value = '';
-            nuevoCampo2.querySelector('.cantidad2').value = '';
-
-            // Asignar los eventos a los nuevos campos
-            nuevoCampo2.querySelector('.producto2').addEventListener('change', actualizarSubtotal2);
-            nuevoCampo2.querySelector('.cantidad2').addEventListener('input', actualizarSubtotal2);
-        });
-
-        camposContainer2.addEventListener('change', function(event) {
-            if (event.target.classList.contains('producto2') || event.target.classList.contains('cantidad2')) {
-            actualizarSubtotal2();
-            }
-        });
-
-        function actualizarSubtotal2() {
-            var camposProductos2 = camposContainer2.querySelectorAll('.campo2 .producto2');
-            var camposCantidades2 = camposContainer2.querySelectorAll('.campo2 .cantidad2');
-            var subtotales2 = camposContainer2.querySelectorAll('.campo2 .subtotal2');
-
-            for (var i = 0; i < camposProductos2.length; i++) {
-                var producto2 = camposProductos2[i];
-                var cantidad2 = camposCantidades2[i];
-                var subtotal2 = subtotales2[i];
-
-                var precio2 = parseFloat(producto2.options[producto2.selectedIndex].getAttribute('data-precio_normal2'));
-                var cantidadValor2 = parseInt(cantidad2.value);
-
-                var subtotalValor2 = isNaN(precio2) || isNaN(cantidadValor2) ? 0 : precio2 * cantidadValor2;
-                subtotal2.value = subtotalValor2.toFixed(2);
-
-            }
-        }
-    });
-</script>
 @endsection
 
 

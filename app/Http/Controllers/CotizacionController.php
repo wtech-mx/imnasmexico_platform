@@ -41,6 +41,32 @@ class CotizacionController extends Controller
         return view('admin.cotizacion.index', compact('notas', 'products', 'clientes', 'administradores','notasAprobadas','notasPendientes','notasCandeladas'));
     }
 
+    public function buscador(Request $request){
+
+        $administradores = User::where('cliente', null)->orWhere('cliente', '5')->get();
+        $clientes = User::where('cliente', '1')->orderBy('id', 'DESC')->get();
+        $products = Products::orderBy('nombre', 'ASC')->get();
+
+        $query = NotasProductos::query();
+
+        if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
+            $fechaInicio = $request->input('fecha_inicio');
+            $fechaFin = $request->input('fecha_fin');
+
+            $query->whereBetween('fecha', [$fechaInicio, $fechaFin]);
+        }
+
+        $query->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion');
+
+        $notas = $query->get();
+        $notasAprobadas = clone $query->where('estatus_cotizacion', 'Aprobada')->get();
+
+        $notasPendientes = clone $query->where('estatus_cotizacion', 'Pendiente')->get();
+        $notasCandeladas = clone $query->where('estatus_cotizacion', 'Cancelada')->get();
+
+        return view('admin.cotizacion.index', compact('notas', 'products', 'clientes', 'administradores', 'notasAprobadas', 'notasPendientes', 'notasCandeladas'));
+    }
+
     public function create(){
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
         $products = Products::orderBy('nombre','ASC')->get();
