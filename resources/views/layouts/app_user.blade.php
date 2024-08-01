@@ -9,6 +9,9 @@
 
     <link rel="shortcut icon" href="{{asset('assets/user/logotipos/favicon.png')}}" type="image/png">
 
+    <script src="https://www.google.com/recaptcha/api.js?render=6LflbR0qAAAAADzEpS4m9oo_7Mftvt7K1OPHjC-D"></script>
+
+
     <title>
         @yield('template_title') - {{$configuracion->nombre_sistema}}
     </title>

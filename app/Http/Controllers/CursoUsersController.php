@@ -12,6 +12,7 @@ use App\Models\Noticias;
 use App\Models\Paquetes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class CursoUsersController extends Controller
 {
@@ -111,18 +112,45 @@ class CursoUsersController extends Controller
         return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual', 'titulo'));
     }
 
-    public function enviarFormulario(Request $request){
-        // Obtener los datos del formulario
-        $nombre = $request->input('nombre');
-        $mensaje = $request->input('mensaje');
-        $curso = $request->input('curso');
-        $fecha = $request->input('fecha');
-        $modalidad = $request->input('modalidad');
+    public function enviarFormulario(Request $request)
+    {
+        // Validar los campos del formulario
+        $request->validate([
+            'nombre' => 'required|string',
+            'mensaje' => 'nullable|string',
+            'token' => 'required|string',
+        ]);
 
-        // Crear el enlace de WhatsApp con los datos del formulario 5531167046
-        $url = 'https://api.whatsapp.com/send?phone=+525531167046&text=Hola%20buen%20d%C3%ADa%2C%20me%20interesa%20el%20curso%20de%20'.$curso.'%20'.$modalidad.'%20para%20la%20fecha%20del%20'.$fecha.'.%0A%0AMis%20datos:%0A'.$nombre.'%0A%0ATengo%20dudas%20y%2Fo%20preguntas%3A%0A'.$mensaje;
+        $recaptchaSecret = '6LflbR0qAAAAAF-I8wYNasutQ9NS-nL6alWy5jCa';
+        $token = $request->input('token');
 
-        // Redireccionar al enlace de WhatsApp
-        return redirect($url);
+        $cu = curl_init();
+        curl_setopt($cu, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+        curl_setopt($cu, CURLOPT_POST, 1);
+        curl_setopt($cu, CURLOPT_POSTFIELDS, http_build_query(array('secret' => $recaptchaSecret, 'response' => $token)));
+        curl_setopt($cu, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($cu);
+        curl_close($cu);
+
+        $responseData = json_decode($response, true);
+        if ($responseData['success'] && $responseData['score'] >= 0.5) {
+            // Obtener los datos del formulario
+            $nombre = $request->input('nombre');
+            $mensaje = $request->input('mensaje');
+            $curso = $request->input('curso');
+            $fecha = $request->input('fecha');
+            $modalidad = $request->input('modalidad');
+
+            // Crear el enlace de WhatsApp con los datos del formulario
+            $url = 'https://api.whatsapp.com/send?phone=+525531167046&text=Hola%20buen%20d%C3%ADa%2C%20me%20interesa%20el%20curso%20de%20'.$curso.'%20'.$modalidad.'%20para%20la%20fecha%20del%20'.$fecha.'.%0A%0AMis%20datos:%0A'.$nombre.'%0A%0ATengo%20dudas%20y%2Fo%20preguntas%3A%0A'.$mensaje;
+
+            // Redireccionar al enlace de WhatsApp
+            return redirect($url);
+        } else {
+            return back()->withErrors(['captcha' => 'ERES UN ROBOT']);
+        }
     }
+
+
+
 }

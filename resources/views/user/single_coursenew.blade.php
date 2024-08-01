@@ -996,22 +996,20 @@
                 Complementa tus conocimientos y conviértete un experto de la Cosmetología.
             </p>
 
-            <form method="POST" action="{{ route('mensaje.form') }}"role="form">
+            <form method="POST" id="form_contact" action="{{ route('mensaje.form') }}" role="form">
                 @csrf
-                    <div class="form-group">
-                        <input type="text" class="form-control form_contact mt-4" name="nombre" id="nombre" placeholder="Nombre (requerido)" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" class="form-control form_contact mt-4" name="mensaje" id="mensaje" placeholder="Message">
-                    </div>
-                    <input type="hidden" class="form-control form_contact mt-4" name="curso" id="curso" value="{{$curso->nombre}}">
-                    <input type="hidden" class="form-control form_contact mt-4" name="fecha" id="fecha" value="{{$curso->fecha_inicial}}">
-                    <input type="hidden" class="form-control form_contact mt-4" name="modalidad" id="modalidad" value="{{$curso->modalidad}}">
-
-                    <p class="text-center text-white">
-                        <button type="submit" class="btn btn_enfiar_form">Enviar <i class="fab fa-whatsapp"></i></button>
-                    </p>
-
+                <div class="form-group">
+                    <input type="text" class="form-control form_contact mt-4" name="nombre" id="nombre" placeholder="Nombre (requerido)" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control form_contact mt-4" name="mensaje" id="mensaje" placeholder="Message">
+                </div>
+                <input type="hidden" class="form-control form_contact mt-4" name="curso" id="curso" value="{{$curso->nombre}}">
+                <input type="hidden" class="form-control form_contact mt-4" name="fecha" id="fecha" value="{{$curso->fecha_inicial}}">
+                <input type="hidden" class="form-control form_contact mt-4" name="modalidad" id="modalidad" value="{{$curso->modalidad}}">
+                <p class="text-center text-white">
+                    <button type="submit" class="btn btn_enfiar_form" id="token_submit">Enviar <i class="fab fa-whatsapp"></i></button>
+                </p>
             </form>
         </div>
 
@@ -1036,6 +1034,23 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
     integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
     crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#token_submit').click(function(e) {
+                e.preventDefault();  // Prevenir el envío inmediato del formulario
+                grecaptcha.ready(function() {
+                    grecaptcha.execute('6LflbR0qAAAAADzEpS4m9oo_7Mftvt7K1OPHjC-D', {
+                        action: 'validarUsuario'
+                    }).then(function(token) {
+                        $('#form_contact').prepend('<input type="hidden" name="token" value="' + token + '" >');
+                        $('#form_contact').prepend('<input type="hidden" name="action" value="validarUsuario" >');
+                        $('#form_contact').submit();
+                    });
+                });
+            });
+        });
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
