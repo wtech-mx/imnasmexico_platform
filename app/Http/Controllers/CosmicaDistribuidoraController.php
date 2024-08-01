@@ -50,6 +50,14 @@ class CosmicaDistribuidoraController extends Controller
         return view('user.distribuidoras', compact('distribuidora'));
     }
 
+    public function index_protocolos(){
+
+        $usercosmika = Cosmikausers::where('membresia','=','Permanente')->orderby('id','desc')->get();
+        $clientes = User::orderby('name','desc')->get();
+
+        return view('cosmica.protocolos.index',compact('usercosmika', 'clientes'));
+    }
+
     public function store(Request $request){
 
         $validatedData = $request->validate([
@@ -89,7 +97,6 @@ class CosmicaDistribuidoraController extends Controller
             $payer->cliente = '1';
             $payer->password = Hash::make($request->get('telefono'));
             $payer->save();
-        //    Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
         $nombre = $request->get('name');
@@ -102,8 +109,13 @@ class CosmicaDistribuidoraController extends Controller
         $usercosmika->membresia = $request->get('membresia');
         $usercosmika->membresia_estatus = $request->get('membresia_estatus');
         $usercosmika->puntos_acomulados = $request->get('puntos_acomulados');
-        $usercosmika->membresia_inicio = $request->get('membresia_inicio');
-        $usercosmika->membresia_fin = $request->get('membresia_fin');
+        if($request->get('membresia') == 'Permanente'){
+            $usercosmika->membresia_inicio = $fechaActual;
+            $usercosmika->membresia_fin = '2090-12-01';
+        }else{
+            $usercosmika->membresia_inicio = $request->get('membresia_inicio');
+            $usercosmika->membresia_fin = $request->get('membresia_fin');
+        }
         $usercosmika->meses_acomulados = $request->get('meses_acomulados');
         $usercosmika->consumido_totalmes = $request->get('consumido_totalmes');
         $usercosmika->claves_protocolo = $claves_protocolo;
