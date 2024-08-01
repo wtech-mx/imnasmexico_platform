@@ -876,121 +876,144 @@ class OrderController extends Controller
 
         $request->validate([
             'name' => 'required|string|regex:/^[^@.%\/&$#]+$/',
+            'ape_paterno' => 'required|string',
+            'ape_materno' => 'required|string',
+            'email' => 'required|email',
+            'telefono' => 'required|string|min:10|max:10',
         ]);
 
-        $code = Str::random(8);
-        $fechaActual = date('Y-m-d');
-        $curso = Cursos::where('id', '=', $request->ticket)->first();
-        $curso_ticket = CursosTickets::where('id_curso', '=', $curso->id)->first();
+        $recaptchaSecret = '6LflbR0qAAAAAF-I8wYNasutQ9NS-nL6alWy5jCa';
+        $token = $request->input('token');
 
-        if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
-            if (User::where('telefono', $request->telefono)->exists()) {
-                $user = User::where('telefono', $request->telefono)->first();
+        $cu = curl_init();
+        curl_setopt($cu, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+        curl_setopt($cu, CURLOPT_POST, 1);
+        curl_setopt($cu, CURLOPT_POSTFIELDS, http_build_query(['secret' => $recaptchaSecret, 'response' => $token]));
+        curl_setopt($cu, CURLOPT_RETURNTRANSFER, true);
+        $response = curl_exec($cu);
+        curl_close($cu);
+
+        $datos = json_decode($response, true);
+
+        if ($datos['success'] && $datos['score'] >= 0.5 && $datos['action'] == 'clases_gratis') {
+
+            $code = Str::random(8);
+            $fechaActual = date('Y-m-d');
+            $curso = Cursos::where('id', '=', $request->ticket)->first();
+            $curso_ticket = CursosTickets::where('id_curso', '=', $curso->id)->first();
+
+            if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+                if (User::where('telefono', $request->telefono)->exists()) {
+                    $user = User::where('telefono', $request->telefono)->first();
+                } else {
+                    $user = User::where('email', $request->email)->first();
+                }
+                $payer = $user;
+
+                $ordenestickets = OrdersTickets::where('id_tickets', '=',$curso_ticket->id)->where('id_usuario', '=',$payer->id)
+                ->first();
+
+                if($ordenestickets == null){
+
+                }else{
+
+                    Alert::warning('Registro con exito', 'Se ha registrado con exito');
+                    return back()->with('warning', 'Ya te has registrado');
+                }
+
             } else {
-                $user = User::where('email', $request->email)->first();
-            }
-            $payer = $user;
-
-            $ordenestickets = OrdersTickets::where('id_tickets', '=',$curso_ticket->id)->where('id_usuario', '=',$payer->id)
-            ->first();
-
-            if($ordenestickets == null){
-
-            }else{
-
-                Alert::warning('Registro con exito', 'Se ha registrado con exito');
-                return back()->with('warning', 'Ya te has registrado');
+                $payer = new User;
+                $payer->name = $request->get('name') . ' ' . $request->get('ape_paterno') . ' ' . $request->get('ape_materno');
+                $payer->email = $request->get('email');
+                $payer->username = $request->get('telefono');
+                $payer->code = $code;
+                $payer->telefono = $request->get('telefono');
+                $payer->cliente = '1';
+                $payer->password = Hash::make($request->get('telefono'));
+                $payer->save();
+                $datos = User::where('id', '=', $payer->id)->first();
+            // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
             }
 
-        } else {
-            $payer = new User;
-            $payer->name = $request->get('name') . ' ' . $request->get('ape_paterno') . ' ' . $request->get('ape_materno');
-            $payer->email = $request->get('email');
-            $payer->username = $request->get('telefono');
-            $payer->code = $code;
-            $payer->telefono = $request->get('telefono');
-            $payer->cliente = '1';
-            $payer->password = Hash::make($request->get('telefono'));
-            $payer->save();
+            $order = new Orders;
+            $order->id_usuario = $payer->id;
+            $order->pago = $curso->precio;
+            $order->forma_pago = 'Clase Gratis';
+            $order->fecha = $fechaActual;
+            $order->estatus = 1;
+            $order->code = $code;
+            $order->save();
+
+            $order_ticket = new OrdersTickets;
+            $order_ticket->id_order = $order->id;
+            $order_ticket->id_tickets = $curso_ticket->id;
+            $order_ticket->id_usuario = $payer->id;
+            $order_ticket->id_curso = $curso->id;
+            $order_ticket->save();
+
+            if($order_ticket->Cursos->certificacion_webinar == 1){
+                $user_certificacion = User::where('id', $order_ticket->User->id)->first();
+                $user_certificacion->estatus_constancia = 'documentos';
+                $user_certificacion->agendar_cita = 1;
+                $user_certificacion->update();
+            }
+
+            // Enviar el correo electrónico
             $datos = User::where('id', '=', $payer->id)->first();
-           // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
-        }
+            $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
+            $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
+            $user = $orden_ticket2->User->name;
+            $id_order = $orden_ticket2->id_order;
+            $pago = $orden_ticket2->Orders->pago;
+            $forma_pago = $orden_ticket2->Orders->forma_pago;
 
-        $order = new Orders;
-        $order->id_usuario = $payer->id;
-        $order->pago = $curso->precio;
-        $order->forma_pago = 'Clase Gratis';
-        $order->fecha = $fechaActual;
-        $order->estatus = 1;
-        $order->code = $code;
-        $order->save();
+            $email_diplomas = 'imnascenter@naturalesainspa.com';
+            $destinatario = [ $order->User->email  , $email_diplomas];
+            $datos = $order->User->name;
 
-        $order_ticket = new OrdersTickets;
-        $order_ticket->id_order = $order->id;
-        $order_ticket->id_tickets = $curso_ticket->id;
-        $order_ticket->id_usuario = $payer->id;
-        $order_ticket->id_curso = $curso->id;
-        $order_ticket->save();
+            foreach ($orden_ticket as $details) {
 
-        if($order_ticket->Cursos->certificacion_webinar == 1){
-            $user_certificacion = User::where('id', $order_ticket->User->id)->first();
-            $user_certificacion->estatus_constancia = 'documentos';
-            $user_certificacion->agendar_cita = 1;
-            $user_certificacion->update();
-        }
+                $curso = $details->Cursos->nombre;
+                $fecha = $details->Cursos->fecha_inicial;
+                $nombre = $order->User->name;
+                $horas_default = "24";
+                $duracion_hrs = $horas_default;
+                $tipo_documentos = Tipodocumentos::first();
 
-        // Enviar el correo electrónico
-        $datos = User::where('id', '=', $payer->id)->first();
-        $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
-        $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
-        $user = $orden_ticket2->User->name;
-        $id_order = $orden_ticket2->id_order;
-        $pago = $orden_ticket2->Orders->pago;
-        $forma_pago = $orden_ticket2->Orders->forma_pago;
+                if ($details->Cursos->modalidad == 'Online') {
+                    Mail::to($payer->email)->send(new PlantillaTicket($details));
+                } else {
+                    Mail::to($payer->email)->send(new PlantillaTicketPresencial($details));
+                }
 
-        $email_diplomas = 'imnascenter@naturalesainspa.com';
-        $destinatario = [ $order->User->email  , $email_diplomas];
-        $datos = $order->User->name;
+                if($details->Cursos->stps == '1'){
+                    $id_ticket = $order_ticket->id;
+                    $ticket = OrdersTickets::find($id_ticket);
+                    $ticket->estatus_doc = '1';
+                    $ticket->estatus_cedula = '1';
+                    $ticket->estatus_titulo = '1';
+                    $ticket->estatus_diploma = '1';
+                    $ticket->estatus_credencial = '1';
+                    $ticket->estatus_tira = '1';
+                    $ticket->update();
 
-        foreach ($orden_ticket as $details) {
+                    $sello = 'Si';
 
-            $curso = $details->Cursos->nombre;
-            $fecha = $details->Cursos->fecha_inicial;
-            $nombre = $order->User->name;
-            $horas_default = "24";
-            $duracion_hrs = $horas_default;
-            $tipo_documentos = Tipodocumentos::first();
-
-            if ($details->Cursos->modalidad == 'Online') {
-                Mail::to($payer->email)->send(new PlantillaTicket($details));
-            } else {
-                Mail::to($payer->email)->send(new PlantillaTicketPresencial($details));
+                    $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','horas_default','sello'));
+                    $pdf->setPaper('A4', 'portrait');
+                    $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+                    Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                }
             }
+            Mail::to($payer->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
-            if($details->Cursos->stps == '1'){
-                $id_ticket = $order_ticket->id;
-                $ticket = OrdersTickets::find($id_ticket);
-                $ticket->estatus_doc = '1';
-                $ticket->estatus_cedula = '1';
-                $ticket->estatus_titulo = '1';
-                $ticket->estatus_diploma = '1';
-                $ticket->estatus_credencial = '1';
-                $ticket->estatus_tira = '1';
-                $ticket->update();
 
-                $sello = 'Si';
+            Alert::success('Registro con exito', 'Se ha registrado con exito');
+            return back()->with('success', 'Inscrito correctamente');
+        } else {
 
-                $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','horas_default','sello'));
-                $pdf->setPaper('A4', 'portrait');
-                $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
-                Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
-            }
+            return back()->with('error', 'Error de verificación reCAPTCHA. Por favor, inténtalo de nuevo.');
         }
-        Mail::to($payer->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
-
-
-        Alert::success('Registro con exito', 'Se ha registrado con exito');
-        return back()->with('success', 'Inscrito correctamente');
     }
 
     public function addToCart($id)

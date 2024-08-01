@@ -21,31 +21,31 @@
 <link href="{{asset('assets/user/custom/lightbox.min.css')}}" rel="stylesheet" />
 <style>
     #registroBtn[disabled] {
-    background-color: #ccc; /* Cambia el color de fondo */
-    cursor: not-allowed; /* Cambia el cursor al estilo "no permitido" */
-    color: #666; /* Cambia el color del texto */
-}
+        background-color: #ccc; /* Cambia el color de fondo */
+        cursor: not-allowed; /* Cambia el cursor al estilo "no permitido" */
+        color: #666; /* Cambia el color del texto */
+    }
 </style>
 @endsection
     @php
-    use Carbon\Carbon;
-    $fecha_ini = $curso->fecha_inicial;
-    $fechaInicialCarbon = Carbon::createFromFormat('Y-m-d', $fecha_ini);
-    $nombreDia = $fechaInicialCarbon->locale('es')->isoFormat('dddd');
-    $nombreDiaCapitalizado = ucfirst($nombreDia);
-    $fecha_inicial = $nombreDiaCapitalizado . ' ' . $fechaInicialCarbon->isoFormat('D [de] MMMM');
+        use Carbon\Carbon;
+        $fecha_ini = $curso->fecha_inicial;
+        $fechaInicialCarbon = Carbon::createFromFormat('Y-m-d', $fecha_ini);
+        $nombreDia = $fechaInicialCarbon->locale('es')->isoFormat('dddd');
+        $nombreDiaCapitalizado = ucfirst($nombreDia);
+        $fecha_inicial = $nombreDiaCapitalizado . ' ' . $fechaInicialCarbon->isoFormat('D [de] MMMM');
 
-    $fecha_f = $curso->fecha_final;
-    $fechaInicialCarbon2 = Carbon::createFromFormat('Y-m-d', $fecha_f);
-    $nombreDia2 = $fechaInicialCarbon2->locale('es')->isoFormat('dddd');
-    $nombreDiaCapitalizado2 = ucfirst($nombreDia2);
-    $fecha_final = $nombreDiaCapitalizado2 . ' ' . $fechaInicialCarbon2->isoFormat('D [de] MMMM');
+        $fecha_f = $curso->fecha_final;
+        $fechaInicialCarbon2 = Carbon::createFromFormat('Y-m-d', $fecha_f);
+        $nombreDia2 = $fechaInicialCarbon2->locale('es')->isoFormat('dddd');
+        $nombreDiaCapitalizado2 = ucfirst($nombreDia2);
+        $fecha_final = $nombreDiaCapitalizado2 . ' ' . $fechaInicialCarbon2->isoFormat('D [de] MMMM');
 
-    $horaInicial = $curso->hora_inicial;
-    $hora_inicial = Carbon::createFromFormat('H:i:s', $horaInicial)->format('h:i A');
+        $horaInicial = $curso->hora_inicial;
+        $hora_inicial = Carbon::createFromFormat('H:i:s', $horaInicial)->format('h:i A');
 
-    $horaFinal = $curso->hora_final;
-    $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
+        $horaFinal = $curso->hora_final;
+        $hora_final = Carbon::createFromFormat('H:i:s', $horaFinal)->format('h:i A');
 
     @endphp
 @section('content')
@@ -167,7 +167,7 @@
                                     <div class="card card-body card_colapsable_comprar">
                                         @if($curso->precio == 0)
                                             <div class="row mb-3">
-                                                <form method="POST" action="{{ route('clases_gratis') }}"role="form" id="miFormulario">
+                                                <form method="POST" action="{{ route('clases_gratis') }}" role="form" id="miFormulario">
                                                     @csrf
                                                     <input type="hidden" name="ticket" id="ticket" class="form-control input_custom_checkout" value="{{$curso->id}}">
                                                     <div class="row">
@@ -177,41 +177,35 @@
                                                                 <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre(s) *" pattern="[^@.%/&$#]+" required>
                                                             </div>
                                                         </div>
-
                                                         <div class="col-12">
                                                             <div class="input-group flex-nowrap mt-4">
                                                                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-male"></i></span>
                                                                 <input type="text" name="ape_paterno" id="ape_paterno" class="form-control input_custom_checkout" placeholder="Apellido Paterno *" required>
                                                             </div>
                                                         </div>
-
                                                         <div class="col-12">
                                                             <div class="input-group flex-nowrap mt-4">
                                                                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-female"></i></span>
                                                                 <input type="text" name="ape_materno" id="ape_materno" class="form-control input_custom_checkout" placeholder="Apellido Materno *" required>
                                                             </div>
                                                         </div>
-
                                                         <div class="col-12">
                                                             <div class="input-group flex-nowrap mt-4">
                                                                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
                                                                 <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo *" required>
                                                             </div>
                                                         </div>
-
                                                         <div class="col-12">
                                                             <div class="input-group flex-nowrap mt-4">
                                                                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
                                                                 <input id="telefono" name="telefono" type="tel" minlength="10" maxlength="10" class="form-control input_custom_checkout" placeholder="55-55-55-55-55" required>@error('telefono') <span class="error text-danger">{{ $message }}</span> @enderror
                                                             </div>
                                                         </div>
-
                                                         <div class="col-12">
                                                             <div class="d-flex justify-content-center">
-                                                                <button class="btn_pagar_checkout " type="submit" id="registroBtn">Registrarse</button>
+                                                                <button class="btn_pagar_checkout" type="button" id="registroBtn">Registrarse</button>
                                                             </div>
                                                         </div>
-
                                                     </div>
                                                 </form>
                                             </div>
@@ -1022,7 +1016,6 @@
     </div>
 </section>
 
-
 @endsection
 @section('js')
 
@@ -1052,18 +1045,41 @@
         });
     </script>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var registroBtn = document.getElementById("registroBtn");
-            var formulario = document.getElementById("miFormulario"); // Reemplaza "miFormulario" con el ID de tu formulario
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var registroBtn = document.getElementById("registroBtn");
+        var formulario = document.getElementById("miFormulario");
 
-            registroBtn.addEventListener("click", function () {
-                registroBtn.disabled = true; // Deshabilita el botón después de hacer clic
-                registroBtn.textContent = "Registrando..."; // Cambia el texto del botón
-                formulario.submit(); // Envía el formulario
+        registroBtn.addEventListener("click", function () {
+            registroBtn.disabled = true; // Deshabilita el botón después de hacer clic
+            registroBtn.textContent = "Registrando..."; // Cambia el texto del botón
+
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LflbR0qAAAAADzEpS4m9oo_7Mftvt7K1OPHjC-D', { action: 'clases_gratis' }).then(function(token) {
+                    var tokenInput = document.createElement('input');
+                    tokenInput.type = 'hidden';
+                    tokenInput.name = 'token';
+                    tokenInput.value = token;
+
+                    var actionInput = document.createElement('input');
+                    actionInput.type = 'hidden';
+                    actionInput.name = 'action';
+                    actionInput.value = 'clases_gratis';
+
+                    formulario.appendChild(tokenInput);
+                    formulario.appendChild(actionInput);
+
+                    formulario.submit(); // Envía el formulario
+                }).catch(function(error) {
+                    registroBtn.disabled = false; // Rehabilita el botón si ocurre un error
+                    registroBtn.textContent = "Registrarse"; // Cambia el texto del botón
+                    console.error("reCAPTCHA error:", error);
+                });
             });
         });
-    </script>
+    });
+</script>
+
 
 
 <script>
