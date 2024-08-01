@@ -488,7 +488,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('cosmica/distribuidoras/update/estatus/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_estatus'])->name('distribuidoras.update_estatus');
     Route::patch('cosmica/distribuidoras/update/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_protocolo'])->name('distribuidoras.update_protocolo');
 
-
+    Route::get('cosmica/protocolos/index', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index_protocolos'])->name('protocolos.index');
 
 });
 
