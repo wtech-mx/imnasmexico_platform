@@ -58,6 +58,19 @@
                         </div>
                     </div>
 
+                    <div class="form-group col-6">
+                        <label for="direccion_foto">Foto comprobante</label>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                            </span>
+                            <input id="direccion_foto" name="direccion_foto" type="file" class="form-control"  value="{{$item->direccion_foto}}">
+                        </div>
+
+                        <img id="blah" src="{{asset('utilidades/'.$item->direccion_foto) }}" alt="Imagen" style="width: 100px; height: 100px;"/>
+
+                    </div>
+
                     <div class="col-6">
                         <button type="submit" class="btn btn-success w-100" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                     </div>

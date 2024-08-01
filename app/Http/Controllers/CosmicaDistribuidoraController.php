@@ -22,7 +22,7 @@ class CosmicaDistribuidoraController extends Controller
 
         $this->checkMembresia();
 
-        $usercosmika = Cosmikausers::orderby('id','desc')->get();
+        $usercosmika = Cosmikausers::where('membresia','!=','Permanente')->orderby('id','desc')->get();
         $clientes = User::orderby('name','desc')->get();
 
         $fechaActual = Carbon::now();
@@ -146,11 +146,14 @@ class CosmicaDistribuidoraController extends Controller
         }
 
         $usercosmika =  Cosmikausers::findorfail($id);
-        $usercosmika->membresia = $request->get('membresia');
+        if($usercosmika->membresia != 'Permanente'){
+            $usercosmika->membresia = $request->get('membresia');
+            $usercosmika->membresia_inicio = $request->get('membresia_inicio');
+            $usercosmika->membresia_fin = $request->get('membresia_fin');
+        }
+
         $usercosmika->membresia_estatus = $request->get('membresia_estatus');
         $usercosmika->puntos_acomulados = $request->get('puntos_acomulados');
-        $usercosmika->membresia_inicio = $request->get('membresia_inicio');
-        $usercosmika->membresia_fin = $request->get('membresia_fin');
         $usercosmika->meses_acomulados = $request->get('meses_acomulados');
         $usercosmika->consumido_totalmes = $request->get('consumido_totalmes');
 

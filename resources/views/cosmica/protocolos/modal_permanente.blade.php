@@ -52,6 +52,16 @@
                     </div>
                 </div>
 
+                <div class="form-group col-6">
+                    <label for="direccion_foto">Foto comprobante</label>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon1">
+                            <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                        </span>
+                        <input id="direccion_foto" name="direccion_foto" type="file" class="form-control" required value="{{old('direccion_foto')}}">@error('direccion_foto') <span class="error text-danger">{{ $message }}</span> @enderror
+                    </div>
+                </div>
+
                 <input id="membresia" name="membresia" type="hidden" class="form-control" value="Permanente">
                 <input id="membresia_estatus" name="membresia_estatus" type="hidden" class="form-control" value="Activa">
 

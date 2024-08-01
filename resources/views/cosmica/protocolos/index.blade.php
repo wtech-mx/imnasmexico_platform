@@ -161,21 +161,6 @@
         $('.phone').select2();
 
         $('#datatable-search').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'print',
-                    text: 'Imprimir',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                'excel',
-                'pdf',
-                'colvis'
-            ],
-            responsive: true,
-            stateSave: true,
 
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
