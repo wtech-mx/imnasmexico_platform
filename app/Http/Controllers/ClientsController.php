@@ -26,6 +26,7 @@ use DataTables;
 use Illuminate\Support\Str;
 use App\Mail\PlantillaEvaluacionAprovada;
 use App\Mail\PlantillaWebinar;
+use App\Models\Cam\CamNotEstandares;
 use Illuminate\Support\Facades\Mail;
 
 class ClientsController extends Controller
@@ -132,6 +133,11 @@ class ClientsController extends Controller
                     // Obtener los datos de los estándares
                     $estandaresComprados = CarpetasEstandares::whereIn('id', $estandares)->get();
 
+                    $estandar_user = CamNotEstandares::join('cam_notas', 'cam_notestandares.id_nota', '=', 'cam_notas.id')
+                    ->where('cam_notas.id_cliente', auth()->user()->id)
+                    ->where('cam_notas.fecha', '>', '2024-07-30')
+                    ->get();
+
                     if($cliente->estatus_constancia == 'documentos' || $cliente->estatus_constancia == 'revision de datos' || $cliente->estatus_constancia == 'Seleccion de fecha tentativa'){
 
                         // Preparar los datos necesarios para verificar
@@ -150,7 +156,7 @@ class ClientsController extends Controller
                         return view('user.certificado_webinar',compact('cliente','datosCliente'));
 
                     }else{
-                        return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
+                        return view('user.profilenew',compact('carpetas_carta', 'estandar_user','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
                     }
 }
 
@@ -214,6 +220,11 @@ class ClientsController extends Controller
         $cliente = User::where('id', $id)->firstOrFail();
         $orders = Orders::where('id_usuario', '=',$id)->get();
         $order_ticket = OrdersTickets::where('id_usuario', '=',$id)->get();
+
+        $estandar_user = CamNotEstandares::join('cam_notas', 'cam_notestandares.id_nota', '=', 'cam_notas.id')
+        ->where('cam_notas.id_cliente', $id)
+        ->where('cam_notas.fecha', '>', '2024-07-30')
+        ->get();
 
         $usuarioId = Auth::id(); // Obtén el ID del usuario logueado
         // Verifica si el usuario ha comprado un ticket para el curso
@@ -324,7 +335,7 @@ class ClientsController extends Controller
 
             return view('user.certificado_webinar',compact('cliente','datosCliente'));
         }else{
-            return view('user.profilenew',compact('carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
+            return view('user.profilenew',compact('estandar_user', 'carpetas_carta','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
         }
 
     }

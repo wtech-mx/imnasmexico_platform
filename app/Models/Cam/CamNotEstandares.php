@@ -24,7 +24,7 @@ class CamNotEstandares extends Model
     }
 
     public function Estandar(){
-        return $this->belongsTo(CamEstandares::class, 'id_estandar');
+        return $this->belongsTo('App\Models\CarpetasEstandares'::class, 'id_estandar');
     }
 
     public function User(){

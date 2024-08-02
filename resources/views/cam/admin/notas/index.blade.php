@@ -41,11 +41,11 @@ Notas CAM
                                 ¿Como funciona?
                             </a>
                             @can('nota-cam-create')
-                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleNuevoModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 Crear
                             </a>
                             @endcan
-                            @include('cam.admin.notas.crear')
+                            @include('cam.admin.notas.crear_nuevos')
                         </div>
                     </div>
 
@@ -112,7 +112,7 @@ Notas CAM
                                                     </a>
                                                 </td>
                                             </tr>
-                                            @include('cam.admin.notas.edit')
+                                            @include('cam.admin.notas.edit_nuevos')
                                         @endforeach
                                     </tbody>
                                 </table>
