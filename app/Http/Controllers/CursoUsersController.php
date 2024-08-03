@@ -70,6 +70,8 @@ class CursoUsersController extends Controller
     }
 
     public function advance(Request $request) {
+
+
         $fechaActual = date('Y-m-d');
         $tickets = CursosTickets::get();
         $cursos_slide = Cursos::where('estatus', '1')->orderBy('fecha_inicial','asc')->get();
@@ -108,8 +110,12 @@ class CursoUsersController extends Controller
         // Obtén los resultados de la búsqueda
         $cursos = $cursos->get();
 
+        if ($request->ajax()) {
+            // Devuelve una vista parcial para la solicitud AJAX
+            return view('user.calendar_search', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual', 'titulo'))->render();
+        }
 
-        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual', 'titulo'));
+        // return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual', 'titulo'));
     }
 
     public function enviarFormulario(Request $request)

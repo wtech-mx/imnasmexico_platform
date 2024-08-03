@@ -117,80 +117,108 @@
     <div class="row">
 
         <div class="col-12">
-            <form class="row form_search_calendar desaparecer_form_seach" action="{{ route('advance_search') }}" method="GET" >
-                @csrf
-                <div class="col-12 col-md-5">
-                    <label class="form-label style_search_label">Modalidad</label>
-                    <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="modalidad" id="modalidad">
-                        <option value="" selected>Modalidad</option>
-                        <option value="Presencial">Presencial</option>
-                        <option value="Online">Online</option>
-                    </select>
-                </div>
 
-                <div class="col-12 col-md-5">
-                    <label class="form-label style_search_label">Nombre</label>
-                    <div class="input-group">
-                        <input name="nombre" class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" type="text" placeholder="Nombre">
+        <!-- Añade un ID al formulario -->
+        <form class="row form_search_calendar desaparecer_form_seach" id="search_form" action="{{ route('advance_search') }}" method="GET">
+            @csrf
+            <div class="col-12 col-md-5">
+                <label class="form-label style_search_label">Modalidad 1</label>
+                <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="modalidad" id="modalidad">
+                    <option value="" selected>Modalidad</option>
+                    <option value="Presencial">Presencial</option>
+                    <option value="Online">Online</option>
+                </select>
+            </div>
+
+            <div class="col-12 col-md-5">
+                <label class="form-label style_search_label">Nombre</label>
+                <div class="input-group">
+                    <input name="nombre" class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" type="text" placeholder="Nombre">
+                </div>
+            </div>
+
+            <div class="col-12 col-md-2">
+                <label class="form-label style_search_label">-</label>
+                <div class="input-group">
+                    <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" id="search_button">
+                        <i class="fas fa-search-plus icon_search_style"></i>
+                    </button>
+                    <a class="btn btn-sm mb-0 mt-sm-0 mt-1" href="{{ route('cursos.index_user') }}">
+                        <i class="fas fa-eraser icon_search_style_2"></i>
+                    </a>
+                </div>
+            </div>
+        </form>
+
+        <div class="container aparecer_form_seach" style="display: contents;">
+            <button class="mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#content_search" aria-expanded="false" aria-controls="content_search" style="background: transparent;border: solid transparent;">
+                <i class="fas fa-search  icon_search_style"></i> <strong>Buscar : </strong>
+            </button>
+
+            <div class="collapse" id="content_search">
+
+                <form class="row" action="{{ route('advance_search') }}" method="GET" id="search_form2">
+                    @csrf
+                    <div class="col-4">
+                        <label class="form-label style_search_label">Modalidad 2</label>
+                        <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="modalidad" id="modalidad">
+                            <option value="" selected>Modalidad</option>
+                            <option value="Presencial">Presencial</option>
+                            <option value="Online">Online</option>
+                        </select>
                     </div>
-                </div>
 
-                <div class="col-12 col-md-2">
-                    <label class="form-label style_search_label">-</label>
-                    <div class="input-group">
-                        <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit">
-                            <i class="fas fa-search-plus  icon_search_style"></i>
-                        </button>
-                        <a class="btn btn-sm mb-0 mt-sm-0 mt-1" href="{{ route('cursos.index_user') }}">
-                            <i class="fas fa-eraser  icon_search_style_2"></i>
-                        </a>
+                    <div class="col-8">
+                        <label class="form-label style_search_label">Nombre</label>
+                        <div class="input-group">
+                            <input name="nombre" class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" type="text" placeholder="Nombre">
+                        </div>
                     </div>
 
+                    <div class="col-12">
+                        <label class="form-label style_search_label">-</label>
+
+                        <div class="input-group">
+                            <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" id="search_button2">
+                                <i class="fas fa-search-plus icon_search_style"></i>
+                            </button>
+                            <a class="btn btn-sm mb-0 mt-sm-0 mt-1" href="{{ route('cursos.index_user') }}">
+                                <i class="fas fa-eraser icon_search_style_2"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <!-- Spinner de carga -->
+        <div id="spinner" style="display:none;">
+            <div class="row">
+                <div class="col-12">
+                        <p class="text-center mt-5">
+                            <i class="fas fa-spinner fa-spin my-auto " style="font-size: 60px"></i>
+                        </p>
+                        <p class="text-center mt-3">
+                            <strong class=""> Buscando ...</strong>
+                        </p>
                 </div>
+            </div>
+        </div>
 
-            </form>
+        <!-- Contenedor para mostrar los resultados -->
+        <div id="search_results"></div>
+        <!-- Contenedor para mostrar los resultados -->
 
-            <div class="container aparecer_form_seach" style="display: contents;">
-                <button class="mb-4" type="button" data-bs-toggle="collapse" data-bs-target="#content_search" aria-expanded="false" aria-controls="content_search" style="background: transparent;border: solid transparent;">
-                    <i class="fas fa-search  icon_search_style"></i> <strong>Buscar : </strong>
-                </button>
 
-                <div class="collapse" id="content_search">
-                    <form class="row" action="{{ route('advance_search') }}" method="GET" >
-                        @csrf
-                        <div class="col-4">
-                            <label class="form-label style_search_label">Modalidad</label>
-                            <select class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" name="modalidad" id="modalidad">
-                                <option value="" selected>Modalidad</option>
-                                <option value="Presencial">Presencial</option>
-                                <option value="Online">Online</option>
-                            </select>
-                        </div>
 
-                        <div class="col-8">
-                            <label class="form-label style_search_label">Nombre</label>
-                            <div class="input-group">
-                                <input name="nombre" class="form-control" style="background: #F5ECE4!important;border: solid transparent;color: #836262;font-weight: bold;border-style: solid;border-width: 0px 0px 3px 0px;border-color: #000;border-radius: 0px;" type="text" placeholder="Nombre">
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <label class="form-label style_search_label">-</label>
-                            <div class="input-group">
-                                <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit">
-                                    <i class="fas fa-search-plus  icon_search_style"></i>
-                                </button>
-                                <a class="btn btn-sm mb-0 mt-sm-0 mt-1" href="{{ route('cursos.index_user') }}">
-                                    <i class="fas fa-eraser  icon_search_style_2"></i>
-                                </a>
-                            </div>
-
-                        </div>
-                    </form>
-                </div>
-              </div>
 
         </div>
+
+    </div>
+
+    <div class="row" id="ocultar_grid_ajax">
 
         <div class="col-12 mt-2 mt-sm-5 mt-md-5">
             <div class="d-flex mb-0 mb-sm-5">
@@ -204,9 +232,7 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="row">
         {{-- card_grid --}}
         @foreach ($cursos as $curso)
         @php
@@ -451,6 +477,60 @@
                 registroBtn.disabled = true; // Deshabilita el botón después de hacer clic
                 registroBtn.textContent = "Registrando..."; // Cambia el texto del botón
                 formulario.submit(); // Envía el formulario
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#search_form').on('submit', function(e) {
+                e.preventDefault(); // Prevenir el envío normal del formulario
+
+                var formData = $(this).serialize(); // Obtener los datos del formulario
+
+                $('#spinner').show(); // Mostrar el spinner de carga
+                $('#search_results').html(''); // Limpiar los resultados anteriores
+                $('#ocultar_grid_ajax').hide(); // Ocultar el contenedor específico
+
+                $.ajax({
+                    type: 'GET',
+                    url: $(this).attr('action'), // Obtener la URL del formulario
+                    data: formData,
+                    success: function(response) {
+                        $('#spinner').hide(); // Ocultar el spinner
+                        $('#search_results').html(response); // Mostrar los resultados en el contenedor
+                        $('#search_form')[0].reset(); // Limpiar el formulario
+                    },
+                    error: function(xhr, status, error) {
+                        $('#spinner').hide(); // Ocultar el spinner
+                        $('#search_results').html('<p>Ocurrió un error al buscar los cursos.</p>'); // Mostrar mensaje de error
+                    }
+                });
+            });
+
+            $('#search_form2').on('submit', function(e) {
+                e.preventDefault(); // Prevenir el envío normal del formulario
+
+                var formData = $(this).serialize(); // Obtener los datos del formulario
+
+                $('#spinner').show(); // Mostrar el spinner de carga
+                $('#search_results').html(''); // Limpiar los resultados anteriores
+                $('#ocultar_grid_ajax').hide(); // Ocultar el contenedor específico
+
+                $.ajax({
+                    type: 'GET',
+                    url: $(this).attr('action'), // Obtener la URL del formulario
+                    data: formData,
+                    success: function(response) {
+                        $('#spinner').hide(); // Ocultar el spinner
+                        $('#search_results').html(response); // Mostrar los resultados en el contenedor
+                        $('#search_form2')[0].reset(); // Limpiar el formulario
+                    },
+                    error: function(xhr, status, error) {
+                        $('#spinner').hide(); // Ocultar el spinner
+                        $('#search_results').html('<p>Ocurrió un error al buscar los cursos.</p>'); // Mostrar mensaje de error
+                    }
+                });
             });
         });
     </script>
