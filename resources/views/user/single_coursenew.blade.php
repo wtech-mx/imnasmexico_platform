@@ -712,6 +712,34 @@
                                         </div>
                                     @endif
 
+                                    @if ($curso->nombre == 'Diplomado de Cosmetología Facial y Corporal')
+                                        <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                            <div class="d-flex justify-content-center">
+                                                <div class="card_certificaciones" style="position: relative">
+                                                        <a class="text-center" >
+                                                            <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                        </a>
+                                                </div>
+                                            </div>
+                                            <p class="text-center">
+                                                EC0010 - Prestación de Servicios Estéticos Corporales
+                                            </p>
+                                        </div>
+
+                                        <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
+                                            <div class="d-flex justify-content-center">
+                                                <div class="card_certificaciones" style="position: relative">
+                                                        <a class="text-center" >
+                                                            <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
+                                                        </a>
+                                                </div>
+                                            </div>
+                                            <p class="text-center">
+                                                EC0046 - Prestación de servicios Cosmetológicos Faciales
+                                            </p>
+                                        </div>
+                                    @endif
+
                                     @if($curso->sep == 1)
                                         <div class="col-6 col-md-4 me-0 me-sm-2 me-md-3 me-lg-5">
                                             <div class="d-flex justify-content-center">
