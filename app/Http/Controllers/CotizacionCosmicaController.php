@@ -374,7 +374,9 @@ class CotizacionCosmicaController extends Controller
 
         $nota_productos = ProductosNotasCosmica::where('id_notas_productos', $nota->id)->get();
 
-        $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_nota', compact('nota', 'today', 'nota_productos'));
+        $usercosmika = Cosmikausers::where('id_cliente','=', $nota->id_usuario)->first();
+
+        $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_nota', compact('nota', 'today', 'nota_productos', 'usercosmika'));
         if($nota->folio == null){
             $folio = $nota->id;
         }else{

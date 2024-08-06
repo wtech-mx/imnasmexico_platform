@@ -14,9 +14,15 @@
             top: -160px;
             right: 0px;
             height: 100px;
-            background-color: #322338;
             color: #fff;
             text-align: center;
+        }
+        .header-cotizacion {
+            background-color: #322338;
+        }
+
+        .header-distribuidora {
+            background-color: #783E5D;
         }
         header h1{
             margin: 10px 0;
@@ -58,11 +64,21 @@
         tr:nth-child(even) {
             background-color: #F7EAED;
         }
+        .table-cotizacion {
+            background-color: #783E5D;
+            color: #F7EAED;
+        }
+
+        .table-distribuidora {
+            background-color: #322338;
+            color: #F7EAED;
+        }
   </style>
 <body>
-  <header>
-    <h1>Cotización Cosmica #@if ($nota->folio == null) {{ $nota->id }} @else {{ $nota->folio }} @endif</h1>
-    <h3>Que tu piel brille, como las estrellas en el cosmo.</h3>
+  <header class="{{ $usercosmika == NULL ? 'header-cotizacion' : 'header-distribuidora' }}">
+    <h1>@if ($usercosmika == NULL) Cotización @else Distribuidora @endif
+        Cosmica #@if ($nota->folio == null) {{ $nota->id }} @else {{ $nota->folio }} @endif</h1>
+    <h3>Que tu piel brille, como las Estrellas en el Cosmos.</h3>
   </header>
 
   <footer>
@@ -83,7 +99,7 @@
   </footer>
 
   <div id="content">
-    <table class="table text-center table-bordered border-primary">
+    <table class="table text-center table-bordered border-primary" >
         <thead >
             <tr>
                 <th>Nombre</th>
@@ -123,7 +139,7 @@
     </table>
 
     <table class="table table-bordered border-primary">
-        <thead class="text-center" style="background-color: #783E5D; color: #fff">
+        <thead class="text-center {{ $usercosmika == NULL ? 'table-cotizacion' : 'table-distribuidora' }}">
             <tr>
                 <th>Cantidad</th>
                 <th>Producto</th>

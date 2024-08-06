@@ -23,7 +23,7 @@
                                 <div class="row">
 
                                     <div class="col-12 mt-2">
-                                        <h2 style="color:#783E5D"><strong>Datos del cliente</strong> </h2>
+                                        <h4 style="color:#783E5D"><strong>Datos del cliente</strong> </h4>
                                     </div>
 
                                     <div class="col-3">
@@ -93,8 +93,10 @@
                                         </div>
                                     </div>
 
+                                    <h3 style="color:#783E5D" id="membresia-info"></h3>
+
                                     <div class="col-12 mt-5">
-                                        <h2 style="color:#783E5D"><strong>Seleciona los productos</strong> </h2>
+                                        <h4 style="color:#783E5D"><strong>Seleciona los productos</strong> </h4>
                                     </div>
 
                                     <div class="col-1">
@@ -138,7 +140,7 @@
                                                                 <span class="input-group-text" id="basic-addon1">
                                                                     <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
                                                                 </span>
-                                                                <input type="number" name="descuento_prod[]" class="form-control d-inline-block descuento_prod" value="0">
+                                                                <input type="number" id="descuento_prod" name="descuento_prod[]" class="form-control d-inline-block descuento_prod" value="0">
                                                             </div>
                                                         </div>
 
@@ -166,7 +168,7 @@
                                     </div>
 
                                     <div class="col-12 mt-2 mb-3">
-                                        <h2 style="color:#783E5D"><strong>Pago</strong> </h2>
+                                        <h4 style="color:#783E5D"><strong>Pago</strong> </h4>
                                     </div>
 
                                     <div class="col-4 ">
@@ -345,20 +347,32 @@ document.addEventListener('DOMContentLoaded', function() {
                     type: 'GET',
                     dataType: 'json',
                     success: function(data) {
-                        clienteData = data;
+                        var clienteData = data;
+                        var membresiaInfo = '';
+
                         if (data.status === 'activo') {
                             if (data.membresia === 'Cosmos') {
                                 $('#descuento').val(40);
+                                membresiaInfo = 'Membresía: Cosmos';
+                                $('#descuento_prod').prop('disabled', true);
                             } else if (data.membresia === 'Estelar') {
                                 $('#descuento').val(60);
+                                membresiaInfo = 'Membresía: Estelar';
+                                $('#descuento_prod').prop('disabled', true);
                             }
                         } else {
                             $('#descuento').val(0); // Opcional: Resetear si no está activo
+                            membresiaInfo = 'El cliente no tiene una membresía activa';
+                            $('#descuento_prod').prop('disabled', false);
                         }
+
+                        // Actualiza el contenido del h4 con la información de la membresía
+                        $('#membresia-info').text(membresiaInfo);
                         actualizarSubtotal();
                     }
                 });
             } else {
+                $('#membresia-info').text('');
                 $('#descuento').val(0); // Opcional: Resetear si no hay cliente seleccionado
                 clienteData = null;
                 actualizarSubtotal();
