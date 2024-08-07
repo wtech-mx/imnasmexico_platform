@@ -27,7 +27,7 @@
         <ul class="navbar-nav me-auto navbar_ul_custom my-2 my-lg-0 navbar-nav-scroll" style="">
 
           <li class="nav-item">
-            <a class="nav-link nav_link_custom {{ (Request::is('/*') ? 'active' : '') }}" aria-current="page" href="{{ route('user.home') }}">Inicio</a>
+            <a class="nav-link nav_link_custom" aria-current="page" href="https://cosmicaskin.com">Inicio</a>
           </li>
 
           <li class="nav-item dropdown">
