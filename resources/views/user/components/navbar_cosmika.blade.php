@@ -12,6 +12,38 @@
     color: #c39691!important;
 }
 
+.image_cosmika{
+       width: 15%;
+}
+
+@media only screen and (max-width: 1700px) {
+    .image_cosmika{
+       width: 30%;
+}
+
+}
+
+@media only screen and (max-width: 1200px) {
+    .image_cosmika{
+       width: 45%;
+}
+
+}
+
+@media only screen and (max-width: 1000px) {
+    .image_cosmika{
+       width: 55%;
+}
+
+}
+
+@media only screen and (max-width: 850px) {
+    .image_cosmika{
+       width: 65%;
+}
+
+}
+
 </style>
 
 <nav class="navbar navbar_custom navbar-expand-md bg-body-tertiary" style="    background-color: #2D2034 !important;border: solid 3px #fff;">
@@ -70,7 +102,7 @@
           </li>
 
           <a class="navbar-brand" href="{{ route('user.home') }}">
-            <img src="{{asset('assets/user/logotipos/cosmica.png')}}" class="image_navbar d-inline-block align-text-top">
+            <img src="{{asset('assets/user/logotipos/cosmica.png')}}" class="image_cosmika d-inline-block align-text-top" style="">
          </a>
 
         </ul>
