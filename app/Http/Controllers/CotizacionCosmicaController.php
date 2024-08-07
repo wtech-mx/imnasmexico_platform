@@ -110,50 +110,13 @@ class CotizacionCosmicaController extends Controller
         $code = Str::random(8);
 
         $notas_productos = new NotasProductosCosmica;
-        if($request->get('email') == NULL && $request->get('id_cliente') == NULL){
+
+        if($request->get('id_cliente') == NULL){
             $notas_productos->nombre = $request->get('name');
             $notas_productos->telefono = $request->get('telefono');
-
-            $validator = Validator::make($request->all(), [
-                'email' => 'email|unique:users,email',
-            ]);
-
-            if ($validator->fails()) {
-                return back()
-                ->withErrors($validator)
-                ->withInput()
-                ->with('error', 'El correo ya existe.(Ingresa uno que no exista o seleciona el cliente)');
-            }
+            $notas_productos->id_usuario = NULL;
         }else{
-            if ($request->get('id_cliente')) {
-                $id_cliente = $request->get('id_cliente');
-
-            } else {
-
-                $validator = Validator::make($request->all(), [
-                    'email' => 'email|unique:users,email',
-                ]);
-
-                if ($validator->fails()) {
-                    return back()
-                    ->withErrors($validator)
-                    ->withInput()
-                    ->with('error', 'El correo ya existe.(Ingresa uno que no exista o seleciona el cliente)');
-                }
-
-                $payer = new User;
-                $payer->name = $request->get('name');
-                $payer->email = $request->get('email');
-                $payer->username = $request->get('telefono');
-                $payer->code = $code;
-                $payer->telefono = $request->get('telefono');
-                $payer->cliente = '1';
-                $payer->password = Hash::make($request->get('telefono'));
-                $payer->save();
-
-                $id_cliente = $payer->id;
-            }
-            $notas_productos->id_usuario = $id_cliente;
+            $notas_productos->id_usuario = $request->get('id_cliente');
         }
 
         $dominio = $request->getHost();
@@ -163,7 +126,7 @@ class CotizacionCosmicaController extends Controller
             $pago_fuera = public_path() . '/pagos';
         }
 
-        if($request->get('email') == NULL && $request->get('id_cliente') == NULL){
+        if($request->get('id_cliente') != NULL){
             if ($request->get('envio') !== NULL) {
                 $envio = 180;
             }else{
