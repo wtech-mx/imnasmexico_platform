@@ -14,7 +14,7 @@
 
 @section('content')
 
-<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/utilidades/estrellas.jpg') }}')">
+<section class="primario bg_overley" style="position:relative;background-image: url('{{asset('assets/user/utilidades/estrellas.png') }}')">
     <span class="" style="position: absolute;background-size: cover;background-position: center center;top: 0;left: 0;width: 100%;height: 100%;opacity: 0.6;background-color: #2D2034!important"></span>
     <div class="row margin_home_nav ">
 
