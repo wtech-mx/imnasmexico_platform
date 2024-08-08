@@ -90,9 +90,17 @@ Route::get('certificado_webinar', function () {
 Route::get('folio', function () {
     return view('user.folio');
 });
+
 // =============== M O D U L O   F O L I O S ===============================
 Route::get('/buscar/folio', [App\Http\Controllers\FoliosController::class, 'index'])->name('folio.index');
 Route::get('/buscador/folio', [App\Http\Controllers\FoliosController::class, 'buscador'])->name('folio.buscador');
+
+Route::get('/docmuento/cedula/{id}', [App\Http\Controllers\FoliosController::class, 'index_cedula'])->name('folio.index_cedula');
+Route::get('/docmuento/titulo/{id}', [App\Http\Controllers\FoliosController::class, 'index_titulo'])->name('folio.index_titulo');
+Route::get('/docmuento/diploma/{id}', [App\Http\Controllers\FoliosController::class, 'index_diploma'])->name('folio.index_diploma');
+Route::get('/docmuento/crednecial/{id}', [App\Http\Controllers\FoliosController::class, 'index_crednecial'])->name('folio.index_crednecial');
+Route::get('/docmuento/tira/{id}', [App\Http\Controllers\FoliosController::class, 'index_tira'])->name('folio.index_tira');
+
 
 Auth::routes();
 
