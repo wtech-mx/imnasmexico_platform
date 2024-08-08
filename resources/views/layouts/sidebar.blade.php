@@ -205,7 +205,7 @@
                 <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                     <i class="fas fa-file-invoice-dollar text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
                 </div>
-                <span class="nav-link-text ms-1">Notas</span>
+                <span class="nav-link-text ms-1">Notas NAS</span>
                 </a>
                 <div class="collapse " id="pagesExamplesCursos">
                 <ul class="nav ms-4">
@@ -220,7 +220,7 @@
                         @can('nota-productos-show')
                             <a class="nav-link {{ (Request::is('admin/notas/productos/*') ? 'show' : '') }}" href="{{ route('notas_productos.index') }}">
                                 <span class="sidenav-mini-icon"> P </span>
-                                <span class="sidenav-normal">Notas Productos</span>
+                                <span class="sidenav-normal">Notas Ventas</span>
                             </a>
                         @endcan
 
