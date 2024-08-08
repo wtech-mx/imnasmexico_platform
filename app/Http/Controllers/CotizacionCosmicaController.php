@@ -253,7 +253,12 @@ class CotizacionCosmicaController extends Controller
             $nuevosCampos = $request->input('campo');
             $nuevosCampos2 = $request->input('campo4');
             $nuevosCampos3 = $request->input('campo3');
-            $nuevosCampos4 = $request->input('descuento_prod');
+            $nuevosCampos4 = [];
+
+            // Si descuento_prod no es NULL, asigna los valores a $nuevosCampos4
+            if ($request->has('descuento_prod')) {
+                $nuevosCampos4 = $request->input('descuento_prod');
+            }
 
             foreach ($nuevosCampos as $index => $campo) {
                 $notas_inscripcion = new ProductosNotasCosmica;
@@ -261,7 +266,7 @@ class CotizacionCosmicaController extends Controller
                 $notas_inscripcion->producto = $campo;
                 $notas_inscripcion->price = $nuevosCampos2[$index];
                 $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                $notas_inscripcion->descuento = $nuevosCampos4[$index];
+                $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
                 $notas_inscripcion->save();
             }
         }
