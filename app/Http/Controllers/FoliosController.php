@@ -37,21 +37,46 @@ class FoliosController extends Controller
 
     }
 
-    public function index_titulo(){
+    public function index_titulo(Request $request, $id){
+
+        $tickets = OrdersTickets::where('id', '=', $id)->first();
+
+        $tipo_documentos = Tipodocumentos::find(3);
+
+        return view('user.components.documentos_imnas.index_titulo',compact('tickets','tipo_documentos'));
 
     }
 
-    public function index_diploma(){
+    public function index_diploma(Request $request, $id){
+
+        $tickets = OrdersTickets::where('id', '=', $id)->first();
+
+        $tipo_documentos = Tipodocumentos::find(4);
+
+        return view('user.components.documentos_imnas.index_diploma',compact('tickets','tipo_documentos'));
 
     }
 
-    public function index_crednecial(){
+    public function index_crednecial(Request $request, $id){
+
+        $tickets = OrdersTickets::where('id', '=', $id)->first();
+
+        $tipo_documentos = Tipodocumentos::find(5);
+
+        return view('user.components.documentos_imnas.index_crednecial',compact('tickets','tipo_documentos'));
 
     }
 
-    public function index_tira(){
+    public function index_tira(Request $request, $id){
+
+        $tickets = OrdersTickets::where('id', '=', $id)->first();
+
+        $tipo_documentos = Tipodocumentos::find(2);
+
+        return view('user.components.documentos_imnas.index_tiras',compact('tickets','tipo_documentos'));
 
     }
-
 
 }
+
+

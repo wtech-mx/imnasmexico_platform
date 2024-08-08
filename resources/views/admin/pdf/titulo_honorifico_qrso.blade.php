@@ -323,6 +323,7 @@
                 echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',4,4) . '" style="background: #fff; padding: 5px;"   />';
             @endphp
         </div>
+
         <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
 
         @php
