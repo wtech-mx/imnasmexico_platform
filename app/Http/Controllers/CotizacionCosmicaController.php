@@ -126,7 +126,7 @@ class CotizacionCosmicaController extends Controller
             $pago_fuera = public_path() . '/pagos';
         }
 
-        if($request->get('id_cliente') != NULL){
+        if($request->get('id_cliente') == NULL){
             if ($request->get('envio') !== NULL) {
                 $envio = 180;
             }else{
@@ -134,7 +134,7 @@ class CotizacionCosmicaController extends Controller
             }
         }else{
             //C o s t o  d e  E n v i o
-            $cliente = Cosmikausers::where('id_cliente', '=', $id_cliente)->first();
+            $cliente = Cosmikausers::where('id_cliente', '=', $request->get('id_cliente'))->first();
             $total = $request->input('totalDescuento');
 
             $envio = 0;
