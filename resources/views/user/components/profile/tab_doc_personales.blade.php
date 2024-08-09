@@ -454,6 +454,13 @@
                     @break
                 @endif
             @endforeach
+
+            @if (isset($estandar_user))
+                <p><b>Requisitos CONOCER</b></p>
+                <a class="example-image-link" href="{{asset('documentos/conocer.jpg') }}" data-lightbox="example-2" data-title="conocer" target="_blank">
+                    <img id="img_material_clase example-image" src="{{asset('documentos/conocer.jpg') }}" alt="material de clase" style="width: 90%;border-radius: 19px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);"/>
+                </a>
+            @endif
         </div>
     </div>
 </form>

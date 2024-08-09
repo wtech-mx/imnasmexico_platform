@@ -20,11 +20,9 @@
                                 ¿Como fucniona?
                             </a>
 
-                            @can('cursos-create')
-                                <a class="btn btn-sm btn-success" href="{{ route('cursos.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                    <i class="fa fa-fw fa-edit"></i> Crear
-                                </a>
-                            @endcan
+                            <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#registro_imnas" title="Editar Estatus" style="background: #b600e3;">
+                                Crear
+                            </a>
                         </div>
                     </div>
 
@@ -63,6 +61,7 @@
             </div>
         </div>
     </div>
+    @include('admin.registro_imnas.crear')
 @endsection
 
 @section('datatable')
