@@ -9,25 +9,42 @@
 <link href="https://fonts.googleapis.com/css2?family=Grey+Qo&display=swap" rel="stylesheet">
 
 @php
-    $domain = request()->getHost();
-    $basePath =
-        $domain == 'plataforma.imnasmexico.com'
-            ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
-            : asset('tipos_documentos/');
+            $domain = request()->getHost();
+            $basePath = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
+                    : asset('tipos_documentos/');
 
-    $basePathUtilidades =
-        $domain == 'plataforma.imnasmexico.com'
-            ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
-            : asset('utilidades_documentos/');
+            $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+                    : asset('utilidades_documentos/');
 
-    $basePathDocumentos =
-        $domain == 'plataforma.imnasmexico.com'
-            ? 'https://plataforma.imnasmexico.com/documentos/'
-            : asset('documentos/');
+            $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/documentos/'
+                    : asset('documentos/');
 
-    $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
-    $parte1 = implode(' ', array_slice($palabras, 0, 2));
-    $parte2 = implode(' ', array_slice($palabras, 2));
+            if (!isset($tickets->User->Documentos->foto_tam_infantil)) {
+                $palabras = explode(' ', ucwords(strtolower($tickets->nombre)));
+
+                $foto = $tickets->foto_cuadrada;
+                $firma = $tickets->firma;
+                $nombreCurso = $tickets->nom_curso;
+
+
+                $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/documentos_registro/'
+                    : asset('documentos_registro/');
+
+            }else{
+                $foto = $tickets->User->Documentos->foto_tam_infantil;
+                $firma = $tickets->User->Documentos->firma;
+                $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
+                $nombreCurso = $tickets->Cursos->nombre;
+                $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/documentos/'
+                    : asset('documentos/');
+            }
+
+            $cantidad_palabras = count($palabras);
 
 @endphp
 
@@ -101,7 +118,7 @@
             clip-path: ellipse(50% 50% at 50% 50%);
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('{{ $basePathDocumentos . '/' . $tickets->User->telefono . '/' . $tickets->User->Documentos->foto_tam_infantil }}');
+            background-image: url('{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$foto }}');
             background-size: cover;
             background-position: center center;
         }
@@ -231,7 +248,23 @@
         </div>
 
         <div class="container_nombre">
-            <h4 class="nombre">{{ $parte1 }}<br>{{ $parte2 }}</h4>
+
+                @for ($i = 0; $i < $cantidad_palabras; $i += 2)
+                @php
+                    $linea = '';
+                    if (isset($palabras[$i])) {
+                        $linea .= $palabras[$i];
+                        if (isset($palabras[$i + 1])) {
+                            $linea .= ' ' . $palabras[$i + 1];
+                        }
+                    }
+                    if ($i + 2 < $cantidad_palabras) {
+                        $linea .= '<br>';
+                    }
+                @endphp
+                <h4 class="nombre">{!! $linea !!}</h4>
+            @endfor
+
         </div>
 
         <div class="oval-container">
@@ -240,9 +273,10 @@
         </div>
 
         <div class="container_curso">
+
             @php
                 // Divide el curso por espacios en blanco
-                $palabras = explode(' ', $tickets->Cursos->nombre);
+                $palabras = explode(' ', $nombreCurso);
 
                 // Inicializa la cadena formateada
                 $curso_formateado = '';
@@ -260,12 +294,23 @@
                         $curso_formateado .= '<br>';
                     }
                 }
+
             @endphp
+
             <h4 class="curso">{!! $curso_formateado !!}</h4>
         </div>
 
         <div class="container_fecha">
-            <h4 class="fecha"><strong>{{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicio)->isoFormat('D [de] MMMM [del] YYYY') }}</strong> </h4>
+            <h4 class="fecha">
+            <strong>
+
+            @if(!isset($tickets->Cursos->fecha_inicial))
+                Ciudad de México , México a  {{ \Carbon\Carbon::parse($tickets->fecha_curso)->isoFormat('D [de] MMMM [del] YYYY') }}
+             @else
+                Ciudad de México , México a  {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('D [de] MMMM [del] YYYY') }}
+             @endif
+
+            </strong> </h4>
         </div>
 
         <div class="container_folio_bajo1">

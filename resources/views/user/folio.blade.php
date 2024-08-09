@@ -102,9 +102,9 @@
 
                                         <div class="col-12 col-md-4 col-lg-4">
                                             <a href="{{ route('folio.index_cedula',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DDD78D">Cedulda de Identidad de Papel</a>
-                                            <a href="{{ route('folio.index_cedula',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
-                                            <a href="{{ route('folio.index_cedula',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma Imnnas</a>
-                                            <a href="{{ route('folio.index_cedula',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Titulo Honorifico</a>
+                                            <a href="{{ route('folio.index_crednecial',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
+                                            <a href="{{ route('folio.index_diploma',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma Imnnas</a>
+                                            <a href="{{ route('folio.index_titulo',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Titulo Honorifico</a>
                                             {{-- <a href="" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materias</a> --}}
                                         </div>
 

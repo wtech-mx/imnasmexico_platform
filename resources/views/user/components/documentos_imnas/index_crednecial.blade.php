@@ -5,25 +5,42 @@
 @endsection
 
 @php
-    $domain = request()->getHost();
-    $basePath =
-        $domain == 'plataforma.imnasmexico.com'
-            ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
-            : asset('tipos_documentos/');
+            $domain = request()->getHost();
+            $basePath = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
+                    : asset('tipos_documentos/');
 
-    $basePathUtilidades =
-        $domain == 'plataforma.imnasmexico.com'
-            ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
-            : asset('utilidades_documentos/');
+            $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+                    : asset('utilidades_documentos/');
 
-    $basePathDocumentos =
-        $domain == 'plataforma.imnasmexico.com'
-            ? 'https://plataforma.imnasmexico.com/documentos/'
-            : asset('documentos/');
+            $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/documentos/'
+                    : asset('documentos/');
 
-    $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
-    $parte1 = implode(' ', array_slice($palabras, 0, 2));
-    $parte2 = implode(' ', array_slice($palabras, 2));
+            if (!isset($tickets->User->Documentos->foto_tam_infantil)) {
+                $palabras = explode(' ', ucwords(strtolower($tickets->nombre)));
+
+                $foto = $tickets->foto_cuadrada;
+                $firma = $tickets->firma;
+
+
+                $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/documentos_registro/'
+                    : asset('documentos_registro/');
+
+            }else{
+                $foto = $tickets->User->Documentos->foto_tam_infantil;
+                $firma = $tickets->User->Documentos->firma;
+                $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
+
+                $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/documentos/'
+                    : asset('documentos/');
+            }
+
+            $cantidad_palabras = count($palabras);
+
 
 @endphp
 
@@ -73,7 +90,7 @@
             position: absolute;
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('{{ $basePathDocumentos . '/' . $tickets->User->telefono . '/' . $tickets->User->Documentos->foto_tam_infantil }}');
+            background-image: url('{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$foto }}');
             background-size: cover;
             background-position: center center;
         }
@@ -86,7 +103,7 @@
             position: absolute;
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('{{ $basePathDocumentos . '/' . $tickets->User->telefono . '/' . $tickets->User->Documentos->foto_tam_infantil }}');
+            background-image: url('{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$foto }}');
             opacity: 0.5;
             background-size: cover;
             background-position: center center;
@@ -248,9 +265,6 @@
 
         <div class="conatiner_curso">
             @php
-                // Divide el curso por espacios en blanco
-                $palabras = explode(' ', $tickets->Cursos->nombre);
-
                 // Inicializa la cadena formateada
                 $curso_formateado = '';
                 $contador_palabras = 0;
@@ -312,7 +326,7 @@
             @if($tickets->User->Documentos->firma == null)
 
             @else
-                 <img src="{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$tickets->User->Documentos->firma }}" class="img_firma">
+                 <img src="{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$firma }}" class="img_firma">
             @endif
 
         </div>
@@ -323,7 +337,17 @@
         <img src="{{ $basePath . '/' . $tipo_documentos->img_reverso }}" class="img_reverso">
 
         <div class="container_imgtrasera">
-            <p class="curso_atras">{{ $tickets->Cursos->nombre }}</p>
+            <p class="curso_atras">
+
+                @if(!isset($tickets->Cursos->nombre))
+                {{ ucwords(strtolower($tickets->nom_curso)) }}
+
+                @else
+                {{ ucwords(strtolower($tickets->Cursos->nombre)) }}
+
+                @endif
+
+            </p>
         </div>
 
     </div>
