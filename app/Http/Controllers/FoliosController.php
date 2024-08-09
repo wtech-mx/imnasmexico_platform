@@ -40,26 +40,32 @@ class FoliosController extends Controller
             $tickets = OrdersTickets::where('id', '=', $id)->first();
         }
 
-
         return view('user.components.documentos_imnas.index_cedula',compact('tickets','tipo_documentos'));
 
     }
 
     public function index_titulo(Request $request, $id){
 
-        $tickets = OrdersTickets::where('id', '=', $id)->first();
-
         $tipo_documentos = Tipodocumentos::find(3);
 
+        $tickets = RegistroImnas::where('folio', $id)->first();
+
+        if($tickets == null){
+            $tickets = OrdersTickets::where('id', '=', $id)->first();
+        }
         return view('user.components.documentos_imnas.index_titulo',compact('tickets','tipo_documentos'));
 
     }
 
     public function index_diploma(Request $request, $id){
 
-        $tickets = OrdersTickets::where('id', '=', $id)->first();
-
         $tipo_documentos = Tipodocumentos::find(4);
+
+        $tickets = RegistroImnas::where('folio', $id)->first();
+
+        if($tickets == null){
+            $tickets = OrdersTickets::where('id', '=', $id)->first();
+        }
 
         return view('user.components.documentos_imnas.index_diploma',compact('tickets','tipo_documentos'));
 
@@ -67,9 +73,13 @@ class FoliosController extends Controller
 
     public function index_crednecial(Request $request, $id){
 
-        $tickets = OrdersTickets::where('id', '=', $id)->first();
-
         $tipo_documentos = Tipodocumentos::find(5);
+
+        $tickets = RegistroImnas::where('folio', $id)->first();
+
+        if($tickets == null){
+            $tickets = OrdersTickets::where('id', '=', $id)->first();
+        }
 
         return view('user.components.documentos_imnas.index_crednecial',compact('tickets','tipo_documentos'));
 
@@ -77,9 +87,13 @@ class FoliosController extends Controller
 
     public function index_tira(Request $request, $id){
 
-        $tickets = OrdersTickets::where('id', '=', $id)->first();
-
         $tipo_documentos = Tipodocumentos::find(2);
+
+        $tickets = RegistroImnas::where('folio', $id)->first();
+
+        if($tickets == null){
+            $tickets = OrdersTickets::where('id', '=', $id)->first();
+        }
 
         return view('user.components.documentos_imnas.index_tiras',compact('tickets','tipo_documentos'));
 
