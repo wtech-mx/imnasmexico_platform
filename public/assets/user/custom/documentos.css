@@ -1,4 +1,9 @@
 
+@font-face {
+    font-family: 'Minion';
+    src: url('https://plataforma.imnasmexico.com/assets/admin/fonts/Minion.ttf');
+}
+
 body{
 	background-color: #E9DED7;
 	overflow-x: auto;
