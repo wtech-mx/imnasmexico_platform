@@ -107,7 +107,6 @@ class RegistroIMNASController extends Controller
         ->where('orders.estatus', '1')
         ->select('registro_imnas_doc.*') // Asegúrate de seleccionar solo las columnas necesarias
         ->get();
-;
 
         $curso = Cursos::where('id', '=', 647)->first();
         $cursos_tickets = CursosTickets::where('id_curso', '=', $curso)->get();

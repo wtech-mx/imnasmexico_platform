@@ -5,25 +5,48 @@
 @endsection
 
 @php
-$domain = request()->getHost();
-$basePath = ($domain == 'plataforma.imnasmexico.com')
-        ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
-        : asset('tipos_documentos/');
+            $domain = request()->getHost();
+            $basePath = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
+                    : asset('tipos_documentos/');
 
-$basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
-        ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
-        : asset('utilidades_documentos/');
+            $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+                    : asset('utilidades_documentos/');
 
-$basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
-        ? 'https://plataforma.imnasmexico.com/documentos/'
-        : asset('documentos/');
+            $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/documentos/'
+                    : asset('documentos/');
 
-$palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
-$cantidad_palabras = count($palabras);
+            if (!isset($tickets->User->Documentos->foto_tam_infantil)) {
+                $palabras = explode(' ', ucwords(strtolower($tickets->nombre)));
+
+                $foto = $tickets->foto_cuadrada;
+                $firma = $tickets->firma;
+
+
+                $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/documentos_registro/'
+                    : asset('documentos_registro/');
+
+            }else{
+                $foto = $tickets->User->Documentos->foto_tam_infantil;
+                $firma = $tickets->User->Documentos->firma;
+                $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
+
+                $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/documentos/'
+                    : asset('documentos/');
+            }
+
+            $cantidad_palabras = count($palabras);
+
 
 @endphp
 
+
 @section('css_custom')
+
 
 
 <style>
@@ -87,6 +110,7 @@ $cantidad_palabras = count($palabras);
         top: 28%;
         left: 5%;
     }
+
     .oval {
         width: 100%;
         height: 100%;
@@ -94,7 +118,7 @@ $cantidad_palabras = count($palabras);
         margin: 0;
         padding: 0;
         margin-top: 8px;
-        background-image: url('{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$tickets->User->Documentos->foto_tam_infantil }}');
+        background-image: url('{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$foto }}');
         background-size: cover;
         background-position: center center;
     }
@@ -121,7 +145,6 @@ $cantidad_palabras = count($palabras);
         right: 17px;
         text-align: center;
     }
-
 
     .container_fecha{
         position: absolute;
@@ -161,6 +184,7 @@ $cantidad_palabras = count($palabras);
         position: absolute;
         top:76%;
         left: 36%;
+
     }
 
 </style>
@@ -208,11 +232,25 @@ $cantidad_palabras = count($palabras);
     </div>
 
     <div class="container_curso">
-        <h4 class="curso">{{ ucwords(strtolower($tickets->Cursos->nombre)) }}</h4>
+        <h4 class="curso">
+
+            @if(!isset($tickets->Cursos->nombre))
+                {{ ucwords(strtolower($tickets->nom_curso)) }}
+            @else
+                {{ ucwords(strtolower($tickets->Cursos->nombre)) }}
+            @endif
+
+        </h4>
     </div>
 
     <div class="container_fecha">
-        <h4 class="fecha">Expedido en la Ciudad de México, el {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
+        <h4 class="fecha">
+            @if(!isset($tickets->Cursos->fecha_inicial))
+                Expedido en la Ciudad de México, el {{ \Carbon\Carbon::parse($tickets->fecha_curso)->isoFormat('D [de] MMMM [del] YYYY') }}
+            @else
+                Expedido en la Ciudad de México, el {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('D [de] MMMM [del] YYYY') }}
+            @endif
+        </h4>
     </div>
 
   </div>
@@ -222,21 +260,34 @@ $cantidad_palabras = count($palabras);
     <img src="{{ $basePath .'/'. $tipo_documentos->img_reverso }}" class="img_reverso">
 
     <div class="container_folioReverso">
+
+
         <h4 class="folioReverso">{{$tickets->folio}}</h4>
     </div>
 
     <div class="container_firma">
 
-        @if($tickets->User->Documentos->firma == null)
+        @if($firma == null)
 
         @else
-             <img src="{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$tickets->User->Documentos->firma }}" class="img_firma">
+             <img src="{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$firma }}" class="img_firma">
         @endif
 
     </div>
 
     <div class="container_CursoReverso">
-        <h4 class="curso_sm">{{ ucwords(strtolower($tickets->Cursos->nombre)) }}</h4>
+        <h4 class="curso_sm">
+
+            @if(!isset($tickets->Cursos->nombre))
+            {{ ucwords(strtolower($tickets->nom_curso)) }}
+
+            @else
+            {{ ucwords(strtolower($tickets->Cursos->nombre)) }}
+
+            @endif
+
+
+        </h4>
     </div>
 
     <div class="qr_container2">

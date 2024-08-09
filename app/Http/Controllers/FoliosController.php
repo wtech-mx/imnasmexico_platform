@@ -6,6 +6,7 @@ use App\Models\DocumenotsGenerador;
 use App\Models\OrdersTickets;
 use Illuminate\Http\Request;
 use App\Models\Tipodocumentos;
+use App\Models\RegistroImnas;
 
 class FoliosController extends Controller
 {
@@ -17,11 +18,13 @@ class FoliosController extends Controller
     public function buscador(Request $request){
 
         $tickets = OrdersTickets::where('folio', '=', $request->get('folio'))->first();
+
             if (!$tickets) {
-                $tickets_generador = DocumenotsGenerador::where('folio', $request->get('folio'))->first();
+                $tickets_generador = RegistroImnas::where('folio', $request->get('folio'))->first();
             }else{
                 $tickets_generador = '';
             }
+
         $folio = $request->get('folio');
 
         return view('user.folio',compact('tickets', 'folio', 'tickets_generador'));
@@ -29,9 +32,14 @@ class FoliosController extends Controller
 
     public function index_cedula(Request $request, $id){
 
-        $tickets = OrdersTickets::where('id', '=', $id)->first();
-
         $tipo_documentos = Tipodocumentos::find(2);
+
+        $tickets = RegistroImnas::where('folio', $id)->first();
+
+        if($tickets == null){
+            $tickets = OrdersTickets::where('id', '=', $id)->first();
+        }
+
 
         return view('user.components.documentos_imnas.index_cedula',compact('tickets','tipo_documentos'));
 
