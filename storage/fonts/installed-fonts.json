@@ -1,5 +1,23 @@
 {
     "minion": {
         "normal": "minion_normal_500d7459ee2ef95bfcf291a5300934c7"
+    },
+    "source sans pro": {
+        "normal": "C:\\laragon\\www\\imnasmexico_platform\\storage\\fonts\/source_sans_pro_normal_c093c90c45eed165132a6bbca5006043",
+        "bold": "C:\\laragon\\www\\imnasmexico_platform\\storage\\fonts\/source_sans_pro_bold_7c2e436fd2a061fbe436f908569a93f0",
+        "italic": "C:\\laragon\\www\\imnasmexico_platform\\storage\\fonts\/source_sans_pro_italic_e1cb1acd2044df6e5a28e4042fa8afeb",
+        "bold_italic": "source_sans_pro_bold_italic_0953a86d915a6c7318559ad9c2e80a95"
+    },
+    "monotype corsiva normal": {
+        "normal": "monotype_corsiva_normal_normal_be09d5e4ae6dcb3d03f2ab34853cc73c"
+    },
+    "monotype corsiva bold": {
+        "900": "monotype_corsiva_bold_900_66f132600253e2e805fb5e181cd5d0c7"
+    },
+    "oldenglishtextmt": {
+        "normal": "oldenglishtextmt_normal_be09d5e4ae6dcb3d03f2ab34853cc73c"
+    },
+    "oldenglishtextmt normal": {
+        "normal": "oldenglishtextmt_normal_normal_be09d5e4ae6dcb3d03f2ab34853cc73c"
     }
 }
