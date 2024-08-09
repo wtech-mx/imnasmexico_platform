@@ -18,7 +18,7 @@
                     ? 'https://plataforma.imnasmexico.com/documentos/'
                     : asset('documentos/');
 
-            if (!isset($tickets->User->Documentos->foto_tam_infantil)) {
+            if (isset($tickets->foto_cuadrada)) {
                 $palabras = explode(' ', ucwords(strtolower($tickets->nombre)));
 
                 $foto = $tickets->foto_cuadrada;
