@@ -41,7 +41,9 @@ class RegistroIMNASController extends Controller
         $cursos_tickets = CursosTickets::where('id_curso', $curso->id)->get();
         $cursos_tickets = $cursos_tickets->slice(1);
 
-        return view('user.registro_imnas', compact('registros_imnas', 'cliente', 'recien_comprados', 'cursos_tickets', 'curso'));
+        $especialidades = RegistroImnasEspecialidad::where('id_cliente', $cliente->id)->get();
+
+        return view('user.registro_imnas', compact('registros_imnas', 'cliente', 'recien_comprados', 'cursos_tickets', 'curso', 'especialidades'));
     }
 
     public function update_clientes(Request $request, $id)

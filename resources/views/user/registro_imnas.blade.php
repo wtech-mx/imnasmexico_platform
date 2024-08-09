@@ -150,8 +150,11 @@ Mi perfil- {{$cliente->name}}
                                     <span class="input-group-text">
                                         <img class="img_profile_label" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
                                     </span>
-
-                                    <input class="form-control" type="text"  id="nom_curso" name="nom_curso" required>
+                                    <select class="form-control" id="nom_curso" name="nom_curso" required>
+                                        @foreach ($especialidades as $especialidad)
+                                        <option value="{{ $especialidad->especialidad }}">{{ $especialidad->especialidad }}</option>
+                                        @endforeach
+                                    </select>
                                     </div>
                                 </div>
 
@@ -188,14 +191,6 @@ Mi perfil- {{$cliente->name}}
                                 <div class="col-6 form-group mb-5">
                                     <label for="ine">Foto cuadrada *</label>
                                     <input id="foto_cuadrada" name="foto_cuadrada" type="file" class="form-control ine_input" required>
-                                </div>
-                                <div class="col-6 form-group mb-5">
-                                    <label for="ine">Firma *</label>
-                                    <input id="firma" name="firma" type="file" class="form-control ine_input" required>
-                                </div>
-                                <div class="col-6 form-group mb-5">
-                                    <label for="ine">Logo</label>
-                                    <input id="logo" name="logo" type="file" class="form-control ine_input">
                                 </div>
 
                                 <div class="col-12 col-lg-4 form-group ">
