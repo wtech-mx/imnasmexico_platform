@@ -20,7 +20,7 @@
 
             if (!isset($tickets->User->Documentos->foto_tam_infantil)) {
                 $palabras = explode(' ', ucwords(strtolower($tickets->nombre)));
-
+                $nombreCompleto = ucwords(strtolower($tickets->nombre));
                 $foto = $tickets->foto_cuadrada;
                 $firma = $tickets->firma;
 
@@ -33,7 +33,7 @@
                 $foto = $tickets->User->Documentos->foto_tam_infantil;
                 $firma = $tickets->User->Documentos->firma;
                 $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
-
+                $nombreCompleto = ucwords(strtolower($tickets->User->name));
                 $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
                     ? 'https://plataforma.imnasmexico.com/documentos/'
                     : asset('documentos/');
@@ -161,6 +161,16 @@
             left:76%;
         }
 
+        .container_logo{
+            position: absolute;
+            top: 10%;
+            left:450px;
+        }
+
+        .img_logo{
+            width: 120px;
+        }
+
     </style>
 
 @endsection
@@ -174,16 +184,11 @@
             <img src="https://plataforma.imnasmexico.com/tipos_documentos/marco_diploma.png" class="img_marco">
         </div>
 
-        @php
-            $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
-            $parte1 = implode(' ', array_slice($palabras, 0, 2));
-            $parte2 = implode(' ', array_slice($palabras, 2));
-        @endphp
-
         <div class="oval-container">
             <div class="oval">
             </div>
         </div>
+
 
         <div class="container_curso">
             <h4 class="nombre">
@@ -196,7 +201,9 @@
         </div>
 
         <div class="container_nombre">
-            <h4 class="curso">{{ ucwords(strtolower($tickets->User->name)) }}</h4>
+            <h4 class="curso">
+                {{ $nombreCompleto }}
+            </h4>
         </div>
 
         <div class="container_fecha">
@@ -206,7 +213,6 @@
                 @else
                    Ciudad de México , México a  {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('D [de] MMMM [del] YYYY') }}
                 @endif
-
             </h4>
         </div>
 

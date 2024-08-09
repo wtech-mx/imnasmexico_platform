@@ -19,7 +19,8 @@
                     : asset('documentos/');
 
             if (!isset($tickets->User->Documentos->foto_tam_infantil)) {
-                $palabras = explode(' ', ucwords(strtolower($tickets->nombre)));
+                $palabras = explode(' ', ucwords(strtolower($tickets->nom_curso)));
+                $nombreCompleto = explode(' ', $tickets->nombre);
 
                 $foto = $tickets->foto_cuadrada;
                 $firma = $tickets->firma;
@@ -28,11 +29,11 @@
                 $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
                     ? 'https://plataforma.imnasmexico.com/documentos_registro/'
                     : asset('documentos_registro/');
-
             }else{
                 $foto = $tickets->User->Documentos->foto_tam_infantil;
                 $firma = $tickets->User->Documentos->firma;
-                $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
+                $palabras = explode(' ', ucwords(strtolower($tickets->Cursos->nombre)));
+                $nombreCompleto = explode(' ', $tickets->User->name);
 
                 $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
                     ? 'https://plataforma.imnasmexico.com/documentos/'
@@ -294,13 +295,11 @@
         </div>
 
         @php
-            // Separar el nombre completo en partes
-            $partes = explode(' ', $tickets->User->name);
-
+            // Separar el nombre completo en nombreCompleto
             // Asignar las partes correspondientes
-            $apellidoMaterno = array_pop($partes);
-            $apellidoPaterno = array_pop($partes);
-            $nombre = implode(' ', $partes);
+            $apellidoMaterno = array_pop($nombreCompleto);
+            $apellidoPaterno = array_pop($nombreCompleto);
+            $nombre = implode(' ', $nombreCompleto);
         @endphp
 
         <div class="container_nombre">
