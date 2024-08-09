@@ -12,8 +12,30 @@
         }
 
         @font-face {
-            font-family: 'Minion';
-            src: url('https://plataforma.imnasmexico.com/assets/admin/fonts/Minion.ttf');
+            font-family: 'Monotype Corsiva Normal';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ storage_path('fonts/oldenglishtextmt.ttf') }}') format('truetype');
+        }
+        @font-face {
+            font-family: 'Monotype Corsiva Bold';
+            font-style: normal;
+            font-weight: 900;
+            src: url('{{ storage_path('fonts/Brush.ttf') }}') format('truetype');
+        }
+
+        h1 {
+            font-family: 'Monotype Corsiva Bold';
+            font-weight: 900;
+            font-size: 45px;
+            color: #353535;
+        }
+
+        h2 {
+            font-family: 'Monotype Corsiva Normal';
+            font-weight: normal;
+            font-size: 45px;
+            color: #000;
         }
 
         .img_portada {
@@ -139,11 +161,6 @@
             color: #353535;
         }
 
-        .nombre{
-            font-family: 'Minion';
-            font-size: 45px;
-            color: #000;
-        }
 
         .folio2{
             position:relative;
@@ -271,7 +288,7 @@
         </div>
 
         <div class="container">
-            <h4 class="nombre">{{ $parte1 }}<br>{{ $parte2 }}</h4>
+            <h2 >{{ $parte1 }}<br>{{ $parte2 }}</h2>
         </div>
 
         <div class="oval-container">
@@ -301,7 +318,7 @@
                     }
                 }
             @endphp
-            <h4 class="curso">{!! $curso_formateado !!}</h4>
+            <h1>{!! $curso_formateado !!}</h1>
         </div>
 
         <div class="containerx">

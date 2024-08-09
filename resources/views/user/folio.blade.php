@@ -60,25 +60,22 @@
                                     <h2 class="text-center">{{$tickets->User->name}}</h2><br><br>
 
                                     <div class="row">
-                                        <div class="col-8 my-auto">
+                                        <div class="col-12 col-md-8 col-lg-8 my-auto">
                                             <p><b> Especializado en: </b>{{$tickets->Cursos->nombre}}</p>
                                             <p><b>Cursado del: </b>{{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('DD [de] MMMM [del] YYYY') }}</p>
                                             <p><b>Al: </b>{{ \Carbon\Carbon::parse($tickets->Cursos->fecha_final)->isoFormat('DD [de] MMMM [del] YYYY') }}</p>
                                             <p><b>Este folio: </b>{{$tickets->folio}} certifica que el alumno ha completado satisfactoriamente el curso/diplomado mencionado anteriormente.</p>
                                         </div>
 
-                                        <div class="col-4">
+                                        <div class="col-12 col-md-4 col-lg-4">
                                             <a href="{{ route('folio.index_cedula',$tickets->id) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DDD78D">Cedulda de Identidad de Papel</a>
                                             <a href="{{ route('folio.index_crednecial',$tickets->id) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
                                             <a href="{{ route('folio.index_diploma',$tickets->id) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma Imnnas</a>
                                             <a href="{{ route('folio.index_titulo',$tickets->id) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Titulo Honorifico</a>
-                                            <a href="{{ route('folio.index_tira',$tickets->id) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materias</a>
+                                            {{-- <a href="{{ route('folio.index_tira',$tickets->id) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materias</a> --}}
                                         </div>
 
                                     </div>
-
-
-
 
                                 </div>
                             </div>
@@ -96,19 +93,19 @@
                                 <div class="card card-body card_colapsable_comprar" style="border-radius: 16px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);">
 
                                     <div class="row">
-                                        <div class="col-8">
+                                        <div class="col-12 col-md-8 col-lg-8 my-auto">
                                             <h2 class="text-left">{{$tickets_generador->cliente}}</h2><br><br>
                                             <p><b>Especializado en: </b>{{$tickets_generador->curso}}</p>
                                             <p><b>Cursado el dia: </b>{{ \Carbon\Carbon::parse($tickets_generador->fecha_inicial)->isoFormat('DD [de] MMMM [del] YYYY') }}</p>
                                             <p><b>Este folio: </b>{{$tickets_generador->folio}} certifica que el alumno ha completado satisfactoriamente el curso/diplomado mencionado anteriormente.</p>
                                         </div>
 
-                                        <div class="col-4">
+                                        <div class="col-12 col-md-4 col-lg-4">
                                             <a href="{{ route('folio.index_cedula',$tickets_generador->id) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DDD78D">Cedulda de Identidad de Papel</a>
                                             <a href="" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
                                             <a href="" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma Imnnas</a>
                                             <a href="" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Titulo Honorifico</a>
-                                            <a href="" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materias</a>
+                                            {{-- <a href="" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materias</a> --}}
                                         </div>
 
                                     </div>

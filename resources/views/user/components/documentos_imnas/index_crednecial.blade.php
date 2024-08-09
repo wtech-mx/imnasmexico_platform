@@ -308,7 +308,13 @@
         </div>
 
         <div class="container_firma">
-            <img src="{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$tickets->User->Documentos->firma }}" class="img_firma">
+
+            @if($tickets->User->Documentos->firma == null)
+
+            @else
+                 <img src="{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$tickets->User->Documentos->firma }}" class="img_firma">
+            @endif
+
         </div>
 
     </div>

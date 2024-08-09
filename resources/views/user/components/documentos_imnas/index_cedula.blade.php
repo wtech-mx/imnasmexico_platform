@@ -159,10 +159,8 @@ $cantidad_palabras = count($palabras);
 
     .container_CursoReverso{
         position: absolute;
-        top:78%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        text-align: center;
+        top:76%;
+        left: 36%;
     }
 
 </style>
@@ -228,11 +226,13 @@ $cantidad_palabras = count($palabras);
     </div>
 
     <div class="container_firma">
-        <img src="{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$tickets->User->Documentos->firma }}" class="img_firma"
 
-        @if (!isset($tickets->User->Documentos->firma))
-            src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png"
-        @endif>
+        @if($tickets->User->Documentos->firma == null)
+
+        @else
+             <img src="{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$tickets->User->Documentos->firma }}" class="img_firma">
+        @endif
+
     </div>
 
     <div class="container_CursoReverso">

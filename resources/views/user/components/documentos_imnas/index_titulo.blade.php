@@ -4,6 +4,10 @@
     Cedula
 @endsection
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Grey+Qo&display=swap" rel="stylesheet">
+
 @php
     $domain = request()->getHost();
     $basePath =
@@ -29,6 +33,17 @@
 
 @section('css_custom')
     <style>
+
+        @font-face {
+            font-family: 'oldenglishtextmt';
+            src: url('{{ asset('assets/admin/fonts/oldenglishtextmt.ttf') }}') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Brush';
+            src: url('{{ asset('assets/admin/fonts/Brush.otf') }}') format('truetype');
+        }
+
         .img_portada {
             width: 480px;
             height: 668px;
@@ -49,8 +64,8 @@
             text-align: center;
         }
 
-        .nombre {
-            font-family: 'Minion';
+        h4.nombre {
+            font-family: 'oldenglishtextmt';
             font-size: 20px;
             color: #000;
         }
@@ -58,12 +73,12 @@
         .container_marco {
             position: absolute;
             top: 33%;
-            left: 11.5%;
+            left: 9%;
             z-index: 100;
         }
 
         .img_marco {
-            width: 115px;
+            width: 130px;
             height: 215px;
         }
 
@@ -99,7 +114,8 @@
             text-align: center;
         }
 
-        .curso {
+        h4.curso {
+            font-family: 'Brush';
             font-size: 15px;
             color: #000;
         }
