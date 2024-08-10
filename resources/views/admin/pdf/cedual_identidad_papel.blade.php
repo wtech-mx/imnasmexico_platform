@@ -170,6 +170,17 @@
             display: inline-block;
         }
 
+        .container_registro{
+            position: absolute;
+            top: 44%;
+            left: 3%;
+            z-index: 100000;
+        }
+
+        .img_registro{
+            width: 30%;
+        }
+
     </style>
 </head>
 
@@ -241,6 +252,10 @@
         <div class="oval-container">
             <div class="oval">
             </div>
+        </div>
+
+        <div class="container_registro">
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/logo_registronas.png" class="img_registro">
         </div>
 
         <div class="qr_container">
