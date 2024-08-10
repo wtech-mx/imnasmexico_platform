@@ -242,9 +242,8 @@
 
         .img_registro{
             width: 50%;
-            z-index: 10000;
+            z-index: 100000000000;
         }
-
 
     </style>
 </head>
