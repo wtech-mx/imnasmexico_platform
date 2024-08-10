@@ -17,6 +17,14 @@
             font-weight: normal;
             src: url('{{ storage_path('fonts/oldenglishtextmt.ttf') }}') format('truetype');
         }
+
+        @font-face {
+            font-family: 'Monotype';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ storage_path('fonts/oldenglishtextmt.ttf') }}') format('truetype');
+        }
+
         @font-face {
             font-family: 'Monotype Corsiva Bold';
             font-style: normal;
@@ -35,6 +43,13 @@
             font-family: 'Monotype Corsiva Normal';
             font-weight: normal;
             font-size: 45px;
+            color: #000;
+        }
+
+        h5 {
+            font-family: 'Monotype Corsiva Normal';
+            font-weight: normal;
+            font-size: 21px;
             color: #000;
         }
 
@@ -68,7 +83,7 @@
 
         .containerx{
             position: absolute;
-            top:67.2%;
+            top:67%;
             left: 82%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -198,7 +213,6 @@
             background-size: cover;
             background-position: center center;
         }
-
 
         .qr_container{
             width: 100%;
@@ -337,7 +351,7 @@
         </div>
 
         <div class="containerx">
-            <h4 class="fechax"><strong>{{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }}</strong> </h4>
+            <h5>{{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h5>
         </div>
 
         <div class="container_folio_bajo1">
