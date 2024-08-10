@@ -238,11 +238,12 @@
             position: absolute;
             top: 53%;
             left: 12%;
+            z-index: 100000;
+
         }
 
         .img_registro{
             width: 50%;
-            z-index: 100000000000;
         }
 
     </style>
