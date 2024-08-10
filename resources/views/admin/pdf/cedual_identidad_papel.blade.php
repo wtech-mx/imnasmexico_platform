@@ -172,7 +172,7 @@
 
         .container_registro{
             position: absolute;
-            top: 44%;
+            top: 48%;
             left: 3%;
             z-index: 100000;
         }
