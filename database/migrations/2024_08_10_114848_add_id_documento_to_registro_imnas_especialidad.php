@@ -13,9 +13,6 @@ return new class extends Migration
     {
         Schema::table('registro_imnas_especialidad', function (Blueprint $table) {
             $table->unsignedBigInteger('id_documento');
-            $table->foreign('id_documento')
-                ->references('id')->on('tipo_documentos')
-                ->inDelete('set null');
         });
     }
 

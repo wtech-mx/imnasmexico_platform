@@ -15,6 +15,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 use App\Models\RegistroImnasEspecialidad;
 use App\Models\OrdersTickets;
+use App\Models\RegistroImnasEscuela;
 use Hash;
 
 
@@ -707,10 +708,160 @@ class RegistroIMNASController extends Controller
     }
 
     public function contrato(Request $request,$code){
-
         $user = User::where('code', $code)->firstOrFail();
 
         return view('admin.registro_imnas.contrato', compact('user'));
+    }
 
+    public function contrato_update(Request $request, $id){
+        $user = User::firstOrFail();
+        $user->name = $request->get('name');
+        $user->direccion = $request->get('direccion');
+        $user->city = $request->get('city');
+        $user->state = $request->get('state');
+        $user->postcode = $request->get('postcode');
+        $user->country = $request->get('country');
+        $user->telefono = $request->get('telefono');
+        $user->email = $request->get('email');
+
+        $user->escuela = $request->get('escuela');
+
+        $user->facebook = $request->get('facebook_escuela');
+        $user->instagram = $request->get('instagram_escuela');
+        $user->pagina_web = $request->get('pagina_escuela');
+        $user->celular_casa = $request->get('telefono_escuela');
+        $user->update();
+
+        $dominio = $request->getHost();
+
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $user->telefono);
+        }else{
+            $ruta_manual = public_path() . '/utilidades_documentos';
+        }
+
+        $documentos_id = Documentos::where('id_usuario','=',$user->id)->first();
+
+        if($documentos_id == null){
+            $doc = new Documentos;
+            $doc->id_usuario = $user->id;
+            if ($request->hasFile("img_infantil")) {
+                $file = $request->file('img_infantil');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $doc->foto_tam_infantil = $fileName;
+            }
+
+            if ($request->hasFile("ine")) {
+                $file = $request->file('ine');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $doc->ine = $fileName;
+            }
+
+            if ($request->hasFile("ine_atras_registro")) {
+                $file = $request->file('ine_atras_registro');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $doc->ine_atras_registro = $fileName;
+            }
+
+            if ($request->hasFile("curp")) {
+                $file = $request->file('curp');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $doc->curp = $fileName;
+            }
+
+            if ($request->hasFile("acta_nacimiento_registro")) {
+                $file = $request->file('acta_nacimiento_registro');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $doc->acta_nacimiento_registro = $fileName;
+            }
+
+            if ($request->hasFile("domicilio")) {
+                $file = $request->file('domicilio');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $doc->domicilio = $fileName;
+            }
+            $doc->save();
+        }elseif($documentos_id->id_usuario == $user->id){
+            $documento = Documentos::find($documentos_id->id);
+            if ($request->hasFile("img_infantil")) {
+                $file = $request->file('img_infantil');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documento->foto_tam_infantil = $fileName;
+            }
+
+            if ($request->hasFile("ine")) {
+                $file = $request->file('ine');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documento->ine = $fileName;
+            }
+
+            if ($request->hasFile("ine_atras_registro")) {
+                $file = $request->file('ine_atras_registro');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documento->ine_atras_registro = $fileName;
+            }
+
+            if ($request->hasFile("curp")) {
+                $file = $request->file('curp');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documento->curp = $fileName;
+            }
+
+            if ($request->hasFile("acta_nacimiento_registro")) {
+                $file = $request->file('acta_nacimiento_registro');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documento->acta_nacimiento_registro = $fileName;
+            }
+
+            if ($request->hasFile("domicilio")) {
+                $file = $request->file('domicilio');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $documento->domicilio = $fileName;
+            }
+            $documento->update();
+        }
+
+        $registro = new RegistroImnasEscuela;
+        $registro->id_user = $user->id;
+        $registro->direccion_escuela = $request->get('direccion_escuela');
+        $registro->city_escuela = $request->get('city_escuela');
+        $registro->state_escuela = $request->get('state_escuela');
+        $registro->postcode_escuela = $request->get('postcode_escuela');
+        $registro->country_escuela = $request->get('country_escuela');
+        $registro->nombre_referencia = $request->get('nombre_referencia');
+        $registro->direccion_referencia = $request->get('direccion_referencia');
+        $registro->city_referencia = $request->get('city_referencia');
+        $registro->state_referencia = $request->get('state_referencia');
+        $registro->postcode_referencia = $request->get('postcode_referencia');
+        $registro->country_referencia = $request->get('country_referencia');
+        $registro->telefono_referencia = $request->get('telefono_referencia');
+        $registro->email_referencia = $request->get('email_referencia');
+        $registro->save();
+
+        return redirect()->back()->with('success', 'datos actualizado con exito.');
     }
 }
