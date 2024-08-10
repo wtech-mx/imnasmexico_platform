@@ -705,4 +705,12 @@ class RegistroIMNASController extends Controller
 
         return redirect()->back()->with('success', 'datos actualizado con exito.');
     }
+
+    public function contrato(Request $request,$code){
+
+        $user = User::where('code', $code)->firstOrFail();
+
+        return view('admin.registro_imnas.contrato', compact('user'));
+
+    }
 }

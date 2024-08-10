@@ -467,6 +467,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/registro/imnas/guia/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_guia'])->name('update_guia.imnas');
 
     Route::post('/registro/imnas/store', [App\Http\Controllers\RegistroIMNASController::class, 'store'])->name('registro_imnas.store');
+    Route::get('/contrato/imnas/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'contrato'])->name('contrato.edit');
     // =============== M O D U L O   R E G I S T R O  I M N A S  C L I E N T E S ===============================
     Route::get('/registro/imnas/clientes/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'index_clientes'])->name('clientes.imnas');
     Route::patch('/registro/imnas/subir/doc/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_clientes'])->name('update_clientes.imnas');
