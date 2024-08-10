@@ -175,13 +175,13 @@
 
         .container_registro{
             position: absolute;
-            top: {{ $isNoImage  ? '48%' : '56%' }};
-            left:  {{ $isNoImage  ? '3%' : '4%' }};
+            top: {{ $isNoImage  ? '56%' : '48%' }};
+            left:  {{ $isNoImage  ? '4%' : '3%' }};
             z-index: 100000;
         }
 
         .img_registro{
-            width: {{ $isNoImage  ? '30%' : '15%' }};
+            width: {{ $isNoImage  ? '15%' : '30%' }};
 
         }
 
