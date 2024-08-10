@@ -187,6 +187,16 @@
 
     }
 
+    .container_logo{
+        position: absolute;
+        top: 13%;
+        left:380px;
+    }
+
+    .img_logo{
+        width: 60px;
+    }
+
 </style>
 
 
@@ -195,7 +205,16 @@
 @section('content_documentos')
 
 <div class="card-front">
-    <img src="{{ $basePath .'/'. $tipo_documentos->img_portada }}" class="img_portada">
+
+    <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+
+
+    <div class="container_logo">
+        @if(!isset($tickets->User->logo))
+        @else
+            <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo">
+        @endif
+    </div>
 
 
     <div class="container_nombre">

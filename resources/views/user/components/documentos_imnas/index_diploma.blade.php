@@ -41,7 +41,6 @@
 
             $cantidad_palabras = count($palabras);
 
-
 @endphp
 
 @section('css_custom')
@@ -164,21 +163,33 @@
         .container_logo{
             position: absolute;
             top: 10%;
-            left:450px;
+            left:247px;
         }
 
         .img_logo{
             width: 120px;
         }
 
-    </style>
 
+
+    </style>
 @endsection
 
 @section('content_documentos')
-
     <div class="card-front">
-        <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+
+        @if(!isset($tickets->User->logo))
+            <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+        @else
+            <img src="{{ $basePath .'/'. 'portada_doploma_logo_empresa.png' }}" class="img_portada">
+        @endif
+
+        <div class="container_logo">
+            @if(!isset($tickets->User->logo))
+            @else
+                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo">
+            @endif
+        </div>
 
         <div class="container_marco">
             <img src="https://plataforma.imnasmexico.com/tipos_documentos/marco_diploma.png" class="img_marco">

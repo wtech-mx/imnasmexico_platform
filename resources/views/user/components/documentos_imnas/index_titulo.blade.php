@@ -236,12 +236,34 @@
             left:37%;
         }
 
+        .container_logo{
+            position: absolute;
+            top: 95%;
+            left:93px;
+        }
+
+        .img_logo{
+            width: 36px;
+        }
+
     </style>
 @endsection
 
 @section('content_documentos')
     <div class="card-front">
-        <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+
+        @if(!isset($tickets->User->logo))
+            <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+        @else
+            <img src="{{ $basePath .'/'. 'titulo_logo_empresa.png' }}" class="img_portada">
+        @endif
+
+        <div class="container_logo">
+            @if(!isset($tickets->User->logo))
+            @else
+                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo">
+            @endif
+        </div>
 
         <div class="container_marco">
             <img src="https://plataforma.imnasmexico.com/tipos_documentos/marco_pro.png" class="img_marco">

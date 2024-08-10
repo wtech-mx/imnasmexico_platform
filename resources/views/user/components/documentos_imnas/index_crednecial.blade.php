@@ -238,13 +238,35 @@
             text-align: left;
         }
 
+        .container_logo{
+            position: absolute;
+            top: 8%;
+            left:85px;
+        }
+
+        .img_logo{
+            width: 40px;
+        }
+
     </style>
 @endsection
 
 @section('content_documentos')
 
     <div class="card-front">
-        <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+
+        @if(!isset($tickets->User->logo))
+            <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+        @else
+            <img src="{{ $basePath .'/'. 'portada_credneicla_logo_empresa.png' }}" class="img_portada">
+        @endif
+
+        <div class="container_logo">
+            @if(!isset($tickets->User->logo))
+            @else
+                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo">
+            @endif
+        </div>
 
         <div class="oval-container">
             <div class="oval">
