@@ -61,8 +61,11 @@
   </style>
 <body>
   <header>
-    <h1>Nota de Remision #@if ($nota->folio == null) {{ $nota->id }} @else {{ $nota->folio }} @endif</h1>
-    <h2>Naturales AIN SPA</h2>
+    <h1>Nota de Remision #@if ($nota->folio == null) {{ $nota->id }} @else {{ $nota->folio }} @endif
+    </h1>
+    <h2>Naturales AIN SPA
+    </h2>
+    <p><img src="https://lh3.googleusercontent.com/d/1KpzCr4lID6U5foSXsNtQ4pXklupFAGz3=w800?authuser=0" alt="" style="width:100px;"></p>
   </header>
 
   <footer>
@@ -82,7 +85,7 @@
     </table>
   </footer>
 
-  <div id="content">
+  <div id="content" style="margin-top: 3rem">
     <table class="table text-center table-bordered border-primary">
         <thead >
             <tr>
