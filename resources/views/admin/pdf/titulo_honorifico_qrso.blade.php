@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Titulo Honorifico</title>
+    @php
+        $isNoImage = $fileName === 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
+    @endphp
     <style>
         * {
             padding: 0px;
@@ -189,16 +192,6 @@
             color: red;
         }
 
-        .oval-container {
-            width: 210px;
-            height: 345px;
-            position: absolute;
-            overflow: hidden;
-            top: 40%;
-            left: 15%;
-            background: transparent;
-        }
-
         .oval {
             width: 100%;
             height: 100%;
@@ -213,6 +206,18 @@
             background-size: cover;
             background-position: center center;
         }
+
+        .oval-container {
+            width: 210px;
+            height: 345px;
+            position: absolute;
+            overflow: hidden;
+            left: 15%;
+            background: transparent;
+            top: 40%;
+            /* Ajuste condicional de top */
+        }
+
 
         .qr_container{
             width: 100%;
@@ -253,6 +258,7 @@
             top: 53%;
             left: 12%;
             z-index: 100000;
+            top: {{ $isNoImage  ? '53%' : '60%' }};
 
         }
 

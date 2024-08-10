@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Cedula de identidad</title>
+    @php
+        $isNoImage = $fileName === 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
+    @endphp
     <style>
         * {
             padding: 0px;
@@ -172,13 +175,14 @@
 
         .container_registro{
             position: absolute;
-            top: 48%;
-            left: 3%;
+            top: {{ $isNoImage  ? '48%' : '56%' }};
+            left:  {{ $isNoImage  ? '3%' : '4%' }};
             z-index: 100000;
         }
 
         .img_registro{
-            width: 30%;
+            width: {{ $isNoImage  ? '30%' : '15%' }};
+
         }
 
     </style>
