@@ -234,6 +234,18 @@
             width: 70px;
         }
 
+        .container_registro{
+            position: absolute;
+            top: 53%;
+            left: 12%;
+        }
+
+        .img_registro{
+            width: 50%;
+            z-index: 10000;
+        }
+
+
     </style>
 </head>
 
@@ -267,6 +279,9 @@
         <img src="{{ $basePath . 'titulo_logo_empresa.png' }}" class="img_portada">
         @endif
 
+        <div class="container_registro">
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/logo_registronas.png" class="img_registro">
+        </div>
 
         <div class="container_marco">
             {{-- <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
