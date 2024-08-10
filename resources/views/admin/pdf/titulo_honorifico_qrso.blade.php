@@ -258,7 +258,7 @@
             top: 53%;
             left: 12%;
             z-index: 100000;
-            top: {{ $isNoImage  ? '53%' : '60%' }};
+            top: {{ $isNoImage  ? '60%' : '53%' }};
 
         }
 
