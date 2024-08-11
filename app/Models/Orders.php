@@ -21,6 +21,9 @@ class Orders extends Model
         'fecha',
         'asistencia',
         'id_externo',
+        'foto',
+        'foto2',
+
     ];
 
     public function OrdersTickets()

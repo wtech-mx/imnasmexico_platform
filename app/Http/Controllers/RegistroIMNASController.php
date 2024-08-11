@@ -507,8 +507,10 @@ class RegistroIMNASController extends Controller
             if($dominio == 'plataforma.imnasmexico.com'){
                 $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $request->telefono);
             }else{
-                $ruta_manual = public_path() . '/utilidades_documentos';
+                $ruta_manual = public_path() . '/documentos'.'/'. $request->telefono;
             }
+
+
             if (User::where('telefono', $request->telefono)->exists()) {
                 $user = User::where('telefono', $request->telefono)->first();
                 $user->name = $request->get('name') . " " . $request->get('apellido');
@@ -541,8 +543,10 @@ class RegistroIMNASController extends Controller
             if($dominio == 'plataforma.imnasmexico.com'){
                 $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $request->telefono);
             }else{
-                $ruta_manual = public_path() . '/utilidades_documentos';
+                $ruta_manual = public_path() . '/documentos'.'/'. $request->telefono;
             }
+
+
             $payer = new User();
             $payer->name = $request->get('name') . " " . $request->get('apellido');
             $payer->email = $request->get('email');
@@ -566,8 +570,9 @@ class RegistroIMNASController extends Controller
         if($dominio == 'plataforma.imnasmexico.com'){
             $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $payer->telefono);
         }else{
-            $ruta_manual = public_path() . '/utilidades_documentos';
+            $ruta_manual = public_path() . '/documentos'.'/'. $request->telefono;
         }
+
 
         $documentos_id = Documentos::where('id_usuario','=',$payer->id)->first();
 
@@ -763,7 +768,7 @@ class RegistroIMNASController extends Controller
         if($dominio == 'plataforma.imnasmexico.com'){
             $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $user->telefono);
         }else{
-            $ruta_manual = public_path() . '/utilidades_documentos';
+            $ruta_manual = public_path() . '/documentos';
         }
 
         $documentos_id = Documentos::where('id_usuario','=',$user->id)->first();
@@ -818,8 +823,11 @@ class RegistroIMNASController extends Controller
                 $file->move($path, $fileName);
                 $doc->domicilio = $fileName;
             }
+
             $doc->save();
+
         }elseif($documentos_id->id_usuario == $user->id){
+
             $documento = Documentos::find($documentos_id->id);
             if ($request->hasFile("img_infantil")) {
                 $file = $request->file('img_infantil');
