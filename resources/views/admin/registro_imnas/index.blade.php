@@ -49,8 +49,12 @@
                                                 </td>
                                                 <td>-</td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-info" href="{{ route('show_cliente.imnas', $registro_imnas->User->code) }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
-                                                    <a class="btn btn-sm btn-info" href="{{ route('contrato.edit', $registro_imnas->User->code) }}" target="_blank"><i class="fas fa-external-link-alt"></i></a>
+                                                    <a class="btn btn-sm btn-info" href="{{ route('show_cliente.imnas', $registro_imnas->User->code) }}" target="_blank">
+                                                        Formato
+                                                    </a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('contrato_afiliacion.edit', $registro_imnas->User->code) }}" target="_blank">
+                                                        Contraro
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @endforeach

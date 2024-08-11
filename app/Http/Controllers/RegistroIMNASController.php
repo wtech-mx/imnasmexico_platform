@@ -713,6 +713,12 @@ class RegistroIMNASController extends Controller
         return view('admin.registro_imnas.contrato', compact('user'));
     }
 
+    public function contrato_afiliacion(Request $request,$code){
+        $user = User::where('code', $code)->firstOrFail();
+
+        return view('admin.registro_imnas.contrato_afiliacion', compact('user'));
+    }
+
     public function contrato_update(Request $request, $id){
         $user = User::firstOrFail();
         $user->name = $request->get('name');

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Formato de Registro para Afiliación a Registro IMNAS</title>
+    <title>Contrato de Afiliación a Registro IMNAS</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
@@ -16,7 +16,7 @@
     <style>
 
         body{
-            background-color: #5a0421 ;
+            background-color: #836262 ;
             padding: 30px;
         }
 
@@ -72,7 +72,7 @@
     <section class="row">
 
         <div class="col-12 mb-3">
-            <h3 class="text-white"> <strong>Formato de Registro para Afiliación a Registro IMNAS</strong> <br>
+            <h3 class="text-white"> <strong>Formato de Registro para Afiliación a <br>Registro IMNAS</strong> <br><hr>
                 Por favor, complete la siguiente información para completar su proceso de afiliación.
             </h3>
         </div>
@@ -85,10 +85,12 @@
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <div class="row">
-                                <h4 class="text-left mt-3 mb-3">Datos Personales del Afiliado</h4>
-                                <div class="col-12 form-group">
-                                    <label for="name">Nombre *</label>
-                                    <div class="input-group mb-3">
+
+                                <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Datos Personales del Afiliado</h4>
+
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Nombre Completo: *</label>
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
                                         </span>
@@ -96,71 +98,71 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 form-group">
-                                    <label for="name">Dirección *</label>
-                                    <div class="input-group mb-3">
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Dirección:  *</label>
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="direccion" name="direccion" type="text" class="form-control" value="{{$user->direccion}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
-                                    <label for="name">Ciudad *</label>
-                                    <div class="input-group mb-3">
+                                <div class="col-6 form-group mt-4">
+                                    <label for="name">Ciudad: *</label>
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/rascacielos.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="city" name="city" type="text" class="form-control" value="{{$user->city}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
-                                    <label for="name">Estado *</label>
-                                    <div class="input-group mb-3">
+                                <div class="col-6 form-group mt-4">
+                                    <label for="name">Estado: *</label>
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/mapa.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="state" name="state" type="text" class="form-control" value="{{$user->state}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Codigo Postal *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/codigo-postal.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="postcode" name="postcode" type="text" class="form-control" value="{{$user->postcode}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Pais *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/naciones-unidas.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="country" name="country" type="text" class="form-control" value="{{$user->country}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Telefono *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/ring-phone.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="telefono" name="telefono" type="text" class="form-control" value="{{$user->telefono}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-12 form-group">
+                                <div class="col-6 form-group mt-4 ">
                                     <label for="name">Correo Electronico *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="email" name="email" type="email" class="form-control" value="{{$user->email}}" required>
                                     </div>
@@ -168,123 +170,123 @@
                             </div>
 
                             <div class="row">
-                                <h4 class="text-left mt-3 mb-3">Datos de Academia o escuela del Afiliado</h4>
-                                <div class="col-12 form-group">
+                                <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Datos de Academia o escuela del Afiliado</h4>
+                                <div class="col-12 form-group mt-4 ">
                                     <label for="name">Nombre de escuela o academa(marca, o propio) *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea.webp') }}" alt="" width="35px">
                                         </span>
                                         <input id="escuela" name="escuela" type="text" class="form-control" value="{{$user->escuela}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-12 form-group">
+                                <div class="col-12 form-group mt-4 ">
                                     <label for="name">Dirección *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="direccion_escuela" name="direccion_escuela" type="text" class="form-control" value="{{$user->direccion}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Ciudad *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/rascacielos.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="city_escuela" name="city_escuela" type="text" class="form-control" value="{{$user->city}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Estado *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/mapa.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="state_escuela" name="state_escuela" type="text" class="form-control" value="{{$user->state}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Codigo Postal *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/codigo-postal.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="postcode_escuela" name="postcode_escuela" type="text" class="form-control" value="{{$user->postcode}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Pais *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/naciones-unidas.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="country_escuela" name="country_escuela" type="text" class="form-control" value="{{$user->country}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Telefono *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/ring-phone.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="telefono_escuela" name="telefono_escuela" type="text" class="form-control" value="{{$user->telefono}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-12 form-group">
+                                <div class="col-6 form-group mt-4 ">
                                     <label for="name">Correo Electronico *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="email_escuela" name="email_escuela" type="email" class="form-control" value="{{$user->email}}" required>
                                     </div>
                                 </div>
 
-                                <h4 class="text-left mt-3 mb-3">Datos de Academia o escuela del Afiliado</h4>
-                                <div class="col-12 form-group">
+                                <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Datos de Academia o escuela del Afiliado</h4>
+                                <div class="col-12 col-md-6 col-md-4 form-group mt-4 ">
                                     <label for="name">Instagram</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/instagram.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="instagram_escuela" name="instagram_escuela" type="email" class="form-control" value="{{$user->email}}">
                                     </div>
                                 </div>
 
-                                <div class="col-12 form-group">
+                                <div class="col-12 col-md-6 col-md-4 form-group mt-4 ">
                                     <label for="name">Facebook</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/facebook.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="facebook_escuela" name="facebook_escuela" type="email" class="form-control" value="{{$user->email}}">
                                     </div>
                                 </div>
 
-                                <div class="col-12 form-group">
+                                <div class="col-12 col-md-6 col-md-4 form-group mt-4 ">
                                     <label for="name">Pagina web</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/web-link.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="pagina_escuela" name="pagina_escuela" type="email" class="form-control" value="{{$user->email}}">
                                     </div>
                                 </div>
 
-                                <div class="col-12 form-group">
+                                <div class="col-12 col-md-6 col-md-4 form-group mt-4 ">
                                     <label for="name">Telefono o Whatsapp</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/whatsapp.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="telefono_escuela" name="telefono_escuela" type="email" class="form-control" value="{{$user->email}}">
                                     </div>
@@ -292,10 +294,10 @@
                             </div>
 
                             <div class="row">
-                                <h4 class="text-left mt-3 mb-3">Datos de Familiar, Conocido o Referencia</h4>
-                                <div class="col-12 form-group">
+                                <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Datos de Familiar, Conocido o Referencia</h4>
+                                <div class="col-12 form-group mt-4 ">
                                     <label for="name">Nombre Completo *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
                                         </span>
@@ -303,71 +305,71 @@
                                     </div>
                                 </div>
 
-                                <div class="col-12 form-group">
+                                <div class="col-12 form-group mt-4 ">
                                     <label for="name">Dirección *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="direccion_referencia" name="direccion_referencia" type="text" class="form-control" value="{{$user->direccion}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Ciudad *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/rascacielos.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="city_referencia" name="city_referencia" type="text" class="form-control" value="{{$user->city}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Estado *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/mapa.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="state_referencia" name="state_referencia" type="text" class="form-control" value="{{$user->state}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Codigo Postal *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/codigo-postal.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="postcode_referencia" name="postcode_referencia" type="text" class="form-control" value="{{$user->postcode}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Pais *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/naciones-unidas.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="country_referencia" name="country_referencia" type="text" class="form-control" value="{{$user->country}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Telefono *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/ring-phone.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="telefono_referencia" name="telefono_referencia" type="text" class="form-control" value="{{$user->telefono}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-12 form-group">
+                                <div class="col-6 form-group mt-4 ">
                                     <label for="name">Correo Electronico *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="email_referencia" name="email_referencia" type="email" class="form-control" value="{{$user->email}}" required>
                                     </div>
@@ -375,72 +377,72 @@
                             </div>
 
                             <div class="row">
-                                <h4 class="text-left mt-3 mb-3">Documentación Requerida del afiliado</h4>
-                                <div class="col-6 form-group">
+                                <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Documentación Requerida del afiliado</h4>
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">INE Frente *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/ine.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="ine" name="ine" type="file" class="form-control" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">INE Atras *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/ine.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">CURP *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/carta.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="curp" name="curp" type="file" class="form-control" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Comprobante domicilio *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/contrato_g.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="domicilio" name="domicilio" type="file" class="form-control" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Acta Nacimiento *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/contrato.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="acta_nacimiento_registro" name="acta_nacimiento_registro" type="file" class="form-control" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Foto infantil del afiliado *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
                                         </span>
                                         <input id="img_infantil" name="img_infantil" type="file" class="form-control" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group">
+                                <div class="col-6 form-group mt-4">
                                     <label for="name">Logo de escuela o de marca personal *</label>
-                                    <div class="input-group mb-3">
+                                    <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
+                                            <img src="https://plataforma.imnasmexico.com/assets/user/logotipos/imnas.webp" alt="" width="35px">
                                         </span>
                                         <input id="logo" name="logo" type="file" class="form-control" required>
                                     </div>
