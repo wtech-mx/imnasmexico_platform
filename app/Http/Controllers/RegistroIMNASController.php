@@ -568,6 +568,7 @@ class RegistroIMNASController extends Controller
         }else{
             $ruta_manual = public_path() . '/utilidades_documentos';
         }
+
         $documentos_id = Documentos::where('id_usuario','=',$payer->id)->first();
 
         if($documentos_id == null){
@@ -621,6 +622,7 @@ class RegistroIMNASController extends Controller
                 $doc->domicilio = $fileName;
             }
             $doc->save();
+
         }elseif($documentos_id->id_usuario == $payer->id){
             $documento = Documentos::find($documentos_id->id);
             if ($request->hasFile("img_infantil")) {
@@ -676,8 +678,26 @@ class RegistroIMNASController extends Controller
         $order = new Orders;
         $order->id_usuario = $payer->id;
         $order->pago = $request->get('pago');
+
+        if ($request->hasFile("foto")) {
+            $file = $request->file('foto');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $order->foto = $request->get('foto');
+        }
+
         $order->forma_pago = $request->get('forma_pago');
         $order->pago2 = $request->get('pago2');
+
+        if ($request->hasFile("foto2")) {
+            $file = $request->file('foto2');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $order->foto2 = $request->get('foto2');
+        }
+
         $order->forma_pago2 = $request->get('forma_pago2');
         $order->fecha = $fechaActual;
         $order->estatus = 1;

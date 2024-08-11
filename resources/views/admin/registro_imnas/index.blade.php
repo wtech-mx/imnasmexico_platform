@@ -39,24 +39,31 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($registros_imnas as $registro_imnas)
+                                        @foreach ($registros_imnas as $item)
                                             <tr>
-                                                <td>{{ $registro_imnas->id }}</td>
+                                                <td>{{ $item->id }}</td>
                                                 <td>
-                                                    <a href=" {{ route('perfil.show', $registro_imnas->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">{{ $registro_imnas->User->name }}</a><br>
-                                                    <p>{{ $registro_imnas->User->telefono }}</p>
-                                                    <p>{{ $registro_imnas->User->email }}</p>
+                                                    <a href=" {{ route('perfil.show', $item->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">
+                                                        {{ $item->User->name }}
+                                                    </a><br>
+                                                    <p>{{ $item->User->telefono }}</p>
+                                                    <p>{{ $item->User->email }}</p>
                                                 </td>
                                                 <td>-</td>
                                                 <td>
-                                                    <a class="btn btn-sm btn-info" href="{{ route('show_cliente.imnas', $registro_imnas->User->code) }}" target="_blank">
+                                                    <a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#registro_imnas_edit_{{ $item->id }}">
+                                                        Editar
+                                                    </a>
+                                                    <a class="btn btn-sm btn-info" href="{{ route('show_cliente.imnas', $item->User->code) }}" target="_blank">
                                                         Formato
                                                     </a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('contrato_afiliacion.edit', $registro_imnas->User->code) }}" target="_blank">
+                                                    <a class="btn btn-sm btn-success" href="{{ route('contrato_afiliacion.edit', $item->User->code) }}" target="_blank">
                                                         Contraro
                                                     </a>
                                                 </td>
                                             </tr>
+
+                                            @include('admin.registro_imnas.modal_edit')
                                         @endforeach
                                     </tbody>
                                 </table>

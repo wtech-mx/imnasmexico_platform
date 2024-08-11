@@ -378,7 +378,7 @@
 
                             <div class="row">
                                 <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Documentación Requerida del afiliado</h4>
-                                <div class="col-6 form-group mt-4">
+                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
                                     <label for="name">INE Frente *</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
@@ -388,7 +388,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group mt-4">
+                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
                                     <label for="name">INE Atras *</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
@@ -398,7 +398,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group mt-4">
+                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
                                     <label for="name">CURP *</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
@@ -408,7 +408,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group mt-4">
+                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
                                     <label for="name">Comprobante domicilio *</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
@@ -418,7 +418,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group mt-4">
+                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
                                     <label for="name">Acta Nacimiento *</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
@@ -428,7 +428,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group mt-4">
+                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
                                     <label for="name">Foto infantil del afiliado *</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
@@ -438,8 +438,8 @@
                                     </div>
                                 </div>
 
-                                <div class="col-6 form-group mt-4">
-                                    <label for="name">Logo de escuela o de marca personal *</label>
+                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
+                                    <label for="name">Logo de escuela / marca personal *</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="https://plataforma.imnasmexico.com/assets/user/logotipos/imnas.webp" alt="" width="35px">
@@ -448,6 +448,47 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">
+                                    Documentación DIGITAL Requerida por alumno para emisión de registro <br>
+                                    (Informativo) (Todo se sube por plataforma al momento de realizar el <br>
+                                    pago)
+
+                                </h4>
+
+                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
+                                    <label for="name">INE*</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/ine.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="ine_digital" name="ine_digital" type="file" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
+                                    <label for="name">CURP *</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/carta.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="curp_digital" name="curp_digital" type="file" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
+                                    <label for="name">Foto infantil blanco y negro digital	 *</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="img_infantil_digital" name="img_infantil_digital" type="file" class="form-control" required>
+                                    </div>
+                                </div>
+
+                            </div>
+
                         </form>
                     </div>
                 </div>
