@@ -19,6 +19,7 @@ use App\Models\CursosTickets;
 use App\Models\DocumenotsGenerador;
 use DB;
 use App\Models\Orders;
+use App\Models\RegistroImnasTemario;
 
 class DocumentosController extends Controller
 {
@@ -138,7 +139,6 @@ class DocumentosController extends Controller
         return response()->json($data);
     }
 
-
     public function generar(Request $request){
 
         $dominio = $request->getHost();
@@ -148,6 +148,7 @@ class DocumentosController extends Controller
         }else{
             $ruta_manual = public_path() . '/utilidades_documentos';
         }
+
         if ($request->get('id_client') != null) {
             // Obtener datos del request
             $foto_tam_titulo = $request->get('foto_tam_titulo');
@@ -201,12 +202,9 @@ class DocumentosController extends Controller
         $curp = $request->get('curp');
         $nacionalidad = $request->get('nacionalidad');
 
-
         $nombres = $request->get('nombres');
         $apellido_apeterno = $request->get('apellido_apeterno');
         $apellido_materno = $request->get('apellido_materno');
-
-
 
         if ($request->hasFile("img_infantil")) {
             $file = $request->file('img_infantil');

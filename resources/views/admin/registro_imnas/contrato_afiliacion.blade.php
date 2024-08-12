@@ -206,7 +206,7 @@
                                     Cam by Imnas, S.A. de C.V.
                                 </h6>
                                 <button id="clear2" class="btn btn-sm btn-danger ">Repetir</button>
-                        </div>
+                            </div>
 
                             <div class="col-6">
                                 <button class="btn btn-sm btn-success w-100 mt-5">Guardar Firmas</button>

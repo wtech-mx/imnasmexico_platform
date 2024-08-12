@@ -33,12 +33,12 @@
 
         .nombre_reverso{
             position: absolute;
-            top: 55%;
+            top: 55.5%;
             left: 60%;
             transform: translate(-50%, -50%);
             text-align: center;
             color: red;
-            font-size: 20px;
+            font-size: 15px;
         }
 
         .container {
@@ -232,7 +232,7 @@
         </div>
 
         <div class="container">
-            <h4 class="nombre">{{ $nombre }}<</h4>
+            <h4 class="nombre">{{ $nombre }}</h4>
         </div>
 
         <div class="containerz">
@@ -260,9 +260,9 @@
 
         <div class="container_texto_tira">
             <ul>
-                <li>Aqui van las materias subtemas y materias</li>
-                <li>Prueba de tira de materias</li>
-                <li>Laravel 0 a expero</li>
+                @foreach ($subtemas as $subtema)
+                    <li>{{$subtema->subtema}}</li>
+                @endforeach
             </ul>
         </div>
 

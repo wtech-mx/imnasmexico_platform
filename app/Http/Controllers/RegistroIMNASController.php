@@ -347,12 +347,18 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $registro_imnas_esp = RegistroImnasEspecialidad::where('id_cliente','=',$request->get('id_afiliado'))->get();
+            $idMateria = RegistroImnasEspecialidad::where('id_cliente', $request->get('id_usuario'))->first();
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_afiliados',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
+            $subtemas = RegistroImnasTemario::
+            where('id_materia', $idMateria->id)
+            ->orderBy('id')
+            ->get();
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_afiliados',compact('subtemas','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
-            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+            return $pdf->stream();
+            // return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira_materias_alasiados'){
             $id_ticket = $request->get('id_registro');
@@ -774,7 +780,9 @@ class RegistroIMNASController extends Controller
         ->orderBy('id')
         ->get();
 
-        return view('admin.registro_imnas.contrato', compact('user', 'subtemas', 'idMateria'));
+        $documentos = Documentos::where('id_usuario', $user->id)->first();
+
+        return view('admin.registro_imnas.contrato', compact('user', 'subtemas', 'idMateria', 'documentos'));
     }
 
     public function contrato_afiliacion(Request $request,$code){
@@ -808,7 +816,7 @@ class RegistroIMNASController extends Controller
         if($dominio == 'plataforma.imnasmexico.com'){
             $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $user->telefono);
         }else{
-            $ruta_manual = public_path() . '/documentos';
+            $ruta_manual = public_path() . '/documentos/' . $user->telefono;
         }
 
         $documentos_id = Documentos::where('id_usuario','=',$user->id)->first();
@@ -864,11 +872,34 @@ class RegistroIMNASController extends Controller
                 $doc->domicilio = $fileName;
             }
 
+            if($request->signed != NULL){
+                $folderPath = $ruta_manual; // create signatures folder in public directory
+                $image_parts = explode(";base64,", $request->signed);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+                $signature = uniqid() . '.'.$image_type;
+                $file = $folderPath . $signature;
+                file_put_contents($file, $image_base64);
+                $doc->firma = $signature;
+            }
             $doc->save();
 
         }elseif($documentos_id->id_usuario == $user->id){
 
             $documento = Documentos::find($documentos_id->id);
+            if($request->signed != NULL){
+                $folderPath = $ruta_manual; // create signatures folder in public directory
+                $image_parts = explode(";base64,", $request->signed);
+                $image_type_aux = explode("image/", $image_parts[0]);
+                $image_type = $image_type_aux[1];
+                $image_base64 = base64_decode($image_parts[1]);
+                $signature = uniqid() . '.'.$image_type;
+                $file = $folderPath . $signature;
+                file_put_contents($file, $image_base64);
+                $documento->firma = $signature;
+            }
+
             if ($request->hasFile("img_infantil")) {
                 $file = $request->file('img_infantil');
                 $path = $ruta_manual;
@@ -976,10 +1007,6 @@ class RegistroIMNASController extends Controller
             }
         }
 
-        $relaciones = new RegistroImnasRelacionMat;
-        $relaciones->id_materia = $especialidad->id;
-        $relaciones->id_user = $user->id;
-        $relaciones->save();
         return redirect()->back()->with('success', 'datos actualizado con exito.');
     }
 }

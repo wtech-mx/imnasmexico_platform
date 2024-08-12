@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/jquery.signature.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://paradisus.mx/assets/css/jquery.signature.css">
 
 
   </head>
@@ -384,7 +384,11 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/ine.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="ine" name="ine" type="file" class="form-control" required>
+                                        @if($documentos->ine == NULL)
+                                            <input id="ine" name="ine" type="file" class="form-control" required>
+                                        @else
+                                            <input id="ine" name="ine" type="file" class="form-control">
+                                        @endif
                                     </div>
                                 </div>
 
@@ -394,7 +398,11 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/ine.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control" required>
+                                        @if($documentos->ine_atras_registro == NULL)
+                                            <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control" required>
+                                        @else
+                                            <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control">
+                                        @endif
                                     </div>
                                 </div>
 
@@ -404,7 +412,11 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/carta.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="curp" name="curp" type="file" class="form-control" required>
+                                        @if($documentos->curp == NULL)
+                                            <input id="curp" name="curp" type="file" class="form-control" required>
+                                        @else
+                                            <input id="curp" name="curp" type="file" class="form-control">
+                                        @endif
                                     </div>
                                 </div>
 
@@ -414,7 +426,11 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/contrato_g.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="domicilio" name="domicilio" type="file" class="form-control" required>
+                                        @if($documentos->curp == NULL)
+                                            <input id="domicilio" name="domicilio" type="file" class="form-control" required>
+                                        @else
+                                            <input id="domicilio" name="domicilio" type="file" class="form-control">
+                                        @endif
                                     </div>
                                 </div>
 
@@ -424,7 +440,11 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/contrato.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="acta_nacimiento_registro" name="acta_nacimiento_registro" type="file" class="form-control" required>
+                                        @if($documentos->curp == NULL)
+                                            <input id="acta_nacimiento_registro" name="acta_nacimiento_registro" type="file" class="form-control" required>
+                                        @else
+                                            <input id="acta_nacimiento_registro" name="acta_nacimiento_registro" type="file" class="form-control">
+                                        @endif
                                     </div>
                                 </div>
 
@@ -434,7 +454,11 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="img_infantil" name="img_infantil" type="file" class="form-control" required>
+                                        @if($documentos->curp == NULL)
+                                            <input id="img_infantil" name="img_infantil" type="file" class="form-control" required>
+                                        @else
+                                            <input id="img_infantil" name="img_infantil" type="file" class="form-control">
+                                        @endif
                                     </div>
                                 </div>
 
@@ -444,7 +468,11 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="https://plataforma.imnasmexico.com/assets/user/logotipos/imnas.webp" alt="" width="35px">
                                         </span>
-                                        <input id="logo" name="logo" type="file" class="form-control" required>
+                                        @if($documentos->curp == NULL)
+                                            <input id="logo" name="logo" type="file" class="form-control" required>
+                                        @else
+                                            <input id="logo" name="logo" type="file" class="form-control">
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -483,6 +511,21 @@
 
                                 @endfor
                             </div>
+
+                            @if($documentos->firma == NULL)
+                                <div class="col-6">
+                                    <div id="sig"></div>
+                                    <textarea id="signed" name="signed" style="display: none"></textarea>
+                                    <h6 class="text-left mt-3 mb-3">Nombre: <br>
+                                        {{ $user->name}}
+                                    </h6>
+                                    <button id="clear" class="btn btn-sm btn-danger ">Repetir</button>
+                                </div>
+                            @else
+                                <img src="{{asset('documentos/'. $user->telefono . '/' .$documentos->firma) }}" alt="" width="35px">
+                            @endif
+
+
                             <div class="row mt-4">
                                 <div class="col-12">
                                     <button class="btn btn-success mt-3" type="submit"  style=""><img src="{{ asset('assets/user/icons/salvar.png') }}" alt="" width="35px">  Guardar</button>
@@ -504,7 +547,7 @@
     <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
-    <script type="text/javascript" src="{{ asset('assets/js/jquery.signature.js') }}"></script>
+    <script type="text/javascript" src="https://paradisus.mx/assets/js/jquery.signature.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'></script>
 
 
