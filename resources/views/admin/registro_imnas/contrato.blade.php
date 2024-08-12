@@ -187,7 +187,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="direccion_escuela" name="direccion_escuela" type="text" class="form-control" value="{{$escuela->direccion_escuela}}" required>
+                                        <input id="direccion_escuela" name="direccion_escuela" type="text" class="form-control" value="{{optional($escuela)->direccion_escuela}}" required>
                                     </div>
                                 </div>
 
@@ -197,7 +197,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/rascacielos.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="city_escuela" name="city_escuela" type="text" class="form-control" value="{{$escuela->city_escuela}}" required>
+                                        <input id="city_escuela" name="city_escuela" type="text" class="form-control" value="{{optional($escuela)->city_escuela}}" required>
                                     </div>
                                 </div>
 
@@ -207,7 +207,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/mapa.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="state_escuela" name="state_escuela" type="text" class="form-control" value="{{$escuela->state_escuela}}" required>
+                                        <input id="state_escuela" name="state_escuela" type="text" class="form-control" value="{{optional($escuela)->state_escuela}}" required>
                                     </div>
                                 </div>
 
@@ -217,7 +217,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/codigo-postal.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="postcode_escuela" name="postcode_escuela" type="text" class="form-control" value="{{$escuela->postcode_escuela}}" required>
+                                        <input id="postcode_escuela" name="postcode_escuela" type="text" class="form-control" value="{{optional($escuela)->postcode_escuela}}" required>
                                     </div>
                                 </div>
 
@@ -227,7 +227,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/naciones-unidas.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="country_escuela" name="country_escuela" type="text" class="form-control" value="{{$escuela->country_escuela}}" required>
+                                        <input id="country_escuela" name="country_escuela" type="text" class="form-control" value="{{optional($escuela)->country_escuela}}" required>
                                     </div>
                                 </div>
 
@@ -301,7 +301,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="nombre_referencia" name="nombre_referencia" type="text" class="form-control" value="{{$escuela->nombre_referencia}}" required>
+                                        <input id="nombre_referencia" name="nombre_referencia" type="text" class="form-control" value="{{optional($escuela)->nombre_referencia}}" required>
                                     </div>
                                 </div>
 
@@ -311,7 +311,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="direccion_referencia" name="direccion_referencia" type="text" class="form-control" value="{{$escuela->direccion_referencia}}" required>
+                                        <input id="direccion_referencia" name="direccion_referencia" type="text" class="form-control" value="{{optional($escuela)->direccion_referencia}}" required>
                                     </div>
                                 </div>
 
@@ -321,7 +321,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/rascacielos.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="city_referencia" name="city_referencia" type="text" class="form-control" value="{{$escuela->city_referencia}}" required>
+                                        <input id="city_referencia" name="city_referencia" type="text" class="form-control" value="{{optional($escuela)->city_referencia}}" required>
                                     </div>
                                 </div>
 
@@ -331,7 +331,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/mapa.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="state_referencia" name="state_referencia" type="text" class="form-control" value="{{$escuela->state_referencia}}" required>
+                                        <input id="state_referencia" name="state_referencia" type="text" class="form-control" value="{{optional($escuela)->state_referencia}}" required>
                                     </div>
                                 </div>
 
@@ -341,7 +341,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/codigo-postal.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="postcode_referencia" name="postcode_referencia" type="text" class="form-control" value="{{$escuela->postcode_referencia}}" required>
+                                        <input id="postcode_referencia" name="postcode_referencia" type="text" class="form-control" value="{{optional($escuela)->postcode_referencia}}" required>
                                     </div>
                                 </div>
 
@@ -351,7 +351,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/naciones-unidas.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="country_referencia" name="country_referencia" type="text" class="form-control" value="{{$escuela->country_referencia}}" required>
+                                        <input id="country_referencia" name="country_referencia" type="text" class="form-control" value="{{optional($escuela)->country_referencia}}" required>
                                     </div>
                                 </div>
 
@@ -361,7 +361,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/ring-phone.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="telefono_referencia" name="telefono_referencia" type="text" class="form-control" value="{{$escuela->telefono_referencia}}" required>
+                                        <input id="telefono_referencia" name="telefono_referencia" type="text" class="form-control" value="{{optional($escuela)->telefono_referencia}}" required>
                                     </div>
                                 </div>
 
@@ -371,7 +371,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="email_referencia" name="email_referencia" type="email" class="form-control" value="{{$escuela->email_referencia}}" required>
+                                        <input id="email_referencia" name="email_referencia" type="email" class="form-control" value="{{optional($escuela)->email_referencia}}" required>
                                     </div>
                                 </div>
                             </div>
