@@ -67,7 +67,6 @@
                                         </div>
                                     </div>
 
-                                    <input type="hidden" name="id_afiliado" value="{{ $registro_imnas->User->id }}">
 
                                     <div class="form-group col-6">
                                         <label for="name">Tipo de documento *</label>
