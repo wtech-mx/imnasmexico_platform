@@ -172,8 +172,8 @@
 
         .container_logo_reverso{
             position: absolute;
-            top: 6.5%;
-            left:190px;
+            top: 4.5%;
+            left:205px;
         }
 
         .img_logo{
