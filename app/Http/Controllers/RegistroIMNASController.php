@@ -16,8 +16,10 @@ use Illuminate\Support\Str;
 use App\Models\RegistroImnasEspecialidad;
 use App\Models\OrdersTickets;
 use App\Models\RegistroImnasEscuela;
+use App\Models\RegistroImnasRelacionMat;
+use App\Models\RegistroImnasTemario;
 use Hash;
-
+use Illuminate\Support\Facades\DB;
 
 class RegistroIMNASController extends Controller
 {
@@ -765,7 +767,14 @@ class RegistroIMNASController extends Controller
     public function contrato(Request $request,$code){
         $user = User::where('code', $code)->firstOrFail();
 
-        return view('admin.registro_imnas.contrato', compact('user'));
+        $idMateria = RegistroImnasEspecialidad::where('id_cliente', $user->id)->first();
+
+        $subtemas = RegistroImnasTemario::
+        where('id_materia', $idMateria->id)
+        ->orderBy('id')
+        ->get();
+
+        return view('admin.registro_imnas.contrato', compact('user', 'subtemas', 'idMateria'));
     }
 
     public function contrato_afiliacion(Request $request,$code){
@@ -775,7 +784,8 @@ class RegistroIMNASController extends Controller
     }
 
     public function contrato_update(Request $request, $id){
-        $user = User::firstOrFail();
+
+        $user = User::where('id', $id)->firstOrFail();
         $user->name = $request->get('name');
         $user->direccion = $request->get('direccion');
         $user->city = $request->get('city');
@@ -927,9 +937,10 @@ class RegistroIMNASController extends Controller
         $registro->save();
 
         $especialidad = new RegistroImnasEspecialidad;
-        $especialidad->id_cliente = $user->id_cliente;
+        $especialidad->id_cliente = $user->id;
         $especialidad->especialidad = $request->get('especialidad');
         $especialidad->estatus = '1';
+        $especialidad->id_documento = '0';
         $especialidad->save();
 
         $idMateria = $especialidad->id;
@@ -951,6 +962,24 @@ class RegistroIMNASController extends Controller
         $relaciones->id_user = $user->id;
         $relaciones->save();
 
+        DB::table('registro_imnas_temario')->where('id_materia', $idMateria)->delete();
+
+        // Guardar los nuevos subtemas
+        for ($i = 1; $i <= 12; $i++) {
+            $subtema = $request->input("subtema_$i");
+
+            if (!empty($subtema)) {
+                DB::table('registro_imnas_temario')->insert([
+                    'id_materia' => $idMateria,
+                    'subtema' => $subtema,
+                ]);
+            }
+        }
+
+        $relaciones = new RegistroImnasRelacionMat;
+        $relaciones->id_materia = $especialidad->id;
+        $relaciones->id_user = $user->id;
+        $relaciones->save();
         return redirect()->back()->with('success', 'datos actualizado con exito.');
     }
 }

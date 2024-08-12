@@ -455,133 +455,39 @@
                                     <label for="name">Especialidad *</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/clase.webp') }}" alt="" width="35px">
                                         </span>
-                                        <input id="especialidad" name="especialidad" type="text" class="form-control" required>
+                                        <input id="especialidad" name="especialidad" type="text" class="form-control" value="{{$idMateria->especialidad}}" required>
                                     </div>
                                 </div>
 
-                                <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Subtema 1 *</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="subtema_1" name="subtema_1" type="text" class="form-control" required>
-                                    </div>
-                                </div>
+                                @for ($i = 1; $i <= 12; $i++)
+                                    @php
+                                        // Obtener el subtema correspondiente si existe
+                                        $subtema = $subtemas->skip($i - 1)->first();
+                                    @endphp
 
-                                <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Subtema 2 *</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="subtema_2" name="subtema_2" type="text" class="form-control" required>
-                                    </div>
-                                </div>
+                                    <div class="col-12 form-group mt-4 ">
+                                        <label for="name">Subtema {{ $i }} *</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
+                                            </span>
 
-                                <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Subtema 3 *</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="subtema_3" name="subtema_3" type="text" class="form-control" required>
+                                            <input id="subtema_{{ $i }}" name="subtema_{{ $i }}" type="text" class="form-control"
+                                            value="{{ $subtema ? $subtema->subtema : '' }}"
+                                            @if($i <= 6) required @endif>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Subtema 4 *</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="subtema_4" name="subtema_4" type="text" class="form-control" required>
-                                    </div>
-                                </div>
 
-                                <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Subtema 5 *</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="subtema_5" name="subtema_5" type="text" class="form-control" required>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Subtema 6 *</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="subtema_6" name="subtema_6" type="text" class="form-control" required>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Subtema 7</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="subtema_7" name="subtema_7" type="text" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Subtema 8</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="subtema_8" name="subtema_8" type="text" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Subtema 9</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="subtema_9" name="subtema_9" type="text" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Subtema 10</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="subtema_10" name="subtema_10" type="text" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Subtema 11</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="subtema_11" name="subtema_11" type="text" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Subtema 12</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="subtema_12" name="subtema_12" type="text" class="form-control">
-                                    </div>
+                                @endfor
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-12">
+                                    <button class="btn btn-success mt-3" type="submit"  style=""><img src="{{ asset('assets/user/icons/salvar.png') }}" alt="" width="35px">  Guardar</button>
                                 </div>
                             </div>
-
                         </form>
                     </div>
                 </div>
