@@ -194,6 +194,13 @@ Route::post('registro/bienvenida/store', [App\Http\Controllers\RegistroLlegadaCo
 // =============== M O D U L O   T E R M I N O S ===============================
 Route::post('terminos/store', [App\Http\Controllers\TerminosController::class, 'store'])->name('terminos.store');
 
+// =============== M O D U L O   C O N T R A T O S ===============================
+Route::get('/contrato/imnas/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'contrato'])->name('contrato.edit');
+Route::get('/contrato/afiliacion/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'contrato_afiliacion'])->name('contrato_afiliacion.edit');
+
+Route::patch('/registro/firma/contrato/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_contrato'])->name('update_contrato.imnas');
+Route::patch('/contrato/imnas/update/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'contrato_update'])->name('contrato.update');
+
 Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O  V E R I  F I C A R T R A N S F E R E N C I A S ===============================
@@ -466,16 +473,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/registro/imnas/generar_registro', [App\Http\Controllers\RegistroIMNASController::class, 'generar_registro'])->name('generar_registro.documento');
     Route::patch('/registro/imnas/guia/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_guia'])->name('update_guia.imnas');
 
-    Route::patch('/registro/firma/contrato/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_contrato'])->name('update_contrato.imnas');
-
     Route::post('/registro/imnas/store', [App\Http\Controllers\RegistroIMNASController::class, 'store'])->name('registro_imnas.store');
     Route::post('/registro/imnas/update/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_registro'])->name('update_registro.update');
 
-
-    Route::get('/contrato/imnas/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'contrato'])->name('contrato.edit');
-    Route::get('/contrato/afiliacion/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'contrato_afiliacion'])->name('contrato_afiliacion.edit');
-
-    Route::patch('/contrato/imnas/update/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'contrato_update'])->name('contrato.update');
     // =============== M O D U L O   R E G I S T R O  I M N A S  C L I E N T E S ===============================
     Route::get('/registro/imnas/clientes/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'index_clientes'])->name('clientes.imnas');
     Route::patch('/registro/imnas/subir/doc/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_clientes'])->name('update_clientes.imnas');
