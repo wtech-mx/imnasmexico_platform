@@ -9,7 +9,7 @@
                 </button>
             </div>
 
-            <form method="POST" action="" enctype="multipart/form-data" role="form">
+            <form method="POST" action="{{ route('update_registro.update', $item->id) }}" enctype="multipart/form-data" role="form">
                 @csrf
                 <div class="modal-body">
 
@@ -70,16 +70,16 @@
                             <label for="name">Foto</label>
                             <input id="img_infantil" name="img_infantil" type="file" class="form-control">
 
-                            @if (pathinfo($item->User->Documentos->img_infantil , PATHINFO_EXTENSION) == 'pdf')
+                            @if (pathinfo($item->User->Documentos->foto_tam_infantil , PATHINFO_EXTENSION) == 'pdf')
                                 <p class="text-center ">
-                                    <iframe class="mt-2" src="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->img_infantil )}}" style="width: 60%; height: auto"></iframe>
+                                    <iframe class="mt-2" src="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->foto_tam_infantil )}}" style="width: 60%; height: auto"></iframe>
                                 </p>
-                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->img_infantil ) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->foto_tam_infantil ) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
                                 @else
                                     <p class="text-center mt-2">
-                                        <img id="blah" src="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->img_infantil   ) }}" alt="Imagen" style="width: 60px;height: auto;"/><br>
+                                        <img id="blah" src="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->foto_tam_infantil   ) }}" alt="Imagen" style="width: 60px;height: auto;"/><br>
                                     </p>
-                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->img_infantil ) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
+                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->foto_tam_infantil ) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
                             @endif
 
                         </div>
@@ -97,13 +97,25 @@
                                     <p class="text-center mt-2">
                                         <img id="blah" src="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->ine   ) }}" alt="Imagen" style="width: 60px;height: auto;"/><br>
                                     </p>
-                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->img_infantil ) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
+                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->ine ) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
                             @endif
                         </div>
 
                         <div class="col-6 form-group">
                             <label for="name">INE Atras</label>
                             <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control">
+
+                            @if (pathinfo($item->User->Documentos->ine_atras_registro , PATHINFO_EXTENSION) == 'pdf')
+                            <p class="text-center ">
+                                <iframe class="mt-2" src="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->ine_atras_registro )}}" style="width: 60%; height: auto"></iframe>
+                            </p>
+                            <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->ine_atras_registro ) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                            @else
+                                <p class="text-center mt-2">
+                                    <img id="blah" src="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->ine_atras_registro   ) }}" alt="Imagen" style="width: 60px;height: auto;"/><br>
+                                </p>
+                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->Documentos->ine_atras_registro ) }}" target="_blank" style="background: #836262; color: #ffff!important">Ver Imagen</a>
+                        @endif
                         </div>
 
                         <div class="col-6 form-group">
@@ -222,10 +234,11 @@
                             </div>
 
                             @if (pathinfo($item->foto, PATHINFO_EXTENSION) === 'pdf')
-                                <iframe src="{{ asset('pago_fuera/'.$orders->foto) }}" width="10%" ></iframe>
+                                <iframe class="mt-2" src="{{asset('documentos/'. $item->User->telefono . '/' .$item->foto )}}" style="width: 60%; height: auto"></iframe>
                             @else
-                                <img id="blah" src="{{ asset('pago_fuera/'.$orders->foto) }}" alt="Imagen" style="width: 10%">
-                                <a class="text-center text-white btn btn-sm mt-2" href="{{asset('pago_fuera/'.$orders->foto) }}" download="{{asset('pago_fuera/'.$orders->PagosFuera->foto) }}" style="background: #836262; border-radius: 19px;">
+
+                            <img id="blah" src="{{asset('documentos/'. $item->User->telefono . '/' .$item->foto )}}" alt="Imagen" style="width: 10%">
+                                <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $item->User->telefono . '/' .$item->foto )}}" download="{{asset('documentos/'. $item->User->telefono . '/' .$item->foto )}}" style="background: #836262; border-radius: 19px;">
                                     Descargar
                                 </a>
                             @endif
@@ -276,10 +289,11 @@
                             </div>
 
                             @if (pathinfo($item->foto2, PATHINFO_EXTENSION) === 'pdf')
-                                <iframe src="{{ asset('pago_fuera/'.$orders->foto2) }}" width="10%" ></iframe>
+                                <iframe class="mt-2" src="{{asset('documentos/'. $item->User->telefono . '/' .$item->foto2 )}}" style="width: 60%; height: auto"></iframe>
+
                             @else
-                                <img id="blah" src="{{ asset('pago_fuera/'.$orders->foto2) }}" alt="Imagen" style="width: 10%">
-                                <a class="text-center text-white btn btn-sm mt-2" href="{{asset('pago_fuera/'.$orders->foto2) }}" download="{{asset('pago_fuera/'.$orders->PagosFuera->foto) }}" style="background: #836262; border-radius: 19px;">
+                            <img id="blah" src="{{asset('documentos/'. $item->User->telefono . '/' .$item->foto2 )}}" alt="Imagen" style="width: 10%">
+                                <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $item->User->telefono . '/' .$item->foto2 )}}" download="{{asset('documentos/'. $item->User->telefono . '/' .$item->foto )}}" style="background: #836262; border-radius: 19px;">
                                     Descargar
                                 </a>
                             @endif

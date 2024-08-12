@@ -67,6 +67,8 @@
                                         </div>
                                     </div>
 
+                                    <input type="hidden" name="id_afiliado" value="{{ $registro_imnas->User->id }}">
+
                                     <div class="form-group col-6">
                                         <label for="name">Tipo de documento *</label>
                                         <div class="input-group">
@@ -79,15 +81,14 @@
                                                     <option value="4">RN - Diploma Imnas</option>
                                                     <option value="5">RN - Credencial General</option>
                                                     <option value="3">RN - Titulo Honorifico QRS</option>
-
-                                                        <option value="6">CN - Tira de materias aparatologia</option>
-                                                        <option value="7">CN - Tira de materias alasiados progresivos</option>
-                                                        <option value="8">CN - Tira de materias cosmetologia facial y corporal</option>
-                                                        <option value="9">CN - Tira de materias cosmiatria estetica avanzada</option>
-                                                        <option value="10">CN - Tira de materias auxiliar en cuidados de atencion medica</option>
-                                                        <option value="11">CN - Tira de materias masoterapia</option>
-                                                        <option value="12">CN - Tira de materias Cosmetologia</option>
-
+                                                    <option value="18">CN - Tira materias Afiliados Personalizado</option>
+                                                    <option value="6">CN - Tira de materias aparatologia</option>
+                                                    <option value="7">CN - Tira de materias alasiados progresivos</option>
+                                                    <option value="8">CN - Tira de materias cosmetologia facial y corporal</option>
+                                                    <option value="9">CN - Tira de materias cosmiatria estetica avanzada</option>
+                                                    <option value="10">CN - Tira de materias auxiliar en cuidados de atencion medica</option>
+                                                    <option value="11">CN - Tira de materias masoterapia</option>
+                                                    <option value="12">CN - Tira de materias Cosmetologia</option>
                                             </select>
                                         </div>
                                     </div>
@@ -256,6 +257,7 @@
                                                         <a class="text-center text-dark btn btn-sm" href="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->curp) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver Imagen</a>
                                                     </p>
                                                 @endif
+
                                             </div>
 
                                     </div>

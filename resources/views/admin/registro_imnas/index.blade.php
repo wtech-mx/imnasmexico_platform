@@ -55,6 +55,9 @@
                                                         Editar
                                                     </a>
                                                     <a class="btn btn-sm btn-info" href="{{ route('show_cliente.imnas', $item->User->code) }}" target="_blank">
+                                                        Afiliaciones
+                                                    </a>
+                                                    <a class="btn btn-sm btn-succes" href="{{ route('contrato.edit', $item->User->code) }}" target="_blank">
                                                         Formato
                                                     </a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('contrato_afiliacion.edit', $item->User->code) }}" target="_blank">

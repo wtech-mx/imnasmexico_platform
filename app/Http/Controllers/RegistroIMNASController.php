@@ -326,6 +326,31 @@ class RegistroIMNASController extends Controller
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
 
+        }elseif($tipo_documentos->tipo == 'Tira materias Afiliados'){
+            $id_ticket = $request->get('id_registro');
+            $ticket = RegistroImnas::find($id_ticket);
+            $ticket->estatus_tira = '1';
+            $ticket->folio = $request->get('folio');
+            $ticket->update();
+
+            if($ticket->estatus_cedula == 1 && $ticket->estatus_titulo == 1 && $ticket->estatus_diploma == 1 && $ticket->estatus_credencial == 1 && $ticket->estatus_tira == 1){
+                $ticket->fecha_realizados = date('Y-m-d');
+                $ticket->update();
+            }
+
+            $ancho_cm = 21.5;
+            $alto_cm = 34;
+
+            $ancho_puntos = $ancho_cm * 28.35;
+            $alto_puntos = $alto_cm * 28.35;
+
+            $registro_imnas_esp = RegistroImnasEspecialidad::where('id_cliente','=',$request->get('id_afiliado'))->get();
+
+            $pdf = PDF::loadView('admin.pdf.tira_materias_afiliados',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
+
+            return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+
         }elseif($tipo_documentos->tipo == 'Tira_materias_alasiados'){
             $id_ticket = $request->get('id_registro');
             $ticket = RegistroImnas::find($id_ticket);
@@ -728,6 +753,11 @@ class RegistroIMNASController extends Controller
         $registro_imnas_esp->especialidad = $request->get('especialidad');
         $registro_imnas_esp->estatus = 1;
         $registro_imnas_esp->save();
+
+        return redirect()->back()->with('success', 'datos actualizado con exito.');
+    }
+
+    public function update_registro(Request $request){
 
         return redirect()->back()->with('success', 'datos actualizado con exito.');
     }

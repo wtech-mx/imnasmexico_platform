@@ -467,6 +467,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/registro/imnas/guia/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_guia'])->name('update_guia.imnas');
 
     Route::post('/registro/imnas/store', [App\Http\Controllers\RegistroIMNASController::class, 'store'])->name('registro_imnas.store');
+    Route::post('/registro/imnas/update/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_registro'])->name('update_registro.update');
+
+
     Route::get('/contrato/imnas/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'contrato'])->name('contrato.edit');
     Route::get('/contrato/afiliacion/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'contrato_afiliacion'])->name('contrato_afiliacion.edit');
 

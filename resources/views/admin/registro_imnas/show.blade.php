@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Registro IMNAS
+    R Registro IMNAS
 @endsection
 
 @section('content')
