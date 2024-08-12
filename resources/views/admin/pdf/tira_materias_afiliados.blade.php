@@ -215,18 +215,7 @@
                     }
         @endphp
 
-        @if(!isset($fileName_logo))
         <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
-
-        @elseif(empty($fileName_logo))
-        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
-
-        @elseif($fileName_logo == 'Sin Logo')
-        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
-        @else
-        <img src="{{ $basePath . 'tira_alasiados_logo.png' }}" class="img_portada">
-        @endif
-
 
          <div class="container_logo">
             @if(!isset($fileName_logo))
