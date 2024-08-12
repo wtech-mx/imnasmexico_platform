@@ -7,6 +7,9 @@ use App\Models\OrdersTickets;
 use Illuminate\Http\Request;
 use App\Models\Tipodocumentos;
 use App\Models\RegistroImnas;
+use App\Models\RegistroImnasEscuela;
+use App\Models\RegistroImnasEspecialidad;
+use App\Models\RegistroImnasTemario;
 
 class FoliosController extends Controller
 {
@@ -87,15 +90,19 @@ class FoliosController extends Controller
 
     public function index_tira(Request $request, $id){
 
-        $tipo_documentos = Tipodocumentos::find(2);
+        $tipo_documentos = Tipodocumentos::find(18);
 
         $tickets = RegistroImnas::where('folio', $id)->first();
 
-        if($tickets == null){
-            $tickets = OrdersTickets::where('id', '=', $id)->first();
-        }
 
-        return view('user.components.documentos_imnas.index_tiras',compact('tickets','tipo_documentos'));
+            $idMateria = RegistroImnasEspecialidad::where('id_cliente', $tickets->id_usuario)->first();
+
+            $subtemas = RegistroImnasTemario::
+            where('id_materia', $idMateria->id)
+            ->orderBy('id')
+            ->get();
+
+        return view('user.components.documentos_imnas.index_tira',compact('tickets','tipo_documentos','subtemas'));
 
     }
 
