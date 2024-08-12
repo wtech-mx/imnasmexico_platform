@@ -787,9 +787,40 @@ class RegistroIMNASController extends Controller
     }
 
     public function contrato_afiliacion(Request $request,$code){
-        $user = User::where('code', $code)->firstOrFail();
 
-        return view('admin.registro_imnas.contrato_afiliacion', compact('user'));
+        $registros_imnas = Orders::where('id', '=', $code)->first();
+
+        return view('admin.registro_imnas.contrato_afiliacion', compact('registros_imnas'));
+    }
+
+    public function update_contrato(Request $request, $id){
+
+        $dominio = $request->getHost();
+
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_estandar = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $request->get('telefono'));
+        }else{
+            $ruta_estandar = public_path() . '/documentos/' .$request->get('telefono').'/';
+        }
+
+        $docmuentos = Documentos::where('id_usuario','=',$id)->first();
+
+
+        $image_parts = explode(";base64,", $request->signed);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $signature = uniqid() . '.'.$image_type;
+        $file = $ruta_estandar . $signature;
+
+        file_put_contents($file, $image_base64);
+
+        $docmuentos->firma = $signature;
+        $docmuentos->update();
+
+
+        return redirect()->back()->with('success', 'datos actualizado con exito.');
+
     }
 
     public function contrato_update(Request $request, $id){

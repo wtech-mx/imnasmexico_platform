@@ -54,17 +54,22 @@
                                                     <a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#registro_imnas_edit_{{ $item->id }}">
                                                         Editar
                                                     </a>
+
                                                     <a class="btn btn-sm btn-info" href="{{ route('show_cliente.imnas', $item->User->code) }}" target="_blank">
                                                         Afiliaciones
                                                     </a>
+
                                                     <a class="btn btn-sm btn-succes" href="{{ route('contrato.edit', $item->User->code) }}" target="_blank">
                                                         Formato
                                                     </a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('contrato_afiliacion.edit', $item->User->code) }}" target="_blank">
+
+                                                    <a class="btn btn-sm btn-success" href="{{ route('contrato_afiliacion.edit', $item->id) }}" target="_blank">
                                                         Contraro
                                                     </a>
                                                 </td>
                                             </tr>
+
+                                            @include('admin.registro_imnas.modal_edit')
 
                                         @endforeach
                                     </tbody>
@@ -76,6 +81,7 @@
         </div>
     </div>
     @include('admin.registro_imnas.crear')
+
 @endsection
 
 @section('datatable')

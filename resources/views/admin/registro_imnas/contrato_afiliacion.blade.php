@@ -83,10 +83,10 @@
                         Cam by Imnas, S.A. de C.V. (en adelante, "IMNAS"), con domicilio en [Castilla 136 col álamos,
                         cp 03400, delegación Benito Juárez], representada por [Claudia Carla Rizo Flores], y <br>
                         Nombre del <br>
-                        Afiliado: __________________ <br>
+                        Afiliado: <strong> {{ $registros_imnas->User->name }}</strong> <br>
                         (en adelante, "El Afiliado”) <br>
                         con domicilio en <br>
-                        _____________________
+                        <strong>{{ $registros_imnas->User->direccion }}</strong>
 
                         <br><br><strong>1. OBJETO DEL CONTRATO</strong><br>
                         IMNAS se compromete a proporcionar al Afiliado los servicios de certificación avalados por
@@ -185,24 +185,40 @@
                            <p class="text-left"> <strong>FIRMAS</strong></p>
                         </div>
 
-                        <form method="POST" class="row" action="" enctype="multipart/form-data" role="form">
+                        <form method="POST" class="row" action="{{ route('update_contrato.imnas',$registros_imnas->User->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
+
                             <input type="hidden" name="_method" value="PATCH">
 
+                            <input type="hidden" name="telefono" value="{{ $registros_imnas->User->telefono }}">
+
+                            <input type="hidden" name="ud_user" value="{{ $registros_imnas->User->id }}">
+
                             <div class="col-6">
-                                    <div id="sig"></div>
-                                    <textarea id="signed" name="signed" style="display: none"></textarea>
-                                    <h6 class="text-left mt-3 mb-3">Nombre: <br>
-                                        {{ $user->name}}
-                                    </h6>
-                                    <button id="clear" class="btn btn-sm btn-danger ">Repetir</button>
+
+                            @if($registros_imnas->User->Documentos->firma)
+
+                                <p class="text-center">
+                                    <img id="blah" src="{{asset('documentos/'. $registros_imnas->User->telefono . '/' .$registros_imnas->User->Documentos->firma   ) }}" alt="Imagen" style="width: 100%;height: auto;"/><br>
+                                </p>
+
+                            @else
+                                <div id="sig"></div>
+                                <textarea id="signed" name="signed" style="display: none"></textarea>
+                                <h6 class="text-left mt-3 mb-3">Nombre: <br>
+                                    {{ $registros_imnas->User->name }}
+                                </h6>
+                                <button id="clear" class="btn btn-sm btn-danger ">Repetir</button>
+
+                            @endif
+
                             </div>
 
                             <div class="col-6">
                                 <div id="sig2"></div>
                                 <textarea id="signed2" name="signed2" style="display: none"></textarea>
                                 <h6 class="text-left mt-3 mb-3">
-                                    Nombre del Representante de IMNAS
+                                    Firma  del Representante de IMNAS
                                     Cam by Imnas, S.A. de C.V.
                                 </h6>
                                 <button id="clear2" class="btn btn-sm btn-danger ">Repetir</button>
@@ -212,9 +228,11 @@
                                 <button class="btn btn-sm btn-success w-100 mt-5">Guardar Firmas</button>
                             </div>
 
+
+
                         </form>
                         <div class="col-12">
-                            <p class="mt-4"><strong>Fecha:</strong></p>
+                            {{-- <p class="mt-4"><strong>Fecha:</strong></p> --}}
                         </div>
                     </div>
 
