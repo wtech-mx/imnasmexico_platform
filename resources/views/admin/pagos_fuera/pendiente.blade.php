@@ -36,6 +36,9 @@
 
 </style>
 @section('content')
+@php
+    \Carbon\Carbon::setLocale('es');
+@endphp
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -76,20 +79,35 @@
                                 <table class="table table-flush" id="datatable-search">
                                     <thead class="thead">
                                         <tr>
-                                            <th>#</th>
+                                            <th><img src="{{ asset('assets/cam/carta_res.png') }}" alt="" width="30px">Acciones</th>
+                                            <th><img src="{{ asset('assets/cam/contrato.png') }}" alt="" width="30px">¿Verificado?</th>
+                                            {{-- <th>#</th> --}}
                                             <th><img src="{{ asset('assets/cam/medico.png') }}" alt="" width="30px">Datos de Cliente</th>
                                             <th><img src="{{ asset('assets/cam/acta.png') }}" alt="" width="30px">Curso</th>
                                             <th><img src="{{ asset('assets/cam/metodo-de-pago.png') }}" alt="" width="30px">Forma de pago</th>
-                                            <th><img src="{{ asset('assets/cam/contrato.png') }}" alt="" width="30px">¿Verificado?</th>
-                                            <th><img src="{{ asset('assets/cam/carta_res.png') }}" alt="" width="30px">Acciones</th>
+
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($pagos_fuera as $pago_fuera)
                                         @include('admin.pagos_fuera.modal_ins')
                                             <tr>
-                                                <td>{{ $pago_fuera->id }}</td>
                                                 <td>
+                                                    <a type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#showDataModal{{$pago_fuera->id}}" style="color: #ffff">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    @can('verificacion-pago')
+                                                    <input data-id="{{ $pago_fuera->id }}" class="toggle-class" type="checkbox"
+                                                    data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                                    data-on="Active" data-off="InActive" {{ $pago_fuera->pendiente ? 'checked' : '' }}>
+                                                    @endcan
+                                                </td>
+                                                {{-- <td>{{ $pago_fuera->id }}</td> --}}
+                                                <td>
+                                                   <b>ID: {{ $pago_fuera->id }} </b><br>
                                                     @php
                                                         $words = explode(' ', $pago_fuera->nombre);
                                                         $chunks = array_chunk($words, 3);
@@ -113,18 +131,6 @@
                                                     @endphp
                                                 </td>
                                                 <td>{{ $pago_fuera->modalidad }}</td>
-                                                <td>
-                                                    @can('verificacion-pago')
-                                                    <input data-id="{{ $pago_fuera->id }}" class="toggle-class" type="checkbox"
-                                                    data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                                    data-on="Active" data-off="InActive" {{ $pago_fuera->pendiente ? 'checked' : '' }}>
-                                                    @endcan
-                                                </td>
-                                                <td>
-                                                    <a type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#showDataModal{{$pago_fuera->id}}" style="color: #ffff">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

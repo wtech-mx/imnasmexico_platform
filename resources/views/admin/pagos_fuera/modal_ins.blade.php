@@ -1,4 +1,5 @@
 <!-- Modal -->
+
 <div class="modal fade" id="showDataModal{{$pago_fuera->id}}" tabindex="-1" role="dialog" aria-labelledby="showDataModal{{$pago_fuera->id}}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -20,7 +21,7 @@
                                     <span class="input-group-text" id="basic-addon1">
                                         <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="30px">
                                     </span>
-                                    <input id="fecha_hora_1" name="fecha_hora_1" type="text" class="form-control" value="{{$pago_fuera->fecha_hora_1}}" disabled>
+                                    <input id="fecha_hora_1" name="fecha_hora_1" type="text" class="form-control" value="{{ \Carbon\Carbon::parse($pago_fuera->fecha_hora_1)->translatedFormat('d \d\e F h:i a') }}" disabled>
                                 </div>
                             </div>
 
