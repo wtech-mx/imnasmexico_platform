@@ -66,7 +66,6 @@
                                                 </td>
                                             </tr>
 
-                                            @include('admin.registro_imnas.modal_edit')
                                         @endforeach
                                     </tbody>
                                 </table>

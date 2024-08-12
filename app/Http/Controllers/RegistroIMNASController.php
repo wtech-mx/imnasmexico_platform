@@ -926,6 +926,31 @@ class RegistroIMNASController extends Controller
         $registro->email_referencia = $request->get('email_referencia');
         $registro->save();
 
+        $especialidad = new RegistroImnasEspecialidad;
+        $especialidad->id_cliente = $user->id_cliente;
+        $especialidad->especialidad = $request->get('especialidad');
+        $especialidad->estatus = '1';
+        $especialidad->save();
+
+        $idMateria = $especialidad->id;
+        for ($i = 1; $i <= 12; $i++) {
+            $subtema = $request->input("subtema_$i");
+    
+            // Verifica si el subtema tiene algún valor
+            if (!empty($subtema)) {
+                // Crea un nuevo registro en la tabla registro_imnas_temario
+                DB::table('registro_imnas_temario')->insert([
+                    'id_materia' => $idMateria,
+                    'subtema' => $subtema,
+                ]);
+            }
+        }
+        
+        $relaciones = new RegistroImnasRelacionMat;
+        $relaciones->id_materia = $especialidad->id;
+        $relaciones->id_user = $user->id;
+        $relaciones->save();
+
         return redirect()->back()->with('success', 'datos actualizado con exito.');
     }
 }

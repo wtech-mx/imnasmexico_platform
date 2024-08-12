@@ -450,43 +450,136 @@
                             </div>
 
                             <div class="row">
-                                <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">
-                                    Documentación DIGITAL Requerida por alumno para emisión de registro <br>
-                                    (Informativo) (Todo se sube por plataforma al momento de realizar el <br>
-                                    pago)
-
-                                </h4>
-
-                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
-                                    <label for="name">INE*</label>
+                                <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Temario/plan de estudios para tira de materias (6 subtemas como minimo, 12 subtemas como maximo por especialidad)</h4>
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Especialidad *</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/ine.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
                                         </span>
-                                        <input id="ine_digital" name="ine_digital" type="file" class="form-control" required>
+                                        <input id="especialidad" name="especialidad" type="text" class="form-control" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
-                                    <label for="name">CURP *</label>
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Subtema 1 *</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/carta.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
                                         </span>
-                                        <input id="curp_digital" name="curp_digital" type="file" class="form-control" required>
+                                        <input id="subtema_1" name="subtema_1" type="text" class="form-control" required>
                                     </div>
                                 </div>
 
-                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
-                                    <label for="name">Foto infantil blanco y negro digital	 *</label>
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Subtema 2 *</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
                                         </span>
-                                        <input id="img_infantil_digital" name="img_infantil_digital" type="file" class="form-control" required>
+                                        <input id="subtema_2" name="subtema_2" type="text" class="form-control" required>
                                     </div>
                                 </div>
 
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Subtema 3 *</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="subtema_3" name="subtema_3" type="text" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Subtema 4 *</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="subtema_4" name="subtema_4" type="text" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Subtema 5 *</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="subtema_5" name="subtema_5" type="text" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Subtema 6 *</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="subtema_6" name="subtema_6" type="text" class="form-control" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Subtema 7</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="subtema_7" name="subtema_7" type="text" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Subtema 8</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="subtema_8" name="subtema_8" type="text" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Subtema 9</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="subtema_9" name="subtema_9" type="text" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Subtema 10</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="subtema_10" name="subtema_10" type="text" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Subtema 11</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="subtema_11" name="subtema_11" type="text" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="col-12 form-group mt-4 ">
+                                    <label for="name">Subtema 12</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="subtema_12" name="subtema_12" type="text" class="form-control">
+                                    </div>
+                                </div>
                             </div>
 
                         </form>
