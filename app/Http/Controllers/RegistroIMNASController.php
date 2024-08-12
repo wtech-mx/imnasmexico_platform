@@ -816,7 +816,7 @@ class RegistroIMNASController extends Controller
         if($dominio == 'plataforma.imnasmexico.com'){
             $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $user->telefono);
         }else{
-            $ruta_manual = public_path() . '/documentos/' . $user->telefono;
+            $ruta_manual = public_path() . '/documentos/' . $user->telefono . '/';
         }
 
         $documentos_id = Documentos::where('id_usuario','=',$user->id)->first();

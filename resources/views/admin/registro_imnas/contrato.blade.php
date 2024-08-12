@@ -522,7 +522,7 @@
                                     <button id="clear" class="btn btn-sm btn-danger ">Repetir</button>
                                 </div>
                             @else
-                                <img src="{{asset('documentos/'. $user->telefono . '/' .$documentos->firma) }}" alt="" width="35px">
+                                <img src="{{asset('documentos/'. $user->telefono . '/' .$documentos->firma) }}" alt="" width="50%">
                             @endif
 
 
