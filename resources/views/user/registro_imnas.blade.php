@@ -145,7 +145,7 @@ Mi perfil- {{$cliente->name}}
                                 </div>
 
                                 <div class="col-12 col-lg-6 form-group ">
-                                    <label for="">Nombre del curso *</label>
+                                    <label for="">Especialidad *</label>
                                     <div class="input-group input-group-alternative mb-4">
                                     <span class="input-group-text">
                                         <img class="img_profile_label" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">

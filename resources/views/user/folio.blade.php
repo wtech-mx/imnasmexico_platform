@@ -91,7 +91,7 @@
                                         <p class="text-center mt-4">
                                             <strong>Nombre del Alumno:</strong> {{$tickets->User->name}} <br>
                                             <strong>Especialidad:</strong> {{$tickets->Cursos->nombre}} <br>
-                                            <strong>Escuela donde estudió:</strong> INSTITUO MEXICANO NATURALES AIN SPA <br>
+                                            <strong>Escuela donde estudió:</strong> INSTITUTO MEXICANO NATURALES AIN SPA <br>
                                             <strong>Fecha que estudió del:</strong> {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('DD [de] MMMM [del] YYYY') }} al: {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_final)->isoFormat('DD [de] MMMM [del] YYYY') }}<br>
                                         </p>
                                         <p class="text-center mt-4">
