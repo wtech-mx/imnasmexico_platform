@@ -177,7 +177,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/aprender-en-linea.webp') }}" alt="" width="35px">
                                         </span>
-                                        <input id="escuela" name="escuela" type="text" class="form-control" value="{{$escuela->nombre_referencia}}" required>
+                                        <input id="escuela" name="escuela" type="text" class="form-control" value="{{$user->escuela}}" required>
                                     </div>
                                 </div>
 
@@ -301,7 +301,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="nombre_referencia" name="nombre_referencia" type="text" class="form-control" value="{{$escuela->name}}" required>
+                                        <input id="nombre_referencia" name="nombre_referencia" type="text" class="form-control" value="{{$escuela->nombre_referencia}}" required>
                                     </div>
                                 </div>
 
