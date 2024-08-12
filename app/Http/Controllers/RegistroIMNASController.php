@@ -328,8 +328,6 @@ class RegistroIMNASController extends Controller
 
         }elseif($tipo_documentos->tipo == 'Tira materias Afiliados'){
 
-            dd($tipo_documentos);
-
             $id_ticket = $request->get('id_registro');
             $ticket = RegistroImnas::find($id_ticket);
             $ticket->estatus_tira = '1';
