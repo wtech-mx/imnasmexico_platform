@@ -774,6 +774,7 @@ class RegistroIMNASController extends Controller
         $user = User::where('code', $code)->firstOrFail();
 
         $idMateria = RegistroImnasEspecialidad::where('id_cliente', $user->id)->first();
+        $escuela = RegistroImnasEscuela::where('id_user', $user->id)->first();
 
         $subtemas = RegistroImnasTemario::
         where('id_materia', $idMateria->id)
@@ -782,7 +783,7 @@ class RegistroIMNASController extends Controller
 
         $documentos = Documentos::where('id_usuario', $user->id)->first();
 
-        return view('admin.registro_imnas.contrato', compact('user', 'subtemas', 'idMateria', 'documentos'));
+        return view('admin.registro_imnas.contrato', compact('user', 'subtemas', 'idMateria', 'documentos', 'escuela'));
     }
 
     public function contrato_afiliacion(Request $request,$code){
