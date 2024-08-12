@@ -81,7 +81,7 @@
                                                     <option value="4">RN - Diploma Imnas</option>
                                                     <option value="5">RN - Credencial General</option>
                                                     <option value="3">RN - Titulo Honorifico QRS</option>
-                                                    <option value="18">CN - Tira materias Afiliados Personalizado</option>
+                                                    <option value="18">CN - Tira materias Afiliados</option>
                                                     <option value="6">CN - Tira de materias aparatologia</option>
                                                     <option value="7">CN - Tira de materias alasiados progresivos</option>
                                                     <option value="8">CN - Tira de materias cosmetologia facial y corporal</option>

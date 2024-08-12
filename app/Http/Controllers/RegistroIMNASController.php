@@ -327,6 +327,9 @@ class RegistroIMNASController extends Controller
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira materias Afiliados'){
+
+            dd($tipo_documentos);
+
             $id_ticket = $request->get('id_registro');
             $ticket = RegistroImnas::find($id_ticket);
             $ticket->estatus_tira = '1';
@@ -511,7 +514,6 @@ class RegistroIMNASController extends Controller
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
         }
-
     }
 
     public function update_guia(Request $request){
@@ -935,7 +937,7 @@ class RegistroIMNASController extends Controller
         $idMateria = $especialidad->id;
         for ($i = 1; $i <= 12; $i++) {
             $subtema = $request->input("subtema_$i");
-    
+
             // Verifica si el subtema tiene algún valor
             if (!empty($subtema)) {
                 // Crea un nuevo registro en la tabla registro_imnas_temario
@@ -945,7 +947,7 @@ class RegistroIMNASController extends Controller
                 ]);
             }
         }
-        
+
         $relaciones = new RegistroImnasRelacionMat;
         $relaciones->id_materia = $especialidad->id;
         $relaciones->id_user = $user->id;

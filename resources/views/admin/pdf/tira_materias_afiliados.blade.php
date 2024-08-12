@@ -170,6 +170,12 @@
             left:190px;
         }
 
+        .container_logo_reverso{
+            position: absolute;
+            top: 6.5%;
+            left:190px;
+        }
+
         .img_logo{
             width: 80px;
         }
@@ -275,6 +281,20 @@
             <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
 
             <h4 class="nombre_reverso">{{ ucwords(strtolower($curso)) }}</h4>
+        </div>
+
+        <div class="container_logo_reverso">
+            @if(!isset($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+            @elseif(empty($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+            @else
+                <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo">
+            @endif
         </div>
 
         <div class="qr_container">
