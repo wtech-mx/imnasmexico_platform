@@ -21,13 +21,27 @@ class FoliosController extends Controller
     public function buscador(Request $request){
 
         $tickets = OrdersTickets::where('folio', '=', $request->get('folio'))->first();
+        $externos = DocumenotsGenerador::where('folio', '=', $request->get('folio'))->first();
 
-            if (!$tickets) {
-                $tickets_generador = RegistroImnas::where('folio', $request->get('folio'))->first();
+            if ($tickets != NULL) {
+                $registro = RegistroImnas::where('folio', $request->get('folio'))->first();
+                $tickets_generador = [
+                    'nombre' => $registro->nombre,
+                    'nom_curso' => $registro->nom_curso,
+                    'escuela' => $registro->User->escuela,
+                    'fecha' => $registro->fecha_curso,
+                ];
+            }else if($externos != NULL){
+                $tickets_generador = [
+                    'nombre' => $externos->cliente,
+                    'nom_curso' => $externos->curso,
+                    'escuela' => null, // No hay escuela en esta tabla, puedes dejarlo como null o manejarlo como necesites
+                    'fecha' => $externos->fecha_inicial,
+                ];
             }else{
                 $tickets_generador = '';
             }
-
+            
         $folio = $request->get('folio');
 
         return view('user.folio',compact('tickets', 'folio', 'tickets_generador'));
