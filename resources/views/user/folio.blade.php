@@ -161,8 +161,8 @@
                                     <p class="text-center mt-4">
                                         <strong>Nombre del Alumno:</strong> {{$tickets_generador['nombre']}} <br>
                                         <strong>Especialidad:</strong> {{$tickets_generador['nom_curso']}} <br>
-                                        <strong>Escuela donde estudió:</strong>
                                         @if($tickets_generador['escuela'])
+                                        <strong>Escuela donde estudió:</strong>
                                             <p>Escuela: {{ $tickets_generador['escuela'] }}</p>
                                         @endif<br>
                                         <strong>Fecha que estudió :</strong> {{ \Carbon\Carbon::parse($tickets_generador['fecha'])->isoFormat('DD [de] MMMM [del] YYYY') }} <br>
