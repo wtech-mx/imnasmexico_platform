@@ -229,11 +229,11 @@
                                                     <input id="logo" name="logo" type="file" class="form-control"  >
                                                 </div>
                                                 @if (pathinfo($registro_imnas->logo, PATHINFO_EXTENSION) == 'pdf')
-                                                    <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->logo) }}" download="{{ $registro_imnas->logo }}" style="background: #836262; border-radius: 19px;">
+                                                    <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $registro_imnas->User->telefono . '/' .$cliente->logo) }}" download="{{ $cliente->logo }}" style="background: #836262; border-radius: 19px;">
                                                         Descargar Documento
                                                     </a>
                                                 @else
-                                                    <img id="blah" src="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->logo) }}" alt="Imagen" style="width: 100px;height: 100px;">
+                                                    <img id="blah" src="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$cliente->logo) }}" alt="Imagen" style="width: 100px;height: 100px;">
                                                 @endif
                                             </div>
 
