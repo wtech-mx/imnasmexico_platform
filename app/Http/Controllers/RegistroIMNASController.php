@@ -538,7 +538,7 @@ class RegistroIMNASController extends Controller
 
         if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
             if($dominio == 'plataforma.imnasmexico.com'){
-                $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $request->telefono);
+                $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $request->telefono .'/');
             }else{
                 $ruta_manual = public_path() . '/documentos'.'/'. $request->telefono;
             }
@@ -799,7 +799,7 @@ class RegistroIMNASController extends Controller
         $dominio = $request->getHost();
 
         if($dominio == 'plataforma.imnasmexico.com'){
-            $ruta_estandar = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $request->get('telefono'));
+            $ruta_estandar = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $request->get('telefono') .'/');
         }else{
             $ruta_estandar = public_path() . '/documentos/' .$request->get('telefono').'/';
         }
@@ -847,7 +847,7 @@ class RegistroIMNASController extends Controller
         $dominio = $request->getHost();
 
         if($dominio == 'plataforma.imnasmexico.com'){
-            $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $user->telefono);
+            $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $user->telefono .'/');
         }else{
             $ruta_manual = public_path() . '/documentos/' . $user->telefono . '/';
         }
