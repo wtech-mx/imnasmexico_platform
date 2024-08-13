@@ -44,63 +44,6 @@
                             </div>
                         </div>
 
-                        <div class="col-6 form-group">
-                            <label for="name">Especialidad</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <img src="{{ asset('assets/user/icons/certificacion.webp') }}" alt="" width="35px" style="margin-right: 1rem">
-                                </span>
-                                <input id="especialidad" name="especialidad" type="text" class="form-control" required>
-                            </div>
-                        </div>
-
-                        <div class="col-6 form-group">
-                            <label for="name">Escuela</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <img src="{{ asset('assets/user/icons/aprender-en-linea.png') }}" alt="" width="35px" style="margin-right: 1rem">
-                                </span>
-                                <input id="escuela" name="escuela" type="text" class="form-control">
-                            </div>
-                        </div>
-
-                        <div class="col-6"></div>
-
-                        <div class="col-6 form-group">
-                            <label for="name">Foto</label>
-                            <input id="img_infantil" name="img_infantil" type="file" class="form-control">
-                        </div>
-
-                        <div class="col-6 form-group">
-                            <label for="name">INE Frente</label>
-                            <input id="ine" name="ine" type="file" class="form-control">
-                        </div>
-
-                        <div class="col-6 form-group">
-                            <label for="name">INE Atras</label>
-                            <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control">
-                        </div>
-
-                        <div class="col-6 form-group">
-                            <label for="name">CURP</label>
-                            <input id="curp" name="curp" type="file" class="form-control">
-                        </div>
-
-                        <div class="col-6 form-group">
-                            <label for="name">Acta de nacimiento</label>
-                            <input id="acta_nacimiento_registro" name="acta_nacimiento_registro" type="file" class="form-control">
-                        </div>
-
-                        <div class="col-6 form-group">
-                            <label for="name">Comprobante Domicilio</label>
-                            <input id="domicilio" name="domicilio" type="file" class="form-control">
-                        </div>
-
-                        <div class="col-6 form-group">
-                            <label for="name">Logo</label>
-                            <input id="logo" name="logo" type="file" class="form-control">
-                        </div>
-
                         <div class="col-6"></div>
                         <div class="form-group col-6 mt-3">
                             <label for="name">Método de Pago *</label>
