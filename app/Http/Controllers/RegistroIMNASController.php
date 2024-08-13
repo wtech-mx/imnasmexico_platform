@@ -542,7 +542,9 @@ class RegistroIMNASController extends Controller
             }else{
                 $ruta_manual = public_path() . '/documentos'.'/'. $request->telefono;
             }
-
+            if (!file_exists($ruta_manual)) {
+                mkdir($ruta_manual, 0777, true);
+            }
 
             if (User::where('telefono', $request->telefono)->exists()) {
                 $user = User::where('telefono', $request->telefono)->first();
@@ -578,7 +580,9 @@ class RegistroIMNASController extends Controller
             }else{
                 $ruta_manual = public_path() . '/documentos'.'/'. $request->telefono;
             }
-
+            if (!file_exists($ruta_manual)) {
+                mkdir($ruta_manual, 0777, true);
+            }
 
             $payer = new User();
             $payer->name = $request->get('name') . " " . $request->get('apellido');
@@ -606,7 +610,9 @@ class RegistroIMNASController extends Controller
             $ruta_manual = public_path() . '/documentos'.'/'. $request->telefono;
         }
 
-
+        if (!file_exists($ruta_manual)) {
+            mkdir($ruta_manual, 0777, true);
+        }
         $documentos_id = Documentos::where('id_usuario','=',$payer->id)->first();
 
         if($documentos_id == null){
@@ -802,6 +808,10 @@ class RegistroIMNASController extends Controller
             $ruta_estandar = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $request->get('telefono') .'/');
         }else{
             $ruta_estandar = public_path() . '/documentos/' .$request->get('telefono').'/';
+        }
+
+        if (!file_exists($ruta_estandar)) {
+            mkdir($ruta_estandar, 0777, true);
         }
 
         $docmuentos = Documentos::where('id_usuario','=',$id)->first();
