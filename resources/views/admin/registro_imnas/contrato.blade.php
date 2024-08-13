@@ -258,7 +258,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/instagram.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="instagram_escuela" name="instagram_escuela" type="email" class="form-control" value="{{$user->instagram}}">
+                                        <input id="instagram_escuela" name="instagram_escuela" type="text" class="form-control" value="{{$user->instagram}}">
                                     </div>
                                 </div>
 
@@ -268,7 +268,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/facebook.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="facebook_escuela" name="facebook_escuela" type="email" class="form-control" value="{{$user->facebook}}">
+                                        <input id="facebook_escuela" name="facebook_escuela" type="text" class="form-control" value="{{$user->facebook}}">
                                     </div>
                                 </div>
 
@@ -278,7 +278,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/web-link.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="pagina_escuela" name="pagina_escuela" type="email" class="form-control" value="{{$user->pagina_web}}">
+                                        <input id="pagina_escuela" name="pagina_escuela" type="text" class="form-control" value="{{$user->pagina_web}}">
                                     </div>
                                 </div>
 
@@ -288,7 +288,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/whatsapp.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="telefono_escuela" name="telefono_escuela" type="email" class="form-control" value="{{$user->celular_casa}}">
+                                        <input id="telefono_escuela" name="telefono_escuela" type="text" class="form-control" value="{{$user->celular_casa}}">
                                     </div>
                                 </div>
                             </div>
