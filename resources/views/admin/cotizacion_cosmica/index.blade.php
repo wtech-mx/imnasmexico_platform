@@ -43,14 +43,15 @@
                                 <h5>Filtro</h5>
                                     <div class="row">
                                         <div class="col-3">
-                                            <label for="user_id">Seleccionar Usuario:</label>
-                                            <select class="form-control administradores" name="administradores" id="administradores">
-                                                <option selected value="">seleccionar Usuario</option>
-                                                @foreach($administradores as $admin)
-                                                    <option value="{{ $admin->id }}">{{ $admin->name }}</option>
-                                                @endforeach
-                                            </select>
+                                            <label for="user_id">Fecha Inicio:</label>
+                                            <input type="date" class="form-control" name="fecha_inicio">
                                         </div>
+
+                                        <div class="col-3">
+                                            <label for="user_id">Fecha Fin:</label>
+                                            <input type="date" class="form-control" name="fecha_fin">
+                                        </div>
+
                                         <div class="col-3">
                                             <br>
                                             <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #783E5D; color: #ffffff;">Buscar</button>

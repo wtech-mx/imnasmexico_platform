@@ -82,17 +82,17 @@ class CotizacionCosmicaController extends Controller
 
     public function buscador(Request $request){
         $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
-        $id_client = $request->id_client;
-        $phone = $request->phone;
         $admin = $request->administradores;
-        if ($id_client !== 'null' && $id_client !== null) {
-            $notas = NotasProductosCosmica::where('id_usuario', $id_client)->get();
-        } elseif ($phone !== 'null' && $phone !== null) {
-            $notas = NotasProductosCosmica::where('id_usuario', $phone)->get();
+
+        $query = NotasProductosCosmica::query();
+        if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
+            $fechaInicio = $request->input('fecha_inicio');
+            $fechaFin = $request->input('fecha_fin');
+
+            $query->whereBetween('fecha', [$fechaInicio, $fechaFin]);
         }
-        if ($admin !== 'null' && $admin !== null) {
-            $notas = NotasProductosCosmica::where('id_admin', $admin)->get();
-        }
+
+        $notas = $query->get();
 
         return view('admin.cotizacion_cosmica.index',compact('notas', 'administradores'));
     }
