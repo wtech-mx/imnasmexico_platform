@@ -574,7 +574,7 @@ class RegistroIMNASController extends Controller
             $payer = $user;
         } else {
             if($dominio == 'plataforma.imnasmexico.com'){
-                $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $request->telefono);
+                $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $request->telefono .'/');
             }else{
                 $ruta_manual = public_path() . '/documentos'.'/'. $request->telefono;
             }
