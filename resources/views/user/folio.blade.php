@@ -159,13 +159,10 @@
                                         estatutos requeridos en cada uno de ellos.
                                     </p>
                                     <p class="text-center mt-4">
-                                        <strong>Nombre del Alumno:</strong> {{$tickets_generador['nombre']}} <br>
-                                        <strong>Especialidad:</strong> {{$tickets_generador['nom_curso']}} <br>
-                                        @if($tickets_generador['escuela'])
-                                        <strong>Escuela donde estudió:</strong>
-                                            <p>Escuela: {{ $tickets_generador['escuela'] }}</p>
-                                        @endif<br>
-                                        <strong>Fecha que estudió :</strong> {{ \Carbon\Carbon::parse($tickets_generador['fecha'])->isoFormat('DD [de] MMMM [del] YYYY') }} <br>
+                                        <strong>Nombre del Alumno:</strong> {{$tickets_generador->nombre}} <br>
+                                        <strong>Especialidad:</strong> {{$tickets_generador->nom_curso}} <br>
+                                        <strong>Escuela donde estudió:</strong>  {{$tickets_generador->User->escuela}} <br>
+                                        <strong>Fecha que estudió :</strong> {{ \Carbon\Carbon::parse($tickets_generador->fecha_curso)->isoFormat('DD [de] MMMM [del] YYYY') }} <br>
                                     </p>
                                     <p class="text-center mt-4">
                                         La coordinación de asuntos escolares del Registro Nacional IMNAS con registro en la
@@ -176,15 +173,14 @@
                                     </p>
                                 </div>
 
-                                @if($tickets_generador['escuela'])
-                                    <div class="col-12 col-md-6 col-lg-6 my-auto">
-                                        <a href="{{ route('folio.index_cedula',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DDD78D">Cedulda de Identidad de Papel</a>
-                                        <a href="{{ route('folio.index_crednecial',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
-                                        <a href="{{ route('folio.index_diploma',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma Imnnas</a>
-                                        <a href="{{ route('folio.index_titulo',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Titulo Honorifico</a>
-                                        <a href="{{ route('folio.index_tira',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materias</a>
-                                    </div>
-                                @endif
+                                <div class="col-12 col-md-6 col-lg-6 my-auto">
+                                    <a href="{{ route('folio.index_cedula',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DDD78D">Cedulda de Identidad de Papel</a>
+                                    <a href="{{ route('folio.index_crednecial',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
+                                    <a href="{{ route('folio.index_diploma',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma Imnnas</a>
+                                    <a href="{{ route('folio.index_titulo',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Titulo Honorifico</a>
+                                    <a href="{{ route('folio.index_tira',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materias</a>
+                                </div>
+
                             </div>
 
                         </div>
