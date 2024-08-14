@@ -176,6 +176,7 @@
                                     </p>
                                 </div>
 
+                                @if($tickets_generador['escuela'])
                                     <div class="col-12 col-md-6 col-lg-6 my-auto">
                                         <a href="{{ route('folio.index_cedula',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DDD78D">Cedulda de Identidad de Papel</a>
                                         <a href="{{ route('folio.index_crednecial',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
@@ -183,6 +184,7 @@
                                         <a href="{{ route('folio.index_titulo',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Titulo Honorifico</a>
                                         <a href="{{ route('folio.index_tira',$tickets_generador->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materias</a>
                                     </div>
+                                @endif
                             </div>
 
                         </div>
