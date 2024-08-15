@@ -48,7 +48,7 @@
                                     @if ($tiket->Cursos->modalidad == 'Online')
                                         <b><label>Liga de Clase</label></b><br>
                                         @if ($order->estatus == '1')
-                                            <a href="{{$tiket->Cursos->recurso}}">{{$tiket->Cursos->recurso}}</a>
+                                            <a href="https://{{$tiket->Cursos->recurso}}">{{$tiket->Cursos->recurso}}</a>
                                         @endif
                                     @else
                                         <b><label>Dirección</label></b><br>
