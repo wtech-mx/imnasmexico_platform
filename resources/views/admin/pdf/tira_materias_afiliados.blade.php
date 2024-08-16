@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tira materterias Alasiados</title>
+    <title>Tira materterias Afiliados </title>
     <style>
         * {
             padding: 0px;
@@ -96,6 +96,10 @@
             text-align: left;
         }
 
+        .ul_text{
+            font-size: 26px;
+        }
+
         .img_firma{
             width: 230px;
             height: auto;
@@ -166,18 +170,24 @@
 
         .container_logo{
             position: absolute;
-            top: 5.5%;
+            top: 52px;
             left:190px;
         }
 
         .container_logo_reverso{
             position: absolute;
-            top: 4.5%;
+            top: 52px;
             left:205px;
         }
 
+        .container_logo_reverso_abajo{
+            position: absolute;
+            top: 1120px;
+            left:170px;
+        }
+
         .img_logo{
-            width: 80px;
+            width: 90px;
         }
     </style>
 </head>
@@ -215,7 +225,20 @@
                     }
         @endphp
 
-        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+        @if(!isset($fileName_logo))
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+
+        @elseif(empty($fileName_logo))
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+
+        @elseif($fileName_logo == 'Sin Logo')
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+        @else
+            <img src="{{ $basePath . 'tira_limmpia.png' }}" class="img_portada">
+        @endif
 
          <div class="container_logo">
             @if(!isset($fileName_logo))
@@ -259,7 +282,7 @@
         </div>
 
         <div class="container_texto_tira">
-            <ul>
+            <ul class="ul_text">
                 @foreach ($subtemas as $subtema)
                     <li>{{$subtema->subtema}}</li>
                 @endforeach
@@ -267,12 +290,40 @@
         </div>
 
         <div class="contenedor_reverso">
+
+            @if(!isset($fileName_logo))
             <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+
+
+            @elseif(empty($fileName_logo))
+                <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+
+
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+
+            @else
+                <img src="{{ $basePath . 'tira_limmpia_reversa.png' }}" class="img_reverso">
+            @endif
 
             <h4 class="nombre_reverso">{{ ucwords(strtolower($curso)) }}</h4>
         </div>
 
         <div class="container_logo_reverso">
+            @if(!isset($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+            @elseif(empty($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
+            @else
+                <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo">
+            @endif
+        </div>
+
+        <div class="container_logo_reverso_abajo">
             @if(!isset($fileName_logo))
                 <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
 
