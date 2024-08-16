@@ -488,7 +488,7 @@
         </div>
 
         <div class="container3">
-            <h4 class="folio3">FOLIO {{$folio}}</h4>
+            <h4 class="folio3">{{$folio}}</h4>
         </div>
 
         <div class="qr_container3">

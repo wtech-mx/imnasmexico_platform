@@ -219,12 +219,12 @@
 
         .container_logo{
             position: absolute;
-            top: 8%;
+            top: 8.3%;
             left:60px;
         }
 
         .img_logo{
-            width: 30px;
+            width: 35px;
         }
 
 
@@ -261,7 +261,7 @@
         @elseif($fileName_logo == 'Sin Logo')
             <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
         @else
-            <img src="{{ $basePath . 'portada_credneicla_logo_empresa.png' }}" class="img_portada">
+            <img src="{{ $basePath . 'crdecnia_frontal_limpia.png' }}" class="img_portada">
         @endif
 
         {{-- <div class="container">

@@ -87,12 +87,22 @@
 
         .container_logo{
             position: absolute;
-            top: 13.5%;
-            left:380px;
+            top:50px;
+            left:320px;
         }
 
         .img_logo{
-            width: 60px;
+            width: 100px;
+        }
+
+        .container_logo2{
+            position: absolute;
+            top:550px;
+            left:50px;
+        }
+
+        .img_logo2{
+            width: 85px;
         }
 
         .img_reverso{
@@ -210,8 +220,18 @@
         @endphp
 
     {{-- <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_portada }}" class="img_portada"> --}}
-    <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
 
+    @if(!isset($fileName_logo))
+        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+    @elseif(empty($fileName_logo))
+        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+    @elseif($fileName_logo == 'Sin Logo')
+        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+    @else
+        <img src="{{ $basePath . 'ceudla_frontal_limpia.png' }}" class="img_portada">
+    @endif
 
     {{-- <div class="container_logo">
         <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo"
@@ -232,6 +252,20 @@
             <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
         @else
             <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo">
+        @endif
+    </div>
+
+    <div class="container_logo2">
+        @if(!isset($fileName_logo))
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo2">
+
+        @elseif(empty($fileName_logo))
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo2">
+
+        @elseif($fileName_logo == 'Sin Logo')
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo2">
+        @else
+            <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo2">
         @endif
     </div>
 
@@ -281,7 +315,18 @@
         </div>
 
         {{-- <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
-        <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+
+        @if(!isset($fileName_logo))
+            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+
+        @elseif(empty($fileName_logo))
+            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+
+        @elseif($fileName_logo == 'Sin Logo')
+            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+        @else
+            <img src="{{ $basePath . 'ceudla_trasera_limpia.png' }}" class="img_reverso">
+        @endif
 
         <div class="container4">
             <h4 class="folio2">{{$folio}}</h4>
@@ -297,6 +342,7 @@
             @endif>
             {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma">--}}
         </div>
+
 
         <div class="qr_container2">
             @php
