@@ -245,12 +245,29 @@
 
         .container_logo{
             position: absolute;
-            top: 94%;
-            left:243px;
+            top: 50px;
+            left:35%;
+        }
+
+        .container_logo2{
+            position: absolute;
+            top: 93.5%;
+            left:30%;
+        }
+
+        .container_logo_reversa{
+            width: 100%;
+            position: absolute;
+            top: 93.5%;
+            left:30%;
         }
 
         .img_logo{
-            width: 70px;
+            width: 430px;
+        }
+
+        .img_logo2{
+            width: 80px;
         }
 
         .container_registro{
@@ -296,7 +313,7 @@
         @elseif($fileName_logo == 'Sin Logo')
         <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
         @else
-        <img src="{{ $basePath . 'titulo_logo_empresa.png' }}" class="img_portada">
+        <img src="{{ $basePath . 'titulo_frontal_limpio.png' }}" class="img_portada">
         @endif
 
         <div class="container_registro">
@@ -319,6 +336,20 @@
                 <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo">
             @else
                 <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo">
+            @endif
+        </div>
+
+        <div class="container_logo2">
+            @if(!isset($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo2">
+
+            @elseif(empty($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo2">
+
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo2">
+            @else
+                <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo2">
             @endif
         </div>
 
@@ -361,7 +392,7 @@
         </div>
 
         <div class="container_folio_bajo1">
-            <h4 class="folio3">FOLIO {{$folio}}</h4>
+            <h4 class="folio3">{{$folio}}</h4>
         </div>
 
         <div class="qr_container">
@@ -376,7 +407,17 @@
             @endphp
         </div>
 
+        @if(!isset($fileName_logo))
         <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+
+        @elseif(empty($fileName_logo))
+        <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+
+        @elseif($fileName_logo == 'Sin Logo')
+        <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+        @else
+        <img src="{{ $basePath . 'titulo_reverso_limpio.png' }}" class="img_reverso">
+        @endif
 
         @php
             // Divide el curso por espacios en blanco
@@ -455,6 +496,21 @@
                 echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',6,6) . '" style="background: #fff; padding: 5px;"   />';
             @endphp
         </div>
+
+        <div class="container_logo_reversa">
+            @if(!isset($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo2">
+
+            @elseif(empty($fileName_logo))
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo2">
+
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo2">
+            @else
+                <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo2">
+            @endif
+        </div>
+
 
     </body>
 </html>
