@@ -511,15 +511,17 @@ Route::group(['middleware' => ['auth']], function() {
 
 });
 
+Route::get('registro/login', function () {
+    return view('cam.auth.login');
+});
+
 Route::get('distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index_distribuidoras'])->name('distribuidoras.index_distribuidoras');
 Route::get('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_protocolo'])->name('distribuidoras.index_protocolo');
 Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'validate_protocolo'])->name('distribuidoras.validate_protocolo');
     // Rutas para el sistema de documentos
 
     Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
-    Route::get('login', function () {
-        return view('cam.auth.login');
-    });
+
 
 
     Route::middleware(['auth'])->group(function () {

@@ -7,7 +7,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/admin/img/apple-icon.png')}}">
   <link rel="icon" type="image/png" href="{{asset('assets/user/logotipos/cam.png')}}">
   <title>
-    CAM
+    Registro Nacional
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -26,7 +26,7 @@
     <style>
 .bg-gradient-dark {
     opacity: 0.5!important;
-    background-image: linear-gradient(310deg, #6EC1E4 0%, #6EC1E4 100%)!important;
+    background-image: linear-gradient(310deg, #836262 0%, #836262 100%)!important;
 }
     </style>
 
@@ -36,7 +36,7 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-4 col-md-7">
-            <div class="card border-0 mb-0" style="border-style: solid!important;border-width: 0px 9px 9px 0px!important;border-color: #6EC1E4!important;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);">
+            <div class="card border-0 mb-0" style="border-style: solid!important;border-width: 0px 9px 9px 0px!important;border-color: #836262!important;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);">
               <div class="card-header bg-transparent">
                 <p class="text-center">
                     <img style="width: 90px;" src="{{asset('assets/user/logotipos/cam.png')}}" alt="">
@@ -71,7 +71,7 @@
                   </div>
 
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary w-100 my-4 mb-2" style="background-color: #6EC1E4!important"> Ingresar</button>
+                    <button type="submit" class="btn btn-primary w-100 my-4 mb-2" style="background-color: #836262!important"> Ingresar</button>
                   </div>
 
                 </form>
