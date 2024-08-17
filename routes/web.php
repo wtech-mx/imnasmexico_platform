@@ -407,7 +407,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/notas/cotizacion/update/{id}', [App\Http\Controllers\CotizacionController::class, 'update'])->name('notas_cotizacion.update');
     Route::get('/admin/notas/cotizacion/buscador', [App\Http\Controllers\CotizacionController::class, 'buscador'])->name('advance_cotizacion_productos.buscador');
 
-
     Route::delete('/admin/notas/cotizacion/delete/{id}', [App\Http\Controllers\CotizacionController::class, 'delete'])->name('notas_cotizacion.delete');
     Route::post('/admin/cotizacion/update/', [App\Http\Controllers\CotizacionController::class, 'update_cotizacion'])->name('notas_cotizacion.cotizacion');
 
@@ -471,6 +470,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/order/pay/registro', [OrderController::class, 'pagar_registro'])->name('order.pay_registro');
     Route::get('/registro/imnas/show/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'show_cliente'])->name('show_cliente.imnas');
     Route::post('/registro/imnas/generar_registro', [App\Http\Controllers\RegistroIMNASController::class, 'generar_registro'])->name('generar_registro.documento');
+    Route::get('/registro/imnas/buscar/folio/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'buscador_registro'])->name('folio_registro.buscador');
     Route::patch('/registro/imnas/guia/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_guia'])->name('update_guia.imnas');
 
     Route::post('/registro/imnas/store', [App\Http\Controllers\RegistroIMNASController::class, 'store'])->name('registro_imnas.store');
@@ -478,6 +478,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O   R E G I S T R O  I M N A S  C L I E N T E S ===============================
     Route::get('/registro/imnas/clientes/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'index_clientes'])->name('clientes.imnas');
+    Route::patch('/registro/imnas/subir/especialidad/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_especialidad'])->name('update_especialidad.imnas');
     Route::patch('/registro/imnas/subir/doc/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_clientes'])->name('update_clientes.imnas');
 
 

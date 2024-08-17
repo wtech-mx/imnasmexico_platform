@@ -63,8 +63,12 @@
 
         @media only screen and (max-width: 450px) {
             .text-res {
-            font-size: 12px
+                font-size: 12px
+            }
         }
+
+        .custom-file-input ~ .custom-file-label::after {
+            content: "Seleccionar archivo";
         }
 
     </style>
@@ -89,7 +93,7 @@
                                 <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Datos Personales del Afiliado</h4>
 
                                 <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Nombre Completo: *</label>
+                                    <label for="name">Nombre Completo: <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
@@ -99,7 +103,7 @@
                                 </div>
 
                                 <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Dirección:  *</label>
+                                    <label for="name">Dirección:  <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
@@ -109,7 +113,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Ciudad: *</label>
+                                    <label for="name">Ciudad: <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/rascacielos.png') }}" alt="" width="35px">
@@ -119,7 +123,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Estado: *</label>
+                                    <label for="name">Estado: <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/mapa.png') }}" alt="" width="35px">
@@ -129,7 +133,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Codigo Postal *</label>
+                                    <label for="name">Codigo Postal <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/codigo-postal.png') }}" alt="" width="35px">
@@ -139,7 +143,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Pais *</label>
+                                    <label for="name">Pais <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/naciones-unidas.png') }}" alt="" width="35px">
@@ -149,7 +153,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Telefono *</label>
+                                    <label for="name">Telefono <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/ring-phone.png') }}" alt="" width="35px">
@@ -159,7 +163,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4 ">
-                                    <label for="name">Correo Electronico *</label>
+                                    <label for="name">Correo Electronico <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
@@ -172,7 +176,7 @@
                             <div class="row">
                                 <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Datos de Academia o escuela del Afiliado</h4>
                                 <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Nombre de escuela o academa(marca, o propio) *</label>
+                                    <label for="name">Nombre de escuela o academa(marca, o propio) <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/aprender-en-linea.webp') }}" alt="" width="35px">
@@ -182,7 +186,7 @@
                                 </div>
 
                                 <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Dirección *</label>
+                                    <label for="name">Dirección <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
@@ -192,7 +196,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Ciudad *</label>
+                                    <label for="name">Ciudad <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/rascacielos.png') }}" alt="" width="35px">
@@ -202,7 +206,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Estado *</label>
+                                    <label for="name">Estado <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/mapa.png') }}" alt="" width="35px">
@@ -212,7 +216,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Codigo Postal *</label>
+                                    <label for="name">Codigo Postal <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/codigo-postal.png') }}" alt="" width="35px">
@@ -222,7 +226,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Pais *</label>
+                                    <label for="name">Pais <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/naciones-unidas.png') }}" alt="" width="35px">
@@ -232,7 +236,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Telefono *</label>
+                                    <label for="name">Telefono <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/ring-phone.png') }}" alt="" width="35px">
@@ -242,7 +246,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4 ">
-                                    <label for="name">Correo Electronico *</label>
+                                    <label for="name">Correo Electronico <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
@@ -296,7 +300,7 @@
                             <div class="row">
                                 <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Datos de Familiar, Conocido o Referencia</h4>
                                 <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Nombre Completo *</label>
+                                    <label for="name">Nombre Completo <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
@@ -306,7 +310,7 @@
                                 </div>
 
                                 <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Dirección *</label>
+                                    <label for="name">Dirección <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
@@ -316,7 +320,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Ciudad *</label>
+                                    <label for="name">Ciudad <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/rascacielos.png') }}" alt="" width="35px">
@@ -326,7 +330,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Estado *</label>
+                                    <label for="name">Estado <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/mapa.png') }}" alt="" width="35px">
@@ -336,7 +340,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Codigo Postal *</label>
+                                    <label for="name">Codigo Postal <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/codigo-postal.png') }}" alt="" width="35px">
@@ -346,7 +350,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Pais *</label>
+                                    <label for="name">Pais <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/naciones-unidas.png') }}" alt="" width="35px">
@@ -356,7 +360,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4">
-                                    <label for="name">Telefono *</label>
+                                    <label for="name">Telefono <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/ring-phone.png') }}" alt="" width="35px">
@@ -366,7 +370,7 @@
                                 </div>
 
                                 <div class="col-6 form-group mt-4 ">
-                                    <label for="name">Correo Electronico *</label>
+                                    <label for="name">Correo Electronico <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
@@ -379,13 +383,15 @@
                             <div class="row">
                                 <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Documentación Requerida del afiliado</h4>
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
-                                    <label for="name">INE Frente *</label>
+                                    <label for="name">INE Frente <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/ine.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->ine == NULL)
                                             <input id="ine" name="ine" type="file" class="form-control" required>
+                                            <label for="domicilio" class="custom-file-label">Seleccionar archivo</label>
+                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
                                             <input id="ine" name="ine" type="file" class="form-control">
                                         @endif
@@ -393,13 +399,15 @@
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
-                                    <label for="name">INE Atras *</label>
+                                    <label for="name">INE Atras <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/ine.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->ine_atras_registro == NULL)
                                             <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control" required>
+                                            <label for="ine_atras_registro" class="custom-file-label">Seleccionar archivo</label>
+                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
                                             <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control">
                                         @endif
@@ -407,13 +415,15 @@
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
-                                    <label for="name">CURP *</label>
+                                    <label for="name">CURP <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/carta.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->curp == NULL)
                                             <input id="curp" name="curp" type="file" class="form-control" required>
+                                            <label for="domicilio" class="custom-file-label">Seleccionar archivo</label>
+                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
                                             <input id="curp" name="curp" type="file" class="form-control">
                                         @endif
@@ -421,41 +431,31 @@
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
-                                    <label for="name">Comprobante domicilio *</label>
+                                    <label for="name">Comprobante domicilio <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/contrato_g.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->curp == NULL)
-                                            <input id="domicilio" name="domicilio" type="file" class="form-control" required>
+                                            <input class="custom-file-input" id="domicilio" name="domicilio" type="file" class="form-control" required>
+                                            <label for="domicilio" class="custom-file-label">Seleccionar archivo</label>
+                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
-                                            <input id="domicilio" name="domicilio" type="file" class="form-control">
+                                            <input class="custom-file-input" id="domicilio" name="domicilio" type="file" class="form-control">
                                         @endif
                                     </div>
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
-                                    <label for="name">Acta Nacimiento *</label>
-                                    <div class="input-group">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/contrato.png') }}" alt="" width="35px">
-                                        </span>
-                                        @if($documentos->curp == NULL)
-                                            <input id="acta_nacimiento_registro" name="acta_nacimiento_registro" type="file" class="form-control" required>
-                                        @else
-                                            <input id="acta_nacimiento_registro" name="acta_nacimiento_registro" type="file" class="form-control">
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
-                                    <label for="name">Foto infantil del afiliado *</label>
+                                    <label for="name">Foto infantil del afiliado <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->curp == NULL)
                                             <input id="img_infantil" name="img_infantil" type="file" class="form-control" required>
+                                            <label for="domicilio" class="custom-file-label">Seleccionar archivo</label>
+                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
                                             <input id="img_infantil" name="img_infantil" type="file" class="form-control">
                                         @endif
@@ -463,13 +463,15 @@
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
-                                    <label for="name">Logo de escuela / marca personal *</label>
+                                    <label for="name">Logo de escuela / marca personal <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="https://plataforma.imnasmexico.com/assets/user/logotipos/imnas.webp" alt="" width="35px">
                                         </span>
                                         @if($documentos->curp == NULL)
                                             <input id="logo" name="logo" type="file" class="form-control" required>
+                                            <label for="domicilio" class="custom-file-label">Seleccionar archivo</label>
+                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
                                             <input id="logo" name="logo" type="file" class="form-control">
                                         @endif
@@ -480,7 +482,7 @@
                             <div class="row">
                                 <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Temario/plan de estudios para tira de materias (6 subtemas como minimo, 12 subtemas como maximo por especialidad)</h4>
                                 <div class="col-12 form-group mt-4 ">
-                                    <label for="name">Especialidad *</label>
+                                    <label for="name">Especialidad <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/clase.webp') }}" alt="" width="35px">
@@ -496,7 +498,11 @@
                                     @endphp
 
                                     <div class="col-12 form-group mt-4 ">
-                                        <label for="name">Subtema {{ $i }} *</label>
+                                        <label for="name">Subtema {{ $i }}
+                                            @if($i <= 6)
+                                                <b style="color: #f80909;">*</b>
+                                            @endif
+                                        </label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">

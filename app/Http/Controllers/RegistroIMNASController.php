@@ -37,6 +37,7 @@ class RegistroIMNASController extends Controller
         ->where('registro_imnas_doc.id_usuario', $cliente->id)
         ->whereNull('registro_imnas_doc.nombre')
         ->where('orders.estatus', '1')
+        ->where('registro_imnas_doc.tipo', '1')
         ->select('registro_imnas_doc.*') // Asegúrate de seleccionar solo las columnas necesarias
         ->get();
 
@@ -44,9 +45,112 @@ class RegistroIMNASController extends Controller
         $cursos_tickets = CursosTickets::where('id_curso', $curso->id)->get();
         $cursos_tickets = $cursos_tickets->slice(1);
 
+        $curso_envio = Cursos::where('id', '=', 109)->first();
+        $tickets_envio = CursosTickets::where('id_curso', $curso_envio->id)->get();
+
         $especialidades = RegistroImnasEspecialidad::where('id_cliente', $cliente->id)->get();
 
-        return view('user.registro_imnas', compact('registros_imnas', 'cliente', 'recien_comprados', 'cursos_tickets', 'curso', 'especialidades'));
+        $recien_comprados_especialidad = RegistroImnas::join('orders', 'registro_imnas_doc.id_order', '=', 'orders.id')
+        ->where('registro_imnas_doc.id_usuario', $cliente->id)
+        ->whereNull('registro_imnas_doc.nombre')
+        ->where('orders.estatus', '1')
+        ->where('registro_imnas_doc.tipo', '2')
+        ->where('registro_imnas_doc.num_guia', NULL)
+        ->select('registro_imnas_doc.*') // Asegúrate de seleccionar solo las columnas necesarias
+        ->get();
+        return view('user.registro_imnas_new', compact('registros_imnas', 'recien_comprados_especialidad','cliente', 'recien_comprados', 'cursos_tickets', 'curso', 'especialidades', 'curso_envio', 'tickets_envio'));
+    }
+
+    public function buscador_registro(Request $request, $code){
+        $cliente = User::where('code', $code)->firstOrFail();
+        $registros_imnas = RegistroImnas::where('id_usuario', '=', $cliente->id)->where('nombre', '!=', NULL)->get();
+        $recien_comprados = RegistroImnas::join('orders', 'registro_imnas_doc.id_order', '=', 'orders.id')
+        ->where('registro_imnas_doc.id_usuario', $cliente->id)
+        ->whereNull('registro_imnas_doc.nombre')
+        ->where('orders.estatus', '1')
+        ->where('registro_imnas_doc.tipo', '1')
+        ->select('registro_imnas_doc.*') // Asegúrate de seleccionar solo las columnas necesarias
+        ->get();
+
+        $curso = Cursos::where('id', '=', 647)->first();
+        $cursos_tickets = CursosTickets::where('id_curso', $curso->id)->get();
+        $cursos_tickets = $cursos_tickets->slice(1);
+
+        $curso_envio = Cursos::where('id', '=', 109)->first();
+        $tickets_envio = CursosTickets::where('id_curso', $curso_envio->id)->get();
+
+        $especialidades = RegistroImnasEspecialidad::where('id_cliente', $cliente->id)->get();
+
+        $recien_comprados_especialidad = RegistroImnas::join('orders', 'registro_imnas_doc.id_order', '=', 'orders.id')
+        ->where('registro_imnas_doc.id_usuario', $cliente->id)
+        ->whereNull('registro_imnas_doc.nombre')
+        ->where('orders.estatus', '1')
+        ->where('registro_imnas_doc.tipo', '2')
+        ->where('registro_imnas_doc.num_guia', NULL)
+        ->select('registro_imnas_doc.*') // Asegúrate de seleccionar solo las columnas necesarias
+        ->get();
+
+        $tickets = OrdersTickets::where('folio', '=', $request->get('folio'))->first();
+
+            if (!$tickets) {
+                $tickets_generador = RegistroImnas::where('folio', $request->get('folio'))->first();
+            }else{
+                $tickets_generador = '';
+            }
+
+        $folio = $request->get('folio');
+
+        return view('user.registro_imnas_new', compact('registros_imnas', 'recien_comprados_especialidad','cliente', 'recien_comprados', 'cursos_tickets', 'curso', 'especialidades', 'curso_envio', 'tickets_envio','tickets', 'folio', 'tickets_generador'));
+    }
+
+    public function update_especialidad(Request $request, $id)
+    {
+        $cliente = User::where('id', $request->id_usuario)->first();
+
+        $reg = RegistroImnas::where('id', $id)->first();
+        $reg->num_guia = '1';
+        $reg->update();
+
+        $especialidad = new RegistroImnasEspecialidad;
+        $especialidad->id_cliente = $cliente->id;
+        $especialidad->especialidad = $request->get('especialidad');
+        $especialidad->estatus = '1';
+        $especialidad->id_documento = '0';
+        $especialidad->save();
+
+        $idMateria = $especialidad->id;
+        for ($i = 1; $i <= 12; $i++) {
+            $subtema = $request->input("subtema_$i");
+
+            // Verifica si el subtema tiene algún valor
+            if (!empty($subtema)) {
+                // Crea un nuevo registro en la tabla registro_imnas_temario
+                DB::table('registro_imnas_temario')->insert([
+                    'id_materia' => $idMateria,
+                    'subtema' => $subtema,
+                ]);
+            }
+        }
+
+        $relaciones = new RegistroImnasRelacionMat;
+        $relaciones->id_materia = $especialidad->id;
+        $relaciones->id_user = $cliente->id;
+        $relaciones->save();
+
+        DB::table('registro_imnas_temario')->where('id_materia', $idMateria)->delete();
+
+        // Guardar los nuevos subtemas
+        for ($i = 1; $i <= 12; $i++) {
+            $subtema = $request->input("subtema_$i");
+
+            if (!empty($subtema)) {
+                DB::table('registro_imnas_temario')->insert([
+                    'id_materia' => $idMateria,
+                    'subtema' => $subtema,
+                ]);
+            }
+        }
+        return redirect()->back()->with('success', 'Se creo con exito.');
     }
 
     public function update_clientes(Request $request, $id)
@@ -347,7 +451,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $idMateria = RegistroImnasEspecialidad::where('id_cliente', $request->get('id_usuario'))->first();
+            $idMateria = RegistroImnasEspecialidad::where('especialidad', $ticket->nom_curso)->first();
 
             $subtemas = RegistroImnasTemario::
             where('id_materia', $idMateria->id)

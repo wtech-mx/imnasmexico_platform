@@ -55,9 +55,11 @@ class CustomAuthController extends Controller
 
             if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))){
 
-                if(Auth::user()->cliente == '2' or  Auth::user()->cliente == '5'){
+                if(Auth::user()->registro_imnas == '1'){
+                    $code = Auth::user()->code;
+                    return redirect()->route('clientes.imnas', ['code' => $code])->withSuccess('Sesión iniciada');
+                }elseif(Auth::user()->cliente == '2' or  Auth::user()->cliente == '5'){
                     return redirect('/profesor/inicio');
-
                 }elseif(Auth::user()->user_cam == '4' or Auth::user()->user_cam == '3'){
                     $code = Auth::user()->code;
                     return redirect()->route('perfil.index', ['code' => $code])->withSuccess('Sesión iniciada');

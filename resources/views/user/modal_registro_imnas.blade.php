@@ -37,7 +37,7 @@
                     </div>
                 </div>
 
-                <div class="mb-4 col-6">
+                <div class="mb-4 col-4">
                     <label for="basic-url" class="form-label" style="font-weight: 700;">INE</label>
                     @if (pathinfo($registro_imnas->ine, PATHINFO_EXTENSION) == 'pdf')
                         <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->ine) }}" download="{{ $registro_imnas->ine }}" style="background: #836262; border-radius: 19px;">
@@ -50,7 +50,7 @@
                     @endif
                 </div>
 
-                <div class="mb-4 col-6">
+                <div class="mb-4 col-4">
                     <label for="basic-url" class="form-label" style="font-weight: 700;">CURP</label>
                     @if (pathinfo($registro_imnas->curp, PATHINFO_EXTENSION) == 'pdf')
                         <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->curp) }}" download="{{ $registro_imnas->curp }}" style="background: #836262; border-radius: 19px;">
@@ -63,7 +63,7 @@
                     @endif
                 </div>
 
-                <div class="mb-4 col-6">
+                <div class="mb-4 col-4">
                     <label for="basic-url" class="form-label" style="font-weight: 700;">Foto</label>
                     @if (pathinfo($registro_imnas->foto_cuadrada, PATHINFO_EXTENSION) == 'pdf')
                         <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->foto_cuadrada) }}" download="{{ $registro_imnas->foto_cuadrada }}" style="background: #836262; border-radius: 19px;">
@@ -76,30 +76,59 @@
                     @endif
                 </div>
 
-                <div class="mb-4 col-6">
-                    <label for="basic-url" class="form-label" style="font-weight: 700;">Firma</label>
-                    @if (pathinfo($registro_imnas->firma, PATHINFO_EXTENSION) == 'pdf')
-                        <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->firma) }}" download="{{ $registro_imnas->firma }}" style="background: #836262; border-radius: 19px;">
-                            Descargar Documento
-                        </a>
-                    @else
-                        <div class="input-group">
-                            <img id="blah" src="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->firma) }}" alt="Imagen" style="width: 100px;height: 100px;">
-                        </div>
-                    @endif
+                <div class="mb-4 col-2">
+                    <label for="basic-url" class="form-label" style="font-weight: 700;">Cedula</label>
+                    <div class="input-group">
+                        @if ($registro_imnas->estatus_cedula == NULL)
+                             <p style="color: #864d4d">Faltante por hacer</p>
+                        @else
+                            <p style="color: #5b814d">Realizado</p>
+                        @endif
+                    </div>
                 </div>
 
-                <div class="mb-4 col-6">
-                    <label for="basic-url" class="form-label" style="font-weight: 700;">Logo</label>
-                    @if (pathinfo($registro_imnas->logo, PATHINFO_EXTENSION) == 'pdf')
-                        <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->logo) }}" download="{{ $registro_imnas->logo }}" style="background: #836262; border-radius: 19px;">
-                            Descargar Documento
-                        </a>
-                    @else
-                        <div class="input-group">
-                            <img id="blah" src="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->logo) }}" alt="Imagen" style="width: 100px;height: 100px;">
-                        </div>
-                    @endif
+                <div class="mb-4 col-3">
+                    <label for="basic-url" class="form-label" style="font-weight: 700;">Titulo Honorifico</label>
+                    <div class="input-group">
+                        @if ($registro_imnas->estatus_titulo == NULL)
+                             <p style="color: #864d4d">Faltante por hacer</p>
+                        @else
+                            <p style="color: #5b814d">Realizado</p>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="mb-4 col-2">
+                    <label for="basic-url" class="form-label" style="font-weight: 700;">Diploma</label>
+                    <div class="input-group">
+                        @if ($registro_imnas->estatus_diploma == NULL)
+                             <p style="color: #864d4d">Faltante por hacer</p>
+                        @else
+                            <p style="color: #5b814d">Realizado</p>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="mb-4 col-2">
+                    <label for="basic-url" class="form-label" style="font-weight: 700;">Credencial</label>
+                    <div class="input-group">
+                        @if ($registro_imnas->estatus_credencial == NULL)
+                             <p style="color: #864d4d">Faltante por hacer</p>
+                        @else
+                            <p style="color: #5b814d">Realizado</p>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="mb-4 col-2">
+                    <label for="basic-url" class="form-label" style="font-weight: 700;">Tira de materias</label>
+                    <div class="input-group">
+                        @if ($registro_imnas->estatus_tira == NULL)
+                             <p style="color: #864d4d">Faltante por hacer</p>
+                        @else
+                            <p style="color: #5b814d">Realizado</p>
+                        @endif
+                    </div>
                 </div>
             </div>
       </div>
