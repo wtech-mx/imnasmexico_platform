@@ -189,12 +189,22 @@
 
     .container_logo{
         position: absolute;
-        top: 13%;
-        left:380px;
+        top: 55px;
+        left:300px;
     }
 
     .img_logo{
-        width: 60px;
+        width: 100px;
+    }
+
+    .container_logo2{
+        position: absolute;
+        top: 555px;
+        left:50px;
+    }
+
+    .img_logo2{
+        width: 80px;
     }
 
 </style>
@@ -206,7 +216,17 @@
 
 <div class="card-front">
 
-    <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+
+
+    @if(!isset($tickets->User->logo))
+
+        <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+
+    @else
+
+        <img src="{{ $basePath  . '/' . 'ceudla_frontal_limpia.png' }}" class="img_portada">
+
+    @endif
 
 
     <div class="container_logo">
@@ -272,11 +292,28 @@
         </h4>
     </div>
 
+    <div class="container_logo2">
+        @if(!isset($tickets->User->logo))
+        @else
+            <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo2">
+        @endif
+    </div>
+
   </div>
 
 <div class="card-back">
 
-    <img src="{{ $basePath .'/'. $tipo_documentos->img_reverso }}" class="img_reverso">
+    @if(!isset($tickets->User->logo))
+
+        <img src="{{ $basePath .'/'. $tipo_documentos->img_reverso }}" class="img_reverso">
+
+    @else
+
+        <img src="{{ $basePath   .'/'.  'ceudla_trasera_limpia.png' }}" class="img_reverso">
+
+    @endif
+
+
 
     <div class="container_folioReverso">
 

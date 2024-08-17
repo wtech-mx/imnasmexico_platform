@@ -204,7 +204,6 @@
             $parte2 = implode(' ', array_slice($palabras, 2));
         @endphp
 
-
         {{-- <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada"> --}}
 
             @if(!isset($fileName_logo))

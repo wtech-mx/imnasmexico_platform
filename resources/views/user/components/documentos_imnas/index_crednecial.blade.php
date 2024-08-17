@@ -240,12 +240,12 @@
 
         .container_logo{
             position: absolute;
-            top: 8%;
-            left:85px;
+            top: 15px;
+            left:88px;
         }
 
         .img_logo{
-            width: 40px;
+            width: 53px;
         }
 
     </style>

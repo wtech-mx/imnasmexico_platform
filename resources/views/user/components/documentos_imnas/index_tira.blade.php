@@ -75,7 +75,7 @@
         .container_nombre {
             position: absolute;
             top: 20%;
-            left: 330px;
+            left: 300px;
             text-align: center;
         }
 
@@ -83,7 +83,7 @@
             font-family: 'Minion';
             font-size: 18px;
             color: #000;
-            width: 200px;
+            width: 300px;
 
         }
 
@@ -149,18 +149,24 @@
 
         .container_logo{
             position: absolute;
-            top: 10.5%;
-            left:180px;
+            top: 45px;
+            left:190px;
         }
 
         .container_logo2{
             position: absolute;
-            top: 9.5%;
+            top: 45px;
             left:200px;
         }
 
+        .container_logo3{
+            position: absolute;
+            top: 1120px;
+            left:160px;
+        }
+
         .img_logo{
-            width: 80px;
+            width: 95px;
         }
 
         .container_texto_tira{
@@ -168,6 +174,8 @@
             top:75%;
             left:35%;
             text-align: left;
+            font-size: 25px;
+            width: 610px;
         }
 
     </style>
@@ -176,7 +184,12 @@
 @section('content_documentos')
     <div class="card-front">
 
+        @if(!isset($tickets->User->logo))
         <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+        @else
+            <img src="{{ $basePath .'/'. 'tira_limmpia.png' }}" class="img_portada">
+        @endif
+
 
         <div class="container_logo">
             @if(!isset($tickets->User->logo))
@@ -232,9 +245,21 @@
 
     <div class="card-back">
 
+        @if(!isset($tickets->User->logo))
         <img src="{{ $basePath . '/' . $tipo_documentos->img_reverso }}" class="img_reverso">
+        @else
+            <img src="{{ $basePath .'/'. 'tira_limmpia_reversa.png' }}" class="img_reverso">
+        @endif
+
 
         <div class="container_logo2">
+            @if(!isset($tickets->User->logo))
+            @else
+                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo">
+            @endif
+        </div>
+
+        <div class="container_logo3">
             @if(!isset($tickets->User->logo))
             @else
                 <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo">

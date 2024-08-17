@@ -146,7 +146,7 @@
         .container_cursoTrasero{
             position: absolute;
             top:67%;
-            left: 33%;
+            left: 180px;
         }
 
         .curso_sm{
@@ -162,15 +162,34 @@
 
         .container_logo{
             position: absolute;
-            top: 10%;
-            left:247px;
+            top: 30px;
+            left:280px;
         }
 
         .img_logo{
-            width: 120px;
+            width: 150px;
         }
 
 
+        .container_logo2{
+            position: absolute;
+            top: 680px;
+            left:25px;
+        }
+
+        .img_logo2{
+            width: 65px;
+        }
+
+        .container_logoreversa{
+            position: absolute;
+            top: 680px;
+            left:95px;
+        }
+
+        .img_logoreversa{
+            width: 50px;
+        }
 
     </style>
 @endsection
@@ -181,7 +200,7 @@
         @if(!isset($tickets->User->logo))
             <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
         @else
-            <img src="{{ $basePath .'/'. 'portada_doploma_logo_empresa.png' }}" class="img_portada">
+            <img src="{{ $basePath .'/'. 'diploma_fontal_limpio.png' }}" class="img_portada">
         @endif
 
         <div class="container_logo">
@@ -238,12 +257,23 @@
             <h4 class="folio">{{$tickets->folio}}</h4>
         </div>
 
+        <div class="container_logo2">
+            @if(!isset($tickets->User->logo))
+            @else
+                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo2">
+            @endif
+        </div>
+
 
     </div>
 
     <div class="card-back">
 
-        <img src="{{ $basePath . '/' . $tipo_documentos->img_reverso }}" class="img_reverso">
+        @if(!isset($tickets->User->logo))
+            <img src="{{ $basePath . '/' . $tipo_documentos->img_reverso }}" class="img_reverso">
+        @else
+            <img src="{{ $basePath .'/'. 'diploma_reverso_limpio.png' }}" class="img_reverso">
+        @endif
 
         <div class="container_cursoTrasero">
             <h4 class="curso_sm">
@@ -263,7 +293,12 @@
             @endphp
         </div>
 
-
+        <div class="container_logoreversa">
+            @if(!isset($tickets->User->logo))
+            @else
+                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logoreversa">
+            @endif
+        </div>
 
     </div>
 

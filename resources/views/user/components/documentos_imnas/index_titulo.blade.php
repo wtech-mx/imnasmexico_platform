@@ -239,11 +239,21 @@
         .container_logo{
             position: absolute;
             top: 95%;
-            left:93px;
+            left:140px;
         }
 
         .img_logo{
-            width: 36px;
+            width: 30px;
+        }
+
+        .container_logo2{
+            position: absolute;
+            top: 35px;
+            left:180px;
+        }
+
+        .img_logo2{
+            width: 150px;
         }
 
     </style>
@@ -255,13 +265,20 @@
         @if(!isset($tickets->User->logo))
             <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
         @else
-            <img src="{{ $basePath .'/'. 'titulo_logo_empresa.png' }}" class="img_portada">
+            <img src="{{ $basePath .'/'. 'titulo_frontal_limpio.png' }}" class="img_portada">
         @endif
 
         <div class="container_logo">
             @if(!isset($tickets->User->logo))
             @else
                 <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo">
+            @endif
+        </div>
+
+        <div class="container_logo2">
+            @if(!isset($tickets->User->logo))
+            @else
+                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo2">
             @endif
         </div>
 
@@ -354,7 +371,12 @@
     </div>
 
     <div class="card-back">
-        <img src="{{ $basePath . '/' . $tipo_documentos->img_reverso }}" class="img_reverso">
+
+        @if(!isset($tickets->User->logo))
+            <img src="{{ $basePath . '/' . $tipo_documentos->img_reverso }}" class="img_reverso">
+        @else
+            <img src="{{ $basePath .'/'. 'titulo_reverso_limpio.png' }}" class="img_reverso">
+        @endif
 
         @php
             // Divide el curso por espacios en blanco
@@ -407,6 +429,13 @@
             @php
                 echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$tickets->folio, 'QRCODE',2.3,2.3) . '" style="background: #fff; padding: 5px;"   />';
             @endphp
+        </div>
+
+        <div class="container_logo">
+            @if(!isset($tickets->User->logo))
+            @else
+                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo">
+            @endif
         </div>
 
     </div>
