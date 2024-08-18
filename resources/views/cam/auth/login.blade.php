@@ -1,7 +1,7 @@
 @extends('layouts.app_user')
 
 @section('template_title')
-    Buscar Folio
+    Registro Nacional
 @endsection
 
 @section('css_custom')

@@ -51,6 +51,9 @@
           <li class="nav-item">
             <a class="nav-link nav_link_custom {{ (Request::is('nuestras_instalaciones*') ? 'active' : '') }}" href="{{ route('user.instalaciones') }}">Instalaciones</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link nav_link_custom {{ (Request::is('registro*') ? 'active' : '') }}" href="{{ route('folio_registro.index') }}">Registro Nacional</a>
+          </li>
           {{-- <li class="nav-item">
             <a class="nav-link nav_link_custom {{ (Request::is('reality*') ? 'active' : '') }}" href="{{ route('user.reality') }}">Reality</a>
           </li> --}}
