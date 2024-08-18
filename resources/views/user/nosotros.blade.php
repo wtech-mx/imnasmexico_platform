@@ -182,7 +182,8 @@
                             <div class="carousel-item active">
                                 <video class="video_nosotros" controls>
                                     <source src="{{asset('assets/user/nosotros/clausura_unam.MOV')}}" type="video/mp4">
-                                </video>                            </div>
+                                </video>
+                            </div>
                           </div>
 
                     </div>

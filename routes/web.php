@@ -511,9 +511,12 @@ Route::group(['middleware' => ['auth']], function() {
 
 });
 
-Route::get('registro/login', function () {
-    return view('cam.auth.login');
-});
+// Route::get('registro/login', function () {
+//     return view('cam.auth.login');
+// });
+
+Route::get('/registro', [App\Http\Controllers\FoliosController::class, 'index_registro'])->name('folio_registro.index');
+Route::get('/buscador/folio/registro', [App\Http\Controllers\FoliosController::class, 'buscador_registro'])->name('folio_registro.buscador');
 
 Route::get('distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index_distribuidoras'])->name('distribuidoras.index_distribuidoras');
 Route::get('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_protocolo'])->name('distribuidoras.index_protocolo');

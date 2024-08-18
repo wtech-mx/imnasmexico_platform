@@ -18,6 +18,11 @@ class FoliosController extends Controller
         return view('user.folio');
     }
 
+    public function index_registro(){
+
+        return view('cam.auth.login');
+    }
+
     public function buscador(Request $request){
 
         $tickets = OrdersTickets::where('folio', '=', $request->get('folio'))->first();
@@ -31,6 +36,21 @@ class FoliosController extends Controller
         $folio = $request->get('folio');
 
         return view('user.folio',compact('tickets', 'folio', 'tickets_generador'));
+    }
+
+    public function buscador_registro(Request $request){
+
+        $tickets = OrdersTickets::where('folio', '=', $request->get('folio'))->first();
+
+            if (!$tickets) {
+                $tickets_generador = RegistroImnas::where('folio', $request->get('folio'))->first();
+            }else{
+                $tickets_generador = '';
+            }
+
+        $folio = $request->get('folio');
+
+        return view('cam.auth.login',compact('tickets', 'folio', 'tickets_generador'));
     }
 
     public function index_cedula(Request $request, $id){
