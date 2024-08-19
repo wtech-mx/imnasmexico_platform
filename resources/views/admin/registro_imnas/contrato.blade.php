@@ -390,8 +390,6 @@
                                         </span>
                                         @if($documentos->ine == NULL)
                                             <input id="ine" name="ine" type="file" class="form-control" required>
-                                            <label for="domicilio" class="custom-file-label">Seleccionar archivo</label>
-                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
                                             <input id="ine" name="ine" type="file" class="form-control">
                                         @endif
@@ -406,8 +404,6 @@
                                         </span>
                                         @if($documentos->ine_atras_registro == NULL)
                                             <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control" required>
-                                            <label for="ine_atras_registro" class="custom-file-label">Seleccionar archivo</label>
-                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
                                             <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control">
                                         @endif
@@ -422,8 +418,6 @@
                                         </span>
                                         @if($documentos->curp == NULL)
                                             <input id="curp" name="curp" type="file" class="form-control" required>
-                                            <label for="domicilio" class="custom-file-label">Seleccionar archivo</label>
-                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
                                             <input id="curp" name="curp" type="file" class="form-control">
                                         @endif
@@ -438,8 +432,6 @@
                                         </span>
                                         @if($documentos->curp == NULL)
                                             <input class="custom-file-input" id="domicilio" name="domicilio" type="file" class="form-control" required>
-                                            <label for="domicilio" class="custom-file-label">Seleccionar archivo</label>
-                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
                                             <input class="custom-file-input" id="domicilio" name="domicilio" type="file" class="form-control">
                                         @endif
@@ -454,8 +446,6 @@
                                         </span>
                                         @if($documentos->curp == NULL)
                                             <input id="img_infantil" name="img_infantil" type="file" class="form-control" required>
-                                            <label for="domicilio" class="custom-file-label">Seleccionar archivo</label>
-                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
                                             <input id="img_infantil" name="img_infantil" type="file" class="form-control">
                                         @endif
@@ -470,8 +460,6 @@
                                         </span>
                                         @if($documentos->curp == NULL)
                                             <input id="logo" name="logo" type="file" class="form-control" required>
-                                            <label for="domicilio" class="custom-file-label">Seleccionar archivo</label>
-                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
                                             <input id="logo" name="logo" type="file" class="form-control">
                                         @endif
@@ -486,8 +474,6 @@
                                         </span>
                                         @if($documentos->firma == NULL)
                                             <input id="firma_escuela" name="firma_escuela" type="file" class="form-control">
-                                            <label for="firma_escuela" class="custom-file-label">Seleccionar archivo</label>
-                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
                                             <input id="firma_escuela" name="firma_escuela" type="file" class="form-control">
                                         @endif
