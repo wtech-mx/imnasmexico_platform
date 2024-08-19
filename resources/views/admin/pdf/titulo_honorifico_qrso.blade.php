@@ -245,16 +245,15 @@
 
         .container_logo{
             position: absolute;
-            top: 50px;
-            left:35%;
-        }
-
-        .container_logo2 {
-            position: absolute;
             top: 10px;
             left: 100px;
         }
 
+        .container_logo2{
+            position: absolute;
+            top: 93.5%;
+            left:30%;
+        }
 
         .container_logo_reversa{
             width: 100%;
@@ -264,11 +263,11 @@
         }
 
         .img_logo{
-            width: 430px;
+            width: 300px;
         }
 
-        .img_logo2 {
-             width: 300px;
+        .img_logo2{
+            width: 80px;
         }
 
         .container_registro{
