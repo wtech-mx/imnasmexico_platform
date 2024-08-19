@@ -245,8 +245,8 @@
 
         .container_logo{
             position: absolute;
-            top: 10px;
-            left: 100px;
+            top: 30px;
+            left: 50px;
         }
 
         .container_logo2{
@@ -263,7 +263,7 @@
         }
 
         .img_logo{
-            width: 300px;
+            width: 600px;
         }
 
         .img_logo2{
