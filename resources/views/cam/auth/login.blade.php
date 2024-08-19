@@ -55,10 +55,69 @@
 
         <div class="col-12 col-sm-12 col-md-6 mt-5">
             <p class="text-center">
-                <img src="{{asset('assets/user/logotipos/registro_nacional.png')}}" alt="" style="width: 30%">
+                <img src="{{asset('assets/user/logotipos/registro_nacional.png')}}" alt=""style="width: 30%;background:#fff;border-radius: 9px;margin-left: 3rem;">
+                <img src="{{asset('assets/user/logotipos/stps.png')}}" alt="" style="width: 30%;background:#fff;border-radius: 9px;margin-left: 3rem;">
             </p>
+
         </div>
     </div>
+
+    <div class="page-header min-vh-100" style="background-image: url('{{asset('assets/user/utilidades/portada_cam.webp')}}');">
+        <span class="mask  opacity-6" style="background-image: linear-gradient(310deg, #66C0CC 0%, #373e3b 100%) !important;"></span>
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-7">
+
+              <div class="card border-0 mb-0" style="border-style: solid!important;border-width: 0px 9px 9px 0px!important;border-color: #66C0CC!important;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);">
+                <div class="card-header bg-transparent">
+                  <p class="text-center">
+                      <img src="{{asset('assets/user/logotipos/registro_nacional.png')}}" alt=""  style="width: 90px;">
+                  </p>
+                  <h5 class="text-dark text-center mt-2 mb-3">Bienvenido </h5>
+                </div>
+
+                <div class="card-body px-lg-5 pt-0">
+                  <div class="text-center text-muted mb-4">
+                    <small>Ingresa tus accesos</small>
+                  </div>
+
+                  {{-- <form method="POST" action="{{ route('login') }}"> --}}
+                  <form method="POST" action="{{ route('login.custom') }}">
+                    @csrf
+
+                    <div class="mb-3">
+                      <input id="username" name="username" type="text" placeholder="Celular" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required >
+                          @error('username')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                    </div>
+
+                    <div class="mb-3">
+                      <input id="password" type="password" placeholder="*******" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                          @error('password')
+                          <span class="invalid-feedback" role="alert">
+                              <strong>{{ $message }}</strong>
+                          </span>
+                          @enderror
+                    </div>
+
+                    <div class="text-center">
+                      <button type="submit" class="btn btn-primary w-100 my-4 mb-2" style="background-color: #66C0CC  !important"> Ingresar</button>
+                    </div>
+
+                  </form>
+
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
 
     <div class="row " style="background-color: #fff">
         <div class="col-12 col-sm-12 col-md-12 my-auto">
@@ -169,61 +228,6 @@
         </div>
     </div>
 
-    <div class="page-header min-vh-100" style="background-image: url('{{asset('assets/user/utilidades/portada_cam.webp')}}');">
-      <span class="mask  opacity-6" style="background-image: linear-gradient(310deg, #66C0CC 0%, #373e3b 100%) !important;"></span>
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-4 col-md-7">
-
-            <div class="card border-0 mb-0" style="border-style: solid!important;border-width: 0px 9px 9px 0px!important;border-color: #66C0CC!important;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);">
-              <div class="card-header bg-transparent">
-                <p class="text-center">
-                    <img src="{{asset('assets/user/logotipos/registro_nacional.png')}}" alt=""  style="width: 90px;">
-                </p>
-                <h5 class="text-dark text-center mt-2 mb-3">Bienvenido </h5>
-              </div>
-
-              <div class="card-body px-lg-5 pt-0">
-                <div class="text-center text-muted mb-4">
-                  <small>Ingresa tus accesos</small>
-                </div>
-
-                {{-- <form method="POST" action="{{ route('login') }}"> --}}
-                <form method="POST" action="{{ route('login.custom') }}">
-                  @csrf
-
-                  <div class="mb-3">
-                    <input id="username" name="username" type="text" placeholder="Celular" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required >
-                        @error('username')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                  </div>
-
-                  <div class="mb-3">
-                    <input id="password" type="password" placeholder="*******" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                        @error('password')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-                  </div>
-
-                  <div class="text-center">
-                    <button type="submit" class="btn btn-primary w-100 my-4 mb-2" style="background-color: #66C0CC  !important"> Ingresar</button>
-                  </div>
-
-                </form>
-
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
 
   </section>
 
