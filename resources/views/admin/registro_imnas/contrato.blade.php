@@ -485,7 +485,7 @@
                                             <img src="{{ asset('assets/cam/contrato.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->firma == NULL)
-                                            <input id="firma_escuela" name="firma_escuela" type="file" class="form-control" required>
+                                            <input id="firma_escuela" name="firma_escuela" type="file" class="form-control">
                                             <label for="firma_escuela" class="custom-file-label">Seleccionar archivo</label>
                                             <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
                                         @else
