@@ -50,8 +50,9 @@ class FoliosController extends Controller
 
         $folio = $request->get('folio');
 
-        return view('cam.auth.login',compact('tickets', 'folio', 'tickets_generador'));
+        return view('admin.registro_imnas.resultado_registro',compact('tickets', 'folio', 'tickets_generador'));
     }
+
 
     public function index_cedula(Request $request, $id){
 
