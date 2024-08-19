@@ -243,12 +243,12 @@
             display: inline-block;
         }
 
-        .container_logo{
+        .container_logo {
             position: absolute;
-            top: 50px;
-            left: 35%;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
         }
-
         .container_logo2{
             position: absolute;
             top: 93.5%;
@@ -262,11 +262,10 @@
             left:30%;
         }
 
-        .img_logo{
-            width: 100%!important;
+        .img_logo {
             height: 500px!important;
+            /* Puedes ajustar el ancho aquí si es necesario */
         }
-
         .img_logo2{
             width: 80px;
         }
