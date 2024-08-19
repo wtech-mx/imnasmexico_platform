@@ -246,7 +246,7 @@
         .container_logo{
             position: absolute;
             top: 45px;
-            left: 100px;
+            left: 150px;
         }
 
         .container_logo2{
