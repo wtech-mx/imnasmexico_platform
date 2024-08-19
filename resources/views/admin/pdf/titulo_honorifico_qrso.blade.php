@@ -263,7 +263,7 @@
         }
 
         .img_logo{
-            width: 500px!important;;
+            width: 100%!important;;
             height: 430px!important;
         }
 
