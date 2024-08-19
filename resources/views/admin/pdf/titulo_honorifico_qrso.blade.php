@@ -246,13 +246,13 @@
         .container_logo{
             position: absolute;
             top: 45px;
-            left: 250px;
+            left: 300px;
         }
 
         .container_logo2{
             position: absolute;
             top: 94%;
-            left:35%;
+            left:25%;
         }
 
         .container_logo_reversa{
