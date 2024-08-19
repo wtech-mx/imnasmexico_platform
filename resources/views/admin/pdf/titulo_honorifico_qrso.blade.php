@@ -249,11 +249,12 @@
             left:35%;
         }
 
-        .container_logo2{
+        .container_logo2 {
             position: absolute;
-            top: 93.5%;
-            left:30%;
+            top: 10px;
+            left: 100px;
         }
+
 
         .container_logo_reversa{
             width: 100%;
@@ -266,8 +267,8 @@
             width: 430px;
         }
 
-        .img_logo2{
-            width: 80px;
+        .img_logo2 {
+             width: 300px;
         }
 
         .container_registro{
