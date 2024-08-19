@@ -334,8 +334,8 @@ class RegistroIMNASController extends Controller
             // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
             $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
-            return $pdf->stream();
-            //  return $pdf->download('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
+            // return $pdf->stream();
+             return $pdf->download('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR_CFC'){
             $id_ticket = $request->get('id_registro');
