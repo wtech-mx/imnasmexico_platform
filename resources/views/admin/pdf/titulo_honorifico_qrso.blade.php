@@ -267,7 +267,7 @@
         }
 
         .img_logo2{
-            width: 300px;
+            width: 80px;
         }
 
         .container_registro{
