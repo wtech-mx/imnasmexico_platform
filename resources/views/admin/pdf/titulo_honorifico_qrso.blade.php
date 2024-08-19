@@ -264,6 +264,7 @@
 
         .img_logo{
             width: 430px;
+            height: 430px!important;
         }
 
         .img_logo2{
