@@ -87,7 +87,7 @@
 
         </div>
 
-        <div id="resultsContainer" style="padding: 2rem 5rem 5rem 5rem;"></div>
+        <div id="resultsContainer" class="p-0 p-md-5 p-lg-5"></div>
 
     </div>
 
