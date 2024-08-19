@@ -245,13 +245,13 @@
 
         .container_logo{
             position: absolute;
-            top: 30px;
-            left: 50px;
+            top: 40px;
+            left: 5px;
         }
 
         .container_logo2{
             position: absolute;
-            top: 93.5%;
+            top: 95%;
             left:30%;
         }
 
@@ -267,7 +267,7 @@
         }
 
         .img_logo2{
-            width: 80px;
+            width: 100px;
         }
 
         .container_registro{
