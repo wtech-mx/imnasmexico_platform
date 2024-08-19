@@ -334,8 +334,8 @@ class RegistroIMNASController extends Controller
             // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
             $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
-
-            return $pdf->download('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
+            return $pdf->stream();
+            //  return $pdf->download('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR_CFC'){
             $id_ticket = $request->get('id_registro');
@@ -461,8 +461,8 @@ class RegistroIMNASController extends Controller
             $pdf = PDF::loadView('admin.pdf.tira_materias_afiliados',compact('subtemas','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
-            return $pdf->stream();
-            // return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+             // return $pdf->stream();
+           return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira_materias_alasiados'){
             $id_ticket = $request->get('id_registro');
