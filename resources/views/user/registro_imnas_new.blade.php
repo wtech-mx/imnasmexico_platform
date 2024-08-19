@@ -8,17 +8,64 @@ Mi perfil- {{$cliente->name}}
 <link href="{{asset('assets/user/custom/single_cours.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/perfil.css')}}" rel="stylesheet" />
 {{-- <link src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" /> --}}
+
+<style>
+
+    .header{
+        display: none;
+    }
+
+    .footer{
+        display: none;
+    }
+
+    .space_newprofile {
+        margin-top: 0rem!important;
+    }
+
+    .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link {
+        background-color: #66C0CC;
+        font-size: 24px;
+    }
+
+    .title_curso {
+        color: #66C0CC;
+        font-family: Leelawadee_1;
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .btn_ticket_comprar {
+        background-color: #66C0CC;
+    }
+
+    .icon_footer i {
+        color: #66C0CC;
+    }
+
+    .nav-tabs .nav-link {
+        text-decoration: none;
+        color: #66C0CC;
+    }
+
+    #page-loader {
+        background: #66C0CC none repeat scroll 0% 0%;
+    }
+
+</style>
+
 @endsection
 
 @section('content')
-<section class="primario bg_overley" style="background-color:#F5ECE4;" id="contenido">
+<section class="primario bg_overley" style="background-color:#66C0CC;" id="contenido">
 
     <div class="row space_newprofile" style="">
         <div class="col-12">
             <div class="card_single_horizon row">
-                <div class="col-2">
+                <div class="col-3">
                     <div class="avatar avatar-xl position-relative">
-                      <img src="{{asset('assets/user/logotipos/registro_nacional.png')}}" alt="profile_image" style="height: 100px">
+                      <img src="{{asset('assets/user/logotipos/registro_nacional.png')}}" alt="profile_image" style="height: 80px">
+                      <img src="{{asset('assets/user/logotipos/stps.png')}}" alt="" style="height: 100px">
                     </div>
                 </div>
 
@@ -34,7 +81,7 @@ Mi perfil- {{$cliente->name}}
                     </p>
                 </div>
 
-                <div class="col-8 ">
+                <div class="col-7">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="buscador-tab" data-bs-toggle="tab" data-bs-target="#buscador" type="button" role="tab" aria-controls="buscador" aria-selected="true">Buscador</button>
@@ -72,7 +119,7 @@ Mi perfil- {{$cliente->name}}
                 <div class="col-4">
                     <div class="card_single_horizon">
                         <h3 class="text-center mt-4 mb-4">¿Tienes dudas?</h3>
-                        <p class="text-center mb-0 font-weight-bold text-sm">Comunicate al telefono 5555555555</p>
+                        <p class="text-center mb-0 font-weight-bold text-sm">Comunicate al telefono 5522208966</p>
                         <div class="row">
                             <div class="col-3 icon_footer">
                                 <a target="_blank" href="tel:%2055%208494%207222" class="text-center" style="margin-bottom: 0rem!important">
@@ -104,7 +151,7 @@ Mi perfil- {{$cliente->name}}
                                 <h3 class="title_curso mb-3">Subir documentos</h3>
                                 <img class="icon_nav_course" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
                             </div>
-                            <h4>
+                            <h4 style="font-size: 24px">
                                 @if ($recien_comprado->tipo == '1')
                                     Emisión por alumno
                                 @elseif ($recien_comprado->tipo == '2')
@@ -205,14 +252,14 @@ Mi perfil- {{$cliente->name}}
                                         $precio = number_format($ticket->precio, 2, '.', ',');
                                 @endphp
                                 <div class="col-12 mt-3">
-                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                    <strong style="color: #66C0CC">{{$ticket->nombre}}</strong>
                                 </div>
                                 <div class="col-6 col-lg-6 mt-3">
                                     @if ($ticket->descuento == NULL)
-                                        <h5 style="color: #836262"><strong>$ {{ $precio }}</strong></h5>
+                                        <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
                                     @else
-                                        <del style="color: #836262"><strong>De ${{ $precio }}</strong></del>
-                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
+                                        <del style="color: #66C0CC"><strong>De ${{ $precio }}</strong></del>
+                                        <h5 style="color: #66C0CC"><strong>A ${{$ticket->descuento}}</strong></h5>
                                     @endif
                                 </div>
 
@@ -225,22 +272,22 @@ Mi perfil- {{$cliente->name}}
                                 </div>
 
                                 <div class="col-12">
-                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                    <p style="color: #66C0CC">{{$ticket->descripcion}}</p>
                                 </div>
                             @endforeach
                             @foreach ($tickets_envio as $ticket)
                                 <div class="col-12 mt-3">
-                                    <strong style="color: #836262">{{$ticket->nombre}}</strong>
+                                    <strong style="color: #66C0CC">{{$ticket->nombre}}</strong>
                                 </div>
                                 <div class="col-12">
-                                    <p style="color: #836262">{{$ticket->descripcion}}</p>
+                                    <p style="color: #66C0CC">{{$ticket->descripcion}}</p>
                                 </div>
                                 <div class="col-6 col-lg-6 mt-3">
                                     @if ($ticket->descuento == NULL)
-                                        <h5 style="color: #836262"><strong>$ {{ $ticket->precio }}</strong></h5>
+                                        <h5 style="color: #66C0CC"><strong>$ {{ $ticket->precio }}</strong></h5>
                                     @else
-                                        <del style="color: #836262"><strong>De ${{ $ticket->precio }}</strong></del>
-                                        <h5 style="color: #836262"><strong>A ${{$ticket->descuento}}</strong></h5>
+                                        <del style="color: #66C0CC"><strong>De ${{ $ticket->precio }}</strong></del>
+                                        <h5 style="color: #66C0CC"><strong>A ${{$ticket->descuento}}</strong></h5>
                                     @endif
                                 </div>
 
