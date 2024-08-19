@@ -412,6 +412,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/admin/notas/cotizacion/imprimir/{id}', [App\Http\Controllers\CotizacionController::class, 'imprimir'])->name('notas_cotizacion.imprimir');
     Route::delete('/notas/cotizacion/{id}', [App\Http\Controllers\CotizacionController::class, 'eliminar'])->name('notas_cotizacion.eliminar');
+    Route::get('/admin/notas/cotizacion/reporte', [App\Http\Controllers\CotizacionController::class, 'imprimir_reporte'])->name('notas_cotizacion.imprimir_reporte');
     // =============== M O D U L O   C A J A ===============================
     Route::get('/admin/caja', [App\Http\Controllers\CajaController::class, 'index'])->name('caja.index');
     Route::post('/admin/caja/store', [App\Http\Controllers\CajaController::class, 'store'])->name('caja.store');
@@ -500,6 +501,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('cosmica/cotizacion/imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
 
     Route::get('/get-descuento/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'getDescuento']);
+    Route::get('cosmica/cotizacion/reporte', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir_reporte'])->name('notas_cosmica.imprimir_reporte');
     // =============== M O D U L O   c o s m i k a ===============================
     Route::get('cosmica/distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index'])->name('distribuidoras.index');
     Route::post('cosmica/distribuidoras/store', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'store'])->name('distribuidoras.store');

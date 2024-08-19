@@ -20,8 +20,8 @@
                                     <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                 </span>
                                 <select class="form-select d-inline-block"  data-toggle="select" id="estatus_cotizacion" name="estatus_cotizacion" value="{{ old('estatus_cotizacion') }}">
-                                    <option>Seleccionar Estatus</option>
-                                    <option value="Pendiente">Pendiente</option>
+                                    <option value="">Seleccionar Estatus</option>
+                                    {{-- <option value="Pendiente">Pendiente</option> --}}
                                     <option value="Aprobada">Aprobada</option>
                                     <option value="Cancelada">Cancelar</option>
                                 </select>

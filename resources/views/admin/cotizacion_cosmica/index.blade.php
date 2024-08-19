@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="card">
-                        <form action="{{ route('cotizacion_cosmica.buscador') }}" method="GET" >
+                        <form action="{{ route('notas_cosmica.imprimir_reporte') }}" method="GET" >
 
                             <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
                                 <h5>Filtro</h5>
@@ -54,7 +54,7 @@
 
                                         <div class="col-3">
                                             <br>
-                                            <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #783E5D; color: #ffffff;">Buscar</button>
+                                            <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #783E5D; color: #ffffff;">Reporte</button>
                                         </div>
                                     </div>
                             </div>
