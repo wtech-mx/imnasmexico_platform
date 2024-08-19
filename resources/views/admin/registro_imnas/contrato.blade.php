@@ -477,6 +477,22 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
+                                    <label for="name">Firma</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/contrato.png') }}" alt="" width="35px">
+                                        </span>
+                                        @if($documentos->firma == NULL)
+                                            <input id="firma_escuela" name="firma_escuela" type="file" class="form-control" required>
+                                            <label for="firma_escuela" class="custom-file-label">Seleccionar archivo</label>
+                                            <span id="file-name" class="file-name">Ningún archivo seleccionado</span>
+                                        @else
+                                            <input id="firma_escuela" name="firma_escuela" type="file" class="form-control">
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">

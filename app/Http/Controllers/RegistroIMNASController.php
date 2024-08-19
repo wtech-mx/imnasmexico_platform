@@ -1112,6 +1112,14 @@ class RegistroIMNASController extends Controller
         $registro->country_referencia = $request->get('country_referencia');
         $registro->telefono_referencia = $request->get('telefono_referencia');
         $registro->email_referencia = $request->get('email_referencia');
+
+        if ($request->hasFile("firma_escuela")) {
+            $file = $request->file('firma_escuela');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $registro->firma = $fileName;
+        }
         $registro->save();
 
         $especialidad = new RegistroImnasEspecialidad;
