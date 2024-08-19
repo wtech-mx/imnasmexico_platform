@@ -579,7 +579,7 @@ class CotizacionCosmicaController extends Controller
 
         $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_reporte', compact('cotizaciones', 'today', 'ventas', 'chart', 'chart2', 'totalSum', 'totalSum2', 'fechaInicio', 'fechaFin'));
 
-       return $pdf->stream();
-       //  return $pdf->download('Reporte NAS / '.$today.'.pdf');
+         //  return $pdf->stream();
+        return $pdf->download('Reporte Cosmica / '.$today.'.pdf');
     }
 }
