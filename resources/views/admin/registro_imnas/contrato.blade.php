@@ -66,11 +66,6 @@
                 font-size: 12px
             }
         }
-
-        .custom-file-input ~ .custom-file-label::after {
-            content: "Seleccionar archivo";
-        }
-
     </style>
 
     <section class="row">
