@@ -62,10 +62,6 @@
                                     </div>
                             </div>
                         </form>
-
-                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir_reporte') }}">
-                            <i class="fa fa-file"></i>
-                        </a>
                     </div>
 
                     <div class="card-body">
