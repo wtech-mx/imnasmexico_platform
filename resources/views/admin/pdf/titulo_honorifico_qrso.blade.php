@@ -245,21 +245,23 @@
 
         .container_logo {
             position: absolute;
-        top: 50px;
-        left: 50%;
-        transform: translateX(-50%);
+            top: 50px;
+            left: 50%;
+            transform: translateX(-50%);
         }
         .container_logo2{
             position: absolute;
             top: 93.5%;
-            left:30%;
+            left:29%;
+            transform: translateX(-50%);
+
         }
 
         .container_logo_reversa{
             width: 100%;
             position: absolute;
             top: 93.5%;
-            left:30%;
+            left:29%;
         }
 
         .img_logo {
@@ -267,7 +269,7 @@
             /* Puedes ajustar el ancho aquí si es necesario */
         }
         .img_logo2{
-            width: 80px;
+            height:  80px!important;
         }
 
         .container_registro{
