@@ -237,6 +237,23 @@
                                                 @endif
                                             </div>
 
+                                            <div class="form-group col-6 gc_cn">
+                                                <label for="name">Firma de la director@*</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="firma_director" name="firma_director" type="file" class="form-control"  >
+                                                </div>
+                                                @if (pathinfo($registro_imnas->firma, PATHINFO_EXTENSION) == 'pdf')
+                                                    <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $registro_imnas->User->telefono . '/' .$cliente->logo) }}" download="{{ $cliente->logo }}" style="background: #836262; border-radius: 19px;">
+                                                        Descargar Documento
+                                                    </a>
+                                                @else
+                                                    <img id="blah" src="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$cliente->logo) }}" alt="Imagen" style="width: 100px;height: 100px;">
+                                                @endif
+                                            </div>
+
                                             <div class="form-group col-6 curp_content">
                                                 <label for="name">CURP *:</label>
                                                 <div class="input-group">

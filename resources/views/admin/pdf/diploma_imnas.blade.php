@@ -172,6 +172,17 @@
             transform: translateX(-50%);
         }
 
+        .container_firma_director{
+            position: absolute;
+            top: 1070px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .firma_img{
+            height: 90px!important;
+        }
+
         .container_logo2{
             position: absolute;
             top: 1070px;
@@ -217,8 +228,19 @@
             @elseif($fileName_logo == 'Sin Logo')
                 <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
             @else
-                <img src="{{ $basePath . 'diploma_fontal_limpio.png' }}" class="img_portada">
+
+                @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
+                    <img src="{{ $basePath . 'diploma_logo_firma_director.png' }}" class="img_portada">
+                    <div class="container_firma_director">
+                        <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img">
+                        <p style="font-size:10px;text-align: center;">Firma del Director(a)</p>
+                    </div>
+                @else
+                    <img src="{{ $basePath . 'diploma_fontal_limpio.png' }}" class="img_portada">
+                @endif
+
             @endif
+
 
         <div class="container_marco">
             {{-- <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
@@ -293,7 +315,6 @@
         @else
             <img src="{{ $basePath . 'diploma_reverso_limpio.png' }}" class="img_reverso">
         @endif
-
 
         {{-- <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
 

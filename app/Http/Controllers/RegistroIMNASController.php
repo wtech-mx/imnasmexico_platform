@@ -278,6 +278,15 @@ class RegistroIMNASController extends Controller
             $fileName = 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
         }
 
+        if ($request->hasFile("firma_director")) {
+            $file_firma_director = $request->file('firma_director');
+            $path_firma_director = $ruta_manual;
+            $fileName_firma_director = uniqid() . $file_firma_director->getClientOriginalName();
+            $file_firma_director->move($path_firma_director, $fileName_firma_director);
+        }else{
+            $fileName_firma_director = 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
+        }
+
         if ($request->hasFile("firma")) {
             $file_firma = $request->file('firma');
             $path_firma = $ruta_manual;
@@ -330,7 +339,7 @@ class RegistroIMNASController extends Controller
                 $ticket->update();
             }
 
-            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
+            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director','nacionalidad', 'fileName_logo'));
             // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
             $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
@@ -355,7 +364,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
+            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director','nacionalidad', 'fileName_logo'));
 
             //$pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); //  Cambiar 'a tamaño 48x33 super b'
@@ -380,7 +389,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.diploma_imnas',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma', 'fileName_logo'));
+            $pdf = PDF::loadView('admin.pdf.diploma_imnas',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
 
@@ -956,7 +965,7 @@ class RegistroIMNASController extends Controller
         $user->instagram = $request->get('instagram_escuela');
         $user->pagina_web = $request->get('pagina_escuela');
         $user->celular_casa = $request->get('telefono_escuela');
-     
+
 
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
