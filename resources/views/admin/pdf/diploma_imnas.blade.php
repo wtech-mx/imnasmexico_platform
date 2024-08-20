@@ -155,34 +155,36 @@
         }
 
         .container_logo_reverso{
-            width: 100%;
             position: absolute;
             top: 88%;
             left:180px;
+            transform: translateX(-50%);
         }
 
         .img_logo_reversa{
-            width: 70px;
+            height: 70px!important;
         }
 
         .container_logo{
             position: absolute;
             top: 80px;
-            left:500px;
+            left:75%;
+            transform: translateX(-50%);
         }
 
         .container_logo2{
             position: absolute;
             top: 1070px;
-            left:50px;
+            left:12%;
+            transform: translateX(-50%);
         }
 
         .img_logo{
-            width: 200px;
+            height: 200px!important;
         }
 
         .img_logo2{
-            width: 100px;
+            height: 100px!important;
         }
 
     </style>
