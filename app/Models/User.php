@@ -35,6 +35,11 @@ class User extends Authenticatable
         'colonia',
     ];
 
+    public function RegistroImnasEscuela()
+    {
+       return $this->hasOne(RegistroImnasEscuela::class,'id_user');
+    }
+
     public function DocumentosEstandares()
     {
        return $this->hasMany(DocumentosEstandares::class,'id_usuario');
