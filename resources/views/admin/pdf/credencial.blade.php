@@ -220,11 +220,13 @@
         .container_logo{
             position: absolute;
             top: 8.3%;
-            left:60px;
+            left:23%;
+            transform: translateX(-50%);
+
         }
 
         .img_logo{
-            width: 35px;
+            height: 35px!important;
         }
 
 
