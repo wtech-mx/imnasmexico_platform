@@ -956,15 +956,23 @@ class RegistroIMNASController extends Controller
         $user->instagram = $request->get('instagram_escuela');
         $user->pagina_web = $request->get('pagina_escuela');
         $user->celular_casa = $request->get('telefono_escuela');
-        $user->update();
+     
 
         $dominio = $request->getHost();
-
         if($dominio == 'plataforma.imnasmexico.com'){
             $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $user->telefono .'/');
         }else{
             $ruta_manual = public_path() . '/documentos/' . $user->telefono . '/';
         }
+
+        if ($request->hasFile("logo")) {
+            $file = $request->file('logo');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $user->logo = $fileName;
+        }
+        $user->update();
 
         $documentos_id = Documentos::where('id_usuario','=',$user->id)->first();
 
