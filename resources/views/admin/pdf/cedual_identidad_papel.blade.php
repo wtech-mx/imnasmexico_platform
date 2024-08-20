@@ -89,10 +89,12 @@
             position: absolute;
             top:50px;
             left:320px;
+            transform: translateX(-50%);
+
         }
 
         .img_logo{
-            width: 100px;
+            height: 100px!important;
         }
 
         .container_logo2{
@@ -102,7 +104,7 @@
         }
 
         .img_logo2{
-            width: 85px;
+            height: 85px!important;;
         }
 
         .img_reverso{
