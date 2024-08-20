@@ -38,7 +38,7 @@
         h1 {
             font-family: 'Monotype Corsiva Bold';
             font-weight: 900;
-            font-size: 45px;
+            font-size: 40px;
             color: #353535;
         }
 
