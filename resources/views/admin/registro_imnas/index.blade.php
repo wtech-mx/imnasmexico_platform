@@ -43,7 +43,7 @@
                                             <tr>
                                                 <td>{{ $item->id }}</td>
                                                 <td>
-                                                    <a href=" {{ route('perfil.show', $item->User->id) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">
+                                                    <a href=" {{ route('clientes.imnas', $item->User->code) }} " target="_blank" rel="noopener noreferrer" style="text-decoration: revert;color: blue;">
                                                         {{ $item->User->name }}
                                                     </a><br>
                                                     <p>{{ $item->User->telefono }}</p>
