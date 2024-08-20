@@ -58,6 +58,15 @@
             height: 110px;
         }
 
+        .container_rectangular{
+            position: absolute;
+            top: 96%;
+            left: 17.6%;
+            background: #ffffff;
+            width: 600px;
+            height: 40px;
+        }
+
         .container2{
             position: absolute;
             top:21.3%;
@@ -159,12 +168,14 @@
 
         .container_logo{
             position: absolute;
-            top: 5.5%;
-            left:190px;
+            top: 53px;
+            left:28%;
+            transform: translateX(-50%);
+
         }
 
         .img_logo{
-            width: 80px;
+            height: 80px!important;
         }
 
     </style>
@@ -257,6 +268,8 @@
         <div class="container_folio_bajo1">
             <h4 class="folio3">{{$folio}}</h4>
         </div>
+
+        <div class="container_rectangular"></div>
 
         <div class="contenedor_reverso">
             <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
