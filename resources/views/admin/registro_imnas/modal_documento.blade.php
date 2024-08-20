@@ -228,7 +228,7 @@
                                                     </span>
                                                     <input id="logo" name="logo" type="file" class="form-control"  >
                                                 </div>
-                                                @if (pathinfo($registro_imnas->logo, PATHINFO_EXTENSION) == 'pdf')
+                                                @if (pathinfo($registro_imnas->User->logo, PATHINFO_EXTENSION) == 'pdf')
                                                     <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $registro_imnas->User->telefono . '/' .$registro_imnas->User->logo) }}" download="{{ $registro_imnas->User->logo }}" style="background: #836262; border-radius: 19px;">
                                                         Descargar Documento
                                                     </a>
@@ -245,12 +245,16 @@
                                                     </span>
                                                     <input id="firma_director" name="firma_director" type="file" class="form-control"  >
                                                 </div>
-                                                @if (pathinfo($registro_imnas->firma, PATHINFO_EXTENSION) == 'pdf')
-                                                    <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $registro_imnas->User->telefono . '/' .$registro_imnas->User->RegistroImnasEscuela->firma) }}" download="{{ $registro_imnas->User->RegistroImnasEscuela->firma }}" style="background: #836262; border-radius: 19px;">
-                                                        Descargar Documento
-                                                    </a>
+                                                @if ($registro_imnas->User->RegistroImnasEscuela)
+                                                    @if (pathinfo($registro_imnas->User->RegistroImnasEscuela->firma, PATHINFO_EXTENSION) == 'pdf')
+                                                        <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $registro_imnas->User->telefono . '/' .$registro_imnas->User->RegistroImnasEscuela->firma) }}" download="{{ $registro_imnas->User->RegistroImnasEscuela->firma }}" style="background: #836262; border-radius: 19px;">
+                                                            Descargar Documento
+                                                        </a>
+                                                    @else
+                                                        <img id="blah" src="{{asset('documentos/'. $registro_imnas->User->telefono . '/' .$registro_imnas->User->RegistroImnasEscuela->firma) }}" alt="Imagen" style="width: 200px;height: 150px;">
+                                                    @endif
                                                 @else
-                                                    <img id="blah" src="{{asset('documentos/'. $registro_imnas->User->telefono . '/' .$registro_imnas->User->RegistroImnasEscuela->firma) }}" alt="Imagen" style="width: 100px;height: 100px;">
+                                                    <p>No hay documentos disponibles para este usuario.</p>
                                                 @endif
                                             </div>
 
