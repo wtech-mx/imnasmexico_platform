@@ -285,6 +285,13 @@
             width: 50%;
         }
 
+        .container_firma_director_front{
+            position: absolute;
+            top: 1225px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
         .container_firma_director{
             position: absolute;
             top: 1150px;
@@ -293,7 +300,7 @@
         }
 
         .firma_img{
-            height: 160px!important;
+            height: 170px!important;
         }
 
     </style>
@@ -324,9 +331,19 @@
         <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
 
         @elseif($fileName_logo == 'Sin Logo')
-        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
         @else
-        <img src="{{ $basePath . 'titulo_frontal_limpio.png' }}" class="img_portada">
+
+            @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
+                <img src="{{ $basePath . 'titulo_frontal_limpio_sin_firma_front.png' }}" class="img_portada">
+                <div class="container_firma_director_front">
+                    <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img">
+                    <p style="font-size:10px;text-align: center;">Firma del Director(a)</p>
+                </div>
+            @else
+                <img src="{{ $basePath . 'titulo_frontal_limpio.png' }}" class="img_portada">
+            @endif
+
         @endif
 
         <div class="container_registro">
@@ -363,6 +380,7 @@
                 <img src="https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png" class="img_logo2">
             @else
                 <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo2">
+
             @endif
         </div>
 
@@ -474,7 +492,7 @@
         </div>
 
         <div class="container7">
-            @php
+        @php
             // Divide el curso por espacios en blanco
             $palabras = explode(' ', $curso);
 
