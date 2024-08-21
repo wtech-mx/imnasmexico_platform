@@ -170,25 +170,31 @@
 
         .container_logo{
             position: absolute;
-            top: 52px;
-            left:190px;
+            top: 53px;
+            left:28%;
+            transform: translateX(-50%);
+
+        }
+
+        .img_logo{
+            height: 80px!important;
         }
 
         .container_logo_reverso{
             position: absolute;
             top: 52px;
-            left:205px;
+            left:33%;
+            transform: translateX(-50%);
         }
+
 
         .container_logo_reverso_abajo{
             position: absolute;
             top: 1120px;
-            left:170px;
+            left:28%;
+            transform: translateX(-50%);
         }
 
-        .img_logo{
-            width: 90px;
-        }
     </style>
 </head>
 
