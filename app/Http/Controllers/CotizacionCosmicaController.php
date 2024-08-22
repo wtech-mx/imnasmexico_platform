@@ -33,7 +33,14 @@ class CotizacionCosmicaController extends Controller
         $notas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
         ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->get();
 
-        return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores'));
+        $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
+        ->where('estatus_cotizacion','=' ,'Aprobada')->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->get();
+
+        $notas_canceladas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
+        ->where('estatus_cotizacion','=' ,'Canceladas')->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->get();
+
+
+        return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores','notas_aprobadas','notas_canceladas'));
     }
 
     public function index_protocolo(Request $request, $id)
@@ -77,7 +84,6 @@ class CotizacionCosmicaController extends Controller
 
 
     }
-
 
 
     public function buscador(Request $request){
@@ -357,7 +363,10 @@ class CotizacionCosmicaController extends Controller
     public function update_estatus(Request $request, $id){
 
         $nota = NotasProductosCosmica::find($id);
-        $nota->estatus_cotizacion = 'Aprobada';
+
+        $nota->estatus_cotizacion =  $request->get('estatus_cotizacion');
+
+
         $nota->update();
 
         if($nota->id_usuario){
@@ -377,7 +386,7 @@ class CotizacionCosmicaController extends Controller
             }
         }
 
-        return redirect()->back()->with('success', 'Se ha actualizado con exito');
+        return redirect()->route('cotizacion_cosmica.index') ->with('success', 'Se ha Actualziado su cotizacion con exito');
     }
 
     public function update_protocolo(Request $request, $id){

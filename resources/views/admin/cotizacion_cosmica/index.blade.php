@@ -42,14 +42,15 @@
                             <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
                                 <h5>Filtro</h5>
                                     <div class="row">
+
                                         <div class="col-3">
                                             <label for="user_id">Fecha Inicio:</label>
-                                            <input type="date" class="form-control" name="fecha_inicio">
+                                            <input type="date" class="form-control" name="fecha_inicio" value="{{ date('Y-m-d') }}">
                                         </div>
 
                                         <div class="col-3">
                                             <label for="user_id">Fecha Fin:</label>
-                                            <input type="date" class="form-control" name="fecha_fin">
+                                            <input type="date" class="form-control" name="fecha_fin" value="{{ date('Y-m-d') }}">
                                         </div>
 
                                         <div class="col-3">
@@ -63,94 +64,306 @@
 
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-flush" id="datatable-search">
-                                <thead class="thead">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Cliente</th>
-                                        <th>fecha</th>
-                                        <th>Total</th>
-                                        <th>Estatus</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($notas as $nota)
-                                        <tr>
-                                            <td>
-                                                <h5>{{ $nota->folio }}</h5>
-                                            </td>
-                                            <td>
-                                                <h5>
-                                                    @if ($nota->id_usuario == NULL)
-                                                        {{ $nota->nombre }} <br> {{ $nota->telefono }}
-                                                    @else
-                                                        {{ $nota->User->name }}
-                                                    @endif
-                                                </h5>
-                                            </td>
-                                            {{-- <td>
-                                                <h5>
-                                                    <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
-                                                </h5>
-                                            </td> --}}
-                                            <td>
-                                                @php
-                                                $fecha = $nota->fecha;
-                                                $fecha_timestamp = strtotime($fecha);
-                                                $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
-                                                @endphp
-                                                <h5>
-                                                    {{$fecha_formateada}}
-                                                </h5>
-                                            </td>
-                                            <td><h5>${{ $nota->total }}</h5></td>
-                                            <td>
 
-                                                @if ($nota->estatus_cotizacion == 'Aprobada')
+                            <nav>
+                                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                    <button class="nav-link active" id="nav-Cotizacion-tab" data-bs-toggle="tab" data-bs-target="#nav-Cotizacion" type="button" role="tab" aria-controls="nav-Cotizacion" aria-selected="false" >
+                                        Cotizacion <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
+                                    </button>
 
-                                                <a class="btn btn-xs btn-primary" style="background: #06a306;">
-                                                    Aprobada
-                                                </a>
+                                    <button class="nav-link" id="nav-Aprobada-tab" data-bs-toggle="tab" data-bs-target="#nav-Aprobada" type="button" role="tab" aria-controls="nav-Aprobada" aria-selected="false">
+                                        Aprobada <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
+                                    </button>
 
-                                                @else
+                                    <button class="nav-link" id="nav-Cancelada-tab" data-bs-toggle="tab" data-bs-target="#nav-Cancelada" type="button" role="tab" aria-controls="nav-Cancelada" aria-selected="false">
+                                        Cancelada <img src="{{ asset('assets/cam/cerrar.png') }}" alt="" width="35px">
+                                    </button>
+                                </div>
+                            </nav>
 
-                                                <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}" title="Editar Estatus" style="background: #b600e3;">
-                                                    Pendiente
-                                                </a>
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-Cotizacion" role="tabpanel" aria-labelledby="nav-Cotizacion-tab" tabindex="0">
 
-                                                @endif
+                                    <table class="table table-flush" id="datatable-search3">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Cliente</th>
+                                                <th>fecha</th>
+                                                <th>Total</th>
+                                                <th>Estatus</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($notas as $nota)
+                                                <tr>
+                                                    <td>
+                                                        <h5>{{ $nota->folio }}</h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            @if ($nota->id_usuario == NULL)
+                                                                {{ $nota->nombre }} <br> {{ $nota->telefono }}
+                                                            @else
+                                                                {{ $nota->User->name }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+                                                    {{-- <td>
+                                                        <h5>
+                                                            <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
+                                                        </h5>
+                                                    </td> --}}
+                                                    <td>
+                                                        @php
+                                                        $fecha = $nota->fecha;
+                                                        $fecha_timestamp = strtotime($fecha);
+                                                        $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                                                        @endphp
+                                                        <h5>
+                                                            {{$fecha_formateada}}
+                                                        </h5>
+                                                    </td>
+                                                    <td><h5>${{ $nota->total }}</h5></td>
+                                                    <td>
 
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}">
-                                                    <i class="fa fa-file"></i>
-                                                </a>
-                                                @php
-                                                    $total = 0;$totalCantidad = 0;
-                                                @endphp
-                                                @can('nota-productos-whats')
-                                                    @if ($nota->tipo_nota == 'Venta Presencial')
-                                                        <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Venta%20presencial%0A--------------------------------%0A%0ANumero%20de%20Orden%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16% ' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
-                                                                <i class="fa fa-whatsapp"></i>
+                                                        @if ($nota->estatus_cotizacion == 'Aprobada')
+
+                                                        <a class="btn btn-xs btn-primary" style="background: #06a306;">
+                                                            Aprobada
                                                         </a>
-                                                    @else
-                                                    <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Cotizacion%20Cosmica%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
-                                                        <i class="fa fa-whatsapp"></i>
-                                                    </a>
-                                                    @endif
-                                                @endcan
-                                                @can('nota-productos-editar')
-                                                    <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $nota->id) }}">
-                                                        <i class="fa fa-fw fa-edit"></i>
-                                                    </a>
-                                                @endcan
-                                            </td>
-                                        </tr>
-                                        @include('admin.cotizacion_cosmica.modal_estatus')
-                                    @endforeach
-                                </tbody>
-                            </table>
+
+                                                        @else
+
+                                                        <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}" title="Editar Estatus" style="background: #b600e3;">
+                                                            Pendiente
+                                                        </a>
+
+                                                        @endif
+
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}">
+                                                            <i class="fa fa-file"></i>
+                                                        </a>
+                                                        @php
+                                                            $total = 0;$totalCantidad = 0;
+                                                        @endphp
+                                                        @can('nota-productos-whats')
+                                                            @if ($nota->tipo_nota == 'Venta Presencial')
+                                                                <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Venta%20presencial%0A--------------------------------%0A%0ANumero%20de%20Orden%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16% ' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
+                                                                        <i class="fa fa-whatsapp"></i>
+                                                                </a>
+                                                            @else
+                                                            <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Cotizacion%20Cosmica%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
+                                                                <i class="fa fa-whatsapp"></i>
+                                                            </a>
+                                                            @endif
+                                                        @endcan
+                                                        @can('nota-productos-editar')
+                                                            <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $nota->id) }}">
+                                                                <i class="fa fa-fw fa-edit"></i>
+                                                            </a>
+                                                        @endcan
+                                                    </td>
+                                                </tr>
+                                                @include('admin.cotizacion_cosmica.modal_estatus')
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                                <div class="tab-pane fade" id="nav-Aprobada" role="tabpanel" aria-labelledby="nav-Aprobada-tab" tabindex="0">
+
+
+                                    <table class="table table-flush" id="datatable-search">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Cliente</th>
+                                                <th>fecha</th>
+                                                <th>Total</th>
+                                                <th>Estatus</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($notas_aprobadas as $nota)
+                                                <tr>
+                                                    <td>
+                                                        <h5>{{ $nota->folio }}</h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            @if ($nota->id_usuario == NULL)
+                                                                {{ $nota->nombre }} <br> {{ $nota->telefono }}
+                                                            @else
+                                                                {{ $nota->User->name }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+                                                    {{-- <td>
+                                                        <h5>
+                                                            <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
+                                                        </h5>
+                                                    </td> --}}
+                                                    <td>
+                                                        @php
+                                                        $fecha = $nota->fecha;
+                                                        $fecha_timestamp = strtotime($fecha);
+                                                        $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                                                        @endphp
+                                                        <h5>
+                                                            {{$fecha_formateada}}
+                                                        </h5>
+                                                    </td>
+                                                    <td><h5>${{ $nota->total }}</h5></td>
+                                                    <td>
+
+                                                        @if ($nota->estatus_cotizacion == 'Aprobada')
+
+                                                        <a class="btn btn-xs btn-primary" style="background: #06a306;">
+                                                            Aprobada
+                                                        </a>
+
+                                                        @else
+
+                                                        <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}" title="Editar Estatus" style="background: #b600e3;">
+                                                            Pendiente
+                                                        </a>
+
+                                                        @endif
+
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}">
+                                                            <i class="fa fa-file"></i>
+                                                        </a>
+                                                        @php
+                                                            $total = 0;$totalCantidad = 0;
+                                                        @endphp
+                                                        @can('nota-productos-whats')
+                                                            @if ($nota->tipo_nota == 'Venta Presencial')
+                                                                <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Venta%20presencial%0A--------------------------------%0A%0ANumero%20de%20Orden%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16% ' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
+                                                                        <i class="fa fa-whatsapp"></i>
+                                                                </a>
+                                                            @else
+                                                            <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Cotizacion%20Cosmica%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
+                                                                <i class="fa fa-whatsapp"></i>
+                                                            </a>
+                                                            @endif
+                                                        @endcan
+                                                        @can('nota-productos-editar')
+                                                            <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $nota->id) }}">
+                                                                <i class="fa fa-fw fa-edit"></i>
+                                                            </a>
+                                                        @endcan
+                                                    </td>
+                                                </tr>
+                                                @include('admin.cotizacion_cosmica.modal_estatus')
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
+                                <div class="tab-pane fade" id="nav-Cancelada" role="tabpanel" aria-labelledby="nav-Cancelada-tab" tabindex="0">
+                                    <table class="table table-flush" id="datatable-search4">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Cliente</th>
+                                                <th>fecha</th>
+                                                <th>Total</th>
+                                                <th>Estatus</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($notas_canceladas as $nota)
+                                                <tr>
+                                                    <td>
+                                                        <h5>{{ $nota->folio }}</h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            @if ($nota->id_usuario == NULL)
+                                                                {{ $nota->nombre }} <br> {{ $nota->telefono }}
+                                                            @else
+                                                                {{ $nota->User->name }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+                                                    {{-- <td>
+                                                        <h5>
+                                                            <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
+                                                        </h5>
+                                                    </td> --}}
+                                                    <td>
+                                                        @php
+                                                        $fecha = $nota->fecha;
+                                                        $fecha_timestamp = strtotime($fecha);
+                                                        $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                                                        @endphp
+                                                        <h5>
+                                                            {{$fecha_formateada}}
+                                                        </h5>
+                                                    </td>
+                                                    <td><h5>${{ $nota->total }}</h5></td>
+                                                    <td>
+
+                                                        @if ($nota->estatus_cotizacion == 'Aprobada')
+
+                                                        <a class="btn btn-xs btn-primary" style="background: #06a306;">
+                                                            Aprobada
+                                                        </a>
+
+                                                        @else
+
+                                                        <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}" title="Editar Estatus" style="background: #b600e3;">
+                                                            Pendiente
+                                                        </a>
+
+                                                        @endif
+
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}">
+                                                            <i class="fa fa-file"></i>
+                                                        </a>
+                                                        @php
+                                                            $total = 0;$totalCantidad = 0;
+                                                        @endphp
+                                                        @can('nota-productos-whats')
+                                                            @if ($nota->tipo_nota == 'Venta Presencial')
+                                                                <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Venta%20presencial%0A--------------------------------%0A%0ANumero%20de%20Orden%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16% ' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
+                                                                        <i class="fa fa-whatsapp"></i>
+                                                                </a>
+                                                            @else
+                                                            <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Cotizacion%20Cosmica%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
+                                                                <i class="fa fa-whatsapp"></i>
+                                                            </a>
+                                                            @endif
+                                                        @endcan
+                                                        @can('nota-productos-editar')
+                                                            <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $nota->id) }}">
+                                                                <i class="fa fa-fw fa-edit"></i>
+                                                            </a>
+                                                        @endcan
+                                                    </td>
+                                                </tr>
+                                                @include('admin.cotizacion_cosmica.modal_estatus')
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -177,38 +390,32 @@
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 
 <script type="text/javascript">
+
     $(document).ready(function() {
         $('.cliente').select2();
-        $('.administradores').select2();
         $('.phone').select2();
         $('.administradores').select2();
-
-        $('#datatable-search').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                {
-                    extend: 'print',
-                    text: 'Imprimir',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                'excel',
-                'pdf',
-                'colvis'
-            ],
-            responsive: true,
-            stateSave: true,
-
-            ordering: false,
-
-            language: {
-                url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
-            }
-        });
     });
+
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+        searchable: true,
+        fixedHeight: false
+    });
+
+    const dataTableSearch2 = new simpleDatatables.DataTable("#datatable-search2", {
+        searchable: true,
+        fixedHeight: false
+    });
+
+    const dataTableSearch3 = new simpleDatatables.DataTable("#datatable-search3", {
+        searchable: true,
+        fixedHeight: false
+    });
+
+</script>
 
 </script>
 @endsection
