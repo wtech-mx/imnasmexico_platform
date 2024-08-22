@@ -68,7 +68,7 @@
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <button class="nav-link active" id="nav-Cotizacion-tab" data-bs-toggle="tab" data-bs-target="#nav-Cotizacion" type="button" role="tab" aria-controls="nav-Cotizacion" aria-selected="false" >
-                                        Cotizacion <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
+                                        Pendiente <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
                                     </button>
 
                                     <button class="nav-link" id="nav-Aprobada-tab" data-bs-toggle="tab" data-bs-target="#nav-Aprobada" type="button" role="tab" aria-controls="nav-Aprobada" aria-selected="false">
@@ -84,7 +84,7 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-Cotizacion" role="tabpanel" aria-labelledby="nav-Cotizacion-tab" tabindex="0">
 
-                                    <table class="table table-flush" id="datatable-search3">
+                                    <table class="table table-flush" id="datatable-search">
                                         <thead class="thead">
                                             <tr>
                                                 <th>No</th>
@@ -96,17 +96,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($notas as $nota)
+                                            @foreach ($notas as $item)
                                                 <tr>
                                                     <td>
-                                                        <h5>{{ $nota->folio }}</h5>
+                                                        <h5>{{ $item->folio }}</h5>
                                                     </td>
                                                     <td>
                                                         <h5>
-                                                            @if ($nota->id_usuario == NULL)
-                                                                {{ $nota->nombre }} <br> {{ $nota->telefono }}
+                                                            @if ($item->id_usuario == NULL)
+                                                                {{ $item->nombre }} <br> {{ $item->telefono }}
                                                             @else
-                                                                {{ $nota->User->name }}
+                                                                {{ $item->User->name }}
                                                             @endif
                                                         </h5>
                                                     </td>
@@ -117,7 +117,7 @@
                                                     </td> --}}
                                                     <td>
                                                         @php
-                                                        $fecha = $nota->fecha;
+                                                        $fecha = $item->fecha;
                                                         $fecha_timestamp = strtotime($fecha);
                                                         $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                                                         @endphp
@@ -125,10 +125,10 @@
                                                             {{$fecha_formateada}}
                                                         </h5>
                                                     </td>
-                                                    <td><h5>${{ $nota->total }}</h5></td>
+                                                    <td><h5>${{ $item->total }}</h5></td>
                                                     <td>
 
-                                                        @if ($nota->estatus_cotizacion == 'Aprobada')
+                                                        @if ($item->estatus_cotizacion == 'Aprobada')
 
                                                         <a class="btn btn-xs btn-primary" style="background: #06a306;">
                                                             Aprobada
@@ -136,7 +136,7 @@
 
                                                         @else
 
-                                                        <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}" title="Editar Estatus" style="background: #b600e3;">
+                                                        <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $item->id }}" title="Editar Estatus" style="background: #b600e3;">
                                                             Pendiente
                                                         </a>
 
@@ -144,25 +144,25 @@
 
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}">
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
                                                             <i class="fa fa-file"></i>
                                                         </a>
                                                         @php
                                                             $total = 0;$totalCantidad = 0;
                                                         @endphp
                                                         @can('nota-productos-whats')
-                                                            @if ($nota->tipo_nota == 'Venta Presencial')
-                                                                <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Venta%20presencial%0A--------------------------------%0A%0ANumero%20de%20Orden%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16% ' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
+                                                            @if ($item->tipo_item == 'Venta Presencial')
+                                                                <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $item->id_usuario ? $item->User->telefono : $item->telefono }}&text=Venta%20presencial%0A--------------------------------%0A%0ANumero%20de%20Orden%20%20%20%20%3A%20%20{{ $item->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($item->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($item->tipo, 2, '.', ',') }}{{ $item->restante > 0 ? '%0A Descuento: '. $item->restante .'%' : '' }}{{ $item->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $item->factura == 1 ? '%0A Factura: 16% ' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($item->total, 2, '.', ',') }}%0A">
                                                                         <i class="fa fa-whatsapp"></i>
                                                                 </a>
                                                             @else
-                                                            <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Cotizacion%20Cosmica%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
+                                                            <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $item->id_usuario ? $item->User->telefono : $item->telefono }}&text=Cotizacion%20Cosmica%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $item->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($item->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($item->tipo, 2, '.', ',') }}{{ $item->restante > 0 ? '%0A Descuento: '. $item->restante .'%' : '' }}{{ $item->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $item->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($item->total, 2, '.', ',') }}%0A">
                                                                 <i class="fa fa-whatsapp"></i>
                                                             </a>
                                                             @endif
                                                         @endcan
                                                         @can('nota-productos-editar')
-                                                            <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $nota->id) }}">
+                                                            <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $item->id) }}">
                                                                 <i class="fa fa-fw fa-edit"></i>
                                                             </a>
                                                         @endcan
@@ -178,7 +178,7 @@
                                 <div class="tab-pane fade" id="nav-Aprobada" role="tabpanel" aria-labelledby="nav-Aprobada-tab" tabindex="0">
 
 
-                                    <table class="table table-flush" id="datatable-search">
+                                    <table class="table table-flush" id="datatable-search2">
                                         <thead class="thead">
                                             <tr>
                                                 <th>No</th>
@@ -190,17 +190,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($notas_aprobadas as $nota)
+                                            @foreach ($notas_aprobadas as $item)
                                                 <tr>
                                                     <td>
-                                                        <h5>{{ $nota->folio }}</h5>
+                                                        <h5>{{ $item->folio }}</h5>
                                                     </td>
                                                     <td>
                                                         <h5>
-                                                            @if ($nota->id_usuario == NULL)
-                                                                {{ $nota->nombre }} <br> {{ $nota->telefono }}
+                                                            @if ($item->id_usuario == NULL)
+                                                                {{ $item->nombre }} <br> {{ $item->telefono }}
                                                             @else
-                                                                {{ $nota->User->name }}
+                                                                {{ $item->User->name }}
                                                             @endif
                                                         </h5>
                                                     </td>
@@ -211,7 +211,7 @@
                                                     </td> --}}
                                                     <td>
                                                         @php
-                                                        $fecha = $nota->fecha;
+                                                        $fecha = $item->fecha;
                                                         $fecha_timestamp = strtotime($fecha);
                                                         $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                                                         @endphp
@@ -219,47 +219,41 @@
                                                             {{$fecha_formateada}}
                                                         </h5>
                                                     </td>
-                                                    <td><h5>${{ $nota->total }}</h5></td>
+                                                    <td><h5>${{ $item->total }}</h5></td>
                                                     <td>
 
-                                                        @if ($nota->estatus_cotizacion == 'Aprobada')
+                                                        @if ($item->estatus_cotizacion == 'Aprobada')
 
-                                                        <a class="btn btn-xs btn-primary" style="background: #06a306;">
-                                                            Aprobada
-                                                        </a>
-
-                                                        @else
-
-                                                        <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}" title="Editar Estatus" style="background: #b600e3;">
-                                                            Pendiente
-                                                        </a>
+                                                            <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $item->id }}" title="Editar Estatus" style="background: #00b60f;">
+                                                                Pendiente
+                                                            </a>
 
                                                         @endif
 
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}">
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
                                                             <i class="fa fa-file"></i>
                                                         </a>
                                                         @php
                                                             $total = 0;$totalCantidad = 0;
                                                         @endphp
                                                         @can('nota-productos-whats')
-                                                            @if ($nota->tipo_nota == 'Venta Presencial')
-                                                                <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Venta%20presencial%0A--------------------------------%0A%0ANumero%20de%20Orden%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16% ' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
+                                                            @if ($item->tipo_item == 'Venta Presencial')
+                                                                <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $item->id_usuario ? $item->User->telefono : $item->telefono }}&text=Venta%20presencial%0A--------------------------------%0A%0ANumero%20de%20Orden%20%20%20%20%3A%20%20{{ $item->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($item->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($item->tipo, 2, '.', ',') }}{{ $item->restante > 0 ? '%0A Descuento: '. $item->restante .'%' : '' }}{{ $item->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $item->factura == 1 ? '%0A Factura: 16% ' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($item->total, 2, '.', ',') }}%0A">
                                                                         <i class="fa fa-whatsapp"></i>
                                                                 </a>
                                                             @else
-                                                            <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Cotizacion%20Cosmica%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
+                                                            <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $item->id_usuario ? $item->User->telefono : $item->telefono }}&text=Cotizacion%20Cosmica%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $item->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($item->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($item->tipo, 2, '.', ',') }}{{ $item->restante > 0 ? '%0A Descuento: '. $item->restante .'%' : '' }}{{ $item->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $item->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($item->total, 2, '.', ',') }}%0A">
                                                                 <i class="fa fa-whatsapp"></i>
                                                             </a>
                                                             @endif
                                                         @endcan
                                                         @can('nota-productos-editar')
-                                                            <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $nota->id) }}">
-                                                                <i class="fa fa-fw fa-edit"></i>
-                                                            </a>
-                                                        @endcan
+                                                            <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $item->id) }}">
+                                                            <i class="fa fa-fw fa-edit"></i>
+                                                        </a>
+                                                    @endcan
                                                     </td>
                                                 </tr>
                                                 @include('admin.cotizacion_cosmica.modal_estatus')
@@ -270,7 +264,7 @@
                                 </div>
 
                                 <div class="tab-pane fade" id="nav-Cancelada" role="tabpanel" aria-labelledby="nav-Cancelada-tab" tabindex="0">
-                                    <table class="table table-flush" id="datatable-search4">
+                                    <table class="table table-flush" id="datatable-search3">
                                         <thead class="thead">
                                             <tr>
                                                 <th>No</th>
@@ -282,17 +276,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($notas_canceladas as $nota)
+                                            @foreach ($notas_canceladas as $item)
                                                 <tr>
                                                     <td>
-                                                        <h5>{{ $nota->folio }}</h5>
+                                                        <h5>{{ $item->folio }}</h5>
                                                     </td>
                                                     <td>
                                                         <h5>
-                                                            @if ($nota->id_usuario == NULL)
-                                                                {{ $nota->nombre }} <br> {{ $nota->telefono }}
+                                                            @if ($item->id_usuario == NULL)
+                                                                {{ $item->nombre }} <br> {{ $item->telefono }}
                                                             @else
-                                                                {{ $nota->User->name }}
+                                                                {{ $item->User->name }}
                                                             @endif
                                                         </h5>
                                                     </td>
@@ -303,7 +297,7 @@
                                                     </td> --}}
                                                     <td>
                                                         @php
-                                                        $fecha = $nota->fecha;
+                                                        $fecha = $item->fecha;
                                                         $fecha_timestamp = strtotime($fecha);
                                                         $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                                                         @endphp
@@ -311,44 +305,38 @@
                                                             {{$fecha_formateada}}
                                                         </h5>
                                                     </td>
-                                                    <td><h5>${{ $nota->total }}</h5></td>
+                                                    <td><h5>${{ $item->total }}</h5></td>
                                                     <td>
 
-                                                        @if ($nota->estatus_cotizacion == 'Aprobada')
+                                                        @if ($item->estatus_cotizacion == 'Cancelada')
 
-                                                        <a class="btn btn-xs btn-primary" style="background: #06a306;">
-                                                            Aprobada
-                                                        </a>
-
-                                                        @else
-
-                                                        <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $nota->id }}" title="Editar Estatus" style="background: #b600e3;">
-                                                            Pendiente
-                                                        </a>
+                                                            <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $item->id }}" title="Editar Estatus" style="background: #e30000;">
+                                                                Cancelada
+                                                            </a>
 
                                                         @endif
 
                                                     </td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $nota->id]) }}">
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
                                                             <i class="fa fa-file"></i>
                                                         </a>
                                                         @php
                                                             $total = 0;$totalCantidad = 0;
                                                         @endphp
                                                         @can('nota-productos-whats')
-                                                            @if ($nota->tipo_nota == 'Venta Presencial')
-                                                                <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Venta%20presencial%0A--------------------------------%0A%0ANumero%20de%20Orden%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16% ' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
-                                                                        <i class="fa fa-whatsapp"></i>
+                                                                @if ($item->tipo_item == 'Venta Presencial')
+                                                                    <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $item->id_usuario ? $item->User->telefono : $item->telefono }}&text=Venta%20presencial%0A--------------------------------%0A%0ANumero%20de%20Orden%20%20%20%20%3A%20%20{{ $item->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($item->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($item->tipo, 2, '.', ',') }}{{ $item->restante > 0 ? '%0A Descuento: '. $item->restante .'%' : '' }}{{ $item->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $item->factura == 1 ? '%0A Factura: 16% ' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($item->total, 2, '.', ',') }}%0A">
+                                                                            <i class="fa fa-whatsapp"></i>
+                                                                    </a>
+                                                                @else
+                                                                <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $item->id_usuario ? $item->User->telefono : $item->telefono }}&text=Cotizacion%20Cosmica%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $item->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($item->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($item->tipo, 2, '.', ',') }}{{ $item->restante > 0 ? '%0A Descuento: '. $item->restante .'%' : '' }}{{ $item->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $item->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($item->total, 2, '.', ',') }}%0A">
+                                                                    <i class="fa fa-whatsapp"></i>
                                                                 </a>
-                                                            @else
-                                                            <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $nota->id_usuario ? $nota->User->telefono : $nota->telefono }}&text=Cotizacion%20Cosmica%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $nota->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($nota->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($nota->tipo, 2, '.', ',') }}{{ $nota->restante > 0 ? '%0A Descuento: '. $nota->restante .'%' : '' }}{{ $nota->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $nota->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($nota->total, 2, '.', ',') }}%0A">
-                                                                <i class="fa fa-whatsapp"></i>
-                                                            </a>
-                                                            @endif
-                                                        @endcan
-                                                        @can('nota-productos-editar')
-                                                            <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $nota->id) }}">
+                                                                @endif
+                                                            @endcan
+                                                            @can('nota-productos-editar')
+                                                                <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $item->id) }}">
                                                                 <i class="fa fa-fw fa-edit"></i>
                                                             </a>
                                                         @endcan

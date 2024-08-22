@@ -31,14 +31,13 @@ class CotizacionCosmicaController extends Controller
         $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
 
         $notas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->get();
+        ->where('estatus_cotizacion','=' , null)->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->get();
 
         $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->where('estatus_cotizacion','=' ,'Aprobada')->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->get();
+        ->where('estatus_cotizacion','=' ,'Aprobada')->where('tipo_nota','=' , 'Cotizacion')->orderBy('id','DESC')->get();
 
         $notas_canceladas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->where('estatus_cotizacion','=' ,'Canceladas')->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->get();
-
+        ->where('estatus_cotizacion','=' , 'Cancelada')->orderBy('id','DESC')->get();
 
         return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores','notas_aprobadas','notas_canceladas'));
     }

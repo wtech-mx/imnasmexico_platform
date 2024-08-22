@@ -1,5 +1,5 @@
 <!-- Modal -->
-<div class="modal fade" id="estatus_{{ $nota->id }}" tabindex="-1" role="dialog" aria-labelledby="estatus_{{ $nota->id }}" aria-hidden="true">
+<div class="modal fade" id="estatus_{{ $item->id }}" tabindex="-1" role="dialog" aria-labelledby="estatus_{{ $item->id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
         <div class="modal-content">
 
@@ -12,7 +12,7 @@
 
             <div class="modal-body">
 
-                    <form class="form row" action="{{ route('distribuidoras.update_estatus', $nota->id) }}" method="POST">
+                    <form class="form row" action="{{ route('distribuidoras.update_estatus', $item->id) }}" method="POST">
                         @csrf
                         <input type="hidden" name="_method" value="PATCH">
                         <h4 class="text-center">¿Cambiar estatus?</h4>
