@@ -522,7 +522,53 @@ class CotizacionCosmicaController extends Controller
             $chartURL = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData);
 
             $chartData = file_get_contents($chartURL);
+
             $chart = 'data:image/png;base64, '.base64_encode($chartData);
+
+            //productos menos cotizados
+
+            $productosMenosCotizados = ProductosNotasCosmica::whereIn('id_notas_productos', $cotizacionIds)
+            ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
+            ->groupBy('producto')
+            ->orderBy('total_cantidad', 'ASC')
+            ->limit(5)
+            ->get();
+
+            $labelsmenoscot = $productosMenosCotizados->pluck('producto')->toArray();
+            $data_menoscot = $productosMenosCotizados->pluck('total_cantidad')->toArray();
+            $chartData_menoscot = [
+                "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
+                "data" => [
+                    "labels" => $labelsmenoscot, // Etiquetas para los productos
+                    "datasets" => [
+                        [
+                            "label" => "Productos menos Cotizados",
+                            "data" => $data_menoscot, // Cantidades correspondientes a cada producto
+                            "backgroundColor" => [
+                                '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
+                            ],
+                        ],
+                    ],
+                ],
+                "options" => [
+                    "plugins" => [
+                        "datalabels" => [
+                            "color" => 'white', // Cambia el color del texto a blanco
+                        ],
+                    ],
+                    "legend" => [
+                        "display" => true // Mostrar la leyenda de colores
+                    ],
+                ],
+            ];
+
+            $chartData_menoscot = json_encode($chartData_menoscot);
+
+            $chartURL_menoscot = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData_menoscot);
+
+            $chartData_menoscot = file_get_contents($chartURL_menoscot);
+
+            $chart_menoscot = 'data:image/png;base64, '.base64_encode($chartData_menoscot);
 
         $query2 = NotasProductosCosmica::query();
 
@@ -552,13 +598,14 @@ class CotizacionCosmicaController extends Controller
 
             $labels2 = $productosMasVendidos->pluck('producto')->toArray();
             $data2 = $productosMasVendidos->pluck('total_cantidad')->toArray();
+
             $chartData2 = [
                 "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
                 "data" => [
                     "labels" => $labels2, // Etiquetas para los productos
                     "datasets" => [
                         [
-                            "label" => "Productos más vendidos",
+                            "label" => "Productos mas Vendidos",
                             "data" => $data2, // Cantidades correspondientes a cada producto
                             "backgroundColor" => [
                                 '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
@@ -585,7 +632,52 @@ class CotizacionCosmicaController extends Controller
             $chartData2 = file_get_contents($chartURL2);
             $chart2 = 'data:image/png;base64, '.base64_encode($chartData2);
 
-        $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_reporte', compact('cotizaciones', 'today', 'ventas', 'chart', 'chart2', 'totalSum', 'totalSum2', 'fechaInicio', 'fechaFin'));
+            // menos productos
+
+            $productosMenosVendidos = ProductosNotasCosmica::whereIn('id_notas_productos', $ventasIds)
+            ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
+            ->groupBy('producto')
+            ->orderBy('total_cantidad', 'ASC')
+            ->limit(5)
+            ->get();
+
+            $labels3 = $productosMenosVendidos->pluck('producto')->toArray();
+            $data3 = $productosMenosVendidos->pluck('total_cantidad')->toArray();
+
+            $chartData3 = [
+                "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
+                "data" => [
+                    "labels" => $labels3, // Etiquetas para los productos
+                    "datasets" => [
+                        [
+                            "label" => "Productos menos Vendidos",
+                            "data" => $data3, // Cantidades correspondientes a cada producto
+                            "backgroundColor" => [
+                                '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
+                            ],
+                        ],
+                    ],
+                ],
+                "options" => [
+                    "plugins" => [
+                        "datalabels" => [
+                            "color" => 'white', // Cambia el color del texto a blanco
+                        ],
+                    ],
+                    "legend" => [
+                        "display" => true // Mostrar la leyenda de colores
+                    ],
+                ],
+            ];
+
+            $chartData3 = json_encode($chartData3);
+
+            $chartURL3 = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData3);
+
+            $chartData3 = file_get_contents($chartURL3);
+            $chart3 = 'data:image/png;base64, '.base64_encode($chartData3);
+
+        $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_reporte', compact('cotizaciones', 'today', 'ventas', 'chart_menoscot','chart', 'chart2','chart3', 'totalSum', 'totalSum2', 'fechaInicio', 'fechaFin'));
 
          //  return $pdf->stream();
         return $pdf->download('Reporte Cosmica / '.$today.'.pdf');
