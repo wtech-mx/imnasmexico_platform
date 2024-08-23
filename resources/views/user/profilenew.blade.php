@@ -81,8 +81,62 @@ Mi perfil- {{$cliente->name}}
 
         <div class="col-12">
             <div class="card_single_horizon">
+
+                <div class="row">
+                    <div class="col-12 mt-3 mb-3">
+
+                        <p class="d-inline-flex gap-1" style="position: relative">
+                            <a class="btn_save_profile" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="border: solid 3px #836262!important;color: #836262!important;background: transparent;">
+                              Preguntas Frecuentes <img class="icon_nav_course" src="{{asset('assets/user/icons/pregunta.png')}}" alt="">
+                            </a>
+                            <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" style="z-index: 10">
+                          </p>
+                          <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+                                <p>
+                                    <strong>Da click en tu pregunta para mas informacion</strong>
+                                </p>
+                                <ul class="mt-3" style="list-style:none;padding-left: 0rem!important;">
+                                    <li class="mt-2" style="">
+                                        <a class="td_title_checkout text-dark" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            1- ¿Como puedo ver mis <strong>CLASES GRABADAS</strong>?
+
+                                        </a>
+                                    </li>
+
+                                    <li class="mt-2" style="">
+                                        <a class="td_title_checkout text-dark" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#subir_docs">
+                                            2- ¿Como subir documentos?
+                                        </a>
+                                    </li>
+
+                                    <li class="mt-2" style="">
+                                        <a class="td_title_checkout text-dark" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#sep_cononcer">
+                                            3- ¿Como subir documentos para la certificacion <strong>SEP CONOCER</strong>?
+                                        </a>
+                                    </li>
+
+                                    <li class="mt-2" style="">
+                                        <a class="td_title_checkout text-dark" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#mis_clases">
+                                            4- ¿Como puedo ver el <strong>MATERIAL DE MIS CLASES</strong>?
+                                        </a>
+                                    </li>
+
+                                    <li class="mt-2" style="">
+                                        <a class="td_title_checkout text-dark" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#diploma_Stp">
+                                            5- ¿Como puedo descargar <strong>MI DIPLOMA STPS</strong>?
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                          </div>
+
+                    </div>
+                </div>
+
                     <div class="d-flex justify-content-between">
                         <h2 class="title_curso mb-3">Mi Perfil</h2>
+
                         <img class="icon_nav_course" src="{{asset('assets/user/icons/informacion.png')}}" alt="">
                     </div>
                     <form role="form" action="{{ route('perfil.update', $cliente->code) }}" method="post">
@@ -176,6 +230,11 @@ Mi perfil- {{$cliente->name}}
             </div>
         </div>
 
+        @include('user.components.faqs.clases_gravadas')
+        @include('user.components.faqs.diploma_stps')
+        @include('user.components.faqs.mis_clases')
+        @include('user.components.faqs.sep_conocer')
+        @include('user.components.faqs.subir_documentos')
 
         <div class="col-12 col-lg-5">
             <div class="card_single_horizon">
