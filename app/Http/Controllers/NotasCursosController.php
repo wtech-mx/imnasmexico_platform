@@ -29,10 +29,14 @@ class NotasCursosController extends Controller
      */
     public function index()
     {
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+
         $fechaActual = date('Y-m-d');
-        $notas = NotasCursos::orderBy('id','DESC')->get();
+        $notas = NotasCursos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])->orderBy('id','DESC')->get();
+        $notas_pagos = NotasPagos::whereBetween('created_at', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+
         $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
-        $notas_pagos = NotasPagos::get();
 
         $cursos_paquetes = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
         ->where('cursos_tickets.precio','<=', 600)
@@ -42,36 +46,41 @@ class NotasCursosController extends Controller
         ->select('cursos_tickets.*')
         ->get();
 
-        return view('admin.notas_cursos.index', compact('notas', 'cursos', 'notas_pagos', 'cursos_paquetes'));
+        $client = User::get();
+
+        return view('admin.notas_cursos.index', compact('notas', 'cursos', 'notas_pagos', 'cursos_paquetes', 'client'));
     }
 
     public function store(request $request){
 
         $code = Str::random(8);
 
-        if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
-            if (User::where('telefono', $request->telefono)->exists()) {
-                $user = User::where('telefono', $request->telefono)->first();
+        if($request->id_client == NULL){
+            if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+                if (User::where('telefono', $request->telefono)->exists()) {
+                    $user = User::where('telefono', $request->telefono)->first();
+                } else {
+                    $user = User::where('email', $request->email)->first();
+                }
+                $payer = $user;
             } else {
-                $user = User::where('email', $request->email)->first();
+                $payer = new User;
+                $payer->name = $request->get('name');
+                $payer->email = $request->get('email');
+                $payer->username = $request->get('telefono');
+                $payer->code = $code;
+                $payer->telefono = $request->get('telefono');
+                $payer->cliente = '1';
+                $payer->password = Hash::make($request->get('telefono'));
+                $payer->save();
+                $cliente = $payer->id;
             }
-            $payer = $user;
-        } else {
-            $payer = new User;
-            $payer->name = $request->get('name');
-            $payer->email = $request->get('email');
-            $payer->username = $request->get('telefono');
-            $payer->code = $code;
-            $payer->telefono = $request->get('telefono');
-            $payer->cliente = '1';
-            $payer->password = Hash::make($request->get('telefono'));
-            $payer->save();
-            $datos = User::where('id', '=', $payer->id)->first();
-          //  Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+        }else{
+            $cliente = $request->id_client;
         }
 
         $notas_cursos = new NotasCursos;
-        $notas_cursos->id_usuario = $payer->id;
+        $notas_cursos->id_usuario = $cliente;
         $notas_cursos->fecha = $request->get('fecha');
         $notas_cursos->subtotal = $request->get('total');
         $notas_cursos->descuento = $request->get('descuento');
@@ -81,9 +90,9 @@ class NotasCursosController extends Controller
 
         $code = Str::random(8);
         $order = new Orders;
-        $order->id_usuario = $payer->id;
+        $order->id_usuario = $cliente;
         $order->pago = $notas_cursos->total;
-        $order->forma_pago = 'Nota';
+        $order->forma_pago = $request->get('metodo_pago');
         $order->fecha = $notas_cursos->fecha;
         $order->estatus = 1;
         $order->code = $code;
@@ -93,7 +102,7 @@ class NotasCursosController extends Controller
         $nuevosCampos = $request->input('campo');
         $precio = $request->input('precio');
 
-        for ($count = 0; $count < count($nuevosCampos); $count++) {
+        for ($count = 0; $count < count($precio); $count++) {
             $data = array(
                 'id_nota' => $id,
                 'id_curso' => $nuevosCampos[$count],
@@ -104,7 +113,7 @@ class NotasCursosController extends Controller
             $curso = CursosTickets::where('id', '=', $nuevosCampos[$count])->first();
             $order_ticket = new OrdersTickets;
             $order_ticket->id_order = $order->id;
-            $order_ticket->id_usuario = $payer->id;
+            $order_ticket->id_usuario = $cliente;
             $order_ticket->id_tickets = $nuevosCampos[$count];
             $order_ticket->id_curso = $curso->id_curso;
             $order_ticket->save();

@@ -3,7 +3,38 @@
 @section('template_title')
     Notas Cursos
 @endsection
+<style>
+    .right-panel {
+        position: fixed;
+        top: 0;
+        right: -900px; /* Oculto inicialmente */
+        width: 600px;
+        height: 100%;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
+        z-index: 999;
+        overflow-y: auto;
+    }
 
+    .panel-content {
+        padding: 20px;
+        /* Estilos adicionales para el contenido del panel */
+    }
+
+    .close-btn {
+        cursor: pointer;
+        padding: 10px;
+        background-color: #ddd;
+        text-align: center;
+        margin-top: 65px;
+    }
+
+    .selected-row {
+        background-color: #f8d7da !important; /* Color rojo claro */
+    }
+
+</style>
 @php
     $fecha = date('Y-m-d');
     $fechaHoraActual = new DateTime();
@@ -23,7 +54,7 @@
 
                                 <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                     ¿Como funciona?
-                                </a>
+                                </a>
 
                             @can('nota-cursos-paquetes')
                                 <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#examplePaquete" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
@@ -32,14 +63,14 @@
                             @endcan
 
                             @can('nota-cursos-crear')
-                                <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                <a type="button" class="btn bg-gradient-primary" onclick="openRightPanel()" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                     Crear
                                 </a>
                             @endcan
                         </div>
                     </div>
                         <div class="card-body">
-
+                            @include('admin.notas_cursos.create')
                             <div class="table-responsive">
                                 <table class="table table-flush" id="datatable-search">
                                     <thead class="thead">
@@ -54,8 +85,7 @@
                                     </thead>
                                         <tbody>
                                             @foreach ($notas as $nota)
-                                            <tr>
-
+                                                <tr>
                                                     <td>{{ $nota->id }}</td>
                                                     <td>{{ $nota->User->name }}</td>
 
@@ -101,95 +131,93 @@
             </div>
         </div>
     </div>
-    @include('admin.notas_cursos.create')
+
     @include('admin.notas_cursos.create_paquete')
 @endsection
 
-@section('datatable')
-
+@section('select2')
+<script src="{{ asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script>
+<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-      searchable: true,
-      fixedHeight: false
-    });
 
     document.addEventListener('DOMContentLoaded', function() {
+        $('.cliente').select2();
+
         var agregarCampoBtn = document.getElementById('agregarCampo');
         var camposContainer = document.getElementById('camposContainer');
         var campoExistente = camposContainer.querySelector('.campo');
-        var totalInput = document.getElementById('total');
         var descuentoInput = document.getElementById('descuento');
+        var totalInput = document.getElementById('total');
         var totalDescuentoInput = document.getElementById('totalDescuento');
 
         agregarCampoBtn.addEventListener('click', function() {
             var nuevoCampo = campoExistente.cloneNode(true);
+
+            // Limpiar el select y el input de precio en el nuevo campo
+            var nuevoSelect = nuevoCampo.querySelector('select');
+            var nuevoPrecioInput = nuevoCampo.querySelector('input[name="precio[]"]');
+            nuevoSelect.value = '';
+            nuevoPrecioInput.value = '';
+
+            // Agregar el nuevo campo al contenedor
             camposContainer.appendChild(nuevoCampo);
         });
 
+        // Manejar el evento de cambio en el select
         camposContainer.addEventListener('change', function(event) {
-            if (event.target.classList.contains('cliente')) {
-                var precioInput = event.target.parentNode.querySelector('input[name="precio[]"]');
-                var precio = event.target.options[event.target.selectedIndex].getAttribute('data-precio');
-                precioInput.value = precio;
+            if (event.target.classList.contains('curso')) {
+                var select = event.target;
+                var precioInput = select.parentNode.querySelector('input[name="precio[]"]');
+                var precio = select.options[select.selectedIndex].getAttribute('data-precio');
+                precioInput.value = precio || '';
+                actualizarTotal();
             }
-            updateTotal();
         });
 
+        // Manejar el evento de cambio en los inputs de precio
         camposContainer.addEventListener('input', function(event) {
-            if (event.target.classList.contains('precio')) {
-                updateTotal();
+            if (event.target.name === 'precio[]') {
+                actualizarTotal();
             }
         });
 
-        function updateTotal() {
-            var campos = camposContainer.querySelectorAll('.campo');
+        // Manejar el evento de cambio en el input de descuento
+        descuentoInput.addEventListener('input', function() {
+            aplicarDescuento();
+        });
+
+        // Función para actualizar el total
+        function actualizarTotal() {
+            var precios = document.querySelectorAll('input[name="precio[]"]');
             var total = 0;
 
-            for (var i = 0; i < campos.length; i++) {
-                var precioInput = campos[i].querySelector('.precio');
-                var precio = parseFloat(precioInput.value) || 0;
-                total += precio;
-            }
+            precios.forEach(function(precioInput) {
+                var valor = parseFloat(precioInput.value) || 0;
+                total += valor;
+            });
 
-            totalInput.value = total.toFixed(2);
+            totalInput.value = total.toFixed(2); // Muestra el total con dos decimales
+            aplicarDescuento(); // Recalcula el total con descuento aplicado
+        }
 
-            // Calcular el descuento
+        // Función para aplicar el descuento y actualizar el totalDescuento
+        function aplicarDescuento() {
+            var total = parseFloat(totalInput.value) || 0;
             var descuento = parseFloat(descuentoInput.value) || 0;
-            var totalDescuento = total - (total * (descuento / 100));
-            totalDescuentoInput.value = totalDescuento.toFixed(2);
-        }
+            var descuentoAmount = (descuento / 100) * total;
+            var totalConDescuento = total - descuentoAmount;
 
-        descuentoInput.addEventListener('keyup', function() {
-            updateTotal();
-        });
+            totalDescuentoInput.value = totalConDescuento.toFixed(2); // Muestra el total con descuento aplicado
+        }
     });
+
+    function openRightPanel() {
+        document.getElementById("rightPanel").style.right = "0";
+    }
+
+    function closeRightPanel() {
+        document.getElementById("rightPanel").style.right = "-600px";
+    }
+
 </script>
-
-
-
-<script src="{{ asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script>
-<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
-
-  <script type="text/javascript">
-
-    $(document).ready(function() {
-        $('.cliente').select2();
-    });
-
-    $(document).ready(function() {
-        $('.cliente2').select2();
-    });
-
-  </script>
-
-
-@endsection
-@section('select2')
-    <script>
-        function updatePrecio(selectElement) {
-            var precioInput = selectElement.parentNode.querySelector('input[name="precio[]"]');
-            var precio = selectElement.options[selectElement.selectedIndex].getAttribute('data-precio');
-            precioInput.value = precio;
-        }
-    </script>
 @endsection
