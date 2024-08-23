@@ -111,7 +111,7 @@
                                                     <div class="col-2">
                                                         <div class="form-group">
                                                             <label for="num_sesion">Subtotal</label>
-                                                            <input  id="importe[]" name="importe[]" type="number" class="form-control importe" >
+                                                            <input  id="importe[]" name="importe[]" type="number" class="form-control importe" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
