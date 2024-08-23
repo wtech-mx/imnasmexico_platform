@@ -147,7 +147,19 @@
                                                             <select name="campo[]" class="form-select d-inline-block curso" style="width: 70%!important;">
                                                                 <option value="">Seleccione Curso</option>
                                                                 @foreach ($cursos as $curso)
-                                                                <option value="{{ $curso->id }}" data-precio="{{ $curso->precio}}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+
+                                                                @php
+                                                                    // Remover "Curso de " o "Curso " del inicio del nombre del curso
+                                                                    $nombreCurso = preg_replace('/^Curso de\s*/i', '', $curso->nombre);
+                                                                    $nombreCurso = preg_replace('/^Curso\s*/i', '', $nombreCurso);
+                                                                    $nombreCurso = preg_replace('/^Diplomado en\s*/i', '', $curso->nombre);
+                                                                    $fechaFormateada = date('d-m-Y', strtotime($curso->Cursos->fecha_inicial));
+
+                                                                @endphp
+
+                                                                <option value="{{ $curso->id }}" data-precio="{{ $curso->precio}}">
+                                                                    {{ $nombreCurso }} - {{ $curso->Cursos->modalidad }} / {{ $fechaFormateada }}
+                                                                </option>
                                                                 @endforeach
                                                             </select>
                                                             <input type="text" name="precio[]" class="form-control d-inline-block precio" style="width: 20%!important;">
