@@ -63,18 +63,13 @@
                             @endcan
 
                             @can('nota-cursos-crear')
-                                <a type="button" class="btn bg-gradient-primary" onclick="openRightPanel()" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                    Crear
-                                </a>
-
                                 <a  class="btn bg-gradient-primary" href="{{ route('notas_cursos.crear') }}">
-                                    Crear Individual
+                                    Crear
                                 </a>
                             @endcan
                         </div>
                     </div>
                         <div class="card-body">
-                            @include('admin.notas_cursos.create')
                             <div class="table-responsive">
                                 <table class="table table-flush" id="datatable-search">
                                     <thead class="thead">

@@ -60,7 +60,7 @@ class NotasCursosController extends Controller
         $notas = NotasCursos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])->orderBy('id','DESC')->get();
         $notas_pagos = NotasPagos::whereBetween('created_at', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
-        $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
+        $cursos = Cursos::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
 
         $cursos_paquetes = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
         ->where('cursos_tickets.precio','<=', 600)
@@ -72,7 +72,7 @@ class NotasCursosController extends Controller
 
         $client = User::get();
 
-        return view('admin.notas_cursos.create_tiendita', compact('notas', 'cursos', 'notas_pagos', 'cursos_paquetes', 'client'));
+        return view('admin.notas_cursos.create', compact('notas', 'cursos', 'notas_pagos', 'cursos_paquetes', 'client'));
     }
 
 
