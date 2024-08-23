@@ -7,8 +7,7 @@
 @section('css')
  <!-- Select2  -->
  <link rel="stylesheet" href="{{asset('assets/admin/vendor/select2/dist/css/select2.min.css')}}">
- <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
- <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
+
  @endsection
 
 @php
@@ -198,10 +197,13 @@
                                                     <td>
                                                         <h5>
                                                             @if ($item->id_usuario == NULL)
-                                                                {{ $item->nombre }} <br> {{ $item->telefono }}
+                                                                {{ $item->nombre }} <br> {{ $item->telefono }} <br>
                                                             @else
-                                                                {{ $item->User->name }}
+                                                                {{ $item->User->name }}  <br>
                                                             @endif
+
+                                                            {{ $item->estadociudad}}
+
                                                         </h5>
                                                     </td>
                                                     {{-- <td>
@@ -225,7 +227,7 @@
                                                         @if ($item->estatus_cotizacion == 'Aprobada')
 
                                                             <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_{{ $item->id }}" title="Editar Estatus" style="background: #00b60f;">
-                                                                Pendiente
+                                                                Aprobada
                                                             </a>
 
                                                         @endif
@@ -362,21 +364,7 @@
 @endsection
 
 @section('datatable')
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
 
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-
- <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
- <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap4.min.js"></script>
-
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 
@@ -402,6 +390,7 @@
         searchable: true,
         fixedHeight: false
     });
+
 
 </script>
 

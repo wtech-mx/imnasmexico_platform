@@ -186,6 +186,23 @@
         </tbody>
     </table>
 
+    <table class="mt-5">
+        <thead style="background-color: #CA87A6; color: #fff">
+            <tr>
+                <th>Ciudades donde compran</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>
+                    <img src="{{$chartGrafica }}" width="70%">
+                </th>
+
+            </tr>
+        </tbody>
+    </table>
+
     <table class="mt-5" style="margin-top: 1rem">
         <thead style="background-color: #CA87A6; color: #fff">
             <tr>
@@ -245,6 +262,7 @@
         <thead style="background-color: #87c5ca; color: #fff">
             <tr>
                 <th>Folio</th>
+                <th>Estado / Ciudad</th>
                 <th>Cliente</th>
                 <th>Descuento</th>
                 <th>Total</th>
@@ -256,6 +274,8 @@
             @foreach ($ventas as $venta)
                 <tr>
                     <th>{{$venta->folio}}</th>
+                    <th>{{$venta->estadociudad}}</th>
+
                     <th>
                         @if ($venta->id_usuario == NULL)
                             {{ $venta->nombre }} <br> {{ $venta->telefono }}

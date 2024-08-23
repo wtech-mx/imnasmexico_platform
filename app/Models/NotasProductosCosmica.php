@@ -41,6 +41,7 @@ class NotasProductosCosmica extends Model
         'direccion_fac',
         'folio',
         'estatus_cotizacion',
+        'estadociudad',
     ];
 
     public function User()

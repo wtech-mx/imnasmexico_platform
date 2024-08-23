@@ -364,7 +364,7 @@ class CotizacionCosmicaController extends Controller
         $nota = NotasProductosCosmica::find($id);
 
         $nota->estatus_cotizacion =  $request->get('estatus_cotizacion');
-
+        $nota->estadociudad =  $request->get('estado');
 
         $nota->update();
 
@@ -677,7 +677,70 @@ class CotizacionCosmicaController extends Controller
             $chartData3 = file_get_contents($chartURL3);
             $chart3 = 'data:image/png;base64, '.base64_encode($chartData3);
 
-        $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_reporte', compact('cotizaciones', 'today', 'ventas', 'chart_menoscot','chart', 'chart2','chart3', 'totalSum', 'totalSum2', 'fechaInicio', 'fechaFin'));
+            //estados grafica
+
+            // $ciudadesGrafica = NotasProductosCosmica::select('estadociudad', DB::raw('COUNT(*) as total_compras'))
+            // ->groupBy('estadociudad')
+            // ->orderBy('total_compras', 'desc')
+            // ->limit(5) // Ajusta este límite si deseas mostrar más o menos ciudades
+            // ->get();
+
+            $ciudadesData = NotasProductosCosmica::whereNotNull('estadociudad') // Filtra los registros donde estadociudad no es null
+            ->select('estadociudad', DB::raw('COUNT(*) as total_compras'))
+            ->groupBy('estadociudad')
+            ->orderBy('total_compras', 'desc')
+            ->groupBy('estadociudad')
+            ->get();
+
+            $colores = [
+                '#1abc9c', '#16a085', '#2ecc71', '#27ae60', '#3498db', '#2980b9', '#9b59b6',
+                '#8e44ad', '#34495e', '#2c3e50', '#f1c40f', '#f39c12', '#e67e22', '#d35400',
+                '#e74c3c', '#c0392b', '#ecf0f1', '#bdc3c7', '#95a5a6', '#7f8c8d', '#e91e63',
+                '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#00bcd4', '#009688', '#4caf50',
+                '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'
+            ];
+
+
+            // $labelsGrafica = $ciudadesData->pluck('estadociudad')->toArray();
+
+            $labelsGrafica = $ciudadesData->map(function($item) {
+                return $item->estadociudad . ' (' . $item->total_compras . ')';
+            })->toArray();
+
+            $dataGrafica = $ciudadesData->pluck('total_compras')->toArray();
+
+            $chartDataGrafica = [
+                "type" => 'pie', // Puedes cambiarlo a 'pie', 'line', etc.
+                "data" => [
+                    "labels" => $labelsGrafica, // Etiquetas para las ciudades
+                    "datasets" => [
+                        [
+                            "label" => "Compras por Ciudad",
+                            "data" => $dataGrafica, // Cantidades correspondientes a cada ciudad
+                            "backgroundColor" => $colores, // Aplica los colores generados
+                        ],
+                    ],
+                ],
+                "options" => [
+                    "plugins" => [
+                        "datalabels" => [
+                            "color" => 'white', // Cambia el color del texto a blanco
+                        ],
+                    ],
+                    "legend" => [
+                        "display" => true // Mostrar la leyenda de colores
+                    ],
+                ],
+            ];
+
+            $chartDataGrafica = json_encode($chartDataGrafica);
+            $chartURLGrafica = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartDataGrafica);
+
+            $chartDataGrafica = file_get_contents($chartURLGrafica);
+            $chartGrafica = 'data:image/png;base64, '.base64_encode($chartDataGrafica);
+
+
+        $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_reporte', compact('cotizaciones', 'today', 'ventas', 'chart_menoscot','chart', 'chart2','chart3','chartGrafica', 'totalSum', 'totalSum2', 'fechaInicio', 'fechaFin'));
 
          //  return $pdf->stream();
         return $pdf->download('Reporte Cosmica / '.$today.'.pdf');
