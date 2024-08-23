@@ -17,7 +17,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('notas_cotizacion.store') }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('notas_cursos.store') }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
@@ -26,45 +26,67 @@
                                         <h2 style="color:#836262"><strong>Datos del cliente</strong> </h2>
                                     </div>
 
-                                    <div class="form-group col-6">
-                                        <h4 for="name">Nombre *</h4>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" required>
+                                    <div class="col-3">
+                                        <label for="precio">Nuevo cliente</label><br>
+                                        <button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                    <div class="col-9">
+
+                                        <div class="form-group">
+                                            <label for="name">Cliente *</label>
+                                            <div class="input-group mb-3">
+                                                <select class="form-select cliente d-inline-block"  data-toggle="select" id="id_client" name="id_client" value="{{ old('id_client') }}">
+                                                    <option>Seleccionar cliente</option>
+                                                    @foreach ($client as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->name }} / {{ $item->telefono }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body">
+                                                <div class="row">
+                                                    <div class="form-group col-6">
+                                                        <h4 for="name">Nombre</h4>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">
+                                                                <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input id="name" name="name" type="text" class="form-control" placeholder="Nombre">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-6">
+                                                        <h4 for="name">Correo</h4>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">
+                                                                <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input id="email" name="email" type="email" class="form-control" placeholder="Correo">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-6">
+                                                        <h4 for="name">Telefono</h4>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">
+                                                                <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-6">
-                                        <h4 for="name">Correo</h4>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input id="email" name="email" type="email" class="form-control" placeholder="Correo">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-6">
-                                        <h4 for="name">Telefono *</h4>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-6">
-                                        <h4 for="name">Fecha *</h4>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input id="fecha" name="fecha" type="date" class="form-control" value="{{$fecha}}" required>
-                                        </div>
-                                    </div>
+                                    <input id="fecha" name="fecha" type="date" class="form-control" value="{{$fecha}}" style="display: none">
 
                                     <div class="col-12 mt-5">
                                         <h2 style="color:#836262"><strong>Seleciona el/los Curso(s)</strong> </h2>
@@ -81,7 +103,7 @@
                                                             <select name="concepto[]" class="form-select d-inline-block select2">
                                                                 <option value="">Seleccione curso</option>
                                                                 @foreach ($cursos as $curso)
-                                                                <option value="{{ $curso->nombre }}" data-precio_normal="{{ $curso->precio }}">{{ $curso->nombre }}</option>
+                                                                <option value="{{ $curso->id }}" data-precio_normal="{{ $curso->precio }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
@@ -101,17 +123,8 @@
                                         <h2 style="color:#836262"><strong>Pago</strong> </h2>
                                     </div>
 
-                                    <div class="col-4 ">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="toggleFactura" name="factura" value="1">
-                                            <h4 class="form-check-h4" for="flexCheckDefault">
-                                                <p class="" style="display: inline-block;font-size: 20px;padding: 5px;color: #3b8b00;">Si</p> <strong> (¿Factura?)</strong>
-                                            </h4>
-                                        </div>
-                                    </div>
-
                                     <div class="form-group col-4">
-                                        <h4 for="name">Subtotal *</h4>
+                                        <h4 for="name">Total *</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
@@ -120,23 +133,14 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-4">
-                                        <h4 for="name">Descuento</h4>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input class="form-control" type="number" id="descuento" name="descuento" value="0">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-4">
-                                        <h4 for="name">Total</h4>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input class="form-control" type="text" id="totalDescuento" name="totalDescuento" readonly>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="name">Metodo de Pago</label>
+                                            <select name="metodo_pago" id="metodo_pago" class="form-select d-inline-block">
+                                                <option value="Efectivo">Efectivo</option>
+                                                <option value="Tarjeta">Tarjeta</option>
+                                                <option value="Transferencia">Transferencia</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -163,6 +167,7 @@
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
 $(document).ready(function() {
+    $('.cliente').select2();
     function initializeSelect2($container) {
         $container.find('.select2').select2();
     }

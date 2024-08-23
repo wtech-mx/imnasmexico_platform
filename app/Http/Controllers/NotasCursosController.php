@@ -17,6 +17,9 @@ use App\Models\NotasPagos;
 use App\Models\Orders;
 use App\Models\OrdersTickets;
 use Illuminate\Support\Str;
+use App\Models\Tipodocumentos;
+use App\Mail\PlantillaDocumentoStps;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Session;
 use Hash;
 
@@ -60,7 +63,7 @@ class NotasCursosController extends Controller
         $notas = NotasCursos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])->orderBy('id','DESC')->get();
         $notas_pagos = NotasPagos::whereBetween('created_at', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
-        $cursos = Cursos::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
+        $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
 
         $cursos_paquetes = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
         ->where('cursos_tickets.precio','<=', 600)
@@ -109,7 +112,7 @@ class NotasCursosController extends Controller
         $notas_cursos->fecha = $request->get('fecha');
         $notas_cursos->subtotal = $request->get('total');
         $notas_cursos->descuento = $request->get('descuento');
-        $notas_cursos->total = $request->get('totalDescuento');
+        $notas_cursos->total = $request->get('total');
         $notas_cursos->nota = $request->get('nota');
         $notas_cursos->save();
 
@@ -124,8 +127,8 @@ class NotasCursosController extends Controller
         $order->save();
 
         $id = $notas_cursos->id;
-        $nuevosCampos = $request->input('campo');
-        $precio = $request->input('precio');
+        $nuevosCampos = $request->input('concepto');
+        $precio = $request->input('importe');
 
         for ($count = 0; $count < count($precio); $count++) {
             $data = array(
@@ -140,6 +143,7 @@ class NotasCursosController extends Controller
             $order_ticket->id_order = $order->id;
             $order_ticket->id_usuario = $cliente;
             $order_ticket->id_tickets = $nuevosCampos[$count];
+            $curso = CursosTickets::where('id','=', $order_ticket->id_tickets)->first();
             $order_ticket->id_curso = $curso->id_curso;
             $order_ticket->save();
         }
@@ -154,14 +158,100 @@ class NotasCursosController extends Controller
         $forma_pago = $orden_ticket2->Orders->forma_pago;
         // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
 
+        $email_diplomas = 'imnascenter@naturalesainspa.com';
+        $destinatario = [ $order->User->email  , $email_diplomas];
+        $datos = $order->User->name;
+        
         foreach ($orden_ticket as $details) {
-            if ($details->Cursos->modalidad == 'Online') {
-                Mail::to($order->User->email)->send(new PlantillaTicket($details));
-            } else {
-                Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
+            $curso = $details->Cursos->nombre;
+            $fecha = $details->Cursos->fecha_inicial;
+            $nombre = $order->User->name;
+            $horas_default = "24";
+            $duracion_hrs = $horas_default;
+            $tipo_documentos = Tipodocumentos::first();
+
+            if($details->CursosTickets->descripcion == 'Con opción a Documentos de certificadora IMNAS'){
+
+            }else{
+
+                if($details->Cursos->pack_stps == "Si"){
+
+                    $id_ticket = $order_ticket->id;
+                    $ticket = OrdersTickets::find($id_ticket);
+                    $ticket->estatus_doc = '1';
+                    $ticket->estatus_cedula = '1';
+                    $ticket->estatus_titulo = '1';
+                    $ticket->estatus_diploma = '1';
+                    $ticket->estatus_credencial = '1';
+                    $ticket->estatus_tira = '1';
+                    $ticket->update();
+
+                        $variables = [
+                            $details->Cursos->p_stps_1,
+                            $details->Cursos->p_stps_2,
+                            $details->Cursos->p_stps_3,
+                            $details->Cursos->p_stps_4,
+                            $details->Cursos->p_stps_5,
+                            $details->Cursos->p_stps_6,
+                        ];
+
+                        foreach ($variables as $index => $curso) {
+                            if (isset($curso) && !empty($curso)) {
+                                $sello = 'Si';
+
+                                // Lógica para crear el PDF y enviar el correo aquí
+                                $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre','duracion_hrs','sello'));
+                                $pdf->setPaper('A4', 'portrait');
+                                $contenidoPDF = $pdf->output();
+
+                                Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                            }
+                        }
+
+                    }else{
+
+
+                    if($details->Cursos->stps == '1' && $details->Cursos->titulo_hono == '1'){
+                        $id_ticket = $order_ticket->id;
+                        $ticket = OrdersTickets::find($id_ticket);
+                        $ticket->estatus_doc = '1';
+                        $ticket->estatus_cedula = '1';
+                        $ticket->estatus_diploma = '1';
+                        $ticket->estatus_credencial = '1';
+                        $ticket->estatus_tira = '1';
+                        $ticket->update();
+                        $sello = 'Si';
+
+                        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
+                        $pdf->setPaper('A4', 'portrait');
+                        $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+                        Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+
+                    }
+
+                    if($details->Cursos->stps == '1' && $details->Cursos->titulo_hono == NULL){
+                        $id_ticket = $order_ticket->id;
+                        $ticket = OrdersTickets::find($id_ticket);
+                        $ticket->estatus_doc = '1';
+                        $ticket->estatus_cedula = '1';
+                        $ticket->estatus_titulo = '1';
+                        $ticket->estatus_diploma = '1';
+                        $ticket->estatus_credencial = '1';
+                        $ticket->estatus_tira = '1';
+                        $ticket->update();
+
+                        $sello = 'Si';
+
+                        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
+                        $pdf->setPaper('A4', 'portrait');
+                        $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
+                        Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+
+                    }
+                }
+
             }
         }
-        Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
         $notas_pagos = new NotasPagos;
         $notas_pagos->id_nota = $notas_cursos->id;

@@ -266,9 +266,6 @@ class PagosFueraController extends Controller
                                     $contenidoPDF = $pdf->output();
 
                                     Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
-
-                                    // Si solo quieres generar uno, puedes agregar un break después del Mail::send
-                                    // break;
                                 }
                             }
 
