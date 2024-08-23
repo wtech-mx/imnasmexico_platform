@@ -386,7 +386,7 @@
                                         @if($documentos->ine == NULL)
                                             <input id="ine" name="ine" type="file" class="form-control" required>
                                         @else
-                                            <input id="ine" name="ine" type="file" class="form-control">
+                                            <input id="ine" name="ine" type="file" class="form-control"><br>
                                             @if (pathinfo($documentos->ine, PATHINFO_EXTENSION) == 'pdf')
                                                 <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine)}}" style="width: 60%; height: 60px;"></iframe>
                                                 <p class="text-center ">
@@ -411,7 +411,7 @@
                                         @if($documentos->ine_atras_registro == NULL)
                                             <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control" required>
                                         @else
-                                            <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control">
+                                            <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control"><br>
                                             @if (pathinfo($documentos->ine_atras_registro, PATHINFO_EXTENSION) == 'pdf')
                                                 <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine_atras_registro)}}" style="width: 60%; height: 60px;"></iframe>
                                                 <p class="text-center ">
@@ -436,7 +436,7 @@
                                         @if($documentos->curp == NULL)
                                             <input id="curp" name="curp" type="file" class="form-control" required>
                                         @else
-                                            <input id="curp" name="curp" type="file" class="form-control">
+                                            <input id="curp" name="curp" type="file" class="form-control"><br>
                                             @if (pathinfo($documentos->curp, PATHINFO_EXTENSION) == 'pdf')
                                                 <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->curp)}}" style="width: 60%; height: 60px;"></iframe>
                                                 <p class="text-center ">
@@ -461,7 +461,7 @@
                                         @if($documentos->curp == NULL)
                                             <input class="custom-file-input" id="domicilio" name="domicilio" type="file" class="form-control" required>
                                         @else
-                                            <input class="custom-file-input" id="domicilio" name="domicilio" type="file" class="form-control">
+                                            <input class="custom-file-input" id="domicilio" name="domicilio" type="file" class="form-control"><br>
                                             @if (pathinfo($documentos->domicilio, PATHINFO_EXTENSION) == 'pdf')
                                                 <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->domicilio)}}" style="width: 60%; height: 60px;"></iframe>
                                                 <p class="text-center ">
@@ -486,16 +486,16 @@
                                         @if($documentos->curp == NULL)
                                             <input id="img_infantil" name="img_infantil" type="file" class="form-control" required>
                                         @else
-                                            <input id="img_infantil" name="img_infantil" type="file" class="form-control">
-                                            @if (pathinfo($documentos->img_infantil, PATHINFO_EXTENSION) == 'pdf')
-                                                <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->img_infantil)}}" style="width: 60%; height: 60px;"></iframe>
+                                            <input id="img_infantil" name="img_infantil" type="file" class="form-control"><br>
+                                            @if (pathinfo($documentos->foto_tam_infantil, PATHINFO_EXTENSION) == 'pdf')
+                                                <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->foto_tam_infantil)}}" style="width: 60%; height: 60px;"></iframe>
                                                 <p class="text-center ">
-                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->img_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
                                                 </p>
                                             @else
                                                 <p class="text-center mt-2">
-                                                    <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->img_infantil) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->img_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                                    <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->foto_tam_infantil) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
                                                 </p>
                                             @endif
                                         @endif
@@ -511,8 +511,8 @@
                                         @if($documentos->curp == NULL)
                                             <input id="logo" name="logo" type="file" class="form-control" required>
                                         @else
-                                            <input id="logo" name="logo" type="file" class="form-control">
-                                            @if (pathinfo($documentos->logo, PATHINFO_EXTENSION) == 'pdf')
+                                            <input id="logo" name="logo" type="file" class="form-control"><br>
+                                            @if (pathinfo($user->logo, PATHINFO_EXTENSION) == 'pdf')
                                                 <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$user->logo)}}" style="width: 60%; height: 60px;"></iframe>
                                                 <p class="text-center ">
                                                     <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$user->logo) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
@@ -536,7 +536,7 @@
                                         @if($documentos->firma == NULL)
                                             <input id="firma_escuela" name="firma_escuela" type="file" class="form-control">
                                         @else
-                                            <input id="firma_escuela" name="firma_escuela" type="file" class="form-control">
+                                            <input id="firma_escuela" name="firma_escuela" type="file" class="form-control"><br>
                                             @if (pathinfo($documentos->firma, PATHINFO_EXTENSION) == 'pdf')
                                                 <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$escuela->firma)}}" style="width: 60%; height: 60px;"></iframe>
                                                 <p class="text-center ">
