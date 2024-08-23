@@ -386,20 +386,22 @@
                                         @if($documentos->ine == NULL)
                                             <input id="ine" name="ine" type="file" class="form-control" required>
                                         @else
-                                            <input id="ine" name="ine" type="file" class="form-control"><br>
-                                            @if (pathinfo($documentos->ine, PATHINFO_EXTENSION) == 'pdf')
-                                                <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine)}}" style="width: 60%; height: 60px;"></iframe>
-                                                <p class="text-center ">
-                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
-                                                </p>
-                                            @else
-                                                <p class="text-center mt-2">
-                                                    <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
-                                                </p>
-                                            @endif
+                                            <input id="ine" name="ine" type="file" class="form-control">
                                         @endif
                                     </div>
+                                    @if ($documentos->ine != NULL)
+                                        @if (pathinfo($documentos->ine, PATHINFO_EXTENSION) == 'pdf')
+                                            <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine)}}" style="width: 60%; height: 60px;"></iframe>
+                                            <p class="text-center ">
+                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                            </p>
+                                        @else
+                                            <p class="text-center mt-2">
+                                                <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                            </p>
+                                        @endif
+                                    @endif
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
@@ -412,19 +414,21 @@
                                             <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control" required>
                                         @else
                                             <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control"><br>
-                                            @if (pathinfo($documentos->ine_atras_registro, PATHINFO_EXTENSION) == 'pdf')
-                                                <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine_atras_registro)}}" style="width: 60%; height: 60px;"></iframe>
-                                                <p class="text-center ">
-                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine_atras_registro) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
-                                                </p>
-                                            @else
-                                                <p class="text-center mt-2">
-                                                    <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine_atras_registro) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine_atras_registro) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
-                                                </p>
-                                            @endif
                                         @endif
                                     </div>
+                                    @if ($documentos->ine_atras_registro != NULL)
+                                        @if (pathinfo($documentos->ine_atras_registro, PATHINFO_EXTENSION) == 'pdf')
+                                            <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine_atras_registro)}}" style="width: 60%; height: 60px;"></iframe>
+                                            <p class="text-center ">
+                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine_atras_registro) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                            </p>
+                                        @else
+                                            <p class="text-center mt-2">
+                                                <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine_atras_registro) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->ine_atras_registro) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                            </p>
+                                        @endif
+                                    @endif
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
@@ -437,6 +441,9 @@
                                             <input id="curp" name="curp" type="file" class="form-control" required>
                                         @else
                                             <input id="curp" name="curp" type="file" class="form-control"><br>
+                                        @endif
+                                    </div>
+                                        @if ($documentos->curp != NULL)
                                             @if (pathinfo($documentos->curp, PATHINFO_EXTENSION) == 'pdf')
                                                 <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->curp)}}" style="width: 60%; height: 60px;"></iframe>
                                                 <p class="text-center ">
@@ -449,7 +456,6 @@
                                                 </p>
                                             @endif
                                         @endif
-                                    </div>
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
@@ -459,22 +465,24 @@
                                             <img src="{{ asset('assets/cam/contrato_g.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->curp == NULL)
-                                            <input class="custom-file-input" id="domicilio" name="domicilio" type="file" class="form-control" required>
+                                            <input id="domicilio" name="domicilio" type="file" class="form-control" required>
                                         @else
-                                            <input class="custom-file-input" id="domicilio" name="domicilio" type="file" class="form-control"><br>
-                                            @if (pathinfo($documentos->domicilio, PATHINFO_EXTENSION) == 'pdf')
-                                                <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->domicilio)}}" style="width: 60%; height: 60px;"></iframe>
-                                                <p class="text-center ">
-                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->domicilio) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
-                                                </p>
-                                            @else
-                                                <p class="text-center mt-2">
-                                                    <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->domicilio) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->domicilio) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
-                                                </p>
-                                            @endif
+                                            <input id="domicilio" name="domicilio" type="file" class="form-control"><br>
                                         @endif
                                     </div>
+                                    @if ($documentos->domicilio != NULL)
+                                        @if (pathinfo($documentos->domicilio, PATHINFO_EXTENSION) == 'pdf')
+                                            <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->domicilio)}}" style="width: 60%; height: 60px;"></iframe>
+                                            <p class="text-center ">
+                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->domicilio) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                            </p>
+                                        @else
+                                            <p class="text-center mt-2">
+                                                <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->domicilio) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->domicilio) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                            </p>
+                                        @endif
+                                    @endif
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
@@ -487,19 +495,21 @@
                                             <input id="img_infantil" name="img_infantil" type="file" class="form-control" required>
                                         @else
                                             <input id="img_infantil" name="img_infantil" type="file" class="form-control"><br>
-                                            @if (pathinfo($documentos->foto_tam_infantil, PATHINFO_EXTENSION) == 'pdf')
-                                                <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->foto_tam_infantil)}}" style="width: 60%; height: 60px;"></iframe>
-                                                <p class="text-center ">
-                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
-                                                </p>
-                                            @else
-                                                <p class="text-center mt-2">
-                                                    <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->foto_tam_infantil) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
-                                                </p>
-                                            @endif
                                         @endif
                                     </div>
+                                    @if ($documentos->foto_tam_infantil != NULL)
+                                        @if (pathinfo($documentos->foto_tam_infantil, PATHINFO_EXTENSION) == 'pdf')
+                                            <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->foto_tam_infantil)}}" style="width: 60%; height: 60px;"></iframe>
+                                            <p class="text-center ">
+                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                            </p>
+                                        @else
+                                            <p class="text-center mt-2">
+                                                <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$documentos->foto_tam_infantil) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$documentos->foto_tam_infantil) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                            </p>
+                                        @endif
+                                    @endif
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
@@ -512,19 +522,21 @@
                                             <input id="logo" name="logo" type="file" class="form-control" required>
                                         @else
                                             <input id="logo" name="logo" type="file" class="form-control"><br>
-                                            @if (pathinfo($user->logo, PATHINFO_EXTENSION) == 'pdf')
-                                                <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$user->logo)}}" style="width: 60%; height: 60px;"></iframe>
-                                                <p class="text-center ">
-                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$user->logo) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
-                                                </p>
-                                            @else
-                                                <p class="text-center mt-2">
-                                                    <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$user->logo) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$user->logo) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
-                                                </p>
-                                            @endif
                                         @endif
                                     </div>
+                                    @if ($user->logo != NULL)
+                                        @if (pathinfo($user->logo, PATHINFO_EXTENSION) == 'pdf')
+                                            <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$user->logo)}}" style="width: 60%; height: 60px;"></iframe>
+                                            <p class="text-center ">
+                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$user->logo) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                            </p>
+                                        @else
+                                            <p class="text-center mt-2">
+                                                <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$user->logo) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$user->logo) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                            </p>
+                                        @endif
+                                    @endif
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
@@ -537,19 +549,21 @@
                                             <input id="firma_escuela" name="firma_escuela" type="file" class="form-control">
                                         @else
                                             <input id="firma_escuela" name="firma_escuela" type="file" class="form-control"><br>
-                                            @if (pathinfo($documentos->firma, PATHINFO_EXTENSION) == 'pdf')
-                                                <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$escuela->firma)}}" style="width: 60%; height: 60px;"></iframe>
-                                                <p class="text-center ">
-                                                    <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$escuela->firma) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
-                                                </p>
-                                            @else
-                                                <p class="text-center mt-2">
-                                                    <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$escuela->firma) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
-                                                    <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$escuela->firma) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
-                                                </p>
-                                            @endif
                                         @endif
                                     </div>
+                                    @if ($escuela->firma != NULL)
+                                        @if (pathinfo($documentos->firma, PATHINFO_EXTENSION) == 'pdf')
+                                            <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$escuela->firma)}}" style="width: 60%; height: 60px;"></iframe>
+                                            <p class="text-center ">
+                                                <a class="btn btn-sm text-dark" href="{{asset('documentos/'. $user->telefono . '/' .$escuela->firma) }}" target="_blank" style="background: #836262; color: #ffff">Ver archivo</a>
+                                            </p>
+                                        @else
+                                            <p class="text-center mt-2">
+                                                <img id="blah" src="{{asset('documentos/'. $user->telefono . '/' .$escuela->firma) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $user->telefono . '/' .$escuela->firma) }}" target="_blank" style="background: #836262; color: #ffff">Ver Imagen</a>
+                                            </p>
+                                        @endif
+                                    @endif
                                 </div>
                             </div>
 
