@@ -66,6 +66,10 @@
                                 <a type="button" class="btn bg-gradient-primary" onclick="openRightPanel()" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                     Crear
                                 </a>
+
+                                <a  class="btn bg-gradient-primary" href="{{ route('notas_cursos.crear') }}">
+                                    Crear Individual
+                                </a>
                             @endcan
                         </div>
                     </div>

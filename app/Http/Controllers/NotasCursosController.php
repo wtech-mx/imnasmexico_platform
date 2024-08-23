@@ -51,6 +51,31 @@ class NotasCursosController extends Controller
         return view('admin.notas_cursos.index', compact('notas', 'cursos', 'notas_pagos', 'cursos_paquetes', 'client'));
     }
 
+    public function create()
+    {
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+
+        $fechaActual = date('Y-m-d');
+        $notas = NotasCursos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])->orderBy('id','DESC')->get();
+        $notas_pagos = NotasPagos::whereBetween('created_at', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+
+        $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
+
+        $cursos_paquetes = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+        ->where('cursos_tickets.precio','<=', 600)
+        ->where('cursos_tickets.fecha_inicial','<=', $fechaActual)
+        ->where('cursos_tickets.fecha_final','>=', $fechaActual)
+        ->where('cursos.modalidad','=', 'Online')
+        ->select('cursos_tickets.*')
+        ->get();
+
+        $client = User::get();
+
+        return view('admin.notas_cursos.create_tiendita', compact('notas', 'cursos', 'notas_pagos', 'cursos_paquetes', 'client'));
+    }
+
+
     public function store(request $request){
 
         $code = Str::random(8);
