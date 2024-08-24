@@ -551,7 +551,7 @@
                                             <input id="firma_escuela" name="firma_escuela" type="file" class="form-control"><br>
                                         @endif
                                     </div>
-                                    @if ($escuela->firma != NULL)
+                                    @if ($escuela && $escuela->firma != NULL)
                                         @if (pathinfo($documentos->firma, PATHINFO_EXTENSION) == 'pdf')
                                             <iframe class="mt-2" src="{{asset('documentos/'. $user->telefono . '/' .$escuela->firma)}}" style="width: 60%; height: 60px;"></iframe>
                                             <p class="text-center ">
