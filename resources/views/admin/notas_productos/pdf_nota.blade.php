@@ -128,7 +128,6 @@
     <table class="table table-bordered border-primary">
         <thead class="text-center" style="background-color: #836262; color: #fff">
             <tr>
-                <th>foto</th>
                 <th>Cantidad</th>
                 <th>Producto</th>
                 <th>P.Unit</th>
@@ -138,9 +137,6 @@
         <tbody class="text-center">
             @foreach ($nota_productos as $nota_producto)
                 <tr>
-                    <td>
-                        <img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/>
-                    </td>
                     <td>
                         {{ $nota_producto->cantidad }}
                     </td>
