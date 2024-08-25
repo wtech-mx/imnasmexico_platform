@@ -1139,7 +1139,7 @@ class RegistroIMNASController extends Controller
         }
         $registro->save();
 
-        $especialidad = new RegistroImnasEspecialidad;
+        $especialidad = RegistroImnasEspecialidad::where('id_cliente','=',$user->id)->first();
         $especialidad->id_cliente = $user->id;
         $especialidad->especialidad = $request->get('especialidad');
         $especialidad->estatus = '1';

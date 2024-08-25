@@ -513,13 +513,13 @@
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
-                                    <label for="name">Logo de escuela / marca personal <b style="color: #f80909;">*</b></label>
+                                    <label for="name">Logo de escuela / marca personal <b>IMAGEN</b> <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="https://plataforma.imnasmexico.com/assets/user/logotipos/imnas.webp" alt="" width="35px">
                                         </span>
                                         @if($documentos->curp == NULL)
-                                            <input id="logo" name="logo" type="file" class="form-control" required>
+                                        <input id="logo" name="logo" type="file" class="form-control" accept="image/*" required>
                                         @else
                                             <input id="logo" name="logo" type="file" class="form-control"><br>
                                         @endif
@@ -540,13 +540,13 @@
                                 </div>
 
                                 <div class="col-6 col-md-4 col-lg-3 form-group mt-4">
-                                    <label for="name">Firma</label>
+                                    <label for="name">Firma Director<b>IMAGEN</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/contrato.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->firma == NULL)
-                                            <input id="firma_escuela" name="firma_escuela" type="file" class="form-control">
+                                            <input id="firma_escuela" name="firma_escuela" type="file" class="form-control" accept="image/*">
                                         @else
                                             <input id="firma_escuela" name="firma_escuela" type="file" class="form-control"><br>
                                         @endif
