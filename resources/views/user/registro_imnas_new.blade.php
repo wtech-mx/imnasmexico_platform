@@ -62,14 +62,15 @@ Mi perfil- {{$cliente->name}}
     <div class="row space_newprofile" style="">
         <div class="col-12">
             <div class="card_single_horizon row">
-                <div class="col-3">
+
+                <div class="col-6 col-md-3 col-lg-3">
                     <div class="avatar avatar-xl position-relative">
                       <img src="{{asset('assets/user/logotipos/registro_nacional.png')}}" alt="profile_image" style="height: 80px">
                       <img src="{{asset('assets/user/logotipos/stps.png')}}" alt="" style="height: 100px">
                     </div>
                 </div>
 
-                <div class="col-2 mt-2">
+                <div class="col-6 col-md-2 col-lg-2 mt-2">
                     <h5 class="mb-1">
                     {{$cliente->name}}
                     </h5>
@@ -81,25 +82,25 @@ Mi perfil- {{$cliente->name}}
                     </p>
                 </div>
 
-                <div class="col-7">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="buscador-tab" data-bs-toggle="tab" data-bs-target="#buscador" type="button" role="tab" aria-controls="buscador" aria-selected="true">Buscador</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="estatus-tab" data-bs-toggle="tab" data-bs-target="#estatus" type="button" role="tab" aria-controls="estatus" aria-selected="false">Estatus Documentos</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="especialidad-tab" data-bs-toggle="tab" data-bs-target="#especialidad" type="button" role="tab" aria-controls="especialidad" aria-selected="false">Especialidad</button>
-                    </li>
-                </ul>
+                <div class="col-12 col-md-7 col-lg-7">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="buscador-tab" data-bs-toggle="tab" data-bs-target="#buscador" type="button" role="tab" aria-controls="buscador" aria-selected="true">Buscador</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="estatus-tab" data-bs-toggle="tab" data-bs-target="#estatus" type="button" role="tab" aria-controls="estatus" aria-selected="false">Estatus Documentos</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="especialidad-tab" data-bs-toggle="tab" data-bs-target="#especialidad" type="button" role="tab" aria-controls="especialidad" aria-selected="false">Especialidad</button>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
 
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active row" id="buscador" role="tabpanel" aria-labelledby="home-tab" style="background:#fff0!important; min-height: 0px; align-items: unset;">
-                <div class="col-8">
+                <div class="col-12 col-md-8 col-lg-8">
                     <div class="card_single_horizon" style="margin-right: auto;">
                         <div class="col-12 espace_tittle_avales mb-3">
                             <h3 class="title_curso text-center mb-3">Buscador de Documentos</h3>
@@ -109,14 +110,18 @@ Mi perfil- {{$cliente->name}}
                             Ingresa el Folio de tu documento
                         </h4>
 
-                        <form method="GET" action="{{ route('folio_registro.buscador', $cliente->code) }}" class="d-flex" role="search">
-                            <input class="form-control me-2" placeholder="Ingresa Folio" name="folio">
-                            <button class="btn btn-outline-success" type="submit">Buscar</button>
+                        <form id="searchForm" class="d-flex" role="search">
+                            <input class="form-control me-2" placeholder="Ingresa Folio" name="folio" id="folio">
+                            <button class="btn btn-success" type="submit" style="background: #66C0CC">Buscar</button>
                         </form>
+
+                        <div id="resultsContainer" class="p-0 p-md-5 p-lg-5"></div>
+
                     </div>
                 </div>
 
-                <div class="col-4">
+                <div class="col-12 col-md-4 col-lg-4">
+
                     <div class="card_single_horizon">
                         <h3 class="text-center mt-4 mb-4">¿Tienes dudas?</h3>
                         <p class="text-center mb-0 font-weight-bold text-sm">Comunicate al telefono 5534316258</p>
@@ -134,18 +139,11 @@ Mi perfil- {{$cliente->name}}
                             </div>
                         </div>
                     </div>
+
                 </div>
 
-                @if(Route::currentRouteName() != 'clientes.imnas')
-                    <div class="col-12">
-                        <div class="card_single_horizon" style="margin-right: auto;">
-                            @include('user.registro_imnas_folio')
-                        </div>
-                    </div>
-                @endif
-
                 @foreach ($recien_comprados as $recien_comprado)
-                    <div class="col-8">
+                    <div class="col-12 col-md-8 col-lg-8">
                         <div class="card_single_horizon">
                             <div class="d-flex justify-content-between">
                                 <h3 class="title_curso mb-3">Subir documentos</h3>
@@ -244,7 +242,7 @@ Mi perfil- {{$cliente->name}}
                     </div>
                 @endif
 
-                <div class="col-4">
+                <div class="col-12 col-md-4 col-lg-4">
                     <div class="card_single_horizon">
                         <div class="row mb-3">
                             @foreach ($cursos_tickets as $ticket)
@@ -306,7 +304,7 @@ Mi perfil- {{$cliente->name}}
             </div>
 
             <div class="tab-pane fade row" id="estatus" role="tabpanel" aria-labelledby="estatus-tab" style="background:#fff0!important; min-height: 0px; align-items: unset;">
-                <div class="col-6">
+                <div class="col-12 col-md-6 col-lg-6">
                     <div class="card_single_horizon">
                             <h2 class="title_curso">Documentos Faltantes</h2>
                             <table class="table table-flush" id="datatable-search">
@@ -338,7 +336,7 @@ Mi perfil- {{$cliente->name}}
                             </table>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6 col-lg-6">
                     <div class="card_single_horizon">
                         <h2 class="title_curso">Documentos Finalizados</h2>
 
@@ -375,7 +373,7 @@ Mi perfil- {{$cliente->name}}
 
             <div class="tab-pane fade row" id="especialidad" role="tabpanel" aria-labelledby="especialidad-tab" style="background:#fff0!important; min-height: 0px; align-items: unset;">
 
-                <div class="col-6">
+                <div class="col-12">
                     <div class="card_single_horizon">
                         <div class="col-12 form-group mt-4 ">
                             <label for="name">Especialidades Compradas</b></label>
@@ -447,5 +445,31 @@ Mi perfil- {{$cliente->name}}
         paging: true,
         pageLength: 10
     });
+</script>
+
+<script>
+    $(document).ready(function() {
+    $('#searchForm').on('submit', function(e) {
+        e.preventDefault(); // Evita que se recargue la página
+
+        var folio = $('#folio').val();
+
+        $.ajax({
+            url: '{{ route("folio_registro.buscador") }}',
+            method: 'GET',
+            data: { folio: folio },
+            success: function(response) {
+                // Aquí puedes manejar la respuesta del servidor
+                // Por ejemplo, mostrar los datos en un div:
+                $('#resultsContainer').html(response);
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+                // Manejar errores aquí
+                console.error('Error: ', textStatus, errorThrown);
+            }
+        });
+    });
+});
+
 </script>
 @endsection
