@@ -146,6 +146,8 @@
                     @php
                         if($nota_producto->producto == NULL){
                             $unit = 0;
+                        }elseif($nota_producto->cantidad == NULL){
+                            $unit = 0;
                         }else{
                             $unit = $nota_producto->price / $nota_producto->cantidad;
                         }
