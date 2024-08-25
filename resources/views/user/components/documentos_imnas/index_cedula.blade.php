@@ -41,7 +41,16 @@
 
             $cantidad_palabras = count($palabras);
 
+            // Contar las palabras
+            $cursoNombre = isset($tickets->Cursos->nombre) ? $tickets->Cursos->nombre : $tickets->nom_curso;
+            $cursoNombre = ucwords(strtolower($cursoNombre));
+            $wordCount = str_word_count($cursoNombre);
 
+            $folio = $tickets->folio;
+            $characterCount = strlen($folio);
+
+            $folioReverso = $tickets->folio;
+            $characterCountReverso = strlen($folioReverso);
 @endphp
 
 
@@ -85,15 +94,32 @@
         color: red;
     }
 
-    .folio{
+    /* .folio{
         position:relative;
         font-size:17px;
         color: red;
+    } */
+
+    .folio {
+        font-size: 17px;
+        color: red;
     }
+
+    .folio.small-font {
+        margin-top: 4px;
+        font-size: 11px;
+    }
+
 
     .folioReverso{
         position:relative;
         font-size: 25px;
+        color: red;
+    }
+
+    .folioReverso.small-font-reverso {
+        position:relative;
+        font-size: 18px;
         color: red;
     }
 
@@ -107,7 +133,7 @@
         height: 185px;
         position: absolute;
         overflow: hidden;
-        top: 28%;
+        top: 26%;
         left: 5%;
     }
 
@@ -183,8 +209,12 @@
     .container_CursoReverso{
         position: absolute;
         top:76%;
-        left: 36%;
-
+        left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    text-align: center; /* Centra el texto dentro del contenedor */
     }
 
     .container_logo{
@@ -207,6 +237,15 @@
         width: 80px;
     }
 
+    .curso {
+        font-size: 17px;
+        color: red;
+    }
+
+    .curso.small-font {
+        font-size: 12px;
+    }
+
 </style>
 
 
@@ -216,16 +255,10 @@
 
 <div class="card-front">
 
-
-
     @if(!isset($tickets->User->logo))
-
         <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
-
     @else
-
         <img src="{{ $basePath  . '/' . 'ceudla_frontal_limpia.png' }}" class="img_portada">
-
     @endif
 
 
@@ -266,12 +299,19 @@
         @endphp
     </div>
 
-    <div class="container_folio">
+    {{-- <div class="container_folio">
         <h4 class="folio"> {{$tickets->folio}}</h4>
+    </div> --}}
+
+    <div class="container_folio">
+        <h4 class="folio {{ $characterCount > 14 ? 'small-font' : '' }}">
+            {{ $folio }}
+        </h4>
     </div>
 
+
     <div class="container_curso">
-        <h4 class="curso">
+        {{-- <h4 class="curso">
 
             @if(!isset($tickets->Cursos->nombre))
                 {{ ucwords(strtolower($tickets->nom_curso)) }}
@@ -279,6 +319,10 @@
                 {{ ucwords(strtolower($tickets->Cursos->nombre)) }}
             @endif
 
+        </h4> --}}
+
+        <h4 class="curso {{ $wordCount > 7 ? 'small-font' : '' }}">
+            {{ $cursoNombre }}
         </h4>
     </div>
 
@@ -304,21 +348,19 @@
 <div class="card-back">
 
     @if(!isset($tickets->User->logo))
-
         <img src="{{ $basePath .'/'. $tipo_documentos->img_reverso }}" class="img_reverso">
-
     @else
-
         <img src="{{ $basePath   .'/'.  'ceudla_trasera_limpia.png' }}" class="img_reverso">
-
     @endif
 
-
+    {{-- <div class="container_folioReverso">
+        <h4 class="folioReverso">{{$tickets->folio}}</h4>
+    </div> --}}
 
     <div class="container_folioReverso">
-
-
-        <h4 class="folioReverso">{{$tickets->folio}}</h4>
+        <h4 class="folioReverso {{ $characterCountReverso > 14 ? 'small-font-reverso' : '' }}">
+            {{ $folioReverso }}
+        </h4>
     </div>
 
     <div class="container_firma">
@@ -333,16 +375,7 @@
 
     <div class="container_CursoReverso">
         <h4 class="curso_sm">
-
-            @if(!isset($tickets->Cursos->nombre))
-            {{ ucwords(strtolower($tickets->nom_curso)) }}
-
-            @else
-            {{ ucwords(strtolower($tickets->Cursos->nombre)) }}
-
-            @endif
-
-
+            {{ $cursoNombre }}
         </h4>
     </div>
 
