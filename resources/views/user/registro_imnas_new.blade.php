@@ -119,10 +119,10 @@ Mi perfil- {{$cliente->name}}
                 <div class="col-4">
                     <div class="card_single_horizon">
                         <h3 class="text-center mt-4 mb-4">¿Tienes dudas?</h3>
-                        <p class="text-center mb-0 font-weight-bold text-sm">Comunicate al telefono 5522208966</p>
+                        <p class="text-center mb-0 font-weight-bold text-sm">Comunicate al telefono 5534316258</p>
                         <div class="row">
                             <div class="col-3 icon_footer">
-                                <a target="_blank" href="tel:%2055%208494%207222" class="text-center" style="margin-bottom: 0rem!important">
+                                <a target="_blank" href="https://wa.link/3ldnex" class="text-center" style="margin-bottom: 0rem!important">
                                     <i class="fas fa-phone-alt"></i>
                                 </a>
                             </div>
