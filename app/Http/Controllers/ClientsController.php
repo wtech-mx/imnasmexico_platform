@@ -155,9 +155,9 @@ class ClientsController extends Controller
 
                         return view('user.certificado_webinar',compact('cliente','datosCliente'));
 
-                    }else{
-                        return view('user.profilenew',compact('carpetas_carta', 'estandar_user','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
-                    }
+                }else{
+                    return view('user.profilenew',compact('carpetas_carta', 'estandar_user','carpetas_literatura','carpetas_precios','carpetas_guia','carpetas_material','clase_grabada','estandaresComprados','cliente', 'orders', 'usuario_compro', 'order_ticket', 'documentos', 'documentos_estandares', 'usuario_video', 'publicidad'));
+                }
 }
 
     public function eliminarDocumento($documentoId){

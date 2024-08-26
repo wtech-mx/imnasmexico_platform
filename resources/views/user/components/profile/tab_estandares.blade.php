@@ -29,7 +29,7 @@
                             <div id="collapseOne{{$estandar->id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#acordcion_mb_clases">
                                 <div class="accordion-body row">
                                         @php
-                                            $documentos_estandar = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->where('guia', '=', NULL)->get();
+                                            $documentos_estandar = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id)->where('guia', '=', NULL)->orderBy('orden', 'ASC')->get();
                                         @endphp
                                         <form id="formDocumentos_sepconocer{{$estandar->id}}" class="row mb-3" method="POST" enctype="multipart/form-data" style="padding:0px">
 
@@ -151,7 +151,7 @@
                     <div id="collapseOne{{$estandar->Estandar->id}}" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#acordcion_mb_clases">
                         <div class="accordion-body row">
                                 @php
-                                    $documentos_estandar = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->Estandar->id)->where('guia', '=', NULL)->get();
+                                    $documentos_estandar = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->Estandar->id)->where('guia', '=', NULL)->orderBy('orden', 'ASC')->get();
                                 @endphp
                                 <form id="formDocumentos_sepconocer{{$estandar->Estandar->id}}" class="row mb-3" method="POST" enctype="multipart/form-data" style="padding:0px">
 
