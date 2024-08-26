@@ -15,7 +15,7 @@ class FoliosController extends Controller
 {
     public function index(){
 
-        return view('user.folio');
+        return view('cam.auth.login');
     }
 
     public function index_registro(){
