@@ -43,7 +43,14 @@ class FoliosController extends Controller
         $tickets = OrdersTickets::where('folio', '=', $request->get('folio'))->first();
 
             if (!$tickets) {
+
                 $tickets_generador = RegistroImnas::where('folio', $request->get('folio'))->first();
+
+                // Si tampoco se encuentra en RegistroImnas, busca en DocumentosGenerador
+                if (!$tickets_generador) {
+                    $tickets_generador = DocumenotsGenerador::where('folio', $request->get('folio'))->first();
+                }
+
             }else{
                 $tickets_generador = '';
             }
