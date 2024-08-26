@@ -33,16 +33,17 @@ class FoliosController extends Controller
 
                 // Si tampoco se encuentra en RegistroImnas, busca en DocumentosGenerador
                 if (!$tickets_generador) {
-                    $tickets_generador = DocumenotsGenerador::where('folio', $request->get('folio'))->first();
+                    $tickets_externos = DocumenotsGenerador::where('folio', $request->get('folio'))->first();
                 }
 
             }else{
                 $tickets_generador = '';
+                $tickets_externos = '';
             }
 
         $folio = $request->get('folio');
 
-        return view('user.folio',compact('tickets', 'folio', 'tickets_generador'));
+        return view('user.folio',compact('tickets', 'folio', 'tickets_generador', 'tickets_externos'));
     }
 
     public function buscador_registro(Request $request){
@@ -72,10 +73,20 @@ class FoliosController extends Controller
 
         $tipo_documentos = Tipodocumentos::find(2);
 
-        $tickets = RegistroImnas::where('folio', $id)->first();
+        $tickets_registro = RegistroImnas::where('folio', $id)->first();
 
-        if($tickets == null){
-            $tickets = OrdersTickets::where('id', '=', $id)->first();
+        if($tickets_registro == null){
+            $tickets_alumnos = OrdersTickets::where('id', '=', $id)->first();
+            $tickets = $tickets_alumnos;
+        }
+
+        if($tickets_alumnos == null){
+            $tickets_externos = DocumenotsGenerador::where('folio', '=', $id)->first();
+            $tickets = $tickets_externos;
+        }
+
+        if($tickets_registro != null){
+            $tickets = $tickets_registro;
         }
 
         return view('user.components.documentos_imnas.index_cedula',compact('tickets','tipo_documentos'));
