@@ -439,8 +439,19 @@ class CotizacionController extends Controller
             ->limit(5)
             ->get();
 
+        $productosMenosCotizados = ProductosNotasId::whereIn('id_notas_productos', $cotizacionIds)
+            ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
+            ->groupBy('producto')
+            ->orderBy('total_cantidad', 'ASC')
+            ->limit(5)
+            ->get();
+
             $labels = $productosMasCotizados->pluck('producto')->toArray();
+            $labelsMenos = $productosMenosCotizados->pluck('producto')->toArray();
+
             $data = $productosMasCotizados->pluck('total_cantidad')->toArray();
+            $dataMenos = $productosMenosCotizados->pluck('total_cantidad')->toArray();
+
             $chartData = [
                 "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
                 "data" => [
@@ -467,12 +478,44 @@ class CotizacionController extends Controller
                 ],
             ];
 
+            $chart_Menos = [
+                "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
+                "data" => [
+                    "labels" => $labelsMenos, // Etiquetas para los productos
+                    "datasets" => [
+                        [
+                            "label" => "Productos más cotizados",
+                            "data" => $dataMenos, // Cantidades correspondientes a cada producto
+                            "backgroundColor" => [
+                                '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
+                            ],
+                        ],
+                    ],
+                ],
+                "options" => [
+                    "plugins" => [
+                        "datalabels" => [
+                            "color" => 'white', // Cambia el color del texto a blanco
+                        ],
+                    ],
+                    "legend" => [
+                        "display" => true // Mostrar la leyenda de colores
+                    ],
+                ],
+            ];
+
             $chartData = json_encode($chartData);
+            $chart_Menos = json_encode($chart_Menos);
+
 
             $chartURL = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData);
+            $chartURLMennos = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chart_Menos);
 
             $chartData = file_get_contents($chartURL);
+            $chartDataMenos = file_get_contents($chartURLMennos);
+
             $chart = 'data:image/png;base64, '.base64_encode($chartData);
+            $chart_menoscot = 'data:image/png;base64, '.base64_encode($chartDataMenos);
 
         $query2 = NotasProductos::query();
 
@@ -500,8 +543,19 @@ class CotizacionController extends Controller
             ->limit(5)
             ->get();
 
+        $productosMenosVendidos = ProductosNotasId::whereIn('id_notas_productos', $ventasIds)
+            ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
+            ->groupBy('producto')
+            ->orderBy('total_cantidad', 'ASC')
+            ->limit(5)
+            ->get();
+
             $labels2 = $productosMasVendidos->pluck('producto')->toArray();
+            $labels_ProductMenos = $productosMenosVendidos->pluck('producto')->toArray();
+
             $data2 = $productosMasVendidos->pluck('total_cantidad')->toArray();
+            $data_ProductMenos = $productosMenosVendidos->pluck('total_cantidad')->toArray();
+
             $chartData2 = [
                 "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
                 "data" => [
@@ -528,14 +582,103 @@ class CotizacionController extends Controller
                 ],
             ];
 
+            $chartData_ProductMenos = [
+                "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
+                "data" => [
+                    "labels" => $labels_ProductMenos, // Etiquetas para los productos
+                    "datasets" => [
+                        [
+                            "label" => "Productos más vendidos",
+                            "data" => $data_ProductMenos, // Cantidades correspondientes a cada producto
+                            "backgroundColor" => [
+                                '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
+                            ],
+                        ],
+                    ],
+                ],
+                "options" => [
+                    "plugins" => [
+                        "datalabels" => [
+                            "color" => 'white', // Cambia el color del texto a blanco
+                        ],
+                    ],
+                    "legend" => [
+                        "display" => true // Mostrar la leyenda de colores
+                    ],
+                ],
+            ];
+
             $chartData2 = json_encode($chartData2);
+
+            $chartData_ProductMenos = json_encode($chartData_ProductMenos);
 
             $chartURL2 = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData2);
 
+            $chartURL_ProductMeno = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData_ProductMenos);
+
             $chartData2 = file_get_contents($chartURL2);
+
+            $chartData_ProductMenos = file_get_contents($chartURL_ProductMeno);
+
             $chart2 = 'data:image/png;base64, '.base64_encode($chartData2);
 
-        $pdf = \PDF::loadView('admin.cotizacion.pdf_reporte', compact('cotizaciones', 'today', 'ventas', 'chart', 'chart2', 'totalSum', 'totalSum2', 'fechaInicio', 'fechaFin'));
+            $chart_ProductMeno = 'data:image/png;base64, '.base64_encode($chartData_ProductMenos);
+
+            $ciudadesData = NotasProductos::whereNotNull('estadociudad') // Filtra los registros donde estadociudad no es null
+            ->select('estadociudad', DB::raw('COUNT(*) as total_compras'))
+            ->groupBy('estadociudad')
+            ->orderBy('total_compras', 'desc')
+            ->groupBy('estadociudad')
+            ->get();
+
+            $colores = [
+                '#1abc9c', '#16a085', '#2ecc71', '#27ae60', '#3498db', '#2980b9', '#9b59b6',
+                '#8e44ad', '#34495e', '#2c3e50', '#f1c40f', '#f39c12', '#e67e22', '#d35400',
+                '#e74c3c', '#c0392b', '#ecf0f1', '#bdc3c7', '#95a5a6', '#7f8c8d', '#e91e63',
+                '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#00bcd4', '#009688', '#4caf50',
+                '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'
+            ];
+
+            // $labelsGrafica = $ciudadesData->pluck('estadociudad')->toArray();
+
+            $labelsGrafica = $ciudadesData->map(function($item) {
+                return $item->estadociudad . ' (' . $item->total_compras . ')';
+            })->toArray();
+
+            $dataGrafica = $ciudadesData->pluck('total_compras')->toArray();
+
+            $chartDataGrafica = [
+                "type" => 'pie', // Puedes cambiarlo a 'pie', 'line', etc.
+                "data" => [
+                    "labels" => $labelsGrafica, // Etiquetas para las ciudades
+                    "datasets" => [
+                        [
+                            "label" => "Compras por Ciudad",
+                            "data" => $dataGrafica, // Cantidades correspondientes a cada ciudad
+                            "backgroundColor" => $colores, // Aplica los colores generados
+                        ],
+                    ],
+                ],
+                "options" => [
+                    "plugins" => [
+                        "datalabels" => [
+                            "color" => 'white', // Cambia el color del texto a blanco
+                        ],
+                    ],
+                    "legend" => [
+                        "display" => true // Mostrar la leyenda de colores
+                    ],
+                ],
+            ];
+
+            $chartDataGrafica = json_encode($chartDataGrafica);
+            $chartURLGrafica = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartDataGrafica);
+
+            $chartDataGrafica = file_get_contents($chartURLGrafica);
+            $chartGrafica = 'data:image/png;base64, '.base64_encode($chartDataGrafica);
+
+
+        $pdf = \PDF::loadView('admin.cotizacion.pdf_reporte', compact('chartGrafica','chart_ProductMeno','chart_menoscot','cotizaciones', 'today', 'ventas', 'chart', 'chart2', 'totalSum', 'totalSum2', 'fechaInicio', 'fechaFin'));
 
        // return $pdf->stream();
         return $pdf->download('Reporte NAS / '.$today.'.pdf');

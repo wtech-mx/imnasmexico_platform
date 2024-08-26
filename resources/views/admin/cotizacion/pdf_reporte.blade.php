@@ -186,6 +186,43 @@
         </tbody>
     </table>
 
+    <table class="mt-5">
+        <thead style="background-color: #CA87A6; color: #fff">
+            <tr>
+                <th>Ciudades donde compran</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>
+                    <img src="{{$chartGrafica }}" width="75%">
+                </th>
+
+            </tr>
+        </tbody>
+    </table>
+
+    <table class="mt-5" style="margin-top: 3rem">
+        <thead style="background-color: #CA87A6; color: #fff">
+            <tr>
+                <th>5 Productos menos cotizados</th>
+                <th>5 Productos menos vendidos</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <th>
+                    <img src="{{$chart_menoscot}}" width="100%">
+                </th>
+                <th>
+                    <img src="{{$chart_ProductMeno}}" width="100%">
+                </th>
+            </tr>
+        </tbody>
+    </table>
+
     <div style="page-break-after: always;"></div>
 
     <h2 style="text-align: center;"> <br>Cotizaciones <br></h2>

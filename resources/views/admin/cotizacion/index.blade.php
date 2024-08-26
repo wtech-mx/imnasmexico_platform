@@ -44,12 +44,12 @@
                                     <div class="row">
                                         <div class="col-3">
                                             <label for="user_id">Fecha Inicio:</label>
-                                            <input type="date" class="form-control" name="fecha_inicio">
+                                            <input type="date" class="form-control" name="fecha_inicio" value="{{ date('Y-m-d') }}">
                                         </div>
 
                                         <div class="col-3">
                                             <label for="user_id">Fecha Fin:</label>
-                                            <input type="date" class="form-control" name="fecha_fin">
+                                            <input type="date" class="form-control" name="fecha_fin" value="{{ date('Y-m-d') }}">
                                         </div>
 
 
