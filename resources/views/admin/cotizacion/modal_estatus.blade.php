@@ -19,11 +19,54 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                 </span>
-                                <select class="form-select d-inline-block"  data-toggle="select" id="estatus_cotizacion" name="estatus_cotizacion" value="{{ old('estatus_cotizacion') }}">
+                                <select class="form-select d-inline-block estatus-cotizacion"  data-toggle="select" id="estatus_cotizacion" name="estatus_cotizacion" value="{{ old('estatus_cotizacion') }}">
                                     <option value="">Seleccionar Estatus</option>
                                     {{-- <option value="Pendiente">Pendiente</option> --}}
                                     <option value="Aprobada">Aprobada</option>
                                     <option value="Cancelada">Cancelar</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-12 estado-select" style="display: none;">
+                            <label for="name">Estados*</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
+                                </span>
+                                <select class="form-select d-inline-block" data-toggle="select" id="estado" name="estado">
+                                    <option value="Aguascalientes">Aguascalientes</option>
+                                    <option value="Baja California">Baja California</option>
+                                    <option value="Baja California Sur">Baja California Sur</option>
+                                    <option value="Campeche">Campeche</option>
+                                    <option value="Chiapas">Chiapas</option>
+                                    <option value="Chihuahua">Chihuahua</option>
+                                    <option value="Ciudad de Mexico">Ciudad de Mexico</option>
+                                    <option value="Coahuila">Coahuila</option>
+                                    <option value="Colima">Colima</option>
+                                    <option value="Durango">Durango</option>
+                                    <option value="Estado de Mexico">Estado de Mexico</option>
+                                    <option value="Guanajuato">Guanajuato</option>
+                                    <option value="Guerrero">Guerrero</option>
+                                    <option value="Hidalgo">Hidalgo</option>
+                                    <option value="Jalisco">Jalisco</option>
+                                    <option value="Michoacán">Michoacán</option>
+                                    <option value="Morelos">Morelos</option>
+                                    <option value="Nayarit">Nayarit</option>
+                                    <option value="Nuevo León">Nuevo León</option>
+                                    <option value="Oaxaca">Oaxaca</option>
+                                    <option value="Puebla">Puebla</option>
+                                    <option value="Querétaro">Querétaro</option>
+                                    <option value="Quintana Roo">Quintana Roo</option>
+                                    <option value="San Luis Potosí">San Luis Potosí</option>
+                                    <option value="Sinaloa">Sinaloa</option>
+                                    <option value="Sonora">Sonora</option>
+                                    <option value="Tabasco">Tabasco</option>
+                                    <option value="Tamaulipas">Tamaulipas</option>
+                                    <option value="Tlaxcala">Tlaxcala</option>
+                                    <option value="Veracruz">Veracruz</option>
+                                    <option value="Yucatán">Yucatán</option>
+                                    <option value="Zacatecas">Zacatecas</option>
                                 </select>
                             </div>
                         </div>
@@ -40,3 +83,21 @@
       </div>
     </div>
   </div>
+
+  <script>
+    $(document).ready(function() {
+        $('.modal').on('shown.bs.modal', function() {
+            var $modal = $(this);
+
+            $modal.find('.estatus-cotizacion').change(function() {
+                var selectedValue = $(this).val();
+                if (selectedValue === 'Aprobada') {
+                    $modal.find('.estado-select').show();
+                } else {
+                    $modal.find('.estado-select').hide();
+                }
+            }).trigger('change'); // Activar el evento para el valor actual.
+        });
+    });
+
+    </script>

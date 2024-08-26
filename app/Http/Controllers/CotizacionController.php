@@ -299,6 +299,8 @@ class CotizacionController extends Controller
 
         $nota = NotasProductos::findOrFail($id);
         $nota->estatus_cotizacion  = $request->get('estatus_cotizacion');
+        $nota->estadociudad  = $request->get('estado');
+
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
