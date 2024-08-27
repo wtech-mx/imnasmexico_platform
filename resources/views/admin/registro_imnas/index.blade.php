@@ -48,6 +48,8 @@
                                                     </a><br>
                                                     <p>{{ $item->User->telefono }}</p>
                                                     <p>{{ $item->User->email }}</p>
+                                                    <p>{{ $item->User->escuela }}</p>
+
                                                 </td>
                                                 <td>-</td>
                                                 <td>

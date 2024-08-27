@@ -977,19 +977,44 @@ class RegistroIMNASController extends Controller
 
 
         $dominio = $request->getHost();
-        if($dominio == 'plataforma.imnasmexico.com'){
+
+        // if($dominio == 'plataforma.imnasmexico.com'){
+        //     $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $user->telefono .'/');
+        // }else{
+        //     $ruta_manual = public_path() . '/documentos/' . $user->telefono . '/';
+
+        // }
+
+        if ($dominio == 'plataforma.imnasmexico.com') {
             $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $user->telefono .'/');
-        }else{
+            $ruta_manual_logo = base_path('../public_html/plataforma.imnasmexico.com/utilidades_documentos/');
+        } else {
             $ruta_manual = public_path() . '/documentos/' . $user->telefono . '/';
+            $ruta_manual_logo = public_path() . '/utilidades_documentos/';
         }
+
+        // if ($request->hasFile("logo")) {
+        //     $file = $request->file('logo');
+        //     $path = $ruta_manual;
+        //     $fileName = uniqid() . $file->getClientOriginalName();
+        //     $file->move($path, $fileName);
+        //     $user->logo = $fileName;
+        // }
 
         if ($request->hasFile("logo")) {
             $file = $request->file('logo');
-            $path = $ruta_manual;
             $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
+
+            // Guardar en la primera ruta
+            $file->move($ruta_manual, $fileName);
             $user->logo = $fileName;
+
+            // Copiar el archivo a la segunda ruta
+            $filePathOriginal = $ruta_manual . $fileName;
+            $filePathCopy = $ruta_manual_logo . $fileName;
+            copy($filePathOriginal, $filePathCopy);
         }
+
         $user->update();
 
         $documentos_id = Documentos::where('id_usuario','=',$user->id)->first();
