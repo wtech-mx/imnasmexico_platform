@@ -244,6 +244,50 @@ class CotizacionController extends Controller
     }
 
     public function update(Request $request, $id){
+
+        $producto = $request->input('productos');
+        $price = $request->input('price');
+        $cantidad = $request->input('cantidad');
+        $descuento = $request->input('descuento');
+        $total = 0;
+
+        // Obtener los productos actuales de la base de datos para esa cotización
+        $productosExistentes = ProductosNotasId::where('id_notas_productos', $id)->get();
+
+        // Crear un array para almacenar los IDs de los productos enviados
+        $productosIdsEnviados = [];
+
+        // Actualizar productos existentes
+        for ($count = 0; $count < count($producto); $count++) {
+            // Buscar el producto en la base de datos
+            $productos = ProductosNotasId::where('producto', $producto[$count])
+                ->where('id_notas_productos', $id)
+                ->firstOrFail();
+
+            // Guardar el ID del producto en el array de productos enviados
+            $productosIdsEnviados[] = $productos->id;
+
+            // Limpiar el precio y preparar los datos para la actualización
+            $precio = $price[$count];
+            $cleanPrice2 = floatval(str_replace(['$', ','], '', $precio));
+            $data = array(
+                'price' => $cleanPrice2,
+                'cantidad' => $cantidad[$count],
+                'descuento' => $descuento[$count],
+            );
+
+            // Actualizar el producto en la base de datos
+            $productos->update($data);
+            $total += $cleanPrice2;
+        }
+
+        // Eliminar los productos que ya no están en la solicitud
+        foreach ($productosExistentes as $productoExistente) {
+            if (!in_array($productoExistente->id, $productosIdsEnviados)) {
+                $productoExistente->delete();
+            }
+        }
+
         $campo = $request->input('campo');
         $campo4 = $request->input('campo4');
         $campo3 = $request->input('campo3');
@@ -261,34 +305,12 @@ class CotizacionController extends Controller
                 'descuento' => $descuento_prod[$count],
             );
             ProductosNotasId::create($data);
-        }
-
-        $producto = $request->input('productos');
-        $price = $request->input('price');
-        $cantidad = $request->input('cantidad');
-        $descuento = $request->input('descuento');
-
-        for ($count = 0; $count < count($producto); $count++) {
-            $productos = ProductosNotasId::where('producto', $producto[$count])
-            ->where('id_notas_productos', $id)
-            ->firstOrFail();
-
-            $precio = $price[$count];
-            $cleanPrice2 = floatval(str_replace(['$', ','], '', $precio));
-            $data = array(
-                'price' => $cleanPrice2,
-                'cantidad' => $cantidad[$count],
-                'descuento' => $descuento[$count],
-            );
-            $productos->update($data);
+            $total += $cleanPrice;
         }
 
         $nota = NotasProductos::findOrFail($id);
-        $total_final = $request->get('total_final');
-        $cleanPrice3 = floatval(str_replace(['$', ','], '', $total_final));
-        $cleanPrice4 = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
-        $nota->tipo = $cleanPrice4;
-        $nota->total = $cleanPrice3;
+        $nota->tipo = $total;
+        $nota->total = $total;
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

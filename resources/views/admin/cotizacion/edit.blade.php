@@ -102,57 +102,65 @@
                                     @endphp
 
                                     @foreach ($cotizacion_productos as  $productos)
-                                        @php
-                                            if($productos->cantidad != NULL){
-                                                $precio_unitario = $productos->price / $productos->cantidad;
-                                                $precio_format = number_format($productos->price, 0, '.', ',');
-                                                $precio_unitario_format = number_format($precio_unitario, 0, '.', ',');
-                                            }
-                                        @endphp
+                                        <div class="row campo3" data-id="{{ $productos->id }}">
+                                            @php
+                                                if($productos->cantidad != NULL){
+                                                    $precio_unitario = $productos->price / $productos->cantidad;
+                                                    $precio_format = number_format($productos->price, 0, '.', ',');
+                                                    $precio_unitario_format = number_format($precio_unitario, 0, '.', ',');
+                                                }
+                                            @endphp
 
-                                        <div class="col-3">
-                                            <label for="">Nombre</label>
-                                            <input type="text"  name="productos[]" class="form-control d-inline-block" value="{{ $productos->producto }}" readonly>
-                                        </div>
-
-                                        <div class="form-group col-3">
-                                            <label for="cantidad_{{ $productos->id }}">Cantidad *</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
-                                                </span>
-                                                <input type="number" id="cantidad_{{ $productos->id }}" name="cantidad[]" class="form-control cantidad" style="width: 65%;" value="{{ $productos->cantidad }}">
+                                            <div class="col-3">
+                                                <label for="">Nombre</label>
+                                                <input type="text"  name="productos[]" class="form-control d-inline-block" value="{{ $productos->producto }}" readonly>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group col-3">
-                                            <label for="descuento_{{ $productos->id }}">Descuento *</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
-                                                </span>
-                                                <input type="number" id="descuento_{{ $productos->id }}" name="descuento[]" class="form-control descuento" value="{{ $productos->descuento }}">
+                                            <div class="form-group col-2">
+                                                <label for="cantidad_{{ $productos->id }}">Cantidad *</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input type="number" id="cantidad_{{ $productos->id }}" name="cantidad[]" class="form-control cantidad" style="width: 65%;" value="{{ $productos->cantidad }}">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group col-3">
-                                            <label for="subtotal_{{ $productos->id }}">Subtotal *</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
-                                                </span>
-                                                <input type="text" id="subtotal_{{ $productos->id }}" name="price[]" class="form-control subtotal" value="${{ $precio_format }}" readonly>
+                                            <div class="form-group col-2">
+                                                <label for="descuento_{{ $productos->id }}">Descuento *</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input type="number" id="descuento_{{ $productos->id }}" name="descuento[]" class="form-control descuento" value="{{ $productos->descuento }}">
+                                                </div>
                                             </div>
+
+                                            <div class="form-group col-3">
+                                                <label for="subtotal_{{ $productos->id }}">Subtotal *</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input type="text" id="subtotal_{{ $productos->id }}" name="price[]" class="form-control subtotal" value="${{ $precio_format }}" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-2">
+                                                <h4 for="name">Quitar</h4>
+                                                <div class="input-group mb-3">
+                                                    <button type="button" class="btn btn-danger btn-sm eliminarCampo3" data-id="{{ $productos->id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+                                            <!-- Campo oculto para el precio unitario -->
+                                            <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}">
+
+                                            @php
+                                                $subtotal = $productos->price;
+                                                $total += $subtotal;
+                                                $precio = $total;
+                                            @endphp
                                         </div>
-
-                                        <!-- Campo oculto para el precio unitario -->
-                                        <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}">
-
-                                        @php
-                                            $subtotal = $productos->price;
-                                            $total += $subtotal;
-                                            $precio = $total;
-                                        @endphp
                                     @endforeach
                                     {{-- <div class="col-6 mt-2">
                                         <h5 style="color:#836262"><strong>Total</strong> </h5>
@@ -189,17 +197,17 @@
                                                             </select>
                                                         </div>
 
-                                                        <div class="form-group col-3">
+                                                        <div class="form-group col-2">
                                                             <label for="name">Cantidad *</label>
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text" id="basic-addon1">
                                                                     <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
                                                                 </span>
-                                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad2" value="1">
+                                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad2">
                                                             </div>
                                                         </div>
 
-                                                        <div class="form-group col-3">
+                                                        <div class="form-group col-2">
                                                             <label for="name">Descuento (%)</label>
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text" id="basic-addon1">
@@ -216,6 +224,13 @@
                                                                     <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                                                 </span>
                                                                 <input type="text" name="campo4[]" class="form-control d-inline-block subtotal2" readonly>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-2">
+                                                            <h4 for="name">Quitar</h4>
+                                                            <div class="input-group mb-3">
+                                                                <button type="button" class="btn btn-danger btn-sm eliminarCampo"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -340,66 +355,52 @@
 @endsection
 
 @section('datatable')
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const productos = @json($cotizacion_productos);
+document.addEventListener('DOMContentLoaded', function () {
+    $('.producto2').select2();
+    const productos = @json($cotizacion_productos);
 
-        productos.forEach(producto => {
-            const cantidadInput = document.getElementById(`cantidad_${producto.id}`);
-            const descuentoInput = document.getElementById(`descuento_${producto.id}`);
+    productos.forEach(producto => {
+        const cantidadInput = document.getElementById(`cantidad_${producto.id}`);
+        const descuentoInput = document.getElementById(`descuento_${producto.id}`);
+        const eliminarBtn = document.querySelector(`.eliminarCampo3[data-id="${producto.id}"]`);
 
-            if (cantidadInput) {
-                cantidadInput.addEventListener('input', () => updateSubtotalExistente(producto.id));
-            }
-
-            if (descuentoInput) {
-                descuentoInput.addEventListener('input', () => updateSubtotalExistente(producto.id));
-            }
-        });
-
-        function updateSubtotalExistente(id) {
-            const cantidad = parseFloat(document.getElementById(`cantidad_${id}`).value) || 0;
-            const descuento = parseFloat(document.getElementById(`descuento_${id}`).value) || 0;
-            const precio_unitario = parseFloat(document.getElementById(`precio_unitario_${id}`).value) || 0;
-
-            // Calcular el subtotal antes del descuento
-            const subtotalSinDescuento = cantidad * precio_unitario;
-            // Calcular el descuento en monto
-            const descuentoMonto = (subtotalSinDescuento * descuento) / 100;
-            // Calcular el subtotal final después del descuento
-            const subtotalConDescuento = subtotalSinDescuento - descuentoMonto;
-
-            document.getElementById(`subtotal_${id}`).value = `$${subtotalConDescuento.toFixed(2)}`;
-
-            updateTotal();
+        if (cantidadInput) {
+            cantidadInput.addEventListener('input', () => updateSubtotalExistente(producto.id));
         }
 
-        function updateTotal() {
-            let total = 0;
+        if (descuentoInput) {
+            descuentoInput.addEventListener('input', () => updateSubtotalExistente(producto.id));
+        }
 
-            // Sumar subtotales de productos existentes
-            const subtotalesExistentes = document.querySelectorAll('.subtotal');
-            subtotalesExistentes.forEach(subtotalElement => {
-                const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
-                total += subtotalValue;
-            });
-
-            // Sumar subtotales de nuevos productos
-            const subtotalesNuevos = document.querySelectorAll('.subtotal2');
-            subtotalesNuevos.forEach(subtotalElement => {
-                const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
-                total += subtotalValue;
-            });
-
-            document.getElementById('subtotal_final').value = `$${total.toFixed(2)}`;
-            document.getElementById('total_final').value = `$${total.toFixed(2)}`;
+        // Agregar evento para eliminar el producto
+        if (eliminarBtn) {
+            eliminarBtn.addEventListener('click', () => eliminarProducto(producto.id));
         }
     });
-</script>
 
+    function eliminarProducto(productoId) {
+        const productoDiv = document.querySelector(`.campo3[data-id="${productoId}"]`);
+
+        // Si el elemento existe, eliminarlo del DOM
+        if (productoDiv) {
+            productoDiv.remove();
+        }
+    }
+});
+
+
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const camposContainer2 = document.getElementById('camposContainer2');
+
+        // Asignar eventos a los campos existentes, incluyendo el primero por defecto
+        document.querySelectorAll('.campo2').forEach(campo => {
+            asignarEventos(campo);
+        });
 
         // Añadir campo de producto
         document.getElementById('agregarCampo2').addEventListener('click', function() {
@@ -411,17 +412,37 @@
         function crearNuevoCampo() {
             const campoTemplate = document.querySelector('.campo2');
             const nuevoCampo = campoTemplate.cloneNode(true);
+
+            // Limpia los valores de los inputs en el nuevo campo
             nuevoCampo.querySelector('.producto2').value = '';
             nuevoCampo.querySelector('.cantidad2').value = '';
             nuevoCampo.querySelector('.descuento_prod').value = '0';
             nuevoCampo.querySelector('.subtotal2').value = '';
+
+            // Eliminar la clase 'select2-hidden-accessible' y el contenedor generado por select2 antes de clonar
+            $(nuevoCampo).find('.producto2').removeClass('select2-hidden-accessible').next('.select2').remove();
+
+            // Inicializar select2 después de clonar
+            $(nuevoCampo).find('.producto2').select2();
+
             return nuevoCampo;
+        }
+
+        function eliminarCampo(campo) {
+            campo.remove();
+            updateTotal();  // Actualizar el total después de eliminar un campo
         }
 
         function asignarEventos(campo) {
             const productSelect = campo.querySelector('.producto2');
             const cantidadInput = campo.querySelector('.cantidad2');
             const descuentoInput = campo.querySelector('.descuento_prod');
+
+            // Asignar evento de eliminación al botón correspondiente
+            const eliminarCampoBtn = campo.querySelector('.eliminarCampo');
+            eliminarCampoBtn.addEventListener('click', function() {
+                eliminarCampo(campo);
+            });
 
             productSelect.addEventListener('change', function () {
                 const selectedOption = productSelect.options[productSelect.selectedIndex];
@@ -473,12 +494,11 @@
             document.getElementById('subtotal_final').value = `$${total.toFixed(2)}`;
             document.getElementById('total_final').value = `$${total.toFixed(2)}`;
         }
-
-        // Asignar eventos a los campos existentes
-        document.querySelectorAll('.campo2').forEach(campo => {
-            asignarEventos(campo);
-        });
     });
 </script>
+
+
+
+
 
 @endsection
