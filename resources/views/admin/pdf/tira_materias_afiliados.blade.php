@@ -94,6 +94,7 @@
             top:40%;
             left:23%;
             text-align: left;
+            width: 508px;
         }
 
         .ul_text{
@@ -120,6 +121,11 @@
             position:relative;
             font-size: 22px;
             color: red;
+        }
+
+        .folio3.small-font {
+            margin-top: 4px;
+            font-size: 11px;
         }
 
 
@@ -229,6 +235,9 @@
                             $nombre_formateado .= "<br>";
                         }
                     }
+
+                    $characterCount = strlen($folio);
+
         @endphp
 
         @if(!isset($fileName_logo))
@@ -284,7 +293,11 @@
         </div>
 
         <div class="container_folio_bajo1">
-            <h4 class="folio3">{{$folio}}</h4>
+            {{-- <h4 class="folio3">{{$folio}}</h4> --}}
+
+            <h4 class="folio3 {{ $characterCount > 14 ? 'small-font' : '' }}">
+                {{ $folio }}
+            </h4>
         </div>
 
         <div class="container_texto_tira">
