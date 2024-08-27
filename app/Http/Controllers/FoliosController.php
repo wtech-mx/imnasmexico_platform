@@ -33,29 +33,6 @@ class FoliosController extends Controller
 
                 // Si tampoco se encuentra en RegistroImnas, busca en DocumentosGenerador
                 if (!$tickets_generador) {
-                    $tickets_externos = DocumenotsGenerador::where('folio', $request->get('folio'))->first();
-                }
-
-            }else{
-                $tickets_generador = '';
-                $tickets_externos = '';
-            }
-
-        $folio = $request->get('folio');
-
-        return view('user.folio',compact('tickets', 'folio', 'tickets_generador', 'tickets_externos'));
-    }
-
-    public function buscador_registro(Request $request){
-
-        $tickets = OrdersTickets::where('folio', '=', $request->get('folio'))->first();
-
-            if (!$tickets) {
-
-                $tickets_generador = RegistroImnas::where('folio', $request->get('folio'))->first();
-
-                // Si tampoco se encuentra en RegistroImnas, busca en DocumentosGenerador
-                if (!$tickets_generador) {
                     $tickets_generador = DocumenotsGenerador::where('folio', $request->get('folio'))->first();
                 }
 
@@ -65,7 +42,34 @@ class FoliosController extends Controller
 
         $folio = $request->get('folio');
 
-        return view('admin.registro_imnas.resultado_registro',compact('tickets', 'folio', 'tickets_generador'));
+        return view('user.folio',compact('tickets', 'folio', 'tickets_generador'));
+    }
+
+    public function buscador_registro(Request $request){
+        $tickets = OrdersTickets::where('folio', '=', $request->get('folio'))->first();
+
+            if (!$tickets) {
+
+                $tickets_generador = RegistroImnas::where('folio', $request->get('folio'))->first();
+
+                // Si tampoco se encuentra en RegistroImnas, busca en DocumentosGenerador
+                if (!$tickets_generador) {
+                    $tickets_externo = DocumenotsGenerador::where('folio', $request->get('folio'))->first();
+                }else{
+                    $tickets_externo = '';
+                }
+
+            }else{
+                $tickets_generador = '';
+                $tickets_externo = '';
+
+            }
+
+
+
+        $folio = $request->get('folio');
+
+        return view('admin.registro_imnas.resultado_registro',compact('tickets', 'folio', 'tickets_generador','tickets_externo'));
     }
 
 
