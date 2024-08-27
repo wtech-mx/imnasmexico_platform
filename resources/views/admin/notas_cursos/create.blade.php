@@ -144,6 +144,16 @@
                                         </div>
                                     </div>
 
+                                    <div class="form-group col-4 ">
+                                        <label for="name">Foto (Comprobante)</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
+                                            </span>
+                                            <input id="foto" name="foto" type="file" class="form-control" placeholder="foto" required>@error('foto') <span class="error text-danger">{{ $message }}</span> @enderror
+                                        </div>
+                                    </div>
+
                                     <div class="col-12">
                                         <div class="form-group">
                                             <h4 for="name">Comentario/nota</h4>

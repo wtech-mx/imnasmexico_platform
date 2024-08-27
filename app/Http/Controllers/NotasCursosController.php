@@ -82,7 +82,13 @@ class NotasCursosController extends Controller
     public function store(request $request){
 
         $code = Str::random(8);
-
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera');
+        }else{
+            $pago_fuera = public_path() . '/pago_fuera';
+        }
+        
         if($request->id_client == NULL){
             if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
                 if (User::where('telefono', $request->telefono)->exists()) {
@@ -124,6 +130,13 @@ class NotasCursosController extends Controller
         $order->fecha = $notas_cursos->fecha;
         $order->estatus = 1;
         $order->code = $code;
+        if ($request->hasFile("foto")) {
+            $file = $request->file('foto');
+            $path = $pago_fuera;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $order->foto = $fileName;
+        }
         $order->save();
 
         $id = $notas_cursos->id;
@@ -161,7 +174,7 @@ class NotasCursosController extends Controller
         $email_diplomas = 'imnascenter@naturalesainspa.com';
         $destinatario = [ $order->User->email  , $email_diplomas];
         $datos = $order->User->name;
-        
+
         foreach ($orden_ticket as $details) {
             $curso = $details->Cursos->nombre;
             $fecha = $details->Cursos->fecha_inicial;
