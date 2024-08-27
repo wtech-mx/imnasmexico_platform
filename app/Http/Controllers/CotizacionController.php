@@ -338,6 +338,19 @@ class CotizacionController extends Controller
 
         $nota_productos = ProductosNotasId::where('id_notas_productos', $nota->id)->get();
 
+        // Iterar sobre los productos de la nota para buscar la imagen correspondiente
+        foreach ($nota_productos as $producto_nota) {
+            $producto = Products::where('nombre', $producto_nota->producto)->first();
+
+            if ($producto) {
+                $producto_nota->imagen_producto = $producto->imagenes;
+            } else {
+                $producto_nota->imagen_producto = null; // O algún valor por defecto
+            }
+        }
+
+
+
         $pdf = \PDF::loadView('admin.notas_productos.pdf_nota', compact('nota', 'today', 'nota_productos'));
         if($nota->folio == null){
             $folio = $nota->id;
