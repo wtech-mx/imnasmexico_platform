@@ -125,7 +125,7 @@
 
         .folio3.small-font {
             margin-top: 4px;
-            font-size: 11px;
+            font-size: 15px;
         }
 
 
