@@ -885,7 +885,16 @@ class RegistroIMNASController extends Controller
         return redirect()->back()->with('success', 'datos actualizado con exito.');
     }
 
-    public function update_registro(Request $request){
+    public function update_registro(Request $request, $id){
+
+        $user = User::where('id', $id)->first();
+        $user->name = $request->get('name');
+        $user->telefono = $request->get('telefono');
+        $user->email = $request->get('email');
+        $user->habilitar_btn = $request->get('habilitar_btn');
+        $user->password = Hash::make($request->get('telefono'));
+        $user->update();
+
 
         return redirect()->back()->with('success', 'datos actualizado con exito.');
     }
@@ -958,7 +967,7 @@ class RegistroIMNASController extends Controller
         $user->country = $request->get('country');
         $user->telefono = $request->get('telefono');
         $user->email = $request->get('email');
-
+        $user->habilitar_btn = 'No';
         $user->escuela = $request->get('escuela');
 
         $user->facebook = $request->get('facebook_escuela');

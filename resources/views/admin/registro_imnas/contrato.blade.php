@@ -622,7 +622,7 @@
 
                             <div class="row mt-4">
                                 <div class="col-12">
-                                    @if ($idMateria->especialidad == NULL)
+                                    @if ($user->habilitar_btn != 'No')
                                         <button class="btn btn-success mt-3" type="submit"  style=""><img src="{{ asset('assets/user/icons/salvar.png') }}" alt="" width="35px">  Guardar</button>
                                     @endif
                                 </div>
