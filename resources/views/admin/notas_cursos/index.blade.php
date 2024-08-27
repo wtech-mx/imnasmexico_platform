@@ -56,17 +56,9 @@
                                     ¿Como funciona?
                                 </a>
 
-                            @can('nota-cursos-paquetes')
-                                <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#examplePaquete" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                    Paquetes
-                                </a>
-                            @endcan
-
-                            @can('nota-cursos-crear')
                                 <a  class="btn bg-gradient-primary" href="{{ route('notas_cursos.crear') }}">
                                     Crear
                                 </a>
-                            @endcan
                         </div>
                     </div>
                         <div class="card-body">
@@ -78,7 +70,6 @@
                                             <th>Cliente</th>
                                             <th>Restante</th>
                                             <th>Fecha</th>
-                                            <th>Paquete</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -103,20 +94,18 @@
                                                         @endphp
                                                         {{$fecha_formateada}}
                                                     </td>
-                                                    <td>{{ $nota->paquete }}</td>
                                                     <td>
                                                         {{-- <a type="button" class="btn btn-sm" target="_blank"
                                                         href="https://wa.me/52{{$nota->User->phone}}?text=Hola%20{{$nota->User->name}},%20te%20enviamos%20tu%20nota%20el%20d%C3%ADa:%20{{ $nota->fecha }},%20vuelve%20pronto.%0D%0ADa+click+en+el+siguente+enlace%0D%0A%0D%0A{{route('notas.index_user', $nota->id)}}"
                                                         style="background: #00BB2D; color: #ffff">
                                                         <i class="fa fa-whatsapp"></i></a> --}}
+                                                        @if ($nota->paquete != NULL)
+                                                            <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$nota->paquete) }}" target="_blank">Ver orden</a>
+                                                        @endif
 
-                                                        @can('nota-cursos-pago')
-                                                            <a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#examplePago{{$nota->id}}">
-                                                                <i class="fa fa-money"></i>
-                                                            </a>
-                                                        @endcan
-
-                                                        <a class="btn btn-sm btn-success" href="{{ route('notas_cursos.edit',$nota->id) }}"><i class="fa fa-eye"></i> </a>
+                                                        <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('notas_cursos.imprimir', $nota->id) }}">
+                                                            <i class="fa fa-file"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                                 @include('admin.notas_cursos.modal_pago')

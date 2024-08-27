@@ -88,7 +88,7 @@ class NotasCursosController extends Controller
         }else{
             $pago_fuera = public_path() . '/pago_fuera';
         }
-        
+
         if($request->id_client == NULL){
             if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
                 if (User::where('telefono', $request->telefono)->exists()) {
@@ -221,7 +221,7 @@ class NotasCursosController extends Controller
                             }
                         }
 
-                    }else{
+                }else{
 
 
                     if($details->Cursos->stps == '1' && $details->Cursos->titulo_hono == '1'){
@@ -277,6 +277,7 @@ class NotasCursosController extends Controller
 
         $enotas_cursos = NotasCursos::where('id', '=', $notas_cursos->id)->first();
         $enotas_cursos->restante = $restante;
+        $enotas_cursos->paquete = $order->id;
         $enotas_cursos->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
@@ -419,5 +420,19 @@ class NotasCursosController extends Controller
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Envio de correo exitoso.');
+    }
+
+    public function imprimir($id){
+        $diaActual = date('Y-m-d');
+        $today =  date('d-m-Y');
+
+        $nota = NotasCursos::find($id);
+
+        $nota_productos = NotasInscripcion::where('id_nota', $nota->id)->get();
+
+        $pdf = \PDF::loadView('admin.notas_cursos.pdf', compact('nota', 'today', 'nota_productos'));
+       // return $pdf->stream();
+
+         return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
     }
 }
