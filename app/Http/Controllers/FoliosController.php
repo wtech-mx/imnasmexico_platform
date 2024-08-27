@@ -33,16 +33,20 @@ class FoliosController extends Controller
 
                 // Si tampoco se encuentra en RegistroImnas, busca en DocumentosGenerador
                 if (!$tickets_generador) {
-                    $tickets_generador = DocumenotsGenerador::where('folio', $request->get('folio'))->first();
+                    $tickets_externo = DocumenotsGenerador::where('folio', $request->get('folio'))->first();
+                }else{
+                    $tickets_externo = '';
                 }
 
             }else{
                 $tickets_generador = '';
+                $tickets_externo = '';
+
             }
 
-        $folio = $request->get('folio');
+            $folio = $request->get('folio');
 
-        return view('user.folio',compact('tickets', 'folio', 'tickets_generador'));
+        return view('user.folio',compact('tickets', 'folio', 'tickets_generador','tickets_externo'));
     }
 
     public function buscador_registro(Request $request){
@@ -64,7 +68,6 @@ class FoliosController extends Controller
                 $tickets_externo = '';
 
             }
-
 
 
         $folio = $request->get('folio');
