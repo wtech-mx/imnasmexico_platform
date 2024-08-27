@@ -80,23 +80,19 @@ class FoliosController extends Controller
 
         $tipo_documentos = Tipodocumentos::find(2);
 
-        $tickets_registro = RegistroImnas::where('folio', $id)->first();
+        $tickets = RegistroImnas::where('folio', $id)->first();
 
-        if($tickets_registro == null){
-            $tickets_alumnos = OrdersTickets::where('id', '=', $id)->first();
-            $tickets = $tickets_alumnos;
+        $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
+
+        if($tickets == null){
+            $tickets = OrdersTickets::where('id', '=', $id)->first();
         }
 
-        if($tickets_alumnos == null){
-            $tickets_externos = DocumenotsGenerador::where('folio', '=', $id)->first();
-            $tickets = $tickets_externos;
+        if($tickets_externo != null){
+            $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
         }
 
-        if($tickets_registro != null){
-            $tickets = $tickets_registro;
-        }
-
-        return view('user.components.documentos_imnas.index_cedula',compact('tickets','tipo_documentos'));
+        return view('user.components.documentos_imnas.index_cedula',compact('tickets','tipo_documentos','tickets_externo'));
 
     }
 
@@ -106,10 +102,18 @@ class FoliosController extends Controller
 
         $tickets = RegistroImnas::where('folio', $id)->first();
 
+        $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
+
         if($tickets == null){
             $tickets = OrdersTickets::where('id', '=', $id)->first();
         }
-        return view('user.components.documentos_imnas.index_titulo',compact('tickets','tipo_documentos'));
+
+        if($tickets_externo != null){
+            $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
+        }
+
+
+        return view('user.components.documentos_imnas.index_titulo',compact('tickets','tipo_documentos','tickets_externo'));
 
     }
 
@@ -119,11 +123,18 @@ class FoliosController extends Controller
 
         $tickets = RegistroImnas::where('folio', $id)->first();
 
+        $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
+
         if($tickets == null){
             $tickets = OrdersTickets::where('id', '=', $id)->first();
         }
 
-        return view('user.components.documentos_imnas.index_diploma',compact('tickets','tipo_documentos'));
+        if($tickets_externo != null){
+            $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
+        }
+
+
+        return view('user.components.documentos_imnas.index_diploma',compact('tickets','tipo_documentos','tickets_externo'));
 
     }
 
@@ -133,11 +144,18 @@ class FoliosController extends Controller
 
         $tickets = RegistroImnas::where('folio', $id)->first();
 
+        $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
+
         if($tickets == null){
             $tickets = OrdersTickets::where('id', '=', $id)->first();
         }
 
-        return view('user.components.documentos_imnas.index_crednecial',compact('tickets','tipo_documentos'));
+        if($tickets_externo != null){
+            $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
+        }
+
+
+        return view('user.components.documentos_imnas.index_crednecial',compact('tickets','tipo_documentos','tickets_externo'));
 
     }
 
@@ -147,8 +165,7 @@ class FoliosController extends Controller
 
         $tickets = RegistroImnas::where('folio', $id)->first();
 
-
-            $idMateria = RegistroImnasEspecialidad::where('id_cliente', $tickets->id_usuario)->first();
+        $idMateria = RegistroImnasEspecialidad::where('id_cliente', $tickets->id_usuario)->first();
 
             $subtemas = RegistroImnasTemario::
             where('id_materia', $idMateria->id)

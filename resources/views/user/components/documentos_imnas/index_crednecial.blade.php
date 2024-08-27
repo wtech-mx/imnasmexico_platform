@@ -30,19 +30,40 @@
                     ? 'https://plataforma.imnasmexico.com/documentos_registro/'
                     : asset('documentos_registro/');
             }else{
-                $foto = $tickets->User->Documentos->foto_tam_infantil;
-                $firma = $tickets->User->Documentos->firma;
-                $palabras = explode(' ', ucwords(strtolower($tickets->Cursos->nombre)));
-                $nombreCompleto = explode(' ', $tickets->User->name);
 
-                $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
+
+                if ($tickets == null) {
+
+                    $palabras = explode(' ', ucwords(strtolower($tickets_externo->cliente)));
+                    $firma = null;
+                    $nombreCurso = $tickets_externo->curso;
+                    $nombreCompleto = explode(' ', $tickets_externo->cliente);
+
+                }else {
+
+                    $foto = $tickets->User->Documentos->foto_tam_infantil;
+                    $firma = $tickets->User->Documentos->firma;
+
+                    $palabras = explode(' ', ucwords(strtolower($tickets->Cursos->nombre)));
+
+                    $nombreCompleto = explode(' ', $tickets->Cursos->nombre);
+
+                    $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
                     ? 'https://plataforma.imnasmexico.com/documentos/'
                     : asset('documentos/');
+                }
+
+
             }
 
             $cantidad_palabras = count($palabras);
+            $folio = isset($tickets->folio) ? $tickets->folio : $tickets_externo->folio;
 
-
+            $cursoNombre = isset($tickets->Cursos->nombre)
+            ? $tickets->Cursos->nombre
+            : (isset($cursoNombre)
+                ? $tickets->nom_curso
+                : $tickets_externo->curso);
 @endphp
 
 @section('css_custom')
@@ -83,6 +104,14 @@
             background: transparent;
         }
 
+        @php
+            if (isset($tickets->User)) {
+                $backgroundImage = $basePathDocumentos . '/' . $tickets->User->telefono . '/' . $foto;
+            } else {
+                $backgroundImage = 'https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png';
+            }
+        @endphp
+
         .oval {
             width: 100%;
             height: 100%;
@@ -91,7 +120,7 @@
             position: absolute;
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$foto }}');
+            background-image: url('{{ $backgroundImage }}');
             background-size: cover;
             background-position: center center;
         }
@@ -104,7 +133,7 @@
             position: absolute;
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$foto }}');
+            background-image: url('{{ $backgroundImage }}');
             opacity: 0.5;
             background-size: cover;
             background-position: center center;
@@ -279,7 +308,7 @@
         </div>
 
         <div class="container_folio">
-            <h4 class="folio">{{$tickets->folio}}</h4>
+            <h4 class="folio">{{$folio}}</h4>
         </div>
 
         <div class="container_vigencia">
@@ -338,13 +367,13 @@
 
         <div class="qr_container">
             @php
-                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$tickets->folio, 'QRCODE',3.1,3.1) . '" style="background: #fff; padding: 5px;"   />';
+                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',3.1,3.1) . '" style="background: #fff; padding: 5px;"   />';
             @endphp
         </div>
 
         <div class="container_firma">
 
-            @if($tickets->User->Documentos->firma == null)
+            @if($firma == null)
 
             @else
                  <img src="{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$firma }}" class="img_firma">
@@ -360,13 +389,8 @@
         <div class="container_imgtrasera">
             <p class="curso_atras">
 
-                @if(!isset($tickets->Cursos->nombre))
-                {{ ucwords(strtolower($tickets->nom_curso)) }}
+                {{ ucwords(strtolower($cursoNombre)) }}
 
-                @else
-                {{ ucwords(strtolower($tickets->Cursos->nombre)) }}
-
-                @endif
 
             </p>
         </div>

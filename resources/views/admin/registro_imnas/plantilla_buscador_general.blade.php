@@ -201,7 +201,6 @@
                 <a href="{{ route('folio.index_crednecial',$tickets_externo->folio) }}" class="btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
                 <a href="{{ route('folio.index_diploma',$tickets_externo->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma Imnnas</a>
                 <a href="{{ route('folio.index_titulo',$tickets_externo->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Titulo Honorifico</a>
-                <a href="{{ route('folio.index_tira',$tickets_externo->folio) }}" class="btn btn-xs mt-3 w-100 text-white" style="background-color: #93A29B">Tira de Materias</a>
             </div>
 
         </div>

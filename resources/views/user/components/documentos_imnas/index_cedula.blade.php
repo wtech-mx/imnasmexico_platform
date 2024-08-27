@@ -18,6 +18,7 @@
                     ? 'https://plataforma.imnasmexico.com/documentos/'
                     : asset('documentos/');
 
+
             if (isset($tickets->foto_cuadrada)) {
                 $palabras = explode(' ', ucwords(strtolower($tickets->nombre)));
 
@@ -30,27 +31,44 @@
                     : asset('documentos_registro/');
 
             }else{
+
+                if ($tickets == null) {
+
+                    $palabras = explode(' ', ucwords(strtolower($tickets_externo->cliente)));
+                    $firma = null;
+                }else {
+
                 $foto = $tickets->User->Documentos->foto_tam_infantil;
                 $firma = $tickets->User->Documentos->firma;
+
                 $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
 
                 $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
                     ? 'https://plataforma.imnasmexico.com/documentos/'
                     : asset('documentos/');
+                }
+
             }
 
             $cantidad_palabras = count($palabras);
 
             // Contar las palabras
-            $cursoNombre = isset($tickets->Cursos->nombre) ? $tickets->Cursos->nombre : $tickets->nom_curso;
+            $cursoNombre = isset($tickets->Cursos->nombre)
+            ? $tickets->Cursos->nombre
+            : (isset($tickets->nom_curso)
+                ? $tickets->nom_curso
+                : $tickets_externo->curso);
+
             $cursoNombre = ucwords(strtolower($cursoNombre));
+
             $wordCount = str_word_count($cursoNombre);
 
-            $folio = $tickets->folio;
+            $folio = isset($tickets->folio) ? $tickets->folio : $tickets_externo->folio;
             $characterCount = strlen($folio);
 
-            $folioReverso = $tickets->folio;
+            $folioReverso = isset($tickets->folio) ? $tickets->folio : $tickets_externo->folio;
             $characterCountReverso = strlen($folioReverso);
+
 @endphp
 
 
@@ -137,6 +155,14 @@
         left: 5%;
     }
 
+    @php
+        if (isset($tickets->User)) {
+            $backgroundImage = $basePathDocumentos . '/' . $tickets->User->telefono . '/' . $foto;
+        } else {
+            $backgroundImage = 'https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png';
+        }
+    @endphp
+
     .oval {
         width: 100%;
         height: 100%;
@@ -144,7 +170,7 @@
         margin: 0;
         padding: 0;
         margin-top: 8px;
-        background-image: url('{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$foto }}');
+        background-image: url('{{ $backgroundImage }}');
         background-size: cover;
         background-position: center center;
     }
@@ -210,11 +236,11 @@
         position: absolute;
         top:76%;
         left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    text-align: center; /* Centra el texto dentro del contenedor */
+        right: 0;
+        display: flex;
+        justify-content: center; /* Centra horizontalmente */
+        align-items: center; /* Centra verticalmente */
+        text-align: center; /* Centra el texto dentro del contenedor */
     }
 
     .container_logo{
@@ -295,7 +321,7 @@
 
     <div class="qr_container">
         @php
-            echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$tickets->folio, 'QRCODE',2.5,2.5) . '" style="background: #fff; padding: 10px;"   />';
+            echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.5,2.5) . '" style="background: #fff; padding: 10px;"   />';
         @endphp
     </div>
 
@@ -328,12 +354,15 @@
 
     <div class="container_fecha">
         <h4 class="fecha">
-            @if(!isset($tickets->Cursos->fecha_inicial))
+            @if(!isset($tickets->Cursos->fecha_inicial) && !isset($tickets->fecha_curso))
+                Expedido en la Ciudad de México
+            @elseif(!isset($tickets->Cursos->fecha_inicial))
                 Expedido en la Ciudad de México, el {{ \Carbon\Carbon::parse($tickets->fecha_curso)->isoFormat('D [de] MMMM [del] YYYY') }}
             @else
                 Expedido en la Ciudad de México, el {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('D [de] MMMM [del] YYYY') }}
             @endif
         </h4>
+
     </div>
 
     <div class="container_logo2">
@@ -381,7 +410,7 @@
 
     <div class="qr_container2">
         @php
-            echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$tickets->folio, 'QRCODE',2.5,2.5) . '" style="background: #fff; padding: 10px;"   />';
+            echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.5,2.5) . '" style="background: #fff; padding: 10px;"   />';
         @endphp
     </div>
 
