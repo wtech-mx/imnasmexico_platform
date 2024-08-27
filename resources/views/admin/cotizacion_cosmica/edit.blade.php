@@ -102,57 +102,66 @@
                                     @endphp
 
                                     @foreach ($cotizacion_productos as  $productos)
-                                        @php
-                                            if($productos->cantidad != NULL){
-                                                $precio_unitario = $productos->price / $productos->cantidad;
-                                                $precio_format = number_format($productos->price, 0, '.', ',');
-                                                $precio_unitario_format = number_format($precio_unitario, 0, '.', ',');
-                                            }
-                                        @endphp
+                                        <div class="row campo3" data-id="{{ $productos->id }}">
+                                            @php
+                                                if($productos->cantidad != NULL){
+                                                    $precio_unitario = $productos->price / $productos->cantidad;
+                                                    $precio_format = number_format($productos->price, 0, '.', ',');
+                                                    $precio_unitario_format = number_format($precio_unitario, 0, '.', ',');
+                                                }
+                                            @endphp
 
-                                        <div class="col-3">
-                                            <label for="">Nombre</label>
-                                            <input type="text"  name="productos[]" class="form-control d-inline-block" value="{{ $productos->producto }}" readonly>
-                                        </div>
-
-                                        <div class="form-group col-3">
-                                            <label for="cantidad_{{ $productos->id }}">Cantidad *</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
-                                                </span>
-                                                <input type="number" id="cantidad_{{ $productos->id }}" name="cantidad[]" class="form-control cantidad" style="width: 65%;" value="{{ $productos->cantidad }}">
+                                            <div class="col-3">
+                                                <label for="">Nombre</label>
+                                                <input type="text"  name="productos[]" class="form-control d-inline-block" value="{{ $productos->producto }}" readonly>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group col-3">
-                                            <label for="descuento_{{ $productos->id }}">Descuento *</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
-                                                </span>
-                                                <input type="number" id="descuento_{{ $productos->id }}" name="descuento[]" class="form-control descuento" value="{{ $productos->descuento }}">
+                                            <div class="form-group col-2">
+                                                <label for="cantidad_{{ $productos->id }}">Cantidad *</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input type="number" id="cantidad_{{ $productos->id }}" name="cantidad[]" class="form-control cantidad" style="width: 65%;" value="{{ $productos->cantidad }}">
+                                                </div>
                                             </div>
-                                        </div>
 
-                                        <div class="form-group col-3">
-                                            <label for="subtotal_{{ $productos->id }}">Subtotal *</label>
-                                            <div class="input-group mb-3">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
-                                                </span>
-                                                <input type="text" id="subtotal_{{ $productos->id }}" name="price[]" class="form-control subtotal" value="${{ $precio_format }}" readonly>
+                                            <div class="form-group col-2">
+                                                <label for="descuento_{{ $productos->id }}">Descuento *</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input type="number" id="descuento_{{ $productos->id }}" name="descuento[]" class="form-control descuento" value="{{ $productos->descuento }}">
+                                                </div>
                                             </div>
+
+                                            <div class="form-group col-3">
+                                                <label for="subtotal_{{ $productos->id }}">Subtotal *</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input type="text" id="subtotal_{{ $productos->id }}" name="price[]" class="form-control subtotal" value="${{ $precio_format }}" readonly>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-2">
+                                                <h4 for="name">Quitar</h4>
+                                                <div class="input-group mb-3">
+                                                    <button type="button" class="btn btn-danger btn-sm eliminarCampo3" data-id="{{ $productos->id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+
+                                            <!-- Campo oculto para el precio unitario -->
+                                            <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}">
+
+                                            @php
+                                                $subtotal = $productos->price;
+                                                $total += $subtotal;
+                                                $precio = $total;
+                                            @endphp
                                         </div>
-
-                                        <!-- Campo oculto para el precio unitario -->
-                                        <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}">
-
-                                        @php
-                                            $subtotal = $productos->price;
-                                            $total += $subtotal;
-                                            $precio = $total;
-                                        @endphp
                                     @endforeach
                                     {{-- <div class="col-6 mt-2">
                                         <h5 style="color:#783E5D"><strong>Total</strong> </h5>
@@ -189,7 +198,7 @@
                                                             </select>
                                                         </div>
 
-                                                        <div class="form-group col-3">
+                                                        <div class="form-group col-2">
                                                             <label for="name">Cantidad *</label>
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text" id="basic-addon1">
@@ -199,7 +208,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="form-group col-3">
+                                                        <div class="form-group col-2">
                                                             <label for="name">Descuento (%)</label>
                                                             <div class="input-group mb-3">
                                                                 <span class="input-group-text" id="basic-addon1">
@@ -216,6 +225,13 @@
                                                                     <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                                                 </span>
                                                                 <input type="text" name="campo4[]" class="form-control d-inline-block subtotal2" readonly>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group col-2">
+                                                            <h4 for="name">Quitar</h4>
+                                                            <div class="input-group mb-3">
+                                                                <button type="button" class="btn btn-danger btn-sm eliminarCampo"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -248,83 +264,6 @@
                                             <input id="total_final" name="total_final" type="text" class="form-control"  value="{{ $cotizacion->total }}" readonly>
                                         </div>
                                     </div>
-
-                                    {{-- <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="name">Metodo de pago</label>
-                                            <select class="form-select" name="metodo_pago" id="metodo_pago">
-                                                <option value="{{ $cotizacion->metodo_pago }}">{{ $cotizacion->metodo_pago }}</option>
-                                                <option value="Efectivo">Efectivo</option>
-                                                <option value="Tarjeta Credito/debito">Tarjeta Credito/debito</option>
-                                                <option value="Transferencia">Transferencia</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group col-4">
-                                        <label for="name">Monto</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/user/icons/money.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input class="form-control" type="text" id="monto" name="monto" value="{{ $cotizacion->monto }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-4">
-                                        <label for="name">Foto Pago</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input class="form-control" type="file" id="foto_pago2" name="foto_pago2" value="{{ $cotizacion->foto_pago2 }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-4">
-                                        <label for="name">Metodo de pago 2</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/user/icons/payment.png') }}" alt="" width="35px">
-                                            </span>
-                                            <select class="form-select" name="metodo_pago2" id="metodo_pago2">
-                                                <option value="{{ $cotizacion->metodo_pago2 }}">{{ $cotizacion->metodo_pago2 }}</option>
-                                                <option value="Efectivo">Efectivo</option>
-                                                <option value="Tarjeta Credito/debito">Tarjeta Credito/debito</option>
-                                                <option value="Transferencia">Transferencia</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-4">
-                                        <label for="name">Monto 2</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/user/icons/money.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input class="form-control" type="text" id="monto2" name="monto2" value="{{ $cotizacion->monto2 }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="name">Comentario/nota</label>
-                                            <textarea class="form-control" name="nota" id="nota" cols="30" rows="3">{{ $cotizacion->nota }}</textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <label for="name">Foto Pago</label>
-                                        <div class="form-group">
-                                            @if ($cotizacion->foto_pago2 == NULL)
-                                                <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 250px; height: 300px;"/>
-                                            @else
-                                                <img id="blah" src="{{asset('pagos/'.$cotizacion->foto_pago2) }}" alt="Imagen" style="width: 250px; height: 300px;"/>
-                                            @endif
-                                        </div>
-                                    </div> --}}
-
                                 </div>
 
                             </div>
@@ -343,11 +282,13 @@
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        $('.producto2').select2();
         const productos = @json($cotizacion_productos);
 
         productos.forEach(producto => {
             const cantidadInput = document.getElementById(`cantidad_${producto.id}`);
             const descuentoInput = document.getElementById(`descuento_${producto.id}`);
+            const eliminarBtn = document.querySelector(`.eliminarCampo3[data-id="${producto.id}"]`);
 
             if (cantidadInput) {
                 cantidadInput.addEventListener('input', () => updateSubtotalExistente(producto.id));
@@ -356,7 +297,22 @@
             if (descuentoInput) {
                 descuentoInput.addEventListener('input', () => updateSubtotalExistente(producto.id));
             }
+
+            // Agregar evento para eliminar el producto
+            if (eliminarBtn) {
+                eliminarBtn.addEventListener('click', () => eliminarProducto(producto.id));
+            }
         });
+
+        function eliminarProducto(productoId) {
+            const productoDiv = document.querySelector(`.campo3[data-id="${productoId}"]`);
+
+            // Si el elemento existe, eliminarlo del DOM
+            if (productoDiv) {
+                productoDiv.remove();
+                updateTotal();
+            }
+        }
 
         function updateSubtotalExistente(id) {
             const cantidad = parseFloat(document.getElementById(`cantidad_${id}`).value) || 0;
@@ -416,7 +372,17 @@
             nuevoCampo.querySelector('.cantidad2').value = '';
             nuevoCampo.querySelector('.descuento_prod').value = '0';
             nuevoCampo.querySelector('.subtotal2').value = '';
+            // Eliminar la clase 'select2-hidden-accessible' y el contenedor generado por select2 antes de clonar
+            $(nuevoCampo).find('.producto2').removeClass('select2-hidden-accessible').next('.select2').remove();
+
+            // Inicializar select2 después de clonar
+            $(nuevoCampo).find('.producto2').select2();
             return nuevoCampo;
+        }
+
+        function eliminarCampo(campo) {
+            campo.remove();
+            updateTotal();  // Actualizar el total después de eliminar un campo
         }
 
         function asignarEventos(campo) {
@@ -432,6 +398,12 @@
                 const subtotal = precio - (precio * (descuento / 100));
                 campo.querySelector('.subtotal2').value = `$${subtotal.toFixed(2)}`;
                 updateTotal();
+            });
+
+            // Asignar evento de eliminación al botón correspondiente
+            const eliminarCampoBtn = campo.querySelector('.eliminarCampo');
+            eliminarCampoBtn.addEventListener('click', function() {
+                eliminarCampo(campo);
             });
 
             cantidadInput.addEventListener('input', function () {
