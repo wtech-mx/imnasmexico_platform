@@ -132,7 +132,12 @@
                         {{ $nota_producto->CursosTickets->Cursos->modalidad }}
                     </td>
                     <td>
-                        {{ $nota_producto->CursosTickets->Cursos->fecha_final }}
+                        @php
+                        $fecha = $nota_producto->CursosTickets->Cursos->fecha_inicial;
+                        $fecha_timestamp = strtotime($fecha);
+                        $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                        @endphp
+                        {{$fecha_formateada}}
                     </td>
                     <td>
                         ${{ $nota_producto->precio }}
