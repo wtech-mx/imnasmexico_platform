@@ -8,6 +8,7 @@
     @php
         $isNoImage = $fileName === 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
     @endphp
+
     <style>
         * {
             padding: 0px;
@@ -114,7 +115,7 @@
         }
 
         .curso{
-            font-size: 17px;
+            font-size: {{ $tam_letra_espec_cedu }}px;
             color: red;
         }
 
@@ -136,13 +137,14 @@
 
         .folio{
             position:relative;
-            font-size:19px;
+            font-size: {{ $tam_letra_foli_cedu }}px;
             color: red;
         }
 
+
         .folio2{
             position:relative;
-            font-size: 25px;
+            font-size: {{ $tam_letra_foli_cedu_tras }}px;
             color: red;
         }
 
@@ -318,15 +320,15 @@
         {{-- <img src="https://plataforma.imnasmexico.com/tipos_documentos/{{ $tipo_documentos->img_reverso }}" class="img_reverso"> --}}
 
         @if(!isset($fileName_logo))
-            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+                <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
 
-        @elseif(empty($fileName_logo))
-            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+            @elseif(empty($fileName_logo))
+                <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
 
-        @elseif($fileName_logo == 'Sin Logo')
-            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
-        @else
-            <img src="{{ $basePath . 'ceudla_trasera_limpia.png' }}" class="img_reverso">
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+            @else
+                <img src="{{ $basePath . 'ceudla_trasera_limpia.png' }}" class="img_reverso">
         @endif
 
         <div class="container4">

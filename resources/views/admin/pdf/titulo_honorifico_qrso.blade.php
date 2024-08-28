@@ -7,7 +7,22 @@
     <title>Titulo Honorifico</title>
     @php
         $isNoImage = $fileName === 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
+
+        $domain = request()->getHost();
+            $basePath = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
+                    : 'tipos_documentos/';
+
+            $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+                    : 'utilidades_documentos/';
+
+            $palabras = explode(' ', ucwords(strtolower($nombre)));
+            $parte1 = implode(' ', array_slice($palabras, 0, 2));
+            $parte2 = implode(' ', array_slice($palabras, 2));
+
     @endphp
+
     <style>
         * {
             padding: 0px;
@@ -38,7 +53,7 @@
         h1 {
             font-family: 'Monotype Corsiva Bold';
             font-weight: 900;
-            font-size: 40px;
+            font-size: {{ $tam_letra_especi }}px;
             color: #353535;
         }
 
@@ -188,7 +203,7 @@
 
         .folio3{
             position:relative;
-            font-size: 15px;
+            font-size: {{ $tam_letra_folio }}px;
             color: red;
         }
 
@@ -307,22 +322,6 @@
 </head>
 
     <body>
-
-        @php
-
-            $domain = request()->getHost();
-            $basePath = ($domain == 'plataforma.imnasmexico.com')
-                    ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
-                    : 'tipos_documentos/';
-
-            $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
-                    ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
-                    : 'utilidades_documentos/';
-
-            $palabras = explode(' ', ucwords(strtolower($nombre)));
-            $parte1 = implode(' ', array_slice($palabras, 0, 2));
-            $parte2 = implode(' ', array_slice($palabras, 2));
-        @endphp
 
         @if(!isset($fileName_logo))
         <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">

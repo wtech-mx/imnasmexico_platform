@@ -284,6 +284,58 @@
 
                                             </div>
 
+                                            <div class="col-6"></div>
+
+                                            <div class="form-group col-3 gc_cn">
+                                                <label for="name">Tamaño Letra Especialidad TH</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="tam_letra_especi" name="tam_letra_especi" type="number" class="form-control" value="40" >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-3 gc_cn">
+                                                <label for="name">Letra Folio TH</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="tam_letra_folio" name="tam_letra_folio" type="number" class="form-control" value="15" >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-3 gc_cn">
+                                                <label for="name">Letra Especialidad Cedula</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="tam_letra_espec_cedu" name="tam_letra_espec_cedu" type="number" class="form-control" value="17" >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-3 gc_cn">
+                                                <label for="name">Letra Folio Cedula</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="tam_letra_foli_cedu" name="tam_letra_foli_cedu" type="number" class="form-control" value="19" >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-3 gc_cn">
+                                                <label for="name">Letra Folio Trasero Cedula</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="tam_letra_foli_cedu_tras" name="tam_letra_foli_cedu_tras" type="number" class="form-control" value="25" >
+                                                </div>
+                                            </div>
+
                                     </div>
 
 
