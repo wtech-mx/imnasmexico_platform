@@ -91,7 +91,7 @@
 
         .container_texto_tira{
             position: absolute;
-            top:40%;
+            top:37%;
             left:23%;
             text-align: left;
             width: 508px;
