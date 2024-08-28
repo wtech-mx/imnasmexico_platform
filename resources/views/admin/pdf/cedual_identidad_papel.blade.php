@@ -153,7 +153,8 @@
             overflow: hidden;
             top: 26.5%;
             left: 4.5%;
-            background: transparent;
+            background: #fff;
+            /* background: transparent; */
         }
 
         .oval {
