@@ -25,7 +25,7 @@
                                     <div class="col-12 mt-2">
                                         <h5 style="color:#783E5D"><strong>Datos del cliente</strong> </h5>
                                     </div>
-
+                                    <input id="id_cliente" name="id_cliente" type="hidden" class="form-control" value="{{ $cotizacion->id_usuario }}" >
                                     @if ($cotizacion->id_usuario == NULL)
 
                                         <div class="form-group col-6">
@@ -163,13 +163,6 @@
                                             @endphp
                                         </div>
                                     @endforeach
-                                    {{-- <div class="col-6 mt-2">
-                                        <h5 style="color:#783E5D"><strong>Total</strong> </h5>
-                                    </div>
-
-                                    <div class="col-6 mt-3">
-                                        <h4 style="color:#783E5D"><strong>${{ $precio }}</strong> </h4>
-                                    </div> --}}
 
                                     <div class="col-12">
                                         <h5 class="mt-5">Seleciona mas productos </h5>
@@ -243,6 +236,24 @@
 
                                     <div class="col-12 mt-2 mb-2">
                                         <h5 style="color:#783E5D"><strong>Pago</strong> </h5>
+                                    </div>
+
+                                    <div class="col-4 ">
+                                        <label for="name">¿Agregar envio? *</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="envio" id="flexRadioNo" value="No"
+                                                @if ($cotizacion->envio == 'No') checked @endif>
+                                            <label class="form-check-label" for="flexRadioNo">
+                                                No
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="envio" id="flexRadioSi" value="Si"
+                                                @if ($cotizacion->envio == 'Si') checked @endif>
+                                            <label class="form-check-label" for="flexRadioSi">
+                                                Si
+                                            </label>
+                                        </div>
                                     </div>
 
                                     <div class="form-group col-4">
