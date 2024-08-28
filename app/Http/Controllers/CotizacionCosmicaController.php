@@ -347,6 +347,19 @@ class CotizacionCosmicaController extends Controller
 
         $nota_productos = ProductosNotasCosmica::where('id_notas_productos', $nota->id)->get();
 
+            // Iterar sobre los productos de la nota para buscar la imagen correspondiente
+        foreach ($nota_productos as $producto_nota) {
+            // Buscar el producto en la tabla de productos que coincida con el nombre
+            $producto = Products::where('nombre', $producto_nota->producto)->first();
+
+            // Si se encuentra el producto, añadir la imagen al array
+            if ($producto) {
+                $producto_nota->imagen_producto = $producto->imagenes;
+            } else {
+                $producto_nota->imagen_producto = null; // O un valor por defecto
+            }
+        }
+
         $usercosmika = Cosmikausers::where('id_cliente','=', $nota->id_usuario)->first();
 
         $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_nota', compact('nota', 'today', 'nota_productos', 'usercosmika'));

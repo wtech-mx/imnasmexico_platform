@@ -79,6 +79,7 @@
     <h1>@if ($usercosmika == NULL) Cotización @else Distribuidora @endif
         Cosmica #@if ($nota->folio == null) {{ $nota->id }} @else {{ $nota->folio }} @endif</h1>
     <h3>Que tu piel brille, como las Estrellas en el Cosmos.</h3>
+
   </header>
 
   <footer>
@@ -141,6 +142,7 @@
     <table class="table table-bordered border-primary">
         <thead class="text-center {{ $usercosmika == NULL ? 'table-cotizacion' : 'table-distribuidora' }}">
             <tr>
+                <th>Imagen</th>
                 <th>Cantidad</th>
                 <th>Producto</th>
                 <th>P.Unit</th>
@@ -150,6 +152,9 @@
         <tbody class="text-center">
             @foreach ($nota_productos as $nota_producto)
                 <tr>
+                    <td>
+                        <img src="{{ $nota_producto->imagen_producto }}" alt="" style="width: 60px">
+                     </td>
                     <td>
                         {{ $nota_producto->cantidad }}
                     </td>
@@ -226,6 +231,46 @@
         <b for="">Telefono Factura:</b> {{ $nota->telefono_fac }} <br>
         <b for="">Dirección:</b> {{ $nota->direccion_fac }}<br>
     @endif
+
+        <table style="width:100%" style="background: #322338;margin-top:6rem;">
+        <tr style="background: #322338">
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr style="background: #322338">
+          <td></td>
+          <td>
+            <p style="text-align: center;"><strong><span style="color: #fff; font-size: 20px;">
+            <img src="https://cosmicaskin.com/wp-content/uploads/2024/06/cosmica.png" alt="" style="width:100px;">
+            <br>Ponte en contacto </span>
+            </strong>
+            </p>
+            <p style="text-align: center;"><strong><span style="color: #fff; font-size: 20px;">
+                <a target="_blank" href="https://www.facebook.com/profile.php?id=61561861013921" target="_blank" >
+                    <img src="https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/fb-white-blue.png" width="35px">
+                </a>
+                <a target="_blank" href="hhttps://www.instagram.com/cosmica.skin/?igsh=MXAwMGkzbW1pMGxnMQ%3D%3D" target="_blank" >
+                    <img src="https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/ins-white-color.png" width="35px">
+                </a>
+                <a target="_blank" href="https://api.whatsapp.com/send?phone=525637540093" target="_blank" >
+                    <img src="https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/wa-white-color.png" width="35px">
+                </a>
+
+            </span></strong>
+            </p>
+            <p style="text-align: center;color: #fff;font-size: 12px;">
+                <strong>Direccion: </strong> <br>
+                Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México
+            </p>
+
+<p style="text-align: center;"><span style="color: #f5f5f5;"><span style="font-size: 12px;"> </span></span></p>
+<p style="text-align: center;"><span style="color: #f5f5f5;"><span style="font-size: 12px;">Si tiene alguna pregunta, envíe un correo electrónico a imnascenter@naturalesainspa.com</span></span></p>
+          </td>
+          <td></td>
+        </tr>
+
+      </table>
 
   </div>
 </body>
