@@ -62,6 +62,11 @@ class Handler extends ExceptionHandler
             if (app()->environment('production')) {
                 $this->sendEmail($subject, $exception);
             }
+
+            // Almacenar el error en la sesión para pasarlo a la vista
+            session()->flash('error_code', $statusCode);
+            session()->flash('error_message', $message);
+            session()->flash('error_trace', $exception->getTraceAsString());
         }
 
         parent::report($exception);

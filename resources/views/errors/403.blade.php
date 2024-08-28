@@ -27,6 +27,14 @@
                 Es posible que la página web a la que intentas acceder esté restringida para ciertos usuarios o que esté protegida por contraseña.
             </p>
 
+            @if(session('error_code') && session('error_message'))
+                <p class="text-center text_error">
+                    <strong>Error Code:</strong> {{ session('error_code') }}<br>
+                    <strong>Message:</strong> {{ session('error_message') }}<br>
+                    <strong>Trace:</strong> <pre>{{ session('error_trace') }}</pre>
+                </p>
+            @endif
+
             <div class="d-flex justify-content-center">
                 <a href="{{ route('user.home') }}" class="btn_error_primario">Regresar al inicio</a>
                 <a href="https://wa.link/g3e1bj" class="btn_error_secundario">Contactar</a>

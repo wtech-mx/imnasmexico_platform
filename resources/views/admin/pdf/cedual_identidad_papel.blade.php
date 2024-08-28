@@ -147,27 +147,26 @@
         }
 
         .oval-container {
-            width: 123px;
+            width: 133px;
             height: 185px;
             position: absolute;
             overflow: hidden;
-            top: 28%;
-            left: 5%;
-            /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
+            top: 26.5%;
+            left: 4.5%;
+            background: transparent;
         }
 
         .oval {
             width: 100%;
             height: 100%;
-            background: #fff;
-            margin: 0;
-            padding: 0;
-            margin-top: 8px;
-            background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-             /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
-            background-size: cover;
-            background-position: center center;
+            object-fit: cover;
+            /* clip-path: ellipse(50% 50% at 50% 50%); */
+            transform: translateX(-50%);
+            left: 50%;
+            position: absolute;
         }
+
+        /* ssssssssssss */
 
         .qr_container{
             width: 100%;
@@ -290,8 +289,7 @@
     </div>
 
         <div class="oval-container">
-            <div class="oval">
-            </div>
+            <img class="oval" src="{{ $basePathUtilidades . $fileName }}" alt="Imagen">
         </div>
 
         <div class="container_registro">
