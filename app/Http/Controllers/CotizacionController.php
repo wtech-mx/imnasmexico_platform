@@ -289,28 +289,42 @@ class CotizacionController extends Controller
         }
 
         $campo = $request->input('campo');
-        $campo4 = $request->input('campo4');
-        $campo3 = $request->input('campo3');
-        $descuento_prod = $request->input('descuento_prod');
+        if(!empty(array_filter($campo, fn($value) => !is_null($value)))){
+            $campo4 = $request->input('campo4');
+            $campo3 = $request->input('campo3');
+            $descuento_prod = $request->input('descuento_prod');
 
-        // Agregar nuevos productos
-        for ($count = 0; $count < count($campo); $count++) {
-            $price = $campo4[$count];
-            $cleanPrice = floatval(str_replace(['$', ','], '', $price));
-            $data = array(
-                'id_notas_productos' => $id,
-                'producto' => $campo[$count],
-                'price' => $cleanPrice,
-                'cantidad' => $campo3[$count],
-                'descuento' => $descuento_prod[$count],
-            );
-            ProductosNotasId::create($data);
-            $total += $cleanPrice;
+            // Agregar nuevos productos
+            for ($count = 0; $count < count($campo); $count++) {
+                $price = $campo4[$count];
+                $cleanPrice = floatval(str_replace(['$', ','], '', $price));
+                $data = array(
+                    'id_notas_productos' => $id,
+                    'producto' => $campo[$count],
+                    'price' => $cleanPrice,
+                    'cantidad' => $campo3[$count],
+                    'descuento' => $descuento_prod[$count],
+                );
+                ProductosNotasId::create($data);
+                $total += $cleanPrice;
+            }
         }
 
         $nota = NotasProductos::findOrFail($id);
-        $nota->tipo = $total;
-        $nota->total = $total;
+
+        if($request->get('envio') == 'No'){
+            $envio = 0;
+            $envio_check = 'No';
+        }else{
+            $envio = 250;
+            $envio_check = 'Si';
+        }
+
+        $total_envio = $total + $envio;
+
+        $nota->tipo = $total_envio;
+        $nota->total = $total_envio;
+        $nota->envio = $envio_check;
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

@@ -244,6 +244,24 @@
                                         <h5 style="color:#836262"><strong>Pago</strong> </h5>
                                     </div>
 
+                                    <div class="col-4 ">
+                                        <label for="name">¿Agregar envio? *</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="envio" id="flexRadioNo" value="No"
+                                                @if ($cotizacion->envio == 'No') checked @endif>
+                                            <label class="form-check-label" for="flexRadioNo">
+                                                No
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="envio" id="flexRadioSi" value="Si"
+                                                @if ($cotizacion->envio == 'Si') checked @endif>
+                                            <label class="form-check-label" for="flexRadioSi">
+                                                Si
+                                            </label>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group col-4">
                                         <label for="name">Subtotal *</label>
                                         <div class="input-group mb-3">
@@ -390,8 +408,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
-
-
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
