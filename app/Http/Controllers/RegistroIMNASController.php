@@ -274,6 +274,10 @@ class RegistroIMNASController extends Controller
         $tam_letra_espec_cedu  = $request->get('tam_letra_espec_cedu');
         $tam_letra_foli_cedu = $request->get('tam_letra_foli_cedu');
         $tam_letra_foli_cedu_tras = $request->get('tam_letra_foli_cedu_tras');
+
+        $tam_letra_tira_afi = $request->get('tam_letra_tira_afi');
+
+
         if ($request->hasFile("img_infantil")) {
             $file = $request->file('img_infantil');
             $path = $ruta_manual;
@@ -472,7 +476,7 @@ class RegistroIMNASController extends Controller
             ->orderBy('id')
             ->get();
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_afiliados',compact('subtemas','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
+            $pdf = PDF::loadView('admin.pdf.tira_materias_afiliados',compact('tam_letra_tira_afi','subtemas','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
              // return $pdf->stream();

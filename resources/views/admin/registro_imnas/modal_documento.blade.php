@@ -336,6 +336,16 @@
                                                 </div>
                                             </div>
 
+                                            <div class="form-group col-3 gc_cn">
+                                                <label for="name">Letra listas materias</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="tam_letra_tira_afi" name="tam_letra_tira_afi" type="number" class="form-control" value="26" >
+                                                </div>
+                                            </div>
+
                                     </div>
 
 

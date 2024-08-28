@@ -98,7 +98,7 @@
         }
 
         .ul_text{
-            font-size: 26px;
+            font-size: {{ $tam_letra_tira_afi }}px;
         }
 
         .img_firma{
