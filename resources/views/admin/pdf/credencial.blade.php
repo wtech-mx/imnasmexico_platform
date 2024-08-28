@@ -147,7 +147,7 @@
             background: transparent;
         }
 
-        .oval-container2{
+        .oval-container2 {
             width: 44px;
             height: 54px;
             position: absolute;
@@ -155,7 +155,6 @@
             top: 24.5%;
             left: 83%;
             background: transparent;
-
         }
 
         .oval {
@@ -167,26 +166,17 @@
             clip-path: ellipse(50% 50% at 50% 50%);
             transform: translateX(-50%);
             left: 50%;
-             background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-            /*background-image: url('utilidades_documentos/{{ $fileName }}');*/
+             /* background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}'); */
+            background-image: url('utilidades_documentos/{{ $fileName }}');
             background-size: cover;
             background-position: center center;
         }
 
-        .oval2 {
+        .oval2 img {
             width: 100%;
             height: 100%;
-            border-radius: 1%;
-            background-color: transparent;
-            position: absolute;
-            clip-path: ellipse(50% 50% at 50% 50%);
-            transform: translateX(-50%);
-            left: 50%;
-             background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-            /* background-image: url('utilidades_documentos/{{ $fileName }}');*/
+            object-fit: cover;
             opacity: 0.5;
-            background-size: cover;
-            background-position: center center;
         }
 
         .container_imgtrasera{
@@ -229,8 +219,6 @@
             height: 35px!important;
         }
 
-
-
     </style>
 
 </head>
@@ -271,14 +259,16 @@
         </div> --}}
 
         <div class="oval-container">
-            <div class="oval">
-            </div>
+            <img src="{{ $basePathUtilidades . $fileName }}" style="width: 92px; height: 112px; clip-path: ellipse(50% 50% at 50% 50%); object-fit: cover;" />
         </div>
 
         <div class="oval-container2">
             <div class="oval2">
+                <img src="{{ $basePathUtilidades . $fileName }}" alt="Imagen Ovalada">
             </div>
         </div>
+
+
         <div class="container2">
             @php
                 // Divide el curso por espacios en blanco
