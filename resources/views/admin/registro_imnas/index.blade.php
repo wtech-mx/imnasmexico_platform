@@ -68,6 +68,10 @@
                                                     <a class="btn btn-sm btn-success" href="{{ route('contrato_afiliacion.edit', $item->id) }}" target="_blank">
                                                         Contraro
                                                     </a>
+
+                                                    <a class="btn btn-sm btn-danger" href="{{ route('show_especialidades.imnas', $item->User->id) }}" target="_blank">
+                                                        Especialidad
+                                                    </a>
                                                 </td>
                                             </tr>
 

@@ -635,6 +635,16 @@ class RegistroIMNASController extends Controller
         }
     }
 
+    public function show_especialidades($id){
+
+        $cliente = User::where('id', $id)->firstOrFail();
+        $especialidades = RegistroImnasEspecialidad::where('id_cliente', $id)->get();
+        $idMaterias = $especialidades->pluck('id');
+        $temario = RegistroImnasTemario::whereIn('id_materia', $idMaterias)->get();
+
+        return view('admin.registro_imnas.show_especialidades', compact('especialidades', 'cliente', 'temario'));
+    }
+
     public function update_guia(Request $request){
         $registro_imnas = RegistroImnas::where('id', $request->id_registro)->firstOrFail();
         $registro_imnas->num_guia = $request->get('num_guia');
