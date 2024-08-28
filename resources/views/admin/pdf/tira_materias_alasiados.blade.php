@@ -130,24 +130,18 @@
             position: absolute;
             overflow: hidden;
             top: 14.8%;
-            right:4.2%;
+            right: 4.2%;
             background: transparent;
         }
 
         .oval {
             width: 100%;
             height: 100%;
-            border-radius: 1%;
-            background-color: transparent;
-            position: absolute;
-            clip-path: ellipse(50% 50% at 50% 50%);
+            object-fit: cover;
+            /* clip-path: ellipse(50% 50% at 50% 50%); */
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-            /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
-            background-size: cover;
-            background-position: center center;
-
+            position: absolute;
         }
 
         .qr_container{
@@ -270,8 +264,7 @@
         </div>
 
         <div class="oval-container">
-            <div class="oval">
-            </div>
+            <img class="oval" src="{{ $basePathUtilidades . $fileName }}" alt="Imagen">
         </div>
 
         <div class="container3">

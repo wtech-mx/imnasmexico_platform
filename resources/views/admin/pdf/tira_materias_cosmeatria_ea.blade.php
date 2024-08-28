@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Tira materterias Cosmeatria</title>
+    <title>Tira materterias Cosmeatria aa</title>
     <style>
         * {
             padding: 0px;
@@ -130,25 +130,20 @@
             position: absolute;
             overflow: hidden;
             top: 14.8%;
-            right:4.2%;
+            right: 4.2%;
             background: transparent;
         }
 
         .oval {
             width: 100%;
             height: 100%;
-            border-radius: 1%;
-            background-color: transparent;
-            position: absolute;
-            clip-path: ellipse(50% 50% at 50% 50%);
+            object-fit: cover;
+            /* clip-path: ellipse(50% 50% at 50% 50%); */
             transform: translateX(-50%);
             left: 50%;
-            background-image: url('https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName }}');
-            /* background-image: url('utilidades_documentos/{{ $fileName }}'); */
-            background-size: cover;
-            background-position: center center;
-
+            position: absolute;
         }
+
 
         .qr_container{
             width: 100%;
@@ -229,15 +224,15 @@
         @endphp
 
             @if(!isset($fileName_logo))
-            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
 
-            @elseif(empty($fileName_logo))
-            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+                @elseif(empty($fileName_logo))
+                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
 
-            @elseif($fileName_logo == 'Sin Logo')
-            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
-            @else
-            <img src="{{ $basePath . 'tira_carrera_logo.png' }}" class="img_portada">
+                @elseif($fileName_logo == 'Sin Logo')
+                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+                @else
+                <img src="{{ $basePath . 'tira_carrera_logo.png' }}" class="img_portada">
             @endif
 
          <div class="container_logo">
@@ -268,9 +263,9 @@
         </div>
 
         <div class="oval-container">
-            <div class="oval">
-            </div>
+            <img class="oval" src="{{ $basePathUtilidades . $fileName }}" alt="Imagen">
         </div>
+
 
         <div class="container3">
             <h4 class="fecha">el dia {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }} </h4>
