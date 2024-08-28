@@ -342,10 +342,33 @@
             <h4 class="folio3">{{$folio}}</h4>
         </div>
 
+        @if(!isset($fileName_logo))
+
+
         <div class="container6">
             <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
             {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
         </div>
+
+        @elseif(empty($fileName_logo))
+
+
+        <div class="container6">
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
+            {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
+        </div>
+
+        @elseif($fileName_logo == 'Sin Logo')
+
+
+        <div class="container6">
+            <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma">
+            {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
+        </div>
+        @else
+
+        @endif
+
 
         <div class="container_imgtrasera">
             <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
