@@ -111,7 +111,7 @@
         }
 
         .curso{
-            font-size:8px;
+            font-size: {{ $tam_letra_esp_cred }}px;
             color: red;
         }
 
@@ -243,15 +243,15 @@
         @endphp
 
         @if(!isset($fileName_logo))
-            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
 
-        @elseif(empty($fileName_logo))
-            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+            @elseif(empty($fileName_logo))
+                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
 
-        @elseif($fileName_logo == 'Sin Logo')
-            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
-        @else
-            <img src="{{ $basePath . 'crdecnia_frontal_limpia.png' }}" class="img_portada">
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+            @else
+                <img src="{{ $basePath . 'crdecnia_frontal_limpia.png' }}" class="img_portada">
         @endif
 
         {{-- <div class="container">

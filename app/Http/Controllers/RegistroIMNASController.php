@@ -277,6 +277,7 @@ class RegistroIMNASController extends Controller
 
         $tam_letra_tira_afi = $request->get('tam_letra_tira_afi');
 
+        $tam_letra_esp_cred = $request->get('tam_letra_esp_cred');
 
         if ($request->hasFile("img_infantil")) {
             $file = $request->file('img_infantil');
@@ -422,7 +423,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad', 'fileName_logo'));
+            $pdf = PDF::loadView('admin.pdf.credencial',compact('tam_letra_esp_cred','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad', 'fileName_logo'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
             return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
