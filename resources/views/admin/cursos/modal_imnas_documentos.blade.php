@@ -4,7 +4,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="modal_documentosLabel">Generar Diploma y/o Certificacion</h1>
+          <h1 class="modal-title fs-5" id="modal_documentosLabel">Generar Diploma y/o Certificacion IMNAS</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
@@ -236,7 +236,7 @@
                                                 @if ($order->User->Documentos->foto_tam_infantil !== null)
 
                                                     <div class="form-group col-6 gc_cn">
-                                                        <label for="name">Fotografia *</label>
+                                                        <label for="name">Fotografia * .</label>
                                                         <div class="input-group">
                                                             <span class="input-group-text" id="basic-addon1">
                                                                 <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
@@ -250,12 +250,30 @@
                                                         @else
                                                             <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_tam_infantil) }}" alt="Imagen" style="width: 100px;height: 100px;">
                                                         @endif
-                                                </div>
+                                                    </div>
+
+                                                    <div class="form-group col-6 gc_cn">
+                                                        <label for="name">Fotografia 2*</label> <br>
+
+
+                                                        @if ($order->User->Documentos && $order->User->Documentos->foto_infantil_blanco)
+                                                            @if (pathinfo($order->User->Documentos->foto_infantil_blanco, PATHINFO_EXTENSION) == 'pdf')
+                                                                <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_infantil_blanco) }}" download="{{ $order->User->Documentos->foto_infantil_blanco }}" style="background: #836262; border-radius: 19px;">
+                                                                    Descargar Documento
+                                                                </a>
+                                                            @else
+                                                                <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_infantil_blanco) }}" alt="Imagen" style="width: 100px;height: 100px;">
+                                                            @endif
+                                                        @else
+                                                            <p>No se ha subido ninguna fotografía.</p>
+                                                        @endif
+                                                    </div>
+
 
                                                 @endif
                                                 @else
                                                 <div class="form-group col-6 gc_cn">
-                                                    <label for="name">Fotografia *</label>
+                                                    <label for="name">Fotografia * ..</label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
@@ -263,6 +281,23 @@
                                                         <input id="img_infantil" name="img_infantil" type="file" class="form-control"  >
                                                     </div>
                                                 </div>
+
+                                                <div class="form-group col-6 gc_cn">
+                                                    <label for="name">Fotografia 2*</label>
+
+                                                    @if ($order->User->Documentos && $order->User->Documentos->foto_infantil_blanco)
+                                                        @if (pathinfo($order->User->Documentos->foto_infantil_blanco, PATHINFO_EXTENSION) == 'pdf')
+                                                            <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_infantil_blanco) }}" download="{{ $order->User->Documentos->foto_infantil_blanco }}" style="background: #836262; border-radius: 19px;">
+                                                                Descargar Documento
+                                                            </a>
+                                                        @else
+                                                            <img id="blah" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_infantil_blanco) }}" alt="Imagen" style="width: 100px;height: 100px;">
+                                                        @endif
+                                                    @else
+                                                        <p>No se ha subido ninguna fotografía.</p>
+                                                    @endif
+                                                </div>
+
                                             @endif
 
                                             <div class="form-group col-6 gc_cn">
@@ -460,7 +495,7 @@
                                                 @if ($order->User->Documentos->foto_tam_infantil !== null)
 
                                                     <div class="form-group col-6 gc_cn">
-                                                        <label for="name">Fotografia *</label>
+                                                        <label for="name">Fotografia * ...</label>
                                                         <div class="input-group">
                                                             <span class="input-group-text" id="basic-addon1">
                                                                 <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
