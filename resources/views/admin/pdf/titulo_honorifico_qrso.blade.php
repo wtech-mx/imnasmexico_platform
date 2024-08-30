@@ -50,12 +50,38 @@
             src: url('{{ storage_path('fonts/Brush.ttf') }}') format('truetype');
         }
 
+        @font-face {
+            font-family: 'bethaine';
+            font-style: normal;
+            font-weight: 900;
+            src: url('{{ storage_path('fonts/bethaine.ttf') }}') format('truetype');
+        }
+
         h1 {
             font-family: 'Monotype Corsiva Bold';
             font-weight: 900;
             font-size: {{ $tam_letra_especi }}px;
             color: #353535;
         }
+
+        h6 {
+            font-family: 'bethaine';
+            font-weight: 900;
+            font-size: 33px;
+            margin: -60px 0 0 0;
+            color: #353535;
+            line-height: 0.45; /* Ajusta el valor según necesites */
+        }
+
+        h7 {
+            font-family: 'bethaine';
+            font-weight: 900;
+            font-size: 33px;
+            margin: -60px 0 0 0;
+            color: #353535;
+            line-height: 0.45; /* Ajusta el valor según necesites */
+        }
+
 
         h2 {
             font-family: 'Monotype Corsiva Normal';
@@ -69,6 +95,7 @@
             font-weight: normal;
             font-size: 21px;
             color: #000;
+                line-height: 1.2; /* Ajusta el valor según necesites */
         }
 
         .img_portada {
@@ -302,16 +329,17 @@
 
         .container_firma_director_front{
             position: absolute;
-            top: 1225px;
+            top: 1215px;
             left: 50%;
             transform: translateX(-50%);
         }
 
         .container_firma_director{
             position: absolute;
-            top: 1150px;
+            top: 1230px;
             left: 60%;
-            transform: translateX(-50%);
+            transform: translate(-50%, -50%);
+            text-align: center;
         }
 
         .firma_img{
@@ -324,20 +352,20 @@
     <body>
 
         @if(!isset($fileName_logo))
-        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
-
-        @elseif(empty($fileName_logo))
-        <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
-
-        @elseif($fileName_logo == 'Sin Logo')
             <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
-        @else
+
+            @elseif(empty($fileName_logo))
+            <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+            @elseif($fileName_logo == 'Sin Logo')
+                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+            @else
 
             @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
                 <img src="{{ $basePath . 'titulo_frontal_limpio_sin_firma_front.png' }}" class="img_portada">
                 <div class="container_firma_director_front">
                     <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img">
-                    <p style="font-size:10px;text-align: center;">Firma del Director(a)</p>
+                    <h6 style="text-align: center;">{{ $director }} <br> Firma del Director(a)</h6>
                 </div>
             @else
                 <img src="{{ $basePath . 'titulo_frontal_limpio.png' }}" class="img_portada">
@@ -438,26 +466,26 @@
         </div>
 
         @if(!isset($fileName_logo))
-        <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
 
-        @elseif(empty($fileName_logo))
-        <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+            @elseif(empty($fileName_logo))
+            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
 
-        @elseif($fileName_logo == 'Sin Logo')
-        <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
-        @else
+            @elseif($fileName_logo == 'Sin Logo')
+            <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
+            @else
 
-        @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
-            <img src="{{ $basePath . 'titulo_reverso_limpio_firma_director.png' }}" class="img_reverso">
-            <div class="container_firma_director">
-                <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img">
-                <p style="font-size:10px;text-align: center;">Firma del Director(a)</p>
-            </div>
-        @else
-            <img src="{{ $basePath . 'titulo_reverso_limpio.png' }}" class="img_reverso">
-        @endif
+            @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
+                <img src="{{ $basePath . 'titulo_reverso_limpio_firma_director.png' }}" class="img_reverso">
+                <div class="container_firma_director">
+                    <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img"><br>
+                    <h7>{{ $director }} <br> Firma del Director(a)</h7>
+                </div>
+            @else
+                <img src="{{ $basePath . 'titulo_reverso_limpio.png' }}" class="img_reverso">
+            @endif
 
-        @endif
+            @endif
 
         @php
             // Divide el curso por espacios en blanco

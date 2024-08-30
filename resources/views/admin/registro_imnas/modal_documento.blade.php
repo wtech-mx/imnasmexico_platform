@@ -32,6 +32,7 @@
 
                             <input type="hidden" name="email" id="email" value="{{ $registro_imnas->User->email }}">
                             <input type="hidden" name="id_registro" id="id_registro" value="{{ $registro_imnas->id }}">
+                            <input type="hidden" name="director" value=" {{$cliente->name}}">
 
                             <div class="row">
                                     <input id="id_order" name="id_order" type="text" class="form-control" value="{{ $registro_imnas->id_order }}" style="display: none">

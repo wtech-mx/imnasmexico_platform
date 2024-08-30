@@ -19,5 +19,11 @@
     },
     "oldenglishtextmt normal": {
         "normal": "oldenglishtextmt_normal_normal_be09d5e4ae6dcb3d03f2ab34853cc73c"
+    },
+    "monotype": {
+        "normal": "monotype_normal_be09d5e4ae6dcb3d03f2ab34853cc73c"
+    },
+    "bethaine": {
+        "900": "bethaine_900_cb182ef5b81f9693517c94fb4fc5f6df"
     }
 }
