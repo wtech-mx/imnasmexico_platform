@@ -76,7 +76,7 @@
         h7 {
             font-family: 'bethaine';
             font-weight: 900;
-            font-size: 33px;
+            font-size: 27px;
             margin: -60px 0 0 0;
             color: #353535;
             line-height: 0.45; /* Ajusta el valor según necesites */
@@ -336,7 +336,7 @@
 
         .container_firma_director{
             position: absolute;
-            top: 1230px;
+            top: 1240px;
             left: 60%;
             transform: translate(-50%, -50%);
             text-align: center;
