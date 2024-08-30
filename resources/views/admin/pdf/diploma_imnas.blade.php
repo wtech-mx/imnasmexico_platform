@@ -16,6 +16,24 @@
             src: url('https://plataforma.imnasmexico.com/assets/admin/fonts/Minion.ttf');
         }
 
+        @font-face {
+            font-family: 'bethaine';
+            font-style: normal;
+            font-weight: 900;
+            src: url('{{ storage_path('fonts/bethaine.ttf') }}') format('truetype');
+        }
+
+        h6 {
+            font-family: 'bethaine';
+            font-weight: 900;
+            font-size: 33px;
+            margin: -60px 0 0 0;
+            color: #353535;
+            line-height: 0.45; /* Ajusta el valor según necesites */
+
+        }
+
+
         .img_portada {
             width: 812px;
             height:1280px;
@@ -233,7 +251,7 @@
                     <img src="{{ $basePath . 'diploma_logo_firma_director.png' }}" class="img_portada">
                     <div class="container_firma_director">
                         <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img">
-                        <p style="font-size:10px;text-align: center;">Firma del Director(a)</p>
+                        <h6>{{ $director }} <br> Firma del Director(a)</h6>
                     </div>
                 @else
                     <img src="{{ $basePath . 'diploma_fontal_limpio.png' }}" class="img_portada">
