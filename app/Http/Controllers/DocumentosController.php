@@ -308,7 +308,7 @@ class DocumentosController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.credencial',compact('tam_letra_esp_cred','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.credencial',compact('tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
             return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
@@ -496,6 +496,17 @@ class DocumentosController extends Controller
         $apellido_apeterno = $request->get('apellido_apeterno');
         $apellido_materno = $request->get('apellido_materno');
 
+        $tam_letra_especi = $request->get('tam_letra_especi');
+        $tam_letra_folio = $request->get('tam_letra_folio');
+
+        $tam_letra_espec_cedu  = $request->get('tam_letra_espec_cedu');
+        $tam_letra_foli_cedu = $request->get('tam_letra_foli_cedu');
+        $tam_letra_foli_cedu_tras = $request->get('tam_letra_foli_cedu_tras');
+
+        $tam_letra_tira_afi = $request->get('tam_letra_tira_afi');
+
+        $tam_letra_esp_cred = $request->get('tam_letra_esp_cred');
+
         if ($request->hasFile("img_infantil")) {
             $file = $request->file('img_infantil');
             $path = $ruta_manual;
@@ -580,7 +591,8 @@ class DocumentosController extends Controller
                 $ticket->folio = $request->get('folio');
                 $ticket->update();
 
-                $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+
+                $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('tam_letra_foli_cedu_tras','tam_letra_foli_cedu','tam_letra_espec_cedu','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
                 $pdf->setPaper('A4', 'portrait');
                 $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
 
@@ -593,7 +605,7 @@ class DocumentosController extends Controller
                 $ticket->folio = $request->get('folio');
                 $ticket->update();
 
-                $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+                $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
                 // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
                 $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
@@ -651,7 +663,7 @@ class DocumentosController extends Controller
                 $ancho_puntos = $ancho_cm * 28.35;
                 $alto_puntos = $alto_cm * 28.35;
 
-                $pdf = PDF::loadView('admin.pdf.credencial',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
+                $pdf = PDF::loadView('admin.pdf.credencial',compact('tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
                 $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
                 return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
