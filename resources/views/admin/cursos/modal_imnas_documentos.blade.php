@@ -1,6 +1,6 @@
 <!-- Modal -->
 <div class="modal fade" id="modal_imnas_documentos_{{ $order->User->id }}" tabindex="-1" aria-labelledby="modal_documentosLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
 
         <div class="modal-header">
