@@ -308,7 +308,7 @@ class DocumentosController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.credencial',compact('tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.credencial',compact('tam_letra_esp_cred','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
             return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
@@ -663,7 +663,7 @@ class DocumentosController extends Controller
                 $ancho_puntos = $ancho_cm * 28.35;
                 $alto_puntos = $alto_cm * 28.35;
 
-                $pdf = PDF::loadView('admin.pdf.credencial',compact('tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
+                $pdf = PDF::loadView('admin.pdf.credencial',compact('tam_letra_esp_cred','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad'));
                 $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
                 return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
