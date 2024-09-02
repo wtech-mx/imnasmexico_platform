@@ -863,7 +863,7 @@ class RegistroIMNASController extends Controller
             $path = $ruta_manual;
             $fileName = uniqid() . $file->getClientOriginalName();
             $file->move($path, $fileName);
-            $order->foto = $request->get('foto');
+            $order->foto = $fileName;
         }
 
         $order->forma_pago = $request->get('forma_pago');
@@ -874,7 +874,7 @@ class RegistroIMNASController extends Controller
             $path = $ruta_manual;
             $fileName = uniqid() . $file->getClientOriginalName();
             $file->move($path, $fileName);
-            $order->foto2 = $request->get('foto2');
+            $order->foto2 = $fileName;
         }
 
         $order->forma_pago2 = $request->get('forma_pago2');
