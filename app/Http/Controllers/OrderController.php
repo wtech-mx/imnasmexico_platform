@@ -798,13 +798,27 @@ class OrderController extends Controller
           //  Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
         }
 
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera');
+        }else{
+            $pago_fuera = public_path() . '/pago_fuera';
+        }
+        
         $order = new Orders;
         $order->id_usuario = $payer->id;
         $order->pago = $request->precio;
-        $order->forma_pago = 'Externo';
+        $order->forma_pago = $request->forma_pago;
         $order->fecha = $fechaActual;
         $order->estatus = 1;
         $order->code = $code;
+        if ($request->hasFile("foto")) {
+            $file = $request->file('foto');
+            $path = $pago_fuera;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $order->foto = $fileName;
+        }
         $order->save();
 
         $order_ticket = new OrdersTickets;
@@ -843,16 +857,15 @@ class OrderController extends Controller
             $duracion_hrs = $horas_default;
             $tipo_documentos = Tipodocumentos::first();
 
-            if ($details->Cursos->modalidad == 'Online') {
-                Mail::to($payer->email)->send(new PlantillaTicket($details));
-            } else {
-                Mail::to($payer->email)->send(new PlantillaTicketPresencial($details));
-            }
-
             if($details->Cursos->stps == '1'){
                 $id_ticket = $order_ticket->id;
                 $ticket = OrdersTickets::find($id_ticket);
                 $ticket->estatus_doc = '1';
+                $ticket->estatus_cedula = '1';
+                $ticket->estatus_titulo = '1';
+                $ticket->estatus_diploma = '1';
+                $ticket->estatus_credencial = '1';
+                $ticket->estatus_tira = '1';
                 $ticket->update();
 
                 $sello = 'Si';
