@@ -92,7 +92,10 @@
             font-family: 'Minion';
             font-size: 25px;
             color: #000;
-        }
+            <?php if($capitalizar == 'Si'): ?>
+                text-transform: uppercase;
+            <?php endif; ?>
+    }
 
         .fecha{
             font-size: 15px;

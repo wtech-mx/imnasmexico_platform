@@ -133,6 +133,9 @@
             font-family: 'Minion', sans-serif;
             font-size: 17px;
             color: #000;
+            <?php if($capitalizar == 'Si'): ?>
+                text-transform: uppercase;
+            <?php endif; ?>
         }
 
         .folio{

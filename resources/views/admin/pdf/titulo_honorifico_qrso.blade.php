@@ -88,6 +88,9 @@
             font-weight: normal;
             font-size: 45px;
             color: #000;
+            <?php if($capitalizar == 'Si'): ?>
+                text-transform: uppercase;
+            <?php endif; ?>
         }
 
         h5 {
@@ -485,7 +488,7 @@
                 <img src="{{ $basePath . 'titulo_reverso_limpio.png' }}" class="img_reverso">
             @endif
 
-            @endif
+        @endif
 
         @php
             // Divide el curso por espacios en blanco
