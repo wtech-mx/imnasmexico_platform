@@ -513,6 +513,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('cosmica/protocolos/index', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index_protocolos'])->name('protocolos.index');
 
+    // =============== M O D U L O   M A N U A L ===============================
+    Route::get('cam/notas/', [App\Http\Controllers\CamNotasController::class, 'index'])->name('cam_users.index');
+    Route::get('cam/checklist/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'checklist'])->name('independiente.checklist');
 });
 
 // Route::get('registro/login', function () {
