@@ -129,7 +129,9 @@
                                     </tr>
                                     <tr>
                                         <td colspan="10" style="width:506.8pt;border:solid windowtext 1.0pt;border-top:none;background:white;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'> $datodinamico </span></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                            </p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -139,12 +141,22 @@
                                     </tr>
                                     <tr>
                                         <td colspan="10" style="width:506.8pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                            </p>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="7" style="width:253.65pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><em><span style='font-family:"Calibri",sans-serif;'>DIRECCI&Oacute;N (CALLE Y N&Uacute;MERO)</span></em></strong></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                <strong>
+                                                    <em>
+                                                        <span style='font-family:"Calibri",sans-serif;'>DIRECCI&Oacute;N (CALLE Y N&Uacute;MERO)</span>
+
+                                                    </em>
+                                                </strong>
+
+                                            </p>
                                         </td>
                                         <td colspan="3" style="width:253.15pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><em><span style='font-family:"Calibri",sans-serif;'>COLONIA</span></em></strong></p>
@@ -152,10 +164,16 @@
                                     </tr>
                                     <tr>
                                         <td colspan="7" style="width:253.65pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+
+                                            </p>
                                         </td>
                                         <td colspan="3" style="width:253.15pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+
+                                            </p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -171,13 +189,22 @@
                                     </tr>
                                     <tr>
                                         <td colspan="4" style="width:124.0pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                <input type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+
+                                            </p>
                                         </td>
                                         <td colspan="5" style="width:219.85pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+
+                                            </p>
                                         </td>
                                         <td style="width:162.95pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+
+                                            </p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -193,13 +220,22 @@
                                     </tr>
                                     <tr>
                                         <td colspan="6" style="width:159.65pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                <input type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+
+                                            </p>
                                         </td>
                                         <td colspan="2" style="width:134.5pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+
+                                            </p>
                                         </td>
                                         <td colspan="2" style="width:212.65pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                <input type="email" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+
+                                            </p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -207,7 +243,9 @@
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>TELEFONO ALTERNO&nbsp;</span></strong></p>
                                         </td>
                                         <td colspan="5" style="width:372.1pt;border-top:none;border-left:  none;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:42.35pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                 <input type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                            </p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -215,7 +253,9 @@
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>CORREO ELECTR&Oacute;NICO ALTERNO</span></strong></p>
                                         </td>
                                         <td colspan="5" style="width:372.1pt;border-top:none;border-left:  none;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:36.9pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                 <input type="email" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                            </p>
                                         </td>
                                     </tr>
                                     <tr>
