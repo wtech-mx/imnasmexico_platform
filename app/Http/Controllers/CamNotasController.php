@@ -318,7 +318,7 @@ class CamNotasController extends Controller
         return view('admin.notas_cam.cam_users.formato');
     }
 
-    public function programa(){
+    public function edit_programa($code){
 
         return view('admin.notas_cam.cam_users.programa');
     }

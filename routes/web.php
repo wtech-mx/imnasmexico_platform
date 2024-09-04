@@ -529,8 +529,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('cam/formato/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_formato'])->name('edit_independiente.formato');
     Route::patch('cam/formato/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'formato_independiente'])->name('independiente.formato');
 
-    Route::get('cam/programa/independiente', [App\Http\Controllers\CamNotasController::class, 'programa'])->name('independiente.programa');
+    Route::get('cam/formato/programa/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_programa'])->name('edit_independiente.programa');
+    Route::patch('cam/formato/programa/{id}', [App\Http\Controllers\CamNotasController::class, 'programa_independiente'])->name('independiente.programa');
 
+    Route::get('cam/programa/independiente', [App\Http\Controllers\CamNotasController::class, 'programa'])->name('independiente.programa');
 
 });
 

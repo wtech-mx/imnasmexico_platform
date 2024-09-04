@@ -94,7 +94,9 @@
                                         <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><strong><span style="font-size:16px;">Raz&oacute;n Social:</span></strong></p>
                                     </td>
                                     <td style="width: 334.5pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style="font-size:16px;">&nbsp;</span></p>
+                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>
+                                            <input id="direccion" name="direccion" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" >
+                                        </p>
                                         <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style="font-size:16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
                                     </td>
                                 </tr>
@@ -103,7 +105,9 @@
                                         <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><strong><span style="font-size:16px;">Fecha:</span></strong></p>
                                     </td>
                                     <td style="width: 334.5pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style="font-size:16px;">&nbsp;</span></p>
+                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>
+                                            <input id="direccion" name="direccion" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" >
+                                        </p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -111,7 +115,9 @@
                                         <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><strong><span style="font-size:16px;">Responsable de la entrega</span></strong></p>
                                     </td>
                                     <td style="width: 334.5pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style="font-size:16px;">&nbsp;</span></p>
+                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>
+                                            <input id="direccion" name="direccion" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" >
+                                        </p>
                                     </td>
                                 </tr>
                                 <tr>
@@ -119,7 +125,9 @@
                                         <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><strong><span style="font-size:16px;">Recibe y verifica la entrega</span></strong></p>
                                     </td>
                                     <td style="width: 334.5pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style="font-size:16px;">&nbsp;</span></p>
+                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>
+                                            <input id="direccion" name="direccion" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" >
+                                        </p>
                                     </td>
                                 </tr>
                             </tbody>
@@ -152,10 +160,14 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>

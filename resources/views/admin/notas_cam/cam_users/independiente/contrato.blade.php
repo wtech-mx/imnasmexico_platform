@@ -491,7 +491,7 @@
                                             “EVALUADOR INDEPENDIENTE”
                                         </h6>
                                         <button id="clear2" class="btn btn-sm btn-danger ">Repetir Firma</button>
-                                        <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                        <button type="submit" class="btn btn-sm btn-success">Guardar firma</button>
                                     @else
                                         <img src="{{asset('documentos/'. $cliente->telefono . '/' .$contrato_cam->firma) }}" alt="" width="50%">
                                         <h6 class="text-left mt-3 mb-3">

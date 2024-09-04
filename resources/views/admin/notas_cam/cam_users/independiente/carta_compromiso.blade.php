@@ -151,7 +151,7 @@
                                             <div id="sig2"></div>
                                             <textarea id="signed2" name="signed2" style="display: none"></textarea>
                                             <button id="clear2" class="btn btn-sm btn-danger ">Repetir Firma</button>
-                                            <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                            <button type="submit" class="btn btn-sm btn-success">Guardar firma</button>
                                         @else
                                             <img src="{{asset('documentos/'. $cliente->telefono . '/' .$notas_cam->firma_carta) }}" alt="" width="50%">
                                         @endif

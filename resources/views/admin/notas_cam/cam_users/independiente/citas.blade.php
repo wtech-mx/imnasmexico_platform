@@ -144,13 +144,14 @@
                                 @if ($cita_cam->firma == NULL)
                                     <div id="sig"></div>
                                     <textarea id="signed" name="signed" style="display: none"></textarea>
+
                                     <button id="clear" class="btn btn-sm btn-danger ">Repetir Firma</button>
                                 @else
                                     <img src="{{asset('documentos/'. $cliente->telefono . '/' .$cita_cam->firma) }}" alt="" width="50%">
                                 @endif
 
                                 @if ($cita_cam->firma == NULL)
-                                     <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                     <button type="submit" class="btn btn-sm btn-success">Guardar firma</button>
                                 @endif
                             </div>
 

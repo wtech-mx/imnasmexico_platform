@@ -25,14 +25,6 @@
                                     Crear
                                 </a>
 
-                                <a class="btn btn-sm btn-success" href="" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                    <i class="fa fa-fw fa-edit"></i> Cheklist
-                                </a>
-
-                                <a class="btn btn-sm btn-success" href="{{ route('independiente.programa') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                    <i class="fa fa-fw fa-edit"></i> Programa de Citas
-                                </a>
-
                         </div>
                     </div>
 
@@ -58,21 +50,25 @@
                                                     @endif
                                                 </th>
                                                 <td>
-                                                    <a href="{{ route('edit_independiente.citas', $nota_cam->Cliente->code) }}" style="text-decoration: underline;color:rgb(0, 110, 255)">
+                                                    <a target="_blank" class="btn btn-xs btn-primary" href="{{ route('edit_independiente.citas', $nota_cam->Cliente->code) }}" >
                                                         Citas
-                                                    </a><br>
+                                                    </a>
 
-                                                    <a href="{{ route('edit_independiente.contrato', $nota_cam->Cliente->code) }}" style="text-decoration: underline;color:rgb(0, 110, 255)">
+                                                    <a target="_blank" class="btn btn-xs btn-danger" href="{{ route('edit_independiente.contrato', $nota_cam->Cliente->code) }}" >
                                                         Contrato
-                                                    </a><br>
+                                                    </a>
 
-                                                    <a href="{{ route('edit_independiente.carta', $nota_cam->Cliente->code) }}" style="text-decoration: underline;color:rgb(0, 110, 255)">
+                                                    <a target="_blank" class="btn btn-xs btn-warning" href="{{ route('edit_independiente.carta', $nota_cam->Cliente->code) }}" >
                                                         Carta
-                                                    </a><br>
+                                                    </a>
 
-                                                    <a href="{{ route('edit_independiente.formato', $nota_cam->Cliente->code) }}" style="text-decoration: underline;color:rgb(0, 110, 255)">
+                                                    <a target="_blank" class="btn btn-xs btn-success" href="{{ route('edit_independiente.formato', $nota_cam->Cliente->code) }}" >
                                                         Formato
-                                                    </a><br>
+                                                    </a>
+
+                                                    <a target="_blank" class="btn btn-xs btn-dark" href="{{ route('edit_independiente.programa', $nota_cam->Cliente->code) }}" >
+                                                        CHECK LIST
+                                                    </a>
 
                                                 </td>
                                             </tr>
