@@ -254,9 +254,6 @@
     <script type="text/javascript" src="https://paradisus.mx/assets/js/jquery.signature.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'></script>
 
-
-
-
 	<script type="text/javascript" class="init">
 
         $(document).ready(function(){
@@ -277,7 +274,6 @@
                 sig2.signature('clear');
                 $("#signed2").val('');
             });
-
 
         });
 

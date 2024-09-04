@@ -516,6 +516,13 @@ Route::group(['middleware' => ['auth']], function() {
     // =============== M O D U L O   M A N U A L ===============================
     Route::get('cam/notas/', [App\Http\Controllers\CamNotasController::class, 'index'])->name('cam_users.index');
     Route::get('cam/checklist/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'checklist'])->name('independiente.checklist');
+
+    Route::get('cam/carta_compromiso/independiente', [App\Http\Controllers\CamNotasController::class, 'carta_compromiso'])->name('independiente.carta_compromiso');
+    Route::get('cam/contrato/independiente', [App\Http\Controllers\CamNotasController::class, 'contrato'])->name('independiente.contrato');
+    Route::get('cam/formato/independiente', [App\Http\Controllers\CamNotasController::class, 'formato'])->name('independiente.formato');
+    Route::get('cam/programa/independiente', [App\Http\Controllers\CamNotasController::class, 'programa'])->name('independiente.programa');
+
+
 });
 
 // Route::get('registro/login', function () {

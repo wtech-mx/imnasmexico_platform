@@ -25,6 +25,26 @@
                                     <i class="fa fa-fw fa-edit"></i> Crear
                                 </a>
 
+                                <a class="btn btn-sm btn-success" href="{{ route('independiente.carta_compromiso') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    <i class="fa fa-fw fa-edit"></i> Carta Compromiso
+                                </a>
+
+                                <a class="btn btn-sm btn-success" href="" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    <i class="fa fa-fw fa-edit"></i> Cheklist
+                                </a>
+
+                                <a class="btn btn-sm btn-success" href="{{ route('independiente.contrato') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    <i class="fa fa-fw fa-edit"></i> Contrato
+                                </a>
+
+                                <a class="btn btn-sm btn-success" href="{{ route('independiente.formato') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    <i class="fa fa-fw fa-edit"></i> Formato Solicitud
+                                </a>
+
+                                <a class="btn btn-sm btn-success" href="{{ route('independiente.programa') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                                    <i class="fa fa-fw fa-edit"></i> Programa de Citas
+                                </a>
+
                         </div>
                     </div>
 
