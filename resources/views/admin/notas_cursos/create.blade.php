@@ -150,7 +150,7 @@
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
                                             </span>
-                                            <input id="foto" name="foto" type="file" class="form-control" placeholder="foto" required>@error('foto') <span class="error text-danger">{{ $message }}</span> @enderror
+                                            <input id="foto" name="foto" type="file" class="form-control" placeholder="foto">
                                         </div>
                                     </div>
 
