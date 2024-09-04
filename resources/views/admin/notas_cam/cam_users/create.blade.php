@@ -3,28 +3,17 @@
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="createDataModalLabel"># Nota:{{$siguienteId}}</h5>
+                <h5 class="modal-title" id="createDataModalLabel">Nota CAM</h5>
 
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
                     <span aria-hidden="true">X</span>
                 </button>
             </div>
 
-            <form method="POST" action="{{ route('crear.notas') }}" enctype="multipart/form-data" role="form">
+            <form method="POST" action="{{ route('cam_users.store') }}" enctype="multipart/form-data" role="form">
                 @csrf
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-4">
-                                <div class="form-group">
-                                    <label for="name">Fecha *</label>
-                                    <div class="input-group mb-3">
-                                        <span class="input-group-text" id="basic-addon1">
-                                            <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
-                                        </span>
-                                        <input id="fecha" name="fecha" type="date" class="form-control" value="{{$fecha}}" required>
-                                    </div>
-                                </div>
-                            </div>
 
                             <div class="col-4">
                                 <div class="form-group">
@@ -37,7 +26,6 @@
                                             <option value="">Seleccione una opción</option>
                                             <option value="Evaluador Independiente" {{ old('tipo') == 'Evaluador Independiente' ? 'selected' : '' }}>Evaluador Independiente</option>
                                             <option value="Centro Evaluación" {{ old('tipo') == 'Centro Evaluación' ? 'selected' : '' }}>Centro Evaluación</option>
-                                            <option value="Compra Estandar" {{ old('tipo') == 'Compra Estandar' ? 'selected' : '' }}>Compra Estandar</option>
                                         </select>
                                     </div>
                                 </div>
@@ -78,7 +66,7 @@
 
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="name">Celular (WhatasApp) *</label>
+                                    <label for="name">Celular *</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/whatsapp.png') }}" alt="" width="35px">
@@ -100,22 +88,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-12">
-                                <h5>Seleccionar Estándares *</h5>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple" required>
-                                        @foreach ($estandares_cam as $estandar_cam)
-                                            <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
-                                                {{$estandar_cam->nombre}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
                         </div>
 
                     </div>
@@ -129,12 +101,3 @@
         </div>
     </div>
 </div>
-@section('datatable')
-<script src="{{ asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script>
-<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-multiple').select2();
-    });
-</script>
-@endsection

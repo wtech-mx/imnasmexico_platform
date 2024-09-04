@@ -67,6 +67,21 @@
         }
         }
 
+        .underline-input {
+            border: none; /* Elimina el borde del input */
+            border-bottom: 1px solid black; /* Agrega una línea inferior */
+            width: 300px; /* Ajusta el ancho del input, cámbialo según lo necesites */
+            outline: none; /* Elimina el contorno al hacer clic */
+            padding: 5px 0; /* Ajusta el espacio interior */
+            font-size: 16px; /* Tamaño de la fuente */
+            background: none; /* Elimina el fondo */
+            display: inline-block; /* Asegura que el input esté en línea con el texto */
+            vertical-align: middle; /* Alinea el input verticalmente al medio del texto */
+        }
+
+        .underline-input::placeholder {
+            color: grey; /* Cambia el color del texto del placeholder */
+        }
     </style>
 
     <section class="row">
@@ -75,6 +90,9 @@
                 <div class="col-0 col-md-2 col-lg-3"></div>
                 <div class="col-12 col-md-8 col-lg-6">
 
+                <form method="POST" class="row" action="{{ route('independiente.contrato', $cliente->id) }}" enctype="multipart/form-data" role="form">
+                    @csrf
+                    <input type="hidden" name="_method" value="PATCH">
                     <div class="row">
 
                         <div class="col-12">
@@ -84,7 +102,7 @@
                                 PARTE, EL INSTITUTO MEXICANO NATURALES AIN SPA S. C., A QUIEN EN LO SUCESIVO SE
                                 DENOMINARÁ <strong>“ECE356-18 INSTITUTO MEXICANO NATURALES AIN SPA S. C.”</strong>, REPRESENTADO POR LA
                                 LIC. CLAUDIA CARLA RIZO FLORES, EN SU CARÁCTER DE APODERADO GENERAL, Y POR LA OTRA PARTE, A QUIÉN EN LO SUCESIVO SE DENOMINARÁ EL “EVALUADOR INDEPENDIENTE”
-                                REPRESENTADA POR EL C. ______________________________________, EN SU CARÁCTER DE
+                                REPRESENTADA POR EL C. <input id="nombre" name="nombre" type="text" class="form-control underline-input" placeholder="Nombre" required value="{{$contrato_cam->nombre}}">, EN SU CARÁCTER DE
                                 PERSONA JURIDICA, AL TENOR DE LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:
                             </h6>
 
@@ -99,13 +117,13 @@
                                 <br><br>
                                 <strong>2	DECLARA EL “EVALUADOR INDEPENDIENTE” QUE:</strong>
 
-                                2.1	Es una persona física con datos generales: ____________________________, <strong>CON RFC</strong> _______________________________ <strong>con vigencia 2024-2025.  CON IDENTIFICACIÓN OFICIAL</strong> _____________________________________.
+                                2.1	Es una persona física con datos generales: <input id="dato_general" name="dato_general" type="text" class="form-control underline-input" required value="{{$contrato_cam->dato_general}}">, <strong>CON RFC</strong> <input id="rfc" name="rfc" type="text" class="form-control underline-input" required value="{{$contrato_cam->rfc}}"> <strong>con vigencia 2024-2025.  CON IDENTIFICACIÓN OFICIAL</strong> <input id="identificacion_ofi" name="identificacion_ofi" type="text" class="form-control underline-input" required value="{{$contrato_cam->identificacion_ofi}}">.
                                 <br><br>
                                 2.2	Se representa a sí mismo en pleno uso de sus facultades mentales y capacidades de respuesta legal.
                                 <br><br>
                                 2.3	Conoce las Reglas Generales y Criterios para la Integración y Operación del Sistema Nacional de Competencias vigentes, en lo sucesivo “Reglas Generales”, y demás disposiciones que de ellas se derivan, las cuales se agregan al presente Contrato para formar parte de este como Anexo I; las funciones y objetivos del Consejo Nacional de Certificación de Competencias Laborales, en lo sucesivo el “CONOCER”, y en su caso los “Estándares de Competencia” en los que está acreditado. En tal virtud se encuentra acreditada como “EVALUADOR INDEPENDIENTE”a efecto de apoyar y auxiliar al “CONOCER” en evaluar y certificar la competencia de las personas con base a Estándares de Competencia inscritos en el Registro Nacional de Estándares de Competencia.
                                 <br><br>
-                                2.4	Tiene su domicilio para los efectos legales que se deriven del presente instrumento, en _____________________________________________.
+                                2.4	Tiene su domicilio para los efectos legales que se deriven del presente instrumento, en <input id="domicilio" name="domicilio" type="text" class="form-control underline-input" required value="{{$contrato_cam->domicilio}}">.
                                 <br><br>
                                 3.1	<strong>DECLARAN AMBAS PARTES QUE:</strong> La suscripción del presente Contrato no es garantía alguna sobre el nivel de ingresos del “EVALUADOR INDEPENDIENTE”, el cual acepta desde ahora que esto será de su única y exclusiva responsabilidad.
                                 <br> 3.2	De conformidad con las declaraciones anteriores se reconocen la personalidad jurídica y la capacidad legal que ostentan, y con fundamento en los artículos 47, 48 Fracción III, y 66 de las “Reglas Generales”, de común acuerdo convienen en suscribir el presente Contrato, al tenor de las siguientes:
@@ -445,10 +463,10 @@
 
                             <h6 class="text-justify" style="">
                                 EN TESTIMONIO DE LO CUAL LAS PARTES:
-                                POR LA “ECE356-18 INSTITUTO MEXICANO NATURALES AIN SPA S. C.”LA C. CLAUDIA CARLA RIZO FLORES Y  POR EL “EVALUADOR INDEPENDIENTE” C. ___________________ __________________________.
+                                POR LA “ECE356-18 INSTITUTO MEXICANO NATURALES AIN SPA S. C.”LA C. CLAUDIA CARLA RIZO FLORES Y  POR EL “EVALUADOR INDEPENDIENTE” C.<input id="nombre" name="nombre" type="text" class="form-control underline-input" required value="{{$contrato_cam->nombre}}">.
 
-                                <br>ENTERADAS DEL CONTENIDO Y ALCANCE LEGAL DEL PRESENTE CONTRATO, LO FIRMAN POR DUPLICADO EN LA CIUDAD DE MÉXICO, DISTRITO FEDERAL, EL DÍA ___ DEL MES DE _______________________ DEL DOS MIL VEINTI_________________.
-                                INSTITUTO MEXICANO NATURALES AIN SPA S. C.”LA C. CLAUDIA CARLA RIZO FLORES Y  POR EL “EVALUADOR INDEPENDIENTE” C. ___________________ __________________________.
+                                <br>ENTERADAS DEL CONTENIDO Y ALCANCE LEGAL DEL PRESENTE CONTRATO, LO FIRMAN POR DUPLICADO EN LA CIUDAD DE MÉXICO, DISTRITO FEDERAL, EL DÍA <input id="fecha" name="fecha" type="date" class="form-control underline-input" required value="{{$contrato_cam->fecha}}">.
+                                INSTITUTO MEXICANO NATURALES AIN SPA S. C.”LA C. CLAUDIA CARLA RIZO FLORES Y  POR EL “EVALUADOR INDEPENDIENTE” C. <input id="nombre" name="nombre" type="text" class="form-control underline-input" required value="{{$contrato_cam->nombre}}">.
                             </h6>
 
                         </div>
@@ -465,14 +483,22 @@
                                 </div>
 
                                 <div class="col-6">
-                                    <div id="sig2"></div>
-                                    <textarea id="signed2" name="signed2" style="display: none"></textarea>
-                                    <h6 class="text-left mt-3 mb-3">
-                                        NOMBRE Y FIRMA <br>
-                                        “EVALUADOR INDEPENDIENTE”
-                                    </h6>
-                                    <button id="clear2" class="btn btn-sm btn-danger ">Repetir Firma</button>
-                                    <button class="btn btn-sm btn-success">Guardar Firma</button>
+                                    @if ($contrato_cam->firma == NULL)
+                                        <div id="sig2"></div>
+                                        <textarea id="signed2" name="signed2" style="display: none"></textarea>
+                                        <h6 class="text-left mt-3 mb-3">
+                                            FIRMA <br>
+                                            “EVALUADOR INDEPENDIENTE”
+                                        </h6>
+                                        <button id="clear2" class="btn btn-sm btn-danger ">Repetir Firma</button>
+                                        <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                    @else
+                                        <img src="{{asset('documentos/'. $cliente->telefono . '/' .$contrato_cam->firma) }}" alt="" width="50%">
+                                        <h6 class="text-left mt-3 mb-3">
+                                            FIRMA <br>
+                                            “EVALUADOR INDEPENDIENTE”
+                                        </h6>
+                                    @endif
                                 </div>
 
                                 <div class="col-6">
@@ -489,6 +515,7 @@
                             </div>
                         </div>
                     </div>
+                </form>
 
                 </div>
                 <div class="col-0 col-md-2 col-lg-3"></div>

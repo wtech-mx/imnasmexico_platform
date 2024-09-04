@@ -101,7 +101,7 @@
                                             <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;margin-right:2.5pt;'><strong><span style='font-family:"Calibri",sans-serif;'>FECHA DE LA SOLICITUD&nbsp;</span></strong></p>
                                         </td>
                                         <td rowspan="2" style="width:287.05pt;border-top:solid windowtext 1.0pt;border-left:none;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;background:white;padding:0cm 3.55pt 0cm 3.55pt;height:10.9pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><input id="fecha" name="fecha" type="date" class="form-control underline-input" required value="{{$notas_cam->fecha}}"></p>
                                         </td>
                                         <td style="width: 123.45pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;background: rgb(217, 217, 217);padding: 0cm 3.55pt;height: 10.9pt;vertical-align: top;">
                                             <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><strong><span style='font-family:"Calibri",sans-serif;'>SOLICITUD NO.</span></strong></p>
@@ -130,7 +130,7 @@
                                     <tr>
                                         <td colspan="10" style="width:506.8pt;border:solid windowtext 1.0pt;border-top:none;background:white;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                                <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre completo" style="border: solid 3px transparent;" value="{{$cliente->name}}">
                                             </p>
                                         </td>
                                     </tr>
@@ -142,7 +142,7 @@
                                     <tr>
                                         <td colspan="10" style="width:506.8pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                                <input id="puesto" name="puesto" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->puesto}}">
                                             </p>
                                         </td>
                                     </tr>
@@ -165,13 +165,13 @@
                                     <tr>
                                         <td colspan="7" style="width:253.65pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                                <input id="direccion" name="direccion" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->direccion}}">
 
                                             </p>
                                         </td>
                                         <td colspan="3" style="width:253.15pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                                <input id="city" name="city" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->city}}">
 
                                             </p>
                                         </td>
@@ -190,19 +190,19 @@
                                     <tr>
                                         <td colspan="4" style="width:124.0pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                                <input id="postcode" name="postcode" type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->postcode}}">
 
                                             </p>
                                         </td>
                                         <td colspan="5" style="width:219.85pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                                <input id="state" name="state" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->state}}">
 
                                             </p>
                                         </td>
                                         <td style="width:162.95pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                                <input id="country" name="country" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->country}}">
 
                                             </p>
                                         </td>
@@ -221,20 +221,17 @@
                                     <tr>
                                         <td colspan="6" style="width:159.65pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
-
+                                                <input id="telefono" name="telefono" type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->telefono}}">
                                             </p>
                                         </td>
                                         <td colspan="2" style="width:134.5pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
-
+                                                <input id="pagina_web" name="pagina_web" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;"  value="{{$cliente->pagina_web}}">
                                             </p>
                                         </td>
                                         <td colspan="2" style="width:212.65pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input type="email" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
-
+                                                <input id="email" name="email" type="email" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;"  value="{{$cliente->email}}">
                                             </p>
                                         </td>
                                     </tr>
@@ -244,7 +241,7 @@
                                         </td>
                                         <td colspan="5" style="width:372.1pt;border-top:none;border-left:  none;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:42.35pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                 <input type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                                <input id="celular_casa" name="celular_casa" type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->celular_casa}}">
                                             </p>
                                         </td>
                                     </tr>
@@ -254,7 +251,7 @@
                                         </td>
                                         <td colspan="5" style="width:372.1pt;border-top:none;border-left:  none;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:36.9pt;">
                                             <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                 <input type="email" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;">
+                                                <input id="email_alterno" name="email_alterno" type="email" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->email_alterno}}">
                                             </p>
                                         </td>
                                     </tr>
@@ -287,7 +284,13 @@
                                             <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
                                         </td>
                                         <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple" required>
+                                                @foreach ($estandares_cam as $estandar_cam)
+                                                    <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
+                                                        {{$estandar_cam->nombre}}
+                                                    </option>
+                                                @endforeach
+                                            </select>
                                         </td>
                                     </tr>
                                     <tr>
