@@ -813,6 +813,7 @@ class DocumentosController extends Controller
             }
         }else{
             if($curso_first->stps == '1' && $curso_first->titulo_hono == '1'){
+                dd($tipo_documentos->tipo);
                 if($tipo_documentos->tipo == 'Diploma_STPS'){
                     $id_ticket = $request->get('id_ticket_orders');
                     $ticket = OrdersTickets::find($id_ticket);
@@ -862,6 +863,31 @@ class DocumentosController extends Controller
                     }
 
                 }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR_CFC'){
+                    $id_ticket = $request->get('id_ticket_orders');
+                    $ticket = OrdersTickets::find($id_ticket);
+                    $ticket->estatus_doc = '1';
+                    $ticket->estatus_cedula = '1';
+                    $ticket->estatus_titulo = '1';
+                    $ticket->estatus_diploma = '1';
+                    $ticket->estatus_credencial = '1';
+                    $ticket->estatus_tira = '1';
+                    $ticket->folio = $request->get('folio');
+                    $ticket->update();
+
+                    $ancho_cm = 33;
+                    $alto_cm = 48;
+
+                    $ancho_puntos = $ancho_cm * 28.35;
+                    $alto_puntos = $alto_cm * 28.35;
+
+                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+
+                    //$pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
+                    $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); //  Cambiar 'a tamaño 48x33 super b'
+
+                    return $pdf->download('CN-Titulo Honorifico Online QR_'.$nombre.'.pdf');
+
+                }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR'){
                     $id_ticket = $request->get('id_ticket_orders');
                     $ticket = OrdersTickets::find($id_ticket);
                     $ticket->estatus_doc = '1';
