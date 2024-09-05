@@ -161,58 +161,64 @@
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="">
+                                            <input class="form-check-input" type="radio" name="solicitud" id="solicitud1">
                                         </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminate">
+                                            <input class="form-check-input" type="radio" name="solicitud" id="solicitud2" checked>
                                         </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
                                         <div style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>
-
                                             <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style='font-family:"Arial",sans-serif;'>2.-  Contrato de Acreditaci&oacute;n de Evaluador Independiente</span></p>
-
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="contrato" id="contrato1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="contrato" id="contrato1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
                                         <div style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>
-
                                             <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style='font-family:"Arial",sans-serif;'>3.-  Carta compromiso para Evaluador Independiente</span></p>
-
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="carta" id="carta1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="carta" id="carta1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
                                         <div style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>
-
                                             <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style='font-family:"Arial",sans-serif;'>4.-  Identificaci&oacute;n Oficial INE VIGENTE del Evaluador Independiente (copia simple)</span></p>
-
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="identificacion" id="identificacion1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="identificacion" id="identificacion1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -224,10 +230,14 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="curp" id="curp1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="curp" id="curp1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -239,10 +249,14 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="logo" id="logo1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="logo" id="logo1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -254,10 +268,14 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="comproante" id="comproante1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="comproante" id="comproante1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -269,10 +287,14 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="registro_marca" id="registro_marca1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="registro_marca" id="registro_marca1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -284,10 +306,14 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="reconocimiento" id="reconocimiento1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="reconocimiento" id="reconocimiento1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -299,10 +325,14 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="cv" id="cv1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="cv" id="cv1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -314,10 +344,14 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="acta" id="acta1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="acta" id="acta1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -333,10 +367,14 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_contrato" id="firma_contrato1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_contrato" id="firma_contrato1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -348,10 +386,16 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_acuerdo" id="firma_acuerdo1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_acuerdo" id="firma_acuerdo1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -363,10 +407,16 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_nombramiento" id="firma_nombramiento1">
+                                        </div>
+
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_nombramiento" id="firma_nombramiento1">
+                                        </div>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -378,10 +428,16 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_listado" id="firma_listado1">
+                                        </div>
+
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_listado" id="firma_listado1">
+                                        </div>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -393,10 +449,18 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_medios" id="firma_medios1">
+                                        </div>
+
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_medios" id="firma_medios1">
+                                        </div>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -408,10 +472,18 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_redesociales" id="firma_redesociales1">
+                                        </div>
+
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_redesociales" id="firma_redesociales1">
+                                        </div>
+
                                     </td>
                                 </tr>
                                 <tr>
@@ -423,10 +495,14 @@
                                         </div>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_lista_precios" id="firma_lista_precios1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="firma_lista_precios" id="firma_lista_precios1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -437,145 +513,219 @@
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-family:"Arial",sans-serif;'>1.- Manuales digitales de la Normatividad, operatividad y funcionalidad del CONOCER&nbsp;</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>1.- Manuales digitales de la Normatividad, operatividad y funcionalidad del CONOCER&nbsp;</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_manuales" id="entrega_manuales1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_manuales" id="entrega_manuales1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-family:"Arial",sans-serif;'>2.- Reglamento Interno de la Entidad para reglamentar al EI (Dise&ntilde;ado con logos para Evaluador Independiente.)</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>2.- Reglamento Interno de la Entidad para reglamentar al EI (Dise&ntilde;ado con logos para Evaluador Independiente.)</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_reglamento" id="entrega_reglamento1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_reglamento" id="entrega_reglamento1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-family:"Arial",sans-serif;'>3.- Manual de procedimientos de aseguramiento de la calidad con logos para Evaluador Independiente.</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>3.- Manual de procedimientos de aseguramiento de la calidad con logos para Evaluador Independiente.</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_manual" id="entrega_manual1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_manual" id="entrega_manual1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-family:"Arial",sans-serif;'>4.- Manual de Procedimientos de Atenci&oacute;n al Cliente Reporte y Graficaci&oacute;n con Logos para Evaluador Independiente.</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>4.- Manual de Procedimientos de Atenci&oacute;n al Cliente Reporte y Graficaci&oacute;n con Logos para Evaluador Independiente.</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_manual_atencion" id="entrega_manual_atencion1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_manual_atencion" id="entrega_manual_atencion1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-family:"Arial",sans-serif;'>5.- Manual del Participante</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>5.- Manual del Participante</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_manual_participante" id="entrega_manual_participante1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_manual_participante" id="entrega_manual_participante1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;'><span style='font-family:"Arial",sans-serif;'>6.- Ligas de Accesos y contrase&ntilde;as al M&oacute;dulo de Evaluaci&oacute;n del CONOCER</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;'>6.- Ligas de Accesos y contrase&ntilde;as al M&oacute;dulo de Evaluaci&oacute;n del CONOCER</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_ligas_accesos" id="entrega_ligas_accesos1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_ligas_accesos" id="entrega_ligas_accesos1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-family:"Arial",sans-serif;'>7.- Ligas de Videos para la formaci&oacute;n de Evaluadores.</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>7.- Ligas de Videos para la formaci&oacute;n de Evaluadores.</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_ligas_video" id="entrega_ligas_video1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_ligas_video" id="entrega_ligas_video1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-family:"Arial",sans-serif;'>8.- Logos diferenciados del CONOCER para cada Entidad de Certificaci&oacute;n y Evaluaci&oacute;n (ECE), Centro de Evaluaci&oacute;n (CE) y Evaluador Independiente (EI)</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>8.- Logos diferenciados del CONOCER para cada Entidad de Certificaci&oacute;n y Evaluaci&oacute;n (ECE), Centro de Evaluaci&oacute;n (CE) y Evaluador Independiente (EI)</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_logos" id="entrega_logos1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_logos" id="entrega_logos1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-family:"Arial",sans-serif;'>10.- Especificaciones de las fotograf&iacute;as. Si no tiene las especificaciones correctas acarrea retrasos en las entregas de Certificados.</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>10.- Especificaciones de las fotograf&iacute;as. Si no tiene las especificaciones correctas acarrea retrasos en las entregas de Certificados.</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_especificaciones" id="entrega_especificaciones1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_especificaciones" id="entrega_especificaciones1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-family:"Arial",sans-serif;'>11.- Papeler&iacute;a proporcionada por la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n con logos para Evaluador Independiente (Diagn&oacute;stico, Plan de Evaluaci&oacute;n, C&eacute;dula de Evaluaci&oacute;n, Encuesta de Satisfacci&oacute;n)</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>11.- Papeler&iacute;a proporcionada por la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n con logos para Evaluador Independiente (Diagn&oacute;stico, Plan de Evaluaci&oacute;n, C&eacute;dula de Evaluaci&oacute;n, Encuesta de Satisfacci&oacute;n)</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_papeleria" id="entrega_papeleria1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_papeleria" id="entrega_papeleria1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-family:"Arial",sans-serif;'>12.- Tr&iacute;ptico del protocolo de la evaluaci&oacute;n con datos de la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n (ECE) con logos, direcci&oacute;n de la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n (ECE), as&iacute; como los n&uacute;meros de contacto del CONOCER y tambi&eacute;n los datos de contacto de la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n. La Entidad de Certificaci&oacute;n y Evaluaci&oacute;n proporciona este tr&iacute;ptico.</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>12.- Tr&iacute;ptico del protocolo de la evaluaci&oacute;n con datos de la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n (ECE) con logos, direcci&oacute;n de la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n (ECE), as&iacute; como los n&uacute;meros de contacto del CONOCER y tambi&eacute;n los datos de contacto de la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n. La Entidad de Certificaci&oacute;n y Evaluaci&oacute;n proporciona este tr&iacute;ptico.</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_triptico" id="entrega_triptico1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_triptico" id="entrega_triptico1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-family:"Arial",sans-serif;'>13.- Formatos de resoluci&oacute;n de quejas proporcionados por la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n (Colocarlos al lado de Buz&oacute;n de quejas)</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>13.- Formatos de resoluci&oacute;n de quejas proporcionados por la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n (Colocarlos al lado de Buz&oacute;n de quejas)</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entregas_formatos" id="entregas_formatos1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entregas_formatos" id="entregas_formatos1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="width: 391.05pt;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-left: 1pt solid windowtext;border-image: initial;border-top: none;padding: 0cm 5.4pt;vertical-align: top;">
-                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'><span style='font-family:"Arial",sans-serif;'>14.- Formatos Seguimiento de resoluci&oacute;n de quejas proporcionados por la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n (Tenerlos en la papeler&iacute;a del &Aacute;rea del CONOCER de la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n (ECE).</span></p>
+                                        <p style='margin-top:1.0pt;margin-right:0cm;margin-bottom:1.0pt;margin-left:14.2pt;font-size:15px;font-family:"Calibri",sans-serif;text-align:justify;'>14.- Formatos Seguimiento de resoluci&oacute;n de quejas proporcionados por la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n (Tenerlos en la papeler&iacute;a del &Aacute;rea del CONOCER de la Entidad de Certificaci&oacute;n y Evaluaci&oacute;n (ECE).</p>
                                     </td>
                                     <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_formatos_seguimientos" id="entrega_formatos_seguimientos1">
+                                        </div>
                                     </td>
                                     <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;text-align:center;'>&nbsp;</p>
+
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="entrega_formatos_seguimientos" id="entrega_formatos_seguimientos1">
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -585,15 +735,15 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3" style="width:476.3pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt;">
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                        <textarea  class="form-control" name="" id="" cols="30" rows="3"></textarea>
                                     </td>
                                 </tr>
                             </tbody>
+
                         </table>
-                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+
+                        <a class="btn btn-success w-100 mt-3 mb-3">Guardar</a>
+
 
                     </div>
 
