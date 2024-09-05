@@ -83,401 +83,404 @@
 
                         <div class="col-12">
 
-                            <table style="float: left;width: 6.3e+2pt;border: none;border-collapse:collapse;margin-left:5.25pt;margin-right:5.25pt;">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="3" style="width:503.25pt;border:solid windowtext 1.0pt;background:white;padding:0cm 3.55pt 0cm 3.55pt;height:34.85pt;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;text-align:center;font-size:16px;font-family:"Arial",sans-serif;font-weight:bold;'><span style='font-size:15px;font-family:"Calibri",sans-serif;'>Solicitud de Acreditaci&oacute;n INICIAL DE EVALUADOR INDEPENDIENTE&nbsp;</span></p>
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-size:9px;font-family:"Calibri",sans-serif;background:white;'>LAS &Aacute;REAS SOMBREADAS SER&Aacute;N LLENADAS POR LA ENTIDAD DE CERTIFICACI&Oacute;N Y EVALUACI&Oacute;N (ECE) U ORGANISMO CERTIFICADOR (OC)</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3" style="width:503.25pt;border:none;background:white;padding:0cm 3.55pt 0cm 3.55pt;height:9.1pt;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;text-align:center;font-size:16px;font-family:"Arial",sans-serif;font-weight:bold;'><span style='font-size:11px;font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td rowspan="2" style="width:92.75pt;border:solid windowtext 1.0pt;border-bottom:solid black 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:10.9pt;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;margin-right:2.5pt;'><strong><span style='font-family:"Calibri",sans-serif;'>FECHA DE LA SOLICITUD&nbsp;</span></strong></p>
-                                        </td>
-                                        <td rowspan="2" style="width:287.05pt;border-top:solid windowtext 1.0pt;border-left:none;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;background:white;padding:0cm 3.55pt 0cm 3.55pt;height:10.9pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><input id="fecha" name="fecha" type="date" class="form-control underline-input" required value="{{$notas_cam->fecha}}"></p>
-                                        </td>
-                                        <td style="width: 123.45pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;background: rgb(217, 217, 217);padding: 0cm 3.55pt;height: 10.9pt;vertical-align: top;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><strong><span style='font-family:"Calibri",sans-serif;'>SOLICITUD NO.</span></strong></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="width: 123.45pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid windowtext;background: rgb(217, 217, 217);padding: 0cm 3.55pt;height: 7.8pt;vertical-align: top;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                            <table style="float: left;width: 6.3e+2pt;border: none;border-collapse:collapse;margin-left:5.25pt;margin-right:5.25pt;">
-                                <tbody>
-                                    <tr>
-                                        <td colspan="10" style="width: 506.8pt;border: 1pt solid windowtext;background: rgb(217, 217, 217);padding: 0cm 3.55pt;height: 17.65pt;vertical-align: top;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:0cm;margin-left:0cm;text-align:center;'><strong><span style='font-family:"Calibri",sans-serif;'>DATOS GENERALES DEL SOLICITANTE</span></strong></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="10" style="width:506.8pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>DATOS &nbsp;DEL SOLICITANTE</span></strong></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="10" style="width:506.8pt;border:solid windowtext 1.0pt;border-top:none;background:white;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre completo" style="border: solid 3px transparent;" value="{{$cliente->name}}">
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="10" style="width:506.8pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>PROFESI&Oacute;N</span></strong></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="10" style="width:506.8pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input id="puesto" name="puesto" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->puesto}}">
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="7" style="width:253.65pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <strong>
-                                                    <em>
-                                                        <span style='font-family:"Calibri",sans-serif;'>DIRECCI&Oacute;N (CALLE Y N&Uacute;MERO)</span>
+                            <form method="POST" class="row" action="{{ route('independiente.formato', $cliente->id) }}" enctype="multipart/form-data" role="form">
+                                @csrf
+                                <input type="hidden" name="_method" value="PATCH">
+                                <table style="float: left;width: 6.3e+2pt;border: none;border-collapse:collapse;margin-left:5.25pt;margin-right:5.25pt;">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3" style="width:503.25pt;border:solid windowtext 1.0pt;background:white;padding:0cm 3.55pt 0cm 3.55pt;height:34.85pt;">
+                                                <p style='margin:0cm;margin-bottom:.0001pt;text-align:center;font-size:16px;font-family:"Arial",sans-serif;font-weight:bold;'><span style='font-size:15px;font-family:"Calibri",sans-serif;'>Solicitud de Acreditaci&oacute;n INICIAL DE EVALUADOR INDEPENDIENTE&nbsp;</span></p>
+                                                <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-size:9px;font-family:"Calibri",sans-serif;background:white;'>LAS &Aacute;REAS SOMBREADAS SER&Aacute;N LLENADAS POR LA ENTIDAD DE CERTIFICACI&Oacute;N Y EVALUACI&Oacute;N (ECE) U ORGANISMO CERTIFICADOR (OC)</span></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" style="width:503.25pt;border:none;background:white;padding:0cm 3.55pt 0cm 3.55pt;height:9.1pt;">
+                                                <p style='margin:0cm;margin-bottom:.0001pt;text-align:center;font-size:16px;font-family:"Arial",sans-serif;font-weight:bold;'><span style='font-size:11px;font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2" style="width:92.75pt;border:solid windowtext 1.0pt;border-bottom:solid black 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:10.9pt;">
+                                                <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;margin-right:2.5pt;'><strong><span style='font-family:"Calibri",sans-serif;'>FECHA DE LA SOLICITUD&nbsp;</span></strong></p>
+                                            </td>
+                                            <td rowspan="2" style="width:287.05pt;border-top:solid windowtext 1.0pt;border-left:none;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;background:white;padding:0cm 3.55pt 0cm 3.55pt;height:10.9pt;">
+                                                <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><input id="fecha_formato" name="fecha_formato" type="date" class="form-control underline-input" required value="{{$cliente->fecha_formato}}"></p>
+                                            </td>
+                                            <td style="width: 123.45pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;background: rgb(217, 217, 217);padding: 0cm 3.55pt;height: 10.9pt;vertical-align: top;">
+                                                <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><strong><span style='font-family:"Calibri",sans-serif;'>SOLICITUD NO.</span></strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 123.45pt;border-top: none;border-left: none;border-bottom: 1pt solid black;border-right: 1pt solid windowtext;background: rgb(217, 217, 217);padding: 0cm 3.55pt;height: 7.8pt;vertical-align: top;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                <table style="float: left;width: 6.3e+2pt;border: none;border-collapse:collapse;margin-left:5.25pt;margin-right:5.25pt;">
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="10" style="width: 506.8pt;border: 1pt solid windowtext;background: rgb(217, 217, 217);padding: 0cm 3.55pt;height: 17.65pt;vertical-align: top;">
+                                                <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:0cm;margin-left:0cm;text-align:center;'><strong><span style='font-family:"Calibri",sans-serif;'>DATOS GENERALES DEL SOLICITANTE</span></strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="10" style="width:506.8pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>DATOS &nbsp;DEL SOLICITANTE</span></strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="10" style="width:506.8pt;border:solid windowtext 1.0pt;border-top:none;background:white;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre completo" style="border: solid 3px transparent;" value="{{$cliente->name}}">
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="10" style="width:506.8pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>PROFESI&Oacute;N</span></strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="10" style="width:506.8pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <input id="puesto" name="puesto" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->puesto}}">
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="7" style="width:253.65pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <strong>
+                                                        <em>
+                                                            <span style='font-family:"Calibri",sans-serif;'>DIRECCI&Oacute;N (CALLE Y N&Uacute;MERO)</span>
 
-                                                    </em>
-                                                </strong>
+                                                        </em>
+                                                    </strong>
 
-                                            </p>
-                                        </td>
-                                        <td colspan="3" style="width:253.15pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><em><span style='font-family:"Calibri",sans-serif;'>COLONIA</span></em></strong></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="7" style="width:253.65pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input id="direccion" name="direccion" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->direccion}}">
+                                                </p>
+                                            </td>
+                                            <td colspan="3" style="width:253.15pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><em><span style='font-family:"Calibri",sans-serif;'>COLONIA</span></em></strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="7" style="width:253.65pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <input id="direccion" name="direccion" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->direccion}}">
 
-                                            </p>
-                                        </td>
-                                        <td colspan="3" style="width:253.15pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input id="city" name="city" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->city}}">
+                                                </p>
+                                            </td>
+                                            <td colspan="3" style="width:253.15pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <input id="city" name="city" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->city}}">
 
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4" style="width:124.0pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><em><span style='font-family:"Calibri",sans-serif;'>C&Oacute;DIGO POSTAL</span></em></strong></p>
-                                        </td>
-                                        <td colspan="5" style="width:219.85pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><em><span style='font-family:"Calibri",sans-serif;'>MUNICIPIO O DELEGACI&Oacute;N&nbsp;</span></em></strong></p>
-                                        </td>
-                                        <td style="width:162.95pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><em><span style='font-family:"Calibri",sans-serif;'>ENTIDAD FEDERATIVA</span></em></strong></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="4" style="width:124.0pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input id="postcode" name="postcode" type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->postcode}}">
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" style="width:124.0pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><em><span style='font-family:"Calibri",sans-serif;'>C&Oacute;DIGO POSTAL</span></em></strong></p>
+                                            </td>
+                                            <td colspan="5" style="width:219.85pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><em><span style='font-family:"Calibri",sans-serif;'>MUNICIPIO O DELEGACI&Oacute;N&nbsp;</span></em></strong></p>
+                                            </td>
+                                            <td style="width:162.95pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><em><span style='font-family:"Calibri",sans-serif;'>ENTIDAD FEDERATIVA</span></em></strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4" style="width:124.0pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <input id="postcode" name="postcode" type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->postcode}}">
 
-                                            </p>
-                                        </td>
-                                        <td colspan="5" style="width:219.85pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input id="state" name="state" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->state}}">
+                                                </p>
+                                            </td>
+                                            <td colspan="5" style="width:219.85pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <input id="state" name="state" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->state}}">
 
-                                            </p>
-                                        </td>
-                                        <td style="width:162.95pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input id="country" name="country" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->country}}">
+                                                </p>
+                                            </td>
+                                            <td style="width:162.95pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <input id="country" name="country" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->country}}">
 
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="6" style="width:159.65pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>TEL&Eacute;FONO</span></strong></p>
-                                        </td>
-                                        <td colspan="2" style="width:134.5pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>P&Aacute;GINA DE INTERNET</span></strong></p>
-                                        </td>
-                                        <td colspan="2" style="width:212.65pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>CORREO ELECTR&Oacute;NICO (RESPONSABLE DEL EVALUADOR</span></strong><span style='font-family:"Calibri",sans-serif;'>)</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="6" style="width:159.65pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input id="telefono" name="telefono" type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->telefono}}">
-                                            </p>
-                                        </td>
-                                        <td colspan="2" style="width:134.5pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input id="pagina_web" name="pagina_web" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;"  value="{{$cliente->pagina_web}}">
-                                            </p>
-                                        </td>
-                                        <td colspan="2" style="width:212.65pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input id="email" name="email" type="email" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;"  value="{{$cliente->email}}">
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5" style="width:134.7pt;border-top:none;border-left:  solid windowtext 1.0pt;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:42.35pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>TELEFONO ALTERNO&nbsp;</span></strong></p>
-                                        </td>
-                                        <td colspan="5" style="width:372.1pt;border-top:none;border-left:  none;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:42.35pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input id="celular_casa" name="celular_casa" type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->celular_casa}}">
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5" style="width:134.7pt;border-top:none;border-left:  solid windowtext 1.0pt;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:36.9pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>CORREO ELECTR&Oacute;NICO ALTERNO</span></strong></p>
-                                        </td>
-                                        <td colspan="5" style="width:372.1pt;border-top:none;border-left:  none;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:36.9pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
-                                                <input id="email_alterno" name="email_alterno" type="email" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->email_alterno}}">
-                                            </p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;" colspan="2">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="8" style="width: 499.7pt;background: white;padding: 0cm 3.55pt;vertical-align: top;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style='font-size:5px;font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:0cm;margin-left:0cm;text-align:center;'><strong><span style='font-family:"Calibri",sans-serif;'>EST&Aacute;NDAR(ES) DE COMPETENCIA &nbsp;EN QUE SOLICITA LA ACREDITACI&Oacute;N INICIAL&nbsp;</span></strong></p>
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style='font-size:5px;font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><strong><span style='font-family:"Calibri",sans-serif;'>C&Oacute;DIGO</span></strong></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border:solid windowtext 1.0pt;border-left:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><strong><span style='font-family:"Calibri",sans-serif;'>EST&Aacute;NDAR DE COMPETENCIA SOLICITADO</span></strong></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple" required>
-                                                @foreach ($estandares_cam as $estandar_cam)
-                                                    <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
-                                                        {{$estandar_cam->nombre}}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;padding:0cm 0cm 0cm 0cm;">
-                                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                                        </td>
-                                        <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                        <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
-                                            <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="border:none;"><br></td>
-                                        <td style="border:none;"><br></td>
-                                        <td style="border:none;"><br></td>
-                                        <td style="border:none;"><br></td>
-                                        <td style="border:none;"><br></td>
-                                        <td style="border:none;"><br></td>
-                                        <td style="border:none;"><br></td>
-                                        <td style="border:none;"><br></td>
-                                        <td style="border:none;"><br></td>
-                                        <td style="border:none;"><br></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
-                            <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" style="width:159.65pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>TEL&Eacute;FONO</span></strong></p>
+                                            </td>
+                                            <td colspan="2" style="width:134.5pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>P&Aacute;GINA DE INTERNET</span></strong></p>
+                                            </td>
+                                            <td colspan="2" style="width:212.65pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>CORREO ELECTR&Oacute;NICO (RESPONSABLE DEL EVALUADOR</span></strong><span style='font-family:"Calibri",sans-serif;'>)</span></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6" style="width:159.65pt;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <input id="telefono" name="telefono" type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->telefono}}">
+                                                </p>
+                                            </td>
+                                            <td colspan="2" style="width:134.5pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <input id="pagina_web" name="pagina_web" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;"  value="{{$cliente->pagina_web}}">
+                                                </p>
+                                            </td>
+                                            <td colspan="2" style="width:212.65pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:17.65pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <input id="email" name="email" type="email" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;"  value="{{$cliente->email}}">
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" style="width:134.7pt;border-top:none;border-left:  solid windowtext 1.0pt;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:42.35pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>TELEFONO ALTERNO&nbsp;</span></strong></p>
+                                            </td>
+                                            <td colspan="5" style="width:372.1pt;border-top:none;border-left:  none;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:42.35pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <input id="celular_casa" name="celular_casa" type="number" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->celular_casa}}">
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="5" style="width:134.7pt;border-top:none;border-left:  solid windowtext 1.0pt;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;height:36.9pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><strong><span style='font-family:"Calibri",sans-serif;'>CORREO ELECTR&Oacute;NICO ALTERNO</span></strong></p>
+                                            </td>
+                                            <td colspan="5" style="width:372.1pt;border-top:none;border-left:  none;border-bottom:solid black 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:36.9pt;">
+                                                <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'>
+                                                    <input id="email_alterno" name="email_alterno" type="email" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" value="{{$cliente->email_alterno}}">
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none;padding:0cm 0cm 0cm 0cm;" colspan="2">
+                                                <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                            </td>
+                                            <td colspan="8" style="width: 499.7pt;background: white;padding: 0cm 3.55pt;vertical-align: top;">
+                                                <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style='font-size:5px;font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                                <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:0cm;margin-left:0cm;text-align:center;'><strong><span style='font-family:"Calibri",sans-serif;'>EST&Aacute;NDAR(ES) DE COMPETENCIA &nbsp;EN QUE SOLICITA LA ACREDITACI&Oacute;N INICIAL&nbsp;</span></strong></p>
+                                                <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style='font-size:5px;font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border:none;padding:0cm 0cm 0cm 0cm;">
+                                                <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                            </td>
+                                            <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;">
+                                                <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><strong><span style='font-family:"Calibri",sans-serif;'>C&Oacute;DIGO</span></strong></p>
+                                            </td>
+                                            <td colspan="7" style="width:418.2pt;border:solid windowtext 1.0pt;border-left:none;background:#D9D9D9;padding:0cm 3.55pt 0cm 3.55pt;">
+                                                <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><strong><span style='font-family:"Calibri",sans-serif;'>EST&Aacute;NDAR DE COMPETENCIA SOLICITADO</span></strong></p>
+                                            </td>
+                                        </tr>
 
+                                        @if($existeNota)
+                                            @foreach($estandares_nota as $estandar_nota)
+                                                <tr>
+                                                    <td style="border:none;padding:0cm 0cm 0cm 0cm;">
+                                                        <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                                    </td>
+                                                    <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                        <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                                    </td>
+                                                    <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <p style='margin:0cm;margin-bottom:  3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;'><span style='font-family:"Calibri",sans-serif;'>{{$estandar_nota->Estandar->nombre}}</span></p>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <td style="border:none;padding:0cm 0cm 0cm 0cm;">
+                                                    <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                                </td>
+                                                <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                                </td>
+                                                <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;">
+                                                        <option value="">Selecciona un estandar</option>
+                                                        @foreach ($estandares_cam as $estandar_cam)
+                                                            <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
+                                                                {{$estandar_cam->nombre}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border:none;padding:0cm 0cm 0cm 0cm;">
+                                                    <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                                </td>
+                                                <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                                </td>
+                                                <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;">
+                                                        <option value="">Selecciona un estandar</option>
+                                                        @foreach ($estandares_cam as $estandar_cam)
+                                                            <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
+                                                                {{$estandar_cam->nombre}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border:none;padding:0cm 0cm 0cm 0cm;">
+                                                    <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                                </td>
+                                                <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                                </td>
+                                                <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;">
+                                                        <option value="">Selecciona un estandar</option>
+                                                        @foreach ($estandares_cam as $estandar_cam)
+                                                            <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
+                                                                {{$estandar_cam->nombre}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border:none;padding:0cm 0cm 0cm 0cm;">
+                                                    <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                                </td>
+                                                <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                                </td>
+                                                <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;">
+                                                        <option value="">Selecciona un estandar</option>
+                                                        @foreach ($estandares_cam as $estandar_cam)
+                                                            <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
+                                                                {{$estandar_cam->nombre}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border:none;padding:0cm 0cm 0cm 0cm;">
+                                                    <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                                </td>
+                                                <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                                </td>
+                                                <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;">
+                                                        <option value="">Selecciona un estandar</option>
+                                                        @foreach ($estandares_cam as $estandar_cam)
+                                                            <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
+                                                                {{$estandar_cam->nombre}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border:none;padding:0cm 0cm 0cm 0cm;">
+                                                    <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                                </td>
+                                                <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                                </td>
+                                                <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;">
+                                                        <option value="">Selecciona un estandar</option>
+                                                        @foreach ($estandares_cam as $estandar_cam)
+                                                            <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
+                                                                {{$estandar_cam->nombre}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border:none;padding:0cm 0cm 0cm 0cm;">
+                                                    <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                                </td>
+                                                <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                                </td>
+                                                <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;">
+                                                        <option value="">Selecciona un estandar</option>
+                                                        @foreach ($estandares_cam as $estandar_cam)
+                                                            <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
+                                                                {{$estandar_cam->nombre}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border:none;padding:0cm 0cm 0cm 0cm;">
+                                                    <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                                </td>
+                                                <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                                </td>
+                                                <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;">
+                                                        <option value="">Selecciona un estandar</option>
+                                                        @foreach ($estandares_cam as $estandar_cam)
+                                                            <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
+                                                                {{$estandar_cam->nombre}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border:none;padding:0cm 0cm 0cm 0cm;">
+                                                    <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                                </td>
+                                                <td colspan="2" style="width:3.0cm;border:solid windowtext 1.0pt;border-top:none;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <p style='margin:0cm;margin-bottom:3.0pt;font-size:15px;font-family:"Arial",sans-serif;margin-top:3.0pt;margin-right:2.5pt;margin-left:0cm;text-align:center;'><span style='font-family:"Calibri",sans-serif;'>&nbsp;</span></p>
+                                                </td>
+                                                <td colspan="7" style="width:418.2pt;border-top:none;border-left:  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 3.55pt 0cm 3.55pt;height:26.5pt;">
+                                                    <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;">
+                                                        <option value="">Selecciona un estandar</option>
+                                                        @foreach ($estandares_cam as $estandar_cam)
+                                                            <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
+                                                                {{$estandar_cam->nombre}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                        <tr>
+                                            <td style="border:none;"><br></td>
+                                            <td style="border:none;"><br></td>
+                                            <td style="border:none;"><br></td>
+                                            <td style="border:none;"><br></td>
+                                            <td style="border:none;"><br></td>
+                                            <td style="border:none;"><br></td>
+                                            <td style="border:none;"><br></td>
+                                            <td style="border:none;"><br></td>
+                                            <td style="border:none;"><br></td>
+                                            <td style="border:none;"><br></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>&nbsp;</p>
+                                @if($existeNota)
+
+                                @else
+                                    <button type="submit" class="btn btn-sm btn-success">Guardar firma</button>
+                                @endif
+                            </form>
                         </div>
-
-
                     </div>
 
                 </div>

@@ -13,6 +13,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Hash;
+use App\Models\Cam\CamNotEstandares;
 
 class CamNotasController extends Controller
 {
@@ -292,30 +293,52 @@ class CamNotasController extends Controller
     public function edit_formato($code){
         $cliente = User::where('code', $code)->first();
         $notas_cam = CamNotas::where('id_cliente', '=', $cliente->id)->first();
-        $estandares_cam = CarpetasEstandares::orderBy('nombre','asc')->get();
+        $estandares_cam = CarpetasEstandares::where('nombre', 'LIKE', 'EC%')
+        ->orderBy('nombre', 'asc')
+        ->get();
 
-        return view('admin.notas_cam.cam_users.independiente.formato', compact('notas_cam', 'cliente', 'estandares_cam'));
+        $existeNota = CamNotEstandares::where('id_nota', $notas_cam->id)->exists();
+        $estandares_nota = CamNotEstandares::where('id_nota', $notas_cam->id)->get();
+
+        return view('admin.notas_cam.cam_users.independiente.formato', compact('notas_cam', 'cliente', 'estandares_cam', 'existeNota', 'estandares_nota'));
     }
 
     public function formato_independiente(Request $request, $id){
+        
         $cliente = User::where('id', $id)->first();
-        $cliente->name = $request->get('nombre');
+        $notas_cam = CamNotas::where('id_cliente', '=', $cliente->id)->first();
+        
+        $cliente->fecha_formato = $request->get('fecha_formato');
+        $cliente->puesto = $request->get('puesto');
+        $cliente->direccion = $request->get('direccion');
+        $cliente->city = $request->get('city');
+        $cliente->postcode = $request->get('postcode');
+        $cliente->state = $request->get('state');
+        $cliente->country = $request->get('country');
+        $cliente->telefono = $request->get('telefono');
+        $cliente->pagina_web = $request->get('pagina_web');
+        $cliente->email = $request->get('email');
+        $cliente->celular_casa = $request->get('celular_casa');
+        $cliente->email_alterno = $request->get('email_alterno');
         $cliente->update();
 
-        $notas_cam = CamNotas::where('id_cliente', '=', $id)->first();
+        $estandares = $request->input('estandares');
 
-        $nota = CamNotas::find($notas_cam->id);
-            $nota->fecha_carta = $request->get('fecha_carta');
-
-        $nota->update();
+        for ($count = 0; $count < count($estandares); $count++) {
+            if($estandares[$count] !== null){
+                $data = array(
+                    'id_nota' => $notas_cam->id,
+                    'id_estandar' => $estandares[$count],
+                    'estatus' => 'Sin estatus',
+                    'estatus_renovacion' => 'renovo',
+                    'id_usuario' => auth()->user()->id,
+                );
+                $insert_data[] = $data;
+            }
+        }
+        CamNotEstandares::insert($insert_data);
 
         return redirect()->back()->with('success', 'Datos actualizado con exito.');
-    }
-
-
-    public function formato(){
-
-        return view('admin.notas_cam.cam_users.formato');
     }
 
     public function edit_programa($code){

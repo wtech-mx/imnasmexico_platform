@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->date('email_alterno')->nullable();
+            $table->text('email_alterno')->nullable();
+            $table->date('fecha_formato')->nullable();
         });
     }
 
