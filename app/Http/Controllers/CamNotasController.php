@@ -351,39 +351,49 @@ class CamNotasController extends Controller
 
     public function checklist_independiente(Request $request, $id){
         
-        $cliente = User::where('id', $id)->first();
-        $notas_cam = CamNotas::where('id_cliente', '=', $cliente->id)->first();
-        $checklist = CamChecklist::where('id_nota', '=', $notas_cam->id)->first();
-        dd($request);
-        $cliente->fecha_formato = $request->get('fecha_formato');
-        $cliente->puesto = $request->get('puesto');
-        $cliente->direccion = $request->get('direccion');
-        $cliente->city = $request->get('city');
-        $cliente->postcode = $request->get('postcode');
-        $cliente->state = $request->get('state');
-        $cliente->country = $request->get('country');
-        $cliente->telefono = $request->get('telefono');
-        $cliente->pagina_web = $request->get('pagina_web');
-        $cliente->email = $request->get('email');
-        $cliente->celular_casa = $request->get('celular_casa');
-        $cliente->email_alterno = $request->get('email_alterno');
+        $cliente = User::where('id', $id)->first();        
+        $cliente->razon_social = $request->get('razon_social');
+        $cliente->fecha_checklist = $request->get('fecha_checklist');
+        $cliente->responsable_entrega = $request->get('responsable_entrega');
+        $cliente->recibe_verifica = $request->get('recibe_verifica');
         $cliente->update();
 
-        $estandares = $request->input('estandares');
-
-        for ($count = 0; $count < count($estandares); $count++) {
-            if($estandares[$count] !== null){
-                $data = array(
-                    'id_nota' => $notas_cam->id,
-                    'id_estandar' => $estandares[$count],
-                    'estatus' => 'Sin estatus',
-                    'estatus_renovacion' => 'renovo',
-                    'id_usuario' => auth()->user()->id,
-                );
-                $insert_data[] = $data;
-            }
-        }
-        CamNotEstandares::insert($insert_data);
+        $notas_cam = CamNotas::where('id_cliente', '=', $cliente->id)->first();
+        $checklist = CamChecklist::where('id_nota', '=', $notas_cam->id)->first();
+        $checklist->c1 = $request->get('solicitud');
+        $checklist->c2 = $request->get('contrato');
+        $checklist->c3 = $request->get('carta');
+        $checklist->c4 = $request->get('identificacion');
+        $checklist->c5 = $request->get('curp');
+        $checklist->c6 = $request->get('logo');
+        $checklist->c7 = $request->get('comproante');
+        $checklist->c8 = $request->get('registro_marca');
+        $checklist->c9 = $request->get('reconocimiento');
+        $checklist->c10 = $request->get('cv');
+        $checklist->c11 = $request->get('acta');
+        $checklist->c12 = $request->get('firma_contrato');
+        $checklist->c13 = $request->get('firma_acuerdo');
+        $checklist->c14 = $request->get('firma_nombramiento');
+        $checklist->c15 = $request->get('firma_listado');
+        $checklist->c16 = $request->get('firma_medios');
+        $checklist->c17 = $request->get('firma_redesociales');
+        $checklist->c18 = $request->get('firma_lista_precios');
+        $checklist->c19 = $request->get('entrega_manuales');
+        $checklist->c20 = $request->get('entrega_reglamento');
+        $checklist->c21 = $request->get('entrega_manual');
+        $checklist->c22 = $request->get('entrega_manual_atencion');
+        $checklist->c23 = $request->get('entrega_manual_participante');
+        $checklist->c24 = $request->get('entrega_ligas_accesos');
+        $checklist->c25 = $request->get('entrega_ligas_video');
+        $checklist->c26 = $request->get('entrega_logos');
+        $checklist->c27 = $request->get('entrega_especificaciones');
+        $checklist->c28 = $request->get('entrega_papeleria');
+        $checklist->c29 = $request->get('entrega_triptico');
+        $checklist->c30 = $request->get('entregas_formatos');
+        $checklist->c31 = $request->get('entrega_formatos_seguimientos');
+        $checklist->c32 = $request->get('c32');
+        $checklist->update();
+    
 
         return redirect()->back()->with('success', 'Datos actualizado con exito.');
     }

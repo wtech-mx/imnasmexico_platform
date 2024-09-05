@@ -98,7 +98,7 @@
                                         </td>
                                         <td style="width: 334.5pt;border-top: 1pt solid windowtext;border-right: 1pt solid windowtext;border-bottom: 1pt solid windowtext;border-image: initial;border-left: none;padding: 0cm 5.4pt;vertical-align: top;">
                                             <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>
-                                                <input id="razo_social" name="razo_social" value="{{$cliente->razo_social}}" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" >
+                                                <input id="razon_social" name="razon_social" value="{{$cliente->razon_social}}" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" >
                                             </p>
                                             <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'><span style="font-size:16px;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</span></p>
                                         </td>
@@ -109,7 +109,7 @@
                                         </td>
                                         <td style="width: 334.5pt;border-top: none;border-left: none;border-bottom: 1pt solid windowtext;border-right: 1pt solid windowtext;padding: 0cm 5.4pt;vertical-align: top;">
                                             <p style='margin:0cm;margin-bottom:.0001pt;font-size:15px;font-family:"Arial",sans-serif;'>
-                                                <input id="fecha_checklist" name="fecha_checklist" value="{{$cliente->fecha_checklist}}" type="text" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" >
+                                                <input id="fecha_checklist" name="fecha_checklist" value="{{$cliente->fecha_checklist}}" type="date" class="form-control" placeholder="Ingresar datos" style="border: solid 3px transparent;" >
                                             </p>
                                         </td>
                                     </tr>
@@ -199,7 +199,7 @@
 
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c3 == 0 ? 'checked' : '' }} value="1" name="carta" id="carta1" >
+                                                <input class="form-check-input" type="radio" {{ $checklist->c3 == 1 ? 'checked' : '' }} value="1" name="carta" id="carta1" >
                                             </div>
                                         </td>
 
@@ -740,7 +740,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3" style="width:476.3pt;border:solid windowtext 1.0pt;border-top:none;background:#D9D9D9;padding:0cm 5.4pt 0cm 5.4pt;">
-                                            <textarea  class="form-control" name="" id="" cols="30" rows="3"></textarea>
+                                            <textarea  class="form-control" name="c32" id="c32" cols="30" rows="3">{{$checklist->c32}}</textarea>
                                         </td>
                                     </tr>
                                 </tbody>
