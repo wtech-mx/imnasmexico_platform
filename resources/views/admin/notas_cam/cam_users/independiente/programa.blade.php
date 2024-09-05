@@ -217,7 +217,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c4 == 0 ? 'checked' : '' }} value="1" name="identificacion" id="identificacion1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c4 == 1 ? 'checked' : '' }} value="1" name="identificacion" id="identificacion1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -236,7 +236,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c5 == 0 ? 'checked' : '' }} value="1" name="curp" id="curp1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c5 == 1 ? 'checked' : '' }} value="1" name="curp" id="curp1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -255,7 +255,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c6 == 0 ? 'checked' : '' }} value="1" name="logo" id="logo1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c6 == 1 ? 'checked' : '' }} value="1" name="logo" id="logo1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -274,7 +274,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c7 == 0 ? 'checked' : '' }} value="1" name="comproante" id="comproante1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c7 == 1 ? 'checked' : '' }} value="1" name="comproante" id="comproante1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -293,7 +293,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c8 == 0 ? 'checked' : '' }} value="1" name="registro_marca" id="registro_marca1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c8 == 1 ? 'checked' : '' }} value="1" name="registro_marca" id="registro_marca1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -312,7 +312,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c9 == 0 ? 'checked' : '' }} value="1" name="reconocimiento" id="reconocimiento1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c9 == 1 ? 'checked' : '' }} value="1" name="reconocimiento" id="reconocimiento1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -331,7 +331,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c10 == 0 ? 'checked' : '' }} value="1" name="cv" id="cv1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c10 == 1 ? 'checked' : '' }} value="1" name="cv" id="cv1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -350,7 +350,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c11 == 0 ? 'checked' : '' }} value="1" name="acta" id="acta1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c11 == 1 ? 'checked' : '' }} value="1" name="acta" id="acta1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -373,7 +373,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c12 == 0 ? 'checked' : '' }} value="1" name="firma_contrato" id="firma_contrato1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c12 == 1 ? 'checked' : '' }} value="1" name="firma_contrato" id="firma_contrato1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -393,7 +393,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c13 == 0 ? 'checked' : '' }} value="1" name="firma_acuerdo" id="firma_acuerdo1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c13 ==  1 ? 'checked' : '' }} value="1" name="firma_acuerdo" id="firma_acuerdo1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -413,7 +413,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c14 == 0 ? 'checked' : '' }} value="1" name="firma_nombramiento" id="firma_nombramiento1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c14 == 1 ? 'checked' : '' }} value="1" name="firma_nombramiento" id="firma_nombramiento1">
                                             </div>
 
                                         </td>
@@ -434,7 +434,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c15 == 0 ? 'checked' : '' }} value="1" name="firma_listado" id="firma_listado1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c15 == 1 ? 'checked' : '' }} value="1" name="firma_listado" id="firma_listado1">
                                             </div>
 
                                         </td>
@@ -456,7 +456,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c16 == 0 ? 'checked' : '' }} value="1" name="firma_medios" id="firma_medios1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c16 == 1 ? 'checked' : '' }} value="1" name="firma_medios" id="firma_medios1">
                                             </div>
 
                                         </td>
@@ -479,7 +479,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c17 == 0 ? 'checked' : '' }} value="1" name="firma_redesociales" id="firma_redesociales1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c17 == 1 ? 'checked' : '' }} value="1" name="firma_redesociales" id="firma_redesociales1">
                                             </div>
 
                                         </td>
@@ -501,7 +501,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c18 == 0 ? 'checked' : '' }} value="1" name="firma_lista_precios" id="firma_lista_precios1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c18 == 1 ? 'checked' : '' }} value="1" name="firma_lista_precios" id="firma_lista_precios1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -522,7 +522,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c19 == 0 ? 'checked' : '' }} value="1" name="entrega_manuales" id="entrega_manuales1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c19 == 1 ? 'checked' : '' }} value="1" name="entrega_manuales" id="entrega_manuales1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -537,7 +537,7 @@
                                         </td>
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c20 == 0 ? 'checked' : '' }} value="1" name="entrega_reglamento" id="entrega_reglamento1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c20 == 1 ? 'checked' : '' }} value="1" name="entrega_reglamento" id="entrega_reglamento1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -553,7 +553,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c21 == 0 ? 'checked' : '' }} value="1" name="entrega_manual" id="entrega_manual1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c21 == 1 ? 'checked' : '' }} value="1" name="entrega_manual" id="entrega_manual1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -570,7 +570,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c22 == 0 ? 'checked' : '' }} value="1" name="entrega_manual_atencion" id="entrega_manual_atencion1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c22 == 1 ? 'checked' : '' }} value="1" name="entrega_manual_atencion" id="entrega_manual_atencion1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -587,7 +587,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c23 == 0 ? 'checked' : '' }} value="1" name="entrega_manual_participante" id="entrega_manual_participante1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c23 == 1 ? 'checked' : '' }} value="1" name="entrega_manual_participante" id="entrega_manual_participante1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -604,7 +604,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c24 == 0 ? 'checked' : '' }} value="1" name="entrega_ligas_accesos" id="entrega_ligas_accesos1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c24 == 1 ? 'checked' : '' }} value="1" name="entrega_ligas_accesos" id="entrega_ligas_accesos1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -621,7 +621,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c25 == 0 ? 'checked' : '' }} value="1" name="entrega_ligas_video" id="entrega_ligas_video1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c25 == 1 ? 'checked' : '' }} value="1" name="entrega_ligas_video" id="entrega_ligas_video1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -638,7 +638,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c26 == 0 ? 'checked' : '' }} value="1" name="entrega_logos" id="entrega_logos1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c26 == 1 ? 'checked' : '' }} value="1" name="entrega_logos" id="entrega_logos1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -655,7 +655,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c27 == 0 ? 'checked' : '' }} value="1" name="entrega_especificaciones" id="entrega_especificaciones1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c27 == 1 ? 'checked' : '' }} value="1" name="entrega_especificaciones" id="entrega_especificaciones1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -672,7 +672,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c28 == 0 ? 'checked' : '' }} value="1" name="entrega_papeleria" id="entrega_papeleria1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c28 == 1 ? 'checked' : '' }} value="1" name="entrega_papeleria" id="entrega_papeleria1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -689,7 +689,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c29 == 0 ? 'checked' : '' }} value="1" name="entrega_triptico" id="entrega_triptico1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c29 == 1 ? 'checked' : '' }} value="1" name="entrega_triptico" id="entrega_triptico1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -706,7 +706,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c30 == 0 ? 'checked' : '' }} value="1" name="entregas_formatos" id="entregas_formatos1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c30 == 1 ? 'checked' : '' }} value="1" name="entregas_formatos" id="entregas_formatos1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
@@ -723,7 +723,7 @@
                                         <td style="width:42.5pt;border-top:none;border-left:none;border-bottom:  solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
 
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" {{ $checklist->c31 == 0 ? 'checked' : '' }} value="1" name="entrega_formatos_seguimientos" id="entrega_formatos_seguimientos1">
+                                                <input class="form-check-input" type="radio" {{ $checklist->c31 == 1 ? 'checked' : '' }} value="1" name="entrega_formatos_seguimientos" id="entrega_formatos_seguimientos1">
                                             </div>
                                         </td>
                                         <td style="width:42.75pt;border-top:none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;padding:0cm 5.4pt 0cm 5.4pt;">
