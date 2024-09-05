@@ -331,7 +331,6 @@ class CamNotasController extends Controller
                     'id_estandar' => $estandares[$count],
                     'estatus' => 'Sin estatus',
                     'estatus_renovacion' => 'renovo',
-                    'id_usuario' => auth()->user()->id,
                 );
                 $insert_data[] = $data;
             }
