@@ -102,6 +102,27 @@ Route::get('/docmuento/crednecial/{id}', [App\Http\Controllers\FoliosController:
 Route::get('/docmuento/tira/{id}', [App\Http\Controllers\FoliosController::class, 'index_tira'])->name('folio.index_tira');
 
 
+// =============== M O D U L O   C A M D O C U M E N T O S D I G I T A L E S ===============================
+
+Route::get('cam/citas/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_citas'])->name('edit_independiente.citas');
+Route::patch('cam/citas/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'citas_independiente'])->name('independiente.citas');
+
+Route::get('cam/contrato/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_contrato'])->name('edit_independiente.contrato');
+Route::patch('cam/contrato/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'contrato_independiente'])->name('independiente.contrato');
+
+Route::get('cam/carta/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_carta'])->name('edit_independiente.carta');
+Route::patch('cam/carta/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'carta_independiente'])->name('independiente.carta');
+
+Route::get('cam/formato/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_formato'])->name('edit_independiente.formato');
+Route::patch('cam/formato/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'formato_independiente'])->name('independiente.formato');
+
+Route::get('cam/programa/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_programa'])->name('edit_independiente.programa');
+Route::patch('cam/programa/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'programa_independiente'])->name('independiente.programa');
+
+Route::get('cam/checklist/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_checklist'])->name('edit_independiente.checklist');
+Route::patch('cam/checklist/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'checklist_independiente'])->name('independiente.checklist');
+
+
 Auth::routes();
 
 Route::post('/votar', [App\Http\Controllers\VotosController::class, 'votar'])->name('votar');
@@ -516,24 +537,6 @@ Route::group(['middleware' => ['auth']], function() {
     // =============== M O D U L O   M A N U A L ===============================
     Route::get('cam/notas/', [App\Http\Controllers\CamNotasController::class, 'index'])->name('cam_users.index');
     Route::post('cam/notas/store', [App\Http\Controllers\CamNotasController::class, 'store'])->name('cam_users.store');
-
-    Route::get('cam/citas/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_citas'])->name('edit_independiente.citas');
-    Route::patch('cam/citas/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'citas_independiente'])->name('independiente.citas');
-
-    Route::get('cam/contrato/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_contrato'])->name('edit_independiente.contrato');
-    Route::patch('cam/contrato/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'contrato_independiente'])->name('independiente.contrato');
-
-    Route::get('cam/carta/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_carta'])->name('edit_independiente.carta');
-    Route::patch('cam/carta/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'carta_independiente'])->name('independiente.carta');
-
-    Route::get('cam/formato/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_formato'])->name('edit_independiente.formato');
-    Route::patch('cam/formato/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'formato_independiente'])->name('independiente.formato');
-
-    Route::get('cam/programa/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_programa'])->name('edit_independiente.programa');
-    Route::patch('cam/programa/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'programa_independiente'])->name('independiente.programa');
-
-    Route::get('cam/checklist/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_checklist'])->name('edit_independiente.checklist');
-    Route::patch('cam/checklist/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'checklist_independiente'])->name('independiente.checklist');
 
 });
 
