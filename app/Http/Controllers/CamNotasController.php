@@ -341,10 +341,51 @@ class CamNotasController extends Controller
         return redirect()->back()->with('success', 'Datos actualizado con exito.');
     }
 
-    public function edit_programa($code){
+    public function edit_checklist($code){
+        $cliente = User::where('code', $code)->first();
+        $notas_cam = CamNotas::where('id_cliente', '=', $cliente->id)->first();
+        $checklist = CamChecklist::where('id_nota', '=', $notas_cam->id)->first();
 
-        return view('admin.notas_cam.cam_users.programa');
+        return view('admin.notas_cam.cam_users.independiente.programa', compact('notas_cam', 'cliente', 'checklist'));
     }
 
+    public function checklist_independiente(Request $request, $id){
+        
+        $cliente = User::where('id', $id)->first();
+        $notas_cam = CamNotas::where('id_cliente', '=', $cliente->id)->first();
+        $checklist = CamChecklist::where('id_nota', '=', $notas_cam->id)->first();
+        dd($request);
+        $cliente->fecha_formato = $request->get('fecha_formato');
+        $cliente->puesto = $request->get('puesto');
+        $cliente->direccion = $request->get('direccion');
+        $cliente->city = $request->get('city');
+        $cliente->postcode = $request->get('postcode');
+        $cliente->state = $request->get('state');
+        $cliente->country = $request->get('country');
+        $cliente->telefono = $request->get('telefono');
+        $cliente->pagina_web = $request->get('pagina_web');
+        $cliente->email = $request->get('email');
+        $cliente->celular_casa = $request->get('celular_casa');
+        $cliente->email_alterno = $request->get('email_alterno');
+        $cliente->update();
+
+        $estandares = $request->input('estandares');
+
+        for ($count = 0; $count < count($estandares); $count++) {
+            if($estandares[$count] !== null){
+                $data = array(
+                    'id_nota' => $notas_cam->id,
+                    'id_estandar' => $estandares[$count],
+                    'estatus' => 'Sin estatus',
+                    'estatus_renovacion' => 'renovo',
+                    'id_usuario' => auth()->user()->id,
+                );
+                $insert_data[] = $data;
+            }
+        }
+        CamNotEstandares::insert($insert_data);
+
+        return redirect()->back()->with('success', 'Datos actualizado con exito.');
+    }
 
 }

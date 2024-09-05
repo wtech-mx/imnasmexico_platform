@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->text('email_alterno')->nullable();
             $table->date('fecha_formato')->nullable();
+            $table->date('fecha_checklist')->nullable();
+            $table->text('responsable_entrega')->nullable();
+            $table->text('recibe_verifica')->nullable();
         });
     }
 

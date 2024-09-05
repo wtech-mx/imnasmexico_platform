@@ -66,7 +66,7 @@
                                                         Formato
                                                     </a>
 
-                                                    <a target="_blank" class="btn btn-xs btn-dark" href="{{ route('edit_independiente.programa', $nota_cam->Cliente->code) }}" >
+                                                    <a target="_blank" class="btn btn-xs btn-dark" href="{{ route('edit_independiente.checklist', $nota_cam->Cliente->code) }}" >
                                                         CHECK LIST
                                                     </a>
 

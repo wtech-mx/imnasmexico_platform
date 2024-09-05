@@ -477,7 +477,7 @@
                                 @if($existeNota)
 
                                 @else
-                                    <button type="submit" class="btn btn-sm btn-success">Guardar firma</button>
+                                    <button type="submit" class="btn btn-sm btn-success">Guardar</button>
                                 @endif
                             </form>
                         </div>
