@@ -498,6 +498,7 @@ class DocumentosController extends Controller
         $tam_letra_nombre = $request->get('tam_letra_nombre');
 
         $tam_letra_especi = $request->get('tam_letra_especi');
+
         $tam_letra_folio = $request->get('tam_letra_folio');
 
         $tam_letra_espec_cedu  = $request->get('tam_letra_espec_cedu');

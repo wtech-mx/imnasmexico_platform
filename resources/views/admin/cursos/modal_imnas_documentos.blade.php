@@ -4,7 +4,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="modal_documentosLabel">Generar Diploma y/o Certificacion IMNAS</h1>
+          <h1 class="modal-title fs-5" id="modal_documentosLabel">Generar Diploma y/o Certificacion IMNAS Listas</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
@@ -599,6 +599,16 @@
                                                     <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
                                                 </span>
                                                 <input id="tam_letra_especi" name="tam_letra_especi" type="number" class="form-control" value="40" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-3 gc_cn">
+                                            <label for="name">Tamaño Letra nombre TH</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                </span>
+                                                <input id="tam_letra_nombre" name="tam_letra_nombre" type="number" class="form-control" value="45" >
                                             </div>
                                         </div>
 

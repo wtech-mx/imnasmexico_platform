@@ -106,6 +106,22 @@
                                     </div>
 
                                     <div class="col-6 form-group">
+                                        <label for="foto_tam_infantil">Foto tamaño Infantil</label>
+                                        <input id="foto_tam_infantil" name="foto_tam_infantil" type="file" class="form-control" >
+                                        @if (pathinfo($documento->foto_tam_infantil, PATHINFO_EXTENSION) == 'pdf')
+                                        <iframe class="mt-2" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil)}}" style="width: 100%; height: 350px;"></iframe>
+                                        <p class="text-center text-dark">
+                                            <a class="btn btn-sm btn btn-sm text-dark" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil)}}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver archivo</a>
+                                        </p>
+                                        @elseif (pathinfo($documento->foto_tam_infantil, PATHINFO_EXTENSION) == 'png' || pathinfo($documento->foto_tam_infantil, PATHINFO_EXTENSION) == 'jpg' || pathinfo($documento->foto_tam_infantil, PATHINFO_EXTENSION) == 'jpeg')
+                                        <p class="text-center mt-2">
+                                            <img id="blah" src="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" alt="Imagen" style="width: 250px;height: 100%;"/><br>
+                                            <a class="text-center text-dark btn btn-sm" href="{{asset('documentos/'. $cliente->telefono . '/' .$documento->foto_tam_infantil) }}" target="_blank" style="background: {{$configuracion->color_boton_close}}; color: #ffff">Ver Imagen</a>
+                                        </p>
+                                        @endif
+                                    </div>
+
+                                    <div class="col-6 form-group">
                                         <label for="carta_compromiso">Carta Compromiso</label>
                                         <input id="carta_compromiso" name="carta_compromiso" type="file" class="form-control" >
                                         @if (pathinfo($documento->carta_compromiso, PATHINFO_EXTENSION) == 'pdf')
