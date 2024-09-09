@@ -507,6 +507,8 @@ class DocumentosController extends Controller
 
         $tam_letra_esp_cred = $request->get('tam_letra_esp_cred');
 
+        $capitalizar =  $request->get('capitalizar');
+
         if ($request->hasFile("img_infantil")) {
             $file = $request->file('img_infantil');
             $path = $ruta_manual;
@@ -592,7 +594,7 @@ class DocumentosController extends Controller
                 $ticket->update();
 
 
-                $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('tam_letra_foli_cedu_tras','tam_letra_foli_cedu','tam_letra_espec_cedu','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+                $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('capitalizar','tam_letra_foli_cedu_tras','tam_letra_foli_cedu','tam_letra_espec_cedu','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
                 $pdf->setPaper('A4', 'portrait');
                 $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
 
@@ -605,7 +607,7 @@ class DocumentosController extends Controller
                 $ticket->folio = $request->get('folio');
                 $ticket->update();
 
-                $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+                $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('capitalizar','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
                 // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
                 $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
@@ -644,7 +646,7 @@ class DocumentosController extends Controller
                 $ancho_puntos = $ancho_cm * 28.35;
                 $alto_puntos = $alto_cm * 28.35;
 
-                $pdf = PDF::loadView('admin.pdf.diploma_imnas',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
+                $pdf = PDF::loadView('admin.pdf.diploma_imnas',compact('capitalizar','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
                 $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
 

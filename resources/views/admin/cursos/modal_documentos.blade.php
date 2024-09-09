@@ -1,10 +1,10 @@
 <!-- Modal -->
 <div class="modal fade" id="modal_documentos_{{ $order->User->id }}" tabindex="-1" aria-labelledby="modal_documentosLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
       <div class="modal-content">
 
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="modal_documentosLabel">Generar Diploma y/o Certificacion</h1>
+          <h1 class="modal-title fs-5" id="modal_documentosLabel">Generar Diploma y/o Certificacion Listas</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
@@ -329,7 +329,7 @@
                                                 @if ($order->User->Documentos->curp !== null)
 
                                                 <div class="form-group col-12 curp_content">
-                                                    <label for="name">CURP(s)*:</label>
+                                                    <label for="name">CURP(ss)*:</label>
                                                     <div class="input-group">
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <img class="img_profile_label" src="{{asset('assets/user/icons/abc-block.png')}}" alt="" width="30px">
@@ -389,6 +389,9 @@
 
                                                 </div>
                                             </div>
+
+
+
                                         </div>
 
                                     </div>
@@ -603,10 +606,100 @@
 
                                                 </div>
                                             </div>
+
                                         </div>
 
                                     </div>
                                     @endif
+
+
+                                    <div class="row">
+                                        <div class="form-group col-3 gc_cn">
+                                            <label for="name">Tamaño Letra Especialidad TH</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                </span>
+                                                <input id="tam_letra_especi" name="tam_letra_especi" type="number" class="form-control" value="40" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-3 gc_cn">
+                                            <label for="name">Letra Folio TH</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                </span>
+                                                <input id="tam_letra_folio" name="tam_letra_folio" type="number" class="form-control" value="15" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-3 gc_cn">
+                                            <label for="name">Letra Especialidad Cedula</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                </span>
+                                                <input id="tam_letra_espec_cedu" name="tam_letra_espec_cedu" type="number" class="form-control" value="17" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-3 gc_cn">
+                                            <label for="name">Letra Folio Cedula</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                </span>
+                                                <input id="tam_letra_foli_cedu" name="tam_letra_foli_cedu" type="number" class="form-control" value="19" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-3 gc_cn">
+                                            <label for="name">Letra Folio Trasero Cedula</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                </span>
+                                                <input id="tam_letra_foli_cedu_tras" name="tam_letra_foli_cedu_tras" type="number" class="form-control" value="25" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-3 gc_cn">
+                                            <label for="name">Letra listas materias</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                </span>
+                                                <input id="tam_letra_tira_afi" name="tam_letra_tira_afi" type="number" class="form-control" value="26" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-3 gc_cn">
+                                            <label for="name">Letra credencial especialidad</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                </span>
+                                                <input id="tam_letra_esp_cred" name="tam_letra_esp_cred" type="number" class="form-control" value="8" >
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group col-6">
+                                            <label for="name">Capitalizar Nombre *</label>
+                                            <div class="input-group">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px">
+                                                </span>
+                                                <select name="capitalizar" id="capitalizar" class="form-select" >
+                                                    <option value="No">Seleciona una opcion</option>
+                                                    <option value="Si">Si</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
 
 
                                     <div class="col-12">
