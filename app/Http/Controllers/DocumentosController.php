@@ -495,6 +495,7 @@ class DocumentosController extends Controller
         $nombres = $request->get('nombres');
         $apellido_apeterno = $request->get('apellido_apeterno');
         $apellido_materno = $request->get('apellido_materno');
+        $tam_letra_nombre = $request->get('tam_letra_nombre');
 
         $tam_letra_especi = $request->get('tam_letra_especi');
         $tam_letra_folio = $request->get('tam_letra_folio');
