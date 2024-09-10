@@ -891,6 +891,7 @@ class DocumentosController extends Controller
                     return $pdf->download('CN-Titulo Honorifico Online QR_'.$nombre.'.pdf');
 
                 }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR'){
+
                     $id_ticket = $request->get('id_ticket_orders');
                     $ticket = OrdersTickets::find($id_ticket);
                     $ticket->estatus_doc = '1';
@@ -902,18 +903,11 @@ class DocumentosController extends Controller
                     $ticket->folio = $request->get('folio');
                     $ticket->update();
 
-                    $ancho_cm = 33;
-                    $alto_cm = 48;
+                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('tam_letra_nombre','capitalizar','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
 
-                    $ancho_puntos = $ancho_cm * 28.35;
-                    $alto_puntos = $alto_cm * 28.35;
+                    $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
 
-                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso2',compact('curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
-
-                    //$pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
-                    $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); //  Cambiar 'a tamaño 48x33 super b'
-
-                    return $pdf->download('CN-Titulo Honorifico Online QR_'.$nombre.'.pdf');
+                    return $pdf->download('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
 
                 }
             }
