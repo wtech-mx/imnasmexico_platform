@@ -284,8 +284,13 @@
                                                             <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que deseas eliminar esta nota?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                         </form> --}}
 
+                                                        <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d;">
+                                                            <i class="fa fa-truck"></i>
+                                                        </a>
+
                                                     </td>
                                                 </tr>
+                                                @include('admin.cotizacion.guia')
                                                 @include('admin.cotizacion.modal_estatus')
                                                 @include('admin.cotizacion.modal_products')
                                             @endforeach

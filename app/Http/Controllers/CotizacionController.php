@@ -332,11 +332,38 @@ class CotizacionController extends Controller
     }
 
     public function update_estatus(Request $request, $id){
-
         $nota = NotasProductos::findOrFail($id);
         $nota->estatus_cotizacion  = $request->get('estatus_cotizacion');
         $nota->estadociudad  = $request->get('estado');
+            if($request->get('estatus_cotizacion') == 'Preparado'){
+                $nota->fecha_preparado  = date("Y-m-d H:i:s");
+            }else if($request->get('estatus_cotizacion') == 'Enviado'){
+                $nota->fecha_envio  = date("Y-m-d H:i:s");
+            }
+        $nota->save();
 
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back()->with('success', 'Se ha actualizada');
+
+    }
+
+    public function update_guia(Request $request, $id){
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera/');
+        }else{
+            $pago_fuera = public_path() . '/pago_fuera/';
+        }
+
+        $nota = NotasProductos::findOrFail($id);
+        $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+        if ($request->hasFile("doc_guia")) {
+            $file = $request->file('doc_guia');
+            $path = $pago_fuera;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $nota->doc_guia = $fileName;
+        }
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
