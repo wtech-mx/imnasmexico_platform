@@ -817,7 +817,6 @@ class DocumentosController extends Controller
             }
         }else{
             if($curso_first->stps == '1' && $curso_first->titulo_hono == '1'){
-                dd($tipo_documentos->tipo);
                 if($tipo_documentos->tipo == 'Diploma_STPS'){
                     $id_ticket = $request->get('id_ticket_orders');
                     $ticket = OrdersTickets::find($id_ticket);
