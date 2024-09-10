@@ -215,13 +215,8 @@
                             </div>
 
                             <div class="col-6">
-                                <div id="sig2"></div>
-                                <textarea id="signed2" name="signed2" style="display: none"></textarea>
-                                <h6 class="text-left mt-3 mb-3">
-                                    Firma  del Representante de IMNAS
-                                    Cam by Imnas, S.A. de C.V.
-                                </h6>
-                                <button id="clear2" class="btn btn-sm btn-danger ">Repetir</button>
+                                <img src="https://plataforma.imnasmexico.com/utilidades_documentos/firma_lic.png" alt="" style="width: 150px">
+
                             </div>
 
                             <div class="col-6">
