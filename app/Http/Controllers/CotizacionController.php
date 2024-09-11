@@ -346,6 +346,8 @@ class CotizacionController extends Controller
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");
             }else if($request->get('estatus_cotizacion') == 'Enviado'){
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
+            }else if($request->get('estatus_cotizacion') == 'Aprobada'){
+                $nota->fecha_aprobada  = date("Y-m-d");
             }
 
         if ($request->hasFile("foto_pago")) {
@@ -512,7 +514,7 @@ class CotizacionController extends Controller
             $fechaInicio = $request->input('fecha_inicio');
             $fechaFin = $request->input('fecha_fin');
 
-            $query->whereBetween('fecha', [$fechaInicio, $fechaFin]);
+            $query->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin]);
         }
 
         $query->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->where('estatus_cotizacion', NULL);
@@ -614,7 +616,7 @@ class CotizacionController extends Controller
             $fechaInicio = $request->input('fecha_inicio');
             $fechaFin = $request->input('fecha_fin');
 
-            $query2->whereBetween('fecha', [$fechaInicio, $fechaFin]);
+            $query2->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin]);
         }
 
         $query2->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->where('estatus_cotizacion', 'Aprobada');
@@ -716,6 +718,7 @@ class CotizacionController extends Controller
             $chart_ProductMeno = 'data:image/png;base64, '.base64_encode($chartData_ProductMenos);
 
             $ciudadesData = NotasProductos::whereNotNull('estadociudad') // Filtra los registros donde estadociudad no es null
+            ->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
             ->select('estadociudad', DB::raw('COUNT(*) as total_compras'))
             ->groupBy('estadociudad')
             ->orderBy('total_compras', 'desc')
