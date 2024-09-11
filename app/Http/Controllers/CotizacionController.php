@@ -332,6 +332,13 @@ class CotizacionController extends Controller
     }
 
     public function update_estatus(Request $request, $id){
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera/');
+        }else{
+            $pago_fuera = public_path() . '/pago_fuera/';
+        }
+
         $nota = NotasProductos::findOrFail($id);
         $nota->estatus_cotizacion  = $request->get('estatus_cotizacion');
         $nota->estadociudad  = $request->get('estado');
@@ -340,6 +347,14 @@ class CotizacionController extends Controller
             }else if($request->get('estatus_cotizacion') == 'Enviado'){
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
             }
+
+        if ($request->hasFile("foto_pago")) {
+            $file = $request->file('foto_pago');
+            $path = $pago_fuera;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $nota->foto_pago = $fileName;
+        }
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

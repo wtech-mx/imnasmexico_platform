@@ -69,6 +69,16 @@
                                     <option value="Zacatecas">Zacatecas</option>
                                 </select>
                             </div>
+
+                            <div class="form-group col-12">
+                                <label for="name">Comprobante de pago</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input class="form-control" type="file" id="foto_pago" name="foto_pago">
+                                </div>
+                            </div>
                         </div>
 
                     </div>

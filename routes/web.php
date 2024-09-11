@@ -541,7 +541,7 @@ Route::group(['middleware' => ['auth']], function() {
     // =============== M O D U L O   B O D E G A ===============================
     Route::get('bodega/preparacion/', [App\Http\Controllers\BodegaController::class, 'index_preparacion'])->name('index_preparacion.bodega');
     Route::patch('bodega/preparacion/guia/{id}', [App\Http\Controllers\CotizacionController::class, 'update_guia'])->name('notas_cotizacion.update_guia');
-
+    Route::patch('bodega/preparacion/guia/cosmica/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_guia'])->name('notas_cosmica.update_guia');
 });
 
 // Route::get('registro/login', function () {

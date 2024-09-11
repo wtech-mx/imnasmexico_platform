@@ -253,11 +253,20 @@
                                                         @endcan
                                                         @can('nota-productos-editar')
                                                             <a class="btn btn-sm btn-warning" href="{{ route('cotizacion_cosmica.edit', $item->id) }}">
-                                                            <i class="fa fa-fw fa-edit"></i>
+                                                                <i class="fa fa-fw fa-edit"></i>
+                                                            </a>
+                                                        @endcan
+                                                        <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                            <i class="fa fa-truck"></i>
                                                         </a>
-                                                    @endcan
+
+                                                        <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#pagoModal{{$item->id}}" style="background: #2d6ee6; color: #ffff">
+                                                            <i class="fa fa-credit-card-alt"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
+                                                @include('admin.cotizacion_cosmica.guia')
+                                                @include('admin.cotizacion_cosmica.modal_pago')
                                                 @include('admin.cotizacion_cosmica.modal_estatus')
                                             @endforeach
                                         </tbody>
