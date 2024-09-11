@@ -205,8 +205,10 @@ class DocumentosController extends Controller
         $nombres = $request->get('nombres');
         $apellido_apeterno = $request->get('apellido_apeterno');
         $apellido_materno = $request->get('apellido_materno');
+        $tam_letra_nombre = $request->get('tam_letra_nombre');
 
         $tam_letra_especi = $request->get('tam_letra_especi');
+
         $tam_letra_folio = $request->get('tam_letra_folio');
 
         $tam_letra_espec_cedu  = $request->get('tam_letra_espec_cedu');
@@ -216,6 +218,8 @@ class DocumentosController extends Controller
         $tam_letra_tira_afi = $request->get('tam_letra_tira_afi');
 
         $tam_letra_esp_cred = $request->get('tam_letra_esp_cred');
+
+        $capitalizar =  $request->get('capitalizar');
 
         if ($request->hasFile("img_infantil")) {
             $file = $request->file('img_infantil');
@@ -237,8 +241,6 @@ class DocumentosController extends Controller
 
         $tipo_documentos = Tipodocumentos::find($tipo);
 
-
-
         if($tipo_documentos->tipo == 'Diploma_STPS'){
 
             $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
@@ -256,7 +258,7 @@ class DocumentosController extends Controller
 
         }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR'){
 
-            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('tam_letra_nombre','capitalizar','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
             // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
             $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
@@ -409,7 +411,6 @@ class DocumentosController extends Controller
 
             return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
         }
-
     }
 
     public function generar_alumno(Request $request){
