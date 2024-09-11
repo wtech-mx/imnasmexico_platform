@@ -28,21 +28,6 @@ class CamNotasController extends Controller
         if (User::where('telefono', $request->celular)->exists() || User::where('email', $request->email)->exists()) {
             if (User::where('telefono', $request->celular)->exists()) {
                 $user = User::where('telefono', $request->celular)->first();
-                $user->razon_social = $request->get('razon_social');
-                $user->direccion = $request->get('direccion');
-                $user->country = $request->get('country');
-                $user->state = $request->get('state');
-                $user->postcode = $request->get('postcode');
-                $user->city = $request->get('city');
-                $user->celular_casa = $request->get('telefono');
-                $user->facebook = $request->get('facebook');
-                $user->tiktok = $request->get('tiktok');
-                $user->instagram = $request->get('instagram');
-                $user->pagina_web = $request->get('pagina_web');
-                $user->otra_red = $request->get('otra_red');
-                $user->puesto = $request->get('puesto');
-                $user->curp = $request->get('curp');
-
                 if($request->get('tipo') == 'Centro Evaluación'){
                     $user->user_cam = '4';
                     $user->cam = $request->celular;
@@ -53,20 +38,6 @@ class CamNotasController extends Controller
                 $user->update();
             } else {
                 $user = User::where('email', $request->email)->first();
-                $user->razon_social = $request->get('razon_social');
-                $user->direccion = $request->get('direccion');
-                $user->country = $request->get('country');
-                $user->state = $request->get('state');
-                $user->postcode = $request->get('postcode');
-                $user->city = $request->get('city');
-                $user->celular_casa = $request->get('telefono');
-                $user->facebook = $request->get('facebook');
-                $user->tiktok = $request->get('tiktok');
-                $user->instagram = $request->get('instagram');
-                $user->pagina_web = $request->get('pagina_web');
-                $user->otra_red = $request->get('otra_red');
-                $user->puesto = $request->get('puesto');
-                $user->curp = $request->get('curp');
                 if($request->get('tipo') == 'Centro Evaluación'){
                     $user->user_cam = '4';
                     $user->cam = $request->celular;
@@ -77,6 +48,7 @@ class CamNotasController extends Controller
                 $user->update();
             }
             $payer = $user;
+            $notas_cam = CamNotas::where('id_cliente', $user->id)->first();
         } else {
             $payer = new User();
             $payer->name = $request->get('name');
@@ -84,20 +56,6 @@ class CamNotasController extends Controller
             $payer->username = $request->get('celular');
             $payer->telefono = $request->get('celular');
             $payer->code = $code;
-            $payer->razon_social = $request->get('razon_social');
-            $payer->direccion = $request->get('direccion');
-            $payer->country = $request->get('country');
-            $payer->state = $request->get('state');
-            $payer->postcode = $request->get('postcode');
-            $payer->city = $request->get('city');
-            $payer->celular_casa = $request->get('telefono');
-            $payer->facebook = $request->get('facebook');
-            $payer->tiktok = $request->get('tiktok');
-            $payer->instagram = $request->get('instagram');
-            $payer->pagina_web = $request->get('pagina_web');
-            $payer->otra_red = $request->get('otra_red');
-            $payer->puesto = $request->get('puesto');
-            $payer->curp = $request->get('curp');
             $payer->cliente = '1';
             if($request->get('tipo') == 'Centro Evaluación'){
                 $payer->user_cam = '4';
@@ -109,34 +67,34 @@ class CamNotasController extends Controller
             $payer->membresia = $request->get('membresia');
             $payer->password = Hash::make($request->get('celular'));
             $payer->save();
+
+            $notas_cam = new CamNotas;
+            $notas_cam->id_cliente = $payer->id;
+            $notas_cam->tipo = $request->get('tipo');
+            $notas_cam->fecha = date('Y-m-d');
+            $notas_cam->membresia = $request->get('membresia');
+            $notas_cam->id_usuario = auth()->user()->id;
+            $notas_cam->nota = 'CAM Nuevo';
+            $notas_cam->save();
+
+            $checklist = new CamChecklist;
+            $checklist->id_nota = $notas_cam->id;
+            $checklist->save();
+
+            $citas = new CamCitas;
+            $citas->id_nota = $notas_cam->id;
+            $citas->save();
+
+            $documentos = new CamDocumentosUsers;
+            $documentos->id_nota = $notas_cam->id;
+            $documentos->save();
+
+            $videos = new CamVideosUser;
+            $videos->id_nota = $notas_cam->id;
+            $videos->id_cliente = $notas_cam->id_cliente;
+            $videos->tipo = $request->get('tipo');
+            $videos->save();
         }
-
-        $notas_cam = new CamNotas;
-        $notas_cam->id_cliente = $payer->id;
-        $notas_cam->tipo = $request->get('tipo');
-        $notas_cam->fecha = date('Y-m-d');
-        $notas_cam->membresia = $request->get('membresia');
-        $notas_cam->id_usuario = auth()->user()->id;
-        $notas_cam->nota = 'CAM Nuevo';
-        $notas_cam->save();
-
-        $checklist = new CamChecklist;
-        $checklist->id_nota = $notas_cam->id;
-        $checklist->save();
-
-        $citas = new CamCitas;
-        $citas->id_nota = $notas_cam->id;
-        $citas->save();
-
-        $documentos = new CamDocumentosUsers;
-        $documentos->id_nota = $notas_cam->id;
-        $documentos->save();
-
-        $videos = new CamVideosUser;
-        $videos->id_nota = $notas_cam->id;
-        $videos->id_cliente = $notas_cam->id_cliente;
-        $videos->tipo = $request->get('tipo');
-        $videos->save();
 
         $contrato = new CamContrato;
         $contrato->id_nota = $notas_cam->id;
@@ -304,10 +262,10 @@ class CamNotasController extends Controller
     }
 
     public function formato_independiente(Request $request, $id){
-        
+
         $cliente = User::where('id', $id)->first();
         $notas_cam = CamNotas::where('id_cliente', '=', $cliente->id)->first();
-        
+
         $cliente->fecha_formato = $request->get('fecha_formato');
         $cliente->puesto = $request->get('puesto');
         $cliente->direccion = $request->get('direccion');
@@ -349,8 +307,8 @@ class CamNotasController extends Controller
     }
 
     public function checklist_independiente(Request $request, $id){
-        
-        $cliente = User::where('id', $id)->first();        
+
+        $cliente = User::where('id', $id)->first();
         $cliente->razon_social = $request->get('razon_social');
         $cliente->fecha_checklist = $request->get('fecha_checklist');
         $cliente->responsable_entrega = $request->get('responsable_entrega');
@@ -392,7 +350,7 @@ class CamNotasController extends Controller
         $checklist->c31 = $request->get('entrega_formatos_seguimientos');
         $checklist->c32 = $request->get('c32');
         $checklist->update();
-    
+
 
         return redirect()->back()->with('success', 'Datos actualizado con exito.');
     }
