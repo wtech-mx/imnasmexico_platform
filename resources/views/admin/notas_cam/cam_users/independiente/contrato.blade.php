@@ -502,11 +502,11 @@
                                 </div>
 
                                 <div class="col-6">
-                                    <img src="" alt="">
-                                    <h6 class="text-left mt-3 mb-3">
+                                    <img src="https://plataforma.imnasmexico.com/utilidades_documentos/firma_lic.png" alt="" style="width: 150px">
+                                    {{-- <h6 class="text-left mt-3 mb-3">
                                         LIC. CLAUDIA CARLA RIZO FLORES <br>
                                         TITULAR ECE356-18 INSTITUTO MEXICANO NATURALES AIN SPA S. C.
-                                    </h6>
+                                    </h6> --}}
                                 </div>
 
                             </form>
