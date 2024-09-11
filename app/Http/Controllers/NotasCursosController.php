@@ -96,7 +96,7 @@ class NotasCursosController extends Controller
                 } else {
                     $user = User::where('email', $request->email)->first();
                 }
-                $payer = $user;
+                $cliente = $user->id;
             } else {
                 $payer = new User;
                 $payer->name = $request->get('name');
