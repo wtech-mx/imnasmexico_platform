@@ -68,7 +68,6 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Cliente</th>
-                                            <th>Restante</th>
                                             <th>Fecha</th>
                                             <th>Acciones</th>
                                         </tr>
@@ -79,13 +78,6 @@
                                                     <td>{{ $nota->id }}</td>
                                                     <td>{{ $nota->User->name }}</td>
 
-                                                    @if ($nota->restante == 0)
-                                                    <td> <label class="badge badge-success" style="font-size: 13px;">Pagado</label> </td>
-                                                    @elseif ($nota->restante >= 0)
-                                                    <td> <label class="badge badge-danger" style="font-size: 15px;">${{ $nota->restante }}</label> </td>
-                                                    @else
-                                                    <td> <label class="badge badge-danger" style="font-size: 15px;">${{ $nota->restante }}</label> </td>
-                                                    @endif
                                                     <td>
                                                         @php
                                                         $fecha = $nota->fecha;
@@ -95,10 +87,6 @@
                                                         {{$fecha_formateada}}
                                                     </td>
                                                     <td>
-                                                        {{-- <a type="button" class="btn btn-sm" target="_blank"
-                                                        href="https://wa.me/52{{$nota->User->phone}}?text=Hola%20{{$nota->User->name}},%20te%20enviamos%20tu%20nota%20el%20d%C3%ADa:%20{{ $nota->fecha }},%20vuelve%20pronto.%0D%0ADa+click+en+el+siguente+enlace%0D%0A%0D%0A{{route('notas.index_user', $nota->id)}}"
-                                                        style="background: #00BB2D; color: #ffff">
-                                                        <i class="fa fa-whatsapp"></i></a> --}}
                                                         @if ($nota->paquete != NULL)
                                                             <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$nota->paquete) }}" target="_blank">Ver orden</a>
                                                         @endif

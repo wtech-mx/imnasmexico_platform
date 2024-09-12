@@ -17,7 +17,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('notas_productos.store') }}" enctype="multipart/form-data" role="form">
+                        <form id="myForm" method="POST" action="{{ route('notas_productos.store') }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
@@ -344,7 +344,7 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff; font-size: 17px;">Guardar</button>
+                                <button type="submit" class="btn close-modal" id="saveButton" style="background: {{$configuracion->color_boton_save}}; color: #ffff; font-size: 17px;">Guardar</button>
                             </div>
                         </form>
                     </div>
@@ -528,6 +528,18 @@
         $('#toggleFactura').change(function () {
             // Mostrar u ocultar el div basado en el estado del switch
             $('#divFactura').toggle();
+        });
+
+        $('#myForm').on('submit', function() {
+            // Deshabilita el botón al enviar el formulario
+            $('#saveButton').prop('disabled', true);
+        });
+
+        $(document).on('keydown', function(event) {
+            // Detecta si la tecla presionada es Enter (keyCode 13)
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Evita el envío del formulario
+            }
         });
     });
 </script>
