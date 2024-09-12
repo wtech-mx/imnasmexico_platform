@@ -518,7 +518,7 @@
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
                                                         </span>
-                                                        <input id="foto_infantil_blanco" name="foto_infantil_blanco" type="file" class="form-control"  >
+                                                        <input id="foto_infantil_blanco" name="img_infantil" type="file" class="form-control"  >
                                                     </div>
                                                     @if (pathinfo($order->User->Documentos->foto_infantil_blanco, PATHINFO_EXTENSION) == 'pdf')
                                                         <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->foto_infantil_blanco) }}" download="{{ $order->User->Documentos->foto_infantil_blanco }}" style="background: #836262; border-radius: 19px;">
