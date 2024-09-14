@@ -10,9 +10,7 @@
             <form method="POST" action="{{ route('notas_cotizacion.update_estatus', $item->id) }}" enctype="multipart/form-data" role="form">
                 @csrf
                 <input type="hidden" name="_method" value="PATCH">
-                <div class="modal-body">
                     <div class="row">
-
                         <div class="form-group">
                             <label for="name">Estatus *</label>
                             <div class="input-group mb-3">
@@ -82,30 +80,51 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="form-group col-12 metodo-pago-select" style="display: none;">
-                        <div class="form-group col-12">
-                            <label for="name">Comprobante de pago</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
-                                </span>
-                                <input class="form-control" type="file" id="foto_pago" name="foto_pago">
+                        <div class="form-group col-12 metodo-pago-select" style="display: none;">
+                            <div class="form-group col-12">
+                                <label for="name">Comprobante de pago</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input class="form-control" type="file" id="foto_pago" name="foto_pago">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label for="name">Doc Guia</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input class="form-control" type="file" id="doc_guia" name="doc_guia">
+                                </div>
                             </div>
                         </div>
 
-                        <div class="form-group col-12">
-                            <label for="name">Doc Guia</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
-                                </span>
-                                <input class="form-control" type="file" id="doc_guia" name="doc_guia">
+                        <div class="form-group col-12 metodo-pago-entrega-select" style="display: none;">
+                            <div class="form-group col-12">
+                                <label for="name">fecha entrega</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input class="form-control" type="date" id="fecha_entrega" name="fecha_entrega">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label for="name">Direccion</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input class="form-control" type="text" id="direccion_entrega" name="direccion_entrega">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -135,7 +154,9 @@
                 var selectedValue = $(this).val();
                 if (selectedValue === 'Envio') {
                     $modal.find('.metodo-pago-select').show();
-                } else {
+                    $modal.find('.metodo-pago-entrega-select').hide();
+                } else if (selectedValue === 'Contra Entrega') {
+                    $modal.find('.metodo-pago-entrega-select').show();
                     $modal.find('.metodo-pago-select').hide();
                 }
             }).trigger('change'); // Activar el evento para el valor actual.

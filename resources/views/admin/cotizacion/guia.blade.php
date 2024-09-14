@@ -15,6 +15,8 @@
 
                         @if ($item->metodo_pago == 'Contra Entrega')
                             <h5>Pedido Contra Entrega</h5>
+                            <p>Fecha entrega: {{$item->fecha_entrega}}</p>
+                            <p>Direccion: {{$item->direccion_entrega}}</p>
                         @else
                             <div class="col-12">
                                 <embed src="{{ asset('pago_fuera/'.$item->doc_guia) }}" type="application/pdf" style="width: 450px; height: 400px;" />

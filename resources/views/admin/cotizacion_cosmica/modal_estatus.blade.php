@@ -73,6 +73,20 @@
                                 </select>
                             </div>
 
+                            <label for="name">Forma de envio*</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
+                                </span>
+                                <select class="form-select d-inline-block metodo-pago" data-toggle="select" id="metodo_pago" name="metodo_pago">
+                                    <option value="">Selecciona una opcion</option>
+                                    <option value="Envio">Envio</option>
+                                    <option value="Contra Entrega">Contra Entrega</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-12 metodo-pago-select" style="display: none;">
                             <div class="form-group col-12">
                                 <label for="name">Comprobante de pago</label>
                                 <div class="input-group mb-3">
@@ -80,6 +94,38 @@
                                         <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
                                     </span>
                                     <input class="form-control" type="file" id="foto_pago" name="foto_pago">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label for="name">Doc Guia</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input class="form-control" type="file" id="doc_guia" name="doc_guia">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-12 metodo-pago-entrega-select" style="display: none;">
+                            <div class="form-group col-12">
+                                <label for="name">fecha entrega</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input class="form-control" type="date" id="fecha_entrega" name="fecha_entrega">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label for="name">Direccion</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input class="form-control" type="text" id="direccion_entrega" name="direccion_entrega">
                                 </div>
                             </div>
                         </div>
@@ -101,19 +147,30 @@
 </div>
 
 <script>
-$(document).ready(function() {
-    $('.modal').on('shown.bs.modal', function() {
-        var $modal = $(this);
+    $(document).ready(function() {
+        $('.modal').on('shown.bs.modal', function() {
+            var $modal = $(this);
 
-        $modal.find('.estatus-cotizacion').change(function() {
-            var selectedValue = $(this).val();
-            if (selectedValue === 'Aprobada') {
-                $modal.find('.estado-select').show();
-            } else {
-                $modal.find('.estado-select').hide();
-            }
-        }).trigger('change'); // Activar el evento para el valor actual.
+            $modal.find('.estatus-cotizacion').change(function() {
+                var selectedValue = $(this).val();
+                if (selectedValue === 'Aprobada') {
+                    $modal.find('.estado-select').show();
+                } else {
+                    $modal.find('.estado-select').hide();
+                }
+            }).trigger('change'); // Activar el evento para el valor actual.
+
+            $modal.find('.metodo-pago').change(function() {
+                var selectedValue = $(this).val();
+                if (selectedValue === 'Envio') {
+                    $modal.find('.metodo-pago-select').show();
+                    $modal.find('.metodo-pago-entrega-select').hide();
+                } else if (selectedValue === 'Contra Entrega') {
+                    $modal.find('.metodo-pago-entrega-select').show();
+                    $modal.find('.metodo-pago-select').hide();
+                }
+            }).trigger('change'); // Activar el evento para el valor actual.
+        });
     });
-});
 
 </script>

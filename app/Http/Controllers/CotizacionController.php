@@ -367,6 +367,9 @@ class CotizacionController extends Controller
 
                 $nota->fecha_preparacion  = date("Y-m-d H:i:s");
                 $nota->metodo_pago  = $request->get('metodo_pago');
+
+                $nota->fecha_entrega  = $request->get('fecha_entrega');
+                $nota->direccion_entrega  = $request->get('direccion_entrega');
             }
         $nota->save();
 
