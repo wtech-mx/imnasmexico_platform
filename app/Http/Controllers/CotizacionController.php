@@ -25,7 +25,7 @@ class CotizacionController extends Controller
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
         $notas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->orderBy('id','DESC')->where('estatus_cotizacion','=' , null)->get();
+        ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion','=' , null)->get();
 
         $notasAprobadas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
         ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('estatus_cotizacion','=' , 'Aprobada')->get();
@@ -514,10 +514,10 @@ class CotizacionController extends Controller
             $fechaInicio = $request->input('fecha_inicio');
             $fechaFin = $request->input('fecha_fin');
 
-            $query->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin]);
+            $query->whereBetween('fecha', [$fechaInicio, $fechaFin]);
         }
 
-        $query->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->where('estatus_cotizacion', NULL);
+        $query->orderBy('id', 'DESC')->where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', NULL);
         $totalSum = $query->sum('total');
         $cotizaciones = $query->get();
 
@@ -774,7 +774,7 @@ class CotizacionController extends Controller
 
         $pdf = \PDF::loadView('admin.cotizacion.pdf_reporte', compact('chartGrafica','chart_ProductMeno','chart_menoscot','cotizaciones', 'today', 'ventas', 'chart', 'chart2', 'totalSum', 'totalSum2', 'fechaInicio', 'fechaFin'));
 
-       // return $pdf->stream();
-        return $pdf->download('Reporte NAS / '.$today.'.pdf');
+        // return $pdf->stream();
+       return $pdf->download('Reporte NAS / '.$today.'.pdf');
     }
 }

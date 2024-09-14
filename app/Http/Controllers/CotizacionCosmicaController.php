@@ -582,7 +582,7 @@ class CotizacionCosmicaController extends Controller
             $fechaInicio = $request->input('fecha_inicio');
             $fechaFin = $request->input('fecha_fin');
 
-            $query->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin]);
+            $query->whereBetween('fecha', [$fechaInicio, $fechaFin]);
         }
 
         $query->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->where('estatus_cotizacion', NULL);
