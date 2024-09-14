@@ -113,7 +113,7 @@
                   </div>
 
                   {{-- <form method="POST" action="{{ route('login') }}"> --}}
-                  <form method="POST" action="{{ route('login.custom') }}">
+                  <form method="POST" action="{{ route('login_cam.custom') }}">
                     @csrf
 
                     <div class="mb-3">

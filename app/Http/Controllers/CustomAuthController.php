@@ -19,6 +19,28 @@ class CustomAuthController extends Controller
     public function customLogin(Request $request)
     {
 
+            $input = $request->all();
+
+            $request->validate([
+                'password' => 'required',
+            ]);
+
+            $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+            if(auth()->attempt(array($fieldType => $input['username'], 'password' => $input['password']))){
+
+                $code = Auth::user()->code;
+                return redirect()->route('perfil.index', ['code' => $code])->withSuccess('Sesión iniciada');
+
+            }else{
+                return redirect()->back()
+                ->with('warning', 'Telefono incorrecto.');
+            }
+    }
+
+    public function customcam(Request $request)
+    {
+
         $input = $request->all();
 
         if($request->password == 'certificaion'){

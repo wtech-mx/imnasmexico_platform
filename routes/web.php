@@ -188,7 +188,10 @@ Route::match(['post', 'patch'],'clientes/documentos/{id}', [App\Http\Controllers
 Route::post('clientes/documentos/estandar/{id}', [App\Http\Controllers\ClientsController::class, 'documentos_estandares_cliente'])->name('documentos.store_cliente');
 Route::patch('admin/perfil/{id}', [App\Http\Controllers\ClientsController::class, 'update_situacionfiscal'])->name('perfil.update_situacionfiscal');
 Route::post('/admin/factura/store', [App\Http\Controllers\ClientsController::class, 'store_factura'])->name('factura.store');
+
 Route::post('custom-login', [App\Http\Controllers\CustomAuthController::class, 'customLogin'])->name('login.custom');
+Route::post('custom-cam', [App\Http\Controllers\CustomAuthController::class, 'customcam'])->name('login_cam.custom');
+
 Route::post('custom-registration', [App\Http\Controllers\CustomAuthController::class, 'customRegistration'])->name('register.custom');
 Route::get('signout', [App\Http\Controllers\CustomAuthController::class, 'signOut'])->name('signout');
 

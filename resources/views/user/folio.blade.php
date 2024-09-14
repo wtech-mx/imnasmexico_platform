@@ -117,8 +117,8 @@
                   </div>
 
                   {{-- <form method="POST" action="{{ route('login') }}"> --}}
-                  <form method="POST" action="{{ route('login.custom') }}">
-                    @csrf
+                    <form method="POST" action="{{ route('login_cam.custom') }}">
+                        @csrf
 
                     <div class="mb-3">
                       <input id="username" name="username" type="text" placeholder="Celular" class="form-control @error('username') is-invalid @enderror" value="{{ old('username') }}" required >
