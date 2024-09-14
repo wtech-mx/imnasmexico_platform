@@ -316,23 +316,50 @@
         </div>
 
         <div class="conatiner_curso">
+
             @php
-                // Inicializa la cadena formateada
-                $curso_formateado = '';
-                $contador_palabras = 0;
 
-                foreach ($palabras as $palabra) {
-                    // Agrega la palabra actual a la cadena formateada
-                    $curso_formateado .= $palabra . ' ';
 
-                    // Incrementa el contador de palabras
-                    $contador_palabras++;
+                if(isset($tickets_externo->curso)){
+                    $palabras = explode(' ', ucwords(strtolower($tickets_externo->curso)));
 
-                    // Agrega un salto de línea después de cada tercera palabra
-                    if ($contador_palabras % 4 == 0) {
-                        $curso_formateado .= "<br>";
+                    // Inicializa la cadena formateada
+                    $curso_formateado = '';
+                    $contador_palabras = 0;
+
+                    foreach ($palabras as $palabra) {
+                        // Agrega la palabra actual a la cadena formateada
+                        $curso_formateado .= $palabra . ' ';
+
+                        // Incrementa el contador de palabras
+                        $contador_palabras++;
+
+                        // Agrega un salto de línea después de cada tercera palabra
+                        if ($contador_palabras % 4 == 0) {
+                            $curso_formateado .= "<br>";
+                        }
+                    }
+
+                }else{
+                    // Inicializa la cadena formateada
+                    $curso_formateado = '';
+                    $contador_palabras = 0;
+
+                    foreach ($palabras as $palabra) {
+                        // Agrega la palabra actual a la cadena formateada
+                        $curso_formateado .= $palabra . ' ';
+
+                        // Incrementa el contador de palabras
+                        $contador_palabras++;
+
+                        // Agrega un salto de línea después de cada tercera palabra
+                        if ($contador_palabras % 4 == 0) {
+                            $curso_formateado .= "<br>";
+                        }
                     }
                 }
+
+
             @endphp
             <h4 class="curso">{!! $curso_formateado !!}</h4>
         </div>
