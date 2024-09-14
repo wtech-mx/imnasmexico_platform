@@ -78,7 +78,6 @@ class NotasCursosController extends Controller
         return view('admin.notas_cursos.create', compact('notas', 'cursos', 'notas_pagos', 'cursos_paquetes', 'client'));
     }
 
-
     public function store(request $request){
 
         $code = Str::random(8);
