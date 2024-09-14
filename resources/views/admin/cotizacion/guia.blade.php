@@ -12,25 +12,19 @@
                 <input type="hidden" name="_method" value="PATCH">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="form-group col-12">
-                            <label for="name">Doc Guia</label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">
-                                    <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
-                                </span>
-                                <input class="form-control" type="file" id="doc_guia" name="doc_guia">
-                            </div>
-                        </div>
 
-                        <div class="col-12">
-                            <embed src="{{ asset('pago_fuera/'.$item->doc_guia) }}" type="application/pdf" style="width: 450px; height: 400px;" />
-                        </div>
+                        @if ($item->metodo_pago == 'Contra Entrega')
+                            <h5>Pedido Contra Entrega</h5>
+                        @else
+                            <div class="col-12">
+                                <embed src="{{ asset('pago_fuera/'.$item->doc_guia) }}" type="application/pdf" style="width: 450px; height: 400px;" />
+                            </div>
+                        @endif
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </form>
 

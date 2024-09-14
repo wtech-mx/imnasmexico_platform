@@ -348,15 +348,26 @@ class CotizacionController extends Controller
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
             }else if($request->get('estatus_cotizacion') == 'Aprobada'){
                 $nota->fecha_aprobada  = date("Y-m-d");
-            }
 
-        if ($request->hasFile("foto_pago")) {
-            $file = $request->file('foto_pago');
-            $path = $pago_fuera;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $nota->foto_pago = $fileName;
-        }
+                if ($request->hasFile("foto_pago")) {
+                    $file = $request->file('foto_pago');
+                    $path = $pago_fuera;
+                    $fileName = uniqid() . $file->getClientOriginalName();
+                    $file->move($path, $fileName);
+                    $nota->foto_pago = $fileName;
+                }
+
+                if ($request->hasFile("doc_guia")) {
+                    $file = $request->file('doc_guia');
+                    $path = $pago_fuera;
+                    $fileName = uniqid() . $file->getClientOriginalName();
+                    $file->move($path, $fileName);
+                    $nota->doc_guia = $fileName;
+                }
+
+                $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+                $nota->metodo_pago  = $request->get('metodo_pago');
+            }
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
