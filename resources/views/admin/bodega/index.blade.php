@@ -92,15 +92,23 @@
                                                             <i class="fa fa-list-alt"></i>
                                                         </a>
 
-                                                        <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
-                                                            <i class="fa fa-truck"></i>
-                                                        </a>
+                                                        @if ($item->metodo_pago == 'Contra Entrega')
+                                                            <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @else
+                                                            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @endif
 
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
+
+                                                @include('admin.cotizacion.guia')
                                                 @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
@@ -142,15 +150,22 @@
                                                             <i class="fa fa-list-alt"></i>
                                                         </a>
 
-                                                        <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
-                                                            <i class="fa fa-truck"></i>
-                                                        </a>
+                                                        @if ($item->metodo_pago == 'Contra Entrega')
+                                                            <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @else
+                                                            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @endif
 
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
+                                                @include('admin.cotizacion.guia')
                                                 @include('admin.bodega.modal_cosmica_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
@@ -209,15 +224,22 @@
                                                             <i class="fa fa-file"></i>
                                                         </a>
 
-                                                        <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
-                                                            <i class="fa fa-truck"></i>
-                                                        </a>
+                                                        @if ($item->metodo_pago == 'Contra Entrega')
+                                                            <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @else
+                                                            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @endif
 
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
+                                                @include('admin.cotizacion.guia')
                                                 @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
@@ -259,15 +281,22 @@
                                                             <i class="fa fa-list-alt"></i>
                                                         </a>
 
-                                                        <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
-                                                            <i class="fa fa-truck"></i>
-                                                        </a>
+                                                        @if ($item->metodo_pago == 'Contra Entrega')
+                                                            <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @else
+                                                            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @endif
 
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
+                                                @include('admin.cotizacion.guia')
                                                 @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
@@ -326,15 +355,22 @@
                                                             <i class="fa fa-file"></i>
                                                         </a>
 
-                                                        <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
-                                                            <i class="fa fa-truck"></i>
-                                                        </a>
+                                                        @if ($item->metodo_pago == 'Contra Entrega')
+                                                            <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @else
+                                                            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @endif
 
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
+                                                @include('admin.cotizacion.guia')
                                                 @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
@@ -376,15 +412,23 @@
                                                             <i class="fa fa-list-alt"></i>
                                                         </a>
 
-                                                        <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
-                                                            <i class="fa fa-truck"></i>
-                                                        </a>
+                                                        @if ($item->metodo_pago == 'Contra Entrega')
+                                                            <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @else
+                                                            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @endif
+
 
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
+                                                @include('admin.cotizacion.guia')
                                                 @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach

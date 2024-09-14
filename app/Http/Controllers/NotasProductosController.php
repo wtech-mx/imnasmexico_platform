@@ -228,62 +228,97 @@ class NotasProductosController extends Controller
         ->with('success', 'Creado exitosamente.');
     }
 
+    public function edit($id){
+        $cotizacion = NotasProductos::find($id);
+        $cotizacion_productos = ProductosNotasId::where('id_notas_productos', '=', $id)->where('price', '!=', NULL)->get();
+        $products = Products::orderBy('nombre','ASC')->get();
+
+        return view('admin.notas_productos.edit', compact('products', 'cotizacion', 'cotizacion_productos'));
+    }
+
     public function update(Request $request, $id){
-        $dominio = $request->getHost();
-        if($dominio == 'plataforma.imnasmexico.com'){
-            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera');
-        }else{
-            $pago_fuera = public_path() . '/pagos';
+
+        $producto = $request->input('productos');
+        $price = $request->input('price');
+        $cantidad = $request->input('cantidad');
+        $descuento = $request->input('descuento');
+        $total = 0;
+
+        // Obtener los productos actuales de la base de datos para esa cotización
+        $productosExistentes = ProductosNotasId::where('id_notas_productos', $id)->get();
+
+        // Crear un array para almacenar los IDs de los productos enviados
+        $productosIdsEnviados = [];
+
+        // Actualizar productos existentes
+        for ($count = 0; $count < count($producto); $count++) {
+            // Buscar el producto en la base de datos
+            $productos = ProductosNotasId::where('producto', $producto[$count])
+                ->where('id_notas_productos', $id)
+                ->firstOrFail();
+
+            // Guardar el ID del producto en el array de productos enviados
+            $productosIdsEnviados[] = $productos->id;
+
+            // Limpiar el precio y preparar los datos para la actualización
+            $precio = $price[$count];
+            $cleanPrice2 = floatval(str_replace(['$', ','], '', $precio));
+            $data = array(
+                'price' => $cleanPrice2,
+                'cantidad' => $cantidad[$count],
+                'descuento' => $descuento[$count],
+            );
+
+            // Actualizar el producto en la base de datos
+            $productos->update($data);
+            $total += $cleanPrice2;
         }
-        $notas = NotasProductos::find($id);
-        $notas->metodo_pago = $request->get('metodo_pago');
-        $notas->tipo = $request->get('tipo');
-        $notas->fecha = $request->get('fecha');
-        $notas->nota = $request->get('nota');
-        $notas->metodo_pago2 = $request->get('metodo_pago2');
-        $notas->monto = $request->get('monto');
-        $notas->monto2 = $request->get('monto2');
 
-        $sum_total = ProductosNotasId::where('id_notas_productos', '=', $id)->get();
-        $total_pro = $sum_total->sum('price');
-
-            $descuento = $notas->restante / 100;
-            $total1 = 0;
-
-            if ($request->has('campo')) {
-                $nuevosCampos = $request->input('campo');
-                $nuevosCampos2 = $request->input('campo4');
-                $nuevosCampos3 = $request->input('campo3');
-
-                foreach ($nuevosCampos as $index => $campo) {
-
-                    $notas_inscripcion = new ProductosNotasId;
-                    $notas_inscripcion->id_notas_productos = $notas->id;
-                    $notas_inscripcion->producto = $campo;
-                    $notas_inscripcion->price = $nuevosCampos2[$index];
-                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                    $notas_inscripcion->save();
-
-                    $precio = $nuevosCampos2[$index];
-                    $subtotal = $precio;
-                    $total1 += $subtotal;
-                    $total = $total_pro + $total1;
-
-                }
-
-                $descuentoAplicado = $total * $descuento;
-                $total -= $descuentoAplicado;
-
+        // Eliminar los productos que ya no están en la solicitud
+        foreach ($productosExistentes as $productoExistente) {
+            if (!in_array($productoExistente->id, $productosIdsEnviados)) {
+                $productoExistente->delete();
             }
-            $notas->total = $total;
-        if ($request->hasFile("foto_pago2")) {
-            $file = $request->file('foto_pago2');
-            $path = $pago_fuera;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $notas->foto_pago2 = $fileName;
         }
-        $notas->update();
+
+        $campo = $request->input('campo');
+        if(!empty(array_filter($campo, fn($value) => !is_null($value)))){
+            $campo4 = $request->input('campo4');
+            $campo3 = $request->input('campo3');
+            $descuento_prod = $request->input('descuento_prod');
+
+            // Agregar nuevos productos
+            for ($count = 0; $count < count($campo); $count++) {
+                $price = $campo4[$count];
+                $cleanPrice = floatval(str_replace(['$', ','], '', $price));
+                $data = array(
+                    'id_notas_productos' => $id,
+                    'producto' => $campo[$count],
+                    'price' => $cleanPrice,
+                    'cantidad' => $campo3[$count],
+                    'descuento' => $descuento_prod[$count],
+                );
+                ProductosNotasId::create($data);
+                $total += $cleanPrice;
+            }
+        }
+
+        $nota = NotasProductos::findOrFail($id);
+
+        if($request->get('envio') == 'No'){
+            $envio = 0;
+            $envio_check = 'No';
+        }else{
+            $envio = 250;
+            $envio_check = 'Si';
+        }
+
+        $total_envio = $total + $envio;
+
+        $nota->tipo = $total_envio;
+        $nota->total = $total;
+        $nota->envio = $envio_check;
+        $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Se ha actualizada');

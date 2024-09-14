@@ -25,7 +25,7 @@ class CotizacionController extends Controller
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
         $notas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->orderBy('id','DESC')->where('estatus_cotizacion','=' , null)->get();
+        ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion','=' , null)->get();
 
         $notasAprobadas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
         ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('estatus_cotizacion','=' , 'Aprobada')->get();
@@ -348,15 +348,26 @@ class CotizacionController extends Controller
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
             }else if($request->get('estatus_cotizacion') == 'Aprobada'){
                 $nota->fecha_aprobada  = date("Y-m-d");
-            }
 
-        if ($request->hasFile("foto_pago")) {
-            $file = $request->file('foto_pago');
-            $path = $pago_fuera;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-            $nota->foto_pago = $fileName;
-        }
+                if ($request->hasFile("foto_pago")) {
+                    $file = $request->file('foto_pago');
+                    $path = $pago_fuera;
+                    $fileName = uniqid() . $file->getClientOriginalName();
+                    $file->move($path, $fileName);
+                    $nota->foto_pago = $fileName;
+                }
+
+                if ($request->hasFile("doc_guia")) {
+                    $file = $request->file('doc_guia');
+                    $path = $pago_fuera;
+                    $fileName = uniqid() . $file->getClientOriginalName();
+                    $file->move($path, $fileName);
+                    $nota->doc_guia = $fileName;
+                }
+
+                $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+                $nota->metodo_pago  = $request->get('metodo_pago');
+            }
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
@@ -514,10 +525,10 @@ class CotizacionController extends Controller
             $fechaInicio = $request->input('fecha_inicio');
             $fechaFin = $request->input('fecha_fin');
 
-            $query->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin]);
+            $query->whereBetween('fecha', [$fechaInicio, $fechaFin]);
         }
 
-        $query->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->where('estatus_cotizacion', NULL);
+        $query->orderBy('id', 'DESC')->where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', NULL);
         $totalSum = $query->sum('total');
         $cotizaciones = $query->get();
 
@@ -774,7 +785,7 @@ class CotizacionController extends Controller
 
         $pdf = \PDF::loadView('admin.cotizacion.pdf_reporte', compact('chartGrafica','chart_ProductMeno','chart_menoscot','cotizaciones', 'today', 'ventas', 'chart', 'chart2', 'totalSum', 'totalSum2', 'fechaInicio', 'fechaFin'));
 
-       // return $pdf->stream();
-        return $pdf->download('Reporte NAS / '.$today.'.pdf');
+        // return $pdf->stream();
+       return $pdf->download('Reporte NAS / '.$today.'.pdf');
     }
 }

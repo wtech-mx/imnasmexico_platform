@@ -146,16 +146,14 @@
                                                     </a>
                                                     @endif
                                                 @endcan
-                                                @can('nota-productos-editar')
-                                                    <a type="button" class="btn btn-xs bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_nota_{{ $nota->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                                        <i class="fa fa-fw fa-edit"></i>
-                                                    </a>
-                                                @endcan
-                                                <form action="{{ route('notas.eliminar', ['id' => $nota->id]) }}" method="POST">
+                                                <a class="btn btn-sm btn-warning" href="{{ route('notas_productos.edit', $nota->id) }}">
+                                                    <i class="fa fa-fw fa-edit"></i>
+                                                </a>
+                                                {{-- <form action="{{ route('notas.eliminar', ['id' => $nota->id]) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-xs" onclick="return confirm('¿Estás seguro de que deseas eliminar esta nota?')"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                </form>
+                                                </form> --}}
 
                                             </td>
                                         </tr>
