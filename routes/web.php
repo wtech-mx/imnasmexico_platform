@@ -402,6 +402,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/publicidad/store', [App\Http\Controllers\PublicidadController::class, 'store'])->name('publicidad.store');
     Route::delete('/admin/publicidad/archivos/{id}', [App\Http\Controllers\PublicidadController::class, 'destroy'])->name('publicidad.destroy');
 
+    // =============== M O D U L O   TRAER PEDIDOS DE WOOCOMERCE ===============================
+    Route::get('/admin/pedidos/woo', [App\Http\Controllers\PedidosWooController::class, 'index'])->name('pedidos_woo.index');
+
+
     // =============== M O D U L O   N O T A S ===============================
     Route::get('/admin/notas/cursos', [App\Http\Controllers\NotasCursosController::class, 'index'])->name('notas_cursos.index');
     Route::get('/admin/notas/cursos/crear', [App\Http\Controllers\NotasCursosController::class, 'create'])->name('notas_cursos.crear');
@@ -410,6 +414,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/notas/cursos/update/{id}', [App\Http\Controllers\NotasCursosController::class, 'update'])->name('notas_cursos.update');
     Route::get('/admin/notas/cursos/imprimir/{id}', [App\Http\Controllers\NotasCursosController::class, 'imprimir'])->name('notas_cursos.imprimir');
     Route::post('/admin/notas/paquete/store', [App\Http\Controllers\NotasCursosController::class, 'store_paquete'])->name('notas_cursos.store_paquete');
+
+
 
     Route::get('/admin/notas/productos', [App\Http\Controllers\NotasProductosController::class, 'index'])->name('notas_productos.index');
     Route::get('/admin/productos/create', [App\Http\Controllers\NotasProductosController::class, 'create'])->name('notas_productos.create');

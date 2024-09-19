@@ -66,7 +66,7 @@ class CustomAuthController extends Controller
 
             }else{
                 return redirect()->back()
-                ->with('warning', 'Telefono incorrecto.');
+                // ->with('warning', 'Telefono incorrecto.');
             }
         }else{
             $request->validate([
