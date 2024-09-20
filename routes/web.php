@@ -404,6 +404,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O   TRAER PEDIDOS DE WOOCOMERCE ===============================
     Route::get('/admin/pedidos/woo', [App\Http\Controllers\PedidosWooController::class, 'index'])->name('pedidos_woo.index');
+    Route::put('orders/update-status/{id}', [App\Http\Controllers\PedidosWooController::class, 'updateStatuWoo'])->name('orders.updateStatuWoo');
 
 
     // =============== M O D U L O   N O T A S ===============================
