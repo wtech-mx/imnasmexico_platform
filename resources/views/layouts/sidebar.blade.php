@@ -119,12 +119,39 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ (Request::is('bodega/preparacion') ? 'active' : '') }}" href="{{ route('index_preparacion.bodega') }}">
-                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                <a data-bs-toggle="collapse" href="#pageBodega" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pageBodega" role="button" aria-expanded="false">
+                <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                     <i class="fa fa-ticket text-sm opacity-10" style="color:#e6b449"></i>
                 </div>
                 <span class="nav-link-text ms-1">Bodega</span>
                 </a>
+                <div class="collapse " id="pageBodega">
+                <ul class="nav ms-4">
+                    <li class="nav-item ">
+                        <a class="nav-link {{ (Request::is('bodega/preparacion') ? 'active' : '') }}" href="{{ route('index_preparacion.bodega') }}">
+                            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-ticket text-sm opacity-10" style="color:#e6b449"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Bodega</span>
+                        </a>
+
+                        <a class="nav-link {{ (Request::is('admin/productos/stock') ? 'active' : '') }}" href="{{ route('productos_stock.index') }}">
+                            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-ticket text-sm opacity-10" style="color:#e6b449"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Productos stock</span>
+                        </a>
+
+                        <a class="nav-link {{ (Request::is('admin/productos/stock/ordenes') ? 'active' : '') }}" href="{{ route('ordenes_nas.index') }}">
+                            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-ticket text-sm opacity-10" style="color:#e6b449"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Pedidos a Lab</span>
+                        </a>
+
+                    </li>
+                </ul>
+                </div>
             </li>
 
             <li class="nav-item">
@@ -213,15 +240,6 @@
                         <i class="fa fa-ticket text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
                     </div>
                     <span class="nav-link-text ms-1">Productos</span>
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link {{ (Request::is('admin/productos/stock') ? 'active' : '') }}" href="{{ route('productos_stock.index') }}">
-                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-ticket text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Productos stock</span>
                     </a>
                 </li>
             @endcan

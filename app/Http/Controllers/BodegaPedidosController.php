@@ -10,7 +10,7 @@ use App\Models\Products;
 class BodegaPedidosController extends Controller
 {
     public function productos_stock(Request $request){
-        $products = Products::orderBy('id','DESC')->get();
+        $products = Products::orderBy('stock','ASC')->get();
 
         return view('admin.products.bajo_stock.index', compact('products'));
     }
@@ -61,5 +61,18 @@ class BodegaPedidosController extends Controller
         $pdf = \PDF::loadView('admin.products.ordenar.pdf', compact('pedido', 'today', 'pedido_productos'));
        return $pdf->stream();
      //return $pdf->download('Nota remision'. $folio .'/'.$today.'.pdf');
+    }
+
+    public function ordenes_nas(Request $request){
+        $ordenes = BodegaPedidos::orderBy('fecha_pedido','DESC')->get();
+
+        return view('admin.products.ordenar.index', compact('ordenes'));
+    }
+
+    public function ordenes_nas_firma($id){
+        $pedido = BodegaPedidos::where('id', $id)->first();
+        $pedido_productos = BodegaPedidosProductos::where('id_pedido', $id)->get();
+
+        return view('admin.products.ordenar.liga', compact('pedido', 'pedido_productos'));
     }
 }

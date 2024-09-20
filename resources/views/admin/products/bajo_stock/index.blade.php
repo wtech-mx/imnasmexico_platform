@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Products
+    Productos stock
 @endsection
 
 @section('content')
@@ -13,25 +13,12 @@
             <!-- Card header -->
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
 
-                    <h3 class="mb-3">Products stock</h3>
+                    <h3 class="mb-3">Productos stock</h3>
 
                     <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                         ¿Como fucniona?
                     </a>
-
-                   <!-- <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="file" class="form-control">
-                        <br>
-                        <button class="btn btn-success">Importar Products</button>
-                    </form>-->
-                    @can('productos-create')
-                        <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_product" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                            <i class="fa fa-fw fa-edit"></i> Crear
-                        </a>
-                    @endcan
                 </div>
             </div>
 
@@ -50,18 +37,33 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Precio Normal</th>
                                     <th>Stock</th>
+                                    <th>Precio</th>
                                 </tr>
                             </thead>
                             @foreach ($products as $product)
                                 <tr class="product-row" data-product='@json($product)'>
                                     <td>
-                                        <img id="blah" src="{{$product->imagenes}}" alt="Imagen" class="w-10 ms-3"/>
+                                        @if ($product->imagenes == NULL)
+                                            <img id="blah" src="https://plataforma.imnasmexico.com/cursos/no-image.jpg" alt="Imagen" class="w-10 ms-3"/>
+                                        @else
+                                            <img id="blah" src="{{$product->imagenes}}" alt="Imagen" class="w-10 ms-3"/>
+                                        @endif
+
                                         <h6 class="ms-3 my-auto">{{ $product->nombre }}</h6>
                                     </td>
+                                    <td class="
+                                            @if($product->stock < 2)
+                                                bg-danger text-white
+                                            @elseif($product->stock >= 2 && $product->stock <= 5)
+                                                bg-warning text-white
+                                            @elseif($product->stock >= 6)
+                                                bg-success text-white
+                                            @endif
+                                        ">
+                                        {{ $product->stock }}
+                                    </td>
                                     <td>${{ number_format($product->precio_normal, 0, '.', ',') }}</td>
-                                    <td>{{ $product->stock }}</td>
                                 </tr>
                                 @include('admin.products.bajo_stock.modal')
                             @endforeach
@@ -75,7 +77,6 @@
         </div>
       </div>
 </div>
-@include('admin.products.modal_create')
 @endsection
 
 @section('datatable')

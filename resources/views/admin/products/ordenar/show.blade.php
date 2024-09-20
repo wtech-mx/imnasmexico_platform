@@ -21,7 +21,7 @@ Productos solicitados
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
                                             </span>
-                                            <input id="fecha" name="fecha" type="datetime" class="form-control" value="{{ $pedido->fecha_pedido }}">
+                                            <input id="fecha" name="fecha" type="text" class="form-control" value="{{ \Carbon\Carbon::parse($pedido->fecha_pedido)->translatedFormat('d F Y h:i a') }}">
                                         </div>
                                     </div>
 
@@ -34,7 +34,7 @@ Productos solicitados
 
                                     <div class="col-2">
                                         <br>
-                                        <a class="btn btn-xs btn-warning text-white" target="_blank" href="{{ route('productos_stock.imprimir', $pedido->id) }}">
+                                        <a class="btn btn-xs btn-warning text-white" target="_blank" href="{{ route('ordenes_nas.firma', $pedido->id) }}">
                                             <i class="fa fa-file"></i> Liga para aprobar
                                         </a>
                                     </div>
@@ -63,9 +63,9 @@ Productos solicitados
                                                 <label>Cantidad solicitada</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                        <img src="{{ asset('assets/cam/carrito-de-compras.webp') }}" alt="" width="35px">
                                                     </span>
-                                                    <input type="number" class="form-control" value="{{ $productos->cantidad_pedido }}" disabled>
+                                                    <input type="number" class="form-control" value="{{ $productos->cantidad_pedido }}">
                                                 </div>
                                             </div>
 

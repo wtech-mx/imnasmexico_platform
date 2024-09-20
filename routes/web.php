@@ -552,11 +552,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('bodega/preparacion/guia/{id}', [App\Http\Controllers\CotizacionController::class, 'update_guia'])->name('notas_cotizacion.update_guia');
     Route::patch('bodega/preparacion/guia/cosmica/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_guia'])->name('notas_cosmica.update_guia');
 
-    // =============== M O D U L O   P R O D U C T O S ===============================
     Route::get('/admin/productos/stock', [App\Http\Controllers\BodegaPedidosController::class, 'productos_stock'])->name('productos_stock.index');
     Route::post('/admin/productos/guardar-carrito', [App\Http\Controllers\BodegaPedidosController::class, 'guardar'])->name('guardar.carrito');
-    Route::get('/admin/productos/show/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'show'])->name('productos_stock.show');
+    Route::get('/admin/productos/stock/show/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'show'])->name('productos_stock.show');
     Route::get('/admin/productos/imprimir/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'imprimir'])->name('productos_stock.imprimir');
+
+    Route::get('/admin/productos/stock/ordenes', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_nas'])->name('ordenes_nas.index');
+    Route::get('/admin/productos/stock/firma/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_nas_firma'])->name('ordenes_nas.firma');
+    Route::patch('/admin/productos/stock/firma/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_nas_firma_update'])->name('ordenes_nas_update.firma');
 });
 
 // Route::get('registro/login', function () {
