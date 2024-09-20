@@ -42,8 +42,8 @@
                             <th>#</th>
                             <th>Foto</th>
                             <th>Nombre</th>
-                            <th>Precio Reb.</th>
                             <th>Precio Normal</th>
+                            <th>Stock</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -56,8 +56,8 @@
                         <td>{{ $product->id }}</td>
                         <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
                         <td>{{ $product->nombre }}</td>
-                        <td>${{ $precio_rebajado }}</td>
                         <td>${{ $precio_normal }}</td>
+                        <td>{{ $product->stock }}</td>
                         <td>
                             @can('productos-edit')
                                 <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#update_product_{{ $product->id }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">

@@ -19,13 +19,22 @@
                     </div>
 
                     <div class="form-group col-6">
-                        <label for="name">Precio rebajado</label>
-                        <input id="precio_rebajado" name="precio_rebajado" type="number" class="form-control" value="{{ $product->precio_rebajado }}">
+                        <label for="name">Precio normal</label>
+                        <input id="precio_normal" name="precio_normal" type="number" class="form-control" value="{{ $product->precio_normal }}">
                     </div>
 
                     <div class="form-group col-6">
-                        <label for="name">Precio normal</label>
-                        <input id="precio_normal" name="precio_normal" type="number" class="form-control" value="{{ $product->precio_normal }}">
+                        <label for="name">Stock</label>
+                        <input id="stock" name="stock" type="number" class="form-control" value="{{ $product->stock }}">
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="name">Categoria</label>
+                        <select class="form-control" id="categoria" name="categoria">
+                            <option value="{{ $product->categoria }}">{{ $product->categoria }}</option>
+                            <option value="NAS">NAS</option>
+                            <option value="Cosmica">Cosmica</option>
+                        </select>
                     </div>
 
                     <div class="form-group col-12">

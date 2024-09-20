@@ -124,6 +124,16 @@
                                     </div>
 
                                     <div class="form-group col-4">
+                                        <h4 for="name">Descuento %</h4>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                            </span>
+                                            <input class="form-control descuento" type="text" id="descuento" name="descuento">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-4">
                                         <h4 for="name">Total *</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
@@ -178,6 +188,7 @@
 <script>
 $(document).ready(function() {
     $('.cliente').select2();
+
     function initializeSelect2($container) {
         $container.find('.select2').select2();
     }
@@ -242,7 +253,27 @@ $(document).ready(function() {
 
         // Coloca la suma total en el input de total
         $('#total').val(sumaTotal.toFixed(2));
+
+        // Llama a la función de calcular el descuento después de calcular la suma total
+        aplicarDescuento();
     }
+
+    // Función para aplicar el descuento
+    function aplicarDescuento() {
+        var total = parseFloat($('#total').val()) || 0;
+        var descuento = parseFloat($('#descuento').val()) || 0;
+
+        // Corrige el cálculo del descuento
+        var totalConDescuento = total * (1 - (descuento / 100));
+
+        // Actualiza el campo de total con el nuevo valor después del descuento
+        $('#total').val(totalConDescuento.toFixed(2));
+    }
+
+    // Evento para aplicar el descuento cuando el valor del input de descuento cambie
+    $('#descuento').on('input', function() {
+        aplicarDescuento();
+    });
 
     // Calcula la suma total al inicio en caso de que haya valores precargados
     calcularSuma();
@@ -259,6 +290,8 @@ $(document).ready(function() {
         }
     });
 });
+
+
 
 
 </script>

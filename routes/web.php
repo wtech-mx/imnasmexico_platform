@@ -551,6 +551,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('bodega/preparacion/', [App\Http\Controllers\BodegaController::class, 'index_preparacion'])->name('index_preparacion.bodega');
     Route::patch('bodega/preparacion/guia/{id}', [App\Http\Controllers\CotizacionController::class, 'update_guia'])->name('notas_cotizacion.update_guia');
     Route::patch('bodega/preparacion/guia/cosmica/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_guia'])->name('notas_cosmica.update_guia');
+
+    // =============== M O D U L O   P R O D U C T O S ===============================
+    Route::get('/admin/productos/stock', [App\Http\Controllers\BodegaPedidosController::class, 'productos_stock'])->name('productos_stock.index');
+    Route::post('/admin/productos/guardar-carrito', [App\Http\Controllers\BodegaPedidosController::class, 'guardar'])->name('guardar.carrito');
+    Route::get('/admin/productos/show/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'show'])->name('productos_stock.show');
+    Route::get('/admin/productos/imprimir/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'imprimir'])->name('productos_stock.imprimir');
 });
 
 // Route::get('registro/login', function () {
