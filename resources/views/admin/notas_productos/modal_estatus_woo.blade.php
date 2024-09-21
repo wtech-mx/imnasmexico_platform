@@ -26,20 +26,22 @@
                     </select>
                 </div>
                 <!-- Campo de archivo oculto inicialmente -->
-                <div class="col-12 mb-3" id="file-upload" >
+                <div class="col-12 mt-3 mb-3" id="file-upload" >
                     <label for="attachment">Cargar archivo (guía, documento, etc.):</label>
                     <input type="file" name="guia_de_envio" class="form-control">
                 </div>
 
-                <div class="col-12 mt-3">
-                    <button type="submit" class="btn btn-primary">Actualizar Estado</button>
+                <div class="col-12 mt-3 mb-3">
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-sm btn-success">Actualizar Estado</button>
+                    </div>
                 </div>
 
                 @if(isset($order->meta_data))
                 @foreach($order->meta_data as $meta)
                     @if($meta->key == 'guia_de_envio')
                     <div class="col-12  mt-3">
-                        <iframe src="{{asset('guias/'.$meta->value) }}" frameborder="0"></iframe> <br>
+                        <iframe src="{{asset('guias/'.$meta->value) }}" frameborder="0" style="width: 100%;"></iframe> <br>
                         <a target="_blank" href="{{asset('guias/'.$meta->value) }}">ver/Descargar</a>
                     </div>
                     @endif
@@ -53,7 +55,7 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
         </div>
 
       </div>

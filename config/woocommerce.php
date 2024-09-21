@@ -1,6 +1,23 @@
 <?php
 
 return [
+
+    'default' => [
+        'url' => env('WOOCOMMERCE_STORE_URL'),
+        'consumer_key' => env('WOOCOMMERCE_CONSUMER_KEY'),
+        'consumer_secret' => env('WOOCOMMERCE_CONSUMER_SECRET'),
+        'wp_api' => true,
+        'version' => 'wc/v3',
+    ],
+
+    'second_store' => [
+        'url' => env('WOOCOMMERCE_SECOND_STORE_URL'),
+        'consumer_key' => env('WOOCOMMERCE_SECOND_STORE_CONSUMER_KEY'),
+        'consumer_secret' => env('WOOCOMMERCE_SECOND_STORE_CONSUMER_SECRET'),
+        'wp_api' => true,
+        'version' => 'wc/v3',
+    ],
+
     /**
      *================================================================================
      * Store URL eg: http://example.com

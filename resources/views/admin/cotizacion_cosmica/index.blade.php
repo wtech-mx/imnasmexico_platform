@@ -57,6 +57,20 @@
                                             <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #783E5D; color: #ffffff;">Reporte</button>
                                         </div>
                                     </div>
+
+                                    <div class="row">
+                                        <div class="col-12 mt-3">
+                                            <div class="d-flex justify-content-center">
+                                                <a href="{{ route('cotizacion_cosmica.index') }}" class="btn btn-sm btn-success m-2" style="background: #322338">Cotizaciones
+                                                    <img src="{{asset('assets/user/icons/carrito-de-compras.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
+                                                </a>
+                                                <a href="{{ route('pedidos_cosmica_woo.index') }}" class="btn btn-sm m-2 text-white" style="background:#B600E3;">Tienda Online
+                                                    <img src="{{asset('assets/user/icons/carrito-de-compras.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
                         </form>
                     </div>

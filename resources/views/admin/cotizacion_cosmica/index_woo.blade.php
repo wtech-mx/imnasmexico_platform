@@ -19,7 +19,7 @@
                 <div class="card">
 
                     <div class="card-body p-5">
-                        <form action="{{ route('pedidos_woo.index') }}" method="GET">
+                        <form action="{{ route('pedidos_cosmica_woo.index') }}" method="GET">
                             <div class="row">
                                 <div class="col-md-5">
                                     <label for="start_date">Fecha de Inicio:</label>
@@ -38,10 +38,10 @@
                         <div class="row">
                             <div class="col-12 mt-3">
                                 <div class="d-flex justify-content-center">
-                                    <a href="{{ route('notas_productos.index') }}" class="btn btn-sm btn-success m-2" style="background: #836262">Tienda Fisica
+                                    <a href="{{ route('cotizacion_cosmica.index') }}" class="btn btn-sm btn-success m-2" style="background: #322338">Cotizaciones
                                         <img src="{{asset('assets/user/icons/carrito-de-compras.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
                                     </a>
-                                    <a href="{{ route('pedidos_woo.index') }}" class="btn btn-sm m-2" style="background:#f5ece4;">Tienda Online
+                                    <a href="{{ route('pedidos_cosmica_woo.index') }}" class="btn btn-sm m-2 text-white" style="background:#B600E3;">Tienda Online
                                         <img src="{{asset('assets/user/icons/carrito-de-compras.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
                                     </a>
 
@@ -100,12 +100,12 @@
                                             </a>
                                             <div class="collapse mt-2" id="shipping{{ $order->id }}">
                                                 <ul class="">
-                                                    <li class="">Compañía: {{ $order->shipping->company }}</li>
-                                                    <li class="">Dirección: {{ $order->shipping->address_1 }} {{ $order->shipping->address_2 }}</li>
-                                                    <li class="">Ciudad: {{ $order->shipping->city }}</li>
-                                                    <li class="">Estado: {{ $order->shipping->state }}</li>
-                                                    <li class="">Código Postal: {{ $order->shipping->postcode }}</li>
-                                                    <li class="">País: {{ $order->shipping->country }}</li>
+                                                    <li class="">Compañía: {{ $order->billing->company }}</li>
+                                                    <li class="">Dirección: {{ $order->billing->address_1 }} {{ $order->billing->address_2 }}</li>
+                                                    <li class="">Ciudad: {{ $order->billing->city }}</li>
+                                                    <li class="">Estado: {{ $order->billing->state }}</li>
+                                                    <li class="">Código Postal: {{ $order->billing->postcode }}</li>
+                                                    <li class="">País: {{ $order->billing->country }}</li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -138,6 +138,14 @@
                                                 </a>
                                             @elseif($order->status == 'enviados')
                                                 <a type="button" class="btn btn-sm btn-secundary" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
+                                                    {{ $order->status }}
+                                                </a>
+                                            @elseif($order->status == 'cancelled')
+                                                <a type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
+                                                    {{ $order->status }}
+                                                </a>
+                                            @elseif($order->status == 'processing')
+                                                <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
                                                     {{ $order->status }}
                                                 </a>
                                             @endif

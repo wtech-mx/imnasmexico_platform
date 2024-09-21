@@ -4,26 +4,65 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Codexshaper\WooCommerce\Facades\WooCommerce;
+use Automattic\WooCommerce\Client;
 use Carbon\Carbon;
 
 class PedidosWooController extends Controller
 {
     public function index(Request $request)
     {
-        // Obtener las fechas de inicio y fin del mes actual
-        $startOfMonth = Carbon::now()->startOfMonth()->format('Y-m-d');
-        $endOfMonth = Carbon::now()->endOfMonth()->format('Y-m-d');
+        // Verificar si se han pasado fechas en el request
+        $startDate = $request->input('start_date') ?: Carbon::now()->startOfMonth()->format('Y-m-d');
+        $endDate = $request->input('end_date') ?: Carbon::now()->endOfMonth()->format('Y-m-d');
 
-        // Traer las órdenes del mes actual utilizando las fechas como parámetros
+        // Formatear las fechas para la consulta en WooCommerce
+        $startDateTime = $startDate . 'T00:00:00';  // Agregar hora inicial
+        $endDateTime = $endDate . 'T23:59:59';      // Agregar hora final
+
+        // Obtener los pedidos de WooCommerce en el rango de fechas
         $orders = WooCommerce::all('orders', [
-            'after' => $startOfMonth . 'T00:00:00',  // Inicio del mes
-            'before' => $endOfMonth . 'T23:59:59',   // Fin del mes
-            'per_page' => 100,                       // Limitar a 100 órdenes
+            'after' => $startDateTime,
+            'before' => $endDateTime,
+            'per_page' => 100,  // Limitar a 100 órdenes
         ]);
 
         // Retornar la vista con los pedidos
         return view('admin.notas_productos.index_woo', compact('orders'));
     }
+
+    public function index_cosmika(Request $request)
+    {
+        // Obtener las fechas de inicio y fin del mes actual o las fechas seleccionadas en el formulario
+        $startDate = $request->input('start_date') ?: Carbon::now()->startOfMonth()->format('Y-m-d');
+        $endDate = $request->input('end_date') ?: Carbon::now()->endOfMonth()->format('Y-m-d');
+
+        // Formatear las fechas para la consulta
+        $startDateTime = $startDate . 'T00:00:00';
+        $endDateTime = $endDate . 'T23:59:59';
+
+        // Crear instancia del cliente Automattic\WooCommerce\Client para la segunda tienda
+        $woocommerceCosmika = new Client(
+            'https://cosmicaskin.com', // URL de la tienda secundaria
+            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
+            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Obtener pedidos de la segunda tienda
+        $orders = $woocommerceCosmika->get('orders', [
+            'after' => $startDateTime,
+            'before' => $endDateTime,
+            'per_page' => 100,
+        ]);
+
+
+        // Retornar la vista con los pedidos de la segunda tienda
+        return view('admin.cotizacion_cosmica.index_woo', compact('orders'));
+    }
+
 
     public function updateStatuWoo(Request $request, $id)
     {

@@ -406,6 +406,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/pedidos/woo', [App\Http\Controllers\PedidosWooController::class, 'index'])->name('pedidos_woo.index');
     Route::put('orders/update-status/{id}', [App\Http\Controllers\PedidosWooController::class, 'updateStatuWoo'])->name('orders.updateStatuWoo');
 
+    Route::get('cosmica/admin/pedidos/cosmika/woo', [App\Http\Controllers\PedidosWooController::class, 'index_cosmika'])->name('pedidos_cosmica_woo.index');
+
 
     // =============== M O D U L O   N O T A S ===============================
     Route::get('/admin/notas/cursos', [App\Http\Controllers\NotasCursosController::class, 'index'])->name('notas_cursos.index');
@@ -415,7 +417,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/notas/cursos/update/{id}', [App\Http\Controllers\NotasCursosController::class, 'update'])->name('notas_cursos.update');
     Route::get('/admin/notas/cursos/imprimir/{id}', [App\Http\Controllers\NotasCursosController::class, 'imprimir'])->name('notas_cursos.imprimir');
     Route::post('/admin/notas/paquete/store', [App\Http\Controllers\NotasCursosController::class, 'store_paquete'])->name('notas_cursos.store_paquete');
-
 
 
     Route::get('/admin/notas/productos', [App\Http\Controllers\NotasProductosController::class, 'index'])->name('notas_productos.index');
