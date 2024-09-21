@@ -62,7 +62,7 @@
                                         <div class="col-12 mt-3">
                                             <div class="d-flex justify-content-center">
                                                 <a href="{{ route('cotizacion_cosmica.index') }}" class="btn btn-sm btn-success m-2" style="background: #322338">Cotizaciones
-                                                    <img src="{{asset('assets/user/icons/carrito-de-compras.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
+                                                    <img src="{{asset('assets/user/icons/prueba.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
                                                 </a>
                                                 <a href="{{ route('pedidos_cosmica_woo.index') }}" class="btn btn-sm m-2 text-white" style="background:#B600E3;">Tienda Online
                                                     <img src="{{asset('assets/user/icons/carrito-de-compras.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>

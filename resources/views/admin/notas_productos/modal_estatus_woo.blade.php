@@ -26,9 +26,9 @@
                         <option value="failed" {{ $order->status == 'failed' ? 'selected' : '' }}>Fallido</option>
                             <!-- Nuevos estados personalizados -->
                         <option value="guia_cargada" {{ $order->status == 'guia_cargada' ? 'selected' : '' }}>Guía Cargada</option>
-                        <option value="en_preparacion" {{ $order->status == 'en_preparacion' ? 'selected' : '' }}>En Preparación</option>
+                        {{-- <option value="en_preparacion" {{ $order->status == 'en_preparacion' ? 'selected' : '' }}>En Preparación</option>
                         <option value="preparados" {{ $order->status == 'preparados' ? 'selected' : '' }}>Preparados</option>
-                        <option value="enviados" {{ $order->status == 'enviados' ? 'selected' : '' }}>Enviados</option>
+                        <option value="enviados" {{ $order->status == 'enviados' ? 'selected' : '' }}>Enviados</option> --}}
                     </select>
                 </div>
                 <!-- Campo de archivo oculto inicialmente -->

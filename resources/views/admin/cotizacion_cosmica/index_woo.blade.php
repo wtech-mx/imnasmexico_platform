@@ -18,9 +18,12 @@
             <div class="col-sm-12">
                 <div class="card">
 
-                    <div class="card-body p-5">
+                    <div class="card-body p-2">
                         <form action="{{ route('pedidos_cosmica_woo.index') }}" method="GET">
                             <div class="row">
+                                <div class="col-12">
+                                    <h3>Ordenes de la tienda Online</h3>
+                                </div>
                                 <div class="col-md-5">
                                     <label for="start_date">Fecha de Inicio:</label>
                                     <input type="date" name="start_date" class="form-control" value="{{ request('start_date') }}">
@@ -39,7 +42,7 @@
                             <div class="col-12 mt-3">
                                 <div class="d-flex justify-content-center">
                                     <a href="{{ route('cotizacion_cosmica.index') }}" class="btn btn-sm btn-success m-2" style="background: #322338">Cotizaciones
-                                        <img src="{{asset('assets/user/icons/carrito-de-compras.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
+                                        <img src="{{asset('assets/user/icons/prueba.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
                                     </a>
                                     <a href="{{ route('pedidos_cosmica_woo.index') }}" class="btn btn-sm m-2 text-white" style="background:#B600E3;">Tienda Online
                                         <img src="{{asset('assets/user/icons/carrito-de-compras.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>

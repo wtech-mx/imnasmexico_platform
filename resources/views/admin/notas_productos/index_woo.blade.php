@@ -18,9 +18,12 @@
             <div class="col-sm-12">
                 <div class="card">
 
-                    <div class="card-body p-5">
+                    <div class="card-body p-2">
                         <form action="{{ route('pedidos_woo.index') }}" method="GET">
                             <div class="row">
+                                <div class="col-12">
+                                    <h3>Ordenes de la tienda Online</h3>
+                                </div>
                                 <div class="col-md-5">
                                     <label for="start_date">Fecha de Inicio:</label>
                                     <input type="date" name="start_date" class="form-control" value="{{ request('start_date') }}">
