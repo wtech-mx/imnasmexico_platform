@@ -115,6 +115,64 @@ class PedidosWooController extends Controller
         }
     }
 
+    public function updateStatuWooCosmika(Request $request, $id)
+    {
+        // Validar el nuevo estado y el archivo
+        $request->validate([
+            'status' => 'required|string',
+            'guia_de_envio' => 'nullable|file', // Validar si se carga el archivo
+        ]);
 
+        // Crear instancia del cliente Automattic\WooCommerce\Client para la segunda tienda (Cosmika)
+        $woocommerceCosmika = new Client(
+            'https://cosmicaskin.com', // URL de la tienda secundaria
+            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
+            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Actualizar el estado de la orden en WooCommerce
+        try {
+            $updatedOrder = $woocommerceCosmika->put("orders/{$id}", [
+                'status' => $request->status,
+            ]);
+
+            // Verificar si se seleccionó el estado "guia_cargada" y si se subió un archivo
+            if ($request->status === 'guia_cargada' && $request->hasFile('guia_de_envio')) {
+                // Definir la ruta para guardar el archivo
+                $dominio = $request->getHost();
+                $ruta_guia = ($dominio == 'plataforma.imnasmexico.com')
+                    ? base_path('../public_html/plataforma.imnasmexico.com/guias')
+                    : public_path() . '/guias';
+
+                // Guardar el archivo con un nombre único
+                $file = $request->file('guia_de_envio');
+                $fileName = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move($ruta_guia, $fileName);
+
+                // Actualizar la meta información en WooCommerce para el campo 'guia_de_envio'
+                $updatedOrderMeta = $woocommerceCosmika->put("orders/{$id}", [
+                    'meta_data' => [
+                        [
+                            'key' => 'guia_de_envio',
+                            'value' => $fileName, // Guardar el nombre del archivo
+                        ],
+                    ],
+                ]);
+            }
+
+            // Verificar si la actualización fue exitosa
+            if ($updatedOrder) {
+                return redirect()->back()->with('success', 'Estado de la orden y archivo actualizado correctamente.');
+            } else {
+                return redirect()->back()->with('error', 'Hubo un problema al actualizar el estado de la orden.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error al actualizar la orden: ' . $e->getMessage());
+        }
+    }
 
 }

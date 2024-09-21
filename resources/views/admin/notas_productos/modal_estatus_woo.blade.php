@@ -9,7 +9,13 @@
 
         <div class="modal-body">
 
-            <form action="{{ route('orders.updateStatuWoo', $order->id) }}" method="POST" class="row" enctype="multipart/form-data">
+
+            @if(request()->is('admin/pedidos/woo'))
+                <form action="{{ route('orders.updateStatuWoo', $order->id) }}" method="POST" class="row" enctype="multipart/form-data">
+            @elseif(request()->is('cosmica/admin/pedidos/cosmika/woo'))
+                <form action="{{ route('orders.updateStatuWooCosmika', $order->id) }}" method="POST" class="row" enctype="multipart/form-data">
+            @endif
+
                 @csrf
                 @method('PUT')
                 <div class="col-12">
@@ -38,16 +44,15 @@
                 </div>
 
                 @if(isset($order->meta_data))
-                @foreach($order->meta_data as $meta)
-                    @if($meta->key == 'guia_de_envio')
-                    <div class="col-12  mt-3">
-                        <iframe src="{{asset('guias/'.$meta->value) }}" frameborder="0" style="width: 100%;"></iframe> <br>
-                        <a target="_blank" href="{{asset('guias/'.$meta->value) }}">ver/Descargar</a>
-                    </div>
-                    @endif
-                @endforeach
-            @endif
-
+                    @foreach($order->meta_data as $meta)
+                        @if($meta->key == 'guia_de_envio')
+                        <div class="col-12  mt-3">
+                            <iframe src="{{asset('guias/'.$meta->value) }}" frameborder="0" style="width: 100%;"></iframe> <br>
+                            <a target="_blank" href="{{asset('guias/'.$meta->value) }}">ver/Descargar</a>
+                        </div>
+                        @endif
+                    @endforeach
+                @endif
 
             </form>
 

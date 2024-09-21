@@ -407,6 +407,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::put('orders/update-status/{id}', [App\Http\Controllers\PedidosWooController::class, 'updateStatuWoo'])->name('orders.updateStatuWoo');
 
     Route::get('cosmica/admin/pedidos/cosmika/woo', [App\Http\Controllers\PedidosWooController::class, 'index_cosmika'])->name('pedidos_cosmica_woo.index');
+    Route::put('cosmica/orders/update-status/{id}', [App\Http\Controllers\PedidosWooController::class, 'updateStatuWooCosmika'])->name('orders.updateStatuWooCosmika');
 
 
     // =============== M O D U L O   N O T A S ===============================
