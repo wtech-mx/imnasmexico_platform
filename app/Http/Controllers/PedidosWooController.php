@@ -78,7 +78,6 @@ class PedidosWooController extends Controller
         ]);
 
         // Verificar si se seleccionó el estado "guia_cargada" y si se subió un archivo
-        if ($request->status === 'guia_cargada' && $request->hasFile('guia_de_envio')) {
             // Definir la ruta para guardar el archivo
             $dominio = $request->getHost();
             if ($dominio == 'plataforma.imnasmexico.com') {
@@ -104,8 +103,6 @@ class PedidosWooController extends Controller
                     ],
                 ],
             ]);
-
-        }
 
         // Verificar si la actualización fue exitosa
         if ($updatedOrder) {
@@ -140,8 +137,6 @@ class PedidosWooController extends Controller
                 'status' => $request->status,
             ]);
 
-            // Verificar si se seleccionó el estado "guia_cargada" y si se subió un archivo
-            if ($request->status === 'guia_cargada' && $request->hasFile('guia_de_envio')) {
                 // Definir la ruta para guardar el archivo
                 $dominio = $request->getHost();
                 $ruta_guia = ($dominio == 'plataforma.imnasmexico.com')
@@ -162,7 +157,7 @@ class PedidosWooController extends Controller
                         ],
                     ],
                 ]);
-            }
+
 
             // Verificar si la actualización fue exitosa
             if ($updatedOrder) {
