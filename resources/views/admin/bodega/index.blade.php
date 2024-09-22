@@ -38,7 +38,7 @@
                                         Enviados <img src="{{ asset('assets/cam/delivery.png') }}" alt="" width="35px">
                                     </button>
                                 </div>
-                              </nav>
+                            </nav>
 
                               <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade show active" id="nav-Cotizacion" role="tabpanel" aria-labelledby="nav-Cotizacion-tab" tabindex="0">
@@ -112,6 +112,7 @@
                                                 @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
+
                                             @foreach ($notas_cosmica_preparacion as $item)
                                                 <tr style="background: #d486d6">
                                                     <td>
@@ -169,8 +170,42 @@
                                                 @include('admin.bodega.modal_cosmica_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
-                                        </tbody>
-                                    </table>
+
+                                            @foreach($orders_tienda_principal as $order)
+                                            <tr>
+                                                <td>{{ $order->id }}</td>
+                                                <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
+                                                <td>{{ ucfirst($order->status) }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($order->date_created)->format('d-m-Y') }}</td>
+                                                <td>${{ $order->total }}</td>
+                                                <td>
+                                                    <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
+                                                        <i class="fa fa-list-alt"></i>
+                                                    </a>
+
+                                                    @if(isset($order->meta_data))
+                                                        @foreach($order->meta_data as $meta)
+                                                            @if($meta->key == 'guia_de_envio')
+
+                                                            <a class="text-center text-white btn btn-sm" href="{{asset('guias/'.$meta->value) }}" download="{{asset('guias/'.$meta->value) }}" style="background: #e6ab2d;">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+
+                                                            @endif
+                                                        @endforeach
+                                                    @endif
+
+
+
+                                                    <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
+                                                        <i class="fa fa-info"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                            @include('admin.bodega.modal_productos')
+                                            @endforeach
+                                            </tbody>
+                                        </table>
                                 </div>
 
                                 <div class="tab-pane fade" id="nav-Aprobada" role="tabpanel" aria-labelledby="nav-Aprobada-tab" tabindex="0">

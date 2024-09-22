@@ -143,6 +143,14 @@
                                                 <a type="button" class="btn btn-sm btn-secundary" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
                                                     {{ $order->status }}
                                                 </a>
+                                            @elseif($order->status == 'processing')
+                                                <a type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
+                                                    {{ $order->status }}
+                                                </a>
+                                            @elseif($order->status == 'cancelled')
+                                                <a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
+                                                    {{ $order->status }}
+                                                </a>
                                             @endif
 
                                         </td>

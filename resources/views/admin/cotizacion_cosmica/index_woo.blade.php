@@ -6,7 +6,7 @@
 
 @section('css')
 
- @endsection
+@endsection
 
 @php
     $fecha = date('Y-m-d');

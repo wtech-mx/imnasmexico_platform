@@ -63,7 +63,6 @@ class PedidosWooController extends Controller
         return view('admin.cotizacion_cosmica.index_woo', compact('orders'));
     }
 
-
     public function updateStatuWoo(Request $request, $id)
     {
         // Validar el nuevo estado y el archivo
@@ -86,13 +85,17 @@ class PedidosWooController extends Controller
                 $ruta_guia = public_path() . '/guias';
             }
 
-            // Guardar el archivo con un nombre único
-            $file = $request->file('guia_de_envio');
-            $fileName = uniqid() . '_' . $file->getClientOriginalName();
-            $file->move($ruta_guia, $fileName);
+            if ($request->hasFile("guia_de_envio")) {
+                // Guardar el archivo con un nombre único
+                $file = $request->file('guia_de_envio');
+                $fileName = uniqid() . '_' . $file->getClientOriginalName();
+                $file->move($ruta_guia, $fileName);
 
-            // Ruta completa del archivo guardado
-            $filePath = $ruta_guia . '/' . $fileName;
+                // Ruta completa del archivo guardado
+                $filePath = $ruta_guia . '/' . $fileName;
+
+                $fecha_y_hora_guia = date("Y-m-d H:i:s");
+            }
 
             // Actualizar la meta información en WooCommerce para el campo 'guia_de_envio'
             $updatedOrderMeta = WooCommerce::update('orders/' . $id, [
@@ -100,6 +103,10 @@ class PedidosWooController extends Controller
                     [
                         'key' => 'guia_de_envio',
                         'value' => $fileName, // Guardar la ruta completa del archivo en WooCommerce
+                    ],
+                    [
+                        'key' => 'fecha_y_hora_guia',
+                        'value' => $fecha_y_hora_guia, // Guardar la ruta completa del archivo en WooCommerce
                     ],
                 ],
             ]);
@@ -143,10 +150,12 @@ class PedidosWooController extends Controller
                     ? base_path('../public_html/plataforma.imnasmexico.com/guias')
                     : public_path() . '/guias';
 
-                // Guardar el archivo con un nombre único
-                $file = $request->file('guia_de_envio');
-                $fileName = uniqid() . '_' . $file->getClientOriginalName();
-                $file->move($ruta_guia, $fileName);
+                if ($request->hasFile("guia_de_envio")) {
+                    // Guardar el archivo con un nombre único
+                    $file = $request->file('guia_de_envio');
+                    $fileName = uniqid() . '_' . $file->getClientOriginalName();
+                    $file->move($ruta_guia, $fileName);
+                }
 
                 // Actualizar la meta información en WooCommerce para el campo 'guia_de_envio'
                 $updatedOrderMeta = $woocommerceCosmika->put("orders/{$id}", [
