@@ -17,7 +17,17 @@
                             $domain = parse_url($order->payment_url, PHP_URL_HOST);
                         @endphp
 
-                        <input type="text" name="dominio" value="{{  $domain  }}">
+                        <input type="hidden" name="dominio" value="{{  $domain  }}">
+
+                        <input type="text" name="" value="{{  $order->status   }}">
+
+                        @if($order->status == 'guia_cargada')
+                            <input type="hidden" name="key" value="preparado_hora_y_guia">
+                        @endif
+
+                        @if($order->status == 'preparados')
+                            <input type="hidden" name="key" value="enviado_hora_y_guia">
+                        @endif
 
                         <div class="form-group">
                             <label for="name">Estatus *</label>

@@ -134,7 +134,7 @@ class BodegaController extends Controller
         $updatedOrderMeta = $woocommerceNas->put("orders/{$id}", [
             'meta_data' => [
                 [
-                    'key' => 'preparado_hora_y_guia',
+                    'key' => $request->get('key'),
                     'value' => date("Y-m-d H:i:s"), // Guardar el nombre del archivo
                 ],
             ],
