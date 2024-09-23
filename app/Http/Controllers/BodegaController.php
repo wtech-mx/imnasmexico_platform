@@ -48,6 +48,7 @@ class BodegaController extends Controller
 
         // Convertir las órdenes en un solo array combinando las de ambas tiendas
         $orders_tienda_principal = array_merge($orders_tienda_principal);
+        // dd($orders_tienda_principal);
 
         $orders_tienda_cosmica = array_merge($orders_tienda_cosmica);
 
@@ -68,6 +69,43 @@ class BodegaController extends Controller
             'notas_preparacion', 'notas_preparado', 'notas_enviados',
             'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados'
         ));
+    }
+
+    public function update_guia_woo(Request $request, $id)
+    {
+        // Crear instancia del cliente Automattic\WooCommerce\Client para la segunda tienda (Cosmika)
+        $woocommerceNas = new Client(
+            'https://imnasmexico.com/new', // URL de la tienda secundaria
+            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda secundaria
+            'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda secundaria
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+
+        $updatedOrder = $woocommerceNas->put("orders/{$id}", [
+            'status' => 'preparados',
+        ]);
+
+        $updatedOrderMeta = $woocommerceNas->put("orders/{$id}", [
+            'meta_data' => [
+                [
+                    'key' => 'preparado_hora_y_guia',
+                    'value' => date("Y-m-d H:i:s"), // Guardar el nombre del archivo
+                ],
+            ],
+        ]);
+
+        // Verificar si la actualización fue exitosa
+        if ($updatedOrder) {
+            return redirect()->back()->with('success', 'Estado de la orden y archivo actualizado correctamente.');
+        } else {
+            return redirect()->back()->with('error', 'Hubo un problema al actualizar el estado de la orden.');
+        }
+
+
     }
 
 }

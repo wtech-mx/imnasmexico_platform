@@ -175,7 +175,11 @@
                                             <tr>
                                                 <td>{{ $order->id }}</td>
                                                 <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
-                                                <td>{{ ucfirst($order->status) }}</td>
+                                                <td>
+                                                    <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
+                                                        En preparación
+                                                    </a>
+                                                </td>
                                                 <td>{{ \Carbon\Carbon::parse($order->date_created)->format('d-m-Y') }}</td>
                                                 <td>${{ $order->total }}</td>
                                                 <td>
@@ -195,14 +199,17 @@
                                                         @endforeach
                                                     @endif
 
-
-
-                                                    <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
+                                                    <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
                                                         <i class="fa fa-info"></i>
                                                     </a>
+
                                                 </td>
                                             </tr>
+
                                             @include('admin.bodega.modal_productos')
+                                            @include('admin.bodega.modal_edit_estatus_woo')
+                                            @include('admin.bodega.modal_estatus_woo')
+
                                             @endforeach
                                             </tbody>
                                         </table>

@@ -1,15 +1,15 @@
-<div class="modal fade" id="estatusModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="estatus_edit_modal_woo{{$order->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered">
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title">Cambio de Estatus #{{$item->id}}</h5>
+          <h5 class="modal-title">Cambio de Estatus woo #{{$order->id}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-            <form method="POST" action="{{ route('notas_cotizacion.update_estatus', $item->id) }}" enctype="multipart/form-data" role="form">
+            <form method="POST" action="{{ route('bodega.update_guia_woo', $order->id) }}" enctype="multipart/form-data" role="form">
                 @csrf
-                <input type="hidden" name="_method" value="PATCH">
+                @method('PUT')
                 <div class="modal-body">
                     <div class="row">
 
@@ -19,11 +19,9 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                 </span>
-                                <select class="form-select d-inline-block"  data-toggle="select" id="estatus_cotizacion" name="estatus_cotizacion">
-                                    @if($item->estatus_cotizacion == 'Aprobada')
-                                        <option value="Preparado">Preparado</option>
-                                    @elseif($item->estatus_cotizacion == 'Preparado')
-                                        <option value="Enviado">Enviado</option>
+                                <select class="form-select d-inline-block"  data-toggle="select"  name="status">
+                                    @if($order->status == 'guia_cargada')
+                                        <option value="preparados">Preparado</option>
                                     @endif
                                 </select>
                             </div>

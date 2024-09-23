@@ -85,6 +85,8 @@ class PedidosWooController extends Controller
                 $ruta_guia = public_path() . '/guias';
             }
 
+            $fecha_y_hora_guia = date("Y-m-d H:i:s");
+
             if ($request->hasFile("guia_de_envio")) {
                 // Guardar el archivo con un nombre único
                 $file = $request->file('guia_de_envio');
@@ -94,22 +96,34 @@ class PedidosWooController extends Controller
                 // Ruta completa del archivo guardado
                 $filePath = $ruta_guia . '/' . $fileName;
 
-                $fecha_y_hora_guia = date("Y-m-d H:i:s");
+
+                // Actualizar la meta información en WooCommerce para el campo 'guia_de_envio'
+                $updatedOrderMeta = WooCommerce::update('orders/' . $id, [
+                    'meta_data' => [
+                        [
+                            'key' => 'guia_de_envio',
+                            'value' => $fileName, // Guardar la ruta completa del archivo en WooCommerce
+                        ],
+                        [
+                            'key' => 'fecha_y_hora_guia',
+                            'value' => $fecha_y_hora_guia, // Guardar la ruta completa del archivo en WooCommerce
+                        ],
+                    ],
+                ]);
+
+            }else{
+                // Actualizar la meta información en WooCommerce para el campo 'guia_de_envio'
+                $updatedOrderMeta = WooCommerce::update('orders/' . $id, [
+                    'meta_data' => [
+                        [
+                            'key' => 'fecha_y_hora_guia',
+                            'value' => $fecha_y_hora_guia, // Guardar la ruta completa del archivo en WooCommerce
+                        ],
+                    ],
+                ]);
             }
 
-            // Actualizar la meta información en WooCommerce para el campo 'guia_de_envio'
-            $updatedOrderMeta = WooCommerce::update('orders/' . $id, [
-                'meta_data' => [
-                    [
-                        'key' => 'guia_de_envio',
-                        'value' => $fileName, // Guardar la ruta completa del archivo en WooCommerce
-                    ],
-                    [
-                        'key' => 'fecha_y_hora_guia',
-                        'value' => $fecha_y_hora_guia, // Guardar la ruta completa del archivo en WooCommerce
-                    ],
-                ],
-            ]);
+
 
         // Verificar si la actualización fue exitosa
         if ($updatedOrder) {
