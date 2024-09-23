@@ -50,6 +50,17 @@
 
                                 </div>
                             </div>
+                            <div class="col-12 mt-3">
+                                <div class="d-flex justify-content-around">
+                                    <span class="badge rounded-pill text-white text-bg-primary">Processing (Pagado)</span>
+                                    <span class="badge rounded-pill text-white text-bg-warning">Pending (Pendiente Pago)</span>
+                                    <span class="badge rounded-pill text-white text-bg-success">Completado</span>
+                                    <span class="badge rounded-pill text-white text-bg-danger">Cancelled (Cancelado)</span>
+                                    <span class="badge rounded-pill text-white text-bg-info">Guia Cargada</span>
+                                    <span class="badge rounded-pill text-dark text-bg-light">Preparado</span>
+                                    <span class="badge rounded-pill text-white text-bg-secondary">Enviado</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -79,6 +90,7 @@
                                                 <li><strong>Correo:</strong>{{ $order->billing->email }}</li>
                                                 <li><strong>Telefono:</strong>{{ $order->billing->phone }}</li>
                                                 <li><strong>Metodo de Pago:</strong>{{ $order->payment_method_title }}</li>
+                                                <li><a href="https://imnasmexico.com/new/wp-admin/post.php?post={{ $order->id }}&action=edit" target="_blank" rel="noopener noreferrer"><strong>Ver Orden</strong></a></li>
                                             </ul>
                                         </td>
                                         <td>
@@ -128,7 +140,7 @@
                                                     {{ $order->status }}
                                                 </a>
                                             @elseif($order->status == 'guia_cargada')
-                                                <a type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
+                                                <a type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
                                                     {{ $order->status }}
                                                 </a>
                                             @elseif($order->status == 'en_preparacion')
@@ -136,11 +148,11 @@
                                                     {{ $order->status }}
                                                 </a>
                                             @elseif($order->status == 'preparados')
-                                                <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
+                                                <a type="button" class="btn btn-sm btn-light" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
                                                     {{ $order->status }}
                                                 </a>
                                             @elseif($order->status == 'enviados')
-                                                <a type="button" class="btn btn-sm btn-secundary" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
+                                                <a type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
                                                     {{ $order->status }}
                                                 </a>
                                             @elseif($order->status == 'processing')
@@ -148,7 +160,7 @@
                                                     {{ $order->status }}
                                                 </a>
                                             @elseif($order->status == 'cancelled')
-                                                <a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
+                                                <a type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#estatus_woo_{{ $order->id }}">
                                                     {{ $order->status }}
                                                 </a>
                                             @endif

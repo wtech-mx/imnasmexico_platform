@@ -19,8 +19,6 @@
 
                         <input type="hidden" name="dominio" value="{{  $domain  }}">
 
-                        <input type="text" name="" value="{{  $order->status   }}">
-
                         @if($order->status == 'guia_cargada')
                             <input type="hidden" name="key" value="preparado_hora_y_guia">
                         @endif

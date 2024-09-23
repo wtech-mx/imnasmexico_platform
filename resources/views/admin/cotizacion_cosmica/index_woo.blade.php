@@ -79,6 +79,7 @@
                                                 <li><strong>Correo:</strong>{{ $order->billing->email }}</li>
                                                 <li><strong>Telefono:</strong>{{ $order->billing->phone }}</li>
                                                 <li><strong>Metodo de Pago:</strong>{{ $order->payment_method_title }}</li>
+                                                <li><a href="https://cosmicaskin.com/wp-admin/post.php?post={{ $order->id }}&action=edit" target="_blank" rel="noopener noreferrer"><strong>Ver Orden</strong></a></li>
                                             </ul>
                                         </td>
                                         <td>
