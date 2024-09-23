@@ -256,8 +256,7 @@
 
         <div class="container_curso">
             <h4 class="nombre">
-                {{ ucwords(strtolower($cursoNombre)) }}
-
+                {{ $cursoNombre }}
             </h4>
         </div>
 
@@ -310,10 +309,7 @@
 
         <div class="container_cursoTrasero">
             <h4 class="curso_sm">
-
-                {{ ucwords(strtolower($cursoNombre)) }}
-
-
+                {{ $cursoNombre }}
             </h4>
         </div>
 
