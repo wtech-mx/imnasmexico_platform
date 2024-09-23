@@ -172,45 +172,94 @@
                                             @endforeach
 
                                             @foreach($orders_tienda_principal as $order)
-                                            <tr>
-                                                <td>{{ $order->id }}</td>
-                                                <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
-                                                <td>
-                                                    <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
-                                                        En preparación
-                                                    </a>
-                                                </td>
-                                                <td>{{ \Carbon\Carbon::parse($order->date_created)->format('d-m-Y') }}</td>
-                                                <td>${{ $order->total }}</td>
-                                                <td>
-                                                    <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
-                                                        <i class="fa fa-list-alt"></i>
-                                                    </a>
+                                                <tr style="background: #F5ECE4">
+                                                    <td>{{ $order->id }}</td>
+                                                    <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
+                                                            En preparación
+                                                        </a>
+                                                    </td>
+                                                    <td>{{ \Carbon\Carbon::parse($order->date_created)->format('d-m-Y') }}</td>
+                                                    <td>${{ $order->total }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
 
-                                                    @if(isset($order->meta_data))
-                                                        @foreach($order->meta_data as $meta)
-                                                            @if($meta->key == 'guia_de_envio')
+                                                        @if(isset($order->meta_data))
+                                                            @foreach($order->meta_data as $meta)
+                                                                @if($meta->key == 'guia_de_envio')
 
-                                                            <a class="text-center text-white btn btn-sm" href="{{asset('guias/'.$meta->value) }}" download="{{asset('guias/'.$meta->value) }}" style="background: #e6ab2d;">
-                                                                <i class="fa fa-truck"></i>
-                                                            </a>
+                                                                <a class="text-center text-white btn btn-sm" href="{{asset('guias/'.$meta->value) }}" download="{{asset('guias/'.$meta->value) }}" style="background: #e6ab2d;">
+                                                                    <i class="fa fa-truck"></i>
+                                                                </a>
 
-                                                            @endif
-                                                        @endforeach
-                                                    @endif
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
 
-                                                    <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
-                                                        <i class="fa fa-info"></i>
-                                                    </a>
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
 
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                </tr>
 
-                                            @include('admin.bodega.modal_productos')
-                                            @include('admin.bodega.modal_edit_estatus_woo')
-                                            @include('admin.bodega.modal_estatus_woo')
+                                                @include('admin.bodega.modal_productos')
+                                                @include('admin.bodega.modal_edit_estatus_woo')
+                                                @include('admin.bodega.modal_estatus_woo')
 
                                             @endforeach
+
+                                            @foreach($orders_tienda_cosmica as $order)
+                                                <tr style="background: #80486B;color:#fff">
+                                                    <td>{{ $order->id }}</td>
+                                                    <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
+                                                            En preparación
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        @foreach($order->meta_data as $meta)
+                                                            @if($meta->key == 'fecha_y_hora_guia')
+                                                                {{ \Carbon\Carbon::parse($meta->value)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                            @endif
+                                                        @endforeach
+
+                                                    </td>
+                                                    <td>${{ $order->total }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        @if(isset($order->meta_data))
+                                                            @foreach($order->meta_data as $meta)
+                                                                @if($meta->key == 'guia_de_envio')
+
+                                                                <a class="text-center text-white btn btn-sm" href="{{asset('guias/'.$meta->value) }}" download="{{asset('guias/'.$meta->value) }}" style="background: #e6ab2d;">
+                                                                    <i class="fa fa-truck"></i>
+                                                                </a>
+
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.bodega.modal_productos')
+                                                @include('admin.bodega.modal_edit_estatus_woo')
+                                                @include('admin.bodega.modal_estatus_woo')
+
+                                            @endforeach
+
                                             </tbody>
                                         </table>
                                 </div>
@@ -285,6 +334,7 @@
                                                 @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
+
                                             @foreach ($notas_cosmica_preparado as $item)
                                                 <tr>
                                                     <td>
@@ -342,6 +392,96 @@
                                                 @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
+
+                                            @foreach($orders_tienda_principal_preparados as $order)
+                                                <tr style="background: #F5ECE4">
+                                                    <td>{{ $order->id }}</td>
+                                                    <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
+                                                            Preparado
+                                                        </a>
+                                                    </td>
+                                                    <td>{{ \Carbon\Carbon::parse($order->date_created)->format('d-m-Y') }}</td>
+                                                    <td>${{ $order->total }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        @if(isset($order->meta_data))
+                                                            @foreach($order->meta_data as $meta)
+                                                                @if($meta->key == 'guia_de_envio')
+
+                                                                <a class="text-center text-white btn btn-sm" href="{{asset('guias/'.$meta->value) }}" download="{{asset('guias/'.$meta->value) }}" style="background: #e6ab2d;">
+                                                                    <i class="fa fa-truck"></i>
+                                                                </a>
+
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.bodega.modal_productos')
+                                                @include('admin.bodega.modal_edit_estatus_woo')
+                                                @include('admin.bodega.modal_estatus_woo')
+
+                                            @endforeach
+
+                                            @foreach($orders_tienda_cosmica_preparados as $order)
+                                                <tr style="background: #80486B;color:#fff">
+                                                    <td>{{ $order->id }}</td>
+                                                    <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
+                                                            Preparado
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        @foreach($order->meta_data as $meta)
+                                                            @if($meta->key == 'fecha_y_hora_guia')
+                                                                {{ \Carbon\Carbon::parse($meta->value)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                            @endif
+                                                        @endforeach
+
+                                                    </td>
+                                                    <td>${{ $order->total }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        @if(isset($order->meta_data))
+                                                            @foreach($order->meta_data as $meta)
+                                                                @if($meta->key == 'guia_de_envio')
+
+                                                                <a class="text-center text-white btn btn-sm" href="{{asset('guias/'.$meta->value) }}" download="{{asset('guias/'.$meta->value) }}" style="background: #e6ab2d;">
+                                                                    <i class="fa fa-truck"></i>
+                                                                </a>
+
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.bodega.modal_productos')
+                                                @include('admin.bodega.modal_edit_estatus_woo')
+                                                @include('admin.bodega.modal_estatus_woo')
+
+                                            @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -416,6 +556,7 @@
                                                 @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
+
                                             @foreach ($notas_cosmica_enviados as $item)
                                                 <tr>
                                                     <td>
@@ -473,6 +614,94 @@
                                                 @include('admin.cotizacion.guia')
                                                 @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
+                                            @endforeach
+
+                                            @foreach($orders_tienda_principal_enviados as $order)
+                                                <tr style="background: #F5ECE4">
+                                                    <td>{{ $order->id }}</td>
+                                                    <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
+                                                            Enviado
+                                                        </a>
+                                                    </td>
+                                                    <td>{{ \Carbon\Carbon::parse($order->date_created)->format('d-m-Y') }}</td>
+                                                    <td>${{ $order->total }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        @if(isset($order->meta_data))
+                                                            @foreach($order->meta_data as $meta)
+                                                                @if($meta->key == 'guia_de_envio')
+
+                                                                <a class="text-center text-white btn btn-sm" href="{{asset('guias/'.$meta->value) }}" download="{{asset('guias/'.$meta->value) }}" style="background: #e6ab2d;">
+                                                                    <i class="fa fa-truck"></i>
+                                                                </a>
+
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.bodega.modal_productos')
+                                                @include('admin.bodega.modal_edit_estatus_woo')
+                                                @include('admin.bodega.modal_estatus_woo')
+                                            @endforeach
+
+                                            @foreach($orders_tienda_cosmica_enviados as $order)
+                                                <tr style="background: #80486B;color:#fff">
+                                                    <td>{{ $order->id }}</td>
+                                                    <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
+                                                            Enviado
+                                                        </a>
+                                                    </td>
+                                                    <td>
+                                                        @foreach($order->meta_data as $meta)
+                                                            @if($meta->key == 'fecha_y_hora_guia')
+                                                                {{ \Carbon\Carbon::parse($meta->value)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                            @endif
+                                                        @endforeach
+
+                                                    </td>
+                                                    <td>${{ $order->total }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        @if(isset($order->meta_data))
+                                                            @foreach($order->meta_data as $meta)
+                                                                @if($meta->key == 'guia_de_envio')
+
+                                                                <a class="text-center text-white btn btn-sm" href="{{asset('guias/'.$meta->value) }}" download="{{asset('guias/'.$meta->value) }}" style="background: #e6ab2d;">
+                                                                    <i class="fa fa-truck"></i>
+                                                                </a>
+
+                                                                @endif
+                                                            @endforeach
+                                                        @endif
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.bodega.modal_productos')
+                                                @include('admin.bodega.modal_edit_estatus_woo')
+                                                @include('admin.bodega.modal_estatus_woo')
+
                                             @endforeach
                                         </tbody>
                                     </table>

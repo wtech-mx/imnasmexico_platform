@@ -41,8 +41,28 @@ class BodegaController extends Controller
             'per_page' => 100,
         ]);
 
+        $orders_tienda_principal_preparados = $woocommerce->get('orders', [
+            'status' => 'preparados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_principal_enviados = $woocommerce->get('orders', [
+            'status' => 'enviados',
+            'per_page' => 100,
+        ]);
+
         $orders_tienda_cosmica = $woocommerceCosmika->get('orders', [
             'status' => 'guia_cargada',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica_preparados = $woocommerceCosmika->get('orders', [
+            'status' => 'preparados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica_enviados = $woocommerceCosmika->get('orders', [
+            'status' => 'enviados',
             'per_page' => 100,
         ]);
 
@@ -65,7 +85,11 @@ class BodegaController extends Controller
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index', compact(
             'orders_tienda_principal',
+            'orders_tienda_principal_preparados',
+            'orders_tienda_principal_enviados',
             'orders_tienda_cosmica',
+            'orders_tienda_cosmica_preparados',
+            'orders_tienda_cosmica_enviados',
             'notas_preparacion', 'notas_preparado', 'notas_enviados',
             'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados'
         ));
@@ -73,20 +97,38 @@ class BodegaController extends Controller
 
     public function update_guia_woo(Request $request, $id)
     {
-        // Crear instancia del cliente Automattic\WooCommerce\Client para la segunda tienda (Cosmika)
-        $woocommerceNas = new Client(
-            'https://imnasmexico.com/new', // URL de la tienda secundaria
-            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda secundaria
-            'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda secundaria
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3',
-            ]
-        );
+
+        $dominio =  $request->get('dominio');
+
+        if($dominio == 'cosmicaskin.com'){
+
+            // Crear instancia del cliente Automattic\WooCommerce\Client para la segunda tienda (Cosmika)
+            $woocommerceNas = new Client(
+                'https://cosmicaskin.com', // URL de la tienda secundaria
+                'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
+                'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
+                [
+                    'wp_api' => true,
+                    'version' => 'wc/v3',
+                ]
+            );
+
+        }else{
+            // Crear instancia del cliente Automattic\WooCommerce\Client para la segunda tienda (Cosmika)
+            $woocommerceNas = new Client(
+                'https://imnasmexico.com/new', // URL de la tienda secundaria
+                'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda secundaria
+                'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda secundaria
+                [
+                    'wp_api' => true,
+                    'version' => 'wc/v3',
+                ]
+            );
+        }
 
 
         $updatedOrder = $woocommerceNas->put("orders/{$id}", [
-            'status' => 'preparados',
+            'status' => $request->get('status'),
         ]);
 
         $updatedOrderMeta = $woocommerceNas->put("orders/{$id}", [

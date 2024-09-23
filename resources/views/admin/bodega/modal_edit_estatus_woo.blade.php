@@ -13,6 +13,12 @@
                 <div class="modal-body">
                     <div class="row">
 
+                        @php
+                            $domain = parse_url($order->payment_url, PHP_URL_HOST);
+                        @endphp
+
+                        <input type="text" name="dominio" value="{{  $domain  }}">
+
                         <div class="form-group">
                             <label for="name">Estatus *</label>
                             <div class="input-group mb-3">
@@ -22,6 +28,10 @@
                                 <select class="form-select d-inline-block"  data-toggle="select"  name="status">
                                     @if($order->status == 'guia_cargada')
                                         <option value="preparados">Preparado</option>
+                                    @endif
+
+                                    @if($order->status == 'preparados')
+                                        <option value="enviados">Enviado</option>
                                     @endif
                                 </select>
                             </div>
