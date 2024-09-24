@@ -23,7 +23,7 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                 </span>
-                                <select class="form-select d-inline-block estatus-cotizacion" data-toggle="select" name="estatus_cotizacion" value="{{ old('estatus_cotizacion') }}">
+                                <select class="form-select d-inline-block estatus-cotizacion" data-toggle="select" name="estatus_cotizacion" value="{{ old('estatus_cotizacion') }}" required>
                                     <option value="">Seleccionar Estatus</option>
                                     <option value="Aprobada">Aprobada</option>
                                     <option value="Cancelada">Cancelada</option>
@@ -200,6 +200,4 @@ $(document).ready(function() {
         }).trigger('change'); // Activar el evento para el valor actual.
     });
 });
-
-
 </script>

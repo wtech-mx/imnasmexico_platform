@@ -3,7 +3,9 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title">Cambio de Estatus</h5>
+          <h5 class="modal-title">Cambio de Estatus #
+            @if ($item->folio == null){{ $item->id }}@else{{ $item->folio }}@endif
+          </h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
@@ -17,7 +19,7 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                 </span>
-                                <select class="form-select d-inline-block estatus-cotizacion"  data-toggle="select" id="estatus_cotizacion" name="estatus_cotizacion" value="{{ old('estatus_cotizacion') }}">
+                                <select class="form-select d-inline-block estatus-cotizacion"  data-toggle="select" id="estatus_cotizacion" name="estatus_cotizacion" value="{{ old('estatus_cotizacion') }}" required>
                                     <option value="">Seleccionar Estatus</option>
                                     {{-- <option value="Pendiente">Pendiente</option> --}}
                                     <option value="Aprobada">Aprobada</option>
@@ -32,7 +34,8 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                 </span>
-                                <select class="form-select d-inline-block" data-toggle="select" id="estado" name="estado">
+                                <select class="form-select d-inline-block" data-toggle="select" id="estado" name="estado"required>
+                                    <option value="">Seleciona Estado</option>
                                     <option value="Aguascalientes">Aguascalientes</option>
                                     <option value="Baja California">Baja California</option>
                                     <option value="Baja California Sur">Baja California Sur</option>
@@ -73,7 +76,7 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                 </span>
-                                <select class="form-select d-inline-block metodo-pago" data-toggle="select" id="metodo_pago" name="metodo_pago">
+                                <select class="form-select d-inline-block metodo-pago" data-toggle="select" id="metodo_pago" name="metodo_pago" required>
                                     <option value="">Selecciona una opcion</option>
                                     <option value="Envio">Envio</option>
                                     <option value="Contra Entrega">Contra Entrega</option>
@@ -152,15 +155,40 @@
 
             $modal.find('.metodo-pago').change(function() {
                 var selectedValue = $(this).val();
+
                 if (selectedValue === 'Envio') {
+                    // Mostrar los campos relacionados con el envío
                     $modal.find('.metodo-pago-select').show();
                     $modal.find('.metodo-pago-entrega-select').hide();
+
+                    // Hacer los campos de imagen requeridos
+                    $modal.find('#foto_pago').attr('required', true);
+                    $modal.find('#doc_guia').attr('required', true);
+
+                    // Remover el atributo required de los campos de "Contra Entrega"
+                    $modal.find('#fecha_entrega').removeAttr('required');
+                    $modal.find('#direccion_entrega').removeAttr('required');
+
+                    // Limpiar los valores de los campos de "Contra Entrega"
+                    $modal.find('#fecha_entrega, #direccion_entrega').val('');
+
                 } else if (selectedValue === 'Contra Entrega') {
+                    // Mostrar los campos relacionados con la entrega contra entrega
                     $modal.find('.metodo-pago-entrega-select').show();
                     $modal.find('.metodo-pago-select').hide();
+
+                    // Hacer los campos de fecha y dirección requeridos
+                    $modal.find('#fecha_entrega').attr('required', true);
+                    $modal.find('#direccion_entrega').attr('required', true);
+
+                    // Remover el atributo required de los campos de imagen
+                    $modal.find('#foto_pago').removeAttr('required');
+                    $modal.find('#doc_guia').removeAttr('required');
+
+                    // Limpiar los valores de los campos de "Envio"
+                    $modal.find('#foto_pago, #doc_guia').val('');
                 }
             }).trigger('change'); // Activar el evento para el valor actual.
         });
     });
-
     </script>
