@@ -55,7 +55,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($notas_preparacion as $item)
-                                                <tr>
+                                                <tr style="background: #836262a3">
                                                     <td>
                                                         <h5>
                                                             @if ($item->folio == null)
