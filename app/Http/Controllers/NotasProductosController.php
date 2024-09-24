@@ -212,6 +212,7 @@ class NotasProductosController extends Controller
             $nuevosCampos = $request->input('campo');
             $nuevosCampos2 = $request->input('campo4');
             $nuevosCampos3 = $request->input('campo3');
+            $nuevosCampos4 = $request->input('descuento_prod');
 
             foreach ($nuevosCampos as $index => $campo) {
                 $notas_inscripcion = new ProductosNotasId;
@@ -219,6 +220,7 @@ class NotasProductosController extends Controller
                 $notas_inscripcion->producto = $campo;
                 $notas_inscripcion->price = $nuevosCampos2[$index];
                 $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                $notas_inscripcion->descuento = $nuevosCampos4[$index];
                 $notas_inscripcion->save();
             }
         }
@@ -340,7 +342,8 @@ class NotasProductosController extends Controller
             $folio = $nota->folio;
         }
 
-         return $pdf->download('Nota remision'. $folio .'/'.$today.'.pdf');
+        // return $pdf->stream();
+        return $pdf->download('Nota remision'. $folio .'/'.$today.'.pdf');
     }
 
     public function delete($id)
