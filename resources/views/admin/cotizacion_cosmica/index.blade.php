@@ -270,15 +270,10 @@
                                                                 <i class="fa fa-fw fa-edit"></i>
                                                             </a>
                                                         @endcan
-                                                        @if ($item->metodo_pago == 'Contra Entrega')
-                                                            <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
-                                                                <i class="fa fa-truck"></i>
-                                                            </a>
-                                                        @else
-                                                            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->doc_guia) }}" download="{{asset('pago_fuera/'.$item->doc_guia) }}" style="background: #e6ab2d;">
-                                                                <i class="fa fa-truck"></i>
-                                                            </a>
-                                                        @endif
+                                                        
+                                                        <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                            <i class="fa fa-truck"></i>
+                                                        </a>
 
                                                         <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#pagoModal{{$item->id}}" style="background: #2d6ee6; color: #ffff">
                                                             <i class="fa fa-credit-card-alt"></i>

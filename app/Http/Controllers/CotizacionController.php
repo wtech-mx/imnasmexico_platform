@@ -633,7 +633,7 @@ class CotizacionController extends Controller
             $query2->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin]);
         }
 
-        $query2->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->where('estatus_cotizacion', 'Aprobada');
+        $query2->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado']);
         $totalSum2 = $query2->sum('total');
         $ventas = $query2->get();
 
