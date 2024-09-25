@@ -462,11 +462,20 @@ class CotizacionCosmicaController extends Controller
                     $nota->doc_guia = $fileName;
                 }
 
+                if ($request->hasFile("guia_rep")) {
+                    $file = $request->file('guia_rep');
+                    $path = $pago_fuera;
+                    $fileName = uniqid() . $file->getClientOriginalName();
+                    $file->move($path, $fileName);
+                    $nota->doc_guia = $fileName;
+                }
+
                 $nota->fecha_preparacion  = date("Y-m-d H:i:s");
                 $nota->metodo_pago  = $request->get('metodo_pago');
 
                 $nota->fecha_entrega  = $request->get('fecha_entrega');
                 $nota->direccion_entrega  = $request->get('direccion_entrega');
+                $nota->comentario_rep  = $request->get('comentario_rep');
             }
 
         $nota->update();

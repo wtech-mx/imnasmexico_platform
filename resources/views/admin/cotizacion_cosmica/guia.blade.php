@@ -16,26 +16,27 @@
                             <h5>Pedido Contra Entrega</h5>
                             <p>Fecha entrega: {{$item->fecha_entrega}}</p>
                             <p>Direccion: {{$item->direccion_entrega}}</p>
-                        @else
-                            <div class="form-group col-12">
-                                <label for="name">Doc Guia</label>
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text" id="basic-addon1">
-                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
-                                    </span>
-                                    <input class="form-control" type="file" id="doc_guia" name="doc_guia">
-                                </div>
-                            </div>
-
+                        @elseif($item->metodo_pago == 'Envio')
                             <div class="col-12">
                                 <embed src="{{ asset('pago_fuera/'.$item->doc_guia) }}" type="application/pdf" style="width: 450px; height: 400px;" />
+                            </div>
+                        @elseif($item->metodo_pago == 'Reposicion')
+                            <div class="col-12">
+                                <embed src="{{ asset('pago_fuera/'.$item->doc_guia) }}" type="application/pdf" style="width: 450px; height: 400px;" />
+                            </div>
+
+                            <label for="name">Comentario</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                </span>
+                                <input class="form-control" type="text" id="comentario_rep" name="comentario_rep" value="{{$item->comentario_rep}}" disabled>
                             </div>
                         @endif
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Guardar</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </form>

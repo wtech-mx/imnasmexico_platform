@@ -80,6 +80,7 @@
                                     <option value="">Selecciona una opcion</option>
                                     <option value="Envio">Envio</option>
                                     <option value="Contra Entrega">Contra Entrega</option>
+                                    <option value="Reposicion">Reposicion</option>
                                 </select>
                             </div>
                         </div>
@@ -127,6 +128,28 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="form-group col-12 metodo-pago-rep-select" style="display: none;">
+                            <div class="form-group col-12">
+                                <label for="name">Doc Guia</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input class="form-control" type="file" id="guia_rep" name="guia_rep">
+                                </div>
+                            </div>
+
+                            <div class="form-group col-12">
+                                <label for="name">Comentario</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input class="form-control" type="text" id="comentario_rep" name="comentario_rep">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 <div class="modal-footer">
@@ -160,6 +183,7 @@
                     // Mostrar los campos relacionados con el envío
                     $modal.find('.metodo-pago-select').show();
                     $modal.find('.metodo-pago-entrega-select').hide();
+                    $modal.find('.metodo-pago-rep-select').hide();
 
                     // Hacer los campos de imagen requeridos
                     $modal.find('#foto_pago').attr('required', true);
@@ -168,14 +192,17 @@
                     // Remover el atributo required de los campos de "Contra Entrega"
                     $modal.find('#fecha_entrega').removeAttr('required');
                     $modal.find('#direccion_entrega').removeAttr('required');
+                    $modal.find('#guia_rep').removeAttr('required');
+                    $modal.find('#comentario_rep').removeAttr('required');
 
                     // Limpiar los valores de los campos de "Contra Entrega"
-                    $modal.find('#fecha_entrega, #direccion_entrega').val('');
+                    $modal.find('#fecha_entrega, #direccion_entrega, #guia_rep, #comentario_rep').val('');
 
                 } else if (selectedValue === 'Contra Entrega') {
                     // Mostrar los campos relacionados con la entrega contra entrega
                     $modal.find('.metodo-pago-entrega-select').show();
                     $modal.find('.metodo-pago-select').hide();
+                    $modal.find('.metodo-pago-rep-select').hide();
 
                     // Hacer los campos de fecha y dirección requeridos
                     $modal.find('#fecha_entrega').attr('required', true);
@@ -184,9 +211,29 @@
                     // Remover el atributo required de los campos de imagen
                     $modal.find('#foto_pago').removeAttr('required');
                     $modal.find('#doc_guia').removeAttr('required');
+                    $modal.find('#guia_rep').removeAttr('required');
+                    $modal.find('#comentario_rep').removeAttr('required');
 
                     // Limpiar los valores de los campos de "Envio"
-                    $modal.find('#foto_pago, #doc_guia').val('');
+                    $modal.find('#foto_pago, #doc_guia, #guia_rep, #comentario_rep').val('');
+                } else if (selectedValue === 'Reposicion') {
+                    // Mostrar los campos relacionados con la entrega Reposicion
+                    $modal.find('.metodo-pago-rep-select').show();
+                    $modal.find('.metodo-pago-entrega-select').hide();
+                    $modal.find('.metodo-pago-select').hide();
+
+                    // Hacer los campos de fecha y dirección requeridos
+                    $modal.find('#guia_rep').attr('required', true);
+                    $modal.find('#comentario_rep').attr('required', true);
+
+                    // Remover el atributo required de los campos de imagen
+                    $modal.find('#foto_pago').removeAttr('required');
+                    $modal.find('#doc_guia').removeAttr('required');
+                    $modal.find('#fecha_entrega').removeAttr('required');
+                    $modal.find('#direccion_entrega').removeAttr('required');
+
+                    // Limpiar los valores de los campos de "Envio"
+                    $modal.find('#foto_pago, #doc_guia, #fecha_entrega, #direccion_entrega').val('');
                 }
             }).trigger('change'); // Activar el evento para el valor actual.
         });

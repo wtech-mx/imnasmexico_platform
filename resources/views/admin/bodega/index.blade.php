@@ -388,7 +388,7 @@
                                                         </a>
                                                     </td>
                                                 </tr>
-                                                @include('admin.cotizacion.guia')
+                                                @include('admin.cotizacion_cosmica.guia')
                                                 @include('admin.bodega.modal_cosmica_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
