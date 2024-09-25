@@ -24,8 +24,8 @@
                 @foreach($usuarioArray['data'] as $pedido)
                     <tr>
                         <td>{{ $pedido['id'] }}</td>
-                        <td>{{ $pedido['id_user'] }}</td>
-                        <td>{{ $pedido['id_client'] }}</td>
+                        <td>{{ $pedido['user']['name'] ?? 'N/A' }}</td>
+                        <td>{{ $pedido['client']['name'] ?? 'N/A' }} {{ $pedido['client']['last_name'] ?? '' }}</td>
                         <td>{{ $pedido['dinero_recibido'] }}</td>
                         <td>{{ $pedido['metodo_pago'] }}</td>
                         <td>{{ $pedido['fecha'] }}</td>
