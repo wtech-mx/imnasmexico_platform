@@ -54,6 +54,55 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($notas_presencial_preparacion as $item)
+                                                <tr style="background: #7a7474a3">
+                                                    <td>
+                                                        <h5>
+                                                            @if ($item->folio == null)
+                                                                {{ $item->id }}
+                                                            @else
+                                                                {{ $item->folio }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            @if ($item->id_usuario == NULL)
+                                                                {{ $item->nombre }} <br> {{ $item->telefono }}
+                                                            @else
+                                                                {{ $item->User->name }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
+                                                            En preparación
+                                                        </a><br>
+                                                        Pedido Tiendita
+                                                    </td>
+
+                                                    <td>
+                                                        <h5>
+                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                        </h5>
+                                                    </td>
+                                                    <td><h5>${{ $item->total }}</h5></td>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $item->id]) }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.bodega.modal_estatus')
+                                                @include('admin.bodega.modal_fechas')
+                                            @endforeach
+
                                             @foreach ($notas_preparacion as $item)
                                                 <tr style="background: #836262a3">
                                                     <td>
@@ -277,6 +326,55 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($notas_presencial_preparado as $item)
+                                                <tr style="background: #7a7474a3">
+                                                    <td>
+                                                        <h5>
+                                                            @if ($item->folio == null)
+                                                                {{ $item->id }}
+                                                            @else
+                                                                {{ $item->folio }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            @if ($item->id_usuario == NULL)
+                                                                {{ $item->nombre }} <br> {{ $item->telefono }}
+                                                            @else
+                                                                {{ $item->User->name }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
+                                                            En preparación
+                                                        </a><br>
+                                                        Pedido Tiendita
+                                                    </td>
+
+                                                    <td>
+                                                        <h5>
+                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                        </h5>
+                                                    </td>
+                                                    <td><h5>${{ $item->total }}</h5></td>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $item->id]) }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.bodega.modal_estatus')
+                                                @include('admin.bodega.modal_fechas')
+                                            @endforeach
+
                                             @foreach ($notas_preparado as $item)
                                                 <tr>
                                                     <td>
@@ -499,6 +597,55 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($notas_presencial_enviados as $item)
+                                                <tr style="background: #7a7474a3">
+                                                    <td>
+                                                        <h5>
+                                                            @if ($item->folio == null)
+                                                                {{ $item->id }}
+                                                            @else
+                                                                {{ $item->folio }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            @if ($item->id_usuario == NULL)
+                                                                {{ $item->nombre }} <br> {{ $item->telefono }}
+                                                            @else
+                                                                {{ $item->User->name }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
+                                                            Preparado
+                                                        </a><br>
+                                                        Pedido Tiendita
+                                                    </td>
+
+                                                    <td>
+                                                        <h5>
+                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                        </h5>
+                                                    </td>
+                                                    <td><h5>${{ $item->total }}</h5></td>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $item->id]) }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.bodega.modal_estatus')
+                                                @include('admin.bodega.modal_fechas')
+                                            @endforeach
+
                                             @foreach ($notas_enviados as $item)
                                                 <tr>
                                                     <td>

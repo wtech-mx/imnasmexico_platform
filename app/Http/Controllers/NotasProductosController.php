@@ -158,6 +158,8 @@ class NotasProductosController extends Controller
 
         $notas_productos->tipo_nota = 'Venta Presencial';
         $notas_productos->metodo_pago = $request->get('metodo_pago');
+        $notas_productos->estatus_cotizacion = 'Aprobada';
+        $notas_productos->fecha_preparacion = date('Y-m-d');
         $notas_productos->fecha = $request->get('fecha');
         $notas_productos->tipo = $sumaCampo4;
         $notas_productos->restante = $request->get('descuento');
@@ -167,12 +169,27 @@ class NotasProductosController extends Controller
         $notas_productos->monto = $request->get('monto');
         $notas_productos->monto2 = $request->get('monto2');
         $tipoNota = $notas_productos->tipo_nota;
-        $ultimoFolio = NotasProductos::where('tipo_nota', $tipoNota)
-            ->max('folio');
 
-        $numeroFolio = ($ultimoFolio) ? intval(substr($ultimoFolio, 1)) + 1 : 1;
+        // Obtener todos los folios del tipo de nota específico
+        $folios = NotasProductos::where('tipo_nota', $tipoNota)->pluck('folio');
+
+        // Extraer los números de los folios y encontrar el máximo
+        $maxNumero = $folios->map(function ($folio) use ($tipoNota) {
+            return intval(substr($folio, strlen($tipoNota[0])));
+        })->max();
+
+        // Si hay un folio existente, sumarle 1 al máximo número
+        if ($maxNumero) {
+            $numeroFolio = $maxNumero + 1;
+        } else {
+            // Si no hay un folio existente, empezar desde 1
+            $numeroFolio = 1;
+        }
+
+        // Crear el nuevo folio con el tipo de nota y el número
         $folio = $tipoNota[0] . $numeroFolio;
 
+        // Asignar el nuevo folio al objeto
         $notas_productos->folio = $folio;
 
         if($request->get('envio') == NULL){

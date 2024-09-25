@@ -77,6 +77,9 @@ class BodegaController extends Controller
         $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
         $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
         $notas_enviados = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
+        $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
+        $notas_presencial_preparado = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Preparado')->get();
+        $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')->get();
 
         $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
         $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
@@ -91,7 +94,8 @@ class BodegaController extends Controller
             'orders_tienda_cosmica_preparados',
             'orders_tienda_cosmica_enviados',
             'notas_preparacion', 'notas_preparado', 'notas_enviados',
-            'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados'
+            'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados',
+            'notas_presencial_preparacion', 'notas_presencial_preparado', 'notas_presencial_enviados'
         ));
     }
 
