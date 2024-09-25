@@ -21,6 +21,19 @@
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-12 mt-3">
+                            <div class="d-flex justify-content-around">
+                                <span class="badge rounded-pill text-dark" style="background: #F5ECE4">NAS Tienda Online</span>
+                                <span class="badge rounded-pill text-white" style="background: #6ec7d1a3">NAS Tiendita</span>
+                                <span class="badge rounded-pill text-white" style="background: #836262a3">NAS Cotizaciones Aprobadas</span>
+                                <span class="badge rounded-pill text-white" style="background: #D486D6">Cosmica Cotizaciones Aprobadas</span>
+                                <span class="badge rounded-pill text-white" style="background: #80486B">Cosmica Tienda Online</span>
+                                <span class="badge rounded-pill text-white" style="background: #EE96BA">Paradisus</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="card-body">
                         <div class="table-responsive">
 
