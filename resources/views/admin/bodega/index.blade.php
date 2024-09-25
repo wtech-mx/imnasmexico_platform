@@ -342,7 +342,6 @@
                                                             @if ($item->folio == null)
                                                                 {{ $item->id }}
                                                             @else
-                                                            {{ $item->id }}
                                                                 {{ $item->folio }}
                                                             @endif
                                                         </h5>
