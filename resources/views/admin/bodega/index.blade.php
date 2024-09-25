@@ -342,6 +342,7 @@
                                                             @if ($item->folio == null)
                                                                 {{ $item->id }}
                                                             @else
+                                                            {{ $item->id }}
                                                                 {{ $item->folio }}
                                                             @endif
                                                         </h5>
@@ -389,7 +390,7 @@
                                                     </td>
                                                 </tr>
                                                 @include('admin.cotizacion.guia')
-                                                @include('admin.bodega.modal_estatus')
+                                                @include('admin.bodega.modal_cosmica_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
 
