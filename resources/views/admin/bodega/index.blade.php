@@ -427,7 +427,7 @@
                                             @endforeach
 
                                             @foreach ($notas_preparado as $item)
-                                                <tr>
+                                                <tr style="background: #836262a3">
                                                     <td>
                                                         <h5>
                                                             @if ($item->folio == null)
@@ -485,7 +485,7 @@
                                             @endforeach
 
                                             @foreach ($notas_cosmica_preparado as $item)
-                                                <tr>
+                                                <tr style="background: #d486d6">
                                                     <td>
                                                         <h5>
                                                             @if ($item->folio == null)
@@ -683,7 +683,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($notas_enviados as $item)
-                                                <tr>
+                                                <tr style="background: #836262a3">
                                                     <td>
                                                         <h5>
                                                             @if ($item->folio == null)
@@ -741,7 +741,7 @@
                                             @endforeach
 
                                             @foreach ($notas_cosmica_enviados as $item)
-                                                <tr>
+                                                <tr style="background: #d486d6">
                                                     <td>
                                                         <h5>
                                                             @if ($item->folio == null)
