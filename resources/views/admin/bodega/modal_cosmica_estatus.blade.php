@@ -3,7 +3,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title">Cambio de Estatus</h5>
+          <h5 class="modal-title">Cambio de Estatus cosmica #{{$item->id}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 

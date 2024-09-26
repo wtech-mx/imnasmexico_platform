@@ -9,10 +9,12 @@ use Illuminate\Http\Request;
 use Codexshaper\WooCommerce\Facades\WooCommerce;
 use Automattic\WooCommerce\Client;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
+
 
 class BodegaController extends Controller
 {
-    public function index_preparacion() {
+    public function index_preparacion(Request $request) {
         // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda principal
         $woocommerce = new Client(
             'https://imnasmexico.com/new/', // URL de la tienda principal
@@ -72,6 +74,35 @@ class BodegaController extends Controller
 
         $orders_tienda_cosmica = array_merge($orders_tienda_cosmica);
 
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $api_pedidosParadisus = Http::get('https://paradisus.mx//api/enviar-notas-pedidos');
+
+        }else{
+            $api_pedidosParadisus = Http::get('http://paradisus.test/api/enviar-notas-pedidos');
+        }
+
+        // Convertir la respuesta a un array
+        $ApiParadisusArray = $api_pedidosParadisus->json();
+
+        // Filtrar los datos con estatus "Aprobada" y limitar a los últimos 100
+        $ApiFiltradaCollectAprobado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Aprobada')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        $ApiFiltradaCollectPreparado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Preparado')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        $ApiFiltradaCollectEnviado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Enviado')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
 
         // Otras consultas de la base de datos
         $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
@@ -87,6 +118,9 @@ class BodegaController extends Controller
 
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index', compact(
+            'ApiFiltradaCollectAprobado',
+            'ApiFiltradaCollectPreparado',
+            'ApiFiltradaCollectEnviado',
             'orders_tienda_principal',
             'orders_tienda_principal_preparados',
             'orders_tienda_principal_enviados',
@@ -152,6 +186,41 @@ class BodegaController extends Controller
         }
 
 
+    }
+
+    public function actualizarPedidoParadisus(Request $request, $id)
+    {
+        // Datos que se enviarán a la API de Paradisus
+
+        if($request->input('estatus_cotizacion') == 'Preparado'){
+
+            $datosActualizados = [
+                'estatus' => $request->input('estatus_cotizacion'), // Tomamos el nuevo estatus del form
+                'preparado_hora_y_guia' => date("Y-m-d H:i:s"), // Tomamos el nuevo estatus del form
+            ];
+
+
+        }elseif($request->input('estatus_cotizacion') == 'Enviado'){
+
+            $datosActualizados = [
+                'estatus' => $request->input('estatus_cotizacion'), // Tomamos el nuevo estatus del form
+                'enviado_hora_y_guia' => date("Y-m-d H:i:s"), // Tomamos el nuevo estatus del form
+            ];
+        }
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $respuesta = Http::patch('https://paradisus.mx/api/actualizar-notas-pedidos/' . $id, $datosActualizados);
+        }else{
+            $respuesta = Http::patch('http://paradisus.test/api/actualizar-notas-pedidos/' . $id, $datosActualizados);
+        }
+
+        // Manejar la respuesta de la API
+        if ($respuesta->successful()) {
+            return back()->with('success', 'El pedido ha sido actualizado en Paradisus correctamente.');
+        } else {
+            return back()->with('error', 'No se pudo actualizar el pedido en Paradisus.');
+        }
     }
 
 }

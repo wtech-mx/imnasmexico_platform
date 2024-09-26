@@ -1,9 +1,9 @@
-<div class="modal fade" id="estatusModal_woo_{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="estatusModal_para_{{ $order['id'] }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg">
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title">Cambio de Estatus Woo #{{$item->id}}</h5>
+          <h5 class="modal-title">Estatus paradisus #{{ $order['id'] }}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
@@ -32,19 +32,10 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets/cam/calendarioo.png') }}" alt="" width="35px">
                                 </span>
-
-                                @if(isset($order->meta_data))
-                                    @foreach($order->meta_data as $meta)
-                                        @if($meta->key == 'fecha_y_hora_guia')
-
-                                            @if ($meta->value == NULL)
-                                                <input class="form-control" type="text" disabled>
-                                            @else
-                                                <input class="form-control" type="text" value="{{ \Carbon\Carbon::parse($meta->value)->isoFormat('dddd DD MMMM hh:mm a') }}" disabled>
-                                            @endif
-
-                                        @endif
-                                    @endforeach
+                                @if ($order['aprobado_hora_y_guia'] == NULL)
+                                    <input class="form-control" type="text" disabled>
+                                @else
+                                    <input class="form-control" type="text" value="{{ \Carbon\Carbon::parse($order['aprobado_hora_y_guia'])->isoFormat('dddd DD MMMM hh:mm a') }}" disabled>
                                 @endif
 
                             </div>
@@ -70,18 +61,10 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets/cam/calendarioo.png') }}" alt="" width="35px">
                                 </span>
-                                @if(isset($order->meta_data))
-                                    @foreach($order->meta_data as $meta)
-                                        @if($meta->key == 'preparado_hora_y_guia')
-
-                                            @if ($meta->value == NULL)
-                                                <input class="form-control" type="text" disabled>
-                                            @else
-                                                <input class="form-control" type="text" value="{{ \Carbon\Carbon::parse($meta->value)->isoFormat('dddd DD MMMM hh:mm a') }}" disabled>
-                                            @endif
-
-                                        @endif
-                                    @endforeach
+                                @if ($order['preparado_hora_y_guia'] == NULL)
+                                    <input class="form-control" type="text" disabled>
+                                @else
+                                    <input class="form-control" type="text" value="{{ \Carbon\Carbon::parse($order['preparado_hora_y_guia'])->isoFormat('dddd DD MMMM hh:mm a') }}" disabled>
                                 @endif
                             </div>
                         </div>
@@ -94,7 +77,7 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets/cam/delivery.png') }}" alt="" width="35px">
                                 </span>
-                                <input class="form-control" type="text" value="Enviado" disabled>
+                                <input class="form-control" type="text" value="Entregado" disabled>
                             </div>
                         </div>
                     </div>
@@ -106,20 +89,11 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets/cam/calendarioo.png') }}" alt="" width="35px">
                                 </span>
-                                @if(isset($order->meta_data))
-                                    @foreach($order->meta_data as $meta)
-                                        @if($meta->key == 's')
-
-                                            @if ($meta->value == NULL)
-                                                <input class="form-control" type="text" disabled>
-                                            @else
-                                                <input class="form-control" type="text" value="{{ \Carbon\Carbon::parse($meta->value)->isoFormat('dddd DD MMMM hh:mm a') }}" disabled>
-                                            @endif
-
-                                        @endif
-                                    @endforeach
+                                @if ($order['enviado_hora_y_guia'] == NULL)
+                                    <input class="form-control" type="text" disabled>
+                                @else
+                                    <input class="form-control" type="text" value="{{ \Carbon\Carbon::parse($order['enviado_hora_y_guia'])->isoFormat('dddd DD MMMM hh:mm a') }}" disabled>
                                 @endif
-
                             </div>
                         </div>
                     </div>

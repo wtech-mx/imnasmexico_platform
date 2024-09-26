@@ -68,7 +68,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($notas_presencial_preparacion as $item)
-                                                <tr style="background: #7a7474a3">
+                                                <tr style="background: #6ec7d1a3">
                                                     <td>
                                                         <h5>
                                                             @if ($item->folio == null)
@@ -322,6 +322,40 @@
 
                                             @endforeach
 
+                                            @foreach($ApiFiltradaCollectAprobado as $order)
+                                                <tr style="background: #EE96BA;color:#fff">
+                                                    <td>{{ $order['id'] }}</td>
+
+                                                    <td>Venta</td>
+
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_paradisus{{$order['id']}}">
+                                                            En preparación
+                                                        </a>
+                                                    </td>
+
+                                                    <td>
+                                                        {{ \Carbon\Carbon::parse($order['created_at'])->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                    </td>
+                                                    <td>${{ $order['total'] }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_paradisus_{{ $order['id'] }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_para_{{ $order['id'] }}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.bodega.modal_productos_paradisus')
+                                                @include('admin.bodega.modal_estatus_paradisus')
+                                                @include('admin.bodega.modal_estatus_edit_para')
+
+                                            @endforeach
+
                                             </tbody>
                                         </table>
                                 </div>
@@ -340,7 +374,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($notas_presencial_preparado as $item)
-                                                <tr style="background: #7a7474a3">
+                                                <tr style="background: #6ec7d1a3">
                                                     <td>
                                                         <h5>
                                                             @if ($item->folio == null)
@@ -593,6 +627,40 @@
 
                                             @endforeach
 
+                                            @foreach($ApiFiltradaCollectPreparado as $order)
+                                                <tr style="background: #EE96BA;color:#fff">
+                                                    <td>{{ $order['id'] }}</td>
+
+                                                    <td>Venta</td>
+
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_paradisus{{$order['id']}}">
+                                                            En preparación
+                                                        </a>
+                                                    </td>
+
+                                                    <td>
+                                                        {{ \Carbon\Carbon::parse($order['created_at'])->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                    </td>
+                                                    <td>${{ $order['total'] }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_paradisus_{{ $order['id'] }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_para_{{ $order['id'] }}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.bodega.modal_productos_paradisus')
+                                                @include('admin.bodega.modal_estatus_paradisus')
+                                                @include('admin.bodega.modal_estatus_edit_para')
+
+                                            @endforeach
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -611,7 +679,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($notas_presencial_enviados as $item)
-                                                <tr style="background: #7a7474a3">
+                                                <tr style="background: #6ec7d1a3">
                                                     <td>
                                                         <h5>
                                                             @if ($item->folio == null)
@@ -861,6 +929,40 @@
                                                 @include('admin.bodega.modal_productos')
                                                 @include('admin.bodega.modal_edit_estatus_woo')
                                                 @include('admin.bodega.modal_estatus_woo')
+
+                                            @endforeach
+
+                                            @foreach($ApiFiltradaCollectEnviado as $order)
+                                                <tr style="background: #EE96BA;color:#fff">
+                                                    <td>{{ $order['id'] }}</td>
+
+                                                    <td>Venta</td>
+
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_paradisus{{$order['id']}}">
+                                                            En preparación
+                                                        </a>
+                                                    </td>
+
+                                                    <td>
+                                                        {{ \Carbon\Carbon::parse($order['created_at'])->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                    </td>
+                                                    <td>${{ $order['total'] }}</td>
+                                                    <td>
+                                                        <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_paradisus_{{ $order['id'] }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_para_{{ $order['id'] }}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.bodega.modal_productos_paradisus')
+                                                @include('admin.bodega.modal_estatus_paradisus')
+                                                @include('admin.bodega.modal_estatus_edit_para')
 
                                             @endforeach
                                         </tbody>
