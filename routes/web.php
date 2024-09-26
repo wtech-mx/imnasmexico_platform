@@ -556,9 +556,11 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O   B O D E G A ===============================
     Route::get('bodega/preparacion/', [App\Http\Controllers\BodegaController::class, 'index_preparacion'])->name('index_preparacion.bodega');
+
     Route::patch('bodega/preparacion/guia/{id}', [App\Http\Controllers\CotizacionController::class, 'update_guia'])->name('notas_cotizacion.update_guia');
     Route::patch('bodega/preparacion/guia/cosmica/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_guia'])->name('notas_cosmica.update_guia');
     Route::put('bodega/preparacion/update_status/{id}', [App\Http\Controllers\BodegaController::class, 'update_guia_woo'])->name('bodega.update_guia_woo');
+    Route::patch('bodega/preparacion/paradisus/{id}', [App\Http\Controllers\BodegaController::class, 'actualizarPedidoParadisus'])->name('actualizar.pedido.paradisus');
 
     Route::get('/admin/productos/stock', [App\Http\Controllers\BodegaPedidosController::class, 'productos_stock'])->name('productos_stock.index');
     Route::post('/admin/productos/guardar-carrito', [App\Http\Controllers\BodegaPedidosController::class, 'guardar'])->name('guardar.carrito');

@@ -20,8 +20,7 @@
             </tr>
         </thead>
         <tbody>
-            @if($usuarioArray['success'] && !empty($usuarioArray['data']))
-                @foreach($usuarioArray['data'] as $pedido)
+                @foreach($usuarioFiltrado as $pedido)
                     <tr>
                         <td>{{ $pedido['id'] }}</td>
                         <td>{{ $pedido['user']['name'] ?? 'N/A' }}</td>
@@ -39,10 +38,6 @@
                         </td>
                     </tr>
                 @endforeach
-            @else
-                <tr>
-                    <td colspan="11">No hay datos disponibles.</td>
-                </tr>
-            @endif
+
         </tbody>
     </table>
