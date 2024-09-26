@@ -50,6 +50,10 @@
                                     <button class="nav-link" id="nav-Cancelada-tab" data-bs-toggle="tab" data-bs-target="#nav-Cancelada" type="button" role="tab" aria-controls="nav-Cancelada" aria-selected="false">
                                         Enviados <img src="{{ asset('assets/cam/delivery.png') }}" alt="" width="35px">
                                     </button>
+
+                                    <button class="nav-link" id="nav-entregado-tab" data-bs-toggle="tab" data-bs-target="#nav-entregado" type="button" role="tab" aria-controls="nav-entregado" aria-selected="false">
+                                        Entregados <img src="{{ asset('assets/cam/delivery.png') }}" alt="" width="35px">
+                                    </button>
                                 </div>
                             </nav>
 
@@ -326,7 +330,7 @@
                                                 <tr style="background: #EE96BA;color:#fff">
                                                     <td>{{ $order['id'] }}</td>
 
-                                                    <td>Venta</td>
+                                                    <td>{{ $order['user']['name'] }}</td>
 
                                                     <td>
                                                         <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_paradisus{{$order['id']}}">
@@ -631,7 +635,7 @@
                                                 <tr style="background: #EE96BA;color:#fff">
                                                     <td>{{ $order['id'] }}</td>
 
-                                                    <td>Venta</td>
+                                                    <td>{{ $order['user']['name'] }}</td>
 
                                                     <td>
                                                         <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_paradisus{{$order['id']}}">
@@ -678,55 +682,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($notas_presencial_enviados as $item)
-                                                <tr style="background: #6ec7d1a3">
-                                                    <td>
-                                                        <h5>
-                                                            @if ($item->folio == null)
-                                                                {{ $item->id }}
-                                                            @else
-                                                                {{ $item->folio }}
-                                                            @endif
-                                                        </h5>
-                                                    </td>
-                                                    <td>
-                                                        <h5>
-                                                            @if ($item->id_usuario == NULL)
-                                                                {{ $item->nombre }} <br> {{ $item->telefono }}
-                                                            @else
-                                                                {{ $item->User->name }}
-                                                            @endif
-                                                        </h5>
-                                                    </td>
-
-                                                    <td>
-                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
-                                                            Preparado
-                                                        </a><br>
-                                                        Pedido Tiendita
-                                                    </td>
-
-                                                    <td>
-                                                        <h5>
-                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                        </h5>
-                                                    </td>
-                                                    <td><h5>${{ $item->total }}</h5></td>
-                                                    <td>
-                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $item->id]) }}">
-                                                            <i class="fa fa-list-alt"></i>
-                                                        </a>
-
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
-                                                            <i class="fa fa-info"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-
-                                                @include('admin.bodega.modal_estatus')
-                                                @include('admin.bodega.modal_fechas')
-                                            @endforeach
-
                                             @foreach ($notas_enviados as $item)
                                                 <tr>
                                                     <td>
@@ -932,11 +887,77 @@
 
                                             @endforeach
 
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="tab-pane fade" id="nav-entregado" role="tabpanel" aria-labelledby="nav-entregado-tab" tabindex="0">
+                                    <table class="table table-flush" id="datatable-search3">
+                                        <thead class="thead">
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Cliente</th>
+                                                <th>Estatus</th>
+                                                <th>fecha Enviado</th>
+                                                <th>Total</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($notas_presencial_enviados as $item)
+                                                <tr style="background: #6ec7d1a3">
+                                                    <td>
+                                                        <h5>
+                                                            @if ($item->folio == null)
+                                                                {{ $item->id }}
+                                                            @else
+                                                                {{ $item->folio }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            @if ($item->id_usuario == NULL)
+                                                                {{ $item->nombre }} <br> {{ $item->telefono }}
+                                                            @else
+                                                                {{ $item->User->name }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+
+                                                    <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
+                                                            Preparado
+                                                        </a><br>
+                                                        Pedido Tiendita
+                                                    </td>
+
+                                                    <td>
+                                                        <h5>
+                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                        </h5>
+                                                    </td>
+                                                    <td><h5>${{ $item->total }}</h5></td>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $item->id]) }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
+                                                            <i class="fa fa-info"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.bodega.modal_estatus')
+                                                @include('admin.bodega.modal_fechas')
+                                            @endforeach
+
                                             @foreach($ApiFiltradaCollectEnviado as $order)
                                                 <tr style="background: #EE96BA;color:#fff">
                                                     <td>{{ $order['id'] }}</td>
 
-                                                    <td>Venta</td>
+                                                    <td>{{ $order['user']['name'] }}</td>
 
                                                     <td>
                                                         <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_paradisus{{$order['id']}}">
@@ -968,9 +989,8 @@
                                         </tbody>
                                     </table>
                                 </div>
+
                               </div>
-
-
 
                         </div>
                     </div>
