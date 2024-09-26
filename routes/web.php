@@ -570,6 +570,15 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/productos/stock/ordenes', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_nas'])->name('ordenes_nas.index');
     Route::get('/admin/productos/stock/firma/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_nas_firma'])->name('ordenes_nas.firma');
     Route::patch('/admin/productos/stock/firma/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_nas_firma_update'])->name('ordenes_nas_update.firma');
+
+    Route::get('/cosmica/admin/productos/stock', [App\Http\Controllers\BodegaPedidosController::class, 'productos_stock_cosmica'])->name('productos_stock_cosmica.index');
+    Route::post('/cosmica/admin/productos/guardar-carrito', [App\Http\Controllers\BodegaPedidosController::class, 'guardar_cosmica'])->name('guardar_cosmica.carrito');
+    Route::get('/cosmica/admin/productos/stock/show/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'show_cosmica'])->name('productos_stock_cosmica.show');
+    Route::get('/cosmica/admin/productos/imprimir/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'imprimir_cosmica'])->name('productos_stock_cosmica.imprimir');
+
+    Route::get('/cosmica/admin/productos/stock/ordenes', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica'])->name('ordenes_cosmica.index');
+    Route::get('/cosmica/admin/productos/stock/firma/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_firma'])->name('ordenes_cosmica.firma');
+    Route::patch('/cosmica/admin/productos/stock/firma/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_firma_update'])->name('ordenes_cosmica_update.firma');
 });
 
 // Route::get('registro/login', function () {

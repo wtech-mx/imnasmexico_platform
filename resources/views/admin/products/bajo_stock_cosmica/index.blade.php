@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Productos stock NAS
+    Productos stock Cosmica
 @endsection
 
 @section('content')
@@ -14,11 +14,11 @@
             <div class="card-header">
                 <div class="d-flex justify-content-between">
 
-                    <h3 class="mb-3">Productos stock NAS</h3>
+                    <h3 class="mb-3">Productos stock Cosmica</h3>
 
                     <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                         ¿Como fucniona?
-                    </a>
+                    </a>
                 </div>
             </div>
 

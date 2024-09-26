@@ -139,14 +139,28 @@
                             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                 <i class="fa fa-ticket text-sm opacity-10" style="color:#e6b449"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Productos stock</span>
+                            <span class="nav-link-text ms-1">Pedidos Lab NAS</span>
                         </a>
 
                         <a class="nav-link {{ (Request::is('admin/productos/stock/ordenes') ? 'active' : '') }}" href="{{ route('ordenes_nas.index') }}">
                             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                 <i class="fa fa-ticket text-sm opacity-10" style="color:#e6b449"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Pedidos a Lab</span>
+                            <span class="nav-link-text ms-1">Historial P. NAS</span>
+                        </a>
+
+                        <a class="nav-link {{ (Request::is('cosmica/admin/productos/stock') ? 'active' : '') }}" href="{{ route('productos_stock_cosmica.index') }}">
+                            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-ticket text-sm opacity-10" style="color:#322338"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Pedidos Lab Cosmi.</span>
+                        </a>
+
+                        <a class="nav-link {{ (Request::is('cosmica/admin/productos/stock/ordenes') ? 'active' : '') }}" href="{{ route('ordenes_cosmica.index') }}">
+                            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                <i class="fa fa-ticket text-sm opacity-10" style="color:#322338"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Historial P. Cosmi.</span>
                         </a>
 
                     </li>
