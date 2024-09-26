@@ -75,8 +75,9 @@ class BodegaController extends Controller
         $orders_tienda_cosmica = array_merge($orders_tienda_cosmica);
 
         $dominio = $request->getHost();
+
         if($dominio == 'plataforma.imnasmexico.com'){
-            $api_pedidosParadisus = Http::get('https://paradisus.mx//api/enviar-notas-pedidos');
+            $api_pedidosParadisus = Http::get('https://paradisus.mx/api/enviar-notas-pedidos');
 
         }else{
             $api_pedidosParadisus = Http::get('http://paradisus.test/api/enviar-notas-pedidos');
