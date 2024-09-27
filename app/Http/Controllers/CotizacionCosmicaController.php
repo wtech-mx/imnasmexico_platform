@@ -444,6 +444,15 @@ class CotizacionCosmicaController extends Controller
             }else if($request->get('estatus_cotizacion') == 'Enviado'){
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
             }else if($request->get('estatus_cotizacion') == 'Aprobada'){
+                $producto = ProductosNotasCosmica::where('id_notas_productos', $id)->get();
+
+                foreach ($producto as $campo) {
+                    $resta = 0;
+                    $producto = Products::where('nombre', $campo->producto)->first();
+                    $resta = $producto->stock - $campo->cantidad;
+                    $producto->stock = $resta;
+                    $producto->update();
+                }
                 $nota->fecha_aprobada  = date("Y-m-d");
 
                 if ($request->hasFile("foto_pago")) {
@@ -476,6 +485,21 @@ class CotizacionCosmicaController extends Controller
                 $nota->fecha_entrega  = $request->get('fecha_entrega');
                 $nota->direccion_entrega  = $request->get('direccion_entrega');
                 $nota->comentario_rep  = $request->get('comentario_rep');
+            }else if($request->get('estatus_cotizacion') == 'Cancelada'){
+                $nota_cambio = NotasProductosCosmica::find($id);
+
+                if($nota_cambio->estatus_cotizacion != NULL){
+                    if($nota_cambio->estatus_cotizacion != 'Cancelada'){
+                        $producto = ProductosNotasCosmica::where('id_notas_productos', $id)->get();
+                        foreach ($producto as $campo) {
+                            $resta = 0;
+                            $producto = Products::where('nombre', $campo->producto)->first();
+                            $resta = $producto->stock + $campo->cantidad;
+                            $producto->stock = $resta;
+                            $producto->update();
+                        }
+                    }
+                }
             }
 
         $nota->update();

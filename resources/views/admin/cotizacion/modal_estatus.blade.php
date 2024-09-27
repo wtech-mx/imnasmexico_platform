@@ -34,7 +34,7 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                 </span>
-                                <select class="form-select d-inline-block" data-toggle="select" id="estado" name="estado"required>
+                                <select class="form-select d-inline-block" data-toggle="select" id="estado" name="estado">
                                     <option value="">Seleciona Estado</option>
                                     <option value="Aguascalientes">Aguascalientes</option>
                                     <option value="Baja California">Baja California</option>
@@ -76,7 +76,7 @@
                                 <span class="input-group-text" id="basic-addon1">
                                     <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
                                 </span>
-                                <select class="form-select d-inline-block metodo-pago" data-toggle="select" id="metodo_pago" name="metodo_pago" required>
+                                <select class="form-select d-inline-block metodo-pago" data-toggle="select" id="metodo_pago" name="metodo_pago">
                                     <option value="">Selecciona una opcion</option>
                                     <option value="Envio">Envio</option>
                                     <option value="Contra Entrega">Contra Entrega</option>
@@ -171,6 +171,9 @@
                 var selectedValue = $(this).val();
                 if (selectedValue === 'Aprobada') {
                     $modal.find('.estado-select').show();
+
+                    $modal.find('#estado').attr('required', true);
+                    $modal.find('#metodo_pago').attr('required', true);
                 } else {
                     $modal.find('.estado-select').hide();
                 }

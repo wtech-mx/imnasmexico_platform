@@ -389,6 +389,21 @@ class CotizacionController extends Controller
                 $nota->fecha_entrega  = $request->get('fecha_entrega');
                 $nota->direccion_entrega  = $request->get('direccion_entrega');
                 $nota->comentario_rep  = $request->get('comentario_rep');
+            }else if($request->get('estatus_cotizacion') == 'Cancelada'){
+                $nota_cambio = NotasProductos::find($id);
+
+                if($nota_cambio->estatus_cotizacion != NULL){
+                    if($nota_cambio->estatus_cotizacion != 'Cancelada'){
+                        $producto = ProductosNotasId::where('id_notas_productos', $id)->get();
+                        foreach ($producto as $campo) {
+                            $resta = 0;
+                            $producto = Products::where('nombre', $campo->producto)->first();
+                            $resta = $producto->stock + $campo->cantidad;
+                            $producto->stock = $resta;
+                            $producto->update();
+                        }
+                    }
+                }
             }
         $nota->save();
 
