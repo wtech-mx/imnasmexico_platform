@@ -265,7 +265,7 @@
                                                             @endforeach
                                                         @endif
 
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$order->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
 
@@ -570,7 +570,7 @@
                                                             @endforeach
                                                         @endif
 
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$order->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
 
@@ -618,7 +618,7 @@
                                                             @endforeach
                                                         @endif
 
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$order->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
 
@@ -827,7 +827,7 @@
                                                             @endforeach
                                                         @endif
 
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$order->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
 
@@ -874,7 +874,7 @@
                                                             @endforeach
                                                         @endif
 
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$order->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
 
