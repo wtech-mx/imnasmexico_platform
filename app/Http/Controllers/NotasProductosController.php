@@ -232,6 +232,12 @@ class NotasProductosController extends Controller
             $nuevosCampos4 = $request->input('descuento_prod');
 
             foreach ($nuevosCampos as $index => $campo) {
+                $resta = 0;
+                $producto = Products::where('nombre', $campo)->first();
+                $resta = $producto->stock - $nuevosCampos3[$index];
+                $producto->stock = $resta;
+                $producto->update();
+
                 $notas_inscripcion = new ProductosNotasId;
                 $notas_inscripcion->id_notas_productos = $notas_productos->id;
                 $notas_inscripcion->producto = $campo;

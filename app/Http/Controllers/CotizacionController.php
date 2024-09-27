@@ -347,6 +347,16 @@ class CotizacionController extends Controller
             }else if($request->get('estatus_cotizacion') == 'Enviado'){
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
             }else if($request->get('estatus_cotizacion') == 'Aprobada'){
+
+                $producto = ProductosNotasId::where('id_notas_productos', $id)->get();
+
+                foreach ($producto as $campo) {
+                    $resta = 0;
+                    $producto = Products::where('nombre', $campo->producto)->first();
+                    $resta = $producto->stock - $campo->cantidad;
+                    $producto->stock = $resta;
+                    $producto->update();
+                }
                 $nota->fecha_aprobada  = date("Y-m-d");
 
                 if ($request->hasFile("foto_pago")) {
