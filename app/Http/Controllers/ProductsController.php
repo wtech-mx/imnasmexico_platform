@@ -41,6 +41,8 @@ class ProductsController extends Controller
         $product->precio_rebajado = $request->get('precio_rebajado');
         $product->precio_normal = $request->get('precio_normal');
         $product->imagenes = $request->get('imagenes');
+        $product->stock = $request->get('stock');
+
         $product->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

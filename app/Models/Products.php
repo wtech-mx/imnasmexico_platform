@@ -17,6 +17,7 @@ class Products extends Model
         'precio_rebajado',
         'precio_normal',
         'imagenes',
+        'stock',
     ];
 
 }

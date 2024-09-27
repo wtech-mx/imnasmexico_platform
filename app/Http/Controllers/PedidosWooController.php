@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Codexshaper\WooCommerce\Facades\WooCommerce;
 use Automattic\WooCommerce\Client;
 use Carbon\Carbon;
+use App\Models\Products;
 
 class PedidosWooController extends Controller
 {
@@ -111,6 +112,25 @@ class PedidosWooController extends Controller
                     ],
                 ]);
 
+                    // Obtener la orden desde WooCommerce
+                    $order = WooCommerce::find("orders/$id");
+                    // 2. Recorrer los productos en la orden (line_items)
+                    foreach ($order->line_items as $item) {
+                        $productName = $item->name; // Nombre del producto en WooCommerce
+                        $quantity = $item->quantity; // Cantidad vendida en WooCommerce
+
+                        // 3. Buscar el producto en la tabla interna
+                        $productoInterno = Products::where('nombre', $productName)->first();
+
+                        if ($productoInterno) {
+                            // 4. Realizar la resta del stock
+                            $nuevoStock = $productoInterno->stock - $quantity;
+
+                            // 5. Actualizar el stock en la base de datos
+                            $productoInterno->update(['stock' => $nuevoStock]);
+                        }
+                    }
+
             }else{
                 // Actualizar la meta información en WooCommerce para el campo 'guia_de_envio'
                 $updatedOrderMeta = WooCommerce::update('orders/' . $id, [
@@ -142,16 +162,16 @@ class PedidosWooController extends Controller
 
         $fecha_y_hora_guia = date("Y-m-d H:i:s");
 
-        // Crear instancia del cliente Automattic\WooCommerce\Client para la segunda tienda (Cosmika)
-        $woocommerceCosmika = new Client(
-            'https://cosmicaskin.com', // URL de la tienda secundaria
-            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
-            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
-            [
-                'wp_api' => true,
-                'version' => 'wc/v3',
-            ]
-        );
+                // Crear instancia del cliente Automattic\WooCommerce\Client para la segunda tienda (Cosmika)
+                $woocommerceCosmika = new Client(
+                    'https://cosmicaskin.com', // URL de la tienda secundaria
+                    'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
+                    'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
+                    [
+                        'wp_api' => true,
+                        'version' => 'wc/v3',
+                    ]
+                );
 
                 $updatedOrder = $woocommerceCosmika->put("orders/{$id}", [
                     'status' => $request->status,
@@ -184,6 +204,28 @@ class PedidosWooController extends Controller
                             ],
                         ],
                     ]);
+
+                    // Obtener la orden desde WooCommerce Cosmika
+                    $orderCosmika = $woocommerceCosmika->get("orders/$id");
+                    // Actualizar stock en Cosmika
+                    foreach ($orderCosmika->line_items as $item) {
+                        $productName = $item->name; // Nombre del producto en WooCommerce
+                        $quantity = $item->quantity; // Cantidad vendida en WooCommerce
+
+                        // Buscar el producto en la tabla interna
+                        $productoInterno = Products::where('nombre', $productName)->first();
+
+                        if ($productoInterno) {
+                            // Realizar la resta del stock
+                            $nuevoStock = $productoInterno->stock - $quantity;
+
+                            // Asegúrate de que el stock no sea negativo
+                            $nuevoStock = max($nuevoStock, 0);
+
+                            // Actualizar el stock en la base de datos
+                            $productoInterno->update(['stock' => $nuevoStock]);
+                        }
+                    }
 
                 }else{
                     // Actualizar la meta información en WooCommerce para el campo 'guia_de_envio'
