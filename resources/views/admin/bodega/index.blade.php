@@ -313,7 +313,7 @@
                                                             @endforeach
                                                         @endif
 
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$item->id}}">
+                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$order->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
 
@@ -355,7 +355,7 @@
                                                 </tr>
 
                                                 @include('admin.bodega.modal_productos_paradisus')
-                                                @include('admin.bodega.modal_estatus_paradisus')
+                                                {{-- @include('admin.bodega.modal_estatus_paradisus') --}}
                                                 @include('admin.bodega.modal_estatus_edit_para')
 
                                             @endforeach

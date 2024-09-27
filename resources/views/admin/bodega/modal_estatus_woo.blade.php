@@ -1,13 +1,13 @@
-<div class="modal fade" id="estatusModal_woo_{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="estatusModal_woo_{{$order->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered modal-lg">
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title">Cambio de Estatus Woo #{{$item->id}}</h5>
+          <h5 class="modal-title">Cambio de Estatus Woo #{{$order->id}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form method="POST" action="{{ route('notas_cotizacion.update_estatus', $item->id) }}" enctype="multipart/form-data" role="form">
+        <form method="POST" action="{{ route('notas_cotizacion.update_estatus', $order->id) }}" enctype="multipart/form-data" role="form">
             @csrf
             <input type="hidden" name="_method" value="PATCH">
             <div class="modal-body">
