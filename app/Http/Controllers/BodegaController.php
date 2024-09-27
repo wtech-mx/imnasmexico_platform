@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
+use App\Models\Products;
 use Illuminate\Http\Request;
 
 use Codexshaper\WooCommerce\Facades\WooCommerce;
@@ -191,36 +192,77 @@ class BodegaController extends Controller
 
     public function actualizarPedidoParadisus(Request $request, $id)
     {
-        // Datos que se enviarán a la API de Paradisus
-
-        if($request->input('estatus_cotizacion') == 'Preparado'){
-
-            $datosActualizados = [
-                'estatus' => $request->input('estatus_cotizacion'), // Tomamos el nuevo estatus del form
-                'preparado_hora_y_guia' => date("Y-m-d H:i:s"), // Tomamos el nuevo estatus del form
-            ];
-
-
-        }elseif($request->input('estatus_cotizacion') == 'Enviado'){
-
-            $datosActualizados = [
-                'estatus' => $request->input('estatus_cotizacion'), // Tomamos el nuevo estatus del form
-                'enviado_hora_y_guia' => date("Y-m-d H:i:s"), // Tomamos el nuevo estatus del form
-            ];
-        }
-
+        // Obtener el dominio para seleccionar la URL adecuada
         $dominio = $request->getHost();
-        if($dominio == 'plataforma.imnasmexico.com'){
-            $respuesta = Http::patch('https://paradisus.mx/api/actualizar-notas-pedidos/' . $id, $datosActualizados);
-        }else{
-            $respuesta = Http::patch('http://paradisus.test/api/actualizar-notas-pedidos/' . $id, $datosActualizados);
+
+        // Obtener el pedido de la API de Paradisus
+        if ($dominio == 'plataforma.imnasmexico.com') {
+            $api_pedidosParadisus = Http::get('https://paradisus.mx/api/enviar-notas-pedidos');
+        } else {
+            $api_pedidosParadisus = Http::get('http://paradisus.test/api/enviar-notas-pedidos');
         }
 
-        // Manejar la respuesta de la API
-        if ($respuesta->successful()) {
-            return back()->with('success', 'El pedido ha sido actualizado en Paradisus correctamente.');
+        // Verificar si la respuesta es exitosa
+        if ($api_pedidosParadisus->successful()) {
+            $pedidos = $api_pedidosParadisus->json();
+
+            // Buscar el pedido específico por ID
+            $pedido = collect($pedidos['data'])->firstWhere('id', $id);
+
+            if (!$pedido) {
+                return back()->with('error', 'El pedido no fue encontrado en la API de Paradisus.');
+            }
+
+            // Verificar si el estado es "Preparado" para descontar el stock
+            if ($request->input('estatus_cotizacion') == 'Preparado') {
+                $datosActualizados = [
+                    'estatus' => $request->input('estatus_cotizacion'),
+                    'preparado_hora_y_guia' => date("Y-m-d H:i:s"), // Tomamos el nuevo estatus del form
+                ];
+
+                // Descontar stock de los productos en "pedidos"
+                foreach ($pedido['pedidos'] as $producto) {
+                    $productName = $producto['concepto']; // Concepto es el nombre del producto
+                    $quantity = $producto['cantidad']; // Cantidad del producto
+
+                    // Buscar el producto en la base de datos interna por el nombre
+                    $productoInterno = Products::where('nombre', $productName)->first();
+
+                    if ($productoInterno) {
+                        // Descontar el stock
+                        $nuevoStock = $productoInterno->stock - $quantity;
+
+                        // Asegurarse de que el stock no sea negativo
+                        $nuevoStock = max($nuevoStock, 0);
+
+                        // Actualizar el stock en la base de datos
+                        $productoInterno->update(['stock' => $nuevoStock]);
+                    } else {
+                        return back()->with('error', "El producto '{$productName}' no se encontró en el inventario interno.");
+                    }
+                }
+            } elseif ($request->input('estatus_cotizacion') == 'Enviado') {
+                $datosActualizados = [
+                    'estatus' => $request->input('estatus_cotizacion'),
+                    'enviado_hora_y_guia' => date("Y-m-d H:i:s"), // Tomamos el nuevo estatus del form
+                ];
+            }
+
+            // Actualizar el pedido en la API de Paradisus
+            if ($dominio == 'plataforma.imnasmexico.com') {
+                $respuesta = Http::patch('https://paradisus.mx/api/actualizar-notas-pedidos/' . $id, $datosActualizados);
+            } else {
+                $respuesta = Http::patch('http://paradisus.test/api/actualizar-notas-pedidos/' . $id, $datosActualizados);
+            }
+
+            // Manejar la respuesta de la API
+            if ($respuesta->successful()) {
+                return back()->with('success', 'El pedido ha sido actualizado en Paradisus correctamente y el stock ajustado.');
+            } else {
+                return back()->with('error', 'No se pudo actualizar el pedido en Paradisus.');
+            }
         } else {
-            return back()->with('error', 'No se pudo actualizar el pedido en Paradisus.');
+            return back()->with('error', 'No se pudo obtener los pedidos de la API de Paradisus.');
         }
     }
 
