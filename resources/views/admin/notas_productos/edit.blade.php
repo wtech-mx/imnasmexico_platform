@@ -146,12 +146,12 @@
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-2">
+                                            {{-- <div class="form-group col-2">
                                                 <h4 for="name">Quitar</h4>
                                                 <div class="input-group mb-3">
                                                     <button type="button" class="btn btn-danger btn-sm eliminarCampo3" data-id="{{ $productos->id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <!-- Campo oculto para el precio unitario -->
                                             <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}">
 

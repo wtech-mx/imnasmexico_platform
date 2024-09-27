@@ -268,7 +268,8 @@ class NotasProductosController extends Controller
         $cantidad = $request->input('cantidad');
         $descuento = $request->input('descuento');
         $total = 0;
-
+        $resta = 0;
+        $suma = 0;
         // Obtener los productos actuales de la base de datos para esa cotización
         $productosExistentes = ProductosNotasId::where('id_notas_productos', $id)->get();
 
@@ -281,6 +282,19 @@ class NotasProductosController extends Controller
             $productos = ProductosNotasId::where('producto', $producto[$count])
                 ->where('id_notas_productos', $id)
                 ->firstOrFail();
+
+
+            $producto_db = Products::where('nombre', $producto[$count])->first();
+            $producto_cot = ProductosNotasId::where('producto', $producto[$count])->where('id_notas_productos', $id)->first();
+
+            if ($producto_db && $producto_cot) {
+                if ($producto_cot->cantidad != $cantidad[$count]) {
+                    $suma = $producto_db->stock + $producto_cot->cantidad;
+                    $resta = $suma - $cantidad[$count];
+                    $producto_db->stock = $resta;
+                    $producto_db->update();
+                }
+            }
 
             // Guardar el ID del producto en el array de productos enviados
             $productosIdsEnviados[] = $productos->id;
@@ -311,9 +325,14 @@ class NotasProductosController extends Controller
             $campo4 = $request->input('campo4');
             $campo3 = $request->input('campo3');
             $descuento_prod = $request->input('descuento_prod');
-
+            $resta = 0;
             // Agregar nuevos productos
             for ($count = 0; $count < count($campo); $count++) {
+                $producto = Products::where('nombre', $campo[$count])->first();
+                $resta = $producto->stock - $campo3[$count];
+                $producto->stock = $resta;
+                $producto->update();
+
                 $price = $campo4[$count];
                 $cleanPrice = floatval(str_replace(['$', ','], '', $price));
                 $data = array(
