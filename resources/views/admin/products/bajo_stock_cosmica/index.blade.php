@@ -179,7 +179,7 @@
 
         // Realizar una petición AJAX para enviar los datos al servidor
         $.ajax({
-            url: '/admin/productos/guardar-carrito', // Ruta que definiremos en Laravel
+            url: '/cosmica/admin/productos/guardar-carrito', // Ruta que definiremos en Laravel
             method: 'POST',
             data: {
                 cart: cart, // Enviar el carrito

@@ -123,7 +123,7 @@
                             @if($pedido->firma)
 
                                 <p class="text-center">
-                                    <img id="blah" src="{{asset('firma_pedidos/' .$pedido->firma   ) }}" alt="Imagen" style="width: 100%;height: auto;"/><br>
+                                    <img id="blah" src="{{asset('firma_pedido/' .$pedido->firma   ) }}" alt="Imagen" style="width: 100%;height: auto;"/><br>
                                 </p>
 
                             @else
