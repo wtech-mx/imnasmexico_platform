@@ -116,7 +116,7 @@ class PedidosWooController extends Controller
                     $order = WooCommerce::find("orders/$id");
                     // 2. Recorrer los productos en la orden (line_items)
                     foreach ($order->line_items as $item) {
-                        $productName = $item->name; // Nombre del producto en WooCommerce
+                        $productName = trim($item->name); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
                         $quantity = $item->quantity; // Cantidad vendida en WooCommerce
 
                         // 3. Buscar el producto en la tabla interna
@@ -209,7 +209,7 @@ class PedidosWooController extends Controller
                     $orderCosmika = $woocommerceCosmika->get("orders/$id");
                     // Actualizar stock en Cosmika
                     foreach ($orderCosmika->line_items as $item) {
-                        $productName = $item->name; // Nombre del producto en WooCommerce
+                        $productName = trim($item->name); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
                         $quantity = $item->quantity; // Cantidad vendida en WooCommerce
 
                         // Buscar el producto en la tabla interna

@@ -221,12 +221,11 @@ class BodegaController extends Controller
 
                 // Descontar stock de los productos en "pedidos"
                 foreach ($pedido['pedidos'] as $producto) {
-                    $productName = $producto['concepto']; // Concepto es el nombre del producto
+                    $productName = trim($producto['concepto']); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
                     $quantity = $producto['cantidad']; // Cantidad del producto
 
                     // Buscar el producto en la base de datos interna por el nombre
                     $productoInterno = Products::where('nombre', $productName)->first();
-
 
                     if ($productoInterno) {
 
