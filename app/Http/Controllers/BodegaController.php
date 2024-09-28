@@ -208,7 +208,6 @@ class BodegaController extends Controller
 
             // Buscar el pedido específico por ID
             $pedido = collect($pedidos['data'])->firstWhere('id', $id);
-
             if (!$pedido) {
                 return back()->with('error', 'El pedido no fue encontrado en la API de Paradisus.');
             }
@@ -228,19 +227,21 @@ class BodegaController extends Controller
                     // Buscar el producto en la base de datos interna por el nombre
                     $productoInterno = Products::where('nombre', $productName)->first();
 
+
                     if ($productoInterno) {
+
                         // Descontar el stock
                         $nuevoStock = $productoInterno->stock - $quantity;
 
-                        // Asegurarse de que el stock no sea negativo
-                        $nuevoStock = max($nuevoStock, 0);
-
                         // Actualizar el stock en la base de datos
                         $productoInterno->update(['stock' => $nuevoStock]);
+
                     } else {
+
                         return back()->with('error', "El producto '{$productName}' no se encontró en el inventario interno.");
                     }
                 }
+
             } elseif ($request->input('estatus_cotizacion') == 'Enviado') {
                 $datosActualizados = [
                     'estatus' => $request->input('estatus_cotizacion'),
