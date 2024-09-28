@@ -254,7 +254,7 @@
                     <img src="{{ $basePath . 'diploma_logo_firma_director.png' }}" class="img_portada">
                     <div class="container_firma_director">
                         <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img">
-                        <p style="font-size:10px;text-align: center;">{{ $director }} <br> Firma del Director(a)</p>
+                        <p style="font-size:10px;text-align: center;">{{ $director }} <br> {{ $firma_directora }}</p>
                     </div>
                 @else
                     <img src="{{ $basePath . 'diploma_fontal_limpio.png' }}" class="img_portada">

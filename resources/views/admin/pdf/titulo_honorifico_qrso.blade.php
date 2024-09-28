@@ -368,7 +368,7 @@
                 <img src="{{ $basePath . 'titulo_frontal_limpio_sin_firma_front.png' }}" class="img_portada">
                 <div class="container_firma_director_front">
                     <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img">
-                    <h6 style="text-align: center;">{{ $director }} <br> Firma del Director(a)</h6>
+                    <h6 style="text-align: center;">{{ $director }} <br> {{ $firma_directora }}</h6>
                 </div>
             @else
                 <img src="{{ $basePath . 'titulo_frontal_limpio.png' }}" class="img_portada">

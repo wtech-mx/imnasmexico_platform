@@ -373,10 +373,24 @@
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px">
                                                     </span>
-                                                    <select name="capitalizar" id="capitalizar" class="form-select" >
+                                                    <select name="capitalizar" id="capitalizar" class="form-select" required >
                                                         <option value="No">Seleciona una opcion</option>
                                                         <option value="Si">Si</option>
                                                         <option value="No">No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-6">
+                                                <label for="name">Director o Direcotora</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px" >
+                                                    </span>
+                                                    <select name="firma_directora" id="firma_directora" class="form-select" required>
+                                                        <option value="No">Seleciona una opcion</option>
+                                                        <option value="Firma del Director">Firma del Director</option>
+                                                        <option value="Firma de la Directora">Firma la Directora</option>
                                                     </select>
                                                 </div>
                                             </div>
