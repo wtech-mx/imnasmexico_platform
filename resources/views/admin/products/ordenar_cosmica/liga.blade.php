@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Aprobar pedido para laboratorio</title>
+    <title>Aprobar pedido para laboratorio Cosmica</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
@@ -73,13 +73,13 @@
             <div class="row">
                 <div class="col-12 mt-3">
                     <h2 class="">
-                        Aprobar pedido para laboratorio
+                        Aprobar pedido para laboratorio Cosmica
                     </h2>
                     <hr>
 
 
                     <div class="col-12 mt-5">
-                        <h5 style="color:#836262"><strong>Productos solicitados</strong> </h5>
+                        <h5 style="color:#836262"><strong>Productos solicitados Cosmica</strong> </h5>
                     </div>
                     @foreach ($pedido_productos as  $productos)
                         <div class="row">
@@ -115,7 +115,7 @@
                            <p class="text-left"> <strong>FIRMA</strong></p>
                         </div>
 
-                        <form method="POST" class="row" action="{{ route('ordenes_nas_update.firma', $pedido->id) }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" class="row" action="{{ route('ordenes_cosmica_update.firma', $pedido->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <div class="col-12">
@@ -123,7 +123,7 @@
                             @if($pedido->firma)
 
                                 <p class="text-center">
-                                    <img id="blah" src="{{asset('firma_pedidos/' .$pedido->firma   ) }}" alt="Imagen" style="width: 100%;height: auto;"/><br>
+                                    <img id="blah" src="{{asset('firma_pedido/' .$pedido->firma   ) }}" alt="Imagen" style="width: 100%;height: auto;"/><br>
                                 </p>
 
                             @else

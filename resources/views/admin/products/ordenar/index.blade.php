@@ -41,9 +41,11 @@
                                     <i class="fa fa-file"></i> Ver
                                 </a>
 
-                                <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $orden->id) }}">
-                                    <i class="fa fa-file"></i> Descargar PDF
-                                </a>
+                                @if ($orden->estatus != 'Realizado')
+                                    <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $orden->id) }}">
+                                        <i class="fa fa-file"></i> Descargar PDF
+                                    </a>
+                                @endif
 
                                 <a class="btn btn-xs btn-warning text-white" target="_blank" href="{{ route('ordenes_nas.firma', $orden->id) }}">
                                     <i class="fa fa-file"></i> Liga para aprobar

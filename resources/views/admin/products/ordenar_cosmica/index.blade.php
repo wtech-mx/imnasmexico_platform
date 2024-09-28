@@ -37,15 +37,15 @@
                             <td>{{ \Carbon\Carbon::parse($orden->fecha_pedido)->translatedFormat('d F Y h:i a') }}</td>
                             <td>{{ $orden->estatus }}</td>
                             <td>
-                                <a class="btn btn-xs btn-success text-white" target="_blank" href="{{ route('productos_stock.show', $orden->id) }}">
+                                <a class="btn btn-xs btn-success text-white" target="_blank" href="{{ route('productos_stock_cosmica.show', $orden->id) }}">
                                     <i class="fa fa-file"></i> Ver
                                 </a>
 
-                                <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $orden->id) }}">
+                                <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock_cosmica.imprimir', $orden->id) }}">
                                     <i class="fa fa-file"></i> Descargar PDF
                                 </a>
 
-                                <a class="btn btn-xs btn-warning text-white" target="_blank" href="{{ route('ordenes_nas.firma', $orden->id) }}">
+                                <a class="btn btn-xs btn-warning text-white" target="_blank" href="{{ route('ordenes_cosmica.firma', $orden->id) }}">
                                     <i class="fa fa-file"></i> Liga para aprobar
                                 </a>
                             </td>

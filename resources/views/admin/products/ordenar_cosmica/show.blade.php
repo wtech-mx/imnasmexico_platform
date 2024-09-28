@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-Productos solicitados
+Productos solicitados Cosmica
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@ Productos solicitados
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('notas_productos.update', $pedido->id) }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('ordenes_cosmica_update.orden', $pedido->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <div class="modal-body">
@@ -25,16 +25,18 @@ Productos solicitados
                                         </div>
                                     </div>
 
-                                    <div class="col-2">
-                                        <br>
-                                        <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $pedido->id) }}">
-                                            <i class="fa fa-file"></i> Descargar PDF
-                                        </a>
-                                    </div>
+                                    @if ($pedido->estatus != 'Realizado')
+                                        <div class="col-2">
+                                            <br>
+                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock_cosmica.imprimir', $pedido->id) }}">
+                                                <i class="fa fa-file"></i> Descargar PDF
+                                            </a>
+                                        </div>
+                                    @endif
 
                                     <div class="col-2">
                                         <br>
-                                        <a class="btn btn-xs btn-warning text-white" target="_blank" href="{{ route('ordenes_nas.firma', $pedido->id) }}">
+                                        <a class="btn btn-xs btn-warning text-white" target="_blank" href="{{ route('ordenes_cosmica.firma', $pedido->id) }}">
                                             <i class="fa fa-file"></i> Liga para aprobar
                                         </a>
                                     </div>
@@ -42,8 +44,12 @@ Productos solicitados
                                     <div class="col-12 mt-5">
                                         <h5 style="color:#836262"><strong>Productos solicitados</strong> </h5>
                                     </div>
-                                    @foreach ($pedido_productos as  $productos)
-                                        <div class="row">
+                                    @foreach ($pedido_productos as $productos)
+                                        <div class="row producto-item" id="producto_{{ $productos->id }}">
+                                            <input type="hidden" name="id_pedido[]" value="{{ $productos->id_pedido }}">
+                                            <input type="hidden" name="id_producto[]" value="{{ $productos->id_producto }}">
+                                            <input type="hidden" name="eliminar_producto[]" value="0" id="eliminar_producto_{{ $productos->id }}">
+
                                             <div class="col-3">
                                                 <label for="">Nombre</label>
                                                 <input type="text" class="form-control" value="{{ $productos->Products->nombre }}" disabled>
@@ -55,7 +61,7 @@ Productos solicitados
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
                                                     </span>
-                                                    <input type="number" class="form-control" value="{{ $productos->stock_anterior }}" disabled>
+                                                    <input type="number" class="form-control" value="{{ $productos->Products->stock }}" disabled>
                                                 </div>
                                             </div>
 
@@ -65,39 +71,79 @@ Productos solicitados
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/cam/carrito-de-compras.webp') }}" alt="" width="35px">
                                                     </span>
-                                                    <input type="number" class="form-control" value="{{ $productos->cantidad_pedido }}">
+                                                    @if ($pedido->estatus == 'Realizado')
+                                                        <input type="number" id="cantidad_pedido[]" name="cantidad_pedido[]" class="form-control" value="{{ $productos->cantidad_pedido }}">
+                                                    @else
+                                                        <input type="number" id="cantidad_pedido[]" name="cantidad_pedido[]" class="form-control" value="{{ $productos->cantidad_pedido }}" readonly>
+                                                    @endif
                                                 </div>
                                             </div>
 
                                             <div class="form-group col-2">
-                                                <label>Cantidad recibida</label>
+                                                <label>Restantes</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                        <img src="{{ asset('assets/cam/carrito-de-compras.webp') }}" alt="" width="35px">
                                                     </span>
-                                                    <input type="text" id="cantidad_recibido[]" name="cantidad_recibido[]" class="form-control">
+                                                    <input type="number" class="form-control" value="{{ $productos->cantidad_restante }}" readonly>
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-2">
-                                                <h4 for="name">Quitar</h4>
-                                                <div class="input-group mb-3">
-                                                    <button type="button" class="btn btn-danger btn-sm eliminarCampo3" data-id="{{ $productos->id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            @if ($pedido->estatus != 'Finalizada')
+                                                <div class="form-group col-2">
+                                                    <label>Cantidad recibida</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                        </span>
+                                                        @if ($pedido->estatus == 'Realizado')
+                                                            <input type="text" id="cantidad_recibido[]" name="cantidad_recibido[]" class="form-control" readonly>
+                                                        @else
+                                                            <input type="text" id="cantidad_recibido[]" name="cantidad_recibido[]" class="form-control">
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @endif
 
+                                            @if ($pedido->estatus == 'Realizado')
+                                                <div class="form-group col-2">
+                                                    <h4 for="name">Quitar</h4>
+                                                    <div class="input-group mb-3">
+                                                        <button type="button" class="btn btn-danger btn-sm eliminarCampo3" data-id="{{ $productos->id }}">
+                                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
                                     @endforeach
                                 </div>
 
                             </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
-                            </div>
+                            @if ($pedido->estatus != 'Finalizada')
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                </div>
+                            @endif
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+@endsection
+@section('datatable')
+<script>
+    $(document).ready(function() {
+        $('.eliminarCampo3').on('click', function() {
+            var productoId = $(this).data('id');
+
+            // Oculta la fila del producto
+            $('#producto_' + productoId).hide();
+
+            // Marca el producto como "eliminado" para que se procese al guardar
+            $('#eliminar_producto_' + productoId).val(1);
+        });
+    });
+</script>
 @endsection
