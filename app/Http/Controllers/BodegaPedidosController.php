@@ -13,7 +13,7 @@ use Session;
 class BodegaPedidosController extends Controller
 {
     public function productos_stock(Request $request){
-        $products = Products::orderBy('stock','ASC')->where('categoria', 'NAS')->get();
+        $products = Products::orderBy('stock','ASC')->where('categoria', 'NAS')->where('stock', '!=', NULL)->get();
 
         return view('admin.products.bajo_stock.index', compact('products'));
     }
@@ -202,7 +202,7 @@ class BodegaPedidosController extends Controller
 
     // =============================== C O S M I C A ============================================
     public function productos_stock_cosmica(Request $request){
-        $products = Products::orderBy('stock','ASC')->where('categoria', 'Cosmica')->get();
+        $products = Products::orderBy('stock','ASC')->where('categoria', 'Cosmica')->where('stock', '!=', NULL)->get();
 
         return view('admin.products.bajo_stock_cosmica.index', compact('products'));
     }
@@ -311,7 +311,7 @@ class BodegaPedidosController extends Controller
         $cantidades_recibido = $request->input('cantidad_recibido');
         $eliminar_producto = $request->input('eliminar_producto');
         $pedido = BodegaPedidosCosmica::where('id', $id)->first();
-      
+
         if($pedido->estatus == 'Realizado'){
             foreach ($ids_pedido as $index => $id_pedido) {
                 if ($eliminar_producto[$index] == 1) {
