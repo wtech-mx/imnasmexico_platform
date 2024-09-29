@@ -11,7 +11,7 @@ use Session;
 class ProductsController extends Controller
 {
     public function index(Request $request){
-        $products = Products::orderBy('id','DESC')->get();
+        $products = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->get();
 
         return view('admin.products.index', compact('products'));
     }

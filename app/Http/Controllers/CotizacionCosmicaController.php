@@ -104,7 +104,7 @@ class CotizacionCosmicaController extends Controller
 
     public function create(){
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
-        $products = Products::where('descripcion', '=', 'Cosmica')->orderBy('nombre','ASC')->get();
+        $products = Products::where('categoria', '=', 'Cosmica')->orderBy('nombre','ASC')->get();
 
         return view('admin.cotizacion_cosmica.create', compact('products', 'clientes'));
     }
@@ -283,7 +283,7 @@ class CotizacionCosmicaController extends Controller
     public function edit($id){
         $cotizacion = NotasProductosCosmica::find($id);
         $cotizacion_productos = ProductosNotasCosmica::where('id_notas_productos', '=', $id)->where('price', '!=', NULL)->get();
-        $products = Products::where('descripcion', '=', 'Cosmica')->orderBy('nombre','ASC')->get();
+        $products = Products::where('categoria', '=', 'Cosmica')->orderBy('nombre','ASC')->get();
 
         return view('admin.cotizacion_cosmica.edit', compact('products', 'cotizacion', 'cotizacion_productos'));
     }

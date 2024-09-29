@@ -69,7 +69,7 @@ class CotizacionController extends Controller
 
     public function create(){
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
-        $products = Products::orderBy('nombre','ASC')->get();
+        $products = Products::orderBy('nombre','ASC')->where('categoria', '!=', 'Ocultar')->get();
 
         return view('admin.cotizacion.create', compact('products', 'clientes'));
     }
@@ -77,7 +77,7 @@ class CotizacionController extends Controller
     public function edit($id){
         $cotizacion = NotasProductos::find($id);
         $cotizacion_productos = ProductosNotasId::where('id_notas_productos', '=', $id)->where('price', '!=', NULL)->get();
-        $products = Products::orderBy('nombre','ASC')->get();
+        $products = Products::orderBy('nombre','ASC')->where('categoria', '!=', 'Ocultar')->get();
 
         return view('admin.cotizacion.edit', compact('products', 'cotizacion', 'cotizacion_productos'));
     }
