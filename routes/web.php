@@ -323,6 +323,7 @@ Route::group(['middleware' => ['auth']], function() {
     |--------------------------------------------------------------------------*/
     Route::get('/configuracion', [App\Http\Controllers\ConfiguracionController::class, 'index'])->name('index.configuracion');
     Route::patch('/configuracion/update', [App\Http\Controllers\ConfiguracionController::class, 'update'])->name('update.configuracion');
+    Route::get('/descargar-db', [App\Http\Controllers\DatabaseController::class, 'descargarBaseDeDatos'])->name('descargar.db');
 
     // =============== M O D U L O   C O M E N T A R I O S ===============================
     Route::get('/admin/comentarios', [App\Http\Controllers\ComentariosController::class, 'index'])->name('comentarios.index');
