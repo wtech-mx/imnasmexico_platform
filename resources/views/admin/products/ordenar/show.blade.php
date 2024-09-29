@@ -15,6 +15,9 @@ Productos solicitados
                             <input type="hidden" name="_method" value="PATCH">
                             <div class="modal-body">
                                 <div class="row">
+                                    <div class="col-12">
+                                        <h2>Productos solicitados NAS</h2>
+                                    </div>
                                     <div class="form-group col-6">
                                         <label for="name">Fecha</label>
                                         <div class="input-group mb-3">
@@ -26,7 +29,7 @@ Productos solicitados
                                     </div>
 
                                     @if ($pedido->estatus != 'Realizado')
-                                        <div class="col-2">
+                                        <div class="col-3">
                                             <br>
                                             <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $pedido->id) }}">
                                                 <i class="fa fa-file"></i> Descargar PDF
@@ -34,9 +37,9 @@ Productos solicitados
                                         </div>
                                     @endif
 
-                                    <div class="col-2">
+                                    <div class="col-3">
                                         <br>
-                                        <a class="btn btn-xs btn-warning text-white" target="_blank" href="{{ route('ordenes_nas.firma', $pedido->id) }}">
+                                        <a class="btn my-auto btn-success text-white" target="_blank" href="{{ route('ordenes_nas.firma', $pedido->id) }}">
                                             <i class="fa fa-file"></i> Liga para aprobar
                                         </a>
                                     </div>
@@ -50,16 +53,21 @@ Productos solicitados
                                             <input type="hidden" name="id_producto[]" value="{{ $productos->id_producto }}">
                                             <input type="hidden" name="eliminar_producto[]" value="0" id="eliminar_producto_{{ $productos->id }}">
 
-                                            <div class="col-3">
-                                                <label for="">Nombre</label>
-                                                <input type="text" class="form-control" value="{{ $productos->Products->nombre }}" disabled>
+                                            <div class="form-group col-3">
+                                                <label>Nombre</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ $productos->Products->imagenes }}" alt="" width="35px">
+                                                    </span>
+                                                    <input type="text" class="form-control" value="{{ $productos->Products->nombre }}" disabled>
+                                                </div>
                                             </div>
 
                                             <div class="form-group col-2">
                                                 <label>Stock Actual</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
+                                                        <img src="{{ asset('assets/user/icons/almacenamiento.png') }}" alt="" width="35px">
                                                     </span>
                                                     <input type="number" class="form-control" value="{{ $productos->Products->stock }}" disabled>
                                                 </div>
@@ -69,7 +77,7 @@ Productos solicitados
                                                 <label>Cantidad solicitada</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/cam/carrito-de-compras.webp') }}" alt="" width="35px">
+                                                        <img src="{{ asset('assets/user/icons/solicitante.png') }}" alt="" width="35px">
                                                     </span>
                                                     @if ($pedido->estatus == 'Realizado')
                                                         <input type="number" id="cantidad_pedido[]" name="cantidad_pedido[]" class="form-control" value="{{ $productos->cantidad_pedido }}">
@@ -83,7 +91,7 @@ Productos solicitados
                                                 <label>Restantes</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/cam/carrito-de-compras.webp') }}" alt="" width="35px">
+                                                        <img src="{{ asset('assets/user/icons/paquete-o-empaquetar.png') }}" alt="" width="35px">
                                                     </span>
                                                     <input type="number" class="form-control" value="{{ $productos->cantidad_restante }}" readonly>
                                                 </div>
@@ -94,7 +102,7 @@ Productos solicitados
                                                     <label>Cantidad recibida</label>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text" id="basic-addon1">
-                                                            <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                                            <img src="{{ asset('assets/user/icons/cajas-de-carga-de-trabajador.png') }}" alt="" width="35px">
                                                         </span>
                                                         @if ($pedido->estatus == 'Realizado')
                                                             <input type="text" id="cantidad_recibido[]" name="cantidad_recibido[]" class="form-control" readonly>
@@ -106,8 +114,8 @@ Productos solicitados
                                             @endif
 
                                             @if ($pedido->estatus == 'Realizado')
-                                                <div class="form-group col-2">
-                                                    <h4 for="name">Quitar</h4>
+                                                <div class="form-group col-1">
+                                                    <h4 for="name">-</h4>
                                                     <div class="input-group mb-3">
                                                         <button type="button" class="btn btn-danger btn-sm eliminarCampo3" data-id="{{ $productos->id }}">
                                                             <i class="fa fa-trash" aria-hidden="true"></i>
