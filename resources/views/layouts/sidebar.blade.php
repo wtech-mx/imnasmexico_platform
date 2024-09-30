@@ -146,6 +146,15 @@
                 <div class="collapse " id="pageBodega">
                 <ul class="nav ms-4">
                     <li class="nav-item ">
+                        @can('reportes-ventas')
+                            <a class="nav-link {{ (Request::is('reporte/ventas') ? 'active' : '') }}" href="{{ route('reporte_ventas.index') }}">
+                                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                    <i class="fa fa-ticket text-sm opacity-10" style="color:#0d52a0"></i>
+                                </div>
+                                <span class="nav-link-text ms-1">Reporte Ventas</span>
+                            </a>
+                        @endcan
+
                         <a class="nav-link {{ (Request::is('bodega/preparacion') ? 'active' : '') }}" href="{{ route('index_preparacion.bodega') }}">
                             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                 <i class="fa fa-ticket text-sm opacity-10" style="color:#e6b449"></i>

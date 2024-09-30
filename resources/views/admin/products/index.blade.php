@@ -3,7 +3,10 @@
 @section('template_title')
     Products
 @endsection
-
+@section('css')
+    <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
+@endsection
 @section('content')
 
 <div class="container-fluid mt-3">
@@ -43,6 +46,7 @@
                             <th>Foto</th>
                             <th>Nombre</th>
                             <th>Precio Normal</th>
+                            <th>Categoria</th>
                             <th>Stock</th>
                             <th>Acciones</th>
                         </tr>
@@ -57,6 +61,7 @@
                         <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
                         <td>{{ $product->nombre }}</td>
                         <td>${{ $precio_normal }}</td>
+                        <td>{{ $product->categoria }}</td>
                         <td>{{ $product->stock }}</td>
                         <td>
                             @can('productos-edit')
@@ -79,11 +84,43 @@
 @endsection
 
 @section('datatable')
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+
+ <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+ <script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap4.min.js"></script>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 
 <script>
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-      searchable: true,
-      fixedHeight: false
+    $('#datatable-search').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                text: 'Imprimir',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'excel',
+            'pdf',
+            'colvis'
+        ],
+        responsive: true,
+        stateSave: true,
+
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+        }
     });
 </script>
 

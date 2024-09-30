@@ -587,6 +587,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/cosmica/admin/productos/stock/firma/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_firma'])->name('ordenes_cosmica.firma');
     Route::patch('/cosmica/admin/productos/stock/firma/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_firma_update'])->name('ordenes_cosmica_update.firma');
     Route::patch('/cosmica/admin/productos/stock/orden/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_orden_update'])->name('ordenes_cosmica_update.orden');
+
+    // =============== M O D U L O   R E P O R T E  V E N T A S ===============================
+    Route::get('reporte/ventas/', [App\Http\Controllers\ReporteVentasController::class, 'index'])->name('reporte_ventas.index');
+    Route::get('reporte/ventas/buscador', [App\Http\Controllers\ReporteVentasController::class, 'buscador'])->name('reporte_ventas.buscador');
 });
 
 // Route::get('registro/login', function () {
