@@ -482,7 +482,7 @@
                 <img src="{{ $basePath . 'titulo_reverso_limpio_firma_director.png' }}" class="img_reverso">
                 <div class="container_firma_director">
                     <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img"><br>
-                    <h7>{{ $director }} <br> Firma del Director(a)</h7>
+                    <h7>{{ $director }} <br> {{ $firma_directora }}</h7>
                 </div>
             @else
                 <img src="{{ $basePath . 'titulo_reverso_limpio.png' }}" class="img_reverso">
