@@ -12,7 +12,7 @@ class LaboratoriosController extends Controller
 {
     public function index_nas(){
 
-        $bodegaPedidoRealizado = BodegaPedidos::where('estatus','=','Realizado')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoRealizado = BodegaPedidos::where('estatus','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoConfirmado = BodegaPedidos::where('estatus','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
 
         return view('admin.laboratorio.index_nas', compact('bodegaPedidoRealizado','bodegaPedidoConfirmado'));
@@ -36,7 +36,7 @@ class LaboratoriosController extends Controller
         $eliminar_producto = $request->input('eliminar_producto');
 
         $pedido = BodegaPedidos::where('id', $id)->first();
-        if($pedido->estatus == 'Realizado'){
+        if($pedido->estatus == 'Aprobada'){
 
             $bodegaPedido = BodegaPedidos::find($id);
             $bodegaPedido->estatus = 'Confirmado';

@@ -142,7 +142,7 @@
                                     <td>{{ $item->estatus }}</td>
                                     <td>
                                         <a class="btn btn-xs btn-success text-white" target="_blank" href="{{ route('productos_stock.show', $item->id) }}">
-                                            <i class="fa fa-file"></i> Ver Pedido Confimado
+                                            <i class="fa fa-file"></i> Ver Respuesta del Laboratorio
                                         </a>
 
                                         @if ($item->estatus != 'Realizado')

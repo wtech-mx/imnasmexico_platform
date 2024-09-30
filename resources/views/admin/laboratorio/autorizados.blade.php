@@ -97,7 +97,7 @@ Productos Autorizadoa
                                                         @if ($pedido->estatus == 'Realizado')
                                                             <input type="text" id="cantidad_recibido[]" name="cantidad_recibido[]" class="form-control" readonly>
                                                         @else
-                                                            <input type="text" id="cantidad_recibido[]" name="cantidad_recibido[]" class="form-control">
+                                                            <input type="text" id="cantidad_recibido[]" name="cantidad_recibido[]" class="form-control" readonly>
                                                         @endif
                                                     </div>
                                                 </div>
