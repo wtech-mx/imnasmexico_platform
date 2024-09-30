@@ -186,6 +186,13 @@
             left:28%;
             transform: translateX(-50%);
         }
+        .container_promedio{
+            position: absolute;
+            top:28.5%;
+            left: 65%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
     </style>
 </head>
 
@@ -264,6 +271,10 @@
 
         <div class="oval-container">
             <img class="oval" src="{{ $basePathUtilidades . $fileName }}" alt="Imagen">
+        </div>
+
+        <div class="container_promedio" style="background: #fff;width:50px;heigth:50px;">
+            <p>{{ $promedio }}</p>
         </div>
 
         <div class="container3">

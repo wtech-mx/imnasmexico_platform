@@ -395,6 +395,17 @@
                                                 </div>
                                             </div>
 
+
+                                            <div class="form-group col-3 gc_cn">
+                                                <label for="name">Promedio</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input  name="promedio" type="text" class="form-control" value="9.5" >
+                                                </div>
+                                            </div>
+
                                     </div>
 
 
