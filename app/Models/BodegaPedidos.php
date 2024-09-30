@@ -21,5 +21,6 @@ class BodegaPedidos extends Model
         'estatus',
         'firma',
         'id_user',
+        'fecha_aprovado_lab',
     ];
 }

@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-Productos solicitados
+Productos Autorizadoa
 @endsection
 
 @section('content')
@@ -10,13 +10,13 @@ Productos solicitados
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('ordenes_nas_update.orden', $pedido->id) }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('ordenes_lab_update.update', $pedido->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h2>Productos solicitados NAS</h2>
+                                        <h2>Productos Autorizados NAS</h2>
                                     </div>
                                     <div class="form-group col-6">
                                         <label for="name">Fecha</label>
@@ -28,27 +28,11 @@ Productos solicitados
                                         </div>
                                     </div>
 
-                                    @if ($pedido->estatus != 'Realizado')
-                                        <div class="col-3">
-                                            <br>
-                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $pedido->id) }}">
-                                                <i class="fa fa-file"></i> Descargar PDF
-                                            </a>
-                                        </div>
-                                    @endif
-
-                                    <div class="col-3">
-                                        <br>
-                                        <a class="btn my-auto btn-success text-white" target="_blank" href="{{ route('ordenes_nas.firma', $pedido->id) }}">
-                                            <i class="fa fa-file"></i> Liga para aprobar
-                                        </a>
-                                    </div>
-
                                     <div class="col-12 mt-5">
                                         <h5 style="color:#836262"><strong>Productos solicitados</strong> </h5>
                                     </div>
                                     @foreach ($pedido_productos as $productos)
-                                        <div class="row producto-item" id="producto_{{ $productos->id }}">
+                                        <div class="row producto-item" id="producto_{{ $productos->id }}" style="">
                                             <input type="hidden" name="id_pedido[]" value="{{ $productos->id_pedido }}">
                                             <input type="hidden" name="id_producto[]" value="{{ $productos->id_producto }}">
                                             <input type="hidden" name="eliminar_producto[]" value="0" id="eliminar_producto_{{ $productos->id }}">
@@ -63,7 +47,7 @@ Productos solicitados
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-2">
+                                            <div class="form-group col-3">
                                                 <label>Stock Actual</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
@@ -73,21 +57,27 @@ Productos solicitados
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-2">
+                                            <div class="form-group col-3">
                                                 <label>Cantidad solicitada</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/solicitante.png') }}" alt="" width="35px">
                                                     </span>
-                                                    @if ($pedido->estatus == 'Realizado')
-                                                        <input type="number" id="cantidad_pedido[]" name="cantidad_pedido[]" class="form-control" value="{{ $productos->cantidad_pedido }}">
-                                                    @else
-                                                        <input type="number" id="cantidad_pedido[]" name="cantidad_pedido[]" class="form-control" value="{{ $productos->cantidad_pedido }}" readonly>
-                                                    @endif
+                                                    <input type="number" id="cantidad_pedido[]" name="cantidad_pedido[]" class="form-control" value="{{ $productos->cantidad_pedido }}" readonly>
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-2">
+                                            <div class="form-group col-3">
+                                                <label>Cantidad que se entrega</label>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/limpieza.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input type="number" id="cantidad_entregada_lab[]" name="cantidad_entregada_lab[]" value="{{ $productos->cantidad_entregada_lab }}" class="form-control" >
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-3 mb-5">
                                                 <label>Restantes</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
@@ -97,20 +87,8 @@ Productos solicitados
                                                 </div>
                                             </div>
 
-                                            @if ($pedido->estatus == 'Confirmado')
-                                                <div class="form-group col-2">
-                                                    <label>Laboratorio Envia</label>
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="basic-addon1">
-                                                            <img src="{{ asset('assets/user/icons/limpieza.png') }}" alt="" width="35px">
-                                                        </span>
-                                                            <input type="text" id="cantidad_entregada_lab[]" name="cantidad_entregada_lab[]" class="form-control" value="{{ $productos->cantidad_entregada_lab }}" readonly>
-                                                    </div>
-                                                </div>
-                                            @endif
-
                                             @if ($pedido->estatus != 'Finalizada')
-                                                <div class="form-group col-2">
+                                                <div class="form-group col-3 mb-5">
                                                     <label>Cantidad recibida</label>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text" id="basic-addon1">
@@ -125,8 +103,8 @@ Productos solicitados
                                                 </div>
                                             @endif
 
-                                            @if ($pedido->estatus == 'Realizado')
-                                                <div class="form-group col-1">
+                                            {{-- @if ($pedido->estatus == 'Realizado')
+                                                <div class="form-group col-1 mb-5">
                                                     <h4 for="name">-</h4>
                                                     <div class="input-group mb-3">
                                                         <button type="button" class="btn btn-danger btn-sm eliminarCampo3" data-id="{{ $productos->id }}">
@@ -134,7 +112,8 @@ Productos solicitados
                                                         </button>
                                                     </div>
                                                 </div>
-                                            @endif
+                                            @endif --}}
+
                                         </div>
                                     @endforeach
                                 </div>

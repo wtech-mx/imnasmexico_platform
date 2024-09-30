@@ -83,26 +83,32 @@
                     </div>
                     @foreach ($pedido_productos as  $productos)
                         <div class="row">
-                            <div class="col-12">
-                                <label for="">Nombre</label>
-                                <input type="text" class="form-control" value="{{ $productos->Products->nombre }}" disabled>
+
+                            <div class="form-group col-4">
+                                <label>Nombre</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ $productos->Products->imagenes }}" alt="" width="35px">
+                                    </span>
+                                    <input type="text" class="form-control" value="{{ $productos->Products->nombre }}" disabled>
+                                </div>
                             </div>
 
-                            <div class="form-group col-6">
+                            <div class="form-group col-4">
                                 <label>Stock Actual</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">
-                                        <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
+                                        <img src="{{ asset('assets/user/icons/almacenamiento.png') }}" alt="" width="35px">
                                     </span>
                                     <input type="number" class="form-control" value="{{ $productos->stock_anterior }}" disabled>
                                 </div>
                             </div>
 
-                            <div class="form-group col-6">
+                            <div class="form-group col-4">
                                 <label>Cantidad solicitada</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">
-                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                        <img src="{{ asset('assets/user/icons/solicitante.png') }}" alt="" width="35px">
                                     </span>
                                     <input type="number" class="form-control" value="{{ $productos->cantidad_pedido }}" disabled>
                                 </div>

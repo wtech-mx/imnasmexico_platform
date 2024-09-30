@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="table-responsive">
+            <div class="table-responsive p-4">
                 <table class="table table-flush" id="datatable-search">
                     <thead class="thead-light">
                         <tr>

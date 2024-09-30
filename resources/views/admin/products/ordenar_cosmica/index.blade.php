@@ -15,7 +15,7 @@
                 <div class="d-flex justify-content-between">
                     <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
 
-                    <h3 class="mb-3">Ordenes a laboratorio</h3>
+                    <h3 class="mb-3">Ordenes a laboratorio Cosmica</h3>
 
                     <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                         ¿Como fucniona?
@@ -61,5 +61,13 @@
 @endsection
 
 @section('datatable')
+
+<script>
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+        deferRender:true,
+        paging: true,
+        pageLength: 10
+    });
+</script>
 
 @endsection

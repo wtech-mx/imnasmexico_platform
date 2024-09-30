@@ -16,6 +16,7 @@ class BodegaPedidosProductos extends Model
         'id_producto',
         'stock_anterior',
         'cantidad_pedido',
+        'cantidad_entregada_lab',
         'cantidad_recibido',
         'cantidad_restante',
         'cantidad_liquidado',

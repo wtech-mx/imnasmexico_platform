@@ -67,9 +67,13 @@ class BodegaPedidosController extends Controller
     }
 
     public function ordenes_nas(Request $request){
-        $ordenes = BodegaPedidos::orderBy('fecha_pedido','DESC')->get();
 
-        return view('admin.products.ordenar.index', compact('ordenes'));
+        $bodegaPedidoRealizado = BodegaPedidos::where('estatus','=','Realizado')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoAprobado = BodegaPedidos::where('estatus','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoConfirmado = BodegaPedidos::where('estatus','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
+
+
+        return view('admin.products.ordenar.index', compact('bodegaPedidoAprobado','bodegaPedidoRealizado','bodegaPedidoConfirmado'));
     }
 
     public function ordenes_nas_firma($id){
