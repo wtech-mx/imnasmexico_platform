@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-Productos Autorizadoa
+Productos Autorizadoa Cosmica
 @endsection
 
 @section('content')
@@ -10,13 +10,13 @@ Productos Autorizadoa
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('ordenes_lab_update.update', $pedido->id) }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('cosmica_ordenes_lab_update.update', $pedido->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h2>Productos Autorizados NAS</h2>
+                                        <h2>Productos Autorizados Cosmica</h2>
                                     </div>
                                     <div class="form-group col-6">
                                         <label for="name">Fecha</label>
@@ -52,7 +52,7 @@ Productos Autorizadoa
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/almacenamiento.png') }}" alt="" width="35px">
                                                     </span>
-                                                    <input type="number" id="stock_cosmica[]" name="stock_cosmica[]" class="form-control" value="{{ $productos->Products->stock_cosmica }}" readonly>
+                                                    <input type="number" id="stock_nas[]" name="stock_nas[]" class="form-control" value="{{ $productos->Products->stock_nas }}" readonly>
                                                 </div>
                                             </div>
 

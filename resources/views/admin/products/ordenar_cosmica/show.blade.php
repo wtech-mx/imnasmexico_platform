@@ -16,7 +16,7 @@ Productos solicitados Cosmica
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h2>Productos solicitados cosmica</h2>
+                                        <h2>Productos solicitados Cosmica</h2>
                                     </div>
                                     <div class="form-group col-6">
                                         <label for="name">Fecha</label>
@@ -31,7 +31,7 @@ Productos solicitados Cosmica
                                     @if ($pedido->estatus != 'Realizado')
                                         <div class="col-3">
                                             <br>
-                                            <a class="btn my-auto btn-danger text-white" target="_blank" href="{{ route('productos_stock_cosmica.imprimir', $pedido->id) }}">
+                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $pedido->id) }}">
                                                 <i class="fa fa-file"></i> Descargar PDF
                                             </a>
                                         </div>
@@ -39,7 +39,7 @@ Productos solicitados Cosmica
 
                                     <div class="col-3">
                                         <br>
-                                        <a class="btn my-auto btn-success text-white" target="_blank" href="{{ route('ordenes_cosmica.firma', $pedido->id) }}">
+                                        <a class="btn my-auto btn-success text-white" target="_blank" href="{{ route('ordenes_nas.firma', $pedido->id) }}">
                                             <i class="fa fa-file"></i> Liga para aprobar
                                         </a>
                                     </div>
@@ -96,6 +96,18 @@ Productos solicitados Cosmica
                                                     <input type="number" class="form-control" value="{{ $productos->cantidad_restante }}" readonly>
                                                 </div>
                                             </div>
+
+                                            @if ($pedido->estatus == 'Confirmado')
+                                                <div class="form-group col-2">
+                                                    <label>Laboratorio Envia</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/limpieza.png') }}" alt="" width="35px">
+                                                        </span>
+                                                            <input type="text" id="cantidad_entregada_lab[]" name="cantidad_entregada_lab[]" class="form-control" value="{{ $productos->cantidad_entregada_lab }}" readonly>
+                                                    </div>
+                                                </div>
+                                            @endif
 
                                             @if ($pedido->estatus != 'Finalizada')
                                                 <div class="form-group col-2">

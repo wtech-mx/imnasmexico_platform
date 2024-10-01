@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Ordenes a laboratorio
+Ordenes a laboratorio NAS
 @endsection
 
 @section('content')

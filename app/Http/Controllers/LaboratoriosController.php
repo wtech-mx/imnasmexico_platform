@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\BodegaPedidos;
+use App\Models\BodegaPedidosCosmica;
+use App\Models\BodegaPedidosProductosCosmica;
 use App\Models\BodegaPedidosProductos;
 use App\Models\Products;
 use Session;
@@ -80,7 +82,62 @@ class LaboratoriosController extends Controller
 
     public function index_cosmica(){
 
-        return view('admin.laboratorio.index_cosmica');
+        $bodegaPedidoRealizado = BodegaPedidosCosmica::where('estatus','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoConfirmado = BodegaPedidosCosmica::where('estatus','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
+
+        return view('admin.laboratorio.index_cosmica',compact('bodegaPedidoRealizado','bodegaPedidoConfirmado'));
+    }
+
+    public function show_cosmica($id){
+        $pedido = BodegaPedidosCosmica::where('id', $id)->first();
+        $pedido_productos = BodegaPedidosProductosCosmica::where('id_pedido', $id)->get();
+
+        return view('admin.laboratorio.autorizado_cosmica', compact('pedido', 'pedido_productos'));
+    }
+
+    public function cosmica_ordenes_lab_orden_update(Request $request, $id)
+    {
+        $ids_pedido = $request->input('id_pedido');
+        $ids_producto = $request->input('id_producto');
+        $cantidades_recibido = $request->input('cantidad_entrega');
+        $stock_nas = $request->input('stock_nas');
+        $restantes = 0;
+        $stock_actualizado = 0;
+        $pedido = BodegaPedidosCosmica::where('id', $id)->first();
+        foreach ($ids_pedido as $index => $id_pedido) {
+            $pedidoProducto = BodegaPedidosProductosCosmica::where('id_pedido', $id_pedido)
+            ->where('id_producto', $ids_producto[$index])
+            ->first();
+            $producto = Products::where('id', $ids_producto[$index])->first();
+                // Verifica si hay datos previos en la cantidad entregada
+                if ($pedidoProducto) {
+                    // Si la cantidad entregada es NULL, considerarla como 0
+                    $cantidad_entregada_actual = $pedidoProducto->cantidad_entregada_lab ?? 0;
+                    // Sumar la nueva cantidad entregada con la cantidad que ya había sido registrada
+                    $restantes = $cantidad_entregada_actual - $cantidades_recibido[$index];
+                    $stock_actualizado = $stock_nas[$index] - $cantidades_recibido[$index];
+
+                    $pedidoProducto->cantidad_entregada_lab = $restantes;
+                    $pedidoProducto->save();
+
+                    $producto->stock_nas = $stock_actualizado;
+                    $producto->save();
+
+                    $productosPendientes = BodegaPedidosProductosCosmica::where('id_pedido', $id_pedido)
+                    ->where('cantidad_restante', '>', 0) // Busca productos con cantidad restante mayor a 0
+                    ->count(); // Cuenta los productos que aún tienen piezas pendientes
+
+                    // Si no hay productos pendientes (cantidad_restante == 0), actualizar el estatus del pedido
+                    if ($productosPendientes == 0) {
+                        $pedido->estatus = 'Confirmado';
+                        $pedido->fecha_aprovado_lab = now();
+                        $pedido->save();
+                    }
+                }
+        }
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back()->with('success', 'Envio de correo exitoso.');
 
     }
 

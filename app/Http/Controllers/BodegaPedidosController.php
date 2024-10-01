@@ -261,9 +261,12 @@ class BodegaPedidosController extends Controller
     }
 
     public function ordenes_cosmica(Request $request){
-        $ordenes = BodegaPedidosCosmica::orderBy('fecha_pedido','DESC')->get();
 
-        return view('admin.products.ordenar_cosmica.index', compact('ordenes'));
+        $bodegaPedidoRealizado = BodegaPedidosCosmica::where('estatus','=','Realizado')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoAprobado = BodegaPedidosCosmica::where('estatus','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoConfirmado = BodegaPedidosCosmica::where('estatus','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
+
+        return view('admin.products.ordenar_cosmica.index', compact('bodegaPedidoAprobado','bodegaPedidoRealizado','bodegaPedidoConfirmado'));
     }
 
     public function ordenes_cosmica_firma($id){
@@ -316,7 +319,6 @@ class BodegaPedidosController extends Controller
         $cantidades_recibido = $request->input('cantidad_recibido');
         $eliminar_producto = $request->input('eliminar_producto');
         $pedido = BodegaPedidosCosmica::where('id', $id)->first();
-
         if($pedido->estatus == 'Realizado'){
             foreach ($ids_pedido as $index => $id_pedido) {
                 if ($eliminar_producto[$index] == 1) {
