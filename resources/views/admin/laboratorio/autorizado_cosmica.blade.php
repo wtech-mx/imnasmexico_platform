@@ -52,7 +52,7 @@ Productos Autorizadoa Cosmica
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/almacenamiento.png') }}" alt="" width="35px">
                                                     </span>
-                                                    <input type="number" id="stock_nas[]" name="stock_nas[]" class="form-control" value="{{ $productos->Products->stock_nas }}" readonly>
+                                                    <input type="number" id="stock_cosmica[]" name="stock_cosmica[]" class="form-control" value="{{ $productos->Products->stock_cosmica }}" readonly>
                                                 </div>
                                             </div>
 
