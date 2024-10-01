@@ -72,7 +72,11 @@ Productos Autorizadoa
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/limpieza.png') }}" alt="" width="35px">
                                                     </span>
+                                                    @if ($pedido->estatus_lab == 'Finalizado')
+                                                    <input type="number" id="cantidad_entrega[]" name="cantidad_entrega[]" class="form-control" disabled>
+                                                    @else
                                                     <input type="number" id="cantidad_entrega[]" name="cantidad_entrega[]" class="form-control" >
+                                                    @endif
                                                 </div>
                                             </div>
 
@@ -90,7 +94,7 @@ Productos Autorizadoa
                                 </div>
 
                             </div>
-                            @if ($pedido->estatus != 'Finalizada')
+                            @if ($pedido->estatus_lab != 'Finalizado')
                                 <div class="modal-footer">
                                     <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                 </div>

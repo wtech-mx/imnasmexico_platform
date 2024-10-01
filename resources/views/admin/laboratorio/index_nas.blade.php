@@ -18,7 +18,7 @@
 
                     <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                         ¿Como fucniona?
-                    </a>
+                    </a>
                 </div>
             </div>
 
@@ -26,13 +26,13 @@
 
                 <li class="nav-item" role="presentation" style="margin-left: 1rem">
                   <button class="btn btn-dark  active" id="pills-autorizados-tab" data-bs-toggle="pill" data-bs-target="#pills-autorizados" type="button" role="tab" aria-controls="pills-respuesta_lab" aria-selected="false">
-                   Pedidos Autorizados
+                   Pedidos Pendientes
                   </button>
                 </li>
 
                 <li class="nav-item" role="presentation" style="margin-left: 1rem">
                     <button class="btn btn-secundary  " id="pills-confirmados-tab" data-bs-toggle="pill" data-bs-target="#pills-confirmados" type="button" role="tab" aria-controls="pills-respuesta_lab" aria-selected="false">
-                      Pedidos Confirmados
+                      Pedidos Finalizados
                     </button>
                 </li>
 
@@ -54,7 +54,7 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ \Carbon\Carbon::parse($item->fecha_pedido)->translatedFormat('d F Y h:i a') }}</td>
-                                    <td>{{ $item->estatus }}</td>
+                                    <td>{{ $item->estatus_lab }}</td>
                                     <td>
                                         <a class="btn btn-xs btn-primary text-white" target="_blank" href="{{ route('productos_autorizado.show', $item->id) }}">
                                             <i class="fa fa-file"></i> Ver Pedido
@@ -83,7 +83,7 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ \Carbon\Carbon::parse($item->fecha_pedido)->translatedFormat('d F Y h:i a') }}</td>
                                     <td>{{ \Carbon\Carbon::parse($item->fecha_aprovado_lab)->translatedFormat('d F Y h:i a') }}</td>
-                                    <td>{{ $item->estatus }}</td>
+                                    <td>{{ $item->estatus_lab }}</td>
                                     <td>
                                         <a class="btn btn-xs btn-success text-white" target="_blank" href="{{ route('productos_stock.show', $item->id) }}">
                                             <i class="fa fa-file"></i> Ver

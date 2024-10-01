@@ -12,8 +12,8 @@ class LaboratoriosController extends Controller
 {
     public function index_nas(){
 
-        $bodegaPedidoRealizado = BodegaPedidos::where('estatus','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
-        $bodegaPedidoConfirmado = BodegaPedidos::where('estatus','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoRealizado = BodegaPedidos::where('estatus_lab','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoConfirmado = BodegaPedidos::where('estatus_lab','=','Finalizado')->orderBy('fecha_pedido','DESC')->get();
 
         return view('admin.laboratorio.index_nas', compact('bodegaPedidoRealizado','bodegaPedidoConfirmado'));
     }
@@ -38,6 +38,8 @@ class LaboratoriosController extends Controller
             $pedidoProducto = BodegaPedidosProductos::where('id_pedido', $id_pedido)
             ->where('id_producto', $ids_producto[$index])
             ->first();
+            $pedido->estatus = 'Confirmado';
+            $pedido->save();
             $producto = Products::where('id', $ids_producto[$index])->first();
                 // Verifica si hay datos previos en la cantidad entregada
                 if ($pedidoProducto) {
@@ -54,12 +56,12 @@ class LaboratoriosController extends Controller
                     $producto->save();
 
                     $productosPendientes = BodegaPedidosProductos::where('id_pedido', $id_pedido)
-                    ->where('cantidad_restante', '>', 0) // Busca productos con cantidad restante mayor a 0
+                    ->where('cantidad_entregada_lab', '>', 0) // Busca productos con cantidad restante mayor a 0
                     ->count(); // Cuenta los productos que aún tienen piezas pendientes
 
                     // Si no hay productos pendientes (cantidad_restante == 0), actualizar el estatus del pedido
                     if ($productosPendientes == 0) {
-                        $pedido->estatus = 'Confirmado';
+                        $pedido->estatus_lab = 'Finalizado';
                         $pedido->fecha_aprovado_lab = now();
                         $pedido->save();
                     }

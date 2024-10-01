@@ -112,6 +112,7 @@ class BodegaPedidosController extends Controller
         $firma->firma = $signature;
         $firma->fecha_aprovado = date("Y-m-d H:i:s");
         $firma->estatus = 'Aprobada';
+        $firma->estatus_lab = 'Aprobada';
         $firma->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
@@ -301,6 +302,7 @@ class BodegaPedidosController extends Controller
         $firma->firma = $signature;
         $firma->fecha_aprovado = date("Y-m-d H:i:s");
         $firma->estatus = 'Aprobada';
+        $firma->estatus_lab = 'Aprobada';
         $firma->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
