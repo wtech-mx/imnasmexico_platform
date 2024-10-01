@@ -121,11 +121,24 @@ class LaboratoriosController extends Controller
 
     }
 
+    public function index_productos_nas(){
+
+        $products = Products::where('laboratorio','=','NAS')->get();
+
+        return view('admin.laboratorio.index_productos',compact('products'));
+    }
+
     public function index_cosmica(){
 
-
-
         return view('admin.laboratorio.index_cosmica');
+
+    }
+
+    public function index_productos_cosmica(){
+
+        $products = Products::where('laboratorio','=','Cosmica')->get();
+
+        return view('admin.laboratorio.index_productos_cosmica',compact('products'));
 
     }
 

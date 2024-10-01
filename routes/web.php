@@ -235,9 +235,12 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/laboratorio/nas', [App\Http\Controllers\LaboratoriosController::class, 'index_nas'])->name('laboratorio.nas');
     Route::get('/laboratorio/cosmica', [App\Http\Controllers\LaboratoriosController::class, 'index_cosmica'])->name('laboratorio.cosmica');
+    Route::get('/laboratorio/nas/prodcutos', [App\Http\Controllers\LaboratoriosController::class, 'index_productos_nas'])->name('laboratorio_producto.nas');
+
 
     Route::get('/admin/ordenes/autorizados/{id}', [App\Http\Controllers\LaboratoriosController::class, 'show'])->name('productos_autorizado.show');
     Route::patch('/admin/ordenes/update/{id}', [App\Http\Controllers\LaboratoriosController::class, 'ordenes_lab_orden_update'])->name('ordenes_lab_update.update');
+    Route::get('/laboratorio/cosmica/prodcutos', [App\Http\Controllers\LaboratoriosController::class, 'index_productos_cosmica'])->name('laboratorio_producto.cosmica');
 
     // =============== M O D U L O  V E R I  F I C A R T R A N S F E R E N C I A S ===============================
     Route::get('/admin/comprobar_transferenciass', [App\Http\Controllers\VerificarTransferenciasController::class, 'index'])->name('trasnferencias.index');

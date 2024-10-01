@@ -42,6 +42,8 @@ class ProductsController extends Controller
         $product->precio_normal = $request->get('precio_normal');
         $product->imagenes = $request->get('imagenes');
         $product->stock = $request->get('stock');
+        $product->stock_nas = $request->get('stock_nas');
+        $product->stock_cosmica = $request->get('stock_cosmica');
 
         $product->update();
 
