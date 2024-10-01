@@ -239,7 +239,11 @@ Route::group(['middleware' => ['auth']], function() {
 
 
     Route::get('/admin/ordenes/autorizados/{id}', [App\Http\Controllers\LaboratoriosController::class, 'show'])->name('productos_autorizado.show');
+    Route::get('/cosmica/admin/ordenes/autorizados/{id}', [App\Http\Controllers\LaboratoriosController::class, 'show_cosmica'])->name('productos_autorizado.show_cosmica');
+
     Route::patch('/admin/ordenes/update/{id}', [App\Http\Controllers\LaboratoriosController::class, 'ordenes_lab_orden_update'])->name('ordenes_lab_update.update');
+    Route::patch('/cosmica/admin/ordenes/update/{id}', [App\Http\Controllers\LaboratoriosController::class, 'cosmica_ordenes_lab_orden_update'])->name('cosmica_ordenes_lab_update.update');
+
     Route::get('/laboratorio/cosmica/prodcutos', [App\Http\Controllers\LaboratoriosController::class, 'index_productos_cosmica'])->name('laboratorio_producto.cosmica');
 
     // =============== M O D U L O  V E R I  F I C A R T R A N S F E R E N C I A S ===============================

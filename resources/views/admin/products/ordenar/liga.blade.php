@@ -73,7 +73,7 @@
             <div class="row">
                 <div class="col-12 mt-3">
                     <h2 class="">
-                        Aprobar pedido para laboratorio
+                        Aprobar pedido para laboratorio NAS
                     </h2>
                     <hr>
 

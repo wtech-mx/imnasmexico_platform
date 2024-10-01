@@ -40,7 +40,6 @@
                             <th>Foto</th>
                             <th>Nombre</th>
                             <th>Precio Normal</th>
-                            <th>Categoria</th>
                             <th>Stock</th>
                             <th>Acciones</th>
                         </tr>
@@ -55,7 +54,6 @@
                         <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
                         <td>{{ $product->nombre }}</td>
                         <td>${{ $precio_normal }}</td>
-                        <td>{{ $product->categoria }}</td>
                         <td>{{ $product->stock_nas }}</td>
                         <td>
                             @can('productos-edit')
