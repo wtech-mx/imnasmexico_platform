@@ -35,9 +35,8 @@ Productos Autorizadoa
                                         <div class="row producto-item" id="producto_{{ $productos->id }}" style="">
                                             <input type="hidden" name="id_pedido[]" value="{{ $productos->id_pedido }}">
                                             <input type="hidden" name="id_producto[]" value="{{ $productos->id_producto }}">
-                                            <input type="hidden" name="eliminar_producto[]" value="0" id="eliminar_producto_{{ $productos->id }}">
 
-                                            <div class="form-group col-3">
+                                            <div class="form-group col-12">
                                                 <label>Nombre</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
@@ -53,7 +52,7 @@ Productos Autorizadoa
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/almacenamiento.png') }}" alt="" width="35px">
                                                     </span>
-                                                    <input type="number" class="form-control" value="{{ $productos->Products->stock }}" disabled>
+                                                    <input type="number" id="stock_nas[]" name="stock_nas[]" class="form-control" value="{{ $productos->Products->stock_nas }}" readonly>
                                                 </div>
                                             </div>
 
@@ -73,7 +72,7 @@ Productos Autorizadoa
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/limpieza.png') }}" alt="" width="35px">
                                                     </span>
-                                                    <input type="number" id="cantidad_entregada_lab[]" name="cantidad_entregada_lab[]" value="{{ $productos->cantidad_entregada_lab }}" class="form-control" >
+                                                    <input type="number" id="cantidad_entrega[]" name="cantidad_entrega[]" class="form-control" >
                                                 </div>
                                             </div>
 
@@ -83,37 +82,9 @@ Productos Autorizadoa
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/paquete-o-empaquetar.png') }}" alt="" width="35px">
                                                     </span>
-                                                    <input type="number" class="form-control" value="{{ $productos->cantidad_restante }}" readonly>
+                                                    <input type="number" id="cantidad_entregada_lab[]" name="cantidad_entregada_lab[]" class="form-control" value="{{ $productos->cantidad_entregada_lab }}" readonly>
                                                 </div>
                                             </div>
-
-                                            @if ($pedido->estatus != 'Finalizada')
-                                                <div class="form-group col-3 mb-5">
-                                                    <label>Cantidad recibida</label>
-                                                    <div class="input-group mb-3">
-                                                        <span class="input-group-text" id="basic-addon1">
-                                                            <img src="{{ asset('assets/user/icons/cajas-de-carga-de-trabajador.png') }}" alt="" width="35px">
-                                                        </span>
-                                                        @if ($pedido->estatus == 'Realizado')
-                                                            <input type="text" id="cantidad_recibido[]" name="cantidad_recibido[]" class="form-control" readonly>
-                                                        @else
-                                                            <input type="text" id="cantidad_recibido[]" name="cantidad_recibido[]" class="form-control" readonly>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            @endif
-
-                                            {{-- @if ($pedido->estatus == 'Realizado')
-                                                <div class="form-group col-1 mb-5">
-                                                    <h4 for="name">-</h4>
-                                                    <div class="input-group mb-3">
-                                                        <button type="button" class="btn btn-danger btn-sm eliminarCampo3" data-id="{{ $productos->id }}">
-                                                            <i class="fa fa-trash" aria-hidden="true"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            @endif --}}
-
                                         </div>
                                     @endforeach
                                 </div>
