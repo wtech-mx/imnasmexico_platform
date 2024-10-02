@@ -109,7 +109,7 @@ Productos solicitados Cosmica
                                                 </div>
                                             @endif
 
-                                            @if ($pedido->estatus != 'Finalizado')
+                                            @if ($pedido->estatus != 'Finalizada')
                                                 <div class="form-group col-2">
                                                     <label>Cantidad recibida</label>
                                                     <div class="input-group mb-3">
@@ -140,7 +140,7 @@ Productos solicitados Cosmica
                                 </div>
 
                             </div>
-                            @if ($pedido->estatus != 'Finalizado')
+                            @if ($pedido->estatus != 'Finalizada')
                                 <div class="modal-footer">
                                     <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                 </div>
