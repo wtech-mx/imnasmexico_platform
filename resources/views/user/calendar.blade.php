@@ -191,7 +191,7 @@
                 </form>
 
             </div>
-        </div>  
+        </div>
 
         <!-- Spinner de carga -->
         <div id="spinner" style="display:none;">
