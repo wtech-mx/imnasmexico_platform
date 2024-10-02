@@ -56,7 +56,7 @@
 
 </style>
 
-<div class="row" style="background-color: #66C0CC">
+<div class="row" style="background-color: #66C0CC" id="afiliados">
     <div class="col-12 m-auto">
         <h1 class="text-white text-center titulo mt-5 mb-5" style="">Conocer Nuestros Afiliados </h1>
         <p class="text-center " style="color:#000!important;">

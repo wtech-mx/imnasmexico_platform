@@ -64,9 +64,19 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-evenly mt-5">
+                <a href="#afiliados" class="btn btn-outline-info">Ver Afiliados</a>
+                <a href="#login" class="btn btn-outline-info">Iniciar Sesión</a>
+                <a href="#registro" class="btn btn-outline-info">¿Qué es el Registro Nacional de Certificación?</a>
+            </div>
+        </div>
+    </div>
+
     @yield('content')
 
-    <div class="page-header min-vh-100" style="background-image: url('{{asset('assets/user/utilidades/portada_cam.webp')}}');">
+    <div id="login" class="page-header min-vh-100" style="background-image: url('{{asset('assets/user/utilidades/portada_cam.webp')}}');">
         <span class="mask  opacity-6" style="background-image: linear-gradient(310deg, #66C0CC 0%, #373e3b 100%) !important;"></span>
         <div class="container">
           <div class="row justify-content-center">
@@ -123,7 +133,7 @@
     </div>
 
 
-    <div class="row">
+    <div class="row" id="registro">
         <div class="col-12 m-auto">
             <h1 class="text-white text-center titulo mt-5 " style="color:#000!important;">Una Plataforma innovadora </h1>
             <p class="text-center " style="color:#000!important;">
