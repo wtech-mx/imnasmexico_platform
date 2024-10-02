@@ -48,9 +48,9 @@
 @section('content_dinamico')
 
 <style>
-    .image-container {
+.image-container {
     width: 100%;
-    height: 200px; /* Ajusta la altura según lo necesites */
+    height: 270px; /* Ajusta la altura según lo necesites */
     overflow: hidden;
 }
 
