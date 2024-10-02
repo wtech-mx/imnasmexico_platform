@@ -237,6 +237,7 @@ class BodegaPedidosController extends Controller
             $pedido_productos->cantidad_pedido = $item['cantidad']; // Cambiado a acceder por índice de array
             $pedido_productos->stock_anterior = $item['stock']; // Cambiado a acceder por índice de array
             $pedido_productos->cantidad_restante = $item['cantidad']; // Cambiado a acceder por índice de array
+            $pedido_productos->cantidad_entregada_lab = $item['cantidad'];
             $pedido_productos->save();
         }
 

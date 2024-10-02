@@ -86,8 +86,8 @@ class LaboratoriosController extends Controller
 
     public function index_cosmica(){
 
-        $bodegaPedidoRealizado = BodegaPedidosCosmica::where('estatus','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
-        $bodegaPedidoConfirmado = BodegaPedidosCosmica::where('estatus','=','Finalizado')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoRealizado = BodegaPedidosCosmica::where('estatus_lab','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoConfirmado = BodegaPedidosCosmica::where('estatus_lab','=','Finalizado')->orderBy('fecha_pedido','DESC')->get();
 
         return view('admin.laboratorio.index_cosmica',compact('bodegaPedidoRealizado','bodegaPedidoConfirmado'));
     }
@@ -137,7 +137,7 @@ class LaboratoriosController extends Controller
 
                     // Si no hay productos pendientes (cantidad_restante == 0), actualizar el estatus del pedido
                     if ($productosPendientes == 0) {
-                        $pedido->estatus = 'Finalizado';
+                        $pedido->estatus_lab = 'Finalizado';
                         $pedido->fecha_aprovado_lab = now();
                         $pedido->save();
                     }

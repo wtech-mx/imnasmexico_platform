@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('bodega_pedidos_cosmica', function (Blueprint $table) {
             $table->text('estatus_lab')->nullable();
+            $table->text('fecha_aprovado_lab')->nullable();
         });
     }
 

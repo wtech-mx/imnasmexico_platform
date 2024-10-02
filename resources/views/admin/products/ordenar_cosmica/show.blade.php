@@ -31,7 +31,7 @@ Productos solicitados Cosmica
                                     @if ($pedido->estatus != 'Realizado')
                                         <div class="col-3">
                                             <br>
-                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $pedido->id) }}">
+                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock_cosmica.imprimir', $pedido->id) }}">
                                                 <i class="fa fa-file"></i> Descargar PDF
                                             </a>
                                         </div>
@@ -39,7 +39,7 @@ Productos solicitados Cosmica
 
                                     <div class="col-3">
                                         <br>
-                                        <a class="btn my-auto btn-success text-white" target="_blank" href="{{ route('ordenes_nas.firma', $pedido->id) }}">
+                                        <a class="btn my-auto btn-success text-white" target="_blank" href="{{ route('ordenes_cosmica.firma', $pedido->id) }}">
                                             <i class="fa fa-file"></i> Liga para aprobar
                                         </a>
                                     </div>
