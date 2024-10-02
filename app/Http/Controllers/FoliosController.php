@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DocumenotsGenerador;
 use App\Models\OrdersTickets;
+use App\Models\Orders;
 use Illuminate\Http\Request;
 use App\Models\Tipodocumentos;
 use App\Models\RegistroImnas;
@@ -20,7 +21,9 @@ class FoliosController extends Controller
 
     public function index_registro(){
 
-        return view('cam.auth.login');
+        $registros_imnas = Orders::where('registro_imnas', '=', '1')->get();
+
+        return view('cam.auth.login',compact('registros_imnas'));
     }
 
     public function buscador(Request $request){
@@ -46,7 +49,10 @@ class FoliosController extends Controller
 
             $folio = $request->get('folio');
 
-        return view('user.folio',compact('tickets', 'folio', 'tickets_generador','tickets_externo'));
+            $registros_imnas = Orders::where('registro_imnas', '=', '1')->get();
+
+
+        return view('user.folio',compact('tickets', 'folio', 'tickets_generador','tickets_externo','registros_imnas'));
     }
 
     public function buscador_registro(Request $request){
@@ -69,10 +75,10 @@ class FoliosController extends Controller
 
             }
 
-
         $folio = $request->get('folio');
+        $registros_imnas = Orders::where('registro_imnas', '=', '1')->get();
 
-        return view('admin.registro_imnas.resultado_registro',compact('tickets', 'folio', 'tickets_generador','tickets_externo'));
+        return view('admin.registro_imnas.resultado_registro',compact('tickets', 'folio', 'tickets_generador','tickets_externo','registros_imnas'));
     }
 
 

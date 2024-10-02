@@ -43,3 +43,61 @@
 </div>
 
 @endsection
+
+
+@section('content_dinamico')
+
+<div class="row" style="background-color: #66C0CC">
+    <div class="col-12 m-auto">
+        <h1 class="text-white text-center titulo mt-5 mb-5" style="">Conocer Nuestros Afiliados </h1>
+        <p class="text-center " style="color:#000!important;">
+
+        </p>
+
+        <div class="row">
+            @foreach ($registros_imnas as $item)
+
+            <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-3">
+
+                <div class="card p-3 m-4" style="box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);">
+
+                    <div id="carouselExampleIndicators" class="carousel slide">
+
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <p class="text-center">
+                                <img src="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->logo) }}" class="d-block w-100" alt="...">
+                            </p>
+                          </div>
+                        </div>
+
+                    </div>
+
+                    <p class="text-center">
+                        {{ $item->User->escuela }}
+                    </p>
+
+                    <div class="d-flex justify-content-center">
+                        <a target="_blank" href=" {{ $item->User->facebook }}" class="mt-2 mb-2" style="margin-left: 1rem;">
+                            <img src="{{asset('assets/user/utilidades/facebook.png') }}" style="width:25px">
+                        </a>
+                        <a target="_blank" href=" {{ $item->User->instagram }}" class="mt-2 mb-2" style="margin-left: 1rem;">
+                            <img src="{{asset('assets/user/utilidades/instagram.png') }}" style="width:25px">
+                        </a>
+                        <a target="_blank" href="https://api.whatsapp.com/send?phone=521{{ $item->User->celular_casa }}&text=Hola" class="mt-2 mb-2" style="margin-left: 1rem;">
+                            <img src="{{asset('assets/user/utilidades/whatsapp.png') }}" style="width:25px">
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+
+            @endforeach
+        </div>
+
+    </div>
+</div>
+
+@endsection
+

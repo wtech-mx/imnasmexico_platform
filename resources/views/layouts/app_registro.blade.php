@@ -147,8 +147,8 @@
                 <strong>4. *Búsqueda Manual:* </strong> <br> Además del escaneo del QR, también puedes ingresar el código de certificación en nuestro sitio web para verificar la validez del documento. <br>
             </p>
 
-            <h1 class="text-white text-center titulo mt-5 " style="color:#fff!important;">¿Por Qué es Importante?</h1>
-            <p class="text-center " style="color:#fff!important;">
+            <h1 class="text-white text-center titulo mt-5 " style="color:#000!important;">¿Por Qué es Importante?</h1>
+            <p class="text-center " style="color:#000!important;">
                 El Registro Nacional de Certificación IMNAS asegura que cada documento emitido bajo nuestro aval es genuino y ha sido otorgado de acuerdo con los más altos estándares educativos. Esto protege tanto a los titulares de los certificados como a las instituciones que confían en estas acreditaciones, asegurando la integridad del proceso de certificación.
                 <br><br>
                 Gracias a este sistema, garantizamos que los certificados emitidos son reconocidos no solo a nivel nacional sino también internacionalmente, brindando una herramienta poderosa para todos aquellos que buscan la validación de sus competencias y habilidades en un entorno cada vez más exigente y globalizado.
@@ -156,6 +156,8 @@
         </div>
 
     </div>
+
+    @yield('content_dinamico')
 
   </section>
 
