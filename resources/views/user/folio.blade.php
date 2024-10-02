@@ -71,7 +71,7 @@
 
         <div class="row">
             @foreach ($registros_imnas as $item)
-            <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-3">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-3">
                 <div class="card p-3 m-4" style="box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);">
                     <p class="text-center">
                         <div class="image-container">
