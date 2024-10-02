@@ -64,14 +64,26 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-12">
-            <div class="d-flex justify-content-evenly mt-5">
-                <a href="#afiliados" class="btn btn-outline-info">Ver Afiliados</a>
-                <a href="#login" class="btn btn-outline-info">Iniciar Sesión</a>
-                <a href="#registro" class="btn btn-outline-info">¿Qué es el Registro Nacional de Certificación?</a>
-            </div>
+    <div class="row mt-5">
+
+        <div class="col-6 col-sm-6 col-md-4 col-lg-4 m-auto">
+            <p class="text-center">
+                <a href="#afiliados" class=" btn btn-outline-info">Ver Afiliados</a>
+            </p>
         </div>
+
+        <div class="col-6 col-sm-6 col-md-4 col-lg-4 m-auto">
+            <p class="text-center">
+                <a href="#login" class="text-center btn btn-outline-info">Iniciar Sesión</a>
+            </p>
+        </div>
+
+        <div class="col-6 col-sm-6 col-md-4 col-lg-4 m-auto">
+            <p class="text-center">
+                <a href="#registro" class="text-center btn btn-outline-info">¿Qué es el Registro Nacional de Certificación?</a>
+            </p>
+        </div>
+
     </div>
 
     @yield('content')
