@@ -192,7 +192,7 @@ class BodegaPedidosController extends Controller
 
                     // Si no hay productos pendientes (cantidad_restante == 0), actualizar el estatus del pedido
                     if ($productosPendientes == 0) {
-                        $pedido->estatus = 'Finalizada';
+                        $pedido->estatus = 'Finalizado';
                         $pedido->fecha_recibido = now();
                         $pedido->save();
                     }
@@ -386,7 +386,7 @@ class BodegaPedidosController extends Controller
 
                     // Si no hay productos pendientes (cantidad_restante == 0), actualizar el estatus del pedido
                     if ($productosPendientes == 0) {
-                        $pedido->estatus = 'Finalizada';
+                        $pedido->estatus = 'Finalizado';
                         $pedido->fecha_recibido = now();
                         $pedido->save();
                     }
