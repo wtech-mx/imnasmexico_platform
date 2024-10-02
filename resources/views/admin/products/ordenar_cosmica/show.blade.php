@@ -99,7 +99,7 @@ Productos solicitados Cosmica
 
                                             @if ($pedido->estatus == 'Confirmado')
                                                 <div class="form-group col-2">
-                                                    <label>Laboratorio Envia</label>
+                                                    <label>Laboratorio Restantes</label>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <img src="{{ asset('assets/user/icons/limpieza.png') }}" alt="" width="35px">

@@ -21,5 +21,6 @@ class BodegaPedidosCosmica extends Model
         'estatus',
         'firma',
         'id_user',
+        'estatus_lab',
     ];
 }

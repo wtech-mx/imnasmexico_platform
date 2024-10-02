@@ -42,6 +42,12 @@ Ordenes a laboratorio Cosmica
                   </button>
                 </li>
 
+                <li class="nav-item" role="presentation" style="margin-left: 1rem">
+                    <button class="btn btn-dark" id="pills-finalizado_lab-tab" data-bs-toggle="pill" data-bs-target="#pills-finalizado_lab" type="button" role="tab" aria-controls="pills-finalizado_lab" aria-selected="false">
+                      Finalizado y entregado
+                    </button>
+                </li>
+
             </ul>
 
               <div class="tab-content" id="pills-tabContent">
@@ -147,6 +153,42 @@ Ordenes a laboratorio Cosmica
 
                                         @if ($item->estatus != 'Realizado')
                                             <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock_cosmica.imprimir', $item->id) }}">
+                                                <i class="fa fa-file"></i> Descargar PDF
+                                            </a>
+                                        @endif
+
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-finalizado_lab" role="tabpanel" aria-labelledby="pills-finalizado_lab-tab" tabindex="0">
+                    <div class="table-responsive">
+                        <table class="table table-flush" id="datatable-search4">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Fecha de pedido</th>
+                                    <th>Fecha de confirmacion de Laboratorio</th>
+                                    <th>Estatus</th>
+                                    <th>Aciones</th>
+                                </tr>
+                            </thead>
+                            @foreach ($bodegaPedidoFinalizada as $item)
+                                <tr>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($item->fecha_pedido)->translatedFormat('d F Y h:i a') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($item->fecha_aprovado_lab)->translatedFormat('d F Y h:i a') }}</td>
+                                    <td>{{ $item->estatus }}</td>
+                                    <td>
+                                        <a class="btn btn-xs btn-success text-white" target="_blank" href="{{ route('productos_stock.show', $item->id) }}">
+                                            <i class="fa fa-file"></i> Ver Respuesta del Laboratorio
+                                        </a>
+
+                                        @if ($item->estatus != 'Realizado')
+                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $item->id) }}">
                                                 <i class="fa fa-file"></i> Descargar PDF
                                             </a>
                                         @endif

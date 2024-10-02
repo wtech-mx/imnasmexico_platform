@@ -72,9 +72,9 @@ class BodegaPedidosController extends Controller
         $bodegaPedidoRealizado = BodegaPedidos::where('estatus','=','Realizado')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoAprobado = BodegaPedidos::where('estatus','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoConfirmado = BodegaPedidos::where('estatus','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoFinalizada = BodegaPedidos::where('estatus','=','Finalizada')->orderBy('fecha_pedido','DESC')->get();
 
-
-        return view('admin.products.ordenar.index', compact('bodegaPedidoAprobado','bodegaPedidoRealizado','bodegaPedidoConfirmado'));
+        return view('admin.products.ordenar.index', compact('bodegaPedidoFinalizada','bodegaPedidoAprobado','bodegaPedidoRealizado','bodegaPedidoConfirmado'));
     }
 
     public function ordenes_nas_firma($id){
@@ -266,8 +266,9 @@ class BodegaPedidosController extends Controller
         $bodegaPedidoRealizado = BodegaPedidosCosmica::where('estatus','=','Realizado')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoAprobado = BodegaPedidosCosmica::where('estatus','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoConfirmado = BodegaPedidosCosmica::where('estatus','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoFinalizada = BodegaPedidosCosmica::where('estatus','=','Finalizada')->orderBy('fecha_pedido','DESC')->get();
 
-        return view('admin.products.ordenar_cosmica.index', compact('bodegaPedidoAprobado','bodegaPedidoRealizado','bodegaPedidoConfirmado'));
+        return view('admin.products.ordenar_cosmica.index', compact('bodegaPedidoFinalizada','bodegaPedidoAprobado','bodegaPedidoRealizado','bodegaPedidoConfirmado'));
     }
 
     public function ordenes_cosmica_firma($id){

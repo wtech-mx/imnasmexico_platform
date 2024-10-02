@@ -126,15 +126,16 @@ class LaboratoriosController extends Controller
                     $producto->save();
 
                     $productosPendientes = BodegaPedidosProductosCosmica::where('id_pedido', $id_pedido)
-                    ->where('cantidad_restante', '>', 0) // Busca productos con cantidad restante mayor a 0
+                    ->where('cantidad_entregada_lab', '>', 0) // Busca productos con cantidad restante mayor a 0
                     ->count(); // Cuenta los productos que aún tienen piezas pendientes
 
                     // Si no hay productos pendientes (cantidad_restante == 0), actualizar el estatus del pedido
                     if ($productosPendientes == 0) {
-                        $pedido->estatus = 'Confirmado';
+                        $pedido->estatus = 'Finalizado';
                         $pedido->fecha_aprovado_lab = now();
                         $pedido->save();
                     }
+
                 }
         }
 

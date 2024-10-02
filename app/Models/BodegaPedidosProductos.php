@@ -22,6 +22,7 @@ class BodegaPedidosProductos extends Model
         'cantidad_liquidado',
         'fecha_recibido',
         'fecha_liquidado',
+        'cantidad_entregada_lab',
     ];
 
     public function BodegaPedidos(){

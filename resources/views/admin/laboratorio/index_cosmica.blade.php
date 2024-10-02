@@ -54,7 +54,7 @@
                                 <tr>
                                     <td>{{ $item->id }}</td>
                                     <td>{{ \Carbon\Carbon::parse($item->fecha_pedido)->translatedFormat('d F Y h:i a') }}</td>
-                                    <td>{{ $item->estatus }}</td>
+                                    <td>{{ $item->estatus_lab }}</td>
                                     <td>
                                         <a class="btn btn-xs btn-primary text-white" target="_blank" href="{{ route('productos_autorizado.show_cosmica', $item->id) }}">
                                             <i class="fa fa-file"></i> Ver Pedido
@@ -83,13 +83,13 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ \Carbon\Carbon::parse($item->fecha_pedido)->translatedFormat('d F Y h:i a') }}</td>
                                     <td>{{ \Carbon\Carbon::parse($item->fecha_aprovado_lab)->translatedFormat('d F Y h:i a') }}</td>
-                                    <td>{{ $item->estatus }}</td>
+                                    <td>{{ $item->estatus_lab }}</td>
                                     <td>
                                         <a class="btn btn-xs btn-success text-white" target="_blank" href="{{ route('productos_stock.show', $item->id) }}">
                                             <i class="fa fa-file"></i> Ver
                                         </a>
 
-                                        @if ($item->estatus != 'Realizado')
+                                        @if ($item->estatus_lab != 'Realizado')
                                             <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $item->id) }}">
                                                 <i class="fa fa-file"></i> Descargar PDF
                                             </a>
