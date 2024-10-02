@@ -183,12 +183,12 @@ Ordenes a laboratorio Cosmica
                                     <td>{{ \Carbon\Carbon::parse($item->fecha_aprovado_lab)->translatedFormat('d F Y h:i a') }}</td>
                                     <td>{{ $item->estatus }}</td>
                                     <td>
-                                        <a class="btn btn-xs btn-success text-white" target="_blank" href="{{ route('productos_stock.show', $item->id) }}">
+                                        <a class="btn btn-xs btn-success text-white" target="_blank" href="{{ route('productos_stock_cosmica.show', $item->id) }}">
                                             <i class="fa fa-file"></i> Ver Respuesta del Laboratorio
                                         </a>
 
                                         @if ($item->estatus != 'Realizado')
-                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $item->id) }}">
+                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock_cosmica.imprimir', $item->id) }}">
                                                 <i class="fa fa-file"></i> Descargar PDF
                                             </a>
                                         @endif
@@ -224,6 +224,12 @@ Ordenes a laboratorio Cosmica
     });
 
     const dataTableSearch3 = new simpleDatatables.DataTable("#datatable-search3", {
+        deferRender:true,
+        paging: true,
+        pageLength: 10
+    });
+
+    const dataTableSearch4 = new simpleDatatables.DataTable("#datatable-search4", {
         deferRender:true,
         paging: true,
         pageLength: 10

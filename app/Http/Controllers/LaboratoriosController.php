@@ -40,8 +40,10 @@ class LaboratoriosController extends Controller
             $pedidoProducto = BodegaPedidosProductos::where('id_pedido', $id_pedido)
             ->where('id_producto', $ids_producto[$index])
             ->first();
+
             $pedido->estatus = 'Confirmado';
             $pedido->save();
+
             $producto = Products::where('id', $ids_producto[$index])->first();
                 // Verifica si hay datos previos en la cantidad entregada
                 if ($pedidoProducto) {
@@ -85,7 +87,7 @@ class LaboratoriosController extends Controller
     public function index_cosmica(){
 
         $bodegaPedidoRealizado = BodegaPedidosCosmica::where('estatus','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
-        $bodegaPedidoConfirmado = BodegaPedidosCosmica::where('estatus','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoConfirmado = BodegaPedidosCosmica::where('estatus','=','Finalizado')->orderBy('fecha_pedido','DESC')->get();
 
         return view('admin.laboratorio.index_cosmica',compact('bodegaPedidoRealizado','bodegaPedidoConfirmado'));
     }
@@ -102,7 +104,7 @@ class LaboratoriosController extends Controller
         $ids_pedido = $request->input('id_pedido');
         $ids_producto = $request->input('id_producto');
         $cantidades_recibido = $request->input('cantidad_entrega');
-        $stock_nas = $request->input('stock_nas');
+        $stock_cosmica = $request->input('stock_cosmica');
         $restantes = 0;
         $stock_actualizado = 0;
         $pedido = BodegaPedidosCosmica::where('id', $id)->first();
@@ -110,6 +112,10 @@ class LaboratoriosController extends Controller
             $pedidoProducto = BodegaPedidosProductosCosmica::where('id_pedido', $id_pedido)
             ->where('id_producto', $ids_producto[$index])
             ->first();
+
+            $pedido->estatus = 'Confirmado';
+            $pedido->save();
+
             $producto = Products::where('id', $ids_producto[$index])->first();
                 // Verifica si hay datos previos en la cantidad entregada
                 if ($pedidoProducto) {
@@ -117,12 +123,12 @@ class LaboratoriosController extends Controller
                     $cantidad_entregada_actual = $pedidoProducto->cantidad_entregada_lab ?? 0;
                     // Sumar la nueva cantidad entregada con la cantidad que ya había sido registrada
                     $restantes = $cantidad_entregada_actual - $cantidades_recibido[$index];
-                    $stock_actualizado = $stock_nas[$index] - $cantidades_recibido[$index];
+                    $stock_actualizado = $stock_cosmica[$index] - $cantidades_recibido[$index];
 
                     $pedidoProducto->cantidad_entregada_lab = $restantes;
                     $pedidoProducto->save();
 
-                    $producto->stock_nas = $stock_actualizado;
+                    $producto->stock_cosmica = $stock_actualizado;
                     $producto->save();
 
                     $productosPendientes = BodegaPedidosProductosCosmica::where('id_pedido', $id_pedido)

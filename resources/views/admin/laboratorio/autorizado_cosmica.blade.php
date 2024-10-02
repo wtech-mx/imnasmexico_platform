@@ -16,7 +16,7 @@ Productos Autorizadoa Cosmica
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h2>Productos Autorizados NAS</h2>
+                                        <h2>Productos Autorizados Cosmica</h2>
                                     </div>
                                     <div class="form-group col-6">
                                         <label for="name">Fecha</label>

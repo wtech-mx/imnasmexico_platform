@@ -64,7 +64,7 @@ Productos solicitados Cosmica
                                             </div>
 
                                             <div class="form-group col-2">
-                                                <label>Stock Actual</label>
+                                                <label>Stock Actuals</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/almacenamiento.png') }}" alt="" width="35px">
