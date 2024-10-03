@@ -121,7 +121,7 @@
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#pageLabNas" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pageLabNas" role="button" aria-expanded="false">
                 <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-                    <i class="fa fa-ticket text-sm opacity-10" style="color:#DABA7E"></i>
+                    <i class="fa fa-flask text-sm opacity-10" style="color:#DABA7E"></i>
                 </div>
                 <span class="nav-link-text ms-1">Labora NAS</span>
                 </a>
@@ -131,14 +131,14 @@
 
                             <a class="nav-link {{ (Request::is('laboratorio/nas/*') ? 'active' : '') }}" href="{{ route('laboratorio.nas') }}">
                                 <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-ticket text-sm opacity-10" style="color:#DABA7E"></i>
+                                    <i class="fa fa-file text-sm opacity-10" style="color:#DABA7E"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Pedidos</span>
                             </a>
 
                             <a class="nav-link {{ (Request::is('admin/productos/stock') ? 'active' : '') }}" href="{{ route('laboratorio_producto.nas') }}">
                                 <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-ticket text-sm opacity-10" style="color:#DABA7E"></i>
+                                    <i class="fa fa-cubes text-sm opacity-10" style="color:#DABA7E"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Stock</span>
                             </a>
@@ -151,7 +151,7 @@
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#pagaLabCosmica" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pagaLabCosmica" role="button" aria-expanded="false">
                 <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-                    <i class="fa fa-ticket text-sm opacity-10" style="color:#000"></i>
+                    <i class="fa fa-flask text-sm opacity-10" style="color:#000"></i>
                 </div>
                 <span class="nav-link-text ms-1">Labora Cosmica</span>
                 </a>
@@ -161,14 +161,14 @@
 
                             <a class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" href="{{ route('laboratorio.cosmica') }}">
                                 <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-ticket text-sm opacity-10" style="color:#000"></i>
+                                    <i class="fa fa-file text-sm opacity-10" style="color:#000"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Pedidos</span>
                             </a>
 
                             <a class="nav-link {{ (Request::is('admin/productos/stock') ? 'active' : '') }}" href="{{ route('laboratorio_producto.cosmica') }}">
                                 <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-ticket text-sm opacity-10" style="color:#000"></i>
+                                    <i class="fa fa-cubes text-sm opacity-10" style="color:#000"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Stock</span>
                             </a>
@@ -178,24 +178,28 @@
                 </div>
             </li>
 
+            @can('reportes-ventas')
+                <li class="nav-item">
+                    <a class="nav-link {{ (Request::is('reporte/ventas') ? 'active' : '') }}" href="{{ route('reporte_ventas.index') }}">
+                        <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-area-chart text-sm opacity-10" style="color: #e6b449"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Reporte Ventas</span>
+                    </a>
+                </li>
+            @endcan
+
+
             <li class="nav-item">
                 <a data-bs-toggle="collapse" href="#pageBodega" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pageBodega" role="button" aria-expanded="false">
                 <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-                    <i class="fa fa-ticket text-sm opacity-10" style="color:#e6b449"></i>
+                    <i class="fa fa-industry text-sm opacity-10" style="color:#e6b449"></i>
                 </div>
                 <span class="nav-link-text ms-1">Bodega</span>
                 </a>
                 <div class="collapse " id="pageBodega">
                 <ul class="nav ms-4">
                     <li class="nav-item ">
-                        @can('reportes-ventas')
-                            <a class="nav-link {{ (Request::is('reporte/ventas') ? 'active' : '') }}" href="{{ route('reporte_ventas.index') }}">
-                                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-ticket text-sm opacity-10" style="color:#0d52a0"></i>
-                                </div>
-                                <span class="nav-link-text ms-1">Reporte Ventas</span>
-                            </a>
-                        @endcan
 
                         <a class="nav-link {{ (Request::is('bodega/preparacion') ? 'active' : '') }}" href="{{ route('index_preparacion.bodega') }}">
                             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
@@ -206,28 +210,28 @@
 
                         <a class="nav-link {{ (Request::is('admin/productos/stock') ? 'active' : '') }}" href="{{ route('productos_stock.index') }}">
                             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                <i class="fa fa-ticket text-sm opacity-10" style="color:#e6b449"></i>
+                                <i class="fa fa-pencil text-sm opacity-10" style="color:#e6b449"></i>
                             </div>
                             <span class="nav-link-text ms-1">Pedidos Lab NAS</span>
                         </a>
 
                         <a class="nav-link {{ (Request::is('admin/productos/stock/ordenes') ? 'active' : '') }}" href="{{ route('ordenes_nas.index') }}">
                             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                <i class="fa fa-ticket text-sm opacity-10" style="color:#e6b449"></i>
+                                <i class="fa fa-list text-sm opacity-10" style="color:#e6b449"></i>
                             </div>
                             <span class="nav-link-text ms-1">Historial P. NAS</span>
                         </a>
 
                         <a class="nav-link {{ (Request::is('cosmica/admin/productos/stock') ? 'active' : '') }}" href="{{ route('productos_stock_cosmica.index') }}">
                             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                <i class="fa fa-ticket text-sm opacity-10" style="color:#322338"></i>
+                                <i class="fa fa-pencil text-sm opacity-10" style="color:#322338"></i>
                             </div>
                             <span class="nav-link-text ms-1">Pedidos Lab Cosmi.</span>
                         </a>
 
                         <a class="nav-link {{ (Request::is('cosmica/admin/productos/stock/ordenes') ? 'active' : '') }}" href="{{ route('ordenes_cosmica.index') }}">
                             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                <i class="fa fa-ticket text-sm opacity-10" style="color:#322338"></i>
+                                <i class="fa fa-list text-sm opacity-10" style="color:#322338"></i>
                             </div>
                             <span class="nav-link-text ms-1">Historial P. Cosmi.</span>
                         </a>
@@ -240,7 +244,7 @@
             <li class="nav-item">
                 <a class="nav-link {{ (Request::is('/admin/certificaciones/webinar/*') ? 'active' : '') }}" href="{{ route('index.certificados_wbinar') }}" target="">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-home text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                        <i class="fa fa-certificate text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
                     </div>
                     <span class="nav-link-text ms-1">Certificacion Webinar</span>
                 </a>
