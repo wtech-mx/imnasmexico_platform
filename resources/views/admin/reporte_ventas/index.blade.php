@@ -61,28 +61,28 @@
 
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <button class="nav-link active" id="nav-cot-nas-tab" data-bs-toggle="tab" data-bs-target="#nav-cot-nas" type="button" role="tab" aria-controls="nav-cot-nas" aria-selected="false" >
-                                        Cotizaciones NAS <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
+                                    <button class="nav-link text-white active" id="nav-cot-nas-tab" data-bs-toggle="tab" data-bs-target="#nav-cot-nas" type="button" role="tab" aria-controls="nav-cot-nas" aria-selected="false"  style="background: #836262a3">
+                                        Cotizaciones NAS <img src="https://lh3.googleusercontent.com/d/1KpzCr4lID6U5foSXsNtQ4pXklupFAGz3=w800?authuser=0" alt="" width="45px">
                                     </button>
 
-                                    <button class="nav-link" id="nav-cot-cosmi-tab" data-bs-toggle="tab" data-bs-target="#nav-cot-cosmi" type="button" role="tab" aria-controls="nav-cot-cosmi" aria-selected="false">
-                                        Cotizaciones Cosmica <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
+                                    <button class="nav-link text-white" id="nav-cot-cosmi-tab" data-bs-toggle="tab" data-bs-target="#nav-cot-cosmi" type="button" role="tab" aria-controls="nav-cot-cosmi" aria-selected="false" style="background: #D486D6">
+                                        Cotizaciones Cosmica <img src="https://cosmicaskin.com/wp-content/uploads/2024/06/logo_recortado_cosmica.png" alt="" width="35px">
                                     </button>
 
-                                    <button class="nav-link" id="nav-tiendita-tab" data-bs-toggle="tab" data-bs-target="#nav-tiendita" type="button" role="tab" aria-controls="nav-tiendita" aria-selected="false">
-                                        Tiendita <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
+                                    <button class="nav-link text-white" id="nav-tiendita-tab" data-bs-toggle="tab" data-bs-target="#nav-tiendita" type="button" role="tab" aria-controls="nav-tiendita" aria-selected="false" style="background: #6ec7d1a3">
+                                        Tiendita <img src="{{ asset('assets/user/icons/marketplace.png') }}" alt="" width="35px">
                                     </button>
 
-                                    <button class="nav-link" id="nav-paradisus-tab" data-bs-toggle="tab" data-bs-target="#nav-paradisus" type="button" role="tab" aria-controls="nav-paradisus" aria-selected="false">
-                                        Paradisus <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
+                                    <button class="nav-link text-white" id="nav-paradisus-tab" data-bs-toggle="tab" data-bs-target="#nav-paradisus" type="button" role="tab" aria-controls="nav-paradisus" aria-selected="false" style="background: #EE96BA">
+                                        Paradisus <img src="https://paradisus.mx/assets/landing/paradisus.webp" alt="" width="45px">
                                     </button>
 
-                                    <button class="nav-link" id="nav-nas-online-tab" data-bs-toggle="tab" data-bs-target="#nav-nas-online" type="button" role="tab" aria-controls="nav-nas-online" aria-selected="false">
-                                        NAS Online  <img src="{{ asset('assets/cam/cerrar.png') }}" alt="" width="35px">
+                                    <button class="nav-link text-dark" id="nav-nas-online-tab" data-bs-toggle="tab" data-bs-target="#nav-nas-online" type="button" role="tab" aria-controls="nav-nas-online" aria-selected="false" style="background: #F5ECE4">
+                                        NAS Online  <img src="{{ asset('assets/user/icons/carrito-de-compras.png') }}" alt="" width="35px">
                                     </button>
 
-                                    <button class="nav-link" id="nav-cosmica-online-tab" data-bs-toggle="tab" data-bs-target="#nav-cosmica-online" type="button" role="tab" aria-controls="nav-cosmica-online" aria-selected="false">
-                                        Cosmica Online  <img src="{{ asset('assets/cam/cerrar.png') }}" alt="" width="35px">
+                                    <button class="nav-link text-white" id="nav-cosmica-online-tab" data-bs-toggle="tab" data-bs-target="#nav-cosmica-online" type="button" role="tab" aria-controls="nav-cosmica-online" aria-selected="false" style="background: #80486B">
+                                        Cosmica Online  <img src="{{ asset('assets/user/icons/carrito-de-compras.png') }}" alt="" width="35px">
                                     </button>
                                 </div>
                               </nav>
