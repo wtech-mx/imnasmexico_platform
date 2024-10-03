@@ -77,6 +77,12 @@ class LaboratoriosController extends Controller
 
     }
 
+    public function show_products_nas($id)
+    {
+        $product = Products::find($id);
+        return response()->json($product);
+    }
+
     public function index_productos_nas(){
 
         $products = Products::where('laboratorio','=','NAS')->get();
@@ -149,6 +155,13 @@ class LaboratoriosController extends Controller
         return redirect()->back()->with('success', 'Envio de correo exitoso.');
 
     }
+
+    public function show_products_cosmica($id)
+    {
+        $product = Products::find($id);
+        return response()->json($product);
+    }
+
 
     public function index_productos_cosmica(){
 

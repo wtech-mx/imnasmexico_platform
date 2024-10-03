@@ -16,6 +16,13 @@ class ProductsController extends Controller
         return view('admin.products.index', compact('products'));
     }
 
+    public function show($id)
+    {
+        $product = Products::find($id);
+        return response()->json($product);
+    }
+
+
     public function store(Request $request)
     {
 
@@ -47,8 +54,18 @@ class ProductsController extends Controller
 
         $product->update();
 
-        Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->back()->with('success', 'Envio de correo exitoso.');
+        return response()->json([
+            'id' => $product->id,
+            'imagenes' => $product->imagenes,
+            'nombre' => $product->nombre,
+            'precio_normal' => $product->precio_normal,
+            'stock' => $product->stock,
+            'stock_nas' => $product->stock_nas,
+            'stock_cosmica' => $product->stock_cosmica,
+        ]);
+
+        // Session::flash('success', 'Se ha guardado sus datos con exito');
+        // return redirect()->back()->with('success', 'Envio de correo exitoso.');
 
     }
 
