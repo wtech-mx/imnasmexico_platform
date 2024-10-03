@@ -16,7 +16,10 @@ class FoliosController extends Controller
 {
     public function index(){
 
-        return view('cam.auth.login');
+        $registros_imnas = Orders::where('registro_imnas', '=', '1')->Orderby('id','ASC')->get();
+
+
+        return view('cam.auth.login',compact('registros_imnas'));
     }
 
     public function index_registro(){
