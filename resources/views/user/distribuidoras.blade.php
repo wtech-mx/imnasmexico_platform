@@ -18,13 +18,13 @@
     <span class="" style="position: absolute;background-size: cover;background-position: center center;top: 0;left: 0;width: 100%;height: 100%;opacity: 0.6;background-color: #2D2034!important"></span>
     <div class="row margin_home_nav ">
 
-        <div class="col-12 col-sm-12 col-md-6 index_superior">
+        <div class="col-12 col-sm-12 col-md-4 index_superior my-auto">
            <p class="text-center">
             <img class="img_reality" src="{{asset('assets/user/utilidades/rating.png') }}">
            </p>
         </div>
 
-        <div class="col-12 col-sm-12 col-md-6 index_superior">
+        <div class="col-12 col-sm-12 col-md-8 index_superior my-auto">
             <h1 class="text-white titulo space_title_instalaciones space_tiitle_slide" style="">
                 ¡Conoce a Nuestras Distribuidoras Autorizadas!
             </h1>
