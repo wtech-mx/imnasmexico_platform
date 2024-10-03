@@ -32,7 +32,7 @@
 
 @media only screen and (max-width: 1000px) {
     .image_cosmika{
-       width: 55%;
+       width: 60%;
 }
 
 }
@@ -93,10 +93,10 @@
           </li>
 
 
-          <li class="nav-item">
+          <li class="nav-item" style="width: 200px;">
             <a class="nav-link nav_link_custom "  href="https://cosmicaskin.com/about/ ">¿Quienes Somos?</a>
           </li>
-{{-- 
+{{--
           <li class="nav-item">
             <a class="nav-link nav_link_custom" target="" href="https://cosmicaskin.com/workshop/">Workshop</a>
           </li> --}}

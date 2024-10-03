@@ -184,7 +184,7 @@
                         <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                             <i class="fa fa-area-chart text-sm opacity-10" style="color: #e6b449"></i>
                         </div>
-                        <span class="nav-link-text ms-1">Reporte Ventas</span>
+                        <span class="nav-link-text ms-1">Ventas Gloabales</span>
                     </a>
                 </li>
             @endcan
