@@ -96,10 +96,10 @@
           <li class="nav-item">
             <a class="nav-link nav_link_custom "  href="https://cosmicaskin.com/about/ ">¿Quienes Somos?</a>
           </li>
-
+{{-- 
           <li class="nav-item">
             <a class="nav-link nav_link_custom" target="" href="https://cosmicaskin.com/workshop/">Workshop</a>
-          </li>
+          </li> --}}
 
           <a class="navbar-brand" href="{{ route('user.home') }}">
             <img src="{{asset('assets/user/logotipos/cosmica.png')}}" class="image_cosmika d-inline-block align-text-top" style="">
