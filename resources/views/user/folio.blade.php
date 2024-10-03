@@ -48,17 +48,17 @@
 @section('content_dinamico')
 
 <style>
-.image-container {
-    width: 100%;
-    height: 270px; /* Ajusta la altura según lo necesites */
-    overflow: hidden;
-}
+    .image-container {
+        width: 100%;
+        height: 270px; /* Ajusta la altura según lo necesites */
+        overflow: hidden;
+    }
 
-.image-fit {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Hace que la imagen ocupe todo el contenedor y mantenga su proporción */
-}
+    .image-fit {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Hace que la imagen ocupe todo el contenedor y mantenga su proporción */
+    }
 
 </style>
 
@@ -75,11 +75,23 @@
                 <div class="card p-3 m-4" style="box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);">
                     <p class="text-center">
                         <div class="image-container">
-                            <img src="{{ asset('documentos/' . $item->User->telefono . '/' . $item->User->logo) }}" class="image-fit">
+
+                            @if($item->User->escuela == NULL)
+                                <img src="https://plataforma.imnasmexico.com/assets/user/logotipos/registro_nacional.png" class="image-fit">
+                            @else
+                                <img src="{{ asset('documentos/' . $item->User->telefono . '/' . $item->User->logo) }}" class="image-fit">
+                            @endif
+
                         </div>
                     </p>
                     <p class="text-center">
-                        {{ $item->User->escuela }}
+
+                        @if($item->User->escuela == NULL)
+                            {{ $item->User->name }}
+                        @else
+                            {{ $item->User->escuela }}
+                        @endif
+
                     </p>
                     <div class="d-flex justify-content-center">
                         <a target="_blank" href="{{ $item->User->facebook }}" class="mt-2 mb-2" style="margin-left: 1rem;">
