@@ -475,4 +475,25 @@ class NotasProductosController extends Controller
         // Redirecciona o responde según tus necesidades
         return redirect()->back()->with('success', 'La nota se eliminó correctamente');
     }
+
+    public function update_estatus(Request $request, $id){
+        $nota = NotasProductos::findOrFail($id);
+        $nota->estatus_cotizacion  = $request->get('estatus_cotizacion');
+
+        if($nota->estatus_cotizacion != 'Cancelada'){
+            $producto = ProductosNotasId::where('id_notas_productos', $id)->get();
+            foreach ($producto as $campo) {
+                $resta = 0;
+                $producto = Products::where('nombre', $campo->producto)->first();
+                $resta = $producto->stock + $campo->cantidad;
+                $producto->stock = $resta;
+                $producto->update();
+            }
+        }
+        $nota->save();
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back()->with('success', 'Se ha actualizada');
+
+    }
 }

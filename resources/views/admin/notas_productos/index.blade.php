@@ -102,7 +102,11 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($notas as $nota)
+                                        @if ($nota->estatus_cotizacion == 'Cancelar')
+                                        <tr style="background: #9b00009c">
+                                        @else
                                         <tr>
+                                        @endif
                                             <td>
                                                 <h5>
                                                     @if ($nota->folio == null)
@@ -123,11 +127,14 @@
                                             </td>
                                             <td>
                                                 <h5>
-                                                    @if ($nota->tipo_nota == 'Venta Presencial')
-                                                        <label class="badge" style="color: #e39b00;background-color: #e3ae0040;">Venta Presencial</label>
+                                                    @if ($nota->estatus_cotizacion == 'Cancelar')
+                                                        Cancelada
                                                     @else
-                                                        <label class="badge" style="color: #b600e3;background-color: #ae00e340;">Cotización</label>
+                                                    <a type="button" data-bs-toggle="modal" data-bs-target="#estatusModal{{$nota->id}}">
+                                                        <label class="badge" style="color: #e39b00;background-color: #e3ae0040;">Venta Presencial</label>
+                                                    </a>
                                                     @endif
+
                                                 </h5>
                                             </td>
                                             <td>
@@ -171,6 +178,7 @@
                                             </td>
                                         </tr>
                                         @include('admin.notas_productos.modal_edit')
+                                        @include('admin.notas_productos.modal_estatus')
                                         @include('admin.notas_productos.modal_products')
                                     @endforeach
                                 </tbody>

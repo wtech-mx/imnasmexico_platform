@@ -446,6 +446,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/notas/productos/edit/{id}', [App\Http\Controllers\NotasProductosController::class, 'edit'])->name('notas_productos.edit');
     Route::patch('/admin/notas/productos/update/{id}', [App\Http\Controllers\NotasProductosController::class, 'update'])->name('notas_productos.update');
     Route::get('/admin/notas/productos/buscador', [App\Http\Controllers\NotasProductosController::class, 'buscador'])->name('advance_productos.buscador');
+    Route::patch('/admin/notas/productos/update/estatus/{id}', [App\Http\Controllers\NotasProductosController::class, 'update_estatus'])->name('notas_productos.update_estatus');
 
     Route::delete('/admin/notas/productos/delete/{id}', [App\Http\Controllers\NotasProductosController::class, 'delete'])->name('notas_productos.delete');
     Route::post('/admin/productos/update/', [App\Http\Controllers\NotasProductosController::class, 'update_productos'])->name('notas_productos.productos');
