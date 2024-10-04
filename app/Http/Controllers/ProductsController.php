@@ -22,7 +22,6 @@ class ProductsController extends Controller
         return response()->json($product);
     }
 
-
     public function store(Request $request)
     {
 
@@ -62,6 +61,22 @@ class ProductsController extends Controller
             'stock' => $product->stock,
             'stock_nas' => $product->stock_nas,
             'stock_cosmica' => $product->stock_cosmica,
+        ]);
+
+        // Session::flash('success', 'Se ha guardado sus datos con exito');
+        // return redirect()->back()->with('success', 'Envio de correo exitoso.');
+
+    }
+
+    public function update_ocultar(Request $request, $id)
+    {
+        $product = Products::find($id);
+        $product->categoria = $request->get('categoria');
+        $product->update();
+
+        return response()->json([
+            'id' => $product->id,
+            'categoria' => $product->categoria,
         ]);
 
         // Session::flash('success', 'Se ha guardado sus datos con exito');

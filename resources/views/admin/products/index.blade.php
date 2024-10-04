@@ -65,9 +65,20 @@
                         <td>{{ $product->stock }}</td>
                         <td>
                             @can('productos-edit')
-                                <a type="button" class="btn btn-sm btn-primary editProductBtn" data-id="{{ $product->id }}">
+                                <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
                                     <i class="fa fa-fw fa-edit"></i>
                                 </a>
+
+                                <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PATCH">
+                                    <input type="hidden" name="categoria" value="Ocultar">
+
+                                    <button type="submit" class="btn btn-danger btn-sm">
+                                        <i class="fa fa-fw fa-trash"></i>
+                                    </button>
+                                </form>
+
                             @endcan
                         </td>
                     </tr>
@@ -214,6 +225,33 @@
               }
           });
       });
+
+      $(document).on('submit', '.OcultarProductForm', function(e) {
+      e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
+
+      let productId = $(this).data('id'); // Obtener el ID del producto
+      let form = $(this); // Referencia al formulario
+      let url = "{{ route('products.update_ocultar', ':id') }}".replace(':id', productId); // Ruta con el ID del producto
+
+      $.ajax({
+        url: url,
+        type: 'PATCH',
+        data: form.serialize(), // Serializar los datos del formulario
+        success: function(response) {
+          // Si la respuesta es exitosa, elimina la fila del producto de la tabla
+          $('#productRow' + response.id).fadeOut(300, function() {
+            $(this).remove(); // Eliminar la fila después de que desaparezca
+          });
+
+          // Opcional: Mostrar mensaje de éxito
+          alert('Eliminado con exito');
+        },
+        error: function(xhr, status, error) {
+          console.error('Error:', error);
+          alert('Error:', error);
+        }
+      });
+    });
 
 
     });

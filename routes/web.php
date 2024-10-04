@@ -479,6 +479,8 @@ Route::group(['middleware' => ['auth']], function() {
      Route::post('/admin/products/import', [App\Http\Controllers\ProductsController::class, 'import_products'])->name('products.import');
      Route::post('/admin/products/store', [App\Http\Controllers\ProductsController::class, 'store'])->name('products.store');
      Route::patch('/admin/products/update/{id}', [App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
+     Route::patch('/admin/products/ocultar/{id}', [App\Http\Controllers\ProductsController::class, 'update_ocultar'])->name('products.update_ocultar');
+
      Route::get('/admin/products/{id}', [App\Http\Controllers\ProductsController::class, 'show'])->name('products.show');
 
      Route::get('/cosmica/admin/products/{id}', [App\Http\Controllers\LaboratoriosController::class, 'show_products_cosmica'])->name('cosmica_products.show');
