@@ -128,7 +128,6 @@
     <table class="table table-bordered border-primary">
         <thead class="text-center" style="background-color: #836262; color: #fff">
             <tr>
-                <!-- <th>Imagen</th> -->
                 <th>Cantidad</th>
                 <th>Producto</th>
                 <th>P.Unit</th>
@@ -141,9 +140,6 @@
                     @php
                         $producto = DB::table('products')->where('nombre', $nota_producto->producto)->first();
                     @endphp
-                    <!-- <td>
-                       <img src="{{ $producto->imagenes }}" alt="" style="width: 60px">
-                    </td> -->
                     <td>
                         {{ $nota_producto->cantidad }}
                     </td>
@@ -166,9 +162,9 @@
                             Descuento {{ $nota_producto->descuento }}% <br>
                            <del> ${{ $producto->precio_normal }} </del> <br>
                            <b> ${{ $unit }} </b>
-                            
+
                         @endif
-                        
+
                     </td>
                     @php
                         $subtotal = $unit * $nota_producto->cantidad;
