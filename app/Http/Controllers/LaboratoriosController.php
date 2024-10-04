@@ -85,7 +85,7 @@ class LaboratoriosController extends Controller
 
     public function index_productos_nas(){
 
-        $products = Products::where('laboratorio','=','NAS')->get();
+        $products = Products::where('laboratorio','=','NAS')->where('subcategoria', 'Producto')->get();
 
         return view('admin.laboratorio.index_productos',compact('products'));
     }

@@ -34,7 +34,7 @@ class NotasProductosController extends Controller
         $notas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
         ->orderBy('id','DESC')->where('tipo_nota','=' , 'Venta Presencial')->get();
 
-        $products = Products::orderBy('nombre','ASC')->get();
+        $products = Products::orderBy('nombre','ASC')->where('categoria', '!=', 'Ocultar')->get();
 
         return view('admin.notas_productos.index', compact('notas', 'products', 'clientes', 'administradores'));
     }

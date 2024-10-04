@@ -13,7 +13,7 @@ use Session;
 class BodegaPedidosController extends Controller
 {
     public function productos_stock(Request $request){
-        $products = Products::orderBy('stock','ASC')->where('categoria', 'NAS')->where('stock', '!=', NULL)->get();
+        $products = Products::orderBy('stock','ASC')->where('categoria', 'NAS')->where('subcategoria', 'Producto')->where('stock', '!=', NULL)->get();
 
         return view('admin.products.bajo_stock.index', compact('products'));
     }
@@ -208,7 +208,7 @@ class BodegaPedidosController extends Controller
 
     // =============================== C O S M I C A ============================================
     public function productos_stock_cosmica(Request $request){
-        $products = Products::orderBy('stock','ASC')->where('categoria', 'Cosmica')->where('stock', '!=', NULL)->get();
+        $products = Products::orderBy('stock','ASC')->where('categoria', 'Cosmica')->where('subcategoria', 'Producto')->where('stock', '!=', NULL)->get();
 
         return view('admin.products.bajo_stock_cosmica.index', compact('products'));
     }
