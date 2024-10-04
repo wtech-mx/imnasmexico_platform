@@ -38,55 +38,195 @@
                 </div>
             </div>
 
-            <div class="table-responsive p-4">
-                <table class="table table-flush" id="datatable-search">
-                    <thead class="thead-light">
-                        <tr>
-                            <th>#</th>
-                            <th>Foto</th>
-                            <th>Nombre</th>
-                            <th>Precio Normal</th>
-                            <th>Categoria</th>
-                            <th>Stock</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    @foreach ($products as $product)
-                    @php
-                        $precio_rebajado = number_format($product->precio_rebajado, 0, '.', ',');
-                        $precio_normal = number_format($product->precio_normal, 0, '.', ',');
-                    @endphp
-                    <tr id="productRow{{ $product->id }}">
-                        <td>{{ $product->id }}</td>
-                        <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
-                        <td>{{ $product->nombre }}</td>
-                        <td>${{ $precio_normal }}</td>
-                        <td>{{ $product->categoria }}</td>
-                        <td>{{ $product->stock }}</td>
-                        <td>
-                            @can('productos-edit')
-                                <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
-                                    <i class="fa fa-fw fa-edit"></i>
-                                </a>
+            <div class="d-flex justify-content-around">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="pills-producto-tab" data-bs-toggle="pill" data-bs-target="#pills-producto" type="button" role="tab" aria-controls="pills-producto" aria-selected="true">
+                                Producto  <img src="{{ asset('assets/user/icons/limpieza.png') }}" alt="" width="35px">
+                            </button>
+                        </li>
 
-                                <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
-                                    @csrf
-                                    <input type="hidden" name="_method" value="PATCH">
-                                    <input type="hidden" name="categoria" value="Ocultar">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-tiendita-tab" data-bs-toggle="pill" data-bs-target="#pills-tiendita" type="button" role="tab" aria-controls="pills-tiendita" aria-selected="false" style="background: #6ec7d1a3">
+                                Tiendita  <img src="{{ asset('assets/user/icons/marketplace.png') }}" alt="" width="35px">
+                            </button>
+                        </li>
 
-                                    <button type="submit" class="btn btn-danger btn-sm">
-                                        <i class="fa fa-fw fa-trash"></i>
-                                    </button>
-                                </form>
-
-                            @endcan
-                        </td>
-                    </tr>
-                    @include('admin.products.modal_update')
-                    @endforeach
-
-                </table>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="pills-kits-tab" data-bs-toggle="pill" data-bs-target="#pills-kits" type="button" role="tab" aria-controls="pills-kits" aria-selected="false" style="background: #86ff61a3">
+                                Kits  <img src="{{ asset('assets/user/icons/productos.png') }}" alt="" width="35px">
+                            </button>
+                        </li>
+                </ul>
             </div>
+
+
+              <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-producto" role="tabpanel" aria-labelledby="pills-producto-tab" tabindex="0">
+
+                    <div class="table-responsive p-4">
+                        <table class="table table-flush" id="datatable-search">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Foto</th>
+                                    <th>Nombre</th>
+                                    <th>Precio Normal</th>
+                                    <th>Categoria</th>
+                                    <th>Stock</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            @foreach ($products as $product)
+                            @php
+                                $precio_rebajado = number_format($product->precio_rebajado, 0, '.', ',');
+                                $precio_normal = number_format($product->precio_normal, 0, '.', ',');
+                            @endphp
+                            <tr id="productRow{{ $product->id }}">
+                                <td>{{ $product->id }}</td>
+                                <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
+                                <td>{{ $product->nombre }}</td>
+                                <td>${{ $precio_normal }}</td>
+                                <td>{{ $product->categoria }}</td>
+                                <td>{{ $product->stock }}</td>
+                                <td>
+                                    @can('productos-edit')
+                                        <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
+                                            <i class="fa fa-fw fa-edit"></i>
+                                        </a>
+
+                                        <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="PATCH">
+                                            <input type="hidden" name="categoria" value="Ocultar">
+
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-fw fa-trash"></i>
+                                            </button>
+                                        </form>
+
+                                    @endcan
+                                </td>
+                            </tr>
+                            @include('admin.products.modal_update')
+                            @endforeach
+
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="pills-tiendita" role="tabpanel" aria-labelledby="pills-tiendita-tab" tabindex="0">
+
+                    <div class="table-responsive p-4" style="border:solid 5px #6ec7d1a3">
+                        <table class="table table-flush" id="datatable-search2">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Foto</th>
+                                    <th>Nombre</th>
+                                    <th>Precio Normal</th>
+                                    <th>Categoria</th>
+                                    <th>Stock</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            @foreach ($productsTiendita as $product)
+                            @php
+                                $precio_rebajado = number_format($product->precio_rebajado, 0, '.', ',');
+                                $precio_normal = number_format($product->precio_normal, 0, '.', ',');
+                            @endphp
+                            <tr id="productRow{{ $product->id }}">
+                                <td>{{ $product->id }}</td>
+                                <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
+                                <td>{{ $product->nombre }}</td>
+                                <td>${{ $precio_normal }}</td>
+                                <td>{{ $product->categoria }}</td>
+                                <td>{{ $product->stock }}</td>
+                                <td>
+                                    @can('productos-edit')
+                                        <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
+                                            <i class="fa fa-fw fa-edit"></i>
+                                        </a>
+
+                                        <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="PATCH">
+                                            <input type="hidden" name="categoria" value="Ocultar">
+
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-fw fa-trash"></i>
+                                            </button>
+                                        </form>
+
+                                    @endcan
+                                </td>
+                            </tr>
+                            @include('admin.products.modal_update')
+                            @endforeach
+
+                        </table>
+                    </div>
+
+                </div>
+
+                <div class="tab-pane fade" id="pills-kits" role="tabpanel" aria-labelledby="pills-kits-tab" tabindex="0">
+
+                    <div class="table-responsive p-4" style="border:solid 5px #86ff61a3">
+                        <table class="table table-flush" id="datatable-search3">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Foto</th>
+                                    <th>Nombre</th>
+                                    <th>Precio Normal</th>
+                                    <th>Categoria</th>
+                                    <th>Stock</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            @foreach ($productsKit as $product)
+                            @php
+                                $precio_rebajado = number_format($product->precio_rebajado, 0, '.', ',');
+                                $precio_normal = number_format($product->precio_normal, 0, '.', ',');
+                            @endphp
+                            <tr id="productRow{{ $product->id }}">
+                                <td>{{ $product->id }}</td>
+                                <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
+                                <td>{{ $product->nombre }}</td>
+                                <td>${{ $precio_normal }}</td>
+                                <td>{{ $product->categoria }}</td>
+                                <td>{{ $product->stock }}</td>
+                                <td>
+                                    @can('productos-edit')
+                                        <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
+                                            <i class="fa fa-fw fa-edit"></i>
+                                        </a>
+
+                                        <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
+                                            @csrf
+                                            <input type="hidden" name="_method" value="PATCH">
+                                            <input type="hidden" name="categoria" value="Ocultar">
+
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-fw fa-trash"></i>
+                                            </button>
+                                        </form>
+
+                                    @endcan
+                                </td>
+                            </tr>
+                            @include('admin.products.modal_update')
+                            @endforeach
+
+                        </table>
+                    </div>
+
+                </div>
+
+              </div>
+
+
           </div>
         </div>
       </div>
@@ -115,6 +255,49 @@
 
 <script>
     $('#datatable-search').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                text: 'Imprimir',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'excel',
+            'pdf',
+            'colvis'
+        ],
+        responsive: true,
+        stateSave: true,
+
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+        }
+    });
+    $('#datatable-search2').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'print',
+                text: 'Imprimir',
+                exportOptions: {
+                    columns: ':visible'
+                }
+            },
+            'excel',
+            'pdf',
+            'colvis'
+        ],
+        responsive: true,
+        stateSave: true,
+
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
+        }
+    });
+
+    $('#datatable-search3').DataTable({
         dom: 'Bfrtip',
         buttons: [
             {

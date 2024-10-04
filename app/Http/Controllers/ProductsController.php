@@ -11,9 +11,11 @@ use Session;
 class ProductsController extends Controller
 {
     public function index(Request $request){
-        $products = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->get();
+        $products = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Producto')->get();
+        $productsTiendita = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Tiendita')->get();
+        $productsKit = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Kit')->get();
 
-        return view('admin.products.index', compact('products'));
+        return view('admin.products.index', compact('products','productsTiendita','productsKit'));
     }
 
     public function show($id)
