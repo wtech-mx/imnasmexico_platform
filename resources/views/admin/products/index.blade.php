@@ -345,13 +345,63 @@
             $('#precio_rebajado').val(product.precio_rebajado);
             $('#imagenes').val(product.imagenes);
             // Llena los otros campos si es necesario
-          // Actualiza la imagen en el modal
-          $('#editProductModal #blah').attr('src', product.imagenes);
-          $('#editProductModal').modal('show');
+            // Actualiza la imagen en el modal
+            $('#editProductModal #blah').attr('src', product.imagenes);
+            $('#editProductModal').modal('show');
+            loadStockHistory(productId);
 
           }
         });
       });
+
+          // Función para cargar el historial de stock en la pestaña del modal
+        function loadStockHistory(productId) {
+            $.ajax({
+                url: "{{ route('products.stockHistory', ':id') }}".replace(':id', productId), // Ruta de Laravel para obtener el historial
+                type: 'GET',
+                success: function(history) {
+    console.log('Historial recibido:', history); // Añadir esto para verificar los datos recibidos
+    $('#pills-profile .row').empty();
+
+    let historyHtml = '<table class="table table-bordered">';
+    historyHtml += '<thead><tr><th>Fecha</th><th>Cantidad</th><th>Usuario</th></tr></thead><tbody>';
+
+    $.each(history, function(index, record) {
+        console.log('Registro individual:', record); // Verificar el contenido de cada registro
+        let date = new Date(record.created_at);
+
+        // Si la fecha no se puede interpretar, este punto es donde podrías ver si hay algún error con el contenido.
+        if (isNaN(date.getTime())) {
+            console.error('Fecha inválida:', record.created_at);
+        }
+
+        let formattedDate = date.toLocaleDateString('es-ES', {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+        let formattedTime = date.toLocaleTimeString('es-ES', {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+
+        historyHtml += `<tr>
+            <td>${formattedDate} a las ${formattedTime}</td>
+            <td>${record.stock}</td>
+            <td>${record.user}</td>
+        </tr>`;
+    });
+
+    historyHtml += '</tbody></table>';
+    $('#pills-profile .row').html(historyHtml);
+},
+
+                error: function(xhr, status, error) {
+                    console.error('Error al cargar el historial:', error);
+                    alert('Error al cargar el historial');
+                }
+            });
+        }
 
       // Abrir modal y establecer el ID del producto
       $(document).on('click', '.edit-product-btn', function() {
@@ -411,32 +461,31 @@
       });
 
       $(document).on('submit', '.OcultarProductForm', function(e) {
-      e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
+        e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
 
-      let productId = $(this).data('id'); // Obtener el ID del producto
-      let form = $(this); // Referencia al formulario
-      let url = "{{ route('products.update_ocultar', ':id') }}".replace(':id', productId); // Ruta con el ID del producto
+        let productId = $(this).data('id'); // Obtener el ID del producto
+        let form = $(this); // Referencia al formulario
+        let url = "{{ route('products.update_ocultar', ':id') }}".replace(':id', productId); // Ruta con el ID del producto
 
-      $.ajax({
-        url: url,
-        type: 'PATCH',
-        data: form.serialize(), // Serializar los datos del formulario
-        success: function(response) {
-          // Si la respuesta es exitosa, elimina la fila del producto de la tabla
-          $('#productRow' + response.id).fadeOut(300, function() {
-            $(this).remove(); // Eliminar la fila después de que desaparezca
-          });
+        $.ajax({
+            url: url,
+            type: 'PATCH',
+            data: form.serialize(), // Serializar los datos del formulario
+            success: function(response) {
+            // Si la respuesta es exitosa, elimina la fila del producto de la tabla
+            $('#productRow' + response.id).fadeOut(300, function() {
+                $(this).remove(); // Eliminar la fila después de que desaparezca
+            });
 
-          // Opcional: Mostrar mensaje de éxito
-          alert('Eliminado con exito');
-        },
-        error: function(xhr, status, error) {
-          console.error('Error:', error);
-          alert('Error:', error);
-        }
-      });
-    });
-
+            // Opcional: Mostrar mensaje de éxito
+            alert('Eliminado con exito');
+            },
+            error: function(xhr, status, error) {
+            console.error('Error:', error);
+            alert('Error:', error);
+            }
+        });
+     });
 
     });
 

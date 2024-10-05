@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ProductsImport;
 use App\Models\Products;
+use App\Models\HistorialStock;
+
 use DB;
 use Session;
 
@@ -46,6 +48,8 @@ class ProductsController extends Controller
     {
         $product = Products::find($id);
 
+        $user = auth()->user();
+
         $oldName = $product->nombre;
         if ($oldName !== $request->get('nombre')) {
             DB::table('productos_notas_id')
@@ -56,6 +60,23 @@ class ProductsController extends Controller
             ->where('producto', $oldName) // Busca todos los registros con el nombre anterior
             ->update(['producto' => $request->get('nombre')]); // Actualiza el nombre al nuevo
         }
+
+        // Guardar los valores anteriores del producto en la tabla historial_stock
+        $historialData = [
+            'id_producto' => $product->id,
+            'user' => $user->name,
+            'precio_normal' => $product->precio_normal,
+            'precio_rebajado' => $product->precio_rebajado,
+            'sku' => $product->sku,
+            'stock' => "Antes: " . $product->stock . " -> Ahora: " . $request->get('stock'),
+            'stock_nas' => "Antes: " . $product->stock_nas . " -> Ahora: " . $request->get('stock_nas'),
+            'stock_cosmica' => "Antes: " . $product->stock_cosmica . " -> Ahora: " . $request->get('stock_cosmica'),
+            'laboratorio' => $product->laboratorio,
+            'categoria' => $product->categoria,
+            'subcategoria' => $product->subcategoria,
+        ];
+
+        HistorialStock::create($historialData);
 
         $product->nombre = $request->get('nombre');
         $product->descripcion = $request->get('descripcion');
@@ -76,6 +97,12 @@ class ProductsController extends Controller
             'stock_nas' => $product->stock_nas,
             'stock_cosmica' => $product->stock_cosmica,
         ]);
+    }
+
+    public function getStockHistory($id)
+    {
+        $historial = HistorialStock::where('id_producto', $id)->get();
+        return response()->json($historial);
     }
 
     public function update_ocultar(Request $request, $id)

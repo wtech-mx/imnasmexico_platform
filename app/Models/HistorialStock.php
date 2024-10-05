@@ -5,25 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Products extends Model
+class HistorialStock extends Model
 {
     use HasFactory;
-    protected $table = 'products';
-    public $timestamps = false;
+
+    protected $table = "historial_stock";
+    protected $primarykey = "id";
+    public $timestamps = true;
 
     protected $fillable = [
-        'nombre',
-        'categoria',
-        'subcategoria',
-        'descripcion',
-        'precio_rebajado',
+        'id_producto',
+        'user',
         'precio_normal',
-        'imagenes',
+        'precio_rebajado',
+        'sku',
         'stock',
         'stock_nas',
         'stock_cosmica',
         'laboratorio',
-        'sku',
+        'categoria',
+        'subcategoria',
     ];
-
 }
