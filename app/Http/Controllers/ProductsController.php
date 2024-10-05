@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ProductsImport;
 use App\Models\Products;
+use DB;
 use Session;
 
 class ProductsController extends Controller
@@ -44,6 +45,18 @@ class ProductsController extends Controller
     public function update(Request $request, $id)
     {
         $product = Products::find($id);
+
+        $oldName = $product->nombre;
+        if ($oldName !== $request->get('nombre')) {
+            DB::table('productos_notas_id')
+                ->where('producto', $oldName) // Busca todos los registros con el nombre anterior
+                ->update(['producto' => $request->get('nombre')]); // Actualiza el nombre al nuevo
+
+            DB::table('productos_notas_cosmica')
+            ->where('producto', $oldName) // Busca todos los registros con el nombre anterior
+            ->update(['producto' => $request->get('nombre')]); // Actualiza el nombre al nuevo
+        }
+
         $product->nombre = $request->get('nombre');
         $product->descripcion = $request->get('descripcion');
         $product->precio_rebajado = $request->get('precio_rebajado');
@@ -52,7 +65,6 @@ class ProductsController extends Controller
         $product->stock = $request->get('stock');
         $product->stock_nas = $request->get('stock_nas');
         $product->stock_cosmica = $request->get('stock_cosmica');
-
         $product->update();
 
         return response()->json([
@@ -64,10 +76,6 @@ class ProductsController extends Controller
             'stock_nas' => $product->stock_nas,
             'stock_cosmica' => $product->stock_cosmica,
         ]);
-
-        // Session::flash('success', 'Se ha guardado sus datos con exito');
-        // return redirect()->back()->with('success', 'Envio de correo exitoso.');
-
     }
 
     public function update_ocultar(Request $request, $id)
