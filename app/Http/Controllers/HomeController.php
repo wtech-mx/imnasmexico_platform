@@ -18,6 +18,8 @@ use App\Models\Factura;
 use App\Models\EnviosOrder;
 use MercadoPago\SDK;
 use App\Models\Cupon;
+use App\Models\NotasProductos;
+use App\Models\NotasProductosCosmica;
 use DB;
 
 class HomeController extends Controller
@@ -149,6 +151,21 @@ class HomeController extends Controller
 
                 $pagos = array();
 
+                $primerDiaDelMes = date('Y-m-01');
+                $ultimoDiaDelMes = date('Y-m-t');
+
+                $cotizacion_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
+                ->where('estatus_cotizacion','=' ,'Aprobada')->where('tipo_nota','=' , 'Cotizacion')->get();
+                $cotizacion_NASCount = $cotizacion_aprobadas->count();
+
+                $notasAprobadas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
+                ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('estatus_cotizacion','=' , 'Aprobada')->get();
+                $cotizacion_CosmicaCount = $notasAprobadas->count();
+
+                $ventas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
+                ->where('tipo_nota','=' , 'Venta Presencial')->get();
+                $ventas_NASCount = $ventas->count();
+
                 do {
                     // Obtener siguiente página de resultados
                     $searchResult = \MercadoPago\Payment::search($filters);
@@ -164,7 +181,7 @@ class HomeController extends Controller
 
                 } while (count($results) > 0);
 
-            return view('admin.dashboard',compact('totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','data','cupones', 'pagos'));
+            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','data','cupones', 'pagos'));
         }
 
     }
