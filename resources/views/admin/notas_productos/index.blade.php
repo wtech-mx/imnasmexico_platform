@@ -130,9 +130,15 @@
                                                     @if ($nota->estatus_cotizacion == 'Cancelar')
                                                         Cancelada
                                                     @else
-                                                    <a type="button" data-bs-toggle="modal" data-bs-target="#estatusModal{{$nota->id}}">
-                                                        <label class="badge" style="color: #e39b00;background-color: #e3ae0040;">Venta Presencial</label>
-                                                    </a>
+                                                        @if ($nota->estatus_cotizacion ==  'Aprobada')
+                                                            <a type="button" data-bs-toggle="modal" data-bs-target="#estatusModal{{$nota->id}}">
+                                                                <label class="badge" style="color: #e39b00;background-color: #e3ae0040;">Venta Presencial</label><br>
+                                                                Pendiente de entregar
+                                                            </a>
+                                                        @else
+                                                            <label class="badge" style="color: #e39b00;background-color: #e3ae0040;">Venta Presencial</label><br>
+                                                            Entregado
+                                                        @endif
                                                     @endif
 
                                                 </h5>

@@ -232,12 +232,6 @@ class NotasProductosController extends Controller
             $nuevosCampos4 = $request->input('descuento_prod');
 
             foreach ($nuevosCampos as $index => $campo) {
-                $resta = 0;
-                $producto = Products::where('nombre', $campo)->first();
-                $resta = $producto->stock - $nuevosCampos3[$index];
-                $producto->stock = $resta;
-                $producto->update();
-
                 $notas_inscripcion = new ProductosNotasId;
                 $notas_inscripcion->id_notas_productos = $notas_productos->id;
                 $notas_inscripcion->producto = $campo;
@@ -479,17 +473,6 @@ class NotasProductosController extends Controller
     public function update_estatus(Request $request, $id){
         $nota = NotasProductos::findOrFail($id);
         $nota->estatus_cotizacion  = $request->get('estatus_cotizacion');
-
-        if($nota->estatus_cotizacion != 'Cancelada'){
-            $producto = ProductosNotasId::where('id_notas_productos', $id)->get();
-            foreach ($producto as $campo) {
-                $resta = 0;
-                $producto = Products::where('nombre', $campo->producto)->first();
-                $resta = $producto->stock + $campo->cantidad;
-                $producto->stock = $resta;
-                $producto->update();
-            }
-        }
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

@@ -344,10 +344,6 @@ class CotizacionController extends Controller
         $nota->estadociudad  = $request->get('estado');
             if($request->get('estatus_cotizacion') == 'Preparado'){
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");
-            }else if($request->get('estatus_cotizacion') == 'Enviado'){
-                $nota->fecha_envio  = date("Y-m-d H:i:s");
-            }else if($request->get('estatus_cotizacion') == 'Aprobada'){
-
                 $producto = ProductosNotasId::where('id_notas_productos', $id)->get();
 
                 foreach ($producto as $campo) {
@@ -357,6 +353,9 @@ class CotizacionController extends Controller
                     $producto->stock = $resta;
                     $producto->update();
                 }
+            }else if($request->get('estatus_cotizacion') == 'Enviado'){
+                $nota->fecha_envio  = date("Y-m-d H:i:s");
+            }else if($request->get('estatus_cotizacion') == 'Aprobada'){
                 $nota->fecha_aprobada  = date("Y-m-d");
 
                 if ($request->hasFile("foto_pago")) {
@@ -389,21 +388,6 @@ class CotizacionController extends Controller
                 $nota->fecha_entrega  = $request->get('fecha_entrega');
                 $nota->direccion_entrega  = $request->get('direccion_entrega');
                 $nota->comentario_rep  = $request->get('comentario_rep');
-            }else if($request->get('estatus_cotizacion') == 'Cancelada'){
-                $nota_cambio = NotasProductos::find($id);
-
-                if($nota_cambio->estatus_cotizacion != NULL){
-                    if($nota_cambio->estatus_cotizacion != 'Cancelada'){
-                        $producto = ProductosNotasId::where('id_notas_productos', $id)->get();
-                        foreach ($producto as $campo) {
-                            $resta = 0;
-                            $producto = Products::where('nombre', $campo->producto)->first();
-                            $resta = $producto->stock + $campo->cantidad;
-                            $producto->stock = $resta;
-                            $producto->update();
-                        }
-                    }
-                }
             }
         $nota->save();
 

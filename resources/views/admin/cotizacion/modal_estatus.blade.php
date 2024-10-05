@@ -23,7 +23,9 @@
                                     <option value="">Seleccionar Estatus</option>
                                     {{-- <option value="Pendiente">Pendiente</option> --}}
                                     <option value="Aprobada">Aprobada</option>
-                                    <option value="Cancelada">Cancelar</option>
+                                    @if ($item->estatus_cotizacion ==  'Aprobada' || $item->estatus_cotizacion ==  NULL)
+                                        <option value="Cancelada">Cancelar</option>
+                                    @endif
                                 </select>
                             </div>
                         </div>
