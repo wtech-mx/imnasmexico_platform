@@ -57,9 +57,11 @@
                         </div>
                     </div>
 
-                    <div class="modal-footer">
-                        <button type="submit"  class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
-                    </div>
+                    @can('productos-edit')
+                        <div class="modal-footer">
+                            <button type="submit"  class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                        </div>
+                    @endcan
                 </form>
 
             </div>

@@ -90,11 +90,12 @@
                                 <td>{{ $product->categoria }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>
-                                    @can('productos-edit')
+
                                         <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
                                             <i class="fa fa-fw fa-edit"></i>
                                         </a>
 
+                                    @can('productos-edit')
                                         <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
                                             @csrf
                                             <input type="hidden" name="_method" value="PATCH">
@@ -144,11 +145,11 @@
                                 <td>{{ $product->categoria }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>
-                                    @can('productos-edit')
+
                                         <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
                                             <i class="fa fa-fw fa-edit"></i>
                                         </a>
-
+                                    @can('productos-edit')
                                         <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
                                             @csrf
                                             <input type="hidden" name="_method" value="PATCH">
@@ -198,11 +199,11 @@
                                 <td>{{ $product->categoria }}</td>
                                 <td>{{ $product->stock }}</td>
                                 <td>
-                                    @can('productos-edit')
+
                                         <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
                                             <i class="fa fa-fw fa-edit"></i>
                                         </a>
-
+                                    @can('productos-edit')
                                         <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
                                             @csrf
                                             <input type="hidden" name="_method" value="PATCH">
