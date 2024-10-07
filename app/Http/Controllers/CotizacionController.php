@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HistorialVendidos;
 use App\Models\ProductosNotasId;
 use App\Models\NotasProductos;
 use App\Models\User;
@@ -344,14 +345,22 @@ class CotizacionController extends Controller
         $nota->estadociudad  = $request->get('estado');
             if($request->get('estatus_cotizacion') == 'Preparado'){
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");
-                $producto = ProductosNotasId::where('id_notas_productos', $id)->get();
+                $producto_pedido = ProductosNotasId::where('id_notas_productos', $id)->get();
 
-                foreach ($producto as $campo) {
-                    $resta = 0;
-                    $producto = Products::where('nombre', $campo->producto)->first();
-                    $resta = $producto->stock - $campo->cantidad;
-                    $producto->stock = $resta;
-                    $producto->update();
+                foreach ($producto_pedido as $campo) {
+                    $product_first = Products::where('nombre', $campo->producto)->first();
+                    if ($product_first && $campo->cantidad > 0) {
+                        $producto_historial = new HistorialVendidos;
+                        $producto_historial->id_producto = $product_first->id;
+                        $producto_historial->stock_viejo = $product_first->stock;
+                        $producto_historial->cantidad_restado = $campo->cantidad;
+                        $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
+                        $producto_historial->id_cotizacion_nas = $id;
+                        $producto_historial->save();
+
+                        $product_first->stock -= $campo->cantidad;
+                        $product_first->save();
+                    }
                 }
             }else if($request->get('estatus_cotizacion') == 'Enviado'){
                 $nota->fecha_envio  = date("Y-m-d H:i:s");

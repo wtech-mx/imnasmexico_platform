@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HistorialVendidos;
 use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 use App\Models\Products;
@@ -219,22 +220,21 @@ class BodegaController extends Controller
                     'preparado_hora_y_guia' => date("Y-m-d H:i:s"), // Tomamos el nuevo estatus del form
                 ];
 
-                // Descontar stock de los productos en "pedidos"
-                foreach ($pedido['pedidos'] as $producto) {
-                    $productName = trim($producto['concepto']); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
-                    $quantity = $producto['cantidad']; // Cantidad del producto
+                foreach ($pedido['pedidos'] as $campo) {
+                    $productName = trim($campo['concepto']); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
+                    $quantity = $campo['cantidad'];
+                    $product_first = Products::where('nombre', $productName)->first();
+                    if ($product_first && $quantity > 0) {
+                        $producto_historial = new HistorialVendidos;
+                        $producto_historial->id_producto = $product_first->id;
+                        $producto_historial->stock_viejo = $product_first->stock;
+                        $producto_historial->cantidad_restado = $quantity;
+                        $producto_historial->stock_actual = $product_first->stock - $quantity;
+                        $producto_historial->id_paradisus = $id;
+                        $producto_historial->save();
 
-                    // Buscar el producto en la base de datos interna por el nombre
-                    $productoInterno = Products::where('nombre', $productName)->first();
-
-                    if ($productoInterno) {
-
-                        // Descontar el stock
-                        $nuevoStock = $productoInterno->stock - $quantity;
-
-                        // Actualizar el stock en la base de datos
-                        $productoInterno->update(['stock' => $nuevoStock]);
-
+                        $product_first->stock -= $quantity;
+                        $product_first->save();
                     } else {
 
                         return back()->with('error', "El producto '{$productName}' no se encontró en el inventario interno.");
