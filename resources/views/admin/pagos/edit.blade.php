@@ -38,21 +38,31 @@
                                             <input type="text" class="form-control" value="{{$orders->forma_pago}}" disabled>
                                         </div>
                                     </div>
-                                    @if ($orders->id_externo == NULL)
-                                        <div class="col-2">
-                                            <div class="form-group">
-                                                <label for="nota">Personal que subio el pago</label>
-                                                <input type="text" class="form-control" value="Pago por pagina" disabled>
+                                        @if ($orders->id_externo != NULL)
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <label for="nota">Personal que subio el pago</label>
+                                                    <input type="text" class="form-control" value="{{$orders->PagosFuera->usuario}}" disabled>
+                                                </div>
                                             </div>
-                                        </div>
-                                    @else
-                                        <div class="col-2">
-                                            <div class="form-group">
-                                                <label for="nota">Personal que subio el pago</label>
-                                                <input type="text" class="form-control" value="{{$orders->PagosFuera->usuario}}" disabled>
+
+                                        @elseif ($orders->id_admin != NULL)
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <label for="nota">Personal que subio el pago</label>
+                                                    <input type="text" class="form-control" value="{{$orders->Admin->name}}" disabled>
+                                                </div>
                                             </div>
-                                        </div>
-                                    @endif
+
+                                        @else
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <label for="nota">Personal que subio el pago</label>
+                                                    <input type="text" class="form-control" value="Pago por pagina" disabled>
+                                                </div>
+                                            </div>
+                                        @endif
+
                                     <div class="col-2">
                                         <div class="form-group">
                                             <label for="nota">Fecha</label>
@@ -128,8 +138,58 @@
                                     </button>
                                 </div>
                             </form>
+
+                            <div class="row">
+                                @if ($orders->id_externo != NULL)
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="nota">Comentario</label>
+                                            <textarea class="form-control" cols="10" rows="5" disabled>{{$orders->PagosFuera->comentario}}</textarea>
+                                        </div>
+                                    </div>
+                                @endif
+
+                                @if ($orders->id_nota != NULL)
+                                    @if ($orders->Nota->NotasPagos->monto2 != NULL)
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label for="nota">Forma de Pago 1</label>
+                                                <input type="text" class="form-control" value="{{$orders->Nota->NotasPagos->metodo_pago}}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label for="nota">Monto 1 </label>
+                                                <input type="text" class="form-control" value="{{$orders->Nota->NotasPagos->monto}}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label for="nota">Forma de Pago 2</label>
+                                                <input type="text" class="form-control" value="{{$orders->Nota->NotasPagos->metodo_pago2}}" disabled>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-3">
+                                            <div class="form-group">
+                                                <label for="nota">Monto 2</label>
+                                                <input type="text" class="form-control" value="{{$orders->Nota->NotasPagos->monto2}}" disabled>
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <label for="nota">Comentario</label>
+                                            <textarea class="form-control" cols="10" rows="5" disabled>{{$orders->Nota->nota}}</textarea>
+                                        </div>
+                                    </div>
+                                @endif
+                            </div>
+
                             @if ($orders->id_externo != NULL)
-                                <div class="col-12">
+                                <div class="col-6">
                                     <div class="form-group">
                                         <label for="foto">Comprobante 1</label> <br>
                                         @if (pathinfo($orders->PagosFuera->foto, PATHINFO_EXTENSION) === 'pdf')
@@ -144,7 +204,7 @@
                                 </div>
 
                                 @if ($orders->PagosFuera->foto2 != NULL)
-                                    <div class="col-12">
+                                    <div class="col-6">
                                         <div class="form-group">
                                             <label for="foto">Comprobante 2</label> <br>
                                             @if (pathinfo($orders->PagosFuera->foto2, PATHINFO_EXTENSION) === 'pdf')

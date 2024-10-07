@@ -22,4 +22,9 @@ class NotasCursos extends Model
     {
         return $this->belongsTo(User::class, 'id_usuario');
     }
+
+    public function NotasPagos()
+    {
+        return $this->hasOne('App\Models\NotasPagos', 'id_nota', 'id');
+    }
 }

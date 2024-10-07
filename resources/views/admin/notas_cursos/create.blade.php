@@ -134,12 +134,32 @@
                                     </div>
 
                                     <div class="form-group col-4">
-                                        <h4 for="name">Total *</h4>
+                                        <h4 for="name">Total</h4>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                             </span>
                                             <input class="form-control total" type="text" id="total" name="total" value="0" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <h4 for="name">Restante</h4>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                            </span>
+                                            <input type="text" class="form-control" id="restante" name="restante" value="0" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <h4 for="name">Monto 1 *</h4>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                            </span>
+                                            <input type="text" class="form-control" id="monto1" name="monto1" required>
                                         </div>
                                     </div>
 
@@ -161,6 +181,28 @@
                                                 <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
                                             </span>
                                             <input id="foto" name="foto" type="file" class="form-control" placeholder="foto">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <h4 for="name">Monto 2 *</h4>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
+                                            </span>
+                                            <input type="text" class="form-control" id="monto2" name="monto2">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label for="name">Metodo de Pago 2</label>
+                                            <select name="metodo_pago2" id="metodo_pago2" class="form-select d-inline-block">
+                                                <option value="">Selecciona una opcion</option>
+                                                <option value="Efectivo">Efectivo</option>
+                                                <option value="Tarjeta">Tarjeta</option>
+                                                <option value="Transferencia">Transferencia</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -193,28 +235,19 @@ $(document).ready(function() {
         $container.find('.select2').select2();
     }
 
-    // Inicializa Select2 en todos los elementos .select2 existentes
     initializeSelect2($('#formulario'));
 
-    // Asocia un evento de cambio al campo de concepto
     $(document).on('change', '.select2', function() {
-        // Obtiene el precio normal del producto seleccionado
         var precioNormal = $(this).find('option:selected').data('precio_normal');
-
-        // Encuentra el campo de importe correspondiente y establece su valor
         $(this).closest('.row').find('.importe').val(precioNormal);
-
-        // Actualiza la suma total
         calcularSuma();
     });
 
-    // Clonar el div cuando se haga clic en el botón "Clonar"
     $(document).on('click', '.clonar', function() {
         var $clone = $('.clonars').first().clone();
         $clone.find('select.select2').removeClass('select2-hidden-accessible').next().remove();
         $clone.find('select.select2').select2();
 
-        // Borra los valores de los inputs clonados
         $clone.find(':input').each(function() {
             if ($(this).is('select')) {
                 this.selectedIndex = 0;
@@ -223,73 +256,69 @@ $(document).ready(function() {
             }
         });
 
-        // Agrega lo clonado al final del formulario
         $clone.appendTo('#formulario');
 
-        // Asocia el evento de cambio al campo de concepto clonado
         $clone.find('.select2').on('change', function() {
             var precioNormal = $(this).find('option:selected').data('precio_normal');
             $(this).closest('.row').find('.importe').val(precioNormal);
-
-            // Actualiza la suma total
             calcularSuma();
         });
 
-        // Asocia el evento 'input' al campo clonado
         $clone.find('input[name="importe[]"]').on('input', function() {
             calcularSuma();
         });
     });
 
-    // Función para calcular la suma total de todos los campos importe
     function calcularSuma() {
         var sumaTotal = 0;
 
-        // Recorre todos los campos de importe y suma sus valores
         $('.importe').each(function() {
             var valor = parseFloat($(this).val()) || 0;
             sumaTotal += valor;
         });
 
-        // Coloca la suma total en el input de total
         $('#total').val(sumaTotal.toFixed(2));
-
-        // Llama a la función de calcular el descuento después de calcular la suma total
         aplicarDescuento();
     }
 
-    // Función para aplicar el descuento
     function aplicarDescuento() {
         var total = parseFloat($('#total').val()) || 0;
         var descuento = parseFloat($('#descuento').val()) || 0;
-
-        // Corrige el cálculo del descuento
         var totalConDescuento = total * (1 - (descuento / 100));
-
-        // Actualiza el campo de total con el nuevo valor después del descuento
         $('#total').val(totalConDescuento.toFixed(2));
+        calcularRestante();
     }
 
-    // Evento para aplicar el descuento cuando el valor del input de descuento cambie
     $('#descuento').on('input', function() {
         aplicarDescuento();
     });
 
-    // Calcula la suma total al inicio en caso de que haya valores precargados
+    function calcularRestante() {
+        var total = parseFloat($('#total').val()) || 0;
+        var monto1 = parseFloat($('#monto1').val()) || 0;
+        var monto2 = parseFloat($('#monto2').val()) || 0;
+
+        var restante = total - (monto1 + monto2);
+        $('#restante').val(restante.toFixed(2));
+    }
+
+    $('#monto1, #monto2').on('input', function() {
+        calcularRestante();
+    });
+
     calcularSuma();
 
     $('#myForm').on('submit', function() {
-        // Deshabilita el botón al enviar el formulario
         $('#saveButton').prop('disabled', true);
     });
 
     $(document).on('keydown', function(event) {
-        // Detecta si la tecla presionada es Enter (keyCode 13)
         if (event.key === 'Enter') {
-            event.preventDefault(); // Evita el envío del formulario
+            event.preventDefault();
         }
     });
 });
+
 
 
 

@@ -102,7 +102,7 @@
                                                     <th>No</th>
                                                     <th>Nombre</th>
                                                     <th>Metodo de Pago</th>
-                                                    <th>Costo</th>
+                                                    <th>Abono</th>
                                                     <th>Documentacion</th>
                                                     <th>Deudor</th>
                                                     <th>Nota</th>
@@ -123,7 +123,7 @@
                                                                     <p>{{ $order->User->email }}</p>
                                                                 </td>
                                                                 <td>{{ $order->Orders->forma_pago }}</td>
-                                                                <td>{{ $order->Orders->pago }}</td>
+                                                                <td>${{ $order->Orders->pago }}</td>
                                                                 <td>
                                                                     @if ($ticket->descripcion == 'Con opción a Documentos de certificadora IMNAS')
                                                                         IMNAS
@@ -214,7 +214,7 @@
                                                                 </td>
                                                                 <td>{{ $order->Orders->forma_pago }}</td>
                                                                 <td>
-                                                                        {{ $order->Orders->pago }}
+                                                                        ${{ $order->Orders->pago }}
                                                                 </td>
                                                                 <td>STPS</td>
                                                                 <td>
@@ -223,6 +223,7 @@
                                                                         @if ($order->Cursos->modalidad == 'Presencial')
                                                                             @if ($order->Orders->PagosFuera->deudor == '1')
                                                                                 <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled checked>
+                                                                                <h3>DEUDOR</h3>
                                                                             @else
                                                                                 <input class="form-check-input" type="checkbox" id="deudor" name="deudor" disabled>
                                                                             @endif

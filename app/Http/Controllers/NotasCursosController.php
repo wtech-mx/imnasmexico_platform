@@ -122,11 +122,15 @@ class NotasCursosController extends Controller
         $notas_cursos->save();
 
         $code = Str::random(8);
+        $monto1 = $request->get('monto1') ?? 0;
+        $monto2 = $request->get('monto2') ?? 0;
         $order = new Orders;
         $order->id_usuario = $cliente;
-        $order->pago = $notas_cursos->total;
+        $order->id_admin = auth()->user()->id;
+        $order->pago = $monto1 + $monto2;
         $order->forma_pago = $request->get('metodo_pago');
         $order->fecha = $notas_cursos->fecha;
+        $order->id_nota = $notas_cursos->id;
         $order->estatus = 1;
         $order->code = $code;
         if ($request->hasFile("foto")) {
@@ -267,8 +271,10 @@ class NotasCursosController extends Controller
 
         $notas_pagos = new NotasPagos;
         $notas_pagos->id_nota = $notas_cursos->id;
-        $notas_pagos->monto = $request->get('monto');
+        $notas_pagos->monto = $request->get('monto1');
         $notas_pagos->metodo_pago = $request->get('metodo_pago');
+        $notas_pagos->monto2 = $request->get('monto2');
+        $notas_pagos->metodo_pago2 = $request->get('metodo_pago2');
         $notas_pagos->created_at = $request->get('created_at');
         $notas_pagos->save();
 

@@ -15,6 +15,7 @@ class Orders extends Model
     protected $fillable = [
         'num_order',
         'id_usuario',
+        'id_admin',
         'pago',
         'forma_pago',
         'estatus',
@@ -34,6 +35,16 @@ class Orders extends Model
     public function User()
     {
         return $this->belongsTo(User::class, 'id_usuario');
+    }
+
+    public function Admin()
+    {
+        return $this->belongsTo(User::class, 'id_admin');
+    }
+
+    public function Nota()
+    {
+        return $this->belongsTo(NotasCursos::class, 'id_nota');
     }
 
     public function PagosFuera()
