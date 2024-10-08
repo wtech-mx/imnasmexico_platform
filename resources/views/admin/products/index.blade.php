@@ -322,10 +322,15 @@
 </script>
 
 <script>
+
     $(document).ready(function() {
+        var activeTab;
+
+
       // Función para abrir el modal y llenar los datos del producto
       $(document).on('click', '.editProductBtn', function() {
           let productId = $(this).data('id');
+          activeTab = $('.nav-tabs .active').attr('id');
 
         // Rellena los campos del formulario con los datos del producto
         $.ajax({
@@ -347,9 +352,20 @@
             // Llena los otros campos si es necesario
             // Actualiza la imagen en el modal
             $('#editProductModal #blah').attr('src', product.imagenes);
-            $('#editProductModal').modal('show');
-            loadStockHistory(productId);
 
+                // Reiniciar las pestañas activas, siempre mostrar la pestaña "Producto"
+                $('#pills-producto-tab').addClass('active').attr('aria-selected', true);
+                $('#pills-tiendita-tab').removeClass('active').attr('aria-selected', false);
+                $('#pills-kits-tab').removeClass('active').attr('aria-selected', false);
+
+                $('#pills-producto').addClass('show active');
+                $('#pills-tiendita, #pills-kits').removeClass('show active');
+
+                // Abrir el modal
+                $('#editProductModal').modal('show');
+
+                // Cargar historial de stock en la pestaña correspondiente
+                loadStockHistory(productId);
           }
         });
       });
@@ -360,41 +376,41 @@
                 url: "{{ route('products.stockHistory', ':id') }}".replace(':id', productId), // Ruta de Laravel para obtener el historial
                 type: 'GET',
                 success: function(history) {
-    console.log('Historial recibido:', history); // Añadir esto para verificar los datos recibidos
-    $('#pills-profile .row').empty();
+                        console.log('Historial recibido:', history); // Añadir esto para verificar los datos recibidos
+                        $('#pills-profile .row').empty();
 
-    let historyHtml = '<table class="table table-bordered">';
-    historyHtml += '<thead><tr><th>Fecha</th><th>Cantidad</th><th>Usuario</th></tr></thead><tbody>';
+                        let historyHtml = '<table class="table table-bordered">';
+                        historyHtml += '<thead><tr><th>Fecha</th><th>Cantidad</th><th>Usuario</th></tr></thead><tbody>';
 
-    $.each(history, function(index, record) {
-        console.log('Registro individual:', record); // Verificar el contenido de cada registro
-        let date = new Date(record.created_at);
+                        $.each(history, function(index, record) {
+                            console.log('Registro individual:', record); // Verificar el contenido de cada registro
+                            let date = new Date(record.created_at);
 
-        // Si la fecha no se puede interpretar, este punto es donde podrías ver si hay algún error con el contenido.
-        if (isNaN(date.getTime())) {
-            console.error('Fecha inválida:', record.created_at);
-        }
+                            // Si la fecha no se puede interpretar, este punto es donde podrías ver si hay algún error con el contenido.
+                            if (isNaN(date.getTime())) {
+                                console.error('Fecha inválida:', record.created_at);
+                            }
 
-        let formattedDate = date.toLocaleDateString('es-ES', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
-        let formattedTime = date.toLocaleTimeString('es-ES', {
-            hour: '2-digit',
-            minute: '2-digit'
-        });
+                            let formattedDate = date.toLocaleDateString('es-ES', {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            });
+                            let formattedTime = date.toLocaleTimeString('es-ES', {
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            });
 
-        historyHtml += `<tr>
-            <td>${formattedDate} a las ${formattedTime}</td>
-            <td>${record.stock}</td>
-            <td>${record.user}</td>
-        </tr>`;
-    });
+                            historyHtml += `<tr>
+                                <td>${formattedDate} a las ${formattedTime}</td>
+                                <td>${record.stock}</td>
+                                <td>${record.user}</td>
+                            </tr>`;
+                    });
 
-    historyHtml += '</tbody></table>';
-    $('#pills-profile .row').html(historyHtml);
-},
+                    historyHtml += '</tbody></table>';
+                    $('#pills-profile .row').html(historyHtml);
+                },
 
                 error: function(xhr, status, error) {
                     console.error('Error al cargar el historial:', error);
@@ -402,6 +418,14 @@
                 }
             });
         }
+
+                // Al cerrar el modal, restauramos la pestaña que estaba activa antes
+        $('#editProductModal').on('hidden.bs.modal', function() {
+            if (activeTab) {
+                $('#' + activeTab).tab('show');
+            }
+        });
+
 
       // Abrir modal y establecer el ID del producto
       $(document).on('click', '.edit-product-btn', function() {
