@@ -22,6 +22,10 @@
                     <button class="nav-link" id="nav-des-ejemplo-tab-masaje" data-bs-toggle="tab" data-bs-target="#nav-des-ejemplo-masaje" type="button" role="tab" aria-controls="nav-des-ejemplo-masaje" aria-selected="false">
                         Ejemplo de llenado EC1048 SEP CONOCER
                     </button>
+                @elseif($estandar->nombre == 'EC1313 - Aplicación de Técnicas para el Mejoramiento de la Apariencia Cutánea Facial mediante Dermapen')
+                    <button class="nav-link" id="nav-des-ejemplo-tab-derma" data-bs-toggle="tab" data-bs-target="#nav-des-ejemplo-derma" type="button" role="tab" aria-controls="nav-des-ejemplo-derma" aria-selected="false">
+                        Ejemplo de llenado EC1313 SEP CONOCER
+                    </button>
                 @endif
             @endforeach
 
@@ -36,6 +40,10 @@
                     </button>
                 @elseif($estandar->Estandar->nombre == 'EC1048 Aplicación de masaje con piedras calientes')
                     <button class="nav-link" id="nav-des-ejemplo-extr-tab-masaje" data-bs-toggle="tab" data-bs-target="#nav-des-ejemplo-extr-masaje" type="button" role="tab" aria-controls="nav-des-ejemplo-extr-masaje" aria-selected="false">
+                        Ejemplo de llenado EC1048 SEP CONOCER
+                    </button>
+                @elseif($estandar->Estandar->nombre == 'EC1313 - Aplicación de Técnicas para el Mejoramiento de la Apariencia Cutánea Facial mediante Dermapen')
+                    <button class="nav-link" id="nav-des-ejemplo-extr-tab-derma" data-bs-toggle="tab" data-bs-target="#nav-des-ejemplo-extr-derma" type="button" role="tab" aria-controls="nav-des-ejemplo-extr-derma" aria-selected="false">
                         Ejemplo de llenado EC1048 SEP CONOCER
                     </button>
                 @endif
@@ -71,6 +79,10 @@
             <div class="tab-pane fade" id="nav-des-ejemplo-masaje" role="tabpanel" aria-labelledby="nav-des-ejemplo-tab-masaje" tabindex="0" style="min-height: auto!important;">
                 @include('user.components.profile.tab_ejemplo_masaje')
             </div>
+        @elseif($estandar->nombre == 'EC1313 - Aplicación de Técnicas para el Mejoramiento de la Apariencia Cutánea Facial mediante Dermapen')
+            <div class="tab-pane fade" id="nav-des-ejemplo-derma" role="tabpanel" aria-labelledby="nav-des-ejemplo-tab-derma" tabindex="0" style="min-height: auto!important;">
+                @include('user.components.profile.tab_ejemplo_derma')
+            </div>
         @endif
     @endforeach
 
@@ -86,6 +98,10 @@
         @elseif($estandar->Estandar->nombre == 'EC1048 Aplicación de masaje con piedras calientes')
             <div class="tab-pane fade" id="nav-des-ejemplo-extr-masaje" role="tabpanel" aria-labelledby="nav-des-ejemplo-extr-tab-masaje" tabindex="0" style="min-height: auto!important;">
                 @include('user.components.profile.tab_ejemplo_masaje')
+            </div>
+        @elseif($estandar->Estandar->nombre == 'EC1313 - Aplicación de Técnicas para el Mejoramiento de la Apariencia Cutánea Facial mediante Dermapen')
+            <div class="tab-pane fade" id="nav-des-ejemplo-derma" role="tabpanel" aria-labelledby="nav-des-ejemplo-tab-derma" tabindex="0" style="min-height: auto!important;">
+                @include('user.components.profile.tab_ejemplo_derma')
             </div>
         @endif
     @endforeach
