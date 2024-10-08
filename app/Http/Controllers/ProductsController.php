@@ -5,14 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ProductsImport;
+use App\Models\HistorialVendidos;
 use App\Models\Products;
 use App\Models\HistorialStock;
+use Illuminate\Support\Facades\Artisan;
+use Milon\Barcode\DNS1D; // Importamos la clase para generar códigos de barras
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use DB;
 use Session;
 
 class ProductsController extends Controller
 {
+
     public function index(Request $request){
         $products = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Producto')->get();
         $productsTiendita = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Tiendita')->get();
@@ -126,4 +131,40 @@ class ProductsController extends Controller
 
         return redirect()->back()->with('success', 'Creado con exito');
     }
+
+    public function generateSKUs()
+    {
+        // Ejecuta el comando de generación de SKUs
+        Artisan::call('products:generate-skus');
+
+        return back()->with('success', 'SKUs generados correctamente para todos los productos.');
+    }
+
+    public function generateAllProductsPDF()
+    {
+        // Obtener todos los productos de la base de datos
+        // $products = Products::all();
+
+        // $products = Products::where('laboratorio','=','NAS')->where('subcategoria', 'Producto')->get();
+        $products = Products::where('laboratorio','=','Cosmica')->get();
+
+
+        // Generar el PDF usando la vista y pasar los datos
+        $pdf = PDF::loadView('admin.products.all_products_barcode', [
+            'products' => $products
+        ]);
+
+        // Descargar el PDF
+        return $pdf->setPaper('letter')->stream("all_products_barcode.pdf");
+
+    }
+
+    public function productsHistorialVendidos(){
+
+        $HistorialVendidos = HistorialVendidos::orderBy('id','DESC')->get();
+
+        return view('admin.products.historial_prodcutsvendidados', compact('HistorialVendidos'));
+
+    }
+
 }

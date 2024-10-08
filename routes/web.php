@@ -482,11 +482,15 @@ Route::group(['middleware' => ['auth']], function() {
      Route::patch('/admin/products/update/{id}', [App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
      Route::patch('/admin/products/ocultar/{id}', [App\Http\Controllers\ProductsController::class, 'update_ocultar'])->name('products.update_ocultar');
      Route::get('/products/{id}/stock-history', [App\Http\Controllers\ProductsController::class, 'getStockHistory'])->name('products.stockHistory');
+     Route::get('/admin/products/historial', [App\Http\Controllers\ProductsController::class, 'productsHistorialVendidos'])->name('productsHistorialVendidos.index');
 
      Route::get('/admin/products/{id}', [App\Http\Controllers\ProductsController::class, 'show'])->name('products.show');
 
      Route::get('/cosmica/admin/products/{id}', [App\Http\Controllers\LaboratoriosController::class, 'show_products_cosmica'])->name('cosmica_products.show');
      Route::get('/nas/admin/products/{id}', [App\Http\Controllers\LaboratoriosController::class, 'show_products_nas'])->name('nas_products.show');
+
+     Route::post('/products/generate-skus', [App\Http\Controllers\ProductsController::class, 'generateSKUs'])->name('products.generateSkus');
+     Route::get('/generate-pdf-all-products', [App\Http\Controllers\ProductsController::class, 'generateAllProductsPDF'])->name('products.generateAllPDF');
 
     // =============== M O D U L O   M A N U A L ===============================
     Route::get('/admin/manual', [App\Http\Controllers\ManualController::class, 'index'])->name('manual.index');
@@ -624,8 +628,6 @@ Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaCon
     // Rutas para el sistema de documentos
 
     Route::group(['prefix' => 'cam', 'middleware' => 'web'], function () {
-
-
 
     Route::middleware(['auth'])->group(function () {
 

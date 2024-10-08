@@ -35,6 +35,17 @@
                             <i class="fa fa-fw fa-edit"></i> Crear
                         </a>
                     @endcan
+
+                    {{-- <form action="{{ route('products.generateSkus') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-primary">Generar SKUs</button>
+                    </form>
+
+                    <a href="{{ route('products.generateAllPDF') }}" class="btn btn-primary">
+                        Generar PDF de Todos los Productos
+                    </a> --}}
+
+
                 </div>
             </div>
 
