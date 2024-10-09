@@ -35,6 +35,7 @@
                                           <th >Monto</th>
                                           <th >Curso</th>
                                           <th >Fecha</th>
+                                          <th >Recibo MP</th>
                                         </tr>
                                       </thead>
                                     <tbody>
@@ -70,7 +71,9 @@
                                                     @endphp
                                                     {!! $fecha_hora_formateada !!}
                                                 </td>
-
+                                                <td>
+                                                    <a href="{{ route('mercado.pago_recibo',$pago->id) }}" target="_blank" class="btn btn-primary btn-sm">Recibo</a>
+                                                </td>
 
                                             </tr>
                                         @endforeach

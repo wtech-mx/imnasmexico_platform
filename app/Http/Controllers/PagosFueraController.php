@@ -90,7 +90,7 @@ class PagosFueraController extends Controller
         }else{
             $curso = $cursos->nombre;
         }
-   
+
         $pagos_fuera = new PagosFuera;
         $pagos_fuera->nombre = $usuario;
         $pagos_fuera->correo = $request->get('email');
@@ -780,11 +780,40 @@ class PagosFueraController extends Controller
             $filters["offset"] += $filters["limit"];
 
         } while (count($results) > 0);
-
-
             return view('admin.pagos.mercado_pago', compact('pagos'));
-
     }
+
+
+    public function mercado_pago_recibo ($id)
+    {
+        // Inicializa la SDK de Mercado Pago
+        SDK::setAccessToken(config('services.mercadopago.token'));
+
+        $payment = \MercadoPago\Payment::find_by_id($id);
+
+        // Verifica si el pago existe
+        if (!$payment) {
+            abort(404, 'Pago no encontrado');
+        }
+
+        // Prepara los datos que te interesan
+        $data = [
+            'id' => $payment->id,
+            'status' => $payment->status,
+            'transaction_amount' => $payment->transaction_amount,
+            'date_approved' => $payment->date_approved,
+            'payment_method_id' => $payment->payment_method_id,
+            'payment_type_id' => $payment->payment_type_id,
+            'description' => $payment->description,
+            'payer_email' => $payment->payer->email,
+        ];
+
+        // Pasando los datos a la vista del recibo
+        $pdf = Pdf::loadView('admin.pagos.recibomp', compact('data'));
+
+        return $pdf->stream('recibo_mercadopago.pdf', ['Attachment' => true]);
+    }
+
 
     public function getTicketsByCurso($id)
     {
