@@ -37,6 +37,7 @@
                             <thead class="thead-light">
                                 <tr>
                                     <th>Nombre</th>
+                                    <th>SKU</th>
                                     <th>Stock</th>
                                     <th>Precio</th>
                                 </tr>
@@ -51,6 +52,9 @@
                                         @endif
 
                                         <h6 class="ms-3 my-auto">{{ $product->nombre }}</h6>
+                                    </td>
+                                    <td>
+                                        {{ $product->sku }}
                                     </td>
                                     <td class="
                                             @if($product->stock < 2)
@@ -105,6 +109,7 @@
             document.getElementById('productName').innerText = product.nombre;
             document.getElementById('productPrice').innerText = product.precio_normal.toLocaleString();
             document.getElementById('productStock').innerText = product.stock;
+            document.getElementById('productSku').innerText = product.sku;
             document.getElementById('cantidad').value = 1; // Valor por defecto en cantidad
 
             // Guardar el producto en el botón de agregar al carrito
@@ -126,6 +131,8 @@
             id: product.id,
             nombre: product.nombre,
             stock: product.stock,
+            imagenes: product.imagenes,
+            sku: product.sku,
             cantidad: cantidad,
         };
 
@@ -157,8 +164,10 @@
             let li = document.createElement('li');
             li.classList.add('list-group-item');
             li.innerHTML = `
+                <img  src="${item.imagenes}" style="width: 50px;">
+                <strong>SKU:</strong> ${item.sku}<br>
                 <strong>${item.nombre}</strong> - Cantidad: ${item.cantidad}
-                <button class="btn btn-danger btn-sm float-end" onclick="removeCartItem(${index})">Eliminar</button>
+                <button class="btn btn-danger btn-sm float-end" onclick="removeCartItem(${index})"><i class="fa fa-trash text-sm opacity-10"></i></button>
             `;
             cartItemsContainer.appendChild(li);
         });
