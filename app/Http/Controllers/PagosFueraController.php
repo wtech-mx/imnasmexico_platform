@@ -22,6 +22,7 @@ use App\Models\WebPage;
 use Hash;
 use App\Mail\PlantillaNuevoUser;
 use App\Models\Cursos;
+use App\Models\RegistroImnas;
 use Illuminate\Support\Str;
 use DB;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -48,8 +49,7 @@ class PagosFueraController extends Controller
         return view('admin.pagos.index_mp', compact('orders'));
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $webpage = WebPage::first();
 
         $code = Str::random(8);
@@ -80,17 +80,17 @@ class PagosFueraController extends Controller
         }
 
         if($request->get('campo4') != NULL){
-            $curso = $cursos->Cursos->nombre . "\n" . $cursos2->Cursos->nombre . "\n" . $cursos3->Cursos->nombre . "\n" . $cursos4->Cursos->nombre;
+            $curso = $cursos->nombre . "\n" . $cursos2->nombre . "\n" . $cursos3->nombre . "\n" . $cursos4->nombre;
         }elseif($request->get('campo3') != NULL){
-            $curso = $cursos->Cursos->nombre . "\n" . $cursos2->Cursos->nombre . "\n" . $cursos3->Cursos->nombre;
+            $curso = $cursos->nombre . "\n" . $cursos2->nombre . "\n" . $cursos3->nombre;
         }elseif($request->get('campo2') != NULL){
-            $curso = $cursos->Cursos->nombre . "\n" . $cursos2->Cursos->nombre;
+            $curso = $cursos->nombre . "\n" . $cursos2->nombre;
         }elseif($request->get('clase_grabada') != NULL){
-            $curso = $clase->Cursos->nombre . '- clase grabada.';
+            $curso = $clase->nombre . '- clase grabada.';
         }else{
-            $curso = $cursos->Cursos->nombre;
+            $curso = $cursos->nombre;
         }
-
+   
         $pagos_fuera = new PagosFuera;
         $pagos_fuera->nombre = $usuario;
         $pagos_fuera->correo = $request->get('email');
@@ -176,6 +176,20 @@ class PagosFueraController extends Controller
                 $order_ticket->id_tickets = $request->get('campo1');
                 $cursos = CursosTickets::where('id','=', $order_ticket->id_tickets)->first();
                 $order_ticket->id_curso = $cursos->id_curso;
+
+                if($order_ticket->id_tickets == 1008){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->tipo = 1;
+                    $envio->save();
+                }else if($order_ticket->id_tickets == 1009){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->tipo = 2;
+                    $envio->save();
+                }
             }
             $order_ticket->save();
 
@@ -187,6 +201,20 @@ class PagosFueraController extends Controller
                 $cursos2 = CursosTickets::where('id','=', $order_ticket2->id_tickets)->first();
                 $order_ticket2->id_curso = $cursos2->id_curso;
                 $order_ticket2->save();
+
+                if($order_ticket2->id_tickets == 1008){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->tipo = 1;
+                    $envio->save();
+                }else if($order_ticket2->id_tickets == 1009){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->tipo = 2;
+                    $envio->save();
+                }
             }
 
             if($request->get('campo3') != NULL){
@@ -197,6 +225,20 @@ class PagosFueraController extends Controller
                 $cursos3 = CursosTickets::where('id','=', $order_ticket3->id_tickets)->first();
                 $order_ticket3->id_curso = $cursos3->id_curso;
                 $order_ticket3->save();
+
+                if($order_ticket3->id_tickets == 1008){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->tipo = 1;
+                    $envio->save();
+                }else if($order_ticket3->id_tickets == 1009){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->tipo = 2;
+                    $envio->save();
+                }
             }
 
             if($request->get('campo4') != NULL){
@@ -207,6 +249,20 @@ class PagosFueraController extends Controller
                 $cursos4 = CursosTickets::where('id','=', $order_ticket4->id_tickets)->first();
                 $order_ticket4->id_curso = $cursos4->id_curso;
                 $order_ticket4->save();
+
+                if($order_ticket4->id_tickets == 1008){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->tipo = 1;
+                    $envio->save();
+                }else if($order_ticket4->id_tickets == 1009){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->tipo = 2;
+                    $envio->save();
+                }
             }
 
             $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
@@ -216,103 +272,6 @@ class PagosFueraController extends Controller
             $datos = $order->User->name;
 
 
-            foreach ($orden_ticket as $details) {
-
-                $curso = $details->Cursos->nombre;
-                $fecha = $details->Cursos->fecha_inicial;
-                $nombre = $order->User->name;
-                $horas_default = "24";
-                $duracion_hrs = $horas_default;
-                $tipo_documentos = Tipodocumentos::first();
-
-                if ($details->Cursos->modalidad == 'Online') {
-                    Mail::to($order->User->email)->send(new PlantillaTicket($details));
-                } else {
-                    Mail::to($order->User->email)->send(new PlantillaTicketPresencial($details));
-                }
-
-                if($details->CursosTickets->descripcion == 'Con opción a Documentos de certificadora IMNAS'){
-
-                }else{
-
-                    if($details->Cursos->pack_stps == "Si"){
-
-                        $id_ticket = $order_ticket->id;
-                        $ticket = OrdersTickets::find($id_ticket);
-                        $ticket->estatus_doc = '1';
-                        $ticket->estatus_cedula = '1';
-                        $ticket->estatus_titulo = '1';
-                        $ticket->estatus_diploma = '1';
-                        $ticket->estatus_credencial = '1';
-                        $ticket->estatus_tira = '1';
-                        $ticket->update();
-
-                            $variables = [
-                                $details->Cursos->p_stps_1,
-                                $details->Cursos->p_stps_2,
-                                $details->Cursos->p_stps_3,
-                                $details->Cursos->p_stps_4,
-                                $details->Cursos->p_stps_5,
-                                $details->Cursos->p_stps_6,
-                            ];
-
-                            foreach ($variables as $index => $curso) {
-                                if (isset($curso) && !empty($curso)) {
-                                    $sello = 'Si';
-
-                                    // Lógica para crear el PDF y enviar el correo aquí
-                                    $pdf = PDF::loadView('admin.pdf.diploma_stps', compact('curso', 'fecha', 'tipo_documentos', 'nombre','duracion_hrs','sello'));
-                                    $pdf->setPaper('A4', 'portrait');
-                                    $contenidoPDF = $pdf->output();
-
-                                    Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
-                                }
-                            }
-
-                        }else{
-
-
-                        if($details->Cursos->stps == '1' && $details->Cursos->titulo_hono == '1'){
-                            $id_ticket = $order_ticket->id;
-                            $ticket = OrdersTickets::find($id_ticket);
-                            $ticket->estatus_doc = '1';
-                            $ticket->estatus_cedula = '1';
-                            $ticket->estatus_diploma = '1';
-                            $ticket->estatus_credencial = '1';
-                            $ticket->estatus_tira = '1';
-                            $ticket->update();
-                            $sello = 'Si';
-
-                            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
-                            $pdf->setPaper('A4', 'portrait');
-                            $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
-                            Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
-
-                        }
-
-                        if($details->Cursos->stps == '1' && $details->Cursos->titulo_hono == NULL){
-                            $id_ticket = $order_ticket->id;
-                            $ticket = OrdersTickets::find($id_ticket);
-                            $ticket->estatus_doc = '1';
-                            $ticket->estatus_cedula = '1';
-                            $ticket->estatus_titulo = '1';
-                            $ticket->estatus_diploma = '1';
-                            $ticket->estatus_credencial = '1';
-                            $ticket->estatus_tira = '1';
-                            $ticket->update();
-
-                            $sello = 'Si';
-
-                            $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
-                            $pdf->setPaper('A4', 'portrait');
-                            $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
-                            Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
-
-                        }
-                    }
-
-                }
-            }
 
             if($request->get('name2') != NULL){
                 $code2 = Str::random(8);
@@ -527,9 +486,6 @@ class PagosFueraController extends Controller
                 $orden_ticket2 = OrdersTickets::where('id_order', '=', $order2->id)->get();
             }
         }
-
-        // $datos = PagosFuera::where('id', '=', $pagos_fuera->id)->first();
-        // Mail::to($webpage->email_developer)->bcc($webpage->email_developer_two, 'Destinatario dev 2')->send(new PlantillaPagoExterno($datos));
 
         return redirect()->route('pagos.pendientes')
             ->with('success', 'pago fuera creado con exito.');

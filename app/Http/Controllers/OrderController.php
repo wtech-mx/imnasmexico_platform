@@ -466,10 +466,6 @@ class OrderController extends Controller
 
                 $ordenwoo = Order::create($data);
             }else if($orden_ticket2->id_curso == 647){
-                $order = Orders::where('code', '=', $external_reference)->first();
-                $order->registro_imnas = 1;
-                $order->update();
-
                 $cliente = User::where('id', '=', $order->id_usuario)->first();
                 $cliente->registro_imnas = 1;
                 $cliente->update();
@@ -605,10 +601,6 @@ class OrderController extends Controller
             Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket, $user, $id_order, $pago, $forma_pago, $orden_ticket2));
 
             if($orden_ticket2->id_curso == 647){
-                $order = Orders::where('code', '=', $external_reference)->first();
-                $order->registro_imnas = 1;
-                $order->update();
-
                 $cliente = User::where('id', '=', $order->id_usuario)->first();
                 $cliente->registro_imnas = 1;
                 $cliente->update();
@@ -804,7 +796,7 @@ class OrderController extends Controller
         }else{
             $pago_fuera = public_path() . '/pago_fuera';
         }
-        
+
         $order = new Orders;
         $order->id_usuario = $payer->id;
         $order->pago = $request->precio;
