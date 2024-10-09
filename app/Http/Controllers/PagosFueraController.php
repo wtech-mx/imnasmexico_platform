@@ -747,15 +747,17 @@ class PagosFueraController extends Controller
             ->with('success', 'curso created successfully.');
     }
 
-    public function mercado_pago(){
+    public function mercado_pago()
+    {
         // Configuración de la SDK de MercadoPago
         SDK::setAccessToken(config('services.mercadopago.token'));
 
-        // Obtener pagos desde MercadoPago
+        // Fechas para el filtro
         $today = date('Y-m-d');
         $lastMonthEndDate = date('Y-m-d', strtotime('-1 month -1 day'));
         $lastMonthStartDate = date('Y-m-01', strtotime('-1 month'));
 
+        // Filtros para la búsqueda de pagos
         $filters = array(
             "status" => "approved",
             "begin_date" => $lastMonthStartDate."T00:00:00.000-00:00",
@@ -764,7 +766,9 @@ class PagosFueraController extends Controller
             "offset" => 0
         );
 
+        // Arrays para almacenar pagos
         $pagos = array();
+        $comprasSinEmail = array();
 
         do {
             // Obtener siguiente página de resultados
@@ -773,15 +777,26 @@ class PagosFueraController extends Controller
             // Obtener los resultados de la búsqueda
             $results = $searchResult->getArrayCopy();
 
-            // Concatenar los resultados de la siguiente página con los resultados anteriores
-            $pagos = array_merge($pagos, $results);
+            // Clasificar los pagos en función de si el email está vacío o no
+            foreach ($results as $pago) {
+                if (empty($pago->payer->email)) {
+                    // Categorizar como "compras" si el email está vacío
+                    $comprasSinEmail[] = $pago;
+                } else {
+                    // Categorizar como pagos normales si el email no está vacío
+                    $pagos[] = $pago;
+                }
+            }
 
             // Incrementar el offset para obtener la siguiente página de resultados
             $filters["offset"] += $filters["limit"];
 
         } while (count($results) > 0);
-            return view('admin.pagos.mercado_pago', compact('pagos'));
+
+        // Pasar los datos a la vista
+        return view('admin.pagos.mercado_pago', compact('pagos', 'comprasSinEmail'));
     }
+
 
 
     public function mercado_pago_recibo ($id)
