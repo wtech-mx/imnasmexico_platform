@@ -32,7 +32,7 @@
 </head>
 <body>
     <div class="container">
-        <img src="{{ asset('utilidades/logo_mp.png') }}" alt="" style="width: 10%">
+        <img src="https://plataforma.imnasmexico.com/utilidades/logo_mp.png" alt="" style="width: 30%">
         <h1>Recibo de Pago - MercadoPago</h1>
 
         <table class="details" width="100%">

@@ -511,7 +511,8 @@
                 <li class="nav-item">
                     <a class="nav-link {{ (Request::is('admin/pagos/mercado*') ? 'active' : '') }}" href="{{ route('mercado.pago') }}">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-money text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                        <img src="https://plataforma.imnasmexico.com/utilidades/logo_mp.png" alt="" style="width: 25px">
+
                     </div>
                     <span class="nav-link-text ms-1">Mercado Pago</span>
                     </a>
