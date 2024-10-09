@@ -3,7 +3,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title">Cambio de Estatus #{{$item->id}}</h5>
+          <h5 class="modal-title">Cambio de Estatus C#{{$item->id}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
@@ -34,7 +34,10 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" id="submitButtonEstatus{{ $item->id }}" class="btn btn-success">
+                        Actualizar
+                        <span id="spinner{{ $item->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
                 </div>
             </form>
 

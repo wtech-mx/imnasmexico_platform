@@ -7,7 +7,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-            <form method="POST" action="{{ route('distribuidoras.update_estatus', $item->id) }}" enctype="multipart/form-data" role="form">
+            <form method="POST"  action="{{ route('distribuidoras.update_estatus', $item->id) }}" enctype="multipart/form-data" role="form">
                 @csrf
                 <input type="hidden" name="_method" value="PATCH">
                 <div class="modal-body">
@@ -34,7 +34,10 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" id="submitButtonEstatus{{ $item->id }}" class="btn btn-success">
+                        Actualizar
+                        <span id="spinner{{ $item->id }}" class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+                    </button>
                 </div>
             </form>
 

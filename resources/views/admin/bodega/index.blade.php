@@ -144,7 +144,8 @@
                                                     <td>
                                                         <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
                                                             En preparación
-                                                        </a>
+                                                        </a><br>
+                                                        NAS Cotizaciones Aprobadas
                                                     </td>
 
                                                     <td>
@@ -1022,6 +1023,27 @@
         searchable: true,
         fixedHeight: false
     });
+
+
+// Seleccionar todos los botones de envío
+document.querySelectorAll('[id^="submitButtonEstatus"]').forEach(function(button) {
+    button.addEventListener('click', function(event) {
+        // Evitar múltiples clics
+        event.preventDefault();
+
+        // Obtener el ID del botón y su spinner correspondiente
+        const id = this.id.replace('submitButtonEstatus', ''); // Obtener el ID del producto
+        const spinner = document.getElementById('spinner' + id);
+
+        // Deshabilitar el botón y mostrar el spinner
+        this.disabled = true;
+        spinner.classList.remove('d-none');
+
+        // Enviar el formulario
+        this.form.submit();
+    });
+});
+
 
 </script>
 
