@@ -47,7 +47,7 @@
                                     <th>#</th>
                                     <th>Producto</th>
                                     <th>stock_viejo</th>
-                                    <th>cantidad restado</th>
+                                    <th>Restado</th>
                                     <th>stock actual</th>
                                     <th>Id Venta</th>
                                     <th>Fecha</th>
@@ -62,7 +62,13 @@
 
                                     <th>
                                         <img id="blah" src="{{$item->Products->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/> <br>
-                                        {{ $item->Products->nombre }}
+                                            @php
+                                                $words = explode(' ', $item->Products->nombre);
+                                                $chunks = array_chunk($words, 2);
+                                                foreach ($chunks as $chunk) {
+                                                    echo implode(' ', $chunk) . '<br>';
+                                                }
+                                            @endphp
                                     </th>
 
                                     <td>
@@ -78,12 +84,12 @@
                                     </td>
 
                                     <td>
-                                        COTIZACION NAS: <strong> {{ $item->id_cotizacion_nas }} </strong><br>
-                                        COTIZACION COSMICA: <strong> {{ $item->id_cotizacion_cosmica }} </strong> <br>
-                                        VENTA NAS: <strong> {{ $item->id_venta_nas }} </strong> <br>
-                                        PARADISUS: <strong> {{ $item->id_paradisus }} </strong> <br>
-                                        NAS ONLINE: <strong> {{ $item->id_nas_online }} </strong> <br>
-                                        COMSICA ONLINE: <strong> {{ $item->id_cosmica_online }} </strong> <br>
+                                        COTIZACION NAS: <strong style="color:#B09B9B"> {{ $item->id_cotizacion_nas }} </strong><br>
+                                        COTIZACION COSMICA: <strong style="color:#D486D6"> {{ $item->id_cotizacion_cosmica }} </strong> <br>
+                                        VENTA NAS: <strong style="color:#A2DBE2"> {{ $item->id_venta_nas }} </strong> <br>
+                                        PARADISUS: <strong style="color:#EE96BA"> {{ $item->id_paradisus }} </strong> <br>
+                                        NAS ONLINE: <strong style="color:#F5ECE4"> {{ $item->id_nas_online }} </strong> <br>
+                                        COMSICA ONLINE: <strong style="color:#80486B"> {{ $item->id_cosmica_online }} </strong> <br>
                                     </td>
 
                                     <td>

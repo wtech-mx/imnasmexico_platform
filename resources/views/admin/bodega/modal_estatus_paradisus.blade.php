@@ -7,7 +7,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <form method="POST" action="{{ route('notas_cotizacion.update_estatus', $item->id) }}" enctype="multipart/form-data" role="form">
+        <form method="POST" action="{{ route('notas_cotizacion.update_estatus', $order['id']) }}" enctype="multipart/form-data" role="form">
             @csrf
             <input type="hidden" name="_method" value="PATCH">
             <div class="modal-body">
