@@ -113,6 +113,10 @@
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
+
+                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner.bodega', $item->id) }}">
+                                                            <i class="fa fa-barcode"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
 
@@ -172,6 +176,10 @@
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
+
+                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner.bodega', $item->id) }}">
+                                                            <i class="fa fa-barcode"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
 
@@ -230,6 +238,10 @@
 
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
+                                                        </a>
+
+                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_cosmica.bodega', $item->id) }}">
+                                                            <i class="fa fa-barcode"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -351,7 +363,6 @@
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_para_{{ $order['id'] }}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
-
                                                     </td>
                                                 </tr>
 

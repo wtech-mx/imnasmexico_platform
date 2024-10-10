@@ -614,6 +614,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/cosmica/admin/productos/stock/firma/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_firma_update'])->name('ordenes_cosmica_update.firma');
     Route::patch('/cosmica/admin/productos/stock/orden/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_orden_update'])->name('ordenes_cosmica_update.orden');
 
+    Route::get('bodega/preparacion/scaner/{id}', [App\Http\Controllers\BodegaController::class, 'preparacion_scaner'])->name('preparacion_scaner.bodega');
+    Route::post('/check-product', [App\Http\Controllers\BodegaController::class, 'checkProduct'])->name('check.product');
+
+    Route::get('bodega/preparacion/scaner/cosmica/{id}', [App\Http\Controllers\BodegaController::class, 'preparacion_scaner_cosmica'])->name('preparacion_scaner_cosmica.bodega');
+    Route::post('/check-product/cosmica', [App\Http\Controllers\BodegaController::class, 'checkProduct_cosmica'])->name('check_cosmica.product');
     // =============== M O D U L O   R E P O R T E  V E N T A S ===============================
     Route::get('reporte/ventas/', [App\Http\Controllers\ReporteVentasController::class, 'index'])->name('reporte_ventas.index');
     Route::get('reporte/ventas/buscador', [App\Http\Controllers\ReporteVentasController::class, 'buscador'])->name('reporte_ventas.buscador');

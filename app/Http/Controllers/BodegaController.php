@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\HistorialVendidos;
 use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
+use App\Models\ProductosNotasCosmica;
+use App\Models\ProductosNotasId;
 use App\Models\Products;
 use Illuminate\Http\Request;
 
@@ -266,4 +268,71 @@ class BodegaController extends Controller
         }
     }
 
+    public function preparacion_scaner(Request $request, $id){
+
+        $nota_scaner = NotasProductos::where('id', '=', $id)->first();
+        $productos_scaner = ProductosNotasId::where('id_notas_productos', '=', $id)->get();
+        $allChecked = $productos_scaner->every(function ($producto) {
+            return $producto->estatus === 1;
+        });
+
+        return view('admin.bodega.scaner.show', compact('nota_scaner', 'productos_scaner', 'allChecked'));
+    }
+
+    public function checkProduct(Request $request){
+        $sku = $request->input('sku');
+        $idNotaProducto = $request->input('id_notas_productos');
+
+        // Busca el producto en la tabla `Products`
+        $product = Products::where('sku', $sku)->first();
+
+        if ($product) {
+            // Verifica y actualiza el registro correcto en `productos_notas`
+            $notaProducto = ProductosNotasId::where('id_notas_productos', $idNotaProducto)
+                ->where('producto', $product->nombre)
+                ->first();
+
+            if ($notaProducto) {
+                $notaProducto->estatus = 1;
+                $notaProducto->save();
+                return response()->json(['status' => 'success', 'message' => 'Producto encontrado y actualizado']);
+            }
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'Producto no encontrado o no corresponde a la nota']);
+    }
+
+    public function preparacion_scaner_cosmica(Request $request, $id){
+
+        $nota_scaner = NotasProductosCosmica::where('id', '=', $id)->first();
+        $productos_scaner = ProductosNotasCosmica::where('id_notas_productos', '=', $id)->get();
+        $allChecked = $productos_scaner->every(function ($producto) {
+            return $producto->estatus === 1;
+        });
+
+        return view('admin.bodega.scaner.show_cosmica', compact('nota_scaner', 'productos_scaner', 'allChecked'));
+    }
+
+    public function checkProduct_cosmica(Request $request){
+        $sku = $request->input('sku');
+        $idNotaProducto = $request->input('id_notas_productos');
+
+        // Busca el producto en la tabla `Products`
+        $product = Products::where('sku', $sku)->first();
+
+        if ($product) {
+            // Verifica y actualiza el registro correcto en `productos_notas`
+            $notaProducto = ProductosNotasCosmica::where('id_notas_productos', $idNotaProducto)
+                ->where('producto', $product->nombre)
+                ->first();
+
+            if ($notaProducto) {
+                $notaProducto->estatus = 1;
+                $notaProducto->save();
+                return response()->json(['status' => 'success', 'message' => 'Producto encontrado y actualizado']);
+            }
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'Producto no encontrado o no corresponde a la nota']);
+    }
 }

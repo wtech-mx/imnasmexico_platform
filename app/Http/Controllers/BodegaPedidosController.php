@@ -400,4 +400,6 @@ class BodegaPedidosController extends Controller
         return redirect()->back()->with('success', 'Envio de correo exitoso.');
 
     }
+
+    
 }
