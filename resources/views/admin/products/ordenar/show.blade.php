@@ -18,7 +18,7 @@ Productos solicitados
                                     <div class="col-12">
                                         <h2>Productos solicitados NAS</h2>
                                     </div>
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-6 col-sm-6 col-md-6 col-lg-6">
                                         <label for="name">Fecha</label>
                                         <div class="input-group mb-3">
                                             <span class="input-group-text" id="basic-addon1">
@@ -29,7 +29,7 @@ Productos solicitados
                                     </div>
 
                                     @if ($pedido->estatus != 'Realizado')
-                                        <div class="col-3">
+                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                             <br>
                                             <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $pedido->id) }}">
                                                 <i class="fa fa-file"></i> Descargar PDF
@@ -37,7 +37,7 @@ Productos solicitados
                                         </div>
                                     @endif
 
-                                    <div class="col-3">
+                                    <div class="col-6 col-sm-6 col-md-3 col-lg-3">
                                         <br>
                                         <a class="btn my-auto btn-success text-white" target="_blank" href="{{ route('ordenes_nas.firma', $pedido->id) }}">
                                             <i class="fa fa-file"></i> Liga para aprobar
@@ -48,12 +48,12 @@ Productos solicitados
                                         <h5 style="color:#836262"><strong>Productos solicitados</strong> </h5>
                                     </div>
                                     @foreach ($pedido_productos as $productos)
-                                        <div class="row producto-item" id="producto_{{ $productos->id }}">
+                                        <div class="row producto-item" id="producto_{{ $productos->id }}" style="background: #f9f9f9;border-radius: 10px;margin: 5px;box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);margin-bottom: 1rem !important;padding: 10px 0 0 0;">
                                             <input type="hidden" name="id_pedido[]" value="{{ $productos->id_pedido }}">
                                             <input type="hidden" name="id_producto[]" value="{{ $productos->id_producto }}">
                                             <input type="hidden" name="eliminar_producto[]" value="0" id="eliminar_producto_{{ $productos->id }}">
 
-                                            <div class="form-group col-3">
+                                            <div class="form-group col-12 col-sm-4 col-md-3 col-lg-3">
                                                 <label>Nombre</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
@@ -63,7 +63,7 @@ Productos solicitados
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-2">
+                                            <div class="form-group col-6 col-sm-4 col-md-3 col-lg-2">
                                                 <label>Stock Actual</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
@@ -73,7 +73,7 @@ Productos solicitados
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-2">
+                                            <div class="form-group col-6 col-sm-4 col-md-3 col-lg-2">
                                                 <label>Cantidad solicitada</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
@@ -87,7 +87,7 @@ Productos solicitados
                                                 </div>
                                             </div>
 
-                                            <div class="form-group col-2">
+                                            <div class="form-group col-6 col-sm-4 col-md-3 col-lg-2">
                                                 <label>Restantes</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
@@ -98,7 +98,7 @@ Productos solicitados
                                             </div>
 
                                             @if ($pedido->estatus == 'Confirmado')
-                                                <div class="form-group col-2">
+                                                <div class="form-group col-6 col-sm-4 col-md-3 col-lg-2">
                                                     <label>Laboratorio Restantes</label>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text" id="basic-addon1">
@@ -110,7 +110,7 @@ Productos solicitados
                                             @endif
 
                                             @if ($pedido->estatus != 'Finalizado')
-                                                <div class="form-group col-2">
+                                                <div class="form-group col-5  col-sm-4 col-md-3 col-lg-2">
                                                     <label>Cantidad recibida</label>
                                                     <div class="input-group mb-3">
                                                         <span class="input-group-text" id="basic-addon1">
