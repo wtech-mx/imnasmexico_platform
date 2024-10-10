@@ -483,7 +483,10 @@ Route::group(['middleware' => ['auth']], function() {
      Route::patch('/admin/products/update/{id}', [App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
      Route::patch('/admin/products/ocultar/{id}', [App\Http\Controllers\ProductsController::class, 'update_ocultar'])->name('products.update_ocultar');
      Route::get('/products/{id}/stock-history', [App\Http\Controllers\ProductsController::class, 'getStockHistory'])->name('products.stockHistory');
+
      Route::get('/admin/products/historial', [App\Http\Controllers\ProductsController::class, 'productsHistorialVendidos'])->name('productsHistorialVendidos.index');
+     Route::get('/admin/products/historial/filtro', [App\Http\Controllers\ProductsController::class, 'filtro'])->name('products_historial.filtro');
+     Route::get('/admin/products/historial/pdf', [App\Http\Controllers\ProductsController::class, 'historial_pdf'])->name('products_historial.pdf');
 
      Route::get('/admin/products/{id}', [App\Http\Controllers\ProductsController::class, 'show'])->name('products.show');
 

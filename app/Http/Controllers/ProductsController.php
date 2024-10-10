@@ -11,7 +11,7 @@ use App\Models\HistorialStock;
 use Illuminate\Support\Facades\Artisan;
 use Milon\Barcode\DNS1D; // Importamos la clase para generar códigos de barras
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Carbon\Carbon;
 use DB;
 use Session;
 
@@ -161,9 +161,49 @@ class ProductsController extends Controller
 
     public function productsHistorialVendidos(){
 
-        $HistorialVendidos = HistorialVendidos::orderBy('id','DESC')->get();
+        $HistorialVendidos = HistorialVendidos::whereDate('created_at', Carbon::today())
+        ->orderBy('id', 'DESC')
+        ->get()
+        ->groupBy('id_producto');
 
         return view('admin.products.historial_prodcutsvendidados', compact('HistorialVendidos'));
+
+    }
+
+    public function filtro(Request $request){
+        $fechaInicialDe = \Carbon\Carbon::parse($request->fecha_inicial_de)->startOfDay();
+        $fechaInicialA = \Carbon\Carbon::parse($request->fecha_inicial_a)->endOfDay();
+
+        $HistorialVendidos = HistorialVendidos::orderBy('created_at', 'DESC');
+
+        if ($request->fecha_inicial_de && $request->fecha_inicial_a) {
+            $HistorialVendidos = $HistorialVendidos->where('created_at', '>=', $fechaInicialDe)
+                                    ->where('created_at', '<=', $fechaInicialA);
+        }
+
+        $HistorialVendidos = $HistorialVendidos->get()->groupBy('id_producto');
+
+        return view('admin.products.historial_prodcutsvendidados', compact('HistorialVendidos'));
+    }
+
+    public function historial_pdf(Request $request)
+    {
+        $today =  date('d-m-Y');
+        $fechaInicialDe = \Carbon\Carbon::parse($request->fecha_inicial_de)->startOfDay();
+        $fechaInicialA = \Carbon\Carbon::parse($request->fecha_inicial_a)->endOfDay();
+
+        $HistorialVendidos = HistorialVendidos::orderBy('created_at', 'DESC');
+
+        if ($request->fecha_inicial_de && $request->fecha_inicial_a) {
+            $HistorialVendidos = $HistorialVendidos->where('created_at', '>=', $fechaInicialDe)
+                                    ->where('created_at', '<=', $fechaInicialA);
+        }
+
+        $HistorialVendidos = $HistorialVendidos->get()->groupBy('id_producto');
+
+        $pdf = \PDF::loadView('admin.products.pdf_historial', compact('HistorialVendidos', 'today'));
+        return $pdf->stream();
+         //return $pdf->download('Nota cotizacion'. $folio .'/'.$today.'.pdf');
 
     }
 

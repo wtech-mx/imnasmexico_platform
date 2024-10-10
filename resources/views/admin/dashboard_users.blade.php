@@ -94,7 +94,71 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-5">
+    @role('Atencion a Clientes')
+        <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
+            <div class="card h-100 ">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <h3 class="mb-3">Documentos Pendientes <br> Registro IMNAS</h3>
+                </div>
+            </div>
+            <div class="card-body pt-0">
+                <div class="table-responsive">
+                    <table class="table table-flush" id="datatable-search">
+                        <thead class="thead">
+                            <tr>
+                                <th>Accion</th>
+                                <th>Cliente</th>
+                                <th>Alumno</th>
+                                <th>Fecha en <br> que subio Doc.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($registros_pendientes as $registro_pendiente)
+                                <tr>
+                                    <td>
+                                        <a class="btn btn-sm btn-info" href="{{ route('show_cliente.imnas', $registro_pendiente->User->code) }}" target="_blank">
+                                            Ver
+                                        </a>
+                                    </td>
+                                    <td>
+                                        @php
+                                            $words = explode(' ', $registro_pendiente->User->name);
+                                            $chunks = array_chunk($words, 2);
+                                            foreach ($chunks as $chunk) {
+                                                echo implode(' ', $chunk) . '<br>';
+                                            }
+                                        @endphp
+                                        {{ $registro_pendiente->User->telefono }} <br>
+                                        @php
+                                            $words = explode(' ', $registro_pendiente->User->escuela);
+                                            $chunks = array_chunk($words, 2);
+                                            foreach ($chunks as $chunk) {
+                                                echo implode(' ', $chunk) . '<br>';
+                                            }
+                                        @endphp
+                                    </td>
+                                    <td>
+                                        @php
+                                            $words = explode(' ', $registro_pendiente->nombre);
+                                            $chunks = array_chunk($words, 2);
+                                            foreach ($chunks as $chunk) {
+                                                echo implode(' ', $chunk) . '<br>';
+                                            }
+                                        @endphp
+                                    </td>
+                                    <td>{{ \Carbon\Carbon::parse($registro_pendiente->fecha_compra)->translatedFormat('d F \\d\\e\\l Y') }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </div>
+    @endrole
+
+    <div class="col-6">
         <div class="card card-carousel overflow-hidden h-100 p-0">
             <div class="card-header pb-0 pt-3 bg-transparent">
                 <h6 class="text-capitalize">Cursos de la semana</h6>

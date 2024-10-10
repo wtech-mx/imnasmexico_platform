@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Products
+    Historial Products
 @endsection
 @section('css')
     <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -22,20 +22,59 @@
 
                     <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                         ¿Como fucniona?
-                    </a>
+                    </a>
 
-                   <!-- <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="file" class="form-control">
-                        <br>
-                        <button class="btn btn-success">Importar Products</button>
-                    </form>-->
-                    @can('productos-create')
-                        <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_product" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                            <i class="fa fa-fw fa-edit"></i> Crear
-                        </a>
-                    @endcan
 
+                </div>
+                <div class="col-12">
+                    <form class="row mt-3 mb-3" action="{{ route('products_historial.filtro') }}" method="GET" >
+                        <div class="col-12">
+                            <h6>Filtro</h6>
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-4 py-3">
+                            <label class="form-label tiitle_products">Rango Fecha de</label>
+                            <div class="input-group">
+                                <span class="input-group-text span_custom_tab" >
+                                    <img class="icon_span_tab" src="{{ asset('assets/media/icons/cero.webp') }}" alt="" >
+                                </span>
+                                <input id="fecha_inicial_de" name="fecha_inicial_de" type="date"  class="form-control input_custom_tab @error('fecha_inicial_de') is-invalid @enderror"  value="{{ old('fecha_inicial_de') }}" autocomplete="" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-4 py-3">
+                            <label class="form-label tiitle_products">hasta </label>
+                            <div class="input-group">
+                                <span class="input-group-text span_custom_tab" >
+                                    <img class="icon_span_tab" src="{{ asset('assets/media/icons/9.webp') }}" alt="" >
+                                </span>
+                                <input id="fecha_inicial_a" name="fecha_inicial_a" type="date"  class="form-control input_custom_tab @error('fecha_inicial_a') is-invalid @enderror"  value="{{ old('fecha_inicial_a') }}" autocomplete="" autofocus>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-4 col-lg-4 py-3">
+                            <label class="form-label tiitle_products">-</label>
+                            <div class="input-group">
+                                <button class="btn btn_filter" type="submit" style="">Filtrar
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    {{-- <a class="btn btn-info" href="{{ route('productsHistorialVendidos.index') }}">
+                        Borrar filtro
+                    </a> --}}
+                    <form class="row mt-3 mb-3" action="{{ route('products_historial.pdf') }}" method="GET" >
+                        <div class="col-3">
+                            <button class="btn btn-dark" type="submit" style="">Imprimir PDF</button>
+                        </div>
+                        @if(Route::currentRouteName() != 'productsHistorialVendidos.index')
+                            <input type="date" name="fecha_inicial_de" value="{{ request('fecha_inicial_de') }}" style="display: none">
+                            <input type="date" name="fecha_inicial_a" value="{{ request('fecha_inicial_a') }}" style="display: none">
+                        @else
+                            <input type="date" name="fecha_inicial_de" value="{{ date('Y-m-d') }}" style="display: none">
+                            <input type="date" name="fecha_inicial_a" value="{{ date('Y-m-d') }}" style="display: none">
+                        @endif
+                    </form>
                 </div>
             </div>
 
@@ -44,67 +83,46 @@
                         <table class="table table-flush" id="datatable-search">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>#</th>
-                                    <th>Producto</th>
-                                    <th>stock_viejo</th>
-                                    <th>Restado</th>
-                                    <th>stock actual</th>
-                                    <th>Id Venta</th>
-                                    <th>Fecha</th>
+                                    <th colspan="2">#</th>
+                                    <th colspan="2">IMG</th>
+                                    <th colspan="2">Nombre</th>
                                 </tr>
                             </thead>
 
-                            @foreach ($HistorialVendidos as $item)
-                                <tr>
-                                    <td>
-                                        {{ $item->id }}
+                            @foreach ($HistorialVendidos as $productoId => $ventas)
+                                <tr style="background-color: #0560776c">
+                                    <td colspan="2"><h5>{{ $productoId }}</h5></td>
+                                    <td colspan="2">
+                                        <img id="blah" src="{{ $ventas->first()->Products->imagenes }}" alt="Imagen" style="width: 60px; height: 60px;"/>
                                     </td>
-
-                                    <th>
-                                        <img id="blah" src="{{$item->Products->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/> <br>
-                                            @php
-                                                $words = explode(' ', $item->Products->nombre);
-                                                $chunks = array_chunk($words, 2);
-                                                foreach ($chunks as $chunk) {
-                                                    echo implode(' ', $chunk) . '<br>';
-                                                }
-                                            @endphp
-                                    </th>
-
-                                    <td>
-                                        {{ $item->stock_viejo }}
+                                    <td colspan="2">
+                                       <h5>{{ $ventas->first()->Products->nombre }}</h5>
                                     </td>
-
-                                    <td>
-                                        {{ $item->cantidad_restado }}
-                                    </td>
-
-                                    <td>
-                                        {{ $item->stock_actual }}
-                                    </td>
-
-                                    <td>
-                                        COTIZACION NAS: <strong style="color:#B09B9B"> {{ $item->id_cotizacion_nas }} </strong><br>
-                                        COTIZACION COSMICA: <strong style="color:#D486D6"> {{ $item->id_cotizacion_cosmica }} </strong> <br>
-                                        VENTA NAS: <strong style="color:#A2DBE2"> {{ $item->id_venta_nas }} </strong> <br>
-                                        PARADISUS: <strong style="color:#EE96BA"> {{ $item->id_paradisus }} </strong> <br>
-                                        NAS ONLINE: <strong style="color:#F5ECE4"> {{ $item->id_nas_online }} </strong> <br>
-                                        COMSICA ONLINE: <strong style="color:#80486B"> {{ $item->id_cosmica_online }} </strong> <br>
-                                    </td>
-
-                                    <td>
-                                        @php
-                                            $fecha = $item->created_at;
-                                            $fecha_timestamp = strtotime($fecha);
-                                            $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
-                                        @endphp
-                                        <h5>
-                                            {{$fecha_formateada}}
-                                        </h5>
-                                    </td>
-
                                 </tr>
+
+                                @foreach ($ventas->groupBy(function($venta) {
+                                    return \Carbon\Carbon::parse($venta->created_at)->format('d \d\e F \d\e\l Y');
+                                }) as $fecha => $ventasPorFecha)
+                                    <tr class="text-center">
+                                        <td colspan="6" style="background-color: #d9edf7;">
+                                           <h5>{{ $fecha }}</h5>
+                                        </td>
+                                    </tr>
+                                    <tr class="text-center">
+                                        <th colspan="2">stock viejo</th>
+                                        <th colspan="3">cantidad restado</th>
+                                        <th colspan="2">stock actual</th>
+                                    </tr>
+                                    @foreach ($ventasPorFecha as $venta)
+                                        <tr class="text-center">
+                                            <td colspan="2">{{ $venta->stock_viejo }}</td>
+                                            <td colspan="3">{{ $venta->cantidad_restado }}</td>
+                                            <td colspan="2">{{ $venta->stock_actual }}</td>
+                                        </tr>
+                                    @endforeach
+                                @endforeach
                             @endforeach
+
 
                         </table>
             </div>
