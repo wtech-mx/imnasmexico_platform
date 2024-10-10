@@ -162,7 +162,7 @@ class ProductsController extends Controller
     public function productsHistorialVendidos(){
 
         $HistorialVendidos = HistorialVendidos::whereDate('created_at', Carbon::today())
-        ->orderBy('id', 'DESC')
+        ->orderBy('id', 'ASC')
         ->get()
         ->groupBy('id_producto');
 
@@ -174,7 +174,7 @@ class ProductsController extends Controller
         $fechaInicialDe = \Carbon\Carbon::parse($request->fecha_inicial_de)->startOfDay();
         $fechaInicialA = \Carbon\Carbon::parse($request->fecha_inicial_a)->endOfDay();
 
-        $HistorialVendidos = HistorialVendidos::orderBy('created_at', 'DESC');
+        $HistorialVendidos = HistorialVendidos::orderBy('created_at', 'ASC');
 
         if ($request->fecha_inicial_de && $request->fecha_inicial_a) {
             $HistorialVendidos = $HistorialVendidos->where('created_at', '>=', $fechaInicialDe)
@@ -192,7 +192,7 @@ class ProductsController extends Controller
         $fechaInicialDe = \Carbon\Carbon::parse($request->fecha_inicial_de)->startOfDay();
         $fechaInicialA = \Carbon\Carbon::parse($request->fecha_inicial_a)->endOfDay();
 
-        $HistorialVendidos = HistorialVendidos::orderBy('created_at', 'DESC');
+        $HistorialVendidos = HistorialVendidos::orderBy('created_at', 'ASC');
 
         if ($request->fecha_inicial_de && $request->fecha_inicial_a) {
             $HistorialVendidos = $HistorialVendidos->where('created_at', '>=', $fechaInicialDe)
