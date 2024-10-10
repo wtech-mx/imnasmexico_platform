@@ -488,6 +488,12 @@ Route::group(['middleware' => ['auth']], function() {
      Route::get('/admin/products/historial/filtro', [App\Http\Controllers\ProductsController::class, 'filtro'])->name('products_historial.filtro');
      Route::get('/admin/products/historial/pdf', [App\Http\Controllers\ProductsController::class, 'historial_pdf'])->name('products_historial.pdf');
 
+
+    // =============== M O D U L O   S C A N N E R ===============================
+
+     Route::get('/admin/scanner', [App\Http\Controllers\ScannerController::class, 'index'])->name('scanner.index');
+     Route::get('/admin/scanner/buscador', [App\Http\Controllers\ScannerController::class, 'buscador_ajax'])->name('scanner.buscador');
+
      Route::get('/admin/products/{id}', [App\Http\Controllers\ProductsController::class, 'show'])->name('products.show');
 
      Route::get('/cosmica/admin/products/{id}', [App\Http\Controllers\LaboratoriosController::class, 'show_products_cosmica'])->name('cosmica_products.show');
