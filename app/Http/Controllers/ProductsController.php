@@ -162,6 +162,9 @@ class ProductsController extends Controller
     public function productsHistorialVendidos(){
 
         $HistorialVendidos = HistorialVendidos::whereDate('created_at', Carbon::today())
+        ->whereHas('Products', function ($query) {
+            $query->where('subcategoria', 'Producto');
+        })
         ->orderBy('id', 'ASC')
         ->get()
         ->groupBy('id_producto');
@@ -174,11 +177,14 @@ class ProductsController extends Controller
         $fechaInicialDe = \Carbon\Carbon::parse($request->fecha_inicial_de)->startOfDay();
         $fechaInicialA = \Carbon\Carbon::parse($request->fecha_inicial_a)->endOfDay();
 
-        $HistorialVendidos = HistorialVendidos::orderBy('created_at', 'ASC');
+        $HistorialVendidos = HistorialVendidos::orderBy('created_at', 'ASC')
+        ->whereHas('Products', function ($query) {
+            $query->where('subcategoria', 'Producto');
+        });
 
         if ($request->fecha_inicial_de && $request->fecha_inicial_a) {
             $HistorialVendidos = $HistorialVendidos->where('created_at', '>=', $fechaInicialDe)
-                                    ->where('created_at', '<=', $fechaInicialA);
+                ->where('created_at', '<=', $fechaInicialA);
         }
 
         $HistorialVendidos = $HistorialVendidos->get()->groupBy('id_producto');
@@ -192,7 +198,11 @@ class ProductsController extends Controller
         $fechaInicialDe = \Carbon\Carbon::parse($request->fecha_inicial_de)->startOfDay();
         $fechaInicialA = \Carbon\Carbon::parse($request->fecha_inicial_a)->endOfDay();
 
-        $HistorialVendidos = HistorialVendidos::orderBy('created_at', 'ASC');
+        $HistorialVendidos = HistorialVendidos::orderBy('created_at', 'ASC')
+        ->whereHas('Products', function ($query) {
+            $query->where('subcategoria', 'Producto');
+        });
+
 
         if ($request->fecha_inicial_de && $request->fecha_inicial_a) {
             $HistorialVendidos = $HistorialVendidos->where('created_at', '>=', $fechaInicialDe)
