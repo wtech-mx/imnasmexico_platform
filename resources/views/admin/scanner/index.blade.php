@@ -34,7 +34,7 @@
 
         <div class="col-2">
             <a class="input-group-text span_custom_primary_dark mt-3" data-bs-dismiss="modal" style="margin-right: 0rem!important;">
-              <img class="icon_span_form m-auto" src="{{ asset('assets/media/icons/close_white.webp') }}" alt="" >
+              <img class="icon_span_form m-auto" src="{{ asset('assets/user/icons/close_white.webp') }}" alt="" width="30px">>
           </a>
         </div>
 
@@ -48,7 +48,7 @@
                       <div class="d-flex justify-content-between">
                           <p style="margin-bottom: 0;">Scanner</p>
                           <p style="margin-bottom: 0;">
-                              <img class="img_scanner_dropdown" src="{{ asset('assets/media/icons/scanner.webp') }}" alt="">
+                              <img class="" src="{{ asset('assets/user/icons/scanner.webp') }}" style="width: 30px">
                           </p>
                       </div>
                   </button>
@@ -66,8 +66,8 @@
                       </div>
 
                       <div class="d-flex justify-content-center">
-                          <a id="resetScannerProduct" class="input-group-text span_custom_primary_warning mt-2 mb-2">
-                              <img class="icon_span_form" src="{{ asset('assets/media/icons/reset.webp') }}" alt="" >
+                          <a id="resetScannerProduct" class="input-group-text bg-dark mt-2 mb-2">
+                              <img class="" src="{{ asset('assets/user/icons/reset.webp') }}" style="width: 30px">
                           </a>
                       </div>
 
@@ -81,7 +81,7 @@
                         <div class="d-flex justify-content-between">
                             <p style="margin-bottom: 0;">Busqueda Sku</p>
                             <p style="margin-bottom: 0;">
-                                <img class="img_scanner_dropdown" src="{{ asset('assets/media/icons/buscar.webp') }}" alt="">
+                                <img class="" src="{{ asset('assets/user/icons/buscar.webp') }}" alt="" style="width: 30px">
                             </p>
                         </div>
                     </button>
@@ -92,7 +92,7 @@
                           <label for="name" class="label_custom_primary_product mb-2">Ingresa SKU : *</label>
                           <div class="input-group ">
                               <span class="input-group-text span_custom_primary_dark" >
-                                  <img class="icon_span_form" src="{{ asset('assets/media/icons/code_barras.webp') }}" alt="" >
+                                <img class="" src="{{ asset('assets/user/icons/code_barras.webp') }}" style="width: 30px">
                               </span>
                               <input id="buscar" name="buscar" type="text"  class="form-control input_custom_primary_dark" >
                           </div>
@@ -102,7 +102,7 @@
 
                           <p class="text-center">
                               <button type="button" id="btn-buscar" class="btn btn-success mt-3 text-white"> Buscar
-                                  <img class="img_scanner_dropdown" src="{{ asset('assets/media/icons/buscar.webp') }}" alt="">
+                                  <img class="" src="{{ asset('assets/user/icons/buscar.webp') }}" width="30px">
                               </button>
                           </p>
                       </div>
@@ -121,8 +121,8 @@
                       </div>
 
                       <div class="d-flex justify-content-center">
-                          <a id="resetScannerProduct_input" class="input-group-text span_custom_primary_warning mt-2 mb-2">
-                              <img class="icon_span_form" src="{{ asset('assets/media/icons/reset.webp') }}" alt="" >
+                          <a id="resetScannerProduct_input" class="input-group-text bg-dark mt-2 mb-2">
+                              <img class="" src="{{ asset('assets/user/icons/reset.webp') }}" style="width: 30px" >
                           </a>
                       </div>
 
@@ -136,7 +136,7 @@
                       <div class="d-flex justify-content-between">
                           <p style="margin-bottom: 0;">Busqueda palabra clave</p>
                           <p style="margin-bottom: 0;">
-                              <img class="img_scanner_dropdown" src="{{ asset('assets/media/icons/filtrar.webp') }}" alt="">
+                            <img class="" src="{{ asset('assets/user/icons/filtrar.webp') }}" style="width: 30px">
                           </p>
                       </div>
                   </button>
@@ -147,7 +147,7 @@
                           <label for="name" class="label_custom_primary_product mb-2">Ingresa palabra clave : *</label>
                           <div class="input-group ">
                               <span class="input-group-text span_custom_primary_dark" >
-                                  <img class="icon_span_form" src="{{ asset('assets/media/icons/una.webp') }}" alt="" >
+                                  <img class="" src="{{ asset('assets/user/icons/una.webp') }}" alt="" width="30px">
                               </span>
                               <input id="buscar_palabra" name="buscar_palabra" type="text" class="form-control input_custom_primary_dark" >
                           </div>
@@ -155,8 +155,8 @@
 
                       <div class="form-group col-12">
                           <p class="text-center">
-                              <button type="button" id="btn-buscar-palabra" class="span_custom_primary_dark mt-3 text-white"> Buscar
-                                  <img class="img_scanner_dropdown" src="{{ asset('assets/media/icons/buscar.webp') }}" alt="">
+                              <button type="button" id="btn-buscar-palabra" class="btn btn-success mt-3 text-white"> Buscar
+                                  <img class="" src="{{ asset('assets/user/icons/buscar.webp') }}" width="30px">
                               </button>
                           </p>
                       </div>
@@ -174,8 +174,8 @@
                       </div>
 
                       <div class="d-flex justify-content-center">
-                          <a id="resetScannerProductPalabra_input" class="input-group-text span_custom_primary_warning mt-2 mb-2">
-                              <img class="icon_span_form" src="{{ asset('assets/media/icons/reset.webp') }}" alt="" >
+                          <a id="resetScannerProductPalabra_input" class="input-group-text bg-dark mt-2 mb-2">
+                              <img class="" src="{{ asset('assets/user/icons/reset.webp') }}" style="width: 30px" >
                           </a>
                       </div>
                   </div>
@@ -296,14 +296,14 @@ $(document).ready(function() {
     }
 
     function buscar_palabra() {
-        var result_palabra = $('#buscar_palabra').val();
+        var result = $('#buscar_palabra').val();
         $('#loadingSpinner_bulk').show();
 
         $.ajax({
-            url: '',
+            url: '{{ route('scanner.buscador_palabra') }}',
             type: 'get',
             data: {
-                'search': result_palabra,
+                'search': result,
                 '_token': token // Agregar el token CSRF a los datos enviados
             },
             success: function(data) {

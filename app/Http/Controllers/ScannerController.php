@@ -19,8 +19,6 @@ class ScannerController extends Controller
     }
 
     public function buscador_ajax(Request $request){
-
-
         if ($request->ajax()) {
 
             $now = Carbon::now();
@@ -31,7 +29,19 @@ class ScannerController extends Controller
 
             return view('admin.scanner.producto_info',compact('product'));
         }
+    }
 
+    public function buscador_ajax_palabra(Request $request){
+        if ($request->ajax()) {
+
+            $now = Carbon::now();
+            $mesActual = $now->month;
+
+            $codigo = $request->input('search');
+            $product = Products::where('nombre', 'LIKE', "%{$codigo}%")->orderby('nombre','ASC')->get();
+
+            return view('admin.scanner.producto_info',compact('product'));
+        }
     }
 
 }

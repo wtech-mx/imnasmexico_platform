@@ -493,6 +493,7 @@ Route::group(['middleware' => ['auth']], function() {
 
      Route::get('/admin/scanner', [App\Http\Controllers\ScannerController::class, 'index'])->name('scanner.index');
      Route::get('/admin/scanner/buscador', [App\Http\Controllers\ScannerController::class, 'buscador_ajax'])->name('scanner.buscador');
+     Route::get('/admin/scanner/buscador/palabra', [App\Http\Controllers\ScannerController::class, 'buscador_ajax_palabra'])->name('scanner.buscador_palabra');
 
      Route::get('/admin/products/{id}', [App\Http\Controllers\ProductsController::class, 'show'])->name('products.show');
 

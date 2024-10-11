@@ -1,6 +1,6 @@
 <div class="row">
     @foreach ($product as $item)
-    <div class="card">
+    <div class="card mb-3">
 
 
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -22,7 +22,9 @@
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
                 <div class="row">
                     <div class="col-12 col-md-3 col-lg-2">
-                        <img src="{{ $item->imagenes }}" class="w-100" style="width: 100px">
+                        <p class="text-center">
+                            <img src="{{ $item->imagenes }}" class="" style="width: 150px">
+                        </p>
                     </div>
 
                     <div class="col-8 col-md-9 col-lg-7 my-auto">
