@@ -89,25 +89,25 @@
                 @foreach ($HistorialVendidos as $itemVendidos)
                     <div class="row productvendidos">
 
-                        <div class="col-3">
+                        <div class="col-6 col-md-3 col-lg-3">
                             <p class="text-dark">
                             <strong>Stock Viejo:</strong><br>{{ $itemVendidos->stock_viejo }}
                             </p>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-6 col-md-3 col-lg-3">
                             <p class="text-dark">
                             <strong>Cantidad Restada:</strong><br>{{ $itemVendidos->cantidad_restado }}
                             </p>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-6 col-md-3 col-lg-3">
                             <p class="text-dark">
                             <strong>Stock Actual:</strong><br>{{ $itemVendidos->stock_actual }}
                             </p>
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-6 col-md-3 col-lg-3">
                             <p class="text-dark">
                             <strong>Fecha:</strong><br>
                             {{ \Carbon\Carbon::parse($itemVendidos->created_at)->format('d/m/Y g:i A') }}
