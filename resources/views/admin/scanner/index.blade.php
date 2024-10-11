@@ -33,9 +33,7 @@
         </div>
 
         <div class="col-2">
-            <a class="input-group-text span_custom_primary_dark mt-3" data-bs-dismiss="modal" style="margin-right: 0rem!important;">
-              <img class="icon_span_form m-auto" src="{{ asset('assets/user/icons/close_white.webp') }}" alt="" width="30px">>
-          </a>
+            <a class="input-group-text span_custom_primary_dark mt-3" data-bs-dismiss="modal" style="margin-right: 0rem!important;">X</a>
         </div>
 
         <div class="col-12"  style="margin: 0!important;padding: 0!important;">
@@ -63,6 +61,7 @@
 
                       <div class="col-12">
                           <div id="product_camera" class=""></div>
+
                       </div>
 
                       <div class="d-flex justify-content-center">
@@ -247,6 +246,7 @@ $(document).ready(function() {
                     success: function (data) {
                         console.log('Skus:', data);
                         $('#product_camera').html(data); // Actualiza la sección con los datos del servicio
+
                     },
                     error: function(error) {
                         console.log(error);

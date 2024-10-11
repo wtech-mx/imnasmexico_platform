@@ -1,3 +1,13 @@
+<style>
+    .productvendidos{
+    box-shadow: 6px 6px 15px -10px rgb(220 220 220 / 50%);
+    background: #f7f7f7;
+    padding: 10px 0 0 0;
+    margin: 10px;
+    border-radius: 9px;
+}
+</style>
+
 <div class="row">
     @foreach ($product as $item)
     <div class="card mb-3">
@@ -54,11 +64,58 @@
             </div>
 
             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-
+                @foreach ($historialMods as $itemMods)
+                    <div class="row">
+                        <div class="col-4">
+                            <p class="text-dark">
+                                <strong>Fecha:</strong><br>{{ $itemMods->stock }}
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <p class="text-dark">
+                            <strong>Cantidad:</strong><br>{{ \Carbon\Carbon::parse($itemMods->created_at)->format('d/m/Y g:i A') }}
+                            </p>
+                        </div>
+                        <div class="col-4">
+                            <p class="text-dark">
+                            <strong>Usuario:</strong><br>{{ $itemMods->user }}
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
             </div>
 
             <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+                @foreach ($HistorialVendidos as $itemVendidos)
+                    <div class="row productvendidos">
 
+                        <div class="col-3">
+                            <p class="text-dark">
+                            <strong>Stock Viejo:</strong><br>{{ $itemVendidos->stock_viejo }}
+                            </p>
+                        </div>
+
+                        <div class="col-3">
+                            <p class="text-dark">
+                            <strong>Cantidad Restada:</strong><br>{{ $itemVendidos->cantidad_restado }}
+                            </p>
+                        </div>
+
+                        <div class="col-3">
+                            <p class="text-dark">
+                            <strong>Stock Actual:</strong><br>{{ $itemVendidos->stock_actual }}
+                            </p>
+                        </div>
+
+                        <div class="col-3">
+                            <p class="text-dark">
+                            <strong>Fecha:</strong><br>
+                            {{ \Carbon\Carbon::parse($itemVendidos->created_at)->format('d/m/Y g:i A') }}
+                            </p>
+                        </div>
+
+                    </div>
+                @endforeach
             </div>
           </div>
 

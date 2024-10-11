@@ -19,6 +19,7 @@ class ScannerController extends Controller
     }
 
     public function buscador_ajax(Request $request){
+
         if ($request->ajax()) {
 
             $now = Carbon::now();
@@ -27,7 +28,14 @@ class ScannerController extends Controller
             $codigo = $request->input('search');
             $product = Products::where('sku','=',$codigo)->get();
 
-            return view('admin.scanner.producto_info',compact('product'));
+            $productId = Products::where('sku','=',$codigo)->first();
+            $extraccionID = $productId->id;
+
+            $historialMods = HistorialStock::where('sku', $codigo)->get();
+
+            $HistorialVendidos = HistorialVendidos::where('id_producto','=',$extraccionID)->get();
+
+            return view('admin.scanner.producto_info',compact('product','historialMods','HistorialVendidos'));
         }
     }
 

@@ -97,7 +97,10 @@
                             <tr id="productRow{{ $product->id }}">
                                 <td>{{ $product->id }}</td>
                                 <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
-                                <td>{{ $product->nombre }}</td>
+                                <td>
+                                    {{ $product->nombre }} <br>
+                                    SKU: {{ $product->sku }} <br>
+                                </td>
                                 <td>${{ $precio_normal }}</td>
                                 <td>{{ $product->categoria }}</td>
                                 <td>{{ $product->stock }}</td>
