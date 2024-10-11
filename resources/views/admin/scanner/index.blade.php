@@ -239,7 +239,7 @@ $(document).ready(function() {
         html5ScannerProdcut.clear().then(_ => {
                 $.ajax({
                     type: 'get',
-                    url: '{{ route('scanner.index') }}',
+                    url: '{{ route('scanner.buscador') }}',
                     data: {
                     'search': result,
                     '_token': token // Agregar el token CSRF a los datos enviados
