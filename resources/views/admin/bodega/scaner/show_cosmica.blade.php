@@ -95,37 +95,43 @@ Productos solicitados
             errorSound.play();
         }
     }
+    document.getElementById('scanInput').addEventListener('change', function() {
+        let sku = this.value.trim(); // Asegúrate de eliminar espacios en blanco al inicio o al final
+        console.log(sku);
 
-    document.getElementById('scanInput').addEventListener('input', function() {
-        let sku = this.value;
-        let idNotaProducto = document.querySelector(`tr[data-id]`)?.getAttribute('data-id');
+        // Aquí puedes validar si el SKU tiene la longitud esperada (por ejemplo, 6 dígitos)
+        if (sku.length === 6) {
+            let idNotaProducto = document.querySelector(`tr[data-id]`)?.getAttribute('data-id');
 
-        fetch("{{ route('check_cosmica.product') }}", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRF-TOKEN": "{{ csrf_token() }}"
-            },
-            body: JSON.stringify({ sku: sku, id_notas_productos: idNotaProducto })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.status === 'success') {
-                document.getElementById('status-' + sku).innerHTML = '✔️';
-                checkAllProductsChecked();
-                playSound(true);
-            } else {
-                playSound(false);
-                alert(data.message);
+            fetch("{{ route('check_cosmica.product') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: JSON.stringify({ sku: sku, id_notas_productos: idNotaProducto })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    document.getElementById('status-' + sku).innerHTML = '✔️';
+                    checkAllProductsChecked();
+                    playSound(true);
+                } else {
+                    playSound(false);
+                    console.log(data);
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                playSound(false); // Reproduce el sonido de error en caso de fallo en la solicitud
+                console.error('Error:', error);
+            });
 
-            }
-        })
-        .catch(error => {
-            playSound(false); // Reproduce el sonido de error en caso de fallo en la solicitud
-            console.error('Error:', error);
-        });
-
-        this.value = '';
+            this.value = ''; // Limpia el campo de entrada después de procesar el SKU
+        } else {
+            console.log('El SKU no tiene la longitud correcta.');
+        }
     });
 
     document.addEventListener("DOMContentLoaded", checkAllProductsChecked);

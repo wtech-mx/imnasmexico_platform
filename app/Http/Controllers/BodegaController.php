@@ -280,7 +280,8 @@ class BodegaController extends Controller
     }
 
     public function checkProduct(Request $request){
-        $sku = $request->input('sku');
+        $sku_scaner = $request->input('sku');
+        $sku = trim($sku_scaner);
         $idNotaProducto = $request->input('id_notas_productos');
 
         // Busca el producto en la tabla `Products`
@@ -314,7 +315,8 @@ class BodegaController extends Controller
     }
 
     public function checkProduct_cosmica(Request $request){
-        $sku = $request->input('sku');
+        $sku_scaner = $request->input('sku');
+        $sku = trim($sku_scaner);
         $idNotaProducto = $request->input('id_notas_productos');
 
         // Busca el producto en la tabla `Products`
