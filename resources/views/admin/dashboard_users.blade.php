@@ -94,7 +94,7 @@
 </div>
 
 <div class="row">
-    @role('Atencion a Clientes')
+    @can('registro-imnas-pendientes')
         <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
             <div class="card h-100 ">
             <div class="card-header">
@@ -156,7 +156,7 @@
             </div>
             </div>
         </div>
-    @endrole
+    @endcan
 
     <div class="col-6">
         <div class="card card-carousel overflow-hidden h-100 p-0">

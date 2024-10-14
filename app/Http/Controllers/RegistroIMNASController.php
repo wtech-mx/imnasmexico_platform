@@ -18,6 +18,7 @@ use App\Models\OrdersTickets;
 use App\Models\RegistroImnasEscuela;
 use App\Models\RegistroImnasRelacionMat;
 use App\Models\RegistroImnasTemario;
+use Carbon\Carbon;
 use Hash;
 use Illuminate\Support\Facades\DB;
 
@@ -103,8 +104,7 @@ class RegistroIMNASController extends Controller
         return view('user.registro_imnas_new', compact('registros_imnas', 'recien_comprados_especialidad','cliente', 'recien_comprados', 'cursos_tickets', 'curso', 'especialidades', 'curso_envio', 'tickets_envio','tickets', 'folio', 'tickets_generador'));
     }
 
-    public function update_especialidad(Request $request, $id)
-    {
+    public function update_especialidad(Request $request, $id){
         $cliente = User::where('id', $request->id_usuario)->first();
 
         $reg = RegistroImnas::where('id', $id)->first();
@@ -1242,5 +1242,28 @@ class RegistroIMNASController extends Controller
         }
 
         return redirect()->back()->with('success', 'datos actualizado con exito.');
+    }
+
+    public function reporte(){
+
+        $registros_imnas = DocumenotsGenerador::where('estatus', '=', 'Generado y descargado Registro IMNAS')
+        ->whereDate('created_at', Carbon::today())
+        ->get();
+
+        return view('admin.registro_imnas.reporte', compact('registros_imnas'));
+    }
+
+    public function buscador(Request $request){
+        $query = DocumenotsGenerador::query();
+        if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
+            $fechaInicio = $request->input('fecha_inicio') . ' 00:00:00';
+            $fechaFin = $request->input('fecha_fin') . ' 23:59:59';
+
+            $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
+        }
+
+        $registros_imnas = $query->get();
+
+        return view('admin.registro_imnas.reporte',compact('registros_imnas'));
     }
 }
