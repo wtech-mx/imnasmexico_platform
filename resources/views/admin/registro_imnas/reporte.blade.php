@@ -55,17 +55,17 @@
                                 </div>
                             </form>
 
-                            <form class="row mt-3 mb-3" action="{{ route('registro_imnas.pdf') }}" method="GET" >
+                            <form class="row mt-3 mb-3" action="{{ route('registro_imnas.pdf') }}" method="post" >
                                 @csrf
                                 <div class="col-3">
                                     <button class="btn btn-dark" type="submit" style="">Imprimir PDF</button>
                                 </div>
                                 @if(Route::currentRouteName() != 'registro_compras.reporte')
                                     <input type="date" name="fecha_inicial" value="{{ request('fecha_inicio') }}" style="display: none">
-                                    <input type="date" name="fecha_inicial" value="{{ request('fecha_fin') }}" style="display: none">
+                                    <input type="date" name="fecha_fin" value="{{ request('fecha_fin') }}" style="display: none">
                                 @else
                                     <input type="date" name="fecha_inicial" value="{{ date('Y-m-d') }}" style="display: none">
-                                    <input type="date" name="fecha_inicial" value="{{ date('Y-m-d') }}" style="display: none">
+                                    <input type="date" name="fecha_fin" value="{{ date('Y-m-d') }}" style="display: none">
                                 @endif
                             </form>
                         </div>

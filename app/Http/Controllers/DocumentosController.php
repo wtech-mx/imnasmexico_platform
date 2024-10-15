@@ -173,7 +173,6 @@ class DocumentosController extends Controller
             ];
         }
 
-
         $bitacora = new DocumenotsGenerador;
 
         if($request->get('curso_name') == null){

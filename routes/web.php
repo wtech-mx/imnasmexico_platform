@@ -225,7 +225,7 @@ Route::post('terminos/store', [App\Http\Controllers\TerminosController::class, '
 // =============== M O D U L O   C O N T R A T O S ===============================
 Route::get('registro/imnas/reporte', [App\Http\Controllers\RegistroIMNASController::class, 'reporte'])->name('registro_imnas.reporte');
 Route::get('registro/imnas/reporte/buscador', [App\Http\Controllers\RegistroIMNASController::class, 'buscador'])->name('registro_imnas.buscador');
-Route::get('registro/imnas/reporte/pdf', [App\Http\Controllers\RegistroIMNASController::class, 'reporte_pdf'])->name('registro_imnas.pdf');
+Route::post('registro/imnas/reporte/pdf', [App\Http\Controllers\RegistroIMNASController::class, 'reporte_pdf'])->name('registro_imnas.pdf');
 
 Route::get('/contrato/imnas/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'contrato'])->name('contrato.edit');
 Route::get('/contrato/afiliacion/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'contrato_afiliacion'])->name('contrato_afiliacion.edit');

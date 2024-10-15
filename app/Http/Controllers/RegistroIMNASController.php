@@ -1274,16 +1274,20 @@ class RegistroIMNASController extends Controller
         $fechaInicialA = \Carbon\Carbon::parse($request->fecha_inicial_a)->endOfDay();
 
         $query = DocumenotsGenerador::query();
-        if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
-            $fechaInicio = $request->input('fecha_inicio') . ' 00:00:00';
+        if ($request->has('fecha_inicial') && $request->has('fecha_fin')) {
+
+            $fechaInicio = $request->input('fecha_inicial') . ' 00:00:00';
             $fechaFin = $request->input('fecha_fin') . ' 23:59:59';
 
             $query->whereBetween('created_at', [$fechaInicio, $fechaFin]);
         }
 
+
         $registros_imnas = $query->get();
 
         $pdf = \PDF::loadView('admin.registro_imnas.pdf_reporte', compact('registros_imnas', 'today'));
-        return $pdf->stream();
+
+        return $pdf->download('pdf_reporte'.$today.'.pdf');
+
     }
 }
