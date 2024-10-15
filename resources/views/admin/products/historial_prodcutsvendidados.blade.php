@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Historial Products
+    Historial Productos
 @endsection
 @section('css')
     <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
                 <div class="d-flex justify-content-between">
                     <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
 
-                    <h3 class="mb-3">Products Historial Vendidos</h3>
+                    <h3 class="mb-3">Productos Historial Vendidos</h3>
 
                     <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                         ¿Como fucniona?
@@ -90,38 +90,54 @@
                             </thead>
 
                             @foreach ($HistorialVendidos as $productoId => $ventas)
-                                <tr style="background-color: #0560776c">
-                                    <td colspan="2"><h5>{{ $productoId }}</h5></td>
-                                    <td colspan="2">
-                                        <img id="blah" src="{{ $ventas->first()->Products->imagenes }}" alt="Imagen" style="width: 60px; height: 60px;"/>
-                                    </td>
-                                    <td colspan="2">
-                                       <h5>{{ $ventas->first()->Products->nombre }}</h5>
+                            <tr style="background-color: #0560776c">
+                                <td colspan="2"><h5>{{ $productoId }}</h5></td>
+                                <td colspan="2">
+                                    <img id="blah" src="{{ $ventas->first()->Products->imagenes }}" alt="Imagen" style="width: 60px; height: 60px;"/>
+                                </td>
+                                <td colspan="2">
+                                   <h5>{{ $ventas->first()->Products->nombre }}</h5>
+                                </td>
+                            </tr>
+
+                            @foreach ($ventas->groupBy(function($venta) {
+                                return \Carbon\Carbon::parse($venta->created_at)->format('d \d\e F \d\e\l Y');
+                            }) as $fecha => $ventasPorFecha)
+                                <tr class="text-center">
+                                    <td colspan="6" style="background-color: #d9edf7;">
+                                       <h5>{{ $fecha }}</h5>
                                     </td>
                                 </tr>
+                                <tr class="text-center">
+                                    <th colspan="2">Stock Viejo</th>
+                                    <th colspan="3">Cantidad Restado</th>
+                                    <th colspan="2">Stock Actual</th>
+                                </tr>
 
-                                @foreach ($ventas->groupBy(function($venta) {
-                                    return \Carbon\Carbon::parse($venta->created_at)->format('d \d\e F \d\e\l Y');
-                                }) as $fecha => $ventasPorFecha)
+                                @php
+                                    $sumaCantidadRestado = 0;
+                                @endphp
+
+                                @foreach ($ventasPorFecha as $venta)
+                                    @php
+                                        $sumaCantidadRestado += $venta->cantidad_restado;
+                                    @endphp
                                     <tr class="text-center">
-                                        <td colspan="6" style="background-color: #d9edf7;">
-                                           <h5>{{ $fecha }}</h5>
-                                        </td>
+                                        <td colspan="2">{{ $venta->stock_viejo }}</td>
+                                        <td colspan="3">{{ $venta->cantidad_restado }}</td>
+                                        <td colspan="2">{{ $venta->stock_actual }}</td>
                                     </tr>
-                                    <tr class="text-center">
-                                        <th colspan="2">stock viejo</th>
-                                        <th colspan="3">cantidad restado</th>
-                                        <th colspan="2">stock actual</th>
-                                    </tr>
-                                    @foreach ($ventasPorFecha as $venta)
-                                        <tr class="text-center">
-                                            <td colspan="2">{{ $venta->stock_viejo }}</td>
-                                            <td colspan="3">{{ $venta->cantidad_restado }}</td>
-                                            <td colspan="2">{{ $venta->stock_actual }}</td>
-                                        </tr>
-                                    @endforeach
                                 @endforeach
+
+                                <!-- Fila para mostrar la suma de cantidad restado -->
+                                <tr class="text-center" style="background-color: #f0f0f0;">
+                                    <td colspan="2"><strong>Total Cantidad Restado:</strong></td>
+                                    <td colspan="3"><strong>{{ $sumaCantidadRestado }}</strong></td>
+                                    <td colspan="2"></td>
+                                </tr>
                             @endforeach
+                        @endforeach
+
 
 
                         </table>

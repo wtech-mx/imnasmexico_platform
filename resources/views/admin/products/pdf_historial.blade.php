@@ -102,6 +102,9 @@
         </thead>
 
         @foreach ($HistorialVendidos as $productoId => $ventas)
+            @php
+                $sumaCantidadRestado= 0;
+            @endphp
             <tr style="background-color: #0560776c">
                 <td colspan="2"><h5>{{ $productoId }}</h5></td>
                 <td colspan="2">
@@ -126,12 +129,20 @@
                     <th colspan="2">stock actual</th>
                 </tr>
                 @foreach ($ventasPorFecha as $venta)
+                    @php
+                        $sumaCantidadRestado += $venta->cantidad_restado;
+                    @endphp
                     <tr class="text-center">
                         <td colspan="2">{{ $venta->stock_viejo }}</td>
                         <td colspan="3">{{ $venta->cantidad_restado }}</td>
                         <td colspan="2">{{ $venta->stock_actual }}</td>
                     </tr>
                 @endforeach
+                <tr class="text-center" style="background-color: #f0f0f0;">
+                    <td colspan="2"><strong>Total Cantidad Restado:</strong></td>
+                    <td colspan="3"><strong>{{ $sumaCantidadRestado }}</strong></td>
+                    <td colspan="2"></td>
+                </tr>
             @endforeach
         @endforeach
     </table>
