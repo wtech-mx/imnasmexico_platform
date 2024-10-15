@@ -1316,4 +1316,17 @@ class RegistroIMNASController extends Controller
         return $pdf->download('pdf_reporte'.$today.'.pdf');
 
     }
+
+    public function imprimir_especialidad($id){
+        $diaActual = date('Y-m-d');
+        $today =  date('d-m-Y');
+
+        $especialidad = RegistroImnasEspecialidad::find($id);
+        $temario = RegistroImnasTemario::where('id_materia', $especialidad->id)->get();
+
+
+        $pdf = \PDF::loadView('admin.tabs_registro.pdf_especialidad', compact('especialidad', 'today', 'temario'));
+        return $pdf->stream();
+       //  return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
+    }
 }

@@ -180,63 +180,41 @@
     @can('registro-imnas-pendientes')
         <div class="col-lg-12 col-md-12 mb-4 mb-lg-0">
             <div class="card h-100 ">
-            <div class="card-header">
-                <div class="d-flex justify-content-between">
-                    <h3 class="mb-3">Documentos Pendientes <br> Registro IMNAS</h3>
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="mb-3">Registro IMNAS</h3>
+                    </div>
                 </div>
-            </div>
-            <div class="card-body pt-0">
-                <div class="table-responsive">
-                    <table class="table table-flush" id="datatable-search">
-                        <thead class="thead">
-                            <tr>
-                                <th>Accion</th>
-                                <th>Cliente</th>
-                                <th>Alumno</th>
-                                <th>Fecha en <br> que subio Doc.</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($registros_pendientes as $registro_pendiente)
-                                <tr>
-                                    <td>
-                                        <a class="btn btn-sm btn-info" href="{{ route('show_cliente.imnas', $registro_pendiente->User->code) }}" target="_blank">
-                                            Ver
-                                        </a>
-                                    </td>
-                                    <td>
-                                        @php
-                                            $words = explode(' ', $registro_pendiente->User->name);
-                                            $chunks = array_chunk($words, 2);
-                                            foreach ($chunks as $chunk) {
-                                                echo implode(' ', $chunk) . '<br>';
-                                            }
-                                        @endphp
-                                        {{ $registro_pendiente->User->telefono }} <br>
-                                        @php
-                                            $words = explode(' ', $registro_pendiente->User->escuela);
-                                            $chunks = array_chunk($words, 2);
-                                            foreach ($chunks as $chunk) {
-                                                echo implode(' ', $chunk) . '<br>';
-                                            }
-                                        @endphp
-                                    </td>
-                                    <td>
-                                        @php
-                                            $words = explode(' ', $registro_pendiente->nombre);
-                                            $chunks = array_chunk($words, 2);
-                                            foreach ($chunks as $chunk) {
-                                                echo implode(' ', $chunk) . '<br>';
-                                            }
-                                        @endphp
-                                    </td>
-                                    <td>{{ \Carbon\Carbon::parse($registro_pendiente->fecha_compra)->translatedFormat('d F \\d\\e\\l Y') }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                <div class="card-body pt-0">
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Doc Pendientes
+                            <span class="badge rounded-pill bg-danger">
+                                {{ $registros_pendientes ? $registros_pendientes->count() : 0 }}
+                            </span>
+                          </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Especialidades Pendientes
+                            <span class="badge rounded-pill bg-danger">
+                                {{ $especialidades_pendientes ? $especialidades_pendientes->count() : 0 }}
+                            </span>
+                          </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Envios Pagados</button>
+                        </li>
+                      </ul>
+                      <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            @include('admin.tabs_registro.doc_pendiente')
+                        </div>
+                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                            @include('admin.tabs_registro.especialidad_pendiente')
+                        </div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                      </div>
                 </div>
-            </div>
             </div>
         </div>
     @endcan

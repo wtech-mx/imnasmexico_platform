@@ -21,6 +21,7 @@ use App\Models\Cupon;
 use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 use App\Models\RegistroImnas;
+use App\Models\RegistroImnasEspecialidad;
 use DB;
 
 class HomeController extends Controller
@@ -168,6 +169,7 @@ class HomeController extends Controller
                 $ventas_NASCount = $ventas->count();
 
                 $registros_pendientes = RegistroImnas::where('fecha_compra', '!=', null)->where('fecha_realizados', '=', null)->where('tipo', '=', '1')->orderBy('id','DESC')->get();
+                $especialidades_pendientes = RegistroImnasEspecialidad::where('especialidad', '!=', null)->where('estatus_imnas', '=', 1)->orderBy('id','DESC')->get();
 
                 do {
                     // Obtener siguiente página de resultados
@@ -184,7 +186,7 @@ class HomeController extends Controller
 
                 } while (count($results) > 0);
 
-            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','data','cupones', 'pagos', 'registros_pendientes'));
+            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','data','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes'));
         }
 
     }
