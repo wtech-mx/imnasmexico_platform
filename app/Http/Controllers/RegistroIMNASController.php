@@ -302,17 +302,17 @@ class RegistroIMNASController extends Controller
 
         if ($request->hasFile("firma_director")) {
 
-            $fileName_firma_director  = $request->file('firma_director');
-            $fileName_logo = uniqid() . $fileName_firma_director ->getClientOriginalName();
-            $fileName_firma_director ->move($ruta_manual, $fileName_logo);
+            $file_firma_director   = $request->file('firma_director');
+            $fileName_firma_director  = uniqid() . $file_firma_director ->getClientOriginalName();
+            $file_firma_director->move($ruta_manual, $fileName_firma_director );
 
             $escuela = RegistroImnasEscuela::where('id_user', $request->get("Id_escuela"))->firstOrFail();
             // Guardar en la primera ruta
-            $escuela->firma = $fileName_logo;
+            $escuela->firma = $fileName_firma_director ;
 
             // Copiar el archivo a la segunda ruta
-            $filePathOriginal = $ruta_manual . $fileName_logo;
-            $filePathCopy = $ruta_manual_logo . $fileName_logo;
+            $filePathOriginal = $ruta_manual . $fileName_firma_director ;
+            $filePathCopy = $ruta_manual_logo . $fileName_firma_director ;
             copy($filePathOriginal, $filePathCopy);
             $escuela->update();
 
