@@ -231,10 +231,14 @@ class RegistroIMNASController extends Controller
 
     public function generar_registro(Request $request){
         $dominio = $request->getHost();
-        if($dominio == 'plataforma.imnasmexico.com'){
-            $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/utilidades_documentos');
-        }else{
-            $ruta_manual = public_path() . '/utilidades_documentos';
+
+        if ($dominio == 'plataforma.imnasmexico.com') {
+            $ruta_manual_logo = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $request->get('telefono_escuela') .'/');
+            $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/utilidades_documentos/');
+
+        } else {
+            $ruta_manual_logo = public_path() . '/documentos/' . $request->get('telefono_escuela') . '/';
+            $ruta_manual = public_path() . '/utilidades_documentos/';
         }
 
         $nombre = $request->get('nombre');
@@ -266,7 +270,6 @@ class RegistroIMNASController extends Controller
         $nacionalidad = $request->get('nacionalidad');
         $director = $request->get('director');
 
-
         $nombres = $request->get('nombres');
         $apellido_apeterno = $request->get('apellido_apeterno');
         $apellido_materno = $request->get('apellido_materno');
@@ -287,6 +290,7 @@ class RegistroIMNASController extends Controller
 
         $capitalizar =  $request->get('capitalizar');
         $firma_directora =  $request->get('firma_directora');
+
         if ($request->hasFile("img_infantil")) {
             $file = $request->file('img_infantil');
             $path = $ruta_manual;
@@ -297,10 +301,21 @@ class RegistroIMNASController extends Controller
         }
 
         if ($request->hasFile("firma_director")) {
-            $file_firma_director = $request->file('firma_director');
-            $path_firma_director = $ruta_manual;
-            $fileName_firma_director = uniqid() . $file_firma_director->getClientOriginalName();
-            $file_firma_director->move($path_firma_director, $fileName_firma_director);
+
+            $file_logo = $request->file('firma_director');
+            $fileName_logo = uniqid() . $file_logo->getClientOriginalName();
+            $file_logo->move($ruta_manual, $fileName_logo);
+
+            $escuela = RegistroImnasEscuela::where('id_user', $request->get("Id_escuela"))->firstOrFail();
+            // Guardar en la primera ruta
+            $escuela->firma = $fileName_logo;
+
+            // Copiar el archivo a la segunda ruta
+            $filePathOriginal = $ruta_manual . $fileName_logo;
+            $filePathCopy = $ruta_manual_logo . $fileName_logo;
+            copy($filePathOriginal, $filePathCopy);
+            $escuela->update();
+
         }else{
             $fileName_firma_director = 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
         }
@@ -315,10 +330,21 @@ class RegistroIMNASController extends Controller
         }
 
         if ($request->hasFile("logo")) {
+
             $file_logo = $request->file('logo');
-            $path_logo = $ruta_manual;
             $fileName_logo = uniqid() . $file_logo->getClientOriginalName();
-            $file_logo->move($path_logo, $fileName_logo);
+            $file_logo->move($ruta_manual, $fileName_logo);
+
+            $user = User::where('id', $request->get("Id_escuela"))->firstOrFail();
+            // Guardar en la primera ruta
+            $user->logo = $fileName_logo;
+
+            // Copiar el archivo a la segunda ruta
+            $filePathOriginal = $ruta_manual . $fileName_logo;
+            $filePathCopy = $ruta_manual_logo . $fileName_logo;
+            copy($filePathOriginal, $filePathCopy);
+            $user->update();
+
         }else{
             $fileName_logo = 'Sin Logo';
         }

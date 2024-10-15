@@ -33,6 +33,9 @@
                             <input type="hidden" name="email" id="email" value="{{ $registro_imnas->User->email }}">
                             <input type="hidden" name="id_registro" id="id_registro" value="{{ $registro_imnas->id }}">
                             <input type="hidden" name="director" value=" {{$cliente->name}}">
+                            <input type="hidden" name="telefono_escuela" value=" {{$cliente->telefono}}">
+                            <input type="hidden" name="logo_escuela" value=" {{$cliente->logo}}">
+                            <input type="hidden" name="Id_escuela" value=" {{$cliente->id}}">
 
                             <div class="row">
                                     <input id="id_order" name="id_order" type="text" class="form-control" value="{{ $registro_imnas->id_order }}" style="display: none">
