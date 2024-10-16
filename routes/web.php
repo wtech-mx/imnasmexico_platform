@@ -643,6 +643,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 Route::get('/registro', [App\Http\Controllers\FoliosController::class, 'index_registro'])->name('folio_registro.index');
 Route::get('/buscador/folio/registro', [App\Http\Controllers\FoliosController::class, 'buscador_registro'])->name('folio_registro.buscador');
+Route::patch('/registro/imnas/update/doc_digital/{id}', [App\Http\Controllers\FoliosController::class, 'update_docDigital'])->name('update.docDigital');
+
 
 Route::get('distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index_distribuidoras'])->name('distribuidoras.index_distribuidoras');
 Route::get('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_protocolo'])->name('distribuidoras.index_protocolo');

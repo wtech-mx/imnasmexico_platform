@@ -253,7 +253,7 @@
                 @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
                     <img src="{{ $basePath . 'diploma_logo_firma_director.png' }}" class="img_portada">
                     <div class="container_firma_director">
-                        <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img" alt="{{  $basePathUtilidades . $fileName_firma_director }}">
+                        <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img" alt>
                         <p style="font-size:10px;text-align: center;">{{ $director }} <br> {{ $firma_directora }}</p>
                     </div>
                 @else

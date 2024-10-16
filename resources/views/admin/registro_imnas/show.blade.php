@@ -72,6 +72,10 @@
 
                                                 <td>
 
+                                                    <a type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#DocDigital_{{ $registro_imnas->id }}">
+                                                       Doc Digital
+                                                    </a>
+
                                                     <a class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal_imnas_documentos_{{ $registro_imnas->id }}">
                                                         <i class="fa fa-file"></i>
                                                     </a>
@@ -86,6 +90,8 @@
 
                                                 </td>
                                             </tr>
+
+                                            @include('admin.registro_imnas.modal_doc_digital')
                                             @include('admin.registro_imnas.modal_documento')
                                             @include('admin.registro_imnas.edit')
                                         @endforeach

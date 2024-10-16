@@ -32,6 +32,18 @@ class RegistroImnas extends Model
         'curp',
         'foto_cuadrada',
         'firma',
+        'tam_letra_especialidad_th',
+        'tam_letra_credencial_especialidad',
+        'tam_letra_nombre_th',
+        'tam_letra_folio_th',
+        'tam_letra_especialidad_cedula',
+        'tam_letra_folio_cedula',
+        'tam_letra_folioTrasero_cedula',
+        'tam_letra_lista_tira_materias',
+        'capitalizar_nombre',
+        'texto_director',
+        'firma_director',
+        'promedio',
     ];
 
     public function User()

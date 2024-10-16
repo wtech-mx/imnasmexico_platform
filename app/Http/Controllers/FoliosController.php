@@ -84,6 +84,26 @@ class FoliosController extends Controller
         return view('admin.registro_imnas.resultado_registro',compact('tickets', 'folio', 'tickets_generador','tickets_externo','registros_imnas'));
     }
 
+    public function update_docDigital(Request $request, $id){
+
+        $registroimnas = RegistroImnas::where('id', $id)->first();
+        $registroimnas->tam_letra_especialidad_th = $request->get('tam_letra_especialidad_th');
+        $registroimnas->tam_letra_credencial_especialidad = $request->get('tam_letra_credencial_especialidad');
+        $registroimnas->tam_letra_nombre_th = $request->get('tam_letra_nombre_th');
+        $registroimnas->tam_letra_folio_th = $request->get('tam_letra_folio_th');
+        $registroimnas->tam_letra_especialidad_cedula = $request->get('tam_letra_especialidad_cedula');
+        $registroimnas->tam_letra_folio_cedula = $request->get('tam_letra_folio_cedula');
+        $registroimnas->tam_letra_folioTrasero_cedula = $request->get('tam_letra_folioTrasero_cedula');
+        $registroimnas->tam_letra_lista_tira_materias = $request->get('tam_letra_lista_tira_materias');
+        $registroimnas->capitalizar_nombre = $request->get('capitalizar_nombre');
+        $registroimnas->texto_director = $request->get('texto_director');
+        $registroimnas->firma_director = $request->get('firma_director');
+        $registroimnas->promedio = $request->get('promedio');
+        $registroimnas->update();
+
+        return redirect()->back()->with('success', 'datos actualizado con exito.');
+
+    }
 
     public function index_cedula(Request $request, $id){
 

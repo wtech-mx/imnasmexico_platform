@@ -12,6 +12,9 @@
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
 
   <link href="{{asset('assets/user/custom/documentos.css')}}" rel="stylesheet" />
+<title>
+  @yield('template_title') - {{$configuracion->nombre_sistema}}
+</title>
 
   @yield('css_custom')
 

@@ -1,7 +1,7 @@
 @extends('layouts.app_documenots')
 
 @section('template_title')
-    Cedula
+    Diploma RN
 @endsection
 
 @php
@@ -18,6 +18,7 @@
                     ? 'https://plataforma.imnasmexico.com/documentos/'
                     : asset('documentos/');
 
+
             if (isset($tickets->foto_cuadrada)) {
                 $palabras = explode(' ', ucwords(strtolower($tickets->nombre)));
                 $nombreCompleto = ucwords(strtolower($tickets->nombre));
@@ -28,6 +29,10 @@
                 $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
                     ? 'https://plataforma.imnasmexico.com/documentos_registro/'
                     : asset('documentos_registro/');
+
+                $basePathFirmaDirect = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/documentos/'
+                    : asset('documentos/');
 
             }else{
 
@@ -104,14 +109,13 @@
             background: transparent;
         }
 
-        @php
+        <?php
             if (isset($tickets->User)) {
                 $backgroundImage = $basePathDocumentos . '/' . $tickets->User->telefono . '/' . $foto;
             } else {
                 $backgroundImage = 'https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png';
             }
-        @endphp
-
+        ?>
 
         .oval {
             width: 90%;
@@ -211,8 +215,22 @@
             left:25px;
         }
 
+        .container_firma_director{
+            position: absolute;
+            top: 680px;
+            left:200px;
+        }
+
+        .texto_firma_direct{
+            font-size: 7px;
+        }
+
         .img_logo2{
             width: 65px;
+        }
+
+        .img_firna{
+            width: 80px;
         }
 
         .container_logoreversa{
@@ -232,9 +250,17 @@
     <div class="card-front">
 
         @if(!isset($tickets->User->logo))
+
             <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+
         @else
-            <img src="{{ $basePath .'/'. 'diploma_fontal_limpio.png' }}" class="img_portada">
+
+            @if($tickets->firma_director == 'si')
+                <img src="{{ $basePath . '/' . 'diploma_logo_firma_director.png' }}" class="img_portada">
+            @else
+                <img src="{{ $basePath .'/'. 'diploma_fontal_limpio.png' }}" class="img_portada">
+            @endif
+
         @endif
 
         <div class="container_logo">
@@ -296,6 +322,17 @@
             @endif
         </div>
 
+        @if($tickets->firma_director == 'si')
+            <div class="container_firma_director">
+                <p class="text-center">
+                    <img src="{{ $basePathFirmaDirect  .'/'.  $tickets->User->telefono . '/' .$tickets->User->RegistroImnasEscuela->firma }}" class="img_firna">
+                </p>
+                <p class="text-center texto_firma_direct">
+                    {{ $nombreCompleto }} <br>
+                    {{ $tickets->texto_director }}
+                </p>
+            </div>
+        @endif
 
     </div>
 
