@@ -504,7 +504,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $idMateria = RegistroImnasEspecialidad::where('especialidad', $ticket->nom_curso)->first();
+            $idMateria = RegistroImnasEspecialidad::where('especialidad', $ticket->nom_curso)->where('id_cliente', $request->id_usuario)->first();
 
             $subtemas = RegistroImnasTemario::
             where('id_materia', $idMateria->id)
