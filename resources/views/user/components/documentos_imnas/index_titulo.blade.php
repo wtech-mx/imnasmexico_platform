@@ -1,7 +1,7 @@
 @extends('layouts.app_documenots')
 
 @section('template_title')
-    Cedula
+    Titulo Honorifico RN -
 @endsection
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,10 +30,13 @@
 
                 $nombreCurso = $tickets->nom_curso;
 
-
                 $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
                     ? 'https://plataforma.imnasmexico.com/documentos_registro/'
                     : asset('documentos_registro/');
+
+                $basePathFirmaDirect = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/documentos/'
+                    : asset('documentos/');
 
             }else{
 
@@ -53,6 +56,7 @@
                     $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
                         ? 'https://plataforma.imnasmexico.com/documentos/'
                         : asset('documentos/');
+
                 }
 
             }
@@ -88,6 +92,13 @@
             src: url('{{ asset('assets/admin/fonts/Brush.otf') }}') format('truetype');
         }
 
+        @font-face {
+            font-family: 'bethaine';
+            font-style: normal;
+            font-weight: 900;
+            src: url('{{ asset('assets/admin/fonts/bethaine.ttf') }}') format('truetype');
+        }
+
         .img_portada {
             width: 480px;
             height: 668px;
@@ -111,6 +122,7 @@
         h4.nombre {
             font-family: 'oldenglishtextmt';
             font-size: 20px;
+            font-size:{{$tickets->tam_letra_nombre_th}}px!important;
             color: #000;
         }
 
@@ -136,14 +148,13 @@
             background: transparent;
         }
 
-        @php
+        <?php
             if (isset($tickets->User)) {
                 $backgroundImage = $basePathDocumentos . '/' . $tickets->User->telefono . '/' . $foto;
             } else {
                 $backgroundImage = 'https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png';
             }
-        @endphp
-
+        ?>
 
         .oval {
             width: 100%;
@@ -170,6 +181,7 @@
         h4.curso {
             font-family: 'Brush';
             font-size: 15px;
+            font-size:{{$tickets->tam_letra_especialidad_th}}px!important;
             color: #000;
         }
 
@@ -188,7 +200,7 @@
 
         .container_folio_bajo1{
             position: absolute;
-            top:92.5%;
+            top:91.5%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -196,11 +208,13 @@
 
         .folio{
             font-size: 5px;
+            font-size:{{$tickets->tam_letra_folio_th}}px!important;
             color: red;
         }
 
         .folio_reversa{
             font-size: 5px;
+            font-size:{{$tickets->tam_letra_folio_th}}px!important;
             color: red;
         }
 
@@ -254,7 +268,7 @@
 
         .container_folio_reversa{
             position: absolute;
-            top:92.5%;
+            top:91.5%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -292,6 +306,48 @@
             width: 150px;
         }
 
+        .container_firma_director{
+            position: absolute;
+            top: 460px;
+            left:200px;
+        }
+
+        .container_firma_director_text{
+            position: absolute;
+            top: 492px;
+            left:210px;
+        }
+
+        .texto_firma_direct{
+            font-size: 10px;
+            font-family: 'bethaine';
+        }
+
+        .container_firma_director_text2{
+            position: absolute;
+            top: 484px;
+            left: 280px;
+        }
+
+        .texto_firma_direct2{
+            font-size: 10px;
+            font-family: 'bethaine';
+        }
+
+        .container_firma_director2{
+            position: absolute;
+            top: 440px;
+            left: 271px;
+        }
+
+        .img_firna{
+            width: 90px;
+        }
+
+        .img_firna2{
+            width: 90px;
+        }
+
     </style>
 @endsection
 
@@ -299,9 +355,17 @@
     <div class="card-front">
 
         @if(!isset($tickets->User->logo))
+
             <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+
         @else
-            <img src="{{ $basePath .'/'. 'titulo_frontal_limpio.png' }}" class="img_portada">
+
+            @if($tickets->firma_director == 'si')
+                <img src="{{ $basePath . '/' . 'titulo_frontal_limpio_sin_firma_front.png' }}" class="img_portada">
+            @else
+                <img src="{{ $basePath .'/'. 'titulo_frontal_limpio.png' }}" class="img_portada">
+            @endif
+
         @endif
 
         <div class="container_logo">
@@ -324,7 +388,7 @@
 
         <div class="container_nombre">
 
-                @for ($i = 0; $i < $cantidad_palabras; $i += 2)
+            @for ($i = 0; $i < $cantidad_palabras; $i += 2)
                 @php
                     $linea = '';
                     if (isset($palabras[$i])) {
@@ -390,6 +454,21 @@
             </strong> </h4>
         </div>
 
+        @if($tickets->firma_director == 'si')
+            <div class="container_firma_director">
+                <p class="text-center">
+                    <img src="{{ $basePathFirmaDirect  .'/'.  $tickets->User->telefono . '/' .$tickets->User->RegistroImnasEscuela->firma }}" class="img_firna">
+                </p>
+            </div>
+
+            <div class="container_firma_director_text">
+                <p class="text-center texto_firma_direct">
+                    {{ $tickets->nombre }} <br>
+                    {{ $tickets->texto_director }}
+                </p>
+            </div>
+        @endif
+
         <div class="container_folio_bajo1">
             <h4 class="folio">{{$folio}}</h4>
         </div>
@@ -411,12 +490,17 @@
     <div class="card-back">
 
         @if(!isset($tickets->User->logo))
+
             <img src="{{ $basePath . '/' . $tipo_documentos->img_reverso }}" class="img_reverso">
         @else
-            <img src="{{ $basePath .'/'. 'titulo_reverso_limpio.png' }}" class="img_reverso">
+
+            @if($tickets->firma_director == 'si')
+                <img src="{{ $basePath . '/' . 'titulo_reverso_limpio_firma_director.png' }}" class="img_reverso">
+            @else
+                <img src="{{ $basePath .'/'. 'titulo_reverso_limpio.png' }}" class="img_reverso">
+            @endif
+
         @endif
-
-
 
         <div class="container_nombre_formateado">
             <h4 class="nombre_reverso">{{ $cursoNombre }}</h4>
@@ -437,6 +521,21 @@
         <div class="container_cursoreversa_medio">
             <h4 class="nombre_reverso">{!! $curso_formateado !!}</h4>
         </div>
+
+        @if($tickets->firma_director == 'si')
+            <div class="container_firma_director2">
+                <p class="text-center">
+                    <img src="{{ $basePathFirmaDirect  .'/'.  $tickets->User->telefono . '/' .$tickets->User->RegistroImnasEscuela->firma }}" class="img_firna2">
+                </p>
+            </div>
+
+            <div class="container_firma_director_text2">
+                <p class="text-center texto_firma_direct">
+                    {{ $tickets->nombre }} <br>
+                    {{ $tickets->texto_director }}
+                </p>
+            </div>
+        @endif
 
         <div class="container_folio_reversa">
             <h4 class="folio_reversa">{{$folio}}</h4>

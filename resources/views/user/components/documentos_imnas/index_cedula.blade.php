@@ -1,7 +1,7 @@
 @extends('layouts.app_documenots')
 
 @section('template_title')
-    Cedula
+    Cedula RN
 @endsection
 
 @php
@@ -126,6 +126,7 @@
     .folio.small-font {
         margin-top: 4px;
         font-size: 11px;
+        font-size:{{$tickets->tam_letra_folio_cedula}}px!important;
     }
 
 
@@ -138,6 +139,7 @@
     .folioReverso.small-font-reverso {
         position:relative;
         font-size: 18px;
+        font-size:{{$tickets->tam_letra_folioTrasero_cedula}}px!important;
         color: red;
     }
 
@@ -155,13 +157,13 @@
         left: 5%;
     }
 
-    @php
+    <?php
         if (isset($tickets->User)) {
             $backgroundImage = $basePathDocumentos . '/' . $tickets->User->telefono . '/' . $foto;
         } else {
             $backgroundImage = 'https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png';
         }
-    @endphp
+    ?>
 
     .oval {
         width: 100%;
@@ -270,6 +272,7 @@
 
     .curso.small-font {
         font-size: 12px;
+        font-size:{{$tickets->tam_letra_especialidad_cedula}}px!important;
     }
 
 </style>

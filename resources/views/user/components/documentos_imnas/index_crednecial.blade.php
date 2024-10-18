@@ -148,6 +148,7 @@
 
         .curso{
             font-size:10px;
+            font-size:{{$tickets->tam_letra_credencial_especialidad}}px!important;
             color: red;
         }
 

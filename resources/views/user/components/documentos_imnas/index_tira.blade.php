@@ -1,7 +1,7 @@
 @extends('layouts.app_documenots')
 
 @section('template_title')
-    Cedula
+    Tira de materias RN
 @endsection
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -147,6 +147,26 @@
             font-weight: bold;
         }
 
+        .container_promedio{
+            position: absolute;
+            top:52.5%;
+            left:106.5%;
+            text-align: center;
+        }
+
+        @if(!isset($tickets->promedio))
+
+        @else
+            .promedio{
+                position:relative;
+                font-size: 15px;
+                font-weight: bold;
+                padding: 10px;
+                background: #fff;
+            }
+        @endif
+
+
         .container_logo{
             position: absolute;
             top: 45px;
@@ -175,6 +195,7 @@
             left:35%;
             text-align: left;
             font-size: 25px;
+            font-size:{{$tickets->tam_letra_lista_tira_materias}}px!important;
             width: 610px;
         }
 
@@ -232,6 +253,16 @@
         <div class="container_folio_bajo1">
             <h4 class="folio3">{{$tickets->folio}}</h4>
         </div>
+
+        @if(!isset($tickets->promedio))
+
+        @else
+            <div class="container_promedio">
+                <h4 class="promedio">{{$tickets->promedio}}</h4>
+            </div>
+        @endif
+
+
 
         <div class="container_texto_tira">
             <ul>

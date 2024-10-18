@@ -155,7 +155,9 @@
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+          {{-- <a href="https://plataforma.imnasmexico.com/buscador/folio?folio='.{{ $registro_imnas->folio }}" class="btn btn-dark">Ver Documetno Digital</a> --}}
+         <a target="_blank" href="{{ route('folio.buscador', 'folio='.$registro_imnas->folio) }}" class="btn btn-dark">Ver Doc Digital</a>
+
         </div>
       </div>
     </div>
