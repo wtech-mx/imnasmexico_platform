@@ -558,6 +558,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/registro/imnas/store', [App\Http\Controllers\RegistroIMNASController::class, 'store'])->name('registro_imnas.store');
     Route::post('/registro/imnas/update/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_registro'])->name('update_registro.update');
     Route::get('/registro/imnas/especialidades/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'show_especialidades'])->name('show_especialidades.imnas');
+    Route::patch('/registro/imnas/especialidades/update/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_especialidades'])->name('especialidades.update');
 
     Route::get('/registro/imnas/imprimir/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'imprimir_especialidad'])->name('imprimir_especialidad.imprimir');
     // =============== M O D U L O   R E G I S T R O  I M N A S  C L I E N T E S ===============================
@@ -635,6 +636,7 @@ Route::group(['middleware' => ['auth']], function() {
     // =============== M O D U L O   R E P O R T E  V E N T A S ===============================
     Route::get('reporte/ventas/', [App\Http\Controllers\ReporteVentasController::class, 'index'])->name('reporte_ventas.index');
     Route::get('reporte/ventas/buscador', [App\Http\Controllers\ReporteVentasController::class, 'buscador'])->name('reporte_ventas.buscador');
+
 });
 
 // Route::get('registro/login', function () {

@@ -689,6 +689,25 @@ class RegistroIMNASController extends Controller
         return view('admin.registro_imnas.show_especialidades', compact('especialidades', 'cliente', 'temario'));
     }
 
+    public function update_especialidades(Request $request, $id){
+        $registro_imnas_especialidad = RegistroImnasEspecialidad::where('id', $id)->first();
+        $registro_imnas_especialidad->especialidad = $request->get('especialidad');
+        $registro_imnas_especialidad->update();
+
+        $registro_imnas_temario = RegistroImnasTemario::where('id_materia', $id)->get();
+        foreach ($registro_imnas_temario as $materia) {
+            $inputName = 'subtema_' . $materia->id; // El nombre del input en el form
+
+            if ($request->has($inputName)) {
+                // Actualizar el subtema correspondiente
+                $materia->subtema = $request->input($inputName);
+                $materia->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'datos actualizado con exito.');
+    }
+
     public function update_guia(Request $request){
         $registro_imnas = RegistroImnas::where('id', $request->id_registro)->firstOrFail();
         $registro_imnas->num_guia = $request->get('num_guia');

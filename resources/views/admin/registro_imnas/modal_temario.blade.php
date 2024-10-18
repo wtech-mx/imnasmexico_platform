@@ -11,19 +11,36 @@
 
                 <div class="modal-body">
                     <div class="row">
-                        @foreach ($temario as $materias)
-                            @if ($item->id == $materias->id_materia)
+                        <form method="POST" action="{{ route('especialidades.update', $item->id) }}" enctype="multipart/form-data" role="form">
+                            @csrf
+                            <input type="hidden" name="_method" value="PATCH">
                                 <div class="col-12 form-group">
-                                    <label for="name">Materia</label>
+                                    <label for="name">Especialidad</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/book.png') }}" alt="" width="35px" style="margin-right: 1rem">
                                         </span>
-                                        <input id="name" name="name" type="text" class="form-control" value=" {{ $materias->subtema }}" disabled>
+                                        <input id="especialidad" name="especialidad" type="text" class="form-control" value="{{ $item->especialidad }}">
                                     </div>
                                 </div>
-                            @endif
-                        @endforeach
+                                @foreach ($temario as $materias)
+                                    @if ($item->id == $materias->id_materia)
+                                        <div class="col-12 form-group">
+                                            <label for="name">Materia</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="basic-addon1">
+                                                    <img src="{{ asset('assets/user/icons/book.png') }}" alt="" width="35px" style="margin-right: 1rem">
+                                                </span>
+                                                <input id="subtema" name="subtema_{{$materias->id}}" type="text" class="form-control" value="{{ $materias->subtema }}">
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                </div>
+                        </form>
                     </div>
                 </div>
 
