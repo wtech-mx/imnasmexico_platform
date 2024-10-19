@@ -24,13 +24,6 @@
                         ¿Como fucniona?
                     </a>
 
-                   <!-- <form action="{{ route('products.import') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        <input type="file" name="file" class="form-control">
-                        <br>
-                        <button class="btn btn-success">Importar Products</button>
-                    </form>-->
-
                     @can('productos-create')
                         <a href="{{ route('bundle.create') }}" class="btn btn-sm bg-gradient-primary"  style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                             <i class="fa fa-fw fa-edit"></i> Crear Paquete / Kit
@@ -40,16 +33,6 @@
                             <i class="fa fa-fw fa-edit"></i> Crear
                         </a>
                     @endcan
-
-                    {{-- <form action="{{ route('products.generateSkus') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">Generar SKUs</button>
-                    </form>
-
-                    <a href="{{ route('products.generateAllPDF') }}" class="btn btn-primary">
-                        Generar PDF de Todos los Productos
-                    </a> --}}
-
 
                 </div>
             </div>
@@ -69,9 +52,9 @@
                         </li>
 
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-kits-tab" data-bs-toggle="pill" data-bs-target="#pills-kits" type="button" role="tab" aria-controls="pills-kits" aria-selected="false" style="background: #86ff61a3">
+                            <a class="nav-link" id="pills-kits-tab" href="{{ route('bundle.index') }}" style="background: #86ff61a3">
                                 Kits  <img src="{{ asset('assets/user/icons/productos.png') }}" alt="" width="35px">
-                            </button>
+                            </a>
                         </li>
                 </ul>
             </div>
@@ -152,60 +135,6 @@
                                 </tr>
                             </thead>
                             @foreach ($productsTiendita as $product)
-                            @php
-                                $precio_rebajado = number_format($product->precio_rebajado, 0, '.', ',');
-                                $precio_normal = number_format($product->precio_normal, 0, '.', ',');
-                            @endphp
-                            <tr id="productRow{{ $product->id }}">
-                                <td>{{ $product->id }}</td>
-                                <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
-                                <td>{{ $product->nombre }}</td>
-                                <td>${{ $precio_normal }}</td>
-                                <td>{{ $product->categoria }}</td>
-                                <td>{{ $product->stock }}</td>
-                                <td>
-
-                                        <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
-                                            <i class="fa fa-fw fa-edit"></i>
-                                        </a>
-                                    @can('productos-edit')
-                                        <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="PATCH">
-                                            <input type="hidden" name="categoria" value="Ocultar">
-
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-fw fa-trash"></i>
-                                            </button>
-                                        </form>
-
-                                    @endcan
-                                </td>
-                            </tr>
-                            @include('admin.products.modal_update')
-                            @endforeach
-
-                        </table>
-                    </div>
-
-                </div>
-
-                <div class="tab-pane fade" id="pills-kits" role="tabpanel" aria-labelledby="pills-kits-tab" tabindex="0">
-
-                    <div class="table-responsive p-4" style="border:solid 5px #86ff61a3">
-                        <table class="table table-flush" id="datatable-search3">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Foto</th>
-                                    <th>Nombre</th>
-                                    <th>Precio Normal</th>
-                                    <th>Categoria</th>
-                                    <th>Stock</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            @foreach ($productsKit as $product)
                             @php
                                 $precio_rebajado = number_format($product->precio_rebajado, 0, '.', ',');
                                 $precio_normal = number_format($product->precio_normal, 0, '.', ',');

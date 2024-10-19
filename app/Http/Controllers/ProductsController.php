@@ -20,11 +20,17 @@ class ProductsController extends Controller
 {
 
     public function index(Request $request){
-        $products = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Producto')->get();
+        $products = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Producto')->orderby('nombre','asc')->get();
         $productsTiendita = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Tiendita')->get();
-        $productsKit = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Kit')->get();
 
-        return view('admin.products.index', compact('products','productsTiendita','productsKit'));
+        return view('admin.products.index', compact('products','productsTiendita'));
+    }
+
+    public function index_bundle(Request $request){
+
+        $productsKit = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Kit')->orderby('nombre','asc')->get();
+
+        return view('admin.products.index_bundle', compact('productsKit'));
     }
 
     public function show($id)
