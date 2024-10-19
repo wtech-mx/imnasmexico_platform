@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HistorialVendidos;
 use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
+use App\Models\OrderOnlineCosmica;
 use App\Models\OrderOnlineNas;
 use App\Models\ProductosNotasCosmica;
 use App\Models\ProductosNotasId;
@@ -173,7 +174,7 @@ class BodegaController extends Controller
         $updatedOrder = $woocommerceNas->put("orders/{$id}", [
             'status' => $request->get('status'),
         ]);
-        
+
         $updatedOrderMeta = $woocommerceNas->put("orders/{$id}", [
             'meta_data' => [
                 [
@@ -186,7 +187,7 @@ class BodegaController extends Controller
         // Verificar si la actualización fue exitosa
         if ($updatedOrder) {
             // Obtener la orden desde WooCommerce
-            $order = WooCommerce::find("orders/$id");
+            $order = $woocommerceNas->get("orders/$id");
             // 2. Recorrer los productos en la orden (line_items)
             foreach ($order->line_items as $item) {
                 $productName = trim($item->name); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
@@ -468,6 +469,52 @@ class BodegaController extends Controller
         if ($product) {
             // Verifica y actualiza el registro correcto en `productos_notas`
             $notaProducto = OrderOnlineNas::where('id_nota', $idNotaProducto)
+                ->where('nombre', $product->nombre)
+                ->first();
+
+            if ($notaProducto) {
+                $notaProducto->estatus = 1;
+                $notaProducto->save();
+                return response()->json(['status' => 'success', 'message' => 'Producto encontrado y actualizado']);
+            }
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'Producto no encontrado o no corresponde a la nota']);
+    }
+
+    public function preparacion_scaner_online_cosmica(Request $request, $id)
+    {
+        $woocommerceCosmika = new Client(
+            'https://cosmicaskin.com', // URL de la tienda secundaria
+            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
+            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Obtener un pedido específico usando el ID
+        $order = $woocommerceCosmika->get('orders/' . $id);
+
+        $order_online_cosmica = OrderOnlineCosmica::where('id_nota', $id)->get();
+
+        return view('admin.bodega.scaner.show_online_cosmica', compact('order', 'order_online_cosmica'));
+    }
+
+    public function checkProduct_online_cosmica(Request $request)
+    {
+
+        $sku_scaner = $request->input('sku');
+        $sku = trim($sku_scaner);
+        $idNotaProducto = $request->input('id_nota');
+
+        // Busca el producto en la tabla `Products`
+        $product = Products::where('sku', $sku)->first();
+
+        if ($product) {
+            // Verifica y actualiza el registro correcto en `productos_notas`
+            $notaProducto = OrderOnlineCosmica::where('id_nota', $idNotaProducto)
                 ->where('nombre', $product->nombre)
                 ->first();
 

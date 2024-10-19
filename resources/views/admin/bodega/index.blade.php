@@ -334,6 +334,9 @@
                                                             <i class="fa fa-info"></i>
                                                         </a>
 
+                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_cosmica.bodega', $order->id) }}">
+                                                            <i class="fa fa-barcode"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
 
