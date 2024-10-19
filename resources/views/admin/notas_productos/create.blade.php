@@ -89,7 +89,8 @@
                                                                 <select name="campo[]" class="form-select d-inline-block producto">
                                                                     <option value="">Seleccione products</option>
                                                                     @foreach ($products as $product)
-                                                                    <option value="{{ $product->nombre }}" data-precio_normal="{{ $product->precio_normal }}">{{ $product->nombre }}</option>
+                                                                    <option value="{{ $product->nombre }}" data-precio_normal="{{ $product->precio_normal }}" data-imagen="{{ $product->imagenes }}">{{ $product->nombre }}</option>
+
                                                                     @endforeach
                                                                 </select>
                                                             </div>
@@ -366,7 +367,29 @@
         var totalDescuentoInput = document.getElementById('totalDescuento');
 
         $(document).ready(function() {
-            $('.producto').select2();
+
+            function formatProduct(producto) {
+                if (!producto.id) {
+                    return producto.text;
+                }
+
+                // Obtener la URL de la imagen desde el atributo data-imagen
+                var imgUrl = $(producto.element).data('imagen');
+
+                // Crear la estructura HTML para mostrar la imagen junto con el nombre del producto
+                var $producto = $(
+                    '<span><img src="' + imgUrl + '" class="img-thumbnail" style="width: 50px; height: 50px; margin-right: 10px;" />' + producto.text + '</span>'
+                );
+                return $producto;
+            }
+
+            // Inicializar Select2 con plantillas personalizadas
+            $('.producto').select2({
+                templateResult: formatProduct,  // Formateo del producto con imagen
+                templateSelection: formatProduct,
+                escapeMarkup: function(m) { return m; }
+            });
+
 
             // Función para asociar eventos al campo de cantidad y descuento
             function asociarEventosCampos(cantidadInput, descuentoInput, productoInput) {
@@ -400,43 +423,48 @@
             asociarEventosCampos(cantidadOriginal, descuentoOriginal, productoOriginal);
 
             // Agregar campo duplicado
-            agregarCampoBtn.addEventListener('click', function() {
-                var nuevoCampo = campoExistente.cloneNode(true);
-                camposContainer.appendChild(nuevoCampo);
+            $('#agregarCampo').on('click', function() {
+            // Clonar el campo existente
+            var campoExistente = $('.campo').first(); // Selecciona el primer campo como base para clonar
+            var nuevoCampo = campoExistente.clone();
 
-                // Limpiar los valores en el nuevo campo
-                nuevoCampo.querySelector('.producto').value = '';
-                nuevoCampo.querySelector('.cantidad').value = '';
-                nuevoCampo.querySelector('.descuento_prod').value = '0';
-                nuevoCampo.querySelector('.subtotal').value = '0.00';
+            // Eliminar los elementos select2 previos generados
+            nuevoCampo.find('.select2').remove(); // Elimina los contenedores internos de Select2
 
-                nuevoCampo.querySelector('.producto').addEventListener('change', function () {
-                    actualizarSubtotal();
-                });
+            // Limpiar los valores de los campos recién agregados
+            nuevoCampo.find('.producto').val('').trigger('change'); // Limpiar select2
+            nuevoCampo.find('.cantidad').val('');
+            nuevoCampo.find('.descuento_prod').val('0');
+            nuevoCampo.find('.subtotal').val('0.00');
 
-                // Obtener los campos de cantidad y descuento del nuevo campo
-                var cantidadInput = nuevoCampo.querySelector('.cantidad');
-                var descuentoInput = nuevoCampo.querySelector('.descuento_prod');
-                var productoInput = nuevoCampo.querySelector('.producto');
+            // Eliminar la instancia select2 previa y reinicializar con un nuevo ID único
+            nuevoCampo.find('.producto').select2('destroy'); // Destruye la instancia select2 anterior
+            nuevoCampo.find('.producto').attr('id', 'producto_' + Math.random().toString(36).substr(2, 9)); // Asigna un nuevo ID único
 
-                // Asociar eventos al nuevo campo de cantidad y descuento
-                asociarEventosCampos(cantidadInput, descuentoInput, productoInput);
-
-                // Eliminar la clase 'select2-hidden-accessible' y la data de select2 antes de clonar
-                $(nuevoCampo).find('.producto').removeClass('select2-hidden-accessible').next().remove();
-
-                // Inicializar select2 después de clonar
-                $(nuevoCampo).find('.producto').select2();
-
-                // Agregar evento para eliminar el nuevo campo
-                var eliminarCampoBtn = nuevoCampo.querySelector('.eliminarCampo');
-                eliminarCampoBtn.addEventListener('click', function() {
-                    eliminarCampo(nuevoCampo);
-                });
-
-                // Actualizar subtotal al agregar nuevo campo
-                actualizarSubtotal();
+            // Volver a inicializar select2 después de clonar
+            nuevoCampo.find('.producto').select2({
+                templateResult: formatProduct,
+                templateSelection: formatProduct,
+                escapeMarkup: function(m) { return m; }
             });
+
+            // Asociar eventos al nuevo campo de cantidad y descuento
+            var cantidadInput = nuevoCampo.find('.cantidad')[0];
+            var descuentoInput = nuevoCampo.find('.descuento_prod')[0];
+            var productoInput = nuevoCampo.find('.producto')[0];
+            asociarEventosCampos(cantidadInput, descuentoInput, productoInput);
+
+            // Agregar evento para eliminar el nuevo campo
+            nuevoCampo.find('.eliminarCampo').on('click', function() {
+                eliminarCampo(nuevoCampo);
+            });
+
+            // Agregar el nuevo campo al contenedor
+            $('#camposContainer').append(nuevoCampo);
+
+            // Actualizar subtotal al agregar nuevo campo
+            actualizarSubtotal();
+        });
 
             // Agregar evento para eliminar el campo original
             var eliminarCampoBtnOriginal = document.querySelector('.campo .eliminarCampo');

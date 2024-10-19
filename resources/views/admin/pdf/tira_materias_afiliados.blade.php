@@ -307,6 +307,7 @@
 
         <div class="container_texto_tira">
             <ul class="ul_text">
+
                 @foreach ($subtemas as $subtema)
                     <li>{{$subtema->subtema}}</li>
                 @endforeach
