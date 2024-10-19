@@ -24,6 +24,12 @@ class Products extends Model
         'stock_cosmica',
         'laboratorio',
         'sku',
+        'fecha',
     ];
+
+    public function ProductosBundleId()
+    {
+        return $this->hasMany(ProductosBundleId::class, 'id_bundle_productos');
+    }
 
 }

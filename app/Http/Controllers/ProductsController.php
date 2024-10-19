@@ -7,6 +7,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ProductsImport;
 use App\Models\HistorialVendidos;
 use App\Models\Products;
+use App\Models\ProductosBundleId;
 use App\Models\HistorialStock;
 use Illuminate\Support\Facades\Artisan;
 use Milon\Barcode\DNS1D; // Importamos la clase para generar códigos de barras
@@ -43,6 +44,64 @@ class ProductsController extends Controller
         $product->imagenes = $request->get('imagenes');
 
         $product->save();
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+
+        return redirect()->back()->with('success', 'Envio de correo exitoso.');
+
+    }
+
+    public function create_bundle(Request $request){
+
+        $products = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '!=', 'Kit')->get();
+
+        return view('admin.products.bundle', compact('products'));
+    }
+
+    public function store_bundle(Request $request)
+    {
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_comentarios = base_path('../public_html/plataforma.imnasmexico.com/products');
+        }else{
+            $ruta_comentarios = public_path() . '/products';
+        }
+
+        $product = new Products;
+        $product->nombre = $request->get('nombre');
+        $product->subcategoria = 'Kit';
+        $product->descripcion = $request->get('descripcion');
+        $product->precio_rebajado = $request->get('total');
+        $product->precio_normal = $request->get('totalDescuento');
+        $product->fecha_fin = $request->get('fecha');
+        $product->categoria = $request->get('categoria');
+
+        if ($request->hasFile("foto")) {
+            $file = $request->file('foto');
+            $path = $ruta_comentarios;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $product->imagenes = $fileName;
+        }
+
+        $product->save();
+
+        if ($request->has('campo')) {
+            $nuevosCampos = $request->input('campo');
+            $nuevosCampos2 = $request->input('campo4');
+            $nuevosCampos3 = $request->input('campo3');
+            $nuevosCampos4 = $request->input('descuento_prod');
+
+            foreach ($nuevosCampos as $index => $campo) {
+                $notas_inscripcion = new ProductosBundleId;
+                $notas_inscripcion->id_product = $product->id;
+                $notas_inscripcion->producto = $campo;
+                $notas_inscripcion->price = $nuevosCampos2[$index];
+                $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                $notas_inscripcion->save();
+            }
+        }
+
         Session::flash('success', 'Se ha guardado sus datos con exito');
 
         return redirect()->back()->with('success', 'Envio de correo exitoso.');

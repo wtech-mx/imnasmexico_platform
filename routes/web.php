@@ -482,6 +482,9 @@ Route::group(['middleware' => ['auth']], function() {
 
      // =============== M O D U L O   WEB PAGE ===============================
      Route::get('/admin/products', [App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
+     Route::get('/admin/products/create/bundle', [App\Http\Controllers\ProductsController::class, 'create_bundle'])->name('bundle.create');
+     Route::post('/admin/products/store/bundle', [App\Http\Controllers\ProductsController::class, 'store_bundle'])->name('bundle.store');
+
      Route::post('/admin/products/import', [App\Http\Controllers\ProductsController::class, 'import_products'])->name('products.import');
      Route::post('/admin/products/store', [App\Http\Controllers\ProductsController::class, 'store'])->name('products.store');
      Route::patch('/admin/products/update/{id}', [App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
