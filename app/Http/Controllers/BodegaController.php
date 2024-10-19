@@ -211,6 +211,7 @@ class BodegaController extends Controller
 
             // Buscar el pedido específico por ID
             $pedido = collect($pedidos['data'])->firstWhere('id', $id);
+
             if (!$pedido) {
                 return back()->with('error', 'El pedido no fue encontrado en la API de Paradisus.');
             }
@@ -332,6 +333,78 @@ class BodegaController extends Controller
                 $notaProducto->estatus = 1;
                 $notaProducto->save();
                 return response()->json(['status' => 'success', 'message' => 'Producto encontrado y actualizado']);
+            }
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'Producto no encontrado o no corresponde a la nota']);
+    }
+
+    public function preparacion_scaner_paradisus(Request $request, $id)
+    {
+        $dominio = $request->getHost();
+
+        // Llama a la API para obtener los pedidos
+        if ($dominio == 'plataforma.imnasmexico.com') {
+            $api_pedidosParadisus = Http::get('https://paradisus.mx/api/enviar-notas-pedidos');
+        } else {
+            $api_pedidosParadisus = Http::get('http://paradisus.test/api/enviar-notas-pedidos');
+        }
+
+        // Convertir la respuesta a un array
+        $ApiParadisusArray = $api_pedidosParadisus->json();
+
+        // Filtrar la nota por ID
+        $ApiFiltradaCollectAprobado = collect($ApiParadisusArray['data'])->where('id', $id)->first();
+
+        // Obtener los productos (pedidos) de la nota
+        $productos_scaner = $ApiFiltradaCollectAprobado['pedidos'] ?? [];
+
+        // Verificar si todos los productos tienen el estatus correcto
+        $allChecked = collect($productos_scaner)->every(function ($producto) {
+            return $producto['estatus'] == 1;
+        });
+
+        return view('admin.bodega.scaner.show_paradisus', compact('ApiFiltradaCollectAprobado', 'productos_scaner', 'allChecked'));
+    }
+
+    public function checkProduct_paradisus(Request $request)
+    {
+        $sku = $request->input('sku');
+        $idNota = $request->input('id_nota');
+
+        // Aquí deberías recorrer los productos de la nota que ya obtuviste en el método anterior
+        $dominio = $request->getHost();
+        $api_pedidosParadisus = $dominio == 'plataforma.imnasmexico.com'
+            ? Http::get('https://paradisus.mx/api/enviar-notas-pedidos')
+            : Http::get('http://paradisus.test/api/enviar-notas-pedidos');
+
+        // Convertir la respuesta a un array
+        $ApiParadisusArray = $api_pedidosParadisus->json();
+
+        // Buscar la nota y los productos
+        $ApiFiltradaCollectAprobado = collect($ApiParadisusArray['data'])->where('id', $idNota)->first();
+
+        if ($ApiFiltradaCollectAprobado) {
+
+            // Obtener el producto dentro de la nota usando el SKU
+            $product = Products::where('sku', $sku)->first();
+            $producto = collect($ApiFiltradaCollectAprobado['pedidos'])->where('concepto', $product->nombre)->first();
+            $producto_id = $producto['id'];
+            if ($producto) {
+
+                if ($dominio == 'plataforma.imnasmexico.com') {
+                    $respuesta = Http::patch('https://paradisus.mx/api/actualizar-producto/' . $producto_id);
+                } else {
+                    $respuesta = Http::patch('http://paradisus.test/api/actualizar-producto/' . $producto_id);
+                }
+
+                if ($respuesta->successful()) {
+                    return response()->json(['status' => 'success', 'message' => 'Producto escaneado'], 200);
+                } else {
+                    return response()->json(['status' => 'error', 'message' => 'Producto no encontrado en la nota'], 404);
+                }
+            } else {
+                return response()->json(['status' => 'error', 'message' => 'Producto no encontrado en la nota'], 404);
             }
         }
 

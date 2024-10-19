@@ -153,8 +153,7 @@ class RegistroIMNASController extends Controller
         return redirect()->back()->with('success', 'Se creo con exito.');
     }
 
-    public function update_clientes(Request $request, $id)
-    {
+    public function update_clientes(Request $request, $id){
         $cliente = User::where('id', $request->id_usuario)->first();
 
         $registro = RegistroImnas::find($id);

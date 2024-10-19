@@ -633,6 +633,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('bodega/preparacion/scaner/cosmica/{id}', [App\Http\Controllers\BodegaController::class, 'preparacion_scaner_cosmica'])->name('preparacion_scaner_cosmica.bodega');
     Route::post('/check-product/cosmica', [App\Http\Controllers\BodegaController::class, 'checkProduct_cosmica'])->name('check_cosmica.product');
+
+    Route::get('bodega/preparacion/scaner/paradisus/{id}', [App\Http\Controllers\BodegaController::class, 'preparacion_scaner_paradisus'])->name('preparacion_scaner_paradisus.bodega');
+    Route::post('/check-product/paradisus', [App\Http\Controllers\BodegaController::class, 'checkProduct_paradisus'])->name('check_paradisus.product');
     // =============== M O D U L O   R E P O R T E  V E N T A S ===============================
     Route::get('reporte/ventas/', [App\Http\Controllers\ReporteVentasController::class, 'index'])->name('reporte_ventas.index');
     Route::get('reporte/ventas/buscador', [App\Http\Controllers\ReporteVentasController::class, 'buscador'])->name('reporte_ventas.buscador');
