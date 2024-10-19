@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderOnlineNas;
 use Illuminate\Http\Request;
 use Codexshaper\WooCommerce\Facades\WooCommerce;
 use Automattic\WooCommerce\Client;
@@ -112,25 +113,14 @@ class PedidosWooController extends Controller
                     ],
                 ]);
 
-                    // Obtener la orden desde WooCommerce
-                    $order = WooCommerce::find("orders/$id");
-                    // 2. Recorrer los productos en la orden (line_items)
-                    foreach ($order->line_items as $item) {
-                        $productName = trim($item->name); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
-                        $quantity = $item->quantity; // Cantidad vendida en WooCommerce
-
-                        // 3. Buscar el producto en la tabla interna
-                        $productoInterno = Products::where('nombre', $productName)->first();
-
-                        if ($productoInterno) {
-                            // 4. Realizar la resta del stock
-                            $nuevoStock = $productoInterno->stock - $quantity;
-
-                            // 5. Actualizar el stock en la base de datos
-                            $productoInterno->update(['stock' => $nuevoStock]);
-                        }
-                    }
-
+                $order = WooCommerce::find("orders/$id");
+                foreach ($order->line_items as $item) {
+                    $order_online_nas = new OrderOnlineNas;
+                    $order_online_nas->id_nota = $id;
+                    $order_online_nas->nombre = $item->name;
+                    $order_online_nas->cantidad = $item->quantity;
+                    $order_online_nas->save();
+                }
             }else{
                 // Actualizar la meta información en WooCommerce para el campo 'guia_de_envio'
                 $updatedOrderMeta = WooCommerce::update('orders/' . $id, [

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HistorialVendidos;
 use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
+use App\Models\OrderOnlineNas;
 use App\Models\ProductosNotasCosmica;
 use App\Models\ProductosNotasId;
 use App\Models\Products;
@@ -169,11 +170,10 @@ class BodegaController extends Controller
             );
         }
 
-
         $updatedOrder = $woocommerceNas->put("orders/{$id}", [
             'status' => $request->get('status'),
         ]);
-
+        
         $updatedOrderMeta = $woocommerceNas->put("orders/{$id}", [
             'meta_data' => [
                 [
@@ -185,12 +185,36 @@ class BodegaController extends Controller
 
         // Verificar si la actualización fue exitosa
         if ($updatedOrder) {
+            // Obtener la orden desde WooCommerce
+            $order = WooCommerce::find("orders/$id");
+            // 2. Recorrer los productos en la orden (line_items)
+            foreach ($order->line_items as $item) {
+                $productName = trim($item->name); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
+                $quantity = $item->quantity; // Cantidad vendida en WooCommerce
+
+                // 3. Buscar el producto en la tabla interna
+                $productoInterno = Products::where('nombre', $productName)->first();
+
+                $producto_historial = new HistorialVendidos;
+                $producto_historial->id_producto = $productoInterno->id;
+                $producto_historial->stock_viejo = $productoInterno->stock;
+                $producto_historial->cantidad_restado = $quantity;
+                $producto_historial->stock_actual = $productoInterno->stock - $quantity;
+                $producto_historial->id_nas_online = $id;
+                $producto_historial->save();
+
+                if ($productoInterno) {
+                    // 4. Realizar la resta del stock
+                    $nuevoStock = $productoInterno->stock - $quantity;
+                    // 5. Actualizar el stock en la base de datos
+                    $productoInterno->update(['stock' => $nuevoStock]);
+                }
+            }
+
             return redirect()->back()->with('success', 'Estado de la orden y archivo actualizado correctamente.');
         } else {
             return redirect()->back()->with('error', 'Hubo un problema al actualizar el estado de la orden.');
         }
-
-
     }
 
     public function actualizarPedidoParadisus(Request $request, $id)
@@ -405,6 +429,52 @@ class BodegaController extends Controller
                 }
             } else {
                 return response()->json(['status' => 'error', 'message' => 'Producto no encontrado en la nota'], 404);
+            }
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'Producto no encontrado o no corresponde a la nota']);
+    }
+
+    public function preparacion_scaner_nas(Request $request, $id)
+    {
+        $woocommerce = new Client(
+            'https://imnasmexico.com/new/', // URL de la tienda principal
+            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda principal
+            'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda principal
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Obtener un pedido específico usando el ID
+        $order = $woocommerce->get('orders/' . $id);
+
+        $order_online_nas = OrderOnlineNas::where('id_nota', $id)->get();
+
+        return view('admin.bodega.scaner.show_nas', compact('order', 'order_online_nas'));
+    }
+
+    public function checkProduct_nas(Request $request)
+    {
+
+        $sku_scaner = $request->input('sku');
+        $sku = trim($sku_scaner);
+        $idNotaProducto = $request->input('id_nota');
+
+        // Busca el producto en la tabla `Products`
+        $product = Products::where('sku', $sku)->first();
+
+        if ($product) {
+            // Verifica y actualiza el registro correcto en `productos_notas`
+            $notaProducto = OrderOnlineNas::where('id_nota', $idNotaProducto)
+                ->where('nombre', $product->nombre)
+                ->first();
+
+            if ($notaProducto) {
+                $notaProducto->estatus = 1;
+                $notaProducto->save();
+                return response()->json(['status' => 'success', 'message' => 'Producto encontrado y actualizado']);
             }
         }
 
