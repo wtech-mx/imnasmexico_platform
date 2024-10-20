@@ -78,7 +78,15 @@
                     @endphp
                     <tr id="productRow{{ $product->id }}">
                         <td>{{ $product->id }}</td>
-                        <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
+                        <th>
+
+                            @if ($product->imagenes == NULL)
+                                <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 50px; height: 50px;"/>
+                            @else
+                                <img id="blah" src="{{asset('products/'.$product->imagenes) }}" alt="Imagen" style="width: 50px; height: 50px;"/>
+                            @endif
+
+                        </th>
                         <td>{{ $product->nombre }}</td>
                         <td>${{ $precio_normal }}</td>
                         <td>{{ $product->categoria }}</td>
