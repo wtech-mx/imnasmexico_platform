@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PlantillaNuevoUser;
+use App\Models\ProductosBundleId;
 use App\Models\Products;
 use Illuminate\Support\Str;
 use Session;
@@ -232,13 +233,38 @@ class NotasProductosController extends Controller
             $nuevosCampos4 = $request->input('descuento_prod');
 
             foreach ($nuevosCampos as $index => $campo) {
-                $notas_inscripcion = new ProductosNotasId;
-                $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                $notas_inscripcion->producto = $campo;
-                $notas_inscripcion->price = $nuevosCampos2[$index];
-                $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                $notas_inscripcion->descuento = $nuevosCampos4[$index];
-                $notas_inscripcion->save();
+                $producto = Products::where('nombre', $campo)->first();
+
+                if($producto->subcategoria == 'Kit'){
+                    $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
+                    foreach($productos_bundle as $producto_bundle){
+                        $notas_inscripcion = new ProductosNotasId;
+                        $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                        $notas_inscripcion->producto = $producto_bundle->producto;
+                        $notas_inscripcion->price = '0';
+                        $notas_inscripcion->cantidad = $producto_bundle->cantidad;
+                        $notas_inscripcion->save();
+                    }
+                    $notas_productos->id_kit = $producto->id;
+                    $notas_productos->update();
+                }elseif($producto->subcategoria == 'Tiendita'){
+                    $notas_inscripcion = new ProductosNotasId;
+                    $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->price = $nuevosCampos2[$index];
+                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                    $notas_inscripcion->descuento = $nuevosCampos4[$index];
+                    $notas_inscripcion->estatus = 1;
+                    $notas_inscripcion->save();
+                }else{
+                    $notas_inscripcion = new ProductosNotasId;
+                    $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->price = $nuevosCampos2[$index];
+                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                    $notas_inscripcion->descuento = $nuevosCampos4[$index];
+                    $notas_inscripcion->save();
+                }
             }
         }
 
