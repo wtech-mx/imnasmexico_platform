@@ -11,7 +11,7 @@ class ProductosBundleId extends Model
     protected $table = 'products_bundle_id';
 
     protected $fillable = [
-        'id_bundle_productos',
+        'id_product',
         'producto',
         'price',
         'cantidad',

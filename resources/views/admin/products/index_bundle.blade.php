@@ -17,7 +17,7 @@
                 <div class="d-flex justify-content-between">
                     <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
 
-                    <h3 class="mb-3">Products</h3>
+                    <h3 class="mb-3">Paquetes/kits</h3>
 
                     <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                         ¿Como fucniona?
@@ -85,9 +85,10 @@
                         <td>{{ $product->stock }}</td>
                         <td>
 
-                                <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
-                                    <i class="fa fa-fw fa-edit"></i>
-                                </a>
+                            <a class="btn btn-sm btn-primary" href="{{ route('bundle.edit', $product->id) }}">
+                                <i class="fa fa-fw fa-edit"></i>
+                            </a>
+
                             @can('productos-edit')
                                 <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
                                     @csrf
@@ -125,5 +126,41 @@
         pageLength: 10
     });
 </script>
+
+<script>
+
+    $(document).ready(function() {
+
+      $(document).on('submit', '.OcultarProductForm', function(e) {
+        e.preventDefault(); // Evitar el comportamiento predeterminado del formulario
+
+        let productId = $(this).data('id'); // Obtener el ID del producto
+        let form = $(this); // Referencia al formulario
+        let url = "{{ route('products.update_ocultar', ':id') }}".replace(':id', productId); // Ruta con el ID del producto
+
+        $.ajax({
+                url: url,
+                type: 'PATCH',
+                data: form.serialize(), // Serializar los datos del formulario
+                success: function(response) {
+                // Si la respuesta es exitosa, elimina la fila del producto de la tabla
+                $('#productRow' + response.id).fadeOut(300, function() {
+                    $(this).remove(); // Eliminar la fila después de que desaparezca
+                });
+
+                // Opcional: Mostrar mensaje de éxito
+                alert('Eliminado con exito');
+                },
+                error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert('Error:', error);
+                }
+            });
+        });
+
+    });
+
+
+  </script>
 
 @endsection

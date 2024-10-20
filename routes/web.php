@@ -485,6 +485,9 @@ Route::group(['middleware' => ['auth']], function() {
      Route::get('/admin/products/bundle', [App\Http\Controllers\ProductsController::class, 'index_bundle'])->name('bundle.index');
      Route::get('/admin/products/create/bundle', [App\Http\Controllers\ProductsController::class, 'create_bundle'])->name('bundle.create');
      Route::post('/admin/products/store/bundle', [App\Http\Controllers\ProductsController::class, 'store_bundle'])->name('bundle.store');
+     Route::get('/admin/products/bundle/edit/{id}', [App\Http\Controllers\ProductsController::class, 'edit_bundle'])->name('bundle.edit');
+     Route::patch('/admin/products/bundle/update/{id}', [App\Http\Controllers\ProductsController::class, 'update_bundle'])->name('bundle.update');
+
 
      Route::post('/admin/products/import', [App\Http\Controllers\ProductsController::class, 'import_products'])->name('products.import');
      Route::post('/admin/products/store', [App\Http\Controllers\ProductsController::class, 'store'])->name('products.store');
