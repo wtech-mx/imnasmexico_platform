@@ -214,7 +214,7 @@
 
                             <a class="nav-link {{ (Request::is('admin/scanner/') ? 'active' : '') }}" href="{{ route('scanner.index') }}">
                                 <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-list text-sm opacity-10" style="color:#e6b449"></i>
+                                    <i class="fa fa-camera text-sm opacity-10" style="color:#e6b449"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Scanner</span>
                             </a>
@@ -222,7 +222,7 @@
                             @can('ordenes-bodega')
                                 <a class="nav-link {{ (Request::is('bodega/preparacion') ? 'active' : '') }}" href="{{ route('index_preparacion.bodega') }}">
                                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                        <i class="fa fa-ticket text-sm opacity-10" style="color:#e6b449"></i>
+                                        <i class="fa fa-box text-sm opacity-10" style="color:#e6b449"></i>
                                     </div>
                                     <span class="nav-link-text ms-1">Bodega</span>
                                 </a>
@@ -266,7 +266,7 @@
 
                             <a class="nav-link {{ (Request::is('productos/vendidos') ? 'active' : '') }}" href="{{ route('productsHistorialVendidos.index') }}">
                                 <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fa fa-list text-sm opacity-10" style="color:#322338"></i>
+                                    <i class="fa fa-file-pdf text-sm opacity-10" style="color:#322338"></i>
                                 </div>
                                 <span class="nav-link-text ms-1">Historial Productos Vendidos</span>
                             </a>
@@ -367,7 +367,7 @@
                 <li class="nav-item">
                     <a class="nav-link {{ (Request::is('admin/products') ? 'active' : '') }}" href="{{ route('products.index') }}">
                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-ticket text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                        <i class="fa fa-shopping-basket text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
                     </div>
                     <span class="nav-link-text ms-1">Productos</span>
                     </a>
