@@ -194,7 +194,7 @@ class FoliosController extends Controller
 
         $tickets = RegistroImnas::where('folio', $id)->first();
 
-        $idMateria = RegistroImnasEspecialidad::where('id_cliente', $tickets->id_usuario)->first();
+        $idMateria = RegistroImnasEspecialidad::where('especialidad', $tickets->nom_curso)->where('id_cliente', $request->id_usuario)->first();
 
             $subtemas = RegistroImnasTemario::
             where('id_materia', $idMateria->id)
