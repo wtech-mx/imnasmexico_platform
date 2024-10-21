@@ -133,14 +133,21 @@
                 @endif
             </td>
             <td>
-                {{ $nota->fecha }}
+                @php
+                $fecha = $nota->fecha;
+                $fecha_timestamp = strtotime($fecha);
+                $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                @endphp
+                {{ $fecha_formateada }}
             </td>
            </tr>
         </tbody>
     </table>
 
     <div class="text-center">
-        <h3>{{$nota->Kit->nombre}}</h3>
+        @if ($nota->id_kit != NULL)
+            <h3>{{$nota->Kit->nombre}}</h3>
+        @endif
     </div>
 
     <table class="table table-bordered border-primary">
@@ -229,12 +236,12 @@
     @if ($nota->monto != NULL)
         <h2>Pago</h2>
         <b for="">Metodo de Pago:</b> {{ $nota->metodo_pago }} <br>
-        <b for="">Monto:</b> {{ $nota->monto }} <br>
+        <b for="">Monto:</b> ${{ $nota->monto }} <br>
     @endif
 
     @if ($nota->monto2 != NULL)
         <b for="">Metodo de Pago:</b> {{ $nota->metodo_pago2 }} <br>
-        <b for="">Monto:</b> {{ $nota->monto2 }} <br>
+        <b for="">Monto:</b> ${{ $nota->monto2 }} <br>
     @endif
 
     @if ($nota->factura == '1')

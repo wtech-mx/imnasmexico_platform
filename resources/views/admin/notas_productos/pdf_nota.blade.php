@@ -119,14 +119,21 @@
                 @endif
             </td>
             <td>
-                {{ $nota->fecha }}
+                @php
+                $fecha = $nota->fecha;
+                $fecha_timestamp = strtotime($fecha);
+                $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
+                @endphp
+                {{ $fecha_formateada }}
             </td>
            </tr>
         </tbody>
     </table>
 
     <div class="text-center">
-        <h3>{{$nota->Kit->nombre}}</h3>
+        @if ($nota->id_kit != NULL)
+            <h3>{{$nota->Kit->nombre}}</h3>
+        @endif
     </div>
 
     <table class="table table-bordered border-primary">
@@ -148,6 +155,7 @@
                         {{ $nota_producto->cantidad }}
                     </td>
                     <td>
+                        <img src="{{ $producto->imagenes }}" alt="" style="width: 60px"><br>
                         {{ $nota_producto->producto }}
                     </td>
                     @php
@@ -174,7 +182,7 @@
                         $subtotal = $unit * $nota_producto->cantidad;
                     @endphp
                     <td>
-                        ${{ $subtotal }}
+                        ${{ number_format($subtotal, 1, '.', ',') }}
                     </td>
                 </tr>
            @endforeach
@@ -184,7 +192,7 @@
                 <td></td>
                 <td></td>
               <td style="text-align: right"><b>Subtotal</b> </td>
-              <td>${{ $nota->tipo }}</td>
+              <td>${{ number_format($nota->tipo, 1, '.', ',') }}</td>
             </tr>
             @if ($nota->restante > 0)
                 <tr style="background-color: #ffffff;">
@@ -214,7 +222,7 @@
                 <td></td>
                 <td></td>
               <td style="text-align: right"><b>Total</b> </td>
-              <td><b>${{ $nota->total }}</b> </td>
+              <td><b>${{ number_format($nota->total, 1, '.', ',') }}</b> </td>
             </tr>
         </tfoot>
     </table>
@@ -222,12 +230,12 @@
     @if ($nota->monto != NULL)
         <h2>Pago</h2>
         <b for="">Metodo de Pago:</b> {{ $nota->metodo_pago }} <br>
-        <b for="">Monto:</b> {{ $nota->monto }} <br>
+        <b for="">Monto:</b> ${{ number_format($nota->monto, 1, '.', ',') }} <br>
     @endif
 
     @if ($nota->monto2 != NULL)
         <b for="">Metodo de Pago:</b> {{ $nota->metodo_pago2 }} <br>
-        <b for="">Monto:</b> {{ $nota->monto2 }} <br>
+        <b for="">Monto:</b> ${{ number_format($nota->monto2, 1, '.', ',') }} <br>
     @endif
 
     @if ($nota->factura == '1')
