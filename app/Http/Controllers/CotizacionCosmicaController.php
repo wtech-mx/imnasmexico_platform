@@ -6,6 +6,7 @@ use App\Models\Bitacora_cosmikausers;
 use App\Models\Cosmikausers;
 use App\Models\HistorialVendidos;
 use App\Models\NotasProductosCosmica;
+use App\Models\ProductosBundleId;
 use App\Models\ProductosNotasCosmica;
 use App\Models\Products;
 use App\Models\User;
@@ -267,13 +268,38 @@ class CotizacionCosmicaController extends Controller
             }
 
             foreach ($nuevosCampos as $index => $campo) {
-                $notas_inscripcion = new ProductosNotasCosmica;
-                $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                $notas_inscripcion->producto = $campo;
-                $notas_inscripcion->price = $nuevosCampos2[$index];
-                $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
-                $notas_inscripcion->save();
+                $producto = Products::where('nombre', $campo)->first();
+
+                if($producto->subcategoria == 'Kit'){
+                    $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
+                    foreach($productos_bundle as $producto_bundle){
+                        $notas_inscripcion = new ProductosNotasCosmica;
+                        $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                        $notas_inscripcion->producto = $producto_bundle->producto;
+                        $notas_inscripcion->price = '0';
+                        $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                        $notas_inscripcion->save();
+                    }
+                    $notas_productos->id_kit = $producto->id;
+                    $notas_productos->update();
+                }elseif($producto->subcategoria == 'Tiendita'){
+                    $notas_inscripcion = new ProductosNotasCosmica;
+                    $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->price = $nuevosCampos2[$index];
+                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                    $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
+                    $notas_inscripcion->estatus = 1;
+                    $notas_inscripcion->save();
+                }else{
+                    $notas_inscripcion = new ProductosNotasCosmica;
+                    $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->price = $nuevosCampos2[$index];
+                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                    $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
+                    $notas_inscripcion->save();
+                }
             }
         }
 

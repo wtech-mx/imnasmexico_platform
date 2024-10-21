@@ -26,33 +26,61 @@
                                         <h2 style="color:#836262"><strong>Datos del cliente</strong> </h2>
                                     </div>
 
-                                    <div class="form-group col-6">
-                                        <h4 for="name">Nombre *</h4>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" required>
+                                    <div class="col-3">
+                                        <label for="precio">Nuevo cliente</label><br>
+                                        <button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                            Agregar
+                                        </button>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="form-group">
+                                            <label for="name">Cliente *</label>
+                                            <div class="input-group mb-3">
+                                                <select class="form-select cliente d-inline-block"  data-toggle="select" id="id_client" name="id_client" value="{{ old('id_client') }}">
+                                                    <option value="">Seleccionar cliente</option>
+                                                    @foreach ($clientes as $item)
+                                                        <option value="{{ $item->id }}">{{ $item->name }} / {{ $item->telefono }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-6">
-                                        <h4 for="name">Correo</h4>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input id="email" name="email" type="email" class="form-control" placeholder="Correo">
-                                        </div>
-                                    </div>
+                                    <div class="form-group col-12">
+                                        <div class="collapse" id="collapseExample">
+                                            <div class="card card-body">
+                                                <div class="row">
+                                                    <div class="form-group col-6">
+                                                        <h4 for="name">Nombre *</h4>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">
+                                                                <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input id="name" name="name" type="text" class="form-control" placeholder="Nombre">
+                                                        </div>
+                                                    </div>
 
-                                    <div class="form-group col-6">
-                                        <h4 for="name">Telefono *</h4>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10" required>
+                                                    <div class="form-group col-6">
+                                                        <h4 for="name">Correo <strong style="color:red;">(No es forzoso)</strong></h4>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">
+                                                                <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input id="email" name="email" type="email" class="form-control" placeholder="Correo">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-6">
+                                                        <h4 for="name">Telefono *</h4>
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text" id="basic-addon1">
+                                                                <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
+                                                            </span>
+                                                            <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -159,7 +187,7 @@
                                             </h4>
                                         </div>
                                     </div>
-
+                                    <div class="col-4"></div>
                                     <div class="form-group col-4">
                                         <h4 for="name">Subtotal *</h4>
                                         <div class="input-group mb-3">
@@ -304,6 +332,7 @@
         var totalDescuentoInput = document.getElementById('totalDescuento');
 
         $(document).ready(function() {
+            $('.cliente').select2();
             $('.producto').select2();
 
             // Función para asociar eventos al campo de cantidad y descuento

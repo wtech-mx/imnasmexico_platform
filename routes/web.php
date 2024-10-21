@@ -647,7 +647,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('bodega/preparacion/scaner/nas/{id}', [App\Http\Controllers\BodegaController::class, 'preparacion_scaner_nas'])->name('preparacion_scaner_nas.bodega');
     Route::post('/check-product/nas', [App\Http\Controllers\BodegaController::class, 'checkProduct_nas'])->name('check_nas.product');
 
-    Route::get('bodega/preparacion/scaner/cosmica/{id}', [App\Http\Controllers\BodegaController::class, 'preparacion_scaner_online_cosmica'])->name('preparacion_scaner_cosmica.bodega');
+    Route::get('bodega/preparacion/scaner/cosmica/online/{id}', [App\Http\Controllers\BodegaController::class, 'preparacion_scaner_online_cosmica'])->name('preparacion_scaner_cosmica_online.bodega');
     Route::post('/check-product/cosmica', [App\Http\Controllers\BodegaController::class, 'checkProduct_online_cosmica'])->name('check_cosmica.product');
     // =============== M O D U L O   R E P O R T E  V E N T A S ===============================
     Route::get('reporte/ventas/', [App\Http\Controllers\ReporteVentasController::class, 'index'])->name('reporte_ventas.index');

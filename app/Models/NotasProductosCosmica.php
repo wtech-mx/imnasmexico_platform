@@ -58,4 +58,9 @@ class NotasProductosCosmica extends Model
     {
         return $this->hasMany(ProductosNotasId::class, 'id_notas_productos');
     }
+
+    public function Kit()
+    {
+        return $this->belongsTo(Products::class, 'id_kit');
+    }
 }

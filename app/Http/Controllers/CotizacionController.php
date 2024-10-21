@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\HistorialVendidos;
 use App\Models\ProductosNotasId;
 use App\Models\NotasProductos;
+use App\Models\ProductosBundleId;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Products;
@@ -88,31 +89,36 @@ class CotizacionController extends Controller
         $code = Str::random(8);
 
         $notas_productos = new NotasProductos;
-        if($request->get('email') == NULL){
-            $notas_productos->nombre = $request->get('name');
-            $notas_productos->telefono = $request->get('telefono');
-        }else{
-            if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
-                if (User::where('telefono', $request->telefono)->exists()) {
-                    $user = User::where('telefono', $request->telefono)->first();
+
+        if($request->id_client == NULL){
+            if($request->get('email') == NULL){
+                $notas_productos->nombre = $request->get('name');
+                $notas_productos->telefono = $request->get('telefono');
+            }else{
+                if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+                    if (User::where('telefono', $request->telefono)->exists()) {
+                        $user = User::where('telefono', $request->telefono)->first();
+                    } else {
+                        $user = User::where('email', $request->email)->first();
+                    }
+                    $payer = $user;
                 } else {
-                    $user = User::where('email', $request->email)->first();
+                    $payer = new User;
+                    $payer->name = $request->get('name');
+                    $payer->email = $request->get('email');
+                    $payer->username = $request->get('telefono');
+                    $payer->code = $code;
+                    $payer->telefono = $request->get('telefono');
+                    $payer->cliente = '1';
+                    $payer->password = Hash::make($request->get('telefono'));
+                    $payer->save();
+                    $datos = User::where('id', '=', $payer->id)->first();
+                    // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
                 }
-                $payer = $user;
-            } else {
-                $payer = new User;
-                $payer->name = $request->get('name');
-                $payer->email = $request->get('email');
-                $payer->username = $request->get('telefono');
-                $payer->code = $code;
-                $payer->telefono = $request->get('telefono');
-                $payer->cliente = '1';
-                $payer->password = Hash::make($request->get('telefono'));
-                $payer->save();
-                $datos = User::where('id', '=', $payer->id)->first();
-                // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+                $notas_productos->id_usuario = $payer->id;
             }
-            $notas_productos->id_usuario = $payer->id;
+        }else{
+            $notas_productos->id_usuario = $request->id_client;
         }
 
         $dominio = $request->getHost();
@@ -230,12 +236,38 @@ class CotizacionController extends Controller
             $nuevosCampos3 = $request->input('campo3');
 
             foreach ($nuevosCampos as $index => $campo) {
-                $notas_inscripcion = new ProductosNotasId;
-                $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                $notas_inscripcion->producto = $campo;
-                $notas_inscripcion->price = $nuevosCampos2[$index];
-                $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                $notas_inscripcion->save();
+                $producto = Products::where('nombre', $campo)->first();
+
+                if($producto->subcategoria == 'Kit'){
+                    $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
+                    foreach($productos_bundle as $producto_bundle){
+                        $notas_inscripcion = new ProductosNotasId;
+                        $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                        $notas_inscripcion->producto = $producto_bundle->producto;
+                        $notas_inscripcion->price = '0';
+                        $notas_inscripcion->cantidad = $producto_bundle->cantidad;
+                        $notas_inscripcion->save();
+                    }
+                    $notas_productos->id_kit = $producto->id;
+                    $notas_productos->update();
+                }elseif($producto->subcategoria == 'Tiendita'){
+                    $notas_inscripcion = new ProductosNotasId;
+                    $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->price = $nuevosCampos2[$index];
+                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                    $notas_inscripcion->descuento = $nuevosCampos4[$index];
+                    $notas_inscripcion->estatus = 1;
+                    $notas_inscripcion->save();
+                }else{
+                    $notas_inscripcion = new ProductosNotasId;
+                    $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->price = $nuevosCampos2[$index];
+                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                    $notas_inscripcion->descuento = $nuevosCampos4[$index];
+                    $notas_inscripcion->save();
+                }
             }
         }
 

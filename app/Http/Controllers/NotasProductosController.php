@@ -89,31 +89,35 @@ class NotasProductosController extends Controller
         $code = Str::random(8);
 
         $notas_productos = new NotasProductos;
-        if($request->get('email') == NULL){
-            $notas_productos->nombre = $request->get('name');
-            $notas_productos->telefono = $request->get('telefono');
-        }else{
-            if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
-                if (User::where('telefono', $request->telefono)->exists()) {
-                    $user = User::where('telefono', $request->telefono)->first();
+        if($request->id_client == NULL){
+            if($request->get('email') == NULL){
+                $notas_productos->nombre = $request->get('name');
+                $notas_productos->telefono = $request->get('telefono');
+            }else{
+                if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+                    if (User::where('telefono', $request->telefono)->exists()) {
+                        $user = User::where('telefono', $request->telefono)->first();
+                    } else {
+                        $user = User::where('email', $request->email)->first();
+                    }
+                    $payer = $user;
                 } else {
-                    $user = User::where('email', $request->email)->first();
+                    $payer = new User;
+                    $payer->name = $request->get('name');
+                    $payer->email = $request->get('email');
+                    $payer->username = $request->get('telefono');
+                    $payer->code = $code;
+                    $payer->telefono = $request->get('telefono');
+                    $payer->cliente = '1';
+                    $payer->password = Hash::make($request->get('telefono'));
+                    $payer->save();
+                    $datos = User::where('id', '=', $payer->id)->first();
+                    // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
                 }
-                $payer = $user;
-            } else {
-                $payer = new User;
-                $payer->name = $request->get('name');
-                $payer->email = $request->get('email');
-                $payer->username = $request->get('telefono');
-                $payer->code = $code;
-                $payer->telefono = $request->get('telefono');
-                $payer->cliente = '1';
-                $payer->password = Hash::make($request->get('telefono'));
-                $payer->save();
-                $datos = User::where('id', '=', $payer->id)->first();
-                // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+                $notas_productos->id_usuario = $payer->id;
             }
-            $notas_productos->id_usuario = $payer->id;
+        }else{
+            $notas_productos->id_usuario = $request->id_client;
         }
 
         $dominio = $request->getHost();
@@ -397,15 +401,15 @@ class NotasProductosController extends Controller
         $nota_productos = ProductosNotasId::where('id_notas_productos', $nota->id)->get();
 
         $pdf = \PDF::loadView('admin.notas_productos.pdf_nota', compact('nota', 'today', 'nota_productos'));
-       // return $pdf->stream();
+
        if($nota->folio == null){
             $folio = $nota->id;
         }else{
             $folio = $nota->folio;
         }
 
-        // return $pdf->stream();
-        return $pdf->download('Nota remision'. $folio .'/'.$today.'.pdf');
+        return $pdf->stream();
+        // return $pdf->download('Nota remision'. $folio .'/'.$today.'.pdf');
     }
 
     public function delete($id)

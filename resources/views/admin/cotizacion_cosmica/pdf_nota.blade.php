@@ -139,6 +139,10 @@
         </tbody>
     </table>
 
+    <div class="text-center">
+        <h3>{{$nota->Kit->nombre}}</h3>
+    </div>
+
     <table class="table table-bordered border-primary">
         <thead class="text-center {{ $usercosmika == NULL ? 'table-cotizacion' : 'table-distribuidora' }}">
             <tr>
@@ -221,6 +225,17 @@
             </tr>
         </tfoot>
     </table>
+
+    @if ($nota->monto != NULL)
+        <h2>Pago</h2>
+        <b for="">Metodo de Pago:</b> {{ $nota->metodo_pago }} <br>
+        <b for="">Monto:</b> {{ $nota->monto }} <br>
+    @endif
+
+    @if ($nota->monto2 != NULL)
+        <b for="">Metodo de Pago:</b> {{ $nota->metodo_pago2 }} <br>
+        <b for="">Monto:</b> {{ $nota->monto2 }} <br>
+    @endif
 
     @if ($nota->factura == '1')
         <h2>Datos de Factura</h2>

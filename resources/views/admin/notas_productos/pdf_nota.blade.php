@@ -125,6 +125,10 @@
         </tbody>
     </table>
 
+    <div class="text-center">
+        <h3>{{$nota->Kit->nombre}}</h3>
+    </div>
+
     <table class="table table-bordered border-primary">
         <thead class="text-center" style="background-color: #836262; color: #fff">
             <tr>
@@ -156,7 +160,7 @@
                         }
                     @endphp
                     <td>
-                        @if($nota_producto->descuento == '0')
+                        @if($nota_producto->descuento == '0' || $nota_producto->descuento == NULL)
                             ${{ $unit }}
                         @else
                             Descuento {{ $nota_producto->descuento }}% <br>
@@ -214,6 +218,17 @@
             </tr>
         </tfoot>
     </table>
+
+    @if ($nota->monto != NULL)
+        <h2>Pago</h2>
+        <b for="">Metodo de Pago:</b> {{ $nota->metodo_pago }} <br>
+        <b for="">Monto:</b> {{ $nota->monto }} <br>
+    @endif
+
+    @if ($nota->monto2 != NULL)
+        <b for="">Metodo de Pago:</b> {{ $nota->metodo_pago2 }} <br>
+        <b for="">Monto:</b> {{ $nota->monto2 }} <br>
+    @endif
 
     @if ($nota->factura == '1')
         <h2>Datos de Factura</h2>
