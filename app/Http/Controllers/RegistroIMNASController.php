@@ -115,6 +115,7 @@ class RegistroIMNASController extends Controller
         $especialidad->id_cliente = $cliente->id;
         $especialidad->especialidad = $request->get('especialidad');
         $especialidad->estatus = '1';
+        $especialidad->estatus_imnas = 1;
         $especialidad->id_documento = '0';
         $especialidad->save();
 
@@ -1346,5 +1347,29 @@ class RegistroIMNASController extends Controller
         $pdf = \PDF::loadView('admin.tabs_registro.pdf_especialidad', compact('especialidad', 'today', 'temario'));
         return $pdf->stream();
        //  return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
+    }
+
+    public function actualizarEstatus(Request $request){
+        $especialidad = RegistroImnasEspecialidad::find($request->id);
+        if ($especialidad) {
+            $especialidad->estatus_imnas = $request->estatus;
+            $especialidad->save();
+
+            return response()->json(['success' => 'Estatus actualizado correctamente.']);
+        }
+
+        return response()->json(['error' => 'Registro no encontrado.'], 404);
+    }
+
+    public function actualizarEstatusEnvio(Request $request){
+        $especialidad = OrdersTickets::find($request->id);
+        if ($especialidad) {
+            $especialidad->estatus_imnas = $request->estatus;
+            $especialidad->save();
+
+            return response()->json(['success' => 'Estatus actualizado correctamente.']);
+        }
+
+        return response()->json(['error' => 'Registro no encontrado.'], 404);
     }
 }

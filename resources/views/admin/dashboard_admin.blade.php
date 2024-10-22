@@ -202,7 +202,11 @@
                           </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Envios Pagados</button>
+                          <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Envios Pagados
+                            <span class="badge rounded-pill bg-danger">
+                                {{ $envios_pendientes ? $envios_pendientes->count() : 0 }}
+                            </span>
+                          </button>
                         </li>
                       </ul>
                       <div class="tab-content" id="myTabContent">
@@ -212,7 +216,9 @@
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             @include('admin.tabs_registro.especialidad_pendiente')
                         </div>
-                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
+                        <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                            @include('admin.tabs_registro.envios_pendientes')
+                        </div>
                       </div>
                 </div>
             </div>

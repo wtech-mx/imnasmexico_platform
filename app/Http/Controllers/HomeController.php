@@ -170,6 +170,15 @@ class HomeController extends Controller
 
                 $registros_pendientes = RegistroImnas::where('fecha_compra', '!=', null)->where('fecha_realizados', '=', null)->where('tipo', '=', '1')->orderBy('id','DESC')->get();
                 $especialidades_pendientes = RegistroImnasEspecialidad::where('especialidad', '!=', null)->where('estatus_imnas', '=', 1)->orderBy('id','DESC')->get();
+                $envios_pendientes = OrdersTickets::where('id_tickets', '=', 137)
+                ->where(function($query) {
+                    $query->where('estatus_imnas', '!=', 0)
+                          ->orWhereNull('estatus_imnas');  // Incluir registros con estatus_imnas en NULL
+                })
+                ->whereHas('Orders', function($query) {
+                    $query->where('estatus', '=', 1); // Solo trae registros donde estatus sea 1 en Orders
+                })
+                ->get();
 
                 do {
                     // Obtener siguiente página de resultados
@@ -186,7 +195,7 @@ class HomeController extends Controller
 
                 } while (count($results) > 0);
 
-            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','data','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes'));
+            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','data','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes', 'envios_pendientes'));
         }
 
     }

@@ -23,7 +23,12 @@
                                 data-subtemas="{{ json_encode($subtemas) }}"
                                 onclick="copyToClipboard(this)">
                             Copiar Temario
-                        </button>
+                        </button><br><br>
+
+                        <div class="form-check">
+                            <label for="">Enviado a la Lic</label>
+                            <input type="checkbox" class="form-check-input change-status" data-id="{{ $registro_pendiente->id }}" {{ $registro_pendiente->estatus_imnas == 0 ? 'checked' : '' }}>
+                        </div>
                     </td>
                     <td>
                         <h5> @php
@@ -82,6 +87,50 @@
         // Confirmación de copiado
         alert("Texto copiado al portapapeles");
     }
+
+    $(document).ready(function() {
+        $('.change-status').on('change', function() {
+            var especialidadId = $(this).data('id');
+            var estatus = $(this).is(':checked') ? 0 : 1;  // Si el checkbox está marcado, el estatus será 0
+
+            $.ajax({
+                url: '{{ route("actualizar.estatus") }}',  // Ruta al controlador
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',  // Token de seguridad de Laravel
+                    id: especialidadId,
+                    estatus: estatus
+                },
+                success: function(response) {
+                    alert('Estatus actualizado');
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);  // Mostrar error en consola si hay problemas
+                }
+            });
+        });
+
+        $('.change-status-envio').on('change', function() {
+            var especialidadId = $(this).data('id');
+            var estatus = $(this).is(':checked') ? 0 : 1;  // Si el checkbox está marcado, el estatus será 0
+            console.log(especialidadId);
+            $.ajax({
+                url: '{{ route("actualizar.estatus_envio") }}',  // Ruta al controlador
+                type: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',  // Token de seguridad de Laravel
+                    id: especialidadId,
+                    estatus: estatus
+                },
+                success: function(response) {
+                    alert('Estatus actualizado');
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);  // Mostrar error en consola si hay problemas
+                }
+            });
+        });
+    });
 </script>
 
 @endsection

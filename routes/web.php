@@ -233,6 +233,9 @@ Route::get('/contrato/afiliacion/{code}', [App\Http\Controllers\RegistroIMNASCon
 Route::patch('/registro/firma/contrato/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_contrato'])->name('update_contrato.imnas');
 Route::patch('/contrato/imnas/update/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'contrato_update'])->name('contrato.update');
 
+Route::post('registro/actualizar-estatus', [App\Http\Controllers\RegistroIMNASController::class, 'actualizarEstatus'])->name('actualizar.estatus');
+Route::post('registro/actualizar-estatus/envio', [App\Http\Controllers\RegistroIMNASController::class, 'actualizarEstatusEnvio'])->name('actualizar.estatus_envio');
+
 Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O  L  A  B  O  R  A  T I  O S ===============================
