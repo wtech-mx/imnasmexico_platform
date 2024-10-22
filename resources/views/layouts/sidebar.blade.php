@@ -277,6 +277,45 @@
                 </li>
             @endcan
 
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#pagesExamplescarrito" class="nav-link {{ (Request::is('admin/pagos*') ? 'active' : '') }}" aria-controls="pagesExamplescarrito" role="button" aria-expanded="false">
+                    <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                        <i class="fa fa-shopping-basket text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Productos</span>
+                    </a>
+                    <div class="collapse " id="pagesExamplescarrito">
+                    <ul class="nav ms-4">
+                        <li class="nav-item ">
+                            <a class="nav-link {{ (Request::is('admin/products') ? 'active' : '') }}" href="{{ route('products.index') }}">
+                                <span class="sidenav-mini-icon">C</span>
+                                <span class="sidenav-normal">Productos</span>
+                            </a>
+                        </li>
+
+                        @can('productos-show')
+                            <li class="nav-item ">
+                            <a class="nav-link {{ (Request::is('admin/products/bundle*') ? 'show' : '') }}" href="{{ route('bundle.index') }}">
+                                <span class="sidenav-mini-icon">C</span>
+                                <span class="sidenav-normal">Ver Kits </span>
+                            </a>
+                            </li>
+
+                            <li class="nav-item ">
+                                <a class="nav-link {{ (Request::is('/admin/products/create/bundle*') ? 'show' : '') }}" href="{{ route('bundle.create') }}">
+                                <span class="sidenav-mini-icon">C</span>
+                                <span class="sidenav-normal">Crear Kit</span>
+                                </a>
+                            </li>
+                        @endcan
+
+                    </ul>
+                    </div>
+                </li>
+
+
+
             @can('certificacion-webinar')
                 <li class="nav-item">
                     <a class="nav-link {{ (Request::is('/admin/certificaciones/webinar/*') ? 'active' : '') }}" href="{{ route('index.certificados_wbinar') }}" target="">
@@ -360,17 +399,6 @@
                         </li>
                     </ul>
                     </div>
-                </li>
-            @endcan
-
-            @can('productos-show')
-                <li class="nav-item">
-                    <a class="nav-link {{ (Request::is('admin/products') ? 'active' : '') }}" href="{{ route('products.index') }}">
-                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-shopping-basket text-sm opacity-10" style="color: {{$configuracion->color_iconos_sidebar}}"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Productos</span>
-                    </a>
                 </li>
             @endcan
 
