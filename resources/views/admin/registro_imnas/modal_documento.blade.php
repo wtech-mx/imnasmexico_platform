@@ -164,15 +164,15 @@
                                             </div>
                                         </div>
 
-                                        <div class="form-group col-6 gc_cn">
-                                            <label for="name">Nacionalidad *</label>
-                                            <div class="input-group">
-                                                <span class="input-group-text" id="basic-addon1">
-                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/flag.png')}}" alt="" width="30px">
-                                                </span>
-                                                <input id="nacionalidad" name="nacionalidad" type="text" class="form-control" value="Mexicana" >
+                                            <div class="form-group col-6 gc_cn">
+                                                <label for="name">Nacionalidad *</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/flag.png')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="nacionalidad" name="nacionalidad" type="text" class="form-control" value="Mexicana" >
+                                                </div>
                                             </div>
-                                        </div>
 
                                             <div class="form-group col-6 gc_cn">
                                                 <label for="name">INE *</label>
@@ -205,7 +205,6 @@
                                                     </div>
                                                 @endif
                                             </div>
-
 
                                             <div class="form-group col-6 gc_cn">
                                                 <label for="name">Fotografia *</label>
@@ -272,7 +271,7 @@
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img class="img_profile_label" src="{{asset('assets/user/icons/abc-block.png')}}" alt="" width="30px">
                                                     </span>
-                                                    <input id="curp" name="curp" type="text" class="form-control"  >
+                                                    <input id="curp" name="curp" type="text" class="form-control" value="{{ $registro_imnas->curp_escrito }}" >
                                                 </div>
                                                 @if (pathinfo($registro_imnas->curp, PATHINFO_EXTENSION) == 'pdf')
                                                     <iframe class="mt-2" src="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->curp)}}" style="width: 100%; height: 350px;"></iframe>

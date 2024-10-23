@@ -59,6 +59,12 @@
             $cantidad_palabras = count($palabras);
             $folio = isset($tickets->folio) ? $tickets->folio : $tickets_externo->folio;
 
+            if ( isset($tickets->curp_escrito)) {
+                $curp = $tickets->curp_escrito;
+            }else{
+                $curp = 'CURP';
+            }
+
             $cursoNombre = isset($tickets->Cursos->nombre)
             ? $tickets->Cursos->nombre
             : (isset($cursoNombre)
@@ -366,7 +372,9 @@
         </div>
 
         <div class="container_curp">
-            <h4 class="curp">CURP</h4>
+            <h4 class="curp">
+                {{ $curp }}
+            </h4>
         </div>
 
         <div class="container_nacionalidad">

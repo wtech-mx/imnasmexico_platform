@@ -30,6 +30,7 @@ class RegistroImnas extends Model
         'nombre',
         'ine',
         'curp',
+        'curp_escrito',
         'foto_cuadrada',
         'firma',
         'tam_letra_especialidad_th',

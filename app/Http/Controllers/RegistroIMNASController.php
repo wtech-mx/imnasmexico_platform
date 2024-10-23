@@ -249,6 +249,13 @@ class RegistroIMNASController extends Controller
         $folio = $request->get('folio');
         $curp = $request->get('curp');
 
+        if($curp =! null){
+            $id_ticket = $request->get('id_registro');
+            $registro = RegistroImnas::find($id_ticket);
+            $registro->curp_escrito = $request->get('curp');
+            $registro->update();
+        }
+
         $bitacora = new DocumenotsGenerador;
         $bitacora->cliente = $request->get('nombre');
         $bitacora->curso = $request->get('curso');

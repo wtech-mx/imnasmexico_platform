@@ -76,7 +76,11 @@
 
             $folio = isset($tickets->folio) ? $tickets->folio : $tickets_externo->folio;
 
-
+            if ( isset($tickets->curp_escrito)) {
+                $curp = $tickets->curp_escrito;
+            }else{
+                $curp = '';
+            }
 @endphp
 
 @section('css_custom')
@@ -245,6 +249,12 @@
         .container_nombre_formateado{
             position: absolute;
             top: 3.2%;
+            left:45px;
+        }
+
+        .container_curp{
+            position: absolute;
+            top: 5.8%;
             left:45px;
         }
 
@@ -510,6 +520,10 @@
 
         <div class="container_nombre_formateado">
             <h4 class="nombre_reverso">{{ $cursoNombre }}</h4>
+        </div>
+
+        <div class="container_curp">
+            <h4 class="nombre_reverso">{{ $curp }}</h4>
         </div>
 
         <div class="container_nacionalidad">
