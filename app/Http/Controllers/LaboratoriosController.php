@@ -167,7 +167,9 @@ class LaboratoriosController extends Controller
 
         $products = Products::where('laboratorio','=','Cosmica')->get();
 
-        return view('admin.laboratorio.index_productos_cosmica',compact('products'));
+        $products_cosmica = Products::where('stock_cosmica','<=', 90)->get();
+
+        return view('admin.laboratorio.index_productos_cosmica',compact('products', 'products_cosmica'));
 
     }
 

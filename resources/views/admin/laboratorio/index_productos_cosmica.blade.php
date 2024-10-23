@@ -18,6 +18,13 @@
                 <div class="d-flex justify-content-between">
                     <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
 
+                    <a type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#alertaModal">
+                        <img src="{{ asset('assets/user/icons/bell.png') }}" alt="" width="30px">
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            {{ $products_cosmica ? $products_cosmica->count() : 0 }}
+                        </span>
+                    </a>
+
                     <h3 class="mb-3">Stock de Productos Laboratorio Cosmica </h3>
 
                     <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
@@ -78,6 +85,7 @@
       </div>
 </div>
 @include('admin.products.modal_create')
+@include('admin.laboratorio.modal_cosmica_vencer')
 @endsection
 
 @section('datatable')
