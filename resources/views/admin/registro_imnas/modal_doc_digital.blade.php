@@ -145,6 +145,16 @@
                         </div>
                     </div>
 
+                    <div class="form-group col-6 ">
+                        <label for="name">Fecha del Curso *</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img class="img_profile_label" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="" width="30px">
+                            </span>
+                            <input id="fecha" name="fecha" type="date" class="form-control" value="{{ $registro_imnas->fecha_curso }}"  >
+                        </div>
+                    </div>
+
                     <div class="form-group col-12 gc_cn">
                         <label for="name">CURP</label>
                         <div class="input-group">

@@ -67,7 +67,7 @@
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img class="img_profile_label" src="{{asset('assets/user/icons/fecha-limite.webp')}}" alt="" width="30px">
                                             </span>
-                                            <input id="fecha" name="fecha" type="text" class="form-control" value="{{ $registro_imnas->fecha_curso }}" readonly >
+                                            <input id="fecha" name="fecha" type="date" class="form-control" value="{{ $registro_imnas->fecha_curso }}"  >
                                         </div>
                                     </div>
 

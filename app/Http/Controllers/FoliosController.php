@@ -100,6 +100,8 @@ class FoliosController extends Controller
         $registroimnas->firma_director = $request->get('firma_director');
         $registroimnas->promedio = $request->get('promedio');
         $registroimnas->curp_escrito = $request->get('curp');
+        $registroimnas->fecha_curso = $request->get('fecha');
+
         $registroimnas->update();
 
         return redirect()->back()->with('success', 'datos actualizado con exito.');

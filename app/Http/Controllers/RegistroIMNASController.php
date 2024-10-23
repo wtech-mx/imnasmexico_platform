@@ -256,6 +256,13 @@ class RegistroIMNASController extends Controller
             $registro->update();
         }
 
+        if($fecha =! null){
+            $id_ticket = $request->get('id_registro');
+            $registro = RegistroImnas::find($id_ticket);
+            $registro->fecha_curso = $request->get('fecha');
+            $registro->update();
+        }
+
         $bitacora = new DocumenotsGenerador;
         $bitacora->cliente = $request->get('nombre');
         $bitacora->curso = $request->get('curso');
