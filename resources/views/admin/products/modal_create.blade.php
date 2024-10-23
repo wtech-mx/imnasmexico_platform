@@ -30,9 +30,19 @@
 
                     <div class="form-group col-6">
                         <label for="name">Categoria</label>
-                        <select class="form-control" id="categoria" name="categoria">
+                        <select class="form-control" id="categoria" name="categoria" required>
+                            <option value="">Seleciona una opcion</option>
                             <option value="NAS">NAS</option>
                             <option value="Cosmica">Cosmica</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-6">
+                        <label for="name">Subcategoria</label>
+                        <select class="form-control" id="subcategoria" name="subcategoria" required>
+                            <option value="">Seleciona una opcion</option>
+                            <option value="Tiendita">Tiendita</option>
+                            <option value="Producto">Producto</option>
                         </select>
                     </div>
 
