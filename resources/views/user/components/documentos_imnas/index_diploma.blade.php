@@ -324,11 +324,15 @@
 
         @if($tickets->firma_director == 'si')
             <div class="container_firma_director">
-                <p class="text-center">
                     <img src="{{ $basePathFirmaDirect  .'/'.  $tickets->User->telefono . '/' .$tickets->User->RegistroImnasEscuela->firma }}" class="img_firna">
-                </p>
                 <p class="text-center texto_firma_direct">
-                    {{ $nombreCompleto }} <br>
+                    @php
+                        $words = explode(' ', $tickets->User->name);
+                        $chunks = array_chunk($words, 3);
+                        foreach ($chunks as $chunk) {
+                            echo implode(' ', $chunk) . '<br>';
+                        }
+                    @endphp
                     {{ $tickets->texto_director }}
                 </p>
             </div>

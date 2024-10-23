@@ -308,7 +308,7 @@
 
         .container_firma_director{
             position: absolute;
-            top: 460px;
+            top: 440px;
             left:200px;
         }
 
@@ -336,7 +336,7 @@
 
         .container_firma_director2{
             position: absolute;
-            top: 440px;
+            top: 420px;
             left: 271px;
         }
 
@@ -463,7 +463,13 @@
 
             <div class="container_firma_director_text">
                 <p class="text-center texto_firma_direct">
-                    {{ $tickets->nombre }} <br>
+                    @php
+                        $words = explode(' ', $tickets->User->name);
+                        $chunks = array_chunk($words, 3);
+                        foreach ($chunks as $chunk) {
+                            echo implode(' ', $chunk) . '<br>';
+                        }
+                    @endphp
                     {{ $tickets->texto_director }}
                 </p>
             </div>
@@ -531,7 +537,13 @@
 
             <div class="container_firma_director_text2">
                 <p class="text-center texto_firma_direct">
-                    {{ $tickets->nombre }} <br>
+                    @php
+                        $words = explode(' ', $tickets->User->name);
+                        $chunks = array_chunk($words, 3);
+                        foreach ($chunks as $chunk) {
+                            echo implode(' ', $chunk) . '<br>';
+                        }
+                    @endphp
                     {{ $tickets->texto_director }}
                 </p>
             </div>

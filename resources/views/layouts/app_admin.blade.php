@@ -50,7 +50,7 @@
     @php
         $backgroundColor = Request::is('cosmica*') ? '#322338' : $configuracion->color_principal;
     @endphp
-  <div class="min-height-300  position-absolute w-100" style="background-color: {{$backgroundColor}}!important;"></div>
+  <div class="min-height-300  position-absolute w-100" style="background-color: {{$backgroundColor}};"></div>
     @include('layouts.sidebar')
     <main class="main-content position-relative border-radius-lg ">
         @include('layouts.navbar')
