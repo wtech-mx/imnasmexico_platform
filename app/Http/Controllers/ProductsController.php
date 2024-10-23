@@ -47,9 +47,11 @@ class ProductsController extends Controller
         $product->descripcion = $request->get('descripcion');
         $product->precio_rebajado = $request->get('precio_rebajado');
         $product->precio_normal = $request->get('precio_normal');
+        $product->categoria = $request->get('categoria');
+        $product->subcategoria = $request->get('subcategoria');
         $product->imagenes = $request->get('imagenes');
-
         $product->save();
+
         Session::flash('success', 'Se ha guardado sus datos con exito');
 
         return redirect()->back()->with('success', 'Envio de correo exitoso.');
