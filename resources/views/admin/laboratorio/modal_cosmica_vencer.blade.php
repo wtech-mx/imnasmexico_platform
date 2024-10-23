@@ -27,7 +27,7 @@
                            <b> {{ $item->nombre }} </b>
                         </div>
                         <div class="col-4 text-center">
-                            {{ $item->stock }}
+                            {{ $item->stock_cosmica }}
                         </div>
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray;">
