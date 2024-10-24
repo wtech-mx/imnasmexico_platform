@@ -126,7 +126,7 @@
         h4.nombre {
             font-family: 'oldenglishtextmt';
             font-size: 20px;
-            font-size:{{$tickets->tam_letra_nombre_th}}px!important;
+            font-size: {{ $tickets?->tam_letra_nombre_th ?? 20 }}px!important;
             color: #000;
         }
 
@@ -185,7 +185,7 @@
         h4.curso {
             font-family: 'Brush';
             font-size: 15px;
-            font-size:{{$tickets->tam_letra_especialidad_th}}px!important;
+            font-size: {{ $tickets?->tam_letra_especialidad_th ?? 15 }}px!important;
             color: #000;
         }
 
@@ -212,13 +212,13 @@
 
         .folio{
             font-size: 5px;
-            font-size:{{$tickets->tam_letra_folio_th}}px!important;
+            font-size: {{ $tickets?->tam_letra_folio_th ?? 5 }}px!important;
             color: red;
         }
 
         .folio_reversa{
             font-size: 5px;
-            font-size:{{$tickets->tam_letra_folio_th}}px!important;
+            font-size: {{ $tickets?->tam_letra_folio_th ?? 5 }}px!important;
             color: red;
         }
 
@@ -464,7 +464,7 @@
             </strong> </h4>
         </div>
 
-        @if($tickets->firma_director == 'si')
+        @if($tickets?->firma_director == 'si')
             <div class="container_firma_director">
                 <p class="text-center">
                     <img src="{{ $basePathFirmaDirect  .'/'.  $tickets->User->telefono . '/' .$tickets->User->RegistroImnasEscuela->firma }}" class="img_firna">
@@ -542,7 +542,7 @@
             <h4 class="nombre_reverso">{!! $curso_formateado !!}</h4>
         </div>
 
-        @if($tickets->firma_director == 'si')
+        @if($tickets?->firma_director == 'si')
             <div class="container_firma_director2">
                 <p class="text-center">
                     <img src="{{ $basePathFirmaDirect  .'/'.  $tickets->User->telefono . '/' .$tickets->User->RegistroImnasEscuela->firma }}" class="img_firna2">

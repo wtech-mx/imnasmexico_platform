@@ -126,7 +126,7 @@
     .folio.small-font {
         margin-top: 4px;
         font-size: 11px;
-        font-size:{{$tickets->tam_letra_folio_cedula}}px!important;
+        font-size: {{ $tickets?->tam_letra_folio_cedula ?? 11 }}px!important;
     }
 
 
@@ -139,7 +139,7 @@
     .folioReverso.small-font-reverso {
         position:relative;
         font-size: 18px;
-        font-size:{{$tickets->tam_letra_folioTrasero_cedula}}px!important;
+        font-size: {{ $tickets?->tam_letra_folioTrasero_cedula ?? 18 }}px!important;
         color: red;
     }
 
@@ -272,7 +272,7 @@
 
     .curso.small-font {
         font-size: 12px;
-        font-size:{{$tickets->tam_letra_especialidad_cedula}}px!important;
+        font-size: {{ $tickets?->tam_letra_especialidad_cedula ?? 12 }}px!important;
     }
 
 </style>

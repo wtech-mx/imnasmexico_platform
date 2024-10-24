@@ -463,11 +463,15 @@ class DocumentosController extends Controller
 
     public function generar_enviar(Request $request){
 
+        $cliente = User::where('id', $request->get('id_usuario'))->first();
+
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
-            $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/utilidades_documentos');
+            $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/utilidades_documentos/');
+            $ruta_doc_alumnos = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $cliente->telefono  . '/');
         }else{
-            $ruta_manual = public_path() . '/utilidades_documentos';
+            $ruta_manual = public_path() . '/utilidades_documentos/';
+            $ruta_doc_alumnos = base_path('/documentos/' . $cliente->telefono  . '/');
         }
 
         $bitacora = new DocumenotsGenerador;
@@ -515,23 +519,53 @@ class DocumentosController extends Controller
         $capitalizar =  $request->get('capitalizar');
         $promedio = $request->get('promedio');
 
+        // Si no existe la carpeta del alumno, la creamos
+        if (!file_exists($ruta_doc_alumnos)) {
+            mkdir($ruta_doc_alumnos, 0777, true);
+        }
+
         if ($request->hasFile("img_infantil")) {
             $file = $request->file('img_infantil');
-            $path = $ruta_manual;
             $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-        }else{
+
+            // Guardar en $ruta_manual
+            $file->move($ruta_manual, $fileName);
+
+            // Copiar a $ruta_doc_alumnos
+            copy($ruta_manual . $fileName, $ruta_doc_alumnos . $fileName);
+
+            // Actualizar en la base de datos
+            $DocUser = Documentos::where('id_usuario', '=', $request->get('id_usuario'))->first();
+            $DocUser->foto_tam_infantil = $fileName;
+            $DocUser->update();
+
+        } else {
             $fileName = 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
         }
 
         if ($request->hasFile("firma")) {
             $file_firma = $request->file('firma');
-            $path_firma = $ruta_manual;
             $fileName_firma = uniqid() . $file_firma->getClientOriginalName();
-            $file_firma->move($path_firma, $fileName_firma);
-        }else{
+
+            // Guardar en $ruta_manual
+            $file_firma->move($ruta_manual, $fileName_firma);
+
+            // Copiar a $ruta_doc_alumnos
+            copy($ruta_manual . $fileName_firma, $ruta_doc_alumnos . $fileName_firma);
+
+            // Actualizar en la base de datos
+            $DocUser = Documentos::where('id_usuario', '=', $request->get('id_usuario'))->first();
+            $DocUser->firma = $fileName_firma;
+            $DocUser->update();
+
+        } else {
             $fileName_firma = 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
         }
+
+        $id_usuario = $request->get('id_usuario');
+        $user = User::find($id_usuario);
+        $user->curp_escrito = $request->get('curp');
+        $user->update();
 
         $destinatario = [ $email_user  , $email_diplomas];
 
@@ -544,6 +578,7 @@ class DocumentosController extends Controller
         }
 
         $bitacora->save();
+
 
         $curso_first = Cursos::where('id', '=', $bitacora->id_curso)->first();
 

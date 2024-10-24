@@ -317,7 +317,7 @@
                                                         <span class="input-group-text" id="basic-addon1">
                                                             <img class="img_profile_label" src="{{asset('assets/user/icons/abc-block.png')}}" alt="" width="30px">
                                                         </span>
-                                                        <input id="curp" name="curp" type="text" class="form-control"  >
+                                                        <input id="curp" name="curp" type="text" class="form-control" value="{{ $order->User->curp_escrito }}" >
                                                     </div>
                                                     @if (pathinfo($order->User->Documentos->curp, PATHINFO_EXTENSION) == 'pdf')
                                                         <iframe class="mt-2" src="{{asset('documentos/'. $order->User->telefono . '/' .$order->User->Documentos->curp)}}" style="width: 100%; height: 350px;"></iframe>

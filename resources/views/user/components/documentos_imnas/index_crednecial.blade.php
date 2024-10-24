@@ -63,7 +63,8 @@
             if ( isset($tickets->curp_escrito)) {
                 $curp = $tickets->curp_escrito;
             }else{
-                $curp = 'CURP';
+                $curp = $tickets->User->curp_escrito ?? '';
+
             }
 
             $cursoNombre = isset($tickets->Cursos->nombre)
@@ -155,7 +156,7 @@
 
         .curso{
             font-size:10px;
-            font-size:{{$tickets->tam_letra_credencial_especialidad}}px!important;
+            font-size: {{ $tickets?->tam_letra_credencial_especialidad ?? 10 }}px!important;
             color: red;
         }
 
