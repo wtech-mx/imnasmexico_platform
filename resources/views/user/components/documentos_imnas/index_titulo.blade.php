@@ -100,7 +100,7 @@
             font-family: 'bethaine';
             font-style: normal;
             font-weight: 900;
-            src: url('{{ asset('assets/admin/fonts/bethaine.ttf') }}') format('truetype');
+            src: url('{{ asset('assets/admin/fonts/Bethaine.ttf') }}') format('truetype');
         }
 
         .img_portada {
