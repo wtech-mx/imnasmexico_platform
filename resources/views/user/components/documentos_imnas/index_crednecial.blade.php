@@ -1,7 +1,7 @@
 @extends('layouts.app_documenots')
 
 @section('template_title')
-    Cedula
+    Credencial Plastificada RN -
 @endsection
 
 @php
@@ -46,7 +46,8 @@
 
                     $palabras = explode(' ', ucwords(strtolower($tickets->Cursos->nombre)));
 
-                    $nombreCompleto = explode(' ', $tickets->Cursos->nombre);
+                    $nombreCompleto = explode(' ', $tickets->User->name);
+
 
                     $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
                     ? 'https://plataforma.imnasmexico.com/documentos/'
