@@ -48,6 +48,13 @@
 
             $cantidad_palabras = count($palabras);
 
+            if ( isset($tickets->curp_escrito)) {
+                $curp = $tickets->curp_escrito;
+            }else{
+                $curp = $tickets->User->curp_escrito ?? '';
+
+            }
+
 @endphp
 
 @section('css_custom')
@@ -229,7 +236,7 @@
                 Instituto Mexicano Naturales Ain Spa RIIMNAS, con registro de la Secretaria
                 del Trabajo y Prevención Social STPS como Agente Capacitador Externo con Registro
                 RIFC-680910-879-0013 , hace constar que el la Alumno(a) , con Numero de
-                Folio: <strong style="color: red"> {{$tickets->folio}} </strong> ,  curso  <strong  style="color: red">{{ ucwords(strtolower($nombreCurso)) }} </strong>  Cubriendo todos los correspondientes.
+                Folio: <strong style="color: red"> {{$tickets->folio}} </strong>, con CURP: {{$curp}}, curso  <strong  style="color: red">{{ ucwords(strtolower($nombreCurso)) }} </strong>  Cubriendo todos los correspondientes.
                 <br> Para afectos de desempeño académico  se expresa lo siguiente:
             </p>
         </div>

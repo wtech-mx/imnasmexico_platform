@@ -249,14 +249,14 @@ class RegistroIMNASController extends Controller
         $folio = $request->get('folio');
         $curp = $request->get('curp');
 
-        if($curp =! null){
+        if($curp != null){
             $id_ticket = $request->get('id_registro');
             $registro = RegistroImnas::find($id_ticket);
             $registro->curp_escrito = $request->get('curp');
             $registro->update();
         }
 
-        if($fecha =! null){
+        if($fecha != null){
             $id_ticket = $request->get('id_registro');
             $registro = RegistroImnas::find($id_ticket);
             $registro->fecha_curso = $request->get('fecha');
