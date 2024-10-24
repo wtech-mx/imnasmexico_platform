@@ -471,7 +471,7 @@ class DocumentosController extends Controller
             $ruta_doc_alumnos = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $cliente->telefono  . '/');
         }else{
             $ruta_manual = public_path() . '/utilidades_documentos/';
-            $ruta_doc_alumnos = base_path('/documentos/' . $cliente->telefono  . '/');
+            $ruta_doc_alumnos = public_path('/documentos/' . $cliente->telefono  . '/');
         }
 
         $bitacora = new DocumenotsGenerador;
