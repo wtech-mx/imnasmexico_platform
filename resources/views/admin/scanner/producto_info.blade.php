@@ -44,19 +44,20 @@
                             <strong  class="text-dark">Subcategoria: </strong> {{ $item->subcategoria }} <br>
                             <strong  class="text-dark">Precio: </strong> ${{ $item->precio_normal }} .0<br>
                         </p>
+                        <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#productoModal{{ $item->id }}" title="productoModal">
+                            <i class="fas fa-edit"></i>
+                        </button>
                     </div>
 
                     <div class="col-4 col-md-12 col-lg-3 my-auto">
                         <p class="text-dark">
                             <strong>SKU:</strong> {{ $item->sku }} <br>
                             <strong class="text-dark">Stock Castilla:</strong> {{ $item->stock }} pza <br>
-                            @if(empty($item->stock_nas) == null)
+                            @if($item->categoria == 'NAS')
                                 <strong class="text-dark">Lab Stock :</strong> {{ $item->stock_nas }} pza <br>
-                            @else
                             @endif
-                            @if(empty($item->stock_cosmica) == null)
+                            @if($item->categoria == 'Cosmica')
                                 <strong class="text-dark">Lab Stock :</strong> {{ $item->stock_cosmica }} pza <br>
-                            @else
                             @endif
                         </p>
                     </div>
@@ -121,5 +122,35 @@
 
     </div>
 
+    @include('admin.scanner.edit')
+    <script>
+        $(document).ready(function() {
+            $('#formProducto_{{ $item->id }}').on('submit', function(e) {
+                e.preventDefault();
+
+                // Obtén los datos del formulario
+                var formData = new FormData(this);
+
+                // Realiza la petición AJAX
+                $.ajax({
+                    url: "{{ route('products.update', $item->id) }}",
+                    type: "POST",
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        // Cierra el modal si la petición es exitosa
+                        $('#productoModal{{ $item->id }}').modal('hide');
+                        // Opcional: actualizar la página o mostrar un mensaje de éxito
+                        alert("Producto actualizado correctamente");
+                    },
+                    error: function(xhr) {
+                        // Muestra un mensaje de error si ocurre algún problema
+                        alert("Hubo un problema al actualizar el producto.");
+                    }
+                });
+            });
+        });
+    </script>
     @endforeach
 </div>
