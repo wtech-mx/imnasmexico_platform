@@ -34,10 +34,11 @@ class PagosFueraController extends Controller
         $fechaActual = date('Y-m-d');
         $pagos_fuera = PagosFuera::orderBy('id','DESC')->get();
         $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
+        $envio = CursosTickets::where('id_curso','=', 109)->first();
 
         $clases_grabadas = CursosTickets::where('fecha_final','<=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
 
-        return view('admin.pagos_fuera.inscripcion', compact('pagos_fuera', 'cursos', 'clases_grabadas'));
+        return view('admin.pagos_fuera.inscripcion', compact('pagos_fuera', 'cursos', 'clases_grabadas', 'envio'));
     }
 
     public function index_mp(){
@@ -674,8 +675,9 @@ class PagosFueraController extends Controller
         $pagos_fuera = PagosFuera::orderBy('id','DESC')->where('pendiente', '=', '0')->get();
         $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
         $clases_grabadas = CursosTickets::where('fecha_final','<=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
+        $envio = CursosTickets::where('id_curso','=', 109)->first();
 
-        return view('admin.pagos_fuera.pendiente', compact('pagos_fuera', 'cursos', 'clases_grabadas'));
+        return view('admin.pagos_fuera.pendiente', compact('pagos_fuera', 'cursos', 'clases_grabadas', 'envio'));
     }
 
     public function ChangePendienteStatus(Request $request)
@@ -797,8 +799,6 @@ class PagosFueraController extends Controller
         return view('admin.pagos.mercado_pago', compact('pagos', 'comprasSinEmail'));
     }
 
-
-
     public function mercado_pago_recibo ($id)
     {
         // Inicializa la SDK de Mercado Pago
@@ -828,7 +828,6 @@ class PagosFueraController extends Controller
 
         return $pdf->stream('recibo_mercadopago.pdf', ['Attachment' => true]);
     }
-
 
     public function getTicketsByCurso($id)
     {
