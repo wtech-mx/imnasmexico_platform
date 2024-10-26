@@ -233,10 +233,12 @@ class RegistroIMNASController extends Controller
         $dominio = $request->getHost();
 
         if ($dominio == 'plataforma.imnasmexico.com') {
+            $ruta_manual_foto = base_path('../public_html/plataforma.imnasmexico.com/documentos_registro/' . $request->get('telefono_escuela') .'/');
             $ruta_manual_logo = base_path('../public_html/plataforma.imnasmexico.com/documentos/' . $request->get('telefono_escuela') .'/');
             $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/utilidades_documentos/');
 
         } else {
+            $ruta_manual_foto = public_path() . '/documentos_registro/' . $request->get('telefono_escuela') . '/';
             $ruta_manual_logo = public_path() . '/documentos/' . $request->get('telefono_escuela') . '/';
             $ruta_manual = public_path() . '/utilidades_documentos/';
         }
@@ -248,17 +250,21 @@ class RegistroIMNASController extends Controller
         $tipo = $request->get('tipo');
         $folio = $request->get('folio');
         $curp = $request->get('curp');
+        $id_usuario = $request->get('id_usuario');
+        $id_ticket = $request->get('id_registro');
+
+        $registro = RegistroImnas::find($id_ticket);
+        $registro->nombre = $nombre;
+        $registro->nom_curso = $curso;
+        $registro->fecha_curso = $fecha;
+        $registro->update();
 
         if($curp != null){
-            $id_ticket = $request->get('id_registro');
-            $registro = RegistroImnas::find($id_ticket);
             $registro->curp_escrito = $request->get('curp');
             $registro->update();
         }
 
         if($fecha != null){
-            $id_ticket = $request->get('id_registro');
-            $registro = RegistroImnas::find($id_ticket);
             $registro->fecha_curso = $request->get('fecha');
             $registro->update();
         }
@@ -310,6 +316,15 @@ class RegistroIMNASController extends Controller
             $path = $ruta_manual;
             $fileName = uniqid() . $file->getClientOriginalName();
             $file->move($path, $fileName);
+
+            $registro->foto_cuadrada = $fileName;
+
+            $filePathOriginal = $ruta_manual . $fileName ;
+            $filePathCopy = $ruta_manual_foto . $fileName ;
+            copy($filePathOriginal, $filePathCopy);
+
+            $registro->update();
+
         }else{
             $fileName = 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
         }
