@@ -128,6 +128,9 @@
             font-size: 20px;
             font-size: {{ $tickets?->tam_letra_nombre_th ?? 20 }}px!important;
             color: #000;
+            <?php if($tickets->capitalizar_nombre == 'Si'): ?>
+                text-transform: uppercase;
+            <?php endif; ?>
         }
 
         .container_marco {
@@ -191,15 +194,18 @@
 
         .container_fecha{
             position: absolute;
-            top:70.5%;
-            left: 58%;
+            top: 67.5%;
+            left: 57%;
             transform: translate(-50%, -50%);
             text-align: center;
+            background: #fff;
+            width: 300px;
         }
 
         .fecha{
+            font-family: 'oldenglishtextmt';
             color: #000;
-            font-size: 9px;
+            font-size: 10px;
         }
 
         .container_folio_bajo1{
@@ -309,7 +315,6 @@
         .container_logo2{
             position: absolute;
             top: 35px;
-            left:180px;
         }
 
         .img_logo2{
@@ -385,11 +390,14 @@
             @endif
         </div>
 
-        <div class="container_logo2">
-            @if(!isset($tickets->User->logo))
-            @else
-                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo2">
-            @endif
+
+        <div class="d-flex justify-content-center">
+            <div class="container_logo2">
+                @if(!isset($tickets->User->logo))
+                @else
+                    <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo2">
+                @endif
+            </div>
         </div>
 
         <div class="container_marco">
@@ -454,11 +462,11 @@
             <strong>
 
              @if(!isset($tickets->Cursos->fecha_inicial) && !isset($tickets->fecha_curso))
-               Ciudad de México , México a
+               Expedido en la Ciudad de México, el día
             @elseif(!isset($tickets->Cursos->fecha_inicial))
-               Ciudad de México , México a, el {{ \Carbon\Carbon::parse($tickets->fecha_curso)->isoFormat('D [de] MMMM [del] YYYY') }}
+               Expedido en la Ciudad de México, el día {{ \Carbon\Carbon::parse($tickets->fecha_curso)->isoFormat('D [de] MMMM [del] YYYY') }}
             @else
-               Ciudad de México , México a, el {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('D [de] MMMM [del] YYYY') }}
+               Expedido en la Ciudad de México, el día {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('D [de] MMMM [del] YYYY') }}
             @endif
 
             </strong> </h4>
