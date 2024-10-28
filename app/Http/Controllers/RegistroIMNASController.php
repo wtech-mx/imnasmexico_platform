@@ -245,6 +245,8 @@ class RegistroIMNASController extends Controller
             $ruta_manual = public_path() . '/utilidades_documentos/';
         }
 
+        $removeBg = new RemoveBg('kfNprpY8MrAbrZFkjriRBDFq');
+
         $nombre = $request->get('nombre');
         $datos = $request->get('nombre');
         $fecha = $request->get('fecha');
@@ -312,7 +314,6 @@ class RegistroIMNASController extends Controller
         $rbg_logo = $request->get('rbg_logo');
         $rbg_signature = $request->get('rbg_signature');
 
-
         $capitalizar =  $request->get('capitalizar');
         $firma_directora =  $request->get('firma_directora');
 
@@ -327,8 +328,6 @@ class RegistroIMNASController extends Controller
                 $filePathOriginal = $ruta_manual . $fileName;
                 $filePathCopy = $ruta_manual_foto . $fileName;
 
-                // Instancia de RemoveBg
-                $removeBg = new RemoveBg('kfNprpY8MrAbrZFkjriRBDFq');
 
                 try {
                     // Quitar el fondo de la imagen y obtener la imagen procesada
@@ -345,6 +344,13 @@ class RegistroIMNASController extends Controller
 
                 } catch (\Exception $e) {
                     \Log::error("Error al quitar el fondo de la imagen: " . $e->getMessage());
+
+                    // En caso de fallo, guardar la imagen original en ambas rutas
+                    $file->move($ruta_manual, $fileName);
+                    copy($filePathOriginal, $filePathCopy);
+
+                    // Guardar el nombre de la imagen original en el registro
+                    $registro->foto_cuadrada = $fileName;
                 }
 
                 // Actualizar registro
@@ -382,26 +388,31 @@ class RegistroIMNASController extends Controller
                 // Mover el archivo a la ruta manual
                 $file_firma_director->move($ruta_manual, $fileName_firma_director);
 
-                // Instancia de RemoveBg
-                $removeBg = new RemoveBg('kfNprpY8MrAbrZFkjriRBDFq');
-
                 try {
                     // Quitar el fondo de la imagen de la firma del director
                     $noBgImage = $removeBg->file($filePathOriginal)->get();
 
-                    // Guardar la imagen sin fondo en la ruta estándar (ruta_manual)
+                    // Guardar la imagen sin fondo en la ruta manual
                     file_put_contents($filePathOriginal, $noBgImage);
 
                     // Copiar la imagen sin fondo a la segunda ruta
                     $filePathCopy = $ruta_manual_logo . $fileName_firma_director;
                     file_put_contents($filePathCopy, $noBgImage);
 
-                    // Actualizar el registro de la escuela con el nombre del archivo
+                    // Guardar el nombre de la imagen en el registro de la escuela
                     $escuela = RegistroImnasEscuela::where('id_user', $request->get("Id_escuela"))->firstOrFail();
                     $escuela->firma = $fileName_firma_director;
 
                 } catch (\Exception $e) {
                     \Log::error("Error al quitar el fondo de la imagen firma_director: " . $e->getMessage());
+
+                    // En caso de fallo, copiar la imagen original a la segunda ruta
+                    $filePathCopy = $ruta_manual_logo . $fileName_firma_director;
+                    copy($filePathOriginal, $filePathCopy);
+
+                    // Guardar el nombre de la imagen original en el registro de la escuela
+                    $escuela = RegistroImnasEscuela::where('id_user', $request->get("Id_escuela"))->firstOrFail();
+                    $escuela->firma = $fileName_firma_director;
                 }
 
                 // Guardar cambios en el registro de la escuela
@@ -447,9 +458,6 @@ class RegistroIMNASController extends Controller
                 // Mover el archivo a la ruta manual
                 $file_logo->move($ruta_manual, $fileName_logo);
 
-                // Instancia de RemoveBg
-                $removeBg = new RemoveBg('kfNprpY8MrAbrZFkjriRBDFq');
-
                 try {
                     // Quitar el fondo de la imagen del logo
                     $noBgImage = $removeBg->file($filePathOriginal)->get();
@@ -467,6 +475,14 @@ class RegistroIMNASController extends Controller
 
                 } catch (\Exception $e) {
                     \Log::error("Error al quitar el fondo de la imagen logo: " . $e->getMessage());
+
+                    // Si la API falla, copiar la imagen original a la segunda ruta
+                    $filePathCopy = $ruta_manual_logo . $fileName_logo;
+                    copy($filePathOriginal, $filePathCopy);
+
+                    // Actualizar el registro del usuario con el nombre del archivo original
+                    $user = User::where('id', $request->get("Id_escuela"))->firstOrFail();
+                    $user->logo = $fileName_logo;
                 }
 
                 // Guardar cambios en el registro del usuario
