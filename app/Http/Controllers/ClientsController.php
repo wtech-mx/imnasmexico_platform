@@ -28,6 +28,9 @@ use App\Mail\PlantillaEvaluacionAprovada;
 use App\Mail\PlantillaWebinar;
 use App\Models\Cam\CamNotEstandares;
 use Illuminate\Support\Facades\Mail;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Storage;
+use Mtownsend\RemoveBg\RemoveBg;
 
 class ClientsController extends Controller
 {
@@ -649,6 +652,8 @@ class ClientsController extends Controller
 
         $documentos_id = Documentos::where('id_usuario','=',$id)->first();
 
+        $removeBg = new RemoveBg('kfNprpY8MrAbrZFkjriRBDFq');
+
         if($documentos_id == null){
 
             $documento = new Documentos;
@@ -677,37 +682,141 @@ class ClientsController extends Controller
                 return view('user.components.profile.resultado.curp',['documento' => $documento,'cliente' => $cliente]);
             }
 
+            if ($request->hasFile("foto_infantil_blanco")) {
+                $file = $request->file('foto_infantil_blanco');
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $tempPath = $ruta_estandar . '/' . $fileName;
+
+                // Mover el archivo original a una ubicación temporal
+                $file->move($ruta_estandar, $fileName);
+
+                try {
+                    // Procesar la imagen para quitar el fondo
+                    $noBgImage = $removeBg->file($tempPath)->get();
+
+                    // Definir la ruta para la imagen sin fondo
+                    $cleanFilePath = $ruta_estandar . '/' . uniqid() . '_cleaned_' . $file->getClientOriginalName();
+
+                    // Guardar la imagen procesada en la ruta de destino
+                    file_put_contents($cleanFilePath, $noBgImage);
+
+                    // Guardar el nombre de la imagen procesada en el campo `firma`
+                    $documento->foto_infantil_blanco = basename($cleanFilePath);
+
+                    // Eliminar la imagen original después de procesarla
+                    unlink($tempPath);
+
+                } catch (\Exception $e) {
+                    \Log::error("Error al quitar el fondo de la imagen de foto_infantil_blanco a colors: " . $e->getMessage());
+
+                    // En caso de fallo, guardar la imagen original
+                    $documento->foto_infantil_blanco = basename($tempPath);
+                }
+
+                    // Actualizar el registro en la base de datos
+                    $documento->save();
+
+
+                return view('user.components.profile.resultado.infantil_blanco', ['documento' => $documento, 'cliente' => $cliente]);
+            }
+
             if ($request->hasFile("foto_tam_titulo")) {
                 $file = $request->file('foto_tam_titulo');
-                $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $documento->foto_tam_titulo = $fileName;
+                $filePath = $ruta_estandar . '/' . $fileName;
 
+                try {
+                    // Quitar el fondo de la imagen y obtener la imagen procesada
+                    $noBgImage = $removeBg->file($file->getRealPath())->get();
+
+                    // Guardar la imagen sin fondo en la ruta estándar
+                    file_put_contents($filePath, $noBgImage);
+
+                    // Guardar el nombre de la imagen en el campo `foto_tam_titulo` del documento
+                    $documento->foto_tam_titulo = $fileName;
+
+                } catch (\Exception $e) {
+                    \Log::error("Error al quitar el fondo de la imagen foto_tam_titulo: " . $e->getMessage());
+                }
+
+                // Guardar cambios en el documento
                 $documento->save();
-                return view('user.components.profile.resultado.tam_titulo',['documento' => $documento,'cliente' => $cliente]);
+
+                return view('user.components.profile.resultado.tam_titulo', ['documento' => $documento, 'cliente' => $cliente]);
             }
 
             if ($request->hasFile("foto_tam_infantil")) {
                 $file = $request->file('foto_tam_infantil');
-                $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $documento->foto_tam_infantil = $fileName;
+                $tempPath = $ruta_estandar . '/' . $fileName;
 
-                $documento->save();
-                return view('user.components.profile.resultado.foto_tam_infantil',['documento' => $documento,'cliente' => $cliente]);
+                // Mover el archivo original a una ubicación temporal
+                $file->move($ruta_estandar, $fileName);
+
+                try {
+                    // Procesar la imagen para quitar el fondo
+                    $noBgImage = $removeBg->file($tempPath)->get();
+
+                    // Definir la ruta para la imagen sin fondo
+                    $cleanFilePath = $ruta_estandar . '/' . uniqid() . '_cleaned_' . $file->getClientOriginalName();
+
+                    // Guardar la imagen procesada en la ruta de destino
+                    file_put_contents($cleanFilePath, $noBgImage);
+
+                    // Guardar el nombre de la imagen procesada en el campo `firma`
+                    $documento->foto_tam_infantil = basename($cleanFilePath);
+
+                    // Eliminar la imagen original después de procesarla
+                    unlink($tempPath);
+
+                } catch (\Exception $e) {
+                    \Log::error("Error al quitar el fondo de la imagen de Foto Infantil a colors: " . $e->getMessage());
+
+                    // En caso de fallo, guardar la imagen original
+                    $documento->foto_tam_infantil = basename($tempPath);
+                }
+
+                    // Actualizar el registro en la base de datos
+                    $documento->save();
+
+                return view('user.components.profile.resultado.foto_tam_infantil', ['documento' => $documento, 'cliente' => $cliente]);
             }
 
-            if ($request->hasFile("foto_infantil_blanco")) {
-                $file = $request->file('foto_infantil_blanco');
-                $path = $ruta_estandar;
+            if ($request->hasFile('firma')) {
+                $file = $request->file('firma');
                 $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $documento->foto_infantil_blanco = $fileName;
+                $tempPath = $ruta_estandar . '/' . $fileName;
 
-                $documento->save();
-                return view('user.components.profile.resultado.infantil_blanco',['documento' => $documento,'cliente' => $cliente]);
+                // Mover el archivo original a una ubicación temporal
+                $file->move($ruta_estandar, $fileName);
+
+                try {
+                    // Procesar la imagen para quitar el fondo
+                    $noBgImage = $removeBg->file($tempPath)->get();
+
+                    // Definir la ruta para la imagen sin fondo
+                    $cleanFilePath = $ruta_estandar . '/' . uniqid() . '_cleaned_' . $file->getClientOriginalName();
+
+                    // Guardar la imagen procesada en la ruta de destino
+                    file_put_contents($cleanFilePath, $noBgImage);
+
+                    // Guardar el nombre de la imagen procesada en el campo `firma`
+                    $documento->firma = basename($cleanFilePath);
+
+                    // Eliminar la imagen original después de procesarla
+                    unlink($tempPath);
+
+                } catch (\Exception $e) {
+                    \Log::error("Error al quitar el fondo de la imagen de firma: " . $e->getMessage());
+
+                    // En caso de fallo, guardar la imagen original
+                    $documento->firma = basename($tempPath);
+                }
+
+                    // Actualizar el registro en la base de datos
+                    $documento->save();
+
+                return view('user.components.profile.resultado.firma', ['documento' => $documento,'cliente' => $cliente]);
             }
 
             if ($request->hasFile("carta_compromiso")) {
@@ -719,17 +828,6 @@ class ClientsController extends Controller
 
                 $documento->save();
                 return view('user.components.profile.resultado.carta_compromiso',['documento' => $documento,'cliente' => $cliente]);
-            }
-
-            if ($request->hasFile("firma")) {
-                $file = $request->file('firma');
-                $path = $ruta_estandar;
-                $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $documento->firma = $fileName;
-
-                $documento->save();
-                return view('user.components.profile.resultado.firma',['documento' => $documento,'cliente' => $cliente]);
             }
 
             if ($request->hasFile("estudios")) {
@@ -789,38 +887,102 @@ class ClientsController extends Controller
 
             if ($request->hasFile("foto_infantil_blanco")) {
                 $file = $request->file('foto_infantil_blanco');
-                $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $documento->foto_infantil_blanco = $fileName;
+                $tempPath = $ruta_estandar . '/' . $fileName;
 
-                $documento->update();
+                // Mover el archivo original a una ubicación temporal
+                $file->move($ruta_estandar, $fileName);
 
-                return view('user.components.profile.resultado.foto_tam_infantil',['documento' => $documento,'cliente' => $cliente]);
+                try {
+                    // Procesar la imagen para quitar el fondo
+                    $noBgImage = $removeBg->file($tempPath)->get();
+
+                    // Definir la ruta para la imagen sin fondo
+                    $cleanFilePath = $ruta_estandar . '/' . uniqid() . '_cleaned_' . $file->getClientOriginalName();
+
+                    // Guardar la imagen procesada en la ruta de destino
+                    file_put_contents($cleanFilePath, $noBgImage);
+
+                    // Guardar el nombre de la imagen procesada en el campo `firma`
+                    $documento->foto_infantil_blanco = basename($cleanFilePath);
+
+                    // Eliminar la imagen original después de procesarla
+                    unlink($tempPath);
+
+                } catch (\Exception $e) {
+                    \Log::error("Error al quitar el fondo de la imagen de foto_infantil_blanco a colors: " . $e->getMessage());
+
+                    // En caso de fallo, guardar la imagen original
+                    $documento->foto_infantil_blanco = basename($tempPath);
+                }
+
+                    // Actualizar el registro en la base de datos
+                    $documento->update();
+
+
+                return view('user.components.profile.resultado.infantil_blanco', ['documento' => $documento, 'cliente' => $cliente]);
             }
 
             if ($request->hasFile("foto_tam_titulo")) {
                 $file = $request->file('foto_tam_titulo');
-                $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $documento->foto_tam_titulo = $fileName;
+                $filePath = $ruta_estandar . '/' . $fileName;
 
-                $documento->update();
+                try {
+                    // Quitar el fondo de la imagen y obtener la imagen procesada
+                    $noBgImage = $removeBg->file($file->getRealPath())->get();
 
-                return view('user.components.profile.resultado.tam_titulo',['documento' => $documento,'cliente' => $cliente]);
+                    // Guardar la imagen sin fondo en la ruta estándar
+                    file_put_contents($filePath, $noBgImage);
+
+                    // Guardar el nombre de la imagen en el campo `foto_tam_titulo` del documento
+                    $documento->foto_tam_titulo = $fileName;
+
+                } catch (\Exception $e) {
+                    \Log::error("Error al quitar el fondo de la imagen foto_tam_titulo: " . $e->getMessage());
+                }
+
+                // Guardar cambios en el documento
+                $documento->save();
+
+                return view('user.components.profile.resultado.tam_titulo', ['documento' => $documento, 'cliente' => $cliente]);
             }
 
             if ($request->hasFile("foto_tam_infantil")) {
                 $file = $request->file('foto_tam_infantil');
-                $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $documento->foto_tam_infantil = $fileName;
+                $tempPath = $ruta_estandar . '/' . $fileName;
 
-                $documento->update();
+                // Mover el archivo original a una ubicación temporal
+                $file->move($ruta_estandar, $fileName);
 
-                return view('user.components.profile.resultado.foto_tam_infantil',['documento' => $documento,'cliente' => $cliente]);
+                try {
+                    // Procesar la imagen para quitar el fondo
+                    $noBgImage = $removeBg->file($tempPath)->get();
+
+                    // Definir la ruta para la imagen sin fondo
+                    $cleanFilePath = $ruta_estandar . '/' . uniqid() . '_cleaned_' . $file->getClientOriginalName();
+
+                    // Guardar la imagen procesada en la ruta de destino
+                    file_put_contents($cleanFilePath, $noBgImage);
+
+                    // Guardar el nombre de la imagen procesada en el campo `firma`
+                    $documento->foto_tam_infantil = basename($cleanFilePath);
+
+                    // Eliminar la imagen original después de procesarla
+                    unlink($tempPath);
+
+                } catch (\Exception $e) {
+                    \Log::error("Error al quitar el fondo de la imagen de Foto Infantil a colors: " . $e->getMessage());
+
+                    // En caso de fallo, guardar la imagen original
+                    $documento->foto_tam_infantil = basename($tempPath);
+                }
+
+                    // Actualizar el registro en la base de datos
+                    $documento->update();
+
+                return view('user.components.profile.resultado.foto_tam_infantil', ['documento' => $documento, 'cliente' => $cliente]);
             }
 
             if ($request->hasFile("carta_compromiso")) {
@@ -835,16 +997,41 @@ class ClientsController extends Controller
                 return view('user.components.profile.resultado.carta_compromiso',['documento' => $documento,'cliente' => $cliente]);
             }
 
-            if ($request->hasFile("firma")) {
+            if ($request->hasFile('firma')) {
                 $file = $request->file('firma');
-                $path = $ruta_estandar;
                 $fileName = uniqid() . $file->getClientOriginalName();
-                $file->move($path, $fileName);
-                $documento->firma = $fileName;
+                $tempPath = $ruta_estandar . '/' . $fileName;
 
-                $documento->update();
+                // Mover el archivo original a una ubicación temporal
+                $file->move($ruta_estandar, $fileName);
 
-                return view('user.components.profile.resultado.firma',['documento' => $documento,'cliente' => $cliente]);
+                try {
+                    // Procesar la imagen para quitar el fondo
+                    $noBgImage = $removeBg->file($tempPath)->get();
+
+                    // Definir la ruta para la imagen sin fondo
+                    $cleanFilePath = $ruta_estandar . '/' . uniqid() . '_cleaned_' . $file->getClientOriginalName();
+
+                    // Guardar la imagen procesada en la ruta de destino
+                    file_put_contents($cleanFilePath, $noBgImage);
+
+                    // Guardar el nombre de la imagen procesada en el campo `firma`
+                    $documento->firma = basename($cleanFilePath);
+
+                    // Eliminar la imagen original después de procesarla
+                    unlink($tempPath);
+
+                } catch (\Exception $e) {
+                    \Log::error("Error al quitar el fondo de la imagen de firma: " . $e->getMessage());
+
+                    // En caso de fallo, guardar la imagen original
+                    $documento->firma = basename($tempPath);
+                }
+
+                    // Actualizar el registro en la base de datos
+                    $documento->update();
+
+                return view('user.components.profile.resultado.firma', ['documento' => $documento,'cliente' => $cliente]);
             }
 
             if ($request->hasFile("estudios")) {

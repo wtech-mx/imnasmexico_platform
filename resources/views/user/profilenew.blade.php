@@ -1564,7 +1564,7 @@ Mi perfil- {{$cliente->name}}
             success: function(response) {
                 // Aquí puedes manejar la respuesta del servidor
                 // Por ejemplo, mostrar un mensaje de éxito
-                alert('Archivo cargado con éxito');
+                alert('Firma cargado con éxito');
                 $('#resultado_firma').html(response); // Actualiza la sección con los datos del servicio
                 var contenedor = document.getElementById("contenedor_firma");
                 contenedor.setAttribute("style", "display:none;");

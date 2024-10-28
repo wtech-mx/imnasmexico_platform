@@ -313,13 +313,13 @@
 
                     @if ($cliente->name != 'Asiyadeth Virginia Hernández Cruz')
                         <div class="col-6 form-group mb-5">
-                            <label for="firma">Foto <b>Blanco y negro</b></label>
+                            <label for="firma">Foto <b>Blanco y negros</b></label>
                             <input id="foto_infantil_blanco" name="foto_infantil_blanco" type="file" class="form-control infantil_blanco_input" >
                             @if ($documento->foto_tam_titulo == NULL)
                                 <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 60px; height: auto;"/>
                             @else
 
-                            <div id="contenedor_foto_tam_titulo">
+                            <div id="contenedor_foto_infantil_blanco">
 
                                 @if (pathinfo($documento->foto_tam_titulo, PATHINFO_EXTENSION) == 'pdf')
                                     <p class="text-center ">
@@ -346,7 +346,7 @@
                             </div>
                             @endif
 
-                            <div id="resultado_foto_tam_titulo"></div>
+                            <div id="resultado_foto_infantil_blanco"></div>
                         </div>
                     @endif
             @endforeach
