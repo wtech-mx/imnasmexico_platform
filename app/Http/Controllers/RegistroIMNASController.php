@@ -21,6 +21,8 @@ use App\Models\RegistroImnasTemario;
 use Carbon\Carbon;
 use Hash;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Mtownsend\RemoveBg\RemoveBg;
 
 class RegistroIMNASController extends Controller
 {
@@ -306,44 +308,120 @@ class RegistroIMNASController extends Controller
 
         $tam_letra_esp_cred = $request->get('tam_letra_esp_cred');
         $promedio = $request->get('promedio');
+        $rbg_foto = $request->get('rbg_foto');
+        $rbg_logo = $request->get('rbg_logo');
+        $rbg_signature = $request->get('rbg_signature');
 
 
         $capitalizar =  $request->get('capitalizar');
         $firma_directora =  $request->get('firma_directora');
 
         if ($request->hasFile("img_infantil")) {
-            $file = $request->file('img_infantil');
-            $path = $ruta_manual;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
 
-            $registro->foto_cuadrada = $fileName;
+            if($rbg_foto == 'si'){
 
-            $filePathOriginal = $ruta_manual . $fileName ;
-            $filePathCopy = $ruta_manual_foto . $fileName ;
-            copy($filePathOriginal, $filePathCopy);
+                $file = $request->file('img_infantil');
+                $fileName = uniqid() . $file->getClientOriginalName();
 
-            $registro->update();
+                // Ruta donde se guardará la imagen sin fondo
+                $filePathOriginal = $ruta_manual . $fileName;
+                $filePathCopy = $ruta_manual_foto . $fileName;
 
-        }else{
+                // Instancia de RemoveBg
+                $removeBg = new RemoveBg('kfNprpY8MrAbrZFkjriRBDFq');
+
+                try {
+                    // Quitar el fondo de la imagen y obtener la imagen procesada
+                    $noBgImage = $removeBg->file($file->getRealPath())->get();
+
+                    // Guardar la imagen sin fondo en el primer path
+                    file_put_contents($filePathOriginal, $noBgImage);
+
+                    // Copiar la imagen sin fondo al segundo path
+                    copy($filePathOriginal, $filePathCopy);
+
+                    // Guardar el nombre de la imagen en el registro
+                    $registro->foto_cuadrada = $fileName;
+
+                } catch (\Exception $e) {
+                    \Log::error("Error al quitar el fondo de la imagen: " . $e->getMessage());
+                }
+
+                // Actualizar registro
+                $registro->update();
+
+            }else{
+
+                $file = $request->file('img_infantil');
+                $path = $ruta_manual;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+
+                $registro->foto_cuadrada = $fileName;
+
+                $filePathOriginal = $ruta_manual . $fileName ;
+                $filePathCopy = $ruta_manual_foto . $fileName ;
+                copy($filePathOriginal, $filePathCopy);
+
+                $registro->update();
+
+            }
+
+        } else {
             $fileName = 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
         }
 
         if ($request->hasFile("firma_director")) {
 
-            $file_firma_director   = $request->file('firma_director');
-            $fileName_firma_director  = uniqid() . $file_firma_director ->getClientOriginalName();
-            $file_firma_director->move($ruta_manual, $fileName_firma_director );
+            if($rbg_signature == 'si'){
 
-            $escuela = RegistroImnasEscuela::where('id_user', $request->get("Id_escuela"))->firstOrFail();
-            // Guardar en la primera ruta
-            $escuela->firma = $fileName_firma_director ;
+                $file_firma_director = $request->file('firma_director');
+                $fileName_firma_director = uniqid() . $file_firma_director->getClientOriginalName();
+                $filePathOriginal = $ruta_manual . $fileName_firma_director;
 
-            // Copiar el archivo a la segunda ruta
-            $filePathOriginal = $ruta_manual . $fileName_firma_director ;
-            $filePathCopy = $ruta_manual_logo . $fileName_firma_director ;
-            copy($filePathOriginal, $filePathCopy);
-            $escuela->update();
+                // Mover el archivo a la ruta manual
+                $file_firma_director->move($ruta_manual, $fileName_firma_director);
+
+                // Instancia de RemoveBg
+                $removeBg = new RemoveBg('kfNprpY8MrAbrZFkjriRBDFq');
+
+                try {
+                    // Quitar el fondo de la imagen de la firma del director
+                    $noBgImage = $removeBg->file($filePathOriginal)->get();
+
+                    // Guardar la imagen sin fondo en la ruta estándar (ruta_manual)
+                    file_put_contents($filePathOriginal, $noBgImage);
+
+                    // Copiar la imagen sin fondo a la segunda ruta
+                    $filePathCopy = $ruta_manual_logo . $fileName_firma_director;
+                    file_put_contents($filePathCopy, $noBgImage);
+
+                    // Actualizar el registro de la escuela con el nombre del archivo
+                    $escuela = RegistroImnasEscuela::where('id_user', $request->get("Id_escuela"))->firstOrFail();
+                    $escuela->firma = $fileName_firma_director;
+
+                } catch (\Exception $e) {
+                    \Log::error("Error al quitar el fondo de la imagen firma_director: " . $e->getMessage());
+                }
+
+                // Guardar cambios en el registro de la escuela
+                $escuela->update();
+
+            }else{
+                $file_firma_director   = $request->file('firma_director');
+                $fileName_firma_director  = uniqid() . $file_firma_director ->getClientOriginalName();
+                $file_firma_director->move($ruta_manual, $fileName_firma_director );
+
+                $escuela = RegistroImnasEscuela::where('id_user', $request->get("Id_escuela"))->firstOrFail();
+                // Guardar en la primera ruta
+                $escuela->firma = $fileName_firma_director ;
+
+                // Copiar el archivo a la segunda ruta
+                $filePathOriginal = $ruta_manual . $fileName_firma_director ;
+                $filePathCopy = $ruta_manual_logo . $fileName_firma_director ;
+                copy($filePathOriginal, $filePathCopy);
+                $escuela->update();
+            }
 
         }else{
             $fileName_firma_director = 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
@@ -360,19 +438,55 @@ class RegistroIMNASController extends Controller
 
         if ($request->hasFile("logo")) {
 
-            $file_logo = $request->file('logo');
-            $fileName_logo = uniqid() . $file_logo->getClientOriginalName();
-            $file_logo->move($ruta_manual, $fileName_logo);
+            if($rbg_logo == 'si'){
 
-            $user = User::where('id', $request->get("Id_escuela"))->firstOrFail();
-            // Guardar en la primera ruta
-            $user->logo = $fileName_logo;
+                $file_logo = $request->file('logo');
+                $fileName_logo = uniqid() . $file_logo->getClientOriginalName();
+                $filePathOriginal = $ruta_manual . $fileName_logo;
 
-            // Copiar el archivo a la segunda ruta
-            $filePathOriginal = $ruta_manual . $fileName_logo;
-            $filePathCopy = $ruta_manual_logo . $fileName_logo;
-            copy($filePathOriginal, $filePathCopy);
-            $user->update();
+                // Mover el archivo a la ruta manual
+                $file_logo->move($ruta_manual, $fileName_logo);
+
+                // Instancia de RemoveBg
+                $removeBg = new RemoveBg('kfNprpY8MrAbrZFkjriRBDFq');
+
+                try {
+                    // Quitar el fondo de la imagen del logo
+                    $noBgImage = $removeBg->file($filePathOriginal)->get();
+
+                    // Guardar la imagen sin fondo en la ruta estándar (ruta_manual)
+                    file_put_contents($filePathOriginal, $noBgImage);
+
+                    // Copiar la imagen sin fondo a la segunda ruta
+                    $filePathCopy = $ruta_manual_logo . $fileName_logo;
+                    file_put_contents($filePathCopy, $noBgImage);
+
+                    // Actualizar el registro del usuario con el nombre del archivo
+                    $user = User::where('id', $request->get("Id_escuela"))->firstOrFail();
+                    $user->logo = $fileName_logo;
+
+                } catch (\Exception $e) {
+                    \Log::error("Error al quitar el fondo de la imagen logo: " . $e->getMessage());
+                }
+
+                // Guardar cambios en el registro del usuario
+                $user->update();
+
+            }else{
+                $file_logo = $request->file('logo');
+                $fileName_logo = uniqid() . $file_logo->getClientOriginalName();
+                $file_logo->move($ruta_manual, $fileName_logo);
+
+                $user = User::where('id', $request->get("Id_escuela"))->firstOrFail();
+                // Guardar en la primera ruta
+                $user->logo = $fileName_logo;
+
+                // Copiar el archivo a la segunda ruta
+                $filePathOriginal = $ruta_manual . $fileName_logo;
+                $filePathCopy = $ruta_manual_logo . $fileName_logo;
+                copy($filePathOriginal, $filePathCopy);
+                $user->update();
+            }
 
         }else{
             $fileName_logo = 'Sin Logo';

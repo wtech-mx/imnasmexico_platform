@@ -17,15 +17,16 @@
         "laravel/ui": "^4.2",
         "laravelcollective/html": "^6.0",
         "livewire/livewire": "^2.12",
+        "maatwebsite/excel": "^3.1",
         "mercadopago/dx-php": "^2.5",
         "milon/barcode": "^11.0",
+        "mtownsend/remove-bg": "^2.0",
+        "phpoffice/phpspreadsheet": "^1.23",
         "psr/simple-cache": "2.0",
         "realrashid/sweet-alert": "^6.0",
         "spatie/laravel-permission": "^5.9",
         "stripe/stripe-php": "^10.12",
-        "yajra/laravel-datatables-oracle": "^10.4",
-        "maatwebsite/excel": "^3.1",
-        "phpoffice/phpspreadsheet": "^1.23"
+        "yajra/laravel-datatables-oracle": "^10.4"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

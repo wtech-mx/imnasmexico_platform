@@ -187,7 +187,7 @@
                                                 @endif
                                             </div>
 
-                                            <div class="form-group col-6 gc_cn">
+                                            {{-- <div class="form-group col-6 gc_cn">
                                                 <label for="name">Firma Personal *</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="basic-addon1">
@@ -204,6 +204,22 @@
                                                         <img id="blah" src="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->firma) }}" alt="Imagen" style="width: 100px;height: 100px;">
                                                     </div>
                                                 @endif
+                                            </div> --}}
+
+                                            <div class="form-group col-6 gc_cn">
+                                                <label for="name">-</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="rbg_foto" id="flexRadioDefault1" value="si">
+                                                    <label class="form-check-label" >
+                                                      Quitar Fondo Fotografia
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="rbg_foto" id="flexRadioDefault2" value="no" checked>
+                                                    <label class="form-check-label" >
+                                                      Dejar Original Fotografia
+                                                    </label>
+                                                  </div>
                                             </div>
 
                                             <div class="form-group col-6 gc_cn">
@@ -221,6 +237,22 @@
                                                 @else
                                                     <img id="blah" src="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->foto_cuadrada) }}" alt="Imagen" style="width: 100px;height: 100px;">
                                                 @endif
+                                            </div>
+
+                                            <div class="form-group col-6 gc_cn">
+                                                <label for="name">-</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="rbg_logo" id="rbg_logo1" value="si">
+                                                    <label class="form-check-label" >
+                                                      Quitar Fondo Logo
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="rbg_logo" id="rbg_logo2" value="no" checked>
+                                                    <label class="form-check-label" >
+                                                      Dejar Original Logo
+                                                    </label>
+                                                  </div>
                                             </div>
 
                                             <div class="form-group col-6 gc_cn">
@@ -242,6 +274,23 @@
                                                 @else
                                                     <p>No hay logo disponible para este usuario.</p>
                                                 @endif
+                                            </div>
+
+
+                                            <div class="form-group col-6 gc_cn">
+                                                <label for="name">-</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="rbg_signature" id="rbg_signature1" value="si">
+                                                    <label class="form-check-label" >
+                                                      Quitar Fondo Firma de la director@
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="rbg_signature" id="rbg_signature2" value="no" checked>
+                                                    <label class="form-check-label" >
+                                                      Dejar Original Firma de la director@
+                                                    </label>
+                                                  </div>
                                             </div>
 
                                             <div class="form-group col-6 gc_cn">
