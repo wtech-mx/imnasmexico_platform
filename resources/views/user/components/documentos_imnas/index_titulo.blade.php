@@ -24,7 +24,7 @@
 
             if (isset($tickets->foto_cuadrada)) {
                 $palabras = explode(' ', ucwords(strtolower($tickets->nombre)));
-
+                $nombrePersona = $tickets->nombre;
                 $foto = $tickets->foto_cuadrada;
                 $firma = $tickets->firma;
 
@@ -43,6 +43,7 @@
                 if ($tickets == null) {
 
                     $palabras = explode(' ', ucwords(strtolower($tickets_externo->cliente)));
+                    $nombrePersona = $tickets_externo->cliente;
                     $firma = null;
                     $nombreCurso = $tickets_externo->curso;
                 }else {
@@ -51,6 +52,7 @@
                     $firma = $tickets->User->Documentos->firma;
 
                     $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
+                    $nombrePersona = $tickets->User->name;
 
                     $nombreCurso = $tickets->Cursos->nombre;
                     $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
@@ -128,10 +130,11 @@
             font-size: 20px;
             font-size: {{ $tickets?->tam_letra_nombre_th ?? 20 }}px!important;
             color: #000;
-            <?php if($tickets->capitalizar_nombre == 'Si'): ?>
+            @if($tickets && $tickets->capitalizar_nombre === 'Si')
                 text-transform: uppercase;
-            <?php endif; ?>
+            @endif
         }
+
 
         .container_marco {
             position: absolute;
@@ -538,11 +541,11 @@
 
         <div class="container_texto_atras">
             <p class="nombre_reverso">
-                <strong class="text-dark"> NOMBRE: </strong>{!! $linea !!} <br>
+                <strong class="text-dark"> NOMBRE: </strong>{!! $nombrePersona !!} <br>
                 <strong class="text-dark"> CURP:</strong> {{ $curp }} <br>
                 <strong class="text-dark"> NACIONALIDAD:</strong> Mexicana <br>
                 <strong class="text-dark"> VIGENCIA: </strong>Permanente <br>
-                <strong class="text-dark"> CARRERA: </strong>{!! $curso_formateado !!} <br>
+                <strong class="text-dark"> CARRERA: </strong>{!! $nombreCurso !!} <br>
             </p>
         </div>
 
@@ -568,7 +571,7 @@
         --}}
 
         <div class="container_cursoreversa_medio">
-            <h4 class="nombre_reverso">{!! $curso_formateado !!}</h4>
+            <h4 class="text-center nombre_reverso">{!! $curso_formateado !!}</h4>
         </div>
 
         @if($tickets?->firma_director == 'si')
