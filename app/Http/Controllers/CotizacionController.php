@@ -6,6 +6,7 @@ use App\Models\HistorialVendidos;
 use App\Models\ProductosNotasId;
 use App\Models\NotasProductos;
 use App\Models\ProductosBundleId;
+use App\Models\HistorialStock;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Products;
@@ -396,6 +397,7 @@ class CotizacionController extends Controller
                 }
             }else if($request->get('estatus_cotizacion') == 'Enviado'){
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
+                $nota->fecha_aprobada  = date("Y-m-d");
             }else if($request->get('estatus_cotizacion') == 'Aprobada'){
                 $nota->fecha_aprobada  = date("Y-m-d");
 
@@ -424,12 +426,16 @@ class CotizacionController extends Controller
                 }
 
                 $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+
                 $nota->metodo_pago  = $request->get('metodo_pago');
 
                 $nota->fecha_entrega  = $request->get('fecha_entrega');
                 $nota->direccion_entrega  = $request->get('direccion_entrega');
                 $nota->comentario_rep  = $request->get('comentario_rep');
+            }else if($request->get('estatus_cotizacion') == 'Enviado'){
+                $nota->fecha_aprobada  = date("Y-m-d");
             }
+
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

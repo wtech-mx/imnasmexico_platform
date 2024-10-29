@@ -3,7 +3,7 @@
       <div class="modal-content">
 
         <div class="modal-header">
-          <h5 class="modal-title">Cambio de Estatus #{{$nota->id}}</h5>
+          <h5 class="modal-title">Cambiar Estatus #{{$nota->id}}</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
@@ -30,7 +30,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary">Guardar</button>
+                    <button type="submit" class="btn btn-success">Actualizar Estado</button>
                 </div>
             </form>
 

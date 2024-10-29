@@ -29,6 +29,8 @@ Productos solicitados
                         <form method="POST" action="{{ route('notas_cotizacion.update_estatus', $nota_scaner->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
+                            <input type="hidden" name="estatus_cotizacion" value="Enviado">
+
                                 <div class="modal-body">
                                     <table class="table">
                                         <thead class="text-center">

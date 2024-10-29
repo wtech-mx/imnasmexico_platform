@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\PlantillaNuevoUser;
 use App\Models\ProductosBundleId;
 use App\Models\Products;
+use App\Models\HistorialVendidos;
+use App\Models\HistorialStock;
 use Illuminate\Support\Str;
 use Session;
 use Hash;
@@ -501,12 +503,56 @@ class NotasProductosController extends Controller
     }
 
     public function update_estatus(Request $request, $id){
+
         $nota = NotasProductos::findOrFail($id);
-        $nota->estatus_cotizacion  = $request->get('estatus_cotizacion');
+        $estatusNuevo = $request->get('estatus_cotizacion');
+
+
+        if ($estatusNuevo === 'Cancelar') {
+            $nota->estatus_cotizacion  = $request->get('estatus_cotizacion');
+            $producto_pedido = ProductosNotasId::where('id_notas_productos', $id)->get();
+
+            foreach ($producto_pedido as $campo) {
+                // Obtener el producto en cuestión
+                $product = Products::where('nombre', $campo->producto)->first();
+
+                if ($product) {
+                    // Recuperar el historial de ventas correspondiente a esta cotización y producto
+                    $historial = HistorialVendidos::where('id_producto', $product->id)
+                        ->where('id_cotizacion_nas', $id)
+                        ->first();
+
+                    if ($historial) {
+                        // Revertir el stock a su valor original
+                        $product->stock += $historial->cantidad_restado;
+                        $product->save();
+
+                        // Registrar el cambio en la tabla HistorialStock
+                        $historialData = [
+                            'id_producto' => $product->id,
+                            'user' => auth()->user()->name, // Se asume que el usuario está autenticado
+                            'precio_normal' => $product->precio_normal,
+                            'precio_rebajado' => $product->precio_rebajado,
+                            'sku' => $product->sku,
+                            'stock' => "FC:" . $nota->folio ." - Antes: " . $historial->stock_actual . " -> Ahora: " . $product->stock,
+                            'laboratorio' => $product->laboratorio,
+                            'categoria' => $product->categoria,
+                            'subcategoria' => $product->subcategoria,
+                        ];
+
+                        HistorialStock::create($historialData);
+
+                        // Opcional: eliminar o marcar el historial de venta como "revertido" si ya no es necesario.
+                        $historial->delete();
+                    }
+                }
+            }
+        }
+
         $nota->save();
 
-        Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->back()->with('success', 'Se ha actualizada');
+        Session::flash('success', 'La cancelación ha sido procesada con éxito.');
+        return redirect()->back()->with('success', 'Se ha actualizado el estado de la cotización.');
 
     }
 }

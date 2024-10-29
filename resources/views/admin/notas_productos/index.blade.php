@@ -103,7 +103,7 @@
                                 <tbody>
                                     @foreach ($notas as $nota)
                                         @if ($nota->estatus_cotizacion == 'Cancelar')
-                                        <tr style="background: #9b00009c">
+                                        <tr style="background: #9b00009c;color:#fff">
                                         @else
                                         <tr>
                                         @endif
@@ -136,8 +136,10 @@
                                                                 Pendiente de entregar
                                                             </a>
                                                         @else
+                                                        <a type="button" data-bs-toggle="modal" data-bs-target="#estatusModal{{$nota->id}}">
                                                             <label class="badge" style="color: #e39b00;background-color: #e3ae0040;">Venta Presencial</label><br>
                                                             Entregado
+                                                        </a>
                                                         @endif
                                                     @endif
 

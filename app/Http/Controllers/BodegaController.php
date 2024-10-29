@@ -122,7 +122,11 @@ class BodegaController extends Controller
 
         $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
         $notas_presencial_preparado = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Preparado')
-        ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+        // ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+        ->get();
+
+        $notas_presencial_cancelada = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Cancelar')->get();
+
         $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')
         ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
@@ -145,7 +149,7 @@ class BodegaController extends Controller
             'orders_tienda_cosmica_enviados',
             'notas_preparacion', 'notas_preparado', 'notas_enviados',
             'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados',
-            'notas_presencial_preparacion', 'notas_presencial_preparado', 'notas_presencial_enviados'
+            'notas_presencial_preparacion', 'notas_presencial_cancelada','notas_presencial_preparado', 'notas_presencial_enviados'
         ));
     }
 
@@ -307,6 +311,7 @@ class BodegaController extends Controller
 
         $nota_scaner = NotasProductos::where('id', '=', $id)->first();
         $productos_scaner = ProductosNotasId::where('id_notas_productos', '=', $id)->get();
+
         $allChecked = $productos_scaner->every(function ($producto) {
             return $producto->estatus === 1;
         });

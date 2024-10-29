@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Venta
+    Notas Venta Edit
 @endsection
 
 @section('css')
