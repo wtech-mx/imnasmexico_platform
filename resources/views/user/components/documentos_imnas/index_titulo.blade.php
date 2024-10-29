@@ -256,6 +256,15 @@
             position: absolute;
             top: 3.2%;
             left:45px;
+
+        }
+
+        .container_texto_atras{
+            position: absolute;
+            top: 3.2%;
+            left: 4px;
+            background: #fff;
+            width: 173px;
         }
 
         .container_curp{
@@ -268,6 +277,7 @@
             position:relative;
             font-size: 9px;
             color: red;
+            text-align: left;
         }
 
         .container_nacionalidad{
@@ -526,8 +536,18 @@
 
         @endif
 
-        <div class="container_nombre_formateado">
-            <h4 class="nombre_reverso">{{ $cursoNombre }}</h4>
+        <div class="container_texto_atras">
+            <p class="nombre_reverso">
+                <strong class="text-dark"> NOMBRE: </strong>{!! $linea !!} <br>
+                <strong class="text-dark"> CURP:</strong>{{ $curp }} <br>
+                <strong class="text-dark"> NACIONALIDAD:</strong> Mexicana <br>
+                <strong class="text-dark"> VIGENCIA: </strong>Permanente <br>
+                <strong class="text-dark"> CARRERA: </strong>{!! $curso_formateado !!} <br>
+            </p>
+        </div>
+
+        {{-- <div class="container_nombre_formateado">
+            <h4 class="nombre_reverso">{!! $linea !!}</h4>
         </div>
 
         <div class="container_curp">
@@ -548,7 +568,7 @@
 
         <div class="container_cursoreversa_medio">
             <h4 class="nombre_reverso">{!! $curso_formateado !!}</h4>
-        </div>
+        </div> --}}
 
         @if($tickets?->firma_director == 'si')
             <div class="container_firma_director2">
