@@ -90,7 +90,7 @@ Productos solicitados Woo Cosmica
 
         if (sku.length === 6) {
             $.ajax({
-                url: "{{ route('check_cosmica.product') }}",
+                url: "{{ route('check_cosmica_online.product') }}",
                 type: "POST",
                 dataType: "json",
                 data: {
