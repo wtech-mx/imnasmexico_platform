@@ -187,7 +187,7 @@
                                                 @endif
                                             </div>
 
-                                            {{-- <div class="form-group col-6 gc_cn">
+                                            <div class="form-group col-6 gc_cn">
                                                 <label for="name">Firma Personal *</label>
                                                 <div class="input-group">
                                                     <span class="input-group-text" id="basic-addon1">
@@ -204,7 +204,7 @@
                                                         <img id="blah" src="{{asset('documentos_registro/'. $registro_imnas->User->telefono . '/' .$registro_imnas->firma) }}" alt="Imagen" style="width: 100px;height: 100px;">
                                                     </div>
                                                 @endif
-                                            </div> --}}
+                                            </div>
 
                                             <div class="form-group col-6 gc_cn">
                                                 <label for="name">-</label>
