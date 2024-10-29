@@ -217,6 +217,7 @@ class CursosController extends Controller
         $precio_ticket = $request->get('precio');
         $fecha_inicial_ticket = $request->get('fecha_inicial_ticket');
         $fecha_final_ticket = $request->get('fecha_final_ticket');
+        $costos_diferentes = $request->get('costos_diferentes');
 
         for ($count = 0; $count < count($nombre_ticket); $count++) {
             $data = array(
@@ -226,6 +227,7 @@ class CursosController extends Controller
                 'precio' => $precio_ticket[$count],
                 'fecha_inicial' => $fecha_inicial_ticket[$count],
                 'fecha_final' => $fecha_final_ticket[$count],
+                'costos_diferentes' => $costos_diferentes[$count],
                 'imagen' => $curso->foto,
             );
             $insert_data[] = $data;
@@ -377,6 +379,7 @@ class CursosController extends Controller
         $fecha_final_ticket = $request->input('fecha_final_ticket');
         $descuento = $request->get('descuento');
         $ticket_ids = $request->input('ticket_id');
+        $costos_diferentes = $request->input('costos_diferentes');
 
         for ($count = 0; $count < count($nombre_ticket); $count++) {
             $data = array(
@@ -387,6 +390,7 @@ class CursosController extends Controller
                 'fecha_inicial' => $fecha_inicial_ticket[$count],
                 'fecha_final' => $fecha_final_ticket[$count],
                 'descuento' => $descuento[$count],
+                'costos_diferentes' => $costos_diferentes[$count],
                 'imagen' => $curso->foto,
             );
 

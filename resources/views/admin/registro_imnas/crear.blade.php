@@ -44,7 +44,20 @@
                             </div>
                         </div>
 
-                        <div class="col-6"></div>
+                        <div class="col-6 form-group">
+                            <label for="name">Tipo de precio Emisión</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" alt="" width="35px">
+                                </span>
+                                <select name="costos_diferentes" id="costos_diferentes" class="form-select d-inline-block">
+                                    @foreach ($cursos_tickets as $curso_ticket)
+                                        <option value="{{$curso_ticket->costos_diferentes}}">{{$curso_ticket->nombre}} - ${{$curso_ticket->precio}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="form-group col-6 mt-3">
                             <label for="name">Método de Pago *</label>
                             <div class="input-group mb-3">

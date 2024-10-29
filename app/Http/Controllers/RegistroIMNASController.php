@@ -29,8 +29,10 @@ class RegistroIMNASController extends Controller
     public function index(){
 
         $registros_imnas = Orders::where('registro_imnas', '=', '1')->get();
+        $curso = Cursos::where('id', '=', 647)->first();
+        $cursos_tickets = CursosTickets::where('id_curso', $curso->id)->where('nombre', 'Emisión por alumno')->get();
 
-        return view('admin.registro_imnas.index', compact('registros_imnas'));
+        return view('admin.registro_imnas.index', compact('registros_imnas', 'cursos_tickets'));
     }
 
     public function index_clientes($code){
@@ -903,6 +905,7 @@ class RegistroIMNASController extends Controller
                     $user->logo = $fileName;
                 }
                 $user->escuela = $request->get('escuela');
+                $user->costos_diferentes = $request->get('costos_diferentes');
                 $user->update();
             } else {
                 $user = User::where('email', $request->email)->first();
@@ -916,6 +919,7 @@ class RegistroIMNASController extends Controller
                     $user->logo = $fileName;
                 }
                 $user->escuela = $request->get('escuela');
+                $user->costos_diferentes = $request->get('costos_diferentes');
                 $user->update();
             }
             $payer = $user;
@@ -946,6 +950,7 @@ class RegistroIMNASController extends Controller
                 $payer->logo = $fileName;
             }
             $payer->escuela = $request->get('escuela');
+            $payer->costos_diferentes = $request->get('costos_diferentes');
             $payer->save();
         }
 

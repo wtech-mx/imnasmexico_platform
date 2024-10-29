@@ -20,6 +20,7 @@ class CursosTickets extends Model
         'descuento',
         'fecha_inicial',
         'fecha_final',
+        'costos_diferentes',
     ];
 
     // public function OrdersTickets()

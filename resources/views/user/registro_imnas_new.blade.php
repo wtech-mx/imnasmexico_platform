@@ -246,31 +246,37 @@ Mi perfil- {{$cliente->name}}
                     <div class="card_single_horizon">
                         <div class="row mb-3">
                             @foreach ($cursos_tickets as $ticket)
+                                @if ($ticket->nombre == 'Emisión por alumno' && $ticket->costos_diferentes != $cliente->costos_diferentes)
+                                    @continue
+                                @endif
+
                                 @php
-                                        $precio = number_format($ticket->precio, 2, '.', ',');
+                                    $precio = number_format($ticket->precio, 2, '.', ',');
                                 @endphp
+
                                 <div class="col-12 mt-3">
-                                    <strong style="color: #66C0CC">{{$ticket->nombre}}</strong>
+                                    <strong style="color: #66C0CC">{{ $ticket->nombre }}</strong>
                                 </div>
+
                                 <div class="col-6 col-lg-6 mt-3">
-                                    @if ($ticket->descuento == NULL)
+                                    @if (is_null($ticket->descuento))
                                         <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
                                     @else
                                         <del style="color: #66C0CC"><strong>De ${{ $precio }}</strong></del>
-                                        <h5 style="color: #66C0CC"><strong>A ${{$ticket->descuento}}</strong></h5>
+                                        <h5 style="color: #66C0CC"><strong>A ${{ $ticket->descuento }}</strong></h5>
                                     @endif
                                 </div>
 
                                 <div class="col-6 col-lg-6 mt-3">
                                     <p class="btn-holder">
-                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}"  role="button">
+                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}" role="button">
                                             <i class="fas fa-ticket-alt"></i> Comprar
                                         </a>
                                     </p>
                                 </div>
 
                                 <div class="col-12">
-                                    <p style="color: #66C0CC">{{$ticket->descripcion}}</p>
+                                    <p style="color: #66C0CC">{{ $ticket->descripcion }}</p>
                                 </div>
                             @endforeach
                             @foreach ($tickets_envio as $ticket)

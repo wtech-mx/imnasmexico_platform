@@ -673,6 +673,16 @@
                                                             </div>
                                                         </div>
 
+                                                        <div class="col-6 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                            <label for="name">Tipo de precio</label>
+                                                            <div class="input-group mb-3">
+                                                                <span class="input-group-text" id="basic-addon1">
+                                                                    <img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" alt="" width="35px">
+                                                                </span>
+                                                                <input value="{{$item->costos_diferentes}}" id="costos_diferentes[]" name="costos_diferentes[]" type="number" class="form-control" >
+                                                            </div>
+                                                        </div>
+
                                                         <div class="col-12">
                                                             <div class="form-group">
                                                                 <label for="descripcion">Descripcion</label><br>
@@ -716,6 +726,16 @@
                                                                     <input  id="descuento[]" name="descuento[]" type="number" class="form-control" >
                                                                 </div>
                                                             </div>
+                                                            <div class="col-6 col-sm-6 col-md-4 col-lg-4 form-group">
+                                                                <label for="name">Tipo de precio</label>
+                                                                <div class="input-group mb-3">
+                                                                    <span class="input-group-text" id="basic-addon1">
+                                                                        <img src="{{ asset('assets/user/icons/bolsa-de-dinero.png') }}" alt="" width="35px">
+                                                                    </span>
+                                                                    <input value="{{$item->costos_diferentes}}" id="costos_diferentes[]" name="costos_diferentes[]" type="number" class="form-control" >
+                                                                </div>
+                                                            </div>
+                                                            
                                                             <div class="col-12">
                                                                 <div class="form-group">
                                                                     <label for="descripcion">Descripcion</label><br>
