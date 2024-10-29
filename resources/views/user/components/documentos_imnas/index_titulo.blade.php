@@ -539,7 +539,7 @@
         <div class="container_texto_atras">
             <p class="nombre_reverso">
                 <strong class="text-dark"> NOMBRE: </strong>{!! $linea !!} <br>
-                <strong class="text-dark"> CURP:</strong>{{ $curp }} <br>
+                <strong class="text-dark"> CURP:</strong> {{ $curp }} <br>
                 <strong class="text-dark"> NACIONALIDAD:</strong> Mexicana <br>
                 <strong class="text-dark"> VIGENCIA: </strong>Permanente <br>
                 <strong class="text-dark"> CARRERA: </strong>{!! $curso_formateado !!} <br>
@@ -565,10 +565,11 @@
         <div class="container_cursoreversa">
             <h4 class="nombre_reverso">{!! $curso_formateado !!}</h4>
         </div>
+        --}}
 
         <div class="container_cursoreversa_medio">
             <h4 class="nombre_reverso">{!! $curso_formateado !!}</h4>
-        </div> --}}
+        </div>
 
         @if($tickets?->firma_director == 'si')
             <div class="container_firma_director2">
