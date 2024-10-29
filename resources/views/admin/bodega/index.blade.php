@@ -97,7 +97,7 @@
                                                     </td>
 
                                                     <td>
-                                                            En preparación
+                                                        En preparación <br>
                                                         Pedido Tiendita
                                                     </td>
 
@@ -148,7 +148,7 @@
                                                     </td>
 
                                                     <td>
-                                                            En preparación
+                                                        En preparación <br>
                                                         NAS Cotizaciones Aprobadas
                                                     </td>
 
