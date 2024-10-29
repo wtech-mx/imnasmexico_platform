@@ -206,6 +206,8 @@
                                                 @endif
                                             </div>
 
+                                            <div class="col-6"></div>
+
                                             <div class="form-group col-6 gc_cn">
                                                 <label for="name">-</label>
                                                 <div class="form-check">
