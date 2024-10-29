@@ -97,9 +97,7 @@
                                                     </td>
 
                                                     <td>
-                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
                                                             En preparación
-                                                        </a><br>
                                                         Pedido Tiendita
                                                     </td>
 
@@ -150,9 +148,7 @@
                                                     </td>
 
                                                     <td>
-                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
                                                             En preparación
-                                                        </a><br>
                                                         NAS Cotizaciones Aprobadas
                                                     </td>
 
@@ -214,9 +210,7 @@
                                                     </td>
 
                                                     <td>
-                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
                                                             En preparación
-                                                        </a>
                                                     </td>
 
                                                     <td>
@@ -259,9 +253,7 @@
                                                     <td>{{ $order->id }}</td>
                                                     <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
                                                     <td>
-                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
                                                             En preparación
-                                                        </a>
                                                     </td>
                                                     <td>{{ \Carbon\Carbon::parse($order->date_created)->format('d-m-Y') }}</td>
                                                     <td>${{ $order->total }}</td>
@@ -304,9 +296,7 @@
                                                     <td>{{ $order->id }}</td>
                                                     <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
                                                     <td>
-                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
                                                             En preparación
-                                                        </a>
                                                     </td>
                                                     <td>
                                                         @foreach($order->meta_data as $meta)
@@ -357,9 +347,7 @@
                                                     <td>{{ $order['user']['name'] }}</td>
 
                                                     <td>
-                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_paradisus{{$order['id']}}">
                                                             En preparación
-                                                        </a>
                                                     </td>
 
                                                     <td>
