@@ -155,7 +155,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group col-12 gc_cn">
+                    <div class="form-group col-6 gc_cn">
                         <label for="name">CURP</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1">
@@ -164,6 +164,38 @@
                             <input id="curp" name="curp" type="text" class="form-control" value="{{ $registro_imnas->curp_escrito }}" >
                         </div>
                     </div>
+
+                    <div class="form-group col-4 gc_cn">
+                        <label for="name">Logo Cedula</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img class="img_profile_label" src="{{asset('documentos/'. $registro_imnas->User->telefono . '/' .$registro_imnas->User->logo) }}" alt="" width="30px">
+                            </span>
+                            <input  name="logo_cedula" type="number" class="form-control" value="{{ $registro_imnas->logo_cedula ?? '100'  }}" >
+                        </div>
+                    </div>
+
+                    <div class="form-group col-4 gc_cn">
+                        <label for="name">Logo diploma</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img class="img_profile_label" src="{{asset('documentos/'. $registro_imnas->User->telefono . '/' .$registro_imnas->User->logo) }}" alt="" width="30px">
+                            </span>
+                            <input  name="logo_diploma" type="number" class="form-control" value="{{ $registro_imnas->logo_diploma ?? '150' }}" >
+                        </div>
+                    </div>
+
+                    <div class="form-group col-4 gc_cn">
+                        <label for="name">Logo titulo</label>
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1">
+                                <img class="img_profile_label" src="{{asset('documentos/'. $registro_imnas->User->telefono . '/' .$registro_imnas->User->logo) }}" alt="" width="30px">
+                            </span>
+                            <input  name="logo_titulo" type="number" class="form-control" value="{{ $registro_imnas->logo_titulo ?? '150' }}" >
+                        </div>
+                    </div>
+
+
 
                     <div class="form-group col-12 my-auto">
                         <button type="submit" class="btn btn-success">Guardar</button>
