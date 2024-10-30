@@ -169,7 +169,7 @@ Mi perfil- {{$cliente->name}}
                                                 <img class="img_profile_label" src="{{asset('assets/user/icons/ESTUDIANTE-.webp')}}" alt="">
                                             </span>
 
-                                            <input class="form-control" type="text"  id="nombre" name="nombre" required>
+                                            <input class="form-control" type="text" id="nombre" name="nombre" required oninput="capitalizeInput(this)">
                                         </div>
                                     </div>
 
@@ -215,7 +215,7 @@ Mi perfil- {{$cliente->name}}
                                     </div>
                                     <div class="col-6 form-group mb-5">
                                         <label for="ine">CURP *</label>
-                                        <input id="curp" name="curp" type="file" class="form-control ine_input" required>
+                                        <input id="curp_escrito" name="curp_escrito" type="text" class="form-control ine_input" required>
                                     </div>
                                     <div class="col-6 form-group mb-5">
                                         <label for="ine">Foto cuadrada <b>Blanco y negro</b>*</label>
@@ -412,7 +412,7 @@ Mi perfil- {{$cliente->name}}
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/clase.webp') }}" alt="" width="35px">
                                         </span>
-                                        <input id="especialidad" name="especialidad" type="text" class="form-control" required>
+                                        <input id="especialidad" name="especialidad" type="text" class="form-control" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
                                 @for ($i = 1; $i <= 12; $i++)
@@ -427,7 +427,7 @@ Mi perfil- {{$cliente->name}}
                                                 <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
                                             </span>
 
-                                            <input id="subtema_{{ $i }}" name="subtema_{{ $i }}" type="text" class="form-control" @if($i <= 6) required @endif>
+                                            <input id="subtema_{{ $i }}" name="subtema_{{ $i }}" type="text" class="form-control" @if($i <= 6) required @endif oninput="capitalizeInput(this)">
                                         </div>
                                     </div>
                                 @endfor
@@ -455,6 +455,15 @@ Mi perfil- {{$cliente->name}}
 
 <script>
     $(document).ready(function() {
+
+        function capitalizeInput(input) {
+            input.value = input.value
+                .toLowerCase()
+                .replace(/\b\w/g, char => char.toUpperCase());
+        }
+        // Asigna la función a la ventana global si es necesario
+        window.capitalizeInput = capitalizeInput;
+
     $('#searchForm').on('submit', function(e) {
         e.preventDefault(); // Evita que se recargue la página
 

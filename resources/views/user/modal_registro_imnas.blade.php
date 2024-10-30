@@ -37,6 +37,13 @@
                     </div>
                 </div>
 
+                <div class="mb-4 col-6">
+                    <label for="basic-url" class="form-label" style="font-weight: 700;">CURP escrito</label>
+                    <div class="input-group">
+                        {{ $registro_imnas->curp_escrito }}
+                    </div>
+                </div>
+
                 <div class="mb-4 col-4">
                     <label for="basic-url" class="form-label" style="font-weight: 700;">INE</label>
                     @if (pathinfo($registro_imnas->ine, PATHINFO_EXTENSION) == 'pdf')
@@ -87,7 +94,7 @@
                     </div>
                 </div>
 
-                <div class="mb-4 col-3">
+                <div class="mb-4 col-6 col-md-3 col-3">
                     <label for="basic-url" class="form-label" style="font-weight: 700;">Titulo Honorifico</label>
                     <div class="input-group">
                         @if ($registro_imnas->estatus_titulo == NULL)
@@ -98,7 +105,7 @@
                     </div>
                 </div>
 
-                <div class="mb-4 col-2">
+                <div class="mb-4 col-6 col-md-3 col-3">
                     <label for="basic-url" class="form-label" style="font-weight: 700;">Diploma</label>
                     <div class="input-group">
                         @if ($registro_imnas->estatus_diploma == NULL)
@@ -109,7 +116,7 @@
                     </div>
                 </div>
 
-                <div class="mb-4 col-2">
+                <div class="mb-4 col-6 col-md-3 col-3">
                     <label for="basic-url" class="form-label" style="font-weight: 700;">Credencial</label>
                     <div class="input-group">
                         @if ($registro_imnas->estatus_credencial == NULL)
@@ -120,7 +127,7 @@
                     </div>
                 </div>
 
-                <div class="mb-4 col-2">
+                <div class="mb-4 col-6 col-md-3 col-3">
                     <label for="basic-url" class="form-label" style="font-weight: 700;">Tira de materias</label>
                     <div class="input-group">
                         @if ($registro_imnas->estatus_tira == NULL)

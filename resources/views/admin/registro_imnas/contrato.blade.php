@@ -93,7 +93,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="name" name="name" type="text" class="form-control" value="{{$user->name}}" required>
+                                        <input id="name" name="name" type="text" class="form-control" value="{{$user->name}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -103,7 +103,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="direccion" name="direccion" type="text" class="form-control" value="{{$user->direccion}}" required>
+                                        <input id="direccion" name="direccion" type="text" class="form-control" value="{{$user->direccion}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -113,7 +113,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/rascacielos.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="city" name="city" type="text" class="form-control" value="{{$user->city}}" required>
+                                        <input id="city" name="city" type="text" class="form-control" value="{{$user->city}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -123,7 +123,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/mapa.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="state" name="state" type="text" class="form-control" value="{{$user->state}}" required>
+                                        <input id="state" name="state" type="text" class="form-control" value="{{$user->state}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -133,7 +133,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/codigo-postal.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="postcode" name="postcode" type="text" class="form-control" value="{{$user->postcode}}" required>
+                                        <input id="postcode" name="postcode" type="number" class="form-control" value="{{$user->postcode}}" required >
                                     </div>
                                 </div>
 
@@ -143,7 +143,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/naciones-unidas.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="country" name="country" type="text" class="form-control" value="{{$user->country}}" required>
+                                        <input id="country" name="country" type="text" class="form-control" value="{{$user->country}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -153,7 +153,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/ring-phone.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="telefono" name="telefono" type="text" class="form-control" value="{{$user->telefono}}" required>
+                                        <input id="telefono" name="telefono" type="number" class="form-control" value="{{$user->telefono}}" required>
                                     </div>
                                 </div>
 
@@ -163,7 +163,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="email" name="email" type="email" class="form-control" value="{{$user->email}}" required>
+                                        <input id="email" name="email" type="email" class="form-control" value="{{$user->email}}" required >
                                     </div>
                                 </div>
                             </div>
@@ -176,7 +176,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/aprender-en-linea.webp') }}" alt="" width="35px">
                                         </span>
-                                        <input id="escuela" name="escuela" type="text" class="form-control" value="{{$user->escuela}}" required>
+                                        <input id="escuela" name="escuela" type="text" class="form-control" value="{{$user->escuela}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -186,7 +186,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="direccion_escuela" name="direccion_escuela" type="text" class="form-control" value="{{optional($escuela)->direccion_escuela}}" required>
+                                        <input id="direccion_escuela" name="direccion_escuela" type="text" class="form-control" value="{{optional($escuela)->direccion_escuela}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -196,7 +196,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/rascacielos.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="city_escuela" name="city_escuela" type="text" class="form-control" value="{{optional($escuela)->city_escuela}}" required>
+                                        <input id="city_escuela" name="city_escuela" type="text" class="form-control" value="{{optional($escuela)->city_escuela}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -206,7 +206,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/mapa.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="state_escuela" name="state_escuela" type="text" class="form-control" value="{{optional($escuela)->state_escuela}}" required>
+                                        <input id="state_escuela" name="state_escuela" type="text" class="form-control" value="{{optional($escuela)->state_escuela}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -216,7 +216,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/codigo-postal.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="postcode_escuela" name="postcode_escuela" type="text" class="form-control" value="{{optional($escuela)->postcode_escuela}}" required>
+                                        <input id="postcode_escuela" name="postcode_escuela" type="number" class="form-control" value="{{optional($escuela)->postcode_escuela}}" required>
                                     </div>
                                 </div>
 
@@ -226,7 +226,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/naciones-unidas.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="country_escuela" name="country_escuela" type="text" class="form-control" value="{{optional($escuela)->country_escuela}}" required>
+                                        <input id="country_escuela" name="country_escuela" type="text" class="form-control" value="{{optional($escuela)->country_escuela}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -236,7 +236,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/ring-phone.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="telefono_escuela" name="telefono_escuela" type="text" class="form-control" value="{{$user->celular_casa}}" required>
+                                        <input id="telefono_escuela" name="telefono_escuela" type="number" class="form-control" value="{{$user->celular_casa}}" required>
                                     </div>
                                 </div>
 
@@ -246,7 +246,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="email_escuela" name="email_escuela" type="email" class="form-control" value="{{$user->email}}" required>
+                                        <input id="email_escuela" name="email_escuela" type="email" class="form-control" value="{{$user->email}}" required >
                                     </div>
                                 </div>
 
@@ -287,7 +287,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/whatsapp.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="telefono_escuela" name="telefono_escuela" type="text" class="form-control" value="{{$user->celular_casa}}">
+                                        <input id="telefono_escuela" name="telefono_escuela" type="number" class="form-control" value="{{$user->celular_casa}}">
                                     </div>
                                 </div>
                             </div>
@@ -300,7 +300,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/letter.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="nombre_referencia" name="nombre_referencia" type="text" class="form-control" value="{{optional($escuela)->nombre_referencia}}" required>
+                                        <input id="nombre_referencia" name="nombre_referencia" type="text" class="form-control" value="{{optional($escuela)->nombre_referencia}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -310,7 +310,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/location-pointer.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="direccion_referencia" name="direccion_referencia" type="text" class="form-control" value="{{optional($escuela)->direccion_referencia}}" required>
+                                        <input id="direccion_referencia" name="direccion_referencia" type="text" class="form-control" value="{{optional($escuela)->direccion_referencia}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -320,7 +320,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/rascacielos.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="city_referencia" name="city_referencia" type="text" class="form-control" value="{{optional($escuela)->city_referencia}}" required>
+                                        <input id="city_referencia" name="city_referencia" type="text" class="form-control" value="{{optional($escuela)->city_referencia}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -330,7 +330,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/mapa.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="state_referencia" name="state_referencia" type="text" class="form-control" value="{{optional($escuela)->state_referencia}}" required>
+                                        <input id="state_referencia" name="state_referencia" type="text" class="form-control" value="{{optional($escuela)->state_referencia}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -340,7 +340,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/codigo-postal.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="postcode_referencia" name="postcode_referencia" type="text" class="form-control" value="{{optional($escuela)->postcode_referencia}}" required>
+                                        <input id="postcode_referencia" name="postcode_referencia" type="number" class="form-control" value="{{optional($escuela)->postcode_referencia}}" required >
                                     </div>
                                 </div>
 
@@ -350,7 +350,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/naciones-unidas.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="country_referencia" name="country_referencia" type="text" class="form-control" value="{{optional($escuela)->country_referencia}}" required>
+                                        <input id="country_referencia" name="country_referencia" type="text" class="form-control" value="{{optional($escuela)->country_referencia}}" required oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -360,7 +360,7 @@
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/ring-phone.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="telefono_referencia" name="telefono_referencia" type="text" class="form-control" value="{{optional($escuela)->telefono_referencia}}" required>
+                                        <input id="telefono_referencia" name="telefono_referencia" type="number" class="form-control" value="{{optional($escuela)->telefono_referencia}}" required >
                                     </div>
                                 </div>
 
@@ -384,7 +384,7 @@
                                             <img src="{{ asset('assets/cam/ine.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->ine == NULL)
-                                            <input id="ine" name="ine" type="file" class="form-control" required>
+                                            <input id="ine" name="ine" type="file" class="form-control" required oninput="capitalizeInput(this)">
                                         @else
                                             <input id="ine" name="ine" type="file" class="form-control">
                                         @endif
@@ -411,7 +411,7 @@
                                             <img src="{{ asset('assets/cam/ine.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->ine_atras_registro == NULL)
-                                            <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control" required>
+                                            <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control" required oninput="capitalizeInput(this)">
                                         @else
                                             <input id="ine_atras_registro" name="ine_atras_registro" type="file" class="form-control"><br>
                                         @endif
@@ -438,7 +438,7 @@
                                             <img src="{{ asset('assets/cam/carta.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->curp == NULL)
-                                            <input id="curp" name="curp" type="file" class="form-control" required>
+                                            <input id="curp" name="curp" type="file" class="form-control" required oninput="capitalizeInput(this)">
                                         @else
                                             <input id="curp" name="curp" type="file" class="form-control"><br>
                                         @endif
@@ -465,7 +465,7 @@
                                             <img src="{{ asset('assets/cam/contrato_g.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->curp == NULL)
-                                            <input id="domicilio" name="domicilio" type="file" class="form-control" required>
+                                            <input id="domicilio" name="domicilio" type="file" class="form-control" required oninput="capitalizeInput(this)">
                                         @else
                                             <input id="domicilio" name="domicilio" type="file" class="form-control"><br>
                                         @endif
@@ -492,7 +492,7 @@
                                             <img src="{{ asset('assets/cam/camara.png') }}" alt="" width="35px">
                                         </span>
                                         @if($documentos->curp == NULL)
-                                            <input id="img_infantil" name="img_infantil" type="file" class="form-control" required>
+                                            <input id="img_infantil" name="img_infantil" type="file" class="form-control" required oninput="capitalizeInput(this)">
                                         @else
                                             <input id="img_infantil" name="img_infantil" type="file" class="form-control"><br>
                                         @endif
@@ -519,7 +519,7 @@
                                             <img src="https://plataforma.imnasmexico.com/assets/user/logotipos/imnas.webp" alt="" width="35px">
                                         </span>
                                         @if($documentos->curp == NULL)
-                                        <input id="logo" name="logo" type="file" class="form-control" accept="image/*" required>
+                                        <input id="logo" name="logo" type="file" class="form-control" accept="image/*" required oninput="capitalizeInput(this)">
                                         @else
                                             <input id="logo" name="logo" type="file" class="form-control"><br>
                                         @endif
@@ -568,14 +568,18 @@
                             </div>
 
                             <div class="row">
-                                <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">Temario/plan de estudios para tira de materias (6 subtemas como minimo, 12 subtemas como maximo por especialidad)</h4>
-                                <div class="col-12 form-group mt-4 ">
+                                <h4 class="text-left mt-3 mb-3 mt-5" style="color: #836262;font-weight: bold;">
+                                    Temario/plan de estudios para tira de materias (6 subtemas como mínimo, 12 subtemas como máximo por especialidad)
+                                </h4>
+
+                                <div class="col-12 form-group mt-4">
                                     <label for="name">Especialidad <b style="color: #f80909;">*</b></label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/user/icons/clase.webp') }}" alt="" width="35px">
                                         </span>
-                                        <input id="especialidad" name="especialidad" type="text" class="form-control" value="{{$idMateria->especialidad}}" required>
+                                        <input id="especialidad" name="especialidad" type="text" class="form-control" value="{{$idMateria->especialidad}}" required
+                                               oninput="capitalizeInput(this)">
                                     </div>
                                 </div>
 
@@ -585,7 +589,7 @@
                                         $subtema = $subtemas->skip($i - 1)->first();
                                     @endphp
 
-                                    <div class="col-12 form-group mt-4 ">
+                                    <div class="col-12 form-group mt-4">
                                         <label for="name">Subtema {{ $i }}
                                             @if($i <= 6)
                                                 <b style="color: #f80909;">*</b>
@@ -595,14 +599,12 @@
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/user/icons/aprender-en-linea-1.webp') }}" alt="" width="35px">
                                             </span>
-
                                             <input id="subtema_{{ $i }}" name="subtema_{{ $i }}" type="text" class="form-control"
-                                            value="{{ $subtema ? $subtema->subtema : '' }}"
-                                            @if($i <= 6) required @endif>
+                                                   value="{{ $subtema ? $subtema->subtema : '' }}"
+                                                   @if($i <= 6) required @endif
+                                                   oninput="capitalizeInput(this)">
                                         </div>
                                     </div>
-
-
                                 @endfor
                             </div>
 
@@ -651,6 +653,15 @@
 	<script type="text/javascript" class="init">
 
         $(document).ready(function(){
+
+            function capitalizeInput(input) {
+                input.value = input.value
+                    .toLowerCase()
+                    .replace(/\b\w/g, char => char.toUpperCase());
+            }
+            // Asigna la función a la ventana global si es necesario
+            window.capitalizeInput = capitalizeInput;
+
             $('#example').DataTable();
             $('#historial').DataTable();
 
