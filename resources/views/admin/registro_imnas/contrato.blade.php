@@ -656,8 +656,8 @@
 
             function capitalizeInput(input) {
                 input.value = input.value
-                    .toLowerCase()
-                    .replace(/\b\w/g, char => char.toUpperCase());
+                .toLowerCase()
+                .replace(/(^|\s)([a-záéíóúüñ])/g, match => match.toUpperCase());
             }
             // Asigna la función a la ventana global si es necesario
             window.capitalizeInput = capitalizeInput;
