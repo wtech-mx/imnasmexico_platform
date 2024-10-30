@@ -225,7 +225,8 @@ class BodegaController extends Controller
                 }
             }
 
-            return redirect()->back()->with('success', 'Estado de la orden y archivo actualizado correctamente.');
+            return redirect()->route('index_preparacion.bodega')
+            ->with('success', 'Creado exitosamente.');
         } else {
             return redirect()->back()->with('error', 'Hubo un problema al actualizar el estado de la orden.');
         }
@@ -298,7 +299,8 @@ class BodegaController extends Controller
 
             // Manejar la respuesta de la API
             if ($respuesta->successful()) {
-                return back()->with('success', 'El pedido ha sido actualizado en Paradisus correctamente y el stock ajustado.');
+                return redirect()->route('index_preparacion.bodega')
+                ->with('success', 'Creado exitosamente.');
             } else {
                 return back()->with('error', 'No se pudo actualizar el pedido en Paradisus.');
             }

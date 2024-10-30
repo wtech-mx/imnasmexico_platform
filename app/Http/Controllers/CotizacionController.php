@@ -439,8 +439,8 @@ class CotizacionController extends Controller
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->back()->with('success', 'Se ha actualizada');
-
+        return redirect()->route('index_preparacion.bodega')
+        ->with('success', 'Creado exitosamente.');
     }
 
     public function update_guia(Request $request, $id){
