@@ -253,6 +253,7 @@
 
     .img_logo{
         width: 100px;
+        width: {{ $tickets?->logo_cedula ?? 100 }}px!important;
     }
 
     .container_logo2{

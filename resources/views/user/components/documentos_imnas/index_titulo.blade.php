@@ -322,8 +322,7 @@
         }
 
         .img_logo{
-            width: 30px;
-        }
+            width: 30px;        }
 
         .container_logo2{
             position: absolute;
@@ -332,6 +331,7 @@
 
         .img_logo2{
             width: 150px;
+            width: {{ $tickets?->logo_titulo ?? 150 }}px!important;
         }
 
         .container_firma_director{

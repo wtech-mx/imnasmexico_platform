@@ -206,6 +206,7 @@
 
         .img_logo{
             width: 150px;
+            width: {{ $tickets?->logo_diploma ?? 150 }}px!important;
         }
 
 

@@ -101,6 +101,9 @@ class FoliosController extends Controller
         $registroimnas->promedio = $request->get('promedio');
         $registroimnas->curp_escrito = $request->get('curp');
         $registroimnas->fecha_curso = $request->get('fecha');
+        $registroimnas->logo_cedula = $request->get('logo_cedula');
+        $registroimnas->logo_diploma = $request->get('logo_diploma');
+        $registroimnas->logo_titulo = $request->get('logo_titulo');
 
         $registroimnas->update();
 
