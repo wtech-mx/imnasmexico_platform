@@ -116,7 +116,11 @@
                                     <option value="">Seleccione Curso</option>
                                     <option value="{{ $envio->id }}">{{ $envio->nombre }}</option>
                                     @foreach ($cursos as $curso)
-                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                        @if ($curso->Cursos->id == 647)
+                                            <option value="{{ $curso->id }}">{{ $curso->nombre }} - ${{ $curso->precio }}</option>
+                                        @else
+                                            <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                        @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -136,7 +140,11 @@
                                                     <option value="">Seleccione Curso</option>
                                                     <option value="{{ $envio->id }}">{{ $envio->nombre }}</option>
                                                     @foreach ($cursos as $curso)
-                                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                                        @if ($curso->Cursos->id == 647)
+                                                            <option value="{{ $curso->id }}">{{ $curso->nombre }} - ${{ $curso->precio }}</option>
+                                                        @else
+                                                            <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -147,7 +155,11 @@
                                                     <option value="">Seleccione Curso</option>
                                                     <option value="{{ $envio->id }}">{{ $envio->nombre }}</option>
                                                     @foreach ($cursos as $curso)
-                                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                                        @if ($curso->Cursos->id == 647)
+                                                            <option value="{{ $curso->id }}">{{ $curso->nombre }} - ${{ $curso->precio }}</option>
+                                                        @else
+                                                            <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -158,7 +170,11 @@
                                                     <option value="">Seleccione Curso</option>
                                                     <option value="{{ $envio->id }}">{{ $envio->nombre }}</option>
                                                     @foreach ($cursos as $curso)
-                                                    <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                                        @if ($curso->Cursos->id == 647)
+                                                            <option value="{{ $curso->id }}">{{ $curso->nombre }} - ${{ $curso->precio }}</option>
+                                                        @else
+                                                            <option value="{{ $curso->id }}">{{ $curso->nombre }} - {{ $curso->Cursos->modalidad }} / {{ $curso->Cursos->fecha_inicial }}</option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>
