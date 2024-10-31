@@ -184,6 +184,12 @@ class PagosFueraController extends Controller
                     $envio->id_usuario = $payer->id;
                     $envio->tipo = 1;
                     $envio->save();
+                }else if($order_ticket->id_tickets == 1185){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->tipo = 1;
+                    $envio->save();
                 }else if($order_ticket->id_tickets == 1009){
                     $envio = new RegistroImnas;
                     $envio->id_order = $order->id;
@@ -204,6 +210,12 @@ class PagosFueraController extends Controller
                 $order_ticket2->save();
 
                 if($order_ticket2->id_tickets == 1008){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->tipo = 1;
+                    $envio->save();
+                }else if($order_ticket->id_tickets == 1185){
                     $envio = new RegistroImnas;
                     $envio->id_order = $order->id;
                     $envio->id_usuario = $payer->id;
@@ -233,6 +245,12 @@ class PagosFueraController extends Controller
                     $envio->id_usuario = $payer->id;
                     $envio->tipo = 1;
                     $envio->save();
+                }else if($order_ticket->id_tickets == 1185){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->tipo = 1;
+                    $envio->save();
                 }else if($order_ticket3->id_tickets == 1009){
                     $envio = new RegistroImnas;
                     $envio->id_order = $order->id;
@@ -252,6 +270,12 @@ class PagosFueraController extends Controller
                 $order_ticket4->save();
 
                 if($order_ticket4->id_tickets == 1008){
+                    $envio = new RegistroImnas;
+                    $envio->id_order = $order->id;
+                    $envio->id_usuario = $payer->id;
+                    $envio->tipo = 1;
+                    $envio->save();
+                }else if($order_ticket->id_tickets == 1185){
                     $envio = new RegistroImnas;
                     $envio->id_order = $order->id;
                     $envio->id_usuario = $payer->id;
