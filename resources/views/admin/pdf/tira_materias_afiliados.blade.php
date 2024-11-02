@@ -231,7 +231,6 @@
             z-index: -1; /* Mantiene la imagen detrás del texto */
         }
 
-
         .texto_traser{
             font-size: 13px;
             line-height: 15px;

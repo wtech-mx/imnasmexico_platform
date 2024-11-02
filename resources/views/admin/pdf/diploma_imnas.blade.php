@@ -148,17 +148,17 @@
 
         .container7{
             position: absolute;
-            top:38%;
+            top:41%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            width: 710px;
+            width: 712px;
             background: #fff;
         }
 
         .texto_traser{
-            font-size: 16px;
-            line-height: 20px;
+            font-size: 14px;
+            line-height: 19px;
         }
 
         .curso_sm{
