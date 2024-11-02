@@ -52,10 +52,9 @@
                                             <input type="date" class="form-control" name="fecha_fin" value="{{ date('Y-m-d') }}">
                                         </div>
 
-
-                                        <div class="col-3">
-                                            <br>
-                                            <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #F82018; color: #ffffff;">Reporte</button>
+                                        <div class="col-3 align-self-end">
+                                            <button type="submit" name="action" value="Filtrar" class="btn btn-primary">Filtrar</button>
+                                            <button type="submit" name="action" value="Generar PDF" class="btn btn-success">Generar PDF</button>
                                         </div>
                                     </div>
                             </div>

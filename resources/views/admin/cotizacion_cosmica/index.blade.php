@@ -36,6 +36,7 @@
                         </div>
                     </div>
                     <div class="card">
+
                         <form action="{{ route('notas_cosmica.imprimir_reporte') }}" method="GET" >
 
                             <div class="card-body" style="padding-left: 1.5rem; padding-top: 1rem;">
@@ -52,9 +53,9 @@
                                             <input type="date" class="form-control" name="fecha_fin" value="{{ date('Y-m-d') }}">
                                         </div>
 
-                                        <div class="col-3">
-                                            <br>
-                                            <button class="btn btn-sm mb-0 mt-sm-0 mt-1" type="submit" style="background-color: #783E5D; color: #ffffff;">Reporte</button>
+                                        <div class="col-3 align-self-end">
+                                            <button type="submit" name="action" value="Filtrar" class="btn btn-primary">Filtrar</button>
+                                            <button type="submit" name="action" value="Generar PDF" class="btn btn-success">Generar PDF</button>
                                         </div>
                                     </div>
 
@@ -270,7 +271,7 @@
                                                                 <i class="fa fa-fw fa-edit"></i>
                                                             </a>
                                                         @endcan
-                                                        
+
                                                         <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
                                                             <i class="fa fa-truck"></i>
                                                         </a>

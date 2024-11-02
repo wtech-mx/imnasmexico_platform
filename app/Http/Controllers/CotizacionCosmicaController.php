@@ -22,27 +22,38 @@ use Session;
 
 class CotizacionCosmicaController extends Controller
 {
-    public function index(){
-
+    public function index(Request $request) {
         $this->checkMembresia();
 
-        $primerDiaDelMes = date('Y-m-01');
-        $ultimoDiaDelMes = date('Y-m-t');
+        // Obtener las fechas para el filtro
+        $fechaInicio = $request->input('fecha_inicio', date('Y-m-01'));
+        $fechaFin = $request->input('fecha_fin', date('Y-m-t'));
 
-        $now = Carbon::now();
-        $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
+        // Administradores
+        $administradores = User::where('cliente', '=', NULL)->orWhere('cliente', '=', '5')->get();
 
-        $notas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->where('estatus_cotizacion','=' , null)->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->get();
+        // Filtrar notas con estatus específicos
+        $notas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->where('estatus_cotizacion', '=', NULL)
+            ->orderBy('id', 'DESC')
+            ->where('tipo_nota', '=', 'Cotizacion')
+            ->get();
 
-        $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->where('estatus_cotizacion','=' ,'Aprobada')->where('tipo_nota','=' , 'Cotizacion')->orderBy('id','DESC')->get();
+        $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->where('estatus_cotizacion', '=', 'Aprobada')
+            ->where('tipo_nota', '=', 'Cotizacion')
+            ->orderBy('id', 'DESC')
+            ->get();
 
-        $notas_canceladas = NotasProductosCosmica::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->where('estatus_cotizacion','=' , 'Cancelada')->orderBy('id','DESC')->get();
+        $notas_canceladas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->where('estatus_cotizacion', '=', 'Cancelada')
+            ->orderBy('id', 'DESC')
+            ->get();
 
-        return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores','notas_aprobadas','notas_canceladas'));
+        // Pasar datos a la vista
+        return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores', 'notas_aprobadas', 'notas_canceladas', 'fechaInicio', 'fechaFin'));
     }
+
 
     public function index_protocolo(Request $request, $id)
     {
@@ -643,287 +654,324 @@ class CotizacionCosmicaController extends Controller
     }
 
     public function imprimir_reporte(Request $request){
-        $today =  date('d-m-Y');
 
-        $query = NotasProductosCosmica::query();
+        $this->checkMembresia();
 
-        if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
-            $fechaInicio = $request->input('fecha_inicio');
-            $fechaFin = $request->input('fecha_fin');
+        // Configuración de fechas de filtro
+        $fechaInicio = $request->input('fecha_inicio', date('Y-m-01'));
+        $fechaFin = $request->input('fecha_fin', date('Y-m-t'));
 
-            $query->whereBetween('fecha', [$fechaInicio, $fechaFin]);
+        // Administradores
+        $administradores = User::where('cliente', '=', NULL)
+            ->orWhere('cliente', '=', '5')
+            ->get();
+
+        // Filtrar cotizaciones
+        $notas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->where('estatus_cotizacion', '=', NULL)
+            ->orderBy('id', 'DESC')
+            ->where('tipo_nota', '=', 'Cotizacion')
+            ->get();
+
+        $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->where('estatus_cotizacion', '=', 'Aprobada')
+            ->where('tipo_nota', '=', 'Cotizacion')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        $notas_canceladas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->where('estatus_cotizacion', '=', 'Cancelada')
+            ->orderBy('id', 'DESC')
+            ->get();
+
+        if ($request->input('action') === 'Generar PDF') {
+            $today =  date('d-m-Y');
+
+            $query = NotasProductosCosmica::query();
+
+            if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
+                $fechaInicio = $request->input('fecha_inicio');
+                $fechaFin = $request->input('fecha_fin');
+
+                $query->whereBetween('fecha', [$fechaInicio, $fechaFin]);
+            }
+
+            $query->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->where('estatus_cotizacion', NULL);
+            $totalSum = $query->sum('total');
+            $cotizaciones = $query->get();
+
+            // 2. Obtener los IDs de las cotizaciones filtradas
+            $cotizacionIds = $cotizaciones->pluck('id');
+
+            // 3. Obtener y sumar las cantidades por producto de esas cotizaciones
+            $productosMasCotizados = ProductosNotasCosmica::whereIn('id_notas_productos', $cotizacionIds)
+                ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
+                ->groupBy('producto')
+                ->orderBy('total_cantidad', 'DESC')
+                ->limit(5)
+                ->get();
+
+                $labels = $productosMasCotizados->pluck('producto')->toArray();
+                $data = $productosMasCotizados->pluck('total_cantidad')->toArray();
+                $chartData = [
+                    "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
+                    "data" => [
+                        "labels" => $labels, // Etiquetas para los productos
+                        "datasets" => [
+                            [
+                                "label" => "Productos más cotizados",
+                                "data" => $data, // Cantidades correspondientes a cada producto
+                                "backgroundColor" => [
+                                    '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
+                                ],
+                            ],
+                        ],
+                    ],
+                    "options" => [
+                        "plugins" => [
+                            "datalabels" => [
+                                "color" => 'white', // Cambia el color del texto a blanco
+                            ],
+                        ],
+                        "legend" => [
+                            "display" => true // Mostrar la leyenda de colores
+                        ],
+                    ],
+                ];
+
+                $chartData = json_encode($chartData);
+
+                $chartURL = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData);
+
+                $chartData = file_get_contents($chartURL);
+
+                $chart = 'data:image/png;base64, '.base64_encode($chartData);
+
+                //productos menos cotizados
+
+                $productosMenosCotizados = ProductosNotasCosmica::whereIn('id_notas_productos', $cotizacionIds)
+                ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
+                ->groupBy('producto')
+                ->orderBy('total_cantidad', 'ASC')
+                ->limit(5)
+                ->get();
+
+                $labelsmenoscot = $productosMenosCotizados->pluck('producto')->toArray();
+                $data_menoscot = $productosMenosCotizados->pluck('total_cantidad')->toArray();
+                $chartData_menoscot = [
+                    "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
+                    "data" => [
+                        "labels" => $labelsmenoscot, // Etiquetas para los productos
+                        "datasets" => [
+                            [
+                                "label" => "Productos menos Cotizados",
+                                "data" => $data_menoscot, // Cantidades correspondientes a cada producto
+                                "backgroundColor" => [
+                                    '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
+                                ],
+                            ],
+                        ],
+                    ],
+                    "options" => [
+                        "plugins" => [
+                            "datalabels" => [
+                                "color" => 'white', // Cambia el color del texto a blanco
+                            ],
+                        ],
+                        "legend" => [
+                            "display" => true // Mostrar la leyenda de colores
+                        ],
+                    ],
+                ];
+
+                $chartData_menoscot = json_encode($chartData_menoscot);
+
+                $chartURL_menoscot = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData_menoscot);
+
+                $chartData_menoscot = file_get_contents($chartURL_menoscot);
+
+                $chart_menoscot = 'data:image/png;base64, '.base64_encode($chartData_menoscot);
+
+            $query2 = NotasProductosCosmica::query();
+
+            if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
+                $fechaInicio = $request->input('fecha_inicio');
+                $fechaFin = $request->input('fecha_fin');
+
+                $query2->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin]);
+            }
+
+            $query2->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado']);
+            $totalSum2 = $query2->sum('total');
+            $ventas = $query2->get();
+
+            $nota_productos = ProductosNotasCosmica::get();
+
+            // 2. Obtener los IDs de las cotizaciones filtradas
+            $ventasIds = $ventas->pluck('id');
+
+            // 3. Obtener y sumar las cantidades por producto de esas cotizaciones
+            $productosMasVendidos = ProductosNotasCosmica::whereIn('id_notas_productos', $ventasIds)
+                ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
+                ->groupBy('producto')
+                ->orderBy('total_cantidad', 'DESC')
+                ->limit(5)
+                ->get();
+
+                $labels2 = $productosMasVendidos->pluck('producto')->toArray();
+                $data2 = $productosMasVendidos->pluck('total_cantidad')->toArray();
+
+                $chartData2 = [
+                    "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
+                    "data" => [
+                        "labels" => $labels2, // Etiquetas para los productos
+                        "datasets" => [
+                            [
+                                "label" => "Productos mas Vendidos",
+                                "data" => $data2, // Cantidades correspondientes a cada producto
+                                "backgroundColor" => [
+                                    '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
+                                ],
+                            ],
+                        ],
+                    ],
+                    "options" => [
+                        "plugins" => [
+                            "datalabels" => [
+                                "color" => 'white', // Cambia el color del texto a blanco
+                            ],
+                        ],
+                        "legend" => [
+                            "display" => true // Mostrar la leyenda de colores
+                        ],
+                    ],
+                ];
+
+                $chartData2 = json_encode($chartData2);
+
+                $chartURL2 = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData2);
+
+                $chartData2 = file_get_contents($chartURL2);
+                $chart2 = 'data:image/png;base64, '.base64_encode($chartData2);
+
+                // menos productos
+
+                $productosMenosVendidos = ProductosNotasCosmica::whereIn('id_notas_productos', $ventasIds)
+                ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
+                ->groupBy('producto')
+                ->orderBy('total_cantidad', 'ASC')
+                ->limit(5)
+                ->get();
+
+                $labels3 = $productosMenosVendidos->pluck('producto')->toArray();
+                $data3 = $productosMenosVendidos->pluck('total_cantidad')->toArray();
+
+                $chartData3 = [
+                    "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
+                    "data" => [
+                        "labels" => $labels3, // Etiquetas para los productos
+                        "datasets" => [
+                            [
+                                "label" => "Productos menos Vendidos",
+                                "data" => $data3, // Cantidades correspondientes a cada producto
+                                "backgroundColor" => [
+                                    '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
+                                ],
+                            ],
+                        ],
+                    ],
+                    "options" => [
+                        "plugins" => [
+                            "datalabels" => [
+                                "color" => 'white', // Cambia el color del texto a blanco
+                            ],
+                        ],
+                        "legend" => [
+                            "display" => true // Mostrar la leyenda de colores
+                        ],
+                    ],
+                ];
+
+                $chartData3 = json_encode($chartData3);
+
+                $chartURL3 = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData3);
+
+                $chartData3 = file_get_contents($chartURL3);
+                $chart3 = 'data:image/png;base64, '.base64_encode($chartData3);
+
+                //estados grafica
+
+                // $ciudadesGrafica = NotasProductosCosmica::select('estadociudad', DB::raw('COUNT(*) as total_compras'))
+                // ->groupBy('estadociudad')
+                // ->orderBy('total_compras', 'desc')
+                // ->limit(5) // Ajusta este límite si deseas mostrar más o menos ciudades
+                // ->get();
+
+                $ciudadesData = NotasProductosCosmica::whereNotNull('estadociudad') // Filtra los registros donde estadociudad no es null
+                ->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+                ->select('estadociudad', DB::raw('COUNT(*) as total_compras'))
+                ->groupBy('estadociudad')
+                ->orderBy('total_compras', 'desc')
+                ->groupBy('estadociudad')
+                ->get();
+
+                $colores = [
+                    '#1abc9c', '#16a085', '#2ecc71', '#27ae60', '#3498db', '#2980b9', '#9b59b6',
+                    '#8e44ad', '#34495e', '#2c3e50', '#f1c40f', '#f39c12', '#e67e22', '#d35400',
+                    '#e74c3c', '#c0392b', '#ecf0f1', '#bdc3c7', '#95a5a6', '#7f8c8d', '#e91e63',
+                    '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#00bcd4', '#009688', '#4caf50',
+                    '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'
+                ];
+
+
+                // $labelsGrafica = $ciudadesData->pluck('estadociudad')->toArray();
+
+                $labelsGrafica = $ciudadesData->map(function($item) {
+                    return $item->estadociudad . ' (' . $item->total_compras . ')';
+                })->toArray();
+
+                $dataGrafica = $ciudadesData->pluck('total_compras')->toArray();
+
+                $chartDataGrafica = [
+                    "type" => 'pie', // Puedes cambiarlo a 'pie', 'line', etc.
+                    "data" => [
+                        "labels" => $labelsGrafica, // Etiquetas para las ciudades
+                        "datasets" => [
+                            [
+                                "label" => "Compras por Ciudad",
+                                "data" => $dataGrafica, // Cantidades correspondientes a cada ciudad
+                                "backgroundColor" => $colores, // Aplica los colores generados
+                            ],
+                        ],
+                    ],
+                    "options" => [
+                        "plugins" => [
+                            "datalabels" => [
+                                "color" => 'white', // Cambia el color del texto a blanco
+                            ],
+                        ],
+                        "legend" => [
+                            "display" => true // Mostrar la leyenda de colores
+                        ],
+                    ],
+                ];
+
+                $chartDataGrafica = json_encode($chartDataGrafica);
+                $chartURLGrafica = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartDataGrafica);
+
+                $chartDataGrafica = file_get_contents($chartURLGrafica);
+                $chartGrafica = 'data:image/png;base64, '.base64_encode($chartDataGrafica);
+
+
+            $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_reporte', compact('cotizaciones', 'today', 'ventas', 'chart_menoscot','chart', 'chart2','chart3','chartGrafica', 'totalSum', 'totalSum2', 'fechaInicio', 'fechaFin'));
+
+            //  return $pdf->stream();
+            return $pdf->download('Reporte Cosmica / '.$today.'.pdf');
         }
 
-        $query->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->where('estatus_cotizacion', NULL);
-        $totalSum = $query->sum('total');
-        $cotizaciones = $query->get();
-
-        // 2. Obtener los IDs de las cotizaciones filtradas
-        $cotizacionIds = $cotizaciones->pluck('id');
-
-        // 3. Obtener y sumar las cantidades por producto de esas cotizaciones
-        $productosMasCotizados = ProductosNotasCosmica::whereIn('id_notas_productos', $cotizacionIds)
-            ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
-            ->groupBy('producto')
-            ->orderBy('total_cantidad', 'DESC')
-            ->limit(5)
-            ->get();
-
-            $labels = $productosMasCotizados->pluck('producto')->toArray();
-            $data = $productosMasCotizados->pluck('total_cantidad')->toArray();
-            $chartData = [
-                "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
-                "data" => [
-                    "labels" => $labels, // Etiquetas para los productos
-                    "datasets" => [
-                        [
-                            "label" => "Productos más cotizados",
-                            "data" => $data, // Cantidades correspondientes a cada producto
-                            "backgroundColor" => [
-                                '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
-                            ],
-                        ],
-                    ],
-                ],
-                "options" => [
-                    "plugins" => [
-                        "datalabels" => [
-                            "color" => 'white', // Cambia el color del texto a blanco
-                        ],
-                    ],
-                    "legend" => [
-                        "display" => true // Mostrar la leyenda de colores
-                    ],
-                ],
-            ];
-
-            $chartData = json_encode($chartData);
-
-            $chartURL = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData);
-
-            $chartData = file_get_contents($chartURL);
-
-            $chart = 'data:image/png;base64, '.base64_encode($chartData);
-
-            //productos menos cotizados
-
-            $productosMenosCotizados = ProductosNotasCosmica::whereIn('id_notas_productos', $cotizacionIds)
-            ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
-            ->groupBy('producto')
-            ->orderBy('total_cantidad', 'ASC')
-            ->limit(5)
-            ->get();
-
-            $labelsmenoscot = $productosMenosCotizados->pluck('producto')->toArray();
-            $data_menoscot = $productosMenosCotizados->pluck('total_cantidad')->toArray();
-            $chartData_menoscot = [
-                "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
-                "data" => [
-                    "labels" => $labelsmenoscot, // Etiquetas para los productos
-                    "datasets" => [
-                        [
-                            "label" => "Productos menos Cotizados",
-                            "data" => $data_menoscot, // Cantidades correspondientes a cada producto
-                            "backgroundColor" => [
-                                '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
-                            ],
-                        ],
-                    ],
-                ],
-                "options" => [
-                    "plugins" => [
-                        "datalabels" => [
-                            "color" => 'white', // Cambia el color del texto a blanco
-                        ],
-                    ],
-                    "legend" => [
-                        "display" => true // Mostrar la leyenda de colores
-                    ],
-                ],
-            ];
-
-            $chartData_menoscot = json_encode($chartData_menoscot);
-
-            $chartURL_menoscot = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData_menoscot);
-
-            $chartData_menoscot = file_get_contents($chartURL_menoscot);
-
-            $chart_menoscot = 'data:image/png;base64, '.base64_encode($chartData_menoscot);
-
-        $query2 = NotasProductosCosmica::query();
-
-        if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
-            $fechaInicio = $request->input('fecha_inicio');
-            $fechaFin = $request->input('fecha_fin');
-
-            $query2->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin]);
-        }
-
-        $query2->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado']);
-        $totalSum2 = $query2->sum('total');
-        $ventas = $query2->get();
-
-        $nota_productos = ProductosNotasCosmica::get();
-
-        // 2. Obtener los IDs de las cotizaciones filtradas
-        $ventasIds = $ventas->pluck('id');
-
-        // 3. Obtener y sumar las cantidades por producto de esas cotizaciones
-        $productosMasVendidos = ProductosNotasCosmica::whereIn('id_notas_productos', $ventasIds)
-            ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
-            ->groupBy('producto')
-            ->orderBy('total_cantidad', 'DESC')
-            ->limit(5)
-            ->get();
-
-            $labels2 = $productosMasVendidos->pluck('producto')->toArray();
-            $data2 = $productosMasVendidos->pluck('total_cantidad')->toArray();
-
-            $chartData2 = [
-                "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
-                "data" => [
-                    "labels" => $labels2, // Etiquetas para los productos
-                    "datasets" => [
-                        [
-                            "label" => "Productos mas Vendidos",
-                            "data" => $data2, // Cantidades correspondientes a cada producto
-                            "backgroundColor" => [
-                                '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
-                            ],
-                        ],
-                    ],
-                ],
-                "options" => [
-                    "plugins" => [
-                        "datalabels" => [
-                            "color" => 'white', // Cambia el color del texto a blanco
-                        ],
-                    ],
-                    "legend" => [
-                        "display" => true // Mostrar la leyenda de colores
-                    ],
-                ],
-            ];
-
-            $chartData2 = json_encode($chartData2);
-
-            $chartURL2 = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData2);
-
-            $chartData2 = file_get_contents($chartURL2);
-            $chart2 = 'data:image/png;base64, '.base64_encode($chartData2);
-
-            // menos productos
-
-            $productosMenosVendidos = ProductosNotasCosmica::whereIn('id_notas_productos', $ventasIds)
-            ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
-            ->groupBy('producto')
-            ->orderBy('total_cantidad', 'ASC')
-            ->limit(5)
-            ->get();
-
-            $labels3 = $productosMenosVendidos->pluck('producto')->toArray();
-            $data3 = $productosMenosVendidos->pluck('total_cantidad')->toArray();
-
-            $chartData3 = [
-                "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
-                "data" => [
-                    "labels" => $labels3, // Etiquetas para los productos
-                    "datasets" => [
-                        [
-                            "label" => "Productos menos Vendidos",
-                            "data" => $data3, // Cantidades correspondientes a cada producto
-                            "backgroundColor" => [
-                                '#27ae60', '#f1c40f', '#e74c3c', '#3498db', '#9b59b6'
-                            ],
-                        ],
-                    ],
-                ],
-                "options" => [
-                    "plugins" => [
-                        "datalabels" => [
-                            "color" => 'white', // Cambia el color del texto a blanco
-                        ],
-                    ],
-                    "legend" => [
-                        "display" => true // Mostrar la leyenda de colores
-                    ],
-                ],
-            ];
-
-            $chartData3 = json_encode($chartData3);
-
-            $chartURL3 = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData3);
-
-            $chartData3 = file_get_contents($chartURL3);
-            $chart3 = 'data:image/png;base64, '.base64_encode($chartData3);
-
-            //estados grafica
-
-            // $ciudadesGrafica = NotasProductosCosmica::select('estadociudad', DB::raw('COUNT(*) as total_compras'))
-            // ->groupBy('estadociudad')
-            // ->orderBy('total_compras', 'desc')
-            // ->limit(5) // Ajusta este límite si deseas mostrar más o menos ciudades
-            // ->get();
-
-            $ciudadesData = NotasProductosCosmica::whereNotNull('estadociudad') // Filtra los registros donde estadociudad no es null
-            ->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
-            ->select('estadociudad', DB::raw('COUNT(*) as total_compras'))
-            ->groupBy('estadociudad')
-            ->orderBy('total_compras', 'desc')
-            ->groupBy('estadociudad')
-            ->get();
-
-            $colores = [
-                '#1abc9c', '#16a085', '#2ecc71', '#27ae60', '#3498db', '#2980b9', '#9b59b6',
-                '#8e44ad', '#34495e', '#2c3e50', '#f1c40f', '#f39c12', '#e67e22', '#d35400',
-                '#e74c3c', '#c0392b', '#ecf0f1', '#bdc3c7', '#95a5a6', '#7f8c8d', '#e91e63',
-                '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#00bcd4', '#009688', '#4caf50',
-                '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'
-            ];
-
-
-            // $labelsGrafica = $ciudadesData->pluck('estadociudad')->toArray();
-
-            $labelsGrafica = $ciudadesData->map(function($item) {
-                return $item->estadociudad . ' (' . $item->total_compras . ')';
-            })->toArray();
-
-            $dataGrafica = $ciudadesData->pluck('total_compras')->toArray();
-
-            $chartDataGrafica = [
-                "type" => 'pie', // Puedes cambiarlo a 'pie', 'line', etc.
-                "data" => [
-                    "labels" => $labelsGrafica, // Etiquetas para las ciudades
-                    "datasets" => [
-                        [
-                            "label" => "Compras por Ciudad",
-                            "data" => $dataGrafica, // Cantidades correspondientes a cada ciudad
-                            "backgroundColor" => $colores, // Aplica los colores generados
-                        ],
-                    ],
-                ],
-                "options" => [
-                    "plugins" => [
-                        "datalabels" => [
-                            "color" => 'white', // Cambia el color del texto a blanco
-                        ],
-                    ],
-                    "legend" => [
-                        "display" => true // Mostrar la leyenda de colores
-                    ],
-                ],
-            ];
-
-            $chartDataGrafica = json_encode($chartDataGrafica);
-            $chartURLGrafica = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartDataGrafica);
-
-            $chartDataGrafica = file_get_contents($chartURLGrafica);
-            $chartGrafica = 'data:image/png;base64, '.base64_encode($chartDataGrafica);
-
-
-        $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_reporte', compact('cotizaciones', 'today', 'ventas', 'chart_menoscot','chart', 'chart2','chart3','chartGrafica', 'totalSum', 'totalSum2', 'fechaInicio', 'fechaFin'));
-
-         //  return $pdf->stream();
-        return $pdf->download('Reporte Cosmica / '.$today.'.pdf');
+        // Si no se solicita PDF, mostrar los resultados en la vista
+        return view('admin.cotizacion_cosmica.index', compact(
+            'notas', 'administradores', 'notas_aprobadas', 'notas_canceladas', 'fechaInicio', 'fechaFin'
+        ));
     }
 }
