@@ -394,8 +394,7 @@
                 MEXICANO NATURALES AIN SPA”, SOCIEDAD CIVIL... <br><br>
 
                 XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su
-                plena comprensión y conformidad con él y lo firmó el día {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }},
-                mismo momento en que lo autorizo definitivamente.- Doy Fe. <br><br>
+                plena comprensión y conformidad con él y lo firmó el día, mismo momento en que lo autorizo definitivamente.- Doy Fe. <br><br>
 
                 Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da
                 el siguiente nombramiento conforme a Derecho, e inscrito en el Registro Nacional Instituto Mexicano Naturales
