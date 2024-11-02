@@ -184,11 +184,23 @@
         }
 
         .container10{
-            position: absolute;
+            /* position: absolute;
             top:57%;
             left: 50%;
             transform: translate(-50%, -50%);
+            text-align: center; */
+            position: absolute;
+            top:41%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             text-align: center;
+            width: 900px;
+            background: #fff;
+        }
+
+        .texto_traser{
+            font-size: 17px;
+            line-height: 23px;
         }
 
         .container5{
@@ -554,9 +566,52 @@
             <h4 class="folio2">PERMANENTE_</h4>
         </div>
 
-        <div class="container10">
+        {{-- <div class="container10">
             <h4 class="folio2">{!! $curso_formateado !!}</h4>
+        </div> --}}
+
+        <div class="container10">
+            <p class="text-center texto_traser">
+
+                <strong>ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br> <br>
+                INSTRUMENTO NÚMERO SETENTA Y CINCO MIL SEISCIENTOS SETENTA Y TRES.	 LIBRO MIL CIENTO
+                CUARENTA Y TRES.	 CIUDAD DE MÉXICO. A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE
+                REFORMA AL ARTÍCULO SEGUNDO DE LOS ESTATUTOS SOCIALES; y,	 B.- LA REFORMA AL ARTÍCULO
+                SEXTO DE LOS ESTATUTOS SOCIALES, que resulta	n de LA PROTOCOLIZACIÓN del acta de Asamblea
+                General Extraordinaria de Socios de “INSTITUTO MEXICANO NATURALES AIN SPA”, SOCIEDAD CIVIL. <br><br>
+
+                Artículo 5o de la Constitución Política de los Estados Unidos Mexicanos: <br><br>
+
+                “A ninguna persona podrá impedirse que se dedique a la profesión, industria, comercio o trabajo
+                que le acomode, siendo lícitos. ... Nadie puede ser privado del producto de su trabajo, sino por resolución judicial. <br>
+
+                Artículo 153 de la Ley General del Trabajo, apartado I, III y IV. En General mejorar el nivel educativo, la competencia
+                laboral y las habilidades de los trabajadores. <br><br>
+
+                Registrado ante la Secretaría del Trabajo y Previsión Social el Instituto Mexicano Naturales Ain Spa,
+                como Agente Capacitador Externo con Número de Registro: <strong style="color:red">RIFC680910-879-0013 </strong><br><br>
+
+                A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE REFORMA AL ARTÍCULO SEGUNDO DE
+                LOS ESTATUTOS SOCIALES; y, B.- LA REFORMA AL ARTÍCULO SEXTO DE LOS ESTATUTOS SOCIALES,
+                que resulta	n de LA PROTOCOLIZACIÓN del acta de Asamblea General Extraordinaria de Socios de “INSTITUTO
+                MEXICANO NATURALES AIN SPA”, SOCIEDAD CIVIL... <br><br>
+
+                XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su
+                plena comprensión y conformidad con él y lo firmó el día {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }},
+                mismo momento en que lo autorizo definitivamente.- Doy Fe. <br><br>
+
+                Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da
+                el siguiente nombramiento conforme a Derecho, e inscrito en el Registro Nacional Instituto Mexicano Naturales
+                Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exigen los planes de estudios
+                especializado en <br><br>
+
+            <strong class="curso_sm" style="color: red"> {!!  $curso_formateado !!}</strong> <br> <br>
+
+            Este reconocimiento es INVALIDO si no tiene todas las firmas, sellos y QR's que lo acrediten <br>
+
+            </p>
         </div>
+
 
         <div class="container3">
             <h4 class="folio3">{{$folio}}</h4>
