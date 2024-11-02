@@ -273,6 +273,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('permisos', PermisosController::class);
     Route::resource('users', UserController::class);
+    Route::patch('/admin/users/destroy/{id}', [App\Http\Controllers\UserController::class, 'destroy'])->name('users.destroy');
 
     // =============== M O D U L O   C U R S O S ===============================
     Route::get('/admin/cursos', [App\Http\Controllers\CursosController::class, 'index'])->name('cursos.index');
@@ -437,7 +438,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('cosmica/admin/pedidos/cosmika/woo', [App\Http\Controllers\PedidosWooController::class, 'index_cosmika'])->name('pedidos_cosmica_woo.index');
     Route::put('cosmica/orders/update-status/{id}', [App\Http\Controllers\PedidosWooController::class, 'updateStatuWooCosmika'])->name('orders.updateStatuWooCosmika');
 
-
     // =============== M O D U L O   N O T A S ===============================
     Route::get('/admin/notas/cursos', [App\Http\Controllers\NotasCursosController::class, 'index'])->name('notas_cursos.index');
     Route::get('/admin/notas/cursos/crear', [App\Http\Controllers\NotasCursosController::class, 'create'])->name('notas_cursos.crear');
@@ -446,7 +446,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/notas/cursos/update/{id}', [App\Http\Controllers\NotasCursosController::class, 'update'])->name('notas_cursos.update');
     Route::get('/admin/notas/cursos/imprimir/{id}', [App\Http\Controllers\NotasCursosController::class, 'imprimir'])->name('notas_cursos.imprimir');
     Route::post('/admin/notas/paquete/store', [App\Http\Controllers\NotasCursosController::class, 'store_paquete'])->name('notas_cursos.store_paquete');
-
 
     Route::get('/admin/notas/productos', [App\Http\Controllers\NotasProductosController::class, 'index'])->name('notas_productos.index');
     Route::get('/admin/productos/create', [App\Http\Controllers\NotasProductosController::class, 'create'])->name('notas_productos.create');
@@ -491,7 +490,6 @@ Route::group(['middleware' => ['auth']], function() {
      Route::get('/admin/products/bundle/edit/{id}', [App\Http\Controllers\ProductsController::class, 'edit_bundle'])->name('bundle.edit');
      Route::patch('/admin/products/bundle/update/{id}', [App\Http\Controllers\ProductsController::class, 'update_bundle'])->name('bundle.update');
 
-
      Route::post('/admin/products/import', [App\Http\Controllers\ProductsController::class, 'import_products'])->name('products.import');
      Route::post('/admin/products/store', [App\Http\Controllers\ProductsController::class, 'store'])->name('products.store');
      Route::patch('/admin/products/update/{id}', [App\Http\Controllers\ProductsController::class, 'update'])->name('products.update');
@@ -501,8 +499,6 @@ Route::group(['middleware' => ['auth']], function() {
      Route::get('/admin/products/historial', [App\Http\Controllers\ProductsController::class, 'productsHistorialVendidos'])->name('productsHistorialVendidos.index');
      Route::get('/admin/products/historial/filtro', [App\Http\Controllers\ProductsController::class, 'filtro'])->name('products_historial.filtro');
      Route::get('/admin/products/historial/pdf', [App\Http\Controllers\ProductsController::class, 'historial_pdf'])->name('products_historial.pdf');
-
-
     // =============== M O D U L O   S C A N N E R ===============================
 
      Route::get('/admin/scanner', [App\Http\Controllers\ScannerController::class, 'index'])->name('scanner.index');

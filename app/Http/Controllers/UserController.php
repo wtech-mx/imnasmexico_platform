@@ -21,7 +21,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::where('cliente','=',null)->orderBy('id','DESC')->get();
+        $data = User::where('cliente','=',null)->where('visibilidad', '=', NULL)->orderBy('id','DESC')->get();
 
         return view('admin.users.index',compact('data'));
     }
@@ -139,9 +139,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-
-        Session::flash('delete', 'Se ha eliminado sus datos con exito');
+        $password = 'IMNAS@2022_Admin';
+        $user = User::find($id);
+        $user->password = Hash::make($password);
+        $user->visibilidad = 0;
+        $user->update();
+        
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
     }
