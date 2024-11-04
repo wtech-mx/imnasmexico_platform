@@ -207,7 +207,7 @@
         .container10 {
             position: absolute;
             top: 37.5%;
-            left: 60%;
+            left: 55%;
             transform: translate(-50%, -50%);
             text-align: center;
             width: 630px;
@@ -394,7 +394,8 @@
                 MEXICANO NATURALES AIN SPA”, SOCIEDAD CIVIL... <br><br>
 
                 XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su
-                plena comprensión y conformidad con él y lo firmó el día, mismo momento en que lo autorizo definitivamente.- Doy Fe. <br><br>
+                plena comprensión y conformidad con él y lo firmó el día 17 de Junio del 2016,
+                mismo momento en que lo autorizo definitivamente.- Doy Fe. <br><br>
 
                 Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da
                 el siguiente nombramiento conforme a Derecho, e inscrito en el Registro Nacional Instituto Mexicano Naturales
