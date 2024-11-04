@@ -117,9 +117,16 @@ Productos solicitados
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    document.getElementById('status-' + sku).innerHTML = '✔️';
+                    // Selecciona todas las celdas que tengan el ID que empiece con "status-" seguido del SKU
+                    document.querySelectorAll(`td[id^="status-${sku}"]`).forEach((statusCell) => {
+                        // Solo actualiza la celda si aún no está marcada
+                        if (statusCell.innerHTML.trim() !== '✔️') {
+                            statusCell.innerHTML = '✔️';
+                            playSound(true);
+                            return; // Detiene la iteración después de actualizar la primera celda no marcada
+                        }
+                    });
                     checkAllProductsChecked();
-                    playSound(true);
                 } else {
                     playSound(false);
                     console.log(data);
@@ -138,5 +145,6 @@ Productos solicitados
     });
 
     document.addEventListener("DOMContentLoaded", checkAllProductsChecked);
+
 </script>
 @endsection

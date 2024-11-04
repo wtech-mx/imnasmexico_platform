@@ -29,6 +29,8 @@ class CotizacionCosmicaController extends Controller
         $fechaInicio = $request->input('fecha_inicio', date('Y-m-01'));
         $fechaFin = $request->input('fecha_fin', date('Y-m-t'));
 
+        $inicioMesAnterior = Carbon::now()->subMonth()->startOfMonth();
+$finMesActual = Carbon::now()->endOfMonth();
         // Administradores
         $administradores = User::where('cliente', '=', NULL)->orWhere('cliente', '=', '5')->get();
 
@@ -39,8 +41,8 @@ class CotizacionCosmicaController extends Controller
             ->where('tipo_nota', '=', 'Cotizacion')
             ->get();
 
-        $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
-            ->where('estatus_cotizacion', '=', 'Aprobada')
+        $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$inicioMesAnterior, $finMesActual])
+            ->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado'])
             ->where('tipo_nota', '=', 'Cotizacion')
             ->orderBy('id', 'DESC')
             ->get();
