@@ -28,6 +28,7 @@ Productos solicitados
                         <input class="form-control" type="text" id="scanInput" placeholder="Escanea el código aquí" autofocus>
                         <form method="POST" action="{{ route('distribuidoras.update_estatus', $nota_scaner->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
+                            <input type="hidden" name="estatus_cotizacion" value="Preparado">
                             <input type="hidden" name="_method" value="PATCH">
                                 <div class="modal-body">
                                     <table class="table">
@@ -95,6 +96,7 @@ Productos solicitados
             errorSound.play();
         }
     }
+
     document.getElementById('scanInput').addEventListener('change', function() {
         let sku = this.value.trim(); // Asegúrate de eliminar espacios en blanco al inicio o al final
         console.log(sku);
@@ -114,9 +116,16 @@ Productos solicitados
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
-                    document.getElementById('status-' + sku).innerHTML = '✔️';
+                    // Selecciona todas las celdas que tengan el ID que empiece con "status-" seguido del SKU
+                    document.querySelectorAll(`td[id^="status-${sku}"]`).forEach((statusCell) => {
+                        // Solo actualiza la celda si aún no está marcada
+                        if (statusCell.innerHTML.trim() !== '✔️') {
+                            statusCell.innerHTML = '✔️';
+                            playSound(true);
+                            return; // Detiene la iteración después de actualizar la primera celda no marcada
+                        }
+                    });
                     checkAllProductsChecked();
-                    playSound(true);
                 } else {
                     playSound(false);
                     console.log(data);

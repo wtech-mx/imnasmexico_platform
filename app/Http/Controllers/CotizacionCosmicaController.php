@@ -41,6 +41,7 @@ class CotizacionCosmicaController extends Controller
 
         $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
             ->where('estatus_cotizacion', '=', 'Aprobada')
+            ->orwhere('estatus_cotizacion', '=', 'Preparado')
             ->where('tipo_nota', '=', 'Cotizacion')
             ->orderBy('id', 'DESC')
             ->get();
