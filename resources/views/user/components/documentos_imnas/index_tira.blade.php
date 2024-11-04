@@ -161,7 +161,7 @@
             text-align: center;
         }
 
-        /* @if(!isset($tickets->promedio))
+        @if(!isset($tickets->promedio))
 
         @else
             .promedio{
@@ -171,7 +171,7 @@
                 padding: 10px;
                 background: #fff;
             }
-        @endif */
+        @endif
 
 
         .container_logo{

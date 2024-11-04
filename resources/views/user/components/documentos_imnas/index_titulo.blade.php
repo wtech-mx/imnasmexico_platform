@@ -355,8 +355,8 @@
         }
 
         .texto_traser{
-            font-size: 9px;
-            line-height: 11px;
+            font-size: 7.5px;
+            line-height: 8.7px;
         }
 
         .texto_firma_direct{
