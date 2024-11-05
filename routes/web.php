@@ -499,6 +499,9 @@ Route::group(['middleware' => ['auth']], function() {
      Route::get('/admin/products/historial', [App\Http\Controllers\ProductsController::class, 'productsHistorialVendidos'])->name('productsHistorialVendidos.index');
      Route::get('/admin/products/historial/filtro', [App\Http\Controllers\ProductsController::class, 'filtro'])->name('products_historial.filtro');
      Route::get('/admin/products/historial/pdf', [App\Http\Controllers\ProductsController::class, 'historial_pdf'])->name('products_historial.pdf');
+
+     Route::post('/products/generate-barcodes', [App\Http\Controllers\ProductsController::class, 'generateBarcodes'])->name('products.generateBarcodes');
+
     // =============== M O D U L O   S C A N N E R ===============================
 
      Route::get('/admin/scanner', [App\Http\Controllers\ScannerController::class, 'index'])->name('scanner.index');

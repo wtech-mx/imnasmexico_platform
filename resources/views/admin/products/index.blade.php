@@ -64,57 +64,67 @@
                 <div class="tab-pane fade show active" id="pills-producto" role="tabpanel" aria-labelledby="pills-producto-tab" tabindex="0">
 
                     <div class="table-responsive p-4">
-                        <table class="table table-flush" id="datatable-search">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>#</th>
-                                    <th>Foto</th>
-                                    <th>Nombre</th>
-                                    <th>Precio Normal</th>
-                                    <th>Categoria</th>
-                                    <th>Stock</th>
-                                    <th>Acciones</th>
+                        <form action="{{ route('products.generateBarcodes') }}" method="POST">
+                            @csrf
+                            <table class="table table-flush" id="datatable-search">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>#</th>
+                                        {{-- <th>Seleccionar</th> --}}
+                                        <th>Foto</th>
+                                        <th>Nombre</th>
+                                        <th>Precio Normal</th>
+                                        <th>Categoria</th>
+                                        <th>Stock</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                @foreach ($products as $product)
+                                @php
+                                    $precio_rebajado = number_format($product->precio_rebajado, 0, '.', ',');
+                                    $precio_normal = number_format($product->precio_normal, 0, '.', ',');
+                                @endphp
+                                <tr id="productRow{{ $product->id }}">
+                                    <td>{{ $product->id }} <br>
+                                        <input type="checkbox" name="selected_products[]" value="{{ $product->id }}">
+                                    </td>
+                                    {{-- <td>
+                                        <input type="checkbox" name="selected_products[]" value="{{ $product->id }}">
+                                    </td> --}}
+                                    <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
+                                    <td>
+                                        {{ $product->nombre }} <br>
+                                        SKU: {{ $product->sku }} <br>
+                                    </td>
+                                    <td>${{ $precio_normal }}</td>
+                                    <td>{{ $product->categoria }}</td>
+                                    <td>{{ $product->stock }}</td>
+                                    <td>
+
+                                            <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
+                                                <i class="fa fa-fw fa-edit"></i>
+                                            </a>
+
+                                        @can('productos-edit')
+                                            <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="PATCH">
+                                                <input type="hidden" name="categoria" value="Ocultar">
+
+                                                <button type="submit" class="btn btn-danger btn-sm">
+                                                    <i class="fa fa-fw fa-trash"></i>
+                                                </button>
+                                            </form>
+
+                                        @endcan
+                                    </td>
                                 </tr>
-                            </thead>
-                            @foreach ($products as $product)
-                            @php
-                                $precio_rebajado = number_format($product->precio_rebajado, 0, '.', ',');
-                                $precio_normal = number_format($product->precio_normal, 0, '.', ',');
-                            @endphp
-                            <tr id="productRow{{ $product->id }}">
-                                <td>{{ $product->id }}</td>
-                                <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
-                                <td>
-                                    {{ $product->nombre }} <br>
-                                    SKU: {{ $product->sku }} <br>
-                                </td>
-                                <td>${{ $precio_normal }}</td>
-                                <td>{{ $product->categoria }}</td>
-                                <td>{{ $product->stock }}</td>
-                                <td>
+                                @include('admin.products.modal_update')
+                                @endforeach
 
-                                        <a type="button" class="btn btn-sm btn-primary editProductBtn d-inline" data-id="{{ $product->id }}">
-                                            <i class="fa fa-fw fa-edit"></i>
-                                        </a>
-
-                                    @can('productos-edit')
-                                        <form class="OcultarProductForm d-inline" data-id="{{ $product->id }}">
-                                            @csrf
-                                            <input type="hidden" name="_method" value="PATCH">
-                                            <input type="hidden" name="categoria" value="Ocultar">
-
-                                            <button type="submit" class="btn btn-danger btn-sm">
-                                                <i class="fa fa-fw fa-trash"></i>
-                                            </button>
-                                        </form>
-
-                                    @endcan
-                                </td>
-                            </tr>
-                            @include('admin.products.modal_update')
-                            @endforeach
-
-                        </table>
+                            </table>
+                            <button type="submit" class="btn btn-success">Generar Códigos de Barra</button>
+                        </form>
                     </div>
 
                 </div>
@@ -273,7 +283,6 @@
 
     $(document).ready(function() {
         var activeTab;
-
 
       // Función para abrir el modal y llenar los datos del producto
       $(document).on('click', '.editProductBtn', function() {

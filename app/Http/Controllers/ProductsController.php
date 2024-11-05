@@ -15,9 +15,29 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use DB;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
+
+    public function generateBarcodes(Request $request)
+    {
+        // Obtenemos los IDs de los productos seleccionados desde el request
+        $selectedProductIds = $request->input('selected_products');
+
+        // Obtenemos los productos
+        $products = Products::whereIn('id', $selectedProductIds)->get();
+
+        // Obtener la fecha, hora y usuario
+        $fechaHora = Carbon::now()->format('d/m/Y H:i:s');
+        $usuario = Auth::user()->name;
+
+        // Generar el PDF con los códigos de barra
+        $pdf = PDF::loadView('admin.pdf.barcode', compact('products', 'fechaHora', 'usuario'));
+
+        // Descargar el PDF
+        return $pdf->download('codigos_barras_'.$fechaHora.'.pdf');
+    }
 
     public function index(Request $request){
         $products = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Producto')->orderby('nombre','asc')->get();
