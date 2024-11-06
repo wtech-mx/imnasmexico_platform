@@ -53,7 +53,7 @@
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
                                             </span>
-                                            <input id="foto" name="foto" type="file" class="form-control"  value="{{$cotizacion->foto}}">
+                                            <input id="foto" name="foto" type="file" class="form-control">
                                         </div>
 
                                         @if ($cotizacion->imagenes == NULL)

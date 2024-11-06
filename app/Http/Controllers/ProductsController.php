@@ -22,8 +22,11 @@ class ProductsController extends Controller
 
     public function generateBarcodes(Request $request)
     {
-        // Obtenemos los IDs de los productos seleccionados desde el request
         $selectedProductIds = $request->input('selected_products');
+
+        if (empty($selectedProductIds)) {
+            return response()->json(['error' => 'No products selected'], 400);
+        }
 
         // Obtenemos los productos
         $products = Products::whereIn('id', $selectedProductIds)->get();
@@ -35,9 +38,11 @@ class ProductsController extends Controller
         // Generar el PDF con los códigos de barra
         $pdf = PDF::loadView('admin.pdf.barcode', compact('products', 'fechaHora', 'usuario'));
 
-        // Descargar el PDF
-        return $pdf->download('codigos_barras_'.$fechaHora.'.pdf');
+        // Para mostrar el PDF en el navegador
+        return $pdf->stream('codigos_barras_'.$fechaHora.'.pdf');
     }
+
+
 
     public function index(Request $request){
         $products = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Producto')->orderby('nombre','asc')->get();
@@ -59,12 +64,29 @@ class ProductsController extends Controller
         return response()->json($product);
     }
 
+    private function generateUniqueSKU()
+    {
+        do {
+            // Generar un SKU aleatorio de 6 dígitos
+            $sku = str_pad(rand(0, 999999), 6, '0', STR_PAD_LEFT);
+
+            // Verificar si el SKU ya existe en la base de datos
+            $existingSKU = Products::where('sku', $sku)->first();
+        } while ($existingSKU); // Si el SKU existe, generar uno nuevo
+
+        return $sku;
+    }
+
     public function store(Request $request)
     {
-
         $product = new Products;
+
+        // Generar SKU único
+        $product->sku = $this->generateUniqueSKU();
+
         $product->nombre = $request->get('nombre');
         $product->descripcion = $request->get('descripcion');
+        $product->stock = $request->get('stock');
         $product->precio_rebajado = $request->get('precio_rebajado');
         $product->precio_normal = $request->get('precio_normal');
         $product->categoria = $request->get('categoria');
@@ -72,10 +94,9 @@ class ProductsController extends Controller
         $product->imagenes = $request->get('imagenes');
         $product->save();
 
-        Session::flash('success', 'Se ha guardado sus datos con exito');
+        Session::flash('success', 'Se ha guardado sus datos con éxito');
 
-        return redirect()->back()->with('success', 'Envio de correo exitoso.');
-
+        return redirect()->back()->with('success', 'Producto creado exitosamente.');
     }
 
     public function create_bundle(Request $request){

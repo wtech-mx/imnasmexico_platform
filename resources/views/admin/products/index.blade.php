@@ -64,8 +64,8 @@
                 <div class="tab-pane fade show active" id="pills-producto" role="tabpanel" aria-labelledby="pills-producto-tab" tabindex="0">
 
                     <div class="table-responsive p-4">
-                        <form action="{{ route('products.generateBarcodes') }}" method="POST">
-                            @csrf
+                        <form id="barcodeForm">
+
                             <table class="table table-flush" id="datatable-search">
                                 <thead class="thead-light">
                                     <tr>
@@ -88,9 +88,7 @@
                                     <td>{{ $product->id }} <br>
                                         <input type="checkbox" name="selected_products[]" value="{{ $product->id }}">
                                     </td>
-                                    {{-- <td>
-                                        <input type="checkbox" name="selected_products[]" value="{{ $product->id }}">
-                                    </td> --}}
+
                                     <th><img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/></th>
                                     <td>
                                         {{ $product->nombre }} <br>
@@ -123,7 +121,7 @@
                                 @endforeach
 
                             </table>
-                            <button type="submit" class="btn btn-success">Generar Códigos de Barra</button>
+                            <button type="button" class="btn btn-success" id="generateBarcodeBtn">Generar Códigos de Barra</button>
                         </form>
                     </div>
 
@@ -283,6 +281,46 @@
 
     $(document).ready(function() {
         var activeTab;
+
+        $('#generateBarcodeBtn').on('click', function(e) {
+            e.preventDefault();
+
+            // Obtener los productos seleccionados
+            let selectedProducts = [];
+            $('input[name="selected_products[]"]:checked').each(function() {
+                selectedProducts.push($(this).val());
+            });
+
+            if (selectedProducts.length === 0) {
+                alert('Por favor selecciona al menos un producto.');
+                return;
+            }
+
+            // Enviar los productos seleccionados al backend
+            $.ajax({
+                url: "{{ route('generateBarcodes') }}",  // La ruta hacia el controlador de Laravel
+                type: 'POST',
+                data: {
+                    selected_products: selectedProducts,
+                    _token: '{{ csrf_token() }}'  // Token CSRF para seguridad
+                },
+                xhrFields: {
+                    responseType: 'blob'  // Esto es para manejar el PDF como un archivo binario
+                },
+                success: function(response) {
+                    // Crear un enlace temporal para descargar el PDF
+                    let blob = new Blob([response], { type: 'application/pdf' });
+                    let link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = 'codigos_barras.pdf';
+                    link.click();
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al generar el PDF:', error);
+                    alert('Error al generar el PDF.');
+                }
+            });
+        });
 
       // Función para abrir el modal y llenar los datos del producto
       $(document).on('click', '.editProductBtn', function() {
