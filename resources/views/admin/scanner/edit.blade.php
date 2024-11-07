@@ -16,8 +16,7 @@
 
                     <input type="hidden" name="_method" value="PATCH">
                     <input type="hidden" name="_method" value="PATCH">
-                    <input type="hidden" id="stock_cosmica" name="stock_cosmica" value="{{ $item->stock_cosmica }}">
-                    <input type="hidden" id="stock_nas" name="stock_nas" value="{{ $item->stock_nas }}">
+
 
                     <div class="row">
                         <div class="form-group col-12">
@@ -42,6 +41,16 @@
                         <div class="form-group col-6">
                             <label for="name">Stock</label>
                             <input id="stock" name="stock" type="number" class="form-control" value="{{ $item->stock}}">
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label for="name">stock_cosmica</label>
+                            <input id="stock_cosmica" name="stock_cosmica" type="number" class="form-control" value="{{ $item->stock_cosmica}}">
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label for="name">stock_nas</label>
+                            <input id="stock_nas" name="stock_nas" type="number" class="form-control" value="{{ $item->stock_nas}}">
                         </div>
 
                         <div class="form-group col-12">
