@@ -166,29 +166,31 @@
                                                                     @endphp
 
                                                                     @if($ticket->nombre == 'CLASE GRATIS "Importancia de la macrobiótica en la Química de productos Dermocosméticos de alta Gama"')
-                                                                    <a type="button" class="btn btn-sm btn-success" href='https://api.whatsapp.com/send?phone={{$order->User->telefono}}&text=CLASE%20GRATIS%20"Importancia%20de%20la%20macrobiótica%20en%20la%20Química%20de%20productos%20Dermocosméticos%C2%A0de%C2%A0alta%C2%A0Gama"%0A%0A{{$order->User->name}}%20Conéctate%20el%20viernes%20en%20punto%20de%20las%203%3A00%20pm%20ingresando%20a%20esta%20liga%20meet.google.com%2Fkpy-nizb-udm' style="color: #ffffff" target="_blank">
-                                                                        <i class="fa fa-whatsapp"></i>
-                                                                    </a>
-                                                                    @else
-                                                                    <a type="button" class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone={{$order->User->telefono}}&text=Hola {{$order->User->name}}%0A%0A {{$mensajeModalidad }} %0A%0A {{$mensajeAdicional}}" style="color: #ffffff" target="_blank">
-                                                                        <i class="fa fa-whatsapp"></i>
-                                                                    </a>
+                                                                        <a type="button" class="btn btn-sm btn-secondary" href='https://api.whatsapp.com/send?phone={{$order->User->telefono}}&text=CLASE%20GRATIS%20"Importancia%20de%20la%20macrobiótica%20en%20la%20Química%20de%20productos%20Dermocosméticos%C2%A0de%C2%A0alta%C2%A0Gama"%0A%0A{{$order->User->name}}%20Conéctate%20el%20viernes%20en%20punto%20de%20las%203%3A00%20pm%20ingresando%20a%20esta%20liga%20meet.google.com%2Fkpy-nizb-udm' style="color: #ffffff" target="_blank">
+                                                                            <i class="fa fa-whatsapp"></i>
+                                                                        </a>
+                                                                        @else
+                                                                        <a type="button" class="btn btn-sm btn-success" href="https://api.whatsapp.com/send?phone={{$order->User->telefono}}&text=Hola {{$order->User->name}}%0A%0A {{$mensajeModalidad }} %0A%0A {{$mensajeAdicional}}" style="color: #ffffff" target="_blank">
+                                                                            <i class="fa fa-whatsapp"></i>
+                                                                        </a>
                                                                     @endif
 
                                                                     @if ($order->CursosTickets->descripcion == 'Con opción a Documentos de certificadora IMNAS')
-                                                                    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_imnas_documentos_{{ $order->User->id }}">
-                                                                        <i class="fa fa-file"></i>
-                                                                    </a>
-                                                                    @elseif ($ticket->descripcion == 'Opción a certificación a masaje holístico EC0900')
-                                                                    <a class="btn btn-sm btn-success">
-                                                                        <i class="fa fa-file"></i>
-                                                                    </a>
-                                                                    @else
-                                                                    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_documentos_{{ $order->User->id }}">
-                                                                        <i class="fa fa-file"></i>
-                                                                    </a>
+                                                                        <a class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal_imnas_documentos_{{ $order->User->id }}">
+                                                                            <i class="fa fa-file"></i>
+                                                                        </a>
+                                                                        @elseif ($ticket->descripcion == 'Opción a certificación a masaje holístico EC0900')
+                                                                        <a class="btn btn-sm btn-warning">
+                                                                            <i class="fa fa-file"></i>
+                                                                        </a>
+                                                                        @else
+                                                                        <a class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#modal_documentos_{{ $order->User->id }}">
+                                                                            <i class="fa fa-file"></i>
+                                                                        </a>
                                                                     @endif
-
+                                                                    <a class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#modal_imnas_guia_{{ $order->User->id }}">
+                                                                        <i class="fa fa-truck"></i>
+                                                                    </a>
                                                                     <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form" style="display: inline-block">
                                                                         @csrf
                                                                         <input type="hidden" name="email" id="email" value="{{ $order->User->email }}">
@@ -242,19 +244,23 @@
                                                                     <a type="button" class="btn btn-sm btn-success" href="https://wa.me/{{ $order->User->telefono }}?text={{ urlencode('Hola ' . $order->User->name . '%0A%0ACon esta liga podrás acceder a tu clase el día ' . $order->Cursos->fecha_inicial . ' a las ' . $order->Cursos->hora_inicial . '%0A%0A' . $order->Cursos->recurso) }}" style="color: #ffffff" target="_blank">
                                                                         <i class="fa fa-whatsapp"></i>
                                                                     </a>
+
                                                                     @if ($order->CursosTickets->descripcion == 'Con opción a Documentos de certificadora IMNAS')
-                                                                    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_imnas_documentos_{{ $order->User->id }}">
-                                                                        <i class="fa fa-file"></i>
-                                                                    </a>
-                                                                    @elseif ($ticket->descripcion == 'Opción a certificación a masaje holístico EC0900')
-                                                                    <a class="btn btn-sm btn-success">
-                                                                        <i class="fa fa-file"></i>
-                                                                    </a>
-                                                                    @else
-                                                                    <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_documentos_{{ $order->User->id }}">
-                                                                        <i class="fa fa-file"></i>
-                                                                    </a>
-                                                                    @endif
+                                                                        <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_imnas_documentos_{{ $order->User->id }}">
+                                                                            <i class="fa fa-file"></i>
+                                                                        </a>
+
+                                                                        @elseif ($ticket->descripcion == 'Opción a certificación a masaje holístico EC0900')
+                                                                        <a class="btn btn-sm btn-success">
+                                                                            <i class="fa fa-file"></i>
+                                                                        </a>
+                                                                        @else
+
+                                                                        <a class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#modal_documentos_{{ $order->User->id }}">
+                                                                            <i class="fa fa-file"></i>
+                                                                        </a>
+
+                                                                        @endif
 
                                                                     <form method="POST" action="{{ route('cursos.correo' ,$order->id) }}" enctype="multipart/form-data" role="form" style="display: inline-block">
                                                                         @csrf
@@ -265,6 +271,9 @@
                                                                         <button type="submit" class="btn btn-sm btn-primary" title="Enviar liga"><i class="fas fa-envelope"></i></button>
                                                                     </form>
 
+                                                                    <a class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#modal_imnas_guia_{{ $order->User->id }}">
+                                                                        <i class="fa fa-truck"></i>
+                                                                    </a>
                                                                     <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$order->Orders->id) }}"><i class="fa fa-money" title="Ver Orden"></i> </a>
                                                                 </td>
                                                             </tr>
@@ -272,6 +281,8 @@
                                                     @endif
                                                         @include('admin.cursos.modal_imnas_documentos')
                                                         @include('admin.cursos.modal_documentos')
+                                                        @include('admin.cursos.modal_guia')
+
                                                 @endforeach
                                             </tbody>
                                         </table>

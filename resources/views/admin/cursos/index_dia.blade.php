@@ -120,7 +120,9 @@
                                                         </button>
                                                     @endcan
                                                     @can('cursos-lista')
-                                                        <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}"><i class="fa fa-users"></i> {{ $curso->orderTicket->count() }}</a>
+                                                        <a type="button" class="btn btn-sm btn-primary" href="{{ route('cursos.listas',$curso->id) }}">
+                                                            <i class="fa fa-users"></i> {{ $curso->orderTicket->count() }}
+                                                        </a>
                                                     @endcan
                                                     @if ($curso->modalidad == 'Online')
                                                         <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#update_modal_{{ $curso->id }}" title="Ligas">

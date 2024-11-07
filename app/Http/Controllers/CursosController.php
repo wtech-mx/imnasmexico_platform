@@ -422,6 +422,32 @@ class CursosController extends Controller
         return redirect()->back()->with('success', 'curso actualizado con exito.');
     }
 
+    public function update_guia(Request $request, $id){
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_guias = base_path('../public_html/plataforma.imnasmexico.com/guias');
+        }else{
+            $ruta_guias = public_path() . '/guias';
+        }
+
+        $guias = OrdersTickets::find($id);
+
+        if ($request->hasFile("guia_doc")) {
+            $file = $request->file('guia_doc');
+            $path = $ruta_guias;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $guias->guia = $fileName;
+        }
+
+        $guias->update();
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back()->with('success', 'Actualziado con exito');
+    }
+
+
     public function update_meet(Request $request, $id){
 
         $fechaHoraActual = date('Y-m-d H:i:s');

@@ -284,6 +284,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/cursos/store', [App\Http\Controllers\CursosController::class, 'store'])->name('cursos.store');
     Route::get('/admin/cursos/edit/{id}', [App\Http\Controllers\CursosController::class, 'edit'])->name('cursos.edit');
     Route::patch('/admin/cursos/update/{id}', [App\Http\Controllers\CursosController::class, 'update'])->name('cursos.update');
+    Route::patch('/admin/cursos/update/guia/{id}', [App\Http\Controllers\CursosController::class, 'update_guia'])->name('cursos.update_guia');
     Route::patch('/admin/cursos/link_meet/{id}', [App\Http\Controllers\CursosController::class, 'update_meet'])->name('cursos.update_meet');
     Route::patch('/admin/cursos/material_clase/{id}', [App\Http\Controllers\CursosController::class, 'update_materialclase'])->name('cursos.material_clase');
     Route::delete('/admin/cursos/delete/{id}', [App\Http\Controllers\CursosController::class, 'destroy'])->name('cursos.destroy');
