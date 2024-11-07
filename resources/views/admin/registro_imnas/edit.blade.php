@@ -20,18 +20,29 @@
                         <label for="name">Fecha de solicitud</label>
                         <input type="date" class="form-control" value="{{ $registro_imnas->fecha_compra }}" readonly>
                     </div>
+
                     <div class="col-6 form-group">
                         <label for="name">Fecha realizados</label>
                         <input type="date" class="form-control" value="{{ $registro_imnas->fecha_realizados }}" readonly>
                     </div>
+
                     <div class="col-6 form-group">
                         <label for="name">Fecha de envio</label>
                         <input type="date" class="form-control" value="{{ $registro_imnas->fecha_enviados }}" readonly>
                     </div>
+
                     <div class="col-6 form-group">
                         <label for="name">Guia de envio</label>
-                        <input id="num_guia" name="num_guia" type="text" class="form-control" value="{{ $registro_imnas->num_guia }}" required>
+                        <input id="num_guia" name="num_guia" type="file" class="form-control" value="{{ $registro_imnas->num_guia }}" required>
+
                     </div>
+
+                    <div class="col-12">
+                        @if (pathinfo($registro_imnas->num_guia, PATHINFO_EXTENSION) == 'pdf')
+                            <iframe class="mt-2" src="{{asset('guias/' .$registro_imnas->num_guia)}}" style="width: 100%; height: 450px;"></iframe>
+                        @endif
+                    </div>
+
                 </div>
 
                 <div class="modal-footer">

@@ -871,8 +871,24 @@ class RegistroIMNASController extends Controller
     }
 
     public function update_guia(Request $request){
+
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_guias = base_path('../public_html/plataforma.imnasmexico.com/guias');
+        }else{
+            $ruta_guias = public_path() . '/guias';
+        }
+
         $registro_imnas = RegistroImnas::where('id', $request->id_registro)->firstOrFail();
-        $registro_imnas->num_guia = $request->get('num_guia');
+
+        if ($request->hasFile("num_guia")) {
+            $file = $request->file('num_guia');
+            $path = $ruta_guias;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $registro_imnas->num_guia = $fileName;
+        }
+
         $registro_imnas->fecha_enviados = date('Y-m-d');
         $registro_imnas->update();
 
