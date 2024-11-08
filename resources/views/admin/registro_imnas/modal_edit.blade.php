@@ -45,6 +45,36 @@
                         </div>
 
                         <div class="col-6 form-group">
+                            <label for="name">Direccion</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/user/icons/edificio.png') }}" alt="" width="35px" style="margin-right: 1rem">
+                                </span>
+                                <input type="text" class="form-control" value="{{$item->User->direccion}}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label for="name">Ciudad</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/user/icons/flag.png') }}" alt="" width="35px" style="margin-right: 1rem">
+                                </span>
+                                <input type="text" class="form-control" value="{{$item->User->city}}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-6 form-group">
+                            <label for="name">Codigo Postal</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/user/icons/cp.png') }}" alt="" width="35px" style="margin-right: 1rem">
+                                </span>
+                                <input type="text" class="form-control" value="{{$item->User->postcode}}" readonly>
+                            </div>
+                        </div>
+
+                        <div class="col-6 form-group">
                             <label for="name">Especialidad</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">
