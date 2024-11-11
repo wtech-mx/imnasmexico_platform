@@ -228,12 +228,12 @@
                                                     </td> --}}
                                                     <td>
                                                         @php
-                                                        $fecha = $item->fecha;
+                                                        $fecha = $item->fecha_preparacion;
                                                         $fecha_timestamp = strtotime($fecha);
                                                         $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                                                         @endphp
                                                         <h5>
-                                                            {{$fecha_formateada}}
+                                                            {{$item->fecha_preparacion}}
                                                         </h5>
                                                     </td>
                                                     <td><h5>${{ $item->total }}</h5></td>
