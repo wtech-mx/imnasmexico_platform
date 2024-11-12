@@ -10,7 +10,7 @@ Productos solicitados Cosmica
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('ordenes_cosmica_update.orden', $pedido->id) }}" enctype="multipart/form-data" role="form">
+                        <form id="mi-formulario" method="POST" action="{{ route('ordenes_cosmica_update.orden', $pedido->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
                             <input type="hidden" name="_method" value="PATCH">
                             <div class="modal-body">
@@ -141,7 +141,7 @@ Productos solicitados Cosmica
                             </div>
                             @if ($pedido->estatus != 'Finalizada')
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                    <button type="submit" class="btn close-modal" id="guardar-btn" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                 </div>
                             @endif
                         </form>
@@ -163,6 +163,16 @@ Productos solicitados Cosmica
             // Marca el producto como "eliminado" para que se procese al guardar
             $('#eliminar_producto_' + productoId).val(1);
         });
+    });
+
+    document.getElementById('guardar-btn').addEventListener('click', function() {
+        // Cambiar el texto y deshabilitar el botón
+        this.disabled = true;
+        this.style.backgroundColor = '#ccc';
+        this.innerText = 'Guardando...';
+
+        // Enviar el formulario
+        document.getElementById('mi-formulario').submit();
     });
 </script>
 @endsection

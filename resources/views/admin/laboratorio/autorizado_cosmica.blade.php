@@ -119,5 +119,12 @@ Productos Autorizadoa Cosmica
             $('#eliminar_producto_' + productoId).val(1);
         });
     });
+
+    document.getElementById('guardar-btn').addEventListener('click', function() {
+        // Desactivar el botón y cambiar su estilo
+        this.disabled = true;
+        this.style.backgroundColor = '#ccc'; // Cambia el color para mostrar que está deshabilitado
+        this.innerText = 'Guardando...'; // Opcional: Cambiar el texto mientras se procesa
+    });
 </script>
 @endsection

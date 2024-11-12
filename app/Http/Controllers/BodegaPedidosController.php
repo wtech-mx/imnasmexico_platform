@@ -267,7 +267,7 @@ class BodegaPedidosController extends Controller
         $bodegaPedidoRealizado = BodegaPedidosCosmica::where('estatus','=','Realizado')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoAprobado = BodegaPedidosCosmica::where('estatus','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoConfirmado = BodegaPedidosCosmica::where('estatus','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
-        $bodegaPedidoFinalizada = BodegaPedidosCosmica::where('estatus','=','Finalizada')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoFinalizada = BodegaPedidosCosmica::where('estatus','=','Finalizado')->orderBy('fecha_pedido','DESC')->get();
 
         return view('admin.products.ordenar_cosmica.index', compact('bodegaPedidoFinalizada','bodegaPedidoAprobado','bodegaPedidoRealizado','bodegaPedidoConfirmado'));
     }
@@ -401,5 +401,5 @@ class BodegaPedidosController extends Controller
 
     }
 
-    
+
 }

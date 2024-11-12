@@ -85,12 +85,12 @@
                                     <td>{{ \Carbon\Carbon::parse($item->fecha_aprovado_lab)->translatedFormat('d F Y h:i a') }}</td>
                                     <td>{{ $item->estatus_lab }}</td>
                                     <td>
-                                        <a class="btn btn-xs btn-success text-white" target="_blank" href="{{ route('productos_stock.show', $item->id) }}">
+                                        <a class="btn btn-xs btn-success text-white" target="_blank" href="{{ route('productos_stock_cosmica.show', $item->id) }}">
                                             <i class="fa fa-file"></i> Ver
                                         </a>
 
                                         @if ($item->estatus_lab != 'Realizado')
-                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $item->id) }}">
+                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock_cosmica.imprimir', $item->id) }}">
                                                 <i class="fa fa-file"></i> Descargar PDF
                                             </a>
                                         @endif
