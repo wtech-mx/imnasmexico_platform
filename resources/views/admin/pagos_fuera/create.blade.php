@@ -110,7 +110,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group col-12">
+                            <div class="form-group col-10">
                                 <label class="mt-2">Curso</label> <br>
                                 <select name="campo1" class="form-select d-inline-block curso" style="width: 70%!important;">
                                     <option value="">Seleccione Curso</option>
@@ -125,6 +125,13 @@
                                 </select>
                             </div>
 
+                            <div class="form-group col-2">
+                                <label for="name">Cantidad</label>
+                                <div class="input-group mb-3">
+                                    <input id="cantidad" name="cantidad" type="number" class="form-control" value="1" style="width: 30%!important;">
+                                </div>
+                            </div>
+
                             <div class="col-6 mt-3">
                                 <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                     Agregar otro curso
@@ -134,7 +141,7 @@
                             <div class="col-12">
                                 <div class="collapse " id="collapseExample">
                                         <div class="row">
-                                            <div class="col-12">
+                                            <div class="col-10">
                                                 <label class="mt-2">Curso 2</label> <br>
                                                 <select name="campo2" class="form-select d-inline-block curso2" style="width: 70%!important;">
                                                     <option value="">Seleccione Curso</option>
@@ -149,7 +156,14 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-12">
+                                            <div class="form-group col-2">
+                                                <label for="name">Cantidad 2</label>
+                                                <div class="input-group mb-3">
+                                                    <input id="cantidad2" name="cantidad2" type="number" class="form-control" value="1" style="width: 30%!important;">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-10">
                                                 <label class="mt-2">Curso 3</label> <br>
                                                 <select name="campo3" class="form-select d-inline-block curso3" style="width: 70%!important;">
                                                     <option value="">Seleccione Curso</option>
@@ -164,7 +178,14 @@
                                                 </select>
                                             </div>
 
-                                            <div class="col-12">
+                                            <div class="form-group col-2">
+                                                <label for="name">Cantidad 3</label>
+                                                <div class="input-group mb-3">
+                                                    <input id="cantidad3" name="cantidad3" type="number" class="form-control" value="1" style="width: 30%!important;">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-10">
                                                 <label class="mt-2">Curso 4</label> <br>
                                                 <select name="campo4" class="form-select d-inline-block curso4" style="width: 70%!important;">
                                                     <option value="">Seleccione Curso</option>
@@ -177,6 +198,13 @@
                                                         @endif
                                                     @endforeach
                                                 </select>
+                                            </div>
+
+                                            <div class="form-group col-2">
+                                                <label for="name">Cantidad 4</label>
+                                                <div class="input-group mb-3">
+                                                    <input id="cantidad4" name="cantidad4" type="number" class="form-control" value="1" style="width: 30%!important;">
+                                                </div>
                                             </div>
                                         </div>
                                 </div>

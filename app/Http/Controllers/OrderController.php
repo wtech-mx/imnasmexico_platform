@@ -138,10 +138,11 @@ class OrderController extends Controller
                     $envio = new RegistroImnas;
                     $envio->id_order = $order->id;
                     $envio->id_usuario = $payer->id;
-                    if($details['id'] == 1008){
-                        $envio->tipo = 1;
-                    }elseif($details['id'] == 1009){
+                    $envio->id_ticket = $details['id'];
+                    if($details['id'] == 1009){
                         $envio->tipo = 2;
+                    }else{
+                        $envio->tipo = 1;
                     }
                     $envio->save();
 
@@ -687,10 +688,10 @@ class OrderController extends Controller
                 $envio = new RegistroImnas;
                 $envio->id_order = $order->id;
                 $envio->id_usuario = $payer->id;
-                if($details['id'] == 1008){
-                    $envio->tipo = 1;
-                }elseif($details['id'] == 1009){
+                if($details['id'] == 1009){
                     $envio->tipo = 2;
+                }else{
+                    $envio->tipo = 1;
                 }
                 $envio->save();
 

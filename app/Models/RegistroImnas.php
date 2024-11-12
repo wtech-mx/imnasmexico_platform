@@ -56,4 +56,9 @@ class RegistroImnas extends Model
     {
         return $this->belongsTo(Orders::class, 'id_order');
     }
+
+    public function CursosTickets()
+    {
+       return $this->belongsTo(CursosTickets::class,'id_ticket');
+    }
 }

@@ -51,4 +51,9 @@ class Orders extends Model
     {
         return $this->belongsTo(PagosFuera::class, 'id_externo');
     }
+
+    public function orderTickets()
+{
+    return $this->hasMany('App\Models\OrdersTickets', 'id_order', 'id');
+}
 }

@@ -24,7 +24,7 @@
                                             <th>Nombre</th>
                                             <th>Comentario</th>
                                             <th>Folio</th>
-                                            <th>Guia</th>
+                                            <th>Documento</th>
                                             <th>Especialidad</th>
                                             <th>Acciones</th>
                                         </tr>
@@ -58,7 +58,13 @@
                                                     @endphp
                                                 </td>
                                                 <td><p>{{ $registro_imnas->folio }}</p></td>
-                                                <td><p>{{ $registro_imnas->num_guia }}</p></td>
+                                                <td>
+                                                    @if ($registro_imnas->id_ticket == NULL)
+                                                    
+                                                    @else
+                                                        <b>{{ $registro_imnas->CursosTickets->nombre }}</b>
+                                                    @endif
+                                                </td>
 
                                                 <td>
                                                     @php

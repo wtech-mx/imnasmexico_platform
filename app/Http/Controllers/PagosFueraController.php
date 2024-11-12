@@ -89,7 +89,7 @@ class PagosFueraController extends Controller
         }elseif($request->get('clase_grabada') != NULL){
             $curso = $clase->nombre . '- clase grabada.';
         }else{
-            $curso = $cursos->nombre;
+            $curso = $request->get('cantidad') .' '. $cursos->nombre;
         }
 
         $pagos_fuera = new PagosFuera;
@@ -178,24 +178,36 @@ class PagosFueraController extends Controller
                 $cursos = CursosTickets::where('id','=', $order_ticket->id_tickets)->first();
                 $order_ticket->id_curso = $cursos->id_curso;
 
-                if($order_ticket->id_tickets == 1008){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->tipo = 1;
-                    $envio->save();
-                }else if($order_ticket->id_tickets == 1185){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->tipo = 1;
-                    $envio->save();
-                }else if($order_ticket->id_tickets == 1009){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->tipo = 2;
-                    $envio->save();
+                for($i = 1; $i <= $request->get('cantidad'); $i++){
+                    if($order_ticket->id_tickets == 1008){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo1');
+                        $envio->tipo = 1;
+                        $envio->save();
+                    }else if($order_ticket->id_tickets == 1185){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo1');
+                        $envio->tipo = 1;
+                        $envio->save();
+                    }else if($order_ticket->id_tickets == 1257 || $order_ticket->id_tickets == 1258 || $order_ticket->id_tickets == 1259 || $order_ticket->id_tickets == 1260 || $order_ticket->id_tickets == 1261){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo1');
+                        $envio->tipo = 1;
+                        $envio->save();
+                    }else if($order_ticket->id_tickets == 1009){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo1');
+                        $envio->tipo = 2;
+                        $envio->save();
+                    }
                 }
             }
             $order_ticket->save();
@@ -209,24 +221,36 @@ class PagosFueraController extends Controller
                 $order_ticket2->id_curso = $cursos2->id_curso;
                 $order_ticket2->save();
 
-                if($order_ticket2->id_tickets == 1008){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->tipo = 1;
-                    $envio->save();
-                }else if($order_ticket->id_tickets == 1185){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->tipo = 1;
-                    $envio->save();
-                }else if($order_ticket2->id_tickets == 1009){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->tipo = 2;
-                    $envio->save();
+                for($i = 1; $i <= $request->get('cantidad2'); $i++){
+                    if($order_ticket->id_tickets == 1008){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo2');
+                        $envio->tipo = 1;
+                        $envio->save();
+                    }else if($order_ticket->id_tickets == 1185){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo2');
+                        $envio->tipo = 1;
+                        $envio->save();
+                    }else if($order_ticket->id_tickets == 1257 || $order_ticket->id_tickets == 1258 || $order_ticket->id_tickets == 1259 || $order_ticket->id_tickets == 1260 || $order_ticket->id_tickets == 1261){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo2');
+                        $envio->tipo = 1;
+                        $envio->save();
+                    }else if($order_ticket->id_tickets == 1009){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo2');
+                        $envio->tipo = 2;
+                        $envio->save();
+                    }
                 }
             }
 
@@ -239,24 +263,36 @@ class PagosFueraController extends Controller
                 $order_ticket3->id_curso = $cursos3->id_curso;
                 $order_ticket3->save();
 
-                if($order_ticket3->id_tickets == 1008){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->tipo = 1;
-                    $envio->save();
-                }else if($order_ticket->id_tickets == 1185){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->tipo = 1;
-                    $envio->save();
-                }else if($order_ticket3->id_tickets == 1009){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->tipo = 2;
-                    $envio->save();
+                for($i = 1; $i <= $request->get('cantidad3'); $i++){
+                    if($order_ticket->id_tickets == 1008){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo3');
+                        $envio->tipo = 1;
+                        $envio->save();
+                    }else if($order_ticket->id_tickets == 1185){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo3');
+                        $envio->tipo = 1;
+                        $envio->save();
+                    }else if($order_ticket->id_tickets == 1257 || $order_ticket->id_tickets == 1258 || $order_ticket->id_tickets == 1259 || $order_ticket->id_tickets == 1260 || $order_ticket->id_tickets == 1261){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo3');
+                        $envio->tipo = 1;
+                        $envio->save();
+                    }else if($order_ticket->id_tickets == 1009){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo3');
+                        $envio->tipo = 2;
+                        $envio->save();
+                    }
                 }
             }
 
@@ -269,24 +305,36 @@ class PagosFueraController extends Controller
                 $order_ticket4->id_curso = $cursos4->id_curso;
                 $order_ticket4->save();
 
-                if($order_ticket4->id_tickets == 1008){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->tipo = 1;
-                    $envio->save();
-                }else if($order_ticket->id_tickets == 1185){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->tipo = 1;
-                    $envio->save();
-                }else if($order_ticket4->id_tickets == 1009){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->tipo = 2;
-                    $envio->save();
+                for($i = 1; $i <= $request->get('cantidad4'); $i++){
+                    if($order_ticket->id_tickets == 1008){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo4');
+                        $envio->tipo = 1;
+                        $envio->save();
+                    }else if($order_ticket->id_tickets == 1185){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo4');
+                        $envio->tipo = 1;
+                        $envio->save();
+                    }else if($order_ticket->id_tickets == 1257 || $order_ticket->id_tickets == 1258 || $order_ticket->id_tickets == 1259 || $order_ticket->id_tickets == 1260 || $order_ticket->id_tickets == 1261){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo4');
+                        $envio->tipo = 1;
+                        $envio->save();
+                    }else if($order_ticket->id_tickets == 1009){
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $request->get('campo4');
+                        $envio->tipo = 2;
+                        $envio->save();
+                    }
                 }
             }
 
