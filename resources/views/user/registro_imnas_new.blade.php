@@ -151,7 +151,11 @@ Mi perfil- {{$cliente->name}}
                             </div>
                             <h4 style="font-size: 24px">
                                 @if ($recien_comprado->tipo == '1')
-                                    Emisión por alumno
+                                    @if ($recien_comprado->id_ticket == NULL)
+                                        Emisión por alumno
+                                    @else
+                                        {{$recien_comprado->CursosTickets->nombre}}
+                                    @endif
                                 @elseif ($recien_comprado->tipo == '2')
                                     Especialidad extra
                                 @endif
