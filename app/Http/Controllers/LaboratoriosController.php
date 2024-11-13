@@ -7,6 +7,7 @@ use App\Models\BodegaPedidos;
 use App\Models\BodegaPedidosCosmica;
 use App\Models\BodegaPedidosProductosCosmica;
 use App\Models\BodegaPedidosProductos;
+use App\Models\HistorialStock;
 use App\Models\Products;
 use Session;
 
@@ -173,5 +174,9 @@ class LaboratoriosController extends Controller
 
     }
 
+    public function getStockHistoryCosmica($id){
+        $historial = HistorialStock::where('id_producto', $id)->get();
+        return response()->json($historial);
+    }
 
 }

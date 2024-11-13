@@ -243,7 +243,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/laboratorio/nas', [App\Http\Controllers\LaboratoriosController::class, 'index_nas'])->name('laboratorio.nas');
     Route::get('/cosmica/laboratorio', [App\Http\Controllers\LaboratoriosController::class, 'index_cosmica'])->name('laboratorio.cosmica');
     Route::get('/laboratorio/nas/prodcutos', [App\Http\Controllers\LaboratoriosController::class, 'index_productos_nas'])->name('laboratorio_producto.nas');
-
+    Route::get('/laboratorio/products/{id}/stock-history', [App\Http\Controllers\LaboratoriosController::class, 'getStockHistoryCosmica'])->name('products.stockHistoryCosmica');
 
     Route::get('/admin/ordenes/autorizados/{id}', [App\Http\Controllers\LaboratoriosController::class, 'show'])->name('productos_autorizado.show');
     Route::get('/cosmica/admin/ordenes/autorizados/{id}', [App\Http\Controllers\LaboratoriosController::class, 'show_cosmica'])->name('productos_autorizado.show_cosmica');
