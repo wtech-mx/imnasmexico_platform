@@ -15,6 +15,10 @@ use App\Http\Controllers\PruebaApiController;
 Route::get('api/preparacion', [PruebaApiController::class, 'index_preparacion'])->name('index_preparacion.api');
 Route::get('envia/shipments', [ShipmentController::class, 'getShipments'])->name('shipments.index');
 
+Route::get('/admin/productos/stock/firma/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_nas_firma'])->name('ordenes_nas.firma');
+Route::get('/cosmica/admin/productos/stock/firma/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_firma'])->name('ordenes_cosmica.firma');
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -626,7 +630,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/productos/imprimir/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'imprimir'])->name('productos_stock.imprimir');
 
     Route::get('/admin/productos/stock/ordenes', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_nas'])->name('ordenes_nas.index');
-    Route::get('/admin/productos/stock/firma/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_nas_firma'])->name('ordenes_nas.firma');
     Route::patch('/admin/productos/stock/firma/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_nas_firma_update'])->name('ordenes_nas_update.firma');
     Route::patch('/admin/productos/stock/orden/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_nas_orden_update'])->name('ordenes_nas_update.orden');
 
@@ -636,7 +639,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/cosmica/admin/productos/imprimir/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'imprimir_cosmica'])->name('productos_stock_cosmica.imprimir');
 
     Route::get('/cosmica/admin/productos/stock/ordenes', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica'])->name('ordenes_cosmica.index');
-    Route::get('/cosmica/admin/productos/stock/firma/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_firma'])->name('ordenes_cosmica.firma');
     Route::patch('/cosmica/admin/productos/stock/firma/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_firma_update'])->name('ordenes_cosmica_update.firma');
     Route::patch('/cosmica/admin/productos/stock/orden/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_orden_update'])->name('ordenes_cosmica_update.orden');
 
