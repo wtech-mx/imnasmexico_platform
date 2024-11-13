@@ -30,7 +30,7 @@ class CotizacionCosmicaController extends Controller
         $fechaFin = $request->input('fecha_fin', date('Y-m-t'));
 
         $inicioMesAnterior = Carbon::now()->subMonth()->startOfMonth();
-$finMesActual = Carbon::now()->endOfMonth();
+        $finMesActual = Carbon::now()->endOfMonth();
         // Administradores
         $administradores = User::where('cliente', '=', NULL)->orWhere('cliente', '=', '5')->get();
 
@@ -55,7 +55,6 @@ $finMesActual = Carbon::now()->endOfMonth();
         // Pasar datos a la vista
         return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores', 'notas_aprobadas', 'notas_canceladas', 'fechaInicio', 'fechaFin'));
     }
-
 
     public function index_protocolo(Request $request, $id)
     {
@@ -98,7 +97,6 @@ $finMesActual = Carbon::now()->endOfMonth();
 
 
     }
-
 
     public function buscador(Request $request){
         $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();

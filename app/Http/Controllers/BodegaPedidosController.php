@@ -72,7 +72,7 @@ class BodegaPedidosController extends Controller
         $bodegaPedidoRealizado = BodegaPedidos::where('estatus','=','Realizado')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoAprobado = BodegaPedidos::where('estatus','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoConfirmado = BodegaPedidos::where('estatus','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
-        $bodegaPedidoFinalizada = BodegaPedidos::where('estatus','=','Finalizada')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoFinalizada = BodegaPedidos::where('estatus','=','Finalizado')->orderBy('fecha_pedido','DESC')->get();
 
         return view('admin.products.ordenar.index', compact('bodegaPedidoFinalizada','bodegaPedidoAprobado','bodegaPedidoRealizado','bodegaPedidoConfirmado'));
     }

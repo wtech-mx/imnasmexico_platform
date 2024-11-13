@@ -148,6 +148,7 @@
           $('#nombre').val(product.nombre);
           $('#titulo_modal').val(product.nombre);
           $('#descripcion').val(product.descripcion);
+          $('#cantidad_aumentada').val(product.cantidad_aumentada);
           $('#precio_normal').val(product.precio_normal);
           $('#stock').val(product.stock);
           $('#stock_cosmica').val(product.stock_cosmica);
@@ -182,6 +183,7 @@
             stock_nas: $('#stock_nas').val(),
             stock: $('#stock').val(),
             descripcion: $('#descripcion').val(),
+            cantidad_aumentada: $('#cantidad_aumentada').val(),
             imagenes: $('#imagenes').val(),
             _token: $('meta[name="csrf-token"]').attr('content'), // Token CSRF
             _method: 'PATCH' // Especificamos el método PATCH para Laravel
@@ -215,6 +217,55 @@
         });
     });
 
+
+              // Función para cargar el historial de stock en la pestaña del modal
+              function loadStockHistory(productId) {
+                $.ajax({
+                    url: "{{ route('products.stockHistory', ':id') }}".replace(':id', productId), // Ruta de Laravel para obtener el historial
+                    type: 'GET',
+                    success: function(history) {
+                            console.log('Historial recibido:', history); // Añadir esto para verificar los datos recibidos
+                            $('#pills-profile .row').empty();
+
+                            let historyHtml = '<table class="table table-bordered">';
+                            historyHtml += '<thead><tr><th>Fecha</th><th>Cantidad</th><th>Usuario</th></tr></thead><tbody>';
+
+                            $.each(history, function(index, record) {
+                                console.log('Registro individual:', record); // Verificar el contenido de cada registro
+                                let date = new Date(record.created_at);
+
+                                // Si la fecha no se puede interpretar, este punto es donde podrías ver si hay algún error con el contenido.
+                                if (isNaN(date.getTime())) {
+                                    console.error('Fecha inválida:', record.created_at);
+                                }
+
+                                let formattedDate = date.toLocaleDateString('es-ES', {
+                                    day: 'numeric',
+                                    month: 'long',
+                                    year: 'numeric'
+                                });
+                                let formattedTime = date.toLocaleTimeString('es-ES', {
+                                    hour: '2-digit',
+                                    minute: '2-digit'
+                                });
+
+                                historyHtml += `<tr>
+                                    <td>${formattedDate} a las ${formattedTime}</td>
+                                    <td>${record.stock_cosmica}</td>
+                                    <td>${record.user}</td>
+                                </tr>`;
+                        });
+
+                        historyHtml += '</tbody></table>';
+                        $('#pills-profile .row').html(historyHtml);
+                    },
+
+                    error: function(xhr, status, error) {
+                        console.error('Error al cargar el historial:', error);
+                        alert('Error al cargar el historial');
+                    }
+                });
+            }
 
   });
 

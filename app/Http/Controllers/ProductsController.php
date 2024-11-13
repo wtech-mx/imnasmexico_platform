@@ -302,6 +302,13 @@ class ProductsController extends Controller
             ->update(['producto' => $request->get('nombre')]); // Actualiza el nombre al nuevo
         }
 
+        if($request->get('cantidad_aumentada') == NULL){
+            $suma = $request->get('stock_cosmica');
+        }else{
+            $suma = $product->stock_cosmica + $request->get('cantidad_aumentada');
+        }
+
+
         // Guardar los valores anteriores del producto en la tabla historial_stock
         $historialData = [
             'id_producto' => $product->id,
@@ -311,7 +318,7 @@ class ProductsController extends Controller
             'sku' => $product->sku,
             'stock' => "Antes: " . $product->stock . " -> Ahora: " . $request->get('stock'),
             'stock_nas' => "Antes: " . $product->stock_nas . " -> Ahora: " . $request->get('stock_nas'),
-            'stock_cosmica' => "Antes: " . $product->stock_cosmica . " -> Ahora: " . $request->get('stock_cosmica'),
+            'stock_cosmica' => "Antes: " . $product->stock_cosmica . " -> Ahora: " . $suma,
             'laboratorio' => $product->laboratorio,
             'categoria' => $product->categoria,
             'subcategoria' => $product->subcategoria,
@@ -326,7 +333,7 @@ class ProductsController extends Controller
         $product->imagenes = $request->get('imagenes');
         $product->stock = $request->get('stock');
         $product->stock_nas = $request->get('stock_nas');
-        $product->stock_cosmica = $request->get('stock_cosmica');
+        $product->stock_cosmica = $suma;
         $product->update();
 
         return response()->json([
