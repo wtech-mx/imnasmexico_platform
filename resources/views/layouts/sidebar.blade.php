@@ -200,6 +200,15 @@
                 </li>
             @endcan
 
+            <li class="nav-item">
+                <a class="nav-link {{ (Request::is('reporte/ventas') ? 'active' : '') }}" href="{{ route('shipments.index') }}">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <img src="{{ asset('assets/admin/img/icons/envia.webp') }}"width="30px" >
+                    </div>
+                    <span class="nav-link-text ms-1">Envia </span>
+                </a>
+            </li>
+
             @can('bodega-menu')
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#pageBodega" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pageBodega" role="button" aria-expanded="false">

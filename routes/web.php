@@ -8,10 +8,12 @@ use App\Http\Controllers\WebhooksController;
 use App\Http\Controllers\Cam\CamExpedientesController;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\RevoesController;
+use App\Http\Controllers\ShipmentController;
 
 use App\Http\Controllers\PruebaApiController;
 
 Route::get('api/preparacion', [PruebaApiController::class, 'index_preparacion'])->name('index_preparacion.api');
+Route::get('envia/shipments', [ShipmentController::class, 'getShipments'])->name('shipments.index');
 
 /*
 |--------------------------------------------------------------------------
