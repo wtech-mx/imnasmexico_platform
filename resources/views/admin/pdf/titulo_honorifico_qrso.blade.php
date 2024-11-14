@@ -349,9 +349,24 @@
             transform: translateX(-50%);
         }
 
+        .container_firma_director_front_text{
+            position: absolute;
+            top: 1370px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
         .container_firma_director{
             position: absolute;
             top: 1240px;
+            left: 60%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .container_firma_director_text{
+            position: absolute;
+            top: 1340px;
             left: 60%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -379,8 +394,34 @@
             @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
                 <img src="{{ $basePath . 'titulo_frontal_limpio_sin_firma_front.png' }}" class="img_portada">
                 <div class="container_firma_director_front">
-                    <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img">
-                    <h6 style="text-align: center;">{{ $director }} <br> {{ $firma_directora }}</h6>
+                    <img style="text-align: center;" src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img">
+
+                </div>
+                <div class="container_firma_director_front_text">
+                    <h6 style="text-align: center;">{{ $director }} <br>
+                        @php
+                            // Divide el curso por espacios en blanco
+                            $palabrasTextFirma = explode(' ', $firma_directora);
+
+                            // Inicializa la cadena formateada
+                            $Textofirma_directora = '';
+                            $contador_palabras = 0;
+
+                            foreach ($palabrasTextFirma as $palabra) {
+                                // Agrega la palabra actual a la cadena formateada
+                                $Textofirma_directora .= $palabra . ' ';
+
+                                // Incrementa el contador de palabras
+                                $contador_palabras++;
+
+                                // Agrega un salto de línea después de cada tercera palabra
+                                if ($contador_palabras % 5 == 0) {
+                                    $Textofirma_directora .= "<br>";
+                                }
+                            }
+                        @endphp
+                        {!! $Textofirma_directora !!}
+                    </h6>
                 </div>
             @else
                 <img src="{{ $basePath . 'titulo_frontal_limpio.png' }}" class="img_portada">
@@ -492,9 +533,38 @@
 
             @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
                 <img src="{{ $basePath . 'titulo_reverso_limpio_firma_director.png' }}" class="img_reverso">
+
                 <div class="container_firma_director">
                     <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img"><br>
-                    <h7>{{ $director }} <br> {{ $firma_directora }}</h7>
+
+
+                </div>
+                <div class="container_firma_director_text">
+
+                    <h7 style="text-align: center;">{{ $director }} <br>
+                        @php
+                            // Divide el curso por espacios en blanco
+                            $palabrasTextFirma = explode(' ', $firma_directora2);
+
+                            // Inicializa la cadena formateada
+                            $Textofirma_directora = '';
+                            $contador_palabras = 0;
+
+                            foreach ($palabrasTextFirma as $palabra) {
+                                // Agrega la palabra actual a la cadena formateada
+                                $Textofirma_directora .= $palabra . ' ';
+
+                                // Incrementa el contador de palabras
+                                $contador_palabras++;
+
+                                // Agrega un salto de línea después de cada tercera palabra
+                                if ($contador_palabras % 5 == 0) {
+                                    $Textofirma_directora .= "<br>";
+                                }
+                            }
+                        @endphp
+                        {!! $Textofirma_directora !!}
+                    </h7>
                 </div>
             @else
                 <img src="{{ $basePath . 'titulo_reverso_limpio.png' }}" class="img_reverso">

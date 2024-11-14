@@ -30,7 +30,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($registros_imnas as $registro_imnas)
+                                        {{-- @foreach ($registros_imnas as $registro_imnas) --}}
+                                        @foreach ($registros_imnas as $index => $registro_imnas)
+
                                             <tr>
                                                 <td>
                                                     <p>
@@ -60,7 +62,7 @@
                                                 <td><p>{{ $registro_imnas->folio }}</p></td>
                                                 <td>
                                                     @if ($registro_imnas->id_ticket == NULL)
-                                                    
+
                                                     @else
                                                         <b>{{ $registro_imnas->CursosTickets->nombre }}</b>
                                                     @endif
@@ -98,7 +100,9 @@
                                             </tr>
 
                                             @include('admin.registro_imnas.modal_doc_digital')
-                                            @include('admin.registro_imnas.modal_documento')
+                                            {{-- @include('admin.registro_imnas.modal_documento') --}}
+                                            @include('admin.registro_imnas.modal_documento', ['index' => $index])
+
                                             @include('admin.registro_imnas.edit')
                                         @endforeach
                                     </tbody>
