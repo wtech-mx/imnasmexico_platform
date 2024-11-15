@@ -133,10 +133,17 @@ $(document).ready(function() {
                 $('#product_id').val(product.id);
                 $('#nombre').val(product.nombre);
                 $('#etiqueta_lateral').val(product.etiqueta_lateral);
+                $('#etiqueta_lateral_uti').val(product.etiqueta_lateral_uti);
+                $('#etiqueta_lateral_comp').val(product.etiqueta_lateral_comp);
                 $('#etiqueta_tapa').val(product.etiqueta_tapa);
+                $('#etiqueta_tapa_uti').val(product.etiqueta_tapa_uti);
+                $('#etiqueta_tapa_comp').val(product.etiqueta_tapa_comp);
                 $('#etiqueta_frente').val(product.etiqueta_frente);
+                $('#etiqueta_frente_uti').val(product.etiqueta_frente_uti);
+                $('#etiqueta_frente_comp').val(product.etiqueta_frente_comp);
                 $('#etiqueta_reversa').val(product.etiqueta_reversa);
-
+                $('#etiqueta_reversa_uti').val(product.etiqueta_reversa_uti);
+                $('#etiqueta_reversa_comp').val(product.etiqueta_reversa_comp);
                 // Abrir el modal después de cargar los datos
                 $('#editProductModal').modal('show');
                 loadStockHistory(productId);

@@ -298,7 +298,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label for="foto2">Comprobante *</label>
-                                        <input id="foto2" name="foto2" type="file" class="form-control" @if($pago_fuera->foto2) disabled @endif required>
+                                        <input id="foto2" name="foto2" type="file" class="form-control" @if($pago_fuera->foto2) disabled @endif>
                                         @error('foto2') <span class="error text-danger">{{ $message }}</span> @enderror
                                     </div>
                                 </div>
