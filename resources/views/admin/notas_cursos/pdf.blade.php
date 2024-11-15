@@ -147,6 +147,14 @@
         </tbody>
         <tfoot >
             <tr style="background-color: #ffffff;">
+                @if ($nota->factura == 1)
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right"><b>IVA</b> </td>
+                    <td>${{ $nota->total_iva }}</td>
+                @endif
+            </tr>
+            <tr style="background-color: #ffffff;">
                 <td></td>
                 <td></td>
               <td style="text-align: right"><b>Total</b> </td>
@@ -154,6 +162,26 @@
             </tr>
         </tfoot>
     </table>
+
+    <h2>Pago</h2>
+    <b for="">Metodo de Pago:</b> {{ $nota_pagos->metodo_pago }} <br>
+    <b for="">Monto:</b> ${{ number_format($nota_pagos->monto, 1, '.', ',') }} <br>
+
+    @if ($nota_pagos->monto2 != NULL)
+        <h2>Pago 2</h2>
+        <b for="">Metodo de Pago 2:</b> {{ $nota_pagos->metodo_pago2 }} <br>
+        <b for="">Monto 2:</b> ${{ number_format($nota_pagos->monto2, 1, '.', ',') }} <br>
+    @endif
+
+    @if ($nota->factura == '1')
+        <h2>Datos de Factura</h2>
+        <b for="">Razon Social:</b> {{ $nota->razon_social }} <br>
+        <b for="">RFC:</b> {{ $nota->rfc }} <br>
+        <b for="">CFDI:</b> {{ $nota->cfdi }} <br>
+        <b for="">Correo Factura:</b> {{ $nota->correo }} <br>
+        <b for="">Telefono Factura:</b> {{ $nota->telefono }} <br>
+        <b for="">Dirección:</b> {{ $nota->direccion }}<br>
+    @endif
 
 
     <table style="width:100%" style="background: #a17576;margin-top:6rem;">

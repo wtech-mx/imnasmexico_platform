@@ -123,6 +123,15 @@
                                         <h2 style="color:#836262"><strong>Pago</strong> </h2>
                                     </div>
 
+                                    <div class="col-4 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="toggleFactura" name="factura" value="1">
+                                            <h4 class="form-check-h4" for="flexCheckDefault">
+                                                <p class="" style="display: inline-block;font-size: 20px;padding: 5px;color: #3b8b00;">Si</p> <strong> (¿Factura?)</strong>
+                                            </h4>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group col-4">
                                         <h4 for="name">Descuento %</h4>
                                         <div class="input-group mb-3">
@@ -206,6 +215,88 @@
                                         </div>
                                     </div>
 
+                                    <div id="divFactura" style="display: none;">
+                                        <div class="row">
+                                            <h4>Factura</h4>
+
+                                            <div class="form-group col-4">
+                                                <h4 for="name">Situacion Fiscal</h4>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input class="form-control" type="file" id="situacion_fiscal" name="situacion_fiscal">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-4">
+                                                <h4 for="name">Nombre / Razon Social</h4>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/firma-digital.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input class="form-control" type="text" id="razon_social" name="razon_social">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-4">
+                                                <h4 for="name">RFC</h4>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/carta.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input class="form-control" type="text" id="rfc" name="rfc">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-4">
+                                                <h4 for="name">CFDI</h4>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/monetary-policy.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <select class="form-select" name="cfdi" id="cfdi">
+                                                        <option value="">Seleccione CFDI</option>
+                                                        <option value="G01 Adquisicion de Mercancias">G01 Adquisicion de Mercancias</option>
+                                                        <option value="G02 Devoluciones, Descuentos o Bonificaciones">G02 Devoluciones, Descuentos o Bonificaciones</option>
+                                                        <option value="G03 Gastos en General">G03 Gastos en General</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-4">
+                                                <h4 for="name">Correo</h4>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/email.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input class="form-control" type="text" id="correo_fac" name="correo_fac">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-4">
+                                                <h4 for="name">Telefono</h4>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/complain.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input class="form-control" type="number" id="telefono_fac" name="telefono_fac">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <h4 for="name">Direccion de Factura</h4>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img src="{{ asset('assets/user/icons/cp.png') }}" alt="" width="35px">
+                                                    </span>
+                                                    <input class="form-control" type="text" id="direccion_fac" name="direccion_fac">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
                                     <div class="col-12">
                                         <div class="form-group">
                                             <h4 for="name">Comentario/nota</h4>
@@ -228,100 +319,118 @@
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
-$(document).ready(function() {
-    $('.cliente').select2();
+    $(document).ready(function() {
+        $('.cliente').select2();
 
-    function initializeSelect2($container) {
-        $container.find('.select2').select2();
-    }
+        function initializeSelect2($container) {
+            $container.find('.select2').select2();
+        }
 
-    initializeSelect2($('#formulario'));
+        initializeSelect2($('#formulario'));
 
-    $(document).on('change', '.select2', function() {
-        var precioNormal = $(this).find('option:selected').data('precio_normal');
-        $(this).closest('.row').find('.importe').val(precioNormal);
-        calcularSuma();
-    });
-
-    $(document).on('click', '.clonar', function() {
-        var $clone = $('.clonars').first().clone();
-        $clone.find('select.select2').removeClass('select2-hidden-accessible').next().remove();
-        $clone.find('select.select2').select2();
-
-        $clone.find(':input').each(function() {
-            if ($(this).is('select')) {
-                this.selectedIndex = 0;
-            } else {
-                this.value = '';
-            }
-        });
-
-        $clone.appendTo('#formulario');
-
-        $clone.find('.select2').on('change', function() {
+        $(document).on('change', '.select2', function() {
             var precioNormal = $(this).find('option:selected').data('precio_normal');
             $(this).closest('.row').find('.importe').val(precioNormal);
             calcularSuma();
         });
 
-        $clone.find('input[name="importe[]"]').on('input', function() {
-            calcularSuma();
+        $(document).on('click', '.clonar', function() {
+            var $clone = $('.clonars').first().clone();
+            $clone.find('select.select2').removeClass('select2-hidden-accessible').next().remove();
+            $clone.find('select.select2').select2();
+
+            $clone.find(':input').each(function() {
+                if ($(this).is('select')) {
+                    this.selectedIndex = 0;
+                } else {
+                    this.value = '';
+                }
+            });
+
+            $clone.appendTo('#formulario');
+
+            $clone.find('.select2').on('change', function() {
+                var precioNormal = $(this).find('option:selected').data('precio_normal');
+                $(this).closest('.row').find('.importe').val(precioNormal);
+                calcularSuma();
+            });
+
+            $clone.find('input[name="importe[]"]').on('input', function() {
+                calcularSuma();
+            });
         });
-    });
 
-    function calcularSuma() {
-        var sumaTotal = 0;
+        function calcularSuma() {
+            var sumaTotal = 0;
 
-        $('.importe').each(function() {
-            var valor = parseFloat($(this).val()) || 0;
-            sumaTotal += valor;
-        });
+            $('.importe').each(function() {
+                var valor = parseFloat($(this).val()) || 0;
+                sumaTotal += valor;
+            });
 
-        $('#total').val(sumaTotal.toFixed(2));
-        aplicarDescuento();
-    }
-
-    function aplicarDescuento() {
-        var total = parseFloat($('#total').val()) || 0;
-        var descuento = parseFloat($('#descuento').val()) || 0;
-        var totalConDescuento = total * (1 - (descuento / 100));
-        $('#total').val(totalConDescuento.toFixed(2));
-        calcularRestante();
-    }
-
-    $('#descuento').on('input', function() {
-        aplicarDescuento();
-    });
-
-    function calcularRestante() {
-        var total = parseFloat($('#total').val()) || 0;
-        var monto1 = parseFloat($('#monto1').val()) || 0;
-        var monto2 = parseFloat($('#monto2').val()) || 0;
-
-        var restante = total - (monto1 + monto2);
-        $('#restante').val(restante.toFixed(2));
-    }
-
-    $('#monto1, #monto2').on('input', function() {
-        calcularRestante();
-    });
-
-    calcularSuma();
-
-    $('#myForm').on('submit', function() {
-        $('#saveButton').prop('disabled', true);
-    });
-
-    $(document).on('keydown', function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
+            $('#total').val(sumaTotal.toFixed(2));
+            aplicarDescuento();
         }
+
+        function aplicarDescuento() {
+            var total = parseFloat($('#total').val()) || 0;
+            var descuento = parseFloat($('#descuento').val()) || 0;
+            var totalConDescuento = total * (1 - (descuento / 100));
+            $('#total').val(totalConDescuento.toFixed(2));
+            calcularRestante();
+        }
+
+        $('#descuento').on('input', function() {
+            aplicarDescuento();
+        });
+
+        $('#toggleFactura').on('change', function() {
+            var total = parseFloat($('#total').val()) || 0;
+
+            if ($(this).is(':checked')) {
+                // Calcular el 16% y sumarlo al total
+                var iva = total * 0.16;
+                var totalConIva = total + iva;
+                $('#total').val(totalConIva.toFixed(2));
+
+                // Mostrar el div
+                $('#divFactura').show();
+            } else {
+                // Si se desmarca, quitar el 16%
+                var totalSinIva = total / 1.16;
+                $('#total').val(totalSinIva.toFixed(2));
+
+                // Ocultar el div
+                $('#divFactura').hide();
+            }
+
+            calcularRestante(); // Actualiza el restante con el nuevo total
+        });
+
+        function calcularRestante() {
+            var total = parseFloat($('#total').val()) || 0;
+            var monto1 = parseFloat($('#monto1').val()) || 0;
+            var monto2 = parseFloat($('#monto2').val()) || 0;
+
+            var restante = total - (monto1 + monto2);
+            $('#restante').val(restante.toFixed(2));
+        }
+
+        $('#monto1, #monto2').on('input', function() {
+            calcularRestante();
+        });
+
+        calcularSuma();
+
+        $('#myForm').on('submit', function() {
+            $('#saveButton').prop('disabled', true);
+        });
+
+        $(document).on('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
+        });
     });
-});
-
-
-
-
-
 </script>
 @endsection

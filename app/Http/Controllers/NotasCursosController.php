@@ -119,6 +119,28 @@ class NotasCursosController extends Controller
         $notas_cursos->descuento = $request->get('descuento');
         $notas_cursos->total = $request->get('total');
         $notas_cursos->nota = $request->get('nota');
+
+        if($request->get('factura') != NULL){
+            $total_con_iva = $request->get('total');
+            $sin_iva = $total_con_iva / 1.16;
+            $iva = $total_con_iva - $sin_iva;
+
+            if ($request->hasFile("situacion_fiscal")) {
+                $file = $request->file('situacion_fiscal');
+                $path = $pago_fuera;
+                $fileName = uniqid() . $file->getClientOriginalName();
+                $file->move($path, $fileName);
+                $notas_cursos->situacion_fiscal = $fileName;
+            }
+            $notas_cursos->factura = '1';
+            $notas_cursos->total_iva = $iva;
+            $notas_cursos->razon_social = $request->get('razon_social');
+            $notas_cursos->rfc = $request->get('rfc');
+            $notas_cursos->cfdi = $request->get('cfdi');
+            $notas_cursos->correo = $request->get('correo_fac');
+            $notas_cursos->telefono = $request->get('telefono_fac');
+            $notas_cursos->direccion_factura = $request->get('direccion_fac');
+        }
         $notas_cursos->save();
 
         $code = Str::random(8);
@@ -434,10 +456,11 @@ class NotasCursosController extends Controller
         $nota = NotasCursos::find($id);
 
         $nota_productos = NotasInscripcion::where('id_nota', $nota->id)->get();
+        $nota_pagos = NotasPagos::where('id_nota', $nota->id)->first();
 
-        $pdf = \PDF::loadView('admin.notas_cursos.pdf', compact('nota', 'today', 'nota_productos'));
-       // return $pdf->stream();
+        $pdf = \PDF::loadView('admin.notas_cursos.pdf', compact('nota', 'today', 'nota_productos', 'nota_pagos'));
+       return $pdf->stream();
 
-         return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
+        //  return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
     }
 }
