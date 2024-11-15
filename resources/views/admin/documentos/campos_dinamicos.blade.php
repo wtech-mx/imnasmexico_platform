@@ -99,26 +99,12 @@
             <img class="img_profile_label" src="{{ asset('assets/user/icons/certificate.png') }}" alt="" width="30px">
         </span>
         <select name="firma_directora" id="firma_directora" class="form-select" required>
-            <option value="No">Selecciona una opción</option>
+            <option selected value="Personalizado">Personalizado</option>
             <option value="Firma del Director">Firma del Director</option>
             <option value="Firma de la Directora">Firma de la Directora</option>
-            <option value="Personalizado">Personalizado</option>
         </select>
     </div>
 </div>
-
-<!-- Campo personalizado que se muestra dinámicamente -->
-<div class="form-group col-12 mt-3" id="inputPersonalizado" style="display: none;">
-    <label for="personalizado_texto">Texto Personalizado de Firma 1</label>
-    <input type="text" name="texto_firma_personalizada" class="form-control" placeholder="Ingrese el texto personalizado">
-</div>
-
-<!-- Campo personalizado que se muestra dinámicamente -->
-<div class="form-group col-12 mt-3" id="inputPersonalizado_2" style="display: none;">
-    <label for="personalizado_texto">Texto Personalizado de Firma 2</label>
-    <input type="text" name="texto_firma_personalizada2" class="form-control" placeholder="Ingrese el texto personalizado">
-</div>
-
 
 <div class="form-group col-3 gc_cn">
     <label for="name">Promedio</label>
@@ -129,22 +115,3 @@
         <input  name="promedio" type="text" class="form-control" value="9.5" >
     </div>
 </div>
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const selectFirma = document.getElementById('firma_directora');
-        const inputPersonalizado = document.getElementById('inputPersonalizado');
-        const inputPersonalizado2 = document.getElementById('inputPersonalizado_2');
-
-        selectFirma.addEventListener('change', function () {
-            if (this.value === 'Personalizado') {
-                inputPersonalizado.style.display = 'block';
-                inputPersonalizado2.style.display = 'block';
-            } else {
-                inputPersonalizado.style.display = 'none';
-                inputPersonalizado2.style.display = 'block';
-            }
-        });
-    });
-</script>

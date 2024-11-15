@@ -14,6 +14,8 @@ class RegistroImnasEscuela extends Model
     protected $fillable = [
         'id_user',
         'direccion_escuela',
+        'firma',
+        'otra_firma_director',
         'city_escuela',
         'state_escuela',
         'postcode_escuela',

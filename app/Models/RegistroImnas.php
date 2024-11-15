@@ -45,6 +45,9 @@ class RegistroImnas extends Model
         'texto_director',
         'firma_director',
         'promedio',
+        'texto_firma_personalizada',
+        'otra_firma_director',
+        'texto_firma_personalizada2',
     ];
 
     public function User()

@@ -316,6 +316,43 @@
                                                 @endif
                                             </div>
 
+                                            <div class="form-group col-6 gc_cn">
+                                                <label for="name">-</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="rbg_signatureOtra" id="rbg_signatureOtra1" value="si">
+                                                    <label class="form-check-label" >
+                                                      Quitar Fondo *otra* Firma de la director
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="rbg_signatureOtra" id="rbg_signatureOtra2" value="no" checked>
+                                                    <label class="form-check-label" >
+                                                      Dejar Original *otra* Firma de la director
+                                                    </label>
+                                                  </div>
+                                            </div>
+
+                                            <div class="form-group col-6 gc_cn">
+                                                <label for="name">Otra Firma de la director*</label>
+                                                <div class="input-group">
+                                                    <span class="input-group-text" id="basic-addon1">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/perfil.png')}}" alt="" width="30px">
+                                                    </span>
+                                                    <input id="otra_firma_director" name="otra_firma_director" type="file" class="form-control"  >
+                                                </div>
+                                                @if ($registro_imnas->User->RegistroImnasEscuela)
+                                                    @if (pathinfo($registro_imnas->User->RegistroImnasEscuela->otra_firma_director, PATHINFO_EXTENSION) == 'pdf')
+                                                        <a class="text-center text-white btn btn-sm mt-2" href="{{asset('documentos/'. $registro_imnas->User->telefono . '/' .$registro_imnas->User->RegistroImnasEscuela->otra_firma_director) }}" download="{{ $registro_imnas->User->RegistroImnasEscuela->otra_firma_director }}" style="background: #836262; border-radius: 19px;">
+                                                            Descargar Documento
+                                                        </a>
+                                                    @else
+                                                        <img id="blah" src="{{asset('documentos/'. $registro_imnas->User->telefono . '/' .$registro_imnas->User->RegistroImnasEscuela->otra_firma_director) }}" alt="Imagen" style="width: 200px;height: 150px;">
+                                                    @endif
+                                                @else
+                                                    <p>No hay Firma disponible para este usuario.</p>
+                                                @endif
+                                            </div>
+
                                             <div class="form-group col-6 curp_content">
                                                 <label for="name">CURP *:</label>
                                                 <div class="input-group">
@@ -341,6 +378,19 @@
                                             <div class="col-6"></div>
 
                                             @include('admin.documentos.campos_dinamicos')
+
+                                        <!-- Campo personalizado que se muestra dinámicamente -->
+                                        <div class="form-group col-12 mt-3" id="inputPersonalizado">
+                                            <label for="personalizado_texto">Texto Personalizado de Firma 1</label>
+                                            <input type="text" name="texto_firma_personalizada" class="form-control" value="{{ $registro_imnas->texto_firma_personalizada }}">
+                                        </div>
+
+                                        <!-- Campo personalizado que se muestra dinámicamente -->
+                                        <div class="form-group col-12 mt-3" id="inputPersonalizado_2">
+                                            <label for="personalizado_texto">Texto Personalizado de Firma 2</label>
+                                            <input type="text" name="texto_firma_personalizada2" class="form-control" value="{{ $registro_imnas->texto_firma_personalizada2 }}">
+                                        </div>
+
 
                                     </div>
 

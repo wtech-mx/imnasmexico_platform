@@ -195,7 +195,17 @@
                         </div>
                     </div>
 
+                    <!-- Campo personalizado que se muestra dinámicamente -->
+                    <div class="form-group col-12 mt-3" id="inputPersonalizado">
+                        <label for="personalizado_texto">Texto Personalizado de Firma 1</label>
+                        <input type="text" name="texto_firma_personalizada" class="form-control" value="{{ $registro_imnas->texto_firma_personalizada }}">
+                    </div>
 
+                    <!-- Campo personalizado que se muestra dinámicamente -->
+                    <div class="form-group col-12 mt-3" id="inputPersonalizado_2">
+                        <label for="personalizado_texto">Texto Personalizado de Firma 2</label>
+                        <input type="text" name="texto_firma_personalizada2" class="form-control" value="{{ $registro_imnas->texto_firma_personalizada2 }}">
+                    </div>
 
                     <div class="form-group col-12 my-auto">
                         <button type="submit" class="btn btn-success">Guardar</button>

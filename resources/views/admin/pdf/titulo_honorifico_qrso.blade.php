@@ -535,8 +535,12 @@
                 <img src="{{ $basePath . 'titulo_reverso_limpio_firma_director.png' }}" class="img_reverso">
 
                 <div class="container_firma_director">
-                    <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img"><br>
 
+                    @if(empty($fileName_firma_directorOtra))
+                        <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img"><br>
+                    @else
+                        <img src="{{ $basePathUtilidades . $fileName_firma_directorOtra }}" class="firma_img"><br>
+                    @endif
 
                 </div>
                 <div class="container_firma_director_text">
@@ -706,7 +710,6 @@
                 <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo2">
             @endif
         </div>
-
 
     </body>
 </html>

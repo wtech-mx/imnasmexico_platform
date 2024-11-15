@@ -18,7 +18,6 @@ Route::get('envia/shipments', [ShipmentController::class, 'getShipments'])->name
 Route::get('/admin/productos/stock/firma/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_nas_firma'])->name('ordenes_nas.firma');
 Route::get('/cosmica/admin/productos/stock/firma/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_firma'])->name('ordenes_cosmica.firma');
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes

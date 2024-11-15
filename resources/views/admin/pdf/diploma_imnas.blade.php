@@ -207,6 +207,13 @@
             transform: translateX(-50%);
         }
 
+        .container_firma_director2{
+            position: absolute;
+            top: 1150px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
         .firma_img{
             height: 90px!important;
         }
@@ -261,7 +268,32 @@
                     <img src="{{ $basePath . 'diploma_logo_firma_director.png' }}" class="img_portada">
                     <div class="container_firma_director">
                         <img src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img" alt>
-                        <p style="font-size:10px;text-align: center;">{{ $director }} <br> {{ $firma_directora }}</p>
+                    </div>
+                    <div class="container_firma_director2">
+                        <p style="font-size:10px;text-align: center;">{{ $director }} <br>
+                            @php
+                                // Divide el curso por espacios en blanco
+                                $palabrasTextFirma = explode(' ', $firma_directora);
+
+                                // Inicializa la cadena formateada
+                                $Textofirma_directora = '';
+                                $contador_palabras = 0;
+
+                                foreach ($palabrasTextFirma as $palabra) {
+                                    // Agrega la palabra actual a la cadena formateada
+                                    $Textofirma_directora .= $palabra . ' ';
+
+                                    // Incrementa el contador de palabras
+                                    $contador_palabras++;
+
+                                    // Agrega un salto de línea después de cada tercera palabra
+                                    if ($contador_palabras % 5 == 0) {
+                                        $Textofirma_directora .= "<br>";
+                                    }
+                                }
+                            @endphp
+                            {!! $Textofirma_directora !!}
+                            </p>
                     </div>
                 @else
                     <img src="{{ $basePath . 'diploma_fontal_limpio.png' }}" class="img_portada">

@@ -316,6 +316,7 @@ class RegistroIMNASController extends Controller
         $rbg_foto = $request->get('rbg_foto');
         $rbg_logo = $request->get('rbg_logo');
         $rbg_signature = $request->get('rbg_signature');
+        $rbg_signatureOtra = $request->get('rbg_signatureOtra');
 
         $capitalizar =  $request->get('capitalizar');
 
@@ -326,8 +327,10 @@ class RegistroIMNASController extends Controller
             $firma_directora = $request->get('texto_firma_personalizada');
             $firma_directora2 = $request->get('texto_firma_personalizada2');
 
+            $registro->texto_firma_personalizada = $firma_directora;
+            $registro->texto_firma_personalizada2 = $firma_directora2;
+            $registro->update();
         }
-
 
         if ($request->hasFile("img_infantil")) {
 
@@ -450,6 +453,68 @@ class RegistroIMNASController extends Controller
             $fileName_firma_director = 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
         }
 
+        if ($request->hasFile("otra_firma_director")) {
+
+            if($rbg_signatureOtra == 'si'){
+
+                $file_firma_directorOtra = $request->file('otra_firma_director');
+                $fileName_firma_directorOtra = uniqid() . $file_firma_directorOtra->getClientOriginalName();
+                $filePathOriginal = $ruta_manual . $fileName_firma_directorOtra;
+
+                // Mover el archivo a la ruta manual
+                $file_firma_directorOtra->move($ruta_manual, $fileName_firma_directorOtra);
+
+                try {
+                    // Quitar el fondo de la imagen de la firma del director
+                    $noBgImage = $removeBg->file($filePathOriginal)->get();
+
+                    // Guardar la imagen sin fondo en la ruta manual
+                    file_put_contents($filePathOriginal, $noBgImage);
+
+                    // Copiar la imagen sin fondo a la segunda ruta
+                    $filePathCopy = $ruta_manual_logo . $fileName_firma_directorOtra;
+                    file_put_contents($filePathCopy, $noBgImage);
+
+                    // Guardar el nombre de la imagen en el registro de la escuela
+                    $escuela = RegistroImnasEscuela::where('id_user', $request->get("Id_escuela"))->firstOrFail();
+                    $escuela->otra_firma_director = $fileName_firma_directorOtra;
+
+
+                } catch (\Exception $e) {
+                    \Log::error("Error al quitar el fondo de la imagen firma_director: " . $e->getMessage());
+
+                    // En caso de fallo, copiar la imagen original a la segunda ruta
+                    $filePathCopy = $ruta_manual_logo . $fileName_firma_directorOtra;
+                    copy($filePathOriginal, $filePathCopy);
+
+                    // Guardar el nombre de la imagen original en el registro de la escuela
+                    $escuela = RegistroImnasEscuela::where('id_user', $request->get("Id_escuela"))->firstOrFail();
+                    $escuela->otra_firma_director = $fileName_firma_directorOtra;
+                }
+
+                // Guardar cambios en el registro de la escuela
+                $escuela->update();
+
+            }else{
+                $file_firma_directorOtra   = $request->file('otra_firma_director');
+                $fileName_firma_directorOtra  = uniqid() . $file_firma_directorOtra ->getClientOriginalName();
+                $file_firma_directorOtra->move($ruta_manual, $fileName_firma_directorOtra );
+
+                $escuela = RegistroImnasEscuela::where('id_user', $request->get("Id_escuela"))->firstOrFail();
+                // Guardar en la primera ruta
+                $escuela->otra_firma_director = $fileName_firma_directorOtra ;
+
+                // Copiar el archivo a la segunda ruta
+                $filePathOriginal = $ruta_manual . $fileName_firma_directorOtra ;
+                $filePathCopy = $ruta_manual_logo . $fileName_firma_directorOtra ;
+                copy($filePathOriginal, $filePathCopy);
+                $escuela->update();
+            }
+
+        }else{
+            $fileName_firma_directorOtra = $fileName_firma_director ;
+        }
+
         if ($request->hasFile("firma")) {
             $file_firma = $request->file('firma');
             $path_firma = $ruta_manual;
@@ -554,7 +619,7 @@ class RegistroIMNASController extends Controller
                 $ticket->update();
             }
 
-            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('firma_directora2','firma_directora','tam_letra_nombre','capitalizar','director','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director','nacionalidad', 'fileName_logo'));
+            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('fileName_firma_directorOtra','firma_directora2','firma_directora','tam_letra_nombre','capitalizar','director','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director','nacionalidad', 'fileName_logo'));
             // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
             $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
