@@ -98,7 +98,7 @@
         </div>
       </div>
 </div>
-@include('admin.Laboratorio_cosmica.create')
+@include('admin.laboratorio_cosmica.create')
 @include('admin.laboratorio_cosmica.modal_vencer')
 @endsection
 
