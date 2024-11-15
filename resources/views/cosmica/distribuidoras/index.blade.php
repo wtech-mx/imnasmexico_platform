@@ -48,6 +48,8 @@
                                 {{ $usuarios_por_vencer ? $usuarios_por_vencer->count() : 0 }}
                             </span>
                         </a>
+
+                        <a class="ml-5" href="{{ route('distribuidoras.index_distribuidoras') }}" target="_blank">Ver Pag de Distribuidoras</a>
                     </div>
 
                     <div class="card-body">
@@ -115,8 +117,20 @@
 
                                         <td>
                                             <a type="button" class="btn btn-primary btn-xs" data-bs-toggle="modal" data-bs-target="#staticBackdrop_{{ $item->id }}">
-                                                <i class="fa fa-fw fa-edit"></i> Editar
+                                                <i class="fa fa-fw fa-edit"></i>
                                             </a>
+
+                                            <form method="POST" class="" action="{{ route('distribuidoras.update_ocultar', $item->id) }}" enctype="multipart/form-data" role="form">
+                                                @csrf
+                                                <input type="hidden" name="_method" value="PATCH">
+
+                                                <input type="hidden" name="ocultar" value="ocultar">
+
+                                                <button type="submit"  class="btn btn-danger btn-xs">
+                                                    <i class="fa fa-fw fa-trash"></i>
+                                                </button>
+                                            </form>
+
                                         </td>
 
                                     </tr>

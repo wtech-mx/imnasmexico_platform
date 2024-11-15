@@ -22,7 +22,7 @@ class CosmicaDistribuidoraController extends Controller
 
         $this->checkMembresia();
 
-        $usercosmika = Cosmikausers::where('membresia','!=','Permanente')->orderby('id','desc')->get();
+        $usercosmika = Cosmikausers::where('membresia','!=','Permanente')->where('membresia_estatus','!=','Inactiva')->orderby('id','desc')->get();
         $clientes = User::orderby('name','desc')->get();
 
         $fechaActual = Carbon::now();
@@ -173,6 +173,21 @@ class CosmicaDistribuidoraController extends Controller
 
         return redirect()->back()->with('success', 'Actualizado exitoso.');
     }
+
+    public function update_ocultar(Request $request,$id){
+
+
+        if($request->get('ocultar')){
+            $usercosmika =  Cosmikausers::findorfail($id);
+
+            $usercosmika->membresia_estatus = 'Inactiva';
+            $usercosmika->update();
+
+            return redirect()->back()->with('warning', 'Eliminada con exito.');
+        }
+
+    }
+
 
     protected function checkMembresia()
     {
