@@ -185,7 +185,7 @@
 
                                             </td>
                                         </tr>
-                                        @include('admin.notas_productos.modal_edit')
+                                        {{-- @include('admin.notas_productos.modal_edit') --}}
                                         @include('admin.notas_productos.modal_estatus')
                                         @include('admin.notas_productos.modal_products')
                                     @endforeach

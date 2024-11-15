@@ -32,6 +32,7 @@
                                             Agregar
                                         </button>
                                     </div>
+
                                     <div class="col-9">
                                         <div class="form-group">
                                             <label for="name">Cliente *</label>
@@ -385,6 +386,31 @@
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
+
+    document.getElementById('myForm').addEventListener('submit', function (e) {
+        const idClient = document.getElementById('id_client').value;
+        const name = document.getElementById('name').value;
+        const telefono = document.getElementById('telefono').value;
+
+        // Referencia al botón de guardar
+        const saveButton = document.getElementById('saveButton');
+
+        // Validar las condiciones
+        if (!idClient && (!name || !telefono)) {
+            e.preventDefault(); // Evita el envío del formulario
+            alert('Debe seleccionar un cliente o ingresar los datos de un nuevo cliente.');
+            saveButton.disabled = false; // Asegura que el botón se habilite si no se cumplen las validaciones
+            saveButton.innerHTML = 'Guardar'; // Restaura el texto original
+            return;
+        }
+
+        // Deshabilita el botón si las validaciones se pasan
+        saveButton.disabled = true;
+        saveButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Guardando...';
+
+    });
+
+
     document.addEventListener('DOMContentLoaded', function() {
         var agregarCampoBtn = document.getElementById('agregarCampo');
         var camposContainer = document.getElementById('camposContainer');
@@ -586,10 +612,10 @@
             $('#divFactura').toggle();
         });
 
-        $('#myForm').on('submit', function() {
-            // Deshabilita el botón al enviar el formulario
-            $('#saveButton').prop('disabled', true);
-        });
+        // $('#myForm').on('submit', function() {
+        //     // Deshabilita el botón al enviar el formulario
+        //     $('#saveButton').prop('disabled', true);
+        // });
 
         $(document).on('keydown', function(event) {
             // Detecta si la tecla presionada es Enter (keyCode 13)
