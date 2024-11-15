@@ -60,7 +60,7 @@ Conteo de Etiquetas Cosmica
                                 </a>
                             </td>
                         </tr>
-                        @include('admin.Laboratorio_cosmica.etiqueta.cambio_stock')
+                        @include('admin.laboratorio_cosmica.etiqueta.cambio_stock')
                     @endforeach
 
                 </table>

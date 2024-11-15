@@ -54,7 +54,7 @@ Conteo a Granel Cosmica
                                 </a>
                             </td>
                         </tr>
-                        @include('admin.Laboratorio_cosmica.granel.cambio_stock')
+                        @include('admin.laboratorio_cosmica.granel.cambio_stock')
                     @endforeach
 
                 </table>

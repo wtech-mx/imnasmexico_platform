@@ -89,7 +89,7 @@
                                 </a>
                             </td>
                         </tr>
-                        @include('admin.Laboratorio_cosmica.cambio_stock')
+                        @include('admin.laboratorio_cosmica.cambio_stock')
                     @endforeach
 
                 </table>
