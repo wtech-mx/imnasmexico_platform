@@ -30,19 +30,19 @@
             @endforeach
 
             @foreach ($estandar_user as $estandar)
-                @if ($estandar->Estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER')
+                @if ($estandar->Estandar && $estandar->Estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER')
                     <button class="nav-link" id="nav-des-ejemplo-extr-tab" data-bs-toggle="tab" data-bs-target="#nav-des-ejemplo-extr" type="button" role="tab" aria-controls="nav-des-ejemplo-extr" aria-selected="false">
                         Ejemplos de llenado SEP CONOCER
                     </button>
-                @elseif($estandar->Estandar->nombre == 'EC0186 - Gestión del negocio spa SEP CONOCER')
+                @elseif($estandar->Estandar && $estandar->Estandar->nombre == 'EC0186 - Gestión del negocio spa SEP CONOCER')
                     <button class="nav-link" id="nav-des-ejemplo-extr-tab-spa" data-bs-toggle="tab" data-bs-target="#nav-des-ejemplo-extr-spa" type="button" role="tab" aria-controls="nav-des-ejemplo-extr-spa" aria-selected="false">
                         Ejemplos de llenado EC0186 SEP CONOCER
                     </button>
-                @elseif($estandar->Estandar->nombre == 'EC1048 Aplicación de masaje con piedras calientes')
+                @elseif($estandar->Estandar && $estandar->Estandar->nombre == 'EC1048 Aplicación de masaje con piedras calientes')
                     <button class="nav-link" id="nav-des-ejemplo-extr-tab-masaje" data-bs-toggle="tab" data-bs-target="#nav-des-ejemplo-extr-masaje" type="button" role="tab" aria-controls="nav-des-ejemplo-extr-masaje" aria-selected="false">
                         Ejemplo de llenado EC1048 SEP CONOCER
                     </button>
-                @elseif($estandar->Estandar->nombre == 'EC1313 - Aplicación de Técnicas para el Mejoramiento de la Apariencia Cutánea Facial mediante Dermapen')
+                @elseif($estandar->Estandar && $estandar->Estandar->nombre == 'EC1313 - Aplicación de Técnicas para el Mejoramiento de la Apariencia Cutánea Facial mediante Dermapen')
                     <button class="nav-link" id="nav-des-ejemplo-extr-tab-derma" data-bs-toggle="tab" data-bs-target="#nav-des-ejemplo-extr-derma" type="button" role="tab" aria-controls="nav-des-ejemplo-extr-derma" aria-selected="false">
                         Ejemplo de llenado EC1048 SEP CONOCER
                     </button>
@@ -87,19 +87,19 @@
     @endforeach
 
     @foreach ($estandar_user as $estandar)
-        @if ($estandar->Estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER')
+        @if ($estandar->Estandar && $estandar->Estandar->nombre == 'EC0010 - Prestación de Servicios Estéticos Corporales SEP CONOCER')
             <div class="tab-pane fade" id="nav-des-ejemplo-extr" role="tabpanel" aria-labelledby="nav-des-ejemplo-extr-tab" tabindex="0" style="min-height: auto!important;">
                 @include('user.components.profile.tab_ejemplo')
             </div>
-        @elseif($estandar->Estandar->nombre == 'EC0186 - Gestión del negocio spa SEP CONOCER')
+        @elseif($estandar->Estandar && $estandar->Estandar->nombre == 'EC0186 - Gestión del negocio spa SEP CONOCER')
             <div class="tab-pane fade" id="nav-des-ejemplo-extr-spa" role="tabpanel" aria-labelledby="nav-des-ejemplo-extr-tab-spa" tabindex="0" style="min-height: auto!important;">
                 @include('user.components.profile.tab_ejemplo_spa')
             </div>
-        @elseif($estandar->Estandar->nombre == 'EC1048 Aplicación de masaje con piedras calientes')
+        @elseif($estandar->Estandar && $estandar->Estandar->nombre == 'EC1048 Aplicación de masaje con piedras calientes')
             <div class="tab-pane fade" id="nav-des-ejemplo-extr-masaje" role="tabpanel" aria-labelledby="nav-des-ejemplo-extr-tab-masaje" tabindex="0" style="min-height: auto!important;">
                 @include('user.components.profile.tab_ejemplo_masaje')
             </div>
-        @elseif($estandar->Estandar->nombre == 'EC1313 - Aplicación de Técnicas para el Mejoramiento de la Apariencia Cutánea Facial mediante Dermapen')
+        @elseif($estandar->Estandar && $estandar->Estandar->nombre == 'EC1313 - Aplicación de Técnicas para el Mejoramiento de la Apariencia Cutánea Facial mediante Dermapen')
             <div class="tab-pane fade" id="nav-des-ejemplo-derma" role="tabpanel" aria-labelledby="nav-des-ejemplo-tab-derma" tabindex="0" style="min-height: auto!important;">
                 @include('user.components.profile.tab_ejemplo_derma')
             </div>

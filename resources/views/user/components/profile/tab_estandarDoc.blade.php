@@ -151,41 +151,43 @@
     @endforeach
 
     @foreach ($estandar_user as $estandar)
-        <div class="col-12">
-            <h4 class="text-center">Guía para evaluar estándar {{ $estandar->Estandar->nombre }}</h4> <br>
-            @php
-                $documentos_estandar = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id_estandar)->where('guia', '=', '1')->get();
-            @endphp
+        @if ($estandar->Estandar)
+            <div class="col-12">
+                <h4 class="text-center">Guía para evaluar estándar {{ $estandar->Estandar->nombre }}</h4> <br>
+                @php
+                    $documentos_estandar = App\Models\CarpetaDocumentosEstandares::where('id_carpeta', $estandar->id_estandar)->where('guia', '=', '1')->get();
+                @endphp
 
-            <div class="row">
-                @foreach ($documentos_estandar as $documento)
-                    @if (pathinfo($documento->nombre, PATHINFO_EXTENSION) == 'pdf')
-                    <div class="col-4">
-                        <p class="text-center ">
-                            <a href="{{asset('carpetasestandares/'.$estandar->Estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="text-decoration: none; color: #000">
-                                <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/><br>
-                                {{ substr($documento->nombre, 13) }}
-                            </a><br>
-                            <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->Estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: #836262; border-radius: 19px;">
-                                Descargar
-                            </a>
-                        </p>
-                    </div>
-                    @else
-                    <div class="col-4">
-                        <p class="text-center mt-2">
-                            <a href="{{asset('carpetasestandares/'.$estandar->Estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="text-decoration: none; color: #000">
-                                <img src="{{asset('assets/user/icons/docx.png') }}" style="width: 45px; height: 45px;"/><br>
-                                {{ substr($documento->nombre, 13) }}
-                            </a><br>
-                            <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->Estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: #836262; border-radius: 19px;">
-                                Descargar
-                            </a>
-                        </p>
-                    </div>
-                    @endif
-                @endforeach
+                <div class="row">
+                    @foreach ($documentos_estandar as $documento)
+                        @if (pathinfo($documento->nombre, PATHINFO_EXTENSION) == 'pdf')
+                        <div class="col-4">
+                            <p class="text-center ">
+                                <a href="{{asset('carpetasestandares/'.$estandar->Estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="text-decoration: none; color: #000">
+                                    <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/><br>
+                                    {{ substr($documento->nombre, 13) }}
+                                </a><br>
+                                <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->Estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: #836262; border-radius: 19px;">
+                                    Descargar
+                                </a>
+                            </p>
+                        </div>
+                        @else
+                        <div class="col-4">
+                            <p class="text-center mt-2">
+                                <a href="{{asset('carpetasestandares/'.$estandar->Estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="text-decoration: none; color: #000">
+                                    <img src="{{asset('assets/user/icons/docx.png') }}" style="width: 45px; height: 45px;"/><br>
+                                    {{ substr($documento->nombre, 13) }}
+                                </a><br>
+                                <a class="text-center text-white btn btn-sm" href="{{asset('carpetasestandares/'.$estandar->Estandar->nombre. '/' .$documento->nombre) }}" download="{{$documento->nombre}}" style="background: #836262; border-radius: 19px;">
+                                    Descargar
+                                </a>
+                            </p>
+                        </div>
+                        @endif
+                    @endforeach
+                </div>
             </div>
-        </div>
+        @endif
     @endforeach
 </div>
