@@ -120,6 +120,49 @@
                 </li>
             @endcan
 
+            @can('laboratorio-cosmica-menu')
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#pagaLabCosmica" class="nav-link {{ (Request::is('/cosmica/laboratorio/envases*') ? 'active' : '') }}" aria-controls="pagaLabCosmica" role="button" aria-expanded="false">
+                    <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                        <i class="fa fa-flask text-sm opacity-10" style="color:#7849e6"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Laboratorio Cosmica</span>
+                    </a>
+                    <div class="collapse " id="pagaLabCosmica">
+                        <ul class="nav ms-4">
+                            <li class="nav-item ">
+                                @can('lab-cosmica-pedidos')
+                                <a class="nav-link {{ (Request::is('/cosmica/laboratorio/envases') ? 'active' : '') }}" href="{{ route('envases.index') }}">
+                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-cube text-sm opacity-10" style="color: #7849e6"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Envases</span>
+                                </a>
+                                @endcan
+
+                                @can('lab-cosmica-stock')
+                                <a class="nav-link {{ (Request::is('/cosmica/laboratorio/granel') ? 'active' : '') }}" href="{{ route('granel.index') }}">
+                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-cubes text-sm opacity-10" style="color:#7849e6"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Granel</span>
+                                </a>
+                                @endcan
+
+                                @can('lab-cosmica-stock')
+                                <a class="nav-link {{ (Request::is('/cosmica/laboratorio/etiqueta') ? 'active' : '') }}" href="{{ route('etiqueta.index') }}">
+                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-barcode text-sm opacity-10" style="color:#7849e6"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Etiqueta</span>
+                                </a>
+                                @endcan
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            @endcan
+
             @can('lab-nas-menu')
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#pageLabNas" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pageLabNas" role="button" aria-expanded="false">
@@ -157,13 +200,13 @@
 
             @can('lab-cosmica-menu')
                 <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#pagaLabCosmica" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pagaLabCosmica" role="button" aria-expanded="false">
+                    <a data-bs-toggle="collapse" href="#pagaCajasCosmica" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pagaCajasCosmica" role="button" aria-expanded="false">
                     <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
                         <i class="fa fa-flask text-sm opacity-10" style="color:#000"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Labora Cosmica</span>
+                    <span class="nav-link-text ms-1">Cajas Cosmica</span>
                     </a>
-                    <div class="collapse " id="pagaLabCosmica">
+                    <div class="collapse " id="pagaCajasCosmica">
                         <ul class="nav ms-4">
                             <li class="nav-item ">
                                 @can('lab-cosmica-pedidos')

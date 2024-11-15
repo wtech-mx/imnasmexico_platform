@@ -659,6 +659,26 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('reporte/ventas/', [App\Http\Controllers\ReporteVentasController::class, 'index'])->name('reporte_ventas.index');
     Route::get('reporte/ventas/buscador', [App\Http\Controllers\ReporteVentasController::class, 'buscador'])->name('reporte_ventas.buscador');
 
+    // =============== M O D U L O   L A B O R A T O R I O  C O S M I C A ===============================
+        // =============== E N V A S E S ===============================
+        Route::get('/cosmica/laboratorio/envases', [App\Http\Controllers\LabCosmicaController::class, 'index'])->name('envases.index');
+        Route::post('/cosmica/laboratorio/envases/store', [App\Http\Controllers\LabCosmicaController::class, 'store'])->name('envases.store');
+        Route::get('/cosmica/laboratorio/envases/edit/{id}', [App\Http\Controllers\LabCosmicaController::class, 'edit'])->name('envases.edit');
+        Route::patch('/cosmica/laboratorio/envases/update/{id}', [App\Http\Controllers\LabCosmicaController::class, 'update'])->name('envases.update');
+
+        Route::get('/cosmica/laboratorio/envases/show/{id}', [App\Http\Controllers\LabCosmicaController::class, 'show'])->name('envases.show');
+        Route::patch('/cosmica/laboratorio/envases/show/update/{id}', [App\Http\Controllers\LabCosmicaController::class, 'show_update'])->name('envases.update');
+        Route::get('/cosmica/laboratorio/envases/show/{id}/stock-history', [App\Http\Controllers\LabCosmicaController::class, 'getStockHistoryEnvases'])->name('envases.stockHistory');
+                    // =============== C O N T E O  G R A N E L ===============================
+        Route::get('/cosmica/laboratorio/granel', [App\Http\Controllers\LabCosmicaController::class, 'index_granel'])->name('granel.index');
+        Route::get('/cosmica/laboratorio/granel/show/{id}', [App\Http\Controllers\LabCosmicaController::class, 'show_granel'])->name('granel.show');
+        Route::patch('/cosmica/laboratorio/granel/show/update/{id}', [App\Http\Controllers\LabCosmicaController::class, 'show_update_granel'])->name('granel.update');
+        Route::get('/cosmica/laboratorio/granel/show/{id}/stock-history', [App\Http\Controllers\LabCosmicaController::class, 'getStockHistoryGranel'])->name('granel.stockHistory');
+                    // =============== C O N T E O  E T I Q U E T A S ===============================
+        Route::get('/cosmica/laboratorio/etiqueta', [App\Http\Controllers\LabCosmicaController::class, 'index_etiqueta'])->name('etiqueta.index');
+        Route::get('/cosmica/laboratorio/etiqueta/show/{id}', [App\Http\Controllers\LabCosmicaController::class, 'show_etiqueta'])->name('etiqueta.show');
+        Route::patch('/cosmica/laboratorio/etiqueta/show/update/{id}', [App\Http\Controllers\LabCosmicaController::class, 'show_update_etiqueta'])->name('etiqueta.update');
+        Route::get('/cosmica/laboratorio/etiqueta/show/{id}/stock-history', [App\Http\Controllers\LabCosmicaController::class, 'getStockHistoryEtiqueta'])->name('etiqueta.stockHistory');
 });
 
 // Route::get('registro/login', function () {

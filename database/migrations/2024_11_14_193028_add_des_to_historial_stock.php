@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->text('envase_lab')->nullable();
-            $table->text('conteo_lab')->nullable();
-            $table->text('descripcion_lab')->nullable();
-            $table->text('caja_lab')->nullable();
+        Schema::table('historial_stock', function (Blueprint $table) {
+            $table->text('tipo_cambio')->nullable();
+            $table->text('stock_laboratorio')->nullable();
+            $table->text('stock_etiqueta')->nullable();
         });
     }
 
@@ -24,7 +23,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('historial_stock', function (Blueprint $table) {
             //
         });
     }

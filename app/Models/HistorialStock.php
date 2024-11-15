@@ -25,5 +25,8 @@ class HistorialStock extends Model
         'laboratorio',
         'categoria',
         'subcategoria',
+        'tipo_cambio',
+        'stock_laboratorio',
+        'stock_etiqueta',
     ];
 }
