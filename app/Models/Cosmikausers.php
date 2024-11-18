@@ -43,10 +43,23 @@ class Cosmikausers extends Model
         return Carbon::now()->diffInDays($membresiaFin, false);
     }
 
+    // public function getPuntosFaltantesAttribute()
+    // {
+    //     $meta = $this->membresia === 'Cosmos' ? 1500 : ($this->membresia === 'Estelar' ? 2500 : 0);
+    //     return max(0, $meta - $this->consumido_totalmes);
+    // }
+
     public function getPuntosFaltantesAttribute()
-    {
-        $meta = $this->membresia === 'Cosmos' ? 1500 : ($this->membresia === 'Estelar' ? 2500 : 0);
-        return max(0, $meta - $this->consumido_totalmes);
-    }
+{
+    // Convertir consumido_totalmes a un número válido
+    $consumido = (float) str_replace(',', '', $this->consumido_totalmes);
+
+    // Establecer la meta según el tipo de membresía
+    $meta = $this->membresia === 'Cosmos' ? 1500 : ($this->membresia === 'Estelar' ? 2500 : 0);
+
+    // Calcular puntos faltantes
+    return max(0, $meta - $consumido);
+}
+
 
 }
