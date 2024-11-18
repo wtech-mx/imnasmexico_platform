@@ -59,8 +59,12 @@
                                         <a class="btn btn-xs btn-primary text-white" target="_blank" href="{{ route('productos_autorizado.show', $item->id) }}">
                                             <i class="fa fa-file"></i> Ver Pedido
                                         </a>
+                                        <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#ordenes_lab_update_finalizar{{ $item->id }}">
+                                            <i class="fa fa-file"></i> Finalizar
+                                        </a>
                                     </td>
                                 </tr>
+                                @include('admin.laboratorio.modal_finalizar')
                             @endforeach
                         </table>
                     </div>
