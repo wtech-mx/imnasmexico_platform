@@ -41,6 +41,9 @@
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                                     <button class="nav-link active" id="nav-Cotizacion-tab" data-bs-toggle="tab" data-bs-target="#nav-Cotizacion" type="button" role="tab" aria-controls="nav-Cotizacion" aria-selected="false" >
                                         En preparación <img src="{{ asset('assets/cam/box.png') }}" alt="" width="35px">
+                                        <span class="badge rounded-pill bg-danger">
+                                            {{ $cantidad }}
+                                        </span>
                                     </button>
 
                                     <button class="nav-link" id="nav-Aprobada-tab" data-bs-toggle="tab" data-bs-target="#nav-Aprobada" type="button" role="tab" aria-controls="nav-Aprobada" aria-selected="false">

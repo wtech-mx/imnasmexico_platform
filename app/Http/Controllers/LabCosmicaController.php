@@ -7,19 +7,12 @@ use App\Models\EnvasesProductos;
 use App\Models\HistorialLabCosmica;
 use App\Models\HistorialStock;
 use App\Models\Products;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class LabCosmicaController extends Controller
 {
-    public function index(Request $request){
-        $products = Products::orderBy('stock','ASC')->where('categoria', 'Cosmica')->where('subcategoria', 'Producto')->get();
-        $envases = Envases::get();
-        $envases_productos = EnvasesProductos::get();
-
-        $envases_vencer = Envases::where('conteo','<=', 150)->get();
-        return view('admin.laboratorio_cosmica.index', compact('products', 'envases', 'envases_productos', 'envases_vencer'));
-    }
-
     public function store(Request $request){
         $envases = new Envases;
         $envases->envase = $request->get('envase');
@@ -115,6 +108,15 @@ class LabCosmicaController extends Controller
     }
 
     // =============== E N V A S E S ===============================
+    public function index(Request $request){
+        $products = Products::orderBy('stock','ASC')->where('categoria', 'Cosmica')->where('subcategoria', 'Producto')->get();
+        $envases = Envases::get();
+        $envases_productos = EnvasesProductos::get();
+
+        $envases_vencer = Envases::where('conteo','<=', 150)->get();
+        return view('admin.laboratorio_cosmica.index', compact('products', 'envases', 'envases_productos', 'envases_vencer'));
+    }
+
     public function show($id){
         $product = Envases::find($id);
         return response()->json($product);
@@ -153,6 +155,29 @@ class LabCosmicaController extends Controller
         return response()->json($historial);
     }
 
+    public function pdf_envases(Request $request){
+        $today =  date('d-m-Y');
+        $envases_vencer = Envases::where('conteo','<=', 150)->get();
+        $envases_productos = EnvasesProductos::get();
+
+        $pdf = \PDF::loadView('admin.laboratorio_cosmica.pdf_vencer', compact('envases_vencer', 'today', 'envases_productos'));
+        //return $pdf->stream();
+         return $pdf->download('Envases bajo stock / '.$today.'.pdf');
+    }
+
+    public function pdf_reporte(Request $request){
+        $today =  date('d-m-Y');
+        $hoy =  date('Y-m-d');
+        $historial = HistorialLabCosmica::where('fecha', $hoy)->get();
+        $envases_productos = EnvasesProductos::get();
+
+        Carbon::setLocale('es');
+        $fechaFormateada = Carbon::parse($today)->translatedFormat('l j \d\e F');
+
+        $pdf = \PDF::loadView('admin.laboratorio_cosmica.pdf_reporte', compact('historial', 'today', 'envases_productos', 'fechaFormateada'));
+        //return $pdf->stream();
+         return $pdf->download('Envases bajo stock / '.$today.'.pdf');
+    }
     // =============== C O N T E O  G R A N E L ===============================
     public function index_granel(Request $request){
         $products = Products::orderBy('id','ASC')->where('categoria', 'Cosmica')->where('subcategoria', 'Producto')->get();

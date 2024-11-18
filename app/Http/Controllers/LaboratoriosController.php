@@ -175,8 +175,23 @@ class LaboratoriosController extends Controller
     }
 
     public function getStockHistoryCosmica($id){
-        $historial = HistorialStock::where('id_producto', $id)->get();
+        $historial = HistorialStock::where('id_producto', $id)
+        ->whereIn('tipo_cambio', ['Caja cosmica resta', 'Caja cosmica suma'])
+        ->get();
         return response()->json($historial);
     }
 
+    public function ordenes_lab_orden_finalizar_update(Request $request, $id){
+
+        $pedido = BodegaPedidos::where('id', $id)->first();
+        $pedido->comentario = $request->get('comentario');
+        $pedido->estatus_lab = 'Finalizado';
+        $pedido->estatus = 'Finalizado';
+        $pedido->fecha_aprovado_lab = date('Y-m-d');
+        $pedido->fecha_recibido = date('Y-m-d');
+        $pedido->update();
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->back();
+    }
 }

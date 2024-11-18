@@ -131,32 +131,26 @@
                     <div class="collapse " id="pagaLabCosmica">
                         <ul class="nav ms-4">
                             <li class="nav-item ">
-                                @can('lab-cosmica-pedidos')
                                 <a class="nav-link {{ (Request::is('/cosmica/laboratorio/envases') ? 'active' : '') }}" href="{{ route('envases.index') }}">
                                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                         <i class="fa fa-cube text-sm opacity-10" style="color: #7849e6"></i>
                                     </div>
                                     <span class="nav-link-text ms-1">Envases</span>
                                 </a>
-                                @endcan
 
-                                @can('lab-cosmica-stock')
                                 <a class="nav-link {{ (Request::is('/cosmica/laboratorio/granel') ? 'active' : '') }}" href="{{ route('granel.index') }}">
                                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                         <i class="fa fa-cubes text-sm opacity-10" style="color:#7849e6"></i>
                                     </div>
                                     <span class="nav-link-text ms-1">Granel</span>
                                 </a>
-                                @endcan
 
-                                @can('lab-cosmica-stock')
                                 <a class="nav-link {{ (Request::is('/cosmica/laboratorio/etiqueta') ? 'active' : '') }}" href="{{ route('etiqueta.index') }}">
                                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                         <i class="fa fa-barcode text-sm opacity-10" style="color:#7849e6"></i>
                                     </div>
                                     <span class="nav-link-text ms-1">Etiqueta</span>
                                 </a>
-                                @endcan
                             </li>
                         </ul>
                     </div>
@@ -243,14 +237,16 @@
                 </li>
             @endcan
 
-            <li class="nav-item">
-                <a class="nav-link {{ (Request::is('reporte/ventas') ? 'active' : '') }}" href="{{ route('shipments.index') }}">
-                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('assets/admin/img/icons/envia.webp') }}"width="30px" >
-                    </div>
-                    <span class="nav-link-text ms-1">Envia </span>
-                </a>
-            </li>
+            @can('envia-menu')
+                <li class="nav-item">
+                    <a class="nav-link {{ (Request::is('reporte/ventas') ? 'active' : '') }}" href="{{ route('shipments.index') }}">
+                        <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                            <img src="{{ asset('assets/admin/img/icons/envia.webp') }}"width="30px" >
+                        </div>
+                        <span class="nav-link-text ms-1">Envia </span>
+                    </a>
+                </li>
+            @endcan
 
             @can('bodega-menu')
                 <li class="nav-item">
@@ -329,7 +325,7 @@
                 </li>
             @endcan
 
-
+            @can('productos-menu')
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#pagesExamplescarrito" class="nav-link {{ (Request::is('admin/pagos*') ? 'active' : '') }}" aria-controls="pagesExamplescarrito" role="button" aria-expanded="false">
                     <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
@@ -365,7 +361,7 @@
                     </ul>
                     </div>
                 </li>
-
+            @endcan
 
 
             @can('certificacion-webinar')

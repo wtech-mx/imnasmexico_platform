@@ -308,7 +308,7 @@ class ProductsController extends Controller
             $suma = $product->stock_cosmica + $request->get('cantidad_aumentada');
         }
 
-
+        $tipo = 'Caja cosmica suma';
         // Guardar los valores anteriores del producto en la tabla historial_stock
         $historialData = [
             'id_producto' => $product->id,
@@ -322,6 +322,7 @@ class ProductsController extends Controller
             'laboratorio' => $product->laboratorio,
             'categoria' => $product->categoria,
             'subcategoria' => $product->subcategoria,
+            'tipo_cambio' => $tipo,
         ];
 
         HistorialStock::create($historialData);

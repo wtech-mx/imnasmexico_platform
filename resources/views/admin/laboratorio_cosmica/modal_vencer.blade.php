@@ -3,6 +3,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="titulo_modal"></h5>
+                <a class="btn btn-warning" href="{{ route('envases.pdf') }}" target="_blank">Imprimir</a>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="background: {{$configuracion->color_boton_close}}; color: #ffff">
                     <span aria-hidden="true">X</span>
                 </button>
@@ -26,11 +27,23 @@
                         <div class="col-12">
                             {{ $item->descripcion }}
                         </div>
+                        <div class="col-12">
+                            <ul>
+                                @foreach ($envases_productos as $envase_producto)
+                                    @if ($envase_producto->id_envase == $item->id)
+                                        <li>
+                                            {{ $envase_producto->Product->nombre }}
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray;">
                 @endforeach
             </div>
             <div class="modal-footer">
+                <a class="btn btn-warning" href="{{ route('envases.pdf') }}" target="_blank">Imprimir</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>

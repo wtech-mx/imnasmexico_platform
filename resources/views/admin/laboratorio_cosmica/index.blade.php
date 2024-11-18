@@ -16,7 +16,6 @@
             <!-- Card header -->
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
 
                     <a type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#alertaModal">
                         <img src="{{ asset('assets/user/icons/bell.png') }}" alt="" width="30px">
@@ -27,9 +26,10 @@
 
                     <h3 class="mb-3">Stock de Envases Laboratorio Cosmica </h3>
 
-                    <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_product" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                    <a class="btn btn-warning" href="{{ route('reporte.pdf') }}" target="_blank">Imprimir reporte</a>
+                    {{-- <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_product" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                         <i class="fa fa-fw fa-edit"></i> Crear
-                    </a>
+                    </a> --}}
                 </div>
             </div>
 
