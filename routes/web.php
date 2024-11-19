@@ -684,6 +684,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/cosmica/laboratorio/etiqueta/show/{id}', [App\Http\Controllers\LabCosmicaController::class, 'show_etiqueta'])->name('etiqueta.show');
         Route::patch('/cosmica/laboratorio/etiqueta/show/update/{id}', [App\Http\Controllers\LabCosmicaController::class, 'show_update_etiqueta'])->name('etiqueta.update');
         Route::get('/cosmica/laboratorio/etiqueta/show/{id}/stock-history', [App\Http\Controllers\LabCosmicaController::class, 'getStockHistoryEtiqueta'])->name('etiqueta.stockHistory');
+        Route::get('/cosmica/laboratorio/etiquetas/pdf', [App\Http\Controllers\LabCosmicaController::class, 'pdf_etiquetas'])->name('etiquetas.pdf');
 });
 
 // Route::get('registro/login', function () {
