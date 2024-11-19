@@ -12,16 +12,22 @@
                 <div class="col-6">
                     <h5>Nombre</h5>
                 </div>
-                <div class="col-6 text-center">
+                <div class="col-3 text-center">
                     <h5>Stock</h5>
+                </div>
+                <div class="col-3 text-center">
+                    <h5>Tipo</h5>
                 </div>
                 @foreach ($etiqueta_lateral as $item)
                     <div class="row mb-2">
                         <div class="col-6">
                            <b> {{ $item->nombre }} </b>
                         </div>
-                        <div class="col-6 text-center">
+                        <div class="col-3 text-center">
                             {{ $item->etiqueta_lateral }}
+                        </div>
+                        <div class="col-3 text-center">
+                            Lateral
                         </div>
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray;">
@@ -31,8 +37,11 @@
                         <div class="col-6">
                         <b> {{ $item->nombre }} </b>
                         </div>
-                        <div class="col-6 text-center">
+                        <div class="col-3 text-center">
                             {{ $item->etiqueta_tapa }}
+                        </div>
+                        <div class="col-3 text-center">
+                            Tapa
                         </div>
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray;">
@@ -42,8 +51,11 @@
                         <div class="col-6">
                         <b> {{ $item->nombre }} </b>
                         </div>
-                        <div class="col-6 text-center">
+                        <div class="col-3 text-center">
                             {{ $item->etiqueta_frente }}
+                        </div>
+                        <div class="col-3 text-center">
+                            Frente
                         </div>
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray;">
@@ -53,8 +65,11 @@
                         <div class="col-6">
                         <b> {{ $item->nombre }} </b>
                         </div>
-                        <div class="col-6 text-center">
+                        <div class="col-3 text-center">
                             {{ $item->etiqueta_reversa }}
+                        </div>
+                        <div class="col-3 text-center">
+                            Reversa
                         </div>
                     </div>
                     <hr style="height:2px;border-width:0;color:gray;background-color:gray;">

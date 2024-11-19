@@ -21,7 +21,7 @@ Conteo de Etiquetas Cosmica
                     <a type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#alertaModal">
                         <img src="{{ asset('assets/user/icons/bell.png') }}" alt="" width="30px">
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {{ $etiqueta_lateral ? $etiqueta_lateral->count() : 0 }}
+                            {{ $suma }}
                         </span>
                     </a>
 

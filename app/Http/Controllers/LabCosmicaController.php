@@ -236,13 +236,13 @@ class LabCosmicaController extends Controller
     // =============== C O N T E O  E T I Q U E T A S ===============================
     public function index_etiqueta(Request $request){
         $products = Products::orderBy('id','ASC')->where('categoria', 'Cosmica')->where('subcategoria', 'Producto')->get();
-        $etiqueta_lateral = Products::where('etiqueta_lateral','<=', 150)->get();
-        $etiqueta_tapa = Products::where('etiqueta_tapa','<=', 150)->get();
-        $etiqueta_frente = Products::where('etiqueta_frente','<=', 150)->get();
-        $etiqueta_reversa = Products::where('etiqueta_reversa','<=', 150)->get();
+        $etiqueta_lateral = Products::where('etiqueta_lateral','<=', 150)->where('estatus_lateral','=', '1')->get();
+        $etiqueta_tapa = Products::where('etiqueta_tapa','<=', 150)->where('estatus_tapa','=', '1')->get();
+        $etiqueta_frente = Products::where('etiqueta_frente','<=', 150)->where('estatus_frente','=', '1')->get();
+        $etiqueta_reversa = Products::where('etiqueta_reversa','<=', 150)->where('estatus_reversa','=', '1')->get();
 
         $suma = $etiqueta_lateral->count() + $etiqueta_tapa->count() + $etiqueta_frente->count() + $etiqueta_reversa->count();
-        return view('admin.laboratorio_cosmica.etiqueta.index', compact('products', 'etiqueta_lateral', 'etiqueta_tapa', 'etiqueta_frente', 'etiqueta_reversa'));
+        return view('admin.laboratorio_cosmica.etiqueta.index', compact('products', 'etiqueta_lateral', 'etiqueta_tapa', 'etiqueta_frente', 'etiqueta_reversa', 'suma'));
     }
 
     public function show_etiqueta($id){
