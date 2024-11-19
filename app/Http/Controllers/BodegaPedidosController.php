@@ -304,7 +304,7 @@ class BodegaPedidosController extends Controller
 
                 $historial_resta = new HistorialStock;
                 $historial_resta->id_producto = $producto->id;
-                $historial_resta->user = auth()->user()->name;
+                $historial_resta->user = 'Jen';
                 $historial_resta->sku = $producto->sku;
                 $historial_resta->stock_cosmica = "Antes: " . $producto->stock_cosmica . " -> Ahora: " . $resta;
                 $historial_resta->categoria = 'Cosmica';
@@ -315,7 +315,7 @@ class BodegaPedidosController extends Controller
 
                 $historial_suma = new HistorialStock;
                 $historial_suma->id_producto = $producto->id;
-                $historial_suma->user = auth()->user()->name;
+                $historial_suma->user = 'Jen';
                 $historial_suma->sku = $producto->sku;
                 $historial_suma->stock_cosmica = "Antes: " . $producto->stock . " -> Ahora: " . $suma;
                 $historial_suma->categoria = 'Cosmica';
