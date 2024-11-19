@@ -1207,6 +1207,7 @@ class RegistroIMNASController extends Controller
         $registro_imnas_esp->id_cliente = $payer->id;
         $registro_imnas_esp->especialidad = $request->get('especialidad');
         $registro_imnas_esp->estatus = 1;
+        $registro_imnas_esp->estatus_imnas = 1;
         $registro_imnas_esp->id_documento = 0;
         $registro_imnas_esp->save();
 
