@@ -20,6 +20,9 @@ Route::patch('/admin/productos/stock/firma/update/{id}', [App\Http\Controllers\B
 
 Route::get('/cosmica/admin/productos/stock/firma/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_firma'])->name('ordenes_cosmica.firma');
 Route::patch('/cosmica/admin/productos/stock/firma/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_firma_update'])->name('ordenes_cosmica_update.firma');
+
+Route::get('/reconocimiento/workshop', [App\Http\Controllers\ClientsController::class, 'reconocimiento_webinar'])->name('reconocimiento.webinar');
+Route::post('/reconocimiento/workshop/store', [App\Http\Controllers\ClientsController::class, 'reconocimiento_webinar_store'])->name('reconocimiento_store.webinar');
 /*
 |--------------------------------------------------------------------------
 | Web Routes

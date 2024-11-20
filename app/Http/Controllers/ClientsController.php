@@ -27,10 +27,12 @@ use Illuminate\Support\Str;
 use App\Mail\PlantillaEvaluacionAprovada;
 use App\Mail\PlantillaWebinar;
 use App\Models\Cam\CamNotEstandares;
+use App\Models\Tipodocumentos;
 use Illuminate\Support\Facades\Mail;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Storage;
 use Mtownsend\RemoveBg\RemoveBg;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ClientsController extends Controller
 {
@@ -1095,6 +1097,24 @@ class ClientsController extends Controller
         return redirect()->back()->with('success', 'Creado con exito');
     }
 
+    public function reconocimiento_webinar(){
+
+        return view('admin.webinar_pdf.index');
+    }
+
+    public function reconocimiento_webinar_store(Request $request){
+        $curso = 'Workshop Online Cosmica Skin';
+        $fecha = date('11/09/2024');
+        $tipo_documentos = Tipodocumentos::find(1);
+        $nombre = $request->get('nombre');
+        $duracion_hrs = '24';
+        $sello = 'Si';
+
+        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
+        $pdf->setPaper('A4', 'portrait');
+
+        return $pdf->download('reconocimiento_workshop_'.$nombre.'.pdf');
+    }
     // =============== A D M I N ===============================
 
     public function index_admin(){
