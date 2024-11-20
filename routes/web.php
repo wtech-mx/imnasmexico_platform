@@ -682,12 +682,16 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/cosmica/laboratorio/granel/show/{id}', [App\Http\Controllers\LabCosmicaController::class, 'show_granel'])->name('granel.show');
         Route::patch('/cosmica/laboratorio/granel/show/update/{id}', [App\Http\Controllers\LabCosmicaController::class, 'show_update_granel'])->name('granel.update');
         Route::get('/cosmica/laboratorio/granel/show/{id}/stock-history', [App\Http\Controllers\LabCosmicaController::class, 'getStockHistoryGranel'])->name('granel.stockHistory');
+
+        Route::get('/cosmica/laboratorio/granel/pdf', [App\Http\Controllers\LabCosmicaController::class, 'pdf_granel'])->name('granel.pdf');
                     // =============== C O N T E O  E T I Q U E T A S ===============================
         Route::get('/cosmica/laboratorio/etiqueta', [App\Http\Controllers\LabCosmicaController::class, 'index_etiqueta'])->name('etiqueta.index');
         Route::get('/cosmica/laboratorio/etiqueta/show/{id}', [App\Http\Controllers\LabCosmicaController::class, 'show_etiqueta'])->name('etiqueta.show');
         Route::patch('/cosmica/laboratorio/etiqueta/show/update/{id}', [App\Http\Controllers\LabCosmicaController::class, 'show_update_etiqueta'])->name('etiqueta.update');
         Route::get('/cosmica/laboratorio/etiqueta/show/{id}/stock-history', [App\Http\Controllers\LabCosmicaController::class, 'getStockHistoryEtiqueta'])->name('etiqueta.stockHistory');
         Route::get('/cosmica/laboratorio/etiquetas/pdf', [App\Http\Controllers\LabCosmicaController::class, 'pdf_etiquetas'])->name('etiquetas.pdf');
+
+        Route::get('/cosmica/laboratorio/reporte/etiquetas/pdf', [App\Http\Controllers\LabCosmicaController::class, 'pdf_etiquetas_reporte'])->name('reporte_etiquetas.pdf');
 });
 
 // Route::get('registro/login', function () {

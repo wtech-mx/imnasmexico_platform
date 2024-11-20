@@ -3,10 +3,6 @@
 @section('template_title')
     Stock Laboratorio Cosmica
 @endsection
-@section('css')
-    <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
-    <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
-@endsection
 @section('content')
 
 <div class="container-fluid mt-3">
@@ -36,15 +32,14 @@
             <div class="table-responsive p-4">
                 <table class="table table-flush" id="datatable-search">
                     <thead class="thead-light">
-                        <tr class="text-center">
-                            <th>#</th>
+                        <tr>
+                            <th>Acciones</th>
                             <th>Foto</th>
                             <th>Productos</th>
                             <th>Envase</th>
                             <th>Conteo</th>
                             <th>Descripcion</th>
                             <th>Cama/Caja</th>
-                            <th>Acciones</th>
                         </tr>
                     </thead>
                     @foreach ($envases as $product)
@@ -53,12 +48,20 @@
                             $lineas = array_chunk($palabras, 2);
 
                             $descripcion = explode(' ', $product->descripcion);
-                            $desc_salto = array_chunk($descripcion, 4);
+                            $desc_salto = array_chunk($descripcion, 2);
                         @endphp
-                        <tr id="productRow{{ $product->id }}" class="text-center">
-                            <th>{{$product->id}}</th>
+                        <tr id="productRow{{ $product->id }}">
+                            <td>
+                                {{-- <a class="btn btn-sm btn-primary" href="{{ route('envases.edit', $product->id) }}">
+                                    <i class="fa fa-fw fa-edit"></i>
+                                </a> --}}
+
+                                <a type="button" class="btn btn-sm btn-primary editProductBtn" data-id="{{ $product->id }}">
+                                    <i class="fa fa-fw fa-edit"></i>
+                                </a>
+                            </td>
                             <th>
-                                <img id="blah" src="{{$product->imagen}}" alt="Imagen" style="width: 90px; height: 90px;"/>
+                                <img id="blah" src="{{$product->imagen}}" alt="Imagen" style="width: 50px; height: 50px;"/>
                             </th>
                             <td>
                                 @foreach ($envases_productos as $envase_producto)
@@ -79,15 +82,6 @@
                                 @endforeach
                             </td>
                             <td>{{ $product->cama }}</td>
-                            <td>
-                                {{-- <a class="btn btn-sm btn-primary" href="{{ route('envases.edit', $product->id) }}">
-                                    <i class="fa fa-fw fa-edit"></i>
-                                </a> --}}
-
-                                <a type="button" class="btn btn-sm btn-primary editProductBtn" data-id="{{ $product->id }}">
-                                    <i class="fa fa-fw fa-edit"></i>
-                                </a>
-                            </td>
                         </tr>
                         @include('admin.laboratorio_cosmica.cambio_stock')
                     @endforeach
@@ -104,44 +98,11 @@
 
 @section('datatable')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.3.0/js/responsive.bootstrap4.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
-
 <script>
-    $('#datatable-search').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            {
-                extend: 'print',
-                text: 'Imprimir',
-                exportOptions: {
-                    columns: ':visible'
-                }
-            },
-            'excel',
-            'pdf',
-            'colvis'
-        ],
-        responsive: true,
-        stateSave: true,
-        language: {
-            url: 'https://cdn.datatables.net/plug-ins/1.11.5/i18n/es-ES.json'
-        },
-        columnDefs: [
-            { type: 'num', targets: 0 } // Cambia el 0 por el índice de la columna que deseas ordenar numéricamente
-        ]
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+    searchable: true,
+    fixedHeight: false
     });
 </script>
 
@@ -250,6 +211,7 @@ $(document).ready(function() {
             success: function(response) {
                 if (response) {
                     alert('Envase actualizado con éxito');
+                    console.log(response);
                     $('#productRow' + response.id + ' td:nth-child(5)').text(response.conteo);
                     $('#editProductModal').modal('hide');
                 }

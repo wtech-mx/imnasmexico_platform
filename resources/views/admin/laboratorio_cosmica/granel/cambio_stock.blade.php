@@ -46,18 +46,18 @@
                                     </div>
 
                                     <div class="form-group col-4">
-                                        <label for="name">Conteo ml/gr</label>
+                                        <label for="name">Conteo L/k</label>
                                         <input id="conteo_lab" name="conteo_lab" type="number" class="form-control" value="{{ $product->conteo_lab}}" readonly>
                                     </div>
 
                                     <div class="form-group col-4">
-                                        <label for="name">Cantidad utilizada ml/gr</label>
-                                        <input id="cantidad_utilizada" name="cantidad_utilizada" type="number" class="form-control" style="background-color: rgba(255, 0, 0, 0.39);">
+                                        <label for="name">Cantidad utilizada L/k</label>
+                                        <input id="cantidad_utilizada" name="cantidad_utilizada" type="number" class="form-control" style="background-color: rgba(255, 0, 0, 0.39);" step="any">
                                     </div>
 
                                     <div class="form-group col-4">
-                                        <label for="name">Cantidad compradas ml/gr</label>
-                                        <input id="cantidad_aumentada" name="cantidad_aumentada" type="number" class="form-control" style="background-color: rgba(72, 255, 0, 0.39);">
+                                        <label for="name">Cantidad compradas L/k</label>
+                                        <input id="cantidad_aumentada" name="cantidad_aumentada" type="number" class="form-control" style="background-color: rgba(72, 255, 0, 0.39);" step="any">
                                     </div>
                                 </div>
                             </div>

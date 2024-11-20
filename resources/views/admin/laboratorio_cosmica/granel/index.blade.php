@@ -16,16 +16,17 @@ Conteo a Granel Cosmica
             <!-- Card header -->
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
-{{--
+
                     <a type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#alertaModal">
                         <img src="{{ asset('assets/user/icons/bell.png') }}" alt="" width="30px">
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            {{ $products_cosmica ? $products_cosmica->count() : 0 }}
+                            {{ $count }}
                         </span>
-                    </a> --}}
+                    </a>
 
                     <h3 class="mb-3">Conteo a Granel Cosmica</h3>
+
+                    <p></p>
                 </div>
             </div>
 
@@ -36,7 +37,7 @@ Conteo a Granel Cosmica
                             <th>#</th>
                             <th>Foto</th>
                             <th>Producto</th>
-                            <th>Cantidad</th>
+                            <th>Cantidad L/k</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -47,7 +48,16 @@ Conteo a Granel Cosmica
                                 <img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 90px; height: 90px;"/>
                             </th>
                             <td>{{ $product->nombre }}</td>
-                            <td>{{ $product->conteo_lab }}</td>
+                            @if ($product->conteo_lab <= 10)
+                                <td style="background-color: #e74c3c; color:#fff">
+                            @elseif ($product->conteo_lab > 10 && $product->conteo_lab <= 15)
+                                <td style="background-color: #e7dc3c; color:#fff">
+                            @elseif ($product->conteo_lab > 15)
+                                <td style="background-color: #72e73c; color:#fff">
+                            @endif
+
+                                {{ number_format($product->conteo_lab, 2) }}
+                            </td>
                             <td>
                                 <a type="button" class="btn btn-sm btn-primary editProductBtn" data-id="{{ $product->id }}">
                                     <i class="fa fa-fw fa-edit"></i>
@@ -63,6 +73,7 @@ Conteo a Granel Cosmica
         </div>
       </div>
 </div>
+@include('admin.laboratorio_cosmica.granel.model_vencer')
 @endsection
 
 @section('datatable')

@@ -16,8 +16,6 @@ Conteo de Etiquetas Cosmica
             <!-- Card header -->
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <a class="btn" id="regresar_btn" style="background: {{$configuracion->color_boton_close}}; color: #fff"><i class="fas fa-arrow-left"></i> Regresar </a>
-
                     <a type="button" class="btn btn-primary position-relative" data-bs-toggle="modal" data-bs-target="#alertaModal">
                         <img src="{{ asset('assets/user/icons/bell.png') }}" alt="" width="30px">
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -26,6 +24,8 @@ Conteo de Etiquetas Cosmica
                     </a>
 
                     <h3 class="mb-3">Conteo de Etiquetas Cosmica</h3>
+
+                    <a class="btn btn-warning" href="{{ route('reporte_etiquetas.pdf') }}" target="_blank">Imprimir reporte</a>
                 </div>
             </div>
 
@@ -239,7 +239,10 @@ $(document).ready(function() {
             success: function(response) {
                 if (response) {
                     alert('Producto actualizado con éxito');
-                    $('#productRow' + response.id + ' td:nth-child(4)').text(response.conteo_lab);
+                    $('#productRow' + response.id + ' td:nth-child(4)').text(response.etiqueta_lateral);
+                    $('#productRow' + response.id + ' td:nth-child(5)').text(response.etiqueta_tapa);
+                    $('#productRow' + response.id + ' td:nth-child(6)').text(response.etiqueta_frente);
+                    $('#productRow' + response.id + ' td:nth-child(7)').text(response.etiqueta_reversa);
                     $('#editProductModal').modal('hide');
                 }
             },

@@ -29,4 +29,8 @@ class HistorialStock extends Model
         'stock_laboratorio',
         'stock_etiqueta',
     ];
+    
+    public function Products(){
+        return $this->belongsTo(Products::class, 'id_producto');
+    }
 }

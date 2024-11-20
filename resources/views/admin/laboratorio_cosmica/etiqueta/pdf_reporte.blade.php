@@ -60,7 +60,7 @@
   </style>
 <body>
   <header>
-    <h1>Reporte Diario Laboratorio
+    <h1>Reporte Diario Etiquetas
     </h1>
     <h2>{{ $fechaFormateada  }}
     </h2>
@@ -84,59 +84,21 @@
   </footer>
 
   <div id="content">
-    <h2>Envases</h2>
     <table class="table table-bordered border-primary">
         <thead style="background-color: #3f2a47; color: #fff">
             <tr>
-                <th>Envase</th>
-                <th>Stock viejo</th>
-                <th>Stock actual</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($historial as $item)
-                <tr>
-                    <td>
-                        <b>{{ $item->Envases->envase }}</b> <br>
-                        {{ $item->Envases->descripcion }} <br> <br>
-                        <b>Productos:</b>
-                        <ul>
-                            @foreach ($envases_productos as $envase_producto)
-                                @if ($envase_producto->id_envase == $item->Envases->id)
-                                    <li>
-                                        {{ $envase_producto->Product->nombre }}
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
-                    </td>
-                    <td>
-                        {{ $item->stock_viejo }}
-                    </td>
-                    <td>
-                        {{ $item->stock_nuevo }}
-                    </td>
-                </tr>
-           @endforeach
-        </tbody>
-    </table>
-
-    <h2>Granel</h2>
-    <table class="table table-bordered border-primary">
-        <thead style="background-color: #325168; color: #fff">
-            <tr>
                 <th>Producto</th>
-                <th>Moviemientos</th>
+                <th>Movimientos</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($historial_granel as $item)
+            @foreach ($historial_etiqueta as $item)
                 <tr>
                     <td>
                         <b>{{ $item->Products->nombre }}</b>
                     </td>
                     <td>
-                        {{ $item->stock_laboratorio }}
+                        {!! $item->stock_etiqueta !!}
                     </td>
                 </tr>
            @endforeach
