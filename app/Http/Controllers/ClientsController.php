@@ -1105,15 +1105,19 @@ class ClientsController extends Controller
     public function reconocimiento_webinar_store(Request $request){
         $curso = 'Workshop Online Cosmica Skin';
         $fecha = date('11/09/2024');
-        $tipo_documentos = Tipodocumentos::find(1);
+        $tipo = $request->get('tipo_documento');
+        $tipo_documentos = Tipodocumentos::where('tipo','=',$tipo)->first();
         $nombre = $request->get('nombre');
         $duracion_hrs = '24';
         $sello = 'Si';
 
-        $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
-        $pdf->setPaper('A4', 'portrait');
+        $pdf = PDF::loadView('admin.pdf.cosmica_workshop',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
 
-        return $pdf->download('reconocimiento_workshop_'.$nombre.'.pdf');
+        // Configuración personalizada de tamaño
+        $customPaper = [0, 0, 1279.5, 904.5]; // [x, y, ancho, alto] en puntos
+        $pdf->setPaper($customPaper, 'portrait');
+
+        return $pdf->download('diploma_cosmica_'.$nombre.'.pdf');
     }
     // =============== A D M I N ===============================
 

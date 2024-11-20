@@ -23,6 +23,8 @@ class CosmicaDistribuidoraController extends Controller
         $this->checkMembresia();
 
         $usercosmika = Cosmikausers::where('membresia','!=','Permanente')->where('membresia_estatus','!=','Inactiva')->orderby('id','desc')->get();
+
+
         $clientes = User::orderby('name','desc')->get();
 
         $fechaActual = Carbon::now();

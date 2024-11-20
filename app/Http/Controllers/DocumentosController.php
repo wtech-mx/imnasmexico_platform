@@ -248,6 +248,15 @@ class DocumentosController extends Controller
 
             return $pdf->download('diploma_stps_'.$nombre.'.pdf');
 
+        }if($tipo_documentos->tipo == 'Diploma Cosmica'){
+
+            $pdf = PDF::loadView('admin.pdf.cosmica_workshop', compact('curso', 'fecha', 'tipo_documentos', 'nombre', 'duracion_hrs', 'sello'));
+            // Configuración personalizada de tamaño
+            $customPaper = [0, 0, 1279.5, 904.5]; // [x, y, ancho, alto] en puntos
+            $pdf->setPaper($customPaper, 'portrait');
+
+            return $pdf->download('diploma_cosmica_'.$nombre.'.pdf');
+
         }elseif($tipo_documentos->tipo == 'Cedula de indetidad'){
 
             $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('capitalizar','tam_letra_foli_cedu_tras','tam_letra_foli_cedu','tam_letra_espec_cedu','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma'));
