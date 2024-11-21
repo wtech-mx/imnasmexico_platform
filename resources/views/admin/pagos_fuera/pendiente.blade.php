@@ -57,9 +57,9 @@
                                 ¿Como funciona?
                             </a>
 
-                            <a type="button" class="btn bg-gradient-primary" onclick="openRightPanel()" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            {{-- <a type="button" class="btn bg-gradient-primary" onclick="openRightPanel()" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 Crear
-                            </a>
+                            </a> --}}
                         </div>
 
                         <div class="row">
