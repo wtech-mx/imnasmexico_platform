@@ -148,6 +148,57 @@
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+        $('.curso').select2();
+        $('.curso4').select2();
+        $('.curso2').select2();
+        $('.curso3').select2();
+
+        const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+            searchable: true,
+            fixedHeight: false
+        });
+
+                // Esconde el contenedor del campo "Abono" inicialmente
+                $('#abono-container').hide();
+
+                // Escucha el evento 'change' del checkbox 'Deudor'
+                $('#deudor').change(function() {
+                    // Si el checkbox 'Deudor' está seleccionado, muestra el contenedor del campo "Abono"
+                    if ($(this).is(':checked')) {
+                    $('#abono-container').show();
+                    } else {
+                    // Si el checkbox 'Deudor' está deseleccionado, oculta el contenedor del campo "Abono" y borra el valor ingresado
+                    $('#abono-container').hide();
+                    $('#abono').val('');
+                    }
+                });
+
+                var table = $('#datatable-search').DataTable();
+
+                // Manejar el clic en las filas
+                $('#datatable-search tbody').on('click', 'tr', function () {
+                    // Remover la clase 'selected-row' de cualquier fila previamente seleccionada
+                    $('#datatable-search tbody tr').removeClass('selected-row');
+
+                    // Agregar la clase 'selected-row' a la fila seleccionada
+                    $(this).addClass('selected-row');
+                });
+
+    });
+
+        function openRightPanel() {
+            document.getElementById("rightPanel").style.right = "0";
+        }
+
+        function closeRightPanel() {
+            document.getElementById("rightPanel").style.right = "-600px";
+        }
+
+</script>
 <script>
 
     $(function() {
@@ -172,5 +223,37 @@
     });
 
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('tuFormulario');
+        var btnGuardar = document.getElementById('btnGuardar');
 
+        btnGuardar.addEventListener('click', function() {
+            // Habilitar el atributo 'required' en los campos del formulario
+            var inputs = form.querySelectorAll('[data-required]');
+            inputs.forEach(function(input) {
+                input.setAttribute('required', 'required');
+            });
+
+            // Deshabilitar el botón
+            this.setAttribute('disabled', 'disabled');
+
+            // Verificar la validez del formulario antes de enviarlo
+            if (form.checkValidity()) {
+                form.submit();
+            } else {
+                // Habilitar nuevamente el botón si el formulario no es válido
+                btnGuardar.removeAttribute('disabled');
+            }
+        });
+
+        form.addEventListener('submit', function(event) {
+            // Deshabilitar el atributo 'required' en los campos del formulario antes de enviarlo
+            var inputs = form.querySelectorAll('[data-required]');
+            inputs.forEach(function(input) {
+                input.removeAttribute('required');
+            });
+        });
+    });
+</script>
 @endsection
