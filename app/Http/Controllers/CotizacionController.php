@@ -231,6 +231,7 @@ class CotizacionController extends Controller
         }
         $notas_productos->save();
 
+        $contadorKits = 1;
         if ($request->has('campo')) {
             $nuevosCampos = $request->input('campo');
             $nuevosCampos2 = $request->input('campo4');
@@ -239,9 +240,10 @@ class CotizacionController extends Controller
             foreach ($nuevosCampos as $index => $campo) {
                 $producto = Products::where('nombre', $campo)->first();
 
-                if($producto->subcategoria == 'Kit'){
+                if ($producto && $producto->subcategoria == 'Kit') {
                     $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
-                    foreach($productos_bundle as $producto_bundle){
+
+                    foreach ($productos_bundle as $producto_bundle) {
                         $notas_inscripcion = new ProductosNotasId;
                         $notas_inscripcion->id_notas_productos = $notas_productos->id;
                         $notas_inscripcion->producto = $producto_bundle->producto;
@@ -249,8 +251,13 @@ class CotizacionController extends Controller
                         $notas_inscripcion->cantidad = $producto_bundle->cantidad;
                         $notas_inscripcion->save();
                     }
-                    $notas_productos->id_kit = $producto->id;
-                    $notas_productos->update();
+
+                    // Asignar el ID del kit en la columna correspondiente
+                    if ($contadorKits <= 6) { // Controlar un máximo de 6 kits
+                        $columnaKit = "id_kit" . ($contadorKits > 1 ? $contadorKits : "");
+                        $notas_productos->$columnaKit = $producto->id;
+                        $contadorKits++;
+                    }
                 }elseif($producto->subcategoria == 'Tiendita'){
                     $notas_inscripcion = new ProductosNotasId;
                     $notas_inscripcion->id_notas_productos = $notas_productos->id;
@@ -270,6 +277,7 @@ class CotizacionController extends Controller
                     $notas_inscripcion->save();
                 }
             }
+            $notas_productos->save();
         }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

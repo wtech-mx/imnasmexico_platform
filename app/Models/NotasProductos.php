@@ -45,4 +45,24 @@ class NotasProductos extends Model
     {
         return $this->belongsTo(Products::class, 'id_kit');
     }
+    public function Kit2()
+    {
+        return $this->belongsTo(Products::class, 'id_kit2');
+    }
+    public function Kit3()
+    {
+        return $this->belongsTo(Products::class, 'id_kit3');
+    }
+    public function Kit4()
+    {
+        return $this->belongsTo(Products::class, 'id_kit4');
+    }
+    public function Kit5()
+    {
+        return $this->belongsTo(Products::class, 'id_kit5');
+    }
+    public function Kit6()
+    {
+        return $this->belongsTo(Products::class, 'id_kit6');
+    }
 }

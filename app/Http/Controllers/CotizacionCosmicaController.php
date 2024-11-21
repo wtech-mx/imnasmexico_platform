@@ -278,21 +278,27 @@ class CotizacionCosmicaController extends Controller
                 $nuevosCampos4 = $request->input('descuento_prod');
             }
 
+            $contadorKits = 1;
             foreach ($nuevosCampos as $index => $campo) {
                 $producto = Products::where('nombre', $campo)->first();
+                if ($producto && $producto->subcategoria == 'Kit') {
+                        $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
 
-                if($producto->subcategoria == 'Kit'){
-                    $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
-                    foreach($productos_bundle as $producto_bundle){
-                        $notas_inscripcion = new ProductosNotasCosmica;
-                        $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                        $notas_inscripcion->producto = $producto_bundle->producto;
-                        $notas_inscripcion->price = '0';
-                        $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                        $notas_inscripcion->save();
-                    }
-                    $notas_productos->id_kit = $producto->id;
-                    $notas_productos->update();
+                        foreach ($productos_bundle as $producto_bundle) {
+                            $notas_inscripcion = new ProductosNotasCosmica;
+                            $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                            $notas_inscripcion->producto = $producto_bundle->producto;
+                            $notas_inscripcion->price = '0';
+                            $notas_inscripcion->cantidad = $producto_bundle->cantidad;
+                            $notas_inscripcion->save();
+                        }
+
+                        // Asignar el ID del kit en la columna correspondiente
+                        if ($contadorKits <= 6) { // Controlar un máximo de 6 kits
+                            $columnaKit = "id_kit" . ($contadorKits > 1 ? $contadorKits : "");
+                            $notas_productos->$columnaKit = $producto->id;
+                            $contadorKits++;
+                        }
                 }elseif($producto->subcategoria == 'Tiendita'){
                     $notas_inscripcion = new ProductosNotasCosmica;
                     $notas_inscripcion->id_notas_productos = $notas_productos->id;
@@ -312,6 +318,7 @@ class CotizacionCosmicaController extends Controller
                     $notas_inscripcion->save();
                 }
             }
+            $notas_productos->save();
         }
 
         return redirect()->route('cotizacion_cosmica.index')

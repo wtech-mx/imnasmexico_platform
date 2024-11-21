@@ -131,8 +131,29 @@
     </table>
 
     <div class="text-center">
-        @if ($nota->id_kit != NULL)
+        @if ($nota->id_kit != NULL && $nota->id_kit2 == NULL)
             <h3>{{$nota->Kit->nombre}}</h3>
+        @endif
+        @if ($nota->id_kit2 != NULL)
+            <h3>Compra de kits:</h3>
+            <ul>
+                <li>{{$nota->Kit->nombre}}</li>
+                @if ($nota->id_kit2 != NULL)
+                    <li>{{$nota->Kit2->nombre}}</li>
+                @endif
+                @if ($nota->id_kit3 != NULL)
+                    <li>{{$nota->Kit3->nombre}}</li>
+                @endif
+                @if ($nota->id_kit4 != NULL)
+                    <li>{{$nota->Kit4->nombre}}</li>
+                @endif
+                @if ($nota->id_kit5 != NULL)
+                    <li>{{$nota->Kit5->nombre}}</li>
+                @endif
+                @if ($nota->id_kit6 != NULL)
+                    <li>{{$nota->Kit6->nombre}}</li>
+                @endif
+            </ul>
         @endif
     </div>
 
