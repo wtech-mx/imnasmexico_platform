@@ -499,6 +499,11 @@
                     <ul class="nav ms-4">
                         <li class="nav-item ">
 
+                        <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/create*') ? 'show' : '') }}" href="{{ route('pagos.create') }}">
+                            <span class="sidenav-mini-icon"> P </span>
+                            <span class="sidenav-normal">Subir Pago</span>
+                        </a>
+
                         <a class="nav-link {{ (Request::is('admin/pagos-por-fuera/pendientes*') ? 'show' : '') }}" href="{{ route('pagos.pendientes') }}">
                             <span class="sidenav-mini-icon"> P </span>
                             <span class="sidenav-normal">Verificar Pagos</span>

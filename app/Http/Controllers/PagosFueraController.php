@@ -560,8 +560,8 @@ class PagosFueraController extends Controller
             }
         }
 
-        return redirect()->route('pagos.pendientes')
-            ->with('success', 'pago fuera creado con exito.');
+        Session::flash('success', 'Se ha subido el pago correctamente');
+        return redirect()->back()->with('success', 'Se ha subido el pago correctamente');
     }
 
     public function update_deudores(Request $request, $id){
@@ -745,11 +745,17 @@ class PagosFueraController extends Controller
     public function pendientes(){
         $fechaActual = date('Y-m-d');
         $pagos_fuera = PagosFuera::orderBy('id','DESC')->where('pendiente', '=', '0')->get();
+
+        return view('admin.pagos_fuera.pendiente', compact('pagos_fuera'));
+    }
+
+    public function create(){
+        $fechaActual = date('Y-m-d');
         $cursos = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
         $clases_grabadas = CursosTickets::where('fecha_final','<=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
         $envio = CursosTickets::where('id_curso','=', 109)->first();
 
-        return view('admin.pagos_fuera.pendiente', compact('pagos_fuera', 'cursos', 'clases_grabadas', 'envio'));
+        return view('admin.pagos_fuera.create', compact('cursos', 'clases_grabadas', 'envio'));
     }
 
     public function ChangePendienteStatus(Request $request)

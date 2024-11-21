@@ -165,13 +165,20 @@ class LaboratoriosController extends Controller
 
 
     public function index_productos_cosmica(){
-
         $products = Products::where('laboratorio','=','Cosmica')->get();
-
         $products_cosmica = Products::where('stock_cosmica','<=', 90)->get();
 
         return view('admin.laboratorio.index_productos_cosmica',compact('products', 'products_cosmica'));
+    }
 
+    public function pdf_cajas(Request $request){
+        $today =  date('d-m-Y');
+        $bajo_productos = Products::where('stock_cosmica','<=', 30)->orderby('stock_cosmica','ASC')->get();
+        $medio_productos = Products::where('stock_cosmica','>', 30)->where('stock_cosmica','<=', 90)->orderby('stock_cosmica','ASC')->get();
+
+        $pdf = \PDF::loadView('admin.laboratorio.pdf_stock_cosmica', compact('bajo_productos', 'today', 'medio_productos'));
+        //return $pdf->stream();
+        return $pdf->download('Productos cosmica bajo stock / '.$today.'.pdf');
     }
 
     public function getStockHistoryCosmica($id){

@@ -264,6 +264,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/cosmica/laboratorio/prodcutos', [App\Http\Controllers\LaboratoriosController::class, 'index_productos_cosmica'])->name('laboratorio_producto.cosmica');
 
     Route::patch('/admin/ordenes/finalizar/update/{id}', [App\Http\Controllers\LaboratoriosController::class, 'ordenes_lab_orden_finalizar_update'])->name('ordenes_lab_update_finalizar.update');
+
+    Route::get('/cosmica/cajas/stock/pdf', [App\Http\Controllers\LaboratoriosController::class, 'pdf_cajas'])->name('cajas.pdf');
     // =============== M O D U L O  V E R I  F I C A R T R A N S F E R E N C I A S ===============================
     Route::get('/admin/comprobar_transferenciass', [App\Http\Controllers\VerificarTransferenciasController::class, 'index'])->name('trasnferencias.index');
     Route::post('/admin/comprobar_transferencias/verificar', [App\Http\Controllers\VerificarTransferenciasController::class, 'store'])->name('trasnferencias.store');
@@ -330,6 +332,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/changeStatus/deudor', [App\Http\Controllers\PagosFueraController::class, 'ChangeDeudorStatus'])->name('ChangeDeudorStatus.pagos');
 
     Route::get('/admin/pagos-por-fuera/pendientes', [App\Http\Controllers\PagosFueraController::class, 'pendientes'])->name('pagos.pendientes');
+    Route::get('/admin/pagos-por-fuera/create', [App\Http\Controllers\PagosFueraController::class, 'create'])->name('pagos.create');
     Route::get('/admin/pagos-por-fuera/deudores', [App\Http\Controllers\PagosFueraController::class, 'deudores'])->name('pagos.deudores');
 
     // =============== M O D U L O   O R D E N E S ===============================
