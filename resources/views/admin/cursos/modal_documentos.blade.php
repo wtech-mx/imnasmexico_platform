@@ -94,7 +94,7 @@
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img class="img_profile_label" src="{{asset('assets/user/icons/aprender-en-linea.webp')}}" alt="" width="30px">
                                             </span>
-                                            <input id="curso" name="curso" type="text" class="form-control" value="{{ $ticket->Cursos->nombre }}" readonly >
+                                            <input id="curso" name="curso" type="text" class="form-control" value="{{ $ticket->Cursos->nombre }}">
                                         </div>
                                     </div>
 
@@ -125,27 +125,13 @@
                                                     <option value="5">RN - Credencial General</option>
                                                     <option value="3">RN - Titulo Honorifico QRS</option>
 
-                                                    @if (str_contains($ticket->Cursos->nombre,'medicina estetica'))
                                                         <option value="6">CN - Tira de materias aparatologia</option>
-                                                    @endif
-                                                    @if (str_contains($ticket->Cursos->nombre, 'Alisados'))
                                                         <option value="7">CN - Tira de materias alasiados progresivos</option>
-                                                    @endif
-                                                    @if (str_contains($ticket->Cursos->nombre, 'Cosmetología Facial y Corporal'))
                                                         <option value="8">CN - Tira de materias cosmetologia facial y corporal</option>
-                                                    @endif
-                                                    @if (str_contains($ticket->Cursos->nombre, 'Cosmiatria'))
                                                         <option value="9">CN - Tira de materias cosmiatria estetica avanzada</option>
-                                                    @endif
-                                                    @if (str_contains($ticket->Cursos->nombre, 'Auxiliar'))
                                                         <option value="10">CN - Tira de materias auxiliar en cuidados de atencion medica</option>
-                                                    @endif
-                                                    @if (str_contains($ticket->Cursos->nombre, 'Mesoterapia'))
                                                         <option value="11">CN - Tira de materias masoterapia</option>
-                                                    @endif
-                                                    @if (str_contains($ticket->Cursos->nombre, 'Cosmetología'))
                                                         <option value="12">CN - Tira de materias Cosmetologia</option>
-                                                    @endif
                                                 @endif
                                                 @if ($ticket->Cursos->imnas == '1' && $ticket->Cursos->titulo_hono == '1')
                                                     <option value="3">RN - Titulo Honorifico QRS</option>
