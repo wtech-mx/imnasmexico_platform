@@ -28,4 +28,13 @@ class HistorialVendidos extends Model
     public function Products(){
         return $this->belongsTo(Products::class, 'id_producto');
     }
+    public function NotasProductosCosmica(){
+        return $this->belongsTo(NotasProductosCosmica::class, 'id_cotizacion_cosmica');
+    }
+    public function NotasProductos(){
+        return $this->belongsTo(NotasProductos::class, 'id_cotizacion_nas');
+    }
+    public function NotasProductosVentas(){
+        return $this->belongsTo(NotasProductos::class, 'id_venta_nas');
+    }
 }

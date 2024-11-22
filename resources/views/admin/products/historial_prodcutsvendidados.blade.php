@@ -8,7 +8,9 @@
     <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
 @endsection
 @section('content')
-
+@php
+    use Carbon\Carbon;
+@endphp
 <div class="container-fluid mt-3">
       <div class="row">
         <div class="col">
@@ -83,19 +85,19 @@
                         <table class="table table-flush" id="datatable-search">
                             <thead class="thead-light">
                                 <tr>
-                                    <th colspan="2">#</th>
-                                    <th colspan="2">IMG</th>
-                                    <th colspan="2">Nombre</th>
+                                    <th colspan="3">#</th>
+                                    <th colspan="3">IMG</th>
+                                    <th colspan="3">Nombre</th>
                                 </tr>
                             </thead>
 
                             @foreach ($HistorialVendidos as $productoId => $ventas)
                             <tr style="background-color: #0560776c">
-                                <td colspan="2"><h5>{{ $productoId }}</h5></td>
-                                <td colspan="2">
+                                <td colspan="3"><h5>{{ $productoId }}</h5></td>
+                                <td colspan="3">
                                     <img id="blah" src="{{ $ventas->first()->Products->imagenes }}" alt="Imagen" style="width: 60px; height: 60px;"/>
                                 </td>
-                                <td colspan="2">
+                                <td colspan="3">
                                    <h5>{{ $ventas->first()->Products->nombre }}</h5>
                                 </td>
                             </tr>
@@ -104,14 +106,16 @@
                                 return \Carbon\Carbon::parse($venta->created_at)->format('d \d\e F \d\e\l Y');
                             }) as $fecha => $ventasPorFecha)
                                 <tr class="text-center">
-                                    <td colspan="6" style="background-color: #d9edf7;">
+                                    <td colspan="9" style="background-color: #d9edf7;">
                                        <h5>{{ $fecha }}</h5>
                                     </td>
                                 </tr>
                                 <tr class="text-center">
                                     <th colspan="2">Stock Viejo</th>
-                                    <th colspan="3">Cantidad Restado</th>
+                                    <th colspan="1">Cantidad Restado</th>
                                     <th colspan="2">Stock Actual</th>
+                                    <th colspan="2">Nota</th>
+                                    <th colspan="2">Fecha y hora</th>
                                 </tr>
 
                                 @php
@@ -124,16 +128,34 @@
                                     @endphp
                                     <tr class="text-center">
                                         <td colspan="2">{{ $venta->stock_viejo }}</td>
-                                        <td colspan="3">{{ $venta->cantidad_restado }}</td>
+                                        <td colspan="1">{{ $venta->cantidad_restado }}</td>
                                         <td colspan="2">{{ $venta->stock_actual }}</td>
+                                        <td colspan="2">
+                                            @if ($venta->id_cotizacion_nas != NULL)
+                                               Nas: {{ $venta->NotasProductos->folio }}
+                                            @elseif ($venta->id_cotizacion_cosmica != NULL)
+                                               Cosmica: {{ $venta->NotasProductosCosmica->folio }}
+                                            @elseif ($venta->id_venta_nas != NULL)
+                                               Tiendita: {{ $venta->NotasProductosVentas->folio }}
+                                            @elseif ($venta->id_paradisus != NULL)
+                                               Paradisus: {{ $venta->id_paradisus }}
+                                            @elseif ($venta->id_nas_online != NULL)
+                                               Nas Online: {{ $venta->id_nas_online }}
+                                            @elseif ($venta->id_cosmica_online != NULL)
+                                               Cosmica Online: {{ $venta->id_cosmica_online }}
+                                            @endif
+
+
+                                        </td>
+                                        <td colspan="2">{{ Carbon::parse($venta->created_at)->locale('es')->translatedFormat('d F Y h:i a') }}</td>
                                     </tr>
                                 @endforeach
 
                                 <!-- Fila para mostrar la suma de cantidad restado -->
                                 <tr class="text-center" style="background-color: #f0f0f0;">
                                     <td colspan="2"><strong>Total Cantidad Restado:</strong></td>
-                                    <td colspan="3"><strong>{{ $sumaCantidadRestado }}</strong></td>
-                                    <td colspan="2"></td>
+                                    <td colspan="1"><strong>{{ $sumaCantidadRestado }}</strong></td>
+                                    <td colspan="6"></td>
                                 </tr>
                             @endforeach
                         @endforeach
