@@ -462,8 +462,6 @@ class CotizacionController extends Controller
                 $nota->fecha_entrega  = $request->get('fecha_entrega');
                 $nota->direccion_entrega  = $request->get('direccion_entrega');
                 $nota->comentario_rep  = $request->get('comentario_rep');
-            }else if($request->get('estatus_cotizacion') == 'Enviado'){
-                $nota->fecha_aprobada  = date("Y-m-d");
             }
 
         $nota->save();
