@@ -180,22 +180,6 @@
         fixedHeight: false
     });
 
-    const dataTableSearch2 = new simpleDatatables.DataTable("#datatable-search2", {
-        searchable: true,
-        fixedHeight: false
-    });
-
-    const dataTableSearch3 = new simpleDatatables.DataTable("#datatable-search3", {
-        searchable: true,
-        fixedHeight: false
-    });
-
-    const dataTableSearch4 = new simpleDatatables.DataTable("#datatable-search4", {
-        searchable: true,
-        fixedHeight: false
-    });
-
-
 // Seleccionar todos los botones de envío
 document.querySelectorAll('[id^="submitButtonEstatus"]').forEach(function(button) {
     button.addEventListener('click', function(event) {

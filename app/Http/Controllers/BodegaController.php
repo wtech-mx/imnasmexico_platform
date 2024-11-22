@@ -51,28 +51,8 @@ class BodegaController extends Controller
             'per_page' => 100,
         ]);
 
-        $orders_tienda_principal_preparados = $woocommerce->get('orders', [
-            'status' => 'preparados',
-            'per_page' => 100,
-        ]);
-
-        $orders_tienda_principal_enviados = $woocommerce->get('orders', [
-            'status' => 'enviados',
-            'per_page' => 100,
-        ]);
-
         $orders_tienda_cosmica = $woocommerceCosmika->get('orders', [
             'status' => 'guia_cargada',
-            'per_page' => 100,
-        ]);
-
-        $orders_tienda_cosmica_preparados = $woocommerceCosmika->get('orders', [
-            'status' => 'preparados',
-            'per_page' => 100,
-        ]);
-
-        $orders_tienda_cosmica_enviados = $woocommerceCosmika->get('orders', [
-            'status' => 'enviados',
             'per_page' => 100,
         ]);
 
@@ -101,51 +81,27 @@ class BodegaController extends Controller
             ->values()
             ->all();
 
-        $ApiFiltradaCollectPreparado = collect($ApiParadisusArray['data'])
-            ->where('estatus', 'Preparado')
-            ->sortByDesc('id')
-            ->values()
-            ->all();
-
-        $ApiFiltradaCollectEnviado = collect($ApiParadisusArray['data'])
-            ->where('estatus', 'Enviado')
-            ->sortByDesc('id')
-            ->values()
-            ->all();
-
         // Otras consultas de la base de datos
         $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
-        $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
-        $notas_enviados = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
 
         $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
-        $notas_presencial_preparado = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Preparado')
-        // ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
-        ->get();
+
         $notas_presencial_cancelada = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Cancelar')->get();
         $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')
         ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
         $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
-        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
-        $notas_cosmica_enviados = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
 
-        $cantidad = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
+        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index', compact(
-            'ApiFiltradaCollectAprobado', 'cantidad',
-            'ApiFiltradaCollectPreparado',
-            'ApiFiltradaCollectEnviado',
+            'notas_presencial_preparacion',
+            'notas_preparacion',
+            'notas_cosmica_preparacion',
             'orders_tienda_principal',
-            'orders_tienda_principal_preparados',
-            'orders_tienda_principal_enviados',
             'orders_tienda_cosmica',
-            'orders_tienda_cosmica_preparados',
-            'orders_tienda_cosmica_enviados',
-            'notas_preparacion', 'notas_preparado', 'notas_enviados',
-            'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados',
-            'notas_presencial_preparacion', 'notas_presencial_cancelada','notas_presencial_preparado', 'notas_presencial_enviados'
-        ));
+            'cantidad_preparacion',
+            'ApiFiltradaCollectAprobado'));
     }
 
     public function index_preparados(Request $request) {
@@ -184,11 +140,6 @@ class BodegaController extends Controller
             'per_page' => 100,
         ]);
 
-        $orders_tienda_principal_enviados = $woocommerce->get('orders', [
-            'status' => 'enviados',
-            'per_page' => 100,
-        ]);
-
         $orders_tienda_cosmica = $woocommerceCosmika->get('orders', [
             'status' => 'guia_cargada',
             'per_page' => 100,
@@ -196,11 +147,6 @@ class BodegaController extends Controller
 
         $orders_tienda_cosmica_preparados = $woocommerceCosmika->get('orders', [
             'status' => 'preparados',
-            'per_page' => 100,
-        ]);
-
-        $orders_tienda_cosmica_enviados = $woocommerceCosmika->get('orders', [
-            'status' => 'enviados',
             'per_page' => 100,
         ]);
 
@@ -235,44 +181,29 @@ class BodegaController extends Controller
             ->values()
             ->all();
 
-        $ApiFiltradaCollectEnviado = collect($ApiParadisusArray['data'])
-            ->where('estatus', 'Enviado')
-            ->sortByDesc('id')
-            ->values()
-            ->all();
 
         // Otras consultas de la base de datos
         $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
         $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
-        $notas_enviados = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
 
         $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
         $notas_presencial_preparado = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Preparado')
         // ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
         ->get();
-        $notas_presencial_cancelada = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Cancelar')->get();
-        $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')
-        ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
         $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
         $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
-        $notas_cosmica_enviados = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
 
-        $cantidad = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
+        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index_preparados', compact(
-            'ApiFiltradaCollectAprobado', 'cantidad',
             'ApiFiltradaCollectPreparado',
-            'ApiFiltradaCollectEnviado',
-            'orders_tienda_principal',
-            'orders_tienda_principal_preparados',
-            'orders_tienda_principal_enviados',
-            'orders_tienda_cosmica',
             'orders_tienda_cosmica_preparados',
-            'orders_tienda_cosmica_enviados',
-            'notas_preparacion', 'notas_preparado', 'notas_enviados',
-            'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados',
-            'notas_presencial_preparacion', 'notas_presencial_cancelada','notas_presencial_preparado', 'notas_presencial_enviados'
+            'orders_tienda_principal_preparados',
+            'notas_cosmica_preparado',
+            'notas_preparado',
+            'notas_presencial_preparado',
+            'cantidad_preparacion'
         ));
     }
 
@@ -386,21 +317,14 @@ class BodegaController extends Controller
         $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
         $notas_cosmica_enviados = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
 
-        $cantidad = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
+        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index_enviados', compact(
-            'ApiFiltradaCollectAprobado', 'cantidad',
-            'ApiFiltradaCollectPreparado',
-            'ApiFiltradaCollectEnviado',
-            'orders_tienda_principal',
-            'orders_tienda_principal_preparados',
-            'orders_tienda_principal_enviados',
-            'orders_tienda_cosmica',
-            'orders_tienda_cosmica_preparados',
             'orders_tienda_cosmica_enviados',
-            'notas_preparacion', 'notas_preparado', 'notas_enviados',
-            'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados',
-            'notas_presencial_preparacion', 'notas_presencial_cancelada','notas_presencial_preparado', 'notas_presencial_enviados'
+            'orders_tienda_principal_enviados',
+            'notas_cosmica_enviados',
+            'notas_enviados',
+            'cantidad_preparacion',
         ));
     }
 
@@ -485,12 +409,6 @@ class BodegaController extends Controller
             ->values()
             ->all();
 
-        $ApiFiltradaCollectPreparado = collect($ApiParadisusArray['data'])
-            ->where('estatus', 'Preparado')
-            ->sortByDesc('id')
-            ->values()
-            ->all();
-
         $ApiFiltradaCollectEnviado = collect($ApiParadisusArray['data'])
             ->where('estatus', 'Enviado')
             ->sortByDesc('id')
@@ -499,36 +417,21 @@ class BodegaController extends Controller
 
         // Otras consultas de la base de datos
         $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
-        $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
-        $notas_enviados = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
 
         $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
-        $notas_presencial_preparado = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Preparado')
         // ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
-        ->get();
-        $notas_presencial_cancelada = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Cancelar')->get();
         $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')
         ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
         $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
-        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
         $notas_cosmica_enviados = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
 
-        $cantidad = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
+        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index_entregados', compact(
-            'ApiFiltradaCollectAprobado', 'cantidad',
-            'ApiFiltradaCollectPreparado',
+            'notas_presencial_enviados',
             'ApiFiltradaCollectEnviado',
-            'orders_tienda_principal',
-            'orders_tienda_principal_preparados',
-            'orders_tienda_principal_enviados',
-            'orders_tienda_cosmica',
-            'orders_tienda_cosmica_preparados',
-            'orders_tienda_cosmica_enviados',
-            'notas_preparacion', 'notas_preparado', 'notas_enviados',
-            'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados',
-            'notas_presencial_preparacion', 'notas_presencial_cancelada','notas_presencial_preparado', 'notas_presencial_enviados'
+            'cantidad_preparacion'
         ));
     }
 
@@ -563,28 +466,8 @@ class BodegaController extends Controller
             'per_page' => 100,
         ]);
 
-        $orders_tienda_principal_preparados = $woocommerce->get('orders', [
-            'status' => 'preparados',
-            'per_page' => 100,
-        ]);
-
-        $orders_tienda_principal_enviados = $woocommerce->get('orders', [
-            'status' => 'enviados',
-            'per_page' => 100,
-        ]);
-
         $orders_tienda_cosmica = $woocommerceCosmika->get('orders', [
             'status' => 'guia_cargada',
-            'per_page' => 100,
-        ]);
-
-        $orders_tienda_cosmica_preparados = $woocommerceCosmika->get('orders', [
-            'status' => 'preparados',
-            'per_page' => 100,
-        ]);
-
-        $orders_tienda_cosmica_enviados = $woocommerceCosmika->get('orders', [
-            'status' => 'enviados',
             'per_page' => 100,
         ]);
 
@@ -613,52 +496,20 @@ class BodegaController extends Controller
             ->values()
             ->all();
 
-        $ApiFiltradaCollectPreparado = collect($ApiParadisusArray['data'])
-            ->where('estatus', 'Preparado')
-            ->sortByDesc('id')
-            ->values()
-            ->all();
-
-        $ApiFiltradaCollectEnviado = collect($ApiParadisusArray['data'])
-            ->where('estatus', 'Enviado')
-            ->sortByDesc('id')
-            ->values()
-            ->all();
-
         // Otras consultas de la base de datos
         $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
-        $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
-        $notas_enviados = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
 
         $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
-        $notas_presencial_preparado = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Preparado')
-        // ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
-        ->get();
 
         $notas_presencial_cancelada = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Cancelar')->get();
 
-        $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')
-        ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
-
         $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
-        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
-        $notas_cosmica_enviados = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
 
-        $cantidad = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
+        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index_cancelados', compact(
-            'ApiFiltradaCollectAprobado', 'cantidad',
-            'ApiFiltradaCollectPreparado',
-            'ApiFiltradaCollectEnviado',
-            'orders_tienda_principal',
-            'orders_tienda_principal_preparados',
-            'orders_tienda_principal_enviados',
-            'orders_tienda_cosmica',
-            'orders_tienda_cosmica_preparados',
-            'orders_tienda_cosmica_enviados',
-            'notas_preparacion', 'notas_preparado', 'notas_enviados',
-            'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados',
-            'notas_presencial_preparacion', 'notas_presencial_cancelada','notas_presencial_preparado', 'notas_presencial_enviados'
+            'notas_presencial_cancelada',
+            'cantidad_preparacion'
         ));
     }
 

@@ -140,21 +140,6 @@
 
 <script type="text/javascript">
 
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-        searchable: true,
-        fixedHeight: false
-    });
-
-    const dataTableSearch2 = new simpleDatatables.DataTable("#datatable-search2", {
-        searchable: true,
-        fixedHeight: false
-    });
-
-    const dataTableSearch3 = new simpleDatatables.DataTable("#datatable-search3", {
-        searchable: true,
-        fixedHeight: false
-    });
-
     const dataTableSearch4 = new simpleDatatables.DataTable("#datatable-search4", {
         searchable: true,
         fixedHeight: false
