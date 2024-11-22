@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Bodega
+    Bodega Enviados
 @endsection
 
 @section('content')
@@ -58,73 +58,21 @@
                                 </div>
                             </nav>
 
-
                               <div class="tab-content" id="nav-tabContent">
 
-                                <table class="table table-flush" id="datatable-search4">
+                                <table class="table table-flush" id="datatable-search3">
                                         <thead class="thead">
                                             <tr>
                                                 <th>No</th>
                                                 <th>Cliente</th>
                                                 <th>Estatus</th>
-                                                <th>fecha Aprobada</th>
+                                                <th>fecha Enviado</th>
                                                 <th>Total</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($notas_presencial_preparacion as $item)
-                                                <tr style="background: #6ec7d1a3">
-                                                    <td>
-                                                        <h5>
-                                                            @if ($item->folio == null)
-                                                                {{ $item->id }}
-                                                            @else
-                                                                {{ $item->folio }}
-                                                            @endif
-                                                        </h5>
-                                                    </td>
-                                                    <td>
-                                                        <h5>
-                                                            @if ($item->id_usuario == NULL)
-                                                                {{ $item->nombre }} <br> {{ $item->telefono }}
-                                                            @else
-                                                                {{ $item->User->name }}
-                                                            @endif
-                                                        </h5>
-                                                    </td>
-
-                                                    <td>
-                                                        En preparación <br>
-                                                        Pedido Tiendita
-                                                    </td>
-
-                                                    <td>
-                                                        <h5>
-                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                        </h5>
-                                                    </td>
-                                                    <td><h5>${{ $item->total }}</h5></td>
-                                                    <td>
-                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $item->id]) }}">
-                                                            <i class="fa fa-list-alt"></i>
-                                                        </a>
-
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
-                                                            <i class="fa fa-info"></i>
-                                                        </a>
-
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner.bodega', $item->id) }}">
-                                                            <i class="fa fa-barcode"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-
-                                                @include('admin.bodega.modal_estatus')
-                                                @include('admin.bodega.modal_fechas')
-                                            @endforeach
-
-                                            @foreach ($notas_preparacion as $item)
+                                            @foreach ($notas_enviados as $item)
                                                 <tr style="background: #836262a3">
                                                     <td>
                                                         <h5>
@@ -146,19 +94,20 @@
                                                     </td>
 
                                                     <td>
-                                                        En preparación <br>
-                                                        NAS Cotizaciones Aprobadas
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
+                                                            Enviado
+                                                        </a>
                                                     </td>
 
                                                     <td>
                                                         <h5>
-                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                            {{ \Carbon\Carbon::parse($item->fecha_envio)->isoFormat('dddd DD MMMM hh:mm a') }}
                                                         </h5>
                                                     </td>
                                                     <td><h5>${{ $item->total }}</h5></td>
                                                     <td>
                                                         <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $item->id]) }}">
-                                                            <i class="fa fa-list-alt"></i>
+                                                            <i class="fa fa-file"></i>
                                                         </a>
 
                                                         @if ($item->metodo_pago == 'Contra Entrega')
@@ -174,19 +123,14 @@
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
                                                         </a>
-
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner.bodega', $item->id) }}">
-                                                            <i class="fa fa-barcode"></i>
-                                                        </a>
                                                     </td>
                                                 </tr>
-
                                                 @include('admin.cotizacion.guia')
                                                 @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
 
-                                            @foreach ($notas_cosmica_preparacion as $item)
+                                            @foreach ($notas_cosmica_enviados as $item)
                                                 <tr style="background: #d486d6">
                                                     <td>
                                                         <h5>
@@ -208,7 +152,9 @@
                                                     </td>
 
                                                     <td>
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
                                                             En preparación
+                                                        </a>
                                                     </td>
 
                                                     <td>
@@ -232,26 +178,25 @@
                                                             </a>
                                                         @endif
 
+
                                                         <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                             <i class="fa fa-info"></i>
-                                                        </a>
-
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_cosmica.bodega', $item->id) }}">
-                                                            <i class="fa fa-barcode"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
                                                 @include('admin.cotizacion.guia')
-                                                @include('admin.bodega.modal_cosmica_estatus')
+                                                @include('admin.bodega.modal_estatus')
                                                 @include('admin.bodega.modal_fechas')
                                             @endforeach
 
-                                            @foreach($orders_tienda_principal as $order)
+                                            @foreach($orders_tienda_principal_enviados as $order)
                                                 <tr style="background: #F5ECE4">
                                                     <td>{{ $order->id }}</td>
                                                     <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
                                                     <td>
-                                                            En preparación
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
+                                                            Enviado
+                                                        </a>
                                                     </td>
                                                     <td>{{ \Carbon\Carbon::parse($order->date_created)->format('d-m-Y') }}</td>
                                                     <td>${{ $order->total }}</td>
@@ -276,25 +221,22 @@
                                                             <i class="fa fa-info"></i>
                                                         </a>
 
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_nas.bodega', $order->id) }}">
-                                                            <i class="fa fa-barcode"></i>
-                                                        </a>
-
                                                     </td>
                                                 </tr>
 
                                                 @include('admin.bodega.modal_productos')
                                                 @include('admin.bodega.modal_edit_estatus_woo')
                                                 @include('admin.bodega.modal_estatus_woo')
-
                                             @endforeach
 
-                                            @foreach($orders_tienda_cosmica as $order)
+                                            @foreach($orders_tienda_cosmica_enviados as $order)
                                                 <tr style="background: #80486B;color:#fff">
                                                     <td>{{ $order->id }}</td>
                                                     <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
                                                     <td>
-                                                            En preparación
+                                                        <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
+                                                            Enviado
+                                                        </a>
                                                     </td>
                                                     <td>
                                                         @foreach($order->meta_data as $meta)
@@ -326,9 +268,6 @@
                                                             <i class="fa fa-info"></i>
                                                         </a>
 
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_cosmica_online.bodega', $order->id) }}">
-                                                            <i class="fa fa-barcode"></i>
-                                                        </a>
                                                     </td>
                                                 </tr>
 
@@ -338,42 +277,7 @@
 
                                             @endforeach
 
-                                            @foreach($ApiFiltradaCollectAprobado as $order)
-                                                <tr style="background: #EE96BA;color:#fff">
-                                                    <td>{{ $order['id'] }}</td>
-
-                                                    <td>{{ $order['user']['name'] }}</td>
-
-                                                    <td>
-                                                            En preparación
-                                                    </td>
-
-                                                    <td>
-                                                        {{ \Carbon\Carbon::parse($order['created_at'])->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                    </td>
-                                                    <td>${{ $order['total'] }}</td>
-                                                    <td>
-                                                        <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_paradisus_{{ $order['id'] }}">
-                                                            <i class="fa fa-list-alt"></i>
-                                                        </a>
-
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_para_{{ $order['id'] }}">
-                                                            <i class="fa fa-info"></i>
-                                                        </a>
-
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_paradisus.bodega', $order['id']) }}">
-                                                            <i class="fa fa-barcode"></i>
-                                                        </a>
-                                                    </td>
-                                                </tr>
-
-                                                @include('admin.bodega.modal_productos_paradisus')
-                                                {{-- @include('admin.bodega.modal_estatus_paradisus') --}}
-                                                @include('admin.bodega.modal_estatus_edit_para')
-
-                                            @endforeach
-
-                                            </tbody>
+                                        </tbody>
                                 </table>
 
                               </div>

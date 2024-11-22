@@ -148,6 +148,520 @@ class BodegaController extends Controller
         ));
     }
 
+    public function index_preparados(Request $request) {
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+        // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda principal
+        $woocommerce = new Client(
+            'https://imnasmexico.com/new/', // URL de la tienda principal
+            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda principal
+            'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda principal
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda secundaria
+        $woocommerceCosmika = new Client(
+            'https://cosmicaskin.com', // URL de la tienda secundaria
+            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
+            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Obtener los pedidos de ambas tiendas con el estado "guia_cargada"
+        $orders_tienda_principal = $woocommerce->get('orders', [
+            'status' => 'guia_cargada',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_principal_preparados = $woocommerce->get('orders', [
+            'status' => 'preparados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_principal_enviados = $woocommerce->get('orders', [
+            'status' => 'enviados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica = $woocommerceCosmika->get('orders', [
+            'status' => 'guia_cargada',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica_preparados = $woocommerceCosmika->get('orders', [
+            'status' => 'preparados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica_enviados = $woocommerceCosmika->get('orders', [
+            'status' => 'enviados',
+            'per_page' => 100,
+        ]);
+
+        // Convertir las órdenes en un solo array combinando las de ambas tiendas
+        $orders_tienda_principal = array_merge($orders_tienda_principal);
+        // dd($orders_tienda_principal);
+
+        $orders_tienda_cosmica = array_merge($orders_tienda_cosmica);
+
+        $dominio = $request->getHost();
+
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $api_pedidosParadisus = Http::get('https://paradisus.mx/api/enviar-notas-pedidos');
+
+        }else{
+            $api_pedidosParadisus = Http::get('http://paradisus.test/api/enviar-notas-pedidos');
+        }
+
+        // Convertir la respuesta a un array
+        $ApiParadisusArray = $api_pedidosParadisus->json();
+
+        // Filtrar los datos con estatus "Aprobada" y limitar a los últimos 100
+        $ApiFiltradaCollectAprobado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Aprobada')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        $ApiFiltradaCollectPreparado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Preparado')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        $ApiFiltradaCollectEnviado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Enviado')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        // Otras consultas de la base de datos
+        $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
+        $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
+        $notas_enviados = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
+
+        $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
+        $notas_presencial_preparado = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Preparado')
+        // ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+        ->get();
+        $notas_presencial_cancelada = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Cancelar')->get();
+        $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')
+        ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+
+        $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
+        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
+        $notas_cosmica_enviados = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
+
+        $cantidad = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
+        // Pasar las órdenes y notas a la vista
+        return view('admin.bodega.index_preparados', compact(
+            'ApiFiltradaCollectAprobado', 'cantidad',
+            'ApiFiltradaCollectPreparado',
+            'ApiFiltradaCollectEnviado',
+            'orders_tienda_principal',
+            'orders_tienda_principal_preparados',
+            'orders_tienda_principal_enviados',
+            'orders_tienda_cosmica',
+            'orders_tienda_cosmica_preparados',
+            'orders_tienda_cosmica_enviados',
+            'notas_preparacion', 'notas_preparado', 'notas_enviados',
+            'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados',
+            'notas_presencial_preparacion', 'notas_presencial_cancelada','notas_presencial_preparado', 'notas_presencial_enviados'
+        ));
+    }
+
+    public function index_enviados(Request $request) {
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+        // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda principal
+        $woocommerce = new Client(
+            'https://imnasmexico.com/new/', // URL de la tienda principal
+            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda principal
+            'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda principal
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda secundaria
+        $woocommerceCosmika = new Client(
+            'https://cosmicaskin.com', // URL de la tienda secundaria
+            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
+            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Obtener los pedidos de ambas tiendas con el estado "guia_cargada"
+        $orders_tienda_principal = $woocommerce->get('orders', [
+            'status' => 'guia_cargada',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_principal_preparados = $woocommerce->get('orders', [
+            'status' => 'preparados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_principal_enviados = $woocommerce->get('orders', [
+            'status' => 'enviados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica = $woocommerceCosmika->get('orders', [
+            'status' => 'guia_cargada',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica_preparados = $woocommerceCosmika->get('orders', [
+            'status' => 'preparados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica_enviados = $woocommerceCosmika->get('orders', [
+            'status' => 'enviados',
+            'per_page' => 100,
+        ]);
+
+        // Convertir las órdenes en un solo array combinando las de ambas tiendas
+        $orders_tienda_principal = array_merge($orders_tienda_principal);
+        // dd($orders_tienda_principal);
+
+        $orders_tienda_cosmica = array_merge($orders_tienda_cosmica);
+
+        $dominio = $request->getHost();
+
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $api_pedidosParadisus = Http::get('https://paradisus.mx/api/enviar-notas-pedidos');
+
+        }else{
+            $api_pedidosParadisus = Http::get('http://paradisus.test/api/enviar-notas-pedidos');
+        }
+
+        // Convertir la respuesta a un array
+        $ApiParadisusArray = $api_pedidosParadisus->json();
+
+        // Filtrar los datos con estatus "Aprobada" y limitar a los últimos 100
+        $ApiFiltradaCollectAprobado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Aprobada')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        $ApiFiltradaCollectPreparado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Preparado')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        $ApiFiltradaCollectEnviado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Enviado')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        // Otras consultas de la base de datos
+        $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
+        $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
+        $notas_enviados = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
+
+        $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
+        $notas_presencial_preparado = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Preparado')
+        // ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+        ->get();
+        $notas_presencial_cancelada = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Cancelar')->get();
+        $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')
+        ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+
+        $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
+        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
+        $notas_cosmica_enviados = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
+
+        $cantidad = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
+        // Pasar las órdenes y notas a la vista
+        return view('admin.bodega.index_enviados', compact(
+            'ApiFiltradaCollectAprobado', 'cantidad',
+            'ApiFiltradaCollectPreparado',
+            'ApiFiltradaCollectEnviado',
+            'orders_tienda_principal',
+            'orders_tienda_principal_preparados',
+            'orders_tienda_principal_enviados',
+            'orders_tienda_cosmica',
+            'orders_tienda_cosmica_preparados',
+            'orders_tienda_cosmica_enviados',
+            'notas_preparacion', 'notas_preparado', 'notas_enviados',
+            'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados',
+            'notas_presencial_preparacion', 'notas_presencial_cancelada','notas_presencial_preparado', 'notas_presencial_enviados'
+        ));
+    }
+
+    public function index_entregados(Request $request) {
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+        // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda principal
+        $woocommerce = new Client(
+            'https://imnasmexico.com/new/', // URL de la tienda principal
+            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda principal
+            'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda principal
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda secundaria
+        $woocommerceCosmika = new Client(
+            'https://cosmicaskin.com', // URL de la tienda secundaria
+            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
+            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Obtener los pedidos de ambas tiendas con el estado "guia_cargada"
+        $orders_tienda_principal = $woocommerce->get('orders', [
+            'status' => 'guia_cargada',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_principal_preparados = $woocommerce->get('orders', [
+            'status' => 'preparados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_principal_enviados = $woocommerce->get('orders', [
+            'status' => 'enviados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica = $woocommerceCosmika->get('orders', [
+            'status' => 'guia_cargada',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica_preparados = $woocommerceCosmika->get('orders', [
+            'status' => 'preparados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica_enviados = $woocommerceCosmika->get('orders', [
+            'status' => 'enviados',
+            'per_page' => 100,
+        ]);
+
+        // Convertir las órdenes en un solo array combinando las de ambas tiendas
+        $orders_tienda_principal = array_merge($orders_tienda_principal);
+        // dd($orders_tienda_principal);
+
+        $orders_tienda_cosmica = array_merge($orders_tienda_cosmica);
+
+        $dominio = $request->getHost();
+
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $api_pedidosParadisus = Http::get('https://paradisus.mx/api/enviar-notas-pedidos');
+
+        }else{
+            $api_pedidosParadisus = Http::get('http://paradisus.test/api/enviar-notas-pedidos');
+        }
+
+        // Convertir la respuesta a un array
+        $ApiParadisusArray = $api_pedidosParadisus->json();
+
+        // Filtrar los datos con estatus "Aprobada" y limitar a los últimos 100
+        $ApiFiltradaCollectAprobado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Aprobada')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        $ApiFiltradaCollectPreparado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Preparado')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        $ApiFiltradaCollectEnviado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Enviado')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        // Otras consultas de la base de datos
+        $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
+        $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
+        $notas_enviados = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
+
+        $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
+        $notas_presencial_preparado = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Preparado')
+        // ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+        ->get();
+        $notas_presencial_cancelada = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Cancelar')->get();
+        $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')
+        ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+
+        $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
+        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
+        $notas_cosmica_enviados = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
+
+        $cantidad = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
+        // Pasar las órdenes y notas a la vista
+        return view('admin.bodega.index_entregados', compact(
+            'ApiFiltradaCollectAprobado', 'cantidad',
+            'ApiFiltradaCollectPreparado',
+            'ApiFiltradaCollectEnviado',
+            'orders_tienda_principal',
+            'orders_tienda_principal_preparados',
+            'orders_tienda_principal_enviados',
+            'orders_tienda_cosmica',
+            'orders_tienda_cosmica_preparados',
+            'orders_tienda_cosmica_enviados',
+            'notas_preparacion', 'notas_preparado', 'notas_enviados',
+            'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados',
+            'notas_presencial_preparacion', 'notas_presencial_cancelada','notas_presencial_preparado', 'notas_presencial_enviados'
+        ));
+    }
+
+    public function index_canceladas(Request $request) {
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+        // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda principal
+        $woocommerce = new Client(
+            'https://imnasmexico.com/new/', // URL de la tienda principal
+            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f', // Consumer Key de la tienda principal
+            'cs_762a289843cea2a92751f757f351d3522147997b', // Consumer Secret de la tienda principal
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Crear instancia del cliente Automattic\WooCommerce\Client para la tienda secundaria
+        $woocommerceCosmika = new Client(
+            'https://cosmicaskin.com', // URL de la tienda secundaria
+            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
+            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Obtener los pedidos de ambas tiendas con el estado "guia_cargada"
+        $orders_tienda_principal = $woocommerce->get('orders', [
+            'status' => 'guia_cargada',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_principal_preparados = $woocommerce->get('orders', [
+            'status' => 'preparados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_principal_enviados = $woocommerce->get('orders', [
+            'status' => 'enviados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica = $woocommerceCosmika->get('orders', [
+            'status' => 'guia_cargada',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica_preparados = $woocommerceCosmika->get('orders', [
+            'status' => 'preparados',
+            'per_page' => 100,
+        ]);
+
+        $orders_tienda_cosmica_enviados = $woocommerceCosmika->get('orders', [
+            'status' => 'enviados',
+            'per_page' => 100,
+        ]);
+
+        // Convertir las órdenes en un solo array combinando las de ambas tiendas
+        $orders_tienda_principal = array_merge($orders_tienda_principal);
+        // dd($orders_tienda_principal);
+
+        $orders_tienda_cosmica = array_merge($orders_tienda_cosmica);
+
+        $dominio = $request->getHost();
+
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $api_pedidosParadisus = Http::get('https://paradisus.mx/api/enviar-notas-pedidos');
+
+        }else{
+            $api_pedidosParadisus = Http::get('http://paradisus.test/api/enviar-notas-pedidos');
+        }
+
+        // Convertir la respuesta a un array
+        $ApiParadisusArray = $api_pedidosParadisus->json();
+
+        // Filtrar los datos con estatus "Aprobada" y limitar a los últimos 100
+        $ApiFiltradaCollectAprobado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Aprobada')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        $ApiFiltradaCollectPreparado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Preparado')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        $ApiFiltradaCollectEnviado = collect($ApiParadisusArray['data'])
+            ->where('estatus', 'Enviado')
+            ->sortByDesc('id')
+            ->values()
+            ->all();
+
+        // Otras consultas de la base de datos
+        $notas_preparacion = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
+        $notas_preparado = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
+        $notas_enviados = NotasProductos::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
+
+        $notas_presencial_preparacion = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Aprobada')->get();
+        $notas_presencial_preparado = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Preparado')
+        // ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+        ->get();
+
+        $notas_presencial_cancelada = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Cancelar')->get();
+
+        $notas_presencial_enviados = NotasProductos::where('tipo_nota', '=', 'Venta Presencial')->where('estatus_cotizacion', '=', 'Enviado')
+        ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
+
+        $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
+        $notas_cosmica_preparado = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Preparado')->get();
+        $notas_cosmica_enviados = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Enviado')->get();
+
+        $cantidad = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($orders_tienda_cosmica);
+        // Pasar las órdenes y notas a la vista
+        return view('admin.bodega.index_cancelados', compact(
+            'ApiFiltradaCollectAprobado', 'cantidad',
+            'ApiFiltradaCollectPreparado',
+            'ApiFiltradaCollectEnviado',
+            'orders_tienda_principal',
+            'orders_tienda_principal_preparados',
+            'orders_tienda_principal_enviados',
+            'orders_tienda_cosmica',
+            'orders_tienda_cosmica_preparados',
+            'orders_tienda_cosmica_enviados',
+            'notas_preparacion', 'notas_preparado', 'notas_enviados',
+            'notas_cosmica_preparacion', 'notas_cosmica_preparado', 'notas_cosmica_enviados',
+            'notas_presencial_preparacion', 'notas_presencial_cancelada','notas_presencial_preparado', 'notas_presencial_enviados'
+        ));
+    }
+
     public function update_guia_woo(Request $request, $id)
     {
 

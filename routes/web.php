@@ -628,6 +628,10 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O   B O D E G A ===============================
     Route::get('bodega/preparacion/', [App\Http\Controllers\BodegaController::class, 'index_preparacion'])->name('index_preparacion.bodega');
+    Route::get('bodega/preparados/', [App\Http\Controllers\BodegaController::class, 'index_preparados'])->name('index_preparados.bodega');
+    Route::get('bodega/enviados/', [App\Http\Controllers\BodegaController::class, 'index_enviados'])->name('index_enviados.bodega');
+    Route::get('bodega/entregados/', [App\Http\Controllers\BodegaController::class, 'index_entregados'])->name('index_entregados.bodega');
+    Route::get('bodega/canceladas/', [App\Http\Controllers\BodegaController::class, 'index_canceladas'])->name('index_canceladas.bodega');
 
     Route::patch('bodega/preparacion/guia/{id}', [App\Http\Controllers\CotizacionController::class, 'update_guia'])->name('notas_cotizacion.update_guia');
     Route::patch('bodega/preparacion/guia/cosmica/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_guia'])->name('notas_cosmica.update_guia');
