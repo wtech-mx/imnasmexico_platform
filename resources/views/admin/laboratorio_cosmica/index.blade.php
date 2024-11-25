@@ -23,9 +23,17 @@
                     <h3 class="mb-3">Stock de Envases Laboratorio Cosmica </h3>
 
                     <a class="btn btn-warning" href="{{ route('reporte.pdf') }}" target="_blank">Imprimir reporte</a>
-                    {{-- <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_product" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                        <i class="fa fa-fw fa-edit"></i> Crear
-                    </a> --}}
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="d-flex justify-content-around">
+                        <span class="badge rounded-pill text-white" style="background: #e74c3c">Bajo stock: 0 - 150</span>
+                        <span class="badge rounded-pill text-dark" style="background: #e7dc3c">Medio stock: 151 - 200</span>
+                        <span class="badge rounded-pill text-dark" style="background: #72e73c">Alto stock: +201</span>
+                    </div>
                 </div>
             </div>
 
@@ -75,7 +83,15 @@
                                     {{ implode(' ', $linea) }}<br>
                                 @endforeach
                             </td>
-                            <td>{{ $product->conteo }}</td>
+                            <td>
+                                @if ($product->conteo <= 150)
+                                    <p style="background-color: #e74c3c; color:#fff">{{ $product->conteo }}</p>
+                                @elseif ($product->conteo > 150 && $product->conteo <= 200)
+                                    <p style="background-color: #e7dc3c; color:#fff">{{ $product->conteo }}</p>
+                                @elseif ($product->conteo > 200)
+                                    <p style="background-color: #72e73c; color:#131313">{{ $product->conteo }}</p>
+                                @endif
+                            </td>
                             <td>
                                 @foreach ($desc_salto as $salto)
                                     {{ implode(' ', $salto) }}<br>

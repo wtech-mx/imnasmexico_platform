@@ -22,7 +22,11 @@
                            <b> {{ $item->envase }} </b>
                         </div>
                         <div class="col-2 text-center">
-                            {{ $item->conteo }}
+                            @if ($item->conteo <= 150)
+                                <p style="background-color: #e74c3c; color:#fff">{{ $item->conteo }}</p>
+                            @elseif ($item->conteo > 150 && $item->conteo <= 200)
+                                <p style="background-color: #e7dc3c; color:#fff">{{ $item->conteo }}</p>
+                            @endif
                         </div>
                         <div class="col-12">
                             {{ $item->descripcion }}

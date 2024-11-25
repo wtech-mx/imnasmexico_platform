@@ -83,8 +83,17 @@
     </table>
   </footer>
 
-  <div id="content" style="margin-top: 3rem">
-    <table class="table table-bordered border-primary">
+  <div id="content" style="margin-top: 1rem">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="d-flex justify-content-around">
+                    <span class="badge rounded-pill" style="background: #e74c3c; color: #f8f8f8">Bajo stock: 0 - 150</span>
+                    <span class="badge rounded-pill text-dark" style="background: #e7dc3c">Medio stock: 151 - 200</span>
+                </div>
+            </div>
+        </div>
+    <table class="table table-bordered border-primary" style="margin-top: 1rem">
         <thead style="background-color: #322338; color: #fff">
             <tr>
                 <th>Nombre</th>
@@ -109,7 +118,11 @@
                         </ul>
                     </td>
                     <td>
-                        {{ $envase_vencer->conteo }}
+                        @if ($envase_vencer->conteo <= 150)
+                            <p style="background-color: #e74c3c; color:#fff">{{ $envase_vencer->conteo }}</p>
+                        @elseif ($envase_vencer->conteo > 150 && $envase_vencer->conteo <= 200)
+                            <p style="background-color: #e7dc3c;">{{ $envase_vencer->conteo }}</p>
+                        @endif
                     </td>
                 </tr>
            @endforeach

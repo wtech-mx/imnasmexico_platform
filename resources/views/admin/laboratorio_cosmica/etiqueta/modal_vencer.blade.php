@@ -25,7 +25,13 @@
                            <b> {{ $item->nombre }} </b>
                         </div>
                         <div class="col-3 text-center">
-                            {{ $item->etiqueta_lateral }}
+                            @if ($item->etiqueta_lateral <= 150)
+                                <p style="background-color: #e74c3c; color:#fff">{{ $item->etiqueta_lateral }}</p>
+                            @elseif ($item->etiqueta_lateral > 150 && $item->etiqueta_lateral <= 200)
+                                <p style="background-color: #e7dc3c; color:#fff">{{ $item->etiqueta_lateral }}</p>
+                            @elseif ($item->etiqueta_lateral > 200)
+                                <p style="background-color: #72e73c; color:#fff">{{ $item->etiqueta_lateral }}</p>
+                            @endif
                         </div>
                         <div class="col-3 text-center">
                             Lateral
@@ -39,7 +45,13 @@
                         <b> {{ $item->nombre }} </b>
                         </div>
                         <div class="col-3 text-center">
-                            {{ $item->etiqueta_tapa }}
+                            @if ($item->etiqueta_tapa <= 150)
+                                <p style="background-color: #e74c3c; color:#fff">{{ $item->etiqueta_tapa }}</p>
+                            @elseif ($item->etiqueta_tapa > 150 && $item->etiqueta_tapa <= 200)
+                                <p style="background-color: #e7dc3c; color:#fff">{{ $item->etiqueta_tapa }}</p>
+                            @elseif ($item->etiqueta_tapa > 200)
+                                <p style="background-color: #72e73c; color:#fff">{{ $item->etiqueta_tapa }}</p>
+                            @endif
                         </div>
                         <div class="col-3 text-center">
                             Tapa
@@ -53,7 +65,13 @@
                         <b> {{ $item->nombre }} </b>
                         </div>
                         <div class="col-3 text-center">
-                            {{ $item->etiqueta_frente }}
+                            @if ($item->etiqueta_frente <= 150)
+                                <p style="background-color: #e74c3c; color:#fff">{{ $item->etiqueta_frente }}</p>
+                            @elseif ($item->etiqueta_frente > 150 && $item->etiqueta_frente <= 200)
+                                <p style="background-color: #e7dc3c; color:#fff">{{ $item->etiqueta_frente }}</p>
+                            @elseif ($item->etiqueta_frente > 200)
+                                <p style="background-color: #72e73c; color:#fff">{{ $item->etiqueta_frente }}</p>
+                            @endif
                         </div>
                         <div class="col-3 text-center">
                             Frente
@@ -67,7 +85,13 @@
                         <b> {{ $item->nombre }} </b>
                         </div>
                         <div class="col-3 text-center">
-                            {{ $item->etiqueta_reversa }}
+                            @if ($item->etiqueta_reversa <= 150)
+                                <p style="background-color: #e74c3c; color:#fff">{{ $item->etiqueta_reversa }}</p>
+                            @elseif ($item->etiqueta_reversa > 150 && $item->etiqueta_reversa <= 200)
+                                <p style="background-color: #e7dc3c; color:#fff">{{ $item->etiqueta_reversa }}</p>
+                            @elseif ($item->etiqueta_reversa > 200)
+                                <p style="background-color: #72e73c; color:#fff">{{ $item->etiqueta_reversa }}</p>
+                            @endif
                         </div>
                         <div class="col-3 text-center">
                             Reversa

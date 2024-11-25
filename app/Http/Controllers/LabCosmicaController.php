@@ -162,8 +162,8 @@ class LabCosmicaController extends Controller
         $envases_productos = EnvasesProductos::get();
 
         $pdf = \PDF::loadView('admin.laboratorio_cosmica.pdf_vencer', compact('envases_vencer', 'today', 'envases_productos'));
-        //return $pdf->stream();
-         return $pdf->download('Envases bajo stock / '.$today.'.pdf');
+        return $pdf->stream();
+        // return $pdf->download('Envases bajo stock / '.$today.'.pdf');
     }
 
     public function pdf_reporte(Request $request){

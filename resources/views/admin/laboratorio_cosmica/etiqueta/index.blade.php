@@ -29,6 +29,16 @@ Conteo de Etiquetas Cosmica
                 </div>
             </div>
 
+            <div class="row">
+                <div class="col-12 mt-3">
+                    <div class="d-flex justify-content-around">
+                        <span class="badge rounded-pill text-white" style="background: #e74c3c">Bajo stock: 0 - 150</span>
+                        <span class="badge rounded-pill text-dark" style="background: #e7dc3c">Medio stock: 151 - 200</span>
+                        <span class="badge rounded-pill text-dark" style="background: #72e73c">Alto stock: +201</span>
+                    </div>
+                </div>
+            </div>
+
             <div class="table-responsive p-4">
                 <table class="table table-flush" id="datatable-search">
                     <thead class="thead-light">
@@ -50,10 +60,58 @@ Conteo de Etiquetas Cosmica
                                 <img id="blah" src="{{$product->imagenes}}" alt="Imagen" style="width: 90px; height: 90px;"/>
                             </th>
                             <td>{{ $product->nombre }}</td>
-                            <td>{{ $product->etiqueta_lateral }}</td>
-                            <td>{{ $product->etiqueta_tapa }}</td>
-                            <td>{{ $product->etiqueta_frente }}</td>
-                            <td>{{ $product->etiqueta_reversa }}</td>
+                            <td>
+                                @if ($product->estatus_lateral == 1)
+                                    @if ($product->etiqueta_lateral <= 150)
+                                        <p style="background-color: #e74c3c; color:#fff">{{ $product->etiqueta_lateral }}</p>
+                                    @elseif ($product->etiqueta_lateral > 150 && $product->etiqueta_lateral <= 200)
+                                        <p style="background-color: #e7dc3c; color:#fff">{{ $product->etiqueta_lateral }}</p>
+                                    @elseif ($product->etiqueta_lateral > 200)
+                                        <p style="background-color: #72e73c; color:#fff">{{ $product->etiqueta_lateral }}</p>
+                                    @endif
+                                @else
+                                    <b>No lleva</b>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($product->estatus_tapa == 1)
+                                    @if ($product->etiqueta_tapa <= 150)
+                                        <p style="background-color: #e74c3c; color:#fff">{{ $product->etiqueta_tapa }}</p>
+                                    @elseif ($product->etiqueta_tapa > 150 && $product->etiqueta_tapa <= 200)
+                                        <p style="background-color: #e7dc3c; color:#fff">{{ $product->etiqueta_tapa }}</p>
+                                    @elseif ($product->etiqueta_tapa > 200)
+                                        <p style="background-color: #72e73c; color:#fff">{{ $product->etiqueta_tapa }}</p>
+                                    @endif
+                                @else
+                                    <b>No lleva</b>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($product->estatus_frente == 1)
+                                    @if ($product->etiqueta_frente <= 150)
+                                        <p style="background-color: #e74c3c; color:#fff">{{ $product->etiqueta_frente }}</p>
+                                    @elseif ($product->etiqueta_frente > 150 && $product->etiqueta_frente <= 200)
+                                        <p style="background-color: #e7dc3c; color:#fff">{{ $product->etiqueta_frente }}</p>
+                                    @elseif ($product->etiqueta_frente > 200)
+                                        <p style="background-color: #72e73c; color:#fff">{{ $product->etiqueta_frente }}</p>
+                                    @endif
+                                @else
+                                    <b>No lleva</b>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($product->estatus_reversa == 1)
+                                    @if ($product->etiqueta_reversa <= 150)
+                                        <p style="background-color: #e74c3c; color:#fff">{{ $product->etiqueta_reversa }}</p>
+                                    @elseif ($product->etiqueta_reversa > 150 && $product->etiqueta_reversa <= 200)
+                                        <p style="background-color: #e7dc3c; color:#fff">{{ $product->etiqueta_reversa }}</p>
+                                    @elseif ($product->etiqueta_reversa > 200)
+                                        <p style="background-color: #72e73c; color:#fff">{{ $product->etiqueta_reversa }}</p>
+                                    @endif
+                                @else
+                                    <b>No lleva</b>
+                                @endif
+                            </td>
                             <td>
                                 <a type="button" class="btn btn-sm btn-primary editProductBtn" data-id="{{ $product->id }}">
                                     <i class="fa fa-fw fa-edit"></i>
