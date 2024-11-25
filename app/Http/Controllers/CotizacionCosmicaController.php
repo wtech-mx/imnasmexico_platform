@@ -284,13 +284,15 @@ class CotizacionCosmicaController extends Controller
                 if ($producto && $producto->subcategoria == 'Kit') {
                         $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
 
-                        foreach ($productos_bundle as $producto_bundle) {
-                            $notas_inscripcion = new ProductosNotasCosmica;
-                            $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                            $notas_inscripcion->producto = $producto_bundle->producto;
-                            $notas_inscripcion->price = '0';
-                            $notas_inscripcion->cantidad = $producto_bundle->cantidad;
-                            $notas_inscripcion->save();
+                        for ($i = 1; $i <= $nuevosCampos3[$index]; $i++) {
+                            foreach ($productos_bundle as $producto_bundle) {
+                                $notas_inscripcion = new ProductosNotasCosmica;
+                                $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                                $notas_inscripcion->producto = $producto_bundle->producto;
+                                $notas_inscripcion->price = '0';
+                                $notas_inscripcion->cantidad = $producto_bundle->cantidad;
+                                $notas_inscripcion->save();
+                            }
                         }
 
                         // Asignar el ID del kit en la columna correspondiente
