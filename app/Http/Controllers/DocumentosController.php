@@ -76,6 +76,7 @@ class DocumentosController extends Controller
             $bitacoras = $bitacoras->whereDate('created_at', '>=', $request->fecha)
                                 ->whereDate('created_at', '<=', $request->fecha2);
         }
+
         $bitacoras = $bitacoras->get();
 
         $documentos = Documentos::get();
@@ -189,6 +190,27 @@ class DocumentosController extends Controller
         $bitacora->fecha_inicial = $request->get('fecha');
         $bitacora->duracion_hrs = $request->get('duracion_hrs');
         $bitacora->estatus = 'Generado y descargado';
+
+        if ($request->hasFile("img_infantil")) {
+            $file = $request->file('img_infantil');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $bitacora->foto = $fileName;
+        } else {
+            $fileName = "";
+        }
+
+        if ($request->hasFile("firma")) {
+            $file_firma = $request->file('firma');
+            $path_firma = $ruta_manual;
+            $fileName_firma = uniqid() . $file_firma->getClientOriginalName();
+            $file_firma->move($path_firma, $fileName_firma);
+            $bitacora->firma = $fileName;
+        } else {
+            $fileName_firma = "fondo_sf.png";
+        }
+
         $bitacora->save();
 
         $nombre = $request->get('nombre');
@@ -221,23 +243,7 @@ class DocumentosController extends Controller
         $capitalizar =  $request->get('capitalizar');
         $promedio = $request->get('promedio');
 
-        if ($request->hasFile("img_infantil")) {
-            $file = $request->file('img_infantil');
-            $path = $ruta_manual;
-            $fileName = uniqid() . $file->getClientOriginalName();
-            $file->move($path, $fileName);
-        } else {
-            $fileName = "";
-        }
 
-        if ($request->hasFile("firma")) {
-            $file_firma = $request->file('firma');
-            $path_firma = $ruta_manual;
-            $fileName_firma = uniqid() . $file_firma->getClientOriginalName();
-            $file_firma->move($path_firma, $fileName_firma);
-        } else {
-            $fileName_firma = "fondo_sf.png";
-        }
 
         $tipo_documentos = Tipodocumentos::find($tipo);
 

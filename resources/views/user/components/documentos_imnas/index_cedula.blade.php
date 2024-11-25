@@ -25,7 +25,6 @@
                 $foto = $tickets->foto_cuadrada;
                 $firma = $tickets->firma;
 
-
                 $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
                     ? 'https://plataforma.imnasmexico.com/documentos_registro/'
                     : asset('documentos_registro/');
@@ -36,10 +35,10 @@
 
                     $palabras = explode(' ', ucwords(strtolower($tickets_externo->cliente)));
                     $firma = null;
+                    $foto = $tickets_externo->foto;
                 }else {
 
                 $foto = $tickets->User->Documentos->foto_tam_infantil;
-                $firma = $tickets->User->Documentos->firma;
 
                 $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
 
@@ -160,6 +159,8 @@
     <?php
         if (isset($tickets->User)) {
             $backgroundImage = $basePathDocumentos . '/' . $tickets->User->telefono . '/' . $foto;
+        } else if(isset($tickets_externo->foto)) {
+                $backgroundImage = $basePathUtilidades . '/' . $foto;
         } else {
             $backgroundImage = 'https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png';
         }

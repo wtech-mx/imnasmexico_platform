@@ -25,7 +25,6 @@
                 $foto = $tickets->foto_cuadrada;
                 $firma = $tickets->firma;
 
-
                 $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
                     ? 'https://plataforma.imnasmexico.com/documentos_registro/'
                     : asset('documentos_registro/');
@@ -38,6 +37,7 @@
                     $firma = null;
                     $nombreCurso = $tickets_externo->curso;
                     $nombreCompleto = explode(' ', $tickets_externo->cliente);
+                    $foto = $tickets_externo->foto;
 
                 }else {
 
@@ -115,7 +115,9 @@
         @php
             if (isset($tickets->User)) {
                 $backgroundImage = $basePathDocumentos . '/' . $tickets->User->telefono . '/' . $foto;
-            } else {
+            } else if(isset($tickets_externo->foto)) {
+                $backgroundImage = $basePathUtilidades . '/' . $foto;
+            }  else {
                 $backgroundImage = 'https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png';
             }
         @endphp

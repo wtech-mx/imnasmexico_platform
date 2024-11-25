@@ -17,6 +17,7 @@ class DocumenotsGenerador extends Model
         'id_curso',
         'id_usuario_bitacora',
         'estado',
+        'fotografia',
         'folio',
     ];
 

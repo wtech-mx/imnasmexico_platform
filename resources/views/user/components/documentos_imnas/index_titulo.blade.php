@@ -46,6 +46,8 @@
                     $nombrePersona = $tickets_externo->cliente;
                     $firma = null;
                     $nombreCurso = $tickets_externo->curso;
+                    $foto = $tickets_externo->foto;
+                    $firma = $tickets_externo->firma;
                 }else {
 
                     $foto = $tickets->User->Documentos->foto_tam_infantil;
@@ -159,11 +161,15 @@
         }
 
         <?php
+
             if (isset($tickets->User)) {
                 $backgroundImage = $basePathDocumentos . '/' . $tickets->User->telefono . '/' . $foto;
+            } else if(isset($tickets_externo->foto)) {
+                $backgroundImage = $basePathUtilidades . '/' . $foto;
             } else {
                 $backgroundImage = 'https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png';
             }
+
         ?>
 
         .oval {
@@ -415,7 +421,6 @@
                 <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo">
             @endif
         </div>
-
 
         <div class="d-flex justify-content-center">
             <div class="container_logo2">

@@ -33,8 +33,6 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Cliente</th>
-                                            <th>Doc Pendientes</th>
-
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -48,10 +46,14 @@
                                                     </a><br>
                                                     <p>{{ $item->User->telefono }}</p>
                                                     <p>{{ $item->User->email }}</p>
-                                                    <p>{{ $item->User->escuela }}</p>
+                                                    @if(empty($item->logo))
+                                                        <p >
+                                                            <img id="blah" src="{{asset('documentos/'. $item->telefono . '/' .$item->logo) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                                        </p>
+                                                    @endif
 
+                                                    <p>{{ $item->User->escuela }}</p>
                                                 </td>
-                                                <td>-</td>
                                                 <td>
                                                     <a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#registro_imnas_edit_{{ $item->id }}">
                                                         Editar
