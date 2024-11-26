@@ -52,7 +52,32 @@
                                                          </p>
                                                     @endif
 
-                                                    <p>{{ $item->User->escuela }}</p>
+                                                    @php
+                                                    $nombreDeEscuela = $item->User->escuela;
+                                                    $nombreDeEscuela = str_replace('Curso de ', '', $nombreDeEscuela);
+                                                    $nombreDeEscuela = str_replace('Curso ', '', $nombreDeEscuela);
+
+                                                    $palabras = explode(' ', $nombreDeEscuela);
+
+                                                    // Inicializa la cadena formateada
+                                                    $nombre_formateado = '';
+                                                    $contador_palabras = 0;
+
+                                                    foreach ($palabras as $palabra) {
+                                                        // Agrega la palabra actual a la cadena formateada
+                                                        $nombre_formateado .= $palabra . ' ';
+
+                                                        // Incrementa el contador de palabras
+                                                        $contador_palabras++;
+
+                                                        // Agrega un salto de línea después de cada tercera palabra
+                                                        if ($contador_palabras % 4== 0) {
+                                                            $nombre_formateado .= "<br>";
+                                                        }
+                                                    }
+                                                @endphp
+                                                <p>{!! $nombre_formateado !!}</p>
+
                                                 </td>
                                                 <td>
                                                     <a type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#registro_imnas_edit_{{ $item->id }}">

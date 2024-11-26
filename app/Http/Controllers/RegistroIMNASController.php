@@ -28,7 +28,7 @@ class RegistroIMNASController extends Controller
 {
     public function index(){
 
-        $registros_imnas = Orders::where('registro_imnas', '=', '1')->get();
+        $registros_imnas = Orders::where('registro_imnas', '=', '1')->orderby('id','DESC')->get();
         $curso = Cursos::where('id', '=', 647)->first();
         $cursos_tickets = CursosTickets::where('id_curso', $curso->id)->where('nombre', 'Emisión por alumno')->get();
 

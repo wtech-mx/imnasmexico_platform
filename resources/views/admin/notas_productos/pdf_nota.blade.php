@@ -176,8 +176,12 @@
                         {{ $nota_producto->cantidad }}
                     </td>
                     <td>
-                        <img src="{{ $producto->imagenes }}" alt="" style="width: 60px"><br>
-                        {{ $nota_producto->producto }}
+                        @if(!empty($producto) && !empty($producto->imagenes))
+                            <img src="{{ $producto->imagenes }}" alt="" style="width: 60px"><br>
+                        @else
+                            <span>IMG  no disponible</span>
+                        @endif
+                    {{ $nota_producto->producto }}
                     </td>
                     @php
                         if($nota_producto->producto == NULL){
