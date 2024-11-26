@@ -136,7 +136,6 @@ Route::patch('cam/programa/independiente/{id}', [App\Http\Controllers\CamNotasCo
 Route::get('cam/checklist/independiente/edit/{code}', [App\Http\Controllers\CamNotasController::class, 'edit_checklist'])->name('edit_independiente.checklist');
 Route::patch('cam/checklist/independiente/{id}', [App\Http\Controllers\CamNotasController::class, 'checklist_independiente'])->name('independiente.checklist');
 
-
 Auth::routes();
 
 Route::post('/votar', [App\Http\Controllers\VotosController::class, 'votar'])->name('votar');
@@ -708,7 +707,7 @@ Route::group(['middleware' => ['auth']], function() {
 Route::get('/registro', [App\Http\Controllers\FoliosController::class, 'index_registro'])->name('folio_registro.index');
 Route::get('/buscador/folio/registro', [App\Http\Controllers\FoliosController::class, 'buscador_registro'])->name('folio_registro.buscador');
 Route::patch('/registro/imnas/update/doc_digital/{id}', [App\Http\Controllers\FoliosController::class, 'update_docDigital'])->name('update.docDigital');
-
+Route::patch('/reporte/docmuentos/update/{id}', [App\Http\Controllers\FoliosController::class, 'update_externos'])->name('update.documentos_externo');
 
 Route::get('distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index_distribuidoras'])->name('distribuidoras.index_distribuidoras');
 Route::get('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_protocolo'])->name('distribuidoras.index_protocolo');

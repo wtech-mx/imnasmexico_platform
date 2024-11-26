@@ -111,6 +111,32 @@ class FoliosController extends Controller
 
     }
 
+    public function update_externos(Request $request, $id){
+
+        $dominio = $request->getHost();
+
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $ruta_manual = base_path('../public_html/plataforma.imnasmexico.com/utilidades_documentos');
+        }else{
+            $ruta_manual = public_path() . '/utilidades_documentos';
+        }
+
+        // $registroimnas = DocumenotsGenerador::where('id', $id)->first();
+        $registroimnas = DocumenotsGenerador::find($id);
+
+        if ($request->hasFile("foto")) {
+            $file = $request->file('foto');
+            $path = $ruta_manual;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $registroimnas->foto = $fileName;
+        }
+
+        $registroimnas->update();
+
+        return redirect()->back()->with('success', 'datos actualizado con exito.');
+    }
+
     public function index_cedula(Request $request, $id){
 
         $tipo_documentos = Tipodocumentos::find(2);

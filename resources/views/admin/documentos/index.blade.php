@@ -97,7 +97,6 @@ Reporte de Documentos
                             <th>Alumn@</th>
                             <th>Curso</th>
                             <th>Documento</th>
-                            <th>Fecha</th>
                             <th>Estatus</th>
                             <th>Personal</th>
                         </tr>
@@ -128,6 +127,14 @@ Reporte de Documentos
                                     @else
                                         {{ $item->Alumno->name }}
                                     @endif
+                                    <br>
+
+                                    @if(empty($item->foto))
+
+                                    @else
+                                    <img id="blah" src="{{asset('utilidades_documentos/'.$item->foto) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
+                                    @endif
+
                                 </td>
                                 <td>
                                     @if ($item->id_curso == NULL)
@@ -151,67 +158,74 @@ Reporte de Documentos
 
                                                 // Agrega un salto de línea después de cada tercera palabra
                                                 if ($contador_palabras2 % 3 == 0) {
-                                                    $nombre_formateado2 .= "<br>";
+                                                    $contador_palabras2 .= "\n";
                                                 }
                                             }
                                         @endphp
-                                        {{ $nombre_formateado2 }}
+                                        {!! nl2br(e($nombre_formateado2)) !!}
+
                                     @else
-                                        @php
-                                            $nombreDelCurso = $item->Cursos->nombre;
-                                            $nombreDelCurso = str_replace('Curso de ', '', $nombreDelCurso);
-                                            $nombreDelCurso = str_replace('Curso ', '', $nombreDelCurso);
+                                    @php
+                                        $nombreDelCurso = $item->Cursos->nombre;
+                                        $nombreDelCurso = str_replace('Curso de ', '', $nombreDelCurso);
+                                        $nombreDelCurso = str_replace('Curso ', '', $nombreDelCurso);
 
-                                            $palabras = explode(' ', $nombreDelCurso);
+                                        $palabras = explode(' ', $nombreDelCurso);
 
-                                            // Inicializa la cadena formateada
-                                            $nombre_formateado = '';
-                                            $contador_palabras = 0;
+                                        // Inicializa la cadena formateada
+                                        $nombre_formateado = '';
+                                        $contador_palabras = 0;
 
-                                            foreach ($palabras as $palabra) {
-                                                // Agrega la palabra actual a la cadena formateada
-                                                $nombre_formateado .= $palabra . ' ';
+                                        foreach ($palabras as $palabra) {
+                                            // Agrega la palabra actual a la cadena formateada
+                                            $nombre_formateado .= $palabra . ' ';
 
-                                                // Incrementa el contador de palabras
-                                                $contador_palabras++;
+                                            // Incrementa el contador de palabras
+                                            $contador_palabras++;
 
-                                                // Agrega un salto de línea después de cada tercera palabra
-                                                if ($contador_palabras % 3 == 0) {
-                                                    $nombre_formateado .= "<br>";
-                                                }
+                                            // Agrega un salto de línea después de cada tercera palabra
+                                            if ($contador_palabras % 3 == 0) {
+                                                $nombre_formateado .= "\n"; // Salto de línea
                                             }
-                                        @endphp
-                                        {!! $nombre_formateado !!}
+                                        }
+                                    @endphp
+
+                                    {{-- Renderiza los saltos de línea correctamente --}}
+                                    {!! nl2br($nombre_formateado) !!}
+
                                     @endif
                                 </td>
                                 <td>{{ $item->tipo_documento }} <br>
-                                    {{ $item->folio }}
-                                </td>
-
-                                <td>
+                                    {{ $item->folio }} <br>
                                     @php
                                         $fecha = $item->created_at;
                                         $fecha_timestamp = strtotime($fecha);
                                         $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                                     @endphp
+                                    <br>
                                     {{$fecha_formateada}}
                                 </td>
 
-                                <td>
+                                <td >
+                                    <p class="text-center">
                                     <!-- Button trigger modal -->
-
-                                    <button type="button" class="btn  btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal_{{$item->id}}">
+                                    <button type="button" class="btn  btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal_{{$item->id}}">
                                         {{ $item->estatus }}
+                                    </button> <br>
+
+                                    <button type="button" class="btn  btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#modal_foto_{{$item->id}}">
+                                        Cargar Foto Infantil
                                     </button>
+                                    </p>
                                 </td>
 
                                 <td>
                                     <td>{{ $item->User->name }}</td>
                                 </td>
 
-
                             </tr>
                             @include('admin.documentos.modal_estatus')
+                            @include('admin.documentos.modal_update_foto')
 
                         @endforeach
 

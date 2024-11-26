@@ -47,7 +47,7 @@
                                                     <p>{{ $item->User->telefono }}</p>
                                                     <p>{{ $item->User->email }}</p>
                                                     @if(empty($item->logo))
-                                                        <p class="text-center mt-2">
+                                                        <p class="text-left">
                                                             <img id="blah" src="{{asset('documentos/'. $item->User->telefono . '/' .$item->User->logo) }}" alt="Imagen" style="width: 60px;height: 60%;"/><br>
                                                          </p>
                                                     @endif
