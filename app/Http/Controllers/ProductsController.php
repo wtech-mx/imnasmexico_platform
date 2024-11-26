@@ -9,6 +9,10 @@ use App\Models\HistorialVendidos;
 use App\Models\Products;
 use App\Models\ProductosBundleId;
 use App\Models\HistorialStock;
+use App\Models\OrderOnlineCosmica;
+use App\Models\OrderOnlineNas;
+use App\Models\ProductosNotasCosmica;
+use App\Models\ProductosNotasId;
 use Illuminate\Support\Facades\Artisan;
 use Milon\Barcode\DNS1D; // Importamos la clase para generar códigos de barras
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -456,6 +460,58 @@ class ProductsController extends Controller
         $HistorialVendidos = $HistorialVendidos->get()->groupBy('id_producto');
 
         $pdf = \PDF::loadView('admin.products.pdf_historial', compact('HistorialVendidos', 'today'));
+        return $pdf->stream();
+         //return $pdf->download('Nota cotizacion'. $folio .'/'.$today.'.pdf');
+
+    }
+
+    public function producto_pdf(Request $request){
+        $today =  date('d-m-Y');
+
+        $productos_notas_id = ProductosNotasId::join('notas_productos', 'productos_notas_id.id_notas_productos', '=', 'notas_productos.id')
+        ->where('notas_productos.estatus_cotizacion', '=', 'Aprobada')
+        ->whereNotNull('notas_productos.fecha_aprobada')
+        ->whereNotNull('notas_productos.fecha_preparacion')
+        ->groupBy('productos_notas_id.producto')
+        ->selectRaw('productos_notas_id.producto, SUM(productos_notas_id.cantidad) as total_cantidad')
+        ->get();
+
+        $notas_cosmica_preparacion = ProductosNotasCosmica::join('notas_productos_cosmica', 'productos_notas_cosmica.id_notas_productos', '=', 'notas_productos_cosmica.id')
+        ->where('notas_productos_cosmica.estatus_cotizacion', '=', 'Aprobada')
+        ->where('notas_productos_cosmica.fecha_preparacion', '!=', NULL)
+        ->groupBy('productos_notas_cosmica.producto')
+        ->selectRaw('productos_notas_cosmica.producto, SUM(productos_notas_cosmica.cantidad) as total_cantidad')
+        ->get();
+
+        $order_online_cosmica = OrderOnlineCosmica::where('estatus', NULL)
+        ->groupBy('nombre')
+        ->selectRaw('nombre as producto, SUM(cantidad) as total_cantidad')
+        ->get();
+
+        $order_online_nas = OrderOnlineNas::where('estatus', NULL)
+        ->groupBy('nombre')
+        ->selectRaw('nombre as producto, SUM(cantidad) as total_cantidad')
+        ->get();
+
+        // Combinar todos los resultados en una colección
+        $productos_combined = collect()
+        ->merge($productos_notas_id)
+        ->merge($notas_cosmica_preparacion)
+        ->merge($order_online_cosmica)
+        ->merge($order_online_nas);
+
+        // Agrupar por producto y sumar las cantidades
+        $productos_agrupados = $productos_combined
+        ->groupBy('producto')
+        ->map(function ($items) {
+            return [
+                'producto' => $items->first()->producto,
+                'total_cantidad' => $items->sum('total_cantidad'),
+            ];
+        })
+        ->values();
+
+        $pdf = \PDF::loadView('admin.products.pdf_faltantes', compact('productos_agrupados', 'today'));
         return $pdf->stream();
          //return $pdf->download('Nota cotizacion'. $folio .'/'.$today.'.pdf');
 
