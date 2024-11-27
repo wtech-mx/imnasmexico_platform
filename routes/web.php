@@ -379,6 +379,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/reporte/custom', [App\Http\Controllers\ReportesController::class, 'index_custom'])->name('reporte.index_custom');
     Route::post('/admin/reporte/calculando_custom', [App\Http\Controllers\ReportesController::class, 'store_calculando_custom'])->name('reporte.store_custom');
 
+    // =============== M O D U L O   R E P O R T E  C U R S O S ===============================
+
+    Route::get('/admin/reporte/cursos', [App\Http\Controllers\ReportesController::class, 'index_cursos'])->name('reporte.index_cursos');
+    Route::post('/admin/reporte/cursos_custom', [App\Http\Controllers\ReportesController::class, 'store_cursos_custom'])->name('cursos_reporte.store_custom');
+
 
     // =============== M O D U L O   WEB PAGE ===============================
 

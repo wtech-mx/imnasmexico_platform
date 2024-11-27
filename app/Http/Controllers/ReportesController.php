@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 use App\Models\OrdersTickets;
 use App\Models\Orders;
+use App\Models\PagosFuera;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ReporteTicketsVendidos;
@@ -383,6 +385,14 @@ class ReportesController extends Controller
         return view('admin.reportes.custom');
     }
 
+    public function index_cursos(request $request){
+
+        $usuarios = User::where('cliente','=',NULL)->where('visibilidad','=',NULL)->orderby('name','asc')->get();
+
+        return view('admin.reportes.cursos',compact('usuarios'));
+    }
+
+
     public function store_calculando_custom(request $request){
 
         $fechaInicioSemana = $request->get('fecha_inicio');
@@ -676,6 +686,94 @@ class ReportesController extends Controller
                 ]);
         }
     }
+
+    public function store_cursos_custom(Request $request)
+    {
+        $fechaInicioSemana = $request->get('fecha_inicio');
+        $fechaFinSemana = $request->get('fecha_fin');
+        $usuarioId = $request->get('usuario');
+
+
+        $orders = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+            ->where('estatus', '1')
+            ->where('pago', '>', '0')
+            ->where('id_externo', '!=', '0') // Excluye registros con id_externo igual a 0
+            ->where('id_externo', '!=', NULL) // Excluye registros con id_externo igual a NULL
+            ->orderBy('fecha', 'DESC')
+            ->get();
+
+        // Obtener el id_externo relacionado con el usuario
+        if ($usuarioId) {
+            $pagosFuera = PagosFuera::where('usuario', $usuarioId)->get();
+            $idsExternos = $pagosFuera->pluck('id')->toArray(); // Obtener los ids correspondientes
+            // Filtrar las órdenes para que coincidan con los id_externo de pagos_fuera
+            $orders = $orders->whereIn('id_externo', $idsExternos);
+        }
+
+        $orders_mp = $orders->where('forma_pago', 'Mercado Pago');
+        $orders_stripe = $orders->where('forma_pago', 'STRIPE');
+        $orders_ext = $orders->whereNotIn('forma_pago', ['Mercado Pago', 'STRIPE', 'Nota']);
+        $orders_inbursa = $orders->where('forma_pago','transferencia inbursa');
+        $orders_bbva = $orders->where('forma_pago','transferencia bancomer');
+        $orders_Efectivo = $orders->where('forma_pago','Efectivo');
+        $orders_Tarjeta = $orders->where('forma_pago','Tarjeta');
+        $orders_oxxo_inbursa = $orders->where('forma_pago','oxxo inbursa');
+
+        $orders_nota = $orders->where('forma_pago', 'Nota');
+
+        $totalPagado = $orders->sum('pago');
+        $totalPagadoFormateado = number_format($totalPagado, 2, '.', ',');
+
+        $cursosComprados = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
+        ->where('estatus', '1')
+        ->where('forma_pago', '!=', 'Clase Gratis')
+        ->with('OrdersTickets.CursosTickets') // Mueve este método antes de get()
+        ->get()
+        ->pluck('OrdersTickets')
+        ->flatten()
+        ->groupBy('CursosTickets.nombre')
+        ->map(function ($tickets, $nombreCurso) {
+            return [
+                'nombre' => $nombreCurso,
+                'total' => $tickets->count(),
+            ];
+        })
+        ->values();
+
+
+        if ($request->ajax()) {
+            $outputSummary = view('admin.reportes.total_summary', compact('totalPagadoFormateado', 'fechaInicioSemana', 'fechaFinSemana'))->render();
+            $outputOrders = view('admin.reportes.orders_table', compact('orders'))->render();
+            $outputCourses = view('admin.reportes.courses_table', compact('cursosComprados'))->render();
+
+            return response()->json([
+                'grafica' => $this->generateChart($orders_mp, $orders_stripe, $orders_ext,$orders_inbursa,$orders_bbva,$orders_Efectivo, $orders_nota,$orders_oxxo_inbursa,$orders_Tarjeta),
+                'resultados' => $outputOrders,
+                'outputSummary' => $outputSummary,
+                'resultados3' => $outputCourses
+
+            ]);
+        }
+    }
+
+    private function generateChart($orders_mp, $orders_stripe, $orders_ext,$orders_inbursa,$orders_bbva,$orders_Efectivo, $orders_nota,$orders_oxxo_inbursa,$orders_Tarjeta)
+    {
+        $data = [
+            'MP' => $orders_mp->sum('pago'),
+            'Stripe' => $orders_stripe->sum('pago'),
+            'TransInbursa' => $orders_inbursa->sum('pago'),
+            'Trans BBVA' => $orders_bbva->sum('pago'),
+            'Pago Efectivo' => $orders_Efectivo->sum('pago'),
+            'Pago Tarjeta' => $orders_Tarjeta->sum('pago'),
+            'OXXO Inbursa' => $orders_oxxo_inbursa->sum('pago'),
+            'Nota' => $orders_nota->sum('pago'),
+        ];
+
+        $colors = ['#2152ff', '#3A416F', '#f53939', '#17c1e8', '#fb6340', '#5e72e4', '#2dce89', '#11cdef', '#fbb140'];
+
+        return view('admin.reportes.chart', compact('data', 'colors'))->render();
+    }
+
 
     public function reporte_email_custom(request $request){
             $webpage = WebPage::first();

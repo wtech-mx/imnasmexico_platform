@@ -444,6 +444,12 @@
                                 <span class="sidenav-normal">Biblioteca</span>
                             </a>
                         @endcan
+
+                            <a class="nav-link {{ (Request::is('/admin/reporte/cursos') ? 'active' : '') }}" href="{{ route('reporte.index_cursos') }}">
+                                <span class="sidenav-mini-icon"> R </span>
+                                <span class="sidenav-normal">Reporte de Cursos</span>
+                            </a>
+
                         </li>
                     </ul>
                     </div>
