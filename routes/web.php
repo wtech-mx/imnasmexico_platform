@@ -383,6 +383,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/admin/reporte/cursos', [App\Http\Controllers\ReportesController::class, 'index_cursos'])->name('reporte.index_cursos');
     Route::post('/admin/reporte/cursos_custom', [App\Http\Controllers\ReportesController::class, 'store_cursos_custom'])->name('cursos_reporte.store_custom');
+    Route::post('/generar-reporte-pdf', [App\Http\Controllers\ReportesController::class, 'generarReportePDF'])->name('reporte.generarPDF');
 
 
     // =============== M O D U L O   WEB PAGE ===============================

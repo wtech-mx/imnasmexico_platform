@@ -56,6 +56,12 @@
                                         </select>
                                     </div>
 
+                                    <div class="col-4">
+                                        <label for="generar_pdf">Generar PDF</label>
+                                        <input type="checkbox" id="generar_pdf" name="generar_pdf">
+                                    </div>
+
+
                                     <div class="col-12">
                                         <div class="d-flex justify-content-center mt-3">
                                             <button type="submit" class="btn close-modal"  id="btn-buscar" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Calcular</button>
@@ -131,6 +137,7 @@
         var fecha_inicio = $('#fecha_inicio').val();
         var fecha_fin = $('#fecha_fin').val();
         var usuario = $('#usuario').val();
+        var generar_pdf = $('#generar_pdf').is(':checked') ? 1 : 0;  // Verificar si el checkbox está marcado
 
         var token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
@@ -140,6 +147,7 @@
                 'fecha_inicio': fecha_inicio,
                 'fecha_fin': fecha_fin,
                 'usuario': usuario,
+                'generar_pdf': generar_pdf,  // Incluir el parámetro de generar PDF
                 '_token': token // Agregar el token CSRF a los datos enviados
             },
             success: function(response) {

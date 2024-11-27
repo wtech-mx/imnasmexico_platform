@@ -13,6 +13,7 @@ use App\Mail\ReporteTicketsVendidos;
 use App\Mail\ReporteTicketsVendidosSemana;
 use App\Mail\ReporteTicketsVendidosMes;
 use App\Mail\ReporteTicketsCustom;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use DateTime;
 
@@ -692,7 +693,7 @@ class ReportesController extends Controller
         $fechaInicioSemana = $request->get('fecha_inicio');
         $fechaFinSemana = $request->get('fecha_fin');
         $usuarioId = $request->get('usuario');
-
+        $generarPdf = $request->get('generar_pdf');  // Obtener la opción de generar PDF
 
         $orders = Orders::whereBetween('fecha', [$fechaInicioSemana, $fechaFinSemana])
             ->where('estatus', '1')
@@ -746,8 +747,34 @@ class ReportesController extends Controller
             $outputOrders = view('admin.reportes.orders_table', compact('orders'))->render();
             $outputCourses = view('admin.reportes.courses_table', compact('cursosComprados'))->render();
 
+            // Si se solicita generar el PDF, lo hacemos aquí
+            if ($generarPdf) {
+                $this->generarPDF(
+                    $outputOrders,
+                    $outputCourses,
+                    $outputSummary,
+                    $fechaInicioSemana,
+                    $fechaFinSemana,
+                    $totalPagadoFormateado,
+                    $cursosComprados,
+                    $orders_mp,
+                    $orders_stripe,
+                    $orders_ext,
+                    $orders_inbursa,
+                    $orders_bbva,
+                    $orders_Efectivo,
+                    $orders_nota,
+                    $orders_oxxo_inbursa,
+                    $orders_Tarjeta,
+                    $orders
+                );
+
+                return response()->json(['success' => true, 'message' => 'PDF generado correctamente']);
+
+            }
+
             return response()->json([
-                'grafica' => $this->generateChart($orders_mp, $orders_stripe, $orders_ext,$orders_inbursa,$orders_bbva,$orders_Efectivo, $orders_nota,$orders_oxxo_inbursa,$orders_Tarjeta),
+                'grafica' => $this->generateChart($orders_mp, $orders_stripe, $orders_ext,$orders_inbursa,$orders_bbva,$orders_Efectivo, $orders_nota,$orders_oxxo_inbursa,$orders_Tarjeta,$orders),
                 'resultados' => $outputOrders,
                 'outputSummary' => $outputSummary,
                 'resultados3' => $outputCourses
@@ -755,6 +782,52 @@ class ReportesController extends Controller
             ]);
         }
     }
+
+    public function generarPDF(
+        $outputOrders,
+        $outputCourses,
+        $outputSummary,
+        $fechaInicioSemana,
+        $fechaFinSemana,
+        $totalPagadoFormateado,
+        $cursosComprados,
+        $orders_mp,
+        $orders_stripe,
+        $orders_ext,
+        $orders_inbursa,
+        $orders_bbva,
+        $orders_Efectivo,
+        $orders_nota,
+        $orders_oxxo_inbursa,
+        $orders_Tarjeta,
+        $orders
+    ) {
+        $grafica = $this->generateChart($orders_mp, $orders_stripe, $orders_ext, $orders_inbursa, $orders_bbva, $orders_Efectivo, $orders_nota, $orders_oxxo_inbursa, $orders_Tarjeta, $orders);
+
+        $pdf = \PDF::loadView('admin.reportes.reporte_pdf', [
+            'outputOrders' => $outputOrders,
+            'outputCourses' => $outputCourses,
+            'outputSummary' => $outputSummary,
+            'fechaInicioSemana' => $fechaInicioSemana,
+            'fechaFinSemana' => $fechaFinSemana,
+            'totalPagadoFormateado' => $totalPagadoFormateado,
+            'cursosComprados' => $cursosComprados,
+            'orders' => $orders,
+            'orders_mp' => $orders_mp,
+            'orders_stripe' => $orders_stripe,
+            'orders_ext' => $orders_ext,
+            'orders_inbursa' => $orders_inbursa,
+            'orders_bbva' => $orders_bbva,
+            'orders_Efectivo' => $orders_Efectivo,
+            'orders_nota' => $orders_nota,
+            'orders_oxxo_inbursa' => $orders_oxxo_inbursa,
+            'orders_Tarjeta' => $orders_Tarjeta,
+            'grafica' => $grafica
+        ]);
+
+        return $pdf->stream('reporte.pdf');
+    }
+
 
     private function generateChart($orders_mp, $orders_stripe, $orders_ext,$orders_inbursa,$orders_bbva,$orders_Efectivo, $orders_nota,$orders_oxxo_inbursa,$orders_Tarjeta)
     {
@@ -773,7 +846,6 @@ class ReportesController extends Controller
 
         return view('admin.reportes.chart', compact('data', 'colors'))->render();
     }
-
 
     public function reporte_email_custom(request $request){
             $webpage = WebPage::first();
