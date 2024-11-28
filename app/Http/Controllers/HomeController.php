@@ -74,21 +74,6 @@ class HomeController extends Controller
             return view('user.home', compact('cursos', 'resultados', 'unam', 'tickets'));
         }else{
 
-             // Obtener IDs de usuarios con nombres que contienen "@"
-            //  $userIds = User::where(function ($query) {
-            //     $query->where('name', 'like', '%@%')
-            // })->pluck('id');
-
-            // DB::table('orders_tickets')
-            // ->whereIn('id_usuario', $userIds)
-            // ->delete();
-
-            // DB::table('orders')
-            // ->whereIn('id_usuario', $userIds)
-            // ->delete();
-
-            // User::whereIn('id', $userIds)->delete();
-
             $fechaHoraActual = date('Y-m-d');
             $orders = Orders::where('fecha', $fechaHoraActual)
             ->where('estatus', '1')
@@ -121,9 +106,9 @@ class HomeController extends Controller
             $fechaFinSemana = $now->endOfWeek()->format('Y-m-d');
 
             $cursos = Cursos::select('id', 'nombre', 'foto', 'fecha_inicial', 'fecha_final', 'recurso', 'modalidad', 'slug', 'clase_grabada', 'clase_grabada2', 'clase_grabada3', 'clase_grabada4', 'clase_grabada5')
-                ->whereBetween('fecha_inicial', [$fechaInicioSemana, $fechaFinSemana])
-                ->orderBy('id', 'DESC')
-                ->get();
+            ->whereBetween('fecha_inicial', [$fechaInicioSemana, $fechaFinSemana])
+            ->orderBy('id', 'DESC')
+            ->get();
 
                 $facturas = Factura::whereNotIn('estatus', ['Realizado', 'Sin procesar', 'Cancelada'])->get();
                 $contadorfacturas = $facturas->count();
@@ -131,8 +116,6 @@ class HomeController extends Controller
                 $envios = EnviosOrder::whereNotIn('estatus', ['Realizado','Cancelado'])->get();
                 $contadorenvios = $envios->count();
                 $profesores =  User::where('cliente','2')->orWhere('cliente', '5')->orderBy('name','DESC')->get();
-
-                $data = User::where('cliente','=',null)->orderBy('id','DESC')->get();
 
                 $cupones = Cupon::orderBy('id','DESC')->get();
 
@@ -195,7 +178,16 @@ class HomeController extends Controller
 
                 } while (count($results) > 0);
 
-            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','data','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes', 'envios_pendientes'));
+                // C O M I S I O N E S  V E N T A  K I T S
+                $notasAprobadasNASComision = NotasProductos::where('fecha_aprobada', $fechaHoraActual)
+                ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('id_kit','!=' , NULL)->get();
+
+                $notasAprobadasCosmicaComision = NotasProductosCosmica::where('fecha_aprobada', $fechaHoraActual)
+                ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('id_kit','!=' , NULL)->get();
+
+                $user_comision_kit = User::where('comision_kit','!=',null)->get();
+
+            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes', 'envios_pendientes', 'notasAprobadasNASComision', 'user_comision_kit', 'notasAprobadasCosmicaComision'));
         }
 
     }

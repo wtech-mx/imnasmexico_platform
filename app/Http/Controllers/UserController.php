@@ -58,6 +58,7 @@ class UserController extends Controller
         $user->email = $request->get('email');
         $user->puesto = $request->get('puesto');
         $user->telefono = $request->get('telefono');
+        $user->comision_kit = $request->get('comision_kit');
         $user->password = Hash::make($request->get('password'));
         $user->assignRole($request->input('roles'));
         $user->save();
@@ -118,6 +119,7 @@ class UserController extends Controller
         $user->email = $request->get('email');
         $user->puesto = $request->get('puesto');
         $user->telefono = $request->get('telefono');
+        $user->comision_kit = $request->get('comision_kit');
         if(!empty($request->get('password'))){
             $user->password = Hash::make($request->get('password'));
         }else{
@@ -144,7 +146,7 @@ class UserController extends Controller
         $user->password = Hash::make($password);
         $user->visibilidad = 0;
         $user->update();
-        
+
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
     }

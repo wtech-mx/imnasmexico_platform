@@ -55,12 +55,12 @@
 
                             <td>
                                 @can('usuarios-edit')
-                                <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
+                                    <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
                                 @endcan
                                 <form class="multisteps-form__form" method="POST" action="{{ route('users.destroy', $user->id) }}" enctype="multipart/form-data" role="form">
                                     @csrf
                                     <input type="hidden" name="_method" value="PATCH">
-                                    <button class="btn btn-sm btn-warning" type="submit"><img src="{{ asset('assets/user/icons/close_white.webp') }}" alt="" width="35px"> </button>
+                                    <button class="btn btn-sm btn-warning" type="submit"><img src="{{ asset('assets/user/icons/close_white.webp') }}" alt="" width="15px"> </button>
                                 </form>
                             </td>
 

@@ -280,7 +280,7 @@ class CotizacionCosmicaController extends Controller
 
             $contadorKits = 1;
             foreach ($nuevosCampos as $index => $campo) {
-                $producto = Products::where('nombre', $campo)->first();
+                $producto = Products::where('nombre', $campo)->where('categoria', '!=', 'Ocultar')->first();
                 if ($producto && $producto->subcategoria == 'Kit') {
                         $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
 
@@ -452,7 +452,7 @@ class CotizacionCosmicaController extends Controller
             // Iterar sobre los productos de la nota para buscar la imagen correspondiente
         foreach ($nota_productos as $producto_nota) {
             // Buscar el producto en la tabla de productos que coincida con el nombre
-            $producto = Products::where('nombre', $producto_nota->producto)->first();
+            $producto = Products::where('nombre', $producto_nota->producto)->where('categoria', '!=', 'Ocultar')->first();
 
             // Si se encuentra el producto, añadir la imagen al array
             if ($producto) {
@@ -491,7 +491,7 @@ class CotizacionCosmicaController extends Controller
                 $producto_bodega = ProductosNotasCosmica::where('id_notas_productos', $id)->get();
 
                 foreach ($producto_bodega as $campo) {
-                    $product_first = Products::where('nombre', $campo->producto)->first();
+                    $product_first = Products::where('nombre', $campo->producto)->where('categoria', '!=', 'Ocultar')->first();
                     if ($product_first && $campo->cantidad > 0) {
                         $producto_historial = new HistorialVendidos;
                         $producto_historial->id_producto = $product_first->id;

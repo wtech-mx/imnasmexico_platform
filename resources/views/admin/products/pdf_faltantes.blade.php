@@ -95,7 +95,6 @@
     </table>
   </footer>
 
-    <h3>NAS</h3>
     <table class="table" id="datatable-search">
         <thead class="thead-light">
             <tr>

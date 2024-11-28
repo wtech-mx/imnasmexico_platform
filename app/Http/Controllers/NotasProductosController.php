@@ -241,7 +241,7 @@ class NotasProductosController extends Controller
             $nuevosCampos4 = $request->input('descuento_prod');
 
             foreach ($nuevosCampos as $index => $campo) {
-                $producto = Products::where('nombre', $campo)->first();
+                $producto = Products::where('nombre', $campo)->where('categoria', '!=', 'Ocultar')->first();
 
                 if ($producto && $producto->subcategoria == 'Kit') {
                     $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
@@ -319,7 +319,7 @@ class NotasProductosController extends Controller
                 ->firstOrFail();
 
 
-            $producto_db = Products::where('nombre', $producto[$count])->first();
+            $producto_db = Products::where('nombre', $producto[$count])->where('categoria', '!=', 'Ocultar')->first();
             $producto_cot = ProductosNotasId::where('producto', $producto[$count])->where('id_notas_productos', $id)->first();
 
             if ($producto_db && $producto_cot) {
@@ -363,7 +363,7 @@ class NotasProductosController extends Controller
             $resta = 0;
             // Agregar nuevos productos
             for ($count = 0; $count < count($campo); $count++) {
-                $producto = Products::where('nombre', $campo[$count])->first();
+                $producto = Products::where('nombre', $campo[$count])->where('categoria', '!=', 'Ocultar')->first();
                 $resta = $producto->stock - $campo3[$count];
                 $producto->stock = $resta;
                 $producto->update();
@@ -523,7 +523,7 @@ class NotasProductosController extends Controller
 
             foreach ($producto_pedido as $campo) {
                 // Obtener el producto en cuestión
-                $product = Products::where('nombre', $campo->producto)->first();
+                $product = Products::where('nombre', $campo->producto)->where('categoria', '!=', 'Ocultar')->first();
 
                 if ($product) {
                     // Recuperar el historial de ventas correspondiente a esta cotización y producto

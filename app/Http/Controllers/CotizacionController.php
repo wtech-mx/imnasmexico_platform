@@ -238,7 +238,7 @@ class CotizacionController extends Controller
             $nuevosCampos3 = $request->input('campo3');
 
             foreach ($nuevosCampos as $index => $campo) {
-                $producto = Products::where('nombre', $campo)->first();
+                $producto = Products::where('nombre', $campo)->where('categoria', '!=', 'Ocultar')->first();
 
                 if ($producto && $producto->subcategoria == 'Kit') {
                     $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
@@ -256,6 +256,14 @@ class CotizacionController extends Controller
                     if ($contadorKits <= 6) { // Controlar un máximo de 6 kits
                         $columnaKit = "id_kit" . ($contadorKits > 1 ? $contadorKits : "");
                         $notas_productos->$columnaKit = $producto->id;
+
+                        // Asignar la cantidad correspondiente al kit
+                        $cantidadCampo = $request->input('campo3')[$contadorKits - 1] ?? null; // Obtener la cantidad del kit actual
+                        if ($cantidadCampo) {
+                            $columnaCantidadKit = "cantidad_kit" . ($contadorKits > 1 ? $contadorKits : "");
+                            $notas_productos->$columnaCantidadKit = $cantidadCampo;
+                        }
+
                         $contadorKits++;
                     }
                 }elseif($producto->subcategoria == 'Tiendita'){
@@ -389,7 +397,7 @@ class CotizacionController extends Controller
                 $producto_pedido = ProductosNotasId::where('id_notas_productos', $id)->get();
 
                 foreach ($producto_pedido as $campo) {
-                    $product_first = Products::where('nombre', $campo->producto)->first();
+                    $product_first = Products::where('nombre', $campo->producto)->where('categoria', '!=', 'Ocultar')->first();
                     if ($product_first && $campo->cantidad > 0) {
                         $producto_historial = new HistorialVendidos;
                         $producto_historial->id_producto = $product_first->id;
@@ -413,7 +421,7 @@ class CotizacionController extends Controller
                 if($nota->tipo_nota == 'Venta Presencial'){
                     $producto_pedido = ProductosNotasId::where('id_notas_productos', $id)->get();
                     foreach ($producto_pedido as $campo) {
-                        $product_first = Products::where('nombre', $campo->producto)->first();
+                        $product_first = Products::where('nombre', $campo->producto)->where('categoria', '!=', 'Ocultar')->first();
                         if ($product_first && $campo->cantidad > 0) {
                             $producto_historial = new HistorialVendidos;
                             $producto_historial->id_producto = $product_first->id;
@@ -505,7 +513,7 @@ class CotizacionController extends Controller
 
         // Iterar sobre los productos de la nota para buscar la imagen correspondiente
         foreach ($nota_productos as $producto_nota) {
-            $producto = Products::where('nombre', $producto_nota->producto)->first();
+            $producto = Products::where('nombre', $producto_nota->producto)->where('categoria', '!=', 'Ocultar')->first();
 
             if ($producto) {
                 $producto_nota->imagen_producto = $producto->imagenes;
