@@ -540,6 +540,7 @@ class CotizacionCosmicaController extends Controller
                 $nota->fecha_entrega  = $request->get('fecha_entrega');
                 $nota->direccion_entrega  = $request->get('direccion_entrega');
                 $nota->comentario_rep  = $request->get('comentario_rep');
+                $nota->id_admin_venta  = auth()->user()->id;
             }
 
         $nota->update();
