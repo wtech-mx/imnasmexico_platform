@@ -776,8 +776,11 @@ class ReportesController extends Controller
                 ]);
 
                 // Generar contenido del PDF
-                $filePath = 'reportes/reporte_' . now()->format('Ymd_His') . '.pdf';
-                \Storage::disk('public')->put($filePath, $pdf->output()); // Usar `output()` en Barryvdh
+                // $filePath = 'reportes/reporte_' . now()->format('Ymd_His') . '.pdf';
+                // \Storage::disk('public')->put($filePath, $pdf->output()); // Usar `output()` en Barryvdh
+
+                $filePath = public_path('reportes/reporte_' . now()->format('Ymd_His') . '.pdf');
+                file_put_contents($filePath, $pdf->output());
 
                 return response()->json([
                     'pdf_url' => \Storage::url($filePath) // URL del PDF generado
