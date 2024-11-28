@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\NotasProductos;
+use App\Models\NotasProductosCosmica;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Validator;
@@ -11,6 +13,7 @@ use DB;
 use Hash;
 use Illuminate\Support\Arr;
 use Session;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -149,5 +152,29 @@ class UserController extends Controller
 
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
+    }
+
+    public function imprimir($id){
+        $startOfWeek = Carbon::now()->startOfWeek();
+        $endOfWeek = Carbon::now()->endOfWeek();
+        $today =  date('d-m-Y');
+
+        $notasAprobadasNASComision = NotasProductos::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])
+        ->where('tipo_nota', '=', 'Cotizacion')
+        ->whereNotNull('id_kit')
+        ->get();
+
+        $notasAprobadasCosmicaComision = NotasProductosCosmica::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])
+        ->where('tipo_nota', '=', 'Cotizacion')
+        ->whereNotNull('id_kit')
+        ->orderBy('id', 'DESC')
+        ->get();
+
+        $user_comision_kit = User::where('id', $id)->first();
+
+        $pdf = \PDF::loadView('admin.users.pdf_comision_kits', compact('today', 'notasAprobadasNASComision', 'user_comision_kit', 'notasAprobadasCosmicaComision'));
+       return $pdf->stream();
+
+        //  return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
     }
 }

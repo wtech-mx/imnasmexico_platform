@@ -93,7 +93,7 @@
     </div>
 </div>
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-lg-7 mb-4 mb-lg-0">
         <div class="card z-index-2 h-100">
         <div class="card-header pb-0 pt-3 bg-transparent">
@@ -174,7 +174,7 @@
 
         </div>
     </div>
-</div>
+</div> --}}
 
 <div class="row mt-4">
     @can('registro-imnas-pendientes')
@@ -227,7 +227,7 @@
 </div>
 
 <div class="row mt-4">
-    <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
+    {{-- <div class="col-lg-6 col-md-6 mb-4 mb-lg-0">
         <div class="card h-100 ">
         <div class="card-header">
             <div class="d-flex justify-content-between">
@@ -265,7 +265,155 @@
             </div>
         </div>
         </div>
-    </div>
+    </div> --}}
+
+    @can('comisiones-kits')
+        <div class="col-md-6">
+            <div class="card">
+            <div class="card-header pb-0 p-3">
+                <div class="d-flex justify-content-between">
+                    <h6 class="mb-0">Comisiones venta kits</h6>
+                </div>
+            </div>
+
+
+            <div class="card-body p-3">
+                <ul class="list-group">
+
+                @foreach ($user_comision_kit as $item)
+                    <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
+                        <div class="d-flex align-items-center">
+                            <div class="icon icon-shape icon-sm me-3 bg-primary shadow text-center">
+                                <i class="ni ni-mobile-button text-white opacity-10"></i>
+                            </div>
+
+                            <div class="d-flex flex-column">
+                                <h6 class="mb-1 text-dark text-sm">{{ $item->name }}</h6>
+                                <span class="text-xs">
+                                    @php
+                                        $notas_nas_individual = 0;
+                                        $notas_nas_comp = 0;
+                                        $notas_nas_comp2 = 0;
+                                        $sum_comp = 0;
+                                        $notas_nas_individual_pares = 0;
+                                        $comision_comp = 0;
+                                        $notas_nas_compartida_pares = 0;
+                                        $division_comp = 0;
+                                        $comision = 0;
+                                        $comision_uno = 0;
+
+                                        //C O M I S I O N E S  C O S M I C A
+                                        $notas_nas_individual_cosmica = 0;
+                                        $notas_nas_comp_cosmica = 0;
+                                        $notas_nas_comp2_cosmica = 0;
+                                        $sum_comp_cosmica = 0;
+                                        $notas_nas_individual_pares_cosmica = 0;
+                                        $comision_comp_cosmica = 0;
+                                        $notas_nas_compartida_pares_cosmica = 0;
+                                        $division_comp_cosmica = 0;
+                                        $comision_cosmica = 0;
+                                        $comision_uno_cosmica = 0;
+
+                                        $suma_individual = 0;
+                                        $suma_compartidas = 0;
+                                    @endphp
+                                    @foreach ($notasAprobadasNASComision as $notas)
+                                        @if ($notas->id_admin == $item->id && $notas->id_admin_venta == $item->id)
+                                            @php
+                                                $notas_nas_individual += $notas->cantidad_kit + $notas->cantidad_kit2 + $notas->cantidad_kit3 + $notas->cantidad_kit4 + $notas->cantidad_kit5 + $notas->cantidad_kit6;
+                                            @endphp
+                                        @endif
+                                        @if ($notas->id_admin == $item->id && $notas->id_admin_venta !== $item->id)
+                                            @php
+                                                $notas_nas_comp += $notas->cantidad_kit + $notas->cantidad_kit2 + $notas->cantidad_kit3 + $notas->cantidad_kit4 + $notas->cantidad_kit5 + $notas->cantidad_kit6;
+                                            @endphp
+                                        @endif
+                                        @if ($notas->id_admin !== $item->id && $notas->id_admin_venta == $item->id)
+                                            @php
+                                                $notas_nas_comp2 += $notas->cantidad_kit + $notas->cantidad_kit2 + $notas->cantidad_kit3 + $notas->cantidad_kit4 + $notas->cantidad_kit5 + $notas->cantidad_kit6;
+                                            @endphp
+                                        @endif
+                                        @php
+                                            $sum_comp = $notas_nas_comp + $notas_nas_comp2;
+
+                                            $notas_nas_individual_pares = $notas_nas_individual;
+                                            if ($notas_nas_individual_pares % 2 != 0) {
+                                                $notas_nas_individual_pares--; // Reducir en 1 si es impar
+                                            }
+
+                                            $division = $notas_nas_individual_pares / 2;
+                                            $comision = $division * $item->comision_kit;
+
+                                            $notas_nas_compartida_pares = $sum_comp;
+                                            if ($notas_nas_compartida_pares % 2 != 0) {
+                                                $notas_nas_compartida_pares--; // Reducir en 1 si es impar
+                                            }
+                                            $comision_comp = $item->comision_kit / 2;
+                                            $division_comp = $notas_nas_compartida_pares / 2;
+                                            $comision_uno = $division_comp * $comision_comp;
+                                        @endphp
+                                    @endforeach
+                                    {{-- C O M I S I O N E S  C O S M I C A --}}
+                                    @foreach ($notasAprobadasCosmicaComision as $notas)
+                                        @if ($notas->id_admin == $item->id && $notas->id_admin_venta == $item->id)
+                                            @php
+                                                $notas_nas_individual_cosmica += $notas->cantidad_kit + $notas->cantidad_kit2 + $notas->cantidad_kit3 + $notas->cantidad_kit4 + $notas->cantidad_kit5 + $notas->cantidad_kit6;
+                                            @endphp
+                                        @endif
+                                        @if ($notas->id_admin == $item->id && $notas->id_admin_venta !== $item->id)
+                                            @php
+                                                $notas_nas_comp_cosmica += $notas->cantidad_kit + $notas->cantidad_kit2 + $notas->cantidad_kit3 + $notas->cantidad_kit4 + $notas->cantidad_kit5 + $notas->cantidad_kit6;
+                                            @endphp
+                                        @endif
+                                        @if ($notas->id_admin !== $item->id && $notas->id_admin_venta == $item->id)
+                                            @php
+                                                $notas_nas_comp2_cosmica += $notas->cantidad_kit + $notas->cantidad_kit2 + $notas->cantidad_kit3 + $notas->cantidad_kit4 + $notas->cantidad_kit5 + $notas->cantidad_kit6;
+                                            @endphp
+                                        @endif
+                                        @php
+                                            $sum_comp_cosmica = $notas_nas_comp_cosmica + $notas_nas_comp2_cosmica;
+
+                                            $notas_nas_individual_pares_cosmica = $notas_nas_individual_cosmica;
+                                            if ($notas_nas_individual_pares_cosmica % 2 != 0) {
+                                                $notas_nas_individual_pares_cosmica--; // Reducir en 1 si es impar
+                                            }
+
+                                            $division = $notas_nas_individual_pares_cosmica / 2;
+                                            $comision_cosmica = $division * $item->comision_kit;
+
+                                            $notas_nas_compartida_pares_cosmica = $sum_comp_cosmica;
+                                            if ($notas_nas_compartida_pares_cosmica % 2 != 0) {
+                                                $notas_nas_compartida_pares_cosmica--; // Reducir en 1 si es impar
+                                            }
+                                            $comision_comp_cosmica = $item->comision_kit / 2;
+                                            $division_comp_cosmica = $notas_nas_compartida_pares_cosmica / 2;
+                                            $comision_uno_cosmica = $division_comp_cosmica * $comision_comp_cosmica;
+
+                                            $suma_individual = $notas_nas_individual + $notas_nas_individual_cosmica;
+                                            $suma_compartidas = $sum_comp + $sum_comp_cosmica;
+                                        @endphp
+                                    @endforeach
+                                    Kits vendidos: {{$suma_individual}} <br>
+                                    Kits vendidos compartidos: {{$suma_compartidas}}
+                                    <strong> -
+                                        <a type="button" class="" data-bs-toggle="modal" data-bs-target="#comision_{{ $item->id }}" style="color: {{$configuracion->color_boton_add}};">
+                                            Ver detalles
+                                        </a>
+                                    </strong>
+                                </span>
+
+                            </div>
+                        </div>
+                    </li>
+                    @include('admin.users.comision_kits')
+                @endforeach
+
+                </ul>
+            </div>
+            </div>
+        </div>
+    @endcan
+
     <div class="col-lg-6">
         <div class="card h-100 ">
         <div class="card-header">
@@ -319,7 +467,7 @@
     </div>
 </div>
 
-<div class="row mt-4">
+{{-- <div class="row mt-4">
     <div class="col-12 col-md-8 mb-4 mb-md-0">
         <div class="card">
             <div class="card-header">
@@ -426,4 +574,4 @@
         </div>
         </div>
     </div>
-</div>
+</div> --}}

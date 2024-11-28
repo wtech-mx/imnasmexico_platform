@@ -179,17 +179,17 @@ class HomeController extends Controller
                 } while (count($results) > 0);
 
                 // C O M I S I O N E S  V E N T A  K I T S
-                $notasAprobadasNASComision = NotasProductos::where('fecha_aprobada', $fechaHoraActual)
+                $startOfWeek = Carbon::now()->startOfWeek();
+                $endOfWeek = Carbon::now()->endOfWeek();
+                $notasAprobadasNASComision = NotasProductos::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])
                 ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('id_kit','!=' , NULL)->get();
 
-                $notasAprobadasCosmicaComision = NotasProductosCosmica::where('fecha_aprobada', $fechaHoraActual)
+                $notasAprobadasCosmicaComision = NotasProductosCosmica::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])
                 ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('id_kit','!=' , NULL)->get();
 
                 $user_comision_kit = User::where('comision_kit','!=',null)->get();
 
-                $data = User::where('cliente','=',null)->orderBy('id','DESC')->get();
-
-            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes', 'envios_pendientes', 'notasAprobadasNASComision', 'user_comision_kit', 'notasAprobadasCosmicaComision', 'data'));
+            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes', 'envios_pendientes', 'notasAprobadasNASComision', 'user_comision_kit', 'notasAprobadasCosmicaComision'));
         }
 
     }
