@@ -749,83 +749,49 @@ class ReportesController extends Controller
 
             // Si se solicita generar el PDF, lo hacemos aquí
             if ($generarPdf) {
-                $this->generarPDF(
-                    $outputOrders,
-                    $outputCourses,
-                    $outputSummary,
-                    $fechaInicioSemana,
-                    $fechaFinSemana,
-                    $totalPagadoFormateado,
-                    $cursosComprados,
-                    $orders_mp,
-                    $orders_stripe,
-                    $orders_ext,
-                    $orders_inbursa,
-                    $orders_bbva,
-                    $orders_Efectivo,
-                    $orders_nota,
-                    $orders_oxxo_inbursa,
-                    $orders_Tarjeta,
-                    $orders
-                );
+                $grafica = $this->generateChart($orders_mp, $orders_stripe, $orders_ext, $orders_inbursa, $orders_bbva, $orders_Efectivo, $orders_nota, $orders_oxxo_inbursa, $orders_Tarjeta, $orders);
+                $fechaGeneracion = now()->format('j M \\d\\e\\l Y \\a \\l\\a\\s H:i:s'); // Fecha y hora formateadas
 
-                return response()->json(['success' => true, 'message' => 'PDF generado correctamente']);
+                $pdf = \PDF::loadView('admin.reportes.reporte_pdf', [
+                    'outputOrders' => $outputOrders,
+                    'outputCourses' => $outputCourses,
+                    'outputSummary' => $outputSummary,
+                    'fechaInicioSemana' => $fechaInicioSemana,
+                    'fechaFinSemana' => $fechaFinSemana,
+                    'totalPagadoFormateado' => $totalPagadoFormateado,
+                    'cursosComprados' => $cursosComprados,
+                    'orders' => $orders,
+                    'orders_mp' => $orders_mp,
+                    'orders_stripe' => $orders_stripe,
+                    'orders_ext' => $orders_ext,
+                    'orders_inbursa' => $orders_inbursa,
+                    'orders_bbva' => $orders_bbva,
+                    'orders_Efectivo' => $orders_Efectivo,
+                    'orders_nota' => $orders_nota,
+                    'orders_oxxo_inbursa' => $orders_oxxo_inbursa,
+                    'orders_Tarjeta' => $orders_Tarjeta,
+                    'vendedor' => $usuarioId,
+                    'grafica' => $grafica, // Pasamos el gráfico base64
+                    'fechaGeneracion' => $fechaGeneracion // Pasa la fecha al PDF
+                ]);
 
+                // Generar contenido del PDF
+                $filePath = 'reportes/reporte_' . now()->format('Ymd_His') . '.pdf';
+                \Storage::disk('public')->put($filePath, $pdf->output()); // Usar `output()` en Barryvdh
+
+                return response()->json([
+                    'pdf_url' => \Storage::url($filePath) // URL del PDF generado
+                ]);
             }
+
 
             return response()->json([
                 'grafica' => $this->generateChart($orders_mp, $orders_stripe, $orders_ext,$orders_inbursa,$orders_bbva,$orders_Efectivo, $orders_nota,$orders_oxxo_inbursa,$orders_Tarjeta,$orders),
                 'resultados' => $outputOrders,
                 'outputSummary' => $outputSummary,
                 'resultados3' => $outputCourses
-
             ]);
         }
-    }
-
-    public function generarPDF(
-        $outputOrders,
-        $outputCourses,
-        $outputSummary,
-        $fechaInicioSemana,
-        $fechaFinSemana,
-        $totalPagadoFormateado,
-        $cursosComprados,
-        $orders_mp,
-        $orders_stripe,
-        $orders_ext,
-        $orders_inbursa,
-        $orders_bbva,
-        $orders_Efectivo,
-        $orders_nota,
-        $orders_oxxo_inbursa,
-        $orders_Tarjeta,
-        $orders
-    ) {
-        $grafica = $this->generateChart($orders_mp, $orders_stripe, $orders_ext, $orders_inbursa, $orders_bbva, $orders_Efectivo, $orders_nota, $orders_oxxo_inbursa, $orders_Tarjeta, $orders);
-
-        $pdf = \PDF::loadView('admin.reportes.reporte_pdf', [
-            'outputOrders' => $outputOrders,
-            'outputCourses' => $outputCourses,
-            'outputSummary' => $outputSummary,
-            'fechaInicioSemana' => $fechaInicioSemana,
-            'fechaFinSemana' => $fechaFinSemana,
-            'totalPagadoFormateado' => $totalPagadoFormateado,
-            'cursosComprados' => $cursosComprados,
-            'orders' => $orders,
-            'orders_mp' => $orders_mp,
-            'orders_stripe' => $orders_stripe,
-            'orders_ext' => $orders_ext,
-            'orders_inbursa' => $orders_inbursa,
-            'orders_bbva' => $orders_bbva,
-            'orders_Efectivo' => $orders_Efectivo,
-            'orders_nota' => $orders_nota,
-            'orders_oxxo_inbursa' => $orders_oxxo_inbursa,
-            'orders_Tarjeta' => $orders_Tarjeta,
-            'grafica' => $grafica
-        ]);
-
-        return $pdf->stream('reporte.pdf');
     }
 
 

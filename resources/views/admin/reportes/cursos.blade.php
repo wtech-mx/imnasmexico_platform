@@ -151,35 +151,37 @@
                 '_token': token // Agregar el token CSRF a los datos enviados
             },
             success: function(response) {
-                $('#outputSummary').html(response.outputSummary);
-                $('#resultados').html(response.resultados);
-                $('#resultados3').html(response.resultados3);
-                $('#grafica').html(response.grafica);
-                $('body').append(response.script);
+                if (response.pdf_url) {
+                    // Si el servidor devuelve una URL del PDF
+                    window.open(response.pdf_url); // Abre el PDF en una nueva pestaña
+                    // alert('PDF generado correctamente.');
+                } else {
+                    // Manejo del contenido HTML para los reportes
+                    $('#outputSummary').html(response.outputSummary);
+                    $('#resultados').html(response.resultados);
+                    $('#resultados3').html(response.resultados3);
+                    $('#grafica').html(response.grafica);
 
-            // Manejo de la primera tabla
-            if (window.dataTableSearch1) {
-                window.dataTableSearch1.destroy(); // Destruir si existe
-            }
-            const tableId1 = "#datatable-search";
-            window.dataTableSearch1 = new simpleDatatables.DataTable(tableId1, {
-                deferRender: true,
-                paging: true,
-                pageLength: 10
-            });
+                    // Inicializar DataTables
+                    if (window.dataTableSearch1) {
+                        window.dataTableSearch1.destroy(); // Destruir si existe
+                    }
+                    window.dataTableSearch1 = new simpleDatatables.DataTable("#datatable-search", {
+                        deferRender: true,
+                        paging: true,
+                        pageLength: 10
+                    });
 
-            // Manejo de la segunda tabla
-            if (window.dataTableSearch2) {
-                window.dataTableSearch2.destroy(); // Destruir si existe
-            }
-            const tableId2 = "#datatable-search2";
-            window.dataTableSearch2 = new simpleDatatables.DataTable(tableId2, {
-                deferRender: true,
-                paging: true,
-                pageLength: 10
-            });
-
-            }
+                    if (window.dataTableSearch2) {
+                        window.dataTableSearch2.destroy(); // Destruir si existe
+                    }
+                    window.dataTableSearch2 = new simpleDatatables.DataTable("#datatable-search2", {
+                        deferRender: true,
+                        paging: true,
+                        pageLength: 10
+                    });
+                }
+            },
         });
     }
 

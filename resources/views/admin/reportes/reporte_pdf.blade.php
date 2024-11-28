@@ -29,11 +29,18 @@
 </head>
 <body>
 
-    <h1>Reporte de Pagos y Cursos</h1>
+    <h1>Reporte de Pagos de Cursos</h1>
 
-    <p><strong>Fecha de inicio:</strong> {{ $fechaInicioSemana }}</p>
-    <p><strong>Fecha de fin:</strong> {{ $fechaFinSemana }}</p>
+    <p><strong>Fecha de inicio:</strong> {{ \Carbon\Carbon::parse($fechaInicioSemana)->format('j M \\d\\e\\l Y') }}</p>
+    <p><strong>Fecha de fin:</strong> {{ \Carbon\Carbon::parse($fechaFinSemana)->format('j M \\d\\e\\l Y') }}</p>
     <p><strong>Total Pagado:</strong> ${{ $totalPagadoFormateado }}</p>
+    <p><strong>Vendedor:</strong> {{ $vendedor }}</p>
+
+    <div class="chart">
+        <h2>Gráfico de Pagos</h2>
+        <img src="data:image/png;base64,{{ $grafica }}" alt="Gráfico de Pagos">
+    </div>
+
 
     <h2>Órdenes</h2>
     <table class="table">
@@ -45,20 +52,24 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($orders as $order)
+            @php
+                $totalPagos = 0;
+                $ordenesOrdenadas = $orders->sortByDesc('pago');
+            @endphp
+            @foreach ($ordenesOrdenadas as $order)
                 <tr>
-                    <td>{{ $order->fecha }}</td>
+                    <td>{{ \Carbon\Carbon::parse($order->fecha)->format('j M \\d\\e\\l Y') }}</td>
                     <td>{{ $order->forma_pago }}</td>
                     <td>${{ number_format($order->pago, 2, '.', ',') }}</td>
                 </tr>
+                @php $totalPagos += $order->pago; @endphp
             @endforeach
+            <tr>
+                <td colspan="2"><strong>Total</strong></td>
+                <td><strong>${{ number_format($totalPagos, 2, '.', ',') }}</strong></td>
+            </tr>
         </tbody>
     </table>
-
-    <h2>Gráfica de Pagos</h2>
-    <div class="chart">
-        <img src="data:image/png;base64,{{ base64_encode($grafica) }}" alt="Gráfico de Pagos">
-    </div>
 
     <h2>Resumen de Formas de Pago</h2>
     <table class="table">
@@ -69,34 +80,62 @@
             </tr>
         </thead>
         <tbody>
-            <tr><td>Mercado Pago</td><td>{{ $orders_mp->count() }}</td></tr>
-            <tr><td>Stripe</td><td>{{ $orders_stripe->count() }}</td></tr>
-            <tr><td>Transferencia Inbursa</td><td>{{ $orders_inbursa->count() }}</td></tr>
-            <tr><td>Transferencia Bancomer</td><td>{{ $orders_bbva->count() }}</td></tr>
-            <tr><td>Efectivo</td><td>{{ $orders_Efectivo->count() }}</td></tr>
-            <tr><td>Tarjeta</td><td>{{ $orders_Tarjeta->count() }}</td></tr>
-            <tr><td>Oxxo Inbursa</td><td>{{ $orders_oxxo_inbursa->count() }}</td></tr>
-            <tr><td>Nota</td><td>{{ $orders_nota->count() }}</td></tr>
+            @php
+                $formasPago = [
+                    ['forma' => 'Mercado Pago', 'total' => $orders_mp->count()],
+                    ['forma' => 'Stripe', 'total' => $orders_stripe->count()],
+                    ['forma' => 'Transferencia Inbursa', 'total' => $orders_inbursa->count()],
+                    ['forma' => 'Transferencia Bancomer', 'total' => $orders_bbva->count()],
+                    ['forma' => 'Efectivo', 'total' => $orders_Efectivo->count()],
+                    ['forma' => 'Tarjeta', 'total' => $orders_Tarjeta->count()],
+                    ['forma' => 'Oxxo Inbursa', 'total' => $orders_oxxo_inbursa->count()],
+                    ['forma' => 'Nota', 'total' => $orders_nota->count()],
+                ];
+                $formasPagoOrdenadas = collect($formasPago)->sortByDesc('total');
+                $totalFormasPago = 0;
+            @endphp
+            @foreach ($formasPagoOrdenadas as $forma)
+                <tr>
+                    <td>{{ $forma['forma'] }}</td>
+                    <td>{{ $forma['total'] }}</td>
+                </tr>
+                @php $totalFormasPago += $forma['total']; @endphp
+            @endforeach
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>{{ $totalFormasPago }}</strong></td>
+            </tr>
         </tbody>
     </table>
 
-    <h2>Cursos Comprados</h2>
+    <h2>Cursos</h2>
     <table class="table">
         <thead>
             <tr>
                 <th>Nombre del Curso</th>
-                <th>Total Comprado</th>
+                <th>Total Inscritos</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($cursosComprados as $curso)
+            @php
+                $totalCursos = 0;
+                $cursosOrdenados = $cursosComprados->sortByDesc('total');
+            @endphp
+            @foreach ($cursosOrdenados as $curso)
                 <tr>
                     <td>{{ $curso['nombre'] }}</td>
                     <td>{{ $curso['total'] }}</td>
                 </tr>
+                @php $totalCursos += $curso['total']; @endphp
             @endforeach
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>{{ $totalCursos }}</strong></td>
+            </tr>
         </tbody>
     </table>
-
+    <div class="footer">
+        <p>Reporte generado el {{ $fechaGeneracion }}</p>
+    </div>
 </body>
 </html>
