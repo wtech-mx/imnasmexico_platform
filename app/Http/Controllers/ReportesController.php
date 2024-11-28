@@ -782,8 +782,11 @@ class ReportesController extends Controller
                 $filePath = public_path('reportes/reporte_' . now()->format('Ymd_His') . '.pdf');
                 file_put_contents($filePath, $pdf->output());
 
+                // Generar la URL basada en la ubicación del archivo en public_html
+                $pdfUrl = asset('reportes/reporte_' . now()->format('Ymd_His') . '.pdf');
+
                 return response()->json([
-                    'pdf_url' => \Storage::url($filePath) // URL del PDF generado
+                    'pdf_url' => $pdfUrl // URL correcta del PDF
                 ]);
             }
 
