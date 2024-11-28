@@ -779,15 +779,29 @@ class ReportesController extends Controller
                 // $filePath = 'reportes/reporte_' . now()->format('Ymd_His') . '.pdf';
                 // \Storage::disk('public')->put($filePath, $pdf->output()); // Usar `output()` en Barryvdh
 
-                $filePath = public_path('reportes/reporte_' . now()->format('Ymd_His') . '.pdf');
+                // $filePath = public_path('reportes/reporte_' . now()->format('Ymd_His') . '.pdf');
+                // file_put_contents($filePath, $pdf->output());
+
+                // // Generar la URL basada en la ubicación del archivo en public_html
+                // $pdfUrl = asset('reportes/reporte_' . now()->format('Ymd_His') . '.pdf');
+
+                // return response()->json([
+                //     'pdf_url' => $pdfUrl // URL correcta del PDF
+                // ]);
+
+                // Ruta personalizada hacia tu public_html
+                $filePath = '/home/lj32x00ef2qq/public_html/plataforma.imnasmexico.com/reportes/reporte_' . now()->format('Ymd_His') . '.pdf';
+
+                // Guarda el archivo en la ubicación correcta
                 file_put_contents($filePath, $pdf->output());
 
-                // Generar la URL basada en la ubicación del archivo en public_html
-                $pdfUrl = asset('reportes/reporte_' . now()->format('Ymd_His') . '.pdf');
+                // Genera la URL pública correcta
+                $pdfUrl = 'https://plataforma.imnasmexico.com/reportes/reporte_' . now()->format('Ymd_His') . '.pdf';
 
                 return response()->json([
-                    'pdf_url' => $pdfUrl // URL correcta del PDF
+                    'pdf_url' => $pdfUrl // Devuelve la URL pública del PDF
                 ]);
+
             }
 
 
