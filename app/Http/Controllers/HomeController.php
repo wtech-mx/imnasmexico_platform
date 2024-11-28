@@ -187,7 +187,9 @@ class HomeController extends Controller
 
                 $user_comision_kit = User::where('comision_kit','!=',null)->get();
 
-            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes', 'envios_pendientes', 'notasAprobadasNASComision', 'user_comision_kit', 'notasAprobadasCosmicaComision'));
+                $data = User::where('cliente','=',null)->orderBy('id','DESC')->get();
+
+            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes', 'envios_pendientes', 'notasAprobadasNASComision', 'user_comision_kit', 'notasAprobadasCosmicaComision', 'data'));
         }
 
     }
