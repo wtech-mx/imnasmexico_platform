@@ -12,7 +12,7 @@ Productos solicitados Paradisus
                         <div class="card-header">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                                <h2 class="mb-3">Folio Paradisus #{{$ApiFiltradaCollectAprobado['id']}}</h2>
+                                <h2 class="mb-3">Folio Paradisus ##{{$ApiFiltradaCollectAprobado['id']}}</h2>
 
                                 <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                     ¿Como funciona?
@@ -122,12 +122,12 @@ Productos solicitados Paradisus
         });
 
         // Mostrar u ocultar el botón según el estado de `allChecked`
-        const guardarBtnContainer = document.getElementById('guardarBtnContainer');
-        if (allChecked) {
-            guardarBtnContainer.style.display = 'block'; // Mostrar el botón
-        } else {
-            guardarBtnContainer.style.display = 'none'; // Ocultar el botón
-        }
+        // const guardarBtnContainer = document.getElementById('guardarBtnContainer');
+        // if (allChecked) {
+        //     guardarBtnContainer.style.display = 'block'; // Mostrar el botón
+        // } else {
+        //     guardarBtnContainer.style.display = 'none'; // Ocultar el botón
+        // }
     }
 
     function playSound(success) {
