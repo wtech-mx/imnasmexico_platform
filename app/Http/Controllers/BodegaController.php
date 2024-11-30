@@ -548,14 +548,14 @@ class BodegaController extends Controller
             'status' => $request->get('status'),
         ]);
 
-        $updatedOrderMeta = $woocommerceNas->put("orders/{$id}", [
-            'meta_data' => [
-                [
-                    'key' => $request->get('key'),
-                    'value' => date("Y-m-d H:i:s"), // Guardar el nombre del archivo
-                ],
-            ],
-        ]);
+        // $updatedOrderMeta = $woocommerceNas->put("orders/{$id}", [
+        //     'meta_data' => [
+        //         [
+        //             'key' => $request->get('key'),
+        //             'value' => date("Y-m-d H:i:s"),
+        //         ],
+        //     ],
+        // ]);
 
         // Verificar si la actualización fue exitosa
         if ($updatedOrder) {
@@ -564,6 +564,7 @@ class BodegaController extends Controller
             // 2. Recorrer los productos en la orden (line_items)
             foreach ($order->line_items as $item) {
                 $productName = trim($item->name); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
+
                 $quantity = $item->quantity; // Cantidad vendida en WooCommerce
 
                 // 3. Buscar el producto en la tabla interna
