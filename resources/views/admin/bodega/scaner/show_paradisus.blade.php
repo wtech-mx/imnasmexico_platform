@@ -58,7 +58,7 @@ Productos solicitados Paradisus
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="modal-footer" id="guardarBtnContainer" style="display: none;">
+                                        <div class="modal-footer" id="guardarBtnContainer">
                                             <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                         </div>
                                 </form>
