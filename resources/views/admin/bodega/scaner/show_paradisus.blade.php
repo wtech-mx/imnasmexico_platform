@@ -12,7 +12,7 @@ Productos solicitados Paradisus
                         <div class="card-header">
                             <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                                <h2 class="mb-3">Folio Paradisus ##{{$ApiFiltradaCollectAprobado['id']}}</h2>
+                                <h2 class="mb-3">Folio Paradisus #{{$ApiFiltradaCollectAprobado['id']}}</h2>
 
                                 <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                     ¿Como funciona?
@@ -40,25 +40,27 @@ Productos solicitados Paradisus
                                                     @php
                                                         $producto_nas = App\Models\Products::where('nombre', '=',  $producto['concepto'])->first();
                                                     @endphp
-                                                        <tr data-id="{{ $producto['id'] }}">
-                                                            <td>{{ $producto['cantidad'] }}</td>
-                                                            <td>
-                                                                <img src="{{ $producto_nas->imagenes }}" alt="" style="width: 60px"><br>
-                                                                {{ $producto['concepto'] }}
-                                                            </td>
-                                                            <td id="status-{{ $producto_nas->sku }}">
-                                                                @if($producto['estatus'] === 1)
-                                                                    ✔️
-                                                                @else
-                                                                    Pendiente
-                                                                @endif
-                                                            </td>
-                                                        </tr>
+                                                    <tr data-id="{{ $producto['id'] }}"
+                                                        style="background-color: {{ $producto['cantidad'] > 0 ? '#d4edda' : '#f8d7da' }};"> <!-- Verde para mayor a 0, naranja para 0 -->
+                                                        <td>{{ $producto['cantidad'] }}</td>
+                                                        <td>
+                                                            <img src="{{ $producto_nas->imagenes }}" alt="" style="width: 60px"><br>
+                                                            {{ $producto['concepto'] }}
+                                                        </td>
+                                                        <td id="status-{{ $producto_nas->sku }}">
+                                                            @if($producto['estatus'] === 1)
+                                                                ✔️
+                                                            @else
+                                                                Pendiente
+                                                            @endif
+                                                        </td>
+                                                    </tr>
                                                     @endforeach
+
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div class="modal-footer" >
+                                        <div class="modal-footer" id="guardarBtnContainer" style="display: none;">
                                             <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                         </div>
                                 </form>
@@ -122,12 +124,12 @@ Productos solicitados Paradisus
         });
 
         // Mostrar u ocultar el botón según el estado de `allChecked`
-        // const guardarBtnContainer = document.getElementById('guardarBtnContainer');
-        // if (allChecked) {
-        //     guardarBtnContainer.style.display = 'block'; // Mostrar el botón
-        // } else {
-        //     guardarBtnContainer.style.display = 'none'; // Ocultar el botón
-        // }
+        const guardarBtnContainer = document.getElementById('guardarBtnContainer');
+        if (allChecked) {
+            guardarBtnContainer.style.display = 'block'; // Mostrar el botón
+        } else {
+            guardarBtnContainer.style.display = 'none'; // Ocultar el botón
+        }
     }
 
     function playSound(success) {
