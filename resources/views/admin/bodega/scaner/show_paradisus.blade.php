@@ -95,7 +95,7 @@ Productos solicitados Paradisus
                     if (data.status === 'success') {
                         // Actualizar el campo correspondiente usando el SKU como ID
                         $('#status-' + sku).html('✔️');
-                        checkAllProductsChecked();
+                        checkAllProductsChecked(); // Verificar si todos los productos están listos
                         successSound.play();
                         alert('Producto escaneado');
                     } else {
@@ -115,10 +115,13 @@ Productos solicitados Paradisus
         }
     });
 
+    // Función para verificar si todos los productos tienen ✔️
     function checkAllProductsChecked() {
         let allChecked = true;
+
         document.querySelectorAll('tbody tr').forEach(function(row) {
-            if (row.querySelector('td:last-child').innerHTML !== '✔️') {
+            const estatus = row.querySelector('td:last-child').innerHTML.trim();
+            if (estatus !== '✔️') {
                 allChecked = false;
             }
         });
@@ -132,12 +135,22 @@ Productos solicitados Paradisus
         }
     }
 
+    // Opcional: función de sonido unificada
     function playSound(success) {
+        const successSound = document.getElementById("successSound");
+        const errorSound = document.getElementById("errorSound");
+
         if (success) {
             successSound.play();
         } else {
             errorSound.play();
         }
     }
+
+    // Llamar a la verificación inicial al cargar la página
+    document.addEventListener('DOMContentLoaded', () => {
+        checkAllProductsChecked();
+    });
 </script>
+
 @endsection
