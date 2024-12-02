@@ -394,9 +394,15 @@ class NotasProductosController extends Controller
 
         $total_envio = $total + $envio;
 
-        $nota->tipo = $total_envio;
-        $nota->total = $total;
+        $nota->tipo = str_replace(['$', ','], '', $request->input('subtotal_final'));
+        $nota->total = str_replace(['$', ','], '', $request->input('total_final'));
         $nota->envio = $envio_check;
+        $nota->restante = $request->input('descuento_total');
+
+        $nota->monto = $request->input('monto');
+        $nota->metodo_pago2 = $request->input('metodo_pago2');
+        $nota->monto2 = $request->input('monto2');
+        $nota->metodo_pago = $request->input('metodo_pago');
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');

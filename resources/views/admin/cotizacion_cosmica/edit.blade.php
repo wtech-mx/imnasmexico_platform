@@ -256,6 +256,16 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-4 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="toggleFacturaSi" name="factura" value="1" {{ $cotizacion->factura == '1' ? 'checked' : '' }}>
+
+                                            <h4 class="form-check-h4" for="flexCheckDefault">
+                                                <p class="" style="display: inline-block;font-size: 20px;padding: 5px;color: #3b8b00;">Si</p> <strong> (¿Factura?)</strong>
+                                            </h4>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group col-4">
                                         <label for="name">Subtotal *</label>
                                         <div class="input-group mb-3">
@@ -263,6 +273,16 @@
                                                 <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                             </span>
                                             <input id="subtotal_final" name="subtotal_final" type="text" class="form-control"  value="{{ $precio }}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <h4 for="name">Descuento</h4>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
+                                            </span>
+                                            <input class="form-control" type="number" id="descuento_total" name="descuento_total" value="{{ $cotizacion->restante }}">
                                         </div>
                                     </div>
 
@@ -346,22 +366,46 @@
             let total = 0;
 
             // Sumar subtotales de productos existentes
-            const subtotalesExistentes = document.querySelectorAll('.subtotal');
-            subtotalesExistentes.forEach(subtotalElement => {
+            document.querySelectorAll('.subtotal').forEach(subtotalElement => {
                 const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
                 total += subtotalValue;
             });
 
             // Sumar subtotales de nuevos productos
-            const subtotalesNuevos = document.querySelectorAll('.subtotal2');
-            subtotalesNuevos.forEach(subtotalElement => {
+            document.querySelectorAll('.subtotal2').forEach(subtotalElement => {
                 const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
                 total += subtotalValue;
             });
 
+            // Mostrar el subtotal final
             document.getElementById('subtotal_final').value = `$${total.toFixed(2)}`;
-            document.getElementById('total_final').value = `$${total.toFixed(2)}`;
+
+            // Obtener el valor del descuento
+            const descuentoInput = document.getElementById('descuento_total');
+            let descuentoPorcentaje = parseFloat(descuentoInput.value) || 0;
+
+            // Calcular el total final con el descuento
+            let totalConDescuento = total - (total * (descuentoPorcentaje / 100));
+
+            // Verificar si el checkbox de factura está marcado
+            const facturaCheckbox = document.getElementById('toggleFacturaSi');
+            if (facturaCheckbox.checked) {
+                totalConDescuento += totalConDescuento * 0.16; // Sumar el 16% de IVA
+            }
+
+            // Mostrar el total final
+            document.getElementById('total_final').value = `$${totalConDescuento.toFixed(2)}`;
         }
+
+        // Escuchar cambios en el input de descuento
+        document.getElementById('descuento_total').addEventListener('input', updateTotal);
+
+        // Escuchar cambios en el checkbox de factura
+        document.getElementById('toggleFacturaSi').addEventListener('change', updateTotal);
+
+        // Llamar a la función para calcular inicialmente
+        updateTotal();
+
     });
 </script>
 
@@ -435,27 +479,6 @@
             const subtotal = (precio * cantidad) - ((precio * cantidad) * (descuento / 100));
             campo.querySelector('.subtotal2').value = `$${subtotal.toFixed(2)}`;
             updateTotal();
-        }
-
-        function updateTotal() {
-            let total = 0;
-
-            // Sumar subtotales de productos existentes
-            const subtotalesExistentes = document.querySelectorAll('.subtotal');
-            subtotalesExistentes.forEach(subtotalElement => {
-                const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
-                total += subtotalValue;
-            });
-
-            // Sumar subtotales de nuevos productos
-            const subtotalesNuevos = document.querySelectorAll('.subtotal2');
-            subtotalesNuevos.forEach(subtotalElement => {
-                const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
-                total += subtotalValue;
-            });
-
-            document.getElementById('subtotal_final').value = `$${total.toFixed(2)}`;
-            document.getElementById('total_final').value = `$${total.toFixed(2)}`;
         }
 
         // Asignar eventos a los campos existentes

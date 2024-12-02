@@ -256,7 +256,7 @@
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
                                             </span>
-                                            <input class="form-control" type="number" id="descuento" name="descuento" value="{{ $cotizacion->restante }}">
+                                            <input class="form-control" type="number" id="descuento_total" name="descuento_total" value="{{ $cotizacion->restante }}">
                                         </div>
                                     </div>
 
@@ -520,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('subtotal_final').value = `$${total.toFixed(2)}`;
 
         // Obtener el valor del descuento
-        const descuentoInput = document.getElementById('descuento');
+        const descuentoInput = document.getElementById('descuento_total');
         const descuentoPorcentaje = parseFloat(descuentoInput.value) || 0;
 
         // Calcular el total final con el descuento
@@ -531,7 +531,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Escuchar cambios en el input de descuento
-    document.getElementById('descuento').addEventListener('input', updateTotal);
+    document.getElementById('descuento_total').addEventListener('input', updateTotal);
 
     // Llamar a la función para calcular inicialmente
     updateTotal();
