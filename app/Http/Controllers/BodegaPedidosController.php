@@ -445,4 +445,14 @@ class BodegaPedidosController extends Controller
     }
 
 
+    public function cancelar($id){
+
+        $pedido = BodegaPedidosCosmica::where('id', $id)->first();
+        $pedido->estatus = 'Cancelado';
+        $pedido->estatus_lab = 'Cancelado';
+        $pedido->update();
+
+        return redirect()->back()->with('success', 'Cancelado con exitoso.');
+    }
+
 }

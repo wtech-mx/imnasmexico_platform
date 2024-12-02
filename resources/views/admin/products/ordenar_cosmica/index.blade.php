@@ -72,17 +72,16 @@ Ordenes a laboratorio Cosmica
                                             <i class="fa fa-file"></i> Ver
                                         </a>
 
-                                        @if ($item->estatus != 'Realizado')
-                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock_cosmica.imprimir', $item->id) }}">
-                                                <i class="fa fa-file"></i> Descargar PDF
-                                            </a>
-                                        @endif
-
                                         <a class="btn btn-xs btn-warning text-white" target="_blank" href="{{ route('ordenes_cosmica.firma', $item->id) }}">
                                             <i class="fa fa-file"></i> Liga para aprobar
                                         </a>
+
+                                        <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#cancelar{{$item->id}}">
+                                            <i class="fa fa-file"></i> Cancelar
+                                        </a>
                                     </td>
                                 </tr>
+                                @include('admin.products.ordenar_cosmica.cancelar')
                             @endforeach
                         </table>
                     </div>

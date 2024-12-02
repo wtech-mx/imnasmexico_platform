@@ -661,6 +661,7 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/cosmica/admin/productos/stock/ordenes', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica'])->name('ordenes_cosmica.index');
     Route::patch('/cosmica/admin/productos/stock/orden/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'ordenes_cosmica_orden_update'])->name('ordenes_cosmica_update.orden');
+    Route::patch('/cosmica/laboratorio/cancelar/update/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'cancelar'])->name('cancelar_pedido.update');
 
     Route::get('bodega/preparacion/scaner/{id}', [App\Http\Controllers\BodegaController::class, 'preparacion_scaner'])->name('preparacion_scaner.bodega');
     Route::post('/check-product', [App\Http\Controllers\BodegaController::class, 'checkProduct'])->name('check.product');
