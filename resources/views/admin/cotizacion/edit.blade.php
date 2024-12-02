@@ -262,6 +262,16 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-4 ">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="toggleFacturaSi" name="factura" value="1" {{ $cotizacion->factura == '1' ? 'checked' : '' }}>
+
+                                            <h4 class="form-check-h4" for="flexCheckDefault">
+                                                <p class="" style="display: inline-block;font-size: 20px;padding: 5px;color: #3b8b00;">Si</p> <strong> (¿Factura?)</strong>
+                                            </h4>
+                                        </div>
+                                    </div>
+
                                     <div class="form-group col-4">
                                         <label for="name">Subtotal *</label>
                                         <div class="input-group mb-3">
@@ -269,6 +279,16 @@
                                                 <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                             </span>
                                             <input id="subtotal_final" name="subtotal_final" type="text" class="form-control"  value="{{ $precio }}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <h4 for="name">Descuento</h4>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
+                                            </span>
+                                            <input class="form-control" type="number" id="descuento_total" name="descuento_total" value="{{ $cotizacion->restante }}">
                                         </div>
                                     </div>
 
@@ -281,82 +301,6 @@
                                             <input id="total_final" name="total_final" type="text" class="form-control"  value="{{ $cotizacion->total }}" readonly>
                                         </div>
                                     </div>
-
-                                    {{-- <div class="col-4">
-                                        <div class="form-group">
-                                            <label for="name">Metodo de pago</label>
-                                            <select class="form-select" name="metodo_pago" id="metodo_pago">
-                                                <option value="{{ $cotizacion->metodo_pago }}">{{ $cotizacion->metodo_pago }}</option>
-                                                <option value="Efectivo">Efectivo</option>
-                                                <option value="Tarjeta Credito/debito">Tarjeta Credito/debito</option>
-                                                <option value="Transferencia">Transferencia</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="form-group col-4">
-                                        <label for="name">Monto</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/user/icons/money.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input class="form-control" type="text" id="monto" name="monto" value="{{ $cotizacion->monto }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-4">
-                                        <label for="name">Foto Pago</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input class="form-control" type="file" id="foto_pago2" name="foto_pago2" value="{{ $cotizacion->foto_pago2 }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-4">
-                                        <label for="name">Metodo de pago 2</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/user/icons/payment.png') }}" alt="" width="35px">
-                                            </span>
-                                            <select class="form-select" name="metodo_pago2" id="metodo_pago2">
-                                                <option value="{{ $cotizacion->metodo_pago2 }}">{{ $cotizacion->metodo_pago2 }}</option>
-                                                <option value="Efectivo">Efectivo</option>
-                                                <option value="Tarjeta Credito/debito">Tarjeta Credito/debito</option>
-                                                <option value="Transferencia">Transferencia</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="form-group col-4">
-                                        <label for="name">Monto 2</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="basic-addon1">
-                                                <img src="{{ asset('assets/user/icons/money.png') }}" alt="" width="35px">
-                                            </span>
-                                            <input class="form-control" type="text" id="monto2" name="monto2" value="{{ $cotizacion->monto2 }}">
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label for="name">Comentario/nota</label>
-                                            <textarea class="form-control" name="nota" id="nota" cols="30" rows="3">{{ $cotizacion->nota }}</textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6">
-                                        <label for="name">Foto Pago</label>
-                                        <div class="form-group">
-                                            @if ($cotizacion->foto_pago2 == NULL)
-                                                <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 250px; height: 300px;"/>
-                                            @else
-                                                <img id="blah" src="{{asset('pagos/'.$cotizacion->foto_pago2) }}" alt="Imagen" style="width: 250px; height: 300px;"/>
-                                            @endif
-                                        </div>
-                                    </div> --}}
 
                                 </div>
 
@@ -508,8 +452,30 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             document.getElementById('subtotal_final').value = `$${total.toFixed(2)}`;
-            document.getElementById('total_final').value = `$${total.toFixed(2)}`;
+
+            // Obtener el valor del descuento
+            const descuentoInput = document.getElementById('descuento_total');
+            let descuentoPorcentaje = parseFloat(descuentoInput.value) || 0;
+
+            // Calcular el total final con el descuento
+            let totalConDescuento = total - (total * (descuentoPorcentaje / 100));
+
+            // Verificar si el checkbox de factura está marcado
+            const facturaCheckbox = document.getElementById('toggleFacturaSi');
+            if (facturaCheckbox.checked) {
+                totalConDescuento += totalConDescuento * 0.16; // Sumar el 16% de IVA
+            }
+
+            document.getElementById('total_final').value = `$${totalConDescuento.toFixed(2)}`;
         }
+        document.getElementById('descuento_total').addEventListener('input', updateTotal);
+
+        // Escuchar cambios en el checkbox de factura
+        document.getElementById('toggleFacturaSi').addEventListener('change', updateTotal);
+
+        // Llamar a la función para calcular inicialmente
+        updateTotal();
+
     });
 </script>
 

@@ -371,10 +371,11 @@ class CotizacionController extends Controller
         }
 
         $total_envio = $total + $envio;
-
-        $nota->tipo = $total_envio;
-        $nota->total = $total_envio;
+        $nota->tipo = str_replace(['$', ','], '', $request->input('subtotal_final'));
+        $nota->total = str_replace(['$', ','], '', $request->input('total_final'));
         $nota->envio = $envio_check;
+        $nota->restante = $request->input('descuento_total');
+        $nota->factura = $request->get('factura');
         $nota->save();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
