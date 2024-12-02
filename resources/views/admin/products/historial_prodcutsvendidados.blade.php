@@ -77,12 +77,6 @@
                             <input type="date" name="fecha_inicial_a" value="{{ date('Y-m-d') }}" style="display: none">
                         @endif
                     </form>
-
-                    <form class="row mt-3 mb-3" action="{{ route('producto_pdf.pdf') }}" method="GET" >
-                        <div class="col-3">
-                            <button class="btn btn-dark" type="submit" style="">Imprimir PDF Faltantes</button>
-                        </div>
-                    </form>
                 </div>
             </div>
 

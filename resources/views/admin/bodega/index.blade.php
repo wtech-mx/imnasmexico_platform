@@ -34,6 +34,15 @@
                         </div>
                     </div>
 
+
+                    <form class="row mt-3" action="{{ route('producto_pdf.pdf') }}" method="GET" >
+                        <div class="row">
+                            <div class="col-3">
+                                <button class="btn btn-dark" type="submit" style="">PDF productos faltantes</button>
+                            </div>
+                        </div>
+                    </form>
+
                     <div class="card-body">
                         <div class="table-responsive">
 

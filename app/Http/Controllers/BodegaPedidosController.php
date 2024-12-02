@@ -444,7 +444,6 @@ class BodegaPedidosController extends Controller
 
     }
 
-
     public function cancelar($id){
 
         $pedido = BodegaPedidosCosmica::where('id', $id)->first();
