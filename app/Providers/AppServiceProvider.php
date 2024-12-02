@@ -58,6 +58,7 @@ class AppServiceProvider extends ServiceProvider
                 $curso->update();
             }
 
+            $noticias_inicio = Noticias::where('seccion', '=', 'Inicio')->get();
             // Asignar la nueva fecha y hora al objeto Cursos
             $curso2 = Cursos::where('video_cad', '=', '1')->first();
 
@@ -78,7 +79,7 @@ class AppServiceProvider extends ServiceProvider
             // SPAN NAS
             $count_pedidos = BodegaPedidos::where('estatus_lab', '=', 'Aprobada')->get();
 
-            $view->with(['count_pedidos' => $count_pedidos,'configuracion' => $configuracion,'webpage' => $webpage,'estandares' => $estandares,'revoes' => $revoes, 'fechaActual' => $fechaActual,'manuales' => $manuales,'noticias' => $noticias]);
+            $view->with(['count_pedidos' => $count_pedidos, 'noticias_inicio' => $noticias_inicio,'configuracion' => $configuracion,'webpage' => $webpage,'estandares' => $estandares,'revoes' => $revoes, 'fechaActual' => $fechaActual,'manuales' => $manuales,'noticias' => $noticias]);
         });
     }
 }

@@ -116,7 +116,7 @@
                                                 <input type="text"  name="productos[]" class="form-control d-inline-block" value="{{ $productos->producto }}" readonly>
                                             </div>
 
-                                            <div class="form-group col-2">
+                                            <div class="form-group col-3">
                                                 <label for="cantidad_{{ $productos->id }}">Cantidad *</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
@@ -247,6 +247,16 @@
                                                 <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
                                             </span>
                                             <input id="subtotal_final" name="subtotal_final" type="text" class="form-control"  value="{{ $precio }}" readonly>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-4">
+                                        <h4 for="name">Descuento</h4>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="{{ asset('assets/user/icons/descuento.png') }}" alt="" width="35px">
+                                            </span>
+                                            <input class="form-control" type="number" id="descuento" name="descuento" value="{{ $cotizacion->restante }}">
                                         </div>
                                     </div>
 
@@ -506,9 +516,25 @@ document.addEventListener('DOMContentLoaded', function () {
             total += subtotalValue;
         });
 
+        // Actualizar el subtotal final
         document.getElementById('subtotal_final').value = `$${total.toFixed(2)}`;
-        document.getElementById('total_final').value = `$${total.toFixed(2)}`;
+
+        // Obtener el valor del descuento
+        const descuentoInput = document.getElementById('descuento');
+        const descuentoPorcentaje = parseFloat(descuentoInput.value) || 0;
+
+        // Calcular el total final con el descuento
+        const totalConDescuento = total - (total * (descuentoPorcentaje / 100));
+
+        // Actualizar el total final
+        document.getElementById('total_final').value = `$${totalConDescuento.toFixed(2)}`;
     }
+
+    // Escuchar cambios en el input de descuento
+    document.getElementById('descuento').addEventListener('input', updateTotal);
+
+    // Llamar a la función para calcular inicialmente
+    updateTotal();
 </script>
 
 
