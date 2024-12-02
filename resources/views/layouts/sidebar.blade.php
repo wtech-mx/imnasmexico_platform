@@ -164,6 +164,9 @@
                         <i class="fa fa-flask text-sm opacity-10" style="color:#DABA7E"></i>
                     </div>
                     <span class="nav-link-text ms-1">Labora NAS</span>
+                    <span class="badge rounded-pill bg-danger">
+                        {{ $count_pedidos ? $count_pedidos->count() : 0 }}
+                    </span>
                     </a>
                     <div class="collapse " id="pageLabNas">
                         <ul class="nav ms-4">

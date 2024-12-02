@@ -14,6 +14,7 @@ use App\Models\Noticias;
 use Carbon\Carbon;
 use DateInterval;
 use DateTime;
+use App\Models\BodegaPedidos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Str;
@@ -74,7 +75,10 @@ class AppServiceProvider extends ServiceProvider
                 }
             }
 
-            $view->with(['configuracion' => $configuracion,'webpage' => $webpage,'estandares' => $estandares,'revoes' => $revoes, 'fechaActual' => $fechaActual,'manuales' => $manuales,'noticias' => $noticias]);
+            // SPAN NAS
+            $count_pedidos = BodegaPedidos::where('estatus_lab', '=', 'Aprobada')->get();
+
+            $view->with(['count_pedidos' => $count_pedidos,'configuracion' => $configuracion,'webpage' => $webpage,'estandares' => $estandares,'revoes' => $revoes, 'fechaActual' => $fechaActual,'manuales' => $manuales,'noticias' => $noticias]);
         });
     }
 }

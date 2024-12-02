@@ -46,22 +46,37 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Fecha de pedido</th>
+                                    <th>Dias retraso</th>
                                     <th>Estatus</th>
                                     <th>Aciones</th>
                                 </tr>
                             </thead>
                             @foreach ($bodegaPedidoRealizado as $item)
-                                <tr>
+                                @php
+                                    $fechaAprobado = \Carbon\Carbon::parse($item->fecha_aprovado);
+                                    $diasTranscurridos = $fechaAprobado->diffInDays(now());
+
+                                    // Determinar la clase CSS según los días transcurridos
+                                    if ($diasTranscurridos <= 3) {
+                                        $claseFila = 'table-success'; // Verde
+                                    } elseif ($diasTranscurridos <= 6) {
+                                        $claseFila = 'table-warning'; // Amarillo
+                                    } else {
+                                        $claseFila = 'table-danger'; // Rojo
+                                    }
+                                @endphp
+                                <tr class="{{ $claseFila }}">
                                     <td>{{ $item->id }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($item->fecha_pedido)->translatedFormat('d F Y h:i a') }}</td>
+                                    <td>{{ $fechaAprobado->translatedFormat('d F Y h:i a') }}</td>
+                                    <td>{{$diasTranscurridos}}</td>
                                     <td>{{ $item->estatus_lab }}</td>
                                     <td>
                                         <a class="btn btn-xs btn-primary text-white" target="_blank" href="{{ route('productos_autorizado.show', $item->id) }}">
                                             <i class="fa fa-file"></i> Ver Pedido
                                         </a>
-                                        <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#ordenes_lab_update_finalizar{{ $item->id }}">
-                                            <i class="fa fa-file"></i> Finalizar
-                                        </a>
+                                        {{-- <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#ordenes_lab_update_finalizar{{ $item->id }}">
+                                            <i class="fa fa-file"></i> Comentario
+                                        </a> --}}
                                     </td>
                                 </tr>
                                 @include('admin.laboratorio.modal_finalizar')
