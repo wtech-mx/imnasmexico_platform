@@ -52,23 +52,6 @@ class CotizacionCosmicaController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
-
-            $registros = ProductosNotasCosmica::all();
-
-            foreach ($registros as $registro) {
-                // Buscar el producto en la tabla Products por el nombre
-                $producto = Products::where('nombre', $registro->producto)->first();
-
-                if ($producto) {
-                    // Actualizar la columna id_producto con el ID encontrado
-                    $registro->id_producto = $producto->id;
-                    $registro->save();
-                } else {
-                    // Si el producto no se encuentra, opcionalmente puedes registrar un log o manejar el caso
-                    \Log::warning("Producto no encontrado: {$registro->producto}");
-                }
-            }
-
         // Pasar datos a la vista
         return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores', 'notas_aprobadas', 'notas_canceladas', 'fechaInicio', 'fechaFin'));
     }
