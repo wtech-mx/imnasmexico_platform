@@ -208,7 +208,7 @@
 
 </head>
 
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg sticky-top" style="    background: transparent;">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">
         <img src="{{asset('assets/user/logotipos/registro_nacional.png')}}" style="width: 130px">
