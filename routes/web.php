@@ -715,6 +715,10 @@ Route::group(['middleware' => ['auth']], function() {
 // });
 
 Route::get('/registro', [App\Http\Controllers\FoliosController::class, 'index_registro'])->name('folio_registro.index');
+Route::get('/registro/nosotros', [App\Http\Controllers\FoliosController::class, 'index_nosotros'])->name('index_nosotros.registro');
+Route::get('/registro/afiliados', [App\Http\Controllers\FoliosController::class, 'index_afiliados'])->name('index_afiliados.registro');
+Route::get('/registro/afiliate', [App\Http\Controllers\FoliosController::class, 'index_afiliate'])->name('index_afiliate.registro');
+
 Route::get('/buscador/folio/registro', [App\Http\Controllers\FoliosController::class, 'buscador_registro'])->name('folio_registro.buscador');
 Route::patch('/registro/imnas/update/doc_digital/{id}', [App\Http\Controllers\FoliosController::class, 'update_docDigital'])->name('update.docDigital');
 Route::patch('/reporte/docmuentos/update/{id}', [App\Http\Controllers\FoliosController::class, 'update_externos'])->name('update.documentos_externo');

@@ -208,305 +208,45 @@
 
 </head>
 
-<nav class="navbar navbar-expand-lg sticky-top" style="    background: transparent;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="{{asset('assets/user/logotipos/registro_nacional.png')}}" style="width: 130px">
-        <img src="{{asset('assets/user/logotipos/stps.png')}}" style="width: 130px">
-
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item mb-2 mb-md-b mb-lg-0">
-            <a class="nav-link nav_button active" aria-current="page" href="#inicio">Inicio</a>
-          </li>
-
-          <li class="nav-item mb-2 mb-md-b mb-lg-0">
-            <a class="nav-link nav_button" href="#nosotros">Nosotros</a>
-          </li>
-
-          <li class="nav-item mb-2 mb-md-b mb-lg-0">
-            <a class="nav-link nav_button" href="#afiliados">Afiliados</a>
-          </li>
-
-          <li class="nav-item mb-2 mb-md-b mb-lg-0">
-            <a class="nav-link nav_button" href="#afiliate">Afiliate</a>
-          </li>
-
-
-        </ul>
-        <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link submit_buttom text-white" href="#">Iniciar Sesion</a>
-            </li>
-        </ul>
-
-      </div>
+<nav class="navbar navbar-expand-lg sticky-top" style="background: transparent;">
+    <div class="container" style="max-width: 1200px;"> <!-- Cambiado a container y límite máximo -->
+        <a class="navbar-brand" href="#">
+            <img src="{{asset('assets/user/logotipos/registro_nacional.png')}}" style="width: 130px">
+            <img src="{{asset('assets/user/logotipos/stps.png')}}" style="width: 130px">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item mb-2 mb-md-b mb-lg-0">
+                    <a class="nav-link nav_button {{ (Request::is('/registro') ? 'active' : '') }}" aria-current="page" href="{{ route('folio_registro.index') }}">Inicio</a>
+                </li>
+                <li class="nav-item mb-2 mb-md-b mb-lg-0">
+                    <a class="nav-link nav_button {{ (Request::is('/registro/nosotros') ? 'active' : '') }}" href="{{ route('index_nosotros.registro') }}">Nosotros</a>
+                </li>
+                <li class="nav-item mb-2 mb-md-b mb-lg-0">
+                    <a class="nav-link nav_button {{ (Request::is('/registro/Afiliados') ? 'active' : '') }}" href="{{ route('index_afiliados.registro') }}">Afiliados</a>
+                </li>
+                <li class="nav-item mb-2 mb-md-b mb-lg-0">
+                    <a class="nav-link nav_button {{ (Request::is('/registro/Afiliate') ? 'active' : '') }}" href="{{ route('index_afiliate.registro') }}">Afiliate</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link submit_buttom text-white  {{ (Request::is('/registro') ? 'active' : '') }}" href="{{ route('folio_registro.index') }}">Iniciar Sesion</a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </nav>
+</nav>
+
 
 <body class="bg_body">
 
     <div class="container">
 
-        <section id="inicio" class="mb-5">
-
-            <div class="row">
-
-                <div class="col-12 col-md-12 col-md-6 col-lg-6">
-                    <h3 class="text-center titulo_custom"><strong>BIENVENIDO</strong></h3>
-                    <h5  class="text-center texto_pag"> Registro Nacional de Certificación IMNAS</h5>
-
-                    @yield('content')
-
-                </div>
-
-                <div class="col-12 col-md-12 col-md-6 col-lg-6 mt-5 mt-md-0 mt-lg-0 ">
-                    <div class="card card_redoundead">
-                        <form method="POST" action="{{ route('login_cam.custom') }}">
-                            @csrf
-                            <div class="row p-3">
-                                <div class="col-12">
-                                    <h3 class="text-center titulo_custom mt-3 mb-3">Accede</h3>
-                                </div>
-
-                                <div class="col-12 text-center">
-                                    <input id="username" name="username" type="text" placeholder="Celular" class="input_redoundedos_login w-100 mb-5 @error('username') is-invalid @enderror" value="{{ old('username') }}" required >
-
-                                    @error('username')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-
-                                    <input id="password" type="password" placeholder="*******" class="input_redoundedos_login w-100 @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                    @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-
-                                <div class="col-12 mt-5 mb-4 text-center">
-                                    <button type="submit" class="submit_buttom text-white">Iniciar sesión</button>
-                                </div>
-
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-
-                <div class="col-12">
-                    @yield('content_result')
-                </div>
-
-            </div>
-
-
-
-        </section>
-
-        <section id="nosotros" class="row separador_section">
-
-            <div class="col-12">
-                <h2 class="titulo_custom_registro">Acerca de <br> <strong>Registro Nacional</strong></h2>
-                <p style="position: relative">
-                    <img src="{{ asset('assets/user/icons/Documentos-RN_1.webp') }}" alt="" class="img_acerca_de" >
-                </p>
-            </div>
-
-            <div class="col-12">
-                <p class="texto_pag2 mt-4">
-                    El Registro Nacional IMNAS Mexico (RIM) , Certificadora Nacional Notariada,
-                    es una iniciativa respaldada por la <strong>Secretaría del Trabajo y Previsión Social (STPS)</strong> y el <strong>Registro Nacional</strong> ,
-                    diseñada para garantizar que los profesionales y centros educativos cumplan con los más altos estándares de calidad a nivel nacional.
-                    Nuestra plataforma, cuenta con una base de datos centralizada y accesible donde se almacenan todos los registros emitidos por nuestra entidad.
-                </p>
-                <h3 class="titulo_custom mt-4 mb-4">Nuestro objetivo</h3>
-                <p class="texto_pag2">
-                    Con el respaldo de autoridades oficiales, nuestro objetivo es impulsar la profesionalización y
-                    certificación laboral en México, ofreciendo validez y reconocimiento formal para fortalecer el
-                    desarrollo profesional en diversos sectores.
-                </p>
-            </div>
-
-            <div class="col-12 col-md-12 col-lg-6 my-auto">
-                <p class="">
-                    <img src="{{ asset('assets/user/icons/computer.webp') }}" alt="" class="img_contenedor" >
-                </p>
-            </div>
-
-            <div class="col-12 col-md-12 col-lg-6">
-                <h3  class="titulo_custom3 right_text mb-3">¿Cómo funciona?</h3>
-                <h4  class="titulo_custom4 right_text mt-3">1. Emisión de Documentos:</h4>
-                <p class="texto_pag2 right_text">
-                    Cada certificado emitido por IMNAS incluye un código QR único
-                </p>
-
-                <h4  class="titulo_custom4 mt-3 text-left">2. Verificación:</h4>
-                <p class="texto_pag2">
-                    Al escanear este código QR con cualquier dispositivo móvil,
-                    se accede directamente al Registro Nacional de Certificación IMNAS.
-                </p>
-
-                <h4  class="titulo_custom4 right_text mt-3">3. Autenticidad:</h4>
-                <p class="texto_pag2 right_text">
-                    La página de verificación mostrará los detalles del
-                    documento, confirmando su autenticidad y validación por
-                    parte de IMNAS.
-                </p>
-
-                <h4  class="titulo_custom4 mt-3">4. Búsqueda Manual:</h4>
-                <p class="texto_pag2">
-                    Además del escaneo del QR,
-                    también puedes ingresar el código de certificación en nuestro sitio web
-                    para verificar la validez del documento.
-                </p>
-            </div>
-
-            <div class="col-12 col-md-12 col-lg-6 my-auto order-2 order-lg-1">
-                <h3  class="titulo_custom4">
-                    Registro Nacional y <br> su importancia
-                </h3>
-                <p class="texto_pag2">
-                    El Registro Nacional de Certificación IMNAS
-                    asegura que cada documento emitido bajo
-                    nuestro aval es genuino y ha sido otorgado de acuerdo
-                    con los más altos estándares educativos.
-                    Esto protege tanto a los titulares de los certificados
-                    como a las instituciones que confían en estas acreditaciones,
-                    asegurando la integridad del proceso de certificación.
-                </p>
-            </div>
-
-
-            <div class="col-12 col-md-12 col-lg-6 my-auto order-1 order-lg-2">
-                <img src="{{ asset('assets/user/icons/diploma-c_sello.webp') }}" alt="" class="img_contenedor" >
-            </div>
-
-            <div class="col-12 col-md-12 col-lg-6 my-auto">
-                <img src="{{ asset('assets/user/icons/mundial.webp') }}" alt="" class="img_contenedor" >
-            </div>
-
-            <div class="col-12 col-md-12 col-lg-6 my-auto">
-                <p class="texto_pag2 container_text" style="margin: 0!important;">
-                    Gracias a nuestro sistema, garantizamos que los certificados emitidos sean reconocidos a nivel nacional e internacional,
-                    brindando una herramienta poderosa para todos aquellos
-
-                </p>
-                <p class="texto_pag2 container_text">
-                    <img src="{{ asset('assets/user/icons/mundi-birrete.webp') }}" alt="" class="img_contenedor_text" >
-                    que buscan la validación de sus competencias  y
-                    habilidades  en un entorno  cada vez más exigente y globalizado.
-                </p>
-            </div>
-
-        </section>
-
-        <section id="afiliados" class="row">
-
-
-            @yield('registros_emitidos')
-
-            <div class="col-12">
-                @yield('content_result2')
-            </div>
-
-
-            @yield('content_dinamico')
-
-
-        </section>
-
-        <section id="afiliate" class="row separador_section">
-
-            <div class="col-12 col-md-12 col-lg-6 my-auto">
-                <h2 class="titulo_custom_registro">Afiliación<br> <strong>Registro IMNAS</strong></h2>
-                <p class="texto_pag2 mt-4">
-                    Entendemos la importancia de ofrecer programas educativos de calidad que no solo eduquen,
-                     sino que también ofrezcan un reconocimiento oficial a tus alumnos. Es por eso que hemos creado <strong>Registro IMNAS,
-                    avalado por la STPS e IMNAS</strong>, para brindarte respaldo y valor curricular.
-                </p>
-            </div>
-
-            <div class="col-12 col-md-12 col-lg-6 my-auto">
-                <img src="{{ asset('assets/user/icons/todos-docs.webp') }}" alt="" class="img_contenedor" >
-            </div>
-
-            <div class="col-6">
-                <h2 class="titulo_custom_registro"> <strong>Beneficios de la</strong> <br> afiliación</h2>
-            </div>
-
-            <div class="col-6"></div>
-
-
-            <div class="col-6">
-                <p class="text-center">
-                    <img src="{{ asset('assets/user/icons/reconocimiento.webp') }}" alt="" class="img_icon" >
-                </p>
-                <h4  class="titulo_custom4 mt-3 text-center">Reconocimiento oficial</h4>
-                <p class="texto_pag2">
-                    Todos los documentos emitidos cuentan con validez nacional,
-                    respaldados por Registro IMNAS y la STPS,
-                    cumpliendo con los más altos estándares educativos y laborales.
-                </p>
-            </div>
-
-            <div class="col-6">
-                <p class="text-center">
-                    <img src="{{ asset('assets/user/icons/Portabilidad.webp') }}" alt="" class="img_icon" >
-                </p>
-                <h4  class="titulo_custom4 mt-3 text-center">Portabilidad</h4>
-                <p class="texto_pag2">
-                    Ofrecemos <strong>documentos</strong> en formatos <strong>físicos</strong> y <strong>digitales</strong>,
-                    facilitando su manejo y verificación en cualquier lugar
-                </p>
-            </div>
-
-            <div class="col-6">
-                <p class="text-center">
-                    <img src="{{ asset('assets/user/icons/empleo.webp') }}" alt="" class="img_icon" >
-                </p>
-                <h4  class="titulo_custom4 mt-3 text-center">Incremento en oportunidades <br> laborales</h4>
-                <p class="texto_pag2">
-                    Según datos del INEGI, los profesionales certificados tienen un <strong>30% más de probabilidades de acceder a mejores empleos.</strong>
-                </p>
-            </div>
-
-            <div class="col-6">
-                <p class="text-center">
-                    <img src="{{ asset('assets/user/icons/aumento.webp') }}" alt="" class="img_icon" >
-                </p>
-                <h4  class="titulo_custom4 mt-3 text-center">Aumento salarial</h4>
-                <p class="texto_pag2">
-                    Estudios internacionales muestran que las certificaciones pueden incrementar el salario hasta un 15%,
-                     marcando la diferencia en el mercado laboral.
-                </p>
-            </div>
-
-            <div class="col-6 my-auto">
-                <img src="{{ asset('assets/user/icons/qr_imagen.png') }}" alt="" class="img_contenedor" >
-            </div>
-
-            <div class="col-6">
-                <p class="text-center">
-                    <img src="{{ asset('assets/user/icons/alianza.webp') }}" alt="" class="img_icon" >
-                </p>
-                <h4  class="titulo_custom4 mt-3 text-center">Credibilidad profesional</h4>
-                <p class="texto_pag2">
-                    Mejora tu perfil ante empleadores, colaboradores y alumnos,
-                    posicionándote como un <strong>profesional altamente preparado.</strong>
-                </p>
-            </div>
-
-
-        </section>
+        @yield('section_pag')
 
         <section id="contacto" class="row container">
 

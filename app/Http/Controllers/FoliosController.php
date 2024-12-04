@@ -17,17 +17,33 @@ class FoliosController extends Controller
     public function index(){
 
         $registros_imnas = Orders::where('registro_imnas', '=', '1')->Orderby('id','ASC')->get();
-
-
         return view('cam.auth.login',compact('registros_imnas'));
     }
 
     public function index_registro(){
 
         $registros_imnas = Orders::where('registro_imnas', '=', '1')->Orderby('id','ASC')->get();
-
-        return view('cam.auth.login',compact('registros_imnas'));
+        return view('user.registro.inicio',compact('registros_imnas'));
     }
+
+    public function index_nosotros(){
+
+        $registros_imnas = Orders::where('registro_imnas', '=', '1')->Orderby('id','ASC')->get();
+        return view('user.registro.nosotros',compact('registros_imnas'));
+    }
+
+    public function index_afiliados(){
+
+        $registros_imnas = Orders::where('registro_imnas', '=', '1')->Orderby('id','ASC')->get();
+        return view('user.registro.afiliados',compact('registros_imnas'));
+    }
+
+    public function index_afiliate(){
+
+        $registros_imnas = Orders::where('registro_imnas', '=', '1')->Orderby('id','ASC')->get();
+        return view('user.registro.afiliate',compact('registros_imnas'));
+    }
+
 
     public function buscador(Request $request){
 
@@ -56,6 +72,7 @@ class FoliosController extends Controller
 
 
         return view('user.folio',compact('tickets', 'folio', 'tickets_generador','tickets_externo','registros_imnas'));
+
     }
 
     public function buscador_registro(Request $request){
