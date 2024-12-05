@@ -1073,6 +1073,11 @@ class OrderController extends Controller
             $totalCartPrice += $details['price'] * $details['quantity'];
         }
 
+        if ($coupon->estado == 'desactivado') {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+            return redirect()->back()->with('warning', 'Cupón caducado');
+        }
+
         // Verificar el gasto mínimo requerido por el cupón
         if ($totalCartPrice < $coupon->gasto_min) {
             Session::flash('modal_checkout', 'Se ha Abierto el checkout');
