@@ -299,6 +299,14 @@ class CotizacionCosmicaController extends Controller
                         if ($contadorKits <= 6) { // Controlar un máximo de 6 kits
                             $columnaKit = "id_kit" . ($contadorKits > 1 ? $contadorKits : "");
                             $notas_productos->$columnaKit = $producto->id;
+
+                            // Asignar la cantidad correspondiente al kit
+                            $cantidadCampo = $request->input('campo3')[$contadorKits - 1] ?? null; // Obtener la cantidad del kit actual
+                            if ($cantidadCampo) {
+                                $columnaCantidadKit = "cantidad_kit" . ($contadorKits > 1 ? $contadorKits : "");
+                                $notas_productos->$columnaCantidadKit = $cantidadCampo;
+                            }
+
                             $contadorKits++;
                         }
                 }elseif($producto->subcategoria == 'Tiendita'){
