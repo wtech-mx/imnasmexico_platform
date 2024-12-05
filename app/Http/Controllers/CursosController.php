@@ -78,6 +78,7 @@ class CursosController extends Controller
         $ultimoDiaDelMes = date('Y-m-t');
 
         $cursos = Cursos::whereBetween('fecha_inicial', [$primerDiaDelMes, $ultimoDiaDelMes])
+        ->where('estatus', '=', '1')
         ->orderBy('fecha_inicial', 'DESC')
         ->get();
 
