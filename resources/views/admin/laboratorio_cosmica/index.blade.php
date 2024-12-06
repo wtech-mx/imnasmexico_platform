@@ -24,6 +24,11 @@
 
                     <a class="btn btn-warning" href="{{ route('reporte.pdf') }}" target="_blank">Imprimir reporte</a>
 
+                    @can('crear-envase')
+                        <a type="button" class="btn btn-sm bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#create_product" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            <i class="fa fa-fw fa-edit"></i> Crear
+                        </a>
+                    @endcan
                 </div>
             </div>
 
