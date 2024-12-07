@@ -50,6 +50,11 @@
                                             Paquete 5
                                         </button>
                                     </li>
+                                    <li class="nav-item" role="paquete3">
+                                        <button class="nav-link" id="pills-paquete6-tab" data-bs-toggle="pill" data-bs-target="#pills-paquete6" type="button" role="tab" aria-controls="pills-paquete6" aria-selected="true">
+                                            Paquete 6
+                                        </button>
+                                    </li>
                                 </ul>
 
                                 <form method="POST" action="{{ route('paquetes.update', 1) }}" enctype="multipart/form-data" role="form">
@@ -349,6 +354,66 @@
                                                     </div>
                                                   @endif
                                                 @endforeach
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" id="pills-paquete6" role="tabpanel" aria-labelledby="pills-paquete6-tab" tabindex="0">
+                                            <div class="row">
+                                                <h5 class="mb-3">Paquete 6 Personalizado</h5>
+
+                                                <div class="form-check col-2">
+                                                    <div class="form-group">
+                                                        @if ($paquete->visible_1 == 1)
+                                                            <input class="form-check-input" type="checkbox" value="1" id="visible_6" name="visible_6" checked>
+                                                            <label for="nota">Paquete visible*</label>
+                                                        @else
+                                                            <input class="form-check-input" type="checkbox" value="1" id="visible_6" name="visible_6">
+                                                            <label for="nota">Paquete visible*</label>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-4">
+                                                    <div class="form-group">
+                                                        <label for="">Precio Paquete 6*</label>
+                                                        <input type="number" class="form-control" id="precio_6" name="precio_6" value="{{$paquete->precio_6}}"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label for="">Precio Descuento Paquete 6*</label>
+                                                        <input type="number" class="form-control" id="precio_rebajado_6" name="precio_rebajado_6" value="{{$paquete->precio_rebajado_6}}"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <h5>Seleccionar cursos que incluye*</h5>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <select name="cursos6[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
+                                                            @foreach ($cursosArray as $nombre)
+                                                                <option value="{{ $nombre }}">{{$nombre}}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <h5>Cursos incluidos actualmente</h5>
+                                                @foreach ($paquete_incluye as $incluye)
+                                                  @if ($incluye->num_paquete == 6)
+                                                    <div class="col-10">
+                                                        <p>{{$incluye->nombre_curso}}</p>
+                                                    </div>
+
+                                                    <div class="col-2">
+                                                        Quitar
+                                                    </div>
+                                                  @endif
+                                                @endforeach
+
                                             </div>
                                         </div>
 
