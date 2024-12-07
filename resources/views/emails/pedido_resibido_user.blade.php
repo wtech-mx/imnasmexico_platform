@@ -354,7 +354,7 @@
                                                                                                                                 role='presentation'
                                                                                                                                 height="22"
                                                                                                                                 style='border-radius:10px;background-color:#ffffff;width:150px; border-width: 5px;  border-style: solid;  border-color: #ffffff; ;'>
-                                                                                                                                <a href='http://api.whatsapp.com/send?phone=525545365893'
+                                                                                                                                <a href='http://api.whatsapp.com/send?phone=525561672283'
                                                                                                                                     target='_blank'
                                                                                                                                     style='color:#3c434a !important;font-weight:400;display:block;text-decoration:none;text-transform:none;margin:0;text-align: center;max-width: 100%;background-color:#ffffff;line-height:22px;height:22px'>
                                                                                                                                     <span
@@ -1304,7 +1304,7 @@
                                                                                                                                 valign='top'
                                                                                                                                 style='padding: 0 3px'>
                                                                                                                                 <a
-                                                                                                                                    href='http://api.whatsapp.com/send?phone=525545365893'><img
+                                                                                                                                    href='http://api.whatsapp.com/send?phone=525561672283'><img
                                                                                                                                         src='https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/wa-white-color.png'
                                                                                                                                         width='32'></a>
                                                                                                                             </td>

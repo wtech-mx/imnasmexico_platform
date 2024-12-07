@@ -133,7 +133,7 @@ Mi perfil- {{$cliente->name}}
                             </div>
 
                             <div class="col-3 icon_footer">
-                                <a target="_blank" href="http://api.whatsapp.com/send?phone=525545365893" class="text-center" style="margin-bottom: 0rem!important">
+                                <a target="_blank" href="http://api.whatsapp.com/send?phone=525561672283" class="text-center" style="margin-bottom: 0rem!important">
                                     <i class="fab fa-whatsapp"></i>
                                 </a>
                             </div>

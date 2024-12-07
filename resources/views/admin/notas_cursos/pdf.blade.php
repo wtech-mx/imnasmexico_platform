@@ -206,7 +206,7 @@
                 <a href="https://www.instagram.com/naturalesainspaoficial/?hl=es" target="_blank" >
                     <img src="https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/ins-white-color.png" width="35px">
                 </a>
-                <a href="https://api.whatsapp.com/send?phone=525545365893" target="_blank" >
+                <a href="https://api.whatsapp.com/send?phone=525561672283" target="_blank" >
                     <img src="https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/wa-white-color.png" width="35px">
                 </a>
                 <a href="https://www.tiktok.com/@carla_rizo" target="_blank" >
