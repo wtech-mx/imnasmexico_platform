@@ -234,6 +234,44 @@
         </div>
 
         {{-- card_grid --}}
+        @if ($paquete->visible_6 == 1)
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="card card_grid card_grid_cale  mb-5 mb-md-3" >
+                    <img class="img_card_grid" src="{{asset('webpage/kit_navideño.png') }}" class="card-img-top" alt="...">
+
+                    <p class="precio_grid" >
+                            ${{$paquete->precio_rebajado_6}} mxn
+                    </p>
+                    <p class="wish_grid" ><i class="fas fa-heart"></i></p>
+
+                    <div class="card-body">
+                        <div class="row">
+
+
+                            <div class="col-12 mt-4 text-center">
+                                <h3 class="tittle_card_grid"  >Kit cursos navideños</h3>
+                            </div>
+                            <div class="col-12">
+                                <div class="text-center">
+                                    <a class="btn btn_secundario_grd_curso" href="{{ route('cursos.paquetes') }}">
+                                        <div class="d-flex justify-content-around">
+                                            <p class="card_tittle_btn_grid my-auto" >
+                                                Saber más
+                                            </p>
+                                            <div class="card_bg_btn_secundario" >
+                                                <i class="fas fa-plus card_icon_btn_secundario_grid"></i>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         @foreach ($cursos as $curso)
         @php
             $hora_inicial = strftime("%H:%M %p", strtotime($curso->hora_inicial)) ;

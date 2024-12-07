@@ -252,6 +252,11 @@
         </tfoot>
     </table>
 
+    @if ($nota->nota != NULL)
+        <h2>Comentario</h2>
+        <p>{{ $nota->nota }}</p>
+    @endif
+
     @if ($nota->monto != NULL)
         <h2>Pago</h2>
         <b for="">Metodo de Pago:</b> {{ $nota->metodo_pago }} <br>

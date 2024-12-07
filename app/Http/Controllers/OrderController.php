@@ -1056,7 +1056,6 @@ class OrderController extends Controller
     public function aplicarCupon(Request $request){
 
         $coupon = Cupon::where('nombre', $request->coupon)
-        ->where('estado', '=', 'activo')
         ->first();
 
         $cart = session('cart');
@@ -1072,6 +1071,11 @@ class OrderController extends Controller
 
         foreach ($cart as $id => $details) {
             $totalCartPrice += $details['price'] * $details['quantity'];
+        }
+
+        if ($coupon->estado == 'desactivado') {
+            Session::flash('modal_checkout', 'Se ha Abierto el checkout');
+            return redirect()->back()->with('warning', 'Cupón caducado');
         }
 
         // Verificar el gasto mínimo requerido por el cupón
@@ -1272,6 +1276,37 @@ class OrderController extends Controller
                 ->where('cursos.fecha_final', '>=', $fechaActual)
                 ->where('cursos.modalidad', '=', 'Online')
                 ->where('cursos.diplomado_colores', '=', null)
+                ->select('cursos_tickets.*')
+                ->first();
+
+                if ($curso != null) {
+                    $cart = session()->get('cart', []);
+                    $cart[] = [
+                        "id" => $curso->id,
+                        "name" => $curso->nombre,
+                        "curso" => $curso->id_curso,
+                        "quantity" => 1,
+                        "price" => $total,
+                        "paquete" => $paquete->num_paquete,
+                        "image" => $curso->imagen
+                    ];
+                    session()->put('cart', $cart);
+                }else{
+
+                    return view('errors.sin_cursospaquetes');
+                }
+            }
+        } elseif ($request->input('paquete') == 6) {
+            $total = $paquete->precio_curso_6;
+            $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas6'));
+            $paquetesIncluye = PaquetesIncluye::where('num_paquete', '=', 6)->get();
+            foreach ($paquetesIncluye as $paquete) {
+                $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+                ->where('cursos.nombre', '=', $paquete->nombre_curso)
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->where('cursos.diplomado_colores', '=', null)
+                ->whereBetween('cursos.fecha_inicial', ['2025-01-01', '2025-01-31'])
                 ->select('cursos_tickets.*')
                 ->first();
 

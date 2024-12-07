@@ -163,6 +163,11 @@
         </tfoot>
     </table>
 
+    @if ($nota->nota != NULL)
+        <h2>Comentario</h2>
+        <p>{{ $nota->nota }}</p>
+    @endif
+
     <h2>Pago</h2>
     <b for="">Metodo de Pago:</b> {{ $nota_pagos->metodo_pago }} <br>
     <b for="">Monto:</b> ${{ number_format($nota_pagos->monto, 1, '.', ',') }} <br>

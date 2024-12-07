@@ -10,6 +10,42 @@
 
 @section('content')
 
+    @if ($paquete->visible_6 == 1)
+        <section class="primario bg_overley" style="background-color:#fff;">
+            <div id="paquete5">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-uno  space_paquetes">
+                        <img class="img_paquetes" src="{{asset('webpage/kit_navideño.png') }}" alt="">
+                    </div>
+
+                    <div class="col-12 col-md-6 order-dos space_paquetes">
+                        <h3 class="mt-3" style="color:#836262!important;">Kit cursos navideños</h3>
+                        <h3 style="color: #836262"><strong>
+                            <del style="color: #836262">${{number_format($paquete->precio_6, 2, '.', ',');}} mxn</del>
+                            ${{number_format($paquete->precio_rebajado_6, 2, '.', ',');}} mxn</strong>
+                        </h3>
+                        <ul>
+                            <li>Despigmentación Facial "Hipercromías" - <b>03 Enero 2025</b></li>
+                            <li>Curso de Dermapen + BBGLOW - <b>07 Enero 2025</b></li>
+                            <li>Curso de BB Virgin Blanqueamiento - <b>10 Enero 2025</b></li>
+                            <li>Curso de Diástasis Abdominal con Cierre de Costillas - <b>13 Enero 2025</b></li>
+                        </ul>
+                        @php
+                            $descuento6 = $paquete->precio_6 - $paquete->precio_rebajado_6;
+                        @endphp
+                        <h5 style="color:#836262!important;">Descuento: <strong>${{number_format($descuento6, 2, '.', ',');}} mxn</strong></h5>
+                        <form class="mt-4" action="{{ route('carrito.resultado6') }}" method="post">
+                            @csrf
+                            <input type="hidden" name="opciones_seleccionadas6" value="">
+                            <input type="hidden" name="paquete" value="6">
+                            <button class="btn_paquetes btn-submit" type="submit">Comprar<i class="fas fa-cart-plus icon_paquetes"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
+
     @if ($paquete->visible_1 == 1)
         <section class="primario bg_overley" style="background-color:#fff;">
             <div id="paquete1">
