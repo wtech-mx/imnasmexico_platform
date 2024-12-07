@@ -28,7 +28,9 @@ class CursoUsersController extends Controller
 
         $titulo = 'Calendario General Online y Presencial';
 
-        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual', 'titulo', 'paquete'));
+        $cursos_promo = Cursos::whereIn('id', [812, 808, 806])->orderBy('fecha_inicial','asc')->get();
+
+        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual', 'titulo', 'paquete', 'cursos_promo'));
     }
 
     public function show($slug)
