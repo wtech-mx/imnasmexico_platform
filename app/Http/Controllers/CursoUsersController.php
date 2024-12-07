@@ -24,11 +24,11 @@ class CursoUsersController extends Controller
         $cursos_slide = Cursos::where('estatus','=', '1')->orderBy('fecha_inicial','asc')->get();
 
         $tickets = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
-
+        $paquete = Paquetes::first();
 
         $titulo = 'Calendario General Online y Presencial';
 
-        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual', 'titulo'));
+        return view('user.calendar', compact('cursos', 'tickets', 'cursos_slide', 'fechaActual', 'titulo', 'paquete'));
     }
 
     public function show($slug)

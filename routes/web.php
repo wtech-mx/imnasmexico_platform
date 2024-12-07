@@ -163,6 +163,7 @@ Route::post('/paquetes/resultado2', [App\Http\Controllers\OrderController::class
 Route::post('/paquetes/resultado3', [App\Http\Controllers\OrderController::class, 'resultado'])->name('carrito.resultado3');
 Route::post('/paquetes/resultado4', [App\Http\Controllers\OrderController::class, 'resultado'])->name('carrito.resultado4');
 Route::post('/paquetes/resultado5', [App\Http\Controllers\OrderController::class, 'resultado'])->name('carrito.resultado5');
+Route::post('/paquetes/resultado6', [App\Http\Controllers\OrderController::class, 'resultado'])->name('carrito.resultado6');
 Route::get('/paquetes/resumen', [App\Http\Controllers\CursoUsersController::class, 'resumen'])->name('carrito.resumen');
 
 // =============== P A G O S ===============================

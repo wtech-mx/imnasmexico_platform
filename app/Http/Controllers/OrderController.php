@@ -1296,6 +1296,37 @@ class OrderController extends Controller
                     return view('errors.sin_cursospaquetes');
                 }
             }
+        } elseif ($request->input('paquete') == 6) {
+            $total = $paquete->precio_curso_6;
+            $opcionesSeleccionadas = explode('|', $request->input('opciones_seleccionadas6'));
+            $paquetesIncluye = PaquetesIncluye::where('num_paquete', '=', 6)->get();
+            foreach ($paquetesIncluye as $paquete) {
+                $curso = CursosTickets::join('cursos', 'cursos_tickets.id_curso', '=', 'cursos.id')
+                ->where('cursos.nombre', '=', $paquete->nombre_curso)
+                ->where('cursos.fecha_final', '>=', $fechaActual)
+                ->where('cursos.modalidad', '=', 'Online')
+                ->where('cursos.diplomado_colores', '=', null)
+                ->whereBetween('cursos.fecha_inicial', ['2025-01-01', '2025-01-31'])
+                ->select('cursos_tickets.*')
+                ->first();
+
+                if ($curso != null) {
+                    $cart = session()->get('cart', []);
+                    $cart[] = [
+                        "id" => $curso->id,
+                        "name" => $curso->nombre,
+                        "curso" => $curso->id_curso,
+                        "quantity" => 1,
+                        "price" => $total,
+                        "paquete" => $paquete->num_paquete,
+                        "image" => $curso->imagen
+                    ];
+                    session()->put('cart', $cart);
+                }else{
+
+                    return view('errors.sin_cursospaquetes');
+                }
+            }
         }
 
 
