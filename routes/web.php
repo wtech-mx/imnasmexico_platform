@@ -598,6 +598,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/registro/imnas/subir/especialidad/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_especialidad'])->name('update_especialidad.imnas');
     Route::patch('/registro/imnas/subir/doc/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_clientes'])->name('update_clientes.imnas');
 
+    // =============== M O D U L O   R E G I S T R O   C O M P R A S ===============================
+
+    Route::get('/meli/ventas', [App\Http\Controllers\MeliController::class, 'index'])->name('meli_ventas.index');
+    Route::get('/mercado_libre_api', [App\Http\Controllers\MeliController::class, 'index_token'])->name('meli_token.index');
 
     // =============== M O D U L O   R E G I S T R O   C O M P R A S ===============================
     Route::get('/cosmica/registro/compras', [App\Http\Controllers\RegistroComprasController::class, 'index'])->name('registro_compras.index');
