@@ -19,15 +19,16 @@
                     <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="" class="img_errors">
                 </p>
 
-                <h2 class="text-center tittle_error">Token Meli</h2>
+                <h2 class="text-center tittle_error mb-4">Token Meli</h2>
 
-                <form method="POST" action="{{ route('meli.updateToken') }}">
+                <form method="POST"  action="{{ route('meli.updateToken') }}">
                     @csrf
                     <div class="form-group">
-                        <input type="text" class="form-control" id="meli-token-code" name="accesstoken"
-                               value="{{ old('accesstoken') }}">
+                        <input type="text" class="form-control" id="meli-token-code" name="accesstoken" value="{{ old('accesstoken') }}">
                     </div>
-                    <button type="submit" class="btn btn-primary mt-3">Actualizar</button>
+                    <p class="text-center mt-4">
+                        <button type="submit" class="btn btn-success btn-xs mt-3">Actualizar</button>
+                    </p>
                 </form>
 
             </div>
