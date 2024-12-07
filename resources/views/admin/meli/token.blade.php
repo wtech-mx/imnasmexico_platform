@@ -22,9 +22,18 @@
 
             <h2 class="text-center tittle_error">Token Meli</h2>
 
+            <form method="POST" action="{{ route('meli.updateToken') }}">
+                @csrf
+                <div class="form-group">
+                    <input type="text" class="form-control" id="meli-token-code" name="accesstoken"
+                           value="{{ old('accesstoken') }}" >
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Actualizar</button>
+            </form>
+{{--
             <p class="text-center text_error" id="meli-token-code">
                 <!-- Aquí aparecerá el código extraído -->
-            </p>
+            </p> --}}
 
         </div>
 

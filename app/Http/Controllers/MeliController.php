@@ -75,8 +75,29 @@ class MeliController extends Controller
         return view('admin.meli.token');
      }
 
-    public function index()
-    {
+     public function updateToken(Request $request){
+         // Validar el campo recibido
+         $request->validate([
+             'accesstoken' => 'required|string',
+         ]);
+
+         // Buscar el primer registro (o ajustar según tus necesidades)
+         $meli = Meli::first();
+
+         if ($meli) {
+             // Actualizar el campo 'accesstoken'
+             $meli->update([
+                 'accesstoken' => $request->input('accesstoken'),
+             ]);
+
+             return redirect()->back()->with('success', 'Access Token actualizado correctamente.');
+         }
+
+         return redirect()->back()->with('error', 'No se encontró ningún registro para actualizar.');
+     }
+
+    public function index(){
+
         $endpoint = "https://api.mercadolibre.com/orders/search?seller={$this->sellerId}&sort=date_desc";
 
         // Realizar la solicitud a la API de Mercado Libre
