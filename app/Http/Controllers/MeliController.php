@@ -152,8 +152,11 @@ class MeliController extends Controller
          if ($response->successful()) {
              $history = $response->json();
 
+             // Filtrar las entradas para excluir "first_visit"
+             $filteredHistory = collect($history)->reject(fn($entry) => $entry['substatus'] === 'first_visit');
+
              // Ordenar por fecha descendente
-             $sortedHistory = collect($history)->sortByDesc(fn($entry) => $entry['date'])->values();
+             $sortedHistory = $filteredHistory->sortByDesc(fn($entry) => $entry['date'])->values();
 
              // Obtener el registro más reciente
              $latestEntry = $sortedHistory->first();
@@ -161,8 +164,8 @@ class MeliController extends Controller
              if ($latestEntry) {
                  return [
                      'date'      => Carbon::parse($latestEntry['date'])->format('d M Y H:i:s'),
-                     'status'    => $latestEntry['status'],
                      'substatus' => $latestEntry['substatus'] ?? null,
+                     'status'    => $latestEntry['status'],
                  ];
              }
          }

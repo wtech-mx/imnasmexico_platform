@@ -57,108 +57,121 @@
                                 </div>
                             @endif
 
-                    @if (!empty($groupedOrders))
+                            @if (!empty($groupedOrders))
 
-                        @foreach ($groupedOrders as $index => $group)
                             @php
-                                $isPack = count($group['orders']) > 1;
-                                $totalAmount = array_sum(array_column($group['orders'], 'total_paid_amount'));
-                                $order = $group['orders'][0]; // Solo usamos el primer registro del grupo
+                                // Diccionario de traducciones de estados
+                                $statusTranslations = [
+                                    'delivered' => 'Entregado',
+                                    'shipped' => 'En camino',
+                                    'ready_to_ship' => 'Listo para enviar',
+                                    'handling' => 'Preparado',
+                                    'cancelled' => 'Cancelado',
+                                ];
                             @endphp
 
-                            <div class="card_container bg-white p-3 mb-2">
-                                <div class="row">
-                                    <div class="col-12 my-auto">
-                                        <div class="d-flex justify-content-between" style="border-bottom: 1px solid rgba(0, 0, 0, .1);">
-                                            <p>#{{ $order['order_id'] }} | {{ $order['payment_date'] }}</p>
+@foreach ($groupedOrders as $index => $group)
+    @php
+        $isPack = count($group['orders']) > 1; // Determina si es un paquete
+        $identifier = $group['pack_id'] ?? $group['order_id']; // Usa pack_id si está disponible
+        $totalAmount = array_sum(array_column($group['orders'], 'total_paid_amount'));
+        $order = $group['orders'][0]; // Primer pedido del grupo
+    @endphp
 
-                                            @if ($order['shipment_details'])
-                                                <p><strong>Último estado del envío:</strong></p>
-                                                <ul>
-                                                    <li><strong>Fecha:</strong> {{ $order['shipment_details']['date'] }}</li>
-                                                    <li><strong>Status:</strong> {{ $order['shipment_details']['status'] }}</li>
-                                                    <li><strong>Substatus:</strong> {{ $order['shipment_details']['substatus'] ?? 'N/A' }}</li>
-                                                </ul>
-                                            @else
-                                                <p>Detalles del envío no disponibles.</p>
-                                            @endif
+    <div class="card_container bg-white p-3 mb-2">
+        <div class="row">
+            <div class="col-12 my-auto">
+                <div class="d-flex justify-content-between" style="border-bottom: 1px solid rgba(0, 0, 0, .1);">
+                    <p>#{{ $identifier }} | {{ $order['payment_date'] }}</p>
+                    <p>{{ $order['buyer_nickname'] }} | <a href="" style="color: #3483fa">Mensajes</a></p>
+                </div>
 
-                                            <p>{{ $order['buyer_nickname'] }} | <a href="" style="color: #3483fa">Mensajes</a></p>
-                                        </div>
+                <div class="row">
+                    <div class="col-6">
+                        @if ($order['shipment_details'])
+                            <p>
+                                <strong>{{ $statusTranslations[$order['shipment_details']['status']] ?? $order['shipment_details']['status'] }}</strong> <br>
+                                {{ $order['shipment_details']['date'] }}
+                            </p>
+                        @else
+                            <p>Detalles del envío no disponibles.</p>
+                        @endif
+                    </div>
+                    <div class="col-6">
+                        <!-- Detalles adicionales -->
+                    </div>
+                </div>
+            </div>
+
+            @if ($isPack)
+                <div class="col-12 my-auto">
+                    <div class="d-flex justify-content-between mt-3 mb-3">
+                        <p class="my-auto">
+                            <a class="" data-bs-toggle="collapse" data-bs-target="#accordion-{{ $index }}" style="margin-right: 1rem">
+                                <img src="{{ asset('assets/user/icons/flecha-hacia-abajo.png') }}" alt="" style="width: 30px">
+                            </a>
+                            Paquete de <strong>{{ count($group['orders']) }}</strong> productos
+                        </p>
+                        <p class="my-auto">
+                            Total  <strong>${{ number_format($totalAmount, 2) }}</strong>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="collapse" id="accordion-{{ $index }}">
+                    @foreach ($group['orders'] as $order)
+                        <div class="row container_product" style="border-bottom: 1px solid rgba(0, 0, 0, .1);">
+                            <div class="col-6 my-auto">
+                                <div class="row container_product_img">
+                                    <div class="col-3 my-auto">
+                                        <img src="https://http2.mlstatic.com/D_843915-MLM80297860360_112024-O.jpg" style="width: 40px">
                                     </div>
-
-                                    @if ($isPack)
-                                        <!-- Mostrar encabezado con botón para desplegar -->
-                                        <div class="col-12 my-auto">
-                                            <div class="d-flex justify-content-between mt-3 mb-3">
-                                                <p class="my-auto">
-                                                    <a class="" data-bs-toggle="collapse" data-bs-target="#accordion-{{ $index }}" style="margin-right: 1rem">
-                                                        <img src="{{ asset('assets/user/icons/flecha-hacia-abajo.png') }}" alt="" style="width: 30px">
-                                                    </a>
-                                                    Paquete de <strong>{{ count($group['orders']) }}</strong> productos
-                                                </p>
-                                                <p class="my-auto">
-                                                    Total  <strong>${{ number_format($totalAmount, 2) }}</strong>
-                                                </p>
-                                            </div>
-                                        </div>
-
-                                        <!-- Accordion para mostrar productos -->
-                                        <div class="collapse" id="accordion-{{ $index }}">
-                                            @foreach ($group['orders'] as $order)
-                                                <div class="row container_product" style="border-bottom: 1px solid rgba(0, 0, 0, .1);">
-                                                    <div class="col-6 my-auto">
-                                                        <div class="row container_product_img">
-                                                            <div class="col-3 my-auto">
-                                                                <img src="https://http2.mlstatic.com/D_843915-MLM80297860360_112024-O.jpg" style="width: 40px">
-                                                            </div>
-                                                            <div class="col-9 my-auto">
-                                                                <h4 style="color: rgba(0, 0, 0, .55);font-size:14px">{{ $order['item_title'] }}</h4>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-3 my-auto">
-                                                        <p style="color: rgba(0, 0, 0, .55);font-size:14px"><strong>${{ number_format($order['total_paid_amount'], 2) }}</strong></p>
-                                                    </div>
-                                                    <div class="col-3 my-auto">
-                                                        <p style="color: rgba(0, 0, 0, .55);font-size:14px"><strong>{{ $order['quantity'] }}</strong></p>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                    @else
-                                        <!-- Mostrar producto individual sin accordion -->
-                                        <div class="row container_product">
-                                            <div class="col-6 my-auto">
-                                                <div class="row container_product_img">
-                                                    <div class="col-3 my-auto">
-                                                        <img src="https://http2.mlstatic.com/D_843915-MLM80297860360_112024-O.jpg" style="width: 40px">
-                                                    </div>
-                                                    <div class="col-9 my-auto">
-                                                        <h4 style="color: rgba(0, 0, 0, .55);font-size:14px">{{ $order['item_title'] }}</h4>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-3 my-auto">
-                                                <p style="color: rgba(0, 0, 0, .55);font-size:14px"><strong>${{ number_format($order['total_paid_amount'], 2) }}</strong></p>
-                                            </div>
-                                            <div class="col-3 my-auto">
-                                                <p style="color: rgba(0, 0, 0, .55);font-size:14px"><strong>{{ $order['quantity'] }}</strong></p>
-                                            </div>
-                                        </div>
-                                    @endif
+                                    <div class="col-9 my-auto">
+                                        <h4 style="color: rgba(0, 0, 0, .55);font-size:14px">{{ $order['item_title'] }}</h4>
+                                    </div>
                                 </div>
                             </div>
-                        @endforeach
-
-                    @else
-                        @if (!isset($errorMessage))
-                            <div class="alert alert-info">
-                                No hay órdenes disponibles en este momento.
+                            <div class="col-3 my-auto">
+                                <p style="color: rgba(0, 0, 0, .55);font-size:14px"><strong>${{ number_format($order['total_paid_amount'], 2) }}</strong></p>
                             </div>
-                        @endif
-                    @endif
+                            <div class="col-3 my-auto">
+                                <p style="color: rgba(0, 0, 0, .55);font-size:14px"><strong>{{ $order['quantity'] }}</strong></p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="row container_product">
+                    <div class="col-6 my-auto">
+                        <div class="row container_product_img">
+                            <div class="col-3 my-auto">
+                                <img src="https://http2.mlstatic.com/D_843915-MLM80297860360_112024-O.jpg" style="width: 40px">
+                            </div>
+                            <div class="col-9 my-auto">
+                                <h4 style="color: rgba(0, 0, 0, .55);font-size:14px">{{ $order['item_title'] }}</h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 my-auto">
+                        <p style="color: rgba(0, 0, 0, .55);font-size:14px"><strong>${{ number_format($order['total_paid_amount'], 2) }}</strong></p>
+                    </div>
+                    <div class="col-3 my-auto">
+                        <p style="color: rgba(0, 0, 0, .55);font-size:14px"><strong>{{ $order['quantity'] }}</strong></p>
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
+@endforeach
 
+
+                            @else
+                                @if (!isset($errorMessage))
+                                    <div class="alert alert-info">
+                                        No hay órdenes disponibles en este momento.
+                                    </div>
+                                @endif
+                            @endif
 
                         </div>
                 </div>
