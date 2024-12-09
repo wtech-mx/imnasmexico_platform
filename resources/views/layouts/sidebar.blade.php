@@ -802,6 +802,27 @@
                 @endcan
             @endcan
 
+            <li class="nav-item mt-3">
+                <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Meli</h6>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ (Request::is('meli/ventas*') ? 'active' : '') }}" href="{{ route('meli_ventas.index') }}">
+                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                    <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="" style="width: 35px">
+                </div>
+                <span class="nav-link-text ms-1">Ventas</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a target="_blank" class="nav-link" href="{{ route('meli_token.index') }}">
+                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                </div>
+                <span class="nav-link-text ms-1">Token</span>
+                </a>
+            </li>
+
             @can('pagina-menu')
                 <li class="nav-item mt-3">
                     <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Web Page</h6>

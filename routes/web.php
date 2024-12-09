@@ -604,6 +604,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/meli/ventas', [App\Http\Controllers\MeliController::class, 'index'])->name('meli_ventas.index');
     Route::get('/mercado_libre_api', [App\Http\Controllers\MeliController::class, 'index_token'])->name('meli_token.index');
     Route::post('/meli/update-token', [App\Http\Controllers\MeliController::class, 'updateToken'])->name('meli.updateToken');
+    Route::post('/meli/refresh-token', [App\Http\Controllers\MeliController::class, 'refreshToken'])->name('meli.refreshToken');
 
     // =============== M O D U L O   R E G I S T R O   C O M P R A S ===============================
     Route::get('/cosmica/registro/compras', [App\Http\Controllers\RegistroComprasController::class, 'index'])->name('registro_compras.index');
