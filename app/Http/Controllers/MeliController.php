@@ -49,7 +49,7 @@ class MeliController extends Controller
             'grant_type'    => 'refresh_token',
             'client_id'     => $meliData->app_id,
             'client_secret' => $meliData->client_secret,
-            'refresh_token' => $meliData->autorizacion, // Token actual para renovarlo
+            'refresh_token' => $meliData->accesstoken, // Token actual para renovarlo
         ];
 
         // Hacer la solicitud a la API
@@ -102,8 +102,7 @@ class MeliController extends Controller
          return redirect()->back()->with('error', 'No se encontró ningún registro para actualizar.');
      }
 
-     private function groupOrdersByPackId(array $orders): array
-     {
+     private function groupOrdersByPackId(array $orders): array{
          $groupedOrders = [];
 
          foreach ($orders as $order) {
@@ -173,9 +172,29 @@ class MeliController extends Controller
          return null; // Devuelve null si no es exitoso o no hay datos
      }
 
+     private function getItemDetails($itemId){
+        $endpoint = "https://api.mercadolibre.com/items/{$itemId}";
 
-    private function formatOrders(array $orders): array
-    {
+        $response = Http::withHeaders([
+            'Authorization' => "Bearer {$this->accessToken}",
+        ])->get($endpoint);
+
+        if ($response->successful()) {
+            $itemData = $response->json();
+            return [
+                'thumbnail_url' => $itemData['pictures'][0]['secure_url'] ?? null, // Primera imagen (segura)
+                'picture_url'   => $itemData['pictures'][0]['url'] ?? null,
+            ];
+        }
+
+        return [
+            'thumbnail_url' => null,
+            'picture_url'   => null,
+        ]; // Retornar valores por defecto si hay error.
+    }
+
+
+    private function formatOrders(array $orders): array{
         $formattedOrders = [];
 
         foreach ($orders as $order) {
@@ -187,6 +206,9 @@ class MeliController extends Controller
 
                 // Obtener detalles del envío solo si hay un shipping_id
                 $shipmentDetails = $shippingId ? $this->getShipmentDetails($shippingId) : null;
+
+                // Obtener detalles del producto (incluyendo imágenes)
+                $itemDetails = $this->getItemDetails($item['item']['id']);
 
                 $formattedOrders[] = [
                     'payment_reason'       => $order['payments'][0]['reason'] ?? null,
@@ -206,13 +228,14 @@ class MeliController extends Controller
                     'is_pack'              => $isPack,
                     'pack_id'              => $order['pack_id'] ?? null,
                     'status'               => $order['status'] ?? null,
+                    'thumbnail_url'        => $itemDetails['thumbnail_url'], // URL de miniatura
+                    'picture_url'          => $itemDetails['picture_url'],   // URL de la imagen completa
                 ];
             }
         }
 
         return $formattedOrders;
     }
-
 
     public function index(){
         $endpoint = "https://api.mercadolibre.com/orders/search?seller={$this->sellerId}&sort=date_desc";
@@ -228,7 +251,6 @@ class MeliController extends Controller
         if ($response->successful()) {
             $data = $response->json();
             $ordenes = $data['results'] ?? []; // Obtiene las órdenes
-
             // Formatear las órdenes
             $formattedOrders = $this->formatOrders($ordenes);
 
