@@ -310,9 +310,20 @@ class ProductsController extends Controller
             $suma = $request->get('stock_cosmica');
         }else{
             $suma = $product->stock_cosmica + $request->get('cantidad_aumentada');
+            $tipo = 'Caja cosmica suma';
         }
 
-        $tipo = 'Caja cosmica suma';
+        if($request->get('cantidad_aumentada_nas') == NULL){
+            $suma_nas = $request->get('stock_nas');
+        }else{
+            $suma_nas = $product->stock_nas + $request->get('cantidad_aumentada_nas');
+            $tipo = 'Lab nas suma';
+        }
+
+        if($request->get('cantidad_aumentada') == NULL && $request->get('cantidad_aumentada_nas') == NULL){
+            $tipo = 'Modificacion manual';
+        }
+
         // Guardar los valores anteriores del producto en la tabla historial_stock
         $historialData = [
             'id_producto' => $product->id,
@@ -321,7 +332,7 @@ class ProductsController extends Controller
             'precio_rebajado' => $product->precio_rebajado,
             'sku' => $product->sku,
             'stock' => "Antes: " . $product->stock . " -> Ahora: " . $request->get('stock'),
-            'stock_nas' => "Antes: " . $product->stock_nas . " -> Ahora: " . $request->get('stock_nas'),
+            'stock_nas' => "Antes: " . $product->stock_nas . " -> Ahora: " . $suma_nas,
             'stock_cosmica' => "Antes: " . $product->stock_cosmica . " -> Ahora: " . $suma,
             'laboratorio' => $product->laboratorio,
             'categoria' => $product->categoria,
@@ -337,7 +348,7 @@ class ProductsController extends Controller
         $product->precio_normal = $request->get('precio_normal');
         $product->imagenes = $request->get('imagenes');
         $product->stock = $request->get('stock');
-        $product->stock_nas = $request->get('stock_nas');
+        $product->stock_nas = $suma_nas;
         $product->stock_cosmica = $suma;
         $product->update();
 

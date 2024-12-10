@@ -11,7 +11,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class LabCosmicaController extends Controller
+class LabNasController extends Controller
 {
     public function store(Request $request){
         $envases = new Envases;
@@ -21,7 +21,7 @@ class LabCosmicaController extends Controller
         $envases->categoria = $request->get('categoria');
         $envases->imagen = $request->get('imagen');
         $envases->descripcion = $request->get('descripcion');
-        $envases->tipo = 'Cosmica';
+        $envases->tipo = 'NAS';
         $envases->save();
 
         if ($request->has('productos')) {
@@ -39,11 +39,11 @@ class LabCosmicaController extends Controller
     }
 
     public function edit($id){
-        $products = Products::orderBy('stock','ASC')->where('categoria', 'Cosmica')->where('subcategoria', 'Producto')->get();
+        $products = Products::orderBy('stock','ASC')->where('categoria', 'NAS')->where('subcategoria', 'Producto')->get();
         $envases = Envases::find($id);
         $envases_productos = EnvasesProductos::where('id_envase', '=', $id)->get();
 
-        return view('admin.laboratorio_cosmica.editar', compact('products', 'envases', 'envases_productos'));
+        return view('admin.laboratorio_nas.editar', compact('products', 'envases', 'envases_productos'));
     }
 
     public function update(Request $request, $id)
@@ -110,16 +110,16 @@ class LabCosmicaController extends Controller
 
     // =============== E N V A S E S ===============================
     public function index(Request $request){
-        $products = Products::orderBy('stock','ASC')->where('categoria', 'Cosmica')->where('subcategoria', 'Producto')->get();
-        $envases = Envases::where('tipo', 'Cosmica')->get();
+        $products = Products::orderBy('stock','ASC')->where('categoria', 'NAS')->where('subcategoria', 'Producto')->get();
+        $envases = Envases::where('tipo', 'NAS')->get();
         $envases_productos = EnvasesProductos::get();
 
         $envases_vencer = Envases::where('conteo','<=', 150)->get();
-        return view('admin.laboratorio_cosmica.index', compact('products', 'envases', 'envases_productos', 'envases_vencer'));
+        return view('admin.laboratorio_nas.index', compact('products', 'envases', 'envases_productos', 'envases_vencer'));
     }
 
     public function show($id){
-        $product = Envases::where('tipo', 'Cosmica')->find($id);
+        $product = Envases::where('tipo', 'NAS')->find($id);
         return response()->json($product);
     }
 
@@ -159,10 +159,10 @@ class LabCosmicaController extends Controller
 
     public function pdf_envases(Request $request){
         $today =  date('d-m-Y');
-        $envases_vencer = Envases::where('tipo', 'Cosmica')->where('conteo','<=', 150)->get();
+        $envases_vencer = Envases::where('tipo', 'NAS')->where('conteo','<=', 150)->get();
         $envases_productos = EnvasesProductos::get();
 
-        $pdf = \PDF::loadView('admin.laboratorio_cosmica.pdf_vencer', compact('envases_vencer', 'today', 'envases_productos'));
+        $pdf = \PDF::loadView('admin.laboratorio_nas.pdf_vencer', compact('envases_vencer', 'today', 'envases_productos'));
         return $pdf->stream();
         // return $pdf->download('Envases bajo stock / '.$today.'.pdf');
     }
@@ -183,18 +183,18 @@ class LabCosmicaController extends Controller
             ->where('tipo_cambio', '=', 'Laboratorio')
             ->get();
 
-        $pdf = \PDF::loadView('admin.laboratorio_cosmica.pdf_reporte', compact('historial', 'today', 'envases_productos', 'fechaFormateada', 'historial_granel'));
+        $pdf = \PDF::loadView('admin.laboratorio_nas.pdf_reporte', compact('historial', 'today', 'envases_productos', 'fechaFormateada', 'historial_granel'));
         //return $pdf->stream();
          return $pdf->download('Envases bajo stock / '.$today.'.pdf');
     }
     // =============== C O N T E O  G R A N E L ===============================
     public function index_granel(Request $request){
-        $products = Products::orderBy('id','ASC')->where('categoria', 'Cosmica')->where('subcategoria', 'Producto')->get();
+        $products = Products::orderBy('id','ASC')->where('categoria', 'NAS')->where('subcategoria', 'Producto')->get();
         $bajo_granel = Products::where('conteo_lab','<=', 10)->get();
         $medio_granel = Products::where('conteo_lab','>', 10)->where('conteo_lab','<=', 15)->get();
         $count = $bajo_granel->count() + $medio_granel->count();
 
-        return view('admin.laboratorio_cosmica.granel.index', compact('products', 'bajo_granel', 'medio_granel', 'count'));
+        return view('admin.laboratorio_nas.granel.index', compact('products', 'bajo_granel', 'medio_granel', 'count'));
     }
 
     public function show_granel($id){
@@ -251,20 +251,20 @@ class LabCosmicaController extends Controller
         $bajo_granel = Products::where('conteo_lab','<=', 10)->get();
         $medio_granel = Products::where('conteo_lab','>', 10)->where('conteo_lab','<=', 15)->get();
 
-        $pdf = \PDF::loadView('admin.laboratorio_cosmica.granel.pdf_granel', compact('bajo_granel', 'today', 'medio_granel'));
+        $pdf = \PDF::loadView('admin.laboratorio_nas.granel.pdf_granel', compact('bajo_granel', 'today', 'medio_granel'));
         // return $pdf->stream();
         return $pdf->download('Granel bajo stock / '.$today.'.pdf');
     }
     // =============== C O N T E O  E T I Q U E T A S ===============================
     public function index_etiqueta(Request $request){
-        $products = Products::orderBy('id','ASC')->where('categoria', 'Cosmica')->where('subcategoria', 'Producto')->get();
+        $products = Products::orderBy('id','ASC')->where('categoria', 'NAS')->where('subcategoria', 'Producto')->get();
         $etiqueta_lateral = Products::where('etiqueta_lateral','<=', 200)->where('estatus_lateral','=', '1')->get();
         $etiqueta_tapa = Products::where('etiqueta_tapa','<=', 200)->where('estatus_tapa','=', '1')->get();
         $etiqueta_frente = Products::where('etiqueta_frente','<=', 200)->where('estatus_frente','=', '1')->get();
         $etiqueta_reversa = Products::where('etiqueta_reversa','<=', 200)->where('estatus_reversa','=', '1')->get();
 
         $suma = $etiqueta_lateral->count() + $etiqueta_tapa->count() + $etiqueta_frente->count() + $etiqueta_reversa->count();
-        return view('admin.laboratorio_cosmica.etiqueta.index', compact('products', 'etiqueta_lateral', 'etiqueta_tapa', 'etiqueta_frente', 'etiqueta_reversa', 'suma'));
+        return view('admin.laboratorio_nas.etiqueta.index', compact('products', 'etiqueta_lateral', 'etiqueta_tapa', 'etiqueta_frente', 'etiqueta_reversa', 'suma'));
     }
 
     public function show_etiqueta($id){
@@ -347,7 +347,7 @@ class LabCosmicaController extends Controller
         $etiqueta_frente = Products::where('etiqueta_frente','<=', 200)->where('estatus_frente','=', '1')->get();
         $etiqueta_reversa = Products::where('etiqueta_reversa','<=', 200)->where('estatus_reversa','=', '1')->get();
 
-        $pdf = \PDF::loadView('admin.laboratorio_cosmica.etiqueta.pdf_etiquetas', compact('etiqueta_lateral', 'etiqueta_tapa', 'etiqueta_frente', 'etiqueta_reversa', 'today'));
+        $pdf = \PDF::loadView('admin.laboratorio_nas.etiqueta.pdf_etiquetas', compact('etiqueta_lateral', 'etiqueta_tapa', 'etiqueta_frente', 'etiqueta_reversa', 'today'));
         return $pdf->stream();
          //return $pdf->download('Envases bajo stock / '.$today.'.pdf');
     }
@@ -365,7 +365,7 @@ class LabCosmicaController extends Controller
             ->where('tipo_cambio', '=', 'Etiqueta')
             ->get();
 
-        $pdf = \PDF::loadView('admin.laboratorio_cosmica.etiqueta.pdf_reporte', compact('today', 'historial_etiqueta', 'fechaFormateada'));
+        $pdf = \PDF::loadView('admin.laboratorio_nas.etiqueta.pdf_reporte', compact('today', 'historial_etiqueta', 'fechaFormateada'));
         return $pdf->stream();
         //return $pdf->download('Envases bajo stock / '.$today.'.pdf');
     }

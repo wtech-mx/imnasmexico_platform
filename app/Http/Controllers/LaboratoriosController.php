@@ -188,6 +188,13 @@ class LaboratoriosController extends Controller
         return response()->json($historial);
     }
 
+    public function getStockHistoryNas($id){
+        $historial = HistorialStock::where('id_producto', $id)
+        ->whereIn('tipo_cambio', ['Lab nas suma', 'Lab nas resta'])
+        ->get();
+        return response()->json($historial);
+    }
+
     public function ordenes_lab_orden_finalizar_update(Request $request, $id){
 
         $pedido = BodegaPedidos::where('id', $id)->first();
