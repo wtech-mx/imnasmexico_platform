@@ -257,6 +257,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/cosmica/laboratorio', [App\Http\Controllers\LaboratoriosController::class, 'index_cosmica'])->name('laboratorio.cosmica');
     Route::get('/laboratorio/nas/prodcutos', [App\Http\Controllers\LaboratoriosController::class, 'index_productos_nas'])->name('laboratorio_producto.nas');
     Route::get('/laboratorio/products/{id}/stock-history', [App\Http\Controllers\LaboratoriosController::class, 'getStockHistoryCosmica'])->name('products.stockHistoryCosmica');
+    Route::get('/laboratorio/products/nas/{id}/stock-history', [App\Http\Controllers\LaboratoriosController::class, 'getStockHistoryNas'])->name('products.getStockHistoryNas');
 
     Route::get('/admin/ordenes/autorizados/{id}', [App\Http\Controllers\LaboratoriosController::class, 'show'])->name('productos_autorizado.show');
     Route::get('/cosmica/admin/ordenes/autorizados/{id}', [App\Http\Controllers\LaboratoriosController::class, 'show_cosmica'])->name('productos_autorizado.show_cosmica');
@@ -715,6 +716,34 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/cosmica/laboratorio/etiquetas/pdf', [App\Http\Controllers\LabCosmicaController::class, 'pdf_etiquetas'])->name('etiquetas.pdf');
 
         Route::get('/cosmica/laboratorio/reporte/etiquetas/pdf', [App\Http\Controllers\LabCosmicaController::class, 'pdf_etiquetas_reporte'])->name('reporte_etiquetas.pdf');
+
+    // =============== M O D U L O   L A B O R A T O R I O  N A S ===============================
+    Route::get('/nas/laboratorio/reporte/pdf', [App\Http\Controllers\LabNasController::class, 'pdf_reporte'])->name('reporte_nas.pdf');
+                    // =============== E N V A S E S ===============================
+        Route::get('/nas/laboratorio/envases', [App\Http\Controllers\LabNasController::class, 'index'])->name('envases_nas.index');
+        Route::post('/nas/laboratorio/envases/store', [App\Http\Controllers\LabNasController::class, 'store'])->name('envases_nas.store');
+        Route::get('/nas/laboratorio/envases/edit/{id}', [App\Http\Controllers\LabNasController::class, 'edit'])->name('envases_nas.edit');
+        Route::patch('/nas/laboratorio/envases/update/{id}', [App\Http\Controllers\LabNasController::class, 'update'])->name('envases_nas.update');
+
+        Route::get('/nas/laboratorio/envases/show/{id}', [App\Http\Controllers\LabNasController::class, 'show'])->name('envases_nas.show');
+        Route::patch('/nas/laboratorio/envases/show/update/{id}', [App\Http\Controllers\LabNasController::class, 'show_update'])->name('envases_nas.update');
+        Route::get('/nas/laboratorio/envases/show/{id}/stock-history', [App\Http\Controllers\LabNasController::class, 'getStockHistoryEnvases'])->name('envases_nas.stockHistory');
+        Route::get('/nas/laboratorio/envases/pdf', [App\Http\Controllers\LabNasController::class, 'pdf_envases'])->name('envases_nas.pdf');
+                    // =============== C O N T E O  G R A N E L ===============================
+        Route::get('/nas/laboratorio/granel', [App\Http\Controllers\LabNasController::class, 'index_granel'])->name('granel_nas.index');
+        Route::get('/nas/laboratorio/granel/show/{id}', [App\Http\Controllers\LabNasController::class, 'show_granel'])->name('granel_nas.show');
+        Route::patch('/nas/laboratorio/granel/show/update/{id}', [App\Http\Controllers\LabNasController::class, 'show_update_granel'])->name('granel_nas.update');
+        Route::get('/nas/laboratorio/granel/show/{id}/stock-history', [App\Http\Controllers\LabNasController::class, 'getStockHistoryGranel'])->name('granel_nas.stockHistory');
+
+        Route::get('/nas/laboratorio/granel/pdf', [App\Http\Controllers\LabNasController::class, 'pdf_granel'])->name('granel_nas.pdf');
+                    // =============== C O N T E O  E T I Q U E T A S ===============================
+        Route::get('/nas/laboratorio/etiqueta', [App\Http\Controllers\LabNasController::class, 'index_etiqueta'])->name('etiqueta_nas.index');
+        Route::get('/nas/laboratorio/etiqueta/show/{id}', [App\Http\Controllers\LabNasController::class, 'show_etiqueta'])->name('etiqueta_nas.show');
+        Route::patch('/nas/laboratorio/etiqueta/show/update/{id}', [App\Http\Controllers\LabNasController::class, 'show_update_etiqueta'])->name('etiqueta_nas.update');
+        Route::get('/nas/laboratorio/etiqueta/show/{id}/stock-history', [App\Http\Controllers\LabNasController::class, 'getStockHistoryEtiqueta'])->name('etiqueta_nas.stockHistory');
+        Route::get('/nas/laboratorio/etiquetas/pdf', [App\Http\Controllers\LabNasController::class, 'pdf_etiquetas'])->name('etiquetas_nas.pdf');
+
+        Route::get('/nas/laboratorio/reporte/etiquetas/pdf', [App\Http\Controllers\LabNasController::class, 'pdf_etiquetas_reporte'])->name('reporte_etiquetas_nas.pdf');
 });
 
 // Route::get('registro/login', function () {

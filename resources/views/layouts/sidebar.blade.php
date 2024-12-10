@@ -181,6 +181,27 @@
                                 </a>
                                 @endcan
 
+                                <a class="nav-link {{ (Request::is('/nas/laboratorio/envases') ? 'active' : '') }}" href="{{ route('envases_nas.index') }}">
+                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-cube text-sm opacity-10" style="color: #DABA7E"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Envases</span>
+                                </a>
+
+                                <a class="nav-link {{ (Request::is('/nas/laboratorio/granel') ? 'active' : '') }}" href="{{ route('granel_nas.index') }}">
+                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-cubes text-sm opacity-10" style="color:#DABA7E"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Granel</span>
+                                </a>
+
+                                <a class="nav-link {{ (Request::is('/nas/laboratorio/etiqueta') ? 'active' : '') }}" href="{{ route('etiqueta_nas.index') }}">
+                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-barcode text-sm opacity-10" style="color:#DABA7E"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Etiqueta</span>
+                                </a>
+                                
                                 @can('lab-nas-stock')
                                 <a class="nav-link {{ (Request::is('admin/productos/stock') ? 'active' : '') }}" href="{{ route('laboratorio_producto.nas') }}">
                                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
