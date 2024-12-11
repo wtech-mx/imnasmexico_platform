@@ -32,4 +32,9 @@ class Products extends Model
         return $this->hasMany(ProductosBundleId::class, 'id_bundle_productos');
     }
 
+    public function getNombreAttribute($value)
+    {
+        return trim($value);
+    }
+
 }

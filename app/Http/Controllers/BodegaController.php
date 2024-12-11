@@ -862,22 +862,27 @@ class BodegaController extends Controller
     public function preparacion_scaner_online_cosmica(Request $request, $id)
     {
         $woocommerceCosmika = new Client(
-            'https://cosmicaskin.com', // URL de la tienda secundaria
-            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
-            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
+            'https://cosmicaskin.com',
+            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586',
+            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff',
             [
                 'wp_api' => true,
                 'version' => 'wc/v3',
             ]
         );
 
-        // Obtener un pedido específico usando el ID
         $order = $woocommerceCosmika->get('orders/' . $id);
 
-        $order_online_cosmica = OrderOnlineCosmica::where('id_nota', $id)->get();
+        $order_online_cosmica = OrderOnlineCosmica::where('id_nota', $id)
+            ->get()
+            ->each(function ($item) {
+                $item->nombre = trim($item->nombre);
+            });
 
         return view('admin.bodega.scaner.show_online_cosmica', compact('order', 'order_online_cosmica'));
     }
+
+
 
     public function checkProduct_online_cosmica(Request $request)
     {
