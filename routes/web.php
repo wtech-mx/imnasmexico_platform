@@ -622,7 +622,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('cosmica/cotizacion/create', [App\Http\Controllers\CotizacionCosmicaController::class, 'create'])->name('cotizacion_cosmica.create');
     Route::post('cosmica/cotizacion/store', [App\Http\Controllers\CotizacionCosmicaController::class, 'store'])->name('cotizacion_cosmica.store');
     Route::get('cosmica/cotizacion/edit/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'edit'])->name('cotizacion_cosmica.edit');
+    Route::get('cosmica/cotizacion/meli/show/{id}', [App\Http\Controllers\MeliController::class, 'meli_show'])->name('cotizacion_cosmica.meli_show');
+
     Route::patch('cosmica/cotizacion/update/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update'])->name('cotizacion_cosmica.update');
+    Route::post('cosmica/cotizacion/meli/publish/{id}', [App\Http\Controllers\MeliController::class, 'publishToMeli'])->name('meli.publish');
+
     Route::get('cosmica/cotizacion/imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
 
     Route::get('/get-descuento/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'getDescuento']);

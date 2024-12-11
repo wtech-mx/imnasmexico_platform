@@ -79,7 +79,13 @@
                             <td>
                                 @foreach ($envases_productos as $envase_producto)
                                     @if ($envase_producto->id_envase == $product->id)
-                                        {{ $envase_producto->Product->nombre }} <br>
+                                        @php
+                                            $words = explode(' ', $envase_producto->Product->nombre);
+                                            $chunks = array_chunk($words, 4);
+                                            foreach ($chunks as $chunk) {
+                                                echo implode(' ', $chunk) . '<br>';
+                                            }
+                                        @endphp
                                     @endif
                                 @endforeach
                             </td>
@@ -129,126 +135,126 @@
 
 <script>
 
-$(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
 
-    // Evento para abrir el modal y llenar los datos del producto
-    $(document).on('click', '.editProductBtn', function() {
-        let productId = $(this).data('id');
+        // Evento para abrir el modal y llenar los datos del producto
+        $(document).on('click', '.editProductBtn', function() {
+            let productId = $(this).data('id');
 
-        // Realizar la solicitud AJAX para obtener los datos del producto
-        $.ajax({
-            url: "{{ route('envases.show', ':id') }}".replace(':id', productId),
-            type: 'GET',
-            success: function(product) {
-                // Rellenar los campos del formulario en el modal con los datos obtenidos
-                $('#product_id').val(product.id);
-                $('#envase').val(product.envase);
-                $('#conteo').val(product.conteo);
-                $('#cantidad_aumentada').val(product.cantidad_aumentada);
-                $('#cantidad_uti').val(product.cantidad_uti);
-                $('#descripcion').val(product.descripcion);
+            // Realizar la solicitud AJAX para obtener los datos del producto
+            $.ajax({
+                url: "{{ route('envases.show', ':id') }}".replace(':id', productId),
+                type: 'GET',
+                success: function(product) {
+                    // Rellenar los campos del formulario en el modal con los datos obtenidos
+                    $('#product_id').val(product.id);
+                    $('#envase').val(product.envase);
+                    $('#conteo').val(product.conteo);
+                    $('#cantidad_aumentada').val(product.cantidad_aumentada);
+                    $('#cantidad_uti').val(product.cantidad_uti);
+                    $('#descripcion').val(product.descripcion);
 
-                // Abrir el modal después de cargar los datos
-                $('#editProductModal').modal('show');
-                loadStockHistory(productId);
-            },
-            error: function(xhr, status, error) {
-                console.error('Error al obtener el producto:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error al cargar datos',
-                    text: 'No se pudieron cargar los datos del producto.'
-                });
-            }
-        });
-    });
-
-    // Función para cargar el historial de stock en la pestaña del modal
-    function loadStockHistory(productId) {
-        $.ajax({
-            url: "{{ route('envases.stockHistory', ':id') }}".replace(':id', productId), // Ruta de Laravel para obtener el historial
-            type: 'GET',
-            success: function(history) {
-                    console.log('Historial recibido:', history); // Añadir esto para verificar los datos recibidos
-                    $('#pills-profile .row').empty();
-
-                    let historyHtml = '<table class="table table-bordered">';
-                    historyHtml += '<thead><tr><th>Fecha</th><th>Cantidad</th><th>Usuario</th></tr></thead><tbody>';
-
-                    $.each(history, function(index, record) {
-                        console.log('Registro individual:', record); // Verificar el contenido de cada registro
-                        let date = new Date(record.created_at);
-
-                        // Si la fecha no se puede interpretar, este punto es donde podrías ver si hay algún error con el contenido.
-                        if (isNaN(date.getTime())) {
-                            console.error('Fecha inválida:', record.created_at);
-                        }
-
-                        let formattedDate = date.toLocaleDateString('es-ES', {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric'
-                        });
-
-                        historyHtml += `<tr>
-                            <td>${formattedDate}</td>
-                            <td>Antes: ${record.stock_viejo} -> Ahora: ${record.stock_nuevo}</td>
-                            <td>${record.user}</td>
-                        </tr>`;
-                });
-
-                historyHtml += '</tbody></table>';
-                $('#pills-profile .row').html(historyHtml);
-            },
-
-            error: function(xhr, status, error) {
-                console.error('Error al cargar el historial:', error);
-                alert('Error al cargar el historial');
-            }
-        });
-    }
-
-    // Enviar formulario AJAX para actualizar el producto
-    $('#editProductForm').on('submit', function(e) {
-        e.preventDefault(); // Evitar el envío predeterminado del formulario
-
-        let productId = $('#product_id').val();
-        let data = {
-            envase: $('#envase').val(),
-            conteo: $('#conteo').val(),
-            cantidad_aumentada: $('#cantidad_aumentada').val(),
-            cantidad_uti: $('#cantidad_uti').val(),
-            descripcion: $('#descripcion').val(),
-            _token: $('meta[name="csrf-token"]').attr('content'),
-            _method: 'PATCH'
-        };
-
-        $.ajax({
-            url: "{{ route('envases.update', ':id') }}".replace(':id', productId),
-            type: 'POST',
-            data: data,
-            dataType: 'json',
-            success: function(response) {
-                if (response) {
-                    alert('Envase actualizado con éxito');
-                    console.log(response);
-                    $('#productRow' + response.id + ' td:nth-child(5)').text(response.conteo);
-                    $('#editProductModal').modal('hide');
+                    // Abrir el modal después de cargar los datos
+                    $('#editProductModal').modal('show');
+                    loadStockHistory(productId);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error al obtener el producto:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al cargar datos',
+                        text: 'No se pudieron cargar los datos del producto.'
+                    });
                 }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-                console.error('Response:', xhr.responseText);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error al actualizar',
-                    text: 'Hubo un problema al intentar actualizar el Envase.',
-                });
-            }
+            });
+        });
+
+        // Función para cargar el historial de stock en la pestaña del modal
+        function loadStockHistory(productId) {
+            $.ajax({
+                url: "{{ route('envases.stockHistory', ':id') }}".replace(':id', productId), // Ruta de Laravel para obtener el historial
+                type: 'GET',
+                success: function(history) {
+                        console.log('Historial recibido:', history); // Añadir esto para verificar los datos recibidos
+                        $('#pills-profile .row').empty();
+
+                        let historyHtml = '<table class="table table-bordered">';
+                        historyHtml += '<thead><tr><th>Fecha</th><th>Cantidad</th><th>Usuario</th></tr></thead><tbody>';
+
+                        $.each(history, function(index, record) {
+                            console.log('Registro individual:', record); // Verificar el contenido de cada registro
+                            let date = new Date(record.created_at);
+
+                            // Si la fecha no se puede interpretar, este punto es donde podrías ver si hay algún error con el contenido.
+                            if (isNaN(date.getTime())) {
+                                console.error('Fecha inválida:', record.created_at);
+                            }
+
+                            let formattedDate = date.toLocaleDateString('es-ES', {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            });
+
+                            historyHtml += `<tr>
+                                <td>${formattedDate}</td>
+                                <td>Antes: ${record.stock_viejo} -> Ahora: ${record.stock_nuevo}</td>
+                                <td>${record.user}</td>
+                            </tr>`;
+                    });
+
+                    historyHtml += '</tbody></table>';
+                    $('#pills-profile .row').html(historyHtml);
+                },
+
+                error: function(xhr, status, error) {
+                    console.error('Error al cargar el historial:', error);
+                    alert('Error al cargar el historial');
+                }
+            });
+        }
+
+        // Enviar formulario AJAX para actualizar el producto
+        $('#editProductForm').on('submit', function(e) {
+            e.preventDefault(); // Evitar el envío predeterminado del formulario
+
+            let productId = $('#product_id').val();
+            let data = {
+                envase: $('#envase').val(),
+                conteo: $('#conteo').val(),
+                cantidad_aumentada: $('#cantidad_aumentada').val(),
+                cantidad_uti: $('#cantidad_uti').val(),
+                descripcion: $('#descripcion').val(),
+                _token: $('meta[name="csrf-token"]').attr('content'),
+                _method: 'PATCH'
+            };
+
+            $.ajax({
+                url: "{{ route('envases.update', ':id') }}".replace(':id', productId),
+                type: 'POST',
+                data: data,
+                dataType: 'json',
+                success: function(response) {
+                    if (response) {
+                        alert('Envase actualizado con éxito');
+                        console.log(response);
+                        $('#productRow' + response.id + ' td:nth-child(5)').text(response.conteo);
+                        $('#editProductModal').modal('hide');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    console.error('Response:', xhr.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error al actualizar',
+                        text: 'Hubo un problema al intentar actualizar el Envase.',
+                    });
+                }
+            });
         });
     });
-});
 
 </script>
 

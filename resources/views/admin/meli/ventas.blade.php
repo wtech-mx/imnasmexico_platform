@@ -163,7 +163,6 @@
                                                 </div>
                                             </div>
 
-
                                             <div class="collapse" id="accordion-{{ $index }}">
                                                 @foreach ($group['orders'] as $order)
                                                 <div class="row container_product" style="border-bottom: 1px solid rgba(0, 0, 0, .1);">

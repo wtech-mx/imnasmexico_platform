@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
 use App\Models\Meli;
+use App\Models\NotasProductosCosmica;
+use App\Models\ProductosNotasCosmica;
+use App\Models\Products;
+
 use Illuminate\Support\Arr;
 
 class MeliController extends Controller
@@ -271,6 +275,107 @@ class MeliController extends Controller
         // Pasar las variables a la vista
         return view('admin.meli.ventas', compact('groupedOrders', 'errorMessage'));
     }
+
+    public function meli_show($id)
+    {
+        // Obtener los datos existentes
+        $cotizacion = NotasProductosCosmica::find($id);
+        $cotizacion_productos = ProductosNotasCosmica::where('id_notas_productos', '=', $id)->where('price', '!=', NULL)->get();
+        $products = Products::where('categoria', '=', 'Cosmica')->orderBy('nombre', 'ASC')->get();
+
+        // Realizar la petición a la API de Mercado Libre para obtener categorías
+        $endpoint = 'https://api.mercadolibre.com/sites/MLM/categories';
+
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => "Bearer {$this->accessToken}",
+            ])->get($endpoint);
+
+            if ($response->successful()) {
+                $categories = $response->json(); // Guardar las categorías como un arreglo
+            } else {
+                $categories = []; // Si falla la petición, devolver un arreglo vacío
+            }
+        } catch (\Exception $e) {
+            $categories = []; // Si hay un error, devolver un arreglo vacío
+        }
+
+        // Pasar todo a la vista
+        return view('admin.cotizacion_cosmica.meli_create', compact('products', 'cotizacion', 'cotizacion_productos', 'categories'));
+    }
+
+    public function publishToMeli(Request $request, $id)
+    {
+        // Validar los datos del request
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'category_id' => 'required|string',
+            'price' => 'required|numeric|min:1',
+            'description' => 'required|string|max:2000',
+        ]);
+
+        // Construir la descripción con los productos y cantidades
+        $productos = $request->input('productos', []);
+        $cantidades = $request->input('cantidad', []);
+        $productosDetalle = '';
+        foreach ($productos as $index => $producto) {
+            $cantidad = $cantidades[$index] ?? 0;
+            $productosDetalle .= "{$producto} cantidad {$cantidad}\n";
+        }
+
+        $descripcionFinal = "Productos:\n" . $productosDetalle . "\n" . $validatedData['description'];
+
+        $endpoint = 'https://api.mercadolibre.com/items';
+        $payload = [
+            'title' => $validatedData['title'],
+            'category_id' => $validatedData['category_id'],
+            'price' => $validatedData['price'],
+            'currency_id' => 'MXN',
+            'available_quantity' => 1,
+            'buying_mode' => 'buy_it_now',
+            'listing_type_id' => 'gold_special',
+            'condition' => 'new',
+            'description' => [
+                'plain_text' => $descripcionFinal,
+            ],
+            'tags' => ['immediate_payment'],
+            'sale_terms' => [
+                [
+                    'id' => 'WARRANTY_TYPE',
+                    'value_name' => 'Garantía del vendedor'
+                ],
+                [
+                    'id' => 'WARRANTY_TIME',
+                    'value_name' => '5 días'
+                ]
+            ],
+            'pictures' => [
+                [
+                    'source' => 'https://plataforma.imnasmexico.com/assets/user/utilidades/meli_item.png',
+                ],
+            ],
+        ];
+
+        try {
+            $response = Http::withHeaders([
+                'Authorization' => "Bearer {$this->accessToken}",
+                'Content-Type' => 'application/json',
+            ])->post($endpoint, $payload);
+
+            if ($response->successful()) {
+                return redirect()->back()->with('success', 'Artículo publicado exitosamente en Mercado Libre.');
+            } else {
+                // Capturar y mostrar el mensaje de error completo
+                $errorDetails = $response->json(); // Obtener todos los detalles del error
+                $errorMessage = $errorDetails['message'] ?? 'Error desconocido';
+                $causes = isset($errorDetails['cause']) ? json_encode($errorDetails['cause'], JSON_PRETTY_PRINT) : 'No se especificaron causas.';
+                return redirect()->back()->with('error', "Error al publicar: {$errorMessage}. Detalles: {$causes}");
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Ocurrió un error: ' . $e->getMessage());
+        }
+    }
+
 
 
 }
