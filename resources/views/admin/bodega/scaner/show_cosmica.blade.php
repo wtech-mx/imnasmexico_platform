@@ -76,6 +76,10 @@ Productos solicitados
 @endsection
 @section('datatable')
 <script>
+    $(document).ready(function() {
+        checkAllProductsChecked();
+    });
+
     function checkAllProductsChecked() {
         let allChecked = true;
         document.querySelectorAll('td[id^="status-"]').forEach((statusCell) => {

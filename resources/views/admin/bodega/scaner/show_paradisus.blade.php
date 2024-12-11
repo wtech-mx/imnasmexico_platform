@@ -74,6 +74,10 @@ Productos solicitados Paradisus
 @endsection
 @section('datatable')
 <script>
+    $(document).ready(function() {
+        checkAllProductsChecked();
+    });
+    
     $('#scanInput').on('change', function() {
         let sku = $(this).val().trim(); // Eliminar espacios en blanco
         let idNota = "{{ $ApiFiltradaCollectAprobado['id'] }}"; // ID de la nota que estás mostrando

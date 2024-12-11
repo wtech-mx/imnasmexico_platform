@@ -82,6 +82,10 @@ Productos solicitados Woo NAS
 @endsection
 @section('datatable')
 <script>
+    $(document).ready(function() {
+        checkAllProductsChecked();
+    });
+
     $('#scanInput').on('change', function() {
         let sku = $(this).val().trim(); // Eliminar espacios en blanco
         let idNota = "{{ $order->id }}"; // ID de la nota que estás mostrando
