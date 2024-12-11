@@ -82,53 +82,58 @@ Productos solicitados Woo Cosmica
 
 @section('datatable')
 <script>
-    $('#scanInput').on('change', function() {
-        let sku = $(this).val().trim();
-        let idNota = "{{ $order->id }}";
-        const successSound = document.getElementById("successSound");
-        const errorSound = document.getElementById("errorSound");
+$(document).ready(function() {
+    checkAllProductsChecked();
+});
 
-        if (sku.length === 6) {
-            $.ajax({
-                url: "{{ route('check_cosmica_online.product') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    sku: sku,
-                    id_nota: idNota,
-                    _token: "{{ csrf_token() }}"
-                },
-                success: function(data) {
-                    if (data.status === 'success') {
-                        $('#status-' + sku).html('✔️');
-                        checkAllProductsChecked();
-                        successSound.play();
-                        alert('Producto escaneado');
-                    } else {
-                        errorSound.play();
-                        alert('Producto no encontrado en el pedido.');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
+$('#scanInput').on('change', function() {
+    let sku = $(this).val().trim();
+    let idNota = "{{ $order->id }}";
+    const successSound = document.getElementById("successSound");
+    const errorSound = document.getElementById("errorSound");
+
+    if (sku.length === 6) {
+        $.ajax({
+            url: "{{ route('check_cosmica_online.product') }}",
+            type: "POST",
+            dataType: "json",
+            data: {
+                sku: sku,
+                id_nota: idNota,
+                _token: "{{ csrf_token() }}"
+            },
+            success: function(data) {
+                if (data.status === 'success') {
+                    $('#status-' + sku).html('✔️');
+                    checkAllProductsChecked();
+                    successSound.play();
+                    alert('Producto escaneado');
+                } else {
                     errorSound.play();
+                    alert('Producto no encontrado en el pedido.');
                 }
-            });
-            $(this).val('');
-        } else {
-            console.log('El SKU no tiene la longitud correcta.');
-        }
-    });
-
-    function checkAllProductsChecked() {
-        let allChecked = true;
-        document.querySelectorAll('tbody tr').forEach(function(row) {
-            if (row.querySelector('td:last-child').innerHTML !== '✔️') {
-                allChecked = false;
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                errorSound.play();
             }
         });
-        const guardarBtnContainer = document.getElementById('guardarBtnContainer');
-        guardarBtnContainer.style.display = allChecked ? 'block' : 'none';
+        $(this).val('');
+    } else {
+        console.log('El SKU no tiene la longitud correcta.');
     }
+});
+
+function checkAllProductsChecked() {
+    let allChecked = true;
+    document.querySelectorAll('tbody tr').forEach(function(row) {
+        if (row.querySelector('td:last-child').innerHTML.trim() !== '✔️') {
+            allChecked = false;
+        }
+    });
+    const guardarBtnContainer = document.getElementById('guardarBtnContainer');
+    guardarBtnContainer.style.display = allChecked ? 'block' : 'none';
+}
+
 </script>
 @endsection

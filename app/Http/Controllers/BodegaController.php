@@ -531,6 +531,8 @@ class BodegaController extends Controller
                 ]
             );
 
+            $order_online_cosmica = OrderOnlineCosmica::where('id_nota', $id)
+            ->get();
         }else{
             // Crear instancia del cliente Automattic\WooCommerce\Client para la segunda tienda (Cosmika)
             $woocommerceNas = new Client(
@@ -542,6 +544,9 @@ class BodegaController extends Controller
                     'version' => 'wc/v3',
                 ]
             );
+
+            $order_online_cosmica = OrderOnlineNas::where('id_nota', $id)
+            ->get();
         }
 
         $updatedOrder = $woocommerceNas->put("orders/{$id}", [
@@ -562,10 +567,10 @@ class BodegaController extends Controller
             // Obtener la orden desde WooCommerce
             $order = $woocommerceNas->get("orders/$id");
             // 2. Recorrer los productos en la orden (line_items)
-            foreach ($order->line_items as $item) {
-                $productName = trim($item->name); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
+            foreach ($order_online_cosmica as $item) {
+                $productName = trim($item->nombre); // Concepto es el nombre del producto, eliminamos espacios y tabuladores
 
-                $quantity = $item->quantity; // Cantidad vendida en WooCommerce
+                $quantity = $item->cantidad; // Cantidad vendida en WooCommerce
 
                 // 3. Buscar el producto en la tabla interna
                 $productoInterno = Products::where('nombre', $productName)->first();
