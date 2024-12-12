@@ -51,7 +51,7 @@
 
                                 <div class="form-group col-6">
                                     <label for="name">Stock Actual</label>
-                                    <input id="stock_cosmica" name="stock_cosmica" type="number" class="form-control" value="{{ $product->stock_cosmica}}" readonly>
+                                    <input id="stock_cosmica" name="stock_cosmica" type="number" class="form-control" value="{{ $product->stock_cosmica}}" >
                                 </div>
 
                                 <div class="form-group col-6">
