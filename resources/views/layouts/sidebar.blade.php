@@ -131,6 +131,15 @@
                     <div class="collapse " id="pagaLabCosmica">
                         <ul class="nav ms-4">
                             <li class="nav-item ">
+                                @can('lab-cosmica-pedidos')
+                                <a class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" href="{{ route('laboratorio.cosmica') }}">
+                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-file text-sm opacity-10" style="color:#7849e6"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Pedidos</span>
+                                </a>
+                                @endcan
+
                                 <a class="nav-link {{ (Request::is('/cosmica/laboratorio/envases') ? 'active' : '') }}" href="{{ route('envases.index') }}">
                                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                         <i class="fa fa-cube text-sm opacity-10" style="color: #7849e6"></i>
@@ -151,6 +160,15 @@
                                     </div>
                                     <span class="nav-link-text ms-1">Etiqueta</span>
                                 </a>
+
+                                @can('lab-cosmica-stock')
+                                <a class="nav-link {{ (Request::is('admin/productos/stock') ? 'active' : '') }}" href="{{ route('laboratorio_producto.cosmica') }}">
+                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                        <i class="fa fa-cubes text-sm opacity-10" style="color:#7849e6"></i>
+                                    </div>
+                                    <span class="nav-link-text ms-1">Stock</span>
+                                </a>
+                                @endcan
                             </li>
                         </ul>
                     </div>
@@ -201,45 +219,11 @@
                                     </div>
                                     <span class="nav-link-text ms-1">Etiqueta</span>
                                 </a>
-                                
+
                                 @can('lab-nas-stock')
                                 <a class="nav-link {{ (Request::is('admin/productos/stock') ? 'active' : '') }}" href="{{ route('laboratorio_producto.nas') }}">
                                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                         <i class="fa fa-cubes text-sm opacity-10" style="color:#DABA7E"></i>
-                                    </div>
-                                    <span class="nav-link-text ms-1">Stock</span>
-                                </a>
-                                @endcan
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            @endcan
-
-            @can('lab-cosmica-menu')
-                <li class="nav-item">
-                    <a data-bs-toggle="collapse" href="#pagaCajasCosmica" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pagaCajasCosmica" role="button" aria-expanded="false">
-                    <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-                        <i class="fa fa-flask text-sm opacity-10" style="color:#000"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Cajas Cosmica</span>
-                    </a>
-                    <div class="collapse " id="pagaCajasCosmica">
-                        <ul class="nav ms-4">
-                            <li class="nav-item ">
-                                @can('lab-cosmica-pedidos')
-                                <a class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" href="{{ route('laboratorio.cosmica') }}">
-                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                        <i class="fa fa-file text-sm opacity-10" style="color:#000"></i>
-                                    </div>
-                                    <span class="nav-link-text ms-1">Pedidos</span>
-                                </a>
-                                @endcan
-
-                                @can('lab-cosmica-stock')
-                                <a class="nav-link {{ (Request::is('admin/productos/stock') ? 'active' : '') }}" href="{{ route('laboratorio_producto.cosmica') }}">
-                                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                                        <i class="fa fa-cubes text-sm opacity-10" style="color:#000"></i>
                                     </div>
                                     <span class="nav-link-text ms-1">Stock</span>
                                 </a>
