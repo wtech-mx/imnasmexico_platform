@@ -363,42 +363,49 @@
         function calcularSuma() {
             var sumaTotal = 0;
 
-            $('.importe').each(function() {
+            $('.importe').each(function () {
                 var valor = parseFloat($(this).val()) || 0;
                 sumaTotal += valor;
             });
 
+            // Guarda el total original en un atributo de datos para cálculos futuros
+            $('#total').data('originalTotal', sumaTotal);
             $('#total').val(sumaTotal.toFixed(2));
+
             aplicarDescuento();
         }
 
         function aplicarDescuento() {
-            var total = parseFloat($('#total').val()) || 0;
+            var totalOriginal = parseFloat($('#total').data('originalTotal')) || 0;
             var descuento = parseFloat($('#descuento').val()) || 0;
-            var totalConDescuento = total * (1 - (descuento / 100));
+
+            // Calcula el total con descuento
+            var totalConDescuento = totalOriginal * (1 - (descuento / 100));
             $('#total').val(totalConDescuento.toFixed(2));
+
             calcularRestante();
         }
 
-        $('#descuento').on('input', function() {
+        $('#descuento').on('input', function () {
             aplicarDescuento();
         });
 
-        $('#toggleFactura').on('change', function() {
-            var total = parseFloat($('#total').val()) || 0;
+        $('#toggleFactura').on('change', function () {
+            var totalConDescuento = parseFloat($('#total').data('originalTotal')) || 0;
+            var descuento = parseFloat($('#descuento').val()) || 0;
+            totalConDescuento = totalConDescuento * (1 - (descuento / 100));
 
             if ($(this).is(':checked')) {
-                // Calcular el 16% y sumarlo al total
-                var iva = total * 0.16;
-                var totalConIva = total + iva;
+                // Calcular el 16% y sumarlo al total con descuento
+                var iva = totalConDescuento * 0.16;
+                var totalConIva = totalConDescuento + iva;
                 $('#total').val(totalConIva.toFixed(2));
 
                 // Mostrar el div
                 $('#divFactura').show();
             } else {
-                // Si se desmarca, quitar el 16%
-                var totalSinIva = total / 1.16;
-                $('#total').val(totalSinIva.toFixed(2));
+                // Si se desmarca, calcular solo el total con descuento
+                $('#total').val(totalConDescuento.toFixed(2));
 
                 // Ocultar el div
                 $('#divFactura').hide();
@@ -416,17 +423,17 @@
             $('#restante').val(restante.toFixed(2));
         }
 
-        $('#monto1, #monto2').on('input', function() {
+        $('#monto1, #monto2').on('input', function () {
             calcularRestante();
         });
 
         calcularSuma();
 
-        $('#myForm').on('submit', function() {
+        $('#myForm').on('submit', function () {
             $('#saveButton').prop('disabled', true);
         });
 
-        $(document).on('keydown', function(event) {
+        $(document).on('keydown', function (event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
             }
