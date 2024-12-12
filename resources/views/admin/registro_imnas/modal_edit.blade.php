@@ -11,8 +11,8 @@
 
             <form method="POST" action="{{ route('update_registro.update', $item->User->id) }}" enctype="multipart/form-data" role="form">
                 @csrf
-                <div class="modal-body">
 
+                <div class="modal-body">
                     <div class="row">
                         <div class="col-6 form-group">
                             <label for="name">Nombre</label>
@@ -112,7 +112,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group col-6 mt-3">
+                        <div class="form-group col-6">
                             <label for="name">Método de Pago *</label>
                             <div class="input-group mb-3">
                                 <span class="input-group-text" id="basic-addon1">
@@ -131,7 +131,6 @@
                                     <option value="oxxo bancomer" {{ old('forma_pago') == 'oxxo bancomer' ? 'selected' : '' }}>OXXO Bancomer</option>
                                     <option value="Mercado Pago" {{ old('forma_pago') == 'Mercado Pago' ? 'selected' : '' }}>Mercado Pago</option>
                                     <option value="otro" {{ old('forma_pago') == 'otro' ? 'selected' : '' }}>Otro</option>
-
                                 </select>
                             </div>
                         </div>
@@ -219,8 +218,35 @@
                                     Descargar
                                 </a>
                             @endif
-
                         </div>
+
+                        <div class="form-group col-6">
+                            <label for="name">Clasificacion de Clave</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                </span>
+                                <select name="clave_clasificacion" class="form-select d-inline-block clave-clasificacion">
+
+                                    @if($item->User->clave_clasificacion == null)
+                                        <option value="">Selecionar una Opcion</option>
+                                    @else
+                                        <option value="{{ $item->User->clave_clasificacion }}">{{ $item->User->clave_clasificacion }}</option>
+                                    @endif
+
+                                    <option value="RIFC680910-879-0013" {{ old('clave_clasificacion') == 'RIFC680910-879-0013' ? 'selected' : '' }}>RIFC680910-879-0013</option>
+                                    <option value="HERK000617-BY7-0005" {{ old('clave_clasificacion') == 'HERK000617-BY7-0005' ? 'selected' : '' }}>HERK000617-BY7-0005</option>
+                                    <option value="Otra" {{ old('clave_clasificacion') == 'Otra' ? 'selected' : '' }}>Otra</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Input dinámico -->
+                        <div class="form-group col-6 d-none otra-clave-container">
+                            <label for="otra_clave">Especifica otra clave</label>
+                            <input type="text" name="otra_clave" class="form-control" placeholder="Ingresa la clave">
+                        </div>
+
                     </div>
 
                 </div>

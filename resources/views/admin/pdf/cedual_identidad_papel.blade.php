@@ -47,10 +47,31 @@
 
         .container7{
             position: absolute;
-            top:78%;
+            top:60%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
+        }
+
+        .container_clave_rfc {
+            width: 100%;
+            position: absolute;
+            top: 58%;
+            left: 70%;
+            display: inline-block;
+        }
+
+        .clave_rfc {
+            color: #000;
+            font-weight: 300;
+            font-size: 11.5px;
+            background-image: url("https://plataforma.imnasmexico.com/utilidades_documentos/pattern_cedula.png");
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 0px; /* Ajusta para que haya espacio interno */
+            display: inline-block;
+            min-height: 20px; /* Ajusta según sea necesario */
+            min-width: 100px; /* Ajusta según sea necesario */
         }
 
         .container6{
@@ -199,7 +220,6 @@
 
         .img_registro{
             width: {{ $isNoImage  ? '15%' : '30%' }};
-
         }
 
     </style>
@@ -349,11 +369,14 @@
             {{-- <img src="utilidades_documentos/{{ $fileName_firma }}" class="img_firma">--}}
         </div>
 
-
         <div class="qr_container2">
             @php
                 echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.5,2.5) . '" style="background: #fff; padding: 10px;"   />';
             @endphp
+        </div>
+
+        <div class="container_clave_rfc">
+            <p class="clave_rfc">{{ $clave_rfc }}</p>
         </div>
 
         <div class="container7">

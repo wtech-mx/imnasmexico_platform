@@ -33,6 +33,8 @@ class User extends Authenticatable
         'otra_red',
         'pagina_web',
         'colonia',
+        'habilitar_btn',
+        'clave_clasificacion',
     ];
 
     public function RegistroImnasEscuela()

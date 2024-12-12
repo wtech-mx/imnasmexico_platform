@@ -145,7 +145,30 @@
                                 <input id="foto2" name="foto2" type="file" class="form-control" placeholder="foto2">
                             </div>
                         </div>
+
+                        <!-- Select Clasificación de Clave -->
+                        <div class="form-group col-6">
+                            <label for="name">Clasificación de Clave</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/cam/acta.png') }}" alt="" width="35px">
+                                </span>
+                                <select name="clave_clasificacion" class="form-select d-inline-block clave-clasificacion">
+                                    <option value="">Seleccionar una opción</option>
+                                    <option value="RIFC680910-879-0013" {{ old('clave_clasificacion') == 'RIFC680910-879-0013' ? 'selected' : '' }}>RIFC680910-879-0013</option>
+                                    <option value="HERK000617-BY7-0005" {{ old('clave_clasificacion') == 'HERK000617-BY7-0005' ? 'selected' : '' }}>HERK000617-BY7-0005</option>
+                                    <option value="Otra Clave" {{ old('clave_clasificacion') == 'Otra Clave' ? 'selected' : '' }}>Otra Clave</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Input dinámico: Otra Clave -->
+                        <div class="form-group col-6 d-none otra-clave-container-create">
+                            <label for="otra_clave">Especifica otra clave</label>
+                            <input type="text" name="otra_clave" class="form-control" placeholder="Ingresa la clave" value="{{ old('otra_clave') }}">
+                        </div>
                     </div>
+
 
                 </div>
 

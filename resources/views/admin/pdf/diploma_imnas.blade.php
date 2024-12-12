@@ -182,6 +182,23 @@
             display: inline-block;
         }
 
+        .container_clave_rfc{
+            width: 100%;
+            position: absolute;
+            top: 79%;
+            left:10%;
+            display: inline-block;
+        }
+
+        .clave_rfc{
+            color: #000;
+            font-weight: bold;
+            font-size: 16px;
+            background: #fff;
+            padding: 0px 10px 0px 10px;
+            display: inline-block;
+        }
+
         .container_logo_reverso{
             position: absolute;
             top: 88%;
@@ -397,7 +414,7 @@
                         laboral y las habilidades de los trabajadores. <br><br>
 
                         Registrado ante la Secretaría del Trabajo y Previsión Social el Instituto Mexicano Naturales Ain Spa,
-                        como Agente Capacitador Externo con Número de Registro: <strong style="color:red">RIFC680910-879-0013 </strong><br><br>
+                        como Agente Capacitador Externo con Número de Registro: <strong style="color:red">{{ $clave_rfc }} </strong><br><br>
 
                         A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE REFORMA AL ARTÍCULO SEGUNDO DE
                         LOS ESTATUTOS SOCIALES; y, B.- LA REFORMA AL ARTÍCULO SEXTO DE LOS ESTATUTOS SOCIALES,
@@ -418,6 +435,10 @@
                     Este reconocimiento es INVALIDO si no tiene todas las firmas, sellos y QR's que lo acrediten <br>
 
                     </p>
+        </div>
+
+        <div class="container_clave_rfc">
+            <p class="clave_rfc">{{ $clave_rfc }}</p>
         </div>
 
         <div class="qr_container2">

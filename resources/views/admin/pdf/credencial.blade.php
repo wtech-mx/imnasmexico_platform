@@ -207,6 +207,23 @@
             display: inline-block;
         }
 
+        .container_clave_rfc{
+            width: 100%;
+            position: absolute;
+            top: 57.3%;
+            left:54.5%;
+            display: inline-block;
+        }
+
+        .clave_rfc{
+            color: red;
+            font-weight: 300;
+            font-size: 5px;
+            background: #fff;
+            padding: 0px 2px 0px 2px;
+            display: inline-block;
+        }
+
         .container_logo{
             position: absolute;
             top: 8.3%;
@@ -373,6 +390,10 @@
         <div class="container_imgtrasera">
             <img src="{{ $basePath . $tipo_documentos->img_reverso }}" class="img_reverso">
             <p class="curso_atras">{{ $curso }}</p>
+        </div>
+
+        <div class="container_clave_rfc">
+            <p class="clave_rfc">{{ $clave_rfc }}</p>
         </div>
 
         <div class="qr_container2">

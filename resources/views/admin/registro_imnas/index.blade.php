@@ -14,7 +14,7 @@
 
                         <div class="d-flex justify-content-between">
 
-                            <h3 class="mb-3">Registros IMNAS</h3>
+                            <h3 class="mb-3">Registros IMNAS Show</h3>
 
                             <a type="button" class="btn btn-sm bg-danger" data-bs-toggle="modal" data-bs-target="#manual_instrucciones" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 ¿Como fucniona?
@@ -53,29 +53,29 @@
                                                     @endif
 
                                                     @php
-                                                    $nombreDeEscuela = $item->User->escuela;
-                                                    $nombreDeEscuela = str_replace('Curso de ', '', $nombreDeEscuela);
-                                                    $nombreDeEscuela = str_replace('Curso ', '', $nombreDeEscuela);
+                                                        $nombreDeEscuela = $item->User->escuela;
+                                                        $nombreDeEscuela = str_replace('Curso de ', '', $nombreDeEscuela);
+                                                        $nombreDeEscuela = str_replace('Curso ', '', $nombreDeEscuela);
 
-                                                    $palabras = explode(' ', $nombreDeEscuela);
+                                                        $palabras = explode(' ', $nombreDeEscuela);
 
-                                                    // Inicializa la cadena formateada
-                                                    $nombre_formateado = '';
-                                                    $contador_palabras = 0;
+                                                        // Inicializa la cadena formateada
+                                                        $nombre_formateado = '';
+                                                        $contador_palabras = 0;
 
-                                                    foreach ($palabras as $palabra) {
-                                                        // Agrega la palabra actual a la cadena formateada
-                                                        $nombre_formateado .= $palabra . ' ';
+                                                        foreach ($palabras as $palabra) {
+                                                            // Agrega la palabra actual a la cadena formateada
+                                                            $nombre_formateado .= $palabra . ' ';
 
-                                                        // Incrementa el contador de palabras
-                                                        $contador_palabras++;
+                                                            // Incrementa el contador de palabras
+                                                            $contador_palabras++;
 
-                                                        // Agrega un salto de línea después de cada tercera palabra
-                                                        if ($contador_palabras % 4== 0) {
-                                                            $nombre_formateado .= "<br>";
+                                                            // Agrega un salto de línea después de cada tercera palabra
+                                                            if ($contador_palabras % 4== 0) {
+                                                                $nombre_formateado .= "<br>";
+                                                            }
                                                         }
-                                                    }
-                                                @endphp
+                                                    @endphp
                                                 <p>{!! $nombre_formateado !!}</p>
 
                                                 </td>
@@ -126,5 +126,39 @@
         pageLength: 10
     });
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Manejo de selects en los modales de edición
+        document.querySelectorAll('.clave-clasificacion').forEach(function (selectElement) {
+            selectElement.addEventListener('change', function () {
+                // Contenedor del input dinámico
+                const container = this.closest('.modal-content').querySelector('.otra-clave-container');
+
+                if (this.value === 'Otra') {
+                    // Mostrar input si seleccionan "Otra"
+                    container.classList.remove('d-none');
+                } else {
+                    // Ocultar el input si no es "Otra"
+                    container.classList.add('d-none');
+                }
+            });
+        });
+
+        // Manejo del select en el modal de creación
+        const createSelect = document.querySelector('#registro_imnas .clave-clasificacion');
+        const createContainer = document.querySelector('.otra-clave-container-create');
+
+        if (createSelect) {
+            createSelect.addEventListener('change', function () {
+                if (this.value === 'Otra Clave') {
+                    createContainer.classList.remove('d-none');
+                } else {
+                    createContainer.classList.add('d-none');
+                }
+            });
+        }
+    });
+</script>
+
 
 @endsection

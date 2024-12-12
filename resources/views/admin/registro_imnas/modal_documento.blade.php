@@ -36,6 +36,7 @@
                             <input type="hidden" name="telefono_escuela" value=" {{$cliente->telefono}}">
                             <input type="hidden" name="logo_escuela" value=" {{$cliente->logo}}">
                             <input type="hidden" name="Id_escuela" value=" {{$cliente->id}}">
+                            <input type="hidden" name="clave_rfc" value=" {{$registro_imnas->User->clave_clasificacion}}">
 
                             <div class="row">
                                     <input id="id_order" name="id_order" type="text" class="form-control" value="{{ $registro_imnas->id_order }}" style="display: none">
