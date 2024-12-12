@@ -295,48 +295,6 @@ class BodegaPedidosController extends Controller
             mkdir($ruta_estandar, 0777, true);
         }
 
-        // ================= A u t o r i z a r   a u t o m a t i c a m e n t e ========================
-            $pedido = BodegaPedidosProductosCosmica::where('id_pedido', $id)->get();
-            foreach ($pedido as $index) {
-                $producto = Products::where('id', $index->id_producto)->first();
-                $resta = $producto->stock_cosmica - $index->cantidad_entregada_lab;
-                $suma = $producto->stock + $index->cantidad_entregada_lab;
-
-                $historial_resta = new HistorialStock;
-                $historial_resta->id_producto = $producto->id;
-                $historial_resta->user = 'Jen';
-                $historial_resta->sku = $producto->sku;
-                $historial_resta->stock_cosmica = "Antes: " . $producto->stock_cosmica . " -> Ahora: " . $resta;
-                $historial_resta->categoria = 'Cosmica';
-                $historial_resta->subcategoria = 'Producto';
-                $historial_resta->laboratorio = 'Cosmica';
-                $historial_resta->tipo_cambio = 'Caja cosmica resta';
-                $historial_resta->save();
-
-                $historial_suma = new HistorialStock;
-                $historial_suma->id_producto = $producto->id;
-                $historial_suma->user = 'Jen';
-                $historial_suma->sku = $producto->sku;
-                $historial_suma->stock_cosmica = "Antes: " . $producto->stock . " -> Ahora: " . $suma;
-                $historial_suma->categoria = 'Cosmica';
-                $historial_suma->subcategoria = 'Producto';
-                $historial_suma->laboratorio = 'Cosmica';
-                $historial_suma->tipo_cambio = 'Bodega cosmica suma';
-                $historial_suma->save();
-
-                $producto->stock_cosmica = $resta;
-                $producto->stock = $suma;
-                $producto->update();
-
-                $index->cantidad_recibido = $index->cantidad_entregada_lab;
-                $index->cantidad_restante = 0;
-                $index->cantidad_entregada_lab = 0;
-                $index->fecha_recibido = $today;
-                $index->fecha_liquidado = $today;
-                $index->update();
-            }
-        // ================= E N D   A u t o r i z a r   a u t o m a t i c a m e n t e ========================
-
         $firma = BodegaPedidosCosmica::find($id);
         $image_parts = explode(";base64,", $request->signed);
         $image_type_aux = explode("image/", $image_parts[0]);
@@ -349,8 +307,8 @@ class BodegaPedidosController extends Controller
 
         $firma->firma = $signature;
         $firma->fecha_aprovado = date("Y-m-d H:i:s");
-        $firma->estatus = 'Finalizado'; //Aprobada
-        $firma->estatus_lab = 'Finalizado'; //Aprobada
+        $firma->estatus = 'Aprobada';
+        $firma->estatus_lab = 'Aprobada';
         $firma->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
