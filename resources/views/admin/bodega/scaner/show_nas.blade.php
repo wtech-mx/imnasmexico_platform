@@ -68,6 +68,13 @@ Productos solicitados Woo NAS
                                                 </tbody>
                                             </table>
                                         </div>
+
+                                        @can('guardar-folio-bodega')
+                                            <div class="modal-footer" >
+                                                <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
+                                            </div>
+                                        @endcan
+
                                         <div class="modal-footer" id="guardarBtnContainer" style="display: none;">
                                             <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                         </div>
