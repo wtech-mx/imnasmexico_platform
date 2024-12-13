@@ -247,9 +247,13 @@
                                             <td>{{ \Carbon\Carbon::parse($order->date_created)->format('d-m-Y') }}</td>
                                             <td>${{ $order->total }}</td>
                                             <td>
-                                                <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
+                                                {{-- <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
                                                     <i class="fa fa-list-alt"></i>
-                                                </a>
+                                                </a> --}}
+
+                                                <a class="btn btn-sm btn-info text-white" href="{{ route('woo_nas_orders.pdf', $order->id) }}" target="_blank">
+                                                    <i class="fa fa-file-pdf"></i>
+                                                </a>
 
                                                 @if(isset($order->meta_data))
                                                     @foreach($order->meta_data as $meta)
@@ -270,7 +274,7 @@
                                             </td>
                                         </tr>
 
-                                        @include('admin.bodega.modal_productos')
+                                        {{-- @include('admin.bodega.modal_productos') --}}
                                         @include('admin.bodega.modal_edit_estatus_woo')
                                         @include('admin.bodega.modal_estatus_woo')
 
@@ -293,11 +297,17 @@
                                                 @endforeach
 
                                             </td>
+
                                             <td>${{ $order->total }}</td>
+
                                             <td>
-                                                <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
+                                                {{-- <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
                                                     <i class="fa fa-list-alt"></i>
-                                                </a>
+                                                </a> --}}
+
+                                                <a class="btn btn-sm btn-info text-white" href="{{ route('woo_cosmica_orders.pdf', $order->id) }}" target="_blank">
+                                                    <i class="fa fa-file-pdf"></i>
+                                                </a>
 
                                                 @if(isset($order->meta_data))
                                                     @foreach($order->meta_data as $meta)
@@ -318,7 +328,7 @@
                                             </td>
                                         </tr>
 
-                                        @include('admin.bodega.modal_productos')
+                                        {{-- @include('admin.bodega.modal_productos') --}}
                                         @include('admin.bodega.modal_edit_estatus_woo')
                                         @include('admin.bodega.modal_estatus_woo')
 

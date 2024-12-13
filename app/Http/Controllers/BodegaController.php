@@ -16,6 +16,7 @@ use Codexshaper\WooCommerce\Facades\WooCommerce;
 use Automattic\WooCommerce\Client;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 
 class BodegaController extends Controller
@@ -102,6 +103,52 @@ class BodegaController extends Controller
             'orders_tienda_cosmica',
             'cantidad_preparacion',
             'ApiFiltradaCollectAprobado'));
+    }
+
+    public function generateOrderWooNasPDF($id)
+    {
+        // Crear instancia del cliente WooCommerce
+        $woocommerce = new Client(
+            'https://imnasmexico.com/new/',
+            'ck_9e19b038c973d3fdf0dcafe8c0352c78a16cad3f',
+            'cs_762a289843cea2a92751f757f351d3522147997b',
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Obtener el pedido por ID
+        $order = $woocommerce->get("orders/{$id}");
+
+        // Generar el PDF usando una vista
+        $pdf = PDF::loadView('admin.bodega.pdf.woo_nas', compact('order'));
+
+        // Descargar el archivo PDF
+        return $pdf->download("Order_NAS_Woo_{$id}.pdf");
+    }
+
+    public function generateOrderWooCosmicaPDF($id)
+    {
+        // Crear instancia del cliente WooCommerce
+        $woocommerce = new Client(
+            'https://cosmicaskin.com', // URL de la tienda secundaria
+            'ck_ad48c46c5cc1e9efd9b03e4a8cb981e52a149586', // Consumer Key de la tienda secundaria
+            'cs_2e6ba2691ca30408d31173f1b8e61e5b67e4f3ff', // Consumer Secret de la tienda secundaria
+            [
+                'wp_api' => true,
+                'version' => 'wc/v3',
+            ]
+        );
+
+        // Obtener el pedido por ID
+        $order = $woocommerce->get("orders/{$id}");
+
+        // Generar el PDF usando una vista
+        $pdf = PDF::loadView('admin.bodega.pdf.woo_cosmica', compact('order'));
+
+        // Descargar el archivo PDF
+        return $pdf->download("Order_Cosmica_Woo_{$id}.pdf");
     }
 
     public function index_preparados(Request $request) {
@@ -886,8 +933,6 @@ class BodegaController extends Controller
 
         return view('admin.bodega.scaner.show_online_cosmica', compact('order', 'order_online_cosmica'));
     }
-
-
 
     public function checkProduct_online_cosmica(Request $request)
     {

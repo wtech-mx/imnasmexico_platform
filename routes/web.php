@@ -628,6 +628,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('cosmica/cotizacion/meli/publish/{id}', [App\Http\Controllers\MeliController::class, 'publishToMeli'])->name('meli.publish');
 
     Route::get('cosmica/cotizacion/imprimir/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir'])->name('cotizacion_cosmica.imprimir');
+    // Route::get('nas/woo/imprimir/{id}', [App\Http\Controllers\BodegaController::class, 'imprimir'])->name('nas_woo.imprimir');
+    Route::get('nas/orders/woo/pdf/{id}', [App\Http\Controllers\BodegaController::class, 'generateOrderWooNasPDF'])->name('woo_nas_orders.pdf');
+    Route::get('cosmica/orders/woo/pdf/{id}', [App\Http\Controllers\BodegaController::class, 'generateOrderWooCosmicaPDF'])->name('woo_cosmica_orders.pdf');
+
 
     Route::get('/get-descuento/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'getDescuento']);
     Route::get('cosmica/cotizacion/reporte', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir_reporte'])->name('notas_cosmica.imprimir_reporte');
