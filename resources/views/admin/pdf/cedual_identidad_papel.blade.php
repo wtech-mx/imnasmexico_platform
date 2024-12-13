@@ -47,7 +47,7 @@
 
         .container7{
             position: absolute;
-            top:60%;
+            top:77.5%;
             left: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
@@ -56,7 +56,7 @@
         .container_clave_rfc {
             width: 100%;
             position: absolute;
-            top: 58%;
+            top: 57.8%;
             left: 70%;
             display: inline-block;
         }
@@ -66,13 +66,17 @@
             font-weight: 300;
             font-size: 11.5px;
             background-image: url("https://plataforma.imnasmexico.com/utilidades_documentos/pattern_cedula.png");
-            background-repeat: no-repeat;
+            background-repeat: repeat-x; /* Repetir solo en el eje X */
             background-size: cover;
-            padding: 0px; /* Ajusta para que haya espacio interno */
+            background-position: center; /* Centrar la imagen horizontalmente */
+            background-size: auto; /* Asegura que la imagen conserve su tamaño original */
+            padding: 0px 15px 0px 0px; /* Espacio interno */
             display: inline-block;
-            min-height: 20px; /* Ajusta según sea necesario */
-            min-width: 100px; /* Ajusta según sea necesario */
+
         }
+
+
+
 
         .container6{
             position: absolute;
