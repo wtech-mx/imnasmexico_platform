@@ -638,8 +638,7 @@ class BodegaController extends Controller
                 }
             }
 
-            return redirect()->route('index_preparacion.bodega')
-            ->with('success', 'Creado exitosamente.');
+            return redirect()->back()->with('success', 'Actuazlaido exitosamente.');
         } else {
             return redirect()->back()->with('error', 'Hubo un problema al actualizar el estado de la orden.');
         }
