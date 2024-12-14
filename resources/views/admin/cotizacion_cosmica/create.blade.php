@@ -75,7 +75,7 @@
                                                             <span class="input-group-text" id="basic-addon1">
                                                                 <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
                                                             </span>
-                                                            <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10">
+                                                            <input type="number" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10">
                                                         </div>
                                                     </div>
                                                 </div>
