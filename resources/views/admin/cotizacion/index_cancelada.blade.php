@@ -45,7 +45,7 @@
 
                             <nav>
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                    <a class="nav-link active" href="{{ route('notas_cotizacion.index') }}">
+                                    <a class="nav-link " href="{{ route('notas_cotizacion.index') }}">
                                         Cotizacion <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
                                     </a>
 
@@ -53,13 +53,13 @@
                                         Aprobada <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
                                     </a>
 
-                                    <a class="nav-link" href="{{ route('notas_cotizacion.index_cancelada') }}">
+                                    <a class="nav-link active" href="{{ route('notas_cotizacion.index_cancelada') }}">
                                         Cancelada <img src="{{ asset('assets/cam/cerrar.png') }}" alt="" width="35px">
                                     </a>
                                 </div>
                               </nav>
 
-                              <table class="table table-flush" id="datatable-search4">
+                              <table class="table table-flush" id="datatable-search3">
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
@@ -71,7 +71,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($notas as $item)
+                                    @foreach ($notasCandeladas as $item)
                                         <tr>
                                             <td>
                                                 <h5>
@@ -138,9 +138,23 @@
                                                                 <i class="fa fa-whatsapp"></i>
                                                         </a>
                                                     @else
-                                                    <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $item->id_usuario ? $item->User->telefono : $item->telefono }}&text=Cotizacion%20NAS%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $item->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($item->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . $productos->price . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($item->tipo, 2, '.', ',') }}{{ $item->restante > 0 ? '%0A Descuento: '. $item->restante .'%' : '' }}{{ $item->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $item->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($item->total, 2, '.', ',') }}%0A">
+                                                    {{-- <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $item->id_usuario ? $item->User->telefono : $item->telefono }}&text=Cotizacion%20NAS%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $item->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php $total = 0; foreach ($item->ProductosNotasId as $productos) { echo $productos->producto . "%20$" . number_format($productos->price, 2, '.', ',') . "%20%20x%20" . $productos->cantidad . "%0A";} @endphp--------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ $total_formateado = number_format($item->tipo, 2, '.', ',') }}{{ $item->restante > 0 ? '%0A Descuento: '. $item->restante .'%' : '' }}{{ $item->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $item->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ $total_formateado = number_format($item->total, 2, '.', ',') }}%0A">
+                                                        <i class="fa fa-whatsapp"></i>
+                                                    </a> --}}
+
+                                                    <a class="btn btn-sm btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{ $item->id_usuario ? $item->User->telefono : $item->telefono }}&text=Cotizacion%20NAS%0A--------------------------------%0A%0ANumero%20de%20Cotizacion%20%20%20%20%3A%20%20{{ $item->id }}%0AFecha%20%20%20%20%20%20%20%20%20%20%20%20%3A%20%20{{ $fecha_formateada }}%0A%0ADetalles%20de%20la%20Orden%3A%0A@php
+                                                        $total = 0;
+                                                        foreach ($item->ProductosNotasId as $productos) {
+                                                            echo $productos->producto . "%20$" .
+                                                                (is_numeric($productos->price) ? number_format($productos->price, 2, '.', ',') : '0.00') .
+                                                                "%20%20x%20" . $productos->cantidad . "%0A";
+                                                        }
+                                                    @endphp
+                                                    --------------------------------%0A%0ADetalles%3A%20%0ASubtotal%3A%20${{ is_numeric($item->tipo) ? number_format($item->tipo, 2, '.', ',') : '0.00' }}{{ $item->restante > 0 ? '%0A Descuento: '. $item->restante .'%' : '' }}{{ $item->envio == 'Si' ? '%0A Envío: $250' : '' }}{{ $item->factura == 1 ? '%0A Factura: 16%' : '' }}%0ATotal%3A%20${{ is_numeric($item->total) ? number_format($item->total, 2, '.', ',') : '0.00' }}%0A">
                                                         <i class="fa fa-whatsapp"></i>
                                                     </a>
+
+
                                                     @endif
                                                 @endcan
                                                 @can('nota-productos-editar')
@@ -184,16 +198,6 @@
         $('.cliente').select2();
         $('.phone').select2();
         $('.administradores').select2();
-    });
-
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search4", {
-        searchable: true,
-        fixedHeight: false
-    });
-
-    const dataTableSearch2 = new simpleDatatables.DataTable("#datatable-search2", {
-        searchable: true,
-        fixedHeight: false
     });
 
     const dataTableSearch3 = new simpleDatatables.DataTable("#datatable-search3", {

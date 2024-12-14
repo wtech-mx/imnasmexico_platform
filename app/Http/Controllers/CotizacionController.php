@@ -30,18 +30,43 @@ class CotizacionController extends Controller
         $notas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
         ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion','=' , null)->get();
 
+        $products = Products::orderBy('nombre','ASC')->get();
+
+        return view('admin.cotizacion.index', compact('notas', 'products', 'clientes', 'administradores'));
+    }
+
+    public function index_aprobada(){
+
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+
+        $now = Carbon::now();
+        $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+
         $notasAprobadas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
         ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado'])->get();
 
-        $notasPendientes = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('estatus_cotizacion','=' , 'Pendiente')->get();
+        $products = Products::orderBy('nombre','ASC')->get();
+
+        return view('admin.cotizacion.index_aprobada', compact( 'products', 'clientes', 'administradores','notasAprobadas'));
+    }
+
+    public function index_cancelada(){
+
+        $primerDiaDelMes = date('Y-m-01');
+        $ultimoDiaDelMes = date('Y-m-t');
+
+        $now = Carbon::now();
+        $administradores = User::where('cliente','=' , NULL)->orWhere('cliente','=' ,'5')->get();
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
         $notasCandeladas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
         ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('estatus_cotizacion','=' , 'Cancelada')->get();
 
         $products = Products::orderBy('nombre','ASC')->get();
 
-        return view('admin.cotizacion.index', compact('notas', 'products', 'clientes', 'administradores','notasAprobadas','notasPendientes','notasCandeladas'));
+        return view('admin.cotizacion.index_cancelada', compact('products', 'clientes', 'administradores','notasCandeladas'));
     }
 
     public function buscador(Request $request){
@@ -66,8 +91,7 @@ class CotizacionController extends Controller
 
         $notasPendientes = clone $query->where('estatus_cotizacion', 'Pendiente')->get();
         $notasCandeladas = clone $query->where('estatus_cotizacion', 'Cancelada')->get();
-
-        return view('admin.cotizacion.index', compact('notas', 'products', 'clientes', 'administradores', 'notasAprobadas', 'notasPendientes', 'notasCandeladas'));
+        return view('admin.cotizacion.index ', compact('notas', 'products', 'clientes', 'administradores', 'notasAprobadas', 'notasPendientes', 'notasCandeladas'));
     }
 
     public function create(){
@@ -917,10 +941,13 @@ class CotizacionController extends Controller
 
             // return $pdf->stream();
             return $pdf->download('Reporte NAS / '.$today.'.pdf');
+
+        }else if($request->input('action') === 'Resetear'){
+            return redirect()->route('notas_cotizacion.index');
         }
 
         // Si no se solicita PDF, mostrar los resultados en la vista
-        return view('admin.cotizacion.index', compact('notas', 'products', 'clientes', 'administradores','notasAprobadas','notasPendientes','notasCandeladas'));
+        return view('admin.cotizacion.index_busqueda', compact('notas', 'products', 'clientes', 'administradores','notasAprobadas','notasPendientes','notasCandeladas'));
 
     }
 }
