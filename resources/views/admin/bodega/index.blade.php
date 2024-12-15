@@ -13,7 +13,7 @@
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
-                            <h2 class="mb-3">Notas ventas del Mes</h2>
+                            <h2 class="mb-3">Notas ventas en preparacion del Mes</h2>
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
@@ -32,16 +32,17 @@
                                 <span class="badge rounded-pill text-white" style="background: #EE96BA">Paradisus</span>
                             </div>
                         </div>
+                        <div class="col-12">
+                            <div class="d-flex justify-content-around">
+                                <form class="row mt-3" action="{{ route('producto_pdf.pdf') }}" method="GET" >
+                                    <button class="btn btn-dark btn-sm" type="submit" style=""><i class="fa fa-file-pdf"></i> PDF productos faltantes</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
 
 
-                    <form class="row mt-3" action="{{ route('producto_pdf.pdf') }}" method="GET" >
-                        <div class="row">
-                            <div class="col-3">
-                                <button class="btn btn-dark" type="submit" style="">PDF productos faltantes</button>
-                            </div>
-                        </div>
-                    </form>
+
 
                     <div class="card-body">
                         <div class="table-responsive">

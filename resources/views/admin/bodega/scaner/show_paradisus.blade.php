@@ -25,7 +25,7 @@ Productos solicitados Paradisus
                                 <form method="POST" action="{{ route('actualizar.pedido.paradisus', $ApiFiltradaCollectAprobado['id']) }}" enctype="multipart/form-data" role="form">
                                     @csrf
                                     <input type="hidden" name="_method" value="PATCH">
-                                    <input  id="estatus_cotizacion" name="estatus_cotizacion" value="Preparado" style="display: none">
+                                    <input  id="estatus_cotizacion" name="estatus_cotizacion" value="Enviado" style="display: none">
                                         <div class="modal-body">
                                             <table class="table">
                                                 <thead class="text-center">
