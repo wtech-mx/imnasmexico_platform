@@ -114,14 +114,25 @@
     <table class="container" align="center" style="">
         <thead class="text-center" style="background-color: #836262; color: #000000">
             <tr>
-                <th style="border: 1px solid black;border-collapse: collapse;">Producto</th>
-                <th style="border: 1px solid black;border-collapse: collapse;">Nombre</th>
-                <th style="border: 1px solid black;border-collapse: collapse;">Cantidad</th>
-                </tr>
+                <th style="color:#ffff;border: 1px solid black;border-collapse: collapse;">Producto</th>
+                <th style="color:#ffff;border: 1px solid black;border-collapse: collapse;">Nombre</th>
+                <th style="color:#ffff;border: 1px solid black;border-collapse: collapse;">Cantidad <br> Solicitada</th>
+                <th style="color:#ffff;border: 1px solid black;border-collapse: collapse;">Cantidad <br> Laboratorio</th>
+                <th style="color:#ffff;border: 1px solid black;border-collapse: collapse;">Cantidad <br> Recibida</th>
+            </tr>
         </thead>
+
         <tbody class="text-center">
             @foreach ($pedido_productos as $item)
+                @php
+                    $resta_lab = 0;
+                    $resta_lab = $item->cantidad_pedido - $item->cantidad_entregada_lab;
+
+                    $date2 = new DateTime($item->updated_at);
+                    $fechaFormateada2 = $date->format('d/m/Y');
+                @endphp
                 <tr>
+
                     <td style="border: 1px solid black;border-collapse: collapse;">
                         <p>
                             @if ($item->Products->imagenes == NULL)
@@ -131,10 +142,27 @@
                             @endif
                         </p>
                     </td>
+
                     <td style="border: 1px solid black;border-collapse: collapse;">
                         <b> {{ $item->Products->nombre }}</b>
                     </td>
+
                     <td style="border: 1px solid black;border-collapse: collapse;">{{ $item->cantidad_pedido }}</td>
+                        @if ($item->cantidad_entregada_lab == 0)
+                            <td style="border: 1px solid black;border-collapse: collapse; background:#86ae7e75">
+                                Finalizado <br>
+                                @if ($item->lab_entrega == NULL)
+                                @else
+                                    Enviado: {{ $item->lab_entrega }}
+                                @endif
+                        @else
+                            <td style="border: 1px solid black;border-collapse: collapse; background:#ae7e7e75">
+                                {{ $item->lab_entrega }}
+                        @endif
+                    </td>
+
+                    <td style="border: 1px solid black;border-collapse: collapse;">{{ $item->cantidad_recibido }}</td>
+
                 </tr>
             @endforeach
     </table>

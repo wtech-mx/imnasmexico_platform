@@ -79,7 +79,7 @@ class LaboratoriosController extends Controller
         }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->back()->with('success', 'Envio de correo exitoso.');
+        return redirect()->back()->with('success', 'Se ha guardado sus datos con exito');
 
     }
 
@@ -99,9 +99,10 @@ class LaboratoriosController extends Controller
     public function index_cosmica(){
 
         $bodegaPedidoRealizado = BodegaPedidosCosmica::where('estatus_lab','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoPendiente = BodegaPedidosCosmica::where('estatus_lab','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoConfirmado = BodegaPedidosCosmica::where('estatus_lab','=','Finalizado')->orderBy('fecha_pedido','DESC')->get();
 
-        return view('admin.laboratorio.index_cosmica',compact('bodegaPedidoRealizado','bodegaPedidoConfirmado'));
+        return view('admin.laboratorio.index_cosmica',compact('bodegaPedidoRealizado','bodegaPedidoConfirmado','bodegaPedidoPendiente'));
     }
 
     public function show_cosmica($id){
@@ -136,7 +137,7 @@ class LaboratoriosController extends Controller
                     // Sumar la nueva cantidad entregada con la cantidad que ya había sido registrada
                     $restantes = $cantidad_entregada_actual - $cantidades_recibido[$index];
                     $stock_actualizado = $stock_cosmica[$index] - $cantidades_recibido[$index];
-
+                    $pedidoProducto->lab_entrega = $cantidades_recibido[$index];
                     $pedidoProducto->cantidad_entregada_lab = $restantes;
                     $pedidoProducto->save();
 
@@ -152,13 +153,17 @@ class LaboratoriosController extends Controller
                         $pedido->estatus_lab = 'Finalizado';
                         $pedido->fecha_aprovado_lab = now();
                         $pedido->save();
+                    }else{
+                        $pedido->estatus_lab = 'Confirmado';
+                        $pedido->fecha_aprovado_lab = now();
+                        $pedido->save();
                     }
 
                 }
         }
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->back()->with('success', 'Envio de correo exitoso.');
+        return redirect()->back()->with('success', 'Se ha guardado sus datos con exito');
 
     }
 
@@ -167,7 +172,6 @@ class LaboratoriosController extends Controller
         $product = Products::find($id);
         return response()->json($product);
     }
-
 
     public function index_productos_cosmica(){
         $products = Products::where('laboratorio','=','Cosmica')->get();

@@ -31,7 +31,7 @@
                 </li>
 
                 <li class="nav-item" role="presentation" style="margin-left: 1rem">
-                    <button class="btn btn-danger" id="pills-pendientes-tab" data-bs-toggle="pill" data-bs-target="#pills-pendientes" type="button" role="tab" aria-controls="pills-respuesta_lab" aria-selected="false">
+                    <button class="btn btn-danger text-white" id="pills-pendientes-tab" data-bs-toggle="pill" data-bs-target="#pills-pendientes" type="button" role="tab" aria-controls="pills-respuesta_lab" aria-selected="false">
                      Pendientes
                     </button>
                 </li>
@@ -83,12 +83,9 @@
                                         {{-- <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#ordenes_lab_update_finalizar{{ $item->id }}">
                                             <i class="fa fa-file"></i> Comentario
                                         </a> --}}
-                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                            <br>
-                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $item->id) }}">
-                                                <i class="fa fa-file"></i> Descargar PDF
-                                            </a>
-                                        </div>
+                                        <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $item->id) }}">
+                                            <i class="fa fa-file"></i> Descargar PDF
+                                        </a>
                                     </td>
                                 </tr>
                                 @include('admin.laboratorio.modal_finalizar')
@@ -99,7 +96,7 @@
 
                 <div class="tab-pane fade " id="pills-pendientes" role="tabpanel" aria-labelledby="pills-pendientes-tab" tabindex="0">
                     <div class="table-responsive">
-                        <table class="table table-flush" id="datatable-search">
+                        <table class="table table-flush" id="datatable-search2">
                             <thead class="thead-light">
                                 <tr>
                                     <th>ID</th>
@@ -135,12 +132,11 @@
                                         {{-- <a type="button" class="btn btn-sm bg-danger text-white" data-bs-toggle="modal" data-bs-target="#ordenes_lab_update_finalizar{{ $item->id }}">
                                             <i class="fa fa-file"></i> Comentario
                                         </a> --}}
-                                        <div class="col-6 col-sm-6 col-md-3 col-lg-3">
-                                            <br>
-                                            <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $item->id) }}">
-                                                <i class="fa fa-file"></i> Descargar PDF
-                                            </a>
-                                        </div>
+
+                                        <a class="btn btn-xs btn-danger text-white" target="_blank" href="{{ route('productos_stock.imprimir', $item->id) }}">
+                                            <i class="fa fa-file"></i> Descargar PDF
+                                        </a>
+
                                     </td>
                                 </tr>
                                 @include('admin.laboratorio.modal_finalizar')
@@ -151,7 +147,7 @@
 
                 <div class="tab-pane fade" id="pills-confirmados" role="tabpanel" aria-labelledby="pills-confirmados-tab" tabindex="0">
                     <div class="table-responsive">
-                        <table class="table table-flush" id="datatable-search2">
+                        <table class="table table-flush" id="datatable-search3">
                             <thead class="thead-light">
                                 <tr>
                                     <th>ID</th>
@@ -204,6 +200,12 @@
     });
 
     const dataTableSearch2 = new simpleDatatables.DataTable("#datatable-search2", {
+        deferRender:true,
+        paging: true,
+        pageLength: 10
+    });
+
+    const dataTableSearch3 = new simpleDatatables.DataTable("#datatable-search3", {
         deferRender:true,
         paging: true,
         pageLength: 10

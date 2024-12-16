@@ -114,13 +114,14 @@
     <table class="container" align="center" style="">
         <thead class="text-center" style="background-color: #836262; color: #000000">
             <tr>
-                <th style="border: 1px solid black;border-collapse: collapse;">Producto</th>
-                <th style="border: 1px solid black;border-collapse: collapse;">Nombre</th>
-                <th style="border: 1px solid black;border-collapse: collapse;">Cantidad <br> Solicitada</th>
-                <th style="border: 1px solid black;border-collapse: collapse;">Cantidad <br> Laboratorio</th>
-                <th style="border: 1px solid black;border-collapse: collapse;">Cantidad <br> Recibida</th>
-                </tr>
+                <th style="color:#ffff;border: 1px solid black;border-collapse: collapse;">Producto</th>
+                <th style="color:#ffff;border: 1px solid black;border-collapse: collapse;">Nombre</th>
+                <th style="color:#ffff;border: 1px solid black;border-collapse: collapse;">Cantidad <br> Solicitada</th>
+                <th style="color:#ffff;border: 1px solid black;border-collapse: collapse;">Cantidad <br> Laboratorio</th>
+                <th style="color:#ffff;border: 1px solid black;border-collapse: collapse;">Cantidad <br> Recibida</th>
+            </tr>
         </thead>
+
         <tbody class="text-center">
             @foreach ($pedido_productos as $item)
                 @php
@@ -140,9 +141,11 @@
                             @endif
                         </p>
                     </td>
+
                     <td style="border: 1px solid black;border-collapse: collapse;">
                         <b> {{ $item->Products->nombre }}</b>
                     </td>
+
                     <td style="border: 1px solid black;border-collapse: collapse;">{{ $item->cantidad_pedido }}</td>
                         @if ($item->cantidad_entregada_lab == 0)
                             <td style="border: 1px solid black;border-collapse: collapse; background:#86ae7e75">
@@ -156,7 +159,9 @@
                                 {{ $item->lab_entrega }}
                         @endif
                     </td>
+
                     <td style="border: 1px solid black;border-collapse: collapse;">{{ $item->cantidad_recibido }}</td>
+
                 </tr>
             @endforeach
     </table>
