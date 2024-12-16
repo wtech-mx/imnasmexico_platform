@@ -16,9 +16,10 @@ class LaboratoriosController extends Controller
     public function index_nas(){
 
         $bodegaPedidoRealizado = BodegaPedidos::where('estatus_lab','=','Aprobada')->orderBy('fecha_pedido','DESC')->get();
+        $bodegaPedidoPendiente = BodegaPedidos::where('estatus_lab','=','Confirmado')->orderBy('fecha_pedido','DESC')->get();
         $bodegaPedidoConfirmado = BodegaPedidos::where('estatus_lab','=','Finalizado')->orderBy('fecha_pedido','DESC')->get();
 
-        return view('admin.laboratorio.index_nas', compact('bodegaPedidoRealizado','bodegaPedidoConfirmado'));
+        return view('admin.laboratorio.index_nas', compact('bodegaPedidoRealizado','bodegaPedidoConfirmado','bodegaPedidoPendiente'));
     }
 
     public function show($id){
@@ -53,7 +54,7 @@ class LaboratoriosController extends Controller
                     // Sumar la nueva cantidad entregada con la cantidad que ya había sido registrada
                     $restantes = $cantidad_entregada_actual - $cantidades_recibido[$index];
                     $stock_actualizado = $stock_nas[$index] - $cantidades_recibido[$index];
-
+                    $pedidoProducto->lab_entrega = $cantidades_recibido[$index];
                     $pedidoProducto->cantidad_entregada_lab = $restantes;
                     $pedidoProducto->save();
 
@@ -67,6 +68,10 @@ class LaboratoriosController extends Controller
                     // Si no hay productos pendientes (cantidad_restante == 0), actualizar el estatus del pedido
                     if ($productosPendientes == 0) {
                         $pedido->estatus_lab = 'Finalizado';
+                        $pedido->fecha_aprovado_lab = now();
+                        $pedido->save();
+                    }else{
+                        $pedido->estatus_lab = 'Confirmado';
                         $pedido->fecha_aprovado_lab = now();
                         $pedido->save();
                     }
