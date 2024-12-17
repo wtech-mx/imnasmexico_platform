@@ -597,6 +597,29 @@ class CotizacionCosmicaController extends Controller
 
     }
 
+    public function update_pago(Request $request, $id){
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera/');
+        }else{
+            $pago_fuera = public_path() . '/pago_fuera/';
+        }
+
+        $nota = NotasProductosCosmica::findOrFail($id);
+        $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+        if ($request->hasFile("foto_pago")) {
+            $file = $request->file('foto_pago');
+            $path = $pago_fuera;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $nota->foto_pago = $fileName;
+        }
+        $nota->save();
+
+        return redirect()->back()->with('success', 'Se ha actualizada');
+
+    }
+
     public function update_protocolo(Request $request, $id){
 
         $distribuidora = Cosmikausers::find($id);

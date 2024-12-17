@@ -665,6 +665,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::put('bodega/preparacion/update_status/{id}', [App\Http\Controllers\BodegaController::class, 'update_guia_woo'])->name('bodega.update_guia_woo');
     Route::patch('bodega/preparacion/paradisus/{id}', [App\Http\Controllers\BodegaController::class, 'actualizarPedidoParadisus'])->name('actualizar.pedido.paradisus');
 
+    Route::patch('bodega/preparacion/pago/cosmica/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_pago'])->name('notas_cosmica.update_pago');
+    
     Route::get('/admin/productos/stock', [App\Http\Controllers\BodegaPedidosController::class, 'productos_stock'])->name('productos_stock.index');
     Route::post('/admin/productos/guardar-carrito', [App\Http\Controllers\BodegaPedidosController::class, 'guardar'])->name('guardar.carrito');
     Route::get('/admin/productos/stock/show/{id}', [App\Http\Controllers\BodegaPedidosController::class, 'show'])->name('productos_stock.show');
