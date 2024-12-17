@@ -60,13 +60,19 @@
         }
 
         .container_clave_rfc {
-            width: 100%;
+            width: auto;
             position: absolute;
-            top: 57.6%;
+            top: 58.2%;
             left: 70%;
             display: inline-block;
             padding: 0px;
             margin: 0px;
+            background-image: url("https://plataforma.imnasmexico.com/utilidades_documentos/pattern_cedula.png");
+            background-repeat: repeat-x; /* Repetir solo en el eje X */
+            background-size: cover;
+            background-position: center; /* Centrar la imagen horizontalmente */
+            background-size: auto; /* Asegura que la imagen conserve su tamaño original */
+            height: 10px;
         }
 
         .clave_rfc {
@@ -75,14 +81,9 @@
             font-weight: normal;
             letter-spacing: -0.5px;
             font-size: 8px;
-            background-image: url("https://plataforma.imnasmexico.com/utilidades_documentos/pattern_cedula.png");
-            background-repeat: repeat-x; /* Repetir solo en el eje X */
-            background-size: cover;
-            background-position: center; /* Centrar la imagen horizontalmente */
-            background-size: auto; /* Asegura que la imagen conserve su tamaño original */
-            padding: 0px 13px 0px 0px; /* Espacio interno */
+            padding: 0px 6px 0px 0px; /* Espacio interno */
             display: inline-block;
-            margin: 0px;
+            margin: -5px 0px -5px 0px;
         }
 
         .container6{
