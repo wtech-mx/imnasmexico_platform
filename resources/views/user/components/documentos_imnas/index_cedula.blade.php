@@ -73,8 +73,6 @@
 
 @section('css_custom')
 
-
-
 <style>
     .img_portada {
         width: 480px;
@@ -274,8 +272,32 @@
 
     .curso.small-font {
         font-size: 12px;
-        font-size: {{ $tickets?->tam_letra_especialidad_cedula ?? 12 }}px!important;
+        font-size: <?php $tickets?->tam_letra_especialidad_cedula ?? 12 ?>px!important;
     }
+
+        .container_clave_rfc{
+            position: absolute;
+            top: 58%;
+            left: 70%;
+            padding: 0px;
+            margin: 0px;
+            background-image: url("https://plataforma.imnasmexico.com/utilidades_documentos/pattern_cedula.png");
+            background-repeat: repeat-x; /* Repetir solo en el eje X */
+            background-size: cover;
+            background-position: center; /* Centrar la imagen horizontalmente */
+            background-size: auto; /* Asegura que la imagen conserve su tamaño original */
+        }
+
+        .clave_rfc{
+            color: #000;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 0px;
+            margin: 0px;
+            letter-spacing: 0.8px;
+            line-height: 10px;
+        }
+
 
 </style>
 
@@ -405,6 +427,16 @@
              <img src="{{ $basePathDocumentos .'/'. $tickets->User->telefono .'/'.$firma }}" class="img_firma">
         @endif
 
+    </div>
+
+    <div class="container_clave_rfc">
+        <p class="clave_rfc">
+            @if(!isset($tickets->User->clave_clasificacion))
+                RIFC680910-879-0013
+            @else
+                {{ $tickets->User->clave_clasificacion }}
+            @endif
+        </p>
     </div>
 
     <div class="container_CursoReverso">

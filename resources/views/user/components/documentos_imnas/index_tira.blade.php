@@ -328,7 +328,14 @@
                         laboral y las habilidades de los trabajadores. <br><br>
 
                         Registrado ante la Secretaría del Trabajo y Previsión Social el Instituto Mexicano Naturales Ain Spa,
-                        como Agente Capacitador Externo con Número de Registro: <strong style="color:red">RIFC680910-879-0013 </strong><br><br>
+                        como Agente Capacitador Externo con Número de Registro:
+
+                        @if(!isset($tickets->User->clave_clasificacion))
+                        <strong style="color:red">RIFC680910-879-0013 </strong>
+                        @else
+                            <strong style="color:red">{{ $tickets->User->clave_clasificacion }} </strong>
+                        @endif
+                        <br><br>
 
                         A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE REFORMA AL ARTÍCULO SEGUNDO DE
                         LOS ESTATUTOS SOCIALES; y, B.- LA REFORMA AL ARTÍCULO SEXTO DE LOS ESTATUTOS SOCIALES,

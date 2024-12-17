@@ -211,7 +211,6 @@ class FoliosController extends Controller
             $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
         }
 
-
         return view('user.components.documentos_imnas.index_diploma',compact('tickets','tipo_documentos','tickets_externo'));
 
     }

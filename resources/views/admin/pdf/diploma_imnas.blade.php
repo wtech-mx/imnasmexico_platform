@@ -95,7 +95,7 @@
             <?php if($capitalizar == 'Si'): ?>
                 text-transform: uppercase;
             <?php endif; ?>
-    }
+        }
 
         .fecha{
             font-size: 15px;
@@ -318,12 +318,10 @@
 
             @endif
 
-
         <div class="container_marco">
             {{-- <img src="https://plataforma.imnasmexico.com/utilidades_documentos/{{ $fileName_firma }}" class="img_firma"> --}}
             <img src="https://plataforma.imnasmexico.com/tipos_documentos/marco_diploma.png" class="img_marco">
         </div>
-
 
         <div class="container_logo">
             @if(!isset($fileName_logo))
@@ -430,9 +428,9 @@
                         Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exigen los planes de estudios
                         especializado en <br><br>
 
-                    <strong class="curso_sm" style="color: red"> {!!  $curso !!}</strong> <br> <br>
+                        <strong class="curso_sm" style="color: red"> {!!  $curso !!}</strong> <br> <br>
 
-                    Este reconocimiento es INVALIDO si no tiene todas las firmas, sellos y QR's que lo acrediten <br>
+                        Este reconocimiento es INVALIDO si no tiene todas las firmas, sellos y QR's que lo acrediten <br>
 
                     </p>
         </div>
@@ -460,7 +458,6 @@
                 <img src="{{ $basePathUtilidades . $fileName_logo }}" class="img_logo_reversa">
             @endif
         </div>
-
 
     </body>
 </html>

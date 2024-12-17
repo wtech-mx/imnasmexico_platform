@@ -288,6 +288,25 @@
             width: 53px;
         }
 
+        .container_clave_rfc{
+            position: absolute;
+            top: 58%;
+            left: 54.4%;
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .clave_rfc{
+            color: red;
+            font-size: 7px;
+            font-weight: bold;
+            background: #fff;
+            padding: 0px;
+            margin: 0px;
+            letter-spacing: 0.5px;
+            line-height: 7px;
+        }
+
     </style>
 @endsection
 
@@ -405,6 +424,8 @@
             <h4 class="nombre">{{$apellidoMaterno}}</h4>
         </div>
 
+
+
         <div class="qr_container">
             @php
                 echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',3.1,3.1) . '" style="background: #fff; padding: 5px;"   />';
@@ -424,14 +445,23 @@
     </div>
 
     <div class="card-back">
+
+
         <img src="{{ $basePath . '/' . $tipo_documentos->img_reverso }}" class="img_reverso">
+
+        <div class="container_clave_rfc">
+            <p class="clave_rfc">
+                @if(!isset($tickets->User->clave_clasificacion))
+                    RIFC680910-879-0013
+                @else
+                    {{ $tickets->User->clave_clasificacion }}
+                @endif
+            </p>
+        </div>
 
         <div class="container_imgtrasera">
             <p class="curso_atras">
-
                 {{ ucwords(strtolower($cursoNombre)) }}
-
-
             </p>
         </div>
 
