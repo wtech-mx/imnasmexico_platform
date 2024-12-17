@@ -331,6 +331,15 @@ document.addEventListener('DOMContentLoaded', function() {
     var totalInput = document.getElementById('total');
     var descuentoInput = document.getElementById('descuento');
     var totalDescuentoInput = document.getElementById('totalDescuento');
+    var nameInput = document.getElementById('name');
+
+
+        // Validar la entrada en tiempo real
+        nameInput.addEventListener('input', function () {
+            // Eliminar cualquier número ingresado
+            this.value = this.value.replace(/\d/g, '');
+        });
+
 
     $(document).ready(function() {
         $('.producto').select2();
