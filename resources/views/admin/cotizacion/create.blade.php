@@ -76,7 +76,7 @@
                                                             <span class="input-group-text" id="basic-addon1">
                                                                 <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
                                                             </span>
-                                                            <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10">
+                                                            <input type="tel" id="telefono" name="number" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -330,10 +330,26 @@
         var totalInput = document.getElementById('total');
         var descuentoInput = document.getElementById('descuento');
         var totalDescuentoInput = document.getElementById('totalDescuento');
+        var nameInput = document.getElementById('name');
+        var telefonoInput = document.getElementById('telefono');
+
+
+        // Validar la entrada en tiempo real
+        nameInput.addEventListener('input', function () {
+            // Eliminar cualquier número ingresado
+            this.value = this.value.replace(/\d/g, '');
+        });
+
+        telefonoInput.addEventListener('input', function () {
+            // Reemplazar cualquier carácter no numérico
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
 
         $(document).ready(function() {
             $('.cliente').select2();
             $('.producto').select2();
+
+
 
             // Función para asociar eventos al campo de cantidad y descuento
             function asociarEventosCampos(cantidadInput, descuentoInput, productoInput) {
