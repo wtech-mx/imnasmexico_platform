@@ -38,7 +38,7 @@
                             @endif
                         </td>
 
-                        <td>{{$estandar_usuario->Estandar->estandar}}</td>
+                        <td>{{$estandar_usuario->Estandar->nombre}}</td>
                         <td>{{$estandar_usuario->fecha_evaluar}}</td>
                         <td>
                             <a data-bs-toggle="modal" data-bs-target="#exampleModalEstatus{{$estandar_usuario->id}}" class="btn btn-link pe-3 ps-0 mb-0 ms-auto">Editar</a>

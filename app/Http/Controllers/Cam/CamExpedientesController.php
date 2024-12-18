@@ -26,6 +26,7 @@ use App\Models\Cam\CamVideosUser;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Cam\CamVideos;
+use App\Models\CarpetasEstandares;
 
 class CamExpedientesController extends Controller
 {
@@ -55,11 +56,10 @@ class CamExpedientesController extends Controller
         $estandares_usuario = CamNotEstandares::where('id_nota', $id_nota)->where('estatus_renovacion', '=', 'renovo')->get();
         $video = CamVideosUser::where('id_nota', $id_nota)->first();
         $estandares_cam_user = CamNotEstandares::where('id_nota', $id_nota)->where('estatus_renovacion', '=', 'renovo')->where('estatus', '=', 'Entregado')->get();
-        $estandares_cam = CamEstandares::whereNotIn('id', function ($query) use ($id_nota) {
-            $query->select('id_estandar')
-                ->from('cam_notestandares')
-                ->where('id_nota', '=', $id_nota);
-        })->get();
+        $estandares_cam = CarpetasEstandares::where('nombre', 'not like', '%Formulario%')
+        ->where('nombre', 'not like', '%Carta%')
+        ->orderBy('nombre', 'asc')
+        ->get();
         $minis_exps = CamMiniExp::where('id_nota', $id_nota)->get();
         $videos_dinamicos = CamVideos::where('tipo','=',$video->tipo)->orderBy('orden','ASC')->get();
         $pagos_emision = CamPagosEmision::where('id_nota', $id_nota)->get();
@@ -85,11 +85,10 @@ class CamExpedientesController extends Controller
         $video = CamVideosUser::where('id_nota', $id)->first();
         $estandares_cam_user = CamNotEstandares::where('id_nota', $id)->where('estatus_renovacion', '=', 'renovo')->where('estatus', '=', 'Entregado')->get();
 
-        $estandares_cam = CamEstandares::whereNotIn('id', function ($query) use ($id) {
-            $query->select('id_estandar')
-                ->from('cam_notestandares')
-                ->where('id_nota', '=', $id);
-        })->get();
+        $estandares_cam = CarpetasEstandares::where('nombre', 'not like', '%Formulario%')
+        ->where('nombre', 'not like', '%Carta%')
+        ->orderBy('nombre', 'asc')
+        ->get();
 
         $minis_exps = CamMiniExp::where('id_nota', $id)->get();
         $videos_dinamicos = CamVideos::where('tipo','=',$video->tipo)->orderBy('orden','ASC')->get();

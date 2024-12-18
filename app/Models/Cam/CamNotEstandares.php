@@ -17,6 +17,9 @@ class CamNotEstandares extends Model
         'estatus',
         'evaluador',
         'id_usuario',
+        'operables',
+        'ya_contaba',
+        'fecha_evaluar',
     ];
 
     public function Nota(){

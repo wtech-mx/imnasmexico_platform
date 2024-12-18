@@ -16,12 +16,12 @@
                         <div class="row">
                             <div class="col-4">
                                 <div class="form-group">
-                                    <label for="name">Fecha *</label>
+                                    <label for="name">Fecha en que concluyo su tramite</label>
                                     <div class="input-group mb-3">
                                         <span class="input-group-text" id="basic-addon1">
                                             <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
                                         </span>
-                                        <input id="fecha" name="fecha" type="date" class="form-control" value="{{$fecha}}" required>
+                                        <input id="fecha_concluyo" name="fecha_concluyo" type="date" class="form-control">
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +37,7 @@
                                             <option value="">Seleccione una opción</option>
                                             <option value="Evaluador Independiente" {{ old('tipo') == 'Evaluador Independiente' ? 'selected' : '' }}>Evaluador Independiente</option>
                                             <option value="Centro Evaluación" {{ old('tipo') == 'Centro Evaluación' ? 'selected' : '' }}>Centro Evaluación</option>
-                                            <option value="Externo" {{ old('tipo') == 'Externo' ? 'selected' : '' }}>Externo</option>
+                                            <option value="Compra Estandar" {{ old('tipo') == 'Compra Estandar' ? 'selected' : '' }}>Compra Estandar</option>
                                         </select>
                                     </div>
                                 </div>
@@ -314,7 +314,7 @@
                                         <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple" required>
                                             @foreach ($estandares_cam as $estandar_cam)
                                                 <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares', [])) ? 'selected' : '' }}>
-                                                    {{$estandar_cam->estandar}}
+                                                    {{$estandar_cam->nombre}}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -330,7 +330,7 @@
                                         <select name="estandares_operables[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple" required>
                                             @foreach ($estandares_cam as $estandar_cam)
                                                 <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares_operables', [])) ? 'selected' : '' }}>
-                                                    {{$estandar_cam->estandar}}
+                                                    {{$estandar_cam->nombre}}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -346,7 +346,7 @@
                                         <select name="estandares_afines[]" class="form-select d-inline-block js-example-basic-multiple2" style="width: 70%!important;" multiple="multiple" >
                                             @foreach ($estandares_cam as $estandar_cam)
                                                 <option value="{{ $estandar_cam->id }}" {{ in_array($estandar_cam->id, old('estandares_afines', [])) ? 'selected' : '' }}>
-                                                    {{$estandar_cam->estandar}}
+                                                    {{$estandar_cam->nombre}}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -362,6 +362,18 @@
                         <div class="row">
 
                             <h4>Sección de pago</h4>
+
+                            <div class="col-4">
+                                <div class="form-group">
+                                    <label for="name">Fecha del pago*</label>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="basic-addon1">
+                                            <img src="{{ asset('assets/cam/calenda.png') }}" alt="" width="35px">
+                                        </span>
+                                        <input id="fecha_pago" name="fecha_pago" type="date" class="form-control" value="{{$fecha}}" required>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="col-4">
                                 <div class="form-group">
@@ -383,10 +395,6 @@
                                         <span class="input-group-text">.00</span>
                                       </div>
                                 </div>
-                            </div>
-
-                            <div class="col-4">
-
                             </div>
 
                             <div class="col-4">

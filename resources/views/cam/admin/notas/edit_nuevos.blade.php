@@ -112,29 +112,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-12">
-                                <h5>Seleccionar Estándares *</h5>
-                            </div>
-
-                            @php
-                                use App\Models\Cam\CamNotEstandares;
-                                $estandares = CamNotEstandares::join('cam_notas', 'cam_notestandares.id_nota', '=', 'cam_notas.id')
-                                ->where('cam_notas.created_at', '>', '2024-07-30 01:00:00')
-                                ->get();
-                            @endphp
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
-                                        @foreach ($estandares as $estandar_cam)
-                                            <option value="{{ $estandar_cam->id }}" selected>
-                                               {{$estandar_cam->Estandar->nombre}}
-                                            </option>
-                                        @endforeach
-                                    </select>
-
-                                </div>
-                            </div>
-
                         </div>
                     </div>
 

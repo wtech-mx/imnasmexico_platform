@@ -39,13 +39,13 @@ Notas CAM
 
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
-                            </a>
+                            </a>
                             @can('nota-cam-create')
-                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleNuevoModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
+                            <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 Crear
                             </a>
                             @endcan
-                            @include('cam.admin.notas.crear_nuevos')
+                            @include('cam.admin.notas.crear')
                         </div>
                     </div>
 
@@ -57,8 +57,7 @@ Notas CAM
                                             <th>No</th>
                                             <th>Nombre</th>
                                             <th>Tipo</th>
-                                            <th>Metodo Pago</th>
-                                            <th>Fecha</th>
+                                            <th>Fecha pago</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -72,13 +71,13 @@ Notas CAM
                                                     <a href="{{ route('expediente.edit_centro', $nota_cam->id) }}" style="text-decoration: underline;color:blue">
                                                         {{$nota_cam->Cliente->name}}
                                                     </a>
-
+                                                    <br>{{$nota_cam->Cliente->telefono}}
                                                     @else
 
                                                     <a href="{{ route('expediente.edit', $nota_cam->id) }}" style="text-decoration: underline;color:blue">
                                                         {{$nota_cam->Cliente->name}}
                                                     </a>
-
+                                                    <br>{{$nota_cam->Cliente->telefono}}
                                                     @endif
 
                                                 <td>
@@ -89,14 +88,8 @@ Notas CAM
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    {{$nota_cam->metodo_pago}}
-                                                    @if ($nota_cam->metodo_pago2 != NULL)
-                                                        - {{$nota_cam->metodo_pago2}}
-                                                    @endif
-                                                </td>
-                                                <td>
                                                     @php
-                                                        $fecha = $nota_cam->fecha;
+                                                        $fecha = $nota_cam->fecha_pago;
                                                         // Convertir a una marca de tiempo Unix
                                                         $timestamp = strtotime($fecha);
                                                         // Formatear la fecha
@@ -104,7 +97,12 @@ Notas CAM
                                                         // Combinar fecha y hora
                                                         $fecha_hora_formateada = $fecha_formateada;
                                                     @endphp
-                                                    {{ $fecha_hora_formateada}}
+                                                    @if ($nota_cam->fecha_pago == NULL)
+                                                        <b>Sin fecha</b>
+                                                    @else
+                                                        {{ $fecha_hora_formateada}}
+                                                    @endif
+
                                                 </td>
                                                 <td>
                                                     <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#EditexampleModal{{$nota_cam->id}}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
@@ -134,6 +132,12 @@ Notas CAM
 
     $(document).ready(function() {
         $('.js-example-basic-multiple2').select2();
+    });
+
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+        deferRender:true,
+        paging: true,
+        pageLength: 10
     });
 </script>
 

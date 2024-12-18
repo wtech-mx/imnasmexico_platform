@@ -57,11 +57,11 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ (Request::is('estandares/index') ? 'active' : '') }}" href="{{ route('index.estandares') }}">
-                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                    <i class="fa fa-ticket text-sm opacity-10" style="color:#6EC1E4"></i>
-                </div>
-                <span class="nav-link-text ms-1">Estandares</span>
+                <a class="nav-link {{ (Request::is('/admin/carpetas/estandares*') ? 'active' : '') }}" href="{{ route('carpetas_estandares.index') }}">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-school text-sm opacity-10" style="color: #6EC1E4"></i>
+                    </div>
+                    <span class="sidenav-normal">Carpeta Estandares</span>
                 </a>
             </li>
 
@@ -370,7 +370,6 @@
                     </div>
                 </li>
             @endcan
-
 
             @can('certificacion-webinar')
                 <li class="nav-item">

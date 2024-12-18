@@ -72,7 +72,7 @@
                                         </span>
                                         <select name="estandares" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" required>
                                             @foreach ($estandares_cam_user as $estandar_cam)
-                                                <option value="{{$estandar_cam->id_estandar}}">{{$estandar_cam->Estandar->estandar}}</option>
+                                                <option value="{{$estandar_cam->id_estandar}}">{{$estandar_cam->Estandar->nombre}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -178,7 +178,7 @@
                                             </span>
                                             <select name="estandares[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
                                                 @foreach ($estandares_cam as $estandar_cam)
-                                                    <option value="{{$estandar_cam->id}}">{{$estandar_cam->estandar}}</option>
+                                                    <option value="{{$estandar_cam->id}}">{{$estandar_cam->nombre}}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -327,7 +327,7 @@
                                             </span>
                                             <select name="estandares_renovacion[]" class="form-select d-inline-block js-example-basic-multiple" style="width: 70%!important;" multiple="multiple">
                                                 @foreach ($estandares_cam_reno as $estandar_cam)
-                                                    <option value="{{$estandar_cam->id}}">{{$estandar_cam->Estandar->estandar}}</option>
+                                                    <option value="{{$estandar_cam->id}}">{{$estandar_cam->Estandar->nombre}}</option>
                                                 @endforeach
                                             </select>
                                         </div>

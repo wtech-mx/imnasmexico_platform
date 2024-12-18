@@ -150,8 +150,10 @@ class NotasCamController extends Controller
         $notas_cam = new CamNotas;
         $notas_cam->id_cliente = $payer->id;
         $notas_cam->tipo = $request->get('tipo');
-        $notas_cam->fecha = $request->get('fecha');
+        $notas_cam->fecha = date('Y-m-d');
         $notas_cam->membresia = $request->get('membresia');
+        $notas_cam->fecha_concluyo = $request->get('fecha_concluyo');
+        $notas_cam->fecha_pago = $request->get('fecha_pago');
         $notas_cam->id_usuario = auth()->user()->id;
         $notas_cam->save();
 
@@ -168,6 +170,38 @@ class NotasCamController extends Controller
             $insert_data[] = $data;
         }
         CamNotEstandares::insert($insert_data);
+
+        $estandares_operables = $request->input('estandares_operables');
+
+        for ($count = 0; $count < count($estandares_operables); $count++) {
+            $data2 = array(
+                'id_nota' => $notas_cam->id,
+                'id_estandar' => $estandares_operables[$count],
+                'estatus' => 'Sin estatus',
+                'estatus_renovacion' => 'renovo',
+                'operables' => '1',
+                'id_usuario' => auth()->user()->id,
+            );
+            $insert_data2[] = $data2;
+        }
+        CamNotEstandares::insert($insert_data2);
+
+        $estandares_afines = $request->input('estandares_afines');
+
+        if($estandares_afines){
+            for ($count = 0; $count < count($estandares_afines); $count++) {
+                $data3 = array(
+                    'id_nota' => $notas_cam->id,
+                    'id_estandar' => $estandares_afines[$count],
+                    'estatus' => 'Entregado',
+                    'estatus_renovacion' => 'renovo',
+                    'ya_contaba' => '1',
+                    'id_usuario' => auth()->user()->id,
+                );
+                $insert_data3[] = $data3;
+            }
+            CamNotEstandares::insert($insert_data3);
+        }
 
         $checklist = new CamChecklist;
         $checklist->id_nota = $notas_cam->id;

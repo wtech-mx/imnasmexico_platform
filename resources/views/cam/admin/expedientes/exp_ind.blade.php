@@ -6,7 +6,7 @@ Expediente {{$expediente->id}}
 
 @section('content')
 @php
-$fecha = $expediente->Nota->fecha; // Suponiendo que $fecha es una cadena en formato 'Y-m-d'
+$fecha = $expediente->Nota->fecha_concluyo; // Suponiendo que $fecha es una cadena en formato 'Y-m-d'
 
 // Crear un objeto DateTime desde la cadena de fecha
 $fechaObj = new DateTime($fecha);
