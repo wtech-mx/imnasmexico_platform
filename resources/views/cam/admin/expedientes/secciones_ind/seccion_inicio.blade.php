@@ -82,6 +82,16 @@
                         </div>
 
                         <div class="form-group">
+                            <h6 for="name" >Fecha inicio operaciones</h6>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets\user\icons\calendario.png') }}" alt="" width="35px">
+                                </span>
+                                <input id="fecha_concluyo" name="fecha_concluyo" class="form-control" type="date" value="{{ $expediente->Nota->fecha_concluyo }}">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-sm mt-2" style="background: #6EC1E4; color: #ffff;">Guardar</button>
                             </div>

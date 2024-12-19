@@ -121,8 +121,11 @@ class CamExpedientesController extends Controller
         $user->contrasena_eva = $request->get('contrasena_eva');
         $user->costo_emi = $request->get('costo_emi');
         $user->nomb_centro = $request->get('nomb_centro');
-
         $user->update();
+
+        $estandar = CamNotas::where('id_cliente', '=', $id)->first();
+        $estandar->fecha_concluyo = $request->get('fecha_concluyo');
+        $estandar->update();
 
         return redirect()->back()->with('success', 'Datos actualizados exitosamente');
     }
