@@ -34,7 +34,7 @@
             .image-fit {
                 width: 100%;
                 height: 100%;
-                object-fit: cover; /* Hace que la imagen ocupe todo el contenedor y mantenga su proporción */
+                object-fit: contain; /* Hace que la imagen ocupe todo el contenedor y mantenga su proporción */
             }
 
         </style>

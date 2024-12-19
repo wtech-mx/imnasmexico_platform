@@ -249,7 +249,7 @@
         .then(response => response.json())
         .then(data => {
             if (data.access_token) {
-                alert('Token actualizado: ' + data.access_token + 'Token  exitosamente: ' + data.autorizacion);
+                alert('Token actualizado: ' + data.access_token + '/ AUTH  actualizado: ' + data.autorizacion);
                 location.reload(); // Recargar la página después de actualizar el token
             } else {
                 alert('Error al actualizar el token: ' + (data.message || 'Desconocido'));
