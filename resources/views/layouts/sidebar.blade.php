@@ -1,94 +1,4 @@
 
-@can('menu-cam')
-
-    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
-        <div class="sidenav-header mt-4">
-            <a class="nav-link active" id="pills-imnas-tab" data-bs-toggle="pill" data-bs-target="#pills-imnas" type="button" role="tab" aria-controls="pills-imnas" aria-selected="true">
-                <img src="{{asset('assets/user/logotipos/cam.png')}}" class="navbar-brand-img h-100" alt="main_logo">
-            </a>
-        </div>
-
-        <hr class="horizontal dark mt-0">
-        <ul class="navbar-nav">
-
-            <li class="nav-item">
-                <a class="nav-link {{ (Request::is('dashboard*') ? 'active' : '') }}" href="{{ route('dashboard') }}" target="">
-                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-home text-sm opacity-10" style="color: #6EC1E4"></i>
-                    </div>
-                    <span class="nav-link-text ms-1">Inicio</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#pagesExamplesCurso" class="nav-link {{ (Request::is('admin/cursos*') ? 'active' : '') }}" aria-controls="pagesExamplesCurso" role="button" aria-expanded="false">
-                <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-                    <i class="fa fa-graduation-cap text-sm opacity-10" style="color:#6EC1E4"></i>
-                </div>
-                <span class="nav-link-text ms-1">Expedientes</span>
-                </a>
-                <div class="collapse " id="pagesExamplesCurso">
-                <ul class="nav ms-4">
-                    <li class="nav-item ">
-                    @can('nota-cam-create')
-                        <a class="nav-link {{ (Request::is('/cam/expedientes*') ? 'show' : '') }}" href="{{ route('independiente.index') }}">
-                            <span class="sidenav-mini-icon"> P </span>
-                            <span class="sidenav-normal">Evaluador Independiente</span>
-                        </a>
-
-                        <a class="nav-link {{ (Request::is('/admin/cursos/dia*') ? 'show' : '') }}" href="{{ route('centro.index') }}">
-                            <span class="sidenav-mini-icon"> P </span>
-                            <span class="sidenav-normal">Centro de Evaluación</span>
-                        </a>
-                    @endcan
-
-                    </li>
-                </ul>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ (Request::is('notas/index') ? 'active' : '') }}" href="{{ route('index.notas') }}">
-                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                    <i class="fa fa-ticket text-sm opacity-10" style="color:#6EC1E4"></i>
-                </div>
-                <span class="nav-link-text ms-1">Nota</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ (Request::is('/admin/carpetas/estandares*') ? 'active' : '') }}" href="{{ route('carpetas_estandares.index') }}">
-                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-school text-sm opacity-10" style="color: #6EC1E4"></i>
-                    </div>
-                    <span class="sidenav-normal">Carpeta Estandares</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ (Request::is('documentos/index') ? 'active' : '') }}" href="{{ route('index.documentos') }}">
-                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                    <i class="fa fa-ticket text-sm opacity-10" style="color:#6EC1E4"></i>
-                </div>
-                <span class="nav-link-text ms-1">Documentos</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link {{ (Request::is('admin/videos_cam') ? 'active' : '') }}" href="{{ route('videos_cam.index') }}">
-                <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
-                    <i class="fa fa-ticket text-sm opacity-10" style="color:#6EC1E4"></i>
-                </div>
-                <span class="nav-link-text ms-1">Videos</span>
-                </a>
-            </li>
-
-        </ul>
-
-    </aside>
-
-@endcan
-
 @can('menu-cursos')
     <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
         <div class="sidenav-header mt-4">
@@ -826,6 +736,84 @@
                 <span class="nav-link-text ms-1">Token</span>
                 </a>
             </li>
+
+            @can('menu-cam')
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">CONOCER</h6>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ (Request::is('dashboard*') ? 'active' : '') }}" href="{{ route('dashboard') }}" target="">
+                        <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-home text-sm opacity-10" style="color: #6EC1E4"></i>
+                        </div>
+                        <span class="nav-link-text ms-1">Inicio</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a data-bs-toggle="collapse" href="#pagesExamplesCurso" class="nav-link {{ (Request::is('admin/cursos*') ? 'active' : '') }}" aria-controls="pagesExamplesCurso" role="button" aria-expanded="false">
+                    <div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+                        <i class="fa fa-graduation-cap text-sm opacity-10" style="color:#6EC1E4"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Expedientes</span>
+                    </a>
+                    <div class="collapse " id="pagesExamplesCurso">
+                    <ul class="nav ms-4">
+                        <li class="nav-item ">
+                        @can('nota-cam-create')
+                            <a class="nav-link {{ (Request::is('/cam/expedientes*') ? 'show' : '') }}" href="{{ route('independiente.index') }}">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal">Evaluador Independiente</span>
+                            </a>
+
+                            <a class="nav-link {{ (Request::is('/admin/cursos/dia*') ? 'show' : '') }}" href="{{ route('centro.index') }}">
+                                <span class="sidenav-mini-icon"> P </span>
+                                <span class="sidenav-normal">Centro de Evaluación</span>
+                            </a>
+                        @endcan
+
+                        </li>
+                    </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ (Request::is('notas/index') ? 'active' : '') }}" href="{{ route('index.notas') }}">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-ticket text-sm opacity-10" style="color:#6EC1E4"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Nota</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ (Request::is('/admin/carpetas/estandares*') ? 'active' : '') }}" href="{{ route('carpetas_estandares.index') }}">
+                        <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                            <i class="fa fa-school text-sm opacity-10" style="color: #6EC1E4"></i>
+                        </div>
+                        <span class="sidenav-normal">Carpeta Estandares</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ (Request::is('documentos/index') ? 'active' : '') }}" href="{{ route('index.documentos') }}">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-ticket text-sm opacity-10" style="color:#6EC1E4"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Documentos</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ (Request::is('admin/videos_cam') ? 'active' : '') }}" href="{{ route('videos_cam.index') }}">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-ticket text-sm opacity-10" style="color:#6EC1E4"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Videos</span>
+                    </a>
+                </li>
+            @endcan
 
             @can('pagina-menu')
                 <li class="nav-item mt-3">

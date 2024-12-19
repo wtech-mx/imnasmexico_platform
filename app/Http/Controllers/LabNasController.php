@@ -163,8 +163,8 @@ class LabNasController extends Controller
         $envases_productos = EnvasesProductos::get();
 
         $pdf = \PDF::loadView('admin.laboratorio_nas.pdf_vencer', compact('envases_vencer', 'today', 'envases_productos'));
-        return $pdf->stream();
-        // return $pdf->download('Envases bajo stock / '.$today.'.pdf');
+       //  return $pdf->stream();
+        return $pdf->download('Envases bajo stock nas / '.$today.'.pdf');
     }
 
     public function pdf_reporte(Request $request){
@@ -185,7 +185,7 @@ class LabNasController extends Controller
 
         $pdf = \PDF::loadView('admin.laboratorio_nas.pdf_reporte', compact('historial', 'today', 'envases_productos', 'fechaFormateada', 'historial_granel'));
         //return $pdf->stream();
-         return $pdf->download('Envases bajo stock / '.$today.'.pdf');
+         return $pdf->download('Reporte envases y granel nas / '.$today.'.pdf');
     }
     // =============== C O N T E O  G R A N E L ===============================
     public function index_granel(Request $request){
@@ -253,7 +253,7 @@ class LabNasController extends Controller
 
         $pdf = \PDF::loadView('admin.laboratorio_nas.granel.pdf_granel', compact('bajo_granel', 'today', 'medio_granel'));
         // return $pdf->stream();
-        return $pdf->download('Granel bajo stock / '.$today.'.pdf');
+        return $pdf->download('Granel bajo stock nas / '.$today.'.pdf');
     }
     // =============== C O N T E O  E T I Q U E T A S ===============================
     public function index_etiqueta(Request $request){
@@ -348,8 +348,8 @@ class LabNasController extends Controller
         $etiqueta_reversa = Products::where('etiqueta_reversa','<=', 200)->where('estatus_reversa','=', '1')->get();
 
         $pdf = \PDF::loadView('admin.laboratorio_nas.etiqueta.pdf_etiquetas', compact('etiqueta_lateral', 'etiqueta_tapa', 'etiqueta_frente', 'etiqueta_reversa', 'today'));
-        return $pdf->stream();
-         //return $pdf->download('Envases bajo stock / '.$today.'.pdf');
+        //return $pdf->stream();
+         return $pdf->download('Etiquetas bajo stock nas / '.$today.'.pdf');
     }
 
     public function pdf_etiquetas_reporte(Request $request){
@@ -366,7 +366,7 @@ class LabNasController extends Controller
             ->get();
 
         $pdf = \PDF::loadView('admin.laboratorio_nas.etiqueta.pdf_reporte', compact('today', 'historial_etiqueta', 'fechaFormateada'));
-        return $pdf->stream();
-        //return $pdf->download('Envases bajo stock / '.$today.'.pdf');
+        //return $pdf->stream();
+        return $pdf->download('Reporte etiquetas nas / '.$today.'.pdf');
     }
 }

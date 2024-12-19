@@ -28,7 +28,7 @@ class NotasCamController extends Controller
 
         $estandar_user = CamNotEstandares::get();
 
-        $notas_cam = CamNotas::get();
+        $notas_cam = CamNotas::where('tipo', '!=', 'Compra Estandar')->get();
 
         $ultimaNota = CamNotas::latest('id')->first();
         $ultimoId = $ultimaNota ? $ultimaNota->id : 0;

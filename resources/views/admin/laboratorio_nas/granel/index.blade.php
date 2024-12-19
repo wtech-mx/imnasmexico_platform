@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-Conteo a Granel Cosmica
+Conteo a Granel NAS
 @endsection
 @section('css')
     <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@ Conteo a Granel Cosmica
                         </span>
                     </a>
 
-                    <h3 class="mb-3">Conteo a Granel Cosmica</h3>
+                    <h3 class="mb-3">Conteo a Granel NAS</h3>
 
                     <p></p>
                 </div>

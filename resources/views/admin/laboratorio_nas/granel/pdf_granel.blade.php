@@ -14,7 +14,7 @@
             top: -160px;
             right: 0px;
             height: 100px;
-            background-color: #322338;
+            background-color: #836262;
             color: #fff;
             text-align: center;
         }
@@ -30,7 +30,7 @@
             bottom: -50px;
             right: 0px;
             height: 40px;
-            border-bottom: 2px solid #322338;
+            border-bottom: 2px solid #836262;
         }
         footer .page:after {
             content: counter(page);
@@ -62,7 +62,7 @@
   <header>
     <h1>Granel bajo stock
     </h1>
-    <h2>Laboratorio
+    <h2>Laboratorio NAS
     </h2>
   </header>
 
@@ -85,7 +85,7 @@
 
   <div id="content" style="margin-top: 3rem">
     <table class="table table-bordered border-primary">
-        <thead style="background-color: #322338; color: #fff">
+        <thead style="background-color: #836262; color: #fff">
             <tr>
                 <th>Nombre</th>
                 <th>Stock</th>

@@ -103,8 +103,8 @@
                                                     <th>Nombre</th>
                                                     <th>Metodo de Pago</th>
                                                     <th>Abono</th>
-                                                    <th>Documentacion</th>
                                                     <th>Deudor</th>
+                                                    <th>Documentacion</th>
                                                     <th>Nota</th>
                                                     <th>Acciones</th>
                                                 </tr>
@@ -122,8 +122,21 @@
                                                                     <p>{{ $order->User->telefono }}</p>
                                                                     <p>{{ $order->User->email }}</p>
                                                                 </td>
-                                                                <td>{{ $order->Orders->forma_pago }}</td>
-                                                                <td>${{ $order->Orders->pago }}</td>
+                                                                <td>{{ $order->Orders->forma_pago }} <br> Subido por: <br>
+                                                                    @if ($order->Orders->id_externo != NULL)
+                                                                    <b>{{ $order->Orders->PagosFuera->usuario }}</b>
+                                                                    @elseif ($order->Orders->id_admin != NULL)
+                                                                    <b>{{ $order->Orders->Admin->name }}</b>
+                                                                    @else
+                                                                    <b>Pago por pagina</b>
+                                                                    @endif
+                                                                </td>
+                                                                <td>${{ $order->Orders->pago }}<br> Fecha del pago:<br>
+                                                                   <b> {{ $order->Orders->fecha }}</b>
+                                                                </td>
+                                                                <td>
+
+                                                                </td>
                                                                 <td>
                                                                     @if ($ticket->descripcion == 'Con opción a Documentos de certificadora IMNAS')
                                                                         IMNAS
@@ -146,9 +159,6 @@
                                                                             UNAM
                                                                         @endif
                                                                     @endif
-                                                                </td>
-                                                                <td>
-
                                                                 </td>
                                                                 <td>
                                                                     @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
@@ -214,11 +224,19 @@
                                                                     <p>{{ $order->User->telefono }}</p>
                                                                     <p>{{ $order->User->email }}</p>
                                                                 </td>
-                                                                <td>{{ $order->Orders->forma_pago }}</td>
-                                                                <td>
-                                                                        ${{ $order->Orders->pago }}
+                                                                <td>{{ $order->Orders->forma_pago }} <br> Subido por: <br>
+                                                                    @if ($order->Orders->id_externo != NULL)
+                                                                    <b>{{ $order->Orders->PagosFuera->usuario }}</b>
+                                                                    @elseif ($order->Orders->id_admin != NULL)
+                                                                    <b>{{ $order->Orders->Admin->name }}</b>
+                                                                    @else
+                                                                    <b>Pago por pagina</b>
+                                                                    @endif
                                                                 </td>
-                                                                <td>STPS</td>
+                                                                <td>
+                                                                        ${{ $order->Orders->pago }}<br> Fecha del pago:<br>
+                                                                        <b> {{ $order->Orders->fecha }}</b>
+                                                                </td>
                                                                 <td>
                                                                     @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
                                                                         @else
@@ -232,6 +250,7 @@
                                                                         @endif
                                                                     @endif
                                                                 </td>
+                                                                <td>STPS</td>
                                                                 <td>
                                                                     @if ($order->Orders->id_externo == 0 || $order->Orders->id_externo == null)
                                                                         @else

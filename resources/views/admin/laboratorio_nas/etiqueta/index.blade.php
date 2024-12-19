@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-Conteo de Etiquetas Cosmica
+Conteo de Etiquetas NAS
 @endsection
 @section('css')
     <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
@@ -23,7 +23,7 @@ Conteo de Etiquetas Cosmica
                         </span>
                     </a>
 
-                    <h3 class="mb-3">Conteo de Etiquetas Cosmica</h3>
+                    <h3 class="mb-3">Conteo de Etiquetas NAS</h3>
 
                     <a class="btn btn-warning" href="{{ route('reporte_etiquetas.pdf') }}" target="_blank">Imprimir reporte</a>
                 </div>

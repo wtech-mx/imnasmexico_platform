@@ -14,7 +14,7 @@
             top: -160px;
             right: 0px;
             height: 100px;
-            background-color: #322338;
+            background-color: #836262;
             color: #fff;
             text-align: center;
         }
@@ -30,7 +30,7 @@
             bottom: -50px;
             right: 0px;
             height: 40px;
-            border-bottom: 2px solid #322338;
+            border-bottom: 2px solid #836262;
         }
         footer .page:after {
             content: counter(page);
@@ -60,7 +60,7 @@
   </style>
 <body>
   <header>
-    <h1>Reporte Diario Laboratorio
+    <h1>Reporte Diario Laboratorio NAS
     </h1>
     <h2>{{ $fechaFormateada  }}
     </h2>

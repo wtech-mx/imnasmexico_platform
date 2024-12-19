@@ -242,7 +242,7 @@ class NotasCursosController extends Controller
                                 $pdf->setPaper('A4', 'portrait');
                                 $contenidoPDF = $pdf->output();
 
-                                Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                               Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
                             }
                         }
 
@@ -283,7 +283,7 @@ class NotasCursosController extends Controller
                         $pdf = PDF::loadView('admin.pdf.diploma_stps',compact('curso','fecha','tipo_documentos','nombre','duracion_hrs','sello'));
                         $pdf->setPaper('A4', 'portrait');
                         $contenidoPDF = $pdf->output(); // Obtiene el contenido del PDF como una cadena.
-                        Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
+                       Mail::to($destinatario)->send(new PlantillaDocumentoStps($contenidoPDF, $datos));
 
                     }
                 }

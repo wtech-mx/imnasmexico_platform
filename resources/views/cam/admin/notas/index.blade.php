@@ -40,11 +40,9 @@ Notas CAM
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
                             </a>
-                            @can('nota-cam-create')
                             <a type="button" class="btn bg-gradient-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
                                 Crear
                             </a>
-                            @endcan
                             @include('cam.admin.notas.crear')
                         </div>
                     </div>
@@ -66,6 +64,7 @@ Notas CAM
                                             <tr>
                                                 <td>{{$nota_cam->id}}</td>
                                                 <td>
+                                                    <p class="mb-0"><b>{{ $nota_cam->Cliente->nomb_centro }}</b></p>
                                                     @if ($nota_cam->tipo == 'Centro Evaluación')
 
                                                     <a href="{{ route('expediente.edit_centro', $nota_cam->id) }}" style="text-decoration: underline;color:blue">
@@ -79,6 +78,8 @@ Notas CAM
                                                     </a>
                                                     <br>{{$nota_cam->Cliente->telefono}}
                                                     @endif
+
+
 
                                                 <td>
                                                     @if ($nota_cam->tipo == 'Centro Evaluación')

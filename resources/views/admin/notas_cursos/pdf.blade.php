@@ -154,6 +154,14 @@
                     <td>${{ $nota->total_iva }}</td>
                 @endif
             </tr>
+            @if ($nota->descuento != NULL)
+                <tr style="background-color: #ffffff;">
+                    <td></td>
+                    <td></td>
+                    <td style="text-align: right"><b>Descuento</b> </td>
+                    <td>${{ $nota->descuento }}%</td>
+                </tr>
+            @endif
             <tr style="background-color: #ffffff;">
                 <td></td>
                 <td></td>
@@ -189,7 +197,7 @@
     @endif
 
 
-    <table style="width:100%" style="background: #a17576;margin-top:6rem;">
+    {{-- <table style="width:100%" style="background: #a17576;margin-top:6rem;">
         <tr style="background: #a17576">
           <th></th>
           <th></th>
@@ -219,13 +227,13 @@
                 Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México
             </p>
 
-<p style="text-align: center;"><span style="color: #f5f5f5;"><span style="font-size: 12px;"> </span></span></p>
-<p style="text-align: center;"><span style="color: #f5f5f5;"><span style="font-size: 12px;">Si tiene alguna pregunta, envíe un correo electrónico a imnascenter@naturalesainspa.com</span></span></p>
+            <p style="text-align: center;"><span style="color: #f5f5f5;"><span style="font-size: 12px;"> </span></span></p>
+            <p style="text-align: center;"><span style="color: #f5f5f5;"><span style="font-size: 12px;">Si tiene alguna pregunta, envíe un correo electrónico a imnascenter@naturalesainspa.com</span></span></p>
           </td>
           <td></td>
         </tr>
 
-      </table>
+      </table> --}}
 
   </div>
 </body>
