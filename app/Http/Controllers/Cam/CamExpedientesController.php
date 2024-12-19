@@ -81,7 +81,7 @@ class CamExpedientesController extends Controller
         $expediente = CamCitas::where('id_nota', $id)->first();
         $documentos = CamDocumentosUsers::where('id_nota', $id)->firstOrFail();
         $check = CamChecklist::where('id_nota', $id)->firstOrFail();
-        $estandares_usuario = CamNotEstandares::where('id_nota', $id)->where('estatus_renovacion', '=', 'renovo')->where('id_mini_exp', '=', NULL)->get();
+        $estandares_usuario = CamNotEstandares::has('Estandar')->where('id_nota', $id)->where('estatus_renovacion', '=', 'renovo')->where('id_mini_exp', '=', NULL)->get();
         $video = CamVideosUser::where('id_nota', $id)->first();
         $estandares_cam_user = CamNotEstandares::where('id_nota', $id)->where('estatus_renovacion', '=', 'renovo')->where('estatus', '=', 'Entregado')->get();
 
@@ -96,7 +96,7 @@ class CamExpedientesController extends Controller
         $pagos_estandar = CamPagosEstandar::where('id_nota', $id)->get();
         $pagos_renovacion = CamPagosRenovacion::where('id_nota', $id)->get();
         $estandares_cam_comprados = CamNotEstandares::where('id_nota', $id)->where('estatus_renovacion', '=', 'renovo')->get();
-        $estandares_cam_reno = CamNotEstandares::where('id_nota', $id)->get();
+        $estandares_cam_reno = CamNotEstandares::has('Estandar')->where('id_nota', $id)->get();
         $estandares_renovacion = CamRenoEstandares::where('id_nota', $id)->get();
 
         return view('cam.admin.expedientes.exp_centro', compact('estandares_renovacion','estandares_cam_reno','estandares_cam_comprados','pagos_renovacion','pagos_emision', 'pagos_estandar','videos_dinamicos','expediente', 'estandares_usuario', 'estandares_cam_user','documentos', 'check', 'video', 'estandares_cam', 'minis_exps'));
