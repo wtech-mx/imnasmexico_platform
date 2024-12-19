@@ -158,6 +158,10 @@
 
                                                     </td>
                                                     <td>
+                                                        <a class="btn btn-xs" target="_blank"  href="{{ route('cotizacion_cosmica.meli_show', $item->id) }}"  style="background: #FFE600; color: #ffff">
+                                                            <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="" style="width: 35px">
+                                                        </a>
+
                                                         <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('cotizacion_cosmica.imprimir', ['id' => $item->id]) }}">
                                                             <i class="fa fa-file"></i>
                                                         </a>
@@ -180,6 +184,8 @@
                                                                 <i class="fa fa-fw fa-edit"></i>
                                                             </a>
                                                         @endcan
+
+
                                                     </td>
                                                 </tr>
                                                 @include('admin.cotizacion_cosmica.modal_estatus')
@@ -190,8 +196,6 @@
                                 </div>
 
                                 <div class="tab-pane fade" id="nav-Aprobada" role="tabpanel" aria-labelledby="nav-Aprobada-tab" tabindex="0">
-
-
                                     <table class="table table-flush" id="datatable-search2">
                                         <thead class="thead">
                                             <tr>
@@ -303,7 +307,6 @@
                                             @endforeach
                                         </tbody>
                                     </table>
-
                                 </div>
 
                                 <div class="tab-pane fade" id="nav-Cancelada" role="tabpanel" aria-labelledby="nav-Cancelada-tab" tabindex="0">
