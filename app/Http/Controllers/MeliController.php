@@ -314,7 +314,6 @@ class MeliController extends Controller
 
     public function meli_show($id)
     {
-        $NotasProductosCosmica = $id;
         // Obtener los datos existentes
         $cotizacion = NotasProductosCosmica::find($id);
         $cotizacion_productos = ProductosNotasCosmica::where('id_notas_productos', '=', $id)
@@ -324,15 +323,19 @@ class MeliController extends Controller
             ->orderBy('nombre', 'ASC')
             ->get();
 
+        $NotasProductosCosmica = $cotizacion->folio;
         // Construir el título con los nombres de los productos si no existe item_title_meli
-        $productNames = '';
         if (is_null($cotizacion->item_title_meli)) {
+            $productNames = '';
+
             $productosDetalle = [];
             foreach ($cotizacion_productos as $producto) {
                 $productosDetalle[] = $producto->producto; // Extraer el nombre de cada producto
             }
             // $productNames = 'Kit ' . implode(' + ', $productosDetalle).' #'. $NotasProductosCosmica; // Agregar 'Kit' al inicio y concatenar con ' + '
 
+            $productNames = 'Kit de productos cosmica #'. $NotasProductosCosmica; // Agregar 'Kit' al inicio y concatenar con ' + '
+        }else{
             $productNames = 'Kit de productos cosmica #'. $NotasProductosCosmica; // Agregar 'Kit' al inicio y concatenar con ' + '
         }
 

@@ -24,6 +24,7 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-12 mt-2">
+                                        <h4>Folio # {{ $cotizacion->folio  }}</h4>
                                         <h5 style="color:#783E5D"><strong>Datos del cliente</strong> </h5>
                                     </div>
                                     <input id="id_cliente" name="id_cliente" type="hidden" class="form-control" value="{{ $cotizacion->id_usuario }}" >
