@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Meli Cotizacion
+    Meli Cotizacion Post
 @endsection
 
 @section('css')
@@ -164,18 +164,49 @@
                                         <p style="color:#783E5D">Vamos a crear y publicar esta cotizacion en Meli</p>
                                     </div>
 
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-12">
                                         <label for="name">Titulo de la publicacion *</label>
                                         <div class="input-group mb-1">
                                             <span class="input-group-text" id="basic-addon1">
                                                 <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="25px">
                                             </span>
-                                            <input id="title" name="title" type="text" class="form-control" >
-
+                                            <input id="title" name="title" type="text" class="form-control" value="{{ $cotizacion->item_title_meli ?? $productNames }}">
+                                            {{-- <input id="title" name="title" type="text" class="form-control" value="{{ $productNames }}"> --}}
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-6">
+                                    <div class="form-group col-3">
+                                        <label for="name">ID ITEM MELI</label>
+                                        <div class="input-group mb-1">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <img src="https://http2.mlstatic.com/frontend-assets/ml-web-navigation/ui-navigation/6.6.92/mercadolibre/logo_large_25years_v2.png" alt="" width="45px">
+                                            </span>
+                                            <input id="" name="" type="text" class="form-control" value="{{ $cotizacion->item_id_meli }}" disabled>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-7 my-auto">
+                                        <p for="name"> <strong>Link de Mercado Libre</strong> <br>
+                                            <a href="{{ $cotizacion->item_descripcion_permalink }}" target="_blank" rel="noopener noreferrer">
+                                                {{ $cotizacion->item_descripcion_permalink }}
+                                            </a>
+                                        </p>
+                                    </div>
+
+                                    <div class="form-group col-2 my-auto">
+                                        @if (!empty($cotizacion->item_descripcion_permalink) && !empty($cotizacion->telefono) && !empty($cotizacion->nombre))
+                                            <a href="https://wa.me/{{ $cotizacion->telefono }}?text={{ urlencode('Hola ' . $cotizacion->nombre . '! Este es el link de tu compra de Mercado Libre de tu cotización. Puedes comprar en el siguiente enlace: ') }}{{ urlencode($cotizacion->item_descripcion_permalink) }}"
+                                            target="_blank"
+                                            class="btn btn-sm btn-success">
+                                                Enviar WhatsApp
+                                            </a>
+                                        @else
+                                            <p>No publicado en MELI</p>
+                                        @endif
+                                    </div>
+
+
+                                    {{-- <div class="form-group col-6">
                                         <label for="categoria">Categoría *</label>
                                         <select class="form-select categoria d-inline-block" id="category_id" name="category_id">
                                             <option value="">Seleccionar Categoría</option>
@@ -183,12 +214,12 @@
                                                 <option value="{{ $category['id'] }}">{{ $category['name'] }}</option>
                                             @endforeach
                                         </select>
-                                    </div>
+                                    </div> --}}
 
 
                                     <div class="form-group col-12">
                                         <label for="" class="form-label">Descripcion</label>
-                                        <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                                        <textarea class="form-control" id="description" name="description" rows="9">{{ $cotizacion->item_descripcion_meli }}</textarea>
                                       </div>
 
                                 </div>

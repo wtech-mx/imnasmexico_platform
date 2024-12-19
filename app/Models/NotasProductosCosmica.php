@@ -42,6 +42,11 @@ class NotasProductosCosmica extends Model
         'folio',
         'estatus_cotizacion',
         'estadociudad',
+        'estadociudad',
+        'item_id_meli',
+        'item_title_meli',
+        'item_descripcion_meli',
+        'item_descripcion_permalink',
     ];
 
     public function User()

@@ -41,6 +41,14 @@
                     </div>
 
                     <div class="card-body">
+
+                        @if (isset($errorMessage))
+                            <div class="alert alert-warning">
+                                {{ $errorMessage }}
+                            </div>
+                        @endif
+
+
                         <div class="table-responsive">
 
                             <nav>
