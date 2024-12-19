@@ -621,6 +621,9 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O   C O T I Z A C I O N E S   C O S M I C A ===============================
     Route::get('cosmica/cotizacion/', [App\Http\Controllers\CotizacionCosmicaController::class, 'index'])->name('cotizacion_cosmica.index');
+    Route::get('cosmica/cotizacion/aprobadas', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_aprobadas'])->name('cotizacion_cosmica.index_aprobadas');
+    Route::get('cosmica/cotizacion/canceladas', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_canceladas'])->name('cotizacion_cosmica.index_canceladas');
+
     Route::get('cosmica/cotizacion/buscador', [App\Http\Controllers\CotizacionCosmicaController::class, 'buscador'])->name('cotizacion_cosmica.buscador');
     Route::get('cosmica/cotizacion/create', [App\Http\Controllers\CotizacionCosmicaController::class, 'create'])->name('cotizacion_cosmica.create');
     Route::post('cosmica/cotizacion/store', [App\Http\Controllers\CotizacionCosmicaController::class, 'store'])->name('cotizacion_cosmica.store');
