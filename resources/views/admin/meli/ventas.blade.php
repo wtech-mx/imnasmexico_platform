@@ -25,46 +25,45 @@
         }
 
         .stacked-images {
-    display: inline-block;
-    position: relative;
-    width: 100px; /* Ajusta el ancho según sea necesario */
-    height: 40px;
-}
+            display: inline-block;
+            position: relative;
+            width: 100px; /* Ajusta el ancho según sea necesario */
+            height: 40px;
+        }
 
-.stacked-image {
-    width: 40px;
-    height: 40px;
-    border: 2px solid #fff; /* Bordes blancos para destacar cada imagen */
-    border-radius: 4px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: translateX(calc(var(--i, 0) * 10%));
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
+        .stacked-image {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #fff; /* Bordes blancos para destacar cada imagen */
+            border-radius: 4px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateX(calc(var(--i, 0) * 10%));
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
 
-.stacked-image:nth-child(1) { --i: 0; }
-.stacked-image:nth-child(2) { --i: 1; }
-.stacked-image:nth-child(3) { --i: 2; }
-.stacked-image:nth-child(4) { --i: 3; }
+        .stacked-image:nth-child(1) { --i: 0; }
+        .stacked-image:nth-child(2) { --i: 1; }
+        .stacked-image:nth-child(3) { --i: 2; }
+        .stacked-image:nth-child(4) { --i: 3; }
 
-.stacked-more {
-    position: absolute;
-    top: 0;
-    left: calc(40px * 3 + 10px); /* Posición después de la última imagen */
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #fff;
-    font-size: 12px;
-    font-weight: bold;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1;
-}
-
+        .stacked-more {
+            position: absolute;
+            top: 0;
+            left: calc(40px * 3 + 10px); /* Posición después de la última imagen */
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
 
     </style>
 
@@ -131,7 +130,7 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-6">
+                                                <div class="col-9">
                                                     @if ($order['shipment_details'])
                                                         <p>
                                                             <strong>{{ $statusTranslations[$order['shipment_details']['status']] ?? $order['shipment_details']['status'] }}</strong> <br>
@@ -141,8 +140,16 @@
                                                         <p>Detalles del envío no disponibles.</p>
                                                     @endif
                                                 </div>
-                                                <div class="col-6">
-                                                    <!-- Detalles adicionales -->
+                                                <div class="col-3 my-auto">
+                                                    @if ($order['shipping_id'])
+                                                            <a href="{{ route('meli.downloadShippingLabel', ['shippingId' => $order['shipping_id']]) }}"
+                                                            class="btn btn-primary btn-sm">
+                                                                Imprimir Guía
+                                                            </a>
+                                                        @else
+                                                            <button class="btn btn-secondary btn-sm" disabled>Guía no disponible</button>
+                                                    @endif
+
                                                 </div>
                                             </div>
                                         </div>

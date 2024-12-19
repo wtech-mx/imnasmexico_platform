@@ -609,6 +609,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/mercado_libre_api', [App\Http\Controllers\MeliController::class, 'index_token'])->name('meli_token.index');
     Route::post('/meli/update-token', [App\Http\Controllers\MeliController::class, 'updateToken'])->name('meli.updateToken');
     Route::post('/meli/refresh-token', [App\Http\Controllers\MeliController::class, 'refreshToken'])->name('meli.refreshToken');
+    Route::get('/meli/print/{shippingId}', [App\Http\Controllers\MeliController::class, 'downloadShippingLabel'])->name('meli.downloadShippingLabel');
 
     // =============== M O D U L O   R E G I S T R O   C O M P R A S ===============================
     Route::get('/cosmica/registro/compras', [App\Http\Controllers\RegistroComprasController::class, 'index'])->name('registro_compras.index');
@@ -637,7 +638,6 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::get('nas/woo/imprimir/{id}', [App\Http\Controllers\BodegaController::class, 'imprimir'])->name('nas_woo.imprimir');
     Route::get('nas/orders/woo/pdf/{id}', [App\Http\Controllers\BodegaController::class, 'generateOrderWooNasPDF'])->name('woo_nas_orders.pdf');
     Route::get('cosmica/orders/woo/pdf/{id}', [App\Http\Controllers\BodegaController::class, 'generateOrderWooCosmicaPDF'])->name('woo_cosmica_orders.pdf');
-
 
     Route::get('/get-descuento/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'getDescuento']);
     Route::get('cosmica/cotizacion/reporte', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir_reporte'])->name('notas_cosmica.imprimir_reporte');

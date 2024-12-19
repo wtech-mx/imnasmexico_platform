@@ -9,6 +9,7 @@ use App\Models\Meli;
 use App\Models\NotasProductosCosmica;
 use App\Models\ProductosNotasCosmica;
 use App\Models\Products;
+use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Arr;
 
@@ -197,7 +198,6 @@ class MeliController extends Controller
         ]; // Retornar valores por defecto si hay error.
     }
 
-
     private function formatOrders(array $orders): array{
         $formattedOrders = [];
 
@@ -276,6 +276,42 @@ class MeliController extends Controller
         return view('admin.meli.ventas', compact('groupedOrders', 'errorMessage'));
     }
 
+    public function downloadShippingLabel($shippingId)
+    {
+        // Endpoint para obtener la guía en formato PDF
+        $endpoint = "https://api.mercadolibre.com/shipment_labels?shipment_ids={$shippingId}&response_type=pdf";
+
+        try {
+            // Realizar la petición a la API de Mercado Libre
+            $response = Http::withHeaders([
+                'Authorization' => "Bearer {$this->accessToken}",
+            ])->get($endpoint);
+
+            if ($response->successful()) {
+                // Descargar el archivo PDF
+                $pdfContent = $response->body();
+
+                // Guardar el PDF en el almacenamiento temporal
+                $fileName = "guia_envio_{$shippingId}.pdf";
+                $filePath = storage_path("app/public/{$fileName}");
+                Storage::disk('public')->put($fileName, $pdfContent);
+
+                // Retornar el PDF para que el navegador lo descargue
+                return response()->download($filePath)->deleteFileAfterSend(true);
+            } else {
+                // Manejar errores de la API
+                return redirect()->back()->withErrors([
+                    'message' => "Error al obtener la guía de envío: {$response->status()}",
+                ]);
+            }
+        } catch (\Exception $e) {
+            // Manejar excepciones
+            return redirect()->back()->withErrors([
+                'message' => "Ocurrió un error: {$e->getMessage()}",
+            ]);
+        }
+    }
+
     public function meli_show($id)
     {
         $NotasProductosCosmica = $id;
@@ -320,9 +356,6 @@ class MeliController extends Controller
         // Pasar todo a la vista
         return view('admin.cotizacion_cosmica.meli_create', compact('products', 'cotizacion', 'cotizacion_productos', 'categories', 'productNames'));
     }
-
-
-
 
     public function publishToMeli(Request $request, $id)
     {
@@ -426,6 +459,5 @@ class MeliController extends Controller
             return redirect()->back()->with('error', 'Ocurrió un error: ' . $e->getMessage());
         }
     }
-
 
 }
