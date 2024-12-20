@@ -117,7 +117,7 @@
                         <p class="text-center mt-4">
                             La coordinación de asuntos escolares del Registro Nacional IMNAS con registro en la
                             Secretaría del Trabajo y Previsión Social (STPS) como agente capacitador externo
-                            RIFC680910-879-0013 hace constar que el alumno con número de FOLIO <strong>{{ $folio}}</strong>
+                            {{ $tickets_generador->User->clave_clasificacion ?? 'RIFC680910-879-0013' }}  hace constar que el alumno con número de FOLIO <strong>{{ $folio}}</strong>
                             ha terminado satisfactoriamente la especialidad <strong>{{$folio}}</strong> con los créditos honoríficos
                             requeridos respecto al plan de estudios vigente.
                         </p>
