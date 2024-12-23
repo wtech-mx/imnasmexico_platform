@@ -132,10 +132,31 @@
                                             <div class="row">
                                                 <div class="col-9">
                                                     @if ($order['shipment_details'])
-                                                        <p>
-                                                            <strong>{{ $statusTranslations[$order['shipment_details']['status']] ?? $order['shipment_details']['status'] }}</strong> <br>
-                                                            {{ $order['shipment_details']['date'] }}
-                                                        </p>
+                                                    <p>
+                                                        <strong>{{ $statusTranslations[$order['shipment_details']['status']] ?? $order['shipment_details']['status'] }}</strong> <br>
+                                                        {{ $order['shipment_details']['date'] }}
+
+                                                        @php
+                                                            // Convertimos la fecha de envío a un objeto DateTime
+                                                            $shipmentDate = new DateTime($order['shipment_details']['date']);
+                                                            // Obtenemos la fecha actual
+                                                            $currentDate = new DateTime();
+                                                            // Calculamos la diferencia en días
+                                                            $difference = $shipmentDate->diff($currentDate)->days;
+
+                                                            // Verificamos si el estado es "Listo para enviar" o "Preparado"
+                                                            $isReadyOrPrepared = in_array($order['shipment_details']['status'], ['ready_to_ship', 'handling']);
+                                                            // Verificamos si ha pasado más de un día desde la fecha de envío
+                                                            $isDelayed = $isReadyOrPrepared && $difference > 1 && $shipmentDate < $currentDate;
+                                                        @endphp
+
+                                                        @if ($isDelayed)
+                                                        <br><br>
+                                                        <strong  style="color:red" >Estás con demora</strong><br>
+                                                                Despacha el paquete cuanto antes en una agencia de Mercado Libre. La demora está afectando tu reputación.
+                                                        @endif
+                                                    </p>
+
                                                     @else
                                                         <p>Detalles del envío no disponibles.</p>
                                                     @endif

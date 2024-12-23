@@ -44,7 +44,6 @@ class FoliosController extends Controller
         return view('user.registro.afiliate',compact('registros_imnas'));
     }
 
-
     public function buscador(Request $request){
 
         $tickets = OrdersTickets::where('folio', '=', $request->get('folio'))->first();

@@ -390,7 +390,7 @@ class MeliController extends Controller
             "listing_type_id" => "gold_special",
             "condition" => "new",
             "pictures" => [
-                ["source" => "https://http2.mlstatic.com/D_NQ_NP_2X_616066-MLM80299386014_112024-F.webp"]
+                ["source" => "https://plataforma.imnasmexico.com/meli/PROPUESTA-1.png"]
             ],
             "attributes" => [
                 [
