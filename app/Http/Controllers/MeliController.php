@@ -254,6 +254,9 @@ class MeliController extends Controller
     }
 
     public function index(){
+
+        $meli = Meli::first();
+
         $endpoint = "https://api.mercadolibre.com/orders/search?seller={$this->sellerId}&sort=date_desc";
 
         // Realizar la solicitud a la API de Mercado Libre
@@ -285,7 +288,7 @@ class MeliController extends Controller
         }
 
         // Pasar las variables a la vista
-        return view('admin.meli.ventas', compact('groupedOrders', 'errorMessage'));
+        return view('admin.meli.ventas', compact('groupedOrders','meli', 'errorMessage'));
     }
 
     public function downloadShippingLabel($shippingId)
@@ -431,7 +434,7 @@ class MeliController extends Controller
             "available_quantity" => 1,
             "buying_mode" => "buy_it_now",
             "listing_type_id" => "gold_special",
-            "condition" => "new",
+            "condition" => "used",
             "pictures" => [
                 ["source" => "https://plataforma.imnasmexico.com/meli/PROPUESTA-1.png"]
             ],

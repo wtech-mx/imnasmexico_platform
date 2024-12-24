@@ -82,15 +82,26 @@
 
                             <button id="refresh-token-btn" class="btn btn-primary">Actualizar Token</button>
 
-                            @can('client-create')
-                            <a class="btn btn-sm btn-success" href="{{ route('comentarios.create') }}" style="background: {{$configuracion->color_boton_add}}; color: #ffff">
-                                <i class="fa fa-fw fa-edit"></i> Crear </a>
-                            @endcan
-
                         </div>
                     </div>
 
                         <div class="card-body">
+
+                            <div class="row mb-2">
+                                <div class="col-5">
+                                    <p class="text-sm">
+                                    Accesstoken : <br>
+                                    {{ $meli->accesstoken }} <br>
+                                    </p>
+                                </div>
+
+                                <div class="col-7">
+                                    <p class="text-sm">
+                                        Autorizacion : <br>
+                                        {{ $meli->autorizacion }} <br>
+                                    </p>
+                                </div>
+                            </div>
 
                             @if (isset($errorMessage))
                                 <div class="alert alert-warning">
