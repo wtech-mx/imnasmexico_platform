@@ -434,7 +434,7 @@ class MeliController extends Controller
             "available_quantity" => 1,
             "buying_mode" => "buy_it_now",
             "listing_type_id" => "gold_special",
-            "condition" => "used",
+            "condition" => "new",
             "pictures" => [
                 ["source" => "https://plataforma.imnasmexico.com/meli/PROPUESTA-1.png"]
             ],
