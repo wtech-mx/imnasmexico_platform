@@ -148,24 +148,48 @@
                                                         {{ $order['shipment_details']['date'] }}
 
                                                         @php
-                                                            // Convertimos la fecha de envío a un objeto DateTime
-                                                            $shipmentDate = new DateTime($order['shipment_details']['date']);
-                                                            // Obtenemos la fecha actual
-                                                            $currentDate = new DateTime();
-                                                            // Calculamos la diferencia en días
-                                                            $difference = $shipmentDate->diff($currentDate)->days;
+                                                        // Convertimos la fecha de envío a un objeto DateTime
+                                                        $shipmentDate = new DateTime($order['shipment_details']['date']);
+                                                        $currentDate = new DateTime();
 
-                                                            // Verificamos si el estado es "Listo para enviar" o "Preparado"
-                                                            $isReadyOrPrepared = in_array($order['shipment_details']['status'], ['ready_to_ship', 'handling']);
-                                                            // Verificamos si ha pasado más de un día desde la fecha de envío
-                                                            $isDelayed = $isReadyOrPrepared && $difference > 1 && $shipmentDate < $currentDate;
-                                                        @endphp
+                                                        // Extraemos solo la fecha (sin la hora) para ambas
+                                                        $shipmentDateFormatted = $shipmentDate->format('Y-m-d');
+                                                        $currentDateFormatted = $currentDate->format('Y-m-d');
 
-                                                        @if ($isDelayed)
+                                                        // Verificamos si el estado es "Listo para enviar" o "Preparado"
+                                                        $isReadyOrPrepared = in_array($order['shipment_details']['status'], ['ready_to_ship', 'handling']);
+                                                        // Verificamos si ha pasado al menos un día (comparando las fechas)
+                                                        $isDelayed = $isReadyOrPrepared && $shipmentDateFormatted < $currentDateFormatted;
+
+                                                        // Verificamos si hay substatus diferente de "printed" y si está en el estado correcto
+                                                        $substatus = $order['shipment_details']['substatus'] ?? null;
+                                                        $substatus_dropped_off = in_array($order['shipment_details']['substatus'], ['dropped_off','in_hub']);
+                                                        $isLabelNotPrinted = $isReadyOrPrepared && $substatus !== 'printed';
+                                                    @endphp
+
+
+
+                                                    @if ($isLabelNotPrinted)
+
+                                                        @if($substatus_dropped_off == true)
+
+
+                                                        @else
                                                         <br><br>
-                                                        <strong  style="color:red" >Estás con demora</strong><br>
-                                                                Despacha el paquete cuanto antes en una agencia de Mercado Libre. La demora está afectando tu reputación.
+                                                        <strong style="color:orange">Etiqueta lista para imprimir</strong><br>
+                                                        Asegúrate de imprimir la etiqueta antes de despachar el paquete.
                                                         @endif
+
+                                                    @else
+
+                                                    @if ($isDelayed)
+                                                        <br><br>
+                                                        <strong style="color:red">Estás con demora</strong><br>
+                                                        Despacha el paquete cuanto antes en una agencia de Mercado Libre. La demora está afectando tu reputación.
+                                                    @endif
+
+                                                    @endif
+
                                                     </p>
 
                                                     @else
