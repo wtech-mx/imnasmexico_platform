@@ -172,7 +172,9 @@
                                                     @endif
 
                                                     @if($order['cosmica_nota_id'])
-                                                        <a href="{{ route('cotizacion_cosmica.meli_show', ['id' => $order['cosmica_nota_id']]) }}" class="btn text-white btn-sm" style="background: #322338" target="_blank">Ver Pedido</a>
+                                                        {{-- <a href="{{ route('cotizacion_cosmica.meli_show', ['id' => $order['cosmica_nota_id']],$identifier) }}" class="btn text-white btn-sm" style="background: #322338" target="_blank">Ver Pedido</a> --}}
+                                                        <a href="{{ route('cotizacion_cosmica.meli_show', ['id' => $order['cosmica_nota_id'], 'order_id' => $identifier]) }}" class="btn text-white btn-sm" style="background: #322338" target="_blank">Ver Pedido</a>
+
                                                     @endif
 
                                                 </div>

@@ -324,40 +324,32 @@ class MeliController extends Controller
         }
     }
 
-    public function meli_show($id)
+    public function meli_show($id, $order_id = null)
     {
         // Obtener los datos existentes
         $cotizacion = NotasProductosCosmica::find($id);
         $cotizacion_productos = ProductosNotasCosmica::where('id_notas_productos', '=', $id)
-            ->where('price', '!=', NULL)
+            ->where('price', '!=', null)
             ->get();
         $products = Products::where('categoria', '=', 'Cosmica')
             ->orderBy('nombre', 'ASC')
             ->get();
 
         $NotasProductosCosmica = $cotizacion->folio;
+
         // Construir el título con los nombres de los productos si no existe item_title_meli
         if (is_null($cotizacion->item_title_meli)) {
-            $productNames = '';
-
-            $productosDetalle = [];
-            foreach ($cotizacion_productos as $producto) {
-                $productosDetalle[] = $producto->producto; // Extraer el nombre de cada producto
-            }
-            // $productNames = 'Kit ' . implode(' + ', $productosDetalle).' #'. $NotasProductosCosmica; // Agregar 'Kit' al inicio y concatenar con ' + '
-
-            $productNames = 'Kit de productos cosmica #'. $NotasProductosCosmica; // Agregar 'Kit' al inicio y concatenar con ' + '
-        }else{
-            $productNames = 'Kit de productos cosmica #'. $NotasProductosCosmica; // Agregar 'Kit' al inicio y concatenar con ' + '
+            $productNames = 'Kit de productos cosmica #' . $NotasProductosCosmica;
+        } else {
+            $productNames = 'Kit de productos cosmica #' . $NotasProductosCosmica;
         }
 
         // Realizar la petición a la API de Mercado Libre para obtener categorías
-        $endpoint = 'https://api.mercadolibre.com/sites/MLM/categories';
-
+        $endpointCategories = 'https://api.mercadolibre.com/sites/MLM/categories';
         try {
             $response = Http::withHeaders([
                 'Authorization' => "Bearer {$this->accessToken}",
-            ])->get($endpoint);
+            ])->get($endpointCategories);
 
             if ($response->successful()) {
                 $categories = $response->json(); // Guardar las categorías como un arreglo
@@ -368,9 +360,48 @@ class MeliController extends Controller
             $categories = []; // Si hay un error, devolver un arreglo vacío
         }
 
+        // Si order_id tiene un valor, realizar las peticiones relacionadas con la orden
+        $orderDetails = null;
+        $shipmentDetails = null;
+        if ($order_id) {
+            // Obtener los detalles de la orden
+            $endpointOrder = "https://api.mercadolibre.com/orders/{$order_id}";
+            try {
+                $orderResponse = Http::withHeaders([
+                    'Authorization' => "Bearer {$this->accessToken}",
+                ])->get($endpointOrder);
+
+                if ($orderResponse->successful()) {
+                    $orderDetails = $orderResponse->json();
+
+                    // Verificar si existe información de envío y realizar la petición
+                    if (isset($orderDetails['shipping']['id'])) {
+                        $shipmentId = $orderDetails['shipping']['id'];
+                        $endpointShipment = "https://api.mercadolibre.com/shipments/{$shipmentId}";
+                        try {
+                            $shipmentResponse = Http::withHeaders([
+                                'Authorization' => "Bearer {$this->accessToken}",
+                                'x-format-new' => 'true',
+                            ])->get($endpointShipment);
+
+                            if ($shipmentResponse->successful()) {
+                                $shipmentDetails = $shipmentResponse->json(); // Guardar los detalles del envío
+                            }
+                        } catch (\Exception $e) {
+                            $shipmentDetails = null; // Si hay un error, dejar null
+                        }
+                    }
+                }
+            } catch (\Exception $e) {
+                $orderDetails = null; // Si hay un error, dejar null
+            }
+        }
+
         // Pasar todo a la vista
-        return view('admin.cotizacion_cosmica.meli_create', compact('products', 'cotizacion', 'cotizacion_productos', 'categories', 'productNames'));
+        return view('admin.cotizacion_cosmica.meli_create', compact('products', 'cotizacion', 'cotizacion_productos', 'categories', 'productNames', 'orderDetails', 'shipmentDetails'));
     }
+
+
 
     public function publishToMeli(Request $request, $id)
     {

@@ -42,19 +42,8 @@ class CotizacionCosmicaController extends Controller
             ->where('tipo_nota', '=', 'Cotizacion')
             ->get();
 
-        $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$inicioMesAnterior, $finMesActual])
-            ->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado'])
-            ->where('tipo_nota', '=', 'Cotizacion')
-            ->orderBy('id', 'DESC')
-            ->get();
-
-        $notas_canceladas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
-            ->where('estatus_cotizacion', '=', 'Cancelada')
-            ->orderBy('id', 'DESC')
-            ->get();
-
         // Pasar datos a la vista
-        return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores', 'notas_aprobadas', 'notas_canceladas', 'fechaInicio', 'fechaFin'));
+        return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores','fechaInicio', 'fechaFin'));
     }
 
     public function index_aprobadas(Request $request) {
@@ -70,11 +59,6 @@ class CotizacionCosmicaController extends Controller
         $administradores = User::where('cliente', '=', NULL)->orWhere('cliente', '=', '5')->get();
 
         // Filtrar notas con estatus específicos
-        $notas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
-            ->where('estatus_cotizacion', '=', NULL)
-            ->orderBy('id', 'DESC')
-            ->where('tipo_nota', '=', 'Cotizacion')
-            ->get();
 
         $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$inicioMesAnterior, $finMesActual])
             ->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado'])
@@ -82,13 +66,8 @@ class CotizacionCosmicaController extends Controller
             ->orderBy('id', 'DESC')
             ->get();
 
-        $notas_canceladas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
-            ->where('estatus_cotizacion', '=', 'Cancelada')
-            ->orderBy('id', 'DESC')
-            ->get();
-
         // Pasar datos a la vista
-        return view('admin.cotizacion_cosmica.index_aprobadas', compact('notas', 'administradores', 'notas_aprobadas', 'notas_canceladas', 'fechaInicio', 'fechaFin'));
+        return view('admin.cotizacion_cosmica.index_aprobadas', compact( 'administradores', 'notas_aprobadas', 'fechaInicio', 'fechaFin'));
     }
 
     public function index_canceladas(Request $request) {

@@ -6,6 +6,17 @@
 
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/admin/vendor/select2/dist/css/select2.min.css')}}">
+
+    <style>
+        .container_user_data{
+            background: #E9ECEF;
+            border-radius: 9px;
+            padding: 15px;
+        }
+
+
+    </style>
+
  @endsection
 
 @php
@@ -37,15 +48,13 @@
                               </button>
                             </li>
 
-                          </ul>
+                        </ul>
 
                           <div class="tab-content" id="pills-tabContent">
 
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
                                 <form method="POST" action="{{ route('meli.publish', $cotizacion->id) }}" enctype="multipart/form-data" role="form">
                                     @csrf
-
-                                    <div class="modal-body">
                                         <div class="row">
                                             <div class="col-12 mt-2">
                                                 <h4>Folio # {{ $cotizacion->folio  }}</h4>
@@ -230,6 +239,21 @@
                                                 @endif
                                             </div>
 
+                                            <div class="form-group col-3 my-auto">
+
+                                                    @if ($orderDetails ?? null)
+                                                            <p for="name"> <strong>Guia de Mercado Libre</strong> <br></p>
+
+                                                            <a href="{{ route('meli.downloadShippingLabel',$orderDetails['shipping']['id']) }}"
+                                                            class="btn btn-primary btn-sm">
+                                                                Imprimir Guía
+                                                            </a>
+
+                                                        @else
+                                                        <p for="name"> <strong>Guía no disponible</strong> <br></p>
+                                                    @endif
+
+                                            </div>
 
                                             {{-- <div class="form-group col-6">
                                                 <label for="categoria">Categoría *</label>
@@ -241,7 +265,6 @@
                                                 </select>
                                             </div> --}}
 
-
                                             <div class="form-group col-12">
                                                 <label for="" class="form-label">Descripcion</label>
                                                 <textarea class="form-control" id="description" name="description" rows="9">{{ $cotizacion->item_descripcion_meli }}</textarea>
@@ -249,20 +272,104 @@
 
                                         </div>
 
-                                    </div>
-
-                                    <div class="modal-footer">
                                         <button type="submit" class="btn close-modal" style="background: #322338; color: #ffff">Guardar</button>
-                                    </div>
 
                                 </form>
                             </div>
 
                             <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
 
+                                <div class="row">
+
+                                    @if ($orderDetails ?? null)
+                                        <div class="col-8">
+
+                                            <div class="row">
+                                                <div class="col-12 ">
+                                                    <h5>{{ $orderDetails['payments'][0]['reason'] }}</h5>
+                                                    <p>Venta #{{ $orderDetails['id'] }} / {{ $orderDetails['date_created'] }} </p>
+                                                </div>
+
+                                                <div class="col-12 my-auto">
+                                                    <div class="container_user_data ">
+                                                        <div class="d-flex justify-content-between my-auto">
+
+                                                            <p>
+                                                                <strong>{{ $orderDetails['buyer']['first_name'] .' '. $orderDetails['buyer']['last_name']}} </strong> <br>
+                                                                {{ $orderDetails['buyer']['nickname'] }}
+                                                            </p>
+
+                                                            <p>
+                                                                <a href="" class="btn btn-primary btn-xs">Conversacion</a>
+                                                            </p>
+                                                        </div>
+
+                                                        <div class="container_user_data mt-4">
+                                                            <div class="d-flex justify-content-between my-auto">
+                                                                <p>
+                                                                    <strong>{{ $shipmentDetails['substatus'] }}</strong> <br>
+                                                                </p>
+
+                                                                <p>
+                                                                    <a href="https://envios.mercadolibre.com.mx/shipping/agencies-map?flow=drop-off-places" target="_blank" class="btn btn-primary btn-xs">
+                                                                        Donde lo despacho
+                                                                    </a>
+                                                                </p>
+                                                            </div>
+
+                                                            <p>
+                                                                <strong class="mt-3">Datos del envío</strong> <br>
+                                                                CP {{ $shipmentDetails['destination']['shipping_address']['zip_code'] }}
+                                                                {{ $shipmentDetails['destination']['shipping_address']['street_name'] }} <br> {{ $shipmentDetails['destination']['shipping_address']['comment'] }} <br>
+                                                                {{ $shipmentDetails['destination']['shipping_address']['city']['name'] }} {{ $shipmentDetails['destination']['shipping_address']['state']['name'] }}<br>
+                                                            </p>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="col-4">
+
+                                        </div>
+                                    @endif
+
+                                </div>
+
                             </div>
 
                             <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
+
+                                <form method="POST" action="{{ route('notas_cosmica.update_guia', $cotizacion->id) }}" enctype="multipart/form-data" role="form">
+                                    @csrf
+                                    <input type="hidden" name="_method" value="PATCH">
+                                        <div class="row">
+                                            <div class="form-group col-12">
+                                                    <label for="name">Doc Guia</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="input-group-text" id="basic-addon1">
+                                                            <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                                        </span>
+                                                        <input class="form-control" type="file" id="doc_guia" name="doc_guia">
+                                                    </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <embed src="{{ asset('pago_fuera/'.$cotizacion->doc_guia) }}" type="application/pdf" style="width: 450px; height: 400px;" />
+                                            </div>
+
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                            </div>
+
+                                        </div>
+                                </form>
 
                             </div>
 
