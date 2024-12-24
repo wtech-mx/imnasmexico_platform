@@ -198,7 +198,8 @@ class MeliController extends Controller
         ]; // Retornar valores por defecto si hay error.
     }
 
-    private function formatOrders(array $orders): array{
+    private function formatOrders(array $orders): array
+    {
         $formattedOrders = [];
 
         foreach ($orders as $order) {
@@ -214,6 +215,16 @@ class MeliController extends Controller
                 // Obtener detalles del producto (incluyendo imágenes)
                 $itemDetails = $this->getItemDetails($item['item']['id']);
 
+                // Buscar en NotasProductosCosmica si el título contiene un código después de '#'
+                $folio = null;
+                $match = [];
+                if (preg_match('/#(\w+)$/', $item['item']['title'], $match)) {
+                    $folio = $match[1]; // Extraer el folio después de '#'
+                }
+
+                // Consultar en la base de datos
+                $notasProducto = $folio ? NotasProductosCosmica::where('folio', $folio)->first() : null;
+
                 $formattedOrders[] = [
                     'payment_reason'       => $order['payments'][0]['reason'] ?? null,
                     'total_paid_amount'    => $order['payments'][0]['total_paid_amount'] ?? null,
@@ -223,7 +234,7 @@ class MeliController extends Controller
                         : null,
                     'payment_status'       => $order['payments'][0]['status'] ?? null,
                     'shipping_id'          => $shippingId,
-                    'shipment_details'     => $shipmentDetails, // Detalles del envío
+                    'shipment_details'     => $shipmentDetails,
                     'item_id'              => $item['item']['id'] ?? null,
                     'item_title'           => $item['item']['title'] ?? null,
                     'quantity'             => $item['quantity'] ?? null,
@@ -232,8 +243,9 @@ class MeliController extends Controller
                     'is_pack'              => $isPack,
                     'pack_id'              => $order['pack_id'] ?? null,
                     'status'               => $order['status'] ?? null,
-                    'thumbnail_url'        => $itemDetails['thumbnail_url'], // URL de miniatura
-                    'picture_url'          => $itemDetails['picture_url'],   // URL de la imagen completa
+                    'thumbnail_url'        => $itemDetails['thumbnail_url'],
+                    'picture_url'          => $itemDetails['picture_url'],
+                    'cosmica_nota_id'      => $notasProducto->id ?? null, // ID del registro de NotasProductosCosmica
                 ];
             }
         }

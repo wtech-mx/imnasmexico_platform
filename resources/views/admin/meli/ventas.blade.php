@@ -171,6 +171,10 @@
                                                             <button class="btn btn-secondary btn-sm" disabled>Guía no disponible</button>
                                                     @endif
 
+                                                    @if($order['cosmica_nota_id'])
+                                                        <a href="{{ route('cotizacion_cosmica.meli_show', ['id' => $order['cosmica_nota_id']]) }}" class="btn text-white btn-sm" style="background: #322338" target="_blank">Ver Pedido</a>
+                                                    @endif
+
                                                 </div>
                                             </div>
                                         </div>
