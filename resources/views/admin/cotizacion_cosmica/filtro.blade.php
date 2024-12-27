@@ -19,6 +19,7 @@
                     <div class="col-3 align-self-end">
                         <button type="submit" name="action" value="Filtrar" class="btn btn-primary">Filtrar</button>
                         <button type="submit" name="action" value="Generar PDF" class="btn btn-success">Generar PDF</button>
+                        <button type="submit" name="action" value="Generar PDF Global" class="btn btn-success">Generar PDF Global Ventas</button>
                     </div>
                 </div>
 
