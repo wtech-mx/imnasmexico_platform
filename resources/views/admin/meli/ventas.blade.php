@@ -105,7 +105,7 @@
                                     <form method="GET" action="{{ route('meli_ventas.index') }}" class="mb-3">
                                         <div class="row">
                                             <div class="col-12">
-                                                <p class="text-danger">Mercado Libre no deja traer registros posteriores a los 20 dias. <br>Pordefecto esta trayendo 20 dias antes del dia actual. <br>Usar el filtro para ampliar el rango de fechas (Sin que pase de 20 dias)</p>
+                                                <p class="text-danger">Mercado Libre no deja traer registros posteriores a los 20 dias. <br>Por defecto esta trayendo 20 dias antes del dia actual. <br>Usar el filtro para ampliar el rango de fechas (Sin que pase de 20 dias)</p>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="fecha_inicio" class="form-label">Fecha de inicio:</label>
