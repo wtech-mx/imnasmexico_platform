@@ -270,8 +270,8 @@ class MeliController extends Controller
         $endpoint = "https://api.mercadolibre.com/orders/search?seller={$this->sellerId}&order.date_created.from=$fechaInicio&order.date_created.to=$fechaFin&sort=date_desc";
         $maxAttempts = 3; // Número máximo de intentos
         $attempt = 0; // Intento actual
-        $timeout = 30; // Timeout total en segundos
-        $connectTimeout = 15; // Timeout de conexión en segundos
+        $timeout = 60; // Timeout total en segundos
+        $connectTimeout = 30; // Timeout de conexión en segundos
 
         $groupedOrders = []; // Definir por defecto como arreglo vacío
         $errorMessage = null; // Mensaje de error por defecto
