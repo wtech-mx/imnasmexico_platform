@@ -101,6 +101,26 @@
                                         {{ $meli->autorizacion }} <br>
                                     </p>
                                 </div>
+                                <div class="col-12">
+                                    <form method="GET" action="{{ route('meli_ventas.index') }}" class="mb-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="text-danger">Mercado Libre no deja traer registros posteriores a los 20 dias. <br>Pordefecto esta trayendo 20 dias antes del dia actual. <br>Usar el filtro para ampliar el rango de fechas (Sin que pase de 20 dias)</p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="fecha_inicio" class="form-label">Fecha de inicio:</label>
+                                                <input type="date" id="fecha_inicio" name="fecha_inicio" class="form-control" value="{{ old('fecha_inicio', substr($fechaInicio, 0, 10)) }}">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label for="fecha_fin" class="form-label">Fecha de fin:</label>
+                                                <input type="date" id="fecha_fin" name="fecha_fin" class="form-control" value="{{ old('fecha_fin', substr($fechaFin, 0, 10)) }}">
+                                            </div>
+                                            <div class="col-md-4 d-flex align-items-end">
+                                                <button type="submit" class="btn btn-success w-100">Filtrar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
 
                             @if (isset($errorMessage))
@@ -120,6 +140,15 @@
                                     'handling' => 'Preparado',
                                     'cancelled' => 'Cancelado',
                                 ];
+
+                                    // Diccionario de colores para los estados
+                                $statusColors = [
+                                    'delivered' => 'text-success', // Verde
+                                    'shipped' => 'text-primary',  // Azul
+                                    'ready_to_ship' => 'text-dark', // Amarillo
+                                    'handling' => 'text-info',    // Cian
+                                    'cancelled' => 'text-danger', // Rojo
+                                ];
                             @endphp
 
                             @foreach ($groupedOrders as $index => $group)
@@ -130,6 +159,10 @@
                                 $totalAmount = array_sum(array_column($group['orders'], 'total_paid_amount'));
                                 $order = $group['orders'][0]; // Primer pedido del grupo
                                 $orders = $isPack ? $group['orders'] : [$order]; // Productos a mostrar
+
+                                // Obtener el estado y su color correspondiente
+                                $shipmentStatus = $order['shipment_details']['status'] ?? 'unknown';
+                                $statusColor = $statusColors[$shipmentStatus] ?? 'text-muted'; // Color predeterminado
                             @endphp
 
                                 <div class="card_container bg-white p-3 mb-2">
@@ -144,7 +177,9 @@
                                                 <div class="col-9">
                                                     @if ($order['shipment_details'])
                                                     <p>
-                                                        <strong>{{ $statusTranslations[$order['shipment_details']['status']] ?? $order['shipment_details']['status'] }}</strong> <br>
+                                                        <strong class="{{ $statusColor }}">
+                                                            {{ $statusTranslations[$order['shipment_details']['status']] ?? $order['shipment_details']['status'] }}
+                                                        </strong> <br>
                                                         {{ $order['shipment_details']['date'] }}
 
                                                         @php

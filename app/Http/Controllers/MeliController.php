@@ -253,11 +253,21 @@ class MeliController extends Controller
         return $formattedOrders;
     }
 
-    public function index(){
-
+    public function index(Request $request)
+    {
         $meli = Meli::first();
 
-        $endpoint = "https://api.mercadolibre.com/orders/search?seller={$this->sellerId}&sort=date_desc";
+        // Calcular el rango por defecto (últimos 20 días)
+        $fechaFin = now()->toIso8601String(); // Fecha actual en formato ISO 8601
+        $fechaInicio = now()->subDays(20)->toIso8601String(); // Últimos 20 días
+
+        // Verificar si se proporciona un filtro personalizado
+        if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
+            $fechaInicio = $request->input('fecha_inicio') . 'T00:00:00.000-00:00';
+            $fechaFin = $request->input('fecha_fin') . 'T23:59:59.999-00:00';
+        }
+
+        $endpoint = "https://api.mercadolibre.com/orders/search?seller={$this->sellerId}&order.date_created.from=$fechaInicio&order.date_created.to=$fechaFin&sort=date_desc";
 
         // Realizar la solicitud a la API de Mercado Libre
         $response = Http::withHeaders([
@@ -270,6 +280,7 @@ class MeliController extends Controller
         if ($response->successful()) {
             $data = $response->json();
             $ordenes = $data['results'] ?? []; // Obtiene las órdenes
+
             // Formatear las órdenes
             $formattedOrders = $this->formatOrders($ordenes);
 
@@ -288,7 +299,7 @@ class MeliController extends Controller
         }
 
         // Pasar las variables a la vista
-        return view('admin.meli.ventas', compact('groupedOrders','meli', 'errorMessage'));
+        return view('admin.meli.ventas', compact('groupedOrders', 'meli', 'errorMessage', 'fechaInicio', 'fechaFin'));
     }
 
     public function downloadShippingLabel($shippingId)
