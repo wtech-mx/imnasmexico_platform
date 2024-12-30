@@ -15,7 +15,31 @@ class GenerarPedidosAutomaticos extends Command
 
     public function handle()
     {
-        $productosBajoStock = Products::where('stock', '<', 30)->where('categoria', '=', 'Cosmica')->where('subcategoria', '=', 'Producto')->get();
+        // Verificar si ya existe un pedido para el día actual
+        $fechaHoy = Carbon::now()->startOfDay(); // Inicio del día actual
+        $pedidoExistente = BodegaPedidosCosmica::whereDate('fecha_pedido', $fechaHoy)->first();
+
+        if ($pedidoExistente) {
+            $this->info('Ya se generó un pedido para hoy.');
+            return 0;
+        }
+
+        // Obtener productos con bajo stock
+        $productosBajoStock = Products::where(function ($query) {
+            $query->where('stock', '<', 60)
+                ->where(function ($subQuery) {
+                    $subQuery->where('nombre', 'LIKE', '%Hydrabooster%')
+                             ->orWhere('nombre', 'LIKE', '%Hydraboosters%');
+                })
+                ->orWhere(function ($subQuery) {
+                    $subQuery->where('stock', '<', 30)
+                             ->where('nombre', 'NOT LIKE', '%Hydrabooster%')
+                             ->where('nombre', 'NOT LIKE', '%Hydraboosters%');
+                });
+        })
+        ->where('categoria', '=', 'Cosmica')
+        ->where('subcategoria', '=', 'Producto')
+        ->get();
 
         if ($productosBajoStock->isEmpty()) {
             $this->info('No hay productos con bajo stock.');
@@ -30,9 +54,10 @@ class GenerarPedidosAutomaticos extends Command
             'fecha_aprovado' => Carbon::now()->format('Y-m-d H:i:s'),
             'id_user' => 2474,
         ]);
-        
+
         foreach ($productosBajoStock as $producto) {
-            $cantidadNecesaria = 30 - $producto->stock;
+            $umbral = (stripos($producto->nombre, 'Hydrabooster') !== false || stripos($producto->nombre, 'Hydraboosters') !== false) ? 60 : 30;
+            $cantidadNecesaria = $umbral - $producto->stock;
 
             // Agregar producto al detalle del pedido
             BodegaPedidosProductosCosmica::create([
@@ -43,9 +68,6 @@ class GenerarPedidosAutomaticos extends Command
                 'cantidad_restante' => $cantidadNecesaria,
                 'cantidad_entregada_lab' => $cantidadNecesaria,
             ]);
-
-            // Actualizar el stock del producto (si corresponde)
-            //$producto->update(['stock' => 30]);
         }
 
         $this->info('Pedido generado con éxito.');

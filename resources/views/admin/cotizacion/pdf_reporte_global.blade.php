@@ -15,7 +15,7 @@
           top: -160px;
           right: 0px;
           height: 100px;
-          background-color: #322338;
+          background-color: #1f618d;
           color: #fff;
           text-align: center;
         }
@@ -34,7 +34,7 @@
           bottom: -50px;
           right: 0px;
           height: 40px;
-          border-bottom: 2px solid #322338;
+          border-bottom: 2px solid #1f618d;
         }
 
         footer .page:after {
@@ -66,7 +66,7 @@
         }
 
         tr:nth-child(even) {
-        background-color: #F7EAED;
+        background-color: #85c1e9;
         }
 
 
@@ -78,8 +78,8 @@
         use Carbon\Carbon;
     @endphp
   <header>
-    <h1>Reporte de Ventas Global Cosmica</h1>
-    <h2>Cosmica</h2>
+    <h1>Reporte de Ventas Global Tiendita</h1>
+    <h2>Tiendita</h2>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </header>
 
@@ -139,7 +139,7 @@
     </table>
     <h2 style="text-align: center;"> <br>Ventas <br></h2>
     <table class="mt-5">
-        <thead style="background-color: #87c5ca; color: #fff">
+        <thead style="background-color: #1f618d; color: #fff">
             <tr>
                 <th>Mes</th>
                 <th>Total de Ventas</th>
@@ -157,27 +157,9 @@
     <div style="page-break-after: always;"></div>
 
     <table class="mt-5">
-        <thead style="background-color: #CA87A6; color: #fff">
+        <thead style="background-color: #1f618d; color: #fff">
             <tr>
-                <th>Ciudades donde compran</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-                <th>
-                    <img src="{{$chartGrafica }}" width="80%">
-                </th>
-
-            </tr>
-        </tbody>
-    </table>
-    <div style="page-break-after: always;"></div>
-
-    <table class="mt-5">
-        <thead style="background-color: #CA87A6; color: #fff">
-            <tr>
-                <th>5 Productos mas vendidos</th>
+                <th>10 Productos mas vendidos</th>
             </tr>
         </thead>
 
@@ -191,9 +173,9 @@
     </table>
 
     <table class="mt-5" style="margin-top: 1rem">
-        <thead style="background-color: #CA87A6; color: #fff">
+        <thead style="background-color: #1f618d; color: #fff">
             <tr>
-                <th>5 Productos menos vendidos</th>
+                <th>10 Productos menos vendidos</th>
             </tr>
         </thead>
 
@@ -209,7 +191,7 @@
     <div style="page-break-after: always;"></div>
     <h2 style="text-align: center;"> <br>Productos <br></h2>
     <table class="mt-5">
-        <thead style="background-color: #87c5ca; color: #fff">
+        <thead style="background-color: #1f618d; color: #fff">
             <tr>
                 <th>Mes</th>
                 <th>Total de Ventas</th>

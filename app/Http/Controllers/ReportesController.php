@@ -8,6 +8,7 @@ use App\Models\OrdersTickets;
 use App\Models\Orders;
 use App\Models\PagosFuera;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ReporteTicketsVendidos;
 use App\Mail\ReporteTicketsVendidosSemana;
@@ -878,4 +879,57 @@ class ReportesController extends Controller
         return redirect()->back()->with('success', 'Webpage actualizada');
     }
 
+    public function pdf_anual(){
+        $fechaInicioSemana =  date('2024-01-01');
+        $fechaFinSemana =  date('2024-12-27');
+        $today = date('Y-m-d');
+
+        $cursosComprados = Orders::join('orders_tickets', 'orders.id', '=', 'orders_tickets.id_order')
+        ->join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id') // Asegúrate de que esta tabla exista y tenga los nombres de los cursos
+        ->whereBetween('orders.fecha', [$fechaInicioSemana, $fechaFinSemana])
+        ->where('orders.estatus', '1')
+        ->where('cursos.precio', '!=', 0)
+        ->where('cursos.nombre', 'not like', '%Estandar%')
+        ->where('cursos.nombre', 'not like', '%WORKSHOP%')
+        ->where('cursos.nombre', 'not like', '%Pago%')
+        ->where('cursos.nombre', 'not like', '%Afiliación%')
+        ->select('cursos.nombre as curso', DB::raw('COUNT(orders_tickets.id_curso) as inscritos'))
+        ->groupBy('cursos.nombre')
+        ->orderBy('inscritos', 'desc') // Opcional, para ordenar por mayor número de inscritos
+        ->get();
+
+        $cursosMasInscritos = Orders::join('orders_tickets', 'orders.id', '=', 'orders_tickets.id_order')
+        ->join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
+        ->whereBetween('orders.fecha', [$fechaInicioSemana, $fechaFinSemana])
+        ->where('orders.estatus', '1')
+        ->where('cursos.precio', '!=', 0)
+        ->where('cursos.nombre', 'not like', '%Estandar%')
+        ->where('cursos.nombre', 'not like', '%WORKSHOP%')
+        ->where('cursos.nombre', 'not like', '%Pago%')
+        ->where('cursos.nombre', 'not like', '%Afiliación%')
+        ->select('cursos.nombre as curso', DB::raw('COUNT(orders_tickets.id_curso) as inscritos'))
+        ->groupBy('cursos.nombre')
+        ->orderBy('inscritos', 'desc') // Orden descendente para los más inscritos
+        ->limit(5) // Límite de 5 resultados
+        ->get();
+
+        $cursosMenosInscritos = Orders::join('orders_tickets', 'orders.id', '=', 'orders_tickets.id_order')
+        ->join('cursos', 'orders_tickets.id_curso', '=', 'cursos.id')
+        ->whereBetween('orders.fecha', [$fechaInicioSemana, $fechaFinSemana])
+        ->where('orders.estatus', '1')
+        ->where('cursos.precio', '!=', 0)
+        ->where('cursos.nombre', 'not like', '%Estandar%')
+        ->where('cursos.nombre', 'not like', '%WORKSHOP%')
+        ->where('cursos.nombre', 'not like', '%Pago%')
+        ->where('cursos.nombre', 'not like', '%Afiliación%')
+        ->select('cursos.nombre as curso', DB::raw('COUNT(orders_tickets.id_curso) as inscritos'))
+        ->groupBy('cursos.nombre')
+        ->orderBy('inscritos', 'asc') // Orden ascendente para los menos inscritos
+        ->limit(5) // Límite de 5 resultados
+        ->get();
+
+        $pdf = \PDF::loadView('admin.cursos.pdf_reporte', compact('cursosComprados', 'today', 'cursosMasInscritos', 'cursosMenosInscritos'));
+       //return $pdf->stream();
+     return $pdf->download('Reporte cursos'.'/'.$today.'.pdf');
+    }
 }

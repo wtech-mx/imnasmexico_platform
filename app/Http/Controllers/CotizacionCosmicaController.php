@@ -798,7 +798,7 @@ class CotizacionCosmicaController extends Controller
                 ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
                 ->groupBy('producto')
                 ->orderBy('total_cantidad', 'DESC')
-                ->limit(5)
+                ->limit(10)
                 ->get();
 
                 $labels = $productosMasCotizados->pluck('producto')->toArray();
@@ -843,7 +843,7 @@ class CotizacionCosmicaController extends Controller
                 ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
                 ->groupBy('producto')
                 ->orderBy('total_cantidad', 'ASC')
-                ->limit(5)
+                ->limit(10)
                 ->get();
 
                 $labelsmenoscot = $productosMenosCotizados->pluck('producto')->toArray();
@@ -905,7 +905,7 @@ class CotizacionCosmicaController extends Controller
                 ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
                 ->groupBy('producto')
                 ->orderBy('total_cantidad', 'DESC')
-                ->limit(5)
+                ->limit(10)
                 ->get();
 
                 $labels2 = $productosMasVendidos->pluck('producto')->toArray();
@@ -950,7 +950,7 @@ class CotizacionCosmicaController extends Controller
                 ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
                 ->groupBy('producto')
                 ->orderBy('total_cantidad', 'ASC')
-                ->limit(5)
+                ->limit(10)
                 ->get();
 
                 $labels3 = $productosMenosVendidos->pluck('producto')->toArray();
@@ -994,7 +994,7 @@ class CotizacionCosmicaController extends Controller
                 // $ciudadesGrafica = NotasProductosCosmica::select('estadociudad', DB::raw('COUNT(*) as total_compras'))
                 // ->groupBy('estadociudad')
                 // ->orderBy('total_compras', 'desc')
-                // ->limit(5) // Ajusta este límite si deseas mostrar más o menos ciudades
+                // ->limit(10) // Ajusta este límite si deseas mostrar más o menos ciudades
                 // ->get();
 
                 $ciudadesData = NotasProductosCosmica::whereNotNull('estadociudad') // Filtra los registros donde estadociudad no es null
@@ -1058,6 +1058,22 @@ class CotizacionCosmicaController extends Controller
             //  return $pdf->stream();
             return $pdf->download('Reporte Cosmica / '.$today.'.pdf');
         }else if($request->input('action') === 'Generar PDF Global'){
+            $fechaInicioAnio = '2024-01-01';
+            $fechaFinAnio = '2024-12-31';
+
+            // Query
+            $productosVendidos = DB::table('notas_productos_cosmica')
+                ->join('productos_notas_cosmica', 'notas_productos_cosmica.id', '=', 'productos_notas_cosmica.id_notas_productos')
+                ->join('products', 'productos_notas_cosmica.id_producto', '=', 'products.id') // Relación con productos
+                ->whereNotNull('notas_productos_cosmica.estatus_cotizacion') // Estatus diferente de null
+                ->where('notas_productos_cosmica.estatus_cotizacion', '!=', 'Cancelada') // Estatus diferente de Cancelada
+                ->whereBetween('notas_productos_cosmica.fecha', [$fechaInicioAnio, $fechaFinAnio]) // Rango de fechas del año
+                ->where('products.precio_normal', '!=', 0)
+                ->select('products.nombre as producto', DB::raw('COUNT(productos_notas_cosmica.id_producto) as vendidos'))
+                ->groupBy('products.nombre') // Agrupamos por nombre del producto
+                ->orderBy('vendidos', 'desc') // Opcional, para ordenar por mayor cantidad vendida
+                ->get();
+
             $query = NotasProductosCosmica::query();
 
             if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
@@ -1074,37 +1090,43 @@ class CotizacionCosmicaController extends Controller
                 $fechaInicio = $request->input('fecha_inicio');
                 $fechaFin = $request->input('fecha_fin');
 
-                $query2->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin]);
+                $query2->whereBetween('fecha_aprobada', [$fechaInicioAnio, $fechaFinAnio]);
             }
 
-            $query2->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado']);
-            $totalSum2 = $query2->sum('total');
-            $ventas = $query2->get();
+                $query2->orderBy('id', 'DESC')->where('tipo_nota', 'Cotizacion')->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado']);
+                $totalSum2 = $query2->sum('total');
+                $ventas = $query2->get();
 
-            $nota_productos = ProductosNotasCosmica::get();
+                $nota_productos = ProductosNotasCosmica::get();
 
-            // 2. Obtener los IDs de las cotizaciones filtradas
-            $ventasIds = $ventas->pluck('id');
+                // 2. Obtener los IDs de las cotizaciones filtradas
+                $ventasIds = $ventas->pluck('id');
 
-            // 3. Obtener y sumar las cantidades por producto de esas cotizaciones
-            $productosMasVendidos = ProductosNotasCosmica::whereIn('id_notas_productos', $ventasIds)
-                ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
-                ->groupBy('producto')
-                ->orderBy('total_cantidad', 'DESC')
-                ->limit(30)
-                ->get();
+                // 3. Obtener y sumar las cantidades por producto de esas cotizaciones
+                $productosMasVendidos = DB::table('notas_productos_cosmica')
+                    ->join('productos_notas_cosmica', 'notas_productos_cosmica.id', '=', 'productos_notas_cosmica.id_notas_productos')
+                    ->join('products', 'productos_notas_cosmica.id_producto', '=', 'products.id') // Relación con productos
+                    ->whereNotNull('notas_productos_cosmica.estatus_cotizacion') // Estatus diferente de null
+                    ->where('notas_productos_cosmica.estatus_cotizacion', '!=', 'Cancelada') // Estatus diferente de Cancelada
+                    ->whereBetween('notas_productos_cosmica.fecha', [$fechaInicioAnio, $fechaFinAnio]) // Rango de fechas del año
+                    ->where('products.precio_normal', '!=', 0)
+                    ->select('products.nombre as producto', DB::raw('SUM(productos_notas_cosmica.cantidad) as total_vendidos'))
+                    ->groupBy('products.nombre') // Agrupamos por nombre del producto
+                    ->orderBy('total_vendidos', 'desc') // Orden descendente para los más vendidos
+                    ->limit(10) // Mostrar los 10 más vendidos
+                    ->get();
 
                 $labels2 = $productosMasVendidos->pluck('producto')->toArray();
-                $data2 = $productosMasVendidos->pluck('total_cantidad')->toArray();
+                $data2 = $productosMasVendidos->pluck('total_vendidos')->toArray(); // Usamos el nombre correcto de la columna
 
                 $chartData2 = [
-                    "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
+                    "type" => 'bar',
                     "data" => [
-                        "labels" => $labels2, // Etiquetas para los productos
+                        "labels" => $labels2,
                         "datasets" => [
                             [
-                                "label" => "Productos mas Vendidos",
-                                "data" => $data2, // Cantidades correspondientes a cada producto
+                                "label" => "Productos Más Vendidos",
+                                "data" => $data2,
                                 "backgroundColor" => [
                                     '#1abc9c', '#16a085', '#2ecc71', '#27ae60', '#3498db', '#2980b9', '#9b59b6',
                                     '#8e44ad', '#34495e', '#2c3e50', '#f1c40f', '#f39c12', '#e67e22', '#d35400',
@@ -1116,13 +1138,21 @@ class CotizacionCosmicaController extends Controller
                         ],
                     ],
                     "options" => [
+                        "scales" => [
+                            "y" => [
+                                "beginAtZero" => true,
+                                "ticks" => [
+                                    "stepSize" => 1, // Escala en pasos de 1
+                                ],
+                            ],
+                        ],
                         "plugins" => [
                             "datalabels" => [
-                                "color" => 'white', // Cambia el color del texto a blanco
+                                "color" => 'white',
                             ],
                         ],
                         "legend" => [
-                            "display" => true // Mostrar la leyenda de colores
+                            "display" => true,
                         ],
                     ],
                 ];
@@ -1134,25 +1164,31 @@ class CotizacionCosmicaController extends Controller
                 $chartData2 = file_get_contents($chartURL2);
                 $chart2 = 'data:image/png;base64, '.base64_encode($chartData2);
 
-                // menos productos
 
-                $productosMenosVendidos = ProductosNotasCosmica::whereIn('id_notas_productos', $ventasIds)
-                ->select('producto', DB::raw('SUM(cantidad) as total_cantidad'))
-                ->groupBy('producto')
-                ->orderBy('total_cantidad', 'ASC')
-                ->limit(30)
+                // Consulta para productos menos vendidos
+                $productosMenosVendidos = DB::table('notas_productos_cosmica')
+                ->join('productos_notas_cosmica', 'notas_productos_cosmica.id', '=', 'productos_notas_cosmica.id_notas_productos')
+                ->join('products', 'productos_notas_cosmica.id_producto', '=', 'products.id') // Relación con productos
+                ->whereNotNull('notas_productos_cosmica.estatus_cotizacion') // Estatus diferente de null
+                ->where('notas_productos_cosmica.estatus_cotizacion', '!=', 'Cancelada') // Estatus diferente de Cancelada
+                ->whereBetween('notas_productos_cosmica.fecha', [$fechaInicioAnio, $fechaFinAnio]) // Rango de fechas del año
+                ->where('products.precio_normal', '!=', 0)
+                ->select('products.nombre as producto', DB::raw('SUM(productos_notas_cosmica.cantidad) as total_vendidos'))
+                ->groupBy('products.nombre') // Agrupamos por nombre del producto
+                ->orderBy('total_vendidos', 'asc') // Orden ascendente para menos vendidos
+                ->limit(10) // Mostrar los 10 menos vendidos
                 ->get();
 
                 $labels3 = $productosMenosVendidos->pluck('producto')->toArray();
-                $data3 = $productosMenosVendidos->pluck('total_cantidad')->toArray();
+                $data3 = $productosMenosVendidos->pluck('total_vendidos')->toArray();
 
                 $chartData3 = [
-                    "type" => 'bar', // Cambiar de 'bar' a 'pie' para una gráfica de pastel
+                    "type" => 'bar',
                     "data" => [
                         "labels" => $labels3, // Etiquetas para los productos
                         "datasets" => [
                             [
-                                "label" => "Productos menos Vendidos",
+                                "label" => "Productos Menos Vendidos",
                                 "data" => $data3, // Cantidades correspondientes a cada producto
                                 "backgroundColor" => [
                                     '#1abc9c', '#16a085', '#2ecc71', '#27ae60', '#3498db', '#2980b9', '#9b59b6',
@@ -1171,10 +1207,11 @@ class CotizacionCosmicaController extends Controller
                             ],
                         ],
                         "legend" => [
-                            "display" => true // Mostrar la leyenda de colores
+                            "display" => true, // Mostrar la leyenda de colores
                         ],
                     ],
                 ];
+
 
                 $chartData3 = json_encode($chartData3);
 
@@ -1184,7 +1221,7 @@ class CotizacionCosmicaController extends Controller
                 $chart3 = 'data:image/png;base64, '.base64_encode($chartData3);
 
                 $ciudadesData = NotasProductosCosmica::whereNotNull('estadociudad') // Filtra los registros donde estadociudad no es null
-                ->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+                ->whereBetween('fecha_aprobada', [$fechaInicioAnio, $fechaFinAnio])
                 ->select('estadociudad', DB::raw('COUNT(*) as total_compras'))
                 ->groupBy('estadociudad')
                 ->orderBy('total_compras', 'desc')
@@ -1237,17 +1274,35 @@ class CotizacionCosmicaController extends Controller
                 $chartDataGrafica = file_get_contents($chartURLGrafica);
                 $chartGrafica = 'data:image/png;base64, '.base64_encode($chartDataGrafica);
 
-                $ventasPorMes = $ventas->groupBy(function ($venta) {
-                    return \Carbon\Carbon::parse($venta->fecha)->locale('es')->isoFormat('MMMM YYYY');
-                })->map(function ($ventasDelMes) {
-                    return $ventasDelMes->sum('total');
+                $ventasPorMes = DB::table('notas_productos_cosmica')
+                    ->select(
+                        DB::raw("DATE_FORMAT(fecha, '%Y-%m') as mes"), // Formato Año-Mes
+                        DB::raw("SUM(total) as total_mensual")        // Suma de los totales
+                    )
+                    ->whereNotNull('estatus_cotizacion')             // Excluir los que son null
+                    ->where('estatus_cotizacion', '!=', 'Cancelada') // Excluir los que están cancelados
+                    ->groupBy(DB::raw("DATE_FORMAT(fecha, '%Y-%m')")) // Agrupar por Año-Mes
+                    ->orderBy('mes', 'asc')                           // Ordenar por fecha ascendente
+                    ->get();
+
+                // Formatear los resultados para incluir meses sin ventas
+                $meses = collect([
+                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo',
+                    'Junio', 'Julio', 'Agosto', 'Septiembre',
+                    'Octubre', 'Noviembre', 'Diciembre'
+                ]);
+
+                $resultado = collect($ventasPorMes)->mapWithKeys(function ($item) {
+                    $fecha = Carbon::parse($item->mes . '-01'); // Parseamos el mes y el año
+                    return [
+                        $fecha->locale('es')->isoFormat('MMMM YYYY') => $item->total_mensual
+                    ];
                 });
 
+            $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_reporte_global', compact('productosVendidos', 'resultado','today', 'ventas',  'chart2','chart3','chartGrafica', 'totalSum2', 'fechaInicio', 'fechaFin'));
 
-            $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_reporte_global', compact( 'ventasPorMes','today', 'ventas',  'chart2','chart3','chartGrafica', 'totalSum2', 'fechaInicio', 'fechaFin'));
-
-            //  return $pdf->stream();
-            return $pdf->download('Reporte Cosmica Ventas Global/ '.$today.'.pdf');
+            return $pdf->stream();
+            //  return $pdf->download('Reporte Cosmica Ventas Global/ '.$today.'.pdf');
 
         }
 

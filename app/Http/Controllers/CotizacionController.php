@@ -669,6 +669,7 @@ class CotizacionController extends Controller
         ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('estatus_cotizacion','=' , 'Cancelada')->get();
 
         $products = Products::orderBy('nombre','ASC')->get();
+        $today =  date('d-m-Y');
 
         if ($request->input('action') === 'Generar PDF') {
 
@@ -942,8 +943,257 @@ class CotizacionController extends Controller
             // return $pdf->stream();
             return $pdf->download('Reporte NAS / '.$today.'.pdf');
 
-        }else if($request->input('action') === 'Resetear'){
-            return redirect()->route('notas_cotizacion.index');
+        }else if($request->input('action') === 'Generar PDF Global'){
+            $fechaInicioAnio = '2024-01-01';
+            $fechaFinAnio = '2024-12-31';
+
+            // Query
+            $productosVendidos = DB::table('notas_productos')
+                ->join('productos_notas_id', 'notas_productos.id', '=', 'productos_notas_id.id_notas_productos')
+                ->join('products', 'productos_notas_id.id_producto', '=', 'products.id') // Relación con productos
+                ->where('products.categoria', 'NAS')
+                ->where('products.subcategoria', 'Producto')
+                ->whereNotNull('notas_productos.estatus_cotizacion') // Estatus diferente de null
+                ->where('notas_productos.estatus_cotizacion', '!=', 'Cancelada') // Estatus diferente de Cancelada
+                ->whereBetween('notas_productos.fecha', [$fechaInicioAnio, $fechaFinAnio]) // Rango de fechas del año
+                ->where('products.precio_normal', '!=', 0)
+                ->select('products.nombre as producto', DB::raw('COUNT(productos_notas_id.id_producto) as vendidos'))
+                ->groupBy('products.nombre') // Agrupamos por nombre del producto
+                ->orderBy('vendidos', 'desc') // Opcional, para ordenar por mayor cantidad vendida
+                ->get();
+
+            $query = NotasProductos::query();
+
+            if ($request->has('fecha_inicio') && $request->has('fecha_fin')) {
+                $fechaInicio = $request->input('fecha_inicio');
+                $fechaFin = $request->input('fecha_fin');
+
+                $query->whereBetween('fecha', [$fechaInicio, $fechaFin]);
+            }
+            //productos menos cotizados
+
+            $query2 = NotasProductos::query();
+
+            $totalSum2 = NotasProductos::where('tipo_nota', 'Venta Presencial')
+            ->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado'])
+            ->whereBetween('fecha', [$fechaInicioAnio, $fechaFinAnio])
+            ->sum('total');
+
+                $ventas = $query2->get();
+
+                $nota_productos = ProductosNotasId::get();
+
+                // 2. Obtener los IDs de las cotizaciones filtradas
+                $ventasIds = $ventas->pluck('id');
+
+                // 3. Obtener y sumar las cantidades por producto de esas cotizaciones
+                $productosMasVendidos = DB::table('notas_productos')
+                    ->join('productos_notas_id', 'notas_productos.id', '=', 'productos_notas_id.id_notas_productos')
+                    ->join('products', 'productos_notas_id.id_producto', '=', 'products.id') // Relación con productos
+                    ->where('products.categoria', 'NAS')
+                    ->where('products.subcategoria', 'Producto')
+                    ->whereNotNull('notas_productos.estatus_cotizacion') // Estatus diferente de null
+                    ->where('notas_productos.estatus_cotizacion', '!=', 'Cancelada') // Estatus diferente de Cancelada
+                    ->whereBetween('notas_productos.fecha', [$fechaInicioAnio, $fechaFinAnio]) // Rango de fechas del año
+                    ->where('products.precio_normal', '!=', 0)
+                    ->select('products.nombre as producto', DB::raw('SUM(productos_notas_id.cantidad) as total_vendidos'))
+                    ->groupBy('products.nombre') // Agrupamos por nombre del producto
+                    ->orderBy('total_vendidos', 'desc') // Orden descendente para los más vendidos
+                    ->limit(10) // Mostrar los 10 más vendidos
+                    ->get();
+
+                $labels2 = $productosMasVendidos->pluck('producto')->toArray();
+                $data2 = $productosMasVendidos->pluck('total_vendidos')->toArray(); // Usamos el nombre correcto de la columna
+
+                $chartData2 = [
+                    "type" => 'bar',
+                    "data" => [
+                        "labels" => $labels2,
+                        "datasets" => [
+                            [
+                                "label" => "Productos Más Vendidos",
+                                "data" => $data2,
+                                "backgroundColor" => [
+                                    '#1abc9c', '#16a085', '#2ecc71', '#27ae60', '#3498db', '#2980b9', '#9b59b6',
+                                    '#8e44ad', '#34495e', '#2c3e50', '#f1c40f', '#f39c12', '#e67e22', '#d35400',
+                                    '#e74c3c', '#c0392b', '#ecf0f1', '#bdc3c7', '#95a5a6', '#7f8c8d', '#e91e63',
+                                    '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#00bcd4', '#009688', '#4caf50',
+                                    '#8bc34a', '#cddc39'
+                                ],
+                            ],
+                        ],
+                    ],
+                    "options" => [
+                        "scales" => [
+                            "y" => [
+                                "beginAtZero" => true,
+                                "ticks" => [
+                                    "stepSize" => 1, // Escala en pasos de 1
+                                ],
+                            ],
+                        ],
+                        "plugins" => [
+                            "datalabels" => [
+                                "color" => 'white',
+                            ],
+                        ],
+                        "legend" => [
+                            "display" => true,
+                        ],
+                    ],
+                ];
+
+                $chartData2 = json_encode($chartData2);
+
+                $chartURL2 = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData2);
+
+                $chartData2 = file_get_contents($chartURL2);
+                $chart2 = 'data:image/png;base64, '.base64_encode($chartData2);
+
+
+                // Consulta para productos menos vendidos
+                $productosMenosVendidos = DB::table('notas_productos')
+                ->join('productos_notas_id', 'notas_productos.id', '=', 'productos_notas_id.id_notas_productos')
+                ->join('products', 'productos_notas_id.id_producto', '=', 'products.id') // Relación con productos
+                ->where('products.categoria', 'NAS')
+                ->where('products.subcategoria', 'Producto')
+                ->whereNotNull('notas_productos.estatus_cotizacion') // Estatus diferente de null
+                ->where('notas_productos.estatus_cotizacion', '!=', 'Cancelada') // Estatus diferente de Cancelada
+                ->whereBetween('notas_productos.fecha', [$fechaInicioAnio, $fechaFinAnio]) // Rango de fechas del año
+                ->where('products.precio_normal', '!=', 0)
+                ->select('products.nombre as producto', DB::raw('SUM(productos_notas_id.cantidad) as total_vendidos'))
+                ->groupBy('products.nombre') // Agrupamos por nombre del producto
+                ->orderBy('total_vendidos', 'asc') // Orden ascendente para menos vendidos
+                ->limit(10) // Mostrar los 10 menos vendidos
+                ->get();
+
+                $labels3 = $productosMenosVendidos->pluck('producto')->toArray();
+                $data3 = $productosMenosVendidos->pluck('total_vendidos')->toArray();
+
+                $chartData3 = [
+                    "type" => 'bar',
+                    "data" => [
+                        "labels" => $labels3, // Etiquetas para los productos
+                        "datasets" => [
+                            [
+                                "label" => "Productos Menos Vendidos",
+                                "data" => $data3, // Cantidades correspondientes a cada producto
+                                "backgroundColor" => [
+                                    '#1abc9c', '#16a085', '#2ecc71', '#27ae60', '#3498db', '#2980b9', '#9b59b6',
+                                    '#8e44ad', '#34495e', '#2c3e50', '#f1c40f', '#f39c12', '#e67e22', '#d35400',
+                                    '#e74c3c', '#c0392b', '#ecf0f1', '#bdc3c7', '#95a5a6', '#7f8c8d', '#e91e63',
+                                    '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#00bcd4', '#009688', '#4caf50',
+                                    '#8bc34a', '#cddc39'
+                                ],
+                            ],
+                        ],
+                    ],
+                    "options" => [
+                        "plugins" => [
+                            "datalabels" => [
+                                "color" => 'white', // Cambia el color del texto a blanco
+                            ],
+                        ],
+                        "legend" => [
+                            "display" => true, // Mostrar la leyenda de colores
+                        ],
+                    ],
+                ];
+
+
+                $chartData3 = json_encode($chartData3);
+
+                $chartURL3 = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartData3);
+
+                $chartData3 = file_get_contents($chartURL3);
+                $chart3 = 'data:image/png;base64, '.base64_encode($chartData3);
+
+                $ciudadesData = NotasProductos::whereNotNull('estadociudad') // Filtra los registros donde estadociudad no es null
+                ->whereBetween('fecha_aprobada', [$fechaInicioAnio, $fechaFinAnio])
+                ->select('estadociudad', DB::raw('COUNT(*) as total_compras'))
+                ->groupBy('estadociudad')
+                ->orderBy('total_compras', 'desc')
+                ->groupBy('estadociudad')
+                ->get();
+
+                $colores = [
+                    '#1abc9c', '#16a085', '#2ecc71', '#27ae60', '#3498db', '#2980b9', '#9b59b6',
+                    '#8e44ad', '#34495e', '#2c3e50', '#f1c40f', '#f39c12', '#e67e22', '#d35400',
+                    '#e74c3c', '#c0392b', '#ecf0f1', '#bdc3c7', '#95a5a6', '#7f8c8d', '#e91e63',
+                    '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#00bcd4', '#009688', '#4caf50',
+                    '#8bc34a', '#cddc39', '#ffeb3b', '#ffc107', '#ff9800', '#ff5722'
+                ];
+
+                // $labelsGrafica = $ciudadesData->pluck('estadociudad')->toArray();
+
+                $labelsGrafica = $ciudadesData->map(function($item) {
+                    return $item->estadociudad . ' (' . $item->total_compras . ')';
+                })->toArray();
+
+                $dataGrafica = $ciudadesData->pluck('total_compras')->toArray();
+
+                $chartDataGrafica = [
+                    "type" => 'pie', // Puedes cambiarlo a 'pie', 'line', etc.
+                    "data" => [
+                        "labels" => $labelsGrafica, // Etiquetas para las ciudades
+                        "datasets" => [
+                            [
+                                "label" => "Compras por Ciudad",
+                                "data" => $dataGrafica, // Cantidades correspondientes a cada ciudad
+                                "backgroundColor" => $colores, // Aplica los colores generados
+                            ],
+                        ],
+                    ],
+                    "options" => [
+                        "plugins" => [
+                            "datalabels" => [
+                                "color" => 'white', // Cambia el color del texto a blanco
+                            ],
+                        ],
+                        "legend" => [
+                            "display" => true // Mostrar la leyenda de colores
+                        ],
+                    ],
+                ];
+
+                $chartDataGrafica = json_encode($chartDataGrafica);
+                $chartURLGrafica = "https://quickchart.io/chart?width=500&height=500&c=".urlencode($chartDataGrafica);
+
+                $chartDataGrafica = file_get_contents($chartURLGrafica);
+                $chartGrafica = 'data:image/png;base64, '.base64_encode($chartDataGrafica);
+
+                $ventasPorMes = DB::table('notas_productos')
+                    ->select(
+                        DB::raw("DATE_FORMAT(fecha, '%Y-%m') as mes"),
+                        DB::raw("SUM(total) as total_mensual")
+                    )
+                    ->where('tipo_nota', 'Venta Presencial')
+                    ->whereNotNull('estatus_cotizacion')
+                    ->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado']) // Filtro actualizado
+                    ->whereBetween('fecha', [$fechaInicioAnio, $fechaFinAnio])
+                    ->groupBy(DB::raw("DATE_FORMAT(fecha, '%Y-%m')"))
+                    ->orderBy('mes', 'asc')
+                    ->get();
+
+                // Formatear los resultados para incluir meses sin ventas
+                $meses = collect([
+                    'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo',
+                    'Junio', 'Julio', 'Agosto', 'Septiembre',
+                    'Octubre', 'Noviembre', 'Diciembre'
+                ]);
+
+                $resultado = collect($ventasPorMes)->mapWithKeys(function ($item) {
+                    $fecha = Carbon::parse($item->mes . '-01'); // Parseamos el mes y el año
+                    return [
+                        $fecha->locale('es')->isoFormat('MMMM YYYY') => $item->total_mensual
+                    ];
+                });
+
+            $pdf = \PDF::loadView('admin.cotizacion.pdf_reporte_global', compact('productosVendidos', 'resultado','today', 'ventas',  'chart2','chart3','chartGrafica', 'totalSum2', 'fechaInicio', 'fechaFin'));
+
+            return $pdf->stream();
+            //  return $pdf->download('Reporte Cosmica Ventas Global/ '.$today.'.pdf');
+
         }
 
         // Si no se solicita PDF, mostrar los resultados en la vista
