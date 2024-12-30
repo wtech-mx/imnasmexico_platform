@@ -273,50 +273,34 @@ class MeliController extends Controller
         $timeout = 60; // Timeout total en segundos
         $connectTimeout = 30; // Timeout de conexión en segundos
 
+        // Realizar la solicitud a la API de Mercado Libre
+        $response = Http::withHeaders([
+            'Authorization' => "Bearer {$this->accessToken}",
+        ])->get($endpoint);
+
         $groupedOrders = []; // Definir por defecto como arreglo vacío
         $errorMessage = null; // Mensaje de error por defecto
 
-        do {
-            try {
-                // Realizar la solicitud a la API con reintentos
-                $response = Http::withHeaders([
-                    'Authorization' => "Bearer {$this->accessToken}",
-                ])->timeout($timeout)->connectTimeout($connectTimeout)->get($endpoint);
+        if ($response->successful()) {
+            $data = $response->json();
+            $ordenes = $data['results'] ?? []; // Obtiene las órdenes
 
-                if ($response->successful()) {
-                    // Si la respuesta es exitosa, procesar los datos
-                    $data = $response->json();
-                    $ordenes = $data['results'] ?? []; // Obtiene las órdenes
+            // Formatear las órdenes
+            $formattedOrders = $this->formatOrders($ordenes);
 
-                    // Formatear las órdenes
-                    $formattedOrders = $this->formatOrders($ordenes);
+            // Agrupar las órdenes por pack_id
+            $groupedOrders = $this->groupOrdersByPackId($formattedOrders);
+        } else {
+            // Manejar errores
+            $error = $response->json();
+            $status = $response->status();
 
-                    // Agrupar las órdenes por pack_id
-                    $groupedOrders = $this->groupOrdersByPackId($formattedOrders);
-
-                    // Salir del bucle ya que la solicitud fue exitosa
-                    break;
-                } else {
-                    // Manejar errores HTTP distintos a 200
-                    $error = $response->json();
-                    $status = $response->status();
-
-                    if ($status === 401 && isset($error['message']) && $error['message'] === 'invalid_token') {
-                        $errorMessage = 'El token ha expirado. Por favor, actualiza el token.';
-                    } else {
-                        $errorMessage = 'Error al conectar con Mercado Libre. Inténtalo más tarde.';
-                    }
-                }
-            } catch (\Exception $e) {
-                $attempt++;
-                if ($attempt >= $maxAttempts) {
-                    // Si se alcanzan los intentos máximos, asignar mensaje de error
-                    $errorMessage = 'No se pudo conectar con Mercado Libre después de varios intentos.';
-                } else {
-                    sleep(1); // Esperar 1 segundo antes de reintentar
-                }
+            if ($status === 401 && isset($error['message']) && $error['message'] === 'invalid_token') {
+                $errorMessage = 'El token ha expirado. Por favor, actualiza el token.';
+            } else {
+                $errorMessage = 'Error al conectar con Mercado Libre. Inténtalo más tarde.';
             }
-        } while ($attempt < $maxAttempts);
+        }
 
         // Pasar las variables a la vista
         return view('admin.meli.ventas', compact('groupedOrders', 'meli', 'errorMessage', 'fechaInicio', 'fechaFin'));
