@@ -16,6 +16,9 @@ class ProductosNotasId extends Model
         'price',
         'cantidad',
         'descuento',
+        'estatus',
+        'id_producto',
+        'escaneados',
     ];
 
     public function Nota()

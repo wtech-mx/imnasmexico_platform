@@ -724,7 +724,12 @@ class BodegaController extends Controller
     public function preparacion_scaner(Request $request, $id){
 
         $nota_scaner = NotasProductos::where('id', '=', $id)->first();
-        $productos_scaner = ProductosNotasId::where('id_notas_productos', '=', $id)->get();
+        $productos_scaner = ProductosNotasId::where('id_notas_productos', '=', $id)
+        ->get()
+        ->map(function ($producto) {
+            $producto->escaneados = $producto->escaneados ?? 0; // Asegúrate de incluir el valor actual
+            return $producto;
+        });
 
         $allChecked = $productos_scaner->every(function ($producto) {
             return $producto->estatus === 1;
@@ -734,6 +739,7 @@ class BodegaController extends Controller
     }
 
     public function checkProduct(Request $request){
+
         $sku_scaner = $request->input('sku');
         $sku = trim($sku_scaner);
         $idNotaProducto = $request->input('id_notas_productos');
@@ -744,13 +750,21 @@ class BodegaController extends Controller
         if ($product) {
             // Verifica y actualiza el registro correcto en `productos_notas`
             $notaProducto = ProductosNotasId::where('id_notas_productos', $idNotaProducto)
-                ->where('producto', $product->nombre)
-                ->first();
+            ->where('producto', $product->nombre)
+            ->first();
 
             if ($notaProducto) {
-                $notaProducto->estatus = 1;
-                $notaProducto->save();
-                return response()->json(['status' => 'success', 'message' => 'Producto encontrado y actualizado']);
+                if ($notaProducto->escaneados < $notaProducto->cantidad) {
+                    $notaProducto->escaneados = intval($notaProducto->escaneados) + 1; // Convierte escaneados a entero y suma 1
+                    if (intval($notaProducto->escaneados) === intval($notaProducto->cantidad)) { // Convierte cantidad a entero para comparar
+                        $notaProducto->estatus = 1; // Marca como completo
+                    }
+                        $notaProducto->save();
+                    return response()->json(['status' => 'success', 'escaneados' => $notaProducto->escaneados]);
+                } else {
+
+                    return response()->json(['status' => 'error', 'message' => 'Cantidad ya alcanzada']);
+                }
             }
         }
 
