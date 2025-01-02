@@ -363,11 +363,11 @@ document.addEventListener('DOMContentLoaded', function() {
                             if (data.membresia === 'Cosmos') {
                                 $('#descuento').val(40);
                                 membresiaInfo = 'Membresía: Cosmos';
-                                $('#descuento_prod').prop('disabled', true);
+                                $('#descuento_prod').prop('disabled', false);
                             } else if (data.membresia === 'Estelar') {
                                 $('#descuento').val(60);
                                 membresiaInfo = 'Membresía: Estelar';
-                                $('#descuento_prod').prop('disabled', true);
+                                $('#descuento_prod').prop('disabled', false);
                             }
                         } else {
                             $('#descuento').val(0); // Opcional: Resetear si no está activo
