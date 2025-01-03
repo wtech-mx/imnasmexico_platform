@@ -420,6 +420,33 @@ class MeliController extends Controller
     }
 
 
+    public function meli_show_order($order_id)
+    {
+
+        // Si order_id tiene un valor, realizar las peticiones relacionadas con la orden
+        $shipmentDetails = null;
+
+        if (isset($order_id)) {
+            $endpointShipment = "https://api.mercadolibre.com/shipments/{$order_id}";
+            try {
+                $shipmentResponse = Http::withHeaders([
+                    'Authorization' => "Bearer {$this->accessToken}",
+                    'x-format-new' => 'true',
+                ])->get($endpointShipment);
+
+                if ($shipmentResponse->successful()) {
+                    $shipmentDetails = $shipmentResponse->json(); // Guardar los detalles del envío
+                }
+            } catch (\Exception $e) {
+                $shipmentDetails = null; // Si hay un error, dejar null
+            }
+        }
+
+
+        // Pasar todo a la vista
+        return view('admin.cotizacion_cosmica.meli_create_order', compact('shipmentDetails'));
+    }
+
 
     public function publishToMeli(Request $request, $id)
     {

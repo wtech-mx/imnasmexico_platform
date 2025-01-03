@@ -632,6 +632,7 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::get('cosmica/cotizacion/meli/show/{id}', [App\Http\Controllers\MeliController::class, 'meli_show'])->name('cotizacion_cosmica.meli_show');
     // Route::get('cosmica/cotizacion/meli/show/{id}/{order_id}', [App\Http\Controllers\MeliController::class, 'meli_show'])->name('cotizacion_cosmica.meli_show');
     Route::get('cosmica/cotizacion/meli/show/{id}/{order_id?}', [App\Http\Controllers\MeliController::class, 'meli_show'])->name('cotizacion_cosmica.meli_show');
+    Route::get('meli/show/{order_id}', [App\Http\Controllers\MeliController::class, 'meli_show_order'])->name('cotizacion_cosmica.meli_show_order');
 
     Route::patch('cosmica/cotizacion/update/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update'])->name('cotizacion_cosmica.update');
     Route::post('cosmica/cotizacion/meli/publish/{id}', [App\Http\Controllers\MeliController::class, 'publishToMeli'])->name('meli.publish');

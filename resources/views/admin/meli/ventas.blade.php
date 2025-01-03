@@ -4,6 +4,10 @@
     Meli Ventas
 @endsection
 
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 @section('content')
 
     <style>
@@ -105,7 +109,7 @@
                                     <form method="GET" action="{{ route('meli_ventas.index') }}" class="mb-3">
                                         <div class="row">
                                             <div class="col-12">
-                                                <p class="text-danger">Mercado Libre no deja traer registros posteriores a los 20 dias. <br>Por defecto esta trayendo 20 dias antes del dia actual. <br>Usar el filtro para ampliar el rango de fechas (Sin que pase de 20 dias)</p>
+                                                <p class="text-danger">Mercado Libre no deja traer registros posteriores a los 20 dias. <br>Pordefecto esta trayendo 20 dias antes del dia actual. <br>Usar el filtro para ampliar el rango de fechas (Sin que pase de 20 dias)</p>
                                             </div>
                                             <div class="col-md-4">
                                                 <label for="fecha_inicio" class="form-label">Fecha de inicio:</label>
@@ -244,8 +248,17 @@
                                                     @if($order['cosmica_nota_id'])
                                                         {{-- <a href="{{ route('cotizacion_cosmica.meli_show', ['id' => $order['cosmica_nota_id']],$identifier) }}" class="btn text-white btn-sm" style="background: #322338" target="_blank">Ver Pedido</a> --}}
                                                         <a href="{{ route('cotizacion_cosmica.meli_show', ['id' => $order['cosmica_nota_id'], 'order_id' => $identifier]) }}" class="btn text-white btn-sm" style="background: #322338" target="_blank">Ver Pedido</a>
-
                                                     @endif
+
+                                                    @if (!Str::contains($order['item_title'], 'Kit De Productos Cosmica'))
+                                                        <a href="{{ route('cotizacion_cosmica.meli_show_order', ['order_id' => $order['shipping_id']]) }}"
+                                                        class="btn text-white btn-sm"
+                                                        style="background: #eaf209"
+                                                        target="_blank">
+                                                            Ver Pedido Meli
+                                                        </a>
+                                                    @endif
+
 
                                                 </div>
                                             </div>
