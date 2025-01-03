@@ -304,7 +304,6 @@
                     <div id="carousel_tiendita" class="carousel slide">
                         <div class="carousel-inner">
                            @foreach ($noticias_inicio as $item)
-                            @if ($item->estatus === 'Activo')
                                 @if ($item->seccion === 'Inicio')
 
                                 <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
@@ -344,7 +343,6 @@
                                 </div>
 
                                 @endif
-                            @endif
                            @endforeach
                         </div>
 
