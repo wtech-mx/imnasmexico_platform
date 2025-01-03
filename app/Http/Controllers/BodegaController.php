@@ -797,17 +797,24 @@ class BodegaController extends Controller
                 ->first();
 
             if ($notaProducto) {
-                $notaProducto->estatus = 1;
-                $notaProducto->save();
-                return response()->json(['status' => 'success', 'message' => 'Producto encontrado y actualizado']);
+                if ($notaProducto->escaneados < $notaProducto->cantidad) {
+                    $notaProducto->escaneados = intval($notaProducto->escaneados) + 1; // Convierte escaneados a entero y suma 1
+                    if (intval($notaProducto->escaneados) === intval($notaProducto->cantidad)) { // Convierte cantidad a entero para comparar
+                        $notaProducto->estatus = 1; // Marca como completo
+                    }
+                        $notaProducto->save();
+                    return response()->json(['status' => 'success', 'escaneados' => $notaProducto->escaneados]);
+                } else {
+
+                    return response()->json(['status' => 'error', 'message' => 'Cantidad ya alcanzada']);
+                }
             }
         }
 
         return response()->json(['status' => 'error', 'message' => 'Producto no encontrado o no corresponde a la nota']);
     }
 
-    public function preparacion_scaner_paradisus(Request $request, $id)
-    {
+    public function preparacion_scaner_paradisus(Request $request, $id){
         $dominio = $request->getHost();
 
         // Llama a la API para obtener los pedidos
@@ -915,9 +922,17 @@ class BodegaController extends Controller
                 ->first();
 
             if ($notaProducto) {
-                $notaProducto->estatus = 1;
-                $notaProducto->save();
-                return response()->json(['status' => 'success', 'message' => 'Producto encontrado y actualizado']);
+                if ($notaProducto->escaneados < $notaProducto->cantidad) {
+                    $notaProducto->escaneados = intval($notaProducto->escaneados) + 1; // Convierte escaneados a entero y suma 1
+                    if (intval($notaProducto->escaneados) === intval($notaProducto->cantidad)) { // Convierte cantidad a entero para comparar
+                        $notaProducto->estatus = 1; // Marca como completo
+                    }
+                        $notaProducto->save();
+                    return response()->json(['status' => 'success', 'escaneados' => $notaProducto->escaneados]);
+                } else {
+
+                    return response()->json(['status' => 'error', 'message' => 'Cantidad ya alcanzada']);
+                }
             }
         }
 
@@ -964,9 +979,17 @@ class BodegaController extends Controller
                 ->first();
 
             if ($notaProducto) {
-                $notaProducto->estatus = 1;
-                $notaProducto->save();
-                return response()->json(['status' => 'success', 'message' => 'Producto encontrado y actualizado']);
+                if ($notaProducto->escaneados < $notaProducto->cantidad) {
+                    $notaProducto->escaneados = intval($notaProducto->escaneados) + 1; // Convierte escaneados a entero y suma 1
+                    if (intval($notaProducto->escaneados) === intval($notaProducto->cantidad)) { // Convierte cantidad a entero para comparar
+                        $notaProducto->estatus = 1; // Marca como completo
+                    }
+                        $notaProducto->save();
+                    return response()->json(['status' => 'success', 'escaneados' => $notaProducto->escaneados]);
+                } else {
+
+                    return response()->json(['status' => 'error', 'message' => 'Cantidad ya alcanzada']);
+                }
             }
         }
 

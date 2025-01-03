@@ -42,6 +42,7 @@ Productos solicitados Woo NAS
                                                     <tr>
                                                         <th>Cantidad</th>
                                                         <th>Producto</th>
+                                                        <th>Progreso</th>
                                                         <th>Estatus</th>
                                                     </tr>
                                                 </thead>
@@ -55,6 +56,9 @@ Productos solicitados Woo NAS
                                                             <td>
                                                                 <img src="{{ $producto_nas->imagenes }}" alt="" style="width: 60px"><br>
                                                                 {{ $item->nombre }}
+                                                            </td>
+                                                            <td data-sku="{{ $producto_nas->sku ?? '' }}" data-cantidad="{{ $item->cantidad }}">
+                                                                <span class="contador">{{ $item->escaneados }}/{{ $item->cantidad }}</span>
                                                             </td>
                                                             <td id="status-{{ $producto_nas->sku }}">
                                                                 @if($item->estatus === 1)
@@ -89,74 +93,104 @@ Productos solicitados Woo NAS
 @endsection
 @section('datatable')
 <script>
-    $(document).ready(function() {
-        checkAllProductsChecked();
-    });
+$(document).ready(function () {
+    const scanCounts = {};
 
-    $('#scanInput').on('change', function() {
-        let sku = $(this).val().trim(); // Eliminar espacios en blanco
-        let idNota = "{{ $order->id }}"; // ID de la nota que estás mostrando
-        const successSound = document.getElementById("successSound");
-        const errorSound = document.getElementById("errorSound");
-
-        if (sku.length === 6) {
-            $.ajax({
-                url: "{{ route('check_nas.product') }}",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    sku: sku,
-                    id_nota: idNota,
-                    _token: "{{ csrf_token() }}" // Incluir el token CSRF
-                },
-                success: function(data) {
-                    console.log(data);
-                    if (data.status === 'success') {
-                        // Actualizar el campo correspondiente usando el SKU como ID
-                        $('#status-' + sku).html('✔️');
-                        checkAllProductsChecked();
-                        successSound.play();
-                        alert('Producto escaneado');
-                    } else {
-                        errorSound.play();
-                        alert('Producto no encontrado en el pedido.');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                    errorSound.play();
-                }
-            });
-
-            $(this).val(''); // Limpiar el campo de entrada después de procesar el SKU
-        } else {
-            console.log('El SKU no tiene la longitud correcta.');
-        }
-    });
-
+    // Verifica si todos los productos han sido escaneados
     function checkAllProductsChecked() {
         let allChecked = true;
-        document.querySelectorAll('tbody tr').forEach(function(row) {
-            if (row.querySelector('td:last-child').innerHTML !== '✔️') {
+        $('td[id^="status-"]').each(function () {
+            if ($(this).text().trim() !== '✔️') {
                 allChecked = false;
             }
         });
-
-        // Mostrar u ocultar el botón según el estado de `allChecked`
-        const guardarBtnContainer = document.getElementById('guardarBtnContainer');
-        if (allChecked) {
-            guardarBtnContainer.style.display = 'block'; // Mostrar el botón
-        } else {
-            guardarBtnContainer.style.display = 'none'; // Ocultar el botón
-        }
+        $('#guardarBtn').toggle(allChecked);  // Muestra el botón solo si todos están marcados
     }
 
+    // Inicializa el contador de productos escaneados
+    $('td[data-sku]').each(function () {
+        const sku = $(this).data('sku');
+        const cantidad = parseInt($(this).data('cantidad'));
+        const escaneados = parseInt($(this).find('.contador').text().split('/')[0]);
+
+        scanCounts[sku] = escaneados;
+
+        if (escaneados === cantidad) {
+            $(`#status-${sku}`).text('✔️');
+        }
+    });
+
+    // Reproduce sonido dependiendo del éxito o error
     function playSound(success) {
+        const successSound = document.getElementById("successSound");
+        const errorSound = document.getElementById("errorSound");
+
         if (success) {
             successSound.play();
         } else {
             errorSound.play();
         }
     }
+
+    // Manejador para escanear el SKU
+    $('#scanInput').on('change', function () {
+        const sku = $(this).val().trim();
+
+        if (sku.length === 6) {
+            const idNotaProducto = $('tr[data-id]').data('id');
+            const cantidad = parseInt($(`td[data-sku="${sku}"]`).data('cantidad')) || 0;
+
+            if (!scanCounts[sku]) {
+                scanCounts[sku] = 0;
+            }
+
+            if (scanCounts[sku] < cantidad) {
+                $.ajax({
+                    url: "{{ route('check_nas.product') }}",
+                    method: "POST",
+                    data: {
+                        sku: sku,
+                        id_notas_productos: idNotaProducto,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function (data) {
+                        if (data.status === 'success') {
+                            scanCounts[sku]++;
+
+                            // Actualiza el contador visible
+                            const contadorCell = $(`td[data-sku="${sku}"]`);
+                            contadorCell.find('.contador').text(`${scanCounts[sku]}/${cantidad}`);
+
+                            if (scanCounts[sku] === cantidad) {
+                                $(`td[id^="status-${sku}"]`).text('✔️');
+                                playSound(true);
+                                checkAllProductsChecked();
+                            } else {
+                                console.log(`Escaneos realizados para SKU ${sku}: ${scanCounts[sku]}/${cantidad}`);
+                            }
+                        } else {
+                            playSound(false);
+                            console.log(data);
+                            alert(data.message);
+                        }
+                    },
+                    error: function (error) {
+                        playSound(false);
+                        console.error('Error:', error);
+                    }
+                });
+            } else {
+                alert(`Ya se han escaneado ${cantidad} productos para el SKU ${sku}.`);
+            }
+
+            $(this).val('');
+        } else {
+            console.log('El SKU no tiene la longitud correcta.');
+        }
+    });
+
+    // Verifica los productos escaneados al cargar la página
+    checkAllProductsChecked();
+});
 </script>
 @endsection
