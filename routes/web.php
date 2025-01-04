@@ -105,6 +105,16 @@ Route::get('folio', function () {
     return view('user.folio');
 });
 
+
+
+// =============== E C O M M E R C E C O S M I C A ===============================
+Route::get('/tienda/home', [App\Http\Controllers\EcommerceCosmikaController::class, 'home'])->name('tienda.home');
+Route::get('/tienda/single_product', [App\Http\Controllers\EcommerceCosmikaController::class, 'single_product'])->name('tienda.single_product');
+Route::get('/tienda/categories', [App\Http\Controllers\EcommerceCosmikaController::class, 'categories'])->name('tienda.categories');
+Route::get('/tienda/filter', [App\Http\Controllers\EcommerceCosmikaController::class, 'filter'])->name('tienda.filter');
+Route::get('/tienda/about', [App\Http\Controllers\EcommerceCosmikaController::class, 'about'])->name('tienda.about');
+
+
 // =============== M O D U L O   F O L I O S ===============================
 Route::get('/buscar/folio', [App\Http\Controllers\FoliosController::class, 'index'])->name('folio.index');
 Route::get('/buscador/folio', [App\Http\Controllers\FoliosController::class, 'buscador'])->name('folio.buscador');
