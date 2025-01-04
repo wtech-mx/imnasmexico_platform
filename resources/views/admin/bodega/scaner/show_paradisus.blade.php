@@ -85,6 +85,10 @@ Productos solicitados Paradisus
 @endsection
 @section('datatable')
 <script>
+    $(document).ready(function() {
+        checkAllProductsChecked();
+    });
+
 $(document).ready(function () {
     const scanCounts = {};
 
@@ -97,7 +101,16 @@ $(document).ready(function () {
             }
         });
         $('#guardarBtn').toggle(allChecked);  // Muestra el botón solo si todos están marcados
+
+        const guardarBtnContainer = document.getElementById('guardarBtnContainer');
+        if (allChecked) {
+            guardarBtnContainer.style.display = 'block'; // Mostrar el botón
+        } else {
+            guardarBtnContainer.style.display = 'none'; // Ocultar el botón
+        }
     }
+
+
 
     // Inicializa el contador de productos escaneados
     $('td[data-sku]').each(function () {
