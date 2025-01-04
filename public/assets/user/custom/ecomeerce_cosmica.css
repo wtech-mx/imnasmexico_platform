@@ -3,6 +3,22 @@
     margin: 0;
 }
 
+.color1{
+    color: #eed6cf;
+}
+
+.color2{
+    color:#2d2432;
+}
+
+.color3{
+    color: #b899b0;
+}
+
+.color4{
+    color: #c2aabd;;
+}
+
 body{
     padding: 0;
     margin: 0;
@@ -19,6 +35,10 @@ body{
     background-image: linear-gradient(to bottom, #eaccc7, #b99c9e, #896e77, #594552, #2c202f); /* Fondo principal */
     box-shadow: 6px 6px 9px -6px rgba(0, 0, 0, 0.25);
     position: relative; /* Necesario para el pseudo-elemento */
+    text-align: center; /* Centrar texto */
+    display: flex; /* Flexbox */
+    flex-direction: column; /* Contenido en columna */
+    align-items: center; /* Centrar horizontalmente */
 }
 
 .container_lineas::before {
@@ -31,30 +51,43 @@ body{
     border-radius: 50px; /* Bordes redondeados para el pseudo-elemento */
     border: 3px solid transparent; /* Borde degradado */
     background: radial-gradient(circle, rgba(72,25,12,1) 64%, rgba(253,233,184,1) 87%, rgba(253,233,184,1) 100%);
-                linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0); /* Define la máscara para el borde */
-    mask:
-        linear-gradient(#fff 0 0) content-box,
-        linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude; /* Solo deja visible el borde */
     pointer-events: none; /* Asegura que no interfiera con el contenido */
 }
 
-.img_grid{
-    height: 250px;
+.img_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ocultar el espacio sobrante */
+    max-width: 250px; /* Ajusta el tamaño máximo del contenedor */
+    max-height: 250px;
+    width: 100%;
+    height: auto;
+}
+
+.img_grid {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain; /* Ajusta la imagen al contenido visible */
     filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));
 }
 
-.title_linea{
-    font-size: 40px;
+.title_linea {
+    font-size: 20px;
     font-weight: 600;
 }
 
-.subtitle_linea{
-    font-size: 45px;
+.subtitle_linea {
+    font-size: 30px;
     font-weight: normal;
 }
+
 
 .container_encabezado{
     background-color: #eed6cf;
@@ -92,10 +125,362 @@ body{
     z-index: 0;              /* Envía la imagen al fondo */
 }
 
-
-
 .titulo_categorias{
     z-index: 1;              /* Asegura que el texto esté por encima de la imagen */
     color: #fff;             /* Color del texto */
     font-size: 40px;
-    font-weight: bold;}
+    font-weight: bold;
+}
+
+
+.category-banner {
+    position: relative;
+    background-size: cover; /* Ajusta la imagen para cubrir el contenedor */
+    background-position: center; /* Centra la imagen */
+    height: 300px; /* Ajusta según lo necesario */
+}
+
+.category-banner .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Asegura que esté detrás del contenido */
+}
+
+.category-banner .container {
+    position: relative;
+    z-index: 2; /* Asegura que el contenido esté encima del overlay */
+}
+
+.container_categories_grid{
+    position: relative;
+    top: -50px;
+    z-index: 10;
+}
+
+.img_portada_linea_esencial{
+    width: 210px;
+    z-index: 1;
+    position: relative;
+    top: -15%;
+    left: 0%;
+}
+
+.h1_portada_linea_esencial{
+    font-size: 60px;
+    color:#767C66;
+}
+
+.h3_portada_linea_esencial{
+    font-size: 60px;
+    color:#767C66;
+}
+
+.btn_portada_linea_esencial{
+    border-radius: 30px;
+    background-color: #fff;
+    padding: 15px;
+    color:#767C66;
+    font-size: 20px;
+}
+
+.bg_gradiente_all_linea{
+    background-image: linear-gradient(to right top, #f9ece6, #fae6dd, #fadfd5, #fbd9ce, #fcd2c7);
+}
+
+.img_gradiente_all_linea{
+    width: 50%;
+}
+
+.h6_all_gradient{
+    font-size: 30px;
+}
+
+.h5_all_gradient{
+    font-size: 35px;
+}
+
+.btn_all_gradient{
+    border-radius: 30px;
+    background-color: #000;
+    padding: 5px 15px 5px 15px;
+    color:#fff;
+    font-size: 20px;
+}
+
+
+.container_lineas_grid {
+    padding: 10px;
+    width: 100%;
+    border-radius: 50px; /* Bordes redondeados */
+    background-image: linear-gradient(to right top, #f9ece6, #fae6dd, #fadfd5, #fbd9ce, #fcd2c7);
+    box-shadow: 6px 6px 9px -6px rgba(0, 0, 0, 0.25);
+    position: relative; /* Necesario para el pseudo-elemento */
+    display: flex; /* Flexbox para centrar contenido */
+    flex-direction: column; /* Contenido en columna */
+    align-items: center; /* Centrar horizontalmente */
+    text-align: center; /* Centrar texto */
+}
+
+.container_lineas_grid::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px; /* Bordes redondeados para el pseudo-elemento */
+    border: 3px solid transparent; /* Borde degradado */
+    background: radial-gradient(circle, rgba(72,25,12,1) 64%, rgba(253,233,184,1) 87%, rgba(253,233,184,1) 100%);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude; /* Solo deja visible el borde */
+    pointer-events: none; /* Asegura que no interfiera con el contenido */
+}
+
+.container_lineas_slide {
+    padding: 10px;
+    width: 100%;
+    border-radius: 50px; /* Bordes redondeados */
+    background-image: linear-gradient(to bottom, #eaccc7, #b99c9e, #896e77, #594552, #2c202f);    box-shadow: 6px 6px 9px -6px rgba(0, 0, 0, 0.25);
+    position: relative; /* Necesario para el pseudo-elemento */
+    display: flex; /* Flexbox para centrar contenido */
+    flex-direction: column; /* Contenido en columna */
+    align-items: center; /* Centrar horizontalmente */
+    text-align: center; /* Centrar texto */
+}
+
+.container_lineas_slide::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px; /* Bordes redondeados para el pseudo-elemento */
+    border: 3px solid transparent; /* Borde degradado */
+    background: radial-gradient(circle, rgba(72,25,12,1) 64%, rgba(253,233,184,1) 87%, rgba(253,233,184,1) 100%);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude; /* Solo deja visible el borde */
+    pointer-events: none; /* Asegura que no interfiera con el contenido */
+}
+
+.img_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ocultar el espacio sobrante */
+    width: auto;
+    height: auto;
+    max-width: 275px;
+    max-height: 200px;
+}
+
+.img_grid_products {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ajusta al contenido visible */
+    /* filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7)); */
+}
+
+.img_btn_plus_grid {
+    width: 30px;
+
+}
+
+.icon_card_product_grid{
+    width: 20px;
+    margin-left: 2rem;
+    margin-top: 2rem;
+}
+
+.title_lineagrid {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.subtitle_lineagrid {
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+
+.horizontal-banner {
+    background-size: cover; /* Ajusta la imagen al contenedor */
+    background-position: center; /* Centra la imagen horizontal y verticalmente */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+    height: auto; /* Altura automática según el contenido */
+    min-height: 330px; /* Altura mínima para asegurar que se vea bien en móviles */
+    width: 100%; /* Asegura que abarque toda la pantalla */
+    padding: 30px 15px; /* Espaciado interno */
+    display: flex; /* Flexbox para alinear contenido */
+    align-items: center; /* Centra el contenido verticalmente */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    color: white; /* Texto blanco */
+    text-align: center; /* Texto centrado */
+    position: relative;
+}
+
+
+@media (max-width: 768px) {
+    .horizontal-banner {
+        min-height: 150px; /* Reduce la altura en móviles */
+    }
+
+    .banner-title {
+        font-size: 1.5rem; /* Ajusta el tamaño del texto en móviles */
+    }
+
+    .banner-subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* Imagen de fondo */
+.background-image {
+     /* Imagen de fondo */
+    background-size: cover; /* La imagen cubre todo el área */
+    background-position: center; /* Centrada */
+    background-repeat: no-repeat; /* Evita repeticiones */
+    position: absolute; /* Posición absoluta para cubrir todo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh; /* Altura de la pantalla completa */
+    z-index: 1; /* Capa inferior */
+}
+
+/* Contenedor superior centrado */
+.overlay-content {
+    position: relative;
+    z-index: 2; /* Encima de la capa de fondo */
+    height: 100vh; /* Abarca toda la pantalla */
+}
+
+/* Contenedor con efecto blur */
+.content-blur {
+    background-color: rgba(255, 255, 255, 0.5); /* Fondo blanco translúcido */
+    backdrop-filter: blur(7px); /* Efecto blur */
+    -webkit-backdrop-filter: blur(7px); /* Blur para Safari */
+    padding: 20px;
+    border-radius: 50px;
+    max-width: 600px;
+    color: #333; /* Color del texto */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+}
+
+.content-blur::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px; /* Bordes redondeados para el pseudo-elemento */
+    border: 3px solid transparent; /* Borde degradado */
+    background: radial-gradient(circle, rgba(72,25,12,1) 64%, rgba(253,233,184,1) 87%, rgba(253,233,184,1) 100%);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude; /* Solo deja visible el borde */
+    pointer-events: none; /* Asegura que no interfiera con el contenido */
+}
+
+/* Botón */
+.btn_caviar_linea {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #d4a373;
+    color: white;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.btn_caviar_linea:hover {
+    background-color: #b2895a;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .content-blur {
+        max-width: 90%;
+    }
+
+    .content-blur h2 {
+        font-size: 24px;
+    }
+
+    .content-blur h3 {
+        font-size: 20px;
+    }
+
+    .content-blur p {
+        font-size: 14px;
+    }
+
+    .btn_caviar_linea {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+}
+
+
+.h2_linea_caviar{
+    font-weight: bold;
+    font-size: 40px;
+
+}
+
+.h3_linea_caviar{
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.p_linea_caviar{
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.btn_caviar_linea{
+    border-radius: 30px;
+    background-color: #eed6cf;
+    padding: 5px 15px 5px 15px;
+    color:#b899b0;
+    font-size: 20px;
+}
+
+.bg_footer{
+    background-color: #2d2432;
+}
+
+.img_estrellas_footer{
+    width: 25px;
+}
+
+.texto_footer_principal{
+    font-size: 30px;
+}
+
+.img_icon_footer{
+    width: 60px;
+}
+
+.subtitle_footer{
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.p_title_footer{
+    font-size: 10px;
+}
+
+
