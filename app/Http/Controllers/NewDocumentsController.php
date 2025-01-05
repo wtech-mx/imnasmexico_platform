@@ -7,13 +7,17 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class NewDocumentsController extends Controller
 {
-    public function cedula(){
+    public function cedula()
+    {
+        // Carga la vista y genera el PDF
+        $pdf = PDF::loadView('admin.pdf.nuevos.cedula')
+            ->setOption('isHtml5ParserEnabled', true)
+            ->setOption('isRemoteEnabled', true);
 
-        $pdf = PDF::loadView('admin.pdf.nuevos.cedula');
+        // Establecer tamaño de papel personalizado
+        $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Oficio
 
-        $pdf->setPaper('A4', 'portrait');
-        $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
-
+        // Retornar el PDF generado
         return $pdf->stream('Cedula.pdf');
     }
 
