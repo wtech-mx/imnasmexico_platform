@@ -47,18 +47,19 @@
             padding-right: 15px;
             box-sizing: border-box;
         }
-        .col-1 { width: 8.33%; }
-        .col-2 { width: 16.66%; }
-        .col-3 { width: 25%; }
-        .col-4 { width: 33.33%; }
-        .col-5 { width: 41.66%; }
-        .col-6 { width: 50%; }
-        .col-7 { width: 58.33%; }
-        .col-8 { width: 66.66%; }
-        .col-9 { width: 75%; }
-        .col-10 { width: 83.33%; }
-        .col-11 { width: 91.66%; }
-        .col-12 { width: 100%; }
+        .col-1 { width: 3.69%; }  /* 8.33% - 4.64% */
+        .col-2 { width: 12.02%; } /* 16.66% - 4.64% */
+        .col-3 { width: 20.36%; } /* 25% - 4.64% */
+        .col-4 { width: 28.69%; } /* 33.33% - 4.64% */
+        .col-5 { width: 37.02%; } /* 41.66% - 4.64% */
+        .col-6 { width: 45.36%; } /* 50% - 4.64% */
+        .col-7 { width: 53.69%; } /* 58.33% - 4.64% */
+        .col-8 { width: 62.02%; } /* 66.66% - 4.64% */
+        .col-9 { width: 70.36%; } /* 75% - 4.64% */
+        .col-10 { width: 78.69%; } /* 83.33% - 4.64% */
+        .col-11 { width: 87.02%; } /* 91.66% - 4.64% */
+        .col-12 { width: 95.36%; } /* 100% - 4.64% */
+
         .text-center {
             text-align: center;
         }
