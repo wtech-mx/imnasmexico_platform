@@ -51,10 +51,10 @@
 
                 <div class="content mb-3 mt-3">
                     <div class="img_container mx-auto">
-                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/protector.png') }}" alt="Protector">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/nebulosa.png') }}" alt="Protector">
                     </div>
                     <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
-                    <h5 class="text-center  Quinsi text-white subtitle_linea m-0">Astros</h5>
+                    <h5 class="text-center  Quinsi text-white subtitle_linea m-0">NEBULOSA</h5>
                 </div>
 
             </div>
@@ -65,14 +65,15 @@
 
                 <div class="content mb-3 mt-3">
                     <div class="img_container mx-auto">
-                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/protector.png') }}" alt="Protector">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/constelacion.png') }}" alt="Protector">
                     </div>
                     <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
-                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">Astros</h5>
+                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">CONSTELACION</h5>
                 </div>
 
             </div>
         </div>
+
     </div>
 
     <div class="row">
@@ -322,14 +323,6 @@
             <p>
                 <a href="#" class="btn btn_caviar_linea">Explorar Línea</a>
             </p>
-        </div>
-    </div>
-</div>
-
-<div class="container px-2 px-md-3 px-lg-4">
-    <div class="row">
-        <div class="col-12">
-            <hr class="hr_custom">
         </div>
     </div>
 </div>

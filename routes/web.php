@@ -105,7 +105,13 @@ Route::get('folio', function () {
     return view('user.folio');
 });
 
+// =============== E C O M M E R C E C O S M I C A ===============================
 
+Route::get('/doc/cedula', [App\Http\Controllers\NewDocumentsController::class, 'cedula'])->name('doc.cedula');
+Route::get('/doc/titulo', [App\Http\Controllers\NewDocumentsController::class, 'titulo'])->name('doc.titulo');
+Route::get('/doc/diploma', [App\Http\Controllers\NewDocumentsController::class, 'diploma'])->name('doc.diploma');
+Route::get('/doc/credencial', [App\Http\Controllers\NewDocumentsController::class, 'credencial'])->name('doc.credencial');
+Route::get('/doc/tira', [App\Http\Controllers\NewDocumentsController::class, 'tira'])->name('doc.tira');
 
 // =============== E C O M M E R C E C O S M I C A ===============================
 Route::get('/tienda/home', [App\Http\Controllers\EcommerceCosmikaController::class, 'home'])->name('tienda.home');
