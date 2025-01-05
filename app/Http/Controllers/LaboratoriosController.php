@@ -59,6 +59,7 @@ class LaboratoriosController extends Controller
                     $pedidoProducto->save();
 
                     $producto->stock_nas = $stock_actualizado;
+                    $producto->stock += $cantidades_recibido[$index];// Aumentar el stock con la cantidad recibida
                     $producto->save();
 
                     $productosPendientes = BodegaPedidosProductos::where('id_pedido', $id_pedido)
@@ -112,8 +113,7 @@ class LaboratoriosController extends Controller
         return view('admin.laboratorio.autorizado_cosmica', compact('pedido', 'pedido_productos'));
     }
 
-    public function cosmica_ordenes_lab_orden_update(Request $request, $id)
-    {
+    public function cosmica_ordenes_lab_orden_update(Request $request, $id){
         $ids_pedido = $request->input('id_pedido');
         $ids_producto = $request->input('id_producto');
         $cantidades_recibido = $request->input('cantidad_entrega');
@@ -142,6 +142,7 @@ class LaboratoriosController extends Controller
                     $pedidoProducto->save();
 
                     $producto->stock_cosmica = $stock_actualizado;
+                    $producto->stock += $cantidades_recibido[$index];// Aumentar el stock con la cantidad recibida
                     $producto->save();
 
                     $productosPendientes = BodegaPedidosProductosCosmica::where('id_pedido', $id_pedido)
