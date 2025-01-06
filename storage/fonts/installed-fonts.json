@@ -31,5 +31,59 @@
     },
     "glyphicons halflings": {
         "normal": "glyphicons_halflings_normal_649b202ffed83c4604c4cf7c88e441bc"
+    },
+    "alexbrush-regular": {
+        "normal": "alexbrush_regular_normal_464d8bda86c3ac75f485852a00d5c768"
+    },
+    "montserrat-bold": {
+        "normal": "montserrat_bold_normal_b1317b70f6be29874816c020d00a79a4"
+    },
+    "montserrat-extrabold": {
+        "normal": "montserrat_extrabold_normal_3e1057c85fdd538831672a522fd37a4a"
+    },
+    "montserrat-medium": {
+        "normal": "montserrat_medium_normal_9bef3ead8033a899313c1b836f6fd1aa"
+    },
+    "montserrat-regular": {
+        "normal": "montserrat_regular_normal_988ad05a30d9373401550da9d641b18f"
+    },
+    "montserrat-semibold": {
+        "normal": "montserrat_semibold_normal_9278ed09842d1db393eec6101ec48d85"
+    },
+    "opensans-regular": {
+        "normal": "opensans_regular_normal_d20362856366f2f28e450e8edd02de28"
+    },
+    "opensauceone-bold": {
+        "normal": "opensauceone_bold_normal_693dc4898e269e17c3f2698533bf69c9"
+    },
+    "opensauceone-regular": {
+        "normal": "opensauceone_regular_normal_a4d2520dea88359095a4489fcc4bf13e"
+    },
+    "alexbrush_regular": {
+        "normal": "alexbrush_regular_normal_464d8bda86c3ac75f485852a00d5c768"
+    },
+    "montserrat_bold": {
+        "normal": "montserrat_bold_normal_b1317b70f6be29874816c020d00a79a4"
+    },
+    "montserrat_extrabold": {
+        "normal": "montserrat_extrabold_normal_3e1057c85fdd538831672a522fd37a4a"
+    },
+    "montserrat_medium": {
+        "normal": "montserrat_medium_normal_9bef3ead8033a899313c1b836f6fd1aa"
+    },
+    "montserrat_regular": {
+        "normal": "montserrat_regular_normal_988ad05a30d9373401550da9d641b18f"
+    },
+    "montserrat_semibold": {
+        "normal": "montserrat_semibold_normal_9278ed09842d1db393eec6101ec48d85"
+    },
+    "opensans_regular": {
+        "normal": "opensans_regular_normal_d20362856366f2f28e450e8edd02de28"
+    },
+    "opensauceone_bold": {
+        "normal": "opensauceone_bold_normal_693dc4898e269e17c3f2698533bf69c9"
+    },
+    "opensauceone_regular": {
+        "normal": "opensauceone_regular_normal_a4d2520dea88359095a4489fcc4bf13e"
     }
 }
