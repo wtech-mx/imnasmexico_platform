@@ -305,6 +305,25 @@
             line-height: 16px;
         }
 
+        .oval {
+            width: 100%;
+            height: 100%;
+            border-radius: 80%;
+            background-color: transparent;
+            background-size: cover;
+            background-position: center center;
+            background-image: url('{{ $basePath . 'foto.jpeg'}}');
+        }
+
+        .oval-container {
+            margin-left: 20px;
+            width: 128px;
+            height: 176px;
+            overflow: hidden;
+            background: transparent;
+            /* Ajuste condicional de top */
+        }
+
     </style>
 </head>
 <body>
@@ -353,8 +372,12 @@
 
             <div class="row">
                 <div class="col-4 text-center border ">
-                    Foto
+                    <div class="oval-container">
+                        <div class="oval" style="">
+                        </div>
+                    </div>
                 </div>
+
                 <div class="col-8 text-center border ">
 
                     <h1 class="h1_nombre azul_fuerte titulo_cedula p-0 m-0">JUNA DEL ARCON</h1>
@@ -378,7 +401,7 @@
 
             <div class="row">
                 <div class="col-4 text-center border ">
-                    <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 110px">
+                    <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 110px; margin-left: 25px;">
                 </div>
 
                 <div class="col-4 text-center border ">
