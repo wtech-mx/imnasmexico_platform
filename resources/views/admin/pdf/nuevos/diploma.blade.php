@@ -380,7 +380,6 @@
 
                 <div class="col-3 border  text-center" style="margin-top: 90px">
                     <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 100px">
-
                 </div>
             </div>
 

@@ -54,7 +54,7 @@
         .col-1 { width: 3.69%; }  /* 8.33% - 4.64% */
         .col-2 { width: 12.02%; } /* 16.66% - 4.64% */
         .col-3 { width: 21.20%; } /* 25% - 4.64% */
-        .col-4 { width: 29.40%; } /* 33.33% - 4.64% */
+        .col-4 { width: 30.90%; } /* 33.33% - 4.64% */
         .col-5 { width: 37.02%; } /* 41.66% - 4.64% */
         .col-6 { width: 45.36%; } /* 50% - 4.64% */
         .col-7 { width: 53.69%; } /* 58.33% - 4.64% */
@@ -77,7 +77,7 @@
         }
 
         .border {
-            border: 0px solid #000;
+            border: 1px solid #000;
         }
 
         .p-2{
@@ -93,7 +93,7 @@
         }
 
         .img_stps_registro_header{
-            width: 160px;
+            width: 200px;
         }
 
         .img_firmas_delanteras{
@@ -145,8 +145,8 @@
 
         .texto_documentos{
             font-size: 16px;
-            font-family: 'Montserrat_SemiBold';
-            font-weight: 'regular';
+            font-family: 'OpenSauceOne_Regular';
+            font-weight: '300';
             margin-top: 20px;
             margin-bottom: 40px;
             color: #545454;
@@ -190,10 +190,10 @@
         }
 
         .subtitulo_cedula{
-            font-size: 37px;
-            font-family: 'Montserrat_SemiBold';
+            font-size: 29px;
+            font-family: 'OPTIEngraversOldEnglish';
             font-weight: 'regular';
-            line-height:18px;
+            line-height:33px;
         }
 
         .titulo_especialidad{
@@ -332,9 +332,9 @@
         }
 
         .oval-container {
-            margin-right: 10px;
-            width: 210px;
-            height: 270px;
+            margin-left: 65px;
+            width: 310px;
+            height: 400px;
             overflow: hidden;
             background: transparent;
             /* Ajuste condicional de top */
@@ -356,20 +356,6 @@
             color: #2c6d77;
         }
 
-        .img_principal {
-            margin-left: auto;
-            margin-right: auto;
-            align-items: center;
-            align-content: center;
-            width: 500px;
-            height: 500px;            /* La imagen ocupa todo el contenedor */
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            position: absolute;      /* Posiciona la imagen detrás del texto */
-            background-image: url('{{ $basePath . 'sello.webp'}}');
-        }
-
     </style>
 </head>
 <body>
@@ -378,12 +364,26 @@
         <!-- Contenido superpuesto sobre la imagen -->
         <div class="content">
 
-            <div class="row" style="margin-top: 60px">
+            <div class="row" >
+                <div class="col-4 text-center border " style="margin-top: 120px">
+                </div>
+
+                <div class="col-4 text-center border " style="margin-top: 120px">
+                    <img class="" src="{{ $basePath . 'logo.png'}}" style="width: 80%">
+                </div>
+
+                <div class="col-4 text-center border " style="margin-top: 120px">
+                </div>
+            </div>
+
+            <div class="row">
                 <div class="col-12 text-center border">
-                    <h5 class="subtitulo_cedula  m-0 p-0">
-                        <div class="img_principal" style=""></div>
+                    <h5 class="azul_fuerte uppercase subtitulo_cedula  m-0 p-0">
+                        Instituto Integral AM 360 a través de Registro <br>
+                        Nacional Instituto Mexicano Naturales Ain Spa
                     </h5>
                 </div>
+
             </div>
 
             <div class="row">
@@ -393,33 +393,43 @@
                         <div class="oval" style="">
                         </div>
                     </div>
-                    <p>
-                        <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 80px">
-                    </p>
                 </div>
 
                 <div class="col-8 text-center border ">
-                    <h1 class="h1_nombre azul_fuerte titulo_name p-0 m-0">JUNA DEL ARCON</h1>
-
-                    <h2 class="azul_fuerte texto_documentos_ligth uppercase p-0 "style="margin-bottom: 13px;margin-top:13px">
-                        con numero de folio <strong class="strong_folio">CFC000918771</strong>
-                    </h2>
 
                     <p class="texto_documentos uppercase p-0 m-0" style="margin-bottom: 40px">
-                        después de haber cumplido los requisitos, <br>
-                        duración, y Evaluación del Programa Vigente <br>
-                        Correspondiente a
+                        otorga a
                     </p>
+
+                    <h1 class="h1_nombre azul_fuerte titulo_name p-0 m-0">JUNA DEL ARCON</h1>
 
                     <h2 class="azul_fuerte titulo_especialidad uppercase p-0" style="margin-bottom: 13px;margin-top:13px">
                         Cosmiatria y Cosmetologia
                     </h2>
 
-
                     <p class="texto_documentos uppercase p-0 m-0" style="margin-bottom: 40px">
-                        Revisado y acreditado por la Comisión Mixta, a <br>
-                        través de un Portafolio de Evidencias, Prácticas y <br>
-                        Exámenes de Suficiencia <br>
+                        En virtud de haber concluido <br>
+                         satisfactoriamente con los créditos honoríficos <br>
+                         requeridos con respecto al plan vigente. <br>
+                         Con fundamento en los Estatutos Institucionales <br>
+                         del Instituto Mexicano Naturales Ain Spa.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-6 text-center border ">
+                    <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" class="img_traseras">
+
+                </div>
+
+                <div class="col-6 text-center border ">
+                    <p class="texto_principal_cedula uppercase" style="margin-bottom: 40px">
+                        La Dirección General del Instituto Mexicano Naturales Ain Spa y <br>
+                         del Registro Nacional Instituto Mexicano Naturales Ain Spa, <br>
+                          expiden el siguiente reconocimiento
                     </p>
                 </div>
 
@@ -446,20 +456,21 @@
             </div>
 
             <div class="row" >
-                <div class="col-4 border  text-center"  style="margin-top: 90px;">
-                    <img class="img_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" style="">
-                </div>
-
-                <div class="col-4 border  text-center" style="margin-top: 90px">
-                    <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 80px">
-                </div>
 
                 <div class="col-4 border  text-center" style="margin-top: 90px">
                     <img class="img_stps_registro_header " src="{{ $basePath . 'stps.webp'}}" style="">
+                </div>
 
+                <div class="col-4 border  text-center" style="margin-top: 90px">
+                    <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 200px">
+                </div>
+
+                <div class="col-4 border  text-center"  style="margin-top: 90px;">
+                    <img class="img_stps_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" style="">
                 </div>
 
             </div>
+
 
         </div>
     </div>

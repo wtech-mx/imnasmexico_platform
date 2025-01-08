@@ -59,7 +59,7 @@
             font-family: 'OPTIEngraversOldEnglish';
             font-style: normal;
             font-weight: normal;
-            src: url('{{ storage_path('fonts/OPTIEngraversOldEnglish.ttf') }}') format('truetype');
+            src: url('{{ storage_path('fonts/OPTIEngraversOldEnglish.otf') }}') format('truetype');
         }
 
 </style>
