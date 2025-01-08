@@ -256,7 +256,7 @@ class DocumentosController extends Controller
 
         }if($tipo_documentos->tipo == 'Diploma Cosmica'){
 
-            $pdf = PDF::loadView('admin.pdf.cosmica_workshop', compact('curso', 'fecha', 'tipo_documentos', 'nombre', 'duracion_hrs', 'sello'));
+            $pdf = PDF::loadView('admin.pdf.cosmica_workshop', compact('clave_rfc','curso', 'fecha', 'tipo_documentos', 'nombre', 'duracion_hrs', 'sello'));
             // Configuración personalizada de tamaño
             $customPaper = [0, 0, 1279.5, 904.5]; // [x, y, ancho, alto] en puntos
             $pdf->setPaper($customPaper, 'portrait');
@@ -958,7 +958,7 @@ class DocumentosController extends Controller
                     $ticket->folio = $request->get('folio');
                     $ticket->update();
 
-                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('tam_letra_nombre','capitalizar','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
+                    $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('clave_rfc','tam_letra_nombre','capitalizar','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
 
                     $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
 
