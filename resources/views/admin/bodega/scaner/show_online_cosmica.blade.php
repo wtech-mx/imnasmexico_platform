@@ -56,8 +56,8 @@ Productos solicitados Woo Cosmica
                                                     @endif
                                                     {{ $item->nombre }}
                                                 </td>
-                                                <td data-sku="{{ $producto->sku ?? '' }}" data-cantidad="{{ $nota_producto->cantidad }}">
-                                                    <span class="contador">{{ $nota_producto->escaneados }}/{{ $nota_producto->cantidad }}</span>
+                                                <td data-sku="{{ $producto->sku ?? '' }}" data-cantidad="{{ $item->cantidad }}">
+                                                    <span class="contador">{{ $item->escaneados }}/{{ $item->cantidad }}</span>
                                                 </td>
                                                 <td id="status-{{ $producto_nas ? $producto_nas->sku : 'N/A' }}">
                                                     @if ($item->estatus === 1)
