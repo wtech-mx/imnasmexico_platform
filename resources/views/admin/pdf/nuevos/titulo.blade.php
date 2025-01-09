@@ -77,7 +77,7 @@
         }
 
         .border {
-            border: 1px solid #000;
+            border: 0px solid #000;
         }
 
         .p-2{
@@ -113,7 +113,7 @@
         }
 
         .texto_emosires{
-            font-family: 'Montserrat_Regular';
+            font-family: 'Montserrat_LightItalic';
             font-weight: 'regular';
             font-size: 20px;
             margin-top: 10px!important;
@@ -144,7 +144,7 @@
 
         .texto_documentos{
             font-size: 33px;
-            font-family: 'AlexBrush-Regular';
+            font-family: 'AlexBrush_Regular';
             font-weight: 'regular';
             margin-top: 20px;
             margin-bottom: 40px;
@@ -574,7 +574,7 @@
                 </div>
 
                 <div class="col-4 text-center border ">
-                    <img src="{{ $basePath . 'carla.webp'}}" style="width: 200px;">
+                    <img src="{{ $basePath . 'carla.webp'}}" style="width: 230px;">
                     <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
                     <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
                 </div>

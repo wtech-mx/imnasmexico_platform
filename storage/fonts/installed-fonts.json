@@ -97,5 +97,8 @@
     },
     "montserrat_extralight": {
         "normal": "montserrat_extralight_normal_a4d9d6215b30ff6ab2ecc668a4474835"
+    },
+    "montserrat_lightitalic": {
+        "normal": "montserrat_lightitalic_normal_d6de1ecdcce17ea741dd79b6e99a2cdb"
     }
 }

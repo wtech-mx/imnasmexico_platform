@@ -91,5 +91,20 @@
             src: url('{{ storage_path('fonts/Brush.otf') }}') format('truetype');
         }
 
+        @font-face {
+            font-family: 'AlexBrush_Regular';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ storage_path('fonts/AlexBrush-Regular.ttf') }}') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Montserrat_LightItalic';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ storage_path('fonts/Montserrat-LightItalic.ttf') }}') format('truetype');
+        }
+
+
 
 </style>
