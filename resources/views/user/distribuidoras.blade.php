@@ -64,7 +64,7 @@
         <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-xl-3 mb-lg-3 mb-md-2 m-auto">
             <div class="card_reality" style="position: relative">
                 <p class="text-center">
-                    <img class="img_reality_alumnas " src="{{asset('utilidades/'.$item->direccion_foto) }}" style="width: 80%;">
+                    <img class="img_reality_alumnas " src="{{asset('utilidades/distribuidoras.jpeg') }}" style="width: 80%;">
                 </p>
                 <p class="text-center">
                     <strong>{{ $item->User->name }}</strong> <br>
