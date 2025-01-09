@@ -101,8 +101,7 @@
         }
 
         .img_traseras{
-            width: 180px;
-
+            width: 220px;
         }
 
         .h3_nomre_firmas{
@@ -144,12 +143,13 @@
         }
 
         .texto_documentos{
-            font-size: 16px;
-            font-family: 'OpenSauceOne_Regular';
-            font-weight: '300';
+            font-size: 33px;
+            font-family: 'AlexBrush-Regular';
+            font-weight: 'regular';
             margin-top: 20px;
             margin-bottom: 40px;
-            color: #545454;
+            color: #747474;
+            line-height: 22px;
         }
 
         .texto_documentos_ligth{
@@ -176,14 +176,14 @@
         }
 
         .titulo_name{
-            font-size: 37px;
-            font-family: 'Montserrat_Bold';
+            font-size: 40px;
+            font-family: 'OPTIEngraversOldEnglish';
             font-weight: 'regular';
             line-height:18px;
         }
 
         .titulo_especialidad_trasero{
-            font-size: 25px;
+            font-size: 30px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
             line-height:18px;
@@ -198,7 +198,7 @@
 
         .titulo_especialidad{
             font-size: 32px;
-            font-family: 'Montserrat_Bold';
+            font-family: 'OPTIEngraversOldEnglish';
             font-weight: 'regular';
             line-height: 25px;
 
@@ -229,12 +229,14 @@
         }
 
         .texto_trasero{
-            font-size:11px;
+            font-size:16px;
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
             margin-top: 20px;
-            line-height: 14px;
-            color: #3d3b3a;
+            line-height: 15px;
+            margin-left: 50px;
+            margin-right: 50px;
+            color: #010101;
         }
 
         .texto_trasero3{
@@ -260,10 +262,11 @@
         }
 
         .texto_principal_cedula{
-            font-size: 19px;
-            font-family: 'Montserrat_Medium';
-            font-weight: 'regular';
-            line-height: 18px; color: #545454;
+            font-size: 22px;
+            font-family: 'Montserrat_Light';
+            font-weight: 'normal';
+            line-height: 18px;
+            color: #747474;
         }
 
         .folio{
@@ -333,8 +336,8 @@
 
         .oval-container {
             margin-left: 65px;
-            width: 310px;
-            height: 400px;
+            width: 330px;
+            height: 460px;
             overflow: hidden;
             background: transparent;
             /* Ajuste condicional de top */
@@ -354,6 +357,13 @@
             font-weight: 'regular';
             line-height:18px;
             color: #2c6d77;
+        }
+
+        .lista{
+            color:#2c6d77;
+            font-size: 20px;
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
         }
 
     </style>
@@ -377,7 +387,7 @@
             </div>
 
             <div class="row">
-                <div class="col-12 text-center border">
+                <div class="col-12 text-center border" style="margin-top: 40px;margin-bottom: 40px">
                     <h5 class="azul_fuerte uppercase subtitulo_cedula  m-0 p-0">
                         Instituto Integral AM 360 a través de Registro <br>
                         Nacional Instituto Mexicano Naturales Ain Spa
@@ -396,18 +406,21 @@
                 </div>
 
                 <div class="col-8 text-center border ">
-
-                    <p class="texto_documentos uppercase p-0 m-0" style="margin-bottom: 40px">
+                    <p class="texto_documentos  p-0 m-0" style="margin-bottom: 40px">
                         otorga a
                     </p>
 
-                    <h1 class="h1_nombre azul_fuerte titulo_name p-0 m-0">JUNA DEL ARCON</h1>
+                    <h1 class="azul_fuerte titulo_name p-0 m-0" style="margin-bottom:40px">Juana de Alarcon</h1>
 
-                    <h2 class="azul_fuerte titulo_especialidad uppercase p-0" style="margin-bottom: 13px;margin-top:13px">
+                    <p class="texto_documentos  p-0 m-0" style="margin-bottom: 40px">
+                        el título de
+                    </p>
+
+                    <h2 class="azul_fuerte titulo_especialidad  p-0" style="margin-bottom: 20px;">
                         Cosmiatria y Cosmetologia
                     </h2>
 
-                    <p class="texto_documentos uppercase p-0 m-0" style="margin-bottom: 40px">
+                    <p class="texto_documentos p-0 m-0" style="margin-bottom: 40px">
                         En virtud de haber concluido <br>
                          satisfactoriamente con los créditos honoríficos <br>
                          requeridos con respecto al plan vigente. <br>
@@ -420,16 +433,13 @@
             </div>
 
             <div class="row">
-                <div class="col-6 text-center border ">
+                <div class="col-4 text-center border ">
                     <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" class="img_traseras">
-
                 </div>
 
-                <div class="col-6 text-center border ">
-                    <p class="texto_principal_cedula uppercase" style="margin-bottom: 40px">
-                        La Dirección General del Instituto Mexicano Naturales Ain Spa y <br>
-                         del Registro Nacional Instituto Mexicano Naturales Ain Spa, <br>
-                          expiden el siguiente reconocimiento
+                <div class="col-8 text-center border ">
+                    <p class="texto_principal_cedula uppercase" style="margin-bottom: auto;margin-top: 60px">
+                        Expedido en la Ciudad de México,<br> día 10 de noviembre de 2024.
                     </p>
                 </div>
 
@@ -437,7 +447,7 @@
 
             <div class="row">
                 <div class="col-4 text-center border ">
-                    <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras">
+                    <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras" style="margin-top: 30px">
                     <h3 class="h3_nomre_firmas uppercase m-0 p-0">Juan Pablo Soto</h3>
                     <h5 class="texto_emosires m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
                 </div>
@@ -449,7 +459,7 @@
                 </div>
 
                 <div class="col-4 text-center border ">
-                    <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras">
+                    <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras" style="margin-top: 30px">
                     <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Ma. Luisa Flores</h3>
                     <h5 class="texto_emosires m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
                 </div>
@@ -457,16 +467,16 @@
 
             <div class="row" >
 
-                <div class="col-4 border  text-center" style="margin-top: 90px">
-                    <img class="img_stps_registro_header " src="{{ $basePath . 'stps.webp'}}" style="">
+                <div class="col-4 border  text-center" style="margin-top: 30px">
+                    <img class="img_stps_registro_header " src="{{ $basePath . 'stps.webp'}}" style="margin-top: 70px">
                 </div>
 
-                <div class="col-4 border  text-center" style="margin-top: 90px">
-                    <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 200px">
+                <div class="col-4 border  text-center" style="margin-top: 30px;">
+                    <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 220px;">
                 </div>
 
-                <div class="col-4 border  text-center"  style="margin-top: 90px;">
-                    <img class="img_stps_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" style="">
+                <div class="col-4 border  text-center"  style="margin-top: 30px;">
+                    <img class="img_stps_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" style="margin-top: 50px">
                 </div>
 
             </div>
@@ -474,6 +484,126 @@
 
         </div>
     </div>
+
+    <div class="container">
+        <!-- Contenido superpuesto sobre la imagen -->
+        <div class="content">
+
+            <div class="row" >
+                <div class="col-4 text-center border " style="margin-top: 120px">
+                </div>
+
+                <div class="col-4 text-center border " style="margin-top: 120px">
+                    <img class="" src="{{ $basePath . 'logo.png'}}" style="width: 80%">
+                </div>
+
+                <div class="col-4 text-center border " style="margin-top: 120px">
+                </div>
+            </div>
+
+
+            <div class="row">
+                <!-- Primera columna -->
+                <div class="col-6 text-start border">
+                    <p class="uppercase lista" style="margin-left: 90px;">
+                        <strong class="color:#000;"> Nombre: </strong>Juana de Alarcon <br>
+                        <strong class="color:#000;"> curp:</strong> JUANA1234567MMCLTA4 <br>
+                        <strong class="color:#000;"> carrera:</strong> Cosmiatria y Cosmetologia <br>
+                        <strong class="color:#000;"> nacionalidad:</strong> mexicana <br>
+                        <strong class="color:#000;"> vigencia:</strong> permanente <br>
+                    </p>
+                </div>
+
+                <!-- Segunda columna -->
+                <div class="col-3 text-center border">
+                    <p style="margin-top: 70px">QR</p>
+                </div>
+
+                <!-- Tercera columna -->
+                <div class="col-3 text-center border">
+                    <h6 class="azul_claro tipo uppercase m-0 p-0" style="margin-top: 70px">
+                        TIPO
+                    </h6>
+                    <h6 class="azul_claro cea uppercase m-0 p-0">
+                        CFC
+                    </h6>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-12 text-start border" >
+                    <p class="texto_trasero uppercase" style="padding:0px 45px 0px 45px;">
+                        <strong>ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br><br>
+
+                        INSTRUMENTO NÚMERO SETENTA Y CINCO MIL SEISCIENTOS SETENTA Y TRES. LIBRO MIL CIENTO CUARENTA Y TRES. CIUDAD DE MÉXICO. A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE REFORMA AL ARTÍCULO SEGUNDO DE LOS ESTATUTOS SOCIALES; y, B.- LA REFORMA AL ARTÍCULO SEXTO DE LOS ESTATUTOS SOCIALES, que resultan de LA PROTOCOLIZACIÓN del acta de Asamblea General Extraordinaria de Socios de "INSTITUTO MEXICANO NATURALES AIN SPA", SOCIEDAD CIVIL.
+                        <br><br>
+                        Artículo 5º de la Constitución Política de los Estados Unidos Mexicanos: “A ninguna persona podrá impedirse que se dedique a la profesión, industria, comercio o trabajo que le acomode siendo lícitos... Nadie puede ser privado del producto de su trabajo, sino por resolución judicial.
+                        <br><br>
+                        Artículo 153 de la Ley General del Trabajo apartado I, III y IV. En general, mejorar el nivel educativo, la competencia laboral y las habilidades de los trabajadores.
+                        <br><br>
+                        Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro: RIFC680910-879-0013
+                        <br><br>
+                        XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su plena comprensión y conformidad con él y lo firmó el día _________________________________________, mismo momento en que lo autorizo definitivamente.- Doy fe.
+                        <br><br>
+                        Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da el siguiente nombramiento conforme a derecho e inscrito en el Registro Nacional Instituto Mexicano Naturales Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exige el plan de estudios especializado en:
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-start border  m-0">
+                    <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 45px 0px 90px;"> Cosmiatria Cosmiatria y Cosmetologia
+                    </h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-start border p-0"  style="margin-bottom: 50px">
+                    <p class="texto_trasero uppercase m-0" style="padding:0px 45px 0px 60px">
+                        este reconocimiento es <strong>inválido</strong> , si no tiene todas las firmas y sellos que lo que acrediten.
+                    </p>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-4 text-center border ">
+                    <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 270px;margin-top: 20px" >
+                </div>
+
+                <div class="col-4 text-center border ">
+                    <img src="{{ $basePath . 'carla.webp'}}" style="width: 200px;">
+                    <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
+                    <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
+                </div>
+
+                <div class="col-4 text-center border ">
+                    <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 210px;">
+
+                </div>
+            </div>
+
+            <div class="row" >
+
+                <div class="col-4 border  text-center" style="">
+                    <img class="" src="{{ $basePath . 'stps.webp'}}" style="width:260px;">
+                </div>
+
+                <div class="col-4 border  text-center" style="">
+                </div>
+
+                <div class="col-4 border  text-center"  style="">
+                    <img class="img_stps_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" >
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
 
 </body>
 </html>
