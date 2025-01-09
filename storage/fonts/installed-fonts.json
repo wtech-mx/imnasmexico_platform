@@ -33,7 +33,7 @@
         "normal": "glyphicons_halflings_normal_649b202ffed83c4604c4cf7c88e441bc"
     },
     "alexbrush-regular": {
-        "normal": "alexbrush_regular_normal_464d8bda86c3ac75f485852a00d5c768"
+        "normal": "alexbrush_regular_normal_66f132600253e2e805fb5e181cd5d0c7"
     },
     "montserrat-bold": {
         "normal": "montserrat_bold_normal_b1317b70f6be29874816c020d00a79a4"
@@ -88,5 +88,17 @@
     },
     "optiengraversoldenglish": {
         "normal": "optiengraversoldenglish_normal_7bf7c2666a0012d359cbc99f52cb4244"
+    },
+    "brush": {
+        "normal": "brush_normal_66f132600253e2e805fb5e181cd5d0c7"
+    },
+    "montserrat_light": {
+        "normal": "montserrat_light_normal_f2e62b4217c8b9241914be1ea35d2d2f"
+    },
+    "montserrat_extralight": {
+        "normal": "montserrat_extralight_normal_a4d9d6215b30ff6ab2ecc668a4474835"
+    },
+    "montserrat_lightitalic": {
+        "normal": "montserrat_lightitalic_normal_d6de1ecdcce17ea741dd79b6e99a2cdb"
     }
 }

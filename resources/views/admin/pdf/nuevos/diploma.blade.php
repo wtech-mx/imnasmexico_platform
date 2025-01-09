@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini-Grid PDF</title>
+    <title>Diploma</title>
     @php
         $domain = request()->getHost();
         $basePath = ($domain == 'plataforma.imnasmexico.com')
@@ -333,8 +333,8 @@
 
         .oval-container {
             margin-left: 10px;
-            width: 210px;
-            height: 270px;
+            width: 230px;
+            height: 290px;
             overflow: hidden;
             background: transparent;
             /* Ajuste condicional de top */
