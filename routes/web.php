@@ -560,6 +560,7 @@ Route::group(['middleware' => ['auth']], function() {
      Route::post('/products/generate-skus', [App\Http\Controllers\ProductsController::class, 'generateSKUs'])->name('products.generateSkus');
      Route::get('/generate-pdf-all-products', [App\Http\Controllers\ProductsController::class, 'generateAllProductsPDF'])->name('products.generateAllPDF');
 
+     Route::get('/admin/scanner/estatus', [App\Http\Controllers\ScannerController::class, 'esatus_nota'])->name('scanner.esatus_nota');
     // =============== M O D U L O   M A N U A L ===============================
     Route::get('/admin/manual', [App\Http\Controllers\ManualController::class, 'index'])->name('manual.index');
     Route::post('/admin/manual/store', [App\Http\Controllers\ManualController::class, 'store'])->name('manual.store');
@@ -686,6 +687,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('bodega/preparacion/guia/cosmica/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_guia'])->name('notas_cosmica.update_guia');
     Route::put('bodega/preparacion/update_status/{id}', [App\Http\Controllers\BodegaController::class, 'update_guia_woo'])->name('bodega.update_guia_woo');
     Route::patch('bodega/preparacion/paradisus/{id}', [App\Http\Controllers\BodegaController::class, 'actualizarPedidoParadisus'])->name('actualizar.pedido.paradisus');
+
+    Route::get('/pdf_etiqueta/{tabla}/{id}', [App\Http\Controllers\BodegaController::class, 'generarEtiqueta'])->name('pdf_etiqueta.bodega');
+    Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController::class, 'actualizarEstatus'])->name('nota.actualizar_estatus');
+
+    Route::get('/admin/scanner/notas', [App\Http\Controllers\ScannerController::class, 'scanner_notas'])->name('scanner_notas.index');
 
     Route::patch('bodega/preparacion/pago/cosmica/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_pago'])->name('notas_cosmica.update_pago');
 

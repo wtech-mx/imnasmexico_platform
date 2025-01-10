@@ -105,6 +105,38 @@ class BodegaController extends Controller
             'ApiFiltradaCollectAprobado'));
     }
 
+    public function generarEtiqueta($tabla, $id){
+
+        $registro = null;
+
+        switch ($tabla) {
+            case 'notas_productos':
+                $registro = NotasProductos::where('id', '=', $id)->first();
+                $tipo = 'nas';
+                break;
+
+            case 'notas_cosmica_productos':
+                $registro = NotasProductosCosmica::where('id', '=', $id)->first();
+                $tipo = 'cosmica';
+                break;
+
+            default:
+                return abort(404, 'Tabla no válida');
+        }
+
+        if (!$registro) {
+            return abort(404, 'Registro no encontrado');
+        }
+
+        $pdf = PDF::loadView('admin.bodega.pdf.etiqueta',compact('registro', 'tipo'));
+
+        // Para cambiar la medida se deben pasar milimetros a putnos
+        $pdf->setPaper([0, 0,141.732,70.8661], 'portrair');
+        return $pdf->stream();
+       // return $pdf->download('etiqueta_'.$sku.'.pdf');
+
+    }
+
     public function generateOrderWooNasPDF($id)
     {
         // Crear instancia del cliente WooCommerce
