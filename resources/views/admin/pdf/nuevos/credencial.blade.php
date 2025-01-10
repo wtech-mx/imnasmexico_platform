@@ -279,7 +279,7 @@
                 <img class="" src="{{ $basePath . 'logo.png'}}" style="width: 40px;margin-top: 9px">
             </div>
             <div class="col-2 text-center border">
-                <img class="" src="{{ $basePath . 'registro_nacional.png'}}" style="width: 60px">
+                <img class="" src="{{ $basePath . 'registro_nacional.png'}}" style="width: 40px;margin-top: 16px">
             </div>
         </div>
 
