@@ -1,16 +1,26 @@
 <style>
-            @font-face {
-            font-family: 'Montserrat_Bold';
-            font-style: normal;
-            font-weight: normal;
-            src: url('{{ storage_path('fonts/Montserrat-Bold.ttf') }}') format('truetype');
-        }
+
 
         @font-face {
             font-family: 'Montserrat_ExtraBold';
             font-style: normal;
             font-weight: normal;
             src: url('{{ storage_path('fonts/Montserrat-ExtraBold.ttf') }}') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Montserrat_Bold';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ storage_path('fonts/Montserrat-Bold.ttf') }}') format('truetype');
+        }
+
+
+        @font-face {
+            font-family: 'Montserrat_SemiBold';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ storage_path('fonts/Montserrat-SemiBold.ttf') }}') format('truetype');
         }
 
         @font-face {
@@ -27,12 +37,6 @@
             src: url('{{ storage_path('fonts/Montserrat-Regular.ttf') }}') format('truetype');
         }
 
-        @font-face {
-            font-family: 'Montserrat_SemiBold';
-            font-style: normal;
-            font-weight: normal;
-            src: url('{{ storage_path('fonts/Montserrat-SemiBold.ttf') }}') format('truetype');
-        }
 
         @font-face {
             font-family: 'Montserrat_Light';
@@ -103,6 +107,20 @@
             font-style: normal;
             font-weight: normal;
             src: url('{{ storage_path('fonts/Montserrat-LightItalic.ttf') }}') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'PTSans_Regular';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ storage_path('fonts/PTSans-Regular.ttf') }}') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'PTSans_Bold';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ storage_path('fonts/PTSans-Bold.ttf') }}') format('truetype');
         }
 
         .text-center {

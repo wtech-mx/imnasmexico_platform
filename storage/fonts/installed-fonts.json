@@ -100,5 +100,14 @@
     },
     "montserrat_lightitalic": {
         "normal": "montserrat_lightitalic_normal_d6de1ecdcce17ea741dd79b6e99a2cdb"
+    },
+    "ptsans-regular": {
+        "normal": "ptsans_regular_normal_74acaea196af8bba5775e397dea9ab8a"
+    },
+    "ptsans_regular": {
+        "normal": "ptsans_regular_normal_74acaea196af8bba5775e397dea9ab8a"
+    },
+    "ptsans_bold": {
+        "normal": "ptsans_bold_normal_a3023d87f5ee260778090a9b5c623d7b"
     }
 }
