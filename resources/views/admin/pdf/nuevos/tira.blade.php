@@ -136,6 +136,31 @@
             line-height: 25px;
         }
 
+        .col_izquierda{
+            color: #545454;
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+            font-size: 13px;
+            line-height: 10px;
+
+        }
+
+        .col_derecha_texto{
+            color: #2c6d77;
+            font-family: 'Montserrat_Bold';
+            font-weight: 'regular';
+            font-size: 13px;
+            line-height: 10px;
+
+        }
+
+        .col_derecha{
+            color: #2c6d77;
+            font-family: 'Montserrat_Bold';
+            font-weight: 'regular';
+            font-size: 17px;
+        }
+
     </style>
 </head>
 <body>
@@ -204,33 +229,45 @@
         </div>
 
         <div class="row">
-            <div class="col-4 text-center border p-2">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th class="text-center" scope="col" colspan="3">CREDITOS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="text-center">Obligatorios: 280 <br> Optativos: 0 <br>Totales: 280</td>
-
+            <div class="col-4 text-start border p-2">
+                <table class="table" style="border: solid 1px #2c6d77;padding:20px 15px 20px 15px;">
+                    <tbody class="m-0 p-0">
+                        <tr class="m-0 p-0">
+                            <td class="text-start col_izquierda uppercase m-0 p-0" >CREDITOS</td>
+                            <td class="text-start col_derecha_texto">
+                                Obligatorios: 280 <br>
+                                Optativos: 0 <br>
+                                Totales: 280
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-
             </div>
 
-            <div class="col-4 text-center border p-2">
-                Columna 12
+            <div class="col-4 text-start border p-2">
+                <table class="table" style="border: solid 1px #2c6d77;margin-left:20px;padding:26px 15px 26px 15px;">
+                    <tbody>
+                        <tr>
+                            <td class="text-start col_izquierda uppercase" >% DE MATERIAS <br> APROBADAS</td>
+                            <td class="text-start col_derecha"  style="padding-left: 15px">
+                                100%
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
-            <div class="col-4 text-center border p-2">
-                Columna 12
-            </div>
-
-            <div class="col-4 text-center border p-2">
-                Columna 12
+            <div class="col-4 text-start border p-2">
+                <table class="table" style="border: solid 1px #2c6d77;margin-left:10px;padding:26px 15px 26px 15px;">
+                    <tbody>
+                        <tr>
+                            <td class="text-start col_izquierda uppercase" >Promedio general</td>
+                            <td class="text-start col_derecha" style="padding-left: 15px">
+                                9.6
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
         </div>
