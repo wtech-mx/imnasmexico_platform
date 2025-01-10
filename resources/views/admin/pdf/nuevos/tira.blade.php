@@ -7,8 +7,8 @@
     @php
         $domain = request()->getHost();
         $basePath = ($domain == 'plataforma.imnasmexico.com')
-                ? 'https://plataforma.imnasmexico.com/documentos_nuevos/credencial/'
-                : 'documentos_nuevos/credencial/';
+                ? 'https://plataforma.imnasmexico.com/documentos_nuevos/tira/'
+                : 'documentos_nuevos/tira/';
     @endphp
 
     @include('admin.pdf.nuevos.fuentes')
@@ -103,7 +103,7 @@
         }
 
         .texto_principal_cedula{
-            font-size: 18px;
+            font-size: 16px;
             font-family: 'Montserrat_Light';
             font-weight: 'regular';
             line-height: 19px; color: #545454;
@@ -161,6 +161,59 @@
             font-size: 17px;
         }
 
+        .contenedor_materia{
+            border: solid 1px #5bb4c2;
+            border-radius: 50%;
+            padding: 5px;
+            color: #545454;
+            font-size: 14px;
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
+        }
+
+        .certificado_titulo{
+            font-size: 16px;
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+            line-height: 15px;
+            color: #2c6d77;
+        }
+
+        .titulo_name{
+            font-size: 37px;
+            font-family: 'Montserrat_Bold';
+            font-weight: 'regular';
+            line-height:18px;
+        }
+
+
+        .texto_trasero{
+            font-size:11px;
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
+            margin-top: 20px;
+            line-height: 14px;
+            color: #3d3b3a;
+        }
+
+        .texto_trasero3{
+            font-size:11px;
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
+            color: #3d3b3a;
+        }
+
+        .texto_trasero4{
+            font-size:10px;
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+            color: #2c6d77;
+        }
+
+        .img_firmas_delanteras{
+            width: 160px;
+        }
+
     </style>
 </head>
 <body>
@@ -207,14 +260,14 @@
                 </h6>
             </div>
 
-            <div class="col-8 text-start border p-2">
+            <div class="col-8 text-start border">
                 <h6 class="uppercase titulo_cedula m-0 p-0">
                     REGISTRO NACIONAL
                 </h6>
                 <h5 class="uppercase subtitulo_cedula  m-0 p-0">
                     INSTITUTO MEXICANO NATURALES AIN SPA
                 </h5>
-                <p class="texto_principal_cedula" style="margin-bottom: 40px">
+                <p class="texto_principal_cedula" style="">
                     La Coordinación de Asuntos Escolares y Apoyo a Estudiantes del
                      Registro Nacional Instituto Mexicano Naturales Ain Spa RIIMNAS,
                      con registro <strong class="texto_prinipal_strong"> RIFC-680910-879-0013</strong> en la Secretaría del Trabajo y Previsión
@@ -273,12 +326,138 @@
         </div>
 
         <div class="row">
-            <div class="col-12 text-center border p-2">
-                Columna 12
+            <div class="col-12 text-left border" style="padding:0px 20px 20px 20px;">
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
             </div>
 
         </div>
+    </div>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-3 text-center border p-2" style="margin-top: 30px">
+                <img class=" " src="{{ $basePath . 'registro_nacional.png'}}" style="width: 130px">
+            </div>
+
+            <div class="col-3 text-center border p-2" style="margin-top: 30px">
+                <img class=" " src="{{ $basePath . 'logo.png'}}" style="width: 100px">
+            </div>
+
+            <div class="col-3 text-center border p-2" style="margin-top: 30px">
+                <img class=" " src="{{ $basePath . 'stps.webp'}}" style="width: 130px">
+            </div>
+
+            <div class="col-3 text-center border p-2" style="margin-top: 30px">
+
+            </div>
+
+            <div class="row">
+                <div class="col-12  border ">
+                    <p class="certificado_titulo text-end">
+                        CERTIFICADO ANTE EL REGISTRO NACIONAL <br>
+                        INSTITUTO MEXICANO NATURALES AIN SPA
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-8 text-center border ">
+                    <h1 class="azul_fuerte titulo_name p-0" style="margin-top: 20px;margin-left:150px;">  ACUERDO LEGAL
+                    </h1>
+                </div>
+
+                <div class="col-4 text-center border ">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-start border" >
+                    <p class="texto_trasero uppercase" style="padding:0px 45px 0px 45px;">
+                        <strong>ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br><br>
+
+                        INSTRUMENTO NÚMERO SETENTA Y CINCO MIL SEISCIENTOS SETENTA Y TRES. LIBRO MIL CIENTO CUARENTA Y TRES. CIUDAD DE MÉXICO. A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE REFORMA AL ARTÍCULO SEGUNDO DE LOS ESTATUTOS SOCIALES; y, B.- LA REFORMA AL ARTÍCULO SEXTO DE LOS ESTATUTOS SOCIALES, que resultan de LA PROTOCOLIZACIÓN del acta de Asamblea General Extraordinaria de Socios de "INSTITUTO MEXICANO NATURALES AIN SPA", SOCIEDAD CIVIL.
+                        <br><br>
+                        Artículo 5º de la Constitución Política de los Estados Unidos Mexicanos: “A ninguna persona podrá impedirse que se dedique a la profesión, industria, comercio o trabajo que le acomode siendo lícitos... Nadie puede ser privado del producto de su trabajo, sino por resolución judicial.
+                        <br><br>
+                        Artículo 153 de la Ley General del Trabajo apartado I, III y IV. En general, mejorar el nivel educativo, la competencia laboral y las habilidades de los trabajadores.
+                        <br><br>
+                        Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro: RIFC680910-879-0013
+                        <br><br>
+                        XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su plena comprensión y conformidad con él y lo firmó el día _________________________________________, mismo momento en que lo autorizo definitivamente.- Doy fe.
+                        <br><br>
+                        Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da el siguiente nombramiento conforme a derecho e inscrito en el Registro Nacional Instituto Mexicano Naturales Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exige el plan de estudios especializado en:
+
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-start border  m-0"  >
+                    <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 45px 0px 45px;"> Cosmiatria y Cosmetologia
+                    </h1>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-start border m-0 p-0" >
+                    <p class="texto_trasero3 uppercase m-0" style="padding:0px 45px 0px 45px;">
+                        este reconocimiento es <strong>inválido</strong> , si no tiene todas las firmas y sellos que lo que acrediten.
+                    </p>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="row">
+                    <div class="col-4 text-center border ">
+                        <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras" style="margin-top: 30px">
+                        <h3 class="h3_nomre_firmas uppercase m-0 p-0">Juan Pablo Soto</h3>
+                        <h5 class="texto_emosires m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
+                    </div>
+
+                    <div class="col-4 text-center border ">
+                        <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
+                        <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
+                        <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
+                    </div>
+
+                    <div class="col-4 text-center border ">
+                        <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras" style="margin-top: 30px">
+                        <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Ma. Luisa Flores</h3>
+                        <h5 class="texto_emosires m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-center border  m-0"  >
+                    <p class="texto_trasero4" style="padding:0px 45px 0px 45px;">
+                        CALLE SUR 109-A No. 260, COL. HEROES DE CHURUBUSCO. DEL. IZTAPALAPA. CIUDAD DE MEXICO. CP.09090 <br>
+                        (55) 54459315, (55) 56468832, (55) 43367085, (55) 43367086, (55) 55323297, (55) 55329757 <br>
+                        www.imnasmexico.com <br>
+                        ESTE DOCUMENTO NO ES VÁLIDO SI ES MUTILADO. PRESENTA BORRADURAS, TACHADURAS O ENMENDADURAS.
+                </div>
+            </div>
+
+        </div>
     </div>
 
 </body>
