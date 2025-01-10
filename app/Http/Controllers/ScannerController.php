@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\HistorialVendidos;
 use App\Models\Products;
 use App\Models\HistorialStock;
+use App\Models\NotasProductos;
+use App\Models\NotasProductosCosmica;
 use Carbon\Carbon;
 use DB;
 use Session;
@@ -17,6 +19,37 @@ class ScannerController extends Controller
 
         return view('admin.scanner.index');
     }
+
+    public function scanner_notas(){
+
+        return view('admin.bodega.index_scaner');
+    }
+
+    public function actualizarEstatus(Request $request)
+    {
+        $table = $request->input('table');
+        $id = $request->input('id');
+
+        // Verificar la tabla y buscar el registro
+        if ($table === 'NotasProductos') {
+            $nota = NotasProductos::find($id);
+        } elseif ($table === 'NotasProductosCosmica') {
+            $nota = NotasProductosCosmica::find($id);
+        } else {
+            return response()->json(['error' => 'Tabla no válida'], 400);
+        }
+
+        if (!$nota) {
+            return response()->json(['error' => 'Nota no encontrada'], 404);
+        }
+
+        // Actualizar el estatus
+        $nota->estatus_cotizacion = 'Enviado'; // Cambia al estatus deseado
+        $nota->save();
+
+        return response()->json(['success' => true, 'message' => 'Estatus actualizado correctamente']);
+    }
+
 
     public function buscador_ajax(Request $request){
 

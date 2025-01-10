@@ -166,6 +166,15 @@
                 </li>
             @endcan
 
+            @can('scaner-nota')
+                <a class="nav-link {{ (Request::is('admin/scanner/notas') ? 'active' : '') }}" href="{{ route('scanner_notas.index') }}">
+                    <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-camera text-sm opacity-10" style="color:#e6b449"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Scanner</span>
+                </a>
+            @endcan
+
             @can('bodega-menu')
                 <li class="nav-item">
                     <a data-bs-toggle="collapse" href="#pageBodega" class="nav-link {{ (Request::is('admin/productos/stock*') ? 'active' : '') }}" aria-controls="pageBodega" role="button" aria-expanded="false">
