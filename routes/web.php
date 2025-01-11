@@ -25,6 +25,7 @@ Route::get('/reconocimiento/workshop', [App\Http\Controllers\ClientsController::
 Route::post('/reconocimiento/workshop/store', [App\Http\Controllers\ClientsController::class, 'reconocimiento_webinar_store'])->name('reconocimiento_store.webinar');
 
 Route::get('/admin/scanner/notas', [App\Http\Controllers\ScannerController::class, 'scanner_notas'])->name('scanner_notas.index');
+Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController::class, 'actualizarEstatus'])->name('nota.actualizar_estatus');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -691,7 +692,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('bodega/preparacion/paradisus/{id}', [App\Http\Controllers\BodegaController::class, 'actualizarPedidoParadisus'])->name('actualizar.pedido.paradisus');
 
     Route::get('/pdf_etiqueta/{tabla}/{id}', [App\Http\Controllers\BodegaController::class, 'generarEtiqueta'])->name('pdf_etiqueta.bodega');
-    Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController::class, 'actualizarEstatus'])->name('nota.actualizar_estatus');
+
 
 
 
