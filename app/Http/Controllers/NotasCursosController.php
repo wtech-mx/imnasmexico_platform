@@ -187,6 +187,23 @@ class NotasCursosController extends Controller
         }
         NotasInscripcion::insert($insert_data2);
 
+        $notas_pagos = new NotasPagos;
+        $notas_pagos->id_nota = $notas_cursos->id;
+        $notas_pagos->monto = $request->get('monto1');
+        $notas_pagos->metodo_pago = $request->get('metodo_pago');
+        $notas_pagos->monto2 = $request->get('monto2');
+        $notas_pagos->metodo_pago2 = $request->get('metodo_pago2');
+        $notas_pagos->created_at = $request->get('created_at');
+        $notas_pagos->save();
+
+        $restante = $notas_cursos->total - $notas_pagos->monto;
+
+        $enotas_cursos = NotasCursos::where('id', '=', $notas_cursos->id)->first();
+        $enotas_cursos->restante = $restante;
+        $enotas_cursos->paquete = $order->id;
+        $enotas_cursos->update();
+
+
         $orden_ticket = OrdersTickets::where('id_order', '=', $order->id)->get();
         $orden_ticket2 = OrdersTickets::where('id_order', '=', $order->id)->first();
 
@@ -194,7 +211,6 @@ class NotasCursosController extends Controller
         $id_order = $orden_ticket2->id_order;
         $pago = $orden_ticket2->Orders->pago;
         $forma_pago = $orden_ticket2->Orders->forma_pago;
-        // Mail::to($order->User->email)->send(new PlantillaPedidoRecibido($orden_ticket));
 
         $email_diplomas = 'imnascenter@naturalesainspa.com';
         $destinatario = [ $order->User->email  , $email_diplomas];
@@ -290,22 +306,6 @@ class NotasCursosController extends Controller
 
             }
         }
-
-        $notas_pagos = new NotasPagos;
-        $notas_pagos->id_nota = $notas_cursos->id;
-        $notas_pagos->monto = $request->get('monto1');
-        $notas_pagos->metodo_pago = $request->get('metodo_pago');
-        $notas_pagos->monto2 = $request->get('monto2');
-        $notas_pagos->metodo_pago2 = $request->get('metodo_pago2');
-        $notas_pagos->created_at = $request->get('created_at');
-        $notas_pagos->save();
-
-        $restante = $notas_cursos->total - $notas_pagos->monto;
-
-        $enotas_cursos = NotasCursos::where('id', '=', $notas_cursos->id)->first();
-        $enotas_cursos->restante = $restante;
-        $enotas_cursos->paquete = $order->id;
-        $enotas_cursos->update();
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'Envio de correo exitoso.');
