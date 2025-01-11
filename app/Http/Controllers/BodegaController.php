@@ -132,8 +132,8 @@ class BodegaController extends Controller
 
         // Para cambiar la medida se deben pasar milimetros a putnos
         $pdf->setPaper([0, 0,141.732,70.8661], 'portrair');
-        return $pdf->stream();
-       // return $pdf->download('etiqueta_'.$sku.'.pdf');
+        //return $pdf->stream();
+        return $pdf->download('etiqueta.pdf');
 
     }
 

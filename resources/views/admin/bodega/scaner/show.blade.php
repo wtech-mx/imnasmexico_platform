@@ -76,6 +76,12 @@ Productos solicitados
                                     </div>
                                 @endcan
 
+                                <a class="text-center text-white btn "
+                                    href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'notas_productos', 'id' => $nota_scaner->id]) }}"
+                                    style="background: #7d2de6;">
+                                    <i class="fa fa-qrcode"></i>
+                                </a>
+
                                 <div class="modal-footer">
                                     <button type="submit" id="guardarBtn" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                 </div>
