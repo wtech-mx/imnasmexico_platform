@@ -12,7 +12,7 @@
           left: 0px;
           top: -160px;
           right: 0px;
-          height: 100px;
+          height: 120px;
           background-color: #322338;
           color: #fff;
           text-align: center;
@@ -72,7 +72,7 @@
     <body>
         <header>
             <h1>Reporte Ventas</h1>
-            <h3>Del: {{$fechaInicio}} - Al: {{$fechaFin}}</h3>
+            <h3>Del: {{$fechaInicioFormateada}} <br> Al: {{$fechaFinFormateada}}</h3>
 
         </header>
 
@@ -114,7 +114,7 @@
 
             <table class="table">
                 <thead>
-                    <tr style="background: #836262; color:#fff">
+                    <tr style="background: #837e62; color:#fff">
                         <th>Vendido por</th>
                         <th>Total Registros</th>
                     </tr>

@@ -1033,6 +1033,8 @@ class BodegaController extends Controller
     public function reporte_ventas(Request $request){
         $fechaInicio = $request->get('fecha_inicio');
         $fechaFin = $request->get('fecha_fin');
+        $fechaInicioFormateada = Carbon::parse($fechaInicio)->translatedFormat('d \d\e F Y');
+        $fechaFinFormateada = Carbon::parse($fechaFin)->translatedFormat('d \d\e F Y');
         $today =  date('d-m-Y');
 
         $notas_nas = NotasProductos::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
@@ -1088,7 +1090,7 @@ class BodegaController extends Controller
 
         $totalCotizaciones = $resultados->sum('total');
 
-        $pdf = \PDF::loadView('admin.bodega.pdf.pdf_ventas', compact('notas_nas', 'today', 'notas_cosmica', 'fechaInicio', 'fechaFin', 'totalVendido', 'resultados', 'totalCotizaciones'));
+        $pdf = \PDF::loadView('admin.bodega.pdf.pdf_ventas', compact('notas_nas', 'today', 'notas_cosmica', 'fechaInicioFormateada', 'fechaFinFormateada', 'totalVendido', 'resultados', 'totalCotizaciones'));
 
           return $pdf->stream();
         //return $pdf->download('Reporte Ventas / '.$today.' .pdf');
