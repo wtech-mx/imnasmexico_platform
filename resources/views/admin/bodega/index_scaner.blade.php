@@ -106,9 +106,9 @@ $(document).ready(function() {
         resetScanner();
     });
 
-    let html5ScannerProdcut = new Html5QrcodeScanner("reader", { fps: 15, qrbox: 300 , autostart: false });
+    let html5ScannerProdcut = new Html5QrcodeScanner("reader", { fps: 15, qrbox: 200 , autostart: false });
     html5ScannerProdcut.render(onScanSuccess);
-    
+
     function onScanSuccess(decodedText, decodedResult) {
         console.log(`Código escaneado: ${decodedText}`);
 
