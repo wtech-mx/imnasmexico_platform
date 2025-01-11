@@ -23,6 +23,8 @@ Route::patch('/cosmica/admin/productos/stock/firma/update/{id}', [App\Http\Contr
 
 Route::get('/reconocimiento/workshop', [App\Http\Controllers\ClientsController::class, 'reconocimiento_webinar'])->name('reconocimiento.webinar');
 Route::post('/reconocimiento/workshop/store', [App\Http\Controllers\ClientsController::class, 'reconocimiento_webinar_store'])->name('reconocimiento_store.webinar');
+
+Route::get('/admin/scanner/notas', [App\Http\Controllers\ScannerController::class, 'scanner_notas'])->name('scanner_notas.index');
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -691,7 +693,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/pdf_etiqueta/{tabla}/{id}', [App\Http\Controllers\BodegaController::class, 'generarEtiqueta'])->name('pdf_etiqueta.bodega');
     Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController::class, 'actualizarEstatus'])->name('nota.actualizar_estatus');
 
-    Route::get('/admin/scanner/notas', [App\Http\Controllers\ScannerController::class, 'scanner_notas'])->name('scanner_notas.index');
+
 
     Route::patch('bodega/preparacion/pago/cosmica/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_pago'])->name('notas_cosmica.update_pago');
 
