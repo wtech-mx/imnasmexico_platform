@@ -1073,15 +1073,18 @@ class BodegaController extends Controller
 
         // Combinar y procesar los resultados
         $resultados = $notasNas->concat($notasCosmica) // Combina ambas colecciones
-            ->groupBy('id_admin_venta') // Agrupa por administrador
-            ->map(function ($items) {
-                $total = $items->sum('total'); // Suma el total de registros
-                $name = $items->first()->Vendido->name ?? 'Sin Asignar'; // Obtiene el nombre del primero
-                return [
-                    'name' => $name,
-                    'total' => $total
-                ];
-            });
+        ->groupBy('id_admin_venta') // Agrupa por administrador
+        ->map(function ($items) {
+            $total = $items->sum('total'); // Suma el total de registros
+            $name = $items->first()->Vendido->name ?? 'Sin Asignar'; // Obtiene el nombre del primero
+            return [
+                'name' => $name,
+                'total' => $total
+            ];
+        })
+        ->filter(function ($item) {
+            return $item['name'] !== 'Sin Asignar'; // Filtra los que no tienen asignado un vendedor
+        });
 
         $totalCotizaciones = $resultados->sum('total');
 
