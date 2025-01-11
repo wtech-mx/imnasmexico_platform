@@ -1092,7 +1092,7 @@ class BodegaController extends Controller
 
         $pdf = \PDF::loadView('admin.bodega.pdf.pdf_ventas', compact('notas_nas', 'today', 'notas_cosmica', 'fechaInicioFormateada', 'fechaFinFormateada', 'totalVendido', 'resultados', 'totalCotizaciones'));
 
-          return $pdf->stream();
-        //return $pdf->download('Reporte Ventas / '.$today.' .pdf');
+        //  return $pdf->stream();
+        return $pdf->download('Reporte Ventas / '.$today.' .pdf');
     }
 }
