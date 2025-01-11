@@ -17,6 +17,7 @@ use Automattic\WooCommerce\Client;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Barryvdh\DomPDF\Facade\Pdf;
+use DB;
 
 
 class BodegaController extends Controller
@@ -1026,5 +1027,67 @@ class BodegaController extends Controller
         }
 
         return response()->json(['status' => 'error', 'message' => 'Producto no encontrado o no corresponde a la nota']);
+    }
+
+
+    public function reporte_ventas(Request $request){
+        $fechaInicio = $request->get('fecha_inicio');
+        $fechaFin = $request->get('fecha_fin');
+        $today =  date('d-m-Y');
+
+        $notas_nas = NotasProductos::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+        ->orderBy('id', 'DESC')
+        ->where('tipo_nota', '=', 'Cotizacion')
+        ->get();
+
+        $notas_cosmica = NotasProductosCosmica::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+        ->where('tipo_nota', '=', 'Cotizacion')
+        ->orderBy('id', 'DESC')
+        ->get();
+
+        $totalNotasNas = NotasProductos::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+            ->where('tipo_nota', '=', 'Cotizacion')
+            ->sum('tipo');
+
+        // Sumar la columna 'total' de la tabla NotasProductosCosmica
+        $totalNotasCosmica = NotasProductosCosmica::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+            ->where('tipo_nota', '=', 'Cotizacion')
+            ->sum('total');
+
+        // Sumar ambos resultados
+        $totalVendido = $totalNotasNas + $totalNotasCosmica;
+
+        // Agrupar y contar registros en NotasProductos
+        $notasNas = NotasProductos::select('id_admin_venta', DB::raw('COUNT(*) as total'), DB::raw("'NotasProductos' as origen"))
+        ->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+        ->with('Vendido')
+        ->groupBy('id_admin_venta')
+        ->get();
+
+        // Agrupar y contar registros en NotasProductosCosmica
+        $notasCosmica = NotasProductosCosmica::select('id_admin_venta', DB::raw('COUNT(*) as total'), DB::raw("'NotasProductosCosmica' as origen"))
+            ->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+            ->with('Vendido')
+            ->groupBy('id_admin_venta')
+            ->get();
+
+        // Combinar y procesar los resultados
+        $resultados = $notasNas->concat($notasCosmica) // Combina ambas colecciones
+            ->groupBy('id_admin_venta') // Agrupa por administrador
+            ->map(function ($items) {
+                $total = $items->sum('total'); // Suma el total de registros
+                $name = $items->first()->Vendido->name ?? 'Sin Asignar'; // Obtiene el nombre del primero
+                return [
+                    'name' => $name,
+                    'total' => $total
+                ];
+            });
+
+        $totalCotizaciones = $resultados->sum('total');
+
+        $pdf = \PDF::loadView('admin.bodega.pdf.pdf_ventas', compact('notas_nas', 'today', 'notas_cosmica', 'fechaInicio', 'fechaFin', 'totalVendido', 'resultados', 'totalCotizaciones'));
+
+          return $pdf->stream();
+        //return $pdf->download('Reporte Ventas / '.$today.' .pdf');
     }
 }

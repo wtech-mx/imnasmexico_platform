@@ -12,6 +12,7 @@ class NotasProductos extends Model
 
     protected $fillable = [
         'id_usuario',
+        'id_admin_venta',
         'producto',
         'id_product_woo',
         'price',
@@ -29,6 +30,10 @@ class NotasProductos extends Model
     public function User()
     {
         return $this->belongsTo(User::class, 'id_usuario');
+    }
+    public function Vendido()
+    {
+        return $this->belongsTo(User::class, 'id_admin_venta');
     }
 
     public function Admin()

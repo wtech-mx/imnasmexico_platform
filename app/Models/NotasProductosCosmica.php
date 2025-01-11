@@ -52,6 +52,10 @@ class NotasProductosCosmica extends Model
     {
         return $this->belongsTo(User::class, 'id_usuario');
     }
+    public function Vendido()
+    {
+        return $this->belongsTo(User::class, 'id_admin_venta');
+    }
 
     public function Admin()
     {

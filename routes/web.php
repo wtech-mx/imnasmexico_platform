@@ -693,9 +693,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::get('/pdf_etiqueta/{tabla}/{id}', [App\Http\Controllers\BodegaController::class, 'generarEtiqueta'])->name('pdf_etiqueta.bodega');
 
-
-
-
+    Route::get('cosmica/reporte/ventas/pdf', [App\Http\Controllers\BodegaController::class, 'reporte_ventas'])->name('reporte.ventas');
+    
     Route::patch('bodega/preparacion/pago/cosmica/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_pago'])->name('notas_cosmica.update_pago');
 
     Route::get('/admin/productos/stock', [App\Http\Controllers\BodegaPedidosController::class, 'productos_stock'])->name('productos_stock.index');
