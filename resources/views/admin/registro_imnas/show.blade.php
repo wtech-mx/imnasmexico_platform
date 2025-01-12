@@ -14,6 +14,10 @@
                         <h5 class="mb-3">Afiliaciones Registro Imnas</h5>
                         <h3 class="mb-3"> {{$cliente->name}} </h3>
                         <h5 class="mb-3"> {{$cliente->telefono}} </h5>
+                        <h5 class="mb-3"> {{$cliente->escuela}} </h5>
+
+                        {{-- $item->User->escuela; --}}
+
                     </div>
 
                         <div class="card-body">
