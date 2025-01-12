@@ -9,18 +9,14 @@
         $basePath = ($domain == 'plataforma.imnasmexico.com')
                 ? 'https://plataforma.imnasmexico.com/documentos_nuevos/diploma/'
                 : 'documentos_nuevos/diploma/';
+        $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+            ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+            : 'utilidades_documentos/';
     @endphp
 
     @include('admin.pdf.nuevos.fuentes')
 
     <style>
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-        }
 
         .container {
             position: relative;
@@ -34,17 +30,6 @@
             background-repeat: no-repeat; /* No repetir la imagen */
         }
 
-        .content {
-            position: relative; /* Necesario para superponer contenido sobre la imagen */
-            z-index: 2; /* Asegura que el contenido esté encima de la imagen */
-            width: 100%;
-            height: 100%;
-        }
-
-        .row {
-            width: 100%;
-            clear: both;
-        }
         [class^="col-"] {
             float: left;
             padding-left: 15px;
@@ -64,25 +49,6 @@
         .col-11 { width: 87.02%; } /* 91.66% - 4.64% */
         .col-12 { width: 96.10%; } /* 100% - 4.64% */
 
-        .text-center {
-            text-align: center;
-        }
-
-        .text-start{
-            text-align: start;
-        }
-
-        .text-end{
-            text-align: end;
-        }
-
-        .border {
-            border: 0px solid #000;
-        }
-
-        .p-2{
-            padding: 10px;
-        }
 
         .img_registro_header{
             width: 150px;
@@ -102,7 +68,6 @@
 
         .img_traseras{
             width: 180px;
-
         }
 
         .h3_nomre_firmas{
@@ -117,30 +82,9 @@
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
             font-size: 20px;
-            margin-top: 10px!important;
+            margin-top: 5px!important;
             line-height: 19px;
             color:#010101;
-        }
-
-        .m-0{
-            margin: 0;
-        }
-
-        .p-0{
-            padding: 0;
-        }
-
-        .my-auto{
-            margin-top: auto;
-            margin-bottom: auto;
-        }
-
-        .azul_fuerte{
-            color: #2c6d77;
-        }
-
-        .azul_claro{
-            color: #5bb4c2;
         }
 
         .texto_documentos{
@@ -161,15 +105,15 @@
         }
 
         .strong_folio{
-            font-size: 23px;
+            font-size: 19px;
             font-family: 'OpenSauceOne_Bold';
             font-weight: 'regular';
             margin-top: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .titulo_cedula{
-            font-size: 53px;
+            font-size: 50px;
             font-family: 'Montserrat_ExtraBold';
             font-weight: 'regular';
             line-height:45px;
@@ -190,26 +134,18 @@
         }
 
         .subtitulo_cedula{
-            font-size: 37px;
+            font-size: 33px;
             font-family: 'Montserrat_SemiBold';
             font-weight: 'regular';
             line-height:18px;
         }
 
         .titulo_especialidad{
-            font-size: 32px;
+            font-size: 30px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
             line-height: 25px;
 
-        }
-
-        .capitalize{
-            text-transform: capitalize;
-        }
-
-        .uppercase{
-            text-transform: uppercase;
         }
 
         .especialidad{
@@ -252,11 +188,11 @@
         }
 
         .texto_trasero2{
-            font-size:7px;
-            font-family: 'Montserrat_Regular';
+            font-size:8px;
+            font-family: 'Montserrat_LightItalic';
             font-weight: 'regular';
             color: #3d3b3a;
-            line-height: 10px;
+            line-height: 7px;
         }
 
         .texto_principal_cedula{
@@ -320,7 +256,6 @@
             line-height: 35px;
         }
 
-
         .oval {
             width: 100%;
             height: 100%;
@@ -346,6 +281,7 @@
             font-weight: 'regular';
             line-height: 15px;
             color: #2c6d77;
+            margin-left: 40px;
         }
 
         .acuerdo{
@@ -354,6 +290,14 @@
             font-weight: 'regular';
             line-height:18px;
             color: #2c6d77;
+        }
+
+        .img_logo{
+            width: 110px;
+            height: 110px;
+            /* height: 120px; */
+            margin-left: auto;
+            margin-right: auto;
         }
 
     </style>
@@ -370,7 +314,7 @@
                 </div>
 
                 <div class="col-3 border  text-center" style="margin-top: 90px">
-                    <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 80px">
+                    <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
                 </div>
 
                 <div class="col-3 border  text-center" style="margin-top: 90px">
@@ -385,7 +329,7 @@
 
             <div class="row">
                 <div class="col-12 text-center border">
-                    <p class="texto_principal_cedula uppercase" style="margin-bottom: 40px">
+                    <p class="texto_principal_cedula uppercase" style="margin-bottom: px">
                         La Dirección General del Instituto Mexicano Naturales Ain Spa y <br>
                          del Registro Nacional Instituto Mexicano Naturales Ain Spa, <br>
                           expiden el siguiente reconocimiento
@@ -416,10 +360,12 @@
             <div class="row">
 
                 <div class="col-8 text-center border ">
-                    <h1 class="h1_nombre azul_fuerte titulo_name p-0 m-0">JUNA DEL ARCON</h1>
+                    <h1 class="h1_nombre azul_fuerte titulo_name p-0 m-0">
+                        {!! $nombre !!}
+                    </h1>
 
                     <h2 class="azul_fuerte texto_documentos_ligth uppercase p-0 "style="margin-bottom: 13px;margin-top:13px">
-                        con numero de folio <strong class="strong_folio">CFC000918771</strong>
+                        con numero de folio <strong class="strong_folio">{{ $folio }}</strong>
                     </h2>
 
                     <p class="texto_documentos uppercase p-0 m-0" style="margin-bottom: 40px">
@@ -429,7 +375,7 @@
                     </p>
 
                     <h2 class="azul_fuerte titulo_especialidad uppercase p-0" style="margin-bottom: 13px;margin-top:13px">
-                        Cosmiatria y Cosmetologia
+                        {{ ucwords(strtolower($curso)) }}
                     </h2>
 
 
@@ -446,7 +392,12 @@
                         </div>
                     </div>
                     <p>
-                        <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 80px">
+                        @php
+                            echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2,2) . '" style=""   />';
+                        @endphp
+                    </p>
+                    <p class="texto_trasero2" style="padding:0px 45px 0px 45px;">
+                        REGISTRO ÚNICO
                     </p>
                 </div>
 
@@ -475,7 +426,7 @@
             <div class="row">
                 <div class="col-12 text-center border ">
                     <p class="azul_fuerte texto_footer uppercase  p-0"  style="margin-top:40px">
-                        Expedido en la Ciudad de México, día 10 de noviembre de 2024. Este documento respalda 120 hrs <br>
+                        Expedido en la Ciudad de México,  el dia {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }}. Este documento respalda 120 hrs <br>
                         totales del Curso, así como Documentos Anexos correspondientes con vigencia PERMANENTE <br>
                         ESTE DOCUMENTO NO ES VÁLIDO SI ES MUTILADO. PRESENTA BORRADURAS, TACHADURAS O ENMENDADURAS.
                     </p>
@@ -494,7 +445,7 @@
                 </div>
 
                 <div class="col-3 border  text-center" style="margin-top: 90px">
-                    <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 80px">
+                    <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
                 </div>
 
                 <div class="col-3 border  text-center" style="margin-top: 90px">
@@ -514,14 +465,14 @@
                     <p class="certificado_titulo text-end">
                         CERTIFICADO ANTE EL REGISTRO NACIONAL <br>
                         INSTITUTO MEXICANO NATURALES AIN SPA
-
                     </p>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-8 text-center border ">
-                    <h1 class="azul_fuerte titulo_name p-0" style="margin-top: 20px;margin-left:150px;">  ACUERDO LEGAL
+                    <h1 class="azul_fuerte titulo_name p-0" style="margin-top: 20px;margin-left:150px;">
+                        ACUERDO LEGAL
                     </h1>
                 </div>
 
@@ -560,7 +511,8 @@
 
             <div class="row">
                 <div class="col-12 text-start border  m-0"  >
-                    <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 45px 0px 45px;"> Cosmiatria y Cosmetologia
+                    <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 45px 0px 45px;">
+                        {{ ucwords(strtolower($curso)) }}
                     </h1>
                 </div>
             </div>
@@ -583,7 +535,9 @@
                         La autenticidad del <br> presente documento <br> puede ser verificada en
                     </p>
 
-                    QR
+                    @php
+                        echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.2,2.2) . '" style=""   />';
+                    @endphp
 
                 </div>
 

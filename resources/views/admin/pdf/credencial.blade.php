@@ -285,7 +285,6 @@
             </div>
         </div>
 
-
         <div class="container2">
             @php
                 // Divide el curso por espacios en blanco

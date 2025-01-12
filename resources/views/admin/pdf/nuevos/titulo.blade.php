@@ -18,8 +18,6 @@
     @include('admin.pdf.nuevos.fuentes')
 
     <style>
-
-
         .container {
             position: relative;
             width: 100%;

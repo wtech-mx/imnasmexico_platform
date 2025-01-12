@@ -9,6 +9,10 @@
         $basePath = ($domain == 'plataforma.imnasmexico.com')
                 ? 'https://plataforma.imnasmexico.com/documentos_nuevos/credencial/'
                 : 'documentos_nuevos/credencial/';
+
+        $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+            ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+            : 'utilidades_documentos/';
     @endphp
 
     @include('admin.pdf.nuevos.fuentes')
@@ -70,6 +74,7 @@
             margin-left: 6px;
             padding: 0px;
             margin:0;
+            margin-top: 6px;
         }
 
         .text_qr2{
@@ -187,12 +192,11 @@
             font-size: 8px;
             font-family: 'Montserrat_ExtraBold';
             font-weight: 'regular';
-            line-height: 0px;
+            line-height: 5px;
             text-align: center;
             color: #2c6d77;
-            padding:6px 0 6px 0;
+            padding:3px 0 6px 0;
             margin:0;
-
           }
 
         .img_grid_categorie{
@@ -223,7 +227,7 @@
         .texto_emosires{
             font-family: 'Montserrat_LightItalic';
             font-weight: 'regular';
-            font-size: 8px;
+            font-size: 6px;
             color:#3d3b3a;
             line-height: 7px;
             margin:0;
@@ -262,31 +266,56 @@
             color: #3d3b3a;
         }
 
+        .img_logo{
+            width: 44px;
+            height: 44px;
+            /* height: 120px; */
+            margin-top: 8px;
+        }
+
+        .oval-container2 {
+            width: 26px;
+            height: 31px;
+            position: absolute;
+            overflow: hidden;
+            top: 5%;
+            left: 0%;
+            background: #fff;
+        }
+
+        .oval2 img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.3;
+        }
+
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="container" style="">
 
         <div class="row">
             <div class="col-8 text-start border " style="padding: 0 0 0 6px">
-                    <p class="titulo_principal" style="margin-top: 22px">
-                        <strong class="titulo_principal_strong">REGISTRO NACIONAL</strong> <br>
-                        INSTITUTO MEXICANO NATURALES AIN SPA
-                    </p>
+                <p class="titulo_principal" style="margin-top: 22px">
+                    <strong class="titulo_principal_strong">REGISTRO NACIONAL</strong> <br>
+                    INSTITUTO MEXICANO NATURALES AIN SPA
+                </p>
             </div>
             <div class="col-2 text-center border">
-                <img class="" src="{{ $basePath . 'logo.png'}}" style="width: 40px;margin-top: 9px">
+                <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
             </div>
             <div class="col-2 text-center border">
-                <img class="" src="{{ $basePath . 'registro_nacional.png'}}" style="width: 40px;margin-top: 16px">
+                <img class="" src="{{ $basePath . 'registro_nacional.png'}}" style="width: 40px;margin-top: 16px;margin-left:20px;">
             </div>
         </div>
 
         <div class="row">
             <div class="col-3 text-center border ">
-                <img class="" src="{{ $basePath . 'qr.png'}}" style="width: 70px">
-
+                @php
+                    echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',1.6,1.6) . '" style="margin-top:10px;"   />';
+                @endphp
                 <p class="text_qr uppercase">Escanea PARA Verifica la <br> autenticidad de este <br> documento </p>
 
                 <h6 class="azul_claro tipo uppercase m-0 p-0">
@@ -298,20 +327,26 @@
                 </h6>
             </div>
 
-            <div class="col-5  border ">
+            <div class="col-5  border " style="position: relative">
+
+                <div class="oval-container2">
+                    <div class="oval2">
+                        <img src="{{ $basePathUtilidades . $fileName }}" alt="Imagen Ovalada">
+                    </div>
+                </div>
+
                 <p class="text_datos uppercase" style="">
                     <strong class="text_datos_strong">Nombre</strong> <br>
-                    ruiz de alarcon
-                    Juana
+                    {!! $nombre !!}
 
                     <br><br><strong class="text_datos_strong">curp</strong> <br>
-                    JUANA1234567MMCLTA4
+                    {{ $curp }}
 
                     <br><br><strong class="text_datos_strong">nacionalidad</strong> <br>
                     mexicana
 
                     <br><br><strong class="text_datos_strong">especialidad</strong> <br>
-                    Cosmiatria y Cosmetologia
+                    {{ ucwords(strtolower($curso)) }}
 
                     <br><br><strong class="text_datos_strong">vigencia:</strong> <br>
                 </p>
@@ -326,14 +361,16 @@
                 </h6>
 
                 <h6 class="azul_claro folio_num uppercase ">
-                    CFC000918771
+                    {{ $folio }}
                 </h6>
 
                 {{-- <div class="img_grid_categorie" style=""></div> --}}
 
                 <div class="oval-container">
-                    <img class="oval" src="{{ $basePath . 'foto.jpeg'}}" style="" />
+                    <img class="oval" src="{{ $basePathUtilidades . $fileName }}" alt="Imagen">
                 </div>
+
+
 
             </div>
         </div>
@@ -350,7 +387,9 @@
 
         <div class="row">
             <div class="col-4 text-center border " style="padding: 0 10px 0 10px">
-                <img class="" src="{{ $basePath . 'qr.png'}}" style="width: 70px">
+                @php
+                    echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2,2) . '" style=""   />';
+                @endphp
                 <p class="text_qr2 uppercase">Escanea PARA Verifica la <br> autenticidad de este <br> documento </p>
                 <img src="{{ $basePath . 'carla.webp'}}" style=" width:50px;">
                 <h3 class="h3_nomre_firmas uppercase ">Lic. Carla Rizo FLORES</h3>
@@ -375,7 +414,7 @@
                     Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da el siguiente nombramiento conforme a derecho e inscrito en el Registro Nacional Instituto Mexicano Naturales Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exige el plan de estudios especializado en:
                 </p>
 
-                <h1 class="especialidad_trasera uppercase">Cosmiatria y Cosmetologia</h1>
+                <h1 class="especialidad_trasera uppercase">{{ ucwords(strtolower($curso)) }}</h1>
 
                 <p class="text_footer text-center uppercase p-0 m-0">
                     este reconocimiento es inválido, si no tiene todas las firmas y sellos que lo que acrediten.

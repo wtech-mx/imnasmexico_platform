@@ -681,11 +681,16 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.diploma_imnas',compact('clave_rfc','firma_directora2','firma_directora','capitalizar','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director', 'fileName_logo', 'director'));
+            if($request->get('documentos_design') == 'si'){
+                $pdf = PDF::loadView('admin.pdf.diploma_imnas',compact('clave_rfc','firma_directora2','firma_directora','capitalizar','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director', 'fileName_logo', 'director'));
+            }else{
+                $pdf = PDF::loadView('admin.pdf.nuevos.diploma',compact('clave_rfc','firma_directora2','firma_directora','capitalizar','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director', 'fileName_logo', 'director'));
+            }
+
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
 
-            return $pdf->download('CN-Doploma_imnas_'.$nombre.'.pdf');
+            return $pdf->stream('CN-Doploma_imnas_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Credencial'){
             $id_ticket = $request->get('id_registro');
@@ -705,10 +710,15 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
-            $pdf = PDF::loadView('admin.pdf.credencial',compact('clave_rfc','tam_letra_esp_cred','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad', 'fileName_logo'));
+            if($request->get('documentos_design') == 'si'){
+                $pdf = PDF::loadView('admin.pdf.credencial',compact('clave_rfc','tam_letra_esp_cred','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad', 'fileName_logo'));
+            }else{
+                $pdf = PDF::loadView('admin.pdf.nuevos.credencial',compact('clave_rfc','tam_letra_esp_cred','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nombres','apellido_apeterno','apellido_materno','nacionalidad', 'fileName_logo'));
+            }
+
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
-            return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
+            return $pdf->stream('CN-Credencial_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira_materias_aparatologia'){
             $id_ticket = $request->get('id_registro');
