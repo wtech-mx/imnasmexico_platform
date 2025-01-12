@@ -14,6 +14,7 @@
             ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
             : 'utilidades_documentos/';
     @endphp
+    
     @include('admin.pdf.nuevos.fuentes')
 
     <style>

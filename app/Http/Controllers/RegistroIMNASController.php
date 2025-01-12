@@ -626,12 +626,17 @@ class RegistroIMNASController extends Controller
                 $ticket->update();
             }
 
-            $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('clave_rfc','fileName_firma_directorOtra','firma_directora2','firma_directora','tam_letra_nombre','capitalizar','director','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director','nacionalidad', 'fileName_logo'));
+            if($request->get('documentos_design') == 'si'){
+                $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('clave_rfc','fileName_firma_directorOtra','firma_directora2','firma_directora','tam_letra_nombre','capitalizar','director','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director','nacionalidad', 'fileName_logo'));
+            }else{
+                $pdf = PDF::loadView('admin.pdf.nuevos.titulo',compact('clave_rfc','fileName_firma_directorOtra','firma_directora2','firma_directora','tam_letra_nombre','capitalizar','director','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director','nacionalidad', 'fileName_logo'));
+            }
+
             // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
             $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
             // return $pdf->stream();
-             return $pdf->download('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
+             return $pdf->stream('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR_CFC'){
             $id_ticket = $request->get('id_registro');

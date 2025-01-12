@@ -9,18 +9,16 @@
         $basePath = ($domain == 'plataforma.imnasmexico.com')
                 ? 'https://plataforma.imnasmexico.com/documentos_nuevos/titulo/'
                 : 'documentos_nuevos/titulo/';
+
+        $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+            ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+            : 'utilidades_documentos/';
     @endphp
 
     @include('admin.pdf.nuevos.fuentes')
 
     <style>
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-        }
 
         .container {
             position: relative;
@@ -34,17 +32,7 @@
             background-repeat: no-repeat; /* No repetir la imagen */
         }
 
-        .content {
-            position: relative; /* Necesario para superponer contenido sobre la imagen */
-            z-index: 2; /* Asegura que el contenido esté encima de la imagen */
-            width: 100%;
-            height: 100%;
-        }
 
-        .row {
-            width: 100%;
-            clear: both;
-        }
         [class^="col-"] {
             float: left;
             padding-left: 15px;
@@ -64,25 +52,11 @@
         .col-11 { width: 87.02%; } /* 91.66% - 4.64% */
         .col-12 { width: 96.10%; } /* 100% - 4.64% */
 
-        .text-center {
-            text-align: center;
-        }
-
-        .text-start{
-            text-align: start;
-        }
-
-        .text-end{
-            text-align: end;
-        }
 
         .border {
             border: 0px solid #000;
         }
 
-        .p-2{
-            padding: 10px;
-        }
 
         .img_registro_header{
             width: 150px;
@@ -121,26 +95,6 @@
             color:#010101;
         }
 
-        .m-0{
-            margin: 0;
-        }
-
-        .p-0{
-            padding: 0;
-        }
-
-        .my-auto{
-            margin-top: auto;
-            margin-bottom: auto;
-        }
-
-        .azul_fuerte{
-            color: #2c6d77;
-        }
-
-        .azul_claro{
-            color: #5bb4c2;
-        }
 
         .texto_documentos{
             font-size: 33px;
@@ -204,13 +158,6 @@
 
         }
 
-        .capitalize{
-            text-transform: capitalize;
-        }
-
-        .uppercase{
-            text-transform: uppercase;
-        }
 
         .especialidad{
             font-size: 10px;
@@ -317,12 +264,11 @@
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
             color:#2c6d77;
-            font-size: 40px;
+            font-size: 70px;
             margin: 0;
             padding: 0;
-            line-height: 35px;
+            line-height: 65px;
         }
-
 
         .oval {
             width: 100%;
@@ -366,6 +312,14 @@
             font-weight: 'regular';
         }
 
+        .img_logo{
+            width: 300px;
+            height: 300px;
+            /* height: 120px; */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
     </style>
 </head>
 <body>
@@ -379,7 +333,7 @@
                 </div>
 
                 <div class="col-4 text-center border " style="margin-top: 120px">
-                    <img class="" src="{{ $basePath . 'logo.png'}}" style="width: 80%">
+                    <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
                 </div>
 
                 <div class="col-4 text-center border " style="margin-top: 120px">
@@ -387,7 +341,7 @@
             </div>
 
             <div class="row">
-                <div class="col-12 text-center border" style="margin-top: 40px;margin-bottom: 40px">
+                <div class="col-12 text-center border" style="margin-top: 20px;margin-bottom: 30px">
                     <h5 class="azul_fuerte uppercase subtitulo_cedula  m-0 p-0">
                         Instituto Integral AM 360 a través de Registro <br>
                         Nacional Instituto Mexicano Naturales Ain Spa
@@ -399,9 +353,9 @@
             <div class="row">
 
                 <div class="col-4 text-center border ">
+
                     <div class="oval-container">
-                        <div class="oval" style="">
-                        </div>
+                        <img class="oval" src="{{ $basePathUtilidades . $fileName }}" alt="Imagen">
                     </div>
                 </div>
 
@@ -410,14 +364,16 @@
                         otorga a
                     </p>
 
-                    <h1 class="azul_fuerte titulo_name p-0 m-0" style="margin-bottom:40px">Juana de Alarcon</h1>
+                    <h1 class="azul_fuerte titulo_name p-0 m-0" style="margin-bottom:40px">
+                        {!! $nombre !!}
+                    </h1>
 
                     <p class="texto_documentos  p-0 m-0" style="margin-bottom: 40px">
                         el título de
                     </p>
 
                     <h2 class="azul_fuerte titulo_especialidad  p-0" style="margin-bottom: 20px;">
-                        Cosmiatria y Cosmetologia
+                        {{ ucwords(strtolower($curso)) }}
                     </h2>
 
                     <p class="texto_documentos p-0 m-0" style="margin-bottom: 40px">
@@ -439,7 +395,7 @@
 
                 <div class="col-8 text-center border ">
                     <p class="texto_principal_cedula uppercase" style="margin-bottom: auto;margin-top: 60px">
-                        Expedido en la Ciudad de México,<br> día 10 de noviembre de 2024.
+                        Expedido en la Ciudad de México,<br>  el dia {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }}
                     </p>
                 </div>
 
@@ -481,7 +437,6 @@
 
             </div>
 
-
         </div>
     </div>
 
@@ -494,21 +449,20 @@
                 </div>
 
                 <div class="col-4 text-center border " style="margin-top: 120px">
-                    <img class="" src="{{ $basePath . 'logo.png'}}" style="width: 80%">
+                    <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
                 </div>
 
                 <div class="col-4 text-center border " style="margin-top: 120px">
                 </div>
             </div>
 
-
             <div class="row">
                 <!-- Primera columna -->
                 <div class="col-6 text-start border">
                     <p class="uppercase lista" style="margin-left: 90px;">
-                        <strong class="color:#000;"> Nombre: </strong>Juana de Alarcon <br>
-                        <strong class="color:#000;"> curp:</strong> JUANA1234567MMCLTA4 <br>
-                        <strong class="color:#000;"> carrera:</strong> Cosmiatria y Cosmetologia <br>
+                        <strong class="color:#000;"> Nombre: </strong>{!! $nombre !!} <br>
+                        <strong class="color:#000;"> curp:</strong> {{$curp}} <br>
+                        <strong class="color:#000;"> carrera:</strong>  {{ ucwords(strtolower($curso)) }} <br>
                         <strong class="color:#000;"> nacionalidad:</strong> mexicana <br>
                         <strong class="color:#000;"> vigencia:</strong> permanente <br>
                     </p>
@@ -516,7 +470,11 @@
 
                 <!-- Segunda columna -->
                 <div class="col-3 text-center border">
-                    <p style="margin-top: 70px">QR</p>
+                    <p style="margin-top: 70px">
+                        @php
+                            echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',3.8,3.8) . '" style=""   />';
+                        @endphp
+                    </p>
                 </div>
 
                 <!-- Tercera columna -->
@@ -529,7 +487,6 @@
                     </h6>
                 </div>
             </div>
-
 
             <div class="row">
                 <div class="col-12 text-start border" >
@@ -554,23 +511,23 @@
 
             <div class="row">
                 <div class="col-12 text-start border  m-0">
-                    <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 45px 0px 90px;"> Cosmiatria Cosmiatria y Cosmetologia
+                    <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 45px 0px 90px;">
+                        {{ ucwords(strtolower($curso)) }}
                     </h1>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-12 text-start border p-0"  style="margin-bottom: 50px">
-                    <p class="texto_trasero uppercase m-0" style="padding:0px 45px 0px 60px">
+                <div class="col-12 text-start border p-0"  style="margin-bottom: 30px">
+                    <p class="texto_trasero uppercase m-0" style="padding:0px 45px 0px 40px">
                         este reconocimiento es <strong>inválido</strong> , si no tiene todas las firmas y sellos que lo que acrediten.
                     </p>
                 </div>
             </div>
 
-
             <div class="row">
                 <div class="col-4 text-center border ">
-                    <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 270px;margin-top: 20px" >
+                    <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 270px;margin-top: 10px" >
                 </div>
 
                 <div class="col-4 text-center border ">
@@ -581,21 +538,20 @@
 
                 <div class="col-4 text-center border ">
                     <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 210px;">
-
                 </div>
             </div>
 
             <div class="row" >
 
-                <div class="col-4 border  text-center" style="">
-                    <img class="" src="{{ $basePath . 'stps.webp'}}" style="width:260px;">
+                <div class="col-4 border  text-center" >
+                    <img class="" src="{{ $basePath . 'stps.webp'}}" style="width:220px;"  >
                 </div>
 
                 <div class="col-4 border  text-center" style="">
                 </div>
 
                 <div class="col-4 border  text-center"  style="">
-                    <img class="img_stps_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" >
+                    <img class=" " src="{{ $basePath . 'registro_nacional.png'}}" style="width:160px;">
                 </div>
 
             </div>
