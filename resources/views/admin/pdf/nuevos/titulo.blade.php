@@ -145,7 +145,7 @@
             font-size: 29px;
             font-family: 'OPTIEngraversOldEnglish';
             font-weight: 'regular';
-            line-height:33px;
+            line-height:22px;
         }
 
         .titulo_especialidad{
@@ -346,8 +346,8 @@
             </div>
 
             <div class="row">
-                <div class="col-12 text-center border" style="margin-top: 20px;margin-bottom: 30px;">
-                    <h5 class="azul_fuerte subtitulo_cedula " style="margin-right:70px;margin-left:70px;">
+                <div class="col-12 text-center border" style="margin-top: 10px;margin-bottom: 0px;">
+                    <h5 class="azul_fuerte subtitulo_cedula " style="margin-right:60px;margin-left:60px;">
                         {{ $name_escuela }} a través de Registro
                         Nacional Instituto Mexicano Naturales Ain Spa
                     </h5>
