@@ -310,6 +310,13 @@
             font-weight: 'regular';
         }
 
+        .lista_strong{
+            color:#010101;
+            font-size: 20px;
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+        }
+
         .img_logo{
             width: 300px;
             height: 300px;
@@ -340,7 +347,7 @@
 
             <div class="row">
                 <div class="col-12 text-center border" style="margin-top: 20px;margin-bottom: 30px">
-                    <h5 class="azul_fuerte uppercase subtitulo_cedula  m-0 p-0">
+                    <h5 class="azul_fuerte subtitulo_cedula  m-0 p-0">
                         Instituto Integral AM 360 a través de Registro <br>
                         Nacional Instituto Mexicano Naturales Ain Spa
                     </h5>
@@ -458,11 +465,11 @@
                 <!-- Primera columna -->
                 <div class="col-6 text-start border">
                     <p class="uppercase lista" style="margin-left: 90px;">
-                        <strong class="color:#000;"> Nombre: </strong>{!! $nombre !!} <br>
-                        <strong class="color:#000;"> curp:</strong> {{$curp}} <br>
-                        <strong class="color:#000;"> carrera:</strong>  {{ ucwords(strtolower($curso)) }} <br>
-                        <strong class="color:#000;"> nacionalidad:</strong> mexicana <br>
-                        <strong class="color:#000;"> vigencia:</strong> permanente <br>
+                        <strong class="lista_strong"> Nombre: </strong>{!! $nombre !!} <br>
+                        <strong class="lista_strong"> curp:</strong> {{$curp}} <br>
+                        <strong class="lista_strong"> carrera:</strong>  {{ ucwords(strtolower($curso)) }} <br>
+                        <strong class="lista_strong"> nacionalidad:</strong> mexicana <br>
+                        <strong class="lista_strong"> vigencia:</strong> permanente <br>
                     </p>
                 </div>
 

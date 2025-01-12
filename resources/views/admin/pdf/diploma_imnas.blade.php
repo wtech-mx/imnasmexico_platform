@@ -356,9 +356,9 @@
         </div>
 
         <div class="oval-container">
-            <div class="oval">
-            </div>
+            <img class="oval" src="{{ $basePathUtilidades . $fileName }}" alt="Imagen">
         </div>
+
 
         <div class="container2">
             <h4 class="curso">{{ ucwords(strtolower($curso)) }}</h4>

@@ -233,13 +233,25 @@
             margin:0;
         }
 
-        .texto_trasero{
-            font-size:4.5px;
-            font-family: 'Montserrat_Regular';
+        .texto_trasero_1{
+            font-size:4px;
+            font-family: 'Montserrat_Medium';
             font-weight: 'regular';
-            line-height: 3px;
+            line-height: 4px;
             color: #3d3b3a;
+            letter-spacing: 0.2px;
         }
+
+        .texto_trasero{
+            font-size:4px;
+            font-family: 'Montserrat_Medium';
+            font-weight: 'regular';
+            color: #3d3b3a;
+            line-height: 3.5px;
+            letter-spacing: 0.2px;
+
+        }
+
 
         .especialidad_trasera{
             font-size: 8px;
@@ -262,8 +274,18 @@
             font-size:4px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
-            line-height: 3px;
+            line-height: 7px;
             color: #3d3b3a;
+
+        }
+
+        .strong_texto_trasero_azul{
+            font-size:4px;
+            font-family: 'Montserrat_Bold';
+            font-weight: 'regular';
+            line-height: 7px;
+            color: #2c6d77;
+
         }
 
         .img_logo{
@@ -397,21 +419,19 @@
             </div>
 
             <div class="col-8 border" style="padding: 0;margin:0;width:68.5%;">
-                <p class="texto_trasero uppercase " style="margin-right: 15px;text-align: right;">
+                <p class="texto_trasero_1 uppercase " style="margin-right: 15px;text-align: right;">
                     <strong class="strong_texto_trasero">ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br><br>
                     INSTRUMENTO NÚMERO SETENTA Y CINCO MIL SEISCIENTOS SETENTA Y TRES. LIBRO MIL CIENTO CUARENTA Y TRES. CIUDAD DE MÉXICO. A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE REFORMA AL ARTÍCULO SEGUNDO DE LOS ESTATUTOS SOCIALES; y, B.- LA REFORMA AL ARTÍCULO SEXTO DE LOS ESTATUTOS SOCIALES, que resultan de LA PROTOCOLIZACIÓN del acta de Asamblea General Extraordinaria de Socios de "INSTITUTO MEXICANO NATURALES AIN SPA", SOCIEDAD CIVIL.
                 </p>
-                <p class="texto_trasero " style="margin-right: 15px;text-align: right;">
-                    <br><br>
+                <p class="texto_trasero " style="margin-right: 15px;text-align: right;margin-top:0;">
+                    <br>
                     Artículo 5º de la Constitución Política de los Estados Unidos Mexicanos: “A ninguna persona podrá impedirse que se dedique a la profesión, industria, comercio o trabajo que le acomode siendo lícitos... Nadie puede ser privado del producto de su trabajo, sino por resolución judicial.
                     <br><br>
+                    Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro:
+                    <strong class="strong_texto_trasero_azul">{{ $clave_rfc }}</strong>
+                    <br><br>
                     Artículo 153 de la Ley General del Trabajo apartado I, III y IV. En general, mejorar el nivel educativo, la competencia laboral y las habilidades de los trabajadores.
-                    <br><br>
-                    Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro:  {{ $clave_rfc }}
-                    <br><br>
-                    XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su plena comprensión y conformidad con él y lo firmó el día _________________________________________, mismo momento en que lo autorizo definitivamente.- Doy fe.
-                    <br><br>
-                    Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da el siguiente nombramiento conforme a derecho e inscrito en el Registro Nacional Instituto Mexicano Naturales Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exige el plan de estudios especializado en:
+                    Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da el siguiente nombramiento conforme a derecho e inscrito en el Registro Nacional Instituto Mexicano Naturales Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exige el plan de estudios especializado en
                 </p>
 
                 <h1 class="especialidad_trasera uppercase">{{ ucwords(strtolower($curso)) }}</h1>
