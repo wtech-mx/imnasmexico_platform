@@ -497,7 +497,7 @@
                         <br><br>
                         Artículo 153 de la Ley General del Trabajo apartado I, III y IV. En general, mejorar el nivel educativo, la competencia laboral y las habilidades de los trabajadores.
                         <br><br>
-                        Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro: RIFC680910-879-0013
+                        Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro: {{ $clave_rfc }}
                         <br><br>
                         XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su plena comprensión y conformidad con él y lo firmó el día _________________________________________, mismo momento en que lo autorizo definitivamente.- Doy fe.
                         <br><br>

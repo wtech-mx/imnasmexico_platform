@@ -9,6 +9,11 @@
         $basePath = ($domain == 'plataforma.imnasmexico.com')
                 ? 'https://plataforma.imnasmexico.com/documentos_nuevos/tira/'
                 : 'documentos_nuevos/tira/';
+
+        $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+                    : 'utilidades_documentos/';
+
     @endphp
 
     @include('admin.pdf.nuevos.fuentes')
@@ -214,6 +219,14 @@
             width: 160px;
         }
 
+        .img_logo{
+            width: 110px;
+            height: 110px;
+            /* height: 120px; */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
     </style>
 </head>
 <body>
@@ -225,7 +238,7 @@
             </div>
 
             <div class="col-3 text-center border p-2" style="margin-top: 30px">
-                <img class=" " src="{{ $basePath . 'logo.png'}}" style="width: 100px">
+                <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
             </div>
 
             <div class="col-3 text-center border p-2" style="margin-top: 30px">
@@ -247,8 +260,7 @@
         <div class="row">
             <div class="col-4 text-center border p-2">
                 <div class="oval-container">
-                    <div class="oval" style="">
-                    </div>
+                    <img class="oval" src="{{ $basePathUtilidades . $fileName }}" alt="Imagen">
                 </div>
 
                 <h6 class="azul_claro folio uppercase  p-0" style="margin-top: 20px">
@@ -256,7 +268,7 @@
                 </h6>
 
                 <h6 class="azul_claro folio_num uppercase m-0 p-0">
-                    CFC000918771
+                    {{$folio}}
                 </h6>
             </div>
 
@@ -270,10 +282,10 @@
                 <p class="texto_principal_cedula" style="">
                     La Coordinación de Asuntos Escolares y Apoyo a Estudiantes del
                      Registro Nacional Instituto Mexicano Naturales Ain Spa RIIMNAS,
-                     con registro <strong class="texto_prinipal_strong"> RIFC-680910-879-0013</strong> en la Secretaría del Trabajo y Previsión
+                     con registro <strong class="texto_prinipal_strong"> {{ $clave_rfc }}</strong> en la Secretaría del Trabajo y Previsión
                      Social STPS como Agente Capacitador Externo, hace constar que el/la
                       Alumno(a), con número de folio <strong class="texto_prinipal_strong">CFC000918771</strong> con
-                       CURP: <strong class="texto_prinipal_strong">JDAR090213MMCMLTA4</strong> , cursó la especialidad de <strong class="texto_prinipal_strong">Cosmiatría y Cosmetología</strong> ,
+                       CURP: <strong class="texto_prinipal_strong">JDAR090213MMCMLTA4</strong> , cursó la especialidad de <strong class="texto_prinipal_strong"> {{ ucwords(strtolower($curso)) }}</strong> ,
                         cubriendo todos los créditos correspondientes.
                     Para efectos de desempeño académico se expresa lo siguiente:
                 </p>
@@ -327,24 +339,10 @@
 
         <div class="row">
             <div class="col-12 text-left border" style="padding:0px 20px 20px 20px;">
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
-                <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">Anatomia y fisiologia</p>
+                @foreach ($subtemas as $subtema)
+                    <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">{{$subtema->subtema}}</p>
+                @endforeach
+
             </div>
 
         </div>
@@ -357,7 +355,7 @@
             </div>
 
             <div class="col-3 text-center border p-2" style="margin-top: 30px">
-                <img class=" " src="{{ $basePath . 'logo.png'}}" style="width: 100px">
+                <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
             </div>
 
             <div class="col-3 text-center border p-2" style="margin-top: 30px">
@@ -365,7 +363,9 @@
             </div>
 
             <div class="col-3 text-center border p-2" style="margin-top: 30px">
-
+                @php
+                    echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',3.8,3.8) . '" style=""   />';
+                @endphp
             </div>
 
             <div class="row">
@@ -399,7 +399,7 @@
                         <br><br>
                         Artículo 153 de la Ley General del Trabajo apartado I, III y IV. En general, mejorar el nivel educativo, la competencia laboral y las habilidades de los trabajadores.
                         <br><br>
-                        Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro: RIFC680910-879-0013
+                        Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro:{{ $clave_rfc }}
                         <br><br>
                         XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su plena comprensión y conformidad con él y lo firmó el día _________________________________________, mismo momento en que lo autorizo definitivamente.- Doy fe.
                         <br><br>
@@ -411,7 +411,8 @@
 
             <div class="row">
                 <div class="col-12 text-start border  m-0"  >
-                    <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 45px 0px 45px;"> Cosmiatria y Cosmetologia
+                    <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 45px 0px 45px;">
+                        {{ ucwords(strtolower($curso)) }}
                     </h1>
                 </div>
             </div>

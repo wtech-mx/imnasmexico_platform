@@ -769,11 +769,16 @@ class RegistroIMNASController extends Controller
             ->orderBy('id')
             ->get();
 
-            $pdf = PDF::loadView('admin.pdf.tira_materias_afiliados',compact('clave_rfc','promedio','tam_letra_tira_afi','subtemas','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
+            if($request->get('documentos_design') == 'si'){
+                $pdf = PDF::loadView('admin.pdf.tira_materias_afiliados',compact('clave_rfc','promedio','tam_letra_tira_afi','subtemas','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
+            }else{
+                $pdf = PDF::loadView('admin.pdf.nuevos.tira',compact('clave_rfc','promedio','tam_letra_tira_afi','subtemas','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
+            }
+
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
              // return $pdf->stream();
-           return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
+           return $pdf->stream('CN-Tira_de_materias'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira_materias_alasiados'){
             $id_ticket = $request->get('id_registro');
