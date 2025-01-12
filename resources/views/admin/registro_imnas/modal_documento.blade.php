@@ -376,7 +376,21 @@
 
                                             </div>
 
-                                            <div class="col-6"></div>
+                                            <div class="form-group col-6 gc_cn">
+                                                <label for="name">-</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="documentos_design" id="docs_design1" value="si" checked>
+                                                    <label class="form-check-label" >
+                                                     Documentos Tradicionales
+                                                    </label>
+                                                  </div>
+                                                  <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="documentos_design" id="docs_design2" value="no" >
+                                                    <label class="form-check-label" >
+                                                      Documentos Nuevos
+                                                    </label>
+                                                  </div>
+                                            </div>
 
                                             @include('admin.documentos.campos_dinamicos')
 

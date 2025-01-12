@@ -6,82 +6,17 @@
     <title>Cedula</title>
     @php
         $domain = request()->getHost();
+        $isNoImage = $fileName === 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
         $basePath = ($domain == 'plataforma.imnasmexico.com')
                 ? 'https://plataforma.imnasmexico.com/documentos_nuevos/cedula/'
                 : 'documentos_nuevos/cedula/';
+        $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+            ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
+            : 'utilidades_documentos/';
     @endphp
+    @include('admin.pdf.nuevos.fuentes')
+
     <style>
-
-        @font-face {
-            font-family: 'Montserrat_Bold';
-            font-style: normal;
-            font-weight: normal;
-            src: url('{{ storage_path('fonts/Montserrat-Bold.ttf') }}') format('truetype');
-        }
-
-        @font-face {
-            font-family: 'Montserrat_ExtraBold';
-            font-style: normal;
-            font-weight: normal;
-            src: url('{{ storage_path('fonts/Montserrat-ExtraBold.ttf') }}') format('truetype');
-        }
-
-        @font-face {
-            font-family: 'Montserrat_Medium';
-            font-style: normal;
-            font-weight: normal;
-            src: url('{{ storage_path('fonts/Montserrat-Medium.ttf') }}') format('truetype');
-        }
-
-        @font-face {
-            font-family: 'Montserrat_Regular';
-            font-style: normal;
-            font-weight: normal;
-            src: url('{{ storage_path('fonts/Montserrat-Regular.ttf') }}') format('truetype');
-        }
-
-        @font-face {
-            font-family: 'Montserrat_SemiBold';
-            font-style: normal;
-            font-weight: normal;
-            src: url('{{ storage_path('fonts/Montserrat-SemiBold.ttf') }}') format('truetype');
-        }
-
-        @font-face {
-            font-family: 'OpenSans_Regular';
-            font-style: normal;
-            font-weight: normal;
-            src: url('{{ storage_path('fonts/OpenSans-Regular.ttf') }}') format('truetype');
-        }
-
-        @font-face {
-            font-family: 'OpenSauceOne_Bold';
-            font-style: normal;
-            font-weight: normal;
-            src: url('{{ storage_path('fonts/OpenSauceOne-Bold.ttf') }}') format('truetype');
-        }
-
-        @font-face {
-            font-family: 'OpenSauceOne_Regular';
-            font-style: normal;
-            font-weight: normal;
-            src: url('{{ storage_path('fonts/OpenSauceOne-Regular.ttf') }}') format('truetype');
-        }
-
-        @font-face {
-            font-family: 'OPTIEngraversOldEnglish';
-            font-style: normal;
-            font-weight: normal;
-            src: url('{{ storage_path('fonts/OPTIEngraversOldEnglish.ttf') }}') format('truetype');
-        }
-
-
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-        }
 
         .container {
             position: relative;
@@ -95,17 +30,6 @@
             background-repeat: no-repeat; /* No repetir la imagen */
         }
 
-        .content {
-            position: relative; /* Necesario para superponer contenido sobre la imagen */
-            z-index: 2; /* Asegura que el contenido esté encima de la imagen */
-            width: 100%;
-            height: 100%;
-        }
-
-        .row {
-            width: 100%;
-            clear: both;
-        }
         [class^="col-"] {
             float: left;
             padding-left: 15px;
@@ -125,25 +49,11 @@
         .col-11 { width: 87.02%; } /* 91.66% - 4.64% */
         .col-12 { width: 95.36%; } /* 100% - 4.64% */
 
-        .text-center {
-            text-align: center;
-        }
-
-        .text-start{
-            text-align: start;
-        }
-
-        .text-end{
-            text-align: end;
-        }
 
         .border {
             border: 0px solid #000;
         }
 
-        .p-2{
-            padding: 10px;
-        }
 
         .img_registro_header{
             width: 100px;
@@ -158,75 +68,45 @@
         }
 
         .img_firmas_delanteras{
-            width: 100px;
+            width: 90px;
         }
 
         .h3_nomre_firmas{
             font-family: 'Montserrat_SemiBold';
             font-weight: 'regular';
-            font-size: 10px;
-            line-height: 9px;
+            font-size: 9px;
+            line-height: 3px;
         }
 
         .texto_emosires{
-            font-family: 'Montserrat_Regular';
+            font-family: 'Montserrat_LightItalic';
             font-weight: 'regular';
-            font-size: 10px;
-            margin-top: 10px!important;
-            line-height: 9px;
-        }
-
-        .m-0{
-            margin: 0;
-        }
-
-        .p-0{
-            padding: 0;
-        }
-
-        .my-auto{
-            margin-top: auto;
-            margin-bottom: auto;
-        }
-
-        .azul_fuerte{
-            color: #2c6d77;
-        }
-
-        .azul_claro{
-            color: #5bb4c2;
-
+            font-size: 9px;
+            margin-top: 4px!important;
+            line-height: 8px;
         }
 
         .texto_documentos{
-            font-size: 10px;
-            font-family: 'Montserrat_Regular';
+            font-size: 11px;
+            font-family: 'Montserrat_LightItalic';
             font-weight: 'regular';
-            font-style: italic;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            color: #545454;
+            line-height: 11px;
         }
 
         .titulo_cedula{
             font-size: 23px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
+            line-height: 16px;
         }
 
         .titulo_especialidad{
-            font-size: 25px;
+            font-size: 23px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
-            line-height: 20px;
-
-        }
-
-        .capitalize{
-            text-transform: capitalize;
-        }
-
-        .uppercase{
-            text-transform: uppercase;
+            line-height: 17px;
+            color:#2c6d77;
         }
 
         .especialidad{
@@ -241,6 +121,7 @@
             font-size: 17px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
+            line-height: 14px;
         }
 
         .texto_trasero{
@@ -250,14 +131,24 @@
             margin-top: 5px;
             margin-bottom: 5px;
             line-height: 7px;
-            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+            color: #3d3b3a;
+        }
+
+        .texto_trasero_strong{
+            font-size: 9.5px;
+            font-family: 'Montserrat_Bold';
+            font-weight: 'regular';
+            margin-top: 5px;
+            margin-bottom: 5px;
+            line-height: 7px;
+            color: #3d3b3a;
         }
 
         .texto_principal_cedula{
             font-size: 11px;
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
-            line-height: 10px;
+            line-height: 9px;
         }
 
         .folio{
@@ -269,7 +160,7 @@
         }
 
         .folio_result{
-            font-size: 15px;
+            font-size: 12px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
         }
@@ -317,11 +208,28 @@
 
         .oval-container {
             margin-left: 20px;
-            width: 128px;
-            height: 176px;
+            width: 130px;
+            height: 180px;
             overflow: hidden;
             background: transparent;
             /* Ajuste condicional de top */
+        }
+
+        .img_logo{
+            width: 90px;
+            height: 90px;
+            /* height: 120px; */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .img_logo_2{
+            width: 70px;
+            height: 70px;
+            /* height: 120px; */
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
         }
 
     </style>
@@ -332,26 +240,27 @@
         <!-- Contenido superpuesto sobre la imagen -->
         <div class="content">
             <div class="row">
-                <div class="col-4 text-center border ">
-                    <img class="img_registro_header" src="{{ $basePath . 'registro_nacional.png'}}">
+                <div class="col-4 text-center border " style="margin-top: 15px">
+                    <img class=""  style="width: 90px" src="{{ $basePath . 'registro_nacional.png'}}">
                 </div>
-                <div class="col-4 text-center border ">
-                    <img class="img_logoAfi_header" src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}">
+
+                <div class="col-4 text-center border " style="margin-top: 15px">
+                    <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
                 </div>
-                <div class="col-4 text-center border ">
-                    <img class="img_stps_registro_header" src="{{ $basePath . 'stps.webp'}}">
+
+                <div class="col-4 text-center border " style="margin-top: 15px">
+                    <img class=""  style="width: 110px" src="{{ $basePath . 'stps.webp'}}">
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-12 text-center border">
-                    <p class="texto_principal_cedula">
+                <div class="col-12 text-center border ">
+                    <p class="texto_principal_cedula uppercase" style="margin:10px 0 10px 0;">
                         REGISTRO NACIONAL INSTITUTO MEXICANO NATURALES <br>
                          AIN SPA, LA SECRETARIA DEL TRABAJO Y PREVISION <br>
                           SOCIAL E INSTITUTO INTEGRAL AM 360 OTORGAN la <br> PRESENTE
                     </p>
                 </div>
-
             </div>
 
             <div class="row">
@@ -373,22 +282,22 @@
             <div class="row">
                 <div class="col-4 text-center border ">
                     <div class="oval-container">
-                        <div class="oval" style="">
-                        </div>
+                        <img class="oval" src="{{ $basePathUtilidades . $fileName }}" alt="Imagen">
                     </div>
                 </div>
 
                 <div class="col-8 text-center border ">
-
-                    <h1 class="h1_nombre azul_fuerte titulo_cedula p-0 m-0">JUNA DEL ARCON</h1>
+                    <h1 class="azul_fuerte titulo_cedula p-0 m-0">
+                        {!! $nombre !!}
+                    </h1>
 
                     <p class="especialidad uppercase p-0 m-0">en la especialidad de</p>
 
                     <h2 class="azul_fuerte titulo_especialidad p-0 m-0">
-                        Cosmiatria y Cosmetologia
+                        {{ ucwords(strtolower($curso)) }}
                     </h2>
 
-                    <p class="texto_documentos p-0 m-0" style="margin-bottom: 10px">
+                    <p class="texto_documentos p-0 m-0" style="margin-top: 5px;margin-bottom: 0px">
                         En virtud de haber concluido satisfactoriamente
                         con los créditos honoríficos requeridos
                         con respecto al plan vigente. con fundamento en los
@@ -401,18 +310,20 @@
 
             <div class="row">
                 <div class="col-4 text-center border ">
-                    <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 110px; margin-left: 25px;">
+                    <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 105px; margin-left: 25px;">
                 </div>
 
                 <div class="col-4 text-center border ">
-                    <p class="folio my-auto" style="margin-top: 30px">
-                        Folio: <br>
-                        <strong class="folio_result azul_fuerte">CFC000918771</strong>
+                    <p class="folio my-auto" style="margin-top: 2s0px">
+                        Folio<br>
+                        <strong class="folio_result azul_fuerte">{{$folio}}</strong>
                     </p>
                 </div>
 
                 <div class="col-4 text-center border ">
-                    <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 110px">
+                    @php
+                        echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.0,2.0) . '" style="background: transparent; padding: px;"   />';
+                    @endphp
                 </div>
             </div>
 
@@ -437,9 +348,9 @@
             </div>
 
             <div class="row">
-                <div class="col-12 text-center border ">
+                <div class="col-12 text-center border " style="margin-top: 10px">
                     <p class="azul_fuerte texto_footer m-0 p-0">
-                        Expedido en la Ciudad de México, día 10 de noviembre de 2024.
+                        Expedido en la Ciudad de México, el {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }}
                     </p>
                     <P class="texto_footer2 m-0 p-0">
                         La autenticidad del presente documento puede ser verificada escaneando el QR.
@@ -455,25 +366,25 @@
 
             <div class="row" >
                 <div class="col-3 border  text-center"  style="margin-top: 15px;">
-                    <img class="img_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" style="">
+                    <img class=" " src="{{ $basePath . 'registro_nacional.png'}}" style="margin-left:30px;width: 90px">
                 </div>
 
                 <div class="col-3 border  text-center" style="margin-top: 15px">
-                    <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 80px">
+                    <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 70px">
                 </div>
 
                 <div class="col-3 border  text-center" style="margin-top: 15px">
-                    <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 80px">
+                    <div class="img_logo_2" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
                 </div>
 
-                <div class="col-3 border  text-center" style="margin-top: 15px">
-                    <img class="img_stps_registro_header " src="{{ $basePath . 'stps.webp'}}" style="">
+                <div class="col-3 border  text-center" style="">
+                    <img class="" src="{{ $basePath . 'stps.webp'}}" style="margin-right: 40px;width: 110px;margin-top:8px;">
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-12 text-center border">
-                    <h6 class="azul_fuerte titulo_cedula m-0 p-0">
+                    <h6 class="azul_claro titulo_cedula m-0 p-0" style="margin-bottom: 10px">
                         ACUERDO LEGAL
                     </h6>
                 </div>
@@ -482,7 +393,7 @@
             <div class="row">
                 <div class="col-12 text-start border">
                     <p class="texto_trasero uppercase" style="margin-right: 20px;margin-left: 20px;">
-                        <strong>ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br><br>
+                        <strong class="texto_trasero_strong">ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br><br>
 
                         INSTRUMENTO NÚMERO SETENTA Y CINCO MIL SEISCIENTOS SETENTA Y TRES. LIBRO MIL CIENTO CUARENTA Y TRES. CIUDAD DE MÉXICO. A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE REFORMA AL ARTÍCULO SEGUNDO DE LOS ESTATUTOS SOCIALES; y, B.- LA REFORMA AL ARTÍCULO SEXTO DE LOS ESTATUTOS SOCIALES, que resultan de LA PROTOCOLIZACIÓN del acta de Asamblea General Extraordinaria de Socios de "INSTITUTO MEXICANO NATURALES AIN SPA", SOCIEDAD CIVIL.
                         <br><br>
@@ -490,7 +401,7 @@
                         <br><br>
                         Artículo 153 de la Ley General del Trabajo apartado I, III y IV. En general, mejorar el nivel educativo, la competencia laboral y las habilidades de los trabajadores.
                         <br><br>
-                        Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro: RIFC680910-879-0013
+                        Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro: {{ $clave_rfc }}
                         <br><br>
                         XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su plena comprensión y conformidad con él y lo firmó el día _________________________________________, mismo momento en que lo autorizo definitivamente.- Doy fe.
                         <br><br>
@@ -500,13 +411,12 @@
                 </div>
             </div>
 
-            <div class="col-12 text-center border">
-                <h2 class="especialidad_trasera azul_fuerte"  style="margin-right: 20px;margin-left: 20px;">Cosmiatria y Cosmetologia </h2>
-            </div>
 
             <div class="row">
                 <div class="col-12 text-start border">
-                    <p class="especialidad_trasera azul_fuerte uppercase"  style="margin-bottom: 0;margin-right: 20px;margin-left: 20px;margin-top:0;">Cosmiatria y Cosmetologia </p>
+                    <p class="especialidad_trasera azul_fuerte uppercase"  style="margin-bottom: 0;margin-right: 20px;margin-left: 20px;margin-top:0;">
+                        {{ ucwords(strtolower($curso)) }}
+                    </p>
                 </div>
             </div>
 
@@ -526,12 +436,12 @@
                     </h6>
                 </div>
                 <div class="col-3 border  text-center" style="margin-top: 10px">
-                    <h6 class="azul_claro permanente uppercase m-0 p-0">
-                        <strong class="vigencia m-0 p-0" style="color: #000;">TIPO</strong> <br>
-                        CEA
-                    </h6>
+                    @php
+                        echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.0,2.0) . '" style="background: transparent; padding: px;"   />';
+                    @endphp
                 </div>
                 <div class="col-3 border  text-center" style="margin-top: 10px">
+
                     <h6 class="azul_claro permanente uppercase m-0 p-0">
                         <strong class="vigencia m-0 p-0" style="color: #000;">TIPO</strong> <br>
                         CEA

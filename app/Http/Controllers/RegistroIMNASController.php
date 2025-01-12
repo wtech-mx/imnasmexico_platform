@@ -602,11 +602,17 @@ class RegistroIMNASController extends Controller
                 $ticket->update();
             }
 
-            $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('clave_rfc','capitalizar','tam_letra_foli_cedu_tras','tam_letra_foli_cedu','tam_letra_espec_cedu','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_logo'));
+
+            if($request->get('documentos_design') == 'si'){
+                $pdf = PDF::loadView('admin.pdf.cedual_identidad_papel',compact('clave_rfc','capitalizar','tam_letra_foli_cedu_tras','tam_letra_foli_cedu','tam_letra_espec_cedu','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_logo'));
+            }else{
+                $pdf = PDF::loadView('admin.pdf.nuevos.cedula',compact('clave_rfc','capitalizar','tam_letra_foli_cedu_tras','tam_letra_foli_cedu','tam_letra_espec_cedu','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_logo'));
+            }
+
             $pdf->setPaper('A4', 'portrait');
             $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
 
-            return $pdf->download('CN-Cedula de identidad papel_'.$nombre.'.pdf');
+            return $pdf->stream('CN-Cedula de identidad papel_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR'){
             $id_ticket = $request->get('id_registro');
