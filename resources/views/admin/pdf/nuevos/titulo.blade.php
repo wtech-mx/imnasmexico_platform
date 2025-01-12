@@ -346,9 +346,9 @@
             </div>
 
             <div class="row">
-                <div class="col-12 text-center border" style="margin-top: 20px;margin-bottom: 30px">
-                    <h5 class="azul_fuerte subtitulo_cedula  m-0 p-0">
-                        Instituto Integral AM 360 a través de Registro <br>
+                <div class="col-12 text-center border" style="margin-top: 20px;margin-bottom: 30px;">
+                    <h5 class="azul_fuerte subtitulo_cedula " style="margin-right:70px;margin-left:70px;">
+                        {{ $name_escuela }} a través de Registro
                         Nacional Instituto Mexicano Naturales Ain Spa
                     </h5>
                 </div>

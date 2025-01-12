@@ -256,11 +256,17 @@
 
             <div class="row">
                 <div class="col-12 text-center border ">
+                    @php
+                        $name_escuela; // Ejemplo
+                        $conector = Str::startsWith($name_escuela, 'I') ? 'y el' : 'E';
+                    @endphp
+
                     <p class="texto_principal_cedula uppercase" style="margin:10px 0 10px 0;">
                         REGISTRO NACIONAL INSTITUTO MEXICANO NATURALES <br>
-                         AIN SPA, LA SECRETARIA DEL TRABAJO Y PREVISION <br>
-                          SOCIAL E INSTITUTO INTEGRAL AM 360 OTORGAN la <br> PRESENTE
+                        AIN SPA, LA SECRETARIA DEL TRABAJO Y PREVISION <br>
+                        {{ $conector }} {{ $name_escuela }} OTORGAN LA PRESENTE
                     </p>
+
                 </div>
             </div>
 

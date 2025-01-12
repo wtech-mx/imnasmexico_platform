@@ -260,6 +260,7 @@ class RegistroIMNASController extends Controller
         $id_usuario = $request->get('id_usuario');
         $id_ticket = $request->get('id_registro');
         $clave_rfc = !empty($request->get('clave_rfc')) ? $request->get('clave_rfc') : 'RIFC680910-879-0013';
+        $name_escuela = !empty($request->get('name_escuela')) ? $request->get('name_escuela') : '';
 
         $registro = RegistroImnas::find($id_ticket);
         $registro->nombre = $nombre;
@@ -323,7 +324,6 @@ class RegistroIMNASController extends Controller
 
         $firma_directora =  $request->get('firma_directora');
         $firma_directora2 =  $request->get('firma_directora');
-        $name_escuela =  $request->get('name_escuela');
 
         if($firma_directora == 'Personalizado'){
             $firma_directora = $request->get('texto_firma_personalizada');
@@ -612,7 +612,7 @@ class RegistroIMNASController extends Controller
             $pdf->setPaper('A4', 'portrait');
             $pdf->setPaper([0, 0, 12.7 * 28.35, 17.7 * 28.35], 'portrait'); // Cambiar 'a tamaño oficio 12.7x17.7'
 
-            return $pdf->stream('CN-Cedula de identidad papel_'.$nombre.'.pdf');
+            return $pdf->download('CN-Cedula de identidad papel_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR'){
             $id_ticket = $request->get('id_registro');
@@ -635,8 +635,8 @@ class RegistroIMNASController extends Controller
             // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
 
             $pdf->setPaper([0, 0, 33.0 * 28.35, 48.0 * 28.35], 'portrait'); // Cambiar 'a tamaño 48x33 super b'
-            // return $pdf->stream();
-             return $pdf->stream('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
+            // return $pdf->download();
+             return $pdf->download('CN-Titulo Honorifico con QR_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Titulo Honorifico con QR_CFC'){
             $id_ticket = $request->get('id_registro');
@@ -690,7 +690,7 @@ class RegistroIMNASController extends Controller
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
 
-            return $pdf->stream('CN-Doploma_imnas_'.$nombre.'.pdf');
+            return $pdf->download('CN-Doploma_imnas_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Credencial'){
             $id_ticket = $request->get('id_registro');
@@ -718,7 +718,7 @@ class RegistroIMNASController extends Controller
 
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'landscape');
 
-            return $pdf->stream('CN-Credencial_'.$nombre.'.pdf');
+            return $pdf->download('CN-Credencial_'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira_materias_aparatologia'){
             $id_ticket = $request->get('id_registro');
@@ -777,8 +777,8 @@ class RegistroIMNASController extends Controller
 
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
 
-             // return $pdf->stream();
-           return $pdf->stream('CN-Tira_de_materias'.$nombre.'.pdf');
+             // return $pdf->download();
+           return $pdf->download('CN-Tira_de_materias'.$nombre.'.pdf');
 
         }elseif($tipo_documentos->tipo == 'Tira_materias_alasiados'){
             $id_ticket = $request->get('id_registro');
@@ -1642,7 +1642,7 @@ class RegistroIMNASController extends Controller
 
 
         $pdf = \PDF::loadView('admin.tabs_registro.pdf_especialidad', compact('especialidad', 'today', 'temario'));
-        return $pdf->stream();
+        return $pdf->download();
        //  return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
     }
 
