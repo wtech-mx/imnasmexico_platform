@@ -597,6 +597,12 @@ class CotizacionCosmicaController extends Controller
                 $nota->direccion_entrega  = $request->get('direccion_entrega');
                 $nota->comentario_rep  = $request->get('comentario_rep');
                 $nota->id_admin_venta  = auth()->user()->id;
+            }else if($request->get('estatus_cotizacion') == 'Aprobar Duo y Amor'){
+                $nota->estatus_cotizacion  = 'Enviado';
+                $nota->fecha_aprobada  = date("Y-m-d");
+                $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+                $nota->fecha_preparado  = date("Y-m-d H:i:s");
+                $nota->fecha_envio  = date("Y-m-d H:i:s");
             }
 
         $nota->update();

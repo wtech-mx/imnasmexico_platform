@@ -26,6 +26,7 @@
                                 <select class="form-select d-inline-block estatus-cotizacion" data-toggle="select" name="estatus_cotizacion" value="{{ old('estatus_cotizacion') }}" required>
                                     <option value="">Seleccionar Estatus</option>
                                     <option value="Aprobada">Aprobada</option>
+                                    <option value="Aprobar Duo y Amor">Aprobar Duo y Amor</option>
                                     @if ($item->estatus_cotizacion ==  'Aprobada' || $item->estatus_cotizacion ==  NULL)
                                         <option value="Cancelada">Cancelada</option>
                                     @endif
