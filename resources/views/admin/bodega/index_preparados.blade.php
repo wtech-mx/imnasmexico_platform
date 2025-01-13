@@ -227,6 +227,12 @@
                                                     <i class="fa fa-list-alt"></i>
                                                 </a>
 
+                                                <a class="text-center text-white btn btn-sm"
+                                                    href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'notas_productos', 'id' => $item->id]) }}"
+                                                    style="background: #7d2de6;">
+                                                    <i class="fa fa-qrcode"></i>
+                                                </a>
+
                                                 @if ($item->metodo_pago == 'Contra Entrega')
                                                     <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
                                                         <i class="fa fa-truck"></i>
