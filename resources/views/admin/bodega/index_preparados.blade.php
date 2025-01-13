@@ -109,6 +109,12 @@
                                                     <i class="fa fa-list-alt"></i>
                                                 </a>
 
+                                                <a class="text-center text-white btn btn-sm"
+                                                    href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'notas_productos', 'id' => $item->id]) }}"
+                                                    style="background: #7d2de6;">
+                                                    <i class="fa fa-qrcode"></i>
+                                                </a>
+
                                                 <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusFechasModal{{$item->id}}">
                                                     <i class="fa fa-info"></i>
                                                 </a>
