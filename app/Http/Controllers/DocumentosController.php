@@ -956,7 +956,6 @@ class DocumentosController extends Controller
                     $ticket->estatus_tira = '1';
                     $ticket->folio = $request->get('folio');
                     $ticket->update();
-                    dd($clave_rfc);
 
                     $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('clave_rfc','tam_letra_nombre','capitalizar','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad'));
 
