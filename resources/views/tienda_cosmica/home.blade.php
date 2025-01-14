@@ -8,30 +8,51 @@
 
 @endsection
 
-
 @section('content')
 
-<div class="container-fluid p-0">
-    <div id="carouelExample" class="carousel slide">
 
-        <div class="carousel-inner img_banners">
-            <div class="carousel-item active ">
-                {{-- <img src="{{ asset('cosmika/INICIO/IMAGEN-1_compuesta.png') }}" class="d-block w-100" alt=""> --}}
-            </div>
+    <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{ asset('cosmika/INICIO/banner/BANNER-1.png') }}" class="d-block w-100" alt="">
+          </div>
 
+          <div class="carousel-item">
+            <img src="{{ asset('cosmika/INICIO/banner/BANNER-2.png') }}" class="d-block w-100" alt="">
+          </div>
+
+          <div class="carousel-item">
+            <img src="{{ asset('cosmika/INICIO/banner/BANNER-3.png') }}" class="d-block w-100" alt="">
+          </div>
+
+          <div class="carousel-item">
+            <img src="{{ asset('cosmika/INICIO/banner/BANNER-4.png') }}" class="d-block w-100" alt="">
+          </div>
+
+          <div class="carousel-item">
+            <img src="{{ asset('cosmika/INICIO/banner/BANNER-5.png') }}" class="d-block w-100" alt="">
+          </div>
+
+          <div class="carousel-item">
+            <img src="{{ asset('cosmika/INICIO/banner/BANNER-6.png') }}" class="d-block w-100" alt="">
+          </div>
+
+          <div class="carousel-item">
+            <img src="{{ asset('cosmika/INICIO/banner/BANNER-7.png') }}" class="d-block w-100" alt="">
+          </div>
         </div>
 
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
         </button>
 
         <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
         </button>
+      </div>
 
-    </div>
 </div>
 
 <div class="container">
@@ -74,6 +95,90 @@
             </div>
         </div>
 
+        <div class="col-6 col-md-4 col-lg-3 mb-4 ">
+            <div class="container_lineas_slide">
+
+                <div class="content mb-3 mt-3">
+                    <div class="img_container mx-auto">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto_6.png') }}" alt="Protector">
+                    </div>
+                    <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
+                    <h5 class="text-center  Quinsi text-white subtitle_linea m-0">VENUS</h5>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 mb-4 ">
+            <div class="container_lineas_slide">
+
+                <div class="content mb-3 mt-3">
+                    <div class="img_container mx-auto">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto_4.png') }}" alt="Protector">
+                    </div>
+                    <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
+                    <h5 class="text-center  Quinsi text-white subtitle_linea m-0">ESPECTRO</h5>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+            <div class="container_lineas_grid">
+
+                <div class="content mb-3 mt-3">
+                    <div class="img_container mx-auto">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-5.png') }}" alt="Protector">
+                    </div>
+                    <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">ESTELAR</h5>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+            <div class="container_lineas_grid">
+
+                <div class="content mb-3 mt-3">
+                    <div class="img_container mx-auto">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto_13.png') }}" alt="Protector">
+                    </div>
+                    <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">PLUTÓN</h5>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+            <div class="container_lineas_grid">
+
+                <div class="content mb-3 mt-3">
+                    <div class="img_container mx-auto">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto_7.png') }}" alt="Protector">
+                    </div>
+                    <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">SOLAR</h5>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+            <div class="container_lineas_grid">
+
+                <div class="content mb-3 mt-3">
+                    <div class="img_container mx-auto">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-3.png') }}" alt="Protector">
+                    </div>
+                    <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">LUNAR</h5>
+                </div>
+
+            </div>
+        </div>
+
     </div>
 
     <div class="row">
@@ -97,7 +202,7 @@
                         <img class="img_grid_products" src="{{ asset('cosmika/inicio/protector.png') }}" alt="Protector">
                     </div>
                     <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
-                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">Astros</h5>
+                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">ECILPSE</h5>
                 </div>
 
             </div>
@@ -108,11 +213,52 @@
 
                 <div class="content mb-3 mt-3">
                     <div class="img_container mx-auto">
-                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/protector.png') }}" alt="Protector">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-1.png') }}" alt="Protector">
                     </div>
                     <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
-                    <h5 class="text-center  Quinsi text-white subtitle_linea m-0">Astros</h5>
+                    <h5 class="text-center  Quinsi text-white subtitle_linea m-0">RENACER</h5>
                 </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+            <div class="container_lineas_grid">
+
+                <div class="content mb-3 mt-3">
+                    <div class="img_container mx-auto">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-9.png') }}" alt="Protector">
+                    </div>
+                    <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">FLASH</h5>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 mb-4 ">
+            <div class="container_lineas_slide">
+
+                <div class="content mb-3 mt-3">
+                    <div class="img_container mx-auto">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-8.png') }}" alt="Protector">
+                    </div>
+                    <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
+                    <h5 class="text-center  Quinsi text-white subtitle_linea m-0">ASTROS</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-6 col-md-4 col-lg-3 mb-4">
+            <div class="container_lineas_grid">
+
+                <div class="content mb-3 mt-3">
+                    <div class="img_container mx-auto">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-10.png') }}" alt="Protector">
+                    </div>
+                    <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">GALAXIA</h5>
+                </div>
+
             </div>
         </div>
 
@@ -326,153 +472,6 @@
         </div>
     </div>
 </div>
-
-<div class="container-fluid bg_footer">
-    <div class="row">
-        <div class="col-12  mt-3 mt-md-5 mt-lg-5 mb-0 mb-md-5 mb-lg-5">
-            <div class="conatainer_text_starts">
-                <p class="text-white texto_footer_principal SwilyBright_Italic text-center">
-                    <img src="{{ asset('cosmika/INICIO/estrellas_2.png') }}" alt="" class="img_estrellas_footer">
-                    Que tu piel <strong class="Christmas">brille</strong> <br> como las estrellas en el cosmos.
-                    <img src="{{ asset('cosmika/INICIO/estrellas_2.png') }}" alt="" class="img_estrellas_footer">
-                </p>
-                <p class="text-center text-white">- Cósmica Skin</p>
-                <p class="text-center">
-                    <img src="{{ asset('cosmika/INICIO/fb.png') }}" alt="" class="img_estrellas_footer">
-                    <img src="{{ asset('cosmika/INICIO/ig.png') }}" alt="" class="img_estrellas_footer">
-                    <img src="{{ asset('cosmika/INICIO/wp.png') }}" alt="" class="img_estrellas_footer">
-
-                </p>
-            </div>
-        </div>
-    </div>
-
-    <footer class="d-flex flex-wrap justify-content-between align-items-center ">
-        <div class="col">
-
-        </div>
-
-        <div class="col-10 ">
-            <div class="row mt-4">
-                <div class="text-white col-6 col-12-sm-12 col-lg-4 mb-3">
-                    <h5 class="text-white text-center mb-3 mt-3">Paginas</h5>
-                    <ul class="text-white nav flex-column" style="align-items: center;">
-                        <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">
-                            <i class="text-white bi bi-envelope"></i> Inicio</a>
-                        </li>
-
-                        <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">
-                            <i class="text-white bi bi-whatsapp"></i> Categorias</a>
-                        </li>
-
-                        <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">
-                            <i class="text-white bi bi-instagram"></i> Productos</a>
-                        </li>
-
-                        <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">
-                            <i class="text-white bi bi-facebook"></i> Sobre Nosotros</a>
-                        </li>
-
-                        <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">
-                            <i class="text-white bi bi-youtube"></i> Distribuidoras</a>
-                        </li>
-
-                        <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">
-                            <i class="text-white bi bi-youtube"></i> Profesionales</a>
-                        </li>
-
-                        <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">
-                            <i class="text-white bi bi-youtube"></i> Contacto</a>
-                        </li>
-
-                    </ul>
-                </div>
-
-                <div class="text-white col-6 col-12-sm-12 col-lg-4 mb-3">
-                    <h5 class="text-white text-center mb-3 mt-3">Contacto</h5>
-                    <ul class="text-white nav flex-column" style="align-items: center;">
-                        <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">Terminos y Condiciones</a>
-                        </li>
-
-                        <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">Aviso de Provacidad</a>
-                        </li>
-
-                        <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">5637540093</a>
-                        </li>
-
-                        <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">Castilla 136, Álamos, Benito Juarez, 03400</a>
-                        </li>
-
-                        <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">FAQS</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="text-white col-12 col-12-sm-12 col-lg-4 mb-3">
-                    <h5 class="text-white text-center mb-3 mt-3">Formas de pago</h5>
-                    <div class="row">
-
-                        <div class="col-6">
-                            <p class="text-center ">
-                                <img src="{{ asset('cosmika/INICIO/camion.png') }}" alt="" class="img_icon_footer">
-                            </p>
-
-                            <a href="#" class="text-white text-center nav-link p-0 subtitle_footer mt-3">
-                                Aprovecha el beneficio del envío gratis
-                            </a>
-
-                            <p class="text-center p_title_footer mt-3">
-                                Aplica en compras a partir de +$2,000. Suma todo lo que quieras al carrito
-                            </p>
-
-                            <p class="text-center">
-                                <img src="{{ asset('cosmika/INICIO/tienda.png') }}" alt="" class="img_icon_footer">
-                            </p>
-                        </div>
-
-                        <div class="col-6">
-                            <p class="text-center">
-                                <img src="{{ asset('cosmika/INICIO/tarjeta.png') }}" alt="" class="img_icon_footer">
-                            </p>
-
-                            <a href="#" class="text-white text-center nav-link p-0 subtitle_footer mt-3">
-                                Elige tu medio de pago favorito
-                            </a>
-
-                            <p class="text-center p_title_footer mt-3">
-                                Paga con tarjeta o en efectivo. Tu dinero está protegido con Mercado Pago.
-                            </p>
-
-                            <p class="text-center">
-                                <img src="{{ asset('cosmika/INICIO/mercado lib.png') }}" alt="" class="img_icon_footer">
-                            </p>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="col">
-
-        </div>
-
-    </footer>
-</div>
-
 
 @endsection
 
