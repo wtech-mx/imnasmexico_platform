@@ -22,7 +22,7 @@
             <h2 class="text-center mt-5 m-5"><strong>< Seguir</strong> Comprando</h2>
         </div>
 
-        <div class="col-4 p-3">
+        <div class="col-12 col-sm-12 col-md-5 col-lg-4 p-3">
 
             <div class="container_lineas_single">
                 <div class="content mb-3 mt-3">
@@ -37,7 +37,7 @@
             </p>
         </div>
 
-        <div class="col-8 p-5">
+        <div class="col-12 col-sm-12 col-md-7 col-lg-8 p-5">
 
             <h1 class="text-center"><strong>Sérum</strong> Hialurónico</h1>
 
@@ -83,8 +83,8 @@
 
         </div>
 
-        <div class="col-4"></div>
-        <div class="col-4 text-center">
+        <div class="col-0 col-0 col-md-2 col-lg-4"></div>
+        <div class="col-12 col-sm-12 col-md-8 col-lg-4 text-center">
 
             <div class="container_lineas_single">
                 <a href="" class="text_shop_single">
@@ -92,9 +92,7 @@
                 </a>
             </div>
         </div>
-        <div class="col-4"></div>
-
-
+        <div class="col-0 col-sm-0 col-md-2 col-lg-4 "></div>
     </div>
 
     <div class="row">
@@ -105,7 +103,7 @@
 
     <div class="row">
 
-        <div class="col-4">
+        <div class="col-3">
 
             <div class="container_lineas_single mx-auto" style="width:80%; ">
                 <div class="content mb-3 mt-3">
@@ -136,7 +134,7 @@
 
         </div>
 
-        <div class="col-4">
+        <div class="col-3">
 
             <div class="container_lineas_single mx-auto" style="width:80%; ">
                 <div class="content mb-3 mt-3">
@@ -167,7 +165,38 @@
 
         </div>
 
-        <div class="col-4">
+        <div class="col-3">
+
+            <div class="container_lineas_single mx-auto" style="width:80%; ">
+                <div class="content mb-3 mt-3">
+                    <div class="img_container_single mx-auto">
+                        <img class="img_grid_products_single" src="{{ asset('cosmika/inicio/lineas/producto_4.png') }}" alt="Protector">
+                    </div>
+                </div>
+            </div>
+            <h2 class="text-center">
+                <strong>Shampoo Facial</strong> <br>
+                con Vitaminas 125 ml
+            </h2>
+            <h4 class="text-center">
+                $200.00
+            </h4>
+            <p class="text-center">
+
+                <a href="" class="text-center mt-3">
+                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="">
+                </a>
+            </p>
+            <p class="text-center">
+
+                <a href="" class="text-center mt-3">
+                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="">
+                </a>
+            </p>
+
+        </div>
+
+        <div class="col-3">
 
             <div class="container_lineas_single mx-auto" style="width:80%; ">
                 <div class="content mb-3 mt-3">
@@ -201,7 +230,6 @@
     </div>
 
     @include('tienda_cosmica.Components.productos_populares')
-
 
 </div>
 

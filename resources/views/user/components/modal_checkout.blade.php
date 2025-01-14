@@ -96,8 +96,6 @@
             <div class="col-12 col-md-6">
                 <p class="text-center tittle_modal_cka">Detalles del cliente</p>
 
-
-
                     <div class="col-12 mt-5">
 
                         <div class="accordion" id="accordionExample">

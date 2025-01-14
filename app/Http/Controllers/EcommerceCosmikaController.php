@@ -16,6 +16,11 @@ class EcommerceCosmikaController extends Controller
         return view('tienda_cosmica.single_product');
     }
 
+    public function cart(){
+
+        return view('tienda_cosmica.cart');
+    }
+
     public function categories(){
 
         return view('tienda_cosmica.categories');
