@@ -64,7 +64,7 @@
 
   </head>
 
-  <body class="body">
+  <body class="body @yield('body_custom')">
 
     @include('tienda_cosmica.Components.header')
 
