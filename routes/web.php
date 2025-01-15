@@ -376,6 +376,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/pagos/edit/cambio/{id}',  [App\Http\Controllers\PagosFueraController::class, 'getTicketsByCurso']);
 
     Route::get('/admin/pagos/mercadopago', [App\Http\Controllers\PagosFueraController::class, 'index_mp'])->name('pagos.mp');
+
+    Route::get('/admin/comprobante/tiendita/{id}', [App\Http\Controllers\PagosFueraController::class, 'comprobante_tiendita'])->name('comprobante.tiendita');
     /*|--------------------------------------------------------------------------
     |Configuracion
     |--------------------------------------------------------------------------*/
@@ -491,6 +493,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('/admin/notas/cursos/update/{id}', [App\Http\Controllers\NotasCursosController::class, 'update'])->name('notas_cursos.update');
     Route::get('/admin/notas/cursos/imprimir/{id}', [App\Http\Controllers\NotasCursosController::class, 'imprimir'])->name('notas_cursos.imprimir');
     Route::post('/admin/notas/paquete/store', [App\Http\Controllers\NotasCursosController::class, 'store_paquete'])->name('notas_cursos.store_paquete');
+
+    Route::get('/admin/listas/comprobante/mp/{id}', [App\Http\Controllers\CursosController::class, 'imprimir_mp'])->name('lista.imprimir_mp');
 
     Route::get('/admin/notas/productos', [App\Http\Controllers\NotasProductosController::class, 'index'])->name('notas_productos.index');
     Route::get('/admin/productos/create', [App\Http\Controllers\NotasProductosController::class, 'create'])->name('notas_productos.create');

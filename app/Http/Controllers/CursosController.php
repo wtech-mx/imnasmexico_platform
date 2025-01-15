@@ -28,7 +28,7 @@ use Google_Client;
 use Google_Service_Calendar;
 use Google_Service_Calendar_Event;
 use App\Models\Tipodocumentos;
-
+use Codexshaper\WooCommerce\Models\Order;
 
 class CursosController extends Controller
 {
@@ -527,6 +527,15 @@ class CursosController extends Controller
         ];
 
         return view('admin.cursos.listas', compact('ordenes', 'tickets', 'curso','tipo_documentos','estados'));
+    }
+
+    public function imprimir_mp ($id)
+    {
+        $nota = Orders::where('id', $id)->first();
+
+        $pdf = \PDF::loadView('admin.cursos.pdf_comprobante_mp', compact('nota'));
+      //return $pdf->stream();
+       return $pdf->download('recibo_mp.pdf');
     }
 
     public function correo($id, Request $request)
