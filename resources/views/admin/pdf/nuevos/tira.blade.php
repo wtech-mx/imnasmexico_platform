@@ -339,9 +339,19 @@
 
         <div class="row">
             <div class="col-12 text-left border" style="padding:0px 20px 20px 20px;">
+                @php
+                    $totalSubtemas = count($subtemas);
+                    $faltantes = 18 - $totalSubtemas; // Calculamos cuántos faltan para llegar a 20
+                @endphp
+
                 @foreach ($subtemas as $subtema)
-                    <p class="contenedor_materia" style="padding: 0 0  0 20px;margin:8px;">{{$subtema->subtema}}</p>
+                    <p class="contenedor_materia" style="padding: 0 0  0 20px; margin: 8px;">{{ $subtema->subtema }}</p>
                 @endforeach
+
+                {{-- Agregamos etiquetas vacías si hay menos de 20 registros --}}
+                @for ($i = 0; $i < $faltantes; $i++)
+                    <p class="contenedor_materia" style="padding: 0 0  0 20px; margin: 8px;">&nbsp;</p>
+                @endfor
 
             </div>
 

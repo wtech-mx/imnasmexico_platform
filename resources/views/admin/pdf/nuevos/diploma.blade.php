@@ -123,7 +123,7 @@
             font-size: 37px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
-            line-height:18px;
+            line-height:22px;
         }
 
         .titulo_especialidad_trasero{
