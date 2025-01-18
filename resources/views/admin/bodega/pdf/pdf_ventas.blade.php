@@ -178,7 +178,7 @@
                                 @if ($item->tipo == 0)
                                     -
                                 @else
-                                    STP
+                                    Transferencia
                                 @endif
                             </td>
                         </tr>
