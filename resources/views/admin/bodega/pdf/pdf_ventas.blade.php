@@ -174,7 +174,13 @@
                             <td>
                                 <h5>{{$item->estatus_cotizacion}}</h5>
                             </td>
-                            <td>STP</td>
+                            <td>
+                                @if ($item->tipo == 0)
+                                    -
+                                @else
+                                    STP
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -223,7 +229,11 @@
                             </td>
                             <td>
                                 @if ($item->item_id_meli == NULL)
-                                    STP
+                                    @if ($item->total == 0)
+                                        -
+                                    @else
+                                        STP
+                                    @endif
                                 @else
                                     MELI
                                 @endif
