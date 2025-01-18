@@ -188,6 +188,7 @@
                         <th>Cliente</th>
                         <th>Vendido por</th>
                         <th>Total</th>
+                        <th>Metodo pago</th>
                         <th>Estatus</th>
                     </tr>
                 </thead>
@@ -220,11 +221,13 @@
                             <td>
                                 <h5>{{$item->estatus_cotizacion}}</h5>
                             </td>
-                            @if ($item->item_id_meli == NULL)
-                                STP
-                            @else
-                                MELI
-                            @endif
+                            <td>
+                                @if ($item->item_id_meli == NULL)
+                                    STP
+                                @else
+                                    MELI
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
