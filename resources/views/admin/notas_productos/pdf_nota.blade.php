@@ -277,39 +277,6 @@
         <b for="">Telefono Factura:</b> {{ $nota->telefono_fac }} <br>
         <b for="">Dirección:</b> {{ $nota->direccion_fac }}<br>
     @endif
-
-    <table style="width:100%" style="background: #a17576;margin-top:6rem;">
-        <tr style="background: #a17576">
-          <th></th>
-          <th></th>
-          <th></th>
-        </tr>
-        <tr style="background: #a17576">
-          <td></td>
-          <td>
-            <p style="text-align: center;"><strong><span style="color: #f5f5f5; font-size: 20px;">Ponte en contacto</span></strong></p>
-            <p style="text-align: center;"><strong><span style="color: #f5f5f5; font-size: 20px;">
-                <a href="https://www.facebook.com/naturalesainspa/" target="_blank" >
-                    <img src="https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/fb-white-blue.png" width="35px">
-                </a>
-                <a href="https://www.instagram.com/naturalesainspaoficial/?hl=es" target="_blank" >
-                    <img src="https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/ins-white-color.png" width="35px">
-                </a>
-                <a href="https://api.whatsapp.com/send?phone=525561672283" target="_blank" >
-                    <img src="https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/wa-white-color.png" width="35px">
-                </a>
-                <a href="https://www.tiktok.com/@carla_rizo" target="_blank" >
-                    <img src="https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/tiktok-white-color.png" width="35px">
-                </a>
-            </span></strong>
-            </p>
-            <p style="text-align: center;color: #f5f5f5;font-size: 12px;">
-                <strong>Direccion: </strong> <br>
-                Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México
-            </p>
-
-<p style="text-align: center;"><span style="color: #f5f5f5;"><span style="font-size: 12px;"> </span></span></p>
-{{-- <p style="text-align: center;"><span style="color: #f5f5f5;"><span style="font-size: 12px;">Si tiene alguna pregunta, envíe un correo electrónico a imnascenter@naturalesainspa.com</span></span></p> --}}
           </td>
           <td></td>
         </tr>
