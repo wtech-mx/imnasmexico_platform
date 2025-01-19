@@ -182,6 +182,7 @@
             font-weight: 'regular';
             line-height: 15px;
             color: #2c6d77;
+            margin-left: 40px;
         }
 
         .titulo_name{
@@ -219,12 +220,24 @@
             width: 160px;
         }
 
-        .img_logo{
+        /* .img_logo{
             width: 110px;
             height: 110px;
-            /* height: 120px; */
             margin-left: auto;
             margin-right: auto;
+        } */
+
+        .img_logo {
+            width: 110px;  /* Tamaño máximo permitido */
+            height: 110px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .img_logo img {
+            max-width: 100%;  /* Evita que la imagen se estire */
+            max-height: 100%;
+            object-fit: contain; /* Mantiene la proporción sin cortar */
         }
 
     </style>
@@ -238,11 +251,14 @@
             </div>
 
             <div class="col-3 text-center border p-2" style="margin-top: 30px">
-                <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
+                <div class="img_logo">
+                    <img src="{{ $basePathUtilidades . $fileName_logo }}" alt="Logo">
+                </div>
+                {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
             </div>
 
             <div class="col-3 text-center border p-2" style="margin-top: 30px">
-                <img class=" " src="{{ $basePath . 'stps.webp'}}" style="width: 130px">
+                <img class=" " src="{{ $basePath . 'stps.webp'}}" style="width: 150px">
             </div>
 
             <div class="col-3 text-center border p-2" style="margin-top: 30px">
@@ -284,7 +300,7 @@
                      Registro Nacional Instituto Mexicano Naturales Ain Spa RIIMNAS,
                      con registro <strong class="texto_prinipal_strong"> {{ $clave_rfc }}</strong> en la Secretaría del Trabajo y Previsión
                      Social STPS como Agente Capacitador Externo, hace constar que el/la
-                      Alumno(a), con número de folio <strong class="texto_prinipal_strong">CFC000918771</strong> con
+                      Alumno(a) <strong class="texto_prinipal_strong"> {!! $nombre !!}</strong> , con número de folio <strong class="texto_prinipal_strong">CFC000918771</strong> con
                        CURP: <strong class="texto_prinipal_strong">JDAR090213MMCMLTA4</strong> , cursó la especialidad de <strong class="texto_prinipal_strong"> {{ ucwords(strtolower($curso)) }}</strong> ,
                         cubriendo todos los créditos correspondientes.
                     Para efectos de desempeño académico se expresa lo siguiente:
@@ -365,11 +381,14 @@
             </div>
 
             <div class="col-3 text-center border p-2" style="margin-top: 30px">
-                <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
+                <div class="img_logo">
+                    <img src="{{ $basePathUtilidades . $fileName_logo }}" alt="Logo">
+                </div>
+                {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
             </div>
 
             <div class="col-3 text-center border p-2" style="margin-top: 30px">
-                <img class=" " src="{{ $basePath . 'stps.webp'}}" style="width: 130px">
+                <img class=" " src="{{ $basePath . 'stps.webp'}}" style="width: 150px">
             </div>
 
             <div class="col-3 text-center border p-2" style="margin-top: 30px">
@@ -411,7 +430,7 @@
                         <br><br>
                         Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro:{{ $clave_rfc }}
                         <br><br>
-                        XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su plena comprensión y conformidad con él y lo firmó el día _________________________________________, mismo momento en que lo autorizo definitivamente.- Doy fe.
+                        XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su plena comprensión y conformidad con él y lo firmó el día 17 de Junio del 2016, mismo momento en que lo autorizo definitivamente.- Doy fe.
                         <br><br>
                         Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da el siguiente nombramiento conforme a derecho e inscrito en el Registro Nacional Instituto Mexicano Naturales Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exige el plan de estudios especializado en:
 

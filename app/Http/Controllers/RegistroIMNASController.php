@@ -591,6 +591,23 @@ class RegistroIMNASController extends Controller
 
         $tipo_documentos = Tipodocumentos::find($tipo);
 
+        if($tipo == '1'){
+            $id_ticket = $request->get('id_registro');
+            $ticket = RegistroImnas::find($id_ticket);
+            $ticket->estatus_reconocimiento = '1';
+            $ticket->folio = $request->get('folio');
+            $ticket->update();
+
+            $ancho_puntos = 612;
+            $alto_puntos = 792;
+
+            $pdf = PDF::loadView('admin.pdf.nuevos.reconocimiento',compact('name_escuela','clave_rfc','capitalizar','tam_letra_foli_cedu_tras','tam_letra_foli_cedu','tam_letra_espec_cedu','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_logo'));
+
+            $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait');
+
+            return $pdf->download('RN_Reconocimiento'.$nombre.'.pdf');
+        }
+
         if($tipo_documentos->tipo == 'Cedula de indetidad'){
             $id_ticket = $request->get('id_registro');
             $ticket = RegistroImnas::find($id_ticket);

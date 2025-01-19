@@ -317,12 +317,24 @@
             font-weight: 'regular';
         }
 
-        .img_logo{
+        /* .img_logo{
             width: 300px;
             height: 300px;
-            /* height: 120px; */
             margin-left: auto;
             margin-right: auto;
+        } */
+
+        .img_logo {
+            width: 300px;  /* Tamaño máximo permitido */
+            height: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .img_logo img {
+            max-width: 100%;  /* Evita que la imagen se estire */
+            max-height: 100%;
+            object-fit: contain; /* Mantiene la proporción sin cortar */
         }
 
     </style>
@@ -338,7 +350,10 @@
                 </div>
 
                 <div class="col-4 text-center border " style="margin-top: 120px">
-                    <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
+                    <div class="img_logo">
+                        <img src="{{ $basePathUtilidades . $fileName_logo }}" alt="Logo">
+                    </div>
+                    {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
                 </div>
 
                 <div class="col-4 text-center border " style="margin-top: 120px">
@@ -454,7 +469,10 @@
                 </div>
 
                 <div class="col-4 text-center border " style="margin-top: 120px">
-                    <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
+                    <div class="img_logo">
+                        <img src="{{ $basePathUtilidades . $fileName_logo }}" alt="Logo">
+                    </div>
+                    {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
                 </div>
 
                 <div class="col-4 text-center border " style="margin-top: 120px">

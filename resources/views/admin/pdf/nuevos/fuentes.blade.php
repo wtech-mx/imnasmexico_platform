@@ -123,6 +123,27 @@
             src: url('{{ storage_path('fonts/PTSans-Bold.ttf') }}') format('truetype');
         }
 
+        @font-face {
+            font-family: 'Tangerine-Regular';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ storage_path('fonts/Tangerine-Regular.ttf') }}') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Belleza-Regular';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ storage_path('fonts/Belleza-Regular.ttf') }}') format('truetype');
+        }
+
+        @font-face {
+            font-family: 'Boston_Angel_Regular';
+            font-style: normal;
+            font-weight: normal;
+            src: url('{{ storage_path('fonts/Boston_Angel_Regular.ttf') }}') format('truetype');
+        }
+
         .text-center {
             text-align: center;
         }

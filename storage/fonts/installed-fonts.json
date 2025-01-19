@@ -109,5 +109,14 @@
     },
     "ptsans_bold": {
         "normal": "ptsans_bold_normal_a3023d87f5ee260778090a9b5c623d7b"
+    },
+    "tangerine-regular": {
+        "normal": "tangerine_regular_normal_f005a6d8188408b0787f25e36a97124b"
+    },
+    "belleza-regular": {
+        "normal": "belleza_regular_normal_8ad8959bc0e6a734b50e25604dc0d26d"
+    },
+    "boston_angel_regular": {
+        "normal": "boston_angel_regular_normal_25a6b68ec0639a4b2747243dd7d6c06d"
     }
 }

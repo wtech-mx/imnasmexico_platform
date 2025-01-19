@@ -75,4 +75,16 @@ class NewDocumentsController extends Controller
 
         return $pdf->stream('tira.pdf');
     }
+
+    public function reconocimiento(){
+
+        // Tamaño carta en puntos
+        $ancho_puntos = 612;
+        $alto_puntos = 792;
+
+        $pdf = PDF::loadView('admin.pdf.nuevos.reconocimiento');
+        $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait');
+
+        return $pdf->stream('tira.pdf');
+    }
 }

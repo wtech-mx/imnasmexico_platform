@@ -288,11 +288,25 @@
 
         }
 
-        .img_logo{
+        /* .img_logo{
             width: 44px;
             height: 44px;
-            /* height: 120px; */
             margin-top: 8px;
+        } */
+
+        .img_logo {
+            width: 38px;  /* Tamaño máximo permitido */
+            height: 38px;
+            /* margin-left: auto;
+            margin-right: auto; */
+            margin-top: 12px;
+
+        }
+
+        .img_logo img {
+            max-width: 100%;  /* Evita que la imagen se estire */
+            max-height: 100%;
+            object-fit: contain; /* Mantiene la proporción sin cortar */
         }
 
         .oval-container2 {
@@ -326,10 +340,14 @@
                 </p>
             </div>
             <div class="col-2 text-center border">
-                <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div>
+                {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
+                <div class="img_logo">
+                    <img src="{{ $basePathUtilidades . $fileName_logo }}" alt="Logo">
+                </div>
             </div>
             <div class="col-2 text-center border">
                 <img class="" src="{{ $basePath . 'registro_nacional.png'}}" style="width: 40px;margin-top: 16px;margin-left:20px;">
+
             </div>
         </div>
 

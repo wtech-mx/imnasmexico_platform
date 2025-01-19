@@ -115,6 +115,7 @@ Route::get('/doc/titulo', [App\Http\Controllers\NewDocumentsController::class, '
 Route::get('/doc/diploma', [App\Http\Controllers\NewDocumentsController::class, 'diploma'])->name('doc.diploma');
 Route::get('/doc/credencial', [App\Http\Controllers\NewDocumentsController::class, 'credencial'])->name('doc.credencial');
 Route::get('/doc/tira', [App\Http\Controllers\NewDocumentsController::class, 'tira'])->name('doc.tira');
+Route::get('/doc/reconocimiento', [App\Http\Controllers\NewDocumentsController::class, 'reconocimiento'])->name('doc.reconocimiento');
 
 // =============== E C O M M E R C E C O S M I C A ===============================
 Route::get('/tienda/home', [App\Http\Controllers\EcommerceCosmikaController::class, 'home'])->name('tienda.home');

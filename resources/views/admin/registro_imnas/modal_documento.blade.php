@@ -81,6 +81,7 @@
                                                 <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px">
                                             </span>
                                             <select name="tipo" id="tipo" class="form-select" >
+                                                    <option value="1">RN- Reconocimiento</option>
                                                     <option value="2">RN-Cedula de identidad de papel General</option>
                                                     {{-- <option value="3">RN - Titulo Honorifico Generico QRS</option> --}}
                                                     <option value="4">RN - Diploma Imnas</option>

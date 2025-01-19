@@ -15,6 +15,7 @@
 
     <link href="{{asset('assets/user/bootstrap/css/bootstrap.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/user/custom/ecomeerce_cosmica.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/user/custom/ecomeerce_fuentes.css')}}" rel="stylesheet" />
 
     @yield('css_custom')
 
