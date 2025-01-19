@@ -130,7 +130,7 @@
             <div class="col-8 text-center border" style="margin-top: 70px">
 
                 <div class="img_logo">
-                    <img src="{{ $basePath . 'logo.png'}}" alt="Logo">
+                    <img src="{{ $basePathUtilidades . $fileName_logo }}" alt="Logo">
                 </div>
 
             </div>
