@@ -1,0 +1,27 @@
+.bg_afiliado{
+    background-image: linear-gradient(to bottom, #fcf3f1, #fbece9, #fae5e1, #f9dfd9, #f8d8d1, #f8d7d0, #f7d7cf, #f7d6ce, #f8dbd4, #f9e0da, #fae5e0, #fbeae6);
+}
+
+.sutittle_conoce{
+    color: #BD92AC;
+    font-size: 20px;
+}
+
+.sutittle_red{
+    color: #BD92AC;
+    font-size: 40px;
+}
+
+.parrafo_about{
+    color: #AD7F9D;
+    font-size: 15px;
+}
+
+.direccion{
+    color: #AD7F9D;
+    font-size: 20px;
+}
+
+.img_logo{
+    width: 300px;
+}

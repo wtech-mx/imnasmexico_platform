@@ -15,26 +15,29 @@
             <!-- Lista a la izquierda -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Inicio</a>
+                    <a class="nav-link active" href="{{ route('tienda.home') }}">Inicio</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categorías
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Facial</a></li>
-                        <li><a class="dropdown-item" href="#">Corporal</a></li>
-                        <li><a class="dropdown-item" href="#">Todo</a></li>
+                        <li><a class="dropdown-item" href="">Facial</a></li>
+                        <li><a class="dropdown-item" href="">Corporal</a></li>
+                        <li><a class="dropdown-item" href="">Todo</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Productos</a>
+                    <a class="nav-link" href="">Productos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Sobre Nosotros</a>
+                    <a class="nav-link" href="{{ route('tienda.about') }}">Sobre Nosotros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profesionales</a>
+                    <a class="nav-link" href="{{ route('tienda.afiliadas') }}">Afiliadas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('tienda.afiliadas') }}">Profesionales</a>
                 </li>
             </ul>
         </div>
