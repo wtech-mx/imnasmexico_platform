@@ -466,6 +466,7 @@ body{
     width: 25px;
 }
 
+
 .texto_footer_principal{
     font-size: 30px;
 }
@@ -596,9 +597,6 @@ body{
 }
 
 
-.img_about{
-    width: 50%;
-}
 
 .btn_pagar_checkout{
     background: #000;
