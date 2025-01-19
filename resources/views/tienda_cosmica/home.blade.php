@@ -14,31 +14,31 @@
 <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="{{ asset('cosmika/INICIO/banner/BANNER-1.png') }}" class="d-block w-100" alt="">
+            <img src="{{ asset('cosmika/inicio/banner/BANNER-1.png') }}" class="d-block w-100" alt="">
           </div>
 
           <div class="carousel-item">
-            <img src="{{ asset('cosmika/INICIO/banner/BANNER-2.png') }}" class="d-block w-100" alt="">
+            <img src="{{ asset('cosmika/inicio/banner/BANNER-2.png') }}" class="d-block w-100" alt="">
           </div>
 
           <div class="carousel-item">
-            <img src="{{ asset('cosmika/INICIO/banner/BANNER-3.png') }}" class="d-block w-100" alt="">
+            <img src="{{ asset('cosmika/inicio/banner/BANNER-3.png') }}" class="d-block w-100" alt="">
           </div>
 
           <div class="carousel-item">
-            <img src="{{ asset('cosmika/INICIO/banner/BANNER-4.png') }}" class="d-block w-100" alt="">
+            <img src="{{ asset('cosmika/inicio/banner/BANNER-4.png') }}" class="d-block w-100" alt="">
           </div>
 
           <div class="carousel-item">
-            <img src="{{ asset('cosmika/INICIO/banner/BANNER-5.png') }}" class="d-block w-100" alt="">
+            <img src="{{ asset('cosmika/inicio/banner/BANNER-5.png') }}" class="d-block w-100" alt="">
           </div>
 
           <div class="carousel-item">
-            <img src="{{ asset('cosmika/INICIO/banner/BANNER-6.png') }}" class="d-block w-100" alt="">
+            <img src="{{ asset('cosmika/inicio/banner/BANNER-6.png') }}" class="d-block w-100" alt="">
           </div>
 
           <div class="carousel-item">
-            <img src="{{ asset('cosmika/INICIO/banner/BANNER-7.png') }}" class="d-block w-100" alt="">
+            <img src="{{ asset('cosmika/inicio/banner/BANNER-7.png') }}" class="d-block w-100" alt="">
           </div>
         </div>
 
@@ -60,7 +60,7 @@
             <h3 class="text-center Quinsi titulos">Productos Faciales</h3>
             <h2 class="text-center Avenir titulos">Líneas Populares</h2>
             <p class="text-center">
-                <img src="{{asset('cosmika/INICIO/ESTRELLAS-DORADAS.png')}}" alt="">
+                <img src="{{asset('cosmika/inicio/ESTRELLAS-DORADAS.png')}}" alt="">
             </p>
         </div>
     </div>
@@ -186,7 +186,7 @@
                 <h3 class="text-center Quinsi titulos">Productos Corporales</h3>
                 <h2 class="text-center Avenir titulos">Líneas Populares</h2>
                 <p class="text-center">
-                    <img src="{{asset('cosmika/INICIO/ESTRELLAS-DORADAS.png')}}" alt="">
+                    <img src="{{asset('cosmika/inicio/ESTRELLAS-DORADAS.png')}}" alt="">
                 </p>
             </div>
     </div>
@@ -261,21 +261,21 @@
 
         <div class="col-4 p-0 p-sm-0 p-md-2">
             <div class="container_categorias_popu">
-                <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/INICIO/TODO-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
+                <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/inicio/TODO-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
                 <p class="titulo_categorias Avenir">TODO</p>
             </div>
         </div>
 
         <div class="col-4 p-0 p-sm-0 p-md-2">
             <div class="container_categorias_popu">
-                <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/INICIO/FACIAL-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
+                <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/inicio/FACIAL-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
                 <p class="titulo_categorias Avenir">FACIAL</p>
             </div>
         </div>
 
         <div class="col-4 p-0 p-sm-0 p-md-2">
             <div class="container_categorias_popu">
-                <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/INICIO/CORPORAL-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
+                <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/inicio/CORPORAL-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
                 <p class="titulo_categorias Avenir">CORPORAL</p>
             </div>
         </div>
@@ -283,12 +283,12 @@
     </div>
 </div>
 
-<section class="category-banner my-auto mt-3 mt-md-5 mt-lg-5 mb-3 mb-md-5 mb-lg-5" style="background-image: url('{{ asset('cosmika/INICIO/FONDO-ESENCIAS.png') }}')">
+<section class="category-banner my-auto mt-3 mt-md-5 mt-lg-5 mb-3 mb-md-5 mb-lg-5" style="background-image: url('{{ asset('cosmika/inicio/FONDO-ESENCIAS.png') }}')">
     <div class="overlay"></div>
 
     <div class="row">
         <div class="col-3">
-            <img class="img_portada_linea_esencial" src="{{ asset('cosmika/INICIO/ESENCIAS.png') }}" alt="">
+            <img class="img_portada_linea_esencial" src="{{ asset('cosmika/inicio/ESENCIAS.png') }}" alt="">
         </div>
 
         <div class="col-9 ">
@@ -305,7 +305,7 @@
     <div class="row">
         <div class="col-12">
             <p class="text-center mt-5">
-                <img class="img_gradiente_all_linea" src="{{ asset('cosmika/INICIO/PRODUCTOS-NNUEVA-MARCA-MEXICANA.png') }}" alt="">
+                <img class="img_gradiente_all_linea" src="{{ asset('cosmika/inicio/PRODUCTOS-NNUEVA-MARCA-MEXICANA.png') }}" alt="">
             </p>
             <h6 class="text-center Quinsi h6_all_gradient">¡Nueva Marca mexicana!</h6>
             <h5 class="text-center Avenir h5_all_gradient">Compra toda la linea y <br> recibe un super descuento </h5>
@@ -322,7 +322,7 @@
 
 </div>
 
-<div class="container-fluid horizontal-banner" style="background-image: url('{{ asset('cosmika/INICIO/MERCADO-LIBRE.png') }}'); /* Cambia por tu imagen */">
+<div class="container-fluid horizontal-banner" style="background-image: url('{{ asset('cosmika/inicio/MERCADO-LIBRE.png') }}'); /* Cambia por tu imagen */">
     <div class="row justify-content-center align-items-center">
         <div class="col-12">
             {{-- <div class="banner-content text-center">
@@ -335,7 +335,7 @@
 
 <div class="container-fluid position-relative mt-5">
     <!-- Capa de fondo -->
-    <div class="background-image" style="background-image: url('{{ asset('cosmika/INICIO/NUEVAS-LINEAS.png') }}');"></div>
+    <div class="background-image" style="background-image: url('{{ asset('cosmika/inicio/NUEVAS-LINEAS.png') }}');"></div>
 
     <!-- Capa superior con contenido -->
     <div class="overlay-content d-flex align-items-center justify-content-center">

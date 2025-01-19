@@ -3,15 +3,15 @@
         <div class="col-12  mt-3 mt-md-5 mt-lg-5 mb-0 mb-md-5 mb-lg-5">
             <div class="conatainer_text_starts">
                 <p class="text-white texto_footer_principal SwilyBright_Italic text-center">
-                    <img src="{{ asset('cosmika/INICIO/estrellas_2.png') }}" alt="" class="img_estrellas_footer">
+                    <img src="{{ asset('cosmika/inicio/estrellas_2.png') }}" alt="" class="img_estrellas_footer">
                     Que tu piel <strong class="Christmas">brille</strong> <br> como las estrellas en el cosmos.
-                    <img src="{{ asset('cosmika/INICIO/estrellas_2.png') }}" alt="" class="img_estrellas_footer">
+                    <img src="{{ asset('cosmika/inicio/estrellas_2.png') }}" alt="" class="img_estrellas_footer">
                 </p>
                 <p class="text-center text-white">- Cósmica Skin</p>
                 <p class="text-center">
-                    <img src="{{ asset('cosmika/INICIO/fb.png') }}" alt="" class="img_estrellas_footer">
-                    <img src="{{ asset('cosmika/INICIO/ig.png') }}" alt="" class="img_estrellas_footer">
-                    <img src="{{ asset('cosmika/INICIO/wp.png') }}" alt="" class="img_estrellas_footer">
+                    <img src="{{ asset('cosmika/inicio/fb.png') }}" alt="" class="img_estrellas_footer">
+                    <img src="{{ asset('cosmika/inicio/ig.png') }}" alt="" class="img_estrellas_footer">
+                    <img src="{{ asset('cosmika/inicio/wp.png') }}" alt="" class="img_estrellas_footer">
 
                 </p>
             </div>
@@ -97,7 +97,7 @@
 
                         <div class="col-6">
                             <p class="text-center ">
-                                <img src="{{ asset('cosmika/INICIO/camion.png') }}" alt="" class="img_icon_footer">
+                                <img src="{{ asset('cosmika/inicio/camion.png') }}" alt="" class="img_icon_footer">
                             </p>
 
                             <a href="#" class="text-white text-center nav-link p-0 subtitle_footer mt-3">
@@ -109,13 +109,13 @@
                             </p>
 
                             <p class="text-center">
-                                <img src="{{ asset('cosmika/INICIO/tienda.png') }}" alt="" class="img_icon_footer">
+                                <img src="{{ asset('cosmika/inicio/tienda.png') }}" alt="" class="img_icon_footer">
                             </p>
                         </div>
 
                         <div class="col-6">
                             <p class="text-center">
-                                <img src="{{ asset('cosmika/INICIO/tarjeta.png') }}" alt="" class="img_icon_footer">
+                                <img src="{{ asset('cosmika/inicio/tarjeta.png') }}" alt="" class="img_icon_footer">
                             </p>
 
                             <a href="#" class="text-white text-center nav-link p-0 subtitle_footer mt-3">
@@ -127,7 +127,7 @@
                             </p>
 
                             <p class="text-center">
-                                <img src="{{ asset('cosmika/INICIO/mercado lib.png') }}" alt="" class="img_icon_footer">
+                                <img src="{{ asset('cosmika/inicio/mercado lib.png') }}" alt="" class="img_icon_footer">
                             </p>
 
                         </div>
