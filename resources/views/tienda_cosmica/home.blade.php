@@ -288,7 +288,7 @@
 
     <div class="row">
         <div class="col-3">
-            <img class="img_portada_linea_esencial" src="{{ asset('cosmika/inicio/ESENCIAS.png') }}" alt="">
+            <img class="img_portada_linea_esencial" src="{{ asset('cosmika/inicio/esencias.png') }}" alt="">
         </div>
 
         <div class="col-9 ">
