@@ -9,8 +9,8 @@
 @endsection
 
 
-@section('css')
-
+@section('css_custom')
+    <link href="{{asset('assets/user/custom/ecommerce_single.css')}}" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -19,31 +19,31 @@
 
     <div class="row">
         <div class="col-12">
-            <h2 class="text-center mt-5 m-5"><strong>< Seguir</strong> Comprando</h2>
+            <h2 class="text-center tittle_single mt-3 mt-sm-2 mt-md-3 mt-lg-5 mb-3 mb-sm-2 mb-md-3 mb-lg-5"><strong>< Seguir</strong> Comprando</h2>
         </div>
 
-        <div class="col-12 col-sm-12 col-md-5 col-lg-4 p-3">
+        <div class="col-12 col-sm-12 col-md-5 col-lg-4 p-3 p-sm-2 p-md-3 p-lg-3">
 
-            <div class="container_lineas_single">
+            <div class="container_lineas_single_product">
                 <div class="content mb-3 mt-3">
-                    <div class="img_container_single mx-auto">
-                        <img class="img_grid_products_single" src="{{ asset('cosmika/inicio/lineas/producto_4.png') }}" alt="Protector">
+                    <div class="img_container_single_product mx-auto">
+                        <img class="img_grid_products_single_product" src="{{ asset('cosmika/inicio/lineas/producto_4.png') }}" alt="Protector">
                     </div>
                 </div>
             </div>
 
-            <p class="text-center mt-4">
+            <p class="text-center  mt-2 mt-sm-2 mt-md-3 mt-lg-4 mb-2 mb-sm-2 mb-md-3 mb-lg-4">
                 <img src="{{asset('cosmika/INICIO/ESTRELLAS-DORADAS.png')}}" alt="">
             </p>
         </div>
 
-        <div class="col-12 col-sm-12 col-md-7 col-lg-8 p-5">
+        <div class="col-12 col-sm-12 col-md-7 col-lg-8 p-1 p-sm-1 p-md-3 p-lg-5">
 
-            <h1 class="text-center"><strong>Sérum</strong> Hialurónico</h1>
+            <h1 class="text-center name_product"><strong>Sérum</strong> Hialurónico</h1>
 
-            <div class="container_price mb-5 mt-4">
+            <div class="container_price  mt-3 mt-sm-3 mt-md-4 mt-lg-5 mb-3 mb-sm-3 mb-md-3 mb-lg-5">
                 <div class="d-flex justify-content-around">
-                    <h2 class="my-auto">$550.0</h2>
+                    <h2 class="my-auto price">$550.0</h2>
                     <p class="my-auto">1
                         <a href="" class="">
                             <img class="icon_plus_cantidad" src="{{ asset('cosmika/INICIO/AGREGAR-POPULARES.png') }}" alt="Carrito">
@@ -56,27 +56,31 @@
             </div>
 
             <div class="contaner_details">
-                <h3>Detalles</h3>
-                <p>El Serum de ácido Hialurónico aporta volumen, además de reducir las arrugas y disimular
+                <h3 class="detalles"> <strong>Detalles</strong> </h3>
+                <p class="detalles_dinamico">El Serum de ácido Hialurónico aporta volumen, además de reducir las arrugas y disimular
                     las líneas de expresión y revitalizar las capas superficiales externas de la piel.
                 </p>
-                <h4>MODO DE EMPLEO:</h4>
-                <p>luego masajee suavemente hasta su total absorción, para obtener el mejor efecto de
+
+                <h4 class="modo">MODO DE EMPLEO:</h4>
+                <p class="modo_dinamico">luego masajee suavemente hasta su total absorción, para obtener el mejor efecto de
                     cuidado de la piel.
                 </p>
-                <h4>BENEFICIOS</h4>
-                <p>Combate líneas de expresión y manchas mantiene una piel rejuvenecida e
+
+                <h4 class="beneficios">BENEFICIOS</h4>
+                <p class="beneficios_dinamico">Combate líneas de expresión y manchas mantiene una piel rejuvenecida e
                     hidratada.
                 </p>
-                <h5>INGREDIENTES</h5>
-                <p>
+
+                <h5 class="ingrediente">INGREDIENTES</h5>
+                <p class="ingrediente_dinamico">
                     AGUA DESMINERALIZADA, ALCOHOL, GLICERINA, GLICOL DE
                     PROPILENO, ÁCIDO HIALURÓNICO, ACETILADO DE SODIO, ÁCIDO HIALURONICO,
                     COLÁGENO HIDROLIZADO, ELASTINA, SILICIO, FRAGANCIA, FENOXIETANOL Y
                     ETILHEXILGLICERINA.
                 </p>
-                <h5><strong>PRODUCTO DE USO COSMÉTICO.</strong></h5>
-                <h4>PRECAUCIONES:</h4>
+
+                <h5 class="producto_de_uso"><strong>PRODUCTO DE USO COSMÉTICO.</strong></h5>
+                <h4 class="precauciones">PRECAUCIONES:</h4>
                 Si presenta irritación, enrojecimiento o alguna molestia, suspenda el uso y acuda al médico.
                 No se deje al alcance de los niños. Manténgase en lugar seco y fresco
             </div>
@@ -85,8 +89,7 @@
 
         <div class="col-0 col-0 col-md-2 col-lg-4"></div>
         <div class="col-12 col-sm-12 col-md-8 col-lg-4 text-center">
-
-            <div class="container_lineas_single">
+            <div class="container_lineas_single  mt-4 mt-sm-2 mt-md-3 mt-lg-3 mb-4 mb-sm-2 mb-md-3 mb-lg-3">
                 <a href="" class="text_shop_single">
                     $550.00 MXN Agregar
                 </a>
@@ -97,137 +100,12 @@
 
     <div class="row">
         <div class="col-12">
-            <h4 class="title_product_populares text-center mt-5 mb-5">Pensamos que te podría interesar</h4>
+            <h4 class="title_product_populares text-center mt-4 mt-sm-2 mt-md-3 mt-lg-5 mb-4 mb-sm-2 mb-md-3 mb-lg-5">Pensamos que te podría interesar</h4>
         </div>
     </div>
 
-    <div class="row">
 
-        <div class="col-3">
-
-            <div class="container_lineas_single mx-auto" style="width:80%; ">
-                <div class="content mb-3 mt-3">
-                    <div class="img_container_single mx-auto">
-                        <img class="img_grid_products_single" src="{{ asset('cosmika/inicio/lineas/producto_4.png') }}" alt="Protector">
-                    </div>
-                </div>
-            </div>
-            <h2 class="text-center">
-                <strong>Shampoo Facial</strong> <br>
-                con Vitaminas 125 ml
-            </h2>
-            <h4 class="text-center">
-                $200.00
-            </h4>
-            <p class="text-center">
-
-                <a href="" class="text-center mt-3">
-                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="">
-                </a>
-            </p>
-            <p class="text-center">
-
-                <a href="" class="text-center mt-3">
-                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="">
-                </a>
-            </p>
-
-        </div>
-
-        <div class="col-3">
-
-            <div class="container_lineas_single mx-auto" style="width:80%; ">
-                <div class="content mb-3 mt-3">
-                    <div class="img_container_single mx-auto">
-                        <img class="img_grid_products_single" src="{{ asset('cosmika/inicio/lineas/producto_4.png') }}" alt="Protector">
-                    </div>
-                </div>
-            </div>
-            <h2 class="text-center">
-                <strong>Shampoo Facial</strong> <br>
-                con Vitaminas 125 ml
-            </h2>
-            <h4 class="text-center">
-                $200.00
-            </h4>
-            <p class="text-center">
-
-                <a href="" class="text-center mt-3">
-                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="">
-                </a>
-            </p>
-            <p class="text-center">
-
-                <a href="" class="text-center mt-3">
-                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="">
-                </a>
-            </p>
-
-        </div>
-
-        <div class="col-3">
-
-            <div class="container_lineas_single mx-auto" style="width:80%; ">
-                <div class="content mb-3 mt-3">
-                    <div class="img_container_single mx-auto">
-                        <img class="img_grid_products_single" src="{{ asset('cosmika/inicio/lineas/producto_4.png') }}" alt="Protector">
-                    </div>
-                </div>
-            </div>
-            <h2 class="text-center">
-                <strong>Shampoo Facial</strong> <br>
-                con Vitaminas 125 ml
-            </h2>
-            <h4 class="text-center">
-                $200.00
-            </h4>
-            <p class="text-center">
-
-                <a href="" class="text-center mt-3">
-                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="">
-                </a>
-            </p>
-            <p class="text-center">
-
-                <a href="" class="text-center mt-3">
-                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="">
-                </a>
-            </p>
-
-        </div>
-
-        <div class="col-3">
-
-            <div class="container_lineas_single mx-auto" style="width:80%; ">
-                <div class="content mb-3 mt-3">
-                    <div class="img_container_single mx-auto">
-                        <img class="img_grid_products_single" src="{{ asset('cosmika/inicio/lineas/producto_4.png') }}" alt="Protector">
-                    </div>
-                </div>
-            </div>
-            <h2 class="text-center">
-                <strong>Shampoo Facial</strong> <br>
-                con Vitaminas 125 ml
-            </h2>
-            <h4 class="text-center">
-                $200.00
-            </h4>
-            <p class="text-center">
-
-                <a href="" class="text-center mt-3">
-                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="">
-                </a>
-            </p>
-            <p class="text-center">
-
-                <a href="" class="text-center mt-3">
-                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="">
-                </a>
-            </p>
-
-        </div>
-
-    </div>
+    @include('tienda_cosmica.Components.corousel_single_product')
 
     @include('tienda_cosmica.Components.productos_populares')
 

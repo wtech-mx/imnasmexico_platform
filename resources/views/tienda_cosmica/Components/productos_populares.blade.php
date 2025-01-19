@@ -8,14 +8,14 @@
     </div>
 </div>
 
-<div class="row mt-5">
-    <div class="col-6 col-md-4 col-lg-3 mb-4">
+<div id="generalPopular" class="owl-carousel mt-4 mb-4">
+    <div class="item">
         <div class="container_lineas_grid">
 
             <div class="content">
                 <div class="icon_heart">
                     <div class="d-flex justify-content-start">
-                        <img class="icon_card_product_grid" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="">
+                        <img class="icon_card_product_grid" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="" style="width: 20px">
                     </div>
                 </div>
                 <div class="img_container mx-auto">
@@ -33,13 +33,13 @@
         </div>
     </div>
 
-    <div class="col-6 col-md-4 col-lg-3 mb-4">
+    <div class="item">
         <div class="container_lineas_grid">
 
             <div class="content">
                 <div class="icon_heart">
                     <div class="d-flex justify-content-start">
-                        <img class="icon_card_product_grid" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="">
+                        <img class="icon_card_product_grid" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="" style="width: 20px">
                     </div>
                 </div>
                 <div class="img_container mx-auto">
@@ -57,13 +57,13 @@
         </div>
     </div>
 
-    <div class="col-6 col-md-4 col-lg-3 mb-4">
+    <div class="item">
         <div class="container_lineas_grid">
 
             <div class="content">
                 <div class="icon_heart">
                     <div class="d-flex justify-content-start">
-                        <img class="icon_card_product_grid" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="">
+                        <img class="icon_card_product_grid" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="" style="width: 20px">
                     </div>
                 </div>
                 <div class="img_container mx-auto">
@@ -81,13 +81,13 @@
         </div>
     </div>
 
-    <div class="col-6 col-md-4 col-lg-3 mb-4">
+    <div class="item">
         <div class="container_lineas_grid">
 
             <div class="content">
                 <div class="icon_heart">
                     <div class="d-flex justify-content-start">
-                        <img class="icon_card_product_grid" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="">
+                        <img class="icon_card_product_grid" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="" style="width: 20px">
                     </div>
                 </div>
                 <div class="img_container mx-auto">

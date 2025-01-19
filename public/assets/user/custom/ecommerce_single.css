@@ -1,0 +1,187 @@
+.tittle_single{
+    font-size: 40px;
+}
+
+.name_product{
+    font-size: 40px;
+}
+
+.detalles{
+    font-size: 30px;
+
+}
+
+.detalles_dinamico{
+    font-size: 15px;
+}
+
+.modo{
+    font-size: 25px;
+}
+
+.modo_dinamico{
+    font-size: 15px;
+}
+
+.beneficios{
+    font-size: 25px;
+}
+
+.beneficios_dinamico{
+    font-size: 15px;
+}
+
+.ingrediente{
+    font-size: 25px;
+}
+
+.ingrediente_dinamico{
+    font-size: 15px;
+}
+
+.producto_de_uso{
+    font-size: 25px;
+}
+
+.precauciones{
+    font-size: 15px;
+}
+
+.price{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.container_lineas_single_product {
+    padding: 10px;
+    width: 100%;
+    border-radius: 50px; /* Bordes redondeados */
+    background-image: linear-gradient(to bottom, #eaccc7, #b99c9e, #896e77, #594552, #2c202f);    box-shadow: 6px 6px 9px -6px rgba(0, 0, 0, 0.25);
+    position: relative; /* Necesario para el pseudo-elemento */
+    display: flex; /* Flexbox para centrar contenido */
+    flex-direction: column; /* Contenido en columna */
+    align-items: center; /* Centrar horizontalmente */
+    text-align: center; /* Centrar texto */
+}
+
+.container_lineas_single_product::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px; /* Bordes redondeados para el pseudo-elemento */
+    border: 3px solid transparent; /* Borde degradado */
+    background: radial-gradient(circle, rgba(72,25,12,1) 64%, rgba(253,233,184,1) 87%, rgba(253,233,184,1) 100%);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude; /* Solo deja visible el borde */
+    pointer-events: none; /* Asegura que no interfiera con el contenido */
+}
+
+.img_container_single_product{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ocultar el espacio sobrante */
+    width: auto;
+    height: 500px;
+    max-width: 200px;
+    max-height: 350px;
+}
+
+.img_grid_products_single_product {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ajusta al contenido visible */
+    /* filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7)); */
+}
+
+.container_lineas_single_carousel {
+    padding: 10px;
+    width: 100%;
+    border-radius: 50px; /* Bordes redondeados */
+    background-image: linear-gradient(to bottom, #eaccc7, #b99c9e, #896e77, #594552, #2c202f);    box-shadow: 6px 6px 9px -6px rgba(0, 0, 0, 0.25);
+    position: relative; /* Necesario para el pseudo-elemento */
+    display: flex; /* Flexbox para centrar contenido */
+    flex-direction: column; /* Contenido en columna */
+    align-items: center; /* Centrar horizontalmente */
+    text-align: center; /* Centrar texto */
+}
+
+.container_lineas_single_carousel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px; /* Bordes redondeados para el pseudo-elemento */
+    border: 3px solid transparent; /* Borde degradado */
+    background: radial-gradient(circle, rgba(72,25,12,1) 64%, rgba(253,233,184,1) 87%, rgba(253,233,184,1) 100%);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude; /* Solo deja visible el borde */
+    pointer-events: none; /* Asegura que no interfiera con el contenido */
+}
+
+.img_container_single_corousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Ocultar el espacio sobrante */
+    width: auto;
+    height: 500px;
+    max-width: 200px;
+    max-height: 280px;
+}
+
+.img_grid_products_single_carousel {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; /* Ajusta al contenido visible */
+    /* filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7)); */
+}
+
+.titulo_producto_carousel{
+font-size: 20px;
+}
+
+.price_producto_carousel{
+font-size: 15px;
+}
+
+
+@media only screen and (max-width: 767px) {
+    .img_container_single_product {
+        width: auto;
+        height: 150px;
+        max-width: 200px;
+        max-height: 150px;
+    }
+
+    .container_lineas_single_product {
+        width: 60%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    .img_container_single_corousel {
+        height: 500px;
+        max-width: 200px;
+        max-height: 230px;
+    }
+}
+
+@media only screen and (max-width: 426px) {
+    .tittle_single {
+        font-size: 30px;
+    }
+}

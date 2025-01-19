@@ -11,7 +11,7 @@
 @section('content')
 
 
-    <div id="carouselExample" class="carousel slide">
+<div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
           <div class="carousel-item active">
             <img src="{{ asset('cosmika/INICIO/banner/BANNER-1.png') }}" class="d-block w-100" alt="">
@@ -52,7 +52,7 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-    </div>
+</div>
 
 <div class="container">
     <div class="row">
@@ -65,13 +65,14 @@
         </div>
     </div>
 
-    <div class="row ">
-        <div class="col-6 col-md-4 col-lg-3 mb-4 ">
+    <div id="facialPopular" class="owl-carousel">
+
+        <div class="item ">
             <div class="container_lineas_slide">
 
                 <div class="content mb-3 mt-3">
                     <div class="img_container mx-auto">
-                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/nebulosa.png') }}" alt="Protector">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/nebulosa.png') }}" alt="Protector">
                     </div>
                     <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
                     <h5 class="text-center  Quinsi text-white subtitle_linea m-0">NEBULOSA</h5>
@@ -80,12 +81,12 @@
             </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
+        <div class="item">
             <div class="container_lineas_grid">
 
                 <div class="content mb-3 mt-3">
                     <div class="img_container mx-auto">
-                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/constelacion.png') }}" alt="Protector">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
                     </div>
                     <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
                     <h5 class="text-center Quinsi color_2 subtitle_linea m-0">CONSTELACION</h5>
@@ -94,12 +95,12 @@
             </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4 ">
+        <div class="item ">
             <div class="container_lineas_slide">
 
                 <div class="content mb-3 mt-3">
                     <div class="img_container mx-auto">
-                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto_6.png') }}" alt="Protector">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-6.png') }}" alt="Protector">
                     </div>
                     <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
                     <h5 class="text-center  Quinsi text-white subtitle_linea m-0">VENUS</h5>
@@ -108,35 +109,35 @@
             </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4 ">
-            <div class="container_lineas_slide">
+        <div class="item ">
+            <div class="container_lineas_grid">
 
                 <div class="content mb-3 mt-3">
                     <div class="img_container mx-auto">
-                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto_4.png') }}" alt="Protector">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-4.png') }}" alt="Protector">
                     </div>
-                    <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
-                    <h5 class="text-center  Quinsi text-white subtitle_linea m-0">ESPECTRO</h5>
+                    <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                    <h5 class="text-center  Quinsi color_2 subtitle_linea m-0">ESPECTRO</h5>
                 </div>
 
             </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
-            <div class="container_lineas_grid">
+        <div class="item">
+            <div class="container_lineas_slide">
 
                 <div class="content mb-3 mt-3">
                     <div class="img_container mx-auto">
                         <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-5.png') }}" alt="Protector">
                     </div>
-                    <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
-                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">ESTELAR</h5>
+                    <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
+                    <h5 class="text-center Quinsi text-white subtitle_linea m-0">ESTELAR</h5>
                 </div>
 
             </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
+        <div class="item">
             <div class="container_lineas_grid">
 
                 <div class="content mb-3 mt-3">
@@ -150,21 +151,21 @@
             </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
-            <div class="container_lineas_grid">
+        <div class="item">
+            <div class="container_lineas_slide">
 
                 <div class="content mb-3 mt-3">
                     <div class="img_container mx-auto">
-                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto_7.png') }}" alt="Protector">
+                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-7.png') }}" alt="Protector">
                     </div>
-                    <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
-                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">SOLAR</h5>
+                    <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
+                    <h5 class="text-center Quinsi text-white subtitle_linea m-0">SOLAR</h5>
                 </div>
 
             </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
+        <div class="item">
             <div class="container_lineas_grid">
 
                 <div class="content mb-3 mt-3">
@@ -188,26 +189,11 @@
                     <img src="{{asset('cosmika/INICIO/ESTRELLAS-DORADAS.png')}}" alt="">
                 </p>
             </div>
-
     </div>
 
-    <div class="row">
+    <div id="corporalPopular" class="owl-carousel">
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
-            <div class="container_lineas_grid">
-
-                <div class="content mb-3 mt-3">
-                    <div class="img_container mx-auto">
-                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/protector.png') }}" alt="Protector">
-                    </div>
-                    <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
-                    <h5 class="text-center Quinsi color_2 subtitle_linea m-0">ECILPSE</h5>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="col-6 col-md-4 col-lg-3 mb-4 ">
+        <div class="item ">
             <div class="container_lineas_slide">
 
                 <div class="content mb-3 mt-3">
@@ -220,7 +206,7 @@
             </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
+        <div class="item">
             <div class="container_lineas_grid">
 
                 <div class="content mb-3 mt-3">
@@ -234,7 +220,7 @@
             </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4 ">
+        <div class="item ">
             <div class="container_lineas_slide">
 
                 <div class="content mb-3 mt-3">
@@ -247,7 +233,7 @@
             </div>
         </div>
 
-        <div class="col-6 col-md-4 col-lg-3 mb-4">
+        <div class="item">
             <div class="container_lineas_grid">
 
                 <div class="content mb-3 mt-3">
@@ -270,24 +256,24 @@
     <h1 class="me-5 Avenir title_categories">Categorias Populares</h1>
 </div>
 
-<div class="container">
+<div class="container-xs container-lg">
     <div class="row">
 
-        <div class="col-4">
+        <div class="col-4 p-0 p-sm-0 p-md-2">
             <div class="container_categorias_popu">
                 <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/INICIO/TODO-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
                 <p class="titulo_categorias Avenir">TODO</p>
             </div>
         </div>
 
-        <div class="col-4">
+        <div class="col-4 p-0 p-sm-0 p-md-2">
             <div class="container_categorias_popu">
                 <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/INICIO/FACIAL-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
                 <p class="titulo_categorias Avenir">FACIAL</p>
             </div>
         </div>
 
-        <div class="col-4">
+        <div class="col-4 p-0 p-sm-0 p-md-2">
             <div class="container_categorias_popu">
                 <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/INICIO/CORPORAL-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
                 <p class="titulo_categorias Avenir">CORPORAL</p>
@@ -297,7 +283,7 @@
     </div>
 </div>
 
-<section class="category-banner my-auto mt-5" style="background-image: url('{{ asset('cosmika/INICIO/FONDO-ESENCIAS.png') }}')">
+<section class="category-banner my-auto mt-3 mt-md-5 mt-lg-5 mb-3 mb-md-5 mb-lg-5" style="background-image: url('{{ asset('cosmika/INICIO/FONDO-ESENCIAS.png') }}')">
     <div class="overlay"></div>
 
     <div class="row">

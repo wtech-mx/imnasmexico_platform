@@ -17,6 +17,10 @@
     <link href="{{asset('assets/user/custom/ecomeerce_cosmica.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/user/custom/ecomeerce_fuentes.css')}}" rel="stylesheet" />
 
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
     @yield('css_custom')
 
     <!-- Font Awesome Icons -->
@@ -85,6 +89,131 @@
     @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js'></script>
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+    <!-- jQuery (necesario para Owl Carousel) -->
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+
+    <!-- Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+    <script>
+        $("#corporalPopular").owlCarousel({
+            loop: true,
+            margin: 15,
+            nav: true,
+            navText: [
+                '<i class="bi bi-chevron-left"></i>',
+                '<i class="bi bi-chevron-right"></i>'
+            ],
+            autoplay: true, // Activar autoplay
+            autoplayTimeout: 3000, // Tiempo en milisegundos (3 segundos)
+            autoplayHoverPause: true, // Pausar autoplay al pasar el mouse
+            responsive: {
+                0: {
+                    items: 2
+                },
+                576: {
+                    items: 3
+                },
+                768: {
+                    items: 4
+                },
+                992: {
+                    items: 5
+                },
+                1200: {
+                    items: 6
+                }
+            }
+        });
+        $("#facialPopular").owlCarousel({
+            loop: true,
+            margin: 15,
+            nav: true,
+            navText: [
+                '<i class="bi bi-chevron-left"></i>',
+                '<i class="bi bi-chevron-right"></i>'
+            ],
+            autoplay: true, // Activar autoplay
+            autoplayTimeout: 3000, // Tiempo en milisegundos (3 segundos)
+            autoplayHoverPause: true, // Pausar autoplay al pasar el mouse
+            responsive: {
+                0: {
+                    items: 2
+                },
+                576: {
+                    items: 3
+                },
+                768: {
+                    items: 4
+                },
+                992: {
+                    items: 5
+                },
+                1200: {
+                    items: 6
+                }
+            }
+        });
+        $("#generalPopular").owlCarousel({
+            loop: true,
+            margin: 15,
+            nav: true,
+            navText: [
+                '<i class="bi bi-chevron-left"></i>',
+                '<i class="bi bi-chevron-right"></i>'
+            ],
+            autoplay: true, // Activar autoplay
+            autoplayTimeout: 3000, // Tiempo en milisegundos (3 segundos)
+            autoplayHoverPause: true, // Pausar autoplay al pasar el mouse
+            responsive: {
+                0: {
+                    items: 2
+                },
+                576: {
+                    items: 3
+                },
+                768: {
+                    items: 4
+                },
+                992: {
+                    items: 5
+                },
+                1200: {
+                    items: 6
+                }
+            }
+        });
+        $("#carousel_Single_Product").owlCarousel({
+            loop: true,
+            margin: 15,
+            nav: true,
+            navText: [
+                '<i class="bi bi-chevron-left"></i>',
+                '<i class="bi bi-chevron-right"></i>'
+            ],
+            autoplay: true, // Activar autoplay
+            autoplayTimeout: 3000, // Tiempo en milisegundos (3 segundos)
+            autoplayHoverPause: true, // Pausar autoplay al pasar el mouse
+            responsive: {
+                0: {
+                    items: 2
+                },
+                576: {
+                    items: 2
+                },
+                768: {
+                    items: 3
+                },
+                992: {
+                    items: 4
+                },
+                1200: {
+                    items: 4
+                }
+            }
+        });
+    </script>
 
     @yield('js')
 
