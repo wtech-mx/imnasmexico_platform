@@ -16,6 +16,7 @@
     #inputs_pickup {
         display: none;
     }
+
 </style>
 @endsection
 
@@ -161,7 +162,7 @@
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 p-3">
                 <p class="text-center tittle_modal_cka"> <strong>Detalles del cliente</strong> </p>
 
-                    <div class="col-12 mt-5">
+                    <div class="col-12">
 
                         <div class="accordion" id="accordionExample">
                             <div class="accordion-item" style="background: transparent;border: solid 1px transparent;">
