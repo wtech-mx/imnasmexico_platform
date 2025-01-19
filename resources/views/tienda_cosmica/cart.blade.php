@@ -8,7 +8,6 @@
     bg_single_product
 @endsection
 
-
 @section('css_custom')
 <link href="{{asset('assets/user/custom/ecomeerce_cosmica_cart.css')}}" rel="stylesheet" />
 <style>
@@ -135,21 +134,21 @@
 
                     <div class="col-4">
                         <p class="text-start ">
-                            Lunes a Viernes <br>
+                            <strong>Lunes a Viernes</strong> <br>
                             10:00 am - 7:00 pm <br><br>
                         </p>
                     </div>
 
                     <div class="col-4">
                         <p class="text-start ">
-                            Sábado <br>
+                            <strong>Sábado</strong> <br>
                             10:00 am - 5:00 pm <br><br>
                         </p>
                     </div>
 
                     <div class="col-4">
                         <p class="text-start ">
-                            Domingo <br>
+                            <strong>Domingo</strong> <br>
                             10:00 am - 5:00 pm
                         </p>
                     </div>
@@ -160,7 +159,7 @@
         </div>
 
             <div class="col-12 col-sm-12 col-md-6 col-lg-6 p-3">
-                <p class="text-center tittle_modal_cka">Detalles del cliente</p>
+                <p class="text-center tittle_modal_cka"> <strong>Detalles del cliente</strong> </p>
 
                     <div class="col-12 mt-5">
 

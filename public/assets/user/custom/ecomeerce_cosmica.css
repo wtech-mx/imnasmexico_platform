@@ -600,6 +600,17 @@ body{
     width: 50%;
 }
 
+.btn_pagar_checkout{
+    background: #000;
+    border-radius: 19px;
+    color: #F5ECE4;
+    border: solid 1px transparent;
+    padding: 10px 45px 10px 45px;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 6px 6px 15px -10px rgb(0 0 0 / 50%);
+}
+
 
 @media only screen and (max-width: 1200px) {
     .subtitle_linea {
