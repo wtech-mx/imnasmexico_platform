@@ -56,8 +56,8 @@
                                                         </p>
                                                     </td>
                                                     <td>
-                                                        <p style="color: {{ $registro_imnas->diseno_doc === 'Viejo' || $registro_imnas->diseno_doc === NULL ? '#836262' : '#66c0cc' }}">
-                                                         <b>Diseño: <br> {{ $registro_imnas->diseno_doc ?? 'Viejo' }}</b>
+                                                        <p style="color: {{ $registro_imnas->diseno_doc === 'Clasico' || $registro_imnas->diseno_doc === NULL ? '#836262' : '#66c0cc' }}">
+                                                         <b>Diseño: <br> {{ $registro_imnas->diseno_doc ?? 'Clasico' }}</b>
                                                         </p>
                                                     </td>
                                                     <td>

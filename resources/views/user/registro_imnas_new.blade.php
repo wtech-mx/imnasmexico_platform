@@ -209,7 +209,7 @@ Mi perfil- {{$cliente->name}}
                                                 <img class="img_profile_label" src="{{asset('assets/user/icons/todos-docs.webp')}}" alt="">
                                             </span>
                                             <select class="form-control" id="diseno_doc" name="diseno_doc" required>
-                                                <option value="Viejo">Diseño viejo</option>
+                                                <option value="Clasico">Diseño Clásico</option>
                                                 <option value="Nuevo">Diseño nuevo</option>
                                             </select>
                                         </div>
@@ -350,8 +350,8 @@ Mi perfil- {{$cliente->name}}
                                                 <td><p>{{ $registro_imnas->folio }}</p></td>
                                                 <td><p>{{ $registro_imnas->num_guia }}</p></td>
                                                 <td>
-                                                    <p style="color: {{ $registro_imnas->diseno_doc === 'Viejo' || $registro_imnas->diseno_doc === NULL ? '#836262' : '#66c0cc' }}">
-                                                        {{ $registro_imnas->diseno_doc ?? 'Viejo' }}
+                                                    <p style="color: {{ $registro_imnas->diseno_doc === 'Clasico' || $registro_imnas->diseno_doc === NULL ? '#836262' : '#66c0cc' }}">
+                                                        {{ $registro_imnas->diseno_doc ?? 'Clasico' }}
                                                     </p>
                                                 </td>
                                                 <td>

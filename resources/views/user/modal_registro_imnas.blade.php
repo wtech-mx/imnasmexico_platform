@@ -47,8 +47,8 @@
                 <div class="mb-4 col-6">
                     <label for="basic-url" class="form-label" style="font-weight: 700;">Tipo Diseño</label>
                     <div class="input-group">
-                        <p style="color: {{ $registro_imnas->diseno_doc === 'Viejo' || $registro_imnas->diseno_doc === NULL ? '#836262' : '#66c0cc' }}">
-                            {{ $registro_imnas->diseno_doc ?? 'Viejo' }}
+                        <p style="color: {{ $registro_imnas->diseno_doc === 'Clasico' || $registro_imnas->diseno_doc === NULL ? '#836262' : '#66c0cc' }}">
+                            {{ $registro_imnas->diseno_doc ?? 'Clasico' }}
                         </p>
                     </div>
                 </div>
