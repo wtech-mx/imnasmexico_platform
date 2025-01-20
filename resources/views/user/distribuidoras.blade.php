@@ -66,10 +66,12 @@
                 <p class="text-center">
                     <img class="img_reality_alumnas " src="{{asset('utilidades/distribuidoras.jpeg') }}" style="width: 80%;">
                 </p>
+
                 <p class="text-center">
                     <strong>{{ $item->User->name }}</strong> <br>
                     {{ $item->direccion_local }}
                 </p>
+
                 <div class="d-flex justify-content-center">
                     <a target="_blank" href=" {{ $item->direccion_rs_face }}" class="mt-2 mb-2" style="margin-left: 1rem;">
                         <img src="{{asset('assets/user/utilidades/facebook.png') }}" style="width:25px">
