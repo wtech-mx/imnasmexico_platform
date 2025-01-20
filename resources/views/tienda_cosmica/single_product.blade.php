@@ -27,7 +27,7 @@
             <div class="container_lineas_single_product">
                 <div class="content mb-3 mt-3">
                     <div class="img_container_single_product mx-auto">
-                        <img class="img_grid_products_single_product" src="{{ asset('cosmika/inicio/lineas/producto_4.png') }}" alt="Protector">
+                        <img class="img_grid_products_single_product" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
                     </div>
                 </div>
             </div>

@@ -36,9 +36,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('tienda.afiliadas') }}">Afiliadas</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('tienda.afiliadas') }}">Profesionales</a>
-                </li>
             </ul>
         </div>
 

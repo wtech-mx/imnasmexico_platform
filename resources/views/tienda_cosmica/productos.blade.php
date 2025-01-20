@@ -18,38 +18,186 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-12 mt-4 mt-sm-4 mt-md-3 mt-lg-4 mb-sm-4 mb-md-3 mb-lg-4">
+        <div class="col-12 mt-4 mt-sm-4 mt-md-3 mt-lg-4 mb-sm-2 mb-md-2 mb-lg-1">
             <h1>Todos Los Productos</h1>
         </div>
-    </div>
 
-    <div class="row">
+        <div class="col-12 mt-4 mt-sm-4 mt-md-3 mt-lg-5 mb-sm-4 mb-md-3 mb-lg-5">
+            <h2 class="subtitle_todas">Todas Las Líneas</h2>
 
-        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-            <div class="container_lineas_grid">
+            <ul class="nav nav-pills mt-4 mt-sm-4 mt-md-3 mt-lg-2 mb-sm-4 mb-md-3 mb-lg-4" id="pills-tab" role="tablist">
+                <li class="nav-item p-2" role="presentation">
+                  <button class="nav-link active" id="pills-todos-tab" data-bs-toggle="pill" data-bs-target="#pills-todos" type="button" role="tab" aria-controls="pills-todos" aria-selected="true">
+                    Todos
+                  </button>
+                </li>
 
-                <div class="content">
-                    <div class="icon_heart">
-                        <div class="d-flex justify-content-start">
-                            <img class="icon_card_product_grid" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="" style="width: 20px">
+                <li class="nav-item p-2" role="presentation">
+                  <button class="nav-link btn_product_nav" id="pills-facial-tab" data-bs-toggle="pill" data-bs-target="#pills-facial" type="button" role="tab" aria-controls="pills-facial" aria-selected="false">
+                    Facial
+                  </button>
+                </li>
+
+                <li class="nav-item p-2" role="presentation">
+                  <button class="nav-link btn_product_nav" id="pills-corporal-tab" data-bs-toggle="pill" data-bs-target="#pills-corporal" type="button" role="tab" aria-controls="pills-corporal" aria-selected="false">
+                    Corporal
+                  </button>
+                </li>
+            </ul>
+
+              <div class="tab-content" id="pills-tabContent">
+
+                <div class="tab-pane fade show active" id="pills-todos" role="tabpanel" aria-labelledby="pills-todos-tab" tabindex="0">
+                    <div class="row">
+
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                            <div class="container_lineas_single_carousel mx-auto" style="width:80%; ">
+                                <div class="content mb-3 mt-3">
+                                    <div class="img_container_single_corousel mx-auto">
+                                        <img class="img_grid_products_single_carousel" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2 class="text-center titulo_producto_carousel mt-4">
+                                <strong>Shampoo Facial</strong> <br>
+                                con Vitaminas 125 ml
+                            </h2>
+
+                            <h4 class="text-center price_producto_carousel mt-3">
+                                <strong class="">$200.00</strong>
+                            </h4>
+
+                            <p class="text-center">
+
+                                <a href="" class="text-center mt-3">
+                                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
+                                </a>
+                            </p>
+                            <p class="text-center">
+
+                                <a href="" class="text-center mt-3">
+                                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
+                                </a>
+                            </p>
+
                         </div>
+
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                            <div class="container_lineas_single_carousel mx-auto" style="width:80%; ">
+                                <div class="content mb-3 mt-3">
+                                    <div class="img_container_single_corousel mx-auto">
+                                        <img class="img_grid_products_single_carousel" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2 class="text-center titulo_producto_carousel mt-4">
+                                <strong>Shampoo Facial</strong> <br>
+                                con Vitaminas 125 ml
+                            </h2>
+
+                            <h4 class="text-center price_producto_carousel mt-3">
+                                <strong class="">$200.00</strong>
+                            </h4>
+
+                            <p class="text-center">
+
+                                <a href="" class="text-center mt-3">
+                                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
+                                </a>
+                            </p>
+                            <p class="text-center">
+
+                                <a href="" class="text-center mt-3">
+                                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
+                                </a>
+                            </p>
+
+                        </div>
+
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                            <div class="container_lineas_single_carousel mx-auto" style="width:80%; ">
+                                <div class="content mb-3 mt-3">
+                                    <div class="img_container_single_corousel mx-auto">
+                                        <img class="img_grid_products_single_carousel" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2 class="text-center titulo_producto_carousel mt-4">
+                                <strong>Shampoo Facial</strong> <br>
+                                con Vitaminas 125 ml
+                            </h2>
+
+                            <h4 class="text-center price_producto_carousel mt-3">
+                                <strong class="">$200.00</strong>
+                            </h4>
+
+                            <p class="text-center">
+
+                                <a href="" class="text-center mt-3">
+                                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
+                                </a>
+                            </p>
+                            <p class="text-center">
+
+                                <a href="" class="text-center mt-3">
+                                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
+                                </a>
+                            </p>
+                        </div>
+
+                        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                            <div class="container_lineas_single_carousel mx-auto" style="width:80%; ">
+                                <div class="content mb-3 mt-3">
+                                    <div class="img_container_single_corousel mx-auto">
+                                        <img class="img_grid_products_single_carousel" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2 class="text-center titulo_producto_carousel mt-4">
+                                <strong>Shampoo Facial</strong> <br>
+                                con Vitaminas 125 ml
+                            </h2>
+
+                            <h4 class="text-center price_producto_carousel mt-3">
+                                <strong class="">$200.00</strong>
+                            </h4>
+
+                            <p class="text-center">
+
+                                <a href="" class="text-center mt-3">
+                                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
+                                </a>
+                            </p>
+                            <p class="text-center">
+
+                                <a href="" class="text-center mt-3">
+                                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
+                                </a>
+                            </p>
+
+                        </div>
+
                     </div>
-                    <div class="img_container mx-auto">
-                        <img class="img_grid_products" src="{{ asset('cosmika/inicio/protector.png') }}" alt="Protector">
-                    </div>
-                    <h4 class="text-center Avenir color_2 title_lineagrid m-0">Protector</h4>
-                    <h5 class="text-center Avenir color_2 subtitle_lineagrid m-0">Solar 50 fps</h5>
-                    <p class="text-center">
-                        <a href="" class="btn btn_plus_grid">
-                            <img class="img_btn_plus_grid" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="">
-                        </a>
-                    </p>
                 </div>
-            </div>
+
+                <div class="tab-pane fade" id="pills-facial" role="tabpanel" aria-labelledby="pills-facial-tab" tabindex="0">
+
+                </div>
+
+                <div class="tab-pane fade" id="pills-corporal" role="tabpanel" aria-labelledby="pills-corporal-tab" tabindex="0">
+
+                </div>
+
+              </div>
 
         </div>
-
     </div>
+
+
 </div>
 
 @endsection
