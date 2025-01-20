@@ -277,11 +277,7 @@
         <b for="">Telefono Factura:</b> {{ $nota->telefono_fac }} <br>
         <b for="">Dirección:</b> {{ $nota->direccion_fac }}<br>
     @endif
-          </td>
-          <td></td>
-        </tr>
-
-      </table>
+     
 
   </div>
 </body>
