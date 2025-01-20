@@ -125,7 +125,7 @@ Route::get('/tienda/categories', [App\Http\Controllers\EcommerceCosmikaControlle
 Route::get('/tienda/filter', [App\Http\Controllers\EcommerceCosmikaController::class, 'filter'])->name('tienda.filter');
 Route::get('/tienda/about', [App\Http\Controllers\EcommerceCosmikaController::class, 'about'])->name('tienda.about');
 Route::get('/tienda/afiliadas', [App\Http\Controllers\EcommerceCosmikaController::class, 'afiliadas'])->name('tienda.afiliadas');
-
+Route::get('/tienda/productos', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos'])->name('tienda.productos');
 
 // =============== M O D U L O   F O L I O S ===============================
 Route::get('/buscar/folio', [App\Http\Controllers\FoliosController::class, 'index'])->name('folio.index');

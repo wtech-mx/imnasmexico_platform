@@ -41,5 +41,9 @@ class EcommerceCosmikaController extends Controller
         return view('tienda_cosmica.afiliadas');
     }
 
+    public function productos(){
+
+        return view('tienda_cosmica.productos');
+    }
 
 }

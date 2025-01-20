@@ -28,7 +28,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="">Productos</a>
+                    <a class="nav-link" href="{{ route('tienda.productos') }}">Productos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('tienda.about') }}">Sobre Nosotros</a>
