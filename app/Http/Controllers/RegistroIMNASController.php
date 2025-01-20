@@ -168,6 +168,7 @@ class RegistroIMNASController extends Controller
         $registro->comentario_cliente = $request->get('comentario_cliente');
         $registro->fecha_compra = date('Y-m-d');
         $registro->curp_escrito = $request->get('curp_escrito');
+        $registro->diseno_doc = $request->get('diseno_doc');
 
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){

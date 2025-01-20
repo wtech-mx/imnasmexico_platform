@@ -44,6 +44,15 @@
                     </div>
                 </div>
 
+                <div class="mb-4 col-6">
+                    <label for="basic-url" class="form-label" style="font-weight: 700;">Tipo Diseño</label>
+                    <div class="input-group">
+                        <p style="color: {{ $registro_imnas->diseno_doc === 'Viejo' || $registro_imnas->diseno_doc === NULL ? '#836262' : '#66c0cc' }}">
+                            {{ $registro_imnas->diseno_doc ?? 'Viejo' }}
+                        </p>
+                    </div>
+                </div>
+
                 <div class="mb-4 col-4">
                     <label for="basic-url" class="form-label" style="font-weight: 700;">INE</label>
                     @if (pathinfo($registro_imnas->ine, PATHINFO_EXTENSION) == 'pdf')

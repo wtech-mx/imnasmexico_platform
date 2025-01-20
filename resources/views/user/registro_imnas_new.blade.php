@@ -7,7 +7,7 @@ Mi perfil- {{$cliente->name}}
 @section('css_custom')
 <link href="{{asset('assets/user/custom/single_cours.css')}}" rel="stylesheet" />
 <link href="{{asset('assets/user/custom/perfil.css')}}" rel="stylesheet" />
-{{-- <link src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" /> --}}
+ {{-- <link src="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css" rel="stylesheet" />  --}}
 
 <style>
 
@@ -203,6 +203,19 @@ Mi perfil- {{$cliente->name}}
                                     </div>
 
                                     <div class="col-12 col-lg-6 form-group ">
+                                        <label for="">Diseño Documentos *</label>
+                                        <div class="input-group input-group-alternative mb-4">
+                                            <span class="input-group-text">
+                                                <img class="img_profile_label" src="{{asset('assets/user/icons/todos-docs.webp')}}" alt="">
+                                            </span>
+                                            <select class="form-control" id="diseno_doc" name="diseno_doc" required>
+                                                <option value="Viejo">Diseño viejo</option>
+                                                <option value="Nuevo">Diseño nuevo</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-lg-6 form-group ">
                                         <label for="">Comentario extra</label>
                                         <div class="input-group input-group-alternative mb-4">
                                             <span class="input-group-text">
@@ -323,6 +336,7 @@ Mi perfil- {{$cliente->name}}
                                         <th>Nombre</th>
                                         <th>Folio</th>
                                         <th>Guia</th>
+                                        <th>Diseño</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
@@ -335,6 +349,11 @@ Mi perfil- {{$cliente->name}}
                                                 </td>
                                                 <td><p>{{ $registro_imnas->folio }}</p></td>
                                                 <td><p>{{ $registro_imnas->num_guia }}</p></td>
+                                                <td>
+                                                    <p style="color: {{ $registro_imnas->diseno_doc === 'Viejo' || $registro_imnas->diseno_doc === NULL ? '#836262' : '#66c0cc' }}">
+                                                        {{ $registro_imnas->diseno_doc ?? 'Viejo' }}
+                                                    </p>
+                                                </td>
                                                 <td>
                                                     <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#modalUser{{ $registro_imnas->id }}" title="Ver"><i class="fa fa-eye"></i></a>
                                                 </td>
@@ -350,7 +369,7 @@ Mi perfil- {{$cliente->name}}
                     <div class="card_single_horizon">
                         <h2 class="title_curso">Documentos Finalizados</h2>
 
-                        <table class="table table-flush" id="datatable-search">
+                        <table class="table table-flush">
                             <thead class="thead">
                                 <tr>
                                     <th>Nombre</th>
@@ -449,12 +468,14 @@ Mi perfil- {{$cliente->name}}
 
 @section('js')
 {{-- <script src="{{asset('assets/admin/js/plugins/datatables.js')}}"></script> --}}
+<script src="{{asset('assets/admin/js/plugins/datatables.js')}}"></script>
 <script>
-    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search2", {
         deferRender:true,
         paging: true,
         pageLength: 10
     });
+
 </script>
 
 <script>
