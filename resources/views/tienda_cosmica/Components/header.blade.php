@@ -22,9 +22,9 @@
                         Categorías
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="">Facial</a></li>
-                        <li><a class="dropdown-item" href="">Corporal</a></li>
-                        <li><a class="dropdown-item" href="">Todo</a></li>
+                        <li><a class="dropdown-item" href="{{ route('tienda.productos_faciales') }}">Facial</a></li>
+                        <li><a class="dropdown-item" href="{{ route('tienda.productos_corporales') }}">Corporal</a></li>
+                        <li><a class="dropdown-item" href="{{ route('tienda.productos') }}">Todo</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

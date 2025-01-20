@@ -46,4 +46,16 @@ class EcommerceCosmikaController extends Controller
         return view('tienda_cosmica.productos');
     }
 
+    public function productos_faciales(){
+
+        return view('tienda_cosmica.productos_faciales');
+    }
+
+
+    public function productos_corporales(){
+
+        return view('tienda_cosmica.productos_corporales');
+    }
+
+
 }
