@@ -279,17 +279,25 @@ Mi perfil- {{$cliente->name}}
                                     @if (is_null($ticket->descuento))
                                         <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
                                     @else
-                                        <del style="color: #66C0CC"><strong>De ${{ $precio }}</strong></del>
-                                        <h5 style="color: #66C0CC"><strong>A ${{ $ticket->descuento }}</strong></h5>
+                                        @if ($ticket->nombre == 'Reconocimiento')
+                                            <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
+                                        @else
+                                            <del style="color: #66C0CC"><strong>De ${{ $precio }}</strong></del>
+                                            <h5 style="color: #66C0CC"><strong>A ${{ $ticket->descuento }}</strong></h5>
+                                        @endif
                                     @endif
                                 </div>
 
                                 <div class="col-6 col-lg-6 mt-3">
-                                    <p class="btn-holder">
-                                        <a class="btn_ticket_comprar text-center" href="{{ route('add.to.cart', $ticket->id) }}" role="button">
-                                            <i class="fas fa-ticket-alt"></i> Comprar
-                                        </a>
-                                    </p>
+                                    <form action="{{ route('add.to.cart', $ticket->id) }}" method="GET">
+                                        @csrf
+                                        <div class="input-group">
+                                            <input type="number" name="quantity" class="form-control" min="1" value="1" style="max-width: 70px; background: #66C0CC !important">
+                                            <button type="submit" class="btn_ticket_comprar text-center btn btn-primary" style="background: #66C0CC !important">
+                                                <i class="fas fa-ticket-alt"></i> Comprar
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
 
                                 <div class="col-12">
@@ -480,7 +488,6 @@ Mi perfil- {{$cliente->name}}
 
 <script>
     $(document).ready(function() {
-
         function capitalizeInput(input) {
             input.value = input.value
                 .toLowerCase()
@@ -489,27 +496,27 @@ Mi perfil- {{$cliente->name}}
         // Asigna la función a la ventana global si es necesario
         window.capitalizeInput = capitalizeInput;
 
-    $('#searchForm').on('submit', function(e) {
-        e.preventDefault(); // Evita que se recargue la página
+        $('#searchForm').on('submit', function(e) {
+            e.preventDefault(); // Evita que se recargue la página
 
-        var folio = $('#folio').val();
+            var folio = $('#folio').val();
 
-        $.ajax({
-            url: '{{ route("folio_registro.buscador") }}',
-            method: 'GET',
-            data: { folio: folio },
-            success: function(response) {
-                // Aquí puedes manejar la respuesta del servidor
-                // Por ejemplo, mostrar los datos en un div:
-                $('#resultsContainer').html(response);
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-                // Manejar errores aquí
-                console.error('Error: ', textStatus, errorThrown);
-            }
+            $.ajax({
+                url: '{{ route("folio_registro.buscador") }}',
+                method: 'GET',
+                data: { folio: folio },
+                success: function(response) {
+                    // Aquí puedes manejar la respuesta del servidor
+                    // Por ejemplo, mostrar los datos en un div:
+                    $('#resultsContainer').html(response);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    // Manejar errores aquí
+                    console.error('Error: ', textStatus, errorThrown);
+                }
+            });
         });
     });
-});
 
 </script>
 @endsection
