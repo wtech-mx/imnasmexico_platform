@@ -163,88 +163,96 @@ Mi perfil- {{$cliente->name}}
                             <form   method="POST" action="{{ route('update_clientes.imnas', $recien_comprado->id) }}" enctype="multipart/form-data" role="form" >
                                 @csrf
                                 <input type="hidden" name="_method" value="PATCH">
-                                <div class="row">
-                                    <input class="form-control" type="text" value="{{$recien_comprado->id_usuario}}" id="id_usuario" name="id_usuario" style="display: none">
+                                    <div class="row">
+                                        <input class="form-control" type="text" value="{{$recien_comprado->id_usuario}}" id="id_usuario" name="id_usuario" style="display: none">
 
-                                    <div class="col-12 col-lg-6 form-group ">
-                                        <label for="">Nombre completo *</label>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <span class="input-group-text">
-                                                <img class="img_profile_label" src="{{asset('assets/user/icons/ESTUDIANTE-.webp')}}" alt="">
-                                            </span>
+                                        <div class="col-12 col-lg-6 form-group ">
+                                            <label for="">Nombre completo *</label>
+                                            <div class="input-group input-group-alternative mb-4">
+                                                <span class="input-group-text">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/ESTUDIANTE-.webp')}}" alt="">
+                                                </span>
 
-                                            <input class="form-control" type="text" id="nombre" name="nombre" required oninput="capitalizeInput(this)">
+                                                <input class="form-control" type="text" id="nombre" name="nombre" required oninput="capitalizeInput(this)">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-lg-6 form-group ">
+                                            <label for="">Especialidad *</label>
+                                            <div class="input-group input-group-alternative mb-4">
+                                                <span class="input-group-text">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
+                                                </span>
+                                                @if ($recien_comprado->id_ticket == 1369)
+                                                    <input class="form-control" type="text" id="nom_curso" name="nom_curso" required oninput="capitalizeInput(this)">
+                                                @else
+                                                    <select class="form-control" id="nom_curso" name="nom_curso" required>
+                                                        @foreach ($especialidades as $especialidad)
+                                                        <option value="{{ $especialidad->especialidad }}">{{ $especialidad->especialidad }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-lg-6 form-group ">
+                                            <label for="">Fecha del curso *</label>
+                                            <div class="input-group input-group-alternative mb-4">
+                                                <span class="input-group-text">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/calendario.png')}}" alt="">
+                                                </span>
+
+                                                <input class="form-control" type="date"  id="fecha_curso" name="fecha_curso" required>
+                                            </div>
+                                        </div>
+
+                                        @if ($recien_comprado->id_ticket != 1369)
+                                            <div class="col-12 col-lg-6 form-group ">
+                                                <label for="">Diseño Documentos *</label>
+                                                <div class="input-group input-group-alternative mb-4">
+                                                    <span class="input-group-text">
+                                                        <img class="img_profile_label" src="{{asset('assets/user/icons/todos-docs.webp')}}" alt="">
+                                                    </span>
+                                                    <select class="form-control" id="diseno_doc" name="diseno_doc" required>
+                                                        <option value="Clasico">Diseño Clásico</option>
+                                                        <option value="Nuevo">Diseño nuevo</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        @endif
+
+                                        <div class="col-12 col-lg-6 form-group ">
+                                            <label for="">Comentario extra</label>
+                                            <div class="input-group input-group-alternative mb-4">
+                                                <span class="input-group-text">
+                                                    <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="">
+                                                </span>
+
+                                                <textarea class="form-control" cols="10" rows="2"  id="comentario_cliente" name="comentario_cliente"></textarea>
+                                            </div>
+                                        </div>
+
+                                        @if ($recien_comprado->id_ticket != 1369)
+                                            <div class="col-6 form-group mb-5">
+                                                <label for="ine">INE Frente y Atras *</label>
+                                                <input id="ine" name="ine" type="file" class="form-control ine_input" required>
+                                            </div>
+                                            <div class="col-6 form-group mb-5">
+                                                <label for="ine">CURP *</label>
+                                                <input id="curp_escrito" name="curp_escrito" type="text" class="form-control ine_input" required>
+                                            </div>
+                                            <div class="col-6 form-group mb-5">
+                                                <label for="ine">Foto cuadrada <b>Blanco y negro</b>*</label>
+                                                <input id="foto_cuadrada" name="foto_cuadrada" type="file" class="form-control ine_input" required>
+                                            </div>
+                                        @endif
+
+                                        <div class="col-12 col-lg-4 form-group ">
+                                            <button type="submit" class="btn_save_profile btn-lg" style="border: solid 0px;">
+                                                Guardar
+                                            </button>
                                         </div>
                                     </div>
-
-                                    <div class="col-12 col-lg-6 form-group ">
-                                        <label for="">Especialidad *</label>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <span class="input-group-text">
-                                                <img class="img_profile_label" src="{{asset('assets/user/icons/certificacion.webp')}}" alt="">
-                                            </span>
-                                            <select class="form-control" id="nom_curso" name="nom_curso" required>
-                                                @foreach ($especialidades as $especialidad)
-                                                <option value="{{ $especialidad->especialidad }}">{{ $especialidad->especialidad }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-lg-6 form-group ">
-                                        <label for="">Fecha del curso *</label>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <span class="input-group-text">
-                                                <img class="img_profile_label" src="{{asset('assets/user/icons/calendario.png')}}" alt="">
-                                            </span>
-
-                                            <input class="form-control" type="date"  id="fecha_curso" name="fecha_curso" required>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-lg-6 form-group ">
-                                        <label for="">Diseño Documentos *</label>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <span class="input-group-text">
-                                                <img class="img_profile_label" src="{{asset('assets/user/icons/todos-docs.webp')}}" alt="">
-                                            </span>
-                                            <select class="form-control" id="diseno_doc" name="diseno_doc" required>
-                                                <option value="Clasico">Diseño Clásico</option>
-                                                <option value="Nuevo">Diseño nuevo</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-12 col-lg-6 form-group ">
-                                        <label for="">Comentario extra</label>
-                                        <div class="input-group input-group-alternative mb-4">
-                                            <span class="input-group-text">
-                                                <img class="img_profile_label" src="{{asset('assets/user/icons/cuaderno.webp')}}" alt="">
-                                            </span>
-
-                                            <textarea class="form-control" cols="10" rows="2"  id="comentario_cliente" name="comentario_cliente"></textarea>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-6 form-group mb-5">
-                                        <label for="ine">INE Frente y Atras *</label>
-                                        <input id="ine" name="ine" type="file" class="form-control ine_input" required>
-                                    </div>
-                                    <div class="col-6 form-group mb-5">
-                                        <label for="ine">CURP *</label>
-                                        <input id="curp_escrito" name="curp_escrito" type="text" class="form-control ine_input" required>
-                                    </div>
-                                    <div class="col-6 form-group mb-5">
-                                        <label for="ine">Foto cuadrada <b>Blanco y negro</b>*</label>
-                                        <input id="foto_cuadrada" name="foto_cuadrada" type="file" class="form-control ine_input" required>
-                                    </div>
-
-                                    <div class="col-12 col-lg-4 form-group ">
-                                        <button type="submit" class="btn_save_profile btn-lg" style="border: solid 0px;">
-                                            Guardar
-                                        </button>
-                                    </div>
-                                </div>
                             </form>
                             <h4>NOTA</h4>
                             <h5 class=" mt-4 mb-4">
