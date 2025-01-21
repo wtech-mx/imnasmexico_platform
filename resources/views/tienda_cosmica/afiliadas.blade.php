@@ -59,81 +59,82 @@
             </h2>
         </div>
 
-        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-            <div class="container_lineas_afiliados">
-                <div class="content mb-3 mt-3">
-                    <div class="img_container_afiliados mx-auto">
-                        <img class="img_grid_afiliados" src="{{ asset('cosmika/inicio/lineas/nebulosa.png') }}" alt="Protector">
+        @foreach ($distribuidora as $index => $item)
+        @if ($index % 2 == 0)
+            <!-- Diseño 1 -->
+            <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                <div class="container_lineas_afiliados">
+                    <div class="content mb-3 mt-3">
+                        <div class="img_container_afiliados mx-auto">
+                            <img class="img_grid_afiliados" src="{{ asset('cosmika/inicio/lineas/nebulosa.png') }}" alt="Protector">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="container_lineas_afiliados mt-3 mb-3">
-                <div class="content">
-                    <div class="img_container_afiliados mx-auto">
-                        <img class="img_grid_afiliados" src="{{ asset('cosmika/inicio/ESTRELLAS-DORADAS.png') }}" alt="Protector">
+                <div class="container_lineas_afiliados mt-3 mb-3">
+                    <div class="content">
+                        <div class="img_container_afiliados mx-auto">
+                            <img class="img_grid_afiliados" src="{{ asset('cosmika/inicio/ESTRELLAS-DORADAS.png') }}" alt="Protector">
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <p class="text-center">
-                <strong>Teresa Isabel Garay Dominguez</strong> <br>
-                Calle Constitución de 1917,
-                Venustiano Carranza,
-                Chicoloapan, 56377 México
-            </p>
+                <p class="text-center">
+                    <strong>{{ $item->User->name }}</strong> <br>
+                    {{ $item->direccion_local }}
+                </p>
 
-            <div class="d-flex justify-content-center">
-                <a target="_blank" href="" class="mt-2 mb-2" style="margin-left: 1rem;">
-                    <img src="{{asset('assets/user/utilidades/facebook.png') }}" style="width:25px">
-                </a>
-                <a target="_blank" href="" class="mt-2 mb-2" style="margin-left: 1rem;">
-                    <img src="{{asset('assets/user/utilidades/instagram.png') }}" style="width:25px">
-                </a>
-                <a target="_blank" href="" class="mt-2 mb-2" style="margin-left: 1rem;">
-                    <img src="{{asset('assets/user/utilidades/whatsapp.png') }}" style="width:25px">
-                </a>
-            </div>
-
-        </div>
-
-        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-            <div class="container_lineas_afiliados_2">
-                <div class="content mb-3 mt-3">
-                    <div class="img_container_afiliados mx-auto">
-                        <img class="img_grid_afiliados" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
-                    </div>
+                <div class="d-flex justify-content-center">
+                    <a target="_blank" href="{{ $item->direccion_rs_face }}" class="mt-2 mb-2" style="margin-left: 1rem;">
+                        <img src="{{ asset('assets/user/utilidades/facebook.png') }}" style="width:25px">
+                    </a>
+                    <a target="_blank" href="{{ $item->direccion_rs_insta }}" class="mt-2 mb-2" style="margin-left: 1rem;">
+                        <img src="{{ asset('assets/user/utilidades/instagram.png') }}" style="width:25px">
+                    </a>
+                    <a target="_blank" href="https://api.whatsapp.com/send?phone=521{{ $item->direccion_rs_whats }}&text=Hola" class="mt-2 mb-2" style="margin-left: 1rem;">
+                        <img src="{{ asset('assets/user/utilidades/whatsapp.png') }}" style="width:25px">
+                    </a>
                 </div>
             </div>
-
-            <div class="container_lineas_afiliados_2 mt-3 mb-3">
-                <div class="content">
-                    <div class="img_container_afiliados mx-auto">
-                        <img class="img_grid_afiliados" src="{{ asset('cosmika/inicio/ESTRELLAS-DORADAS.png') }}" alt="Protector">
+        @else
+            <!-- Diseño 2 -->
+            <div class="col-6 col-sm-6 col-md-4 col-lg-3">
+                <div class="container_lineas_afiliados_2">
+                    <div class="content mb-3 mt-3">
+                        <div class="img_container_afiliados mx-auto">
+                            <img class="img_grid_afiliados" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
+                        </div>
                     </div>
                 </div>
+
+                <div class="container_lineas_afiliados_2 mt-3 mb-3">
+                    <div class="content">
+                        <div class="img_container_afiliados mx-auto">
+                            <img class="img_grid_afiliados" src="{{ asset('cosmika/inicio/ESTRELLAS-DORADAS.png') }}" alt="Protector">
+                        </div>
+                    </div>
+                </div>
+
+                <p class="text-center">
+                    <strong>{{ $item->User->name }}</strong> <br>
+                    {{ $item->direccion_local }}
+                </p>
+
+                <div class="d-flex justify-content-center">
+                    <a target="_blank" href="{{ $item->direccion_rs_face }}" class="mt-2 mb-2" style="margin-left: 1rem;">
+                        <img src="{{ asset('assets/user/utilidades/facebook.png') }}" style="width:25px">
+                    </a>
+                    <a target="_blank" href="{{ $item->direccion_rs_insta }}" class="mt-2 mb-2" style="margin-left: 1rem;">
+                        <img src="{{ asset('assets/user/utilidades/instagram.png') }}" style="width:25px">
+                    </a>
+                    <a target="_blank" href="https://api.whatsapp.com/send?phone=521{{ $item->direccion_rs_whats }}&text=Hola" class="mt-2 mb-2" style="margin-left: 1rem;">
+                        <img src="{{ asset('assets/user/utilidades/whatsapp.png') }}" style="width:25px">
+                    </a>
+                </div>
             </div>
+        @endif
+    @endforeach
 
-            <p class="text-center">
-                <strong>Teresa Isabel Garay Dominguez</strong> <br>
-                Calle Constitución de 1917,
-                Venustiano Carranza,
-                Chicoloapan, 56377 México
-            </p>
-
-            <div class="d-flex justify-content-center">
-                <a target="_blank" href="" class="mt-2 mb-2" style="margin-left: 1rem;">
-                    <img src="{{asset('assets/user/utilidades/facebook.png') }}" style="width:25px">
-                </a>
-                <a target="_blank" href="" class="mt-2 mb-2" style="margin-left: 1rem;">
-                    <img src="{{asset('assets/user/utilidades/instagram.png') }}" style="width:25px">
-                </a>
-                <a target="_blank" href="" class="mt-2 mb-2" style="margin-left: 1rem;">
-                    <img src="{{asset('assets/user/utilidades/whatsapp.png') }}" style="width:25px">
-                </a>
-            </div>
-
-        </div>
 
         </div>
     </div>

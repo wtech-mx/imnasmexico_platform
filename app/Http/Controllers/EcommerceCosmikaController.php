@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Products;
+use App\Models\Cosmikausers;
+
 use Illuminate\Http\Request;
+
 
 class EcommerceCosmikaController extends Controller
 {
@@ -53,7 +56,9 @@ class EcommerceCosmikaController extends Controller
 
     public function afiliadas(){
 
-        return view('tienda_cosmica.afiliadas');
+        $distribuidora = Cosmikausers::where('membresia','=','estelar')->where('membresia_estatus','=','Activa')->get();
+
+        return view('tienda_cosmica.afiliadas', compact('distribuidora'));
     }
 
     public function productos(){
