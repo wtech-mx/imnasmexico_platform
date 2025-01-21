@@ -7,7 +7,7 @@
     {{-- <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('favicon/'. $configuracion->favicon) }}"> --}}
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('favicon/'. $configuracion->favicon) }}">
 
-    <link rel="shortcut icon" href="{{asset('assets/user/logotipos/cosmica.png')}}" type="image/png">
+    <link rel="shortcut icon" href="{{ asset('cosmika/menu/logo.png') }}" type="image/png">
 
     <title>
         @yield('template_title') - {{$configuracion->nombre_sistema}}
@@ -66,16 +66,13 @@
 
     </style>
 
-
   </head>
 
   <body class="body @yield('body_custom')">
 
     @include('tienda_cosmica.Components.header')
 
-
     @yield('content')
-
 
     @include('tienda_cosmica.Components.footer')
 

@@ -65,6 +65,65 @@
                                         <input id="stock" name="stock" type="number" class="form-control" value="{{ $product->stock}}">
                                     </div>
 
+                                    <div class="form-group col-6">
+                                        <label for="name">Destacar</label>
+                                        <select class="form-control" id="favorito" name="favorito">
+                                            <option value="{{ $product->favorito }}">{{ $product->favorito }}</option>
+                                            <option value="Si">Si</option>
+                                            <option value="No">No</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-6">
+                                        <label for="name">Linea</label>
+                                        <select class="form-control" id="linea" name="linea">
+                                            <option value="{{ $product->linea }}">{{ $product->linea }}</option>
+                                            <option value="Facial">Facial</option>
+                                            <option value="Corporal">Corporal</option>
+                                        </select>
+                                    </div>
+
+
+                                    <div class="form-group col-6">
+                                        <label for="name">Sub Linea</label>
+                                        <select class="form-control" id="sublinea" name="sublinea">
+                                            <option value="{{ $product->sublinea }}">{{ $product->sublinea }}</option>
+                                            <option value="Astros">Linea Facial - Astros</option>
+                                            <option value="Eclipse">Linea Facial - Eclipse</option>
+                                            <option value="Flash">Linea Facial - Flash</option>
+                                            <option value="Galaxia">Linea Facial - Galaxia</option>
+                                            <option value="Renacer">Linea Facial - Renacer</option>
+                                            <option value="Constelacion">Linea Corporal - Constelacion</option>
+                                            <option value="Espectro">Linea Corporal - Espectro</option>
+                                            <option value="Lunar">Linea Corporal - Lunar</option>
+                                            <option value="Mascarillas Estelares">Linea Corporal - Mascarillas Estelares</option>
+                                            <option value="Nebulosa">Linea Corporal - Nebulosa</option>
+                                            <option value="Pluton">Linea Corporal - Pluton</option>
+                                            <option value="Solar">Linea Corporal - Solar</option>
+                                            <option value="Venus">Linea Corporal - Venus</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label for="num_estandar">Modo de Empleo</label>
+                                        <textarea name="modo_empleo" id="modo_empleo" cols="10" rows="3" class="form-control" >{{ $product->modo_empleo }}</textarea>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label for="num_estandar">Beneficios</label>
+                                        <textarea name="beneficios" id="beneficios" cols="10" rows="3" class="form-control" >{{ $product->beneficios }}</textarea>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label for="num_estandar">Ingredientes</label>
+                                        <textarea name="ingredientes" id="ingredientes" cols="10" rows="3" class="form-control" >{{ $product->ingredientes }}</textarea>
+                                    </div>
+
+                                    <div class="form-group col-12">
+                                        <label for="num_estandar">Precauciones</label>
+                                        <textarea name="precauciones" id="precauciones" cols="10" rows="3" class="form-control" >{{ $product->precauciones }}</textarea>
+                                    </div>
+
                                     <div class="form-group col-12">
                                         <label for="num_estandar">descripcion</label>
                                         <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control" >{{ $product->descripcion }}</textarea>

@@ -3,10 +3,12 @@
 @section('template_title')
     Products
 @endsection
+
 @section('css')
     <link href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css" rel="stylesheet">
 @endsection
+
 @section('content')
 
 <div class="container-fluid mt-3">
@@ -338,6 +340,15 @@
             $('#titulo_modal').val(product.nombre);
             $('#descripcion').val(product.descripcion);
             $('#categoria').val(product.categoria);
+
+            $('#linea').val(product.linea);
+            $('#sublinea').val(product.sublinea);
+            $('#modo_empleo').val(product.modo_empleo);
+            $('#beneficios').val(product.beneficios);
+            $('#ingredientes').val(product.ingredientes);
+            $('#precauciones').val(product.precauciones);
+            $('#favorito').val(product.favorito);
+
             $('#precio_normal').val(product.precio_normal);
             $('#stock').val(product.stock);
             $('#stock_cosmica').val(product.stock_cosmica);
@@ -442,6 +453,15 @@
               stock_nas: $('#stock_nas').val(),
               stock: $('#stock').val(),
               descripcion: $('#descripcion').val(),
+
+              linea: $('#linea').val(),
+              sublinea: $('#sublinea').val(),
+              modo_empleo: $('#modo_empleo').val(),
+              beneficios: $('#beneficios').val(),
+              ingredientes: $('#ingredientes').val(),
+              precauciones: $('#precauciones').val(),
+              favorito: $('#favorito').val(),
+
               imagenes: $('#imagenes').val(),
               _token: $('meta[name="csrf-token"]').attr('content'), // Token CSRF
               _method: 'PATCH' // Especificamos el método PATCH para Laravel

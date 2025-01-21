@@ -337,6 +337,13 @@ class ProductsController extends Controller
             'laboratorio' => $product->laboratorio,
             'categoria' => $product->categoria,
             'subcategoria' => $product->subcategoria,
+            'linea' => $product->linea,
+            'sublinea' => $product->sublinea,
+            'modo_empleo' => $product->modo_empleo,
+            'beneficios' => $product->beneficios,
+            'ingredientes' => $product->ingredientes,
+            'precauciones' => $product->precauciones,
+            'favorito' => $product->favorito,
             'tipo_cambio' => $tipo,
         ];
 
@@ -350,6 +357,14 @@ class ProductsController extends Controller
         $product->stock = $request->get('stock');
         $product->stock_nas = $suma_nas;
         $product->stock_cosmica = $suma;
+        $product->linea = $request->get('linea');
+        $product->sublinea = $request->get('sublinea');
+        $product->modo_empleo = $request->get('modo_empleo');
+        $product->beneficios = $request->get('beneficios');
+        $product->ingredientes = $request->get('ingredientes');
+        $product->precauciones = $request->get('precauciones');
+        $product->favorito = $request->get('favorito');
+
         $product->update();
 
         return response()->json([
