@@ -66,8 +66,63 @@ class EcommerceCosmikaController extends Controller
     }
 
     public function productos_faciales(){
+        $products_constelacion = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Constelacion')
+        ->orderBy('nombre','ASC')
+        ->get();
 
-        return view('tienda_cosmica.productos_faciales');
+        $products_espectro = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Constelacion')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        $products_lunar = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Lunar')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        $products_mascarillas = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Mascarillas Estelares')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        $products_nebulosa = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Nebulosa')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        $products_pluton = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Pluton')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        $products_solar = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Solar')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        $products_venus = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Venus')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        return view('tienda_cosmica.productos_faciales', compact('products_constelacion', 'products_espectro', 'products_lunar', 'products_mascarillas', 'products_nebulosa', 'products_pluton', 'products_solar', 'products_venus'));
     }
 
 
