@@ -501,6 +501,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/admin/listas/comprobante/mp/{id}', [App\Http\Controllers\CursosController::class, 'imprimir_mp'])->name('lista.imprimir_mp');
 
     Route::get('/admin/notas/productos', [App\Http\Controllers\NotasProductosController::class, 'index'])->name('notas_productos.index');
+    Route::get('/admin/notas/ventas/get-descuento/{id}', [App\Http\Controllers\NotasProductosController::class, 'ventas_cliente']);
     Route::get('/admin/productos/create', [App\Http\Controllers\NotasProductosController::class, 'create'])->name('notas_productos.create');
     Route::post('/admin/notas/productos/store', [App\Http\Controllers\NotasProductosController::class, 'store'])->name('notas_productos.store');
     Route::get('/admin/notas/productos/edit/{id}', [App\Http\Controllers\NotasProductosController::class, 'edit'])->name('notas_productos.edit');

@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PlantillaNuevoUser;
+use App\Models\Cosmikausers;
 use App\Models\ProductosBundleId;
 use App\Models\Products;
 use App\Models\HistorialVendidos;
@@ -84,6 +85,21 @@ class NotasProductosController extends Controller
         $products = Products::orderBy('nombre','ASC')->where('categoria', '!=', 'Ocultar')->get();
 
         return view('admin.notas_productos.create', compact('products', 'clientes'));
+    }
+
+    public function ventas_cliente($id){
+        $user = Cosmikausers::where('id_cliente', $id)->first();
+
+        if ($user && $user->membresia_estatus === 'Activa') {
+            return response()->json([
+                'status' => 'activo',
+                'membresia' => $user->membresia,
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'inactivo',
+            ]);
+        }
     }
 
     public function store(request $request){
@@ -178,6 +194,24 @@ class NotasProductosController extends Controller
         $notas_productos->monto2 = $request->get('monto2');
         $tipoNota = $notas_productos->tipo_nota;
 
+        if($request->id_client == NULL){
+        }else{
+            if(Cosmikausers::where('id_cliente', $notas_productos->id_usuario)->exists()){
+                $distribuidora = Cosmikausers::where('id_cliente', $notas_productos->id_usuario)->first();
+                $suma = $distribuidora->puntos_acomulados + $notas_productos->total;
+
+                // Obtener solo los múltiplos de 1000
+                $puntos_sumar = floor($suma / 1000) * 1000;
+
+                // Solo sumar si puntos_sumar es mayor o igual a 1000
+                if ($puntos_sumar >= 1000) {
+                    $distribuidora->puntos_acomulados = $puntos_sumar;
+                    $distribuidora->consumido_totalmes = $suma;
+                    $distribuidora->update();
+                }
+            }
+        }
+
         // Obtener todos los folios del tipo de nota específico
         $folios = NotasProductos::where('tipo_nota', $tipoNota)->pluck('folio');
 
@@ -241,43 +275,53 @@ class NotasProductosController extends Controller
             $nuevosCampos4 = $request->input('descuento_prod');
 
             foreach ($nuevosCampos as $index => $campo) {
+                if (!$campo) {
+                    // Si no se seleccionó un producto (campo vacío), omitir este ciclo.
+                    continue;
+                }
+
                 $producto = Products::where('nombre', $campo)->where('categoria', '!=', 'Ocultar')->first();
 
-                if ($producto && $producto->subcategoria == 'Kit') {
-                    $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
+                if ($producto) {
+                    if ($producto && $producto->subcategoria == 'Kit') {
+                        $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
 
-                    foreach ($productos_bundle as $producto_bundle) {
+                        foreach ($productos_bundle as $producto_bundle) {
+                            $notas_inscripcion = new ProductosNotasId;
+                            $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                            $notas_inscripcion->producto = $producto_bundle->producto;
+                            $notas_inscripcion->price = '0';
+                            $notas_inscripcion->cantidad = $producto_bundle->cantidad;
+                            $notas_inscripcion->save();
+                        }
+
+                        // Asignar el ID del kit en la columna correspondiente
+                        if ($contadorKits <= 6) { // Controlar un máximo de 6 kits
+                            $columnaKit = "id_kit" . ($contadorKits > 1 ? $contadorKits : "");
+                            $notas_productos->$columnaKit = $producto->id;
+                            $contadorKits++;
+                        }
+                    }elseif($producto->subcategoria == 'Tiendita'){
                         $notas_inscripcion = new ProductosNotasId;
                         $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                        $notas_inscripcion->producto = $producto_bundle->producto;
-                        $notas_inscripcion->price = '0';
-                        $notas_inscripcion->cantidad = $producto_bundle->cantidad;
+                        $notas_inscripcion->producto = $campo;
+                        $notas_inscripcion->price = $nuevosCampos2[$index];
+                        $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                        $notas_inscripcion->descuento = $nuevosCampos4[$index];
+                        $notas_inscripcion->estatus = 1;
+                        $notas_inscripcion->save();
+                    }else{
+                        $notas_inscripcion = new ProductosNotasId;
+                        $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                        $notas_inscripcion->producto = $campo;
+                        $notas_inscripcion->price = $nuevosCampos2[$index];
+                        $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                        $notas_inscripcion->descuento = $nuevosCampos4[$index];
                         $notas_inscripcion->save();
                     }
-
-                    // Asignar el ID del kit en la columna correspondiente
-                    if ($contadorKits <= 6) { // Controlar un máximo de 6 kits
-                        $columnaKit = "id_kit" . ($contadorKits > 1 ? $contadorKits : "");
-                        $notas_productos->$columnaKit = $producto->id;
-                        $contadorKits++;
-                    }
-                }elseif($producto->subcategoria == 'Tiendita'){
-                    $notas_inscripcion = new ProductosNotasId;
-                    $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                    $notas_inscripcion->producto = $campo;
-                    $notas_inscripcion->price = $nuevosCampos2[$index];
-                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                    $notas_inscripcion->descuento = $nuevosCampos4[$index];
-                    $notas_inscripcion->estatus = 1;
-                    $notas_inscripcion->save();
-                }else{
-                    $notas_inscripcion = new ProductosNotasId;
-                    $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                    $notas_inscripcion->producto = $campo;
-                    $notas_inscripcion->price = $nuevosCampos2[$index];
-                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                    $notas_inscripcion->descuento = $nuevosCampos4[$index];
-                    $notas_inscripcion->save();
+                } else {
+                    // Si el producto no existe, puedes omitir este ciclo o manejar el error según tu lógica.
+                    continue;
                 }
             }
             $notas_productos->save();

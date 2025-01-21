@@ -95,6 +95,8 @@
                                         </div>
                                     </div>
 
+                                    <h3 style="color:#783E5D" id="membresia-info"></h3>
+
                                     <div class="col-12 mt-5">
                                         <h2 style="color:#836262"><strong>Seleciona los productos</strong> </h2>
                                     </div>
@@ -422,6 +424,49 @@
 
         $(document).ready(function() {
             $('.cliente').select2();
+
+            var clienteData = null;
+            $('#id_client').on('change', function() {
+            var clienteId = $(this).val();
+
+            if (clienteId) {
+                $.ajax({
+                    url: '/admin/notas/ventas/get-descuento/' + clienteId,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        var clienteData = data;
+                        var membresiaInfo = '';
+
+                        if (data.status === 'activo') {
+                            if (data.membresia === 'Cosmos') {
+                                $('#descuento').val(40);
+                                membresiaInfo = 'Membresía: Cosmos';
+                                $('#descuento_prod').prop('disabled', false);
+                            } else if (data.membresia === 'Estelar') {
+                                $('#descuento').val(60);
+                                membresiaInfo = 'Membresía: Estelar';
+                                $('#descuento_prod').prop('disabled', false);
+                            }
+                        } else {
+                            $('#descuento').val(0); // Opcional: Resetear si no está activo
+                            membresiaInfo = 'El cliente no tiene una membresía activa';
+                            $('#descuento_prod').prop('disabled', false);
+                        }
+
+                        // Actualiza el contenido del h4 con la información de la membresía
+                        $('#membresia-info').text(membresiaInfo);
+                        actualizarSubtotal();
+                    }
+                });
+            } else {
+                $('#membresia-info').text('');
+                $('#descuento').val(0); // Opcional: Resetear si no hay cliente seleccionado
+                clienteData = null;
+                actualizarSubtotal();
+            }
+        });
+
             function formatProduct(producto) {
                 if (!producto.id) {
                     return producto.text;
