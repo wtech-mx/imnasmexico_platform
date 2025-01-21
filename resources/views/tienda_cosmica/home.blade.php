@@ -68,14 +68,14 @@
     <div id="facialPopular" class="owl-carousel">
 
         <div class="item ">
-            <a href="{{ route('tienda.productos_faciales') }}#pills-nebulosa">
+            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-nebulosa">
                 <div class="container_lineas_slide">
 
                     <div class="content mb-3 mt-3">
                         <div class="img_container mx-auto">
                             <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/nebulosa.png') }}" alt="Protector">
                         </div>
-                        <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
+                        <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
                         <h5 class="text-center  Quinsi text-white subtitle_linea m-0">NEBULOSA</h5>
                     </div>
 
@@ -84,14 +84,14 @@
         </div>
 
         <div class="item">
-            <a href="{{ route('tienda.productos_faciales') }}#pills-constelacion">
+            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-constelacion">
                 <div class="container_lineas_grid">
 
                     <div class="content mb-3 mt-3">
                         <div class="img_container mx-auto">
                             <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
                         <h5 class="text-center Quinsi color_2 subtitle_linea m-0">CONSTELACION</h5>
                     </div>
 
@@ -100,14 +100,14 @@
         </div>
 
         <div class="item ">
-            <a href="{{ route('tienda.productos_faciales') }}#pills-venus">
+            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-venus">
                 <div class="container_lineas_slide">
 
                     <div class="content mb-3 mt-3">
                         <div class="img_container mx-auto">
                             <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-6.png') }}" alt="Protector">
                         </div>
-                        <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
+                        <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
                         <h5 class="text-center  Quinsi text-white subtitle_linea m-0">VENUS</h5>
                     </div>
 
@@ -116,14 +116,14 @@
         </div>
 
         <div class="item ">
-            <a href="{{ route('tienda.productos_faciales') }}#pills-espectro">
+            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-espectro">
                 <div class="container_lineas_grid">
 
                     <div class="content mb-3 mt-3">
                         <div class="img_container mx-auto">
                             <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-4.png') }}" alt="Protector">
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
                         <h5 class="text-center  Quinsi color_2 subtitle_linea m-0">ESPECTRO</h5>
                     </div>
 
@@ -132,14 +132,14 @@
         </div>
 
         <div class="item">
-            <a href="{{ route('tienda.productos_faciales') }}#pills-mascarillas">
+            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-mascarillas">
                 <div class="container_lineas_slide">
 
                     <div class="content mb-3 mt-3">
                         <div class="img_container mx-auto">
                             <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-5.png') }}" alt="Protector">
                         </div>
-                        <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
+                        <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
                         <h5 class="text-center Quinsi text-white subtitle_linea m-0">ESTELAR</h5>
                     </div>
 
@@ -148,14 +148,14 @@
         </div>
 
         <div class="item">
-            <a href="{{ route('tienda.productos_faciales') }}#pills-pluton">
+            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-pluton">
                 <div class="container_lineas_grid">
 
                     <div class="content mb-3 mt-3">
                         <div class="img_container mx-auto">
                             <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto_13.png') }}" alt="Protector">
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
                         <h5 class="text-center Quinsi color_2 subtitle_linea m-0">PLUTÓN</h5>
                     </div>
 
@@ -164,14 +164,14 @@
         </div>
 
         <div class="item">
-            <a href="{{ route('tienda.productos_faciales') }}#pills-solar">
+            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-solar">
                 <div class="container_lineas_slide">
 
                     <div class="content mb-3 mt-3">
                         <div class="img_container mx-auto">
                             <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-7.png') }}" alt="Protector">
                         </div>
-                        <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
+                        <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
                         <h5 class="text-center Quinsi text-white subtitle_linea m-0">SOLAR</h5>
                     </div>
 
@@ -180,14 +180,14 @@
         </div>
 
         <div class="item">
-            <a href="{{ route('tienda.productos_faciales') }}#pills-lunar">
+            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-lunar">
                 <div class="container_lineas_grid">
 
                     <div class="content mb-3 mt-3">
                         <div class="img_container mx-auto">
                             <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-3.png') }}" alt="Protector">
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
                         <h5 class="text-center Quinsi color_2 subtitle_linea m-0">LUNAR</h5>
                     </div>
 
@@ -216,7 +216,7 @@
                     <div class="img_container mx-auto">
                         <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-1.png') }}" alt="Protector">
                     </div>
-                    <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
+                    <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
                     <h5 class="text-center  Quinsi text-white subtitle_linea m-0">RENACER</h5>
                 </div>
             </div>
@@ -229,7 +229,7 @@
                     <div class="img_container mx-auto">
                         <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-9.png') }}" alt="Protector">
                     </div>
-                    <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                    <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
                     <h5 class="text-center Quinsi color_2 subtitle_linea m-0">FLASH</h5>
                 </div>
 
@@ -243,7 +243,7 @@
                     <div class="img_container mx-auto">
                         <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-8.png') }}" alt="Protector">
                     </div>
-                    <h4 class="text-center  Avenir text-white title_linea m-0">Linea</h4>
+                    <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
                     <h5 class="text-center  Quinsi text-white subtitle_linea m-0">ASTROS</h5>
                 </div>
             </div>
@@ -256,7 +256,7 @@
                     <div class="img_container mx-auto">
                         <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-10.png') }}" alt="Protector">
                     </div>
-                    <h4 class="text-center  Avenir color_2 title_linea m-0">Linea</h4>
+                    <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
                     <h5 class="text-center Quinsi color_2 subtitle_linea m-0">GALAXIA</h5>
                 </div>
 
@@ -268,7 +268,7 @@
 </div>
 
 <div class="container-fluid d-flex align-items-center justify-content-between container_encabezado mt-5 mb-4">
-    <hr class="flex-grow-1 mx-3 hr_categories" style="">
+    <hr class="flex-grow-1 mx-3 hr_categorie    s" style="">
     <h1 class="me-5 Avenir title_categories">Categorias Populares</h1>
 </div>
 
