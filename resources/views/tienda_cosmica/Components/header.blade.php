@@ -6,7 +6,7 @@
         </button>
 
         <!-- Logo centrado -->
-        <a class="navbar-brand mx-auto order-lg-2 position-absolute start-50 translate-middle-x" href="#">
+        <a class="navbar-brand mx-auto order-lg-2 position-absolute start-50 translate-middle-x" href="{{ route('tienda.home') }}">
             <img src="{{ asset('cosmika/menu/logo.png') }}" alt="Logo" style="width: 80px;">
         </a>
 
@@ -34,7 +34,7 @@
                     <a class="nav-link" href="{{ route('tienda.about') }}">Sobre Nosotros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('tienda.afiliadas') }}">Afiliadas</a>
+                    <a class="nav-link" href="{{ route('tienda.afiliadas') }}">Distribuidoras</a>
                 </li>
             </ul>
         </div>

@@ -9,9 +9,17 @@
                 </p>
                 <p class="text-center text-white">- Cósmica Skin</p>
                 <p class="text-center">
-                    <img src="{{ asset('cosmika/inicio/fb.png') }}" alt="" class="img_estrellas_footer">
-                    <img src="{{ asset('cosmika/inicio/ig.png') }}" alt="" class="img_estrellas_footer">
-                    <img src="{{ asset('cosmika/inicio/wp.png') }}" alt="" class="img_estrellas_footer">
+                    <a target="_blank" href="">
+                        <img src="{{ asset('cosmika/inicio/fb.png') }}" alt="" class="img_estrellas_footer">
+                    </a>
+
+                    <a target="_blank" href="https://www.instagram.com/cosmica.skin?igsh=MXAwMGkzbW1pMGxnMQ==">
+                        <img src="{{ asset('cosmika/inicio/ig.png') }}" alt="" class="img_estrellas_footer">
+                    </a>
+
+                    <a target="_blank" href="https://wa.link/j4xywk">
+                        <img src="{{ asset('cosmika/inicio/wp.png') }}" alt="" class="img_estrellas_footer">
+                    </a>
 
                 </p>
             </div>
@@ -29,7 +37,7 @@
                     <h5 class="text-white text-center mb-3 mt-3">Paginas</h5>
                     <ul class="text-white nav flex-column" style="align-items: center;">
                         <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">
+                            <a href="{{ route('tienda.home') }}" class="text-white nav-link p-0">
                             <i class="text-white bi bi-envelope"></i> Inicio</a>
                         </li>
 
@@ -39,24 +47,24 @@
                         </li>
 
                         <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">
+                            <a href="{{ route('tienda.productos') }}" class="text-white nav-link p-0">
                             <i class="text-white bi bi-instagram"></i> Productos</a>
                         </li>
 
                         <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">
+                            <a href="{{ route('tienda.about') }}" class="text-white nav-link p-0">
                             <i class="text-white bi bi-facebook"></i> Sobre Nosotros</a>
                         </li>
 
                         <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">
+                            <a href="{{ route('tienda.afiliadas') }}" class="text-white nav-link p-0">
                             <i class="text-white bi bi-youtube"></i> Distribuidoras</a>
                         </li>
 
-                        <li class="text-white nav-item mb-2">
+                        {{-- <li class="text-white nav-item mb-2">
                             <a href="#" class="text-white nav-link p-0">
                             <i class="text-white bi bi-youtube"></i> Profesionales</a>
-                        </li>
+                        </li> --}}
 
                         <li class="text-white nav-item mb-2">
                             <a href="#" class="text-white nav-link p-0">
@@ -74,15 +82,15 @@
                         </li>
 
                         <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">Aviso de Provacidad</a>
+                            <a target="_blank" href="#" class="text-white nav-link p-0">Aviso de Provacidad</a>
                         </li>
 
                         <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">5637540093</a>
+                            <a target="_blank" href="https://wa.link/j4xywk" class="text-white nav-link p-0">5637540093</a>
                         </li>
 
                         <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">Castilla 136, Álamos, Benito Juarez, 03400</a>
+                            <a target="_blank" href="https://maps.app.goo.gl/2NV3JD3rVz3BqDtHA" class="text-white nav-link p-0">Castilla 136, Álamos, Benito Juarez, 03400</a>
                         </li>
 
                         <li class="text-white nav-item mb-2">

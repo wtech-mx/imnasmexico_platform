@@ -528,7 +528,6 @@
 
     });
 
-
   </script>
 
 @endsection

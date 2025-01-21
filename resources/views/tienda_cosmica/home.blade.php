@@ -260,24 +260,30 @@
     <div class="row">
 
         <div class="col-4 p-0 p-sm-0 p-md-2">
-            <div class="container_categorias_popu">
-                <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/inicio/TODO-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
-                <p class="titulo_categorias Avenir">TODO</p>
-            </div>
+            <a href="{{ route('tienda.productos') }}" class="d-block text-decoration-none">
+                <div class="container_categorias_popu">
+                    <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/inicio/TODO-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
+                    <p class="titulo_categorias Avenir">TODO</p>
+                </div>
+            </a>
         </div>
 
         <div class="col-4 p-0 p-sm-0 p-md-2">
-            <div class="container_categorias_popu">
-                <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/inicio/FACIAL-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
-                <p class="titulo_categorias Avenir">FACIAL</p>
-            </div>
+            <a href="{{ route('tienda.productos_faciales') }}" class="d-block text-decoration-none">
+                <div class="container_categorias_popu">
+                    <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/inicio/FACIAL-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
+                    <p class="titulo_categorias Avenir">FACIAL</p>
+                </div>
+            </a>
         </div>
 
         <div class="col-4 p-0 p-sm-0 p-md-2">
-            <div class="container_categorias_popu">
-                <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/inicio/CORPORAL-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
-                <p class="titulo_categorias Avenir">CORPORAL</p>
-            </div>
+            <a href="{{ route('tienda.productos_corporales') }}" class="d-block text-decoration-none">
+                <div class="container_categorias_popu">
+                    <div class="img_container_categorias_popu" style="background: url('{{ asset('cosmika/inicio/CORPORAL-CHICA.png') }}') #ffffff00 50% / cover no-repeat;"></div>
+                    <p class="titulo_categorias Avenir">CORPORAL</p>
+                </div>
+            </a>
         </div>
 
     </div>
