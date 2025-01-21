@@ -11,8 +11,14 @@ use Illuminate\Http\Request;
 class EcommerceCosmikaController extends Controller
 {
     public function home(){
+        $products_popular = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->inRandomOrder()
+        ->take(15)
+        ->get();
 
-        return view('tienda_cosmica.home');
+        return view('tienda_cosmica.home', compact('products_popular'));
     }
 
     public function single_product($sku){
