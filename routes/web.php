@@ -336,7 +336,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/admin/cursos/recordatorios/store', [App\Http\Controllers\CursosController::class, 'recordatorios_store'])->name('recordatorio.store');
 
     Route::post('/cursos/{id}/duplicar', [App\Http\Controllers\CursosController::class, 'duplicar'])->name('cursos.duplicar');
-
+    Route::post('/cursos/inscripcion/masiva', [App\Http\Controllers\CursosController::class, 'inscribirUsuarios'])->name('masiva.inscripcion');
     // =============== M O D U L O  Profesores ===============================
     Route::get('/admin/profesores', [App\Http\Controllers\ProfesoresController::class, 'index_profesores'])->name('profesores.index');
     Route::post('/admin/profesores/store', [App\Http\Controllers\ProfesoresController::class, 'store_profesores'])->name('profesores.store');

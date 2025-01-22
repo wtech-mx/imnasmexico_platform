@@ -44,6 +44,7 @@ class CursosController extends Controller
     }
 
     public function filtro(Request $request){
+        $fechaActual = date('Y-m-d');
         $cursos = Cursos::orderBy('fecha_inicial', 'DESC');
 
         if( $request->fecha_inicial_de && $request->fecha_inicial_a ){
@@ -51,8 +52,9 @@ class CursosController extends Controller
                                      ->where('fecha_inicial', '<=', $request->fecha_inicial_a);
         }
         $cursos = $cursos->get();
+        $cursos_modal = CursosTickets::where('fecha_final','>=', $fechaActual)->orderBy('nombre', 'DESC')->get();
 
-        return view('admin.cursos.index_dia', compact('cursos'));
+        return view('admin.cursos.index_dia', compact('cursos', 'cursos_modal'));
     }
 
     public function index_dia(Request $request)
@@ -69,7 +71,9 @@ class CursosController extends Controller
         ->with('orderTicket')
         ->get();
 
-        return view('admin.cursos.index_dia', compact('cursos'));
+        $cursos_modal = CursosTickets::where('fecha_final','>=', $fechaActual)->orderBy('nombre', 'DESC')->get();
+
+        return view('admin.cursos.index_dia', compact('cursos', 'cursos_modal'));
     }
 
     public function index_mes(Request $request)
@@ -513,6 +517,7 @@ class CursosController extends Controller
 
     public function listas($id)
     {
+        $fechaActual = date('Y-m-d');
         $curso = Cursos::find($id);
         $ordenes = OrdersTickets::where('id_curso', $id)->get();
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
@@ -525,7 +530,6 @@ class CursosController extends Controller
             'Puebla', 'Querétaro', 'Quintana Roo', 'San Luis Potosí', 'Sinaloa', 'Sonora',
             'Tabasco', 'Tamaulipas', 'Tlaxcala', 'Veracruz', 'Yucatán', 'Zacatecas'
         ];
-
         return view('admin.cursos.listas', compact('ordenes', 'tickets', 'curso','tipo_documentos','estados'));
     }
 
@@ -666,5 +670,51 @@ class CursosController extends Controller
 
         Session::flash('success', 'Se ha guardado sus datos con exito');
         return redirect()->back()->with('success', 'curso actualizado con exito.');
+    }
+
+    public function inscribirUsuarios(Request $request){
+
+        $cursoOrigen = $request->curso_origen;
+        $cursoDestino = $request->curso_destino;
+        $fechaActual = date('Y-m-d');
+
+        // Obtener los usuarios únicos inscritos en el curso de origen (sin duplicados)
+        $usuariosInscritos = OrdersTickets::join('orders', 'orders_tickets.id_order', '=', 'orders.id')
+            ->where('orders.estatus', '1')
+            ->where('orders_tickets.id_curso', $cursoOrigen)
+            ->pluck('orders_tickets.id_usuario')
+            ->unique();
+
+        // Filtrar usuarios que ya están inscritos en el curso destino
+        $usuariosYaInscritos = OrdersTickets::where('id_tickets', $cursoDestino)
+            ->pluck('id_usuario')
+            ->toArray();
+
+        $usuariosPorInscribir = $usuariosInscritos->diff($usuariosYaInscritos);
+
+        $curso = CursosTickets::where('id', $cursoDestino)->first();
+
+        // Inscribir usuarios al curso destino
+        foreach ($usuariosPorInscribir as $usuarioId) {
+            $code = Str::random(8);
+
+            $orden = new Orders;
+            $orden->id_usuario = $usuarioId;
+            $orden->pago = '0';
+            $orden->forma_pago = $request->forma_pago;
+            $orden->estatus = '1';
+            $orden->code = $code;
+            $orden->fecha = $fechaActual;
+            $orden->save();
+
+            $orden_ticket = new OrdersTickets;
+            $orden_ticket->id_order = $orden->id;
+            $orden_ticket->id_usuario = $usuarioId;
+            $orden_ticket->id_tickets = $cursoDestino;
+            $orden_ticket->id_curso = $curso->id_curso;
+            $orden_ticket->save();
+        }
+
+        return redirect()->back()->with('success', 'Usuarios inscritos exitosamente al curso destino.');
     }
 }
