@@ -38,7 +38,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         float: left;
         padding-left: 15px;
         padding-right: 15px;
-        box-sizing: border-box;
+        box-sizing: -box;
     }
     .col-1 { width: 3.69%; }  /* 8.33% - 4.64% */
     .col-2 { width: 12.02%; } /* 16.66% - 4.64% */
@@ -54,10 +54,9 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
     .col-12 { width: 95.36%; } /* 100% - 4.64% */
 
 
-    .border {
-        border: 0px solid #000;
+    .border{
+        : 0px solid #000;
     }
-
 
     .img_registro_header{
         width: 100px;
@@ -203,7 +202,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
     .oval {
         width: 100%;
         height: 100%;
-        border-radius: 80%;
+        -radius: 80%;
         background-color: transparent;
         background-size: cover;
         background-position: center center;
@@ -272,11 +271,11 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
     <div class="container2">
 
         <div class="row">
-            <div class="col-4 text-center border " style="margin-top: 15px">
+            <div class="col-4 text-center  " style="margin-top: 15px">
                 <img class=""  style="width: 90px" src="{{ $basePath . 'registro_nacional.png'}}">
             </div>
 
-            <div class="col-4 text-center border " style="margin-top: 15px">
+            <div class="col-4 text-center  " style="margin-top: 15px">
                 {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
 
                 <div class="img_logo">
@@ -284,13 +283,13 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
             </div>
 
-            <div class="col-4 text-center border " style="margin-top: 15px">
+            <div class="col-4 text-center  " style="margin-top: 15px">
                 <img class=""  style="width: 110px" src="{{ $basePath . 'stps.webp'}}">
             </div>
         </div>
 
         <div class="row">
-            <div class="col-12 text-center border ">
+            <div class="col-12 text-center  ">
 
 
                 <p class="texto_principal_cedula uppercase" style="margin:10px 0 10px 0;">
@@ -303,7 +302,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         </div>
 
         <div class="row">
-            <div class="col-12 text-center border">
+            <div class="col-12 text-center ">
                 <h6 class="azul_fuerte titulo_cedula m-0 p-0">
                     CÉDULA DE IDENTIDAD
                 </h6>
@@ -311,7 +310,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         </div>
 
         <div class="row">
-            <div class="col-12 text-center border">
+            <div class="col-12 text-center ">
                 <p class="letra_sola m-0 p-0">
                 A
                 </p>
@@ -319,13 +318,13 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         </div>
 
         <div class="row">
-            <div class="col-4 text-center border ">
+            <div class="col-4 text-center  ">
                 <div class="oval-container">
 
                 </div>
             </div>
 
-            <div class="col-8 text-center border ">
+            <div class="col-8 text-center  ">
                 <h1 class="azul_fuerte titulo_cedula p-0 m-0">
                 </h1>
 
@@ -346,36 +345,36 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         </div>
 
         <div class="row">
-            <div class="col-4 text-center border ">
+            <div class="col-4 text-center  ">
                 <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 105px; margin-left: 25px;">
             </div>
 
-            <div class="col-4 text-center border ">
+            <div class="col-4 text-center  ">
                 <p class="folio my-auto" style="margin-top: 2s0px">
                     Folio<br>
                     <strong class="folio_result azul_fuerte"></strong>
                 </p>
             </div>
 
-            <div class="col-4 text-center border ">
+            <div class="col-4 text-center  ">
 
             </div>
         </div>
 
         <div class="row">
-            <div class="col-4 text-center border ">
+            <div class="col-4 text-center  ">
                 <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras">
                 <h3 class="h3_nomre_firmas uppercase m-0 p-0">Juan Pablo Soto</h3>
                 <h5 class="texto_emosires m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
             </div>
 
-            <div class="col-4 text-center border ">
+            <div class="col-4 text-center  ">
                 <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
                 <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
                 <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
             </div>
 
-            <div class="col-4 text-center border ">
+            <div class="col-4 text-center  ">
                 <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras">
                 <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Ma. Luisa Flores</h3>
                 <h5 class="texto_emosires m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
@@ -383,7 +382,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         </div>
 
         <div class="row">
-            <div class="col-12 text-center border " style="margin-top: 10px">
+            <div class="col-12 text-center  " style="margin-top: 10px">
                 <p class="azul_fuerte texto_footer m-0 p-0">
                     Expedido en la Ciudad de México, el
                 </p>
@@ -401,15 +400,15 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
     <div class="container2">
 
         <div class="row" >
-            <div class="col-3 border  text-center"  style="margin-top: 15px;">
+            <div class="col-3   text-center"  style="margin-top: 15px;">
                 <img class=" " src="{{ $basePath . 'registro_nacional.png'}}" style="margin-left:30px;width: 90px">
             </div>
 
-            <div class="col-3 border  text-center" style="margin-top: 15px">
+            <div class="col-3   text-center" style="margin-top: 15px">
                 <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 80px">
             </div>
 
-            <div class="col-3 border  text-center" style="margin-top: 20px">
+            <div class="col-3   text-center" style="margin-top: 20px">
                 {{-- <div class="img_logo_2" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
 
                 <div class="img_logo_2">
@@ -417,13 +416,13 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                 </div>
             </div>
 
-            <div class="col-3 border  text-center" style="">
+            <div class="col-3   text-center" style="">
                 <img class="" src="{{ $basePath . 'stps.webp'}}" style="margin-right: 40px;width: 110px;margin-top:8px;">
             </div>
         </div>
 
         <div class="row">
-            <div class="col-12 text-center border">
+            <div class="col-12 text-center ">
                 <h6 class="azul_claro titulo_cedula m-0 p-0" style="margin-bottom: 10px">
                     ACUERDO LEGAL
                 </h6>
@@ -431,7 +430,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         </div>
 
         <div class="row">
-            <div class="col-12 text-start border">
+            <div class="col-12 text-start ">
                 <p class="texto_trasero uppercase" style="margin-right: 20px;margin-left: 20px;">
                     <strong class="texto_trasero_strong">ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br><br>
 
@@ -452,7 +451,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         </div>
 
         <div class="row">
-            <div class="col-12 text-start border">
+            <div class="col-12 text-start ">
                 <p class="especialidad_trasera azul_fuerte uppercase"  style="margin-bottom: 0;margin-right: 20px;margin-left: 20px;margin-top:0;">
 
                 </p>
@@ -460,7 +459,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         </div>
 
         <div class="row">
-            <div class="col-12 text-start border">
+            <div class="col-12 text-start ">
                 <p class="texto_trasero uppercase"  style="margin-right: 20px;margin-left: 20px;">
                     este reconocimiento es inválido, si no tiene todas las firmas y sellos que lo que acrediten.
                 </p>
@@ -468,16 +467,16 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         </div>
 
         <div class="row">
-            <div class="col-6 border  text-center" style="margin-top: 10px">
+            <div class="col-6   text-center" style="margin-top: 10px">
                 <h6 class="azul_claro permanente uppercase m-0 p-0">
                     <strong class="vigencia m-0 p-0" style="color: #000;">Vigencia</strong> <br>
                     permanente
                 </h6>
             </div>
-            <div class="col-3 border  text-center" style="margin-top: 10px">
+            <div class="col-3   text-center" style="margin-top: 10px">
 
             </div>
-            <div class="col-3 border  text-center" style="margin-top: 10px">
+            <div class="col-3   text-center" style="margin-top: 10px">
 
                 <h6 class="azul_claro permanente uppercase m-0 p-0">
                     <strong class="vigencia m-0 p-0" style="color: #000;">TIPO</strong> <br>
@@ -488,7 +487,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         </div>
 
         <div class="row">
-            <div class="col-12 text-center border m-0 p-0">
+            <div class="col-12 text-center  m-0 p-0">
                 <P class="texto_footer2 ">La autenticidad del presente documento puede ser verificada escaneando el QR.</p>
                 </div>
         </div>

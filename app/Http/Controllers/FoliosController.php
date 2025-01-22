@@ -255,12 +255,24 @@ class FoliosController extends Controller
 
         $tickets = RegistroImnas::where('folio', $id)->first();
 
+        $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
+
+        if($tickets == null){
+            $tickets = OrdersTickets::where('id', '=', $id)->first();
+        }
+
+        if($tickets_externo != null){
+            $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
+        }
+
         $idMateria = RegistroImnasEspecialidad::where('especialidad', $tickets->nom_curso)->where('id_cliente', $tickets->id_usuario)->first();
 
-            $subtemas = RegistroImnasTemario::
+        $subtemas = RegistroImnasTemario::
             where('id_materia', $idMateria->id)
             ->orderBy('id')
             ->get();
+
+
 
             if (!empty($tickets) && $tickets->diseno_doc == 'Nuevo') {
                 return view('user.components.documentos_imnas.nuevos.index_tira', compact('tickets', 'tipo_documentos', 'tickets_externo'));

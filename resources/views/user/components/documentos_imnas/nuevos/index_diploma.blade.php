@@ -1,257 +1,292 @@
 @extends('layouts.app_documenots')
 
 @section('template_title')
-    Diploma RN
+    Nueva Diploma RN
 @endsection
 
 @php
-            $domain = request()->getHost();
-            $basePath = ($domain == 'plataforma.imnasmexico.com')
-                    ? 'https://plataforma.imnasmexico.com/tipos_documentos/'
-                    : asset('tipos_documentos/');
+$domain = request()->getHost();
+$basePath = ($domain == 'plataforma.imnasmexico.com')
+    ? asset('documentos_nuevos/diploma/') . '/'
+    : asset('documentos_nuevos/diploma/') . '/';
 
-            $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
-                    ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
-                    : asset('utilidades_documentos/');
-
-            $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
-                    ? 'https://plataforma.imnasmexico.com/documentos/'
-                    : asset('documentos/');
-
-
-            if (isset($tickets->foto_cuadrada)) {
-                $palabras = explode(' ', ucwords(strtolower($tickets->nombre)));
-                $nombreCompleto = ucwords(strtolower($tickets->nombre));
-                $foto = $tickets->foto_cuadrada;
-                $firma = $tickets->firma;
-
-
-                $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
-                    ? 'https://plataforma.imnasmexico.com/documentos_registro/'
-                    : asset('documentos_registro/');
-
-                $basePathFirmaDirect = ($domain == 'plataforma.imnasmexico.com')
-                    ? 'https://plataforma.imnasmexico.com/documentos/'
-                    : asset('documentos/');
-
-            }else{
-
-
-                if ($tickets == null) {
-
-                    $palabras = explode(' ', ucwords(strtolower($tickets_externo->cliente)));
-                    $firma = null;
-                    $nombreCurso = $tickets_externo->curso;
-                    $nombreCompleto = ucwords(strtolower($tickets_externo->cliente));
-                    $foto = $tickets_externo->foto;
-                    $firma = $tickets_externo->firma;
-                }else {
-
-                    $foto = $tickets->User->Documentos->foto_tam_infantil;
-                    $firma = $tickets->User->Documentos->firma;
-
-                    $palabras = explode(' ', ucwords(strtolower($tickets->User->name)));
-
-                    $nombreCompleto = ucwords(strtolower($tickets->User->name));
-                    $basePathDocumentos = ($domain == 'plataforma.imnasmexico.com')
-                    ? 'https://plataforma.imnasmexico.com/documentos/'
-                    : asset('documentos/');
-                }
-
-
-            }
-
-            $cantidad_palabras = count($palabras);
-
-            // Contar las palabras
-            $cursoNombre = isset($tickets->Cursos->nombre)
-            ? $tickets->Cursos->nombre
-            : (isset($cursoNombre)
-                ? $tickets->nom_curso
-                : $tickets_externo->curso);
-
-            $folio = isset($tickets->folio) ? $tickets->folio : $tickets_externo->folio;
-
+$basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
+    ? asset('utilidades_documentos/') . '/'
+    : asset('utilidades_documentos/') . '/';
 @endphp
+
 
 @section('css_custom')
     <style>
-        .img_portada {
+
+        .container2 {
+            position: relative;
             width: 480px;
             height: 800px;
-            position: relative;
+            margin: 0 auto; /* Centrar el contenedor */
+            overflow: hidden; /* Evitar desbordes */
+            background-image: url('{{ $basePath . 'fondo.png'}}');
+            background-size: cover; /* Asegura que la imagen cubra toda el área */
+            background-position: center center; /* Centra la imagen */
+            background-repeat: no-repeat; /* No repetir la imagen */
         }
 
-        .img_reverso {
-            width: 480px;
-            height: 800px;
-            position: relative;
+        .img_registro_header{
+            width: 150px;
         }
 
-        .container_marco{
-            position: absolute;
-            top: 41%;
-            left: -2%;
-            z-index: 100;
+        .img_logoAfi_header{
+            width: 130px;
         }
 
-        .img_marco{
-            width: 200px;
-            height: 323px;
+        .img_stps_registro_header{
+            width: 160px;
         }
 
-        .oval-container {
-            width: 170px;
-            height: 230px;
-            position: absolute;
-            overflow: hidden;
-            top: 50%;
-            left: 2%;
-            background: transparent;
+        .img_firmas_delanteras{
+            width: 160px;
         }
 
-        <?php
-            if (isset($tickets->User)) {
-                $backgroundImage = $basePathDocumentos . '/' . $tickets->User->telefono . '/' . $foto;
-            } else if(isset($tickets_externo->foto)) {
-                $backgroundImage = $basePathUtilidades . '/' . $foto;
-            } else {
-                $backgroundImage = 'https://plataforma.imnasmexico.com/utilidades_documentos/fondo_sf.png';
-            }
-        ?>
-
-        .oval {
-            width: 90%;
-            height: 100%;
-            border-radius: 50%;
-            background-color: transparent;
-            position: absolute;
-            clip-path: ellipse(50% 50% at 50% 40%);
-            transform: translateX(-50%);
-            left: 50%;
-            background-image: url('{{ $backgroundImage }}');
-            background-size: cover;
-            background-position: center center;
+        .img_traseras{
+            width: 180px;
         }
 
-        .container_nombre{
-            position: absolute;
-            top:55%;
-            left: 50%;
+        .h3_nomre_firmas{
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+            font-size: 17px;
+            line-height: 19px;
+            color:#010101;
         }
 
-        .container_curso{
-            position: absolute;
-            top:66%;
-            left: 50%;
+        .texto_emosires{
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
+            font-size: 20px;
+            margin-top: 5px!important;
+            line-height: 19px;
+            color:#010101;
         }
 
-        .curso{
-            font-size: 11px;
+        .texto_documentos{
+            font-size: 16px;
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+            margin-top: 20px;
+            margin-bottom: 40px;
+            color: #545454;
         }
 
-        .nombre{
-            font-size: 11px;
+        .texto_documentos_ligth{
+            font-size: 20px;
+            font-family: 'OpenSans_Regular';
+            font-weight: 'regular';
+            margin-top: 20px;
+            margin-bottom: 40px;
         }
 
-        .container_fecha{
-            position: absolute;
-            top:98%;
-            left: 29%;
+        .strong_folio{
+            font-size: 19px;
+            font-family: 'OpenSauceOne_Bold';
+            font-weight: 'regular';
+            margin-top: 20px;
+            margin-bottom: 30px;
         }
 
-        .fecha{
+        .titulo_cedula{
+            font-size: 50px;
+            font-family: 'Montserrat_ExtraBold';
+            font-weight: 'regular';
+            line-height:45px;
+        }
+
+        .titulo_name{
+            font-size: 37px;
+            font-family: 'Montserrat_Bold';
+            font-weight: 'regular';
+            line-height:22px;
+        }
+
+        .titulo_especialidad_trasero{
+            font-size: 25px;
+            font-family: 'Montserrat_Bold';
+            font-weight: 'regular';
+            line-height:18px;
+        }
+
+        .subtitulo_cedula{
+            font-size: 33px;
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+            line-height:18px;
+        }
+
+        .titulo_especialidad{
+            font-size: 30px;
+            font-family: 'Montserrat_Bold';
+            font-weight: 'regular';
+            line-height: 25px;
+
+        }
+
+        .especialidad{
             font-size: 10px;
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
+            margin-top: 20px;
+            margin-bottom: 40px;
+            margin-left: 50px;
+            margin-right: 50px;
         }
 
-        .qr_container{
-            width: 100%;
-            position: absolute;
-            top: 82%;
-            left:38%;
-            display: inline-block;
+        .especialidad_trasera{
+            font-size: 37px;
+            font-family: 'Montserrat_Bold';
+            font-weight: 'regular';
         }
 
-        .container_folio_bajo1{
-            position: absolute;
-            top:88%;
-            left: 8%;
+        .texto_trasero{
+            font-size:11px;
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
+            margin-top: 20px;
+            line-height: 14px;
+            color: #3d3b3a;
+        }
+
+        .texto_trasero3{
+            font-size:11px;
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
+            color: #3d3b3a;
+        }
+
+        .texto_trasero4{
+            font-size:10px;
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
+            color: #2c6d77;
+        }
+
+        .texto_trasero2{
+            font-size:8px;
+            font-family: 'Montserrat_LightItalic';
+            font-weight: 'regular';
+            color: #3d3b3a;
+            line-height: 7px;
+        }
+
+        .texto_principal_cedula{
+            font-size: 19px;
+            font-family: 'Montserrat_Medium';
+            font-weight: 'regular';
+            line-height: 18px; color: #545454;
         }
 
         .folio{
+            font-size: 23px;
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .folio_result{
+            font-size: 15px;
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+        }
+
+        .letra_sola{
             font-size: 13px;
-            color: red;
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
         }
 
-
-        .container_cursoTrasero{
-            position: absolute;
-            width: 424px;
-            position: absolute;
-            top: 19%;
-            background: #fff;
+        .texto_footer{
+            font-size: 11px;
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
+            color: #2c6d77;
         }
 
-        .texto_traser{
+        .texto_footer2{
             font-size: 9px;
-            line-height: 11px;
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
         }
 
-        .curso_sm{
-            font-size:12px;
-            color: red;
+        .tipo{
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
+            font-size: 0px;
+            font-size: 15px;
+            color:#000;
+            margin: 0;
+            padding: 0;
+            line-height: 0;
+         }
+
+        .cea{
+            font-family: 'Montserrat_Bold';
+            font-weight: 'regular';
+            color:#2c6d77;
+            font-size: 40px;
+            margin: 0;
+            padding: 0;
+            line-height: 35px;
         }
 
-        .qr_container2{
-            position: absolute;
-            top: 84%;
-            left:76%;
+        .oval {
+            width: 100%;
+            height: 100%;
+            border-radius: 80%;
+            background-color: transparent;
+            background-size: cover;
+            background-position: center center;
+            /* background-image: url('{{ $basePath . 'foto.jpeg'}}'); */
+            background-image: url('');
+
         }
 
-        .container_logo{
-            position: absolute;
-            top: 30px;
-            left:280px;
+        .oval-container {
+            margin-left: 10px;
+            width: 230px;
+            height: 290px;
+            overflow: hidden;
+            background: transparent;
+            /* Ajuste condicional de top */
         }
 
-        .img_logo{
-            width: 150px;
-            width: {{ $tickets?->logo_diploma ?? 150 }}px!important;
+        .certificado_titulo{
+            font-size: 16px;
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+            line-height: 15px;
+            color: #2c6d77;
+            margin-left: 40px;
+        }
+
+        .acuerdo{
+            font-size: 35px;
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+            line-height:18px;
+            color: #2c6d77;
         }
 
 
-        .container_logo2{
-            position: absolute;
-            top: 680px;
-            left:25px;
+        .img_logo {
+            width: 110px;  /* Tamaño máximo permitido */
+            height: 110px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .container_firma_director{
-            position: absolute;
-            top: 680px;
-            left:200px;
-        }
-
-        .texto_firma_direct{
-            font-size: 7px;
-        }
-
-        .img_logo2{
-            width: 65px;
-        }
-
-        .img_firna{
-            width: 80px;
-        }
-
-        .container_logoreversa{
-            position: absolute;
-            top: 680px;
-            left:95px;
-        }
-
-        .img_logoreversa{
-            width: 50px;
+        .img_logo img {
+            max-width: 100%;  /* Evita que la imagen se estire */
+            max-height: 100%;
+            object-fit: contain; /* Mantiene la proporción sin cortar */
         }
 
     </style>
@@ -260,176 +295,264 @@
 @section('content_documentos')
     <div class="card-front">
 
-        @if(!isset($tickets->User->logo))
+        <div class="container2">
+            <!-- Contenido superpuesto sobre la imagen -->
+            <div class="content">
 
-            <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+                <div class="row" >
+                    <div class="col-3 border  text-center"  style="margin-top: 90px;">
+                        <img class="img_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" style="">
+                    </div>
 
-        @else
+                    <div class="col-3 border  text-center" style="margin-top: 90px">
+                        <div class="img_logo">
+                            <img src="" alt="Logo">
+                        </div>
 
-            @if($tickets->firma_director == 'si')
-                <img src="{{ $basePath . '/' . 'diploma_logo_firma_director.png' }}" class="img_portada">
-            @else
-                <img src="{{ $basePath .'/'. 'diploma_fontal_limpio.png' }}" class="img_portada">
-            @endif
+                        {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
+                    </div>
 
-        @endif
+                    <div class="col-3 border  text-center" style="margin-top: 90px">
+                        <img class="img_stps_registro_header " src="{{ $basePath . 'stps.webp'}}" style="">
 
-        <div class="container_logo">
-            @if(!isset($tickets->User->logo))
-            @else
-                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo">
-            @endif
-        </div>
+                    </div>
 
-        <div class="container_marco">
-            <img src="https://plataforma.imnasmexico.com/tipos_documentos/marco_diploma.png" class="img_marco">
-        </div>
+                    <div class="col-3 border  text-center" style="margin-top: 90px">
+                        <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 100px">
+                    </div>
+                </div>
 
-        <div class="oval-container">
-            <div class="oval">
+                <div class="row">
+                    <div class="col-12 text-center border">
+                        <p class="texto_principal_cedula uppercase" style="margin-bottom: px">
+                            La Dirección General del Instituto Mexicano Naturales Ain Spa y <br>
+                             del Registro Nacional Instituto Mexicano Naturales Ain Spa, <br>
+                              expiden el siguiente reconocimiento
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-12 text-center border">
+                        <h6 class="azul_fuerte uppercase titulo_cedula m-0 p-0">
+                            diploma
+                        </h6>
+                        <h5 class="azul_fuerte uppercase subtitulo_cedula  m-0 p-0">
+                            de profesionalización
+                        </h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 text-center border">
+                        <p class="letra_sola p-0" style="margin-top: 20p,margin-bottom: 40px">
+                           A
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-8 text-center border ">
+                        <h1 class="h1_nombre azul_fuerte titulo_name p-0 m-0">
+                            Nombre
+                        </h1>
+
+                        <h2 class="azul_fuerte texto_documentos_ligth uppercase p-0 "style="margin-bottom: 13px;margin-top:13px">
+                            con numero de folio <strong class="strong_folio">Folio</strong>
+                        </h2>
+
+                        <p class="texto_documentos uppercase p-0 m-0" style="margin-bottom: 40px">
+                            después de haber cumplido los requisitos, <br>
+                            duración, y Evaluación del Programa Vigente <br>
+                            Correspondiente a
+                        </p>
+
+                        <h2 class="azul_fuerte titulo_especialidad uppercase p-0" style="margin-bottom: 13px;margin-top:13px">
+                            Curso
+                        </h2>
+
+
+                        <p class="texto_documentos uppercase p-0 m-0" style="margin-bottom: 40px">
+                            Revisado y acreditado por la Comisión Mixta, a <br>
+                            través de un Portafolio de Evidencias, Prácticas y <br>
+                            Exámenes de Suficiencia <br>
+                        </p>
+                    </div>
+
+                    <div class="col-4 text-center border ">
+                        <div class="oval-container">
+                            <div class="oval" style="">
+                            </div>
+                        </div>
+                        <p>
+
+                        </p>
+                        <p class="texto_trasero2" style="padding:0px 45px 0px 45px;">
+                            REGISTRO ÚNICO
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-4 text-center border ">
+                        <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras">
+                        <h3 class="h3_nomre_firmas uppercase m-0 p-0">Juan Pablo Soto</h3>
+                        <h5 class="texto_emosires m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
+                    </div>
+
+                    <div class="col-4 text-center border ">
+                        <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
+                        <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
+                        <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
+                    </div>
+
+                    <div class="col-4 text-center border ">
+                        <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras">
+                        <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Ma. Luisa Flores</h3>
+                        <h5 class="texto_emosires m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 text-center border ">
+                        <p class="azul_fuerte texto_footer uppercase  p-0"  style="margin-top:40px">
+                            Expedido en la Ciudad de México,  el dia Fecha. Este documento respalda 120 hrs <br>
+                            totales del Curso, así como Documentos Anexos correspondientes con vigencia PERMANENTE <br>
+                            ESTE DOCUMENTO NO ES VÁLIDO SI ES MUTILADO. PRESENTA BORRADURAS, TACHADURAS O ENMENDADURAS.
+                        </p>
+                    </div>
+                </div>
+
             </div>
         </div>
-
-
-        <div class="container_curso">
-            <h4 class="nombre">
-                {{ $cursoNombre }}
-            </h4>
-        </div>
-
-        <div class="container_nombre">
-            <h4 class="curso">
-                {{ $nombreCompleto }}
-            </h4>
-        </div>
-
-        <div class="container_fecha">
-            <h4 class="fecha">
-                @if(!isset($tickets->Cursos->fecha_inicial) && !isset($tickets->fecha_curso))
-                Ciudad de México , México a
-                @elseif(!isset($tickets->Cursos->fecha_inicial))
-                Ciudad de México , México a, el {{ \Carbon\Carbon::parse($tickets->fecha_curso)->isoFormat('D [de] MMMM [del] YYYY') }}
-                @else
-                Ciudad de México , México a, el {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('D [de] MMMM [del] YYYY') }}
-                @endif
-            </h4>
-        </div>
-
-        <div class="qr_container">
-            @php
-                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.4,2.4) . '" style="background: #fff; padding: 5px;"   />';
-            @endphp
-        </div>
-
-
-        <div class="container_folio_bajo1">
-            <h4 class="folio">{{$folio}}</h4>
-        </div>
-
-        <div class="container_logo2">
-            @if(!isset($tickets->User->logo))
-            @else
-                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo2">
-            @endif
-        </div>
-
-
-
-@if($tickets?->firma_director == 'si')
-    <div class="container_firma_director">
-        <img src="{{ $basePathFirmaDirect  . '/' . $tickets?->User?->telefono . '/' . $tickets?->User?->RegistroImnasEscuela?->firma }}" class="img_firna">
-        <p class="text-center texto_firma_direct">
-            @php
-                $words = explode(' ', $tickets?->User?->name ?? '');
-                $chunks = array_chunk($words, 3);
-                foreach ($chunks as $chunk) {
-                    echo implode(' ', $chunk) . '<br>';
-                }
-            @endphp
-            {{ $tickets?->texto_director }}
-        </p>
-    </div>
-@endif
-
 
     </div>
 
     <div class="card-back">
 
-        @if(!isset($tickets->User->logo))
-            <img src="{{ $basePath . '/' . $tipo_documentos->img_reverso }}" class="img_reverso">
-        @else
-            <img src="{{ $basePath .'/'. 'diploma_reverso_limpio.png' }}" class="img_reverso">
-        @endif
+        <div class="container2">
+            <!-- Contenido superpuesto sobre la imagen -->
 
-        <div class="d-flex justify-content-center">
-            <div class="container_cursoTrasero">
-                    <p class="text-center texto_traser">
+                <div class="row" >
+                    <div class="col-3 border  text-center"  style="margin-top: 90px;">
+                        <img class="img_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" style="">
+                    </div>
 
-                        <strong>ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br> <br>
-                        INSTRUMENTO NÚMERO SETENTA Y CINCO MIL SEISCIENTOS SETENTA Y TRES.	 LIBRO MIL CIENTO
-                        CUARENTA Y TRES.	 CIUDAD DE MÉXICO. A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE
-                        REFORMA AL ARTÍCULO SEGUNDO DE LOS ESTATUTOS SOCIALES; y,	 B.- LA REFORMA AL ARTÍCULO
-                        SEXTO DE LOS ESTATUTOS SOCIALES, que resulta	n de LA PROTOCOLIZACIÓN del acta de Asamblea
-                        General Extraordinaria de Socios de “INSTITUTO MEXICANO NATURALES AIN SPA”, SOCIEDAD CIVIL. <br><br>
+                    <div class="col-3 border  text-center" style="margin-top: 90px">
+                        {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
+                        <div class="img_logo">
+                            <img src="" alt="Logo">
+                        </div>
+                    </div>
 
-                        Artículo 5o de la Constitución Política de los Estados Unidos Mexicanos: <br><br>
+                    <div class="col-3 border  text-center" style="margin-top: 90px">
+                        <img class="img_stps_registro_header " src="{{ $basePath . 'stps.webp'}}" style="">
 
-                        “A ninguna persona podrá impedirse que se dedique a la profesión, industria, comercio o trabajo
-                        que le acomode, siendo lícitos. ... Nadie puede ser privado del producto de su trabajo, sino por resolución judicial. <br>
+                    </div>
 
-                        Artículo 153 de la Ley General del Trabajo, apartado I, III y IV. En General mejorar el nivel educativo, la competencia
-                        laboral y las habilidades de los trabajadores. <br><br>
+                    <div class="col-3 border  text-center" style="margin-top: 90px">
+                        <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 100px">
 
-                        Registrado ante la Secretaría del Trabajo y Previsión Social el Instituto Mexicano Naturales Ain Spa,
-                        como Agente Capacitador Externo con Número de Registro:
-
-                        @if(!isset($tickets->User->clave_clasificacion))
-                            <strong style="color:red">RIFC680910-879-0013 </strong>
-                        @else
-                            <strong style="color:red">{{ $tickets->User->clave_clasificacion }} </strong>
-                        @endif
-
-                        <br><br>
-
-                        A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE REFORMA AL ARTÍCULO SEGUNDO DE
-                        LOS ESTATUTOS SOCIALES; y, B.- LA REFORMA AL ARTÍCULO SEXTO DE LOS ESTATUTOS SOCIALES,
-                        que resulta	n de LA PROTOCOLIZACIÓN del acta de Asamblea General Extraordinaria de Socios de “INSTITUTO
-                        MEXICANO NATURALES AIN SPA”, SOCIEDAD CIVIL... <br><br>
-
-                        XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su
-                        plena comprensión y conformidad con él y lo firmó el día 17 de Junio del 2016,
-                        mismo momento en que lo autorizo definitivamente.- Doy Fe. <br><br>
+                    </div>
+                </div>
 
 
-                        Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da
-                        el siguiente nombramiento conforme a Derecho, e inscrito en el Registro Nacional Instituto Mexicano Naturales
-                        Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exigen los planes de estudios
-                        especializado en <br><br>
+                <div class="row">
+                    <div class="col-12  border ">
+                        <p class="certificado_titulo text-end">
+                            CERTIFICADO ANTE EL REGISTRO NACIONAL <br>
+                            INSTITUTO MEXICANO NATURALES AIN SPA
+                        </p>
+                    </div>
+                </div>
 
-                    <strong class="curso_sm"> {{ $cursoNombre }}</strong> <br><br>
+                <div class="row">
+                    <div class="col-8 text-center border ">
+                        <h1 class="azul_fuerte titulo_name p-0" style="margin-top: 20px;margin-left:150px;">
+                            ACUERDO LEGAL
+                        </h1>
+                    </div>
 
-                    </p>
-            </div>
-        </div>
+                    <div class="col-4 text-center border ">
 
-        {{-- <div class="container_cursoTrasero">
-            <h4 class="curso_sm">
-                {{ $cursoNombre }}
-            </h4>
-        </div> --}}
+                        <h6 class="azul_claro tipo uppercase m-0 p-0">
+                            TIPO
+                        </h6>
 
-        <div class="qr_container2">
-            @php
-                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',2.4,2.4) . '" style="background: #fff; padding: 5px;"   />';
-            @endphp
-        </div>
+                        <h6 class="azul_claro cea uppercase m-0 p-0">
+                            CFC
+                        </h6>
+                    </div>
+                </div>
 
-        <div class="container_logoreversa">
-            @if(!isset($tickets->User->logo))
-            @else
-                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logoreversa">
-            @endif
+                <div class="row">
+                    <div class="col-12 text-start border" >
+                        <p class="texto_trasero uppercase" style="padding:0px 45px 0px 45px;">
+                            <strong>ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br><br>
+
+                            INSTRUMENTO NÚMERO SETENTA Y CINCO MIL SEISCIENTOS SETENTA Y TRES. LIBRO MIL CIENTO CUARENTA Y TRES. CIUDAD DE MÉXICO. A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE REFORMA AL ARTÍCULO SEGUNDO DE LOS ESTATUTOS SOCIALES; y, B.- LA REFORMA AL ARTÍCULO SEXTO DE LOS ESTATUTOS SOCIALES, que resultan de LA PROTOCOLIZACIÓN del acta de Asamblea General Extraordinaria de Socios de "INSTITUTO MEXICANO NATURALES AIN SPA", SOCIEDAD CIVIL.
+                            <br><br>
+                            Artículo 5º de la Constitución Política de los Estados Unidos Mexicanos: “A ninguna persona podrá impedirse que se dedique a la profesión, industria, comercio o trabajo que le acomode siendo lícitos... Nadie puede ser privado del producto de su trabajo, sino por resolución judicial.
+                            <br><br>
+                            Artículo 153 de la Ley General del Trabajo apartado I, III y IV. En general, mejorar el nivel educativo, la competencia laboral y las habilidades de los trabajadores.
+                            <br><br>
+                            Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro: Calve rfc
+                            <br><br>
+                            XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su plena comprensión y conformidad con él y lo firmó el día 17 de Junio del 2016 , mismo momento en que lo autorizo definitivamente.- Doy fe.
+                            <br><br>
+                            Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da el siguiente nombramiento conforme a derecho e inscrito en el Registro Nacional Instituto Mexicano Naturales Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exige el plan de estudios especializado en:
+
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 text-start border  m-0"  >
+                        <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 45px 0px 45px;">
+                           Curso
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 text-start border m-0 p-0" >
+                        <p class="texto_trasero3 uppercase m-0" style="padding:0px 45px 0px 45px;">
+                            este reconocimiento es <strong>inválido</strong> , si no tiene todas las firmas y sellos que lo que acrediten.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-4 text-center border ">
+                        <img src="{{ $basePath . 'sello-constancia.webp'}}" class="img_traseras">
+                    </div>
+
+                    <div class="col-4 text-center border ">
+                        <p class="texto_trasero2" style="padding:0px 45px 0px 45px;">
+                            La autenticidad del <br> presente documento <br> puede ser verificada en
+                        </p>
+
+
+                    </div>
+
+                    <div class="col-4 text-center border ">
+                        <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" class="img_traseras">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 text-center border  m-0"  >
+                        <p class="texto_trasero4" style="padding:0px 45px 0px 45px;">
+                            CALLE SUR 109-A No. 260, COL. HEROES DE CHURUBUSCO. DEL. IZTAPALAPA. CIUDAD DE MEXICO. CP.09090 <br>
+                            (55) 54459315, (55) 56468832, (55) 43367085, (55) 43367086, (55) 55323297, (55) 55329757 <br>
+                            www.imnasmexico.com <br>
+                            ESTE DOCUMENTO NO ES VÁLIDO SI ES MUTILADO. PRESENTA BORRADURAS, TACHADURAS O ENMENDADURAS.
+                    </div>
+                </div>
+
         </div>
 
     </div>

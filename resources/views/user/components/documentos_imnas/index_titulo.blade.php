@@ -401,143 +401,134 @@
 @section('content_documentos')
     <div class="card-front">
 
-        @if(!isset($tickets->User->logo))
+        <div class="container">
+            <div class="row">
+                <div class="col-3 text-center border p-2" style="margin-top: 30px">
+                    <img class=" " src="{{ $basePath . 'registro_nacional.png'}}" style="width: 130px">
+                </div>
 
-            <img src="{{ $basePath . '/' . $tipo_documentos->img_portada }}" class="img_portada">
+                <div class="col-3 text-center border p-2" style="margin-top: 30px">
+                    <div class="img_logo">
+                        <img src="{{ $basePathUtilidades . $fileName_logo }}" alt="Logo">
+                    </div>
+                    {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
+                </div>
 
-        @else
+                <div class="col-3 text-center border p-2" style="margin-top: 30px">
+                    <img class=" " src="{{ $basePath . 'stps.webp'}}" style="width: 150px">
+                </div>
 
-            @if($tickets->firma_director == 'si')
-                <img src="{{ $basePath . '/' . 'titulo_frontal_limpio_sin_firma_front.png' }}" class="img_portada">
-            @else
-                <img src="{{ $basePath .'/'. 'titulo_frontal_limpio.png' }}" class="img_portada">
-            @endif
+                <div class="col-3 text-center border p-2" style="margin-top: 30px">
+                    <h6 class="azul_claro tipo uppercase  p-0" style="margin-top: 30px">
+                        TIPO
+                    </h6>
 
-        @endif
+                    <h6 class="azul_claro cea uppercase m-0 p-0">
+                        CFC
+                    </h6>
+                </div>
 
-        <div class="container_logo">
-            @if(!isset($tickets->User->logo))
-            @else
-                <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo">
-            @endif
-        </div>
-
-        <div class="d-flex justify-content-center">
-            <div class="container_logo2">
-                @if(!isset($tickets->User->logo))
-                @else
-                    <img src="{{ $basePathUtilidades  .'/'.  $tickets->User->logo }}" class="img_logo2">
-                @endif
-            </div>
-        </div>
-
-        <div class="container_marco">
-            <img src="https://plataforma.imnasmexico.com/tipos_documentos/marco_pro.png" class="img_marco">
-        </div>
-
-        <div class="container_nombre">
-
-            @for ($i = 0; $i < $cantidad_palabras; $i += 2)
-                @php
-                    $linea = '';
-                    if (isset($palabras[$i])) {
-                        $linea .= $palabras[$i];
-                        if (isset($palabras[$i + 1])) {
-                            $linea .= ' ' . $palabras[$i + 1];
-                        }
-                    }
-                    if ($i + 2 < $cantidad_palabras) {
-                        $linea .= '<br>';
-                    }
-                @endphp
-                <h4 class="nombre">{!! $linea !!}</h4>
-            @endfor
-
-        </div>
-
-        <div class="oval-container">
-            <div class="oval">
-            </div>
-        </div>
-
-        <div class="container_curso">
-
-            @php
-                // Divide el curso por espacios en blanco
-                $palabras = explode(' ', $nombreCurso);
-
-                // Inicializa la cadena formateada
-                $curso_formateado = '';
-                $contador_palabras = 0;
-
-                foreach ($palabras as $palabra) {
-                    // Agrega la palabra actual a la cadena formateada
-                    $curso_formateado .= $palabra . ' ';
-
-                    // Incrementa el contador de palabras
-                    $contador_palabras++;
-
-                    // Agrega un salto de línea después de cada tercera palabra
-                    if ($contador_palabras % 4 == 0) {
-                        $curso_formateado .= '<br>';
-                    }
-                }
-
-            @endphp
-
-            <h4 class="curso">{!! $curso_formateado !!}</h4>
-        </div>
-
-        <div class="container_fecha">
-            <h4 class="fecha">
-            <strong>
-
-             @if(!isset($tickets->Cursos->fecha_inicial) && !isset($tickets->fecha_curso))
-               Expedido en la Ciudad de México, el día
-            @elseif(!isset($tickets->Cursos->fecha_inicial))
-               Expedido en la Ciudad de México, el día {{ \Carbon\Carbon::parse($tickets->fecha_curso)->isoFormat('D [de] MMMM [del] YYYY') }}
-            @else
-               Expedido en la Ciudad de México, el día {{ \Carbon\Carbon::parse($tickets->Cursos->fecha_inicial)->isoFormat('D [de] MMMM [del] YYYY') }}
-            @endif
-
-            </strong> </h4>
-        </div>
-
-        @if($tickets?->firma_director == 'si')
-            <div class="container_firma_director">
-                <p class="text-center">
-                    <img src="{{ $basePathFirmaDirect  .'/'.  $tickets->User->telefono . '/' .$tickets->User->RegistroImnasEscuela->firma }}" class="img_firna">
-                </p>
             </div>
 
-            <div class="container_firma_director_text">
-                <p class="text-center texto_firma_direct">
+            <div class="row">
+                <div class="col-4 text-center border p-2">
+                    <div class="oval-container">
+                        <img class="oval" src="{{ $basePathUtilidades . $fileName }}" alt="Imagen">
+                    </div>
+
+                    <h6 class="azul_claro folio uppercase  p-0" style="margin-top: 20px">
+                        folio
+                    </h6>
+
+                    <h6 class="azul_claro folio_num uppercase m-0 p-0">
+                        {{$folio}}
+                    </h6>
+                </div>
+
+                <div class="col-8 text-start border">
+                    <h6 class="uppercase titulo_cedula m-0 p-0">
+                        REGISTRO NACIONAL
+                    </h6>
+                    <h5 class="uppercase subtitulo_cedula  m-0 p-0">
+                        INSTITUTO MEXICANO NATURALES AIN SPA
+                    </h5>
+                    <p class="texto_principal_cedula" style="">
+                        La Coordinación de Asuntos Escolares y Apoyo a Estudiantes del
+                         Registro Nacional Instituto Mexicano Naturales Ain Spa RIIMNAS,
+                         con registro <strong class="texto_prinipal_strong"> {{ $clave_rfc }}</strong> en la Secretaría del Trabajo y Previsión
+                         Social STPS como Agente Capacitador Externo, hace constar que el/la
+                          Alumno(a) <strong class="texto_prinipal_strong"> {!! $nombre !!}</strong> , con número de folio <strong class="texto_prinipal_strong">CFC000918771</strong> con
+                           CURP: <strong class="texto_prinipal_strong">JDAR090213MMCMLTA4</strong> , cursó la especialidad de <strong class="texto_prinipal_strong"> {{ ucwords(strtolower($curso)) }}</strong> ,
+                            cubriendo todos los créditos correspondientes.
+                        Para efectos de desempeño académico se expresa lo siguiente:
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-4 text-start border p-2">
+                    <table class="table" style="border: solid 1px #2c6d77;padding:20px 15px 20px 15px;">
+                        <tbody class="m-0 p-0">
+                            <tr class="m-0 p-0">
+                                <td class="text-start col_izquierda uppercase m-0 p-0" >CREDITOS</td>
+                                <td class="text-start col_derecha_texto">
+                                    Obligatorios: 280 <br>
+                                    Optativos: 0 <br>
+                                    Totales: 280
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-4 text-start border p-2">
+                    <table class="table" style="border: solid 1px #2c6d77;margin-left:20px;padding:26px 15px 26px 15px;">
+                        <tbody>
+                            <tr>
+                                <td class="text-start col_izquierda uppercase" >% DE MATERIAS <br> APROBADAS</td>
+                                <td class="text-start col_derecha"  style="padding-left: 15px">
+                                    100%
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="col-4 text-start border p-2">
+                    <table class="table" style="border: solid 1px #2c6d77;margin-left:10px;padding:26px 15px 26px 15px;">
+                        <tbody>
+                            <tr>
+                                <td class="text-start col_izquierda uppercase" >Promedio general</td>
+                                <td class="text-start col_derecha" style="padding-left: 15px">
+                                    9.6
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-12 text-left border" style="padding:0px 20px 20px 20px;">
                     @php
-                        $words = explode(' ', $tickets->User->name);
-                        $chunks = array_chunk($words, 3);
-                        foreach ($chunks as $chunk) {
-                            echo implode(' ', $chunk) . '<br>';
-                        }
+                        $totalSubtemas = count($subtemas);
+                        $faltantes = 18 - $totalSubtemas; // Calculamos cuántos faltan para llegar a 20
                     @endphp
-                    {{ $tickets->texto_director }}
-                </p>
+
+                    @foreach ($subtemas as $subtema)
+                        <p class="contenedor_materia" style="padding: 0 0  0 20px; margin: 8px;">{{ $subtema->subtema }}</p>
+                    @endforeach
+
+                    {{-- Agregamos etiquetas vacías si hay menos de 20 registros --}}
+                    @for ($i = 0; $i < $faltantes; $i++)
+                        <p class="contenedor_materia" style="padding: 0 0  0 20px; margin: 8px;">&nbsp;</p>
+                    @endfor
+
+                </div>
+
             </div>
-        @endif
-
-        <div class="container_folio_bajo1">
-            <h4 class="folio">{{$folio}}</h4>
-        </div>
-
-        <div class="qr_container">
-            @php
-                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',1.5,1.5) . '" style="background: #fff; padding: 5px;"   />';
-            @endphp
-        </div>
-
-        <div class="qr_container2">
-            @php
-                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$folio, 'QRCODE',1.5,1.5) . '" style="background: #fff; padding: 5px;"   />';
-            @endphp
         </div>
 
     </div>
