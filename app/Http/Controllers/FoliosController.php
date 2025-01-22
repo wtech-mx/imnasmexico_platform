@@ -169,7 +169,11 @@ class FoliosController extends Controller
             $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
         }
 
-        return view('user.components.documentos_imnas.index_cedula',compact('tickets','tipo_documentos','tickets_externo'));
+        if (!empty($tickets) && $tickets->diseno_doc == 'Nuevo') {
+            return view('user.components.documentos_imnas.nuevos.index_cedula', compact('tickets', 'tipo_documentos', 'tickets_externo'));
+        } else {
+            return view('user.components.documentos_imnas.index_cedula', compact('tickets', 'tipo_documentos', 'tickets_externo'));
+        }
 
     }
 
@@ -189,8 +193,11 @@ class FoliosController extends Controller
             $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
         }
 
-
-        return view('user.components.documentos_imnas.index_titulo',compact('tickets','tipo_documentos','tickets_externo'));
+        if (!empty($tickets) && $tickets->diseno_doc == 'Nuevo') {
+            return view('user.components.documentos_imnas.nuevos.index_titulo', compact('tickets', 'tipo_documentos', 'tickets_externo'));
+        } else {
+            return view('user.components.documentos_imnas.index_titulo', compact('tickets', 'tipo_documentos', 'tickets_externo'));
+        }
 
     }
 
@@ -210,7 +217,11 @@ class FoliosController extends Controller
             $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
         }
 
-        return view('user.components.documentos_imnas.index_diploma',compact('tickets','tipo_documentos','tickets_externo'));
+        if (!empty($tickets) && $tickets->diseno_doc == 'Nuevo') {
+            return view('user.components.documentos_imnas.nuevos.index_diploma', compact('tickets', 'tipo_documentos', 'tickets_externo'));
+        } else {
+            return view('user.components.documentos_imnas.index_diploma', compact('tickets', 'tipo_documentos', 'tickets_externo'));
+        }
 
     }
 
@@ -230,8 +241,11 @@ class FoliosController extends Controller
             $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
         }
 
-
-        return view('user.components.documentos_imnas.index_crednecial',compact('tickets','tipo_documentos','tickets_externo'));
+        if (!empty($tickets) && $tickets->diseno_doc == 'Nuevo') {
+            return view('user.components.documentos_imnas.nuevos.index_crednecial', compact('tickets', 'tipo_documentos', 'tickets_externo'));
+        } else {
+            return view('user.components.documentos_imnas.index_crednecial', compact('tickets', 'tipo_documentos', 'tickets_externo'));
+        }
 
     }
 
@@ -248,7 +262,11 @@ class FoliosController extends Controller
             ->orderBy('id')
             ->get();
 
-        return view('user.components.documentos_imnas.index_tira',compact('tickets','tipo_documentos','subtemas'));
+            if (!empty($tickets) && $tickets->diseno_doc == 'Nuevo') {
+                return view('user.components.documentos_imnas.nuevos.index_tira', compact('tickets', 'tipo_documentos', 'tickets_externo'));
+            } else {
+                return view('user.components.documentos_imnas.index_tira', compact('tickets', 'tipo_documentos', 'tickets_externo'));
+            }
 
     }
 
