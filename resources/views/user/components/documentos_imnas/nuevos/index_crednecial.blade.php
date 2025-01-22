@@ -15,19 +15,22 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
     : asset('utilidades_documentos/') . '/';
 @endphp
 
+@include('user.components.documentos_imnas.nuevos.fuentes')
+
+
 @section('css_custom')
     <style>
 
 
         .card-3d-wrapper {
-            width: 408px!important;
-            height:280px!important;
+            width: 480px!important;
+            height: 304px !important;
         }
 
         .container2 {
             position: relative;
-            width: 408px!important;
-            height:280px!important;
+            width: 480px;
+            height: 305px;
             margin: 0 auto; /* Centrar el contenedor */
             overflow: hidden; /* Evitar desbordes */
             background-image: url('{{ $basePath . 'fondo.png'}}');
@@ -38,8 +41,8 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
         .container_trasero {
             position: relative;
-            width: 408px!important;
-            height:280px!important;
+            width: 480px;
+            height: 305px;
             margin: 0 auto; /* Centrar el contenedor */
             overflow: hidden; /* Evitar desbordes */
             background-image: url('{{ $basePath . 'fondo_trasero.png'}}');
@@ -50,7 +53,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
 
         .text_qr{
-            font-size: 3px;
+            font-size: 7px;
             color:#3d3b3a;
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
@@ -61,13 +64,13 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         }
 
         .text_qr2{
-            font-size: 5px;
+            font-size: 7px;
             color:#3d3b3a;
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
             padding: 0px;
             margin:5px 0 0 0;
-            line-height: 4.3px;
+            line-height: 6.3px;
 
         }
 
@@ -79,7 +82,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
             color:#000;
             margin: 0;
             padding: 0;
-            line-height: 0;
+            line-height: 30px;
             margin-top: 15px;
             margin-bottom: 13px;
          }
@@ -88,17 +91,17 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
             color:#2c6d77;
-            font-size: 25px;
+            font-size: 27px;
             margin: 0;
             padding: 0;
-            line-height: 10px;
+            line-height: 12px;
         }
 
         .text_datos{
-            font-size: 8px;
+            font-size: 10px;
             font-family: 'PTSans_Bold';
             font-weight: '600';
-            line-height: 6px;
+            line-height: 20px;
             text-align: end;
             color: #2c6d77;
             text-align: right; /* Alinea el texto a la derecha */
@@ -117,7 +120,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         }
 
         .text_datos_strong{
-            font-size: 8px;
+            font-size: 10px;
             font-family: 'PTSans_Bold';
             font-weight: '600';
             line-height: 6px;
@@ -145,10 +148,10 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         }
 
         .titulo_principal{
-            font-size: 8px;
+            font-size: 10px;
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
-            line-height: 7px;
+            line-height: 23px;
             color: #fff;
         }
 
@@ -161,7 +164,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         }
 
         .folio{
-            font-size: 5px;
+            font-size: 7px;
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
             line-height: 0px;
@@ -172,7 +175,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         }
 
         .folio_num{
-            font-size: 8px;
+            font-size: 10px;
             font-family: 'Montserrat_ExtraBold';
             font-weight: 'regular';
             line-height: 5px;
@@ -202,7 +205,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         .h3_nomre_firmas{
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
-            font-size: 5px;
+            font-size: 7px;
             color:#3d3b3a;
             margin:0;
         }
@@ -217,27 +220,27 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         }
 
         .texto_trasero_1{
-            font-size:4px;
+            font-size:7px;
             font-family: 'Montserrat_Medium';
             font-weight: 'regular';
-            line-height: 4px;
+            line-height: 7px;
             color: #3d3b3a;
             letter-spacing: 0.2px;
         }
 
         .texto_trasero{
-            font-size:4px;
+            font-size:7px;
             font-family: 'Montserrat_Medium';
             font-weight: 'regular';
             color: #3d3b3a;
-            line-height: 3.5px;
+            line-height: 7px;
             letter-spacing: 0.2px;
 
         }
 
 
         .especialidad_trasera{
-            font-size: 8px;
+            font-size: 10px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
             line-height: 6px;
@@ -254,7 +257,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         }
 
         .strong_texto_trasero{
-            font-size:4px;
+            font-size:6px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
             line-height: 7px;
@@ -263,7 +266,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         }
 
         .strong_texto_trasero_azul{
-            font-size:4px;
+            font-size:6px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
             line-height: 7px;
@@ -317,10 +320,10 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 @section('content_documentos')
 
     <div class="card-front">
-        <div class="container2" style="">
+        <div class="container2 p-2" style="">
 
             <div class="row">
-                <div class="col-8 text-start  " style="padding: 0 0 0 6px">
+                <div class="col-8 text-start  " style="">
                     <p class="titulo_principal" style="margin-top: 22px">
                         <strong class="titulo_principal_strong">REGISTRO NACIONAL</strong> <br>
                         INSTITUTO MEXICANO NATURALES AIN SPA
@@ -409,7 +412,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
             <div class="row">
                 <div class="col-12 ">
-                    <p class="titulo_trasero uppercase">CÉDULA DE IDENTIDAD permanente</p>
+                    <p class="titulo_trasero uppercase mt-3">CÉDULA DE IDENTIDAD permanente</p>
                 </div>
             </div>
 
