@@ -135,16 +135,14 @@ class OrderController extends Controller
                 $order_ticket->save();
 
                 if($details['curso'] == 647){
-                    $envio = new RegistroImnas;
-                    $envio->id_order = $order->id;
-                    $envio->id_usuario = $payer->id;
-                    $envio->id_ticket = $details['id'];
-                    if($details['id'] == 1009){
-                        $envio->tipo = 2;
-                    }else{
-                        $envio->tipo = 1;
+                    for ($i = 0; $i < $details['quantity']; $i++) {
+                        $envio = new RegistroImnas;
+                        $envio->id_order = $order->id;
+                        $envio->id_usuario = $payer->id;
+                        $envio->id_ticket = $details['id'];
+                        $envio->tipo = ($details['id'] == 1009) ? 2 : 1;
+                        $envio->save();
                     }
-                    $envio->save();
 
                     $user_registro_imnas = User::where('id', $payer->id)->first();
                     $user_registro_imnas->registro_imnas = '1';
@@ -1022,26 +1020,35 @@ class OrderController extends Controller
         }
     }
 
-    public function addToCart($id)
+    public function addToCart(Request $request, $id)
     {
         $cart = session()->get('cart', []);
 
         $product = CursosTickets::findOrFail($id);
-        if ($product->descuento == NULL) {
-            $precio = $product->precio;
-        } else {
+        $currentQuantity = isset($cart[$id]) ? $cart[$id]['quantity'] : 0;
+        $newQuantity = $currentQuantity + $request->quantity;
+
+        // Determinar el precio según las condiciones
+        if ($id == 1369 && $newQuantity >= 15) {
             $precio = $product->descuento;
+        } else {
+            if ($id == 1369) {
+                $precio = $product->precio;
+            } else {
+                $precio = $product->descuento === null ? $product->precio : $product->descuento;
+            }
         }
 
         if (isset($cart[$id])) {
-            $cart[$id]['quantity']++;
+            $cart[$id]['quantity'] += $request->quantity;
+            $cart[$id]['price'] = $precio;
         } else {
 
             $cart[$id] = [
                 "id" => $product->id,
                 "name" => $product->nombre,
                 "curso" => $product->id_curso,
-                "quantity" => 1,
+                "quantity" => $request->quantity,
                 "price" => $precio,
                 "paquete" => 0,
                 "image" => $product->imagen
