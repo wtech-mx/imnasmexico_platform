@@ -404,7 +404,19 @@ Mi perfil- {{$cliente->name}}
                                             <td><p>{{ $registro_imnas->folio }}</p></td>
                                             <td><p>{{ $registro_imnas->num_guia }}</p></td>
                                             <td>
-                                                <a type="button" class="btn btn-sm btn-ligth" data-bs-toggle="modal" data-bs-target="#modalUser{{ $registro_imnas->id }}" title="Ver"><i class="fa fa-eye"></i></a>
+                                                <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modalUser{{ $registro_imnas->id }}" title="Ver">Detalles</a>
+                                                @if ($registro_imnas->id_ticket == 1369)
+                                                    @if ($registro_imnas->estatus_reconocimiento == 'Rechazado')
+                                                        <p style="color: #864d4d"><b>Rechazado</b></p>
+                                                    @else
+                                                        <form action="{{ route('reconoci.generarPDF', $registro_imnas->id) }}" method="POST">
+                                                            @csrf
+                                                            <button type="submit" class="btn-sm text-center btn btn-success mt-2">
+                                                                Descargar
+                                                            </button>
+                                                        </form>
+                                                    @endif
+                                                @endif
                                             </td>
                                         </tr>
                                         @include('user.modal_registro_imnas')

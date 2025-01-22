@@ -632,6 +632,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/registro/imnas/clientes/{code}', [App\Http\Controllers\RegistroIMNASController::class, 'index_clientes'])->name('clientes.imnas');
     Route::patch('/registro/imnas/subir/especialidad/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_especialidad'])->name('update_especialidad.imnas');
     Route::patch('/registro/imnas/subir/doc/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_clientes'])->name('update_clientes.imnas');
+    Route::post('/registro/imnas/pdf/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'reconoci_generarPDF'])->name('reconoci.generarPDF');
+    Route::post('/registro/imnas/update/reconocimiento/{id}', [App\Http\Controllers\RegistroIMNASController::class, 'update_reconocimiento'])->name('reconocimiento.update');
 
     // =============== M O D U L O   R E G I S T R O   C O M P R A S ===============================
 
