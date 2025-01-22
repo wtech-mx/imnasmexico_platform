@@ -275,7 +275,7 @@
             background-color: transparent;
             background-size: cover;
             background-position: center center;
-            background-image: url('{{ $basePath . 'foto.jpeg'}}');
+            /* background-image: url('{{ $basePath . 'foto.jpeg'}}'); */
         }
 
         .oval-container {
