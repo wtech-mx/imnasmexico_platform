@@ -1025,7 +1025,7 @@ class OrderController extends Controller
         $cart = session()->get('cart', []);
 
         $product = CursosTickets::findOrFail($id);
-        $currentQuantity = isset($cart[$id]) ? $cart[$id]['quantity'] : 0;
+        $currentQuantity = isset($cart[$id]) ? $cart[$id]['quantity'] : 1;
         $newQuantity = $currentQuantity + $request->quantity;
 
         // Determinar el precio según las condiciones
