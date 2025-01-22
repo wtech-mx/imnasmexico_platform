@@ -1025,8 +1025,13 @@ class OrderController extends Controller
         $cart = session()->get('cart', []);
 
         $product = CursosTickets::findOrFail($id);
-        $currentQuantity = isset($cart[$id]) ? $cart[$id]['quantity'] : 1;
-        $newQuantity = $currentQuantity + $request->quantity;
+
+        // Establecer cantidad predeterminada si no se proporciona
+        $requestQuantity = $request->quantity ?? 1;
+
+        // Obtener la cantidad actual en el carrito
+        $currentQuantity = isset($cart[$id]) ? $cart[$id]['quantity'] : 0;
+        $newQuantity = $currentQuantity + $requestQuantity;
 
         // Determinar el precio según las condiciones
         if ($id == 1369 && $newQuantity >= 15) {
@@ -1040,15 +1045,16 @@ class OrderController extends Controller
         }
 
         if (isset($cart[$id])) {
-            $cart[$id]['quantity'] += $request->quantity;
+            // Actualizar cantidad y precio en el carrito
+            $cart[$id]['quantity'] += $requestQuantity;
             $cart[$id]['price'] = $precio;
         } else {
-
+            // Agregar un nuevo producto al carrito
             $cart[$id] = [
                 "id" => $product->id,
                 "name" => $product->nombre,
                 "curso" => $product->id_curso,
-                "quantity" => $request->quantity,
+                "quantity" => $requestQuantity,
                 "price" => $precio,
                 "paquete" => 0,
                 "image" => $product->imagen
