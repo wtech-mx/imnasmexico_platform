@@ -11,6 +11,7 @@ use App\Models\RegistroImnas;
 use App\Models\RegistroImnasEscuela;
 use App\Models\RegistroImnasEspecialidad;
 use App\Models\RegistroImnasTemario;
+use App\Models\User;
 
 class FoliosController extends Controller
 {
