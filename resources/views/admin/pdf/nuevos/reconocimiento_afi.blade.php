@@ -14,6 +14,10 @@
                     ? 'https://plataforma.imnasmexico.com/utilidades_documentos/'
                     : 'utilidades_documentos/';
 
+        $basePathLogo = ($domain == 'plataforma.imnasmexico.com')
+                    ? 'https://plataforma.imnasmexico.com/documentos/'
+                    : 'documentos/';
+
     @endphp
 
     @include('admin.pdf.nuevos.fuentes')
@@ -130,7 +134,7 @@
             <div class="col-8 text-center border" style="margin-top: 70px">
 
                 <div class="img_logo">
-                    <img src="{{ $basePathUtilidades . $fileName_logo }}" alt="Logo">
+                    <img src="{{ $basePathUtilidades . $user->logo }}" alt="Logo">
                 </div>
 
             </div>
@@ -145,7 +149,7 @@
 
             <div class="col-8 text-center border p-2">
                 <h1 class="titulo">
-                    El Registro Nacional Instituto Mexicano Naturales Ain Spa  en conjunto con {{ $name_escuela }}
+                    El Registro Nacional Instituto Mexicano Naturales Ain Spa  en conjunto con {{ $user->escuela }}
                 </h1>
             </div>
 
@@ -171,7 +175,7 @@
 
             <div class="col-8 text-center border">
                 <h3 class="nombre_persona">
-                    {!! $nombre !!}
+                    {!! $registro->nombre !!}
                 </h3>
             </div>
 
@@ -186,8 +190,8 @@
 
             <div class="col-8 text-center border p-2">
                 <p class="parrafo">  Por haber concluido exitosamente el curso o diplomado de:</p>
-                <h2 class="curso"> {{ ucwords(strtolower($curso)) }}</h2>
-                <p class="parrafo"> Realizado desde el {{ \Carbon\Carbon::parse($fecha)->isoFormat('D [de] MMMM [del] YYYY') }}. </p>
+                <h2 class="curso"> {{ ucwords(strtolower($registro->nom_curso)) }}</h2>
+                <p class="parrafo"> Realizado desde el {{ \Carbon\Carbon::parse($registro->fecha_curso)->isoFormat('D [de] MMMM [del] YYYY') }}. </p>
             </div>
 
             <div class="col-2 text-center border p-2">
@@ -199,7 +203,7 @@
             <div class="col-2 text-center border">
             </div>
             <div class="col-8 text-center border ">
-                <p class="footer p-0 m-0">Organizado por la marca {{ $name_escuela }} </p>
+                <p class="footer p-0 m-0">Organizado por la marca {{ $user->escuela }} </p>
                 <p class="parrafo2 p-0 m-0">Agente  capacitador externo del Registro Nacional Instituto Mexicano Naturales Ain Spa</p>
             </div>
             <div class="col-2 text-center border">
@@ -217,8 +221,8 @@
             </div>
 
             <div class="col-4 text-center border" style="margin-top: 60px">
-                <img style="text-align: center;" src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img">
-                <p>{{ $director }}</p>
+                <img src="{{$basePathLogo . $user->telefono . '/'. $escuela->firma}}" style="width: 120px;">
+                <p>{{ $user->name}}</p>
             </div>
         </div>
 

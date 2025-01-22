@@ -16,6 +16,12 @@
                         <h5 class="mb-3"> {{$cliente->telefono}} </h5>
                         <h5 class="mb-3"> {{$cliente->escuela}} </h5>
 
+                        <ul>
+                            @foreach ($especialidades as $especialidad)
+                                <li>{{$especialidad->especialidad}}</li>
+                            @endforeach
+                        </ul>
+
                         {{-- $item->User->escuela; --}}
 
                     </div>
@@ -56,9 +62,13 @@
                                                         </p>
                                                     </td>
                                                     <td>
-                                                        <p style="color: {{ $registro_imnas->diseno_doc === 'Clasico' || $registro_imnas->diseno_doc === NULL ? '#836262' : '#66c0cc' }}">
-                                                         <b>Diseño: <br> {{ $registro_imnas->diseno_doc ?? 'Clasico' }}</b>
-                                                        </p>
+                                                        @if ($registro_imnas->id_ticket == 1369)
+                                                            {{$registro_imnas->estatus_reconocimiento}}
+                                                        @else
+                                                            <p style="color: {{ $registro_imnas->diseno_doc === 'Clasico' || $registro_imnas->diseno_doc === NULL ? '#836262' : '#66c0cc' }}">
+                                                            <b>Diseño: <br> {{ $registro_imnas->diseno_doc ?? 'Clasico' }}</b>
+                                                            </p>
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         @php
@@ -98,14 +108,31 @@
                                                             <i class="fa fa-file"></i>
                                                         </a>
 
-                                                        <a class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#edit_guia_{{ $registro_imnas->id }}">
-                                                            <i class="fa fa-eye"></i>
-                                                        </a>
+                                                        @if ($registro_imnas->id_ticket == 1369)
+                                                        <form action="{{ route('reconocimiento.update', $registro_imnas->id) }}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" value="0" name="estatus">
+                                                            <button class="btn btn-sm btn-danger"type="submit">
+                                                                <i class="fa fa-window-close"></i>
+                                                            </button>
+                                                        </form>
 
-                                                        <a type="button" class="btn btn-sm btn-success" href='https://api.whatsapp.com/send?phone={{ $cliente->telefono }}&text=Hola,%20te%20informamos%20que%20tus%20documentos%20ya%20est%C3%A1n%20listos%20y%20han%20sido%20enviados%20por%20paqueter%C3%ADa.%20Puedes%20rastrear%20tu%20env%C3%ADo%20utilizando%20el%20n%C3%BAmero%20de%20gu%C3%ADa:%20{{ $registro_imnas->num_guia }}.%20Si%20tienes%20alguna%20pregunta%20o%20necesitas%20m%C3%A1s%20informaci%C3%B3n,%20no%20dudes%20en%20contactarnos.' style="color: #ffffff" target="_blank">
-                                                            <i class="fa fa-whatsapp"></i>
-                                                        </a>
+                                                        <form action="{{ route('reconocimiento.update', $registro_imnas->id) }}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" value="1" name="estatus">
+                                                            <button class="btn btn-sm btn-success" type="submit">
+                                                                <i class="fa fa-check-circle"></i>
+                                                            </button>
+                                                        </form>
+                                                        @else
+                                                            <a class="btn btn-sm btn-info" data-bs-toggle="modal" data-bs-target="#edit_guia_{{ $registro_imnas->id }}">
+                                                                <i class="fa fa-eye"></i>
+                                                            </a>
 
+                                                            <a type="button" class="btn btn-sm btn-success" href='https://api.whatsapp.com/send?phone={{ $cliente->telefono }}&text=Hola,%20te%20informamos%20que%20tus%20documentos%20ya%20est%C3%A1n%20listos%20y%20han%20sido%20enviados%20por%20paqueter%C3%ADa.%20Puedes%20rastrear%20tu%20env%C3%ADo%20utilizando%20el%20n%C3%BAmero%20de%20gu%C3%ADa:%20{{ $registro_imnas->num_guia }}.%20Si%20tienes%20alguna%20pregunta%20o%20necesitas%20m%C3%A1s%20informaci%C3%B3n,%20no%20dudes%20en%20contactarnos.' style="color: #ffffff" target="_blank">
+                                                                <i class="fa fa-whatsapp"></i>
+                                                            </a>
+                                                        @endif
                                                     </td>
                                                 </tr>
 

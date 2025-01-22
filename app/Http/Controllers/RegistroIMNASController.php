@@ -231,8 +231,9 @@ class RegistroIMNASController extends Controller
 
         $curso = Cursos::where('id', '=', 647)->first();
         $cursos_tickets = CursosTickets::where('id_curso', '=', $curso)->get();
+        $especialidades = RegistroImnasEspecialidad::where('id_cliente', '=', $cliente->id)->get();
 
-        return view('admin.registro_imnas.show', compact('registros_imnas', 'cliente', 'curso', 'cursos_tickets'));
+        return view('admin.registro_imnas.show', compact('registros_imnas', 'cliente', 'curso', 'cursos_tickets', 'especialidades'));
     }
 
     public function generar_registro(Request $request){
@@ -1686,5 +1687,31 @@ class RegistroIMNASController extends Controller
         }
 
         return response()->json(['error' => 'Registro no encontrado.'], 404);
+    }
+
+    public function reconoci_generarPDF(Request $request, $id)
+    {
+        $registro = RegistroImnas::where('id', $id)->first();
+        $user = User::where('id', $registro->id_usuario)->firstOrFail();
+        $escuela = RegistroImnasEscuela::where('id_user', $registro->id_usuario)->first();
+
+        $pdf = \PDF::loadView('admin.pdf.nuevos.reconocimiento_afi', compact('registro', 'user', 'escuela'));
+
+       // return $pdf->stream();
+        return $pdf->download('Reconocimiento '.$registro->nombre.'.pdf');
+    }
+
+    public function update_reconocimiento(Request $request, $id){
+
+        $registro_imnas = RegistroImnas::where('id', $id)->firstOrFail();
+        $registro_imnas->fecha_realizados = date('Y-m-d');
+        if($request->input('estatus') == '1'){
+            $registro_imnas->estatus_reconocimiento = 'Aprobada';
+        }else{
+            $registro_imnas->estatus_reconocimiento = 'Rechazado';
+        }
+        $registro_imnas->update();
+
+        return redirect()->back()->with('success', 'datos actualizado con exito.');
     }
 }
