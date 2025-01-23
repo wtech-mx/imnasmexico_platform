@@ -18,6 +18,7 @@
         ? asset('utilidades_documentos/') . '/'
         : asset('utilidades_documentos/') . '/';
 @endphp
+@include('user.components.documentos_imnas.nuevos.fuentes')
 
 @section('css_custom')
     <style>
@@ -43,21 +44,22 @@
         }
 
         .img_stps_registro_header{
-            width: 200px;
+            width: 70px;
         }
 
         .img_firmas_delanteras{
-            width: 160px;
+            width: 70px;
         }
 
         .img_traseras{
-            width: 220px;
+            width: 130px;
+            margin-left: 30px;
         }
 
         .h3_nomre_firmas{
             font-family: 'Montserrat_SemiBold';
             font-weight: 'regular';
-            font-size: 17px;
+            font-size: 8px;
             line-height: 19px;
             color:#010101;
         }
@@ -65,21 +67,21 @@
         .texto_emosires{
             font-family: 'Montserrat_LightItalic';
             font-weight: 'regular';
-            font-size: 20px;
-            margin-top: 10px!important;
-            line-height: 19px;
-            color:#010101;
+            font-size: 10px;
+            margin-top: 5px !important;
+            line-height: 11px;
+            color: #010101;
         }
 
 
         .texto_documentos{
-            font-size: 33px;
+            font-size: 17px;
             font-family: 'AlexBrush_Regular';
             font-weight: 'regular';
             margin-top: 20px;
             margin-bottom: 40px;
             color: #747474;
-            line-height: 22px;
+            line-height: 15px;
         }
 
         .texto_documentos_ligth{
@@ -106,28 +108,28 @@
         }
 
         .titulo_name{
-            font-size: 40px;
+            font-size: 18px;
             font-family: 'OPTIEngraversOldEnglish';
             font-weight: 'regular';
             line-height:18px;
         }
 
         .titulo_especialidad_trasero{
-            font-size: 30px;
+            font-size: 18px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
             line-height:18px;
         }
 
         .subtitulo_cedula{
-            font-size: 29px;
+            font-size: 20px;
             font-family: 'OPTIEngraversOldEnglish';
             font-weight: 'regular';
             line-height:22px;
         }
 
         .titulo_especialidad{
-            font-size: 32px;
+            font-size: 27px;
             font-family: 'OPTIEngraversOldEnglish';
             font-weight: 'regular';
             line-height: 25px;
@@ -152,13 +154,12 @@
         }
 
         .texto_trasero{
-            font-size:16px;
+            font-size:6px;
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
-            margin-top: 20px;
-            line-height: 15px;
-            margin-left: 50px;
-            margin-right: 50px;
+            line-height: 9px;
+            margin-left: 40px;
+            margin-right: 40px;
             color: #010101;
         }
 
@@ -185,7 +186,7 @@
         }
 
         .texto_principal_cedula{
-            font-size: 22px;
+            font-size: 13px;
             font-family: 'Montserrat_Light';
             font-weight: 'normal';
             line-height: 18px;
@@ -240,7 +241,7 @@
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
             color:#2c6d77;
-            font-size: 70px;
+            font-size: 35px;
             margin: 0;
             padding: 0;
             line-height: 65px;
@@ -253,16 +254,16 @@
             background-color: transparent;
             background-size: cover;
             background-position: center center;
+            background-image: url('https://plataforma.imnasmexico.com/documentos_nuevos/cedula/foto.jpeg');
             /* background-image: url('{{ $basePath . 'foto.jpeg'}}'); */
         }
 
         .oval-container {
-            margin-left: 65px;
-            width: 330px;
-            height: 460px;
+            margin-left: 30px;
+            width: 140px;
+            height: 170px;
             overflow: hidden;
             background: transparent;
-            /* Ajuste condicional de top */
         }
 
         .certificado_titulo{
@@ -283,14 +284,14 @@
 
         .lista{
             color:#2c6d77;
-            font-size: 20px;
+            font-size: 7px;
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
         }
 
         .lista_strong{
             color:#010101;
-            font-size: 20px;
+            font-size: 7px;
             font-family: 'Montserrat_SemiBold';
             font-weight: 'regular';
         }
@@ -303,8 +304,8 @@
         } */
 
         .img_logo {
-            width: 300px;  /* Tamaño máximo permitido */
-            height: 300px;
+            width: 105px;  /* Tamaño máximo permitido */
+            height: 105px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -326,23 +327,23 @@
             <div class="content">
 
                 <div class="row" >
-                    <div class="col-4 text-center border " style="margin-top: 120px">
+                    <div class="col-4 text-center border " style="margin-top: 30px">
                     </div>
 
-                    <div class="col-4 text-center border " style="margin-top: 120px">
+                    <div class="col-4 text-center border " style="margin-top: 30px">
                         <div class="img_logo">
-                            <img src="" alt="Logo">
+                            <img src="https://plataforma.imnasmexico.com/documentos_nuevos/titulo/logo.png" alt="Logo">
                         </div>
                         {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
                     </div>
 
-                    <div class="col-4 text-center border " style="margin-top: 120px">
+                    <div class="col-4 text-center border " style="margin-top: 30px">
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-center border" style="margin-top: 10px;margin-bottom: 0px;">
-                        <h5 class="azul_fuerte subtitulo_cedula " style="margin-right:60px;margin-left:60px;">
+                    <div class="col-12 text-center border" style="margin-top: 0px;margin-bottom: 0px;">
+                        <h5 class="azul_fuerte subtitulo_cedula " style="margin-right:20px;margin-left:20px;">
                             ESCUELA a través de Registro
                             Nacional Instituto Mexicano Naturales Ain Spa
                         </h5>
@@ -372,7 +373,7 @@
                             el título de
                         </p>
 
-                        <h2 class="azul_fuerte titulo_especialidad  p-0" style="margin-bottom: 20px;">
+                        <h2 class="azul_fuerte titulo_especialidad  p-0" style="margin-bottom: 10px;">
                             Curso
                         </h2>
 
@@ -393,8 +394,8 @@
                         <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" class="img_traseras">
                     </div>
 
-                    <div class="col-8 text-center border ">
-                        <p class="texto_principal_cedula uppercase" style="margin-bottom: auto;margin-top: 60px">
+                    <div class="col-8 text-center border my-auto">
+                        <p class="texto_principal_cedula uppercase" style="">
                             Expedido en la Ciudad de México,<br>  el dia
                         </p>
                     </div>
@@ -423,16 +424,16 @@
 
                 <div class="row" >
 
-                    <div class="col-4 border  text-center" style="margin-top: 30px">
-                        <img class="img_stps_registro_header " src="{{ $basePath . 'stps.webp'}}" style="margin-top: 70px">
+                    <div class="col-4 border  text-center" style="margin-top: 0px">
+                        <img class="img_stps_registro_header " src="{{ $basePath . 'stps.webp'}}" style="margin-top: 5px">
                     </div>
 
-                    <div class="col-4 border  text-center" style="margin-top: 30px;">
-                        <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 220px;">
+                    <div class="col-4 border  text-center" style="margin-top: 0px;">
+                        <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 60px;">
                     </div>
 
-                    <div class="col-4 border  text-center"  style="margin-top: 30px;">
-                        <img class="img_stps_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" style="margin-top: 50px">
+                    <div class="col-4 border  text-center"  style="margin-top: 0px;">
+                        <img class="img_stps_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" style="margin-top: 00px">
                     </div>
 
                 </div>
@@ -450,24 +451,24 @@
             <div class="content">
 
                 <div class="row" >
-                    <div class="col-4 text-center border " style="margin-top: 120px">
+                    <div class="col-4 text-center border " style="margin-top: 30px">
                     </div>
 
-                    <div class="col-4 text-center border " style="margin-top: 120px">
+                    <div class="col-4 text-center border " style="margin-top: 30px">
                         <div class="img_logo">
-                            <img src="" alt="Logo">
+                            <img src="https://plataforma.imnasmexico.com/documentos_nuevos/titulo/logo.png" alt="Logo">
                         </div>
                         {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
                     </div>
 
-                    <div class="col-4 text-center border " style="margin-top: 120px">
+                    <div class="col-4 text-center border " style="margin-top: 30px">
                     </div>
                 </div>
 
                 <div class="row">
                     <!-- Primera columna -->
                     <div class="col-6 text-start border">
-                        <p class="uppercase lista" style="margin-left: 90px;">
+                        <p class="uppercase lista" style="margin-left: 40px;">
                             <strong class="lista_strong"> Nombre: </strong> <br>
                             <strong class="lista_strong"> curp:</strong>  <br>
                             <strong class="lista_strong"> carrera:</strong>  <br>
@@ -484,8 +485,8 @@
                     </div>
 
                     <!-- Tercera columna -->
-                    <div class="col-3 text-center border">
-                        <h6 class="azul_claro tipo uppercase m-0 p-0" style="margin-top: 70px">
+                    <div class="col-3 text-center border my-auto">
+                        <h6 class="azul_claro tipo uppercase m-0 p-0" style="">
                             TIPO
                         </h6>
                         <h6 class="azul_claro cea uppercase m-0 p-0">
@@ -496,7 +497,7 @@
 
                 <div class="row">
                     <div class="col-12 text-start border" >
-                        <p class="texto_trasero uppercase" style="padding:0px 45px 0px 45px;">
+                        <p class="texto_trasero uppercase" style="">
                             <strong>ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br><br>
 
                             INSTRUMENTO NÚMERO SETENTA Y CINCO MIL SEISCIENTOS SETENTA Y TRES. LIBRO MIL CIENTO CUARENTA Y TRES. CIUDAD DE MÉXICO. A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE REFORMA AL ARTÍCULO SEGUNDO DE LOS ESTATUTOS SOCIALES; y, B.- LA REFORMA AL ARTÍCULO SEXTO DE LOS ESTATUTOS SOCIALES, que resultan de LA PROTOCOLIZACIÓN del acta de Asamblea General Extraordinaria de Socios de "INSTITUTO MEXICANO NATURALES AIN SPA", SOCIEDAD CIVIL.
@@ -517,14 +518,14 @@
 
                 <div class="row">
                     <div class="col-12 text-start border  m-0">
-                        <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 45px 0px 90px;">
+                        <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 0px 0px 40px;">
                             Curso
                         </h1>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-start border p-0"  style="margin-bottom: 30px">
+                    <div class="col-12 text-start border p-0"  style="">
                         <p class="texto_trasero uppercase m-0" style="padding:0px 45px 0px 40px">
                             este reconocimiento es <strong>inválido</strong> , si no tiene todas las firmas y sellos que lo que acrediten.
                         </p>
@@ -532,32 +533,32 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-4 text-center border ">
-                        <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 270px;margin-top: 10px" >
+                    <div class="col-4 text-center border my-auto">
+                        <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 100px;" >
                     </div>
 
                     <div class="col-4 text-center border ">
-                        <img src="{{ $basePath . 'carla.webp'}}" style="width: 230px;">
+                        <img src="{{ $basePath . 'carla.webp'}}" style="width: 80px;">
                         <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
                         <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
                     </div>
 
-                    <div class="col-4 text-center border ">
-                        <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 210px;">
+                    <div class="col-4 text-center border my-auto">
+                        <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 70px;">
                     </div>
                 </div>
 
                 <div class="row" >
 
                     <div class="col-4 border  text-center" >
-                        <img class="" src="{{ $basePath . 'stps.webp'}}" style="width:220px;"  >
+                        <img class="" src="{{ $basePath . 'stps.webp'}}" style="width:750px;"  >
                     </div>
 
                     <div class="col-4 border  text-center" style="">
                     </div>
 
                     <div class="col-4 border  text-center"  style="">
-                        <img class=" " src="{{ $basePath . 'registro_nacional.png'}}" style="width:160px;">
+                        <img class=" " src="{{ $basePath . 'registro_nacional.png'}}" style="width:65px;">
                     </div>
 
                 </div>

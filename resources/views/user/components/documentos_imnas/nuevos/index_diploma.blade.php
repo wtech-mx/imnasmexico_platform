@@ -299,11 +299,11 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
             <div class="content">
 
                 <div class="row" >
-                    <div class="col-3 border  text-center"  style="margin-top: 60px;">
+                    <div class="col-3  text-center"  style="margin-top: 60px;">
                         <img class="img_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" style="">
                     </div>
 
-                    <div class="col-3 border  text-center" style="margin-top: 60px">
+                    <div class="col-3  text-center" style="margin-top: 60px">
                         <div class="img_logo">
                             <img src="" alt="Logo">
                         </div>
@@ -311,18 +311,18 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                         {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
                     </div>
 
-                    <div class="col-3 border  text-center" style="margin-top: 60px">
+                    <div class="col-3  text-center" style="margin-top: 60px">
                         <img class="img_stps_registro_header " src="{{ $basePath . 'stps.webp'}}" style="">
 
                     </div>
 
-                    <div class="col-3 border  text-center" style="margin-top: 60px">
+                    <div class="col-3  text-center" style="margin-top: 60px">
                         <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 60px">
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-center border">
+                    <div class="col-12 text-center ">
                         <p class="texto_principal_cedula uppercase" style="margin-bottom: px">
                             La Dirección General del Instituto Mexicano Naturales Ain Spa y <br>
                              del Registro Nacional Instituto Mexicano Naturales Ain Spa, <br>
@@ -333,7 +333,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-center border">
+                    <div class="col-12 text-center ">
                         <h6 class="azul_fuerte uppercase titulo_cedula m-0 p-0">
                             diploma
                         </h6>
@@ -344,7 +344,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-center border">
+                    <div class="col-12 text-center ">
                         <p class="letra_sola p-0" style="margin-top: 5px;margin-bottom: 5px">
                            A
                         </p>
@@ -353,7 +353,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
                 <div class="row">
 
-                    <div class="col-8 text-center border ">
+                    <div class="col-8 text-center  ">
                         <h1 class="h1_nombre azul_fuerte titulo_name p-0 m-0">
                             Nombre
                         </h1>
@@ -380,7 +380,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                         </p>
                     </div>
 
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
                         <div class="oval-container">
                             <div class="oval" style="">
                             </div>
@@ -396,19 +396,19 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                 </div>
 
                 <div class="row">
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
                         <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras">
                         <h3 class="h3_nomre_firmas uppercase m-0 p-0">Juan Pablo Soto</h3>
                         <h5 class="texto_emosires m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
                     </div>
 
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
                         <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
                         <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
                         <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
                     </div>
 
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
                         <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras">
                         <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Ma. Luisa Flores</h3>
                         <h5 class="texto_emosires m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
@@ -416,7 +416,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-center border ">
+                    <div class="col-12 text-center  ">
                         <p class="azul_fuerte texto_footer uppercase  p-0"  style="margin-top:20px">
                             Expedido en la Ciudad de México,  el dia Fecha. Este documento respalda 120 hrs <br>
                             totales del Curso, así como Documentos Anexos correspondientes con vigencia PERMANENTE <br>
@@ -436,23 +436,23 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
             <!-- Contenido superpuesto sobre la imagen -->
 
                 <div class="row" >
-                    <div class="col-3 border  text-center"  style="margin-top: 60px;">
+                    <div class="col-3   text-center"  style="margin-top: 60px;">
                         <img class="img_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" style="">
                     </div>
 
-                    <div class="col-3 border  text-center" style="margin-top: 60px">
+                    <div class="col-3   text-center" style="margin-top: 60px">
                         {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
                         <div class="img_logo">
                             <img src="" alt="Logo">
                         </div>
                     </div>
 
-                    <div class="col-3 border  text-center" style="margin-top: 60px">
+                    <div class="col-3   text-center" style="margin-top: 60px">
                         <img class="img_stps_registro_header " src="{{ $basePath . 'stps.webp'}}" style="">
 
                     </div>
 
-                    <div class="col-3 border  text-center" style="margin-top: 60px">
+                    <div class="col-3   text-center" style="margin-top: 60px">
                         <img class="" src="{{ $basePath . 'mundo.webp'}}" style="width: 60px">
 
                     </div>
@@ -460,7 +460,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
 
                 <div class="row">
-                    <div class="col-12  border ">
+                    <div class="col-12   ">
                         <p class="certificado_titulo text-start">
                             CERTIFICADO ANTE EL REGISTRO NACIONAL <br>
                             INSTITUTO MEXICANO NATURALES AIN SPA
@@ -469,13 +469,13 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                 </div>
 
                 <div class="row">
-                    <div class="col-8 text-center border ">
+                    <div class="col-8 text-center  ">
                         <h1 class="azul_fuerte titulo_name p-0" style="margin-top: 10px;margin-left:150px;">
                             ACUERDO LEGAL
                         </h1>
                     </div>
 
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
 
                         <h6 class="azul_claro tipo uppercase m-0 p-0">
                             TIPO
@@ -488,7 +488,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-start border" >
+                    <div class="col-12 text-start " >
                         <p class="texto_trasero uppercase" style="padding:0px 20px 0px 20px;">
                             <strong>ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br><br>
 
@@ -509,7 +509,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-start border  m-0"  >
+                    <div class="col-12 text-start   m-0"  >
                         <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 20px 0px 20px;">
                            Curso
                         </h1>
@@ -517,7 +517,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-start border m-0 p-0" >
+                    <div class="col-12 text-start  m-0 p-0" >
                         <p class="texto_trasero3 uppercase m-0" style="padding:0px 20px 0px 20px;">
                             este reconocimiento es <strong>inválido</strong> , si no tiene todas las firmas y sellos que lo que acrediten.
                         </p>
@@ -525,11 +525,11 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                 </div>
 
                 <div class="row">
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
                         <img src="{{ $basePath . 'sello-constancia.webp'}}" class="img_traseras">
                     </div>
 
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
                         <p class="texto_trasero2" style="">
                             La autenticidad del <br> presente documento <br> puede ser verificada en
                         </p>
@@ -537,13 +537,13 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
                     </div>
 
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
                         <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" class="img_traseras">
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-center border  m-0"  >
+                    <div class="col-12 text-center   m-0"  >
                         <p class="texto_trasero4" style="padding:0px 20px 0px 20px;">
                             CALLE SUR 109-A No. 260, COL. HEROES DE CHURUBUSCO. DEL. IZTAPALAPA. CIUDAD DE MEXICO. CP.09090 <br>
                             (55) 54459315, (55) 56468832, (55) 43367085, (55) 43367086, (55) 55323297, (55) 55329757 <br>
