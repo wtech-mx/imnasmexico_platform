@@ -342,7 +342,7 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
                             <tr>
                                 <td class="text-start col_izquierda uppercase" style="padding: 1.1rem!important;">% DE MATERIAS <br> APROBADAS</td>
                                 <td class="text-start col_derecha"  style="padding-left: 15px">
-                                    100%
+                                   <br> 100%
                                 </td>
                             </tr>
                         </tbody>
@@ -355,7 +355,12 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
                             <tr>
                                 <td class="text-start col_izquierda uppercase" > <br> Promedio general <br>- <br> </td>
                                 <td class="text-start col_derecha" style="padding-left: 15px">
+                                    <br>
+                                    @if(!isset($tickets->promedio))
                                     9.6
+                                    @else
+                                        {{$tickets->promedio}}
+                                    @endif
                                 </td>
                             </tr>
                         </tbody>
