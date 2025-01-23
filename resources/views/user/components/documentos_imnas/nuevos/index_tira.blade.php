@@ -322,10 +322,10 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
 
             <div class="row">
                 <div class="col-4 text-start  p-2">
-                    <table class="table" style="border: solid 1px #2c6d77;padding:20px 15px 20px 15px;">
+                    <table class="table" style="border: solid 1px #2c6d77;padding:20px 15px 20px 15px;margin-left: 20px;">
                         <tbody class="m-0 p-0">
                             <tr class="m-0 p-0">
-                                <td class="text-start col_izquierda uppercase m-0 p-0" >CREDITOS</td>
+                                <td class="text-start col_izquierda uppercase" ><br>CREDITOS	</td>
                                 <td class="text-start col_derecha_texto">
                                     Obligatorios: 280 <br>
                                     Optativos: 0 <br>
@@ -340,7 +340,7 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
                     <table class="table" style="border: solid 1px #2c6d77;margin-left:20px;padding:26px 15px 26px 15px;">
                         <tbody>
                             <tr>
-                                <td class="text-start col_izquierda uppercase" >% DE MATERIAS <br> APROBADAS</td>
+                                <td class="text-start col_izquierda uppercase" style="padding: 1.1rem!important;">% DE MATERIAS <br> APROBADAS</td>
                                 <td class="text-start col_derecha"  style="padding-left: 15px">
                                     100%
                                 </td>
@@ -350,10 +350,10 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
                 </div>
 
                 <div class="col-4 text-start  p-2">
-                    <table class="table" style="border: solid 1px #2c6d77;margin-left:10px;padding:26px 15px 26px 15px;">
+                    <table class="table" style="border: solid 1px #2c6d77;margin-left:10px;padding:26px 15px 26px 15px;padding: 1.1rem;    margin-left: 17px;">
                         <tbody>
                             <tr>
-                                <td class="text-start col_izquierda uppercase" >Promedio general</td>
+                                <td class="text-start col_izquierda uppercase" > <br> Promedio general <br>- <br> </td>
                                 <td class="text-start col_derecha" style="padding-left: 15px">
                                     9.6
                                 </td>
