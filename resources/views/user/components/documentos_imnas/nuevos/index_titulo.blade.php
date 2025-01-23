@@ -18,7 +18,7 @@
         ? asset('utilidades_documentos/') . '/'
         : asset('utilidades_documentos/') . '/';
 
-        $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
+    $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
     ? asset('documentos_registro/') . '/'
     : asset('documentos_registro/') . '/';
 @endphp
