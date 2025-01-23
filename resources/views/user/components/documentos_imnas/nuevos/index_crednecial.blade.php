@@ -13,6 +13,10 @@ $basePath = ($domain == 'plataforma.imnasmexico.com')
 $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
     ? asset('utilidades_documentos/') . '/'
     : asset('utilidades_documentos/') . '/';
+
+$basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
+    ? asset('documentos_registro/') . '/'
+    : asset('documentos_registro/') . '/';
 @endphp
 
 @include('user.components.documentos_imnas.nuevos.fuentes')
@@ -78,11 +82,11 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
             font-family: 'Montserrat_Medium';
             font-weight: 'regular';
             font-size: 0px;
-            font-size: 6px;
+            font-size: 15px;
             color:#000;
             margin: 0;
             padding: 0;
-            line-height: 30px;
+            line-height: 45px;
             margin-top: 15px;
             margin-bottom: 13px;
          }
@@ -91,7 +95,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
             color:#2c6d77;
-            font-size: 27px;
+            font-size: 37px;
             margin: 0;
             padding: 0;
             line-height: 12px;
@@ -129,13 +133,19 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
         }
 
-        .oval-container {
-
+        .oval {
+            width: 100%;
+            height: 100%;
+            border-radius: 0%;
+            background-color: transparent;
+            background-size: cover;
+            background-position: center center;
+            background-image: url('{{ $basePathUDoc. '/' .$user->telefono . '/' .$tickets->foto_cuadrada}}');
         }
 
         .oval {
-            width: 80px;
-            height: 92px;
+            width: 150px;
+            height: 170px;
             padding: 0;
             margin:0;
             text-align: center;
@@ -281,8 +291,8 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         } */
 
         .img_logo {
-            width: 38px;  /* Tamaño máximo permitido */
-            height: 38px;
+            width: 50px;  /* Tamaño máximo permitido */
+            height: 50px;
             /* margin-left: auto;
             margin-right: auto; */
             margin-top: 12px;
@@ -332,17 +342,21 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                 <div class="col-2 text-center ">
                     {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
                     <div class="img_logo">
-                        <img src="" alt="Logo">
+                        <img src="{{ $basePathUtilidades . $user->logo }}" alt="Logo">
                     </div>
                 </div>
                 <div class="col-2 text-center ">
-                    <img class="" src="{{ $basePath . 'registro_nacional.png'}}" style="width: 40px;margin-top: 16px;margin-left:20px;">
+                    <img class="" src="{{ $basePath . 'registro_nacional.png'}}" style="width: 58px;margin-top: 16px;margin-left:10px;">
 
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-3 text-center  ">
+
+                    @php
+                        echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$tickets->folio, 'QRCODE',2.0,2.0) . '" style="background: transparent; margin-top: 10px;"   />';
+                    @endphp
 
                     <p class="text_qr uppercase">Escanea PARA Verifica la <br> autenticidad de este <br> documento </p>
 
@@ -359,22 +373,22 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
                     <div class="oval-container2">
                         <div class="oval2">
-                            <img src="" alt="Imagen Ovalada">
+                            <img src="{{ $basePathUDoc. '/' .$user->telefono . '/' .$tickets->foto_cuadrada }}" alt="Imagen Ovalada">
                         </div>
                     </div>
 
                     <p class="text_datos uppercase" style="">
                         <strong class="text_datos_strong">Nombre</strong> <br>
-                       Nombre
+                        {{ $tickets->nombre }}
 
                         <br><br><strong class="text_datos_strong">curp</strong> <br>
-                        CURP
+                        {{ $tickets->curp }}
 
                         <br><br><strong class="text_datos_strong">nacionalidad</strong> <br>
                         mexicana
 
                         <br><br><strong class="text_datos_strong">especialidad</strong> <br>
-                        CURSO
+                        {{ $tickets->nom_curso }}
 
                         <br><br><strong class="text_datos_strong">vigencia:</strong> <br>
                     </p>
@@ -389,16 +403,14 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                     </h6>
 
                     <h6 class="azul_claro folio_num uppercase ">
-                        FOLIO
+                        {{ $tickets->folio }}
                     </h6>
 
                     {{-- <div class="img_grid_categorie" style=""></div> --}}
 
                     <div class="oval-container">
-                        <img class="oval" src="" alt="Imagen">
+                        <img class="oval" src="" alt="">
                     </div>
-
-
 
                 </div>
             </div>
@@ -418,7 +430,9 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
             <div class="row">
                 <div class="col-4 text-center  " style="padding: 0 10px 0 10px">
-
+                    @php
+                        echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$tickets->folio, 'QRCODE',2.5,2.5) . '" style="background: transparent; margin-top: 10px;"   />';
+                    @endphp
                     <p class="text_qr2 uppercase">Escanea PARA Verifica la <br> autenticidad de este <br> documento </p>
                     <img src="{{ $basePath . 'carla.webp'}}" style=" width:50px;">
                     <h3 class="h3_nomre_firmas uppercase ">Lic. Carla Rizo FLORES</h3>
@@ -441,7 +455,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                         Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da el siguiente nombramiento conforme a derecho e inscrito en el Registro Nacional Instituto Mexicano Naturales Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exige el plan de estudios especializado en
                     </p>
 
-                    <h1 class="especialidad_trasera uppercase">CURSO</h1>
+                    <h1 class="especialidad_trasera uppercase">{{ $tickets->nom_curso }}</h1>
 
                     <p class="text_footer text-center uppercase p-0 m-0">
                         este reconocimiento es inválido, si no tiene todas las firmas y sellos que lo que acrediten.

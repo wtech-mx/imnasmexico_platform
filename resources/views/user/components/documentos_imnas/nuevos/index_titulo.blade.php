@@ -17,6 +17,10 @@
     $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         ? asset('utilidades_documentos/') . '/'
         : asset('utilidades_documentos/') . '/';
+
+        $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
+    ? asset('documentos_registro/') . '/'
+    : asset('documentos_registro/') . '/';
 @endphp
 @include('user.components.documentos_imnas.nuevos.fuentes')
 
@@ -254,8 +258,8 @@
             background-color: transparent;
             background-size: cover;
             background-position: center center;
-            background-image: url('https://plataforma.imnasmexico.com/documentos_nuevos/cedula/foto.jpeg');
-            /* background-image: url('{{ $basePath . 'foto.jpeg'}}'); */
+            background-image: url('{{ $basePathUDoc. '/' .$user->telefono . '/' .$tickets->foto_cuadrada}}');
+
         }
 
         .oval-container {
@@ -327,24 +331,24 @@
             <div class="content">
 
                 <div class="row" >
-                    <div class="col-4 text-center border " style="margin-top: 30px">
+                    <div class="col-4 text-center  " style="margin-top: 30px">
                     </div>
 
-                    <div class="col-4 text-center border " style="margin-top: 30px">
+                    <div class="col-4 text-center  " style="margin-top: 30px">
                         <div class="img_logo">
-                            <img src="https://plataforma.imnasmexico.com/documentos_nuevos/titulo/logo.png" alt="Logo">
+                            <img src="{{ $basePathUtilidades . $user->logo }}" alt="Logo">
                         </div>
                         {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
                     </div>
 
-                    <div class="col-4 text-center border " style="margin-top: 30px">
+                    <div class="col-4 text-center  " style="margin-top: 30px">
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-center border" style="margin-top: 0px;margin-bottom: 0px;">
-                        <h5 class="azul_fuerte subtitulo_cedula " style="margin-right:20px;margin-left:20px;">
-                            ESCUELA a través de Registro
+                    <div class="col-12 text-center " style="margin-top: 0px;margin-bottom: 0px;">
+                        <h5 class="azul_fuerte subtitulo_cedula " style="margin-right:25px;margin-left:20px;">
+                            {{ $tickets->escuela }} a través de Registro
                             Nacional Instituto Mexicano Naturales Ain Spa
                         </h5>
                     </div>
@@ -353,20 +357,20 @@
 
                 <div class="row">
 
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
 
                         <div class="oval-container">
-                            <img class="oval" src="" alt="Imagen">
+                            <img class="oval" src="">
                         </div>
                     </div>
 
-                    <div class="col-8 text-center border ">
+                    <div class="col-8 text-center  ">
                         <p class="texto_documentos  p-0 m-0" style="margin-bottom: 40px">
                             otorga a
                         </p>
 
                         <h1 class="azul_fuerte titulo_name p-0 m-0" style="margin-bottom:40px">
-                           Nombre
+                            {{ $tickets->nombre }}
                         </h1>
 
                         <p class="texto_documentos  p-0 m-0" style="margin-bottom: 40px">
@@ -374,7 +378,7 @@
                         </p>
 
                         <h2 class="azul_fuerte titulo_especialidad  p-0" style="margin-bottom: 10px;">
-                            Curso
+                            {{ $tickets->nom_curso }}
                         </h2>
 
                         <p class="texto_documentos p-0 m-0" style="margin-bottom: 40px">
@@ -390,32 +394,32 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
                         <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" class="img_traseras">
                     </div>
 
-                    <div class="col-8 text-center border my-auto">
+                    <div class="col-8 text-center  my-auto">
                         <p class="texto_principal_cedula uppercase" style="">
-                            Expedido en la Ciudad de México,<br>  el dia
+                            Expedido en la Ciudad de México,<br>  el dia {{ \Carbon\Carbon::parse($tickets->fecha_curso)->translatedFormat('d \d\e F \d\e\l Y') }}
                         </p>
                     </div>
 
                 </div>
 
                 <div class="row">
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center " style="padding: 0 0 0 45px;">
                         <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras" style="margin-top: 30px">
                         <h3 class="h3_nomre_firmas uppercase m-0 p-0">Juan Pablo Soto</h3>
                         <h5 class="texto_emosires m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
                     </div>
 
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
                         <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
                         <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
                         <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
                     </div>
 
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
                         <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras" style="margin-top: 30px">
                         <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Ma. Luisa Flores</h3>
                         <h5 class="texto_emosires m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
@@ -424,15 +428,15 @@
 
                 <div class="row" >
 
-                    <div class="col-4 border  text-center" style="margin-top: 0px">
+                    <div class="col-4   text-center" style="margin-top: 0px">
                         <img class="img_stps_registro_header " src="{{ $basePath . 'stps.webp'}}" style="margin-top: 5px">
                     </div>
 
-                    <div class="col-4 border  text-center" style="margin-top: 0px;">
+                    <div class="col-4   text-center" style="margin-top: 0px;">
                         <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 60px;">
                     </div>
 
-                    <div class="col-4 border  text-center"  style="margin-top: 0px;">
+                    <div class="col-4   text-center"  style="margin-top: 0px;">
                         <img class="img_stps_registro_header " src="{{ $basePath . 'registro_nacional.png'}}" style="margin-top: 00px">
                     </div>
 
@@ -451,41 +455,41 @@
             <div class="content">
 
                 <div class="row" >
-                    <div class="col-4 text-center border " style="margin-top: 30px">
+                    <div class="col-4 text-center  " style="margin-top: 30px">
                     </div>
 
-                    <div class="col-4 text-center border " style="margin-top: 30px">
+                    <div class="col-4 text-center p-1 " style="margin-top: 30px">
                         <div class="img_logo">
-                            <img src="https://plataforma.imnasmexico.com/documentos_nuevos/titulo/logo.png" alt="Logo">
+                            <img src="{{ $basePathUtilidades . $user->logo }}" alt="Logo">
                         </div>
                         {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
                     </div>
 
-                    <div class="col-4 text-center border " style="margin-top: 30px">
+                    <div class="col-4 text-center  " style="margin-top: 30px">
                     </div>
                 </div>
 
                 <div class="row">
                     <!-- Primera columna -->
-                    <div class="col-6 text-start border">
+                    <div class="col-6 text-start ">
                         <p class="uppercase lista" style="margin-left: 40px;">
-                            <strong class="lista_strong"> Nombre: </strong> <br>
-                            <strong class="lista_strong"> curp:</strong>  <br>
-                            <strong class="lista_strong"> carrera:</strong>  <br>
+                            <strong class="lista_strong"> Nombre: </strong>{{ $tickets->nombre }} <br>
+                            <strong class="lista_strong"> curp:</strong> {{ $tickets->curp }} <br>
+                            <strong class="lista_strong"> carrera:</strong> {{ $tickets->nom_curso }} <br>
                             <strong class="lista_strong"> nacionalidad:</strong> mexicana <br>
                             <strong class="lista_strong"> vigencia:</strong> permanente <br>
                         </p>
                     </div>
 
                     <!-- Segunda columna -->
-                    <div class="col-3 text-center border">
+                    <div class="col-3 text-center ">
                         <p style="margin-top: 70px">
 
                         </p>
                     </div>
 
                     <!-- Tercera columna -->
-                    <div class="col-3 text-center border my-auto">
+                    <div class="col-3 text-center  my-auto">
                         <h6 class="azul_claro tipo uppercase m-0 p-0" style="">
                             TIPO
                         </h6>
@@ -496,7 +500,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-start border" >
+                    <div class="col-12 text-start " >
                         <p class="texto_trasero uppercase" style="">
                             <strong>ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br><br>
 
@@ -517,47 +521,47 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-start border  m-0">
+                    <div class="col-12 text-start   m-0">
                         <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 0px 0px 40px;">
-                            Curso
+                            {{ $tickets->nom_curso }}
                         </h1>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-12 text-start border p-0"  style="">
-                        <p class="texto_trasero uppercase m-0" style="padding:0px 45px 0px 40px">
+                    <div class="col-12 text-start  p-0"  style="">
+                        <p class="texto_trasero uppercase m-0" style="padding:0px 45px 0px 50px">
                             este reconocimiento es <strong>inválido</strong> , si no tiene todas las firmas y sellos que lo que acrediten.
                         </p>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-4 text-center border my-auto">
+                    <div class="col-4 text-center  my-auto" style="padding: 0 0 0 45px;">
                         <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 100px;" >
                     </div>
 
-                    <div class="col-4 text-center border ">
+                    <div class="col-4 text-center  ">
                         <img src="{{ $basePath . 'carla.webp'}}" style="width: 80px;">
                         <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
                         <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
                     </div>
 
-                    <div class="col-4 text-center border my-auto">
+                    <div class="col-4 text-center  my-auto">
                         <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 70px;">
                     </div>
                 </div>
 
                 <div class="row" >
 
-                    <div class="col-4 border  text-center" >
-                        <img class="" src="{{ $basePath . 'stps.webp'}}" style="width:750px;"  >
+                    <div class="col-4 text-center" style="">
+                        <img class="" src="{{ $basePath . 'stps.webp'}}" style="width:75px;"  >
                     </div>
 
-                    <div class="col-4 border  text-center" style="">
+                    <div class="col-4 text-center" style="">
                     </div>
 
-                    <div class="col-4 border  text-center"  style="">
+                    <div class="col-4 text-center"  style="">
                         <img class=" " src="{{ $basePath . 'registro_nacional.png'}}" style="width:65px;">
                     </div>
 

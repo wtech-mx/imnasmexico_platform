@@ -13,6 +13,11 @@ $basePath = ($domain == 'plataforma.imnasmexico.com')
 $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
     ? asset('utilidades_documentos/') . '/'
     : asset('utilidades_documentos/') . '/';
+
+$basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
+    ? asset('documentos_registro/') . '/'
+    : asset('documentos_registro/') . '/';
+
 @endphp
 
 
@@ -207,7 +212,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         background-color: transparent;
         background-size: cover;
         background-position: center center;
-        /* background-image: url('{{ $basePath . 'foto.jpeg'}}'); */
+        background-image: url('{{ $basePathUDoc. '/' .$user->telefono . '/' .$tickets->foto_cuadrada}}');
     }
 
     .oval-container {
@@ -322,12 +327,13 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         <div class="row">
             <div class="col-4 text-center  ">
                 <div class="oval-container">
-                    {{ $tickets->nombre }}
+                    <img class="oval" src="" alt="">
                 </div>
             </div>
 
             <div class="col-8 text-center  ">
                 <h1 class="azul_fuerte titulo_cedula p-0 m-0">
+                    {{ $tickets->nombre }}
                 </h1>
 
                 <p class="especialidad uppercase p-0 m-0">en la especialidad de</p>

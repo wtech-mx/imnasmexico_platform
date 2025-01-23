@@ -13,6 +13,10 @@ $basePath = ($domain == 'plataforma.imnasmexico.com')
 $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
     ? asset('utilidades_documentos/') . '/'
     : asset('utilidades_documentos/') . '/';
+
+$basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
+    ? asset('documentos_registro/') . '/'
+    : asset('documentos_registro/') . '/';
 @endphp
 
 @include('user.components.documentos_imnas.nuevos.fuentes')
@@ -87,7 +91,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         }
 
         .strong_folio{
-            font-size: 19px;
+            font-size: 13px;
             font-family: 'OpenSauceOne_Bold';
             font-weight: 'regular';
             margin-top: 20px;
@@ -102,7 +106,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         }
 
         .titulo_name{
-            font-size: 30px;
+            font-size: 25px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
             line-height:24px;
@@ -123,7 +127,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
         }
 
         .titulo_especialidad{
-            font-size: 30px;
+            font-size: 25px;
             font-family: 'Montserrat_Bold';
             font-weight: 'regular';
             line-height: 25px;
@@ -244,9 +248,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
             background-color: transparent;
             background-size: cover;
             background-position: center center;
-            /* background-image: url('{{ $basePath . 'foto.jpeg'}}'); */
-            background-image: url('https://plataforma.imnasmexico.com/documentos_nuevos/cedula/foto.jpeg');
-
+            background-image: url('{{ $basePathUDoc. '/' .$user->telefono . '/' .$tickets->foto_cuadrada}}');
         }
 
         .oval-container {
@@ -276,8 +278,8 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
 
         .img_logo {
-            width: 110px;  /* Tamaño máximo permitido */
-            height: 110px;
+            width: 70px;  /* Tamaño máximo permitido */
+            height: 70px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -304,8 +306,8 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                     </div>
 
                     <div class="col-3  text-center" style="margin-top: 60px">
-                        <div class="img_logo">
-                            <img src="" alt="Logo">
+                        <div class="img_logo" style="margin-top:5px;">
+                            <img src="{{ $basePathUtilidades . $user->logo }}" alt="Logo">
                         </div>
 
                         {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
@@ -355,11 +357,11 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
                     <div class="col-8 text-center  ">
                         <h1 class="h1_nombre azul_fuerte titulo_name p-0 m-0">
-                            Nombre
+                            {{ $tickets->nombre }}
                         </h1>
 
                         <h2 class="azul_fuerte texto_documentos_ligth uppercase p-0 "style="margin-bottom: 13px;margin-top:13px">
-                            con numero de folio <strong class="strong_folio">Folio</strong>
+                            con numero de folio <strong class="strong_folio">{{ $tickets->folio }}</strong>
                         </h2>
 
                         <p class="texto_documentos uppercase p-0 m-0" style="margin-bottom: 40px">
@@ -369,7 +371,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                         </p>
 
                         <h2 class="azul_fuerte titulo_especialidad uppercase p-0" style="margin-bottom: 13px;margin-top:13px">
-                            Curso
+                            {{ $tickets->nom_curso }}
                         </h2>
 
 
@@ -386,7 +388,9 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                             </div>
                         </div>
                         <p>
-
+                            @php
+                                echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$tickets->folio, 'QRCODE',1.8,1.8) . '" style="background: transparent; margin-top: 10px;"   />';
+                            @endphp
                         </p>
                         <p class="texto_trasero2" style="padding:0px 20px 0px 20px;">
                             REGISTRO ÚNICO
@@ -441,9 +445,8 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                     </div>
 
                     <div class="col-3   text-center" style="margin-top: 60px">
-                        {{-- <div class="img_logo" style="background: url('{{ $basePathUtilidades . $fileName_logo }}') #ffffff00  50% / contain no-repeat;"></div> --}}
-                        <div class="img_logo">
-                            <img src="" alt="Logo">
+                        <div class="img_logo" style="margin-top:5px;">
+                            <img src="{{ $basePathUtilidades . $user->logo }}" alt="Logo">
                         </div>
                     </div>
 
@@ -457,7 +460,6 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
 
                     </div>
                 </div>
-
 
                 <div class="row">
                     <div class="col-12   ">
@@ -511,7 +513,7 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                 <div class="row">
                     <div class="col-12 text-start   m-0"  >
                         <h1 class="azul_fuerte titulo_especialidad_trasero " style="padding:0px 20px 0px 20px;">
-                           Curso
+                            {{ $tickets->nom_curso }}
                         </h1>
                     </div>
                 </div>
@@ -533,8 +535,9 @@ $basePathUtilidades = ($domain == 'plataforma.imnasmexico.com')
                         <p class="texto_trasero2" style="">
                             La autenticidad del <br> presente documento <br> puede ser verificada en
                         </p>
-
-
+                        @php
+                            echo ' <img src="data:image/png;base64,' . DNS2D::getBarcodePNG('https://plataforma.imnasmexico.com/buscador/folio?folio='.$tickets->folio, 'QRCODE',1.8,1.8) . '" style="background: transparent; padding: px;margin-bottom: 6px;"   />';
+                        @endphp
                     </div>
 
                     <div class="col-4 text-center  ">
