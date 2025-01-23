@@ -31,7 +31,7 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
         }
 
         .card-3d-wrapper{
-            height: 714px!important;
+            height: 890px!important;
         }
 
 
@@ -165,10 +165,10 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
 
         .contenedor_materia{
             border: solid 1px #5bb4c2;
-            border-radius: 50%;
+            border-radius: 6px;
             padding: 5px;
             color: #545454;
-            font-size: 14px;
+            font-size: 9px;
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
         }
@@ -191,11 +191,11 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
 
 
         .texto_trasero{
-            font-size:7px;
+            font-size:9px;
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
             margin-top: 20px;
-            line-height: 9px;
+            line-height: 12px;
             color: #3d3b3a;
         }
 
@@ -309,10 +309,10 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
                     <p class="texto_principal_cedula" style="">
                         La Coordinación de Asuntos Escolares y Apoyo a Estudiantes del
                          Registro Nacional Instituto Mexicano Naturales Ain Spa RIIMNAS,
-                         con registro <strong class="texto_prinipal_strong"> CLAVE</strong> en la Secretaría del Trabajo y Previsión
+                         con registro <strong class="texto_prinipal_strong"> {{ $user->clave_clasificacion }}</strong> en la Secretaría del Trabajo y Previsión
                          Social STPS como Agente Capacitador Externo, hace constar que el/la
-                          Alumno(a) <strong class="texto_prinipal_strong"> {{ $tickets->nombre }}</strong> , con número de folio <strong class="texto_prinipal_strong">CFC000918771</strong> con
-                           CURP: <strong class="texto_prinipal_strong">JDAR090213MMCMLTA4</strong> , cursó la especialidad de <strong class="texto_prinipal_strong"> {{ $tickets->nombre }}</strong> ,
+                          Alumno(a) <strong class="texto_prinipal_strong"> {{ $tickets->nombre }}</strong> , con número de folio <strong class="texto_prinipal_strong">{{ $tickets->folio }}</strong> con
+                           CURP: <strong class="texto_prinipal_strong"> {{ $tickets->curp_escrito }} </strong> , cursó la especialidad de <strong class="texto_prinipal_strong"> {{ $tickets->nom_curso }}</strong> ,
                             cubriendo todos los créditos correspondientes.
                         Para efectos de desempeño académico se expresa lo siguiente:
                     </p>
@@ -365,8 +365,20 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
             </div>
 
             <div class="row">
-                <div class="col-12 text-left " style="padding:0px 20px 20px 20px;">
+                <div class="col-12 text-left " style="padding:0px 10px 10px 20px;">
+                    @php
+                        $totalSubtemas = count($subtemas);
+                        $faltantes = 18 - $totalSubtemas; // Calculamos cuántos faltan para llegar a 20
+                    @endphp
 
+                    @foreach ($subtemas as $subtema)
+                        <p class="contenedor_materia" style="padding: 0 0  0 5px; margin: 8px;">{{ $subtema->subtema }}</p>
+                    @endforeach
+
+                    {{-- Agregamos etiquetas vacías si hay menos de 20 registros --}}
+                    @for ($i = 0; $i < $faltantes; $i++)
+                        <p class="contenedor_materia" style="padding: 0 0  0 5px; margin: 8px;">&nbsp;</p>
+                    @endfor
                 </div>
 
             </div>
@@ -428,7 +440,7 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
                             <br><br>
                             Artículo 153 de la Ley General del Trabajo apartado I, III y IV. En general, mejorar el nivel educativo, la competencia laboral y las habilidades de los trabajadores.
                             <br><br>
-                            Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro: clave_Rfc
+                            Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro: {{ $user->clave_clasificacion }}
                             <br><br>
                             XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su plena comprensión y conformidad con él y lo firmó el día 17 de Junio del 2016, mismo momento en que lo autorizo definitivamente.- Doy fe.
                             <br><br>

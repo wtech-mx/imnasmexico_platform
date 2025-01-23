@@ -286,10 +286,8 @@ class FoliosController extends Controller
             ->orderBy('id')
             ->get();
 
-
-
             if (!empty($tickets) && $tickets->diseno_doc == 'Nuevo') {
-                return view('user.components.documentos_imnas.nuevos.index_tira', compact('tickets', 'tipo_documentos', 'tickets_externo','user'));
+                return view('user.components.documentos_imnas.nuevos.index_tira', compact('subtemas','tickets', 'tipo_documentos', 'tickets_externo','user'));
             } else {
                 return view('user.components.documentos_imnas.index_tira', compact('tickets', 'tipo_documentos', 'tickets_externo'));
             }
