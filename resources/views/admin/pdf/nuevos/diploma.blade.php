@@ -66,6 +66,10 @@
             width: 160px;
         }
 
+        .img_firmas_delanteras_dire{
+            width: 130px;
+        }
+
         .img_traseras{
             width: 180px;
         }
@@ -78,12 +82,29 @@
             color:#010101;
         }
 
+        .h3_nomre_firmas_dire{
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+            font-size: 11px;
+            line-height: 14px;
+            color:#010101;
+        }
+
         .texto_emosires{
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
-            font-size: 20px;
+            font-size: 15px;
             margin-top: 5px!important;
-            line-height: 19px;
+            line-height: 17px;
+            color:#010101;
+        }
+
+        .texto_emosires_dire{
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
+            font-size: 15px;
+            margin-top: 5px!important;
+            line-height: 17px;
             color:#010101;
         }
 
@@ -293,13 +314,6 @@
             line-height:18px;
             color: #2c6d77;
         }
-/*
-        .img_logo{
-            width: 110px;
-            height: 110px;
-            margin-left: auto;
-            margin-right: auto;
-        } */
 
         .img_logo {
             width: 110px;  /* Tamaño máximo permitido */
@@ -423,23 +437,55 @@
             </div>
 
             <div class="row">
-                <div class="col-4 text-center border ">
-                    <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras">
-                    <h3 class="h3_nomre_firmas uppercase m-0 p-0">Juan Pablo Soto</h3>
-                    <h5 class="texto_emosires m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
-                </div>
 
-                <div class="col-4 text-center border ">
-                    <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
-                    <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
-                    <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
-                </div>
+                @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
 
-                <div class="col-4 text-center border ">
-                    <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras">
-                    <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Ma. Luisa Flores</h3>
-                    <h5 class="texto_emosires m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
-                </div>
+                    <div class="col-3 text-center">
+                        <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras_dire">
+                        <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Juan Pablo Soto</h3>
+                        <h5 class="texto_emosires_dire capitalize m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
+                    </div>
+
+                    <div class="col-3 text-center">
+                        <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras_dire">
+                        <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Carla Rizo FLORES</h3>
+                        <h5 class="texto_emosires_dire capitalize m-0 p-0">Directora General <br> IMNAS</h5>
+                    </div>
+
+                    <div class="col-3 text-center">
+                        <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras_dire">
+                        <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Ma. Luisa Flores</h3>
+                        <h5 class="texto_emosires_dire capitalize m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
+                    </div>
+
+                    <div class="col-3 text-center">
+                        <img src="{{ $basePathUtilidades . $fileName_firma_director}}" class="img_firmas_delanteras_dire">
+                        <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">{{ $director }}</h3>
+                        <h5 class="texto_emosires_dire capitalize m-0 p-0">{{ $firma_directora }}</h5>
+                    </div>
+
+                    @else
+
+                    <div class="col-4 text-center border ">
+                        <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras">
+                        <h3 class="h3_nomre_firmas capitalize m-0 p-0">Juan Pablo Soto</h3>
+                        <h5 class="texto_emosires capitalize m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
+                    </div>
+
+                    <div class="col-4 text-center border ">
+                        <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
+                        <h3 class="h3_nomre_firmas capitalize m-0 p-0">Lic. Carla Rizo FLORES</h3>
+                        <h5 class="texto_emosires capitalize m-0 p-0">Directora General <br> IMNAS</h5>
+                    </div>
+
+                    <div class="col-4 text-center border ">
+                        <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
+                        <h3 class="h3_nomre_firmas capitalize m-0 p-0">Lic. Ma. Luisa Flores</h3>
+                        <h5 class="texto_emosires capitalize m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
+                    </div>
+
+                @endif
+
             </div>
 
             <div class="row">
