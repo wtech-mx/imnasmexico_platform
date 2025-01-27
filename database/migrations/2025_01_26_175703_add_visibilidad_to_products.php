@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('registro_imnas_doc', function (Blueprint $table) {
-            $table->text('estatus_reconocimiento')->nullable();
+        Schema::table('products', function (Blueprint $table) {
+            $table->text('visibilidad_granel')->nullable();
         });
     }
 
@@ -21,7 +21,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('registro_imnas_doc', function (Blueprint $table) {
+        Schema::table('products', function (Blueprint $table) {
             //
         });
     }

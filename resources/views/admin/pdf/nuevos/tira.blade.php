@@ -344,7 +344,7 @@
                         <tr>
                             <td class="text-start col_izquierda uppercase" >Promedio general</td>
                             <td class="text-start col_derecha" style="padding-left: 15px">
-                                9.6
+                               {{ $promedio }}
                             </td>
                         </tr>
                     </tbody>

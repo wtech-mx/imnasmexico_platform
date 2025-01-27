@@ -348,7 +348,7 @@
                 <div class="row">
                     <div class="col-12 text-center " style="margin-top: 0px;margin-bottom: 0px;">
                         <h5 class="azul_fuerte subtitulo_cedula " style="margin-right:25px;margin-left:20px;">
-                            {{ $tickets->escuela }} a través de Registro
+                            {{ $user->escuela }} a través de Registro
                             Nacional Instituto Mexicano Naturales Ain Spa
                         </h5>
                     </div>
@@ -474,7 +474,7 @@
                     <div class="col-6 text-start ">
                         <p class="uppercase lista" style="margin-left: 40px;">
                             <strong class="lista_strong"> Nombre: </strong>{{ $tickets->nombre }} <br>
-                            <strong class="lista_strong"> curp:</strong> {{ $tickets->curp }} <br>
+                            <strong class="lista_strong"> curp:</strong> {{ $tickets->curp_escrito }}  <br>
                             <strong class="lista_strong"> carrera:</strong> {{ $tickets->nom_curso }} <br>
                             <strong class="lista_strong"> nacionalidad:</strong> mexicana <br>
                             <strong class="lista_strong"> vigencia:</strong> permanente <br>
@@ -510,7 +510,7 @@
                             <br><br>
                             Artículo 153 de la Ley General del Trabajo apartado I, III y IV. En general, mejorar el nivel educativo, la competencia laboral y las habilidades de los trabajadores.
                             <br><br>
-                            Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro: Clave_Rfc
+                            Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro:  {{ $user->clave_clasificacion }}
                             <br><br>
                             XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su plena comprensión y conformidad con él y lo firmó el día 17 de Junio del 2016 , mismo momento en que lo autorizo definitivamente.- Doy fe.
                             <br><br>

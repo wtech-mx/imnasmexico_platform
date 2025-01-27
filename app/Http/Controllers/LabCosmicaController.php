@@ -189,9 +189,9 @@ class LabCosmicaController extends Controller
     }
     // =============== C O N T E O  G R A N E L ===============================
     public function index_granel(Request $request){
-        $products = Products::orderBy('id','ASC')->where('categoria', 'Cosmica')->where('subcategoria', 'Producto')->get();
-        $bajo_granel = Products::where('conteo_lab','<=', 10)->get();
-        $medio_granel = Products::where('conteo_lab','>', 10)->where('conteo_lab','<=', 15)->get();
+        $products = Products::orderBy('id','ASC')->where('categoria', 'Cosmica')->where('subcategoria', 'Producto')->where('visibilidad_granel', '=', '1')->get();
+        $bajo_granel = Products::where('conteo_lab','<=', 10)->where('visibilidad_granel', '=', '1')->get();
+        $medio_granel = Products::where('conteo_lab','>', 10)->where('conteo_lab','<=', 15)->where('visibilidad_granel', '=', '1')->get();
         $count = $bajo_granel->count() + $medio_granel->count();
 
         return view('admin.laboratorio_cosmica.granel.index', compact('products', 'bajo_granel', 'medio_granel', 'count'));

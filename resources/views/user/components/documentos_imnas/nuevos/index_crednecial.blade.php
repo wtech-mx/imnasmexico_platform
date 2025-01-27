@@ -382,7 +382,7 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
                         {{ $tickets->nombre }}
 
                         <br><br><strong class="text_datos_strong">curp</strong> <br>
-                        {{ $tickets->curp }}
+                        {{ $tickets->curp_escrito }}
 
                         <br><br><strong class="text_datos_strong">nacionalidad</strong> <br>
                         mexicana
@@ -409,7 +409,7 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
                     {{-- <div class="img_grid_categorie" style=""></div> --}}
 
                     <div class="oval-container">
-                        <img class="oval" src="" alt="">
+                        <img class="oval" src="">
                     </div>
 
                 </div>
@@ -448,8 +448,8 @@ $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
                         <br>
                         Artículo 5º de la Constitución Política de los Estados Unidos Mexicanos: “A ninguna persona podrá impedirse que se dedique a la profesión, industria, comercio o trabajo que le acomode siendo lícitos... Nadie puede ser privado del producto de su trabajo, sino por resolución judicial.
                         <br><br>
-                        Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro:
-                        <strong class="strong_texto_trasero_azul">CLAVE_RFC</strong>
+                        Registrado ante la Secretaría del Trabajo y Previsión Social, el Instituto Mexicano Naturales Ain Spa, como agente capacitador externo con número de registro
+                        <strong class="strong_texto_trasero_azul">{{ $user->clave_clasificacion }}</strong>
                         <br><br>
                         Artículo 153 de la Ley General del Trabajo apartado I, III y IV. En general, mejorar el nivel educativo, la competencia laboral y las habilidades de los trabajadores.
                         Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da el siguiente nombramiento conforme a derecho e inscrito en el Registro Nacional Instituto Mexicano Naturales Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exige el plan de estudios especializado en
