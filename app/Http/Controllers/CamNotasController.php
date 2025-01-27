@@ -48,7 +48,6 @@ class CamNotasController extends Controller
                 $user->update();
             }
             $payer = $user;
-            $notas_cam = CamNotas::where('id_cliente', $user->id)->first();
         } else {
             $payer = new User();
             $payer->name = $request->get('name');
@@ -68,33 +67,34 @@ class CamNotasController extends Controller
             $payer->password = Hash::make($request->get('celular'));
             $payer->save();
 
-            $notas_cam = new CamNotas;
-            $notas_cam->id_cliente = $payer->id;
-            $notas_cam->tipo = $request->get('tipo');
-            $notas_cam->fecha = date('Y-m-d');
-            $notas_cam->membresia = $request->get('membresia');
-            $notas_cam->id_usuario = auth()->user()->id;
-            $notas_cam->nota = 'CAM Nuevo';
-            $notas_cam->save();
 
-            $checklist = new CamChecklist;
-            $checklist->id_nota = $notas_cam->id;
-            $checklist->save();
-
-            $citas = new CamCitas;
-            $citas->id_nota = $notas_cam->id;
-            $citas->save();
-
-            $documentos = new CamDocumentosUsers;
-            $documentos->id_nota = $notas_cam->id;
-            $documentos->save();
-
-            $videos = new CamVideosUser;
-            $videos->id_nota = $notas_cam->id;
-            $videos->id_cliente = $notas_cam->id_cliente;
-            $videos->tipo = $request->get('tipo');
-            $videos->save();
         }
+        $notas_cam = new CamNotas;
+        $notas_cam->id_cliente = $payer->id;
+        $notas_cam->tipo = $request->get('tipo');
+        $notas_cam->fecha = date('Y-m-d');
+        $notas_cam->membresia = $request->get('membresia');
+        $notas_cam->id_usuario = auth()->user()->id;
+        $notas_cam->nota = 'CAM Nuevo';
+        $notas_cam->save();
+
+        $checklist = new CamChecklist;
+        $checklist->id_nota = $notas_cam->id;
+        $checklist->save();
+
+        $citas = new CamCitas;
+        $citas->id_nota = $notas_cam->id;
+        $citas->save();
+
+        $documentos = new CamDocumentosUsers;
+        $documentos->id_nota = $notas_cam->id;
+        $documentos->save();
+
+        $videos = new CamVideosUser;
+        $videos->id_nota = $notas_cam->id;
+        $videos->id_cliente = $notas_cam->id_cliente;
+        $videos->tipo = $request->get('tipo');
+        $videos->save();
 
         $contrato = new CamContrato;
         $contrato->id_nota = $notas_cam->id;
