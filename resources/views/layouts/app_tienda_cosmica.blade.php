@@ -16,6 +16,7 @@
     <link href="{{asset('assets/user/bootstrap/css/bootstrap.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/user/custom/ecomeerce_cosmica.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/user/custom/ecomeerce_fuentes.css')}}" rel="stylesheet" />
+    <link href="{{asset('assets/user/custom/btn_flotante.css')}}" rel="stylesheet" />
 
     <!-- Owl Carousel CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
@@ -75,6 +76,8 @@
     @yield('content')
 
     @include('tienda_cosmica.Components.footer')
+
+    @include('user.components.btn_flotante')
 
     @include('layouts.alertas')
 
