@@ -20,11 +20,7 @@
             <div class="container_lineas_grid">
 
                 <div class="content">
-                    <div class="icon_heart">
-                        <div class="d-flex justify-content-start">
-                            <img class="icon_card_product_grid" src="{{ asset('cosmika/inicio/CORAZON-POPULARES.png') }}" alt="" style="width: 20px">
-                        </div>
-                    </div>
+
                     <div class="img_container mx-auto">
                         <img class="img_grid_products" src="{{$product_popular->imagenes}}" alt="Protector">
                     </div>
