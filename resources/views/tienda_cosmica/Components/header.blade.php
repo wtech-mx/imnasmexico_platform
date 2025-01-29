@@ -34,7 +34,7 @@
                     <a class="nav-link" href="{{ route('tienda.about') }}">Sobre Nosotros</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('tienda.afiliadas') }}">Distribuidoras</a>
+                    <a class="nav-link" href="{{ route('distribuidoras.index_distribuidoras') }}">Distribuidoras</a>
                 </li>
             </ul>
         </div>

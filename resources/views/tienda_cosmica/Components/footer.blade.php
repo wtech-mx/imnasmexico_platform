@@ -57,7 +57,7 @@
                         </li>
 
                         <li class="text-white nav-item mb-2">
-                            <a href="{{ route('tienda.afiliadas') }}" class="text-white nav-link p-0">
+                            <a href="{{ route('distribuidoras.index_distribuidoras') }}" class="text-white nav-link p-0">
                             <i class="text-white bi bi-youtube"></i> Distribuidoras</a>
                         </li>
 

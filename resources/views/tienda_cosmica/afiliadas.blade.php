@@ -66,7 +66,7 @@
                 <div class="container_lineas_afiliados">
                     <div class="content mb-3 mt-3">
                         <div class="img_container_afiliados mx-auto">
-                            <img class="img_grid_afiliados" src="{{ asset('cosmika/inicio/lineas/nebulosa.png') }}" alt="Protector">
+                            <img class="img_grid_afiliados" src="http://imnasmexico_platform.test/utilidades/dis_logo.png" alt="Protector">
                         </div>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                 <div class="container_lineas_afiliados_2">
                     <div class="content mb-3 mt-3">
                         <div class="img_container_afiliados mx-auto">
-                            <img class="img_grid_afiliados" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
+                            <img class="img_grid_afiliados" src="http://imnasmexico_platform.test/utilidades/logo_negativo.png" alt="Protector">
                         </div>
                     </div>
                 </div>
