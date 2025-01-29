@@ -192,7 +192,17 @@
 @endsection
 
 @section('js')
-
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const hash = window.location.hash; // Obtener el fragmento de la URL
+        if (hash) {
+            const tabButton = document.querySelector(`[data-bs-target="${hash}"]`);
+            if (tabButton) {
+                // Activar la pestaña
+                const tab = new bootstrap.Tab(tabButton);
+                tab.show();
+            }
+        }
+    });
+</script>
 @endsection
-
-
