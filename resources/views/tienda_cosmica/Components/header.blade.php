@@ -41,9 +41,6 @@
 
         <!-- Iconos a la derecha -->
         <div class="d-flex order-lg-3">
-            <a href="#" target="_blank" class="btn me-2">
-                <img src="{{ asset('cosmika/menu/CORAZON.png') }}" alt="Favoritos"  class="icons_header" style="">
-            </a>
             <a href="#" class="btn me-2">
                 <img src="{{ asset('cosmika/menu/LUPA.png') }}" alt="Buscar"  class="icons_header" style="">
             </a>

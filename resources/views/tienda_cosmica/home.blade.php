@@ -346,15 +346,16 @@
 
 </div>
 
-<div class="container-fluid horizontal-banner" style="background-image: url('{{ asset('cosmika/inicio/MERCADO-LIBRE.png') }}'); /* Cambia por tu imagen */">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-12">
-            {{-- <div class="banner-content text-center">
-                <h2 class="banner-title">¡Promoción Especial!</h2>
-                <p class="banner-subtitle">Aprovecha nuestras ofertas exclusivas por tiempo limitado</p>
-            </div> --}}
-        </div>
+
+<div id="carouselExampleMeli" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <a href="https://perfil.mercadolibre.com.mx/COSMICA_SKIN" target="_blank" rel="noopener noreferrer">
+            <img src="{{ asset('cosmika/inicio/MERCADO-LIBRE.png') }}" class="d-block w-100" alt="">
+        </a>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="container-fluid position-relative mt-5">
