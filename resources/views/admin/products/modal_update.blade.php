@@ -88,19 +88,20 @@
                                         <label for="name">Sub Linea</label>
                                         <select class="form-control" id="sublinea" name="sublinea">
                                             <option value="{{ $product->sublinea }}">{{ $product->sublinea }}</option>
-                                            <option value="Astros">Linea Facial - Astros</option>
-                                            <option value="Eclipse">Linea Facial - Eclipse</option>
-                                            <option value="Flash">Linea Facial - Flash</option>
-                                            <option value="Galaxia">Linea Facial - Galaxia</option>
-                                            <option value="Renacer">Linea Facial - Renacer</option>
-                                            <option value="Constelacion">Linea Corporal - Constelacion</option>
-                                            <option value="Espectro">Linea Corporal - Espectro</option>
-                                            <option value="Lunar">Linea Corporal - Lunar</option>
-                                            <option value="Mascarillas Estelares">Linea Corporal - Mascarillas Estelares</option>
-                                            <option value="Nebulosa">Linea Corporal - Nebulosa</option>
-                                            <option value="Pluton">Linea Corporal - Pluton</option>
-                                            <option value="Solar">Linea Corporal - Solar</option>
-                                            <option value="Venus">Linea Corporal - Venus</option>
+                                            <option value="Estelar">Linea Corporal - Estelar</option>
+                                            <option value="Eclipse">Linea Corporal - Eclipse</option>
+                                            <option value="Renacer">Linea Corporal - Renacer</option>
+                                            <option value="Flash">Linea Corporal - Flash</option>
+                                            <option value="Astros">Linea Corporal - Astros</option>
+                                            <option value="Galaxia">Linea Corporal - Galaxia</option>
+                                            <option value="Constelacion">Linea Facial - Constelacion</option>
+                                            <option value="Espectro">Linea Facial - Espectro</option>
+                                            <option value="Lunar">Linea Facial - Lunar</option>
+                                            <option value="Mascarillas Estelares">Linea Facial - Mascarillas Estelares</option>
+                                            <option value="Nebulosa">Linea Facial - Nebulosa</option>
+                                            <option value="Pluton">Linea Facial - Pluton</option>
+                                            <option value="Solar">Linea Facial - Solar</option>
+                                            <option value="Venus">Linea Facial - Venus</option>
                                         </select>
                                     </div>
 
