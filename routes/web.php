@@ -119,7 +119,7 @@ Route::get('/doc/reconocimiento', [App\Http\Controllers\NewDocumentsController::
 
 // =============== E C O M M E R C E C O S M I C A ===============================
 Route::get('/tienda/home', [App\Http\Controllers\EcommerceCosmikaController::class, 'home'])->name('tienda.home');
-Route::get('/tienda/single_product/{sku}', [App\Http\Controllers\EcommerceCosmikaController::class, 'single_product'])->name('tienda.single_product');
+Route::get('/tienda/producto/{slug}', [App\Http\Controllers\EcommerceCosmikaController::class, 'single_product'])->name('tienda.single_product');
 Route::get('/tienda/cart', [App\Http\Controllers\EcommerceCosmikaController::class, 'cart'])->name('tienda.cart');
 Route::get('/tienda/categories', [App\Http\Controllers\EcommerceCosmikaController::class, 'categories'])->name('tienda.categories');
 Route::get('/tienda/filter', [App\Http\Controllers\EcommerceCosmikaController::class, 'filter'])->name('tienda.filter');

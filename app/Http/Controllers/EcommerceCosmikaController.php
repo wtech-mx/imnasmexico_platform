@@ -21,8 +21,8 @@ class EcommerceCosmikaController extends Controller
         return view('tienda_cosmica.home', compact('products_popular'));
     }
 
-    public function single_product($sku){
-        $product = Products::where('sku', $sku)->first();
+    public function single_product($slug){
+        $product = Products::where('slug', '=', $slug)->first();
 
         $products_interesar = Products::
         where('linea', $product->linea)

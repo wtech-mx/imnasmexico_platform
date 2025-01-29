@@ -24,6 +24,7 @@ class Products extends Model
         'stock_cosmica',
         'laboratorio',
         'sku',
+        'slug',
         'fecha',
     ];
 

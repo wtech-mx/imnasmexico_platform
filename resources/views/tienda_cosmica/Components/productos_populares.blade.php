@@ -27,7 +27,7 @@
                     <h4 class="text-center Avenir color_2 title_lineagrid m-0">{{ $primeraPalabra }}</h4>
                     <h5 class="text-center Avenir color_2 subtitle_lineagrid m-0">{{ $restoDelTexto }}</h5>
                     <p class="text-center">
-                        <a href="{{ route('tienda.single_product', $product_popular->sku) }}" class="btn btn_plus_grid">
+                        <a href="{{ route('tienda.single_product', $product_popular->slug) }}" class="btn btn_plus_grid">
                             <img class="img_btn_plus_grid" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="">
                         </a>
                     </p>

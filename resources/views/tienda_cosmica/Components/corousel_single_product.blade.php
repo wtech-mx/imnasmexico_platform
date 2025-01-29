@@ -28,7 +28,7 @@
 
             <p class="text-center">
 
-                <a href="{{ route('tienda.single_product', $product_interesar->sku) }}" class="text-center mt-3">
+                <a href="{{ route('tienda.single_product', $product_interesar->slug) }}" class="text-center mt-3">
                     <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
                 </a>
             </p>
