@@ -17,7 +17,9 @@ class CajaController extends Controller
         $notas_pagos = NotasPagos::whereDate('created_at', today())->where('metodo_pago', '=', 'Efectivo')->get();
         $total_notas_pagos = $notas_pagos->sum('monto');
 
-        $caja_egresos = CajaDia::where('fecha', '=', $fechaActual)->get();
+        $caja_dia = CajaDia::where('fecha', '=', $fechaActual)->get();
+
+        $caja_egresos = CajaDia::where('fecha', '=', $fechaActual)->where('tipo', '=', 'Egreso')->get();
         $total_egresos = $caja_egresos->sum('egresos');
 
         $caja = Caja::where('fecha', '=', $fechaActual)->first();
