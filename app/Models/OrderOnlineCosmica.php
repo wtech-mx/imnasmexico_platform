@@ -19,5 +19,8 @@ class OrderOnlineCosmica extends Model
         'estatus',
 
     ];
-
+    public function Orders()
+    {
+        return $this->belongsTo(OrdersCosmica::class, 'id_nota');
+    }
 }

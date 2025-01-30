@@ -15,6 +15,7 @@ use Carbon\Carbon;
 use DateInterval;
 use DateTime;
 use App\Models\BodegaPedidos;
+use App\Models\Caja;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Str;
@@ -78,6 +79,19 @@ class AppServiceProvider extends ServiceProvider
 
             // SPAN NAS
             $count_pedidos = BodegaPedidos::where('estatus_lab', '=', 'Aprobada')->get();
+
+            $registroHoy = Caja::whereDate('fecha', now()->toDateString())->exists();
+            if($registroHoy){
+
+            }else{
+                $totalDiaAnterior = Caja::orderBy('fecha', 'desc')->value('total');
+
+                Caja::create([
+                    'fecha' => now(),
+                    'ingresos' => $totalDiaAnterior,
+                    'inicio' => $totalDiaAnterior,
+                ]);
+            }
 
             $view->with(['count_pedidos' => $count_pedidos, 'noticias_inicio' => $noticias_inicio,'configuracion' => $configuracion,'webpage' => $webpage,'estandares' => $estandares,'revoes' => $revoes, 'fechaActual' => $fechaActual,'manuales' => $manuales,'noticias' => $noticias]);
         });

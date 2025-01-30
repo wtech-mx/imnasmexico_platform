@@ -43,7 +43,7 @@
             <div class="card">
                 <div class="card-header mx-4 p-3 text-center">
                     <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
-                        <i class="fab fa-paypal opacity-10"></i>
+                        <i class="fa fa-usd opacity-10"></i>
                     </div>
                 </div>
                 <div class="card-body pt-0 p-3 text-center">
@@ -61,7 +61,7 @@
                 <div class="card">
                   <div class="card-header mx-4 p-3 text-center">
                     <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
-                      <i class="fas fa-landmark opacity-10"></i>
+                      <i class="fas fa-long-arrow-up opacity-10"></i>
                     </div>
                   </div>
                   <div class="card-body pt-0 p-3 text-center">
@@ -77,7 +77,7 @@
                 <div class="card">
                   <div class="card-header mx-4 p-3 text-center">
                     <div class="icon icon-shape icon-lg bg-gradient-primary shadow text-center border-radius-lg">
-                      <i class="fab fa-paypal opacity-10"></i>
+                      <i class="fa fa-long-arrow-down opacity-10"></i>
                     </div>
                   </div>
                   <div class="card-body pt-0 p-3 text-center">
@@ -94,22 +94,6 @@
 
           <div class="col-md-12 mb-lg-0 mb-4">
             <div class="card mt-4">
-                @if ($caja == NULL)
-                    <form method="POST" action="{{ route('caja.caja_inicial') }}" enctype="multipart/form-data" role="form">
-                        @csrf
-                        <div class="card-header">
-                            <div class="row">
-                                <h6 >Saldo inicial en caja</h6>
-                                <div class="col-3 ">
-                                    <input name="monto_inicial" id="monto_inicial" type="number" class="form-control" placeholder="$ $ $ $" required>
-                                </div>
-                                <div class="col-3 ">
-                                    <button type="submit" class="btn" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                @endif
                 <form method="POST" action="{{ route('caja.store') }}" enctype="multipart/form-data" role="form">
                     @csrf
                     <div class="card-header pb-0 p-3">
@@ -124,7 +108,16 @@
                     </div>
                     <div class="card-body p-3">
                         <div class="row">
-                        <div class="col-md-6 mb-md-0 mb-4">
+                        <div class="col-md-3 mb-md-0 mb-4">
+                            <h6 >Tipo</h6>
+                            <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
+                                <select class="form-select d-inline-block" id="tipo" name="tipo">
+                                    <option value="Egreso">Egreso</option>
+                                    <option value="Ingreso">Ingreso</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-md-0 mb-4">
                             <h6 >Importe</h6>
                             <div class="card card-body border card-plain border-radius-lg d-flex align-items-center flex-row">
                                 <input class="form-control" type="number" id="egresos" name="egresos" placeholder="$ $ $ $" required>
@@ -149,7 +142,7 @@
           <div class="card-header pb-0 p-3">
             <div class="row">
               <div class="col-6 d-flex align-items-center">
-                <h6 class="mb-0">Egresos</h6>
+                <h6 class="mb-0">Ingresos y Egresos</h6>
               </div>
               <div class="col-6 text-end">
                 <a type="button" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" href="{{ route('caja.print_corte') }}"><i class="fas fa-file-pdf text-lg me-1"></i>Corte</a>
@@ -158,7 +151,7 @@
           </div>
           <div class="card-body p-3 pb-0">
             <ul class="list-group">
-                @foreach ($caja_egresos as $caja_egreso)
+                @foreach ($caja_dia as $caja_egreso)
                     <li class="list-group-item border-0 d-flex justify-content-between ps-0 mb-2 border-radius-lg">
                         <div class="d-flex flex-column">
                         <h6 class="mb-1 text-dark font-weight-bold text-sm">{{$caja_egreso->concepto}}</h6>
@@ -176,10 +169,10 @@
     </div>
 
     <div class="row mt-4">
-      <div class="col-md-7">
+      <div class="col-6">
         <div class="card">
           <div class="card-header pb-0 px-3">
-            <h6 class="mb-0">Notas Cursos</h6>
+            <a class="text-warning text-gradient px-3 mb-0"><i class="fa fa-graduation-cap me-2"></i>Nota Cursos</a>
           </div>
           <div class="card-body pt-4 p-3">
             <ul class="list-group">
@@ -197,8 +190,13 @@
                             <span class="text-xs">ID Nota: <span class="text-dark ms-sm-2 font-weight-bold">#{{$nota_pago->Nota->id}}</span></span>
                         </div>
                         <div class="ms-auto text-end">
-                            <a class="text-warning text-gradient px-3 mb-0"><i class="fa fa-graduation-cap me-2"></i>Nota Cursos</a>
-                            <a class="btn btn-link text-dark px-3 mb-0" href="{{ route('notas_cursos.edit', $nota_pago->Nota->id) }}" target="_blank"><i class="fas fa-eye text-dark me-2" aria-hidden="true"></i>Ver</a>
+                            @if ($nota_pago->Nota->paquete != NULL)
+                                <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$nota_pago->Nota->paquete) }}" target="_blank">Ver orden</a>
+                            @endif
+
+                            <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('notas_cursos.imprimir', $nota_pago->Nota->id) }}">
+                                <i class="fa fa-file"></i>
+                            </a>
                         </div>
                     </li>
                 @endforeach
@@ -207,16 +205,12 @@
         </div>
       </div>
 
-      <div class="col-md-5 mt-md-0 mt-4">
-        <div class="card h-100 mb-4">
+      <div class="col-6 mt-md-0 mt-4">
+        <div class="card mb-4">
           <div class="card-header pb-0 px-3">
             <div class="row">
               <div class="col-md-6">
-                <h6 class="mb-0">Notas Productos</h6>
-              </div>
-              <div class="col-md-6 d-flex justify-content-end align-items-center">
-                <i class="far fa-calendar-alt me-2"></i>
-                <small>{{$fecha}}</small>
+                <a class="text-success text-gradient px-3 mb-0"><i class="fa fa-shopping-bag me-2"></i><b> Nota Productos </b></a>
               </div>
             </div>
           </div>
@@ -233,10 +227,12 @@
                             <h6 class="mb-3 text-sm">{{$nota_producto->User->name}}</h6>
                             <span class="mb-2 text-xs">Fecha: <span class="text-dark font-weight-bold ms-sm-2">{{$fechaFormateada}}</span></span>
                             <span class="mb-2 text-xs">Monto: <span class="text-dark ms-sm-2 font-weight-bold">${{$nota_producto->total}}</span></span>
-                            <span class="text-xs">ID Nota: <span class="text-dark ms-sm-2 font-weight-bold">#{{$nota_producto->id}}</span></span>
+                            <span class="text-xs">ID Nota: <span class="text-dark ms-sm-2 font-weight-bold">{{$nota_producto->folio}}</span></span>
                         </div>
                         <div class="ms-auto text-end">
-                            <a class="text-success text-gradient px-3 mb-0"><i class="fa fa-shopping-bag me-2"></i><b> Nota Productos </b></a>
+                            <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('notas_productos.imprimir', ['id' => $nota_producto->id]) }}">
+                                <i class="fa fa-file"></i>
+                            </a>
                         </div>
                     </li>
                 @endforeach

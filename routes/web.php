@@ -129,6 +129,15 @@ Route::get('/tienda/productos', [App\Http\Controllers\EcommerceCosmikaController
 Route::get('/tienda/productos_faciales', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos_faciales'])->name('tienda.productos_faciales');
 Route::get('/tienda/productos_corporales', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos_corporales'])->name('tienda.productos_corporales');
 
+// =============== E C O M M E R C E  C A J A ===============================
+Route::post('/agregar-al-carrito', [App\Http\Controllers\CartController::class, 'agregar'])->name('carrito.agregar');
+Route::post('/actualizar-carrito', [App\Http\Controllers\CartController::class, 'actualizar'])->name('carrito.actualizar');
+Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/process-payment', [App\Http\Controllers\CartController::class, 'processPayment'])->name('process-payment_cosmica');
+Route::get('/cart/orders/pay', [App\Http\Controllers\CartController::class, 'pay'])->name('order_cosmica.pay');
+Route::get('/cart/orders/{code}/show', [App\Http\Controllers\CartController::class, 'show'])->name('order_cosmica.show');
+
 // =============== M O D U L O   F O L I O S ===============================
 Route::get('/buscar/folio', [App\Http\Controllers\FoliosController::class, 'index'])->name('folio.index');
 Route::get('/buscador/folio', [App\Http\Controllers\FoliosController::class, 'buscador'])->name('folio.buscador');

@@ -13,7 +13,7 @@
       top: -160px;
       right: 0px;
       height: 100px;
-      background-color: #CA87A6;
+      background-color: #836262;
       color: #fff;
       text-align: center;
     }
@@ -29,7 +29,7 @@
       bottom: -50px;
       right: 0px;
       height: 40px;
-      border-bottom: 2px solid #CA87A6;
+      border-bottom: 2px solid #836262;
     }
     footer .page:after {
       content: counter(page);
@@ -55,7 +55,7 @@
     }
 
     tr:nth-child(even) {
-    background-color: #F7EAED;
+    background-color: #8362625e;
     }
   </style>
 @php
@@ -65,7 +65,7 @@
 <body>
   <header>
     <h1>Reporte de IMNAS</h1>
-    <h2>Corte</h2>
+    <h2>Corte Caja {{ date('d/n/y', strtotime($today)) }}</h2>
   </header>
 
   <footer>
@@ -73,7 +73,7 @@
       <tr>
         <td>
             <p class="izq">
-               Fecha: {{$today}}
+               Fecha: {{ date('d/n/y', strtotime($today)) }}
             </p>
         </td>
         <td>
@@ -86,15 +86,15 @@
   </footer>
 
   <div id="content">
-
+    <h2 style="text-align: center;">Ventas totales</h2>
     <table class="table text-center">
         <colgroup span="2" width="100"></colgroup>
         <colgroup span="2" width="100"></colgroup>
         <colgroup span="2" width="100"></colgroup>
         <tr>
-            <td colspan="2" style="background-color: #CA87A6; color: #fff; border: rgb(255, 255, 255) 1px solid;">Efectivo</td>
-            <td colspan="2" style="background-color: #CA87A6; color: #fff; border: rgb(255, 255, 255) 1px solid;">Transferencia</td>
-            <td colspan="2" style="background-color: #CA87A6; color: #fff; border: rgb(255, 255, 255) 1px solid;">Tarjeta</td>
+            <td colspan="2" style="background-color: #836262; color: #fff; border: rgb(255, 255, 255) 1px solid;">Efectivo</td>
+            <td colspan="2" style="background-color: #836262; color: #fff; border: rgb(255, 255, 255) 1px solid;">Transferencia</td>
+            <td colspan="2" style="background-color: #836262; color: #fff; border: rgb(255, 255, 255) 1px solid;">Tarjeta</td>
         </tr>
         <tr>
             <td style="border: rgb(255, 255, 255) 1px solid;">Curso/Venta</td>
@@ -116,11 +116,10 @@
         </tr>
     </table>
 
-    <h2 style="text-align: center;">Caja</h2>
+    <h2 style="text-align: center;">Total en Caja</h2>
     <table class="table text-center">
-        <thead style="background-color: #CA87A6; color: #fff">
+        <thead style="background-color: #836262; color: #fff">
             <tr>
-                <th>Fecha</th>
                 <th>Saldo Inicial</th>
                 <th>Ingreso</th>
                 <th>Egreso</th>
@@ -129,7 +128,6 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{ $caja->fecha }}</td>
                 <td>${{ $caja->monto_inicial }}</td>
                 <td>${{ $total_pagos_efectivo }}</td>
                 <td>${{ $total_egresos }}</td>
@@ -138,9 +136,35 @@
         </tbody>
     </table>
 
+    <h2 style="text-align: center;">Ingresos y Egresos Manuales</h2>
+    <table class="table text-center">
+        <thead style="background-color: #836262; color: #fff">
+            <tr>
+                <th>ID</th>
+                <th>Concepto</th>
+                <th>Monto</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($caja_dia as $caja_egreso)
+                <tr>
+                    <td>#{{ $caja_egreso->id }}</td>
+                    <td>{{ $caja_egreso->concepto }}</td>
+                    <td>${{ $caja_egreso->egresos }}</td>
+                    @if ($caja_egreso->tipo == 'Egreso')
+                        <td style="background-color: #ff0808d3; color:#fff">{{ $caja_egreso->tipo }}</td>
+                    @else
+                        <td style="background-color: #7fff08d3; color:#000000">{{ $caja_egreso->tipo }}</td>
+                    @endif
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
     <h2 style="text-align: center;">Efectivo</h2>
     <table class="table text-center">
-        <thead style="background-color: #CA87A6; color: #fff">
+        <thead style="background-color: #836262; color: #fff">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
@@ -151,7 +175,7 @@
         <tbody>
             @foreach ($notas_cursos_efectivo as $nota_curso_efectivo)
                 <tr>
-                    <td>{{ $nota_curso_efectivo->Nota->id }}</td>
+                    <td>#{{ $nota_curso_efectivo->Nota->id }}</td>
                     <td>{{ $nota_curso_efectivo->Nota->User->name }}</td>
                     <td>${{ $nota_curso_efectivo->monto }}</td>
                     <td>Curso</td>
@@ -159,7 +183,7 @@
             @endforeach
             @foreach ($notas_producto_efectivo as $nota_producto_efectivo)
                 <tr>
-                    <td>{{ $nota_producto_efectivo->id }}</td>
+                    <td>{{ $nota_producto_efectivo->folio }}</td>
                     <td>{{ $nota_producto_efectivo->User->name }}</td>
                     <td>${{ $nota_producto_efectivo->total }}</td>
                     <td>Producto</td>
@@ -171,7 +195,7 @@
     <h2 style="text-align: center;">
         Transferencia</h2>
     <table class="table text-center">
-        <thead style="background-color: #CA87A6; color: #fff">
+        <thead style="background-color: #836262; color: #fff">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
@@ -182,7 +206,7 @@
         <tbody>
             @foreach ($notas_cursos_trans as $nota_curso_efectivo)
                 <tr>
-                    <td>{{ $nota_curso_efectivo->Nota->id }}</td>
+                    <td>#{{ $nota_curso_efectivo->Nota->id }}</td>
                     <td>{{ $nota_curso_efectivo->Nota->User->name }}</td>
                     <td>${{ $nota_curso_efectivo->monto }}</td>
                     <td>Curso</td>
@@ -190,7 +214,7 @@
             @endforeach
             @foreach ($notas_producto_trans as $nota_producto_efectivo)
                 <tr>
-                    <td>{{ $nota_producto_efectivo->id }}</td>
+                    <td>{{ $nota_producto_efectivo->folio }}</td>
                     <td>{{ $nota_producto_efectivo->User->name }}</td>
                     <td>${{ $nota_producto_efectivo->total }}</td>
                     <td>Producto</td>
@@ -202,7 +226,7 @@
     <h2 style="text-align: center;">
         Tarjeta</h2>
     <table class="table text-center">
-        <thead style="background-color: #CA87A6; color: #fff">
+        <thead style="background-color: #836262; color: #fff">
             <tr>
                 <th>ID</th>
                 <th>Nombre</th>
@@ -213,7 +237,7 @@
         <tbody>
             @foreach ($notas_cursos_tarjeta as $nota_curso_efectivo)
                 <tr>
-                    <td>{{ $nota_curso_efectivo->Nota->id }}</td>
+                    <td>#{{ $nota_curso_efectivo->Nota->id }}</td>
                     <td>{{ $nota_curso_efectivo->Nota->User->name }}</td>
                     <td>${{ $nota_curso_efectivo->monto }}</td>
                     <td>Curso</td>
@@ -221,7 +245,7 @@
             @endforeach
             @foreach ($notas_producto_tarjeta as $nota_producto_efectivo)
                 <tr>
-                    <td>{{ $nota_producto_efectivo->id }}</td>
+                    <td>{{ $nota_producto_efectivo->folio }}</td>
                     <td>{{ $nota_producto_efectivo->User->name }}</td>
                     <td>${{ $nota_producto_efectivo->total }}</td>
                     <td>Producto</td>

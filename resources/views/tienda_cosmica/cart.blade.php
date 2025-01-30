@@ -37,26 +37,30 @@
                 <h4>Costos</h4>
             </div>
 
-            <div class="container_list_product">
-                <div class="d-flex justify-content-between">
+            @if(session('cart_productos'))
+                @foreach(session('cart_productos') as $id => $producto)
+                    <div class="container_list_product mb-2">
+                        <div class="d-flex justify-content-between">
 
-                    <img class="my-auto" src="{{ asset('cosmika/inicio/protector.png') }}" alt="" style="height: 60px;width:60px;" >
+                            <img class="my-auto" src="{{ $producto['imagen'] }}" alt="" style="height: 60px;width:60px;" >
 
-                    <p class="my-auto">Sérum Hialurónico
-                        30 ml
-                    </p>
+                            <p class="my-auto">{{ $producto['nombre'] }}</p>
 
-                    <p class="my-auto">
-                        <a class="icon_list_cart" href="">+</a>
-                        <input class="input_cart_list" type="number" value="1">
-                        <a class="icon_list_cart" href="">-</a>
-                    </p>
+                            <p class="my-auto">
+                                <a href="javascript:void(0);" class="icon_list_cart incrementar" data-id="{{ $id }}">+</a>
+                                <input class="input_cart_list" type="number" value="{{ $producto['cantidad'] }}" min="1" data-id="{{ $id }}">
+                                <a href="javascript:void(0);" class="icon_list_cart decrementar" data-id="{{ $id }}">-</a>
+                            </p>
 
-                    <p class="my-auto">
-                        $550.0
-                    </p>
-                </div>
-            </div>
+                            <p class="my-auto total-precio" id="total-{{ $id }}">
+                                ${{ number_format($producto['precio'] * $producto['cantidad'], 0, '.', ',') }}
+                            </p>
+
+                            <button class="btn btn-sm btn-danger eliminar-producto" data-id="{{ $id }}">X</button>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
 
             <div class="button_collapse_cart mt-5 mb-5">
                 <div class="d-flex justify-content-center">
@@ -175,8 +179,15 @@
                                 <div class="accordion-body" style="padding: 0px!important;">
                                     <div class="row">
                                         <div class="col-12">
+                                            @if(session('cart_productos'))
+                                            @php
+                                                $cart_productos = session('cart_productos', []);
+                                                $total_carrito = array_sum(array_map(fn($p) => $p['precio'] * $p['cantidad'], $cart_productos));
+                                            @endphp
+                                            <h4 class="mt-3"><b>Total: </b> <span id="total-carrito">${{ number_format($total_carrito, 0, '.', ',') }}</span></h4>
+                                            @endif
                                             @guest
-                                                <form method="POST" action="{{ route('process-payment') }}">
+                                                <form method="POST" action="{{ route('process-payment_cosmica') }}">
                                                     @csrf
                                                     <div class="row">
                                                         <div class="col-12">
@@ -221,9 +232,7 @@
 
                                                         <div class="col-12">
                                                             <div class="d-flex justify-content-center">
-                                                                <div class="container_lineas_single mt-3 mb-3">
-                                                                    <a class="text_shop_single " type="submit">Pagar ahora</a>
-                                                                </div>
+                                                                <button class="btn_pagar_checkout " type="submit">Pagar</button>
                                                             </div>
                                                         </div>
 
@@ -231,7 +240,7 @@
 
                                                 </form>
                                                 @else
-                                                <form method="POST" action="{{ route('process-payment') }}">
+                                                <form method="POST" action="{{ route('process-payment_cosmica') }}">
                                                     @csrf
                                                     <div class="row">
                                                         <div class="col-12">
@@ -284,16 +293,14 @@
                               </h2>
                               <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body" style="padding: 0px!important;">
-                                    @if(session('cart'))
+                                    @if(session('cart_productos'))
                                         @php
-                                            $total = 0;
-                                            foreach(session('cart') as $id => $details){
-                                                $total += $details['price'] * $details['quantity'];
-                                                $iva = $total * .16;
-                                                $total_iva = $total + $iva;
-                                            }
+                                            $cart_productos = session('cart_productos', []);
+                                            $total_carrito = array_sum(array_map(fn($p) => $p['precio'] * $p['cantidad'], $cart_productos));
+                                            $iva = $total_carrito * .16;
+                                            $total_iva = $total_carrito + $iva;
                                         @endphp
-                                    <b>Total con IVA: </b> {{$total_iva}}
+                                        <h4 class="mt-3"><b>Total: </b> <span id="total-carrito">${{ number_format($total_iva, 0, '.', ',') }}</span></h4>
                                     @endif
                                     @guest
                                         <form role="form" action="{{ route('order.pay_stripe') }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
@@ -610,6 +617,74 @@
     toggleInputs();
 </script>
 
+<script>
+    $(document).ready(function () {
+        // Aumentar cantidad
+        $('.incrementar').click(function () {
+            let id = $(this).data('id');
+            let input = $('input[data-id="' + id + '"]');
+            let cantidad = parseInt(input.val()) + 1;
+            actualizarCantidad(id, cantidad);
+        });
+
+        // Disminuir cantidad
+        $('.decrementar').click(function () {
+            let id = $(this).data('id');
+            let input = $('input[data-id="' + id + '"]');
+            let cantidad = parseInt(input.val()) - 1;
+            if (cantidad > 0) {
+                actualizarCantidad(id, cantidad);
+            }
+        });
+
+        // Actualizar cantidad desde input
+        $('.input_cart_list').on('change', function () {
+            let id = $(this).data('id');
+            let cantidad = parseInt($(this).val());
+            if (cantidad > 0) {
+                actualizarCantidad(id, cantidad);
+            }
+        });
+
+        // Función AJAX para actualizar cantidad
+        function actualizarCantidad(id, cantidad) {
+            $.ajax({
+                url: "{{ route('cart.update') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: id,
+                    cantidad: cantidad
+                },
+                success: function (response) {
+                    if (response.success) {
+                        $('input[data-id="' + id + '"]').val(cantidad);
+                        $('#total-' + id).text('$' + response.total_producto);
+                        $('#total-carrito').text('$' + response.total_carrito);
+                    }
+                }
+            });
+        }
+
+        // Eliminar producto del carrito
+        $('.eliminar-producto').click(function () {
+            let id = $(this).data('id');
+            $.ajax({
+                url: "{{ route('cart.remove') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: id
+                },
+                success: function (response) {
+                    if (response.success) {
+                        location.reload(); // Recargar la página para actualizar el carrito
+                    }
+                }
+            });
+        });
+    });
+</script>
 
 @endsection
 

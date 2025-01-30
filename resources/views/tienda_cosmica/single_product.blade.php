@@ -44,12 +44,16 @@
             <div class="container_price  mt-3 mt-sm-3 mt-md-4 mt-lg-5 mb-3 mb-sm-3 mb-md-3 mb-lg-5">
                 <div class="d-flex justify-content-around">
                     <h2 class="my-auto price">${{number_format($product->precio_normal, 0, '.', ',')}}</h2>
-                    <p class="my-auto">1
+                    <p class="my-auto">
+                        <p class="my-auto">
+                            <input type="number" id="cantidad_{{ $product->id }}" class="form-control d-inline-block" value="1" min="1" style="width: 60px;">
+                        </p>
                         <a href="" class="">
                             <img class="icon_plus_cantidad" src="{{ asset('cosmika/INICIO/AGREGAR-POPULARES.png') }}" alt="Carrito">
                         </a>
                     </p>
-                    <a href="" class="btn btn_shop my-auto">Comprar
+                    <a href="javascript:void(0)" class="btn btn_shop my-auto agregar-carrito" data-id="{{ $product->id }}">
+                        Agregar
                         <img class="img_btn_shop" src="{{ asset('cosmika/menu/BOLSA-DE-COMPRA.png') }}" alt="Carrito">
                     </a>
                 </div>
@@ -104,7 +108,30 @@
 @endsection
 
 @section('js')
+<script>
+    $(document).ready(function() {
+        $(".agregar-carrito").click(function() {
+            var productId = $(this).data("id");
+            var cantidad = $("#cantidad_" + productId).val();
 
+            $.ajax({
+                url: "{{ route('carrito.agregar') }}",
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    id: productId,
+                    cantidad: cantidad
+                },
+                success: function(response) {
+                    alert(response.mensaje);
+                },
+                error: function(xhr) {
+                    alert("Hubo un error al agregar el producto.");
+                }
+            });
+        });
+    });
+</script>
 @endsection
 
 
