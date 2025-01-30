@@ -21,6 +21,11 @@
     $basePathUDoc = ($domain == 'plataforma.imnasmexico.com')
     ? asset('documentos_registro/') . '/'
     : asset('documentos_registro/') . '/';
+
+    $basePathFirmaDirect = ($domain == 'plataforma.imnasmexico.com')
+    ? asset('documentos/') . '/'
+    : asset('documentos/') . '/';
+
 @endphp
 @include('user.components.documentos_imnas.nuevos.fuentes')
 
@@ -55,6 +60,10 @@
             width: 70px;
         }
 
+        .img_firmas_delanteras_dire{
+            width: 60px;
+        }
+
         .img_traseras{
             width: 130px;
             margin-left: 30px;
@@ -68,6 +77,14 @@
             color:#010101;
         }
 
+        .h3_nomre_firmas_dire{
+            font-family: 'Montserrat_SemiBold';
+            font-weight: 'regular';
+            font-size: 6px;
+            line-height: 13px;
+            color:#010101;
+        }
+
         .texto_emosires{
             font-family: 'Montserrat_LightItalic';
             font-weight: 'regular';
@@ -77,6 +94,14 @@
             color: #010101;
         }
 
+        .texto_emosires_dire{
+            font-family: 'Montserrat_Regular';
+            font-weight: 'regular';
+            font-size: 6px;
+            margin-top: 5px!important;
+            line-height: 9px;
+            color:#010101;
+        }
 
         .texto_documentos{
             font-size: 17px;
@@ -407,23 +432,53 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-4 text-center " style="padding: 0 0 0 45px;">
-                        <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras" style="margin-top: 30px">
-                        <h3 class="h3_nomre_firmas uppercase m-0 p-0">Juan Pablo Soto</h3>
-                        <h5 class="texto_emosires m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
-                    </div>
+                    @if($tickets?->firma_director == 'si')
 
-                    <div class="col-4 text-center  ">
-                        <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
-                        <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
-                        <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
-                    </div>
+                        <div class="col-3 text-center" style="padding: 0 0 0 30px;">
+                            <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras_dire">
+                            <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Juan Pablo Soto</h3>
+                            <h5 class="texto_emosires_dire capitalize m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
+                        </div>
 
-                    <div class="col-4 text-center  ">
-                        <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras" style="margin-top: 30px">
-                        <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Ma. Luisa Flores</h3>
-                        <h5 class="texto_emosires m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
-                    </div>
+                        <div class="col-3 text-center">
+                            <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras_dire">
+                            <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Carla Rizo FLORES</h3>
+                            <h5 class="texto_emosires_dire capitalize m-0 p-0">Directora General <br> IMNAS</h5>
+                        </div>
+
+                        <div class="col-3 text-center">
+                            <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras_dire">
+                            <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Ma. Luisa Flores</h3>
+                            <h5 class="texto_emosires_dire capitalize m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
+                        </div>
+
+                        <div class="col-3 text-center">
+                            <img src="{{ $basePathFirmaDirect  . '/' . $tickets?->User?->telefono . '/' . $tickets?->User?->RegistroImnasEscuela?->firma }}" class="img_firmas_delanteras_dire">
+                            <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">{{ $tickets?->User?->name ?? '' }}</h3>
+                            <h5 class="texto_emosires_dire capitalize m-0 p-0"> {{ $tickets?->texto_director }}</h5>
+                        </div>
+
+                        @else
+
+                        <div class="col-4 text-center border " style="margin-left: 30px">>
+                            <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras">
+                            <h3 class="h3_nomre_firmas capitalize m-0 p-0">Juan Pablo Soto</h3>
+                            <h5 class="texto_emosires capitalize m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
+                        </div>
+
+                        <div class="col-4 text-center border ">
+                            <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
+                            <h3 class="h3_nomre_firmas capitalize m-0 p-0">Lic. Carla Rizo FLORES</h3>
+                            <h5 class="texto_emosires capitalize m-0 p-0">Directora General <br> IMNAS</h5>
+                        </div>
+
+                        <div class="col-4 text-center border ">
+                            <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
+                            <h3 class="h3_nomre_firmas capitalize m-0 p-0">Lic. Ma. Luisa Flores</h3>
+                            <h5 class="texto_emosires capitalize m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
+                        </div>
+
+                    @endif
                 </div>
 
                 <div class="row" >
