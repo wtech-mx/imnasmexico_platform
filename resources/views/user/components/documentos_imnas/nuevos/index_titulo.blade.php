@@ -592,32 +592,60 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-4 text-center  my-auto" style="padding: 0 0 0 45px;">
-                        <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 100px;" >
-                    </div>
 
-                    <div class="col-4 text-center  ">
-                        <img src="{{ $basePath . 'carla.webp'}}" style="width: 80px;">
-                        <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
-                        <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
-                    </div>
+                    @if($tickets?->firma_director == 'si')
 
-                    <div class="col-4 text-center  my-auto">
-                        <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 70px;">
-                    </div>
+                        <div class="col-3 text-center  my-auto" style="padding: 0 0 0 45px;">
+                            <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 60px;" >
+                        </div>
+
+                        <div class="col-3 text-center my-auto" style="padding: 0 0 0 45px;">
+                            <img src="{{ $basePath . 'carla.webp'}}" style="width: 80px;">
+                            <h3 class="h3_nomre_firmas_dire uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
+                            <h5 class="texto_emosires_dire m-0 p-0">Directora General <br> IMNAS</h5>
+                        </div>
+
+                        <div class="col-3 text-center my-auto">
+                            <img src="{{ $basePathFirmaDirect  . '/' . $tickets?->User?->telefono . '/' . $tickets?->User?->RegistroImnasEscuela?->firma }}" class="img_firmas_delanteras_dire">
+                            <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">{{ $tickets?->User?->name ?? '' }}</h3>
+                            <h5 class="texto_emosires_dire capitalize m-0 p-0"> {{ $tickets?->texto_director }}</h5>
+                        </div>
+
+                        <div class="col-3 text-center  my-auto">
+                            <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 40px;">
+                        </div>
+
+                    @else
+
+                        <div class="col-4 text-center  my-auto" style="padding: 0 0 0 45px;">
+                            <img src="{{ $basePath . 'sello-registro-marca-de-agua.webp'}}" style="width: 100px;" >
+                        </div>
+
+                        <div class="col-4 text-center  ">
+                            <img src="{{ $basePath . 'carla.webp'}}" style="width: 80px;">
+                            <h3 class="h3_nomre_firmas uppercase m-0 p-0">Lic. Carla Rizo FLORES</h3>
+                            <h5 class="texto_emosires m-0 p-0">Directora General <br> IMNAS</h5>
+                        </div>
+
+                        <div class="col-4 text-center  my-auto">
+                            <img class="" src="{{ $basePath . 'sello.webp'}}" style="width: 70px;">
+                        </div>
+
+                    @endif
+
                 </div>
 
                 <div class="row" >
 
                     <div class="col-4 text-center" style="">
-                        <img class="" src="{{ $basePath . 'stps.webp'}}" style="width:75px;"  >
+                        <img class="" src="{{ $basePath . 'stps.webp'}}" style="width:60px;"  >
                     </div>
 
                     <div class="col-4 text-center" style="">
                     </div>
 
                     <div class="col-4 text-center"  style="">
-                        <img class=" " src="{{ $basePath . 'registro_nacional.png'}}" style="width:65px;">
+                        <img class=" " src="{{ $basePath . 'registro_nacional.png'}}" style="width:50px;">
                     </div>
 
                 </div>
