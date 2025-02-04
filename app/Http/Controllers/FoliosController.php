@@ -162,7 +162,11 @@ class FoliosController extends Controller
 
         $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
 
-        $user = User::where('id', $tickets->id_usuario)->first();
+        if($tickets == null){
+
+        }else{
+            $user = User::where('id', $tickets->id_usuario)->first();
+        }
 
         if($tickets == null){
             $tickets = OrdersTickets::where('id', '=', $id)->first();
@@ -188,8 +192,11 @@ class FoliosController extends Controller
 
         $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
 
-        $user = User::where('id', $tickets->id_usuario)->first();
+        if($tickets == null){
 
+        }else{
+            $user = User::where('id', $tickets->id_usuario)->first();
+        }
 
         if($tickets == null){
             $tickets = OrdersTickets::where('id', '=', $id)->first();
@@ -215,7 +222,11 @@ class FoliosController extends Controller
 
         $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
 
-        $user = User::where('id', $tickets->id_usuario)->first();
+        if($tickets == null){
+
+        }else{
+            $user = User::where('id', $tickets->id_usuario)->first();
+        }
 
         if($tickets == null){
             $tickets = OrdersTickets::where('id', '=', $id)->first();
@@ -241,8 +252,11 @@ class FoliosController extends Controller
 
         $tickets_externo = DocumenotsGenerador::where('folio', $id)->first();
 
-        $user = User::where('id', $tickets->id_usuario)->first();
+        if($tickets == null){
 
+        }else{
+            $user = User::where('id', $tickets->id_usuario)->first();
+        }
 
         if($tickets == null){
             $tickets = OrdersTickets::where('id', '=', $id)->first();
@@ -289,7 +303,7 @@ class FoliosController extends Controller
             if (!empty($tickets) && $tickets->diseno_doc == 'Nuevo') {
                 return view('user.components.documentos_imnas.nuevos.index_tira', compact('subtemas','tickets', 'tipo_documentos', 'tickets_externo','user'));
             } else {
-                return view('user.components.documentos_imnas.index_tira', compact('tickets', 'tipo_documentos', 'tickets_externo'));
+                return view('user.components.documentos_imnas.index_tira', compact('subtemas','tickets', 'tipo_documentos', 'tickets_externo'));
             }
 
     }
