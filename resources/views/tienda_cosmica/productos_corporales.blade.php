@@ -56,129 +56,76 @@
                     </button>
                   </li>
 
+                  <li class="nav-item p-2" role="presentation">
+                    <button class="nav-link btn_product_nav" id="pills-rose-tab" data-bs-toggle="pill" data-bs-target="#pills-rose" type="button" role="tab" aria-controls="pills-rose" aria-selected="false">
+                      Rose
+                    </button>
+                </li>
+
+                <li class="nav-item p-2" role="presentation">
+                    <button class="nav-link btn_product_nav" id="pills-esencia-tab" data-bs-toggle="pill" data-bs-target="#pills-esencia" type="button" role="tab" aria-controls="pills-esencia" aria-selected="false">
+                      Esencia
+                    </button>
+                  </li>
+
             </ul>
 
               <div class="tab-content" id="pills-tabContent">
 
                 <div class="tab-pane fade show active" id="pills-astros" role="tabpanel" aria-labelledby="pills-todos-tab" tabindex="0">
                     <div class="row">
-
-                        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                            <div class="container_lineas_single_carousel mx-auto" style="width:80%; ">
-                                <div class="content mb-3 mt-3">
-                                    <div class="img_container_single_corousel mx-auto">
-                                        <img class="img_grid_products_single_carousel" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h2 class="text-center titulo_producto_carousel mt-4">
-                                <strong>Shampoo Facial</strong> <br>
-                                con Vitaminas 125 ml
-                            </h2>
-
-                            <h4 class="text-center price_producto_carousel mt-3">
-                                <strong class="">$200.00</strong>
-                            </h4>
-
-                            <p class="text-center">
-
-                                <a href="" class="text-center mt-3">
-                                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
-                                </a>
-                            </p>
-
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                            <div class="container_lineas_single_carousel mx-auto" style="width:80%; ">
-                                <div class="content mb-3 mt-3">
-                                    <div class="img_container_single_corousel mx-auto">
-                                        <img class="img_grid_products_single_carousel" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h2 class="text-center titulo_producto_carousel mt-4">
-                                <strong>Shampoo Facial</strong> <br>
-                                con Vitaminas 125 ml
-                            </h2>
-
-                            <h4 class="text-center price_producto_carousel mt-3">
-                                <strong class="">$200.00</strong>
-                            </h4>
-
-                            <p class="text-center">
-
-                                <a href="" class="text-center mt-3">
-                                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
-                                </a>
-                            </p>
-
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                            <div class="container_lineas_single_carousel mx-auto" style="width:80%; ">
-                                <div class="content mb-3 mt-3">
-                                    <div class="img_container_single_corousel mx-auto">
-                                        <img class="img_grid_products_single_carousel" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h2 class="text-center titulo_producto_carousel mt-4">
-                                <strong>Shampoo Facial</strong> <br>
-                                con Vitaminas 125 ml
-                            </h2>
-
-                            <h4 class="text-center price_producto_carousel mt-3">
-                                <strong class="">$200.00</strong>
-                            </h4>
-
-                            <p class="text-center">
-
-                                <a href="" class="text-center mt-3">
-                                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
-                                </a>
-                            </p>
-                        </div>
-
-                        <div class="col-6 col-sm-6 col-md-4 col-lg-3">
-                            <div class="container_lineas_single_carousel mx-auto" style="width:80%; ">
-                                <div class="content mb-3 mt-3">
-                                    <div class="img_container_single_corousel mx-auto">
-                                        <img class="img_grid_products_single_carousel" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h2 class="text-center titulo_producto_carousel mt-4">
-                                <strong>Shampoo Facial</strong> <br>
-                                con Vitaminas 125 ml
-                            </h2>
-
-                            <h4 class="text-center price_producto_carousel mt-3">
-                                <strong class="">$200.00</strong>
-                            </h4>
-
-                            <p class="text-center">
-
-                                <a href="" class="text-center mt-3">
-                                    <img class="icon_single_item_slide" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="" style="width: 25px;margin-right: auto;margin-left: auto;">
-                                </a>
-                            </p>
-
-                        </div>
-
+                        @foreach ($products_Estelar as $product)
+                            @include('tienda_cosmica.Components.item_categorias')
+                        @endforeach
                     </div>
                 </div>
 
                 <div class="tab-pane fade" id="pills-eclipse" role="tabpanel" aria-labelledby="pills-facial-tab" tabindex="0">
-
+                    <div class="row">
+                        @foreach ($products_Eclipse as $product)
+                            @include('tienda_cosmica.Components.item_categorias')
+                        @endforeach
+                    </div>
                 </div>
 
-                <div class="tab-pane fade" id="pills-corporal" role="tabpanel" aria-labelledby="pills-corporal-tab" tabindex="0">
+                <div class="tab-pane fade" id="pills-flash" role="tabpanel" aria-labelledby="pills-flash-tab" tabindex="0">
+                    <div class="row">
+                        @foreach ($products_Renacer as $product)
+                            @include('tienda_cosmica.Components.item_categorias')
+                        @endforeach
+                    </div>
+                </div>
 
+                <div class="tab-pane fade" id="pills-galaxia" role="tabpanel" aria-labelledby="pills-galaxia-tab" tabindex="0">
+                    <div class="row">
+                        @foreach ($products_Flash as $product)
+                            @include('tienda_cosmica.Components.item_categorias')
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-renacer" role="tabpanel" aria-labelledby="pills-renacer-tab" tabindex="0">
+                    <div class="row">
+                        @foreach ($products_Astros as $product)
+                            @include('tienda_cosmica.Components.item_categorias')
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-rose" role="tabpanel" aria-labelledby="pills-rose-tab" tabindex="0">
+                    <div class="row">
+                        @foreach ($products_rose as $product)
+                            @include('tienda_cosmica.Components.item_categorias')
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-esencia" role="tabpanel" aria-labelledby="pills-esencia-tab" tabindex="0">
+                    <div class="row">
+                        @foreach ($products_Esencia as $product)
+                            @include('tienda_cosmica.Components.item_categorias')
+                        @endforeach
+                    </div>
                 </div>
 
               </div>

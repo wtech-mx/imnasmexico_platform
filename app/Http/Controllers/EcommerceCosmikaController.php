@@ -139,7 +139,56 @@ class EcommerceCosmikaController extends Controller
 
     public function productos_corporales(){
 
-        return view('tienda_cosmica.productos_corporales');
+        $products_Estelar = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Estelar')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        $products_Eclipse = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Eclipse')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        $products_Renacer = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Renacer')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        $products_Flash = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Flash')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        $products_Astros = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Astros')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        $products_rose = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Rose Caviar')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        $products_Esencia = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Esencia Vital')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        return view('tienda_cosmica.productos_corporales',compact('products_Estelar','products_Eclipse','products_Renacer','products_Flash','products_Astros','products_rose','products_Esencia'));
     }
 
 
