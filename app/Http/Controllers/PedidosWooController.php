@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderOnlineCosmica;
 use App\Models\OrderOnlineNas;
+use App\Models\OrdersCosmica;
+use App\Models\OrdersCosmicaOnline;
 use Illuminate\Http\Request;
 use Codexshaper\WooCommerce\Facades\WooCommerce;
 use Automattic\WooCommerce\Client;
@@ -221,6 +223,47 @@ class PedidosWooController extends Controller
             } else {
                 return redirect()->back()->with('error', 'Hubo un problema al actualizar el estado de la orden.');
             }
+    }
+
+    public function index_cosmika_ecommerce_apro(Request $request)
+    {
+        $startDate = $request->input('start_date') ?: Carbon::now()->startOfMonth()->format('Y-m-d');
+        $endDate = $request->input('end_date') ?: Carbon::now()->endOfMonth()->format('Y-m-d');
+
+        $startDateTime = $startDate . 'T00:00:00';
+        $endDateTime = $endDate . 'T23:59:59';
+
+        $notas = OrdersCosmica::orderBy('id','DESC')->where('estatus','=' , '1')->get();
+
+        return view('admin.cosmica_ecommerce.index', compact('notas'));
+    }
+
+    public function index_cosmika_ecommerce_pen(Request $request)
+    {
+        $startDate = $request->input('start_date') ?: Carbon::now()->startOfMonth()->format('Y-m-d');
+        $endDate = $request->input('end_date') ?: Carbon::now()->endOfMonth()->format('Y-m-d');
+
+        $startDateTime = $startDate . 'T00:00:00';
+        $endDateTime = $endDate . 'T23:59:59';
+
+        $notas = OrdersCosmica::whereBetween('fecha', [$startDate, $endDate])
+        ->orderBy('id','DESC')->where('estatus','=' , '0')->get();
+
+        return view('admin.cosmica_ecommerce.index', compact('notas'));
+    }
+
+    public function imprimir_cosmica($id){
+        $diaActual = date('Y-m-d');
+        $today =  date('d-m-Y');
+
+        $nota = OrdersCosmica::find($id);
+
+        $nota_productos = OrdersCosmicaOnline::where('id_order', $nota->id)->get();
+
+
+        $pdf = \PDF::loadView('admin.cosmica_ecommerce.pdf_nota', compact('nota', 'today', 'nota_productos'));
+
+        return $pdf->stream();
     }
 
 }

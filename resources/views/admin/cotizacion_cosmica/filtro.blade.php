@@ -32,7 +32,12 @@
                             <a href="{{ route('pedidos_cosmica_woo.index') }}" class="btn btn-sm m-2 text-white" style="background:#B600E3;">Tienda Online
                                 <img src="{{asset('assets/user/icons/carrito-de-compras.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
                             </a>
-
+                            <a href="{{ route('pedidos_cosmica_ecommerce.index') }}" class="btn btn-sm m-2 text-white" style="background:#660080;">Ecommerce
+                                <img src="{{asset('assets/user/icons/order.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
+                                <span class="badge rounded-pill bg-danger">
+                                    {{ $oreder_cosmica ? $oreder_cosmica->count() : 0 }}
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -44,7 +44,7 @@
             <a href="#" class="btn me-2">
                 <img src="{{ asset('cosmika/menu/LUPA.png') }}" alt="Buscar"  class="icons_header" style="">
             </a>
-            <a href="#" class="btn">
+            <a href="{{ route('tienda.cart') }}" class="btn">
                 <img src="{{ asset('cosmika/menu/BOLSA-DE-COMPRA.png') }}" alt="Carrito"  class="icons_header" style="">
             </a>
         </div>

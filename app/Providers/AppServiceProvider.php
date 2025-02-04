@@ -16,6 +16,7 @@ use DateInterval;
 use DateTime;
 use App\Models\BodegaPedidos;
 use App\Models\Caja;
+use App\Models\OrdersCosmica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\URL;
 use Str;
@@ -92,8 +93,9 @@ class AppServiceProvider extends ServiceProvider
                     'inicio' => $totalDiaAnterior,
                 ]);
             }
+            $oreder_cosmica = OrdersCosmica::where('estatus','=' , '1')->get();
 
-            $view->with(['count_pedidos' => $count_pedidos, 'noticias_inicio' => $noticias_inicio,'configuracion' => $configuracion,'webpage' => $webpage,'estandares' => $estandares,'revoes' => $revoes, 'fechaActual' => $fechaActual,'manuales' => $manuales,'noticias' => $noticias]);
+            $view->with(['count_pedidos' => $count_pedidos, 'noticias_inicio' => $noticias_inicio,'configuracion' => $configuracion,'webpage' => $webpage,'estandares' => $estandares,'revoes' => $revoes, 'fechaActual' => $fechaActual,'manuales' => $manuales,'noticias' => $noticias, 'oreder_cosmica' => $oreder_cosmica]);
         });
     }
 }

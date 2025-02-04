@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\OrderOnlineCosmica;
 use App\Models\OrdersCosmica;
+use App\Models\OrdersCosmicaOnline;
+use App\Models\OrdersTickets;
 use App\Models\Products;
 use Illuminate\Http\Request;
 use MercadoPago\{Exception, SDK, Preference, Item};
@@ -34,6 +36,7 @@ class CartController extends Controller
         } else {
             // Si no está, se agrega al carrito de productos
             $cart[$product->id] = [
+                'id_producto' => $product->id,
                 'nombre' => $product->nombre,
                 'precio' => $product->precio_normal,
                 'cantidad' => $cantidad,
@@ -112,8 +115,20 @@ class CartController extends Controller
         if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
             if (User::where('telefono', $request->telefono)->exists()) {
                 $user = User::where('telefono', $request->telefono)->first();
+                $user->postcode = $request->get('postcode');
+                $user->state = $request->get('state');
+                $user->country = $request->get('country');
+                $user->direccion = $request->get('direccion');
+                $user->city = $request->get('city');
+                $user->update();
             } else {
                 $user = User::where('email', $request->email)->first();
+                $user->postcode = $request->get('postcode');
+                $user->state = $request->get('state');
+                $user->country = $request->get('country');
+                $user->direccion = $request->get('direccion');
+                $user->city = $request->get('city');
+                $user->update();
             }
             $payer = $user;
         } else {
@@ -125,6 +140,12 @@ class CartController extends Controller
             $payer->telefono = $request->get('telefono');
             $payer->cliente = '1';
             $payer->password = Hash::make($request->get('telefono'));
+
+            $payer->postcode = $request->get('postcode');
+            $payer->state = $request->get('state');
+            $payer->country = $request->get('country');
+            $payer->direccion = $request->get('direccion');
+            $payer->city = $request->get('city');
             $payer->save();
             $datos = User::where('id', '=', $payer->id)->first();
         }
@@ -151,8 +172,9 @@ class CartController extends Controller
             $order_cosmica->save();
 
             foreach (session('cart_productos') as $id => $details) {
-                $order_ticket = new OrderOnlineCosmica;
-                $order_ticket->id_nota = $order_cosmica->id;
+                $order_ticket = new OrdersCosmicaOnline;
+                $order_ticket->id_order = $order_cosmica->id;
+                $order_ticket->id_producto = $details['id_producto'];
                 $order_ticket->nombre = $details['nombre'];
                 $order_ticket->precio = $details['precio'];
                 $order_ticket->cantidad = $details['cantidad'];
@@ -202,5 +224,12 @@ class CartController extends Controller
         return redirect()->route('order_cosmica.show', $order->code);
     }
 
+    public function show($code)
+    {
+        $order = OrdersCosmica::where('code', $code)->firstOrFail();
+        $order_ticket = OrdersCosmicaOnline::where('id_order', '=', $order->id)->get();
+
+        return view('tienda_cosmica.thankyou', compact('order', 'order_ticket'));
+    }
 }
 

@@ -498,6 +498,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('cosmica/admin/pedidos/cosmika/woo', [App\Http\Controllers\PedidosWooController::class, 'index_cosmika'])->name('pedidos_cosmica_woo.index');
     Route::put('cosmica/orders/update-status/{id}', [App\Http\Controllers\PedidosWooController::class, 'updateStatuWooCosmika'])->name('orders.updateStatuWooCosmika');
 
+    // =============== M O D U L O  E C O M M E R C E ===============================
+    Route::get('cosmica/admin/pedidos/cosmika/ecommerce', [App\Http\Controllers\PedidosWooController::class, 'index_cosmika_ecommerce_apro'])->name('pedidos_cosmica_ecommerce.index');
+    Route::get('cosmica/admin/pedidos/cosmika/ecommerce/pendientes', [App\Http\Controllers\PedidosWooController::class, 'index_cosmika_ecommerce_pen'])->name('pedidos_cosmica_ecommerce.index_pen');
+    Route::get('cosmica/admin/pedidos/cosmika/imprimir/{id}', [App\Http\Controllers\PedidosWooController::class, 'imprimir_cosmica'])->name('pedidos_cosmica.imprimir');
     // =============== M O D U L O   N O T A S ===============================
     Route::get('/admin/notas/cursos', [App\Http\Controllers\NotasCursosController::class, 'index'])->name('notas_cursos.index');
     Route::get('/admin/notas/cursos/crear', [App\Http\Controllers\NotasCursosController::class, 'create'])->name('notas_cursos.crear');
