@@ -3,7 +3,14 @@
 @section('template_title') Single @endsection
 
 @section('css_custom')
-
+<style>
+.container_order_item{
+    background-color: #fff;
+    border-radius: 26px;
+    border: solid 2px #FDE9B8;
+    padding: 10px 20px 10px 20px;
+}
+</style>
 @endsection
 
 @section('content')
@@ -11,14 +18,16 @@
 <div class="container">
     <div class="row justify-content-center align-items-center">
 
-        <div class="col-12 mb-5">
+        <div class="col-12 mb-2">
             <div class="container_error" style="">
 
                 @if ($order->estatus == '1')
-                    <p class="text-center title_thankyou mt-5">
-                        Orden Competada con exito <br>
-                        ¡Felicidades!
-                    </p>
+                <h3 class="text-center Quinsi titulos"> Orden Competada con exito</h3>
+                <h2 class="text-center Avenir titulos">¡Felicidades!</h2>
+                <p class="text-center">
+                    <img src="{{asset('cosmika/inicio/ESTRELLAS-DORADAS.png')}}" alt="">
+                </p>
+
                 @else
                     <h2 class="text-center title_thankyou mt-5" style="color: #d38919f8">Tu compra se encuentra en estado Pendiente</h2>
                 @endif
@@ -28,15 +37,20 @@
                 </p>
 
                 <div class="d-flex justify-content-center">
-                    <a href="{{ route('tienda.home') }}" class="btn btn_verde_primario">Regresar al inicio</a>
-                    <a href="" class="btn btn_verde_secundario">Contactar</a>
+                    <p class="text-center  mt-4">
+                        <a href="{{ route('tienda.home') }}" class="Quinsi btn btn_all_gradient_border">Regresar al inicio</a>
+                    </p>
+
+                    <p class="text-center  mt-4"  style="margin-left: 1rem">
+                        <a href="" class="Quinsi btn btn_all_gradient">Contactar</a>
+                    </p>
                 </div>
 
             </div>
         </div>
 
         <div class="col-12 col-md-6 col-lg-6 my-auto p-4">
-            <h2 class="thankyou_subtitle mb-4">Resumen de la Orden</h2>
+            <h2 class="thankyou_subtitle Quinsi mb-4">Resumen de la Orden</h2>
             <h4 class=" mb-4">Folio: #<b>{{$order->id}} </b></h4>
 
             @foreach ($order_ticket as $item)
@@ -58,7 +72,7 @@
                     </div>
                 </div>
             @endforeach
-            <h4 class=" mb-4">Total: $<b>{{number_format($order->pago, 2, '.', ',')}} </b></h4>
+            <h4 class=" mb-4 Avenir">Total: $<b>{{number_format($order->pago, 2, '.', ',')}} </b></h4>
 
         </div>
 
@@ -66,8 +80,8 @@
 
             <div class="row">
                 <div class="col-12">
-                    <h2 class="thankyou_subtitle mb-4">Datos de Cliente</h2>
-                    <p class="texto_order_thanks">
+                    <h2 class="thankyou_subtitle Quinsi mb-4">Datos de Cliente</h2>
+                    <p class="texto_order_thanks Avenir ">
                         <strong class="subtitle_order_datos">Cliente: </strong> <br>
                         {{$order->User->name}} <br> <br>
                         <strong class="subtitle_order_datos">Correo: </strong> <br>
@@ -76,40 +90,40 @@
                 </div>
 
                 <div class="col-12">
-                    <h2 class="thankyou_subtitle mb-4">Dirección</h2>
+                    <h2 class="thankyou_subtitle Quinsi mb-4">Dirección</h2>
                 </div>
 
                 @if ($order->tipo_envio == 'envio')
                     <div class="col-6">
-                        <p class="texto_order_thanks">
+                        <p class="texto_order_thanks Avenir">
                             <strong class="subtitle_order_datos">CP:</strong> <br>
                             {{$order->User->postcode}}
                         </p>
-                        <p class="texto_order_thanks">
+                        <p class="texto_order_thanks Avenir">
                             <strong class="subtitle_order_datos">Estado:</strong> <br>
                             {{$order->User->state}}
                         </p>
                     </div>
 
                     <div class="col-6">
-                        <p class="texto_order_thanks">
+                        <p class="texto_order_thanks Avenir">
                             <strong class="subtitle_order_datos">Municipio Alcaldia:</strong> <br>
                             {{$order->User->country}}
                         </p>
-                        <p class="texto_order_thanks">
+                        <p class="texto_order_thanks Avenir">
                             <strong class="subtitle_order_datos">Calle y Numero:</strong> <br>
                             {{$order->User->direccion}}
                         </p>
                     </div>
 
                     <div class="col-12">
-                        <p class="texto_order_thanks">
+                        <p class="texto_order_thanks Avenir">
                             <strong class="subtitle_order_datos">Referencias:</strong> <br>
                             {{$order->User->city}}
                         </p>
                     </div>
                 @else
-                    <h4 class=" mb-4">Recoge en tienda <b> con tu numero de Folio: #{{$order->id}}</b></h4>
+                    <h4 class=" mb-4 Avenir">Recoge en tienda <b> con tu numero de Folio: #{{$order->id}}</b></h4>
                     <div class="container_pickup row mt-3">
                         <p>
                             <a href="https://maps.app.goo.gl/WoEycdRbmkpVLquXA">

@@ -210,6 +210,14 @@ body{
     font-size: 20px;
 }
 
+.btn_all_gradient_border{
+    border-radius: 30px;
+    border:solid 2px #000;
+    background-color: #fff;
+    padding: 5px 15px 5px 15px;
+    color:#000;
+    font-size: 20px;
+}
 
 .container_lineas_grid {
     padding: 10px;
@@ -325,6 +333,14 @@ body{
     color: white; /* Texto blanco */
     text-align: center; /* Texto centrado */
     position: relative;
+}
+
+.thankyou_subtitle{
+
+}
+
+.texto_order_thanks{
+
 }
 
 
