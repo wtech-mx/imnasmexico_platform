@@ -191,5 +191,19 @@ class EcommerceCosmikaController extends Controller
         return view('tienda_cosmica.productos_corporales',compact('products_Estelar','products_Eclipse','products_Renacer','products_Flash','products_Astros','products_rose','products_Esencia'));
     }
 
+    public function buscar(Request $request) {
+        $query = $request->get('query');
+        $palabras = explode(' ', $query);
 
+        $productos = Products::query();
+        foreach ($palabras as $palabra) {
+            $productos->where('nombre', 'LIKE', "%{$palabra}%");
+        }
+
+        // Obtener los productos con los campos necesarios
+        $productos = $productos->where('categoria', '=', 'Cosmica')->where('subcategoria', '=', 'Producto')->limit(10)->get(['id', 'nombre', 'imagenes', 'precio_normal','slug']);
+
+        // Retornar una vista parcial con los productos
+        return view('tienda_cosmica.components.buscador', compact('productos'));
+    }
 }

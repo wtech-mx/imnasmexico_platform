@@ -215,6 +215,64 @@
         });
     </script>
 
+    <script>
+        document.getElementById('toggleForm').addEventListener('click', function() {
+            const form = document.getElementById('searchForm');
+            // Alternar la clase 'd-none' para mostrar/ocultar
+            form.classList.toggle('d-none');
+        });
+
+        $(document).ready(function () {
+            $('#buscador').on('keyup', function () {
+                let query = $(this).val();
+
+                if (query.length > 1) {
+                    $.ajax({
+                        url: '{{ route("productos.buscar") }}',
+                        type: 'GET',
+                        data: { query: query },
+                        success: function (data) {
+                            $('#resultadoBusqueda').html(data);
+                        }
+                    });
+                } else {
+                    $('#resultadoBusqueda').empty();
+                }
+            });
+
+            // Redireccionar al hacer clic en un producto
+            $(document).on('click', '.producto-item', function () {
+                let url = $(this).data('url');
+                window.location.href = url;
+            });
+
+            $('#buscador-movil').on('keyup', function () {
+                let query = $(this).val();
+
+                if (query.length > 1) {
+                    $.ajax({
+                        url: '{{ route("productos.buscar") }}',
+                        type: 'GET',
+                        data: { query: query },
+                        success: function (data) {
+                            $('#resultadoBusquedaMovil').html(data);
+                        }
+                    });
+                } else {
+                    $('#resultadoBusquedaMovil').empty();
+                }
+            });
+
+            // Rellenar el input al hacer clic en una opción y redirigir
+            $(document).on('click', '.producto-item', function () {
+                let url = $(this).data('url');
+                window.location.href = url;
+            });
+
+        });
+
+
+    </script>
     @yield('js')
 
   </body>

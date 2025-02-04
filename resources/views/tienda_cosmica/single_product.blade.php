@@ -48,7 +48,7 @@
                         <p class="my-auto">
                             <input type="number" id="cantidad_{{ $product->id }}" class="form-control d-inline-block" value="1" min="1" style="width: 60px;">
                         </p>
-                        <a href="" class="">
+                        <a href="javascript:void(0);" class="btn-agregar" data-id="{{ $product->id }}">
                             <img class="icon_plus_cantidad" src="{{ asset('cosmika/INICIO/AGREGAR-POPULARES.png') }}" alt="Carrito">
                         </a>
                     </p>
@@ -129,6 +129,19 @@
                     alert("Hubo un error al agregar el producto.");
                 }
             });
+        });
+    });
+
+    document.querySelectorAll('.btn-agregar').forEach(function(button) {
+        button.addEventListener('click', function() {
+            // Obtener el ID del producto desde el atributo data-id
+            const productId = button.getAttribute('data-id');
+            // Buscar el input correspondiente al producto
+            const input = document.getElementById(`cantidad_${productId}`);
+            if (input) {
+                // Incrementar el valor actual del input
+                input.value = parseInt(input.value) + 1;
+            }
         });
     });
 </script>
