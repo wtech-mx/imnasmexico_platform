@@ -37,22 +37,20 @@ class CartController extends Controller
         }
     }
 
-    public function agregar(Request $request){
+    public function agregar(Request $request)
+    {
         $product = Products::find($request->id);
-        $cantidad = $request->cantidad;
+        $cantidad = $request->cantidad ?? 1;
 
         if (!$product) {
             return response()->json(['error' => 'Producto no encontrado'], 404);
         }
 
-        // Obtener el carrito de productos desde la sesión
         $cart = session()->get('cart_productos', []);
 
-        // Si el producto ya está en el carrito, solo se aumenta la cantidad
         if (isset($cart[$product->id])) {
             $cart[$product->id]['cantidad'] += $cantidad;
         } else {
-            // Si no está, se agrega al carrito de productos
             $cart[$product->id] = [
                 'id_producto' => $product->id,
                 'nombre' => $product->nombre,
@@ -62,11 +60,14 @@ class CartController extends Controller
             ];
         }
 
-        // Guardar el carrito de productos en la sesión
         session()->put('cart_productos', $cart);
 
-        return response()->json(['mensaje' => 'Producto agregado al carrito', 'carrito' => $cart]);
+        return response()->json([
+            'mensaje' => 'Producto agregado al carrito',
+            'carrito' => $cart
+        ]);
     }
+
 
     public function update(Request $request)
     {

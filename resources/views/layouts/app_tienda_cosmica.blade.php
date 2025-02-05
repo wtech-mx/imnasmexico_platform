@@ -19,9 +19,11 @@
     <link href="{{asset('assets/user/custom/btn_flotante.css')}}" rel="stylesheet" />
 
     <style>
+
         #searchForm {
             transition: opacity 0.3s ease-in-out;
         }
+
     </style>
     <!-- Owl Carousel CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
@@ -85,6 +87,8 @@
     @include('user.components.btn_flotante')
 
     @include('layouts.alertas')
+
+    <div id="toast-container" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050;"></div>
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -221,86 +225,85 @@
     </script>
 
     <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const searchIcon = document.getElementById("toggleForm"); // Icono de la lupa
-    const searchForm = document.getElementById("searchForm"); // Formulario de búsqueda
-    const navbarBrand = document.querySelector(".navbar-brand"); // Logo
-    const searchInput = document.getElementById("buscador"); // Input de búsqueda
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchIcon = document.getElementById("toggleForm"); // Icono de la lupa
+            const searchForm = document.getElementById("searchForm"); // Formulario de búsqueda
+            const navbarBrand = document.querySelector(".navbar-brand"); // Logo
+            const searchInput = document.getElementById("buscador"); // Input de búsqueda
 
-    // Mostrar/Ocultar el formulario al hacer clic en la lupa
-    searchIcon.addEventListener("click", function () {
-        searchForm.classList.toggle("d-none");
+            // Mostrar/Ocultar el formulario al hacer clic en la lupa
+            searchIcon.addEventListener("click", function () {
+                searchForm.classList.toggle("d-none");
 
-        // Ocultar el logo en móvil cuando se muestre el buscador
-        if (!searchForm.classList.contains("d-none") && window.innerWidth <= 992) {
-            navbarBrand.classList.add("d-none");
-        }
-    });
-
-    // Ocultar el logo si el usuario hace clic dentro del input en móvil
-    searchInput.addEventListener("focus", function () {
-        if (window.innerWidth <= 992) {
-            navbarBrand.classList.add("d-none");
-        }
-    });
-
-    // Ocultar el buscador si se hace clic fuera
-    document.addEventListener("click", function (event) {
-        if (!searchForm.contains(event.target) && !searchIcon.contains(event.target)) {
-            searchForm.classList.add("d-none");
-
-            if (window.innerWidth <= 992) {
-                navbarBrand.classList.remove("d-none"); // Mostrar el logo nuevamente
-            }
-        }
-    });
-
-    // Evitar que se cierre si el usuario hace clic dentro del buscador
-    searchForm.addEventListener("click", function (event) {
-        event.stopPropagation();
-    });
-
-    // Detectar Enter en el buscador para redirigir a la vista de resultados
-    searchInput.addEventListener("keypress", function (event) {
-        if (event.key === "Enter") {
-            event.preventDefault(); // Evita el envío normal del formulario
-            let query = searchInput.value.trim();
-            if (query.length > 1) {
-                window.location.href = `/tienda/busqueda?query=${encodeURIComponent(query)}`;
-            }
-        }
-    });
-});
-
-
-$(document).ready(function () {
-    $('#buscador').on('keyup', function () {
-        let query = $(this).val();
-
-        if (query.length > 1) {
-            $.ajax({
-                url: '{{ route("productos.buscar") }}',
-                type: 'GET',
-                data: { query: query },
-                success: function (data) {
-                    $('#resultadoBusqueda').html(data);
+                // Ocultar el logo en móvil cuando se muestre el buscador
+                if (!searchForm.classList.contains("d-none") && window.innerWidth <= 992) {
+                    navbarBrand.classList.add("d-none");
                 }
             });
-        } else {
-            $('#resultadoBusqueda').empty();
-        }
-    });
 
-    // Redireccionar al hacer clic en un producto
-    $(document).on('click', '.producto-item', function () {
-        let url = $(this).data('url');
-        window.location.href = url;
-    });
-});
+            // Ocultar el logo si el usuario hace clic dentro del input en móvil
+            searchInput.addEventListener("focus", function () {
+                if (window.innerWidth <= 992) {
+                    navbarBrand.classList.add("d-none");
+                }
+            });
 
+            // Ocultar el buscador si se hace clic fuera
+            document.addEventListener("click", function (event) {
+                if (!searchForm.contains(event.target) && !searchIcon.contains(event.target)) {
+                    searchForm.classList.add("d-none");
 
+                    if (window.innerWidth <= 992) {
+                        navbarBrand.classList.remove("d-none"); // Mostrar el logo nuevamente
+                    }
+                }
+            });
 
+            // Evitar que se cierre si el usuario hace clic dentro del buscador
+            searchForm.addEventListener("click", function (event) {
+                event.stopPropagation();
+            });
+
+            // Detectar Enter en el buscador para redirigir a la vista de resultados
+            searchInput.addEventListener("keypress", function (event) {
+                if (event.key === "Enter") {
+                    event.preventDefault(); // Evita el envío normal del formulario
+                    let query = searchInput.value.trim();
+                    if (query.length > 1) {
+                        window.location.href = `/tienda/busqueda?query=${encodeURIComponent(query)}`;
+                    }
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            $('#buscador').on('keyup', function () {
+                let query = $(this).val();
+
+                if (query.length > 1) {
+                    $.ajax({
+                        url: '{{ route("productos.buscar") }}',
+                        type: 'GET',
+                        data: { query: query },
+                        success: function (data) {
+                            $('#resultadoBusqueda').html(data);
+                        }
+                    });
+                } else {
+                    $('#resultadoBusqueda').empty();
+                }
+            });
+
+            // Redireccionar al hacer clic en un producto
+            $(document).on('click', '.producto-item', function () {
+                let url = $(this).data('url');
+                window.location.href = url;
+            });
+        });
     </script>
+
+
+
     @yield('js')
 
   </body>

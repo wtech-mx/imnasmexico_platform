@@ -17,6 +17,7 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="{{ route('tienda.home') }}">Inicio</a>
                 </li>
+
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categorías
@@ -27,6 +28,7 @@
                         <li><a class="dropdown-item" href="{{ route('tienda.productos') }}">Todo</a></li>
                     </ul>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('tienda.productos') }}">Productos</a>
                 </li>
@@ -41,21 +43,21 @@
 
         <!-- Iconos a la derecha -->
         <div class="d-flex order-lg-3">
+            <i class="fa-solid fa-magnifying-glass icons_header my-auto" alt="Buscar" id="toggleForm"></i>
 
-                {{-- <img src="{{ asset('cosmika/menu/LUPA.png') }}" alt="Buscar"  class="icons_header" id="toggleForm"> --}}
-                <i class="fa-solid fa-magnifying-glass icons_header my-auto" alt="Buscar" id="toggleForm"></i>
+            <form class="w-100 d-none" role="search" id="searchForm">
+                <input type="text" id="buscador" class="form-control" placeholder="Buscar producto...">
+                <ul id="resultadoBusqueda" class="list-group position-absolute" style="max-height: 200px; overflow-y: auto; z-index: 1000;"></ul>
+            </form>
 
-                <form class="w-100 d-none" role="search" id="searchForm">
-
-                    <input type="text" id="buscador" class="form-control" placeholder="Buscar producto...">
-                    <ul id="resultadoBusqueda" class="list-group position-absolute" style="max-height: 200px; overflow-y: auto; z-index: 1000;"></ul>
-                </form>
-
-            <a href="{{ route('tienda.cart') }}" class="btn">
+            <a href="{{ route('tienda.cart') }}" class="btn position-relative">
                 <i class="fa-solid fa-cart-shopping icons_header my-auto"></i>
-                {{-- <img src="{{ asset('cosmika/menu/BOLSA-DE-COMPRA.png') }}" alt="Carrito"  class="icons_header" style=""> --}}
-
+                <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{ session('cart_productos') ? count(session('cart_productos')) : 0 }}
+                </span>
             </a>
+
         </div>
+
     </div>
 </nav>

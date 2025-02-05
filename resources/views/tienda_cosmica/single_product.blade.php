@@ -109,28 +109,49 @@
 
 @section('js')
 <script>
-    $(document).ready(function() {
-        $(".agregar-carrito").click(function() {
-            var productId = $(this).data("id");
-            var cantidad = $("#cantidad_" + productId).val();
+$(document).ready(function() {
+    $(".agregar-carrito").click(function() {
+        var productId = $(this).data("id");
+        var cantidad = $("#cantidad_" + productId).val() || 1; // Si no hay input de cantidad, asignar 1 por defecto
 
-            $.ajax({
-                url: "{{ route('carrito.agregar') }}",
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    id: productId,
-                    cantidad: cantidad
-                },
-                success: function(response) {
-                    alert(response.mensaje);
-                },
-                error: function(xhr) {
-                    alert("Hubo un error al agregar el producto.");
-                }
-            });
+        $.ajax({
+            url: "{{ route('carrito.agregar') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: productId,
+                cantidad: cantidad
+            },
+            success: function(response) {
+                mostrarToast("Producto agregado al carrito", "success"); // Mostrar notificación
+                actualizarContadorCarrito(Object.keys(response.carrito).length); // Actualizar cantidad en carrito
+            },
+            error: function(xhr) {
+                mostrarToast("Error al agregar producto", "error");
+            }
         });
     });
+
+    // Función para actualizar el contador del carrito en tiempo real
+    function actualizarContadorCarrito(total) {
+        $("#cart-count").text(total);
+    }
+
+    // Función para mostrar una notificación con un mensaje y tipo (éxito o error)
+    function mostrarToast(mensaje, tipo) {
+        let bgColor = tipo === "success" ? "bg-success" : "bg-danger";
+        let toastHtml = `
+            <div class="toast align-items-center text-white ${bgColor} border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body">${mensaje}</div>
+                    <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>`;
+        $("#toast-container").html(toastHtml);
+        setTimeout(() => { $(".toast").toast("hide"); }, 3000);
+    }
+});
+
 
     document.querySelectorAll('.btn-agregar').forEach(function(button) {
         button.addEventListener('click', function() {
