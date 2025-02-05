@@ -18,6 +18,11 @@
     <link href="{{asset('assets/user/custom/ecomeerce_fuentes.css')}}" rel="stylesheet" />
     <link href="{{asset('assets/user/custom/btn_flotante.css')}}" rel="stylesheet" />
 
+    <style>
+        #searchForm {
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
     <!-- Owl Carousel CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
@@ -216,10 +221,43 @@
     </script>
 
     <script>
-        document.getElementById('toggleForm').addEventListener('click', function() {
-            const form = document.getElementById('searchForm');
-            // Alternar la clase 'd-none' para mostrar/ocultar
-            form.classList.toggle('d-none');
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchIcon = document.getElementById("toggleForm"); // Icono de la lupa
+            const searchForm = document.getElementById("searchForm"); // Formulario de búsqueda
+            const navbarBrand = document.querySelector(".navbar-brand"); // Logo
+
+            // Mostrar el formulario al hacer clic en la lupa
+            searchIcon.addEventListener("click", function () {
+                searchForm.classList.toggle("d-none");
+
+                // Ocultar el logo en móvil cuando se muestre el buscador
+                if (!searchForm.classList.contains("d-none") && window.innerWidth <= 992) {
+                    navbarBrand.classList.add("d-none");
+                }
+            });
+
+            // Ocultar el logo si el usuario hace clic dentro del input del buscador en móvil
+            document.getElementById("buscador").addEventListener("focus", function () {
+                if (window.innerWidth <= 992) {
+                    navbarBrand.classList.add("d-none");
+                }
+            });
+
+            // Mostrar el logo si el usuario hace clic fuera del buscador en móvil
+            document.addEventListener("click", function (event) {
+                if (!searchForm.contains(event.target) && !searchIcon.contains(event.target)) {
+                    searchForm.classList.add("d-none");
+
+                    if (window.innerWidth <= 992) {
+                        navbarBrand.classList.remove("d-none"); // Volver a mostrar el logo en móvil
+                    }
+                }
+            });
+
+            // Evitar que se cierre el buscador si el usuario hace clic dentro
+            searchForm.addEventListener("click", function (event) {
+                event.stopPropagation();
+            });
         });
 
         $(document).ready(function () {
