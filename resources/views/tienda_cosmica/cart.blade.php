@@ -56,7 +56,9 @@
                                 ${{ number_format($producto['precio'] * $producto['cantidad'], 0, '.', ',') }}
                             </p>
 
-                            <button class="btn btn-sm btn-danger eliminar-producto" data-id="{{ $id }}">X</button>
+                            <button class="btn btn-sm eliminar-producto" data-id="{{ $id }}" style="background: transparent;">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
                         </div>
                     </div>
                 @endforeach
@@ -69,12 +71,106 @@
                     <div class="col-12">
 
                         <div class="accordion" id="accordionExample">
+
+                            <div class="accordion-item" style="background: transparent;border: solid 1px transparent;">
+                                <h2 class="accordion-header" id="headingcollapseMeli">
+                                  <button class="accordion-button button_collapse_cart" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMeli" aria-expanded="true" aria-controls="collapseMeli" style="background: #FFE900">
+                                          <img class="" style="width: 100px;" src="{{asset('assets/user/utilidades/meli.png')}}" alt="">
+                                  </button>
+                                </h2>
+
+                                <div id="collapseMeli" class="accordion-collapse collapse " aria-labelledby="headingcollapseMeli" data-bs-parent="#accordionExample">
+                                  <div class="accordion-body" style="padding: 0px!important;">
+                                      <div class="row">
+                                        <div class="col-12">
+                                            <p class="text-start tittle_modal_cka mt-3">Con esta opcion se creara un producto de Mercado Libre directamente en su plataforma para que lo puedeas comprar directamente en su tienda</p>
+                                            <p><strong>Nota: Se creara con un numero de Folio y su respectivo nombre</strong></p>
+
+                                            @if(session('cart_productos'))
+                                            @php
+                                                $cart_productos = session('cart_productos', []);
+                                                $total_carrito = array_sum(array_map(fn($p) => $p['precio'] * $p['cantidad'], $cart_productos));
+                                            @endphp
+                                                <h4 class="mt-3"><b>Total: </b> <span id="total-carrito">${{ number_format($total_carrito, 0, '.', ',') }}</span></h4>
+                                            @endif
+
+                                            <form method="POST" action="{{ route('processPaymentMeli') }}">
+                                                @csrf
+                                                @guest
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Nombre(s) *" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-male"></i></span>
+                                                            <input type="text" name="ape_paterno" id="ape_paterno" class="form-control input_custom_checkout" placeholder="Apellido Paterno *" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-female"></i></span>
+                                                            <input type="text" name="ape_materno" id="ape_materno" class="form-control input_custom_checkout" placeholder="Apellido Materno *" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" placeholder="Correo *" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                            <input type="tel" minlength="10" maxlength="10" name="telefono" id="telefono" class="form-control input_custom_checkout" placeholder="Telefono *" required>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
+                                                            <input type="text" name="name" id="name" class="form-control input_custom_checkout" value="{{auth()->user()->name}}" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-envelope"></i></span>
+                                                            <input type="email" name="email" id="email" class="form-control input_custom_checkout" value="{{auth()->user()->email}}" required>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-12">
+                                                        <div class="input-group flex-nowrap mt-4">
+                                                            <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-phone-alt"></i></span>
+                                                            <input type="number" name="telefono" id="telefono" class="form-control input_custom_checkout" value="{{auth()->user()->telefono}}" required>
+                                                        </div>
+                                                    </div>
+                                                @endguest
+                                                <div class="d-flex justify-content-center">
+                                                    <button class="btn_pagar_checkout " type="submit" style="background: #FFE900;color:#000;border: solid #000;;">Pagar en Meli</button>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+
                             <div class="accordion-item" style="background: transparent;border: solid 1px transparent;">
                               <h2 class="accordion-header" id="headingOne">
                                 <button class="accordion-button button_collapse_cart" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                         <img class="" style="width: 260px;" src="{{asset('assets/user/utilidades/formas_pago.png')}}" alt="">
                                 </button>
                               </h2>
+
                               <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                 <div class="accordion-body" style="padding: 0px!important;">
                                     <div class="row">
@@ -84,8 +180,10 @@
                                                 $cart_productos = session('cart_productos', []);
                                                 $total_carrito = array_sum(array_map(fn($p) => $p['precio'] * $p['cantidad'], $cart_productos));
                                             @endphp
-                                            <h4 class="mt-3"><b>Total: </b> <span id="total-carrito">${{ number_format($total_carrito, 0, '.', ',') }}</span></h4>
+
+                                                <h4 class="mt-3"><b>Total: </b> <span id="total-carrito">${{ number_format($total_carrito, 0, '.', ',') }}</span></h4>
                                             @endif
+
                                             <form method="POST" action="{{ route('process-payment_cosmica') }}">
                                                 @csrf
                                                 <div class="row">
@@ -419,7 +517,7 @@
 
                           </div>
 
-                                <div class="collapse collapse-horizontal" id="collapse_mp">
+                          <div class="collapse collapse-horizontal" id="collapse_mp">
                                     <div class="card card-body" style="width: auto;border: solid 0px;padding: 0!important;">
 
                                         <div class="row">
@@ -454,14 +552,13 @@
                                         </div>
 
                                     </div>
-                                </div>
+                          </div>
 
 
-                                <div class="collapse collapse-horizontal" id="collapse_factura">
-                                  <div class="card card-body" style="width: auto;border: solid 0px;padding: 0!important;">
-
-                                </div>
+                          <div class="collapse collapse-horizontal" id="collapse_factura">
+                            <div class="card card-body" style="width: auto;border: solid 0px;padding: 0!important;" >
                               </div>
+                          </div>
 
                     </div>
 

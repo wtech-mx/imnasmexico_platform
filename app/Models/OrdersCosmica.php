@@ -21,6 +21,10 @@ class OrdersCosmica extends Model
         'fecha',
         'code',
         'external_reference',
+        'item_id_meli',
+        'item_title_meli',
+        'item_descripcion_meli',
+        'item_descripcion_permalink',
     ];
 
     public function User()

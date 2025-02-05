@@ -138,6 +138,7 @@ Route::post('/actualizar-carrito', [App\Http\Controllers\CartController::class, 
 Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
 Route::post('/cart/process-payment', [App\Http\Controllers\CartController::class, 'processPayment'])->name('process-payment_cosmica');
+Route::post('/cart/processPaymentMeli', [App\Http\Controllers\CartController::class, 'processPaymentMeli'])->name('processPaymentMeli');
 Route::get('/cart/orders/pay', [App\Http\Controllers\CartController::class, 'pay'])->name('order_cosmica.pay');
 Route::get('/cart/orders/{code}/show', [App\Http\Controllers\CartController::class, 'show'])->name('order_cosmica.show');
 Route::get('/cart/count', [App\Http\Controllers\CartController::class, 'getCartCount'])->name('cart.count');

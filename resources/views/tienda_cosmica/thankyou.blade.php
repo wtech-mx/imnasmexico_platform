@@ -10,6 +10,13 @@
     border: solid 2px #FDE9B8;
     padding: 10px 20px 10px 20px;
 }
+
+.button_collapse_cart {
+    border-radius: 13px;
+    padding: 20px;
+    border-top-left-radius: 13px !important;
+    border-top-right-radius: 13px !important;
+}
 </style>
 @endsection
 
@@ -22,19 +29,60 @@
             <div class="container_error" style="">
 
                 @if ($order->estatus == '1')
-                <h3 class="text-center Quinsi titulos"> Orden Competada con exito</h3>
-                <h2 class="text-center Avenir titulos">¡Felicidades!</h2>
-                <p class="text-center">
-                    <img src="{{asset('cosmika/inicio/ESTRELLAS-DORADAS.png')}}" alt="">
-                </p>
+                    <h3 class="text-center Quinsi titulos"> Orden Competada con exito</h3>
+                    <h2 class="text-center Avenir titulos">¡Felicidades!</h2>
+                    <p class="text-center">
+                        <img src="{{asset('cosmika/inicio/ESTRELLAS-DORADAS.png')}}" alt="">
+                    </p>
 
-                @else
-                    <h2 class="text-center title_thankyou mt-5" style="color: #d38919f8">Tu compra se encuentra en estado Pendiente</h2>
-                @endif
+                    @else
+                        <h2 class="text-center title_thankyou Quinsi mt-5" style="color: #000">
+                            Tu compra se encuentra en estado Pendiente
+                        </h2>
+                    @endif
 
                 <p class="text-center ">
-                    <img src="{{asset('cosmika/INICIO/TIENDA.png')}}" class="img_thankyou">
+                    @if($order->item_descripcion_permalink)
+                        <img class="mt-3 mb-3" style="width: 300px;" src="{{asset('assets/user/utilidades/meli.png')}}" alt="">
+                    @else
+                        <img src="{{asset('cosmika/INICIO/TIENDA.png')}}" class="img_thankyou">
+                    @endif
                 </p>
+
+                @if($order->item_descripcion_permalink)
+
+                    <h2 class="thankyou_subtitle Quinsi mb-4 text-center" style="color:#000;">
+                        <a href="{{ $order->item_descripcion_permalink }}" target="_blank" rel="noopener noreferrer" style="text-decoration: none">
+                            Enlace de Compra de Mercado Libre
+                        </a>
+                    </h2>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="text-center texto_order_thanks Avenir ">
+                                <a href="{{ $order->item_descripcion_permalink }}" target="_blank" style="color: #000;text-decoration: none">
+                                    <strong class="subtitle_order_datos">Link: </strong> <br>
+                                    {{ $order->item_descripcion_permalink }} <br> <br>
+                                </a>
+                            </p>
+                        </div>
+
+                        <div class="col-6 my-auto">
+                            <p class="text-center texto_order_thanks Avenir ">
+                                <a class="button_collapse_cart" href="{{ $order->item_descripcion_permalink }}" target="_blank"  style="background: #FFE900;color: #000;text-decoration: none">
+                                    <img class="" style="width: 100px;" src="{{asset('assets/user/utilidades/meli.png')}}" alt=""> Comprar ahora
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="text-center">
+                        <strong>Nota:</strong> Tomara alrededor de un minuto que Mercado libre Ponga la publcacion activa
+                    </p>
+
+                @else
+
+                @endif
 
                 <div class="d-flex justify-content-center">
                     <p class="text-center  mt-4">
@@ -85,54 +133,81 @@
                         <strong class="subtitle_order_datos">Cliente: </strong> <br>
                         {{$order->User->name}} <br> <br>
                         <strong class="subtitle_order_datos">Correo: </strong> <br>
-                        {{$order->User->correo}} <br>
+                        {{$order->User->email}} <br>
                     </p>
                 </div>
 
-                <div class="col-12">
-                    <h2 class="thankyou_subtitle Quinsi mb-4">Dirección</h2>
-                </div>
-
-                @if ($order->tipo_envio == 'envio')
-                    <div class="col-6">
-                        <p class="texto_order_thanks Avenir">
-                            <strong class="subtitle_order_datos">CP:</strong> <br>
-                            {{$order->User->postcode}}
-                        </p>
-                        <p class="texto_order_thanks Avenir">
-                            <strong class="subtitle_order_datos">Estado:</strong> <br>
-                            {{$order->User->state}}
-                        </p>
-                    </div>
-
-                    <div class="col-6">
-                        <p class="texto_order_thanks Avenir">
-                            <strong class="subtitle_order_datos">Municipio Alcaldia:</strong> <br>
-                            {{$order->User->country}}
-                        </p>
-                        <p class="texto_order_thanks Avenir">
-                            <strong class="subtitle_order_datos">Calle y Numero:</strong> <br>
-                            {{$order->User->direccion}}
-                        </p>
-                    </div>
+                @if($order->item_descripcion_permalink)
 
                     <div class="col-12">
-                        <p class="texto_order_thanks Avenir">
-                            <strong class="subtitle_order_datos">Referencias:</strong> <br>
-                            {{$order->User->city}}
+                        <h2 class="thankyou_subtitle Quinsi mb-4">Datos de Mercado Libre</h2>
+                        <p class="texto_order_thanks Avenir ">
+                            <strong class="subtitle_order_datos">ID Meli: </strong> <br>
+                            {{$order->item_id_meli}} <br> <br>
+
+                            <strong class="subtitle_order_datos">Titulo de Publicacion: </strong> <br>
+                            {{$order->item_title_meli}} <br><br>
+
+                            <strong class="subtitle_order_datos">Descripcion: </strong> <br>
+                            {{$order->item_descripcion_meli}} <br><br>
+
+                            <strong class="subtitle_order_datos">Enlace de publicacion: </strong> <br>
+                            <a href="{{$order->item_descripcion_permalink}}" target="_blank" rel="noopener noreferrer">{{$order->item_descripcion_permalink}}</a> <br>
                         </p>
                     </div>
+
+
                 @else
-                    <h4 class=" mb-4 Avenir">Recoge en tienda <b> con tu numero de Folio: #{{$order->id}}</b></h4>
-                    <div class="container_pickup row mt-3">
-                        <p>
-                            <a href="https://maps.app.goo.gl/WoEycdRbmkpVLquXA">
-                                Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
-                            </a>
-                        </p>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.3490269944937!2d-99.14528382431148!3d19.397319941805755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ffd944963ec3%3A0xb529339c57f86ca6!2sPARADISUS%20SPA!5e0!3m2!1sen!2smx!4v1738685384595!5m2!1sen!2smx" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                    <div class="col-12">
+                        <h2 class="thankyou_subtitle Quinsi mb-4">Dirección</h2>
                     </div>
+
+                    @if ($order->tipo_envio == 'envio')
+                        <div class="col-6">
+                            <p class="texto_order_thanks Avenir">
+                                <strong class="subtitle_order_datos">CP:</strong> <br>
+                                {{$order->User->postcode}}
+                            </p>
+                            <p class="texto_order_thanks Avenir">
+                                <strong class="subtitle_order_datos">Estado:</strong> <br>
+                                {{$order->User->state}}
+                            </p>
+                        </div>
+
+                        <div class="col-6">
+                            <p class="texto_order_thanks Avenir">
+                                <strong class="subtitle_order_datos">Municipio Alcaldia:</strong> <br>
+                                {{$order->User->country}}
+                            </p>
+                            <p class="texto_order_thanks Avenir">
+                                <strong class="subtitle_order_datos">Calle y Numero:</strong> <br>
+                                {{$order->User->direccion}}
+                            </p>
+                        </div>
+
+                        <div class="col-12">
+                            <p class="texto_order_thanks Avenir">
+                                <strong class="subtitle_order_datos">Referencias:</strong> <br>
+                                {{$order->User->city}}
+                            </p>
+                        </div>
+                    @else
+                        <h4 class=" mb-4 Avenir">Recoge en tienda <b> con tu numero de Folio: #{{$order->id}}</b></h4>
+                        <div class="container_pickup row mt-3">
+                            <p>
+                                <a href="https://maps.app.goo.gl/WoEycdRbmkpVLquXA">
+                                    Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México, CDMX
+                                </a>
+                            </p>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.3490269944937!2d-99.14528382431148!3d19.397319941805755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ffd944963ec3%3A0xb529339c57f86ca6!2sPARADISUS%20SPA!5e0!3m2!1sen!2smx!4v1738685384595!5m2!1sen!2smx" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    @endif
+
                 @endif
+
+
+
             </div>
 
         </div>
