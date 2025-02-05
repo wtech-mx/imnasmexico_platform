@@ -25,7 +25,15 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $data = User::where('cliente','=',null)->where('visibilidad', '=', NULL)->orderBy('id','DESC')->get();
+                    // Actualizar productos_notas_id
+                    DB::table('productos_notas_id')
+                    ->join('products', 'productos_notas_id.producto', '=', 'products.nombre')
+                    ->update(['productos_notas_id.id_producto' => DB::raw('products.id')]);
 
+                // Actualizar productos_notas_cosmica
+                DB::table('productos_notas_cosmica')
+                    ->join('products', 'productos_notas_cosmica.producto', '=', 'products.nombre')
+                    ->update(['productos_notas_cosmica.id_producto' => DB::raw('products.id')]);
         return view('admin.users.index',compact('data'));
     }
 
