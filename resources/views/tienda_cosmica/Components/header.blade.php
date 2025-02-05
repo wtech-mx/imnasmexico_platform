@@ -41,8 +41,10 @@
 
         <!-- Iconos a la derecha -->
         <div class="d-flex order-lg-3">
-                <img src="{{ asset('cosmika/menu/LUPA.png') }}" alt="Buscar"  class="icons_header" id="toggleForm">
-                
+
+                {{-- <img src="{{ asset('cosmika/menu/LUPA.png') }}" alt="Buscar"  class="icons_header" id="toggleForm"> --}}
+                <i class="fa-solid fa-magnifying-glass icons_header my-auto" alt="Buscar" id="toggleForm"></i>
+
                 <form class="w-100 d-none" role="search" id="searchForm">
 
                     <input type="text" id="buscador" class="form-control" placeholder="Buscar producto...">
@@ -50,7 +52,8 @@
                 </form>
 
             <a href="{{ route('tienda.cart') }}" class="btn">
-                <img src="{{ asset('cosmika/menu/BOLSA-DE-COMPRA.png') }}" alt="Carrito"  class="icons_header" style="">
+                <i class="fa-solid fa-cart-shopping icons_header my-auto"></i>
+                {{-- <img src="{{ asset('cosmika/menu/BOLSA-DE-COMPRA.png') }}" alt="Carrito"  class="icons_header" style=""> --}}
 
             </a>
         </div>
