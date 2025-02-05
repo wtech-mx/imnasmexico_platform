@@ -1044,6 +1044,7 @@ class BodegaController extends Controller
 
         $notas_cosmica = NotasProductosCosmica::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
         ->where('tipo_nota', '=', 'Cotizacion')
+        ->where('id_admin_venta', '!=', NULL)
         ->orderBy('id', 'DESC')
         ->get();
 
