@@ -25,4 +25,9 @@ class ProductosNotasId extends Model
     {
         return $this->belongsTo(NotasProductos::class, 'id_notas_productos');
     }
+
+    public function Productos()
+    {
+        return $this->belongsTo(Products::class, 'id_producto');
+    }
 }

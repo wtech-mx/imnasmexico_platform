@@ -27,6 +27,6 @@ class ProductosNotasCosmica extends Model
 
     public function Productos()
     {
-        return $this->belongsTo(Products::class, 'id_notas_productos');
+        return $this->belongsTo(Products::class, 'id_producto');
     }
 }

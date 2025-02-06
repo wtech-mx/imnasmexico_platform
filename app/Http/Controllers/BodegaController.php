@@ -783,7 +783,7 @@ class BodegaController extends Controller
         if ($product) {
             // Verifica y actualiza el registro correcto en `productos_notas`
             $notaProducto = ProductosNotasId::where('id_notas_productos', $idNotaProducto)
-            ->where('producto', $product->nombre)
+            ->where('id_producto', $product->id)
             ->first();
 
             if ($notaProducto) {
@@ -826,7 +826,7 @@ class BodegaController extends Controller
         if ($product) {
             // Verifica y actualiza el registro correcto en `productos_notas`
             $notaProducto = ProductosNotasCosmica::where('id_notas_productos', $idNotaProducto)
-                ->where('producto', $product->nombre)
+                ->where('id_producto', $product->id)
                 ->first();
 
             if ($notaProducto) {

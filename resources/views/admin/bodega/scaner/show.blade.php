@@ -43,22 +43,19 @@ Productos solicitados
                                         </thead>
                                         <tbody class="text-center">
                                             @foreach ($productos_scaner as $nota_producto)
-                                                @php
-                                                    $producto = App\Models\Products::where('nombre', '=', $nota_producto->producto)->first();
-                                                @endphp
                                                 <tr data-id="{{ $nota_producto->id_notas_productos }}"
                                                     style="background-color: {{ $nota_producto->cantidad > 0 ? '#d4edda' : '#f8d7da' }};"> <!-- Verde si >0, naranja si 0 -->
                                                     <td>
                                                         {{ $nota_producto->cantidad }}
                                                     </td>
                                                     <td>
-                                                        <img src="{{ $producto->imagenes }}" alt="" style="width: 60px"><br>
-                                                        {{ $nota_producto->producto }}
+                                                        <img src="{{ $nota_producto->Productos->imagenes }}" alt="" style="width: 60px"><br>
+                                                        {{ $nota_producto->Productos->nombre }}
                                                     </td>
-                                                    <td data-sku="{{ $producto->sku ?? '' }}" data-cantidad="{{ $nota_producto->cantidad }}">
+                                                    <td data-sku="{{ $nota_producto->Productos->sku ?? '' }}" data-cantidad="{{ $nota_producto->cantidad }}">
                                                         <span class="contador">{{ $nota_producto->escaneados }}/{{ $nota_producto->cantidad }}</span>
                                                     </td>
-                                                    <td id="status-{{ $producto->sku ?? '' }}">
+                                                    <td id="status-{{ $nota_producto->Productos->sku ?? '' }}">
                                                         @if ($nota_producto->estatus === 1)
                                                             ✔️
                                                         @endif

@@ -280,7 +280,7 @@ class NotasProductosController extends Controller
                     continue;
                 }
 
-                $producto = Products::where('nombre', $campo)->where('categoria', '!=', 'Ocultar')->first();
+                $producto = Products::where('id', $campo)->where('categoria', '!=', 'Ocultar')->first();
 
                 if ($producto) {
                     if ($producto && $producto->subcategoria == 'Kit') {
@@ -289,7 +289,8 @@ class NotasProductosController extends Controller
                         foreach ($productos_bundle as $producto_bundle) {
                             $notas_inscripcion = new ProductosNotasId;
                             $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                            $notas_inscripcion->producto = $producto_bundle->producto;
+                            $notas_inscripcion->producto = $producto->nombre;
+                            $notas_inscripcion->id_producto = $producto->id;
                             $notas_inscripcion->price = '0';
                             $notas_inscripcion->cantidad = $producto_bundle->cantidad;
                             $notas_inscripcion->save();
@@ -304,7 +305,8 @@ class NotasProductosController extends Controller
                     }elseif($producto->subcategoria == 'Tiendita'){
                         $notas_inscripcion = new ProductosNotasId;
                         $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                        $notas_inscripcion->producto = $campo;
+                        $notas_inscripcion->producto = $producto->nombre;
+                        $notas_inscripcion->id_producto = $producto->id;
                         $notas_inscripcion->price = $nuevosCampos2[$index];
                         $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                         $notas_inscripcion->descuento = $nuevosCampos4[$index];
@@ -313,7 +315,8 @@ class NotasProductosController extends Controller
                     }else{
                         $notas_inscripcion = new ProductosNotasId;
                         $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                        $notas_inscripcion->producto = $campo;
+                        $notas_inscripcion->producto = $producto->nombre;
+                        $notas_inscripcion->id_producto = $producto->id;
                         $notas_inscripcion->price = $nuevosCampos2[$index];
                         $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                         $notas_inscripcion->descuento = $nuevosCampos4[$index];

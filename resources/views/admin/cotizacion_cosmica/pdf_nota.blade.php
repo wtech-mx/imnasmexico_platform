@@ -185,7 +185,7 @@
             @foreach ($nota_productos as $nota_producto)
                 <tr>
                     <td>
-                        <img src="{{ $nota_producto->imagen_producto }}" alt="" style="width: 60px">
+                        <img src="{{ $nota_producto->Productos->imagenes }}" alt="" style="width: 60px">
                      </td>
                     <td>
                         {{ $nota_producto->cantidad }}
@@ -218,11 +218,13 @@
             <tr style="background-color: #ffffff;">
                 <td></td>
                 <td></td>
+                <td></td>
               <td style="text-align: right"><b>Subtotal</b> </td>
               <td>${{ $nota->subtotal }}</td>
             </tr>
             @if ($nota->restante > 0)
                 <tr style="background-color: #ffffff;">
+                    <td></td>
                     <td></td>
                     <td></td>
                 <td style="text-align: right"><b>Descuento</b> </td>
@@ -233,6 +235,7 @@
                 <tr style="background-color: #ffffff;">
                     <td></td>
                     <td></td>
+                    <td></td>
                 <td style="text-align: right"><b>Envío</b> </td>
                 <td>${{$nota->dinero_recibido}}</td>
                 </tr>
@@ -241,11 +244,13 @@
                 <tr style="background-color: #ffffff;">
                     <td></td>
                     <td></td>
+                    <td></td>
                 <td style="text-align: right"><b>IVA por Factura</b> </td>
                 <td>16%</td>
                 </tr>
             @endif
             <tr style="background-color: #ffffff;">
+                <td></td>
                 <td></td>
                 <td></td>
               <td style="text-align: right"><b>Total</b> </td>
@@ -284,24 +289,6 @@
         <tr style="background: #322338">
           <td></td>
           <td>
-            <p style="text-align: center;"><strong><span style="color: #fff; font-size: 20px;">
-            <img src="https://cosmicaskin.com/wp-content/uploads/2024/06/cosmica.png" alt="" style="width:100px;">
-            <br>Ponte en contacto </span>
-            </strong>
-            </p>
-            <p style="text-align: center;"><strong><span style="color: #fff; font-size: 20px;">
-                <a target="_blank" href="https://www.facebook.com/profile.php?id=61561861013921" target="_blank" >
-                    <img src="https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/fb-white-blue.png" width="35px">
-                </a>
-                <a target="_blank" href="hhttps://www.instagram.com/cosmica.skin/?igsh=MXAwMGkzbW1pMGxnMQ%3D%3D" target="_blank" >
-                    <img src="https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/ins-white-color.png" width="35px">
-                </a>
-                <a target="_blank" href="https://api.whatsapp.com/send?phone=525637540093" target="_blank" >
-                    <img src="https://imnasmexico.com/new/wp-content/plugins/woocommerce-email-template-customizer/assets/img/wa-white-color.png" width="35px">
-                </a>
-
-            </span></strong>
-            </p>
             <p style="text-align: center;color: #fff;font-size: 12px;">
                 <strong>Direccion: </strong> <br>
                 Castilla 136, Álamos, Benito Juárez, 03400 Ciudad de México

@@ -328,7 +328,7 @@ class CotizacionCosmicaController extends Controller
 
             $contadorKits = 1;
             foreach ($nuevosCampos as $index => $campo) {
-                $producto = Products::where('nombre', $campo)->where('categoria', '!=', 'Ocultar')->first();
+                $producto = Products::where('id', $campo)->where('categoria', '!=', 'Ocultar')->first();
                 if ($producto && $producto->subcategoria == 'Kit') {
                         $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
 
@@ -339,6 +339,7 @@ class CotizacionCosmicaController extends Controller
                                 $notas_inscripcion->producto = $producto_bundle->producto;
                                 $notas_inscripcion->price = '0';
                                 $notas_inscripcion->cantidad = $producto_bundle->cantidad;
+                                $notas_inscripcion->id_producto = $producto->id;
                                 $notas_inscripcion->save();
                             }
                         }
@@ -360,7 +361,8 @@ class CotizacionCosmicaController extends Controller
                 }elseif($producto->subcategoria == 'Tiendita'){
                     $notas_inscripcion = new ProductosNotasCosmica;
                     $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->producto = $producto->nombre;
+                    $notas_inscripcion->id_producto = $producto->id;
                     $notas_inscripcion->price = $nuevosCampos2[$index];
                     $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                     $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
@@ -369,7 +371,8 @@ class CotizacionCosmicaController extends Controller
                 }else{
                     $notas_inscripcion = new ProductosNotasCosmica;
                     $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->producto = $producto->nombre;
+                    $notas_inscripcion->id_producto = $producto->id;
                     $notas_inscripcion->price = $nuevosCampos2[$index];
                     $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                     $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
@@ -442,11 +445,13 @@ class CotizacionCosmicaController extends Controller
 
             // Agregar nuevos productos
             for ($count = 0; $count < count($campo); $count++) {
+                $producto_first = Products::where('id', $campo)->where('categoria', '!=', 'Ocultar')->first();
                 $price = $campo4[$count];
                 $cleanPrice = floatval(str_replace(['$', ','], '', $price));
                 $data = array(
                     'id_notas_productos' => $id,
-                    'producto' => $campo[$count],
+                    'producto' => $producto_first->nombre,
+                    'id_producto' => $producto_first->id,
                     'price' => $cleanPrice,
                     'cantidad' => $campo3[$count],
                     'descuento' => $descuento_prod[$count],
@@ -505,19 +510,6 @@ class CotizacionCosmicaController extends Controller
 
         $nota_productos = ProductosNotasCosmica::where('id_notas_productos', $nota->id)->get();
 
-            // Iterar sobre los productos de la nota para buscar la imagen correspondiente
-        foreach ($nota_productos as $producto_nota) {
-            // Buscar el producto en la tabla de productos que coincida con el nombre
-            $producto = Products::where('nombre', $producto_nota->producto)->where('categoria', '!=', 'Ocultar')->first();
-
-            // Si se encuentra el producto, añadir la imagen al array
-            if ($producto) {
-                $producto_nota->imagen_producto = $producto->imagenes;
-            } else {
-                $producto_nota->imagen_producto = null; // O un valor por defecto
-            }
-        }
-
         $usercosmika = Cosmikausers::where('id_cliente','=', $nota->id_usuario)->first();
 
         $pdf = \PDF::loadView('admin.cotizacion_cosmica.pdf_nota', compact('nota', 'today', 'nota_productos', 'usercosmika'));
@@ -547,7 +539,7 @@ class CotizacionCosmicaController extends Controller
                 $producto_bodega = ProductosNotasCosmica::where('id_notas_productos', $id)->get();
 
                 foreach ($producto_bodega as $campo) {
-                    $product_first = Products::where('nombre', $campo->producto)->where('categoria', '!=', 'Ocultar')->first();
+                    $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
                     if ($product_first && $campo->cantidad > 0) {
                         $producto_historial = new HistorialVendidos;
                         $producto_historial->id_producto = $product_first->id;

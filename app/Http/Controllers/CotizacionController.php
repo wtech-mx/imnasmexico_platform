@@ -262,7 +262,7 @@ class CotizacionController extends Controller
             $nuevosCampos3 = $request->input('campo3');
 
             foreach ($nuevosCampos as $index => $campo) {
-                $producto = Products::where('nombre', $campo)->where('categoria', '!=', 'Ocultar')->first();
+                $producto = Products::where('id', $campo)->where('categoria', '!=', 'Ocultar')->first();
 
                 if ($producto && $producto->subcategoria == 'Kit') {
                     $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
@@ -270,7 +270,8 @@ class CotizacionController extends Controller
                     foreach ($productos_bundle as $producto_bundle) {
                         $notas_inscripcion = new ProductosNotasId;
                         $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                        $notas_inscripcion->producto = $producto_bundle->producto;
+                        $notas_inscripcion->producto = $producto->nombre;
+                        $notas_inscripcion->id_producto = $producto->id;
                         $notas_inscripcion->price = '0';
                         $notas_inscripcion->cantidad = $producto_bundle->cantidad;
                         $notas_inscripcion->save();
@@ -293,7 +294,8 @@ class CotizacionController extends Controller
                 }elseif($producto->subcategoria == 'Tiendita'){
                     $notas_inscripcion = new ProductosNotasId;
                     $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->producto = $producto->nombre;
+                    $notas_inscripcion->id_producto = $producto->id;
                     $notas_inscripcion->price = $nuevosCampos2[$index];
                     $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                     $notas_inscripcion->descuento = $nuevosCampos4[$index];
@@ -302,7 +304,8 @@ class CotizacionController extends Controller
                 }else{
                     $notas_inscripcion = new ProductosNotasId;
                     $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                    $notas_inscripcion->producto = $campo;
+                    $notas_inscripcion->producto = $producto->nombre;
+                    $notas_inscripcion->id_producto = $producto->id;
                     $notas_inscripcion->price = $nuevosCampos2[$index];
                     $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                     $notas_inscripcion->descuento = $nuevosCampos4[$index];
@@ -417,12 +420,13 @@ class CotizacionController extends Controller
         $nota = NotasProductos::findOrFail($id);
         $nota->estatus_cotizacion  = $request->get('estatus_cotizacion');
         $nota->estadociudad  = $request->get('estado');
+
             if($request->get('estatus_cotizacion') == 'Preparado'){
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");
                 $producto_pedido = ProductosNotasId::where('id_notas_productos', $id)->get();
 
                 foreach ($producto_pedido as $campo) {
-                    $product_first = Products::where('nombre', $campo->producto)->where('categoria', '!=', 'Ocultar')->first();
+                    $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
                     if ($product_first && $campo->cantidad > 0) {
                         $producto_historial = new HistorialVendidos;
                         $producto_historial->id_producto = $product_first->id;
@@ -443,22 +447,20 @@ class CotizacionController extends Controller
             }else if($request->get('estatus_cotizacion') == 'Enviado'){
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
                 $nota->fecha_aprobada  = date("Y-m-d");
-                if($nota->tipo_nota == 'Venta Presencial'){
-                    $producto_pedido = ProductosNotasId::where('id_notas_productos', $id)->get();
-                    foreach ($producto_pedido as $campo) {
-                        $product_first = Products::where('nombre', $campo->producto)->where('categoria', '!=', 'Ocultar')->first();
-                        if ($product_first && $campo->cantidad > 0) {
-                            $producto_historial = new HistorialVendidos;
-                            $producto_historial->id_producto = $product_first->id;
-                            $producto_historial->stock_viejo = $product_first->stock;
-                            $producto_historial->cantidad_restado = $campo->cantidad;
-                            $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
-                            $producto_historial->id_venta_nas = $id;
-                            $producto_historial->save();
+                $producto_pedido = ProductosNotasId::where('id_notas_productos', $id)->get();
+                foreach ($producto_pedido as $campo) {
+                    $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
+                    if ($product_first && $campo->cantidad > 0) {
+                        $producto_historial = new HistorialVendidos;
+                        $producto_historial->id_producto = $product_first->id;
+                        $producto_historial->stock_viejo = $product_first->stock;
+                        $producto_historial->cantidad_restado = $campo->cantidad;
+                        $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
+                        $producto_historial->id_venta_nas = $id;
+                        $producto_historial->save();
 
-                            $product_first->stock -= $campo->cantidad;
-                            $product_first->save();
-                        }
+                        $product_first->stock -= $campo->cantidad;
+                        $product_first->save();
                     }
                 }
             }else if($request->get('estatus_cotizacion') == 'Aprobada'){

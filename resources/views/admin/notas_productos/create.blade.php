@@ -120,7 +120,7 @@
                                                                 <select name="campo[]" class="form-select d-inline-block producto">
                                                                     <option value="">Seleccione products</option>
                                                                     @foreach ($products as $product)
-                                                                    <option value="{{ $product->nombre }}" data-precio_normal="{{ $product->precio_normal }}" data-imagen="{{ $product->imagenes }}">{{ $product->nombre }} - {{ $product->sku }}</option>
+                                                                    <option value="{{ $product->id }}" data-precio_normal="{{ $product->precio_normal }}" data-imagen="{{ $product->imagenes }}">{{ $product->nombre }} - {{ $product->sku }}</option>
 
                                                                     @endforeach
                                                                 </select>

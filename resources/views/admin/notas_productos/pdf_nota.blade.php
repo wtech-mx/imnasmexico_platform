@@ -169,19 +169,12 @@
         <tbody class="text-center">
             @foreach ($nota_productos as $nota_producto)
                 <tr>
-                    @php
-                        $producto = DB::table('products')->where('nombre', $nota_producto->producto)->first();
-                    @endphp
                     <td>
                         {{ $nota_producto->cantidad }}
                     </td>
                     <td>
-                        @if(!empty($producto) && !empty($producto->imagenes))
-                            <img src="{{ $producto->imagenes }}" alt="" style="width: 60px"><br>
-                        @else
-                            <span>IMG  no disponible</span>
-                        @endif
-                    {{ $nota_producto->producto }}
+                        <img src="{{ $nota_producto->Productos->imagenes }}" alt="" style="width: 60px"><br>
+                        {{ $nota_producto->Productos->nombre }}
                     </td>
                     @php
                         if($nota_producto->producto == NULL){
@@ -193,11 +186,11 @@
                         }
                     @endphp
                     <td>
-                        @if($nota_producto->descuento == '0' || $nota_producto->descuento == NULL)
+                        @if($nota_producto->restante == '0' || $nota_producto->restante == NULL)
                             ${{ $unit }}
                         @else
-                            Descuento {{ $nota_producto->descuento }}% <br>
-                           <del> ${{ $producto->precio_normal }} </del> <br>
+                            Descuento {{ $nota_producto->restante }}% <br>
+                           <del> ${{ $nota_producto->Productos->precio_normal }} </del> <br>
                            <b> ${{ $unit }} </b>
 
                         @endif
@@ -277,7 +270,7 @@
         <b for="">Telefono Factura:</b> {{ $nota->telefono_fac }} <br>
         <b for="">Dirección:</b> {{ $nota->direccion_fac }}<br>
     @endif
-     
+
 
   </div>
 </body>
