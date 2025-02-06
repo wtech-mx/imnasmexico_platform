@@ -136,7 +136,6 @@ class EcommerceCosmikaController extends Controller
         return view('tienda_cosmica.productos_faciales', compact('products_constelacion', 'products_espectro', 'products_lunar', 'products_mascarillas', 'products_nebulosa', 'products_pluton', 'products_solar', 'products_venus'));
     }
 
-
     public function productos_corporales(){
 
         $products_Estelar = Products::
@@ -223,6 +222,17 @@ class EcommerceCosmikaController extends Controller
                                ->get(['id', 'nombre', 'imagenes', 'precio_normal', 'slug']);
 
         return view('tienda_cosmica.components.busqueda', compact('products', 'query'));
+    }
+
+    public function aviso(){
+
+        return view('tienda_cosmica.aviso');
+    }
+
+    public function terminos(){
+
+        return view('tienda_cosmica.terminos');
+
     }
 
 }

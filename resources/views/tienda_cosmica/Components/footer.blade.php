@@ -78,11 +78,11 @@
                     <h5 class="text-white text-center mb-3 mt-3">Contacto</h5>
                     <ul class="text-white nav flex-column" style="align-items: center;">
                         <li class="text-white nav-item mb-2">
-                            <a href="#" class="text-white nav-link p-0">Terminos y Condiciones</a>
+                            <a href="{{ route('tienda.terminos') }}" class="text-white nav-link p-0">Terminos y Condiciones</a>
                         </li>
 
                         <li class="text-white nav-item mb-2">
-                            <a target="_blank" href="#" class="text-white nav-link p-0">Aviso de Provacidad</a>
+                            <a target="_blank" href="{{ route('tienda.aviso') }}" class="text-white nav-link p-0">Aviso de Provacidad</a>
                         </li>
 
                         <li class="text-white nav-item mb-2">
