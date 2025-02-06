@@ -140,7 +140,15 @@
             line-height: 6px;
             text-align: end;
             color: #737373;
+        }
 
+        .text_datos_strong_especialidad{
+            font-size: {{ $tam_letra_esp_cred }}px;
+            font-family: 'PTSans_Bold';
+            font-weight: '600';
+            line-height: 6px;
+            text-align: end;
+            color: #737373;
         }
 
         .oval-container {
@@ -251,7 +259,6 @@
             letter-spacing: 0.2px;
 
         }
-
 
         .especialidad_trasera{
             font-size: 8px;
@@ -386,7 +393,9 @@
                     mexicana
 
                     <br><br><strong class="text_datos_strong">especialidad</strong> <br>
-                    {{ ucwords(strtolower($curso)) }}
+                    <a href="" class="text_datos_strong_especialidad" style="text-decoration: none">
+                        {{ ucwords(strtolower($curso)) }}
+                    </a>
 
                     <br><br><strong class="text_datos_strong">vigencia:</strong> <br>
                 </p>
