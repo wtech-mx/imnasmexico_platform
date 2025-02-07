@@ -49,7 +49,7 @@
                             <input type="number" id="cantidad_{{ $product->id }}" class="form-control d-inline-block" value="1" min="1" style="width: 60px;">
                         </p>
                         <a href="javascript:void(0);" class="btn-agregar" data-id="{{ $product->id }}">
-                            <img class="icon_plus_cantidad" src="{{ asset('cosmika/INICIO/AGREGAR-POPULARES.png') }}" alt="Carrito">
+                            <img class="icon_plus_cantidad" src="{{ asset('cosmika/inicio/AGREGAR-POPULARES.png') }}" alt="Carrito">
                         </a>
                     </p>
                     <a href="javascript:void(0)" class="btn btn_shop my-auto agregar-carrito" data-id="{{ $product->id }}">
