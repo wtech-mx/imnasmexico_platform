@@ -274,43 +274,83 @@ Mi perfil- {{$cliente->name}}
                                 @if ($ticket->nombre == 'Emisión por alumno' && $ticket->costos_diferentes != $cliente->costos_diferentes)
                                     @continue
                                 @endif
+                                @if ($cliente->costos_diferentes == 3)
+                                    @if ($ticket->costos_diferentes == 3 || $ticket->id == 1009)
+                                        @php
+                                            $precio = number_format($ticket->precio, 2, '.', ',');
+                                        @endphp
 
-                                @php
-                                    $precio = number_format($ticket->precio, 2, '.', ',');
-                                @endphp
+                                        <div class="col-12 mt-3">
+                                            <strong style="color: #66C0CC">{{ $ticket->nombre }}</strong>
+                                        </div>
 
-                                <div class="col-12 mt-3">
-                                    <strong style="color: #66C0CC">{{ $ticket->nombre }}</strong>
-                                </div>
+                                        <div class="col-6 col-lg-6 mt-3">
+                                            @if (is_null($ticket->descuento))
+                                                <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
+                                            @else
+                                                @if ($ticket->nombre == 'Reconocimiento')
+                                                    <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
+                                                @else
+                                                    <del style="color: #66C0CC"><strong>De ${{ $precio }}</strong></del>
+                                                    <h5 style="color: #66C0CC"><strong>A ${{ $ticket->descuento }}</strong></h5>
+                                                @endif
+                                            @endif
+                                        </div>
 
-                                <div class="col-6 col-lg-6 mt-3">
-                                    @if (is_null($ticket->descuento))
-                                        <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
-                                    @else
-                                        @if ($ticket->nombre == 'Reconocimiento')
+                                        <div class="col-6 col-lg-6 mt-3">
+                                            <form action="{{ route('add.to.cart', $ticket->id) }}" method="GET">
+                                                @csrf
+                                                <div class="input-group">
+                                                    <input type="number" name="quantity" class="form-control" min="1" value="1" style="max-width: 70px; background: #66C0CC !important">
+                                                    <button type="submit" class="btn_ticket_comprar text-center btn btn-primary" style="background: #66C0CC !important">
+                                                        <i class="fas fa-ticket-alt"></i> Comprar
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <p style="color: #66C0CC">{{ $ticket->descripcion }}</p>
+                                        </div>
+                                    @endif
+                                @else
+                                    @php
+                                        $precio = number_format($ticket->precio, 2, '.', ',');
+                                    @endphp
+
+                                    <div class="col-12 mt-3">
+                                        <strong style="color: #66C0CC">{{ $ticket->nombre }}</strong>
+                                    </div>
+
+                                    <div class="col-6 col-lg-6 mt-3">
+                                        @if (is_null($ticket->descuento))
                                             <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
                                         @else
-                                            <del style="color: #66C0CC"><strong>De ${{ $precio }}</strong></del>
-                                            <h5 style="color: #66C0CC"><strong>A ${{ $ticket->descuento }}</strong></h5>
+                                            @if ($ticket->nombre == 'Reconocimiento')
+                                                <h5 style="color: #66C0CC"><strong>$ {{ $precio }}</strong></h5>
+                                            @else
+                                                <del style="color: #66C0CC"><strong>De ${{ $precio }}</strong></del>
+                                                <h5 style="color: #66C0CC"><strong>A ${{ $ticket->descuento }}</strong></h5>
+                                            @endif
                                         @endif
-                                    @endif
-                                </div>
+                                    </div>
 
-                                <div class="col-6 col-lg-6 mt-3">
-                                    <form action="{{ route('add.to.cart', $ticket->id) }}" method="GET">
-                                        @csrf
-                                        <div class="input-group">
-                                            <input type="number" name="quantity" class="form-control" min="1" value="1" style="max-width: 70px; background: #66C0CC !important">
-                                            <button type="submit" class="btn_ticket_comprar text-center btn btn-primary" style="background: #66C0CC !important">
-                                                <i class="fas fa-ticket-alt"></i> Comprar
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
+                                    <div class="col-6 col-lg-6 mt-3">
+                                        <form action="{{ route('add.to.cart', $ticket->id) }}" method="GET">
+                                            @csrf
+                                            <div class="input-group">
+                                                <input type="number" name="quantity" class="form-control" min="1" value="1" style="max-width: 70px; background: #66C0CC !important">
+                                                <button type="submit" class="btn_ticket_comprar text-center btn btn-primary" style="background: #66C0CC !important">
+                                                    <i class="fas fa-ticket-alt"></i> Comprar
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
 
-                                <div class="col-12">
-                                    <p style="color: #66C0CC">{{ $ticket->descripcion }}</p>
-                                </div>
+                                    <div class="col-12">
+                                        <p style="color: #66C0CC">{{ $ticket->descripcion }}</p>
+                                    </div>
+                                @endif
                             @endforeach
                             @foreach ($tickets_envio as $ticket)
                                 <div class="col-12 mt-3">

@@ -1044,6 +1044,10 @@ class OrderController extends Controller
             }
         }
 
+        if ($id == 1373) {
+            $requestQuantity = 30;
+        }
+
         if (isset($cart[$id])) {
             // Actualizar cantidad y precio en el carrito
             $cart[$id]['quantity'] += $requestQuantity;
