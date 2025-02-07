@@ -108,22 +108,24 @@
                         El afiliado podrá elegir el nombre de la especialidad, la cual saldrá en el paquete registro de
                         su alumnado. <br><br>
 
-                        <strong>3. COSTOS Y PAGOS</strong><br><br>
+                        @if ($registros_imnas->User->costos_diferentes == 1 )
+                            <strong>3. COSTOS Y PAGOS</strong><br><br>
 
-                        3.1. Afiliación Inicial: <br>
-                        El costo de afiliación es de $5000 MXN, el cual incluye:
-                        - Afiliación a la entidad <br>
-                        - 1 Registro IMNAS de regalo <br>
-                        - Una especialidad personalizada <br> <br>
+                            3.1. Afiliación Inicial: <br>
+                            El costo de afiliación es de $5000 MXN, el cual incluye:
+                            - Afiliación a la entidad <br>
+                            - 1 Registro IMNAS de regalo <br>
+                            - Una especialidad personalizada <br> <br>
 
-                        3.2. Especialidades Adicionales: <br>
-                        El costo de cada especialidad adicional es de $2500 MXN. <br><br>
-                        3.3. Paquete por Alumno: <br>
-                        El costo de cada paquete de documentos por alumno es de $2000 MXN.
-                        - Si se registran más de 30 alumnos mensuales, el costo por paquete por alumno baja a
-                        $1500 MXN. <br><br>
-                        3.4. Costo de Envío: <br>
-                        El costo de envío por paquete es de $250 MXN. <br><br>
+                            3.2. Especialidades Adicionales: <br>
+                            El costo de cada especialidad adicional es de $2500 MXN. <br><br>
+                            3.3. Paquete por Alumno: <br>
+                            El costo de cada paquete de documentos por alumno es de $2000 MXN.
+                            - Si se registran más de 30 alumnos mensuales, el costo por paquete por alumno baja a
+                            $1500 MXN. <br><br>
+                            3.4. Costo de Envío: <br>
+                            El costo de envío por paquete es de $250 MXN. <br><br>
+                        @endif
 
                         <strong>4. PROCESO DE REGISTRO</strong><br><br>
 
