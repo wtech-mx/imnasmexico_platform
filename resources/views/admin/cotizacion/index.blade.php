@@ -93,9 +93,9 @@
                                             <td>
                                                 <h5>
                                                     @if ($item->id_usuario == NULL)
-                                                        {{ $item->nombre }} <br> {{ $item->telefono }}
+                                                        {{ $item->nombre }}
                                                     @else
-                                                        {{ $item->User->name }}
+                                                        {{ $item->User->name }} <br> {{ $item->User->telefono }}
                                                     @endif
                                                 </h5>
                                             </td>
