@@ -274,8 +274,8 @@ Mi perfil- {{$cliente->name}}
                                 @if ($ticket->nombre == 'Emisión por alumno' && $ticket->costos_diferentes != $cliente->costos_diferentes)
                                     @continue
                                 @endif
-                                @if ($cliente->costos_diferentes == 3)
-                                    @if ($ticket->costos_diferentes == 3 || $ticket->id == 1009)
+                                @if ($cliente->costos_diferentes == 5)
+                                    @if ($ticket->costos_diferentes == 5 || $ticket->id == 1009)
                                         @php
                                             $precio = number_format($ticket->precio, 2, '.', ',');
                                         @endphp
