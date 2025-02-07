@@ -203,7 +203,7 @@ class EcommerceCosmikaController extends Controller
         $productos = $productos->where('categoria', '=', 'Cosmica')->where('subcategoria', '=', 'Producto')->limit(10)->get(['id', 'nombre', 'imagenes', 'precio_normal','slug']);
 
         // Retornar una vista parcial con los productos
-        return view('tienda_cosmica.components.buscador', compact('productos'));
+        return view('tienda_cosmica.Components.buscador', compact('productos'));
     }
 
     public function buscarProductos(Request $request) {
@@ -221,7 +221,7 @@ class EcommerceCosmikaController extends Controller
                                ->where('subcategoria', 'Producto')
                                ->get(['id', 'nombre', 'imagenes', 'precio_normal', 'slug']);
 
-        return view('tienda_cosmica.components.busqueda', compact('products', 'query'));
+        return view('tienda_cosmica.Components.busqueda', compact('products', 'query'));
     }
 
     public function aviso(){
