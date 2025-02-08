@@ -818,6 +818,11 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/nas/laboratorio/etiquetas/pdf', [App\Http\Controllers\LabNasController::class, 'pdf_etiquetas'])->name('etiquetas_nas.pdf');
 
         Route::get('/nas/laboratorio/reporte/etiquetas/pdf', [App\Http\Controllers\LabNasController::class, 'pdf_etiquetas_reporte'])->name('reporte_etiquetas_nas.pdf');
+
+        // =============== M O D U L O  P E R F I L  C L I E N T E ===============================
+        Route::get('/perfil/cliente/index', [App\Http\Controllers\PerfilClienteController::class, 'index'])->name('peril_cliente.index');
+        Route::get('/perfil/cliente/buscador', [App\Http\Controllers\PerfilClienteController::class, 'buscador'])->name('peril_cliente.buscador');
+        Route::get('/perfil/cliente/cursos/{id}', [App\Http\Controllers\PerfilClienteController::class, 'cursos'])->name('peril_cliente.cursos');
 });
 
 // Route::get('registro/login', function () {
