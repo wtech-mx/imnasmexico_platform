@@ -7,6 +7,11 @@
     color: #eed6cf;
 }
 
+.logo_header{
+    width: 130px;
+    margin-left: 12rem;
+}
+
 .color2{
     color:#2d2432;
 }
@@ -84,7 +89,7 @@ body{
 }
 
 .subtitle_linea {
-    font-size: 30px;
+    font-size: 25px;
     font-weight: normal;
 }
 
@@ -343,6 +348,15 @@ body{
 
 }
 
+
+
+@media (max-width: 991px) {
+    .logo_header{
+        width: 120px;
+        margin-left: 0rem;
+    }
+
+}
 
 @media (max-width: 768px) {
     .horizontal-banner {

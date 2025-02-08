@@ -7,7 +7,7 @@
 
         <!-- Logo centrado -->
         <a class="navbar-brand mx-auto order-lg-2 position-absolute start-50 translate-middle-x" href="{{ route('tienda.home') }}">
-            <img src="{{ asset('cosmika/menu/logo.png') }}" alt="Logo" style="width: 80px;">
+            <img src="{{ asset('cosmika/menu/logo.png') }}" class="logo_header" alt="Logo" style="">
         </a>
 
         <!-- Contenido del menú -->

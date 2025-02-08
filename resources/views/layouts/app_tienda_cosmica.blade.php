@@ -172,7 +172,7 @@
                 '<i class="bi bi-chevron-left"></i>',
                 '<i class="bi bi-chevron-right"></i>'
             ],
-            autoplay: true, // Activar autoplay
+            autoplay: false, // Activar autoplay
             autoplayTimeout: 3000, // Tiempo en milisegundos (3 segundos)
             autoplayHoverPause: true, // Pausar autoplay al pasar el mouse
             responsive: {
