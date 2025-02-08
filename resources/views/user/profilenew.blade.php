@@ -1003,52 +1003,52 @@ Mi perfil- {{$cliente->name}}
                                                                     <div class="carousel-inner">
                                                                         <div class="carousel-item active">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f3809a6CURSOS ONLINE.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/646512f3809a6CURSOS ONLINE.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f380e3bCURSOS PRESENCIALES.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/646512f380e3bCURSOS PRESENCIALES.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f3823e8DOCUMENTACIÓN.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/646512f3823e8DOCUMENTACIÓN.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646513beca4b6INSTALACIONES-DOCUMENTOS_4.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/646513beca4b6INSTALACIONES-DOCUMENTOS_4.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646513beccf90SEP CONOCER.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/646513beccf90SEP CONOCER.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f33aeb2CAM-01.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/646512f33aeb2CAM-01.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f33bbccCAM.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/646512f33bbccCAM.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646512f3812b7DISTRIBUIDAORA DE PRODUCTO.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/646512f3812b7DISTRIBUIDAORA DE PRODUCTO.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/646513becd472VENTAS DE PRODCUTO.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/646513becd472VENTAS DE PRODCUTO.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/64deb7c5d9f866465176806a32Lic Carla-1.jpeg') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/64deb7c5d9f866465176806a32Lic Carla-1.jpeg') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                     </div>
@@ -1070,186 +1070,186 @@ Mi perfil- {{$cliente->name}}
                                                                     <div class="carousel-inner">
                                                                         <div class="carousel-item active">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_1.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_1.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_2.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_2.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_3.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_3.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_4.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_4.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_5.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_5.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_6.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_6.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_7.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_7.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_8.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_8.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_9.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_9.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_10.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_10.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_11.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_11.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_12.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_12.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_13.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_13.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_14.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_14.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_15.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_15.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_16.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_16.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_17.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_17.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_18.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_18.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_19.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_19.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_20.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_20.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_21.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_21.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_22.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_22.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item ">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/avales_23.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/avales_23.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-1.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/ESTÁNDARES-SECTORES-1.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-2.png') }}" class="d-block">
-                                                                            </p>
-                                                                        </div>
-
-
-                                                                        <div class="carousel-item">
-                                                                            <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-3.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/ESTÁNDARES-SECTORES-2.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
 
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-4.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/ESTÁNDARES-SECTORES-3.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
 
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-5.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/ESTÁNDARES-SECTORES-4.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
 
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-6.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/ESTÁNDARES-SECTORES-5.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
 
 
                                                                         <div class="carousel-item">
                                                                             <p class="text-center">
-                                                                                <img class="img_material_clase_pc" src="{{asset('publicidad/ESTÁNDARES-SECTORES-7.png') }}" class="d-block">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/ESTÁNDARES-SECTORES-6.png') }}" class="d-block">
+                                                                            </p>
+                                                                        </div>
+
+
+                                                                        <div class="carousel-item">
+                                                                            <p class="text-center">
+                                                                                <img class="img_material_clase_pc" src="{{asset('archivos/ESTÁNDARES-SECTORES-7.png') }}" class="d-block">
                                                                             </p>
                                                                         </div>
                                                                     </div>
