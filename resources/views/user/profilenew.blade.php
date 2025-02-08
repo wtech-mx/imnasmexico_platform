@@ -962,24 +962,24 @@ Mi perfil- {{$cliente->name}}
                                                                         <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                                                             @if ($extension == 'jpg')
                                                                             <p class="text-center">
-                                                                            <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                                                            <img class="img_material_clase_pc" src="{{asset('archivos/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
                                                                             </p>
                                                                             @elseif ($extension == 'png')
                                                                             <p class="text-center">
-                                                                            <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                                                            <img class="img_material_clase_pc" src="{{asset('archivos/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
                                                                             </p>
                                                                             @elseif ($extension == 'jpeg')
                                                                             <p class="text-center">
-                                                                            <img class="img_material_clase_pc" src="{{asset('publicidad/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
+                                                                            <img class="img_material_clase_pc" src="{{asset('archivos/'. $item->nombre) }}" class="d-block" alt="{{ $item->nombre }}">
                                                                             </p>
                                                                             @elseif ($extension == 'pdf')
                                                                             <p class="text-center">
-                                                                            <embed class="embed_pdf_publicidad" src="{{asset('publicidad/'. $item->nombre) }}" type="application/pdf"  />
-                                                                            <a class="text-dark" href="{{ asset('publicidad/' . $item->nombre) }}" target="_blank" >Ver PDF</a>
+                                                                            <embed class="embed_pdf_publicidad" src="{{asset('archivos/'. $item->nombre) }}" type="application/pdf"  />
+                                                                            <a class="text-dark" href="{{ asset('archivos/' . $item->nombre) }}" target="_blank" >Ver PDF</a>
                                                                             </p>
                                                                             @elseif ($extension == 'mp4')
                                                                             <p class="text-center">
-                                                                            <video class="video_publicidad" src="{{asset('publicidad/'. $item->nombre) }}" controls></video>
+                                                                            <video class="video_publicidad" src="{{asset('archivos/'. $item->nombre) }}" controls></video>
                                                                             </p>
                                                                             @endif
                                                                         </div>
