@@ -479,7 +479,7 @@
                     </div>
 
                     <div class="col-4 text-center border ">
-                        <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
+                        <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras">
                         <h3 class="h3_nomre_firmas capitalize m-0 p-0">Lic. Ma. Luisa Flores</h3>
                         <h5 class="texto_emosires capitalize m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
                     </div>
