@@ -13,9 +13,15 @@
 
 <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner">
+
           <div class="carousel-item active">
+            <img src="{{ asset('cosmika/inicio/banner/BANNER-4.png') }}" class="d-block w-100" alt="">
+          </div>
+
+          <div class="carousel-item ">
             <img src="{{ asset('cosmika/inicio/banner/BANNER-1.png') }}" class="d-block w-100" alt="">
           </div>
+
 
           <div class="carousel-item">
             <img src="{{ asset('cosmika/inicio/banner/BANNER-2.png') }}" class="d-block w-100" alt="">
@@ -319,7 +325,7 @@
             <div class="container text-center">
                 <h1 class="Avenir h1_portada_linea_esencial m-0 mt-5">Línea</h1>
                 <h3 class="Quinsi h3_portada_linea_esencial m-0">Esencial Vital</strong></h3>
-                <a href="{{ route("tienda.productos") }}" class="Quinsi btn btn_portada_linea_esencial">Comprar ahora</a>
+                <a href="{{ route('tienda.productos_corporales') }}#pills-esencia" class="Quinsi btn btn_portada_linea_esencial">Comprar ahora</a>
             </div>
         </div>
     </div>
@@ -372,7 +378,7 @@
                 esta colección redefine el cuidado de la piel al fusionar ingredientes premium con innovación dermocosmética.
             </p>
             <p>
-                <a href="{{ route("tienda.productos") }}" class="btn btn_caviar_linea">Explorar Línea</a>
+                <a href="{{ route('tienda.productos_corporales') }}#pills-rose" class="btn btn_caviar_linea">Explorar Línea</a>
             </p>
         </div>
     </div>

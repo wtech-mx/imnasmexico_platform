@@ -17,9 +17,9 @@
             $restoDelTexto = $partes[1] ?? ''; // El resto del texto, si existe
         @endphp
         <div class="item">
-            <div class="container_lineas_grid">
+            <div class="container_lineas_grid" style="height: 350px;">
 
-                <div class="content">
+                <div class="content mt-3">
                     <div class="img_container mx-auto">
                         <img class="img_grid_products" src="{{$product_popular->imagenes}}" alt="Protector">
                     </div>

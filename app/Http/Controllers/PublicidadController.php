@@ -19,9 +19,9 @@ class PublicidadController extends Controller
     {
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
-            $ruta_publicidad = base_path('../public_html/plataforma.imnasmexico.com/publicidad');
+            $ruta_publicidad = base_path('../public_html/plataforma.imnasmexico.com/archivos');
         }else{
-            $ruta_publicidad = public_path() . '/publicidad';
+            $ruta_publicidad = public_path() . '/archivos';
         }
 
         if ($request->hasFile('archivos')) {

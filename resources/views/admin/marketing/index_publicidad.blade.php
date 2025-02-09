@@ -68,11 +68,11 @@
 
                                                 <td>
                                                     @if ($extension === 'pdf')
-                                                        <iframe src="{{ asset('publicidad/'.$recurso->nombre) }}" class=""></iframe>
+                                                        <iframe src="{{ asset('archivos/'.$recurso->nombre) }}" class=""></iframe>
                                                     @else
-                                                        <img id="img_material_clase" src="{{asset('publicidad/'. $recurso->nombre) }}" style="width: 100px; height: 100px;"/>
+                                                        <img id="img_material_clase" src="{{asset('archivos/'. $recurso->nombre) }}" style="width: 100px; height: 100px;"/>
                                                     @endif
-                                                    <a href="{{ asset('publicidad/'.$recurso->nombre) }}" target="_blank" >
+                                                    <a href="{{ asset('archivos/'.$recurso->nombre) }}" target="_blank" >
                                                         Ver
                                                     </a>
                                                 </td>
