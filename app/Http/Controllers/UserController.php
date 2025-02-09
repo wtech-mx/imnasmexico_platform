@@ -34,6 +34,10 @@ class UserController extends Controller
                 DB::table('productos_notas_cosmica')
                     ->join('products', 'productos_notas_cosmica.producto', '=', 'products.nombre')
                     ->update(['productos_notas_cosmica.id_producto' => DB::raw('products.id')]);
+
+                    DB::table('products_bundle_id')
+                    ->join('products', 'products_bundle_id.producto', '=', 'products.nombre')
+                    ->update(['products_bundle_id.id_producto' => DB::raw('products.id')]);
         return view('admin.users.index',compact('data'));
     }
 
