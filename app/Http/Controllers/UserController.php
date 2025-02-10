@@ -189,4 +189,115 @@ class UserController extends Controller
 
         //  return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
     }
+
+    public function imprimir_new($id){
+        $startOfWeek = Carbon::now()->startOfWeek();
+        $endOfWeek = Carbon::now()->endOfWeek();
+        $today =  date('d-m-Y');
+
+        $notasAprobadasCosmicaComision = NotasProductosCosmica::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])
+        ->where('tipo_nota', '=', 'Cotizacion')
+        ->whereNotNull('id_kit')
+        ->orderBy('id', 'DESC')
+        ->get();
+
+        $idsPermitidos = [1950, 1949, 1948, 1947, 1946, 1945, 1815, 1935];
+
+        $notasAprobadasMatutino = NotasProductosCosmica::join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
+            ->whereBetween('notas_productos_cosmica.fecha_aprobada', [$startOfWeek, $endOfWeek])
+            ->where('notas_productos_cosmica.tipo_nota', '=', 'Cotizacion')
+            ->where('users.turno', '=', 'Matutino')
+            ->where(function ($query) use ($idsPermitidos) {
+                $query->whereIn('notas_productos_cosmica.id_kit', $idsPermitidos)
+                      ->orWhereIn('notas_productos_cosmica.id_kit2', $idsPermitidos)
+                      ->orWhereIn('notas_productos_cosmica.id_kit3', $idsPermitidos)
+                      ->orWhereIn('notas_productos_cosmica.id_kit4', $idsPermitidos)
+                      ->orWhereIn('notas_productos_cosmica.id_kit5', $idsPermitidos)
+                      ->orWhereIn('notas_productos_cosmica.id_kit6', $idsPermitidos);
+            })
+            ->sum('notas_productos_cosmica.total');
+
+            $notasAprobadasMatutinoReg = NotasProductosCosmica::join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
+            ->whereBetween('notas_productos_cosmica.fecha_aprobada', [$startOfWeek, $endOfWeek])
+            ->where('notas_productos_cosmica.tipo_nota', '=', 'Cotizacion')
+            ->where('users.turno', '=', 'Matutino')
+            ->where(function ($query) use ($idsPermitidos) {
+                $query->whereIn('notas_productos_cosmica.id_kit', $idsPermitidos)
+                      ->orWhereIn('notas_productos_cosmica.id_kit2', $idsPermitidos)
+                      ->orWhereIn('notas_productos_cosmica.id_kit3', $idsPermitidos)
+                      ->orWhereIn('notas_productos_cosmica.id_kit4', $idsPermitidos)
+                      ->orWhereIn('notas_productos_cosmica.id_kit5', $idsPermitidos)
+                      ->orWhereIn('notas_productos_cosmica.id_kit6', $idsPermitidos);
+            })
+            ->get();
+
+        $notasAprobadasVespertino = NotasProductosCosmica::join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
+        ->whereBetween('notas_productos_cosmica.fecha_aprobada', [$startOfWeek, $endOfWeek])
+        ->where('notas_productos_cosmica.tipo_nota', '=', 'Cotizacion')
+        ->where('users.turno', '=', 'Vespertino')
+        ->where(function ($query) use ($idsPermitidos) {
+            $query->whereIn('notas_productos_cosmica.id_kit', $idsPermitidos)
+                  ->orWhereIn('notas_productos_cosmica.id_kit2', $idsPermitidos)
+                  ->orWhereIn('notas_productos_cosmica.id_kit3', $idsPermitidos)
+                  ->orWhereIn('notas_productos_cosmica.id_kit4', $idsPermitidos)
+                  ->orWhereIn('notas_productos_cosmica.id_kit5', $idsPermitidos)
+                  ->orWhereIn('notas_productos_cosmica.id_kit6', $idsPermitidos);
+        })
+        ->sum('notas_productos_cosmica.total');
+
+        $user_comision_kit = User::where('id', $id)->first();
+
+        $comision = 0;
+        $comisionVespertino = 0;
+
+        if ($notasAprobadasMatutino >= 4000 && $notasAprobadasMatutino <= 5999) {
+            $comision = 0.03;
+        } elseif ($notasAprobadasMatutino >= 6000 && $notasAprobadasMatutino <= 7999) {
+            $comision = 0.04;
+        } elseif ($notasAprobadasMatutino >= 8000 && $notasAprobadasMatutino <= 9999) {
+            $comision = 0.05;
+        } elseif ($notasAprobadasMatutino >= 10000 && $notasAprobadasMatutino <= 14999) {
+            $comision = 0.06;
+        } elseif ($notasAprobadasMatutino >= 15000 && $notasAprobadasMatutino <= 19999) {
+            $comision = 0.07;
+        } elseif ($notasAprobadasMatutino >= 20000) {
+            $comision = 0.08;
+        }
+
+        // Calcular el monto de la comisión
+        $montoComisionVespertino = $notasAprobadasVespertino * $comisionVespertino;
+
+        if ($notasAprobadasVespertino >= 4000 && $notasAprobadasVespertino <= 5999) {
+            $comisionVespertino = 0.03;
+        } elseif ($notasAprobadasVespertino >= 6000 && $notasAprobadasVespertino <= 7999) {
+            $comisionVespertino = 0.04;
+        } elseif ($notasAprobadasVespertino >= 8000 && $notasAprobadasVespertino <= 9999) {
+            $comisionVespertino = 0.05;
+        } elseif ($notasAprobadasVespertino >= 10000 && $notasAprobadasVespertino <= 14999) {
+            $comisionVespertino = 0.06;
+        } elseif ($notasAprobadasVespertino >= 15000 && $notasAprobadasVespertino <= 19999) {
+            $comisionVespertino = 0.07;
+        } elseif ($notasAprobadasVespertino >= 20000) {
+            $comisionVespertino = 0.08;
+        }
+
+        // Calcular el monto de la comisión
+        $montoComisionMatutino = $notasAprobadasMatutino * $comision;
+        $montoComisionVespertino = $notasAprobadasVespertino * $comisionVespertino;
+
+        // Calcular el monto de la comisión individual
+        $user_comisionmatutino = User::where('turno', '=', 'Matutino')->count();
+        $user_comisionvespertino = User::where('turno', '=', 'Vespertino')->count();
+
+        $comision_individual = 0;
+        $comisionVespertino_individual = 0;
+
+        $comision_individual = $montoComisionMatutino / $user_comisionmatutino;
+        $comisionVespertino_individual = $montoComisionVespertino / $user_comisionvespertino;
+
+        $pdf = \PDF::loadView('admin.users.pdf_comision_new', compact('today', 'user_comision_kit', 'notasAprobadasMatutinoReg', 'notasAprobadasCosmicaComision', 'notasAprobadasMatutino', 'notasAprobadasVespertino', 'comision', 'comisionVespertino', 'comision_individual', 'comisionVespertino_individual'));
+       return $pdf->stream();
+
+        //  return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
+    }
 }
