@@ -133,7 +133,14 @@ class EcommerceCosmikaController extends Controller
         ->orderBy('nombre','ASC')
         ->get();
 
-        return view('tienda_cosmica.productos_faciales', compact('products_constelacion', 'products_espectro', 'products_lunar', 'products_mascarillas', 'products_nebulosa', 'products_pluton', 'products_solar', 'products_venus'));
+        $products_lips = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Lips Glow')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        return view('tienda_cosmica.productos_faciales', compact('products_lips','products_constelacion', 'products_espectro', 'products_lunar', 'products_mascarillas', 'products_nebulosa', 'products_pluton', 'products_solar', 'products_venus'));
     }
 
     public function productos_corporales(){
@@ -187,7 +194,14 @@ class EcommerceCosmikaController extends Controller
         ->orderBy('nombre','ASC')
         ->get();
 
-        return view('tienda_cosmica.productos_corporales',compact('products_Estelar','products_Eclipse','products_Renacer','products_Flash','products_Astros','products_rose','products_Esencia'));
+        $products_Pure = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Pure')
+        ->orderBy('nombre','ASC')
+        ->get();
+
+        return view('tienda_cosmica.productos_corporales',compact('products_Pure','products_Estelar','products_Eclipse','products_Renacer','products_Flash','products_Astros','products_rose','products_Esencia'));
     }
 
     public function buscar(Request $request) {
