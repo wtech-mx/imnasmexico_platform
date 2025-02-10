@@ -66,7 +66,13 @@
                     <button class="nav-link btn_product_nav" id="pills-esencia-tab" data-bs-toggle="pill" data-bs-target="#pills-esencia" type="button" role="tab" aria-controls="pills-esencia" aria-selected="false">
                       Esencia
                     </button>
-                  </li>
+                </li>
+
+                <li class="nav-item p-2" role="presentation">
+                    <button class="nav-link btn_product_nav" id="pills-pure-tab" data-bs-toggle="pill" data-bs-target="#pills-pure" type="button" role="tab" aria-controls="pills-pure" aria-selected="false">
+                        Pure
+                    </button>
+                </li>
 
             </ul>
 
@@ -123,6 +129,14 @@
                 <div class="tab-pane fade" id="pills-esencia" role="tabpanel" aria-labelledby="pills-esencia-tab" tabindex="0">
                     <div class="row">
                         @foreach ($products_Esencia as $product)
+                            @include('tienda_cosmica.Components.item_categorias')
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="pills-pure" role="tabpanel" aria-labelledby="pills-pure-tab" tabindex="0">
+                    <div class="row">
+                        @foreach ($products_Pure as $product)
                             @include('tienda_cosmica.Components.item_categorias')
                         @endforeach
                     </div>

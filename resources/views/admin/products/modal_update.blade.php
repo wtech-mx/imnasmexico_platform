@@ -96,6 +96,8 @@
                                             <option value="Galaxia">Linea Corporal - Galaxia</option>
                                             <option value="Rose Caviar">Linea Corporal - Rose Caviar</option>
                                             <option value="Esencia Vital">Linea Corporal - Esencia Vital</option>
+                                            <option value="Pure">Linea Corporal - Pure</option>
+                                            <option value="Lips Glow">Linea Facial - Lips Glow</option>
                                             <option value="Constelacion">Linea Facial - Constelacion</option>
                                             <option value="Espectro">Linea Facial - Espectro</option>
                                             <option value="Lunar">Linea Facial - Lunar</option>
