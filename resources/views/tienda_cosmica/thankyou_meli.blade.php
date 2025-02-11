@@ -1,6 +1,6 @@
 @extends('layouts.app_tienda_cosmica')
 
-@section('template_title') Single @endsection
+@section('template_title') Gracias por su Compra @endsection
 
 @section('css_custom')
 <style>
