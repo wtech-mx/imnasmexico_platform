@@ -91,7 +91,7 @@
                                                 $cart_productos = session('cart_productos', []);
                                                 $total_carrito = array_sum(array_map(fn($p) => $p['precio'] * $p['cantidad'], $cart_productos));
                                             @endphp
-                                                <h4 class="mt-3"><b>Total: </b> <span id="total-carrito">${{ number_format($total_carrito, 0, '.', ',') }}</span></h4>
+                                                <h4 class="mt-3"><b>Total: </b> <span id="total-carrito-meli">${{ number_format($total_carrito, 0, '.', ',') }}</span></h4>
                                             @endif
 
                                             <form method="POST" action="{{ route('processPaymentMeli') }}">
@@ -278,7 +278,7 @@
                                             $iva = $total_carrito * .16;
                                             $total_iva = $total_carrito + $iva;
                                         @endphp
-                                        <h4 class="mt-3"><b>Total: </b> <span id="total-carrito">${{ number_format($total_iva, 0, '.', ',') }}</span></h4>
+                                        <h4 class="mt-3"><b>Total: </b> <span id="total-carrito-st">${{ number_format($total_iva, 0, '.', ',') }}</span></h4>
                                     @endif
                                     @guest
                                         <form role="form" action="{{ route('order.pay_stripe') }}" method="post" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="{{ env('STRIPE_KEY') }}" id="payment-form">
@@ -599,72 +599,93 @@
 </script>
 
 <script>
-    $(document).ready(function () {
-        // Aumentar cantidad
-        $('.incrementar').click(function () {
-            let id = $(this).data('id');
-            let input = $('input[data-id="' + id + '"]');
-            let cantidad = parseInt(input.val()) + 1;
+$(document).ready(function () {
+    // Aumentar cantidad
+    $('.incrementar').click(function () {
+        let id = $(this).data('id');
+        let input = $('input[data-id="' + id + '"]');
+        let cantidad = parseInt(input.val()) + 1;
+        actualizarCantidad(id, cantidad);
+    });
+
+    // Disminuir cantidad
+    $('.decrementar').click(function () {
+        let id = $(this).data('id');
+        let input = $('input[data-id="' + id + '"]');
+        let cantidad = parseInt(input.val()) - 1;
+        if (cantidad > 0) {
             actualizarCantidad(id, cantidad);
-        });
-
-        // Disminuir cantidad
-        $('.decrementar').click(function () {
-            let id = $(this).data('id');
-            let input = $('input[data-id="' + id + '"]');
-            let cantidad = parseInt(input.val()) - 1;
-            if (cantidad > 0) {
-                actualizarCantidad(id, cantidad);
-            }
-        });
-
-        // Actualizar cantidad desde input
-        $('.input_cart_list').on('change', function () {
-            let id = $(this).data('id');
-            let cantidad = parseInt($(this).val());
-            if (cantidad > 0) {
-                actualizarCantidad(id, cantidad);
-            }
-        });
-
-        // Función AJAX para actualizar cantidad
-        function actualizarCantidad(id, cantidad) {
-            $.ajax({
-                url: "{{ route('cart.update') }}",
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    id: id,
-                    cantidad: cantidad
-                },
-                success: function (response) {
-                    if (response.success) {
-                        $('input[data-id="' + id + '"]').val(cantidad);
-                        $('#total-' + id).text('$' + response.total_producto);
-                        $('#total-carrito').text('$' + response.total_carrito);
-                    }
-                }
-            });
         }
+    });
 
-        // Eliminar producto del carrito
-        $('.eliminar-producto').click(function () {
-            let id = $(this).data('id');
-            $.ajax({
-                url: "{{ route('cart.remove') }}",
-                type: "POST",
-                data: {
-                    _token: "{{ csrf_token() }}",
-                    id: id
-                },
-                success: function (response) {
-                    if (response.success) {
-                        location.reload(); // Recargar la página para actualizar el carrito
-                    }
+    // Actualizar cantidad desde input manualmente
+    $('.input_cart_list').on('change', function () {
+        let id = $(this).data('id');
+        let cantidad = parseInt($(this).val());
+        if (cantidad > 0) {
+            actualizarCantidad(id, cantidad);
+        }
+    });
+
+    // Función AJAX para actualizar cantidad
+    function actualizarCantidad(id, cantidad) {
+    $.ajax({
+        url: "{{ route('cart.update') }}",
+        type: "POST",
+        data: {
+            _token: "{{ csrf_token() }}",
+            id: id,
+            cantidad: cantidad
+        },
+        success: function (response) {
+            console.log("Respuesta del servidor:", response); // Depuración
+
+            if (response.success) {
+                let totalProducto = parseFloat(response.total_producto) || 0;
+                let totalCarrito = parseFloat(response.total_carrito) || 0;
+                let iva = totalCarrito * 0.16; // 16% de IVA
+                let totalConIVA = totalCarrito + iva;
+
+                $('input[data-id="' + id + '"]').val(cantidad);
+                $('#total-' + id).text('$' + totalProducto.toFixed(2));
+                $('#total-carrito-meli').text('$' + totalCarrito.toFixed(2));
+                $('#total-carrito').text('$' + totalCarrito.toFixed(2));
+                $('#total-carrito-st').text('$' + totalConIVA.toFixed(2)); // Total con IVA
+            } else {
+                console.error("Error en la respuesta del servidor:", response);
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("Error en AJAX:", error);
+        }
+    });
+}
+
+
+    // Eliminar producto del carrito
+    $('.eliminar-producto').click(function () {
+        let id = $(this).data('id');
+        $.ajax({
+            url: "{{ route('cart.remove') }}",
+            type: "POST",
+            data: {
+                _token: "{{ csrf_token() }}",
+                id: id
+            },
+            success: function (response) {
+                if (response.success) {
+                    location.reload(); // Recargar la página para actualizar el carrito
                 }
-            });
+            },
+            error: function (xhr, status, error) {
+                console.error("Error al eliminar el producto:", error);
+            }
         });
     });
+});
+
+
+
 </script>
 
 @endsection

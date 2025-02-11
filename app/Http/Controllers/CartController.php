@@ -73,19 +73,21 @@ class CartController extends Controller
         $cart = session()->get('cart_productos', []);
 
         if (isset($cart[$request->id])) {
-            $cart[$request->id]['cantidad'] = $request->cantidad;
+            $cart[$request->id]['cantidad'] = (int) $request->cantidad; // Asegurar que sea número entero
             session()->put('cart_productos', $cart);
         }
 
-        $total_producto = number_format($cart[$request->id]['precio'] * $cart[$request->id]['cantidad'], 0, '.', ',');
-        $total_carrito = number_format(array_sum(array_map(fn($p) => $p['precio'] * $p['cantidad'], $cart)), 0, '.', ',');
+        // Calcular totales sin formatearlos en strings
+        $total_producto = $cart[$request->id]['precio'] * $cart[$request->id]['cantidad'];
+        $total_carrito = array_sum(array_map(fn($p) => $p['precio'] * $p['cantidad'], $cart));
 
         return response()->json([
             'success' => true,
-            'total_producto' => $total_producto,
-            'total_carrito' => $total_carrito
+            'total_producto' => round($total_producto, 2), // Devolver como número
+            'total_carrito' => round($total_carrito, 2) // Devolver como número
         ]);
     }
+
 
     public function remove(Request $request)
     {

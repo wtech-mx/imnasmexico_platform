@@ -83,7 +83,7 @@
         <div class="col-0 col-0 col-md-2 col-lg-4"></div>
         <div class="col-12 col-sm-12 col-md-8 col-lg-4 text-center">
             <div class="container_lineas_single  mt-4 mt-sm-2 mt-md-3 mt-lg-3 mb-4 mb-sm-2 mb-md-3 mb-lg-3">
-                <a href="" class="text_shop_single">
+                <a href="javascript:void(0)" class="text_shop_single agregar-carrito " data-id="{{ $product->id }}">
                     ${{number_format($product->precio_normal, 0, '.', ',')}} MXN Agregar
                 </a>
             </div>

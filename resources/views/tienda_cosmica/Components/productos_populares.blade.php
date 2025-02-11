@@ -21,7 +21,9 @@
 
                 <div class="content mt-3">
                     <div class="img_container mx-auto">
-                        <img class="img_grid_products" src="{{$product_popular->imagenes}}" alt="Protector">
+                        <a href="{{ route('tienda.single_product', $product_popular->slug) }}" class="">
+                            <img class="img_grid_products" src="{{$product_popular->imagenes}}" alt="Protector">
+                        </a>
                     </div>
                     <h4 class="text-center Avenir color_2 title_lineagrid m-0">{{ $primeraPalabra }}</h4>
                     <h5 class="text-center Avenir color_2 subtitle_lineagrid m-0">{{ $restoDelTexto }}</h5>
