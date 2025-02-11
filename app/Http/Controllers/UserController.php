@@ -204,18 +204,26 @@ class UserController extends Controller
         $idsPermitidos = [1950, 1949, 1948, 1947, 1946, 1945, 1815, 1935];
 
         $notasAprobadasMatutino = NotasProductosCosmica::join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
-            ->whereBetween('notas_productos_cosmica.fecha_aprobada', [$startOfWeek, $endOfWeek])
-            ->where('notas_productos_cosmica.tipo_nota', '=', 'Cotizacion')
-            ->where('users.turno', '=', 'Matutino')
-            ->where(function ($query) use ($idsPermitidos) {
-                $query->whereIn('notas_productos_cosmica.id_kit', $idsPermitidos)
-                      ->orWhereIn('notas_productos_cosmica.id_kit2', $idsPermitidos)
-                      ->orWhereIn('notas_productos_cosmica.id_kit3', $idsPermitidos)
-                      ->orWhereIn('notas_productos_cosmica.id_kit4', $idsPermitidos)
-                      ->orWhereIn('notas_productos_cosmica.id_kit5', $idsPermitidos)
-                      ->orWhereIn('notas_productos_cosmica.id_kit6', $idsPermitidos);
-            })
-            ->sum('notas_productos_cosmica.total');
+        ->leftJoin('products as p1', 'notas_productos_cosmica.id_kit', '=', 'p1.id')
+        ->leftJoin('products as p2', 'notas_productos_cosmica.id_kit2', '=', 'p2.id')
+        ->leftJoin('products as p3', 'notas_productos_cosmica.id_kit3', '=', 'p3.id')
+        ->leftJoin('products as p4', 'notas_productos_cosmica.id_kit4', '=', 'p4.id')
+        ->leftJoin('products as p5', 'notas_productos_cosmica.id_kit5', '=', 'p5.id')
+        ->leftJoin('products as p6', 'notas_productos_cosmica.id_kit6', '=', 'p6.id')
+        ->whereBetween('notas_productos_cosmica.fecha_aprobada', [$startOfWeek, $endOfWeek])
+        ->where('notas_productos_cosmica.tipo_nota', '=', 'Cotizacion')
+        ->where('users.turno', '=', 'Matutino')
+        ->selectRaw("
+            SUM(
+                CASE WHEN id_kit IN (" . implode(',', $idsPermitidos) . ") THEN p1.precio_normal ELSE 0 END +
+                CASE WHEN id_kit2 IN (" . implode(',', $idsPermitidos) . ") THEN p2.precio_normal ELSE 0 END +
+                CASE WHEN id_kit3 IN (" . implode(',', $idsPermitidos) . ") THEN p3.precio_normal ELSE 0 END +
+                CASE WHEN id_kit4 IN (" . implode(',', $idsPermitidos) . ") THEN p4.precio_normal ELSE 0 END +
+                CASE WHEN id_kit5 IN (" . implode(',', $idsPermitidos) . ") THEN p5.precio_normal ELSE 0 END +
+                CASE WHEN id_kit6 IN (" . implode(',', $idsPermitidos) . ") THEN p6.precio_normal ELSE 0 END
+            ) AS total_precio_kits
+        ")
+        ->value('total_precio_kits');
 
             $notasAprobadasMatutinoReg = NotasProductosCosmica::join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
             ->whereBetween('notas_productos_cosmica.fecha_aprobada', [$startOfWeek, $endOfWeek])
@@ -232,18 +240,26 @@ class UserController extends Controller
             ->get();
 
         $notasAprobadasVespertino = NotasProductosCosmica::join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
+        ->leftJoin('products as p1', 'notas_productos_cosmica.id_kit', '=', 'p1.id')
+        ->leftJoin('products as p2', 'notas_productos_cosmica.id_kit2', '=', 'p2.id')
+        ->leftJoin('products as p3', 'notas_productos_cosmica.id_kit3', '=', 'p3.id')
+        ->leftJoin('products as p4', 'notas_productos_cosmica.id_kit4', '=', 'p4.id')
+        ->leftJoin('products as p5', 'notas_productos_cosmica.id_kit5', '=', 'p5.id')
+        ->leftJoin('products as p6', 'notas_productos_cosmica.id_kit6', '=', 'p6.id')
         ->whereBetween('notas_productos_cosmica.fecha_aprobada', [$startOfWeek, $endOfWeek])
         ->where('notas_productos_cosmica.tipo_nota', '=', 'Cotizacion')
         ->where('users.turno', '=', 'Vespertino')
-        ->where(function ($query) use ($idsPermitidos) {
-            $query->whereIn('notas_productos_cosmica.id_kit', $idsPermitidos)
-                  ->orWhereIn('notas_productos_cosmica.id_kit2', $idsPermitidos)
-                  ->orWhereIn('notas_productos_cosmica.id_kit3', $idsPermitidos)
-                  ->orWhereIn('notas_productos_cosmica.id_kit4', $idsPermitidos)
-                  ->orWhereIn('notas_productos_cosmica.id_kit5', $idsPermitidos)
-                  ->orWhereIn('notas_productos_cosmica.id_kit6', $idsPermitidos);
-        })
-        ->sum('notas_productos_cosmica.total');
+        ->selectRaw("
+            SUM(
+                CASE WHEN id_kit IN (" . implode(',', $idsPermitidos) . ") THEN p1.precio_normal ELSE 0 END +
+                CASE WHEN id_kit2 IN (" . implode(',', $idsPermitidos) . ") THEN p2.precio_normal ELSE 0 END +
+                CASE WHEN id_kit3 IN (" . implode(',', $idsPermitidos) . ") THEN p3.precio_normal ELSE 0 END +
+                CASE WHEN id_kit4 IN (" . implode(',', $idsPermitidos) . ") THEN p4.precio_normal ELSE 0 END +
+                CASE WHEN id_kit5 IN (" . implode(',', $idsPermitidos) . ") THEN p5.precio_normal ELSE 0 END +
+                CASE WHEN id_kit6 IN (" . implode(',', $idsPermitidos) . ") THEN p6.precio_normal ELSE 0 END
+            ) AS total_precio_kits
+        ")
+        ->value('total_precio_kits');
 
         $user_comision_kit = User::where('id', $id)->first();
 
