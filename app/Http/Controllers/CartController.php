@@ -214,6 +214,7 @@ class CartController extends Controller
     public function processPaymentMeli(Request $request){
             // Validar los datos del request
             $fechaActual = date('Y-m-d');
+            $code = Str::random(8);
 
             if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
                 if (User::where('telefono', $request->telefono)->exists()) {
@@ -367,7 +368,8 @@ class CartController extends Controller
 
                     Session::forget('cart_productos');
 
-                    return view('tienda_cosmica.thankyou', compact('order', 'order_ticket'));
+                    return redirect()->route('thankyou.page', ['id' => $order->id]);
+                    // return view('tienda_cosmica.thankyou', compact('order', 'order_ticket'));
 
                 } else {
                     $errorDetails = $response->json();
@@ -377,11 +379,19 @@ class CartController extends Controller
                     return redirect()->back()->with('error', "Error al publicar: {$errorMessage}. Detalles: {$causes}");
                 }
             } catch (\Exception $e) {
-                dd($e);
 
                 return redirect()->back()->with('error', 'Ocurrió un error: ' . $e->getMessage());
             }
     }
+
+    public function thankYouPage($id){
+
+        $order = OrdersCosmica::findOrFail($id);
+        $order_ticket = OrdersCosmicaOnline::where('id_order', '=', $order->id)->get();
+
+        return view('tienda_cosmica.thankyou_meli', compact('order', 'order_ticket'));
+    }
+
 
 
     public function pay(OrdersCosmica $order, Request $request)
