@@ -44,7 +44,7 @@
 
                             <img class="my-auto" src="{{ $producto['imagen'] }}" alt="" style="height: 60px;width:60px;" >
 
-                            <p class="my-auto">{{ $producto['nombre'] }}</p>
+                            <p class="my-auto text-start" style="width: 203px;">{{ $producto['nombre'] }}</p>
 
                             <p class="my-auto">
                                 <a href="javascript:void(0);" class="icon_list_cart incrementar" data-id="{{ $id }}">+</a>
