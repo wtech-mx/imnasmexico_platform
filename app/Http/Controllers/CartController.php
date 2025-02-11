@@ -68,7 +68,6 @@ class CartController extends Controller
         ]);
     }
 
-
     public function update(Request $request)
     {
         $cart = session()->get('cart_productos', []);

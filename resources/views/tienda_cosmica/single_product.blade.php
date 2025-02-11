@@ -110,9 +110,12 @@
 @section('js')
 <script>
 $(document).ready(function() {
+    // ✅ Obtener el contador inicial desde la sesión
+    actualizarContadorCarrito(parseInt($("#cart-count").text()));
+
     $(".agregar-carrito").click(function() {
         var productId = $(this).data("id");
-        var cantidad = $("#cantidad_" + productId).val() || 1; // Si no hay input de cantidad, asignar 1 por defecto
+        var cantidad = parseInt($("#cantidad_" + productId).val()) || 1;
 
         $.ajax({
             url: "{{ route('carrito.agregar') }}",
@@ -123,21 +126,31 @@ $(document).ready(function() {
                 cantidad: cantidad
             },
             success: function(response) {
-                mostrarToast("Producto agregado al carrito", "success"); // Mostrar notificación
-                actualizarContadorCarrito(Object.keys(response.carrito).length); // Actualizar cantidad en carrito
+                mostrarToast("✅ Producto agregado al carrito", "success");
+
+                // ✅ Sumar todas las cantidades de productos en el carrito y actualizar el contador
+                let totalCantidad = Object.values(response.carrito).reduce((acc, item) => acc + parseInt(item.cantidad), 0);
+                actualizarContadorCarrito(totalCantidad);
             },
             error: function(xhr) {
-                mostrarToast("Error al agregar producto", "error");
+                mostrarToast("❌ Error al agregar producto", "error");
             }
         });
     });
 
-    // Función para actualizar el contador del carrito en tiempo real
+    // ✅ Función para actualizar el contador del carrito en tiempo real
     function actualizarContadorCarrito(total) {
-        $("#cart-count").text(total);
+        let cartCount = $("#cart-count");
+        cartCount.text(total);
+
+        if (total > 0) {
+            cartCount.removeClass("d-none");
+        } else {
+            cartCount.addClass("d-none");
+        }
     }
 
-    // Función para mostrar una notificación con un mensaje y tipo (éxito o error)
+    // ✅ Función para mostrar notificaciones con Toast
     function mostrarToast(mensaje, tipo) {
         let bgColor = tipo === "success" ? "bg-success" : "bg-danger";
         let toastHtml = `
@@ -147,10 +160,12 @@ $(document).ready(function() {
                     <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
             </div>`;
+
         $("#toast-container").html(toastHtml);
-        setTimeout(() => { $(".toast").toast("hide"); }, 3000);
+        setTimeout(() => { $(".toast").toast("hide"); }, 6000);
     }
 });
+
 
 
     document.querySelectorAll('.btn-agregar').forEach(function(button) {

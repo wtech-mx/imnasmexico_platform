@@ -135,6 +135,7 @@ Route::get('/tienda/buscar/productos', [App\Http\Controllers\EcommerceCosmikaCon
 Route::get('/tienda/busqueda', [App\Http\Controllers\EcommerceCosmikaController::class, 'buscarProductos'])->name('tienda_online.buscar');
 
 // =============== E C O M M E R C E  C A J A ===============================
+
 Route::post('/agregar-al-carrito', [App\Http\Controllers\CartController::class, 'agregar'])->name('carrito.agregar');
 Route::post('/actualizar-carrito', [App\Http\Controllers\CartController::class, 'actualizar'])->name('carrito.actualizar');
 Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');

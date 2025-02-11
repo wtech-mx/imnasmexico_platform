@@ -52,9 +52,10 @@
 
             <a href="{{ route('tienda.cart') }}" class="btn position-relative">
                 <i class="fa-solid fa-cart-shopping icons_header my-auto"></i>
-                <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{ session('cart_productos') ? count(session('cart_productos')) : 0 }}
+                <span id="cart-count" class="badge bg-danger {{ session('cart_productos') ? '' : 'd-none' }}">
+                    {{ session('cart_productos') ? array_sum(array_column(session('cart_productos'), 'cantidad')) : 0 }}
                 </span>
+
             </a>
 
         </div>
