@@ -159,6 +159,13 @@ class EcommerceCosmikaController extends Controller
         ->orderBy('nombre','ASC')
         ->get();
 
+        $products_Galaxia = Products::
+        where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
+        ->where('sublinea', 'Galaxia')
+        ->orderBy('nombre','ASC')
+        ->get();
+
         $products_Renacer = Products::
         where('categoria', 'Cosmica')
         ->where('subcategoria', 'Producto')
@@ -201,7 +208,7 @@ class EcommerceCosmikaController extends Controller
         ->orderBy('nombre','ASC')
         ->get();
 
-        return view('tienda_cosmica.productos_corporales',compact('products_Pure','products_Estelar','products_Eclipse','products_Renacer','products_Flash','products_Astros','products_rose','products_Esencia'));
+        return view('tienda_cosmica.productos_corporales',compact('products_Galaxia','products_Pure','products_Estelar','products_Eclipse','products_Renacer','products_Flash','products_Astros','products_rose','products_Esencia'));
     }
 
     public function buscar(Request $request) {
