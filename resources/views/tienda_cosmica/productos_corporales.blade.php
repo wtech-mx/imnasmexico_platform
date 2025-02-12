@@ -80,7 +80,7 @@
 
                 <div class="tab-pane fade show active" id="pills-astros" role="tabpanel" aria-labelledby="pills-todos-tab" tabindex="0">
                     <div class="row">
-                        @foreach ($products_Estelar as $product)
+                        @foreach ($products_Astros $product)
                             @include('tienda_cosmica.Components.item_categorias')
                         @endforeach
                     </div>
@@ -96,7 +96,7 @@
 
                 <div class="tab-pane fade" id="pills-flash" role="tabpanel" aria-labelledby="pills-flash-tab" tabindex="0">
                     <div class="row">
-                        @foreach ($products_Renacer as $product)
+                        @foreach ($products_Flash as $product)
                             @include('tienda_cosmica.Components.item_categorias')
                         @endforeach
                     </div>
@@ -112,7 +112,7 @@
 
                 <div class="tab-pane fade" id="pills-renacer" role="tabpanel" aria-labelledby="pills-renacer-tab" tabindex="0">
                     <div class="row">
-                        @foreach ($products_Astros as $product)
+                        @foreach ($products_Renacer as $product)
                             @include('tienda_cosmica.Components.item_categorias')
                         @endforeach
                     </div>

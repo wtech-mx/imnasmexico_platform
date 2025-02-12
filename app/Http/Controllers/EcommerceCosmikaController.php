@@ -87,7 +87,7 @@ class EcommerceCosmikaController extends Controller
         $products_espectro = Products::
         where('categoria', 'Cosmica')
         ->where('subcategoria', 'Producto')
-        ->where('sublinea', 'Constelacion')
+        ->where('sublinea', 'Espectro')
         ->orderBy('nombre','ASC')
         ->get();
 
