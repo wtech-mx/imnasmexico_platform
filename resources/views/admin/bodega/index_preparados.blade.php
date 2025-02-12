@@ -292,60 +292,6 @@
 
                                     @endforeach
 
-                                    @foreach($orders_tienda_cosmica_preparados as $order)
-                                        <tr style="background: #80486B;color:#fff">
-                                            <td>{{ $order->id }}</td>
-                                            <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
-                                            <td>
-                                                <a type="button" class="btn btn-xs btn-success" data-bs-toggle="modal" data-bs-target="#estatus_edit_modal_woo{{$order->id}}">
-                                                    Preparado
-                                                </a>
-                                            </td>
-                                            <td>
-                                                @foreach($order->meta_data as $meta)
-                                                    @if($meta->key == 'fecha_y_hora_guia')
-                                                        {{ \Carbon\Carbon::parse($meta->value)->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                    @endif
-                                                @endforeach
-
-                                            </td>
-
-                                            <td>${{ $order->total }}</td>
-
-                                            <td>
-                                                {{-- <a type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#modal_productos_{{ $order->id }}">
-                                                    <i class="fa fa-list-alt"></i>
-                                                </a> --}}
-
-                                                <a class="btn btn-sm btn-info text-white" href="{{ route('woo_cosmica_orders.pdf', $order->id) }}" target="_blank">
-                                                    <i class="fa fa-file-pdf"></i>
-                                                </a>
-
-                                                @if(isset($order->meta_data))
-                                                    @foreach($order->meta_data as $meta)
-                                                        @if($meta->key == 'guia_de_envio')
-
-                                                        <a class="text-center text-white btn btn-sm" href="{{asset('guias/'.$meta->value) }}" download="{{asset('guias/'.$meta->value) }}" style="background: #e6ab2d;">
-                                                            <i class="fa fa-truck"></i>
-                                                        </a>
-
-                                                        @endif
-                                                    @endforeach
-                                                @endif
-
-                                                <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$order->id}}">
-                                                    <i class="fa fa-info"></i>
-                                                </a>
-
-                                            </td>
-                                        </tr>
-
-                                        {{-- @include('admin.bodega.modal_productos') --}}
-                                        @include('admin.bodega.modal_edit_estatus_woo')
-                                        @include('admin.bodega.modal_estatus_woo')
-
-                                    @endforeach
-
                                     @foreach($ApiFiltradaCollectPreparado as $order)
                                         <tr style="background: #EE96BA;color:#fff">
                                             <td>{{ $order['id'] }}</td>
