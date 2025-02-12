@@ -62,6 +62,7 @@
                                     <input type="hidden" name="_method" value="PATCH">
                                     <button class="btn btn-sm btn-warning" type="submit"><img src="{{ asset('assets/user/icons/close_white.webp') }}" alt="" width="15px"> </button>
                                 </form>
+                                <a class="btn btn-warning" href="{{ route('comision_kit.imprimir', $user->id) }}" target="_blank">Imprimir</a>
                             </td>
 
                         </tr>

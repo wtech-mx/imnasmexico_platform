@@ -166,7 +166,7 @@ class UserController extends Controller
                         ->with('success','User deleted successfully');
     }
 
-    public function imprimir($id){
+    public function imprimir_old($id){
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek = Carbon::now()->endOfWeek();
         $today =  date('d-m-Y');
@@ -190,18 +190,34 @@ class UserController extends Controller
         //  return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
     }
 
-    public function imprimir_new($id){
+    public function imprimir($id){
         $startOfWeek = Carbon::now()->startOfWeek();
         $endOfWeek = Carbon::now()->endOfWeek();
         $today =  date('d-m-Y');
 
+        $idsPermitidos = [1950, 1949, 1948, 1947, 1946, 1945, 1820];
+
         $notasAprobadasCosmicaComision = NotasProductosCosmica::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])
         ->where('tipo_nota', '=', 'Cotizacion')
-        ->whereNotNull('id_kit')
+        ->where('id_admin_venta', '=', $id) // Filtrar por id_admin_venta
+        ->where(function ($query) use ($idsPermitidos) {
+            $query->whereNotIn('id_kit', $idsPermitidos)
+                  ->orWhereNotIn('id_kit2', $idsPermitidos)
+                  ->orWhereNotIn('id_kit3', $idsPermitidos)
+                  ->orWhereNotIn('id_kit4', $idsPermitidos)
+                  ->orWhereNotIn('id_kit5', $idsPermitidos)
+                  ->orWhereNotIn('id_kit6', $idsPermitidos);
+        })
+        ->where(function ($query) {
+            $query->whereNotNull('id_kit')
+                  ->orWhereNotNull('id_kit2')
+                  ->orWhereNotNull('id_kit3')
+                  ->orWhereNotNull('id_kit4')
+                  ->orWhereNotNull('id_kit5')
+                  ->orWhereNotNull('id_kit6');
+        })
         ->orderBy('id', 'DESC')
         ->get();
-
-        $idsPermitidos = [1950, 1949, 1948, 1947, 1946, 1945, 1815, 1935];
 
         $notasAprobadasMatutino = NotasProductosCosmica::join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
         ->leftJoin('products as p1', 'notas_productos_cosmica.id_kit', '=', 'p1.id')

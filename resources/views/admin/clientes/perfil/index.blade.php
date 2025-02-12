@@ -56,7 +56,7 @@
                             <div class="card position-sticky top-1">
                             <ul class="nav flex-column bg-white border-radius-lg p-3">
                                 <li class="nav-item">
-                                <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="#basic-info">
+                                <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="{{route('peril_cliente.informacion', $cliente->id)}}">
                                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                         <img src="{{ asset('assets/cam/woman.png') }}"width="30px" >
                                     </div>
@@ -149,7 +149,7 @@
                         </div>
                     </div>
                     @endif
-                    @if(Route::currentRouteName() == 'peril_cliente.buscador')
+                    @if(Route::currentRouteName() == 'peril_cliente.buscador' || Route::currentRouteName() == 'peril_cliente.informacion')
                         @include('admin.clientes.perfil.basic_info')
                     @endif
                     @if(Route::currentRouteName() == 'peril_cliente.cursos')
@@ -171,6 +171,12 @@
     const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
     searchable: true,
     fixedHeight: false
+    });
+
+    const dataTableCursos = new simpleDatatables.DataTable("#datatable-cursos", {
+        deferRender:true,
+        paging: true,
+        pageLength: 10
     });
 </script>
 

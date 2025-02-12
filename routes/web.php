@@ -293,7 +293,7 @@ Route::group(['middleware' => ['auth']], function() {
     // =============== M O D U L O   C O M I S I O N E S ===============================
     Route::get('/admin/comision/kit/imprimir/{id}', [App\Http\Controllers\UserController::class, 'imprimir'])->name('comision_kit.imprimir');
 
-    // =============== M O D U L O  L  A  B  O  R  A  T I  O S ===============================
+    // =============== M O D U L O  L A B O R A T I O S ===============================
 
     Route::get('/laboratorio/nas', [App\Http\Controllers\LaboratoriosController::class, 'index_nas'])->name('laboratorio.nas');
     Route::get('/cosmica/laboratorio', [App\Http\Controllers\LaboratoriosController::class, 'index_cosmica'])->name('laboratorio.cosmica');
@@ -825,6 +825,7 @@ Route::group(['middleware' => ['auth']], function() {
         // =============== M O D U L O  P E R F I L  C L I E N T E ===============================
         Route::get('/perfil/cliente/index', [App\Http\Controllers\PerfilClienteController::class, 'index'])->name('peril_cliente.index');
         Route::get('/perfil/cliente/buscador', [App\Http\Controllers\PerfilClienteController::class, 'buscador'])->name('peril_cliente.buscador');
+        Route::get('/perfil/cliente/informacion/{id}', [App\Http\Controllers\PerfilClienteController::class, 'informacion'])->name('peril_cliente.informacion');
         Route::get('/perfil/cliente/cursos/{id}', [App\Http\Controllers\PerfilClienteController::class, 'cursos'])->name('peril_cliente.cursos');
 });
 

@@ -6,6 +6,12 @@
     </div>
     <div class="card-body pt-0">
         <div class="row">
+        <div class="col-12">
+            <label class="form-label">Fecha de registro</label>
+            <div class="input-group">
+            <p>{{$cliente->created_at}}</p>
+            </div>
+        </div>
         <div class="col-6">
             <label class="form-label">Nombre</label>
             <div class="input-group">

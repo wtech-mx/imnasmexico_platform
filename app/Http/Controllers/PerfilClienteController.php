@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cosmikausers;
+use App\Models\OrdersTickets;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -31,12 +32,24 @@ class PerfilClienteController extends Controller
         return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora'));
     }
 
+    public function informacion(Request $request, $id){
+
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+
+        $cliente = User::where('cliente','=' ,'1')->where('id', '=', $id)->first();
+        $distribuidora = Cosmikausers::where('id_cliente', $id)->orderBy('id','DESC')->first();
+
+        return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora'));
+    }
+
     public function cursos(Request $request, $id){
 
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
         $cliente = User::where('cliente','=' ,'1')->where('id', '=', $id)->first();
         $distribuidora = Cosmikausers::where('id_cliente', $id)->orderBy('id','DESC')->first();
+
+        $tickets = OrdersTickets::where('cliente','=' ,'1')->where('id', '=', $id)->first();
 
         return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora'));
     }
