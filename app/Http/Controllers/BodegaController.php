@@ -7,6 +7,7 @@ use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 use App\Models\OrderOnlineCosmica;
 use App\Models\OrderOnlineNas;
+use App\Models\OrdersCosmica;
 use App\Models\ProductosNotasCosmica;
 use App\Models\ProductosNotasId;
 use App\Models\Products;
@@ -76,8 +77,9 @@ class BodegaController extends Controller
         ->whereBetween('fecha_aprobada', [$primerDiaDelMes, $ultimoDiaDelMes])->get();
 
         $notas_cosmica_preparacion = NotasProductosCosmica::where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion', '=', 'Aprobada')->where('fecha_preparacion', '!=', NULL)->get();
+        $oreders_cosmica_ecommerce = OrdersCosmica::orderBy('id','DESC')->where('estatus_bodega','=' , 'En preparacion')->get();
 
-        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal);
+        $cantidad_preparacion = count($notas_preparacion) + count($notas_presencial_preparacion) + count($notas_cosmica_preparacion) + count($ApiFiltradaCollectAprobado) + count($orders_tienda_principal) + count($oreders_cosmica_ecommerce);
         // Pasar las órdenes y notas a la vista
         return view('admin.bodega.index', compact(
             'notas_presencial_preparacion',
@@ -85,7 +87,8 @@ class BodegaController extends Controller
             'notas_cosmica_preparacion',
             'orders_tienda_principal',
             'cantidad_preparacion',
-            'ApiFiltradaCollectAprobado'));
+            'ApiFiltradaCollectAprobado',
+            'oreders_cosmica_ecommerce'));
     }
 
     public function generarEtiqueta($tabla, $id){
@@ -103,6 +106,10 @@ class BodegaController extends Controller
                 $tipo = 'cosmica';
                 break;
 
+            case 'ecommerce_cosmica':
+                $registro = OrdersCosmica::where('id', '=', $id)->first();
+                $tipo = 'cosmica_ecommerce';
+                break;
             default:
                 return abort(404, 'Tabla no válida');
         }

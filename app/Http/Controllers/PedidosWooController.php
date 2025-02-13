@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\HistorialVendidos;
 use App\Models\OrderOnlineCosmica;
 use App\Models\OrderOnlineNas;
 use App\Models\OrdersCosmica;
@@ -11,6 +12,7 @@ use Codexshaper\WooCommerce\Facades\WooCommerce;
 use Automattic\WooCommerce\Client;
 use Carbon\Carbon;
 use App\Models\Products;
+use Session;
 
 class PedidosWooController extends Controller
 {
@@ -233,7 +235,7 @@ class PedidosWooController extends Controller
         $startDateTime = $startDate . 'T00:00:00';
         $endDateTime = $endDate . 'T23:59:59';
 
-        $notas = OrdersCosmica::orderBy('id','DESC')->where('estatus','=' , '1')->get();
+        $notas = OrdersCosmica::orderBy('id','DESC')->where('estatus','=' , '1')->where('guia_doc','!=' , NULL)->get();
 
         return view('admin.cosmica_ecommerce.index', compact('notas'));
     }
@@ -252,6 +254,44 @@ class PedidosWooController extends Controller
         return view('admin.cosmica_ecommerce.index', compact('notas'));
     }
 
+    public function index_cosmika_ecommerce_preparacion(Request $request)
+    {
+        $startDate = $request->input('start_date') ?: Carbon::now()->startOfMonth()->format('Y-m-d');
+        $endDate = $request->input('end_date') ?: Carbon::now()->endOfMonth()->format('Y-m-d');
+
+        $startDateTime = $startDate . 'T00:00:00';
+        $endDateTime = $endDate . 'T23:59:59';
+
+        $notas = OrdersCosmica::orderBy('id','DESC')->where('estatus_bodega','=' , 'En preparacion')->get();
+
+        return view('admin.cosmica_ecommerce.index', compact('notas'));
+    }
+
+
+    public function update_guia_ecommerce(Request $request, $id){
+        $dominio = $request->getHost();
+        if($dominio == 'plataforma.imnasmexico.com'){
+            $pago_fuera = base_path('../public_html/plataforma.imnasmexico.com/pago_fuera/');
+        }else{
+            $pago_fuera = public_path() . '/pago_fuera/';
+        }
+
+        $nota = OrdersCosmica::findOrFail($id);
+        $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+        $nota->estatus_bodega  = 'En preparacion';
+        if ($request->hasFile("doc_guia")) {
+            $file = $request->file('doc_guia');
+            $path = $pago_fuera;
+            $fileName = uniqid() . $file->getClientOriginalName();
+            $file->move($path, $fileName);
+            $nota->guia_doc = $fileName;
+        }
+        $nota->save();
+
+        return redirect()->back()->with('success', 'Se ha actualizada');
+
+    }
+
     public function imprimir_cosmica($id){
         $diaActual = date('Y-m-d');
         $today =  date('d-m-Y');
@@ -264,6 +304,107 @@ class PedidosWooController extends Controller
         $pdf = \PDF::loadView('admin.cosmica_ecommerce.pdf_nota', compact('nota', 'today', 'nota_productos'));
 
         return $pdf->stream();
+    }
+
+    public function preparacion_scaner(Request $request, $id){
+
+        $nota_scaner = OrdersCosmica::where('id', '=', $id)->first();
+        $productos_scaner = OrdersCosmicaOnline::where('id_order', '=', $id)
+        ->get()
+        ->map(function ($producto) {
+            $producto->escaneados = $producto->escaneados ?? 0; // Asegúrate de incluir el valor actual
+            return $producto;
+        });
+
+        $allChecked = $productos_scaner->every(function ($producto) {
+            return $producto->estatus === 1;
+        });
+
+        return view('admin.bodega.scaner.show_cosmica_ecome', compact('nota_scaner', 'productos_scaner', 'allChecked'));
+    }
+
+    public function update_estatus(Request $request, $id){
+        $nota = OrdersCosmica::findOrFail($id);
+        $nota->estatus_bodega  = $request->get('estatus_cotizacion');
+
+            if($request->get('estatus_bodega') == 'Preparado'){
+                $nota->fecha_preparado  = date("Y-m-d H:i:s");
+                $producto_pedido = OrdersCosmicaOnline::where('id_order', $id)->get();
+
+                foreach ($producto_pedido as $campo) {
+                    $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
+                    if ($product_first && $campo->cantidad > 0) {
+                        $producto_historial = new HistorialVendidos;
+                        $producto_historial->id_producto = $product_first->id;
+                        $producto_historial->stock_viejo = $product_first->stock;
+                        $producto_historial->cantidad_restado = $campo->cantidad;
+                        $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
+                        $producto_historial->id_cosmica_online = $id;
+                        $producto_historial->save();
+
+                        $product_first->stock -= $campo->cantidad;
+                        $product_first->save();
+                    }
+                }
+            }else if($request->get('estatus_cotizacion') == 'Enviado'){
+                $nota->fecha_envio  = date("Y-m-d H:i:s");
+                $nota->fecha_aprobada  = date("Y-m-d");
+                $producto_pedido = OrdersCosmicaOnline::where('id_notas_productos', $id)->get();
+                foreach ($producto_pedido as $campo) {
+                    $product_first = Products::where('id', $campo->id_producto)->where('categoria', '!=', 'Ocultar')->first();
+                    if ($product_first && $campo->cantidad > 0) {
+                        $producto_historial = new HistorialVendidos;
+                        $producto_historial->id_producto = $product_first->id;
+                        $producto_historial->stock_viejo = $product_first->stock;
+                        $producto_historial->cantidad_restado = $campo->cantidad;
+                        $producto_historial->stock_actual = $product_first->stock - $campo->cantidad;
+                        $producto_historial->id_venta_nas = $id;
+                        $producto_historial->save();
+
+                        $product_first->stock -= $campo->cantidad;
+                        $product_first->save();
+                    }
+                }
+            }
+
+        $nota->save();
+
+        Session::flash('success', 'Se ha guardado sus datos con exito');
+        return redirect()->route('index_preparacion.bodega')
+        ->with('success', 'Creado exitosamente.');
+    }
+
+    public function checkProduct(Request $request){
+
+        $sku_scaner = $request->input('sku');
+        $sku = trim($sku_scaner);
+        $idNotaProducto = $request->input('id_notas_productos');
+
+        // Busca el producto en la tabla `Products`
+        $product = Products::where('sku', $sku)->first();
+
+        if ($product) {
+            // Verifica y actualiza el registro correcto en `productos_notas`
+            $notaProducto = OrdersCosmicaOnline::where('id_order', $idNotaProducto)
+            ->where('id_producto', $product->id)
+            ->first();
+
+            if ($notaProducto) {
+                if ($notaProducto->escaneados < $notaProducto->cantidad) {
+                    $notaProducto->escaneados = intval($notaProducto->escaneados) + 1; // Convierte escaneados a entero y suma 1
+                    if (intval($notaProducto->escaneados) === intval($notaProducto->cantidad)) { // Convierte cantidad a entero para comparar
+                        $notaProducto->estatus = 1; // Marca como completo
+                    }
+                        $notaProducto->save();
+                    return response()->json(['status' => 'success', 'escaneados' => $notaProducto->escaneados]);
+                } else {
+
+                    return response()->json(['status' => 'error', 'message' => 'Cantidad ya alcanzada']);
+                }
+            }
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'Producto no encontrado o no corresponde a la nota']);
     }
 
 }

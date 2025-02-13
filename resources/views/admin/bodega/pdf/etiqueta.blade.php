@@ -3,7 +3,12 @@
 <html lang="es">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <title>Etiqueta {{$registro->folio}}</title>
+        @if ($registro->folio == NULL)
+            <title>Etiqueta {{$registro->id}}</title>
+        @else
+            <title>Etiqueta {{$registro->folio}}</title>
+        @endif
+
     </head>
     <style>
 
@@ -43,8 +48,11 @@
                 @if ($tipo == 'nas')
                     <img class="barcode" src="data:image/png;base64, {!! DNS2D::getBarcodePNG('NP_' . $registro->id, 'QRCODE', 3.5, 3.5) !!}" alt="Código QR">
                     <p>{{$tipo}}</p>
-                @else
+                @elseif ($tipo == 'cosmica')
                     <img class="barcode" src="data:image/png;base64, {!! DNS2D::getBarcodePNG('NC_' . $registro->id, 'QRCODE', 3.5, 3.5) !!}" alt="Código QR">
+                    <p>{{$tipo}}</p>
+                @else
+                    <img class="barcode" src="data:image/png;base64, {!! DNS2D::getBarcodePNG('EC_' . $registro->id, 'QRCODE', 3.5, 3.5) !!}" alt="Código QR">
                     <p>{{$tipo}}</p>
                 @endif
                 {{-- <p style="font-size: 9px;padding:1px;margin-top:5px;margin-left:8px;">{{ explode('_', $notas_preparacion->id)[0] }}</p> --}}
@@ -52,7 +60,12 @@
             </div>
 
             <div class="contenedo_padre_dos">
-                <p style="font-size: 9px;padding:1px;margin-top:5px;margin-left:8px;">Folio: {{ Str::limit($registro->folio, 75) }}</p>
+                @if ($registro->folio == NULL)
+                    <p style="font-size: 9px;padding:1px;margin-top:5px;margin-left:8px;">Folio: {{ Str::limit($registro->id, 75) }}</p>
+                @else
+                    <p style="font-size: 9px;padding:1px;margin-top:5px;margin-left:8px;">Folio: {{ Str::limit($registro->folio, 75) }}</p>
+                @endif
+
                 <p style="font-size: 9px;padding:1px;margin-top:2px;margin-left:8px;">¿Problemas con tu pedido? Contactanos <b>56 3754 0093</b></p>
 
             </div>

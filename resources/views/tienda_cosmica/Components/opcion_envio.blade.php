@@ -18,42 +18,42 @@
         <div class="col-4">
             <div class="input-group  mb-4">
                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                <input type="number" name="" id="" class="form-control input_custom_checkout" placeholder="CP *" >
+                <input type="number" name="postcode" id="postcode" class="form-control input_custom_checkout" placeholder="CP *" >
             </div>
         </div>
 
         <div class="col-8">
             <div class="input-group mb-4">
                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                <input type="text" name="" id="" class="form-control input_custom_checkout" placeholder="colonia*" >
+                <input type="text" name="country" id="country" class="form-control input_custom_checkout" placeholder="colonia*" >
             </div>
         </div>
 
         <div class="col-6">
             <div class="input-group mb-4">
                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                <input type="text" name="" id="" class="form-control input_custom_checkout" placeholder="Estado*" >
+                <input type="text" name="state" id="state" class="form-control input_custom_checkout" placeholder="Estado*" >
             </div>
         </div>
 
         <div class="col-6">
             <div class="input-group mb-4">
                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                <input type="text" name="" id="" class="form-control input_custom_checkout" placeholder="Alcaldia/Municipio *" >
+                <input type="text" name="city" id="city" class="form-control input_custom_checkout" placeholder="Alcaldia/Municipio *" >
             </div>
         </div>
 
         <div class="col-12">
             <div class="input-group mb-4 ">
                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Calle*" >
+                <input type="text" name="direccion" id="direccion" class="form-control input_custom_checkout" placeholder="Calle*" >
             </div>
         </div>
 
         <div class="col-12">
             <div class="input-group mb-4 ">
                 <span class="input-group-text span_custom_checkout" id=""><i class="fas fa-sort-alpha-up"></i></span>
-                <input type="text" name="name" id="name" class="form-control input_custom_checkout" placeholder="Referencia*" >
+                <input type="text" name="referencia" id="referencia" class="form-control input_custom_checkout" placeholder="Referencia*" >
             </div>
         </div>
 

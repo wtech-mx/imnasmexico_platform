@@ -41,12 +41,16 @@
 
                             <nav>
                                 <div class="nav nav-tabs" >
-                                    <a class="nav-link active" href="{{ route('pedidos_cosmica_ecommerce.index') }}">
-                                        Aprobada <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
+                                    <a class="nav-link" href="{{ route('pedidos_cosmica_ecommerce.index') }}">
+                                        Pendientes Guia <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
+                                    </a>
+
+                                    <a class="nav-link" href="{{ route('pedidos_cosmica_ecommerce.index_preparacion') }}">
+                                        En Preparación <img src="{{ asset('assets/cam/comprobante.png') }}" alt="" width="35px">
                                     </a>
 
                                     <a class="nav-link " href="{{ route('pedidos_cosmica_ecommerce.index_pen') }}">
-                                        Pendiente <img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
+                                        Pendiente Pago<img src="{{ asset('assets/cam/cheque.png') }}" alt="" width="35px">
                                     </a>
                                 </div>
                             </nav>
@@ -105,7 +109,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        @include('admin.cotizacion_cosmica.guia')
+                                        @include('admin.cosmica_ecommerce.modal_direccion')
                                     @endforeach
                                 </tbody>
                             </table>

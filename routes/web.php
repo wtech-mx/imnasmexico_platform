@@ -510,7 +510,12 @@ Route::group(['middleware' => ['auth']], function() {
     // =============== M O D U L O  E C O M M E R C E ===============================
     Route::get('cosmica/admin/pedidos/cosmika/ecommerce', [App\Http\Controllers\PedidosWooController::class, 'index_cosmika_ecommerce_apro'])->name('pedidos_cosmica_ecommerce.index');
     Route::get('cosmica/admin/pedidos/cosmika/ecommerce/pendientes', [App\Http\Controllers\PedidosWooController::class, 'index_cosmika_ecommerce_pen'])->name('pedidos_cosmica_ecommerce.index_pen');
+    Route::get('cosmica/admin/pedidos/cosmika/ecommerce/preparacion', [App\Http\Controllers\PedidosWooController::class, 'index_cosmika_ecommerce_preparacion'])->name('pedidos_cosmica_ecommerce.index_preparacion');
     Route::get('cosmica/admin/pedidos/cosmika/imprimir/{id}', [App\Http\Controllers\PedidosWooController::class, 'imprimir_cosmica'])->name('pedidos_cosmica.imprimir');
+    Route::patch('cosmica/admin/pedidos/cosmika/guia/{id}', [App\Http\Controllers\PedidosWooController::class, 'update_guia_ecommerce'])->name('notas_cosmica.update_guia_ecommerce');
+    Route::get('cosmica/admin/bodega/preparacion/scaner/{id}', [App\Http\Controllers\PedidosWooController::class, 'preparacion_scaner'])->name('preparacion_scaner.bodega_cosmica');
+    Route::patch('cosmica/admin/bodega/estatus/{id}', [App\Http\Controllers\PedidosWooController::class, 'update_estatus'])->name('ecommerce_cosmica.update_estatus');
+    Route::post('cosmica/admin/bodega/check-product', [App\Http\Controllers\PedidosWooController::class, 'checkProduct'])->name('check_cosmica_eco.product');
     // =============== M O D U L O   N O T A S ===============================
     Route::get('/admin/notas/cursos', [App\Http\Controllers\NotasCursosController::class, 'index'])->name('notas_cursos.index');
     Route::get('/admin/notas/cursos/crear', [App\Http\Controllers\NotasCursosController::class, 'create'])->name('notas_cursos.crear');
