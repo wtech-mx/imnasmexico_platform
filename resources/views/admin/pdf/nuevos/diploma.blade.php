@@ -328,17 +328,6 @@
             object-fit: contain; /* Mantiene la proporción sin cortar */
         }
 
-        .clave_rfc_img{
-            position: absolute;
-            top:39px;
-            left: 95px;
-            font-size: 8px;
-        }
-
-        .img_sello{
-            position: relative;
-            margin-top:50px;
-        }
 
     </style>
 </head>
@@ -605,9 +594,8 @@
             </div>
 
             <div class="row">
-                <div class="col-4 text-center border img_sello">
-                    <img src="{{ $basePath . 'sello-constancia.png'}}" class="img_traseras ">
-                    <p class="clave_rfc_img" style="">{{ $clave_rfc }}</p>
+                <div class="col-4 text-center border ">
+                    <img src="{{ $basePath . 'sello-constancia.webp'}}" class="img_traseras">
                 </div>
 
                 <div class="col-4 text-center border ">
