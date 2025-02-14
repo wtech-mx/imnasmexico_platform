@@ -307,7 +307,7 @@
 
                                                         <a class="btn btn-sm btn-info text-white" href="{{ route('woo_nas_orders.pdf', $order->id) }}" target="_blank">
                                                             <i class="fa fa-file-pdf"></i>
-                                                        </a>
+                                                        </a>
 
                                                         @if(isset($order->meta_data))
                                                             @foreach($order->meta_data as $meta)
@@ -329,55 +329,6 @@
                                                             <i class="fa fa-barcode"></i>
                                                         </a>
 
-                                                    </td>
-                                                </tr>
-
-                                                {{-- @include('admin.bodega.modal_productos') --}}
-                                                @include('admin.bodega.modal_edit_estatus_woo')
-                                                @include('admin.bodega.modal_estatus_woo')
-
-                                            @endforeach
-
-                                            @foreach($orders_tienda_cosmica as $order)
-                                                <tr style="background: #80486B;color:#fff">
-                                                    <td>{{ $order->id }}</td>
-                                                    <td>{{ $order->billing->first_name . ' ' . $order->billing->last_name }}</td>
-                                                    <td>
-                                                            En preparación
-                                                    </td>
-                                                    <td>
-                                                        @foreach($order->meta_data as $meta)
-                                                            @if($meta->key == 'fecha_y_hora_guia')
-                                                                {{ \Carbon\Carbon::parse($meta->value)->isoFormat('dddd DD MMMM hh:mm a') }}
-                                                            @endif
-                                                        @endforeach
-
-                                                    </td>
-                                                    <td>${{ $order->total }}</td>
-                                                    <td>
-                                                        <a class="btn btn-sm btn-info text-white" href="{{ route('woo_cosmica_orders.pdf', $order->id) }}" target="_blank">
-                                                            <i class="fa fa-file-pdf"></i>
-                                                        </a>
-
-                                                        @if(isset($order->meta_data))
-                                                            @foreach($order->meta_data as $meta)
-                                                                @if($meta->key == 'guia_de_envio')
-
-                                                                <a class="text-center text-white btn btn-sm" href="{{asset('guias/'.$meta->value) }}" download="{{asset('guias/'.$meta->value) }}" style="background: #e6ab2d;">
-                                                                    <i class="fa fa-truck"></i>
-                                                                </a>
-
-                                                                @endif
-                                                            @endforeach
-                                                        @endif
-
-                                                        <a type="button" class="btn btn-sm btn-danger text-white" data-bs-toggle="modal" data-bs-target="#estatusModal_woo_{{$order->id}}">
-                                                            <i class="fa fa-info"></i>
-                                                        </a>
-
-                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_cosmica_online.bodega', $order->id) }}">
-                                                            <i class="fa fa-barcode"></i>
-                                                        </a>
                                                     </td>
                                                 </tr>
 
@@ -421,7 +372,61 @@
                                                 @include('admin.bodega.modal_estatus_edit_para')
 
                                             @endforeach
+                                            
+                                            @foreach ($oreders_cosmica_ecommerce as $item)
+                                                <tr style="background: #80486B;color:#fff">
+                                                    <td>
+                                                        <h5>
+                                                            TC{{ $item->id }}
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            {{ $item->User->name }}
+                                                            {{ $item->User->telefono }}
+                                                        </h5>
+                                                    </td>
 
+                                                    <td>
+                                                        En preparación <br>
+                                                        Ecommerce Cosmica
+                                                    </td>
+
+                                                    <td>
+                                                        <h5>
+                                                            {{ \Carbon\Carbon::parse($item->fecha_preparacion)->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                        </h5>
+                                                    </td>
+                                                    <td><h5>${{ $item->pago }}</h5></td>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $item->id]) }}">
+                                                            <i class="fa fa-list-alt"></i>
+                                                        </a>
+
+                                                        <a class="text-center text-white btn btn-sm"
+                                                            href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'ecommerce_cosmica', 'id' => $item->id]) }}"
+                                                            style="background: #7d2de6;">
+                                                            <i class="fa fa-qrcode"></i>
+                                                        </a>
+
+                                                        @if ($item->forma_envio == 'PickUp')
+                                                            <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$item->id}}" style="background: #e6ab2d; color: #ffff">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @else
+                                                            <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$item->guia_doc) }}" download="{{asset('pago_fuera/'.$item->guia_doc) }}" style="background: #e6ab2d;">
+                                                                <i class="fa fa-truck"></i>
+                                                            </a>
+                                                        @endif
+
+                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner.bodega_cosmica', $item->id) }}">
+                                                            <i class="fa fa-barcode"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+
+                                                @include('admin.cosmica_ecommerce.modal_direccion')
+                                            @endforeach
                                             </tbody>
                                 </table>
 

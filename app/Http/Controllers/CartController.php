@@ -141,6 +141,7 @@ class CartController extends Controller
                 $user->country = $request->get('country');
                 $user->direccion = $request->get('direccion');
                 $user->city = $request->get('city');
+                $user->referencia = $request->get('referencia');
                 $user->update();
             } else {
                 $user = User::where('email', $request->email)->first();
@@ -149,6 +150,7 @@ class CartController extends Controller
                 $user->country = $request->get('country');
                 $user->direccion = $request->get('direccion');
                 $user->city = $request->get('city');
+                $user->referencia = $request->get('referencia');
                 $user->update();
             }
             $payer = $user;
@@ -167,6 +169,7 @@ class CartController extends Controller
             $payer->country = $request->get('country');
             $payer->direccion = $request->get('direccion');
             $payer->city = $request->get('city');
+            $payer->referencia = $request->get('referencia');
             $payer->save();
             $datos = User::where('id', '=', $payer->id)->first();
         }
@@ -190,6 +193,9 @@ class CartController extends Controller
             $order_cosmica->estatus = 0;
             $order_cosmica->code = $code;
             $order_cosmica->external_reference = $code;
+            if($request->get('postcode') != NULL ){
+                $order_cosmica->forma_envio = 'envio';
+            }
             $order_cosmica->save();
 
             foreach (session('cart_productos') as $id => $details) {
