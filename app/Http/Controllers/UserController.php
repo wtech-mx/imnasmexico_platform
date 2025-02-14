@@ -199,7 +199,10 @@ class UserController extends Controller
 
         $notasAprobadasCosmicaComision = NotasProductosCosmica::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])
         ->where('tipo_nota', '=', 'Cotizacion')
-        ->where('id_admin_venta', '=', $id) // Filtrar por id_admin_venta
+        ->where(function ($query) use ($id, $idsPermitidos) {
+            $query->where('id_admin_venta', '=', $id) // Filtrar por id_admin_venta
+                  ->orWhere('id_admin', '=', $id);  // Incluir si está en id_admin
+        }) // Filtrar por id_admin_venta
         ->where(function ($query) use ($idsPermitidos) {
             $query->whereNotIn('id_kit', $idsPermitidos)
                   ->orWhereNotIn('id_kit2', $idsPermitidos)
@@ -228,15 +231,19 @@ class UserController extends Controller
         ->leftJoin('products as p6', 'notas_productos_cosmica.id_kit6', '=', 'p6.id')
         ->whereBetween('notas_productos_cosmica.fecha_aprobada', [$startOfWeek, $endOfWeek])
         ->where('notas_productos_cosmica.tipo_nota', '=', 'Cotizacion')
-        ->where('users.turno', '=', 'Matutino')
+        ->where(function ($query) use ($id, $idsPermitidos) {
+            $query->where('id_admin_venta', '=', $id) // Filtrar por id_admin_venta
+                  ->orWhere('id_admin', '=', $id);  // Incluir si está en id_admin
+        })
         ->selectRaw("
             SUM(
-                CASE WHEN id_kit IN (" . implode(',', $idsPermitidos) . ") THEN p1.precio_normal ELSE 0 END +
+                (CASE WHEN id_kit IN (" . implode(',', $idsPermitidos) . ") THEN p1.precio_normal ELSE 0 END +
                 CASE WHEN id_kit2 IN (" . implode(',', $idsPermitidos) . ") THEN p2.precio_normal ELSE 0 END +
                 CASE WHEN id_kit3 IN (" . implode(',', $idsPermitidos) . ") THEN p3.precio_normal ELSE 0 END +
                 CASE WHEN id_kit4 IN (" . implode(',', $idsPermitidos) . ") THEN p4.precio_normal ELSE 0 END +
                 CASE WHEN id_kit5 IN (" . implode(',', $idsPermitidos) . ") THEN p5.precio_normal ELSE 0 END +
                 CASE WHEN id_kit6 IN (" . implode(',', $idsPermitidos) . ") THEN p6.precio_normal ELSE 0 END
+                ) * (1 - COALESCE(notas_productos_cosmica.restante, 0) / 100)
             ) AS total_precio_kits
         ")
         ->value('total_precio_kits');
@@ -244,7 +251,10 @@ class UserController extends Controller
             $notasAprobadasMatutinoReg = NotasProductosCosmica::join('users', 'notas_productos_cosmica.id_admin_venta', '=', 'users.id')
             ->whereBetween('notas_productos_cosmica.fecha_aprobada', [$startOfWeek, $endOfWeek])
             ->where('notas_productos_cosmica.tipo_nota', '=', 'Cotizacion')
-            ->where('users.turno', '=', 'Matutino')
+            ->where(function ($query) use ($id, $idsPermitidos) {
+                $query->where('id_admin_venta', '=', $id) // Filtrar por id_admin_venta
+                      ->orWhere('id_admin', '=', $id);  // Incluir si está en id_admin
+            })
             ->where(function ($query) use ($idsPermitidos) {
                 $query->whereIn('notas_productos_cosmica.id_kit', $idsPermitidos)
                       ->orWhereIn('notas_productos_cosmica.id_kit2', $idsPermitidos)
@@ -324,8 +334,8 @@ class UserController extends Controller
         $comision_individual = 0;
         $comisionVespertino_individual = 0;
 
-        $comision_individual = $montoComisionMatutino / $user_comisionmatutino;
-        $comisionVespertino_individual = $montoComisionVespertino / $user_comisionvespertino;
+        $comision_individual = $montoComisionMatutino;
+        $comisionVespertino_individual = $montoComisionVespertino;
 
         $pdf = \PDF::loadView('admin.users.pdf_comision_new', compact('today', 'user_comision_kit', 'notasAprobadasMatutinoReg', 'notasAprobadasCosmicaComision', 'notasAprobadasMatutino', 'notasAprobadasVespertino', 'comision', 'comisionVespertino', 'comision_individual', 'comisionVespertino_individual'));
        return $pdf->stream();
