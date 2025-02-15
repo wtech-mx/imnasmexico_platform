@@ -21,9 +21,10 @@
 <section class="primario bg_overley" style="">
     @if(session('show_iframe') || $show_iframe)
         <div class="d-flex justify-content-center">
-            <iframe src="https://cosmicaskin.com/protocolo/" frameborder="0" class="container" style="margin-top: 6rem"></iframe>
+            <iframe src="{{asset('books/pdf/revista_comprimida.pdf')}}" frameborder="0" class="container" style="margin-top: 6rem"></iframe>
         </div>
     @else
+
         <div class="container" id="container1" style="margin-top: 6rem">
             <div class="d-flex justify-content-center">
                 <form action="{{ route('distribuidoras.validate_protocolo', $distribuidora->id) }}" method="POST">
