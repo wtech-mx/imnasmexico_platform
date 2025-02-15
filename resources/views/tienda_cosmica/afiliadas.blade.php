@@ -66,7 +66,7 @@
                 <div class="container_lineas_afiliados">
                     <div class="content mb-3 mt-3">
                         <div class="img_container_afiliados mx-auto">
-                            <img class="img_grid_afiliados" src="{{ asset('cosmika/estados/' . str_replace(' ', '_', $item->User->state) . '.png') }}" alt="{{ $item->User->state }}">
+                            <img class="img_grid_afiliados" src="{{ asset('cosmika/estados/' . urlencode($item->User->state) . '.png') }}" alt="{{ $item->User->state }}">
                         </div>
                     </div>
                 </div>
