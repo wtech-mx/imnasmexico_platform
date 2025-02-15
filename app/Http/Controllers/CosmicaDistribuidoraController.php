@@ -96,6 +96,7 @@ class CosmicaDistribuidoraController extends Controller
             $payer->username = $request->get('telefono');
             $payer->code = $code;
             $payer->telefono = $request->get('telefono');
+            $payer->state = $request->get('state');
             $payer->cliente = '1';
             $payer->password = Hash::make($request->get('telefono'));
             $payer->save();
@@ -146,6 +147,11 @@ class CosmicaDistribuidoraController extends Controller
         }else{
             $ruta_webpage = public_path() . '/utilidades';
         }
+
+        $user = User::find($request->id_user);
+        $user->state = $request->get('state');
+        $user->update();
+
 
         $usercosmika =  Cosmikausers::findorfail($id);
         if($usercosmika->membresia != 'Permanente'){

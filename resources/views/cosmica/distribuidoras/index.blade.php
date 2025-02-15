@@ -86,6 +86,9 @@
                                             {{ $item->User->email }}
                                             <br>
                                             {{ $item->User->telefono }}
+                                            <br>
+                                            {{ $item->User->state }}
+
                                         </td>
 
                                         <td>
