@@ -43,7 +43,7 @@
                                                     <div class="row">
 
                                                         <div class="col-12  col-md-5 col-lg-5 mb-4 ">
-                                                            @if (pathinfo($documentoSubido->documento, PATHINFO_EXTENSION) == 'png')
+                                                            @if (pathinfo($documento->nombre, PATHINFO_EXTENSION) == 'png')
                                                                 <a style="text-decoration: none; color: #000">
                                                                     <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
                                                                     Subir proyecto
