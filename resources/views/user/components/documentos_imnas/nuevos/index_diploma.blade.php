@@ -315,6 +315,17 @@ $basePathFirmaDirect = ($domain == 'plataforma.imnasmexico.com')
             object-fit: contain; /* Mantiene la proporción sin cortar */
         }
 
+        .clave_rfc_img{
+            position: absolute;
+            top:39px;
+            left: 60px;
+            font-size: 4px;
+        }
+
+        .img_sello{
+            position: relative;
+        }
+
     </style>
 @endsection
 
@@ -449,7 +460,7 @@ $basePathFirmaDirect = ($domain == 'plataforma.imnasmexico.com')
                         <div class="col-3 text-center">
                             <img src="{{ $basePathFirmaDirect  . '/' . $tickets?->User?->telefono . '/' . $tickets?->User?->RegistroImnasEscuela?->firma }}" class="img_firmas_delanteras_dire">
                             <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">{{ $tickets?->User?->name ?? '' }}</h3>
-                            <h5 class="texto_emosires_dire capitalize m-0 p-0"> {{ $tickets?->texto_director }}</h5>
+                            <h5 class="texto_emosires_dire capitalize m-0 p-0"> {{ $tickets?->texto_director }} {{ $tickets?->texto_firma_personalizada  }}</h5>
                         </div>
 
                         @else
@@ -467,7 +478,7 @@ $basePathFirmaDirect = ($domain == 'plataforma.imnasmexico.com')
                         </div>
 
                         <div class="col-4 text-center border ">
-                            <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
+                            <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras">
                             <h3 class="h3_nomre_firmas capitalize m-0 p-0">Lic. Ma. Luisa Flores</h3>
                             <h5 class="texto_emosires capitalize m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
                         </div>
@@ -584,8 +595,9 @@ $basePathFirmaDirect = ($domain == 'plataforma.imnasmexico.com')
                 </div>
 
                 <div class="row">
-                    <div class="col-4 text-center  ">
-                        <img src="{{ $basePath . 'sello-constancia.webp'}}" class="img_traseras">
+                    <div class="col-4 text-center img_sello my-auto">
+                        <img src="{{ $basePath . 'sello-constancia.png'}}" class="img_traseras">
+                        <p class="clave_rfc_img" style="">{{ $user->clave_clasificacion }}</p>
                     </div>
 
                     <div class="col-4 text-center  ">

@@ -112,6 +112,8 @@ class FoliosController extends Controller
         $registroimnas->tam_letra_folio_cedula = $request->get('tam_letra_folio_cedula');
         $registroimnas->tam_letra_folioTrasero_cedula = $request->get('tam_letra_folioTrasero_cedula');
         $registroimnas->tam_letra_lista_tira_materias = $request->get('tam_letra_lista_tira_materias');
+        $registroimnas->texto_firma_personalizada = $request->get('texto_firma_personalizada');
+        $registroimnas->texto_firma_personalizada2 = $request->get('texto_firma_personalizada2');
         $registroimnas->capitalizar_nombre = $request->get('capitalizar_nombre');
         $registroimnas->texto_director = $request->get('texto_director');
         $registroimnas->firma_director = $request->get('firma_director');
