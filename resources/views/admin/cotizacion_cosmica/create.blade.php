@@ -17,7 +17,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('cotizacion_cosmica.store') }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('cotizacion_cosmica.store') }}" enctype="multipart/form-data" role="form" id="miFormulario">>
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
@@ -324,6 +324,26 @@
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+
+    var form = document.getElementById('miFormulario');
+
+    form.addEventListener('submit', function(event) {
+        var cantidadInputs = document.querySelectorAll('.campo .cantidad');
+        var isValid = true;
+
+        cantidadInputs.forEach(function(input) {
+            if (input.value === '' || input.value < 1) {
+                isValid = false;
+                alert('La cantidad no puede estar vacía o ser menor que 1');
+                input.focus();
+            }
+        });
+
+        if (!isValid) {
+            event.preventDefault(); // Prevenir el envío del formulario
+        }
+    });
+
     var agregarCampoBtn = document.getElementById('agregarCampo');
     var camposContainer = document.getElementById('camposContainer');
     var campoExistente = camposContainer.querySelector('.campo');
