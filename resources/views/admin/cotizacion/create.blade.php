@@ -17,7 +17,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('notas_cotizacion.store') }}" enctype="multipart/form-data" role="form">
+                        <form method="POST" action="{{ route('notas_cotizacion.store') }}" enctype="multipart/form-data" role="form" id="miFormulario">
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
@@ -39,7 +39,9 @@
                                                 <select class="form-select cliente d-inline-block"  data-toggle="select" id="id_client" name="id_client" value="{{ old('id_client') }}">
                                                     <option value="">Seleccionar cliente</option>
                                                     @foreach ($clientes as $item)
-                                                        <option value="{{ $item->id }}">{{ $item->name }} / {{ $item->telefono }}</option>
+                                                        <option value="{{ $item->id }}" >
+                                                            {{ $item->name }} / {{ $item->telefono }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -56,7 +58,7 @@
                                                             <span class="input-group-text" id="basic-addon1">
                                                                 <img src="{{ asset('assets/cam/nombre.png') }}" alt="" width="35px">
                                                             </span>
-                                                            <input id="name" name="name" type="text" class="form-control" placeholder="Nombre">
+                                                            <input id="name" name="name" type="text" class="form-control" placeholder="Nombre" value="{{old('name')}}">
                                                         </div>
                                                     </div>
 
@@ -66,7 +68,7 @@
                                                             <span class="input-group-text" id="basic-addon1">
                                                                 <img src="{{ asset('assets/cam/correo-electronico.png') }}" alt="" width="35px">
                                                             </span>
-                                                            <input id="email" name="email" type="email" class="form-control" placeholder="Correo">
+                                                            <input id="email" name="email" type="email" class="form-control" placeholder="Correo" value="{{old('Correo')}}">
                                                         </div>
                                                     </div>
 
@@ -76,7 +78,7 @@
                                                             <span class="input-group-text" id="basic-addon1">
                                                                 <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
                                                             </span>
-                                                            <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10">
+                                                            <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10" value="{{old('telefono')}}">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -129,7 +131,10 @@
                                                                 <span class="input-group-text" id="basic-addon1">
                                                                     <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
                                                                 </span>
-                                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad" >
+                                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad">
+                                                                @error('campo3.*')
+                                                                    <div class="alert alert-danger mt-1">{{ $message }}</div>
+                                                                @enderror
                                                             </div>
                                                         </div>
 
@@ -303,7 +308,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <h4 for="name">Comentario/nota</h4>
-                                            <textarea class="form-control" name="nota" id="nota" cols="30" rows="3"></textarea>
+                                            <textarea class="form-control" name="nota" id="nota" cols="30" rows="3">{{ old('nota') }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -323,6 +328,27 @@
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+
+
+        var form = document.getElementById('miFormulario');
+
+        form.addEventListener('submit', function(event) {
+            var cantidadInputs = document.querySelectorAll('.campo .cantidad');
+            var isValid = true;
+
+            cantidadInputs.forEach(function(input) {
+                if (input.value === '' || input.value < 1) {
+                    isValid = false;
+                    alert('La cantidad no puede estar vacía o ser menor que 1');
+                    input.focus();
+                }
+            });
+
+            if (!isValid) {
+                event.preventDefault(); // Prevenir el envío del formulario
+            }
+        });
+
         var agregarCampoBtn = document.getElementById('agregarCampo');
         var camposContainer = document.getElementById('camposContainer');
         var campoExistente = camposContainer.querySelector('.campo');

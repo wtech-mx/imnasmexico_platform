@@ -110,6 +110,16 @@ class CotizacionController extends Controller
     }
 
     public function store(request $request){
+
+        // Validar que todos los campos de cantidad estén presentes y no vacíos
+        $request->validate([
+            'campo3.*' => 'required|integer|min:1'
+        ], [
+            'campo3.*.required' => 'El campo de cantidad es obligatorio.',
+            'campo3.*.integer' => 'El campo de cantidad debe ser un número entero.',
+            'campo3.*.min' => 'La cantidad mínima es 1.'
+        ]);
+
         // Creacion de user
         $code = Str::random(8);
 
