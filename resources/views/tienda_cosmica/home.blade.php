@@ -230,6 +230,48 @@
         </div>
 
         <div class="item">
+            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-esencia">
+                <div class="container_lineas_grid">
+                    <div class="content mb-3 mt-3">
+                        <div class="img_container mx-auto">
+                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/esencial.png') }}" alt="Protector">
+                        </div>
+                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
+                        <h5 class="text-center Quinsi color_2 subtitle_linea m-0">Esencia Vital</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="item">
+            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-pure">
+                <div class="container_lineas_grid">
+                    <div class="content mb-3 mt-3">
+                        <div class="img_container mx-auto">
+                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/pure.png') }}" alt="Protector">
+                        </div>
+                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
+                        <h5 class="text-center Quinsi color_2 subtitle_linea m-0">Pure</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="item">
+            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-rose">
+                <div class="container_lineas_grid">
+                    <div class="content mb-3 mt-3">
+                        <div class="img_container mx-auto">
+                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/caviar.png') }}" alt="Protector">
+                        </div>
+                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
+                        <h5 class="text-center Quinsi color_2 subtitle_linea m-0">Rose Caviar</h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="item">
             <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-flash">
                 <div class="container_lineas_grid">
                     <div class="content mb-3 mt-3">
