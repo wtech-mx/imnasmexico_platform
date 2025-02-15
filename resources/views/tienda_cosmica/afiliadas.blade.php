@@ -66,7 +66,7 @@
                 <div class="container_lineas_afiliados">
                     <div class="content mb-3 mt-3">
                         <div class="img_container_afiliados mx-auto">
-                            <img class="img_grid_afiliados" src="http://imnasmexico_platform.test/utilidades/dis_logo.png" alt="Protector">
+                            <img class="img_grid_afiliados" src="{{ asset('cosmika/estados/' . str_replace(' ', '_', $item->User->state) . '.png') }}" alt="{{ $item->User->state }}">
                         </div>
                     </div>
                 </div>
@@ -82,6 +82,7 @@
                 <p class="text-center">
                     <strong>{{ $item->User->name }}</strong> <br>
                     {{ $item->direccion_local }}
+
                 </p>
 
                 <div class="d-flex justify-content-center">
