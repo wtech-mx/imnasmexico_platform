@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use App\Models\Cosmikausers;
-
+use App\Models\ProductosBundleId;
 use Illuminate\Http\Request;
 
 
@@ -209,6 +209,22 @@ class EcommerceCosmikaController extends Controller
         ->get();
 
         return view('tienda_cosmica.productos_corporales',compact('products_Galaxia','products_Pure','products_Estelar','products_Eclipse','products_Renacer','products_Flash','products_Astros','products_rose','products_Esencia'));
+    }
+
+    public function kits(){
+
+        $products_kits = Products::orderBy('id','DESC')->where('categoria', '=', 'Cosmica')->where('subcategoria', '=', 'Kit')->orderby('nombre','asc')->get();
+
+        return view('tienda_cosmica.kits', compact('products_kits'));
+    }
+
+    public function view_kit($id){
+
+        $cotizacion = Products::find($id);
+        $cotizacion_productos = ProductosBundleId::where('id_product', '=', $id)->where('price', '!=', NULL)->get();
+        $products = Products::orderBy('nombre','ASC')->get();
+
+        return view('tienda_cosmica.kits_view', compact('products', 'cotizacion', 'cotizacion_productos'));
     }
 
     public function buscar(Request $request) {
