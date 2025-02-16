@@ -39,7 +39,7 @@
                             <div class="container_lineas_single_carousel mx-auto" style="width:80%; ">
                                 <div class="content mb-3 mt-3">
                                     <div class="img_container_single_corousel mx-auto">
-                                        <img class="img_grid_products_single_carousel" src="{{$product->imagenes}}" alt="Protector">
+                                        <img class="img_grid_products_single_carousel" src="{{asset('products/'.$product->imagenes) }}" alt="Protector">
                                     </div>
                                 </div>
                             </div>
