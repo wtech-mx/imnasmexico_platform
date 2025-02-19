@@ -153,7 +153,7 @@
 
             <div class="col-8 text-center border p-2">
                 <h1 class="titulo">
-                    Oirganizado por  {{ $user->escuela }}
+                    El Registro Nacional Instituto Mexicano Naturales Ain Spa  en conjunto con {{ $user->escuela }}
                 </h1>
             </div>
 
@@ -207,7 +207,7 @@
             <div class="col-2 text-center border">
             </div>
             <div class="col-8 text-center border ">
-                <p class="footer p-0 m-0">Organizado por la marca {{ $user->escuela }} </p>
+                <p class="footer p-0 m-0">Organizado por {{ $user->escuela }} </p>
                 <p class="parrafo2 p-0 m-0">Agente  capacitador externo del Registro Nacional Instituto Mexicano Naturales Ain Spa</p>
             </div>
             <div class="col-2 text-center border">
