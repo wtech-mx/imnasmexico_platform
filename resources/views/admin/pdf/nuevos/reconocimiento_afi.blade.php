@@ -31,7 +31,7 @@
         .container {
             position: relative;
             width: 816px;  /* 8.5 in * 96 dpi */
-            height: 1056px; /* 11 in * 96 dpi */
+            height: 1080px; /* 11 in * 96 dpi */
             margin: 0 auto;
             overflow: hidden;
             background-image: url('{{ $basePath . 'fondo.png'}}');
