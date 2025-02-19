@@ -25,7 +25,7 @@
     <style>
 
         .border {
-            border: 1px solid #000;
+            border: 0px solid #000;
         }
 
         .container {
@@ -108,18 +108,17 @@
         }
 
         .img_logo {
-            width: 300px;  /* Tamaño máximo permitido */
-            height: 300px;
+            width: 330px;  /* Tamaño máximo permitido */
+            height: auto;
             margin-left: auto;
             margin-right: auto;
-            margin-top: 70px;
+            margin-top: 0px;
             padding: 0;
-            margin: 0;
         }
 
         .img_logo img {
-            max-width: 100%;  /* Tamaño máximo permitido */
-            max-height: 100%;
+            max-width: 90%;  /* Tamaño máximo permitido */
+            max-height: 90%;
             object-fit: contain; /* Mantiene la proporción sin cortar */
             padding: 0;
             margin: 0;
