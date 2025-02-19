@@ -113,10 +113,16 @@
             margin-left: auto;
             margin-right: auto;
             margin-top: 70px;
+            padding: 0;
+            margin: 0;
         }
 
         .img_logo img {
+            max-width: 150px;  /* Tamaño máximo permitido */
+            max-height: 150px;
             object-fit: contain; /* Mantiene la proporción sin cortar */
+            padding: 0;
+            margin: 0;
         }
 
 
