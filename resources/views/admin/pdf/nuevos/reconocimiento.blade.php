@@ -104,16 +104,20 @@
         }
 
         .img_logo {
-            width: 160px;  /* Tamaño máximo permitido */
-            height: 160px;
+            width: 330px;  /* Tamaño máximo permitido */
+            height: auto;
             margin-left: auto;
             margin-right: auto;
+            margin-top: 0px;
+            padding: 0;
         }
 
         .img_logo img {
-            max-width: 100%;  /* Evita que la imagen se estire */
-            max-height: 100%;
+            max-width: 90%;  /* Tamaño máximo permitido */
+            max-height: 90%;
             object-fit: contain; /* Mantiene la proporción sin cortar */
+            padding: 0;
+            margin: 0;
         }
 
 
