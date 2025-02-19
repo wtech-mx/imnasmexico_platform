@@ -216,8 +216,7 @@
             </div>
 
             <div class="col-4 text-center border"  style="margin-top: 60px">
-                <img src="{{ $basePath . 'Sello-reconocimiento.webp'}}" style="width: 120px;">
-
+                <img src="{{ $basePath . 'sello-reconocimiento.webp'}}" style="width: 120px;" alt="{{ $basePath . 'sello-reconocimiento.webp'}}">
             </div>
 
             <div class="col-4 text-center border" style="margin-top: 60px">
