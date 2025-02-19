@@ -112,6 +112,8 @@
             height: 300px;
             margin-left: auto;
             margin-right: auto;
+            margin-top: auto;
+            margin-bottom: auto;
         }
 
         .img_logo img {
