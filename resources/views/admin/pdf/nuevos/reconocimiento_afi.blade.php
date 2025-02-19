@@ -108,8 +108,8 @@
         }
 
         .img_logo {
-            width: 160px;  /* Tamaño máximo permitido */
-            height: 160px;
+            width: 250px;  /* Tamaño máximo permitido */
+            height: 250px;
             margin-left: auto;
             margin-right: auto;
         }
