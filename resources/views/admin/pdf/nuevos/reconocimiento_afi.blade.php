@@ -116,8 +116,6 @@
         }
 
         .img_logo img {
-            max-width: 300px;  /* Tamaño máximo permitido */
-            max-height: 300px;
             object-fit: contain; /* Mantiene la proporción sin cortar */
         }
 
