@@ -94,47 +94,26 @@
 </div>
 
 @can('comisiones-kits')
-    <div class="row mt-4">
-        <div class="col-md-6">
-            <div class="card">
-            <div class="card-header pb-0 p-3">
-                <div class="d-flex justify-content-between">
-                    <h6 class="mb-0">Comisiones venta kits</h6>
-                </div>
-            </div>
-
-
-            <div class="card-body p-3">
-                <ul class="list-group">
-
-                @foreach ($user_comision_kit as $item)
-                <div class="col-md-6">
-                    <div class="card">
-                    <div class="card-header pb-0 p-3">
-                        <div class="d-flex justify-content-between">
-                            <h6 class="mb-0">Comisiones venta kits</h6>
-                        </div>
-                    </div>
-
-
-                    <div class="card-body p-3">
-                        <ul class="list-group">
-
-                            @if ($item->id == auth()->user()->id)
-                            <a class="btn btn-warning" href="{{ route('comision_kit.imprimir', $item->id) }}" target="_blank">Imprimir</a>
-                            @endif
-
-                        </ul>
-                    </div>
-                    </div>
-                </div>
-                @endforeach
-
-                </ul>
-            </div>
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-header pb-0 p-3">
+            <div class="d-flex justify-content-between">
+                <h6 class="mb-0">Comisiones venta kits</h6>
             </div>
         </div>
+
+
+        <div class="card-body p-3">
+            <ul class="list-group">
+                @foreach ($user_comision_kit as $item)
+                    @if ($item->id == auth()->user()->id)
+                    <a class="btn btn-warning" href="{{ route('comision_kit.imprimir', $item->id) }}" target="_blank">Imprimir</a>
+                    @endif
+                @endforeach
+            </ul>
+        </div>
     </div>
+</div>
 @endcan
 
 <div class="row">

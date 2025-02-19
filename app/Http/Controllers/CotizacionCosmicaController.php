@@ -257,7 +257,12 @@ class CotizacionCosmicaController extends Controller
         $notas_productos->monto = $request->get('monto');
         $notas_productos->monto2 = $request->get('monto2');
 
-        $notas_productos->tipo_nota = 'Cotizacion';
+        if($request->get('tipo_cotizacion') == 'Expo'){
+            $notas_productos->tipo_nota = 'Expo';
+        }else{
+            $notas_productos->tipo_nota = 'Cotizacion';
+        }
+
         $tipoNota = $notas_productos->tipo_nota;
 
         // Obtener todos los folios del tipo de nota específico
@@ -382,8 +387,18 @@ class CotizacionCosmicaController extends Controller
             $notas_productos->save();
         }
 
-        return redirect()->route('cotizacion_cosmica.index')
-        ->with('success', 'Se ha creado su cotizacion con exito');
+        if($request->get('tipo_cotizacion') == 'Expo'){
+            return response()->json([
+                'success' => true,
+                'message' => 'Se ha creado su cotización con éxito',
+                'tipo_cotizacion' => 'Expo',
+                'id' => $notas_productos->id
+            ]);
+        }else{
+            return redirect()->route('cotizacion_cosmica.index')
+            ->with('success', 'Se ha creado su cotizacion con exito');
+        }
+
     }
 
     public function edit($id){
@@ -595,6 +610,12 @@ class CotizacionCosmicaController extends Controller
                 $nota->fecha_preparacion  = date("Y-m-d H:i:s");
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
+            }else if($request->get('estatus_cotizacion') == 'Aprobada Expo'){
+                $nota->estatus_cotizacion  = 'Enviado';
+                $nota->fecha_aprobada  = date("Y-m-d");
+                $nota->fecha_preparacion  = date("Y-m-d H:i:s");
+                $nota->fecha_preparado  = date("Y-m-d H:i:s");
+                $nota->fecha_envio  = date("Y-m-d H:i:s");
             }
 
         $nota->update();
@@ -616,8 +637,15 @@ class CotizacionCosmicaController extends Controller
             }
         }
 
-        return redirect()->route('index_preparacion.bodega')
-                ->with('success', 'Creado exitosamente.');
+        if($request->get('estatus_cotizacion') == 'Aprobada Expo'){
+            return redirect()->route('corizacion_expo.index')
+            ->with('success', 'Se ha actualizado con exito');
+
+        }else{
+            return redirect()->route('index_preparacion.bodega')
+            ->with('success', 'Creado exitosamente.');
+        }
+
     }
 
     public function update_guia(Request $request, $id){
@@ -1308,5 +1336,48 @@ class CotizacionCosmicaController extends Controller
         return view('admin.cotizacion_cosmica.index_filtro', compact(
             'notas', 'administradores', 'notas_aprobadas', 'notas_canceladas', 'fechaInicio', 'fechaFin'
         ));
+    }
+
+    public function index_expo(Request $request) {
+        $fechaInicio = $request->input('fecha_inicio', date('Y-m-01'));
+        $fechaFin = $request->input('fecha_fin', date('Y-m-t'));
+
+        // Filtrar notas con estatus específicos
+        $notas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->orderBy('id', 'DESC')
+            ->where('tipo_nota', '=', 'Expo')
+            ->get();
+
+        // Pasar datos a la vista
+        return view('admin.cotizacion_cosmica.expo.index', compact('notas'));
+    }
+
+    public function create_expo(){
+        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
+        $products = Products::where('categoria', '=', 'Cosmica')->orderBy('nombre','ASC')->get();
+
+        return view('admin.cotizacion_cosmica.expo.crear', compact('products', 'clientes'));
+    }
+
+    public function edit_expo($id){
+        $cotizacion = NotasProductosCosmica::find($id);
+        $cotizacion_productos = ProductosNotasCosmica::where('id_notas_productos', '=', $id)->where('price', '!=', NULL)->get();
+        $products = Products::where('categoria', '=', 'Cosmica')->orderBy('nombre','ASC')->get();
+
+        return view('admin.cotizacion_cosmica.expo.edit', compact('products', 'cotizacion', 'cotizacion_productos'));
+    }
+
+    public function buscador_expo(Request $request){
+        $fechaInicio = $request->input('fecha_inicio', date('Y-m-01'));
+        $fechaFin = $request->input('fecha_fin', date('Y-m-t'));
+
+        $notas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
+        ->orderBy('id', 'DESC')
+        ->where('tipo_nota', '=', 'Expo')
+        ->get();
+
+        $item = NotasProductosCosmica::where('id', '=' , $request->get('folio'))->first();
+
+        return view('admin.cotizacion_cosmica.expo.index',compact('item', 'notas'));
     }
 }

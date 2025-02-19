@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Cotizacion Cosmica
+    Cotizacion Expo
 @endsection
 
 @section('css')
@@ -17,9 +17,9 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('cotizacion_cosmica.store') }}" enctype="multipart/form-data" role="form" id="miFormulario">>
+                        <form method="POST" action="{{ route('cotizacion_cosmica.store') }}" enctype="multipart/form-data" role="form" id="miFormulario">
                             @csrf
-                            <input id="tipo_cotizacion" name="tipo_cotizacion" type="hidden" class="form-control" value="Cotizacion">
+                             <input id="tipo_cotizacion" name="tipo_cotizacion" type="hidden" class="form-control" value="Expo">
                             <div class="modal-body">
                                 <div class="row">
 
@@ -323,12 +323,14 @@
 @endsection
 @section('datatable')
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-
     var form = document.getElementById('miFormulario');
 
     form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevenir el envío del formulario
+
         var cantidadInputs = document.querySelectorAll('.campo .cantidad');
         var isValid = true;
 
@@ -341,8 +343,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
 
         if (!isValid) {
-            event.preventDefault(); // Prevenir el envío del formulario
+            return; // No enviar el formulario si no es válido
         }
+
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: data.message,
+                    icon: 'success',
+                    showCancelButton: true,
+                    confirmButtonText: 'Imprimir PDF',
+                    cancelButtonText: 'Ir al índice'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        var printWindow = window.open('{{ route('cotizacion_cosmica.imprimir', '') }}/' + data.id, '_blank');
+                        printWindow.onload = function() {
+                            window.location.reload();
+                        };
+                    } else {
+                        window.location.href = '{{ route('corizacion_expo.index') }}';
+                    }
+                });
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Hubo un problema al crear la cotización.',
+                    icon: 'error'
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                title: 'Error',
+                text: 'Hubo un problema al crear la cotización.',
+                icon: 'error'
+            });
+        });
     });
 
     var agregarCampoBtn = document.getElementById('agregarCampo');
@@ -354,13 +402,11 @@ document.addEventListener('DOMContentLoaded', function() {
     var totalDescuentoInput = document.getElementById('totalDescuento');
     var nameInput = document.getElementById('name');
 
-
-        // Validar la entrada en tiempo real
-        nameInput.addEventListener('input', function () {
-            // Eliminar cualquier número ingresado
-            this.value = this.value.replace(/\d/g, '');
-        });
-
+    // Validar la entrada en tiempo real
+    nameInput.addEventListener('input', function () {
+        // Eliminar cualquier número ingresado
+        this.value = this.value.replace(/\d/g, '');
+    });
 
     $(document).ready(function() {
         $('.producto').select2();
@@ -539,21 +585,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-
-
-    $(document).ready(function () {
-        // Manejar el cambio de estado del switch
-        $('#toggleSwitch').change(function () {
-            // Mostrar u ocultar el div basado en el estado del switch
-            $('#divToToggle').toggle();
-        });
-
-        // Manejar el cambio de estado del switch
-        $('#toggleFactura').change(function () {
-            // Mostrar u ocultar el div basado en el estado del switch
-            $('#divFactura').toggle();
-        });
+$(document).ready(function () {
+    // Manejar el cambio de estado del switch
+    $('#toggleSwitch').change(function () {
+        // Mostrar u ocultar el div basado en el estado del switch
+        $('#divToToggle').toggle();
     });
+
+    // Manejar el cambio de estado del switch
+    $('#toggleFactura').change(function () {
+        // Mostrar u ocultar el div basado en el estado del switch
+        $('#divFactura').toggle();
+    });
+});
 </script>
 @endsection

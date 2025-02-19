@@ -118,8 +118,6 @@
                                                         Cencelada
                                                     </a>
                                                 @endif
-
-
                                             </td>
 
                                             <td>

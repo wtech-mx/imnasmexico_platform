@@ -72,7 +72,7 @@
                                 </a>
                                 </li>
                                 <li class="nav-item pt-2">
-                                <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="#2fa">
+                                <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="{{route('peril_cliente.compras_tiendita', $cliente->id)}}">
                                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                         <img src="{{ asset('assets/cam/shopping-cart.png') }}"width="30px" >
                                     </div>
@@ -80,7 +80,7 @@
                                 </a>
                                 </li>
                                 <li class="nav-item pt-2">
-                                <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="#accounts">
+                                <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="{{route('peril_cliente.cotizaciones_nas', $cliente->id)}}">
                                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                         <img src="https://lh3.googleusercontent.com/d/1KpzCr4lID6U5foSXsNtQ4pXklupFAGz3=w800?authuser=0"width="50px" >
                                     </div>
@@ -88,7 +88,7 @@
                                 </a>
                                 </li>
                                 <li class="nav-item pt-2">
-                                <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="#notifications">
+                                <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="{{route('peril_cliente.cotizaciones_cosmica', $cliente->id)}}">
                                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                         <img src="{{ asset('/cosmika/menu/logo.png') }}"width="50px" >
                                     </div>
@@ -96,7 +96,7 @@
                                 </a>
                                 </li>
                                 <li class="nav-item pt-2">
-                                <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="#sessions">
+                                <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="{{route('peril_cliente.membresia_cosmica', $cliente->id)}}">
                                     <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                         <img src="{{ asset('assets/cam/membrecia.png') }}"width="30px" >
                                     </div>
@@ -155,6 +155,18 @@
                     @if(Route::currentRouteName() == 'peril_cliente.cursos')
                         @include('admin.clientes.perfil.cursos')
                     @endif
+                    @if(Route::currentRouteName() == 'peril_cliente.compras_tiendita')
+                        @include('admin.clientes.perfil.compras')
+                    @endif
+                    @if(Route::currentRouteName() == 'peril_cliente.cotizaciones_nas')
+                        @include('admin.clientes.perfil.cotizacion_nas')
+                    @endif
+                    @if(Route::currentRouteName() == 'peril_cliente.cotizaciones_cosmica')
+                        @include('admin.clientes.perfil.cotizacion_cosmica')
+                    @endif
+                    @if(Route::currentRouteName() == 'peril_cliente.membresia_cosmica')
+                        @include('admin.clientes.perfil.membresia')
+                    @endif
                   </div>
                 </div>
               </div>
@@ -165,18 +177,11 @@
 @endsection
 
 @section('datatable')
-<script src="{{ asset('assets/admin/vendor/jquery/dist/jquery.min.js')}}"></script>
 <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 <script>
     const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
     searchable: true,
     fixedHeight: false
-    });
-
-    const dataTableCursos = new simpleDatatables.DataTable("#datatable-cursos", {
-        deferRender:true,
-        paging: true,
-        pageLength: 10
     });
 </script>
 
