@@ -25,7 +25,7 @@
     <style>
 
         .border {
-            border: 0px solid #000;
+            border: 1px solid #000;
         }
 
         .container {
