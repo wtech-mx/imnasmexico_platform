@@ -226,6 +226,7 @@
             <div class="col-4 text-center border" style="margin-top: 20px">
                 <img src="{{$basePathLogo . $user->telefono . '/'. $escuela->firma}}" style="width: 120px;">
                 <p>{{ $user->name}}</p>
+                <p class=""> {{ $registro?->texto_director ?? 'Firma del Director'  }}</p>
             </div>
         </div>
 

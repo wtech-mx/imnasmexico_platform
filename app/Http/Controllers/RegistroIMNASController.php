@@ -603,7 +603,7 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = 612;
             $alto_puntos = 792;
 
-            $pdf = PDF::loadView('admin.pdf.nuevos.reconocimiento',compact('name_escuela','clave_rfc','capitalizar','tam_letra_foli_cedu_tras','tam_letra_foli_cedu','tam_letra_espec_cedu','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_logo'));
+            $pdf = PDF::loadView('admin.pdf.nuevos.reconocimiento',compact('firma_directora','director','name_escuela','clave_rfc','capitalizar','tam_letra_foli_cedu_tras','tam_letra_foli_cedu','tam_letra_espec_cedu','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_logo','fileName_firma_director'));
 
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait');
 

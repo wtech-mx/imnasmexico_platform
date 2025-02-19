@@ -217,7 +217,8 @@
 
             <div class="col-4 text-center border" style="margin-top: 60px">
                 <img style="text-align: center;" src="{{ $basePathUtilidades . $fileName_firma_director }}" class="firma_img">
-                <p>{{ $director }}</p>
+                <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">{{ $director }}</h3>
+                <h5 class="texto_emosires_dire capitalize m-0 p-0">{{ $firma_directora }}</h5>
             </div>
         </div>
 
