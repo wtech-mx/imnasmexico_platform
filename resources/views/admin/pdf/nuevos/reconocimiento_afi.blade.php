@@ -108,8 +108,8 @@
         }
 
         .img_logo {
-            width: 250px;  /* Tamaño máximo permitido */
-            height: 250px;
+            width: 350px;  /* Tamaño máximo permitido */
+            height: 350px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -211,15 +211,15 @@
         </div>
 
         <div class="row">
-            <div class="col-4 text-center border" style="margin-top: 60px">
+            <div class="col-4 text-center border" style="margin-top: 20px">
                 <img src="{{ $basePath . 'sello-stps-reconocimiento.png'}}" style="width: 120px;">
             </div>
 
-            <div class="col-4 text-center border"  style="margin-top: 60px">
+            <div class="col-4 text-center border"  style="margin-top: 20px">
                 <img src="{{ $basePath . 'sello-reconocimiento.webp'}}" style="width: 120px;" alt="{{ $basePath . 'sello-reconocimiento.webp'}}">
             </div>
 
-            <div class="col-4 text-center border" style="margin-top: 60px">
+            <div class="col-4 text-center border" style="margin-top: 20px">
                 <img src="{{$basePathLogo . $user->telefono . '/'. $escuela->firma}}" style="width: 120px;">
                 <p>{{ $user->name}}</p>
             </div>
