@@ -112,16 +112,13 @@
             height: 160px;
             margin-left: auto;
             margin-right: auto;
-            margin-top: auto;
-            margin-bottom: auto;
+            margin-top: 50px;
         }
 
         .img_logo img {
             max-width: 100%;  /* Evita que la imagen se estire */
             max-height: 100%;
             object-fit: contain; /* Mantiene la proporción sin cortar */
-            margin-top: auto;
-            margin-bottom: auto;
         }
 
 
