@@ -25,7 +25,7 @@
     <style>
 
         .border {
-            border: 0px solid #000;
+            border: 1px solid #000;
         }
 
         .container {
@@ -110,6 +110,8 @@
         .img_logo {
             width: 350px;  /* Tamaño máximo permitido */
             height: 350px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .img_logo img {
@@ -126,10 +128,10 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-2 text-center border" style="margin-top: 70px">
+            <div class="col-2 text-center border" style="margin-top: 50px">
             </div>
 
-            <div class="col-8 text-center border" style="margin-top: 70px">
+            <div class="col-8 text-center border" style="margin-top: 50px">
 
                 <div class="img_logo">
                     <img src="{{ $basePathUtilidades . $user->logo }}" alt="Logo">
@@ -137,7 +139,7 @@
 
             </div>
 
-            <div class="col-2 text-center border" style="margin-top: 70px">
+            <div class="col-2 text-center border" style="margin-top: 50px">
             </div>
         </div>
 
