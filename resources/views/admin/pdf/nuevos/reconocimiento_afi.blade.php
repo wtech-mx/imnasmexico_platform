@@ -31,7 +31,7 @@
         .container {
             position: relative;
             width: 816px;  /* 8.5 in * 96 dpi */
-            height: 1056px; /* 11 in * 96 dpi */
+            height: 1120px; /* 11 in * 96 dpi */
             margin: 0 auto;
             overflow: hidden;
             background-image: url('{{ $basePath . 'fondo.png'}}');
@@ -112,12 +112,16 @@
             height: 160px;
             margin-left: auto;
             margin-right: auto;
+            margin-top: auto;
+            margin-bottom: auto;
         }
 
         .img_logo img {
             max-width: 100%;  /* Evita que la imagen se estire */
             max-height: 100%;
             object-fit: contain; /* Mantiene la proporción sin cortar */
+            margin-top: auto;
+            margin-bottom: auto;
         }
 
 
