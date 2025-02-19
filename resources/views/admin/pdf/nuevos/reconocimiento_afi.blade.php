@@ -153,7 +153,7 @@
 
             <div class="col-8 text-center border p-2">
                 <h1 class="titulo">
-                    El Registro Nacional Instituto Mexicano Naturales Ain Spa  en conjunto con {{ $user->escuela }}
+                    Oirganizado por  {{ $user->escuela }}
                 </h1>
             </div>
 
