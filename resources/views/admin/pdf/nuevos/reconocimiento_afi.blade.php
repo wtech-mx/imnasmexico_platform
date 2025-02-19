@@ -25,13 +25,13 @@
     <style>
 
         .border {
-            border: 1px solid #000;
+            border: 0px solid #000;
         }
 
         .container {
             position: relative;
             width: 816px;  /* 8.5 in * 96 dpi */
-            height: 1120px; /* 11 in * 96 dpi */
+            height: 1056px; /* 11 in * 96 dpi */
             margin: 0 auto;
             overflow: hidden;
             background-image: url('{{ $basePath . 'fondo.png'}}');
@@ -108,12 +108,10 @@
         }
 
         .img_logo {
-            width: 300px;  /* Tamaño máximo permitido */
-            height: 300px;
+            width: 160px;  /* Tamaño máximo permitido */
+            height: 160px;
             margin-left: auto;
             margin-right: auto;
-            margin-top: auto;
-            margin-bottom: auto;
         }
 
         .img_logo img {
@@ -130,10 +128,10 @@
     <div class="container">
 
         <div class="row">
-            <div class="col-2 text-center border" style="margin-top: 50px">
+            <div class="col-2 text-center border" style="margin-top: 70px">
             </div>
 
-            <div class="col-8 text-center border" style="margin-top: 50px">
+            <div class="col-8 text-center border" style="margin-top: 70px">
 
                 <div class="img_logo">
                     <img src="{{ $basePathUtilidades . $user->logo }}" alt="Logo">
@@ -141,7 +139,7 @@
 
             </div>
 
-            <div class="col-2 text-center border" style="margin-top: 50px">
+            <div class="col-2 text-center border" style="margin-top: 70px">
             </div>
         </div>
 
