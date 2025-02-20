@@ -655,9 +655,9 @@ class RegistroIMNASController extends Controller
             }
 
             if($request->get('documentos_design') == 'si'){
-                $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('name_escuela','clave_rfc','fileName_firma_directorOtra','firma_directora2','firma_directora','tam_letra_nombre','capitalizar','director','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director','nacionalidad', 'fileName_logo'));
+                $pdf = PDF::loadView('admin.pdf.titulo_honorifico_qrso',compact('titular2','titular1','texto_firma_personalizada','texto_firma_personalizada2','fileName_firma_directorOtra','orden_firmas','name_escuela','clave_rfc','fileName_firma_directorOtra','firma_directora2','firma_directora','tam_letra_nombre','capitalizar','director','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director','nacionalidad', 'fileName_logo'));
             }else{
-                $pdf = PDF::loadView('admin.pdf.nuevos.titulo',compact('name_escuela','clave_rfc','fileName_firma_directorOtra','firma_directora2','firma_directora','tam_letra_nombre','capitalizar','director','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director','nacionalidad', 'fileName_logo'));
+                $pdf = PDF::loadView('admin.pdf.nuevos.titulo',compact('titular2','titular1','texto_firma_personalizada','texto_firma_personalizada2','fileName_firma_directorOtra','orden_firmas','name_escuela','clave_rfc','fileName_firma_directorOtra','firma_directora2','firma_directora','tam_letra_nombre','capitalizar','director','tam_letra_folio','tam_letra_especi','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director','nacionalidad', 'fileName_logo'));
             }
 
             // $pdf->setPaper('letter', 'portrait'); // Cambiar 'a tamaño oficio'
