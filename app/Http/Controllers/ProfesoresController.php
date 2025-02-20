@@ -8,6 +8,7 @@ use App\Models\Cursos;
 use App\Models\CursosTickets;
 use App\Models\Orders;
 use App\Models\OrdersTickets;
+use App\Models\ProductosNotasCosmica;
 use Session;
 use Hash;
 use Str;
@@ -32,8 +33,6 @@ class ProfesoresController extends Controller
         $ordenes = OrdersTickets::where('id_curso', '=', $id)->get();
         $tickets = CursosTickets::where('id_curso', '=', $id)->get();
         $ticketCount = CursosTickets::where('id_curso', '=', $id)->count();
-
-
 
         return view('profesor.single_clase', compact('curso', 'ordenes', 'tickets','ticketCount','profesor'));
     }
@@ -123,5 +122,21 @@ class ProfesoresController extends Controller
         $profesor->update();
 
         return back()->with('success', 'Profesor agregado');
+    }
+
+    public function asistencia_expo(){
+
+        $ordenes = ProductosNotasCosmica::whereIn('id_producto', [1952, 1881, 1882])->get();
+
+        return view('admin.cotizacion_cosmica.expo.asistencia_expo', compact('ordenes'));
+    }
+
+    public function updateAsistencia(Request $request)
+    {
+        $orden = ProductosNotasCosmica::find($request->id);
+        $orden->asistencia = $request->asistencia;
+        $orden->save();
+
+        return response()->json(['success' => 'Asistencia actualizada.']);
     }
 }
