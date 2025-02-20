@@ -30,6 +30,7 @@
 
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    <h5>{{$totalPersonas}}</h5>
                                     <table class="table table-flush" id="datatable-search">
                                         <thead class="thead">
                                             <tr>
