@@ -171,7 +171,7 @@
             border-radius: 50%;
             padding: 5px;
             color: #545454;
-            font-size: 14px;
+            font-size: {{ $tam_letra_tira_afi ?? 14 }}px;
             font-family: 'Montserrat_Regular';
             font-weight: 'regular';
         }
@@ -357,7 +357,7 @@
             <div class="col-12 text-left border" style="padding:0px 20px 20px 20px;">
                 @php
                     $totalSubtemas = count($subtemas);
-                    $faltantes = 18 - $totalSubtemas; // Calculamos cuántos faltan para llegar a 20
+                    $faltantes = $celdas_tira_afi - $totalSubtemas; // Calculamos cuántos faltan para llegar a 20
                 @endphp
 
                 @foreach ($subtemas as $subtema)
@@ -421,7 +421,6 @@
                 <div class="col-12 text-start border" >
                     <p class="texto_trasero uppercase" style="padding:0px 45px 0px 45px;">
                         <strong>ESTATUTOS LEGALES ANTE NOTARIO PÚBLICO, GERARDO GONZÁLEZ-MEZA HOFFMANN:</strong> <br><br>
-
                         INSTRUMENTO NÚMERO SETENTA Y CINCO MIL SEISCIENTOS SETENTA Y TRES. LIBRO MIL CIENTO CUARENTA Y TRES. CIUDAD DE MÉXICO. A.- LA MODIFICACIÓN AL OBJETO SOCIAL Y LA CONSECUENTE REFORMA AL ARTÍCULO SEGUNDO DE LOS ESTATUTOS SOCIALES; y, B.- LA REFORMA AL ARTÍCULO SEXTO DE LOS ESTATUTOS SOCIALES, que resultan de LA PROTOCOLIZACIÓN del acta de Asamblea General Extraordinaria de Socios de "INSTITUTO MEXICANO NATURALES AIN SPA", SOCIEDAD CIVIL.
                         <br><br>
                         Artículo 5º de la Constitución Política de los Estados Unidos Mexicanos: “A ninguna persona podrá impedirse que se dedique a la profesión, industria, comercio o trabajo que le acomode siendo lícitos... Nadie puede ser privado del producto de su trabajo, sino por resolución judicial.
@@ -433,7 +432,6 @@
                         XIV.- Que leído y explicado íntegramente por el suscrito notario este instrumento a la compareciente, manifestó su plena comprensión y conformidad con él y lo firmó el día 17 de Junio del 2016, mismo momento en que lo autorizo definitivamente.- Doy fe.
                         <br><br>
                         Por lo antes descrito el Instituto Mexicano Naturales Ain Spa, para efectos legales de acreditación ante terceros, da el siguiente nombramiento conforme a derecho e inscrito en el Registro Nacional Instituto Mexicano Naturales Ain Spa RNIMNAS, al haber aprobado y cumplido con todos los requisitos que exige el plan de estudios especializado en:
-
                     </p>
                 </div>
             </div>
