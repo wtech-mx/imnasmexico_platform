@@ -314,6 +314,7 @@ class RegistroIMNASController extends Controller
         $tam_letra_foli_cedu_tras = $request->get('tam_letra_foli_cedu_tras');
 
         $tam_letra_tira_afi = $request->get('tam_letra_tira_afi');
+        $celdas_tira_afi = $request->get('celdas_tira_afi');
 
         $tam_letra_esp_cred = $request->get('tam_letra_esp_cred');
         $promedio = $request->get('promedio');
@@ -789,9 +790,9 @@ class RegistroIMNASController extends Controller
             ->get();
 
             if($request->get('documentos_design') == 'si'){
-                $pdf = PDF::loadView('admin.pdf.tira_materias_afiliados',compact('name_escuela','clave_rfc','promedio','tam_letra_tira_afi','subtemas','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
+                $pdf = PDF::loadView('admin.pdf.tira_materias_afiliados',compact('celdas_tira_afi','name_escuela','clave_rfc','promedio','tam_letra_tira_afi','subtemas','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             }else{
-                $pdf = PDF::loadView('admin.pdf.nuevos.tira',compact('name_escuela','clave_rfc','promedio','tam_letra_tira_afi','subtemas','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
+                $pdf = PDF::loadView('admin.pdf.nuevos.tira',compact('celdas_tira_afi','name_escuela','clave_rfc','promedio','tam_letra_tira_afi','subtemas','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','nacionalidad', 'fileName_logo'));
             }
 
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)
