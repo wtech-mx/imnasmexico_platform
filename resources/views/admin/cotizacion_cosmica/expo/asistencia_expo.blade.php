@@ -30,6 +30,16 @@
 
                             <div class="card-body">
                                 <div class="table-responsive">
+                                    <h3>Acompañante: </h3>
+                                    <h5>{{$ordenes_acompañante}}</h5>
+
+                                    <h3>Sin Acompañante: </h3>
+                                    <h5>{{$ordenes_sin_acompañante}}</h5>
+
+                                    <h3>Basico: </h3>
+                                    <h5>{{$ordenes_basico}}</h5>
+
+                                    <h3>Total de Personas: </h3>
                                     <h5>{{$totalPersonas}}</h5>
                                     <table class="table table-flush" id="datatable-search">
                                         <thead class="thead">

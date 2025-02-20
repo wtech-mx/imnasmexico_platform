@@ -127,9 +127,15 @@ class ProfesoresController extends Controller
     public function asistencia_expo(){
 
         $ordenes = ProductosNotasCosmica::whereIn('id_producto', [1952, 1881, 1882])->get();
-        $totalPersonas = $ordenes->sum('cantidad');
 
-        return view('admin.cotizacion_cosmica.expo.asistencia_expo', compact('ordenes', 'totalPersonas'));
+        $ordenes_acompañante = ProductosNotasCosmica::where('id_producto', 1881)->sum('cantidad');
+        $ordenes_sin_acompañante = ProductosNotasCosmica::where('id_producto', 1882)->sum('cantidad');
+        $ordenes_basico = ProductosNotasCosmica::where('id_producto', 1952)->sum('cantidad');
+        
+        $multi = $ordenes_acompañante * 2;
+        $totalPersonas = $multi + $ordenes_sin_acompañante + $ordenes_basico;
+
+        return view('admin.cotizacion_cosmica.expo.asistencia_expo', compact('ordenes', 'totalPersonas', 'ordenes_acompañante', 'ordenes_sin_acompañante', 'ordenes_basico'));
     }
 
     public function updateAsistencia(Request $request)
