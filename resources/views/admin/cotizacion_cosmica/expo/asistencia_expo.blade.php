@@ -29,25 +29,52 @@
                             </div>
 
                             <div class="card-body">
+                                <div class="row">
+                                    <div class="col-2 text-center">
+                                        <label>Acompañante: </label>
+                                        <h5>{{$multi}}</h5>
+                                    </div>
+
+                                    <div class="col-2 text-center">
+                                        <label>Sin Acompañante: </label>
+                                        <h5>{{$ordenes_sin_acompañante}}</h5>
+                                    </div>
+
+                                    <div class="col-2 text-center">
+                                        <label>Basico: </label>
+                                        <h5>{{$ordenes_basico}}</h5>
+                                    </div>
+
+                                    <div class="col-3 text-center">
+                                        <label>Total de Registros: </label>
+                                        <h5>{{$totalRegistros}}</h5>
+                                    </div>
+
+                                    <div class="col-3 text-center">
+                                        <label>Total de Personas: </label>
+                                        <h5>{{$totalPersonas}}</h5>
+                                    </div>
+
+                                    <div class="col-6 text-center" style="background-color:#81e31e57">
+                                        <label>Asistencia: </label>
+                                        <h5>{{$asistencia}}</h5>
+                                    </div>
+
+                                    <div class="col-6 text-center" style="background-color: #9b1ee357">
+                                        <label>Inasistencia: </label>
+                                        <h5>{{$inasistencia}}</h5>
+                                    </div>
+                                </div>
+
                                 <div class="table-responsive">
-                                    <h3>Acompañante: </h3>
-                                    <h5>{{$ordenes_acompañante}}</h5>
-
-                                    <h3>Sin Acompañante: </h3>
-                                    <h5>{{$ordenes_sin_acompañante}}</h5>
-
-                                    <h3>Basico: </h3>
-                                    <h5>{{$ordenes_basico}}</h5>
-
-                                    <h3>Total de Personas: </h3>
-                                    <h5>{{$totalPersonas}}</h5>
                                     <table class="table table-flush" id="datatable-search">
                                         <thead class="thead">
                                             <tr>
                                                 <th>Cliente</th>
                                                 <th>Tipo</th>
                                                 <th>Cantidad</th>
-                                                <th>Acciones</th>
+                                                <th>Asistencia</th>
+                                                <th>WhatsApp</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -75,8 +102,17 @@
                                                         @for ($i = 0; $i < $item->cantidad; $i++)
                                                             <input data-id="{{ $item->id }}" data-index="{{ $i }}" class="toggle-class" type="checkbox"
                                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
-                                                            data-on="Active" data-off="InActive" {{ $i < $item->asistencia ? 'checked' : '' }}>
+                                                            data-on="Active" data-off="InActive" {{ $i < $item->asistencia ? 'checked disabled' : '' }}>
                                                         @endfor
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                            $telefono = $item->Nota->id_usuario == NULL ? $item->Nota->telefono : $item->Nota->User->telefono;
+                                                            $mensaje = urlencode("✨ ¡RECORDATORIO ESPECIAL: Este DOMINGO 23 es nuestra jornada especial! ✨\n\n📢 IMPORTANTE: LEE CON ATENCIÓN ESTAS INDICACIONES 📢\n\n🔸 Si compraste boleto VIP:\nTe pedimos llegar puntualmente a las 10:00 AM para realizar tu registro. Esto nos permitirá iniciar a tiempo el desayuno a las 10:30 AM y comenzar la jornada sin retrasos.\n\n🔸 Si tienes boleto básico:\nDe igual manera, te invitamos a llegar temprano, ya que debes completar tu registro antes de ingresar.\n\n💡 El registro es indispensable, ya que en este momento recibirás:\n✅ Pulsera de acceso\n✅ Kit de muestras\n✅ Producto gratis (para VIP que asistieron solos)\n✅ Material extra para la jornada\n\nPara agilizar tu ingreso, por favor llega con anticipación y colócate en la fila correspondiente. Si eres VIP, así también podrás disfrutar tu desayuno y snack sin prisas.\n\n📍 DIRECCIÓN: Miguel Laurent #961, Delegación Benito Juárez, CDMX\n📌 Waze: Busca ANUIES\n🗓 Fecha: Domingo 23 de febrero\n🕒 Horario: 10:00 AM - 2:00 PM\n🚍 Ubicación: A solo 1 cuadra del Metrobús Miguel Laurent\n🅿 Estacionamiento disponible (primer piso)\n\n📸 Adjuntamos foto de la entrada y la ubicación para que llegues sin problema.\n\n💖 Este evento ha sido preparado con muchísimo amor, pensando en cada detalle para que lo disfrutes al máximo. Estamos ansiosas por verte, compartir esta experiencia contigo y aprender juntas.\n\n¡Nos vemos muy pronto! ✨");
+                                                        @endphp
+                                                         <a class="btn btn-xs btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{$telefono}}&text={{$mensaje}}">
+                                                            <i class="fa fa-whatsapp"></i>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -125,7 +161,9 @@
                             },
                             success: function(data){
                                 console.log(data.success);
-                            }
+                                // Deshabilitar el checkbox después de marcarlo
+                                $(this).prop('disabled', true);
+                            }.bind(this)
                         });
                     });
                 });

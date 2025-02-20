@@ -131,11 +131,19 @@ class ProfesoresController extends Controller
         $ordenes_acompañante = ProductosNotasCosmica::where('id_producto', 1881)->sum('cantidad');
         $ordenes_sin_acompañante = ProductosNotasCosmica::where('id_producto', 1882)->sum('cantidad');
         $ordenes_basico = ProductosNotasCosmica::where('id_producto', 1952)->sum('cantidad');
-        
+
         $multi = $ordenes_acompañante * 2;
         $totalPersonas = $multi + $ordenes_sin_acompañante + $ordenes_basico;
+        $totalRegistros = $ordenes->count();
 
-        return view('admin.cotizacion_cosmica.expo.asistencia_expo', compact('ordenes', 'totalPersonas', 'ordenes_acompañante', 'ordenes_sin_acompañante', 'ordenes_basico'));
+        $asistencia = ProductosNotasCosmica::whereIn('id_producto', [1952, 1881, 1882])->where('asistencia', '!=', NULL)->sum('asistencia');
+        $inasistencia_acompañante = ProductosNotasCosmica::where('id_producto', 1881)->where('asistencia', '=', NULL)->sum('cantidad') * 2;
+        $inasistencia_sin_acompañante = ProductosNotasCosmica::where('id_producto', 1882)->where('asistencia', '=', NULL)->sum('cantidad');
+        $inasistencia_basico = ProductosNotasCosmica::where('id_producto', 1952)->where('asistencia', '=', NULL)->sum('cantidad');
+
+        $inasistencia = $inasistencia_acompañante + $inasistencia_sin_acompañante + $inasistencia_basico;
+
+        return view('admin.cotizacion_cosmica.expo.asistencia_expo', compact('ordenes', 'totalPersonas', 'multi', 'ordenes_sin_acompañante', 'ordenes_basico', 'totalRegistros', 'asistencia', 'inasistencia'));
     }
 
     public function updateAsistencia(Request $request)
