@@ -124,22 +124,63 @@ class ProfesoresController extends Controller
         return back()->with('success', 'Profesor agregado');
     }
 
-    public function asistencia_expo(){
+   
+    public function asistencia_expo() {
+        $ordenes = ProductosNotasCosmica::whereIn('id_producto', [1952, 1881, 1882])
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->get();
 
-        $ordenes = ProductosNotasCosmica::whereIn('id_producto', [1952, 1881, 1882])->get();
+        $ordenes_acompañante = ProductosNotasCosmica::where('id_producto', 1881)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->sum('cantidad');
 
-        $ordenes_acompañante = ProductosNotasCosmica::where('id_producto', 1881)->sum('cantidad');
-        $ordenes_sin_acompañante = ProductosNotasCosmica::where('id_producto', 1882)->sum('cantidad');
-        $ordenes_basico = ProductosNotasCosmica::where('id_producto', 1952)->sum('cantidad');
+        $ordenes_sin_acompañante = ProductosNotasCosmica::where('id_producto', 1882)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->sum('cantidad');
+
+        $ordenes_basico = ProductosNotasCosmica::where('id_producto', 1952)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->sum('cantidad');
 
         $multi = $ordenes_acompañante * 2;
         $totalPersonas = $multi + $ordenes_sin_acompañante + $ordenes_basico;
         $totalRegistros = $ordenes->count();
 
-        $asistencia = ProductosNotasCosmica::whereIn('id_producto', [1952, 1881, 1882])->where('asistencia', '!=', NULL)->sum('asistencia');
-        $inasistencia_acompañante = ProductosNotasCosmica::where('id_producto', 1881)->where('asistencia', '=', NULL)->sum('cantidad') * 2;
-        $inasistencia_sin_acompañante = ProductosNotasCosmica::where('id_producto', 1882)->where('asistencia', '=', NULL)->sum('cantidad');
-        $inasistencia_basico = ProductosNotasCosmica::where('id_producto', 1952)->where('asistencia', '=', NULL)->sum('cantidad');
+        $asistencia = ProductosNotasCosmica::whereIn('id_producto', [1952, 1881, 1882])
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->where('asistencia', '!=', NULL)
+            ->sum('asistencia');
+
+        $inasistencia_acompañante = ProductosNotasCosmica::where('id_producto', 1881)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->where('asistencia', '=', NULL)
+            ->sum('cantidad') * 2;
+
+        $inasistencia_sin_acompañante = ProductosNotasCosmica::where('id_producto', 1882)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->where('asistencia', '=', NULL)
+            ->sum('cantidad');
+
+        $inasistencia_basico = ProductosNotasCosmica::where('id_producto', 1952)
+            ->whereHas('Nota', function($query) {
+                $query->whereNotNull('fecha_aprobada');
+            })
+            ->where('asistencia', '=', NULL)
+            ->sum('cantidad');
 
         $inasistencia = $inasistencia_acompañante + $inasistencia_sin_acompañante + $inasistencia_basico;
 
