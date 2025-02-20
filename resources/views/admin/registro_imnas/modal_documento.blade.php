@@ -398,14 +398,25 @@
 
                                             @include('admin.documentos.campos_dinamicos')
 
+                                        <div class="form-group col-6 mt-3" id="inputPersonalizado">
+                                            <label for="personalizado_texto">Titular nombre 1</label>
+                                            <input type="text" name="titular1" class="form-control" value="{{ $registro_imnas->titular1 }}">
+                                        </div>
+
                                         <!-- Campo personalizado que se muestra dinámicamente -->
-                                        <div class="form-group col-12 mt-3" id="inputPersonalizado">
+                                        <div class="form-group col-6 mt-3" id="inputPersonalizado">
                                             <label for="personalizado_texto">Texto Personalizado de Firma 1</label>
                                             <input type="text" name="texto_firma_personalizada" class="form-control" value="{{ $registro_imnas->texto_firma_personalizada }}">
                                         </div>
 
+                                        <div class="form-group col-6 mt-3" id="inputPersonalizado">
+                                            <label for="personalizado_texto">Titular nombre 2</label>
+                                            <input type="text" name="titular2" class="form-control" value="{{ $registro_imnas->titular2 }}">
+                                        </div>
+
+
                                         <!-- Campo personalizado que se muestra dinámicamente -->
-                                        <div class="form-group col-12 mt-3" id="inputPersonalizado_2">
+                                        <div class="form-group col-6 mt-3" id="inputPersonalizado_2">
                                             <label for="personalizado_texto">Texto Personalizado de Firma 2</label>
                                             <input type="text" name="texto_firma_personalizada2" class="form-control" value="{{ $registro_imnas->texto_firma_personalizada2 }}">
                                         </div>

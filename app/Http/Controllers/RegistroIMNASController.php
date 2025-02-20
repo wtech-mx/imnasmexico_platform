@@ -324,9 +324,14 @@ class RegistroIMNASController extends Controller
         $rbg_signatureOtra = $request->get('rbg_signatureOtra');
 
         $capitalizar =  $request->get('capitalizar');
+        $orden_firmas =  $request->get('orden_firmas');
 
         $firma_directora =  $request->get('firma_directora');
         $firma_directora2 =  $request->get('firma_directora');
+        $texto_firma_personalizada = $request->get('texto_firma_personalizada');
+        $texto_firma_personalizada2 = $request->get('texto_firma_personalizada2');
+        $titular1 = $request->get('titular1');
+        $titular2 = $request->get('titular2');
 
         if($firma_directora == 'Personalizado'){
             $firma_directora = $request->get('texto_firma_personalizada');
@@ -334,6 +339,9 @@ class RegistroIMNASController extends Controller
 
             $registro->texto_firma_personalizada = $firma_directora;
             $registro->texto_firma_personalizada2 = $firma_directora2;
+            $registro->titular1 = $titular1;
+            $registro->titular2 = $titular2;
+            $registro->orden_firmas =  $orden_firmas;
             $registro->update();
         }
 
@@ -517,7 +525,7 @@ class RegistroIMNASController extends Controller
             }
 
         }else{
-            $fileName_firma_directorOtra = $fileName_firma_director ;
+            $fileName_firma_directorOtra = 'https://plataforma.imnasmexico.com/cursos/no-image.jpg';
         }
 
         if ($request->hasFile("firma")) {
@@ -701,10 +709,11 @@ class RegistroIMNASController extends Controller
             $ancho_puntos = $ancho_cm * 28.35;
             $alto_puntos = $alto_cm * 28.35;
 
+
             if($request->get('documentos_design') == 'si'){
-                $pdf = PDF::loadView('admin.pdf.diploma_imnas',compact('name_escuela','clave_rfc','firma_directora2','firma_directora','capitalizar','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director', 'fileName_logo', 'director'));
+                $pdf = PDF::loadView('admin.pdf.diploma_imnas',compact('titular2','titular1','texto_firma_personalizada','texto_firma_personalizada2','fileName_firma_directorOtra','orden_firmas','name_escuela','clave_rfc','firma_directora2','firma_directora','capitalizar','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director', 'fileName_logo', 'director'));
             }else{
-                $pdf = PDF::loadView('admin.pdf.nuevos.diploma',compact('name_escuela','clave_rfc','firma_directora2','firma_directora','capitalizar','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director', 'fileName_logo', 'director'));
+                $pdf = PDF::loadView('admin.pdf.nuevos.diploma',compact('titular2','titular1','texto_firma_personalizada','texto_firma_personalizada2','fileName_firma_directorOtra','orden_firmas','name_escuela','clave_rfc','firma_directora2','firma_directora','capitalizar','curso','fecha','tipo_documentos','nombre','folio','curp','fileName','fileName_firma','fileName_firma_director', 'fileName_logo', 'director'));
             }
 
             $pdf->setPaper([0, 0, $ancho_puntos, $alto_puntos], 'portrait'); // Cambiar al tamaño 21.5x34 (cm to points)

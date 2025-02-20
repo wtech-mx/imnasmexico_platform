@@ -89,7 +89,7 @@
     </div>
 </div>
 
-<div class="form-group col-6">
+<div class="form-group col-4">
     <label for="name">Capitalizar Nombre *</label>
     <div class="input-group">
         <span class="input-group-text" id="basic-addon1">
@@ -99,6 +99,19 @@
             <option value="No">Seleciona una opcion</option>
             <option value="Si">Si</option>
             <option value="No">No</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-group col-4">
+    <label for="name">Opciones de orden de firmas *</label>
+    <div class="input-group">
+        <span class="input-group-text" id="basic-addon1">
+            <img class="img_profile_label" src="{{asset('assets/user/icons/certificate.png')}}" alt="" width="30px">
+        </span>
+        <select name="orden_firmas" id="orden_firmas" class="form-select" required >
+            <option value="Predeterminada" selected>Predeterminada</option>
+            <option value="Alterna">Alterna</option>
         </select>
     </div>
 </div>
