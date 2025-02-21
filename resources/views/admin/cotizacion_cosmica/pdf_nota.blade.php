@@ -185,8 +185,12 @@
             @foreach ($nota_productos as $nota_producto)
                 <tr>
                     <td>
-                        <img src="{{ $nota_producto->Productos->imagenes }}" alt="" style="width: 60px">
-                     </td>
+                        @if ($nota_producto->Productos)
+                            <img src="{{ $nota_producto->Productos->imagenes }}" alt="" style="width: 60px">
+                        @else
+                            <span>Imagen no disponible</span>
+                        @endif
+                    </td>
                     <td>
                         {{ $nota_producto->cantidad }}
                     </td>
@@ -212,7 +216,7 @@
                         ${{ $subtotal }}
                     </td>
                 </tr>
-           @endforeach
+            @endforeach
         </tbody>
         <tfoot >
             <tr style="background-color: #ffffff;">
