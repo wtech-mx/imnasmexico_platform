@@ -32,17 +32,17 @@
                                 <div class="row">
                                     <div class="col-2 text-center">
                                         <label>Acompañante: </label>
-                                        <h5>{{$multi}}</h5>
+                                        <h5>{{$multi + $multi_nas}}</h5>
                                     </div>
 
                                     <div class="col-2 text-center">
                                         <label>Sin Acompañante: </label>
-                                        <h5>{{$ordenes_sin_acompañante}}</h5>
+                                        <h5>{{$ordenes_sin_acompañante + $ordenes_nas_sin_acompañante}}</h5>
                                     </div>
 
                                     <div class="col-2 text-center">
                                         <label>Basico: </label>
-                                        <h5>{{$ordenes_basico}}</h5>
+                                        <h5>{{$ordenes_basico + $ordenes_nas_basico}}</h5>
                                     </div>
 
                                     <div class="col-3 text-center">
@@ -57,7 +57,7 @@
 
                                     <div class="col-6 text-center" style="background-color:#81e31e57">
                                         <label>Asistencia: </label>
-                                        <h5>{{$asistencia}}</h5>
+                                        <h5>{{$asistencia + $asistencia_nas}}</h5>
                                     </div>
 
                                     <div class="col-6 text-center" style="background-color: #9b1ee357">
@@ -111,6 +111,44 @@
                                                             $mensaje = urlencode("✨ ¡RECORDATORIO ESPECIAL: Este DOMINGO 23 es nuestra jornada especial! ✨\n\n📢 IMPORTANTE: LEE CON ATENCIÓN ESTAS INDICACIONES 📢\n\n🔸 Si compraste boleto VIP:\nTe pedimos llegar puntualmente a las 10:00 AM para realizar tu registro. Esto nos permitirá iniciar a tiempo el desayuno a las 10:30 AM y comenzar la jornada sin retrasos.\n\n🔸 Si tienes boleto básico:\nDe igual manera, te invitamos a llegar temprano, ya que debes completar tu registro antes de ingresar.\n\n💡 El registro es indispensable, ya que en este momento recibirás:\n✅ Pulsera de acceso\n✅ Kit de muestras\n✅ Producto gratis (para VIP que asistieron solos)\n✅ Material extra para la jornada\n\nPara agilizar tu ingreso, por favor llega con anticipación y colócate en la fila correspondiente. Si eres VIP, así también podrás disfrutar tu desayuno y snack sin prisas.\n\n📍 DIRECCIÓN: Miguel Laurent #961, Delegación Benito Juárez, CDMX\n📌 Waze: Busca ANUIES\n🗓 Fecha: Domingo 23 de febrero\n🕒 Horario: 10:00 AM - 2:00 PM\n🚍 Ubicación: A solo 1 cuadra del Metrobús Miguel Laurent\n🅿 Estacionamiento disponible (primer piso)\n\n📸 Adjuntamos foto de la entrada y la ubicación para que llegues sin problema.\n\n💖 Este evento ha sido preparado con muchísimo amor, pensando en cada detalle para que lo disfrutes al máximo. Estamos ansiosas por verte, compartir esta experiencia contigo y aprender juntas.\n\n¡Nos vemos muy pronto! ✨");
                                                         @endphp
                                                          <a class="btn btn-xs btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{$telefono}}&text={{$mensaje}}">
+                                                            <i class="fa fa-whatsapp"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            @foreach ($ordenes_nas as $item)
+                                                <tr>
+                                                    <td>
+                                                        {{ $item->id }}
+                                                        <h5>
+                                                            @if ($item->Nota->id_usuario == NULL)
+                                                                {{ $item->Nota->nombre }} <br>
+                                                                {{ $item->Nota->telefono }}
+                                                            @else
+                                                                {{ $item->Nota->User->name }} <br>
+                                                                {{ $item->Nota->User->telefono }}
+                                                            @endif
+                                                        </h5>
+                                                    </td>
+                                                    <td>
+                                                        <h5>
+                                                            {{ $item->producto }}
+                                                        </h5>
+                                                    </td>
+                                                    <td><h5>{{ $item->cantidad }}</h5></td>
+                                                    <td>
+                                                        @for ($i = 0; $i < $item->cantidad; $i++)
+                                                            <input data-id="{{ $item->id }}" data-index="{{ $i }}" class="toggle-class" type="checkbox"
+                                                            data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
+                                                            data-on="Active" data-off="InActive" {{ $i < $item->asistencia ? 'checked disabled' : '' }}>
+                                                        @endfor
+                                                    </td>
+                                                    <td>
+                                                        @php
+                                                            $telefono = $item->Nota->id_usuario == NULL ? $item->Nota->telefono : $item->Nota->User->telefono;
+                                                            $mensaje = urlencode("✨ ¡RECORDATORIO ESPECIAL: Este DOMINGO 23 es nuestra jornada especial! ✨\n\n📢 IMPORTANTE: LEE CON ATENCIÓN ESTAS INDICACIONES 📢\n\n🔸 Si compraste boleto VIP:\nTe pedimos llegar puntualmente a las 10:00 AM para realizar tu registro. Esto nos permitirá iniciar a tiempo el desayuno a las 10:30 AM y comenzar la jornada sin retrasos.\n\n🔸 Si tienes boleto básico:\nDe igual manera, te invitamos a llegar temprano, ya que debes completar tu registro antes de ingresar.\n\n💡 El registro es indispensable, ya que en este momento recibirás:\n✅ Pulsera de acceso\n✅ Kit de muestras\n✅ Producto gratis (para VIP que asistieron solos)\n✅ Material extra para la jornada\n\nPara agilizar tu ingreso, por favor llega con anticipación y colócate en la fila correspondiente. Si eres VIP, así también podrás disfrutar tu desayuno y snack sin prisas.\n\n📍 DIRECCIÓN: Miguel Laurent #961, Delegación Benito Juárez, CDMX\n📌 Waze: Busca ANUIES\n🗓 Fecha: Domingo 23 de febrero\n🕒 Horario: 10:00 AM - 2:00 PM\n🚍 Ubicación: A solo 1 cuadra del Metrobús Miguel Laurent\n🅿 Estacionamiento disponible (primer piso)\n\n📸 Adjuntamos foto de la entrada y la ubicación para que llegues sin problema.\n\n💖 Este evento ha sido preparado con muchísimo amor, pensando en cada detalle para que lo disfrutes al máximo. Estamos ansiosas por verte, compartir esta experiencia contigo y aprender juntas.\n\n¡Nos vemos muy pronto! ✨");
+                                                        @endphp
+                                                        <a class="btn btn-xs btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{$telefono}}&text={{$mensaje}}">
                                                             <i class="fa fa-whatsapp"></i>
                                                         </a>
                                                     </td>
