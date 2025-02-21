@@ -79,15 +79,19 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($ordenes as $item)
-                                                <tr>
+                                                <tr id="row-{{ $item->id }}" style="background-color: {{ $item->confirmacion ? 'pink' : 'transparent' }};">
                                                     <td>
                                                         {{ $item->id }}
                                                         <h5>
                                                             @if ($item->Nota->id_usuario == NULL)
-                                                                {{ $item->Nota->nombre }} <br>
+                                                                {!! nl2br(implode(' ', array_map(function($word, $index) {
+                                                                    return $index > 0 && $index % 2 == 0 ? "\n$word" : $word;
+                                                                }, explode(' ', $item->Nota->nombre), array_keys(explode(' ', $item->Nota->nombre))))) !!} <br>
                                                                 {{ $item->Nota->telefono }}
                                                             @else
-                                                                {{ $item->Nota->User->name }} <br>
+                                                                {!! nl2br(implode(' ', array_map(function($word, $index) {
+                                                                    return $index > 0 && $index % 2 == 0 ? "\n$word" : $word;
+                                                                }, explode(' ', $item->Nota->User->name), array_keys(explode(' ', $item->Nota->User->name))))) !!} <br>
                                                                 {{ $item->Nota->User->telefono }}
                                                             @endif
                                                         </h5>
@@ -100,7 +104,7 @@
                                                     <td><h5>{{ $item->cantidad }}</h5></td>
                                                     <td>
                                                         @for ($i = 0; $i < $item->cantidad; $i++)
-                                                            <input data-id="{{ $item->id }}" data-index="{{ $i }}" class="toggle-class" type="checkbox"
+                                                            <input data-id="{{ $item->id }}" data-table="cosmica" data-index="{{ $i }}" class="toggle-class" type="checkbox"
                                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                                             data-on="Active" data-off="InActive" {{ $i < $item->asistencia ? 'checked disabled' : '' }}>
                                                         @endfor
@@ -110,22 +114,26 @@
                                                             $telefono = $item->Nota->id_usuario == NULL ? $item->Nota->telefono : $item->Nota->User->telefono;
                                                             $mensaje = urlencode("✨ ¡RECORDATORIO ESPECIAL: Este DOMINGO 23 es nuestra jornada especial! ✨\n\n📢 IMPORTANTE: LEE CON ATENCIÓN ESTAS INDICACIONES 📢\n\n🔸 Si compraste boleto VIP:\nTe pedimos llegar puntualmente a las 10:00 AM para realizar tu registro. Esto nos permitirá iniciar a tiempo el desayuno a las 10:30 AM y comenzar la jornada sin retrasos.\n\n🔸 Si tienes boleto básico:\nDe igual manera, te invitamos a llegar temprano, ya que debes completar tu registro antes de ingresar.\n\n💡 El registro es indispensable, ya que en este momento recibirás:\n✅ Pulsera de acceso\n✅ Kit de muestras\n✅ Producto gratis (para VIP que asistieron solos)\n✅ Material extra para la jornada\n\nPara agilizar tu ingreso, por favor llega con anticipación y colócate en la fila correspondiente. Si eres VIP, así también podrás disfrutar tu desayuno y snack sin prisas.\n\n📍 DIRECCIÓN: Miguel Laurent #961, Delegación Benito Juárez, CDMX\n📌 Waze: Busca ANUIES\n🗓 Fecha: Domingo 23 de febrero\n🕒 Horario: 10:00 AM - 2:00 PM\n🚍 Ubicación: A solo 1 cuadra del Metrobús Miguel Laurent\n🅿 Estacionamiento disponible (primer piso)\n\n📸 Adjuntamos foto de la entrada y la ubicación para que llegues sin problema.\n\n💖 Este evento ha sido preparado con muchísimo amor, pensando en cada detalle para que lo disfrutes al máximo. Estamos ansiosas por verte, compartir esta experiencia contigo y aprender juntas.\n\n¡Nos vemos muy pronto! ✨");
                                                         @endphp
-                                                         <a class="btn btn-xs btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{$telefono}}&text={{$mensaje}}">
+                                                        <a class="btn btn-xs btn-success text-white whatsapp-btn" data-id="{{ $item->id }}" target="_blank" href="https://api.whatsapp.com/send?phone={{$telefono}}&text={{$mensaje}}">
                                                             <i class="fa fa-whatsapp"></i>
                                                         </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
                                             @foreach ($ordenes_nas as $item)
-                                                <tr>
+                                                <tr id="row-{{ $item->id }}" style="background-color: {{ $item->confirmacion ? 'pink' : 'transparent' }};">
                                                     <td>
                                                         {{ $item->id }}
                                                         <h5>
                                                             @if ($item->Nota->id_usuario == NULL)
-                                                                {{ $item->Nota->nombre }} <br>
+                                                                {!! nl2br(implode(' ', array_map(function($word, $index) {
+                                                                    return $index > 0 && $index % 2 == 0 ? "\n$word" : $word;
+                                                                }, explode(' ', $item->Nota->nombre), array_keys(explode(' ', $item->Nota->nombre))))) !!} <br>
                                                                 {{ $item->Nota->telefono }}
                                                             @else
-                                                                {{ $item->Nota->User->name }} <br>
+                                                                {!! nl2br(implode(' ', array_map(function($word, $index) {
+                                                                    return $index > 0 && $index % 2 == 0 ? "\n$word" : $word;
+                                                                }, explode(' ', $item->Nota->User->name), array_keys(explode(' ', $item->Nota->User->name))))) !!} <br>
                                                                 {{ $item->Nota->User->telefono }}
                                                             @endif
                                                         </h5>
@@ -138,7 +146,7 @@
                                                     <td><h5>{{ $item->cantidad }}</h5></td>
                                                     <td>
                                                         @for ($i = 0; $i < $item->cantidad; $i++)
-                                                            <input data-id="{{ $item->id }}" data-index="{{ $i }}" class="toggle-class" type="checkbox"
+                                                            <input data-id="{{ $item->id }}" data-table="nas" data-index="{{ $i }}" class="toggle-class" type="checkbox"
                                                             data-onstyle="success" data-offstyle="danger" data-toggle="toggle"
                                                             data-on="Active" data-off="InActive" {{ $i < $item->asistencia ? 'checked disabled' : '' }}>
                                                         @endfor
@@ -148,7 +156,7 @@
                                                             $telefono = $item->Nota->id_usuario == NULL ? $item->Nota->telefono : $item->Nota->User->telefono;
                                                             $mensaje = urlencode("✨ ¡RECORDATORIO ESPECIAL: Este DOMINGO 23 es nuestra jornada especial! ✨\n\n📢 IMPORTANTE: LEE CON ATENCIÓN ESTAS INDICACIONES 📢\n\n🔸 Si compraste boleto VIP:\nTe pedimos llegar puntualmente a las 10:00 AM para realizar tu registro. Esto nos permitirá iniciar a tiempo el desayuno a las 10:30 AM y comenzar la jornada sin retrasos.\n\n🔸 Si tienes boleto básico:\nDe igual manera, te invitamos a llegar temprano, ya que debes completar tu registro antes de ingresar.\n\n💡 El registro es indispensable, ya que en este momento recibirás:\n✅ Pulsera de acceso\n✅ Kit de muestras\n✅ Producto gratis (para VIP que asistieron solos)\n✅ Material extra para la jornada\n\nPara agilizar tu ingreso, por favor llega con anticipación y colócate en la fila correspondiente. Si eres VIP, así también podrás disfrutar tu desayuno y snack sin prisas.\n\n📍 DIRECCIÓN: Miguel Laurent #961, Delegación Benito Juárez, CDMX\n📌 Waze: Busca ANUIES\n🗓 Fecha: Domingo 23 de febrero\n🕒 Horario: 10:00 AM - 2:00 PM\n🚍 Ubicación: A solo 1 cuadra del Metrobús Miguel Laurent\n🅿 Estacionamiento disponible (primer piso)\n\n📸 Adjuntamos foto de la entrada y la ubicación para que llegues sin problema.\n\n💖 Este evento ha sido preparado con muchísimo amor, pensando en cada detalle para que lo disfrutes al máximo. Estamos ansiosas por verte, compartir esta experiencia contigo y aprender juntas.\n\n¡Nos vemos muy pronto! ✨");
                                                         @endphp
-                                                        <a class="btn btn-xs btn-success text-white" target="_blank" href="https://api.whatsapp.com/send?phone={{$telefono}}&text={{$mensaje}}">
+                                                        <a class="btn btn-xs btn-success text-white whatsapp-btn" data-id="{{ $item->id }}" target="_blank" href="https://api.whatsapp.com/send?phone={{$telefono}}&text={{$mensaje}}">
                                                             <i class="fa fa-whatsapp"></i>
                                                         </a>
                                                     </td>
@@ -168,44 +176,73 @@
 @endsection
 
 @section('datatable')
-        <script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
+<script src="{{ asset('assets/admin/vendor/select2/dist/js/select2.min.js')}}"></script>
 
-        <script type="text/javascript">
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.cliente').select2();
+        $('.phone').select2();
+        $('.administradores').select2();
 
-            $(document).ready(function() {
-                    $('.cliente').select2();
-                    $('.phone').select2();
-                    $('.administradores').select2();
+        const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
+            searchable: true,
+            fixedHeight: false
+        });
 
-                    const dataTableSearch = new simpleDatatables.DataTable("#datatable-search", {
-                        searchable: true,
-                        fixedHeight: false
-                    });
+        $(document).on('change', '.toggle-class', function() {
+            var id = $(this).data('id');
+            var table = $(this).data('table');
+            var checkboxes = $(`input[data-id="${id}"]`);
+            var asistencia = checkboxes.filter(':checked').length;
+            console.log(asistencia);
 
-                    $(document).on('change', '.toggle-class', function() {
-                        var id = $(this).data('id');
-                        var checkboxes = $(`input[data-id="${id}"]`);
-                        var asistencia = checkboxes.filter(':checked').length;
-                        console.log(asistencia);
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: '{{ route('updateAsistencia') }}',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'id': id,
+                    'table': table,
+                    'asistencia': asistencia
+                },
+                success: function(data){
+                    console.log(data.success);
+                    // Deshabilitar el checkbox después de marcarlo
+                    $(this).prop('disabled', true);
+                }.bind(this),
+                error: function(data){
+                    console.log(data.error);
+                }
+            });
+        });
 
-                        $.ajax({
-                            type: "POST",
-                            dataType: "json",
-                            url: '{{ route('updateAsistencia') }}',
-                            data: {
-                                '_token': '{{ csrf_token() }}',
-                                'id': id,
-                                'asistencia': asistencia
-                            },
-                            success: function(data){
-                                console.log(data.success);
-                                // Deshabilitar el checkbox después de marcarlo
-                                $(this).prop('disabled', true);
-                            }.bind(this)
-                        });
-                    });
-                });
-        </script>
+        $(document).on('click', '.whatsapp-btn', function(e) {
+            var id = $(this).data('id');
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: '{{ route('updateConfirmacion') }}',
+                data: {
+                    '_token': '{{ csrf_token() }}',
+                    'id': id
+                },
+                success: function(data){
+                    console.log(data.success);
+                    // Cambiar el color de la fila a rosa
+                    $(`#row-${id}`).css('background-color', 'pink');
+                    // Redirigir a WhatsApp
+                    window.open($(this).attr('href'), '_blank');
+                }.bind(this),
+                error: function(data){
+                    console.log(data.error);
+                }
+            });
+        });
+    });
+</script>
 @endsection
 
 

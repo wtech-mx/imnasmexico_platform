@@ -247,10 +247,52 @@ class ProfesoresController extends Controller
 
     public function updateAsistencia(Request $request)
     {
-        $orden = ProductosNotasCosmica::find($request->id);
-        $orden->asistencia = $request->asistencia;
-        $orden->save();
+        $table = $request->table;
+        $id = $request->id;
+        $asistencia = $request->asistencia;
 
-        return response()->json(['success' => 'Asistencia actualizada.']);
+        if ($table == 'cosmica') {
+            $orden = ProductosNotasCosmica::find($id);
+        } else if ($table == 'nas') {
+            $orden = ProductosNotasId::find($id);
+        } else {
+            return response()->json(['error' => 'Tabla no válida.'], 400);
+        }
+
+        if ($orden) {
+            $orden->asistencia = $asistencia;
+            $orden->save();
+            return response()->json(['success' => 'Asistencia actualizada.']);
+        } else {
+            return response()->json(['error' => 'Orden no encontrada.'], 404);
+        }
+    }
+
+    public function updateConfirmacion(Request $request)
+    {
+        $id = $request->id;
+
+        // Primero intenta encontrar el registro en la tabla ProductosNotasCosmica
+        $orden = ProductosNotasCosmica::find($id);
+
+        if ($orden) {
+            // Si se encuentra en ProductosNotasCosmica, actualiza la confirmación
+            $orden->confirmacion = 1;
+            $orden->save();
+        } else {
+            // Si no se encuentra en ProductosNotasCosmica, intenta encontrarlo en ProductosNotasId
+            $orden = ProductosNotasId::find($id);
+
+            if ($orden) {
+                // Si se encuentra en ProductosNotasId, actualiza la confirmación
+                $orden->confirmacion = 1;
+                $orden->save();
+            } else {
+                // Si no se encuentra en ninguna tabla, devuelve un error
+                return response()->json(['error' => 'Orden no encontrada.'], 404);
+            }
+        }
+
+        return response()->json(['success' => 'Confirmación actualizada.']);
     }
 }
