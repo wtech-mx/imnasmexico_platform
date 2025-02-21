@@ -26,6 +26,8 @@ class EcommerceCosmikaController extends Controller
 
         $products_interesar = Products::
         where('linea', $product->linea)
+        ->where('categoria', 'Cosmica')
+        ->where('subcategoria', 'Producto')
         ->inRandomOrder()
         ->take(6)
         ->get();
