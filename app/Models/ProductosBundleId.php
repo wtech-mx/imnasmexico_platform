@@ -15,6 +15,7 @@ class ProductosBundleId extends Model
         'producto',
         'price',
         'cantidad',
+        'id_producto',
     ];
 
 

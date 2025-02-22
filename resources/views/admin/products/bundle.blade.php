@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-    Notas Productos
+    Crear kit
 @endsection
 
 @section('css')
@@ -91,7 +91,6 @@
                                                                     <option value="">Seleccione products</option>
                                                                     @foreach ($products as $product)
                                                                     <option value="{{ $product->nombre }}" data-precio_normal="{{ $product->precio_normal }}" data-imagen="{{ $product->imagenes }}">{{ $product->nombre }}</option>
-
                                                                     @endforeach
                                                                 </select>
                                                             </div>

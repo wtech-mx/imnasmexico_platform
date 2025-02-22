@@ -146,11 +146,14 @@ class ProductsController extends Controller
             $nuevosCampos4 = $request->input('descuento_prod');
 
             foreach ($nuevosCampos as $index => $campo) {
+                $producto = Products::where('nombre', $campo)->first();
+
                 $notas_inscripcion = new ProductosBundleId;
                 $notas_inscripcion->id_product = $product->id;
                 $notas_inscripcion->producto = $campo;
                 $notas_inscripcion->price = $nuevosCampos2[$index];
                 $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                $notas_inscripcion->id_producto = $producto->id;
                 $notas_inscripcion->save();
             }
         }
@@ -244,9 +247,6 @@ class ProductsController extends Controller
             // Agregar nuevos productos
             for ($count = 0; $count < count($campo); $count++) {
                 $producto = Products::where('nombre', $campo[$count])->first();
-                $resta = $producto->stock - $campo3[$count];
-                $producto->stock = $resta;
-                $producto->update();
 
                 $price = $campo4[$count];
 
@@ -257,6 +257,7 @@ class ProductsController extends Controller
                     'price' => $cleanPrice,
                     'cantidad' => $campo3[$count],
                     'descuento' => $descuento_prod[$count],
+                    'id_producto' => $producto->id,
                 );
                 ProductosBundleId::create($data);
                 $total += $cleanPrice;
