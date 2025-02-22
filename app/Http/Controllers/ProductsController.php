@@ -247,9 +247,6 @@ class ProductsController extends Controller
             // Agregar nuevos productos
             for ($count = 0; $count < count($campo); $count++) {
                 $producto = Products::where('nombre', $campo[$count])->first();
-                $resta = $producto->stock - $campo3[$count];
-                $producto->stock = $resta;
-                $producto->update();
 
                 $price = $campo4[$count];
 
@@ -260,6 +257,7 @@ class ProductsController extends Controller
                     'price' => $cleanPrice,
                     'cantidad' => $campo3[$count],
                     'descuento' => $descuento_prod[$count],
+                    'id_producto' => $producto->id,
                 );
                 ProductosBundleId::create($data);
                 $total += $cleanPrice;
