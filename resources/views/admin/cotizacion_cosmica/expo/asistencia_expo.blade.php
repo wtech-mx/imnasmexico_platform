@@ -70,6 +70,7 @@
                                     <table class="table table-flush" id="datatable-search">
                                         <thead class="thead">
                                             <tr>
+                                                <th>Folio</th>
                                                 <th>Cliente</th>
                                                 <th>Tipo</th>
                                                 <th>Cantidad</th>
@@ -80,6 +81,7 @@
                                         <tbody>
                                             @foreach ($ordenes as $item)
                                                 <tr id="row-{{ $item->id }}" style="background-color: {{ $item->confirmacion ? 'pink' : 'transparent' }};">
+                                                    <td>{{ $item->Nota->folio ?? 'Sin folio' }}</td>
                                                     <td>
                                                         {{ $item->id }}
                                                         <h5>
@@ -120,8 +122,11 @@
                                                     </td>
                                                 </tr>
                                             @endforeach
+
                                             @foreach ($ordenes_nas as $item)
                                                 <tr id="row-{{ $item->id }}" style="background-color: {{ $item->confirmacion ? 'pink' : 'transparent' }};">
+                                                    <td>{{ $item->Nota->folio ?? 'Sin folio' }}</td>
+
                                                     <td>
                                                         {{ $item->id }}
                                                         <h5>
@@ -138,12 +143,15 @@
                                                             @endif
                                                         </h5>
                                                     </td>
+
                                                     <td>
                                                         <h5>
                                                             {{ $item->producto }}
                                                         </h5>
                                                     </td>
+
                                                     <td><h5>{{ $item->cantidad }}</h5></td>
+
                                                     <td>
                                                         @for ($i = 0; $i < $item->cantidad; $i++)
                                                             <input data-id="{{ $item->id }}" data-table="nas" data-index="{{ $i }}" class="toggle-class" type="checkbox"
@@ -151,6 +159,7 @@
                                                             data-on="Active" data-off="InActive" {{ $i < $item->asistencia ? 'checked disabled' : '' }}>
                                                         @endfor
                                                     </td>
+
                                                     <td>
                                                         @php
                                                             $telefono = $item->Nota->id_usuario == NULL ? $item->Nota->telefono : $item->Nota->User->telefono;

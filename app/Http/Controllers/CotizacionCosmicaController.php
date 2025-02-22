@@ -246,6 +246,7 @@ class CotizacionCosmicaController extends Controller
                 $totalConDescuento = $totalDesc + $factura;
             }
         }
+
         $notas_productos->dinero_recibido = $envio;
         $notas_productos->metodo_pago = $request->get('metodo_pago');
         $notas_productos->fecha = $request->get('fecha');
