@@ -146,11 +146,14 @@ class ProductsController extends Controller
             $nuevosCampos4 = $request->input('descuento_prod');
 
             foreach ($nuevosCampos as $index => $campo) {
+                $producto = Products::where('nombre', $campo)->first();
+
                 $notas_inscripcion = new ProductosBundleId;
                 $notas_inscripcion->id_product = $product->id;
                 $notas_inscripcion->producto = $campo;
                 $notas_inscripcion->price = $nuevosCampos2[$index];
                 $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                $notas_inscripcion->id_producto = $producto->id;
                 $notas_inscripcion->save();
             }
         }
