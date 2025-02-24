@@ -36,14 +36,47 @@ class CotizacionCosmicaController extends Controller
         $administradores = User::where('cliente', '=', NULL)->orWhere('cliente', '=', '5')->get();
 
         // Filtrar notas con estatus específicos
-        $notas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
+        $query = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
             ->where('estatus_cotizacion', '=', NULL)
-            ->orderBy('id', 'DESC')
-            ->where('tipo_nota', '=', 'Cotizacion')
-            ->get();
+            ->where('tipo_nota', '=', 'Cotizacion');
+
+        if ($request->has('search') && !empty($request->search['value'])) {
+            $search = $request->search['value'];
+            $query->where(function($q) use ($search) {
+                $q->where('folio', 'LIKE', "%{$search}%")
+                  ->orWhere('nombre', 'LIKE', "%{$search}%")
+                  ->orWhere('telefono', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $orderColumn = $request->input('order.0.column', 'id');
+        $orderDir = $request->input('order.0.dir', 'desc');
+        $columns = $request->input('columns', []);
+        $orderColumnName = $columns[$orderColumn]['data'] ?? 'id';
+
+        $query->orderBy($orderColumnName, $orderDir);
+
+        $notas = $query->paginate($request->input('length', 10), ['*'], 'page', ($request->input('start', 0) / $request->input('length', 10)) + 1);
+
+        // Agregar columnas estatus y acciones manualmente
+        $notas->getCollection()->transform(function ($nota) {
+            $nota->estatus = $nota->estatus_cotizacion == 'Aprobada' ? 'Aprobada' : 'Pendiente';
+            $nota->acciones = view('admin.cotizacion_cosmica.partials.acciones', compact('nota'))->render();
+            $nota->cliente = $nota->id_usuario == NULL ? $nota->nombre . '<br>' . $nota->telefono : $nota->User->name;
+            return $nota;
+        });
 
         // Pasar datos a la vista
-        return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores','fechaInicio', 'fechaFin'));
+        if ($request->ajax()) {
+            return response()->json([
+                'draw' => $request->input('draw'),
+                'recordsTotal' => $notas->total(),
+                'recordsFiltered' => $notas->total(),
+                'data' => $notas->items(),
+            ]);
+        }
+
+        return view('admin.cotizacion_cosmica.index', compact('notas', 'administradores', 'fechaInicio', 'fechaFin'));
     }
 
     public function index_aprobadas(Request $request) {
@@ -59,15 +92,47 @@ class CotizacionCosmicaController extends Controller
         $administradores = User::where('cliente', '=', NULL)->orWhere('cliente', '=', '5')->get();
 
         // Filtrar notas con estatus específicos
-
-        $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$inicioMesAnterior, $finMesActual])
+        $query = NotasProductosCosmica::whereBetween('fecha', [$inicioMesAnterior, $finMesActual])
             ->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado'])
-            ->where('tipo_nota', '=', 'Cotizacion')
-            ->orderBy('id', 'DESC')
-            ->get();
+            ->where('tipo_nota', '=', 'Cotizacion');
+
+        if ($request->has('search') && !empty($request->search['value'])) {
+            $search = $request->search['value'];
+            $query->where(function($q) use ($search) {
+                $q->where('folio', 'LIKE', "%{$search}%")
+                  ->orWhere('nombre', 'LIKE', "%{$search}%")
+                  ->orWhere('telefono', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $orderColumn = $request->input('order.0.column', 'id');
+        $orderDir = $request->input('order.0.dir', 'desc');
+        $columns = $request->input('columns', []);
+        $orderColumnName = $columns[$orderColumn]['data'] ?? 'id';
+
+        $query->orderBy($orderColumnName, $orderDir);
+
+        $notas_aprobadas = $query->paginate($request->input('length', 10), ['*'], 'page', ($request->input('start', 0) / $request->input('length', 10)) + 1);
+
+        // Agregar columnas estatus y acciones manualmente
+        $notas_aprobadas->getCollection()->transform(function ($nota) {
+            $nota->estatus = $nota->estatus_cotizacion == 'Aprobada' ? 'Aprobada' : 'Pendiente';
+            $nota->acciones = view('admin.cotizacion_cosmica.partials.acciones_aprobadas', compact('nota'))->render();
+            $nota->cliente = $nota->id_usuario == NULL ? $nota->nombre . '<br>' . $nota->telefono : $nota->User->name;
+            return $nota;
+        });
 
         // Pasar datos a la vista
-        return view('admin.cotizacion_cosmica.index_aprobadas', compact( 'administradores', 'notas_aprobadas', 'fechaInicio', 'fechaFin'));
+        if ($request->ajax()) {
+            return response()->json([
+                'draw' => $request->input('draw'),
+                'recordsTotal' => $notas_aprobadas->total(),
+                'recordsFiltered' => $notas_aprobadas->total(),
+                'data' => $notas_aprobadas->items(),
+            ]);
+        }
+
+        return view('admin.cotizacion_cosmica.index_aprobadas', compact('administradores', 'notas_aprobadas', 'fechaInicio', 'fechaFin'));
     }
 
     public function index_canceladas(Request $request) {
@@ -83,25 +148,47 @@ class CotizacionCosmicaController extends Controller
         $administradores = User::where('cliente', '=', NULL)->orWhere('cliente', '=', '5')->get();
 
         // Filtrar notas con estatus específicos
-        $notas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
-            ->where('estatus_cotizacion', '=', NULL)
-            ->orderBy('id', 'DESC')
-            ->where('tipo_nota', '=', 'Cotizacion')
-            ->get();
-
-        $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$inicioMesAnterior, $finMesActual])
-            ->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado'])
-            ->where('tipo_nota', '=', 'Cotizacion')
-            ->orderBy('id', 'DESC')
-            ->get();
-
-        $notas_canceladas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
+        $query = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
             ->where('estatus_cotizacion', '=', 'Cancelada')
-            ->orderBy('id', 'DESC')
-            ->get();
+            ->where('tipo_nota', '=', 'Cotizacion');
+
+        if ($request->has('search') && !empty($request->search['value'])) {
+            $search = $request->search['value'];
+            $query->where(function($q) use ($search) {
+                $q->where('folio', 'LIKE', "%{$search}%")
+                  ->orWhere('nombre', 'LIKE', "%{$search}%")
+                  ->orWhere('telefono', 'LIKE', "%{$search}%");
+            });
+        }
+
+        $orderColumn = $request->input('order.0.column', 'id');
+        $orderDir = $request->input('order.0.dir', 'desc');
+        $columns = $request->input('columns', []);
+        $orderColumnName = $columns[$orderColumn]['data'] ?? 'id';
+
+        $query->orderBy($orderColumnName, $orderDir);
+
+        $notas_canceladas = $query->paginate($request->input('length', 10), ['*'], 'page', ($request->input('start', 0) / $request->input('length', 10)) + 1);
+
+        // Agregar columnas estatus y acciones manualmente
+        $notas_canceladas->getCollection()->transform(function ($nota) {
+            $nota->estatus = $nota->estatus_cotizacion == 'Cancelada' ? 'Cancelada' : 'Pendiente';
+            $nota->acciones = view('admin.cotizacion_cosmica.partials.acciones_canceladas', compact('nota'))->render();
+            $nota->cliente = $nota->id_usuario == NULL ? $nota->nombre . '<br>' . $nota->telefono : $nota->User->name;
+            return $nota;
+        });
 
         // Pasar datos a la vista
-        return view('admin.cotizacion_cosmica.index_canceladas', compact('notas', 'administradores', 'notas_aprobadas', 'notas_canceladas', 'fechaInicio', 'fechaFin'));
+        if ($request->ajax()) {
+            return response()->json([
+                'draw' => $request->input('draw'),
+                'recordsTotal' => $notas_canceladas->total(),
+                'recordsFiltered' => $notas_canceladas->total(),
+                'data' => $notas_canceladas->items(),
+            ]);
+        }
+
+        return view('admin.cotizacion_cosmica.index_canceladas', compact('administradores', 'notas_canceladas', 'fechaInicio', 'fechaFin'));
     }
 
     public function index_protocolo(Request $request, $id)

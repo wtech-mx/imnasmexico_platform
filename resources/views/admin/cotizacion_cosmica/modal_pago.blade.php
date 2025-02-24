@@ -1,4 +1,4 @@
-<div class="modal fade" id="pagoModal{{$item->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="pagoModal{{ $nota->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-dialog-centered">
       <div class="modal-content">
 
@@ -6,7 +6,7 @@
           <h5 class="modal-title">Comprobante pago</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-        <form method="POST" action="{{ route('notas_cosmica.update_pago', $item->id) }}" enctype="multipart/form-data" role="form">
+        <form method="POST" action="{{ route('notas_cosmica.update_pago', $nota->id) }}" enctype="multipart/form-data" role="form">
             @csrf
             <input type="hidden" name="_method" value="PATCH">
                 <div class="modal-body">
@@ -22,7 +22,7 @@
                         </div>
 
                         <div class="col-12">
-                            <embed src="{{ asset('pago_fuera/'.$item->foto_pago) }}" type="application/pdf" style="width: 450px; height: 400px;" />
+                            <embed src="{{ asset('pago_fuera/'.$nota->foto_pago) }}" type="application/pdf" style="width: 450px; height: 400px;" />
                         </div>
                     </div>
                 </div>
