@@ -840,12 +840,15 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/perfil/cliente/cotizaciones/cosmica/{id}', [App\Http\Controllers\PerfilClienteController::class, 'cotizaciones_cosmica'])->name('peril_cliente.cotizaciones_cosmica');
         Route::get('/perfil/cliente/membresia/cosmica/{id}', [App\Http\Controllers\PerfilClienteController::class, 'membresia_cosmica'])->name('peril_cliente.membresia_cosmica');
 
+        Route::get('/perfil/cliente/search-phone', [App\Http\Controllers\PerfilClienteController::class, 'searchPhone'])->name('peril_cliente.searchPhone');
+        Route::get('/perfil/cliente/search-name', [App\Http\Controllers\PerfilClienteController::class, 'searchName'])->name('peril_cliente.searchName');
         // =============== M O D U L O  C O T I Z A C I O N  E X P O ===============================
         Route::get('/cotizacion/expo/index', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_expo'])->name('corizacion_expo.index');
         Route::get('/cotizacion/expo/buscador', [App\Http\Controllers\CotizacionCosmicaController::class, 'buscador_expo'])->name('corizacion_expo.buscador');
         Route::get('/cotizacion/expo/create', [App\Http\Controllers\CotizacionCosmicaController::class, 'create_expo'])->name('corizacion_expo.create');
         Route::get('/cotizacion/expo/edit/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'edit_expo'])->name('corizacion_expo.edit');
 
+        Route::get('/cotizacion/expo/pdf', [App\Http\Controllers\CotizacionCosmicaController::class, 'pdf_expo'])->name('pdf_expo.pdf');
         // =============== M O D U L O  A S I S T E N C I A  E X P O ===============================
         Route::get('/asistencia/expo/index', [App\Http\Controllers\ProfesoresController::class, 'asistencia_expo'])->name('asistencia_expo.index');
         Route::post('/update-asistencia', [App\Http\Controllers\ProfesoresController::class, 'updateAsistencia'])->name('updateAsistencia');
