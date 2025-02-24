@@ -121,7 +121,7 @@
         <thead>
             <tr>
                 <th>
-                    <h2 style="text-align: center;">Total de Cotizaciones <img src="https://plataforma.imnasmexico.com/assets/user/icons/bolsa-de-dinero.png" alt="" width="35px"></h2>
+                    <h2 style="text-align: center;">Total de Ventas <img src="https://plataforma.imnasmexico.com/assets/user/icons/bolsa-de-dinero.png" alt="" width="35px"></h2>
                 </th>
             </tr>
         </thead>
@@ -135,7 +135,6 @@
         </tbody>
     </table>
 
-    <div style="page-break-after: always;"></div>
 
     <h2 style="text-align: center;"> <br>Cotizaciones <br></h2>
     <table class="mt-5">
