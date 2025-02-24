@@ -1468,4 +1468,21 @@ class CotizacionCosmicaController extends Controller
 
         return view('admin.cotizacion_cosmica.expo.index',compact('item', 'notas'));
     }
+
+    public function pdf_expo(Request $request){
+        $today =  date('d-m-Y');
+        $fechaInicio = $request->input('fecha_inicio', date('Y-m-01'));
+        $fechaFin = $request->input('fecha_fin', date('Y-m-t'));
+
+        $notas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
+        ->orderBy('id', 'DESC')
+        ->where('tipo_nota', '=', 'Expo')
+        ->get();
+
+        $total = $notas->sum('total');
+
+        $pdf = \PDF::loadView('admin.cotizacion_cosmica.expo.pdf_expo', compact('notas', 'today', 'total'));
+        return $pdf->stream();
+       //  return $pdf->download('Etiquetas bajo stock nas / '.$today.'.pdf');
+    }
 }

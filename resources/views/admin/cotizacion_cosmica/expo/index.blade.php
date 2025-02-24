@@ -63,6 +63,9 @@
                                     </div>
                                 </form>
 
+                                <form class="row mt-3" action="{{ route('pdf_expo.pdf') }}" method="GET" >
+                                    <button class="btn btn-dark btn-sm" type="submit" style=""><i class="fa fa-file-pdf"></i> PDF </button>
+                                </form>
                                 <div class="table-responsive">
                                     <table class="table table-flush" id="datatable-search">
                                         <thead class="thead">
