@@ -835,9 +835,9 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/perfil/cliente/buscador', [App\Http\Controllers\PerfilClienteController::class, 'buscador'])->name('peril_cliente.buscador');
         Route::get('/perfil/cliente/informacion/{id}', [App\Http\Controllers\PerfilClienteController::class, 'informacion'])->name('peril_cliente.informacion');
         Route::get('/perfil/cliente/cursos/{id}', [App\Http\Controllers\PerfilClienteController::class, 'cursos'])->name('peril_cliente.cursos');
-        Route::get('/perfil/cliente/compras/tiendita/{id}', [App\Http\Controllers\PerfilClienteController::class, 'compras_tiendita'])->name('peril_cliente.compras_tiendita');
-        Route::get('/perfil/cliente/cotizaciones/nas/{id}', [App\Http\Controllers\PerfilClienteController::class, 'cotizaciones_nas'])->name('peril_cliente.cotizaciones_nas');
-        Route::get('/perfil/cliente/cotizaciones/cosmica/{id}', [App\Http\Controllers\PerfilClienteController::class, 'cotizaciones_cosmica'])->name('peril_cliente.cotizaciones_cosmica');
+        Route::get('/perfil/cliente/compras/tiendita/{phone}', [App\Http\Controllers\PerfilClienteController::class, 'compras_tiendita'])->name('peril_cliente.compras_tiendita');
+        Route::get('/perfil/cliente/cotizaciones/nas/{phone}', [App\Http\Controllers\PerfilClienteController::class, 'cotizaciones_nas'])->name('peril_cliente.cotizaciones_nas');
+        Route::get('/perfil/cliente/cotizaciones/cosmica/{phone}', [App\Http\Controllers\PerfilClienteController::class, 'cotizaciones_cosmica'])->name('peril_cliente.cotizaciones_cosmica');
         Route::get('/perfil/cliente/membresia/cosmica/{id}', [App\Http\Controllers\PerfilClienteController::class, 'membresia_cosmica'])->name('peril_cliente.membresia_cosmica');
 
         Route::get('/perfil/cliente/search-phone', [App\Http\Controllers\PerfilClienteController::class, 'searchPhone'])->name('peril_cliente.searchPhone');
