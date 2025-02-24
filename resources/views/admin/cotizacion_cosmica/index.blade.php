@@ -111,7 +111,7 @@
                 { data: 'cliente', name: 'cliente' },
                 { data: 'fecha', name: 'fecha' },
                 { data: 'total', name: 'total' },
-                { data: 'estatus', name: 'estatus' },
+                { data: 'estatus_boton', name: 'estatus_boton', orderable: false, searchable: false },
                 { data: 'acciones', name: 'acciones', orderable: false, searchable: false }
             ],
             order: [[0, 'desc']],

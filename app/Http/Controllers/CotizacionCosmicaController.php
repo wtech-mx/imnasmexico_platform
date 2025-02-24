@@ -63,6 +63,7 @@ class CotizacionCosmicaController extends Controller
             $nota->estatus = $nota->estatus_cotizacion == 'Aprobada' ? 'Aprobada' : 'Pendiente';
             $nota->acciones = view('admin.cotizacion_cosmica.partials.acciones', compact('nota'))->render();
             $nota->cliente = $nota->id_usuario == NULL ? $nota->nombre . '<br>' . $nota->telefono : $nota->User->name;
+            $nota->estatus_boton = view('admin.cotizacion_cosmica.partials.estatus_boton', compact('nota'))->render();
             return $nota;
         });
 
@@ -117,8 +118,9 @@ class CotizacionCosmicaController extends Controller
         // Agregar columnas estatus y acciones manualmente
         $notas_aprobadas->getCollection()->transform(function ($nota) {
             $nota->estatus = $nota->estatus_cotizacion == 'Aprobada' ? 'Aprobada' : 'Pendiente';
-            $nota->acciones = view('admin.cotizacion_cosmica.partials.acciones_aprobadas', compact('nota'))->render();
+            $nota->acciones = view('admin.cotizacion_cosmica.partials.acciones', compact('nota'))->render();
             $nota->cliente = $nota->id_usuario == NULL ? $nota->nombre . '<br>' . $nota->telefono : $nota->User->name;
+            $nota->estatus_boton = view('admin.cotizacion_cosmica.partials.estatus_boton', compact('nota'))->render();
             return $nota;
         });
 
@@ -173,8 +175,9 @@ class CotizacionCosmicaController extends Controller
         // Agregar columnas estatus y acciones manualmente
         $notas_canceladas->getCollection()->transform(function ($nota) {
             $nota->estatus = $nota->estatus_cotizacion == 'Cancelada' ? 'Cancelada' : 'Pendiente';
-            $nota->acciones = view('admin.cotizacion_cosmica.partials.acciones_canceladas', compact('nota'))->render();
+            $nota->acciones = view('admin.cotizacion_cosmica.partials.acciones', compact('nota'))->render();
             $nota->cliente = $nota->id_usuario == NULL ? $nota->nombre . '<br>' . $nota->telefono : $nota->User->name;
+            $nota->estatus_boton = view('admin.cotizacion_cosmica.partials.estatus_boton', compact('nota'))->render();
             return $nota;
         });
 
