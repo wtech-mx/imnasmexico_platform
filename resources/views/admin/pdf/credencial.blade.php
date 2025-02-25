@@ -259,17 +259,36 @@
 
         @endphp
 
-        @if(!isset($fileName_logo))
-                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+        @if($curso == 'Tanatologia')
 
-            @elseif(empty($fileName_logo))
-                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+            @if(!isset($fileName_logo))
+                    <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
 
-            @elseif($fileName_logo == 'Sin Logo')
-                <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
-            @else
-                <img src="{{ $basePath . 'crdecnia_frontal_limpia.png' }}" class="img_portada">
+                @elseif(empty($fileName_logo))
+                    <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+                @elseif($fileName_logo == 'Sin Logo')
+                    <img src="{{ $basePath . 'credencial_88.jpg' }}" class="img_portada">
+                @else
+                    <img src="{{ $basePath . 'credencial_99.jpg' }}" class="img_portada">
+            @endif
+
+        @else
+
+            @if(!isset($fileName_logo))
+                    <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+                @elseif(empty($fileName_logo))
+                    <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+
+                @elseif($fileName_logo == 'Sin Logo')
+                    <img src="{{ $basePath . $tipo_documentos->img_portada }}" class="img_portada">
+                @else
+                    <img src="{{ $basePath . 'crdecnia_frontal_limpia.png' }}" class="img_portada">
+            @endif
+
         @endif
+
 
         {{-- <div class="container">
             <h4 class="nombre">{{ $parte1 }}<br>{{ $parte2 }}</h4>
