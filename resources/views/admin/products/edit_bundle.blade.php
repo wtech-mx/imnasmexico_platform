@@ -103,23 +103,13 @@
                                                 <input type="text"  name="productos[]" class="form-control d-inline-block" value="{{ $productos->producto }}" readonly>
                                             </div>
 
-                                            <div class="form-group col-4">
+                                            <div class="form-group col-2">
                                                 <label for="cantidad_{{ $productos->id }}">Cantidad *</label>
                                                 <div class="input-group mb-3">
                                                     <span class="input-group-text" id="basic-addon1">
                                                         <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
                                                     </span>
                                                     <input type="number" id="cantidad_{{ $productos->id }}" name="cantidad[]" class="form-control cantidad" style="width: 65%;" value="{{ $productos->cantidad }}">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group col-2" style="display: none">
-                                                <label for="descuento_{{ $productos->id }}">Descuento *</label>
-                                                <div class="input-group mb-3">
-                                                    <span class="input-group-text" id="basic-addon1">
-                                                        <img src="{{ asset('assets/cam/dinero.png') }}" alt="" width="35px">
-                                                    </span>
-                                                    <input type="number" id="descuento_{{ $productos->id }}" name="descuento[]" class="form-control descuento" value="{{ $productos->descuento }}">
                                                 </div>
                                             </div>
 
@@ -133,12 +123,12 @@
                                                 </div>
                                             </div>
 
-                                            {{-- <div class="form-group col-2">
+                                            <div class="form-group col-2">
                                                 <h4 for="name">Quitar</h4>
                                                 <div class="input-group mb-3">
                                                     <button type="button" class="btn btn-danger btn-sm eliminarCampo3" data-id="{{ $productos->id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                 </div>
-                                            </div> --}}
+                                            </div>
 
                                             <!-- Campo oculto para el precio unitario -->
                                             <input type="hidden" id="precio_unitario_{{ $productos->id }}" value="{{ $precio_unitario }}">
@@ -150,13 +140,6 @@
                                             @endphp
                                         </div>
                                     @endforeach
-                                    {{-- <div class="col-6 mt-2">
-                                        <h5 style="color:#836262"><strong>Total</strong> </h5>
-                                    </div>
-
-                                    <div class="col-6 mt-3">
-                                        <h4 style="color:#836262"><strong>${{ $precio }}</strong> </h4>
-                                    </div> --}}
 
                                     <div class="col-12">
                                         <h5 class="mt-2">Seleciona mas productos </h5>

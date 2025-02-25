@@ -172,8 +172,7 @@ class ProductsController extends Controller
         return view('admin.products.edit_bundle', compact('products', 'cotizacion', 'cotizacion_productos'));
     }
 
-    public function update_bundle(Request $request, $id){
-
+    public function update_bundle(Request $request, $id) {
         $dominio = $request->getHost();
         if($dominio == 'plataforma.imnasmexico.com'){
             $ruta_comentarios = base_path('../public_html/plataforma.imnasmexico.com/products');
@@ -188,6 +187,7 @@ class ProductsController extends Controller
         $total = 0;
         $resta = 0;
         $suma = 0;
+
         // Obtener los productos actuales de la base de datos para esa cotización
         $productosExistentes = ProductosBundleId::where('id_product', $id)->get();
 
@@ -200,7 +200,6 @@ class ProductsController extends Controller
             $productos = ProductosBundleId::where('producto', $producto[$count])
                 ->where('id_product', $id)
                 ->firstOrFail();
-
 
             $producto_db = Products::where('nombre', $producto[$count])->first();
             $producto_cot = ProductosBundleId::where('producto', $producto[$count])->where('id_product', $id)->first();
@@ -223,7 +222,6 @@ class ProductsController extends Controller
             $data = array(
                 'price' => $cleanPrice2,
                 'cantidad' => $cantidad[$count],
-                'descuento' => $descuento[$count],
             );
 
             // Actualizar el producto en la base de datos
@@ -256,7 +254,6 @@ class ProductsController extends Controller
                     'producto' => $campo[$count],
                     'price' => $cleanPrice,
                     'cantidad' => $campo3[$count],
-                    'descuento' => $descuento_prod[$count],
                     'id_producto' => $producto->id,
                 );
                 ProductosBundleId::create($data);
