@@ -588,8 +588,9 @@ class CotizacionCosmicaController extends Controller
 
         $nota = NotasProductosCosmica::findOrFail($id);
         $cleanPrice4 = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
+        $cleanPriceTotal = floatval(str_replace(['$', ','], '', $request->get('total_final')));
         $nota->subtotal = $cleanPrice4;
-        $nota->total = $request->get('total_final');
+        $nota->total = $cleanPriceTotal;
         $nota->envio = $request->get('envio');
         $nota->save();
 
