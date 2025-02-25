@@ -270,6 +270,7 @@ class CotizacionController extends Controller
             $nuevosCampos = $request->input('campo');
             $nuevosCampos2 = $request->input('campo4');
             $nuevosCampos3 = $request->input('campo3');
+            $descuento_prod = $request->input('descuento_prod');
 
             foreach ($nuevosCampos as $index => $campo) {
                 $producto = Products::where('id', $campo)->where('categoria', '!=', 'Ocultar')->first();
@@ -308,7 +309,7 @@ class CotizacionController extends Controller
                     $notas_inscripcion->id_producto = $producto->id;
                     $notas_inscripcion->price = $nuevosCampos2[$index];
                     $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                    $notas_inscripcion->descuento = $nuevosCampos4[$index];
+                    $notas_inscripcion->descuento = $descuento_prod[$index];
                     $notas_inscripcion->estatus = 1;
                     $notas_inscripcion->save();
                 }else{
@@ -318,7 +319,7 @@ class CotizacionController extends Controller
                     $notas_inscripcion->id_producto = $producto->id;
                     $notas_inscripcion->price = $nuevosCampos2[$index];
                     $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                    $notas_inscripcion->descuento = $nuevosCampos4[$index];
+                    $notas_inscripcion->descuento = $descuento_prod[$index];
                     $notas_inscripcion->save();
                 }
             }
@@ -365,7 +366,6 @@ class CotizacionController extends Controller
 
             // Actualizar el producto en la base de datos
             $productos->update($data);
-            $total += $cleanPrice2;
         }
 
         // Eliminar los productos que ya no están en la solicitud
@@ -383,34 +383,26 @@ class CotizacionController extends Controller
 
             // Agregar nuevos productos
             for ($count = 0; $count < count($campo); $count++) {
+                $producto_first = Products::where('id', $campo[$count])->where('categoria', '!=', 'Ocultar')->first();
                 $price = $campo4[$count];
                 $cleanPrice = floatval(str_replace(['$', ','], '', $price));
                 $data = array(
                     'id_notas_productos' => $id,
-                    'producto' => $campo[$count],
+                    'producto' => $producto_first->nombre,
+                    'id_producto' => $producto_first->id,
                     'price' => $cleanPrice,
                     'cantidad' => $campo3[$count],
                     'descuento' => $descuento_prod[$count],
                 );
                 ProductosNotasId::create($data);
-                $total += $cleanPrice;
             }
         }
 
         $nota = NotasProductos::findOrFail($id);
 
-        if($request->get('envio') == 'No'){
-            $envio = 0;
-            $envio_check = 'No';
-        }else{
-            $envio = 250;
-            $envio_check = 'Si';
-        }
-
-        $total_envio = $total + $envio;
         $nota->tipo = str_replace(['$', ','], '', $request->input('subtotal_final'));
         $nota->total = str_replace(['$', ','], '', $request->input('total_final'));
-        $nota->envio = $envio_check;
+        $nota->envio = $request->get('envio');
         $nota->restante = $request->input('descuento_total');
         $nota->factura = $request->get('factura');
         $nota->save();
