@@ -197,7 +197,7 @@
                                                                 <span class="input-group-text" id="basic-addon1">
                                                                     <img src="{{ asset('assets/user/icons/clic2.png') }}" alt="" width="35px">
                                                                 </span>
-                                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad2" value="1">
+                                                                <input type="number" name="campo3[]" class="form-control d-inline-block cantidad2">
                                                             </div>
                                                         </div>
 
@@ -315,6 +315,66 @@
     document.addEventListener('DOMContentLoaded', function () {
         $('.producto2').select2();
         const productos = @json($cotizacion_productos);
+        let clienteData = null;
+
+        function updateTotal() {
+            let total = 0;
+
+            document.querySelectorAll('.subtotal').forEach(subtotalElement => {
+                const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
+                total += subtotalValue;
+            });
+
+            document.querySelectorAll('.subtotal2').forEach(subtotalElement => {
+                const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
+                total += subtotalValue;
+            });
+
+            document.getElementById('subtotal_final').value = `$${total.toFixed(2)}`;
+
+            const descuentoInput = document.getElementById('descuento_total');
+            let descuentoPorcentaje = parseFloat(descuentoInput.value) || 0;
+
+            let totalConDescuento = total - (total * (descuentoPorcentaje / 100));
+
+            const facturaCheckbox = document.getElementById('toggleFacturaSi');
+            if (facturaCheckbox.checked) {
+                totalConDescuento += totalConDescuento * 0.16;
+            }
+
+            const envioCheckbox = document.querySelector('input[name="envio"]:checked');
+            let costoEnvio = 0;
+
+            if (envioCheckbox && envioCheckbox.value === 'Si') {
+                if (clienteData && clienteData.status === 'activo') {
+                    if (clienteData.membresia === 'Cosmos') {
+                        costoEnvio = total >= 1500 ? 90 : 126;
+                    } else if (clienteData.membresia === 'Estelar') {
+                        costoEnvio = total >= 2500 ? 0 : 90;
+                    }
+                } else {
+                    costoEnvio = 180; // Si el cliente no tiene membresía o no está activa, el costo de envío es 180
+                }
+            }
+
+            totalConDescuento += costoEnvio;
+
+            document.getElementById('total_final').value = `$${totalConDescuento.toFixed(2)}`;
+        }
+
+        function updateSubtotalExistente(id) {
+            const cantidad = parseFloat(document.getElementById(`cantidad_${id}`).value) || 0;
+            const descuento = parseFloat(document.getElementById(`descuento_${id}`).value) || 0;
+            const precio_unitario = parseFloat(document.getElementById(`precio_unitario_${id}`).value) || 0;
+
+            const subtotalSinDescuento = cantidad * precio_unitario;
+            const descuentoMonto = (subtotalSinDescuento * descuento) / 100;
+            const subtotalConDescuento = subtotalSinDescuento - descuentoMonto;
+
+            document.getElementById(`subtotal_${id}`).value = `$${subtotalConDescuento.toFixed(2)}`;
+
+            updateTotal();
+        }
 
         productos.forEach(producto => {
             const cantidadInput = document.getElementById(`cantidad_${producto.id}`);
@@ -329,7 +389,6 @@
                 descuentoInput.addEventListener('input', () => updateSubtotalExistente(producto.id));
             }
 
-            // Agregar evento para eliminar el producto
             if (eliminarBtn) {
                 eliminarBtn.addEventListener('click', () => eliminarProducto(producto.id));
             }
@@ -338,82 +397,23 @@
         function eliminarProducto(productoId) {
             const productoDiv = document.querySelector(`.campo3[data-id="${productoId}"]`);
 
-            // Si el elemento existe, eliminarlo del DOM
             if (productoDiv) {
                 productoDiv.remove();
                 updateTotal();
             }
         }
 
-        function updateSubtotalExistente(id) {
-            const cantidad = parseFloat(document.getElementById(`cantidad_${id}`).value) || 0;
-            const descuento = parseFloat(document.getElementById(`descuento_${id}`).value) || 0;
-            const precio_unitario = parseFloat(document.getElementById(`precio_unitario_${id}`).value) || 0;
-
-            // Calcular el subtotal antes del descuento
-            const subtotalSinDescuento = cantidad * precio_unitario;
-            // Calcular el descuento en monto
-            const descuentoMonto = (subtotalSinDescuento * descuento) / 100;
-            // Calcular el subtotal final después del descuento
-            const subtotalConDescuento = subtotalSinDescuento - descuentoMonto;
-
-            document.getElementById(`subtotal_${id}`).value = `$${subtotalConDescuento.toFixed(2)}`;
-
-            updateTotal();
-        }
-
-        function updateTotal() {
-            let total = 0;
-
-            // Sumar subtotales de productos existentes
-            document.querySelectorAll('.subtotal').forEach(subtotalElement => {
-                const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
-                total += subtotalValue;
-            });
-
-            // Sumar subtotales de nuevos productos
-            document.querySelectorAll('.subtotal2').forEach(subtotalElement => {
-                const subtotalValue = parseFloat(subtotalElement.value.replace('$', '').replace(',', '')) || 0;
-                total += subtotalValue;
-            });
-
-            // Mostrar el subtotal final
-            document.getElementById('subtotal_final').value = `$${total.toFixed(2)}`;
-
-            // Obtener el valor del descuento
-            const descuentoInput = document.getElementById('descuento_total');
-            let descuentoPorcentaje = parseFloat(descuentoInput.value) || 0;
-
-            // Calcular el total final con el descuento
-            let totalConDescuento = total - (total * (descuentoPorcentaje / 100));
-
-            // Verificar si el checkbox de factura está marcado
-            const facturaCheckbox = document.getElementById('toggleFacturaSi');
-            if (facturaCheckbox.checked) {
-                totalConDescuento += totalConDescuento * 0.16; // Sumar el 16% de IVA
-            }
-
-            // Mostrar el total final
-            document.getElementById('total_final').value = `$${totalConDescuento.toFixed(2)}`;
-        }
-
-        // Escuchar cambios en el input de descuento
         document.getElementById('descuento_total').addEventListener('input', updateTotal);
-
-        // Escuchar cambios en el checkbox de factura
         document.getElementById('toggleFacturaSi').addEventListener('change', updateTotal);
 
-        // Llamar a la función para calcular inicialmente
+        document.querySelectorAll('input[name="envio"]').forEach(radio => {
+            radio.addEventListener('change', updateTotal);
+        });
+
         updateTotal();
 
-    });
-</script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
         const camposContainer2 = document.getElementById('camposContainer2');
 
-        // Añadir campo de producto
         document.getElementById('agregarCampo2').addEventListener('click', function() {
             const nuevoCampo = crearNuevoCampo();
             camposContainer2.appendChild(nuevoCampo);
@@ -427,17 +427,14 @@
             nuevoCampo.querySelector('.cantidad2').value = '';
             nuevoCampo.querySelector('.descuento_prod').value = '0';
             nuevoCampo.querySelector('.subtotal2').value = '';
-            // Eliminar la clase 'select2-hidden-accessible' y el contenedor generado por select2 antes de clonar
             $(nuevoCampo).find('.producto2').removeClass('select2-hidden-accessible').next('.select2').remove();
-
-            // Inicializar select2 después de clonar
             $(nuevoCampo).find('.producto2').select2();
             return nuevoCampo;
         }
 
         function eliminarCampo(campo) {
             campo.remove();
-            updateTotal();  // Actualizar el total después de eliminar un campo
+            updateTotal();
         }
 
         function asignarEventos(campo) {
@@ -455,7 +452,6 @@
                 updateTotal();
             });
 
-            // Asignar evento de eliminación al botón correspondiente
             const eliminarCampoBtn = campo.querySelector('.eliminarCampo');
             eliminarCampoBtn.addEventListener('click', function() {
                 eliminarCampo(campo);
@@ -481,11 +477,23 @@
             updateTotal();
         }
 
-        // Asignar eventos a los campos existentes
         document.querySelectorAll('.campo2').forEach(campo => {
             asignarEventos(campo);
         });
+
+        // Obtener datos del cliente
+        const clienteId = document.getElementById('id_cliente').value;
+        if (clienteId) {
+            $.ajax({
+                url: '/get-descuento/' + clienteId,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    clienteData = data;
+                    updateTotal();
+                }
+            });
+        }
     });
 </script>
-
 @endsection
