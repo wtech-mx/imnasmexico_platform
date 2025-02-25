@@ -500,7 +500,7 @@ class CotizacionCosmicaController extends Controller
         return view('admin.cotizacion_cosmica.edit', compact('products', 'cotizacion', 'cotizacion_productos'));
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id) {
         $producto = $request->input('productos');
         $price = $request->input('price');
         $cantidad = $request->input('cantidad');
@@ -517,23 +517,41 @@ class CotizacionCosmicaController extends Controller
             // Buscar el producto en la base de datos
             $productos = ProductosNotasCosmica::where('producto', $producto[$count])
                 ->where('id_notas_productos', $id)
-                ->firstOrFail();
+                ->first();
 
-            // Guardar el ID del producto en el array de productos enviados
-            $productosIdsEnviados[] = $productos->id;
+            // Si el producto existe, actualizarlo
+            if ($productos) {
+                // Guardar el ID del producto en el array de productos enviados
+                $productosIdsEnviados[] = $productos->id;
 
-            // Limpiar el precio y preparar los datos para la actualización
-            $precio = $price[$count];
-            $cleanPrice2 = floatval(str_replace(['$', ','], '', $precio));
-            $data = array(
-                'price' => $cleanPrice2,
-                'cantidad' => $cantidad[$count],
-                'descuento' => $descuento[$count],
-            );
+                // Limpiar el precio y preparar los datos para la actualización
+                $precio = $price[$count];
+                $cleanPrice2 = floatval(str_replace(['$', ','], '', $precio));
+                $data = array(
+                    'price' => $cleanPrice2,
+                    'cantidad' => $cantidad[$count],
+                    'descuento' => $descuento[$count],
+                );
 
-            // Actualizar el producto en la base de datos
-            $productos->update($data);
-            $total += $cleanPrice2;
+                // Actualizar el producto en la base de datos
+                $productos->update($data);
+            } else {
+                // Si el producto no existe, crearlo
+                $producto_first = Products::where('id', $producto[$count])->where('categoria', '!=', 'Ocultar')->first();
+                if ($producto_first) {
+                    $cleanPrice = floatval(str_replace(['$', ','], '', $price[$count]));
+                    $data = array(
+                        'id_notas_productos' => $id,
+                        'producto' => $producto_first->nombre,
+                        'id_producto' => $producto_first->id,
+                        'price' => $cleanPrice,
+                        'cantidad' => $cantidad[$count],
+                        'descuento' => $descuento[$count],
+                    );
+                    $newProduct = ProductosNotasCosmica::create($data);
+                    $productosIdsEnviados[] = $newProduct->id;
+                }
+            }
         }
 
         // Eliminar los productos que ya no están en la solicitud
@@ -544,65 +562,35 @@ class CotizacionCosmicaController extends Controller
         }
 
         $campo = $request->input('campo');
-        if(!empty(array_filter($campo, fn($value) => !is_null($value)))){
+        if (!empty(array_filter($campo, fn($value) => !is_null($value)))) {
             $campo4 = $request->input('campo4');
             $campo3 = $request->input('campo3');
             $descuento_prod = $request->input('descuento_prod');
 
             // Agregar nuevos productos
             for ($count = 0; $count < count($campo); $count++) {
-                $producto_first = Products::where('id', $campo)->where('categoria', '!=', 'Ocultar')->first();
-                $price = $campo4[$count];
-                $cleanPrice = floatval(str_replace(['$', ','], '', $price));
-                $data = array(
-                    'id_notas_productos' => $id,
-                    'producto' => $producto_first->nombre,
-                    'id_producto' => $producto_first->id,
-                    'price' => $cleanPrice,
-                    'cantidad' => $campo3[$count],
-                    'descuento' => $descuento_prod[$count],
-                );
-                ProductosNotasCosmica::create($data);
-                $total += $cleanPrice;
-            }
-        }
-
-
-        if($request->get('envio') == 'No'){
-            $envio = 0;
-            $envio_check = 'No';
-        }else{
-            if($request->get('id_cliente') == NULL){
-                $envio = 180;
-            }else{
-                //C o s t o  d e  E n v i o
-                $cliente = Cosmikausers::where('id_cliente', '=', $request->get('id_cliente'))->first();
-                $total = $request->input('totalDescuento');
-
-                $envio = 0;
-                if ($request->get('envio') !== NULL) {
-                    // Si el cliente tiene membresía activa, calcular el costo de envío basado en la membresía
-                    if ($cliente && $cliente->membresia_estatus === 'Activa') {
-                        if ($cliente->membresia === 'Cosmos') {
-                            $envio = $total >= 1500 ? 90 : 126;
-                        } elseif ($cliente->membresia === 'Estelar') {
-                            $envio = $total >= 2500 ? 0 : 90;
-                        }
-                    } else {
-                        // Si el cliente no tiene membresía activa, el costo de envío es 180
-                        $envio = 180;
-                    }
+                $producto_first = Products::where('id', $campo[$count])->where('categoria', '!=', 'Ocultar')->first();
+                if ($producto_first) {
+                    $price = $campo4[$count];
+                    $cleanPrice = floatval(str_replace(['$', ','], '', $price));
+                    $data = array(
+                        'id_notas_productos' => $id,
+                        'producto' => $producto_first->nombre,
+                        'id_producto' => $producto_first->id,
+                        'price' => $cleanPrice,
+                        'cantidad' => $campo3[$count],
+                        'descuento' => $descuento_prod[$count],
+                    );
+                    ProductosNotasCosmica::create($data);
                 }
             }
-            $envio_check = 'Si';
         }
 
-        $total_envio = $total + $envio;
         $nota = NotasProductosCosmica::findOrFail($id);
         $cleanPrice4 = floatval(str_replace(['$', ','], '', $request->get('subtotal_final')));
         $nota->subtotal = $cleanPrice4;
-        $nota->total = $total_envio;
-        $nota->envio = $envio_check;
+        $nota->total = $request->get('total_final');
+        $nota->envio = $request->get('envio');
         $nota->save();
 
         return redirect()->back()->with('success', 'Se ha actualizado con exito');
