@@ -74,7 +74,15 @@
                                     </thead>
                                         <tbody>
                                             @foreach ($notas as $nota)
-                                                <tr>
+                                            @if ($nota->paquete == NULL)
+                                                <tr style="background-color: #d51d1d70;">
+                                            @else
+                                                @if ($nota->Order->estatus == '0')
+                                                    <tr style="background-color: #d51d1d70;">
+                                                @else
+                                                        <tr>
+                                                @endif
+                                            @endif
                                                     <td>{{ $nota->id }}</td>
                                                     <td>{{ $nota->User->name }}</td>
 
@@ -91,9 +99,22 @@
                                                             <a class="btn btn-sm btn-warning" href="{{ route('pagos.edit_pago',$nota->paquete) }}" target="_blank">Ver orden</a>
                                                         @endif
 
-                                                        <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('notas_cursos.imprimir', $nota->id) }}">
-                                                            <i class="fa fa-file"></i>
-                                                        </a>
+                                                        @if ($nota->paquete == NULL)
+                                                            <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('notas_cursos.imprimir_canceladas', $nota->id) }}">
+                                                                <i class="fa fa-file"></i>
+                                                            </a>
+                                                        @else
+                                                            @if ($nota->Order->estatus == '0')
+                                                                <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('notas_cursos.imprimir_canceladas', $nota->id) }}">
+                                                                    <i class="fa fa-file"></i>
+                                                                </a>
+                                                            @else
+                                                                <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('notas_cursos.imprimir', $nota->id) }}">
+                                                                    <i class="fa fa-file"></i>
+                                                                </a>
+                                                            @endif
+                                                        @endif
+
                                                     </td>
                                                 </tr>
                                                 @include('admin.notas_cursos.modal_pago')

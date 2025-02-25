@@ -16,6 +16,7 @@ class NotasCursos extends Model
         'total',
         'restante',
         'nota',
+        'paquete',
     ];
 
     public function User()
@@ -26,5 +27,10 @@ class NotasCursos extends Model
     public function NotasPagos()
     {
         return $this->hasOne('App\Models\NotasPagos', 'id_nota', 'id');
+    }
+
+    public function Order()
+    {
+        return $this->belongsTo(Orders::class, 'paquete');
     }
 }

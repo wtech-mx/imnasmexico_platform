@@ -463,4 +463,14 @@ class NotasCursosController extends Controller
 
         //  return $pdf->download('Nota curso'. $nota->id .'/'.$today.'.pdf');
     }
+
+    public function imprimir_canceladas($id){
+        $diaActual = date('Y-m-d');
+        $today =  date('d-m-Y');
+
+        $nota = NotasCursos::find($id);
+
+        $pdf = \PDF::loadView('admin.notas_cursos.pdf_cancelado', compact('nota', 'today'));
+       return $pdf->stream();
+    }
 }
