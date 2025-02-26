@@ -262,6 +262,7 @@ class CotizacionCosmicaController extends Controller
 
     public function store(request $request){
 
+
         // Creacion de user
         $code = Str::random(8);
 
@@ -412,6 +413,7 @@ class CotizacionCosmicaController extends Controller
         $notas_productos->save();
 
         if ($request->has('campo')) {
+
             $nuevosCampos = $request->input('campo');
             $nuevosCampos2 = $request->input('campo4');
             $nuevosCampos3 = $request->input('campo3');
@@ -426,52 +428,84 @@ class CotizacionCosmicaController extends Controller
             foreach ($nuevosCampos as $index => $campo) {
                 $producto = Products::where('id', $campo)->where('categoria', '!=', 'Ocultar')->first();
                 if ($producto && $producto->subcategoria == 'Kit') {
-                        $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
+                    $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
 
-                        for ($i = 1; $i <= $nuevosCampos3[$index]; $i++) {
-                            foreach ($productos_bundle as $producto_bundle) {
+                    for ($i = 1; $i <= $nuevosCampos3[$index]; $i++) {
+                        foreach ($productos_bundle as $producto_bundle) {
+                            $notas_inscripcion = ProductosNotasCosmica::where('id_notas_productos', $notas_productos->id)
+                                ->where('id_producto', $producto_bundle->id_producto)
+                                ->first();
+
+                            if ($notas_inscripcion) {
+                                // Si ya existe, actualiza la cantidad
+                                $notas_inscripcion->cantidad += $producto_bundle->cantidad;
+                            } else {
+                                // Si no existe, crea un nuevo registro
                                 $notas_inscripcion = new ProductosNotasCosmica;
                                 $notas_inscripcion->id_notas_productos = $notas_productos->id;
                                 $notas_inscripcion->id_producto = $producto_bundle->id_producto;
                                 $notas_inscripcion->producto = $producto_bundle->producto;
                                 $notas_inscripcion->price = '0';
                                 $notas_inscripcion->cantidad = $producto_bundle->cantidad;
-                                $notas_inscripcion->save();
                             }
+                            $notas_inscripcion->save();
+                        }
+                    }
+
+                    // Asignar el ID del kit en la columna correspondiente
+                    if ($contadorKits <= 6) { // Controlar un máximo de 6 kits
+                        $columnaKit = "id_kit" . ($contadorKits > 1 ? $contadorKits : "");
+                        $notas_productos->$columnaKit = $producto->id;
+
+                        // Asignar la cantidad correspondiente al kit
+                        $cantidadCampo = $request->input('campo3')[$contadorKits - 1] ?? null; // Obtener la cantidad del kit actual
+                        if ($cantidadCampo) {
+                            $columnaCantidadKit = "cantidad_kit" . ($contadorKits > 1 ? $contadorKits : "");
+                            $notas_productos->$columnaCantidadKit = $cantidadCampo;
                         }
 
-                        // Asignar el ID del kit en la columna correspondiente
-                        if ($contadorKits <= 6) { // Controlar un máximo de 6 kits
-                            $columnaKit = "id_kit" . ($contadorKits > 1 ? $contadorKits : "");
-                            $notas_productos->$columnaKit = $producto->id;
+                        $contadorKits++;
+                    }
+                } elseif ($producto->subcategoria == 'Tiendita') {
+                    $notas_inscripcion = ProductosNotasCosmica::where('id_notas_productos', $notas_productos->id)
+                        ->where('id_producto', $producto->id)
+                        ->first();
 
-                            // Asignar la cantidad correspondiente al kit
-                            $cantidadCampo = $request->input('campo3')[$contadorKits - 1] ?? null; // Obtener la cantidad del kit actual
-                            if ($cantidadCampo) {
-                                $columnaCantidadKit = "cantidad_kit" . ($contadorKits > 1 ? $contadorKits : "");
-                                $notas_productos->$columnaCantidadKit = $cantidadCampo;
-                            }
-
-                            $contadorKits++;
-                        }
-                }elseif($producto->subcategoria == 'Tiendita'){
-                    $notas_inscripcion = new ProductosNotasCosmica;
-                    $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                    $notas_inscripcion->producto = $producto->nombre;
-                    $notas_inscripcion->id_producto = $producto->id;
-                    $notas_inscripcion->price = $nuevosCampos2[$index];
-                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                    $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
-                    $notas_inscripcion->estatus = 1;
+                    if ($notas_inscripcion) {
+                        // Si ya existe, actualiza la cantidad y el descuento
+                        $notas_inscripcion->cantidad += $nuevosCampos3[$index];
+                        $notas_inscripcion->descuento += isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
+                    } else {
+                        // Si no existe, crea un nuevo registro
+                        $notas_inscripcion = new ProductosNotasCosmica;
+                        $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                        $notas_inscripcion->producto = $producto->nombre;
+                        $notas_inscripcion->id_producto = $producto->id;
+                        $notas_inscripcion->price = $nuevosCampos2[$index];
+                        $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                        $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
+                        $notas_inscripcion->estatus = 1;
+                    }
                     $notas_inscripcion->save();
-                }else{
-                    $notas_inscripcion = new ProductosNotasCosmica;
-                    $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                    $notas_inscripcion->producto = $producto->nombre;
-                    $notas_inscripcion->id_producto = $producto->id;
-                    $notas_inscripcion->price = $nuevosCampos2[$index];
-                    $notas_inscripcion->cantidad = $nuevosCampos3[$index];
-                    $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
+                } else {
+                    $notas_inscripcion = ProductosNotasCosmica::where('id_notas_productos', $notas_productos->id)
+                        ->where('id_producto', $producto->id)
+                        ->first();
+
+                    if ($notas_inscripcion) {
+                        // Si ya existe, actualiza la cantidad y el descuento
+                        $notas_inscripcion->cantidad += $nuevosCampos3[$index];
+                        $notas_inscripcion->descuento += isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
+                    } else {
+                        // Si no existe, crea un nuevo registro
+                        $notas_inscripcion = new ProductosNotasCosmica;
+                        $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                        $notas_inscripcion->producto = $producto->nombre;
+                        $notas_inscripcion->id_producto = $producto->id;
+                        $notas_inscripcion->price = $nuevosCampos2[$index];
+                        $notas_inscripcion->cantidad = $nuevosCampos3[$index];
+                        $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
+                    }
                     $notas_inscripcion->save();
                 }
             }
