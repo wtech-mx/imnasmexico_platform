@@ -882,13 +882,19 @@ class CotizacionCosmicaController extends Controller
         }
     }
 
-    public function imprimir_reporte(Request $request){
-
+    public function imprimir_reporte(Request $request)
+    {
         $this->checkMembresia();
 
         // Configuración de fechas de filtro
         $fechaInicio = $request->input('fecha_inicio', date('Y-m-01'));
         $fechaFin = $request->input('fecha_fin', date('Y-m-t'));
+
+
+        // Formatear las fechas
+        $fechaInicioFormatted = \Carbon\Carbon::parse($fechaInicio)->format('d/m/Y');
+        $fechaFinFormatted = \Carbon\Carbon::parse($fechaFin)->format('d/m/Y');
+
 
         // Administradores
         $administradores = User::where('cliente', '=', NULL)
@@ -896,24 +902,37 @@ class CotizacionCosmicaController extends Controller
             ->get();
 
         // Filtrar cotizaciones
-        $notas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
-            ->where('estatus_cotizacion', '=', NULL)
-            ->orderBy('id', 'DESC')
-            ->where('tipo_nota', '=', 'Cotizacion')
-            ->get();
+        $query = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
+            ->where('tipo_nota', '=', 'Cotizacion');
 
-        $notas_aprobadas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
-            ->where('estatus_cotizacion', '=', 'Aprobada')
-            ->where('tipo_nota', '=', 'Cotizacion')
-            ->orderBy('id', 'DESC')
-            ->get();
+        if ($request->has('search') && !empty($request->search['value'])) {
+            $search = $request->search['value'];
+            $query->where(function($q) use ($search) {
+                $q->where('folio', 'LIKE', "%{$search}%")
+                  ->orWhere('nombre', 'LIKE', "%{$search}%")
+                  ->orWhere('telefono', 'LIKE', "%{$search}%");
+            });
+        }
 
-        $notas_canceladas = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
-            ->where('estatus_cotizacion', '=', 'Cancelada')
-            ->orderBy('id', 'DESC')
-            ->get();
+        $orderColumn = $request->input('order.0.column', 'id');
+        $orderDir = $request->input('order.0.dir', 'desc');
+        $columns = $request->input('columns', []);
+        $orderColumnName = $columns[$orderColumn]['data'] ?? 'id';
 
-            $today =  date('d-m-Y');
+        $query->orderBy($orderColumnName, $orderDir);
+
+        $notas = $query->paginate($request->input('length', 10), ['*'], 'page', ($request->input('start', 0) / $request->input('length', 10)) + 1);
+
+        // Agregar columnas estatus y acciones manualmente
+        $notas->getCollection()->transform(function ($nota) {
+            $nota->estatus = $nota->estatus_cotizacion == 'Aprobada' ? 'Aprobada' : 'Pendiente';
+            $nota->acciones = view('admin.cotizacion_cosmica.partials.acciones', compact('nota'))->render();
+            $nota->cliente = $nota->id_usuario == NULL ? $nota->nombre . '<br>' . $nota->telefono : $nota->User->name;
+            $nota->estatus_boton = view('admin.cotizacion_cosmica.partials.estatus_boton', compact('nota'))->render();
+            return $nota;
+        });
+
+        $today =  date('d-m-Y');
 
         if ($request->input('action') === 'Generar PDF') {
 
@@ -1446,12 +1465,18 @@ class CotizacionCosmicaController extends Controller
 
         }
 
-        // Si no se solicita PDF, mostrar los resultados en la vista
-        return view('admin.cotizacion_cosmica.index_filtro', compact(
-            'notas', 'administradores', 'notas_aprobadas', 'notas_canceladas', 'fechaInicio', 'fechaFin'
-        ));
-    }
+        // Pasar datos a la vista
+        if ($request->ajax()) {
+            return response()->json([
+                'draw' => $request->input('draw'),
+                'recordsTotal' => $notas->total(),
+                'recordsFiltered' => $notas->total(),
+                'data' => $notas->items(),
+            ]);
+        }
 
+        return view('admin.cotizacion_cosmica.index_filtro', compact('notas', 'administradores', 'fechaInicio', 'fechaFin', 'fechaInicioFormatted', 'fechaFinFormatted'));
+    }
     public function index_expo(Request $request) {
         $fechaInicio = $request->input('fecha_inicio', date('Y-m-01'));
         $fechaFin = $request->input('fecha_fin', date('Y-m-t'));

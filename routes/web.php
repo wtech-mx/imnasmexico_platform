@@ -706,7 +706,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('cosmica/orders/woo/pdf/{id}', [App\Http\Controllers\BodegaController::class, 'generateOrderWooCosmicaPDF'])->name('woo_cosmica_orders.pdf');
 
     Route::get('/get-descuento/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'getDescuento']);
-    Route::get('cosmica/cotizacion/reporte', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir_reporte'])->name('notas_cosmica.imprimir_reporte');
+    // Route::get('cosmica/cotizacion/reporte', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir_reporte'])->name('notas_cosmica.imprimir_reporte');
+    Route::get('cotizacion_cosmica/imprimir_reporte', [App\Http\Controllers\CotizacionCosmicaController::class, 'imprimir_reporte'])->name('cotizacion_cosmica.imprimir_reporte');
     // =============== M O D U L O   c o s m i k a ===============================
     Route::get('cosmica/distribuidoras/', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'index'])->name('distribuidoras.index');
     Route::post('cosmica/distribuidoras/store', [App\Http\Controllers\CosmicaDistribuidoraController::class, 'store'])->name('distribuidoras.store');

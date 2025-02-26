@@ -100,7 +100,7 @@
             processing: true,
             serverSide: true,
             ajax: {
-                url: "{{ route('cotizacion_cosmica.index') }}",
+                url: "{{ route('notas_cosmica.imprimir_reporte') }}",
                 data: function (d) {
                     d.fecha_inicio = '{{ $fechaInicio }}';
                     d.fecha_fin = '{{ $fechaFin }}';
