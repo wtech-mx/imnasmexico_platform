@@ -355,7 +355,7 @@
     </div>
 </div>
 
-<section class="category-banner my-auto mt-3 mt-md-5 mt-lg-5 mb-3 mb-md-5 mb-lg-5" style="background-image: url('{{ asset('cosmika/inicio/FONDO-ESENCIAS.png') }}')">
+{{-- <section class="category-banner my-auto mt-3 mt-md-5 mt-lg-5 mb-3 mb-md-5 mb-lg-5" style="background-image: url('{{ asset('cosmika/inicio/FONDO-ESENCIAS.png') }}')">
     <div class="overlay"></div>
 
     <div class="row">
@@ -371,7 +371,18 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
+
+<div id="carouselLinea" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <a href="#" target="_blank" rel="noopener noreferrer">
+            <img src="{{ asset('cosmika/inicio/banner/banner-9.png') }}" class="d-block w-100" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container_fluid bg_gradiente_all_linea">
     <div class="row">
@@ -392,6 +403,28 @@
 
     @include('tienda_cosmica.Components.productos_populares')
 
+</div>
+
+<div id="carouselKits" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <a href="{{ route('tienda.kits') }}" target="_blank" rel="noopener noreferrer">
+            <img src="{{ asset('cosmika/inicio/banner/banner-8.png') }}" class="d-block w-100" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="carouselPure" class="carousel slide">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <a href="{{ route('tienda.productos_faciales') }}#pills-pure" rel="noopener noreferrer">
+            <img src="{{ asset('cosmika/inicio/banner/banner-10.png') }}" class="d-block w-100" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 
 
