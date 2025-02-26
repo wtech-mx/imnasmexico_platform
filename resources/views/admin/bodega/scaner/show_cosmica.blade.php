@@ -110,9 +110,12 @@ $(document).ready(function () {
         const cantidad = parseInt($(this).data('cantidad'));
         const escaneados = parseInt($(this).find('.contador').text().split('/')[0]);
 
-        scanCounts[sku] = escaneados;
+        if (!scanCounts[sku]) {
+            scanCounts[sku] = 0;
+        }
+        scanCounts[sku] += escaneados;
 
-        if (escaneados === cantidad) {
+        if (scanCounts[sku] === cantidad) {
             $(`#status-${sku}`).text('✔️');
         }
     });
@@ -135,50 +138,43 @@ $(document).ready(function () {
 
         if (sku.length === 6) {
             const idNotaProducto = $('tr[data-id]').data('id');
-            const cantidad = parseInt($(`td[data-sku="${sku}"]`).data('cantidad')) || 0;
 
-            if (!scanCounts[sku]) {
-                scanCounts[sku] = 0;
-            }
-
-            if (scanCounts[sku] < cantidad) {
-                $.ajax({
-                    url: "{{ route('check_cosmica.product') }}",
-                    method: "POST",
-                    data: {
-                        sku: sku,
-                        id_notas_productos: idNotaProducto,
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function (data) {
-                        if (data.status === 'success') {
-                            scanCounts[sku]++;
-
-                            // Actualiza el contador visible
-                            const contadorCell = $(`td[data-sku="${sku}"]`);
-                            contadorCell.find('.contador').text(`${scanCounts[sku]}/${cantidad}`);
-
-                            if (scanCounts[sku] === cantidad) {
-                                $(`td[id^="status-${sku}"]`).text('✔️');
-                                playSound(true);
-                                checkAllProductsChecked();
-                            } else {
-                                console.log(`Escaneos realizados para SKU ${sku}: ${scanCounts[sku]}/${cantidad}`);
+            $.ajax({
+                url: "{{ route('check_cosmica.product') }}",
+                method: "POST",
+                data: {
+                    sku: sku,
+                    id_notas_productos: idNotaProducto,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (data) {
+                    if (data.status === 'success') {
+                        const contadorCell = $(`td[data-sku="${sku}"]`);
+                        contadorCell.each(function () {
+                            const currentCount = parseInt($(this).find('.contador').text().split('/')[0]);
+                            const cantidad = parseInt($(this).data('cantidad'));
+                            if (currentCount < cantidad) {
+                                $(this).find('.contador').text(`${currentCount + 1}/${cantidad}`);
+                                if (currentCount + 1 === cantidad) {
+                                    $(`#status-${sku}`).text('✔️');
+                                }
+                                return false; // Break the loop
                             }
-                        } else {
-                            playSound(false);
-                            console.log(data);
-                            alert(data.message);
-                        }
-                    },
-                    error: function (error) {
+                        });
+
+                        playSound(true);
+                        checkAllProductsChecked();
+                    } else {
                         playSound(false);
-                        console.error('Error:', error);
+                        console.log(data);
+                        alert(data.message);
                     }
-                });
-            } else {
-                alert(`Ya se han escaneado ${cantidad} productos para el SKU ${sku}.`);
-            }
+                },
+                error: function (error) {
+                    playSound(false);
+                    console.error('Error:', error);
+                }
+            });
 
             $(this).val('');
         } else {

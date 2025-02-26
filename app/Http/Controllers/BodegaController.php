@@ -718,24 +718,23 @@ class BodegaController extends Controller
         $product = Products::where('sku', $sku)->first();
 
         if ($product) {
-            // Verifica y actualiza el registro correcto en `productos_notas`
-            $notaProducto = ProductosNotasCosmica::where('id_notas_productos', $idNotaProducto)
+            // Verifica y actualiza los registros correctos en `productos_notas`
+            $notaProductos = ProductosNotasCosmica::where('id_notas_productos', $idNotaProducto)
                 ->where('id_producto', $product->id)
-                ->first();
+                ->get();
 
-            if ($notaProducto) {
+            foreach ($notaProductos as $notaProducto) {
                 if ($notaProducto->escaneados < $notaProducto->cantidad) {
                     $notaProducto->escaneados = intval($notaProducto->escaneados) + 1; // Convierte escaneados a entero y suma 1
                     if (intval($notaProducto->escaneados) === intval($notaProducto->cantidad)) { // Convierte cantidad a entero para comparar
                         $notaProducto->estatus = 1; // Marca como completo
                     }
-                        $notaProducto->save();
-                    return response()->json(['status' => 'success', 'escaneados' => $notaProducto->escaneados]);
-                } else {
-
-                    return response()->json(['status' => 'error', 'message' => 'Cantidad ya alcanzada']);
+                    $notaProducto->save();
+                    return response()->json(['status' => 'success', 'escaneados' => $notaProducto->escaneados, 'cantidad' => $notaProducto->cantidad, 'id' => $notaProducto->id]);
                 }
             }
+
+            return response()->json(['status' => 'error', 'message' => 'Cantidad ya alcanzada para todos los registros']);
         }
 
         return response()->json(['status' => 'error', 'message' => 'Producto no encontrado o no corresponde a la nota']);
