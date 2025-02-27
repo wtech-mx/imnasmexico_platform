@@ -1,7 +1,7 @@
 @extends('layouts.app_admin')
 
 @section('template_title')
-Productos solicitados
+Escaner #{{ $nota_scaner->id }} NAS
 @endsection
 <style>
     #guardarBtn {
@@ -15,9 +15,7 @@ Productos solicitados
                 <div class="card">
                     <div class="card-header">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-
                             <h2 class="mb-3">Cotizacion NAS Folio #{{$nota_scaner->folio}}</h2>
-
                             <a type="button" class="btn bg-danger text-white" data-bs-toggle="modal" data-bs-target="#manual_instrucciones">
                                 ¿Como funciona?
                             </a>
@@ -28,52 +26,19 @@ Productos solicitados
                         <input class="form-control" type="text" id="scanInput" placeholder="Escanea el código aquí" autofocus>
                         <form method="POST" action="{{ route('notas_cotizacion.update_estatus', $nota_scaner->id) }}" enctype="multipart/form-data" role="form">
                             @csrf
-                            <input type="hidden" name="_method" value="PATCH">
                             <input type="hidden" name="estatus_cotizacion" value="Enviado">
-
-                                <div class="modal-body">
-                                    <table class="table">
-                                        <thead class="text-center">
-                                            <tr>
-                                                <th>Cantidad</th>
-                                                <th>Producto</th>
-                                                <th>Progreso</th>
-                                                <th>Estatus</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="text-center">
-                                            @foreach ($productos_scaner as $nota_producto)
-                                                <tr data-id="{{ $nota_producto->id_notas_productos }}"
-                                                    style="background-color: {{ $nota_producto->cantidad > 0 ? '#d4edda' : '#f8d7da' }};"> <!-- Verde si >0, naranja si 0 -->
-                                                    <td>
-                                                        {{ $nota_producto->cantidad }}
-                                                    </td>
-                                                    <td>
-                                                        <img src="{{ $nota_producto->Productos->imagenes }}" alt="" style="width: 60px"><br>
-                                                        {{ $nota_producto->Productos->nombre }}
-                                                    </td>
-                                                    <td data-sku="{{ $nota_producto->Productos->sku ?? '' }}" data-cantidad="{{ $nota_producto->cantidad }}">
-                                                        <span class="contador">{{ $nota_producto->escaneados }}/{{ $nota_producto->cantidad }}</span>
-                                                    </td>
-                                                    <td id="status-{{ $nota_producto->Productos->sku ?? '' }}">
-                                                        @if ($nota_producto->estatus === 1)
-                                                            ✔️
-                                                        @endif
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-
-                                        </tbody>
-                                    </table>
+                            <input type="hidden" name="_method" value="PATCH">
+                                <div class="modal-body" id="productTableContainer">
+                                    @include('admin.bodega.scaner.product_table', ['productos_scaner' => $productos_scaner])
                                 </div>
 
                                 @can('guardar-folio-bodega')
-                                    <div class="modal-footer" >
+                                    <div class="modal-footer">
                                         <button type="submit" class="btn close-modal" style="background: {{$configuracion->color_boton_save}}; color: #ffff">Guardar</button>
                                     </div>
                                 @endcan
 
-                                <a class="text-center text-white btn "
+                                <a class="text-center text-white btn"
                                     href="{{ route('pdf_etiqueta.bodega', ['tabla' => 'notas_productos', 'id' => $nota_scaner->id]) }}"
                                     style="background: #7d2de6;">
                                     <i class="fa fa-qrcode"></i>
@@ -94,32 +59,6 @@ Productos solicitados
 @section('datatable')
 <script>
 $(document).ready(function () {
-    const scanCounts = {};
-
-    // Verifica si todos los productos han sido escaneados
-    function checkAllProductsChecked() {
-        let allChecked = true;
-        $('td[id^="status-"]').each(function () {
-            if ($(this).text().trim() !== '✔️') {
-                allChecked = false;
-            }
-        });
-        $('#guardarBtn').toggle(allChecked);  // Muestra el botón solo si todos están marcados
-    }
-
-    // Inicializa el contador de productos escaneados
-    $('td[data-sku]').each(function () {
-        const sku = $(this).data('sku');
-        const cantidad = parseInt($(this).data('cantidad'));
-        const escaneados = parseInt($(this).find('.contador').text().split('/')[0]);
-
-        scanCounts[sku] = escaneados;
-
-        if (escaneados === cantidad) {
-            $(`#status-${sku}`).text('✔️');
-        }
-    });
-
     // Reproduce sonido dependiendo del éxito o error
     function playSound(success) {
         const successSound = document.getElementById("successSound");
@@ -132,56 +71,50 @@ $(document).ready(function () {
         }
     }
 
+    // Verifica si todos los productos han sido escaneados
+    function checkAllProductsChecked() {
+        let allChecked = true;
+        $('td[data-sku]').each(function () {
+            const cantidad = parseInt($(this).data('cantidad'));
+            const escaneados = parseInt($(this).find('.contador').text().split('/')[0]);
+            if (escaneados < cantidad) {
+                allChecked = false;
+            }
+        });
+        $('#guardarBtn').toggle(allChecked);  // Muestra el botón solo si todos están marcados
+    }
+
     // Manejador para escanear el SKU
     $('#scanInput').on('change', function () {
         const sku = $(this).val().trim();
 
         if (sku.length === 6) {
             const idNotaProducto = $('tr[data-id]').data('id');
-            const cantidad = parseInt($(`td[data-sku="${sku}"]`).data('cantidad')) || 0;
 
-            if (!scanCounts[sku]) {
-                scanCounts[sku] = 0;
-            }
-
-            if (scanCounts[sku] < cantidad) {
-                $.ajax({
-                    url: "{{ route('check.product') }}",
-                    method: "POST",
-                    data: {
-                        sku: sku,
-                        id_notas_productos: idNotaProducto,
-                        _token: "{{ csrf_token() }}"
-                    },
-                    success: function (data) {
-                        if (data.status === 'success') {
-                            scanCounts[sku]++;
-
-                            // Actualiza el contador visible
-                            const contadorCell = $(`td[data-sku="${sku}"]`);
-                            contadorCell.find('.contador').text(`${scanCounts[sku]}/${cantidad}`);
-
-                            if (scanCounts[sku] === cantidad) {
-                                $(`td[id^="status-${sku}"]`).text('✔️');
-                                playSound(true);
-                                checkAllProductsChecked();
-                            } else {
-                                console.log(`Escaneos realizados para SKU ${sku}: ${scanCounts[sku]}/${cantidad}`);
-                            }
-                        } else {
-                            playSound(false);
-                            console.log(data);
-                            alert(data.message);
-                        }
-                    },
-                    error: function (error) {
+            $.ajax({
+                url: "{{ route('check.product') }}",
+                method: "POST",
+                data: {
+                    sku: sku,
+                    id_notas_productos: idNotaProducto,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function (data) {
+                    if (data.status === 'success') {
+                        $('#productTableContainer').html(data.view);
+                        playSound(true);
+                        checkAllProductsChecked();
+                    } else {
                         playSound(false);
-                        console.error('Error:', error);
+                        console.log(data);
+                        alert(data.message);
                     }
-                });
-            } else {
-                alert(`Ya se han escaneado ${cantidad} productos para el SKU ${sku}.`);
-            }
+                },
+                error: function (error) {
+                    playSound(false);
+                    console.error('Error:', error);
+                }
+            });
 
             $(this).val('');
         } else {
@@ -192,6 +125,5 @@ $(document).ready(function () {
     // Verifica los productos escaneados al cargar la página
     checkAllProductsChecked();
 });
-
 </script>
 @endsection

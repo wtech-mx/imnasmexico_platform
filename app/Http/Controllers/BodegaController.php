@@ -662,11 +662,11 @@ class BodegaController extends Controller
             return $producto->estatus === 1;
         });
 
+
         return view('admin.bodega.scaner.show', compact('nota_scaner', 'productos_scaner', 'allChecked'));
     }
 
     public function checkProduct(Request $request){
-
         $sku_scaner = $request->input('sku');
         $sku = trim($sku_scaner);
         $idNotaProducto = $request->input('id_notas_productos');
@@ -675,24 +675,26 @@ class BodegaController extends Controller
         $product = Products::where('sku', $sku)->first();
 
         if ($product) {
-            // Verifica y actualiza el registro correcto en `productos_notas`
-            $notaProducto = ProductosNotasId::where('id_notas_productos', $idNotaProducto)
-            ->where('id_producto', $product->id)
-            ->first();
+            // Verifica y actualiza los registros correctos en `productos_notas`
+            $notaProductos = ProductosNotasId::where('id_notas_productos', $idNotaProducto)
+                ->where('id_producto', $product->id)
+                ->get();
 
-            if ($notaProducto) {
+            foreach ($notaProductos as $notaProducto) {
                 if ($notaProducto->escaneados < $notaProducto->cantidad) {
                     $notaProducto->escaneados = intval($notaProducto->escaneados) + 1; // Convierte escaneados a entero y suma 1
                     if (intval($notaProducto->escaneados) === intval($notaProducto->cantidad)) { // Convierte cantidad a entero para comparar
                         $notaProducto->estatus = 1; // Marca como completo
                     }
-                        $notaProducto->save();
-                    return response()->json(['status' => 'success', 'escaneados' => $notaProducto->escaneados]);
-                } else {
+                    $notaProducto->save();
 
-                    return response()->json(['status' => 'error', 'message' => 'Cantidad ya alcanzada']);
+                    $productos_scaner = ProductosNotasId::where('id_notas_productos', $idNotaProducto)->get();
+                    $view = view('admin.bodega.scaner.product_table', compact('productos_scaner'))->render();
+                    return response()->json(['status' => 'success', 'view' => $view]);
                 }
             }
+
+            return response()->json(['status' => 'error', 'message' => 'Cantidad ya alcanzada para todos los registros']);
         }
 
         return response()->json(['status' => 'error', 'message' => 'Producto no encontrado o no corresponde a la nota']);
@@ -708,6 +710,7 @@ class BodegaController extends Controller
 
         return view('admin.bodega.scaner.show_cosmica', compact('nota_scaner', 'productos_scaner', 'allChecked'));
     }
+
 
     public function checkProduct_cosmica(Request $request){
         $sku_scaner = $request->input('sku');
@@ -730,7 +733,10 @@ class BodegaController extends Controller
                         $notaProducto->estatus = 1; // Marca como completo
                     }
                     $notaProducto->save();
-                    return response()->json(['status' => 'success', 'escaneados' => $notaProducto->escaneados, 'cantidad' => $notaProducto->cantidad, 'id' => $notaProducto->id]);
+
+                    $productos_scaner = ProductosNotasCosmica::where('id_notas_productos', $idNotaProducto)->get();
+                    $view = view('admin.bodega.scaner.product_table', compact('productos_scaner'))->render();
+                    return response()->json(['status' => 'success', 'view' => $view]);
                 }
             }
 
