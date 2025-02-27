@@ -403,7 +403,7 @@ class NotasProductosController extends Controller
         }
 
         $campo = $request->input('campo');
-        if(!empty(array_filter($campo, fn($value) => !is_null($value)))){
+        if (!empty(array_filter($campo, fn($value) => !is_null($value)))) {
             $campo4 = $request->input('campo4');
             $campo3 = $request->input('campo3');
             $descuento_prod = $request->input('descuento_prod');
@@ -420,6 +420,7 @@ class NotasProductosController extends Controller
                 $data = array(
                     'id_notas_productos' => $id,
                     'producto' => $campo[$count],
+                    'id_producto' => $producto->id, // Agregar id_producto
                     'price' => $cleanPrice,
                     'cantidad' => $campo3[$count],
                     'descuento' => $descuento_prod[$count],

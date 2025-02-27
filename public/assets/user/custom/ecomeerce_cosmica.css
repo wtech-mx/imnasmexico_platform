@@ -348,7 +348,13 @@ body{
 
 }
 
+@media (max-width: 1200px) {
+    .logo_header{
+        width: 120px;
+        margin-left: 19rem;
+    }
 
+}
 
 @media (max-width: 991px) {
     .logo_header{
