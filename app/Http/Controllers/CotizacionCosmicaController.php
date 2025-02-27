@@ -261,8 +261,6 @@ class CotizacionCosmicaController extends Controller
     }
 
     public function store(request $request){
-
-
         // Creacion de user
         $code = Str::random(8);
 
@@ -512,13 +510,8 @@ class CotizacionCosmicaController extends Controller
             $notas_productos->save();
         }
 
-        if($request->get('tipo_cotizacion') == 'Expo'){
-            return response()->json([
-                'success' => true,
-                'message' => 'Se ha creado su cotización con éxito',
-                'tipo_cotizacion' => 'Expo',
-                'id' => $notas_productos->id
-            ]);
+        if($request->get('tipo_cotizacion') == 'Perfil Alumno'){
+            return redirect()->back()->with('success', 'Se ha creado su cotizacion con exito');
         }else{
             return redirect()->route('cotizacion_cosmica.index')
             ->with('success', 'Se ha creado su cotizacion con exito');
@@ -751,15 +744,7 @@ class CotizacionCosmicaController extends Controller
             }
         }
 
-        if($request->get('estatus_cotizacion') == 'Aprobada Expo'){
-            return redirect()->route('corizacion_expo.index')
-            ->with('success', 'Se ha actualizado con exito');
-
-        }else{
-            return redirect()->route('index_preparacion.bodega')
-            ->with('success', 'Creado exitosamente.');
-        }
-
+        return redirect()->back()->with('success', 'Se ha actualizado con exito');
     }
 
     public function update_guia(Request $request, $id){

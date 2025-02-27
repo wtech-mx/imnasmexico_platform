@@ -358,9 +358,12 @@ class CotizacionController extends Controller
             $notas_productos->save();
         }
 
-        Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->route('notas_cotizacion.index')
-        ->with('success', 'Creado exitosamente.');
+        if($request->get('tipo_cotizacion') == 'Perfil Alumno'){
+            return redirect()->back()->with('success', 'Se ha creado su cotizacion con exito');
+        }else{
+            return redirect()->route('notas_cotizacion.index')
+            ->with('success', 'Creado exitosamente.');
+        }
     }
 
     public function update(Request $request, $id){
@@ -536,9 +539,7 @@ class CotizacionController extends Controller
 
         $nota->save();
 
-        Session::flash('success', 'Se ha guardado sus datos con exito');
-        return redirect()->route('index_preparacion.bodega')
-        ->with('success', 'Creado exitosamente.');
+        return redirect()->back()->with('success', 'Se ha actualizado');
     }
 
     public function update_guia(Request $request, $id){

@@ -844,6 +844,9 @@ Route::group(['middleware' => ['auth']], function() {
 
         Route::get('/perfil/cliente/search-phone', [App\Http\Controllers\PerfilClienteController::class, 'searchPhone'])->name('peril_cliente.searchPhone');
         Route::get('/perfil/cliente/search-name', [App\Http\Controllers\PerfilClienteController::class, 'searchName'])->name('peril_cliente.searchName');
+
+        Route::post('/perfil/cliente/reporte/cosmica/create', [App\Http\Controllers\PerfilClienteController::class, 'reporte_cosmica'])->name('peril_cliente.reporte_cosmica');
+        Route::post('/perfil/cliente/reporte/nas/create', [App\Http\Controllers\PerfilClienteController::class, 'reporte_nas'])->name('peril_cliente.reporte_nas');
         // =============== M O D U L O  C O T I Z A C I O N  E X P O ===============================
         Route::get('/cotizacion/expo/index', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_expo'])->name('corizacion_expo.index');
         Route::get('/cotizacion/expo/buscador', [App\Http\Controllers\CotizacionCosmicaController::class, 'buscador_expo'])->name('corizacion_expo.buscador');

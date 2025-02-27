@@ -84,10 +84,6 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $product = new Products;
-
-        // Generar SKU único
-        $product->sku = $this->generateUniqueSKU();
-
         $product->nombre = $request->get('nombre');
         $product->descripcion = $request->get('descripcion');
         $product->stock = $request->get('stock');
