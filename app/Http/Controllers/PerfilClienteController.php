@@ -235,7 +235,7 @@ class PerfilClienteController extends Controller
             return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora', 'cotizaciones_cosmica', 'tipo', 'reportes', 'reportes_archivos', 'mensajesPorCotizacion', 'products', 'fechaPerfil'));
     }
 
-    public function membresia_cosmica(Request $request, $phone, $id){
+    public function membresia_cosmica(Request $request, $id){
 
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
