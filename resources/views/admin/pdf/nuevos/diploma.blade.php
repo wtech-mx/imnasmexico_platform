@@ -453,25 +453,25 @@
 
                     @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
 
-                        <div class="col-3 text-center">
+                        <div class="col-3 d-flex flex-column align-items-center justify-content-end text-center">
                             <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras_dire">
                             <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Juan Pablo Soto</h3>
                             <h5 class="texto_emosires_dire capitalize m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
                         </div>
 
-                        <div class="col-3 text-center">
+                        <div class="col-3 d-flex flex-column align-items-center justify-content-end text-center">
                             <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras_dire">
                             <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Carla Rizo FLORES</h3>
                             <h5 class="texto_emosires_dire capitalize m-0 p-0">Directora General <br> IMNAS</h5>
                         </div>
 
-                        <div class="col-3 text-center">
+                        <div class="col-3 d-flex flex-column align-items-center justify-content-end text-center">
                             <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras_dire">
                             <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Ma. Luisa Flores</h3>
                             <h5 class="texto_emosires_dire capitalize m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
                         </div>
 
-                        <div class="col-3 text-center">
+                        <div class="col-3 d-flex flex-column align-items-center justify-content-end text-center">
                             <img src="{{ $basePathUtilidades . $fileName_firma_director}}" class="img_firmas_delanteras_dire">
                             <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">{{ $director }}</h3>
                             <h5 class="texto_emosires_dire capitalize m-0 p-0">{{ $firma_directora }}</h5>
@@ -479,19 +479,19 @@
 
                         @else
 
-                        <div class="col-4 text-center border ">
+                        <div class="col-4 d-flex flex-column align-items-center justify-content-end text-center ">
                             <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras">
                             <h3 class="h3_nomre_firmas capitalize m-0 p-0">Juan Pablo Soto</h3>
                             <h5 class="texto_emosires capitalize m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
                         </div>
 
-                        <div class="col-4 text-center border ">
+                        <div class="col-4 d-flex flex-column align-items-center justify-content-end text-center ">
                             <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras">
                             <h3 class="h3_nomre_firmas capitalize m-0 p-0">Lic. Carla Rizo FLORES</h3>
                             <h5 class="texto_emosires capitalize m-0 p-0">Directora General <br> IMNAS</h5>
                         </div>
 
-                        <div class="col-4 text-center border ">
+                        <div class="col-4 d-flex flex-column align-items-center justify-content-end text-center ">
                             <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras">
                             <h3 class="h3_nomre_firmas capitalize m-0 p-0">Lic. Ma. Luisa Flores</h3>
                             <h5 class="texto_emosires capitalize m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
@@ -503,29 +503,31 @@
 
                 @if($fileName_firma_director != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
 
-                    <div class="col-3 text-center">
+                <div class="row">
+                    <div class="col-3 d-flex flex-column align-items-center justify-content-end text-center">
                         <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras_dire">
                         <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Carla Rizo FLORES</h3>
                         <h5 class="texto_emosires_dire capitalize m-0 p-0">Directora General <br> IMNAS</h5>
                     </div>
 
-                    <div class="col-3 text-center">
+                    <div class="col-3 d-flex flex-column align-items-center justify-content-end text-center">
                         <img src="{{ $basePathUtilidades . $fileName_firma_directorOtra}}" class="img_firmas_delanteras_dire">
                         <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">{{ $titular2 }}</h3>
                         <h5 class="texto_emosires_dire capitalize m-0 p-0">{{ $texto_firma_personalizada2 }}</h5>
                     </div>
 
-                    <div class="col-3 text-center">
+                    <div class="col-3 d-flex flex-column align-items-center justify-content-end text-center">
                         <img src="{{ $basePathUtilidades . $fileName_firma_director}}" class="img_firmas_delanteras_dire">
                         <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">{{ $titular1 }}</h3>
                         <h5 class="texto_emosires_dire capitalize m-0 p-0">{{ $texto_firma_personalizada }}</h5>
                     </div>
 
-                    <div class="col-3 text-center">
+                    <div class="col-3 d-flex flex-column align-items-center justify-content-end text-center">
                         <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras_dire">
                         <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Ma. Luisa Flores</h3>
                         <h5 class="texto_emosires_dire capitalize m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
                     </div>
+                </div>
 
                 @endif
 
