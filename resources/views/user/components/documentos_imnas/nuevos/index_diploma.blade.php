@@ -440,25 +440,25 @@ $basePathFirmaDirect = ($domain == 'plataforma.imnasmexico.com')
                     @if($tickets->orden_firmas == 'Predeterminada')
                         @if($tickets?->User?->RegistroImnasEscuela?->firma != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
 
-                            <div class="col-3 text-center">
+                            <div class="flex flex-column align-items-center justify-content-end text-center">
                                 <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras_dire">
                                 <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Juan Pablo Soto</h3>
                                 <h5 class="texto_emosires_dire capitalize m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
                             </div>
 
-                            <div class="col-3 text-center">
+                            <div class="flex flex-column align-items-center justify-content-end text-center">
                                 <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras_dire">
                                 <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Carla Rizo FLORES</h3>
                                 <h5 class="texto_emosires_dire capitalize m-0 p-0">Directora General <br> IMNAS</h5>
                             </div>
 
-                            <div class="col-3 text-center">
+                            <div class="flex flex-column align-items-center justify-content-end text-center">
                                 <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras_dire">
                                 <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Ma. Luisa Flores</h3>
                                 <h5 class="texto_emosires_dire capitalize m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
                             </div>
 
-                            <div class="col-3 text-center">
+                            <div class="flex flex-column align-items-center justify-content-end text-center">
                                 <img src="{{ $basePathFirmaDirect  . '/' . $tickets?->User?->telefono . '/' . $tickets?->User?->RegistroImnasEscuela?->firma }}" class="img_firmas_delanteras_dire">
                                 <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">{{ $tickets?->User?->name ?? '' }}</h3>
                                 <h5 class="texto_emosires_dire capitalize m-0 p-0">{{ $tickets?->texto_director }} {{ $tickets?->texto_firma_personalizada  }}</h5>
@@ -490,25 +490,25 @@ $basePathFirmaDirect = ($domain == 'plataforma.imnasmexico.com')
 
                         @if($tickets?->User?->RegistroImnasEscuela?->firma != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
 
-                            <div class="col-3 text-center">
+                            <div class="flex flex-column align-items-center justify-content-end text-center">
                                 <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras_dire">
                                 <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Carla Rizo FLORES</h3>
                                 <h5 class="texto_emosires_dire capitalize m-0 p-0">Directora General <br> IMNAS</h5>
                             </div>
 
-                            <div class="col-3 text-center">
+                            <div class="flex flex-column align-items-center justify-content-end text-center">
                                 <img src="{{ $basePathFirmaDirect  . '/' . $tickets?->User?->telefono . '/' . $tickets?->User?->RegistroImnasEscuela?->otra_firma_director }}" class="img_firmas_delanteras_dire">
                                 <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">{{ $tickets->titular2 }}</h3>
                                 <h5 class="texto_emosires_dire capitalize m-0 p-0">{{ $tickets->texto_firma_personalizada2 }}</h5>
                             </div>
 
-                            <div class="col-3 text-center">
+                            <div class="flex flex-column align-items-center justify-content-end text-center">
                                 <img src="{{ $basePathFirmaDirect  . '/' . $tickets?->User?->telefono . '/' . $tickets?->User?->RegistroImnasEscuela?->firma }}" class="img_firmas_delanteras_dire">
                                 <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">{{ $tickets->titular1 }}</h3>
                                 <h5 class="texto_emosires_dire capitalize m-0 p-0">{{ $tickets->texto_firma_personalizada }}</h5>
                             </div>
 
-                            <div class="col-3 text-center">
+                            <div class="flex flex-column align-items-center justify-content-end text-center">
                                 <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras_dire">
                                 <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Ma. Luisa Flores</h3>
                                 <h5 class="texto_emosires_dire capitalize m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
@@ -520,25 +520,25 @@ $basePathFirmaDirect = ($domain == 'plataforma.imnasmexico.com')
 
                     @if($tickets?->User?->RegistroImnasEscuela?->firma != 'https://plataforma.imnasmexico.com/cursos/no-image.jpg')
 
-                    <div class="col-3 text-center">
+                    <div class="flex flex-column align-items-center justify-content-end text-center">
                         <img src="{{ $basePath . 'juanpa.webp'}}" class="img_firmas_delanteras_dire">
                         <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Juan Pablo Soto</h3>
                         <h5 class="texto_emosires_dire capitalize m-0 p-0">Comite Dictaminador <br> RNIMNAS</h5>
                     </div>
 
-                    <div class="col-3 text-center">
+                    <div class="flex flex-column align-items-center justify-content-end text-center">
                         <img src="{{ $basePath . 'carla.webp'}}" class="img_firmas_delanteras_dire">
                         <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Carla Rizo FLORES</h3>
                         <h5 class="texto_emosires_dire capitalize m-0 p-0">Directora General <br> IMNAS</h5>
                     </div>
 
-                    <div class="col-3 text-center">
+                    <div class="flex flex-column align-items-center justify-content-end text-center">
                         <img src="{{ $basePath . 'maria.webp'}}" class="img_firmas_delanteras_dire">
                         <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">Lic. Ma. Luisa Flores</h3>
                         <h5 class="texto_emosires_dire capitalize m-0 p-0">Emisor de certificados <br> RNIMNAS</h5>
                     </div>
 
-                    <div class="col-3 text-center">
+                    <div class="flex flex-column align-items-center justify-content-end text-center">
                         <img src="{{ $basePathFirmaDirect  . '/' . $tickets?->User?->telefono . '/' . $tickets?->User?->RegistroImnasEscuela?->firma }}" class="img_firmas_delanteras_dire">
                         <h3 class="h3_nomre_firmas_dire capitalize m-0 p-0">{{ $tickets?->User?->name ?? '' }}</h3>
                         <h5 class="texto_emosires_dire capitalize m-0 p-0">{{ $tickets?->texto_director }} {{ $tickets?->texto_firma_personalizada  }}</h5>
