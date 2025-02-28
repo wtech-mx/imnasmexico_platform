@@ -300,8 +300,8 @@
                      Registro Nacional Instituto Mexicano Naturales Ain Spa RIIMNAS,
                      con registro <strong class="texto_prinipal_strong"> {{ $clave_rfc }}</strong> en la Secretaría del Trabajo y Previsión
                      Social STPS como Agente Capacitador Externo, hace constar que el/la
-                      Alumno(a) <strong class="texto_prinipal_strong"> {!! $nombre !!}</strong> , con número de folio <strong class="texto_prinipal_strong">CFC000918771</strong> con
-                       CURP: <strong class="texto_prinipal_strong">JDAR090213MMCMLTA4</strong> , cursó la especialidad de <strong class="texto_prinipal_strong"> {{ ucwords(strtolower($curso)) }}</strong> ,
+                      Alumno(a) <strong class="texto_prinipal_strong"> {!! $nombre !!}</strong> , con número de folio <strong class="texto_prinipal_strong">{{ $folio }}</strong> con
+                       CURP: <strong class="texto_prinipal_strong">{{ $curp }}</strong> , cursó la especialidad de <strong class="texto_prinipal_strong"> {{ ucwords(strtolower($curso)) }}</strong> ,
                         cubriendo todos los créditos correspondientes.
                     Para efectos de desempeño académico se expresa lo siguiente:
                 </p>
