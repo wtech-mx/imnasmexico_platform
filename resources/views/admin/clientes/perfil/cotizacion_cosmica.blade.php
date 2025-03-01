@@ -70,6 +70,16 @@
                                     <i class="fa fa-fw fa-edit"></i>
                                 </a>
 
+                                @if ($nota->metodo_pago == 'Contra Entrega')
+                                    <a type="button" class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#guiaModal{{$nota->id}}" style="background: #e6ab2d; color: #ffff">
+                                        <i class="fa fa-truck"></i>
+                                    </a>
+                                @else
+                                    <a class="text-center text-white btn btn-sm" href="{{asset('pago_fuera/'.$nota->doc_guia) }}" download="{{asset('pago_fuera/'.$nota->doc_guia) }}" style="background: #e6ab2d;">
+                                        <i class="fa fa-truck"></i>
+                                    </a>
+                                @endif
+
                                 @if(isset($mensajesPorCotizacion[$nota->id]) && $mensajesPorCotizacion[$nota->id] > 0)
                                     <a class="btn btn-xs" data-bs-toggle="modal" data-bs-target="#reporte_{{ $nota->id }}" title="Reporte" style="background: rgb(255, 255, 255); color:black">
                                         <i class="fa fa-commenting"></i>
