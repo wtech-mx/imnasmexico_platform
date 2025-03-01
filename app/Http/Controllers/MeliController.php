@@ -143,40 +143,28 @@ class MeliController extends Controller
          return array_values($groupedOrders);
      }
 
-
      private function getShipmentDetails($shippingId)
      {
-         $endpoint = "https://api.mercadolibre.com/shipments/{$shippingId}/history";
+         $endpoint = "https://api.mercadolibre.com/shipments/{$shippingId}";
 
          $response = Http::withHeaders([
              'Authorization' => "Bearer {$this->accessToken}",
-             'x-format-new'  => 'true',
          ])->get($endpoint);
 
          if ($response->successful()) {
-             $history = $response->json();
+             $shipmentDetails = $response->json();
 
-             // Filtrar las entradas para excluir "first_visit"
-             $filteredHistory = collect($history)->reject(fn($entry) => $entry['substatus'] === 'first_visit');
-
-             // Ordenar por fecha descendente
-             $sortedHistory = $filteredHistory->sortByDesc(fn($entry) => $entry['date'])->values();
-
-             // Obtener el registro más reciente
-             $latestEntry = $sortedHistory->first();
-
-             if ($latestEntry) {
-                 return [
-                     'date'      => Carbon::parse($latestEntry['date'])->format('d M Y H:i:s'),
-                     'substatus' => $latestEntry['substatus'] ?? null,
-                     'status'    => $latestEntry['status'],
-                 ];
-             }
+             return [
+                 'date_created' => Carbon::parse($shipmentDetails['date_created'])->format('d M Y H:i:s'),
+                 'status' => $shipmentDetails['status'],
+                 'substatus' => $shipmentDetails['substatus'] ?? null,
+                 'buffering_date' => isset($shipmentDetails['shipping_option']['buffering']['date']) ? Carbon::parse($shipmentDetails['shipping_option']['buffering']['date'])->format('d M Y') : null,
+                 'estimated_delivery_final' => isset($shipmentDetails['shipping_option']['estimated_delivery_final']['date']) ? Carbon::parse($shipmentDetails['shipping_option']['estimated_delivery_final']['date'])->format('d M Y') : null,
+             ];
          }
 
          return null; // Devuelve null si no es exitoso o no hay datos
      }
-
      private function getItemDetails($itemId){
         $endpoint = "https://api.mercadolibre.com/items/{$itemId}";
 
