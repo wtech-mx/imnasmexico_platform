@@ -184,11 +184,21 @@
                                                         <strong class="{{ $statusColor }}">
                                                             {{ $statusTranslations[$order['shipment_details']['status']] ?? $order['shipment_details']['status'] }}
                                                         </strong> <br>
-                                                        {{ $order['shipment_details']['date'] }}
+                                                        {{ $order['shipment_details']['date_created'] }}
+
+                                                        @if (isset($order['shipment_details']['buffering_date']))
+                                                            <br><br>
+                                                            <strong>Para enviar el {{ $order['shipment_details']['buffering_date'] }}</strong>
+                                                        @endif
+
+                                                        @if (isset($order['shipment_details']['estimated_delivery_final']))
+                                                            <br><br>
+                                                            <strong>Fecha estimada de entrega: {{ $order['shipment_details']['estimated_delivery_final'] }}</strong>
+                                                        @endif
 
                                                         @php
                                                         // Convertimos la fecha de envío a un objeto DateTime
-                                                        $shipmentDate = new DateTime($order['shipment_details']['date']);
+                                                        $shipmentDate = new DateTime($order['shipment_details']['date_created']);
                                                         $currentDate = new DateTime();
 
                                                         // Extraemos solo la fecha (sin la hora) para ambas
@@ -202,38 +212,29 @@
 
                                                         // Verificamos si hay substatus diferente de "printed" y si está en el estado correcto
                                                         $substatus = $order['shipment_details']['substatus'] ?? null;
-                                                        $substatus_dropped_off = in_array($order['shipment_details']['substatus'], ['dropped_off','in_hub']);
+                                                        $substatus_dropped_off = in_array($substatus, ['dropped_off','in_hub']);
                                                         $isLabelNotPrinted = $isReadyOrPrepared && $substatus !== 'printed';
-                                                    @endphp
+                                                        @endphp
 
-
-
-                                                    @if ($isLabelNotPrinted)
-
-                                                        @if($substatus_dropped_off == true)
-
-
+                                                        @if ($isLabelNotPrinted)
+                                                            @if($substatus_dropped_off == true)
+                                                            @else
+                                                                <br><br>
+                                                                <strong style="color:orange">Etiqueta lista para imprimir</strong><br>
+                                                                Asegúrate de imprimir la etiqueta antes de despachar el paquete.
+                                                            @endif
                                                         @else
-                                                        <br><br>
-                                                        <strong style="color:orange">Etiqueta lista para imprimir</strong><br>
-                                                        Asegúrate de imprimir la etiqueta antes de despachar el paquete.
+                                                            @if ($isDelayed)
+                                                                <br><br>
+                                                                <strong style="color:red">Estás con demora</strong><br>
+                                                                Despacha el paquete cuanto antes en una agencia de Mercado Libre. La demora está afectando tu reputación.
+                                                            @endif
                                                         @endif
-
-                                                    @else
-
-                                                    @if ($isDelayed)
-                                                        <br><br>
-                                                        <strong style="color:red">Estás con demora</strong><br>
-                                                        Despacha el paquete cuanto antes en una agencia de Mercado Libre. La demora está afectando tu reputación.
-                                                    @endif
-
-                                                    @endif
-
                                                     </p>
+                                                @else
+                                                    <p>Detalles del envío no disponibles.</p>
+                                                @endif
 
-                                                    @else
-                                                        <p>Detalles del envío no disponibles.</p>
-                                                    @endif
                                                 </div>
                                                 <div class="col-3 my-auto">
                                                     @if ($order['shipping_id'])
