@@ -69,6 +69,14 @@
             z-index: 1;
         }
 
+        .pagination {
+            justify-content: center;
+        }
+        .page-item.active .page-link {
+            background-color: #3483fa;
+            border-color: #3483fa;
+        }
+
     </style>
 
     <div class="container-fluid">
@@ -145,7 +153,7 @@
                                     'cancelled' => 'Cancelado',
                                 ];
 
-                                    // Diccionario de colores para los estados
+                                // Diccionario de colores para los estados
                                 $statusColors = [
                                     'delivered' => 'text-success', // Verde
                                     'shipped' => 'text-primary',  // Azul
@@ -326,6 +334,10 @@
                                     </div>
                                 </div>
                             @endforeach
+
+                            <div class="d-flex justify-content-center">
+                                {{ $groupedOrders->links('pagination::bootstrap-5') }}
+                            </div>
 
                             @else
                                 @if (!isset($errorMessage))
