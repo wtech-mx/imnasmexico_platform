@@ -10,7 +10,7 @@ use App\Models\NotasProductosCosmica;
 use App\Models\ProductosNotasCosmica;
 use App\Models\Products;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 
 class MeliController extends Controller
@@ -241,8 +241,7 @@ class MeliController extends Controller
         return $formattedOrders;
     }
 
-    public function index(Request $request)
-    {
+    public function index(Request $request){
         $meli = Meli::first();
 
         // Calcular el rango por defecto (últimos 20 días)
@@ -278,6 +277,14 @@ class MeliController extends Controller
 
             // Agrupar las órdenes por pack_id
             $groupedOrders = $this->groupOrdersByPackId($formattedOrders);
+
+            // Paginación
+            $perPage = 20; // Número de elementos por página
+            $currentPage = LengthAwarePaginator::resolveCurrentPage();
+            $currentItems = array_slice($groupedOrders, ($currentPage - 1) * $perPage, $perPage);
+            $groupedOrders = new LengthAwarePaginator($currentItems, count($groupedOrders), $perPage, $currentPage, [
+                'path' => LengthAwarePaginator::resolveCurrentPath(),
+            ]);
         } else {
             // Manejar errores
             $error = $response->json();
