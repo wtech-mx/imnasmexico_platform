@@ -112,6 +112,10 @@
                                                             <a type="button" class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
                                                                 Cencelada
                                                             </a>
+                                                        @else
+                                                            <a type="button" class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatusModal{{ $item->id }}" style="background: #19da53;">
+                                                                {{ $item->estatus_cotizacion }}
+                                                            </a>
                                                         @endif
 
 
@@ -217,6 +221,10 @@
                                                         @elseif($item->estatus_cotizacion == 'Cancelada')
                                                             <a type="button" class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
                                                                 Cencelada
+                                                            </a>
+                                                        @else
+                                                            <a type="button" class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#estatusModal{{ $item->id }}" style="background: #19da53;">
+                                                                {{ $item->estatus_cotizacion }}
                                                             </a>
                                                         @endif
 
@@ -333,6 +341,7 @@
                                                             <a type="button" class="btn btn-xs btn-danger" data-bs-toggle="modal" data-bs-target="#estatusModal{{$item->id}}">
                                                                 Cencelada
                                                             </a>
+
                                                         @endif
 
 

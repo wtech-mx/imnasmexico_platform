@@ -45,10 +45,12 @@ class CotizacionController extends Controller
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
         $notasAprobadas = NotasProductos::whereBetween('fecha', [$primerDiaDelMes, $ultimoDiaDelMes])
-        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado'])->get();
+        ->orderBy('id','DESC')
+        ->where('tipo_nota','=' , 'Cotizacion')
+        ->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado'])
+        ->get();
 
         $products = Products::orderBy('nombre','ASC')->get();
-
         return view('admin.cotizacion.index_aprobada', compact( 'products', 'clientes', 'administradores','notasAprobadas'));
     }
 
@@ -697,7 +699,9 @@ class CotizacionController extends Controller
         ->orderBy('id','DESC')->where('tipo_nota', '=', 'Cotizacion')->where('estatus_cotizacion','=' , null)->get();
 
         $notasAprobadas = NotasProductos::whereBetween('fecha', [$fechaInicio, $fechaFin])
-        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('estatus_cotizacion','=' , 'Aprobada')->get();
+        ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')
+        ->whereIn('estatus_cotizacion', ['Aprobada', 'Preparado', 'Enviado'])
+        ->get();
 
         $notasPendientes = NotasProductos::whereBetween('fecha', [$fechaInicio, $fechaFin])
         ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('estatus_cotizacion','=' , 'Pendiente')->get();
