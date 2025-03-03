@@ -238,7 +238,7 @@
                                                         $fecha_formateada = date('d \d\e F \d\e\l Y', $fecha_timestamp);
                                                         @endphp
                                                         <h5>
-                                                            {{$item->fecha_preparacion}}
+                                                            {{$fecha_formateada}}
                                                         </h5>
                                                     </td>
                                                     <td><h5>${{ $item->total }}</h5></td>
