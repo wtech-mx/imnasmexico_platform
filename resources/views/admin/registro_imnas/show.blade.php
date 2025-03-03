@@ -99,7 +99,6 @@
                                                     </td>
 
                                                     <td>
-
                                                         <a type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal" data-bs-target="#DocDigital_{{ $registro_imnas->id }}">
                                                         Doc Digital
                                                         </a>
@@ -133,6 +132,13 @@
                                                                 <i class="fa fa-whatsapp"></i>
                                                             </a>
                                                         @endif
+                                                        <form action="{{ route('eliminar_folio.imnas') }}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" value="{{ $registro_imnas->id }}" name="id_folio">
+                                                            <button class="btn btn-sm btn-danger"type="submit">
+                                                                <i class="fa fa-eraser"></i>
+                                                            </button>
+                                                        </form>
                                                     </td>
                                                 </tr>
 

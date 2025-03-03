@@ -1724,4 +1724,15 @@ class RegistroIMNASController extends Controller
 
         return redirect()->back()->with('success', 'datos actualizado con exito.');
     }
+
+    public function eliminar_folio(Request $request){
+        $especialidad = RegistroImnas::find($request->id_folio);
+
+        $documento = DocumenotsGenerador::where('folio', '=', $especialidad->folio)->delete();
+
+        $especialidad->folio = $especialidad->folio . '-BAJA';
+        $especialidad->save();
+
+        return redirect()->back()->with('success', 'Folio cancelado con exito.');
+    }
 }
