@@ -433,19 +433,13 @@ class CotizacionCosmicaController extends Controller
                             $notas_inscripcion = ProductosNotasCosmica::where('id_notas_productos', $notas_productos->id)
                                 ->where('id_producto', $producto_bundle->id_producto)
                                 ->first();
-
-                            if ($notas_inscripcion) {
-                                // Si ya existe, actualiza la cantidad
-                                $notas_inscripcion->cantidad += $producto_bundle->cantidad;
-                            } else {
-                                // Si no existe, crea un nuevo registro
-                                $notas_inscripcion = new ProductosNotasCosmica;
-                                $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                                $notas_inscripcion->id_producto = $producto_bundle->id_producto;
-                                $notas_inscripcion->producto = $producto_bundle->producto;
-                                $notas_inscripcion->price = '0';
-                                $notas_inscripcion->cantidad = $producto_bundle->cantidad;
-                            }
+                            // Si no existe, crea un nuevo registro
+                            $notas_inscripcion = new ProductosNotasCosmica;
+                            $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                            $notas_inscripcion->id_producto = $producto_bundle->id_producto;
+                            $notas_inscripcion->producto = $producto_bundle->producto;
+                            $notas_inscripcion->price = '0';
+                            $notas_inscripcion->cantidad = $producto_bundle->cantidad;
                             $notas_inscripcion->save();
                         }
                     }
@@ -469,11 +463,6 @@ class CotizacionCosmicaController extends Controller
                         ->where('id_producto', $producto->id)
                         ->first();
 
-                    if ($notas_inscripcion) {
-                        // Si ya existe, actualiza la cantidad y el descuento
-                        $notas_inscripcion->cantidad += $nuevosCampos3[$index];
-                        $notas_inscripcion->descuento += isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
-                    } else {
                         // Si no existe, crea un nuevo registro
                         $notas_inscripcion = new ProductosNotasCosmica;
                         $notas_inscripcion->id_notas_productos = $notas_productos->id;
@@ -483,18 +472,11 @@ class CotizacionCosmicaController extends Controller
                         $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                         $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
                         $notas_inscripcion->estatus = 1;
-                    }
-                    $notas_inscripcion->save();
+                        $notas_inscripcion->save();
                 } else {
                     $notas_inscripcion = ProductosNotasCosmica::where('id_notas_productos', $notas_productos->id)
                         ->where('id_producto', $producto->id)
                         ->first();
-
-                    if ($notas_inscripcion) {
-                        // Si ya existe, actualiza la cantidad y el descuento
-                        $notas_inscripcion->cantidad += $nuevosCampos3[$index];
-                        $notas_inscripcion->descuento += isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
-                    } else {
                         // Si no existe, crea un nuevo registro
                         $notas_inscripcion = new ProductosNotasCosmica;
                         $notas_inscripcion->id_notas_productos = $notas_productos->id;
@@ -503,8 +485,7 @@ class CotizacionCosmicaController extends Controller
                         $notas_inscripcion->price = $nuevosCampos2[$index];
                         $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                         $notas_inscripcion->descuento = isset($nuevosCampos4[$index]) ? $nuevosCampos4[$index] : 0;
-                    }
-                    $notas_inscripcion->save();
+                        $notas_inscripcion->save();
                 }
             }
             $notas_productos->save();
@@ -542,28 +523,12 @@ class CotizacionCosmicaController extends Controller
         // Actualizar productos existentes
         for ($count = 0; $count < count($producto); $count++) {
             // Buscar el producto en la base de datos
+
             $productos = ProductosNotasCosmica::where('producto', $producto[$count])
                 ->where('id_notas_productos', $id)
                 ->first();
 
-            // Si el producto existe, actualizarlo
-            if ($productos) {
-                // Guardar el ID del producto en el array de productos enviados
-                $productosIdsEnviados[] = $productos->id;
 
-                // Limpiar el precio y preparar los datos para la actualización
-                $precio = $price[$count];
-                $cleanPrice2 = floatval(str_replace(['$', ','], '', $precio));
-                $data = array(
-                    'price' => $cleanPrice2,
-                    'cantidad' => $cantidad[$count],
-                    'descuento' => $descuento[$count],
-                );
-
-                // Actualizar el producto en la base de datos
-                $productos->update($data);
-            } else {
-                // Si el producto no existe, crearlo
                 $producto_first = Products::where('id', $producto[$count])->where('categoria', '!=', 'Ocultar')->first();
                 if ($producto_first) {
                     $cleanPrice = floatval(str_replace(['$', ','], '', $price[$count]));
@@ -578,15 +543,15 @@ class CotizacionCosmicaController extends Controller
                     $newProduct = ProductosNotasCosmica::create($data);
                     $productosIdsEnviados[] = $newProduct->id;
                 }
-            }
         }
 
-        // Eliminar los productos que ya no están en la solicitud
-        foreach ($productosExistentes as $productoExistente) {
-            if (!in_array($productoExistente->id, $productosIdsEnviados)) {
-                $productoExistente->delete();
-            }
-        }
+        // Eliminar los productos existentes que no están en la solicitud
+        // foreach ($productosExistentes as $productoExistente) {
+        //     if (!in_array($productoExistente->id, $productosIdsEnviados)) {
+        //         dd($productosExistentes);
+        //         $productoExistente->delete();
+        //     }
+        // }
 
         $campo = $request->input('campo');
         if (!empty(array_filter($campo, fn($value) => !is_null($value)))) {

@@ -285,18 +285,13 @@ class CotizacionController extends Controller
                             ->where('id_producto', $producto_bundle->id_producto)
                             ->first();
 
-                        if ($notas_inscripcion) {
-                            // Si ya existe, actualiza la cantidad
-                            $notas_inscripcion->cantidad += $producto_bundle->cantidad;
-                        } else {
-                            // Si no existe, crea un nuevo registro
-                            $notas_inscripcion = new ProductosNotasId;
-                            $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                            $notas_inscripcion->producto = $producto_bundle->producto;
-                            $notas_inscripcion->id_producto = $producto_bundle->id_producto;
-                            $notas_inscripcion->price = '0';
-                            $notas_inscripcion->cantidad = $producto_bundle->cantidad;
-                        }
+                        // Si no existe, crea un nuevo registro
+                        $notas_inscripcion = new ProductosNotasId;
+                        $notas_inscripcion->id_notas_productos = $notas_productos->id;
+                        $notas_inscripcion->producto = $producto_bundle->producto;
+                        $notas_inscripcion->id_producto = $producto_bundle->id_producto;
+                        $notas_inscripcion->price = '0';
+                        $notas_inscripcion->cantidad = $producto_bundle->cantidad;
                         $notas_inscripcion->save();
                     }
 
@@ -319,11 +314,6 @@ class CotizacionController extends Controller
                         ->where('id_producto', $producto->id)
                         ->first();
 
-                    if ($notas_inscripcion) {
-                        // Si ya existe, actualiza la cantidad y el descuento
-                        $notas_inscripcion->cantidad += $nuevosCampos3[$index];
-                        $notas_inscripcion->descuento += isset($descuento_prod[$index]) ? $descuento_prod[$index] : 0;
-                    } else {
                         // Si no existe, crea un nuevo registro
                         $notas_inscripcion = new ProductosNotasId;
                         $notas_inscripcion->id_notas_productos = $notas_productos->id;
@@ -333,18 +323,12 @@ class CotizacionController extends Controller
                         $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                         $notas_inscripcion->descuento = isset($descuento_prod[$index]) ? $descuento_prod[$index] : 0;
                         $notas_inscripcion->estatus = 1;
-                    }
-                    $notas_inscripcion->save();
+                        $notas_inscripcion->save();
                 } else {
                     $notas_inscripcion = ProductosNotasId::where('id_notas_productos', $notas_productos->id)
                         ->where('id_producto', $producto->id)
                         ->first();
 
-                    if ($notas_inscripcion) {
-                        // Si ya existe, actualiza la cantidad y el descuento
-                        $notas_inscripcion->cantidad += $nuevosCampos3[$index];
-                        $notas_inscripcion->descuento += isset($descuento_prod[$index]) ? $descuento_prod[$index] : 0;
-                    } else {
                         // Si no existe, crea un nuevo registro
                         $notas_inscripcion = new ProductosNotasId;
                         $notas_inscripcion->id_notas_productos = $notas_productos->id;
@@ -353,8 +337,7 @@ class CotizacionController extends Controller
                         $notas_inscripcion->price = $nuevosCampos2[$index];
                         $notas_inscripcion->cantidad = $nuevosCampos3[$index];
                         $notas_inscripcion->descuento = isset($descuento_prod[$index]) ? $descuento_prod[$index] : 0;
-                    }
-                    $notas_inscripcion->save();
+                        $notas_inscripcion->save();
                 }
             }
             $notas_productos->save();
@@ -406,11 +389,11 @@ class CotizacionController extends Controller
         }
 
         // Eliminar los productos que ya no están en la solicitud
-        foreach ($productosExistentes as $productoExistente) {
-            if (!in_array($productoExistente->id, $productosIdsEnviados)) {
-                $productoExistente->delete();
-            }
-        }
+        // foreach ($productosExistentes as $productoExistente) {
+        //     if (!in_array($productoExistente->id, $productosIdsEnviados)) {
+        //         $productoExistente->delete();
+        //     }
+        // }
 
         $campo = $request->input('campo');
         if(!empty(array_filter($campo, fn($value) => !is_null($value)))){
