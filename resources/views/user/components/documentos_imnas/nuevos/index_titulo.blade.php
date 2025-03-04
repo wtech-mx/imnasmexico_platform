@@ -399,7 +399,7 @@
                         </h1>
 
                         <p class="texto_documentos  p-0 m-0" style="margin-bottom: 40px">
-                            el título de
+                            el Título Honorífico en la Especialidad de:
                         </p>
 
                         <h2 class="azul_fuerte titulo_especialidad  p-0" style="margin-bottom: 10px;">
