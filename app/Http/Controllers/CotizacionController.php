@@ -7,6 +7,8 @@ use App\Models\ProductosNotasId;
 use App\Models\NotasProductos;
 use App\Models\ProductosBundleId;
 use App\Models\HistorialStock;
+use App\Models\OrdersCosmica;
+use App\Models\OrdersCosmicaOnline;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Products;
