@@ -1224,4 +1224,35 @@ class CotizacionController extends Controller
         return view('admin.cotizacion.index_busqueda', compact('notas', 'products', 'clientes', 'administradores','notasAprobadas','notasPendientes','notasCandeladas'));
 
     }
+
+    public function imprimir_ecommerce($id){
+        $diaActual = date('Y-m-d');
+        $today =  date('d-m-Y');
+
+        $nota = OrdersCosmica::find($id);
+
+        $nota_productos = OrdersCosmicaOnline::where('id_order', $nota->id)->get();
+
+        // Iterar sobre los productos de la nota para buscar la imagen correspondiente
+        foreach ($nota_productos as $producto_nota) {
+            $producto = Products::where('id', $producto_nota->id_producto)->where('categoria', '!=', 'Ocultar')->first();
+
+            if ($producto) {
+                $producto_nota->imagen_producto = $producto->imagenes;
+            } else {
+                $producto_nota->imagen_producto = null; // O algún valor por defecto
+            }
+        }
+
+
+
+        $pdf = \PDF::loadView('admin.cosmica_ecommerce.pdf_nota', compact('nota', 'today', 'nota_productos'));
+        if($nota->folio == null){
+            $folio = $nota->id;
+        }else{
+            $folio = $nota->folio;
+        }
+        return $pdf->stream();
+         //return $pdf->download('Nota cotizacion'. $folio .'/'.$today.'.pdf');
+    }
 }
