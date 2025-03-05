@@ -139,7 +139,7 @@
                                                     </td>
                                                     <td><h5>${{ $item->total }}</h5></td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir_ecommerce', ['id' => $item->id]) }}">
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $item->id]) }}">
                                                             <i class="fa fa-list-alt"></i>
                                                         </a>
 
@@ -399,7 +399,7 @@
                                                     </td>
                                                     <td><h5>${{ $item->pago }}</h5></td>
                                                     <td>
-                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir', ['id' => $item->id]) }}">
+                                                        <a class="btn btn-sm btn-info text-white" target="_blank" href="{{ route('notas_cotizacion.imprimir_ecommerce', ['id' => $item->id]) }}">
                                                             <i class="fa fa-list-alt"></i>
                                                         </a>
 
