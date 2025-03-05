@@ -229,13 +229,13 @@ class PedidosWooController extends Controller
 
     public function index_cosmika_ecommerce_apro(Request $request)
     {
-        $startDate = $request->input('start_date') ?: Carbon::now()->startOfMonth()->format('Y-m-d');
-        $endDate = $request->input('end_date') ?: Carbon::now()->endOfMonth()->format('Y-m-d');
+        // $startDate = $request->input('start_date') ?: Carbon::now()->startOfMonth()->format('Y-m-d');
+        // $endDate = $request->input('end_date') ?: Carbon::now()->endOfMonth()->format('Y-m-d');
 
-        $startDateTime = $startDate . 'T00:00:00';
-        $endDateTime = $endDate . 'T23:59:59';
+        // $startDateTime = $startDate . 'T00:00:00';
+        // $endDateTime = $endDate . 'T23:59:59';
 
-        $notas = OrdersCosmica::orderBy('id','DESC')->where('estatus','=' , '1')->where('guia_doc','!=' , NULL)->get();
+        $notas = OrdersCosmica::orderBy('id','DESC')->where('estatus','=' , '1')->get();
 
         return view('admin.cosmica_ecommerce.index', compact('notas'));
     }

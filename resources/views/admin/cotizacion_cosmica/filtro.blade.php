@@ -23,9 +23,9 @@
                         <a href="{{ route('cotizacion_cosmica.index') }}" class="btn btn-sm btn-success m-2" style="background: #322338">Cotizaciones
                             <img src="{{asset('assets/user/icons/prueba.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
                         </a>
-                        <a href="{{ route('pedidos_cosmica_woo.index') }}" class="btn btn-sm m-2 text-white" style="background:#B600E3;">Tienda Online
+                        {{-- <a href="{{ route('pedidos_cosmica_woo.index') }}" class="btn btn-sm m-2 text-white" style="background:#B600E3;">Tienda Online
                             <img src="{{asset('assets/user/icons/carrito-de-compras.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
-                        </a>
+                        </a> --}}
                         <a href="{{ route('pedidos_cosmica_ecommerce.index') }}" class="btn btn-sm m-2 text-white" style="background:#660080;">Ecommerce
                             <img src="{{asset('assets/user/icons/order.webp') }}" alt="Imagen" style="width: 25px; height: 25px;"/>
                             <span class="badge rounded-pill bg-danger">
