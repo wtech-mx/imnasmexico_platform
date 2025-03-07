@@ -48,10 +48,10 @@ class FoliosController extends Controller
     public function buscador(Request $request){
 
 
-        if($request->get('folio') == 'EFDFGVOA-16620'){
+        // if($request->get('folio') == 'EFDFGVOA-16620'){
 
-            $request->get('folio') = 'EFDFOAGV-16620';
-        }
+        //     $request->get('folio') = 'EFDFOAGV-16620';
+        // }
 
         $tickets = OrdersTickets::where('folio', '=', $request->get('folio'))->first();
 
