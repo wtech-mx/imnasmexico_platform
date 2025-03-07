@@ -53,6 +53,8 @@ class FoliosController extends Controller
         if($folio == 'EFDFGVOA-16620'){
 
             $folio = 'EFDFOAGV-16620';
+        }else if($folio == 'EFDFMRHA-16264'){
+            $folio = 'EFDFHAMR-16264';
         }
 
         $tickets = OrdersTickets::where('folio', '=', $folio)->first();
