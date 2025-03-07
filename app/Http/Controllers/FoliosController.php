@@ -47,21 +47,23 @@ class FoliosController extends Controller
 
     public function buscador(Request $request){
 
+        $folio = $request->get('folio');
 
-        // if($request->get('folio') == 'EFDFGVOA-16620'){
 
-        //     $request->get('folio') = 'EFDFOAGV-16620';
-        // }
+        if($folio == 'EFDFGVOA-16620'){
 
-        $tickets = OrdersTickets::where('folio', '=', $request->get('folio'))->first();
+            $folio = 'EFDFOAGV-16620';
+        }
+
+        $tickets = OrdersTickets::where('folio', '=', $folio)->first();
 
             if (!$tickets) {
 
-                $tickets_generador = RegistroImnas::where('folio', $request->get('folio'))->first();
+                $tickets_generador = RegistroImnas::where('folio', $folio)->first();
 
                 // Si tampoco se encuentra en RegistroImnas, busca en DocumentosGenerador
                 if (!$tickets_generador) {
-                    $tickets_externo = DocumenotsGenerador::where('folio', $request->get('folio'))->first();
+                    $tickets_externo = DocumenotsGenerador::where('folio', $folio)->first();
                 }else{
                     $tickets_externo = '';
                 }
@@ -71,8 +73,6 @@ class FoliosController extends Controller
                 $tickets_externo = '';
 
             }
-
-            $folio = $request->get('folio');
 
             $registros_imnas = Orders::where('registro_imnas', '=', '1')->get();
 
