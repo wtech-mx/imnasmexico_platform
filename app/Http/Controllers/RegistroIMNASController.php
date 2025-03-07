@@ -1735,4 +1735,17 @@ class RegistroIMNASController extends Controller
 
         return redirect()->back()->with('success', 'Folio cancelado con exito.');
     }
+
+    public function imprimir_especialidades_afi(){
+        $diaActual = date('Y-m-d');
+        $today =  date('d-m-Y');
+
+        $afiliado = User::where('registro_imnas', 1)->get();
+        $especialidad = RegistroImnasEspecialidad::get();
+
+
+        $pdf = \PDF::loadView('admin.registro_imnas.pdf_especialidades', compact('especialidad', 'today', 'afiliado'));
+        return $pdf->stream();
+       //  return $pdf->download('Cotizacion Cosmica'. $folio .'/'.$today.'.pdf');
+    }
 }

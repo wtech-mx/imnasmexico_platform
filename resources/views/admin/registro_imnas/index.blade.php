@@ -23,6 +23,10 @@
                             <a class="btn btn-xs btn-primary" data-bs-toggle="modal" data-bs-target="#registro_imnas" title="Editar Estatus" style="background: #b600e3;">
                                 Crear
                             </a>
+
+                            <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('imprimir.especialidades') }}">
+                                <i class="fa fa-file"></i>afi
+                            </a>
                         </div>
                     </div>
 
