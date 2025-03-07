@@ -102,7 +102,9 @@
         <tbody>
             @foreach ($afiliado as $item)
                 <tr>
-                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->name }} <br>
+                        {{ $item->escuela }}
+                    </td>
                     <td>
                         @foreach ($especialidad as $especialidades)
                             @if ($item->id == $especialidades->id_cliente)

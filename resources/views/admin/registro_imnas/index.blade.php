@@ -24,9 +24,9 @@
                                 Crear
                             </a>
 
-                            {{-- <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('imprimir.especialidades') }}">
+                            <a class="btn btn-xs btn-info text-white" target="_blank" href="{{ route('imprimir.especialidades') }}">
                                 <i class="fa fa-file"></i>afi
-                            </a> --}}
+                            </a>
                         </div>
                     </div>
 
