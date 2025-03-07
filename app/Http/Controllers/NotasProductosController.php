@@ -289,8 +289,8 @@ class NotasProductosController extends Controller
                         foreach ($productos_bundle as $producto_bundle) {
                             $notas_inscripcion = new ProductosNotasId;
                             $notas_inscripcion->id_notas_productos = $notas_productos->id;
-                            $notas_inscripcion->producto = $productos_bundle->producto;
-                            $notas_inscripcion->id_producto = $productos_bundle->id_product;
+                            $notas_inscripcion->producto = $producto_bundle->producto;
+                            $notas_inscripcion->id_producto = $producto_bundle->id_product;
                             $notas_inscripcion->price = '0';
                             $notas_inscripcion->cantidad = $producto_bundle->cantidad;
                             $notas_inscripcion->save();
