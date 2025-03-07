@@ -43,6 +43,7 @@ class FoliosController extends Controller
 
         $registros_imnas = Orders::where('registro_imnas', '=', '1')->Orderby('id','ASC')->get();
         return view('user.registro.afiliate',compact('registros_imnas'));
+
     }
 
     public function buscador(Request $request){
@@ -67,6 +68,11 @@ class FoliosController extends Controller
             }
 
             $folio = $request->get('folio');
+
+            if($folio == 'EFDFGVOA-16620'){
+
+                $folio = 'EFDFOAGV-16620';
+            }
 
             $registros_imnas = Orders::where('registro_imnas', '=', '1')->get();
 
