@@ -290,10 +290,11 @@ class NotasProductosController extends Controller
                             $notas_inscripcion = new ProductosNotasId;
                             $notas_inscripcion->id_notas_productos = $notas_productos->id;
                             $notas_inscripcion->producto = $producto_bundle->producto;
-                            $notas_inscripcion->id_producto = $producto_bundle->id_product;
+                            $notas_inscripcion->id_producto = $producto_bundle->id_producto;
                             $notas_inscripcion->price = '0';
                             $notas_inscripcion->cantidad = $producto_bundle->cantidad;
                             $notas_inscripcion->save();
+
                         }
 
                         // Asignar el ID del kit en la columna correspondiente
