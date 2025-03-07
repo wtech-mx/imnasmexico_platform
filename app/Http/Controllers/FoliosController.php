@@ -49,13 +49,20 @@ class FoliosController extends Controller
 
         $folio = $request->get('folio');
 
+            if($folio == 'EFDFGVOA-16620'){
 
-        if($folio == 'EFDFGVOA-16620'){
+                $folio = 'EFDFOAGV-16620';
 
-            $folio = 'EFDFOAGV-16620';
-        }else if($folio == 'EFDFMRHA-16264'){
-            $folio = 'EFDFHAMR-16264';
-        }
+            }else if($folio == 'EFDFMRHA-16264'){
+                $folio = 'EFDFHAMR-16264';
+
+            }else if($folio == 'EDPEAARD-16689'){
+                $folio = 'EDPERDAA-16689';
+
+            }else if($folio == 'EDPEBAG-16619'){
+                $folio = 'EDPEGBA-16619';
+            }
+
 
         $tickets = OrdersTickets::where('folio', '=', $folio)->first();
 
