@@ -81,6 +81,16 @@
         color: #2D2432;
     }
 
+    .span_custom_checkout {
+        background: #2D2432;
+        color: #fff;
+    }
+
+    .input_custom_checkout {
+        background: #2D2432;
+        color: #fff;
+    }
+
 </style>
 @endsection
     @php
