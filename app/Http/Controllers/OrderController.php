@@ -899,7 +899,7 @@ class OrderController extends Controller
 
         $datos = json_decode($response, true);
 
-        if ($datos['success'] && $datos['score'] >= 0.5 && $datos['action'] == 'clases_gratis') {
+      //  if ($datos['success'] && $datos['score'] >= 0.5 && $datos['action'] == 'clases_gratis') {
 
             $code = Str::random(8);
             $fechaActual = date('Y-m-d');
@@ -1014,10 +1014,10 @@ class OrderController extends Controller
 
             Alert::success('Registro con exito', 'Se ha registrado con exito');
             return back()->with('success', 'Inscrito correctamente');
-        } else {
+        // } else {
 
-            return back()->with('error', 'Error de verificación reCAPTCHA. Por favor, inténtalo de nuevo.');
-        }
+        //     return back()->with('error', 'Error de verificación reCAPTCHA. Por favor, inténtalo de nuevo.');
+        // }
     }
 
     public function addToCart(Request $request, $id)
