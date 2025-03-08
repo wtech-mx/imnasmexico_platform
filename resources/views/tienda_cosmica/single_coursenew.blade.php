@@ -82,13 +82,13 @@
     }
 
     .span_custom_checkout {
-        background: #2D2432;
-        color: #fff;
+        background: #2D2432!important;
+        color: #fff!important;
     }
 
     .input_custom_checkout {
-        background: #2D2432;
-        color: #fff;
+        background: #2D2432!important;
+        color: #fff!important;
     }
 
 </style>
@@ -647,7 +647,7 @@
                 @endif
             @endif
 
-            @if($curso->registro_imnas != '1')
+            {{-- @if($curso->registro_imnas != '1')
                 @if($curso->visibilidad_doc == '0')
 
                 @else
@@ -741,7 +741,6 @@
                                                     <a class="text-center" data-bs-toggle="modal" data-bs-target="#educativo">
                                                             <img class="img_card_certificaciones" src="{{asset('assets/user/logotipos/sepconocer.png')}}" alt="">
                                                         </a>
-                                                    {{-- <img class="click_docmuentos" src="{{asset('assets/user/icons/clic2.png')}}" alt="" > --}}
                                                 </div>
                                             </div>
                                             <p class="text-center">
@@ -879,7 +878,7 @@
                             </div>
                     </div>
                 @endif
-            @endif
+            @endif --}}
 
             @if($curso->registro_imnas != '1')
                 <div class="card_single_horizon">
