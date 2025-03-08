@@ -4,6 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use App\Models\Cosmikausers;
+use App\Models\Cursos;
+use App\Models\Noticias;
+use App\Models\CursosTickets;
+use App\Models\OrdersTickets;
+use Session;
+use Str;
+use Illuminate\Support\Facades\Auth;
+
 use App\Models\ProductosBundleId;
 use Illuminate\Http\Request;
 
@@ -19,6 +27,25 @@ class EcommerceCosmikaController extends Controller
         ->get();
 
         return view('tienda_cosmica.home', compact('products_popular'));
+    }
+
+    public function show($slug)
+    {
+        $fechaActual = date('Y-m-d');
+
+        $noticias_gallery = Noticias::orderBy('id','DESC')->where('seccion','=','Galeria Cursos')->get();
+
+        $curso = Cursos::where('slug','=', $slug)->firstOrFail();
+        $cursos = Cursos::where('fecha_final','>=', $fechaActual)->where('estatus','=', '1')->get();
+        $tickets = CursosTickets::where('id_curso','=', $curso->id)->where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->get();
+
+        $usuarioId = Auth::id(); // Obtén el ID del usuario logueado
+        // Verifica si el usuario ha comprado un ticket para el curso
+        $usuario_compro = OrdersTickets::where('id_usuario', $usuarioId)
+                        ->where('id_curso','=', $curso->id)
+                        ->first();
+
+        return view('tienda_cosmica.single_coursenew', compact('curso', 'tickets', 'usuario_compro','cursos','noticias_gallery'));
     }
 
     public function single_product($slug){

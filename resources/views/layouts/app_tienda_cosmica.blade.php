@@ -84,7 +84,7 @@
 
     @include('tienda_cosmica.Components.footer')
 
-    @include('user.components.btn_flotante')
+    @include('tienda_cosmica.Components.btn_flotante')
 
     @include('layouts.alertas')
 
