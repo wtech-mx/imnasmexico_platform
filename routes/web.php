@@ -137,7 +137,7 @@ Route::get('/tienda/terminos_y_condciones', [App\Http\Controllers\EcommerceCosmi
 Route::get('/tienda/buscar/productos', [App\Http\Controllers\EcommerceCosmikaController::class, 'buscar'])->name('productos.buscar');
 Route::get('/tienda/busqueda', [App\Http\Controllers\EcommerceCosmikaController::class, 'buscarProductos'])->name('tienda_online.buscar');
 
-Route::get('    {slug}', [App\Http\Controllers\EcommerceCosmikaController::class, 'show'])->name('cursos_cosmica.show');
+Route::get('tienda/curso/{slug}', [App\Http\Controllers\EcommerceCosmikaController::class, 'show'])->name('cursos_cosmica.show');
 
 // =============== E C O M M E R C E  C A J A ===============================
 
