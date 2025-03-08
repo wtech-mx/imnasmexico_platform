@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => request()->getSchemeAndHttpHost(),
 
     'asset_url' => env('ASSET_URL', '/'),
 
