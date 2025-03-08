@@ -248,8 +248,7 @@ class PedidosWooController extends Controller
         $startDateTime = $startDate . 'T00:00:00';
         $endDateTime = $endDate . 'T23:59:59';
 
-        $notas = OrdersCosmica::whereBetween('fecha', [$startDate, $endDate])
-        ->orderBy('id','DESC')->where('estatus','=' , '0')->get();
+        $notas = OrdersCosmica::orderBy('id','DESC')->where('estatus','=' , '0')->get();
 
         return view('admin.cosmica_ecommerce.index', compact('notas'));
     }
