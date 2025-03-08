@@ -63,6 +63,8 @@ class FoliosController extends Controller
                 $folio = 'EDPEGBA-16619';
             }else if($folio == 'MPMCD-16697'){
                 $folio = 'MCDPM-16697';
+            }else if($folio == 'MSPMI-16697'){
+                $folio = 'MMISP-16697';
             }
 
 
