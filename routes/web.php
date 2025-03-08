@@ -12,55 +12,6 @@ use App\Http\Controllers\ShipmentController;
 
 use App\Http\Controllers\PruebaApiController;
 
-
-// Rutas para el segundo dominio
-Route::group(['domain' => env('SECONDARY_DOMAIN', 'localhost')], function () {
-
-    // =============== E C O M M E R C E C O S M I C A ===============================
-
-    Route::get('/doc/cedula', [App\Http\Controllers\NewDocumentsController::class, 'cedula'])->name('doc.cedula');
-    Route::get('/doc/titulo', [App\Http\Controllers\NewDocumentsController::class, 'titulo'])->name('doc.titulo');
-    Route::get('/doc/diploma', [App\Http\Controllers\NewDocumentsController::class, 'diploma'])->name('doc.diploma');
-    Route::get('/doc/credencial', [App\Http\Controllers\NewDocumentsController::class, 'credencial'])->name('doc.credencial');
-    Route::get('/doc/tira', [App\Http\Controllers\NewDocumentsController::class, 'tira'])->name('doc.tira');
-    Route::get('/doc/reconocimiento', [App\Http\Controllers\NewDocumentsController::class, 'reconocimiento'])->name('doc.reconocimiento');
-
-    // =============== E C O M M E R C E C O S M I C A ===============================
-    Route::get('/tienda/home', [App\Http\Controllers\EcommerceCosmikaController::class, 'home'])->name('tienda.home');
-    Route::get('/tienda/producto/{slug}', [App\Http\Controllers\EcommerceCosmikaController::class, 'single_product'])->name('tienda.single_product');
-    Route::get('/tienda/cart', [App\Http\Controllers\EcommerceCosmikaController::class, 'cart'])->name('tienda.cart');
-    Route::get('/tienda/categories', [App\Http\Controllers\EcommerceCosmikaController::class, 'categories'])->name('tienda.categories');
-    Route::get('/tienda/filter', [App\Http\Controllers\EcommerceCosmikaController::class, 'filter'])->name('tienda.filter');
-    Route::get('/tienda/about', [App\Http\Controllers\EcommerceCosmikaController::class, 'about'])->name('tienda.about');
-    Route::get('/tienda/afiliadas', [App\Http\Controllers\EcommerceCosmikaController::class, 'afiliadas'])->name('tienda.afiliadas');
-    Route::get('/tienda/kits', [App\Http\Controllers\EcommerceCosmikaController::class, 'kits'])->name('tienda.kits');
-    Route::get('/tienda/kits/{id}', [App\Http\Controllers\EcommerceCosmikaController::class, 'view_kit'])->name('tienda.view_kit');
-
-    Route::get('/tienda/productos', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos'])->name('tienda.productos');
-    Route::get('/tienda/productos_faciales', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos_faciales'])->name('tienda.productos_faciales');
-    Route::get('/tienda/productos_corporales', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos_corporales'])->name('tienda.productos_corporales');
-    Route::get('/tienda/aviso_privacidad', [App\Http\Controllers\EcommerceCosmikaController::class, 'aviso'])->name('tienda.aviso');
-    Route::get('/tienda/terminos_y_condciones', [App\Http\Controllers\EcommerceCosmikaController::class, 'terminos'])->name('tienda.terminos');
-
-    Route::get('/tienda/buscar/productos', [App\Http\Controllers\EcommerceCosmikaController::class, 'buscar'])->name('productos.buscar');
-    Route::get('/tienda/busqueda', [App\Http\Controllers\EcommerceCosmikaController::class, 'buscarProductos'])->name('tienda_online.buscar');
-
-    // =============== E C O M M E R C E  C A J A ===============================
-
-    Route::post('/agregar-al-carrito', [App\Http\Controllers\CartController::class, 'agregar'])->name('carrito.agregar');
-    Route::post('/actualizar-carrito', [App\Http\Controllers\CartController::class, 'actualizar'])->name('carrito.actualizar');
-    Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
-    Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
-    Route::post('/cart/process-payment', [App\Http\Controllers\CartController::class, 'processPayment'])->name('process-payment_cosmica');
-    Route::post('/cart/processPaymentMeli', [App\Http\Controllers\CartController::class, 'processPaymentMeli'])->name('processPaymentMeli');
-    Route::get('/cart/thankyou/{id}', [App\Http\Controllers\CartController::class, 'thankYouPage'])->name('thankyou.page');
-
-    Route::get('/cart/orders/pay', [App\Http\Controllers\CartController::class, 'pay'])->name('order_cosmica.pay');
-    Route::get('/cart/orders/{code}/show', [App\Http\Controllers\CartController::class, 'show'])->name('order_cosmica.show');
-    Route::get('/cart/count', [App\Http\Controllers\CartController::class, 'getCartCount'])->name('cart.count');
-
-});
-
 Route::get('api/preparacion', [PruebaApiController::class, 'index_preparacion'])->name('index_preparacion.api');
 Route::get('envia/shipments', [ShipmentController::class, 'getShipments'])->name('shipments.index');
 
@@ -85,8 +36,6 @@ Route::post('/nota/actualizar-estatus', [App\Http\Controllers\ScannerController:
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-
 
 Route::get('403', function () {
     return view('errors.403');
@@ -159,18 +108,57 @@ Route::get('folio', function () {
     return view('user.folio');
 });
 
+// =============== E C O M M E R C E C O S M I C A ===============================
 
+Route::get('/doc/cedula', [App\Http\Controllers\NewDocumentsController::class, 'cedula'])->name('doc.cedula');
+Route::get('/doc/titulo', [App\Http\Controllers\NewDocumentsController::class, 'titulo'])->name('doc.titulo');
+Route::get('/doc/diploma', [App\Http\Controllers\NewDocumentsController::class, 'diploma'])->name('doc.diploma');
+Route::get('/doc/credencial', [App\Http\Controllers\NewDocumentsController::class, 'credencial'])->name('doc.credencial');
+Route::get('/doc/tira', [App\Http\Controllers\NewDocumentsController::class, 'tira'])->name('doc.tira');
+Route::get('/doc/reconocimiento', [App\Http\Controllers\NewDocumentsController::class, 'reconocimiento'])->name('doc.reconocimiento');
 
-    // =============== M O D U L O   F O L I O S ===============================
+// =============== E C O M M E R C E C O S M I C A ===============================
+Route::get('/tienda/home', [App\Http\Controllers\EcommerceCosmikaController::class, 'home'])->name('tienda.home');
+Route::get('/tienda/producto/{slug}', [App\Http\Controllers\EcommerceCosmikaController::class, 'single_product'])->name('tienda.single_product');
+Route::get('/tienda/cart', [App\Http\Controllers\EcommerceCosmikaController::class, 'cart'])->name('tienda.cart');
+Route::get('/tienda/categories', [App\Http\Controllers\EcommerceCosmikaController::class, 'categories'])->name('tienda.categories');
+Route::get('/tienda/filter', [App\Http\Controllers\EcommerceCosmikaController::class, 'filter'])->name('tienda.filter');
+Route::get('/tienda/about', [App\Http\Controllers\EcommerceCosmikaController::class, 'about'])->name('tienda.about');
+Route::get('/tienda/afiliadas', [App\Http\Controllers\EcommerceCosmikaController::class, 'afiliadas'])->name('tienda.afiliadas');
+Route::get('/tienda/kits', [App\Http\Controllers\EcommerceCosmikaController::class, 'kits'])->name('tienda.kits');
+Route::get('/tienda/kits/{id}', [App\Http\Controllers\EcommerceCosmikaController::class, 'view_kit'])->name('tienda.view_kit');
 
-    Route::get('/buscar/folio', [App\Http\Controllers\FoliosController::class, 'index'])->name('folio.index');
-    Route::get('/buscador/folio', [App\Http\Controllers\FoliosController::class, 'buscador'])->name('folio.buscador');
+Route::get('/tienda/productos', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos'])->name('tienda.productos');
+Route::get('/tienda/productos_faciales', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos_faciales'])->name('tienda.productos_faciales');
+Route::get('/tienda/productos_corporales', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos_corporales'])->name('tienda.productos_corporales');
+Route::get('/tienda/aviso_privacidad', [App\Http\Controllers\EcommerceCosmikaController::class, 'aviso'])->name('tienda.aviso');
+Route::get('/tienda/terminos_y_condciones', [App\Http\Controllers\EcommerceCosmikaController::class, 'terminos'])->name('tienda.terminos');
 
-    Route::get('/docmuento/cedula/{id}', [App\Http\Controllers\FoliosController::class, 'index_cedula'])->name('folio.index_cedula');
-    Route::get('/docmuento/titulo/{id}', [App\Http\Controllers\FoliosController::class, 'index_titulo'])->name('folio.index_titulo');
-    Route::get('/docmuento/diploma/{id}', [App\Http\Controllers\FoliosController::class, 'index_diploma'])->name('folio.index_diploma');
-    Route::get('/docmuento/crednecial/{id}', [App\Http\Controllers\FoliosController::class, 'index_crednecial'])->name('folio.index_crednecial');
-    Route::get('/docmuento/tira/{id}', [App\Http\Controllers\FoliosController::class, 'index_tira'])->name('folio.index_tira');
+Route::get('/tienda/buscar/productos', [App\Http\Controllers\EcommerceCosmikaController::class, 'buscar'])->name('productos.buscar');
+Route::get('/tienda/busqueda', [App\Http\Controllers\EcommerceCosmikaController::class, 'buscarProductos'])->name('tienda_online.buscar');
+
+// =============== E C O M M E R C E  C A J A ===============================
+
+Route::post('/agregar-al-carrito', [App\Http\Controllers\CartController::class, 'agregar'])->name('carrito.agregar');
+Route::post('/actualizar-carrito', [App\Http\Controllers\CartController::class, 'actualizar'])->name('carrito.actualizar');
+Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+Route::post('/cart/process-payment', [App\Http\Controllers\CartController::class, 'processPayment'])->name('process-payment_cosmica');
+Route::post('/cart/processPaymentMeli', [App\Http\Controllers\CartController::class, 'processPaymentMeli'])->name('processPaymentMeli');
+Route::get('/cart/thankyou/{id}', [App\Http\Controllers\CartController::class, 'thankYouPage'])->name('thankyou.page');
+
+Route::get('/cart/orders/pay', [App\Http\Controllers\CartController::class, 'pay'])->name('order_cosmica.pay');
+Route::get('/cart/orders/{code}/show', [App\Http\Controllers\CartController::class, 'show'])->name('order_cosmica.show');
+Route::get('/cart/count', [App\Http\Controllers\CartController::class, 'getCartCount'])->name('cart.count');
+// =============== M O D U L O   F O L I O S ===============================
+Route::get('/buscar/folio', [App\Http\Controllers\FoliosController::class, 'index'])->name('folio.index');
+Route::get('/buscador/folio', [App\Http\Controllers\FoliosController::class, 'buscador'])->name('folio.buscador');
+
+Route::get('/docmuento/cedula/{id}', [App\Http\Controllers\FoliosController::class, 'index_cedula'])->name('folio.index_cedula');
+Route::get('/docmuento/titulo/{id}', [App\Http\Controllers\FoliosController::class, 'index_titulo'])->name('folio.index_titulo');
+Route::get('/docmuento/diploma/{id}', [App\Http\Controllers\FoliosController::class, 'index_diploma'])->name('folio.index_diploma');
+Route::get('/docmuento/crednecial/{id}', [App\Http\Controllers\FoliosController::class, 'index_crednecial'])->name('folio.index_crednecial');
+Route::get('/docmuento/tira/{id}', [App\Http\Controllers\FoliosController::class, 'index_tira'])->name('folio.index_tira');
 
 
 // =============== M O D U L O   C A M D O C U M E N T O S D I G I T A L E S ===============================
