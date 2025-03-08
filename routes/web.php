@@ -108,7 +108,44 @@ Route::get('folio', function () {
     return view('user.folio');
 });
 
-// =============== E C O M M E R C E C O S M I C A ===============================
+Route::group(['domain' => 'cosmicaskin.com'], function () {
+
+    // =============== E C O M M E R C E C O S M I C A ===============================
+    Route::get('/tienda/home', [App\Http\Controllers\EcommerceCosmikaController::class, 'home'])->name('tienda.home');
+    Route::get('/tienda/producto/{slug}', [App\Http\Controllers\EcommerceCosmikaController::class, 'single_product'])->name('tienda.single_product');
+    Route::get('/tienda/cart', [App\Http\Controllers\EcommerceCosmikaController::class, 'cart'])->name('tienda.cart');
+    Route::get('/tienda/categories', [App\Http\Controllers\EcommerceCosmikaController::class, 'categories'])->name('tienda.categories');
+    Route::get('/tienda/filter', [App\Http\Controllers\EcommerceCosmikaController::class, 'filter'])->name('tienda.filter');
+    Route::get('/tienda/about', [App\Http\Controllers\EcommerceCosmikaController::class, 'about'])->name('tienda.about');
+    Route::get('/tienda/afiliadas', [App\Http\Controllers\EcommerceCosmikaController::class, 'afiliadas'])->name('tienda.afiliadas');
+    Route::get('/tienda/kits', [App\Http\Controllers\EcommerceCosmikaController::class, 'kits'])->name('tienda.kits');
+    Route::get('/tienda/kits/{id}', [App\Http\Controllers\EcommerceCosmikaController::class, 'view_kit'])->name('tienda.view_kit');
+
+    Route::get('/tienda/productos', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos'])->name('tienda.productos');
+    Route::get('/tienda/productos_faciales', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos_faciales'])->name('tienda.productos_faciales');
+    Route::get('/tienda/productos_corporales', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos_corporales'])->name('tienda.productos_corporales');
+    Route::get('/tienda/aviso_privacidad', [App\Http\Controllers\EcommerceCosmikaController::class, 'aviso'])->name('tienda.aviso');
+    Route::get('/tienda/terminos_y_condciones', [App\Http\Controllers\EcommerceCosmikaController::class, 'terminos'])->name('tienda.terminos');
+
+    Route::get('/tienda/buscar/productos', [App\Http\Controllers\EcommerceCosmikaController::class, 'buscar'])->name('productos.buscar');
+    Route::get('/tienda/busqueda', [App\Http\Controllers\EcommerceCosmikaController::class, 'buscarProductos'])->name('tienda_online.buscar');
+
+    // =============== E C O M M E R C E  C A J A ===============================
+
+    Route::post('/agregar-al-carrito', [App\Http\Controllers\CartController::class, 'agregar'])->name('carrito.agregar');
+    Route::post('/actualizar-carrito', [App\Http\Controllers\CartController::class, 'actualizar'])->name('carrito.actualizar');
+    Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
+    Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+    Route::post('/cart/process-payment', [App\Http\Controllers\CartController::class, 'processPayment'])->name('process-payment_cosmica');
+    Route::post('/cart/processPaymentMeli', [App\Http\Controllers\CartController::class, 'processPaymentMeli'])->name('processPaymentMeli');
+    Route::get('/cart/thankyou/{id}', [App\Http\Controllers\CartController::class, 'thankYouPage'])->name('thankyou.page');
+
+    Route::get('/cart/orders/pay', [App\Http\Controllers\CartController::class, 'pay'])->name('order_cosmica.pay');
+    Route::get('/cart/orders/{code}/show', [App\Http\Controllers\CartController::class, 'show'])->name('order_cosmica.show');
+    Route::get('/cart/count', [App\Http\Controllers\CartController::class, 'getCartCount'])->name('cart.count');
+});
+
+
 
 Route::get('/doc/cedula', [App\Http\Controllers\NewDocumentsController::class, 'cedula'])->name('doc.cedula');
 Route::get('/doc/titulo', [App\Http\Controllers\NewDocumentsController::class, 'titulo'])->name('doc.titulo');
@@ -117,39 +154,7 @@ Route::get('/doc/credencial', [App\Http\Controllers\NewDocumentsController::clas
 Route::get('/doc/tira', [App\Http\Controllers\NewDocumentsController::class, 'tira'])->name('doc.tira');
 Route::get('/doc/reconocimiento', [App\Http\Controllers\NewDocumentsController::class, 'reconocimiento'])->name('doc.reconocimiento');
 
-// =============== E C O M M E R C E C O S M I C A ===============================
-Route::get('/tienda/home', [App\Http\Controllers\EcommerceCosmikaController::class, 'home'])->name('tienda.home');
-Route::get('/tienda/producto/{slug}', [App\Http\Controllers\EcommerceCosmikaController::class, 'single_product'])->name('tienda.single_product');
-Route::get('/tienda/cart', [App\Http\Controllers\EcommerceCosmikaController::class, 'cart'])->name('tienda.cart');
-Route::get('/tienda/categories', [App\Http\Controllers\EcommerceCosmikaController::class, 'categories'])->name('tienda.categories');
-Route::get('/tienda/filter', [App\Http\Controllers\EcommerceCosmikaController::class, 'filter'])->name('tienda.filter');
-Route::get('/tienda/about', [App\Http\Controllers\EcommerceCosmikaController::class, 'about'])->name('tienda.about');
-Route::get('/tienda/afiliadas', [App\Http\Controllers\EcommerceCosmikaController::class, 'afiliadas'])->name('tienda.afiliadas');
-Route::get('/tienda/kits', [App\Http\Controllers\EcommerceCosmikaController::class, 'kits'])->name('tienda.kits');
-Route::get('/tienda/kits/{id}', [App\Http\Controllers\EcommerceCosmikaController::class, 'view_kit'])->name('tienda.view_kit');
 
-Route::get('/tienda/productos', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos'])->name('tienda.productos');
-Route::get('/tienda/productos_faciales', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos_faciales'])->name('tienda.productos_faciales');
-Route::get('/tienda/productos_corporales', [App\Http\Controllers\EcommerceCosmikaController::class, 'productos_corporales'])->name('tienda.productos_corporales');
-Route::get('/tienda/aviso_privacidad', [App\Http\Controllers\EcommerceCosmikaController::class, 'aviso'])->name('tienda.aviso');
-Route::get('/tienda/terminos_y_condciones', [App\Http\Controllers\EcommerceCosmikaController::class, 'terminos'])->name('tienda.terminos');
-
-Route::get('/tienda/buscar/productos', [App\Http\Controllers\EcommerceCosmikaController::class, 'buscar'])->name('productos.buscar');
-Route::get('/tienda/busqueda', [App\Http\Controllers\EcommerceCosmikaController::class, 'buscarProductos'])->name('tienda_online.buscar');
-
-// =============== E C O M M E R C E  C A J A ===============================
-
-Route::post('/agregar-al-carrito', [App\Http\Controllers\CartController::class, 'agregar'])->name('carrito.agregar');
-Route::post('/actualizar-carrito', [App\Http\Controllers\CartController::class, 'actualizar'])->name('carrito.actualizar');
-Route::post('/cart/update', [App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
-Route::post('/cart/remove', [App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
-Route::post('/cart/process-payment', [App\Http\Controllers\CartController::class, 'processPayment'])->name('process-payment_cosmica');
-Route::post('/cart/processPaymentMeli', [App\Http\Controllers\CartController::class, 'processPaymentMeli'])->name('processPaymentMeli');
-Route::get('/cart/thankyou/{id}', [App\Http\Controllers\CartController::class, 'thankYouPage'])->name('thankyou.page');
-
-Route::get('/cart/orders/pay', [App\Http\Controllers\CartController::class, 'pay'])->name('order_cosmica.pay');
-Route::get('/cart/orders/{code}/show', [App\Http\Controllers\CartController::class, 'show'])->name('order_cosmica.show');
-Route::get('/cart/count', [App\Http\Controllers\CartController::class, 'getCartCount'])->name('cart.count');
 // =============== M O D U L O   F O L I O S ===============================
 Route::get('/buscar/folio', [App\Http\Controllers\FoliosController::class, 'index'])->name('folio.index');
 Route::get('/buscador/folio', [App\Http\Controllers\FoliosController::class, 'buscador'])->name('folio.buscador');
@@ -970,3 +975,5 @@ Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaCon
 // });
 
 
+Route::get('/messenger', fn() => view('messenger'));
+Route::ResourceView('template');
