@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Bitacora_cosmikausers;
 use App\Models\Cosmikausers;
 use App\Models\HistorialVendidos;
+use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 use App\Models\ProductosBundleId;
 use App\Models\ProductosNotasCosmica;
+use App\Models\ProductosNotasId;
 use App\Models\Products;
 use App\Models\User;
 use DB;
@@ -688,6 +690,51 @@ class CotizacionCosmicaController extends Controller
                 $nota->fecha_preparacion  = date("Y-m-d H:i:s");
                 $nota->fecha_preparado  = date("Y-m-d H:i:s");
                 $nota->fecha_envio  = date("Y-m-d H:i:s");
+            } else if($request->get('estatus_cotizacion') == 'Aprobado por tiendita'){
+                // Copiar datos a NotasProductos
+                $nuevaNota = new NotasProductos();
+                $nuevaNota->fill($nota->toArray());
+                $nuevaNota->tipo_nota = 'Venta Presencial';
+                $nuevaNota->estatus_cotizacion = 'Aprobada';
+                $nuevaNota->id_admin = auth()->user()->id;
+                $nuevaNota->metodo_pago = $request->get('metodo_pago2');
+                $nuevaNota->foto_pago = $request->get('foto_pago2');
+
+                // Obtener todos los folios del tipo de nota específico
+                $folios = NotasProductos::where('tipo_nota', 'Venta Presencial')->pluck('folio');
+
+                // Extraer los números de los folios y encontrar el máximo
+                $maxNumero = $folios->map(function ($folio) {
+                    return intval(substr($folio, strlen('V')));
+                })->max();
+
+                // Si hay un folio existente, sumarle 1 al máximo número
+                if ($maxNumero) {
+                    $numeroFolio = $maxNumero + 1;
+                } else {
+                    // Si no hay un folio existente, empezar desde 1
+                    $numeroFolio = 1;
+                }
+
+                // Crear el nuevo folio con el tipo de nota y el número
+                $folio = 'V' . $numeroFolio;
+
+                // Asignar el nuevo folio al objeto
+                $nuevaNota->folio = $folio;
+                $nuevaNota->save();
+
+                // Copiar productos a ProductosNotasId
+                $productosCosmica = ProductosNotasCosmica::where('id_notas_productos', $id)->get();
+                foreach ($productosCosmica as $productoCosmica) {
+                    $nuevoProducto = new ProductosNotasId();
+                    $nuevoProducto->fill($productoCosmica->toArray());
+                    $nuevoProducto->id_notas_productos = $nuevaNota->id;
+                    $nuevoProducto->save();
+                }
+
+                // Eliminar la nota y productos originales si es necesario
+                ProductosNotasCosmica::where('id_notas_productos', $id)->delete();
+                $nota->delete();
             }
 
         $nota->update();

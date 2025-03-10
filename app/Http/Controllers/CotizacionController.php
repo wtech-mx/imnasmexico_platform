@@ -522,6 +522,35 @@ class CotizacionController extends Controller
                 $nota->direccion_entrega  = $request->get('direccion_entrega');
                 $nota->comentario_rep  = $request->get('comentario_rep');
                 $nota->id_admin_venta  = auth()->user()->id;
+            } else if($request->get('estatus_cotizacion') == 'Aprobado por tiendita'){
+                // Cambiar el folio y pasar a Aprobada
+                $nota->estatus_cotizacion = 'Aprobada';
+                $nota->tipo_nota = 'Venta Presencial';
+                $nota->metodo_pago = $request->get('metodo_pago2');
+                $nota->foto_pago = $request->get('foto_pago2');
+                $nota->id_admin = auth()->user()->id;
+
+                // Obtener todos los folios del tipo de nota específico
+                $folios = NotasProductos::where('tipo_nota', 'Venta Presencial')->pluck('folio');
+
+                // Extraer los números de los folios y encontrar el máximo
+                $maxNumero = $folios->map(function ($folio) {
+                    return intval(substr($folio, strlen('V')));
+                })->max();
+
+                // Si hay un folio existente, sumarle 1 al máximo número
+                if ($maxNumero) {
+                    $numeroFolio = $maxNumero + 1;
+                } else {
+                    // Si no hay un folio existente, empezar desde 1
+                    $numeroFolio = 1;
+                }
+
+                // Crear el nuevo folio con el tipo de nota y el número
+                $folio = 'V' . $numeroFolio;
+
+                // Asignar el nuevo folio al objeto
+                $nota->folio = $folio;
             }
 
         $nota->save();

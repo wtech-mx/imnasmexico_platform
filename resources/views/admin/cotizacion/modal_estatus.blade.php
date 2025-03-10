@@ -26,6 +26,7 @@
                                     @if ($item->estatus_cotizacion ==  'Aprobada' || $item->estatus_cotizacion ==  NULL)
                                         <option value="Cancelada">Cancelar</option>
                                     @endif
+                                    <option value="Aprobado por tiendita">Aprobado por tiendita</option>
                                 </select>
                             </div>
                         </div>
@@ -84,6 +85,31 @@
                                     <option value="Contra Entrega">Contra Entrega</option>
                                     <option value="Reposicion">Reposicion</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-12 tiendita-select" style="display: none;">
+                            <label for="name">Pago</label>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">
+                                    <img src="{{ asset('assets/cam/change.png') }}" alt="" width="35px">
+                                </span>
+                                <select class="form-select" name="metodo_pago2" id="metodo_pago2">
+                                    <option value="">Seleccione metodo de pago</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Tarjeta Credito/debito">Tarjeta Credito/debito</option>
+                                    <option value="Transferencia">Transferencia</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group col-12">
+                                <h4 for="name">Foto Pago</h4>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">
+                                        <img src="{{ asset('assets/user/icons/picture.png') }}" alt="" width="35px">
+                                    </span>
+                                    <input class="form-control" type="file" id="foto_pago2" name="foto_pago2">
+                                </div>
                             </div>
                         </div>
 
@@ -173,11 +199,19 @@
                 var selectedValue = $(this).val();
                 if (selectedValue === 'Aprobada') {
                     $modal.find('.estado-select').show();
+                    $modal.find('.tiendita-select').hide();
 
                     $modal.find('#estado').attr('required', true);
                     $modal.find('#metodo_pago').attr('required', true);
+                } else if (selectedValue === 'Aprobado por tiendita') {
+                    $modal.find('.tiendita-select').show();
+                    $modal.find('.estado-select').hide();
+
+                    $modal.find('#estado').attr('required', false);
+                    $modal.find('#metodo_pago').attr('required', false);
                 } else {
                     $modal.find('.estado-select').hide();
+                    $modal.find('.tiendita-select').hide();
                 }
             }).trigger('change'); // Activar el evento para el valor actual.
 
