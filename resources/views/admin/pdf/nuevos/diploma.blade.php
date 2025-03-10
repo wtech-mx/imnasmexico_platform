@@ -413,6 +413,7 @@
                     </h2>
 
                     <p class="texto_documentos uppercase p-0 m-0" style="margin-bottom: 40px">
+                        este documento respalda 120 hrs totales del curso <br>
                         después de haber cumplido los requisitos, <br>
                         duración, y Evaluación del Programa Vigente <br>
                         Correspondiente a
