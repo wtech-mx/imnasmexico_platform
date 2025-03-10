@@ -140,7 +140,10 @@ class PerfilClienteController extends Controller
             $compras = NotasProductos::where('tipo_nota','=' , 'Venta Presencial')->where('telefono','=' ,$phone)->get();
         }
 
-        return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora', 'compras', 'tipo'));
+        $products = Products::orderBy('nombre','ASC')->get();
+        $fechaPerfil = date('Y-m-d');
+
+        return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora', 'compras', 'tipo', 'products', 'fechaPerfil'));
     }
 
     public function cotizaciones_nas(Request $request, $phone){
@@ -184,7 +187,7 @@ class PerfilClienteController extends Controller
             ->groupBy('id_cotizacion_nas')
             ->pluck('total', 'id_cotizacion_nas');
 
-        $products = Products::where('categoria', '=', 'Cosmica')->orderBy('nombre','ASC')->get();
+        $products = Products::orderBy('nombre','ASC')->get();
         $fechaPerfil = date('Y-m-d');
 
         return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora', 'cotizaciones', 'tipo', 'reportes', 'reportes_archivos', 'mensajesPorCotizacion', 'products', 'fechaPerfil'));

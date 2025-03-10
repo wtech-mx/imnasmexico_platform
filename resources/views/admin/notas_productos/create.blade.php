@@ -21,7 +21,7 @@
                             @csrf
                             <div class="modal-body">
                                 <div class="row">
-
+                                    <input id="tipo_cotizacion" name="tipo_cotizacion" type="hidden" class="form-control" value="Cotizacion">
                                     <div class="col-12 mt-2">
                                         <h2 style="color:#836262"><strong>Datos del cliente</strong> </h2>
                                     </div>

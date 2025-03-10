@@ -1,7 +1,7 @@
 <!-- Card Basic Info -->
 <div class="card mt-4" id="basic-info">
     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-        Crear cotizacion Cosmica
+        Crear cotizacion NAS
     </a>
 
     <div class="collapse" id="collapseExample">
