@@ -974,6 +974,3 @@ Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaCon
 
 // Route::get('/messenger', fn() => view('messenger'));
 // Route::ResourceView('template');
-
-Route::get('/messenger', fn() => view('messenger'));
-Route::ResourceView('template');
