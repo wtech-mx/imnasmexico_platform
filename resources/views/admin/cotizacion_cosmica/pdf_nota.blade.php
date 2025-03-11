@@ -205,7 +205,7 @@
                     <td>
                         <img id="blah" src="{{$producto->Productos->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/>
                     </td>
-                    <td>imagenes
+                    <td>
                         {{ $producto->cantidad }}
                     </td>
                     <td>
