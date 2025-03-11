@@ -46,8 +46,6 @@ class ProductsController extends Controller
         return $pdf->stream('codigos_barras_'.$fechaHora.'.pdf');
     }
 
-
-
     public function index(Request $request){
         $products = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Producto')->orderby('nombre','asc')->get();
         $productsTiendita = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Tiendita')->get();
@@ -60,6 +58,18 @@ class ProductsController extends Controller
         $productsKit = Products::orderBy('id','DESC')->where('categoria', '!=', 'Ocultar')->where('subcategoria', '=', 'Kit')->orderby('nombre','asc')->get();
 
         return view('admin.products.index_bundle', compact('productsKit'));
+    }
+
+    public function update_estatus(Request $request, $id){
+
+        $product = Products::find($id);
+        $product->estatus = $request->get('estatus');
+        $product->update();
+
+        return response()->json([
+            'id' => $product->id,
+            'estatus' => $product->estatus,
+        ]);
     }
 
     public function show($id)

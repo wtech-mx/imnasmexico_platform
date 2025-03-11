@@ -68,9 +68,11 @@
                             <th>Precio Normal</th>
                             <th>Categoria</th>
                             <th>Stock</th>
+                            <th>Estatus</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
+
                     @foreach ($productsKit as $product)
                     @php
                         $precio_rebajado = number_format($product->precio_rebajado, 0, '.', ',');
@@ -91,6 +93,9 @@
                         <td>${{ $precio_normal }}</td>
                         <td>{{ $product->categoria }}</td>
                         <td>{{ $product->stock }}</td>
+                        <td>
+                            <input type="checkbox" class="estatus-checkbox" data-id="{{ $product->id }}" {{ $product->estatus == 'publicado' ? 'checked' : '' }}>
+                        </td>
                         <td>
 
                             <a class="btn btn-sm btn-primary" href="{{ route('bundle.edit', $product->id) }}">
@@ -162,6 +167,29 @@
                 error: function(xhr, status, error) {
                 console.error('Error:', error);
                 alert('Error:', error);
+                }
+            });
+        });
+
+        // Manejar el cambio de estado del checkbox
+        $(document).on('change', '.estatus-checkbox', function() {
+            let productId = $(this).data('id');
+            let estatus = $(this).is(':checked') ? 'publicado' : 'no publicado';
+            let url = "{{ route('products.update_estatus', ':id') }}".replace(':id', productId);
+
+            $.ajax({
+                url: url,
+                type: 'PATCH',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    estatus: estatus
+                },
+                success: function(response) {
+                    alert('Estatus actualizado con éxito');
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('Error al actualizar el estatus');
                 }
             });
         });

@@ -242,7 +242,7 @@ class EcommerceCosmikaController extends Controller
 
     public function kits(){
 
-        $products_kits = Products::orderBy('id','DESC')->where('categoria', '=', 'Cosmica')->where('subcategoria', '=', 'Kit')->orderby('nombre','asc')->get();
+        $products_kits = Products::orderBy('id','DESC')->where('categoria', '=', 'Cosmica')->where('subcategoria', '=', 'Kit')->orderby('nombre','asc')->where('estatus', '=', 'publicado')->get();
 
         return view('tienda_cosmica.kits', compact('products_kits'));
     }

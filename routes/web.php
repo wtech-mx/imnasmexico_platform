@@ -580,6 +580,7 @@ Route::group(['middleware' => ['auth']], function() {
      // =============== M O D U L O   WEB PAGE ===============================
      Route::get('/admin/products', [App\Http\Controllers\ProductsController::class, 'index'])->name('products.index');
      Route::get('/admin/products/bundle', [App\Http\Controllers\ProductsController::class, 'index_bundle'])->name('bundle.index');
+     Route::patch('admin/products/update-estatus/{id}', [App\Http\Controllers\ProductsController::class, 'update_estatus'])->name('products.update_estatus');
      Route::get('/admin/products/create/bundle', [App\Http\Controllers\ProductsController::class, 'create_bundle'])->name('bundle.create');
      Route::post('/admin/products/store/bundle', [App\Http\Controllers\ProductsController::class, 'store_bundle'])->name('bundle.store');
      Route::get('/admin/products/bundle/edit/{id}', [App\Http\Controllers\ProductsController::class, 'edit_bundle'])->name('bundle.edit');
