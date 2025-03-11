@@ -82,7 +82,14 @@ class NotasProductosController extends Controller
 
     public function create(){
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
-        $products = Products::orderBy('nombre','ASC')->where('categoria', '!=', 'Ocultar')->get();
+
+        $products = Products::where('categoria', '!=', 'Ocultar')
+        ->where(function($query) {
+            $query->whereNull('fecha_fin')
+                  ->orWhere('fecha_fin', '>', Carbon::now());
+        })
+        ->orderBy('nombre', 'ASC')
+        ->get();
 
         return view('admin.notas_productos.create', compact('products', 'clientes'));
     }
@@ -343,7 +350,14 @@ class NotasProductosController extends Controller
     public function edit($id){
         $cotizacion = NotasProductos::find($id);
         $cotizacion_productos = ProductosNotasId::where('id_notas_productos', '=', $id)->where('price', '!=', NULL)->get();
-        $products = Products::orderBy('nombre','ASC')->get();
+
+        $products = Products::where('categoria', '!=', 'Ocultar')
+        ->where(function($query) {
+            $query->whereNull('fecha_fin')
+                  ->orWhere('fecha_fin', '>', Carbon::now());
+        })
+        ->orderBy('nombre', 'ASC')
+        ->get();
 
         return view('admin.notas_productos.edit', compact('products', 'cotizacion', 'cotizacion_productos'));
     }

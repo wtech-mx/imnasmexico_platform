@@ -69,6 +69,7 @@
                             <th>Categoria</th>
                             <th>Stock</th>
                             <th>Estatus</th>
+                            <th>Fecha Fin</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -77,6 +78,8 @@
                     @php
                         $precio_rebajado = number_format($product->precio_rebajado, 0, '.', ',');
                         $precio_normal = number_format($product->precio_normal, 0, '.', ',');
+                        $fecha_fin = \Carbon\Carbon::parse($product->fecha_fin);
+                        $isExpired = $fecha_fin->isPast();
                     @endphp
                     <tr id="productRow{{ $product->id }}">
                         <td>{{ $product->id }}</td>
@@ -95,6 +98,9 @@
                         <td>{{ $product->stock }}</td>
                         <td>
                             <input type="checkbox" class="estatus-checkbox" data-id="{{ $product->id }}" {{ $product->estatus == 'publicado' ? 'checked' : '' }}>
+                        </td>
+                        <td class="{{ $isExpired ? 'text-danger' : '' }}">
+                            {{ $fecha_fin->format('d/m/Y') }}
                         </td>
                         <td>
 

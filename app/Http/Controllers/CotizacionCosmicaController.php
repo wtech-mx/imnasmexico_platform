@@ -256,8 +256,14 @@ class CotizacionCosmicaController extends Controller
     }
 
     public function create(){
-        $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
-        $products = Products::where('categoria', '=', 'Cosmica')->orderBy('nombre','ASC')->get();
+        $clientes = User::where('cliente', '=', '1')->orderBy('id', 'DESC')->get();
+        $products = Products::where('categoria', '=', 'Cosmica')
+                            ->where(function($query) {
+                                $query->whereNull('fecha_fin')
+                                      ->orWhere('fecha_fin', '>', Carbon::now());
+                            })
+                            ->orderBy('nombre', 'ASC')
+                            ->get();
 
         return view('admin.cotizacion_cosmica.create', compact('products', 'clientes'));
     }
@@ -505,7 +511,14 @@ class CotizacionCosmicaController extends Controller
     public function edit($id){
         $cotizacion = NotasProductosCosmica::find($id);
         $cotizacion_productos = ProductosNotasCosmica::where('id_notas_productos', '=', $id)->where('price', '!=', NULL)->get();
-        $products = Products::where('categoria', '=', 'Cosmica')->orderBy('nombre','ASC')->get();
+
+        $products = Products::where('categoria', '=', 'Cosmica')
+                            ->where(function($query) {
+                                $query->whereNull('fecha_fin')
+                                      ->orWhere('fecha_fin', '>', Carbon::now());
+                            })
+                            ->orderBy('nombre', 'ASC')
+                            ->get();
 
         return view('admin.cotizacion_cosmica.edit', compact('products', 'cotizacion', 'cotizacion_productos'));
     }
@@ -588,7 +601,8 @@ class CotizacionCosmicaController extends Controller
         $nota->envio = $request->get('envio');
         $nota->save();
 
-        return redirect()->back()->with('success', 'Se ha actualizado con exito');
+        return redirect()->route('cotizacion_cosmica.index')
+        ->with('success', 'Se ha actualizado su cotizacion con exito');
     }
 
     public function imprimir($id){
