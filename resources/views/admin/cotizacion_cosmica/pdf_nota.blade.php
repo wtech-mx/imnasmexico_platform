@@ -201,25 +201,21 @@
             @endforeach
 
             @foreach ($nota_productos->where('kit', 0) as $producto)
-                @php
-                    $unit = $producto->price;
-                    $subtotal = $unit * $producto->cantidad;
-                @endphp
                 <tr>
                     <td>
                         <img id="blah" src="{{$producto->Productos->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/>
                     </td>
-                    <td>
+                    <td>imagenes
                         {{ $producto->cantidad }}
                     </td>
                     <td>
                         {{ $producto->producto }}
                     </td>
                     <td>
-                        ${{ $unit }}
+                        ${{$producto->Productos->precio_normal}}
                     </td>
                     <td>
-                        ${{ $subtotal }}
+                        ${{$producto->price}}
                     </td>
                 </tr>
             @endforeach
