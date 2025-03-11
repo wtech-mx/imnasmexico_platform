@@ -1,45 +1,40 @@
 <?php
-namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\Message;
 
 class MessageController extends Controller
 {
-    public function getMessages(Request $request)
+    public function index()
     {
-        $chat_id = $request->query('chat_id');
-
-        if (!$chat_id) {
-            return response()->json(['error' => 'Chat ID is required'], 400);
-        }
-
-        $messages = Message::where('chat_id', $chat_id)->get();
-
-        return response()->json(['data' => $messages], 200);
+        $messages = Message::all();
+        return view('ajax.messages', compact('messages'));
     }
 
     public function sendMessage(Request $request)
     {
-        $validated = $request->validate([
-            'waba_phone_id' => 'required|string',
-            'to' => 'required|string',
-            'message' => 'required|array',
+        $request->validate([
+            'content' => 'required|string',
+            'chat_id' => 'required|exists:chats,id',
         ]);
 
-        // Lógica para enviar el mensaje a través de la API de WhatsApp
-
-        // Guardar el mensaje en la base de datos
         $message = new Message();
-        $message->chat_id = $request->input('chat_id');
-        $message->body = json_encode($request->input('message'));
-        $message->type = $request->input('message.type');
-        $message->direction = 'toApp';
-        $message->sended_by = 'app';
-        $message->timestamp = now();
+        $message->content = $request->content;
+        $message->chat_id = $request->chat_id;
         $message->save();
 
-        return response()->json(['data' => $message], 200);
+        return response()->json($message);
+    }
+
+    public function getMessages(Request $request)
+    {
+        $request->validate([
+            'chat_id' => 'required|exists:chats,id',
+        ]);
+
+        $messages = Message::where('chat_id', $request->chat_id)->get();
+        return response()->json($messages);
     }
 }
