@@ -448,6 +448,8 @@ class CotizacionCosmicaController extends Controller
                             $notas_inscripcion->producto = $producto_bundle->producto;
                             $notas_inscripcion->price = '0';
                             $notas_inscripcion->cantidad = $producto_bundle->cantidad;
+                            $notas_inscripcion->kit = '1';
+                            $notas_inscripcion->num_kit = $producto_bundle->id_product;
                             $notas_inscripcion->save();
                         }
                     }

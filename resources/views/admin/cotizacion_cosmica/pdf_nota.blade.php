@@ -144,33 +144,6 @@
         </tbody>
     </table>
 
-    <div class="text-center">
-        @if ($nota->id_kit != NULL && $nota->id_kit2 == NULL)
-            <h3>{{$nota->Kit->nombre}}</h3>
-        @endif
-        @if ($nota->id_kit2 != NULL)
-            <h3>Compra de kits:</h3>
-            <ul>
-                <li>{{$nota->Kit->nombre}}</li>
-                @if ($nota->id_kit2 != NULL)
-                    <li>{{$nota->Kit2->nombre}}</li>
-                @endif
-                @if ($nota->id_kit3 != NULL)
-                    <li>{{$nota->Kit3->nombre}}</li>
-                @endif
-                @if ($nota->id_kit4 != NULL)
-                    <li>{{$nota->Kit4->nombre}}</li>
-                @endif
-                @if ($nota->id_kit5 != NULL)
-                    <li>{{$nota->Kit5->nombre}}</li>
-                @endif
-                @if ($nota->id_kit6 != NULL)
-                    <li>{{$nota->Kit6->nombre}}</li>
-                @endif
-            </ul>
-        @endif
-    </div>
-
     <table class="table table-bordered border-primary">
         <thead class="text-center {{ $usercosmika == NULL ? 'table-cotizacion' : 'table-distribuidora' }}">
             <tr>
@@ -182,37 +155,74 @@
             </tr>
         </thead>
         <tbody class="text-center">
-            @foreach ($nota_productos as $nota_producto)
+            @foreach (range(1, 6) as $i)
+                @php
+                    $kitId = 'id_kit' . ($i == 1 ? '' : $i);
+                    $kitCantidad = 'cantidad_kit' . ($i == 1 ? '' : $i);
+                @endphp
+                @if ($nota->$kitId != NULL)
+                    @php
+                        $kit = \App\Models\Products::find($nota->$kitId);
+                        $cantidad = $nota->$kitCantidad;
+                        $unit = $kit->precio_normal;
+                        $subtotal = $unit * $cantidad;
+                    @endphp
+                    <tr>
+                        <td>
+                            @if ($kit->imagenes == NULL)
+                                <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 50px; height: 50px;"/>
+                            @else
+                                <img id="blah" src="{{asset('products/'.$kit->imagenes) }}" alt="Imagen" style="width: 50px; height: 50px;"/>
+                            @endif
+                        </td>
+                        <td>
+                            {{ $cantidad }}
+                        </td>
+                        <td>
+                            {{ $kit->nombre }}
+                        </td>
+                        <td>
+                            ${{ $unit }}
+                        </td>
+                        <td>
+                            ${{ $subtotal }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="5" style="text-align: left;">
+                            <ul>
+                                @foreach ($nota_productos->where('kit', 1)->where('num_kit', $nota->$kitId) as $producto)
+                                    <li>{{ $producto->cantidad }} {{ $producto->producto }}</li>
+                                @endforeach
+                            </ul>
+                        </td>
+                    </tr>
+                @endif
+            @endforeach
+
+            @foreach ($nota_productos->where('kit', 0) as $producto)
+                @php
+                    $unit = $producto->price;
+                    $subtotal = $unit * $producto->cantidad;
+                @endphp
                 <tr>
                     <td>
-                        <img src="{{ $nota_producto->Productos->imagenes }}" alt="" style="width: 60px">
-                     </td>
-                    <td>
-                        {{ $nota_producto->cantidad }}
+                        <img id="blah" src="{{$producto->Productos->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/>
                     </td>
                     <td>
-                        {{ $nota_producto->producto }}
+                        {{ $producto->cantidad }}
                     </td>
-                    @php
-                        if($nota_producto->producto == NULL){
-                            $unit = 0;
-                        }elseif($nota_producto->cantidad == NULL){
-                            $unit = 0;
-                        }else{
-                            $unit = $nota_producto->price / $nota_producto->cantidad;
-                        }
-                    @endphp
+                    <td>
+                        {{ $producto->producto }}
+                    </td>
                     <td>
                         ${{ $unit }}
                     </td>
-                    @php
-                        $subtotal = $unit * $nota_producto->cantidad;
-                    @endphp
                     <td>
                         ${{ $subtotal }}
                     </td>
                 </tr>
-           @endforeach
+            @endforeach
         </tbody>
         <tfoot >
             <tr style="background-color: #ffffff;">
