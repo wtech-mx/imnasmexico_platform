@@ -169,7 +169,11 @@
                     @endphp
                     <tr>
                         <td>
-                            <img src="{{ $kit->imagenes }}" alt="" style="width: 60px">
+                            @if ($kit->imagenes == NULL)
+                                <img id="blah" src="{{asset('cursos/no-image.jpg') }}" alt="Imagen" style="width: 50px; height: 50px;"/>
+                            @else
+                                <img id="blah" src="{{asset('products/'.$kit->imagenes) }}" alt="Imagen" style="width: 50px; height: 50px;"/>
+                            @endif
                         </td>
                         <td>
                             {{ $cantidad }}
@@ -203,7 +207,7 @@
                 @endphp
                 <tr>
                     <td>
-                        <img src="{{ $producto->imagenes }}" alt="" style="width: 60px">
+                        <img id="blah" src="{{$producto->imagenes}}" alt="Imagen" style="width: 60px; height: 60px;"/>
                     </td>
                     <td>
                         {{ $producto->cantidad }}
