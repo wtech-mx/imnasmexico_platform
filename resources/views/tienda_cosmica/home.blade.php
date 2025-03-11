@@ -376,7 +376,7 @@
 <div id="carouselLinea" class="carousel slide">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="https://cosmicaskin.com/tienda/kits/1849" target="_blank" rel="noopener noreferrer">
             <img src="{{ asset('cosmika/inicio/banner/banner-9.png') }}" class="d-block w-100" alt="">
         </a>
       </div>
@@ -393,7 +393,7 @@
             <h6 class="text-center Quinsi h6_all_gradient">¡Nueva Marca mexicana!</h6>
             <h5 class="text-center Avenir h5_all_gradient">Compra toda la linea y <br> recibe un super descuento </h5>
             <p class="text-center  mt-4">
-                <a href="" class="Quinsi btn btn_all_gradient">Comprar ahora</a>
+                <a href="https://cosmicaskin.com/tienda/kits/1849" class="Quinsi btn btn_all_gradient">Comprar ahora</a>
             </p>
         </div>
     </div>
