@@ -59,6 +59,41 @@
                                     <input id="cantidad_aumentada" name="cantidad_aumentada" type="number" class="form-control" value="0">
                                 </div>
 
+                                <div class="form-group col-6">
+                                    <label for="name">Linea</label>
+                                    <select class="form-control" id="linea" name="linea" readonly>
+                                        <option value="{{ $product->linea }}">{{ $product->linea }}</option>
+                                        <option value="Facial">Facial</option>
+                                        <option value="Corporal">Corporal</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group col-6">
+                                    <label for="name">Sub Linea</label>
+                                    <select class="form-control" id="sublinea" name="sublinea" readonly>
+                                        <option value="{{ $product->sublinea }}">{{ $product->sublinea }}</option>
+                                        <option value="Estelar">Linea Corporal - Estelar</option>
+                                        <option value="Eclipse">Linea Corporal - Eclipse</option>
+                                        <option value="Renacer">Linea Corporal - Renacer</option>
+                                        <option value="Flash">Linea Corporal - Flash</option>
+                                        <option value="Astros">Linea Corporal - Astros</option>
+                                        <option value="Galaxia">Linea Corporal - Galaxia</option>
+                                        <option value="Rose Caviar">Linea Corporal - Rose Caviar</option>
+                                        <option value="Esencia Vital">Linea Corporal - Esencia Vital</option>
+                                        <option value="Pure">Linea Corporal - Pure</option>
+                                        <option value="Lips Glow">Linea Facial - Lips Glow</option>
+                                        <option value="Constelacion">Linea Facial - Constelacion</option>
+                                        <option value="Espectro">Linea Facial - Espectro</option>
+                                        <option value="Lunar">Linea Facial - Lunar</option>
+                                        <option value="Mascarillas Estelares">Linea Facial - Mascarillas Estelares</option>
+                                        <option value="Nebulosa">Linea Facial - Nebulosa</option>
+                                        <option value="Pluton">Linea Facial - Pluton</option>
+                                        <option value="Solar">Linea Facial - Solar</option>
+                                        <option value="Venus">Linea Facial - Venus</option>
+                                    </select>
+                                </div>
+
                                 <div class="form-group col-12">
                                     <label for="num_estandar">descripcion</label>
                                     <textarea name="descripcion" id="descripcion" cols="10" rows="3" class="form-control" readonly>{{ $product->descripcion }}</textarea>

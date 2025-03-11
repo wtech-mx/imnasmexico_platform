@@ -306,25 +306,25 @@ class ProductsController extends Controller
                 ->update(['producto' => $request->get('nombre')]); // Actualiza el nombre al nuevo
 
             DB::table('productos_notas_cosmica')
-            ->where('producto', $oldName) // Busca todos los registros con el nombre anterior
-            ->update(['producto' => $request->get('nombre')]); // Actualiza el nombre al nuevo
+                ->where('producto', $oldName) // Busca todos los registros con el nombre anterior
+                ->update(['producto' => $request->get('nombre')]); // Actualiza el nombre al nuevo
         }
 
-        if($request->get('cantidad_aumentada') == NULL){
+        if ($request->get('cantidad_aumentada') == NULL) {
             $suma = $request->get('stock_cosmica');
-        }else{
+        } else {
             $suma = $product->stock_cosmica + $request->get('cantidad_aumentada');
             $tipo = 'Caja cosmica suma';
         }
 
-        if($request->get('cantidad_aumentada_nas') == NULL){
+        if ($request->get('cantidad_aumentada_nas') == NULL) {
             $suma_nas = $request->get('stock_nas');
-        }else{
+        } else {
             $suma_nas = $product->stock_nas + $request->get('cantidad_aumentada_nas');
             $tipo = 'Lab nas suma';
         }
 
-        if($request->get('cantidad_aumentada') == NULL && $request->get('cantidad_aumentada_nas') == NULL){
+        if ($request->get('cantidad_aumentada') == NULL && $request->get('cantidad_aumentada_nas') == NULL) {
             $tipo = 'Modificacion manual';
         }
 
@@ -361,13 +361,29 @@ class ProductsController extends Controller
         $product->stock = $request->get('stock');
         $product->stock_nas = $suma_nas;
         $product->stock_cosmica = $suma;
-        $product->linea = $request->get('linea');
-        $product->sublinea = $request->get('sublinea');
-        $product->modo_empleo = $request->get('modo_empleo');
-        $product->beneficios = $request->get('beneficios');
-        $product->ingredientes = $request->get('ingredientes');
-        $product->precauciones = $request->get('precauciones');
-        $product->favorito = $request->get('favorito');
+
+        // Solo actualizar los campos si están presentes en la solicitud
+        if ($request->has('linea')) {
+            $product->linea = $request->get('linea');
+        }
+        if ($request->has('sublinea')) {
+            $product->sublinea = $request->get('sublinea');
+        }
+        if ($request->has('modo_empleo')) {
+            $product->modo_empleo = $request->get('modo_empleo');
+        }
+        if ($request->has('beneficios')) {
+            $product->beneficios = $request->get('beneficios');
+        }
+        if ($request->has('ingredientes')) {
+            $product->ingredientes = $request->get('ingredientes');
+        }
+        if ($request->has('precauciones')) {
+            $product->precauciones = $request->get('precauciones');
+        }
+        if ($request->has('favorito')) {
+            $product->favorito = $request->get('favorito');
+        }
 
         $product->update();
 
