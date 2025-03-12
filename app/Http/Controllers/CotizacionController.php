@@ -144,32 +144,26 @@ class CotizacionController extends Controller
         $notas_productos = new NotasProductos;
 
         if($request->id_client == NULL){
-            if($request->get('email') == NULL){
-                $notas_productos->nombre = $request->get('name');
-                $notas_productos->telefono = $request->get('telefono');
-            }else{
-                if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
-                    if (User::where('telefono', $request->telefono)->exists()) {
-                        $user = User::where('telefono', $request->telefono)->first();
-                    } else {
-                        $user = User::where('email', $request->email)->first();
-                    }
-                    $payer = $user;
+
+            if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+                if (User::where('telefono', $request->telefono)->exists()) {
+                    $user = User::where('telefono', $request->telefono)->first();
                 } else {
-                    $payer = new User;
-                    $payer->name = $request->get('name');
-                    $payer->email = $request->get('email');
-                    $payer->username = $request->get('telefono');
-                    $payer->code = $code;
-                    $payer->telefono = $request->get('telefono');
-                    $payer->cliente = '1';
-                    $payer->password = Hash::make($request->get('telefono'));
-                    $payer->save();
-                    $datos = User::where('id', '=', $payer->id)->first();
-                    // Mail::to($payer->email)->send(new PlantillaNuevoUser($datos));
+                    $user = User::where('email', $request->email)->first();
                 }
-                $notas_productos->id_usuario = $payer->id;
+                $payer = $user;
+            } else {
+                $payer = new User;
+                $payer->name = $request->get('name');
+                $payer->email = $request->get('telefono') . '@imnasmexico.com';
+                $payer->username = $request->get('telefono');
+                $payer->code = $code;
+                $payer->telefono = $request->get('telefono');
+                $payer->cliente = '1';
+                $payer->password = Hash::make($request->get('telefono'));
+                $payer->save();
             }
+            $notas_productos->id_usuario = $payer->id;
         }else{
             $notas_productos->id_usuario = $request->id_client;
         }

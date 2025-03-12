@@ -275,9 +275,25 @@ class CotizacionCosmicaController extends Controller
         $notas_productos = new NotasProductosCosmica;
 
         if($request->get('id_cliente') == NULL){
-            $notas_productos->nombre = $request->get('name');
-            $notas_productos->telefono = $request->get('telefono');
-            $notas_productos->id_usuario = NULL;
+            if (User::where('telefono', $request->telefono)->exists() || User::where('email', $request->email)->exists()) {
+                if (User::where('telefono', $request->telefono)->exists()) {
+                    $user = User::where('telefono', $request->telefono)->first();
+                } else {
+                    $user = User::where('email', $request->email)->first();
+                }
+                $payer = $user;
+            } else {
+                $payer = new User;
+                $payer->name = $request->get('name');
+                $payer->email = $request->get('telefono') . '@imnasmexico.com';
+                $payer->username = $request->get('telefono');
+                $payer->code = $code;
+                $payer->telefono = $request->get('telefono');
+                $payer->cliente = '1';
+                $payer->password = Hash::make($request->get('telefono'));
+                $payer->save();
+            }
+            $notas_productos->id_usuario = $payer->id;
         }else{
             $notas_productos->id_usuario = $request->get('id_cliente');
         }

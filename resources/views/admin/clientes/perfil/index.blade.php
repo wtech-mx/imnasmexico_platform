@@ -132,7 +132,12 @@
                                         @endif
                                     </h5>
                                     <p class="mb-0 font-weight-bold text-sm">
-                                        {{$cliente->telefono}}
+                                        @if ($tipo == 'Usuario')
+                                            {{$cliente->telefono}} <br>
+                                            A{{$cliente->id}}
+                                        @else
+                                            {{$cliente->telefono}}
+                                        @endif
                                     </p>
                                 </div>
                             </div>
