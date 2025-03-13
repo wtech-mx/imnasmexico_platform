@@ -81,6 +81,15 @@
                                                             <input type="tel" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10" value="{{old('telefono')}}">
                                                         </div>
                                                     </div>
+
+                                                    <div class="form-group col-6">
+                                                        <h4 >
+                                                            Cliente de MELI
+                                                        </h4>
+                                                        <div class="form-check mt-4 input-group">
+                                                            <input class="form-check-input" type="checkbox" value="1" id="ClienteMeli" name="ClienteMeli">
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

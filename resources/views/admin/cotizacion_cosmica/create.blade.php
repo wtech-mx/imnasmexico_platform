@@ -76,7 +76,16 @@
                                                             <span class="input-group-text" id="basic-addon1">
                                                                 <img src="{{ asset('assets/cam/llamar.png') }}" alt="" width="35px">
                                                             </span>
-                                                            <input type="number" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10">
+                                                            <input type="number" id="telefono" name="telefono" class="form-control" placeholder="Telefono" pattern="[0-9]{10}"  minlength="10" maxlength="10" value="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group col-6">
+                                                        <h4 >
+                                                            Cliente de MELI
+                                                        </h4>
+                                                        <div class="form-check mt-4 input-group">
+                                                            <input class="form-check-input" type="checkbox" value="1" id="ClienteMeli" name="ClienteMeli">
                                                         </div>
                                                     </div>
                                                 </div>
