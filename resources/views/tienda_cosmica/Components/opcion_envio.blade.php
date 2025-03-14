@@ -6,7 +6,7 @@
           </div>
 
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" checked>
             <label class="form-check-label text-white" for="inlineRadio2">Recojer en Tienda</label>
           </div>
     </div>

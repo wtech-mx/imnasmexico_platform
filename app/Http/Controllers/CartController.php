@@ -126,7 +126,7 @@ class CartController extends Controller
         $preference->back_urls = array(
             "success" => route('order_cosmica.pay'),
             "pending" => route('order_cosmica.pay'),
-            "failure" => "https://plataforma.imnasmexico.com/",
+            "failure" => "https://cosmicaskin.com",
         );
 
         $preference->auto_return = "approved";
@@ -404,6 +404,7 @@ class CartController extends Controller
     public function pay(OrdersCosmica $order, Request $request)
     {
         $payment_id = $request->get('payment_id');
+        $external_reference = $request->get('external_reference');
 
         $dominio = $request->getHost();
         if ($dominio == 'plataforma.imnasmexico.com') {
@@ -412,10 +413,19 @@ class CartController extends Controller
         } else {
             $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=TEST-3105049862829838-031417-76d6b6648d0ba342c635d268cd25ba10-236513607");
         }
-
         $response = json_decode($response);
-        $status = $response->status;
-        $external_reference = $response->external_reference;
+        if (isset($response->error)) {
+            return redirect()->route('order_cosmica.show', $order->code)->with('error', 'Hubo un problema al verificar el pago.');
+        }
+        $status = $response->status ?? null;
+        $external_reference_api = $response->external_reference ?? null;
+        $external_reference = $external_reference_api ?: $external_reference;
+
+        // Si no se encuentra el external_reference, redirige con error
+        if (!$external_reference) {
+            return redirect()->route('order_cosmica.show', $order->code)->with('error', 'No se pudo verificar el pago. Falta external_reference.');
+        }
+
         if ($status == 'approved') {
             $order = OrdersCosmica::where('code', '=', $external_reference)->first();
             $order->num_order = $payment_id;
