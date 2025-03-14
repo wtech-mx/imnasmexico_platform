@@ -12,7 +12,7 @@ class TemplateController extends Controller
     public function index()
     {
         $templates = Template::all();
-        return view('ajax.templates', compact('templates'));
+        return view('whatsapp.templates', compact('templates'));
     }
 
     public function store(StoreTemplateRequest $request)
@@ -35,26 +35,26 @@ class TemplateController extends Controller
 
     public function showTemplate()
     {
-        return view('ajax.template');
+        return view('whatsapp.template');
     }
 
     public function createTemplate()
     {
-        return view('ajax.create');
+        return view('whatsapp.create');
     }
 
     public function detailTemplate()
     {
-        return view('ajax.detail');
+        return view('whatsapp.detail');
     }
 
     public function indexTemplate()
     {
-        return view('ajax.index');
+        return view('whatsapp.index');
     }
 
     public function updateTemplate()
     {
-        return view('ajax.update');
+        return view('whatsapp.update');
     }
 }

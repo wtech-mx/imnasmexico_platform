@@ -36,8 +36,8 @@
 
     <input type="file" id="media-input" hidden />
 
-    @include('ajax.send-media-message')
-    @include('ajax.chat-bubble')
+    @include('whatsapp.send-media-message')
+    @include('whatsapp.chat-bubble')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>

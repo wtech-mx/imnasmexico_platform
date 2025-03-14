@@ -23,7 +23,7 @@
                 <label>Lada:</label>
                 <select v-model="countryCode" class="select select-bordered w-full mb-4">
                     <option disabled selected>---</option>
-                    <option value="521">+521</option>
+                    <option value="52">+521</option>
                 </select>
             </div>
             <div class="w-full">

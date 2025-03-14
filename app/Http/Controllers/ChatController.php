@@ -9,17 +9,17 @@ class ChatController extends Controller
 {
     public function showChatBubble()
     {
-        return view('ajax.chat-bubble');
+        return view('whatsapp.chat-bubble');
     }
 
     public function showSendMediaMessage()
     {
-        return view('ajax.send-media-message');
+        return view('whatsapp.send-media-message');
     }
 
     public function showMessenger()
     {
-        return view('ajax.messenger');
+        return view('whatsapp.messenger');
     }
 
     public function sendMediaMessage(Request $request)

@@ -8,6 +8,6 @@ class BreadcrumbController extends Controller
 {
     public function showBreadcrumb()
     {
-        return view('ajax.breadcrumb');
+        return view('whatsapp.breadcrumb');
     }
 }

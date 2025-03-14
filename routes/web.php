@@ -976,19 +976,16 @@ Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaCon
 // });
 
 
-// Route::get('/messenger', fn() => view('messenger'));
-// Route::ResourceView('template');
+Route::get('/messenger', fn() => view('messenger'));
+Route::ResourceView('template');
 
-// Route::get('/messenger', fn() => view('messenger'));
-// Route::ResourceView('template');
-
-Route::get('/ajax/template', [TemplateController::class, 'showTemplate']);
-Route::get('/ajax/breadcrumb', [BreadcrumbController::class, 'showBreadcrumb']);
-Route::get('/ajax/create', [TemplateController::class, 'createTemplate']);
-Route::get('/ajax/detail', [TemplateController::class, 'detailTemplate']);
-Route::get('/ajax/index', [TemplateController::class, 'indexTemplate']);
-Route::get('/ajax/update', [TemplateController::class, 'updateTemplate']);
-Route::get('/ajax/chat-bubble', [ChatController::class, 'showChatBubble']);
-Route::get('/ajax/send-media-message', [ChatController::class, 'showSendMediaMessage']);
-Route::get('/ajax/messenger', [ChatController::class, 'showMessenger']);
+Route::get('/whatsapp/ajax/template', [TemplateController::class, 'showTemplate']);
+Route::get('/whatsapp/ajax/breadcrumb', [BreadcrumbController::class, 'showBreadcrumb']);
+Route::get('/whatsapp/ajax/create', [TemplateController::class, 'createTemplate']);
+Route::get('/whatsapp/ajax/detail', [TemplateController::class, 'detailTemplate']);
+Route::get('/whatsapp/ajax/index', [TemplateController::class, 'indexTemplate']);
+Route::get('/whatsapp/ajax/update', [TemplateController::class, 'updateTemplate']);
+Route::get('/whatsapp/ajax/chat-bubble', [ChatController::class, 'showChatBubble']);
+Route::get('/whatsapp/ajax/send-media-message', [ChatController::class, 'showSendMediaMessage']);
+Route::get('/whatsapp/ajax/messenger', [ChatController::class, 'showMessenger']);
 Route::post('/api/v1/message/send-media', [ChatController::class, 'sendMediaMessage']);
