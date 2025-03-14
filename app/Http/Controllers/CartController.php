@@ -407,12 +407,8 @@ class CartController extends Controller
         $external_reference = $request->get('external_reference');
 
         $dominio = $request->getHost();
-        if ($dominio == 'plataforma.imnasmexico.com') {
-            $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-8901800557603427-041420-99b569dfbf4e6ce9160fc673d9a47b1e-1115271504");
-
-        } else {
-            $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=TEST-3105049862829838-031417-76d6b6648d0ba342c635d268cd25ba10-236513607");
-        }
+        $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-8901800557603427-041420-99b569dfbf4e6ce9160fc673d9a47b1e-1115271504");
+        
         $response = json_decode($response);
         if (isset($response->error)) {
             return redirect()->route('order_cosmica.show', $order->code)->with('error', 'Hubo un problema al verificar el pago.');
