@@ -14,6 +14,19 @@
             </div>
 
             <div class="col-6  mb-2">
+                <a href="{{asset('documentos/EJEMPLO PORTAFOLIO EC0010.pdf') }}" download="EJEMPLO PORTAFOLIO EC0010" style="text-decoration: none; color: #000">
+                    <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
+                    EJEMPLO PORTAFOLIO EC0010
+                </a>
+            </div>
+            <div class="col-6  mb-2">
+                <iframe class="mt-2" src="{{asset('documentos/EJEMPLO PORTAFOLIO EC0010.pdf')}}" style="width: 60%; height: 60px;"></iframe>
+                <p class="text-center ">
+                    <a class="btn btn-sm text-dark" href="{{asset('documentos/EJEMPLO PORTAFOLIO EC0010.pdf') }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                </p>
+            </div>
+
+            <div class="col-6  mb-2">
                 <a href="{{asset('documentos/FICHA CLINICA FACIAL.pdf') }}" download="FICHA CLINICA FACIAL" style="text-decoration: none; color: #000">
                     <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
                     FICHA CLINICA FACIAL
@@ -23,6 +36,19 @@
                 <iframe class="mt-2" src="{{asset('documentos/FICHA CLINICA FACIAL.pdf')}}" style="width: 60%; height: 60px;"></iframe>
                 <p class="text-center ">
                     <a class="btn btn-sm text-dark" href="{{asset('documentos/FICHA CLINICA FACIAL.pdf') }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
+                </p>
+            </div>
+
+            <div class="col-6  mb-2">
+                <a href="{{asset('documentos/EJEMPLO PORTAFOLIO EC0046 COSMETOLOGIA FACIAL.pdf') }}" download="EJEMPLO PORTAFOLIO EC0046 COSMETOLOGIA FACIAL" style="text-decoration: none; color: #000">
+                    <img src="{{asset('assets/user/icons/pdf.png') }}" style="width: 45px; height: 45px;"/>
+                    EJEMPLO PORTAFOLIO EC0046 COSMETOLOGIA FACIAL
+                </a>
+            </div>
+            <div class="col-6  mb-2">
+                <iframe class="mt-2" src="{{asset('documentos/EJEMPLO PORTAFOLIO EC0046 COSMETOLOGIA FACIAL.pdf')}}" style="width: 60%; height: 60px;"></iframe>
+                <p class="text-center ">
+                    <a class="btn btn-sm text-dark" href="{{asset('documentos/EJEMPLO PORTAFOLIO EC0046 COSMETOLOGIA FACIAL.pdf') }}" target="_blank" style="background: #836262; color: #ffff!important">Ver archivo</a>
                 </p>
             </div>
     </div>
