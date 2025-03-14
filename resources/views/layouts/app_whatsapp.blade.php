@@ -5,11 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhatsApp UI Clone</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{asset('assets/whatsapp/style.css')}}">
 </head>
 <body>
     <div class="container">
         <div class="leftSide">
+
+            @yield('content')
             <!-- Header -->
             <div class="header">
                 <div class="userimg">
@@ -30,22 +32,8 @@
             </div>
             <!-- CHAT LIST -->
             <div class="chatlist">
-                <div class="block active">
-                    <div class="imgBox">
-                        <img src="images/img1.jpg" class="cover" alt="">
-                    </div>
-                    <div class="details">
-                        <div class="listHead">
-                            <h4>Jhon Doe</h4>
-                            <p class="time">10:56</p>
-                        </div>
-                        <div class="message_p">
-                            <p>How are you doing?</p>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="block unread">
+                <div class="block unread active">
                     <div class="imgBox">
                         <img src="images/img2.jpg" class="cover" alt="">
                     </div>
@@ -78,6 +66,7 @@
 
             </div>
         </div>
+        
         <div class="rightSide">
             <div class="header">
                 <div class="imgText">
@@ -97,65 +86,21 @@
                 <div class="message my_msg">
                     <p>Hi <br><span>12:18</span></p>
                 </div>
+
                 <div class="message friend_msg">
                     <p>Hey <br><span>12:18</span></p>
                 </div>
-                <div class="message my_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br><span>12:15</span></p>
-                </div>
-                <div class="message friend_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br><span>12:15</span></p>
-                </div>
-                <div class="message my_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque aliquid fugiat accusamus dolore qui vitae ratione optio sunt <br><span>12:15</span></p>
-                </div>
-                <div class="message friend_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <br><span>12:15</span></p>
-                </div>
-                <div class="message my_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur <br><span>12:15</span></p>
-                </div>
-                <div class="message friend_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br><span>12:15</span></p>
-                </div>
-                <div class="message my_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br><span>12:15</span></p>
-                </div>
-                <div class="message friend_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br><span>12:15</span></p>
-                </div>
-                <div class="message my_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br><span>12:15</span></p>
-                </div>
-                <div class="message friend_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br><span>12:15</span></p>
-                </div>
-                <div class="message my_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br><span>12:15</span></p>
-                </div>
-                <div class="message friend_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br><span>12:15</span></p>
-                </div>
-                <div class="message my_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br><span>12:15</span></p>
-                </div>
-                <div class="message friend_msg">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.<br><span>12:15</span></p>
-                </div>
+
             </div>
 
-            <!-- CHAT INPUT -->
-            <div class="chat_input">
-                <ion-icon name="happy-outline"></ion-icon>
-                <!-- <ion-icon name="happy-outline"></ion-icon> -->
-                <input type="text" placeholder="Type a message">
-                <ion-icon name="mic"></ion-icon>
-            </div>
+            @include('whatsapp.components.chat_input')
+
         </div>
     </div>
 
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
 </html>

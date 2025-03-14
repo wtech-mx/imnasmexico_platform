@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Storage;
 
 class ChatController extends Controller
 {
+
+    public function inicio()
+    {
+        return view('whatsapp.inicio');
+    }
+
+
     public function showChatBubble()
     {
         return view('whatsapp.chat-bubble');

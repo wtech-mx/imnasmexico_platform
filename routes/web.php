@@ -979,6 +979,9 @@ Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaCon
 Route::get('/messenger', fn() => view('messenger'));
 Route::ResourceView('template');
 
+Route::get('/whatsapp', [ChatController::class, 'inicio']);
+
+
 Route::get('/whatsapp/ajax/template', [TemplateController::class, 'showTemplate']);
 Route::get('/whatsapp/ajax/breadcrumb', [BreadcrumbController::class, 'showBreadcrumb']);
 Route::get('/whatsapp/ajax/create', [TemplateController::class, 'createTemplate']);
