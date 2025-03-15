@@ -1,6 +1,7 @@
 <?php
 
-namespace Sdkconsultoria\WhatsappCloudApi\Models;
+namespace App\Http\Controllers;
+
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +10,30 @@ use Sdkconsultoria\WhatsappCloudApi\Lib\Message\BussinessProfile;
 class WabaPhone extends Model
 {
     use HasFactory;
+
+    protected $table = 'waba_phones';
+
+    protected $fillable = [
+        'created_by',
+        'updated_by',
+        'waba_id',
+        'address',
+        'description',
+        'vertical',
+        'about',
+        'email',
+        'websites',
+        'profile_picture_url',
+        'messaging_product',
+        'name',
+        'code_verification_status',
+        'display_phone_number',
+        'phone_number_clean',
+        'quality_rating',
+        'phone_id',
+        'pin',
+        'status',
+    ];
 
     public static function savePhones(array $phones, $wabaId): void
     {

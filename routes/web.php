@@ -981,14 +981,18 @@ Route::ResourceView('template');
 
 Route::get('/whatsapp', [ChatController::class, 'inicio']);
 
+    // Templates
+    Route::get('/whatsapp/ajax/template', [TemplateController::class, 'showTemplate']);
+    Route::get('/whatsapp/ajax/breadcrumb', [BreadcrumbController::class, 'showBreadcrumb']);
+    Route::get('/whatsapp/ajax/create', [TemplateController::class, 'createTemplate']);
+    Route::get('/whatsapp/ajax/detail', [TemplateController::class, 'detailTemplate']);
+    Route::get('/whatsapp/ajax/index', [TemplateController::class, 'indexTemplate']);
+    Route::get('/whatsapp/ajax/update', [TemplateController::class, 'updateTemplate']);
 
-Route::get('/whatsapp/ajax/template', [TemplateController::class, 'showTemplate']);
-Route::get('/whatsapp/ajax/breadcrumb', [BreadcrumbController::class, 'showBreadcrumb']);
-Route::get('/whatsapp/ajax/create', [TemplateController::class, 'createTemplate']);
-Route::get('/whatsapp/ajax/detail', [TemplateController::class, 'detailTemplate']);
-Route::get('/whatsapp/ajax/index', [TemplateController::class, 'indexTemplate']);
-Route::get('/whatsapp/ajax/update', [TemplateController::class, 'updateTemplate']);
-Route::get('/whatsapp/ajax/chat-bubble', [ChatController::class, 'showChatBubble']);
-Route::get('/whatsapp/ajax/send-media-message', [ChatController::class, 'showSendMediaMessage']);
-Route::get('/whatsapp/ajax/messenger', [ChatController::class, 'showMessenger']);
-Route::post('/api/v1/message/send-media', [ChatController::class, 'sendMediaMessage']);
+    // Chat
+    Route::get('/whatsapp/ajax/chat-bubble', [ChatController::class, 'showChatBubble']);
+    Route::get('/whatsapp/ajax/send-media-message', [ChatController::class, 'showSendMediaMessage']);
+    Route::get('/whatsapp/ajax/messenger', [ChatController::class, 'showMessenger']);
+    Route::get('/whatsapp/ajax/messenger2', [ChatController::class, 'showMessenger2']);
+
+    Route::get('/api/v1/message/{chat_id}', [ChatController::class, 'loadMessages']);

@@ -6,23 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WhatsApp UI Clone</title>
     <link rel="stylesheet" href="{{asset('assets/whatsapp/style.css')}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 <body>
     <div class="container">
         <div class="leftSide">
 
-            @yield('content')
             <!-- Header -->
             <div class="header">
+
+
                 <div class="userimg">
                     <img src="images/user.jpg" alt="" class="cover">
                 </div>
+
                 <ul class="nav_icons">
                     <li><ion-icon name="scan-circle-outline"></ion-icon></li>
                     <li><ion-icon name="chatbox"></ion-icon></li>
                     <li><ion-icon name="ellipsis-vertical"></ion-icon></li>
                 </ul>
             </div>
+
             <!-- Search Chat -->
             <div class="search_chat">
                 <div>
@@ -33,23 +38,11 @@
             <!-- CHAT LIST -->
             <div class="chatlist">
 
-                <div class="block unread active">
-                    <div class="imgBox">
-                        <img src="images/img2.jpg" class="cover" alt="">
-                    </div>
-                    <div class="details">
-                        <div class="listHead">
-                            <h4>Andre</h4>
-                            <p class="time">12:34</p>
-                        </div>
-                        <div class="message_p">
-                            <p>I love your youtube videos!</p>
-                            <b>1</b>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="block">
+
+                @yield('content_chats')
+
+                {{--<div class="block">
                     <div class="imgBox">
                         <img src="images/img4.jpg" class="cover" alt="">
                     </div>
@@ -62,40 +55,19 @@
                             <p>Hey!</p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
 
             </div>
         </div>
-        
+
         <div class="rightSide">
-            <div class="header">
-                <div class="imgText">
-                    <div class="userimg">
-                        <img src="images/img1.jpg" alt="" class="cover">
-                    </div>
-                    <h4>Qazi <br><span>online</span></h4>
-                </div>
-                <ul class="nav_icons">
-                    <li><ion-icon name="search-outline"></ion-icon></li>
-                    <li><ion-icon name="ellipsis-vertical"></ion-icon></li>
-                </ul>
-            </div>
 
-            <!-- CHAT-BOX -->
-            <div class="chatbox">
-                <div class="message my_msg">
-                    <p>Hi <br><span>12:18</span></p>
-                </div>
+            @yield('content_messages')
 
-                <div class="message friend_msg">
-                    <p>Hey <br><span>12:18</span></p>
-                </div>
-
-            </div>
-
-            @include('whatsapp.components.chat_input')
+            {{-- @include('whatsapp.components.chat_input') --}}
 
         </div>
+
     </div>
 
 
