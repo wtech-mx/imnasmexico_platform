@@ -1,6 +1,10 @@
 @extends('layouts.app_whatsapp')
 
 @section('content_chats')
+
+<!-- ✅ MOVER EL INPUT SEARCH AL INICIO PARA QUE EL SCRIPT LO ENCUENTRE -->
+<input id="search" type="text" placeholder="Buscar Chat" class="input w-full" />
+
 <div id="conversation-list">
     @foreach($conversations as $conversation)
         <div class="block unread chat-item" data-chat-id="{{ $conversation->id }}" data-client-phone="{{ $conversation->client_phone }}">
@@ -46,159 +50,173 @@
         <button onclick="sendMessage()">Enviar</button>
         <ion-icon name="mic"></ion-icon>
     </div>
-@endsection
 
+@endsection
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const messageInput = document.getElementById('message-input');
-    const conversationList = document.getElementById('conversation-list');
-    const chatbox = document.getElementById('chatbox');
-    const chatTitle = document.getElementById('chat-title');
-    const currentConversationPhone = document.getElementById('current-conversation-phone');
+    // ✅ Asegurar que el código se ejecute después de que el DOM esté listo
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("✅ DOM completamente cargado.");
 
-    let currentChatId = null;
-    let clientPhone = null;
-    let conversations = [];
+        // ✅ Seleccionamos los elementos del DOM
+        const messageInput = document.getElementById('message-input');
+        const searchInput = document.getElementById('search');
+        const conversationList = document.getElementById('conversation-list');
+        const chatbox = document.getElementById('chatbox');
+        const chatTitle = document.getElementById('chat-title');
+        const currentConversationPhone = document.getElementById('current-conversation-phone');
 
-    // ✅ Cargar conversaciones al inicio
-    function loadConversations() {
-        $.ajax({
-            url: '/api/v1/chat',
-            method: 'GET',
-            success: function(response) {
-                conversations = response.data;
-                renderConversations();
-            },
-            error: function(error) {
-                console.error("Error al cargar las conversaciones:", error);
-            }
-        });
-    }
-
-    // ✅ Renderizar conversaciones en la lista
-    function renderConversations() {
-        conversationList.innerHTML = '';
-
-        conversations.forEach(conversation => {
-            const chatItem = document.createElement('div');
-            chatItem.classList.add('block', 'unread', 'chat-item');
-            chatItem.dataset.chatId = conversation.id;
-            chatItem.dataset.clientPhone = conversation.client_phone;
-
-            chatItem.innerHTML = `
-                <div class="imgBox">
-                    <img src="{{ asset('images/img2.jpg') }}" class="cover" alt="">
-                </div>
-                <div class="details">
-                    <div class="listHead">
-                        <p class="time">${new Date(conversation.updated_at).toLocaleTimeString()}</p>
-                    </div>
-                    <div class="listHead">
-                        <h6>${conversation.client_phone}</h6>
-                    </div>
-                    <div class="message_p">
-                        <p>Último mensaje...</p>
-                    </div>
-                </div>
-            `;
-
-            chatItem.addEventListener('click', function () {
-                setConversation(conversation.id, conversation.client_phone);
-            });
-
-            conversationList.appendChild(chatItem);
-        });
-    }
-
-    // ✅ Cambiar de chat al hacer clic en un chat de la lista
-    function setConversation(chatId, phone) {
-        if (!chatId || !phone) return;
-
-        currentChatId = chatId;
-        clientPhone = phone;
-
-        chatTitle.textContent = clientPhone;
-        currentConversationPhone.textContent = clientPhone;
-
-        console.log("Chat actualizado:", currentChatId, clientPhone);
-        loadMessages(currentChatId);
-    }
-
-    // ✅ Cargar mensajes de la conversación activa
-    function loadMessages(chatId) {
-        if (!chatId) return;
-
-        $.ajax({
-            url: `/api/v1/message/${chatId}`,
-            method: 'GET',
-            success: function(response) {
-                renderMessages(response.data);
-            },
-            error: function(error) {
-                console.error("Error al cargar los mensajes:", error);
-            }
-        });
-    }
-
-    // ✅ Renderizar mensajes en el chatbox
-    function renderMessages(messages) {
-        chatbox.innerHTML = ''; // 🧹 Limpia el chat antes de cargar nuevos mensajes
-
-        messages.forEach(message => {
-            const messageDiv = document.createElement('div');
-            messageDiv.classList.add('message', message.direction === 'toApp' ? 'friend_msg' : 'my_msg');
-            messageDiv.innerHTML = `<p>${message.body} <br><span>${new Date(message.timestamp * 1000).toLocaleTimeString()}</span></p>`;
-            chatbox.appendChild(messageDiv);
-        });
-
-        chatbox.scrollTop = chatbox.scrollHeight; // 🔽 Auto-scroll al último mensaje
-    }
-
-    // ✅ Enviar un nuevo mensaje
-    window.sendMessage = function () {
-        if (!currentChatId || !messageInput.value.trim()) {
-            alert("Selecciona un chat y escribe un mensaje.");
+        if (!searchInput) {
+            console.error("❌ Error: No se encontró el campo de búsqueda 'search'");
             return;
         }
 
-        const messageBody = messageInput.value.trim();
-        console.log("Enviando mensaje a:", currentChatId, clientPhone);
+        let conversations = [];
+        let currentConversation = { id: 0 };
+        let messages = [];
 
-        $.ajax({
-            url: '/api/v1/message/send',
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                waba_phone_id: currentChatId,
-                to: clientPhone,
-                message: {
-                    type: 'text',
-                    text: { body: messageBody }
+        // ✅ Cargar conversaciones
+        async function loadConversations() {
+            try {
+                const response = await fetch('/api/v1/chat?client_phone=' + searchInput.value);
+                const data = await response.json();
+                conversations = data.data;
+                renderConversations();
+
+                if (currentConversation.id === 0 && conversations.length > 0) {
+                    currentConversation = conversations[0];
+                    loadMessagesFromConversation();
                 }
-            }),
-            success: function () {
-                console.log("Mensaje enviado con éxito");
-                messageInput.value = "";
-
-                // ✅ Agregar el mensaje directamente a la UI
-                const messageDiv = document.createElement('div');
-                messageDiv.classList.add('message', 'my_msg');
-                messageDiv.innerHTML = `<p>${messageBody} <br><span>${new Date().toLocaleTimeString()}</span></p>`;
-                chatbox.appendChild(messageDiv);
-
-                chatbox.scrollTop = chatbox.scrollHeight; // 🔽 Auto-scroll al último mensaje
-            },
-            error: function (error) {
-                console.error("Error al enviar el mensaje:", error);
+            } catch (error) {
+                console.error("❌ Error al cargar conversaciones:", error);
             }
-        });
-    };
+        }
 
-    // ✅ Cargar conversaciones al cargar la página
-    loadConversations();
-});
+        // ✅ Renderizar la lista de conversaciones
+        function renderConversations() {
+            if (!conversationList) {
+                console.error("❌ Error: No se encontró el contenedor de conversaciones 'conversation-list'");
+                return;
+            }
+
+            conversationList.innerHTML = '';
+
+            conversations.forEach(conversation => {
+                const chatItem = document.createElement('div');
+                chatItem.classList.add('block', 'unread', 'chat-item');
+                chatItem.dataset.chatId = conversation.id;
+                chatItem.dataset.clientPhone = conversation.client_phone;
+
+                chatItem.innerHTML = `
+                    <div class="imgBox">
+                        <img src="{{ asset('images/img2.jpg') }}" class="cover" alt="">
+                    </div>
+                    <div class="details">
+                        <div class="listHead">
+                            <p class="time">${new Date(conversation.updated_at).toLocaleTimeString()}</p>
+                        </div>
+                        <div class="listHead">
+                            <h6>${conversation.client_phone}</h6>
+                        </div>
+                        <div class="message_p">
+                            <p>Último mensaje...</p>
+                        </div>
+                    </div>
+                `;
+
+                chatItem.addEventListener('click', function () {
+                    setConversation(conversation);
+                });
+
+                conversationList.appendChild(chatItem);
+            });
+        }
+
+        // ✅ Seleccionar conversación y cargar mensajes
+        function setConversation(conversation) {
+            if (!conversation) {
+                console.error("❌ Error: conversación inválida.");
+                return;
+            }
+
+            currentConversation = conversation;
+
+            if (currentConversationPhone) currentConversationPhone.textContent = conversation.client_phone;
+            if (chatTitle) chatTitle.textContent = conversation.client_phone;
+
+            console.log("📩 Chat seleccionado:", currentConversation.id, currentConversation.client_phone);
+            loadMessagesFromConversation();
+        }
+
+        // ✅ Cargar mensajes de la conversación actual
+        async function loadMessagesFromConversation() {
+            if (!currentConversation.id) {
+                console.error("❌ Error: No hay conversación seleccionada.");
+                return;
+            }
+
+            try {
+                const response = await fetch('/api/v1/message?chat_id=' + currentConversation.id);
+                const data = await response.json();
+                messages = data.data;
+                renderMessages();
+            } catch (error) {
+                console.error("❌ Error al cargar los mensajes:", error);
+            }
+        }
+
+        // ✅ Renderizar los mensajes en la vista
+        function renderMessages() {
+            if (!chatbox) {
+                console.error("❌ Error: No se encontró el contenedor de mensajes 'chatbox'");
+                return;
+            }
+
+            chatbox.innerHTML = '';
+
+            messages.forEach(message => {
+                const div = document.createElement('div');
+                div.classList.add('message', message.direction === 'toApp' ? 'friend_msg' : 'my_msg');
+                div.innerHTML = `<p>${message.content} <br><span>${new Date(message.timestamp * 1000).toLocaleTimeString()}</span></p>`;
+                chatbox.appendChild(div);
+            });
+
+            chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll al último mensaje
+        }
+
+        // ✅ Enviar mensaje
+        function sendMessage() {
+            fetch('/api/v1/message/send', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    waba_phone_id: currentConversation.waba_phone_id,
+                    to: currentConversation.client_phone,
+                    message: {
+                        type: 'text',
+                        text: {
+                            preview_url: false,
+                            body: messageInput.value
+                        }
+                    }
+                })
+            }).then(response => response.json())
+                .then(data => {
+                    messageInput.value = '';
+                    loadMessagesFromConversation();
+                });
+        }
+
+// ✅ Asegurar que `sendMessage` esté en el ámbito global
+window.sendMessage = sendMessage;
+
+
+        // ✅ Cargar conversaciones al cargar la página
+        loadConversations();
+    });
 </script>
