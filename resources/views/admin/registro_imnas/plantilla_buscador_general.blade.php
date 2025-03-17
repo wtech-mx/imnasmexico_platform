@@ -210,7 +210,7 @@
                     'Diplomado en Drenaje Linfático Facial y Corporal',
                     'Micropuntura Brasileña'
                 ]))
-                    <a href="{{ route('folio.index_titulo',$tickets->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
+                    <a href="{{ route('folio.index_titulo',$tickets_externo->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
                         Título Honorífico
                     </a>
                 @else
