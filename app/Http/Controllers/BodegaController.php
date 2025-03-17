@@ -936,63 +936,75 @@ class BodegaController extends Controller
         $fechaFinFormateada = Carbon::parse($fechaFin)->translatedFormat('d \d\e F Y');
         $today =  date('d-m-Y');
 
-        $notas_nas = NotasProductos::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
-        ->orderBy('id', 'DESC')
-        ->where('tipo_nota', '=', 'Cotizacion')
-        ->get();
-
-        $notas_cosmica = NotasProductosCosmica::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
-        ->where('tipo_nota', '=', 'Cotizacion')
-        ->where('id_admin_venta', '!=', NULL)
-        ->orderBy('id', 'DESC')
-        ->get();
-
-        $totalNotasNas = NotasProductos::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+        if($request->get('tipo') == 'General'){
+            $notas_nas = NotasProductos::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+            ->orderBy('id', 'DESC')
             ->where('tipo_nota', '=', 'Cotizacion')
-            ->sum('tipo');
+            ->get();
 
-        // Sumar la columna 'total' de la tabla NotasProductosCosmica
-        $totalNotasCosmica = NotasProductosCosmica::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+            $notas_cosmica = NotasProductosCosmica::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
             ->where('tipo_nota', '=', 'Cotizacion')
-            ->sum('total');
+            ->where('id_admin_venta', '!=', NULL)
+            ->orderBy('id', 'DESC')
+            ->get();
 
-        // Sumar ambos resultados
-        $totalVendido = $totalNotasNas + $totalNotasCosmica;
+            $totalNotasNas = NotasProductos::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+                ->where('tipo_nota', '=', 'Cotizacion')
+                ->sum('tipo');
 
-        // Agrupar y contar registros en NotasProductos
-        $notasNas = NotasProductos::select('id_admin_venta', DB::raw('COUNT(*) as total'), DB::raw("'NotasProductos' as origen"))
-        ->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
-        ->with('Vendido')
-        ->groupBy('id_admin_venta')
-        ->get();
+            // Sumar la columna 'total' de la tabla NotasProductosCosmica
+            $totalNotasCosmica = NotasProductosCosmica::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+                ->where('tipo_nota', '=', 'Cotizacion')
+                ->sum('total');
 
-        // Agrupar y contar registros en NotasProductosCosmica
-        $notasCosmica = NotasProductosCosmica::select('id_admin_venta', DB::raw('COUNT(*) as total'), DB::raw("'NotasProductosCosmica' as origen"))
+            // Sumar ambos resultados
+            $totalVendido = $totalNotasNas + $totalNotasCosmica;
+
+            // Agrupar y contar registros en NotasProductos
+            $notasNas = NotasProductos::select('id_admin_venta', DB::raw('COUNT(*) as total'), DB::raw("'NotasProductos' as origen"))
             ->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
             ->with('Vendido')
             ->groupBy('id_admin_venta')
             ->get();
 
-        // Combinar y procesar los resultados
-        $resultados = $notasNas->concat($notasCosmica) // Combina ambas colecciones
-        ->groupBy('id_admin_venta') // Agrupa por administrador
-        ->map(function ($items) {
-            $total = $items->sum('total'); // Suma el total de registros
-            $name = $items->first()->Vendido->name ?? 'Sin Asignar'; // Obtiene el nombre del primero
-            return [
-                'name' => $name,
-                'total' => $total
-            ];
-        })
-        ->filter(function ($item) {
-            return $item['name'] !== 'Sin Asignar'; // Filtra los que no tienen asignado un vendedor
-        });
+            // Agrupar y contar registros en NotasProductosCosmica
+            $notasCosmica = NotasProductosCosmica::select('id_admin_venta', DB::raw('COUNT(*) as total'), DB::raw("'NotasProductosCosmica' as origen"))
+                ->whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+                ->with('Vendido')
+                ->groupBy('id_admin_venta')
+                ->get();
 
-        $totalCotizaciones = $resultados->sum('total');
+            // Combinar y procesar los resultados
+            $resultados = $notasNas->concat($notasCosmica) // Combina ambas colecciones
+            ->groupBy('id_admin_venta') // Agrupa por administrador
+            ->map(function ($items) {
+                $total = $items->sum('total'); // Suma el total de registros
+                $name = $items->first()->Vendido->name ?? 'Sin Asignar'; // Obtiene el nombre del primero
+                return [
+                    'name' => $name,
+                    'total' => $total
+                ];
+            })
+            ->filter(function ($item) {
+                return $item['name'] !== 'Sin Asignar'; // Filtra los que no tienen asignado un vendedor
+            });
 
-        $pdf = \PDF::loadView('admin.bodega.pdf.pdf_ventas', compact('notas_nas', 'today', 'notas_cosmica', 'fechaInicioFormateada', 'fechaFinFormateada', 'totalVendido', 'resultados', 'totalCotizaciones'));
+            $totalCotizaciones = $resultados->sum('total');
 
-        //  return $pdf->stream();
-        return $pdf->download('Reporte Ventas / '.$today.' .pdf');
+            $pdf = \PDF::loadView('admin.bodega.pdf.pdf_ventas', compact('notas_nas', 'today', 'notas_cosmica', 'fechaInicioFormateada', 'fechaFinFormateada', 'totalVendido', 'resultados', 'totalCotizaciones'));
+        }elseif($request->get('tipo') == 'Cosmica'){
+            $notas_cosmica = NotasProductosCosmica::whereBetween('fecha_aprobada', [$fechaInicio, $fechaFin])
+            ->where('tipo_nota', '=', 'Cotizacion')
+            ->where('id_admin_venta', '!=', NULL)
+            ->orderBy('id', 'DESC')
+            ->get();
+
+            $totalCotizaciones = $notas_cosmica->sum('total');
+
+            $pdf = \PDF::loadView('admin.bodega.pdf.pdf_cosmica', compact('today', 'notas_cosmica', 'fechaInicioFormateada', 'fechaFinFormateada', 'totalCotizaciones'));
+        }
+
+          return $pdf->stream();
+      //  return $pdf->download('Reporte Ventas / '.$today.' .pdf');
     }
 }
