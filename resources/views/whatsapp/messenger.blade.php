@@ -97,43 +97,49 @@
 
         // ✅ Renderizar la lista de conversaciones
         function renderConversations() {
-            if (!conversationList) {
-                console.error("❌ Error: No se encontró el contenedor de conversaciones 'conversation-list'");
-                return;
-            }
+    if (!conversationList) {
+        console.error("❌ Error: No se encontró el contenedor de conversaciones 'conversation-list'");
+        return;
+    }
 
-            conversationList.innerHTML = '';
+    conversationList.innerHTML = '';
 
-            conversations.forEach(conversation => {
-                const chatItem = document.createElement('div');
-                chatItem.classList.add('block', 'unread', 'chat-item');
-                chatItem.dataset.chatId = conversation.id;
-                chatItem.dataset.clientPhone = conversation.client_phone;
+    conversations.forEach(conversation => {
+        const lastMessage = conversation.messages.length > 0 ? conversation.messages[0].content : "No hay mensajes aún";
+        const lastMessageTime = conversation.messages.length > 0
+            ? new Date(conversation.messages[0].timestamp * 1000).toLocaleTimeString()
+            : "";
 
-                chatItem.innerHTML = `
-                    <div class="imgBox">
-                        <img src="{{ asset('images/img2.jpg') }}" class="cover" alt="">
-                    </div>
-                    <div class="details">
-                        <div class="listHead">
-                            <p class="time">${new Date(conversation.updated_at).toLocaleTimeString()}</p>
-                        </div>
-                        <div class="listHead">
-                            <h6>${conversation.client_phone}</h6>
-                        </div>
-                        <div class="message_p">
-                            <p>Último mensaje...</p>
-                        </div>
-                    </div>
-                `;
+        const chatItem = document.createElement('div');
+        chatItem.classList.add('block', 'unread', 'chat-item');
+        chatItem.dataset.chatId = conversation.id;
+        chatItem.dataset.clientPhone = conversation.client_phone;
 
-                chatItem.addEventListener('click', function () {
-                    setConversation(conversation);
-                });
+        chatItem.innerHTML = `
+            <div class="imgBox">
+                <img src="{{ asset('images/img2.jpg') }}" class="cover" alt="">
+            </div>
+            <div class="details">
+                <div class="listHead">
+                    <p class="time">${lastMessageTime}</p>
+                </div>
+                <div class="listHead">
+                    <h6>${conversation.client_phone}</h6>
+                </div>
+                <div class="message_p">
+                    <p>${lastMessage}</p>
+                </div>
+            </div>
+        `;
 
-                conversationList.appendChild(chatItem);
-            });
-        }
+        chatItem.addEventListener('click', function () {
+            setConversation(conversation);
+        });
+
+        conversationList.appendChild(chatItem);
+    });
+}
+
 
         // ✅ Seleccionar conversación y cargar mensajes
         function setConversation(conversation) {
