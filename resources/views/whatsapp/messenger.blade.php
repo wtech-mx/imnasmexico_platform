@@ -105,9 +105,13 @@
     conversationList.innerHTML = '';
 
     conversations.forEach(conversation => {
-        const lastMessage = conversation.messages.length > 0 ? conversation.messages[0].content : "No hay mensajes aún";
-        const lastMessageTime = conversation.messages.length > 0
-            ? new Date(conversation.messages[0].timestamp * 1000).toLocaleTimeString()
+        // ✅ Asegurar que messages existe y es un array
+        const messagesArray = Array.isArray(conversation.messages) ? conversation.messages : [];
+
+        // ✅ Obtener el último mensaje si existe
+        const lastMessage = messagesArray.length > 0 ? messagesArray[0].content : "No hay mensajes aún";
+        const lastMessageTime = messagesArray.length > 0
+            ? new Date(messagesArray[0].timestamp * 1000).toLocaleTimeString()
             : "";
 
         const chatItem = document.createElement('div');
@@ -139,6 +143,7 @@
         conversationList.appendChild(chatItem);
     });
 }
+
 
 
         // ✅ Seleccionar conversación y cargar mensajes
