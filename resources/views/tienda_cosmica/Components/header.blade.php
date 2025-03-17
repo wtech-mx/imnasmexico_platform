@@ -11,7 +11,7 @@
         </a>
 
         <!-- Contenido del menú -->
-        <div class="collapse navbar-collapse order-lg-1" id="navbarNav" style="z-index: 1000">>
+        <div class="collapse navbar-collapse order-lg-1" id="navbarNav" style="z-index: 1000">
             <!-- Lista a la izquierda -->
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
