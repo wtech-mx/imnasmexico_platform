@@ -72,6 +72,23 @@
             font-family:'SwilyBright_Italic';
         }
 
+        .btn-prev-facial, .btn-next-facial,
+        .btn-prev-corporal, .btn-next-corporal {
+            background: rgba(0, 0, 0, 0);
+            color: #D8BBB8;
+            border: none;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn-prev-facial:hover, .btn-next-facial:hover,
+        .btn-prev-corporal:hover, .btn-next-corporal:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+
     </style>
 
   </head>
@@ -106,64 +123,57 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
     <script>
-        $("#corporalPopular").owlCarousel({
-            loop: true,
-            margin: 15,
-            nav: true,
-            navText: [
-                '<i class="bi bi-chevron-left"></i>',
-                '<i class="bi bi-chevron-right"></i>'
-            ],
-            autoplay: true, // Activar autoplay
-            autoplayTimeout: 3000, // Tiempo en milisegundos (3 segundos)
-            autoplayHoverPause: true, // Pausar autoplay al pasar el mouse
-            responsive: {
-                0: {
-                    items: 2
-                },
-                576: {
-                    items: 3
-                },
-                768: {
-                    items: 4
-                },
-                992: {
-                    items: 5
-                },
-                1200: {
-                    items: 6
-                }
-            }
-        });
-        $("#facialPopular").owlCarousel({
-            loop: true,
-            margin: 15,
-            nav: true,
-            navText: [
-                '<i class="bi bi-chevron-left"></i>',
-                '<i class="bi bi-chevron-right"></i>'
-            ],
-            autoplay: true, // Activar autoplay
-            autoplayTimeout: 3000, // Tiempo en milisegundos (3 segundos)
-            autoplayHoverPause: true, // Pausar autoplay al pasar el mouse
-            responsive: {
-                0: {
-                    items: 2
-                },
-                576: {
-                    items: 3
-                },
-                768: {
-                    items: 4
-                },
-                992: {
-                    items: 5
-                },
-                1200: {
-                    items: 6
-                }
-            }
-        });
+ let facialCarousel = $("#facialPopular").owlCarousel({
+        loop: true,
+        margin: 15,
+        nav: false, // Desactivar las flechas por defecto
+        dots: true, // Puedes mantener los dots si quieres
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        responsive: {
+            0: { items: 2 },
+            576: { items: 3 },
+            768: { items: 4 },
+            992: { items: 5 },
+            1200: { items: 6 }
+        }
+    });
+
+    let corporalCarousel = $("#corporalPopular").owlCarousel({
+        loop: true,
+        margin: 15,
+        nav: false, // Desactivar las flechas por defecto
+        dots: true,
+        autoplay: true,
+        autoplayTimeout: 3000,
+        autoplayHoverPause: true,
+        responsive: {
+            0: { items: 2 },
+            576: { items: 3 },
+            768: { items: 4 },
+            992: { items: 5 },
+            1200: { items: 6 }
+        }
+    });
+
+    // Botones de navegación manual para facial
+    $(".btn-prev-facial").click(function(){
+        facialCarousel.trigger('prev.owl.carousel');
+    });
+
+    $(".btn-next-facial").click(function(){
+        facialCarousel.trigger('next.owl.carousel');
+    });
+
+    // Botones de navegación manual para corporal
+    $(".btn-prev-corporal").click(function(){
+        corporalCarousel.trigger('prev.owl.carousel');
+    });
+
+    $(".btn-next-corporal").click(function(){
+        corporalCarousel.trigger('next.owl.carousel');
+    });
         $("#generalPopular").owlCarousel({
             loop: true,
             margin: 15,

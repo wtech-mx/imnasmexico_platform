@@ -70,138 +70,143 @@
             </p>
         </div>
     </div>
+    <!-- FLECHAS DE NAVEGACIÓN -->
+    <div class="d-flex justify-content-between align-items-center">
+        <button class="btn-prev-facial"><i class="fa-solid fa-chevron-left"></i></button>
+        <div id="facialPopular" class="owl-carousel">
 
-    <div id="facialPopular" class="owl-carousel">
+            <div class="item ">
+                <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-nebulosa">
+                    <div class="container_lineas_slide">
 
-        <div class="item ">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-nebulosa">
-                <div class="container_lineas_slide">
-
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/nebulosa.png') }}" alt="Protector">
+                        <div class="content mb-3 mt-3">
+                            <div class="img_container mx-auto">
+                                <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/nebulosa.png') }}" alt="Protector">
+                            </div>
+                            <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
+                            <h5 class="text-center  Quinsi text-white subtitle_linea m-0">NEBULOSA</h5>
                         </div>
-                        <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
-                        <h5 class="text-center  Quinsi text-white subtitle_linea m-0">NEBULOSA</h5>
+
                     </div>
+                </a>
+            </div>
 
-                </div>
-            </a>
-        </div>
+            <div class="item">
+                <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-constelacion">
+                    <div class="container_lineas_grid">
 
-        <div class="item">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-constelacion">
-                <div class="container_lineas_grid">
-
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
+                        <div class="content mb-3 mt-3">
+                            <div class="img_container mx-auto">
+                                <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/constelacion.png') }}" alt="Protector">
+                            </div>
+                            <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
+                            <h5 class="text-center Quinsi color_2 subtitle_linea m-0">CONSTELACION</h5>
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
-                        <h5 class="text-center Quinsi color_2 subtitle_linea m-0">CONSTELACION</h5>
+
                     </div>
+                </a>
+            </div>
 
-                </div>
-            </a>
-        </div>
+            <div class="item ">
+                <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-venus">
+                    <div class="container_lineas_slide">
 
-        <div class="item ">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-venus">
-                <div class="container_lineas_slide">
-
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-6.png') }}" alt="Protector">
+                        <div class="content mb-3 mt-3">
+                            <div class="img_container mx-auto">
+                                <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-6.png') }}" alt="Protector">
+                            </div>
+                            <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
+                            <h5 class="text-center  Quinsi text-white subtitle_linea m-0">VENUS</h5>
                         </div>
-                        <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
-                        <h5 class="text-center  Quinsi text-white subtitle_linea m-0">VENUS</h5>
+
                     </div>
+                </a>
+            </div>
 
-                </div>
-            </a>
-        </div>
+            <div class="item ">
+                <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-espectro">
+                    <div class="container_lineas_grid">
 
-        <div class="item ">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-espectro">
-                <div class="container_lineas_grid">
-
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-4.png') }}" alt="Protector">
+                        <div class="content mb-3 mt-3">
+                            <div class="img_container mx-auto">
+                                <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-4.png') }}" alt="Protector">
+                            </div>
+                            <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
+                            <h5 class="text-center  Quinsi color_2 subtitle_linea m-0">ESPECTRO</h5>
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
-                        <h5 class="text-center  Quinsi color_2 subtitle_linea m-0">ESPECTRO</h5>
+
                     </div>
+                </a>
+            </div>
 
-                </div>
-            </a>
-        </div>
+            <div class="item">
+                <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-mascarillas">
+                    <div class="container_lineas_slide">
 
-        <div class="item">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-mascarillas">
-                <div class="container_lineas_slide">
-
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-5.png') }}" alt="Protector">
+                        <div class="content mb-3 mt-3">
+                            <div class="img_container mx-auto">
+                                <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-5.png') }}" alt="Protector">
+                            </div>
+                            <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
+                            <h5 class="text-center Quinsi text-white subtitle_linea m-0">ESTELAR</h5>
                         </div>
-                        <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
-                        <h5 class="text-center Quinsi text-white subtitle_linea m-0">ESTELAR</h5>
+
                     </div>
+                </a>
+            </div>
 
-                </div>
-            </a>
-        </div>
+            <div class="item">
+                <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-pluton">
+                    <div class="container_lineas_grid">
 
-        <div class="item">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-pluton">
-                <div class="container_lineas_grid">
-
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto_13.png') }}" alt="Protector">
+                        <div class="content mb-3 mt-3">
+                            <div class="img_container mx-auto">
+                                <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto_13.png') }}" alt="Protector">
+                            </div>
+                            <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
+                            <h5 class="text-center Quinsi color_2 subtitle_linea m-0">PLUTÓN</h5>
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
-                        <h5 class="text-center Quinsi color_2 subtitle_linea m-0">PLUTÓN</h5>
+
                     </div>
+                </a>
+            </div>
 
-                </div>
-            </a>
-        </div>
+            <div class="item">
+                <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-solar">
+                    <div class="container_lineas_slide">
 
-        <div class="item">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-solar">
-                <div class="container_lineas_slide">
-
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-7.png') }}" alt="Protector">
+                        <div class="content mb-3 mt-3">
+                            <div class="img_container mx-auto">
+                                <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-7.png') }}" alt="Protector">
+                            </div>
+                            <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
+                            <h5 class="text-center Quinsi text-white subtitle_linea m-0">SOLAR</h5>
                         </div>
-                        <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
-                        <h5 class="text-center Quinsi text-white subtitle_linea m-0">SOLAR</h5>
+
                     </div>
+                </a>
+            </div>
 
-                </div>
-            </a>
-        </div>
+            <div class="item">
+                <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-lunar">
+                    <div class="container_lineas_grid">
 
-        <div class="item">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_faciales') }}#pills-lunar">
-                <div class="container_lineas_grid">
-
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-3.png') }}" alt="Protector">
+                        <div class="content mb-3 mt-3">
+                            <div class="img_container mx-auto">
+                                <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-3.png') }}" alt="Protector">
+                            </div>
+                            <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
+                            <h5 class="text-center Quinsi color_2 subtitle_linea m-0">LUNAR</h5>
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
-                        <h5 class="text-center Quinsi color_2 subtitle_linea m-0">LUNAR</h5>
+
                     </div>
+                </a>
+            </div>
 
-                </div>
-            </a>
         </div>
-
+        <button class="btn-next-facial"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
+
 
     <div class="row">
             <div class="col-12 mt-5">
@@ -213,107 +218,112 @@
             </div>
     </div>
 
-    <div id="corporalPopular" class="owl-carousel">
+        <!-- FLECHAS DE NAVEGACIÓN -->
+        <div class="d-flex justify-content-between align-items-center">
+            <button class="btn-prev-corporal"><i class="fa-solid fa-chevron-left"></i></button>
+            <div id="corporalPopular" class="owl-carousel">
 
-        <div class="item ">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-renacer">
-                <div class="container_lineas_slide">
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-1.png') }}" alt="Protector">
+                <div class="item ">
+                    <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-renacer">
+                        <div class="container_lineas_slide">
+                            <div class="content mb-3 mt-3">
+                                <div class="img_container mx-auto">
+                                    <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-1.png') }}" alt="Protector">
+                                </div>
+                                <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
+                                <h5 class="text-center  Quinsi text-white subtitle_linea m-0">RENACER</h5>
+                            </div>
                         </div>
-                        <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
-                        <h5 class="text-center  Quinsi text-white subtitle_linea m-0">RENACER</h5>
-                    </div>
+                    </a>
                 </div>
-            </a>
-        </div>
 
-        <div class="item">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-esencia">
-                <div class="container_lineas_grid">
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/esencial.png') }}" alt="Protector">
+                <div class="item">
+                    <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-esencia">
+                        <div class="container_lineas_grid">
+                            <div class="content mb-3 mt-3">
+                                <div class="img_container mx-auto">
+                                    <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/esencial.png') }}" alt="Protector">
+                                </div>
+                                <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
+                                <h5 class="text-center Quinsi color_2 subtitle_linea m-0">Esencia Vital</h5>
+                            </div>
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
-                        <h5 class="text-center Quinsi color_2 subtitle_linea m-0">Esencia Vital</h5>
-                    </div>
+                    </a>
                 </div>
-            </a>
-        </div>
 
-        <div class="item">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-pure">
-                <div class="container_lineas_grid">
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/pure.png') }}" alt="Protector">
+                <div class="item">
+                    <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-pure">
+                        <div class="container_lineas_slide">
+                            <div class="content mb-3 mt-3">
+                                <div class="img_container mx-auto">
+                                    <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/pure.png') }}" alt="Protector">
+                                </div>
+                                <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
+                                <h5 class="text-center Quinsi text-white subtitle_linea m-0">Pure</h5>
+                            </div>
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
-                        <h5 class="text-center Quinsi color_2 subtitle_linea m-0">Pure</h5>
-                    </div>
+                    </a>
                 </div>
-            </a>
-        </div>
 
-        <div class="item">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-rose">
-                <div class="container_lineas_grid">
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/caviar.png') }}" alt="Protector">
+                <div class="item">
+                    <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-rose">
+                        <div class="container_lineas_grid">
+                            <div class="content mb-3 mt-3">
+                                <div class="img_container mx-auto">
+                                    <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/caviar.png') }}" alt="Protector">
+                                </div>
+                                <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
+                                <h5 class="text-center Quinsi color_2 subtitle_linea m-0">Rose Caviar</h5>
+                            </div>
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
-                        <h5 class="text-center Quinsi color_2 subtitle_linea m-0">Rose Caviar</h5>
-                    </div>
+                    </a>
                 </div>
-            </a>
-        </div>
 
-        <div class="item">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-flash">
-                <div class="container_lineas_grid">
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-9.png') }}" alt="Protector">
+                <div class="item">
+                    <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-flash">
+                        <div class="container_lineas_grid">
+                            <div class="content mb-3 mt-3">
+                                <div class="img_container mx-auto">
+                                    <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-9.png') }}" alt="Protector">
+                                </div>
+                                <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
+                                <h5 class="text-center Quinsi color_2 subtitle_linea m-0">FLASH</h5>
+                            </div>
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
-                        <h5 class="text-center Quinsi color_2 subtitle_linea m-0">FLASH</h5>
-                    </div>
+                    </a>
                 </div>
-            </a>
-        </div>
 
-        <div class="item ">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-astros">
-                <div class="container_lineas_slide">
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-8.png') }}" alt="Protector">
+                <div class="item ">
+                    <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-astros">
+                        <div class="container_lineas_slide">
+                            <div class="content mb-3 mt-3">
+                                <div class="img_container mx-auto">
+                                    <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-8.png') }}" alt="Protector">
+                                </div>
+                                <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
+                                <h5 class="text-center  Quinsi text-white subtitle_linea m-0">ASTROS</h5>
+                            </div>
                         </div>
-                        <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
-                        <h5 class="text-center  Quinsi text-white subtitle_linea m-0">ASTROS</h5>
-                    </div>
+                    </a>
                 </div>
-            </a>
-        </div>
 
-        <div class="item">
-            <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-galaxia">
-                <div class="container_lineas_grid">
-                    <div class="content mb-3 mt-3">
-                        <div class="img_container mx-auto">
-                            <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-10.png') }}" alt="Protector">
+                <div class="item">
+                    <a style="color:#2D2432;text-decoration: none;" href="{{ route('tienda.productos_corporales') }}#pills-galaxia">
+                        <div class="container_lineas_grid">
+                            <div class="content mb-3 mt-3">
+                                <div class="img_container mx-auto">
+                                    <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/producto-10.png') }}" alt="Protector">
+                                </div>
+                                <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
+                                <h5 class="text-center Quinsi color_2 subtitle_linea m-0">GALAXIA</h5>
+                            </div>
                         </div>
-                        <h4 class="text-center  Avenir color_2 title_linea m-0">Líneas</h4>
-                        <h5 class="text-center Quinsi color_2 subtitle_linea m-0">GALAXIA</h5>
-                    </div>
+                    </a>
                 </div>
-            </a>
-        </div>
 
-    </div>
+            </div>
+            <button class="btn-next-corporal"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
 
 </div>
 
