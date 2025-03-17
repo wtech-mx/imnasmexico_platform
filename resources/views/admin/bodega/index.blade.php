@@ -38,6 +38,16 @@
                                                 <input type="date" class="form-control" name="fecha_fin" value="{{ date('Y-m-d') }}">
                                             </div>
 
+                                            <div class="col-3">
+                                                <label for="user_id">Tipo:</label>
+                                                <select class="form-control" id="tipo" name="tipo">
+                                                    <option value="General">General</option>
+                                                    <option value="NAS">NAS</option>
+                                                    <option value="Cosmica">Cosmica</option>
+                                                </select>
+                                            </div>
+
+
                                             <div class="col-3 align-self-end">
                                                 <button type="submit" name="action" value="Generar PDF" class="btn btn-success">Generar PDF</button>
                                             </div>
