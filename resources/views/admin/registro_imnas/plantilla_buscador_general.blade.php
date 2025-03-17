@@ -206,7 +206,7 @@
             </div>
 
             <div class="col-12 col-md-6 col-lg-6 my-auto">
-                @if(in_array($tickets->Cursos->nombre, [
+                @if(in_array($tickets_externo->Cursos->nombre, [
                     'Diplomado en Drenaje Linfático Facial y Corporal',
                     'Micropuntura Brasileña'
                 ]))
