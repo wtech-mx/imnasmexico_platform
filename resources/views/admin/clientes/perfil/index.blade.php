@@ -97,6 +97,15 @@
                                 </li>
                                 @if ($tipo == 'Usuario')
                                     <li class="nav-item pt-2">
+                                        <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="{{route('peril_cliente.reposicion', $cliente->id)}}">
+                                            <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
+                                                <img src="{{ asset('/assets/cam/return.png') }}"width="40px" >
+                                            </div>
+                                            <span class="text-sm">Reposición</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item pt-2">
                                         <a class="nav-link text-body d-flex align-items-center" data-scroll="" href="{{route('peril_cliente.membresia_cosmica', $cliente->id)}}">
                                             <div class="icon icon-shape icon-sm text-center  me-2 d-flex align-items-center justify-content-center">
                                                 <img src="{{ asset('assets/cam/membrecia.png') }}"width="30px" >
@@ -184,6 +193,9 @@
                     @endif
                     @if(Route::currentRouteName() == 'peril_cliente.cotizaciones_cosmica')
                         @include('admin.clientes.perfil.cotizacion_cosmica')
+                    @endif
+                    @if(Route::currentRouteName() == 'peril_cliente.reposicion')
+                        @include('admin.clientes.perfil.reposicion')
                     @endif
                     @if(Route::currentRouteName() == 'peril_cliente.membresia_cosmica')
                         @include('admin.clientes.perfil.membresia')

@@ -7,6 +7,8 @@ use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 use App\Models\Orders;
 use App\Models\OrdersTickets;
+use App\Models\ProductosNotasCosmica;
+use App\Models\ProductosNotasId;
 use App\Models\Products;
 use App\Models\ReportesCotizaciones;
 use App\Models\ReportesCotizacionesMensajes;
@@ -236,6 +238,123 @@ class PerfilClienteController extends Controller
         $products = Products::where('categoria', '=', 'Cosmica')->orderBy('nombre','ASC')->get();
         $fechaPerfil = date('Y-m-d');
             return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora', 'cotizaciones_cosmica', 'tipo', 'reportes', 'reportes_archivos', 'mensajesPorCotizacion', 'products', 'fechaPerfil'));
+    }
+
+    public function reposicion(Request $request, $id){
+
+        $cliente = User::where('cliente','=' ,'1')->where('id', '=', $id)->first();
+        $distribuidora = Cosmikausers::where('id_cliente', $id)->orderBy('id','DESC')->first();
+
+        $cosmica_user = Cosmikausers::where('id_cliente', '=', $id)->first();
+        $tipo = 'Usuario';
+        $cotizaciones = NotasProductosCosmica::where('tipo_nota', '=', 'Reposicion')->where('id_usuario', $id)->get();
+        $products = Products::orderBy('nombre','ASC')->get();
+        $fechaPerfil = date('Y-m-d');
+
+        return view('admin.clientes.perfil.index',compact('cliente', 'distribuidora', 'cosmica_user', 'tipo', 'cotizaciones', 'products', 'fechaPerfil'));
+    }
+
+    public function getNotasByUsuario($id)
+    {
+        // Obtener las notas de la tabla notas_productos por id_usuario
+        $notas = NotasProductos::where('id_usuario', $id)->get();
+
+        // Retornar las notas como JSON
+        return response()->json($notas);
+    }
+    public function getProductosByNota($notaId)
+    {
+        $productos = ProductosNotasId::where('id_notas_productos', $notaId)->get();
+        return response()->json($productos);
+    }
+
+    public function getAllProductos()
+    {
+        $productos = Products::orderBy('nombre','ASC')->get();
+        return response()->json($productos);
+    }
+
+    public function create_reposicion(request $request){
+
+        $notas_productos = new NotasProductosCosmica;
+        $notas_productos->id_usuario = $request->id_cliente;
+        $notas_productos->tipo_nota = 'Reposicion';
+        $notas_productos->metodo_pago = 'Reposicion';
+        $notas_productos->fecha = date('Y-m-d');
+        $notas_productos->restante = '0';
+        $notas_productos->total = '0';
+        $notas_productos->estatus_reposicion = 'Pendiente';
+        $notas_productos->nota_reposicion = $request->get('nota_reposicion');
+        $notas_productos->id_reposicion_user = auth()->user()->id;
+        $notas_productos->id_reposicion_nas = $request->notas;
+        $tipoNota = $notas_productos->tipo_nota;
+
+        // Obtener todos los folios del tipo de nota específico
+        $folios = NotasProductosCosmica::where('tipo_nota', $tipoNota)->pluck('folio');
+
+        // Extraer los números de los folios y encontrar el máximo
+        $maxNumero = $folios->map(function ($folio) use ($tipoNota) {
+            return intval(substr($folio, strlen($tipoNota[0])));
+        })->max();
+
+        // Si hay un folio existente, sumarle 1 al máximo número
+        if ($maxNumero) {
+            $numeroFolio = $maxNumero + 1;
+        } else {
+            // Si no hay un folio existente, empezar desde 1
+            $numeroFolio = 1;
+        }
+
+        // Crear el nuevo folio con el tipo de nota y el número
+        $folio = $tipoNota[0] . $numeroFolio;
+
+        // Asignar el nuevo folio al objeto
+        $notas_productos->folio = $folio;
+
+        $notas_productos->envio = 'Si';
+        $notas_productos->id_admin = auth()->user()->id;
+        $notas_productos->save();
+
+        $productos = $request->input('productos', []);
+
+        foreach ($productos as $productoId => $detalles) {
+            if($detalles['reemplazo'] != null){
+                $originalId = (int) $detalles['original'];
+                $reemplazoId = (int) $detalles['reemplazo'];
+                $cantidadId = (int) $detalles['cantidad'];
+
+                $produc = Products::where('id', $reemplazoId)->first();
+
+                $productos = new ProductosNotasCosmica;
+                $productos->id_notas_productos = $notas_productos->id;
+                $productos->id_reposicion_producto = $originalId;
+                $productos->id_producto = $reemplazoId;
+                $productos->producto = $produc->nombre;
+                $productos->cantidad = $cantidadId;
+                $productos->price = '0';
+                $productos->save();
+            }
+        }
+
+        return redirect()->back()->with('success', 'Se ha creado su reposicion con exito');
+    }
+
+    public function liga_reposicion($id){
+        $pedido = NotasProductosCosmica::where('id', $id)->first();
+        $pedido_productos = ProductosNotasCosmica::where('id_notas_productos', $id)->get();
+
+        $pedido_original = NotasProductos::where('id', $pedido->id_reposicion_nas)->first();
+        $pedido_original_productos = ProductosNotasId::where('id_notas_productos', $pedido->id_reposicion_nas)->get();
+        return view('admin.clientes.perfil.pdf_reposicion', compact('pedido', 'pedido_productos', 'pedido_original', 'pedido_original_productos'));
+    }
+
+    public function getNotasCosmicaByUsuario($id)
+    {
+        // Obtener las notas de la tabla notas_productos_cosmica por id_usuario
+        $notasCosmica = NotasProductosCosmica::where('id_usuario', $id)->get();
+
+        // Retornar las notas como JSON
+        return response()->json($notasCosmica);
     }
 
     public function membresia_cosmica(Request $request, $id){

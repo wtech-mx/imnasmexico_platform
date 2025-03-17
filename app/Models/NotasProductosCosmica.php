@@ -58,8 +58,22 @@ class NotasProductosCosmica extends Model
         'item_title_meli',
         'item_descripcion_meli',
         'item_descripcion_permalink',
+        'id_reposicion_nas',
+        'id_reposicion_cosmica',
+        'id_reposicion_user',
     ];
-
+    public function NotasNAS()
+    {
+        return $this->belongsTo(NotasProductos::class, 'id_reposicion_nas');
+    }
+    public function NotasCosmica()
+    {
+        return $this->belongsTo(NotasProductosCosmica::class, 'id_reposicion_cosmica');
+    }
+    public function UserRepo()
+    {
+        return $this->belongsTo(User::class, 'id_reposicion_user');
+    }
     public function User()
     {
         return $this->belongsTo(User::class, 'id_usuario');

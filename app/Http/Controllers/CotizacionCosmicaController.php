@@ -38,9 +38,10 @@ class CotizacionCosmicaController extends Controller
         $administradores = User::where('cliente', '=', NULL)->orWhere('cliente', '=', '5')->get();
 
         // Filtrar notas con estatus específicos
-        $query = NotasProductosCosmica::whereBetween('fecha', [$fechaInicio, $fechaFin])
-            ->where('estatus_cotizacion', '=', NULL)
-            ->where('tipo_nota', '=', 'Cotizacion');
+        $query = NotasProductosCosmica::with('User')
+        ->whereBetween('fecha', [$fechaInicio, $fechaFin])
+        ->where('estatus_cotizacion', '=', NULL)
+        ->where('tipo_nota', '=', 'Cotizacion');
 
         if ($request->has('search') && !empty($request->search['value'])) {
             $search = $request->search['value'];
@@ -64,7 +65,9 @@ class CotizacionCosmicaController extends Controller
         $notas->getCollection()->transform(function ($nota) {
             $nota->estatus = $nota->estatus_cotizacion == 'Aprobada' ? 'Aprobada' : 'Pendiente';
             $nota->acciones = view('admin.cotizacion_cosmica.partials.acciones', compact('nota'))->render();
-            $nota->cliente = $nota->id_usuario == NULL ? $nota->nombre . '<br>' . $nota->telefono : $nota->User->name;
+            $nota->cliente = $nota->id_usuario == NULL
+            ? $nota->nombre . '<br>' . ($nota->telefono ?? 'Teléfono no disponible')
+            : ($nota->User ? ($nota->User->name . '<br>' . ($nota->User->telefono ?? 'Teléfono no disponible')) : 'Usuario no encontrado');
             $nota->estatus_boton = view('admin.cotizacion_cosmica.partials.estatus_boton', compact('nota'))->render();
             return $nota;
         });

@@ -851,6 +851,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/perfil/cliente/compras/tiendita/{phone}', [App\Http\Controllers\PerfilClienteController::class, 'compras_tiendita'])->name('peril_cliente.compras_tiendita');
         Route::get('/perfil/cliente/cotizaciones/nas/{phone}', [App\Http\Controllers\PerfilClienteController::class, 'cotizaciones_nas'])->name('peril_cliente.cotizaciones_nas');
         Route::get('/perfil/cliente/cotizaciones/cosmica/{phone}', [App\Http\Controllers\PerfilClienteController::class, 'cotizaciones_cosmica'])->name('peril_cliente.cotizaciones_cosmica');
+        Route::get('/perfil/cliente/reposicion/{id}', [App\Http\Controllers\PerfilClienteController::class, 'reposicion'])->name('peril_cliente.reposicion');
         Route::get('/perfil/cliente/membresia/cosmica/{id}', [App\Http\Controllers\PerfilClienteController::class, 'membresia_cosmica'])->name('peril_cliente.membresia_cosmica');
 
         Route::get('/perfil/cliente/search-phone', [App\Http\Controllers\PerfilClienteController::class, 'searchPhone'])->name('peril_cliente.searchPhone');
@@ -858,6 +859,14 @@ Route::group(['middleware' => ['auth']], function() {
 
         Route::post('/perfil/cliente/reporte/cosmica/create', [App\Http\Controllers\PerfilClienteController::class, 'reporte_cosmica'])->name('peril_cliente.reporte_cosmica');
         Route::post('/perfil/cliente/reporte/nas/create', [App\Http\Controllers\PerfilClienteController::class, 'reporte_nas'])->name('peril_cliente.reporte_nas');
+
+        Route::get('/perfil/cliente/api/notas/{id}', [App\Http\Controllers\PerfilClienteController::class, 'getNotasByUsuario']);
+        Route::get('/perfil/cliente/api/notas-cosmica/{id}', [App\Http\Controllers\PerfilClienteController::class, 'getNotasCosmicaByUsuario']);
+
+        Route::get('/perfil/cliente/api/productos-nota/{notaId}', [App\Http\Controllers\PerfilClienteController::class, 'getProductosByNota']);
+        Route::get('/perfil/cliente/api/productos', [App\Http\Controllers\PerfilClienteController::class, 'getAllProductos']);
+        Route::post('/perfil/cliente/create/reposicion', [App\Http\Controllers\PerfilClienteController::class, 'create_reposicion'])->name('reposicion.create');
+        Route::get('/perfil/cliente/liga/reposicion/{id}', [App\Http\Controllers\PerfilClienteController::class, 'liga_reposicion'])->name('reposicion.liga');
         // =============== M O D U L O  C O T I Z A C I O N  E X P O ===============================
         Route::get('/cotizacion/expo/index', [App\Http\Controllers\CotizacionCosmicaController::class, 'index_expo'])->name('corizacion_expo.index');
         Route::get('/cotizacion/expo/buscador', [App\Http\Controllers\CotizacionCosmicaController::class, 'buscador_expo'])->name('corizacion_expo.buscador');
