@@ -632,7 +632,7 @@ body{
 
   @media only screen and (max-width: 990px) {
     .subtitle_linea {
-        font-size: 23px;
+        font-size: 19px;
         font-weight: normal;
     }
   }
@@ -713,6 +713,14 @@ body{
 
     .category-banner {
         height: 260px;
+    }
+
+    .container_lineas_grid{
+        width: 90%;
+    }
+
+    .container_lineas_slide {
+        width: 90%;
     }
 
   }

@@ -88,6 +88,15 @@
             background: rgba(255, 255, 255, 0.8);
         }
 
+        /* Ocultar flechas en pantallas menores a 768px */
+        @media (max-width: 500px) {
+            .btn-prev-facial, .btn-next-facial,
+            .btn-prev-corporal, .btn-next-corporal {
+                display: none !important;
+            }
+        }
+
+
 
     </style>
 

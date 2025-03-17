@@ -258,8 +258,8 @@
                                 <div class="img_container mx-auto">
                                     <img class="img_grid_products" src="{{ asset('cosmika/inicio/lineas/pure.png') }}" alt="Protector">
                                 </div>
-                                <h4 class="text-center  Avenir text-white title_linea m-0">Líneas</h4>
-                                <h5 class="text-center Quinsi text-white subtitle_linea m-0">Pure</h5>
+                                <h4 class="text-center  Avenir text-white  title_linea m-0">Líneas</h4>
+                                <h5 class="text-center Quinsi text-white  subtitle_linea m-0">Pure</h5>
                             </div>
                         </div>
                     </a>
