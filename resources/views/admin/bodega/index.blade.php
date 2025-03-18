@@ -383,6 +383,28 @@
 
                                             @endforeach
 
+                                            @foreach($ApiFiltradaCollectAprobadoreposicion as $order)
+                                                <tr style="background: #EE96BA;color:#fff">
+                                                    <td>R{{ $order['id'] }}</td>
+
+                                                    <td>{{ $order['user']['name'] }}</td>
+
+                                                    <td>
+                                                            En preparación
+                                                    </td>
+
+                                                    <td>
+                                                        {{ \Carbon\Carbon::parse($order['fecha_aprobado'])->isoFormat('dddd DD MMMM hh:mm a') }}
+                                                    </td>
+                                                    <td>$0</td>
+                                                    <td>
+                                                        <a class="btn btn-sm btn-dark text-white" target="_blank" href="{{ route('preparacion_scaner_paradisus_repo.bodega', $order['id']) }}">
+                                                            <i class="fa fa-barcode"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+
                                             @foreach ($oreders_cosmica_ecommerce as $item)
                                                 <tr style="background: #80486B;color:#fff">
                                                     <td>

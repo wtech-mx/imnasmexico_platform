@@ -746,6 +746,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::patch('bodega/preparacion/guia/cosmica/{id}', [App\Http\Controllers\CotizacionCosmicaController::class, 'update_guia'])->name('notas_cosmica.update_guia');
     Route::put('bodega/preparacion/update_status/{id}', [App\Http\Controllers\BodegaController::class, 'update_guia_woo'])->name('bodega.update_guia_woo');
     Route::patch('bodega/preparacion/paradisus/{id}', [App\Http\Controllers\BodegaController::class, 'actualizarPedidoParadisus'])->name('actualizar.pedido.paradisus');
+    Route::patch('bodega/preparacion/paradisus/repo/{id}', [App\Http\Controllers\BodegaController::class, 'actualizarPedidoParadisusrepo'])->name('actualizar.repo.paradisus');
 
     Route::get('/pdf_etiqueta/{tabla}/{id}', [App\Http\Controllers\BodegaController::class, 'generarEtiqueta'])->name('pdf_etiqueta.bodega');
 
@@ -779,6 +780,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('bodega/preparacion/scaner/paradisus/{id}', [App\Http\Controllers\BodegaController::class, 'preparacion_scaner_paradisus'])->name('preparacion_scaner_paradisus.bodega');
     Route::post('/check-product/paradisus', [App\Http\Controllers\BodegaController::class, 'checkProduct_paradisus'])->name('check_paradisus.product');
 
+    Route::get('bodega/preparacion/scaner/paradisus/repo/{id}', [App\Http\Controllers\BodegaController::class, 'preparacion_scaner_paradisus_repo'])->name('preparacion_scaner_paradisus_repo.bodega');
+    Route::post('/check-product/paradisus/repo', [App\Http\Controllers\BodegaController::class, 'checkProduct_paradisus_repo'])->name('check_paradisus_repo.product');
+
     Route::get('bodega/preparacion/scaner/nas/{id}', [App\Http\Controllers\BodegaController::class, 'preparacion_scaner_nas'])->name('preparacion_scaner_nas.bodega');
     Route::post('/check-product/nas', [App\Http\Controllers\BodegaController::class, 'checkProduct_nas'])->name('check_nas.product');
 
@@ -790,6 +794,8 @@ Route::group(['middleware' => ['auth']], function() {
 
     // =============== M O D U L O   L A B O R A T O R I O  C O S M I C A ===============================
     Route::get('/cosmica/laboratorio/reporte/pdf', [App\Http\Controllers\LabCosmicaController::class, 'pdf_reporte'])->name('reporte.pdf');
+    Route::get('/laboratorio-cosmica/pdf-produccion-estimado', [App\Http\Controllers\LabCosmicaController::class, 'pdfProduccionEstimado'])
+    ->name('laboratorio_cosmica.pdf_produccion_estimado');
                     // =============== E N V A S E S ===============================
         Route::get('/cosmica/laboratorio/envases', [App\Http\Controllers\LabCosmicaController::class, 'index'])->name('envases.index');
         Route::post('/cosmica/laboratorio/envases/store', [App\Http\Controllers\LabCosmicaController::class, 'store'])->name('envases.store');
