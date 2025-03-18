@@ -188,22 +188,35 @@
 
         // ✅ Renderizar los mensajes en la vista
         function renderMessages() {
-            if (!chatbox) {
-                console.error("❌ Error: No se encontró el contenedor de mensajes 'chatbox'");
-                return;
+    if (!chatbox) {
+        console.error("❌ Error: No se encontró el contenedor de mensajes 'chatbox'");
+        return;
+    }
+
+    chatbox.innerHTML = '';
+
+    messages.forEach(message => {
+        let messageText = message.body;
+
+        try {
+            // 📌 Intentar parsear el JSON si es un objeto válido
+            const parsedMessage = JSON.parse(message.body);
+            if (parsedMessage.text && parsedMessage.text.body) {
+                messageText = parsedMessage.text.body; // Extraer el contenido del mensaje
             }
-
-            chatbox.innerHTML = '';
-
-            messages.forEach(message => {
-                const div = document.createElement('div');
-                div.classList.add('message', message.direction === 'toApp' ? 'friend_msg' : 'my_msg');
-                div.innerHTML = `<p>${message.content} <br><span>${new Date(message.timestamp * 1000).toLocaleTimeString()}</span></p>`;
-                chatbox.appendChild(div);
-            });
-
-            chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll al último mensaje
+        } catch (error) {
+            console.warn("⚠️ No se pudo parsear el JSON del mensaje, usando el valor original.");
         }
+
+        const div = document.createElement('div');
+        div.classList.add('message', message.direction === 'toApp' ? 'friend_msg' : 'my_msg');
+        div.innerHTML = `<p>${messageText} <br><span>${new Date(message.timestamp * 1000).toLocaleTimeString()}</span></p>`;
+        chatbox.appendChild(div);
+    });
+
+    chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll al último mensaje
+}
+
 
 
         // ✅ Enviar mensaje
