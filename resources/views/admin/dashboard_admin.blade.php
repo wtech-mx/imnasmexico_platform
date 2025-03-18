@@ -276,15 +276,13 @@
                 </div>
             </div>
             <div class="card-body p-3">
-                <div class="progress-container" style="position: relative; height: 150px;">
-                    <!-- Imagen del cerdito -->
-                    <img id="cerdito" src="{{ asset('assets/cam/piggy-bank.png') }}" alt="Cerdito" style="width: 50px; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); transition: bottom 0.5s ease-in-out;">
+                <p class="text-center">
+                    <img id="cerdito" src="{{ asset('assets/cam/piggy-bank.png') }}" alt="Cerdito" style="width: 100px; position: relative; top: 0;">
+                </p>
+                <div class="progress mt-4" style="height: 30px; position: relative;">
 
-                    <!-- Barra de progreso -->
-                    <div class="progress" style="height: 30px; position: absolute; bottom: 0; width: 100%;">
-                        <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-                            <span id="progress-text" style="position: absolute; left: 50%; transform: translateX(-50%); color: white; font-weight: bold;">0%</span>
-                        </div>
+                    <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                        <span id="progress-text" style="position: absolute; left: 50%; transform: translateX(-50%); color: white; font-weight: bold;">0%</span>
                     </div>
                 </div>
                 <div class="mt-3">

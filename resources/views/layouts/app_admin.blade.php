@@ -44,14 +44,17 @@
         }
 
         #cerdito {
-            transition: bottom 0.5s ease-in-out;
+            transition: top 0.5s ease-in-out;
         }
 
-        .progress-container {
+        .progress {
             background-color: #f5f5f5;
             border-radius: 15px;
             overflow: hidden;
-            position: relative;
+        }
+
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
         }
     </style>
 
