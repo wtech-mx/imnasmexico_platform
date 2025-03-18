@@ -42,6 +42,17 @@
             display: inline-block;
             color: black;
         }
+
+        #cerdito {
+            transition: bottom 0.5s ease-in-out;
+        }
+
+        .progress-container {
+            background-color: #f5f5f5;
+            border-radius: 15px;
+            overflow: hidden;
+            position: relative;
+        }
     </style>
 
 </head>
@@ -115,6 +126,9 @@
                 formContainer.style.display = 'none';
             }
         });
+
+
+
     </script>
 
 

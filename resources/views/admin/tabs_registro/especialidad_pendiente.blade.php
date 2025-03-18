@@ -131,6 +131,37 @@
             });
         });
     });
+    document.addEventListener('DOMContentLoaded', function () {
+        const totalVentas = {{ $totalVentas }}; // Total de ventas desde el backend
+        const cerdito = document.getElementById('cerdito');
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+
+        // Definir los niveles de ventas
+        const niveles = [
+            { limite: 60000, porcentaje: 33 },
+            { limite: 100000, porcentaje: 66 },
+            { limite: 150000, porcentaje: 100 }
+        ];
+
+        // Calcular el porcentaje de progreso
+        let porcentaje = 0;
+        for (const nivel of niveles) {
+            if (totalVentas >= nivel.limite) {
+                porcentaje = nivel.porcentaje;
+            }
+        }
+
+        // Actualizar la barra de progreso
+        progressBar.style.width = `${porcentaje}%`;
+        progressBar.setAttribute('aria-valuenow', porcentaje);
+        progressText.textContent = `${porcentaje}%`;
+
+        // Mover el cerdito
+        const maxBottom = 120; // Altura máxima que puede alcanzar el cerdito (en px)
+        const bottom = (maxBottom * porcentaje) / 100;
+        cerdito.style.bottom = `${bottom}px`;
+    });
 </script>
 
 @endsection

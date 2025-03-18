@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cosmikausers;
+use App\Models\CursosTickets;
+use App\Models\NotasCursos;
 use App\Models\NotasProductos;
 use App\Models\NotasProductosCosmica;
 use App\Models\Orders;
@@ -108,6 +110,7 @@ class PerfilClienteController extends Controller
 
     public function cursos(Request $request, $id){
 
+        $fechaActual = date('Y-m-d');
         $clientes = User::where('cliente','=' ,'1')->orderBy('id','DESC')->get();
 
         $cliente = User::where('cliente','=' ,'1')->where('id', '=', $id)->first();
@@ -117,7 +120,11 @@ class PerfilClienteController extends Controller
         ->where('orders.id_usuario','=' ,$id)->where('orders.estatus','=' , '1')->get();
         $tipo = 'Usuario';
 
-        return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora', 'cursos', 'tipo'));
+        $notas = NotasCursos::where('id_usuario', '=', $id)->orderBy('id','DESC')->get();
+        $cursos_compra = CursosTickets::where('fecha_inicial','<=', $fechaActual)->where('fecha_final','>=', $fechaActual)->orderBy('fecha_inicial','asc')->get();
+        $fechaPerfil = date('Y-m-d');
+
+        return view('admin.clientes.perfil.index',compact('clientes', 'cliente', 'distribuidora', 'cursos', 'tipo', 'fechaPerfil', 'cursos_compra', 'notas'));
     }
 
     public function compras_tiendita(Request $request, $phone){

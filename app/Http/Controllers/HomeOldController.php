@@ -181,24 +181,15 @@ class HomeController extends Controller
                 // C O M I S I O N E S  V E N T A  K I T S
                 $startOfWeek = Carbon::now()->startOfWeek();
                 $endOfWeek = Carbon::now()->endOfWeek();
+                $notasAprobadasNASComision = NotasProductos::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])
+                ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('id_kit','!=' , NULL)->get();
 
                 $notasAprobadasCosmicaComision = NotasProductosCosmica::whereBetween('fecha_aprobada', [$startOfWeek, $endOfWeek])
                 ->orderBy('id','DESC')->where('tipo_nota','=' , 'Cotizacion')->where('id_kit','!=' , NULL)->get();
 
-                $totalVentas = $notasAprobadasCosmicaComision->sum('total'); // Asumiendo que la columna 'total' contiene el monto de cada venta
+                $user_comision_kit = User::where('comision_kit','!=',null)->get();
 
-                // Determinar la comisión grupal
-                $comisionGrupal = 0;
-                if ($totalVentas >= 60000 && $totalVentas <= 80000) {
-                    $comisionGrupal = 1000;
-                } elseif ($totalVentas >= 100000 && $totalVentas <= 149999) {
-                    $comisionGrupal = 2000;
-                } elseif ($totalVentas >= 150000) {
-                    $comisionGrupal = 3000;
-                }
-
-
-            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes', 'envios_pendientes', 'totalVentas', 'comisionGrupal'));
+            return view('admin.dashboard',compact('cotizacion_NASCount', 'ventas_NASCount', 'cotizacion_CosmicaCount', 'totalPagadoFormateadoDia','clientesTotal','meses', 'datachart','cursos','contadorfacturas','contadorenvios','profesores','cupones', 'pagos', 'registros_pendientes', 'especialidades_pendientes', 'envios_pendientes', 'notasAprobadasNASComision', 'user_comision_kit', 'notasAprobadasCosmicaComision'));
         }
 
     }

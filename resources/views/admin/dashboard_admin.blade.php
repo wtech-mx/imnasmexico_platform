@@ -268,28 +268,32 @@
     </div> --}}
 
     @can('comisiones-kits')
-        <div class="col-md-6">
-            <div class="card">
+    <div class="col-md-6">
+        <div class="card">
             <div class="card-header pb-0 p-3">
                 <div class="d-flex justify-content-between">
                     <h6 class="mb-0">Comisiones venta kits</h6>
                 </div>
             </div>
-
-
             <div class="card-body p-3">
-                <ul class="list-group">
+                <div class="progress-container" style="position: relative; height: 150px;">
+                    <!-- Imagen del cerdito -->
+                    <img id="cerdito" src="{{ asset('assets/cam/piggy-bank.png') }}" alt="Cerdito" style="width: 50px; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); transition: bottom 0.5s ease-in-out;">
 
-                @foreach ($user_comision_kit as $item)
-                    @if ($item->id == auth()->user()->id)
-                    <a class="btn btn-warning" href="{{ route('comision_kit.imprimir', $item->id) }}" target="_blank">Imprimir</a>
-                    @endif
-                @endforeach
-
-                </ul>
-            </div>
+                    <!-- Barra de progreso -->
+                    <div class="progress" style="height: 30px; position: absolute; bottom: 0; width: 100%;">
+                        <div id="progress-bar" class="progress-bar bg-success" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            <span id="progress-text" style="position: absolute; left: 50%; transform: translateX(-50%); color: white; font-weight: bold;">0%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3">
+                    <p><strong>Total de Ventas:</strong> ${{ number_format($totalVentas, 2) }}</p>
+                    <p><strong>Comisión Grupal:</strong> ${{ number_format($comisionGrupal, 2) }}</p>
+                </div>
             </div>
         </div>
+    </div>
     @endcan
 
     <div class="col-lg-6">
