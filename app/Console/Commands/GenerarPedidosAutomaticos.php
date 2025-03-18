@@ -22,13 +22,13 @@ class GenerarPedidosAutomaticos extends Command
 
         // ===================== Lógica para BodegaPedidosCosmica =====================
         // Verificar si existe un pedido del día anterior con estatus 'Aprobada'
-        $pedidoAyerCosmica = BodegaPedidosCosmica::where('estatus', 'Aprobada')
+        $pedidoAyerCosmica = BodegaPedidosCosmica::where('estatus_lab', 'Aprobada')
             ->whereDate('fecha_pedido', $fechaAyer)
             ->first();
 
         if ($pedidoAyerCosmica) {
             // Cambiar el estatus del pedido del día anterior a 'Cancelada'
-            $pedidoAyerCosmica->update(['estatus' => 'Cancelada']);
+            $pedidoAyerCosmica->update(['estatus_lab' => 'Cancelada']);
             $this->info('El pedido del día anterior en BodegaPedidosCosmica con estatus "Aprobada" ha sido cambiado a "Cancelada".');
         }
 
@@ -44,13 +44,13 @@ class GenerarPedidosAutomaticos extends Command
 
         // ===================== Lógica para BodegaPedidos =====================
         // Verificar si existe un pedido del día anterior con estatus 'Aprobada'
-        $pedidoAyer = BodegaPedidos::where('estatus', 'Aprobada')
+        $pedidoAyer = BodegaPedidos::where('estatus_lab', 'Aprobada')
             ->whereDate('fecha_pedido', $fechaAyer)
             ->first();
 
         if ($pedidoAyer) {
             // Cambiar el estatus del pedido del día anterior a 'Cancelada'
-            $pedidoAyer->update(['estatus' => 'Cancelada']);
+            $pedidoAyer->update(['estatus_lab' => 'Cancelada']);
             $this->info('El pedido del día anterior en BodegaPedidos con estatus "Aprobada" ha sido cambiado a "Cancelada".');
         }
 
