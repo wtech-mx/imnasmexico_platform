@@ -164,20 +164,27 @@
 
         // ✅ Cargar mensajes de la conversación actual
         async function loadMessagesFromConversation() {
-            if (!currentConversation.id) {
-                console.error("❌ Error: No hay conversación seleccionada.");
-                return;
+                if (!currentConversation.id) {
+                    console.error("❌ Error: No hay conversación seleccionada.");
+                    return;
+                }
+
+                fetch(`/api/v1/message/${currentConversation.id}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        messages = data.data;
+                        renderMessages();
+                    })
+                    .catch(error => console.error("❌ Error al cargar los mensajes:", error));
             }
 
-            try {
-                const response = await fetch('/api/v1/message?chat_id=' + currentConversation.id);
-                const data = await response.json();
-                messages = data.data;
-                renderMessages();
-            } catch (error) {
-                console.error("❌ Error al cargar los mensajes:", error);
-            }
-        }
+            // ✅ Actualizar el chat cada 5 segundos para recibir mensajes nuevos
+            setInterval(() => {
+                if (currentConversation.id !== 0) {
+                    loadMessagesFromConversation();
+                }
+            }, 5000);
+
 
         // ✅ Renderizar los mensajes en la vista
         function renderMessages() {
@@ -197,6 +204,7 @@
 
             chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll al último mensaje
         }
+
 
         // ✅ Enviar mensaje
         function sendMessage() {
