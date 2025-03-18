@@ -17,16 +17,60 @@ class GenerarPedidosAutomaticos extends Command
 
     public function handle()
     {
-        // Verificar si ya existe un pedido para el día actual
-        $fechaHoy = Carbon::now()->startOfDay(); // Inicio del día actual
-        $pedidoExistente = BodegaPedidosCosmica::whereDate('fecha_pedido', $fechaHoy)->first();
+        $fechaHoy = Carbon::now()->startOfDay();
+        $fechaAyer = Carbon::yesterday()->startOfDay();
 
-        if ($pedidoExistente) {
-            $this->info('Ya se generó un pedido para hoy.');
+        // ===================== Lógica para BodegaPedidosCosmica =====================
+        // Verificar si existe un pedido del día anterior con estatus 'Aprobada'
+        $pedidoAyerCosmica = BodegaPedidosCosmica::where('estatus', 'Aprobada')
+            ->whereDate('fecha_pedido', $fechaAyer)
+            ->first();
+
+        if ($pedidoAyerCosmica) {
+            // Cambiar el estatus del pedido del día anterior a 'Cancelada'
+            $pedidoAyerCosmica->update(['estatus' => 'Cancelada']);
+            $this->info('El pedido del día anterior en BodegaPedidosCosmica con estatus "Aprobada" ha sido cambiado a "Cancelada".');
+        }
+
+        // Verificar si ya existe un pedido para el día actual
+        $pedidoHoyCosmica = BodegaPedidosCosmica::whereDate('fecha_pedido', $fechaHoy)->first();
+
+        if ($pedidoHoyCosmica) {
+            $this->info('Ya existe un pedido en BodegaPedidosCosmica para el día de hoy. No se generará un nuevo pedido.');
+        } else {
+            // Generar un nuevo pedido para BodegaPedidosCosmica
+            $this->generarPedidoCosmica();
+        }
+
+        // ===================== Lógica para BodegaPedidos =====================
+        // Verificar si existe un pedido del día anterior con estatus 'Aprobada'
+        $pedidoAyer = BodegaPedidos::where('estatus', 'Aprobada')
+            ->whereDate('fecha_pedido', $fechaAyer)
+            ->first();
+
+        if ($pedidoAyer) {
+            // Cambiar el estatus del pedido del día anterior a 'Cancelada'
+            $pedidoAyer->update(['estatus' => 'Cancelada']);
+            $this->info('El pedido del día anterior en BodegaPedidos con estatus "Aprobada" ha sido cambiado a "Cancelada".');
+        }
+
+        // Verificar si ya existe un pedido para el día actual
+        $pedidoHoy = BodegaPedidos::whereDate('fecha_pedido', $fechaHoy)->first();
+
+        if ($pedidoHoy) {
+            $this->info('Ya existe un pedido en BodegaPedidos para el día de hoy. No se generará un nuevo pedido.');
             return 0;
         }
 
-        // Obtener productos con bajo stock
+        // Generar un nuevo pedido para BodegaPedidos
+        $this->generarPedidoNAS();
+
+        return 0;
+    }
+
+    private function generarPedidoCosmica()
+    {
+        // Obtener productos con bajo stock para BodegaPedidosCosmica
         $productosBajoStock = Products::where(function ($query) {
             $query->where('stock', '<', 60)
                 ->where(function ($subQuery) {
@@ -49,8 +93,8 @@ class GenerarPedidosAutomaticos extends Command
         ->get();
 
         if ($productosBajoStock->isEmpty()) {
-            $this->info('No hay productos con bajo stock.');
-            return 0;
+            $this->info('No hay productos con bajo stock en BodegaPedidosCosmica.');
+            return;
         }
 
         // Crear un nuevo pedido
@@ -79,15 +123,12 @@ class GenerarPedidosAutomaticos extends Command
             ]);
         }
 
-        // =================================  S T O C K  P A R A  C A T E G O R I A  N A S  =================================
-        $pedidoExistente = BodegaPedidos::whereDate('fecha_pedido', $fechaHoy)->first();
+        $this->info('Nuevo pedido generado con éxito en BodegaPedidosCosmica.');
+    }
 
-        if ($pedidoExistente) {
-            $this->info('Ya se generó un pedido para hoy.');
-            return 0;
-        }
-
-        // Obtener productos con bajo stock para la categoría NAS
+    private function generarPedidoNAS()
+    {
+        // Obtener productos con bajo stock para BodegaPedidos
         $productosBajoStock = Products::where(function ($query) {
             $query->where('categoria', '=', 'NAS')
                 ->where('subcategoria', '=', 'Producto')
@@ -122,11 +163,11 @@ class GenerarPedidosAutomaticos extends Command
         ->get();
 
         if ($productosBajoStock->isEmpty()) {
-            $this->info('No hay productos con bajo stock.');
-            return 0;
+            $this->info('No hay productos con bajo stock en BodegaPedidos.');
+            return;
         }
 
-        // Crear un nuevo pedido para la categoría NAS
+        // Crear un nuevo pedido
         $pedido = BodegaPedidos::create([
             'estatus' => 'Aprobada',
             'estatus_lab' => 'Aprobada',
@@ -136,7 +177,6 @@ class GenerarPedidosAutomaticos extends Command
         ]);
 
         foreach ($productosBajoStock as $producto) {
-            // Determinar el umbral de stock según las condiciones
             $umbral = 20; // Valor predeterminado para productos no especificados
 
             if (stripos($producto->nombre, '1.3 kg') !== false || stripos($producto->nombre, '1300 g') !== false) {
@@ -166,7 +206,6 @@ class GenerarPedidosAutomaticos extends Command
             ]);
         }
 
-        $this->info('Pedido generado con éxito.');
-        return 0;
+        $this->info('Nuevo pedido generado con éxito en BodegaPedidos.');
     }
 }
