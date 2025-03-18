@@ -42,25 +42,6 @@ class CosmicaDistribuidoraController extends Controller
                     })
                     ->get();
 
-
-
-                    $duplicados = Cosmikausers::select('id_cliente')
-                        ->groupBy('id_cliente')
-                        ->havingRaw('COUNT(*) > 1')
-                        ->pluck('id_cliente');
-
-                        foreach ($duplicados as $idCliente) {
-                            // Obtener todos los registros duplicados para este id_cliente, ordenados por fecha de creación descendente
-                            $registros = Cosmikausers::where('id_cliente', $idCliente)
-                                ->orderBy('created_at', 'desc') // O usa 'id' si no tienes 'created_at'
-                                ->get();
-
-                            // Conservar el registro más reciente y eliminar los demás
-                            $registros->skip(1)->each(function ($registro) {
-                                $registro->delete();
-                            });
-                        }
-
         return view('cosmica.distribuidoras.index',compact('usercosmika', 'clientes', 'usuarios_por_vencer'));
     }
 
