@@ -14,6 +14,7 @@ use App\Http\Controllers\ChatController;
 
 use App\Http\Controllers\PruebaApiController;
 use App\Http\Controllers\BreadcrumbController;
+use App\Http\Controllers\WhatsAppWebhookController;
 
 Route::get('api/preparacion', [PruebaApiController::class, 'index_preparacion'])->name('index_preparacion.api');
 Route::get('envia/shipments', [ShipmentController::class, 'getShipments'])->name('shipments.index');
@@ -1005,3 +1006,6 @@ Route::get('/whatsapp', [ChatController::class, 'inicio']);
     Route::get('/whatsapp/ajax/messenger2', [ChatController::class, 'showMessenger2']);
 
     Route::get('/api/v1/message/{chat_id}', [ChatController::class, 'loadMessages']);
+    
+    Route::post('/whatsapp/webhook', [WhatsAppWebhookController::class, 'handleWebhook']);
+    Route::get('/whatsapp/webhook', [WhatsAppWebhookController::class, 'verifyWebhook']);

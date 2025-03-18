@@ -12,8 +12,6 @@ class WebhookController extends Controller
             return $request->hub_challenge;
         }
 
-        dd($request);
-
         return response()->json(['error' => 'Invalid verify token'], 400);
     }
 
