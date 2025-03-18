@@ -42,6 +42,25 @@ class CosmicaDistribuidoraController extends Controller
                     })
                     ->get();
 
+
+
+                    $duplicados = Cosmikausers::select('id_cliente')
+                        ->groupBy('id_cliente')
+                        ->havingRaw('COUNT(*) > 1')
+                        ->pluck('id_cliente');
+
+                        foreach ($duplicados as $idCliente) {
+                            // Obtener todos los registros duplicados para este id_cliente, ordenados por fecha de creación descendente
+                            $registros = Cosmikausers::where('id_cliente', $idCliente)
+                                ->orderBy('created_at', 'desc') // O usa 'id' si no tienes 'created_at'
+                                ->get();
+
+                            // Conservar el registro más reciente y eliminar los demás
+                            $registros->skip(1)->each(function ($registro) {
+                                $registro->delete();
+                            });
+                        }
+
         return view('cosmica.distribuidoras.index',compact('usercosmika', 'clientes', 'usuarios_por_vencer'));
     }
 
@@ -82,10 +101,12 @@ class CosmicaDistribuidoraController extends Controller
             if (User::where('telefono', $request->telefono)->exists()) {
                 $user = User::where('telefono', $request->telefono)->first();
                 $user->name = $request->get('name') . " " . $request->get('apellido');
+                $user->state = $request->get('state');
                 $user->update();
             } else {
                 $user = User::where('email', $request->email)->first();
                 $user->name = $request->get('name') . " " . $request->get('apellido');
+                $user->state = $request->get('state');
                 $user->update();
             }
             $payer = $user;
@@ -131,6 +152,7 @@ class CosmicaDistribuidoraController extends Controller
             $usercosmika->direccion_foto = $fileName;
         }
 
+        $usercosmika->direccion_local = $request->get('direccion_local');
         $usercosmika->direccion_rs_face = $request->get('direccion_rs_face');
         $usercosmika->direccion_rs_insta = $request->get('direccion_rs_insta');
         $usercosmika->direccion_rs_whats = $request->get('direccion_rs_whats');
