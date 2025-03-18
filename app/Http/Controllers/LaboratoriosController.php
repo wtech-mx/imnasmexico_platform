@@ -72,7 +72,7 @@ class LaboratoriosController extends Controller
                         $pedido->fecha_aprovado_lab = now();
                         $pedido->save();
                     }else{
-                        $pedido->estatus_lab = 'Confirmado';
+                        $pedido->estatus_lab = 'Finalizado';
                         $pedido->fecha_aprovado_lab = now();
                         $pedido->save();
                     }
@@ -155,7 +155,7 @@ class LaboratoriosController extends Controller
                         $pedido->fecha_aprovado_lab = now();
                         $pedido->save();
                     }else{
-                        $pedido->estatus_lab = 'Confirmado';
+                        $pedido->estatus_lab = 'Finalizado';
                         $pedido->fecha_aprovado_lab = now();
                         $pedido->save();
                     }
