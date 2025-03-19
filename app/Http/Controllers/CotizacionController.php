@@ -622,8 +622,6 @@ class CotizacionController extends Controller
             }
         }
 
-
-
         $pdf = \PDF::loadView('admin.notas_productos.pdf_nota', compact('nota', 'today', 'nota_productos'));
         if($nota->folio == null){
             $folio = $nota->id;

@@ -144,6 +144,13 @@
         </tbody>
     </table>
 
+    @if ($nota->id_usuario == NULL)
+        <label style="font-size: 20px"><b>Sin numero del cliente</b></label>
+    @else
+        <label style="font-size: 20px"><b>Numero de cliente: </b>A{{ $nota->User->id }}</label>
+    @endif
+
+
     <table class="table table-bordered border-primary">
         <thead class="text-center {{ $usercosmika == NULL ? 'table-cotizacion' : 'table-distribuidora' }}">
             <tr>

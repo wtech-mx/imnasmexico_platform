@@ -40,7 +40,7 @@
                                                     <option value="">Seleccionar cliente</option>
                                                     @foreach ($clientes as $item)
                                                         <option value="{{ $item->id }}" >
-                                                            {{ $item->name }} / {{ $item->telefono }}
+                                                            A{{ $item->id }} - {{ $item->name }} / {{ $item->telefono }}
                                                         </option>
                                                     @endforeach
                                                 </select>

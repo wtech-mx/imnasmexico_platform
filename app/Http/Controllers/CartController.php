@@ -12,6 +12,7 @@ use MercadoPago\{Exception, SDK, Preference, Item};
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Models\Meli;
+use App\Models\ProductosBundleId;
 use Hash;
 use Illuminate\Support\Facades\Redirect;
 use Throwable;
@@ -199,13 +200,34 @@ class CartController extends Controller
             $order_cosmica->save();
 
             foreach (session('cart_productos') as $id => $details) {
-                $order_ticket = new OrdersCosmicaOnline;
-                $order_ticket->id_order = $order_cosmica->id;
-                $order_ticket->id_producto = $details['id_producto'];
-                $order_ticket->nombre = $details['nombre'];
-                $order_ticket->precio = $details['precio'];
-                $order_ticket->cantidad = $details['cantidad'];
-                $order_ticket->save();
+
+                $producto = Products::where('id', $details['id_producto'])->first();
+
+                if ($producto) {
+                    if ($producto && $producto->subcategoria == 'Kit') {
+                        $productos_bundle = ProductosBundleId::where('id_product', $producto->id)->get();
+
+                        foreach ($productos_bundle as $producto_bundle) {
+                            $order_ticket = new OrdersCosmicaOnline;
+                            $order_ticket->id_order = $order_cosmica->id;
+                            $order_ticket->nombre = $producto_bundle->producto;
+                            $order_ticket->id_producto = $producto_bundle->id_producto;
+                            $order_ticket->precio = '0';
+                            $order_ticket->cantidad = $producto_bundle->cantidad;
+                            $order_ticket->kit = '1';
+                            $order_ticket->num_kit = $producto_bundle->id_product;
+                            $order_ticket->save();
+                        }
+                    }else{
+                        $order_ticket = new OrdersCosmicaOnline;
+                        $order_ticket->id_order = $order_cosmica->id;
+                        $order_ticket->id_producto = $details['id_producto'];
+                        $order_ticket->nombre = $details['nombre'];
+                        $order_ticket->precio = $details['precio'];
+                        $order_ticket->cantidad = $details['cantidad'];
+                        $order_ticket->save();
+                    }
+                }
             }
             // Redirigir al usuario al proceso de pago de Mercado Pago
             return Redirect::to($preference->init_point);
@@ -408,7 +430,7 @@ class CartController extends Controller
 
         $dominio = $request->getHost();
         $response = Http::get("https://api.mercadopago.com/v1/payments/$payment_id" . "?access_token=APP_USR-8901800557603427-041420-99b569dfbf4e6ce9160fc673d9a47b1e-1115271504");
-        
+
         $response = json_decode($response);
         if (isset($response->error)) {
             return redirect()->route('order_cosmica.show', $order->code)->with('error', 'Hubo un problema al verificar el pago.');

@@ -130,6 +130,12 @@
         </tbody>
     </table>
 
+    @if ($nota->id_usuario == NULL)
+        <label style="font-size: 20px"><b>Sin numero del cliente</b></label>
+    @else
+        <label style="font-size: 20px"><b>Numero de cliente: </b>A{{ $nota->User->id }}</label>
+    @endif
+
     <div class="text-center">
         @if ($nota->id_kit != NULL && $nota->id_kit2 == NULL)
             <h3>{{$nota->Kit->nombre}}</h3>
