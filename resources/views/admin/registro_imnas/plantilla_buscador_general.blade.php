@@ -210,22 +210,24 @@
                     'Diplomado en Drenaje Linfático Facial y Corporal',
                     'Micropuntura Brasileña',
                 ]))
-                    <a href="{{ route('folio.index_titulo',$tickets_externo->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
+                    <a href="{{ route('folio.index_titulo',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
                         Título Honorífico
                     </a>
                 @elseif(in_array($tickets_externo->curso, [
                     'Masoterapia en Técnicas de Masaje Relajante, Descontracturante y Deportivo',
                 ]))
-                    <a href="{{ route('folio.index_titulo',$tickets_externo->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
+                    <a href="{{ route('folio.index_titulo',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">
                         Título Honorífico
                     </a>
-                    <a href="{{ route('folio.index_diploma',$tickets_externo->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma de Profesionalización</a>
+                    <a href="{{ route('folio.index_diploma',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">
+                        Diploma de Profesionalización
+                    </a>
 
                 @else
-                    <a href="{{ route('folio.index_cedula',$tickets_externo->id) }}" class="text-center btn btn-xs mt-3 w-100 text-dark" style="background-color: #DDD78D">Cédula de Identidad de Papel</a>
-                    <a href="{{ route('folio.index_crednecial',$tickets_externo->id) }}" class="text-center btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
-                    <a href="{{ route('folio.index_diploma',$tickets_externo->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma de Profesionalización</a>
-                    <a href="{{ route('folio.index_titulo',$tickets_externo->id) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Título Honorífico</a>
+                    <a href="{{ route('folio.index_cedula',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-dark" style="background-color: #DDD78D">Cédula de Identidad de Papel</a>
+                    <a href="{{ route('folio.index_crednecial',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-dark" style="background-color: #DCBF85">Credencial Plastificada</a>
+                    <a href="{{ route('folio.index_diploma',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #8B635C">Diploma de Profesionalización</a>
+                    <a href="{{ route('folio.index_titulo',$tickets_externo->folio) }}" class="text-center btn btn-xs mt-3 w-100 text-white" style="background-color: #60594D">Título Honorífico</a>
                 @endif
 
 
