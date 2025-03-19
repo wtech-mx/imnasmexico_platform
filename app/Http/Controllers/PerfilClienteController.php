@@ -56,13 +56,38 @@ class PerfilClienteController extends Controller
         return response()->json($results);
     }
 
+    public function searchId(Request $request){
+        $search = $request->get('q'); // Obtener el término de búsqueda
+
+        $clientes = User::where('id', 'LIKE', "%$search%") // Buscar por ID
+            ->orderBy('id', 'asc')
+            ->get();
+
+        return response()->json($clientes);
+    }
+
     public function buscador(Request $request)
     {
         $phone = $request->phone;
         $name = $request->name;
+        $ID = $request->id_clienta;
 
         $clientes = User::where('cliente', '=', '1')->orderBy('id', 'DESC')->get();
         $cliente = null;
+
+        if ($ID !== null) {
+            $cliente = User::where('cliente', '=', '1')->where('id', '=', $ID)->first();
+            $tipo = 'Usuario';
+            if (!$cliente) {
+                $cliente = NotasProductos::where('id_usuario', '=', $ID)->first();
+                $tipo = 'Nota';
+            }
+
+            if (!$cliente) {
+                $cliente = NotasProductosCosmica::where('id_usuario', '=', $ID)->first();
+                $tipo = 'Nota';
+            }
+        }
 
         if ($phone !== null) {
             $cliente = User::where('cliente', '=', '1')->where('telefono', '=', $phone)->first();

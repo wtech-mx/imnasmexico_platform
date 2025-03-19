@@ -863,6 +863,7 @@ Route::group(['middleware' => ['auth']], function() {
 
         Route::get('/perfil/cliente/search-phone', [App\Http\Controllers\PerfilClienteController::class, 'searchPhone'])->name('peril_cliente.searchPhone');
         Route::get('/perfil/cliente/search-name', [App\Http\Controllers\PerfilClienteController::class, 'searchName'])->name('peril_cliente.searchName');
+        Route::get('/perfil-cliente/search-id', [App\Http\Controllers\PerfilClienteController::class, 'searchId'])->name('peril_cliente.searchId');
 
         Route::post('/perfil/cliente/reporte/cosmica/create', [App\Http\Controllers\PerfilClienteController::class, 'reporte_cosmica'])->name('peril_cliente.reporte_cosmica');
         Route::post('/perfil/cliente/reporte/nas/create', [App\Http\Controllers\PerfilClienteController::class, 'reporte_nas'])->name('peril_cliente.reporte_nas');
@@ -1012,6 +1013,6 @@ Route::get('/whatsapp', [ChatController::class, 'inicio']);
     Route::get('/whatsapp/ajax/messenger2', [ChatController::class, 'showMessenger2']);
 
     Route::get('/api/v1/message/{chat_id}', [ChatController::class, 'loadMessages']);
-    
+
     Route::post('/whatsapp/webhook', [WhatsAppWebhookController::class, 'handleWebhook']);
     Route::get('/whatsapp/webhook', [WhatsAppWebhookController::class, 'verifyWebhook']);

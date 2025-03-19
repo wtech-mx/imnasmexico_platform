@@ -20,6 +20,10 @@
                                 <form action="{{ route('peril_cliente.buscador') }}" method="GET" >
                                     <div class="row">
                                         <div class="col-3">
+                                            <label for="user_id">Seleccionar # Cliente:</label>
+                                            <select class="form-control id" name="id_clienta" id="id_clienta"></select>
+                                        </div>
+                                        <div class="col-3">
                                             <label for="user_id">Seleccionar Cliente:</label>
                                             <select class="form-control name" name="name" id="name"></select>
                                         </div>
@@ -220,6 +224,36 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
+        $('.id').select2({
+            placeholder: 'Buscar ID',
+            ajax: {
+                url: '{{ route('peril_cliente.searchId') }}', // Ruta para buscar por ID
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    // Si el usuario escribe "A100", eliminamos la "A" antes de enviar la consulta
+                    let searchTerm = params.term;
+                    if (searchTerm && searchTerm.startsWith('A')) {
+                        searchTerm = searchTerm.substring(1); // Eliminar la "A"
+                    }
+                    return {
+                        q: searchTerm // Enviar el término de búsqueda al backend
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return {
+                                text: 'A' + item.id, // Mostrar el ID con "A"
+                                id: item.id          // Usar el ID como valor
+                            }
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+
         $('.phone').select2({
             placeholder: 'Buscar Teléfono',
             ajax: {
