@@ -993,7 +993,7 @@ Route::post('cosmica/protocolo/{id}', [App\Http\Controllers\CotizacionCosmicaCon
 
 
 Route::get('/messenger', fn() => view('messenger'));
-Route::ResourceView('template');
+// Route::ResourceView('template');
 
 Route::get('/whatsapp', [ChatController::class, 'inicio']);
 
@@ -1012,6 +1012,6 @@ Route::get('/whatsapp', [ChatController::class, 'inicio']);
     Route::get('/whatsapp/ajax/messenger2', [ChatController::class, 'showMessenger2']);
 
     Route::get('/api/v1/message/{chat_id}', [ChatController::class, 'loadMessages']);
-    
+
     Route::post('/whatsapp/webhook', [WhatsAppWebhookController::class, 'handleWebhook']);
     Route::get('/whatsapp/webhook', [WhatsAppWebhookController::class, 'verifyWebhook']);

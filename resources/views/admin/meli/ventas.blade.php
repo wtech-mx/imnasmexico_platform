@@ -259,7 +259,16 @@
                                                         <a href="{{ route('cotizacion_cosmica.meli_show', ['id' => $order['cosmica_nota_id'], 'order_id' => $identifier]) }}" class="btn text-white btn-sm" style="background: #322338" target="_blank">Ver Pedido</a>
                                                     @endif
 
-                                                    @if (!Str::contains($order['item_title'], 'Kit De Productos Cosmica'))
+                                                    {{-- @if (!Str::contains($order['item_title'], 'Kit De Productos Cosmica'))
+                                                        <a href="{{ route('cotizacion_cosmica.meli_show_order', ['order_id' => $order['shipping_id']]) }}"
+                                                        class="btn text-white btn-sm"
+                                                        style="background: #eaf209"
+                                                        target="_blank">
+                                                            Ver Pedido Meli
+                                                        </a>
+                                                    @endif --}}
+
+                                                    @if (!Str::contains($order['item_title'], 'Kit De Productos Cosmica') && isset($order['shipping_id']))
                                                         <a href="{{ route('cotizacion_cosmica.meli_show_order', ['order_id' => $order['shipping_id']]) }}"
                                                         class="btn text-white btn-sm"
                                                         style="background: #eaf209"
