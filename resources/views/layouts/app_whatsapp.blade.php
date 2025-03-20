@@ -28,7 +28,7 @@
 /* Dropdown de emojis oculto por defecto */
 .emoji-dropdown {
     position: absolute;
-    bottom: 40px; /* Se despliega hacia arriba */
+    bottom: 66px; /* Se despliega hacia arriba */
     left: 0;
     background: white;
     border-radius: 8px;
@@ -36,8 +36,8 @@
     padding: 10px;
     display: none; /* Oculto por defecto */
     flex-wrap: wrap;
-    width: 180px;
-    max-height: 150px;
+    width: 100%;
+    max-height: 200px;
     overflow-y: auto;
     z-index: 100;
 }

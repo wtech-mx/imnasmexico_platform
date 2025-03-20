@@ -46,30 +46,7 @@
     <!-- CHAT INPUT -->
     <div class="chat_input">
         <ion-icon id="emoji-button" name="happy-outline"></ion-icon>
-        <div id="emoji-dropdown" class="emoji-dropdown">
-            <span class="emoji">😐</span>
-            <span class="emoji">😑</span>
-            <span class="emoji">😶</span>
-            <span class="emoji">🙄</span>
-            <span class="emoji">😏</span>
-            <span class="emoji">😣</span>
-            <span class="emoji">😥</span>
-            <span class="emoji">😮</span>
-            <span class="emoji">🤐</span>
-            <span class="emoji">😯</span>
-            <span class="emoji">😪</span>
-            <span class="emoji">😫</span>
-            <span class="emoji">😴</span>
-            <span class="emoji">😌</span>
-            <span class="emoji">😛</span>
-            <span class="emoji">😜</span>
-            <span class="emoji">😝</span>
-            <span class="emoji">🤤</span>
-            <span class="emoji">😒</span>
-            <span class="emoji">😓</span>
-            <span class="emoji">😔</span>
-            <span class="emoji">😕</span>
-        </div>
+        @include('whatsapp.components.emojis')
         <input id="message-input" type="text" placeholder="Escribe un mensaje...">
         <button onclick="sendMessage()">Enviar</button>
         <ion-icon name="mic"></ion-icon>
