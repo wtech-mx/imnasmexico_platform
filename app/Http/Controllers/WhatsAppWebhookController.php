@@ -32,34 +32,36 @@ class WhatsAppWebhookController extends Controller
 
         $data = $request->all();
 
-        // Verificar si el webhook tiene mensajes de WhatsApp
         if (isset($data['entry'][0]['changes'][0]['value']['messages'])) {
             foreach ($data['entry'][0]['changes'][0]['value']['messages'] as $message) {
-                $phoneNumber = $message['from']; // Número del remitente
-                $text = $message['text']['body'] ?? null; // Contenido del mensaje
+                $phoneNumber = $message['from'] ?? null;
+                $text = $message['text']['body'] ?? null;
                 $timestamp = $message['timestamp'] ?? now()->timestamp;
-                $messageId = $message['id'];
+                $messageId = $message['id'] ?? null;
 
-                if ($text) {
-                    // Buscar o crear la conversación
-                    $chat = Chat::firstOrCreate([
-                        'client_phone' => $phoneNumber
-                    ]);
-
-                    // Guardar el mensaje en la base de datos
-                    Message::create([
-                        'chat_id' => $chat->id,
-                        'message_id' => $messageId,
-                        'content' => $text,
-                        'direction' => 'toApp', // Indica que es un mensaje entrante
-                        'timestamp' => $timestamp
-                    ]);
-
-                    Log::info("📥 Mensaje guardado en la BD: {$text}");
+                // 🛑 Verificar que todos los datos existen
+                if (!$phoneNumber || !$text || !$messageId) {
+                    Log::error("❌ Falta información en el mensaje", $message);
+                    continue;
                 }
+
+                // 📌 Buscar o crear el chat
+                $chat = Chat::firstOrCreate(['client_phone' => $phoneNumber]);
+
+                // 📌 Guardar mensaje en la base de datos
+                $msg = Message::create([
+                    'chat_id' => $chat->id,
+                    'message_id' => $messageId,
+                    'body' => $text,
+                    'direction' => 'toApp',
+                    'timestamp' => $timestamp
+                ]);
+
+                Log::info("📥 Mensaje guardado en la BD:", $msg->toArray());
             }
         }
 
         return response()->json(['status' => 'success']);
     }
+
 }
