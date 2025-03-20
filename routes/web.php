@@ -1014,5 +1014,5 @@ Route::get('/whatsapp', [ChatController::class, 'inicio']);
 
     Route::get('/api/v1/message/{chat_id}', [ChatController::class, 'loadMessages']);
 
-    Route::post('/whatsapp/webhook', [WhatsAppWebhookController::class, 'handleWebhook']);
-    Route::get('/whatsapp/webhook', [WhatsAppWebhookController::class, 'verifyWebhook']);
+    Route::get('/whatsapp/webhook', [WhatsAppWebhookController::class, 'webhook']);
+    Route::post('/whatsapp/webhook', [WhatsAppWebhookController::class, 'recibe']);
