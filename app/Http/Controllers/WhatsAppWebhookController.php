@@ -28,7 +28,7 @@ class WhatsAppWebhookController extends Controller
       /*
       * RECEPCION DE MENSAJES
       */
-      public function recibe()
+      public function recibe(Request $request)
       {
         try {
             // 1️⃣ Capturar el JSON completo del Webhook
