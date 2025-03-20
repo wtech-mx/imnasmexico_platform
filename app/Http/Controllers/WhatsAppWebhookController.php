@@ -28,12 +28,34 @@ class WhatsAppWebhookController extends Controller
      */
     public function handleWebhook(Request $request)
     {
-        // 📌 Guardar el webhook en un archivo de texto en `public/` para que sea accesible desde el navegador
-        $logFile = public_path('webhook_log.txt');
-        file_put_contents($logFile, json_encode($request->all(), JSON_PRETTY_PRINT) . "\n\n", FILE_APPEND);
+        $data = json_encode($request->all(), JSON_PRETTY_PRINT);
 
-        return response()->json(['status' => 'success']);
+        // ✅ 1. Guardar en storage/logs/webhook_log.txt
+        try {
+            $logFile = storage_path('logs/webhook_log.txt');
+            file_put_contents($logFile, now() . " - Webhook recibido:\n" . $data . "\n\n", FILE_APPEND);
+        } catch (\Exception $e) {
+            Log::error("❌ Error escribiendo en storage/logs/webhook_log.txt: " . $e->getMessage());
+        }
+
+        // ✅ 2. Guardar en public/webhook_log.txt (para verlo desde el navegador)
+        try {
+            $publicLogFile = public_path('webhook_log.txt');
+            file_put_contents($publicLogFile, now() . " - Webhook recibido:\n" . $data . "\n\n", FILE_APPEND);
+        } catch (\Exception $e) {
+            Log::error("❌ Error escribiendo en public/webhook_log.txt: " . $e->getMessage());
+        }
+
+        // ✅ 3. Guardar en el Log de Laravel
+        Log::info("📩 Webhook recibido:", $request->all());
+
+        // ✅ 4. Responder con los datos del webhook para verificar que llega
+        return response()->json([
+            'status' => 'Webhook recibido!',
+            'data' => $request->all()
+        ], 200);
     }
+
 
 
 
