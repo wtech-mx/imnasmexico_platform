@@ -45,7 +45,31 @@
 
     <!-- CHAT INPUT -->
     <div class="chat_input">
-        <ion-icon name="happy-outline"></ion-icon>
+        <ion-icon id="emoji-button" name="happy-outline"></ion-icon>
+        <div id="emoji-dropdown" class="emoji-dropdown">
+            <span class="emoji">😐</span>
+            <span class="emoji">😑</span>
+            <span class="emoji">😶</span>
+            <span class="emoji">🙄</span>
+            <span class="emoji">😏</span>
+            <span class="emoji">😣</span>
+            <span class="emoji">😥</span>
+            <span class="emoji">😮</span>
+            <span class="emoji">🤐</span>
+            <span class="emoji">😯</span>
+            <span class="emoji">😪</span>
+            <span class="emoji">😫</span>
+            <span class="emoji">😴</span>
+            <span class="emoji">😌</span>
+            <span class="emoji">😛</span>
+            <span class="emoji">😜</span>
+            <span class="emoji">😝</span>
+            <span class="emoji">🤤</span>
+            <span class="emoji">😒</span>
+            <span class="emoji">😓</span>
+            <span class="emoji">😔</span>
+            <span class="emoji">😕</span>
+        </div>
         <input id="message-input" type="text" placeholder="Escribe un mensaje...">
         <button onclick="sendMessage()">Enviar</button>
         <ion-icon name="mic"></ion-icon>
@@ -58,200 +82,218 @@
 <script>
     // ✅ Asegurar que el código se ejecute después de que el DOM esté listo
     document.addEventListener("DOMContentLoaded", function () {
-        console.log("✅ DOM completamente cargado.");
+    console.log("✅ Script cargado correctamente.");
 
-        // ✅ Seleccionamos los elementos del DOM
-        const messageInput = document.getElementById('message-input');
-        const searchInput = document.getElementById('search');
-        const conversationList = document.getElementById('conversation-list');
-        const chatbox = document.getElementById('chatbox');
-        const chatTitle = document.getElementById('chat-title');
-        const currentConversationPhone = document.getElementById('current-conversation-phone');
+    // 📌 Variables Globales
+    const messageInput = document.getElementById('message-input');
+    const searchInput = document.getElementById('search');
+    const conversationList = document.getElementById('conversation-list');
+    const chatbox = document.getElementById('chatbox');
+    const chatTitle = document.getElementById('chat-title');
+    const currentConversationPhone = document.getElementById('current-conversation-phone');
 
-        if (!searchInput) {
-            console.error("❌ Error: No se encontró el campo de búsqueda 'search'");
+    // 📌 Variables para el Emoji Picker
+    const emojiButton = document.getElementById('emoji-button');
+    const emojiDropdown = document.getElementById('emoji-dropdown');
+
+    let conversations = [];
+    let currentConversation = { id: 0 };
+    let messages = [];
+
+    if (!searchInput) {
+        console.error("❌ Error: No se encontró el campo de búsqueda 'search'");
+        return;
+    }
+
+    // ✅ Cargar conversaciones desde API
+    async function loadConversations() {
+        try {
+            const response = await fetch('/api/v1/chat?client_phone=' + searchInput.value);
+            const data = await response.json();
+            conversations = data.data;
+            renderConversations();
+
+            if (currentConversation.id === 0 && conversations.length > 0) {
+                currentConversation = conversations[0];
+                loadMessagesFromConversation();
+            }
+        } catch (error) {
+            console.error("❌ Error al cargar conversaciones:", error);
+        }
+    }
+
+    // ✅ Renderizar la lista de conversaciones
+    function renderConversations() {
+        if (!conversationList) {
+            console.error("❌ Error: No se encontró el contenedor de conversaciones 'conversation-list'");
             return;
         }
 
-        let conversations = [];
-        let currentConversation = { id: 0 };
-        let messages = [];
+        conversationList.innerHTML = '';
 
-        // ✅ Cargar conversaciones
-        async function loadConversations() {
-            try {
-                const response = await fetch('/api/v1/chat?client_phone=' + searchInput.value);
-                const data = await response.json();
-                conversations = data.data;
-                renderConversations();
+        conversations.forEach(conversation => {
+            const messagesArray = Array.isArray(conversation.messages) ? conversation.messages : [];
+            const lastMessage = messagesArray.length > 0 ? messagesArray[0].content : "No hay mensajes aún";
+            const lastMessageTime = messagesArray.length > 0
+                ? new Date(messagesArray[0].timestamp * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
+                : "";
 
-                if (currentConversation.id === 0 && conversations.length > 0) {
-                    currentConversation = conversations[0];
-                    loadMessagesFromConversation();
-                }
-            } catch (error) {
-                console.error("❌ Error al cargar conversaciones:", error);
-            }
-        }
+            const chatItem = document.createElement('div');
+            chatItem.classList.add('block', 'unread', 'chat-item');
+            chatItem.dataset.chatId = conversation.id;
+            chatItem.dataset.clientPhone = conversation.client_phone;
 
-        // ✅ Renderizar la lista de conversaciones
-        function renderConversations() {
-            if (!conversationList) {
-                console.error("❌ Error: No se encontró el contenedor de conversaciones 'conversation-list'");
-                return;
-            }
-
-            conversationList.innerHTML = '';
-
-            conversations.forEach(conversation => {
-                // ✅ Asegurar que messages existe y es un array
-                const messagesArray = Array.isArray(conversation.messages) ? conversation.messages : [];
-
-                // ✅ Obtener el último mensaje si existe
-                const lastMessage = messagesArray.length > 0 ? messagesArray[0].content : "No hay mensajes aún";
-                const lastMessageTime = messagesArray.length > 0
-                    ? new Date(messagesArray[0].timestamp * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
-                    : "";
-
-                const chatItem = document.createElement('div');
-                chatItem.classList.add('block', 'unread', 'chat-item');
-                chatItem.dataset.chatId = conversation.id;
-                chatItem.dataset.clientPhone = conversation.client_phone;
-
-                chatItem.innerHTML = `
-                    <div class="imgBox">
-                        <img src="{{ asset('images/img2.jpg') }}" class="cover" alt="">
+            chatItem.innerHTML = `
+                <div class="imgBox">
+                    <img src="{{ asset('images/img2.jpg') }}" class="cover" alt="">
+                </div>
+                <div class="details">
+                    <div class="listHead">
+                        <p class="time">${lastMessageTime}</p>
                     </div>
-                    <div class="details">
-                        <div class="listHead">
-                            <p class="time">${lastMessageTime}</p>
-                        </div>
-                        <div class="listHead">
-                            <h6>${conversation.client_phone}</h6>
-                        </div>
-                        <div class="message_p">
-                            <p>${lastMessage}</p>
-                        </div>
+                    <div class="listHead">
+                        <h6>${conversation.client_phone}</h6>
                     </div>
-                `;
+                    <div class="message_p">
+                        <p>${lastMessage}</p>
+                    </div>
+                </div>
+            `;
 
-                chatItem.addEventListener('click', function () {
-                    setConversation(conversation);
-                });
-
-                conversationList.appendChild(chatItem);
+            chatItem.addEventListener('click', function () {
+                setConversation(conversation);
             });
+
+            conversationList.appendChild(chatItem);
+        });
+    }
+
+    // ✅ Seleccionar conversación y cargar mensajes
+    function setConversation(conversation) {
+        if (!conversation) {
+            console.error("❌ Error: conversación inválida.");
+            return;
         }
 
-        // ✅ Seleccionar conversación y cargar mensajes
-        function setConversation(conversation) {
-            if (!conversation) {
-                console.error("❌ Error: conversación inválida.");
-                return;
-            }
+        currentConversation = conversation;
 
-            currentConversation = conversation;
+        if (currentConversationPhone) currentConversationPhone.textContent = conversation.client_phone;
+        if (chatTitle) chatTitle.textContent = conversation.client_phone;
 
-            if (currentConversationPhone) currentConversationPhone.textContent = conversation.client_phone;
-            if (chatTitle) chatTitle.textContent = conversation.client_phone;
+        console.log("📩 Chat seleccionado:", currentConversation.id, currentConversation.client_phone);
+        loadMessagesFromConversation();
+    }
 
-            console.log("📩 Chat seleccionado:", currentConversation.id, currentConversation.client_phone);
+    // ✅ Cargar mensajes de la conversación actual
+    async function loadMessagesFromConversation() {
+        if (!currentConversation.id) {
+            console.error("❌ Error: No hay conversación seleccionada.");
+            return;
+        }
+
+        fetch(`/api/v1/message/${currentConversation.id}`)
+            .then(response => response.json())
+            .then(data => {
+                messages = data.data;
+                renderMessages();
+            })
+            .catch(error => console.error("❌ Error al cargar los mensajes:", error));
+    }
+
+    // ✅ Auto-Actualizar el chat cada 5 segundos
+    setInterval(() => {
+        if (currentConversation.id !== 0) {
             loadMessagesFromConversation();
         }
+    }, 5000);
 
-        // ✅ Cargar mensajes de la conversación actual
-        async function loadMessagesFromConversation() {
-            if (!currentConversation.id) {
-                console.error("❌ Error: No hay conversación seleccionada.");
-                return;
-            }
-
-            fetch(`/api/v1/message/${currentConversation.id}`)
-                .then(response => response.json())
-                .then(data => {
-                    messages = data.data;
-                    renderMessages();
-                })
-                .catch(error => console.error("❌ Error al cargar los mensajes:", error));
+    // ✅ Renderizar los mensajes en la vista
+    function renderMessages() {
+        if (!chatbox) {
+            console.error("❌ Error: No se encontró el contenedor de mensajes 'chatbox'");
+            return;
         }
 
-        // ✅ Actualizar el chat cada 5 segundos para recibir mensajes nuevos
-        setInterval(() => {
-            if (currentConversation.id !== 0) {
-                loadMessagesFromConversation();
-            }
-        }, 5000);
+        chatbox.innerHTML = '';
 
-        // ✅ Renderizar los mensajes en la vista
-        function renderMessages() {
-            if (!chatbox) {
-                console.error("❌ Error: No se encontró el contenedor de mensajes 'chatbox'");
-                return;
-            }
+        messages.forEach(message => {
+            let messageText = message.body;
 
-            chatbox.innerHTML = '';
-
-            messages.forEach(message => {
-                let messageText = message.body;
-
-                try {
-                    // 📌 Intentar parsear el JSON si es un objeto válido
-                    const parsedMessage = JSON.parse(message.body);
-                    if (parsedMessage.text && parsedMessage.text.body) {
-                        messageText = parsedMessage.text.body; // Extraer el contenido del mensaje
-                    }
-                } catch (error) {
-                    console.warn("⚠️ No se pudo parsear el JSON del mensaje, usando el valor original.");
+            try {
+                const parsedMessage = JSON.parse(message.body);
+                if (parsedMessage.text && parsedMessage.text.body) {
+                    messageText = parsedMessage.text.body;
                 }
-
-                const div = document.createElement('div');
-                div.classList.add('message', message.direction === 'toApp' ? 'friend_msg' : 'my_msg');
-                div.innerHTML = `<p>${messageText} <br><span>${new Date(message.timestamp * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</span></p>`;
-                chatbox.appendChild(div);
-            });
-
-            chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll al último mensaje
-        }
-
-        // ✅ Enviar mensaje
-        function sendMessage() {
-            fetch('/api/v1/message/send', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    waba_phone_id: currentConversation.waba_phone_id,
-                    to: currentConversation.client_phone,
-                    message: {
-                        type: 'text',
-                        text: {
-                            preview_url: false,
-                            body: messageInput.value
-                        }
-                    }
-                })
-            }).then(response => response.json())
-                .then(data => {
-                    messageInput.value = '';
-                    loadMessagesFromConversation();
-                });
-        }
-
-        // ✅ Enviar mensaje al presionar Enter
-        messageInput.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                sendMessage();
+            } catch (error) {
+                console.warn("⚠️ No se pudo parsear el JSON del mensaje, usando el valor original.");
             }
+
+            const div = document.createElement('div');
+            div.classList.add('message', message.direction === 'toApp' ? 'friend_msg' : 'my_msg');
+            div.innerHTML = `<p>${messageText} <br><span>${new Date(message.timestamp * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</span></p>`;
+            chatbox.appendChild(div);
         });
 
-        // ✅ Asegurar que `sendMessage` esté en el ámbito global
-        window.sendMessage = sendMessage;
+        chatbox.scrollTop = chatbox.scrollHeight;
+    }
 
-        // ✅ Cargar conversaciones al cargar la página
-        loadConversations();
+    // ✅ Enviar mensaje
+    function sendMessage() {
+        fetch('/api/v1/message/send', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                waba_phone_id: currentConversation.waba_phone_id,
+                to: currentConversation.client_phone,
+                message: {
+                    type: 'text',
+                    text: {
+                        preview_url: false,
+                        body: messageInput.value
+                    }
+                }
+            })
+        }).then(response => response.json())
+            .then(data => {
+                messageInput.value = '';
+                loadMessagesFromConversation();
+            });
+    }
+
+    // ✅ Enviar mensaje al presionar Enter
+    messageInput.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
     });
-</script>
 
+    // ✅ Emoji Picker (Dropdown de emojis)
+    emojiButton.addEventListener('click', function () {
+        emojiDropdown.classList.toggle('show');
+    });
+
+    document.querySelectorAll('.emoji').forEach(emoji => {
+        emoji.addEventListener('click', function () {
+            messageInput.value += this.textContent;
+            emojiDropdown.classList.remove('show');
+        });
+    });
+
+    // ✅ Cerrar el dropdown si se hace clic fuera de él
+    document.addEventListener('click', function (event) {
+        if (!emojiButton.contains(event.target) && !emojiDropdown.contains(event.target)) {
+            emojiDropdown.classList.remove('show');
+        }
+    });
+
+    // ✅ Asegurar que `sendMessage` esté en el ámbito global
+    window.sendMessage = sendMessage;
+
+    // ✅ Cargar conversaciones al cargar la página
+    loadConversations();
+});
+</script>
 
 @endsection
