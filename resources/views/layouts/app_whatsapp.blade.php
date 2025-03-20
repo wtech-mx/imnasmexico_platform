@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="{{asset('assets/whatsapp/style.css')}}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <style>
+        .container .rightSide::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('http://imnasmexico_platform.test/assets/whatsapp/pattern.png');
+            opacity: 0.06;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -70,9 +82,12 @@
 
     </div>
 
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    @yield('js')
 
 </body>
 </html>
