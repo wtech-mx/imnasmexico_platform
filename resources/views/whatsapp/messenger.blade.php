@@ -7,25 +7,19 @@
 
 <div id="conversation-list">
     @foreach($conversations as $conversation)
-        @php
-            $lastMessage = $conversation->messages->first();
-            $lastMessageText = $lastMessage ? $lastMessage->content : "No hay mensajes aún";
-            $lastMessageTime = $lastMessage ? \Carbon\Carbon::createFromTimestamp($lastMessage->timestamp)->format('h:i a') : "";
-            $profileImageUrl = "https://api.whatsapp.com/send?phone={$conversation->client_phone}&text=Hola"; // Reemplaza con la URL real de la imagen de perfil
-        @endphp
         <div class="block unread chat-item" data-chat-id="{{ $conversation->id }}" data-client-phone="{{ $conversation->client_phone }}">
             <div class="imgBox">
-                <img src="{{ $profileImageUrl }}" class="cover" alt="">
+                <img src="{{ asset('images/img2.jpg') }}" class="cover" alt="">
             </div>
             <div class="details">
                 <div class="listHead">
-                    <p class="time">{{ $lastMessageTime }}</p>
+                    <p class="time">{{ $conversation->updated_at->format('H:i') }}</p>
                 </div>
                 <div class="listHead">
                     <h6>{{ $conversation->client_phone }}</h6>
                 </div>
                 <div class="message_p">
-                    <p>{{ $lastMessageText }}</p>
+                    <p>Último mensaje...</p>
                 </div>
             </div>
         </div>
@@ -51,7 +45,7 @@
 
     <!-- CHAT INPUT -->
     <div class="chat_input">
-        <ion-icon id="emoji-button" name="happy-outline"></ion-icon>
+        <ion-icon name="happy-outline"></ion-icon>
         <input id="message-input" type="text" placeholder="Escribe un mensaje...">
         <button onclick="sendMessage()">Enviar</button>
         <ion-icon name="mic"></ion-icon>
@@ -59,7 +53,7 @@
 
 @endsection
 
-@section(section: 'js')
+@section('js')
 
 <script>
     // ✅ Asegurar que el código se ejecute después de que el DOM esté listo
@@ -73,7 +67,6 @@
         const chatbox = document.getElementById('chatbox');
         const chatTitle = document.getElementById('chat-title');
         const currentConversationPhone = document.getElementById('current-conversation-phone');
-        const emojiButton = document.getElementById('emoji-button');
 
         if (!searchInput) {
             console.error("❌ Error: No se encontró el campo de búsqueda 'search'");
@@ -83,16 +76,6 @@
         let conversations = [];
         let currentConversation = { id: 0 };
         let messages = [];
-
-        // ✅ Configurar el selector de emojis
-        const picker = new EmojiButton();
-        picker.on('emoji', emoji => {
-            messageInput.value += emoji;
-        });
-
-        emojiButton.addEventListener('click', () => {
-            picker.togglePicker(emojiButton);
-        });
 
         // ✅ Cargar conversaciones
         async function loadConversations() {
@@ -221,19 +204,9 @@
                     console.warn("⚠️ No se pudo parsear el JSON del mensaje, usando el valor original.");
                 }
 
-                // 📌 Determinar el estado del mensaje
-                let statusIcon = '';
-                if (message.status === 'sent') {
-                    statusIcon = '✔️'; // Una palomita gris
-                } else if (message.status === 'delivered') {
-                    statusIcon = '✔️✔️'; // Dos palomitas grises
-                } else if (message.status === 'read') {
-                    statusIcon = '✔️✔️'; // Dos palomitas azules
-                }
-
                 const div = document.createElement('div');
                 div.classList.add('message', message.direction === 'toApp' ? 'friend_msg' : 'my_msg');
-                div.innerHTML = `<p>${messageText} <br><span>${new Date(message.timestamp * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })} ${statusIcon}</span></p>`;
+                div.innerHTML = `<p>${messageText} <br><span>${new Date(message.timestamp * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })}</span></p>`;
                 chatbox.appendChild(div);
             });
 
@@ -279,5 +252,6 @@
         loadConversations();
     });
 </script>
+
 
 @endsection
