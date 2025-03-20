@@ -58,13 +58,19 @@ class WhatsAppWebhookController extends Controller
                     'client_phone' => $phoneNumber
                 ]);
 
-                Message::create([
+                $messageData = [
                     'chat_id' => $chat->id,
+                    'timestamp' => $timestamp,
                     'message_id' => $messageId,
-                    'content' => json_encode(['type' => 'text', 'text' => ['preview_url' => false, 'body' => $text]]),
-                    'direction' => 'toApp', // Indica que es un mensaje entrante
-                    'timestamp' => $timestamp
-                ]);
+                    'type' => 'text',
+                    'direction' => 'toApp',
+                    'body' => json_encode(['type' => 'text', 'text' => ['preview_url' => false, 'body' => $text]]),
+                    'status' => 10
+                ];
+
+                Log::info("📥 Datos del mensaje a guardar en la BD:", $messageData);
+
+                Message::create($messageData);
 
                 Log::info("📥 Mensaje guardado en la BD: {$text}");
             }
