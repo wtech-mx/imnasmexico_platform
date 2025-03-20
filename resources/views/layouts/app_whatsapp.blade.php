@@ -19,6 +19,46 @@
             background: url('http://imnasmexico_platform.test/assets/whatsapp/pattern.png');
             opacity: 0.06;
         }
+        /* Contenedor del dropdown */
+.emoji-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown de emojis oculto por defecto */
+.emoji-dropdown {
+    position: absolute;
+    bottom: 40px; /* Se despliega hacia arriba */
+    left: 0;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    display: none; /* Oculto por defecto */
+    flex-wrap: wrap;
+    width: 180px;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+/* Mostrar el dropdown cuando esté activo */
+.emoji-dropdown.show {
+    display: flex;
+}
+
+/* Estilo de cada emoji */
+.emoji {
+    font-size: 22px;
+    cursor: pointer;
+    margin: 5px;
+    transition: transform 0.2s;
+}
+
+.emoji:hover {
+    transform: scale(1.2);
+}
+
     </style>
 </head>
 <body>
