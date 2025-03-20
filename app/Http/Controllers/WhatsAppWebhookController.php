@@ -23,13 +23,13 @@ class WhatsAppWebhookController extends Controller
             echo $hub_challenge;
             exit;
         }
-      }
+    }
 
-      /*
-      * RECEPCION DE MENSAJES
-      */
-      public function recibe(Request $request)
-      {
+    /*
+    * RECEPCION DE MENSAJES
+    */
+    public function recibe(Request $request)
+    {
         try {
             // 1️⃣ Capturar el JSON completo del Webhook
             $data = $request->all();
@@ -47,7 +47,7 @@ class WhatsAppWebhookController extends Controller
 
             // 5️⃣ Extraer el mensaje recibido
             $message = $data['entry'][0]['changes'][0]['value']['messages'][0];
-            $phoneNumber = $message['from'];
+            $phoneNumber = $this->formatPhoneNumber($message['from']);
             $text = $message['text']['body'] ?? null;
             $timestamp = $message['timestamp'] ?? now()->timestamp;
             $messageId = $message['id'];
@@ -61,7 +61,7 @@ class WhatsAppWebhookController extends Controller
                 Message::create([
                     'chat_id' => $chat->id,
                     'message_id' => $messageId,
-                    'content' => $text,
+                    'content' => json_encode(['type' => 'text', 'text' => ['preview_url' => false, 'body' => $text]]),
                     'direction' => 'toApp', // Indica que es un mensaje entrante
                     'timestamp' => $timestamp
                 ]);
@@ -77,4 +77,14 @@ class WhatsAppWebhookController extends Controller
         }
     }
 
+    /**
+     * Formatear el número de teléfono eliminando el '1' después del '55'
+     */
+    private function formatPhoneNumber($phoneNumber)
+    {
+        if (substr($phoneNumber, 0, 3) === '521') {
+            return '52' . substr($phoneNumber, 3);
+        }
+        return $phoneNumber;
+    }
 }
