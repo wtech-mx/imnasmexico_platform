@@ -30,70 +30,51 @@ class WhatsAppWebhookController extends Controller
      */
     public function handleWebhook(Request $request)
     {
-        // Log en Laravel
-        Log::info('📩 Webhook recibido:', $request->all());
+        try {
+            // 1️⃣ Capturar el JSON completo del Webhook
+            $data = $request->all();
 
-        // Guardar en un archivo para depuración
-        File::put(public_path('webhook_log.txt'), json_encode($request->all(), JSON_PRETTY_PRINT));
+            // 2️⃣ Registrar en el Log de Laravel
+            Log::info('📩 Webhook recibido:', $data);
 
-        $data = $request->all();
+            // 3️⃣ Guardar en un archivo de texto en public/
+            File::put(public_path('webhook_log.txt'), json_encode($data, JSON_PRETTY_PRINT));
 
-        // Verificar si el webhook tiene mensajes de WhatsApp
-        if (!isset($data['entry'][0]['changes'][0]['value']['messages'])) {
-            return response()->json(['status' => 'no_messages_received']);
-        }
+            // 4️⃣ Verificar si el webhook tiene mensajes de WhatsApp
+            if (!isset($data['entry'][0]['changes'][0]['value']['messages'])) {
+                return response()->json(['status' => 'no_messages_received']);
+            }
 
-        $message = $data['entry'][0]['changes'][0]['value']['messages'][0];
+            // 5️⃣ Extraer el mensaje recibido
+            $message = $data['entry'][0]['changes'][0]['value']['messages'][0];
+            $phoneNumber = $message['from'];
+            $text = $message['text']['body'] ?? null;
+            $timestamp = $message['timestamp'] ?? now()->timestamp;
+            $messageId = $message['id'];
 
-        // Extraer datos importantes
-        $phoneNumber = $message['from'];
-        $text = $message['text']['body'] ?? null;
-        $timestamp = $message['timestamp'] ?? now()->timestamp;
-        $messageId = $message['id'];
+            // 6️⃣ Guardar en la Base de Datos solo si hay texto
+            if ($text) {
+                $chat = Chat::firstOrCreate([
+                    'client_phone' => $phoneNumber
+                ]);
 
-        if ($text) {
-            // Buscar o crear la conversación
-            $chat = Chat::firstOrCreate([
-                'client_phone' => $phoneNumber
-            ]);
+                Message::create([
+                    'chat_id' => $chat->id,
+                    'message_id' => $messageId,
+                    'content' => $text,
+                    'direction' => 'toApp', // Indica que es un mensaje entrante
+                    'timestamp' => $timestamp
+                ]);
 
-            // Guardar el mensaje en la base de datos
-            Message::create([
-                'chat_id' => $chat->id,
-                'message_id' => $messageId,
-                'content' => $text,
-                'direction' => 'toApp', // Indica que es un mensaje entrante
-                'timestamp' => $timestamp
-            ]);
+                Log::info("📥 Mensaje guardado en la BD: {$text}");
+            }
 
-            Log::info("📥 Mensaje guardado en la BD: {$text}");
-
-            // Responder con un mensaje de "Echo"
-            $this->sendMessage($phoneNumber, "Echo: " . $text, $messageId);
-        }
-
-        return response()->json(['status' => 'success']);
-    }
-
-    /**
-     * Enviar un mensaje de respuesta
-     */
-    private function sendMessage($to, $text, $contextMessageId)
-    {
-        $businessPhoneNumberId = env('BUSINESS_PHONE_NUMBER_ID');
-        $graphApiToken = env('GRAPH_API_TOKEN');
-
-        $response = Http::withToken($graphApiToken)->post("https://graph.facebook.com/v18.0/{$businessPhoneNumberId}/messages", [
-            'messaging_product' => 'whatsapp',
-            'to' => $to,
-            'text' => ['body' => $text],
-            'context' => ['message_id' => $contextMessageId],
-        ]);
-
-        if ($response->successful()) {
-            Log::info("📤 Mensaje enviado: {$text}");
-        } else {
-            Log::error("❌ Error al enviar el mensaje: {$response->body()}");
+            return response()->json(['status' => 'success']);
+        } catch (\Exception $e) {
+            Log::error("❌ Error en el webhook: " . $e->getMessage());
+            File::put(public_path('webhook_error.txt'), $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
 }
