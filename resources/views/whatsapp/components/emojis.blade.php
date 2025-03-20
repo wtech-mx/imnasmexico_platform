@@ -44,7 +44,6 @@
 
     <div class="emocat" data-name="People">
         <p>Personas</p>
-
         <span class="emoji">👦</span>
         <span class="emoji">👶</span>
         <span class="emoji">👧</span>
@@ -164,8 +163,7 @@
         <span class="emoji">🚶‍♂️</span>
         <span class="emoji">🚶‍♀️</span>
         <span class="emoji">🏃</span>
-        <span class="emoji">
-
+    </div>
 
     <div class="emocat" data-name="Plants">
         <p>Plantas</p>
