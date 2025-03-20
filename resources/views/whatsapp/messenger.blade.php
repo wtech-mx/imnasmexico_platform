@@ -97,54 +97,52 @@
 
         // ✅ Renderizar la lista de conversaciones
         function renderConversations() {
-    if (!conversationList) {
-        console.error("❌ Error: No se encontró el contenedor de conversaciones 'conversation-list'");
-        return;
-    }
+            if (!conversationList) {
+                console.error("❌ Error: No se encontró el contenedor de conversaciones 'conversation-list'");
+                return;
+            }
 
-    conversationList.innerHTML = '';
+            conversationList.innerHTML = '';
 
-    conversations.forEach(conversation => {
-        // ✅ Asegurar que messages existe y es un array
-        const messagesArray = Array.isArray(conversation.messages) ? conversation.messages : [];
+            conversations.forEach(conversation => {
+                // ✅ Asegurar que messages existe y es un array
+                const messagesArray = Array.isArray(conversation.messages) ? conversation.messages : [];
 
-        // ✅ Obtener el último mensaje si existe
-        const lastMessage = messagesArray.length > 0 ? messagesArray[0].content : "No hay mensajes aún";
-        const lastMessageTime = messagesArray.length > 0
-            ? new Date(messagesArray[0].timestamp * 1000).toLocaleTimeString()
-            : "";
+                // ✅ Obtener el último mensaje si existe
+                const lastMessage = messagesArray.length > 0 ? messagesArray[0].content : "No hay mensajes aún";
+                const lastMessageTime = messagesArray.length > 0
+                    ? new Date(messagesArray[0].timestamp * 1000).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true })
+                    : "";
 
-        const chatItem = document.createElement('div');
-        chatItem.classList.add('block', 'unread', 'chat-item');
-        chatItem.dataset.chatId = conversation.id;
-        chatItem.dataset.clientPhone = conversation.client_phone;
+                const chatItem = document.createElement('div');
+                chatItem.classList.add('block', 'unread', 'chat-item');
+                chatItem.dataset.chatId = conversation.id;
+                chatItem.dataset.clientPhone = conversation.client_phone;
 
-        chatItem.innerHTML = `
-            <div class="imgBox">
-                <img src="{{ asset('images/img2.jpg') }}" class="cover" alt="">
-            </div>
-            <div class="details">
-                <div class="listHead">
-                    <p class="time">${lastMessageTime}</p>
-                </div>
-                <div class="listHead">
-                    <h6>${conversation.client_phone}</h6>
-                </div>
-                <div class="message_p">
-                    <p>${lastMessage}</p>
-                </div>
-            </div>
-        `;
+                chatItem.innerHTML = `
+                    <div class="imgBox">
+                        <img src="{{ asset('images/img2.jpg') }}" class="cover" alt="">
+                    </div>
+                    <div class="details">
+                        <div class="listHead">
+                            <p class="time">${lastMessageTime}</p>
+                        </div>
+                        <div class="listHead">
+                            <h6>${conversation.client_phone}</h6>
+                        </div>
+                        <div class="message_p">
+                            <p>${lastMessage}</p>
+                        </div>
+                    </div>
+                `;
 
-        chatItem.addEventListener('click', function () {
-            setConversation(conversation);
-        });
+                chatItem.addEventListener('click', function () {
+                    setConversation(conversation);
+                });
 
-        conversationList.appendChild(chatItem);
-    });
-}
-
-
+                conversationList.appendChild(chatItem);
+            });
+        }
 
         // ✅ Seleccionar conversación y cargar mensajes
         function setConversation(conversation) {
@@ -164,38 +162,37 @@
 
         // ✅ Cargar mensajes de la conversación actual
         async function loadMessagesFromConversation() {
-                if (!currentConversation.id) {
-                    console.error("❌ Error: No hay conversación seleccionada.");
-                    return;
-                }
-
-                fetch(`/api/v1/message/${currentConversation.id}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        messages = data.data;
-                        renderMessages();
-                    })
-                    .catch(error => console.error("❌ Error al cargar los mensajes:", error));
+            if (!currentConversation.id) {
+                console.error("❌ Error: No hay conversación seleccionada.");
+                return;
             }
 
-            // ✅ Actualizar el chat cada 5 segundos para recibir mensajes nuevos
-            setInterval(() => {
-                if (currentConversation.id !== 0) {
-                    loadMessagesFromConversation();
-                }
-            }, 5000);
+            fetch(`/api/v1/message/${currentConversation.id}`)
+                .then(response => response.json())
+                .then(data => {
+                    messages = data.data;
+                    renderMessages();
+                })
+                .catch(error => console.error("❌ Error al cargar los mensajes:", error));
+        }
 
+        // ✅ Actualizar el chat cada 5 segundos para recibir mensajes nuevos
+        setInterval(() => {
+            if (currentConversation.id !== 0) {
+                loadMessagesFromConversation();
+            }
+        }, 5000);
 
         // ✅ Renderizar los mensajes en la vista
         function renderMessages() {
-    if (!chatbox) {
-        console.error("❌ Error: No se encontró el contenedor de mensajes 'chatbox'");
-        return;
-    }
+            if (!chatbox) {
+                console.error("❌ Error: No se encontró el contenedor de mensajes 'chatbox'");
+                return;
+            }
 
-    chatbox.innerHTML = '';
+            chatbox.innerHTML = '';
 
-    messages.forEach(message => {
+            messages.forEach(message => {
                 let messageText = message.body;
 
                 try {
@@ -214,10 +211,8 @@
                 chatbox.appendChild(div);
             });
 
-    chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll al último mensaje
-}
-
-
+            chatbox.scrollTop = chatbox.scrollHeight; // Auto-scroll al último mensaje
+        }
 
         // ✅ Enviar mensaje
         function sendMessage() {
@@ -244,9 +239,15 @@
                 });
         }
 
-// ✅ Asegurar que `sendMessage` esté en el ámbito global
-window.sendMessage = sendMessage;
+        // ✅ Enviar mensaje al presionar Enter
+        messageInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
 
+        // ✅ Asegurar que `sendMessage` esté en el ámbito global
+        window.sendMessage = sendMessage;
 
         // ✅ Cargar conversaciones al cargar la página
         loadConversations();
